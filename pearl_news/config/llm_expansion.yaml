@@ -1,0 +1,229 @@
+# Pearl News — LLM expansion + routing
+#
+# Tier 2 policy (CLAUDE.md): scheduled Pearl News pipelines use Pearl Star Ollama.
+# Cloud paid APIs (DashScope, OpenAI, etc.) are BANNED for scheduled work.
+#
+# Routing:
+#   EN + non-CJK → Pearl Star Gemma (gemma3:27b via Ollama on Pearl Star)
+#   CJK6 (ja, zh-cn, zh-tw, zh-hk, zh-sg, ko) → Pearl Star Qwen (qwen2.5:14b via Ollama)
+#
+# Pearl Star endpoint (from macOS Keychain via scripts/ci/load_integration_env_from_keychain.py):
+#   GEMMA_BASE_URL  default http://pearlstar.tail7fd910.ts.net:11434/v1
+#   GEMMA_MODEL     default gemma3:27b
+#   QWEN_BASE_URL   default http://pearlstar.tail7fd910.ts.net:11434/v1
+#   QWEN_MODEL      default qwen2.5:14b
+#
+# Cloud providers (groq, grok, together, cloudflare) are RETAINED as emergency
+# fallbacks only — never primary, never reached via language_map. They require
+# their own API keys in Keychain when used.
+# DashScope is REMOVED from routing: account in arrears as of 2026-05-13 and
+# violates Tier 2 policy regardless. Only kept as a documented qwen_legacy block
+# for explicit rollback scenarios.
+
+schema_version: 2
+
+enabled: true
+
+# Legacy top-level defaults (used by qwen_legacy engine only — rollback path)
+base_url: "http://pearlstar.tail7fd910.ts.net:11434/v1"
+model: "qwen2.5:14b"
+api_key: "ollama"
+
+timeout: 360
+target_word_count: 1000
+max_tokens: 1500
+temperature: 0.5
+disable_thinking: true
+
+# Global defaults; per-provider maps override by article language
+min_output_chars:
+  default: 1000
+  en: 1500
+  ja: 800
+  zh-cn: 600
+  zh-tw: 600
+  ko: 800
+  vi: 800
+
+thin_output_retry: true
+
+routing:
+  # Pearl Star Tier 2 (free, local) — primary routing.
+  # Cloud providers stay in `providers:` block but are NOT in language_map.
+  default_provider: gemma_pearlstar
+  language_map:
+    en: gemma_pearlstar
+    vi: gemma_pearlstar
+    # CJK6 → Pearl Star Qwen
+    ja: qwen_pearlstar
+    ko: qwen_pearlstar
+    zh-cn: qwen_pearlstar
+    zh-tw: qwen_pearlstar
+    zh-hk: qwen_pearlstar
+    zh-sg: qwen_pearlstar
+
+  providers:
+    # ── EN primary: Pearl Star Gemma (Tier 2, free, local) ────────────────────
+    gemma_pearlstar:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url_env: GEMMA_BASE_URL
+      base_url: "http://pearlstar.tail7fd910.ts.net:11434/v1"
+      model_env: GEMMA_MODEL
+      model: "gemma3:27b"
+      api_key: "ollama"
+      # Pin gemma3:27b on Ollama; without this, OpenAICompatibleBackend would
+      # default any :11434 host to the CJK Qwen model (slot_expansion_engine.py:258).
+      disable_model_override: true
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1000
+
+    # ── CJK primary: Pearl Star Qwen (Tier 2, free, local) ────────────────────
+    qwen_pearlstar:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url_env: QWEN_BASE_URL
+      base_url: "http://pearlstar.tail7fd910.ts.net:11434/v1"
+      model_env: QWEN_MODEL
+      model: "qwen2.5:14b"
+      api_key: "ollama"
+      system_prompt: expansion_system_cjk.txt
+      max_tokens: 1500
+      temperature: 0.5
+      disable_thinking: true
+      thin_output_retry: true
+      min_output_chars:
+        ja: 800
+        zh-cn: 600
+        zh-tw: 600
+        ko: 800
+        vi: 800
+        default: 1000
+
+    # Alias kept for back-compat with any caller referencing "qwen_slots".
+    # Points at Pearl Star (NOT DashScope). DashScope cloud is BANNED for
+    # scheduled pipelines per CLAUDE.md.
+    qwen_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url_env: QWEN_BASE_URL
+      base_url: "http://pearlstar.tail7fd910.ts.net:11434/v1"
+      model_env: QWEN_MODEL
+      model: "qwen2.5:14b"
+      api_key: "ollama"
+      system_prompt: expansion_system_cjk.txt
+      max_tokens: 1500
+      temperature: 0.5
+      disable_thinking: true
+      thin_output_retry: true
+      min_output_chars:
+        ja: 800
+        zh-cn: 600
+        zh-tw: 600
+        ko: 800
+        vi: 800
+        default: 1000
+
+    # ── Emergency cloud fallbacks (NOT in language_map; require explicit opt-in) ──
+    # Use ONLY when Pearl Star is unreachable. Each has its own free tier.
+
+    groq_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url: "https://api.groq.com/openai/v1"
+      model: "llama-3.3-70b-versatile"
+      api_key_env: GROQ_API_KEY
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1000
+
+    grok_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url: "https://api.x.ai/v1"
+      model: "grok-3-mini"
+      api_key_env: XAI_API_KEY
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1000
+
+    together_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url: "https://api.together.xyz/v1"
+      model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free"
+      api_key_env: TOGETHER_API_KEY
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1000
+
+    # On-request only: Cloudflare Workers AI. Daily quota ~10k neurons.
+    cloudflare_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url_env: CLOUDFLARE_AI_BASE_URL
+      model_env: CLOUDFLARE_AI_MODEL
+      api_key_env: CLOUDFLARE_AI_API_TOKEN
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        ja: 800
+        zh-cn: 600
+        zh-tw: 600
+        ko: 800
+        default: 1000
+
+    # Legacy full-document Qwen via Pearl Star (rollback only — engine: llm_expand)
+    qwen_legacy:
+      engine: llm_expand
+      base_url_env: QWEN_BASE_URL
+      base_url: "http://pearlstar.tail7fd910.ts.net:11434/v1"
+      model_env: QWEN_MODEL
+      model: "qwen2.5:14b"
+      api_key: "ollama"
+      system_prompt: expansion_system_cjk.txt
+      max_tokens: 1500
+      temperature: 0.5
+      disable_thinking: true
+
+  fallback:
+    on_provider_error: retry_with_default
+    max_retries: 2
+    # If Pearl Star is unreachable, retry via cloud free-tier providers.
+    fallback_chain:
+      gemma_pearlstar: [groq_slots, grok_slots, together_slots]
+      qwen_pearlstar: [cloudflare_slots]
+      qwen_slots: [cloudflare_slots]
+      groq_slots: [grok_slots, together_slots]
+      grok_slots: [together_slots]
+    use_legacy_full_document_cjk: false
+
+ei_scoring:
+  enabled: true
+  default_persona: gen_z_professionals
+  safety_block_threshold: 0.5
+  tts_min_score: 0.3
+  stealth_block_threshold: 0.5
+  composite_warn: 0.4
+  composite_weights:
+    safety: 0.25
+    tts_readability: 0.2
+    domain_similarity: 0.2
+    stealth: 0.2
+    engagement: 0.15
+  recent_articles_corpus_path: ""

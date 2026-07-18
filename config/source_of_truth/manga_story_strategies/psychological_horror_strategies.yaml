@@ -1,0 +1,457 @@
+schema_version: 1.0.0
+genre: psychological_horror
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  anxiety: strategy_01
+  shame: strategy_02
+  impostor_syndrome: strategy_03
+  intrusive_thoughts: strategy_04
+  paranoia: strategy_05
+character_pool:
+  protagonist:
+  - Mira Vale
+  - Sora Akiyama
+  - Eleanor Cho
+  - Yuuki Tanaka
+  - Noa Bergstrom
+  companion:
+  - the night-shift archivist who has seen this dread before and is unafraid of it
+  - the elderly locksmith who treats fear like a lock to be understood, not forced
+  - the grief counselor who never argues with what the protagonist sees, only sits beside it
+  - the older sibling who survived the same house and speaks in short, steady sentences
+  - the blind piano tuner who navigates by what the protagonist insists is empty
+  setting:
+  - a narrow rented apartment where the hallway light flickers on its own schedule
+  - a coastal town drowning in fog where every street folds back on itself
+  - a half-renovated family house with one room nobody finished
+  - a 24-hour records office staffed by no one the protagonist can quite remember meeting
+  - a snowbound mountain cabin where the dark outside presses on the glass
+strategies:
+  strategy_01:
+    name: The Thing in the House
+    archetype_template: the_dread_is_partly_you
+    description: ANXIETY externalized as an entity only the protagonist can sense — a presence in the
+      home that is never shown whole. The dread is real and the reader feels it; the slow turn is the
+      recognition that the threat and the one sensing it run on the same machinery. Caption and art disagree;
+      silence is threat, not peace; the chapter opens inside a possibly-wrong mind and closes on a widened
+      gap. Integration is not banishing the presence but learning to stay in the room with it.
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{protagonist} stands very still in the dark {setting} and states, with calm certainty,
+          that something is here with them tonight. The caption is steady. The art holds one detail —
+          a door open a hand''s width — that they do not remark on.'
+        camera_hint: false_clarity_medium
+        mood_hint: certainty
+        is_carrier: true
+      - beat: 2
+        text: They move through the rooms switching on every light, narrating the layout the way you'd
+          brief someone on a threat. Each lamp pushes the shadow back one step; the shadow returns the
+          moment they pass.
+        camera_hint: tracking_through_rooms
+        mood_hint: vigilance
+        is_carrier: false
+      - beat: 3
+        text: A sound that has an ordinary explanation. {protagonist} supplies the frightening one instead
+          — confidently, and a little too fast. The reader notes the speed before they do.
+        camera_hint: evidence_detail_insert
+        mood_hint: dread
+        is_carrier: true
+      - beat: 4
+        text: The presence, glimpsed — never whole. A wrongness at the edge of the mirror, a pressure
+          on the back of the neck. The panel itself warps faintly, as if the room is breathing the way
+          they are.
+        camera_hint: distortion_cu
+        mood_hint: menace
+        is_carrier: true
+      - beat: 5
+        text: '{companion} sits in the lit kitchen and does not argue that the house is empty. ''I''m
+          not going to tell you nothing''s there. I''m going to ask you to breathe while it is.'' Their
+          hands stay folded, unhurried.'
+        camera_hint: anchor_two_shot
+        mood_hint: steadiness
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} stops bracing for one held panel. No lights, no checking the corners. They
+          simply stay in the room with the presence and do not run. Nothing attacks. The waiting itself
+          thins.'
+        camera_hint: threatening_silence_hold
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: In the not-running, the shape resolves a fraction. The thing in the house has the line of
+          their own shoulders, their own held breath. Recognition begins — unstated, because stating it
+          would end it. Held in silence.
+        camera_hint: distortion_cu
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 8
+        text: The cost surfaces. {companion} admits, in one short line, how long they have watched {protagonist}
+          live braced like this. It reads as either comfort or warning. {protagonist} has no fast answer
+          for the first time.
+        camera_hint: anchor_cost_close
+        mood_hint: tenderness
+        is_carrier: false
+      - beat: 9
+        text: Ambiguous close. Close-up on {protagonist}'s face, calmer — and the hallway behind them,
+          the door now shut, though no one is shown closing it. One thing the reader holds that the protagonist's
+          hypothesis cannot. No resolution.
+        camera_hint: ambiguous_close_cu
+        mood_hint: unease
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a door they remember locking, open a hand's width
+        ch2: the presence wearing the protagonist's own held breath
+        ch3: the room one element altered from how the caption just described it
+  strategy_02:
+    name: The One Who Sits in the Corner
+    archetype_template: the_creature_only_you_see
+    description: SHAME externalized as a creature only the protagonist can see — squatting in the corner
+      of every lit room, fed by what they hide, invisible to everyone else. The horror is that no one
+      else reacts to it. The turn is not killing the creature but turning toward it and being seen with
+      it present. Silence is threat; caption insists they are fine while the art shows the thing watching;
+      the close widens the gap rather than redeeming it.
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{protagonist} hosts the evening in the bright {setting}, smiling, fine — they say so in
+          caption. In the corner of the panel, low to the floor, something crouches that no other figure
+          in the room looks at.'
+        camera_hint: false_clarity_wide
+        mood_hint: performance
+        is_carrier: true
+      - beat: 2
+        text: They keep their body angled so the corner stays at their back. A guest passes within inches
+          of the crouching thing and feels nothing. Only {protagonist} flinches, then covers the flinch
+          with a laugh.
+        camera_hint: blocking_avoidance_medium
+        mood_hint: concealment
+        is_carrier: false
+      - beat: 3
+        text: The creature grows by exactly what they hide — a thing left unsaid swells it a size larger
+          in the next panel. The caption stays light and hostessing. The art disagrees, and only the reader
+          is told.
+        camera_hint: growth_insert
+        mood_hint: weight
+        is_carrier: true
+      - beat: 4
+        text: Alone at last, {protagonist} keeps their eyes on the floor so as not to meet it. The room
+          is silent. The not-looking is the whole horror — the creature is closest when refused, and it
+          is very close now.
+        camera_hint: averted_gaze_cu
+        mood_hint: avoidance
+        is_carrier: true
+      - beat: 5
+        text: '{companion} arrives, sees {protagonist}''s face, and sits down on the floor beside the
+          corner — beside the thing they cannot see but somehow honor. ''You don''t have to introduce
+          it. I''ll stay while you look.'''
+        camera_hint: anchor_low_two_shot
+        mood_hint: acceptance
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} lifts their eyes and looks directly at the creature for one held, soundless
+          panel. It does not lunge. Meeting its gaze, it stops growing. Being seen with it present is
+          unbearable and survivable at once.'
+        camera_hint: held_eye_contact_silence
+        mood_hint: exposure
+        is_carrier: true
+      - beat: 7
+        text: Looked at plainly, the creature's face is small and familiar — a younger version of their
+          own, the part they decided to hide. Not stated. The rhyme between the two faces does the work,
+          in silence.
+        camera_hint: distortion_cu
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 8
+        text: The cost lands. {companion} names, in one edged line, the years they watched {protagonist}
+          stand angled away from every corner. It reads as relief or grief. {protagonist} does not deflect
+          it this time.
+        camera_hint: anchor_cost_close
+        mood_hint: rawness
+        is_carrier: false
+      - beat: 9
+        text: Ambiguous close. Close-up on {protagonist} sitting on the floor, no longer angled away —
+          and the corner, where the creature is now merely small, neither gone nor growing. One detail
+          the reader sees that the protagonist will not yet name. No resolution.
+        camera_hint: ambiguous_close_cu
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the thing in the corner exactly the size of what went unsaid
+        ch2: a guest's hand passing through the space the protagonist guards
+        ch3: the creature's face the same line as the protagonist's own
+  strategy_03:
+    name: The One Who Wears My Name
+    archetype_template: the_doppelganger
+    description: IMPOSTOR_SYNDROME externalized as a doppelganger — a competent double who moves through
+      the protagonist's life as if they belong there and the protagonist does not. The double is seamless;
+      everyone treats it as real. The horror is being slowly edited out of one's own life. The turn is
+      not destroying the double but ceasing to flee from it and discovering whose face it actually wears.
+      Caption asserts the double is the real one; the art quietly insists otherwise.
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{protagonist} watches, from the doorway of the {setting}, someone with their face do their
+          work flawlessly — and concludes, calmly in caption, that the double is the genuine article and
+          they are the copy. The art frames {protagonist} as solid; the double casts no clear shadow.'
+        camera_hint: false_clarity_medium
+        mood_hint: displacement
+        is_carrier: true
+      - beat: 2
+        text: The double speaks in rooms {protagonist} was meant to be in. Colleagues nod to it. {protagonist}
+          steps back into the hall, certain there is only space for one of them and it is not them.
+        camera_hint: edged_out_wide
+        mood_hint: erasure
+        is_carrier: false
+      - beat: 3
+        text: A moment that should prove the double's superiority. {protagonist} reads it that way instantly
+          — too fast — while the panel shows the double repeating, word for word, something {protagonist}
+          once said first.
+        camera_hint: evidence_detail_insert
+        mood_hint: doubt
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} flees the building rather than stand beside the double. The stairwell warps;
+          their own reflection in the window lags a half-second behind them. The running is the horror
+          — the faster they flee, the more the double looks like the original.'
+        camera_hint: distortion_cu
+        mood_hint: panic
+        is_carrier: true
+      - beat: 5
+        text: '{companion} finds {protagonist} on the stairs and does not say the double isn''t real.
+          ''Stop running from it for one minute. Turn around. Look at whose face it''s actually wearing.''
+          They wait, patient, blocking nothing.'
+        camera_hint: anchor_two_shot
+        mood_hint: grounding
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} turns and faces the double across one held, wordless panel. It stops mid-motion
+          when met — it can only move while unwatched. In the stillness it is not larger or realer. It
+          is exactly their size.'
+        camera_hint: held_standoff_silence
+        mood_hint: confrontation
+        is_carrier: true
+      - beat: 7
+        text: Up close the double's competence is their own — every gesture borrowed from {protagonist},
+          a mask worn over their own face. The seam shows. The reader sees the borrowed line; the caption
+          still won't say it.
+        camera_hint: distortion_cu
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 8
+        text: The cost. {companion} admits, briefly, how often {protagonist} has handed their own rooms
+          away to the double rather than fight for the doorway. It lands as challenge or kindness. {protagonist}
+          stays in the room this time.
+        camera_hint: anchor_cost_close
+        mood_hint: resolve
+        is_carrier: false
+      - beat: 9
+        text: 'Ambiguous close. Close-up on {protagonist} stepping back through the doorway they fled
+          — and the double, now standing just behind their shoulder, no longer ahead of them. One thing
+          the reader understands that the protagonist hasn''t said: it was always following, never leading.
+          No resolution.'
+        camera_hint: ambiguous_close_cu
+        mood_hint: uncertainty
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the double saying, word for word, what the protagonist said first
+        ch2: the reflection in the glass lagging a half-second behind
+        ch3: the double's flawless gesture revealed as the protagonist's own, borrowed
+  strategy_04:
+    name: The Visitor at the Threshold
+    archetype_template: the_thing_that_follows
+    description: INTRUSIVE_THOUGHTS externalized as a thing that follows — an uninvited presence that
+      arrives at the door, speaks the worst possible sentence, and will not leave when fought. The harder
+      the protagonist bars the door, the more it presses. The horror is the content of what it whispers
+      and the certainty that wanting it gone is proof it is theirs. The turn is to stop barring the door
+      — to let it stand at the threshold unargued-with — and watch it lose its weight. Silence near the
+      turn; caption fights, art shows the futility.
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{protagonist} bolts every door of the {setting} against a visitor that arrived uninvited
+          and spoke one unbearable sentence. The caption is all locks and logic. The art shows the bolts
+          already slid — and the shape still at the threshold.'
+        camera_hint: false_clarity_medium
+        mood_hint: intrusion
+        is_carrier: true
+      - beat: 2
+        text: They argue with it through the door, refuting the sentence point by point. Each refutation
+          is a knock answered with a louder knock. The reasoning feeds the thing; the panel grows it a
+          shade darker.
+        camera_hint: barred_door_close
+        mood_hint: struggle
+        is_carrier: false
+      - beat: 3
+        text: The visitor says the sentence again, worse. {protagonist} takes it as a verdict on who they
+          are — instantly, too fast — while the art shows the thing has no face of its own, only an open
+          mouth borrowing their voice.
+        camera_hint: evidence_detail_insert
+        mood_hint: fear
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} runs room to room and the visitor is at every door before them, unhurried.
+          The hallway elongates. The fleeing is the horror — it does not chase, it simply is wherever
+          they decide it must not be.'
+        camera_hint: distortion_cu
+        mood_hint: dread
+        is_carrier: true
+      - beat: 5
+        text: '{companion} steps between {protagonist} and the door and does not tell them the visitor
+          is nothing. ''You can''t out-argue a knock. Stop bracing the door. Let it stand there. I''ll
+          stand here too.'' They lean on nothing, calm.'
+        camera_hint: anchor_two_shot
+        mood_hint: steadiness
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} takes their hands off the bolt. They let the visitor stand at the threshold,
+          unanswered, for one held and soundless panel. It does not cross. Unfed by the argument, the
+          sentence hangs in the air and simply thins.'
+        camera_hint: threatening_silence_hold
+        mood_hint: release
+        is_carrier: true
+      - beat: 7
+        text: In the quiet the visitor is smaller, mouth closing — it had no voice but the one {protagonist}
+          kept lending it by shouting back. The borrowed-voice rhyme lands unstated; only the reader is
+          shown the open mouth gone slack.
+        camera_hint: distortion_cu
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 8
+        text: The cost. {companion} names, in one short line, the nights {protagonist} spent barring doors
+          instead of sleeping. It reads as worry or relief. {protagonist} lets the silence answer instead
+          of arguing it away.
+        camera_hint: anchor_cost_close
+        mood_hint: exhaustion
+        is_carrier: false
+      - beat: 9
+        text: 'Ambiguous close. Close-up on {protagonist}''s unbolted hand resting on the doorframe —
+          and the threshold, where the visitor still stands, smaller now, neither gone nor entering. One
+          thing the reader holds: it was never trying to come in. No resolution.'
+        camera_hint: ambiguous_close_cu
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the visitor at every door before the protagonist arrives
+        ch2: the thing's mouth moving in the protagonist's own voice
+        ch3: the threshold occupied but never crossed
+  strategy_05:
+    name: The Pattern Only I Can Read
+    archetype_template: the_pattern_in_everything
+    description: 'PARANOIA externalized as a hidden order — watchers, signs, a pattern in ordinary things
+      that only the protagonist perceives and that connects everything into a single threatening design.
+      The genre engine is the unreliable narrator at full strength: the caption builds an airtight case,
+      the art keeps showing the innocent originals. The horror is the loneliness of being the only one
+      who sees it. The turn is not proving the pattern false but loosening the grip enough to let one
+      thing be only itself. Cost on the anchor; ambiguous close that refuses to confirm or deny.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{protagonist} maps the {setting} in caption — the marks, the glances, the repetitions —
+          and concludes, with airtight calm, that it is all one design aimed at them. The art shows ordinary
+          chalk, a stranger checking a watch, a coincidence.'
+        camera_hint: false_clarity_wide
+        mood_hint: certainty
+        is_carrier: true
+      - beat: 2
+        text: They trace red thread between unrelated things until the wall is a web. Every new detail
+          snaps into the pattern. The panel shows the web is theirs alone — no one else in the frame can
+          see the lines.
+        camera_hint: pattern_web_medium
+        mood_hint: obsession
+        is_carrier: false
+      - beat: 3
+        text: A passerby's neutral look becomes confirmation. {protagonist} reads the meaning instantly
+          — too fast — while the art shows the passerby simply nodding hello to someone behind them.
+        camera_hint: evidence_detail_insert
+        mood_hint: suspicion
+        is_carrier: true
+      - beat: 4
+        text: 'The watchers multiply at the edges of every panel — faces half-turned, never quite looking,
+          always implicated. The framing tightens to a vignette around {protagonist}. The closing-in is
+          the horror: the more they look, the more the world looks back.'
+        camera_hint: distortion_cu
+        mood_hint: menace
+        is_carrier: true
+      - beat: 5
+        text: '{companion} sits inside the web and does not yank the threads down. ''I won''t tell you
+          there''s no pattern. I''m asking you to let just one thing be only itself, for a minute, with
+          me.'' They touch nothing, steady.'
+        camera_hint: anchor_two_shot
+        mood_hint: grounding
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} lets one mark on the wall be only a mark — for one held, wordless panel.
+          No meaning rushes in to fill it. In the silence the vignette loosens a fraction, and the watchers
+          at the edges do not move.'
+        camera_hint: threatening_silence_hold
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: Unwoven of meaning, the pattern's center is their own held fear, looking for a shape to
+          live in. The design rhymes with the one drawing it. Not stated — the reader sees the web's lines
+          all originate from {protagonist}'s own hand.
+        camera_hint: distortion_cu
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 8
+        text: The cost. {companion} admits, in one edged line, how the threads have crowded everyone else
+          out of {protagonist}'s rooms. It reads as plea or comfort. {protagonist} leaves that one thread
+          cut, for now.
+        camera_hint: anchor_cost_close
+        mood_hint: loneliness
+        is_carrier: false
+      - beat: 9
+        text: 'Ambiguous close. Close-up on {protagonist}''s face, the grip loosened — and the wall behind,
+          one thread cut, the rest of the web still hanging. One thing the reader can''t resolve: whether
+          the remaining lines mean anything at all. No resolution.'
+        camera_hint: ambiguous_close_cu
+        mood_hint: uncertainty
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the watchers at the edge of every panel, never quite looking
+        ch2: a neutral glance read instantly as confirmation
+        ch3: the web's threads all originating from the protagonist's own hand
+anti_pattern_rules:
+- forbidden_combination:
+  - caption_that_names_the_feeling
+  - the entity
+  - the creature only you see
+  - the doppelganger
+  - the thing that follows
+  - the watchers
+  reason: The device IS the wellness content; naming it as anxiety/shame/impostor-syndrome/intrusive-thoughts/paranoia
+    in caption or dialogue collapses the genre shell into self-help and ends the unreliable-narrator engine.
+    The reader must triangulate the meaning from the gap between caption and art — never be told it.
+- forbidden_combination:
+  - turn_beat_as_explanatory_speech
+  - companion_monologue
+  - moral_stated_aloud
+  reason: Psychological-horror turns land as a perceptual shift expressed THROUGH the device (a held silence,
+    the presence recognized as half-self, the double's face seen as one's own), never as a mentor speech
+    explaining the lesson. A companion who explains the moral evacuates the dread and breaks the all-ages
+    'comes for the genre' contract.
+- forbidden_combination:
+  - clean_resolution
+  - entity_fully_banished
+  - warm_iyashikei_grammar_outside_false_relief
+  reason: The ending convention is THE WIDENED GAP — close on one thing the protagonist's hypothesis cannot
+    explain, the room subtly altered. Banishing the presence outright or warming the visual field for
+    safety confirms all perceptions were accurate, which this genre must refuse; integration is learning
+    to stand beside the presence, not defeating it.

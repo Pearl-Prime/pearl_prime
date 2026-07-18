@@ -1,0 +1,74 @@
+# Invokes scripts/generate_full_catalog.py directly (not canary, not max-quality catalog).
+# en-US: English content uses the default CLUSTER atoms tree at repo `atoms/` (no separate atoms/en-US/).
+# Smoke on GitHub: use workflow_dispatch with max_books=1, skip_wave_selection=true,
+# no_teacher_mode=true. Full teacher-mode compiles are stricter and may fail the
+# teacher coverage gate until pools are green; defaults keep the stricter path available.
+name: Full catalog CLI (generate_full_catalog, en-US)
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_books:
+        description: Max books to plan and compile (use 1 for first smoke on main)
+        required: false
+        default: '3'
+        type: number
+      skip_wave_selection:
+        description: Skip wave_orchestrator (faster CI smoke)
+        required: false
+        default: true
+        type: boolean
+      plan_only:
+        description: Only allocate + BookSpecs (no run_pipeline compiles)
+        required: false
+        default: false
+        type: boolean
+      no_teacher_mode:
+        description: >-
+          If true, pass --no-teacher-mode (shared atoms only). Recommended true for first
+          smoke on CI; false exercises full teacher path and may fail on teacher coverage gate.
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: full-catalog-cli-en-us
+  cancel-in-progress: false
+
+jobs:
+  full-catalog-cli:
+    name: generate_full_catalog.py (en-US atoms)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run full catalog CLI (en-US / default atoms)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          set -euo pipefail
+          MAX="${{ inputs.max_books }}"
+          EXTRA=()
+          if [ "${{ inputs.skip_wave_selection }}" = "true" ]; then
+            EXTRA+=(--skip-wave-selection)
+          fi
+          if [ "${{ inputs.plan_only }}" = "true" ]; then
+            EXTRA+=(--plan-only)
+          fi
+          if [ "${{ inputs.no_teacher_mode }}" = "true" ]; then
+            EXTRA+=(--no-teacher-mode)
+          fi
+          echo "Running: python3 scripts/generate_full_catalog.py --max-books ${MAX} ${EXTRA[*]}"
+          python3 scripts/generate_full_catalog.py --max-books "${MAX}" "${EXTRA[@]}"

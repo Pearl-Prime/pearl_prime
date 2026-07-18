@@ -1,0 +1,55 @@
+2026-04-05 12:14:30,601 writing_campaign INFO ============================================================
+2026-04-05 12:14:30,602 writing_campaign INFO STARTING TASK: engine_atoms_new_topics
+2026-04-05 12:14:30,602 writing_campaign INFO   Write engine atoms for 5 new topics across all 10 personas and 7 engines
+2026-04-05 12:14:30,602 writing_campaign INFO ============================================================
+2026-04-05 12:14:30,602 writing_campaign INFO Task 'engine_atoms_new_topics': 350 jobs
+2026-04-05 12:14:30,689 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/false_alarm (5 variants)
+2026-04-05 12:14:30,690 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/shame (5 variants)
+2026-04-05 12:14:30,693 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/comparison (5 variants)
+2026-04-05 12:14:30,707 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/watcher (5 variants)
+2026-04-05 12:14:30,707 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/overwhelm (5 variants)
+2026-04-05 12:14:55,618 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:14:55,649 atom_writer INFO Response received in 24.9s (3768 chars, stop=end_turn)
+2026-04-05 12:14:55,652 atom_writer INFO Wrote atoms/corporate_managers/adhd_focus/overwhelm/CANONICAL.txt (3768 bytes)
+2026-04-05 12:14:55,653 writing_campaign INFO [COMPLETED] corporate_managers/adhd_focus/overwhelm
+2026-04-05 12:14:55,658 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/grief (5 variants)
+2026-04-05 12:14:56,336 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:14:56,338 anthropic._base_client INFO Retrying request to /v1/messages in 16.000000 seconds
+2026-04-05 12:15:05,763 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:15:06,124 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:15:06,128 atom_writer INFO Response received in 35.4s (4901 chars, stop=end_turn)
+2026-04-05 12:15:06,130 atom_writer INFO Wrote atoms/corporate_managers/adhd_focus/false_alarm/CANONICAL.txt (4901 bytes)
+2026-04-05 12:15:06,131 writing_campaign INFO [COMPLETED] corporate_managers/adhd_focus/false_alarm
+2026-04-05 12:15:06,135 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/adhd_focus/spiral (5 variants)
+2026-04-05 12:15:06,498 atom_writer INFO Response received in 35.8s (4684 chars, stop=end_turn)
+2026-04-05 12:15:06,501 atom_writer INFO Wrote atoms/corporate_managers/adhd_focus/shame/CANONICAL.txt (4684 bytes)
+2026-04-05 12:15:06,501 writing_campaign INFO [COMPLETED] corporate_managers/adhd_focus/shame
+2026-04-05 12:15:06,506 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/people_pleasing/watcher (5 variants)
+2026-04-05 12:15:07,236 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:07,237 anthropic._base_client INFO Retrying request to /v1/messages in 35.000000 seconds
+2026-04-05 12:15:07,279 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:07,280 anthropic._base_client INFO Retrying request to /v1/messages in 34.000000 seconds
+2026-04-05 12:15:08,881 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:15:08,884 atom_writer INFO Response received in 38.2s (5659 chars, stop=end_turn)
+2026-04-05 12:15:08,887 atom_writer INFO Wrote atoms/corporate_managers/adhd_focus/watcher/CANONICAL.txt (5659 bytes)
+2026-04-05 12:15:08,888 writing_campaign INFO [COMPLETED] corporate_managers/adhd_focus/watcher
+2026-04-05 12:15:08,892 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/people_pleasing/shame (5 variants)
+2026-04-05 12:15:09,286 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:09,287 anthropic._base_client INFO Retrying request to /v1/messages in 34.000000 seconds
+2026-04-05 12:15:10,050 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:15:10,055 atom_writer INFO Response received in 39.4s (5831 chars, stop=end_turn)
+2026-04-05 12:15:10,058 atom_writer INFO Wrote atoms/corporate_managers/adhd_focus/comparison/CANONICAL.txt (5831 bytes)
+2026-04-05 12:15:10,058 writing_campaign INFO [COMPLETED] corporate_managers/adhd_focus/comparison
+2026-04-05 12:15:10,063 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/people_pleasing/comparison (5 variants)
+2026-04-05 12:15:10,346 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:10,347 anthropic._base_client INFO Retrying request to /v1/messages in 37.000000 seconds
+2026-04-05 12:15:12,677 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:12,679 anthropic._base_client INFO Retrying request to /v1/messages in 34.000000 seconds
+2026-04-05 12:15:42,573 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:42,575 anthropic._base_client INFO Retrying request to /v1/messages in 20.000000 seconds
+2026-04-05 12:15:42,691 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:42,691 anthropic._base_client INFO Retrying request to /v1/messages in 19.000000 seconds
+2026-04-05 12:15:47,220 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:47,222 writing_campaign ERROR Error writing corporate_managers/adhd_focus/grief: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': "This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: 4be6e03b-d576-4c96-bcf8-9481be497b57, model: claude-sonnet-4-6). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase."}, 'request_id': 'req_011CZjybX2hm9XoZvLdrb8Mt'}
+2026-04-05 12:15:47,223 writing_campaign INFO [ERROR] corporate_managers/adhd_focus/grief
+2026-04-05 12:15:47,230 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/people_pleasing/false_alarm (5 variants)

@@ -1,0 +1,964 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "",
+  "runtime_format": "extended_book_2h",
+  "output_format_id": null,
+  "target_word_range": null,
+  "format_structural_id": null,
+  "book_plan_id": "ref_anxiety_genz_6h_v1",
+  "word_count": 21912,
+  "chapter_count": 12,
+  "pre_depth_total_words": 20895,
+  "post_depth_total_words": 20895,
+  "chapter_architecture_version": 1,
+  "angle_id": "PROTECTIVE_ALARM",
+  "chapter_planner_warnings": [],
+  "accent_budget": {
+    "QUOTE": 3,
+    "REFLECTION_QUESTION": 3,
+    "WISDOM_ESSENCE": 1,
+    "AUTHOR_COMMENTARY": 1,
+    "EXTERNAL_STORY": 2,
+    "TROUBLESHOOTING": 1,
+    "ENCOURAGEMENT": 2,
+    "CITED_EVIDENCE": 1
+  },
+  "accent_signature": "ea760c206755e0fc",
+  "story_mix_profile": "intimate_voice",
+  "accent_assignments": [
+    {
+      "chapter": 2,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_16",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "standalone_reflection_prompt",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 4,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_02",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "standalone_reflection_prompt",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 12,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_15",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "standalone_reflection_prompt",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 6,
+      "class": "TROUBLESHOOTING",
+      "accent_id": "ts_anxiety_gen_z_professionals_13",
+      "position": "after_INTEGRATION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "chapter_engine",
+        "count_unit": "tracked_surface",
+        "preferred_positions": [
+          "after_INTEGRATION"
+        ],
+        "disallowed_positions": [
+          "before_HOOK",
+          "after_HOOK",
+          "before_STORY"
+        ]
+      }
+    },
+    {
+      "chapter": 4,
+      "class": "QUOTE",
+      "accent_id": "quote_anxiety_en_us_dickinson_letter_1862_v01",
+      "position": "before_HOOK",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "borrowed_authority_block",
+        "preferred_positions": [
+          "before_HOOK",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "QUOTE",
+      "accent_id": "quote_overthinking_en_us_poe_raven_v01",
+      "position": "before_HOOK",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "borrowed_authority_block",
+        "preferred_positions": [
+          "before_HOOK",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 10,
+      "class": "QUOTE",
+      "accent_id": "quote_burnout_en_us_emerson_compensation_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "borrowed_authority_block",
+        "preferred_positions": [
+          "before_HOOK",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 1,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v01",
+      "position": "after_EXERCISE",
+      "supply_source": "atom_pool",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "atom_pool",
+        "surface_bucket": "optional_accents",
+        "count_unit": "substantial_encouragement_block",
+        "preferred_positions": [
+          "after_EXERCISE",
+          "after_turning_point"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 6,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v10",
+      "position": "after_turning_point",
+      "supply_source": "atom_pool",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "atom_pool",
+        "surface_bucket": "optional_accents",
+        "count_unit": "substantial_encouragement_block",
+        "preferred_positions": [
+          "after_EXERCISE",
+          "after_turning_point"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 11,
+      "class": "CITED_EVIDENCE",
+      "accent_id": "anx_exposure_inhibitory_learning_craske_2014",
+      "position": "before_STORY",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "proof_and_embodiment",
+        "count_unit": "evidence_block",
+        "preferred_positions": [
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "truth_metadata": {
+          "citation": "Craske MG, Treanor M, Conway CC, Zbozinek TD, Vervliet B (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy, 58, 10-23.",
+          "year": 2014,
+          "robustness": "robust",
+          "truth_status": "robust"
+        }
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "WISDOM_ESSENCE",
+      "accent_id": "we_anx_bracing_cost_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "distilled_wisdom_block",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    },
+    {
+      "chapter": 1,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_fresh_air_anxiety_theme_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "proof_and_embodiment",
+        "count_unit": "substantial_vignette",
+        "preferred_positions": [
+          "after_HOOK",
+          "after_REFLECTION",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "story_type": "true_life_broadcast",
+        "truth_metadata": {
+          "source": "Fresh Air — anxiety and mental health episode themes",
+          "citation": "NPR Fresh Air archive; Terry Gross interviews on anxiety disorders and stress (2010s–2020s).",
+          "rights_class": "paraphrase_attributed",
+          "truth_status": "paraphrase_attributed"
+        },
+        "story_function": "recognition",
+        "story_function_source": "inferred_emotional_shape"
+      }
+    },
+    {
+      "chapter": 7,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_historical_lincoln_melancholy_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "proof_and_embodiment",
+        "count_unit": "substantial_vignette",
+        "preferred_positions": [
+          "after_HOOK",
+          "after_REFLECTION",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "story_type": "historical",
+        "truth_metadata": {
+          "source": "Abraham Lincoln — documented melancholy",
+          "citation": "Shenk, J.W. Lincoln's Melancholy (2005); Lincoln legal papers and contemporary memoirs.",
+          "rights_class": "verified_facts_only",
+          "truth_status": "verified_facts_only"
+        },
+        "story_function": "recognition",
+        "story_function_source": "inferred_emotional_shape"
+      }
+    },
+    {
+      "chapter": 11,
+      "class": "AUTHOR_COMMENTARY",
+      "accent_id": "ac_ravi_anxiety_observed_standup_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "surface_bucket": "optional_accents",
+        "count_unit": "substantial_interpretive_commentary_block",
+        "preferred_positions": [
+          "after_PIVOT",
+          "after_EXERCISE",
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": []
+      }
+    }
+  ],
+  "enhancement_contract_v21": {
+    "schema_version": "2.1.0",
+    "truth_label": "research_informed_working_priors",
+    "surface_taxonomy": {
+      "chapter_engine": [
+        "VALIDATION_NORMALIZATION",
+        "MECHANISM_EXPLANATION",
+        "PRACTICE_APPLICATION",
+        "TROUBLESHOOTING",
+        "TRANSITION_GLUE",
+        "CLOSING_TAKEAWAY",
+        "PROPULSION"
+      ],
+      "proof_and_embodiment": [
+        "HOOK_STORY",
+        "EXTERNAL_STORY",
+        "AUTHOR_DISCLOSURE",
+        "CASE_STUDY",
+        "CITED_EVIDENCE"
+      ],
+      "optional_accents": [
+        "QUOTE",
+        "ENCOURAGEMENT",
+        "REFLECTION_QUESTION",
+        "AUTHOR_COMMENTARY",
+        "WISDOM_ESSENCE"
+      ],
+      "cohesion_and_craft": [
+        "CALLBACK_PLANT",
+        "CALLBACK_RETURN",
+        "MOTIF",
+        "ANALOGY",
+        "METAPHOR",
+        "BRIDGE",
+        "TRANSITION"
+      ]
+    },
+    "count_units": {
+      "QUOTE": "borrowed_authority_block",
+      "ENCOURAGEMENT": "substantial_encouragement_block",
+      "REFLECTION_QUESTION": "standalone_reflection_prompt",
+      "AUTHOR_COMMENTARY": "substantial_interpretive_commentary_block",
+      "WISDOM_ESSENCE": "distilled_wisdom_block",
+      "CITED_EVIDENCE": "evidence_block",
+      "EXTERNAL_STORY": "substantial_vignette",
+      "AUTHOR_DISCLOSURE": "substantial_first_person_disclosure",
+      "ANALOGY": "major_explanatory_analogy",
+      "METAPHOR": "developed_or_recurring_metaphor",
+      "CALLBACK_RETURN": "meaningful_motif_return"
+    },
+    "tracked_surfaces": [
+      {
+        "surface": "QUOTE",
+        "bucket": "optional_accents",
+        "requested": 3,
+        "assigned": 3,
+        "count_unit": "borrowed_authority_block",
+        "preferred_positions": [
+          "before_HOOK",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "ENCOURAGEMENT",
+        "bucket": "optional_accents",
+        "requested": 2,
+        "assigned": 2,
+        "count_unit": "substantial_encouragement_block",
+        "preferred_positions": [
+          "after_EXERCISE",
+          "after_turning_point"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "REFLECTION_QUESTION",
+        "bucket": "optional_accents",
+        "requested": 3,
+        "assigned": 3,
+        "count_unit": "standalone_reflection_prompt",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "AUTHOR_COMMENTARY",
+        "bucket": "optional_accents",
+        "requested": 1,
+        "assigned": 1,
+        "count_unit": "substantial_interpretive_commentary_block",
+        "preferred_positions": [
+          "after_PIVOT",
+          "after_EXERCISE",
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "WISDOM_ESSENCE",
+        "bucket": "optional_accents",
+        "requested": 1,
+        "assigned": 1,
+        "count_unit": "distilled_wisdom_block",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "TROUBLESHOOTING",
+        "bucket": "chapter_engine",
+        "requested": 1,
+        "assigned": 1,
+        "count_unit": "tracked_surface",
+        "preferred_positions": [
+          "after_INTEGRATION"
+        ],
+        "disallowed_positions": [
+          "before_HOOK",
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "CITED_EVIDENCE",
+        "bucket": "proof_and_embodiment",
+        "requested": 1,
+        "assigned": 1,
+        "count_unit": "evidence_block",
+        "preferred_positions": [
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "EXTERNAL_STORY",
+        "bucket": "proof_and_embodiment",
+        "requested": 2,
+        "assigned": 2,
+        "count_unit": "substantial_vignette",
+        "preferred_positions": [
+          "after_HOOK",
+          "after_REFLECTION",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "AUTHOR_DISCLOSURE",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_first_person_disclosure",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "tracked_surface_only"
+      },
+      {
+        "surface": "ANALOGY",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "major_explanatory_analogy",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      },
+      {
+        "surface": "METAPHOR",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "developed_or_recurring_metaphor",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      },
+      {
+        "surface": "CALLBACK_RETURN",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "meaningful_motif_return",
+        "preferred_positions": [
+          "after_PIVOT",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      }
+    ],
+    "optional_accent_budget": {
+      "target_accent_chapters": {
+        "min": 5,
+        "max": 7
+      },
+      "hard_max_accent_chapters": 8,
+      "target_total_accents": {
+        "min": 7,
+        "max": 9
+      },
+      "hard_max_total_accents": 10,
+      "max_accents_per_chapter": 2,
+      "accent_free_chapters_minimum": 4,
+      "chapter_share_rounding": "ceil",
+      "class_hard_maxima": {
+        "QUOTE": 3,
+        "ENCOURAGEMENT": 2,
+        "REFLECTION_QUESTION": 3,
+        "AUTHOR_COMMENTARY": 1,
+        "WISDOM_ESSENCE": 1
+      },
+      "ceiling_interpretation": "Class-level maxima are ceilings, not instructions to maximize every optional accent class simultaneously.",
+      "actual": {
+        "assigned_total_optional_accents": 10,
+        "optional_assignment_counts": {
+          "QUOTE": 3,
+          "ENCOURAGEMENT": 2,
+          "REFLECTION_QUESTION": 3,
+          "AUTHOR_COMMENTARY": 1,
+          "WISDOM_ESSENCE": 1
+        },
+        "chapters_with_optional_accents": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          10,
+          11,
+          12
+        ],
+        "optional_accent_chapter_count": 8,
+        "accent_free_chapter_count": 4,
+        "per_chapter_optional_counts": {
+          "1": 1,
+          "2": 1,
+          "4": 2,
+          "5": 2,
+          "6": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1
+        }
+      }
+    },
+    "phase_strategy": {
+      "story_mix_profile": "intimate_voice",
+      "chapter_phase_order": [
+        "problem",
+        "history",
+        "knowledge",
+        "action",
+        "maintenance"
+      ],
+      "phase_weights_by_class": {
+        "REFLECTION_QUESTION": {
+          "early": 6,
+          "mid": 10,
+          "late": 14
+        },
+        "TROUBLESHOOTING": {
+          "early": 4,
+          "mid": 8,
+          "late": 12
+        },
+        "QUOTE": {
+          "early": 14,
+          "mid": 8,
+          "late": 12
+        },
+        "ENCOURAGEMENT": {
+          "early": 6,
+          "mid": 10,
+          "late": 8
+        },
+        "CITED_EVIDENCE": {
+          "early": 12,
+          "mid": 10,
+          "late": 6
+        },
+        "EXTERNAL_STORY": {
+          "early": 8,
+          "mid": 10,
+          "late": 10
+        },
+        "WISDOM_ESSENCE": {
+          "early": 6,
+          "mid": 10,
+          "late": 12
+        },
+        "AUTHOR_COMMENTARY": {
+          "early": 6,
+          "mid": 10,
+          "late": 10
+        }
+      },
+      "role_weights_by_class": {
+        "REFLECTION_QUESTION": {
+          "recognition": 4,
+          "reframe": 2,
+          "integration": 2
+        },
+        "TROUBLESHOOTING": {
+          "practice": 3,
+          "integration": 4,
+          "application": 3
+        },
+        "CITED_EVIDENCE": {
+          "recognition": 3,
+          "reframe": 3,
+          "understand": 2
+        },
+        "EXTERNAL_STORY": {
+          "recognition": 3,
+          "reframe": 3,
+          "turn": 2
+        },
+        "ENCOURAGEMENT": {
+          "practice": 3,
+          "integration": 3,
+          "repair": 2
+        }
+      },
+      "anxiety_flagship_mode": "validation_plus_mechanism_hybrid"
+    },
+    "tracking_notes": [
+      "TROUBLESHOOTING, CITED_EVIDENCE, and EXTERNAL_STORY are tracked outside the optional-accent bucket.",
+      "AUTHOR_DISCLOSURE is distinct from AUTHOR_COMMENTARY even when no authored disclosure bank is present.",
+      "ANALOGY, METAPHOR, and callback return surfaces are counted downstream from slots/hooks and audits, not from optional accent budgets."
+    ]
+  },
+  "accent_beats_by_chapter": {
+    "1": [
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v01",
+        "position": "after_EXERCISE",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "atom_pool",
+          "surface_bucket": "optional_accents",
+          "count_unit": "substantial_encouragement_block",
+          "preferred_positions": [
+            "after_EXERCISE",
+            "after_turning_point"
+          ],
+          "disallowed_positions": []
+        }
+      },
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_fresh_air_anxiety_theme_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "proof_and_embodiment",
+          "count_unit": "substantial_vignette",
+          "preferred_positions": [
+            "after_HOOK",
+            "after_REFLECTION",
+            "before_STORY"
+          ],
+          "disallowed_positions": [],
+          "story_type": "true_life_broadcast",
+          "truth_metadata": {
+            "source": "Fresh Air — anxiety and mental health episode themes",
+            "citation": "NPR Fresh Air archive; Terry Gross interviews on anxiety disorders and stress (2010s–2020s).",
+            "rights_class": "paraphrase_attributed",
+            "truth_status": "paraphrase_attributed"
+          },
+          "story_function": "recognition",
+          "story_function_source": "inferred_emotional_shape"
+        }
+      }
+    ],
+    "2": [
+      {
+        "class": "REFLECTION_QUESTION",
+        "accent_id": "rq_anxiety_gen_z_professionals_16",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "standalone_reflection_prompt",
+          "preferred_positions": [
+            "after_REFLECTION",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ],
+    "4": [
+      {
+        "class": "REFLECTION_QUESTION",
+        "accent_id": "rq_anxiety_gen_z_professionals_02",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "standalone_reflection_prompt",
+          "preferred_positions": [
+            "after_REFLECTION",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      },
+      {
+        "class": "QUOTE",
+        "accent_id": "quote_anxiety_en_us_dickinson_letter_1862_v01",
+        "position": "before_HOOK",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "borrowed_authority_block",
+          "preferred_positions": [
+            "before_HOOK",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ],
+    "5": [
+      {
+        "class": "QUOTE",
+        "accent_id": "quote_overthinking_en_us_poe_raven_v01",
+        "position": "before_HOOK",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "borrowed_authority_block",
+          "preferred_positions": [
+            "before_HOOK",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      },
+      {
+        "class": "WISDOM_ESSENCE",
+        "accent_id": "we_anx_bracing_cost_v01",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "distilled_wisdom_block",
+          "preferred_positions": [
+            "after_REFLECTION",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ],
+    "6": [
+      {
+        "class": "TROUBLESHOOTING",
+        "accent_id": "ts_anxiety_gen_z_professionals_13",
+        "position": "after_INTEGRATION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "chapter_engine",
+          "count_unit": "tracked_surface",
+          "preferred_positions": [
+            "after_INTEGRATION"
+          ],
+          "disallowed_positions": [
+            "before_HOOK",
+            "after_HOOK",
+            "before_STORY"
+          ]
+        }
+      },
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v10",
+        "position": "after_turning_point",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "atom_pool",
+          "surface_bucket": "optional_accents",
+          "count_unit": "substantial_encouragement_block",
+          "preferred_positions": [
+            "after_EXERCISE",
+            "after_turning_point"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ],
+    "7": [
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_historical_lincoln_melancholy_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "proof_and_embodiment",
+          "count_unit": "substantial_vignette",
+          "preferred_positions": [
+            "after_HOOK",
+            "after_REFLECTION",
+            "before_STORY"
+          ],
+          "disallowed_positions": [],
+          "story_type": "historical",
+          "truth_metadata": {
+            "source": "Abraham Lincoln — documented melancholy",
+            "citation": "Shenk, J.W. Lincoln's Melancholy (2005); Lincoln legal papers and contemporary memoirs.",
+            "rights_class": "verified_facts_only",
+            "truth_status": "verified_facts_only"
+          },
+          "story_function": "recognition",
+          "story_function_source": "inferred_emotional_shape"
+        }
+      }
+    ],
+    "10": [
+      {
+        "class": "QUOTE",
+        "accent_id": "quote_burnout_en_us_emerson_compensation_v01",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "borrowed_authority_block",
+          "preferred_positions": [
+            "before_HOOK",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ],
+    "11": [
+      {
+        "class": "CITED_EVIDENCE",
+        "accent_id": "anx_exposure_inhibitory_learning_craske_2014",
+        "position": "before_STORY",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "proof_and_embodiment",
+          "count_unit": "evidence_block",
+          "preferred_positions": [
+            "after_HOOK",
+            "before_STORY"
+          ],
+          "disallowed_positions": [],
+          "truth_metadata": {
+            "citation": "Craske MG, Treanor M, Conway CC, Zbozinek TD, Vervliet B (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy, 58, 10-23.",
+            "year": 2014,
+            "robustness": "robust",
+            "truth_status": "robust"
+          }
+        }
+      },
+      {
+        "class": "AUTHOR_COMMENTARY",
+        "accent_id": "ac_ravi_anxiety_observed_standup_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "substantial_interpretive_commentary_block",
+          "preferred_positions": [
+            "after_PIVOT",
+            "after_EXERCISE",
+            "after_REFLECTION",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ],
+    "12": [
+      {
+        "class": "REFLECTION_QUESTION",
+        "accent_id": "rq_anxiety_gen_z_professionals_15",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "surface_bucket": "optional_accents",
+          "count_unit": "standalone_reflection_prompt",
+          "preferred_positions": [
+            "after_REFLECTION",
+            "before_THREAD"
+          ],
+          "disallowed_positions": []
+        }
+      }
+    ]
+  }
+}

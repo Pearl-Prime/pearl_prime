@@ -1,0 +1,444 @@
+{
+  "schema_version": "3.0.0",
+  "artifact_type": "lettering_spec",
+  "default_locale": "en_US",
+  "available_locales": [
+    "en_US",
+    "ja_JP",
+    "zh_CN",
+    "zh_TW"
+  ],
+  "series_id": "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+  "chapter_id": "ep_001",
+  "lettering_panels": [
+    {
+      "panel_id": "ep001_001",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_002",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "Tuesday. Six forty-seven.",
+        "ja_JP": "[ja_JP] Tuesday. Six forty-seven.",
+        "zh_TW": "[zh_TW] Tuesday. Six forty-seven.",
+        "zh_CN": "[zh_CN] Tuesday. Six forty-seven."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_003",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_004",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_005",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {
+        "en_US": [
+          "thud-thud..."
+        ],
+        "ja_JP": [
+          "[ja_JP] thud-thud..."
+        ],
+        "zh_TW": [
+          "[zh_TW] thud-thud..."
+        ],
+        "zh_CN": [
+          "[zh_CN] thud-thud..."
+        ]
+      },
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_006",
+      "silence_confirmed": false,
+      "dialogue_lines": [
+        {
+          "speaker": "mira",
+          "text_by_locale": {
+            "en_US": "Oh.",
+            "ja_JP": "[ja_JP] Oh.",
+            "zh_TW": "[zh_TW] Oh.",
+            "zh_CN": "[zh_CN] Oh."
+          },
+          "emotion": "neutral",
+          "intensity": "whisper",
+          "bubble_style": "round_normal",
+          "tail_style": "pointer",
+          "position_hint": "top_right",
+          "font_override_by_locale": {},
+          "speech_atom_id": null
+        }
+      ],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_007",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_008",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_009",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "The tea is still warm.",
+        "ja_JP": "[ja_JP] The tea is still warm.",
+        "zh_TW": "[zh_TW] The tea is still warm.",
+        "zh_CN": "[zh_CN] The tea is still warm."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_010",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_011",
+      "silence_confirmed": false,
+      "dialogue_lines": [
+        {
+          "speaker": "mira_internal",
+          "text_by_locale": {
+            "en_US": "What if I missed something.",
+            "ja_JP": "[ja_JP] What if I missed something.",
+            "zh_TW": "[zh_TW] What if I missed something.",
+            "zh_CN": "[zh_CN] What if I missed something."
+          },
+          "emotion": "neutral",
+          "intensity": "internal",
+          "bubble_style": "cloud_thought",
+          "tail_style": "dotless",
+          "position_hint": "top_left",
+          "font_override_by_locale": {
+            "en_US": "italic_internal"
+          },
+          "speech_atom_id": null
+        },
+        {
+          "speaker": "mira_internal",
+          "text_by_locale": {
+            "en_US": "What if they noticed last week.",
+            "ja_JP": "[ja_JP] What if they noticed last week.",
+            "zh_TW": "[zh_TW] What if they noticed last week.",
+            "zh_CN": "[zh_CN] What if they noticed last week."
+          },
+          "emotion": "neutral",
+          "intensity": "internal",
+          "bubble_style": "cloud_thought",
+          "tail_style": "dotless",
+          "position_hint": "top_right",
+          "font_override_by_locale": {
+            "en_US": "italic_internal"
+          },
+          "speech_atom_id": null
+        },
+        {
+          "speaker": "mira_internal",
+          "text_by_locale": {
+            "en_US": "I should have prepped on Sunday.",
+            "ja_JP": "[ja_JP] I should have prepped on Sunday.",
+            "zh_TW": "[zh_TW] I should have prepped on Sunday.",
+            "zh_CN": "[zh_CN] I should have prepped on Sunday."
+          },
+          "emotion": "neutral",
+          "intensity": "internal",
+          "bubble_style": "cloud_thought",
+          "tail_style": "dotless",
+          "position_hint": "center_right",
+          "font_override_by_locale": {
+            "en_US": "italic_internal"
+          },
+          "speech_atom_id": null
+        }
+      ],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_012",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_013",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_014",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_015",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "Still here. The bird is still here.",
+        "ja_JP": "[ja_JP] Still here. The bird is still here.",
+        "zh_TW": "[zh_TW] Still here. The bird is still here.",
+        "zh_CN": "[zh_CN] Still here. The bird is still here."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_016",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_017",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {
+        "en_US": [],
+        "ja_JP": [],
+        "zh_TW": [],
+        "zh_CN": []
+      },
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_018",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_019",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_020",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_021",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_022",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_023",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "Once, my therapist said something I didn't believe.",
+        "ja_JP": "[ja_JP] Once, my therapist said something I didn't believe.",
+        "zh_TW": "[zh_TW] Once, my therapist said something I didn't believe.",
+        "zh_CN": "[zh_CN] Once, my therapist said something I didn't believe."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_024",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "He said the body's alarm system is older than the body's wisdom.",
+        "ja_JP": "[ja_JP] He said the body's alarm system is older than the body's wisdom.",
+        "zh_TW": "[zh_TW] He said the body's alarm system is older than the body's wisdom.",
+        "zh_CN": "[zh_CN] He said the body's alarm system is older than the body's wisdom."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_025",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_026",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "It can't tell smoke from steam.",
+        "ja_JP": "[ja_JP] It can't tell smoke from steam.",
+        "zh_TW": "[zh_TW] It can't tell smoke from steam.",
+        "zh_CN": "[zh_CN] It can't tell smoke from steam."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_027",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_028",
+      "silence_confirmed": false,
+      "dialogue_lines": [
+        {
+          "speaker": "mira_internal",
+          "text_by_locale": {
+            "en_US": "Oh.",
+            "ja_JP": "[ja_JP] Oh.",
+            "zh_TW": "[zh_TW] Oh.",
+            "zh_CN": "[zh_CN] Oh."
+          },
+          "emotion": "neutral",
+          "intensity": "whisper",
+          "bubble_style": "cloud_thought",
+          "tail_style": "dotless",
+          "position_hint": "top_right",
+          "font_override_by_locale": {
+            "en_US": "italic_internal"
+          },
+          "speech_atom_id": null
+        }
+      ],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_029",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_030",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_031",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_032",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "I don't have to believe it yet. I just have to notice it once.",
+        "ja_JP": "[ja_JP] I don't have to believe it yet. I just have to notice it once.",
+        "zh_TW": "[zh_TW] I don't have to believe it yet. I just have to notice it once.",
+        "zh_CN": "[zh_CN] I don't have to believe it yet. I just have to notice it once."
+      },
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_033",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_034",
+      "silence_confirmed": true,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {},
+      "estimated_bubble_coverage": null
+    },
+    {
+      "panel_id": "ep001_035",
+      "silence_confirmed": false,
+      "dialogue_lines": [],
+      "sfx_by_locale": {},
+      "narrator_caption_by_locale": {
+        "en_US": "End of Episode 1 — The Alarm Is Lying",
+        "ja_JP": "[ja_JP] End of Episode 1 — The Alarm Is Lying",
+        "zh_TW": "[zh_TW] End of Episode 1 — The Alarm Is Lying",
+        "zh_CN": "[zh_CN] End of Episode 1 — The Alarm Is Lying"
+      },
+      "estimated_bubble_coverage": null
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__courage__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__courage__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__brave_world__1hr
+  name: Brave in the World — for Founders (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Thing You Won''t Say: When One Thought Becomes a Thousand'
+subtitle: The Rumination Trap — Courage for Entrepreneurs (Breaking the Thought Loop,
+  1)
+cover_tagline: One Slack message. Three a.m. A thousand thoughts. You know this loop.
+description:
+  short_blurb: 'It starts with one thought — a flat reply, a number that slipped,
+    a look in a meeting — and by 3 a.m. it''s a thousand thoughts deep and you can''t
+    find the bottom. This is the founder''s spiral: rumination dressed up as problem-solving.
+    This book teaches you to recognize the loop and stop feeding it.'
+  long_description: 'It''s never the first thought that gets you. It''s the second,
+    and the ninth, and the four hundredth. A cofounder''s reply lands a little flat.
+    A churn number ticks the wrong way. Someone goes quiet after a meeting. And your
+    mind, which is very good at its job, takes that one small thing and begins to
+    multiply it — every angle, every worst case, every way this is the beginning of
+    the end. By the time you notice, it''s late, you''re wide awake, and you''ve solved
+    nothing. You''ve just been somewhere dark for an hour.
+
+
+    This book is for the founder who spirals. The one whose mind runs hot and won''t
+    idle, who mistakes the churning for diligence because it feels like thinking.
+    You tell yourself you''re being thorough, being responsible, staying ahead of
+    the problem. But a real problem has an end. The spiral doesn''t. It just loops
+    — the same fear wearing slightly different clothes, pulling you down one rung
+    at a time, all night.
+
+
+    We start by naming the spiral exactly: how it begins, the specific founder-triggers
+    that open the trapdoor, the difference between thought that moves toward a decision
+    and thought that only deepens the rut. Then we go down into it — not to win the
+    argument with your own mind, not to think a better thought to cancel the bad one,
+    but to recognize the loop as a loop while it''s happening. You''ll learn the felt
+    difference between you and the spinning, the place to stand that isn''t inside
+    the thought stream. You''ll see how a founder''s mind — trained to anticipate,
+    to model failure, to never be caught off guard — turns its best instinct against
+    you after dark. And you''ll find that the way out is down, not around: not stopping
+    the thoughts, but stopping your participation in them.
+
+
+    This is not a productivity hack or a thought-stopping technique. There''s no journaling
+    prompt to untangle the knot, no mantra to drown it out, no five-step framework
+    to think your way to calm. This book will not optimize your mind or promise you
+    a quiet one. It won''t make the loops stop opening. What it offers is recognition
+    — the ability to feel the spiral start and know it for what it is before it has
+    you, to step out of the stream instead of getting carried. The thought was never
+    the problem. Believing you had to follow it was.
+
+
+    You don''t have to chase every thought to the bottom. You get to let one go.
+
+
+    Book of the Brave in the World — for Founders (One-Hour) series.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  secondary:
+  - founders
+  - courage for founders
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: devon_hale
+comp_titles:
+- Chatter (Ethan Kross) — the science of the inner voice and how rumination hijacks
+  it
+- Don't Believe Everything You Think (Joseph Nguyen) — secular take on disengaging
+  from a runaway thought stream
+- Why Has Nobody Told Me This Before? (Julie Smith) — practical, no-woo tools for
+  catching a spiral in motion
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

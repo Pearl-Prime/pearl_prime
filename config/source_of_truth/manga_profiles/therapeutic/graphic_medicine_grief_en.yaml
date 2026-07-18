@@ -1,0 +1,59 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+therapeutic_lane: graphic_medicine
+
+title_id: graphic_medicine_grief_en
+brand_id: graphic_medicine_grief
+locale_primary: en
+
+market_demo: josei
+genre_family: graphic_medicine
+subgenre: "grief_process_science_and_story"
+
+emotional_engine: grief
+reader_promise: "You will feel the non-linear shape of grief finally mapped — and understand that your unexpected path through it is not a detour."
+
+serialization_engine: arc_based
+chapter_hook_family: loss_echo
+
+visual_grammar: grounded_josei_realism
+line_weight_profile: medium
+black_fill_ratio: 0.17
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 65
+  silent_panel_ratio: 0.35
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: generous
+
+adaptation_targets:
+  - print
+  - webtoon
+
+series_notes: |
+  Grief from the graphic medicine angle — the neuroscience of loss, the non-linear stages,
+  the way grief returns in waves long after the world expects it to be done.
+  Grief engine: the reader's grief is witnessed and given a shape that feels true.
+  Loss echo hook: reader enters through an unexpected moment of re-encountering loss.
+  Research basis: therapeutic_manga_wellness_market_research_2026_04_04.md §grief §somatic
+  Reader promise anchors to craving: Grief (#7) + Reframe (#13).
+  EN-first. Skeleton locales await localization sprint.
+
+locale_skeletons:
+  - {locale: ja_JP, status: skeleton_awaits_localization_sprint}
+  - {locale: ko_KR, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_TW, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_CN, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_HK, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_SG, status: skeleton_awaits_localization_sprint}
+  - {locale: de_DE, status: skeleton_awaits_localization_sprint}
+  - {locale: fr_FR, status: skeleton_awaits_localization_sprint}
+  - {locale: es_ES, status: skeleton_awaits_localization_sprint}
+  - {locale: es_US, status: skeleton_awaits_localization_sprint}
+  - {locale: it_IT, status: skeleton_awaits_localization_sprint}
+  - {locale: pt_BR, status: skeleton_awaits_localization_sprint}

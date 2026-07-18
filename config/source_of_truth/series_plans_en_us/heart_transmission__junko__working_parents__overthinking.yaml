@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__working_parents__overthinking
+brand: heart_transmission
+teacher: junko
+persona: working_parents
+topic: overthinking
+byline_author: otis_iverson
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__working_parents__overthinking__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__overthinking__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__working_parents__overthinking__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__overthinking__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_transmission__junko__working_parents__overthinking__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__overthinking__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be handed a quieter mind to perform. You will
+  be met inside the loud one — by a voice that has stood in the same dark hallway
+  listening to its own head — and shown, breath by breath, how to set the thinking
+  down for a moment and simply be the parent who is already enough.
+bestseller_hook_family: ''
+emotional_engine: overthinking_recognition
+comp_series:
+- Good Inside (Dr. Becky Kennedy) — the same warm, non-shaming voice, turned here
+  from the child's behavior toward the parent's own overthinking mind
+- Burnout (Emily & Amelia Nagoski) — names the stress loop that won't complete; this
+  series carries that compassion into the specific 2am rumination of parenting on
+  empty
+- Unwinding Anxiety (Judson Brewer) — maps the habit loop of the anxious mind, but
+  where Brewer trains it, this series simply sits beside it with a hand open
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-46
+  where_they_are: It is 2:11am. The house is finally quiet, the children are finally
+    asleep, and you are wide awake on your back replaying a sentence you said to your
+    kid at dinner — turning it over, building the worst version of where it leads,
+    certain you have done some small permanent damage you won't see for years. Tomorrow
+    you will function. Right now your mind will not close a single tab.
+  what_they_need: to be told that a busy, catastrophizing mind is not a character
+    flaw or a verdict on their parenting — and to feel what it is like to lay the
+    thinking down for even a few honest minutes without earning it first
+  what_they_avoid: clinical 'reframe your thoughts' worksheets, mindset hacks, optimize-your-brain
+    productivity language, performative calm, and anyone who implies a good parent
+    would simply think less
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the voice of someone sitting
+    close in the dark with you — warm, unhurried, never clinical, never preachy, never
+    hustle
+  sentence_rhythm: long unspooling sentences that mirror the mind's spiral, broken
+    by short, steadying ones that land like a hand on the chest; tender repetition;
+    spoken-aloud cadence meant to be read close and slow
+  metaphor_family: the heart and what passes between two of them, light passed hand
+    to hand, an open palm, the warmth of presence, the unguarded moment, breath shared
+    in a quiet room, setting a heavy thing down — never machinery, military, productivity,
+    or biohacking
+_needs_authoring: false

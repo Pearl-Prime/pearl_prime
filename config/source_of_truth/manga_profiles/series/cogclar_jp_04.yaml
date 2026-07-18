@@ -1,0 +1,76 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-22"
+profile_type: series
+
+title_id: cogclar_jp_04
+brand_id: cognitive_clarity
+locale: ja_JP
+teacher: kenjin
+
+market_demo: seinen
+genre_family: mystery
+subgenre: "perfectionism_quiet_drama"
+
+emotional_engine: recognition
+reader_promise: "You will stop running from the flaw the perfectionist part of you is so sure is there."
+
+serialization_engine: mood_based
+chapter_hook_family: hidden_truth_glimpse
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.18
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 70
+  silent_panel_ratio: 0.35
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon
+
+series_title: "完璧主義の夜"
+series_title_en: "Perfectionist Nights"
+
+series_logline: >-
+  A young architect who cannot stop reviewing his work is not afraid of failure —
+  he is afraid of being seen clearly.
+
+series_description: |
+  He is good at his work. The team respects him. He receives the commission. At night
+  he goes back to the drawings and finds everything wrong. This is not perfectionism
+  about the work — the series slowly makes clear it is the expectation of exposure.
+  Each chapter ends late, quietly. He does not spiral dramatically. He just stays too
+  long. Jump SQ or ComicWalker aesthetic: understated, evening-focused, calibrated
+  for the male imposter syndrome reader.
+
+marketing_angle: |
+  Imposter syndrome in seinen register — not the female "I don't belong" story but
+  the male "I am about to be found out" story. Quiet. Evening-paced. The architectural
+  setting is visually rich. Polished seinen linework with near-architectural precision.
+
+comp_titles:
+  - "Vagabond (Takehiko Inoue) — discipline, craft, identity"
+  - "Blue Period (Tsubasa Yamaguchi) — artistic perfectionism"
+
+platform_primary: "Jump SQ (Shueisha)"
+platform_secondary: "ComicWalker"
+format_note: "Monthly. Arc-based — one commission per arc, 6–8 chapters."
+
+launch_priority: P2
+
+main_character_name: "蓮" # Ren
+main_character_name_romanized: Ren
+main_character_role: "architect, 28, junior partner, never satisfied"
+main_character_image_path: null
+
+topic_mapping:
+  - imposter_syndrome
+  - overthinking
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md

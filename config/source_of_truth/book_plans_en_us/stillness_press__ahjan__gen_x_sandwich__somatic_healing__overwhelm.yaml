@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-04-24'
+book_id: stillness_press__ahjan__gen_x_sandwich__somatic_healing__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__gen_x_sandwich__somatic_healing.yaml
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: Too Many Things, Not Enough You
+subtitle: A Path Back to Stillness
+cover_tagline: You have more on your plate than fits in your hours.
+description:
+  short_blurb: You have more on your plate than fits in your hours. release what's been held in my body for years.
+  long_description: |
+    You have more on your plate than fits in your hours.
+
+    This book is for office director, parent of teen + caregiver to aging parents who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
+
+    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+
+    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
+
+    Book 2 of the Stillness Press somatic healing series.
+keywords:
+  primary:
+  - somatic therapy
+  - body keeps the score
+  - trauma-informed
+  - nervous system healing
+  - embodiment practice
+  - polyvagal
+  - felt sense
+  secondary:
+  - gen x sandwich
+  - overwhelm somatic healing
+bisac_codes:
+- FAM051000
+- SEL027000
+- FAM058000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: ahjan
+  brand: stillness_press
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — trauma-body foundational
+- Waking the Tiger (Peter Levine) — somatic experiencing
+- My Grandmother's Hands (Resmaa Menakem) — racialized somatic voice
+main_character_name: Sophia
+main_character_lora_id: sophia_sp_us
+confidence:
+  pricing: low
+  title: medium
+  comps: high
+plan_source_path: config/manga/manga_brand_series_plan.yaml

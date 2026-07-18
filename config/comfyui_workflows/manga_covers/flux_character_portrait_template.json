@@ -1,0 +1,46 @@
+{
+    "_meta": {
+        "name": "Manga catalog — FLUX character portrait (template)",
+        "description": "Template aligned with scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json. RunComfy serverless uses deployment overrides; local tooling may substitute {{positive_prompt}}. Uses flux1-dev (full guidance) at steps=28 cfg=3.5 with dpmpp_2m/karras — schnell (4-step distilled) is incompatible with steps>=8 and cfg>1, which silently degraded mecha/dark_fantasy/fantasy_adventure outputs (see docs/PHOENIX_OMEGA_PRODUCTION_AUDIT_2026-04-29.md drift autopsy).",
+        "version": "1.1.0"
+    },
+    "1": {
+        "class_type": "CheckpointLoaderSimple",
+        "inputs": {"ckpt_name": "flux1-dev-fp8.safetensors"}
+    },
+    "2": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{positive_prompt}}", "clip": ["1", 1]}
+    },
+    "3": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{negative_prompt}}", "clip": ["1", 1]}
+    },
+    "4": {
+        "class_type": "EmptyLatentImage",
+        "inputs": {"width": 1024, "height": 1024, "batch_size": 1}
+    },
+    "5": {
+        "class_type": "KSampler",
+        "inputs": {
+            "seed": 42,
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
+            "denoise": 1.0,
+            "model": ["1", 0],
+            "positive": ["2", 0],
+            "negative": ["3", 0],
+            "latent_image": ["4", 0]
+        }
+    },
+    "6": {
+        "class_type": "VAEDecode",
+        "inputs": {"samples": ["5", 0], "vae": ["1", 2]}
+    },
+    "7": {
+        "class_type": "SaveImage",
+        "inputs": {"filename_prefix": "manga_catalog_character", "images": ["6", 0]}
+    }
+}

@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__depletion
+  name: Refill the Empty Well — for Managers
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Burnout Recovery: Living with What You''ve Lost'
+subtitle: A Real Talk Guide to Burnout for Corporate Managers
+cover_tagline: You're not tired. You're grieving the manager you used to be.
+description:
+  short_blurb: Burnout for a manager isn't just exhaustion — it's a loss. Somewhere
+    along the way the version of you who had capacity, who cared without flinching,
+    who could carry the team and still have something left, quietly stopped showing
+    up. This is a real-talk guide to grieving that person instead of trying to drag
+    them back to work.
+  long_description: 'It hits you on an ordinary Tuesday. A direct report brings you
+    a problem you would once have solved before lunch, and you feel nothing — no spark,
+    no instinct, just a flat gray wall where your competence used to live. You''re
+    not slacking. You''re not weak. Something that used to be in there is gone, and
+    no amount of pushing brings it back.
+
+
+    Maybe you''ve been calling it burnout, and treating it the way you''d treat a
+    low battery: more sleep, a long weekend, a promise to set boundaries next quarter.
+    But the charge never returns, and somewhere underneath the tiredness is a quieter,
+    stranger feeling you haven''t let yourself name. You miss someone. You miss the
+    manager you used to be — the one who carried the team through the reorg, the layoffs,
+    the impossible quarter, and still had something left at the end of the day. That
+    person isn''t resting. That person is gone, and what you''re feeling is grief.
+
+
+    This is grief work for people who would never call it that. It starts by saying
+    the true thing out loud: the capable, generous, always-available leader you were
+    did not go on sabbatical — that version of you ended, used up by a job that kept
+    asking. Naming it is the part everyone skips, because naming a loss makes it real.
+    So instead you audition. You perform recovery for the people watching, you fake
+    the old energy in standups, and you wonder why you feel like a fraud in your own
+    office.
+
+
+    From there, you go down instead of around. You sit with what the role quietly
+    took — the patience, the open door, the parts of yourself you handed over so slowly
+    you never noticed them leaving. Not to wallow, but because grief is the one door
+    that actually opens onto the other side. And the other side is real. You come
+    out steadier, slower, more honest, with edges you didn''t have before. Not a downgrade.
+    A different manager, working from capacity that''s actually yours instead of borrowed
+    against a self that no longer exists.
+
+
+    What this book refuses to sell you is the old you, repackaged. No morning routine,
+    no resilience framework, no twelve ways to recharge by Sunday night — every one
+    of those assumes the well is merely low, when the truth is that something ended.
+    What it offers instead is permission. Permission to stop auditioning for your
+    own job. Permission to mourn the leader you were without ruling that you failed.
+    Permission to lead from who is left.
+
+
+    You are allowed to grieve the version of you the work consumed. You are allowed
+    to set him down. And you are allowed to find out that the person standing in the
+    wreckage is sturdier than the one who burned.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - managers
+  - burnout for managers
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the stress cycle managers never
+  get to complete
+- It's OK That You're Not OK (Megan Devine) — grief without the fix-it pressure, for
+  losses that aren't death
+- The Body Keeps the Score (Bessel van der Kolk) — why depletion lives in the body
+  long after the crisis ends
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

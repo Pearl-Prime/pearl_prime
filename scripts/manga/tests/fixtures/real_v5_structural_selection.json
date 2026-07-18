@@ -1,0 +1,19 @@
+{
+  "panel_id": "fixture_real_v5_selection",
+  "canvas": {
+    "width": 200,
+    "height": 300
+  },
+  "contaminated_layer_02": {
+    "bbox": [112, 35, 200, 300],
+    "color": [20, 30, 180, 255],
+    "expected_rejection": "main_component_contacts_multiple_edges"
+  },
+  "clean_layer_03": {
+    "main_bbox": [78, 96, 126, 236],
+    "stray_bbox": [8, 8, 21, 21],
+    "stray_area_px": 169,
+    "color": [210, 30, 30, 255],
+    "stray_color": [30, 30, 30, 255]
+  }
+}

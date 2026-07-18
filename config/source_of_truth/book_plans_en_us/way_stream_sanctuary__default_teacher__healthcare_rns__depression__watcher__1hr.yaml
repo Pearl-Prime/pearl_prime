@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__depression__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__through_loss__1hr
+  name: Through the Low Places — for Nurses (One-Hour)
+installment_number: 3
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: The Observer''s Mind (4)'
+subtitle: The Witnessing Practice — Depression for Healthcare Rns (The Observer's
+  Mind)
+cover_tagline: The shift ended hours ago. Your mind is still running the code.
+description:
+  short_blurb: For the nurse whose head won't stand down after the shift. This one
+    hour names the hypervigilant watcher, takes you under the replaying instead of
+    arguing with it, and gets you back to a mind that can finally rest — no thought-stopping
+    tricks required.
+  long_description: 'It''s two in the morning and you are wide awake, running it back.
+    Did you catch that change in his rhythm fast enough. Did you chart the allergy
+    before you handed off. Was that the right call, did you miss something in the
+    numbers, is the night nurse going to walk in and find the thing you didn''t. The
+    shift has been over for hours and your mind is still on the floor, scanning the
+    board, re-checking the orders, replaying the one patient who didn''t do well on
+    a loop you can''t reach the end of. You call the heaviness depression, because
+    grey and exhausted is what it feels like — but the engine underneath it is a mind
+    that never got the message that you''re off the clock.
+
+
+    This hour is for the nurse who can''t put the watcher down. The one trained into
+    hypervigilance because on your unit a missed detail is somebody''s life, so you
+    learned to catch everything — and now that same radar runs at home, in the shower,
+    in bed, on your days off, on vacation. Who is so tired of being braced for the
+    next catch that the exhaustion has gone grey and shapeless and started to look
+    a lot like depression. If staying one step ahead of disaster has become a full-time
+    job your brain refuses to clock out of, this is for you.
+
+
+    Waystream calls this the watcher engine. Recognition: it names the relentless
+    monitoring as a survival skill that did its job beautifully on shift and then
+    simply forgot how to switch off — not a character flaw, not anxiety you should
+    be able to talk yourself out of, not something broken in you. Descent: instead
+    of teaching you to stop the thoughts or reason yourself calm, it takes you underneath
+    the watching, down into the fear that keeps the radar spinning in the first place,
+    so it stops running the entire show from behind the scenes. Integration: you come
+    back up able to be sharp and tireless at the bedside and actually, genuinely off
+    when you''re off — watching your own thoughts go by without being dragged under
+    by every replay of every shift.
+
+
+    This will not give you a thought-stopping trick or a gratitude practice to run
+    before bed. It will not tell you to just let it go on a job where letting go of
+    details gets people hurt. No worksheets, no routine, no pretending the vigilance
+    was never rational. The watching kept your patients safe and it kept you good
+    at this. It was simply never meant to run your nights too.
+
+
+    You are allowed to take the radar off the wall when you get home. Your mind is
+    permitted to rest, and you can learn, in an hour, how to let it.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - nurses
+  - depression for nurses
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — working with the looping, hypervigilant mind
+  instead of fighting it
+- Why We Sleep (Matthew Walker) — why a mind that won't stand down wrecks the rest
+  you need
+- Burnout (Emily and Amelia Nagoski) — the cost of a stress response that never gets
+  to finish
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

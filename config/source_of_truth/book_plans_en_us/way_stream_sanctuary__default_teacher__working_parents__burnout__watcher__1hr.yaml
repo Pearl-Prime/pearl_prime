@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__burnout__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__steady_ground__1hr
+  name: Steady Ground — for Working Parents (One-Hour)
+installment_number: 3
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: Stepping Back from the Storm'
+subtitle: Watching Your Thoughts Without Drowning — Burnout for Working Parents (Watching
+  Your Thoughts Without Drowning)
+cover_tagline: Your mind has been on duty for years. It forgot how to clock out.
+description:
+  short_blurb: For the working parent whose mind never stands down — scanning the
+    schedule, the bank balance, the kids, the next thing, even at 2 a.m. This is not
+    a book that tries to quiet your thoughts. It's an hour to learn how to watch the
+    watching without getting pulled under by it.
+  long_description: 'It''s the middle of the night and you''re wide awake, mind running
+    the inventory: Did the deposit clear. Is tomorrow a half-day. Did you reply to
+    that email. Is the permission slip signed. You''re not solving anything — there''s
+    nothing to solve at 2 a.m. — but the watcher in your head won''t stand down. It''s
+    been on duty for years, scanning for the next thing that could go wrong, and somewhere
+    along the way it forgot how to clock out.
+
+
+    This hour is for the working parent whose mind treats every quiet moment as a
+    chance to check the perimeter. The one who can''t sit through a movie, a meal,
+    or a bath without half their attention running surveillance on the calendar and
+    the money and the children. If you''ve been told to just relax — as if hypervigilance
+    were a choice you keep making badly — this names what''s really happening: your
+    mind learned that staying on watch was how you kept everyone safe, and now it
+    doesn''t know it''s allowed to stop.
+
+
+    We start by naming the watcher — that part of you that''s always scanning, always
+    a half-step ahead, always braced. Then we go down into it instead of trying to
+    shut it off. This is the part most advice gets wrong: you can''t force a vigilant
+    mind quiet, and trying just adds a second watcher to monitor the first. So instead
+    you learn to watch the watching. You''ll notice the scanning as it happens, name
+    it for what it is, and let it run without climbing inside every thought it throws
+    up. That''s the descent — not silencing the mind, but loosening your grip on it.
+
+
+    What shifts is not whether the watcher shows up. That''s the integration, and
+    it''s the honest part: the vigilant mind doesn''t switch off, especially when
+    you''ve got real people depending on you. You come back able to notice it without
+    drowning in it — aware that your mind is scanning, and no longer mistaking every
+    scan for an emergency you have to act on.
+
+
+    This book will not teach you to empty your mind, install a meditation streak,
+    or reframe your hypervigilance as a superpower. There is no morning routine, no
+    thought-stopping trick, no promise of a quiet head by the last page. It will not
+    tell you the goal is to stop thinking. What it offers is permission — to recognize
+    that your mind has been working a shift it was never relieved from, and that you
+    can learn to stand beside the watching instead of being swept along by it.
+
+
+    You''re allowed to have a busy mind and still find ground under your feet. You''re
+    allowed to take one hour and learn to watch without drowning. Start there.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - working parents
+  - burnout for working parents
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: hannah_stern
+comp_titles:
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — explains the always-on stress response
+  in plain biological terms
+- Unwinding Anxiety (Judson Brewer) — teaches noticing the anxious mind instead of
+  forcing it quiet
+- The Happiness Trap (Russ Harris) — secular ACT approach to unhooking from relentless
+  thoughts without fighting them
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime 教師展示 — 13 位教師 · 13 個品牌</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg-primary: #0D0D0D;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #242424;
+  --text-primary: #F5E6C8;
+  --text-secondary: #BFA97A;
+  --text-muted: #7A6E5A;
+  --amber: #F5A623;
+  --amber-dim: #C48B1A;
+  --cream: #F5E6C8;
+  --border: #333;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--sans); line-height: 1.6; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; left: 0; width: 240px; height: 100vh; background: var(--bg-secondary); border-right: 1px solid var(--border); overflow-y: auto; z-index: 100; padding: 20px 0; }
+.sidebar-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--amber); padding: 0 16px 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.sidebar-subtitle { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); padding: 0 16px 12px; letter-spacing: 0.05em; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; text-decoration: none; color: var(--text-primary); transition: all 0.2s; border-left: 3px solid transparent; }
+.nav-item:hover, .nav-item.active { background: var(--bg-tertiary); border-left-color: var(--brand-color); }
+.nav-radio { appearance: none; -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid rgba(245,166,35,0.3); background: transparent; cursor: pointer; flex-shrink: 0; transition: all .15s; position: relative; pointer-events: none; }
+.nav-item.active .nav-radio, .nav-radio:checked { border-color: var(--amber); background: var(--amber); box-shadow: 0 0 0 2px rgba(245,166,35,0.2); }
+.nav-item.active .nav-radio::after, .nav-radio:checked::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 5px; height: 5px; border-radius: 50%; background: #0D0D0D; }
+.nav-item:hover .nav-radio { border-color: rgba(245,166,35,0.6); }
+.nav-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.65rem; font-weight: 700; color: white; flex-shrink: 0; overflow: hidden; }
+.nav-icon img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.nav-name { font-size: 0.85rem; font-weight: 500; white-space: nowrap; display: block; }
+.nav-brand { font-size: 0.65rem; color: var(--text-muted); display: block; }
+
+/* Main */
+.main { margin-left: 240px; padding: 40px 48px; max-width: 1200px; }
+.page-title { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; color: var(--amber); margin-bottom: 8px; }
+.page-subtitle { font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; letter-spacing: 0.03em; }
+
+/* Stats bar */
+.stats-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.stat-pill { font-family: var(--mono); font-size: 0.7rem; padding: 6px 14px; background: rgba(245,166,35,.06); border: 1px solid rgba(245,166,35,.12); border-radius: 6px; color: var(--amber); }
+.stat-pill.green { background: rgba(74,222,128,.06); border-color: rgba(74,222,128,.12); color: #4ade80; }
+
+/* Filters */
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-btn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); border-radius: 4px; background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+.filter-btn:hover, .filter-btn.active { color: var(--amber); border-color: var(--amber); background: rgba(245,166,35,.08); }
+
+/* Teacher Section */
+.teacher-section { margin-bottom: 48px; padding: 28px; background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border); }
+.teacher-section.highlight { border-color: var(--brand-color, var(--amber)); box-shadow: 0 0 24px rgba(245,166,35,0.1); }
+.teacher-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.teacher-avatar { width: 64px; height: 64px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 1rem; font-weight: 700; color: white; flex-shrink: 0; }
+.teacher-name { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: var(--cream); line-height: 1.2; }
+.teacher-brand { font-size: 0.9rem; font-weight: 500; color: var(--brand-color, var(--amber)); margin-top: 2px; }
+.brand-jp { font-size: 0.8rem; color: var(--text-muted); margin-left: 6px; }
+.teacher-tradition { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+.teacher-focus { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+.teacher-stats { font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
+
+/* Section Toggles */
+.section-toggle { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px; padding: 10px 16px; cursor: pointer; font-family: var(--mono); font-size: 0.75rem; color: var(--amber); letter-spacing: 0.04em; transition: all 0.2s; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.section-toggle:hover { background: var(--border); }
+.toggle-arrow { transition: transform 0.2s; font-size: 0.65rem; }
+.toggle-arrow.open { transform: rotate(90deg); }
+
+/* Collapsible */
+.collapsible { padding: 16px 0; }
+
+/* Formats Grid */
+.formats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.format-card { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; transition: transform 0.2s; }
+.format-card:hover { transform: scale(1.02); }
+.format-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+.format-label { font-family: var(--mono); font-size: 0.7rem; color: var(--cream); letter-spacing: 0.06em; text-transform: uppercase; }
+.format-brand { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
+.format-meta { font-family: var(--mono); font-size: 0.55rem; color: var(--text-muted); margin-top: 2px; }
+.format-coming { opacity: 0.5; }
+.format-placeholder { font-size: 2rem; padding: 40px 0; }
+
+/* Listen */
+.listen-block { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+.listen-title { font-family: var(--serif); font-size: 1rem; color: var(--cream); margin-bottom: 8px; }
+.listen-meta { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); margin-top: 6px; letter-spacing: 0.03em; }
+
+/* Watch */
+.watch-grid { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.watch-main { flex: 2; min-width: 280px; }
+.watch-side { flex: 1; min-width: 160px; max-width: 240px; }
+.watch-side video { width: 100%; border-radius: 6px; background: #111; min-height: 300px; }
+.video-container.landscape { background: linear-gradient(135deg, #1a1a1a, #111); aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid var(--border); gap: 8px; }
+.video-container.landscape::before { content: '\25B6'; font-size: 2.5rem; color: var(--amber); opacity: 0.3; }
+.video-label { font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; text-align: center; }
+.video-note { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); }
+/* Official example reel (Cloudflare R2); 9:16-friendly frame for 1:1 or vertical sources */
+.video-reel-wrap { max-width: min(100%, 360px); margin: 0 auto; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; background: #111; border: 1px solid var(--border); }
+.video-reel-wrap video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+
+/* Manga Gallery */
+.manga-gallery { display: flex; gap: 8px; overflow-x: auto; padding: 8px 0; }
+.manga-gallery img { height: 360px; border-radius: 4px; cursor: pointer; transition: transform 0.2s; border: 1px solid var(--border); }
+.manga-gallery img:hover { transform: scale(1.03); border-color: var(--brand-color, var(--amber)); }
+.manga-characters { display: flex; gap: 8px; margin-top: 12px; }
+.manga-characters img { height: 100px; border-radius: 4px; border: 1px solid var(--border); }
+  /* Triptych row — Character Portrait / Teaching Scene / Brand Essence */
+  .manga-triptych {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .triptych-card {
+    flex: 1;
+    text-align: center;
+  }
+  .triptych-card img {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  .triptych-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 600px) {
+    .manga-triptych {
+      flex-direction: column;
+    }
+  }
+.manga-meta { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); margin-top: 8px; }
+
+/* Book Content */
+.book-content { max-height: 500px; overflow-y: auto; padding: 28px 36px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--cream); }
+.book-content p { margin-bottom: 0.6em; text-indent: 0; }
+.book-content h3.chapter-heading { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--amber); margin: 2em 0 0.8em; padding-top: 1em; border-top: 1px solid var(--border); }
+.book-content h3.pre-intro-heading { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 1em; font-style: italic; }
+.book-content br { display: block; height: 0.3em; }
+.book-content::-webkit-scrollbar { width: 8px; }
+.book-content::-webkit-scrollbar-track { background: var(--bg-secondary); }
+.book-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Marketing Brief */
+.marketing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.marketing-item { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 4px; padding: 10px 14px; font-size: 0.78rem; color: var(--cream); }
+.marketing-label { font-family: var(--mono); font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+/* Manga Reader Overlay */
+.manga-reader-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 1000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.manga-reader-overlay.open { display: flex; }
+.manga-reader-img { max-height: 90vh; max-width: 90vw; border-radius: 6px; }
+.manga-reader-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--amber); cursor: pointer; padding: 20px; user-select: none; }
+.manga-reader-nav.prev { left: 20px; }
+.manga-reader-nav.next { right: 20px; }
+.manga-reader-close { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; }
+.manga-reader-counter { position: absolute; bottom: 20px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 20px; }
+  .formats-grid { grid-template-columns: repeat(2, 1fr); }
+  .watch-grid { flex-direction: column; }
+  .watch-side { max-width: 100%; }
+  .marketing-grid { grid-template-columns: 1fr; }
+}
+
+  .teacher-cta-row { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0 8px; padding:16px;
+    background:rgba(180,83,9,.04); border:1px solid rgba(180,83,9,.15); border-radius:6px;
+    align-items:center; justify-content:flex-start; }
+  .teacher-cta { display:inline-flex; align-items:center; gap:8px; padding:10px 18px;
+    background:rgba(217,119,6,.12); border:1px solid rgba(217,119,6,.4); border-radius:4px;
+    color:#f5d0a9; font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:500;
+    text-decoration:none; transition:all .18s; cursor:pointer; }
+  .teacher-cta:hover { background:rgba(217,119,6,.22); border-color:#d97706; color:#faf6f0;
+    transform:translateY(-1px); box-shadow:0 2px 6px rgba(217,119,6,.2); }
+  .cta-anchor { display:block; height:1px; visibility:hidden; }
+
+  /* Teacher select button in header */
+  .teacher-select-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: .6rem; letter-spacing: .08em;
+    text-transform: uppercase; padding: 7px 16px; border-radius: 4px;
+    cursor: pointer; border: 1px solid var(--brand-color, var(--amber));
+    background: transparent; color: var(--brand-color, var(--amber));
+    transition: all .18s; white-space: nowrap; margin-top: 10px;
+  }
+  .teacher-select-btn:hover, .teacher-select-btn.selected {
+    background: var(--brand-color, var(--amber)); color: #0e0a06;
+    box-shadow: 0 0 12px rgba(245,166,35,.3);
+  }
+  .teacher-select-btn.selected::before { content: "✓ "; }
+
+  /* Sticky choose bar */
+  #choose-bar {
+    position: fixed; bottom: 0; left: 240px; right: 0; z-index: 500;
+    background: rgba(14,10,6,.97); border-top: 1px solid rgba(180,83,9,.25);
+    backdrop-filter: blur(10px); padding: 10px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    transform: translateY(100%); transition: transform .25s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+  #choose-bar.visible { transform: translateY(0); }
+  #choose-bar-label {
+    font-size: .8rem; color: rgba(250,246,240,.5);
+    font-family: var(--mono); letter-spacing: .05em;
+  }
+  #choose-bar-name {
+    font-size: .95rem; color: #d97706; font-family: 'Cormorant Garamond', serif;
+    font-weight: 500; margin-left: 6px;
+  }
+  #choose-bar-btn {
+    font-family: var(--mono); font-size: .65rem; letter-spacing: .1em;
+    text-transform: uppercase; padding: 9px 22px; border-radius: 3px;
+    cursor: pointer; border: 1px solid #d97706;
+    background: #d97706; color: #0e0a06; font-weight: 700;
+    transition: all .15s;
+  }
+  #choose-bar-btn:hover { background: #b45309; border-color: #b45309; }
+  /* Composite (no teacher) banner — always visible at top of main content */
+  #composite-banner {
+    margin: 0 0 24px 0; padding: 16px 20px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(180,83,9,0.06));
+    border: 1px solid rgba(245,166,35,0.35);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  #composite-banner-text { color: var(--text-secondary, #cbd5e1); font-size: 14px; line-height: 1.4; flex: 1 1 280px; }
+  #composite-banner-btn {
+    background: transparent; color: #f5a623; border: 1px solid #f5a623;
+    padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  #composite-banner-btn:hover { background: #f5a623; color: #0a0a0a; }
+  @media (max-width: 640px) {
+    #choose-bar { left: 0; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Universal Nav -->
+
+<!-- Sticky teacher choose bar -->
+<div id="choose-bar">
+  <div>
+    <span id="choose-bar-label">正在查看 — </span>
+    <span id="choose-bar-name"></span>
+  </div>
+  <button id="choose-bar-btn" onclick="chooseTeacherFromBar()">選擇此老師 →</button>
+</div>
+
+<!-- Sidebar -->
+<nav class="sidebar" style="top:0; height:100vh">
+  <div class="sidebar-title">Pearl Prime</div>
+  <div class="sidebar-subtitle">世界心靈導師論壇</div>
+    <a href="#ahjan" class="nav-item" data-teacher="ahjan" style="--brand-color:#F5A623">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/ahjan.png" alt="ahjan"></span>
+      <div>
+        <span class="nav-name">Ahjan Sensei</span>
+        <span class="nav-brand">Stillness Press</span>
+      </div>
+    </a>
+    <a href="#adi_da" class="nav-item" data-teacher="adi_da" style="--brand-color:#E74C3C">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/adi_da.png" alt="adi_da"></span>
+      <div>
+        <span class="nav-name">Adi Da</span>
+        <span class="nav-brand">Feather & Scale Press</span>
+      </div>
+    </a>
+    <a href="#master_feung" class="nav-item" data-teacher="master_feung" style="--brand-color:#2ECC71">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/master_feung.png" alt="master_feung"></span>
+      <div>
+        <span class="nav-name">Master Feung</span>
+        <span class="nav-brand">Root & Meridian Press</span>
+      </div>
+    </a>
+    <a href="#sai_ma" class="nav-item" data-teacher="sai_ma" style="--brand-color:#9B59B6">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/sai_ma.png" alt="sai_ma"></span>
+      <div>
+        <span class="nav-name">Her Holiness Sai Maa</span>
+        <span class="nav-brand">Open Vessel Press</span>
+      </div>
+    </a>
+    <a href="#ra" class="nav-item" data-teacher="ra" style="--brand-color:#3498DB">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/ra.png" alt="ra"></span>
+      <div>
+        <span class="nav-name">Ra</span>
+        <span class="nav-brand">Ember & Ash Publishing</span>
+      </div>
+    </a>
+    <a href="#junko" class="nav-item" data-teacher="junko" style="--brand-color:#1ABC9C">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/miyuki.png" alt="junko"></span>
+      <div>
+        <span class="nav-name">Junko</span>
+        <span class="nav-brand">Bare Form Books</span>
+      </div>
+    </a>
+    <a href="#miki" class="nav-item" data-teacher="miki" style="--brand-color:#FF6B9D">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/miki.png" alt="miki"></span>
+      <div>
+        <span class="nav-name">Miki</span>
+        <span class="nav-brand">Present Tense Books</span>
+      </div>
+    </a>
+    <a href="#master_wu" class="nav-item" data-teacher="master_wu" style="--brand-color:#95A5A6">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/master_wu.png" alt="master_wu"></span>
+      <div>
+        <span class="nav-name">Master Wu</span>
+        <span class="nav-brand">Iron Gate Press</span>
+      </div>
+    </a>
+    <a href="#pamela_fellows" class="nav-item" data-teacher="pamela_fellows" style="--brand-color:#E8B4B8">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/pamela_fellows.png" alt="pamela_fellows"></span>
+      <div>
+        <span class="nav-name">Pamela Fellows</span>
+        <span class="nav-brand">Felt Sense Publishing</span>
+      </div>
+    </a>
+    <a href="#joshin" class="nav-item" data-teacher="joshin" style="--brand-color:#4E7A51">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/joshin.png" alt="joshin"></span>
+      <div>
+        <span class="nav-name">Joshin Sensei</span>
+        <span class="nav-brand">Clear Seeing Books</span>
+      </div>
+    </a>
+    <a href="#maat" class="nav-item" data-teacher="maat" style="--brand-color:#F39C12">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/maat.png" alt="maat"></span>
+      <div>
+        <span class="nav-name">Maat</span>
+        <span class="nav-brand">Feather & Scale Press</span>
+      </div>
+    </a>
+    <a href="#omote" class="nav-item" data-teacher="omote" style="--brand-color:#5DADE2">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/omote.png" alt="omote"></span>
+      <div>
+        <span class="nav-name">Omote Sensei</span>
+        <span class="nav-brand">Held Ground Press</span>
+      </div>
+    </a>
+    <a href="#master_sha" class="nav-item" data-teacher="master_sha" style="--brand-color:#8E44AD">
+      <span class="nav-radio" aria-hidden="true"></span>
+      <span class="nav-icon"><img src="teacher_pics/master_sha.png" alt="master_sha"></span>
+      <div>
+        <span class="nav-name">Master Sha</span>
+        <span class="nav-brand">Night Architecture Books</span>
+      </div>
+    </a>
+</nav>
+
+<!-- Main Content -->
+<main class="main" style="padding-top:20px">
+  <h1 class="page-title">老師展示館</h1>
+  <p class="page-subtitle">媒體作品範例</p>
+
+  <!-- Composite mode CTA: skip teacher selection entirely -->
+  <div id="composite-banner">
+    <div id="composite-banner-text"><span id="composite-banner-hint">以無老師之聲，為此品牌撰寫所有書籍</span></div>
+    <button id="composite-banner-btn" onclick="chooseComposite()">綜合模式（無教師） →</button>
+  </div>
+
+  <!-- Teacher Sections -->
+
+    <section id="ahjan" class="teacher-section" style="--brand-color:#F5A623; --brand-dark:#4A2C00">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/ahjan_top.png" alt="ahjan" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Ahjan Sensei</div>
+          <div class="teacher-brand">Stillness Press <span class="brand-jp">内なる光出版</span></div>
+          <div class="teacher-tradition">觀照 / 內在之光 / 業瑜伽</div>
+          <div class="teacher-focus">冥想、正念、內在平靜</div>
+          <div class="teacher-stats">🇺🇸 英語 · somatic_companion · 10,120字 · 療癒系</div>
+                <button class="teacher-select-btn" id="sel-btn-ahjan" data-tname="Ahjan" onclick="chooseTeacher('ahjan', 'Ahjan')">選擇 Ahjan</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('ahjan_formats')">
+        <span class="toggle-arrow open" id="arr_ahjan_formats">▸</span> 格式
+      </div>
+      <div id="ahjan_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('ahjan_book')" style="cursor:pointer">
+            <img src="assets/covers/kdp/ahjan_ebook.png" loading="lazy" alt="Ahjan 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Stillness Press</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('ahjan')">
+            <img src="assets/covers/kdp/ahjan_audiobook.png" loading="lazy" alt="Ahjan 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-ahjan" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-ahjan" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/ahjan_audiobook_en.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('ahjan')" style="cursor:pointer">
+            <img id="manga-img-ahjan" src="assets/manga_covers/ahjan_scene.png" loading="lazy" alt="Ahjan 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('ahjan')">
+            <img src="assets/covers/kdp/ahjan_podcast.png"
+                 loading="lazy" alt="Ahjan 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-ahjan" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-ahjan" preload="metadata"
+                   src="assets/audio/podcast/ahjan_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/ahjan.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('ahjan_book')">
+        <span class="toggle-arrow" id="arr_ahjan_book">▸</span> 閱讀樣章（約1,437字）</div>
+      <div id="ahjan_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/ahjan__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+        </div>
+      </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-ahjan" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-ahjan" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="adi_da" class="teacher-section" style="--brand-color:#E74C3C; --brand-dark:#4A1010">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/adi_da_top.png" alt="adi_da" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Adi Da</div>
+          <div class="teacher-brand">Feather & Scale Press</div>
+          <div class="teacher-tradition">徹底的奉獻 / 自我超越</div>
+          <div class="teacher-focus">自我價值、勇氣、界線</div>
+          <div class="teacher-stats">🇺🇸 英語 · elder_stabilizer · 14,025字 · 青年</div>
+                <button class="teacher-select-btn" id="sel-btn-adi_da" data-tname="Adi Da" onclick="chooseTeacher('adi_da', 'Adi Da')">選擇 Adi Da</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('adi_da_formats')">
+        <span class="toggle-arrow open" id="arr_adi_da_formats">▸</span> 格式
+      </div>
+      <div id="adi_da_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('adi_da_book')" style="cursor:pointer">
+            <img src="assets/covers/kdp/adi_da_ebook.png" loading="lazy" alt="Adi Da 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Feather & Scale Press</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('adi_da')">
+            <img src="assets/covers/kdp/adi_da_audiobook.png" loading="lazy" alt="Adi Da 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-adi_da" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-adi_da" preload="metadata" src="assets/audio/audiobook_chapters/adi_da_self_worth_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('adi_da')" style="cursor:pointer">
+            <img id="manga-img-adi_da" src="assets/manga_covers/adi_da_scene.png" loading="lazy" alt="Adi Da 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('adi_da')">
+            <img src="assets/covers/kdp/adi_da_podcast.png"
+                 loading="lazy" alt="Adi Da 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-adi_da" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-adi_da" preload="metadata"
+                   src="assets/audio/podcast/adi_da_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/adi_da.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('adi_da_book')">
+        <span class="toggle-arrow" id="arr_adi_da_book">▸</span> 閱讀樣章（約2,151字）</div>
+      <div id="adi_da_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了如指掌。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓內在的緊縮顯露出來的自我編排。這場永遠不會出現在行事曆上的準備，才是你這一週所做的最耗神之事。留意這一點。別就這樣略過它。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著截然不同的另一種東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是戲劇化地。只是——掃描著。追蹤主管的回覆速度。解讀一則 Slack 訊息裡某個字的溫度。反覆推算上週二那句話如今可能仍意味著什麼。你這麼做得太有效率、太久了，久到它再也不會浮上意識。你把它誤認成了你自己。</p>
+<br>
+<p>那並不是你自己。那是一套機制——一套精準、忠於演化的機制——而當你把它看作一套機制的那一刻，某種東西便動了。動的不是機制。是你。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/adi_da__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-adi_da" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-adi_da" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="master_feung" class="teacher-section" style="--brand-color:#95A5A6; --brand-dark:#2D3436">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0;height:96px"><img src="teacher_pics/manga/master_feung_top.png" alt="master_feung" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Master Feung</div>
+          <div class="teacher-brand">Iron Gate Press <span class="brand-jp">鐵門出版</span></div>
+          <div class="teacher-tradition">道家 / 氣功 / 傳統中醫</div>
+          <div class="teacher-focus">倦怠、身心療癒、勇氣</div>
+          <div class="teacher-stats">🇨🇳 中文 · 長者穩定 · 8,614字 · 武俠</div>
+                <button class="teacher-select-btn" id="sel-btn-master_feung" data-tname="Master Feung" onclick="chooseTeacher('master_feung', 'Master Feung')">選擇馮老師</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('master_feung_formats')">
+        <span class="toggle-arrow open" id="arr_master_feung_formats">▸</span> 格式
+      </div>
+      <div id="master_feung_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('master_feung_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_localized_2026-05-17.png" loading="lazy" alt="Master Feung 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">鐵門出版</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_feung')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Feung 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-master_feung" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-master_feung" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/master_feung_audiobook_zh-cn.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('master_feung')" style="cursor:pointer">
+            <img id="manga-img-master_feung" src="assets/manga_covers/master_feung_scene.png" loading="lazy" alt="Master Feung 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('master_feung')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_podcast_localized_2026-05-17.jpg"
+                 loading="lazy" alt="Master Feung 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-master_feung" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-master_feung" preload="metadata"
+                   src="assets/audio/podcast/master_wu_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/master_feung.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('master_feung_book')">
+        <span class="toggle-arrow" id="arr_master_feung_book">▸</span> 閱讀樣章（約2,333字）</div>
+      <div id="master_feung_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第一章 — 鳴不止的警報</h3>
+<br>
+<p>你的績效評估在下週四。</p>
+<br>
+<p>從週一開始，你就在準備——不是材料。材料你早就熟了。你在準備的是你的<em>臉</em>。你的聲音。那個走進會議室、不讓警報顯形的版本的自己。沒有人看得見的那部分準備，才是這一週裡最耗人的部分。</p>
+<br>
+<p>日曆說：高效。身體卻在跑一套完全不同的程式。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你身上有一部分總是在掃描。</p>
+<br>
+<p>不是焦慮地掃。不是顯眼地掃。就是——掃描。盯著主管的回覆時間。讀一條 Slack 訊息的語氣。反覆推算上週二那句話到底是什麼意思。你做這件事已經太久、太熟練，以至於自己都不再察覺。你把它當成了「我就是這種人」。</p>
+<br>
+<p>不是。這是一個機制。看清楚之後，它就開始鬆動。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/master_feung__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-master_feung" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-master_feung" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="sai_ma" class="teacher-section" style="--brand-color:#9B59B6; --brand-dark:#2D1A35">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/sai_maa_top.png" alt="sai_ma" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Her Holiness Sai Maa</div>
+          <div class="teacher-brand">Open Vessel Press</div>
+          <div class="teacher-tradition">吠陀印度教 / 夏克提 / 奉愛</div>
+          <div class="teacher-focus">悲傷、慈悲疲勞、憂鬱</div>
+          <div class="teacher-stats">🇨🇳 中文 · somatic_companion · 10,004 words · josei</div>
+                <button class="teacher-select-btn" id="sel-btn-sai_ma" data-tname="Sai Ma" onclick="chooseTeacher('sai_ma', 'Sai Ma')">選擇 Sai Ma</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('sai_ma_formats')">
+        <span class="toggle-arrow open" id="arr_sai_ma_formats">▸</span> 格式
+      </div>
+      <div id="sai_ma_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('sai_ma_book')" style="cursor:pointer">
+            <img src="assets/covers/kdp/sai_ma_ebook.png" loading="lazy" alt="Sai Ma 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Open Vessel Press</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('sai_ma')">
+            <img src="assets/covers/kdp/sai_ma_audiobook.png" loading="lazy" alt="Sai Ma 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-sai_ma" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-sai_ma" preload="metadata" src="assets/audio/audiobook_chapters/sai_ma_grief_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('sai_ma')" style="cursor:pointer">
+            <img id="manga-img-sai_ma" src="assets/manga_covers/sai_ma_scene.png" loading="lazy" alt="Sai Ma 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('sai_ma')">
+            <img src="assets/covers/kdp/sai_ma_podcast.png"
+                 loading="lazy" alt="Sai Ma 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-sai_ma" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-sai_ma" preload="metadata"
+                   src="assets/audio/podcast/sai_ma_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/sai_ma.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('sai_ma_book')">
+        <span class="toggle-arrow" id="arr_sai_ma_book">▸</span> 閱讀樣章（約2,021字）</div>
+      <div id="sai_ma_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
+<br>
+<p>而在身體更深的底下，有某種東西在等待著——光輝滿盈、從容不迫——一種尚未被允許開口說話的東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>並非如此。那只是一套在前景運行的機制，而在其深處，你更深的智慧——傳承所稱之為 <em>shakti</em> 者——正在底下等待。靜默地、全然清醒地，不願離你而去。掃描並不是你的本質。看見它，才是。而當看見開始的那一刻，聖母便已在這房間之中。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/sai_ma__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-sai_ma" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-sai_ma" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="ra" class="teacher-section" style="--brand-color:#3498DB; --brand-dark:#0F2940">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/ra_top.png" alt="ra" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Ra</div>
+          <div class="teacher-brand">Ember & Ash Publishing</div>
+          <div class="teacher-tradition">非洲靈性 / 太陽 / 祖靈</div>
+          <div class="teacher-focus">憂鬱、勇氣、自我價值、悲傷</div>
+          <div class="teacher-stats">🇺🇸 英語 · research_guide · 8,894字 · 青年</div>
+                <button class="teacher-select-btn" id="sel-btn-ra" data-tname="Ra" onclick="chooseTeacher('ra', 'Ra')">選擇 Ra</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('ra_formats')">
+        <span class="toggle-arrow open" id="arr_ra_formats">▸</span> 格式
+      </div>
+      <div id="ra_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('ra_book')" style="cursor:pointer">
+            <img src="assets/covers/kdp/ra_ebook.png" loading="lazy" alt="Ra 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Ember & Ash Publishing</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('ra')">
+            <img src="assets/covers/kdp/ra_audiobook.png" loading="lazy" alt="Ra 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-ra" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-ra" preload="metadata" src="assets/audio/audiobook_chapters/ra_self_worth_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('ra')" style="cursor:pointer">
+            <img id="manga-img-ra" src="assets/manga_covers/ra_scene.png" loading="lazy" alt="Ra 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('ra')">
+            <img src="assets/covers/kdp/ra_podcast.png"
+                 loading="lazy" alt="Ra 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-ra" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-ra" preload="metadata"
+                   src="assets/audio/podcast/ra_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/ra.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('ra_book')">
+        <span class="toggle-arrow" id="arr_ra_book">▸</span> 閱讀樣章（約2,106字）</div>
+      <div id="ra_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>在你讀下一句話之前，請留意——有某種東西正在「閱讀」。</p>
+<br>
+<p>警報自星期一起便在你胸中鳴響——考核在星期四——而在這一切鳴響之下，有某種東西靜得足以感知到它。一種不曾被徵召進憂慮之中的東西。讀著這一段，去感受它。不是那鳴響。而是那個聽見鳴響的人。那個人一直都在這裡。在警報響起之前，它就在這裡。在警報靜下來之後，它仍會在這裡。</p>
+<br>
+<p>你的行事曆說：有生產力。你所披的戲服說：從容。那個觀看著這一切的人，才是我們將一次又一次回歸之處，直到你無需任何協助，便能自行尋見它。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。掃描與自我，已在你的記憶中融為一體。但這兩者，並不是同一回事。</p>
+<br>
+<p>那並不是你自己。那是一套機制。而那個觀看著機制的人，並不是機制。留意這個分別。讀來雖是微小的差異，活在其中卻無比巨大。它，就是這整本書。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/ra__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-ra" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-ra" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="junko" class="teacher-section" style="--brand-color:#1ABC9C; --brand-dark:#0A3D32">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/miyuki_top.png" alt="junko" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Junko</div>
+          <div class="teacher-brand">Bare Form Books <span class="brand-jp">裸形書房</span></div>
+          <div class="teacher-tradition">禪僧 / 侘寂 / 坐禪</div>
+          <div class="teacher-focus">倦怠症候群、冒名頂替症候群、勇氣</div>
+          <div class="teacher-stats">🇯🇵 日語 · somatic_companion · 8,872字 · 青年漫畫</div>
+                <button class="teacher-select-btn" id="sel-btn-junko" data-tname="Junko" onclick="chooseTeacher('junko', 'Junko')">選擇 Junko</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('junko_formats')">
+        <span class="toggle-arrow open" id="arr_junko_formats">▸</span> 格式
+      </div>
+      <div id="junko_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('junko_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_localized_2026-05-21.png" loading="lazy" alt="Junko 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">裸形書房</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('junko')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_audiobook_localized_2026-05-21.jpg" loading="lazy" alt="Junko 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-junko" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-junko" preload="metadata" src="assets/audio/audiobook_chapters/miyuki_overthinking_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('junko')" style="cursor:pointer">
+            <img id="manga-img-junko" src="assets/manga_covers/miyuki_scene.png" loading="lazy" alt="Junko 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('junko')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_podcast_localized_2026-05-21.jpg"
+                 loading="lazy" alt="Junko 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-junko" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-junko" preload="metadata"
+                   src="assets/audio/podcast/junko_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/junko.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+</div>
+</div>
+</div>
+        </div>
+        <!-- Topic-cover thumbnails — hidden by default; the same files are
+             included in MANGA_IMGS["junko"] so clicking the Manga format card
+             cycles through them along with the portrait + scene. -->
+        <div class="manga-topic-extra" style="display:none">
+          <img src="assets/manga_covers/miyuki_cover_sleep_anxiety.png" loading="lazy" alt="Topic cover: Sleep anxiety">
+          <img src="assets/manga_covers/miyuki_cover_social_anxiety.png" loading="lazy" alt="Topic cover: Social anxiety">
+        </div>
+      </div>
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('junko_book')">
+        <span class="toggle-arrow" id="arr_junko_book">▸</span> 閱讀樣章（約2,857字）</div>
+      <div id="junko_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/junko__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-junko" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-junko" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="miki" class="teacher-section" style="--brand-color:#FF6B9D; --brand-dark:#401A2D">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/miki_top.png" alt="miki" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Miki</div>
+          <div class="teacher-brand">Present Tense Books <span class="brand-jp">今此処文庫</span></div>
+          <div class="teacher-tradition">神道 / 森林浴 / 自然冥想</div>
+          <div class="teacher-focus">睡眠焦慮、焦慮、同理心疲勞</div>
+          <div class="teacher-stats">🇯🇵 日語 · research_guide · 8,177字 · 療癒系</div>
+                <button class="teacher-select-btn" id="sel-btn-miki" data-tname="Miki" onclick="chooseTeacher('miki', 'Miki')">選擇 Miki</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('miki_formats')">
+        <span class="toggle-arrow open" id="arr_miki_formats">▸</span> 格式
+      </div>
+      <div id="miki_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('miki_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_starseed_2026-05-21.png" loading="lazy" alt="Miki 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">今此処文庫</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('miki')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_audiobook_starseed_2026-05-21.jpg" loading="lazy" alt="Miki 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-miki" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-miki" preload="metadata" src="assets/audio/audiobook_chapters/miki_imposter_syndrome_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('miki')" style="cursor:pointer">
+            <img id="manga-img-miki" src="assets/manga_covers/miki_scene.png" loading="lazy" alt="Miki 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('miki')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_podcast_starseed_2026-05-21.jpg"
+                 loading="lazy" alt="Miki 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-miki" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-miki" preload="metadata"
+                   src="assets/audio/podcast/miki_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/miki.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('miki_book')">
+        <span class="toggle-arrow" id="arr_miki_book">▸</span> 閱讀樣章（約3,041字）</div>
+      <div id="miki_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/miki__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-miki" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-miki" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="master_wu" class="teacher-section" style="--brand-color:#2ECC71; --brand-dark:#0A3D1F">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0;height:96px"><img src="teacher_pics/manga/master_wu_top.png" alt="master_wu" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Master Wu</div>
+          <div class="teacher-brand">Root & Meridian Press <span class="brand-jp">根脈出版</span></div>
+          <div class="teacher-tradition">少林 / 武術 / 禪宗</div>
+          <div class="teacher-focus">勇氣、倦怠、界線</div>
+          <div class="teacher-stats">🇹🇼 繁體中文 · 長者穩定 · 6,784 字 · 武俠</div>
+                <button class="teacher-select-btn" id="sel-btn-master_wu" data-tname="Master Wu" onclick="chooseTeacher('master_wu', 'Master Wu')">選擇吳師父</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('master_wu_formats')">
+        <span class="toggle-arrow open" id="arr_master_wu_formats">▸</span> 格式
+      </div>
+      <div id="master_wu_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('master_wu_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_localized_2026-05-17.png" loading="lazy" alt="Master Wu 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">根脈出版</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_wu')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Wu 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-master_wu" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-master_wu" preload="metadata" src="assets/audio/audiobook_chapters/master_wu_courage_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('master_wu')" style="cursor:pointer">
+            <img id="manga-img-master_wu" src="assets/manga_covers/master_wu_scene.png" loading="lazy" alt="Master Wu 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色藝術</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('master_wu')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_podcast_localized_2026-05-17.jpg"
+                 loading="lazy" alt="Master Wu 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-master_wu" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-master_wu" preload="metadata"
+                   src="assets/audio/podcast/master_feung_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/master_wu.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直版 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+</div>
+</div>
+</div>
+        </div>
+        <!-- Topic-cover thumbnails — hidden by default; included in MANGA_IMGS["master_wu"] cycle. -->
+        <div class="manga-topic-extra" style="display:none">
+          <img src="assets/manga_covers/master_wu_cover_boundaries.png" loading="lazy" alt="Topic cover: Boundaries">
+          <img src="assets/manga_covers/master_wu_cover_burnout.png" loading="lazy" alt="Topic cover: Burnout">
+        </div>
+      </div>
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('master_wu_book')">
+        <span class="toggle-arrow" id="arr_master_wu_book">▸</span> 閱讀樣章 (約2,288字)</div>
+      <div id="master_wu_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第一章 — 鳴不止的警報</h3>
+<br>
+<p>下週四是你的年度績效考核。</p>
+<br>
+<p>從週一開始，你就一直在準備 — 不是準備資料。資料你早已熟透。你準備的是自己的<em>臉</em>。你的聲音。那個能走進會議室、不讓警報外洩的版本。沒有人看見的那部分準備，是這一週最耗人的工程。</p>
+<br>
+<p>行事曆寫著：產出。但你的身體跑著完全不同的一張地圖。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你身上有一處，一直在掃描。</p>
+<br>
+<p>不是焦躁的那種。也不是明顯的那種。就是 — 在掃描。盯著主管的回覆速度。讀著 Slack 訊息裡的語氣。重新計算上週二那句話的弦外之音。你做得太久、太順手，以至於你已經停止留意它。你把它當成「我就是這種人」。</p>
+<br>
+<p>不是的。那是一個機制。看清楚之後，它就會改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/master_wu__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-master_wu" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-master_wu" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="pamela_fellows" class="teacher-section" style="--brand-color:#E8B4B8; --brand-dark:#3D2A2C">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0;height:96px"><img src="teacher_pics/manga/pamela_fllows_top.png" alt="pamela_fellows" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Pamela Fellows</div>
+          <div class="teacher-brand">Felt Sense Publishing</div>
+          <div class="teacher-tradition">身心療癒 / 多重迷走神經 / 神經系統</div>
+          <div class="teacher-focus">身心療癒、焦慮、倦怠</div>
+          <div class="teacher-stats">🇺🇸 英語 · somatic_companion · 10,487字 · 女性向</div>
+                <button class="teacher-select-btn" id="sel-btn-pamela_fellows" data-tname="Pamela Fellows" onclick="chooseTeacher('pamela_fellows', 'Pamela Fellows')">選擇 Pamela Fellows</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('pamela_fellows_formats')">
+        <span class="toggle-arrow open" id="arr_pamela_fellows_formats">▸</span> 格式
+      </div>
+      <div id="pamela_fellows_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('pamela_fellows_book')" style="cursor:pointer">
+            <img src="assets/covers/kdp/pamela_fellows_ebook.png" loading="lazy" alt="Pamela Fellows 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Felt Sense Publishing</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('pamela_fellows')">
+            <img src="assets/covers/kdp/pamela_fellows_audiobook.png" loading="lazy" alt="Pamela Fellows 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-pamela_fellows" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-pamela_fellows" preload="metadata" src="assets/audio/audiobook_chapters/pamela_fellows_burnout_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('pamela_fellows')" style="cursor:pointer">
+            <img id="manga-img-pamela_fellows" src="assets/manga_covers/pamela_fellows_scene.png" loading="lazy" alt="Pamela Fellows 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('pamela_fellows')">
+            <img src="assets/covers/kdp/pamela_fellows_podcast.png"
+                 loading="lazy" alt="Pamela Fellows 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-pamela_fellows" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-pamela_fellows" preload="metadata"
+                   src="assets/audio/podcast/pamela_fellows_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/pamela_fellows.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('pamela_fellows_book')">
+        <span class="toggle-arrow" id="arr_pamela_fellows_book">▸</span> 閱讀樣章（約2,132字）</div>
+      <div id="pamela_fellows_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已擁有於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個將要走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，是這一週裡代價最昂貴的一個鐘頭，而它正在你所做的其餘一切之下，悄然發生。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著行事曆無法讀取的東西——一個更安靜、更古老的訊號，正尋找著收件匣永遠無法送達的某樣東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是看得見地。只是——掃描著。追蹤主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話可能意味著什麼。你這麼做得太有效率、太久了，久到你已不再把它意識為一件獨立的事。你開始把它稱作你的性格。</p>
+<br>
+<p>那並不是你的性格。那是一套機制。而當你把它看作它實際所是的那一刻，它內部的某種東西便開始鬆軟下來。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/pamela_fellows__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-pamela_fellows" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-pamela_fellows" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="joshin" class="teacher-section" style="--brand-color:#4E7A51; --brand-dark:#1A2D1B">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0;height:96px"><img src="teacher_pics/manga/joshin_top.png" alt="joshin" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">上心 先生</div>
+          <div class="teacher-brand">Clear Seeing Books <span class="brand-jp">明見書房</span></div>
+          <div class="teacher-tradition">禪僧 / 公案 / 正念</div>
+          <div class="teacher-focus">想太多、焦慮、倦怠症候群</div>
+          <div class="teacher-stats">🇯🇵 日語 · research_guide · 4,799字 · 青年漫畫</div>
+                <button class="teacher-select-btn" id="sel-btn-joshin" data-tname="Joshin" onclick="chooseTeacher('joshin', 'Joshin')">選擇 Joshin</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('joshin_formats')">
+        <span class="toggle-arrow open" id="arr_joshin_formats">▸</span> 格式
+      </div>
+      <div id="joshin_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('joshin_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_localized_2026-05-17.png" loading="lazy" alt="Joshin 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">明見書房</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('joshin')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Joshin 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-joshin" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-joshin" preload="metadata" src="assets/audio/audiobook_chapters/joshin_anxiety_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('joshin')" style="cursor:pointer">
+            <img id="manga-img-joshin" src="assets/manga_covers/joshin_symbolic.png" loading="lazy" alt="Joshin 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('joshin')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_podcast_localized_2026-05-17.jpg"
+                 loading="lazy" alt="Joshin 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-joshin" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-joshin" preload="metadata"
+                   src="assets/audio/podcast/joshin_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/joshin.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+</div>
+</div>
+</div>
+        </div>
+        <!-- Topic-cover thumbnails — hidden by default; included in MANGA_IMGS["joshin"] cycle. -->
+        <div class="manga-topic-extra" style="display:none">
+          <img src="assets/manga_covers/joshin_cover_depression.png" loading="lazy" alt="Topic cover: Depression">
+          <img src="assets/manga_covers/joshin_cover_overthinking.png" loading="lazy" alt="Topic cover: Overthinking">
+        </div>
+      </div>
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('joshin_book')">
+        <span class="toggle-arrow" id="arr_joshin_book">▸</span> 閱讀樣章（約3,022字）</div>
+      <div id="joshin_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/joshin__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-joshin" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-joshin" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="maat" class="teacher-section" style="--brand-color:#F39C12; --brand-dark:#3D2700">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/maat_top.png" alt="maat" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Maat</div>
+          <div class="teacher-brand">Feather & Scale Press</div>
+          <div class="teacher-tradition">埃及神秘學 / 瑪特 / 真理</div>
+          <div class="teacher-focus">界線、自我價值、社交焦慮</div>
+          <div class="teacher-stats">🇺🇸 英語 · research_guide · 10,162字 · 青年</div>
+                <button class="teacher-select-btn" id="sel-btn-maat" data-tname="Maat" onclick="chooseTeacher('maat', 'Maat')">選擇 Maat</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('maat_formats')">
+        <span class="toggle-arrow open" id="arr_maat_formats">▸</span> 格式
+      </div>
+      <div id="maat_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('maat_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_v1_restore_2026-05-21.png" loading="lazy" alt="Maat 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Feather & Scale Press</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('maat')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_audiobook_v1_restore_2026-05-21.jpg" loading="lazy" alt="Maat 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-maat" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-maat" preload="metadata" src="assets/audio/audiobook_chapters/maat_boundaries_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('maat')" style="cursor:pointer">
+            <img id="manga-img-maat" src="assets/manga_covers/maat_scene.png" loading="lazy" alt="Maat 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('maat')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_podcast_v1_restore_2026-05-21.jpg"
+                 loading="lazy" alt="Maat 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-maat" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-maat" preload="metadata"
+                   src="assets/audio/podcast/maat_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/maat.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('maat_book')">
+        <span class="toggle-arrow" id="arr_maat_book">▸</span> 閱讀樣章（約2,037字）</div>
+      <div id="maat_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已擁有。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那份你打算披進那個房間裡的鎮定，好讓肋骨底下的警報不致顯露。這一週裡，每一天最漫長的一個鐘頭，正是那沒人看得見的一個鐘頭。</p>
+<br>
+<p>你的行事曆把它命名為生產力。可你的身體，卻在底下執行著一場更古老的儀典——一種行事曆沒有欄位可記、任何主管都永遠不會過問、卻依舊照常運行的渴望。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是看得見地，也不帶任何戲劇性。只是——掃描著。注視著主管的回覆速度。解讀一則 Slack 訊息的語氣。靜靜地盤點上週二那句話，以及它是否真如你所疑的那般意味著什麼。你這麼做得太好、太久了，久到你已不再把它感受為一件獨立的事。你開始把它稱作你的性格。</p>
+<br>
+<p>並非如此。那是一套機制。而當它被看作它所是的那一刻，它之中的某種東西便開始鬆解。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/maat__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-maat" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-maat" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="omote" class="teacher-section" style="--brand-color:#5DADE2; --brand-dark:#1A3040">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/omote_top.png" alt="omote" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Omote Sensei</div>
+          <div class="teacher-brand">Held Ground Press <span class="brand-jp">面の地出版</span></div>
+          <div class="teacher-tradition">日本美學 / 能樂 / 真實性</div>
+          <div class="teacher-focus">自我肯定感、社交焦慮、冒名頂替症候群</div>
+          <div class="teacher-stats">🇯🇵 日語 · research_guide · 9,073字 · 青年漫畫</div>
+                <button class="teacher-select-btn" id="sel-btn-omote" data-tname="Omote" onclick="chooseTeacher('omote', 'Omote')">選擇 Omote</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('omote_formats')">
+        <span class="toggle-arrow open" id="arr_omote_formats">▸</span> 格式
+      </div>
+      <div id="omote_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('omote_book')" style="cursor:pointer">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_localized_2026-05-17.png" loading="lazy" alt="Omote 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">面の地出版</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('omote')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Omote 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-omote" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-omote" preload="metadata" src="assets/audio/audiobook_chapters/omote_sleep_anxiety_ch1.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('omote')" style="cursor:pointer">
+            <img id="manga-img-omote" src="assets/manga_covers/omote_scene.png" loading="lazy" alt="Omote 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('omote')">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_podcast_localized_2026-05-17.jpg"
+                 loading="lazy" alt="Omote 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-omote" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-omote" preload="metadata"
+                   src="assets/audio/podcast/omote_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/omote.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('omote_book')">
+        <span class="toggle-arrow" id="arr_omote_book">▸</span> 閱讀樣章（約3,325字）</div>
+      <div id="omote_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
+<br>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/omote__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-omote" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-omote" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+    <section id="master_sha" class="teacher-section" style="--brand-color:#8E44AD; --brand-dark:#2D1540">
+      <!-- TEACHER HEADER -->
+      <div class="teacher-header">
+        <div class="teacher-avatar" style="overflow:hidden;padding:0"><img src="teacher_pics/manga/master_sha_top.png" alt="master_sha" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
+        <div>
+          <div class="teacher-name">Master Sha</div>
+          <div class="teacher-brand">Night Architecture Books <span class="brand-jp">夜の建築書房</span></div>
+          <div class="teacher-tradition">靈魂身心 / 量子療癒</div>
+          <div class="teacher-focus">身心療癒、憂鬱、悲傷</div>
+          <div class="teacher-stats">🇨🇳 中文 · elder_stabilizer · 8,492 words · iyashikei</div>
+                <button class="teacher-select-btn" id="sel-btn-master_sha" data-tname="Master Sha" onclick="chooseTeacher('master_sha', 'Master Sha')">選擇 Master Sha</button>
+      </div>
+      </div>
+
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
+      <div class="section-toggle" onclick="toggleSection('master_sha_formats')">
+        <span class="toggle-arrow open" id="arr_master_sha_formats">▸</span> 格式
+      </div>
+      <div id="master_sha_formats" class="collapsible" style="display:block">
+        <div class="formats-grid">
+          <div class="format-card" onclick="toggleSection('master_sha_book')" style="cursor:pointer">
+            <img src="assets/covers/kdp/master_sha_ebook.png" loading="lazy" alt="Master Sha 電子書" onerror="this.style.display='none'">
+            <div class="format-label">電子書</div>
+            <div class="format-brand">Night Architecture Books</div>
+          </div>
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_sha')">
+            <img src="assets/covers/kdp/master_sha_audiobook.png" loading="lazy" alt="Master Sha 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-master_sha" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
+            <audio id="audiobook-master_sha" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/master_sha_audiobook_en.mp3"></audio>
+          </div>
+          <div class="format-card" onclick="cycleManga('master_sha')" style="cursor:pointer">
+            <img id="manga-img-master_sha" src="assets/manga_covers/master_sha_scene.png" loading="lazy" alt="Master Sha 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
+          </div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('master_sha')">
+            <img src="assets/covers/kdp/master_sha_podcast.png"
+                 loading="lazy" alt="Master Sha 播客"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-master_sha" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
+            <audio id="podcast-master_sha" preload="metadata"
+                   src="assets/audio/podcast/master_sha_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/master_sha.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!-- LISTEN -->
+
+      <!-- READ MANGA -->
+
+      <!-- READ BOOK -->
+      <div class="section-toggle" onclick="toggleSection('master_sha_book')">
+        <span class="toggle-arrow" id="arr_master_sha_book">▸</span> 閱讀樣章（約2,064字）</div>
+      <div id="master_sha_book" class="collapsible" style="display:none">
+        <div class="book-content">
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
+<br>
+<p>你的績效考核在下週四。</p>
+<br>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了如指掌。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，正是把你掏空的那個部分。行事曆說：有生產力。身體卻在運行著全然不同的東西。在這一天之下，有一片「場域」正在嗡鳴，而那並不是工作的場域。</p>
+<br>
+<p>聽。那嗡鳴之中藏著訊息。今天我們將精準地為它命名，並以正確的順序賦予它正確的名字——因為順序的錯誤，正是耗盡你的那些東西之一。</p>
+<br>
+<h4 class="preview-section-heading">掃描</h4>
+<br>
+<p>你的內在，有一個部分始終在掃描。</p>
+<br>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。追蹤主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話意味著什麼。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
+<br>
+<p>那並不是你自己。那是一套在靈魂—身體—心智—精神系統之中運行的機制，而當你一旦看清它，場域便開始改變。</p>
+<br>
+<div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
+  <a href="./teacher_showcase/master_sha__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
+</div>
+</div>
+      </div>
+
+      <!-- MARKETING BRIEF -->
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+      </div>
+      <a id="book-master_sha" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-master_sha" class="cta-anchor" aria-hidden="true"></a>
+    </section>
+
+</main>
+
+<!-- Manga Reader Overlay -->
+<div class="manga-reader-overlay" id="mangaOverlay" onclick="closeMangaReader(event)">
+  <div class="manga-reader-close" onclick="closeMangaReader()">&times;</div>
+  <div class="manga-reader-nav prev" onclick="mangaNav(-1, event)">&#8249;</div>
+  <img class="manga-reader-img" id="mangaReaderImg" src="" alt="Manga page">
+  <div class="manga-reader-nav next" onclick="mangaNav(1, event)">&#8250;</div>
+  <div class="manga-reader-counter" id="mangaCounter"></div>
+</div>
+
+<script>
+// Toggle collapsible sections
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  const arr = document.getElementById('arr_' + id);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    if (arr) arr.classList.add('open');
+  } else {
+    el.style.display = 'none';
+    if (arr) arr.classList.remove('open');
+  }
+}
+
+// Manga reader
+let mangaState = { teacher: '', page: 0, pages: [] };
+function openMangaReader(teacherId, pageIdx) {
+  mangaState.teacher = teacherId;
+  mangaState.pages = [
+    'assets/manga_panels/' + teacherId + '/page_001.png',
+    'assets/manga_panels/' + teacherId + '/page_002.png',
+    'assets/manga_panels/' + teacherId + '/page_003.png',
+    'assets/manga_panels/' + teacherId + '/page_004.png'
+  ];
+  mangaState.page = pageIdx;
+  showMangaPage();
+  document.getElementById('mangaOverlay').classList.add('open');
+}
+function showMangaPage() {
+  document.getElementById('mangaReaderImg').src = mangaState.pages[mangaState.page];
+  document.getElementById('mangaCounter').textContent = (mangaState.page + 1) + ' / ' + mangaState.pages.length;
+}
+function mangaNav(dir, e) {
+  if (e) e.stopPropagation();
+  mangaState.page = Math.max(0, Math.min(mangaState.pages.length - 1, mangaState.page + dir));
+  showMangaPage();
+}
+function closeMangaReader(e) {
+  if (e && e.target !== e.currentTarget && !e.target.classList.contains('manga-reader-close')) return;
+  document.getElementById('mangaOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('mangaOverlay').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') mangaNav(-1);
+  if (e.key === 'ArrowRight') mangaNav(1);
+  if (e.key === 'Escape') closeMangaReader();
+});
+
+// Format filter
+function filterFormat(format) {
+  document.querySelectorAll('#format-filter .filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.section-toggle').forEach(t => {
+    const id = t.getAttribute('onclick').match(/'([^']+)'/)[1];
+    const type = id.split('_').pop(); // formats, listen, watch, manga, book, marketing
+    if (format === 'all') {
+      t.style.display = '';
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none'; // keep collapsed
+    } else if (id.endsWith('_' + format)) {
+      t.style.display = '';
+    } else {
+      t.style.display = 'none';
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    }
+  });
+}
+
+// ── Teacher selection ───────────────────────────────────────────────────────
+const TEACHER_LABELS = {
+  en: { select: 'Select', chosen: 'Selected', barLabel: 'Viewing — ', barBtn: 'Choose This Teacher →',
+        composite: 'Composite mode (no teacher) →', compositeHint: 'Author all books for this brand without a teacher voice' },
+  ja: { select: '選択する', chosen: '選択済み', barLabel: '表示中 — ', barBtn: 'このティーチャーを選ぶ →',
+        composite: 'コンポジット（教師なし） →', compositeHint: 'この銘柄の全ての書籍を、教師の声なしで執筆' },
+  zh: { select: '选择', chosen: '已选择', barLabel: '正在查看 — ', barBtn: '选择此老师 →',
+        composite: '综合模式（无教师） →', compositeHint: '为该品牌创作所有书籍，不使用教师之声' },
+  tw: { select: '選擇', chosen: '已選擇', barLabel: '正在查看 — ', barBtn: '選擇此老師 →',
+        composite: '綜合模式（無教師） →', compositeHint: '為此品牌創作所有書籍，不使用教師之聲' },
+};
+function _teacherLang() {
+  // zh-Hant (Taiwan) sibling page: honor explicit ?lang= override, else default to tw routing code.
+  try {
+    var _p = new URLSearchParams(window.location.search).get('lang');
+    if (_p === 'ja') return 'ja';
+    if (_p === 'tw' || _p === 'zh-TW' || _p === 'zh-Hant') return 'tw';
+    if (_p === 'zh' || _p === 'zh-CN') return 'zh';
+  } catch (e) {}
+  try { localStorage.setItem('pearl_prime_locale', 'tw'); } catch (e) {}
+  return 'tw';
+}
+function _wizardFile() {
+  const lang = _teacherLang();
+  if (lang === 'ja') return 'wizard-ja.html';
+  if (lang === 'tw') return 'wizard-tw.html';
+  if (lang === 'zh') return 'wizard-zh.html';
+  return 'wizard.html';
+}
+let _selectedTeacher = null;
+function chooseTeacher(id, name) {
+  _selectedTeacher = { id, name };
+  // persist
+  localStorage.setItem('phoenix_book_mode', JSON.stringify({
+    mode: 'teacher', teacher: id, teacherName: name
+  }));
+  // update all select buttons
+  document.querySelectorAll('.teacher-select-btn').forEach(b => {
+    b.classList.remove('selected');
+    const lang = _teacherLang();
+    const L = TEACHER_LABELS[lang] || TEACHER_LABELS.en;
+    b.textContent = L.select + ' ' + b.dataset.tname;
+  });
+  const btn = document.getElementById('sel-btn-' + id);
+  const L = TEACHER_LABELS[_teacherLang()] || TEACHER_LABELS.en;
+  if (btn) { btn.classList.add('selected'); btn.textContent = '✓ ' + L.chosen; }
+  // update sticky bar
+  updateChooseBar(id, name);
+  // highlight sidebar nav for selected teacher
+  document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.remove('active'); });
+  const navFor = document.querySelector('.nav-item[data-teacher="' + id + '"]');
+  if (navFor) navFor.classList.add('active');
+  // Navigate to wizard with the selected teacher (short delay so the user sees the
+  // "Selected" feedback before redirect). Prior bug: user had to scroll to find the
+  // sticky bar to actually proceed — this fixes that.
+  setTimeout(function () {
+    window.location.href = _wizardFile() + '?teacher=' + encodeURIComponent(id);
+  }, 280);
+}
+// Composite mode: skip teacher selection entirely. The wizard reads
+// phoenix_book_mode from localStorage AND honors ?mode=composite as a URL fallback.
+// YAML emit shape: teacher_mode: { mode: composite, selected_teacher: null, teacher_boost_pct: 0 }
+function chooseComposite() {
+  localStorage.setItem('phoenix_book_mode', JSON.stringify({
+    mode: 'composite', teacher: null
+  }));
+  window.location.href = _wizardFile() + '?mode=composite';
+}
+function updateChooseBar(id, name) {
+  const lang = _teacherLang();
+  const L = TEACHER_LABELS[lang] || TEACHER_LABELS.en;
+  const bar = document.getElementById('choose-bar');
+  const label = document.getElementById('choose-bar-label');
+  const nameEl = document.getElementById('choose-bar-name');
+  const barBtn = document.getElementById('choose-bar-btn');
+  if (label) label.textContent = L.barLabel;
+  if (nameEl) nameEl.textContent = name || '';
+  if (barBtn) barBtn.textContent = L.barBtn;
+  if (bar && name) bar.classList.add('visible');
+}
+function chooseTeacherFromBar() {
+  if (!_selectedTeacher) return;
+  // Persist the same phoenix_book_mode shape chooseTeacher() writes, so the SPA's
+  // generateYAML() reads the selected teacher from localStorage (its primary source)
+  // identically whether the user proceeds via the card button or this sticky bar.
+  // generateYAML falls back to the ?teacher= URL param too, but writing localStorage
+  // here keeps both entry paths self-consistent. teacher = snake_case id; teacherName
+  // = display label. The wizard's ?teacher= useEffect then lands on STEP 1 (index 0).
+  try {
+    localStorage.setItem('phoenix_book_mode', JSON.stringify({
+      mode: 'teacher', teacher: _selectedTeacher.id, teacherName: _selectedTeacher.name
+    }));
+  } catch (e) {}
+  window.location.href = _wizardFile() + '?teacher=' + encodeURIComponent(_selectedTeacher.id);
+}
+function wireSidebarTeacherNav() {
+  document.querySelectorAll('.sidebar a.nav-item[data-teacher]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var tid = link.getAttribute('data-teacher');
+      if (!tid) return;
+      var target = document.getElementById(tid);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.history && window.history.replaceState) {
+        try { window.history.replaceState(null, '', '#' + tid); } catch (err) {}
+      }
+    });
+  });
+}
+// Init select button labels from locale
+document.addEventListener('DOMContentLoaded', () => {
+  const lang = _teacherLang();
+  const L = TEACHER_LABELS[lang] || TEACHER_LABELS.en;
+  document.querySelectorAll('.teacher-select-btn').forEach(btn => {
+    const tname = btn.dataset.tname;
+    btn.textContent = L.select + ' ' + tname;
+  });
+  document.getElementById('choose-bar-btn').textContent = L.barBtn;
+  document.getElementById('choose-bar-label').textContent = L.barLabel;
+  // Composite banner: locale-aware
+  const cBtn = document.getElementById('composite-banner-btn');
+  const cHint = document.getElementById('composite-banner-hint');
+  if (cBtn) cBtn.textContent = L.composite;
+  if (cHint) cHint.textContent = L.compositeHint;
+  wireSidebarTeacherNav();
+});
+
+// Sidebar active tracking
+const sections = document.querySelectorAll('.teacher-section');
+const navItems = document.querySelectorAll('.nav-item');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navItems.forEach(item => item.classList.remove('active'));
+      const activeNav = document.querySelector('.nav-item[data-teacher="' + entry.target.id + '"]');
+      if (activeNav) {
+        activeNav.classList.add('active');
+        // Update sticky bar to show current teacher in view
+        const tname = activeNav.querySelector('.nav-name')?.textContent || '';
+        const tid = activeNav.dataset.teacher || '';
+        updateChooseBar(tid, tname);
+      }
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(section => observer.observe(section));
+
+var MANGA_IMGS = {
+  "ahjan": ["assets/manga_covers/ahjan_portrait.png","assets/manga_covers/ahjan_scene.png"],
+  "joshin": ["assets/manga_covers/joshin_symbolic.png","assets/manga_covers/joshin_portrait.png","assets/manga_covers/joshin_scene.png","assets/manga_covers/joshin_cover_depression.png","assets/manga_covers/joshin_cover_overthinking.png"],
+  "junko": ["assets/manga_covers/miyuki_portrait.png","assets/manga_covers/miyuki_scene.png","assets/manga_covers/miyuki_cover_sleep_anxiety.png","assets/manga_covers/miyuki_cover_social_anxiety.png"],
+  "miki": ["assets/manga_covers/miki_portrait.png","assets/manga_covers/miki_scene.png"],
+  "omote": ["assets/manga_covers/omote_portrait.png","assets/manga_covers/omote_scene.png"],
+  "master_wu": ["assets/manga_covers/master_wu_portrait.png","assets/manga_covers/master_wu_scene.png","assets/manga_covers/master_wu_cover_boundaries.png","assets/manga_covers/master_wu_cover_burnout.png"],
+  "maat": ["assets/manga_covers/maat_portrait.png","assets/manga_covers/maat_scene.png"],
+  "ra": ["assets/manga_covers/ra_portrait.png","assets/manga_covers/ra_scene.png"],
+  "sai_ma": ["assets/manga_covers/sai_ma_portrait.png","assets/manga_covers/sai_ma_scene.png"],
+  "adi_da": ["assets/manga_covers/adi_da_portrait.png","assets/manga_covers/adi_da_scene.png"],
+  "master_sha": ["assets/manga_covers/master_sha_portrait.png","assets/manga_covers/master_sha_scene.png"],
+  "master_feung": ["assets/manga_covers/master_feung_portrait.png","assets/manga_covers/master_feung_scene.png"],
+  "pamela_fellows": ["assets/manga_covers/pamela_fellows_portrait.png","assets/manga_covers/pamela_fellows_scene.png"]
+};
+var mangaIdx = {};
+function cycleManga(tid) {
+  if (!MANGA_IMGS[tid] || MANGA_IMGS[tid].length === 0) return;
+  if (mangaIdx[tid] === undefined) mangaIdx[tid] = 0;
+  mangaIdx[tid] = (mangaIdx[tid] + 1) % MANGA_IMGS[tid].length;
+  var el = document.getElementById('manga-img-' + tid);
+  if (el) el.src = MANGA_IMGS[tid][mangaIdx[tid]];
+}
+
+</script>
+<script>
+/* Podcast click-to-play — only one plays at a time */
+const _pod = { el: null, tid: null };
+function toggleAudiobook(tid) {
+      var audio = document.getElementById('audiobook-' + tid);
+      var icon  = document.getElementById('play-ab-' + tid);
+      if (!audio) return;
+      if (audio.paused) { audio.play(); if(icon) icon.style.opacity='0'; }
+      else { audio.pause(); if(icon) icon.style.opacity='1'; }
+    }
+    function togglePodcast(tid) {
+  const audio = document.getElementById('podcast-' + tid);
+  const overlay = document.getElementById('play-' + tid);
+  if (!audio || !overlay) return;
+  const span = overlay.querySelector('span');
+
+  if (_pod.el && _pod.tid !== tid) {
+    _pod.el.pause();
+    _pod.el.currentTime = 0;
+    const prev = document.getElementById('play-' + _pod.tid);
+    if (prev) prev.querySelector('span').innerHTML = '&#9654;';
+  }
+
+  if (audio.paused) {
+    audio.play();
+    span.innerHTML = '&#9646;&#9646;';
+    _pod.el = audio;
+    _pod.tid = tid;
+  } else {
+    audio.pause();
+    span.innerHTML = '&#9654;';
+    _pod.el = null;
+    _pod.tid = null;
+  }
+
+  audio.onended = () => {
+    span.innerHTML = '&#9654;';
+    _pod.el = null;
+    _pod.tid = null;
+  };
+}
+</script>
+</body>
+</html>

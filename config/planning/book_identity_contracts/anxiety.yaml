@@ -1,0 +1,43 @@
+# Identity contract — anxiety
+# Authored 2026-07-05 (Pearl_Writer). Pilot cell: stillness_press anxiety "the_alarm_is_lying".
+# STATUS: unwired — enforcement is Cursor Phase 1 (see book_identity_contracts/README.md).
+status: wired
+topic: anxiety
+allowed_engines: [false_alarm, spiral, watcher, overwhelm, shame, comparison, grief]
+
+primary_metaphor: "The Alarm"
+# Anxiety as a mis-firing alarm system: the body's danger response triggered by a
+# signal, not a situation. false_alarm is the signature engine; every other engine
+# is a *way the same alarm rings* — never a competing image.
+engine_metaphors:
+  false_alarm: "The Alarm itself — a smoke detector screaming at burnt toast: real noise, no fire."
+  spiral: "The Loop — the alarm re-arming itself, each thought pulling the trigger for the next."
+  watcher: "The Scanner — the alarm on patrol, sweeping the room, the thread, the tone for the next threat."
+  overwhelm: "The Overload — every input tripping the alarm at once until the whole panel is red."
+  shame: "The Silent Alarm — the one you hide, sure that if anyone heard it they'd stop choosing you."
+  comparison: "The False Reading — the alarm calibrated to everyone else's calm exterior, always reading you as behind."
+  grief: "The Stuck Alarm — still ringing for a danger that has already passed, mistaking stillness for safety."
+
+core_contrast: "The alarm is not the danger."
+# The book keeps re-drawing this line: the signal (alarm) vs. the situation (reality);
+# the feeling of threat vs. the presence of one. The turn in every chapter is the
+# reader learning to hear the alarm without obeying it.
+
+identity_line: "The alarm is lying."
+identity_line_placement: [1, last]   # must land in ch1 and the final chapter
+
+banned_phrases:
+  # Rival PRIMARY-image systems that would compete with The Alarm. Deprioritize
+  # atoms that build a different governing metaphor for the whole anxiety experience.
+  - "the storm"
+  - "tidal wave of"
+  - "the beast"
+  - "the monster"
+  - "monkey mind"
+  - "spinning plates"
+rationale: >
+  Both reads praised the anxiety atoms (the doctrine block, Priya's story, the
+  sigh practice) — the gap was never the atoms, it was that nothing enforced a
+  single governing image. The Alarm is already latent in the strongest atoms and
+  the book slug (the_alarm_is_lying); this contract makes it the book's spine and
+  keeps rival metaphor systems from diluting it.

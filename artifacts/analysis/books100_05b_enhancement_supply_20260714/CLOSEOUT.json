@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "lane": "05b_enhancement_supply",
+  "branch": "agent/books100-enhancement-supply-20260714",
+  "base_sha": "b507f3029e2aa7e5d9adfdb258b16d17910dc4fe",
+  "status": "READY_FOR_OPERATOR_PR",
+  "files_changed": [
+    "artifacts/qa/enhancement_supply_backlog_20260714/enhancement_supply_backlog.json",
+    "artifacts/qa/enhancement_supply_backlog_20260714/writer_backlog.md",
+    "scripts/qa/build_enhancement_supply_backlog.py"
+  ],
+  "tests": [
+    {
+      "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 /Users/ahjan/phoenix_omega/docs/books_100_multi_lane_pr_kit/lanes/05b_enhancement_supply/apply.py /Users/ahjan/phoenix_omega_worktrees/books100-20260714/05b_enhancement_supply",
+      "exit_code": 0,
+      "result_tail": ""
+    },
+    {
+      "command": "python3 scripts/qa/build_enhancement_supply_backlog.py",
+      "exit_code": 0,
+      "result_tail": ": false,\n      \"writer_action\": \"BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY\",\n      \"required_metadata\": {\n        \"truth_metadata\": false,\n        \"profile_gate\": false,\n        \"semantic_fingerprint\": true,\n        \"plant_id_return_function_semantic_development\": false\n      }\n    },\n    {\n      \"class\": \"MOTIF\",\n      \"runtime_executable_as_accent\": false,\n      \"writer_action\": \"BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY\",\n      \"required_metadata\": {\n        \"truth_metadata\": false,\n        \"profile_gate\": false,\n        \"semantic_fingerprint\": false,\n        \"plant_id_return_function_semantic_development\": false\n      }\n    },\n    {\n      \"class\": \"CALLBACK_RETURN\",\n      \"runtime_executable_as_accent\": false,\n      \"writer_action\": \"BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY\",\n      \"required_metadata\": {\n        \"truth_metadata\": false,\n        \"profile_gate\": false,\n        \"semantic_fingerprint\": false,\n        \"plant_id_return_function_semantic_development\": true\n      }\n    },\n    {\n      \"class\": \"BRIDGE\",\n      \"runtime_executable_as_accent\": false,\n      \"writer_action\": \"BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY\",\n      \"required_metadata\": {\n        \"truth_metadata\": false,\n        \"profile_gate\": false,\n        \"semantic_fingerprint\": false,\n        \"plant_id_return_function_semantic_development\": false\n      }\n    },\n    {\n      \"class\": \"TRANSITION\",\n      \"runtime_executable_as_accent\": false,\n      \"writer_action\": \"BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY\",\n      \"required_metadata\": {\n        \"truth_metadata\": false,\n        \"profile_gate\": false,\n        \"semantic_fingerprint\": false,\n        \"plant_id_return_function_semantic_development\": false\n      }\n    }\n  ],\n  \"safe_to_author_now\": [],\n  \"blocked_classes\": [\n    \"AUTHOR_DISCLOSURE\",\n    \"PARABLE\",\n    \"ANALOGY\",\n    \"METAPHOR\",\n    \"MOTIF\",\n    \"CALLBACK_RETURN\",\n    \"BRIDGE\",\n    \"TRANSITION\"\n  ],\n  \"truth\": \"No supply is counted until the live runtime can select and prove it.\"\n}\n"
+    }
+  ],
+  "blockers": [],
+  "truth": {
+    "fresh_production_render_completed": false,
+    "books_100_production_ready": false
+  }
+}

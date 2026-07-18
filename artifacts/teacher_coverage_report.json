@@ -1,0 +1,61 @@
+{
+  "teacher_id": "master_sha",
+  "topic_id": "anxiety",
+  "persona_id": "gen_alpha_students",
+  "format_id": "MOD_pocket_guide",
+  "arc_id": "gen_alpha_students_anxiety_overwhelm_F006_gen",
+  "required_by_slot": {
+    "HOOK": 20,
+    "SCENE": 20,
+    "REFLECTION": 20,
+    "EXERCISE": 20,
+    "TAKEAWAY": 20,
+    "INTEGRATION": 20,
+    "THREAD": 20
+  },
+  "required_story_by_band": {},
+  "available_by_slot": {
+    "PIVOT": 15,
+    "INTEGRATION": 12,
+    "EXERCISE": 12,
+    "COMPRESSION": 12,
+    "SCENE": 12,
+    "PERMISSION": 15,
+    "THREAD": 15,
+    "HOOK": 12,
+    "STORY": 20,
+    "REFLECTION": 12,
+    "TAKEAWAY": 15
+  },
+  "story_band_inventory": {
+    "4": 4,
+    "2": 8,
+    "3": 6,
+    "1": 1,
+    "5": 1
+  },
+  "gaps": {
+    "EXERCISE": {
+      "total_missing": 8
+    },
+    "HOOK": {
+      "total_missing": 8
+    },
+    "INTEGRATION": {
+      "total_missing": 8
+    },
+    "REFLECTION": {
+      "total_missing": 8
+    },
+    "SCENE": {
+      "total_missing": 8
+    },
+    "TAKEAWAY": {
+      "total_missing": 5
+    },
+    "THREAD": {
+      "total_missing": 5
+    }
+  },
+  "fallback_required": false
+}

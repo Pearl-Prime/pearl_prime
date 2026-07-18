@@ -1,0 +1,113 @@
+# GHL marketing feed — provision R2 + publish WITHOUT Cloudflare dashboard login.
+# Uses CLOUDFLARE_API_TOKEN (wrangler bucket/dev-url) + R2 S3 keys (boto3 upload).
+#
+# Operator: GitHub → Actions → "Provision pearl-prime-content (GHL feed)" → Run workflow
+
+name: Provision pearl-prime-content (GHL feed)
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand_id:
+        description: Brand id
+        default: stillness_press
+        type: string
+      locale:
+        description: Locale
+        default: en_US
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  provision-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PEARL_PRIME_CONTENT_R2_BUCKET: pearl-prime-content
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install tools
+        run: |
+          npm i -g wrangler@4
+          pip install pyyaml boto3
+
+      - name: Create bucket + public r2.dev URL
+        run: |
+          set +e
+          BUCKET="pearl-prime-content"
+          wrangler r2 bucket list 2>/dev/null | grep -q "^${BUCKET}$" || wrangler r2 bucket create "${BUCKET}" 2>/dev/null
+          wrangler r2 bucket dev-url enable "${BUCKET}" 2>/dev/null
+          CDN="$(wrangler r2 bucket dev-url get "${BUCKET}" 2>/dev/null | grep -Eo 'https://pub-[a-f0-9]+\.r2\.dev' | tail -1)"
+          set -e
+          if [[ -z "${CDN}" && -n "${CLOUDFLARE_ACCOUNT_ID:-}" ]]; then
+            CDN="https://pub-${CLOUDFLARE_ACCOUNT_ID}.r2.dev"
+            echo "WARN: wrangler dev-url parse empty; using ${CDN}"
+          fi
+          if [[ -z "${CDN}" ]]; then
+            echo "ERROR: no pub-*.r2.dev CDN base (check CLOUDFLARE_ACCOUNT_ID + R2 token)" >&2
+            exit 1
+          fi
+          echo "CDN_BASE=${CDN}" >> "$GITHUB_ENV"
+          echo "## R2 bucket: ${BUCKET}" >> "$GITHUB_STEP_SUMMARY"
+          echo "CDN base: **${CDN}**" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build feed
+        run: |
+          python3 scripts/marketing/build_funnel_book_url_index.py
+          PYTHONPATH=. python3 scripts/marketing/build_marketing_feed.py \
+            --brand-id "${{ inputs.brand_id }}" \
+            --locale "${{ inputs.locale }}"
+
+      - name: Upload marketing_feed.json (R2 S3)
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          PEARL_PRIME_CONTENT_R2_BUCKET: pearl-prime-content
+          PEARL_PRIME_CONTENT_CDN_URL: ${{ env.CDN_BASE }}
+        run: |
+          BRAND="${{ inputs.brand_id }}"
+          LOCALE="${{ inputs.locale }}"
+          FEED="artifacts/marketing_feed/${BRAND}/${LOCALE}/$(ls artifacts/marketing_feed/${BRAND}/${LOCALE})/marketing_feed.json"
+          WEEK="$(basename "$(dirname "$FEED")")"
+          OBJ_KEY="pearl-prime-content/${BRAND}/${LOCALE}/${WEEK}/marketing_feed.json"
+          if [[ -z "${R2_ACCESS_KEY_ID:-}" ]]; then
+            echo "ERROR: R2_ACCESS_KEY_ID secret missing — cannot upload feed" >&2
+            exit 1
+          fi
+          PYTHONPATH=. python3 scripts/marketing/publish_marketing_feed_r2.py \
+            --brand-id "${BRAND}" \
+            --locale "${LOCALE}" \
+            --feed "${FEED}" \
+            --cdn-base "${CDN_BASE}"
+          echo "FEED_KEY=${OBJ_KEY}" >> "$GITHUB_ENV"
+          echo "Week: ${WEEK}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Summary — paste to GHL admin
+        run: |
+          URL="${CDN_BASE}/${FEED_KEY}"
+          {
+            echo ""
+            echo "### GHL admin feed URL"
+            echo '```'
+            echo "${URL}"
+            echo '```'
+            echo ""
+            echo "Add GitHub secrets if missing:"
+            echo "- \`PEARL_PRIME_CONTENT_R2_BUCKET\` = pearl-prime-content"
+            echo "- \`PEARL_PRIME_CONTENT_CDN_URL\` = ${CDN_BASE}"
+          } >> "$GITHUB_STEP_SUMMARY"

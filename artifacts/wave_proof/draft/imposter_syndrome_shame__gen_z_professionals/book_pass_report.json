@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "source": "spine_pipeline",
+  "checks": {
+    "word_budget": {
+      "status": "PASS",
+      "word_count": 17456,
+      "target_range": [
+        9000,
+        22000
+      ]
+    },
+    "band_distribution": {
+      "status": "PASS",
+      "distinct_roles": [
+        "cost_exposure",
+        "destabilization",
+        "hidden_belief",
+        "identity_fracture",
+        "integration",
+        "mechanism_intro",
+        "practical_interruption",
+        "recognition",
+        "reframe",
+        "relational_consequence",
+        "self_relation_shift",
+        "somatic_legitimacy"
+      ],
+      "distinct_count": 12
+    },
+    "identity_stages": {
+      "status": "PASS",
+      "stages": {
+        "recognition": true,
+        "mechanism": true,
+        "integration": true
+      },
+      "stage_count": 3
+    },
+    "callback_completion": {
+      "status": "PASS"
+    },
+    "angle_journey_coherence": {
+      "status": "PASS",
+      "errors": [],
+      "warnings": [
+        "angle_journey: named_object not commissioned for topic; skipping per-chapter check"
+      ],
+      "metrics": {
+        "angle_id": "IMPOSTERS_PERFORMANCE",
+        "runtime_format": "standard_book",
+        "layer_progression": [
+          {
+            "layer": 1,
+            "phase": "definition",
+            "chapter_range": [
+              1,
+              2
+            ],
+            "assertion": "TODO"
+          },
+          {
+            "layer": 2,
+            "phase": "pattern_recognition",
+            "chapter_range": [
+              3,
+              5
+            ],
+            "assertion": "TODO"
+          },
+          {
+            "layer": 3,
+            "phase": "identity_implications",
+            "chapter_range": [
+              6,
+              7
+            ],
+            "assertion": "TODO"
+          },
+          {
+            "layer": 4,
+            "phase": "civilizational_spiritual",
+            "chapter_range": [
+              8,
+              10
+            ],
+            "assertion": "TODO",
+            "optional_for_topics": [
+              "sleep_anxiety",
+              "boundaries",
+              "courage"
+            ]
+          },
+          {
+            "layer": 5,
+            "phase": "transcendence_reintegration",
+            "chapter_range": [
+              11,
+              12
+            ],
+            "assertion": "TODO"
+          }
+        ],
+        "named_object": "",
+        "observed_layers": [
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            9,
+            4
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            12,
+            5
+          ]
+        ],
+        "chapters_with_angle_slots": 12,
+        "angle_slot_chapter_share": 1.0
+      }
+    },
+    "atom_metadata_subchecks": {
+      "status": "SKIPPED",
+      "reason": "spine mode has no compiled atom_ids/chapter_slot_sequence metadata gates"
+    }
+  },
+  "failures": []
+}

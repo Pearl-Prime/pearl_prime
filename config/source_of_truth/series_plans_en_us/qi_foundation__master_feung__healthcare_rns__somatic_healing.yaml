@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: qi_foundation__master_feung__healthcare_rns__somatic_healing
+brand: qi_foundation
+teacher: master_feung
+persona: healthcare_rns
+topic: somatic_healing
+byline_author: wren_petrova
+arc:
+  installment_1:
+    book_id: qi_foundation__master_feung__healthcare_rns__somatic_healing__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: qi_foundation__master_feung__healthcare_rns__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For nurses whose bodies have quietly carried every shift home
+  — a way back down into the ground of yourself, where the energy you've spent all
+  day on everyone else finally turns toward the root and refills you from below. No
+  optimizing, no powering through. Just the body remembering it is allowed to come
+  back to rest.
+bestseller_hook_family: ''
+emotional_engine: somatic_healing_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case that trauma
+  and depletion live in the body and must be met there, not just thought through
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
+  names the unfinished stress response stuck in the nervous system of helping-profession
+  women, our exact reader'
+- When the Body Says No (Gabor Maté) — for caregivers whose chronic self-suppression
+  eventually surfaces as physical cost, written with the same warmth toward the depleted
+  helper
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 29-52
+  where_they_are: It's well past the end of your shift and you're sitting in the car
+    in the hospital parking garage with the engine off, unable to make your hands
+    turn the key, your shoulders still up around your ears, the alarm tones still
+    ringing somewhere behind your eyes — home is fifteen minutes away and your body
+    has not yet understood that it is allowed to stop.
+  what_they_need: To feel the ground come back up under them — to let the held charge
+    drain out of the shoulders and jaw and the floor of the belly, to breathe all
+    the way down to the bottom of the lungs again, and to trust that the vitality
+    they pour out at the bedside can flow back into their own roots without being
+    earned.
+  what_they_avoid: Self-care that sounds like another shift — wellness checklists,
+    optimize-your-recovery hacks, gratitude that papers over exhaustion, energy-drink
+    hustle, and anyone who tells a depleted nurse to simply do more, breathe better,
+    or bounce back faster.
+series_voice_markers:
+  register: grounded, restorative, quietly vital; the steady voice of someone who
+    has sat in the same parking garage, who speaks to the body and not at it, never
+    clinical, never preachy, never hustle
+  sentence_rhythm: unhurried and settling; long exhaled sentences that sink toward
+    the floor, broken by short ones that land like a hand on the sternum; the cadence
+    of breath reaching the lowest part of the lungs
+  metaphor_family: roots and meridians, deep ground and rising sap, the well that
+    refills from below, a blockage clearing so the current flows again, breath reaching
+    the floor of the lungs, vitality returning from the root rather than drained from
+    it
+_needs_authoring: false

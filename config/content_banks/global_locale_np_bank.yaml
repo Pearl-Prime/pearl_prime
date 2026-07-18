@@ -1,0 +1,1125 @@
+---
+bank_id: global_locale_np_bank
+selector_note: Short noun-phrase fallbacks for hydrated location tokens in atom prose;
+  not full scene anchors.
+variants:
+- variant_id: glnp_001
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: soft daylight along the sill
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_002
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: morning sun cutting through the blinds
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_003
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: rain streaking the glass
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_004
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: fluorescent light humming overhead
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_005
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: late afternoon light slanting across the desk
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_006
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: a cloudy sky pressing against the window
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_007
+  slot_type: LOCALE_NP
+  locale_var_key: weather_detail
+  body: cold air seeping through the window frame
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_weather_detail
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {weather_detail}; rotate per chapter.
+- variant_id: glnp_008
+  slot_type: LOCALE_NP
+  locale_var_key: street_name
+  body: the street below
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_street_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {street_name}; rotate per chapter.
+- variant_id: glnp_009
+  slot_type: LOCALE_NP
+  locale_var_key: street_name
+  body: the avenue outside
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_street_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {street_name}; rotate per chapter.
+- variant_id: glnp_010
+  slot_type: LOCALE_NP
+  locale_var_key: street_name
+  body: the sidewalk two floors down
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_street_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {street_name}; rotate per chapter.
+- variant_id: glnp_011
+  slot_type: LOCALE_NP
+  locale_var_key: street_name
+  body: the road past the parking lot
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_street_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {street_name}; rotate per chapter.
+- variant_id: glnp_012
+  slot_type: LOCALE_NP
+  locale_var_key: street_name
+  body: traffic moving on the highway
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_street_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {street_name}; rotate per chapter.
+- variant_id: glnp_013
+  slot_type: LOCALE_NP
+  locale_var_key: street_name
+  body: the crosswalk at the corner
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_street_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {street_name}; rotate per chapter.
+- variant_id: glnp_014
+  slot_type: LOCALE_NP
+  locale_var_key: transit_line
+  body: the train
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_line
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_line}; rotate per chapter.
+- variant_id: glnp_015
+  slot_type: LOCALE_NP
+  locale_var_key: transit_line
+  body: the bus
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_line
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_line}; rotate per chapter.
+- variant_id: glnp_016
+  slot_type: LOCALE_NP
+  locale_var_key: transit_line
+  body: the subway car
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_line
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_line}; rotate per chapter.
+- variant_id: glnp_017
+  slot_type: LOCALE_NP
+  locale_var_key: transit_line
+  body: the commuter rail
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_line
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_line}; rotate per chapter.
+- variant_id: glnp_018
+  slot_type: LOCALE_NP
+  locale_var_key: transit_line
+  body: the metro
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_line
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_line}; rotate per chapter.
+- variant_id: glnp_019
+  slot_type: LOCALE_NP
+  locale_var_key: transit_line
+  body: the light rail
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_line
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_line}; rotate per chapter.
+- variant_id: glnp_020
+  slot_type: LOCALE_NP
+  locale_var_key: coffee_shop
+  body: a coffee shop
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_coffee_shop
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {coffee_shop}; rotate per chapter.
+- variant_id: glnp_021
+  slot_type: LOCALE_NP
+  locale_var_key: coffee_shop
+  body: the cafe on the corner
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_coffee_shop
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {coffee_shop}; rotate per chapter.
+- variant_id: glnp_022
+  slot_type: LOCALE_NP
+  locale_var_key: coffee_shop
+  body: a quiet booth at the back
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_coffee_shop
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {coffee_shop}; rotate per chapter.
+- variant_id: glnp_023
+  slot_type: LOCALE_NP
+  locale_var_key: coffee_shop
+  body: the counter where you always sit
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_coffee_shop
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {coffee_shop}; rotate per chapter.
+- variant_id: glnp_024
+  slot_type: LOCALE_NP
+  locale_var_key: coffee_shop
+  body: a table by the window
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_coffee_shop
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {coffee_shop}; rotate per chapter.
+- variant_id: glnp_025
+  slot_type: LOCALE_NP
+  locale_var_key: transit_stop
+  body: the platform
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_transit_stop
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {transit_stop}.
+- variant_id: glnp_026
+  slot_type: LOCALE_NP
+  locale_var_key: city_name
+  body: the city
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_city_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {city_name}.
+- variant_id: glnp_027
+  slot_type: LOCALE_NP
+  locale_var_key: neighborhood
+  body: the neighborhood
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_neighborhood
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {neighborhood}.
+- variant_id: glnp_028
+  slot_type: LOCALE_NP
+  locale_var_key: building_type
+  body: the building
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_building_type
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {building_type}.
+- variant_id: glnp_029
+  slot_type: LOCALE_NP
+  locale_var_key: local_landmark
+  body: a landmark nearby
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_local_landmark
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {local_landmark}.
+- variant_id: glnp_030
+  slot_type: LOCALE_NP
+  locale_var_key: park_name
+  body: the park
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_park_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {park_name}.
+- variant_id: glnp_031
+  slot_type: LOCALE_NP
+  locale_var_key: restaurant
+  body: a nearby restaurant
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_restaurant
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {restaurant}.
+- variant_id: glnp_032
+  slot_type: LOCALE_NP
+  locale_var_key: store_name
+  body: a nearby store
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_store_name
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {store_name}.
+- variant_id: glnp_033
+  slot_type: LOCALE_NP
+  locale_var_key: office_building
+  body: the office building
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_office_building
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {office_building}.
+- variant_id: glnp_034
+  slot_type: LOCALE_NP
+  locale_var_key: commute_mode
+  body: the commute
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_commute_mode
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {commute_mode}.
+- variant_id: glnp_035
+  slot_type: LOCALE_NP
+  locale_var_key: location.digital_space
+  body: your phone
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_location_digital_space
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {location.digital_space}.
+- variant_id: glnp_036
+  slot_type: LOCALE_NP
+  locale_var_key: location.daily_space
+  body: the kitchen table
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_location_daily_space
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {location.daily_space}.
+- variant_id: glnp_037
+  slot_type: LOCALE_NP
+  locale_var_key: location.high_stakes_space
+  body: the meeting room
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_location_high_stakes_space
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {location.high_stakes_space}.
+- variant_id: glnp_038
+  slot_type: LOCALE_NP
+  locale_var_key: location.learning_space
+  body: the quiet room
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_location_learning_space
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {location.learning_space}.
+- variant_id: glnp_039
+  slot_type: LOCALE_NP
+  locale_var_key: location.memory_space
+  body: the place where they used to be
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_location_memory_space
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {location.memory_space}.
+- variant_id: glnp_040
+  slot_type: LOCALE_NP
+  locale_var_key: location.social_gathering
+  body: the gathering
+  topic_allowlist: []
+  topic_blocklist: []
+  persona_allowlist: []
+  frame_allowlist:
+  - secular
+  - workplace
+  - clinical
+  - nervous_system
+  - contemplative
+  - buddhist
+  - comparative_religion
+  frame_blocklist: []
+  runtime_allowlist: []
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    engagement: 0.5
+  collision_family: locale_np_location_social_gathering
+  signature_phrases: []
+  forbidden_terms:
+  - gray light through the window
+  notes_for_selector: NP fallback for {location.social_gathering}.

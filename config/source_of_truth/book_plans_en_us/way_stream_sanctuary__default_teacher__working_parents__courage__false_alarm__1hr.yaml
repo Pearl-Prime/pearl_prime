@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__courage__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__courage__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__brave_world__1hr
+  name: Brave in the World — for Working Parents (One-Hour)
+installment_number: 1
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Building Courage: When Fear Lies to You (2)'
+subtitle: A Real Talk Guide to Courage for Working Parents
+cover_tagline: The email you keep not sending isn't dangerous. Your body just thinks
+  it is.
+description:
+  short_blurb: There's a conversation you keep putting off, and every time you go
+    to have it, your body floods like it's a real emergency. This one-hour reset for
+    working parents shows you that the panic before a hard email or a held-back word
+    is a false alarm, not a verdict. You'll learn to feel the spike and speak anyway.
+  long_description: 'You have known for three days that you need to send the email.
+    The one where you tell your manager the deadline isn''t realistic, or ask for
+    the afternoon off for the school play, or finally say the thing in the meeting
+    that everyone is already thinking. And every single time you go to do it, your
+    chest tightens, your stomach drops, your hand hovers over the keyboard, and you
+    find one more reason to leave it until later. By the time the kids are in bed
+    and the house is quiet, you are too wrung out to do it at all. So it carries over
+    to tomorrow.
+
+
+    If your body sounds a five-alarm fire over a conversation that, on paper, is completely
+    survivable, this hour is for you. You are not weak and you are not a coward. Your
+    nervous system is doing exactly what it was built to do — it just cannot tell
+    the difference between a real threat and a hard email. A racing heart in a meeting
+    and a racing heart in front of a moving car feel identical from the inside. That
+    is the false alarm: a body bracing for danger that isn''t actually there.
+
+
+    Pushing through, hyping yourself up, talking yourself out of the fear — those
+    moves work for an afternoon and leave you exactly where you started, so this book
+    skips them. Instead it walks you straight into the alarm and shows you what it
+    actually is: a set of sensations, not a verdict on whether you should speak. We
+    go down into the real moment instead of around it — the held breath in the car
+    at pickup while you rehearse the conversation for the fortieth time, the jolt
+    before you knock on your boss''s door, the way your voice goes thin right when
+    you need it. We stay there, in plain language you can use the next time it happens,
+    until the alarm stops running the whole show.
+
+
+    What you will learn is not how to stop being afraid. It is how to feel the spike
+    move through you and open your mouth anyway — how to let your heart pound and
+    still hit send. The fear and the action stop being chained together.
+
+
+    None of this hands you calm. The dread won''t disappear, there''s no script that
+    works every time, and you will not become someone who never flinches before a
+    hard talk. You are a tired parent with a full plate, not a project to optimize.
+    The smaller, more useful thing on offer is room between the alarm and the silence,
+    so the body can blare and you can speak through it.
+
+
+    The thing you won''t say is not waiting on more courage. It is waiting on you
+    to stop treating a false alarm like the truth. You are allowed to be terrified
+    and say it anyway.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  secondary:
+  - working parents
+  - courage for working parents
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: tomas_vidal
+comp_titles:
+- Dare to Lead (Brené Brown) — names the body-level fear of speaking up at work and
+  reframes it as the cost of showing up, not a flaw
+- When Panic Attacks (David D. Burns) — practical, secular take on a nervous system
+  that fires real alarm at non-dangerous moments
+- The Courage to Be Disliked (Ichiro Kishimi & Fumitake Koga) — argues that freedom
+  starts where you stop letting other people's reactions decide what you'll say
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: body_memory__omote__working_parents__sleep_anxiety
+brand: body_memory
+teacher: omote
+persona: working_parents
+topic: sleep_anxiety
+byline_author: theo_castellan
+arc:
+  installment_1:
+    book_id: body_memory__omote__working_parents__sleep_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__sleep_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: body_memory__omote__working_parents__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: body_memory__omote__working_parents__sleep_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__sleep_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the working parent whose body won''t believe the day is
+  over: a steady, ground-level voice that meets you at lights-out and stays — never
+  to fix your sleep, only to help your nervous system finally feel held enough to
+  set the day down.'
+bestseller_hook_family: ''
+emotional_engine: sleep_anxiety_recognition
+comp_series:
+- Good Inside (Dr. Becky Kennedy) — meets overwhelmed parents with steadiness instead
+  of one more thing to do right
+- The Body Keeps the Score adjacent (Bessel van der Kolk) — the body-holds-what-the-mind-can't
+  lineage, made gentle and bedside
+- Burnout (Emily & Amelia Nagoski) — names the unfinished stress cycle parents carry
+  to bed, without hustle or shame
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32 to 47
+  where_they_are: It's 11:40pm. The kids are finally asleep, the dishwasher is humming,
+    tomorrow's lunches are made — and you are lying in the dark, rigid, heart going,
+    certain something is wrong even though you just checked and everyone is breathing.
+    You have to be up in six hours. You can feel them ticking down.
+  what_they_need: To understand that a body that has spent all day on alert for everyone
+    else doesn't switch off on command — and to be shown how to signal safety to it
+    without pushing, performing, or one more thing to get right.
+  what_they_avoid: Sleep-hacking checklists, 'just relax,' optimized bedtime routines
+    that become one more chore to fail at, cheerful wellness positivity, and anything
+    that treats their exhaustion as a discipline problem.
+series_voice_markers:
+  register: grounded, steady, holding; warm and plain, the voice of someone sitting
+    on the edge of the bed in the dark who is not going anywhere — never clinical,
+    never a sleep coach, never hustle
+  sentence_rhythm: unhurried and weighted; short declaratives that land and settle,
+    room to breathe between them, the pacing of a slow exhale rather than instruction
+  metaphor_family: held ground and the earth beneath the bed, weight supported and
+    set down, the body remembering it is safe, roots and steadiness, what holds when
+    the day won't stop shaking — never machinery, optimization, or biohacking
+_needs_authoring: false

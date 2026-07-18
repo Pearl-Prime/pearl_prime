@@ -1,0 +1,176 @@
+# Per-Genre Speech-Bubble Style Map — Phoenix Omega Manga Lettering
+#
+# Status: AUTHORITY (LANE B — bubble rendering genre register).
+# Schema version: 1.0
+# Created: 2026-06-17
+# Owner: Pearl_Dev
+#
+# Purpose:
+#   The bubble renderer (phoenix_v4/manga/chapter/bubble_render_v2.py) derives a
+#   per-line `bubble_style` from dialogue INTENSITY only. That makes every genre
+#   look identical: a tense line in a gentle healing story gets the same hard
+#   spiky bubble as a shonen battle scream. This file adds the missing layer —
+#   a GENRE register that shapes the *default* bubble shape, lettering font, and
+#   tail across a whole series, so a healing/iyashikei book reads soft and a
+#   shonen book reads punchy.
+#
+#   Resolution precedence in the renderer (highest wins):
+#     1. Explicit per-line override in the chapter_script (bubble_style /
+#        font_override / tail_style set by the author) — ALWAYS respected.
+#     2. Genre register override from this file — applied only when the line
+#        used the intensity DEFAULT (author did not specify a style).
+#     3. Intensity default mapping (lettering_from_script._INTENSITY_TO_*).
+#
+#   This means the genre register changes the "resting" look of dialogue while
+#   still letting intensity-driven emphasis (shouting -> scream bubble) and
+#   explicit authorial overrides punch through.
+#
+# Cross-references:
+#   - specs/manga_bubble_rendering_engine.md (§5.2 bubble style resolution)
+#   - specs/LETTERING_AGENT_SPEC.md (semantic lettering layer)
+#   - fonts/manga/FONT_REGISTRY.yaml (font_role -> font file resolution)
+#   - config/manga/drawing_tradition_per_genre.yaml (visual-tradition companion)
+#   - config/manga/manga_brand_series_plan.yaml (per-series `genre:` register)
+#   - config/manga/canonical_genre_list.yaml (catalog genre ids; see aliases)
+#
+# font_role values resolve through FONT_REGISTRY.yaml locale_coverage_required:
+#   body                  -> per-locale dialogue body (Comic Neue en / Source Han CJK)
+#   handwritten           -> per-locale soft/brush face (Patrick Hand en / Klee One ja / LXGW zh)
+#   handwritten_secondary -> alternate handwritten (Architects Daughter en)
+#   display               -> punchy display face (Bangers en)
+# Genres that want a soft, gentle, "hand-lettered" feel (healing, romance,
+# slice_of_life) use `handwritten`; punchy genres (shonen/battle, sports) use
+# `body` (clean) and let intensity drive emphasis.
+
+schema_version: "1.0"
+last_updated: "2026-06-17"
+
+# bubble_style values MUST be members of svg_bubble_library.BUBBLE_STYLE_IDS:
+#   round_normal, shojo_soft, spiky_emphasis, scream_ultra, cloud_thought,
+#   whisper_dashed, square_narration, electronic_sharp, drip_horror,
+#   wavy_supernatural, off_panel, singing
+# tail values are consumed by tail_geometry / _draw_tail_pointer:
+#   pointer (mouth-targeted), soft (gentle curve -> falls back to pointer),
+#   none (no tail)
+
+# ── Default register (used when a series' genre is unknown / unmapped) ──────
+default:
+  bubble_style: round_normal      # neutral oval — safe everywhere
+  font_role: body                 # clean dialogue body
+  tail_style: pointer
+  description: "Neutral fallback register."
+
+genres:
+  # ── HEALING / IYASHIKEI — soft, gentle, devotional-emotional ─────────────
+  # LOCKED P0: the Devotion brand (devotion_path / Open Vessel Press / Sai Ma)
+  # renders in THIS register — healing / iyashikei / devotional-emotional-drama
+  # + supernatural-healing (grief, compassion, courage-as-inner-work). NOT
+  # shonen / battle / cultivation.
+  iyashikei:
+    bubble_style: shojo_soft       # soft rounded bubble, pale warm fill
+    font_role: handwritten         # gentle hand-lettered face (Patrick Hand / Klee One)
+    tail_style: soft               # gentle curved tail (renderer softens the pointer)
+    fill_tint: [255, 250, 244, 224]  # warm off-white — calmer than stark white
+    stroke_tint: [120, 108, 96, 255] # soft warm-grey outline, not hard black
+    description: >-
+      Soft rounded bubbles with gentle handwritten lettering. The signature
+      iyashikei / healing look: nothing jagged, nothing shouting at the reader.
+      Used for the Devotion brand's grief/compassion/inner-work register.
+
+  healing:                          # canonical_genre_list id -> alias of iyashikei
+    alias_of: iyashikei
+
+  # ── SHOUJO — emotional, decorative, romance-adjacent ─────────────────────
+  shoujo:
+    bubble_style: shojo_soft       # soft rounded, pale-pink fill
+    font_role: handwritten
+    tail_style: soft
+    fill_tint: [255, 245, 250, 224]  # the classic pale-pink shoujo bubble
+    stroke_tint: [150, 90, 120, 255]
+    description: >-
+      Soft rounded bubbles, pale-pink fill, gentle hand-lettering. Emotional
+      shoujo / josei register; flower-soft, never hard-edged.
+  shojo:
+    alias_of: shoujo
+  romance:
+    alias_of: shoujo
+
+  # ── SHONEN — bright, punchy, action ──────────────────────────────────────
+  shonen:
+    bubble_style: round_normal     # clean crisp oval; intensity drives spiky/scream
+    font_role: body                # clean punchy body (upgrades to Anime Ace if present)
+    tail_style: pointer            # sharp mouth-targeted pointer
+    fill_tint: [255, 255, 255, 240]  # crisp opaque white
+    stroke_tint: [0, 0, 0, 255]      # hard black outline
+    description: >-
+      Crisp white bubbles, hard black outline, sharp tails. Lets intensity
+      escalate to spiky_emphasis / scream_ultra for battle beats.
+  battle:
+    alias_of: shonen
+  sports:
+    alias_of: shonen
+  fantasy_adventure:
+    alias_of: shonen
+  cultivation:
+    alias_of: shonen
+  isekai:
+    alias_of: shonen
+
+  # ── SEINEN — adult, restrained, realist ──────────────────────────────────
+  seinen:
+    bubble_style: round_normal     # restrained oval, slightly squared feel
+    font_role: body
+    tail_style: pointer
+    fill_tint: [252, 252, 250, 236]  # near-white, faintly warm
+    stroke_tint: [30, 30, 30, 255]   # dark grey, slightly softer than pure black
+    description: >-
+      Restrained, realist bubbles with a clean body face. Adult register;
+      emotionally compressed, not airy and not punchy.
+  mecha:
+    alias_of: seinen
+  sci_fi_cyberpunk:
+    bubble_style: electronic_sharp # sharp rectangle for the tech register
+    font_role: body
+    tail_style: pointer
+    fill_tint: [220, 235, 250, 224]
+    stroke_tint: [0, 110, 200, 255]
+    description: "Sharp, slightly electronic bubbles for the cyberpunk register."
+  psychological_horror:
+    bubble_style: drip_horror
+    font_role: body
+    tail_style: pointer
+    fill_tint: [245, 245, 245, 232]
+    stroke_tint: [40, 0, 0, 255]
+    description: "Unsettled, drip-edged bubbles for the horror register."
+  horror:
+    alias_of: psychological_horror
+  dark_fantasy:
+    alias_of: psychological_horror
+
+  # ── SLICE OF LIFE — gentle, everyday ─────────────────────────────────────
+  slice_of_life:
+    bubble_style: round_normal
+    font_role: handwritten         # gentle, but a touch crisper than iyashikei
+    tail_style: soft
+    fill_tint: [255, 253, 248, 232]
+    stroke_tint: [80, 76, 70, 255]
+    description: >-
+      Gentle everyday bubbles, soft hand-lettering, but a little more grounded
+      than full iyashikei (slice_of_life allows conflict and broader range).
+  comedy:
+    bubble_style: round_normal
+    font_role: handwritten_secondary
+    tail_style: pointer
+    description: "Lively, slightly loose hand-lettering for comedic beats."
+  food:
+    alias_of: slice_of_life
+  family:
+    alias_of: slice_of_life
+  essay:
+    alias_of: slice_of_life
+  memoir:
+    alias_of: slice_of_life
+  supernatural_everyday:
+    alias_of: iyashikei            # supernatural-healing leans gentle, per P0
+  manhwa:
+    alias_of: shoujo               # webtoon emotional register, soft bubbles

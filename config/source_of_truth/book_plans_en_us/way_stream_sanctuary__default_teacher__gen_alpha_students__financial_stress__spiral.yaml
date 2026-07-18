@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__financial_stress__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__money_fears
+  name: Money Without Panic — for Students
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Stress Management: The Overthinking Spiral'
+subtitle: How Gen Alpha Students Are Rewriting the Rules of Financial Stress
+cover_tagline: Your hours get cut by two and suddenly, in your head, the entire plan
+  collapses.
+description:
+  short_blurb: One change to the schedule or one surprise charge, and your mind sprints
+    to total ruin. This book is for working students whose financial stress detonates
+    into runaway worst-case thinking. It teaches you to spot the spiral early and
+    find the single real thing at the bottom of it.
+  long_description: 'Your manager cuts your hours by two. That''s it. That''s the
+    whole event. But by the time you''re lying in bed it''s no longer two hours, it''s
+    can''t make rent, it''s behind on everything, it''s dropping classes to work more,
+    it''s the whole carefully balanced plan collapsing in slow motion behind your
+    eyes. You didn''t decide to think about it. One small real thing landed and your
+    mind sprinted straight to the end of the world.
+
+
+    This book is for the student whose financial stress doesn''t sit quietly but detonates.
+    The one for whom a single surprise charge or schedule change becomes a chain of
+    escalating disasters, each one bigger and less likely and more vivid than the
+    last. The one who can be holding it together at work and watching their entire
+    future cave in by midnight. If one real money event reliably becomes a thousand
+    imagined catastrophes, this was written for you.
+
+
+    The engine here is the spiral: the way a stressed mind takes one true thing and
+    builds a tower of dread on top of it, link by link, until you''re bracing for
+    a collapse that lives only in your head. You''ll learn to catch it early, at the
+    second or third link, while there''s still a real number in your hand and not
+    yet a catastrophe. You''ll recognize how the thoughts pick up speed and pull further
+    from anything happening today. Then, instead of trying to out-argue a spiral that''s
+    faster than your logic, you go down into it, watch how it stacks itself, and find
+    the one true thing at the bottom you can actually deal with: this cut, this week,
+    this single real shortfall.
+
+
+    This is not a money-management book. No automated savings hack, no app, no cheery
+    line about how stressing never paid a bill. It will not steady your finances and
+    it will not promise the bad outcome is impossible. What it offers is a way to
+    tell the one real problem in your hands apart from the thousand invented ones
+    in your head, so the next time two lost hours turn into total ruin at midnight,
+    you can name the spiral, follow it down, and land on the only thing tonight that''s
+    actually real.
+
+
+    Your mind sprinting to ruin over a small setback is not a forecast. It''s just
+    stress doing what stress does to a tired brain. Catch it before the tower goes
+    up, and read.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - students
+  - financial stress for students
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — breaks down how worry loops form and how to
+  short-circuit them
+- The Worry Trick (David Carbonell) — names how anxiety inflates a small event into
+  catastrophe and how to step off
+- The Financial Diet (Chelsea Fagan) — keeps young-adult money worry anchored in plain,
+  practical reality
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

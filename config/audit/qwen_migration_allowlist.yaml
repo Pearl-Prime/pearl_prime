@@ -1,0 +1,10 @@
+# Reserved allowlist path for any future Qwen-Agent → phoenix_omega migration work.
+# This file exists so governance and audit tooling have a stable config location,
+# but it is intentionally conservative until a fresh migration PR defines a
+# concrete allowlist.
+
+workflows: []
+scripts: []
+config: []
+docs: []
+pearl_news_assets: []

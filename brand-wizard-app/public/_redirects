@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects
+# Root → Pearl Prime entry (avoid React SPA shell)
+/ /pearl_prime_entry.html 302
+# Legacy entry → static deck
+/onboarding_proof_presentation.html /onboarding/presentation.html 302

@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: creative_unfold__house__gen_alpha_students__courage
+brand: creative_unfold
+teacher: null
+persona: gen_alpha_students
+topic: courage
+byline_author: maya_crane
+arc:
+  installment_1:
+    book_id: creative_unfold__house__gen_alpha_students__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: creative_unfold__house__gen_alpha_students__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: creative_unfold__house__gen_alpha_students__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Courage is not the absence of fear; it is one small mark made
+  before you feel ready. This series meets young creators at the edge of who they
+  could be and walks them through every way fear disguises itself, never demanding
+  the leap, only the next honest step.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Confidence Code for Girls (Katty Kay & Claire Shipman) — courage and bravery
+  written directly for the teen who freezes before she speaks
+- What Do You Do with a Problem? / a Chance? (Kobi Yamada) — the small-brave-step
+  ethos and the edge-of-fear image, scaled up for older students
+- Big Magic (Elizabeth Gilbert) — fear and creative courage as companions rather than
+  enemies, for the maker who is scared to be seen
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 13 to 18, Gen Alpha and the youngest Gen Z, in middle and high school
+  where_they_are: Sitting in class with their hand half-raised, the answer right there
+    behind their teeth, watching the moment close while their heart slams and they
+    tell themselves they'll speak up next time, they always tell themselves next time.
+  what_they_need: Permission to be afraid and act anyway; a way to tell real danger
+    from the alarm that fires over nothing; proof that the unfinished, imperfect,
+    brave-enough version of them is allowed to exist out loud.
+  what_they_avoid: Be-fearless hype, motivational-poster bravery, adults who say just
+    believe in yourself, anything that treats their fear as a flaw to fix instead
+    of a signal to understand.
+series_voice_markers:
+  register: open, encouraging, creative; warm and honest, never precious; the voice
+    of someone a few years ahead who remembers exactly what the edge felt like, never
+    a coach and never a clinician
+  sentence_rhythm: short true sentences that land like a held breath, then a longer
+    one that opens the room back up; plainspoken, image-led, room to think between
+    the lines
+  metaphor_family: the blank canvas and the first mark, the edge and the one step
+    before you feel ready, the draft you are allowed to ruin, color returning to something
+    that went grey, what wants to be made through you
+_needs_authoring: false

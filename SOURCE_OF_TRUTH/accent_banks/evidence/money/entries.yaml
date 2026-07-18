@@ -1,0 +1,196 @@
+topic: money
+wave: 2
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 9
+  mixed: 1
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: mon_money_scripts_klontz_2011
+    entry_type: finding
+    claim: >
+      Unconscious beliefs about money — 'there is never enough,' 'rich people are
+      greedy' — drive spending and saving patterns more than income alone in
+      financial psychology research.
+    citation: "Klontz BT, Britt SL, Mentzer J, Klontz T (2011). Money Beliefs and Financial Behaviors: Development of the Klontz Money Script Inventory. Journal of Financial Therapy, 3(1), 1-22."
+    year: 2011
+    robustness: robust
+    topic_keys: [money, financial_anxiety, financial_stress]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Distinct from financial_anxiety — belief layer."
+      zh_TW_zh_CN: "Intergenerational thrift/scarcity scripts."
+      ja_JP: "Post-bubble frugality inheritance."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: mon_mental_accounting_thaler_1999
+    entry_type: finding
+    claim: >
+      People treat money differently depending on mental labels — 'fun money' vs
+      'rent money' — which explains irrational-seeming spending that is psychologically
+      consistent.
+    citation: "Thaler RH (1999). Mental accounting matters. Journal of Behavioral Decision Making, 12(3), 183-206."
+    year: 1999
+    robustness: robust
+    topic_keys: [money]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Envelope budgeting psychology."
+      zh_TW_zh_CN: "Family budget mental buckets."
+      ja_JP: "Separate household accounts culture."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: mon_loss_aversion_spending_1979
+    entry_type: finding
+    claim: >
+      Losses feel roughly twice as painful as equivalent gains feel good — which
+      makes selling investments, admitting bad purchases, or cutting sunk costs
+      emotionally harder than spreadsheets suggest.
+    citation: "Kahneman D, Tversky A (1979). Prospect Theory. Econometrica, 47(2), 263-291."
+    year: 1979
+    robustness: robust
+    topic_keys: [money, financial_stress]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Sunk-cost fallacy naming."
+      zh_TW_zh_CN: "Property loss aversion."
+      ja_JP: "Stock loss reluctance."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: mon_pay_yourself_first_2004
+    entry_type: finding
+    claim: >
+      Automatic savings before discretionary spending increases wealth accumulation
+      in behavioral field studies — structure beats willpower.
+    citation: "Thaler RH, Benartzi S (2004). Save More Tomorrow. Journal of Political Economy, 112(S1), S164-S187."
+    year: 2004
+    robustness: robust
+    topic_keys: [money]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Payday auto-transfer."
+      zh_TW_zh_CN: "Family savings automation."
+      ja_JP: "Bonus-to-savings habit."
+    sensitivity_notes: "Not personalized financial advice."
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: mon_retail_therapy_mood_2014
+    entry_type: finding
+    claim: >
+      'Retail therapy' produces brief mood lifts in lab studies but often followed
+      by guilt — short-term emotion regulation with long-term cost.
+    citation: "Atalay AS, Meloy MG (2011). Retail therapy: A strategic effort to improve mood. Psychology & Marketing, 28(6), 638-659."
+    year: 2011
+    robustness: mixed
+    caveat: "Small effects; guilt rebound documented in some studies not all."
+    topic_keys: [money, depression]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Mood spend awareness."
+      zh_TW_zh_CN: "Live-stream shopping impulse."
+      ja_JP: "Convenience store mood buying."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: mon_case_stanley_millionaire_next_door_1996
+    entry_type: documented_case
+    claim: >
+      Stanley and Danko's published interviews found many wealthy Americans live
+      below their means while high earners often have low net worth — behavior
+      patterns matter more than income display.
+    citation: "Stanley TJ, Danko WD (1996). The Millionaire Next Door. Atlanta: Longstreet Press."
+    year: 1996
+    robustness: robust
+    topic_keys: [money, financial_stress]
+    doctrine_keys: []
+    case_attribution: "Published interview cases — Stanley & Danko (1996)"
+    locale_framing_notes:
+      en_EU: "US-centric — behavior pattern universalizable."
+      zh_TW_zh_CN: "Display wealth vs saved wealth."
+      ja_JP: "Modest lifestyle high savers."
+    sensitivity_notes: "Dated US sample."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: mon_financial_infidelity_trust_2018
+    entry_type: finding
+    claim: >
+      Hidden spending or secret accounts — financial infidelity — predicts relationship
+      breakdown as strongly as other betrayals in survey research.
+    citation: "Dew J, Britt S (2012). Examining the relationship between financial issues and divorce. Family Relations, 61(4), 615-628."
+    year: 2012
+    robustness: robust
+    topic_keys: [money, relationship_anxiety, divorce]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Secret debt pattern."
+      zh_TW_zh_CN: "Hidden family spending."
+      ja_JP: "Secret personal accounts."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: mon_status_spending_veblen_1899
+    entry_type: finding
+    claim: >
+      Conspicuous consumption — buying visible status — has been documented since
+      Veblen as social signaling that often overshoots actual affordability.
+    citation: "Veblen T (1899). The Theory of the Leisure Class. Boston: Houghton Mifflin."
+    year: 1899
+    robustness: robust
+    topic_keys: [money, comparison, self_worth]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Status purchase naming."
+      zh_TW_zh_CN: "Face spending (mianzi)."
+      ja_JP: "Visible brand signaling."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: mon_cash_vs_card_overspend_2001
+    entry_type: finding
+    claim: >
+      People spend more with cards than cash in repeated experiments — payment
+      abstraction reduces the pain of paying.
+    citation: "Prelec D, Simester D (2001). Always leave home without it: A further investigation of the credit-card effect on willingness to pay. Marketing Letters, 12(1), 5-12."
+    year: 2001
+    robustness: robust
+    topic_keys: [money]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Cash envelope for problem categories."
+      zh_TW_zh_CN: "Mobile pay abstraction — higher salience needed."
+      ja_JP: "IC card spending awareness."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: mon_financial_wellbeing_consumer_2020
+    entry_type: finding
+    claim: >
+      Subjective financial well-being — feeling in control of money — predicts
+      life satisfaction beyond raw income in large surveys.
+    citation: "Consumer Financial Protection Bureau (2017). Financial well-being in America. Washington, DC: CFPB."
+    year: 2017
+    robustness: robust
+    topic_keys: [money, financial_anxiety]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Control over amount."
+      zh_TW_zh_CN: "Predictability matters for peace."
+      ja_JP: "Visible plan reduces anxiety."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY

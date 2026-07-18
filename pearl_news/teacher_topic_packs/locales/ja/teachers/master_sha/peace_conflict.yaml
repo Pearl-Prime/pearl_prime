@@ -1,0 +1,66 @@
+hook_personal:
+  options:
+  - id: master_sha_peace_hook_personal_01
+    line: 一つの通知を通じて公共の暴力が私生活に入ってくるのを感じられる。身体は言葉より先に知り、恐れが害を再生産する閉塞に変わりうる。
+  - id: master_sha_peace_hook_personal_02
+    line: 見ないことは不誠実に感じるから読み続ける。繰り返される紛争ニュースが身体に何をしているか──締まり、止まり、また確認──も知っている。
+hook_big_picture:
+  options:
+  - id: master_sha_peace_hook_big_01
+    line: 紛争の圧力はもはや地政学だけではない。道徳的傷害として、集団のあいだの場の閉塞としても来る。伝統は、応答が暴力を再生産しなくなるには閉塞を晴らすことが要ると説く。
+  - id: master_sha_peace_hook_big_02
+    line: 恐れ、恨み、処理されないトラウマが晴らされずに積もると、敵意、やがて暴力として現れる。平和は閉塞を抑え込むことではなく、晴らすことで達せられる。
+teacher_intro:
+  options:
+  - id: master_sha_peace_intro_01
+    line: ジー・ガン・シャ師（Dr. and Master Zhi Gang Sha）は、数十年にわたりTao SourceとSoulfulnessを教え、実践の場で若者が紛争の圧を恐れと責任の両方として抱えるのを見てきた。世界が危ないかどうかではない。危険と接触したまま、恐れが暴力を再生産する閉塞に変わらないようどういるかを問うている。
+youth_somatic:
+  options:
+  - id: master_sha_peace_somatic_01
+    line: '紛争アラートを読む。胸が締まる。一瞬止まる。また確認する。危険は本物だから。
+
+      LOOP_SEQUENCE: "アラートを読んだ。胸が締まった。止まった。また確認した。"'
+teacher_witness:
+  options:
+  - id: master_sha_peace_witness_01
+    line: Master Shaは若者のなかでこのループそのものを見てきた。アラートが届き、身体が収縮し、一秒時間が止まり、現実がまだそこにあるから注意が戻る。
+turnaround:
+  options:
+  - id: master_sha_peace_turnaround_01
+    stat_line_1: 148 youth peace networks. 22 regions.
+    stat_line_2: 若者が対話を主導し、修復的実践を組織し、紛争を明晰さと集合的癒しで迎えられるものとして扱うキャンペーンを走らせている。
+bridge:
+  options:
+  - id: master_sha_peace_bridge_01
+    line: トラッカーは停戦と条約を測る。次の平和構築の行為を可能にしたもの──恐れと恨みの閉塞を晴らし、応答がパターンを再生産しない容量──の欄はない。Master Shaの伝統は、聖歌と共同体の発声が、暴力が砕く共有の振動場を取り戻すと説く。
+    hidden_capacity: 応答が暴力を再生産しないよう閉塞を晴らす
+teacher_perspective:
+  options:
+  - id: master_sha_peace_perspective_01
+    header: Master Shaが見ていること
+    paragraphs:
+    - 紛争の根は個人、コミュニティ、集団間の場にある閉塞だ。恐れ、恨み、処理されない歴史的トラウマが晴らされずに積もると、敵意、やがて暴力として現れる。Tao Sourceの教えは、これらの閉塞を抑え込むのではなく、最大の許しで晴らすことによって平和が達せられると説く。
+    - 最大の愛は感情ではなく実践だ。紛争に当てはめると、相手も閉塞されており、その暴力は真の本性ではなく閉塞の表れであると認識して近づくことになる。この教えは若者に害を免罪させよとは求めない。再生産しないよう応答するには、その起源を十分明晰に見ることを求める。
+    - 聖歌は紛争後の集合的癒しの実践として文化を横断して用いられてきた。共同体の発声は、暴力が砕く共有の振動場を取り戻す。「自分が壊れている、間違っている」に感じることは、誰一人では直せない条件へのしばしば正確な応答だ。暴力のあと一緒に歌う若者は、要求に決して設計されなかったシステムと制度のなかで、伝統が不可欠とみなすことをしている。
+practice:
+  options:
+  - id: master_sha_peace_practice_01
+    display_name: Tao Source ゴールデンライトの実践
+    announcement_line: Master Shaは5分間のTao Sourceゴールデンライトの実践を教える。紛争ニュースが閉塞になり、身体が恐れのまわりで締まったときのため。サイドバーに時間どおりステップ付きで載せている。
+    relief_lines:
+    - 危険を凍結か怒りに変える閉塞がやわらぐ。
+    - 害を再生産するのではなく、つながりから応答するだけの明晰さが戻る。
+sdg:
+  primary:
+    line: 国連のSDG 16の枠組みには、平和な社会、司法へのアクセス、暴力を再生産しない機関が含まれる。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+  - id: master_sha_peace_cta_01
+    line: '若者主導の平和構築と対話の組織が、明晰さと集合的癒しで紛争に応答したい人への入口になる。入口：若者平和ネットワークやワークショップに参加する。'
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_sha_peace_headline_01
+      line: Tao Sourceの教師が紛争を閉塞として読み、害を再生産せずに晴らす実践を名指す。

@@ -1,0 +1,95 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+# Profile type: brand-genre lane template. All series within this brand+genre
+# lane use this profile. Per-series variation comes from seed selection.
+
+title_id: cognitive_clarity_seinen
+brand_id: cognitive_clarity
+teacher: kenjin
+
+market_demo: seinen
+genre_family: mystery
+subgenre: "psychological_self_inquiry"
+
+emotional_engine: wonder
+reader_promise: "You will stop explaining yourself and discover what remains when the thought stops."
+
+serialization_engine: arc_based
+chapter_hook_family: hidden_truth_glimpse
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.20
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 95
+  silent_panel_ratio: 0.30
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: generous
+adaptation_targets:
+  - print
+  - webtoon
+
+# --- marketing & catalog ---
+series_description: |
+  A cognitive_clarity seinen series for readers who have over-explained themselves
+  into exhaustion. Psychological mystery format — arc-based, hidden_truth_glimpse
+  chapter hooks, polished seinen linework. The investigation is always the reader
+  themselves. No resolution is delivered; the wonder is the destination.
+
+series_title: "The Question That Stays"
+# Derives from hidden_truth_glimpse hook + wonder engine + reader_promise:
+# what remains when the thought stops. Philosophical, minimal, seinen feel.
+
+series_logline: >-
+  For the reader who suspects the story they've been telling themselves
+  might not be the whole story.
+# 17 words. Reader-benefit. Captures psychological_self_inquiry with no clinical language.
+
+positioning: >-
+  For readers of Vagabond and Planetes who also want a series that asks
+  better questions instead of offering answers.
+
+audience: |
+  He is 28-45, reads widely, thinks too much, and has noticed that thinking
+  more hasn't solved the thinking. At 11pm he is three browsers deep into a
+  question that started with something small. He is ready for a series that
+  doesn't give him another framework — just the sensation of not needing one.
+
+comp_titles:
+  - "Vagabond (Takehiko Inoue)"
+  - "Planetes (Makoto Yukimura)"
+  - "Ping Pong the Animation (Taiyo Matsumoto)"
+  - "Flow: The Psychology of Optimal Experience (Mihaly Csikszentmihalyi)"
+
+marketing_angle: |
+  A psychological mystery series where the investigation is always the reader
+  themselves: arc-based structure with hidden_truth_glimpse chapter hooks and
+  polished seinen linework deliver the experience of noticing that you've been
+  the unreliable narrator all along. No resolution — the wonder IS the point.
+
+hook_lines:
+  - "The mystery is you. Work it out."
+  - "Every chapter shows you what you missed."
+  - "Stop explaining. See what's actually here."
+
+launch_priority: P1
+# P1: strong philosophical seinen niche, proven comp title sales (Vagabond, Planetes).
+# cognitive_clarity brand needs one differentiation sprint before P0 placement.
+# Launches after stillness_press proof of concept.
+
+main_character_name: Kenji
+# Male. Common in seinen context, understated, mid-career professional feel.
+# Not aspirational. Plausible for seinen adult male market.
+
+main_character_role: "overqualified analyst questioning everything"
+# Mirrors the reader: intellectual, analytical, ready to stop over-explaining.
+# Captures the wonder/psychological_self_inquiry engine.
+
+main_character_image_path: null
+# RunComfy generation is Phase E — separate sprint. Teacher: joshin.

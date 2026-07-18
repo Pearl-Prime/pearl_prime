@@ -1,0 +1,463 @@
+# Stillness Press Brand Signature
+# Brand: Stillness Press
+# Genre specialization: Iyashikei, slice-of-life, pastoral contemplation, gentle rural/nature narratives
+# Target demographics: Seinen and josei adult readers seeking comfort manga; crossover appeal to all-ages readers
+# Visual register: Barakamon, Yotsuba&!, Aria, Silver Spoon, Mushishi, Natsume's Book of Friends
+# Date established: 2026-04-18
+# Owner: Pearl_Architect
+#
+# DESIGN PHILOSOPHY:
+# Stillness Press covers do not compete for attention. They invite it.
+# In a manga shelf where 80% of covers use speed lines, saturated colors,
+# and aggressive poses, a Stillness Press cover creates contrast through restraint.
+# White space is not emptiness. It is the breath before a sentence.
+# The reader should feel a small deceleration when their eye lands on this cover.
+
+brand_id: stillness-press
+display_name: "Stillness Press"
+tagline: "Stories that breathe."
+
+# ─────────────────────────────────────────
+# PRIMARY PALETTE
+# ─────────────────────────────────────────
+# 6 colors. No pure primaries. No harsh contrasts.
+# All colors can coexist in a single composition without any one dominating.
+# The palette evokes: morning light through rice paper, forest understory at midday,
+# late-afternoon clay earth, open sky, deep forest shadow, warm candlelight.
+# Test: place all six swatches in a row. They should feel like one breath.
+
+primary_palette:
+  - name: morning_mist
+    hex: "#E8EAD8"
+    role: background
+    notes: >
+      Desaturated green-white. The color of morning light through rice paper screens.
+      Used as primary background on front cover, back cover zones, and flap backgrounds.
+      Pairs with any other palette color. Never use as text color — too light.
+      The palette's rest note. Where nothing else is happening, this is.
+
+  - name: moss_shadow
+    hex: "#7A8B6F"
+    role: primary
+    notes: >
+      Forest understory green. Neither too saturated nor too muted.
+      Grounding and natural. Used for series titles, accent elements, and structural
+      elements (dividers, lines). The palette's anchor — reliable, steady, present.
+      Reads well at small sizes. Excellent for volume numbers and creator credits.
+
+  - name: warm_clay
+    hex: "#C4956A"
+    role: accent
+    notes: >
+      Earthen warmth. The color of kiln-fired ceramics, rice straw in afternoon light,
+      tatami edge worn smooth. This is the palette's warmth note — it appears as accent
+      in compositions to prevent the palette from reading as too cold or clinical.
+      Series accent for Wandering Harvest. Appears in character clothing and motif highlights.
+      Never dominant; always counterbalancing.
+
+  - name: sky_wash
+    hex: "#B8CCDA"
+    role: secondary
+    notes: >
+      Pale blue wash. Open sky without dramatic depth — just presence and possibility.
+      Used in backgrounds evoking open air, water surfaces, winter light.
+      Counterbalances warm_clay in palette compositions. Cool but not aggressive.
+      Pairs beautifully with morning_mist as a two-color background gradient.
+
+  - name: ink_dusk
+    hex: "#2D3A2E"
+    role: dark
+    notes: >
+      Deep forest dark. Not pure black — slightly greenish, like the inside of a cedar grove
+      at dusk. Used for: all title text, creator credits, body text on back cover,
+      publisher logo (dark variant). Provides necessary contrast for legibility without
+      the harshness of true black. At small text sizes, reads as rich and warm rather than harsh.
+      Test: on morning_mist background, ink_dusk text at 9pt should read cleanly at arm's length.
+
+  - name: cream_light
+    hex: "#FAF7EE"
+    role: light
+    notes: >
+      Warm white. The color of good handmade paper, or milk glass in morning light.
+      Used for title-safe zones when composition requires a lighter option than morning_mist,
+      and for back cover body text zones. Also used for the inside front cover board.
+      Distinct from morning_mist: this is warmer and lighter — pure rest.
+
+# ─────────────────────────────────────────
+# COMPOSITION FAMILY
+# ─────────────────────────────────────────
+
+composition_family: environmental
+composition_notes: >
+  Stillness Press covers are environment-forward. The world breathes.
+  The character is a presence within the world, not the axis the world revolves around.
+  Rule: character occupies no more than 30% of cover area in most volumes.
+  Exception: ensemble covers may use up to 45% if characters are arranged as part of
+  the landscape (e.g., figures silhouetted against a rice paddy horizon).
+  The setting should be recognizable independently — a reader should be able to describe
+  the cover without mentioning the character.
+  Composition variant bank for this brand:
+    environmental_foreground: character in close-up, environment visible behind
+    environmental_midground: character occupies middle distance, setting equal
+    environmental_aerial: bird's-eye view; character tiny against landscape
+    environmental_intimate: tight setting detail (cup of tea, window pane, book page)
+    environmental_threshold: character at boundary (doorway, shoreline, path divergence)
+
+# ─────────────────────────────────────────
+# MOOD REGISTER
+# ─────────────────────────────────────────
+
+mood_register: restrained
+mood_notes: >
+  Restrained means: no speed lines. No screentone bursts. No dramatic "reveal" poses.
+  No exclamation effects. Covers should feel like a long exhale, not a held breath.
+  Energy is internal, not displayed. A Stillness Press cover communicates through
+  small things: the angle of light, the weight of a figure's posture, the season in
+  the grass.
+  Permitted energy levels: static, weight-shift, slow-motion.
+  Forbidden energy levels: action, extreme-motion, dynamic-pose.
+  Mood does not mean humorless. Warmth, wit, and gentle delight are all within register.
+  What is not within register: urgency, alarm, threat, aggression.
+
+# ─────────────────────────────────────────
+# TYPOGRAPHY FAMILY
+# ─────────────────────────────────────────
+
+typography_family:
+  display_font_id: klee_one
+  body_font_id: m_plus_1
+  accent_font_id: lato
+
+  display_font_notes: >
+    Klee One: a humanist sans-serif with calligraphic origins.
+    Soft, handwriting-adjacent at display sizes — literary, not aggressive.
+    Available in Latin and Japanese glyphs natively, which makes it an ideal
+    cross-script choice. At 36–48pt for series titles, it reads as "a thoughtful
+    person chose this." At 12pt it remains legible without becoming cold.
+    This font says: there is a human behind this book.
+
+  body_font_id: m_plus_1
+  body_font_notes: >
+    M PLUS 1: clean, neutral, humanist. Excellent CJK coverage.
+    Used for back cover blurb text, flap bio, and any body-weight text on covers.
+    9pt minimum for Latin; 8pt minimum for Japanese. Line spacing 1.5-1.6× for all uses.
+
+  accent_font_id: lato
+  accent_font_notes: >
+    Lato: geometric humanist Latin-script font. Pairs well with Klee One as
+    a complementary sans. Used for volume numbers, brand supporting text,
+    and any numerical or technical text on covers. Its geometric clarity
+    contrasts productively with Klee One's calligraphic warmth.
+
+  title_weight: 400
+  title_weight_notes: >
+    Regular weight ONLY for series titles. Bold would break the restrained register.
+    Even for dramatic series (within Stillness Press), regular weight maintains the
+    brand register. If a series needs more visual weight, increase font size slightly
+    rather than increasing weight.
+
+  volume_number_font_id: lato
+  volume_number_style: "small-caps style, lower-right of cover, moss_shadow color, 14-16pt"
+
+  creator_credit_font_id: m_plus_1
+  creator_credit_style: "smallest readable size (8pt), bottom-center, ink_dusk at 60% opacity"
+
+# ─────────────────────────────────────────
+# TITLE PLACEMENT
+# ─────────────────────────────────────────
+
+title_placement:
+  zone: upper
+  zone_notes: "Top 25% of cover. Breathing room below title before image begins."
+  alignment: left
+  alignment_notes: >
+    Flush-left title with 8mm inset from left trim edge.
+    Right side of title zone left open — allows the cover illustration to breathe
+    into the right side of the title area, creating integration between text and image.
+  horizontal_inset_mm: 8
+  vertical_inset_mm: 10
+  max_font_size_pt: 48
+  min_font_size_pt: 28
+  color: ink_dusk
+  color_exception: >
+    If background in title zone is dark (darker than 50% luminosity),
+    use cream_light for title text. This should be rare for Stillness Press
+    due to light background convention.
+
+# ─────────────────────────────────────────
+# TABOO ELEMENTS
+# ─────────────────────────────────────────
+# These are absolute prohibitions. No exception for any series, volume, or market.
+# Market adaptations (regulatory badges, etc.) are excluded from this list.
+
+taboo_elements:
+  - speed_lines
+  - screentone_burst_effects
+  - dramatic_action_poses
+  - impact_explosion_effects
+  - dark_horror_imagery
+  - gore_or_body_horror
+  - highly_saturated_colors
+  - red_tones_dominant
+  - military_or_weapon_imagery
+  - urban_industrial_backgrounds
+  - heavy_machinery_backgrounds
+  - exclamation_graphic_effects
+  - digital_HUD_elements
+  - isekai_status_windows
+  - glowing_power_auras
+  - monster_or_creature_violence
+  - aggressive_eye_contact_direct_threat
+  - forced_dramatic_lens_distortion
+  - overly_stylized_anatomical_exaggeration
+  - neon_glow_effects
+  - dystopian_urban_decay
+  - dark_fantasy_elements_out_of_genre
+  - chibi_or_super_deformed_style_on_front_cover
+
+taboo_notes:
+  red_tones_dominant: >
+    Exception: autumn foliage (momiji) in environmental compositions is permitted.
+    Red as a *natural element within context* — leaves, clay soil, barn walls —
+    is fine. Red as a dominant compositional color (red sky, red background,
+    red clothing as primary) is not permitted.
+  urban_industrial_backgrounds: >
+    Exception: if a series is explicitly set in a small city or town and the
+    story requires urban settings, lightly treated cityscapes (soft focus,
+    partial view through window) may be approved on a per-series basis by brand admin.
+
+# ─────────────────────────────────────────
+# LOGO LOCKUP
+# ─────────────────────────────────────────
+
+logo_lockup:
+  position: lower_left_back_cover
+  front_cover_position: none
+  front_cover_position_notes: >
+    Stillness Press does NOT place its logo on the front cover. This is intentional
+    and brand-defining. The front cover belongs entirely to the illustration and title.
+    Publisher identification lives on the spine and back cover only.
+    This is consistent with literary fiction publishing conventions worldwide
+    and reinforces the brand's "thoughtful reader" positioning.
+  spine_position: bottom
+  spine_position_notes: >
+    Logo appears at the bottom of the spine (in the orientation that text is read
+    top-to-bottom for JP, or at the bottom when book is shelved spine-out for US).
+    On spines narrower than 5mm, only the logo mark (enso circle) is used, not the wordmark.
+  size_relative: 0.08
+  size_relative_notes: >
+    8% of cover width. On a 112mm JP tankōbon: approximately 8.96mm wide.
+    This is intentionally small and humble. The logo does not compete.
+  color_variant: ink_dusk
+  color_variant_notes: >
+    Primary logo in ink_dusk. On dark backgrounds, use cream_light logo variant.
+    Never use moss_shadow for logo — too close in luminosity to backgrounds.
+
+  logo_description: >
+    The Stillness Press logo is a brush-painted enso circle (Japanese: 円相)
+    — an open circle drawn in one gesture, symbolizing completeness, the present moment,
+    and imperfection. Beneath it: "STILLNESS" in Lato Light, 0.6× the circle diameter.
+    The logo reads as a publisher mark of literary intention, not commercial branding.
+    Readers who know the enso meaning understand immediately what this press values.
+
+# ─────────────────────────────────────────
+# SERIES DEFAULTS
+# ─────────────────────────────────────────
+# Default values that series signatures inherit unless explicitly overridden.
+
+series_defaults:
+  composition_variant: environmental_midground
+  composition_variant_notes: >
+    Midground as default: character visible but not dominating, setting equally present.
+    Series that need intimate close-up work may use environmental_foreground.
+    Series with very strong landscape focus may use environmental_aerial.
+
+  background_treatment: environment
+  background_treatment_notes: >
+    Rendered scene backgrounds always. Solid color and gradient reserved for
+    exceptional circumstances (promotional volumes, special editions).
+
+  character_pose_preference: at_rest
+  character_pose_preference_notes: >
+    Standing, seated, observing. Not walking with intent, not running, not fighting.
+    At_rest means the character is present in the world, not rushing through it.
+
+  seasonal_variation: true
+  seasonal_variation_notes: >
+    Covers reflect the dominant season of that volume's story content.
+    For a 12-volume series, the seasonal arc should cycle through all four seasons.
+    Specific assignment is governed by the volume variation mood_beat and setting_variant,
+    but the general principle is: covers feel like seasons of the year.
+
+  focal_element_bias: setting_dominant
+  focal_element_bias_notes: >
+    Series-level default toward setting_dominant composition. Character_dominant
+    and object_symbolic are available in volume variations but less frequent.
+
+# ─────────────────────────────────────────
+# COVER EVOLUTION PRINCIPLE
+# ─────────────────────────────────────────
+
+cover_evolution_principle: >
+  Across a series, covers should feel like walking through a year.
+  Volume 1: spring — green, open, beginning.
+  Volume 2: early summer — lush, warm, deepening.
+  Volume 3: high summer or early autumn — complex, transitioning.
+  Volume 4: late autumn — reflective, cooling.
+  Volume 5: winter — spare, essential, quiet.
+  Volume 6: spring again — but different. The character has changed within the same world.
+  The world of the series does not need to be literally seasonal. The covers communicate
+  emotional season even when set in a world without defined seasons.
+  By the time a reader has collected a full series, the spines together should tell a story
+  of passage — light moving across a landscape over the arc of a year.
+
+# ─────────────────────────────────────────
+# PRODUCTION NOTES
+# ─────────────────────────────────────────
+
+production_notes:
+  paper_stock_preference: matte
+  paper_stock_notes: >
+    Matte paper only. Gloss is incompatible with the restrained register.
+    Gloss finishes create visual noise (reflections, fingerprints visible) that
+    breaks the contemplative quality the brand requires.
+
+  lamination: matte
+  lamination_notes: >
+    Matte lamination on all physical covers. Soft-touch matte available for
+    special editions (adds cost but reinforces the premium, tactile quality).
+
+  spot_uv: false
+  spot_uv_notes: >
+    No spot UV. The restrained aesthetic does not use dramatic light-catching effects.
+    Exception: a very subtle spot UV on the enso logo only, for special edition printing,
+    may be approved by brand admin on a per-title basis.
+
+  embossing: false
+  embossing_notes: >
+    No embossing for standard runs. Special editions (anniversary, omnibus) may
+    use a single embossed element (the recurring motif, or the enso mark) with
+    brand admin approval.
+
+  ink_notes: >
+    Standard 4-color CMYK printing. No spot colors required (palette achieves
+    its target look in CMYK without spot color matching).
+    For JP market: Japan Color 2011 Coated ICC profile.
+    For US/AU/MX: US Web Coated SWOP v2.
+    For EU markets: ISO Coated v2.
+
+  inside_cover:
+    front_board: cream_light
+    back_board: ink_dusk
+    notes: >
+      Inside front board in cream_light — a warm welcome when the jacket is removed.
+      Inside back board in ink_dusk — the forest dark that closes the book.
+      No printing beyond board color for standard runs.
+      Special editions may include a small spot illustration (character or motif only).
+
+# ─────────────────────────────────────────
+# EXAMPLE REFERENCES
+# ─────────────────────────────────────────
+# Real-world published manga that exemplify the Stillness Press visual register.
+# Used as training reference for visual agents and as design calibration for
+# new series signatures.
+
+example_references:
+  - title: "Yotsuba&! (よつばと!)"
+    publisher: "ASCII Media Works / Dengeki Comics"
+    notes: >
+      Environmental composition: the world is vast and curious, and the child
+      is a small, delighted presence within it. Covers use white space generously.
+      Natural palette. Cover energy is wonder, not urgency. The setting (suburban
+      neighborhood, park, beach) is always identifiable and present, not just backdrop.
+
+  - title: "Barakamon"
+    publisher: "Square Enix / G Fantasy Comics"
+    notes: >
+      Seasonal variation demonstrated across volumes. Restrained typographic approach.
+      The calligrapher protagonist's presence is linked to his craft and setting —
+      he is a person in a place, not a figure against a dramatic backdrop.
+      Warm clay and natural greens appear throughout.
+
+  - title: "Aria (天然水 / AQUA)"
+    publisher: "Mag Garden"
+    notes: >
+      Extreme use of white space — some covers are nearly empty of content.
+      Pastel palette, environmental focus (Neo-Venezia canals), mood is unhurried.
+      Typography is understated. The covers feel like watercolor illustrations.
+      This is the upper bound of restraint for Stillness Press — we use slightly
+      more character presence and natural grounding than Aria.
+
+  - title: "Silver Spoon (銀の匙)"
+    publisher: "Shōgakukan"
+    notes: >
+      Agricultural setting as visual identity. Covers consistently place the
+      protagonist within farming contexts — animals, equipment, fields.
+      Warm palette weighted toward yellows and tans. The setting's specificity
+      (Hokkaido agricultural school) creates immediate world recognition.
+      Character occupies 40-50% of cover — somewhat more than Stillness Press default,
+      but composition always anchors character within the setting.
+
+  - title: "Mushishi (蟲師)"
+    publisher: "Kodansha"
+    notes: >
+      Masterclass in restrained color palette. Blues, greens, and pale yellows.
+      Environmental compositions where the natural world has more presence than
+      the protagonist. Ink_dusk equivalent used throughout for shadows and depths.
+      The covers communicate: this world has rules we do not fully understand.
+      Relevant for Stillness Press series with supernatural or mysterious elements.
+
+  - title: "Natsume's Book of Friends (夏目友人帳)"
+    publisher: "Hakusensha"
+    notes: >
+      Nature as emotional register. Recurring motif (the Book of Friends) appears
+      across volumes. Character exists in profound relationship with the natural
+      world. Seasonal variation visible across the series. Soft line quality.
+      This is the emotional tone Stillness Press aims for in its quieter series.
+
+# ─────────────────────────────────────────
+# MARKET-SPECIFIC OVERRIDES
+# ─────────────────────────────────────────
+# Brand-level preferences for specific markets.
+# These supplement (not replace) the market rules in schema.yaml.
+
+market_preferences:
+  JP:
+    spine_mural_plan_required: true
+    spine_mural_notes: >
+      Every Stillness Press JP series must have a spine mural plan before Vol. 1 ships.
+      The mural is typically a panoramic natural landscape from the series' world.
+      Planned for 12 volumes minimum. Extends gracefully for ongoing series.
+    inside_cover: true
+    inside_cover_front: cream_light
+    inside_cover_back: ink_dusk
+    dust_jacket: true
+    flap_character_illustration: secondary_character_or_protagonist_casual
+    flap_background: cream_light
+
+  US:
+    logo_on_front_cover: false
+    logo_on_front_cover_notes: >
+      US convention often places publisher logo on front cover lower-left or lower-right.
+      Stillness Press maintains its no-front-cover-logo policy in US market.
+      Publisher identification on spine and back cover only.
+    rating_badge_placement: back_cover_lower_right
+    isbn_adjacent_to_barcode: true
+
+  FR:
+    loi_1949_notice_required: true
+    price_with_tva: true
+
+  DE:
+    altersfreigabe_badge_required: true
+    altersfreigabe_min_size_mm: 25
+    price_with_mwst: true
+
+  CN:
+    content_review_required: true
+    content_review_notes: >
+      All CN market covers and series content must be reviewed for NPPA compliance
+      before print. Stillness Press content is generally low-risk (no supernatural
+      elements, no political content, no LGBTQ+ content in core line) but review
+      is mandatory regardless.
+    shu_hao_required: true

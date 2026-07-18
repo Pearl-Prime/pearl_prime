@@ -1,0 +1,40 @@
+{
+  "panel_id": "p02_standing_medium_clear_floor",
+  "layer_type_used": "L2",
+  "layer_roles": {
+    "layer_00.png": "model_composite",
+    "layer_01.png": "support_zone_background",
+    "layer_02.png": "clean_foreground_subject"
+  },
+  "structural_template_id": "standing_room_scene",
+  "support_zone_contract": [
+    {
+      "zone_id": "clear_floor",
+      "kind": "floor",
+      "polygon_pct": [
+        [
+          0,
+          65
+        ],
+        [
+          100,
+          65
+        ],
+        [
+          100,
+          100
+        ],
+        [
+          0,
+          100
+        ]
+      ],
+      "occupancy": "clear",
+      "allows_character_support": true,
+      "allowed_structural_templates": [
+        "standing_room_scene"
+      ],
+      "priority": 0
+    }
+  ]
+}

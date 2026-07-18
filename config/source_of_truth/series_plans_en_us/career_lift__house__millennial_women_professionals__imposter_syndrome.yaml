@@ -1,0 +1,65 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: career_lift__house__millennial_women_professionals__imposter_syndrome
+brand: career_lift
+teacher: null
+persona: millennial_women_professionals
+topic: imposter_syndrome
+byline_author: maya_tam
+arc:
+  installment_1:
+    book_id: career_lift__house__millennial_women_professionals__imposter_syndrome__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__imposter_syndrome__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: career_lift__house__millennial_women_professionals__imposter_syndrome__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__imposter_syndrome__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A warm, honest companion for the capable woman who keeps waiting
+  to be found out — not a cure for the fear, but room to stop performing and turn
+  the page on who she was told she had to be at work.
+bestseller_hook_family: ''
+emotional_engine: imposter_syndrome_recognition
+comp_series:
+- The Imposter Cure (Dr. Jessamy Hibberd) — names the fraud-feeling without shaming
+  the reader who has it.
+- How to Be Yourself (Ellen Hendriksen) — warm, non-clinical work on social fear and
+  the belief that you're about to be found out.
+- The Gifts of Imperfection (Brené Brown) — shame, worthiness, and letting go of who
+  you think you're supposed to be.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: late twenties to late thirties
+  where_they_are: It's 9pm and she's still rereading the email she sent this morning,
+    certain a smarter person would have phrased it better — and certain that, eventually,
+    the room will figure out she's been bluffing this whole time.
+  what_they_need: Permission to stop treating her own success as a clerical error,
+    and a way to keep showing up to the next chapter of her career without first having
+    to feel like she's earned the right to be there.
+  what_they_avoid: Girlboss hustle, 'manifest your dream job' affirmations, influencer
+    confidence theatre, and toxic positivity that pretends career fear is just a mindset
+    she hasn't fixed yet.
+series_voice_markers:
+  register: encouraging, forward-looking, grounded; the voice of a slightly-further-along
+    colleague who has felt the same fraud-fear and won't pretend it away — warm and
+    practical, never clinical, never preachy, never hype
+  sentence_rhythm: conversational and unhurried, with short declarative lines landing
+    the hard truths; second person throughout, building toward an exhale rather than
+    a crescendo
+  metaphor_family: the next chapter and the turning page, the threshold and the doorway,
+    the room you haven't walked into yet, the step up that costs something, the draft
+    of yourself you're still writing
+_needs_authoring: false

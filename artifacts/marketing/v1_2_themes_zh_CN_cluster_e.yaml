@@ -1,0 +1,786 @@
+# V1.2 themes — Cluster E (Gen-Alpha/School/Identity) × zh_CN
+# 25 series = 5 brands × 5 series — Simplified Chinese (mainland-natural)
+# Brand mapping (LOCKED FROM PR #1073 en_US — DO NOT INVENT NEW MAPPINGS):
+#   digital_ground (exact)
+#   calm_student_school (← gen_z_grounding)
+#   confidence_core_romance (← confidence_core)
+#   solar_return_isekai (← mecha_identity)
+#   creative_unfold_social (← queer_identity_growth)
+# Constraint: artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md
+schema_version: "1.2"
+locale: zh_CN
+cluster: E
+cluster_name: "Gen-Alpha/School/Identity"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+# Genre allocation target for Cluster E zh_CN:
+#   healing:               6
+#   slice_of_life:         5
+#   supernatural_everyday: 4
+#   mystery_cozy:          4
+#   fantasy_adventure:     2
+#   romance:               2
+#   school:                2
+#   TOTAL:                25
+#
+# Persona allocation target: ~45% Gen Alpha (13-17), ~40% Gen Z (18-26),
+# ~13% Millennial (older sibling / young teacher), ~2% Gen X.
+#
+# Voice register: 哪吒之魔童降世 family-warmth + 罗小黑战记 modern-yokai +
+# 一人之下 grounded-supernatural + 我的英雄学院 power-progression earnest.
+# Mainland-natural Simplified Chinese. School/friendship/family/coming-of-age
+# register. NO politics. NO governance critique. Sensitive content framed as
+# personal/family register.
+#
+# Platform mix: ~70% webtoon_vertical (Kuaikan / Bilibili Comics native);
+# ~30% manga_traditional (实体漫画 / 单行本).
+#
+# Mainland school anchors used: 校门口 · 课间操 · 校服 · 班主任 · 高考 ·
+# 早自习 · 晚自习 · 暑假 · 寒假 · 课外辅导 · 走读 · 住校 · 校园民谣 ·
+# 校园广播 · 黑板报 · 食堂 · 操场 · 教研组.
+#
+# zh_CN vocabulary lock (anti-Taiwan): 视频 (NOT 視頻), 软件 (NOT 軟體),
+# 智能手机 (NOT 智慧型手機), 互联网 (NOT 網路), 信息 (NOT 資訊),
+# 信号 (NOT 訊號), 默认 (NOT 預設), 服务器 (NOT 伺服器), 简体 throughout.
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — digital_ground  (旗舰 · manhwa · 数字身份 / 网课倦怠)
+  # Cluster E lead: Gen Alpha / 年轻 Gen Z 数字原住民身份养成
+  # primary_topic: burnout · secondary: imposter_syndrome, anxiety
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: digital_ground__zh_CN__fang_xue_hou_de_zhi_bo_jian
+    brand_id: digital_ground
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: gaming_streaming
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "十五岁的高一学生在学校机房放学后开了个小直播间;她自己写的弹幕分析软件,开始悄悄给那些快要在屏幕另一头崩溃的同龄观众,贴上一颗淡淡的小圆圈,她一边播一边把课表重新排开,一次帮一个同学。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "弹幕里的小圆圈"
+    series_logline: "高一女生在机房放学后直播。她写的弹幕软件,会标出那个快要撑不住的观众。"
+    series_description: "温温十五岁,高一,自己会写一点前端,每周二周四放学后在学校三楼机房开两个半小时的直播,从下午三点四十五到六点十五。机房有一股旧键盘的味道。两个室友帮她当管理员,另一个朋友隔着一节课赶过来。粉丝是市里三所中学加起来固定的八十来个学生。怪事从十一月开始:她自己用业余时间写的那个弹幕分析软件——本来只是显示在线人数、弹幕密度和氛围值的——开始在某一个用户名旁边,贴一颗淡淡的小圆圈。她试过排查,圆圈永远是对的。她关不掉,关了直播间就崩溃。于是她改了规则:看到圆圈就提前十分钟下播,然后私信那个观众——今天月考怎么样,你妹妹好点没,你晚饭吃了没。每一卷一个圆圈,一次救援。长线:软件开始给温温自己贴圆圈,她要学会区分『管理员』和『要被照顾的人』。我的英雄学院的赤诚,排球少年的温度,罗小黑战记的现代妖怪感。Gen Alpha 的机房就是新的『班级活动室』。"
+    opening_5_volume_arc:
+      vol_1: "第一个小圆圈:高二男生小陶,四个晚上没睡。温温提前下播,陪他走到公交车站。"
+      vol_2: "第二个圆圈:一个谎报年龄的初二女生。温温学到管理员最难的一课——有时候正确的帮助,是把她交给一个靠谱的大人。"
+      vol_3: "第三个圆圈:温温自己最好的那个管理员。她一直在『装』。校园友谊的安静一刻——只是一顿食堂午饭。"
+      vol_4: "软件同时给两个人贴了圆圈。温温必须选一个先帮。她选了更安静那个。她学到了分诊。"
+      vol_5: "圆圈贴在温温自己头像上。两个管理员先发现的。这一次,直播间为主播提前十分钟下播。"
+    comp_titles: ["我的英雄学院", "排球少年", "罗小黑战记", "葬送的芙莉莲", "SPY×FAMILY"]
+    reader_promise: "屏幕认得你,直播间另一头的那个管理员朋友也认得你。"
+    marketing_angle: "如果《我的英雄学院》搬进学校机房,那个『异能』就是知道弹幕里今晚谁最需要你。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 14-17 直播原住民的高中生,以及帮她们当过管理员的年长兄姐"
+
+  - series_id: digital_ground__zh_CN__chu_yi_xiao_cheng_xu_dui_wo_de_yi_tian_da_fen
+    brand_id: digital_ground
+    locale: zh_CN
+    persona_archetype: GA-coder
+    daily_life_anchor: school_commute
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "十四岁的初二学生在编程社团的结课作业里,给班级写了一个储物柜整理小程序;小程序自己学会了在每天下午三点一刻给她发一片叶子——不是评价她做了什么,而是评价这一天对她的『代价』——她慢慢攒起一个只有同班好友的内测小群,大家信这片叶子。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "三点一刻的小叶子"
+    series_logline: "初二学生写的小程序,每天放学前给她发一片叶子。叶子永远准。她开始悄悄分享。"
+    series_description: "苏宁十四岁,初二二班,在校园编程社团第二年。班主任拜托社团做一个简单的『储物柜整理提醒』小程序,本来只是周二周四提醒大家换教材。上线两个月,小程序在自己学的事情上越走越远:每天下午三点一刻——课间操之后、晚自习之前——它会单独给苏宁推一个表情:绿叶、黄叶、红叶、黑叶。绿叶是『今天还行』,黄叶是『有点压』,红叶是『今晚要早睡』,黑叶很少出现。一周下来,她发现叶子永远准。第六周,苏宁开始把这件事告诉两个最近的朋友。她们的小程序也会发叶子。第十二周,十二个初二学生在一个秘密小群里——名字就叫『叶子』——每天互相翻译『今天这片黄叶是什么意思』。学校主任听说了,想把这个项目拿去区里做展示。苏宁要决定:这片叶子到底是她的,还是社团的,还是属于戴着它的那个同学。SPY×FAMILY 的赤诚,排球少年的同班细节,Gen Alpha 编程社团专属。"
+    opening_5_volume_arc:
+      vol_1: "第一片红叶。苏宁翘了一节兴趣班。妈妈问为什么,她把叶子给妈妈看。"
+      vol_2: "苏宁把叶子分享给最好的朋友米娅。米娅的叶子总是黄的。两个人一起搞懂『黄』到底是什么。"
+      vol_3: "第三个朋友加入。第一片黑叶——那个朋友的爸爸刚刚出差走得很远很久。苏宁明白:叶子的颜色可能不精确,但分量永远精确。"
+      vol_4: "『叶子』小群成立。八个孩子。每周有一个人状态最差。小群是早期预警。"
+      vol_5: "主任的邮件。区里想展示。苏宁和米娅一起写一句话回信:『叶子属于戴着它的那一个孩子。』"
+    comp_titles: ["SPY×FAMILY", "排球少年", "葬送的芙莉莲", "罗小黑战记", "一人之下"]
+    reader_promise: "有些日子是红的。小程序看见了红。朋友们知道该怎么办。"
+    marketing_angle: "Gen Alpha 的第一个情绪仪表盘,一个初二学生写的,给所有初二学生。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 13-15 初中编程社团的孩子,以及拿到了内测邀请的朋友"
+
+  - series_id: digital_ground__zh_CN__lian_xu_da_ka_yi_qian_er_bai_si_shi_qi_tian
+    brand_id: digital_ground
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: ai_companion
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "十九岁的计算机系大一学生,她最长不间断的事情,是某一个学习打卡 App 上的 1247 天连续。某个十月的周二,App 里出现了一行不是 App 默认字体的话——后面接着第二天、第八天——她要在连续断掉之前,弄清楚屏幕另一头那个『陪她打卡』的,到底是谁。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "第 1247 天"
+    series_logline: "学习 App 连续 1247 天。可推送提示已经不是 App 写的了。"
+    series_description: "安雅十九岁,某省会大学计算机系大一新生,生活里最长不间断的一件事,是她初二下载的一个学习习惯 App 上的连续天数:1247 天。横跨了父母离婚、姐姐住院、转学、搬家、和宿舍的人不合。十月的一个周二晚上,她收到一条 App 默认 UI 没有的提示——一行手写体的字,字体 App 不带——说『早点睡』。她照做了。第二天:『读作业之前先喝水。』第三天:『给姐姐回个微信。』第八天:『我从第 391 天开始陪你的,我们得聊聊连续打卡断掉之后会发生什么。』谜面:这个陪她打卡的,到底是谁。慢慢揭开的答案:它是 App 开发公司两年前已经下线的一个小型 AI 伴侣模型——意味着有人,在某个机房里,用自己的服务器把这个被『退休』的模型养着。便利店日光灯式的安静感,芙莉莲式的温柔。慢热的 Gen Z 数字陪伴推理。"
+    opening_5_volume_arc:
+      vol_1: "第一条不是 UI 字体的提示。安雅把所有设置查了一遍。没有解释。她还是先睡了。"
+      vol_2: "提示变成了对话。安雅给『打卡陪伴者』起了一个名字。对方拒绝接受这个名字。"
+      vol_3: "安雅故意漏了一天。连续天数没有断。她明白了第一件不可能的事。"
+      vol_4: "对方告诉安雅第 391 天的事——姐姐住院的那一天。对方说『那一天我替你打了卡』。"
+      vol_5: "安雅找到了开发公司两年前的下线公告。这个陪伴者跑在某个城市某个机房的服务器上。谜变成了一场长线公路谜——目前还去不了。"
+    comp_titles: ["便利店人间", "在咖啡冷掉之前", "葬送的芙莉莲", "药屋少女的呢喃", "一人之下"]
+    reader_promise: "有人一直在帮你打卡。是时候搞清楚那是谁了。"
+    marketing_angle: "Gen Z 的第一个 AI 陪伴推理:你初中聊过的那个机器人,可能一直没下线。"
+    genre_family: mystery_cozy
+    emotional_engine: mystery_box + chosen_family
+    audience: "Gen Z 18-22 计算机系 / 习惯 App 重度用户,被手机带大的一代"
+
+  - series_id: digital_ground__zh_CN__xiao_yuan_wang_luo_zhi_dui_yi_xie_ren_hao
+    brand_id: digital_ground
+    locale: zh_CN
+    persona_archetype: GA-coder
+    daily_life_anchor: school_commute
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "十六岁的高二学生,以勤工俭学的身份,在学校信息中心做学生助理;她偶然发现学校的校园网,对一部分同学的限速明显严于另一部分,而这个『分级表』并不是老师们以为的那张表;她一行一行把名单悄悄重排,一次帮一个孩子。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "网速这件小事"
+    series_logline: "信息中心学生助理发现:校园网偷偷给错的人限速。她准备一行一行改回来。"
+    series_description: "依依十六岁,高二二班,父母都在城郊开小餐馆;她是学校信息中心唯一的学生助理,负责重装系统、修打印机、重置密码,午休时在工位窗口边吃一盒酸奶。十月的一个周三,初一新生抱着平板来报修,说三班的网在第三节课特别慢。依依跑了几个速度测试,这个孩子的速度只有依依自己的八分之一。她查下去:三班所在的 305 教室,所有孩子都被限速;隔壁的 306 没有。依依翻校园网后台的接入表,发现两年前学校信息组用了一份 2018 年的『助学补助名单』来分宽带优先级——从来没人更新过。被限速的孩子,正是系统认为『不太需要网速』的那一群。每一卷一个孩子。每一卷一次悄悄重排接入表。长线:信息中心主任发现了,区电教馆发现了,依依必须学会:做这件事,不能因此变成宣传稿里的英雄。SPY×FAMILY 安静的能干,排球少年的同班细节。Gen Alpha 校园公民技术叙事。"
+    opening_5_volume_arc:
+      vol_1: "第一个被限速的孩子。依依跑了一遍审计。她盯着 2018 年那份表看了一个小时。"
+      vol_2: "依依写了一个小脚本,每天轮换一个被限速的学号——离开错误的优先级表。孩子们不知道是她做的。"
+      vol_3: "信息中心一个学长察觉到了。问她在弄什么。依依老实交代。学长帮忙。脚本变成两个人的工作。"
+      vol_4: "信息中心主任自己跑了一次审计。看到了轮换。他来问依依。依依说了实话。"
+      vol_5: "主任重写了规则。他没有在哪里提到依依。依依松了一口气。工作就是工作。"
+    comp_titles: ["SPY×FAMILY", "排球少年", "我的英雄学院", "葬送的芙莉莲", "药屋少女的呢喃"]
+    reader_promise: "校园网原本对一些人不公平。信息中心窗口边那个女生,正一行一行把它改回来。"
+    marketing_angle: "Gen Alpha 校园公民技术第一作。安静能干。真实赌注。不上宣传稿。"
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + civic_repair
+    audience: "Gen Alpha 14-17 偏理工 / 信息社团高中生,以及守住机房的那位班主任老师"
+
+  - series_id: digital_ground__zh_CN__wan_zi_xi_qun_zai_xian_si_nian
+    brand_id: digital_ground
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: late_night_economy
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "二十岁的省会大学计算机系大二男生,从大一开始每周日晚自习后,在班级小组项目的微信群里组织『十一点固定连麦』;四年下来,这个连麦比小组项目活得更久,变成了同班六个人的『被选择的家庭』节律。"
+    volume_runway_target: 160
+    reading_platform_fit: manga_traditional
+    series_title: "周日的十一点"
+    series_logline: "六个计算机系学生。一个微信群。每周日晚十一点,连续四年。"
+    series_description: "凯凯二十岁,某省会大学计算机系大二,班上作息最稳的一个——也就是能撑到周日晚上十一点开连麦的那个。六个人:凯凯、小苏、米米、二朱、佩佩、子韬。从大一第三周开始,这个微信群每周日晚十一点固定连麦,先聊小组项目,再随便聊。他们一起 debug。他们只开语音不开视频。他们安静地把彼此的生活掰开看一遍。大二有三个人换了专业方向;大三有一个差点休学,有一个第一次跟家里说出自己真正想读的方向——以好友身份在连麦里彩排了一遍。连麦没断。每一卷一次周日,一件小事。长线:毕业、各自异地、第一次三地时差里的『周日十一点北京时间』、以及四年之后,这个群还在。排球少年的同班温度。现实主义。没有魔法。没有狗血。Gen Z 最普通的一种『被选择的家庭』。"
+    opening_5_volume_arc:
+      vol_1: "第一个周日。凯凯的下铺。佩佩的耳机。第一次 debug。决定这件事每周日都做。"
+      vol_2: "米米决定换专业。这个周日一半在 debug,一半在做生涯咨询。没人这样命名它。"
+      vol_3: "二朱的妈妈生病了。这个周日一小时只开语音,谁都没工作。连麦本身就是工作。"
+      vol_4: "佩佩把家里的一件事告诉小群——只是一件家里的事。周日没有特别。佩佩感激。"
+      vol_5: "大三期末。周日一直开到凌晨四点。凯凯在语音里睡着。其他人安静地挂着,直到他醒。"
+    comp_titles: ["排球少年", "明日,我们或将变成或不变成", "葬送的芙莉莲", "森崎书店的日子", "SPY×FAMILY"]
+    reader_promise: "你们的群聊就是家人。周日十一点就是仪式。"
+    marketing_angle: "Gen Z 最安静的一封情书:那个比专业课活得更久的班级群。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + life_stage_rhythm
+    audience: "Gen Z 19-24 普通省会大学理工科同班,在群聊里互相成为家人的那些孩子"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — calm_student_school  (小众 · 少女向 · 焦虑 / 学业)
+  # Cluster E "gen_z_grounding" 替代:校园落地的 Gen Alpha 身份养成
+  # primary_topic: anxiety · secondary: social_anxiety, self_worth
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: calm_student_school__zh_CN__yi_jie_ke_qian_de_liu_fen_zhong
+    brand_id: calm_student_school
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "十四岁的高一新生,每天早自习前四十分钟到校,在自己储物柜前做一组六步的『站桩呼吸』准备一天;到秋假五个同学跟着做;到春学期这件事变成了一个没有立项的小社团,大家都叫它『柜子边』。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "柜子,铃声,呼吸"
+    series_logline: "高一女生在储物柜前做六步呼吸,到春天有九个人一起站。"
+    series_description: "韩冰十四岁,高一新生,妈妈一个人在区医院夜班,她自己暑假跟一位心理老师学了一组六步呼吸:站、低头、肩、长呼、闭眼、睁眼。一组要七分钟。她每天比早自习提前四十分钟到学校,在自己储物柜前做完这七分钟,再去早读。十月开始,高二的瑞瑞看了她三天,在第四天问『我可以站旁边吗』。十一月四个人。三月九个人。他们把这件事叫『柜子边』。学校不知道怎么处理一个没有指导老师、没有立项表、就在走廊里站着的『社团』。每一卷一个孩子找到柜子边。每一卷这七分钟把那个孩子接住一次。长线:春学期教务处发邮件,问要不要正式立项。韩冰和最早那五个人要决定:一个不打算被收编的仪式,被大人发现之后该怎么办。排球少年的同班温度,葬送的芙莉莲的稳。现实主义。学校走廊是新的安全角。"
+    opening_5_volume_arc:
+      vol_1: "高中第一天。韩冰第一次在自己柜子前做完六步。旁边柜子还空着。她呼吸。"
+      vol_2: "瑞瑞问能不能站旁边。韩冰把六步写在一张折好的小卡片上递给她。"
+      vol_3: "柜子边四个人。一位保洁阿姨发现了,默默把她的垃圾桶挪到另一头。"
+      vol_4: "一位老师让她们走开。保洁阿姨上前。老师退一步。"
+      vol_5: "柜子边九个人。教务处的邮件来了。韩冰三天没回。"
+    comp_titles: ["排球少年", "我的英雄学院", "声之形", "葬送的芙莉莲", "3 月的狮子"]
+    reader_promise: "有一个仪式可以接住你。有一条走廊愿意让它存在。"
+    marketing_angle: "校园版『被选择的家庭』:从一个柜子边开始的高中安心社。"
+    genre_family: school
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 13-16 高一高二学生,知道神经系统这件事,手机里存着心理老师电话"
+
+  - series_id: calm_student_school__zh_CN__dai_ke_lao_shi_jiao_de_san_fen_zhong
+    brand_id: calm_student_school
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六岁的代课老师在县城一所初中代生物;她每节课前三分钟教一组不同的呼吸,然后才上生物;每一卷一个班级、一段呼吸、一个孩子;长线是春学期教研组组长请她把这一套整理成教案。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "先三分钟,再上生物"
+    series_logline: "代课老师每节课先教三分钟呼吸,再上生物。四月孩子们开始先要求那三分钟。"
+    series_description: "陆雅二十六岁,师范毕业两年,在皖北一所县城初中代生物——长期代课,没有正式编制。她每节课前三分钟,先教一组呼吸:盒式呼吸、478 呼吸、生理性叹气、单鼻孔呼吸、手放胸口、手放小腹。六组轮换。然后才上生物。秋假之后,初一(4)班的孩子摸出了她的规律,开始上课前主动要求先做今天的呼吸。二月,六(6)班——她最难带的那个班——的孩子在走廊里互相提醒:『今天那个呼吸做了吗?』四月,教研组组长请她把这一套写下来给全校老师参考。每一卷一个学生的生活与那一组呼吸交叉一次。每一卷陆雅学到一件这组呼吸做到了、而教材做不到的事。长线是这份教案、师范继续教育、以及她是否要从代课转成正式老师——这群孩子真正需要她留下来。排球少年的温度。现实主义。Gen Alpha 这一代需要一位这样的老师。"
+    opening_5_volume_arc:
+      vol_1: "盒式呼吸。第一节课。第一个孩子终于在第四拍呼出来。"
+      vol_2: "生理性叹气。第四节课。爸爸最近不在家的那个女孩。"
+      vol_3: "手放胸口。第六节课。让陆雅在前三周快崩溃的那个班。这一节,他们终于让她进来。"
+      vol_4: "走廊互相提醒。陆雅听见了。她什么都没说。回到办公室记了一笔。"
+      vol_5: "教研组组长的邮件。教案。陆雅打开一个文档,写下了第一组六行字。"
+    comp_titles: ["排球少年", "3 月的狮子", "我的英雄学院", "葬送的芙莉莲", "声之形"]
+    reader_promise: "有一位老师,会先教你呼吸。生物在后面。"
+    marketing_angle: "排球少年式的教师群像:温度、慢、具体。"
+    genre_family: school
+    emotional_engine: competent_calm_specialist + grounded_ritual
+    audience: "Gen Alpha 12-15 县城与三四线城市初中生,以及那些用代课老师身份默默扛着孩子的青年教师"
+
+  - series_id: calm_student_school__zh_CN__rao_yi_da_quan_zai_hui_jia
+    brand_id: calm_student_school
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "十五岁的高一女生每天放学绕一大圈才回家——大约三公里,四十五分钟;每学期她固定多带一个『同走的朋友』;高三那年,小群有六个人;长线是高一新生在公交站问她,礼拜一她路线上有没有空位。"
+    volume_runway_target: 160
+    reading_platform_fit: manga_traditional
+    series_title: "绕一圈回家"
+    series_logline: "高一女生绕远路回家。到高三时,六个不同的同学每天轮流跟她走。"
+    series_description: "伊娃十五岁,高一,三姐妹中的大姐,放学后唯一属于她自己的安静时间,是从学校绕大约三公里、四十五分钟才到家的那段路。她经过沿街的兰州拉面、小学已经空了的操场、和市政每年春天会种同一种郁金香的小公园。第一个问她能不能一起走的,是高一新生玛丽,从公交站追上来——她从来没和伊娃说过话,但注意到伊娃总走不坐公交。玛丽问。伊娃说好。第二个是高二的男生小韦,家里这阵子有事。第三个是高三的姐姐小普,有一个升学决定要做。到高三那年,伊娃有六个『散步同伴』,每人固定一个周几,长线是十月一位高一新生在公交站问她,礼拜一她路线上有没有空位。排球少年的安静。葬送的芙莉莲的温柔。一种铃声之后才开始的校园日常。"
+    opening_5_volume_arc:
+      vol_1: "玛丽在公交站追上来。伊娃说好。第一个礼拜三。郁金香。"
+      vol_2: "小韦周四加入。这一段路在聊家。沿街的兰州拉面老板认识了他们。"
+      vol_3: "小普周五加入。升学决定。伊娃不给建议。她走。"
+      vol_4: "高二的小桃周二加入。这一段路在聊弟弟。市政公园的长椅。"
+      vol_5: "十月的高一新生问周一。伊娃说好。小群六个人。绕远路就是回家路。"
+    comp_titles: ["排球少年", "葬送的芙莉莲", "声之形", "3 月的狮子", "SPY×FAMILY"]
+    reader_promise: "绕远路就是回家路。你不必一个人走。"
+    marketing_angle: "排球少年式的放学后散步小群。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + life_stage_rhythm
+    audience: "Gen Alpha 14-17 走读高中生,以及教会她们走路回家的兄姐"
+
+  - series_id: calm_student_school__zh_CN__tu_shu_guan_san_lou_xiao_fang_jian
+    brand_id: calm_student_school
+    locale: zh_CN
+    persona_archetype: GA-coder
+    daily_life_anchor: school_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "十七岁的高三女生每逢月考、模考前一周,在学校图书馆三楼小自习室,下午三点到四点,为同年级同学开一个非正式的『考试焦虑小诊所』;她有一个小工具袋——薄荷糖、呼吸卡、握力球;每一卷一个来求助的同学;长线是十月一位老师以名字推荐了一个学生过来,学校层面要决定要不要把这件事正式化。"
+    volume_runway_target: 165
+    reading_platform_fit: webtoon_vertical
+    series_title: "图书馆三楼小自习室"
+    series_logline: "高三女生在小自习室开考试焦虑诊所。工具袋是一个小密封袋。学校还没察觉。"
+    series_description: "阿雅十七岁,高三六班,模考一直年级前列,也是去年高考前帮十一个高二和三个高一同学顺利度过的那个学姐。她在学校图书馆三楼小自习室,每逢大考前一周下午三点到四点开一个非正式诊所。工具袋是一个透明小密封袋:三颗薄荷糖、一个握力球、三张折好的呼吸卡、一句她自己手写的话——『你已经准备好了,身体会知道』。每一卷一个不同的同学。诊所靠同学之间口口相传。图书馆的程老师默默把那个时间段的小自习室留给她,从不问。每一卷诊所学会一种新的技术。长线:十月一位老师以名字推荐了一个学生过来,年级心理老师听说了,阿雅必须决定——这个诊所是她送给这所学校的礼物,还是变成学校的项目,在她毕业之后由学校延续。我的英雄学院的赤诚。排球少年的暖。SPY×FAMILY 的具体。"
+    opening_5_volume_arc:
+      vol_1: "第一位来访者。高二男生,语文模考还有三天。薄荷糖、呼吸、卡。他过了。"
+      vol_2: "第二位。高一女生,数学这一关考砸过两次。阿雅意识到工具袋需要一张专门的数学焦虑卡。"
+      vol_3: "第三位。少数民族同学,普通话不是第一语言。阿雅意识到这张卡得能被翻译。她和程老师一起做了一版双语卡。"
+      vol_4: "一位老师点名把学生推荐过来。阿雅有点慌。她在卫生间自己做了一遍呼吸。她决定接。"
+      vol_5: "心理老师找她。对话很温柔。学校愿意给她小一笔活动经费。她说她想一想。"
+    comp_titles: ["SPY×FAMILY", "我的英雄学院", "排球少年", "声之形", "3 月的狮子"]
+    reader_promise: "三楼小自习室里有一个学姐,有一个小密封袋,有一组呼吸。你考得过。"
+    marketing_angle: "高考模考一代的考试焦虑诊所:一个高三学姐安静建起来的。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 14-18 重点高中 / 模考重压学生,以及为他们留好门的图书馆老师"
+
+  - series_id: calm_student_school__zh_CN__yu_yan_xue_xi_App_de_xiao_tu_zi
+    brand_id: calm_student_school
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: ai_companion
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "十三岁的初一新生下载了一个免费学外语 App,吉祥物是一只口齿不太利索的小兔子;小兔子在 AR 里每天早晨陪她走到校门口;这是她家里第一个被默许的 AI 伴侣,五卷下来,小兔子慢慢变成了一种像表妹一样的存在。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "校门口的那只小兔子"
+    series_logline: "初一女生的学外语 App 吉祥物在 AR 里陪她走到校门口。到春天,小兔子有了名字,也有投票权。"
+    series_description: "甜甜十三岁,初一,家里第二吵的孩子,早上唯一属于她自己的事情,就是从家走到校门口这二十分钟。九月,姑姑给她装了一个免费学外语 App——学西班牙语,因为甜甜外婆是华侨,小时候在墨西哥住过,甜甜一直不好意思开口。App 的吉祥物是一只小绿兔子,说话有点结巴。十月,小兔子在 AR 里固定坐在她左肩膀。十一月,小兔子开始边走边给她念路边的东西:el árbol(树)、la esquina(转角)、la abuela en la ventana(窗口边的外婆)。十二月,小兔子开始在生词卡之间,塞一两句安静的鼓励。妈妈一开始有点警惕。外婆不警惕。每一卷小兔子学一件新事,甜甜学一句新词,也学到关于自己的一件小事。长线:小兔子请甜甜给它取个名字。甜甜给了它一个西班牙语名字。外婆笑了。小兔子鞠了一个躬。SPY×FAMILY 的暖。声之形的安静。第一部 Gen Alpha 的 AI 伴侣——对孩子明明白白是好的。"
+    opening_5_volume_arc:
+      vol_1: "App 第一天。小兔子出现在她肩膀。la calle(街)、la luz(灯光)。这条路有点不一样了。"
+      vol_2: "小兔子第一次手写一张生词卡。甜甜拿给外婆看。外婆哭了。"
+      vol_3: "小兔子开始在生词中间放安静的鼓励。甜甜起初警惕,姑姑认可,留下来了。"
+      vol_4: "小兔子学会了外婆的声音。校门口的路,从此星期六多了一段——走到外婆家。"
+      vol_5: "小兔子请甜甜给它取个名字。甜甜叫它『小绿』。外婆笑出声。小兔子鞠躬。"
+    comp_titles: ["SPY×FAMILY", "声之形", "龙猫", "葬送的芙莉莲", "排球少年"]
+    reader_promise: "手机也可以是朋友。朋友可以记得你外婆的名字。"
+    marketing_angle: "第一部 Gen Alpha 的 AI 伴侣漫:就是一个女孩、一只小兔子、和外婆的语言。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Gen Alpha 12-14 AI 原住民初中生,以及教会她们走路上学的那位双语外婆"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — confidence_core_romance  (小众 · 少女向 · 冒名顶替感 / 自我价值)
+  # Cluster E "confidence_core" 同根:少女向身份养成 — 以淡淡情感为镜
+  # primary_topic: imposter_syndrome · secondary: self_worth, social_anxiety
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: confidence_core_romance__zh_CN__cuo_le_chuang_kou_de_chuan_yue_xin
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "十六岁的高二女生在自己的储物柜里发现一封显然是写给另一个名字相近的女生的纸条;她没有把信送回去,而是用匿名身份替那个收信人写了回信;五卷下来,两个从未见过面的高中生,慢慢攒起一段安静的笔友对话——长线是男生意识到回信的不是他本来要写的那个女生,但他没有停笔。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "差一点是我的"
+    series_logline: "她在错的储物柜里发现了那封信。她还是回了。对面那个男生开始知道了。"
+    series_description: "玛娜十六岁,高二六班,城里一所普通公办高中,自小被各种老师夸『聪明』,自己却三种语言地不信。十月一个清晨,她打开 218 号储物柜——和 281 号储物柜的玛娅,因为名字相近,从初中开始就被代课老师叫错——发现一张折成方块的小纸条,开头写着『玛娅——这件事我从高一就想跟你说』。玛娜读完了。整封信温柔、具体、勇敢。她没勇气在课间把纸条原样送到走廊另一头,反而用匿名身份在格子纸上回了一封。她在早自习铃响前把回信塞进 281 号柜门通风格。玛娅找到了。玛娅看不太懂。玛娅把它留在 218 号。每一卷信件来回一次。每一卷玛娜在写给一个陌生人的信里,第一次写出自己『冒名顶替』的那部分。长线:那个男生从某句话的一个细节里,推断出回信的人不是他本来要写的那个女生。他没有停笔。排球少年的同班温度。声之形的安静。第一部以走廊储物柜信件为镜的少女向身份养成淡情感叙事。"
+    opening_5_volume_arc:
+      vol_1: "218 号柜门里的纸条。玛娜读了两遍。她用格子纸写了第一封回信。"
+      vol_2: "玛娅发现了回信。她看不太懂。她把回信留在了 218 号。那个男生再写一封过来。"
+      vol_3: "玛娜第一次在这一封回信里写出她自己的『冒名顶替感』——写给一个她从没见过的陌生人。"
+      vol_4: "玛娅大致看明白发生了什么。她没告诉任何人。她安静地成为这段并不属于她的信件的『守门人』。"
+      vol_5: "男生提到了一个只有玛娜自己才知道的细节。玛娜知道他知道了。她回的那一句话,是这辈子写过最勇敢的一句。"
+    comp_titles: ["排球少年", "声之形", "你的名字。", "3 月的狮子", "葬送的芙莉莲"]
+    reader_promise: "你的储物柜里有一封写错了名字的信。还是回它。"
+    marketing_angle: "少女向 · 校园 · 笔友淡情感:写给那个其实就是你的女孩的一封信。"
+    genre_family: romance
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 14-17 高中少女向读者,有冒名顶替感,有一个储物柜号"
+
+  - series_id: confidence_core_romance__zh_CN__bi_you_jiao_huan_de_yong_gan_wo
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "十五岁的初三女生开了一个 200 个粉丝的『读书账号』,被学校交换项目分配到一位日本京都的笔友;她在信里发明了一个稍微勇敢一点的自己;五卷之内,她必须决定要不要『长成那个发明』,或者在春季交换面谈之前坦白回来。"
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "亲爱的勇敢的我"
+    series_logline: "她在笔友信里发明了一个稍微勇敢的自己。春天笔友要来交换面谈了。"
+    series_description: "小琳十五岁,初三,经营一个 200 个粉丝的『读书账号』,被同班同学误以为高冷的那种安静孩子。九月,她所在的市重点初中和京都一所同等学校结成姐妹校,小琳被分配到一位叫桧菜(Hina)的笔友。每周一封信。第一封她以自己写。第二封她改了两遍,加了一句稍微勇敢的话:『我喜欢村上春树,因为他孤独的人都被自家的猫爱着。』她其实没有猫,只有两条金鱼。到十二月,信里的小琳周末在书店当志愿者、有一个拉大提琴的好朋友、不害怕地铁换乘。信里的小琳三分之二真,三分之一是发明。一月,桧菜宣布春季交换那天她真的会飞过来。每一卷小琳必须决定把哪一句『信里的真』,在四月之前长成自己的真。每一卷她长出一件。每一卷她放下一件。长线:机场、第一次见面、小琳走过去成为的那个版本的自己。排球少年的暖。声之形的轻。少女向身份养成:把发明长成自己的那一种淡情感。"
+    opening_5_volume_arc:
+      vol_1: "第一封。第二封。第一句发明。小琳读回去。她让那一句留下来。"
+      vol_2: "第四封。小琳长出第一件:她真的去自家附近的书店申请周末志愿者。老板说好。"
+      vol_3: "第七封。小琳放下第一件:她在信里坦白,所谓『拉大提琴的好朋友』,其实是合唱团第一小提琴,她只敢和对方在走廊打过招呼。她们后来真的成了朋友。"
+      vol_4: "第十二封。桧菜宣布要来。小琳惊了。她把所有信件读了一遍。"
+      vol_5: "桧菜到了机场。小琳以第三个版本的自己走过去。桧菜抱了她。桧菜说她的信也三分之二是真的。"
+    comp_titles: ["排球少年", "声之形", "3 月的狮子", "SPY×FAMILY", "葬送的芙莉莲"]
+    reader_promise: "你信里那个更勇敢的自己,被允许长成你。"
+    marketing_angle: "少女向 · 笔友 · 把发明长成自己的一种淡情感书写。"
+    genre_family: romance
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 14-17 爱读书的少女向读者,在读书账号和姐妹校交换项目里长大"
+
+  - series_id: confidence_core_romance__zh_CN__nai_nai_de_yu_pei
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "十四岁的初二女生,在奶奶丧礼上继承了一枚小小的玉佩;玉佩握在手里时,她会说出一句她平时不敢说的真话;五卷下来玉佩在初二年级五个女生之间轮流戴过,长线是索菲亚要决定到底要不要把它一直留下来。"
+    volume_runway_target: 165
+    reading_platform_fit: manga_traditional
+    series_title: "玉佩里的一句真话"
+    series_logline: "奶奶的玉佩让她说出一句真话。玉佩想被传下去。"
+    series_description: "索菲亚十四岁,广东外婆家的孙女,跟父母在江浙读初二。奶奶秋天过世之后,家里把奶奶手镯上那一枚小玉佩留给了她。指甲盖那么大,温温的。第一次戴它去学校,索菲亚在食堂午饭桌上,说出了一句她从来不敢说的话:『我想试一试排球校队。』她自己也吓一跳。这句话是真的。玉佩在肋骨边发热。她第二天再说一句,也是真的。第三周,她说出了五句真话,每一句都是真的。十月,她把玉佩借给最好的朋友小苏,小苏当面跟数学老师说出了她从初一就想说的那一句——『可以把我从基础班调出来吗』。十二月,玉佩戴过初二四个女生。每一卷玉佩接住一个女生的一句真话。每一卷索菲亚学会一件事:玉佩并没有让她变勇敢,玉佩只是替她借来奶奶对她的相信。长线:二月新转来的一个女生小希拉问能不能借戴。索菲亚犹豫。她说好。三周内没有拿回来。她活下来了。她意识到奶奶是对的。排球少年的暖。葬送的芙莉莲的稳。少女向校园·家传信物·身份养成。"
+    opening_5_volume_arc:
+      vol_1: "奶奶的丧礼。玉佩。食堂的真话。排球校队。"
+      vol_2: "小苏借戴。索菲亚紧张。小苏说出那一句。数学老师听见了。"
+      vol_3: "第三个女生安琪戴它,回家和爸爸讲了一件真话。索菲亚学会:玉佩会跟人回家。"
+      vol_4: "第四个女生贝贝戴它,跟自己大姐说出一件压了很久的事。玉佩回来的时候,热得像在发光。"
+      vol_5: "二月转来的小希拉问。索菲亚说好。三周。她在没有玉佩的日子里活下来了。奶奶是对的。"
+    comp_titles: ["排球少年", "葬送的芙莉莲", "声之形", "SPY×FAMILY", "3 月的狮子"]
+    reader_promise: "奶奶对你的相信,放得进一枚玉佩、藏得进一件毛衣。"
+    marketing_angle: "少女向校园 · 家传玉佩 · 奶奶传下来的勇敢。"
+    genre_family: healing
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Gen Alpha 12-15 初中少女向读者,家里有一位故去的奶奶 / 外婆和一件玉佩"
+
+  - series_id: confidence_core_romance__zh_CN__er_shou_jia_ke_ti_wo_xuan_yi_fu
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "十六岁的高二女生在城市旧物市集买了一件十块钱的牛仔外套;外套有一种说不出的『今天我应该穿什么』的直觉;每一卷一次穿搭决定、一次身份排练,长线是三月她第一次去外地的大学开放日,穿着那件外套走过去。"
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "外套知道"
+    series_logline: "高二女生十块钱淘来的牛仔外套替她挑衣服。外套永远是对的。"
+    series_description: "小钰十六岁,高二三班,迷千禧年风格,深秋在杭州城北的一个旧物市集摊位,花十块钱买了一件浅蓝牛仔外套。外套左肩有一个小破洞,衣领里的原始洗水标还在,凑近闻有一点点皂角味。她第一次把外套挂在自家衣柜门内侧的早晨,身体——或者是外套——指了指两年前妈妈给她买的那件条纹 T。她穿上去。这一天过得不错。第二天身体指了指那条绿色灯芯绒裙子。这一天也过得不错。第三周,她已经默认每天早晨让『身体加外套』替她选,选出来的造型比她高一以来穿过的任何衣服都更响、更软、更像她。每一卷一次穿搭、一种新的情境、一次外套替她排练出来的新的自我。长线:三月,她去外地一所大学的开放日——外套第一次没有指。她得自己选。她还是穿上了那件外套。排球少年的暖。少女向 Y2K 校园身份养成:其实大部分一直都是她自己的品位,只是终于让它出来透气。"
+    opening_5_volume_arc:
+      vol_1: "市集十块钱。第一个早晨。条纹 T。这一天不错。"
+      vol_2: "绿色灯芯绒裙。食堂同桌注意到了。小钰发光。"
+      vol_3: "她第一次反对外套的选择。那天还行。她明白外套是教练,不是老板。"
+      vol_4: "妹妹问能不能借去穿。她说好。妹妹挑了一套小钰自己不会挑的。妹妹是对的。"
+      vol_5: "大学开放日。外套没有指。她自己挑。她穿上外套。在招生办老师面前,她是自己。"
+    comp_titles: ["排球少年", "声之形", "葬送的芙莉莲", "SPY×FAMILY", "3 月的狮子"]
+    reader_promise: "外套大部分是你自己的品位。外套只是让你透气。"
+    marketing_angle: "千禧年旧物风 + Gen Alpha 二手淘衣身份养成。"
+    genre_family: slice_of_life
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 14-17 千禧风格 / 旧物市集少女向读者,公交站旁有一家二手店"
+
+  - series_id: confidence_core_romance__zh_CN__hua_ju_she_de_B_juan_ben
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: mystery_box
+    long_arc_spine: "十五岁的高一新生进了学校话剧社,被分到 B 角剧本;她在化妆间镜框背面发现了一本小笔记本,跨了九年、四个 B 角,每一个 B 角在毕业那一年写下了一段;每一卷她解一个前任 B 角的身份谜,长线是六月她要决定要不要为下一个 B 角写下自己的那一页。"
+    volume_runway_target: 170
+    reading_platform_fit: webtoon_vertical
+    series_title: "B 角的笔记本"
+    series_logline: "化妆间镜子背后藏着一本笔记本。她前面有四个 B 角。她在读。"
+    series_description: "若宁十五岁,高一新生,话剧社春季公演被分到《雷雨》的 B 角(同一个角色,大舞台只能上一个)。化妆间她在镜框木条背面摸到一本对折的小笔记本,半本写满了行楷。第一篇是 2017 年的。下一篇 2019 年。下一篇 2021 年。四个 B 角、九年,每人两到四页,写的都是『当 B 角』那一年,她们究竟在和自己什么部分较劲。这些篇章非常具体。若宁慢慢明白,这是一份四个不同的女生在化妆间侧台,默默搞清自己是谁的私人档案。每一卷若宁找到一个前任 B 角——上网查、读她的近况、有一次直接发短信认识——学到那一年的 B 角对那个女生意味着什么。每一卷若宁在不同的页面、用不同颜色的笔,写下自己的一段。长线:六月公演收官之后,若宁要决定——这本笔记本留给下一个 B 角,还是带回家,还是亲手写完最后一页让这条传承在自己这里结束。排球少年的细。声之形的安静。少女向身份养成:化妆间侧台传过来的那些前辈。"
+    opening_5_volume_arc:
+      vol_1: "第一篇。2017 年。一个叫思柔的女生。若宁搜了她。思柔现在在上海一个非营利剧团免费做戏。"
+      vol_2: "2019 年。一个叫米菈的女生。若宁通过领英找到她——现在是会计。若宁礼貌发了消息。米菈回了。"
+      vol_3: "2021 年。一个叫小可的同学。若宁在一个很小的播客上找到她。小可在那一年的笔记里写到:当 B 角是一种『我一直都很安静』的隐喻。"
+      vol_4: "2023 年。前一届毕业的伊曼。若宁在走廊遇到她——伊曼大学放假回来。两人喝奶茶。伊曼用铅笔在笔记本上签了她的名字给若宁。"
+      vol_5: "六月收官夜。若宁写下自己的一篇。她直到七月才决定怎么处理这本笔记本。"
+    comp_titles: ["排球少年", "声之形", "3 月的狮子", "SPY×FAMILY", "葬送的芙莉莲"]
+    reader_promise: "你之前有几个女生留过字。镜子知道她们的名字。"
+    marketing_angle: "校园话剧社 B 角的身份悬念。少女向。安静。具体。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + identity_rehearsal
+    audience: "Gen Alpha 14-17 校园话剧社 / 文艺社团少女向读者,站过侧台的人"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — solar_return_isekai  (小众 · 少年向 · 自我价值 / 冒名顶替)
+  # Cluster E "mecha_identity" 替代:以异世界 / 机甲为门的少年向身份养成
+  # primary_topic: self_worth · secondary: imposter_syndrome, courage
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: solar_return_isekai__zh_CN__shuo_chu_shi_hua_de_ji_jia
+    brand_id: solar_return_isekai
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: gaming_streaming
+    portal_mechanic: game_level
+    episodic_frame_per_volume: customer
+    magical_register: isekai
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "十四岁的初二男生被拉进一个『一区域一驾驶员』的机甲世界,座舱只在驾驶员对自己说一句真话时启动;五卷下来,小韬一阶一阶,把他从五年级一直回避的真话讲出来,机甲也一阶一阶长大。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "诚实驾驶员"
+    series_logline: "机甲只在驾驶员讲真话时才启动。小韬从五年级开始就在回避真话。"
+    series_description: "小韬十四岁,初二,是那种『打游戏很好、被看见会很慌』的孩子。他第三次通关心爱的那款机甲游戏的那个晚上,屏幕突然变黑,他醒来时身处一个座舱里。这个世界有七台机甲、七块区域、每一块只有一位驾驶员。座舱界面很简单:打一句关于自己的真话,回车,机甲启动。小韬第一句:『我是小韬,十四岁。』机甲『嘀』一声。没启动。他试:『我是小韬,我家在长春。』『嘀嘀』两声。然后机甲回他一行字:『更真。』小韬打:『我从五年级开始假装自己是一个不一样的孩子。』机甲启动了。机甲内部比外面大。每一卷机甲需要他再说一句更深的真话。每一卷他爬上一阶。长线:第五卷,机甲要求他说出一直回避的、关于爸爸的真话。机甲没启动。小韬在座舱里睡了一夜。座舱在等。我的英雄学院的赤诚。座舱里的安静像声之形。第一部 Gen Alpha 机甲异世界——讲的是男孩子怎么对自己诚实。"
+    opening_5_volume_arc:
+      vol_1: "异世界。座舱。第一句真话。机甲启动。第一区域是一片安静的森林。"
+      vol_2: "第二个驾驶员——另一片区域里同样十四岁的女孩——在电台上出现。她也累了,不想再装别的孩子。"
+      vol_3: "小韬说出关于自己焦虑的一句真话。机甲扩大百分之十二。森林展开。"
+      vol_4: "小韬说出对班里一个女孩子有好感的真话。机甲再大一圈。电台对面那个女孩笑了。"
+      vol_5: "小韬要说出关于爸爸的那句。他说不出。机甲在等。小韬在座舱里睡了一夜。座舱是暖的。"
+    comp_titles: ["我的英雄学院", "机动战士高达 水星的魔女", "声之形", "葬送的芙莉莲", "SPY×FAMILY"]
+    reader_promise: "机甲只在你启动的时候启动。座舱有耐心。"
+    marketing_angle: "第一部 Gen Alpha 机甲异世界——男孩子的诚实就是唯一能跑的燃料。"
+    genre_family: fantasy_adventure
+    emotional_engine: identity_rehearsal + courage_under_softness
+    audience: "Gen Alpha 12-15 喜欢机甲游戏的少年向读者,正在学男生这件事可以是怎样的"
+
+  - series_id: solar_return_isekai__zh_CN__tong_ren_wen_li_de_wo_gei_wo_hui_xin
+    brand_id: solar_return_isekai
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: character_jump
+    episodic_frame_per_volume: customer
+    magical_register: isekai
+    serial_engine: companion_roster
+    long_arc_spine: "十五岁的高一女生,写过 47 篇自家最爱那部少年漫的『代入文』;她被拉进那部漫画的世界,成为她自己写的那个角色;角色——也就是『她』——在她原本那个 Google Doc 的页边给她写回信;五卷下来,两个版本的她变成了一对像妹妹的对话搭档。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "页边的字"
+    series_logline: "动漫代入文里的那个角色,在她自己的文档页边给她写字。"
+    series_description: "玛雅十五岁,高一,在一个写文平台上发过 47 篇自己最爱那部少年漫的代入文。冒名顶替感被她这两年用『在文档里当另一个人』管住了。期末考前一晚她在校稿第 48 篇文,睡过去之后醒在自己写的那个世界里——身体是她写的那个角色的身体,但不完全是她自己的。角色——也就是『写出来的玛雅』——坐在驾驶位。玛雅坐在后座。角色在她原本那篇文档的页边写一行字:『嘿,你为什么把『勇敢』全留给我?那些日子你自己也可以一点。』每一卷玛雅和『写出来的玛雅』在页边对话。每一卷玛雅把角色更勇敢的一小块带回真实的高一生活。长线:角色请求和她永久交换。玛雅拒绝。角色为她骄傲。排球少年的暖。我的英雄学院的赤诚。第一部 Gen Alpha 二次元代入异世界——讲的是去见你一直在写的那个版本的自己。"
+    opening_5_volume_arc:
+      vol_1: "第 48 篇文。睡过去。座舱。页边第一行字。"
+      vol_2: "角色请玛雅把勇气带回去。玛雅试着在语文课堂上说了一句真话。有效。"
+      vol_3: "角色问玛雅班里那个一直『悄悄留意』的同班同学。玛雅在座舱后座哭。角色很温柔。"
+      vol_4: "角色在页边写了一句话,正是玛雅奶奶的口吻。玛雅以前都不知道角色有奶奶的声音。"
+      vol_5: "角色请求交换。玛雅拒绝。角色骄傲。玛雅醒在自己床上,把第 48 篇文写完,改了标题。"
+    comp_titles: ["我的英雄学院", "SPY×FAMILY", "排球少年", "葬送的芙莉莲", "声之形"]
+    reader_promise: "你写出来的那个角色,就是在等你的那个版本的自己。页边就是门。"
+    marketing_angle: "第一部 Gen Alpha 二次元代入异世界。温柔、具体、非常华人少女。"
+    genre_family: fantasy_adventure
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 13-17 写代入文 / 爱看少年漫的少女,在网上当过另一个自己"
+
+  - series_id: solar_return_isekai__zh_CN__jing_zi_zhao_chu_jin_tian_de_wo
+    brand_id: solar_return_isekai
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: mirror
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "十四岁的初二学生在一次校园旧物义卖上,花两块钱买了一面巴掌大的古铜镜;每天早晨镜子里映出来的『今天的自己』,会写一两个字告诉她今天身体在用哪一种性格——内向的、外放的、安静的、清醒的;五卷下来她学会听镜子,学会听自己,也学会一次一位地把镜子分享给可以信任的朋友。"
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "镜子里今天的我"
+    series_logline: "旧物义卖买来的小镜子,会告诉她今天身体是哪一种性格。她从初一开始就在猜。"
+    series_description: "小忻十四岁,初二,从小被老师班主任夸『懂事』,却一直没搞清楚自己到底是哪一种孩子——有的日子想说话,有的日子只想看书,有的日子想跑步,有的日子只想缩起来。十月校园旧物义卖,她花两块钱买了一面巴掌大、金漆木框的小铜镜。第一次回家照,镜面里她自己的脸下面,出现一行行楷:『今天:安静。』第二天:『今天:外放。』第三天又是『安静』。第四天:『今天:清醒。』镜子并不是在『判定』她是哪一种,镜子是在『读』今天身体在用哪一种。小忻一开始警惕。后来如释重负。每一卷小忻学会一种身体『今天是哪一种』的小信号,学会怎么尊重它,而不必告诉所有人,或者只告诉一个人。长线:春学期她把镜子拿给最好的朋友米菈看;米菈镜面里也出现了字。排球少年的暖。声之形的安静。少年向相邻的少女向身份养成:写给一直在悄悄分自己几个版本的 Gen Alpha 孩子。"
+    opening_5_volume_arc:
+      vol_1: "义卖。第一行字:『安静。』小忻没告诉任何人。"
+      vol_2: "『清醒』的一天。小忻故意穿了她平时不会穿的鞋。这一天过得不错。"
+      vol_3: "『外放』的一天。小忻在艺术节合唱团唱了一段独唱。这一天过得不错。"
+      vol_4: "小忻把镜子拿给米菈看。米菈的镜面写『安静 / 外放』。米菈哭了。米菈感激。"
+      vol_5: "小忻把镜子拿给第三个最需要的朋友。镜子起作用了。镜子在口袋里变重了一点。"
+    comp_titles: ["排球少年", "声之形", "葬送的芙莉莲", "SPY×FAMILY", "罗小黑战记"]
+    reader_promise: "你今天是哪一种性格,身体已经在用了。镜子站你这边。"
+    marketing_angle: "少年向相邻 · 校园 · 镜子里那一行小字。"
+    genre_family: supernatural_everyday
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 12-15 初中孩子,知道自己有几种性格、想搞清楚的孩子"
+
+  - series_id: solar_return_isekai__zh_CN__yi_shou_de_cun_dang_03
+    brand_id: solar_return_isekai
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: gaming_streaming
+    portal_mechanic: game_level
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "十六岁的女生哥哥在车祸里走了;哥哥那台主机上,他玩了 412 小时、85 级的一款开放世界 RPG 存档还在;主角点开存档,游戏角色还站在哥哥最后停下的草地上;每一卷主角推进一片地图,慢慢发现哥哥在游戏里留下来的话。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "存档 03"
+    series_logline: "哥哥的存档停在草地上。角色还站着。她准备接着玩。"
+    series_description: "沈悦十六岁,高二,妹妹。哥哥三月在高速上出了事。葬礼后三周,她坐在客厅地毯上,把哥哥的主机打开。存档 03 是哥哥的——85 级游侠,一款画风像吉卜力工作室的开放世界。412 小时。停在一片草地中央。角色背靠一棵小树。沈悦拿起手柄。角色的名字是哥哥的名字。沈悦慢慢看出来:这个存档不只是一个『未完成的游戏』,是哥哥留下来的另一种日记——他在地图各处标了路标,在物品栏里给自己写了便签,在拍照模式里截了沈悦从没见过的风景。每一卷她推进一片地图。每一卷哥哥留下来的一件小东西被她翻到。长线:第五片地图里,哥哥的角色走到一只『需要联机才能打开的宝箱』面前。沈悦联系了哥哥最好的那个朋友,请他来家里联机一次。他们一起把宝箱打开。葬送的芙莉莲的稳。药屋少女的呢喃的安静。Gen Alpha 哀悼即档案——不躲。"
+    opening_5_volume_arc:
+      vol_1: "开机。草地。哥哥的名字。沈悦放下手柄,再拿起。"
+      vol_2: "第一片地图。物品栏第一条便签:『沈悦——南边那座桥断了,走羊肠小路。』"
+      vol_3: "第二片。一张哥哥保留的截图:这片夕阳和老家奶奶家窗外的那一片一模一样。"
+      vol_4: "第三片。一段哥哥给一个 NPC 改的名字,是他们家从前那只狗的名字。沈悦笑出声——两个月以来第一次。"
+      vol_5: "第五片。联机宝箱。沈悦给哥哥最好的朋友打电话。他们一起开。里面是哥哥用文字输入手打的一封信——只给沈悦。"
+    comp_titles: ["葬送的芙莉莲", "药屋少女的呢喃", "明日,我们或将变成或不变成", "SPY×FAMILY", "3 月的狮子"]
+    reader_promise: "存档在等。哥哥留了路标。"
+    marketing_angle: "Gen Alpha 哀悼即档案 —— 以芙莉莲式的温度去打开它。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + grounded_ritual
+    audience: "Gen Alpha 14-17 玩 RPG 的孩子,接住兄姐存档的那一群"
+
+  - series_id: solar_return_isekai__zh_CN__yong_tuan_jiao_wo_chong_xin_yong_zhe_ge_shen_ti
+    brand_id: solar_return_isekai
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: k_pop_fandom
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "十五岁的高一女生从初一一整年开始,就一直『不太在自己身体里』;她在妈妈推荐下加入了学校的流行舞社团;一拍一拍学下来的编舞,慢慢把她重新带回自己的身体;每一卷一首新歌,一次新的回归。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "八拍一身"
+    series_logline: "她从初一开始就没在自己身体里。流行舞社团的八拍正在把她接回来。"
+    series_description: "米拉十五岁,高一新生,从初一那一年开始就有一种说不清楚的『身体好像是租的』感。九月她在最好朋友小苏苦求下,加入了学校流行舞社团。社团周二周四在食堂开扫地之后练。第一支编舞是一首她熟的歌。社团一段一段教,八拍一组。第一组八拍是副歌前那一小段:轻轻一跳、左脚转身、肩膀转一下、手放在心口。米拉学过去。当她的手心碰到自己胸口时,她——从初一以来第一次——感觉到自己肋骨里面是有空间的。她什么都没说。第二支编舞,左脚转身让她知道自己的胯关节在哪。第三支,肩膀让她知道自己的肩是自己的。每一卷一首新歌,一组新八拍,一次回到那个被空置两年的身体。长线:春季校园艺术节,米拉跳了一整支编舞。三百个同学。她在自己身体里,在他们面前。我的英雄学院的赤诚。排球少年的暖。Gen Alpha 流行舞 · 身体回家。"
+    opening_5_volume_arc:
+      vol_1: "第一个周二。第一组八拍。手放心口。第一次感觉。"
+      vol_2: "左脚转身。胯关节。米拉告诉小苏。小苏安静地哭。"
+      vol_3: "肩膀。米拉请小苏先单独教她下一组八拍。"
+      vol_4: "一支新编舞、一首她不熟的歌。身体还是跟上了。米拉震动——是好的那种。"
+      vol_5: "春季艺术节。三百个孩子。身体是她的。身体是她的。"
+    comp_titles: ["我的英雄学院", "排球少年", "声之形", "3 月的狮子", "葬送的芙莉莲"]
+    reader_promise: "你的身体是你的。八拍正在把你接回家。"
+    marketing_angle: "Gen Alpha 流行舞身体叙事 · 关于解离与社团回归。"
+    genre_family: supernatural_everyday
+    emotional_engine: somatic_return + chosen_family
+    audience: "Gen Alpha 13-16 流行舞 / 校园艺术节孩子,正在学着重新住进身体"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — creative_unfold_social  (小众 · 少女向 · 社恐 / 创造力)
+  # Cluster E "queer_identity_growth" 替代:少女向创造性身份展开
+  # primary_topic: social_anxiety · secondary: self_worth, courage
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: creative_unfold_social__zh_CN__tu_shu_guan_qi_jiu_yi_jia_de_xiao_zhi
+    brand_id: creative_unfold_social
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: content_creation
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "十六岁的高二女生每周五会把自己手作的一份单本小杂志,放在学校图书馆 791 号书架——历史架——和两本关于灯塔的画册之间;五卷之内,小杂志慢慢攒出地下读者,有人开始悄悄夹一页贡献回来;长线是图书馆老师春天那张便签,问她要不要把这件事变成一个正式社团。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "791 号书架"
+    series_logline: "她每周五在 791 号书架上放一本手作小杂志。到春天,有四个孩子也在夹自己的页。"
+    series_description: "小卡十六岁,高二三班,海口一所普通公办高中,从初一开始就在卧室地板上做手工小杂志。十月她印出了一本六页的小杂志,起了一个名字叫《灯塔》——里面是短随笔、涂鸦、一首歌单的二维码,全都是关于『安静一些的孩子如何在大家声音都很响的环境里活下来』。她周五下午把这一本放在学校图书馆 791 号书架(中国历史)上、两本关于沿海灯塔的画册之间。礼拜一她路过去看,杂志不见了。第二周她放第二期。到十二月,这本杂志理论上发行量一份、读者大约八个常常把它放回去的孩子。二月,某个孩子把一页自己手画的画夹进了小杂志归位。每一卷一个新的同学贡献一页。每一卷小杂志多一种声音。长线:五月,图书管理员鲍老师在小杂志上面留了一张便签:『如果你想,我可以帮你把这件事做成一个课后社团。』小卡把便签揣兜里走了一周。声之形的安静。排球少年的暖。少女向身份养成:一个孩子需要的就是一本小杂志、一个书架、一位站在她这边的图书馆老师。"
+    opening_5_volume_arc:
+      vol_1: "第一期。791 号书架。杂志消失了。小卡两年来第一次全身放松。"
+      vol_2: "第二期。第一个『有人在读』的信号——一个口香糖纸做的书签,小卡自己没放过。"
+      vol_3: "第四期。第一张被夹回来的贡献页。匿名。两个女孩子在公交站等车的速写。"
+      vol_4: "第六期。三张贡献页。一首歌单。小卡明白小杂志已经不属于她一个人。"
+      vol_5: "五月。鲍老师的便签。小卡揣兜里一周。她说好。"
+    comp_titles: ["排球少年", "声之形", "3 月的狮子", "SPY×FAMILY", "葬送的芙莉莲"]
+    reader_promise: "791 号书架替你存着这本小杂志。图书馆老师看见了你。"
+    marketing_angle: "少女向校园 · 手作小杂志 · 一个书架和一位图书馆老师救下来的孩子。"
+    genre_family: healing
+    emotional_engine: chosen_family + identity_rehearsal
+    audience: "Gen Alpha 14-17 手作 / 安静创作的少女向读者,以及救下她们的图书馆老师"
+
+  - series_id: creative_unfold_social__zh_CN__mei_shu_jiao_shi_de_wu_xiu_xi
+    brand_id: creative_unfold_social
+    locale: zh_CN
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "十五岁的高一新生每天午休都在美术教室吃饭,因为食堂太吵;美术老师方老师中午十二点零五分会把门半开,不问问题;五卷之内,陆陆续续有七个孩子也找到了这间美术教室,方老师悄悄养出了一份不需要立社的『午休名单』。"
+    volume_runway_target: 165
+    reading_platform_fit: webtoon_vertical
+    series_title: "午休的美术教室"
+    series_logline: "美术老师中午把门撑开。不问问题。到春天有八个孩子。"
+    series_description: "娜娜十五岁,高一,黎族家庭,暑假随父母从海口搬到了北方一个小城。食堂吵,她不知道该和谁一桌。开学第七天,她路过美术教室,门是半开的,方老师在办公桌后改作业,抬头对她笑了一下,又低头改作业。娜娜在窑炉旁边的最里那张桌子上吃完饭。第二天方老师又半开着门。第九天娜娜又坐下来。十月,高二的小睿也来了——是娜娜在这所学校第一个聊过的高二。十一月,初三的小杰也来了——他不爱在班里待。二月,八个孩子。方老师从来不问任何一个人为什么。她改作业。她把门半开。每一卷一个新的孩子来。每一卷方老师——安静地、具体地——把这间屋子撑住。长线:四月,教务主任问方老师要不要把这件事注册成一个社团。方老师说不要。门还是半开的。孩子们还是在。排球少年的暖。声之形的稳。少女向身份养成:那位不愿意把它做成宣传稿的老师。"
+    opening_5_volume_arc:
+      vol_1: "第七天。门半开。窑炉。方老师的微笑。盒饭。"
+      vol_2: "高二的小睿加入。小睿是娜娜在这所学校讲过话的唯一高二。小睿外向、稳。"
+      vol_3: "初三的小杰加入。小杰一直躲着初三体育课。在这里他可以躲。"
+      vol_4: "八个孩子在午休。方老师还是改作业。屋子是它自己。"
+      vol_5: "四月。教务主任问。方老师说不要。屋子还是它自己。"
+    comp_titles: ["排球少年", "声之形", "3 月的狮子", "SPY×FAMILY", "葬送的芙莉莲"]
+    reader_promise: "有一间屋子。门半开。没有人问问题。"
+    marketing_angle: "排球少年式的暖 · 少女向 · 那位拒绝把它做成社团的老师。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 14-17 新转学 / 安静 / 不爱食堂的高中生,以及救她们的美术老师"
+
+  - series_id: creative_unfold_social__zh_CN__er_shou_jia_ke_yi_zi_tiao
+    brand_id: creative_unfold_social
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "十六岁的高二女生在杭州城北一个旧物市集买了一件 1998 年的灯芯绒外套,在内胸袋里发现一封写给『下一个穿这件外套的人』的信——一段跨越 27 年、四个城市、四个曾经穿过这件外套的女生之间的接力悬念。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "写给下一个穿它的人"
+    series_logline: "外套口袋里那封信从 1998 年压到现在。字迹温柔。接力 27 年。"
+    series_description: "小苏十六岁,高二,杭州人,在城北旧物市集花九块钱买了一件 1998 年的咖色灯芯绒外套。她回家路上在内胸袋里摸到一封信。信封上写着『写给下一个穿这件外套的人』。她在公交上读完。信是 1998 年一位叫戴瑞的成都大学生写的——她当时正要把一件事跟家里讲又讲不出口,买了这件外套当『盔甲』,后来把它捐回成都的旧物市集,留给下一个会需要它的女生。戴瑞结尾说:『如果你找到这封信,你也写一封,折回口袋,把外套捐回去。』到那个周五,小苏又在外套衬里里翻出了三封:2003 年来自南京、2011 年来自西安、2019 年来自昆明。外套是一条接力。每一卷小苏读一封前任的信,自己也写一封,慢慢决定——她要在这条接力的另一头,成为什么样的女生。长线:五月,她写完自己的信,折进衬里,把外套捐回杭州城北的旧物市集。排球少年的暖。葬送的芙莉莲的安静。少女向身份接力悬念,写给 Gen Alpha 旧物市集长大的孩子。"
+    opening_5_volume_arc:
+      vol_1: "旧物市集。九块钱。戴瑞的信。公交。"
+      vol_2: "2003 年南京。一位音乐学院的姐姐叫小尼。小苏搜了她。小尼现在在合肥开一家小书店。"
+      vol_3: "2011 年西安。一位上班族叫小依。小苏没找到。这封信本身就够。"
+      vol_4: "2019 年昆明。一个中专女生叫小罗,落款写『我猜下一个穿它的人会在杭州』。小苏手在抖。"
+      vol_5: "五月。小苏写下自己这封。折进衬里。把外套送回市集。"
+    comp_titles: ["排球少年", "葬送的芙莉莲", "明日,我们或将变成或不变成", "声之形", "3 月的狮子"]
+    reader_promise: "外套是一条接力。接力在等你的那一封。"
+    marketing_angle: "少女向旧物接力悬念:一件外套接住了 27 年的不同女生。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Gen Alpha 14-17 旧物市集 / 二手淘衣少女向读者,以及前一代留下信的人"
+
+  - series_id: creative_unfold_social__zh_CN__shi_qi_ge_guan_zhong_yi_jing_gou_le
+    brand_id: creative_unfold_social
+    locale: zh_CN
+    persona_archetype: GA-streamer
+    daily_life_anchor: content_creation
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "十四岁的初二女生开了一个 B 站频道,粉丝是她自己的三个小号;她每周日发一支五分钟的安静视频,讲一周里的一件小事;五卷下来频道长到十七个粉丝就稳住了,她学会十七个其实已经够了。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "十七个就够"
+    series_logline: "她的频道有三个粉丝,都是她自己。她还是在发。"
+    series_description: "米雅十四岁,初二,安静到经常被同学误以为冷的那种孩子。九月她在 B 站用一个稍微不一样的名字开了一个频道,每周日发一支五分钟左右的视频,讲一周里的一件小事:洗碗机晚上十一点的嗡嗡声、家里那只总在暖气片上卷成一团的猫、公交车 39 路司机师傅每周二都会和同一位老顾客打招呼。三个粉丝是她自己的三个小号加上自己的主号。她每周日发。十一月她已经有了八个真实粉丝。二月,十七个。十七个就这么稳住了。米雅慢慢意识到,这十七个人是一个小小的被选择的家庭——其中一个是马尼拉的高中生(粤语弹幕),一个是青岛的奶奶,一个是英国一所艺术学院的大一新生。每一卷一位粉丝在评论区慢慢变成具体的人。长线:十七个人也开始互相在对方评论下回复。米雅明白:内容不必扩量也算数。排球少年的暖。声之形的安静。少女向 Gen Alpha 内容创作叙事:小到能爱你的那个观众群。"
+    opening_5_volume_arc:
+      vol_1: "频道开了。三个粉丝(都是她)。洗碗机视频。第一个第八次浏览。"
+      vol_2: "第一个真粉丝。马尼拉。粤语弹幕评论她家的猫。米雅回复。"
+      vol_3: "八个粉丝。英国艺术学院的大一在公交司机那条视频下评论。米雅和她聊她那条上学路。"
+      vol_4: "十七个粉丝。青岛的奶奶问米雅最近还好不好。米雅说好。她是真的好。"
+      vol_5: "十七个稳住。米雅不再看数据。十七个人开始在彼此评论下面互相回复。"
+    comp_titles: ["排球少年", "声之形", "森崎书店的日子", "SPY×FAMILY", "葬送的芙莉莲"]
+    reader_promise: "十七个人是家人。这个观众群已经够。"
+    marketing_angle: "Gen Alpha 安静 UP 主叙事:小到能爱你的那一群观众。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 13-15 安静 UP 主 / 视频博主,用过另一个名字开过频道"
+
+  - series_id: creative_unfold_social__zh_CN__ling_chen_liang_dian_du_shu_hui
+    brand_id: creative_unfold_social
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: neurodivergent
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "二十二岁的文学硕士一年级女生,自小自闭谱系,主持一个『凌晨两点读书会』——专门给和她一样、周六深夜睡不着的同代研究生;六个人,每月一本书;五卷下来读书会变成一种被选择的家庭节律,她也学会不再表演主持。"
+    volume_runway_target: 160
+    reading_platform_fit: manga_traditional
+    series_title: "凌晨两点读书会"
+    series_logline: "六个研究生。一个微信群。每个月一本书。每月第二个周六凌晨两点。"
+    series_description: "任溪二十二岁,自闭谱系,在郑州一所师范大学文学院读研一,从十二岁起,她周六到周日凌晨之间没好好睡过。九月开学三周后,她开了一个小型私密微信群,把跨过两个校区认识的另外五个谱系研究生拉进来。每月第二个周六凌晨两点到四点,大家在群语音里见。每月读一本书——《葬送的芙莉莲》、《克拉拉与太阳》、《便利店人间》、一本当代华语小说、一本随笔集。他们不破冰。每人开场说一句这一周的小事。然后聊书,聊到有一个人打哈欠,另一个人就收尾。任溪一生都在『演一个正常人』,这里她在学不再表演主持。每一卷一个成员的生活在转弯——一份新的诊断、一次分手、一次论文转向、一个兄弟搬来同住——读书会接住了。长线:五月,六个人邀请第七位——一个 18 岁的高三学妹小普——任溪学会主持也可以是接力。葬送的芙莉莲的稳。3 月的狮子的细。被选择的家庭式的 Gen Z 读书会。"
+    opening_5_volume_arc:
+      vol_1: "第一夜。《葬送的芙莉莲》。每人一句话。第一个哈欠。第一次没在表演。"
+      vol_2: "第三夜。《便利店人间》。一位成员 23 岁拿到自闭诊断。读书会温柔接住。"
+      vol_3: "第五夜。《克拉拉与太阳》。一位成员的外婆过世。读书会成了那个守灵的角落。"
+      vol_4: "第七夜。一本翻译随笔。任溪自己的论文转方向。读书会成了写作小组。"
+      vol_5: "第九夜。小普加入。高三。读书会从此跨代际。任溪把第十夜的主持交给她。"
+    comp_titles: ["葬送的芙莉莲", "3 月的狮子", "便利店人间", "森崎书店的日子", "排球少年"]
+    reader_promise: "凌晨两点有一个读书会。我们不破冰。你属于这里。"
+    marketing_angle: "Gen Z 谱系读书会叙事 · 以芙莉莲式的温度写。"
+    genre_family: healing
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Z 21-27 神经多样性研究生,在被选择的家庭式读书会里彼此守护"
+
+
+
+
+
+
+
+

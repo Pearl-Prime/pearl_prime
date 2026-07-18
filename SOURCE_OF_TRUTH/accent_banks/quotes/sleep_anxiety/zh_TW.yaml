@@ -1,0 +1,38 @@
+# Quote bank — sleep_anxiety / zh_TW — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: sleep_anxiety
+locale_cluster: zh_TW
+wave: 2
+quote_count: 2
+quotes:
+- quote_id: quote_w2_sleep_zh_tw_laozi_v04
+  text: 靜勝躁，寒勝熱。
+  text_en: Stillness overcomes unrest.
+  author: 老子
+  primary_source: 《道德經》第四十五章
+  verified_via: ctext.org
+  public_domain: y
+  topic_keys:
+  - sleep_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_laozi_somatic_v01
+  text: 重为轻根，静为躁君。
+  text_en: Heaviness is the root of lightness; stillness is the lord of unrest.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 26
+  verified_via: ctext.org
+  public_domain: y
+  topic_keys:
+  - somatic_healing
+  - sleep_anxiety
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either

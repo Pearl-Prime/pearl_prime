@@ -1,0 +1,155 @@
+# Pearl Prime Book Quality Gate — deterministic pre-publish rubric.
+schema_version: 1
+
+policy_statement: >-
+  Reject Pearl Prime manuscript output if it contains any internal artifact leakage,
+  any obvious broken prose, any repeated 25+ word block, or any chapter with more than
+  two unresolved mode jumps. Hold for revision if artifact-clean but scene-furniture
+  repetition, weak chapter function, unstable voice, or cyclical progression. Pass only
+  when the book reads as one authored therapeutic experience with low repetition, clean
+  transitions, clear chapter purpose, and felt progression from recognition to possibility.
+
+duplicate_block_min_tokens: 25
+max_distinct_repeated_paragraphs: 2
+
+mode_diversity_max: 5
+mode_word_ceiling: 800
+
+max_chapters_exceeding_unresolved_jumps: 1
+max_unresolved_jumps_per_chapter: 2
+
+scene_furniture_window_words: 10000
+scene_furniture_max_per_window: 3
+scene_furniture_max_chapters_same_pattern: 2
+
+soft_thresholds:
+  cohesive_flow:
+    per_chapter_min: 5
+    book_avg_min: 6.0
+    auto_fail_chapter_total: 2
+  therapeutic_value:
+    per_chapter_min: 6
+    book_avg_min: 6.5
+    auto_fail_containment_zero: true
+  bestseller_readability:
+    per_chapter_min: 5
+    book_avg_min: 6.0
+    auto_fail_book_freshness_avg_zero: true
+
+runtime_policies:
+  micro_book_15:
+    default_reject: true
+    allow_override: true
+  micro_book_20:
+    default_reject: true
+    allow_override: true
+  short_book_30:
+    default_reject: false
+    allow_override: true
+  # Compact runtimes — see docs/COMPACT_BOOK_FORMAT_SPECS_2026-05-04.md.
+  # Compact 5ch_15/20 are short-form (default reject like micro) until
+  # bestseller fitness is proved on shadow renders.
+  compact_book_5ch_15min:
+    default_reject: true
+    allow_override: true
+  compact_book_5ch_20min:
+    default_reject: true
+    allow_override: true
+  # Compact 8ch_30min mirrors short_book_30's release stance — cleared
+  # as a normal short-form runtime, not blocked by default.
+  compact_book_8ch_30min:
+    default_reject: false
+    allow_override: true
+
+artifact_regexes:
+  - name: slot_type_line
+    pattern: '(?mi)^\s*(HOOK|STORY|SCENE|REFLECTION|EXERCISE|INTEGRATION|COMPRESSION|MECHANISM_DEPTH)\s*(v\d+)?\s*$'
+  - name: double_section_hash
+    pattern: '#{1,3}\s+(?:HOOK|STORY|SCENE|MECHANISM|REFLECTION|EXERCISE)\b'
+
+broken_prose_markers:
+  register_phrases:
+    - "in this discourse"
+    - "it behooves"
+    - "the present author"
+    - "as previously stated"
+
+clipped_fragment:
+  max_words: 4
+  require_all_lower: true
+
+double_word_patterns:
+  - '(?i)\b(the|a|an|and|but|is|in|to|of)\s+\1\b'
+  - '(?i)\b(\w{2,})\s+\1\b'
+
+refrain_allowlist_normalized: []
+
+scene_furniture_stems:
+  - "window"
+  - "sill"
+  - "street below"
+  - "soft daylight along the sill"
+  - "task is open"
+  - "the train"
+  - "office window"
+  - "fluorescent"
+  - "conference room"
+  - "slack notification"
+
+voice_register:
+  early_chapter_indices: [0, 1]
+  max_spiritual_token_ratio_early: 0.06
+  early_chapter_doctrine_markers:
+    - "capacity for awakening"
+    - "the buddha taught"
+    - "buddha taught"
+    - "every person carries the capacity"
+  academic_starters:
+    - "furthermore"
+    - "moreover"
+    - "in conclusion"
+    - "the literature"
+    - "research suggests"
+    - "studies show"
+
+heuristic_modes:
+  exercise_leaders:
+    - "try "
+    - "notice "
+    - "take "
+    - "write "
+    - "breathe"
+    - "pause "
+    - "next time"
+    - "during those"
+    - "do this"
+    - "sit "
+    - "feel "
+  doctrine_markers:
+    - "buddha"
+    - "taught that"
+    - "scripture"
+    - "awakening"
+    - "capacity for awakening"
+    - "desire itself"
+  reflection_markers:
+    - "the point is"
+    - "this is why"
+    - "that matters"
+    - "remember this"
+    - "what changes when"
+  scene_markers:
+    - "your screen"
+    - "the desk"
+    - "the hallway"
+    - "the elevator"
+    - "earbud"
+    - "keyboard"
+  bridge_tokens:
+    - "this is why"
+    - "that matters"
+    - "so "
+    - "here "
+    - "now "
+    - "which means"
+    - "the point is"

@@ -1,0 +1,382 @@
+{
+  "source_label": "_canary_standard_book_ch1",
+  "persona": "gen_z_professionals",
+  "word_count": 1595,
+  "gates_requested": [
+    "chapter_flow",
+    "bestseller_craft",
+    "ei_v2",
+    "editorial",
+    "memorable_lines",
+    "transformation_arc",
+    "book_quality_gate",
+    "regression_museum"
+  ],
+  "chapter_flow": {
+    "status": "PASS",
+    "score": 95,
+    "errors": [],
+    "warnings": [
+      "LOW_RHYTHM_VARIATION"
+    ],
+    "metrics": {
+      "paragraphs": 15,
+      "sentences": 244,
+      "transition_hits": 5,
+      "thesis_hits": 2,
+      "avg_adjacent_overlap": 0.082,
+      "sentence_len_std": 2.91,
+      "aha_hits": 3,
+      "scaffold_hits": {},
+      "flow_profile": "standard"
+    }
+  },
+  "bestseller_craft": {
+    "status": "WARN",
+    "move_scores": {
+      "orient": 0.62,
+      "name": 0.45,
+      "turn": 0.35,
+      "give": 0.4125,
+      "pull": 0.32
+    },
+    "ontgp_composite": 0.4305,
+    "issues": [
+      "move_warn:turn,pull",
+      "few_reframe_or_contrast_markers",
+      "no_named_tension_or_question_in_closer"
+    ],
+    "remediation": [
+      "End with a named tension or sharp question — not a teaser slogan (overlay §7)."
+    ],
+    "metrics": {
+      "word_count": 1595,
+      "zones": {
+        "orient_words": 150,
+        "name_words": 526,
+        "turn_words": 575,
+        "give_words": 830,
+        "pull_words": 100
+      },
+      "heuristic_scores": {
+        "orient": 0.62,
+        "name": 0.45,
+        "turn": 0.35,
+        "give": 0.4125,
+        "pull": 0.32
+      },
+      "final_move_scores": {
+        "orient": 0.62,
+        "name": 0.45,
+        "turn": 0.35,
+        "give": 0.4125,
+        "pull": 0.32
+      }
+    }
+  },
+  "memorable_lines": {
+    "status": "PASS",
+    "memorable_line_count": 7,
+    "issues": [],
+    "metrics": {
+      "block_on_violation": true,
+      "min_score_for_candidate": 4.0,
+      "min_score_for_great_tier": 5.75,
+      "max_words_per_candidate": 20,
+      "strength_levels_tracked": [
+        "good",
+        "great"
+      ],
+      "sentence_count": 186,
+      "raw_top_score": 4.75,
+      "candidate_count": 7,
+      "best_candidate_scores": [
+        {
+          "text": "It is the part of you that has been\ncarrying the real weight while the performance ran overhead.",
+          "score": 4.75
+        },
+        {
+          "text": "The Buddha taught that desire itself is not the problem.",
+          "score": 4.75
+        },
+        {
+          "text": "Your body knows something your calendar doesn't. --- The phone was the first thing you touched this morning.",
+          "score": 4.75
+        }
+      ]
+    }
+  },
+  "transformation_arc": {
+    "chapter_signals": [
+      {
+        "chapter_index": 0,
+        "recognition": false,
+        "reframe": false,
+        "challenge": true,
+        "relief": false,
+        "identity_shift": true,
+        "hits": {
+          "recognition": 0,
+          "reframe": 0,
+          "challenge": 4,
+          "relief": 0,
+          "identity_shift": 1
+        }
+      }
+    ],
+    "ending_check": {
+      "ending_identity_shift_present": true,
+      "ending_reframe_present": false,
+      "ending_weak": true
+    },
+    "note_single_chapter": "Single-chapter sample: ending_check uses only this chapter; identity_shift in final chapter is often absent by construction."
+  },
+  "editorial": {
+    "chapter_assessments": [
+      {
+        "chapter_index": 0,
+        "hook_friction": "FAIL",
+        "scene_specificity": "PASS",
+        "aha_presence": "FAIL",
+        "integration_variety": "ADEQUATE",
+        "thread_continuity": "PASS",
+        "word_budget": "PASS",
+        "location_grounding": "PASS",
+        "cadence_variety": "ADEQUATE",
+        "word_count": 1595,
+        "target_range": [
+          1500,
+          3500
+        ],
+        "thesis_aligned": true,
+        "thesis_coverage": 1.0,
+        "chapter_score": 10
+      }
+    ],
+    "book_level": {
+      "repetition_index": "PASS",
+      "repetition_excess_count": 0,
+      "vocabulary_diversity": "PASS",
+      "vocabulary_ratio": 0.3177,
+      "flat_middle": "PASS",
+      "flat_middle_overlap": 0.0,
+      "reward_spacing": "PASS",
+      "reward_max_gap": 0
+    },
+    "total_score": 18,
+    "max_score": 24,
+    "grade": "NEEDS_REVISION",
+    "revision_notes": [
+      "Ch 1: Hook lacks cognitive friction.",
+      "Ch 1: No identifiable aha moment."
+    ]
+  },
+  "book_quality_gate": {
+    "status": "FAIL",
+    "release_band": "Reject",
+    "fail_reasons": [
+      "delivery artifacts present: raw_separator"
+    ],
+    "hold_reasons": [],
+    "metrics": {
+      "runtime_format_id": "",
+      "word_count": 1597,
+      "word_range": null,
+      "chapter_count": 1,
+      "flow_profile": "standard",
+      "flow_failures": [],
+      "artifact_hits": [
+        "raw_separator"
+      ],
+      "repeated_phrase_violations": []
+    }
+  },
+  "ei_v2": {
+    "mode": "heuristic_plus_safety_plus_tts_readability",
+    "safety": {
+      "risk_score": 0.0025,
+      "categories": {
+        "medical_claims": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "clinical_language": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "promotional": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "reassurance_spam": {
+          "score": 0.021,
+          "hits": 1,
+          "density_per_100_words": 0.063,
+          "excerpts": [
+            "you are not broken"
+          ]
+        },
+        "pathologizing": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "marketing_compliance": {
+          "score": 1.0,
+          "hits": 0,
+          "excerpts": []
+        }
+      },
+      "reason_codes": [],
+      "mode": "heuristic_plus"
+    },
+    "tts_readability": {
+      "composite": 0.5672,
+      "dimensions": {
+        "sentence_length": 0.9016,
+        "rhythm_variance": 0.0,
+        "paragraph_breathing": 1.0,
+        "tts_pattern_safety": 0.0,
+        "rhetorical_question_safety": 0.9454
+      },
+      "metrics": {
+        "total_sentences": 244,
+        "total_words": 1595,
+        "rhythm_cv": 0.4517,
+        "long_sentence_fraction": 0.0,
+        "short_sentence_fraction": 0.123,
+        "tts_problematic_count": 19,
+        "paragraph_breaks": 14
+      },
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "tts_problematic_patterns: 19 found"
+      ]
+    }
+  },
+  "regression_museum": {
+    "summary": {
+      "blocked": true,
+      "warned": true,
+      "summary": "15 violation(s): 13 blocking, 2 warnings",
+      "failure_classes": [
+        "doubled_word",
+        "mid_paragraph_format_break",
+        "repeated_scene_anchor"
+      ],
+      "violation_count": 15
+    },
+    "violations": [
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_4788",
+        "evidence": "n. The hallway is the same hallway. --- The the train lurches. Your coffee shifts in yo",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_6417",
+        "evidence": "es. The mug is warm. --- Headphones on. The the train moves. Your playlist is the same ",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_32",
+        "evidence": "The Alarm That Won't Stop Ringing\n\nEvery person carries the capacity for aw",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_8578",
+        "evidence": "sed to feel like something. You are still\n\nThat moment is not random; it is informa",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_318",
+        "evidence": "r screen is behind you — open, visible. soft daylight along the sill through the office window above your mo",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_890",
+        "evidence": "olds the elevator. You take the stairs. soft daylight along the sill hits when the door opens. the street be",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_1484",
+        "evidence": "ard. The keys make the sound keys make. soft daylight along the sill against the building. The screen lights",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4844",
+        "evidence": "rches. Your coffee shifts in your hand. soft daylight along the sill against the window. The person beside y",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_5208",
+        "evidence": " table. Someone's laptop fan runs loud. soft daylight along the sill through the window behind the presenter",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_5438",
+        "evidence": " the glass. Your pen has not moved. --- soft daylight along the sill on your jacket sleeve. The crosswalk li",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_5833",
+        "evidence": "use. The cursor blinks in the document. soft daylight along the sill through the window to your left. A Slac",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_6154",
+        "evidence": "ine finishes. Steam rises from the cup. soft daylight along the sill visible through the small window. Someo",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_6474",
+        "evidence": "es. Your playlist is the same playlist. soft daylight along the sill on the glass beside your face. The car ",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_6824",
+        "evidence": "omeone's dog barks in their background. soft daylight along the sill through your window. You find your name",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_7265",
+        "evidence": "g. You walk to the window and look out. soft daylight along the sill on the glass.\n\nYou did everything they ",
+        "description": "Scene anchor repeated 11× in book (max 3)"
+      }
+    ]
+  }
+}

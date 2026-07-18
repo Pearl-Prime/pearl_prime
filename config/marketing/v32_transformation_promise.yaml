@@ -1,0 +1,439 @@
+# v32_transformation_promise.yaml
+# Transformation Promise v3.2
+#
+# Core promise template: "10 minutes after pressing play, the listener will feel {specific_emotional_state}"
+#
+# Each brand has ONE canonical promise tied to its therapeutic focus.
+# The emotional state MUST:
+# - Match brand's primary emotional_vocabulary
+# - Be specific and immediate (10 minutes, not abstract)
+# - Reflect the brand's structural_signature and discovery_contract
+# - Be differentiable from other brands' promises
+#
+# Authority: Writers Bible v3.2, §TransformationPromise
+
+version: 3.2
+config_type: transformation_promises
+total_brands: 24
+
+# ─── TRANSFORMATION PROMISES BY BRAND ───────────────────────────────────────
+
+promises:
+
+  # STABILIZER — Nervous system regulation focus
+  stabilizer:
+    brand_id: stabilizer
+    primary_moment: evening_wind_down
+    promise_template: >
+      10 minutes after pressing play, the listener will feel grounded and
+      settled in their body, with the nervous system's alarm dial turned down.
+    promise_short: "Feel grounded and nervous system reset"
+    emotional_state:
+      primary: grounded
+      secondary: calm
+      tertiary: regulation
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # OPTIMIZER — Focus and clarity focus
+  optimizer:
+    brand_id: optimizer
+    primary_moment: morning_commute
+    promise_template: >
+      10 minutes after pressing play, the listener will feel sharp-minded and
+      clear about their day's priority, with momentum building before the first task.
+    promise_short: "Feel focused and ready to execute"
+    emotional_state:
+      primary: clarity
+      secondary: momentum
+      tertiary: focus
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # NIGHT_RESET — Sleep and calm focus
+  night_reset:
+    brand_id: night_reset
+    primary_moment: late_night_spiral
+    promise_template: >
+      10 minutes after pressing play, the listener will feel their anxious
+      thoughts slowing down, and their body giving permission to rest.
+    promise_short: "Feel the spiral stop and rest return"
+    emotional_state:
+      primary: calm
+      secondary: release
+      tertiary: safety
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # CAREER_LIFT — Clarity and choice focus
+  career_lift:
+    brand_id: career_lift
+    primary_moment: sunday_planning
+    promise_template: >
+      10 minutes after pressing play, the listener will feel unstuck and
+      grounded in what matters most about their next move, no longer frozen.
+    promise_short: "Feel unstuck and clear about your direction"
+    emotional_state:
+      primary: clarity
+      secondary: grounded
+      tertiary: momentum
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # ADHD_FORGE — Acceptance and focus focus
+  adhd_forge:
+    brand_id: adhd_forge
+    primary_moment: afternoon_focus_crash
+    promise_template: >
+      10 minutes after pressing play, the listener will feel more regulated
+      and accepting of how their brain works, with focus restored for the task at hand.
+    promise_short: "Feel accepted and refocused, not broken"
+    emotional_state:
+      primary: acceptance
+      secondary: clarity
+      tertiary: regulation
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # LONGEVITY_LAB — Biohacking and vitality focus
+  longevity_lab:
+    brand_id: longevity_lab
+    primary_moment: morning_health_routine
+    promise_template: >
+      10 minutes after pressing play, the listener will feel in control of
+      their aging biology, with one clear habit decision made for the day.
+    promise_short: "Feel in control of your health choices"
+    emotional_state:
+      primary: clarity
+      secondary: vitality
+      tertiary: calm
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # CREATIVE_UNFOLD — Creative confidence focus
+  creative_unfold:
+    brand_id: creative_unfold
+    primary_moment: reflective_walk
+    promise_template: >
+      10 minutes after pressing play, the listener will feel their creative
+      blocks loosening, with curiosity and playfulness rekindled.
+    promise_short: "Feel creative confidence return and blocks release"
+    emotional_state:
+      primary: flow
+      secondary: curiosity
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # RESILIENT_PARENT — Nervous system and identity focus
+  resilient_parent:
+    brand_id: resilient_parent
+    primary_moment: post_kids_bedtime
+    promise_template: >
+      10 minutes after pressing play, the listener will feel like a person again,
+      with their nervous system reset and their own needs acknowledged.
+    promise_short: "Feel like yourself again, not just a parent"
+    emotional_state:
+      primary: grounded
+      secondary: safety
+      tertiary: calm
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # EXECUTIVE_CALM — Presence under pressure focus
+  executive_calm:
+    brand_id: executive_calm
+    primary_moment: pre_board_meeting
+    promise_template: >
+      10 minutes after pressing play, the listener will feel steady and present,
+      with clarity and calm authority accessible under pressure.
+    promise_short: "Feel calm and commanding presence return"
+    emotional_state:
+      primary: presence
+      secondary: clarity
+      tertiary: calm
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # TRAUMA_PATH — Safety and integration focus
+  trauma_path:
+    brand_id: trauma_path
+    primary_moment: therapy_integration
+    promise_template: >
+      10 minutes after pressing play, the listener will feel safe in their body
+      and grounded in the present moment, witnessing their own resilience.
+    promise_short: "Feel safe in your own body, grounded and witnessed"
+    emotional_state:
+      primary: safety
+      secondary: grounded
+      tertiary: regulation
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # SPIRITUAL_GROUND — Presence and connection focus
+  spiritual_ground:
+    brand_id: spiritual_ground
+    primary_moment: morning_meditation
+    promise_template: >
+      10 minutes after pressing play, the listener will feel connected to something
+      larger than themselves, with presence anchoring them in calm clarity.
+    promise_short: "Feel connected to something larger and grounded in presence"
+    emotional_state:
+      primary: presence
+      secondary: calm
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # FOCUS_SPRINT — Focus without burnout focus
+  focus_sprint:
+    brand_id: focus_sprint
+    primary_moment: late_night_work
+    promise_template: >
+      10 minutes after pressing play, the listener will feel focused and
+      energized to ship, without the usual burnout spiral starting.
+    promise_short: "Feel focused and sustainable momentum"
+    emotional_state:
+      primary: focus
+      secondary: momentum
+      tertiary: clarity
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # HORMONE_RESET — Bodily control and vitality focus
+  hormone_reset:
+    brand_id: hormone_reset
+    primary_moment: health_research_evening
+    promise_template: >
+      10 minutes after pressing play, the listener will feel in control of
+      their body's signals and rhythms, with vitality accessible.
+    promise_short: "Feel in control of your body and vital"
+    emotional_state:
+      primary: grounded
+      secondary: vitality
+      tertiary: regulation
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # STOIC_EDGE — Mental toughness focus
+  stoic_edge:
+    brand_id: stoic_edge
+    primary_moment: gym_drive
+    promise_template: >
+      10 minutes after pressing play, the listener will feel mentally tough and
+      disciplined, with emotional clarity and composure available.
+    promise_short: "Feel mentally tough and emotionally composed"
+    emotional_state:
+      primary: discipline
+      secondary: clarity
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # CALM_STUDENT — Exam calm and focus focus
+  calm_student:
+    brand_id: calm_student
+    primary_moment: pre_exam_evening
+    promise_template: >
+      10 minutes after pressing play, the listener will feel the spiraling
+      thoughts settle, with focus and groundedness returning for the task ahead.
+    promise_short: "Feel calm and focused instead of spiraling"
+    emotional_state:
+      primary: calm
+      secondary: focus
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # HEALING_GROUND — Midday somatic reset focus
+  healing_ground:
+    brand_id: healing_ground
+    primary_moment: lunch_break
+    promise_template: >
+      10 minutes after pressing play, the listener will feel reset in their
+      body, with chronic stress released and groundedness restored.
+    promise_short: "Feel reset and grounded in the middle of your day"
+    emotional_state:
+      primary: grounded
+      secondary: regulation
+      tertiary: reset
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # BIO_FLOW — Data-driven optimization focus
+  bio_flow:
+    brand_id: bio_flow
+    primary_moment: quantified_self_review
+    promise_template: >
+      10 minutes after pressing play, the listener will feel optimized and
+      clear about their biohacking next level, with regulation supporting flow.
+    promise_short: "Feel optimized and data-driven clarity"
+    emotional_state:
+      primary: clarity
+      secondary: regulation
+      tertiary: focus
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # CONFIDENCE_CORE — Pre-social calm focus
+  confidence_core:
+    brand_id: confidence_core
+    primary_moment: pre_social_event
+    promise_template: >
+      10 minutes after pressing play, the listener will feel grounded in their
+      body and safe showing up, with social confidence accessible.
+    promise_short: "Feel safe and confident about showing up"
+    emotional_state:
+      primary: safety
+      secondary: confidence
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # RELATIONSHIP_CLARITY — Co-regulation and repair focus
+  relationship_clarity:
+    brand_id: relationship_clarity
+    primary_moment: post_argument
+    promise_template: >
+      10 minutes after pressing play, both partners will feel grounded and
+      reconnected, with safety and clarity returning to the relationship.
+    promise_short: "Feel reconnected and safe with your partner"
+    emotional_state:
+      primary: connection
+      secondary: safety
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # MORNING_MOMENTUM — Morning routine and readiness focus
+  morning_momentum:
+    brand_id: morning_momentum
+    primary_moment: sunrise_drive
+    promise_template: >
+      10 minutes after pressing play, the listener will feel clarity and momentum
+      building, ready to set the day's direction with intention.
+    promise_short: "Feel momentum and ready to own your day"
+    emotional_state:
+      primary: momentum
+      secondary: clarity
+      tertiary: focus
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # MINIMAL_MIND — Attention and clarity focus
+  minimal_mind:
+    brand_id: minimal_mind
+    primary_moment: doomscroll_fatigue
+    promise_template: >
+      10 minutes after pressing play, the listener will feel less scattered and
+      more grounded, with attention reclaimed from digital overwhelm.
+    promise_short: "Feel grounded and attention reclaimed"
+    emotional_state:
+      primary: clarity
+      secondary: grounded
+      tertiary: calm
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # HIGH_PERFORMER — Pre-call confidence focus
+  high_performer:
+    brand_id: high_performer
+    primary_moment: pre_call_prep
+    promise_template: >
+      10 minutes after pressing play, the listener will feel confident and
+      grounded, with the edge and clarity needed to perform.
+    promise_short: "Feel confident, grounded, and ready to close"
+    emotional_state:
+      primary: confidence
+      secondary: clarity
+      tertiary: focus
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # GENTLE_GROWTH — Safe self-inquiry focus
+  gentle_growth:
+    brand_id: gentle_growth
+    primary_moment: journaling_time
+    promise_template: >
+      10 minutes after pressing play, the listener will feel safe exploring
+      their inner world, with gentle curiosity and groundedness supporting discovery.
+    promise_short: "Feel safe exploring and gently grounded"
+    emotional_state:
+      primary: safety
+      secondary: curiosity
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+  # LEGACY_BUILDER — Midlife reinvention focus
+  legacy_builder:
+    brand_id: legacy_builder
+    primary_moment: life_transition
+    promise_template: >
+      10 minutes after pressing play, the listener will feel grounded in meaning
+      and clarity about their next chapter, with presence supporting decision-making.
+    promise_short: "Feel clarity and meaning for your next chapter"
+    emotional_state:
+      primary: clarity
+      secondary: presence
+      tertiary: grounded
+    validation:
+      emotional_vocabulary_match: true
+      immediate_claim: true
+      time_specific: 10_minutes
+
+# ─── VALIDATION RULES ────────────────────────────────────────────────────────
+
+validation_requirements:
+  - Each brand_id must match canonical brand_archetype_registry.yaml
+  - Promise must use "10 minutes after pressing play" framing
+  - Emotional state must match brand's emotional_vocabulary (max 2-3 tokens)
+  - Promise must be specific, not abstract (e.g., "grounded" vs "better")
+  - Promise must be single sentence or short compound sentence
+  - No use of forbidden_title_tokens (guaranteed, instant, cure)

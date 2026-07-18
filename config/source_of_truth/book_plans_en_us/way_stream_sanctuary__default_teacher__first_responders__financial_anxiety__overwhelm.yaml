@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__financial_anxiety__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__money_fears
+  name: Money Without Panic — for First Responders
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Anxiety: When Everything Is Too Much (2)'
+subtitle: A Real Talk Guide to Financial Anxiety for First Responders
+cover_tagline: You run toward other people's worst days. Then the bills come and your
+  chest goes tight.
+description:
+  short_blurb: Written for the people who hold it together on shift and come apart
+    over a stack of envelopes at the kitchen table. This is a plain-spoken look at
+    money panic for first responders — not a budget, a recognition. It names what's
+    happening in your body when the number in your head gets too loud, and it doesn't
+    try to talk you out of it.
+  long_description: 'You can stay calm with a stranger''s blood on your hands. You
+    can give report, pull the next call, hold the line for twelve hours straight.
+    Then you sit down with the mail and your heart does the thing it never does on
+    scene — it races over a number. Over rent, the truck payment, the card you''ve
+    been carrying since the last slow stretch of overtime. That gap is the whole problem,
+    and nobody warned you about it.
+
+
+    This book is for the first responders who carry a dread they can''t outrun — the
+    medic, the cop, the firefighter, the dispatcher who can run a mass-casualty in
+    their head but can''t open the banking app without their stomach dropping. You
+    are trained to triage everyone but yourself. So when the money math becomes too
+    much at once — too many bills, too many what-ifs, too many people depending on
+    the check — your nervous system does what it does best. It floods. And you treat
+    a spreadsheet like a structure fire.
+
+
+    We start by naming it, plainly: this is overwhelm, not a character flaw. The reason
+    "just make a budget" never sticks is that you''re not failing at math — you''re
+    maxed out, and a maxed-out system can''t plan, it can only brace. From there we
+    go down into it instead of around it. We look at what the dread is actually made
+    of when you stop slapping it away — the specific fears, the inherited rules, the
+    catch in your chest that shows up before any number does. We separate the bills
+    you can touch today from the catastrophe-reel your watcher-trained brain keeps
+    running. We let the number be loud without letting it run the truck. And then
+    you come back up — not fixed, not suddenly rich, but able to sit with the stack
+    and breathe.
+
+
+    This is not a get-out-of-debt plan. It will not optimize your spending or shame
+    you into a side hustle on your one day off. There are no worksheets, no 5 a.m.
+    routines, no pretending the pay is enough when it isn''t. What it gives you is
+    harder and more useful: a way to be in the same room as your money without your
+    body going to red alert, so the next decision gets made by you and not by the
+    panic.
+
+
+    You already carry enough for everyone else. You''re allowed to put this one down
+    long enough to actually look at it.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - first responders
+  - money anxiety for first responders
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names the body''s stress flood and how to complete it, not just think your way
+  out'
+- The Body Keeps the Score (Bessel van der Kolk) — why high-stress nervous systems
+  hijack everyday moments like opening a bill
+- Your Money or Your Life (Vicki Robin & Joe Dominguez) — a humane, non-hustle reframe
+  of the emotional grip money has on you
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

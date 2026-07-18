@@ -1,0 +1,761 @@
+schema_version: 1
+teacher_id: master_feung
+topic: economy_work
+active: true
+identity:
+  display_name: Master Feung
+  attribution_name: Master Feung
+  tradition: Chinese wisdom traditions; calligraphy as spiritual practice; Grand Painting teaching; Xi'an cultural center; Hua Shan pilgrimage lineage
+  tradition_short: Chinese wisdom traditions
+  teacher_setting_options:
+  - Xi'an cultural center
+  - calligraphy studio
+  teacher_years: decades
+  affiliation_safe_line: teaches within Chinese wisdom traditions at his Xi'an cultural center
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: schedule_refresh
+    label: refreshing the schedule app for basic stability
+    loop: checks the schedule app -> stomach drops -> refreshes again -> screenshots
+      it before it changes
+    body_markers:
+    - stomach
+    - jaw
+    - breath
+    - shoulders
+    digital_markers:
+    - checks the app
+    - refreshes
+    - screenshots
+topic_fit:
+  fit_level: primary
+  fit_reason: Work precarity is not a verdict on character. In the Grand Painting,
+    every person is a unique necessary piece — and the body that tightens under the
+    next schedule shock is registering the system's instability, not personal failure.
+    Being-yourself practice and calligraphy return dignity to the brush stroke even
+    when the roster keeps changing.
+  forbidden_angles:
+  - do not reduce this to generic wellness
+  - do not frame the pressure as personal weakness
+hook_personal:
+  options:
+  - id: master_feung_econ_hook_personal_01
+    line: Every shift change asks you to treat uncertainty like maturity. You keep
+      going, and you know how much hidden effort that takes — and part of you knows
+      the instability you are carrying was never authored by you.
+    metadata:
+      semantic_family: hidden-effort
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_personal_02
+    line: You feel the stomach drop before you have words for it. The mind has done
+      its work — read the threads, taken the screenings, tried the hustle stack. Something
+      quieter in you is asking to be witnessed rather than optimized.
+    metadata:
+      semantic_family: stomach-witness
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_personal_03
+    line: At 1 a.m. you refresh the app and check the messages. Neither move helps,
+      because the schedule will keep moving regardless — and the part of you trying
+      to control it is the part that has been over-asked all day.
+    metadata:
+      semantic_family: midnight-refresh
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_personal_04
+    line: You open the roster and your jaw tightens. You also know that no perfect
+      attendance, no flawless performance, no extra shift will undo the instability
+      you did not create — and that something in you needs space to be the piece it
+      actually is, not the worker it has been asked to perform.
+    metadata:
+      semantic_family: piece-not-performance
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_personal_05
+    line: The body knows the truth of the volatility before the analysis catches up.
+      You have read enough productivity content. What remains is a quieter question
+      — how to be yourself, here, in this body, in this part of the larger artwork,
+      without disappearing under the schedule you did not author.
+    metadata:
+      semantic_family: be-yourself-under-schedule
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: master_feung_econ_hook_big_01
+    line: 'Economic stress now lands as self-management under unstable conditions:
+      stay employable, stay flexible, stay calm, and act like the system is rewarding
+      effort fairly. The mismatch is not in the young worker; it is in the structure
+      that keeps converting structural instability into private nervous-system load.'
+    metadata:
+      semantic_family: system-pressure
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_big_02
+    line: Work precarity is not a malfunction of effort. It is the accurate registering
+      of the gap between what the labor market promises and what it actually delivers
+      to the cohort entering it — and that gap is being held by the body that opens
+      the app.
+    metadata:
+      semantic_family: precarity-as-accuracy
+      angle: labor-deferral
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_big_03
+    line: Humanity is a vast artwork — and the part of the painting now being asked
+      to carry the precarity load is the part with the least power to have authored
+      the conditions. The structural unfairness is not abstract; it is the felt edge
+      of every young worker who screenshots the schedule.
+    metadata:
+      semantic_family: grand-painting-unfairness
+      angle: structural-unfairness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_big_04
+    line: The signal that older systems read as a "lazy generation" is, in Master
+      Feung's framework, the body registering that the work it was prepared for is
+      no longer the work it has been offered. That registration is not laziness —
+      it is presence.
+    metadata:
+      semantic_family: presence-registration
+      angle: body-as-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_hook_big_05
+    line: The collective field of work has shifted faster than the institutions designed
+      to hold it. What gets read as a youth economic crisis is, in part, the visible
+      edge of a structural gap that no individual brush stroke was built to close
+      alone.
+    metadata:
+      semantic_family: structural-gap
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: master_feung_econ_intro_01
+    line: Master Feung, a teacher of Chinese wisdom traditions, has watched in his
+      Xi'an cultural center young people carry work instability not as a private failing
+      but as the felt edge of the Grand Painting — the vast artwork in which every
+      person is a unique, necessary piece. In his teaching, the body that drops when
+      the roster updates is not malfunctioning; it is the painting recognizing its
+      own load.
+    metadata:
+      semantic_family: grand-painting-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_intro_02
+    line: Master Feung does not position himself as an authority above his students
+      — he teaches that being yourself is the practice, not attaining an ideal. For
+      decades he has worked at his Xi'an cultural center with young people whose work
+      load arrives faster than their nervous systems can settle. What his tradition
+      offers is not another hustle stack; it is a return to the place each person
+      already holds in the larger artwork.
+    metadata:
+      semantic_family: being-yourself-frame
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_intro_03
+    line: Master Feung works with calligraphy as embodied practice. The brush stroke
+      cannot be undone — and that is the teaching. He has watched young workers arrive
+      certain they should be doing more, certain their precarity is proof of personal
+      failure, and watched the certainty soften when the brush meets the page and
+      presence becomes the practice.
+    metadata:
+      semantic_family: calligraphy-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_intro_04
+    line: Master Feung teaches from his five-floor cultural center in Xi'an, where
+      Taoist, Buddhist, and Confucian traditions interweave into a single non-doctrinal
+      practice. His pilgrimage to Hua Shan, the sacred Taoist mountain, is not metaphor
+      — it is the lived ground of his teaching. From that ground he meets young workers
+      not with answers but with the recognition that they are already the piece the
+      painting needed.
+    metadata:
+      semantic_family: xian-huashan-ground
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_intro_05
+    line: Master Feung teaches inside a tradition that reads humanity as a Grand Painting
+      — every person a unique, necessary piece exactly where they need to be. He has
+      watched the reframe land in young workers carrying schedule precarity and remove,
+      at least, the additional burden of believing the load is proof they were placed
+      wrong.
+    metadata:
+      semantic_family: piece-already-placed
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: master_feung_econ_somatic_01
+    line: You check the schedule app. Your stomach drops. You refresh it again. Then
+      you screenshot it before the shift changes underneath you.
+    metadata:
+      semantic_family: stomach-refresh-screenshot
+      loop_type: schedule_refresh
+      body_register: stomach
+      digital_behavior: checks the app
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_somatic_02
+    line: You open the roster. Your jaw tightens. You refresh. Then you screenshot
+      it because reality keeps moving and you need one stable image of where you stand.
+    metadata:
+      semantic_family: jaw-refresh-pin
+      loop_type: schedule_refresh
+      body_register: jaw
+      digital_behavior: refreshes
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_somatic_03
+    line: You scrolled through three job postings before lunch. Your shoulders lifted.
+      Your breath shortened. You did not finish the sandwich, because the body had
+      already ranked the search above the meal.
+    metadata:
+      semantic_family: shoulder-search-skip
+      loop_type: schedule_refresh
+      body_register: shoulders
+      digital_behavior: scroll-postings
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_somatic_04
+    line: You held your breath without noticing while the manager's message loaded.
+      Your stomach locked. You exhaled only when you saw the words and only halfway,
+      because there is always another message coming.
+    metadata:
+      semantic_family: breath-hold-message
+      loop_type: schedule_refresh
+      body_register: breath
+      digital_behavior: message-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_somatic_05
+    line: You lay down and your eyes pinned open. Tomorrow's shift replayed. Your
+      jaw would not soften. You knew sleep would help and you could not find the door
+      into it.
+    metadata:
+      semantic_family: night-shift-replay
+      loop_type: schedule_refresh
+      body_register: jaw
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: master_feung_econ_witness_01
+    line: Master Feung has seen this exact work loop in students and young workers
+      at his Xi'an center — the check, the drop, the refresh, the screenshot that
+      tries to hold one stable fact for a moment. In his teaching that loop is not
+      character; it is the painting registering load through the only piece currently
+      asked to hold it.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: schedule_refresh
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_witness_02
+    line: Master Feung has watched young workers walk into the calligraphy studio
+      already mid-loop, already certain the effort should have stabilized this by
+      now. In his tradition that certainty is the signal — the place where striving
+      stops and presence can return.
+    metadata:
+      semantic_family: striving-exhausted
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_witness_03
+    line: He has seen the body carry what the productivity content could not. In his
+      framework the somatic loop is not a malfunction — it is the painting speaking
+      through the only piece left awake when the optimization has been overused.
+    metadata:
+      semantic_family: somatic-painting-message
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_witness_04
+    line: Master Feung has watched young workers arrive with shame that no labor report
+      names accurately. In his tradition that shame is information, not pathology
+      — a signal that the cohort being asked to carry the instability was never the
+      one that authored the conditions producing it.
+    metadata:
+      semantic_family: shame-information
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_witness_05
+    line: Master Feung has watched the moment when a young worker stops trying to
+      produce the perfect worker self and lets the brush meet the page instead. In
+      his tradition that moment is not weakness — it is the return to being yourself
+      that conventional employment has no language for.
+    metadata:
+      semantic_family: brush-return
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: master_feung_econ_turnaround_01
+    stat_line_1: 73 million. ILO 2024.
+    stat_line_2: The ILO 2024 youth unemployment report counts seventy-three million
+      young people globally without work — a measurable floor for the cohort load
+      no single individual authored and no national policy has yet fully addressed.
+    metadata:
+      semantic_family: ilo-cohort-scale
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_turnaround_02
+    stat_line_1: 13.6%. Youth rate 2024.
+    stat_line_2: The ILO 2024 youth unemployment rate sits at thirteen point six per
+      cent — roughly three times the adult rate, and the structural fact every young
+      worker is being asked to absorb as if it were personal failing.
+    metadata:
+      semantic_family: ilo-rate-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_turnaround_03
+    stat_line_1: 11 states + DC. Fight for $15.
+    stat_line_2: The Fight for $15 movement has driven minimum wage increases in eleven
+      US states plus the District of Columbia — youth-led labor organizing translating
+      into measurable policy gains across nearly a quarter of the country.
+    metadata:
+      semantic_family: fight-for-15-policy
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_turnaround_04
+    stat_line_1: 1,200 co-ops. USFWC.
+    stat_line_2: The US Federation of Worker Cooperatives now coordinates more than
+      twelve hundred worker-owned cooperatives — an alternative ownership infrastructure
+      that did not exist at this scale a decade ago and now offers a measurable door
+      out of pure precarity.
+    metadata:
+      semantic_family: usfwc-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_turnaround_05
+    stat_line_1: 7 cities + Oregon. Fair Workweek.
+    stat_line_2: Fair Workweek laws have passed in seven US cities plus Oregon statewide
+      — the first wave of legislation that names schedule instability itself as a
+      labor harm requiring policy response, not a personal flexibility problem.
+    metadata:
+      semantic_family: fair-workweek-laws
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: master_feung_econ_bridge_01
+    line: 73 million. ILO 2024. The tracker measures the unemployment the young carry.
+      It has no column for what made the next shift, the next application, the next
+      conversation possible after another week of instability — the capacity to stay
+      steady enough to act again without handing the whole self over to the schedule.
+      Master Feung's tradition has language for what remains when striving falls away —
+      being yourself in the painting, even when the painting is being rearranged around
+      you.
+    hidden_capacity: stay steady enough to act without handing the self to the schedule
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_bridge_02
+    line: The numbers show the policy wins the young built. They do not show the Grand
+      Painting context that those wins are being built inside — a period where the
+      cohort with the least authoring power is being asked to hold the most consequential
+      load. Master Feung's tradition holds that context as native, not metaphor.
+    hidden_capacity: hold the larger context the data cannot show
+    metadata:
+      semantic_family: grand-painting-context-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_bridge_03
+    line: The data captures cases, co-ops, and wage gains. It cannot capture the shift
+      that happens when a young person stops trying to be the perfect worker and remembers
+      they are already the piece the painting needed. In Master Feung's framework
+      that remembrance is the actual ground — the part no tracker reports.
+    hidden_capacity: remember the piece the painting already needed
+    metadata:
+      semantic_family: remembrance-ground
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_bridge_04
+    line: The infrastructure is measurable. The brush stroke that cannot be undone
+      — the presence each person brings when they stop forcing the worker performance
+      — is not. Master Feung's tradition does not argue with the measurement; it works
+      in the layer beneath it, where calligraphy is practiced and being yourself becomes
+      the daily teaching.
+    hidden_capacity: work in the brush-stroke layer beneath measurement
+    metadata:
+      semantic_family: measurable-vs-brush
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_bridge_05
+    line: Co-ops, fair workweek laws, and minimum wage gains can be counted. The structural
+      unfairness underneath — a generation entering work conditions previous generations
+      did not have to survive — cannot. Master Feung's tradition does not replace
+      the structural work; it names the layer institutional response is not designed
+      to reach and offers Hua Shan-grounded presence as the door in.
+    hidden_capacity: name the structural unfairness the trackers cannot count
+    metadata:
+      semantic_family: structural-unfairness-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: master_feung_econ_perspective_01
+    header: What Master Feung Sees
+    paragraphs:
+    - In Master Feung's framework, humanity is a Grand Painting — a vast artwork in
+      which every person is a unique, necessary piece exactly where they need to be.
+      The young worker carrying schedule load is not misplaced; they are the piece
+      the painting placed precisely there. Suffering grows when that placement is
+      misread as personal failure rather than recognized as the painting's accurate
+      registration of structural load.
+    - Calligraphy in Master Feung's teaching is not art for display. It is embodied
+      practice in which body, breath, and presence unite. The brush stroke cannot
+      be undone — and that is the teaching. The young worker who keeps trying to do
+      it perfectly is fighting the actual practice. Presence is the practice. The
+      brush meets the page once, and that meeting is enough.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the painting's accurate signal that the system and institutional
+      structure have placed this load on the piece least able to have authored its
+      conditions. The practice is not to fix the self. The practice is to be yourself,
+      here, in this body, and let the brush meet the page even when the roster is
+      being rearranged.
+    metadata:
+      semantic_family: grand-painting-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_perspective_02
+    header: What Master Feung Sees
+    paragraphs:
+    - Calligraphy is not metaphor in Master Feung's teaching. It is the literal practice
+      — brush, ink, page, breath, body — in which the unrepeatable nature of presence
+      becomes felt. The young worker whose precarity is being processed as a hustle
+      problem has not been offered the layer the tradition has held for centuries —
+      the layer where one honest stroke is enough.
+    - The practice matters because it explains the relief many young workers describe
+      after time at the page — not that they have been argued out of the instability,
+      but that the instability has loosened on a layer that argument never reaches.
+      The brush did not have to be perfect for the breath to soften.
+    - This is the part conventional employment is not designed to deliver. It does
+      not invalidate the cases, the co-ops, or the policy work — but it names a missing
+      layer, and offers a tradition that has worked in that layer for generations.
+    metadata:
+      semantic_family: calligraphy-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_perspective_03
+    header: What Master Feung Sees
+    paragraphs:
+    - In Master Feung's tradition, Hua Shan is not a destination — it is a relationship.
+      The sacred Taoist mountain near Xi'an has been a pilgrimage site for centuries,
+      and Master Feung's own time there is the lived ground of what he teaches. The
+      mountain does not try to be stable. It is. The body that learns from the mountain
+      stops trying to be stable and lets stability arrive on its own.
+    - For a young worker carrying schedule load, the experience of being witnessed
+      by something larger than the manager is, in itself, structurally different from
+      being processed by them. The message that lands is not "here is the metric";
+      it is "you are already the piece the painting needed, and the instability you
+      carry was never authored by you alone."
+    - That distinction — witnessed rather than processed — is what conventional employment
+      cannot reproduce, and what Master Feung's tradition has carried as native for
+      decades at the Xi'an center.
+    metadata:
+      semantic_family: huashan-witness
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_perspective_04
+    header: What Master Feung Sees
+    paragraphs:
+    - Being yourself, in Master Feung's framework, is the teaching — not self-improvement,
+      not attaining an ideal, not becoming a better worker. The young person who feels
+      they should be more productive, more flexible, more anything is fighting the
+      actual practice. The painting placed them exactly where they are, and the load
+      they feel is the painting's load, not theirs alone.
+    - This is not a flattering reframe. It does not promise the labor market will
+      stabilize quickly, and it does not blame the cohort for feeling unstable in
+      an unstable market. It simply names the placement and removes the additional
+      weight of believing the instability proves they were placed wrong.
+    - That weight removal is, in calligraphy practice, often the part that lands first
+      — before the deeper return to being yourself can begin.
+    metadata:
+      semantic_family: being-yourself-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_perspective_05
+    header: What Master Feung Sees
+    paragraphs:
+    - Xi'an, in Master Feung's tradition, is the ground where Taoist, Buddhist, and
+      Confucian streams converge — not into a hybrid doctrine but into a single non-doctrinal
+      practice of authentic presence. The young worker who feels they need a system,
+      a method, a perfect approach to work has not yet been told that the converging
+      streams do not produce a method. They produce a return.
+    - Cultivation here is not productivity language. It is the practice of letting
+      the body lead — one breath, one stroke, one shift of weight — so the next move
+      arrives from presence rather than panic. The mountain does not try. The brush
+      does not strive. Let the body learn from that.
+    - In that frame, self-blame softens. The problem is not that young people are
+      lazy or that you are wrong for feeling unstable. The problem is that the labor
+      market is delivering instability faster than nervous systems can absorb, and
+      the painting is now registering the delivery through the piece least able to
+      have authored it. Being yourself, here, is the practice. The rest is the system's
+      accounting, not yours.
+    metadata:
+      semantic_family: xian-convergence
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: master_feung_econ_practice_01
+  options:
+  - id: master_feung_econ_practice_01
+    display_name: Brush Presence
+    duration: 5 minutes
+    announcement_line: Master Feung teaches a 5-minute Brush Presence practice for
+      moments when work instability is starting to overwrite clarity. It is in the
+      sidebar, timed and step by step.
+    relief_lines:
+    - The brush meets the page once, and the mind stops naming the whole self by the
+      schedule.
+    - A steadier presence returns, and with it the capacity to act again from the
+      piece you actually are.
+    relief_register:
+    - presence
+    - capacity
+    - act again
+    derived_from_frame: calligraphy_presence
+    metadata:
+      semantic_family: brush_presence
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_practice_02
+    display_name: Hua Shan Pilgrimage Memory
+    duration: 4 minutes
+    announcement_line: Master Feung offers a 4-minute Hua Shan Pilgrimage Memory practice
+      for moments when the schedule shock has knocked the body out of its own range.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body recalls the mountain — and the mountain does not try to be stable.
+    - The breath finds its own pace and stops chasing the roster's demanded pace.
+    relief_register:
+    - ground
+    - breath
+    - stillness
+    derived_from_frame: huashan_pilgrimage
+    metadata:
+      semantic_family: huashan_pilgrimage_memory
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_practice_03
+    display_name: Grand Painting Witness
+    duration: 6 minutes
+    announcement_line: Master Feung teaches a 6-minute Grand Painting Witness practice
+      for moments when the labor instability is being read as personal failure. It
+      is in the sidebar, timed and step by step.
+    relief_lines:
+    - The painting comes into view — and the piece you are stops being read as the
+      whole load.
+    - The body remembers it was placed here, not punished here.
+    relief_register:
+    - witness
+    - placement
+    - belonging
+    derived_from_frame: grand_painting
+    metadata:
+      semantic_family: grand_painting_witness
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_practice_04
+    display_name: Calligraphy Pause
+    duration: 3 minutes
+    announcement_line: Master Feung offers a 3-minute Calligraphy Pause for moments
+      between shifts, when the body has been carrying the load without permission
+      to set it down. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The brush stroke that cannot be undone becomes the marker for presence rather
+      than performance.
+    - The cohort load stops being treated as the individual's personal balance sheet.
+    relief_register:
+    - pause
+    - presence
+    - release
+    derived_from_frame: calligraphy_pause
+    metadata:
+      semantic_family: calligraphy_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_econ_practice_05
+    display_name: Being-Yourself Recall
+    duration: 3 minutes
+    announcement_line: Master Feung teaches a 3-minute Being-Yourself Recall for moments
+      when the urge to be more — more productive, more flexible, more anything — has
+      replaced the actual practice. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The pressure to become a better worker softens, and the piece you already are
+      returns to view.
+    - The painting comes back into focus, and the schedule stops being framed as a
+      personal audit.
+    relief_register:
+    - return
+    - being
+    - belonging
+    derived_from_frame: being_yourself
+    metadata:
+      semantic_family: being_yourself_recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 8
+    title: Decent Work and Economic Growth
+    line: The United Nations framework names decent work under SDG 8 and its full
+      and productive employment targets.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United
+      Nations.
+cta:
+  options:
+  - id: master_feung_econ_cta_01
+    org: US Federation of Worker Cooperatives
+    line: 'The US Federation of Worker Cooperatives coordinates more than twelve hundred
+      worker-owned cooperatives across the United States. Door in — find or start a
+      co-op near you.'
+    metadata:
+      semantic_family: door-in-usfwc
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_cta_02
+    org: Fight for $15
+    line: 'Fight for $15 is the worker-led movement for a living wage and union rights
+      that has shifted minimum wage policy across eleven US states. Door in — join
+      a local campaign.'
+    metadata:
+      semantic_family: door-in-fight-15
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_cta_03
+    org: ILO Youth Employment Programme
+    line: 'The International Labour Organization Youth Employment Programme runs research,
+      policy, and partnership work on the global youth labor crisis. Door in — their
+      youth network and resources.'
+    metadata:
+      semantic_family: door-in-ilo-youth
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_cta_04
+    org: Center for Popular Democracy
+    line: 'The Center for Popular Democracy is the national network organizing on
+      Fair Workweek, fair wages, and economic dignity across more than fifty cities.
+      Door in — their member organizations.'
+    metadata:
+      semantic_family: door-in-cpd
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_econ_cta_05
+    org: National Employment Law Project
+    line: 'The National Employment Law Project provides legal research and advocacy
+      on minimum wage, wage theft, and worker rights. Door in — their know-your-rights
+      resources and policy network.'
+    metadata:
+      semantic_family: door-in-nelp
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_feung_econ_headline_01
+      line: A Xi'an teacher names work precarity as the painting's load — and the
+        brush stroke that returns presence.
+      metadata:
+        semantic_family: painting-load-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_econ_headline_02
+      line: A calligraphy teacher, not a productivity coach, on the layer of work
+        instability conventional employment is not built to reach.
+      metadata:
+        semantic_family: calligraphy-witness-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_econ_headline_03
+      line: Being yourself, not becoming a better worker — Master Feung's tradition
+        meets the cohort precarity load.
+      metadata:
+        semantic_family: being-yourself-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_econ_headline_04
+      line: Hua Shan grounded, Xi'an based — a Chinese wisdom teacher reframes economic
+        anxiety as accurate registration.
+      metadata:
+        semantic_family: huashan-xian-ground
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_econ_headline_05
+      line: The Grand Painting holds the load — what Master Feung's tradition brings
+        to a generation handed an unstable labor market.
+      metadata:
+        semantic_family: grand-painting-call
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

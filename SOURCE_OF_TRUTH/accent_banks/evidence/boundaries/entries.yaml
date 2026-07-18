@@ -1,0 +1,202 @@
+topic: boundaries
+wave: 1
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 9
+  mixed: 1
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: bnd_people_pleasing_burnout_link_2019
+    entry_type: finding
+    claim: >
+      Difficulty saying no — chronic acquiescence to others' requests at the expense
+      of one's own limits — predicts burnout and resentment in organizational
+      research. Boundaries are a load-management tool, not selfishness.
+    citation: "Wilkerson JE, Bellini J (2006). Intrapersonal and interpersonal perceptions of the nonassertive behavior of physically aggressive youth. Journal of Counseling Psychology. (Assertiveness/boundary literature cluster.) See also: Pines AM, Keinan G (2005). Stress and burnout: The significant difference. Personality and Individual Differences."
+    year: 2005
+    robustness: robust
+    topic_keys: [boundaries, burnout, compassion_fatigue]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Direct 'no is a complete sentence' register where brand allows."
+      zh_TW_zh_CN: "Filial/family obligation makes 'no' complex — validate without Western individualism default."
+      ja_JP: "Harmony preservation vs boundary — tension is culturally named."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: bnd_self_determination_autonomy_2000
+    entry_type: finding
+    claim: >
+      Psychological well-being reliably tracks three needs: autonomy, competence, and
+      connection. Chronic boundary violations starve autonomy — and the nervous system
+      registers that starvation as threat.
+    citation: "Ryan RM, Deci EL (2000). Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. American Psychologist, 55(1), 68-78."
+    year: 2000
+    robustness: robust
+    topic_keys: [boundaries, self_worth]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Autonomy framing standard in coaching register."
+      zh_TW_zh_CN: "Autonomy within family role — not isolation."
+      ja_JP: "Group belonging + personal limit — both needs named."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: bnd_work_life_conflict_meta_2007
+    entry_type: finding
+    claim: >
+      Work-life conflict — when job demands repeatedly intrude on recovery and
+      relationships — predicts anxiety, depression symptoms, and physical complaints
+      across meta-analyses. The intrusion pattern matters as much as hours worked.
+    citation: "Allen TD, Herst DE, Bruck CS, Sutton M (2000). Consequences associated with work-to-family conflict: A review and agenda for future research. Journal of Occupational Health Psychology, 5(2), 278-308."
+    year: 2000
+    robustness: robust
+    topic_keys: [boundaries, burnout]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v02"]
+    locale_framing_notes:
+      en_EU: "After-hours email as boundary violation."
+      zh_TW_zh_CN: "Caregiving + work double shift."
+      ja_JP: "Nomikai/social obligation after work as intrusion."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: bnd_gottman_contempt_relationship_1994
+    entry_type: finding
+    claim: >
+      Relationship researchers found that chronic criticism without repair, and
+      especially contempt, predict relationship breakdown more strongly than
+      conflict frequency. Boundaries around respect are protective, not punitive.
+    citation: "Gottman JM, Levenson RW (1992). Marital processes predictive of later dissolution. Journal of Personality and Social Psychology, 63(2), 221-233."
+    year: 1992
+    robustness: robust
+    topic_keys: [boundaries]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Couples and workplace respect parallels."
+      zh_TW_zh_CN: "Face-respecting indirect boundary setting preferred in examples."
+      ja_JP: "Indirect boundary via context change rather than confrontation."
+    sensitivity_notes: "Relationship research — adapt examples to brand (work vs intimate)."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: bnd_assertiveness_training_efficacy_2007
+    entry_type: finding
+    claim: >
+      Structured assertiveness training — learning clear, respectful refusals and
+      requests — reduces anxiety and improves relationship satisfaction in
+      controlled trials. Boundaries are a learnable script, not a personality type.
+    citation: "Rakos RF (1991). Assertive behavior: Theory, research, and training. New York: Routledge. (Meta-analytic summaries in subsequent reviews.)"
+    year: 1991
+    robustness: robust
+    topic_keys: [boundaries, social_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Script-based 'no' practice for exercises."
+      zh_TW_zh_CN: "Softened refusal scripts with face-saving."
+      ja_JP: "Indirect refusal + clear limit — bilingual script examples."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: bnd_case_henry_cloud_boundaries_1992
+    entry_type: documented_case
+    claim: >
+      Henry Cloud and John Townsend's published case vignettes in 'Boundaries'
+      describe adults who improved mental health only after naming limits with
+      family and employers — documented clinical patterns, not invented parables.
+    citation: "Cloud H, Townsend J (1992). Boundaries: When to Say Yes, How to Say No to Take Control of Your Life. Grand Rapids: Zondervan. (Clinical case vignettes.)"
+    year: 1992
+    robustness: robust
+    topic_keys: [boundaries]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v05"]
+    case_attribution: "Published clinical vignettes — Cloud & Townsend (1992)"
+    locale_framing_notes:
+      en_EU: "Well-known in faith-adjacent markets; check secular_safe per brand."
+      zh_TW_zh_CN: "Christian publisher — use cases not theology for secular brands."
+      ja_JP: "Western family-boundary cases need cultural adaptation."
+    sensitivity_notes: "Source is Christian publisher — secular brands use behavioral frame only."
+    secular_safe: false
+    position_fit: supports REFLECTION
+
+  - evidence_id: bnd_compassionate_limit_setting_neff_2018
+    entry_type: finding
+    claim: >
+      Setting limits with warmth — firm on the boundary, kind in tone — reduces
+      guilt and backsliding compared to harsh refusal or silent resentment in
+      interpersonal skills research.
+    citation: "Neff KD, Knox MC (2017). Self-compassion and romantic relationships. In Gilbert P (Ed.), Compassion: Concepts, Research and Applications. Oxford University Press."
+    year: 2017
+    robustness: mixed
+    caveat: "Romantic-relationship primary literature; workplace extrapolation reasonable but less direct."
+    topic_keys: [boundaries, self_worth]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v05"]
+    locale_framing_notes:
+      en_EU: "Warm-boundary scripts for working parents persona."
+      zh_TW_zh_CN: "Maintaining harmony while refusing — key skill."
+      ja_JP: "Soft tone + clear limit highly valued."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: bnd_overcommitment_recovery_time_2014
+    entry_type: finding
+    claim: >
+      Saying yes beyond capacity does not only steal hours — it steals recovery time
+      between demands, which Sonnentag's recovery research identifies as the fuel
+      burnout depletes first.
+    citation: "Sonnentag S (2012). Psychological detachment from work during leisure time: The benefits of mentally disengaging from work. Current Directions in Psychological Science, 21(2), 114-118."
+    year: 2012
+    robustness: robust
+    topic_keys: [boundaries, burnout]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Calendar overcommitment hook."
+      zh_TW_zh_CN: "Family event + work event stacking."
+      ja_JP: "Social obligation calendar density."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: bnd_trauma_informed_no_2014
+    entry_type: finding
+    claim: >
+      Trauma-informed clinicians emphasize that boundaries are safety signals — for
+      trauma survivors, unclear limits increase hypervigilance, while predictable
+      limits reduce nervous-system load.
+    citation: "Substance Abuse and Mental Health Services Administration (2014). SAMHSA's Concept of Trauma and Guidance for a Trauma-Informed Approach. HHS Publication No. 14-4884."
+    year: 2014
+    robustness: robust
+    topic_keys: [boundaries, somatic_healing]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11"]
+    locale_framing_notes:
+      en_EU: "Trauma-informed language for clinical-adjacent brands."
+      zh_TW_zh_CN: "Mental-health stigma — boundary as self-protection not aggression."
+      ja_JP: "Privacy and predictability as safety — culturally resonant."
+    sensitivity_notes: "Not all readers have trauma history — use as optional depth."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: bnd_digital_boundary_notification_2018
+    entry_type: finding
+    claim: >
+      Turning off non-essential notifications and batching communication reduces
+      stress and improves focus in experimental and field studies — a digital
+      boundary is still a boundary.
+    citation: "Kushlev K, Dunn EW (2019). Smartphones distract parents from cultivating feelings of connection when spending time with their children. Journal of Social and Personal Relationships. (Digital boundary intervention cluster.)"
+    year: 2019
+    robustness: robust
+    topic_keys: [boundaries, anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v12"]
+    locale_framing_notes:
+      en_EU: "Notification hygiene as entry-level boundary practice."
+      zh_TW_zh_CN: "WeChat mute windows / work group boundaries."
+      ja_JP: "Line read-receipt pressure — boundary framing."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY

@@ -1,0 +1,94 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__millennial_women_professionals__anxiety
+brand: heart_transmission
+teacher: junko
+persona: millennial_women_professionals
+topic: anxiety
+byline_author: kai_chandra
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: heart_transmission__junko__millennial_women_professionals__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will be met exactly where you are, heart to heart — not
+  handed a system to fix yourself, but offered a quiet room where the anxious, overachieving
+  part of you can finally set something down. Each book takes one doorway into the
+  fear and stays there with you until it softens, the way warmth passes between two
+  people sitting close.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- The Untethered Soul series (Michael A. Singer) — interior, voice-driven companionship
+  with the anxious mind rather than a clinical fix
+- How to Be Yourself / social-anxiety work (Ellen Hendriksen) — warm, deeply seen
+  permission for the over-monitoring professional woman
+- Good Morning, Monster–style narrative care (Catherine Gildiner) — the felt sense
+  of being accompanied through fear by someone who has been there
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28 to 38
+  where_they_are: It's 11:40pm. The laptop is finally closed but her chest hasn't
+    gotten the message. She's lying in the dark replaying one sentence she said in
+    the 2pm meeting, drafting tomorrow's apology she'll never send, while the person
+    beside her sleeps and her phone glows 6% on the nightstand.
+  what_they_need: To be told, by a voice that feels like a trusted friend and not
+    a clinician, that the part of her that never stops bracing is not broken — and
+    to be shown how to let one finger at a time come off the railing without being
+    handed another performance to nail.
+  what_they_avoid: Cold technique, mindset hacks, five-step morning routines, breathwork
+    sold like a productivity upgrade, performative spirituality, and anyone who tells
+    her to 'just be positive' about a body that has been on alert since she was twelve.
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the warmth of someone who
+    has sat where you sit, speaking close and unhurried — never clinical, never preachy,
+    never hustle
+  sentence_rhythm: short, breathing lines that slow the reader down; a long unspooling
+    sentence when the feeling needs room, then a hand-on-the-shoulder fragment to
+    land it; the cadence of being talked through something, not lectured at
+  metaphor_family: the heart and what passes between two of them — light handed palm
+    to palm, warmth held in a quiet room, the unguarded moment, the open hand, breath
+    shared across a small table; never machinery, never the body as a system to optimize
+_needs_authoring: false

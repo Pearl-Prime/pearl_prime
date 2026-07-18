@@ -1,0 +1,429 @@
+schema_version: 1.0.0
+genre: romance_josei_drama
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  social_anxiety: strategy_01
+  boundaries: strategy_02
+  vulnerability: strategy_03
+  self_worth: strategy_04
+  loneliness: strategy_05
+character_pool:
+  protagonist:
+  - Aoi
+  - Mizuki
+  - Rena
+  - Haruka
+  - Saki
+  companion:
+  - the older florist who never rushes a bloom
+  - a widowed letterpress printer with patient hands
+  - the late-shift bartender who listens more than she pours
+  - an unhurried ceramics teacher who prizes the cracked bowl
+  - the retired stage actress who knows every kind of silence
+  setting:
+  - a narrow stationery shop wedged between two larger buildings
+  - a rooftop laundry deck above a sleeping city
+  - a corner cafe that keeps one table by the window unbooked
+  - a riverside apartment with a balcony too small for two chairs
+  - a bookbinding atelier that smells of glue and rain
+strategies:
+  strategy_01:
+    name: The Width of a Doorway
+    archetype_template: intimacy_threshold
+    description: Social anxiety externalised as THE INTIMACY THRESHOLD — a literal doorway the protagonist
+      rehearses crossing but never does. The genre device (the threshold one hovers at, the conversation
+      drafted and deleted) carries the inner state. The turn is not a pep talk; it is the discovery that
+      the other person leaves the door open on purpose, and that crossing can be one small step, not a
+      leap.
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, closing hour. {protagonist} stands one step outside the lit doorway, takes the
+          breath that should carry them in, and instead watches their own hand fold back around the strap
+          of their bag.'
+        camera_hint: wide_establishing
+        mood_hint: hesitation
+        is_carrier: false
+      - beat: 2
+        text: Inside, the warm light. Outside, the safe dark. {protagonist} has practised the first sentence
+          on the train, on the stairs, in the reflection of the glass — and the glass is as far as it
+          ever gets.
+        camera_hint: medium_two_shot
+        mood_hint: longing
+        is_carrier: false
+      - beat: 3
+        text: '{companion} sets a second cup on the counter without being asked, then turns away to wipe
+          a shelf that is already clean — leaving the doorway, and the choice, entirely unguarded.'
+        camera_hint: over_the_shoulder
+        mood_hint: invitation
+        is_carrier: false
+      - beat: 4
+        text: '{protagonist} steps in, says one word too many, feels the heat climb their neck, and bolts
+          back to the threshold as if the floor had tilted.'
+        camera_hint: close_up
+        mood_hint: panic
+        is_carrier: false
+      - beat: 5
+        text: '''You think the door is a test,'' {companion} says, not unkindly, eyes still on the shelf.
+          ''It isn''t. I left it open. I leave it open every night.'''
+        camera_hint: close_up
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} stops at the threshold. They do not go in and do not flee. For one long moment
+          they simply stand in the lit gap, breathing, letting the doorway be a place a person is allowed
+          to be.'
+        camera_hint: wide_establishing
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: One foot forward. Then, deliberately, the other. {protagonist} sits — not at the far end,
+          but at the cup that was set for them — and the sentence they finally say is small, and ordinary,
+          and theirs.
+        camera_hint: medium_two_shot
+        mood_hint: courage
+        is_carrier: true
+      - beat: 8
+        text: They talk about nothing — the rain, the price of good paper — and the nothing is the most
+          they have said to anyone in months. {companion} only nods, and refills the cup.
+        camera_hint: two_shot_warm
+        mood_hint: ease
+        is_carrier: false
+      - beat: 9
+        text: Weeks on, {protagonist} arrives at the same hour and walks in mid-step, mid-thought, the
+          threshold gone soft beneath their feet — a place crossed now, not a wall.
+        camera_hint: wide_establishing
+        mood_hint: belonging
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The door is open. The question was never whether they would be let in — only whether they
+          would let themselves.
+        ch2: One word, badly chosen, and the floor did not tilt after all. Tomorrow, perhaps, a second
+          word.
+        ch3: They have learned where to sit. Next they must learn to be the one who sets out the second
+          cup.
+  strategy_02:
+    name: The Word That Costs Nothing
+    archetype_template: saying_no
+    description: Boundaries externalised as LEARNING TO SAY NO — rendered through the favor-economy of
+      a relationship where the protagonist's yes is always assumed. The device is the running ledger of
+      small surrenders; the turn is the single quiet 'no' that the mentor models and the protagonist finally
+      speaks, discovering the bond does not break but breathes.
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, late. {protagonist} cancels their own evening again to cover someone else''s,
+          smiling the smile that has become a reflex, the phone already to their ear before the question
+          is fully out.'
+        camera_hint: medium_two_shot
+        mood_hint: depletion
+        is_carrier: false
+      - beat: 2
+        text: The favours stack like unpaid receipts in a drawer no one opens — each yes so small alone,
+          so heavy together that {protagonist} no longer remembers what an evening of their own would
+          even hold.
+        camera_hint: close_up
+        mood_hint: weariness
+        is_carrier: false
+      - beat: 3
+        text: '{companion} is asked for a thing they do not wish to give, and they say, simply and without
+          apology, ''No, not tonight.'' Then they keep arranging the flowers as though nothing remarkable
+          has occurred.'
+        camera_hint: over_the_shoulder
+        mood_hint: steadiness
+        is_carrier: true
+      - beat: 4
+        text: '''It didn''t break,'' {protagonist} murmurs, watching the other person leave unoffended.
+          ''You said no, and it just — held.'''
+        camera_hint: close_up
+        mood_hint: wonder
+        is_carrier: false
+      - beat: 5
+        text: '''A no is not a wall,'' {companion} answers. ''It''s a window. They can still see you through
+          it — they only can''t walk in whenever they please.'''
+        camera_hint: two_shot_warm
+        mood_hint: clarity
+        is_carrier: true
+      - beat: 6
+        text: The next request comes. {protagonist} opens their mouth, and the old yes is already there
+          — and they hold it, behind their teeth, and let the room go quiet around the unspoken word.
+        camera_hint: close_up
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: '''No,'' {protagonist} says. Just that. No reason offered, no apology stitched to the end
+          of it. The single syllable lands in the room and the room, astonishingly, stays standing.'
+        camera_hint: close_up
+        mood_hint: release
+        is_carrier: true
+      - beat: 8
+        text: The other person blinks, shrugs, says 'okay then' — and is, somehow, no less their friend
+          at the door than they were a moment before.
+        camera_hint: medium_two_shot
+        mood_hint: relief
+        is_carrier: false
+      - beat: 9
+        text: '{protagonist} keeps the evening they reclaimed. They sit alone with a cooling cup and find
+          the silence is not loneliness but ownership — the first hour in a long time that belongs to
+          no one else.'
+        camera_hint: wide_establishing
+        mood_hint: wholeness
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The word held the door. It did not slam it. There is a difference, and now {protagonist}
+          knows it in the body.
+        ch2: One no, and the friendship survived. So the fear was never the friend — it was the silence.
+        ch3: An evening reclaimed is a small country. Next, {protagonist} must learn to defend its borders
+          without guilt as the toll.
+  strategy_03:
+    name: The Drawer She Never Opened
+    archetype_template: letting_someone_in
+    description: Vulnerability externalised as LETTING SOMEONE IN — through a private, kept thing (an
+      unfinished work, a hidden craft, a grief) the protagonist has never shown a living soul. The device
+      is the closed drawer / unshared object; the turn is the act of showing it, imperfect, with the mentor
+      having shown theirs first. Intimacy is the risk of being seen, not a confession of feelings.
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} works late on a thing they will show no one — sliding it shut
+          in the drawer the instant footsteps near, the way one hides a wound rather than a treasure.'
+        camera_hint: close_up
+        mood_hint: guardedness
+        is_carrier: false
+      - beat: 2
+        text: To everyone they are easy, open, laughing in the right places — and the drawer stays locked
+          beneath the counter, the one room in the house with no light let in.
+        camera_hint: medium_two_shot
+        mood_hint: concealment
+        is_carrier: false
+      - beat: 3
+        text: '{companion} sets their own unfinished piece on the table between them — flawed, abandoned,
+          plainly painful to show — and says, ''I have never shown this to anyone. I''d like you to be
+          the first.'''
+        camera_hint: over_the_shoulder
+        mood_hint: trust
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} looks at the offered, imperfect thing and understands the cost of it — that
+          being let in is a gift someone chose to risk, not a door forced.'
+        camera_hint: close_up
+        mood_hint: recognition
+        is_carrier: false
+      - beat: 5
+        text: Their hand goes to the drawer. Stops. The whole shop seems to hold its breath with them,
+          the only sound the rain finding the gutter.
+        camera_hint: close_up
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: '''It isn''t finished,'' {protagonist} says — meaning so much more than the object — and
+          slides the drawer open all the way.'
+        camera_hint: medium_two_shot
+        mood_hint: exposure
+        is_carrier: true
+      - beat: 7
+        text: '{companion} does not fix it, does not praise it past what is true. They simply look — really
+          look — and say, ''Thank you for letting me see it.'' And the seeing does not burn.'
+        camera_hint: two_shot_warm
+        mood_hint: tenderness
+        is_carrier: true
+      - beat: 8
+        text: The thing sits in the open between them, unhidden at last, and the air in the room is not
+          dangerous — only closer, only warmer than before.
+        camera_hint: close_up
+        mood_hint: relief
+        is_carrier: false
+      - beat: 9
+        text: Next time, {protagonist} does not slide the drawer shut at the footsteps. They leave it
+          open on the counter, in the light, and let whoever comes see what they are making.
+        camera_hint: wide_establishing
+        mood_hint: openness
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The drawer is open and nothing was destroyed. Being seen, it turns out, is survivable — even
+          gentle.
+        ch2: 'They showed the unfinished thing. Now the harder craft: to let it be loved before it is
+          perfect.'
+        ch3: One drawer opened. The house has so many rooms still dark — but a person has learned that
+          light, let in, does not burn.
+  strategy_04:
+    name: Set a Place for Yourself
+    archetype_template: believing_you_are_choosable
+    description: 'Self-worth externalised as BELIEVING YOU ARE CHOOSABLE — through the long habit of waiting
+      to be picked: laying out a single place setting, hovering at the edge of every gathering, available
+      but never assuming a seat is theirs. The device is the table, the place set or unset. The turn is
+      the mentor refusing to let them shrink, and the protagonist setting a place for themselves before
+      anyone asks.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, evening. {protagonist} sets the table for everyone else, then eats standing
+          at the counter — present at the meal, somehow never quite invited to it.'
+        camera_hint: wide_establishing
+        mood_hint: smallness
+        is_carrier: false
+      - beat: 2
+        text: They wait, always, to be chosen — for the seat, the project, the second glance — certain
+          that to assume a place is theirs would be to overstep a line everyone but them can see.
+        camera_hint: medium_two_shot
+        mood_hint: diminishment
+        is_carrier: false
+      - beat: 3
+        text: '{companion} watches them hover at the table''s edge and quietly pulls out the chair beside
+          their own. ''You keep setting places for others. When did you decide you weren''t one of the
+          people who gets to sit down?'''
+        camera_hint: close_up
+        mood_hint: challenge
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} has no answer. The question lands somewhere old and sore, in the place that
+          learned long ago to be grateful for crumbs.'
+        camera_hint: close_up
+        mood_hint: ache
+        is_carrier: false
+      - beat: 5
+        text: They stand at the head of the laid table, the empty chair waiting, and for a long moment
+          do nothing at all — just breathe, and let the want to sit be a thing they are allowed to feel.
+        camera_hint: wide_establishing
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: Then {protagonist} takes a second plate from the shelf and sets a place — their own — at
+          the table, with the same care they have always spent on everyone else.
+        camera_hint: medium_two_shot
+        mood_hint: claiming
+        is_carrier: true
+      - beat: 7
+        text: They sit. Not at the edge, not standing — in the chair, at the table, in the life. {companion}
+          says nothing, only slides the bread within their reach, as one does for a person who belongs
+          there.
+        camera_hint: two_shot_warm
+        mood_hint: worth
+        is_carrier: true
+      - beat: 8
+        text: 'The meal goes on, unchanged in every way but one: there is a place that is {protagonist}''s,
+          and they are in it, and no one asked them to leave.'
+        camera_hint: two_shot_warm
+        mood_hint: ease
+        is_carrier: false
+      - beat: 9
+        text: Some weeks later {protagonist} walks into a gathering, finds no seat saved for them, and
+          simply pulls one to the table — choosing themselves before the room can decide whether to.
+        camera_hint: wide_establishing
+        mood_hint: confidence
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: They set their own place at last. The seat was never going to be offered — it was only ever
+          theirs to take.
+        ch2: One chair, claimed without permission. The world did not object. It had only been waiting
+          for them to.
+        ch3: To be choosable, they learned, begins with choosing yourself. The next table will be easier
+          — but the first one changed everything.
+  strategy_05:
+    name: The House Built to Need No One
+    archetype_template: the_loneliness_architecture
+    description: Loneliness externalised as THE ARCHITECTURE OF A SELF-SUFFICIENT LIFE — a routine engineered
+      so flawlessly around solitude that no other person can find a way in. The device is the perfectly
+      arranged single life (one cup, one chair, one routine). The turn is not a rescue; it is the mentor's
+      gentle observation that a door left open is not weakness, and the protagonist deliberately leaving
+      one crack of their life unsealed.
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, a flawless dawn routine. {protagonist} pours one cup, sets one chair, walks
+          one path — a life so smoothly self-contained that nothing, and no one, is ever required of it.'
+        camera_hint: wide_establishing
+        mood_hint: isolation
+        is_carrier: false
+      - beat: 2
+        text: They tell themselves it is freedom — needing no one, owing no one. But the second cup in
+          the cupboard has not been touched in so long the dust has made a home of it.
+        camera_hint: close_up
+        mood_hint: hollowness
+        is_carrier: false
+      - beat: 3
+        text: '{companion} notices the single place setting, the door that locks the moment it closes,
+          the kettle sized for one. ''You''ve built a beautiful house,'' they say. ''I just can''t find
+          the way in.'''
+        camera_hint: medium_two_shot
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 4
+        text: '''I built it that way on purpose,'' {protagonist} admits — and hears, for the first time,
+          how the sentence sounds said aloud to another living person.'
+        camera_hint: close_up
+        mood_hint: honesty
+        is_carrier: false
+      - beat: 5
+        text: That night {protagonist} stands in the doorway of their immaculate, solitary rooms, hand
+          on the lock, and does not turn it. They simply stand in the unsealed quiet, the night air moving
+          freely through.
+        camera_hint: wide_establishing
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: In the morning they take the second cup down from the shelf, wash the dust from it, and
+          set it on the counter — not for anyone in particular. Just so the place is no longer sealed
+          against company.
+        camera_hint: close_up
+        mood_hint: opening
+        is_carrier: true
+      - beat: 7
+        text: When {companion} comes by, there are two cups already waiting. {protagonist} pours for both,
+          and the routine — for the first time in years — has to make room.
+        camera_hint: two_shot_warm
+        mood_hint: connection
+        is_carrier: true
+      - beat: 8
+        text: The perfect, frictionless life is a little messier now — a second chair that doesn't quite
+          match, a path that detours past someone else's door — and {protagonist} finds they do not mind.
+        camera_hint: medium_two_shot
+        mood_hint: warmth
+        is_carrier: false
+      - beat: 9
+        text: They leave one part of the day unplanned now, on purpose — a crack in the architecture where
+          another person might, if they wish, walk in.
+        camera_hint: wide_establishing
+        mood_hint: belonging
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The door is unlocked now. Not flung wide — only unlocked. For a house built to need no one,
+          it is a revolution.
+        ch2: Two cups on the counter, and dust washed from the second. The life has a way in at last.
+        ch3: Solitude was a fortress they mistook for freedom. The crack they left in the wall is where
+          the light — and the company — gets in.
+anti_pattern_rules:
+- forbidden_combination:
+  - self_help_voiceover
+  - named_emotion_in_dialogue
+  - therapy_vocabulary
+  reason: Josei drama carries the inner state through the genre device — the doorway, the table, the second
+    cup, the kept drawer. A character must never name the lesson ('I have social anxiety', 'I need to
+    set boundaries', 'this is about my self-worth') or deliver a self-help monologue. The psychological
+    turn is shown as a physical gesture (crossing the threshold, saying the single 'no', sliding the drawer
+    open, taking the second plate down), never explained as a moral.
+- forbidden_combination:
+  - romance_as_rescue
+  - love_interest_fixes_protagonist
+  - confession_resolves_the_arc
+  reason: The companion is a mentor/ally who carries quiet wisdom and MODELS the behavior (says their
+    own 'no' first, shows their own unfinished work first), not a love interest whose affection cures
+    the protagonist. The arc resolves through the protagonist's own chosen action — they cross the threshold,
+    claim the chair, unlock the door themselves. A romantic confession or being-rescued-by-love must never
+    be the mechanism of the turn, or the embedded-wellness logic collapses into wish fulfillment.

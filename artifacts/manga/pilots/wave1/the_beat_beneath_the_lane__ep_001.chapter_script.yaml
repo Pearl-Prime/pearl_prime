@@ -1,0 +1,114 @@
+# PILOT (wave1) — MUSIC-MODE manga (Tier-1 authored). One mode only: MUSIC. No teacher, no doctrine.
+# Genre: sports_competition. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# music-vessel = THE INNER BEAT / THE TEAM CHANT. The runner's stride has a tempo; under pressure it
+# scatters. The race TURNS the instant the beat re-finds itself — scored, not explained. The reader is
+# made to FEEL, never taught. Nothing is explained. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: music_mode__en_US__sports_competition__series01
+catalog_title: "The Beat Beneath the Lane"
+chapter_id: ep_001
+title: "The Beat Beneath the Lane — Episode 1: The Tempo She Lost on the Line"
+mode: music                           # XOR — never teacher
+manga_author: Haru Kasten             # MUSICIAN-archetype EI author (NOT a teacher)
+musician_id: haru_kasten
+teacher_id: null                      # none — music-mode carries no doctrine
+genre: sports_competition
+felt_topic: imposter_syndrome         # interior, FELT through sound — never named, never taught
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Music-mode 3-beat skeleton (the inner beat carries the arc — open / mid / close):
+mode_beats:
+  opening_motif: page_2   (the sound enters — her stride's own steady beat, a chant the team hums)
+  mid_recurrence: page_4  (bestseller beat — forcing the pace scatters the beat; mid-race it RE-FINDS itself and she runs ON it again)
+  closing_resolution: page_6  (the beat settles into her own steady pulse — hers to keep, no longer borrowed)
+
+main_characters:
+  - id: rei
+    name: Rei
+    role: >-
+      protagonist — a sprinter who made the national relay team and is convinced it was a
+      mistake, that any second they'll find out she doesn't belong. On the blocks her body
+      seizes. (Unstated, never taught: a self that feels like a fraud in her own lane; here it
+      is carried by a BEAT, not a lesson.)
+    visual_anchor: spikes always double-knotted and re-checked; number bib she keeps tugging straight; shoulders that creep up at the start line; taps a nervous rhythm on her thigh before every race.
+  - id: the_beat
+    name: The Beat                     # the inner tempo + team chant — the MUSIC-VESSEL itself
+    role: >-
+      not a person; the rhythm Rei runs to. In training it lives under her stride, steady and
+      sure, doubled by a low chant the relay team hums before races. Under pressure it scatters
+      and she runs ragged. It is not a pep talk. It is the pulse she belongs to when she lets it carry her.
+    visual_anchor: never seen, only felt — rendered as a hand-lettered beat-motif under the panels (steady when she flows, broken and stuttering when she forces); the team's low pre-race hum; her own footfalls in time.
+  - id: the_anchor_leg
+    name: The Final Exchange           # the recurring stakes — the baton handoff
+    role: the relay's last handoff into Rei's anchor leg; through the chapter it is the moment her belonging is tested at full speed.
+
+scene_palette:
+  primary: stadium day — bright track red, white lanes, packed stands
+  secondary: bleached panic-white (the forced pace; the scattered beat)
+  accent: warm gold (her stride in true tempo; the team's hum)
+  resolution_palette: low warm light, empty track after (page 6 only)
+
+pages:
+  # ── The problem: she forces the pace and seizes ────────────────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — sports stadium; the arena of the race",
+         scene: "A packed stadium under bright sun, the relay final about to begin, lanes crisp red and white, the crowd a roar. Tense, electric, enormous. Render the ambient sound as a wall of noise."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the one who feels like a fraud in her own lane",
+         scene: "REI in the call room, double-knotting already-knotted spikes, tugging her bib straight again, shoulders climbing toward her ears. The other anchors look like they belong. She taps a fast, scattered rhythm on her thigh, eyes darting, certain someone's about to tell her she doesn't."}
+      - {panel_id: ep001_003, beat_type: failure, intent: "forcing the pace breaks the rhythm (imposter feeling, shown not named)",
+         scene: "A practice start. The gun. Rei explodes out trying to PROVE it — overstriding, muscling, chasing a pace that isn't hers. Her form scatters, arms flailing, the smooth runner from training nowhere to be found. Bleached panic-white. She pulls up, chest heaving, having run fast and wrong. The coach frowns. She feels every eye."}
+
+  # ── OPENING MOTIF: the beat enters ─────────────────────────────────────────
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: quiet, intent: "alone in the warm-up tunnel; the noise drops away",
+         scene: "The cool dim of the warm-up tunnel, the crowd muffled to a hum. Rei sits alone on a bench, head down, hands quiet for once, just breathing. The roar fades. It is suddenly very still."}
+      - {panel_id: ep001_005, beat_type: opening_motif, intent: "MUSIC-VESSEL enters — her own stride-beat, doubled by the team's hum; felt, never explained",
+         scene: "Down the tunnel, the relay team is gathered, doing the thing they always do before a race — a low, steady, four-count HUM, the chant they've shared since the first day. And under it, Rei feels it: the beat of her own true stride, the tempo she runs to when she isn't trying, the one her body knows in training. It rises in her, simple and sure. Render it as a hand-lettered beat-motif pulsing softly and EVENLY through the panel (not narration — a pulse): a steady four-count she half-forgot she had."}
+      - {panel_id: ep001_006, beat_type: response, intent: "the beat reaches the part of her that knows she belongs",
+         scene: "Without deciding to, Rei's tapping fingers slow — and fall into the steady four-count, matching the team's hum, matching her own stride. Her shoulders drop an inch. She doesn't tell herself she belongs; her body just remembers the rhythm it has always run to. Almost silent: the team's low hum and her own steady tap, in time."}
+
+  # ── Escalation: the race, she forces it again ──────────────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: action, intent: "stakes — the genre's engine",
+         scene: "The final. The gun. Legs one, two, three fly down the track, the crowd at full roar, the race neck-and-neck. The baton comes flashing toward Rei's anchor leg. Everything is on the last 100 meters. Everything is on her."}
+      - {panel_id: ep001_008, beat_type: crisis, intent: "under pressure she reverts to forcing — the imposter feeling peaks",
+         scene: "Baton in hand, Rei panics and does it again — tries to FORCE the pace, prove she earned this, outrun the doubt by sheer will. Her stride scatters instantly, the steady beat shattering into ragged noise, form falling apart, a rival pulling even. Bleached white. She is losing the race and her rhythm at once."}
+
+  # ── MID RECURRENCE (bestseller beat): the beat re-finds itself ─────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_009, beat_type: turn, intent: "she stops forcing — and reaches for the BEAT, not the proof",
+         scene: "Halfway down the straight, lungs burning, about to lose — Rei stops trying to prove anything. She stops chasing the rival's pace. Eyes forward, she lets go, and finds the steady four-count under her feet — the team's hum, her own true tempo — and lets her stride drop ONTO it instead of fighting it."}
+      - {panel_id: ep001_010, beat_type: mid_recurrence, intent: "BESTSELLER BEAT — the beat RETURNS, steady, and her stride locks into it",
+         scene: "The instant she finds it, the ragged noise RESOLVES — the scattered footfalls bend back into the even four-count from the tunnel, now full and powerful, her whole stride snapping into rhythm. Render the beat-motif filling the panel, the broken stutter becoming the steady pulse, footfalls landing dead on the beat. She isn't forcing the pace anymore. She is RIDING it. And riding it, she is suddenly, effortlessly, fast."}
+      - {panel_id: ep001_011, beat_type: flow, intent: "from forcing to flow — felt, never explained",
+         scene: "Rei flows down the final meters in perfect tempo — relaxed, huge, unforced, eating up the track, the rival falling behind. No straining. Just the steady beat and her body moving exactly on it, like the chant made flesh. She isn't proving she belongs. She's running like she always did, in her own lane, on her own beat."}
+
+  # ── CLOSING RESOLUTION: the beat settles ───────────────────────────────────
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: aftermath, intent: "the race ends; the pulse settles",
+         scene: "The line. Rei hits the tape first, the stadium erupting, but the panel holds quiet on her — slowing, hands on knees, the steady four-count still pulsing under her heaving breath, not scattered now. Her teammates pour toward her, still humming the chant, the same four counts."}
+      - {panel_id: ep001_013, beat_type: closing_resolution, intent: "the beat resolves into her own steady pulse",
+         scene: "In the noise, Rei straightens, hand on her own chest, and feels the four-count settle — from the team's hum, into her own heartbeat, slowing, steady, hers. The borrowed beat is her own pulse now. Render the beat-motif settling into a calm, even heartbeat, coming gently to rest."}
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_014, beat_type: image, intent: "belonging — carried entirely by sound",
+         scene: "Later. The warm low light of an emptying stadium. Rei alone on the track, spikes in hand, walking the lane she just won, calm. She taps the four-count once on her thigh — steady, sure, no longer nervous. It's just hers now."}
+      - {panel_id: ep001_015, beat_type: close, intent: "MUSIC close — no moral, just the feeling that has changed",
+         scene: "Final panel, pulled wide and still. The small runner on the vast quiet track, the empty stands gold in the late light. Closing music-caption, the musician's sign-off — a last steady bar of the four-count, and beneath it, small: '— and the beat she thought she'd borrowed had been hers the whole way down.'"}
+
+wrapper_note: >-
+  Music-mode only. There is NO coach, NO mentor, NO teaching line — the arc (imposter-panic ->
+  belonging) is carried entirely by the inner beat / team chant, the sports genre's native
+  music-vessel: a steady tempo that scatters under forcing, RE-FINDS itself mid-race when Rei stops
+  proving and rides it, and at last settles into her own pulse. The reader is made to feel, not
+  instructed. If this were teacher-mode it would have a coach who drills the body out of choking and
+  SAYS the doctrine (the choke is bracing, the flow is release); here her stride just finds its beat.
+  Interior topic (imposter syndrome / feeling like a fraud) never named on the page.

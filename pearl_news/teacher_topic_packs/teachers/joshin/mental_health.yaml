@@ -1,0 +1,740 @@
+schema_version: 1
+teacher_id: joshin
+topic: mental_health
+active: true
+identity:
+  display_name: Joshin
+  attribution_name: Shingon Priest Joshin
+  tradition: Shingon Esoteric Buddhism (Mikkyo)
+  tradition_short: Shingon Esoteric
+  teacher_setting_options:
+  - temple
+  - ritual hall
+  teacher_years: lineage-bearing
+  affiliation_safe_line: teaches within the Shingon Esoteric Buddhist tradition
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: honne_tatemae_overload
+    label: friction between the surface face the system requires and what the body
+      cannot keep from registering underneath
+    loop: reads the alert -> jaw tightens -> puts the phone down -> picks it up again
+      because the surface still has to be performed
+    body_markers:
+    - jaw
+    - chest
+    - breath
+    digital_markers:
+    - put the phone down
+    - pick it up again
+topic_fit:
+  fit_level: primary
+  fit_reason: Mental overload in a phone-native cohort that has been trained in honne/tatemae
+    is not only symptom; it is the cost of holding the surface together while the
+    body registers what the surface is not allowed to acknowledge. Shingon's ritual
+    technology — explicit body/speech/mind synchronization — is built to address
+    precisely this gap.
+  forbidden_angles:
+  - do not reduce to generic wellness
+  - do not frame the pressure as personal weakness
+  - do not use Zen framing
+hook_personal:
+  options:
+  - id: joshin_mh_hook_personal_01
+    line: You know the spiral before anyone names it. You also know that the inherited
+      toolkit — mindfulness apps, breathing trackers, the surface-level prompts —
+      has been working on the layer the surface is already managing. The layer underneath
+      keeps doing its own thing.
+    metadata:
+      semantic_family: surface-toolkit-gap
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_personal_02
+    line: You have a face for school and a face for the group chat and a face for
+      the bathroom mirror at 1 a.m. The body has been carrying all three at once,
+      and the modern toolkit has been training you to manage the surface better.
+      What you actually need is a technology that synchronizes what is underneath.
+    metadata:
+      semantic_family: multiple-faces-no-synchronizer
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_personal_03
+    line: The chest has been tight since the morning headline. You have not let it
+      show. The not-showing has cost something — and the toolkit you were given for
+      the cost is more not-showing, more surface management. The layer underneath
+      keeps building pressure.
+    metadata:
+      semantic_family: not-showing-cost
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_personal_04
+    line: You are exhausted in a way the rest cannot touch. The sleep happens and
+      the exhaustion remains — because the load is held in a layer the breath app
+      cannot reach. The Buddha-nature in this body, in the Shingon framework, has
+      been waiting for an explicit technology to be addressed.
+    metadata:
+      semantic_family: buddha-nature-waiting
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_personal_05
+    line: A part of you knows the question is not whether you are managing well enough.
+      The question is whether anything is actually being delivered to the layer that
+      has been doing the carrying — and Shingon's tradition holds an explicit ritual
+      technology for that delivery.
+    metadata:
+      semantic_family: ritual-tech-question
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: joshin_mh_hook_big_01
+    line: Youth mental overload is not only about symptoms. It is what surface management
+      costs over time — what happens to attention, rest, and the capacity to register
+      one's own state when the culture has been training the cohort in surface management
+      and not in synchronization.
+    metadata:
+      semantic_family: surface-management-cost
+      angle: cultural-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_big_02
+    line: A generation is being asked to carry institutional load, family expectation,
+      and platform performance simultaneously — and the inherited mental health framing
+      treats each as a private symptom. Shingon's tradition reads this as a synchronization
+      problem with explicit ritual technology, not a personal failure.
+    metadata:
+      semantic_family: synchronization-framing
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_big_03
+    line: In Japan especially, honne/tatemae — the gap between real feeling and the
+      face required — has thickened in the platform age. The cohort is being asked
+      to hold a wider gap than any prior generation, with fewer rituals for the layer
+      underneath. The mental health crisis sits inside that architecture.
+    metadata:
+      semantic_family: honne-tatemae-thickened
+      angle: cultural-architecture
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_big_04
+    line: Shingon's premise — Sokushin Jobutsu, Buddhahood in this very body — refuses
+      to defer the inner truth. The body the cohort is carrying is not preparation
+      for some later self; it is the site where the synchronization either happens
+      or does not.
+    metadata:
+      semantic_family: sokushin-jobutsu-now
+      angle: doctrine-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_hook_big_05
+    line: What gets read as a generational mental health crisis is, in part, an architecture
+      problem — a system that has not provided explicit body/speech/mind technology
+      for the load the cohort is being asked to carry. Shingon has carried that technology
+      for centuries.
+    metadata:
+      semantic_family: architecture-tech-gap
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: joshin_mh_intro_01
+    line: Joshin, a priest in the Shingon Esoteric Buddhist tradition (Mikkyo), has
+      worked inside ritual halls with young people for decades. He has watched what
+      surface management costs a cohort that has been trained to perform and not
+      taught the ritual technology that synchronizes what is underneath.
+    metadata:
+      semantic_family: identity-seen-shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_intro_02
+    line: Joshin teaches inside the Shingon lineage. He does not position himself
+      as a mental health practitioner in the clinical sense — he is a ritual technologist
+      whose tradition has, for over a millennium, treated body, speech, and mind
+      as one synchronized field that has explicit technology for adjustment.
+    metadata:
+      semantic_family: ritual-technologist
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_intro_03
+    line: Joshin works from the Shingon principle of Sokushin Jobutsu — Buddhahood
+      in this very body. There is no deferred self that the practice is preparing.
+      The body that carries the load now is the site of the work, and the technology
+      addresses that body directly.
+    metadata:
+      semantic_family: sokushin-jobutsu-frame
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_intro_04
+    line: Joshin has watched young people arrive at the temple already worn down by
+      the cost of carrying multiple faces. In Shingon's framework the friction is
+      not character failure; it is the body asking for the synchronization the surface
+      has been refusing.
+    metadata:
+      semantic_family: synchronization-asked-for
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_intro_05
+    line: Joshin is fluent in the language of platform and pressure. His Shingon practice
+      is not a return to a softer time — it is a reframe of esoteric Buddhism as
+      a technology stack precisely suited to the cohort whose lives are being run
+      by platforms and performance demands.
+    metadata:
+      semantic_family: esoteric-as-tech-stack
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+youth_somatic:
+  options:
+  - id: joshin_mh_somatic_01
+    line: You read the update after midnight. Your jaw locked. You put the phone
+      face-down. Then you turned it back over because the surface still had to be
+      maintained for the morning.
+    metadata:
+      semantic_family: jaw-surface-maintained
+      loop_type: midnight_overload
+      body_register: jaw
+      digital_behavior: phone face-down
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_somatic_02
+    line: You woke before the alarm. The chest was already tight. You reached for
+      the phone before you reached for the light — because the day required the
+      face to be in place by the time anyone else saw it.
+    metadata:
+      semantic_family: morning-face-pre-rigged
+      loop_type: morning_dread
+      body_register: chest
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_somatic_03
+    line: Your breath shortened in the meeting when the question was directed at
+      you. You answered smoothly. The breath did not lengthen afterwards — because
+      the surface had succeeded and the layer underneath was the only one left to
+      pay the cost.
+    metadata:
+      semantic_family: meeting-surface-success
+      loop_type: surface_cost
+      body_register: breath
+      digital_behavior: in-room performance
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_somatic_04
+    line: You scrolled past three updates in one minute. The stomach turned each time.
+      You did not name the turning — because the platform you scrolled in was the
+      same platform where the face had to be performed, and the cost of one was
+      arriving inside the other.
+    metadata:
+      semantic_family: stomach-platform-double-cost
+      loop_type: scroll_compound
+      body_register: stomach
+      digital_behavior: rapid scroll
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_somatic_05
+    line: You lay down and the shoulders would not soften. You opened the phone to
+      escape and the same face was waiting in the camera roll. The body looked for
+      a release the day had not been allowed to deliver.
+    metadata:
+      semantic_family: shoulders-no-release
+      loop_type: sleep_resistance
+      body_register: shoulders
+      digital_behavior: open the phone to escape
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: joshin_mh_witness_01
+    line: Joshin has seen this exact loop in young people who arrive at the temple
+      worn down by surface management. In Shingon's framework the contraction is
+      not pathology — it is the body asking for the synchronization that the surface
+      has been refusing.
+    metadata:
+      semantic_family: synchronization-asked
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_witness_02
+    line: He has watched young people sit through the first cycle of a Goma fire
+      ritual and feel, for the first time, that the surface has been allowed to
+      drop. In his tradition the drop is not breakdown — it is the explicit ritual
+      release the body has been asking for.
+    metadata:
+      semantic_family: goma-surface-drop
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_witness_03
+    line: He has guided cohorts through their first Sanmitsu practice — the synchronization
+      of mudra, mantra, and visualization — and watched the moment when body, speech,
+      and mind stop pulling against one another. In his tradition that is not relaxation;
+      it is the explicit technology working.
+    metadata:
+      semantic_family: sanmitsu-synchronization
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_witness_04
+    line: He has seen the moment when a young person stops trying to argue themselves
+      out of the load and lets a mantra carry the layer the surface cannot reach.
+      In his tradition the moment is not surrender — it is the ritual technology
+      doing what the modern toolkit was not built to do.
+    metadata:
+      semantic_family: mantra-carries-layer
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_witness_05
+    line: He has watched the shift when a young person registers, for the first time,
+      that the body they are inside now is the Buddha-body — that there is no later
+      self the practice is preparing. The reframe lands as something the surface
+      management vocabulary cannot deliver.
+    metadata:
+      semantic_family: this-body-buddha-body
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: joshin_mh_turnaround_01
+    stat_line_1: 320 campuses. 18 countries.
+    stat_line_2: Youth organizers are hosting peer circles, training listeners, and
+      forcing schools to treat mental health as infrastructure rather than private
+      weakness.
+    metadata:
+      semantic_family: youth-organizing-scale
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_turnaround_02
+    stat_line_1: 488 universities. JED Campus.
+    stat_line_2: The JED Foundation program now runs comprehensive mental health
+      frameworks across nearly five hundred US campuses, embedding peer support and
+      faculty training into the day-to-day infrastructure rather than the crisis
+      aftermath.
+    metadata:
+      semantic_family: jed-campus-network
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_turnaround_03
+    stat_line_1: 5,600 voices. 7 countries.
+    stat_line_2: UNICEF's Global Coalition for Youth Mental Health gathered 5,600
+      young people aged 14-25 across seven countries to name the load themselves
+      before the agencies could.
+    metadata:
+      semantic_family: youth-collective-organizing
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_turnaround_04
+    stat_line_1: 14 million contacts. 988 Lifeline.
+    stat_line_2: Since the 988 Suicide and Crisis Lifeline launched in 2022, more
+      than fourteen million contacts have been routed through it — a resource pool
+      that did not exist three years ago.
+    metadata:
+      semantic_family: resource-pool-built
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_turnaround_05
+    stat_line_1: 53 member states. WHO Europe.
+    stat_line_2: The WHO Europe Child and Adolescent Health Strategy 2026-2030, adopted
+      in October 2025, binds fifty-three member states to report on adolescent mental
+      load against a 2030 deadline.
+    metadata:
+      semantic_family: policy-shift
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: joshin_mh_bridge_01
+    line: 320 campuses. 18 countries. The tracker measures the workshops and peer
+      circles young people built. It does not measure the synchronization gap —
+      what happens when body, speech, and mind have been pulling against one another
+      for years without an explicit technology to put them back into one field. Joshin's
+      Shingon practice holds that technology as native.
+    hidden_capacity: synchronize body, speech, and mind into one field
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_bridge_02
+    line: The numbers show what young people built. They do not show what each organizer
+      carries privately at 1 a.m. — the surface management cost that the platform
+      and the institution and the family expectation have been accumulating in the
+      same body. Shingon's Goma ritual addresses that accumulation directly.
+    hidden_capacity: release accumulated surface cost the trackers do not measure
+    metadata:
+      semantic_family: goma-accumulation-release
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_bridge_03
+    line: Policy frameworks track participation. They do not track the layer underneath
+      that the surface management is hiding from the policy view. Shingon's tradition
+      makes that layer explicit — mudra (hand seal) grounds the body, mantra (true
+      word) addresses the speech layer, and visualization holds the mind. Together
+      they synchronize what was hidden.
+    hidden_capacity: make the hidden layer explicit through Sanmitsu
+    metadata:
+      semantic_family: sanmitsu-explicit
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_bridge_04
+    line: The data capture sessions and contacts and policy adoption. They cannot
+      capture the moment a young person sits inside Goma and feels, for the first
+      time, that the surface has been allowed to drop in a structured, contained
+      way. In Joshin's framework that drop is the relief no tracker reports.
+    hidden_capacity: provide structured release the trackers cannot measure
+    metadata:
+      semantic_family: goma-structured-release
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_bridge_05
+    line: The infrastructure is measurable. The Sokushin Jobutsu — the recognition
+      that this body, now, is the site of the work — is not. Joshin's tradition does
+      not replace the infrastructure; it names the layer beneath it and offers explicit
+      ritual technology for the cohort the infrastructure is trying to serve.
+    hidden_capacity: name and address the layer the infrastructure cannot reach
+    metadata:
+      semantic_family: sokushin-vs-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+teacher_perspective:
+  options:
+  - id: joshin_mh_perspective_01
+    header: What Joshin Sees
+    paragraphs:
+    - Joshin does not tell young people to relax as if the overload were a personal
+      mistake. In Shingon's framework the friction is the body asking for synchronization
+      — Sanmitsu, the union of body, speech, and mind — that the surface management
+      culture has been refusing to provide. The problem is not the cohort. The problem
+      is the absence of explicit ritual technology for the load the cohort is being
+      asked to carry.
+    - From there he turns to Goma — the fire ritual. The Shingon tradition uses Goma
+      as an explicit, non-cognitive release for emotional accumulation that the cultural
+      taboo against open expression has been blocking. The fire receives what the
+      surface has not been permitted to acknowledge, and the body registers the
+      release before the mind has language for it.
+    - That matters because what feels like private failure is, in his framework,
+      accurate response to a synchronization gap. The Shingon premise — Sokushin
+      Jobutsu, Buddhahood in this very body — refuses to defer the work. The body
+      that carries the load now is the site of the technology, not the audience for
+      a deferred promise.
+    metadata:
+      semantic_family: teacher-diagnosis
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_perspective_02
+    header: What Joshin Sees
+    paragraphs:
+    - In Joshin's tradition the body's contraction is precise information. It is
+      not a malfunction; it is the body registering that the surface and the underneath
+      have been pulling against one another without an explicit way to be re-synchronized.
+      The Shingon answer is Sanmitsu — the simultaneous use of mudra (hand seal),
+      mantra (true word), and mandala (visualization) to put body, speech, and mind
+      back into one field.
+    - For a phone-native cohort, the explicit, embodied nature of these tools is
+      part of the point. Mudra grounds the body — fingers do something they cannot
+      do on a screen. Mantra addresses the speech layer — the throat is asked to
+      do something the platform script does not require. Mandala holds the mind in
+      a structured field that the algorithm cannot generate.
+    - The result is not relaxation in the modern sense. It is the explicit re-alignment
+      of layers that have been operating against each other. The body registers the
+      alignment as relief, but the relief is the side effect; the technology was
+      always doing the alignment work directly.
+    metadata:
+      semantic_family: sanmitsu-mechanism
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_perspective_03
+    header: What Joshin Sees
+    paragraphs:
+    - Goma is the Shingon fire ritual — an explicit ceremony for non-cognitive emotional
+      release. In a cultural context where honne/tatemae has been thickened by platform
+      performance demands, the cohort has been accumulating emotional load with diminishing
+      legitimate channels for release. The screen cannot receive what the cultural
+      script has not been permitted to acknowledge.
+    - Goma can. The fire is the receiver. The ritual structure provides the explicit
+      permission and the explicit container — what is offered is offered for transmutation,
+      not for analysis or judgment. The cohort's body registers the receiving before
+      the cohort's mind has language for what just happened.
+    - In Joshin's framework this is not therapy and not entertainment. It is ritual
+      technology that has been refined for over a millennium for precisely the kind
+      of accumulated, unaddressed load that the surface-management culture builds
+      up. The fact that the modern toolkit has no equivalent is not a defect of
+      the cohort — it is a vocabulary the modern toolkit has not been designed to
+      hold.
+    metadata:
+      semantic_family: goma-mechanism
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_perspective_04
+    header: What Joshin Sees
+    paragraphs:
+    - Sokushin Jobutsu — Buddhahood in this very body — is the load-bearing Shingon
+      premise. It refuses to defer the inner work to some later self. The body that
+      carries the load now is, in the framework, already Buddha-nature; the practice
+      is not preparation for a different self but explicit synchronization of the
+      one that is already here.
+    - For a generation that has been trained to manage the surface and treat the
+      inner state as something to be optimized later or treated as a private symptom,
+      this reframe is structurally different from the modern toolkit. The modern
+      toolkit assumes the work is on the symptom. Shingon assumes the work is on
+      the synchronization, and the symptom is information about which layer needs
+      attention.
+    - The reframe does not promise the load lifts. It promises the layer that has
+      been carrying it has explicit technology available and is recognized as the
+      site of the actual work, not as the part that needs to be managed quietly while
+      the surface continues to perform.
+    metadata:
+      semantic_family: sokushin-reframe
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_perspective_05
+    header: What Joshin Sees
+    paragraphs:
+    - The principle Joshin returns to is that mental overload in this cohort is a
+      synchronization problem dressed up as a symptom. The body, speech, and mind
+      have been operating against one another — under platform demand, family expectation,
+      and institutional load — and the modern toolkit has been trying to manage the
+      symptom while leaving the synchronization gap untouched.
+    - Shingon's contribution is the technology for the synchronization itself. Sanmitsu
+      addresses all three layers at once. Goma releases accumulated load that the
+      surface has refused. The ritual structure provides the explicit container that
+      the platform cannot generate and that the screening tool was not built to deliver.
+    - For a phone-native cohort, the question is not whether to abandon the platform.
+      The question is whether the synchronization technology can be made available
+      and legible alongside it. Joshin teaches that it can, and that the layer the
+      modern toolkit cannot reach is precisely the layer the tradition has been working
+      on for centuries.
+    metadata:
+      semantic_family: synchronization-technology
+      article_types:
+      - hard_news_spiritual_response
+practice:
+  default_id: joshin_mh_practice_01
+  options:
+  - id: joshin_mh_practice_01
+    display_name: Mudra Grounding
+    duration: 4 minutes
+    announcement_line: Joshin teaches a 4-minute Mudra Grounding — an explicit hand-seal
+      practice that gives the body a task the screen cannot ask of it and grounds
+      the somatic layer the surface has been carrying. It is in the sidebar, brief
+      and usable in ordinary life.
+    relief_lines:
+    - The body is given an explicit task the screen does not require.
+    - The somatic layer that has been holding the surface receives an explicit reset.
+    relief_register:
+    - mudra
+    - ground
+    - body
+    derived_from_frame: mudra_grounding
+    metadata:
+      semantic_family: mudra-grounding
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_practice_02
+    display_name: Mantra Layer
+    duration: 3 minutes
+    announcement_line: Joshin offers a 3-minute Mantra Layer practice — a short sonic
+      ritual that addresses the speech layer the platform script has been overriding
+      and gives the throat something to do that is not surface management. It is
+      in the sidebar, timed and step by step.
+    relief_lines:
+    - The throat receives a task the platform script cannot generate.
+    - The speech layer registers an alignment the surface has not been delivering.
+    relief_register:
+    - mantra
+    - sound
+    - speech
+    derived_from_frame: mantra_layer
+    metadata:
+      semantic_family: mantra-layer
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_practice_03
+    display_name: Goma Receiving Visualization
+    duration: 7 minutes
+    announcement_line: Joshin teaches a 7-minute Goma Receiving Visualization —
+      a structured visualization that mirrors the Shingon fire ritual and provides
+      an explicit container for emotional load that the cultural script has been
+      refusing to acknowledge. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - Accumulated load is offered to a structured container that can receive it.
+    - The cohort's body registers an explicit release the surface culture has not
+      permitted.
+    relief_register:
+    - goma
+    - receive
+    - transmute
+    derived_from_frame: goma_visualization
+    metadata:
+      semantic_family: goma-visualization
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_practice_04
+    display_name: Sanmitsu Synchronization
+    duration: 5 minutes
+    announcement_line: Joshin teaches a 5-minute Sanmitsu Synchronization — the simultaneous
+      use of mudra (hand seal), mantra (true word), and mandala (visualization) to
+      put body, speech, and mind back into one field. It is in the sidebar, timed
+      and step by step.
+    relief_lines:
+    - All three layers — body, speech, mind — are asked to do explicit work simultaneously.
+    - The pulling-against-one-another loosens because each layer has an explicit task.
+    relief_register:
+    - sanmitsu
+    - synchronize
+    - field
+    derived_from_frame: sanmitsu_synchronization
+    metadata:
+      semantic_family: sanmitsu-synchronization
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_practice_05
+    display_name: Sokushin Jobutsu Recall
+    duration: 3 minutes
+    announcement_line: Joshin offers a 3-minute Sokushin Jobutsu Recall — a quiet
+      reframe practice that returns the practitioner to the Shingon premise that
+      this body, now, is the site of the work, not preparation for a later self.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body the cohort is carrying is recognized as the site of the actual practice.
+    - The deferral pattern that has been pushing the inner state to a later self
+      loosens.
+    relief_register:
+    - sokushin
+    - this body
+    - now
+    derived_from_frame: sokushin_recall
+    metadata:
+      semantic_family: sokushin-recall
+      article_types:
+      - hard_news_spiritual_response
+sdg:
+  primary:
+    id: SDG 3
+    title: Good Health and Well-Being
+    line: The United Nations framework includes mental health and wellbeing in SDG
+      3.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
+cta:
+  options:
+  - id: joshin_mh_cta_01
+    org: Crisis Text Line
+    line: 'If you or someone you know is in crisis, Crisis Text Line provides free,
+      24/7 support. Text HOME to 741741. Door in: join their network.'
+    metadata:
+      semantic_family: door-in-crisis-text
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_cta_02
+    org: 988 Suicide and Crisis Lifeline
+    line: 'If you or someone you know is in crisis, the 988 Suicide and Crisis Lifeline
+      provides free, 24/7 support across the United States. Call or text 988. Door
+      in: their network has handled more than fourteen million contacts since 2022.'
+    metadata:
+      semantic_family: door-in-988-lifeline
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_cta_03
+    org: The Trevor Project
+    line: 'If you are LGBTQ+ and under 25 and in crisis, The Trevor Project provides
+      free, 24/7 support by text, chat, or call. Text START to 678-678. Door in: a
+      network built for the specific cohort.'
+    metadata:
+      semantic_family: door-in-trevor-project
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_cta_04
+    org: NAMI HelpLine
+    line: 'For information, referrals, and peer support on mental health, the NAMI
+      HelpLine is available Monday through Friday. Call 1-800-950-NAMI (6264) or
+      text "HelpLine" to 62640. Door in: connect to the National Alliance on Mental
+      Illness network.'
+    metadata:
+      semantic_family: door-in-nami
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_mh_cta_05
+    org: Active Minds
+    line: 'Active Minds runs peer-led mental health communities on more than 650
+      US campuses. If a campus chapter exists where you are, it is a low-friction
+      door in.'
+    metadata:
+      semantic_family: door-in-active-minds
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: joshin_mh_headline_01
+      line: A Shingon priest reads mental overload as a synchronization gap and offers
+        explicit ritual technology — Sanmitsu and Goma — for the layer the modern
+        toolkit cannot reach.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_mh_headline_02
+      line: Esoteric Buddhism as ritual technology — Joshin on the layer underneath
+        surface management.
+      metadata:
+        semantic_family: esoteric-as-tech
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_mh_headline_03
+      line: Sokushin Jobutsu — Buddhahood in this body, not a deferred self — a Shingon
+        priest meets the load a generation is being asked to carry.
+      metadata:
+        semantic_family: sokushin-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_mh_headline_04
+      line: Sanmitsu — mudra, mantra, mandala — Joshin on the synchronization that
+        the screening tools cannot deliver.
+      metadata:
+        semantic_family: sanmitsu-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_mh_headline_05
+      line: Goma fire ritual meets a phone-native cohort — a Shingon priest on what
+        the surface culture has been refusing to release.
+      metadata:
+        semantic_family: goma-meets-cohort
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    intensity_range:
+    - 2
+    - 4

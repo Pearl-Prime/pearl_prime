@@ -1,0 +1,3128 @@
+{
+  "_schema": "composite_essence_graph/v0",
+  "_alias": "this IS the #1517 Contemplative Spine (spine == CEG)",
+  "_advisory": true,
+  "embedding_backend": "ollama:nomic-embed-text (Pearl Star GPU)",
+  "cluster_backend": "leiden",
+  "modularity": 0.5431679180005482,
+  "params": {
+    "leiden_resolution": 4.0,
+    "knn_k": 15,
+    "edge_min_sim": 0.3,
+    "include_doctrines": true,
+    "random_seed": 42
+  },
+  "n_atoms": 2418,
+  "n_teachers": 15,
+  "universal_min_teachers": 3,
+  "roots": [
+    {
+      "root_id": "spine_000",
+      "label": "something / years / said",
+      "convergence_strength": 0.8667,
+      "is_universal": true,
+      "size": 127,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 9,
+          "ahjan": 5,
+          "joshin": 1,
+          "junko": 28,
+          "maat": 21,
+          "master_feung": 20,
+          "master_sha": 2,
+          "master_wu": 2,
+          "miki": 21,
+          "miyuki": 1,
+          "omote": 4,
+          "ra": 8,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "miki_STORY_004",
+          "miki_STORY_009",
+          "maat_STORY_018",
+          "miki_STORY_005"
+        ]
+      },
+      "atom_types": {
+        "STORY": 112,
+        "INTEGRATION": 1,
+        "PIVOT": 9,
+        "SCENE": 4,
+        "THREAD": 1
+      },
+      "keywords": [
+        "something",
+        "years",
+        "said",
+        "work",
+        "felt",
+        "know",
+        "miki",
+        "still"
+      ],
+      "exemplars": [
+        "Marcus had been telling himself he was fine for so long that he had almost believed it. He was twenty-nine, a software engineer in Berlin, and he was, by most measures, doing well — good salary, good flat, good friends. The depression was quiet and clinical, the kind that does no",
+        "Yuki was twenty-six and had been overthinking her life so thoroughly that she could barely make small decisions without running them through a full internal tribunal. She lived in Osaka and worked in design. She was gifted and exhausted and spent as much time analyzing what she s",
+        "Ingrid was forty-two, a pediatric occupational therapist, and she was what her supervisor called \"a natural empath.\" This was a compliment. It was also a description of the mechanism by which, over fourteen years of work, she had been slowly drained.\nShe could feel the distress o",
+        "Sofia had a list of people she needed to apologize to, people she had let down in the years when she had been too depleted to give anything more than the bare minimum. She was forty-six, a social worker in São Paulo, and compassion fatigue had taken more from her than she had kno"
+      ]
+    },
+    {
+      "root_id": "spine_001",
+      "label": "contraction / self / body",
+      "convergence_strength": 0.3333,
+      "is_universal": true,
+      "size": 122,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "junko",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 113,
+          "ahjan": 6,
+          "junko": 1,
+          "ra": 1,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "adi_da_INTEGRATION_006",
+          "adi_da_REFLECTION_026",
+          "adi_da_INTEGRATION_024",
+          "adi_da_EXERCISE_012"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 11,
+        "EXERCISE": 19,
+        "HOOK": 11,
+        "INTEGRATION": 14,
+        "PERMISSION": 5,
+        "PIVOT": 7,
+        "REFLECTION": 14,
+        "SCENE": 12,
+        "STORY": 5,
+        "TAKEAWAY": 7,
+        "THREAD": 14,
+        "TEACHER_DOCTRINE": 2,
+        "DOCTRINE": 1
+      },
+      "keywords": [
+        "contraction",
+        "self",
+        "body",
+        "bright",
+        "feel",
+        "notice",
+        "seeing",
+        "person"
+      ],
+      "exemplars": [
+        "The Bright remains. The contraction is visible. What was avoided can now be seen. Stay here with what you notice in your chest and throat. The separate self becomes audible in its refusal to open. The tightening is not about the other person. It reveals where identity seeks to pr",
+        "The heart knows something the mind denies. In relationships that matter, the heart contracts against the self's strategies. This contraction is not suffering. It is the sign of recognition. The Bright is pressing against the self's walls. The self tightens. This tightening is the",
+        "Nothing has been achieved here. Nothing needs to be. Achievement is the language of the separate self. What happened—if anything happened—is that the contraction became a little more visible. Visibility is not a prize. It is the natural state of awareness when it stops contractin",
+        "Contraction mapping. Sit quietly and bring to mind a recent moment of difficulty—an argument, a worry, a disappointment. Do not analyze the content. Instead, notice where the body tightens in response. Jaw, shoulders, belly, chest, throat. Place your hand on the area of greatest "
+      ]
+    },
+    {
+      "root_id": "spine_002",
+      "label": "spiritual / light / enlightenment",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 120,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 104,
+          "joshin": 2,
+          "master_wu": 2,
+          "miki": 3,
+          "miyuki": 3,
+          "omote": 2,
+          "maat": 1,
+          "master_feung": 1,
+          "pamela_fellows": 1,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "ahjan_EXERCISE_040_mined",
+          "ahjan_EXERCISE_053_mined",
+          "ahjan_EXERCISE_001_mined",
+          "ahjan_EXERCISE_002_mined"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 30,
+        "EXERCISE": 36,
+        "HOOK": 2,
+        "REFLECTION": 37,
+        "STORY": 1,
+        "SCENE": 2,
+        "TAKEAWAY": 2,
+        "INTEGRATION": 1,
+        "DOCTRINE": 9
+      },
+      "keywords": [
+        "spiritual",
+        "light",
+        "enlightenment",
+        "mind",
+        "meditation",
+        "path",
+        "state",
+        "self"
+      ],
+      "exemplars": [
+        "Meditation is a powerful tool that allows practitioners to experience higher dimensions of awareness and move towards enlightenment.Beyond the Six Worlds: EnlightenmentUltimately, the Wheel of Dharma and the Six Worlds teach us that we have a choice in how we experience life, bot",
+        "It is a state of being beyond our ordinary concepts of good and bad, wants and aversions. True happiness and liberation are found when you transcend these worldly attachments.In the spiritual journey, self-effort involves disciplined practices like meditation, mindfulness, and co",
+        "Consequently, understanding the transient and dream-like nature of life is a significant step towards enlightenment.Seeking Higher States of Mind:Buddhist practitioners strive to attain higher states of mind, characterized by increased clarity, happiness, and a broader perspectiv",
+        "It is a direct experience of life devoid of any mental constructs or illusions, a state of being in perfect harmony with the universe.In conclusion, Buddhist enlightenment is a journey from ordinary states of mind to a state of ultimate peace and clarity known as Nirvana. This pa"
+      ]
+    },
+    {
+      "root_id": "spine_003",
+      "label": "painting / stroke / brushstroke",
+      "convergence_strength": 0.0667,
+      "is_universal": false,
+      "size": 96,
+      "provenance": {
+        "teachers": [
+          "master_feung"
+        ],
+        "teacher_distribution": {
+          "master_feung": 96
+        },
+        "exemplar_atom_ids": [
+          "master_feung_TAKEAWAY_004",
+          "master_feung_INTEGRATION_009",
+          "master_feung_EXERCISE_008",
+          "master_feung_THREAD_009"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 8,
+        "EXERCISE": 9,
+        "HOOK": 10,
+        "INTEGRATION": 11,
+        "PERMISSION": 14,
+        "PIVOT": 7,
+        "REFLECTION": 9,
+        "SCENE": 7,
+        "TAKEAWAY": 12,
+        "THREAD": 9
+      },
+      "keywords": [
+        "painting",
+        "stroke",
+        "brushstroke",
+        "made",
+        "make",
+        "brush",
+        "without",
+        "paper"
+      ],
+      "exemplars": [
+        "Presence is enough. The painting does not require you to be perfect — only to be here, making your stroke.",
+        "Name one person who is making a stroke in the painting that you find difficult to witness. Acknowledge that their stroke belongs there too. This is the practice of the Grand Painting — it holds all strokes.",
+        "Write on a small piece of paper one thing you feel you have failed at. Fold the paper once. Now write on the outside: \"This stroke belongs to the painting.\" The fold is not erasing it — the stroke happened and it is real. But it is one stroke among thousands. Place the folded pap",
+        "The stroke you made today will still be in the painting tomorrow. It does not require tending. Simply make the next one."
+      ]
+    },
+    {
+      "root_id": "spine_004",
+      "label": "cosmic / council / transmission",
+      "convergence_strength": 0.2667,
+      "is_universal": true,
+      "size": 74,
+      "provenance": {
+        "teachers": [
+          "junko",
+          "maat",
+          "miki",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "junko": 59,
+          "maat": 1,
+          "miki": 12,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "junko_PIVOT_013",
+          "miki_PERMISSION_005",
+          "junko_DOCTRINE",
+          "junko_THREAD_004"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 7,
+        "EXERCISE": 2,
+        "HOOK": 7,
+        "INTEGRATION": 8,
+        "PERMISSION": 12,
+        "PIVOT": 5,
+        "REFLECTION": 10,
+        "SCENE": 3,
+        "TAKEAWAY": 7,
+        "THREAD": 12,
+        "DOCTRINE": 1
+      },
+      "keywords": [
+        "cosmic",
+        "council",
+        "transmission",
+        "receiving",
+        "receive",
+        "masters",
+        "body",
+        "transmit"
+      ],
+      "exemplars": [
+        "The cosmic council told me to stop transmitting. I stopped mid-syllable. They said: the receiver needs silence, not more transmission. Silence is also a transmission. I had not always known this.",
+        "You do not have to be spiritually advanced to receive Miki's transmissions. Original completeness belongs to everyone. It is not earned.",
+        "Junko\nNew Age; channeling; ascended masters; light language; cosmic guidance\nI do not create the message — I receive it; transmission over technique; messages from ascended masters realign and awaken; the soul's frequency understands what the mind cannot\nlight language / vibratio",
+        "Light Language transmissions thread together across receivers as well as across time. What I transmit to you may also be transmitted to someone you have never met. You are part of a constellation, not a single point."
+      ]
+    },
+    {
+      "root_id": "spine_005",
+      "label": "effort / resistance / trying",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 73,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 5,
+          "ahjan": 5,
+          "joshin": 7,
+          "junko": 2,
+          "maat": 1,
+          "master_sha": 3,
+          "master_wu": 34,
+          "miki": 1,
+          "miyuki": 7,
+          "omote": 2,
+          "ra": 1,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "master_wu_SCENE_001",
+          "master_wu_EXERCISE_004",
+          "joshin_PIVOT_003",
+          "miki_EXERCISE_007"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 4,
+        "PERMISSION": 7,
+        "PIVOT": 11,
+        "REFLECTION": 14,
+        "TAKEAWAY": 5,
+        "INTEGRATION": 6,
+        "SCENE": 7,
+        "TEACHER_DOCTRINE": 1,
+        "COMPRESSION": 4,
+        "HOOK": 7,
+        "THREAD": 5,
+        "STORY": 2
+      },
+      "keywords": [
+        "effort",
+        "resistance",
+        "trying",
+        "stop",
+        "stopped",
+        "notice",
+        "itself",
+        "something"
+      ],
+      "exemplars": [
+        "You have been pushing hard against resistance and getting nowhere. You stop pushing. You pause. And in the pause, you notice a way forward that does not require force.",
+        "Sit and bring to mind something you're struggling with. An anxiety, a shame, a boundary issue.\n\nRather than trying to solve it, ask: \"What if I yielded to this? Not gave up, but stopped fighting?\"\n\nNotice what happens in your body when you release the resistance. Not the problem,",
+        "Something stopped trying. The effort itself had been the obstacle. Without it, movement happened naturally.",
+        "Think of something in your life you have been trying very hard to fix or change. For the next three minutes, allow yourself to stop trying. Not forever — just for these three minutes. Let whatever is there simply be there. Notice what your body does when you stop fighting. This i"
+      ]
+    },
+    {
+      "root_id": "spine_006",
+      "label": "love / self / personal",
+      "convergence_strength": 0.4667,
+      "is_universal": true,
+      "size": 73,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "maat",
+          "master_sha",
+          "miyuki",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 29,
+          "maat": 7,
+          "master_sha": 13,
+          "miyuki": 2,
+          "pamela_fellows": 1,
+          "sai_ma": 18
+        },
+        "exemplar_atom_ids": [
+          "ahjan_TEACHING_072_mined",
+          "ahjan_TEACHING_034_mined",
+          "ahjan_TEACHING_022_mined",
+          "ahjan_TEACHING_092_mined"
+        ]
+      },
+      "atom_types": {
+        "HOOK": 5,
+        "TAKEAWAY": 5,
+        "COMPRESSION": 18,
+        "EXERCISE": 7,
+        "REFLECTION": 12,
+        "TEACHER_DOCTRINE": 2,
+        "PERMISSION": 7,
+        "PIVOT": 3,
+        "INTEGRATION": 7,
+        "SCENE": 6,
+        "THREAD": 1
+      },
+      "keywords": [
+        "love",
+        "self",
+        "personal",
+        "life",
+        "spiritual",
+        "understanding",
+        "force",
+        "personalities"
+      ],
+      "exemplars": [
+        "The stories of Avalokiteshvara and the Buddha's teachings reinforce this perspective, emphasizing love's boundless and transformative nature.Love is not just an emotion, feeling, or sentiment; it constitutes a state of being, a way of life, and a path to spiritual liberation. As ",
+        "Love is seen as a dynamic, evolving force that progresses from a personal level to a more universal, altruistic expression.Higher love goes beyond conventional understanding. It is a transformative force integral to self-realization and enlightenment. It begins with self-love, a ",
+        "This suggests that love is not merely an emotion but a fundamental force that binds and brings together all things in existence. From the simplest rock to the complex human relationships, love is the underlying essence that makes the universe luminous. We can experience different",
+        "It is a journey that leads us to embrace love in its purest form, extending love for ourselves, love for others, and love for the divine. As we continue to meditate and explore the dimensions of light within us, we move closer to realizing our true potential and the ultimate trut"
+      ]
+    },
+    {
+      "root_id": "spine_007",
+      "label": "story / something / question",
+      "convergence_strength": 0.8667,
+      "is_universal": true,
+      "size": 69,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 4,
+          "ahjan": 11,
+          "joshin": 34,
+          "junko": 1,
+          "maat": 3,
+          "master_sha": 1,
+          "master_wu": 1,
+          "miki": 3,
+          "miyuki": 5,
+          "omote": 1,
+          "pamela_fellows": 1,
+          "ra": 3,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "joshin_EXERCISE_000",
+          "joshin_EXERCISE_005",
+          "joshin_EXERCISE_002",
+          "joshin_STORY_002"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 8,
+        "PIVOT": 9,
+        "THREAD": 6,
+        "HOOK": 9,
+        "INTEGRATION": 8,
+        "REFLECTION": 12,
+        "STORY": 3,
+        "TAKEAWAY": 3,
+        "COMPRESSION": 3,
+        "SCENE": 8
+      },
+      "keywords": [
+        "story",
+        "something",
+        "question",
+        "mind",
+        "answer",
+        "yourself",
+        "true",
+        "notice"
+      ],
+      "exemplars": [
+        "Inquiry into the Thinker: Bring to mind a story you believe absolutely — something you tell yourself about who you are or what you're capable of. Now ask gently: \"Who is thinking this story?\" Don't force an answer. Let the question sit. You might notice: the story is being though",
+        "Inquiry into Identity: Bring awareness to a story that feels most true about who you are. Let's say: \"I am not capable.\" Sit with it. Then ask: \"Is this thought true about the one who observes the thought?\" You are observing that \"I am not capable\" is being thought. The observer ",
+        "Dropping the Story: When you notice yourself caught in a narrative about yourself (worry, shame, self-doubt), pause. Take a breath. Name the story: \"This is the story that I'm not good enough\" or \"This is the story that I will fail.\" You're not fighting it or suppressing it — jus",
+        "You carry a story about yourself. Perhaps it has been with you so long you've forgotten you're carrying it.\n\nThe story might be: \"I am not good enough. I am broken. I will be discovered and rejected.\"\n\nHere is what I want to offer you: inquiry into this story, not to defeat it, b"
+      ]
+    },
+    {
+      "root_id": "spine_008",
+      "label": "fear / anxiety / mind",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 68,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 6,
+          "joshin": 10,
+          "maat": 16,
+          "master_feung": 8,
+          "master_wu": 1,
+          "miki": 12,
+          "miyuki": 4,
+          "omote": 3,
+          "pamela_fellows": 1,
+          "ra": 4
+        },
+        "exemplar_atom_ids": [
+          "miyuki_EXERCISE_006",
+          "joshin_SCENE_003",
+          "maat_TAKEAWAY_012",
+          "joshin_REFLECTION_001"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 9,
+        "PIVOT": 6,
+        "REFLECTION": 11,
+        "SCENE": 13,
+        "TEACHER_DOCTRINE": 1,
+        "EXERCISE": 5,
+        "HOOK": 2,
+        "PERMISSION": 3,
+        "STORY": 4,
+        "INTEGRATION": 3,
+        "TAKEAWAY": 6,
+        "THREAD": 5
+      },
+      "keywords": [
+        "fear",
+        "anxiety",
+        "mind",
+        "something",
+        "body",
+        "still",
+        "already",
+        "without"
+      ],
+      "exemplars": [
+        "Sit quietly. Close your eyes.\n\nBring to mind a difficult emotion—anxiety, shame, grief, whatever is present. Don't try to make it bigger or smaller. Just acknowledge it.\n\nNow, hold a question lightly in your awareness: *Is this moment actually dangerous?*\n\nOften, anxiety points t",
+        "You wake in the night with anxiety gripping your chest. Your mind generates a hundred worries, each one feeling absolutely true. You lie there, watching. And then something strange happens: you notice the thoughts are changing. One worry is replaced by another. If they were absol",
+        "Financial fear is real. The Beloved does not deny the fear — the Beloved expands the container so you can hold the fear without being consumed by it.",
+        "Notice this: when the fear arises, what do you do? Do you believe it, push it away, or analyze it? What if the freedom you seek is not found in any of those three, but in noticing that you are doing any of them? The space of noticing—what is that space like?"
+      ]
+    },
+    {
+      "root_id": "spine_009",
+      "label": "heart / body / love",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 62,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "joshin",
+          "junko",
+          "maat",
+          "master_sha",
+          "miki",
+          "miyuki",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "joshin": 2,
+          "junko": 1,
+          "maat": 11,
+          "master_sha": 15,
+          "miki": 7,
+          "miyuki": 1,
+          "pamela_fellows": 1,
+          "sai_ma": 23
+        },
+        "exemplar_atom_ids": [
+          "master_sha_EXERCISE_000",
+          "sai_ma_EXERCISE_003",
+          "master_sha_INTEGRATION_012",
+          "sai_ma_EXERCISE_000"
+        ]
+      },
+      "atom_types": {
+        "HOOK": 6,
+        "INTEGRATION": 8,
+        "REFLECTION": 4,
+        "EXERCISE": 25,
+        "COMPRESSION": 4,
+        "SCENE": 6,
+        "TAKEAWAY": 4,
+        "THREAD": 3,
+        "PERMISSION": 1,
+        "PIVOT": 1
+      },
+      "keywords": [
+        "heart",
+        "body",
+        "love",
+        "place",
+        "hand",
+        "minutes",
+        "practice",
+        "hands"
+      ],
+      "exemplars": [
+        "Heart Love Practice: Place your hands on your heart. Close your eyes. Silently repeat: \"I love you. I love this body. I love this heart. I am loved.\" No need to feel it — just offer the words as a frequency, as an intention. Continue for 5-10 minutes. Notice what shifts in your b",
+        "Sit comfortably. Place your right hand on your heart and your left hand on your belly. Breathe in slowly for a count of four. Hold for a count of four. Breathe out slowly for a count of four. With each breath, say: I am loved. I am safe. I am home in my own heart. Continue this f",
+        "Begin now: place your hand on your heart and send yourself love. This is the whole path.",
+        "Sit comfortably and place both hands on your heart center. Close your eyes. Begin to breathe naturally. With each breath, imagine that you are breathing love directly into your own heart. Not from outside, but from your deepest self to your heart. Say silently: I am worthy of my "
+      ]
+    },
+    {
+      "root_id": "spine_010",
+      "label": "system / nervous / window",
+      "convergence_strength": 0.4667,
+      "is_universal": true,
+      "size": 62,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "maat",
+          "master_wu",
+          "miki",
+          "omote",
+          "pamela_fellows"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "ahjan": 3,
+          "maat": 1,
+          "master_wu": 1,
+          "miki": 1,
+          "omote": 6,
+          "pamela_fellows": 49
+        },
+        "exemplar_atom_ids": [
+          "pamela_fellows_INTEGRATION_007",
+          "pamela_fellows_PERMISSION_000",
+          "pamela_fellows_EXERCISE_000",
+          "pamela_fellows_STORY_007"
+        ]
+      },
+      "atom_types": {
+        "PIVOT": 12,
+        "COMPRESSION": 7,
+        "PERMISSION": 5,
+        "HOOK": 6,
+        "INTEGRATION": 4,
+        "REFLECTION": 5,
+        "THREAD": 7,
+        "EXERCISE": 5,
+        "SCENE": 5,
+        "STORY": 1,
+        "TAKEAWAY": 5
+      },
+      "keywords": [
+        "system",
+        "nervous",
+        "window",
+        "safety",
+        "feel",
+        "safe",
+        "practice",
+        "regulation"
+      ],
+      "exemplars": [
+        "Your nervous system is learning that you are safe. This takes time.",
+        "You are allowed to need safety. Needing safety is not fragility. It is your nervous system doing exactly what it was designed to do.",
+        "This is a window of tolerance practice. You'll notice where your nervous system is right now.\n\nSit comfortably. Bring attention to your body. Are you activated (agitated, racing heart, tense)? Collapsed (numb, heavy, shut down)? Or regulated (alert but calm)?\n\nYour window of tole",
+        "There is an old practice in Western medicine, now being remembered again, called the window of tolerance. It describes a zone where the nervous system can function—not too hyped up, not too shut down. In that zone, learning happens. Healing happens. Everything else happens.\n\nMost"
+      ]
+    },
+    {
+      "root_id": "spine_011",
+      "label": "mask / performance / performing",
+      "convergence_strength": 0.4667,
+      "is_universal": true,
+      "size": 56,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "maat",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "ahjan": 1,
+          "maat": 1,
+          "master_wu": 2,
+          "miyuki": 2,
+          "omote": 48,
+          "ra": 1
+        },
+        "exemplar_atom_ids": [
+          "omote_STORY_002",
+          "omote_STORY_007",
+          "omote_EXERCISE_009",
+          "omote_EXERCISE_001"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 8,
+        "STORY": 20,
+        "PIVOT": 7,
+        "COMPRESSION": 2,
+        "EXERCISE": 6,
+        "HOOK": 3,
+        "INTEGRATION": 2,
+        "PERMISSION": 2,
+        "REFLECTION": 2,
+        "TAKEAWAY": 2,
+        "THREAD": 2
+      },
+      "keywords": [
+        "mask",
+        "performance",
+        "performing",
+        "something",
+        "someone",
+        "body",
+        "authentic",
+        "presence"
+      ],
+      "exemplars": [
+        "I was working with someone I'll call Sora. She arrives at the office at 7 a.m., leaves at 8 p.m. She is always on. Always present for everyone else. Always managing, facilitating, smoothing the way. She smiles in meetings even when she is hollowed out. One morning, she sits at he",
+        "You have been performing so long you have forgotten you are performing. This is the cost. Not the mask itself — the mask is neutral, necessary. But the unconsciousness about the mask. The belief that you are failing if the mask is visible. You perform confidence while doubt runs ",
+        "Conscious Choosing: When you notice yourself falling into an old performance pattern, pause. Ask: \"Am I choosing this mask consciously, or am I running it automatically?\" There is a huge difference. Unconscious performance creates anxiety and exhaustion. Conscious performance — c",
+        "Body Noticing in Social Settings: In a social interaction, pause and check in with your body. Are you tense? Shallow-breathing? Defending? These are signals that you are performing. There is nothing wrong with this — the body is simply showing you where the mask is active. Now, w"
+      ]
+    },
+    {
+      "root_id": "spine_012",
+      "label": "clarity / practice / seeing",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 55,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_sha",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 15,
+          "joshin": 6,
+          "junko": 2,
+          "maat": 2,
+          "master_sha": 1,
+          "miki": 3,
+          "miyuki": 3,
+          "omote": 9,
+          "pamela_fellows": 1,
+          "ra": 9,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "ahjan_PERMISSION_002",
+          "omote_EXERCISE_003",
+          "ahjan_PERMISSION_007",
+          "ra_REFLECTION_006"
+        ]
+      },
+      "atom_types": {
+        "PERMISSION": 18,
+        "TAKEAWAY": 3,
+        "COMPRESSION": 5,
+        "HOOK": 6,
+        "INTEGRATION": 5,
+        "REFLECTION": 4,
+        "SCENE": 3,
+        "THREAD": 5,
+        "EXERCISE": 4,
+        "STORY": 1,
+        "PIVOT": 1
+      },
+      "keywords": [
+        "clarity",
+        "practice",
+        "seeing",
+        "judgment",
+        "doubt",
+        "already",
+        "actually",
+        "true"
+      ],
+      "exemplars": [
+        "Your confusion is not a flaw. It is the mind being honest about what it has not yet seen. That honesty is valuable.",
+        "Vulnerability Practice: In a small, safe context, share something true that you normally hide. \"I'm unsure about this.\" \"I'm tired.\" \"I don't understand that.\" Notice the impulse to soften it, to perform certainty instead. Resist that impulse once. Say the simple truth. Notice wh",
+        "You do not need to perform understanding. If something is unclear, say so. Clarity comes from honesty, not pretense.",
+        "Clarity means seeing truly. What are you not seeing clearly about your situation?"
+      ]
+    },
+    {
+      "root_id": "spine_013",
+      "label": "come / state / need",
+      "convergence_strength": 0.9333,
+      "is_universal": true,
+      "size": 55,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 4,
+          "ahjan": 5,
+          "joshin": 3,
+          "junko": 7,
+          "maat": 3,
+          "master_feung": 2,
+          "master_sha": 4,
+          "master_wu": 2,
+          "miki": 1,
+          "miyuki": 7,
+          "omote": 1,
+          "pamela_fellows": 3,
+          "ra": 10,
+          "sai_ma": 3
+        },
+        "exemplar_atom_ids": [
+          "sai_ma_HOOK_004",
+          "ra_TAKEAWAY_003",
+          "omote_HOOK_011",
+          "adi_da_TAKEAWAY_001"
+        ]
+      },
+      "atom_types": {
+        "PIVOT": 1,
+        "TAKEAWAY": 19,
+        "THREAD": 4,
+        "PERMISSION": 3,
+        "COMPRESSION": 8,
+        "HOOK": 10,
+        "INTEGRATION": 7,
+        "SCENE": 2,
+        "REFLECTION": 1
+      },
+      "keywords": [
+        "come",
+        "state",
+        "need",
+        "arrives",
+        "something",
+        "always",
+        "changes",
+        "change"
+      ],
+      "exemplars": [
+        "Grace is always available. It is not that it arrives. It is that you stop blocking it.",
+        "Stillness is not achieved. It is recognized.",
+        "Presence is not being seen. Presence is being here.",
+        "Freedom is not achieved. It is recognized. It was here before you began searching."
+      ]
+    },
+    {
+      "root_id": "spine_014",
+      "label": "breath / notice / body",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 51,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 11,
+          "ahjan": 7,
+          "joshin": 6,
+          "junko": 1,
+          "maat": 6,
+          "master_wu": 4,
+          "miki": 3,
+          "miyuki": 8,
+          "omote": 4,
+          "ra": 1
+        },
+        "exemplar_atom_ids": [
+          "adi_da_EXERCISE_016",
+          "miki_EXERCISE_010",
+          "adi_da_INTEGRATION_025",
+          "ra_EXERCISE_001"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 30,
+        "HOOK": 1,
+        "INTEGRATION": 6,
+        "REFLECTION": 2,
+        "SCENE": 3,
+        "COMPRESSION": 1,
+        "PERMISSION": 1,
+        "PIVOT": 2,
+        "THREAD": 4,
+        "TAKEAWAY": 1
+      },
+      "keywords": [
+        "breath",
+        "notice",
+        "body",
+        "minutes",
+        "practice",
+        "attention",
+        "without",
+        "walk"
+      ],
+      "exemplars": [
+        "Recognition pause. Three times today, stop whatever you are doing for sixty seconds. Do not meditate. Do not breathe in a special way. Simply stop seeking anything at all. Notice what is here when you are not reaching for the next moment. The Bright does not arrive in these pause",
+        "At some point today, simply stop what you are doing for two minutes. Sit or stand. Let your body be still. You are not meditating. You are not clearing your mind. You are simply pausing in the middle of your ordinary life, the way a person pauses at the threshold of a door. Somet",
+        "Before you move on to the next thing, pause. One breath. Feel the ground beneath you. Feel the body you inhabit. This body, this breath, this moment—the Bright is here. It does not leave when you stop paying attention. It simply waits, prior to all your seeking, for you to notice",
+        "Find a comfortable seated position. Breathe naturally. As you breathe, imagine that you are observing your breath from a vast distance. You are not the breath. You are the awareness that observes the breath. The breath comes. The breath goes. The observer remains. Do this for fiv"
+      ]
+    },
+    {
+      "root_id": "spine_015",
+      "label": "shame / love / something",
+      "convergence_strength": 0.5333,
+      "is_universal": true,
+      "size": 51,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "master_sha",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "ahjan": 4,
+          "joshin": 5,
+          "master_sha": 21,
+          "miyuki": 8,
+          "omote": 2,
+          "pamela_fellows": 3,
+          "sai_ma": 7
+        },
+        "exemplar_atom_ids": [
+          "master_sha_STORY_000",
+          "master_sha_EXERCISE_006",
+          "master_sha_STORY_005",
+          "master_sha_EXERCISE_001"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 7,
+        "COMPRESSION": 2,
+        "REFLECTION": 6,
+        "STORY": 18,
+        "INTEGRATION": 2,
+        "EXERCISE": 5,
+        "HOOK": 2,
+        "PERMISSION": 3,
+        "PIVOT": 4,
+        "TAKEAWAY": 1,
+        "THREAD": 1
+      },
+      "keywords": [
+        "shame",
+        "love",
+        "something",
+        "forgiveness",
+        "heart",
+        "story",
+        "yourself",
+        "body"
+      ],
+      "exemplars": [
+        "I was working with someone I'll call Ming. She carries deep shame about a mistake that affected someone she loved. She has punished herself with it for years. The shame is a blockage in her heart so heavy she feels it in her chest when she breathes. She avoids forgiving herself b",
+        "Shame Release with Love: Bring to mind something you feel shame about. Rather than pushing it away, place your hand on your heart and offer it love. Say silently: \"I see this shame. I understand why you are here — you tried to protect me. I love you. I release you with gratitude ",
+        "I worked with Chen, who holds shame so deep it has moved into the body. Tension. Pain. A sense of disconnection from his own presence. He was taught that boundaries are selfish. So he has none. He gives until he is empty. People ask and he says yes even when yes costs him everyth",
+        "Forgiveness Frequency: Bring to mind someone you need to forgive — or yourself. You are not condoning harm; you are releasing the weight you carry. Place your hand on your heart. Breathe slowly. Silently say: \"I forgive you for being human and limited. I release the weight I have"
+      ]
+    },
+    {
+      "root_id": "spine_016",
+      "label": "shifted / something / dramatically",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 51,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "junko",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 8,
+          "joshin": 6,
+          "junko": 1,
+          "master_sha": 6,
+          "master_wu": 5,
+          "miyuki": 5,
+          "omote": 5,
+          "pamela_fellows": 5,
+          "ra": 5,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "master_wu_PIVOT_014",
+          "miyuki_PIVOT_011",
+          "miyuki_PIVOT_012",
+          "miyuki_PIVOT_013"
+        ]
+      },
+      "atom_types": {
+        "PIVOT": 49,
+        "THREAD": 1,
+        "REFLECTION": 1
+      },
+      "keywords": [
+        "shifted",
+        "something",
+        "dramatically",
+        "frame",
+        "different",
+        "moved",
+        "shift",
+        "changed"
+      ],
+      "exemplars": [
+        "Something shifted. Not dramatically. But the frame is different now.",
+        "Something shifted. Not dramatically. But the frame is different now.",
+        "Something shifted. Not dramatically. But the frame is different now.",
+        "Something shifted. Not dramatically. But the frame is different now."
+      ]
+    },
+    {
+      "root_id": "spine_017",
+      "label": "pattern / identity / signal",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 50,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 6,
+          "joshin": 5,
+          "junko": 1,
+          "master_sha": 5,
+          "master_wu": 5,
+          "miyuki": 5,
+          "omote": 5,
+          "pamela_fellows": 6,
+          "ra": 5,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "miyuki_TAKEAWAY_010",
+          "miyuki_TAKEAWAY_012",
+          "miyuki_TAKEAWAY_013",
+          "miyuki_TAKEAWAY_014"
+        ]
+      },
+      "atom_types": {
+        "HOOK": 1,
+        "PIVOT": 2,
+        "TAKEAWAY": 46,
+        "COMPRESSION": 1
+      },
+      "keywords": [
+        "pattern",
+        "identity",
+        "signal",
+        "worth",
+        "reading",
+        "pivot",
+        "seeing",
+        "patterns"
+      ],
+      "exemplars": [
+        "The pattern is not your identity. It is a signal worth reading.",
+        "The pattern is not your identity. It is a signal worth reading.",
+        "The pattern is not your identity. It is a signal worth reading.",
+        "The pattern is not your identity. It is a signal worth reading."
+      ]
+    },
+    {
+      "root_id": "spine_018",
+      "label": "allowed / move / faster",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 50,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "junko",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 6,
+          "joshin": 5,
+          "junko": 1,
+          "master_sha": 5,
+          "master_wu": 6,
+          "miyuki": 5,
+          "omote": 6,
+          "pamela_fellows": 6,
+          "ra": 5,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "miyuki_PERMISSION_011",
+          "miyuki_PERMISSION_013",
+          "miyuki_PERMISSION_014",
+          "omote_PERMISSION_010"
+        ]
+      },
+      "atom_types": {
+        "PERMISSION": 47,
+        "INTEGRATION": 2,
+        "REFLECTION": 1
+      },
+      "keywords": [
+        "allowed",
+        "move",
+        "faster",
+        "speed",
+        "body",
+        "sets",
+        "apology",
+        "world"
+      ],
+      "exemplars": [
+        "You are allowed to move at the speed your body sets. Not faster. Not with apology.",
+        "You are allowed to move at the speed your body sets. Not faster. Not with apology.",
+        "You are allowed to move at the speed your body sets. Not faster. Not with apology.",
+        "You are allowed to move at the speed your body sets. Not faster. Not with apology."
+      ]
+    },
+    {
+      "root_id": "spine_019",
+      "label": "room / something / light",
+      "convergence_strength": 0.8667,
+      "is_universal": true,
+      "size": 48,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 4,
+          "ahjan": 4,
+          "joshin": 4,
+          "junko": 6,
+          "maat": 6,
+          "master_feung": 4,
+          "master_sha": 2,
+          "master_wu": 2,
+          "miki": 4,
+          "miyuki": 4,
+          "omote": 3,
+          "ra": 3,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "ahjan_STORY_010_mined",
+          "ra_STORY_008",
+          "joshin_SCENE_001",
+          "joshin_STORY_005"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 6,
+        "HOOK": 1,
+        "SCENE": 17,
+        "STORY": 16,
+        "THREAD": 1,
+        "PIVOT": 5,
+        "REFLECTION": 2
+      },
+      "keywords": [
+        "room",
+        "something",
+        "light",
+        "mind",
+        "breath",
+        "feel",
+        "morning",
+        "body"
+      ],
+      "exemplars": [
+        "Early morning in the meditation hall. The light is still uncertain—somewhere between\ndark and dawn. Someone has lit a single candle near the altar.\n\nHer spine is against the wall. Her breath is moving through her body like water\nfinding channels. She has been sitting for six hour",
+        "A room with a single window. Morning light. A person sits in a chair and does not move for forty minutes. They do not meditate. They do not pray. They do not try to achieve anything.\n\nThey just sit. They watch the light move across the floor. They hear the sound of traffic outsid",
+        "You are sitting in the early morning. The house is still. Your mind is not still—it circles, plans, doubts. You watch the breath enter and leave. A story arises: \"I am not meditating correctly. This is not working.\" Instead of pushing the story away, you turn and ask it directly:",
+        "Kenji sits by the window. Morning light. Breath coming and going.\n\nNo one watching. No judgment. Just the simple fact of breathing.\n\nThe mind tries to find a problem. Tries to improve. Tries to become enlightened.\n\nBut he lets the trying dissolve. Returns to the breath. Natural. "
+      ]
+    },
+    {
+      "root_id": "spine_020",
+      "label": "body / mind / something",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 48,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 5,
+          "ahjan": 2,
+          "joshin": 2,
+          "junko": 3,
+          "maat": 3,
+          "master_wu": 2,
+          "miki": 7,
+          "miyuki": 12,
+          "omote": 3,
+          "pamela_fellows": 8,
+          "ra": 1
+        },
+        "exemplar_atom_ids": [
+          "maat_TAKEAWAY_009",
+          "ahjan_HOOK_010",
+          "miyuki_THREAD_008",
+          "junko_TAKEAWAY_005"
+        ]
+      },
+      "atom_types": {
+        "INTEGRATION": 6,
+        "PERMISSION": 9,
+        "PIVOT": 5,
+        "TAKEAWAY": 9,
+        "HOOK": 4,
+        "COMPRESSION": 4,
+        "THREAD": 4,
+        "REFLECTION": 4,
+        "SCENE": 3
+      },
+      "keywords": [
+        "body",
+        "mind",
+        "something",
+        "trust",
+        "knows",
+        "cannot",
+        "already",
+        "understanding"
+      ],
+      "exemplars": [
+        "The body does not lie. What it is holding, it is holding for a reason. Slow down enough to listen, and it will tell you what the mind has not yet found language for.",
+        "The body knows truth that the mind argues about. When you place your attention\non breath, sensation, and presence, the thinking quiets. This is not escape. It is\nreturn.",
+        "The body showed you something the mind missed. That conversation between body and mind is just beginning.",
+        "Frequency does not lie. The mind may try to interpret it falsely. The body always knows."
+      ]
+    },
+    {
+      "root_id": "spine_021",
+      "label": "silence / space / noise",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 47,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 2,
+          "joshin": 6,
+          "junko": 1,
+          "master_wu": 8,
+          "miki": 4,
+          "miyuki": 3,
+          "omote": 1,
+          "ra": 18,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "ra_PERMISSION_009",
+          "ahjan_THREAD_002",
+          "joshin_PIVOT_005",
+          "ra_SCENE_006"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 5,
+        "THREAD": 10,
+        "SCENE": 7,
+        "COMPRESSION": 5,
+        "PIVOT": 4,
+        "TAKEAWAY": 4,
+        "REFLECTION": 4,
+        "HOOK": 3,
+        "INTEGRATION": 2,
+        "STORY": 1,
+        "PERMISSION": 2
+      },
+      "keywords": [
+        "silence",
+        "space",
+        "noise",
+        "practice",
+        "emptiness",
+        "empty",
+        "something",
+        "everything"
+      ],
+      "exemplars": [
+        "Your silence is not empty. It is full of everything that matters. Trust the silence.",
+        "Something quieted. But the noise will return. When it does, the practice is not silence. It is noticing the noise.",
+        "Noise remained. Silence appeared within it. Not as absence, but as the space that holds all sound.",
+        "The silence arrives—not the absence of sound, but the presence of something vast. In the silence, you understand without words."
+      ]
+    },
+    {
+      "root_id": "spine_022",
+      "label": "next / layer / noticed",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 46,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 5,
+          "joshin": 5,
+          "master_sha": 5,
+          "master_wu": 5,
+          "miyuki": 5,
+          "omote": 5,
+          "pamela_fellows": 6,
+          "ra": 5,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "ahjan_THREAD_010",
+          "miyuki_THREAD_014",
+          "omote_THREAD_010",
+          "omote_THREAD_011"
+        ]
+      },
+      "atom_types": {
+        "THREAD": 46
+      },
+      "keywords": [
+        "next",
+        "layer",
+        "noticed",
+        "chapter",
+        "already",
+        "forming",
+        "protection",
+        "tension"
+      ],
+      "exemplars": [
+        "What you noticed here does not end with this chapter. The next layer is already forming.",
+        "What you noticed here does not end with this chapter. The next layer is already forming.",
+        "What you noticed here does not end with this chapter. The next layer is already forming.",
+        "What you noticed here does not end with this chapter. The next layer is already forming."
+      ]
+    },
+    {
+      "root_id": "spine_023",
+      "label": "seeking / itself / already",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 45,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_wu",
+          "miyuki",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 25,
+          "ahjan": 4,
+          "joshin": 3,
+          "junko": 1,
+          "maat": 2,
+          "master_wu": 4,
+          "miyuki": 3,
+          "ra": 2,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "adi_da_COMPRESSION_002",
+          "ra_PERMISSION_007",
+          "adi_da_SCENE_008",
+          "adi_da_REFLECTION_008"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 3,
+        "EXERCISE": 3,
+        "HOOK": 3,
+        "INTEGRATION": 3,
+        "PERMISSION": 3,
+        "PIVOT": 2,
+        "REFLECTION": 11,
+        "SCENE": 6,
+        "TAKEAWAY": 7,
+        "THREAD": 3,
+        "TEACHER_DOCTRINE": 1
+      },
+      "keywords": [
+        "seeking",
+        "itself",
+        "already",
+        "self",
+        "freedom",
+        "stop",
+        "bright",
+        "notice"
+      ],
+      "exemplars": [
+        "The seeking is the suffering. Not the thing you are seeking. Not the absence of what you want. The activity of seeking itself is the contraction that obscures what is already here.",
+        "Let the seeking stop. Not because seeking is wrong, but because what you seek is already present, looking through your eyes.",
+        "You finish a task you have been dreading. Relief washes through you. But almost immediately the mind reaches for the next source of concern. The relief was not freedom. It was a brief pause in seeking. Freedom does not come and go. It is the seeking that comes and goes across wha",
+        "Before seeking comes the Bright. Seeking arises when the Bright is forgotten. The separate self seeks because it assumes the Bright is elsewhere. But seeking itself creates the false distance. Relationship reveals this. In the presence of another, seeking becomes obvious. You con"
+      ]
+    },
+    {
+      "root_id": "spine_024",
+      "label": "awareness / experience / witness",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 44,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 6,
+          "joshin": 2,
+          "junko": 2,
+          "maat": 1,
+          "master_wu": 1,
+          "miki": 1,
+          "miyuki": 1,
+          "omote": 2,
+          "pamela_fellows": 4,
+          "ra": 19,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "ra_INTEGRATION_005",
+          "ra_PERMISSION_005",
+          "ra_THREAD_007",
+          "adi_da_TAKEAWAY_015"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 7,
+        "STORY": 1,
+        "TAKEAWAY": 4,
+        "HOOK": 7,
+        "PIVOT": 4,
+        "THREAD": 5,
+        "INTEGRATION": 7,
+        "REFLECTION": 4,
+        "EXERCISE": 1,
+        "PERMISSION": 3,
+        "DOCTRINE": 1
+      },
+      "keywords": [
+        "awareness",
+        "experience",
+        "witness",
+        "capacity",
+        "never",
+        "recognition",
+        "experiences",
+        "without"
+      ],
+      "exemplars": [
+        "You are not the contents of your experience. You are the awareness in which experience happens.",
+        "Your experience right now, whatever it is, is occurring within awareness. You cannot be outside of what you are.",
+        "Awareness noticed itself. The mind will try to make this an experience to keep. Awareness is not an experience. It is what experiences happen in.",
+        "Recognition is not an event that happens once. It is a capacity that deepens each time you turn toward what is true instead of away from it."
+      ]
+    },
+    {
+      "root_id": "spine_025",
+      "label": "grief / something / love",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 43,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "miki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 1,
+          "junko": 4,
+          "maat": 8,
+          "master_feung": 3,
+          "master_sha": 3,
+          "miki": 9,
+          "omote": 1,
+          "pamela_fellows": 4,
+          "ra": 3,
+          "sai_ma": 5
+        },
+        "exemplar_atom_ids": [
+          "miki_SCENE_012",
+          "master_sha_STORY_002",
+          "pamela_fellows_EXERCISE_007",
+          "ra_STORY_003"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 4,
+        "STORY": 11,
+        "TEACHER_DOCTRINE": 1,
+        "EXERCISE": 7,
+        "PERMISSION": 4,
+        "PIVOT": 4,
+        "INTEGRATION": 2,
+        "REFLECTION": 4,
+        "THREAD": 2,
+        "HOOK": 1,
+        "TAKEAWAY": 1,
+        "COMPRESSION": 2
+      },
+      "keywords": [
+        "grief",
+        "something",
+        "love",
+        "time",
+        "still",
+        "know",
+        "loss",
+        "like"
+      ],
+      "exemplars": [
+        "The grief is with you, as it has been for months. You sit with Miki and she does not try to move it. She simply lets it be present alongside you both, held in the same light. You feel, for the first time, that the grief is not a problem to be solved. It is a testament. Something ",
+        "I was working with someone I'll call Xia. She is grieving a loss so profound it feels like it will break her. She cannot eat. She wakes at 3 a.m. She believes the grief means she is weak. The grief creates shame. But one day, someone tells her: \"Your grief is how you love.\" Somet",
+        "This is a grief-aware practice. Grief needs to be felt and honored, not managed away.\n\nIf you're willing, bring to mind something you've lost or are losing. Let the grief be present for a moment.\n\nNotice where you feel it. In your chest? Your throat? Your belly?\n\nYou don't need t",
+        "Mira is in grief. Real grief. Her father died three months ago and she is still in the fog of it. She cannot focus on work. She forgets conversations. She will start crying in the middle of a grocery store.\n\nWhat is difficult is not the grief itself but the judgment of the grief."
+      ]
+    },
+    {
+      "root_id": "spine_026",
+      "label": "ahjan / practice / mind",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 43,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "kenjin",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 17,
+          "joshin": 1,
+          "junko": 1,
+          "kenjin": 4,
+          "master_feung": 2,
+          "master_sha": 1,
+          "master_wu": 3,
+          "miyuki": 5,
+          "omote": 2,
+          "ra": 3,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "ahjan_TEACHER_DOCTRINE_003",
+          "ahjan_TEACHER_DOCTRINE_003",
+          "ahjan_TEACHER_DOCTRINE_006",
+          "ahjan_TEACHER_DOCTRINE_006"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 2,
+        "STORY": 16,
+        "COMPRESSION": 9,
+        "EXERCISE": 2,
+        "HOOK": 1,
+        "INTEGRATION": 2,
+        "REFLECTION": 1,
+        "TEACHER_DOCTRINE": 6,
+        "THREAD": 2,
+        "DOCTRINE": 2
+      },
+      "keywords": [
+        "ahjan",
+        "practice",
+        "mind",
+        "says",
+        "student",
+        "teacher",
+        "body",
+        "awareness"
+      ],
+      "exemplars": [
+        "Ahjan teaches that awareness is not something you have to manufacture. It\nis not a state you build by working hard. It is closer to a place you\nreturn to. He uses the word homecoming sometimes. He says, \"Awareness is\nthe address you were never not at. You just stopped writing to ",
+        "Ahjan teaches that awareness is not something you have to manufacture. It\nis not a state you build by working hard. It is closer to a place you\nreturn to. He uses the word homecoming sometimes. He says, \"Awareness is\nthe address you were never not at. You just stopped writing to ",
+        "Ahjan teaches that you will begin this practice again. And again. And\nagain. And this is not a flaw. This is the practice.\n\nMost people come to mindfulness expecting a curve. They expect to start\nawkward and grow steady. They expect that after enough months of sitting,\nthey will ",
+        "Ahjan teaches that you will begin this practice again. And again. And\nagain. And this is not a flaw. This is the practice.\n\nMost people come to mindfulness expecting a curve. They expect to start\nawkward and grow steady. They expect that after enough months of sitting,\nthey will "
+      ]
+    },
+    {
+      "root_id": "spine_027",
+      "label": "giving / karma / yoga",
+      "convergence_strength": 0.5333,
+      "is_universal": true,
+      "size": 43,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 30,
+          "joshin": 1,
+          "maat": 2,
+          "master_feung": 1,
+          "master_sha": 4,
+          "omote": 1,
+          "ra": 2,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "ahjan_EXERCISE_037_mined",
+          "ahjan_EXERCISE_035_mined",
+          "ahjan_EXERCISE_038_mined",
+          "ahjan_EXERCISE_036_mined"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 11,
+        "EXERCISE": 20,
+        "REFLECTION": 7,
+        "TAKEAWAY": 1,
+        "HOOK": 2,
+        "INTEGRATION": 1,
+        "THREAD": 1
+      },
+      "keywords": [
+        "giving",
+        "karma",
+        "yoga",
+        "selfless",
+        "practice",
+        "inner",
+        "actions",
+        "others"
+      ],
+      "exemplars": [
+        "They inspire us to cultivate selflessness in our own lives and provide invaluable guidance on how to navigate the challenges that may arise along the path.ConclusionSelfless giving, or Karma Yoga, is a profound practice that brings greater love and fulfillment into our lives. By ",
+        "Through regular meditation practice, we can cultivate a heightened sense of empathy and an unwavering commitment to selfless giving.Empowering GivingSelfless giving is not merely about giving for the sake of it; it is about giving in a way that genuinely benefits others and uplif",
+        "Meditation becomes a tool to enhance our selfless giving, empowering us to connect with our innermost essence.In the journey of selfless giving, we discover unity and connection with all beings, move beyond dualistic thinking, and seek enlightenment. Guidance from masters who emb",
+        "We come to understand that we are all interconnected, and the well-being of one is intricately linked to the well-being of all.Going Beyond OppositesThe practice of selfless giving encourages us to move beyond dualistic thinking and the limitations of opposites. It urges us to co"
+      ]
+    },
+    {
+      "root_id": "spine_028",
+      "label": "path / obstacle / step",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 42,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 4,
+          "joshin": 4,
+          "maat": 6,
+          "master_feung": 3,
+          "master_sha": 1,
+          "master_wu": 10,
+          "miyuki": 3,
+          "omote": 1,
+          "pamela_fellows": 5,
+          "ra": 1,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "pamela_fellows_HOOK_010",
+          "master_feung_COMPRESSION_006",
+          "adi_da_COMPRESSION_003",
+          "master_wu_SCENE_011"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 9,
+        "PIVOT": 2,
+        "EXERCISE": 2,
+        "PERMISSION": 3,
+        "TAKEAWAY": 5,
+        "THREAD": 3,
+        "SCENE": 3,
+        "HOOK": 6,
+        "INTEGRATION": 4,
+        "REFLECTION": 5
+      },
+      "keywords": [
+        "path",
+        "obstacle",
+        "step",
+        "spiritual",
+        "always",
+        "beloved",
+        "stop",
+        "else"
+      ],
+      "exemplars": [
+        "Pendulation moves you between the difficult and the resource. This is the path.",
+        "Being yourself is not the reward at the end of the path. It is the path.",
+        "Freedom is not something you earn. It is not at the end of a path. It is the ground you are standing on while you search for it somewhere else.",
+        "The Tao is showing you the way and it is not the way your ego wants to go. You follow the Tao. It is right."
+      ]
+    },
+    {
+      "root_id": "spine_029",
+      "label": "pain / anger / suffering",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 42,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_sha",
+          "miyuki",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 8,
+          "ahjan": 9,
+          "joshin": 1,
+          "maat": 3,
+          "master_sha": 3,
+          "miyuki": 7,
+          "pamela_fellows": 2,
+          "ra": 7,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "ra_SCENE_001",
+          "adi_da_PERMISSION_010",
+          "master_sha_PERMISSION_002",
+          "miyuki_COMPRESSION_003"
+        ]
+      },
+      "atom_types": {
+        "HOOK": 3,
+        "PERMISSION": 4,
+        "PIVOT": 6,
+        "STORY": 6,
+        "COMPRESSION": 8,
+        "INTEGRATION": 1,
+        "REFLECTION": 2,
+        "SCENE": 7,
+        "TEACHER_DOCTRINE": 2,
+        "THREAD": 1,
+        "EXERCISE": 1,
+        "TAKEAWAY": 1
+      },
+      "keywords": [
+        "pain",
+        "anger",
+        "suffering",
+        "body",
+        "something",
+        "ahjan",
+        "condition",
+        "feel"
+      ],
+      "exemplars": [
+        "Pain moves through your awareness and instead of identifying with the pain, you notice the awareness that is aware of the pain. The pain is there, but you are not reduced by it.",
+        "If you are in pain right now—physical or emotional—you do not need to set the pain aside to engage with this. The Bright is not separate from your pain. It is the awareness in which the pain is held. You can be in pain and still be free. These are not contradictory.",
+        "Your pain is not punishment. It is information from your soul asking for your attention and your compassion.",
+        "Gratitude is not denial of pain. It is the recognition that even in darkness, something is holding you up. Name what holds you."
+      ]
+    },
+    {
+      "root_id": "spine_030",
+      "label": "self / bright / avoidance",
+      "convergence_strength": 0.4,
+      "is_universal": true,
+      "size": 40,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "miki",
+          "omote",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 15,
+          "ahjan": 1,
+          "joshin": 1,
+          "miki": 2,
+          "omote": 20,
+          "ra": 1
+        },
+        "exemplar_atom_ids": [
+          "adi_da_REFLECTION_025",
+          "adi_da_REFLECTION_020",
+          "adi_da_REFLECTION_010",
+          "adi_da_HOOK_035"
+        ]
+      },
+      "atom_types": {
+        "HOOK": 10,
+        "REFLECTION": 14,
+        "SCENE": 3,
+        "PERMISSION": 2,
+        "THREAD": 3,
+        "INTEGRATION": 4,
+        "TAKEAWAY": 3,
+        "COMPRESSION": 1
+      },
+      "keywords": [
+        "self",
+        "bright",
+        "avoidance",
+        "public",
+        "person",
+        "away",
+        "becomes",
+        "separate"
+      ],
+      "exemplars": [
+        "Avoidance is a sign of recognition. Some quality in the other person reveals something you cannot bear to see about yourself. So you turn away. In that turning away, the self becomes solid. But if you stayed present with that revelation, what would dissolve? The self, yes. But wh",
+        "In relationship, when the other person truly sees you, what happens to the separate self? Does it feel threatened? What is it afraid of being seen? Is that fear the self, or is it the recognition of the self's unreality? Can you sit with both?",
+        "The Bright is not something to attain. It is prior to the separate self's activity. Contraction occurs in the presence of the Bright. The self senses its own falsity and tightens. This tightening is not pathology. It is the sign of recognition. The Bright is always prior. The sel",
+        "There is a version of you that you show the world and a version that lives underneath. The gap between them is exhausting to maintain. Not because you are dishonest. Because the effort of holding yourself together in a particular shape takes more energy than you realize."
+      ]
+    },
+    {
+      "root_id": "spine_031",
+      "label": "nafs / worthy / already",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 40,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 1,
+          "joshin": 1,
+          "junko": 5,
+          "maat": 15,
+          "master_feung": 2,
+          "master_sha": 4,
+          "master_wu": 1,
+          "miki": 5,
+          "miyuki": 1,
+          "pamela_fellows": 2,
+          "sai_ma": 3
+        },
+        "exemplar_atom_ids": [
+          "sai_ma_HOOK_005",
+          "miki_INTEGRATION_007",
+          "master_sha_INTEGRATION_003",
+          "junko_TAKEAWAY_002"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 2,
+        "INTEGRATION": 10,
+        "COMPRESSION": 5,
+        "HOOK": 7,
+        "TAKEAWAY": 5,
+        "REFLECTION": 5,
+        "THREAD": 5,
+        "PERMISSION": 1
+      },
+      "keywords": [
+        "nafs",
+        "worthy",
+        "already",
+        "remembering",
+        "beloved",
+        "something",
+        "never",
+        "back"
+      ],
+      "exemplars": [
+        "You are already worthy. This is the foundation. Everything else is remembering this.",
+        "Take the remembering of your original completeness back into your life. Not as a thought to hold but as a ground to stand on.",
+        "Forgiveness is not forgetting. It is releasing the weight so you can live.",
+        "You came here to remember, not to learn. The remembering is the work."
+      ]
+    },
+    {
+      "root_id": "spine_032",
+      "label": "healing / love / soul",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 39,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "junko",
+          "master_sha",
+          "miki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "ahjan": 1,
+          "junko": 1,
+          "master_sha": 19,
+          "miki": 8,
+          "omote": 1,
+          "pamela_fellows": 3,
+          "ra": 1,
+          "sai_ma": 4
+        },
+        "exemplar_atom_ids": [
+          "ra_COMPRESSION_010",
+          "master_sha_PIVOT_005",
+          "master_sha_STORY_009",
+          "miki_PERMISSION_001"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 4,
+        "PERMISSION": 9,
+        "STORY": 5,
+        "EXERCISE": 2,
+        "PIVOT": 5,
+        "REFLECTION": 2,
+        "SCENE": 1,
+        "TAKEAWAY": 3,
+        "THREAD": 3,
+        "INTEGRATION": 3,
+        "HOOK": 1,
+        "DOCTRINE": 1
+      },
+      "keywords": [
+        "healing",
+        "love",
+        "soul",
+        "body",
+        "frequency",
+        "light",
+        "something",
+        "mind"
+      ],
+      "exemplars": [
+        "Time is not linear for the soul. What you are healing now is sending ripples backward and forward. The work is never only for this moment.",
+        "She stopped trying to heal herself and asked for love instead. The healing followed without effort.",
+        "I was working with someone I'll call Mei. She is anxious about her own worthiness. The belief that she is not enough lives in her chest. She moves through the world believing she needs to prove something. The blockage is in her heart. She practices visualization: imagining healin",
+        "You do not have to fix yourself before you can receive healing. The healing comes first."
+      ]
+    },
+    {
+      "root_id": "spine_033",
+      "label": "body / rest / exhaustion",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 38,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 4,
+          "ahjan": 4,
+          "joshin": 1,
+          "maat": 2,
+          "master_feung": 1,
+          "master_sha": 2,
+          "master_wu": 7,
+          "miki": 4,
+          "miyuki": 5,
+          "omote": 3,
+          "pamela_fellows": 4,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "adi_da_PERMISSION_011",
+          "master_wu_PERMISSION_001",
+          "master_wu_STORY_001",
+          "miki_PERMISSION_003"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 3,
+        "PERMISSION": 9,
+        "PIVOT": 5,
+        "TAKEAWAY": 4,
+        "STORY": 9,
+        "INTEGRATION": 2,
+        "REFLECTION": 1,
+        "THREAD": 1,
+        "EXERCISE": 2,
+        "HOOK": 2
+      },
+      "keywords": [
+        "body",
+        "rest",
+        "exhaustion",
+        "something",
+        "burnout",
+        "weakness",
+        "without",
+        "yourself"
+      ],
+      "exemplars": [
+        "You may be reading this in a state of exhaustion. The self is tired of holding itself together. That exhaustion is not weakness. It is the body telling you the truth about the cost of contraction. Rest is not quitting. Rest is the self releasing its grip long enough for the Brigh",
+        "Your exhaustion is not weakness. It is the body's honest response to forcing what wants to flow naturally.",
+        "Dao is burned out. He's been trying to push through, force his way through exhaustion by pure willpower. His body is heavy. His eyes close during meetings.\n\nHis Taoist teacher suggests he stop. Not rest in the effortful sense, but yield to what his body is asking.\n\nDao stops forc",
+        "You are allowed to be exhausted. Depletion is not evidence of failure. It is evidence of how much you have given."
+      ]
+    },
+    {
+      "root_id": "spine_034",
+      "label": "body / notice / softness",
+      "convergence_strength": 0.8667,
+      "is_universal": true,
+      "size": 38,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 1,
+          "joshin": 1,
+          "maat": 4,
+          "master_feung": 2,
+          "master_sha": 1,
+          "master_wu": 13,
+          "miki": 1,
+          "miyuki": 3,
+          "omote": 1,
+          "pamela_fellows": 2,
+          "ra": 3,
+          "sai_ma": 3
+        },
+        "exemplar_atom_ids": [
+          "master_wu_INTEGRATION_005",
+          "master_wu_SCENE_008",
+          "master_feung_PIVOT_014",
+          "master_wu_EXERCISE_001"
+        ]
+      },
+      "atom_types": {
+        "HOOK": 5,
+        "INTEGRATION": 4,
+        "THREAD": 7,
+        "PIVOT": 9,
+        "SCENE": 3,
+        "TAKEAWAY": 2,
+        "EXERCISE": 3,
+        "PERMISSION": 1,
+        "REFLECTION": 2,
+        "STORY": 1,
+        "COMPRESSION": 1
+      },
+      "keywords": [
+        "body",
+        "notice",
+        "softness",
+        "soften",
+        "thing",
+        "hold",
+        "practice",
+        "tension"
+      ],
+      "exemplars": [
+        "Softness overcomes hardness. Practice softness without forcing the moment.\nLet the breath find the lower belly. Let the jaw unhook. Let the day soften one inch at a time.",
+        "A confrontation is coming and normally you would brace yourself. Instead you soften. The confrontation dissolves because there is no hard place to hit.",
+        "She felt the body's held tension and did not try to fix it. She simply noticed it as a stroke that was already made. It softened without being managed.",
+        "Stand or sit. Bring awareness to the places where you're holding tension in your body.\n\nThe practice is not to fix the tension, but to soften your relationship to it.\n\nWhere you're tight, invite softness. Not through force. Through gentleness. \"Can this be a little softer?\" Not a"
+      ]
+    },
+    {
+      "root_id": "spine_035",
+      "label": "light / kurama / yama",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 38,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "junko",
+          "maat",
+          "master_sha",
+          "miki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "ahjan": 1,
+          "junko": 3,
+          "maat": 5,
+          "master_sha": 3,
+          "miki": 14,
+          "omote": 1,
+          "ra": 1,
+          "sai_ma": 9
+        },
+        "exemplar_atom_ids": [
+          "sai_ma_HOOK_007",
+          "sai_ma_THREAD_002",
+          "ra_COMPRESSION_009",
+          "miki_PERMISSION_006"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 3,
+        "HOOK": 7,
+        "COMPRESSION": 6,
+        "EXERCISE": 3,
+        "PERMISSION": 5,
+        "TAKEAWAY": 3,
+        "THREAD": 3,
+        "INTEGRATION": 3,
+        "PIVOT": 2,
+        "REFLECTION": 3
+      },
+      "keywords": [
+        "light",
+        "kurama",
+        "yama",
+        "inner",
+        "shine",
+        "even",
+        "anything",
+        "simply"
+      ],
+      "exemplars": [
+        "Inner light is always present. You are learning to allow it to shine.",
+        "The inner light was recognized. When darkness arrives, the light does not leave. Your attention does.",
+        "The darkness is not the absence of light. It is the presence of unrevealed light. What you fear most is often the unacknowledged source of your power.",
+        "You are allowed to feel skeptical. The light does not require your belief. It only requires your presence."
+      ]
+    },
+    {
+      "root_id": "spine_036",
+      "label": "body / feel / ground",
+      "convergence_strength": 0.4667,
+      "is_universal": true,
+      "size": 37,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "junko",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "pamela_fellows",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 5,
+          "junko": 2,
+          "master_wu": 1,
+          "miki": 3,
+          "miyuki": 3,
+          "pamela_fellows": 14,
+          "ra": 9
+        },
+        "exemplar_atom_ids": [
+          "pamela_fellows_EXERCISE_005",
+          "miki_EXERCISE_006",
+          "adi_da_INTEGRATION_017",
+          "ra_EXERCISE_004"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 16,
+        "INTEGRATION": 5,
+        "PERMISSION": 2,
+        "SCENE": 5,
+        "PIVOT": 2,
+        "REFLECTION": 4,
+        "THREAD": 2,
+        "HOOK": 1
+      },
+      "keywords": [
+        "body",
+        "feel",
+        "ground",
+        "notice",
+        "feet",
+        "practice",
+        "minutes",
+        "something"
+      ],
+      "exemplars": [
+        "This is a trauma-sensitive grounding practice. Use this when you feel triggered or activated.\n\nFeel your feet on the floor. Press them down. Feel the solidity. The earth holding you.\n\nFeel your sitting bones or back against the surface you're on. You are being held.\n\nPlace your h",
+        "Wherever you are, let your feet feel the ground beneath them. Not a technique — just a noticing. The floor or earth beneath you has been holding your weight this entire time without requiring anything. Let yourself notice that. You do not have to do anything with this awareness. ",
+        "Return your attention to where your body touches the ground. The Bright remains. The contraction exists. So does the solid earth beneath you. Feel your sitting bones. Notice the place where your back meets the chair. Feel this support. The gesture of avoidance is real and your bo",
+        "Sit with your feet flat on the ground. Place your awareness at the base of your spine, feeling your connection to the earth. This is your ground, the foundation that does not move. From here, expand your awareness upward through your spine, feeling the stability all the way up th"
+      ]
+    },
+    {
+      "root_id": "spine_037",
+      "label": "return / right / back",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 36,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 5,
+          "ahjan": 1,
+          "joshin": 4,
+          "junko": 4,
+          "maat": 6,
+          "master_feung": 2,
+          "master_sha": 1,
+          "master_wu": 7,
+          "miki": 2,
+          "miyuki": 1,
+          "sai_ma": 3
+        },
+        "exemplar_atom_ids": [
+          "adi_da_PERMISSION_006",
+          "adi_da_PERMISSION_018",
+          "joshin_EXERCISE_004",
+          "adi_da_TAKEAWAY_016"
+        ]
+      },
+      "atom_types": {
+        "PERMISSION": 5,
+        "PIVOT": 3,
+        "TAKEAWAY": 4,
+        "THREAD": 12,
+        "INTEGRATION": 6,
+        "EXERCISE": 1,
+        "SCENE": 2,
+        "COMPRESSION": 2,
+        "STORY": 1
+      },
+      "keywords": [
+        "return",
+        "right",
+        "back",
+        "place",
+        "door",
+        "practice",
+        "away",
+        "stop"
+      ],
+      "exemplars": [
+        "If this feels too much right now, you may stop. The Bright does not demand your attention. It waits. It has always waited. It will be here when you are ready to return. There is no urgency in what is already prior.",
+        "You are allowed to put this down and come back tomorrow. Freedom is patient because it has nowhere to go. It is already where it has always been. Your timeline is honored. Your pace is respected. The Bright does not hurry.",
+        "Return to Presence: Whenever you catch yourself lost in worry about the future or shame about the past, pause. Bring your attention to the five senses: What do you see right now? What do you hear? What do you feel on your skin? The present moment is always free of the story. It's",
+        "You do not arrive at the Bright. You stop departing from it. The departure was the seeking. The return is the stopping."
+      ]
+    },
+    {
+      "root_id": "spine_038",
+      "label": "mind / thoughts / thought",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 35,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "pamela_fellows",
+          "ra"
+        ],
+        "teacher_distribution": {
+          "adi_da": 1,
+          "ahjan": 7,
+          "joshin": 3,
+          "junko": 1,
+          "maat": 3,
+          "master_wu": 2,
+          "miki": 3,
+          "miyuki": 3,
+          "pamela_fellows": 1,
+          "ra": 11
+        },
+        "exemplar_atom_ids": [
+          "miyuki_PERMISSION_003",
+          "joshin_HOOK_008",
+          "ra_EXERCISE_003",
+          "ahjan_HOOK_008"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 4,
+        "HOOK": 9,
+        "PERMISSION": 6,
+        "REFLECTION": 3,
+        "SCENE": 2,
+        "TAKEAWAY": 5,
+        "PIVOT": 3,
+        "INTEGRATION": 1,
+        "THREAD": 1,
+        "EXERCISE": 1
+      },
+      "keywords": [
+        "mind",
+        "thoughts",
+        "thought",
+        "thinking",
+        "need",
+        "stop",
+        "thinker",
+        "notice"
+      ],
+      "exemplars": [
+        "It is okay to not finish the thought. Some thoughts are not meant to be finished. They are meant to be noticed and released.",
+        "Everything changes when you understand this one thing: you are not the one having the thoughts. The thoughts are having themselves. You are the space in which they appear and disappear. The moment this becomes lived understanding, not just words, the whole game ends.",
+        "This is a thought-observing practice. Sit comfortably and notice the thoughts that arise naturally, without trying to create them or suppress them. Observe them as if they are clouds passing through the sky of your awareness. Do not judge them. Do not believe them. Simply observe",
+        "Your thoughts are not facts about the world. They are the mind's habit. Once you\nsee this, your relationship to thinking changes. The same thought can pass through\nwithout catching you."
+      ]
+    },
+    {
+      "root_id": "spine_039",
+      "label": "water / stone / river",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 35,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "junko",
+          "kenjin",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 5,
+          "junko": 2,
+          "kenjin": 1,
+          "master_sha": 2,
+          "master_wu": 15,
+          "miyuki": 1,
+          "pamela_fellows": 1,
+          "ra": 3,
+          "sai_ma": 3
+        },
+        "exemplar_atom_ids": [
+          "master_wu_EXERCISE_005",
+          "sai_ma_STORY_009",
+          "pamela_fellows_STORY_001",
+          "master_sha_STORY_011"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 3,
+        "HOOK": 2,
+        "STORY": 17,
+        "TEACHER_DOCTRINE": 3,
+        "SCENE": 2,
+        "COMPRESSION": 1,
+        "INTEGRATION": 1,
+        "PERMISSION": 2,
+        "PIVOT": 1,
+        "REFLECTION": 1,
+        "TAKEAWAY": 1,
+        "THREAD": 1
+      },
+      "keywords": [
+        "water",
+        "stone",
+        "river",
+        "simply",
+        "teaching",
+        "light",
+        "around",
+        "without"
+      ],
+      "exemplars": [
+        "Watch water. A river, a fountain, even a glass of water you disturb.\n\nNotice how water moves. It doesn't fight obstacles. It flows around them. It finds the path of least resistance.\n\nBut through this softness, water is relentless. Over time, it wears stone.\n\nSit with this teachi",
+        "There is a teaching about the water that becomes ice. The water is willing. The water is flowing. The water knows its nature is to move, to adapt, to find the shape of whatever holds it.\n\nThen winter comes. The water freezes. It becomes rigid. It becomes hard. It becomes brittle.",
+        "In a river, there is a stone that has been smooth for a thousand years. The water never stopped moving against it, and the stone never resisted. The water did not soften the stone through force. It simply kept returning. The river teaches us: safety is not the absence of water. I",
+        "There is a river in the teaching that wants to flow to the sea. But the path is not direct. The river meets obstacles: mountains, walls built by humans, deserts that seem to stretch forever. The river does not stop. It does not judge the obstacles. It does not decide it is failin"
+      ]
+    },
+    {
+      "root_id": "spine_040",
+      "label": "moment / next / notice",
+      "convergence_strength": 0.6,
+      "is_universal": true,
+      "size": 33,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 4,
+          "joshin": 4,
+          "maat": 2,
+          "master_feung": 3,
+          "miyuki": 10,
+          "omote": 4,
+          "ra": 2,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "joshin_THREAD_009",
+          "miyuki_HOOK_001",
+          "joshin_SCENE_011",
+          "ahjan_INTEGRATION_005"
+        ]
+      },
+      "atom_types": {
+        "EXERCISE": 2,
+        "PERMISSION": 1,
+        "INTEGRATION": 2,
+        "PIVOT": 8,
+        "REFLECTION": 4,
+        "COMPRESSION": 3,
+        "SCENE": 3,
+        "THREAD": 4,
+        "HOOK": 2,
+        "TAKEAWAY": 4
+      },
+      "keywords": [
+        "moment",
+        "next",
+        "notice",
+        "enough",
+        "conversation",
+        "ordinary",
+        "moments",
+        "rehearsing"
+      ],
+      "exemplars": [
+        "This moment was enough. The next moment will ask if you believe that.",
+        "The moment is complete as it is. What are you waiting for?",
+        "You are listening to someone speak, and instead of planning your response, you simply hear. No interpretation, no judgment forming. For a moment, your mind is still. And in that stillness, you understand something: this is what it would feel like to move through the world unfough",
+        "This week, practice one moment of not knowing. When you are about to react with\ncertainty, pause. What if you don't actually know what the other person meant? What\nif you don't know what comes next? Sit in this uncertainty for a few seconds. This\nopening is where wisdom lives."
+      ]
+    },
+    {
+      "root_id": "spine_041",
+      "label": "practice / presence / nothing",
+      "convergence_strength": 0.8,
+      "is_universal": true,
+      "size": 32,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "junko",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miyuki",
+          "omote",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 3,
+          "ahjan": 1,
+          "joshin": 5,
+          "junko": 1,
+          "maat": 1,
+          "master_feung": 1,
+          "master_sha": 2,
+          "master_wu": 3,
+          "miyuki": 6,
+          "omote": 5,
+          "ra": 1,
+          "sai_ma": 3
+        },
+        "exemplar_atom_ids": [
+          "master_sha_COMPRESSION_008",
+          "miyuki_INTEGRATION_001",
+          "adi_da_COMPRESSION_012",
+          "joshin_COMPRESSION_009"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 10,
+        "PERMISSION": 6,
+        "TAKEAWAY": 7,
+        "HOOK": 4,
+        "INTEGRATION": 3,
+        "PIVOT": 1,
+        "REFLECTION": 1
+      },
+      "keywords": [
+        "practice",
+        "presence",
+        "nothing",
+        "life",
+        "action",
+        "form",
+        "without",
+        "anyone"
+      ],
+      "exemplars": [
+        "Gratitude is not a practice you add to your life. It is the fundamental posture of a life that understands how much has been given.",
+        "Sit. Do nothing. This is the practice.",
+        "The Bright is not something you create through practice. It is what remains when you stop creating a self through effort. Practice removes the obstruction. It does not produce the light.",
+        "Discipline is not punishment. It is the container that holds the practice until the practice can hold you."
+      ]
+    },
+    {
+      "root_id": "spine_042",
+      "label": "broken / trying / something",
+      "convergence_strength": 0.6667,
+      "is_universal": true,
+      "size": 31,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "joshin",
+          "maat",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "omote",
+          "pamela_fellows",
+          "ra",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "joshin": 1,
+          "maat": 1,
+          "master_wu": 3,
+          "miki": 8,
+          "miyuki": 6,
+          "omote": 1,
+          "pamela_fellows": 3,
+          "ra": 4,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "miki_TAKEAWAY_001",
+          "miki_COMPRESSION_004",
+          "miki_COMPRESSION_002",
+          "miki_HOOK_001"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 6,
+        "THREAD": 4,
+        "HOOK": 7,
+        "SCENE": 2,
+        "TAKEAWAY": 4,
+        "REFLECTION": 3,
+        "PERMISSION": 3,
+        "PIVOT": 1,
+        "INTEGRATION": 1
+      },
+      "keywords": [
+        "broken",
+        "trying",
+        "something",
+        "never",
+        "forgotten",
+        "current",
+        "original",
+        "healing"
+      ],
+      "exemplars": [
+        "Healing is not repairing broken things. It is remembering original completeness.",
+        "Healing is not repairing broken things. It is remembering original completeness.",
+        "You are not broken. You have temporarily forgotten your original completeness.",
+        "You are not broken. You have temporarily forgotten something that is still here."
+      ]
+    },
+    {
+      "root_id": "spine_043",
+      "label": "therapist / something / body",
+      "convergence_strength": 0.3333,
+      "is_universal": true,
+      "size": 24,
+      "provenance": {
+        "teachers": [
+          "ahjan",
+          "joshin",
+          "miyuki",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "ahjan": 2,
+          "joshin": 4,
+          "miyuki": 2,
+          "pamela_fellows": 15,
+          "sai_ma": 1
+        },
+        "exemplar_atom_ids": [
+          "pamela_fellows_STORY_000",
+          "pamela_fellows_STORY_009",
+          "pamela_fellows_STORY_005",
+          "pamela_fellows_STORY_004"
+        ]
+      },
+      "atom_types": {
+        "STORY": 24
+      },
+      "keywords": [
+        "therapist",
+        "something",
+        "body",
+        "nervous",
+        "system",
+        "story",
+        "hands",
+        "sits"
+      ],
+      "exemplars": [
+        "Sarah sits in her kitchen at 6 AM. Her chest is tight. Coffee grows cold in her hands.\n\nFor three months, her nervous system has been in constant alert. She startles at sounds. Her shoulders live near her ears. Sleep fragments. Her therapist's words return: \"Your nervous system l",
+        "The office air is still. A lamp. Two chairs arranged at angles.\n\nDmitri sits with his hands trembling. His therapist sits quietly, her own body at rest.\n\nHe cannot speak. The words are stuck. But her lack of urgency is itself a communication. This moment is not an emergency.\n\nHis",
+        "The office is very quiet. Two chairs. A box of tissues. Light from the window falls in a particular way across the floor.\n\nKenji sits with his body tense, arms crossed. His therapist sits across from him with her shoulders relaxed. There is no hurry in her posture. She has done t",
+        "Elena lies on the therapist's couch with her eyes closed. They're practicing something called somatic tracking—noticing where anxiety lives in her body, not fighting it.\n\nThe anxiety is in her chest. Tight. Like a fist that won't release.\n\nHer therapist asks: \"What happens if you"
+      ]
+    },
+    {
+      "root_id": "spine_044",
+      "label": "boundary / love / boundaries",
+      "convergence_strength": 0.7333,
+      "is_universal": true,
+      "size": 23,
+      "provenance": {
+        "teachers": [
+          "adi_da",
+          "ahjan",
+          "joshin",
+          "maat",
+          "master_feung",
+          "master_sha",
+          "master_wu",
+          "miki",
+          "miyuki",
+          "pamela_fellows",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "adi_da": 2,
+          "ahjan": 1,
+          "joshin": 2,
+          "maat": 6,
+          "master_feung": 2,
+          "master_sha": 4,
+          "master_wu": 1,
+          "miki": 1,
+          "miyuki": 1,
+          "pamela_fellows": 1,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "sai_ma_STORY_006",
+          "maat_TAKEAWAY_008",
+          "maat_HOOK_009",
+          "master_sha_STORY_006"
+        ]
+      },
+      "atom_types": {
+        "SCENE": 1,
+        "THREAD": 2,
+        "COMPRESSION": 3,
+        "PERMISSION": 1,
+        "STORY": 4,
+        "HOOK": 2,
+        "INTEGRATION": 1,
+        "REFLECTION": 2,
+        "TAKEAWAY": 3,
+        "PIVOT": 1,
+        "EXERCISE": 3
+      },
+      "keywords": [
+        "boundary",
+        "love",
+        "boundaries",
+        "protect",
+        "right",
+        "myself",
+        "someone",
+        "place"
+      ],
+      "exemplars": [
+        "There is a boundary that is not what you have been taught it is. You have been taught that a boundary is a wall. A firm no. A place where you protect yourself by keeping others out.\n\nBut the deepest boundary is different. It is a line drawn from love, not from fear. It is you say",
+        "A boundary is a love act. It says: I honor what the Beloved made me, and I am protecting it so I can remain present and whole.",
+        "A boundary is not a wall you build to keep the world out. It is a declaration of where you end and the Beloved begins.",
+        "I was working with someone I'll call Fang. She spirals in anxiety about her boundaries. She says yes when she means no. People ask and she complies. The shame that follows is intense. She feels she is failing at love by having her own needs. But when she begins a practice of grat"
+      ]
+    },
+    {
+      "root_id": "spine_045",
+      "label": "frequency / love / language",
+      "convergence_strength": 0.2,
+      "is_universal": true,
+      "size": 23,
+      "provenance": {
+        "teachers": [
+          "junko",
+          "master_sha",
+          "miki"
+        ],
+        "teacher_distribution": {
+          "junko": 11,
+          "master_sha": 11,
+          "miki": 1
+        },
+        "exemplar_atom_ids": [
+          "master_sha_INTEGRATION_008",
+          "junko_HOOK_005",
+          "junko_INTEGRATION_006",
+          "master_sha_SCENE_009"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 5,
+        "HOOK": 4,
+        "INTEGRATION": 3,
+        "PERMISSION": 2,
+        "PIVOT": 4,
+        "REFLECTION": 2,
+        "SCENE": 1,
+        "THREAD": 2
+      },
+      "keywords": [
+        "frequency",
+        "love",
+        "language",
+        "felt",
+        "life",
+        "light",
+        "body",
+        "vibration"
+      ],
+      "exemplars": [
+        "Your frequency attracts your reality. Raise your frequency through love and gratitude.",
+        "The frequency was here before I was. I only learned to hear it.",
+        "Integration after transmission often means doing less, not more. The frequency does the work. You provide the willingness.",
+        "The frequency you have been broadcasting is one of unworthiness and it has been attracting a life that reflects that belief. You shift the frequency through gratitude and small things begin to change."
+      ]
+    },
+    {
+      "root_id": "spine_046",
+      "label": "lotus / grows / soil",
+      "convergence_strength": 0.2,
+      "is_universal": true,
+      "size": 18,
+      "provenance": {
+        "teachers": [
+          "miki",
+          "miyuki",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "miki": 8,
+          "miyuki": 1,
+          "sai_ma": 9
+        },
+        "exemplar_atom_ids": [
+          "sai_ma_PERMISSION_000",
+          "miki_INTEGRATION_003",
+          "miki_COMPRESSION_003",
+          "miki_HOOK_007"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 1,
+        "HOOK": 2,
+        "INTEGRATION": 2,
+        "TAKEAWAY": 2,
+        "THREAD": 5,
+        "PERMISSION": 3,
+        "PIVOT": 2,
+        "STORY": 1
+      },
+      "keywords": [
+        "lotus",
+        "grows",
+        "soil",
+        "seed",
+        "planted",
+        "need",
+        "bloom",
+        "even"
+      ],
+      "exemplars": [
+        "You are allowed to bloom even in difficult conditions. The lotus does not wait for clean water. It blooms where it is.",
+        "Something has been planted today that will grow in the background of your life. You do not need to tend it with your attention. Trust the soil.",
+        "The seed was planted. It grows in the dark, on its own schedule, whether or not you are watching.",
+        "The seed does not need to understand what it is becoming. It only needs to rest in the soil."
+      ]
+    },
+    {
+      "root_id": "spine_047",
+      "label": "soul / mind / ordinary",
+      "convergence_strength": 0.4,
+      "is_universal": true,
+      "size": 17,
+      "provenance": {
+        "teachers": [
+          "joshin",
+          "maat",
+          "master_sha",
+          "miki",
+          "miyuki",
+          "sai_ma"
+        ],
+        "teacher_distribution": {
+          "joshin": 1,
+          "maat": 3,
+          "master_sha": 9,
+          "miki": 1,
+          "miyuki": 1,
+          "sai_ma": 2
+        },
+        "exemplar_atom_ids": [
+          "master_sha_SCENE_011",
+          "master_sha_INTEGRATION_004",
+          "master_sha_EXERCISE_004",
+          "maat_PERMISSION_008"
+        ]
+      },
+      "atom_types": {
+        "COMPRESSION": 2,
+        "HOOK": 2,
+        "PERMISSION": 1,
+        "TAKEAWAY": 5,
+        "EXERCISE": 1,
+        "INTEGRATION": 2,
+        "REFLECTION": 1,
+        "SCENE": 1,
+        "THREAD": 2
+      },
+      "keywords": [
+        "soul",
+        "mind",
+        "ordinary",
+        "show",
+        "return",
+        "memory",
+        "listening",
+        "quiet"
+      ],
+      "exemplars": [
+        "The soul suggests something and the mind objects with a thousand reasons why not. You quiet the mind and listen to the soul. It was right.",
+        "Your soul is wise. Start listening to it more than your worried mind.",
+        "Soul-Body Integration: Close your eyes. Imagine your soul — your essential self, your deepest wisdom — as a presence of pure light or love. Silently call to it: \"Soul, guide me. Show me what needs healing. Show me what is mine to do.\" Listen without forcing. What arises? A memory",
+        "You are allowed to want things. Longing is not a spiritual flaw — it is how the soul navigates. Let it guide you deeper, not shame you silent."
+      ]
+    }
+  ]
+}

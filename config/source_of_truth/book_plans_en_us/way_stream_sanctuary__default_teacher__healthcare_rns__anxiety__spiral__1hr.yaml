@@ -1,0 +1,111 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__calm_alarm__1hr
+  name: Calm the Alarm — for Nurses (One-Hour)
+installment_number: 6
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Anxiety Relief: Escaping the Mental Loop (2)'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Anxiety for Healthcare Rns (Breaking the Thought Loop, 1)
+cover_tagline: Did I document that? Did I document that? Did I— it's 2 a.m. and you're
+  still on the same thought.
+description:
+  short_blurb: One small worry walks in and twenty minutes later your mind has built
+    a disaster out of nothing. This is the one-hour reset for the nurse whose brain
+    turns a single thought into a thousand on the drive home. Read it in a single
+    sitting and learn how to step out of the loop without arguing your way through
+    it.
+  long_description: 'It always starts small. A flicker of did I chart that PRN? on
+    your way to the parking lot. By the time you''re in the car it''s did I miss it,
+    did the patient get it, what if they got a double dose, what if it''s caught,
+    what if there''s an investigation, what if I lose my license. One thought, and
+    your mind has built an entire catastrophe out of it, brick by brick, and you cannot
+    find the exit.
+
+
+    This hour is for the nurse whose brain loops. You lie awake re-running the shift,
+    hunting for the thing you missed. You re-read your own documentation in your head.
+    You replay the conversation with the doctor, the look the family gave you, the
+    order you almost questioned. The spiral feels like diligence — like if you just
+    think hard enough you''ll catch the error and be safe — but it never delivers
+    safety. It just goes around again.
+
+
+    The recognition is that the spiral is not problem-solving. It''s a malfunctioning
+    loop wearing the mask of carefulness. Real checking has an end: you verify, you
+    confirm, you''re done. A spiral has no end, because its job was never to find
+    an answer — its job is to keep you braced. The alarm tells you that one more lap
+    will finally make it stop. It won''t. The next lap is the trap.
+
+
+    Then we go down into the loop instead of running it faster. Not thought-stopping,
+    not arguing each fear down with logic — you''ve tried that at 2 a.m. and the spiral
+    just rebuts you and keeps going. Instead you''ll learn to feel the pull of the
+    loop and step out of the stream rather than swim it, to let the thought keep churning
+    without you riding every revolution. You come back able to recognize it the moment
+    it starts in the car: that''s the loop, not new information — and to step off
+    without needing to win the argument first.
+
+
+    This book will not promise a quiet mind. Your brain is going to keep generating
+    thoughts; that''s what brains do, and a nurse''s brain has been trained to scan
+    for what''s wrong. It won''t optimize your thinking or hand you a five-step script
+    to recite when the loop starts. No forcing the worry to be positive, no pretending
+    the stakes of your job aren''t real.
+
+
+    What changes is whether you have to follow. You stop treating every catastrophic
+    chain as a problem you''re obligated to solve, and start letting the loop spin
+    without climbing on. You are allowed to have a racing mind and not chase it. You
+    are allowed to leave a thought unfinished and go to sleep. The alarm swears the
+    next lap is the one that saves you. You can step off the track instead.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - nurses
+  - anxiety for nurses
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — the secular neuroscience of the worry loop and
+  how to interrupt it
+- Rewire Your Anxious Brain (Catherine Pittman) — how rumination circuits fire and
+  how to step out
+- The Worry Trick (David Carbonell) — why fighting the spiral feeds it, and what to
+  do instead
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

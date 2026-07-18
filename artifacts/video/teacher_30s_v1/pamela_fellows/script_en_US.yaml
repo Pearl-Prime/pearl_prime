@@ -1,0 +1,39 @@
+# TEACHER-MANGA-30S-VIDEO-V1 — localized 30s spine (meaning-matched to anchor prose; not verbatim)
+project_id: PRJ-TEACHER-MANGA-30S-VIDEO-V1
+teacher_id: pamela_fellows
+brand_id: somatic_wisdom
+locale: en_US
+anchor_prose_path: artifacts/audiobook_samples/_prose/pamela_fellows_burnout_ch1.txt
+total_seconds: 30
+
+beats:
+  - id: hook
+    start_s: 0
+    end_s: 6
+    text: Light hits the blinds; burnout lives in temples before vocabulary catches up quiet default etched in mornings.
+    sensory_anchor: Blinds striping the room; temples under your fingers; mattress reluctance
+    mc_action: Sitting up slow, rubbing circles at the neck where the knot lives
+
+  - id: struggle
+    start_s: 6
+    end_s: 22
+    text: Messages stack errands tax you double joy sleeps appetite swings insomnia loops nightly you finish wrung yet wired rest resembles another audition you keep missing on purpose.
+    embodied_dis_ease: Weighted limbs, braced jaw, shallow upper-chest breathing that never quite lands
+    mc_action: Shoulders hitch toward ears during email; you catch it, then lose it again
+
+  - id: release
+    start_s: 22
+    end_s: 30
+    text: Hands wide on ribs exhale lingers inhale shorten belly loosens notch somatic slowdown not hero arc permission to creep human speed again tonight.
+    signature_practice: Rib-basket breath—hand on side waist, inhale wide, exhale longer than inhale for three cycles
+    mc_action: Palms on low ribs, thumbs toward spine, tracking expansion like tide
+
+reading_rate_basis: >-
+  config/localization/locale_registry.yaml — en-US baseline; shojo-somatic lane favors emotional precision with accessible anatomy cues; 65–80 words @ ~2.2–2.6 wps.
+
+word_count_target: 65–80 English words total
+estimated_word_count_script: 65
+estimated_seconds: 30
+
+voice_notes: >-
+  Somatic Wisdom: tender, body-forward, names fatigue without shame; metaphors stay organic (tide, weight) not clinical.

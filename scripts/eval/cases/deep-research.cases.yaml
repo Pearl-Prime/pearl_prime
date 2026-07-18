@@ -1,0 +1,32 @@
+# Eval case dataset — skill: deep-research
+# Baseline eval input for P0-2 (docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md §2).
+skill: deep-research
+judge_lang: en
+
+trigger:
+  positives:
+    - "research the latest GLP-1 wellness market with citations"
+    - "deep research the competitor landscape for somatic apps"
+    - "look into Gen Z sleep habits in the US"
+    - "what do we know about cortisol and morning anxiety, cite sources"
+    - "investigate format trends for short audiobooks"
+    - "persona research for the burnout-recovery reader"
+    - "research this topic for the book"
+    - "market research on the manga wellness niche in Japan"
+  negatives:
+    - "branch from origin/main and push this commit"
+    - "connect the WordPress API and store the token"
+    - "render the cover image on Pearl Star"
+    - "open a worktree-based isolation PR for these two files"
+    - "fix the index.lock contention in the main worktree"
+
+tasks:
+  - id: dr-task-1-citation
+    prompt: "What is the mandatory rule about claims in a research report from this skill?"
+    rubric: "States every claim must have a citation and the agent must never synthesize from training data alone; output is cited markdown saved to the repo."
+  - id: dr-task-2-regional-routing
+    prompt: "A research query is about Shanghai consumer trends. Which engine does the cascade try first and why?"
+    rubric: "Routes China/HK/Singapore topics through DeepSeek first per the regional routing; references detect_region.py region detection."
+  - id: dr-task-3-cascade
+    prompt: "Describe the multi-engine cascade and the fallback trigger."
+    rubric: "Names the Gemini -> ChatGPT -> Claude -> ChatGPT-web cascade with auto-detection of quota exhaustion as the fall-through trigger."

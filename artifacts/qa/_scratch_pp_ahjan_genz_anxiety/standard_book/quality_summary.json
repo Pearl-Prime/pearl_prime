@@ -1,0 +1,191 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "ahjan",
+  "quality_profile": "draft",
+  "gates_run": true,
+  "gates_hard": false,
+  "gate_failures": [],
+  "overall_status": "PASS",
+  "book_pass_gate": "SKIPPED_SPINE_MODE",
+  "pre_depth_total_words": 6134,
+  "post_depth_total_words": 13000,
+  "frame": "somatic_first",
+  "exercise_slots_dropped": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 2,
+      "chapter_index": 1,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 3,
+      "chapter_index": 2,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 4,
+      "chapter_index": 3,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 6,
+      "chapter_index": 5,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 7,
+      "chapter_index": 6,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 8,
+      "chapter_index": 7,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    }
+  ],
+  "chapter_contract_warnings": [
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [
+    {
+      "chapter": 3,
+      "chapter_index": 2,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 11,
+          "excerpt": "Unlike the common perception of karma as a system of reward and punishment, karma yoga sees action as a means to spiritu"
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 11,
+          "excerpt": "The Essence of Selfless Giving At the heart of karma yoga is the concept of selfless giving."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.05517668939863608
+    },
+    {
+      "chapter": 5,
+      "chapter_index": 4,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 42,
+          "excerpt": "Unlike the common perception of karma as a system of reward and punishment, karma yoga sees action as a means to spiritu"
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 42,
+          "excerpt": "The Essence of Selfless Giving At the heart of karma yoga is the concept of selfless giving."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.047189819724284196
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 11,
+          "excerpt": "However, true karma yoga is about intelligent action, discernment, and maintaining a healthy boundary between self-care "
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 11,
+          "excerpt": "Integrating Karma Yoga into Daily Life Incorporating the principles of karma yoga into daily life can start with small s"
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.17567567567567569
+    }
+  ],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": []
+}

@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__compassion_fatigue__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__compassion_fatigue.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__depletion
+  name: Refill the Empty Well — for Students
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Cost of Caring: When Everything Is Too Much'
+subtitle: A Field Guide for Gen Alpha Students Navigating Compassion Fatigue
+cover_tagline: Everyone's crisis is your crisis now — and your brain just went offline.
+description:
+  short_blurb: Your friend's spiraling, the group chat needs a referee, someone's
+    mad, someone's sad, and you've gone completely blank — too maxed out to help anyone,
+    yourself included. This is a no-spin guide to the shutdown point of compassion
+    fatigue, for the student quietly carrying everyone at once.
+  long_description: 'It''s all happening at the same time. One friend is melting down
+    over text, another''s mad at you and won''t say why, the group chat needs a referee,
+    and somebody you barely know just trauma-dumped in your DMs. You used to be able
+    to hold all of it. Now you''re staring at your phone, every notification landing
+    like a weight, and you''ve gone totally blank. You can''t answer any of them.
+    You''re not being cold — your system maxed out and tripped the breaker. That''s
+    the shutdown point of compassion fatigue, and it isn''t you failing the people
+    you love. It''s you slamming into a limit nobody ever warned you that you had.
+
+
+    This book is for the student who became everyone''s support system and then buckled
+    under the weight of it. The one who feels guilty for needing space, who sees ''are
+    you okay?'' from a friend and feels dread instead of warmth because there''s simply
+    nothing left in the tank. When everyone''s pain is your job all at once, your
+    mind can''t rank what''s urgent against what isn''t, so it shuts the entire board
+    down. That''s not heartlessness. That''s overload doing exactly what overload
+    does.
+
+
+    It starts to ease the moment you name it straight — not ''I''m a terrible friend,''
+    but ''I''ve hit the shutdown point, and one person can only hold so much.'' Then
+    you go in. You''ll learn what this particular overwhelm feels like in your body,
+    why being endlessly available was always going to break you eventually, and how
+    to find the single thing you can actually do when every demand is screaming at
+    the same volume — beginning with setting the phone down and not hating yourself
+    for it. The skill that grows out of that is early warning: feeling the overload
+    build while you can still do something, instead of after it''s flattened you.
+
+
+    This is not a book about time management or being there for everyone more efficiently.
+    It won''t hand you a system for juggling every crisis without ever dropping one.
+    Your scheduling was never the problem. The problem is that being everyone''s everything
+    is impossible, and no method makes the impossible sustainable.
+
+
+    What you get instead is plain language for the freeze and permission to be a person
+    with a limit rather than a help desk that never closes. You don''t have to reply
+    to everyone tonight. You don''t have to carry all of it at once. Set it down.
+    Come back to yourself before you come back to them — they''ll still be there,
+    and so will you. That''s where it starts.'
+keywords:
+  primary:
+  - compassion fatigue
+  - caregiver burnout
+  - caring too much
+  - empathy fatigue
+  - helper burnout
+  - caregiver stress
+  secondary:
+  - students
+  - compassion fatigue for students
+bisac_codes:
+- SEL027000
+- SOC026000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — explains overload and shutdown in over-givers as a body-level stress response'
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — secular tools for limits when
+  you've become everyone's support system
+- How to Keep House While Drowning (KC Davis) — reframes the shutdown freeze as overload,
+  not a moral failing
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

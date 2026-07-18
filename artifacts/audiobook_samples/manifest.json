@@ -1,0 +1,362 @@
+{
+  "schema": "audiobook_showcase_manifest_v2_pearl_star",
+  "persona": "gen_z_professionals",
+  "teachers": [
+    {
+      "teacher_id": "ahjan",
+      "topic": "anxiety",
+      "brand_key": "stillness_press",
+      "display_name": "Ahjan",
+      "locale": "en-US",
+      "topic_label": "Anxiety",
+      "brand_display": "Stillness Press",
+      "positioning": "somatic_companion",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "english_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/ahjan_anxiety_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/ahjan_anxiety_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_ahjan_anxiety_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "joshin",
+      "topic": "anxiety",
+      "brand_key": "cognitive_clarity",
+      "display_name": "Joshin",
+      "locale": "en-US",
+      "topic_label": "Anxiety",
+      "brand_display": "Clear Seeing Books",
+      "positioning": "research_guide",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "english_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/joshin_anxiety_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/joshin_anxiety_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_joshin_anxiety_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "ahjan",
+      "topic": "boundaries",
+      "brand_key": "stillness_press",
+      "display_name": "Ahjan",
+      "locale": "en-US",
+      "topic_label": "Boundaries",
+      "brand_display": "Stillness Press",
+      "positioning": "elder_stabilizer",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "english_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/ahjan_boundaries_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/ahjan_boundaries_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_ahjan_boundaries.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "pamela_fellows",
+      "topic": "burnout",
+      "brand_key": "somatic_wisdom",
+      "display_name": "Pamela Fellows",
+      "locale": "en-US",
+      "topic_label": "Burnout",
+      "brand_display": "Felt Sense Publishing",
+      "positioning": "somatic_companion",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "english_female",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/pamela_fellows_burnout_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/pamela_fellows_burnout_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_pamela_fellows_burnout_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "master_wu",
+      "topic": "courage",
+      "brand_key": "warrior_calm",
+      "display_name": "Master Wu",
+      "locale": "zh-CN",
+      "topic_label": "Courage",
+      "brand_display": "Iron Gate Press",
+      "positioning": "research_guide",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "chinese_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/master_wu_courage_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/master_wu_courage_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_master_wu_courage_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "miki",
+      "topic": "imposter_syndrome",
+      "brand_key": "digital_ground",
+      "display_name": "Miki",
+      "locale": "ja-JP",
+      "topic_label": "Imposter Syndrome",
+      "brand_display": "Present Tense Books",
+      "positioning": "somatic_companion",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "ja_m_calm_01",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/miki_imposter_syndrome_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/miki_imposter_syndrome_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_miki_imposter_syndrome_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "junko",
+      "topic": "overthinking",
+      "brand_key": "relational_calm",
+      "display_name": "Junko",
+      "locale": "ja-JP",
+      "topic_label": "Overthinking",
+      "brand_display": "Bare Form Books",
+      "positioning": "somatic_companion",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "ja_female_warm",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/junko_overthinking_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/junko_overthinking_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_junko_overthinking_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "master_sha",
+      "topic": "grief",
+      "brand_key": "sleep_restoration",
+      "display_name": "Master Sha",
+      "locale": "zh-CN",
+      "topic_label": "Grief",
+      "brand_display": "Night Architecture Books",
+      "positioning": "elder_stabilizer",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "chinese_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/master_sha_grief_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/master_sha_grief_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_master_sha_grief_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "ra",
+      "topic": "self_worth",
+      "brand_key": "solar_return",
+      "display_name": "Ra",
+      "locale": "en-US",
+      "topic_label": "Self-Worth",
+      "brand_display": "Ember & Ash Publishing",
+      "positioning": "research_guide",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "english_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/ra_self_worth_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/ra_self_worth_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_ra_self_worth_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "sai_ma",
+      "topic": "grief",
+      "brand_key": "devotion_path",
+      "display_name": "Sai Ma",
+      "locale": "zh-CN",
+      "topic_label": "Grief",
+      "brand_display": "Open Vessel Press",
+      "positioning": "somatic_companion",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "chinese_female",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/sai_ma_grief_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/sai_ma_grief_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_sai_ma_grief_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "adi_da",
+      "topic": "self_worth",
+      "brand_key": "heart_balance",
+      "display_name": "Adi Da",
+      "locale": "en-US",
+      "topic_label": "Self-Worth",
+      "brand_display": "Feather & Scale Press",
+      "positioning": "research_guide",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "english_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/adi_da_self_worth_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/adi_da_self_worth_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_adi_da_self_worth_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "omote",
+      "topic": "sleep_anxiety",
+      "brand_key": "body_memory",
+      "display_name": "Omote",
+      "locale": "ko-KR",
+      "topic_label": "Sleep Anxiety",
+      "brand_display": "Held Ground Press",
+      "positioning": "somatic_companion",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "ko_female_gentle",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/omote_sleep_anxiety_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/omote_sleep_anxiety_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_omote_sleep_anxiety_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    },
+    {
+      "teacher_id": "master_feung",
+      "topic": "burnout",
+      "brand_key": "qi_foundation",
+      "display_name": "Master Feung",
+      "locale": "zh-CN",
+      "topic_label": "Burnout",
+      "brand_display": "Root & Meridian Press",
+      "positioning": "elder_stabilizer",
+      "provenance": "qwen3_pearl_star_native",
+      "llm": {
+        "provider": "ollama_qwen_pearl_star",
+        "base_url": "http://192.168.1.112:11434/v1"
+      },
+      "tts": {
+        "provider": "cosyvoice2_pearl_star",
+        "base_url": "http://192.168.1.112:9880",
+        "speaker_or_reference_id": "chinese_male",
+        "voice_resolution": "teacher_row_cv_builtin",
+        "reference_wav_repo_rel": null
+      },
+      "audio_rel": "artifacts/audiobook_samples/master_feung_burnout_ch1.mp3",
+      "prose_rel": "artifacts/audiobook_samples/_prose/master_feung_burnout_ch1.txt",
+      "cover_audiobook_rel": "brand-wizard-app/public/assets/covers/audiobook/cover_master_feung_burnout_audiobook.png",
+      "n_pen_name_authors_repo": 480,
+      "ecapa_pairwise_max_repo": 0.5853
+    }
+  ],
+  "cost": "0USD_all_on_pearl_star",
+  "metrics": {
+    "target_lufs": -16,
+    "true_peak_dbtp": -1.0
+  }
+}

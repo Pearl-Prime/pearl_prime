@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
+locale: en_US
+book_id_prefix: stillness_press__ahjan__gen_z_professionals__sleep_anxiety
+brand: stillness_press
+teacher: ahjan
+persona: gen_z_professionals
+topic: sleep_anxiety
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__gen_z_professionals__sleep_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__sleep_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__gen_z_professionals__sleep_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__sleep_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: stillness_press__ahjan__gen_z_professionals__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: |
+  You'll learn what your body is doing at 3am without needing to make it stop being awake. Sleep will come — but not through chasing it.
+bestseller_hook_family: night_recognition
+emotional_engine: sleepless_anxious_recognition
+comp_series:
+- Why We Sleep (Matthew Walker) — science foundation, though more technical
+- The Sleep Book (Guy Meadows) — ACT-based surrender framing
+- Sleep Smarter (Shawn Stevenson) — habit register, but this series avoids prescriptions
+platform_strategy:
+  primary:
+  - audible
+  - kdp_ebook
+  secondary:
+  - apple_books
+  - spotify_audiobooks
+  - insight_timer
+  launch_platform: audible
+  cadence:
+    release_spacing_days: 21
+    max_books_per_brand_per_month: 1
+reader_avatar:
+  age: 22–29
+  where_they_are: |
+    In bed at 2am. Already tried melatonin. Already tried not looking at phone. Tried sleep apps — they talk too much and sound wrong. The voice they need is not trying to put them to sleep.
+  what_they_need: |
+    Someone who makes sense of why they're awake at this hour without promising a fix. Words that feel okay at 3am — not too alert, not too chipper.
+  what_they_avoid: |
+    "Sleep hygiene" checklists. Breath count-downs. Anyone who sounds like they've never been awake at this hour.
+series_voice_markers:
+  register: hushed, low-contrast — designed for bedtime listening
+  sentence_rhythm: longer, unhurried sentences — no punchy copy
+  metaphor_family: night, water, animals settling, nest-building
+  second_person_default: true
+  taboo:
+  - No alarm-clock imagery
+  - No productivity-morning framing
+  - No 'wake up refreshed' promises
+  - No sleep-chasing — the book does NOT promise sleep
+  - No bright cover colors — covers stay in the deep-blue/violet palette
+main_character_name: Yuki
+main_character_role: accounts manager with a 6am alarm she keeps missing
+main_character_image_path: null
+main_character_lora_id: yuki_sp_us
+main_character_trigger_word: yuki_sp_us
+plan_source_path: config/manga/manga_brand_series_plan.yaml

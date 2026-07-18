@@ -1,0 +1,84 @@
+# Author disclosure bank — anxiety / ravi_chandra / en_US — pilot
+# status: pilot (wired) — first live AUTHOR_DISCLOSURE bank, split out of
+# author_commentary per ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md
+# section 11: AUTHOR_DISCLOSURE (the author reveals something experienced,
+# feared, misunderstood, attempted, or learned) is a distinct craft surface
+# from AUTHOR_COMMENTARY (the author interprets what the reader just
+# encountered). These three entries were previously misfiled as
+# AUTHOR_COMMENTARY commentary_type: personal_admission / source_disclosure —
+# moved here verbatim (same already-approved prose, same bio_license_refs,
+# no new claims invented) and relabeled with disclosure_function per the
+# doctrine's taxonomy so the two surfaces stop colliding.
+status: pilot
+accent_class: AUTHOR_DISCLOSURE
+topic: anxiety
+author_id: ravi_chandra
+locale_cluster: en_US
+wave: pilot
+disclosure_count: 3
+bio_license_version: draft_pending_operator_approval_2026-07-07
+disclosures:
+- disclosure_id: ad_ravi_anxiety_admission_body_lead_v01
+  disclosure_function: failure_model
+  mode_allow: [composite, teacher_mode]
+  composite_safe: true
+  bio_license_refs:
+  - performed_calm_while_body_alarm_ran
+  - body_noise_as_information
+  topic_keys: [anxiety]
+  allowed_positions: [after_PIVOT, after_REFLECTION]
+  register: witness
+  position_variants:
+    after_PIVOT:
+      body: |
+        This one took me the longest to believe — that the body could lead and the explanation could arrive second.
+        I had built a career on being the person who had the answer before the question finished loading.
+        Letting the chest speak first felt like professional negligence until I noticed how often my explanations were just elegant ways of ignoring what had already started.
+        See if the next practice lands differently if you stop requiring it to make intellectual sense first.
+    after_REFLECTION:
+      body: |
+        This one took me the longest to believe — that the body could lead and the explanation could arrive second.
+        I had built a career on being the person who had the answer before the question finished loading.
+        Letting the chest speak first felt like professional negligence until I noticed how often my explanations were just elegant ways of ignoring what had already started.
+        See if what you just reflected on lands differently if you stop requiring it to make intellectual sense first.
+
+- disclosure_id: ad_ravi_anxiety_disclosure_ahjan_v01
+  disclosure_function: credibility
+  mode_allow: [teacher_mode]
+  composite_safe: false
+  bio_license_refs:
+  - ahjan_framework_observer
+  topic_keys: [anxiety]
+  doctrine_keys: [COMPOSITE_DOCTRINE v03]
+  allowed_positions: [after_REFLECTION]
+  register: witness
+  position_variants:
+    after_REFLECTION:
+      body: |
+        I came across Ahjan's teaching on the alarm within at a point when every productivity framework I tried was just a more organized way to ignore my chest.
+        He does not ask you to become calm — he asks you to stop treating the alarm as a character flaw.
+        I found that framing usable in sprint reviews and in the two minutes before I unmute.
+        Maybe it will help you name what your body has been reporting all along.
+
+- disclosure_id: ad_ravi_anxiety_admission_perform_fine_v01
+  disclosure_function: vulnerability
+  mode_allow: [composite, teacher_mode]
+  composite_safe: true
+  bio_license_refs:
+  - performed_calm_while_body_alarm_ran
+  topic_keys: [anxiety]
+  allowed_positions: [before_THREAD, after_REFLECTION]
+  register: witness
+  position_variants:
+    before_THREAD:
+      body: |
+        I spent years being good at performing fine while my chest kept the minutes.
+        The performance was not dishonesty — it was what the job rewarded.
+        What I needed was not a better mask; it was one honest signal I could trust before the mask went on.
+        Carry that question into the thread that follows: what is your body reporting before you answer how you are doing.
+    after_REFLECTION:
+      body: |
+        I spent years being good at performing fine while my chest kept the minutes.
+        The performance was not dishonesty — it was what the job rewarded.
+        What I needed was not a better mask; it was one honest signal I could trust before the mask went on.
+        Carry that question with you: what is your body reporting before you answer how you are doing.

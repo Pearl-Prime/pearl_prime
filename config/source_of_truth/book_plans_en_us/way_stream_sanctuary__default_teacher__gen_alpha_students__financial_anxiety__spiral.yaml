@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__financial_anxiety__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__money_fears
+  name: Money Without Panic — for Students
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Anxiety: The Overthinking Spiral'
+subtitle: The Overthinking Spiral — Financial Anxiety for Gen Alpha Students (The
+  Overthinking Spiral)
+cover_tagline: One overdraft notification, and by 3am you've lost the apartment, the
+  degree, and the whole future.
+description:
+  short_blurb: A single money thought hits at night and twenty minutes later you've
+    catastrophized your entire life. This book is for students whose minds turn one
+    bill into a thousand worst-case scenarios. It teaches you to recognize the spiral
+    as it starts and climb out before it finishes.
+  long_description: 'It starts so small. A notification. A number slightly lower than
+    you expected. A friend mentions the cost of something and your stomach drops.
+    Then the thought has a thought, and that one has three more, and within minutes
+    you''ve gone from one tight month to dropping out, disappointing everyone, ending
+    up with nothing, a whole demolished future running in high definition while you
+    lie there at 3am staring at the ceiling. You weren''t even trying to think about
+    it. It just took off.
+
+
+    This book is for the student whose brain treats one money worry like a loose thread
+    and pulls until the entire sweater is on the floor. The one who can be fine at
+    dinner and underwater by midnight. The one who has run the I''ll-have-to-drop-out
+    movie so many times it plays automatically now. If a single financial thought
+    reliably becomes a thousand, each one bigger and further from anything actually
+    happening today, this was written for you.
+
+
+    The engine here is the spiral: the way an anxious mind manufactures a chain, each
+    link forged from the last, until you''re terrified of a future that exists only
+    in your head. You''ll learn to catch the spiral at link one or two, when there''s
+    still a real number in your hand and not yet a catastrophe. You''ll recognize
+    the exact texture of the thoughts as they multiply and speed up. Then, instead
+    of trying to argue the spiral down with logic it always outruns, you go down into
+    it, watch how it builds itself, and find the single true thing at the bottom that
+    you can actually look at: this bill, this week, this one real edge.
+
+
+    This is not a money-management book. No app, no automated savings trick, no breezy
+    reframe about how worrying never helped anyone. It will not balance your account
+    and it will not promise the scary future can''t happen. What it offers is a way
+    to tell the difference between the one real problem in your hands and the thousand
+    invented ones in your head, so the next time the spiral takes off at 3am, you
+    can name it, follow it down, and come back to the only number that''s actually
+    real tonight.
+
+
+    Your mind running a horror film about the future is not a prophecy. It''s just
+    a tired brain doing what tired brains do. Catch it at the first link, and read.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - students
+  - money anxiety for students
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — shows how worry loops build and how to interrupt
+  them
+- The Worry Trick (David Carbonell) — explains how anxiety hijacks the imagination
+  into catastrophe and how to step out
+- Broke Millennial (Erin Lowry) — grounds young-adult money fear in plain, doable
+  reality
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

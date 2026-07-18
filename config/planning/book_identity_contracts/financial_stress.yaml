@@ -1,0 +1,41 @@
+# Identity contract — financial_stress
+# Authored 2026-07-05 (Pearl_Writer). Fixes the external editor's #1 finding:
+# 7 competing metaphor systems in the financial book. Collapses them to ONE.
+# STATUS: unwired — enforcement is Cursor Phase 1 (see book_identity_contracts/README.md).
+status: wired
+topic: financial_stress
+allowed_engines: [overwhelm, spiral, shame]   # mirrors config/topic_engine_bindings.yaml
+
+primary_metaphor: "The Financial Alarm"
+# The book's spine image: money stress as a mis-calibrated alarm that fires the
+# body's danger response at a situation that is hard but survivable. Every engine
+# extends this ONE image — none competes with it.
+engine_metaphors:
+  overwhelm: "The Pile — the alarm rings as volume: too much to hold, no bottom to reach."
+  spiral: "The Chain — the alarm rings as sequence: this bill → that one → ruin, walked link by link."
+  shame: "The Ledger — the alarm rings as exposure: the hidden number, the fear of being seen as behind."
+
+core_contrast: "Situation, not Sentence"
+# Money trouble is a finite situation to be worked, not a verdict on who you are.
+# The book keeps re-drawing this line: the pile is heavy (situation) vs. you are
+# failing (sentence); the number is low (situation) vs. you are worthless (sentence).
+
+identity_line: "Worth is not net worth."
+identity_line_placement: [1, last]   # must land in ch1 and the final chapter
+
+banned_phrases:
+  # Competing metaphors the editor flagged — deprioritize atoms carrying these.
+  - "numbers and nerves"
+  - "spreadsheet vs chest"
+  - "spreadsheet versus chest"
+  - "the weight of it all"      # use the Pile (volume) not a generic "weight" system
+  - "money and the body"        # too abstract; use alarm/pile/chain/ledger
+  - "sea of debt"               # rival water metaphor to the Pile
+  - "mountain of bills"         # rival mass metaphor to the Pile
+  - "storm of"                  # rival weather metaphor
+rationale: >
+  On the external read the financial book cycled through the weight, the pile,
+  spreadsheet-vs-chest, numbers-and-nerves, and more — so no image ever became
+  the book's identity. One primary (The Financial Alarm) with three disciplined
+  engine extensions (Pile/Chain/Ledger), one contrast (Situation-not-Sentence),
+  one line (Worth is not net worth) is what turns the inventory into a book.

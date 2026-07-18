@@ -1,0 +1,114 @@
+# Locale Voice Routing — TTS provider chain per locale.
+# CJK:   CosyVoice2 (Pearl Star) → Edge-TTS → ElevenLabs
+# en-US: CosyVoice2 (Pearl Star) → Edge-TTS → ElevenLabs  ($0-first; ElevenLabs demoted to last-resort)
+# EU:    ElevenLabs → Edge-TTS   (hu-HU hard-pinned to ElevenLabs; see hard_rules)
+# Authority: docs/VOICE_PERSONA_TOPIC_RESEARCH.md
+schema_version: 1
+last_updated: "2026-06-12"
+
+cjk_locales:
+  ja-JP:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "ja"
+    edge_tts_default: "ja-JP-NanamiNeural"
+    notes: "Keigo register for authority content. Iyashikei for somatic."
+
+  ko-KR:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "ko"
+    edge_tts_default: "ko-KR-SunHiNeural"
+    notes: "힐링 wellness register. Ppalli-ppalli pacing for micro-content."
+
+  zh-CN:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "zh"
+    edge_tts_default: "zh-CN-XiaoxiaoNeural"
+    notes: "Mainland Mandarin. Platform-specific voice style (Ximalaya vs Dedao)."
+
+  zh-TW:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "zh"
+    edge_tts_default: "zh-TW-HsiaoChenNeural"
+    notes: "Taiwanese Mandarin accent. Not mainland pronunciation."
+
+  zh-HK:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "yue"  # CANTONESE — NEVER Mandarin
+    edge_tts_default: "zh-HK-HiuGaaiNeural"
+    notes: "MUST use Cantonese (yue-HK). Mandarin is wrong for HK audience."
+
+  zh-SG:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "zh"
+    edge_tts_default: "zh-CN-XiaoxiaoNeural"
+    notes: "Singaporean Mandarin. Neutral accent, pragmatic register."
+
+en_eu_locales:
+  en-US:
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "en"
+    edge_tts_default: "en-US-JennyNeural"
+    notes: "$0-first (roadmap B.4 P1). CosyVoice2 primary, Edge-TTS fallback, ElevenLabs last-resort only. Matches CJK chains."
+
+  de-DE:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "de-DE-KatjaNeural"
+
+  fr-FR:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "fr-FR-DeniseNeural"
+
+  es-ES:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "es-ES-ElviraNeural"
+
+  es-US:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "es-US-AlonsoNeural"
+
+  it-IT:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "it-IT-ElsaNeural"
+
+  hu-HU:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "hu-HU-NoemiNeural"
+    notes: "ElevenLabs mandatory. No Google Neural2 for Hungarian."
+
+  pt-BR:
+    provider_chain: [elevenlabs, edge_tts]
+    edge_tts_default: "pt-BR-FranciscaNeural"
+
+provider_config:
+  cosyvoice2:
+    url_env: COSYVOICE_URL
+    default_url: "http://192.168.1.112:9880"
+    voice_cache_endpoint: "/api/v3/voices/"
+    synthesis_endpoint: "/api/v3/cross-lingual/with-cache"
+    health_endpoint: "/api/v1/health"
+    timeout_ms: 30000
+    retries: 2
+
+  elevenlabs:
+    key_env: ELEVENLABS_API_KEY
+    base_url: "https://api.elevenlabs.io/v1"
+    model: "eleven_multilingual_v2"
+    timeout_ms: 60000
+    retries: 3
+
+  edge_tts:
+    binary: "edge-tts"
+    timeout_ms: 30000
+    retries: 1
+    notes: "Free Microsoft TTS. CLI-based. No API key needed."
+
+hard_rules:
+  - locale: zh-HK
+    rule: "cosyvoice2_language MUST be 'yue' (Cantonese). NEVER 'zh' (Mandarin)."
+  - locale: hu-HU
+    rule: "ElevenLabs mandatory. No Google Neural2 exists for Hungarian. Do NOT flip to CosyVoice2-first."
+  - locale: zh-CN
+    rule: "MCN distribution required. Findaway cannot reach mainland China."
+  - locale: en-US
+    rule: "$0-first (roadmap B.4 P1): provider_chain MUST be cosyvoice2-first. ElevenLabs is last-resort fallback only, NEVER primary. Paid-first path is retired."
+  - rule: "ElevenLabs stays available as final-fallback for ALL locales, but is NEVER the primary engine for CJK or en-US."

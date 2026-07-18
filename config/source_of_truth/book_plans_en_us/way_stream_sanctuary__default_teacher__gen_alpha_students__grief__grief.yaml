@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__grief__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__grief.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__through_loss
+  name: Through the Low Places — for Students
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Grief: The Grief That Doesn''t Leave (1)'
+subtitle: A Real Talk Guide to Grief for Gen Alpha Students
+cover_tagline: Everyone said you'd move on by now. You didn't. This is for the part
+  of you that's still standing in the loss.
+description:
+  short_blurb: For the student carrying a loss the people around them have already
+    moved past — a person, a relationship, a version of life that's gone. This is
+    a real-talk guide to grief that doesn't run on anyone else's timeline. No five
+    tidy stages, no 'they'd want you to be happy' — just the truth about living with
+    what you've lost.
+  long_description: 'Everyone else seems to have gone back to normal. The texts checking
+    on you stopped weeks ago. Classes kept going, the group chat moved on, and you''re
+    still standing in the middle of something that changed everything — and now you
+    feel like you''re grieving wrong because you''re not over it yet.
+
+
+    This book is for the student living with what they''ve lost. Maybe it''s a person
+    who died. Maybe it''s a friendship that ended, a family that came apart, a relationship
+    that mattered, a whole future you''d already planned. Grief at your age comes
+    with a brutal extra weight: you''re supposed to be focused, productive, fine —
+    and the world does not pause its deadlines for your heart.
+
+
+    First, you''ll learn to recognize what grief actually is, underneath the clichés.
+    It''s not a checklist of five neat stages you pass through and graduate from.
+    It''s love and loss with nowhere to go, and it moves in waves that don''t care
+    about your calendar. Knowing that you''re not behind — that there''s no schedule
+    you''re failing — changes everything about how you hold it.
+
+
+    Then, instead of teaching you to ''get past it,'' this book teaches you to go
+    down into it. To stop performing okay for everyone who needs you to be okay. To
+    let a wave be a wave when it hits in the middle of a normal Tuesday. You''ll find
+    that going toward the loss instead of around it is the thing that actually moves
+    — not because the loss disappears, but because you stop spending all your strength
+    holding it off.
+
+
+    And then you come back carrying it differently — not healed in some final, finished
+    way, but changed, with the loss woven into you instead of crushing you.
+
+
+    Let''s be clear about what''s not in here. No closure on offer, no timeline to
+    hit. No stages to tick off, no ''everything happens for a reason,'' no ''they''d
+    want to see you smiling.'' Nobody''s going to tell you to count your blessings
+    or hunt for the bright side. And if the grief has slid into something that''s
+    swallowing your safety, the book says it without dressing it up: get a counselor
+    or a trusted adult into this with you. What''s actually here is steady, honest
+    company for a loss the rest of the world has already stopped seeing.
+
+
+    You don''t have to be over it. You don''t owe anyone a recovery timeline. You''re
+    allowed to still be standing in the loss — and to keep living anyway, at the speed
+    that''s actually yours.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  - losing someone
+  secondary:
+  - students
+  - grief for students
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — rejects the tidy-stages model and validates
+  grief that doesn't resolve on schedule
+- The Year of Magical Thinking (Joan Didion) — unflinching account of how loss actually
+  moves, with no false comfort
+- Bittersweet (Susan Cain) — secular case for letting longing and sorrow have a real
+  place in your life
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

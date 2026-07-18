@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "envelope_id": "plan_p04_standing_l3_prop_separate",
+  "transform_model": "structural_mvp_v1",
+  "structural_template_id": "standing_room_scene",
+  "panel_type_id": "establish_standing_room",
+  "plan_body": {
+    "panel_id": "p04_standing_l3_prop_separate",
+    "canvas": {
+      "width": 1024,
+      "height": 1024
+    },
+    "structural_template_id": "standing_room_scene",
+    "panel_type_id": "establish_standing_room",
+    "required_support_proof": [
+      "standing_on"
+    ],
+    "allowed_relations": [
+      "held_by",
+      "occluded_by",
+      "resting_on",
+      "seated_on",
+      "standing_on"
+    ],
+    "support_graph": {
+      "nodes": [
+        {
+          "node_id": "support",
+          "category": "support_surface",
+          "role": "floor",
+          "support_polygon_pct": [
+            [
+              0,
+              65
+            ],
+            [
+              100,
+              65
+            ],
+            [
+              100,
+              100
+            ],
+            [
+              0,
+              100
+            ]
+          ]
+        },
+        {
+          "node_id": "char",
+          "category": "character",
+          "role": "primary_subject",
+          "contact_point_pct": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "e_support",
+          "relation": "standing_on",
+          "from_node": "char",
+          "to_node": "support"
+        }
+      ]
+    },
+    "resolved_placements": [
+      {
+        "node_id": "char",
+        "transform": {
+          "tx_pct": 25,
+          "ty_pct": 86,
+          "uniform_scale": 0.55,
+          "rotation_deg": 0.0,
+          "transform_model": "structural_mvp_v1"
+        }
+      }
+    ],
+    "transform_model": "structural_mvp_v1"
+  },
+  "plan_hash": "0874275600cad25149d0ebe95cdc8130dd529fe1354fc25a67bc9e166f2b5fde",
+  "validation": {
+    "status": "pass",
+    "failures": []
+  }
+}

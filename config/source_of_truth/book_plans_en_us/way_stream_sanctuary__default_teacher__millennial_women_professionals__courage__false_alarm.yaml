@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__courage__false_alarm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__courage.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__brave_world
+  name: Brave in the World — for Professional Women
+installment_number: 1
+engine: false_alarm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Thing You Won''t Say: When Fear Lies to You'
+subtitle: A Real Talk Guide to Courage for Millennial Women Professionals
+cover_tagline: Your body sounds the alarm before the meeting starts. There is no fire.
+description:
+  short_blurb: You're not in danger when you speak up at work — but your body hasn't
+    gotten the memo. This is a direct, secular look at the false alarm that fires
+    in your chest before you say the hard thing, and how to keep moving while it's
+    still ringing. No breathing exercises that pretend it away. Just the truth about
+    what's happening and what it actually means.
+  long_description: 'You''re three sentences from saying the thing. You can feel it
+    coming — the disagreement, the ask, the correction your director needs to hear.
+    And before a single word leaves your mouth, your heart is going, your hands are
+    cold, your throat has tightened like you''re about to be thrown out of the room.
+    Nothing has happened yet. Nothing is going to happen. And your body is screaming
+    that you are in mortal danger.
+
+
+    This book is for the professional woman who has learned to read that alarm as
+    proof. You feel the surge and you conclude: this must be too risky, I must be
+    wrong, now is not the time. So you swallow it. Again. And the meeting ends and
+    the thing stays unsaid, and you carry it home in your chest like a stone.
+
+
+    Here is what no one told you: that alarm is a false alarm. Your nervous system
+    can''t tell the difference between a saber-tooth tiger and a senior VP who might
+    frown at you. It fires the same way for both. The pounding heart is not information
+    about the danger of speaking — it''s information about how much speaking matters
+    to you. Those are not the same thing, and learning to tell them apart changes
+    everything.
+
+
+    We''re going to do this in three moves. First, recognition — you''ll learn to
+    catch the alarm in the act and name it for what it is, out loud, in the moment:
+    not danger, just alarm. Second, descent — instead of fixing the feeling or breathing
+    it away, you''ll go down into it, let it be as loud as it wants to be, and discover
+    it cannot actually stop you. Third, integration — you''ll come back from this
+    knowing, in your body, that you can speak while the alarm is still ringing. That''s
+    the whole skill. Not silence. Not calm. Speaking anyway.
+
+
+    This is real talk, written for your actual working life — the standup, the performance
+    review, the Slack message you''ve drafted four times. There are no morning routines
+    here. No forced positivity. No one telling you the panic is secretly a gift you
+    should be grateful for. The alarm is not a gift and we won''t pretend it is.
+
+
+    What this book will not do is promise that the alarm goes quiet. It may always
+    fire. That''s not failure — that''s a body that cares. What changes is that it
+    stops getting the final vote.
+
+
+    The thing you won''t say is not too dangerous to say. Your body is just very,
+    very loud. You''re allowed to speak through the noise.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  - brave
+  secondary:
+  - professional women
+  - courage for professional women
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sofia_marchetti
+comp_titles:
+- Dare to Lead (Brené Brown) — naming the physical cost of courage at work without
+  softening it
+- The Anxiety Toolkit (Alice Boyes) — practical, secular handling of an over-firing
+  fear response
+- Playing Big (Tara Mohr) — professional women speaking up despite the inner alarm
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

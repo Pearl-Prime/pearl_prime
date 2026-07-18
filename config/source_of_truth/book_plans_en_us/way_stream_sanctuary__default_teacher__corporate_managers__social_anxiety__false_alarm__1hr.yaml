@@ -1,0 +1,110 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__social_anxiety__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__social_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__brave_world__1hr
+  name: Brave in the World — for Managers (One-Hour)
+installment_number: 2
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Social Anxiety: The False Alarm Response (1)'
+subtitle: How Corporate Managers Are Rewriting the Rules of Social Anxiety
+cover_tagline: The room went quiet and your body decided you were in danger. You were
+  just about to speak.
+description:
+  short_blurb: It's your turn to talk in the leadership meeting and your body floods
+    like you're under threat, heart pounding, face hot, certain everyone can see it.
+    This is a one-hour, grounded look at the false alarm that fires in a manager the
+    instant the attention turns. You won't learn to feel calm. You'll learn to stop
+    letting the alarm decide whether you speak.
+  long_description: 'All eyes turn to you. It''s your update, your turn, the moment
+    the room goes quiet and waits, and your body answers like you''ve stepped off
+    a curb into traffic. Heart slamming. Face going hot. That high, tight feeling
+    in your throat that says danger, now, while the thinking part of you knows perfectly
+    well it''s a status meeting with people you''ve sat beside for years. No one here
+    is going to hurt you. Your nervous system never got the memo.
+
+
+    This book is for the manager who floods the instant the attention lands. You can
+    run the project, make the unpopular call, hold a tense room when it''s about the
+    work, but the second it''s about you, the heat climbs your neck and you''re certain
+    it''s showing. So you rush your point to get the spotlight off. You stay quiet
+    in the meeting where speaking up was the entire job. And somewhere along the way
+    you decided the flush means you''re not built for the visible part of leading,
+    when all it really means is that an ancient alarm is going off in a room that
+    never called for it.
+
+
+    In one hour we look straight at the body, not the story you''ve built around it.
+    Recognition comes first: feeling the precise instant the surge trips, the flush
+    rising, the bracing that fires a half-second before you''ve even clocked that
+    every face turned your way. Then, instead of fighting to look unbothered, you
+    go into the sensation and see it plainly for what it is, a threat response engineered
+    for physical danger, misfiring on the entirely survivable act of being looked
+    at by coworkers. That is the descent, and it is where the grip loosens. Then you
+    surface, still flushing on some days, but no longer reading red skin as proof
+    that something is wrong with you.
+
+
+    This is not a book about becoming unflappable when the room turns. The alarm is
+    wired deep and it will not stand down because you asked politely. There''s no
+    breathing trick here that keeps you cool under the gaze, no posture hack, no reframe
+    that swaps the dread for poise. You''ll feel the heat rise the next time it''s
+    your turn. What shifts is that the flush stops getting a vote on whether you speak,
+    whether you stay in view, whether you claim the room.
+
+
+    Waystream is secular and direct. We put plain words on what the body is doing,
+    words you can reach for the next time the attention swings to you, before the
+    all-hands, in the breath before you unmute, in the long exposed second of being
+    watched. You don''t have to feel calm to lead. You only have to stop letting a
+    misfiring alarm read the wrong threat.
+
+
+    You are allowed to go red in the face and say the thing anyway.'
+keywords:
+  primary:
+  - social anxiety
+  - social phobia
+  - fear of people
+  - social confidence
+  - fear of judgment
+  secondary:
+  - managers
+  - social anxiety for managers
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
+comp_titles:
+- Dare (Barry McDonagh) — secular method for letting the body's false alarm fire without
+  obeying it
+- When Panic Attacks (David D. Burns) — plain-language CBT for the threat-response
+  spike that fires when attention turns to you
+- How to Be Yourself (Ellen Hendriksen) — evidence-based work aimed squarely at the
+  social-anxiety flush of being watched
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__sleep_anxiety__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__sleep_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__restless_mind
+  name: Quiet the Restless Mind — for Working Parents
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Sleep Anxiety: When Everything Is Too Much (2)'
+subtitle: How Working Parents Are Rewriting the Rules of Sleep Anxiety
+cover_tagline: You can't sleep because there's too much, and the dark is when all
+  of it lands at once.
+description:
+  short_blurb: You lie down to sleep and the entire weight of it arrives at once,
+    every task, every person depending on you, every undone thing, all stacked on
+    your chest in the dark. This is overwhelm, too much landing with nowhere to put
+    it down. This book helps you meet the flood without pretending you can carry it
+    all tonight.
+  long_description: 'You finally lie down. The day is over, the kids are asleep, and
+    this was supposed to be the moment you rest. Instead the whole load arrives at
+    once: the work thing and the school thing and the doctor''s appointment you haven''t
+    booked and the parent who needs you and the bills and the sense that you are the
+    only thing holding all of it together. It doesn''t come as separate thoughts.
+    It comes as one crushing weight that settles on your chest the second your head
+    hits the pillow, and there''s nowhere to set any of it down.
+
+
+    This book is for the working parent drowning in demands at the exact hour they''re
+    supposed to recover from them. You who can''t sleep, not because of one worry,
+    but because of everything, all of it, stacked too high to see past. You who carries
+    the full mental load of a household and a job and feels it land hardest in the
+    dark when there''s no task you can actually do at midnight. You''re not weak for
+    buckling under this. You''re carrying genuinely too much, and bedtime is just
+    when the weight finally catches up with you.
+
+
+    We start by saying it plainly: this is overwhelm, too many real things landing
+    at once with no room to hold them. And rather than frantically sorting the pile,
+    we lower ourselves down into the weight of it, because you already know that 11pm
+    triage only makes everything feel more urgent. You''ll learn what overwhelm feels
+    like in the body, the held breath, the braced chest, the sense of too-much-at-once,
+    and why trying to mentally handle every item in the dark keeps you awake managing
+    a list you can''t act on. We don''t fix your life or shrink your responsibilities.
+    We don''t hand you a productivity system to cram the load into. We let the whole
+    weight be too much without you having to carry it all tonight. What you arrive
+    at is this: not fewer demands, but the discovery that you don''t have to hold
+    every one of them at 1am.
+
+
+    This is real talk for someone genuinely stretched too thin, written to be read
+    in the small window before sleep, or instead of it. No time-management worksheet.
+    No gratitude practice to guilt you out of the dark. Just an honest naming of the
+    weight and a way to lie down underneath it without trying to lift it all at once.
+
+
+    This isn''t a promise of a lighter life or a cleared plate. It will not make you
+    more efficient. What it gives you is recognition, so that the next time the whole
+    load lands on your chest at midnight, you''ll know what it is and that you are
+    allowed to set it down until morning. The weight will still come. You just won''t
+    have to carry it in your sleep. You''re allowed to put it down and rest anyway.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - can't sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - sleep without medication
+  secondary:
+  - working parents
+  - sleep anxiety for working parents
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: tomas_vidal
+comp_titles:
+- Burnout (Emily & Amelia Nagoski) — secular take on carrying too much and the stress
+  that won't discharge
+- Fair Play (Eve Rodsky) — names the invisible mental load working parents haul, especially
+  at night
+- Four Thousand Weeks (Oliver Burkeman) — honest reckoning that you genuinely cannot
+  do it all, and needn't
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

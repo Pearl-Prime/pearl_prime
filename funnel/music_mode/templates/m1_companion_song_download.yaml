@@ -1,0 +1,27 @@
+# PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1 — M1 scaffold (docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md §3)
+project_id: PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1
+subsystem: marketing
+spec_ref: docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md#3-proposed-music-mode-freebie-types-v1-candidate-set
+freebie_tier: M1
+template_id: companion_track_download_v1
+name: Companion song download
+asset_type: companion_track_audio
+delivery_format: lossy_or_lossless_download
+sample_size: one_full_quality_track
+gating_step: email_capture_before_download_link
+copy_blocks:
+  CTA: Get my song
+  body: |
+    This is the one track {{artist_name}} wanted you to hear first—same mix that will ship on the album, not a watered-down teaser.
+    Drop your email once and we will send a clean download link for "{{track_title}}" straight to your inbox; no hoops, just the song.
+    When you are ready to go deeper, your confirmation path also points at {{album_slug}} so pre-save and full-release day stay on your radar.
+    If anything bounces, use {{download_url}} from the email—we keep that link valid through the campaign window.
+  social_share: >-
+    Free companion track: "{{track_title}}" by {{artist_name}}—email once, grab it: {{landing_url}}
+cross_link_targets:
+  - template_id: preview_clip_30s_v1
+    relation: tease_same_release_wave
+  - template_id: lyric_poster_pdf_v1
+    relation: printable_lyric_bundle
+  - template_id: sample_ep_bundle_v1
+    relation: deeper_listen_bundle

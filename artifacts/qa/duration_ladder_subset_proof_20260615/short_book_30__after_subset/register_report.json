@@ -1,0 +1,826 @@
+{
+  "verdict": "HARD_FAIL",
+  "findings": [
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_000",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 6
+          },
+          {
+            "chapter": 8,
+            "para_index": 8
+          }
+        ],
+        "excerpt": "People search for the right practice. They read books. They try methods. They follow programs. They start, they stop, th..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_001",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 7
+          },
+          {
+            "chapter": 8,
+            "para_index": 9
+          }
+        ],
+        "excerpt": "This is fine. There is nothing wrong with method. But underneath all of it, there is something simpler that is always av..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_002",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 8
+          },
+          {
+            "chapter": 8,
+            "para_index": 10
+          }
+        ],
+        "excerpt": "The breath. The one that is happening right now, while you are reading these words. Not a special breath. Not a longer b..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_003",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 9
+          },
+          {
+            "chapter": 8,
+            "para_index": 11
+          }
+        ],
+        "excerpt": "Notice it now. Do not change it. Just feel it. The cool of the air at the nostrils. The small movement in the belly. The..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_004",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 10
+          },
+          {
+            "chapter": 8,
+            "para_index": 12
+          }
+        ],
+        "excerpt": "This is the practice. It is not a metaphor for the practice. It is the practice itself. The breath that is already movin..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_005",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 11
+          },
+          {
+            "chapter": 8,
+            "para_index": 13
+          }
+        ],
+        "excerpt": "When anxiety arrives, you do not need a special technique. You need to remember the breath. The one already moving. The ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_006",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 12
+          },
+          {
+            "chapter": 8,
+            "para_index": 14
+          }
+        ],
+        "excerpt": "Feel the breath. Just for one cycle. In, pause, out, pause. That was a practice. The next one is already starting. You h..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 2])",
+      "evidence": {
+        "cluster_id": "f1_cluster_007",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 13
+          },
+          {
+            "chapter": 2,
+            "para_index": 15
+          }
+        ],
+        "excerpt": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing its..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 6 (chapters [1, 2, 3, 4, 6, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_008",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 22
+          },
+          {
+            "chapter": 2,
+            "para_index": 24
+          },
+          {
+            "chapter": 3,
+            "para_index": 21
+          },
+          {
+            "chapter": 4,
+            "para_index": 21
+          },
+          {
+            "chapter": 6,
+            "para_index": 22
+          },
+          {
+            "chapter": 8,
+            "para_index": 22
+          }
+        ],
+        "excerpt": "Try this before you move on. Not to fix anything. Just to give yourself a different input for a moment."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_009",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 26
+          },
+          {
+            "chapter": 6,
+            "para_index": 26
+          }
+        ],
+        "excerpt": "Now, I want you to notice something. Notice if the question made you uncomfortable. Or not. Both are fine. Whatever happ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_010",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 27
+          },
+          {
+            "chapter": 6,
+            "para_index": 27
+          }
+        ],
+        "excerpt": "Now, before you move on, the question stays with you. Nothing has to change from this moment forward. One breath at a ti..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 4 (chapters [2, 3, 5, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_011",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 4
+          },
+          {
+            "chapter": 3,
+            "para_index": 1
+          },
+          {
+            "chapter": 5,
+            "para_index": 2
+          },
+          {
+            "chapter": 8,
+            "para_index": 2
+          }
+        ],
+        "excerpt": "The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows something your ca..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_012",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 8
+          },
+          {
+            "chapter": 6,
+            "para_index": 6
+          }
+        ],
+        "excerpt": "Most people who arrive at the territory of anxiety carry a quiet hope. The hope is that, on the other side of the work, ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_013",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 9
+          },
+          {
+            "chapter": 6,
+            "para_index": 7
+          }
+        ],
+        "excerpt": "This hope is gentle, but it carries a hidden weight. It puts the work in the future. It locates the worthwhile self at t..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_014",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 11
+          },
+          {
+            "chapter": 6,
+            "para_index": 9
+          }
+        ],
+        "excerpt": "But the better one does not arrive. Even when the chest is less tight and the sleep is deeper and the practice has worke..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_015",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 12
+          },
+          {
+            "chapter": 6,
+            "para_index": 10
+          }
+        ],
+        "excerpt": "The shift is small. Instead of trying to become a different person, you can try to come home to the person you already a..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_016",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 13
+          },
+          {
+            "chapter": 6,
+            "para_index": 11
+          }
+        ],
+        "excerpt": "Coming home is not heroic. It is not impressive. But it is the work. The chest softens when the person inside it stops a..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [2, 6, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_017",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 14
+          },
+          {
+            "chapter": 6,
+            "para_index": 12
+          },
+          {
+            "chapter": 7,
+            "para_index": 7
+          }
+        ],
+        "excerpt": "You are not on the way to becoming. You are already here. The work is the homecoming. The home was always you."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_018",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 23
+          },
+          {
+            "chapter": 6,
+            "para_index": 24
+          }
+        ],
+        "excerpt": "This is Emptiness Contemplation. Your breath is always available. You do not need to believe that. Just try it."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [3, 4, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_019",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 25
+          },
+          {
+            "chapter": 4,
+            "para_index": 25
+          },
+          {
+            "chapter": 8,
+            "para_index": 26
+          }
+        ],
+        "excerpt": "Now, I want you to notice something. Notice what your mind did. There is no wrong answer. Whatever happened \u2014 or did not..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [3, 4, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_020",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 26
+          },
+          {
+            "chapter": 4,
+            "para_index": 26
+          },
+          {
+            "chapter": 8,
+            "para_index": 27
+          }
+        ],
+        "excerpt": "Now, before you move on, stillness does not require silence. Nothing has to change from this moment forward. You did som..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_021",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 13
+          },
+          {
+            "chapter": 6,
+            "para_index": 13
+          }
+        ],
+        "excerpt": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4])",
+      "evidence": {
+        "cluster_id": "f1_cluster_022",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 16
+          },
+          {
+            "chapter": 4,
+            "para_index": 29
+          }
+        ],
+        "excerpt": "Every strategy you've used to manage the alarm \u2014 avoiding, preparing, checking, reassurance-seeking \u2014 has kept the alarm..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_023",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 16
+          },
+          {
+            "chapter": 6,
+            "para_index": 31
+          }
+        ],
+        "excerpt": "The alarm does not update through understanding. It updates through experience \u2014 specifically, through the repeated expe..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_024",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 10
+          },
+          {
+            "chapter": 7,
+            "para_index": 20
+          }
+        ],
+        "excerpt": "The alarm will return. Not because you failed, not because you haven't done the work, but because your body remains resp..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 438,
+        "snippet": " there. It just costs more than it used to.\n\nPriy"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 1379,
+        "snippet": "ailable, and that no method can improve on.\n\nThe "
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.E: colon followed by paragraph break (slot content missing)",
+      "evidence": {
+        "rule": "F2.E_colon_no_content",
+        "offset": 5848,
+        "snippet": ".\n\nTry this for ninety seconds:\n\n1. Notice where your attention"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 2,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 4296,
+        "snippet": "p.\n\nHere's a grounding practice to work with.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 2,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 6106,
+        "snippet": "had. Now you have a little more to work with.\n\nYour"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 4,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 4178,
+        "snippet": "or a moment.\n\nHere's a practice to work with.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 5,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 576,
+        "snippet": "like you ran a race you did not sign up for.\n\nNadi"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 5,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 4030,
+        "snippet": "ne.\n\nHere's a settling practice to work with.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 5,
+      "summary": "F2.D: sub-4-word fragment \"Small Exposures\" \u2014 likely slot-template artifact",
+      "evidence": {
+        "rule": "F2.D_sub_4_word_paragraph",
+        "text": "Small Exposures"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 8,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 1883,
+        "snippet": "ailable, and that no method can improve on.\n\nThe "
+      }
+    },
+    {
+      "failure_id": "F6",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "pedagogical-cadence 4-gram repeated 3+ times: 5 distinct repeating cadences",
+      "evidence": {
+        "repeats": [
+          {
+            "cadence": [
+              4,
+              4,
+              6,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              11,
+              10,
+              8,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              9,
+              4,
+              7
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              8,
+              4,
+              5,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              11,
+              10,
+              8
+            ],
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 1,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 2,
+      "summary": "over-prescribed practice density: 6 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 6
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 3,
+      "summary": "over-prescribed practice density: 6 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 6
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 4,
+      "summary": "over-prescribed practice density: 8 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 8
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 5,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 6,
+      "summary": "over-prescribed practice density: 5 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 5
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 7,
+      "summary": "over-prescribed practice density: 6 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 6
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 8,
+      "summary": "over-prescribed practice density: 10 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 10
+      }
+    },
+    {
+      "failure_id": "F12",
+      "severity": "FAIL",
+      "chapter": 2,
+      "summary": "un-wrapped teacher voice-shift: 'master this' entered raw (bypassed teacher_wrapper / science_wrapper resolution)",
+      "evidence": {
+        "error_class": "VoiceOutOfZoneError",
+        "kind": "unwrapped_voice_shift",
+        "register": "teacher",
+        "marker": "master this",
+        "snippet": "y moment.\n\nYou do not need to master this. You need to try it once and",
+        "cap": "BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "FAIL",
+      "chapter": 8,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "This is not laziness.",
+          "The message itself says \"got a sec to chat?\"\n\nThe point is that the message is six words and your nervous system has alr",
+          "This is not paranoia."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    }
+  ],
+  "book_metrics": {
+    "chapter_count": 8,
+    "word_count": 8445,
+    "teacher_id": "",
+    "persona_id": "gen_z_professionals",
+    "topic_id": "anxiety",
+    "quality_profile": "production",
+    "spec_version": "1.0.0",
+    "f8_deferred": "anchor_corpus_required"
+  },
+  "suggested_lanes": [
+    "Pearl_Editor + Pearl_Writer (atom diversification) OR Pearl_Dev (renderer paragraph-template dedupe extension)",
+    "Pearl_Dev (renderer slot-fill validation; HARD-FAIL renderer artifact)",
+    "Pearl_Editor + Pearl_Writer (cadence variety in pedagogical-cadence atoms)",
+    "Pearl_Architect (per-chapter practice-density cap) + Pearl_Editor (atom routing)",
+    "Pearl_Dev (route teacher/science register through teacher_wrapper / science_wrapper per BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01) + Pearl_Editor (re-attribute the raw shift; shares D12 VoiceOutOfZoneError vocab)",
+    "Pearl_Editor + Pearl_Writer (re-pace per \u00a77.3 dwell contract \u2014 insert a dwell beat after each named insight; \u00a713 criterion #13)"
+  ]
+}

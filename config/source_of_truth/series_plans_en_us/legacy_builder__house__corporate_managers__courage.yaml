@@ -1,0 +1,72 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: legacy_builder__house__corporate_managers__courage
+brand: legacy_builder
+teacher: null
+persona: corporate_managers
+topic: courage
+byline_author: nina_rourke
+arc:
+  installment_1:
+    book_id: legacy_builder__house__corporate_managers__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: legacy_builder__house__corporate_managers__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: legacy_builder__house__corporate_managers__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Courage you build for the long climb — the kind that lets a
+  seasoned manager finally say the true thing in the room, not to win the meeting,
+  but to stand for something worth being remembered for.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Daring Way / Daring Greatly companion works (Brené Brown) — courage reframed
+  as showing up and being seen, not winning
+- The Second Mountain (David Brooks) — the turn from achievement to meaning that names
+  this reader's whole stage of life
+- Let Your Life Speak (Parker J. Palmer) — quiet, vocational courage written for people
+  who lead and still doubt their own voice
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early 40s to mid 50s
+  where_they_are: It's 6:50pm and the office has thinned out. You're still at your
+    desk, the meeting that mattered ended hours ago, and you're replaying the moment
+    you went quiet — the one thing you believed and didn't say, while someone with
+    half your experience said the easy thing and got the nod. You've led teams for
+    fifteen years. You don't understand why the words still stick.
+  what_they_need: permission to count the courage they already have, and a steadier,
+    slower way to speak the true thing without bracing for impact — courage measured
+    by what they stand for, not by who they out-talk
+  what_they_avoid: leadership-bootcamp bravado, 'command the room' theater, fake-it-till-you-make-it
+    confidence hacks, anything that treats a quiet voice as a defect to be drilled
+    out
+series_voice_markers:
+  register: reflective, meaningful, steady — the voice of someone further up the same
+    climb who stopped to wait for you; warm and substantive, never grandiose, never
+    a coach barking from the sideline
+  sentence_rhythm: measured and unhurried; longer reflective sentences that open a
+    thought, then a short plain one that sets it down — the cadence of a walk taken
+    on purpose, not a sprint
+  metaphor_family: the second mountain of purpose, the view from later in the climb,
+    the deeper foundation you can't see, planting trees whose shade you won't sit
+    in, what you build to outlast you, the long arc of a working life
+_needs_authoring: false

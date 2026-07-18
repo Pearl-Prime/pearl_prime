@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__depression__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__through_loss__1hr
+  name: Through the Low Places — for Young Professionals (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: Too Many Things, Not Enough You (1)'
+subtitle: The Overwhelm Response — Depression for Gen Z Professionals (When Everything
+  Is Too Much)
+cover_tagline: Too much, all at once, and somewhere under it the color quietly went
+  out.
+description:
+  short_blurb: The inbox, the group chats, the deadlines, the life admin — it stacked
+    up until you went numb instead of stressed. This is a one-hour, no-fixing read
+    for young professionals who hit the wall where overwhelm tips into flat, heavy
+    nothing.
+  long_description: 'There''s a specific moment you know too well. The to-do list
+    gets so long that instead of panicking, you simply stop. You stare at your laptop.
+    You open a tab and forget why you opened it. The demands didn''t slow down — you
+    did. Everyone around you reads it as slacking. What''s actually happening is that
+    the overwhelm got so loud it blew a fuse, and now there''s a gray heaviness sitting
+    where your drive used to be.
+
+
+    This hour is for you if you''re buried under more than any one person could reasonably
+    carry — the job, the side thing, the rent that keeps climbing, the texts you owe
+    seven people, the low certainty that you''re failing at all of it at once — and
+    you''ve crossed the line from stressed into shut down. Not lazy. Flooded. So flooded
+    that the system went dark to protect itself, and then the dark started to feel
+    like a permanent address.
+
+
+    We''ll work through it in three honest passes. In recognition, you name the difference
+    between busy and buried, between tired and the particular heaviness that arrives
+    when too much lands at once and then refuses to leave. You''ll get words you can
+    actually reach for in the middle of a meltdown. In descent, you go into the overwhelm
+    instead of around it — feeling where it sits in your body, the locked shoulders,
+    the shallow breath, the way your thoughts stack up like notifications you can''t
+    clear. You don''t triage the list here. You stay with the person drowning underneath
+    it. In integration, you come back up able to carry the weight differently — not
+    because the demands shrank, but because you stopped treating your own collapse
+    as one more item you failed to handle.
+
+
+    Here''s what this hour will not do. It won''t sell you a better task-management
+    system, a calendar-blocking method, or a way to do more in less time. The problem
+    was never your scheduling. It won''t tell you to wake at five a.m., and it won''t
+    ask you to be grateful you''re so in demand. It won''t pretend the flatness is
+    a mindset you can hack your way out of.
+
+
+    What it will do is stop the room from spinning for sixty minutes and let you be
+    a person again — not a backlog, not a productivity case study, not someone who''s
+    behind. The demands will still be there afterward. But you don''t have to meet
+    them as a hollowed-out version of yourself. Right now, you get to put all of it
+    down. The list can wait. You go first.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - young professionals
+  - depression for young professionals
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the stress cycle and how to complete
+  it instead of powering through
+- Four Thousand Weeks (Oliver Burkeman) — dismantles the lie that you can out-optimize
+  an impossible workload
+- How to Keep House While Drowning (KC Davis) — a shame-free approach to functioning
+  when you're completely flooded
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

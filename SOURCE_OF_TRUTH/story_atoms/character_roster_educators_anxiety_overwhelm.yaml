@@ -1,0 +1,75 @@
+# Character Roster — story_atoms generation
+# Persona: educators / Topic: anxiety / Engine: overwhelm
+# Authority: story_atom_tier_templates.yaml
+#
+# PURPOSE: named-character continuity for atoms/educators/anxiety/overwhelm/CANONICAL.txt
+# STORY slots. Before this file, story_atoms/educators/anchored/anxiety/overwhelm/ did not
+# exist on origin/main at all, even though the engine-keyed bank at
+# atoms/educators/anxiety/overwhelm/CANONICAL.txt already declared 26 `path:` targets
+# pointing into it (recognition v01-v05, mechanism_proof v01-v07, turning_point v01-v07,
+# embodiment v01-v07). This roster authors 3 named characters across all 4 arc positions
+# (12 of the 26 declared paths); the remaining 14 declared paths are still unwritten and
+# are NOT claimed as done by this lane.
+#
+# SHARING RULE: same as gen_z_professionals/anchored — a character can recur across books;
+# within one book a name appears at most once per phase (enforced by story_planner.py
+# cross-phase dedup).
+
+version: "1.0"
+topic: anxiety
+persona: educators
+engine: overwhelm
+
+characters:
+
+  - id: rachel
+    name: Rachel
+    role: "classroom teacher, public middle school"
+    signature_trigger: "volume of ungraded/unfinished tasks exceeding any single day's capacity"
+    signature_pattern: "triages by moving undone work to a less-visible place (front seat / back seat / trunk of the car) instead of doing or dropping it"
+    signature_detail: "one hundred twenty-seven ungraded papers riding in the car for weeks"
+    topic_tie: "overwhelm via opportunity cost — everything is individually doable, nothing is doable together"
+    arc_position_coverage:
+      recognition: "story_atoms/educators/anchored/anxiety/overwhelm/recognition/micro/v01.txt"
+      mechanism_proof: "story_atoms/educators/anchored/anxiety/overwhelm/mechanism_proof/micro/v01.txt"
+      turning_point: "story_atoms/educators/anchored/anxiety/overwhelm/turning_point/micro/v01.txt"
+      embodiment: "story_atoms/educators/anchored/anxiety/overwhelm/embodiment/micro/v01.txt"
+    notes_for_writer: "Rachel's name and 'wall of everything' framing already exist unnamed in atoms/educators/anxiety/overwhelm/CANONICAL.txt RECOGNITION v01 — this roster gives that same voice a named, continuous arc rather than a one-off mention."
+
+  - id: marcus_webb
+    name: Marcus Webb
+    role: "teacher, takes on extracurricular duties (tutoring, yearbook, coverage)"
+    signature_trigger: "says yes to every ask before finishing hearing it, to avoid seeming unable to handle the job"
+    signature_pattern: "accumulates commitments one small yes at a time until the total is invisible even to him"
+    signature_detail: "copy machine jam at 6:40pm, realizing he skipped lunch"
+    topic_tie: "overwhelm via identity-protective over-commitment — saying no feels like admitting insufficiency"
+    arc_position_coverage:
+      recognition: "story_atoms/educators/anchored/anxiety/overwhelm/recognition/micro/v02.txt"
+      mechanism_proof: "story_atoms/educators/anchored/anxiety/overwhelm/mechanism_proof/micro/v02.txt"
+      turning_point: "story_atoms/educators/anchored/anxiety/overwhelm/turning_point/micro/v02.txt"
+      embodiment: "story_atoms/educators/anchored/anxiety/overwhelm/embodiment/micro/v02.txt"
+    notes_for_writer: "Marcus's turning_point is a trade, not a refusal — he proposes giving something up in exchange for taking something on. The embodiment is the trade being accepted, not a triumphant no."
+
+  - id: denise_okafor
+    name: Denise Okafor
+    age: null
+    role: "22-year veteran teacher, informal department mentor"
+    signature_trigger: "role has quietly expanded (double mentoring load, accreditation binder, chair duties) without anyone deciding it should"
+    signature_pattern: "absorbs added non-teaching duties without lowering her teaching standard, tracked privately on index cards in a desk drawer"
+    signature_detail: "a drawer full of weekly task index cards accumulated over years"
+    topic_tie: "overwhelm via role creep — competence becomes the reason more gets added, never less"
+    arc_position_coverage:
+      recognition: "story_atoms/educators/anchored/anxiety/overwhelm/recognition/micro/v03.txt"
+      mechanism_proof: "story_atoms/educators/anchored/anxiety/overwhelm/mechanism_proof/micro/v03.txt"
+      turning_point: "story_atoms/educators/anchored/anxiety/overwhelm/turning_point/micro/v03.txt"
+      embodiment: "story_atoms/educators/anchored/anxiety/overwhelm/embodiment/micro/v03.txt"
+    notes_for_writer: "Denise's turning_point comes through mentoring someone else through the same overwhelm, not through her own crisis. Her embodiment is a boundary set without justification offered — a break from twenty-two years of absorbing without comment."
+
+# ─── REMAINING DECLARED PATHS NOT YET AUTHORED (out of scope this lane) ──────
+# atoms/educators/anxiety/overwhelm/CANONICAL.txt still declares these paths with
+# no backing file on disk as of this roster's authoring:
+#   recognition:      v04, v05
+#   mechanism_proof:   v04, v05, v06, v07
+#   turning_point:     v04, v05, v06, v07
+#   embodiment:        v04, v05, v06, v07
+# These remain a real backlog for a future smallest-safe batch on this same cell.

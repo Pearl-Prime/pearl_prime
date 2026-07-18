@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__burnout__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__steady_ground__1hr
+  name: Steady Ground — for First Responders (One-Hour)
+installment_number: 3
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'After the Flame: Watching Your Thoughts Without Drowning'
+subtitle: Stepping Back from the Storm — Burnout for First Responders (The Observer's
+  Mind)
+cover_tagline: You're off shift. Your radar isn't. An hour to let the watch finally
+  stand down.
+description:
+  short_blurb: You scan every room. You sit facing the door. You're home, safe, and
+    your body still won't believe the threat is over. This is a one-hour read for
+    the first responder whose hypervigilance never clocks out. Not a relaxation script.
+    A way to understand the guard that won't go off duty — and let it.
+  long_description: 'You''re at the kid''s game, at the dinner table, lying in bed
+    — and part of you is still working. Scanning exits. Reading hands. Cataloging
+    who''s off, what''s wrong, where it could go bad. You sit facing the door without
+    deciding to. You wake at every sound. You''re safe, and your body flatly refuses
+    to believe it, because the job trained it not to, and that training doesn''t come
+    with an off switch.
+
+
+    This hour is for you — the officer, the firefighter, the medic, the dispatcher
+    whose mind became a threat-detection machine because on the job, it kept you and
+    everyone else alive. The one who can''t fully relax even at home and has started
+    to wonder if ''off'' is gone for good. That watching mind is not paranoia and
+    it''s not a defect. It''s a survival skill that did exactly what it was built
+    to do — and then never learned that the shift ended hours ago.
+
+
+    We start by naming the watcher plainly, because you''ve been treating constant
+    scanning as just who you are now. Then we go down into it — not by forcing your
+    guard down, which only makes it dig in, but by turning toward the part of you
+    that''s still standing post and understanding why it won''t stand down. You''ll
+    see why fighting the vigilance keeps it locked on, and what it feels like when
+    the watch finally gets the message that it''s allowed to rest. Then you come back
+    up — still sharp, still the person who reads a scene before anyone else, but no
+    longer running threat-assessment on your own living room.
+
+
+    This will not give you a relaxation routine. No breathing app, no guided meditation,
+    no telling you to ''just let your guard down'' as if you hadn''t already tried.
+    It won''t pretend you can or should switch off the instincts that keep you alive
+    at work. It won''t promise the hypervigilance vanishes overnight. What it will
+    do is stop treating your watching mind as something broken to fix and start treating
+    it as a loyal guard that''s simply been on duty too long without relief.
+
+
+    Marcus Reed writes for the people who stay alert so everyone else can sleep. No
+    woo, no ''find your calm,'' no asking you to become someone softer than the job
+    allows. Just one honest hour, in plain language you can use the next time you
+    catch yourself facing the door.
+
+
+    You don''t have to fully stand down to let the watch rest for an hour. Start here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - first responders
+  - burnout for first responders
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — explains why a threat-trained nervous
+  system stays switched on long after the danger
+- Widen the Window (Elizabeth Stanley) — written for high-stress operators on regulating
+  a body stuck in survival mode
+- Emotional Survival for Law Enforcement (Kevin Gilmartin) — names the hypervigilance
+  cycle that follows first responders home
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

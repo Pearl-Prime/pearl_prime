@@ -1,0 +1,326 @@
+schema_version: "1.0.0"
+genre: mecha
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+# topic -> strategy_id: which machine-device carries which inner state. The
+# render path pins the matching strategy for the carrier chapter, so a 'burnout'
+# cell opens on the failing-chassis arc instead of a hash-random one.
+topic_strategy_map:
+  burnout: strategy_01
+  exhaustion: strategy_01
+  depletion: strategy_01
+  anxiety: strategy_02
+  overthinking: strategy_02
+  panic_response: strategy_02
+  grief: strategy_03
+  loss: strategy_03
+  bereavement: strategy_03
+  overwhelm: strategy_04
+  perfectionism: strategy_04
+  pressure: strategy_04
+  isolation: strategy_05
+  loneliness: strategy_05
+  disconnection: strategy_05
+# Mecha strategy beat-bank. The embedded-wellness device for this genre is the
+# MACHINE: an inner state is externalised as the pilot's relationship to a
+# cockpit unit. The reader comes for giant robots; the resolution logic is the
+# psychological turn. {protagonist} = the pilot; {companion} = the hangar
+# mentor (carries the teacher's doctrine — stillness over force); {setting} =
+# the hangar / drop-zone / cockpit. Beats are placeholder-templated so any
+# (teacher, topic) cell renders genre-authentic.
+strategies:
+  strategy_01:
+    name: The Chassis Is Listening
+    archetype_template: burnout_as_machine_desync
+    description: >-
+      BURNOUT embedded as a failing chassis. The unit won't sync because the
+      pilot is running on empty; the harder {protagonist} forces the link, the
+      colder the machine goes. The turn is not a power-up — it is permission to
+      stop forcing. The chassis responds to an honest, rested signal, never a
+      louder one.
+    layer_1_plot_skeleton:
+      variant_label: failing_chassis_standard
+      beat_count: 9
+      beats:
+        - beat: 1
+          text: "{setting}, pre-dawn. {protagonist} runs the sync sequence for the fourth time tonight. Green, green, then the link light stutters and dies. The cockpit goes quiet around them."
+          camera_hint: wide_establishing
+          mood_hint: depletion
+          is_carrier: true
+        - beat: 2
+          text: "Briefing. The unit is flagged 'pilot fatigue — stand down.' {protagonist} signs the override instead. They have not missed a sortie in two hundred days and will not start now."
+          camera_hint: medium_two_shot
+          mood_hint: pressure
+          is_carrier: true
+        - beat: 3
+          text: "Launch. For ninety seconds the machine answers — then the limbs lag a half-beat behind {protagonist}'s hands, like moving through water. The harder they push the throttle, the heavier it gets."
+          camera_hint: dynamic_action
+          mood_hint: strain
+          is_carrier: true
+        - beat: 4
+          text: "{companion} watches the telemetry from the hangar floor and says nothing about the enemy. 'The unit is not broken,' they radio. 'It is doing exactly what you are doing. Look at your own readout.'"
+          camera_hint: close_up
+          mood_hint: dawning
+          is_carrier: true
+        - beat: 5
+          text: "{protagonist}'s biometrics scroll past — heart rate flat-lined high, breath shallow for weeks. The machine has been mirroring a body that forgot how to rest. SILENCE as the truth lands."
+          camera_hint: insert_detail
+          mood_hint: recognition
+          is_carrier: true
+        - beat: 6
+          text: "The old instinct: push through. {protagonist} redlines the reactor to muscle the unit upright. It seizes. Warning klaxons. The machine will not be bullied into giving what {protagonist} no longer has."
+          camera_hint: medium_action
+          mood_hint: breaking_point
+          is_carrier: true
+        - beat: 7
+          text: "{companion}'s voice, steady: 'Stop flying it. Just breathe, and let it breathe with you.' {protagonist} lifts their hands off the controls. One slow breath. Then another."
+          camera_hint: close_up
+          mood_hint: surrender
+          is_carrier: true
+        - beat: 8
+          text: "The sync light steadies — not blazing, just true. The unit rises on its own balance, moving only as fast as {protagonist} can honestly drive it. Slower. Lighter. Alive."
+          camera_hint: hero_low_angle
+          mood_hint: relief
+          is_carrier: true
+        - beat: 9
+          text: "Back on the deck. {protagonist} files the stand-down they refused this morning. {companion}: 'The machine was never asking for more of you. It was asking for the real you.'"
+          camera_hint: wide_quiet
+          mood_hint: integration
+          is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: redline_seize_cliff
+        ch2: hands_off_the_controls
+        ch3: the_real_signal_close
+  strategy_02:
+    name: Ghost in the Cockpit
+    archetype_template: anxiety_as_phantom_contact
+    description: >-
+      ANXIETY embedded as a phantom contact only {protagonist}'s instruments
+      register — a threat the squad cannot confirm. The dread that the alarm is
+      real even when nothing is there. The turn: learning to read the difference
+      between a true signal and a frightened one.
+    layer_1_plot_skeleton:
+      variant_label: phantom_contact_standard
+      beat_count: 8
+      beats:
+        - beat: 1
+          text: "{setting}. {protagonist}'s threat board lights with a contact at the treeline. No one else's instruments see it. They call it in anyway; the squad sweeps and finds empty air."
+          camera_hint: wide_establishing
+          mood_hint: unease
+          is_carrier: true
+        - beat: 2
+          text: "It happens again on the next patrol. And the next. {protagonist} begins flying braced for an enemy that never resolves, fuel burning twice as fast from constant evasive turns."
+          camera_hint: cockpit_pov
+          mood_hint: hypervigilance
+          is_carrier: true
+        - beat: 3
+          text: "{companion} pulls the unit's logs. 'Your sensor is fine. It is catching every shadow because you have told it everything is a threat. It believes you.'"
+          camera_hint: close_up
+          mood_hint: dawning
+          is_carrier: true
+        - beat: 4
+          text: "Mid-sortie the phantom blooms huge across the board — a wall of contacts, inbound, certain death. {protagonist}'s hands shake on the launch keys."
+          camera_hint: dynamic_action
+          mood_hint: panic
+          is_carrier: true
+        - beat: 5
+          text: "{companion}, calm on the channel: 'Do not fire. Hold. Count the things that are actually true right now.' {protagonist} names them: altitude, fuel, one steady heartbeat. SILENCE."
+          camera_hint: insert_detail
+          mood_hint: grounding
+          is_carrier: true
+        - beat: 6
+          text: "The contacts thin, flicker, gone — ghost echoes, every one. The real sky is empty and quiet. {protagonist} did not fire on a threat that was never there."
+          camera_hint: wide_quiet
+          mood_hint: relief
+          is_carrier: true
+        - beat: 7
+          text: "A real contact appears later, small and unmistakable. {protagonist} reads it clean, calls it true, handles it. The difference is obvious now that they are not drowning in false ones."
+          camera_hint: medium_action
+          mood_hint: clarity
+          is_carrier: true
+        - beat: 8
+          text: "Debrief. {companion}: 'The board was never lying about danger. It was lying about how much. You get to decide which alarms you answer.'"
+          camera_hint: medium_two_shot
+          mood_hint: integration
+          is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: empty_air_cliff
+        ch2: do_not_fire_hold
+        ch3: which_alarms_close
+  strategy_03:
+    name: The Salvage Unit
+    archetype_template: grief_as_inherited_machine
+    description: >-
+      GRIEF embedded as piloting a dead comrade's recovered unit. The cockpit
+      still smells like them; the controls remember another pilot's hands. The
+      turn is letting the machine become {protagonist}'s own without erasing
+      whose it was.
+    layer_1_plot_skeleton:
+      variant_label: inherited_unit_standard
+      beat_count: 8
+      beats:
+        - beat: 1
+          text: "{setting}. They wheel in the salvaged unit, scorched but whole. It was {companion}'s partner's machine, before the last drop. {protagonist} is assigned to fly it."
+          camera_hint: wide_establishing
+          mood_hint: heaviness
+          is_carrier: true
+        - beat: 2
+          text: "The cockpit fits wrong. Seat set for someone taller, callsign still etched by the throttle. {protagonist} flies it stiffly, afraid to change a single setting, as if that would be a betrayal."
+          camera_hint: cockpit_pov
+          mood_hint: reverence
+          is_carrier: true
+        - beat: 3
+          text: "Performance suffers — a borrowed machine flown like a museum piece gets people hurt. {companion} sees it. 'You are trying to fly it as them. You cannot. You will both lose.'"
+          camera_hint: close_up
+          mood_hint: tension
+          is_carrier: true
+        - beat: 4
+          text: "A live drop forces the issue. The unit hesitates under {protagonist}'s half-committed hands and nearly falls. They have to choose: stay a guest in this cockpit, or make it theirs."
+          camera_hint: dynamic_action
+          mood_hint: crisis
+          is_carrier: true
+        - beat: 5
+          text: "{protagonist} resets the seat. Their own callsign goes beside the old one, not over it. 'I've got it from here,' they say to no one. SILENCE."
+          camera_hint: insert_detail
+          mood_hint: release
+          is_carrier: true
+        - beat: 6
+          text: "The machine answers differently now — not a ghost, a partner. {protagonist} flies it like themselves and it finally moves clean."
+          camera_hint: hero_low_angle
+          mood_hint: lift
+          is_carrier: true
+        - beat: 7
+          text: "{companion} reads the new callsign by the throttle and does not flinch. 'Good. They would have wanted it flown, not embalmed.'"
+          camera_hint: medium_two_shot
+          mood_hint: tenderness
+          is_carrier: true
+        - beat: 8
+          text: "After. {protagonist} keeps both names on the panel. Carrying someone is not the same as being unable to move. The unit is theirs, and it remembers."
+          camera_hint: wide_quiet
+          mood_hint: integration
+          is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: borrowed_cockpit_cliff
+        ch2: make_it_yours
+        ch3: both_names_close
+  strategy_04:
+    name: Redline
+    archetype_template: overwhelm_as_thermal_limit
+    description: >-
+      OVERWHELM / perfectionism embedded as a reactor that overheats when driven
+      past its limit. {protagonist} believes the only acceptable output is more.
+      The turn: the limit is not a flaw to override, it is information to honor.
+    layer_1_plot_skeleton:
+      variant_label: thermal_limit_standard
+      beat_count: 8
+      beats:
+        - beat: 1
+          text: "{setting}. {protagonist} posts the squad's top sortie count and the highest reactor-temp warnings on record. They wear both like medals."
+          camera_hint: wide_establishing
+          mood_hint: drive
+          is_carrier: true
+        - beat: 2
+          text: "Every engagement, {protagonist} runs the core hot — past spec, into the red — because slowing down feels like failing. The unit screams; they call it commitment."
+          camera_hint: dynamic_action
+          mood_hint: intensity
+          is_carrier: true
+        - beat: 3
+          text: "{companion}: 'That gauge is not doubting you. It is telling you the truth about heat. Override it enough times and there is no machine left to be perfect in.'"
+          camera_hint: close_up
+          mood_hint: warning
+          is_carrier: true
+        - beat: 4
+          text: "Critical sortie. {protagonist} redlines to close a gap no one asked them to close. The core spikes; the unit locks mid-stride, dead weight, exposed."
+          camera_hint: medium_action
+          mood_hint: breaking_point
+          is_carrier: true
+        - beat: 5
+          text: "Cooling cycle, forced. {protagonist} sits powerless inside the silent machine and, for the first time, does nothing while the temperature falls. SILENCE."
+          camera_hint: insert_detail
+          mood_hint: stillness
+          is_carrier: true
+        - beat: 6
+          text: "Restart — inside spec this time. {protagonist} flies to the limit and not past it. Slower. Sustainable. The unit holds, hour after hour, where the red runs would have killed it."
+          camera_hint: hero_low_angle
+          mood_hint: steadiness
+          is_carrier: true
+        - beat: 7
+          text: "The mission is won not by the hottest run but the one that lasted. {companion}: 'Endurance is a kind of strength you kept calling weakness.'"
+          camera_hint: medium_two_shot
+          mood_hint: reframe
+          is_carrier: true
+        - beat: 8
+          text: "{protagonist} resets their own redline lower, on purpose. The medals for overheating come down. The limit is a partner now, not an enemy."
+          camera_hint: wide_quiet
+          mood_hint: integration
+          is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: core_spike_cliff
+        ch2: forced_cooling
+        ch3: lower_redline_close
+  strategy_05:
+    name: The Handshake Protocol
+    archetype_template: isolation_as_failed_sync
+    description: >-
+      ISOLATION / fear-of-trust embedded as a twin-unit sync that only works
+      when two pilots stop guarding their own controls. {protagonist} flies
+      better alone — until the mission requires a link they have spent years
+      refusing. The turn: trust as a mechanism, not a risk.
+    layer_1_plot_skeleton:
+      variant_label: failed_sync_standard
+      beat_count: 8
+      beats:
+        - beat: 1
+          text: "{setting}. The new op needs paired units flying as one through a shared link. {protagonist}, the squad's best solo pilot, is assigned a partner for the first time in years."
+          camera_hint: wide_establishing
+          mood_hint: resistance
+          is_carrier: true
+        - beat: 2
+          text: "The sync fails on every attempt. {protagonist} keeps a hand back, never fully committing their controls to the link. The paired unit lurches, fights itself, stalls."
+          camera_hint: dynamic_action
+          mood_hint: friction
+          is_carrier: true
+        - beat: 3
+          text: "{companion}: 'The link is not weak. You are holding the door shut from the inside. A handshake needs two open hands.'"
+          camera_hint: close_up
+          mood_hint: dawning
+          is_carrier: true
+        - beat: 4
+          text: "Under fire, alone-thinking nearly gets both units killed. {protagonist} has to choose between control they can keep and a partner they would have to actually let in."
+          camera_hint: medium_action
+          mood_hint: crisis
+          is_carrier: true
+        - beat: 5
+          text: "{protagonist} opens the full link — every input shared, nothing held back. For one terrifying second they are not alone in the machine. SILENCE."
+          camera_hint: insert_detail
+          mood_hint: vulnerability
+          is_carrier: true
+        - beat: 6
+          text: "The paired unit snaps into true sync and moves like a single body — faster, surer than {protagonist} ever flew solo. The thing they feared made them stronger, not smaller."
+          camera_hint: hero_low_angle
+          mood_hint: exhilaration
+          is_carrier: true
+        - beat: 7
+          text: "They win it together, neither one carrying it alone. {companion}: 'You were never less of a pilot for needing a hand on the link.'"
+          camera_hint: medium_two_shot
+          mood_hint: warmth
+          is_carrier: true
+        - beat: 8
+          text: "{protagonist} requests the same partner for the next op. The open link stays open. Some machines — some people — only work when you let them in."
+          camera_hint: wide_quiet
+          mood_hint: integration
+          is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: failed_sync_cliff
+        ch2: open_the_link
+        ch3: same_partner_close
+anti_pattern_rules:
+  - forbidden_combination: [mecha, gore_spectacle]
+    reason: "Mecha-as-embed externalises an inner state; gratuitous gore breaks the psychological read and the all-ages register."
+  - forbidden_combination: [mecha, villain_monologue_resolution]
+    reason: "The turn must be the pilot's internal shift expressed through the machine, never a speech that explains the moral."

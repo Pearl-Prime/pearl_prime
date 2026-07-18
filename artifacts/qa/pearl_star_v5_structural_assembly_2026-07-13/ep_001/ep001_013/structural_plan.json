@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "envelope_id": "plan_ep001_013",
+  "transform_model": "structural_mvp_v1",
+  "structural_template_id": "standing_room_scene",
+  "panel_type_id": "establish_standing_room",
+  "plan_body": {
+    "panel_id": "ep001_013",
+    "canvas": {
+      "width": 1024,
+      "height": 1024
+    },
+    "structural_template_id": "standing_room_scene",
+    "panel_type_id": "establish_standing_room",
+    "required_support_proof": [
+      "standing_on"
+    ],
+    "allowed_relations": [
+      "standing_on",
+      "resting_on",
+      "held_by",
+      "occluded_by"
+    ],
+    "support_graph": {
+      "nodes": [
+        {
+          "node_id": "floor_support",
+          "category": "support_surface",
+          "role": "floor",
+          "support_polygon_pct": [
+            [
+              0.0,
+              65.0
+            ],
+            [
+              100.0,
+              65.0
+            ],
+            [
+              100.0,
+              100.0
+            ],
+            [
+              0.0,
+              100.0
+            ]
+          ]
+        },
+        {
+          "node_id": "char_standing",
+          "category": "character",
+          "role": "primary_subject",
+          "contact_point_pct": [
+            0.0,
+            0.0
+          ],
+          "placement_bbox_pct_xyxy": [
+            3.0,
+            65.0,
+            25.0,
+            85.0
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "e_standing",
+          "relation": "standing_on",
+          "from_node": "char_standing",
+          "to_node": "floor_support"
+        }
+      ]
+    },
+    "resolved_placements": [
+      {
+        "node_id": "char_standing",
+        "transform": {
+          "tx_pct": 14.0,
+          "ty_pct": 85.0,
+          "uniform_scale": 0.4450186620729256,
+          "rotation_deg": 0.0,
+          "transform_model": "structural_mvp_v1"
+        }
+      }
+    ],
+    "transform_model": "structural_mvp_v1"
+  },
+  "plan_hash": "dd3c27533954126d6ae3d8a915d6f94a68da03a0e6a1deeff1d7fd4cc7ffd97b",
+  "validation": {
+    "status": "pass",
+    "failures": []
+  }
+}

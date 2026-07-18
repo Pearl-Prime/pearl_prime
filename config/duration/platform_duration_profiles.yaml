@@ -1,0 +1,237 @@
+# CDIS §4 — Platform duration profiles (hard bounds + sweet spots + notes).
+# version 2 (2026-06-13, Pearl_Research): numbers validated/refreshed against 50+ current
+# (2025–2026) cited sources + a tier→platform cross-walk added (ladder_tier_platform_fit).
+# Provenance + every [K#]/[A#]/[S#]/[Y#]/[W#]/[C#] source key:
+#   artifacts/research/duration_per_platform_20260613/PLATFORM_DURATION_SOURCES.md
+# Plan + meets/misses verdict:
+#   artifacts/research/duration_per_platform_20260613/{DURATION_PER_PLATFORM_PLAN,DURATION_GAP_VERIFICATION}.md
+# DO-NOT-MERGE pending operator review of the platform-strategy/routing decision. CJK rows provisional
+# (gate on a measured zh+ko render — Pearl Star CosyVoice2 currently off).
+version: 2
+
+platforms:
+  youtube:
+    platform_id: youtube
+    format_type: video_long
+    hard_min_seconds: 1
+    hard_max_seconds: 43200
+    sweet_spot_min_seconds: 480   # was 600 — 2026 educational/wellness sweet spot tightened to 8–15 min [Y6]
+    sweet_spot_max_seconds: 900   # was 1200 — keep 1200 as extend-only ceiling gated on sustained ≥50% AVD [Y4][Y6]
+    algo_notes: "8–15 min; watch-time × satisfaction layer (retention ≥50% AVD is the gate, raw watch-time alone 'dead' in 2026); mid-roll unlocks at 8 min"
+    monetization_threshold_seconds: 480   # 8 min — VALIDATED unchanged 2026 [Y1][Y2]
+    sources: [Y1, Y2, Y4, Y6]
+
+  youtube_shorts:
+    platform_id: youtube_shorts
+    format_type: video_short
+    hard_min_seconds: 1
+    hard_max_seconds: 180   # was 60 — 3-min Shorts since 2024-10-15 [Y3]; the 1–3 min lane was unused at the old 60s cap
+    sweet_spot_min_seconds: 15
+    sweet_spot_max_seconds: 30   # 15–30s = completion-optimal (80%+); NOTE 30–60s = views-optimal (~22× vs <10s) [Y5]
+    algo_notes: "15–30s completion-optimal; 30–60s views-optimal; hook = first ~15s; max 180s [Y3][Y5]"
+    monetization_threshold_seconds: null
+    sources: [Y3, Y5]
+
+  tiktok:
+    platform_id: tiktok
+    format_type: video_short
+    hard_min_seconds: 3
+    hard_max_seconds: 3600
+    sweet_spot_min_seconds: 60
+    sweet_spot_max_seconds: 90
+    algo_notes: "Completion #1; <30s higher completion"
+    monetization_threshold_seconds: null
+
+  instagram_reels:
+    platform_id: instagram_reels
+    format_type: video_short
+    hard_min_seconds: 3
+    hard_max_seconds: 90
+    sweet_spot_min_seconds: 15
+    sweet_spot_max_seconds: 30
+    algo_notes: "3s hold drives reach"
+    monetization_threshold_seconds: null
+
+  bilibili:
+    platform_id: bilibili
+    format_type: video_long
+    hard_min_seconds: 1
+    hard_max_seconds: 36000
+    sweet_spot_min_seconds: 420
+    sweet_spot_max_seconds: 900
+    algo_notes: "Quality > virality; Knowledge Zone"
+    monetization_threshold_seconds: 300
+
+  douyin:
+    platform_id: douyin
+    format_type: video_short
+    hard_min_seconds: 1
+    hard_max_seconds: 1800
+    sweet_spot_min_seconds: 60
+    sweet_spot_max_seconds: 180
+    algo_notes: "Useful > entertaining; Douyin-specific content"
+    monetization_threshold_seconds: null
+
+  spotify:
+    platform_id: spotify
+    format_type: audiobook
+    hard_min_seconds: 60
+    hard_max_seconds: 86400
+    sweet_spot_min_seconds: 14400   # was 18000 — bias the LOWER end (4–6 hr) for Spotify's casual 18–34 audience [S3][S6]
+    sweet_spot_max_seconds: 21600   # 6 hr; 5–7 hr stays the cross-platform self-help default
+    algo_notes: "Audiobook 4–6 hr bias (15 hr/mo at NORMAL speed → runtime scarce → shorter tryable; payout pro-rata on COMPLETED hours). Podcast 20–40 min (target 25–35; completion flat 10→45 min). Findaway ceased 2025-08-01 → INaudio + Spotify-for-Authors [S1][S3][S4][S7][A8]"
+    monetization_threshold_seconds: 1200   # NOT a Spotify audiobook rule — Spotify discloses none; keep as an internal PODCAST-completion floor only [S5]
+    podcast_sweet_spot_min_seconds: 1200   # 20 min
+    podcast_sweet_spot_max_seconds: 2400   # 40 min (target 25–35) [S7][S8]
+    sources: [S1, S3, S4, S5, S6, S7, S8]
+
+  audible:
+    platform_id: audible
+    format_type: audiobook
+    hard_min_seconds: 900   # technical floor only — NOT commercially sellable; real commercial floor = 3 hr (monetization_threshold) [A6][A7]
+    hard_max_seconds: 86400
+    sweet_spot_min_seconds: 18000   # 5 hr — VALIDATED self-help sweet spot [A4][A5]
+    sweet_spot_max_seconds: 25200   # 7 hr
+    algo_notes: "Self-help 5–7 hr. À-la-carte price is TIERED by finished hours (<1h $6.95 | 1–3h $14.95 | 3–5h $19.95 | 5–10h $24.95) → length sets royalty + consumption-pool weight. Shorts disadvantaged by credit/pool economics (NO official 'under-3hr' collection; a 33-min title = bottom tier, 'not worth a credit') [A1][A4][A6]"
+    monetization_threshold_seconds: 10800   # 3 hr — the real go/no-go gate (VALIDATED) [A5][A6]
+    royalty_model: "consumption_pool_2026-05-26 (excl 50% / non-excl 30%, weighted by à-la-carte price × engagement/completion) [A1]"
+    sources: [A1, A4, A5, A6, A7]
+
+  ximalaya:
+    platform_id: ximalaya
+    format_type: podcast
+    hard_min_seconds: 60
+    hard_max_seconds: 14400
+    sweet_spot_min_seconds: 600
+    sweet_spot_max_seconds: 1800
+    algo_notes: "10-30 min episodes; high daily usage CN"
+    monetization_threshold_seconds: null
+
+  millie_library:
+    platform_id: millie_library
+    format_type: audiobook
+    hard_min_seconds: 300
+    hard_max_seconds: 7200
+    sweet_spot_min_seconds: 900
+    sweet_spot_max_seconds: 1800
+    algo_notes: "Summary audiobooks Korea"
+    monetization_threshold_seconds: null
+
+  headspace:
+    platform_id: headspace
+    format_type: meditation
+    hard_min_seconds: 60
+    hard_max_seconds: 7200
+    sweet_spot_min_seconds: 600
+    sweet_spot_max_seconds: 900
+    algo_notes: "10-15 min guided common"
+    monetization_threshold_seconds: null
+
+  calm:
+    platform_id: calm
+    format_type: meditation
+    hard_min_seconds: 60
+    hard_max_seconds: 7200
+    sweet_spot_min_seconds: 600
+    sweet_spot_max_seconds: 900
+    algo_notes: "10-15 min guided"
+    monetization_threshold_seconds: null
+
+  webtoon:
+    platform_id: webtoon
+    format_type: manga_episode
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_panels_min: 20
+    sweet_spot_panels_max: 60
+    algo_notes: "Canvas 20-30; Originals 40-60 genre-dependent"
+    monetization_threshold_seconds: null
+
+  kakao:
+    platform_id: kakao
+    format_type: manga_episode
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_panels_min: 40
+    sweet_spot_panels_max: 65
+    algo_notes: "25-chapter min contract typical"
+    monetization_threshold_seconds: null
+
+  bilibili_comics:
+    platform_id: bilibili_comics
+    format_type: manga_episode
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_panels_min: 30
+    sweet_spot_panels_max: 80
+    algo_notes: "Weekly cadence"
+    monetization_threshold_seconds: null
+
+  lezhin:
+    platform_id: lezhin
+    format_type: manga_episode
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_panels_min: 70
+    sweet_spot_panels_max: 90
+    algo_notes: "70+ panels/ch; min 24 ep"
+    monetization_threshold_seconds: null
+
+  kdp:
+    platform_id: kdp
+    format_type: ebook
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_pages_min: 150
+    sweet_spot_pages_max: 230
+    algo_notes: "KDP 70% royalty zone; price tiers"
+    monetization_threshold_seconds: null
+
+  readmoo:
+    platform_id: readmoo
+    format_type: ebook
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_pages_min: 150
+    sweet_spot_pages_max: 280
+    algo_notes: "TW market EPUB"
+    monetization_threshold_seconds: null
+
+  wechat_read:
+    platform_id: wechat_read
+    format_type: ebook
+    hard_min_seconds: null
+    hard_max_seconds: null
+    sweet_spot_pages_min: 120
+    sweet_spot_pages_max: 250
+    algo_notes: "CN simplified EPUB/TXT; self-help norm 10万–15万字 [C3]"
+    monetization_threshold_seconds: null
+
+# ─── LADDER TIER → PLATFORM FIT (the cross-walk; NEW 2026-06-13) ─────────────
+# Maps the merged honest 7-tier ladder (MARKETING_DURATION_TARGETS.md / PR #1550)
+# to the surface each tier's LENGTH actually wins on. This is the missing SSOT:
+# the ladder and the platform profiles above were never cross-walked before.
+# verdict: win = the surface this tier is built for · marginal = listable-but-wrong-home · loser = structural miss
+# Full reasoning + sources: DURATION_PER_PLATFORM_PLAN.md §1; meets/misses vs our REAL renders: DURATION_GAP_VERIFICATION.md §2.
+ladder_tier_platform_fit:
+  # en-US, words → audiobook_min(÷150) / print_pp(÷250)
+  T1_quick_reset:   { words: 3500,  audio_min: 23,  print_pp: 14,  win: [podcast_episode, lead_magnet, youtube_shorts], marginal: [apple_ai_audiobook], loser: [kdp_full, audible, spotify_audiobook] }
+  T2_mini:          { words: 4500,  audio_min: 30,  print_pp: 18,  win: [podcast_episode, lead_magnet],                marginal: [apple_ai_audiobook], loser: [kdp_full, audible, spotify_audiobook] }
+  T3_short:         { words: 6000,  audio_min: 40,  print_pp: 24,  win: [podcast_episode, kdp_short_read],            marginal: [apple_ai_audiobook], loser: [audible, spotify_audiobook] }
+  T4_one_hour:      { words: 9000,  audio_min: 60,  print_pp: 36,  win: [kdp_short_read, podcast_special],            marginal: [apple_ai_audiobook], loser: [audible, spotify_audiobook] }
+  T5_standard:      { words: 22000, audio_min: 147, print_pp: 88,  win: [podcast_season],                             marginal: [kdp_short_read, audible, spotify_audiobook, apple_ai_audiobook], loser: [kdp_full] }
+  T6_long_form:     { words: 30000, audio_min: 200, print_pp: 120, win: [audible_entry_3_5h, podcast_season],         marginal: [kdp_full, spotify_audiobook],                                    loser: [] }
+  T7_complete:      { words: 52000, audio_min: 347, print_pp: 208, win: [kdp_full, audible, spotify_audiobook, apple_ai_audiobook, podcast_multiseason], marginal: [], loser: [] }
+  notes: >
+    Only T7 wins the flagship paid-book surfaces (full KDP 150–230pp + Audible 5–7h + Spotify 4–6h) simultaneously.
+    T6 is the entry full-audiobook (Audible 3–5h tier). T1–T5 are podcast/short-read/lead-magnet/sample plays —
+    structural losers as STANDALONE audiobooks (sub-3h Audible floor + bottom price tier). Our REAL renders are
+    thin (~5k≈33min) to gold (~22k≈2.4h), so today NOTHING reaches T7 — the flagship 52k product is routed to the
+    WRITING PROGRAM (real length, ≥70% completion, never padding). See CONTENT_LENGTH_TARGETS_FOR_WRITING_PROGRAM.md.
+
+# CJK targets are CHAR-based and PROVISIONAL — ja expansion 2.15 measured; zh 1.6 + ko 2.0 UNVERIFIED.
+# Do not ship CJK platform durations until one zh + one ko render is measured. See PLATFORM_DURATION_SOURCES.md §7.
+cjk_provisional:
+  ja-JP: { expansion_char_per_word: 2.15, narration_cpm: 300, confidence: "expansion MEASURED; rate HARD-sourced [C8][C9]" }
+  zh:    { expansion_char_per_word: 1.6,  narration_cpm: 190, confidence: "UNVERIFIED — measure before ship; calm 160–190 is a slow floor vs market 180–220 [C2]" }
+  ko-KR: { expansion_char_per_word: 2.0,  narration_cpm: 350, confidence: "UNVERIFIED — rate has NO source [verify]; Korea = ship BOTH Millie summary + Welaaa full [C11][C12]" }

@@ -1,0 +1,123 @@
+# Per-topic/hub Proof Loop config. Same structure across hubs; content from here + story bank.
+# Second exercise comes from config/freebies/exercise_pairs.yaml (keyed by first_exercise).
+# Authority: freebie funnel plan (Problem-Solution Funnel at scale).
+
+burnout_reset:
+  topic: burnout
+  first_exercise: cyclic_sighing  # or list of options for multi-exercise hubs
+  story_id: burnout_nurse_story   # loads from funnel/burnout_reset/stories/burnout.md or story file
+  book_slug: burnout-reset
+  email_sequence_id: burnout_nurture_5
+  freebie_slug: burnout-energy-audit
+
+anxiety_reset:
+  topic: anxiety
+  first_exercise: box_breathing
+  story_id: anxiety_panic_story
+  book_slug: anxiety-reset
+  email_sequence_id: anxiety_nurture_5
+  freebie_slug: anxiety-nervous-system-reset
+
+self_worth_reset:
+  topic: self_worth
+  first_exercise: worth_inventory_exercise
+  story_id: self_worth_achiever_story
+  book_slug: self-worth-inventory
+  email_sequence_id: self_worth_nurture_5
+  freebie_slug: self-worth-inventory
+
+imposter_syndrome_reset:
+  topic: imposter_syndrome
+  first_exercise: evidence_log_fill
+  story_id: imposter_promotion_story
+  book_slug: imposter-evidence-log
+  email_sequence_id: imposter_syndrome_nurture_5
+  freebie_slug: imposter-evidence-log
+
+boundaries_reset:
+  topic: boundaries
+  first_exercise: script_practice_one
+  story_id: boundaries_yes_exhaustion_story
+  book_slug: boundaries-script-kit
+  email_sequence_id: boundaries_nurture_5
+  freebie_slug: boundaries-script-kit
+
+depression_reset:
+  topic: depression
+  first_exercise: micro_action_one
+  story_id: depression_motions_story
+  book_slug: depression-momentum-kit
+  email_sequence_id: depression_nurture_5
+  freebie_slug: depression-momentum-kit
+
+courage_reset:
+  topic: courage
+  first_exercise: decision_map_step1
+  story_id: courage_edge_story
+  book_slug: courage-decision-map
+  email_sequence_id: courage_nurture_5
+  freebie_slug: courage-decision-map
+
+overthinking_reset:
+  topic: overthinking
+  first_exercise: thought_sorter_8q
+  story_id: overthinking_job_offer_story
+  book_slug: overthinking-thought-sorter
+  email_sequence_id: overthinking_nurture_5
+  freebie_slug: overthinking-thought-sorter
+
+compassion_fatigue_reset:
+  topic: compassion_fatigue
+  first_exercise: capacity_audit_10q
+  story_id: compassion_fatigue_nurse_story
+  book_slug: compassion-fatigue-audit
+  email_sequence_id: compassion_fatigue_nurture_5
+  freebie_slug: compassion-fatigue-audit
+
+social_anxiety_reset:
+  topic: social_anxiety
+  first_exercise: pre_event_protocol
+  story_id: social_anxiety_early_leave_story
+  book_slug: social-anxiety-toolkit
+  email_sequence_id: social_anxiety_nurture_5
+  freebie_slug: social-anxiety-toolkit
+
+sleep_anxiety_reset:
+  topic: sleep_anxiety
+  first_exercise: wind_down_phase1
+  story_id: sleep_anxiety_9pm_story
+  book_slug: sleep-anxiety-wind-down
+  email_sequence_id: sleep_anxiety_nurture_5
+  freebie_slug: sleep-anxiety-wind-down
+
+financial_anxiety_reset:
+  topic: financial_anxiety
+  first_exercise: money_checkin_10q
+  story_id: financial_anxiety_six_figures_story
+  book_slug: financial-anxiety-check-in
+  email_sequence_id: financial_anxiety_nurture_5
+  freebie_slug: financial-anxiety-check-in
+
+financial_stress_reset:
+  topic: financial_stress
+  first_exercise: stress_audit_prompts_1_2
+  story_id: financial_stress_earned_more_story
+  book_slug: financial-stress-audit
+  email_sequence_id: financial_stress_nurture_5
+  freebie_slug: financial-stress-audit
+
+somatic_healing_reset:
+  topic: somatic_healing
+  first_exercise: body_scan_4min
+  story_id: somatic_healing_held_breath_story
+  book_slug: somatic-body-scan
+  email_sequence_id: somatic_healing_nurture_5
+  freebie_slug: somatic-body-scan
+
+grief_reset:
+  topic: grief
+  first_exercise: unsent_letter_prompts
+  story_id: grief_carried_alone_story
+  book_slug: grief-letter-template
+  email_sequence_id: grief_nurture_5
+  freebie_slug: grief-letter-template

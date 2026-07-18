@@ -1,0 +1,226 @@
+# Regression Museum — Permanent blocking gates for every known failure class.
+#
+# RULES:
+#   - Entries are NEVER removed. If a pattern causes false positives, refine the
+#     `pattern` field; do not delete the entry.
+#   - Every fix PR must add an entry here. PR template has a checkbox for it.
+#   - Detection is deterministic (regex or hash). Zero LLM spend.
+#   - action: block_merge → CI fails, PR cannot merge.
+#   - action: warn_then_block → warn on first occurrence, block on ≥2.
+#   - action: warn → logged only, does not block.
+
+failure_classes:
+
+  template_dict_artifact:
+    description: "Python dict syntax leaked into rendered prose"
+    example: "{'intro': 'Marcus pauses...', 'guided_practice': '...'}"
+    detection: regex
+    pattern: "\\{['\"]?\\w+['\"]?\\s*:\\s*['\"]"
+    scope: rendered_chapter_text
+    action: block_merge
+    first_seen: "2026-04-18"
+    fix_pr: "(add PR number when gate first blocks a regression)"
+
+  font_css_leak:
+    description: "CSS/font directives in prose text"
+    example: "Helvetica; ;; ;;"
+    detection: regex
+    pattern: "[A-Za-z]+;\\s*;;"
+    scope: rendered_chapter_text
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  doubled_word:
+    description: "Accidental word repetition artifact"
+    example: "The the train was late"
+    detection: regex
+    pattern: "\\b([A-Za-z]{2,})\\s+\\1\\b"
+    exceptions:
+      - "had had"
+      - "that that"
+      - "do do"
+      - "very very"
+      - "is is"
+    scope: rendered_chapter_text
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  cross_chapter_verbatim_duplication:
+    description: "Same 50+ word block appearing in 2+ chapters"
+    detection: ngram_hash
+    ngram_size: 50
+    max_occurrences: 1
+    scope: all_chapters
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  off_persona_vocabulary:
+    description: "Vocabulary from wrong doctrinal corpus appearing in persona book"
+    detection: persona_blocklist
+    per_persona:
+      gen_z_professionals:
+        blocked_terms:
+          - "Bhakti Yoga"
+          - "Bhakti yoga"
+          - "Karma yoga"
+          - "Karma Yoga"
+          - "Dharma"
+          - "Six Worlds"
+          - "enlightened teacher"
+          - "stopping thought"
+          - "self-realization"
+          - "divine love"
+          - "mundane existence"
+    scope: rendered_chapter_text
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  same_exercise_overuse:
+    description: "Single exercise atom used in >2 chapters of a book"
+    detection: atom_id_count
+    max_chapters_per_atom: 2
+    scope: exercise_slots_across_book
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  identical_opening_scene:
+    description: "Chapter opening (first 100 words) hash-matches another chapter"
+    detection: opening_hash
+    window_words: 100
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  generic_reader_address:
+    description: "Too many chapters open with 'many people feel...' or 'we all experience...'"
+    detection: regex_count
+    pattern: "^(Many people|We all|Everyone|Most of us) "
+    max_occurrences_per_book: 2
+    scope: chapter_openings
+    action: warn_then_block
+    first_seen: "2026-04-18"
+
+  mid_paragraph_format_break:
+    description: "Paragraph ending mid-sentence or truncated (no terminal punctuation)"
+    detection: regex
+    pattern: "(?<![.!?\"'\\])])[\\s]*\\n\\s*\\n"
+    scope: rendered_chapter_text
+    action: warn
+    first_seen: "2026-04-18"
+
+  doctrinal_exposition_inline:
+    description: "Pasted doctrinal explanation disconnected from chapter narrative"
+    detection: heuristic
+    # Paragraph containing: doctrine terms + abstract nouns + NO character name + NO body sensation
+    doctrine_terms:
+      - "dharma"
+      - "karma"
+      - "bhakti"
+      - "enlightenment"
+      - "consciousness elevation"
+      - "self-realization"
+    abstract_nouns:
+      - "enlightenment"
+      - "consciousness"
+      - "awakening"
+      - "divine"
+    scope: chapter_paragraphs
+    action: warn_then_block
+    first_seen: "2026-04-18"
+
+  repeated_scene_anchor:
+    description: "Same descriptive phrase used as scene anchor more than 3× in a book"
+    detection: regex_count
+    pattern: "soft daylight along the sill"
+    max_occurrences_per_book: 3
+    scope: rendered_chapter_text
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  verbatim_chapter_block_repeat:
+    description: "An entire chapter's content block (200+ words) is copy-pasted verbatim into another chapter"
+    detection: ngram_hash
+    ngram_size: 200
+    max_occurrences: 1
+    scope: all_chapters
+    action: block_merge
+    first_seen: "2026-04-18"
+
+  cross_chapter_sentence_repeat:
+    description: "Any normalized 6+ word sentence appearing verbatim in 2+ chapters (named comfort lines, engine theses)"
+    detection: sentence_hash
+    min_words: 6
+    max_chapters_per_sentence: 1
+    scope: all_chapters
+    action: block_merge
+    first_seen: "2026-06-30"
+    notes: >
+      Sentence-granularity backstop below the 50-word block detector. Catches the
+      cohesion repeats that pass every register gate: short therapeutic lines and
+      engine-keyed theses (~6-15 words) that recur across chapters and make the
+      book read interchangeable. Normalized case/punctuation/whitespace.
+      Detector: phoenix_v4/quality/regression_museum/detectors.py
+      :detect_cross_chapter_sentence_repeat.
+
+  # ---------------------------------------------------------------------------
+  # Pearl News invariant failures — added 2026-04-19
+  # Contract: docs/PEARL_NEWS_CONTRACT.md
+  # Detectors: phoenix_v4/quality/regression_museum/pearl_news_detectors.py
+  # ---------------------------------------------------------------------------
+
+  pearl_news_multi_teacher_article:
+    description: "Pearl News article lists more than one teacher as author/subject in byline or metadata"
+    detection: html_structure_check
+    scope: pearl_news_output
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON has teacher_id=None AND teacher_used.teacher_id=None (fallback group voice
+      in non-interfaith-dialogue template), OR content HTML has multiple distinct teacher names in
+      .pn-byline. Interfaith dialogue template (uslf_group_article_ratio ~5%) is exempt.
+
+  pearl_news_topic_duplication_in_run:
+    description: "Two or more articles in one Pearl News cycle share the same topic"
+    detection: run_level_check
+    scope: pearl_news_run
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: scan all article_{id}.json files in the cycle output dir; collect topic values;
+      flag if any topic appears more than once. Exempt: explicitly flagged same-topic
+      two-perspectives runs (allow_topic_sharing=true in cycle manifest).
+
+  pearl_news_language_mismatch:
+    description: "Pearl News article language field does not match the teacher's assigned_language"
+    detection: config_vs_output_check
+    scope: article_vs_teacher_config
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON language field vs TEACHER_LANGUAGE[teacher_id] in
+      scripts/pearl_news/run_daily_news_cycle.py (or teacher_language_map.yaml).
+      Mismatch → teacher's CJK articles were generated in English or vice versa.
+
+  pearl_news_missing_layout_shell:
+    description: "Pearl News article content is missing the byline block (.pn-byline)"
+    detection: html_structure_check
+    scope: pearl_news_output
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON content field must contain class="pn-byline" with non-empty
+      teacher name. An article with only raw <h1>/<p> prose and no byline block fails.
+
+  pearl_news_missing_sidebar:
+    description: "Pearl News article content is missing the sidebar block (<aside class=\"pn-sidebar\">)"
+    detection: html_structure_check
+    scope: pearl_news_output
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON content field must contain <aside class="pn-sidebar">.
+      Article JSON must also have a non-empty sidebar object with teacher_name field.
+
+# Detection implementations live in phoenix_v4/quality/regression_museum/
+# Each failure_class has a detector: detect_<class_name>(book, **kwargs) -> list[Violation]
+# Runner: phoenix_v4/quality/regression_museum/runner.py
+# CI: .github/workflows/regression-museum-gate.yml

@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__sleep_anxiety__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__sleep_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__restless_mind
+  name: Quiet the Restless Mind — for Nurses
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Sleep Anxiety: Drowning in Demands (2)'
+subtitle: How Healthcare Rns Are Rewriting the Rules of Sleep Anxiety
+cover_tagline: Too much for too long, and now even sleep is one more thing.
+description:
+  short_blurb: After enough back-to-backs, the exhaustion stops feeling like tiredness
+    and starts feeling like a wall. This is a field guide for nurses on the kind of
+    sleep anxiety that comes from sheer overload — when there's so much on you that
+    your system shuts down instead of resting, and rest itself becomes one more demand
+    you can't meet.
+  long_description: 'There''s a specific kind of tired that sleep doesn''t touch.
+    You''ve worked too many shifts too close together. You''ve held too much — too
+    many patients, too many alarms, too many families, too many decisions that mattered.
+    And now you''re in bed and you can''t sleep, not because your mind is racing,
+    but because there''s simply too much, and your whole system has hit a point where
+    it can''t process any more of anything. Including rest.
+
+
+    This book is for the nurse who is past tired and into overload. Overwhelm isn''t
+    weakness and it isn''t a time-management problem you can route around with a better
+    schedule. It''s what happens when the load exceeds the capacity, shift after shift,
+    until the body stops being able to take in even the good thing it needs. You lie
+    down to sleep and it feels like one more task on a list that''s already too long.
+    The exhaustion is real, but the rest won''t come, because you''ve reached the
+    shutdown point.
+
+
+    The recognition: this is too much at once, and that is a real condition with a
+    real cause — not a flaw in your resilience. When you''re this overloaded, the
+    answer is not to do more, push harder, or ''just relax,'' because relaxing is
+    itself more input your system can''t take. Naming the overwhelm for what it is
+    — capacity exceeded, not character failed — is where the pressure starts to ease.
+
+
+    We go down into the overload instead of trying to power through it. You''ll learn
+    to recognize the shutdown point in your own body — the flatness, the can''t-even,
+    the way sleep feels like effort — and stop adding to the pile, including stopping
+    the demand that you should be sleeping by now. You let the system be as overloaded
+    as it is, without fighting it. That''s the descent. The integration is not a sudden
+    capacity to handle everything; it''s knowing where your shutdown point is and
+    stopping before it owns the night.
+
+
+    This won''t give you more bandwidth or teach you to carry more. It''s not a productivity
+    system, not a self-care regimen, not a list of boundaries to draw between med
+    passes. It will not make the workload smaller or promise you''ll bounce back by
+    morning. This is about recognizing the overwhelm clearly enough that you stop
+    treating rest as one more thing you''re failing to do.
+
+
+    You''ve absorbed more than any one person should, and you did it for people who
+    needed you. You''re allowed to be at capacity. You don''t have to perform rest
+    on top of everything else. Putting it down is allowed, even when it''s only for
+    the night.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - can't sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - sleep without medication
+  secondary:
+  - nurses
+  - sleep anxiety for nurses
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- Burnout (Emily & Amelia Nagoski) — names overwhelm as a completed-stress-cycle problem,
+  not a willpower one
+- Do Nothing (Celeste Headlee) — challenges the compulsion to treat rest as another
+  task to achieve
+- Real Self-Care (Pooja Lakshmin) — written by a physician, rejects optimization in
+  favor of naming what's actually too much
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

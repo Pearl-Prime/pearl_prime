@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "bundle_id": "stillness_ep001_016_seated_table",
+  "panel_id": "ep001_016",
+  "panel_type_id": "re_establish_seated_table",
+  "structural_template_id": "seated_table_scene",
+  "source_note": "stillness honest packet ep001_016 \u2014 conference room with tiny seated figure (checklist accepted establishing; structural contact uses seated_table_scene). Archetype sparse_establishing_wide maps to standing bridge; structural template chosen by visible seated contact, not by collapsing panel-type taxonomy.",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "asset_refs": {
+    "assembled_panel": "artifacts/qa/manga_reading_packets_2026-07-11/stillness_ep001_postmerge_honest/panels/ep001_016.png",
+    "panel_manifest": "artifacts/qa/manga_reading_packets_2026-07-11/stillness_ep001_postmerge_honest/panel_manifest.json"
+  },
+  "nodes": [
+    {
+      "node_id": "conference_seat",
+      "category": "support_surface",
+      "role": "seat_or_table",
+      "support_polygon_pct": [
+        [
+          44.0,
+          44.0
+        ],
+        [
+          56.0,
+          44.0
+        ],
+        [
+          57.5,
+          52.5
+        ],
+        [
+          42.5,
+          52.5
+        ]
+      ]
+    },
+    {
+      "node_id": "char_mira",
+      "category": "character",
+      "role": "primary_subject",
+      "contact_point_pct": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e_seated",
+      "relation": "seated_on",
+      "from_node": "char_mira",
+      "to_node": "conference_seat"
+    }
+  ],
+  "placements": [
+    {
+      "node_id": "char_mira",
+      "transform": {
+        "tx_pct": 50.0,
+        "ty_pct": 48.0,
+        "uniform_scale": 1.0,
+        "rotation_deg": 0.0
+      }
+    }
+  ]
+}

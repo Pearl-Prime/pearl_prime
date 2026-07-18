@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "panel_prompts",
+  "render_target": "1080x1920",
+  "prompts": [
+    {
+      "panel_id": "L0_f3bc5f4cc41f",
+      "prompt": "Wide establishing shot of Mira's kitchen. Small wooden table center-left. Window with gauze curtain (camera-left), dappled tree-leaf shadow on the cream wall. Houseplant (monstera) on windowsill. Wooden chair at the table. Counter and stove visible in background-right with the kettle. Warm cream + sage palette. Empty mug rack on wall. No people in scene.\n.\n\nLIGHTING: warm dawn light from camera-left and slightly above, soft window-diffused with gentle warm bounce on shadow side, color temperature ~3200K, slight atmospheric haze (dust motes catching light), high-key exposure with 200-250 brightness range.\n\nSTYLE: soft pen-and-ink linework, variable line weight 0.5-1.2px, warm uneven hand-inked aesthetic, not vector-perfect, soft watercolor wash with gentle 2-4px edge bleed, painterly continuity, no hard cel-shading, low tonal density, breathable negative space, no heavy hatching, no dense screentone, gentle shading, low contrast, value range 180-240 on light skin, no dramatic chiaroscuro.\n\nCOMPOSITION: leave generous empty space at upper-right third for character placement, lower-left third for kettle/cup placement of the frame for subject placement. table at lower-third, window upper-left with dappled light, monstera lower-left, sage accent on cabinet handles \n\nGENRE TRADITION: iyashikei watercolor register, painterly continuity, Yokohama Kaidashi Kiko aesthetic.\n\n\n\nPortrait orientation 1080x1920.",
+      "negative_prompt": "people, person, character, human, figure, named characters, faces, hands, body parts, phone in scene (phone is L3 close-object), multiple people, named characters, electronic devices except kettle, decorative clutter, text, words, letters, watermark, signature, signs, writing, low resolution, jpeg artifacts, blurry, bad anatomy, no speed lines, no dutch angles, no exaggerated reactions, no sweatdrops, no concentration lines, harsh contrast, busy composition, cluttered",
+      "beat_type": "micro",
+      "engine_routing": "qwen_image_no_pulid"
+    }
+  ]
+}

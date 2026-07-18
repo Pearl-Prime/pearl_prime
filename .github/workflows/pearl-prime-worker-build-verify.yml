@@ -1,0 +1,49 @@
+# Pearl Prime Worker — repo-owned build verify (wrangler dry-run).
+#
+# Complements the external Cloudflare Workers Builds GitHub check
+# (`Workers Builds: pearl-prime`). This workflow does NOT replace that check;
+# it proves the repo-owned worker contract still deploys from root after
+# dependency install.
+#
+# See docs/PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md.
+
+name: Pearl Prime Worker (verify)
+
+on:
+  pull_request:
+    paths:
+      - "cloudflare/pearl_prime_worker.js"
+      - "wrangler.jsonc"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/pearl-prime-worker-build-verify.yml"
+  push:
+    branches: [main]
+    paths:
+      - "cloudflare/pearl_prime_worker.js"
+      - "wrangler.jsonc"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/pearl-prime-worker-build-verify.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install wrangler (root manifest only)
+        run: npm ci
+
+      - name: Wrangler deploy dry-run
+        run: npm run build:worker

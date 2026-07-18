@@ -1,0 +1,170 @@
+# PILOT (wave2) — MUSIC-MODE manga (Tier-1 authored). One mode only: MUSIC. No teacher, no doctrine.
+# Genre: romance_josei_drama. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / manga_mode_vessels.yaml):
+# romance music-vessel = THE SHARED SONG. One tune passes between two people; who hums it, and when,
+# charts the whole romance. Nothing is taught, nothing is explained — the reader is made to FEEL the
+# walls come down. NEW genre×mode combo: wave1 romance was teacher-mode; this is romance×music.
+# Shell engine is ROMANCE-NATIVE: delay, gaze, proximity, relational asymmetry, confession pressure.
+# (Render gated, exactly like wave1.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: heart_balance_shojo__en_US__romance_josei_drama__series01
+catalog_title: "Worthy of the Window Seat"
+chapter_id: ep_001
+title: "Worthy of the Window Seat — Episode 1: Eight Bars, Unfinished"
+mode: music                           # XOR — never teacher
+manga_author: Hana Dewpath            # MUSICIAN-archetype EI author (per series plan SSOT)
+musician_id: hana_dewpath
+teacher_id: null                      # none — music-mode carries no doctrine
+brand_id: heart_balance_shojo
+genre: romance_josei_drama
+felt_topic: self_worth                # interior, FELT through who dares to be heard — never named
+locale: en_US
+available_locales: [en_US, ja_JP, ko_KR, zh_CN, zh_TW]
+
+# Music-mode 3-beat skeleton (the shared song charts the romance — open / mid / close):
+mode_beats:
+  opening_motif: page_1-3   (his eight bars, unfinished — hummed alone at the window seat; she answers only in pencil, only in secret)
+  mid_recurrence: page_4-5  (the phrase heard WHOLE for the first time — his hands, her pencil bars — and the margin duet begins)
+  closing_resolution: page_7-8 (she plays both halves aloud; he almost says it; the ALMOST holds — and she hums the tune in the open shop, alone, unhidden)
+
+main_characters:
+  - id: mio
+    name: Mio Tachibana
+    role: >-
+      protagonist, 26 — clerk at Marginalia, a secondhand sheet-music and book shop. Arranges
+      music by ear better than anyone who will ever be asked to; plays the shop's old upright
+      only after closing, lights off. Files other people's names all day. (Unstated, never
+      narrated as a lesson: she believes the best seats — and the credit lines — belong to
+      other people. Carried entirely by WHO gets heard, never by a caption naming it.)
+    visual_anchor: cardigan sleeves pushed to the elbow; a soft-grey pencil kept behind her right ear at all times; quick precise hands that go still when anyone watches them.
+  - id: ren
+    name: Ren Kuroda
+    role: >-
+      the love interest, 29 — a session pianist and composer with a name just famous enough to
+      be on a poster two streets away. Every Thursday he takes the shop's window seat and works
+      at a commission that has been stuck on the same eight bars for a month. Warm in a
+      distracted way; catastrophically unobservant about anything that is not sound.
+    visual_anchor: long fingers always ghost-playing on any flat surface; good coat worn wrong; fountain pen with a bent clip; hums with his jaw set when the music won't come.
+  - id: saki
+    name: Saki
+    role: >-
+      shop owner, 40s — Mio's employer and the chapter's comic pressure-valve. Sees everything,
+      says nothing (at maximum volume). Guards the lost-and-found drawer like a dragon who
+      approves of exactly one treasure in it.
+    visual_anchor: reading glasses pushed up into aggressive curls; feather duster wielded like a conductor's baton.
+  - id: the_window_seat
+    name: The Window Seat
+    role: >-
+      the recurring object — the bay-window bench, best light in the shop, facing the street.
+      By unspoken custom it belongs to paying regulars; by Mio's private law, never to staff.
+      The romance is charted by who sits in it, and the season ends when she does.
+
+scene_palette:
+  primary: rain-grey street light through the bay window; warm paper-and-lamp amber inside
+  secondary: after-closing blue dark (the only light Mio plays in)
+  accent: soft pencil-grey against ink-black (her bars vs his; the courtship is legible in graphite)
+  resolution_palette: streetlamps coming on through fogged glass, the seat warm (page 8 only)
+
+pages:
+  # ── OPENING MOTIF: eight bars, unfinished — hummed alone ───────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: proximity_setup, intent: "GENRE SHELL — josei romance; the hook is nearness about to become charged",
+         scene: "Rainy Thursday afternoon. Marginalia: narrow secondhand shop, shelves of yellowed sheet music, an old upright piano wedged between poetry and atlases. REN KURODA sits in the bay-window seat, manuscript on his knee, fountain pen capped, humming eight bars under his breath — and stopping, every time, on the same unresolved note. MIO TACHIBANA shelves returns two aisles away, close enough to hear. Interior caption (Mio, soft-border): 'Thursday. Four-oh-five. He always stops on the same bar.'"}
+      - {panel_id: ep001_002, beat_type: eye_lock, intent: "the gaze through the shelves — wanting, unauthorized",
+         scene: "Through a gap in the shelved spines: Mio's eye-line finds Ren's profile against the rain-lit glass. He hums the phrase again. Her hand, without permission from anywhere, is already pencilling the melody onto the receipt pad by the register — by ear, exact. SILENT except the hummed notes drifting as small hand-drawn notation across the panel gutter. Mood-tone: fine rain-streak gradient, one warm pool of lamp."}
+      - {panel_id: ep001_003, beat_type: delayed_beat, intent: "delay engine ignites — the phrase stops; she aches at the incompleteness",
+         scene: "The hum cuts off mid-phrase — same place, always. Ren drags both hands down his face. CU Mio at the register, pencil frozen over the receipt pad, the transcribed bars ending at the same cliff his did. Interior caption: 'Eight bars. He's been carrying them around for a month, unfinished.' Beat. 'I know how they end. I've known for three weeks.' Her pencil hovers — and she puts it behind her ear instead."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: interior_caption, intent: "RELATIONAL ASYMMETRY — who he is; who she has decided she is",
+         scene: "Street view: Ren leaving with his coat collar wrong, passing a concert-hall poster two doors down — his trio, his name, mid-size print. SAKI, at Mio's shoulder, stage-whispers: 'That one did the strings on that drama everyone cried at. Sits in MY window every Thursday like it's church.' Interior caption (Mio, watching him go): 'People with posters get listened to.' Beat. 'People like me alphabetize what they leave behind.'"}
+      - {panel_id: ep001_005, beat_type: chibi_release, intent: "comic pressure-valve (shojo requires the release every few pages)",
+         scene: "Chibi/SD panel: tiny Saki brandishing the feather duster like a baton — 'YOU could play him something! You play like a haunted music box!' Tiny Mio, sprouting three panic sweat-drops, shoving sheet music onto shelves at superhuman speed: 'I play for the SHELVES. The shelves don't have OPINIONS.'"}
+      - {panel_id: ep001_006, beat_type: proximity_setup, intent: "her secret register — the after-hours self, established (proximity 0)",
+         scene: "After closing. Blue dark, shutters half down, rain gone to drizzle. Mio alone at the old upright, lights off, playing something quick and lovely with the softness of a person who has practiced not being heard. Wide shot: the empty window seat holds the last of the streetlight. SILENT panel — notation drifts up like steam. Interior caption: 'Closed means empty. Empty means safe.'"}
+
+  # ── The manuscript changes hands (the tune passes for the first time) ──────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: proximity_setup, intent: "the forgotten manuscript — his half of the song, left on the seat",
+         scene: "Next Thursday, closing time. The window seat, empty — except: his manuscript, forgotten, pages fanned. Title in his ink: 'BRIDGE — (unfinished).' Mio lifts it like it might be hot. The eight bars end at the cliff she knows. Saki, coat on, in the doorway: 'Lost-and-found drawer. Or...' — meaningful pause the size of a bus — '...the drawer.'"}
+      - {panel_id: ep001_008, beat_type: emotional_peak, intent: "she answers him the only way she can afford — in pencil, in secret",
+         scene: "Night shop, blue dark. Mio at the upright with HIS manuscript on the stand, playing his eight bars — then, without stopping, four more. Hers. The answer. CU: her pencil comes down from behind her ear and writes the four bars into the margin, small and soft-grey beneath his ink. Mood-tone: sparse sparkle, held breath. Interior caption: 'Just so they aren't... falling. Just so the phrase gets to land somewhere.'"}
+      - {panel_id: ep001_009, beat_type: almost_touch, intent: "instant regret — deniability chosen over authorship",
+         scene: "Panic close-up: Mio staring at what she's done, pencil clutched in both hands like evidence. She half-reaches for the eraser — stops — and instead slides the manuscript into the lost-and-found drawer and shuts it, leaning on it, breathing. Interior caption: 'Pencil erases. If he hates it, it was never anyone.'"}
+
+  # ── MID-RECURRENCE: the phrase heard WHOLE — and the margin duet begins ────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: emotional_peak, intent: "MID-RECURRENCE — the shared song heard complete for the first time",
+         scene: "Thursday. Ren at the drawer, retrieved manuscript in hand — stopped dead in the middle of the shop. He reads the pencilled bars. Reads them again. Then he crosses to the old upright, sits, uninvited, and PLAYS: his eight bars, her four — the phrase landing whole, for the first time, out loud, in the amber light. Wide panel; the whole shop turned to face the music; notation streams over the shelves. Rain stopped outside."}
+      - {panel_id: ep001_011, beat_type: eye_lock, intent: "gaze — the search; the delay held by one held breath",
+         scene: "Ren stands so fast the piano stool barks. 'Who finished this?' He scans the shop — one browsing regular, Saki mid-dusting, Mio frozen holding a stack of Chopin like a shield. His gaze sweeps the room, passes over Mio... catches... half a beat too long... and moves on. Reaction shots stacked: Saki (delighted, silent), Mio (cardiac arrest, silent), regular (oblivious): 'Maybe it always went like that?'"}
+      - {panel_id: ep001_012, beat_type: delayed_beat, intent: "she lets the moment pass — the misread signal seals the delay",
+         scene: "Ren, to the room at large, holding the manuscript up: 'Whoever it was — they hear where things are supposed to go.' Mio, shelving Chopin with terrible concentration, says nothing. CU her free hand, behind the shelf where no one sees: pressed flat over her sternum, holding something in. Interior caption: 'Say it. Three words. It — was — me.' Beat. Small: 'The Chopin got very heavy.'"}
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_013, beat_type: proximity_setup, intent: "the margin courtship — the tune passes back and forth (proximity 2, rising)",
+         scene: "Montage across a strip of panels, weeks passing in the drawer: the manuscript grows. His ink: four new bars and a margin note — 'Your move.' Her pencil: a correction to his voicing, prim and merciless. His ink: the children's-song quote, inverted, as a joke. Her pencil: the joke transposed into something suddenly, accidentally beautiful. Two handwritings learning each other's rhythm. No names anywhere."}
+      - {panel_id: ep001_014, beat_type: almost_touch, intent: "ALMOST-TOUCH — the drawer handle; skin; retreat",
+         scene: "Thursday. Both reach for the lost-and-found drawer at the same moment — her opening it to plant the manuscript, him arriving early to collect it. Fingers brush on the brass handle. Freeze-frame; mood-tone bursts (flowers, involuntary). Both retract as if scalded. Ren, formal, catastrophically blind: 'Sorry — you must be the one who passes it along. Thank you. For being the courier.' CU Mio's face doing four things at once. Interior caption: 'The courier.' Beat. 'Right.'"}
+      - {panel_id: ep001_015, beat_type: chibi_release, intent: "comic release + the asymmetry twisted tighter",
+         scene: "Chibi panel: tiny Ren earnestly interrogating tiny Mio across the counter — 'What are they LIKE? Do they play professionally? Are they OLD?' — while tiny Saki in the background mouths 'THE COURIER' and mimes flipping a table. Tiny Mio, dead-eyed, stamping receipts: 'They're... shy.'"}
+
+  # ── Confession pressure: the premiere, the front row, the named seat ───────
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_016, beat_type: emotional_peak, intent: "CONFESSION PRESSURE — the stakes get a date and a seat",
+         scene: "Ren at the window seat, manuscript squared on his knee, unusually still. To Mio, restocking nearby: 'The commission premieres in three weeks. It's finished. It's the best thing I've made and half of it is in pencil.' He looks at the notation, not at her. 'Ask them to co-sign it. Their name next to mine, on the program.' Beat panel, rain starting again on the glass. 'And ask them to take the seat I'm keeping in the front row. Whoever hears the end of an unfinished thing like that — I want them where I can see them.'"}
+      - {panel_id: ep001_017, beat_type: interior_caption, intent: "the interior stakes — wanting the seat vs the old private law (never named as a lesson)",
+         scene: "CU Mio, shelf steadying her. Through the window behind Ren: the concert-hall poster down the street, his name in print. Interior caption, fragmenting the way she only does near him: 'A name on a program. A kept seat. In the light, where the whole hall—' The caption cuts off unfinished, exactly like his eight bars used to. SILENT beat panel: her pencil, behind her ear, untouched."}
+      - {panel_id: ep001_018, beat_type: delayed_beat, intent: "she deflects — delay held; the pressure now has a clock",
+         scene: "Mio, bright and false, aligning a shelf that is already aligned: 'I'll pass it along.' Ren nods, disappointed in a direction he can't locate, and leaves the manuscript in the drawer on his way out. Saki watches him go, then levels the feather duster at Mio like a rapier. Saki: 'Three weeks.' Mio, to the shelf: 'I KNOW.'"}
+
+  # ── CLOSING RESOLUTION: both halves aloud — and the ALMOST ─────────────────
+  - page_id: ep001_p07
+    panels:
+      - {panel_id: ep001_019, beat_type: emotional_peak, intent: "CLOSING BEAT BEGINS — she plays the whole duet aloud, believing herself unheard",
+         scene: "Night. Rain proper again — first-page bookend. Shop dark except the streetlamp through the bay window. Mio at the upright plays the finished piece ENTIRE — his hands' part and hers — full voice, nothing held, the way it was written to go. Wide gorgeous panel: notation flooding the dark shop like weather. For once she does not play quietly."}
+      - {panel_id: ep001_020, beat_type: eye_lock, intent: "the near-reveal — he is in the doorway (proximity 4)",
+         scene: "The last chord decays. Sound of the door: REN in the doorway, rain-wet, umbrella not even opened, absolutely still — he has been there for all of it. Eye-lock across the dark shop; the streetlamp lays one line of light between them like a drawn bow. SILENT panel. Mood-tone: everything stops sparkling; just the two of them and the rain."}
+      - {panel_id: ep001_021, beat_type: almost_touch, intent: "proximity 5 — the bench, the pencil, the sentence that almost lands",
+         scene: "Ren crosses the shop without hurry and sits beside her on the piano bench — close, shoulder-warm, the first time they have ever shared a seat. He looks at her hands on the keys. Then, gently, he lifts the soft-grey pencil from behind her ear and holds it up between them: the exact grey of every margin. Quiet, half a smile breaking: 'It was—'"}
+  - page_id: ep001_p08
+    panels:
+      - {panel_id: ep001_022, beat_type: delayed_beat, intent: "THE ALMOST — the genre's ending convention; the confession interrupted, not refused",
+         scene: "CRASH — the door: SAKI barging back in shaking a dead umbrella ('It FOLDED on me, the TRAITOR—') at the same instant Ren's phone erupts: rehearsal call. The moment shatters into ordinary noise. Ren stands, backing toward the door, coat wrong, grinning like sunrise, holding up the manuscript: 'Thursday.' Mio, still on the bench, pencil-less, breathless: 'Thursday.'"}
+      - {panel_id: ep001_023, beat_type: emotional_peak, intent: "title image lands — she takes the window seat (the tune, hummed alone, unhidden)",
+         scene: "Alone. Streetlamps on, glass fogged with the day's warmth. Mio crosses the shop — hesitates one breath by unspoken law — and sits, for the first time, ON THE WINDOW SEAT, manuscript on her knees, facing the lit street where anyone could look in. She hums the shared song, aloud, in the open shop. Nobody gave permission. Final interior caption, small, steady: 'Next Thursday.' Beat. 'My move.'"}
+
+craft_notes: >-
+  VESSEL (music-mode): THE SHARED SONG — cited from config/manga/manga_mode_vessels.yaml
+  romance_josei_drama.music ("one tune passes between two people; who hums it, when, charts the
+  romance"). Musician EI author carries the mode; teacher_id null; no doctrine line anywhere.
+  GENRE BIBLE: docs/research/manga_craft/shojo_romance.md — engine compliance: proximity-beat
+  chapter hook (§3), ALMOST chapter ending (§3), interior-caption heroine voice (§4), chibi
+  release every 2-3 pages (§6.6), heroine with a life beyond the romance (§6.5 — she arranges,
+  she works, she has Saki), love interest interiority windowed not withheld (§6.2 — his stillness
+  on p6), proximity integer rising 0→5 across the chapter (§8).
+  PACING CONTRACT: config/manga/manga_pacing_by_genre.yaml romance — silent-panel ratio in range
+  (5 fully/near-silent of 23), reaction-shot frequency high (p4), page_turn_triggers used:
+  almost_confession (p7-8), gaze_exchange (p4, p7), misread_signal (p5 'the courier').
+  SHELL TRACEABILITY: reader fantasy = being SEEN and chosen by the person whose world outranks
+  yours; escalation engine = the margin duet (the tune passing hand to hand) + a premiere clock;
+  scene pleasures = pencil-vs-ink courtship, drawer-handle almost-touch, doorway eye-lock,
+  bench proximity, the claimed seat. GENERIC FAILURE MODE AVOIDED: no therapeutic monologue,
+  no partner-as-teacher (that was wave1's romance×teacher combo), no 'rest/soften' cadence —
+  the interior (self_worth) is carried only by who plays in the dark vs who hums in the open,
+  pencil (deniable) vs ink (named), and who takes the visible seat. Remove the topic label and
+  this is still a delay-engine music-shop romance. Cold-read gate: emotion (the almost) arrives
+  before any theme can be articulated; no caption ever names worth, deserving, or anxiety.
+
+wrapper_note: >-
+  Music-mode only. The shared song IS the relationship's chart: hummed alone (his, p1) → answered
+  in secret pencil (hers, p3) → played whole by him (p4) → passed hand to hand in margins (p5) →
+  played whole by her, overheard (p7) → hummed alone, unhidden, in the open (hers, p8 — same tune,
+  different woman). No teacher, no lesson, no line of doctrine; if this were teacher-mode it would
+  need a beloved-who-models vessel and none exists here. Interior topic (self-worth) never appears
+  on the page — it is felt as the migration of her music from the dark shop to the lit window.

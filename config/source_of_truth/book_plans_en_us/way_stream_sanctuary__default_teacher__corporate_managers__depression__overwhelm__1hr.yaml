@@ -1,0 +1,100 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__depression__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__through_loss__1hr
+  name: Through the Low Places — for Managers (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Weight Without a Name: When Everything Is Too Much'
+subtitle: How Corporate Managers Are Rewriting the Rules of Depression
+cover_tagline: Twelve open tabs and one of them is you.
+description:
+  short_blurb: The inputs never stop and somewhere underneath the flood you've gone
+    numb. Slack, the dashboards, the one-on-ones, the escalations, all of it landing
+    at once until you stopped feeling any of it. This is one hour of putting the firehose
+    down.
+  long_description: 'It''s 4:50 and you haven''t done the thing you sat down to do
+    at 9. You''ve been busy every minute, eaten by Slack threads and calendar holds
+    and the escalation that jumped the queue, and now the day is gone and there''s
+    a low static behind your eyes that doesn''t switch off when you close the laptop.
+    Everything is too much, and it''s been too much for so long that you''ve stopped
+    registering it as a feeling and started treating it as the weather, just the climate
+    you manage in now.
+
+
+    This hour is for the manager drowning in inputs. The one with the team depending
+    on you, the leadership depending on you, the partner at home wondering when you''ll
+    actually arrive instead of just walking in the door. You''re not failing. You''re
+    flooded. There is more coming at you than any one nervous system was built to
+    hold, and the flatness you feel underneath isn''t laziness, it''s a circuit that
+    tripped because the load never once let up long enough to reset.
+
+
+    Waystream won''t hand you a better task manager or tell you to wake up at five
+    to win the morning. We start by naming what''s true: too much is arriving at once,
+    and somewhere under the volume you went quiet to survive it. Then you go down
+    underneath the noise, one layer at a time, until you find the version of you that''s
+    still in there, the one that existed before the queue did. You stop trying to
+    clear the backlog and start letting it exist without holding all of it in your
+    chest. For one hour you put the firehose down and feel your own weight again instead
+    of everyone else''s.
+
+
+    This book will not promise inbox zero or a calmer Q3. It will not tell you that
+    the right system would fix this, or that you''d cope if you just delegated better.
+    The overload is real and it isn''t a character flaw, and no amount of color-coding
+    was ever going to be the answer. What this gives you is a way to recognize the
+    flood for what it is, drop down beneath it instead of surfing it, and come back
+    up able to feel the ground again, even with the tabs still open.
+
+
+    You are not the queue. You''re allowed to be a person who is carrying too much,
+    and to set part of it down for an hour without the whole thing falling over the
+    second you stop bracing it.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - managers
+  - depression for managers
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Four Thousand Weeks (Oliver Burkeman) — dismantles the fantasy that you can ever
+  get on top of it all
+- Burnout (Emily Nagoski & Amelia Nagoski) — maps how chronic overload flattens you
+  into numbness
+- Why Has Nobody Told Me This Before? (Julie Smith) — plain tools for the nervous
+  system when the load won't stop
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

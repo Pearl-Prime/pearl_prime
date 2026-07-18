@@ -1,0 +1,141 @@
+{
+  "trace_kind": "epub_derived_assembly_trace",
+  "honesty_note": "Full spine render-dir assembly_trace was not retained beside these EPUBs; this trace is reconstructed from the landed EPUB bytes + wave10 matrix/closeout provenance. Sufficient for blind-read prep; not a substitute for a live render-dir.",
+  "cell": {
+    "persona": "corporate_managers",
+    "topic": "anxiety",
+    "engine": "watcher",
+    "brand": "way_stream_sanctuary",
+    "runtime": "standard_book"
+  },
+  "queue_evidence": {
+    "wave10_matrix_row": {
+      "book_id": "way_stream_sanctuary__corporate_managers__anxiety__watcher",
+      "persona": "corporate_managers",
+      "topic": "anxiety",
+      "engine": "watcher",
+      "runtime": "standard_book",
+      "render_status": "PASS",
+      "register_outcome": "register_PASS",
+      "epub_outcome": "epub_ok",
+      "epub_path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__corporate_managers__anxiety__watcher.epub",
+      "epub_bytes": "45818",
+      "failing_gate": "none",
+      "notes": "spine+production; coverless; landed via #4486 merge"
+    },
+    "wave10_matrix_path": "artifacts/qa/WAYSTREAM_EPUB_WAVE10_MATRIX_2026-07-10.tsv",
+    "wave10_closeout_path": "artifacts/qa/WAYSTREAM_EPUB_WAVE10_CLOSEOUT_2026-07-10.md",
+    "land_commit": "321379f8f8efa5359b1a2af1ff6919cfc48011d4",
+    "land_pr": "#4486 / closeout #5510"
+  },
+  "epub": {
+    "path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__corporate_managers__anxiety__watcher.epub",
+    "bytes": 45818,
+    "sha256": "679ecdf5a60d412df83195d3efe8559b2fdb7c90b42c31fcfa5f247f35df1281"
+  },
+  "extracted_book": {
+    "path": "book.txt",
+    "bytes": 88499,
+    "sha256": "b278d90586d8b01beab53c51d5dbe8dd8b24cc5d7c602a50e10d65984109e0f5",
+    "word_count": 15002,
+    "chapter_count": 12
+  },
+  "chapters": [
+    {
+      "index": 1,
+      "source_file": "EPUB/chapter_01.xhtml",
+      "title": "Chapter 1",
+      "chars": 12197,
+      "words": 2138
+    },
+    {
+      "index": 2,
+      "source_file": "EPUB/chapter_02.xhtml",
+      "title": "Chapter 2",
+      "chars": 7784,
+      "words": 1437
+    },
+    {
+      "index": 3,
+      "source_file": "EPUB/chapter_03.xhtml",
+      "title": "Chapter 3",
+      "chars": 6781,
+      "words": 1200
+    },
+    {
+      "index": 4,
+      "source_file": "EPUB/chapter_04.xhtml",
+      "title": "Chapter 4",
+      "chars": 5761,
+      "words": 941
+    },
+    {
+      "index": 5,
+      "source_file": "EPUB/chapter_05.xhtml",
+      "title": "Chapter 5",
+      "chars": 7765,
+      "words": 1332
+    },
+    {
+      "index": 6,
+      "source_file": "EPUB/chapter_06.xhtml",
+      "title": "Chapter 6",
+      "chars": 9383,
+      "words": 1565
+    },
+    {
+      "index": 7,
+      "source_file": "EPUB/chapter_07.xhtml",
+      "title": "Chapter 7",
+      "chars": 7031,
+      "words": 1144
+    },
+    {
+      "index": 8,
+      "source_file": "EPUB/chapter_08.xhtml",
+      "title": "Chapter 8",
+      "chars": 6176,
+      "words": 1046
+    },
+    {
+      "index": 9,
+      "source_file": "EPUB/chapter_09.xhtml",
+      "title": "Chapter 9",
+      "chars": 6021,
+      "words": 968
+    },
+    {
+      "index": 10,
+      "source_file": "EPUB/chapter_10.xhtml",
+      "title": "Chapter 10",
+      "chars": 5228,
+      "words": 881
+    },
+    {
+      "index": 11,
+      "source_file": "EPUB/chapter_11.xhtml",
+      "title": "Chapter 11",
+      "chars": 8955,
+      "words": 1468
+    },
+    {
+      "index": 12,
+      "source_file": "EPUB/chapter_12.xhtml",
+      "title": "Chapter 12",
+      "chars": 4840,
+      "words": 810
+    }
+  ],
+  "opf_meta": {
+    "dc_title": "Anxiety Relief: The Observer's Mind: The Witnessing Practice",
+    "dc_creator": "Mara Okonkwo",
+    "dc_identifier": "phoenix-omega-5957d5caef8704d4"
+  },
+  "pipeline_claim_from_matrix": {
+    "render_status": "PASS",
+    "register_outcome": "register_PASS",
+    "epub_outcome": "epub_ok",
+    "notes": "spine+production; coverless; landed via #4486 merge"
+  },
+  "generated_at": "2026-07-10T10:30:41Z"
+}

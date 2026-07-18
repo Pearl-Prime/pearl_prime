@@ -1,0 +1,111 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__financial_anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__steady_ground__1hr
+  name: Steady Ground — for Founders (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Number in Your Head: Breaking the Thought Loop'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Financial Anxiety for Entrepreneurs (Breaking the Thought Loop)
+cover_tagline: One glance at the burn rate, and twenty minutes later you've mentally
+  laid off the whole team.
+description:
+  short_blurb: It starts with one money thought and ends with the company bankrupt,
+    your reputation gone, and you explaining it all to everyone who believed in you.
+    This one-hour reset is for the founder whose financial worry detonates into catastrophe
+    in seconds. No affirmations. Just an hour learning to feel the loop start before
+    it takes the whole night.
+  long_description: 'It begins with one number. The burn looks a little high this
+    month — that''s all, just a fact on a screen. But your mind doesn''t leave it
+    as a fact. Within seconds you''re three quarters out: the round falls through,
+    you can''t make payroll, the team finds out, the investors find out, your name
+    becomes the cautionary story people tell at dinners you''re not invited to, and
+    you''re already rehearsing the apology to everyone who ever believed in you. None
+    of it has happened. You''re sitting in a chair in a quiet room. But your body
+    is responding like the worst already arrived, and just like that, the night is
+    gone.
+
+
+    This hour is for the founder whose money anxiety doesn''t stay still — it spirals.
+    The one who can turn a single Stripe dip into a fully-imagined collapse before
+    the coffee''s even cold. The one who lies awake at 3am litigating a bankruptcy
+    that exists nowhere but inside their own head. You''re not catastrophizing because
+    you''re weak or dramatic; you''re doing it because the stakes are genuinely real
+    and your mind, trying its hardest to protect you, sprints to the end of every
+    worst case and then loops straight back to run it again. One thought becomes a
+    thousand, and you''re trapped inside all of them at once.
+
+
+    First you name the spiral as a spiral — a thought loop, not a forecast; a mechanism,
+    not a message about what''s actually going to happen. Then you go down into it
+    instead of arguing with it — you watch the loop start, feel the exact pull of
+    the first catastrophic jump, and stop trying to win the debate with a runaway
+    mind that always has one more disaster loaded and ready. You don''t out-reason
+    a spiral; you learn its shape from the inside, the way you''d learn a recurring
+    weather pattern. And once you can feel the loop beginning — that precise half-second
+    before one number becomes a thousand thoughts — something quietly shifts. You
+    are no longer only the person it happens to.
+
+
+    This will not give you affirmations to chant or a worst-case spreadsheet to ''prove''
+    the fear wrong — the spiral eats reassurance and comes back hungrier. It won''t
+    promise the catastrophic thoughts stop arriving. They may always arrive. That
+    was never the part you could control.
+
+
+    What you get is sixty minutes of meeting the loop at its starting line instead
+    of three exits down the highway. Where the first jump is felt and named rather
+    than ridden all the way to bankruptcy. The burn rate is still what it is, and
+    you''ll deal with it tomorrow with a clearer head. For one hour, you learn the
+    one move the spiral can''t survive: catching it as it begins, and choosing not
+    to climb aboard. The thoughts can come. You don''t have to follow them all the
+    way down.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - founders
+  - money anxiety for founders
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- Unwinding Anxiety (Brewer) — the neuroscience of worry loops and how to interrupt
+  the habit
+- Don't Believe Everything You Think (Nguyen) — secular take on the runaway thought
+  spiral
+- The Psychology of Money (Housel) — why financial fear hijacks reasoning and what
+  steadies it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

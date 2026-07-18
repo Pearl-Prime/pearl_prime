@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__sleep_anxiety__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__sleep_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__restless_mind
+  name: Quiet the Restless Mind — for Young Professionals
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The 3am Mind: Breaking the Thought Loop'
+subtitle: The Overthinking Spiral — Sleep Anxiety for Gen Z Professionals (The Overthinking
+  Spiral)
+cover_tagline: One thought at midnight. By 2 a.m. it's a thousand and you're still
+  awake.
+description:
+  short_blurb: 'It starts with one thing in the dark — a worry, a memory, a what-if
+    — and by the time the clock reads 3 a.m. it''s split into a thousand and dragged
+    your whole life down with it. This is a field guide to the nighttime spiral: how
+    one thought becomes a loop you can''t sleep through, and how to step off it in
+    the dark.'
+  long_description: 'It''s one thought at first. Just one — something you said in
+    a meeting, a bill you forgot, a what-if about next week. But it''s dark and quiet
+    and there''s nothing left to distract you, so the one thought splits. Then it
+    splits again. By 3 a.m. you''ve traveled from a single worry through your career,
+    your relationships, your health, and a detailed future in which it all comes apart
+    — and you''re wide, sickeningly awake, watching yourself do it and completely
+    unable to stop.
+
+
+    This book is for the young professional who lies down exhausted and then gets
+    pulled, link by link, into a loop that refuses to let them sleep. The nighttime
+    version of the spiral is its own particular hell: no daylight to break it, no
+    task to interrupt it, no one to talk you down — just you and a mind handing each
+    thought off to a worse one in the dark. You''re not choosing this and you''re
+    not catastrophizing on purpose. You''re caught in a loop that the silence makes
+    faster and the exhaustion makes more convincing, until 3 a.m. logic feels like
+    the only logic there is.
+
+
+    Which is why the work begins at the hook, not the wreckage. You learn to feel
+    the exact catch — the jump from "I forgot to reply" to "and my whole life is quietly
+    unraveling" — and to name it as a loop while you''re inside it, instead of piecing
+    it together the next morning. From there, the counterintuitive part: you stop
+    thrashing to escape, because fighting a 3 a.m. loop only feeds it speed and wakes
+    you further. You practice letting the thoughts keep coming without chasing each
+    one to its catastrophe, feeling the pull of the next link and not grabbing it,
+    lying in the dark while the loop spins without being flung off the edge of it.
+    The loop won''t stop on command. But you can stop being dragged behind it through
+    the whole night.
+
+
+    This is plain, secular, no-nonsense writing for the real 3 a.m. your brain does
+    this to you — not a daytime theory of calm. No sleep-hygiene checklist. No "empty
+    your mind before bed," because you can''t, and the instruction only makes it louder.
+    No promise of a single quiet, single-threaded thought between here and sunrise.
+
+
+    What it won''t do is sell you a technique to switch your brain off at night or
+    optimize your way to a thought-free pillow. The goal was never a silent mind.
+    The goal is to recognize the nighttime loop for exactly what it is — a loop, not
+    a verdict the dark has handed down about your life — and to step off it, so the
+    spiral stops quietly costing you whole nights. You don''t have to follow the thought
+    down at 3 a.m. You can let it spin and stay right where you are, in your bed,
+    until morning.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - can't sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - sleep without medication
+  secondary:
+  - young professionals
+  - sleep anxiety for young professionals
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ravi_chandra
+comp_titles:
+- Chatter (Ethan Kross) — the looping inner voice and proven ways to quiet the cycle
+- Hello Sleep (Jade Wu) — an anti-perfectionist, science-based path through the nights
+  your mind won't stop
+- The Happiness Trap (Russ Harris) — why struggling against your thoughts feeds them,
+  and what to do instead
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

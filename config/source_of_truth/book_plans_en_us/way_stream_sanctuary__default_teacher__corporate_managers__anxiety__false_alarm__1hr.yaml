@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__anxiety__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__calm_alarm__1hr
+  name: Calm the Alarm — for Managers (One-Hour)
+installment_number: 2
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Anxiety Relief: The False Alarm Response'
+subtitle: When Fear Lies to You
+cover_tagline: Your body thinks the Slack message is a tiger. It isn't.
+description:
+  short_blurb: A subject line goes cold, a meeting gets moved with no reason, and
+    your whole system floods like something is actually wrong. This is a one-hour
+    reset for the manager whose alarm fires when there's no real danger. You'll learn
+    to read the signal instead of obeying it.
+  long_description: 'Your manager sends "got a sec?" with no context. Your stomach
+    drops. Your heart picks up, your thoughts sprint to worst-case, and for the next
+    forty minutes your body runs like you''re under threat, over a calendar invite.
+
+
+    This book is for the manager whose alarm system is louder than the actual stakes.
+    You''re responsible for outcomes, people, and a hundred small fires a day, and
+    somewhere along the way your nervous system started treating a delayed reply,
+    a quiet board member, or an unexpected one-on-one as genuine danger. The signal
+    is real. What it''s pointing at usually isn''t.
+
+
+    It makes a brutal kind of sense. When you''re accountable for things that can
+    actually go wrong, your brain learns to scan for the wrong thing early, and being
+    a half-step ahead of trouble is most of what good management feels like from the
+    inside. But a system tuned that high stops distinguishing between a real problem
+    and an ambiguous one. A cool email and an actual crisis produce the same flood,
+    so you spend the surge of a five-alarm fire on a meeting that got moved because
+    someone had a dentist appointment.
+
+
+    In the next hour we don''t try to talk you out of it. First, recognition: you
+    learn the specific shape of your own false alarm, the chest, the jaw, the looping
+    "what did I do," so you can name it the second it fires. Then descent. Instead
+    of immediately reassuring yourself or hunting for evidence that everything''s
+    fine, you go down and feel the alarm without acting on it, long enough to learn
+    it''s a wave, not a verdict. Then integration: you walk back into the cold subject
+    line and the moved meeting able to feel the surge and still read the room clearly,
+    because a body on alert is a bad analyst.
+
+
+    This will not promise a calm nervous system by Friday. It will not optimize your
+    stress response or hand you a breathing protocol that makes you unflappable in
+    every escalation. There''s no morning routine here. The alarm is wired into you
+    for a reason and it isn''t leaving.
+
+
+    What it gives you is the gap. Between the surge and the spiral, between "my body
+    says danger" and "there is actually danger," there''s a space, and in that space
+    you stop letting a false alarm run your afternoon. You learn that the signal misreads
+    ambiguity as threat, and that you can be flooded and still not believe it.
+
+
+    You don''t have to fix your alarm to stop being run by it. You just have to learn
+    what it''s actually saying. Start with the next "got a sec?"'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - managers
+  - anxiety for managers
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
+comp_titles:
+- When the Body Says No (Gabor Maté) — secular account of how the stress signal misfires
+  under chronic pressure
+- Burnout (Emily Nagoski & Amelia Nagoski) — practical, non-woo work on completing
+  the stress cycle in the body
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the science of a threat response
+  firing when there's no real threat
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

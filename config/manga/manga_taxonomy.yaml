@@ -1,0 +1,903 @@
+version: 1
+last_updated: 2026-04-19
+reconciliation_status: verified_2026-04-19
+purpose: >-
+  Canonical taxonomy for manga-oriented catalog planning, generation, QA, and
+  adaptation in Phoenix Omega. This file defines market demos, genre families,
+  subgenres, emotional engines, serialization engines, visual grammars, reader
+  promises, and adaptation targets so manga is treated as a native story system
+  rather than a surface art style.
+
+market_demos:
+  - id: shonen
+    label: Shonen
+    default_reader_drives:
+      - aspiration
+      - rivalry
+      - momentum
+      - belonging
+    notes: >-
+      Usually youth-facing and momentum-driven, but should not be reduced to
+      action only. Can include sports, comedy, mystery, and emotional growth.
+
+  - id: shojo
+    label: Shojo
+    default_reader_drives:
+      - longing
+      - tenderness
+      - recognition
+      - emotional_becoming
+    notes: >-
+      Often relationship-centered and emotionally sensitive. Requires strong
+      support for restraint, social signaling, and softness as narrative force.
+
+  - id: seinen
+    label: Seinen
+    default_reader_drives:
+      - tension
+      - complexity
+      - obsession
+      - reflection
+    notes: >-
+      Adult-targeted umbrella spanning thriller, realism, psychological drama,
+      workplace conflict, philosophy, horror, and mature genre hybrids.
+
+  - id: josei
+    label: Josei
+    default_reader_drives:
+      - emotional_truth
+      - intimacy
+      - realism
+      - identity_rebuild
+    notes: >-
+      Adult-targeted relational and life-stage storytelling. Should not be
+      flattened into generic romance. Often depends on subtle social and
+      emotional texture.
+
+  - id: kodomo
+    label: Kodomo
+    default_reader_drives:
+      - play
+      - clarity
+      - curiosity
+      - warmth
+    notes: >-
+      Child-facing manga with strong clarity, simple emotional readability, and
+      playful pacing.
+
+genre_families:
+  - id: battle
+    label: Battle
+    ite_profile_ref: shonen  # primary match; seinen also applicable for adult battle titles
+    common_demos: [shonen, seinen]
+    default_emotional_engines: [aspiration, rivalry, conviction]
+    default_serialization_engines: [cliffhanger_escalation, tournament_ladder, quest_progression]
+    default_visual_grammars: [kinetic_action, impact_contrast]
+
+  - id: romance
+    label: Romance
+    ite_profile_ref: webtoon_romance  # closest match; shojo also applicable for print romance
+    common_demos: [shojo, josei, seinen]
+    default_emotional_engines: [longing, tenderness, emotional_recognition]
+    default_serialization_engines: [slow_burn_relationship, emotional_misread_chain]
+    default_visual_grammars: [decorative_romance, intimate_realism]
+
+  - id: slice_of_life
+    label: Slice of Life
+    ite_profile_ref: slice_of_life
+    common_demos: [shojo, josei, seinen, kodomo]
+    default_emotional_engines: [restoration, quiet_recognition, warmth]
+    default_serialization_engines: [ritual_daily_life, episodic_comfort]
+    default_visual_grammars: [sparse_atmosphere, everyday_warmth]
+
+  - id: horror
+    label: Horror
+    ite_profile_ref: horror  # direct match in genre_ite_profiles.yaml
+    common_demos: [seinen, shonen, shojo]
+    default_emotional_engines: [dread, obsession, helplessness]
+    default_serialization_engines: [mystery_reveal_chain, dread_escalation]
+    default_visual_grammars: [dread_contrast, body_horror_expressionism]
+
+  - id: mystery
+    label: Mystery
+    ite_profile_ref: mystery
+    common_demos: [seinen, shonen, josei]
+    default_emotional_engines: [curiosity, tension, suspicion]
+    default_serialization_engines: [mystery_reveal_chain, procedural_case_loop]
+    default_visual_grammars: [grounded_realism, clue_focus]
+
+  - id: sports
+    label: Sports
+    ite_profile_ref: sports  # direct match in genre_ite_profiles.yaml
+    common_demos: [shonen, seinen, shojo]
+    default_emotional_engines: [rivalry, aspiration, team_belonging]
+    default_serialization_engines: [tournament_ladder, training_payoff_cycle]
+    default_visual_grammars: [sports_motion_clarity, kinetic_action]
+
+  - id: fantasy_adventure
+    label: Fantasy Adventure
+    ite_profile_ref: isekai  # closest match (isekai covers portal/world-jump fantasy)
+    common_demos: [shonen, shojo, seinen]
+    default_emotional_engines: [wonder, aspiration, quest_bonding]
+    default_serialization_engines: [quest_progression, ensemble_rotation]
+    default_visual_grammars: [ornate_fantasy, kinetic_action]
+
+  - id: workplace
+    label: Workplace
+    ite_profile_ref: workplace
+    common_demos: [josei, seinen]
+    default_emotional_engines: [identity_rebuild, emotional_truth, quiet_recognition]
+    default_serialization_engines: [procedural_case_loop, slow_burn_relationship, ensemble_rotation]
+    default_visual_grammars: [grounded_realism, intimate_realism]
+
+  - id: food
+    label: Food
+    ite_profile_ref: food
+    common_demos: [seinen, josei, kodomo, shonen]
+    default_emotional_engines: [comfort, craft_pride, connection]
+    default_serialization_engines: [episodic_comfort, procedural_case_loop, training_payoff_cycle]
+    default_visual_grammars: [sensory_closeup, everyday_warmth]
+
+  - id: family
+    label: Family
+    ite_profile_ref: family
+    common_demos: [josei, seinen, kodomo, shojo]
+    default_emotional_engines: [grief, warmth, repair, emotional_truth]
+    default_serialization_engines: [ritual_daily_life, emotional_misread_chain]
+    default_visual_grammars: [intimate_realism, sparse_atmosphere]
+
+  - id: procedural
+    label: Procedural
+    ite_profile_ref: procedural
+    common_demos: [seinen, josei, shonen]
+    default_emotional_engines: [competence, tension, responsibility]
+    default_serialization_engines: [procedural_case_loop, mystery_reveal_chain]
+    default_visual_grammars: [grounded_realism, clue_focus]
+
+  - id: essay
+    label: Essay / Reflective
+    ite_profile_ref: essay
+    common_demos: [seinen, josei]
+    default_emotional_engines: [reflection, emotional_truth, quiet_recognition]
+    default_serialization_engines: [reflective_progression, episodic_comfort]
+    default_visual_grammars: [sparse_atmosphere, symbolic_reflection]
+
+  - id: healing
+    label: Healing / Iyashikei
+    ite_profile_ref: iyashikei  # direct match in genre_ite_profiles.yaml
+    common_demos: [seinen, josei, shojo]
+    default_emotional_engines: [restoration, tenderness, quiet_recognition]
+    default_serialization_engines: [episodic_comfort, ritual_daily_life]
+    default_visual_grammars: [healing_iyashikei, sparse_atmosphere]
+
+  - id: historical
+    label: Historical
+    ite_profile_ref: historical
+    common_demos: [seinen, shojo, josei, shonen]
+    default_emotional_engines: [gravitas, wonder, loss, conviction]
+    default_serialization_engines: [quest_progression, ensemble_rotation, political_escalation]
+    default_visual_grammars: [grounded_realism, ornate_fantasy]
+
+  - id: comedy
+    label: Comedy
+    ite_profile_ref: comedy
+    common_demos: [shonen, shojo, kodomo, seinen]
+    default_emotional_engines: [play, absurdity, release]
+    default_serialization_engines: [episodic_comfort, gag_reset_loop]
+    default_visual_grammars: [comedic_deformation, everyday_warmth]
+
+  - id: cultivation
+    label: Cultivation / Progression Fantasy
+    ite_profile_ref: cultivation
+    primary_demo: [seinen, shonen]
+    serialization_engines: [tournament_ladder, quest_based, arc_based]
+    visual_grammars: [kinetic_shonen, polished_seinen, fantasy_ornate]
+    notes: Common in Chinese-origin manhwa/donghua. Power-level progression with cultivation stages.
+
+subgenres:
+  - id: school_romance
+    genre_family: romance
+    common_demos: [shojo, shonen]
+    emotional_engines: [longing, tenderness, emotional_misread]
+    serialization_engines: [slow_burn_relationship, emotional_misread_chain]
+    visual_grammars: [decorative_romance, everyday_warmth]
+
+  - id: workplace_intimacy
+    genre_family: romance
+    common_demos: [josei, seinen]
+    emotional_engines: [emotional_truth, longing, identity_rebuild]
+    serialization_engines: [slow_burn_relationship, ensemble_rotation]
+    visual_grammars: [intimate_realism, grounded_realism]
+
+  - id: psychological_thriller
+    genre_family: mystery
+    common_demos: [seinen]
+    emotional_engines: [tension, obsession, suspicion]
+    serialization_engines: [mystery_reveal_chain, dread_escalation]
+    visual_grammars: [dread_contrast, clue_focus]
+
+  - id: iyashikei
+    genre_family: healing
+    common_demos: [seinen, josei, shojo]
+    emotional_engines: [restoration, quiet_recognition, warmth]
+    serialization_engines: [episodic_comfort, ritual_daily_life]
+    visual_grammars: [healing_iyashikei, sparse_atmosphere]
+
+  - id: survival_game
+    genre_family: horror
+    common_demos: [seinen, shonen]
+    emotional_engines: [tension, dread, desperation]
+    serialization_engines: [cliffhanger_escalation, mystery_reveal_chain]
+    visual_grammars: [dread_contrast, kinetic_action]
+
+  - id: cooking_competition
+    genre_family: food
+    common_demos: [shonen, seinen]
+    emotional_engines: [craft_pride, rivalry, aspiration]
+    serialization_engines: [training_payoff_cycle, tournament_ladder]
+    visual_grammars: [sensory_closeup, sports_motion_clarity]
+
+  - id: delinquent_redemption
+    genre_family: family
+    common_demos: [shonen, seinen]
+    emotional_engines: [repair, belonging, conviction]
+    serialization_engines: [quest_progression, emotional_misread_chain]
+    visual_grammars: [grounded_realism, kinetic_action]
+
+  - id: isekai
+    label: Isekai (portal fantasy)
+    ite_profile_ref: null  # uses isekai ITE profile via fantasy_adventure parent
+    parent_genre: fantasy_adventure
+    genre_family: fantasy_adventure
+    common_demos: [shonen, seinen]
+    emotional_engines: [wonder, aspiration, quest_bonding]
+    serialization_engines: [quest_based, arc_based, ensemble_progression]
+    visual_grammars: [kinetic_action, ornate_fantasy]
+    notes: Subgenre of fantasy. Character transported to another world. isekai ITE profile covers this.
+
+  - id: magical_girl
+    genre_family: fantasy_adventure
+    common_demos: [shojo, kodomo]
+    emotional_engines: [wonder, becoming, tenderness]
+    serialization_engines: [quest_progression, cliffhanger_escalation]
+    visual_grammars: [decorative_romance, ornate_fantasy]
+
+  - id: medical_drama
+    genre_family: procedural
+    common_demos: [seinen, josei]
+    emotional_engines: [responsibility, grief, competence]
+    serialization_engines: [procedural_case_loop, emotional_misread_chain]
+    visual_grammars: [grounded_realism, clue_focus]
+
+  - id: occult_slice_of_life
+    genre_family: slice_of_life
+    common_demos: [shojo, seinen, josei]
+    emotional_engines: [wonder, restoration, quiet_recognition]
+    serialization_engines: [ritual_daily_life, episodic_comfort]
+    visual_grammars: [sparse_atmosphere, symbolic_reflection]
+
+  - id: sports_rivalry
+    genre_family: sports
+    common_demos: [shonen, seinen]
+    emotional_engines: [rivalry, aspiration, team_belonging]
+    serialization_engines: [training_payoff_cycle, tournament_ladder]
+    visual_grammars: [sports_motion_clarity, kinetic_action]
+
+  - id: gothic_romance
+    genre_family: romance
+    common_demos: [shojo, josei, seinen]
+    emotional_engines: [longing, dread, obsession]
+    serialization_engines: [slow_burn_relationship, mystery_reveal_chain]
+    visual_grammars: [decorative_romance, dread_contrast]
+
+  - id: autobiographical_reflection
+    genre_family: essay
+    common_demos: [josei, seinen]
+    emotional_engines: [reflection, grief, emotional_truth]
+    serialization_engines: [reflective_progression]
+    visual_grammars: [symbolic_reflection, sparse_atmosphere]
+
+  - id: burnout_recovery
+    genre_family: healing
+    common_demos: [josei, seinen]
+    emotional_engines: [restoration, identity_rebuild, emotional_truth]
+    serialization_engines: [reflective_progression, episodic_comfort]
+    visual_grammars: [healing_iyashikei, intimate_realism]
+
+  - id: overthinking_psychology
+    genre_family: essay
+    common_demos: [seinen, josei]
+    emotional_engines: [reflection, restoration, emotional_recognition]
+    serialization_engines: [reflective_progression, ritual_daily_life]
+    visual_grammars: [symbolic_reflection, sparse_atmosphere]
+
+emotional_engines:
+  - id: aspiration
+    label: Aspiration
+    promise: feel stronger and keep moving
+
+  - id: rivalry
+    label: Rivalry
+    promise: become invested in challenge, growth, and comparison
+
+  - id: conviction
+    label: Conviction
+    promise: feel moral and emotional momentum
+
+  - id: longing
+    label: Longing
+    promise: feel ache, anticipation, and emotional pull
+
+  - id: tenderness
+    label: Tenderness
+    promise: feel softness, care, and emotional warmth
+
+  - id: emotional_recognition
+    label: Emotional Recognition
+    promise: feel seen in subtle inner experience
+
+  - id: emotional_truth
+    label: Emotional Truth
+    promise: feel the realism and honesty of adult emotional life
+
+  - id: identity_rebuild
+    label: Identity Rebuild
+    promise: experience the slow reconstruction of selfhood
+
+  - id: dread
+    label: Dread
+    promise: stay tense and uneasy
+
+  - id: obsession
+    label: Obsession
+    promise: get pulled into fixation and escalation
+
+  - id: suspicion
+    label: Suspicion
+    promise: keep searching for what is hidden or wrong
+
+  - id: restoration
+    label: Restoration
+    promise: feel soothed, repaired, and more settled
+
+  - id: quiet_recognition
+    label: Quiet Recognition
+    promise: find meaning in small moments and understated change
+
+  - id: wonder
+    label: Wonder
+    promise: feel awe and imaginative possibility
+
+  - id: grief
+    label: Grief
+    promise: feel loss, tenderness, and human weight
+
+  - id: team_belonging
+    label: Team Belonging
+    promise: feel connection through shared struggle
+
+  - id: comfort
+    label: Comfort
+    promise: feel safe, nourished, and emotionally held
+
+  - id: craft_pride
+    label: Craft Pride
+    promise: enjoy mastery, detail, and earned competence
+
+  - id: play
+    label: Play
+    promise: feel delight, looseness, and comic release
+
+  - id: absurdity
+    label: Absurdity
+    promise: laugh through contrast, escalation, and surprise
+
+  - id: release
+    label: Release
+    promise: discharge tension through humor or catharsis
+
+  - id: helplessness
+    label: Helplessness
+    promise: intensify vulnerability and danger
+
+  - id: curiosity
+    label: Curiosity
+    promise: keep searching for answers and patterns
+
+  - id: responsibility
+    label: Responsibility
+    promise: feel the weight of choices and duty
+
+  - id: competence
+    label: Competence
+    promise: enjoy capable decision-making under pressure
+
+  - id: becoming
+    label: Becoming
+    promise: witness transformation into a new self
+
+  - id: emotional_misread
+    label: Emotional Misread
+    promise: stay engaged through ambiguity and social uncertainty
+
+serialization_engines:
+  - id: cliffhanger_escalation
+    label: Cliffhanger Escalation
+    chapter_logic: each chapter intensifies danger, desire, or uncertainty
+
+  - id: slow_burn_relationship
+    label: Slow-Burn Relationship
+    chapter_logic: progress occurs through small shifts in trust, closeness, and misreading
+
+  - id: emotional_misread_chain
+    label: Emotional Misread Chain
+    chapter_logic: plot and feeling move through mistaken signals, withheld truths, and partial recognition
+
+  - id: episodic_comfort
+    label: Episodic Comfort
+    chapter_logic: each unit offers its own emotional completion while deepening attachment to place and cast
+
+  - id: quest_progression
+    label: Quest Progression
+    chapter_logic: forward movement through external milestones and internal growth
+
+  - id: tournament_ladder
+    label: Tournament Ladder
+    chapter_logic: staged competition with rising challenge, skill display, and rivalry
+
+  - id: ensemble_rotation
+    label: Ensemble Rotation
+    chapter_logic: emotional and plot focus rotates across multiple cast members
+
+  - id: mystery_reveal_chain
+    label: Mystery Reveal Chain
+    chapter_logic: each chapter answers one question while opening a deeper one
+
+  - id: procedural_case_loop
+    label: Procedural Case Loop
+    chapter_logic: recurring case structure creates competence rhythm and variation
+
+  - id: ritual_daily_life
+    label: Ritual Daily Life
+    chapter_logic: repeated actions gain significance through subtle emotional change
+
+  - id: training_payoff_cycle
+    label: Training Payoff Cycle
+    chapter_logic: effort, adjustment, and earned demonstration repeat at increasing stakes
+
+  - id: dread_escalation
+    label: Dread Escalation
+    chapter_logic: certainty declines while danger and unease rise
+
+  - id: reflective_progression
+    label: Reflective Progression
+    chapter_logic: insight accumulates through observation, memory, and internal reframing
+
+  - id: political_escalation
+    label: Political Escalation
+    chapter_logic: social and institutional pressures intensify across factions and decisions
+
+  - id: gag_reset_loop
+    label: Gag Reset Loop
+    chapter_logic: recurring comic premise resets while relationships and tone deepen over time
+
+visual_grammars:
+  - id: kinetic_action
+    label: Kinetic Action
+    style_archetype_ref: power_progression  # direct match in style_archetypes.yaml
+    traits:
+      - dynamic_panel_angles
+      - speed_lines
+      - impact_frames
+      - high_movement_readability
+
+  - id: impact_contrast
+    label: Impact Contrast
+    style_archetype_ref: dark_psychological  # partial match; heavy B&W contrast, dark shadows
+    traits:
+      - black_white_extremes
+      - explosive_moments
+      - compressed_setup_then_release
+
+  - id: decorative_romance
+    label: Decorative Romance
+    style_archetype_ref: webtoon_vertical_romance  # closest match; soft shading, romantic aesthetic
+    traits:
+      - emotional_ornament
+      - gaze_emphasis
+      - floral_or_symbolic_motifs
+      - soft_space_management
+
+  - id: intimate_realism
+    label: Intimate Realism
+    style_archetype_ref: hyper_clean_cinematic  # closest match; detailed, polished, cinematic
+    traits:
+      - body_language_precision
+      - facial_microexpression
+      - environment_as_social_context
+      - restrained_camera
+
+  - id: grounded_realism
+    label: Grounded Realism
+    style_archetype_ref: grounded_realism
+    traits:
+      - spatial_clarity
+      - realistic_proportion
+      - low_exaggeration
+      - object_attention
+
+  - id: sparse_atmosphere
+    label: Sparse Atmosphere
+    style_archetype_ref: cozy_iyashikei  # closest match; soft, minimal, healing aesthetic
+    traits:
+      - negative_space
+      - quiet_beats
+      - low_balloon_density
+      - environment_breathing_room
+
+  - id: dread_contrast
+    label: Dread Contrast
+    style_archetype_ref: dark_psychological  # direct match; high contrast, heavy ink, dark shadows
+    traits:
+      - unsettling_crops
+      - harsh_shadows
+      - visual_emptiness
+      - distorted_focus
+
+  - id: body_horror_expressionism
+    label: Body Horror Expressionism
+    style_archetype_ref: dark_psychological  # closest match; psychological, high contrast
+    traits:
+      - anatomical_instability
+      - visual_discomfort
+      - texture_intensity
+      - psychological_physical_merge
+
+  - id: sports_motion_clarity
+    label: Sports Motion Clarity
+    style_archetype_ref: power_progression  # closest match; dynamic action, speed lines
+    traits:
+      - readable_body_mechanics
+      - momentum_traces
+      - competition_state_clarity
+      - repeated_skill_visualization
+
+  - id: ornate_fantasy
+    label: Ornate Fantasy
+    style_archetype_ref: ornate_fantasy
+    traits:
+      - worldbuilding_detail
+      - costume_emphasis
+      - ceremonial_or_magical_motifs
+      - spectacle_panels
+
+  - id: sensory_closeup
+    label: Sensory Closeup
+    style_archetype_ref: sensory_closeup
+    traits:
+      - texture_focus
+      - appetite_or_craft_detail
+      - object_reverence
+      - pleasure_emphasis
+
+  - id: everyday_warmth
+    label: Everyday Warmth
+    style_archetype_ref: cozy_iyashikei  # close match; warm tones, rounded shapes, gentle
+    traits:
+      - approachable_faces
+      - cozy_environments
+      - humor_softness
+      - routine_as_affection
+
+  - id: symbolic_reflection
+    label: Symbolic Reflection
+    style_archetype_ref: symbolic_reflection
+    traits:
+      - metaphor_panels
+      - inner_state_externalization
+      - poetic_objects
+      - contemplative_spacing
+
+  - id: comedic_deformation
+    label: Comedic Deformation
+    style_archetype_ref: comedic_deformation
+    traits:
+      - exaggerated_expression
+      - super_deformed_burst
+      - gag_timing_panel
+      - bold_reaction_lines
+
+  - id: social_media_simulacra
+    label: Social Media / Digital Native
+    style_archetype_ref: social_media_simulacra
+    primary_demo: [shojo, josei, shonen]
+    traits:
+      - ui_panel_elements
+      - smartphone_screen_framing
+      - text_message_aesthetic
+      - digital_native_composition
+    notes: Modern aesthetic with UI elements. Fits contemporary school/romance titles targeting digital readers.
+
+  - id: interactive_branching
+    label: Interactive / Visual Novel
+    style_archetype_ref: interactive_branching
+    primary_demo: [shojo, seinen]
+    traits:
+      - choice_indicator_panels
+      - game_ui_framing
+      - clean_cel_shading
+      - visual_novel_composition
+    notes: Visual novel aesthetic. Clean digital art with choice/game-UI framing.
+
+reader_promises:
+  - id: feel_stronger
+    label: Feel Stronger
+  - id: feel_seen
+    label: Feel Seen
+  - id: feel_soothed
+    label: Feel Soothed
+  - id: feel_the_ache
+    label: Feel the Ache
+  - id: stay_tense
+    label: Stay Tense
+  - id: binge_the_rivalry
+    label: Binge the Rivalry
+  - id: fall_in_love_with_the_cast
+    label: Fall in Love with the Cast
+  - id: marvel_at_the_world
+    label: Marvel at the World
+  - id: trust_the_process
+    label: Trust the Process
+  - id: laugh_and_release
+    label: Laugh and Release
+
+adaptation_targets:
+  - id: print_manga
+    label: Print Manga
+  - id: web_manga
+    label: Web Manga
+  - id: webtoon_vertical
+    label: Webtoon Vertical
+  - id: motion_comic
+    label: Motion Comic
+  - id: short_form_teaser
+    label: Short-Form Teaser
+  - id: trailer_cut
+    label: Trailer Cut
+  - id: narrated_explainer_manga
+    label: Narrated Explainer Manga
+
+chapter_hook_families:
+  - id: revelation
+  - id: interruption
+  - id: vow
+  - id: betrayal
+  - id: arrival
+  - id: new_rival
+  - id: emotional_rupture
+  - id: ominous_image
+  - id: hidden_truth_glimpse
+  - id: confession_almost_happened
+  - id: impossible_task
+  - id: what_did_that_mean
+
+title_archetype_templates:
+  - id: battle_shonen_rivalry_arc
+    market_demo: shonen
+    genre_family: battle
+    emotional_engine: rivalry
+    serialization_engine: tournament_ladder
+    visual_grammar: kinetic_action
+    reader_promise: binge_the_rivalry
+    adaptation_targets: [print_manga, motion_comic, short_form_teaser]
+    allowed_hook_families: [new_rival, vow, revelation, impossible_task]
+
+  - id: shojo_first_love
+    market_demo: shojo
+    genre_family: romance
+    emotional_engine: longing
+    serialization_engine: slow_burn_relationship
+    visual_grammar: decorative_romance
+    reader_promise: feel_the_ache
+    adaptation_targets: [print_manga, web_manga, short_form_teaser]
+    allowed_hook_families: [confession_almost_happened, what_did_that_mean, interruption]
+
+  - id: josei_workplace_rebuild
+    market_demo: josei
+    genre_family: workplace
+    emotional_engine: identity_rebuild
+    serialization_engine: ensemble_rotation
+    visual_grammar: intimate_realism
+    reader_promise: feel_seen
+    adaptation_targets: [print_manga, web_manga, motion_comic]
+    allowed_hook_families: [emotional_rupture, revelation, what_did_that_mean]
+
+  - id: seinen_psychological_dread
+    market_demo: seinen
+    genre_family: horror
+    emotional_engine: dread
+    serialization_engine: dread_escalation
+    visual_grammar: dread_contrast
+    reader_promise: stay_tense
+    adaptation_targets: [print_manga, motion_comic, trailer_cut]
+    allowed_hook_families: [ominous_image, hidden_truth_glimpse, betrayal]
+
+  - id: healing_iyashikei_daily_life
+    market_demo: seinen
+    genre_family: healing
+    emotional_engine: restoration
+    serialization_engine: ritual_daily_life
+    visual_grammar: healing_iyashikei
+    reader_promise: feel_soothed
+    adaptation_targets: [print_manga, web_manga, narrated_explainer_manga]
+    allowed_hook_families: [revelation, arrival]
+
+visual_grammar_aliases:
+  healing_iyashikei:
+    base: sparse_atmosphere
+    overlays:
+      - everyday_warmth
+      - symbolic_reflection
+
+notes:
+  - >-
+    This taxonomy is intended to be extended, not frozen. New subgenres and
+    archetype templates should be added when supported by catalog demand and QA.
+  - >-
+    Phoenix should avoid using market demo alone as a generation control. At
+    minimum, market_demo + genre_family + emotional_engine + serialization_engine
+    + visual_grammar should be resolved together.
+  - >-
+    Reader promise is not decorative metadata. It should influence hooks,
+    chapter-end logic, visual emphasis, and adaptation packaging.
+
+reconciliation_notes:
+  reconciled_at: "2026-04-19"
+  last_gap_fill: "2026-04-19"
+  reconciled_against:
+    - config/manga/genre_ite_profiles.yaml
+    - config/manga/style_archetypes.yaml
+
+  genre_family_gaps:
+    # Genre families in manga_taxonomy.yaml — previously missing ITE profiles.
+    # All gaps resolved 2026-04-19 (PR #510 followup).
+    - id: slice_of_life
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        slice_of_life ITE profile added to genre_ite_profiles.yaml. High breath density,
+        warm color arc, gentle soundtrack (60-75 bpm). ite_profile_ref updated in taxonomy.
+    - id: mystery
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        mystery ITE profile added to genre_ite_profiles.yaml. Medium-high tension color arc
+        (cold resolution), sparse breath, minor-scale soundtrack. ite_profile_ref updated.
+    - id: workplace
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        workplace ITE profile added to genre_ite_profiles.yaml. Medium breath, neutral color
+        arc, urban/architectural fractal, spoken-word modal soundtrack. ite_profile_ref updated.
+    - id: food
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        food ITE profile added to genre_ite_profiles.yaml. High warmth color arc (amber/golden),
+        sensory fractal, moderate breath, steady tempo (72-85 bpm). ite_profile_ref updated.
+    - id: family
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        family ITE profile added to genre_ite_profiles.yaml. Gentle breath (2-3/chapter),
+        warm resolution color, domestic/arboreal fractal, lullaby-tempo soundtrack (55-70 bpm).
+        ite_profile_ref updated.
+    - id: procedural
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        procedural ITE profile added to genre_ite_profiles.yaml. Low-to-medium breath,
+        analytical color arc, structured fractal, steady metronomic soundtrack. ite_profile_ref updated.
+    - id: essay
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        essay ITE profile added to genre_ite_profiles.yaml. High breath density (reflective pauses),
+        contemplative color arc, symbolic fractal, ambient/silence-emphasis soundtrack.
+        ite_profile_ref updated.
+    - id: historical
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        historical ITE profile added to genre_ite_profiles.yaml. Slow breath (1-2/chapter),
+        desaturated color arc (aged/sepia), architectural/natural fractal, traditional-instrument
+        soundtrack (phrygian/dorian modes). ite_profile_ref updated.
+    - id: comedy
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        comedy ITE profile added to genre_ite_profiles.yaml. Burst-rest pattern breath,
+        bright/saturated color arc, upbeat tempo (80-130 bpm), resolution_tight_forbidden: false.
+        ite_profile_ref updated.
+
+  visual_grammar_gaps:
+    # Visual grammars in manga_taxonomy.yaml — previously missing style archetypes.
+    # All gaps resolved 2026-04-19 (PR #510 followup).
+    - id: grounded_realism
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        grounded_realism archetype added to style_archetypes.yaml. Raw realistic style,
+        thick ink lines, heavy blacks, seinen aesthetic. style_archetype_ref updated in taxonomy.
+    - id: ornate_fantasy
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        ornate_fantasy archetype added to style_archetypes.yaml. Detailed architecture,
+        elaborate costume design, ceremonial aesthetic, intricate linework. style_archetype_ref updated.
+    - id: sensory_closeup
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        sensory_closeup archetype added to style_archetypes.yaml. Warm ink, food illustration
+        style, sensory detail, steam, texture close-up. style_archetype_ref updated.
+    - id: symbolic_reflection
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        symbolic_reflection archetype added to style_archetypes.yaml. Minimalist panels,
+        symbolic imagery, contemplative spacing, essay-style illustration. style_archetype_ref updated.
+    - id: comedic_deformation
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        comedic_deformation archetype added to style_archetypes.yaml AND formal visual_grammar
+        entry added to taxonomy. 4-koma style, exaggerated reaction face, super-deformed,
+        comedy timing panel.
+
+  ite_profiles_in_config_not_in_taxonomy:
+    # Profiles in genre_ite_profiles.yaml — previously missing taxonomy entries.
+    # All gaps resolved 2026-04-19 (PR #510 followup).
+    - id: cultivation
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        cultivation genre_family added to manga_taxonomy.yaml. Common in Chinese-origin
+        manhwa/donghua. Power-level progression with cultivation stages.
+    - id: manhwa
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        manhwa is a format/origin marker, not a genre_family. Represented as an
+        adaptation_target/format marker rather than a genre_family entry. No genre_family
+        addition required; manhwa ITE profile remains available for format-keyed override.
+    - id: webtoon_romance
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        webtoon_romance is represented by the romance genre_family + webtoon_vertical
+        adaptation_target. No separate genre_family entry required; webtoon_romance ITE
+        profile remains available as a format-keyed override for the romance genre_family.
+    - id: isekai
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        isekai subgenre entry added to manga_taxonomy.yaml under fantasy_adventure parent.
+        Uses isekai ITE profile. Character-transported-to-another-world subgenre formalized.
+
+  style_archetypes_in_config_not_in_taxonomy:
+    # Archetypes in style_archetypes.yaml — previously missing visual_grammar mappings.
+    # All gaps resolved 2026-04-19 (PR #510 followup).
+    - id: social_media_simulacra
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        social_media_simulacra visual_grammar entry added to manga_taxonomy.yaml.
+        Modern aesthetic with UI elements. Fits contemporary school/romance titles
+        targeting digital readers.
+    - id: interactive_branching
+      status: resolved
+      resolved_at: "2026-04-19"
+      note: >-
+        interactive_branching visual_grammar entry added to manga_taxonomy.yaml.
+        Visual novel aesthetic. Clean digital art with choice/game-UI framing.

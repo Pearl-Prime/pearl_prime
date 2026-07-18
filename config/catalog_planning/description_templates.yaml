@@ -1,0 +1,177 @@
+# Description template data for 4-layer composition engine.
+# Authority: catalog generator (scripts/catalog/generate_full_catalog.py)
+# Each layer varies independently; combined via deterministic hash.
+
+schema_version: 1
+
+# ── Layer 3: Topic hooks (5 per topic for rotation) ──────────
+topic_hooks:
+  anxiety:
+    - "Explores the hidden mechanics of anxiety — how the alarm fires before anything is actually wrong, and what to do when it does."
+    - "Maps the anxiety pattern from trigger to spiral, giving you tools to interrupt the cycle before it takes hold."
+    - "Shows how anxiety hijacks your nervous system and teaches body-based techniques to reclaim calm."
+    - "Reveals why anxiety intensifies at rest and provides a structured path from hypervigilance to grounded presence."
+    - "Addresses the gap between knowing you're safe and feeling safe — the core paradox of modern anxiety."
+
+  burnout:
+    - "Traces the slow collapse of burnout — not as weakness, but as a system running beyond its capacity for too long."
+    - "Maps the burnout cycle from overcommitment to shutdown, with practical off-ramps at every stage."
+    - "Shows why rest alone doesn't fix burnout and what actually restores the nervous system after prolonged depletion."
+    - "Reveals the hidden costs of high performance — the point where productivity becomes self-destruction."
+    - "Addresses the exhaustion that sleep can't touch, with somatic tools for deep nervous system recovery."
+
+  self_worth:
+    - "Examines how self-worth gets tangled with achievement and offers a path to feeling enough without proof."
+    - "Maps the pattern of seeking validation and shows what happens when you stop outsourcing your sense of value."
+    - "Reveals why accomplishment never feels like enough and how to build worth that doesn't depend on external metrics."
+    - "Addresses the gap between what you've achieved and how little it registers — the core wound of conditional self-worth."
+    - "Shows how self-worth gets hijacked by comparison and teaches the practice of recognizing inherent value."
+
+  boundaries:
+    - "Explores why saying no feels dangerous and how to build boundaries that protect without isolating."
+    - "Maps the cost of invisible boundaries — the energy drain of always being available, always saying yes."
+    - "Shows how boundary failure isn't about weakness but about a nervous system that learned safety through compliance."
+    - "Reveals the hidden link between people-pleasing and self-abandonment, with practical tools for repair."
+    - "Addresses the fear underneath boundary-setting and teaches the somatic skills to hold firm without hardening."
+
+  depression:
+    - "Traces depression not as sadness but as a system that has gone flat — and what it takes to bring sensation back online."
+    - "Maps the quiet mechanics of depression: the withdrawal, the numbness, the way everything loses weight and color."
+    - "Shows why willpower fails against depression and what actually moves the needle — small, body-first interventions."
+    - "Reveals how depression protects by shutting down and teaches the practice of safe re-engagement with feeling."
+    - "Addresses the exhaustion of pretending to be fine, with honest tools for people who are tired of performing recovery."
+
+  grief:
+    - "Explores grief as a process the body carries, not a problem the mind can solve."
+    - "Maps the waves of grief — the unexpected triggers, the phantom presence, the way loss reshapes ordinary moments."
+    - "Shows why grief doesn't follow timelines and how to honor the process without being consumed by it."
+    - "Reveals the hidden grief of things that didn't happen — the unlived life, the unspoken words, the paths not taken."
+    - "Addresses the loneliness inside grief and teaches the practice of carrying loss without carrying it alone."
+
+  imposter_syndrome:
+    - "Examines the mechanics of feeling like a fraud — why success feels accidental and competence feels borrowed."
+    - "Maps the imposter pattern from trigger to spiral: the praise that doesn't land, the achievement that feels hollow."
+    - "Shows why imposter syndrome intensifies with success and what actually breaks the cycle of self-doubt."
+    - "Reveals how imposter feelings protect you from visibility — and what becomes possible when you stop hiding."
+    - "Addresses the exhaustion of performing confidence you don't feel, with tools for authentic self-trust."
+
+  courage:
+    - "Explores courage not as fearlessness but as the practice of moving forward while afraid."
+    - "Maps the moment of hesitation — the gap between knowing what to do and actually doing it."
+    - "Shows how courage builds through small acts of risk, not dramatic leaps."
+    - "Reveals the hidden cost of playing safe — the slow erosion of aliveness that comes from avoiding discomfort."
+    - "Addresses the fear of being seen and teaches the somatic practice of expanding your tolerance for exposure."
+
+  overthinking:
+    - "Traces the loop of overthinking — how the mind creates problems faster than it can solve them."
+    - "Maps the difference between productive thinking and the spiral that masquerades as problem-solving."
+    - "Shows why overthinking feels productive and why stopping feels dangerous — the paradox of a busy mind."
+    - "Reveals how overthinking is the nervous system's attempt to create certainty in an uncertain world."
+    - "Addresses the 3am mind — the thoughts that loop without resolution — and teaches body-based interrupts."
+
+  somatic_healing:
+    - "Explores how the body stores what the mind tries to forget — and how to release it safely."
+    - "Maps the body's language of tension, holding, and release as the foundation of lasting healing."
+    - "Shows why talk therapy alone often isn't enough and how somatic awareness completes the healing circuit."
+    - "Reveals the wisdom in physical symptoms — the way your body communicates what your words can't yet say."
+    - "Addresses the disconnection between mind and body that chronic stress creates, with practices for reintegration."
+
+  compassion_fatigue:
+    - "Traces the slow depletion of those who care for others — the point where empathy becomes exhaustion."
+    - "Maps the caregiver's paradox: the better you are at holding space for others, the less space remains for you."
+    - "Shows how compassion fatigue differs from burnout and why the recovery path requires a different approach."
+    - "Reveals the hidden resentment underneath caregiver exhaustion and offers tools for sustainable compassion."
+    - "Addresses the guilt of needing rest when others need you, with practices for filling your own cup first."
+
+  sleep_anxiety:
+    - "Explores the cruel irony of sleep anxiety — how the fear of not sleeping becomes the thing preventing sleep."
+    - "Maps the pre-sleep spiral: the racing thoughts, the body scan for wakefulness, the clock-watching that makes it worse."
+    - "Shows why sleep hygiene alone fails for anxious sleepers and what actually calms the nervous system at bedtime."
+    - "Reveals how daytime anxiety deposits into nighttime wakefulness and teaches the practice of evening nervous system discharge."
+    - "Addresses the dread of bedtime itself and offers somatic tools for making the transition from day to night feel safe."
+
+  social_anxiety:
+    - "Examines what happens in the body before, during, and after social exposure — the full arc of social anxiety."
+    - "Maps the anticipatory spiral that makes social events feel dangerous long before they happen."
+    - "Shows why social anxiety persists despite evidence of social competence — the gap between performance and felt safety."
+    - "Reveals the protective function of social withdrawal and teaches gradual expansion without forced exposure."
+    - "Addresses the exhaustion of performing ease in social settings, with tools for genuine presence instead of masks."
+
+  financial_anxiety:
+    - "Traces the nervous system response to money uncertainty — how financial stress becomes a full-body experience."
+    - "Maps the scarcity loop: the checking, the calculating, the catastrophizing that money triggers even when you're solvent."
+    - "Shows how financial anxiety often has roots in earlier experiences of instability, not just current bank balances."
+    - "Reveals the shame underneath money worry and teaches the practice of engaging with finances from calm, not fear."
+    - "Addresses the gap between rational financial planning and the irrational fear that something will go wrong."
+
+  financial_stress:
+    - "Explores the weight of financial obligation — the way debt and uncertainty become a constant background hum."
+    - "Maps the real-world mechanics of financial stress: the juggling, the trade-offs, the decisions that have no good option."
+    - "Shows how financial stress compounds other stress and teaches nervous system tools for decision-making under pressure."
+    - "Reveals how financial pressure changes relationship dynamics and offers practices for staying connected under strain."
+    - "Addresses the isolation of financial struggle — the conversations you can't have — with tools for breaking the silence."
+
+  mindfulness:
+    - "Explores mindfulness not as calm but as the practice of seeing clearly — even when what you see is difficult."
+    - "Maps the difference between mindfulness as escape and mindfulness as engagement with what is actually here."
+    - "Shows how mindfulness practice builds the capacity to be present with discomfort without being overwhelmed by it."
+    - "Reveals why mindfulness sometimes makes things feel worse before better — and why that's actually the practice working."
+    - "Addresses the gap between knowing about mindfulness and actually living it, with body-anchored practices for daily life."
+
+# ── Layer 4: Runtime format descriptions ─────────────────────
+runtime_descriptions:
+  micro_book_15: "A focused 15-minute micro-guide"
+  short_book_30: "A practical 30-minute guide"
+  standard_book: "A comprehensive guide (~1 hour of listening)"
+  deep_book_4h: "An in-depth exploration (~4 hours of immersive listening)"
+
+# ── Layer 4: Persona descriptions ────────────────────────────
+persona_descriptions:
+  corporate_managers: "professionals navigating corporate pressure"
+  gen_z_professionals: "Gen Z adults building their careers"
+  gen_z_student: "students navigating academic and social pressure"
+  tech_finance_burnout: "tech and finance professionals running on empty"
+  millennial_women_professionals: "millennial women balancing career and identity"
+  entrepreneurs: "entrepreneurs carrying the weight of building something"
+  working_parents: "working parents stretched between roles"
+  gen_x_sandwich: "Gen X adults caring for aging parents and growing children"
+  healthcare_rns: "healthcare workers processing what they witness daily"
+  gen_alpha_students: "young students learning to navigate big emotions"
+  first_responders: "first responders carrying invisible weight"
+  educators: "educators absorbing more than they teach"
+  nyc_executives: "high-performing executives in demanding environments"
+
+# ── Layer 4: Companion notes ─────────────────────────────────
+companion_notes:
+  workbook: "Includes a free companion workbook with guided exercises and reflection prompts."
+  practice_guide: "Comes with a free practice guide for daily integration."
+  none: ""
+
+# ── P1: Market topic weights ─────────────────────────────────
+market_topic_weights:
+  ja_JP:
+    grief: 1.5
+    burnout: 1.3
+    somatic_healing: 1.2
+  de_DE:
+    somatic_healing: 1.4
+    burnout: 1.2
+    anxiety: 1.1
+  ko_KR:
+    imposter_syndrome: 1.3
+    anxiety: 1.2
+    burnout: 1.1
+  zh_TW:
+    grief: 1.3
+    sleep_anxiety: 1.2
+    somatic_healing: 1.2
+  zh_CN:
+    anxiety: 1.3
+    depression: 1.2
+    self_worth: 1.1
+  fr_FR:
+    somatic_healing: 1.2
+    depression: 1.1
+  hu_HU:
+    anxiety: 1.2
+    burnout: 1.1

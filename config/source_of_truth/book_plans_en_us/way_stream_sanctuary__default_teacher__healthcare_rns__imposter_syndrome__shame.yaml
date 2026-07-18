@@ -1,0 +1,114 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__imposter_syndrome__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__imposter_syndrome.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__worth_limits
+  name: Worth & Limits — for Nurses
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Seat You Earned: Carrying What You Can''t Say'
+subtitle: A Field Guide for Healthcare Rns Navigating Imposter Syndrome
+cover_tagline: Imposter syndrome isn't a confidence problem. It's a shame that whispers
+  you got here by accident.
+description:
+  short_blurb: 'Under the fear of being found out is something quieter and meaner:
+    the belief that you''re fundamentally not enough and have been hiding it. This
+    is imposter syndrome at its root — the buried shame that says the real you is
+    a fraud and the competent you is a costume. It will not affirm you into believing
+    you''re great. It will help you meet the shame underneath and stop letting it
+    run the unit.'
+  long_description: 'The fear of being exposed is loud, but it''s not the deepest
+    part. Underneath "they''ll find out I don''t know what I''m doing" is something
+    heavier and much older: a quiet certainty that the real you — the one no one sees
+    — is not enough, and never was, and that everything competent about you is a performance
+    you''ve somehow kept up. The scrubs, the steady hands, the patients who trust
+    you: a costume over a fraud. That''s not imposter syndrome as a thinking error.
+    That''s shame, and it''s wearing your career like a disguise.
+
+
+    This is for the nurse who feels like an imposter not because she lacks skill but
+    because she carries a buried belief that something about her is fundamentally
+    wrong — who''s convinced her competence is luck or charm or sheer effort masking
+    the truth. No matter how many shifts she nails, she can''t shake the sense that
+    she got here by accident and is one mistake from being seen for what she really
+    is.
+
+
+    We begin by separating the two things you''ve fused: doubt and shame. Doubt says
+    "I''m not sure I can do this." Shame says "I''m not sure I should exist in this
+    room." You''ve been treating a shame problem with competence, which is why no
+    amount of competence ever fixes it. You hit the target and the relief lasts an
+    hour, because the target was never the issue. The issue is a belief about your
+    worth that you absorbed long before nursing school, and that the high stakes of
+    this job have simply given new ground to grow in.
+
+
+    Then we go where it actually lives — the moment the imposter feeling becomes shame,
+    when you''re sure the mask is slipping. Not to reframe it, not to drown it in
+    affirmations about how skilled you are, but to look at what it''s protecting.
+    Almost always there''s a younger self who decided that being ordinary, uncertain,
+    or in-process meant being unworthy, and who has been frantically over-performing
+    ever since to stay ahead of that verdict. She can''t be argued with. She can only
+    be met, and seen, and told the truth: she was never the fraud. The shame was.
+
+
+    You won''t come away certain you belong. The shame will still surface when you
+    feel exposed. What changes is that you''ll recognize it as the hidden weight it
+    is — something handed to you, not something true about you — and you''ll stop
+    letting it conduct the whole performance.
+
+
+    This won''t build your confidence or teach you to claim your accomplishments,
+    and it won''t deliver a version of you who finally feels like she''s earned it.
+    All it does is loosen the grip of the shame impersonating insight — so you can
+    feel like a fraud and know, underneath, that you are not one.
+
+
+    The competent you was never a costume. You''re allowed to be exactly who you are
+    and still belong here.'
+keywords:
+  primary:
+  - imposter syndrome
+  - feeling like a fraud
+  - self doubt at work
+  - confidence at work
+  - perfectionism
+  - imposter syndrome help
+  secondary:
+  - nurses
+  - imposter syndrome for nurses
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL031000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- Daring Greatly (Brené Brown) — the foundational secular work on shame, vulnerability,
+  and worthiness
+- The Secret Thoughts of Successful Women (Valerie Young) — on imposter syndrome and
+  the fear of being exposed as a fraud
+- The Gifts of Imperfection (Brené Brown) — on the buried belief that you are not
+  enough as you are
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

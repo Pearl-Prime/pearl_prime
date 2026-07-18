@@ -1,0 +1,67 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 誰かが名指す前に螺旋を知っています。内面の容量が薄れ続けるなかで一日を運ぶのにどれだけ要るかも知っています。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 若者のメンタルヘルスの負担は臨床の動向だけではありません。制度が過負荷を正常化し、若者がそれを私的欠陥だと扱い始めるやり方です。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Wu（土地と修練の教師）は、実践の場でこの圧力が若者に落ちるのを見てきました。学生はもっと頑張る方法だけを問うのではありません。断片化を訓練し続ける環境のなかでどう安定するかを問っています。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        真夜中過ぎに報告を読みます。身体が締まります。スマホを置きます。また手に取ります。圧力はすでに部屋のなかにいるからです。
+        LOOP_SEQUENCE: "報告を読んだ。身体が締まった。スマホを置いた。また手に取った。"
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Wuはこのループそのものを見てきました。報告、身体の締まり、スマホを置くこと、圧力がまだそこにあるからの戻りです。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 320 campuses. 18 countries.
+      stat_line_2: 学生がピアの輪、ワークショップ、キャンペーンを組み、メンタルヘルスを私的弱さではなく共有のインフラとして扱っています。
+bridge:
+  options:
+    - id: bridge_01
+      line: 320 campuses. 18 countries. トラッカーは若者がしたことを測ります。もう一つの遅れか破綻した対応のあと、次の一歩を可能にしたもの──助けを求め、過負荷をアイデンティティにせず戻る容量──の欄はありません。戻ってきた人にはそれが要りました。そのループの読者にも要ります。Master Wuの教えには、その容量を守る言葉があります。
+      hidden_capacity: 真実に沿った行動へ戻る
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Wuが見ていること
+      paragraphs:
+        - Master Wuはまず場から始めます。注意、調整、努力は意志だけでなく条件によって形づくられます。
+        - 周りの場が断片的で不安定、あるいは厳しいとき、最初の誤りはその混乱を人への判断に翻訳することです。
+        - 「自分が壊れている、間違っている」に感じることが、しばしば求めることのために設計されなかった制度・構造のまわりの、劣化した条件への正確な反応です。
+practice:
+  options:
+    - id: practice_01
+      display_name: 5-minute Return-to-Ground Practice
+      announcement_line: Master Wuは、メンタルヘルスの圧力が注意を無力感に変え始める瞬間のため、5分間のReturn-to-Ground Practiceを教えています。サイドバーに、時間どおり実用的に載せています。
+      relief_lines:
+        - 身体はあらゆる要求を全面の混乱だとするのをやめます。
+        - 次の正直な行動に足る調整が戻ります。
+sdg:
+  primary:
+    title: すべての人々の健康と福祉を確保する
+    line: 国連はSDG 3とそのメンタルヘルスの目標を通じて、これへの枠組みを示しています。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+    - id: cta_01
+      line: "Active Mindsと若者支援グループが、ここへの公的入口を提供しています。入口: https://www.activeminds.org"
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 若者のメンタル過負荷は上昇し続けています。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 教師が、それがアイデンティティに固まる前の圧力を名指します。

@@ -1,0 +1,128 @@
+# Europe Catalog Plan
+
+**Generated:** 2026-04-27
+**Status:** SCAFFOLD — Pearl_Research deep-research authors fill format mix + revenue tables.
+**Authority:** Pearl_Architect (scaffold) → Pearl_Research (research authoring) → Pearl_PM (acceptance)
+**Scope:** European locales — initially `hu_HU` (Hungary), with placeholder slots for `de_DE`, `fr_FR`, `it_IT`, `es_ES` per `artifacts/research/full_content_audit.md` top-5 high-confidence locale list.
+
+This file is created as part of extending the manga catalog generator from 5 → 8 markets (`scripts/manga/generate_catalog_plan_from_strategic.py:55`). It exists so the generator can resolve `hu_HU` per-locale rules; deep market research must follow.
+
+---
+
+## 1. Status
+
+This plan is a **scaffold** for `hu_HU` (Hungary). Other European locales (`de_DE`, `fr_FR`, `it_IT`, `es_ES`) are listed in §6 as future expansion slots but are NOT yet wired in `VALID_LOCALES`.
+
+## 2. Hungary (hu_HU) — known constraints
+
+Per [artifacts/research/full_content_audit.md](../artifacts/research/full_content_audit.md):
+
+> "Hungarian market (hu-HU) is too small for deep books (4h+, 6h)"
+>
+> "Any deep-form content in hu-HU — Hungarian audiobook market ~$2M. A 6-hour deep book will sell <50 copies. Production cost exceeds revenue."
+
+**Implications for hu_HU catalog:**
+- Restrict to micro-format (≤2h) or short standard (~3h)
+- Prioritize webtoon vertical-strip over deep tankobon (lower production cost per unit)
+- Skip the bottom 6 of the 12 genre shells until evidence accumulates — focus on the top revenue genres only
+- TTS: `hu-HU-NoemiNeural` via Edge TTS (free, confirmed in PR #734)
+
+## 3. Format and art style by sub-market — PLACEHOLDER
+
+| Sub-market | Format | Art Style | Platform |
+|---|---|---|---|
+| HU (Hungary) | Webtoon vertical-strip OR micro tankobon (≤2h) | TBD | TBD |
+
+## 4. Brand tier assignments for hu_HU — TO RESEARCH
+
+Pearl_Research input needed:
+- Which Phoenix Omega brands resonate in Hungarian post-Soviet cultural context?
+- Are there genre preferences amplified by Hungarian literary tradition (Krasznahorkai for psychological_horror? Esterházy for literary memoir?)
+- Cultural sensitivities around mental health framing (clinical vs. spiritual vs. philosophical register)
+
+## 5. Genre allocation for hu_HU — TO RESEARCH
+
+Per-brand × per-genre % allocations following the same 4-leg blend, with **HARD constraint** that micro-format dominates (no deep books).
+
+**Hungarian revenue weights** (TO POPULATE in `_GENRE_REVENUE_WEIGHTS` per Hungary):
+- `psychological_thriller` likely amplified by literary tradition
+- `psychological_horror` (Junji Ito has European market translation track record)
+- `iyashikei` undertested
+- Action shells underweighted (smaller market for shonen-style content)
+
+## 6. Future European locales — RESERVED, NOT YET WIRED
+
+Per `artifacts/research/full_content_audit.md` top-5 high-confidence locale list (en-US, de-DE, ja-JP, ko-KR, fr-FR), the high-confidence European locales are de-DE and fr-FR — neither is wired in current 8-market `VALID_LOCALES`. Adding them is a future extension:
+
+| Locale | Status | Notes |
+|---|---|---|
+| `de_DE` | Future | High-confidence per audit; large audiobook market; spiritual/teacher framing underperforms — needs evidence-based register |
+| `fr_FR` | Future | High-confidence per audit; manga aisle developed via FR/BD tradition; literary register required |
+| `it_IT` | Future | Lower priority; manga aisle smaller than DE/FR |
+| `es_ES` | Future | Could share `es_LA` infrastructure or split — operator decision |
+
+When adding any of these:
+1. Append to `VALID_LOCALES` in `generate_catalog_plan_from_strategic.py` and `generate_series_plans_from_catalog.py`
+2. Extend schema enum and bump schema version
+3. Author per-locale strategic doc section (or new file)
+4. Add format-routing config entries
+
+## 6.1 RATIFIED — de_DE / fr_FR / it_IT / es_ES strategy (2026-05-29, operator)
+
+> **✅ RATIFIED 2026-05-29 (operator).** These per-market strategies are accepted. **Locale-wiring scope expansion APPROVED** — priority **France + Brazil first** (genuine manga cultures), then DE/ES/IT/MX (ebook-forward). Implementation = a separately-governed `VALID_LOCALES` + schema-enum + `lane_content_mix` + `format_routing` change with a series_plan regen (thousands of files → its own atomic PR per the 2X.4 pattern; NOT done here). Western markets are ebook-heavy / manga-light except France; audiobook is the universal growth lever.
+
+### Germany (de_DE)
+- **Format mix (proposed):** ebook ~80% / manga ~10% / **audiobook companion** (Germany = #1 EU audiobook market by volume; books €9.88B in 2024). Manga = a YA-driven aisle, not a self-help vehicle.
+- **Genre tilt:** OVER `psychological_thriller`, `dark_fantasy` (krimi/seinen tradition), `workplace_drama` (Mittelstand burnout), `sci_fi_cyberpunk`. UNDER sports, cultivation, explicit-`iyashikei` (credentialed/clinical register required; `soul_repair` is a de_DE `brand_locale_kill`).
+- **First-wave brands:** `cognitive_clarity` (CBT/thriller), `digital_ground`, `executive_calm_workplace`, `stabilizer_healing`. **Audiobook-first, not manga-first.**
+
+### France (fr_FR) — deepest Western manga ladder
+- **Format mix (proposed):** ebook ~70% / manga ~15% (highest EU manga weight). France = #1 EU manga market (36M copies 2024; manga ≈ 11% of book revenue; segment ~19.6% CAGR to 2030); WEBTOON Canvas FR launching 2026.
+- **Genre tilt:** OVER `dark_fantasy`, `isekai`, `psychological_horror`, `supernatural_mystery`, `romance_josei_drama` (BD-manga crossover); philosophical register. The prime non-Asian home for the embedded-wellness manga thesis.
+- **First-wave brands:** `stillness_press` (full genre ladder), `cognitive_clarity`, `solar_return_isekai`, `healing_ground_healing`.
+
+### Spain (es_ES)
+- **Format mix (proposed):** ebook ~80% / manga ~10% / audiobook (Storytel / Kobo Plus). Books €3.037B 2024 (+6.3%, 11th growth year); audiobooks +14.9%.
+- **Genre tilt:** OVER `romance_josei_drama`, `psychological_horror`, `supernatural_mystery` (horror-cinema heritage). UNDER sports, cultivation. Credentialed-author framing.
+- **First-wave brands:** `gentle_growth_healing`, `relational_calm_iyashikei`, `heart_balance_shojo`, `confidence_core_romance`. Shares `es_LA` production but **SPLIT register** (European ≠ LATAM Spanish).
+
+### Italy (it_IT)
+- **Format mix (proposed):** ebook ~83% / manga ~12% / audiobook (the lone growth segment, €34M 2025 +13.3%). Manga = 74.4% of comics value but **cooling** (−2.8% 2025).
+- **Genre tilt:** OVER `romance_josei_drama`, `dark_fantasy`, `psychological_horror` (Dylan Dog fumetti tradition), YA-skewing manga. UNDER long explicit self-help (high price-sensitivity).
+- **First-wave brands:** `stillness_press`, `gentle_growth_healing`, `healing_ground_healing`, `relational_calm_iyashikei`. Audiobook + ebook entry; manga as YA-crossover.
+
+**Wiring for any of de/fr/it/es** (per the §6 checklist): `VALID_LOCALES` (both generators) + schema enum bump + per-locale `lane_content_mix` + `format_routing` + `_GENRE_REVENUE_WEIGHTS`. Operator decision (scope expansion). Sources: Publishing Perspectives (DE 2024), Statista/Grand View (FR manga), PW (Spain), AIE/Fumettologica (Italy 2025), Bookwire (Spain), Market Data Forecast (EU audiobook).
+
+---
+
+## 7. Translation provider routing — DECISION NEEDED for hu_HU
+
+| Provider option | Cost | Quality | Notes |
+|---|---|---|---|
+| DeepSeek | Free tier | Unknown for Hungarian | Need quality benchmark |
+| Claude Code (Tier 1) | Subscription | High | Operator-attended only |
+| Google Translate API | Free tier | Lower | Fallback only |
+
+**Decision needed:** translation provider for series-level metadata before catalog generator emits hu_HU rows.
+
+## 8. Distribution platform mapping — TO RESEARCH
+
+Format-routing entries needed in `config/manga/format_routing.yaml` for hu_HU.
+
+## 9. Risk gates
+
+- **Market-size risk:** Hungarian audiobook market ~$2M — keep production budgets proportional.
+- **Translation quality risk:** Hungarian is morphologically rich — agglutinative grammar makes machine translation harder than Romance / Germanic languages.
+- **Distribution risk:** No major Hungarian-native manga platform — must rely on cross-shipping from EU webtoon platforms.
+
+---
+
+## Generator wiring
+
+`hu_HU` is wired in:
+- `scripts/manga/generate_catalog_plan_from_strategic.py:55` — `VALID_LOCALES`
+- `scripts/manga/generate_series_plans_from_catalog.py:44` — `VALID_LOCALES`
+- `scripts/manga/generate_series_plans_from_catalog.py:60` — `_RE_LOCALE_HEADING`
+- `schemas/manga/series_plan.schema.json` — `locale` + `default_locale` + `localized_titles` enums (v2.2.0)
+
+Format-routing entries in `config/manga/format_routing.yaml` are still needed before generator can emit hu_HU rows successfully.

@@ -1,0 +1,62 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: body_memory__omote__educators__anxiety
+brand: body_memory
+teacher: omote
+persona: educators
+topic: anxiety
+byline_author: oscar_santos
+arc:
+  installment_1:
+    book_id: body_memory__omote__educators__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/educators__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the teacher whose body is still braced long after the last
+  bell — a steady, grounded place to set down what the day asked you to carry, without
+  being told to toughen up, push through, or just relax.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- The Anxiety Toolkit (Alice Boyes) — practical, non-shaming support for an over-activated
+  mind, without hustle or hype.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the body''s stress response as something to complete and discharge, not muscle through.'
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case that the
+  body, not just the thoughts, holds what overwhelms us.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28-52
+  where_they_are: It's 9:40 on a Tuesday night. The lesson plans for tomorrow are
+    still open in three tabs, the parent email you haven't answered is glowing at
+    the top of your inbox, and you're standing in the kitchen unable to remember why
+    you walked in. Your chest is tight in a way it has been since roughly 7am, and
+    the to-do list keeps arriving faster than you can set any single thing down.
+  what_they_need: To feel the ground come back under them — to recognize that the
+    flood in their chest is a nervous system asking for support, not a character flaw;
+    and to find one steady place to stand when twenty things arrive at once.
+  what_they_avoid: Push-through toughness, 'just relax,' performative calm, hustle
+    and optimization language, toxic positivity, and anything that asks an already-shaken
+    nervous system to do more before it gets to rest.
+series_voice_markers:
+  register: grounded, steady, holding; warm and plain; the voice of someone who has
+    sat in the same after-school quiet and is not going to rush you out of it. Never
+    clinical, never preachy, never hustle.
+  sentence_rhythm: unhurried; short declaratives that land like a hand on the shoulder,
+    alternating with longer breaths that let a feeling settle before the next one
+    arrives. The pacing itself slows the reader down.
+  metaphor_family: held ground and the earth beneath you; weight supported and set
+    down; roots and steadiness; the body remembering it is safe; what holds when everything
+    shakes; the floor that does not move.
+_needs_authoring: false

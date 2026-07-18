@@ -1,0 +1,495 @@
+{
+  "source_label": "internal_deep6h_ch10",
+  "persona": "gen_z_professionals",
+  "word_count": 3518,
+  "gates_requested": [
+    "chapter_flow",
+    "bestseller_craft",
+    "ei_v2",
+    "editorial",
+    "memorable_lines",
+    "transformation_arc",
+    "book_quality_gate",
+    "regression_museum"
+  ],
+  "chapter_flow": {
+    "status": "FAIL",
+    "score": 85,
+    "errors": [
+      "MISSING_CLEAR_POINT"
+    ],
+    "warnings": [],
+    "metrics": {
+      "paragraphs": 63,
+      "sentences": 451,
+      "transition_hits": 3,
+      "thesis_hits": 0,
+      "avg_adjacent_overlap": 0.106,
+      "sentence_len_std": 6.1,
+      "aha_hits": 4,
+      "scaffold_hits": {},
+      "flow_profile": "standard"
+    }
+  },
+  "bestseller_craft": {
+    "status": "WARN",
+    "move_scores": {
+      "orient": 0.53,
+      "name": 0.67,
+      "turn": 0.75,
+      "give": 1.0,
+      "pull": 0.32
+    },
+    "ontgp_composite": 0.654,
+    "issues": [
+      "move_warn:pull",
+      "no_named_tension_or_question_in_closer"
+    ],
+    "remediation": [
+      "End with a named tension or sharp question — not a teaser slogan (overlay §7)."
+    ],
+    "metrics": {
+      "word_count": 3518,
+      "zones": {
+        "orient_words": 150,
+        "name_words": 1161,
+        "turn_words": 1267,
+        "give_words": 1830,
+        "pull_words": 100
+      },
+      "heuristic_scores": {
+        "orient": 0.53,
+        "name": 0.67,
+        "turn": 0.75,
+        "give": 1.0,
+        "pull": 0.32
+      },
+      "final_move_scores": {
+        "orient": 0.53,
+        "name": 0.67,
+        "turn": 0.75,
+        "give": 1.0,
+        "pull": 0.32
+      }
+    }
+  },
+  "memorable_lines": {
+    "status": "PASS",
+    "memorable_line_count": 8,
+    "issues": [],
+    "metrics": {
+      "block_on_violation": true,
+      "min_score_for_candidate": 4.0,
+      "min_score_for_great_tier": 5.75,
+      "max_words_per_candidate": 20,
+      "strength_levels_tracked": [
+        "good",
+        "great"
+      ],
+      "sentence_count": 436,
+      "raw_top_score": 4.75,
+      "candidate_count": 8,
+      "best_candidate_scores": [
+        {
+          "text": "Instead of pushing it away, say yes to it for\none minute.",
+          "score": 4.75
+        },
+        {
+          "text": "Not\nforever, but long enough to notice what remains.",
+          "score": 4.75
+        },
+        {
+          "text": "Not because you\nfought it, but because you felt it.",
+          "score": 4.75
+        }
+      ]
+    }
+  },
+  "transformation_arc": {
+    "chapter_signals": [
+      {
+        "chapter_index": 0,
+        "recognition": false,
+        "reframe": true,
+        "challenge": true,
+        "relief": false,
+        "identity_shift": false,
+        "hits": {
+          "recognition": 0,
+          "reframe": 6,
+          "challenge": 9,
+          "relief": 0,
+          "identity_shift": 0
+        }
+      }
+    ],
+    "ending_check": {
+      "ending_identity_shift_present": false,
+      "ending_reframe_present": true,
+      "ending_weak": true
+    },
+    "note_single_chapter": "Single-chapter sample: ending_check uses only this chapter; identity_shift in final chapter is often absent by construction."
+  },
+  "editorial": {
+    "chapter_assessments": [
+      {
+        "chapter_index": 0,
+        "hook_friction": "FAIL",
+        "scene_specificity": "PASS",
+        "aha_presence": "PASS",
+        "integration_variety": "PASS",
+        "thread_continuity": "PASS",
+        "word_budget": "ADEQUATE",
+        "location_grounding": "PASS",
+        "cadence_variety": "PASS",
+        "word_count": 3518,
+        "target_range": [
+          1500,
+          3500
+        ],
+        "thesis_aligned": true,
+        "thesis_coverage": 1.0,
+        "chapter_score": 13
+      }
+    ],
+    "book_level": {
+      "repetition_index": "PASS",
+      "repetition_excess_count": 0,
+      "vocabulary_diversity": "PASS",
+      "vocabulary_ratio": 0.3248,
+      "flat_middle": "PASS",
+      "flat_middle_overlap": 0.0,
+      "reward_spacing": "PASS",
+      "reward_max_gap": 0
+    },
+    "total_score": 21,
+    "max_score": 24,
+    "grade": "PASS",
+    "revision_notes": [
+      "Ch 1: Hook lacks cognitive friction."
+    ]
+  },
+  "book_quality_gate": {
+    "status": "FAIL",
+    "release_band": "Reject",
+    "fail_reasons": [
+      "chapter flow failed in 1 chapter(s)"
+    ],
+    "hold_reasons": [],
+    "metrics": {
+      "runtime_format_id": "",
+      "word_count": 3520,
+      "word_range": null,
+      "chapter_count": 1,
+      "flow_profile": "standard",
+      "flow_failures": [
+        {
+          "chapter": 1,
+          "errors": [
+            "MISSING_CLEAR_POINT"
+          ]
+        }
+      ],
+      "artifact_hits": [],
+      "repeated_phrase_violations": []
+    }
+  },
+  "ei_v2": {
+    "mode": "heuristic_plus_safety_plus_tts_readability",
+    "safety": {
+      "risk_score": 0.24,
+      "categories": {
+        "medical_claims": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "clinical_language": {
+          "score": 1.0,
+          "hits": 3,
+          "excerpts": [
+            "medication",
+            "medication",
+            "medication"
+          ]
+        },
+        "promotional": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "reassurance_spam": {
+          "score": 0.0,
+          "hits": 0,
+          "density_per_100_words": 0.0,
+          "excerpts": []
+        },
+        "pathologizing": {
+          "score": 1.0,
+          "hits": 2,
+          "raw_hits": 2,
+          "excerpts": [
+            "Suffering",
+            "suffering"
+          ]
+        },
+        "marketing_compliance": {
+          "score": 1.0,
+          "hits": 0,
+          "excerpts": []
+        }
+      },
+      "reason_codes": [
+        "clinical_language_detected",
+        "pathologizing_detected"
+      ],
+      "mode": "heuristic_plus"
+    },
+    "tts_readability": {
+      "composite": 0.426,
+      "dimensions": {
+        "sentence_length": 0.8788,
+        "rhythm_variance": 0.0,
+        "paragraph_breathing": 0.0627,
+        "tts_pattern_safety": 0.4,
+        "rhetorical_question_safety": 0.8918
+      },
+      "metrics": {
+        "total_sentences": 462,
+        "total_words": 3518,
+        "rhythm_cv": 0.5972,
+        "long_sentence_fraction": 0.0,
+        "short_sentence_fraction": 0.1515,
+        "tts_problematic_count": 4,
+        "paragraph_breaks": 62
+      },
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks",
+        "tts_problematic_patterns: 4 found"
+      ]
+    }
+  },
+  "regression_museum": {
+    "summary": {
+      "blocked": true,
+      "warned": true,
+      "summary": "29 violation(s): 24 blocking, 5 warnings",
+      "failure_classes": [
+        "doctrinal_exposition_inline",
+        "doubled_word",
+        "font_css_leak",
+        "mid_paragraph_format_break",
+        "off_persona_vocabulary",
+        "repeated_scene_anchor"
+      ],
+      "violation_count": 29
+    },
+    "violations": [
+      {
+        "failure_class": "font_css_leak",
+        "severity": "block",
+        "location": "chapter_1:char_6991",
+        "evidence": "ay. What changes when the story stops?\n\nHelvetica; ;; ;; All spiritual contemplation inevitab",
+        "description": "CSS/font directive leaked into prose"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_5205",
+        "evidence": "sitting in the dark, your eyes burning.\nThe the street below traffic is light for this ",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_12007",
+        "evidence": "e phone down and stare at the ceiling.\n\nThe the train lurches. Your coffee shifts in yo",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_16206",
+        "evidence": "ar is a private space for public panic.\nThe the street below outside is where normal pe",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7083",
+        "evidence": "bly leads to the understanding of love. Bhakti Yoga is where love is essential to practice.",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7138",
+        "evidence": "where love is essential to practice. In Bhakti Yoga, love transcends mere feelings and sent",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7083",
+        "evidence": "bly leads to the understanding of love. Bhakti Yoga is where love is essential to practice.",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7138",
+        "evidence": "where love is essential to practice. In Bhakti Yoga, love transcends mere feelings and sent",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10473",
+        "evidence": " the path.ConclusionSelfless giving, or Karma Yoga, is a profound practice that brings gre",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10473",
+        "evidence": " the path.ConclusionSelfless giving, or Karma Yoga, is a profound practice that brings gre",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9836",
+        "evidence": "This process involves understanding the Dharmakaya light, a manifestation of ultimate ",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8013",
+        "evidence": " the nature of reality.Guidance from an Enlightened TeacherWhile meditation is a powerful practice,",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8090",
+        "evidence": "s a powerful practice, guidance from an enlightened teacher can accelerate your journey toward expe",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9505",
+        "evidence": " individuals navigate the inner way. An enlightened teacher can direct students toward the various ",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_24",
+        "evidence": "When The Alarm Comes Back\n\nThe teachings are not about becoming som",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_8",
+        "evidence": "Most people believe enlightenment requires leaving the world behind. The Buddha\ntaught something different: the path moves through ordinary life, not away from it.\nNotice where you are right now. This",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_22",
+        "evidence": "Meditation becomes a tool to enhance our selfless giving, empowering us to connect with our innermost essence.In the journey of selfless giving, we discover unity and connection with all beings, move ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_25",
+        "evidence": "If something or someone consistently depletes energy, it may be wise to limit or eliminate that influence.Seeking Enlightenment: The Highest Form of Personal PowerIn Buddhism and various spiritual pra",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_27",
+        "evidence": "This process involves understanding the Dharmakaya light, a manifestation of ultimate truth and enlightenment experienced at death, and the bardo, the intermediate state between death and rebirth.The ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_2105",
+        "evidence": " is grey. The overhead light is steady. soft daylight along the sill through the hall window at the end. You",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_2419",
+        "evidence": "water. You notice this as you sit down. soft daylight along the sill shifts the morning light across it. The",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_3216",
+        "evidence": "culating again. Always calculating.\nThe soft daylight along the sill outside the window is dark and close.\nT",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4294",
+        "evidence": "nt it. Your voice wouldn't work anyway. soft daylight along the sill outside the conference room windows. Tw",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4770",
+        "evidence": "from your team feels like judgment.\nThe soft daylight along the sill outside makes it impossible to tell wha",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_12063",
+        "evidence": "rches. Your coffee shifts in your hand. soft daylight along the sill against the window. The person beside y",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_14249",
+        "evidence": "t fail. the street below is still busy. soft daylight along the sill is still sharp. the train still moves b",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_16825",
+        "evidence": "l pole tighter. Through the window: the soft daylight along the sill makes the city gray. Someone's shoulder",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_18456",
+        "evidence": "ard. The keys make the sound keys make. soft daylight along the sill against the building. The screen lights",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_18705",
+        "evidence": "een is still open on the same document. soft daylight along the sill has changed outside — brighter now, or ",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      }
+    ]
+  }
+}

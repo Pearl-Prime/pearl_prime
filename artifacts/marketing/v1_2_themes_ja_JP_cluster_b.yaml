@@ -1,0 +1,781 @@
+# V1.2 themes — Cluster B (Cognitive/Focus/Burnout) × ja_JP
+# 25 series = 5 brands × 5 series — natural Japanese content (ja-native)
+#
+# Authority chain (read before editing):
+#   - artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md  (BINDING per-cluster allocation)
+#   - artifacts/research/manga_bestseller_magical_serial_framework_2026-05-12.md  (PR #1051)
+#   - artifacts/research/manga_genz_genalpha_portal_framework_2026-05-13.md       (PR #1053)
+#   - config/manga/canonical_brand_list.yaml  (37-brand canon)
+#   - artifacts/marketing/v1_2_themes_en_US_cluster_b.yaml  (PR #1058 — Cluster B structural mapping)
+#   - artifacts/marketing/v1_2_themes_ja_JP_cluster_a.yaml  (PR #1057 — JP register precedent)
+#
+# Scope:
+#   - locale:           ja_JP
+#   - cluster:          B — Cognitive/Focus/Burnout
+#   - brands:           5 (cognitive_clarity, stabilizer_healing, focus_sprint_workplace,
+#                          adhd_forge_mystery, career_lift_workplace)
+#   - series per brand: 5
+#   - total series:     25
+#
+# Brand-id mapping (constraint doc -> canonical_brand_list.yaml):
+#   cognitive_clarity            -> cognitive_clarity            (exact)
+#   burnout_iyashikei            -> stabilizer_healing           (mapped: closest burnout-iyashikei seinen brand)
+#   executive_function_focus     -> focus_sprint_workplace       (mapped: canonical ADHD/focus brand, seinen)
+#   neurodivergent_strengths     -> adhd_forge_mystery           (mapped: neurodivergent strengths brand, shonen)
+#   career_lift                  -> career_lift_workplace        (mapped: canonical name)
+#
+# Genre allocation for Cluster B × ja_JP (within binding ranges):
+#   healing:                6
+#   slice_of_life:          5
+#   supernatural_everyday:  4
+#   mystery_cozy:           4
+#   fantasy_adventure:      3
+#   romance:                1
+#   horror:                 1
+#   school/other:           1
+#   TOTAL:                  25
+#
+# Locale guidance applied:
+#   - 100% natural Japanese for: series_title, series_logline, series_description,
+#     opening_5_volume_arc, long_arc_spine, reader_promise, marketing_angle, audience.
+#   - Structural enums in English: persona_archetype, daily_life_anchor, portal_mechanic,
+#     episodic_frame_per_volume, magical_register, serial_engine, reading_platform_fit,
+#     genre_family, emotional_engine.
+#   - Tone references: 『葬送のフリーレン』感情の節度 + 『薬屋のひとりごと』職能の確かさ
+#     + 『蟲師』日常の中の超常 + 『ハチミツとクローバー』倦怠と若さの矛盾.
+#   - reading_platform_fit ratio target: ~70% manga_traditional / ~30% webtoon_vertical
+#     (JP buyers prefer pages, older-skewed).
+#   - Cluster B-specific cultural anchors: 過労, 喫茶店, 商店街, 副業, 公園のベンチ, 終電,
+#     コワーキング, 深夜営業, 始発, 屋上, 河川敷, 銀行員, 公務員.
+#   - Persona mix: ~50% Gen Z, ~25% Millennial, ~25% Gen Alpha (Mill heavier than en_US for JP).
+
+schema_version: "1.2"
+locale: ja_JP
+cluster: B
+cluster_name: "Cognitive/Focus/Burnout"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — cognitive_clarity (flagship · josei · overthinking/clarity)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: cognitive_clarity__ja_JP__shinya_no_kinkos
+    brand_id: cognitive_clarity
+    locale: ja_JP
+    persona_archetype: Mill-burnout
+    daily_life_anchor: late_night_economy
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十一歳でコンサル会社を辞めた女性が、二十四時間営業の印刷店で深夜シフトに入る。客が印刷を頼む書類の余白には、その人が何度も繰り返している思考のループが、彼女にだけ薄く印字されている。彼女は同じ用紙で、ループを一度閉じる一枚を黙って添える。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "深夜のコピー機"
+    series_logline: "三十一歳でコンサルを辞めた華は、駅前の二十四時間印刷店で深夜シフトに入っている。客の書類に薄く印字された思考ループを読み、もう一枚、静かに添える。"
+    series_description: "華は三十歳で部長補佐の名刺を持ち、会議中に貧乏ゆすりをしすぎて足を疲労骨折した。辞表を出して実家の二階に戻り、駅前の二十四時間営業のコピー店で深夜シフトに入った。最初の客は博士論文を十一回目に再アップロードする院生で、彼女のファイルの背景に、華にだけ薄く印字されている——『もう一回。もう一回。もう一回』。華は頼まれた通りに印刷する。それから、自分の用紙にA4一枚——臨床的な装飾を抜いた、友人が書いたような短い認知再構成のメモを刷り、袋の底に滑り込ませる。院生は家に帰り、ループは閉じる。夜ごとに新しい客と新しいループ。四十回目のピッチデックを持ってきた起業家。娘の弔辞の改稿七稿を抱えた父親。送らない皮肉な返信メールを十二回印刷する女子。華は思考ループを正確に読まないと二枚目を選べない。長期の伏線——華に読み方を教えたのは誰で、彼女自身の仕事に潜むまだ読めないループはどれか。蛍光灯と紙とトナーの匂いの静かな話。"
+    opening_5_volume_arc:
+      vol_1: "博士課程の女性。論文十一回目。最初の二枚目。ループが閉じる。"
+      vol_2: "四十回目のピッチデックを抱える起業家。サンクコストについての一枚。違う人になって店を出る。"
+      vol_3: "弔辞改稿の父親。華は二枚目を選べない。三度試して、三枚目で届く。"
+      vol_4: "前職の同僚が客として現れる。蛍光灯の下、華に気づかない。華は二枚目を渡さない。なぜかを夜通し考える。"
+      vol_5: "店そのもののループが、レシートの隅に薄く印字されていることに華は初めて気づく。店長が黙って合鍵を差し出す。"
+    comp_titles: ["薬屋のひとりごと", "コンビニ人間", "深夜食堂", "森崎書店の日々", "ハチミツとクローバー"]
+    reader_promise: "あなたの思考ループには、A4一枚で閉じる方法があって、それを選んでくれる店員がいる。"
+    marketing_angle: "『薬屋のひとりごと』の処方の確かさを、二十四時間印刷店の蛍光灯の下で発揮させたら。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + post_corporate_recovery
+    audience: "三十代前半の元会社員女性、最適化文化からの回復過程にあるミレニアル知識労働者層"
+
+  - series_id: cognitive_clarity__ja_JP__mirai_no_jibun_kara_no_tegami
+    brand_id: cognitive_clarity
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: letter
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十四歳のUXデザイナーは、入社三ヶ月で『十年後の自分から手紙が届くアプリ』のプロトタイプ担当に配属される。テスト用の試作版に、彼女自身が書いた覚えのない、明らかに自分の筆跡の手紙が届きはじめる。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "未来の自分からの手紙"
+    series_logline: "二十四歳の凛が試作中のアプリには、彼女自身が書いた覚えのない、十年後の自分からの手紙が届く。最初の手紙は『今日は早く帰っていい』だった。"
+    series_description: "凛は新卒二年目のUXデザイナー。配属されたのは『未来の自分から、必要なときだけ手紙が届く』というメンタルケア・アプリの試作チーム。先輩エンジニアがふざけて『君のアカウントで本気テストして』と言ったその夜、最初の手紙が届く——『今日は早く帰っていい。あの企画はあなたの仕事じゃない』。凛は手紙の筆跡をスキャンする。十年分老けたが、確かに自分の字だった。手紙は週に一度だけ届く。仕事の判断、付き合っている人のこと、両親に言うべきこと、言わないでいいこと。手紙は答えではなく、決めるのは現在の凛だ。だが時々、手紙の末尾に小さな注意書きが付いている——『この件、私(未来)は後悔した』。長期の伏線——いつから手紙は届きはじめたのか、十年後の凛は何を後悔して、何を守ろうとしているのか。チームの誰が、本当にこの機能を実装したのか。アプリのUIスクリーンを差し挟みながら進む、現代日本のオフィスとアパートの物語。"
+    opening_5_volume_arc:
+      vol_1: "最初の手紙。『今日は早く帰っていい』。凛は試してみる。何も悪いことは起きない。"
+      vol_2: "二通目。『あの企画はあなたの仕事じゃない』。引き受けない判断の練習。"
+      vol_3: "恋人について書かれた手紙。注意書きは『私は別れた——遅かった』。凛は決断を保留する。"
+      vol_4: "手紙が届かない週。凛は不安になる。十年後の自分は今、忙しいのかもしれない。"
+      vol_5: "先輩エンジニアの画面に、凛宛ての手紙のコードが映る。彼は知らないと言う。本当に知らない。"
+    comp_titles: ["コーヒーが冷めないうちに", "違国日記", "夜は短し歩けよ乙女", "君は月夜に光り輝く", "ハチミツとクローバー"]
+    reader_promise: "未来の自分は、いま手紙を書く準備をしている。返事はあなたが書く。"
+    marketing_angle: "『コーヒーが冷めないうちに』の時間飛ばしを、スマホアプリのプッシュ通知にしたら。"
+    genre_family: healing
+    emotional_engine: future_self_compassion + decision_clarity
+    audience: "新卒二〜三年目のZ世代UI/UX関連職、自己決定に揺れる二十代前半"
+
+  - series_id: cognitive_clarity__ja_JP__atama_no_naka_no_kissaten
+    brand_id: cognitive_clarity
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: cafe_kissaten
+    portal_mechanic: ritual
+    episodic_frame_per_volume: recipe
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十九歳の中間管理職が、昔の同級生が営む昭和の喫茶店で、自分の頭の中の会議室を一つずつ閉店させていく。喫茶店の各席は、頭の中のずっと開きっぱなしの『未完の会議』に対応している。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "頭の中の喫茶店"
+    series_logline: "中間管理職の悠は、頭の中で同時に七つの会議が止まっていることに気づく。土曜の朝、昭和の喫茶店のカウンターで、同級生が一杯ずつ会議を閉じてくれる。"
+    series_description: "悠は二十九歳、メーカー二年目の係長。月曜の朝礼で『先週の進捗を一言で』と振られて、頭の中で七つの会議が同時に喋り出した。退職した上司の声、母親の声、辞めた部下の声、自分自身の何年か前の声。土曜の朝、駅前の昭和の喫茶店『深呼吸』に入る。マスターは中学の同級生だった青年で、何も聞かずにカウンターの七つの席を指す。『どの会議から閉じる?』。彼の店では、客が頭の中で開きっぱなしの会議を、一杯ずつ言葉にしながら閉じていく。コーヒーは媒介で、本体は『この件は今日で議事録を書いて、終わりにする』という宣言だ。各巻ごとに一つの『未完の会議』が閉じる。長期の伏線——マスター自身が抱える、まだ閉じていない一つの会議は何か。悠は最後にそれを聞くのか。蛍光灯ではなく暖色の白熱灯、紙ナプキン、サイフォンの音、雨の日の通り。"
+    opening_5_volume_arc:
+      vol_1: "最初の会議——退職した上司の小言。悠はそれをマスターの前で言葉にする。会議が閉じる。月曜の朝礼で、最初の一言が出る。"
+      vol_2: "二つ目——母親の『あなたは長女なのだから』。閉じ方は『私は反論を諦めた、今日で議事録に書く』。"
+      vol_3: "三つ目——辞めた部下への謝罪。一杯では閉じない。次の土曜に持ち越す。"
+      vol_4: "四つ目——昔の自分。二十二歳の悠が二十九歳の悠に言う『お前はもう私の言うことを聞かなくていい』。"
+      vol_5: "マスターの席が一つだけ空いている。悠は座らない。マスターの会議を、まだ聞かない。"
+    comp_titles: ["深夜食堂", "コーヒーが冷めないうちに", "森崎書店の日々", "薬屋のひとりごと", "ハチミツとクローバー"]
+    reader_promise: "頭の中で開きっぱなしの会議は、一杯のコーヒーと一行の議事録で閉じることができる。"
+    marketing_angle: "『深夜食堂』の店主の存在感を、思考のループを言葉にして閉じるための喫茶店に置き換えたら。"
+    genre_family: slice_of_life
+    emotional_engine: ritual_closure + chosen_family
+    audience: "二十代後半〜三十代前半の中間管理職、複数案件を同時並行で抱えるミレニアル知識労働者"
+
+  - series_id: cognitive_clarity__ja_JP__shinrin_ofisu
+    brand_id: cognitive_clarity
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: coworking
+    portal_mechanic: location
+    episodic_frame_per_volume: locale
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "三鷹の森にある古い洋館を改装したコワーキングは、利用者の集中力を一日二時間だけ預かってくれる。預ける条件は『今日その二時間で何を仕上げるか』を、館の中の樹に書きつけること。樹は約束を覚えていて、達成しなかった場合は静かに翌週まで集中を預からない。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "森林オフィス"
+    series_logline: "三鷹の森のコワーキングは、樹に約束した二時間だけ集中を貸してくれる。守れなかった人には、翌週、樹がそっと顔を背ける。"
+    series_description: "雛は新卒一年目のフリーランス志望のWebライター、副業がそろそろ本業の収入を超えそうな段階。在宅では集中できず、ある日、三鷹の森にある『森林オフィス』を見つける。受付には誰もいない。古い洋館の中央に一本の大きなクスノキが伸びていて、机はその周囲にある。利用方法は壁の張り紙——『その日の二時間で仕上げることを、紙片に書いて樹に結ぶ。二時間、樹は雑念を預かる。終わったら、紙片を取り外す』。雛は最初は半信半疑だったが、二時間、本当に何も考えずに書けた。守れなかった次の週、樹はわずかに顔を背けたように見えた。森林オフィスには各巻、別のフリーランスや副業者が来る。漫画家の卵、税理士見習い、副業の翻訳者、独立準備中の会社員。各巻一人、樹との関係を結び直していく。長期の伏線——なぜ樹は約束を覚えているのか、館の元の主は誰だったのか。"
+    opening_5_volume_arc:
+      vol_1: "雛、最初の二時間。樹に結ぶ紙片。仕上がる。次の週、また通う。"
+      vol_2: "漫画家の卵の青年。十回目の持ち込みで落ちた直後。樹は彼に三時間預けることを許す。例外。"
+      vol_3: "雛が二時間で仕上げられず、翌週、樹は顔を背ける。雛は紙片の書き方を変える——『仕上げる』ではなく『書き始める』。"
+      vol_4: "税理士見習いの女性。彼女の紙片には、確定申告ではなく『母に電話する』と書いてある。樹はそれも預かる。"
+      vol_5: "雨の日。誰も来ない。雛は受付の引き出しに、館の元の主——三十年前の高名な児童文学作家の手紙を見つける。"
+    comp_titles: ["森崎書店の日々", "葬送のフリーレン", "となりのトトロ", "蟲師", "コーヒーが冷めないうちに"]
+    reader_promise: "二時間だけ、雑念を預けて集中を借りることができる場所がある。約束は樹が覚えている。"
+    marketing_angle: "『蟲師』の自然との対話を、フリーランスのコワーキング・スペースに移植したら。"
+    genre_family: supernatural_everyday
+    emotional_engine: nature_pact + competent_calm_specialist
+    audience: "二十代前半のフリーランス志望Z世代、副業から本業移行期の知識労働者"
+
+  - series_id: cognitive_clarity__ja_JP__kioku_no_seiri_kan
+    brand_id: cognitive_clarity
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: mystery_box
+    long_arc_spine: "三十二歳の元検索エンジン会社のPMが、亡き祖父の遺品整理を引き継いで『記憶の整理館』を継ぐ。客の頭の中で何度も再生される一つの記憶を聞き出し、それを文鎮ほどの小さな金属の塊に転写して棚に並べる。客の頭の中からその記憶が消えるわけではないが、強度が下がる。長期の謎——祖父が転写を断った一つの記憶が、地下室の引き出しに保管されている。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "記憶の整理館"
+    series_logline: "頭の中で何度も再生される一つの記憶を、文鎮にして棚に置く。整理館の主の三十二歳の女性は、祖父から店を継いだ。"
+    series_description: "凜子は三十二歳。大手検索エンジン会社で六年プロダクト・マネージャーをして、年末年始に祖父の訃報で帰省した。葬式の三日後、町の弁護士から封筒を渡される——『記憶整理士の免状』。祖父は表向きは小さな金物屋の主だったが、裏では『記憶の整理館』を営んでいた。客は予約制で訪れ、頭の中で何度も再生される一つの記憶——後悔、別れの場面、言わなかった一言、見たくない自分の姿——を、凜子の聞き取りに従って言葉にする。凜子は聞き終わると、客の手の上に小さな金属の塊を置く。客はそれに記憶を映す。塊は文鎮ほどの重さになり、棚に並ぶ。客の頭の中から記憶が消えるわけではないが、再生される回数が劇的に減る。凜子は祖父の手帳と棚を見て、徐々に整理士の作法を学ぶ。長期の伏線——地下室に一つだけ、祖父が転写を最後まで断った客の記憶がある。誰の何の記憶か、なぜ祖父は断ったのか。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。離婚から五年経つ五十代の男性。再生され続ける『あの夜の妻の表情』。凜子は最初の文鎮を作る。"
+      vol_2: "二人目の客。受験で母にぶたれた瞬間を二十年再生している三十代女性。"
+      vol_3: "凜子は自分の頭の中の一つの記憶——前職で部下を退職に追い込んだ日——に気づく。自分には作れないと祖父の手帳に書いてある。"
+      vol_4: "客が文鎮を取り戻しに来る。整理館は返品も引き受ける。凜子はその意味をまだ知らない。"
+      vol_5: "地下室の鍵が開く。引き出しの底に、祖父の手書きの注釈付きの文鎮が一つ。誰の記憶でもない、祖父自身のものだった。"
+    comp_titles: ["薬屋のひとりごと", "深夜食堂", "葬送のフリーレン", "森崎書店の日々", "ツバキ文具店"]
+    reader_promise: "何度も再生される一つの記憶は、文鎮になって棚に置くことができる。消すわけではない、軽くするだけ。"
+    marketing_angle: "『薬屋のひとりごと』の職能の確かさを、認知行動療法の『記憶の再評価』に下ろしたら。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + competent_calm_specialist
+    audience: "三十代前半の女性元会社員、過去の判断を反芻し続ける完璧主義のミレニアル層"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — stabilizer_healing (core · seinen · burnout/iyashikei)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stabilizer_healing__ja_JP__shotengai_no_yasumijo
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: Mill-burnout
+    daily_life_anchor: retail_service
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "燃え尽きた三十代の元営業マンが、祖母が遺した古い商店街の二階の小部屋を改装して、有料の『休み所』を開く。客は一回千円で、ただ畳の上に寝るだけ。彼は何もしない。客が起きたら茶を出す。それだけ。各巻、別の客の燃え尽きの形が描かれる。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "商店街の休み所"
+    series_logline: "東十条の商店街の二階、四畳半に畳を敷いて『一時間千円、寝てください』とだけ書いた看板を出した三十二歳の男。何もしない、をする。"
+    series_description: "翔太は三十二歳、東十条の商店街で生まれ育ち、東京で営業を九年やって、燃え尽きて帰ってきた。祖母は二年前に亡くなっていて、商店街の魚屋の二階の小部屋が、彼に残されていた。引っ越し荷物を解いている途中で、何もする気が起きなくなった。畳に寝た。三日経って、看板を作った——『休み所。一時間千円。寝るだけ。それ以外は何もしません』。最初に来たのは商店街の八百屋の七十代の店主だった。一時間寝て、三千円置いていった。釣りは要らない、と言った。それから、町内のサラリーマン、子育て中の母親、夜勤明けの看護師、終電を逃した会社員、受験生が来た。翔太は何もしない。客が寝ている間、彼は別の部屋で本を読むか、湯を沸かして待つ。起きた客には茶を出す。会話は最低限。一時間千円のビジネスモデルは、彼自身の燃え尽きの後遺症でもある——彼は他人のために動けないが、空間と静けさは提供できる。長期の伏線——祖母自身、この部屋で何をしていたのか。引き出しの底に、彼女の手書きのメモが一枚ある——『何もしない、をする』。"
+    opening_5_volume_arc:
+      vol_1: "看板を出した最初の日。客はゼロ。翔太自身が畳に寝る。"
+      vol_2: "八百屋の七十代の店主。一時間。三千円。釣りは要らない。"
+      vol_3: "夜勤明けの看護師の女性。畳の上で泣く。翔太はティッシュだけ置いて部屋を出る。"
+      vol_4: "受験生の男子高校生。母親に紹介された。一時間ずっと天井を見ている。"
+      vol_5: "祖母の引き出しの底のメモ。翔太は読む。読み終わって、もう一時間、自分が畳に寝る。"
+    comp_titles: ["深夜食堂", "コンビニ人間", "森崎書店の日々", "あん", "葬送のフリーレン"]
+    reader_promise: "何もしない、を金を払ってやっていい場所がある。誰も褒めない、誰も急かさない。"
+    marketing_angle: "『深夜食堂』の店主の手数を引いて、空間と静けさだけを残したら。"
+    genre_family: healing
+    emotional_engine: nothing_is_doing + post_corporate_recovery
+    audience: "都市で燃え尽きて地方や下町に戻った三十代男性、回復期のミレニアル層"
+
+  - series_id: stabilizer_healing__ja_JP__kawara_no_benchi
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: park_bench
+    portal_mechanic: location
+    episodic_frame_per_volume: locale
+    magical_register: magical_realism
+    serial_engine: location_anthology
+    long_arc_spine: "終電を逃した二十五歳のSEが、河川敷の一本のベンチに座ると、そのベンチに過去に座って泣いた人々の声がかすかに聞こえる。声は責めない、ただ『お前だけじゃない』と言う。彼は週に一度だけそのベンチに通うようになり、各巻、別のベンチに別の声を見つけていく。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "河川敷のベンチ"
+    series_logline: "終電を逃した夜、河川敷のベンチに座ると、過去に同じベンチで泣いた人々の声がかすかに聞こえる。声は責めない。"
+    series_description: "和真は二十五歳、システムエンジニア二年目。リリース直前の金曜、終電を逃して荒川の河川敷を歩いた。広い川面と高速道路の灯りの間で、一つだけ常夜灯がついているベンチを見つける。座った瞬間、声が聞こえる——『お前だけじゃない』。男女、年齢ばらばら、十数人の声。誰も和真を見ない、誰も話しかけない、ただかつてこのベンチで一人で泣いた人々の小さな声が、霧のように残っているだけ。和真は朝まで座る。月曜、彼はリリースを乗り切る。次の週も、その次の週も、金曜の深夜だけベンチに通う。声は飽きない、毎週違う声が聞こえる。各巻、別の場所のベンチを彼は見つける——目黒川、隅田川、京都の鴨川、大阪の淀川、北海道の網走川。各巻、別のベンチに別の声がいる。長期の伏線——和真自身の声が、いつかどこかのベンチに残る日が来るのか。"
+    opening_5_volume_arc:
+      vol_1: "最初のベンチ、荒川。十数人の声。『お前だけじゃない』。月曜、和真は乗り切る。"
+      vol_2: "目黒川のベンチ。声は若い——大学生たち。就活の声、別れの声、進学を諦めた声。"
+      vol_3: "鴨川のベンチ。京都出張のついでに座る。声は古い——昭和の終わりの会社員、平成初頭の主婦。"
+      vol_4: "和真は同僚にベンチの話をする。同僚は笑わない。彼にも知っているベンチがある。"
+      vol_5: "和真は荒川のベンチで一度だけ、泣く。次の週、ベンチの声に、新しい一人が加わっている気がする。"
+    comp_titles: ["蟲師", "夜は短し歩けよ乙女", "葬送のフリーレン", "深夜食堂", "森崎書店の日々"]
+    reader_promise: "あなたが泣いた場所には、あなたより前に泣いた誰かがいる。あなたの後にも来る。"
+    marketing_angle: "『蟲師』の自然霊の優しさを、現代都市の河川敷のベンチに置いたら。"
+    genre_family: supernatural_everyday
+    emotional_engine: you_are_not_alone + paying_it_forward
+    audience: "二十代後半の都市Z世代エンジニア・知識労働者、孤独な深夜帰宅を経験する層"
+
+  - series_id: stabilizer_healing__ja_JP__shuden_no_uta
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: school_commute
+    portal_mechanic: train_station
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三十代の会社員六人が、終電の同じ車両で偶然顔を覚え、誰も挨拶しないままに四年通勤する。ある日、一人が降りなくなる。残りの五人は、その人が誰だったのかを、各巻一人ずつ突き止めていく。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "終電の歌"
+    series_logline: "京浜東北線終電、最後尾車両。同じ三十代六人がいつも乗っている。ある夜、一人が降りなくなる。残り五人は名前も知らない。"
+    series_description: "京浜東北線、平日終電、最後尾車両。十時五十八分、川崎発、横浜方面。三十代の会社員六人がいつも同じ顔ぶれで乗っている——濃紺スーツの男、ベージュコートの女、ノートPC肩掛けの細身の男、髪を一つに結んだ女、いつもイヤホンしている男、文庫を読んでいる女。四年間、誰も挨拶しない。三月の月曜、いつもイヤホンしている男が、乗ってこない。火曜も、水曜も、来ない。残り五人は、お互いの顔をはじめて確認するように見る。話さない。次の週も、彼は来ない。物語は五人がそれぞれの理由で、いない一人を探しはじめるところから始まる。各巻、一人の視点から、いない男のことを少しずつ知っていく。長期の伏線——彼は何があって消えたのか、五人はなぜ会話なしの繋がりを大切に思っていたのか、彼らはいつ自分の生活を整え直すのか。"
+    opening_5_volume_arc:
+      vol_1: "三月の月曜。イヤホンの男が来ない。濃紺スーツの男の視点で一巻。彼は会社の人事に問い合わせる勇気がない。"
+      vol_2: "ベージュコートの女の視点。彼女は男の降りる駅を突き止める。改札を出ない。"
+      vol_3: "ノートPCの男の視点。彼自身が燃え尽きている。男のことを考えながら、自分の心療内科を予約する。"
+      vol_4: "髪を結んだ女の視点。彼女は車両に一輪の花を置く。誰も持って帰らない。次の日まで残っている。"
+      vol_5: "文庫の女の視点。男の住むマンションの管理人に話を聞く。男は引っ越したと言われる。五人は車両でその夜、初めて軽く頷き合う。"
+    comp_titles: ["コンビニ人間", "深夜食堂", "森崎書店の日々", "違国日記", "ハチミツとクローバー"]
+    reader_promise: "言葉を交わさない人にも、四年分の繋がりがある。消えた一人を心配する権利が、あなたにはある。"
+    marketing_angle: "『深夜食堂』の常連感を、終電の最後尾車両に置き換えたら。"
+    genre_family: slice_of_life
+    emotional_engine: silent_solidarity + life_stage_recognition
+    audience: "三十代の都市通勤会社員、燃え尽きの予兆を抱えるミレニアル層"
+
+  - series_id: stabilizer_healing__ja_JP__okujou_no_kohi
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: cafe_kissaten
+    portal_mechanic: ritual
+    episodic_frame_per_volume: recipe
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六歳の元バリスタが、自社ビルの屋上で平日昼休みだけ営業する『屋上のコーヒー』を開く。客は同じビルで働く人。一杯入れる間に、客の今週の燃え尽きの段階を聞く。一週間後、同じ客が来たら、別の豆を出す。回復のステージに合わせた豆の選び方の物語。"
+    volume_runway_target: 180
+    reading_platform_fit: webtoon_vertical
+    series_title: "屋上のコーヒー"
+    series_logline: "中野のオフィスビル屋上、平日十二時から十三時まで。一杯五百円。バリスタの早苗は、客の今週の燃え尽きの段階を聞いてから豆を選ぶ。"
+    series_description: "早苗は二十六歳、専門学校卒業後にチェーン店で四年バリスタを務め、辞めて自社ビルの屋上を改装した。一杯五百円、平日昼休みのみ、現金。屋上には木製のカウンター一つ、椅子四つ。風が強い日は閉店。早苗は客の顔を覚えており、最初の一杯は『今日はどんな感じですか』と聞く。続く週、客の答えを覚えていて、別の豆を出す。燃え尽きの五段階——『気合いで持ち直せる』『気合いだけでは無理だ』『何もしたくない』『何もしたくない自分が嫌』『何もしないことに罪悪感がなくなった』——にそれぞれ対応した豆の表が、彼女のノートにある。客の側は、自分が今どの段階か知ろうとして毎週来る。長期の伏線——五段階目の客に出す豆が、ノートには空欄になっている。早苗は自分の師匠だった三十年前のバリスタの遺したノートから、その豆を探していく。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。二十代の女性、システム会社の若手。第一段階『気合いで持ち直せる』。明るい焙煎。"
+      vol_2: "三週通ってきた青年。今日は『何もしたくない』。早苗はノートを開き直す。深い焙煎、ハチミツを添える。"
+      vol_3: "新人バリスタ志望の女子大生が、見学に来る。早苗は五段階の表を見せる。"
+      vol_4: "客の一人が三ヶ月来ない。早苗は心配する。三ヶ月半で戻ってくる。第五段階だ、と本人が言う。"
+      vol_5: "師匠の遺したノートの『五段階目の豆』のページに、染みがある。早苗は染みを湯で湿らせる。文字が浮かぶ——『何もない豆』。"
+    comp_titles: ["薬屋のひとりごと", "深夜食堂", "コーヒーが冷めないうちに", "森崎書店の日々", "アバランチ"]
+    reader_promise: "あなたの燃え尽きの段階に合う一杯がある。段階は変わる、豆も変わる。"
+    marketing_angle: "『薬屋のひとりごと』の処方の精度を、ビル屋上の昼休みコーヒーに移植したら。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + ritual_closure
+    audience: "二十代後半の都市オフィスワーカー、燃え尽きの段階を自分で知りたいZ世代知識労働者"
+
+  - series_id: stabilizer_healing__ja_JP__yoru_no_byoutou
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: hospital_ward
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: occult_cosmic
+    serial_engine: case_of_the_week
+    long_arc_spine: "燃え尽きで休職した三十四歳の元医療事務員が、夢の中で『燃え尽きた人だけが入院する病棟』に通う。病棟には看護師がいる。看護師は彼女の前職の上司だった人で、現実では十年前に過労死している。各巻、別の患者の燃え尽きの形が、暗い色調で描かれる。"
+    volume_runway_target: 100
+    reading_platform_fit: manga_traditional
+    series_title: "夜の病棟"
+    series_logline: "休職中の凪は、夜眠ると、燃え尽きた人だけが入院する病棟にいる。看護師は十年前に過労死した、彼女の元上司だ。"
+    series_description: "凪は三十四歳。大学病院の医療事務で十二年働いて、過労で適応障害と診断され、半年休職している。眠るのが怖くなったのは三ヶ月前。眠ると、見たことのない暗い病棟にいる。蛍光灯はチカチカ、廊下は曲がりくねっていて、白衣を着た女性が一人だけ常駐している。彼女は十年前、凪の上司だった主任——過労で倒れて、職場で亡くなった人だった。主任は何も説明しない。ただ、凪を含めた数人の入院患者を世話している。患者は皆、現実では燃え尽きて停止している人々。営業の男性、看護師、教師、公務員、母親、若いソーシャルワーカー。各巻、別の患者の燃え尽きの過程が、ホラー寄りの色調で描かれる——責められた言葉、見られた目、降りられない電話。だが主任は誰も責めない、ただ淡々と看護する。長期の伏線——凪は退院できるのか、主任は誰のために病棟にいるのか、現実の凪はどこまで戻るのか。重たいが、最後はやさしい話。"
+    opening_5_volume_arc:
+      vol_1: "凪、最初の入院。主任との再会。何も説明されない。最初の患者——営業の男性。彼の話を凪は聞く。"
+      vol_2: "看護師の患者。同業者だった。彼女が現実で同期だったことを凪は思い出す。"
+      vol_3: "教師の患者。彼の燃え尽きは、生徒一人の自死から始まっていた。主任は責めない。"
+      vol_4: "凪は現実の心療内科を再開する。病棟の夢の頻度が減る。主任は寂しそうに見える。"
+      vol_5: "凪は退院の鍵を渡される。主任は『また見舞いに来ていい』と言う。凪は朝、目を覚まして、復職届けを書く準備をする。"
+    comp_titles: ["蟲師", "ダンダダン", "葬送のフリーレン", "コンビニ人間", "Black Jack"]
+    reader_promise: "燃え尽きの夜にも、世話をしてくれる人がいる。怖くてもいい、責めない場所がある。"
+    marketing_angle: "『蟲師』の自然と病の境界を、現代の過労死と休職の物語に下ろしたら。"
+    genre_family: horror
+    emotional_engine: dark_compassion + chosen_family
+    audience: "三十代の医療・教育・公務員の女性、燃え尽きで休職中または復職前のミレニアル層"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — focus_sprint_workplace (core · seinen · executive function/ADHD)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: focus_sprint_workplace__ja_JP__nijuppun_taimu
+    brand_id: focus_sprint_workplace
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: coworking
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十八歳の元プログラマーが、ADHD当事者のための小さな塾を商店街の二階で開く。塾では『二十分タイマー』が一つだけある。生徒は二十分でできることを宣言し、二十分後に何ができたかを報告する。タイマーは木製で、祖父の遺品。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "二十分タイム"
+    series_logline: "ADHDの当事者だけが通う、商店街二階の小さな塾。木の二十分砂時計が一つあるだけ。先生も二十八歳のADHDだ。"
+    series_description: "渚は二十八歳、二十六歳でADHDの診断を受けた元プログラマー。退職後、商店街の元珈琲店の二階を借りて、ADHDの当事者向けの小さな塾を開いた。月謝は一回二千円。集まるのは小学校高学年から大学生まで六人ほど。塾には机が六つあり、中央には木製の砂時計が一つ。砂は二十分で落ちきる。授業はない。生徒は塾に来ると、まず『二十分で何をするか』を渚に向かって声に出して言う——『単語五十個書く』『プログラミングの章を一節読む』『将来の不安について三行書く』。渚は頷く。砂時計を反転する。二十分後、各生徒は『何ができたか』を口頭で報告する。できなかった日は、できなかったと言うだけでいい。渚は判定しない。各巻、別の生徒の物語が進む——RSDで宿題が手につかない中学生、過集中で逆に消耗する大学生、ワーキングメモリの不足で会議が辛い社会人。長期の伏線——砂時計は渚の祖父が彼女のために手作りした遺品で、祖父自身もADHD当事者だった。渚は祖父の遺した手紙を、毎週一通ずつ読んでいる。"
+    opening_5_volume_arc:
+      vol_1: "塾の開校。最初の生徒は中学二年生の少年。『漢字を二十個書く』。十二個書けた。それでよし。"
+      vol_2: "高校生の少女。RSDで友達からの返信を見られない。『LINEを一通開く』。開けた。返信はしない。"
+      vol_3: "大学生の青年。過集中型。彼の宣言は『二十分後に必ず立ち上がる』。塾の作法を逆向きに使う。"
+      vol_4: "渚自身の二十分。彼女は祖父の手紙を一通だけ読む。"
+      vol_5: "新しい生徒——四十代の母親。子どももADHDで、自分もそうかもしれないと言う。塾は年齢で区切らない。"
+    comp_titles: ["薬屋のひとりごと", "ハチミツとクローバー", "葬送のフリーレン", "森崎書店の日々", "ホリミヤ"]
+    reader_promise: "二十分なら、何かはできる。何もできなくても、ここでは責められない。"
+    marketing_angle: "『薬屋のひとりごと』の処方の確かさを、ADHD当事者のポモドーロ塾に下ろしたら。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + neurodivergent_pride
+    audience: "ADHD・ASD当事者またはグレーゾーンの二十代Z世代、自己理解の途上にある社会人・大学生層"
+
+  - series_id: focus_sprint_workplace__ja_JP__shusho_no_kioku
+    brand_id: focus_sprint_workplace
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: workplace_office
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: magical_realism
+    serial_engine: mystery_box
+    long_arc_spine: "三十三歳の中堅社員が、退職した部下が残した一冊の手書きノートを引き継ぐ。ノートには会議や案件ごとに『誰が何をどう決めたか』が淡々と書かれている。ノートを読むと、社員の頭の中に欠けていた『会議のあの結論』が戻ってくる。ノートを書いた本人は、書いた瞬間にその記憶を失っていた。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "書記の記憶"
+    series_logline: "退職した部下が机に残した一冊のノート。読み始めた途端、半年前の会議の結論が、頭の中にゆっくり戻ってくる。"
+    series_description: "悠介は三十三歳、中堅メーカーの企画課係長。退職した部下の沙織が机に残していった一冊のノート。表紙には『書記の記憶』とだけ書いてある。最初の数ページを読んで、悠介は息を呑む。半年前の会議で、彼が部長に何を反論し、何を取り下げたかが、彼の記憶よりも詳細に書かれている。読み終わると、頭の中に欠けていた『会議のあの結論』が戻ってくる——彼は当時、自分の提案を取り下げる代わりに、別案件の主導権を確保していた。完全に忘れていた。沙織は退職前、上司や同僚の知らないところでこのノートを書き続けていた。彼女の几帳面さは知られていたが、書記としての記録の精度は誰も知らなかった。各巻、悠介はノートの別のページを開く。読まれた記憶は彼の頭の中に戻ってくる。長期の伏線——沙織は自分が書いた瞬間にその記憶を失っていた、と最後のページに書いてある。彼女は今、何を覚えていて、何を覚えていないのか。悠介はノートを彼女に返すべきか、自分の手元に置くべきか。"
+    opening_5_volume_arc:
+      vol_1: "ノートを発見。最初のページ。半年前の会議の結論が戻る。悠介は飲み会の夜、部長に確認する。書記は正しい。"
+      vol_2: "二年前の人事評価面談。悠介は自分が部下に何を約束したかを思い出す。約束は守られていない。"
+      vol_3: "悠介は沙織に連絡を取る。沙織は静かに『そのノートは差し上げます』とだけ言う。"
+      vol_4: "ノートのページの一つに、悠介の名前が書かれていない会議がある。誰が何を決めたかは書いてあるが、悠介はそこに出席していたかどうか思い出せない。"
+      vol_5: "沙織と再会。彼女は退職後、本屋でアルバイトしている。彼女の頭の中の半年は、本当に空白だった。悠介はノートを返さない決断をする。"
+    comp_titles: ["薬屋のひとりごと", "森崎書店の日々", "ハチミツとクローバー", "コンビニ人間", "違国日記"]
+    reader_promise: "会議で決まったことを覚えていなくても、誰かがどこかで書いている可能性がある。"
+    marketing_angle: "『薬屋のひとりごと』の知の継承を、現代日本のオフィスのワーキングメモリ問題に置き換えたら。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_record + working_memory_relief
+    audience: "三十代の中堅会社員男性、ワーキングメモリと中間管理職の負荷に消耗するミレニアル層"
+
+  - series_id: focus_sprint_workplace__ja_JP__shukin_no_neko
+    brand_id: focus_sprint_workplace
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "二十二歳の大学生が、シェアハウスで保護した三毛猫が、住人それぞれの『先延ばし』を一つずつ食べてくれる神獣だと気づく。猫は一日に一つだけ食べる。住人は各自、何を食べさせるかを毎朝紙に書く。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "先延ばしの猫"
+    series_logline: "シェアハウスの三毛猫は、住人の『先延ばし』を一日一つ食べる。住人は毎朝、紙に書く。猫はそれだけ食べる。"
+    series_description: "あおいは二十二歳、大学院修士一年。彼女が住む四人シェアハウスに、ある雨の夜、子猫が紛れ込んだ。住人四人は猫に『シカク』と名付けた——三角でも丸でもないから。一週間後、住人の一人が冗談で『提出を先延ばしにしている修論の章』と書いた紙を、シカクの皿の隣に置いた。翌朝、紙はなくなっていた。書いた本人は、その章を午後三時に書き始めて、夕方には提出した。住人は半信半疑で実験する。シカクは一日に一つだけ、紙を食べる。先延ばしされている『あること』が、紙に書かれていれば。書かれていない先延ばしは食べない。たべるものは『行動の先延ばし』であって、決断の先延ばしや感情の先延ばしには触れない。あおいたち四人は、毎朝シカクの皿の隣に紙を置くようになる。各巻、別の住人の先延ばしが描かれる——修論、両親への電話、転職活動、皮膚科の予約、年賀状、別れ話、確定申告。長期の伏線——シカクは何年生きるのか、シカクが食べた紙はどこに行くのか、シカクが食べてくれない種類の先延ばしを、住人たちはどう扱うのか。"
+    opening_5_volume_arc:
+      vol_1: "シカクの登場。最初の紙——『修論第三章』。翌日、書き始める。住人四人は実験を始める。"
+      vol_2: "あおいの紙——『皮膚科の予約』。三日連続書いたら、シカクは三日目だけ食べた。なぜか。"
+      vol_3: "シカクが食べない紙——『母に本当のことを言う』。これは『行動』ではなく『決断』。住人は別の方法を考える。"
+      vol_4: "シカクが体調を崩す。住人は皆、シカクのために自分の先延ばしを書くのをやめる。"
+      vol_5: "シカクは快復。あおいは初めて、自分の先延ばしではなく『シカクのキャットフードを買う』と書く。シカクは食べない——『これは先延ばしではない』。"
+    comp_titles: ["蟲師", "夏目友人帳", "薬屋のひとりごと", "夜は短し歩けよ乙女", "となりのトトロ"]
+    reader_promise: "あなたの先延ばしを一日一つ、誰かが代わりに食べてくれる場所がある。書くだけでいい。"
+    marketing_angle: "『夏目友人帳』のニャンコ先生を、ADHDの先延ばし問題に向き合うシェアハウスに招いたら。"
+    genre_family: supernatural_everyday
+    emotional_engine: kind_supernatural_helper + chosen_family
+    audience: "二十代前半の大学院生・大学生Z世代、ADHD・先延ばしに悩む知的好奇心の高い層"
+
+  - series_id: focus_sprint_workplace__ja_JP__renraku_no_nai_seishun
+    brand_id: focus_sprint_workplace
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: workplace_office
+    portal_mechanic: ritual
+    episodic_frame_per_volume: locale
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三十代半ばの五人の元同期が、十二年ぶりに同じプロジェクトで再会する。各自が抱えている『集中の崩れ』——会議で考えられない、メールが書けない、会話が頭に入らない——を、お互いに少しずつ補い合いながら、八ヶ月のプロジェクトを進める。連絡網は誰も作らない、ただ毎週金曜の昼食だけ、決まった蕎麦屋に集まる。"
+    volume_runway_target: 120
+    reading_platform_fit: manga_traditional
+    series_title: "連絡のない青春"
+    series_logline: "三十代半ば、十二年ぶりに再会した五人の元同期。連絡網は作らない。金曜の昼の蕎麦屋だけ。"
+    series_description: "和喜は三十六歳、メーカーの主任。十二年前の新人研修で同期だった四人と、社内の大型プロジェクトで偶然再集結することになった。皆、別の部署、別の家族、別の悩み。皆、それぞれに集中力の崩れを抱えている——会議で議題の半分を聞き逃す悟、メールの返信が一週間遅れる美穂、上司の話が頭に入らない友也、若手部下の名前を覚えられない由香。誰もカミングアウトしない。皆、自分だけだと思っている。プロジェクトの初週、和喜が冗談で『金曜の昼、蕎麦屋で』と言い、五人は集まった。それから八ヶ月、毎週金曜十二時十五分、駅前の小さな蕎麦屋。各自が自分の一週間の『集中が切れた瞬間』を、最低限の言葉で報告する。アドバイスはしない。誰かが頷くだけ。各巻、別の同期の物語が、軽い色調で進む。長期の伏線——彼らは皆、新人研修の最終日にあったある出来事を、別々の角度から覚えている。最後の巻で、それは共有される。"
+    opening_5_volume_arc:
+      vol_1: "プロジェクト発表。五人の再集結。初回の蕎麦屋。最初の報告——和喜『朝の会議で社長の話を覚えていない』。"
+      vol_2: "美穂の月。彼女のメール返信遅延が、案件の山場で炸裂する。蕎麦屋では誰も責めない。彼女は翌週、月一の通院を再開する。"
+      vol_3: "友也の月。彼は上司の話を録音している。蕎麦屋で『これ、皆もやっていいですか』と聞く。皆、やる。"
+      vol_4: "由香の月。彼女は若手の名前を覚えるのを諦める代わりに、彼らに『呼んでほしい呼び方』を聞く。"
+      vol_5: "プロジェクト中盤。蕎麦屋に五人目——悟が遅刻。彼の集中の崩れが一番深い。皆、何も言わずに席を空けておく。"
+    comp_titles: ["ハチミツとクローバー", "コンビニ人間", "深夜食堂", "森崎書店の日々", "ホリミヤ"]
+    reader_promise: "集中力が崩れていることは、十二年経った同期の誰もが抱えている。連絡網は要らない、蕎麦屋でいい。"
+    marketing_angle: "『ハチミツとクローバー』の同窓性を、十二年後、ワーキングメモリ問題を抱えた三十代に伸ばしたら。"
+    genre_family: slice_of_life
+    emotional_engine: silent_solidarity + life_stage_recognition
+    audience: "三十代半ばの男女会社員、新人時代の同期と再会する世代、集中力の自覚が強まるミレニアル層"
+
+  - series_id: focus_sprint_workplace__ja_JP__nyu_no_tou
+    brand_id: focus_sprint_workplace
+    locale: ja_JP
+    persona_archetype: GA-tween
+    daily_life_anchor: school_homework
+    portal_mechanic: portal_gate
+    episodic_frame_per_volume: case
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "中学二年生のADHDの少年が、宿題に手をつけられない夜、机の引き出しの中に小さな塔への入り口を見つける。塔は十二階、各階に違う『集中の試練』がある。少年は一階ずつ登っていき、各階で出会う仲間と一緒に、現実の宿題に対応するスキルを獲得していく。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "二十分の塔"
+    series_logline: "中学二年生の蓮の机の引き出しには、十二階の塔への入り口がある。塔の中の二十分は、現実の二十分。各階で『集中の試練』が違う。"
+    series_description: "蓮は中学二年生、ADHDの診断を持っている。塾の先生にも親にも『気合いが足りない』と言われ続けている。ある秋の夜、宿題プリント七枚を前に動けなくなり、机の引き出しを開けた。中に小さな扉。背丈ほどの大きさになって、彼は入った。塔は内側からは広い。一階は『短い文を最後まで読む』階——文字が逃げる、捕まえる方法を教えてくれる小柄な少女がいる。蓮は二十分で一階を越える。現実の机に戻ると、机の上の時計の針は二十分進んでいる。プリント七枚のうち、最初の一枚が解けている。蓮は塔に通う。各階に違う仲間がいる——二階の聴覚処理の少年、三階のワーキングメモリの少女、四階の時間感覚の青年、五階のRSDで止まる少女。塔は十二階。長期の伏線——塔は誰が作ったのか、最上階には何があるのか、卒業する登階者は塔をどうするのか。Gen Alpha向けの、唯一のファンタジー寄り作品。"
+    opening_5_volume_arc:
+      vol_1: "引き出しの扉。一階の少女。文字が逃げる。蓮は二十分で一枚解ける。"
+      vol_2: "二階。聴覚処理の少年——授業の音が一斉に聞こえる。先生の声だけ拾うコツ。"
+      vol_3: "三階。ワーキングメモリの少女——三つの指示を覚えるための小さな歌。蓮は学校で試す。"
+      vol_4: "蓮の母親が引き出しを見つける。中身は普通の引き出し。蓮にだけ塔が見える。"
+      vol_5: "四階。時間感覚の青年——二十分の長さの感じ方を体に教える。蓮は宿題プリント七枚を、一週間で全部解く。"
+    comp_titles: ["葬送のフリーレン", "とんがり帽子のアトリエ", "ダンダダン", "夏目友人帳", "魔法少女まどか☆マギカ"]
+    reader_promise: "気合いが足りないわけじゃない。十二階の塔がある。一階ずつでいい。"
+    marketing_angle: "『とんがり帽子のアトリエ』の段階的学びを、ADHDの中学生のための塔ダンジョンにしたら。"
+    genre_family: fantasy_adventure
+    emotional_engine: power_escalation + neurodivergent_pride
+    audience: "中高生のADHD・ASD当事者および保護者、Gen Alpha読者層"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — adhd_forge_mystery (core · shonen · neurodivergent strengths)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: adhd_forge_mystery__ja_JP__kajiya_to_tanteidan
+    brand_id: adhd_forge_mystery
+    locale: ja_JP
+    persona_archetype: GA-tween
+    daily_life_anchor: school_homework
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: soft_fantasy
+    serial_engine: case_of_the_week
+    long_arc_spine: "中学一年生の少年は鍛冶屋の祖父の弟子で、過集中で何時間も金属を叩く。商店街で起きる小さな事件——失くした鍵、消えた看板、誰かに似た見知らぬ少女——を、過集中で観察したディテールから一つずつ解いていく。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "鍛冶屋と探偵団"
+    series_logline: "中学一年生の鍛太郎は、祖父の鍛冶屋で六時間鉄を叩く。彼の過集中の目は、商店街の小さな事件を、誰よりも先に解く。"
+    series_description: "鍛太郎は中学一年生、ADHDの過集中タイプ。学校の授業では一つも頭に入らないが、祖父の鍛冶屋に来ると六時間ぶっ通しで鉄を叩き、刃物の角度を覚えていく。商店街には鍛太郎の同級生で同じく神経多様性をもつ仲間が三人いる——図書館の本の位置を全部覚えている真央、人の声色の微差を聞き分けるサキ、地図を一度見ると忘れない健。四人は『商店街探偵団』と自称している。各巻、商店街で起きる小さな事件——魚屋の前で消えた合鍵、書店の二階で動いた本棚、誰にも似ていない少女の登場、町内のラジオ体操カセットの紛失——を、四人の過集中で集めた情報を組み合わせて解く。鍛冶屋の祖父は四人に手伝いを頼みながら、ほめないし、急かさない。長期の伏線——鍛太郎の祖父も若いころ神経多様性を抱えていた、と祖父の古い手帳に書いてある。事件は徐々に商店街の歴史と祖父の過去に近づいていく。"
+    opening_5_volume_arc:
+      vol_1: "魚屋の合鍵紛失事件。鍛太郎は当日、魚屋の店先を二時間眺めていた。彼の目に映ったものが、鍵だった。"
+      vol_2: "書店の二階の本棚が三センチずれていた事件。真央が気づく。"
+      vol_3: "ラジオ体操のカセット紛失。サキは町内放送の音の質の違いから、誰が押し入ったかを当てる。"
+      vol_4: "誰にも似ていない少女。健が地図上で彼女の通学路を逆算する。彼女は隣町から商店街に通っている。"
+      vol_5: "鍛冶屋の祖父が倒れる。四人は祖父の手帳の最初のページを開ける——『私の見え方、メモ』。"
+    comp_titles: ["薬屋のひとりごと", "ダンダダン", "金田一少年の事件簿", "夏目友人帳", "葬送のフリーレン"]
+    reader_promise: "あなたの過集中は欠点じゃない。それで解ける事件がある、それを認める仲間がいる。"
+    marketing_angle: "『金田一少年の事件簿』の探偵団を、神経多様性を強みとして使う中学生四人組に置き換えたら。"
+    genre_family: mystery_cozy
+    emotional_engine: neurodivergent_pride + chosen_family
+    audience: "中高生のADHD・ASD当事者および保護者、強みベースのアプローチに共感するGen Alpha層"
+
+  - series_id: adhd_forge_mystery__ja_JP__shinkansen_no_techo
+    brand_id: adhd_forge_mystery
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: train_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: magical_realism
+    serial_engine: mystery_box
+    long_arc_spine: "二十一歳の鉄道好きの大学生が、新幹線で偶然拾った古い手帖を開くと、過去に同じ車両に乗った人々の『その日まだ言っていない一言』が書かれている。手帖は読んだ瞬間に内容を入れ替えていく。彼は手帖を返したい一人に返すために、各巻、一区間ずつ旅する。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "新幹線の手帖"
+    series_logline: "東京〜博多の新幹線で拾った手帖を開くと、過去に同じ車両にいた人々の『その日まだ言っていない一言』が書かれている。"
+    series_description: "悠太は二十一歳、大学二年生、強い鉄道愛好家でADHD当事者。福岡の祖母の家から東京に戻る新幹線の中で、トイレ前の床に落ちていた古い革表紙の手帖を拾った。落とし主は見当たらない。座席に戻って開く。最初のページ——『今日、母に「あの時は本当に怖かった」と言うつもりだった』。筆跡は知らない。次のページ——『今日、息子に「お前を誇りに思う」と言うべきだった』。さらに——『今日、上司に「もう辞めます」と言いたかった』。手帖は読むたびに内容を入れ替え、別の人の『言っていない一言』が現れる。悠太は手帖を返したい。誰に。彼の過集中は鉄道の駅と車両番号と時刻表に向かう。手帖は彼に駅名を教える——『京都駅、十二月十日、十時三十二分発のぞみ』。彼は出向く。各巻、別の人の『言っていない一言』を、その人本人に渡す方法を見つけていく。長期の伏線——手帖の最初の持ち主は誰で、なぜこの手帖は『言っていない一言』を集めているのか。"
+    opening_5_volume_arc:
+      vol_1: "手帖を拾う。最初のページ。悠太は新幹線車内で本人を探さない——車両のWi-Fi記録を後で照会するわけにもいかない。彼の過集中は別の方法を見つける。"
+      vol_2: "京都駅。十二月十日。彼は『あの時は本当に怖かった』を母に伝えたかった人を、駅前のカフェで突き止める。"
+      vol_3: "新大阪。誇りに思うべきだった父子。父はもう亡くなっていた。悠太は息子に手帖のページを見せる。"
+      vol_4: "悠太自身の『言っていない一言』が、手帖のあるページにいつの間にか現れている。誰が書いたのか。"
+      vol_5: "手帖の最後のページ。空白。悠太は自分の言葉を、初めて手帖に書く。書いた瞬間、手帖は重みを失う。"
+    comp_titles: ["薬屋のひとりごと", "コーヒーが冷めないうちに", "ダンダダン", "葬送のフリーレン", "金田一少年の事件簿"]
+    reader_promise: "あなたが今日言わなかった一言を、いつか誰かが届けてくれる可能性がある。"
+    marketing_angle: "『コーヒーが冷めないうちに』の時間飛ばしを、新幹線の網棚に置き忘れた手帖にしたら。"
+    genre_family: mystery_cozy
+    emotional_engine: unsent_message + paying_it_forward
+    audience: "二十代前半の鉄道好き・ADHD当事者の大学生、強い趣味の集中力をもつZ世代男性"
+
+  - series_id: adhd_forge_mystery__ja_JP__chika_no_kobo
+    brand_id: adhd_forge_mystery
+    locale: ja_JP
+    persona_archetype: GA-tween
+    daily_life_anchor: school_homework
+    portal_mechanic: portal_gate
+    episodic_frame_per_volume: case
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "中学三年生の少女が、図書室の床下に隠された『道具を作る工房』を見つける。工房の道具は、神経多様性を持つ人だけに『見える』。少女は学期ごとに新しい道具を一つ作り、級友の困難を一つずつ解いていく。各道具は祖母世代の障がい者支援者の遺品でもある。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "地下の工房"
+    series_logline: "中学三年生の千夏は、図書室の床下に、神経多様性を持つ人にしか見えない『道具工房』を見つける。"
+    series_description: "千夏は中学三年生、ASDの診断を持つ少女。学校の図書室の奥、誰も借りない『郷土史』の本棚の前で、ある日床板が緩んでいるのに気づく。下に古い木の階段。降りた先に、工房——ハンマー、糸、目に見えない種類の織機、文字を別の色に翻訳する筆、文具のような小さな道具たち。工房は、神経多様性を持つ人にだけ見える。千夏は学期ごとに、工房で一つの道具を作る。最初は『耳栓』——感覚過敏の同級生のために、騒音を選別する小さな耳栓を作る。次は『時間の見える定規』——ADHDの級友のために、時間の長さを色で見せる定規。各巻、別の道具と別の級友。工房には古いノートがあり、千夏の祖母世代の特別支援の先生が、何十年も前に同じ道具を作っていたことが書かれている。長期の伏線——工房は誰の遺産か、千夏の祖母自身が神経多様性をもっていたのか、卒業した先輩は工房をどう次の人に渡したのか。"
+    opening_5_volume_arc:
+      vol_1: "工房発見。床下の階段。最初の道具——耳栓。同級生に渡す。受け取った瞬間、彼の肩が少し下がる。"
+      vol_2: "時間の見える定規。ADHDの級友のため。時間が色で見える。学校生活が少し楽になる。"
+      vol_3: "千夏自身は工房で何を作るべきか、まだ分からない。古いノートに自分自身のための道具を作った人の章がある。"
+      vol_4: "後輩の女子が、図書室で千夏を見ている。千夏は彼女に工房が見えるか、まだ分からない。"
+      vol_5: "祖母の写真が古いノートの最後のページに挟まっている。祖母は工房の昔の使い手だった。"
+    comp_titles: ["とんがり帽子のアトリエ", "葬送のフリーレン", "魔法少女まどか☆マギカ", "ダンダダン", "蟲師"]
+    reader_promise: "あなたの困難に合う道具は、すでに誰かが作ってくれている。"
+    marketing_angle: "『とんがり帽子のアトリエ』の道具作りの丁寧さを、特別支援の歴史と中学生の物語に重ねたら。"
+    genre_family: fantasy_adventure
+    emotional_engine: tools_for_difference + inherited_wisdom
+    audience: "中学生のASD・ADHD当事者および保護者、特別支援教育に関心のあるGen Alpha層"
+
+  - series_id: adhd_forge_mystery__ja_JP__akari_to_tonari
+    brand_id: adhd_forge_mystery
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workplace_office
+    portal_mechanic: mascot
+    episodic_frame_per_volume: case
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "新入社員のADHDの女性は、彼女の隣の席に毎日違う『小さな影』が現れる——会議の議事録を取ってくれる影、メールを下書きしてくれる影、書類の整理整頓をしてくれる影。彼女には影が見え、影と話せる。職場の人々は彼女が一人でも仕事ができていると思っている。影たちは別の神経多様性を持つ先輩社員たちの『記憶の残り香』だった。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "明と隣"
+    series_logline: "新入社員の明里の机の隣には、毎日違う影がいる。議事録の影、メールの影、書類整理の影。彼女には見える。"
+    series_description: "明里は二十三歳、新入社員、ADHDの診断は中学三年で受けている。配属された総務課で、初日に既に三回ミスをした。三ヶ月目、ふと隣の席を見ると、誰か座っている影がいる。同僚たちには見えない。影は会議中、彼女の代わりに議事録を取っている。明里は影と話せる。影は『私は二十年前にこの会社にいた事務員。あなたと同じ診断、あなたと同じミスをした人。あなたを助けに来ました』と言う。次の日は別の影——営業のメール下書きを大量にこなす影。週ごとに違う影。職場の人々は気づかない。明里は徐々に、神経多様性をもつ先輩社員たちが残した『仕事のやり方の記憶』が、影として現れていることを理解する。長期の伏線——明里自身もいつか影になるのか、影たちを残した先輩たちは今どこにいるのか、明里は自分の同期に影の存在を打ち明けるべきか。職場の蛍光灯と書類の山の現実描写。"
+    opening_5_volume_arc:
+      vol_1: "三ヶ月目。最初の影——議事録の影。明里、初めて会議の議題を翌週まで覚えている。"
+      vol_2: "メールの影。明里は影が下書きしたメールを、自分の言葉に書き直す——影と自分の協業。"
+      vol_3: "書類整理の影。明里の机が初めて、片付いた状態で月曜を迎える。"
+      vol_4: "明里は同期に影の話をする。同期は冗談だと笑う。明里は静かに、それ以上は言わない。"
+      vol_5: "退職して二十年経った元事務員——影の本人——を、明里は休日に訪ねる。本人は静かに頷く。"
+    comp_titles: ["夏目友人帳", "蟲師", "薬屋のひとりごと", "森崎書店の日々", "ホリミヤ"]
+    reader_promise: "あなたが苦手な仕事を、すでに誰かが工夫していて、その記憶があなたを助けに来る可能性がある。"
+    marketing_angle: "『夏目友人帳』の見える人と霊の関係を、職場のADHD新人と先輩の記憶の影に置き換えたら。"
+    genre_family: supernatural_everyday
+    emotional_engine: invisible_helper + inherited_wisdom
+    audience: "二十代前半のADHD当事者新入社員、職場でのつまずきと工夫を語れる場を求めるZ世代"
+
+  - series_id: adhd_forge_mystery__ja_JP__shinkagura_no_yoake
+    brand_id: adhd_forge_mystery
+    locale: ja_JP
+    persona_archetype: GA-tween
+    daily_life_anchor: rural_village
+    portal_mechanic: ritual
+    episodic_frame_per_volume: case
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "山陰地方の小さな村で、十二歳の少女が祖父から『神楽』の太鼓を継ぐ。村の神楽は実は、村内の人々の『感覚過敏』『記憶の異なり』『時間感覚の違い』を、踊りと音で和らげる儀式だった。少女は学期ごとに新しい型を覚え、村の年配者の困難を一つずつ解いていく。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "新神楽の夜明け"
+    series_logline: "山陰の小さな村、十二歳のすばるは祖父から神楽の太鼓を継ぐ。神楽は村の認知の違いを和らげる古い儀式だった。"
+    series_description: "すばるは十二歳、島根の山あいの集落に住む小学六年生。診断は受けていないが、音が周囲よりよく聞こえ、人の表情の微差を読みすぎて疲れる。祖父は村の神楽社中の長で、すばるが小学校に上がる前から太鼓を教えてきた。ある秋祭りの夜、祖父は『この神楽は何のために続いてきたか、お前にもうすぐ話す』と言って倒れる。すばるは祖父の遺した木箱を開ける。中には十二の型の絵巻——『眩しさを和らげる型』『大勢の声を一つに聞かせる型』『時間の流れを揃える型』。村の神楽は、神への奉納であると同時に、村人の認知の違いを和らげる千年の儀式だった。すばるは学期ごとに一つの型を覚える。各巻、村の年配者の一人の困難——感覚過敏、認知症の混乱、時間感覚の乱れ——を、舞いと太鼓で和らげていく。Gen Alpha向けの土着・ファンタジー作品。長期の伏線——神楽の創始者は誰で、なぜ村にだけこの伝承が残ったのか、村を離れる若者たちに型は伝わるのか。"
+    opening_5_volume_arc:
+      vol_1: "祖父の倒れた夜。木箱を開ける。最初の型——眩しさを和らげる舞。村の認知症の婆さんの目が、その夜だけ穏やかになる。"
+      vol_2: "二つ目の型——大勢の声を一つに聞かせる舞。村のお祭りで使う。"
+      vol_3: "都会から戻ってきた従兄が、神楽を観る。彼の不眠は、その夜だけ和らぐ。"
+      vol_4: "すばる自身の困難——人の表情を読みすぎる——を、彼女は型のどれで和らげるのか。"
+      vol_5: "祖父が目を覚ます。彼は遺言を完成させる——『この十二の型は、君が次の十二の型を作るための土台だ』。"
+    comp_titles: ["蟲師", "夏目友人帳", "葬送のフリーレン", "となりのトトロ", "ダンダダン"]
+    reader_promise: "あなたの感覚の違いを、千年前から知っている儀式がある。"
+    marketing_angle: "『蟲師』の自然と人の境界を、山陰の神楽と認知多様性の物語に下ろしたら。"
+    genre_family: fantasy_adventure
+    emotional_engine: inherited_ritual + neurodivergent_pride
+    audience: "小学校高学年〜中学生、土着ファンタジーと神経多様性のテーマに惹かれるGen Alpha層"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — career_lift_workplace (core · seinen · career/transitions)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: career_lift_workplace__ja_JP__tenshoku_no_chizu
+    brand_id: career_lift_workplace
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workplace_office
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十九歳の元人事担当者が、副業として駅前の小さな『地図屋』を始める。客は転職を考えている人。彼女は手書きの地図を描く——客がここから三年後に立っていそうな場所までの。地図は実際の道ではなく、選択と試練の象徴的地図。客はそれをポケットに入れて帰る。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "転職の地図"
+    series_logline: "駅前の小さな『地図屋』で、二十九歳の妙子は転職希望者の三年後までの地図を手描きで描いてくれる。"
+    series_description: "妙子は二十九歳、大手人材会社の元人事担当者。社内で五年間、何百人もの転職希望者を見送ってきた。退職して、副業として駅前のシェアスペースの一角を借り、『地図屋』を開いた。看板は『一回三千円、転職の地図、手描き』。客は予約制で来る。妙子は一時間、客の現状を聞く——今の仕事、退職したい理由、家計、家族、年齢、健康、隠している夢、行きたくない場所。聞き終わると、A三の紙に手描きで地図を描く。実際の道ではなく、象徴的な地図——『この谷は転職活動三ヶ月目に落ちる谷。橋を架けるには、副業で月五万を作る』『この林は、上司に退職を伝える林。最短ルートと迂回路がある』。地図は答えではなく、客の現状の可視化。客は地図を持ち帰り、自分の足で歩く。各巻、別の客と別の地図。妙子の店には、人材会社時代の元同僚や、彼女自身が三年前に渡された地図の話が、ゆっくり浮かんでくる。長期の伏線——妙子に地図を渡した人は誰で、彼女は今、自分自身の地図のどこに立っているか。"
+    opening_5_volume_arc:
+      vol_1: "最初の客——三十二歳の銀行員男性。退職して脱サラ希望。妙子は谷と林と橋を描く。"
+      vol_2: "二十六歳の女性デザイナー。職場のハラスメントから逃れたい。地図は『今すぐ逃げる』ルートを描く。"
+      vol_3: "四十代の元編集者。出版社が傾いている。地図は『元の業界に戻る』『隣接業界に行く』二択を描く。"
+      vol_4: "妙子は自分の地図を、店の壁から下ろして客に見せる——彼女自身が三年前に渡された地図。今、地図の橋の上に立っている。"
+      vol_5: "新人地図屋希望の女子大生が、見学に来る。妙子は教えない。代わりに、彼女のための地図を一枚描いて渡す。"
+    comp_titles: ["薬屋のひとりごと", "森崎書店の日々", "ハチミツとクローバー", "違国日記", "コーヒーが冷めないうちに"]
+    reader_promise: "あなたの転職は、誰かが一枚の地図に描いてくれる価値のある旅だ。"
+    marketing_angle: "『薬屋のひとりごと』の処方の確かさを、転職市場の手描き地図に下ろしたら。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + transition_clarity
+    audience: "二十代後半〜三十代の転職希望者、自己決定の地図がほしい知識労働者層"
+
+  - series_id: career_lift_workplace__ja_JP__fukugyo_no_yoru
+    brand_id: career_lift_workplace
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: side_gig
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六歳の女性が、本業の合間の副業として、月に一度だけ営業する『副業会』を主宰する。集まるのは副業を始めたい、または続けたい知識労働者。会の作法は決まっている——『今月、副業で何を試したか』『来月、副業で何を試すか』を、十分ずつで報告する。アドバイスは禁止。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "副業の夜"
+    series_logline: "月一の『副業会』。会の作法は二つだけ——『今月何を試したか』と『来月何を試すか』を十分話す。アドバイスは禁止。"
+    series_description: "彩は二十六歳、本業はメーカー総務、副業はビジネス書のリサーチアシスタント。彼女は副業を二十二歳から続けていて、燃え尽きと再開のリズムを五年分蓄積している。三年前から、彼女は月に一度、平日の夜、東京の駅前の貸会議室を借りて『副業会』を主宰している。参加費は五百円。集まるのは八人前後の副業者——フリーランス志望、副業歴半年、副業歴五年、副業を一度諦めた、これから始める。会の作法は二つだけ——『今月、副業で何を試したか』『来月、副業で何を試すか』を、各自十分ずつで話す。アドバイスは禁止。質問は事実確認のみ。彩はファシリテーター役、自分も同じ作法で報告する。各巻、別の参加者の物語が進む。長期の伏線——彩は副業を本業にする日が来るのか、来ないことを選ぶのか。副業会の参加者は、長く続けるほどに、副業から得たいものが『お金』から『別の場所での自分』に変わっていく。"
+    opening_5_volume_arc:
+      vol_1: "副業会の三十六回目。新規参加者——三十歳の元編集者の男性。最初の報告は震えていた。"
+      vol_2: "五年続けている女性デザイナーの報告。彼女は今月、副業で得た収入を本業より上回らせた。"
+      vol_3: "一度諦めた男性の再参加。彼の十分間は、ほぼ沈黙だった。彩は時間を測り続けた。誰もアドバイスしなかった。"
+      vol_4: "彩自身の報告。今月、本業に異動の打診があった。彼女は副業をどうするか、まだ決めていない。"
+      vol_5: "副業会四十回目記念。古参四人の卒業生から手紙が届く。彩は手紙を皆の前で読む。"
+    comp_titles: ["ハチミツとクローバー", "コンビニ人間", "違国日記", "森崎書店の日々", "深夜食堂"]
+    reader_promise: "副業の試行錯誤は、アドバイスではなく、報告と沈黙で続いていく。"
+    marketing_angle: "『コンビニ人間』の労働観に、副業のリアリズムと月一の会の温度を加えたら。"
+    genre_family: slice_of_life
+    emotional_engine: silent_solidarity + practice_over_advice
+    audience: "二十代〜三十代の副業者および副業志望者、フリーランス志向のZ世代・ミレニアル知識労働者層"
+
+  - series_id: career_lift_workplace__ja_JP__rikishoku_no_ko
+    brand_id: career_lift_workplace
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: workplace_office
+    portal_mechanic: ritual
+    episodic_frame_per_volume: locale
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三十四歳の元銀行員の女性が、退職金で小さな『離職の湖』を作る——湖というのは比喩で、実際は山あいの民宿を改装した二泊三日の『離職を整理する宿』。客は会社を辞めたばかりの人。スタッフは話を聞かない、ただ食事と布団と散歩道を用意する。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "離職の湖"
+    series_logline: "三十四歳の凜は、退職金で長野の民宿を改装し、会社を辞めたばかりの人だけが泊まれる二泊三日の宿を始めた。"
+    series_description: "凜は三十四歳、大手銀行を十二年勤めて、自分の心身の限界で退職した。退職金と祖母の遺してくれた長野の山あいの民宿を組み合わせて、『離職の湖』という二泊三日の宿を始めた。湖は比喩で、実際は山の中の小さな民宿。一回の宿泊三万円、ご飯と布団と散歩道つき。客は『会社を辞めて一ヶ月以内の人』に限定。凜とスタッフ二人は、客の話を聞かない。事情を尋ねない。チェックイン時に渡される一枚——『二泊三日、好きに過ごしてください。誰も話しかけません。三日目の朝、もし誰かと話したくなったら、玄関のベルを鳴らしてください』。客は朝食、夕食、温泉、山の散歩道、囲炉裏端、書庫を自由に使える。各巻、別の客の二泊三日が静かに描かれる——四十代でリストラされた男性、二十代で自己都合退職した女性、定年退職した六十代、就職して三ヶ月で辞めた新人。長期の伏線——凜自身、いつか客として、別の誰かの『湖』に泊まりに行く日が来るのか。"
+    opening_5_volume_arc:
+      vol_1: "湖の開業。最初の客は四十二歳のリストラ男性。三日目の朝、彼はベルを鳴らさない。静かに帰る。一週間後、礼状が届く。"
+      vol_2: "二十六歳の女性。自己都合退職、理由は職場のハラスメント。彼女は二泊目の夜、布団の中で初めて泣いた。"
+      vol_3: "六十五歳の定年退職者。彼は囲炉裏端で凜に『この湖は誰の発案か』と聞く。凜は祖母の名前を答える。"
+      vol_4: "新人退職者——二十三歳の男性。三日目の朝、彼はベルを鳴らす。話したいことが、まだ言葉になっていない。凜は彼の隣に座って、湯を沸かす。"
+      vol_5: "凜の元同期が客として来る。凜は驚かない。元同期も驚かない。二泊三日、二人は会話しない。"
+    comp_titles: ["深夜食堂", "あん", "森崎書店の日々", "葬送のフリーレン", "コンビニ人間"]
+    reader_promise: "会社を辞めた直後の二泊三日を、誰にも詮索されずに過ごせる場所がある。"
+    marketing_angle: "『あん』の静かな労働観を、離職直後の宿に置き換えたら。"
+    genre_family: slice_of_life
+    emotional_engine: silence_as_care + post_corporate_recovery
+    audience: "三十代〜五十代の離職者および離職予定者、燃え尽き型キャリア・トランジションのミレニアル層"
+
+  - series_id: career_lift_workplace__ja_JP__shanai_renai_dewa_arimasen
+    brand_id: career_lift_workplace
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workplace_office
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "二十七歳の同じ部署の男女二人が、互いに『この職場で潰れる前にどちらかが辞めること』を約束する。約束は契約のような関係で、二人は付き合っていない、付き合うつもりもない。各巻、二人が職場の困難をどう乗り切るか、どちらが先に辞めるか、その後の関係をどう保つかが描かれる。"
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "社内恋愛ではありません"
+    series_logline: "同じ部署の同期、男女二人。彼らは付き合っていない。約束しているのは『どちらかがここを辞めるまで、二人で潰れないでいる』ことだけ。"
+    series_description: "和馬と里香は二十七歳、入社五年目、同じ営業二課。配属当初から仲がいいが、付き合ったことはないし、付き合う気もない。部署は完全な燃え尽きラインで、上司の暴言、過剰な営業ノルマ、終電帰宅が常態化している。入社三年目の夜、二人は飲み屋で約束した——『どちらかが本気で潰れそうになったら、もう一人が先に辞めて、その人を引っ張り出す』。これは恋愛ではない。共助の契約。二人は週に一度だけ昼休みに合流し、お互いの『今週の限界度』を一行で報告する——『七割』『八割五分』『今週は四割、楽だった』『十割。来週、辞表書く準備する』。各巻、二人の現場の物語と、約束の運用方法が描かれる。長期の伏線——どちらが先に辞めるのか、辞めた後、二人の関係はどう変わるのか、彼らは恋愛感情に転化するのか、しないのか。シリーズの大半は『しない』前提で、ロマンスではなく『関係性の革命』として描く。だが最後の数巻、可能性が静かに開かれる。"
+    opening_5_volume_arc:
+      vol_1: "約束の夜の回想。現在、五年目の春。和馬の今週は『七割五分』。里香は『六割』。お互い、もう少し持ちこたえる。"
+      vol_2: "里香の上司からのセクハラ事案。彼女は和馬に報告する前に、人事に動く。約束の運用版が描かれる。"
+      vol_3: "和馬の母親が倒れる。彼は介護のために辞めるか迷う。里香は『辞めていい。私の番じゃない』と言う。"
+      vol_4: "里香の今週『十割』。和馬は約束を発動して、先に辞表を書く準備をする。"
+      vol_5: "和馬の退職日。里香は送別会に来ない。代わりに、退社直後の和馬を駅前で待っている。二人は何も言わない。"
+    comp_titles: ["ホリミヤ", "違国日記", "ハチミツとクローバー", "深夜食堂", "コーヒーが冷めないうちに"]
+    reader_promise: "恋愛じゃない深さで、職場の同僚と契約することができる。"
+    marketing_angle: "『ホリミヤ』の親密さの描写を、職場の共助契約という現代的な関係性に転換したら。"
+    genre_family: romance
+    emotional_engine: non_romantic_intimacy + workplace_survival
+    audience: "二十代後半の男女会社員、燃え尽き職場での同期との関係性を再定義したいZ世代後半層"
+
+  - series_id: career_lift_workplace__ja_JP__shoukou_no_jugyo
+    brand_id: career_lift_workplace
+    locale: ja_JP
+    persona_archetype: GA-tween
+    daily_life_anchor: school_homework
+    portal_mechanic: location
+    episodic_frame_per_volume: locale
+    magical_register: none
+    serial_engine: location_anthology
+    long_arc_spine: "中学三年生の少女が、放課後に近所の商店街の各店主を訪ねて『進路の授業』を受ける。一年で十二人——魚屋、書店主、和菓子屋、コインランドリー経営者、税理士、町工場、美容師、地域カフェ、保育士、農家、葬儀社、消防士。各店主から、自分の仕事の喜びと辛さの両方を、率直に聞く。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "商工の授業"
+    series_logline: "中学三年生のなぎさは、放課後の一年間、商店街の十二人の店主・職人を訪ねて、進路の本音を聞いて回る。"
+    series_description: "なぎさは中学三年生、進路をまだ決められない。学校の進路指導は『将来の夢』と『偏差値』の二択を強要する。彼女の祖父は商店街の隅で和菓子屋を営んでいて、ある日彼女に言う——『学校で進路を決めるのは、菓子屋でラーメンを注文するようなものだ。商店街を歩いてこい』。なぎさは祖父の言葉を真に受けて、放課後の一年間、商店街の十二人の店主・職人を訪ねて回る。一人につき三回——一回目は自己紹介、二回目はその人の仕事の喜び、三回目はその人の仕事の辛さ。各巻、別の店主の人生哲学とその仕事のリアリズムが描かれる。魚屋の早朝、書店主の月末の不安、和菓子屋の季節感、コインランドリーの夜更けの客、税理士の二月、町工場の継承問題、美容師の指の疲労、地域カフェの収支、保育士の倫理、農家の自然との交渉、葬儀社の慎み、消防士の覚悟。長期の伏線——なぎさ自身がどの仕事を選ぶか、いや、彼女は十二人と出会った後、もう一年同じことを続けたくなる。Gen Alpha向け、進路選択の物語。"
+    opening_5_volume_arc:
+      vol_1: "祖父の和菓子屋。一回目の訪問。なぎさは『なぜ和菓子屋になったの』と聞く。祖父は『なぜなぎさは学校に行くの』と聞き返す。"
+      vol_2: "魚屋の早朝。なぎさは午前四時に起きて、市場について行く。"
+      vol_3: "書店主。月末の請求書とおすすめの一冊を、なぎさは同じ口で語る本屋の話を聞く。"
+      vol_4: "町工場の継承問題。三代目の女性経営者。なぎさは初めて、自分が何かを継ぐ可能性について考える。"
+      vol_5: "保育士。なぎさは保育士の倫理——子どもが嫌いになった日、どうするか——を聞く。彼女は答えに半年かかる。"
+    comp_titles: ["ハチミツとクローバー", "あひるの空", "違国日記", "森崎書店の日々", "ホリミヤ"]
+    reader_promise: "進路は商店街を歩いてから決めていい。十二人の本音は、進路指導の十二倍の情報だ。"
+    marketing_angle: "『ハチミツとクローバー』の若さの迷いを、中学生の地域進路探究に下ろしたら。"
+    genre_family: school
+    emotional_engine: vocational_realism + intergenerational_witness
+    audience: "中学生〜高校生、進路選択期のGen Alpha、地域・商店街文脈に親しみのある層"
+

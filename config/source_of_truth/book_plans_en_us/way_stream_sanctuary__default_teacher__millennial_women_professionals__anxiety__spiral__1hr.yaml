@@ -1,0 +1,112 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__calm_alarm__1hr
+  name: Calm the Alarm — for Professional Women (One-Hour)
+installment_number: 6
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Alarm Is Lying: The Overthinking Spiral'
+subtitle: Escaping the Mental Loop — Anxiety for Millennial Women Professionals (Breaking
+  the Thought Loop)
+cover_tagline: One email at 4 p.m. One thousand thoughts by midnight.
+description:
+  short_blurb: One thought catches, and by 2 a.m. it's a thousand. This is a one-hour
+    reset for the professional woman whose mind turns a single worry into a runaway
+    loop. It won't teach you to think positive. It will show you how the spiral actually
+    works and where its exit has been the whole time.
+  long_description: 'It starts with one small thing. An email that landed a little
+    flat. A comment in the meeting you cannot stop replaying. A single thought catches
+    like a thread snagged on a nail, and then your mind is off, pulling the entire
+    sweater apart row by row. What did she mean. What if it means this. And if it
+    means this, then what about the thing after that. By midnight you have followed
+    the loop through forty rooms, and you are lying there wide awake, exhausted and
+    somehow certain and terrified all at once, about a future that hasn''t happened,
+    built entirely out of one ordinary moment from four in the afternoon.
+
+
+    This hour is for the professional woman whose sharp, capable mind turns on her
+    the instant the lights go out. The very same brain that makes you good at your
+    job, that connects the dots and sees three moves ahead, is the brain that takes
+    one small worry and spins it into a thousand. You have tried to reason with the
+    spiral, to talk yourself down, to deliberately think a better thought. But you
+    cannot out-think a thinking problem, and every attempt to win the argument just
+    hands the loop more thread to work with.
+
+
+    The first thing you''ll do is learn to see the spiral as a mechanism rather than
+    a message, to catch the exact instant one thought hooks into the next and becomes
+    a chain. That catch is everything, because the moment you can see the loop, you
+    are no longer simply living inside it. Then, instead of chasing each thought down
+    or trying to argue your own mind into surrender, you''ll turn and go down underneath
+    it. You''ll stop following the content and look instead at what is actually powering
+    the spin, which is almost never the thought it happens to be using tonight. You
+    come back up with the same fast, restless mind you have always had, but no longer
+    entirely at its mercy at two in the morning.
+
+
+    This book will not promise to quiet your mind for good. It will not hand you a
+    thought-stopping trick, a gratitude list to scribble before bed, or a wind-down
+    routine that supposedly switches the whole apparatus off at ten p.m. Your mind
+    will still, sometimes, catch on a thread and start to pull. What changes is that
+    you''ll know a spiral when you are in one, and that recognition, plain as it sounds,
+    is the exact thing that lets you step off it.
+
+
+    Written in clear, grounded language for a mind that runs far too fast to read
+    slowly, this is real talk for the two a.m. loop. No positive-thinking gospel.
+    No woo. No pretending you can simply choose a calmer thought while your brain
+    is already mid-sprint. Just one honest hour of seeing the spiral for the mechanism
+    it is and finding, at last, the way out that was there all along.
+
+
+    You are allowed to not follow the thought. It will keep offering, politely, endlessly.
+    You do not have to keep saying yes.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - professional women
+  - anxiety for professional women
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sofia_marchetti
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — neuroscience of worry loops and how to interrupt
+  the habit, no woo
+- Chatter (Ethan Kross) — the science of the inner voice and how rumination runs away
+  with us
+- Don't Believe Everything You Think (Joseph Nguyen) — secular look at how thought
+  loops generate suffering
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

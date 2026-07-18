@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Evidence Log | Waystream Sanctuary</title>
+  <meta name="description" content="Track what you've actually done. The imposter voice doesn't have a rebuttal to a list. Free from Waystream Sanctuary.">
+  <meta property="og:title" content="The Evidence Log — Free Imposter Syndrome Tool">
+  <meta property="og:description" content="Log what you did. Log what it proves. The imposter voice doesn't have a rebuttal to a list.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0F;
+      --surface: #13131A;
+      --accent: #3B82F6;
+      --text: #F0EFE8;
+      --secondary: #8B8A82;
+      --border: rgba(240,239,232,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--secondary);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .capture-card p { color: var(--secondary); font-size: 14px; margin-bottom: 24px; }
+
+    .form-row { display: flex; flex-direction: column; gap: 12px; }
+
+    input[type="text"], input[type="email"] {
+      background: rgba(240,239,232,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: var(--secondary); }
+    input:focus { border-color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    #tool-section { display: none; }
+    #tool-section.visible { display: block; }
+
+    .tool-intro {
+      margin-bottom: 32px;
+    }
+
+    .tool-intro h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .counter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .counter-text {
+      font-size: 13px;
+      color: var(--secondary);
+      letter-spacing: 0.04em;
+    }
+
+    .counter-num {
+      font-size: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* TABLE */
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+    }
+
+    .evidence-table th {
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      font-weight: 500;
+      padding: 0 12px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .evidence-table th:last-child { width: 60px; text-align: center; }
+
+    .evidence-row td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .evidence-row td input[type="text"] {
+      background: rgba(240,239,232,0.04);
+      border: 1px solid transparent;
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 8px 10px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .evidence-row td input[type="text"]:focus {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.05);
+    }
+
+    .evidence-row td input[type="text"].placeholder-text {
+      color: var(--secondary);
+    }
+
+    .evidence-row.example-row td input[type="text"] {
+      color: var(--secondary);
+    }
+
+    .check-cell {
+      text-align: center;
+    }
+
+    .check-cell input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .evidence-row.logged td {
+      opacity: 0.6;
+    }
+
+    .add-row-btn {
+      background: transparent;
+      border: 1px dashed rgba(59,130,246,0.4);
+      border-radius: 8px;
+      color: var(--accent);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 11px 20px;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .add-row-btn:hover {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+    }
+
+    .bottom-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--secondary);
+      text-align: center;
+      margin-top: 12px;
+      padding: 0 16px;
+    }
+
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 14px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .cta-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 24px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-cta:hover { opacity: 0.88; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      .evidence-table th:nth-child(2),
+      .evidence-row td:nth-child(2) { display: none; }
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="way_stream_sanctuary" data-topic="imposter_syndrome" data-funnel-slug="imposter-evidence-log" data-post-experience-capture="1" data-ghl-webhook="">
+<div class="page-wrap">
+
+  <div class="wordmark">Waystream Sanctuary — Inner Light Press</div>
+
+  <h1>The Evidence Log</h1>
+  <p class="subtitle">A running record of what you've actually done. The imposter voice doesn't have a rebuttal to a list.</p>
+
+  <div class="capture-card" id="capture-section">
+    <h2>Access the Free Evidence Log</h2>
+    <p>Your entries stay in your browser. Nothing is stored or sent.</p>
+    <form id="capture-form">
+      <div class="form-row">
+        <input type="text" placeholder="First name" autocomplete="given-name">
+        <input type="email" placeholder="Email address" required autocomplete="email">
+        <button type="submit" class="btn-primary">Access Free Evidence Log</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="tool-section">
+    <div class="tool-intro">
+      <h2>Your Evidence</h2>
+    </div>
+
+    <div class="counter-bar">
+      <span class="counter-text">Pieces of evidence logged</span>
+      <span class="counter-num" id="logged-count">0</span>
+    </div>
+
+    <table class="evidence-table" id="evidence-table">
+      <thead>
+        <tr>
+          <th>What I did</th>
+          <th>What it proves</th>
+          <th>Logged</th>
+        </tr>
+      </thead>
+      <tbody id="evidence-body">
+        <!-- Pre-filled example rows inserted by JS -->
+      </tbody>
+    </table>
+
+    <button class="add-row-btn" onclick="addRow()">+ Add a row</button>
+
+    <p class="bottom-note">"The imposter voice doesn't have a rebuttal to a list."</p>
+  </div>
+
+  <div class="cta-banner">
+    <p>Want the full system?</p>
+    <h3>Own Your Seat Collection: You're Not a Fraud — $0.99</h3>
+    <a class="btn-cta" href="https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison" rel="noopener">Get Book 1 for $0.99</a>
+  </div>
+
+  <footer>A free tool from Waystream Sanctuary — Inner Light Press</footer>
+</div>
+
+<script>
+  document.getElementById('capture-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nameEl = document.querySelector('#capture-form input[type="text"]');
+    var emailEl = document.querySelector('#capture-form input[type="email"]');
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    function revealTool() {
+      document.getElementById('capture-section').style.display = 'none';
+      document.getElementById('tool-section').classList.add('visible');
+    }
+    if (!window.PhoenixLead) {
+      revealTool();
+      return;
+    }
+    PhoenixLead.captureLead({
+      email: email,
+      first_name: name,
+      topic: 'imposter_syndrome',
+      funnel_slug: 'imposter-evidence-log',
+      quiz_id: 'evidence_log',
+      score: null,
+      score_band: null,
+      tags: ['source_freebie_quiz', 'quiz_imposter_syndrome', 'freebie_captured']
+    }).then(revealTool).catch(revealTool);
+  });
+
+  const examples = [
+    { did: 'Led the project meeting', proves: 'I know the material' },
+    { did: 'Someone asked my opinion', proves: 'People trust my judgment' },
+    { did: 'Finished the report under deadline', proves: 'I can deliver under pressure' },
+  ];
+
+  const tbody = document.getElementById('evidence-body');
+
+  function updateCount() {
+    const checked = tbody.querySelectorAll('input[type="checkbox"]:checked').length;
+    document.getElementById('logged-count').textContent = checked;
+  }
+
+  function makeRow(didVal, provesVal, isExample) {
+    const tr = document.createElement('tr');
+    tr.className = 'evidence-row' + (isExample ? ' example-row' : '');
+
+    const td1 = document.createElement('td');
+    const inp1 = document.createElement('input');
+    inp1.type = 'text';
+    inp1.value = didVal;
+    inp1.placeholder = 'What I did...';
+    if (!didVal) inp1.classList.add('placeholder-text');
+    td1.appendChild(inp1);
+
+    const td2 = document.createElement('td');
+    const inp2 = document.createElement('input');
+    inp2.type = 'text';
+    inp2.value = provesVal;
+    inp2.placeholder = 'What it proves...';
+    if (!provesVal) inp2.classList.add('placeholder-text');
+    td2.appendChild(inp2);
+
+    const td3 = document.createElement('td');
+    td3.className = 'check-cell';
+    const chk = document.createElement('input');
+    chk.type = 'checkbox';
+    chk.addEventListener('change', function() {
+      tr.classList.toggle('logged', chk.checked);
+      updateCount();
+    });
+    td3.appendChild(chk);
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    return tr;
+  }
+
+  // Add example rows
+  examples.forEach(function(ex) {
+    tbody.appendChild(makeRow(ex.did, ex.proves, true));
+  });
+
+  function addRow() {
+    const row = makeRow('', '', false);
+    tbody.appendChild(row);
+    row.querySelector('input[type="text"]').focus();
+  }
+</script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script type="application/json" id="phoenix-evergreen-campaign-plan">
+{
+  "archetype_id": "evidence_log",
+  "bonus_pre_e3_benefit": "Gives the contact one more felt practice before the story email lands.",
+  "bonus_pre_e3_cta": "Open the bonus practice",
+  "bonus_pre_e3_html_template": "funnel/waystream_sanctuary/emails/email_bonus_pre_story.html",
+  "bonus_pre_e3_microcopy": "Send this before Email 3 only when welcome_depth is blank or missing.",
+  "bonus_pre_e3_send_if_welcome_depth_missing": true,
+  "bonus_pre_e3_short_description": "A pre-E3 bonus email for the welcome-depth fallback when GHL has no welcome_depth value.",
+  "bonus_pre_e3_title": "Bonus before the story: one extra imposter syndrome practice",
+  "bonus_pre_e3_tool_name": "Extended exhale for the fraud alarm",
+  "bonus_pre_e3_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex04_extended_exhale.html?unlock=1",
+  "brand_id": "way_stream_sanctuary",
+  "campaign_plan_id": "waystream_imposter_evidence_log_evergreen_v1",
+  "content_type": "accountability_partner_pdf",
+  "e1_benefit": "Use it when imposter syndrome starts to take over and you need one immediate step.",
+  "e1_cta": "Open the evidence log",
+  "e1_microcopy": "No login wall. Keep this link for the moment you need it.",
+  "e1_short_description": "The free Waystream tool you requested for imposter syndrome.",
+  "e1_title": "Your imposter evidence log is ready",
+  "e1_tool_name": "Imposter Evidence Log",
+  "e1_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/imposter-evidence-log/",
+  "e2_benefit": "Pair it with yesterday\u2019s tool so your body gets the signal twice.",
+  "e2_cta": "Try the breathing practice",
+  "e2_microcopy": "Do it once today. Notice the smallest shift.",
+  "e2_short_description": "A second practice that keeps the first reset from being a one-off.",
+  "e2_title": "Extended exhale for the fraud alarm",
+  "e2_tool_name": "Extended exhale for the fraud alarm",
+  "e2_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex04_extended_exhale.html?unlock=1",
+  "e3_benefit": "See the mechanism through a human moment instead of a lecture.",
+  "e3_cta": "Read the deeper path",
+  "e3_microcopy": "No pitch in this email. Just the story.",
+  "e3_short_description": "A short story about why the imposter syndrome reset can work in real life.",
+  "e3_story_body": "A Waystream reader once opened Imposter Evidence Log in the middle of an ordinary day, not a dramatic breaking point. The old pattern was already moving: imposter syndrome had started to feel like a command, and the body was treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It gives the body one repeatable cue that says, \"we can slow this down before it runs the whole day.\"",
+  "e3_title": "Why this works: a short imposter syndrome story",
+  "e3_tool_name": "Transformation story",
+  "e3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e4_benefit": "Use it when you want the full journey, not only the free tool.",
+  "e4_book_title": "The Waystream Guide to Imposter Syndrome",
+  "e4_cta": "See the book",
+  "e4_microcopy": "The free tools are still yours. This is the next layer.",
+  "e4_short_description": "The first deeper Waystream book for this imposter syndrome pattern.",
+  "e4_title": "Recommended for you: The Waystream Guide to Imposter Syndrome",
+  "e4_tool_name": "The Waystream Guide to Imposter Syndrome",
+  "e4_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e5_benefit": "Choose the next book by the kind of support you want right now.",
+  "e5_book1_note": "Start here if you want the main Waystream path for imposter syndrome.",
+  "e5_book1_title": "The Waystream Guide to Imposter Syndrome",
+  "e5_book1_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e5_book2_note": "Use this as the second recommendation once the first path feels familiar.",
+  "e5_book2_title": "The Follow-Up Waystream Guide for Imposter Syndrome",
+  "e5_book2_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e5_book3_note": "Use this when you want the book path and free tools grouped together.",
+  "e5_book3_title": "The Imposter Syndrome Calm Bundle",
+  "e5_book3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e5_cta": "See the reading path",
+  "e5_microcopy": "Start with the first recommendation if you are unsure.",
+  "e5_short_description": "A short list of next reads for imposter syndrome.",
+  "e5_title": "More Waystream books for imposter syndrome",
+  "e5_tool_name": "Waystream reading path",
+  "e5_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e6_benefit": "Use this after the first book if you want a second angle on the same pattern.",
+  "e6_book_title": "The Follow-Up Waystream Guide for Imposter Syndrome",
+  "e6_cta": "Open recommendation 2",
+  "e6_microcopy": "Recommendation 2 is for continuity, not pressure.",
+  "e6_short_description": "A follow-up book recommendation for the next layer of imposter syndrome.",
+  "e6_title": "Book 2 recommendation for imposter syndrome",
+  "e6_tool_name": "The Follow-Up Waystream Guide for Imposter Syndrome",
+  "e6_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e7_benefit": "Use the bundle when you want the tools and books in one mental shelf.",
+  "e7_bundle_title": "The Imposter Syndrome Calm Bundle",
+  "e7_cta": "See the bundle path",
+  "e7_microcopy": "This is the cleanest path if you prefer everything in one place.",
+  "e7_short_description": "A bundle-style path that groups the next imposter syndrome supports together.",
+  "e7_title": "Book 3 bundle path for imposter syndrome",
+  "e7_tool_name": "The Imposter Syndrome Calm Bundle",
+  "e7_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e8_benefit": "Take the next step now if you know you want the deeper support.",
+  "e8_cta": "Take the next step",
+  "e8_last_chance_note": "This is the last direct book nudge in the imposter syndrome freebie sequence.",
+  "e8_microcopy": "If not, keep the free tool. That still counts.",
+  "e8_short_description": "A final nudge before this imposter syndrome sequence quiets down.",
+  "e8_title": "Last chance to keep the imposter syndrome path close",
+  "e8_tool_name": "Last-chance reminder",
+  "e8_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison",
+  "e9_benefit": "Return to the simplest reset any time you need it.",
+  "e9_cta": "Reopen the free tool",
+  "e9_microcopy": "No new ask today. Just the tool again.",
+  "e9_short_description": "A still-here reminder with the original free tool link.",
+  "e9_title": "Still here: reopen Imposter Evidence Log",
+  "e9_tool_name": "Imposter Evidence Log",
+  "e9_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/imposter-evidence-log/",
+  "fallback_allowed": false,
+  "freebie_id": "accountability_partner_v1",
+  "funnel_variant": "evergreen_freebie_v1",
+  "locale": "en_US",
+  "quiz_id": "evidence_log",
+  "source_page_slug": "imposter-evidence-log",
+  "status": "active",
+  "topic": "imposter_syndrome"
+}
+</script>
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+});
+</script>
+
+</body>
+</html>

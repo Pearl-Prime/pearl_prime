@@ -1,0 +1,79 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: somatic_wisdom__pamela_fellows__millennial_women_professionals__sleep_anxiety
+brand: somatic_wisdom
+teacher: pamela_fellows
+persona: millennial_women_professionals
+topic: sleep_anxiety
+byline_author: suki_dunmore
+arc:
+  installment_1:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__sleep_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__sleep_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__sleep_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__sleep_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A trauma-informed, body-first way back to sleep for the high-functioning
+  woman whose nervous system won't stand down at night — not another protocol to perfect,
+  but a felt sense of safety she can finally feel in her own chest, where the bracing
+  finally lets go.
+bestseller_hook_family: ''
+emotional_engine: sleep_anxiety_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case that trauma
+  and threat live in the body, not just the mind, which is exactly where this series
+  meets sleeplessness.
+- Why We Sleep (Matthew Walker) — names sleep as biological necessity rather than
+  a discipline to win, dignifying the reader's struggle without shaming it.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — speaks
+  to high-achieving women about completing the body''s stress response, the same nervous-system
+  literacy this series brings to the bedroom.'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: late twenties to early forties
+  where_they_are: It is 1:47am. She got into bed exhausted ninety minutes ago, did
+    everything right — no screens, the lavender, the breathing app — and her body
+    answered by going wide awake the instant the lights went off. She is lying on
+    her back in the dark, jaw tight, shoulders pulled up toward her ears, running
+    tomorrow's meeting on a loop, listening to her partner breathe slowly beside her
+    and feeling like the only person in the house whose body forgot how to do this.
+  what_they_need: To understand that her sleeplessness is a nervous system stuck in
+    protection, not a personal failure or a willpower problem — and to be guided,
+    gently and from the body, back into the felt experience of safety that has to
+    come before sleep, not chased after it.
+  what_they_avoid: Push-through sleep hacks, optimization and tracking culture, cold
+    clinical sleep-hygiene checklists delivered like homework, anything that treats
+    her body as a machine to be debugged or shames her for not 'just relaxing,' and
+    intensity that drags her back through the very fear she's trying to settle.
+series_voice_markers:
+  register: embodied, grounded, gently somatic and trauma-informed; the steady voice
+    of a felt-sense guide sitting beside her in the dark, speaking from and to the
+    body — never clinical, never hustle, never telling her to try harder
+  sentence_rhythm: slow and settling, like a long exhale; short grounding sentences
+    that land in the body, then a longer one that opens room to breathe; pauses where
+    the reader can feel the weight lift
+  metaphor_family: the body's felt sense; breath and the ground beneath the bed; tension
+    held in the jaw and shoulders, then released; the nervous system settling like
+    weather passing; warmth returning to a braced place; the difference between being
+    safe and feeling safe
+_needs_authoring: false

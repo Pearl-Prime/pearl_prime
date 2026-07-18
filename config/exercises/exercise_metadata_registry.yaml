@@ -1,0 +1,74 @@
+schema_version: 1
+description: >
+  Six canonical exercise ids for journey planning and depth-module affinity.
+  Used by legacy template / exercise journey follow-ups (not wired to Pearl Prime).
+
+exercises:
+  body_scan_v1:
+    type: somatic_scan
+    phase_fit: [early, mid]
+    section_fit: [4, 8]
+    effects: [interoception, downshift]
+    intensity: low
+    prerequisites: []
+    compatible_with: [anxiety, somatic_healing, sleep_anxiety]
+    outcome_tags: [awareness, regulation]
+    # Explicit per-dimension delivery magnitudes (0-1). Replaces the old
+    # equal-weight tag split (which capped any dimension at 0.5 and made the
+    # thesis thresholds mathematically unsatisfiable in 2-step journeys).
+    outcome_scores: {awareness: 0.92, regulation: 0.55, integration: 0.45}
+
+  sensation_tracking_v1:
+    type: tracking
+    phase_fit: [early, mid, late]
+    section_fit: [4, 8, 10]
+    effects: [labeling, curiosity]
+    intensity: low
+    prerequisites: []
+    compatible_with: [anxiety, overthinking, emotional_overwhelm]
+    outcome_tags: [awareness, integration]
+    outcome_scores: {awareness: 0.90, regulation: 0.35, integration: 0.60}
+
+  extended_exhale_v2:
+    type: breath
+    phase_fit: [early, mid]
+    section_fit: [4, 8]
+    effects: [parasympathetic, brake]
+    intensity: low
+    prerequisites: []
+    compatible_with: [anxiety, sleep_anxiety, burnout_pattern]
+    outcome_tags: [regulation]
+    outcome_scores: {awareness: 0.15, regulation: 0.90, integration: 0.50}
+
+  breath_anchor_v1:
+    type: breath
+    phase_fit: [mid, late]
+    section_fit: [8, 10]
+    effects: [stability, presence]
+    intensity: low
+    prerequisites: [sensation_tracking_v1]
+    compatible_with: [anxiety, emotional_overwhelm]
+    outcome_tags: [regulation, integration]
+    outcome_scores: {awareness: 0.25, regulation: 0.88, integration: 0.62}
+
+  sensation_hold_v1:
+    type: somatic_hold
+    phase_fit: [mid, late]
+    section_fit: [8, 10]
+    effects: [tolerance, capacity]
+    intensity: medium
+    prerequisites: [sensation_tracking_v1]
+    compatible_with: [anxiety, unnamed_feeling, emotional_overwhelm]
+    outcome_tags: [awareness, regulation]
+    outcome_scores: {awareness: 0.82, regulation: 0.70, integration: 0.55}
+
+  grounding_anchor_v1:
+    type: grounding
+    phase_fit: [early, late]
+    section_fit: [4, 10]
+    effects: [orientation, safety]
+    intensity: low
+    prerequisites: []
+    compatible_with: [anxiety, emotional_overwhelm, burnout_pattern]
+    outcome_tags: [regulation, integration]
+    outcome_scores: {awareness: 0.30, regulation: 0.80, integration: 0.66}

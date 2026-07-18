@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__anxiety__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__calm_alarm__1hr
+  name: Calm the Alarm — for First Responders (One-Hour)
+installment_number: 3
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Alarm Is Lying: The Weight You Carry'
+subtitle: Living with What You've Lost — Anxiety for First Responders (The Weight
+  You Carry)
+cover_tagline: Some calls you carry out with you. This is for the ones that never
+  quite leave.
+description:
+  short_blurb: You don't get to grieve the ones you couldn't save — there's another
+    call coming, and the job doesn't pause for it. This is the one-hour read for the
+    first responder holding losses that never got mourned. It won't ask you to let
+    go. It makes room for what you're already carrying.
+  long_description: 'There are calls you carried out of the scene and never set back
+    down. The one you worked and lost. The face you couldn''t un-see. The kid, the
+    partner''s partner, the regular whose name you knew. The job doesn''t make space
+    for it — you clear, you fuel up, you''re available again, and the next tone drops
+    before the last one''s even cold. So the grief doesn''t get mourned. It gets stacked.
+    And after enough years there''s a whole pile in there you''ve never been allowed
+    to feel, sitting in your chest as something that looks like anxiety but is really
+    loss that never had anywhere to go.
+
+
+    This book is for the first responder carrying the dead and the unsaveable: the
+    medic who remembers every one he lost, the firefighter who still smells the worst
+    day of his career, the cop grieving a brother off the job, the dispatcher who
+    heard it happen and couldn''t reach through the line. Grief in this work is strange
+    because it''s chronic and it''s silent — you''re not supposed to fall apart over
+    strangers, so you don''t, and the not-falling-apart becomes its own slow weight.
+    The tightness you feel might not be fear at all. It might be everything you were
+    never given a minute to mourn.
+
+
+    In a single sitting we name it for what it is: grief that didn''t leave because
+    it never got to. Then we go down into it — not to process it efficiently or close
+    it out like a report, but to finally let it be felt, the way it should have been
+    felt the night it happened. You''ll touch the loss without rushing past it to
+    the next available, without bracing against it, without telling yourself it wasn''t
+    yours to grieve because they weren''t yours to lose. And you come back not over
+    it, but no longer holding your breath against it.
+
+
+    This won''t promise you closure or tell you it''s time to let go. The ones you
+    carry are part of you now; the work isn''t deleting them, it''s stopping the war
+    against feeling them. There''s no stage chart here, no timeline you''re behind
+    on.
+
+
+    The alarm is lying when it tells you this grief is something wrong with you that
+    you need to manage. It isn''t. It''s love and loss with nowhere to land, in a
+    person who''s seen more endings than anyone should. You''re allowed to grieve
+    the ones you couldn''t save. You always were.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - first responders
+  - anxiety for first responders
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: cole_bennett
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — grief you're meant to carry, not 'get
+  over'
+- Bearing the Unbearable (Joanne Cacciatore) — staying present to loss instead of
+  rushing past it
+- The Wild Edge of Sorrow (Francis Weller) — why unmourned grief accumulates and needs
+  a place to land
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

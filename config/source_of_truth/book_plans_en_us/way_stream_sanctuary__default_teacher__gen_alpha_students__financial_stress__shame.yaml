@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__financial_stress__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__money_fears
+  name: Money Without Panic — for Students
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Stress Management: Carrying What You Can''t Say'
+subtitle: A Field Guide for Gen Alpha Students Navigating Financial Stress
+cover_tagline: You'd rather pick up another shift than admit out loud how tight it
+  really is.
+description:
+  short_blurb: You're working hard and still behind, and somewhere you've decided
+    that means it's your fault. This book is for working students carrying a private
+    belief that the struggle is a personal defect. It goes after that shame directly,
+    not the spreadsheet.
+  long_description: 'You''re not doing nothing. You''re doing a lot. The shifts, the
+    classes, the careful tracking of every dollar, and still the money''s tight, and
+    still you''d sooner pick up another shift than say any of it out loud. When a
+    friend suggests a trip you can''t afford, you invent a reason. When someone asks
+    how the job''s going, you say fine. Underneath all of it sits a quiet verdict
+    you''ve never once questioned: that working this hard and still being squeezed
+    must mean something is wrong with you specifically.
+
+
+    This book is for the student who has built a whole performance around being okay.
+    The one watching classmates who don''t work, who don''t check prices, who talk
+    about money like it''s easy, and silently deciding the gap is a flaw in them rather
+    than a difference in circumstance. The one who knows the exact number and treats
+    it like a secret that would expose them. If the financial stress has quietly turned
+    into a story about your worth, and you carry that story completely alone, this
+    was written for you.
+
+
+    The engine here is shame: the buried belief that the tight month is evidence about
+    you, not about the cost of being a working student. You''ll learn to pull the
+    two apart, the situation, which is hours and wages and prices, and the verdict
+    you''ve stapled to it. You''ll catch the move where shame pushes you into silence
+    and that fake fine exactly when honesty would cost you nothing. Then you go down
+    into it and look the belief in the face long enough to see it was handed to you,
+    never true. You come back able to hold the struggle as a fact of your circumstances
+    instead of a sentence about your character.
+
+
+    No payoff plan lives in here, no hustle pitch, no poison about how anyone can
+    make it if they just want it badly enough. This won''t fix your finances and won''t
+    pretend the shame is yours to have earned. What it does is give you language for
+    the thing under the performance, so the next time you''re about to say fine and
+    mean nothing of the kind, you can tell the truth about how tight it is without
+    lying to yourself about what kind of person that makes you.
+
+
+    Working hard and still being broke is a fact about the math, not a fact about
+    you. You don''t owe anyone the performance. Set down the secret you''ve been carrying,
+    and read.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - students
+  - financial stress for students
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- Daring Greatly (Brené Brown) — shows how shame thrives in silence and loosens the
+  moment it's spoken
+- Broke Millennial (Erin Lowry) — talks frankly about money shame for young adults
+  without judgment
+- Maid (Stephanie Land) — a lived account of working hard and still being broke, naming
+  the shame around it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

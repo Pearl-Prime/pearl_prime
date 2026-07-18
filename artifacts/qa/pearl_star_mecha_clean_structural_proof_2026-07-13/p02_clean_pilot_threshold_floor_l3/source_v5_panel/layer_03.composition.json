@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "p02_clean_pilot_threshold_floor_l3_l3_telemetry",
+  "layer_class": "L3",
+  "genre": "mecha",
+  "style_register": "mecha_telemetry",
+  "crop_class": "object_macro",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "clean",
+    "role": "isolated_object",
+    "subject": "telemetry",
+    "contains": [
+      "telemetry"
+    ]
+  }
+}

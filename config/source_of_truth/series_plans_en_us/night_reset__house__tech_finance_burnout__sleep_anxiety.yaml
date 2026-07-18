@@ -1,0 +1,66 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: night_reset__house__tech_finance_burnout__sleep_anxiety
+brand: night_reset
+teacher: null
+persona: tech_finance_burnout
+topic: sleep_anxiety
+byline_author: suki_bennett
+arc:
+  installment_1:
+    book_id: night_reset__house__tech_finance_burnout__sleep_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__sleep_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: night_reset__house__tech_finance_burnout__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: night_reset__house__tech_finance_burnout__sleep_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__sleep_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: >
+  You'll learn to recognize what your wired, exhausted body is doing at night without forcing it to stop.
+  Three books into the same sleepless hour, each one entering the dark from a different angle.
+bestseller_hook_family: recognition_descent
+emotional_engine: sleep_anxiety_recognition
+comp_series:
+- "Hello Sleep (Jade Wu) — acceptance-first, anti-effort sleep register"
+- "Why We Sleep (Matthew Walker) — the science of what the tired body is doing"
+- "Say Good Night to Insomnia (Gregg D. Jacobs) — drug-free, mechanism-led reassurance"
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: "30–48"
+  where_they_are: >
+    Flat on their back at 2:47am, phone face-down on the nightstand, the day's Slack threads and a red market
+    still running behind their eyes while the body refuses to power down.
+  what_they_need: >
+    Someone who names what high-pressure work does to a nervous system at night without calling it a disorder or
+    handing them another sleep-hygiene checklist.
+  what_they_avoid: >
+    Sleep-hygiene listicles. "Just put the phone away" advice. Wellness-influencer morning routines. Clinical labels.
+series_voice_markers:
+  register: "calm, nocturnal, steady; close and unhurried, never clinical or hustle-toned"
+  sentence_rhythm: "short, low sentences dominant, with occasional long settling stretches that slow the reader down"
+  metaphor_family: "night, tide, breath, dimming light, the body's own systems — never productivity, machines, or military"
+  second_person_default: true
+  taboo:
+  - "No insomnia-disorder or diagnostic language"
+  - "No sleep-hygiene checklists"
+  - "No 'put the phone away' scolding"
+  - "No cure or fix promises"
+_needs_authoring: false

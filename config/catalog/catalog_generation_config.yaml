@@ -1,0 +1,636 @@
+# Catalog Generation Configuration
+# Authority: Pearl_Research + Pearl_Marketing + EI v2
+# Generates ~800 high-confidence catalog entries from brand x topic x persona x format constraints.
+
+schema_version: "1.0"
+
+# ── Locales ──────────────────────────────────────────────────────────
+locales:
+  en_US: { language: English, region: "United States", currency: USD, tier: primary }
+  ja_JP: { language: Japanese, region: Japan, currency: JPY, tier: primary }
+  ko_KR: { language: Korean, region: "South Korea", currency: KRW, tier: primary }
+  de_DE: { language: German, region: Germany, currency: EUR, tier: primary }
+  fr_FR: { language: French, region: France, currency: EUR, tier: primary }
+  zh_TW: { language: "Traditional Chinese", region: Taiwan, currency: TWD, tier: secondary }
+  zh_CN: { language: "Simplified Chinese", region: "China Mainland", currency: CNY, tier: secondary }
+  zh_HK: { language: "Traditional Chinese", region: "Hong Kong", currency: HKD, tier: secondary }
+  es_US: { language: "Latin American Spanish", region: "US Hispanic", currency: USD, tier: secondary }
+  es_ES: { language: "Castilian Spanish", region: Spain, currency: EUR, tier: secondary }
+  it_IT: { language: Italian, region: Italy, currency: EUR, tier: secondary }
+  zh_SG: { language: "Simplified Chinese", region: Singapore, currency: SGD, tier: tertiary }
+  hu_HU: { language: Hungarian, region: Hungary, currency: HUF, tier: tertiary }
+  pt_BR: { language: Portuguese, region: Brazil, currency: BRL, tier: secondary }  # ratified 2026-05-29 (LATAM §1A): manga-forward, top-2 priority w/ France
+
+# ── Canonical Topics (17 active) ─────────────────────────────────────
+topics:
+  - adhd_focus
+  - anxiety
+  - boundaries
+  - burnout
+  - compassion_fatigue
+  - courage
+  - depression
+  - financial_anxiety
+  - financial_stress
+  - grief
+  - imposter_syndrome
+  - mindfulness
+  - overthinking
+  - self_worth
+  - sleep_anxiety
+  - social_anxiety
+  - somatic_healing
+
+# ── Canonical Personas ───────────────────────────────────────────────
+personas:
+  - corporate_managers
+  - millennial_women_professionals
+  - tech_finance_burnout
+  - gen_z_professionals
+  - healthcare_rns
+  - first_responders
+  - educators
+  - working_parents
+  - entrepreneurs
+  - gen_x_sandwich
+  - gen_alpha_students
+  - nyc_executives
+  - gen_z_student
+
+# ── Content Mix Ratios (per brand, default = Western ebook markets) ──
+content_mix:
+  series_ratio: 0.45
+  standalone_ratio: 0.30
+  micro_ratio: 0.20
+  deep_ratio: 0.05
+
+# ── Lane-Specific Content Mix Overrides ─────────────────────────────
+# Per global_manga_distribution_strategy.md (1,416 lines):
+# - ALL lanes include manga (not just JP)
+# - Manga sells on Amazon KDP as graphic novel EPUB
+# - WEBTOON Canvas 2026 supports 7 languages
+# - France = #1 EU manga market (35% share)
+#
+# PROVENANCE (2026-05-29): the manga shares below were re-weighted UPWARD from the
+# cited global_manga_distribution_strategy.md §6.1 (e.g. en_US manga ~20% here vs
+# strategy 30%; ja_JP ~70% vs 40%; ko_KR ~60% vs 35%; zh_TW ~55% vs 25%). Intentional
+# portfolio bet, not a faithful copy of the source. This is the OPERATIVE per-market
+# format-mix SSOT (market_catalog_registry.yaml::content_mix is stale) — but know it
+# diverges from the cited research numbers.
+
+lane_content_mix:
+  # Japan: manga-primary. Piccoma #1 app ($482M+), webtoon $10.85B.
+  ja_JP:
+    manga_series: 0.40          # webtoon serialization (LINE Manga, Piccoma via MediaDo)
+    manga_standalone: 0.20      # tankōbon volumes (KDP JP, Rakuten Kobo JP)
+    ebook_series: 0.15          # text audiobook series
+    ebook_standalone: 0.10      # text standalone
+    micro_manga: 0.10           # short episodes (LINE Manga)
+    micro_ebook: 0.05           # $0.99 text micro
+
+  # Korea: vertical scroll mandatory. Naver CANVAS only self-publish option.
+  ko_KR:
+    manga_series: 0.35          # webtoon serialization (Naver CANVAS)
+    manga_standalone: 0.15      # collected volumes (KDP KR)
+    ebook_series: 0.20          # text series
+    ebook_standalone: 0.15      # text standalone
+    micro_manga: 0.10           # short webtoon episodes
+    micro_ebook: 0.05           # text micro
+
+  # Taiwan: LINE Webtoon TW + Bookwalker TW
+  zh_TW:
+    manga_series: 0.30          # LINE Webtoon TW
+    manga_standalone: 0.15      # Bookwalker TW, KDP TW
+    ebook_series: 0.20          # text series
+    ebook_standalone: 0.20      # text standalone (Readmoo)
+    micro_manga: 0.10           # short episodes
+    micro_ebook: 0.05           # text micro
+
+  # US: manga growing fast. KDP graphic novels + WEBTOON Canvas.
+  en_US:
+    manga_series: 0.10          # WEBTOON Canvas serialization
+    manga_standalone: 0.05      # KDP graphic novel EPUB
+    ebook_series: 0.35          # text series (primary)
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # WEBTOON short episodes
+    micro_ebook: 0.20           # $0.99 text micro
+
+  # France: #1 EU manga market (35% share). WEBTOON CANVAS 2026 FR.
+  fr_FR:
+    manga_series: 0.15          # WEBTOON Canvas FR
+    manga_standalone: 0.10      # KDP FR graphic novel
+    ebook_series: 0.30          # text series
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.15           # text micro
+
+  # Spain: growing manga market. WEBTOON CANVAS 2026 ES.
+  es_ES:
+    manga_series: 0.10          # WEBTOON Canvas ES
+    manga_standalone: 0.05      # KDP ES graphic novel
+    ebook_series: 0.35          # text series
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.20           # text micro
+
+  # Germany: moderate manga market.
+  de_DE:
+    manga_series: 0.10          # WEBTOON Canvas DE
+    manga_standalone: 0.05      # KDP DE graphic novel
+    ebook_series: 0.35          # text series
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.20           # text micro
+
+  # Brazil: top-3 ex-Asia anime market; manga-forward (One Piece = #2 comic). LATAM §1A.
+  pt_BR:
+    manga_series: 0.13          # WEBTOON Canvas BR + Brazilian manga apps
+    manga_standalone: 0.08      # KDP BR graphic novel / tankōbon
+    ebook_series: 0.32          # text series
+    ebook_standalone: 0.27      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.15           # text micro
+
+  # China: SKIP (inaccessible without local entity)
+  zh_CN:
+    manga_series: 0.00
+    manga_standalone: 0.00
+    ebook_series: 0.45          # text only via any accessible platform
+    ebook_standalone: 0.30
+    micro_manga: 0.00
+    micro_ebook: 0.25
+
+  # Default for remaining lanes (HK, SG, US-Hispanic, Italy, Hungary):
+  # Ebook-primary with 10% manga
+  _default:
+    manga_series: 0.05
+    manga_standalone: 0.05
+    ebook_series: 0.35
+    ebook_standalone: 0.30
+    micro_manga: 0.05
+    micro_ebook: 0.20
+
+# ── Series Configuration ─────────────────────────────────────────────
+series_config:
+  series_per_brand: [1, 2]
+  books_per_series: [7, 10]
+  book_1_price_override: 0.00  # permafree via KDP price-match (list free on Google Play/Kobo)
+  series_pricing:
+    standard: [3.99, 6.99]
+    extended: [9.99, 14.99]
+
+# ── Wave Assignment Rules ────────────────────────────────────────────
+wave_rules:
+  WAVE_1:
+    description: "Cold-start: $0.99 micro-books and series Book 1s"
+    content_types: [micro_book]
+    price_max: 0.99
+  WAVE_2:
+    description: "Series expansion and standalones"
+    content_types: [series_book, standalone]
+  WAVE_3:
+    description: "Deep books for proven markets"
+    content_types: [deep_book]
+
+# ── Locale Pricing Adjustments ───────────────────────────────────────
+locale_pricing:
+  en_US: { multiplier: 1.0 }
+  ja_JP: { multiplier: 0.85, min_micro: 0.99, max_standard: 19.99 }
+  ko_KR: { multiplier: 0.35, min_micro: 0.75, max_standard: 7.20 }
+  de_DE: { multiplier: 0.95, min_micro: 0.99, max_standard: 27.99 }
+  fr_FR: { multiplier: 0.90, min_micro: 0.99, max_standard: 24.99 }
+  zh_TW: { multiplier: 0.45, min_micro: 1.50, max_standard: 11.00 }
+  zh_CN: { multiplier: 0.25, min_micro: 0.50, max_standard: 6.50 }
+  zh_HK: { multiplier: 0.50, min_micro: 1.00, max_standard: 12.00 }
+  es_US: { multiplier: 0.70, min_micro: 0.99, max_standard: 17.99 }
+  es_ES: { multiplier: 0.85, min_micro: 0.99, max_standard: 22.99 }
+  it_IT: { multiplier: 0.85, min_micro: 0.99, max_standard: 22.99 }
+  zh_SG: { multiplier: 0.45, min_micro: 1.50, max_standard: 10.00 }
+  hu_HU: { multiplier: 0.40, min_micro: 0.99, max_standard: 14.99 }
+  pt_BR: { multiplier: 0.60, min_micro: 0.99, max_standard: 16.99 }  # ratified band 0.55–0.65 (LATAM §1A); BRL, price-sensitive market
+
+# ── Kill List (Never Build) ──────────────────────────────────────────
+kill_list:
+  topic_persona_kills:
+    - { topic: financial_anxiety, persona: gen_alpha_students }
+    - { topic: financial_stress, persona: gen_alpha_students }
+    - { topic: compassion_fatigue, persona: gen_alpha_students }
+    - { topic: compassion_fatigue, persona: entrepreneurs }
+    - { topic: compassion_fatigue, persona: gen_z_student }
+    - { topic: adhd_focus, persona: gen_x_sandwich }
+    - { topic: adhd_focus, persona: healthcare_rns }
+    - { topic: mindfulness, persona: gen_alpha_students }
+  format_locale_kills:
+    - { format: deep_book_6h, locale: hu_HU }
+    - { format: deep_book_4h, locale: hu_HU }
+    - { format: extended_book_2h, locale: hu_HU }
+  brand_locale_kills:
+    - { brand: cosmic_edge, locale: hu_HU }
+    - { brand: soul_repair, locale: de_DE }
+    - { brand: vitality_path, locale: hu_HU }
+
+# ── Title Template Formulas ──────────────────────────────────────────
+title_templates:
+  anxiety:
+    - { title: "The Alarm Is Lying", subtitle_pattern: "A Nervous System Guide to {topic} Recovery" }
+    - { title: "Safe Enough", subtitle_pattern: "How to Calm {topic} and Reclaim Your Nervous System" }
+    - { title: "The Emergency That Never Comes", subtitle_pattern: "Breaking Free from High-Functioning {topic}" }
+    - { title: "Ground Where You Stand", subtitle_pattern: "A Daily {topic} Recovery Practice" }
+    - { title: "Threshold Calm", subtitle_pattern: "Crossing Out of {topic} One Moment at a Time" }
+    - { title: "Soft Steadying", subtitle_pattern: "A Hands-On {topic} Recovery Practice" }
+  burnout:
+    - { title: "Running on Fumes", subtitle_pattern: "A Recovery Guide for {topic} and Work Exhaustion" }
+    - { title: "The Collapse You Earned", subtitle_pattern: "{topic} Recovery for People Who Can't Stop" }
+    - { title: "Before You Break", subtitle_pattern: "Escaping {topic} and Rebuilding Your Energy" }
+    - { title: "Permission to Pause", subtitle_pattern: "Resting Through {topic} Without Guilt" }
+    - { title: "The Long Way Back", subtitle_pattern: "A Recovery Companion for {topic} Survivors" }
+  sleep_anxiety:
+    - { title: "The 3 AM Mind", subtitle_pattern: "A Guide to Overcoming Insomnia and {topic}" }
+    - { title: "Permission to Rest", subtitle_pattern: "How to Calm Racing Thoughts and Finally Sleep" }
+    - { title: "The Quiet Hour", subtitle_pattern: "Reclaiming Sleep from {topic} and Overthinking" }
+    - { title: "Reclaim the Night", subtitle_pattern: "An {topic} Companion for the Sleepless" }
+    - { title: "The Soft Landing", subtitle_pattern: "Falling Asleep With {topic} as a Companion" }
+  imposter_syndrome:
+    - { title: "You're Not a Fraud", subtitle_pattern: "Overcoming {topic} and Owning Your Worth" }
+    - { title: "The Proof Was Always You", subtitle_pattern: "An {topic} Recovery Guide for Professionals" }
+    - { title: "Belonging at the Table", subtitle_pattern: "Silencing {topic} and Claiming Your Place" }
+    - { title: "Earned It Already", subtitle_pattern: "A Quiet Guide to {topic} for Those Who Doubt" }
+    - { title: "The Voice That Knows", subtitle_pattern: "Trusting Yourself Through {topic}" }
+  social_anxiety:
+    - { title: "The Room Isn't Watching", subtitle_pattern: "A {topic} Recovery Guide for Quiet People" }
+    - { title: "Brave Enough to Show Up", subtitle_pattern: "Overcoming {topic} and Building Real Connection" }
+    - { title: "The Script Nobody Gave You", subtitle_pattern: "How to Navigate {topic} with Confidence" }
+    - { title: "Visible at Your Own Pace", subtitle_pattern: "{topic} Recovery That Respects Your Nervous System" }
+    - { title: "The Smaller Yes", subtitle_pattern: "Starting Small With {topic} Recovery" }
+  self_worth:
+    - { title: "You Were Always Enough", subtitle_pattern: "Rebuilding Self-Esteem and Reclaiming Your Worth" }
+    - { title: "The Mirror Lied", subtitle_pattern: "A Self-Love Guide to Healing Low Self-Esteem" }
+    - { title: "Worthy Without Proof", subtitle_pattern: "How to Build Unshakable {topic} and Confidence" }
+    - { title: "The Quiet Yes", subtitle_pattern: "A {topic} Guide for People Who Apologize Too Much" }
+    - { title: "Already Whole", subtitle_pattern: "Returning to {topic} Without Performing" }
+  boundaries:
+    - { title: "The No That Saved Me", subtitle_pattern: "A Practical Guide to Setting {topic} and Finding Peace" }
+    - { title: "Stop Pouring from an Empty Cup", subtitle_pattern: "{topic} for People Pleasers and Overgivers" }
+    - { title: "The Line You Draw", subtitle_pattern: "How to Set {topic} Without Guilt or Fear" }
+    - { title: "Soft No, Steady Self", subtitle_pattern: "A Compassionate {topic} Practice" }
+    - { title: "Edge Work", subtitle_pattern: "Building {topic} from the Inside Out" }
+  grief:
+    - { title: "The Weight of Gone", subtitle_pattern: "A Gentle Guide to {topic}, Loss, and Healing" }
+    - { title: "Still Here Without You", subtitle_pattern: "Finding Your Way Through {topic} and Heartbreak" }
+    - { title: "The Shape of Missing", subtitle_pattern: "A {topic} Recovery Companion for the Worst Days" }
+    - { title: "Carry It Lightly", subtitle_pattern: "A Daily {topic} Practice for the Long Walk" }
+    - { title: "Where the Love Goes", subtitle_pattern: "A {topic} Companion for Year One and After" }
+  overthinking:
+    - { title: "The Loop Breaker", subtitle_pattern: "How to Stop {topic} and Quiet Your Racing Mind" }
+    - { title: "Your Brain Is Not the Boss", subtitle_pattern: "A Guide to Overcoming {topic} and Mental Spirals" }
+    - { title: "Thought Traffic", subtitle_pattern: "Breaking Free from {topic}, Worry, and Analysis Paralysis" }
+    - { title: "Drop the Loop", subtitle_pattern: "A Daily Practice for Quieting {topic}" }
+    - { title: "The Stop Signal", subtitle_pattern: "Interrupting {topic} Before It Spirals" }
+  somatic_healing:
+    - { title: "The Body Remembers the Way Out", subtitle_pattern: "{topic} and Nervous System Recovery" }
+    - { title: "Unlock the Freeze", subtitle_pattern: "A Somatic Guide to Nervous System Reset and Trauma Release" }
+    - { title: "Held by the Body", subtitle_pattern: "A {topic} Guide for Stress, Trauma, and Anxiety" }
+    - { title: "Listening Lower", subtitle_pattern: "A Body-First {topic} Practice for Adults" }
+    - { title: "The Body's Slow Yes", subtitle_pattern: "Returning Through {topic} at Body Speed" }
+    - { title: "Where the Story Settles", subtitle_pattern: "An Embodied {topic} Companion for Adults" }
+  depression:
+    - { title: "The Light You Forgot", subtitle_pattern: "A Gentle Guide to Healing {topic} and Finding Hope" }
+    - { title: "Still Breathing", subtitle_pattern: "{topic} Recovery for People Running on Empty" }
+    - { title: "Color Returns", subtitle_pattern: "How to Move Through {topic} One Day at a Time" }
+    - { title: "Smaller Than the Day", subtitle_pattern: "A {topic} Companion for Hours, Not Years" }
+    - { title: "The Single Step", subtitle_pattern: "Walking Through {topic} One Movement at a Time" }
+    - { title: "Quiet Mornings", subtitle_pattern: "A Soft {topic} Practice for the Heavy Days" }
+  courage:
+    - { title: "The Fear That Built You", subtitle_pattern: "Finding {topic} When Everything Feels Uncertain" }
+    - { title: "Jump Scared", subtitle_pattern: "A Guide to Building {topic} and Facing the Unknown" }
+    - { title: "Bold Enough", subtitle_pattern: "How to Find {topic} in Anxious Times" }
+    - { title: "Walk Into the Room", subtitle_pattern: "A Daily {topic} Practice for Brave Choices" }
+    - { title: "The Slow Brave", subtitle_pattern: "Building {topic} One Small Decision at a Time" }
+  compassion_fatigue:
+    - { title: "Caring Until There's Nothing Left", subtitle_pattern: "A {topic} Recovery Guide for Helpers" }
+    - { title: "The Empty Well", subtitle_pattern: "Healing {topic} and Emotional Exhaustion" }
+    - { title: "Who Heals the Healer", subtitle_pattern: "{topic} Recovery for Nurses and Caregivers" }
+    - { title: "Refill the Vessel", subtitle_pattern: "A Practical {topic} Guide for Care Workers" }
+    - { title: "Hold Yourself Last", subtitle_pattern: "Why {topic} Demands a New Order of Care" }
+  financial_anxiety:
+    - { title: "The Money Knot", subtitle_pattern: "Untangling {topic} and Building Financial Peace" }
+    - { title: "Broke and Breathing", subtitle_pattern: "A Somatic Guide to {topic} Recovery" }
+    - { title: "Worth More Than Your Balance", subtitle_pattern: "Healing {topic} and Money Shame" }
+    - { title: "The Quiet Ledger", subtitle_pattern: "A {topic} Practice for the Spreadsheet-Tired" }
+    - { title: "Money Without Panic", subtitle_pattern: "A Nervous-System Guide to {topic}" }
+  financial_stress:
+    - { title: "The Money Knot", subtitle_pattern: "Untangling {topic} and Building Financial Peace" }
+    - { title: "Broke and Breathing", subtitle_pattern: "A Somatic Guide to {topic} Recovery" }
+    - { title: "Worth More Than Your Balance", subtitle_pattern: "Healing {topic} and Money Shame" }
+    - { title: "The Quiet Ledger", subtitle_pattern: "A {topic} Practice for the Spreadsheet-Tired" }
+    - { title: "Money Without Panic", subtitle_pattern: "A Nervous-System Guide to {topic}" }
+  mindfulness:
+    - { title: "The Present Hour", subtitle_pattern: "A {topic} Practice Guide for Busy Lives" }
+    - { title: "Notice First", subtitle_pattern: "Daily {topic} Practices for Real Days" }
+    - { title: "The Quiet That Stays", subtitle_pattern: "Building a Sustainable {topic} Practice" }
+    - { title: "Slow Attention", subtitle_pattern: "A Beginner's {topic} Guide for the Distracted" }
+    - { title: "Land in the Moment", subtitle_pattern: "A 90-Second {topic} Practice for Anywhere" }
+  adhd_focus:
+    - { title: "From Scatter to Anchor", subtitle_pattern: "An {topic} Companion for the Easily Distracted" }
+    - { title: "Permission to Drift", subtitle_pattern: "Working With Your ADHD Brain Instead of Against It" }
+    - { title: "The Loop That Frees You", subtitle_pattern: "{topic} for Brains That Won't Sit Still" }
+    - { title: "Brain on Your Side", subtitle_pattern: "A {topic} Practice for Neurodivergent Adults" }
+    - { title: "Focus Without Force", subtitle_pattern: "A Soft {topic} Guide for Restless Minds" }
+
+# ── B2 (#786) — Brand voice + persona subtitle modifiers ─────────────
+# Per Issue #786 §5: "base emotional promise + brand-tone modifier +
+# persona/outcome signal". §6 allows deterministic per-(brand, persona)
+# salting using brand archetype + persona label.
+#
+# brand_voice_modifiers prepends a brand-tone adjective/noun to the base
+# title, deterministically derived from brand archetype. This makes
+# (brand, topic, persona) tuples produce visually distinct titles
+# without random salts.
+brand_voice_modifiers:
+  # B1 (locale-native titles, on top of #790's #786 architecture):
+  # `voice_prefix` is en_US default. `voice_prefix_{locale}` per non-en
+  # locale is consumed by the generator when locale != en_US.
+  stillness_press:
+    voice_prefix:        "Quiet"
+    voice_prefix_ja_JP:  "静かな"
+    voice_prefix_zh_TW:  "靜默的"
+    voice_prefix_zh_CN:  "止息的"
+  cognitive_clarity:
+    voice_prefix:        "Clear"
+    voice_prefix_ja_JP:  "澄んだ"
+    voice_prefix_zh_TW:  "清明的"
+    voice_prefix_zh_CN:  "清明的"
+  digital_ground:
+    voice_prefix:        "Grounded"
+    voice_prefix_ja_JP:  "落ち着いた"
+    voice_prefix_zh_TW:  "踏實的"
+    voice_prefix_zh_CN:  "踏实的"
+  warrior_calm:
+    voice_prefix:        "Steady"
+    voice_prefix_ja_JP:  "ゆるがぬ"
+    voice_prefix_zh_TW:  "穩定的"
+    voice_prefix_zh_CN:  "稳定的"
+  somatic_wisdom:
+    voice_prefix:        "Embodied"
+    voice_prefix_ja_JP:  "からだに宿る"
+    voice_prefix_zh_TW:  "身體的"
+    voice_prefix_zh_CN:  "身体的"
+  relational_calm:
+    voice_prefix:        "Together"
+    voice_prefix_ja_JP:  "やわらかな"
+    voice_prefix_zh_TW:  "溫柔的"
+    voice_prefix_zh_CN:  "温柔的"
+  sleep_restoration:
+    voice_prefix:        "Restful"
+    voice_prefix_ja_JP:  "やすらかな"
+    voice_prefix_zh_TW:  "安睡的"
+    voice_prefix_zh_CN:  "安睡的"
+  heart_balance:
+    voice_prefix:        "Whole"
+    voice_prefix_ja_JP:  "ととのう"
+    voice_prefix_zh_TW:  "平衡的"
+    voice_prefix_zh_CN:  "平衡的"
+  devotion_path:
+    voice_prefix:        "Devoted"
+    voice_prefix_ja_JP:  "ささげる"
+    voice_prefix_zh_TW:  "皈依的"
+    voice_prefix_zh_CN:  "皈依的"
+  solar_return:
+    voice_prefix:        "Bright"
+    voice_prefix_ja_JP:  "明るい"
+    voice_prefix_zh_TW:  "明亮的"
+    voice_prefix_zh_CN:  "明亮的"
+  body_memory:
+    voice_prefix:        "Held"
+    voice_prefix_ja_JP:  "抱きしめる"
+    voice_prefix_zh_TW:  "承接的"
+    voice_prefix_zh_CN:  "承接的"
+  qi_foundation:
+    voice_prefix:        "Rooted"
+    voice_prefix_ja_JP:  "根づいた"
+    voice_prefix_zh_TW:  "扎根的"
+    voice_prefix_zh_CN:  "扎根的"
+  # zh-specific standard brands (zh_TW + zh_CN) — added in B1 so non-en
+  # rows under these brands have voice_prefix coverage.
+  gen_z_grounding_tw:
+    voice_prefix_zh_TW:  "Z 世代踏實的"
+  grief_companion_tw:
+    voice_prefix_zh_TW:  "悲傷陪伴的"
+  inner_security_tw:
+    voice_prefix_zh_TW:  "內在安穩的"
+  panic_first_aid_tw:
+    voice_prefix_zh_TW:  "恐慌急救的"
+  sleep_repair_tw:
+    voice_prefix_zh_TW:  "睡眠修復的"
+  stabilizer_tw:
+    voice_prefix_zh_TW:  "神經安穩的"
+  bright_presence_tw:
+    voice_prefix_zh_TW:  "明朗臨在的"
+  gen_z_grounding_cn:
+    voice_prefix_zh_CN:  "Z 世代安身的"
+  grief_companion_cn:
+    voice_prefix_zh_CN:  "悲伤陪伴的"
+  inner_security_cn:
+    voice_prefix_zh_CN:  "内在安稳的"
+  panic_first_aid_cn:
+    voice_prefix_zh_CN:  "恐慌急救的"
+  sleep_repair_cn:
+    voice_prefix_zh_CN:  "睡眠修复的"
+  stabilizer_cn:
+    voice_prefix_zh_CN:  "神经稳定的"
+  _default:
+    voice_prefix:        ""
+
+# persona_subtitle_modifiers appends a persona signal to the base subtitle,
+# producing distinct (title, subtitle) tuples per persona slot.
+persona_subtitle_modifiers:
+  # B1: `signal` is en_US. `signal_{locale}` per non-en locale.
+  corporate_managers:
+    signal:        "for mid-level leaders"
+    signal_ja_JP:  "管理職のために"
+    signal_zh_TW:  "寫給中階主管"
+    signal_zh_CN:  "写给中层管理者"
+  millennial_women_professionals:
+    signal:        "for millennial women professionals"
+    signal_ja_JP:  "ミレニアル世代の女性へ"
+    signal_zh_TW:  "寫給千禧世代女性"
+    signal_zh_CN:  "写给千禧一代女性"
+  gen_z_professionals:
+    signal:        "for Gen Z professionals"
+    signal_ja_JP:  "Z世代の働き手へ"
+    signal_zh_TW:  "寫給 Z 世代專業工作者"
+    signal_zh_CN:  "写给 Z 世代职场人"
+  gen_z_student:
+    signal:        "for Gen Z students"
+    signal_ja_JP:  "Z世代の学生へ"
+    signal_zh_TW:  "寫給 Z 世代學生"
+    signal_zh_CN:  "写给 Z 世代学生"
+  gen_alpha_students:
+    signal:        "for younger students"
+    signal_ja_JP:  "若い学生へ"
+    signal_zh_TW:  "寫給年幼學生"
+    signal_zh_CN:  "写给年幼学生"
+  gen_x_sandwich:
+    signal:        "for the sandwich generation"
+    signal_ja_JP:  "サンドイッチ世代へ"
+    signal_zh_TW:  "寫給夾心世代"
+    signal_zh_CN:  "写给夹心一代"
+  working_parents:
+    signal:        "for working parents"
+    signal_ja_JP:  "働く親へ"
+    signal_zh_TW:  "寫給在職父母"
+    signal_zh_CN:  "写给在职父母"
+  entrepreneurs:
+    signal:        "for founders"
+    signal_ja_JP:  "起業家へ"
+    signal_zh_TW:  "寫給創業者"
+    signal_zh_CN:  "写给创业者"
+  first_responders:
+    signal:        "for frontline workers"
+    signal_ja_JP:  "現場の最前線へ"
+    signal_zh_TW:  "寫給第一線救援人員"
+    signal_zh_CN:  "写给一线响应人员"
+  educators:
+    signal:        "for teachers and educators"
+    signal_ja_JP:  "教える人へ"
+    signal_zh_TW:  "寫給教師與教育工作者"
+    signal_zh_CN:  "写给教师与教育工作者"
+  healthcare_rns:
+    signal:        "for healthcare workers"
+    signal_ja_JP:  "医療従事者へ"
+    signal_zh_TW:  "寫給醫療人員"
+    signal_zh_CN:  "写给医疗从业者"
+  tech_finance_burnout:
+    signal:        "for tech and finance pros"
+    signal_ja_JP:  "テック・金融で働く人へ"
+    signal_zh_TW:  "寫給科技與金融工作者"
+    signal_zh_CN:  "写给科技与金融从业者"
+  _default:
+    signal:        ""
+
+# ── B1 (locale-native titles, on top of #790's #786 architecture) ───
+# Non-en locales use formula-based templates (with `{voice_prefix}` and
+# `{topic}` placeholders) instead of fixed base titles. Each locale has 5
+# formula templates; combined with 12 brand voice prefixes × 17 topics ×
+# 12 personas, this yields enough diversity to hold cap-3 per cluster.
+#
+# Tonal anchors per rubric:
+#   - ja_JP: contemplative, understated. Hiragana-rich, 体言止め.
+#   - zh_TW: emotional clarity, human tone. Traditional characters.
+#   - zh_CN: structured, outcome-oriented. Simplified characters.
+#
+# Best-effort drafts authored without a native-fluency reviewer; revise
+# entries by index if needed (no code change required).
+
+title_templates_ja_JP:
+  - { title: "{voice_prefix}{topic}の手当て",          subtitle_pattern: "{topic}を抜けるための、{voice_prefix}日々への手引き" }
+  - { title: "{topic}を超えて、{voice_prefix}日々へ",  subtitle_pattern: "{topic}回復のための、しずかな歩み" }
+  - { title: "{voice_prefix}{topic}回復の歩み",        subtitle_pattern: "{topic}が止まらないときの、{voice_prefix}手引き" }
+  - { title: "{voice_prefix}{topic}との対話",          subtitle_pattern: "{topic}のあとに、{voice_prefix}静けさを取り戻す" }
+  - { title: "{topic}のあとに、{voice_prefix}日々",    subtitle_pattern: "{voice_prefix}暮らしへの、{topic}回復の手引き" }
+
+title_templates_zh_TW:
+  - { title: "{voice_prefix}{topic}指引",             subtitle_pattern: "走出{topic}，邁向{voice_prefix}日子" }
+  - { title: "穿越{topic}，走向{voice_prefix}時光",   subtitle_pattern: "{topic}復原途中的{voice_prefix}陪伴" }
+  - { title: "{voice_prefix}步調，走出{topic}",       subtitle_pattern: "當{topic}停不下來時的{voice_prefix}指引" }
+  - { title: "{voice_prefix}{topic}的同行",           subtitle_pattern: "{topic}復原中的{voice_prefix}日子" }
+  - { title: "{topic}之後，{voice_prefix}日子",       subtitle_pattern: "{voice_prefix}生活，{topic}復原的同行者" }
+
+title_templates_zh_CN:
+  - { title: "{voice_prefix}{topic}指南",             subtitle_pattern: "走出{topic}，迈向{voice_prefix}日子" }
+  - { title: "穿越{topic}，走向{voice_prefix}日子",   subtitle_pattern: "{topic}恢复期的{voice_prefix}陪伴" }
+  - { title: "{voice_prefix}节奏，走出{topic}",       subtitle_pattern: "当{topic}无法停止时的{voice_prefix}指引" }
+  - { title: "{voice_prefix}{topic}的同行",           subtitle_pattern: "{topic}恢复期的{voice_prefix}日子" }
+  - { title: "{topic}之后，{voice_prefix}日子",       subtitle_pattern: "{voice_prefix}生活，{topic}恢复的同行者" }
+
+# Locale-native topic display strings (used in title/subtitle interpolation).
+# en_US intentionally omitted — generator falls back to topic.replace("_", " ").title()
+# preserving byte-identical en_US output.
+
+topic_displays_ja_JP:
+  anxiety: "不安"
+  burnout: "燃え尽き"
+  sleep_anxiety: "睡眠の不安"
+  imposter_syndrome: "インポスター症候群"
+  social_anxiety: "対人不安"
+  self_worth: "自己肯定"
+  boundaries: "境界線"
+  grief: "喪失とかなしみ"
+  overthinking: "考えすぎ"
+  somatic_healing: "身体の癒し"
+  depression: "抑うつ"
+  courage: "勇気"
+  compassion_fatigue: "共感疲労"
+  financial_anxiety: "お金への不安"
+  financial_stress: "経済的なストレス"
+  adhd_focus: "集中の困難"
+  mindfulness: "マインドフルネス"
+
+topic_displays_zh_TW:
+  anxiety: "焦慮"
+  burnout: "倦怠"
+  sleep_anxiety: "睡眠焦慮"
+  imposter_syndrome: "冒牌者症候群"
+  social_anxiety: "社交焦慮"
+  self_worth: "自我價值"
+  boundaries: "界限"
+  grief: "悲傷"
+  overthinking: "想太多"
+  somatic_healing: "身體療癒"
+  depression: "憂鬱"
+  courage: "勇氣"
+  compassion_fatigue: "同理疲勞"
+  financial_anxiety: "金錢焦慮"
+  financial_stress: "經濟壓力"
+  adhd_focus: "專注困難"
+  mindfulness: "正念"
+
+topic_displays_zh_CN:
+  anxiety: "焦虑"
+  burnout: "倦怠"
+  sleep_anxiety: "睡眠焦虑"
+  imposter_syndrome: "冒名顶替综合征"
+  social_anxiety: "社交焦虑"
+  self_worth: "自我价值"
+  boundaries: "边界"
+  grief: "悲伤"
+  overthinking: "过度思虑"
+  somatic_healing: "身体疗愈"
+  depression: "抑郁"
+  courage: "勇气"
+  compassion_fatigue: "共情疲劳"
+  financial_anxiety: "金钱焦虑"
+  financial_stress: "经济压力"
+  adhd_focus: "注意力困难"
+  mindfulness: "正念"
+
+# ── Cover Brief Templates ────────────────────────────────────────────
+cover_brief_templates:
+  minimalist_gradient: "Minimalist gradient background ({palette}). Bold sans-serif title in white or dark contrast. Clean, modern, premium feel. No illustrations."
+  geometric_anchor: "Geometric shapes on {palette} background. Strong typography, structured layout. Professional, focused energy."
+  dark_minimal: "Dark background ({palette}). Subtle texture. Serif or thin sans-serif title. Calm, nighttime, restful mood."
+  bold_typography: "Typography-driven cover. Large bold title on clean {palette} background. Minimal decoration."
+  vibrant_shapes: "Colorful abstract shapes on {palette} background. Energetic, youthful, ADHD-friendly visual rhythm."
+  warm_soft: "Warm, soft gradients ({palette}). Rounded typography. Inviting, nurturing feel."
+  dark_elegant: "Dark elegant design ({palette}). Gold or silver accents. Executive/premium positioning."
+  earth_tones: "Earth-tone palette ({palette}). Organic textures. Grounded, safe, body-connection feel."
+  abstract_symbolic: "Abstract symbolic imagery on {palette}. Contemplative, spiritual but modern."
+  whimsical_illustrated: "Light hand-drawn illustrations on {palette}. Creative, artistic, gentle energy."
+
+# ── Keyword Templates Per Topic ──────────────────────────────────────
+keyword_templates:
+  anxiety: ["anxiety relief", "nervous system regulation", "calm anxiety naturally", "anxiety recovery", "high functioning anxiety", "anxiety workbook adults", "somatic anxiety"]
+  burnout: ["burnout recovery", "work exhaustion healing", "nervous system reset", "burnout book professionals", "hustle culture recovery", "stress management", "burnout prevention"]
+  sleep_anxiety: ["insomnia self help", "racing thoughts night", "sleep anxiety relief", "cant sleep book", "3am anxiety", "calm mind sleep", "bedtime anxiety"]
+  imposter_syndrome: ["imposter syndrome book", "feeling like fraud", "self doubt recovery", "imposter syndrome women", "imposter syndrome work", "confidence building", "worthy enough"]
+  social_anxiety: ["social anxiety recovery", "overcoming shyness", "introvert anxiety", "social confidence", "making friends adult", "phone anxiety", "social skills"]
+  self_worth: ["self esteem books", "self worth healing", "self love guide", "confidence building", "feeling worthless recovery", "enough self help", "body neutrality"]
+  boundaries: ["setting boundaries book", "how say no", "people pleasing recovery", "boundaries without guilt", "codependency healing", "toxic relationship boundaries", "healthy boundaries"]
+  grief: ["grief recovery book", "coping with loss", "grief healing guide", "losing loved one", "grief companion", "complicated grief", "bereavement self help"]
+  overthinking: ["stop overthinking book", "racing thoughts relief", "quiet mind guide", "analysis paralysis", "worry less book", "mental spirals", "rumination recovery"]
+  somatic_healing: ["nervous system regulation book", "somatic exercises", "vagus nerve healing", "body trauma release", "polyvagal theory guide", "somatic therapy self help", "freeze response"]
+  depression: ["depression recovery book", "feeling numb healing", "low energy guide", "depression self help", "finding hope again", "functioning depression", "mood healing"]
+  courage: ["courage building book", "facing fear guide", "brave living", "fear of change", "bold decisions", "risk taking self help", "courage practice"]
+  compassion_fatigue: ["compassion fatigue recovery", "caregiver burnout book", "empathy exhaustion", "nurse self care", "helper burnout", "vicarious trauma", "moral injury healing"]
+  financial_anxiety: ["money anxiety book", "financial stress relief", "money shame healing", "financial anxiety guide", "broke and scared", "money mindset", "financial therapy"]
+  financial_stress: ["financial stress book", "money worry relief", "financial wellness guide", "money anxiety recovery", "financial peace", "money shame healing", "financial self help"]

@@ -1,0 +1,110 @@
+# Waystream Sanctuary — Cover Template System (Pearl_Dev)
+# ---------------------------------------------------------------------------
+# Machine contract for the VARIED, per-author + per-topic cover system.
+# One brand (way_stream_sanctuary), 20 author lines, 15 topics, 800 books.
+#
+# Design law (reconciles research craft vs. operator "make it varied"):
+#   * Each SINGLE cover stays craft-clean: one focal element, <=3 colors,
+#     <=2 fonts, ONE high-contrast topic mark. (research §0)
+#   * VARIATION lives across the SYSTEM: template family + fonts + palette
+#     per author; symbol vocabulary per topic; symbol COUNT/arrangement per
+#     book (count == installment == series-accumulation mark, research Schema C).
+#   * Symbol color is chosen at render time by background luminance to
+#     GUARANTEE contrast (fixes the pilot's invisible light-blue mark).
+#
+# Sources of truth:
+#   authors/topics  -> artifacts/waystream/waystream_800book_catalog_plan.csv
+#   FLUX recipe     -> schnell only (flux1-dev BANNED); Pearl Star ComfyUI
+#   research        -> artifacts/research/cover_quality_and_differentiation_framework_2026-05-03.md
+schema_version: 1
+
+brand:
+  brand_id: way_stream_sanctuary
+  imprint: "WAYSTREAM SANCTUARY"
+  one_word_read: "steady"
+
+canvas: {w: 1600, h: 2560}   # KDP 1.6:1
+
+# Two content tracks (from the catalog): each author writes exactly one.
+tracks:
+  activation:   # lighter, dawn/sky/sea — the "calm the alarm / be brave" arc
+    topics: [anxiety, courage, overthinking, sleep_anxiety, social_anxiety]
+  ground:       # heavier, dusk/earth/ember — the "low places / limits / refill" arc
+    topics: [boundaries, burnout, compassion_fatigue, depression, financial_anxiety,
+             financial_stress, grief, imposter_syndrome, self_worth, somatic_healing]
+
+# The layout LIBRARY. 4 use a FLUX image; 4 are image-free (zero GPU).
+families: [full_bleed, inset_card, panel_bands, title_block,
+           gradient_solo, framed, duotone_split, stripe_minimal, type_dominant]
+image_families: [full_bleed, inset_card, panel_bands, title_block]
+
+# ---------------------------------------------------------------------------
+# AUTHOR REGISTRY — each author = a distinct publishing line.
+# Unique (family x serif x sans x palette x title_case) per author_id.
+# deep = primary dark ; field = warm paper (never pure #fff) ; accent = signal.
+# ---------------------------------------------------------------------------
+authors:
+  # ---- TRACK A: activation (10) ----
+  lena_frost:      {display: "Lena Frost",       track: activation, family: full_bleed,     serif: "Georgia",         sans: "Avenir Next",   deep: "#0E1B33", field: "#F3EFE5", accent: "#6FA8D6", title_case: sentence}
+  mara_okonkwo:    {display: "Mara Okonkwo",     track: activation, family: gradient_solo,  serif: "Hoefler Text",    sans: "Gill Sans",     deep: "#11324A", field: "#F4F1E8", accent: "#E8A23D", title_case: title}
+  cole_bennett:    {display: "Cole Bennett",     track: activation, family: stripe_minimal, serif: "Charter",         sans: "Futura",        deep: "#1B2A4A", field: "#EFEADD", accent: "#DE5B45", title_case: sentence}
+  daniel_cho:      {display: "Daniel Cho",       track: activation, family: inset_card,     serif: "Iowan Old Style", sans: "Helvetica Neue",deep: "#14303A", field: "#F2EEE3", accent: "#4FB0A2", title_case: sentence}
+  devon_hale:      {display: "Devon Hale",       track: activation, family: framed,         serif: "Baskerville",     sans: "Gill Sans",     deep: "#233A5E", field: "#F6F2E9", accent: "#C9A24A", title_case: small_caps}
+  elena_petrova:   {display: "Elena Petrova",    track: activation, family: duotone_split,  serif: "Didot",           sans: "Trebuchet MS",  deep: "#2A2440", field: "#F1ECE0", accent: "#C98AB0", title_case: sentence}
+  nina_vazquez:    {display: "Nina Vazquez",     track: activation, family: panel_bands,    serif: "Athelas",         sans: "Verdana",       deep: "#103040", field: "#EFEADD", accent: "#46A6CB", title_case: sentence}
+  ravi_chandra:    {display: "Ravi Chandra",     track: activation, family: title_block,    serif: "Cochin",          sans: "Gill Sans",     deep: "#2E2233", field: "#F3EEE2", accent: "#E0913C", title_case: sentence}
+  sofia_marchetti: {display: "Sofia Marchetti",  track: activation, family: gradient_solo,  serif: "Bodoni 72",       sans: "Futura",        deep: "#20384B", field: "#F4F0E6", accent: "#DDA94B", title_case: title}
+  tomas_vidal:     {display: "Tomas Vidal",      track: activation, family: full_bleed,     serif: "Superclarendon", sans: "Avenir Next",   deep: "#16283D", field: "#F2EEE4", accent: "#6FB0A0", title_case: sentence}
+  # ---- TRACK B: ground (10) ----
+  theo_castellan:  {display: "Theo Castellan",   track: ground,     family: panel_bands,    serif: "Georgia",         sans: "Helvetica Neue",deep: "#2A211B", field: "#F1E9DC", accent: "#C8703B", title_case: sentence}
+  ana_reyes:       {display: "Ana Reyes",        track: ground,     family: framed,         serif: "Hoefler Text",    sans: "Trebuchet MS",  deep: "#2E2A22", field: "#F3ECDD", accent: "#B98A3E", title_case: small_caps}
+  grace_adeyemi:   {display: "Grace Adeyemi",    track: ground,     family: gradient_solo,  serif: "Charter",         sans: "Verdana",       deep: "#3A2A2A", field: "#F4ECDD", accent: "#D98F4E", title_case: title}
+  hannah_stern:    {display: "Hannah Stern",     track: ground,     family: stripe_minimal, serif: "Baskerville",     sans: "Helvetica Neue",deep: "#26303A", field: "#EFEADD", accent: "#C76B57", title_case: sentence}
+  jonah_kim:       {display: "Jonah Kim",        track: ground,     family: inset_card,     serif: "Iowan Old Style", sans: "Futura",        deep: "#1F2A2A", field: "#F1ECE0", accent: "#C9A24A", title_case: sentence}
+  marcus_reed:     {display: "Marcus Reed",      track: ground,     family: duotone_split,  serif: "Didot",           sans: "Arial",         deep: "#322A3A", field: "#F2ECE0", accent: "#B98AA8", title_case: sentence}
+  oscar_bello:     {display: "Oscar Bello",      track: ground,     family: title_block,    serif: "Cochin",          sans: "Verdana",       deep: "#3A3024", field: "#F4EEDF", accent: "#D89B45", title_case: sentence}
+  priya_raman:     {display: "Priya Raman",      track: ground,     family: panel_bands,    serif: "Athelas",         sans: "Arial",         deep: "#33232A", field: "#F3ECDF", accent: "#C77A6A", title_case: sentence}
+  sam_meridian:    {display: "Sam Meridian",     track: ground,     family: full_bleed,     serif: "Athelas",         sans: "Avenir Next",   deep: "#232A24", field: "#F0ECDE", accent: "#B79A48", title_case: sentence}
+  wren_adler:      {display: "Wren Adler",       track: ground,     family: framed,         serif: "Bodoni 72",       sans: "Futura",        deep: "#2B2530", field: "#F2ECE0", accent: "#C98F52", title_case: small_caps}
+
+# ---------------------------------------------------------------------------
+# PER-TOPIC SYMBOL VOCABULARY.
+# motif = primitive glyph drawn by symbols.py. The glyph is repeated
+# (count == installment, 1..7) in an arrangement seeded by book_id, so no two
+# books share a pattern. Color is luminance-picked for HIGH CONTRAST.
+# ---------------------------------------------------------------------------
+topic_symbols:
+  anxiety:           {motif: breath,   reads: "concentric calm"}
+  courage:           {motif: rise,     reads: "upward chevron"}
+  overthinking:      {motif: loop,     reads: "looping thought"}
+  sleep_anxiety:     {motif: crescent, reads: "moon arc"}
+  social_anxiety:    {motif: link,     reads: "two joined rings"}
+  boundaries:        {motif: divider,  reads: "a line drawn"}
+  burnout:           {motif: ember,    reads: "low flame"}
+  compassion_fatigue: {motif: wane,    reads: "diminishing"}
+  depression:        {motif: lowline,  reads: "weight on a low line"}
+  financial_anxiety: {motif: bars,     reads: "uneven columns"}
+  financial_stress:  {motif: jagged,   reads: "spike"}
+  grief:             {motif: drop,     reads: "single mark / absence"}
+  imposter_syndrome: {motif: offset,   reads: "gap between selves"}
+  self_worth:        {motif: ring,     reads: "a whole circle"}
+  somatic_healing:   {motif: stem,     reads: "rooted breath"}
+
+# ---------------------------------------------------------------------------
+# FLUX POOL PROMPTS — only image_families authors need a pool (10 of 20).
+# schnell only. {N} images each, vary seed. No text / no people / no frame.
+# ---------------------------------------------------------------------------
+pool:
+  negative: "text, words, letters, typography, title, watermark, signature, people, faces, hands, buildings, frame, border, ui, logo"
+  count: 15
+  prompts:
+    lena_frost:    "abstract atmospheric book cover background, deep dusk navy sky over a warm cream lower field, a soft low horizon line of dawn light, subtle ink-wash texture, contemplative, minimal, fine-art, no text, no people"
+    tomas_vidal:   "abstract atmospheric book cover background, deep slate-blue dusk sky over a darker sea, a single pale horizon line of cool light low in the frame, ink-wash texture, moody, fine-art, no text, no people"
+    sam_meridian:  "abstract atmospheric book cover background, deep forest-charcoal green with a single low clearing of warm light emerging from shadow, ink-wash texture, grounded, moody, fine-art, no text, no people"
+    daniel_cho:    "abstract atmospheric book cover background, deep teal and pine-green water under a dark sky, a single shaft of cool light on still water, ink-wash texture, calm, moody, fine-art, no text, no people"
+    jonah_kim:     "abstract atmospheric book cover background, deep spruce green and warm clay, a single shaft of low golden light through dark fog, textured, grounded, moody, fine-art, no text, no people"
+    nina_vazquez:  "abstract atmospheric book cover background, deep teal-navy sea under a dim sky, a low horizon with a single faint cool glow, ink-wash texture, moody, fine-art, no text, no people"
+    theo_castellan: "abstract atmospheric book cover background, warm charcoal and soft amber tones, a single luminous arch of light emerging from shadow, textured paper grain, grounded, contemplative, minimal, fine-art, no text, no people"
+    priya_raman:   "abstract atmospheric book cover background, deep wine and rosewood dusk, a single warm dawn glow behind dark low hills, ink-wash texture, tender, moody, fine-art, no text, no people"
+    ravi_chandra:  "abstract atmospheric book cover background, deep aubergine dusk with a single warm marigold sun low on a dark horizon, ink-wash texture, contemplative, moody, fine-art, no text, no people"
+    oscar_bello:   "abstract atmospheric book cover background, deep bronze-brown earth under an amber sky, a single low steady horizon at golden hour with dark foreground, textured, grounded, moody, fine-art, no text, no people"

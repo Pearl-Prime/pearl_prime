@@ -1,0 +1,760 @@
+# V1.2 themes — Cluster D (Relational/Connection/Family) × zh_TW
+# 25 series = 5 brands × 5 series — Traditional Chinese (Taiwan-natural)
+# Brand mapping (from PR #1065):
+#   relational_calm_iyashikei
+#   confidence_core_romance (← inner_security)
+#   bright_presence_tw_seinen
+#   heart_balance_shojo (← found_family_shojo)
+#   resilient_parent_social (← communal_warmth)
+# Constraint: artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md
+#
+# Genre allocation target (cluster D):
+#   healing: 6, slice_of_life: 5, supernatural_everyday: 4-5,
+#   mystery_cozy: 4, fantasy_adventure: 3, romance: 1-2,
+#   horror: 0-1, school: 0-1, other: 0-1 = 25
+# This file delivers: healing=6, slice_of_life=5, supernatural_everyday=5,
+#                     mystery_cozy=4, fantasy_adventure=3, romance=2 = 25
+#
+# Voice register (zh_TW Taiwan-natural):
+#   用九柑仔店 humanist + 神隱少女 magical + 海街diary family-warmth
+#   Avoid mainland phrasing (視頻→影片, 軟件→軟體, 智能手機→智慧型手機, 互聯網→網路).
+#   Anchors: 全家聚餐、阿嬤的廚房、媽祖廟、春節圍爐、中秋烤肉、冬至湯圓、
+#            收涎、滿月酒、寒暑假鄉下、夜市、雙北小巷、台南老街、花蓮太魯閣。
+schema_version: "1.2"
+locale: zh_TW
+cluster: D
+cluster_name: "Relational/Connection/Family"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — relational_calm_iyashikei  (核心 · josei · 社交焦慮療癒)
+  # 主題:社交焦慮、界線、身體感療癒
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: relational_calm_iyashikei__zh_TW__yong_yuan_kai_zhe_de_men
+    brand_id: relational_calm_iyashikei
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: queer_identity
+    portal_mechanic: door
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "一位二十六歲、住在台北中正區巷子裡的女生,每個工作日傍晚七點到十一點都不鎖門——讓她那群『沒地方回家』的朋友隨時能走進來。她漸漸發現,那間老公寓本身在記住每一個曾在客廳沙發上睡過的人,並悄悄地把他們列入它自己的保護名單。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "門永遠開著"
+    series_logline: "二十六歲的小昀每晚七點到十一點不鎖門,讓她的朋友群隨時能落腳——而那間老公寓開始一個一個記住他們是誰。"
+    series_description: "小昀今年二十六歲,Z 世代,從南部上來台北念書後就一直住在中正區一條巷子裡的三十年老公寓。她的原生家庭在她二十一歲那年因為她出櫃而停止聯絡。她念大學那四年慢慢長出了一群『非血緣家人』——大學社團的學妹、打工認識的咖啡師、論文口試前一晚不睡陪她練稿的朋友。畢業後她對這群人說過一句話:『工作日傍晚七點到十一點,我家不鎖門,你們有事沒事都可以進來。』三年下來,這間老公寓開始有自己的反應:暖氣會在過敏的子睿走進來時自動降一格;廚房的小燈會在剛下大夜班的瑪莉開門時變得柔和;沙發會在阿哲爸爸來台北的那一晚多出一個靠枕。小昀沒有跟它對抗,她學著讀公寓的語法——那其實就是她自己神經系統的語法:誰可以進來、誰要保持距離、身體在門口願意允許什麼樣的靠近。每一集會有新的人想踏進來——失聯多年的弟弟、前任的新對象、葬禮後再也沒見的表姊——而公寓會自己慢慢決定,這個房間此刻能不能容納這份歡迎。葬送のフリーレン式的安靜、Heartstopper 式的溫柔、台北巷弄的老公寓骨架。"
+    opening_5_volume_arc:
+      vol_1: "子睿的過敏。瑪莉的大夜班。第一週公寓自己『運作』了起來。小昀開始把它叫做『這間房子』。"
+      vol_2: "阿哲的爸爸從台中上來。沙發多了一個靠枕。小昀明白:這間房子會替她愛的人,也替他們各自的傷,留位子。"
+      vol_3: "第一個陌生人——朋友的朋友處於危機。門花了九十秒才開。小昀學到:『安全』不是她決定的,是這間房子的判斷。"
+      vol_4: "前任的新對象想進來。門沒有開。小昀坐在門內的地板上,給前任傳了一則溫柔但清楚的訊息。"
+      vol_5: "失聯五年的親妹妹站在門口。暖氣沒有反應。小昀必須決定:是要讓這間房子學一個新人,還是相信房子是對的。"
+    comp_titles: ["用九柑仔店", "葬送のフリーレン", "海街diary", "深夜食堂", "解憂雜貨店"]
+    reader_promise: "你的非血緣家人有地方可以回來,而這間房子站在你這邊。"
+    marketing_angle: "《用九柑仔店》遇上《葬送のフリーレン》——一間台北老公寓自己學會了誰是你的家人。"
+    genre_family: healing
+    emotional_engine: chosen_family + boundaried_belonging
+    audience: "Z 世代 24–29 歲、雙北、酷兒/同志、有非血緣家人責任感、神經系統意識的讀者"
+
+  - series_id: relational_calm_iyashikei__zh_TW__zhou_ri_qi_dian_de_yi_zhang_zhuo
+    brand_id: relational_calm_iyashikei
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: content_creation
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "一位二十五歲、住在新北永和的設計助理,每個禮拜天晚上七點都會在她租屋處的小餐桌上,辦同一場五個人的晚餐;桌上那本綠色筆記本——她外婆過世前留給她的——會在每次晚餐前自己寫上一句話,給其中一位朋友,字跡不是任何人的。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "禮拜天晚上七點"
+    series_logline: "五個朋友、一張小餐桌、一本綠色筆記本——上面寫著這一週每個人最需要被告訴的那句話,而沒有人是寫的人。"
+    series_description: "樂希二十五歲,平面設計助理,在新北永和租了一間有小客廳的雅房。她是這群朋友裡空間最大的一個,所以禮拜天晚上七點固定在她家吃飯。五個人——娜娜、貝貝、紀廷、米拉、樂希——輪著煮固定的菜單(義大利麵週、咖哩週、滷味週),搭一瓶超商七十九塊的紅酒,然後在桌上那本綠色筆記本上面隨意寫東西。那本筆記本是樂希外婆過世前留給她的。神奇的是:每個禮拜天晚餐開始之前,本子上會多出一句話,字跡誰都認不出來——而那句話總是這禮拜這群朋友裡某一個最需要被告訴的。她們學會不要去討論這件事。她們學會在對的時間讀對的句子。每一集這句話會屬於不同人;長期主線是某個禮拜日有個新人被帶到這張桌邊,而本子也替那個人寫了一句。SPY×FAMILY 的溫暖、海街diary 的安靜,加一點點魔幻寫實。"
+    opening_5_volume_arc:
+      vol_1: "娜娜剛被升副理但她拒絕了。本子寫:『禮拜二之前你都還可以改變心意。』她禮拜三才改。"
+      vol_2: "貝貝媽媽生病。本子寫:『跟紀廷說。』紀廷的爸爸十年前是同一個診斷。"
+      vol_3: "紀廷把交往三個月的男朋友帶來。本子替男朋友也寫了一句——樂希到下一集才把那句拿給他看。"
+      vol_4: "男朋友讀到屬於他的那一句。決定留下來。本子從這禮拜開始替六個人寫。"
+      vol_5: "米拉要去柏林讀書。本子替她寫最後一句。椅子留著。本子之後每週還是會替她寫——只是字會慢慢淡。"
+    comp_titles: ["SPY×FAMILY", "海街diary", "解憂雜貨店", "用九柑仔店", "深夜食堂"]
+    reader_promise: "你每週的小聚會其實有一份紀錄——它知道每個人這一週是為了什麼來的。"
+    marketing_angle: "《SPY×FAMILY》的台灣 Z 世代版本——你那張週日小餐桌,是你這禮拜唯一撐住你的東西。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + ritual_as_belonging
+    audience: "Z 世代 24–28 歲、雙北首份工作、有固定朋友聚會、會把週日當『真正的家』的讀者"
+
+  - series_id: relational_calm_iyashikei__zh_TW__tu_shu_guan_de_shi_wu_zhao_ling
+    brand_id: relational_calm_iyashikei
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位有社交焦慮的二十二歲女大生,在台北市立圖書館分館的失物招領櫃台一週打工二十小時。她漸漸發現:每一件被遺忘的小物,其實都屬於一段同樣被遺忘的友情——把東西還回去,那段友情就有機會被找回來;有些會,有些不會,而她從來不催。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "圖書館的失物招領"
+    series_logline: "二十二歲、有點社恐的依芮,在圖書館的失物招領櫃台值班——她發現每一件失物,都在替一段失聯的友情寄信。"
+    series_description: "依芮二十二歲,大三,中文系,在台北市立圖書館松山分館的失物招領室一週打工二十小時。那是一個日光燈、堆滿塑膠籃的小房間。她有寫好的社交焦慮:『請出示證件』這句話她在腦袋裡演練過兩千次。每一集她會把某一件失物還給某一個人,而每一件失物都是某段這個人放掉的友情留下來的殘骸:高中閨蜜燒的合輯 CD、前室友寄放的盆栽、夏令營交換的友誼手環、初戀寫但沒寄出去的卡片。依芮不勸、不講大道理。她把東西交回去,然後安靜地看著對方決定要不要傳訊息給那個朋友。有些訊息會傳出去,有些不會。長期主線:有一天失物招領室裡出現了一件屬於依芮自己的東西——是她高中那位最好的朋友送她的素描——而她要決定要不要打開那張寫著名字的領取單。"
+    opening_5_volume_arc:
+      vol_1: "高中合輯 CD。客人現在三十歲。她沒有打電話。她坐在停車場聽完。"
+      vol_2: "前室友的盆栽。兩個人三年沒講話。盆栽快死了。依芮幫她查到正確的澆水週期。"
+      vol_3: "夏令營友誼手環。那位朋友已經過世。客人不知道。依芮用足夠長的安靜把這件事告訴她。"
+      vol_4: "依芮自己的素描出現在失物招領。她暫時沒翻領取單上的名字。"
+      vol_5: "依芮翻開領取單。打電話給高中那位最好的朋友。說了一聲嗨。這一集在話講到一半就結束。圖書館關門。"
+    comp_titles: ["用九柑仔店", "深夜食堂", "解憂雜貨店", "葬送のフリーレン", "海街diary"]
+    reader_promise: "你放掉的那段友情,把它的收據留在失物招領了。"
+    marketing_angle: "《解憂雜貨店》的台北圖書館版本——失物招領的女大生跟你一樣社恐,但她認真在守那些被你丟下的友情。"
+    genre_family: healing
+    emotional_engine: rekindled_intimacy + competent_calm_specialist
+    audience: "Z 世代 20–24 歲、大學在學、有社交焦慮、心裡有一段沒能延續的友情的讀者"
+
+  - series_id: relational_calm_iyashikei__zh_TW__zhuan_zu_yi_nian_de_yi_shi
+    brand_id: relational_calm_iyashikei
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: dating
+    portal_mechanic: ritual
+    episodic_frame_per_volume: month
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "兩個原本互不認識的二十多歲上班族,因為房租一起轉租了新北中和一間兩房公寓,簽下一年合約。十二個月裡他們發明了三十六種小儀式——介於室友、朋友、家人之間——但他們都不去定義關係。合約到期那一天,他們必須替這件事取一個名字。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "轉租一年"
+    series_logline: "兩個陌生人、一份一年合約、十二個月的小儀式——到了第六個月,他們需要替這件事取一個名字。"
+    series_description: "亭安二十四歲,剛從四年戀情裡走出來;宥廷二十六歲,清大研究所剛畢業在新北科學園區上班。他們兩個都需要一個房間。591 上一間中和的轉租案:一年、平面兩房、共用廚房客廳、十六坪、月租兩萬四。第二個月開始他們發明了『禮拜三晚上義大利麵』的習慣、『禮拜天上午不講話』的默契、『誰買衛生紙』的不成文規定。第四個月他們在同一張沙發上各滑各的手機傳訊息給對方。第六個月誰都沒有在外面交往,他們之間也沒有定義成交往——他們正在做三十六件看起來像戀愛、感覺起來像友情、語言裡找不到名字的小事。每一集是一個月,系列共十二集。長期主線:合約到期那天他們要替這件事取什麼名字。慢熱式戀愛,身體距離保持得很乾淨。《用九柑仔店》式的人情味、《你的婚禮》式的克制。"
+    opening_5_volume_arc:
+      vol_1: "一月。簽合約。第一個禮拜三的義大利麵。宥廷不吃洋蔥;亭安禮拜二才知道。"
+      vol_2: "二月。第一次吵架——誰要打電話給房東。他們發明『禮拜天上午不講話』。"
+      vol_3: "三月。亭安前任傳訊息來。那個禮拜三宥廷自己煮義大利麵。亭安還是回家了。"
+      vol_4: "四月。宥廷媽媽從台中上來。她問你們是不是在交往。兩個人都沒回答。媽媽請他們吃豐盛的早午餐。"
+      vol_5: "五月。他們一起組了 IKEA 書櫃。書櫃上有兩個人的書。書櫃沒有一格叫『他們是什麼』。"
+    comp_titles: ["你的婚禮", "用九柑仔店", "我吃了那個男孩一整年的早餐", "可不可以,你也剛好喜歡我", "海街diary"]
+    reader_promise: "還沒被命名的關係也算數——只要你們有共同守住的小儀式。"
+    marketing_angle: "《你的婚禮》的中和轉租房版本——慢熱、克制、靠儀式維生的成年人戀愛。"
+    genre_family: romance
+    emotional_engine: slow_proximity + ritual_as_belonging
+    audience: "Z 世代與年輕千禧 23–28 歲、雙北、第一間轉租房、慢熱型戀愛取向的讀者"
+
+  - series_id: relational_calm_iyashikei__zh_TW__guo_zhong_qun_zu
+    brand_id: relational_calm_iyashikei
+    locale: zh_TW
+    persona_archetype: Mill-mid
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位三十三歲、在台南老家整理已故母親遺物的女設計師,發現一個鐵盒裡裝著她國中時期 MSN 對話紀錄列印本。她和現在的高中同學群組一起重讀——而當年國二的他們,開始用同樣的字跡在這些列印紙的空白處『回信』。"
+    volume_runway_target: 125
+    reading_platform_fit: webtoon_vertical
+    series_title: "國中 MSN 鐵盒"
+    series_logline: "采君在台南老家找到她國二的 MSN 紀錄列印本;她的高中群組開始替十三歲的自己寫信——而十三歲的他們,真的回信了。"
+    series_description: "采君三十三歲,在台北做包裝設計總監。她媽媽今年初過世,她回台南老家整理遺物時,在閣樓一個鐵盒裡找到一疊厚厚的列印紙——是她媽媽當年偷偷幫她備份的、二零零五到二零零七年她與三個國中死黨的 MSN 對話紀錄。她拍照丟到現在的高中群組(都是同一批人,後來高中又同班)。四個人在群組裡哭笑了三個鐘頭,然後采君靈感一來:把列印紙翻面,大家輪流替十三歲的自己『寫一封信』。隔天早上,采君把信掃描傳出去前,翻開來看——空白處多了一行字,是采君國二的字跡,寫:『姊姊你好,我有看到。』從那天開始,每一集這四個成年人替當年的自己寫一封信,而當年的自己——用同一張紙的反面——回信。長期主線:當年那段他們以為已經被遺忘的、國二某個夏天發生過的一件事,正在從信裡浮出來。"
+    opening_5_volume_arc:
+      vol_1: "采君寫給國二的自己:『妳媽媽很愛妳。』國二的采君回:『我知道,只是我那時候不敢說。』"
+      vol_2: "宥成寫給國二的自己:『你不用為了被喜歡而假裝外向。』國二的宥成回:『我可以選擇安靜也很好嗎？』"
+      vol_3: "婕安寫給國二的自己關於那個轉學的女生。國二的婕安回:『她有跟我說過再見,你忘了。』"
+      vol_4: "庭甄寫給國二的自己:『妳那年絕食那件事,媽媽其實有發現。』國二的庭甄回:『我等了十九年才有人問。』"
+      vol_5: "四個人發現:他們的信都指向同一個那年夏天的星期六下午——那一天他們四個人在公園的鞦韆旁邊講過一句話。沒有人記得了。當年的他們開始一起寫那個下午發生了什麼。"
+    comp_titles: ["解憂雜貨店", "你的婚禮", "用九柑仔店", "Stand by Me 哆啦A夢", "我們的青春期"]
+    reader_promise: "十三歲那個你,沒有走丟——他只是在等一個你長大之後願意寫回去的時刻。"
+    marketing_angle: "《解憂雜貨店》的台南鐵盒版本——但這次,寫回信的是你十三歲的自己。"
+    genre_family: healing
+    emotional_engine: past_self_dialogue + chosen_family
+    audience: "千禧世代 30–37 歲、台灣 MSN 世代、有國中老朋友群組、開始面對父母老去的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — confidence_core_romance  (核心 · shojo · 內在安全感)
+  # 原始 brand-id:inner_security → confidence_core_romance
+  # 主題:慢熱戀愛、自我價值、被看見、心理界線
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: confidence_core_romance__zh_TW__qing_ke_ji_chu
+    brand_id: confidence_core_romance
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: cafe_indie
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "一位二十一歲的大三女生在台北師大商圈一間獨立咖啡店打工。店裡有一條不成文的規矩:每位常客會被店長分配一個『請客級數』(一到五),代表他這個禮拜可以被誰請一杯咖啡而不會欠人情。月希發現這個系統其實在替每位常客修補一段他不敢開口接受的關懷。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "請客級數"
+    series_logline: "師大商圈一間咖啡店的常客都有一個『請客級數』——一到五,代表他這禮拜願意被請的程度;月希慢慢看懂了它在替每個人修補什麼。"
+    series_description: "月希二十一歲,大三,讀社工系,在台北師大商圈一間獨立咖啡店『等一下』打工二十小時。店長是位四十五歲、總是穿亞麻襯衫的姊姊,叫阿茉。阿茉有一條從來不寫出來的規矩:每位常客會根據這禮拜的狀態被分配一個『請客級數』——一是『只能自己付』、五是『今天進門我就請』。月希被訓練成能用三十秒看出來:這個人這禮拜的身體有沒有放鬆、肩膀有沒有撐著、上一杯咖啡是不是真的有喝完。她下意識覺得這套系統有點奇怪,但越做越懂——它其實在解一個年輕世代特別解不開的題:『被人對你好,你的身體會排斥。』每一集是一位常客。月希慢慢明白,自己的『請客級數』長期被自己鎖在一,連阿茉都還沒解開。長期主線:店裡來了一個男生——也是社工系、慢熱、會看人的肩膀——他第一週就被阿茉打了三分。他開始一週一週,溫柔地把月希的級數從一抬到三,再到四。蜻蜓結社式的耐心、《你的婚禮》式的乾淨。"
+    opening_5_volume_arc:
+      vol_1: "新來的女客人這禮拜五分。她剛離職。月希練習說:『今天阿茉請。』"
+      vol_2: "退休的爺爺三分。月希發現:他每禮拜三會故意把錢忘在家裡,他只是想被請。"
+      vol_3: "高三女生一分。她甚至不敢點奶泡。月希用兩個月把她抬到二。"
+      vol_4: "新來的男社工生進店裡。阿茉看了三十秒,寫:他三分。月希:你怎麼看出來?阿茉:你看他坐下時肩膀有沒有先撐五秒。"
+      vol_5: "男社工生第一次替月希點咖啡。月希身體一僵。阿茉小聲說:『接受一杯不算欠他。』月希喝了。她那天回家寫了很久的日記。"
+    comp_titles: ["你的婚禮", "用九柑仔店", "可不可以,你也剛好喜歡我", "蜻蜓結社", "我吃了那個男孩一整年的早餐"]
+    reader_promise: "你不是不值得被請——你只是還沒練習接受。級數可以慢慢被抬上去。"
+    marketing_angle: "《你的婚禮》的師大咖啡店版本——慢慢學會被人對你好,是一種需要練習的能力。"
+    genre_family: romance
+    emotional_engine: slow_proximity + self_worth_built
+    audience: "Z 世代 20–24 歲、雙北、社工/心理/教育學系、剛開始學界線的女性讀者"
+
+  - series_id: confidence_core_romance__zh_TW__ma_zu_de_qian_zai_shen_bian
+    brand_id: confidence_core_romance
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: temple_local
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位二十三歲在大稻埕長大的女設計師,從小被阿嬤帶去媽祖廟拜拜。阿嬤過世後,她在媽祖廟拜出了一個奇怪的功能:她抽到的籤詩,籤詩的字會在她身邊的紙上又寫一遍,而那一行字其實是回應她最近不敢開口的那個自我懷疑。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "媽祖籤"
+    series_logline: "大稻埕長大的二十三歲女設計師,在媽祖廟抽的籤會自己跟著她回家——回應她那些連自己都不敢說出口的不安。"
+    series_description: "瑀晴二十三歲,平面設計助理,在中山區一間品牌設計公司。她從小被阿嬤帶在大稻埕霞海城隍廟與媽祖廟之間長大。阿嬤去年中過世,瑀晴在最低潮的禮拜五傍晚再次走進媽祖廟抽了一支籤。當天晚上她回到中山的小套房,她攤開的素描本上自己浮出了同一行字:『莫急,你已經比你以為的安穩。』她以為自己幻覺。她隔週再去一次。又一行字出現在她公司桌面便條紙上。她明白:阿嬤把她跟媽祖之間的某條線接好了。每一集她抽一支籤,籤裡的回應會以同一行字,出現在她身邊的某張紙上——回應的不是現實裡的問題,是她連對自己都不敢承認的那個小小自我懷疑。每一集會有一位身邊的人也來到她生活裡——同事、學妹、堂妹——而瑀晴漸漸學會替別人也讀一張籤。長期主線:媽祖回應她的那行字越來越像阿嬤的字跡;她要決定要不要在阿嬤的對年那天,問出那個她一直不敢問的問題。"
+    opening_5_volume_arc:
+      vol_1: "第一支籤。素描本上浮出:『莫急,你已經比你以為的安穩。』瑀晴去做了三年來第一個徹底乾淨的健康檢查。"
+      vol_2: "同事問起她設計理念。她抽一籤,紙上寫:『你的安靜,本身就是答案。』她那天提案沒有再硬撐話術。"
+      vol_3: "學妹問她要不要接私案。籤回:『現在不是時候。』她婉拒了。一個月後學妹的案子鬧上新聞;瑀晴鬆了一口氣。"
+      vol_4: "堂妹要結婚她不想去。籤回:『去,但只去吃飯,不要去拍照。』她照做。她和堂妹隔了五年第一次好好說話。"
+      vol_5: "阿嬤的對年。她抽了一支沒有編號的籤。回應的字跡完全是阿嬤的字:『我有看見妳長大了。』她在媽祖面前哭了很久。"
+    comp_titles: ["神隱少女", "用九柑仔店", "可不可以,你也剛好喜歡我", "夏目友人帳", "解憂雜貨店"]
+    reader_promise: "你那些連自己都不敢說的不安,有人聽見。阿嬤把那條線替你接好了。"
+    marketing_angle: "《神隱少女》的大稻埕版本——媽祖透過抽籤,替你回答你連自己都不敢問出口的那句話。"
+    genre_family: supernatural_everyday
+    emotional_engine: ancestor_witness + self_worth_built
+    audience: "Z 世代 22–26 歲、雙北、有阿嬤記憶、會偶爾去廟裡走走的台灣女性讀者"
+
+  - series_id: confidence_core_romance__zh_TW__bu_dao_di_de_shi_jian
+    brand_id: confidence_core_romance
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workplace_corporate
+    portal_mechanic: ritual
+    episodic_frame_per_volume: meeting_room
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "一位二十五歲在新北科學園區當行銷助理的女生,因為被資深主管嚴重情緒勒索三個月,在一位前輩的提醒下開始實驗『不到底』:每天工作只給自己撥八成的力氣,留兩成的時間給身體。她和一位也在練習這件事的男同事,變成彼此的『八成見證人』。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "只給八成"
+    series_logline: "二十五歲的婷宇被資深主管情緒勒索三個月之後,開始每天只給工作八成的力氣;辦公室裡有另一個人也在練同一件事。"
+    series_description: "婷宇二十五歲,在新北科學園區一間中型 SaaS 公司當行銷助理。她的直屬主管是出名的『情緒勒索高手』:不直接罵人,而是冷冷地讓你猜她在不滿什麼。婷宇撐了三個月後失眠到去身心科。一位四十歲的女前輩在茶水間對她說了一句話:『試試看每天只給工作八成的力氣。剩下兩成,給你的身體。』她開始實驗:八成上班、兩成走路/煮飯/早睡。第二週她發現公司裡另一個男同事也在做同樣的事——他週三下午一定五點半下班、他從來不在群組秒回。他叫宥承,二十六歲,工程師。他們開始互相幫忙在群組裡『擋一下』、提醒對方下班時間、不要在週五晚上覆訊。每一集是一個月,他們在十二個月裡學會:被情緒勒索的解藥不是辭職,是『身體在工作裡留兩成』。十二集後,他們之間長出來的不是熱戀,是一種互為見證人的溫柔關係。"
+    opening_5_volume_arc:
+      vol_1: "婷宇第一次只給八成。下午四點半她去走了二十分鐘。主管隔週才反應過來。"
+      vol_2: "宥承在群組裡幫婷宇『擋一下』:『她現在不在線上,我幫你接。』婷宇第一次覺得辦公室有同盟。"
+      vol_3: "婷宇媽媽從台南打電話來罵她『不夠拼』。她沒有掛電話,但她也沒有道歉。"
+      vol_4: "宥承被點名遲交。婷宇用工程語言幫他擋一句:『他卡在 staging 環境的 dependency。』兩個人對望笑出來。"
+      vol_5: "他們週末第一次一起吃飯。整頓飯不談公事。婷宇明白:這不是戀愛,但這比戀愛安全。"
+    comp_titles: ["你的婚禮", "我吃了那個男孩一整年的早餐", "用九柑仔店", "蜻蜓結社", "可不可以,你也剛好喜歡我"]
+    reader_promise: "你不需要把自己用完才能換到別人的肯定——八成的你,就夠了。"
+    marketing_angle: "《我吃了那個男孩一整年的早餐》的新北科學園區版本——但這次他們不是談戀愛,是替彼此守住身體。"
+    genre_family: slice_of_life
+    emotional_engine: boundaried_belonging + self_worth_built
+    audience: "Z 世代 24–28 歲、雙北、第一份工作被情緒勒索、剛開始學界線的女性讀者"
+
+  - series_id: confidence_core_romance__zh_TW__yi_zhi_zhi_de_qing_shu
+    brand_id: confidence_core_romance
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: queer_identity
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "一位二十二歲在台南讀美術系的女生,把所有不敢說出口的喜歡都寫成『未寄出的情書』,放在一個鐵盒裡。她開始發現那些信會自己消失幾天,然後回到鐵盒——對方那一邊也讀到了,只是用一種她說不清楚的方式。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "一直沒寄的情書"
+    series_logline: "台南美術系的微琪寫了二十六封沒寄出去的情書;它們開始自己出門幾天,回來時被讀過了。"
+    series_description: "微琪二十二歲,在台南藝術大學讀視覺傳達設計。她從十六歲開始就有一個習慣:對每一個她偷偷喜歡過的人,都寫一封信,然後把它放進一個喜餅鐵盒裡。她從來沒寄出去過。盒子裡現在有二十六封。她是雙性戀,雙北南三地都有未寄出的對象。某個清明連假回台北外婆家的早上,她翻開鐵盒,發現最上面那封——寫給高中那位女同學的——被打開過。她以為自己記錯。她開始做記號。她明白:每隔大約一個月,會有一封信自己消失三到五天,再回到盒子裡。她不知道是什麼力量,只知道對方那一邊——以一種說不清楚的方式——真的讀到了。每一集是一封信被讀過之後,對方那邊的世界(他/她/它)發生的一件小事。長期主線:她最近寫的是給一位現在還在認識中的女同學,而那封信還沒消失過。"
+    opening_5_volume_arc:
+      vol_1: "高中那位女同學。信消失五天回來。隔週微琪在 IG 收到她一句:『最近常想到妳。』"
+      vol_2: "大一系上的學長。信消失三天。學長那禮拜結婚了。微琪笑出來——她寫的是『祝你過得好』。"
+      vol_3: "國中補習班的同學。她已經移民加拿大。信消失四天。微琪夢到她。隔週她真的傳訊息來。"
+      vol_4: "前同事的女朋友。微琪不敢承認的喜歡。信消失了七天才回。微琪鼓起勇氣,跟前同事的女朋友只是當朋友。"
+      vol_5: "現在認識中的這位女同學。信還在盒子裡。微琪每天看它兩次。它沒有消失。微琪明白:有些信你要親手寄出去。"
+    comp_titles: ["你的婚禮", "可不可以,你也剛好喜歡我", "解憂雜貨店", "我吃了那個男孩一整年的早餐", "海街diary"]
+    reader_promise: "你那些不敢說出口的喜歡,都沒有浪費——它們各自找到了被讀到的方式。"
+    marketing_angle: "《你的婚禮》的台南美術系版本——但這次,信替你說了話。"
+    genre_family: healing
+    emotional_engine: unspoken_love + self_worth_built
+    audience: "Z 世代 20–24 歲、南部、藝術/設計學系、酷兒/雙性戀、有壓抑情感史的讀者"
+
+  - series_id: confidence_core_romance__zh_TW__san_dian_yi_ke_zhong
+    brand_id: confidence_core_romance
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: late_night_economy
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位二十四歲在台北忠孝東路一間二十四小時麥當勞做清晨班的女生,凌晨三點一刻會固定有同樣五位客人輪流出現——每個人都來這裡跟自己對話。她漸漸明白:她不是服務員,她是『清晨三點一刻』這個時段的見證者。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "三點一刻"
+    series_logline: "凌晨三點一刻,忠孝東路的二十四小時麥當勞會準時出現五位常客;沛婕是這個時段的見證人。"
+    series_description: "沛婕二十四歲,在台北一間二十四小時麥當勞做凌晨一點到早上九點的班。她大學讀心理系，當服務員只是過渡。她很快發現:每天凌晨三點一刻,固定會有五位客人裡的其中一位進門——一位剛下班的計程車司機、一位失眠的女作家、一位在台北念書的香港男生、一位四十多歲的健身房教練、一位夜班護理師。每個人都點一樣的東西,坐一樣的座位,通常不講話。沛婕一開始以為只是巧合,後來明白:他們是來這裡跟自己對話的。三點一刻在台北是個特別的時刻——城市夠安靜、身體夠累、白天的角色全都暫時放下。每一集她以服務員的距離,見證其中一位的內心對話(用心理系的觀察筆記)。每位常客有自己的長期主題。長期主線:沛婕自己也快撐不住——她不敢在三點一刻坐下來面對自己;最後她決定把自己也加進這份名單。"
+    opening_5_volume_arc:
+      vol_1: "計程車司機。每天三點一刻吃一份雞塊。沛婕發現他在跟自己道歉——關於十五年前的一件事。"
+      vol_2: "失眠的女作家。她每次都點黑咖啡和薯餅。她在校稿——是她沒寫完的小說的最後一章。"
+      vol_3: "在台北念書的香港男生。他每天三點一刻來,只是因為這裡的英文播報讓他想起家。"
+      vol_4: "夜班護理師。她坐在窗邊三十分鐘不點餐。沛婕主動送一杯熱水。護理師哭了。"
+      vol_5: "沛婕第一次在三點一刻坐下來。她點了一份蛋堡。她明白:她也是這份名單的一員——而她欠自己一場對話。"
+    comp_titles: ["深夜食堂", "解憂雜貨店", "用九柑仔店", "可不可以,你也剛好喜歡我", "海街diary"]
+    reader_promise: "凌晨三點一刻的你,有一張不需要解釋的椅子。"
+    marketing_angle: "《深夜食堂》的台北忠孝東路二十四小時麥當勞版本——凌晨三點一刻,城市最誠實的那一刻。"
+    genre_family: slice_of_life
+    emotional_engine: late_night_witness + self_worth_built
+    audience: "Z 世代 22–26 歲、雙北、夜班/失眠/凌晨在外活動、心理系或對人觀察敏感的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — bright_presence_tw_seinen  (核心 · seinen · 亮系男性向)
+  # 主題:成年男性在台灣社會的非孤獨、社群、職人感、安靜的兄弟情誼
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: bright_presence_tw_seinen__zh_TW__ye_shi_xiao_chi_xiong_di
+    brand_id: bright_presence_tw_seinen
+    locale: zh_TW
+    persona_archetype: Mill-mid
+    daily_life_anchor: night_market
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "一位三十五歲、在台北寧夏夜市接下父親生炒花枝攤的男生,某個颱風夜發現夜市裡的小吃攤老闆們會在凌晨兩點之後,進入一個叫做『收攤之後的夜市』的隱藏時空——只有真的把這份工作當一輩子做的人才看得見。"
+    volume_runway_target: 200
+    reading_platform_fit: both
+    series_title: "收攤之後的夜市"
+    series_logline: "寧夏夜市三十五歲的二代攤主阿廷在颱風夜發現:凌晨兩點過後的夜市,只開給真正把這份工當一輩子的人。"
+    series_description: "阿廷三十五歲,父親五年前過世後他從竹科辭職回來接生炒花枝攤。一開始他很討厭夜市的油煙、討厭觀光客、討厭自己的人生變成這樣。某個颱風夜十一點半,他收完攤想說喝一杯,沒想到夜市的鐵門全拉下後,凌晶兩點他從鐵門縫看出去——夜市還在,只是燈光不一樣,攤位也不太一樣。他打開鐵門走出去,發現裡面坐著夜市所有他從小看到大的長輩攤主:阿全伯、麵線阿姨、蚵仔煎阿伯——他們都還在,只是更年輕。麵線阿姨對他說:『你終於看得見了。』每一集他和『收攤之後的夜市』裡的一位老師傅學一件事:不是料理技術,是『把一份工做一輩子』的心理結構——怎麼跟身體相處、怎麼面對客人、怎麼讓這份工把你撐住。長期主線:他爸爸也在那個夜市裡,他要練到某個程度才能坐下來和爸爸講話。"
+    opening_5_volume_arc:
+      vol_1: "麵線阿姨。她教他怎麼用三十秒判斷一個客人這禮拜過得好不好。"
+      vol_2: "蚵仔煎阿伯。他不教蚵仔煎,他教他怎麼一個人收攤而不覺得這份工孤獨。"
+      vol_3: "賣米血的姨丈。他教他:『不要把這份工當成委屈,當成一張你選的椅子。』"
+      vol_4: "他看見爸爸坐在最遠的那一桌。他還不敢走過去。"
+      vol_5: "他第一次走到爸爸那一桌。爸爸沒有講話,只是把鍋子推給他。他知道:他可以開始接這份工的中年了。"
+    comp_titles: ["深夜食堂", "用九柑仔店", "孤獨的美食家", "葬送のフリーレン", "築地魚河岸三代目"]
+    reader_promise: "你接下來的這份工,不用一個人扛——你前面所有做過這份工的人都還在。"
+    marketing_angle: "《深夜食堂》的台北寧夏夜市二代版——你接的不是攤位,是一整代人的安靜傳承。"
+    genre_family: supernatural_everyday
+    emotional_engine: ancestor_witness + craft_as_belonging
+    audience: "千禧世代 32–42 歲、台灣男性、二代接班/家業中堅、在工作裡找意義的讀者"
+
+  - series_id: bright_presence_tw_seinen__zh_TW__ji_che_xiu_li_dian
+    brand_id: bright_presence_tw_seinen
+    locale: zh_TW
+    persona_archetype: Mill-mid
+    daily_life_anchor: workshop_blue_collar
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位三十八歲在新北板橋經營機車行的師傅,接的每一台需要大修的機車,車子本身都會用零件鬆動的方式『告訴他』,牠的主人這禮拜在什麼地方撐不下去。"
+    volume_runway_target: 200
+    reading_platform_fit: both
+    series_title: "機車修理店"
+    series_logline: "板橋的機車師傅阿凱發現:他接的每一台大修的車,都在替牠的主人傳話——某個地方撐不下去。"
+    series_description: "阿凱三十八歲,板橋一間二十年的機車行老闆。父親是創店師傅,五年前阿凱接下來。他發現:有些客人牽車進來,車的故障點完全不合理——明明剛保養完、明明零件沒問題,卻在最莫名其妙的地方鬆掉。阿凱漸漸明白:這些車在替主人傳話。比如:剎車片鬆=這個人這禮拜在某件事情上『煞不住』;後照鏡歪=這個人最近不敢回頭看某段關係;龍頭鎖卡住=這個人陷在一個決定上動不了。每一集是一台車。阿凱以一個務實、不講大道理、會用扳手指東西的中年男人方式,用三句話替客人指出他自己看不到的那件事。他不勸,他只說:『車是這樣告訴我的,你聽不聽我管不著。』長期主線:他自己的舊車也開始出狀況——他要面對自己這幾年壓在心裡的那件事。"
+    opening_5_volume_arc:
+      vol_1: "三十歲的女上班族,剎車片鬆。阿凱:『你最近是不是有個東西該說 no 沒說?』她沉默十秒,點頭。"
+      vol_2: "二十二歲的大學生,後照鏡歪。阿凱:『回頭一下你不會死。』兩週後學生回來告訴他他打了電話給高中朋友。"
+      vol_3: "五十五歲的計程車大哥,龍頭鎖卡住。阿凱:『你心裡有個決定卡了多久?』大哥:『三年。』阿凱:『今天決定。』"
+      vol_4: "一位中年女士的車燈時亮時暗。阿凱:『妳家裡有沒有人不太好?』她哭了。"
+      vol_5: "阿凱自己的舊車排氣管異響。他打開引擎蓋,看到的不是引擎,是他爸爸最後一次替他修車時留下的工具痕跡。他終於哭出來。"
+    comp_titles: ["孤獨的美食家", "用九柑仔店", "深夜食堂", "夏目友人帳", "解憂雜貨店"]
+    reader_promise: "你撐不下去的地方,你的車比你先知道——而修車的師傅願意替你翻譯。"
+    marketing_angle: "《孤獨的美食家》的板橋機車行版本——三句話的中年男師傅,聽得懂車也聽得懂人。"
+    genre_family: supernatural_everyday
+    emotional_engine: craft_as_belonging + practical_witness
+    audience: "千禧世代 35–45 歲、台灣男性、藍領/技職背景、騎機車的中年男性與他們的伴侶讀者"
+
+  - series_id: bright_presence_tw_seinen__zh_TW__cha_dao_zui_hou_yi_jian_an
+    brand_id: bright_presence_tw_seinen
+    locale: zh_TW
+    persona_archetype: Mill-careerist
+    daily_life_anchor: workplace_corporate
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: none
+    serial_engine: mystery_box
+    long_arc_spine: "一位四十二歲、在台中當資深刑警的男人,接到一個離奇的案子:一棟老公寓裡死了一位獨居老榮民,身邊只留下一張寫著八個地名的字條。每個地名連起來其實是一段台灣中部老兵的人生路線,而這位老兵其實是要在死前把一段被自己藏了五十年的友情找回來。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "查到最後一件案"
+    series_logline: "台中刑警老吳接到獨居老榮民的案子,八個地名的字條,牽出一段五十年的兄弟情誼。"
+    series_description: "老吳四十二歲,台中市刑大資深隊員,離婚、女兒大學畢業在台北工作。他三年內要退休。某個禮拜三,他接到南屯區一間老公寓的案子:獨居八十歲的老榮民王伯伯過世,身邊只留下一張寫著八個地名的字條:左營—鳳山—嘉義—員林—南投—霧峰—太平—北屯。沒有自殺、沒有他殺。家屬找不到。署裡覺得結案就好。老吳是少數還會多走兩步的老派刑警——他發現這八個地名連起來,是一九五五年到一九六五年之間台灣中部三十多位老兵被分派的駐地路線。他開始一個地點一個地點去走訪,慢慢拼出王伯伯這一輩子最在意的那個朋友——一位失聯了五十年的同袍。每一集是一個地點。長期主線:老吳一邊查這個案子,一邊整理自己跟自己父親(也是老兵)之間從來沒講開的距離。"
+    opening_5_volume_arc:
+      vol_1: "左營。老吳找到一位九十歲的老班長。班長記得王伯伯,還記得王伯伯當年最好的朋友姓陳。"
+      vol_2: "鳳山。地下市場的一位阿伯告訴老吳:那位陳姓朋友後來去了嘉義開腳踏車店。"
+      vol_3: "嘉義。腳踏車店已經改成手搖飲料店。老闆告訴老吳:陳爺爺去年過世，但臨終前一直念一個名字叫王某某。"
+      vol_4: "員林、南投、霧峰。一連串的線索把老吳帶到一張老照片:王伯伯和陳爺爺,一九六零年的春節,在霧峰拍的合照。"
+      vol_5: "北屯。王伯伯的火化骨灰下午要送往榮民塔。老吳安排把陳爺爺的骨灰罈和王伯伯的並列。沒有人懂他為什麼這樣做。他打電話給他自己住養老院的父親:『爸,我下班去看你。』"
+    comp_titles: ["孤獨的美食家", "深夜食堂", "解憂雜貨店", "用九柑仔店", "MIU404"]
+    reader_promise: "你以為早就失聯的那段兄弟情誼,有人會替你查到最後一站。"
+    marketing_angle: "《孤獨的美食家》遇上《MIU404》的台中刑警版——三年內退休的老派刑警替老兵走完最後一段路。"
+    genre_family: mystery_cozy
+    emotional_engine: brotherhood_witness + last_chance_belonging
+    audience: "千禧世代 40–50 歲、台灣男性、有父親是老兵或外省二代背景、喜歡冷靜推理的讀者"
+
+  - series_id: bright_presence_tw_seinen__zh_TW__shi_qu_de_chong_wu_an
+    brand_id: bright_presence_tw_seinen
+    locale: zh_TW
+    persona_archetype: Mill-mid
+    daily_life_anchor: pet_companion
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位三十六歲在高雄當寵物溝通師(同時是動物醫生)的男人,接到的『協尋失蹤寵物』案件,每一隻寵物其實都是替主人去尋找一段他自己也不知道走丟了的關係。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "失蹤的寵物"
+    series_logline: "高雄的寵物溝通師兼動物醫生柏勛接的協尋案,每一隻寵物都在替主人尋找一段他不知道走丟了的關係。"
+    series_description: "柏勛三十六歲,高雄苓雅區一間貓狗醫院的院長,業餘做寵物溝通。他不是怪力亂神型的——他是有獸醫執照、會搭配 fMRI 觀察動物腦波的那種。他接到的協尋案件,他第一週才發現規律:每隻失蹤的寵物其實沒走丟,牠們是『去某個地方』。比如:走失的柴犬會在主人小學的同學家樓下徘徊;失蹤的橘貓會去主人前任的辦公樓下;失蹤的鸚鵡會飛去主人外婆過世的舊家。柏勛漸漸明白:寵物在替主人去找他自己潛意識裡走丟的那段關係。每一集他協尋到一隻寵物,並用務實的語氣對主人說一句:『牠在你小學同學家樓下。你要不要去看一下?』有些主人去了,有些沒有。長期主線:他自己養的那隻十六歲的老柴犬最近開始往同一個地方走——是柏勛父親五年前過世前最後住的安養院。"
+    opening_5_volume_arc:
+      vol_1: "走失的柴犬。在小學同學家樓下。主人去敲門。同學沒有不開心,他們聊了三個鐘頭。"
+      vol_2: "失蹤的橘貓。在前任公司樓下。主人沒有去——但他發了一則簡訊。前任回了。"
+      vol_3: "失蹤的鸚鵡。在外婆舊家前的麵店。主人哭了二十分鐘。她終於請了三天假回鄉下整理外婆的東西。"
+      vol_4: "走失的米克斯。在主人國中霸凌過的同學現在開的小餐館外面。主人沒去——但他在 IG 上私訊了道歉。"
+      vol_5: "柏勛的老柴犬第三次往爸爸的安養院走。柏勛開車載牠去。在大廳裡,他坐了很久。柴犬安靜地趴在他腳邊。"
+    comp_titles: ["孤獨的美食家", "夏目友人帳", "解憂雜貨店", "深夜食堂", "用九柑仔店"]
+    reader_promise: "你以為走丟的關係,你的貓狗替你記得在哪裡。"
+    marketing_angle: "《夏目友人帳》的高雄寵物醫院版本——務實的中年獸醫,替你重新看見你走丟的關係。"
+    genre_family: mystery_cozy
+    emotional_engine: animal_witness + rekindled_intimacy
+    audience: "千禧世代 32–42 歲、台灣男性與他們的伴侶、有寵物、開始面對父母老去的讀者"
+
+  - series_id: bright_presence_tw_seinen__zh_TW__deng_ta_shou_men_yuan
+    brand_id: bright_presence_tw_seinen
+    locale: zh_TW
+    persona_archetype: Mill-mid
+    daily_life_anchor: lighthouse_remote
+    portal_mechanic: location
+    episodic_frame_per_volume: month
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "一位三十七歲離婚的男設計師,搬到台灣最南端的鵝鑾鼻燈塔附近當守燈員。他發現這座燈塔不只是給海上的船看的——它每晚會替一位『迷路的旅人』指路;而那位旅人,有時候是一位陌生人、有時候是他自己生命裡某一段。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "鵝鑾鼻守燈員"
+    series_logline: "三十七歲的男設計師逸辰搬到鵝鑾鼻當守燈員;這座燈塔每晚會替一位迷路的旅人指路。"
+    series_description: "逸辰三十七歲,離婚兩年,前妻帶女兒去溫哥華。他原本在台北做 UI 設計總監,辭職後申請了台灣海岸燈塔守員的職位,被分發到屏東鵝鑾鼻。第一個月他在燈塔下的小宿舍整理東西,某個無風的夜晚他發現:燈塔不只是給海上的船看的——它每晚會替一位『迷路的旅人』把光照到他需要去的地方。那位旅人有時候是一位真實的陌生人(夜潛失蹤的漁夫、徒步環島迷路的女生、騎重機半夜經過的中年男子),有時候是他自己生命裡某一段走丟的自己(二十歲那個逸辰、結婚那天那個逸辰、爸爸過世那晚那個逸辰)。每一集是一晚。長期主線:十二個月後,燈塔會替他自己指一次路;他要決定他要不要去那個地方。soft fantasy 設定但情感非常寫實,有《葬送のフリーレン》的孤獨優雅。"
+    opening_5_volume_arc:
+      vol_1: "六月。徒步環島的女大生迷路。燈塔指向南灣的一個小亭子。她被一位夜跑的退伍軍人救了。"
+      vol_2: "七月。夜潛失蹤的漁夫。燈塔指向礁岩西側。海巡救上一位還在呼吸的人。"
+      vol_3: "八月。逸辰看見二十歲的自己在燈塔下走過。他追上去,沒講話,只是陪他走了五分鐘。"
+      vol_4: "九月。重機騎士。燈塔的光指向他自己要去的地方——不是逸辰能干預的。"
+      vol_5: "十月。逸辰結婚那天的自己出現。逸辰坐下來,沒有勸他不要結婚——只跟他說:『無論你怎麼選,你都會回到我這。』"
+    comp_titles: ["葬送のフリーレン", "夏目友人帳", "海街diary", "千與千尋", "用九柑仔店"]
+    reader_promise: "你那些走丟的版本,有一座燈塔在替你照亮回家的路。"
+    marketing_angle: "《葬送のフリーレン》的鵝鑾鼻燈塔版本——一個守燈員,每晚替一位迷路的旅人(包括他自己)指路。"
+    genre_family: fantasy_adventure
+    emotional_engine: past_self_dialogue + craft_as_belonging
+    audience: "千禧世代 35–45 歲、台灣男性、離婚/中年轉折、喜歡安靜冒險設定的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — heart_balance_shojo  (核心 · josei/shojo · 非血緣家)
+  # 原始 brand-id:found_family_shojo → heart_balance_shojo
+  # 主題:非血緣家、姊妹情誼、世代之間的療癒、心理界線
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: heart_balance_shojo__zh_TW__a_ma_de_chu_fang
+    brand_id: heart_balance_shojo
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: grandmother_kitchen
+    portal_mechanic: recipe
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "一位二十四歲女設計助理,從台南阿嬤過世後繼承了一本手抄食譜本。她開始發現:她照著食譜煮某一道菜,煮的當天會有一位『需要這一道菜』的人準時來敲她租屋處的門——她甚至不認識對方。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "阿嬤的食譜本"
+    series_logline: "阿嬤過世後留給昕榆一本手抄食譜——她照著煮,當天就會有一位需要這道菜的人來敲她的門。"
+    series_description: "昕榆二十四歲,在台北信義區一間品牌顧問公司當設計助理,從小是台南阿嬤帶大。阿嬤過世後她繼承了一本厚厚的手抄食譜——四十七道菜,每道菜的最後都用阿嬤的字寫一句話:『這道給累的人吃。』『這道給剛分手的人吃。』『這道給回家路上的人吃。』她原本只當作回憶。某個禮拜五她想煮『給累的人吃』的那道——麻油雞湯麵線。湯滾的時候,她租屋處的門鈴響了。是樓下鄰居的媽媽,她剛從醫院做完化療回來,她說:『我聞到味道,我可不可以上來坐一下?』從那天開始,昕榆每煮一道菜,當天就會有一位需要那道菜的人來——有時候是鄰居、有時候是同事、有時候是完全不認識的快遞員。每一集是一道菜、一個人。長期主線:食譜的最後一道阿嬤沒有寫名字,只寫:『這道,給找不到家的人吃。』昕榆要等到對的時刻才能煮。"
+    opening_5_volume_arc:
+      vol_1: "麻油雞湯麵線——給累的人吃。樓下化療鄰居。她們聊了兩個鐘頭。"
+      vol_2: "薑絲鳳梨苦瓜雞——給剛分手的人吃。同事失戀,沒約她,當天卻在她家樓下哭。"
+      vol_3: "鹹粥配油條——給回家路上的人吃。快遞員。他媽媽住養老院他三年沒回去看。隔週他回去了。"
+      vol_4: "蘿蔔糕——給害怕長大的人吃。十六歲離家出走的少女在她家門口睡了一晚。昕榆煮給她,然後送她回家。"
+      vol_5: "她終於明白她自己是『找不到家的人』。她煮最後那道——阿嬤的滷肉飯——是為了她自己。她坐下來吃了。她哭了。"
+    comp_titles: ["用九柑仔店", "海街diary", "深夜食堂", "可不可以,你也剛好喜歡我", "解憂雜貨店"]
+    reader_promise: "你阿嬤教過你的,沒有失傳——它只是換了一種方式繼續餵養需要被餵養的人。"
+    marketing_angle: "《海街diary》的台南阿嬤食譜版本——食譜本身會替你叫人來。"
+    genre_family: healing
+    emotional_engine: ancestor_witness + chosen_family
+    audience: "Z 世代 22–28 歲、台灣女性、有阿嬤記憶、第一個自己租的小套房的讀者"
+
+  - series_id: heart_balance_shojo__zh_TW__san_jie_mei_de_yi_jian_yi_fu
+    brand_id: heart_balance_shojo
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三位非血緣的女生——一位二十歲、一位二十五歲、一位三十三歲——在台北永康街一起經營一間小型二手衣店。店裡有一條規矩:每一件被帶回來的衣服,都要先聽完前一位主人的故事,才會被掛上架。"
+    volume_runway_target: 150
+    reading_platform_fit: both
+    series_title: "三姊妹的一件衣服"
+    series_logline: "永康街一間二手衣店,三位非血緣的姊妹——每一件衣服要先聽完前主人的故事,才會被掛上架。"
+    series_description: "店主是阿婕,三十三歲,離婚一年帶八歲女兒,前夫家境優渥但情緒勒索她十年。她開這間店是為了不再回去。她認的『大妹』是嘉惠,二十五歲,從花蓮上來,在店裡顧店、做版型修改。最小的是楨楨,二十歲,讀服裝設計系,週末來幫忙拍照、整理 IG。三個人沒有血緣,但她們把店開成『家』。她們做的不是普通二手衣——每一件被帶來的衣服,賣家必須先在後面那張小餐桌上,把這件衣服的故事講完(那天為什麼買的、那天為什麼穿的、為什麼現在不要了)。阿婕用筆記本記下來。衣服被掛上架時,旁邊會夾一張小卡,寫前一位主人的一句話。每一集是一件衣服、一位賣家、一位買家。長期主線:阿婕的前夫某一天進店裡來,帶著她們離婚那天她沒拿走的洋裝。"
+    opening_5_volume_arc:
+      vol_1: "一件紅色洋裝。賣家是剛離婚的四十歲女人。買家是二十二歲第一次面試的女生。"
+      vol_2: "一件男生襯衫。賣家:剛出櫃但跟原本的對象分手的女生。買家:一位變裝表演者。"
+      vol_3: "嘉惠的媽媽從花蓮上來。看到店一直沒走。三個人和媽媽吃了一頓飯。媽媽:『妳真的找到妳的人了。』"
+      vol_4: "楨楨被學校系上排擠。她躲在店裡兩個禮拜。阿婕教她怎麼面對。"
+      vol_5: "阿婕的前夫進店裡。帶了一件白色洋裝——他們離婚那天的洋裝。他沒講話,放下衣服就走。阿婕把它掛上架,卡片寫:『我不再需要它。』"
+    comp_titles: ["海街diary", "用九柑仔店", "可不可以,你也剛好喜歡我", "我吃了那個男孩一整年的早餐", "深夜食堂"]
+    reader_promise: "你的家不一定是血緣——你可以替自己選三位姊妹,共同經營一件你願意守的事。"
+    marketing_angle: "《海街diary》的台北永康街二手衣店版本——三個沒有血緣的女人,把店開成了家。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + ritual_as_belonging
+    audience: "Z 世代 20–28 歲、雙北、女性、有非血緣姊妹網絡、開始建立自己的『家』的讀者"
+
+  - series_id: heart_balance_shojo__zh_TW__yang_ming_shan_de_xiao_qi_diao
+    brand_id: heart_balance_shojo
+    locale: zh_TW
+    persona_archetype: GA-mid
+    daily_life_anchor: nature_walk
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位十三歲、和媽媽住在士林的女生,每個禮拜六早上會跟著媽媽走陽明山的小溪步道。某個禮拜六她發現:溪邊住著一群只有她看得見的『小溪精靈』——他們專門陪伴那些跟家人關係卡住的小孩。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "陽明山的小溪精靈"
+    series_logline: "十三歲的婕妮在陽明山小溪邊看見只有她能看見的精靈——他們專門陪伴跟家人關係卡住的小孩。"
+    series_description: "婕妮十三歲,國一,跟單親媽媽住士林。媽媽是急診室護理師,長期值大夜班,母女之間有一條不知道怎麼跨過去的距離。每個禮拜六早上她們會走擎天崗或菁山步道,當作『我們有在一起』的儀式。某個禮拜六下大雨,婕妮在小溪邊看見一個比她小、穿著葉子做的衣服的小女生,坐在岩石上發呆。她回頭問媽媽:『妳有看見嗎?』媽媽沒看見。從那天開始,婕妮每個禮拜六都在不同的小溪邊看見不同的小精靈——有的像男生、有的像女生、有的像動物。她漸漸明白:每一位精靈都對應著她認識的某一位『跟家人關係卡住』的同學或鄰居小孩。每一集她替一位精靈傳一句話給對方的小孩。每一次她也偷偷練習自己跟媽媽之間還沒講出口的話。長期主線:有一位精靈,長得像八歲的媽媽。婕妮要練到某個程度,才有勇氣把這件事告訴媽媽。"
+    opening_5_volume_arc:
+      vol_1: "葉衣小精靈。對應婕妮班上一位剛搬家不適應的女同學。婕妮放學主動跟她講話。"
+      vol_2: "山羌精靈。對應隔壁鄰居八歲的小男生,他爸媽剛離婚。婕妮借他一本繪本。"
+      vol_3: "水流精靈。對應婕妮自己的表妹,寒假時她們會見面。婕妮第一次主動跟表妹聊天。"
+      vol_4: "綠繡眼精靈。對應婕妮自己——她那位住在心裡的、十歲那年覺得媽媽不愛她的自己。她在小溪邊坐了很久。"
+      vol_5: "穿白色棉布衣的小女生。長得很像媽媽小時候。婕妮回家後第一次主動牽媽媽的手。媽媽沒講話,只是緊緊回握。"
+    comp_titles: ["神隱少女", "夏目友人帳", "用九柑仔店", "海街diary", "蟲師"]
+    reader_promise: "你跟家人卡住的地方,不是你的錯——這座山有人替你陪那些卡住的小孩。"
+    marketing_angle: "《神隱少女》的陽明山版本——適合 Gen Alpha 的家庭療癒入門,但情感深度足以打動三代讀者。"
+    genre_family: supernatural_everyday
+    emotional_engine: nature_as_witness + parent_child_repair
+    audience: "Gen Alpha 11–14 歲、雙北、與單親或忙碌父母同住、敏感型小孩 + 千禧家長雙讀者"
+
+  - series_id: heart_balance_shojo__zh_TW__hua_lian_hui_jia_de_huo_che
+    brand_id: heart_balance_shojo
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: train_journey
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: location_anthology
+    long_arc_spine: "一位二十一歲、在台北念大三的花蓮女生,每個月會搭一次自強號回家。她漸漸發現:那班車的某節車廂(第七節靠窗位)會在進入北迴線之後,變成一節『載著還沒回家的人』的車——車上每位乘客都有一段沒講完的家。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "回家的火車"
+    series_logline: "從台北回花蓮的自強號,第七節靠窗位過了北迴線之後會變成另一節車——載著還沒回家的人。"
+    series_description: "穎柔二十一歲,花蓮玉里人,在台北念東吳法律系大三。她每個月會搭一次自強號回家——通常是禮拜五晚上六點四十七分那班。某個禮拜五她照常坐第七車廂十二號靠窗,睡了三十分鐘,醒來時車廂變了:座位的布套變舊了、窗外是台灣四十年前的東海岸風景、車廂裡的乘客她也認不得。她去問列車長,列車長對她點點頭:『你是這個月新接到通知的。第七車這節,過了北迴線就是給「還沒回家」的人坐的。每個月會選一位學生來幫忙。』每一集她在這節車廂上認識一位乘客——一位過世已久的外婆要回去看孫女、一位中年男人沒勇氣回到故鄉、一位嫁到台北三十年沒再回花蓮的阿姨——穎柔以一個年輕人安靜的方式陪他們坐這段路。soft fantasy 設定但情感全部寫實。長期主線:穎柔自己跟父親之間的距離,在這節車廂裡會被慢慢翻譯。"
+    opening_5_volume_arc:
+      vol_1: "穿黑色外套的女士。她其實已經過世。她要回去看出生那年她沒能抱到的孫女。穎柔陪她到玉里站。"
+      vol_2: "四十五歲的中年男子。他在台北混了二十年,從來沒勇氣回家。穎柔用兩個鐘頭聽他講他媽媽。"
+      vol_3: "嫁到台北三十年的阿姨。她要回去拜父母的墓。她跟穎柔說:『你不要像我一樣,等到對方不在了才回去。』"
+      vol_4: "一位十六歲離家出走的男生。穎柔的距離感剛好——她不勸、不通報、只陪。男生在花蓮站下車時自己決定要回家。"
+      vol_5: "穎柔自己的爸爸出現在車廂裡——是他二十二歲那年。他正要去台北念書。穎柔終於懂為什麼他這輩子那麼難講出愛的話。她回家後抱了他。"
+    comp_titles: ["神隱少女", "夏目友人帳", "葬送のフリーレン", "千年女優", "用九柑仔店"]
+    reader_promise: "你想回家但回不去的那些人,有一節車廂等他們——而你可以替他們陪這段路。"
+    marketing_angle: "《千年女優》的東部幹線版本——一節靜謐的車廂,載著還沒回家的人。"
+    genre_family: fantasy_adventure
+    emotional_engine: past_self_dialogue + ancestor_witness
+    audience: "Z 世代 20–24 歲、東部出身在台北念書/工作、有父母世代距離感的讀者"
+
+  - series_id: heart_balance_shojo__zh_TW__zhong_qiu_kao_rou_de_shi_jia_ren
+    brand_id: heart_balance_shojo
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: mid_autumn_bbq
+    portal_mechanic: ritual
+    episodic_frame_per_volume: case
+    magical_register: magical_realism
+    serial_engine: mystery_box
+    long_arc_spine: "一位二十六歲、住在新北中和的女生,某年中秋連假在頂樓辦烤肉,意外發現她們家頂樓的烤肉爐每年中秋只開放給一組『十口人』烤——而她和老公那一邊只有兩個,還有八個位子,會在那一晚不約而同地,有八位『從未見過但其實是家人』的人上來。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "中秋頂樓十口人"
+    series_logline: "中和七樓頂樓的烤肉爐每年中秋限制十口人;暖晴和老公兩個,還有八位『從未見過但其實是家人』的人會上來。"
+    series_description: "暖晴二十六歲,新北中和一棟二十年公寓七樓住戶,跟老公阿擎結婚兩年。中秋節阿擎家在台南、暖晴家在新竹,他們今年因為阿擎要上工沒辦法回家。他們決定在自己家頂樓烤肉。暖晴買了十個人的肉——習慣性,因為她家從小就十口人。烤到一半,頂樓門打開,進來八位他們從沒見過的人——但每位都莫名地讓暖晴覺得『眼熟』。第一位是位戴眼鏡的老先生,自我介紹說他是『暖晴外婆的二哥,你媽媽從來沒見過的舅公』。第二位是『阿擎媽媽的童年好友,後來搬到日本失聯』。八位人都是兩家人血脈裡『被遺忘但其實一直是家人』的人。每一集是其中一位的故事——他們為什麼在那個時間點消失、現在過得怎樣、為什麼今晚回來。長期主線:他們明白:中秋這個爐子,是替每個家把『被遺忘的家人』請回來一晚。明年的中秋,他們要主動去找。"
+    opening_5_volume_arc:
+      vol_1: "舅公。他講外婆小時候跟著家人從中國來台的故事——這是暖晴第一次聽。"
+      vol_2: "阿擎媽媽的童年好友。她講阿擎媽媽十二歲那年偷偷救過一隻流浪貓。阿擎打電話問媽媽,媽媽哭了。"
+      vol_3: "暖晴沒見過的姑姑——爸爸十六歲離家的姊姊。她講她當年離開的原因。暖晴決定明年帶爸爸來。"
+      vol_4: "一位是『家裡曾經要收養但沒收養的小孩』。暖晴和阿擎聽完都沉默——這層歷史他們的爸媽從來沒提過。"
+      vol_5: "最後一位是位小孩,只有六歲。她說她是『暖晴和阿擎以後會有的女兒在另一個版本的時空』。她什麼都沒講,只是吃了一塊肉,然後笑著睡著。暖晴抱著她哭。"
+    comp_titles: ["神隱少女", "用九柑仔店", "海街diary", "千與千尋", "解憂雜貨店"]
+    reader_promise: "你家裡那些被遺忘的家人,沒有消失——他們只是在等你準備好的一個中秋。"
+    marketing_angle: "《海街diary》的中和頂樓中秋烤肉版本——你家其實有十口人,只是其中八個一直在等你想起。"
+    genre_family: mystery_cozy
+    emotional_engine: ancestor_witness + chosen_family
+    audience: "Z 世代 24–30 歲、雙北、已婚或同居、跟原生家庭關係複雜的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — resilient_parent_social  (核心 · josei · 共同養育/社群)
+  # 原始 brand-id:communal_warmth → resilient_parent_social
+  # 主題:育兒/共同養育、社區、世代支持、彈性家庭結構
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: resilient_parent_social__zh_TW__zhuan_ma_ma_de_xia_wu
+    brand_id: resilient_parent_social
+    locale: zh_TW
+    persona_archetype: Mill-parent
+    daily_life_anchor: communal_parenting
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "一位三十六歲、育有五歲女兒的單親媽媽,因為跟同社區的另外三位媽媽談好了『輪流帶小孩的下午』,她每禮拜得到了一個下午的喘息。系列追蹤她和那三位媽媽從第一週『陌生地把小孩交出去』到第五十二週『他們的小孩都把對方家當第二個家』之間,長出來的非血緣女性社群。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "輪媽媽的下午"
+    series_logline: "新北永和四位媽媽談好輪流帶小孩的下午——一年後,他們的小孩把對方家當第二個家。"
+    series_description: "依宸三十六歲,離婚兩年,獨自帶五歲女兒妞妞,在新北永和租了一間兩房公寓。她在公司是 PM,在生活裡是孤軍。同社區媽媽群組裡,她和另外三位媽媽——靜文(三十八、雙寶媽)、惠卿(三十四、男寶媽)、嫻芳(四十、女兒七歲)——某天在群組裡半開玩笑說:『我們要不要輪流帶小孩?』然後她們真的做了。每週每位媽媽負責一個下午(週二/三/四/五),那個下午其他媽媽的小孩會送到她家。一開始大家都緊張,規則寫了七頁。第十週後規則被縮成一張紙。一年後,孩子們把『誰家』當作『我們家』。每一集是一個月。長期主線:這一年發生的轉變——四位媽媽從『把孩子交出去的焦慮』到『學會被人共同養育自己的孩子』。寫實、不戲劇化、每集都有具體的小場景。"
+    opening_5_volume_arc:
+      vol_1: "一月。第一個禮拜二。依宸第一次把妞妞交給靜文。她在咖啡店哭了二十分鐘。然後她睡了一個午覺。"
+      vol_2: "二月。妞妞發燒在靜文家。靜文沒打電話給依宸,她照顧到傍晚才告訴。依宸學著相信。"
+      vol_3: "三月。惠卿的兒子第一次來依宸家。妞妞教他怎麼用小椅子當太空船。依宸看著兩個小孩玩了三個鐘頭。"
+      vol_4: "四月。嫻芳爆出婚姻問題。其他三位媽媽輪流多接她女兒兩週。沒有人問細節。"
+      vol_5: "五月。母親節。四位媽媽不慶祝給自己的媽媽,她們慶祝彼此。"
+    comp_titles: ["海街diary", "用九柑仔店", "媽媽,我可以這樣不一樣嗎", "深夜食堂", "可不可以,你也剛好喜歡我"]
+    reader_promise: "你不需要一個人扛育兒——你可以替自己找三個媽媽,把週二下午還給自己。"
+    marketing_angle: "《海街diary》的新北永和育兒版本——四位媽媽,輪流的下午,一整年。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + parent_relief
+    audience: "千禧世代 32–42 歲、台灣母親、單親或雙薪家庭、有社區育兒網絡需求的讀者"
+
+  - series_id: resilient_parent_social__zh_TW__chun_jie_wei_lu_de_da_jia_zu
+    brand_id: resilient_parent_social
+    locale: zh_TW
+    persona_archetype: Mill-parent
+    daily_life_anchor: lunar_new_year
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位三十九歲、嫁到雲林斗六的女記者,每年春節圍爐都是她最焦慮的時刻——婆家三十口人。某年圍爐她發現:她家飯桌上的一張舊椅子,只要有家人之間有未說完的話,就會自動坐上『那一年那個人』——讓對話有機會被講完。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "圍爐那張舊椅子"
+    series_logline: "嫁到雲林斗六的女記者宛之發現:春節圍爐桌邊那張舊椅子會坐上『那一年那個人』——讓沒講完的話有機會被講完。"
+    series_description: "宛之三十九歲,《自由時報》地方記者,十二年前嫁到雲林斗六婆家。她公公那邊是傳統三合院,圍爐三十口人是常態。每年她最焦慮的就是除夕——婆媳張力、姑嫂張力、十二位堂兄弟姊妹的小孩擠在一起。婚後第十二年的除夕,她發現飯桌靠西邊那張舊木椅(婆婆的婆婆留下來的)有點怪——她坐了一下,起身去廚房,回來時椅子坐了個她不認識的中年男子。婆婆面色平常:『他是你公公的弟弟,二十五年前車禍走的。今天他來吃年夜飯。』那一晚這位『叔叔』和她公公講了二十五年前他們吵架那件事——他們的爸爸偏心的事。第二年除夕,椅子上坐了另一位失聯多年的姑姑。宛之漸漸明白:這張椅子在替這個家把所有沒講完的話補完。每年除夕一個人。長期主線:第十二年,椅子上坐了宛之自己過世已久的爸爸。她要決定要不要在三十個人面前,問她爸爸那件她藏了二十年的事。"
+    opening_5_volume_arc:
+      vol_1: "公公的弟弟。他和公公講二十五年前他們吵架的原因——爸爸偏心。公公第一次哭。"
+      vol_2: "失聯三十年的姑姑。她和婆婆講當年她為什麼離家——婆婆那時候誤會了她。婆婆向她道歉。"
+      vol_3: "宛之的婆婆的媽媽。她對宛之說：『妳是好媳婦。』宛之第一次明白她努力的這十二年有被看見。"
+      vol_4: "公公十六歲那年的同學。他講公公小時候很愛畫畫,後來為什麼放棄。公公那年買了一套水彩。"
+      vol_5: "宛之自己的爸爸。她哭著問了她從來不敢問的問題:『你那年為什麼一個人去蘇花公路?』爸爸回答了。她終於可以放下。"
+    comp_titles: ["海街diary", "用九柑仔店", "解憂雜貨店", "千年女優", "深夜食堂"]
+    reader_promise: "你家沒講完的話,有一張椅子在替你們留位子。"
+    marketing_angle: "《海街diary》的雲林斗六春節版本——一張椅子,一年一個人,把家補完。"
+    genre_family: healing
+    emotional_engine: ancestor_witness + family_repair
+    audience: "千禧世代 35–45 歲、台灣女性、已婚有公婆、跟原生家庭有未說完的話的讀者"
+
+  - series_id: resilient_parent_social__zh_TW__shou_xian_yu_man_yue_jiu
+    brand_id: resilient_parent_social
+    locale: zh_TW
+    persona_archetype: Mill-parent
+    daily_life_anchor: baby_milestone
+    portal_mechanic: ritual
+    episodic_frame_per_volume: case
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "一位四十一歲、在台中經營傳統麻油雞外送店的女主廚,專門做給做月子的媽媽。她漸漸發現:她送出去的麻油雞,湯裡會浮現一些她從未說過的祝福——而那些祝福總是新手媽媽最需要的那一句。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "麻油雞的祝福"
+    series_logline: "台中麻油雞外送主廚雅琪發現:她送給新手媽媽的湯裡,會浮現她從未說過的祝福。"
+    series_description: "雅琪四十一歲,在台中北區開了一間月子餐外送店『嬤嬤的湯』。她自己生過兩個女兒,深知做月子的孤獨。她做的麻油雞配方是她婆婆教她的,但加了她自己的東西:每送出去一鍋,她會在心裡對那位新手媽媽說一句祝福。從第三年開始,她送回收的湯碗時,碗底會有不是她寫的字——是湯凝結的油花排出來的——那行字總是新手媽媽當週最需要被告訴的話。比如:『妳的奶不夠不是妳的錯,妳生過小孩了。』『今天放給先生抱,妳去睡兩個鐘頭。』『產後憂鬱要看醫生不要等。』雅琪明白:這份工作不只是煮湯,是一整代媽媽替下一代媽媽留的話。每一集是一位客人。長期主線:她自己的大女兒今年要生第一個小孩了,雅琪要替女兒做一鍋——那鍋的祝福她要寫什麼?"
+    opening_5_volume_arc:
+      vol_1: "二十八歲第一胎的高雄媽媽。湯裡的字:『妳的奶夠不夠不是妳的錯。』她哭了。她不再硬擠。"
+      vol_2: "三十三歲第二胎的雙寶媽。湯裡的字:『今天放給先生抱,妳去睡兩個鐘頭。』她睡了。她老公也聽懂了。"
+      vol_3: "二十二歲意外懷孕的單親媽媽。湯裡的字:『妳已經比妳以為的還勇敢。』她改變了原本要送養的決定。"
+      vol_4: "三十六歲產後憂鬱嚴重的媽媽。湯裡的字:『今天打電話給身心科。』她打了。她得到救援。"
+      vol_5: "雅琪替自己女兒做。她坐在廚房猶豫了一個鐘頭。最後她寫:『妳會犯錯,我會陪。』她把湯送過去,沒講話。"
+    comp_titles: ["用九柑仔店", "海街diary", "深夜食堂", "解憂雜貨店", "媽媽,我可以這樣不一樣嗎"]
+    reader_promise: "妳做月子的孤獨,有一位中年女人在替妳熬一鍋祝福。"
+    marketing_angle: "《用九柑仔店》的台中月子餐版本——一鍋麻油雞,一句正在缺的話,一整代媽媽的相挺。"
+    genre_family: supernatural_everyday
+    emotional_engine: ancestor_witness + parent_relief
+    audience: "千禧世代 28–40 歲、台灣女性、孕產期或第一年新手媽媽、產後支持需求大的讀者"
+
+  - series_id: resilient_parent_social__zh_TW__she_qu_de_ru_mu_pu
+    brand_id: resilient_parent_social
+    locale: zh_TW
+    persona_archetype: Mill-parent
+    daily_life_anchor: communal_parenting
+    portal_mechanic: object
+    episodic_frame_per_volume: case
+    magical_register: none
+    serial_engine: mystery_box
+    long_arc_spine: "一位三十七歲、在台南安平經營社區互助育嬰中心的女護理師,接收捐贈的母乳長達八年。她有一本親手寫的『乳母譜』——記錄每一位捐乳者的孩子的故事。某年中心收到的一份匿名母乳,排到了乳母譜裡很特殊的位置,而這份線索把她帶向一段被遺忘的醫療不正義事件。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "乳母譜"
+    series_logline: "台南安平社區互助育嬰中心的玟惠手上有八年的『乳母譜』;一份匿名捐贈把她帶向一段被遺忘的醫療不正義。"
+    series_description: "玟惠三十七歲,前護理師,八年前在台南安平開了一間社區互助育嬰中心『安平媽媽家』,接收捐贈母乳給沒有母乳的新生兒(尤其是早產兒)。她有一本親手寫的『乳母譜』,每一位捐乳者她都會記下:寶寶名字、捐乳原因、那一週她家發生的事。八年下來,這本譜子上有六百三十二位媽媽和她們的小孩。某年中心收到一份匿名捐乳,捐贈紙條只寫:『請查 1998 年高雄某醫院新生兒室的紀錄。』玟惠是社工背景,她開始查——這是台南高雄醫療圈一段被刻意遺忘的事件,牽涉到八位媽媽和她們的孩子。每一集是一位涉及的媽媽。長期主線:玟惠用『乳母譜』的人脈,慢慢替八個家庭把當年的真相還原。冷靜、節制、不煽情。"
+    opening_5_volume_arc:
+      vol_1: "匿名紙條。玟惠拒絕公開——她決定一步一步私下查。"
+      vol_2: "第一位媽媽。當年的護理長,現在退休住在屏東。她交給玟惠一份手寫紀錄。"
+      vol_3: "第二位媽媽。她的孩子當年被診斷錯誤。她願意公開。"
+      vol_4: "第三位媽媽。她不願意公開,但她願意作證。玟惠尊重她。"
+      vol_5: "玟惠開了一場閉門茶會,八位媽媽到了五位。她們決定一起寫一份公開信給醫院。沒有訴訟,只要真相。"
+    comp_titles: ["MIU404", "解憂雜貨店", "用九柑仔店", "海街diary", "深夜食堂"]
+    reader_promise: "你那段曾經發生但被遺忘的事,有人會用八年的人脈替你找回真相。"
+    marketing_angle: "《MIU404》遇上《海街diary》的台南安平育兒中心版本——一本乳母譜,八年人脈,一段醫療不正義的還原。"
+    genre_family: mystery_cozy
+    emotional_engine: communal_witness + truth_recovery
+    audience: "千禧世代 35–45 歲、台灣女性、醫療/社工背景、關心社會議題與母親權益的讀者"
+
+  - series_id: resilient_parent_social__zh_TW__dong_zhi_tang_yuan_de_xiao_xiao_qi_diao
+    brand_id: resilient_parent_social
+    locale: zh_TW
+    persona_archetype: GA-mid
+    daily_life_anchor: winter_solstice
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: companion_roster
+    long_arc_spine: "一位十二歲、住在台北大安區的女生,每年冬至跟阿嬤一起搓湯圓。某年冬至她意外發現,她搓出來的某幾顆湯圓會變成『小小精靈』——他們是替家裡每位需要被陪伴的長輩值班的小幫手,每位精靈各有性格,每年冬至重新被叫醒。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "冬至湯圓的小精靈"
+    series_logline: "十二歲的婭婷冬至搓湯圓時意外召出小精靈——他們替家裡每位需要被陪伴的長輩值班。"
+    series_description: "婭婷十二歲,國一,住台北大安區四代同堂的老公寓(阿祖九十五歲、阿嬤六十八歲、爸媽四十多、她和弟弟)。每年冬至她跟阿嬤一起搓湯圓——這是她最期待的傳統。某年冬至她搓出來的一顆湯圓在桌上彈了一下,變成一個拇指大的小人——穿著紅色衣服,圓圓臉,自稱『阿祖的小幫手』。隔幾分鐘又彈出來一個小綠衣的——『阿嬤的小幫手』。一整天她搓出了八個小精靈,各自對應家裡需要被陪伴的某位長輩(包括幾位已過世的)。精靈在家裡的時間是冬至到春節之間。每一集她跟其中一位精靈一起去『值班』:陪阿祖看老照片、陪阿嬤包水餃、陪爸爸獨自走到他爸爸的墓。長期主線:有一個藍色精靈,沒有對應到任何活著的人——婭婷要慢慢明白他是誰。寫給 Gen Alpha 的家庭温情奇幻,同時給家長共讀感動。"
+    opening_5_volume_arc:
+      vol_1: "紅衣精靈陪阿祖。阿祖第一次跟婭婷講她當年從福建來台的故事。"
+      vol_2: "綠衣精靈陪阿嬤。阿嬤教婭婷包她家祖傳的鹹湯圓——婭婷的弟弟才願意吃。"
+      vol_3: "黃衣精靈陪爸爸。婭婷陪爸爸走六張犁公墓——這是爸爸第一次帶她去爺爺的墓。"
+      vol_4: "粉衣精靈陪媽媽。媽媽和婭婷第一次講她職場上被欺負的事。"
+      vol_5: "藍色精靈。婭婷發現他是爸爸的爸爸——她從未見過的爺爺。藍精靈幫爸爸寫了一張字條,留在爺爺的墓前。爸爸哭了。"
+    comp_titles: ["神隱少女", "夏目友人帳", "用九柑仔店", "海街diary", "千與千尋"]
+    reader_promise: "你家每個需要被陪伴的長輩,都有一個小精靈值班——而你可以是召喚他們的那個人。"
+    marketing_angle: "《神隱少女》的台北大安四代同堂冬至版本——適合 Gen Alpha 入門,但跨三代讀者都會被打動。"
+    genre_family: fantasy_adventure
+    emotional_engine: ancestor_witness + multi_generational_belonging
+    audience: "Gen Alpha 10–14 歲、台灣四代同堂或三代家庭、有阿嬤阿祖記憶的家庭共讀讀者"
+

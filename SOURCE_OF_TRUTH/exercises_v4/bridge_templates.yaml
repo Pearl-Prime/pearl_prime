@@ -1,0 +1,145 @@
+# Bridge templates: transition the reader from narrative/teaching into exercise mode.
+# Keyed by exercise_type (from exercises_v4 registry).
+# Each type has full (2-3 sentences), lean (1 sentence), and gentle (post-emotional) variants.
+# The bridge prepares the reader mentally so the exercise doesn't feel abrupt.
+# DO NOT reuse: "Now, before you move on" / "Not to fix anything" / "Nothing has to change"
+
+version: 1
+
+templates:
+  _default:
+    full: >-
+      Let the practice start where the alarm is loudest.
+      It takes less than two minutes and requires nothing but attention.
+      Follow the steps and notice what your body does, not what you think it should.
+    lean: >-
+      Try this. One time. Notice what happens.
+    gentle: >-
+      Something was activated in that section. This practice gives the activation
+      somewhere to go. No fixing required. The body just needs a place to land.
+
+  00_breath_regulation:
+    full: >-
+      Do this with the part of your body that reacted first.
+      Breath is the one system you can regulate consciously and immediately.
+      Follow the rhythm. The shift, when it comes, will be physical before it is mental.
+    lean: >-
+      Bring your attention to your breath. Follow it for sixty seconds.
+    gentle: >-
+      Your body just processed something. The breath is already different than it was
+      two minutes ago. This practice works with that, not against it.
+
+  01_grounding_orientation:
+    full: >-
+      Bring the room back before you bring the next chapter in.
+      Your thoughts may still be in the last section. Your senses know where you
+      actually are. This practice uses that gap.
+    lean: >-
+      Look at one object in the room. Name its color and its edge.
+    gentle: >-
+      You have been somewhere that does not feel like the room you are sitting in.
+      Let your senses close the gap. Ground in the physical before the conceptual.
+
+  02_body_awareness_scan:
+    full: >-
+      Check in with your body before the next section loads.
+      Not to diagnose anything — to find out what is already there.
+      A scan takes ninety seconds and often surfaces tension you were carrying before you started reading.
+    lean: >-
+      Scan from shoulders to hands. Notice what you find. Do not fix it.
+    gentle: >-
+      The weight of what you just read lands somewhere in the body.
+      This practice finds where it landed — not to clear it, but to acknowledge it.
+
+  03_somatic_release_discharge:
+    full: >-
+      Before the next idea arrives, let the body complete what it started.
+      What was activated needs somewhere to go. A few seconds of deliberate movement
+      is faster than any thought exercise for discharging what language leaves behind.
+    lean: >-
+      Move your body once before you continue. Any movement counts.
+    gentle: >-
+      Your body may have held very still through that section.
+      Give it permission to move now. Not performance — whatever happens next in your shoulders, hands, or jaw.
+
+  04_nervous_system_downregulation:
+    full: >-
+      Let your nervous system shift one degree before the next page.
+      This is not relaxation — it is a deliberate recalibration so the next section
+      reaches you from a slightly steadier baseline.
+    lean: >-
+      Give your nervous system one beat to settle before you continue.
+    gentle: >-
+      That section asked something from your system.
+      Give your body permission to come down one notch. Not to forget what you read —
+      to hold it from a position that costs less to maintain.
+
+  05_nervous_system_upregulation:
+    full: >-
+      Wake your body up before you continue. The next section rewards presence,
+      and a few seconds of deliberate activation sharpens attention without raising
+      the alarm you are already trying to lower.
+    lean: >-
+      Bring energy into your body. Three breaths. Feet on the floor.
+    gentle: >-
+      If the last section left you somewhere flat or heavy,
+      let your body find a small signal of aliveness before we go on.
+      Not forced. Just enough to stay with what comes next.
+
+  06_vagal_stimulation_sound:
+    full: >-
+      Try making a sound — a hum, a tone, whatever comes.
+      It will feel strange. The strangeness is the point. Sound vibration reaches
+      a nerve that runs from brain to gut, and the shift is faster than any reasoning.
+    lean: >-
+      Hum for ten seconds. Trust the awkwardness.
+    gentle: >-
+      Your throat may feel tight after that section. A sound — any sound —
+      can release what words left compressed. You do not need a reason to make it.
+
+  07_self_contact_touch:
+    full: >-
+      Place a hand somewhere on your body. Not as a gesture — as a signal.
+      Skin touching skin and feeling the contact from both sides tells the nervous system
+      something that reasoning cannot replicate.
+    lean: >-
+      Place a hand on your chest or arm. Feel it from both sides.
+    gentle: >-
+      Your body may need to feel located after that section.
+      A hand placed anywhere it lands is the simplest version of "I am still here."
+
+  08_emotional_processing_completion:
+    full: >-
+      Stay with the sensation for a moment — not the story of it, the sensation.
+      Emotions complete their cycle when they are felt through, not when they are managed.
+      This practice stays with the feeling until it reaches its own landing.
+    lean: >-
+      Stay with the sensation. Do not interpret. Just feel it through.
+    gentle: >-
+      Something moved during that section. Give it space to finish.
+      Not to resolve it — to let it reach its natural landing instead of being
+      interrupted by what comes next.
+
+  09_embodied_intention_direction:
+    full: >-
+      Ask yourself one question and wait for your body to answer it — not your mind.
+      The answer will not arrive as a thought. It will arrive as a pull, a lean,
+      a tightening, or a release. Trust the physical signal over the verbal one.
+    lean: >-
+      Ask your body what it needs right now. Wait for the physical answer.
+    gentle: >-
+      Your mind may have opinions about what just happened.
+      Set those aside and ask your body. The body answers differently.
+      The answer may surprise you.
+
+  10_integration_return_to_baseline:
+    full: >-
+      Take one beat to feel what shifted — not to summarize it, to feel it.
+      Integration is not the same as understanding. It is the body registering
+      that the terrain changed, even slightly.
+    lean: >-
+      Land for a moment. Feel what is different from when you started this chapter.
+    gentle: >-
+      You have been through something in this section.
+      Give your body a quiet registration of what is different now.
+      Not a conclusion. Not a lesson. Just an honest accounting.

@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__burnout__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__depletion
+  name: Refill the Empty Well — for Managers
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Burnout Recovery: The Witnessing Practice'
+subtitle: How Corporate Managers Are Rewriting the Rules of Burnout
+cover_tagline: You stopped working hours ago. Your manager-brain didn't get the memo.
+description:
+  short_blurb: Burnout doesn't end when you close the laptop — not when part of you
+    is still scanning for the next fire at 11pm. This is a real-talk guide to the
+    hypervigilant manager-mind that never stands down, and how to put space between
+    you and the anxiety that runs the night shift.
+  long_description: 'It''s late. The work is done, the team is offline, the house
+    has gone quiet. And your mind is still at the office — replaying the Slack thread
+    you didn''t love, rehearsing tomorrow''s hard conversation, sweeping the org for
+    the problem that hasn''t happened yet. You are not on the clock. But the part
+    of you that watches for trouble never punched out, and you''ve half-forgotten
+    that switching it off was ever an option.
+
+
+    Burnout doesn''t only drain you; sometimes it leaves a circuit jammed in the on
+    position. You became the person everyone escalates to. You trained yourself to
+    spot the fire before the smoke, and now that radar will not power down — not on
+    vacation, not on a Sunday, not at two in the morning when it jolts you awake to
+    re-litigate a meeting from Thursday. The vigilance is why you''re good at the
+    job. It''s also why your shoulders haven''t dropped from around your ears in months,
+    and why rest, when you get it, doesn''t feel like rest.
+
+
+    The work here is to meet that watcher face to face. It''s a part of you that has
+    stood guard so long it now mistakes constant scanning for safety — as if letting
+    your attention rest for one hour would let the whole building burn. You won''t
+    silence it; that never works, and a part this loyal doesn''t respond to being
+    told to shut up. Instead you learn to catch it in the act. You notice the scanning
+    while it''s happening. You feel, maybe for the first time in a while, the gap
+    between the anxious narrator and the you who is listening to it. And you widen
+    that gap until there''s actual room to stand.
+
+
+    From inside that room, everything changes — not because the work got safer, but
+    because you are no longer fused to the alarm. A worry arrives and you get to decide
+    whether it''s worth acting on, instead of obeying it on reflex. The threat passes
+    through you rather than taking up residence. You can read the situation clearly
+    precisely because you''re not drowning in it.
+
+
+    This book won''t promise you a calm mind on command, and it won''t sell you a
+    meditation streak or a bedtime ritual that finally clicks the brain off. The watcher
+    is loud, practiced, and well-meaning; freedom isn''t deleting it but ceasing to
+    take its every order. What you walk away with is room — a deliberate gap between
+    you and the dread, wide enough that the next 11pm thought is information you can
+    weigh in the morning instead of an order you have to obey tonight.
+
+
+    You are not the night shift. You''re allowed to leave the post unguarded for a
+    few hours and trust that the building will still be standing when morning comes.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - managers
+  - burnout for managers
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — unhooking from the thoughts
+  that run on a loop
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — what chronic alertness does to a
+  human body
+- Burnout (Emily Nagoski & Amelia Nagoski) — completing the stress response so your
+  body can stand down
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

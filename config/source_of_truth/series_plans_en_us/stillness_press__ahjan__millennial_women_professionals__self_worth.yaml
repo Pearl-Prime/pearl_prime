@@ -1,0 +1,68 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stillness_press__ahjan__millennial_women_professionals__self_worth
+brand: stillness_press
+teacher: ahjan
+persona: millennial_women_professionals
+topic: self_worth
+byline_author: mira_santos
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__millennial_women_professionals__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__millennial_women_professionals__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will stop earning your way toward being enough and start
+  meeting the worth that was never actually in question — not by fixing yourself,
+  but by sitting down with the part of you that has been working overtime to prove
+  it.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Gifts of Imperfection (Brené Brown) — the same turn from proving your worth
+  to letting yourself be seen as you are, in a warmer and less clinical register
+- Radical Acceptance (Tara Brach) — shares the contemplative, self-compassion-first
+  approach to the belief that something is wrong with you, without the hustle gloss
+- Self-Compassion (Kristin Neff) — for the same high-achieving reader who treats herself
+  as a project; this series trades the exercises for a quieter, sit-with-it presence
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: late twenties to early forties
+  where_they_are: It's a Tuesday night, the apartment is quiet, and she's still half-composing
+    tomorrow's email in her head — replaying the meeting where she stayed silent,
+    scrolling a feed of people who seem to have it handled, certain that if she just
+    performed a little better, a little longer, the low hum of not-enough would finally
+    go quiet.
+  what_they_need: To recognize that her worth was never the thing being measured —
+    to feel, even once, what it is to rest in a value that no promotion, no approval,
+    and no comparison can add to or take away.
+  what_they_avoid: Hustle-culture confidence hacks, 'manifest your worth' affirmations
+    she doesn't believe, girlboss empowerment slogans, and any framework that turns
+    self-acceptance into one more project to optimize and fall behind on.
+series_voice_markers:
+  register: contemplative, spacious, grounded — an unhurried presence who has sat
+    in this same low hum herself and is not in any rush to fix you; never clinical,
+    never a coach, never a cheerleader
+  sentence_rhythm: unhurried and breath-paced; long settling sentences that open a
+    thought, then a short one that lets it land — room left between, the way silence
+    is left in a room
+  metaphor_family: stillness and settling water, breath and the pause between, open
+    ground, light coming through a window, the quiet of a room after everyone has
+    gone — never machinery, productivity, scoreboards, or self-improvement
+_needs_authoring: false

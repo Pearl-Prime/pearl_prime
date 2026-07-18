@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__self_worth__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__self_worth.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__worth_limits
+  name: Worth & Limits — for Students
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Building Self Worth: Carrying What You Can''t Say'
+subtitle: A Field Guide for Gen Alpha Students Navigating Self-Worth
+cover_tagline: The not-enough voice isn't new information. It's an old belief you
+  were handed. Put it down.
+description:
+  short_blurb: The voice that says you're not enough doesn't feel like an opinion,
+    it feels like a fact you've always known about yourself. This is a book for students
+    about the shame underneath that voice, the buried belief that something is wrong
+    with you at the core. We are not going to drown it out with positivity. We are
+    going to name where it actually came from and help you set down a weight that
+    was never yours to begin with.
+  long_description: 'The voice that says not enough doesn''t feel like a thought you
+    could argue with. It feels like a fact, something you''ve simply always known
+    about yourself, the way you know your own name. It''s there when you mess up and
+    it''s still there when you succeed, murmuring that the real you, the one underneath
+    the grades and the friends and the effort, is fundamentally not enough. And because
+    it feels exactly like the truth, you''ve never really questioned it. You''ve just
+    carried it around like part of your own body.
+
+
+    This book is for the student whose not-enough isn''t loud, it''s bone-deep. The
+    one for whom low self-worth isn''t a passing bad mood but a quiet, lifelong certainty
+    that something is wrong with them at the very core. If achievement never once
+    fills the hole, if praise slides straight off because it doesn''t match what you
+    already know about yourself, if you''ve felt for as long as you can remember that
+    you''re somehow less than everyone around you, not in any single way you could
+    point to but in every way at once, this is your book. That feeling has a name,
+    and the name is shame, and shame lies. It feels like the oldest truth about you,
+    but it was planted there, and you''ve been guarding it ever since.
+
+
+    We are not going to bury it under positivity, because you cannot affirm your way
+    out of a belief rooted this deep. Instead we name it for exactly what it is: shame,
+    the buried conviction that something is wrong with you, wearing low self-worth
+    as its everyday mask. Then we go down into it, slowly and without flinching, all
+    the way to where it first began, the moments and the messages that taught you
+    your worth was conditional, that the real you wasn''t enough to keep. We don''t
+    rush that descent, because the descent is the whole point of the book. And then
+    you come back up no longer mistaking the weight for who you are, because you''ve
+    finally seen it as something that was put into your hands, not something you were
+    born as.
+
+
+    This book won''t promise you''ll feel worthy by the final page, or that the voice
+    disappears for good, or that you''ll be optimized into tidy self-love. That isn''t
+    honest, and you have already had more than enough edits sold to you as the truth.
+
+
+    What it offers instead is this: the belief that you''re not enough was never once
+    a fact about you. It was a weight someone set in your hands a long time ago, before
+    you were old enough to know you were allowed to refuse it. You can set it down
+    now. The real you, the one the voice has been lying about this entire time, was
+    always enough. You were never the problem here. You never were.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  - inner critic
+  secondary:
+  - students
+  - self-worth for students
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- Daring Greatly (Brené Brown) — the defining secular book on shame and worthiness
+- The Gifts of Imperfection (Brené Brown) — releasing the belief that you have to
+  earn your worth
+- Chatter (Ethan Kross) — understanding and quieting the critical inner voice
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

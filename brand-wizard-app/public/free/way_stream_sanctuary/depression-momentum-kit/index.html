@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Momentum Kit | Waystream Sanctuary</title>
+  <meta name="description" content="Five action categories by energy cost. Start with zero effort. That is not a failure. Free from Waystream Sanctuary.">
+  <meta property="og:title" content="The Momentum Kit — Free Energy-Cost Checklist">
+  <meta property="og:description" content="Start where you are. Five categories, ten actions, any energy level. Free from Waystream Sanctuary — Inner Light Press.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0F;
+      --surface: #13131A;
+      --accent: #3B82F6;
+      --text: #F0EFE8;
+      --secondary: #8B8A82;
+      --border: rgba(240,239,232,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--secondary);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .capture-card p { color: var(--secondary); font-size: 14px; margin-bottom: 24px; }
+
+    .form-row { display: flex; flex-direction: column; gap: 12px; }
+
+    input[type="text"], input[type="email"] {
+      background: rgba(240,239,232,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: var(--secondary); }
+    input:focus { border-color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    #tool-section { display: none; }
+    #tool-section.visible { display: block; }
+
+    .note-banner {
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .counter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .counter-label { font-size: 13px; color: var(--secondary); }
+    .counter-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .category-block {
+      margin-bottom: 24px;
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cat-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Color coding */
+    .level-zero  .cat-dot { background: #6B7A8D; }
+    .level-zero  .cat-label { color: #6B7A8D; }
+    .level-vlow  .cat-dot { background: #5B87B8; }
+    .level-vlow  .cat-label { color: #5B87B8; }
+    .level-low   .cat-dot { background: #4A96D6; }
+    .level-low   .cat-label { color: #4A96D6; }
+    .level-mod   .cat-dot { background: #3B82F6; }
+    .level-mod   .cat-label { color: #3B82F6; }
+    .level-avail .cat-dot { background: #60A5FA; }
+    .level-avail .cat-label { color: #60A5FA; }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+
+    .checklist-item:hover { border-color: rgba(59,130,246,0.3); }
+
+    .checklist-item.done {
+      opacity: 0.5;
+    }
+
+    .checklist-item.done .item-text {
+      text-decoration: line-through;
+      color: var(--secondary);
+    }
+
+    .item-checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1.5px solid rgba(59,130,246,0.4);
+      background: transparent;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .checklist-item.done .item-checkbox {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checkmark {
+      display: none;
+      width: 11px;
+      height: 8px;
+    }
+
+    .checkmark path {
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .checklist-item.done .checkmark { display: block; }
+
+    .item-text {
+      font-size: 15px;
+      line-height: 1.5;
+      transition: color 0.2s;
+    }
+
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 14px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .cta-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 24px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-cta:hover { opacity: 0.88; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--secondary);
+      text-align: center;
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="way_stream_sanctuary" data-topic="depression" data-funnel-slug="depression-momentum-kit" data-post-experience-capture="1" data-ghl-webhook="">
+<div class="page-wrap">
+
+  <div class="wordmark">Waystream Sanctuary — Inner Light Press</div>
+
+  <h1>The Momentum Kit</h1>
+  <p class="subtitle">Actions sorted by energy cost. Start wherever you are.</p>
+
+  <div class="capture-card" id="capture-section">
+    <h2>Access the Free Momentum Kit</h2>
+    <p>No account. Opens directly in your browser.</p>
+    <form id="capture-form">
+      <div class="form-row">
+        <input type="text" placeholder="First name" autocomplete="given-name">
+        <input type="email" placeholder="Email address" required autocomplete="email">
+        <button type="submit" class="btn-primary">Access Free Momentum Kit</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="tool-section">
+
+    <div class="note-banner">
+      Start with zero effort. That is not a failure. That is a beginning.
+    </div>
+
+    <div class="counter-bar">
+      <span class="counter-label">Things done today</span>
+      <span class="counter-num" id="done-count">0</span>
+    </div>
+
+    <div id="checklist-wrap"></div>
+
+  </div>
+
+  <div class="cta-banner">
+    <p>Want the full system?</p>
+    <h3>Light Ahead Collection: Still Breathing — $0.99</h3>
+    <a class="btn-cta" href="https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief" rel="noopener">Get Book 1 for $0.99</a>
+  </div>
+
+  <footer>A free tool from Waystream Sanctuary — Inner Light Press</footer>
+</div>
+
+<script>
+  document.getElementById('capture-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nameEl = document.querySelector('#capture-form input[type="text"]');
+    var emailEl = document.querySelector('#capture-form input[type="email"]');
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    function revealTool() {
+      document.getElementById('capture-section').style.display = 'none';
+      document.getElementById('tool-section').classList.add('visible');
+    }
+    if (!window.PhoenixLead) {
+      revealTool();
+      return;
+    }
+    PhoenixLead.captureLead({
+      email: email,
+      first_name: name,
+      topic: 'depression',
+      funnel_slug: 'depression-momentum-kit',
+      quiz_id: 'micro_action_kit',
+      score: null,
+      score_band: null,
+      tags: ['source_freebie_quiz', 'quiz_depression', 'freebie_captured']
+    }).then(revealTool).catch(revealTool);
+  });
+
+  const categories = [
+    {
+      level: 'zero',
+      label: 'Zero Effort',
+      items: ['Put both feet on the floor.', 'Open a window.']
+    },
+    {
+      level: 'vlow',
+      label: 'Very Low',
+      items: ['Drink something.', 'Send one text.']
+    },
+    {
+      level: 'low',
+      label: 'Low',
+      items: ['Walk to a different room.', 'Read one page of anything.']
+    },
+    {
+      level: 'mod',
+      label: 'Moderate',
+      items: ['Go outside for 5 minutes.', 'Make one food item.']
+    },
+    {
+      level: 'avail',
+      label: 'Available',
+      items: ['Do the one small thing you\'ve been avoiding.', 'Tell someone one true thing about today.']
+    }
+  ];
+
+  const wrap = document.getElementById('checklist-wrap');
+  const countEl = document.getElementById('done-count');
+  let doneCount = 0;
+
+  categories.forEach(function(cat) {
+    const block = document.createElement('div');
+    block.className = 'category-block level-' + cat.level;
+
+    const header = document.createElement('div');
+    header.className = 'cat-header';
+    header.innerHTML = `<div class="cat-dot"></div><div class="cat-label">${cat.label}</div>`;
+    block.appendChild(header);
+
+    cat.items.forEach(function(item) {
+      const row = document.createElement('div');
+      row.className = 'checklist-item';
+      row.innerHTML = `
+        <div class="item-checkbox">
+          <svg class="checkmark" viewBox="0 0 11 8">
+            <path d="M1 4l3 3 6-6"/>
+          </svg>
+        </div>
+        <span class="item-text">${item}</span>
+      `;
+      row.addEventListener('click', function() {
+        const wasDone = row.classList.contains('done');
+        row.classList.toggle('done');
+        doneCount += wasDone ? -1 : 1;
+        countEl.textContent = doneCount;
+      });
+      block.appendChild(row);
+    });
+
+    wrap.appendChild(block);
+  });
+</script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script type="application/json" id="phoenix-evergreen-campaign-plan">
+{
+  "archetype_id": "micro_action_kit",
+  "bonus_pre_e3_benefit": "Gives the contact one more felt practice before the story email lands.",
+  "bonus_pre_e3_cta": "Open the bonus practice",
+  "bonus_pre_e3_html_template": "funnel/waystream_sanctuary/emails/email_bonus_pre_story.html",
+  "bonus_pre_e3_microcopy": "Send this before Email 3 only when welcome_depth is blank or missing.",
+  "bonus_pre_e3_send_if_welcome_depth_missing": true,
+  "bonus_pre_e3_short_description": "A pre-E3 bonus email for the welcome-depth fallback when GHL has no welcome_depth value.",
+  "bonus_pre_e3_title": "Bonus before the story: one extra depression practice",
+  "bonus_pre_e3_tool_name": "Body scan for the first small step",
+  "bonus_pre_e3_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1",
+  "brand_id": "way_stream_sanctuary",
+  "campaign_plan_id": "waystream_depression_momentum_kit_evergreen_v1",
+  "content_type": "thirty_day_tracker_pdf",
+  "e1_benefit": "Use it when depression starts to take over and you need one immediate step.",
+  "e1_cta": "Open the momentum kit",
+  "e1_microcopy": "No login wall. Keep this link for the moment you need it.",
+  "e1_short_description": "The free Waystream tool you requested for depression.",
+  "e1_title": "Your depression momentum kit is ready",
+  "e1_tool_name": "Depression Momentum Kit",
+  "e1_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/depression-momentum-kit/",
+  "e2_benefit": "Pair it with yesterday\u2019s tool so your body gets the signal twice.",
+  "e2_cta": "Try the body scan",
+  "e2_microcopy": "Do it once today. Notice the smallest shift.",
+  "e2_short_description": "A second practice that keeps the first reset from being a one-off.",
+  "e2_title": "A body scan for the first small step",
+  "e2_tool_name": "Body scan for the first small step",
+  "e2_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1",
+  "e3_benefit": "See the mechanism through a human moment instead of a lecture.",
+  "e3_cta": "Read the deeper path",
+  "e3_microcopy": "No pitch in this email. Just the story.",
+  "e3_short_description": "A short story about why the depression reset can work in real life.",
+  "e3_story_body": "A Waystream reader once opened Depression Momentum Kit in the middle of an ordinary day, not a dramatic breaking point. The old pattern was already moving: depression had started to feel like a command, and the body was treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It gives the body one repeatable cue that says, \"we can slow this down before it runs the whole day.\"",
+  "e3_title": "Why this works: a short depression story",
+  "e3_tool_name": "Transformation story",
+  "e3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e4_benefit": "Use it when you want the full journey, not only the free tool.",
+  "e4_book_title": "The Waystream Guide to Depression",
+  "e4_cta": "See the book",
+  "e4_microcopy": "The free tools are still yours. This is the next layer.",
+  "e4_short_description": "The first deeper Waystream book for this depression pattern.",
+  "e4_title": "Recommended for you: The Waystream Guide to Depression",
+  "e4_tool_name": "The Waystream Guide to Depression",
+  "e4_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e5_benefit": "Choose the next book by the kind of support you want right now.",
+  "e5_book1_note": "Start here if you want the main Waystream path for depression.",
+  "e5_book1_title": "The Waystream Guide to Depression",
+  "e5_book1_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e5_book2_note": "Use this as the second recommendation once the first path feels familiar.",
+  "e5_book2_title": "The Follow-Up Waystream Guide for Depression",
+  "e5_book2_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e5_book3_note": "Use this when you want the book path and free tools grouped together.",
+  "e5_book3_title": "The Depression Calm Bundle",
+  "e5_book3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e5_cta": "See the reading path",
+  "e5_microcopy": "Start with the first recommendation if you are unsure.",
+  "e5_short_description": "A short list of next reads for depression.",
+  "e5_title": "More Waystream books for depression",
+  "e5_tool_name": "Waystream reading path",
+  "e5_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e6_benefit": "Use this after the first book if you want a second angle on the same pattern.",
+  "e6_book_title": "The Follow-Up Waystream Guide for Depression",
+  "e6_cta": "Open recommendation 2",
+  "e6_microcopy": "Recommendation 2 is for continuity, not pressure.",
+  "e6_short_description": "A follow-up book recommendation for the next layer of depression.",
+  "e6_title": "Book 2 recommendation for depression",
+  "e6_tool_name": "The Follow-Up Waystream Guide for Depression",
+  "e6_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e7_benefit": "Use the bundle when you want the tools and books in one mental shelf.",
+  "e7_bundle_title": "The Depression Calm Bundle",
+  "e7_cta": "See the bundle path",
+  "e7_microcopy": "This is the cleanest path if you prefer everything in one place.",
+  "e7_short_description": "A bundle-style path that groups the next depression supports together.",
+  "e7_title": "Book 3 bundle path for depression",
+  "e7_tool_name": "The Depression Calm Bundle",
+  "e7_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e8_benefit": "Take the next step now if you know you want the deeper support.",
+  "e8_cta": "Take the next step",
+  "e8_last_chance_note": "This is the last direct book nudge in the depression freebie sequence.",
+  "e8_microcopy": "If not, keep the free tool. That still counts.",
+  "e8_short_description": "A final nudge before this depression sequence quiets down.",
+  "e8_title": "Last chance to keep the depression path close",
+  "e8_tool_name": "Last-chance reminder",
+  "e8_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief",
+  "e9_benefit": "Return to the simplest reset any time you need it.",
+  "e9_cta": "Reopen the free tool",
+  "e9_microcopy": "No new ask today. Just the tool again.",
+  "e9_short_description": "A still-here reminder with the original free tool link.",
+  "e9_title": "Still here: reopen Depression Momentum Kit",
+  "e9_tool_name": "Depression Momentum Kit",
+  "e9_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/depression-momentum-kit/",
+  "fallback_allowed": false,
+  "freebie_id": "thirty_day_tracker_v1",
+  "funnel_variant": "evergreen_freebie_v1",
+  "locale": "en_US",
+  "quiz_id": "micro_action_kit",
+  "source_page_slug": "depression-momentum-kit",
+  "status": "active",
+  "topic": "depression"
+}
+</script>
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+});
+</script>
+
+</body>
+</html>

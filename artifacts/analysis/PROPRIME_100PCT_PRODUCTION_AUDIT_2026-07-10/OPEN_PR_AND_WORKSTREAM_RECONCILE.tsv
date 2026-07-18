@@ -1,0 +1,31 @@
+id	type	surface	status	relevance_to_books_first	already_solves_gap	must_merge_before_launch	owner	recommended_disposition
+5489	pr	composite_regular/atoms	MERGED 2026-07-10	critical — thin-persona STORY/canonical gaps	partial — slot-keyed not engine-keyed	no	Pearl_Dev	merged-on-main
+5490	pr	composite_regular pipeline	OPEN CI-red	critical — spine default drift	yes — locks spine path	yes	Pearl_Dev	fix-ci-then-merge
+5492	pr	composite_regular quality	MERGED 2026-07-10	high — anxiety enrichment proof	yes — contract-v1 on main	no	Pearl_Prime	merged-on-main
+5494	pr	composite_regular content	MERGED 2026-07-10	medium — new arc slice	yes — arc on main	no	Pearl_Prime	merged-on-main
+5237	pr	atoms quality	OPEN medium	medium — cohesion/stub lint	partial	no	Pearl_Editor	merge-if-green
+5495	pr	translation non-CJK	MERGED 2026-07-10	high — first pt-BR es-US atoms	pilot only	no	Pearl_Localization	merged-on-main
+5496	pr	translation ja-JP	MERGED 2026-07-10	high — Ollama path + 5 atoms	pilot only	no	Pearl_Localization	merged-on-main
+5497	pr	translation CI	MERGED 2026-07-10	medium — coverage counting fix	yes — infra	no	Pearl_Dev	merged-on-main
+5498	pr	translation CI	MERGED 2026-07-10	medium — banned-key workflow fix	yes — policy	no	Pearl_Dev	merged-on-main
+5499	pr	translation zh-TW	MERGED 2026-07-10	high — drift reconcile + 6 atoms	pilot only	no	Pearl_Localization	merged-on-main
+5500	pr	translation zh-CN	MERGED 2026-07-10	high — stage-1 gen_z gaps	pilot only	no	Pearl_Localization	merged-on-main
+5501	pr	translation ja-JP teacher-bank	OPEN teacher-gates-red	medium — 51 teacher atoms	pilot only	no	Pearl_Localization	fix-ci-then-merge
+5503	pr	atoms content	MERGED 2026-07-10	medium — overthinking stubs	yes	no	Pearl_Writer	merged-on-main
+5504	pr	translation ko-KR	MERGED 2026-07-10	high — Stage-1 gen_z anxiety slice	pilot only	no	Pearl_Localization	merged-on-main
+5507	pr	translation ja-JP zh-TW	MERGED 2026-07-10	medium — overthinking retranslation	pilot only	no	Pearl_Localization	merged-on-main
+5508	pr	CI atoms	MERGED 2026-07-10	medium — parse-sweep stub gate	yes	no	Pearl_Dev	merged-on-main
+5502	pr	CI policy	OPEN low	low — dashscope workflow audit	no	no	Pearl_DevOps	merge-when-green-not-books
+5206	pr	audit pearl_prime	OPEN medium	evidence — journey gap diagnosis	partial — Path B scope	no	Pearl_PM	consume-do-not-merge-for-audit
+5295	pr	audit system redundancy	OPEN low	evidence only — not books roadmap	no	no	owner	do-not-merge
+4861	pr	audit governance	OPEN low	evidence — best-path canaries	no	no	Pearl_Architect	consume-do-not-merge
+3166	pr	CI budget	OPEN draft low	none — operator gated	no	no	operator	do-not-merge
+5073-5503-pr-catalog-skeletons	pr	catalog listings	OPEN ~150 low/negative — listings not EPUBs	no	no	catalog-fanout	merge-on-schedule-not-launch
+proj_state_convergence_20260328	workstream	repo coordination	active	high — parent program	partial	Pearl_PM	continue
+ws_cjk_atom_translation_qwen25_20260420	workstream	translation	active high	for books — locale atom depth in flight	yes — July 10 pilots landed	no	Pearl_Localization	continue-ja-zh-cn-ko-backlog
+ws_translation_source_pack_20260709	workstream	translation	completed	medium — planning pack only	yes — #5480	no	Pearl_Localization	completed
+ws_manga_first_ship_20260425	workstream	manga	active low for books	low — mecha proof landed	no	Pearl_Dev	defer-post-books-wave1
+MUSIC-MODE-BRAND-INTEGRATION-V1	workstream	music_mode	cap active	medium — parallel track	partial (infra)	no	Pearl_Editor	phase-A-after-book-wave1
+ws_bestseller_pipeline_default_path_b_20260425	workstream	composite_regular quality	proposed/needed	high — SCENE story_schedule wiring	no	yes	Pearl_Dev	dispatch-post-5206
+ws_auto_plan_ssot_refactor_20260505	workstream	format SSOT	proposed low	low	no	no	Pearl_Dev	later
+ws_lfs_setup_20260410	workstream	devops	active low	low	partial (#5306 pilot)	no	owner-gated	later

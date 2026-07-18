@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-03-28T04:13:14Z",
+  "workflow_name": "External promotion verify",
+  "workflow_file": ".github/workflows/ei-v2-learning.yml",
+  "repository": "",
+  "run_id": "",
+  "run_attempt": "",
+  "run_number": "",
+  "ref": "",
+  "sha": "",
+  "event_name": "",
+  "run_url": "",
+  "out_path": "artifacts/release/workflow_run_manifest.json",
+  "artifacts": [
+    {
+      "path": "artifacts/recommendations/ranked.json",
+      "name": "ranked.json",
+      "exists": true
+    },
+    {
+      "path": "artifacts/recommendations/summary.md",
+      "name": "summary.md",
+      "exists": true
+    }
+  ],
+  "artifact_paths": [
+    "artifacts/recommendations/ranked.json",
+    "artifacts/recommendations/summary.md"
+  ]
+}

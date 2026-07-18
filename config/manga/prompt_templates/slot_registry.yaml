@@ -1,0 +1,87 @@
+# Slot registry — machine-readable canonical source for prompt-template slots.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §5.9 (v0.5.1 additive-safe semantics).
+#
+# Rules (compiler enforces; see SLOTS.md for prose):
+#   - Templates may reference any slot declared here.
+#   - Required slots: missing value at compile time = FATAL.
+#   - Optional slots: missing value = use `default_when_missing`.
+#   - Templates referencing slots NOT in this registry = FATAL.
+#   - Contract providing slots not in any template's references = WARN (additive-safe).
+#
+# Slot naming: dotted-path semantic, e.g. "safe_zone.margin.top". Templates use {dotted.path}.
+
+schema_version: "1.0.0"
+
+slots_by_layer:
+
+  L0:  # Foundation backdrop — full scene, no people, no hero objects
+    required:
+      - "scene.description"
+      - "scene.subject_bbox_region_clause"
+      - "scene.scene_specific_composition_clause"
+      - "scene.forbidden_objects_clause"
+      - "light_rig.prompt_clause"
+      - "style_state.line_weight_clause"
+      - "style_state.wash_softness_clause"
+      - "style_state.tonal_density_clause"
+      - "style_state.shading_aggression_clause"
+      - "genre.drawing_tradition_clause"
+      - "genre.forbidden_grammar_clause"
+      - "resolution.width"
+      - "resolution.height"
+    optional:
+      "scene.atmospheric_clause":
+        default_when_missing: ""
+        description: "Extra atmospheric notes (e.g., 'gentle dust motes catching light')"
+      "scene.palette_clause":
+        default_when_missing: ""
+        description: "Series-specific palette override; defaults to genre palette if absent"
+
+  L2:  # Character layer — v0.6: scene-context render, post-cutout via rembg
+    required:
+      - "character.render_prompt_base"
+      - "character.negative_prompt_base"
+      - "continuity.pose_clause"
+      - "continuity.gaze_clause"
+      - "continuity.hand_state_clause"
+      - "continuity.emotional_clause"
+      - "continuity.expression_dial"
+      - "safe_zone.framing_clause"
+      - "safe_zone.subject_zone_pct_str"
+      - "safe_zone.margin.top"
+      - "safe_zone.margin.bottom"
+      - "safe_zone.margin.left"
+      - "safe_zone.margin.right"
+      - "safe_zone.shoulder_margin_clause"
+      - "archetype.scene_context_clause"          # v0.6.1: sourced from archetype.layer_render_contract.L2_char.scene_context_clause (per-archetype short scene-grounding directive)
+      - "archetype.attached_props_clause"         # v0.6.1: declares what props/objects the archetype expects the character to interact with (e.g., "holding a warm ceramic cup" for tea_beat_close_up; "" for character_quiet_face)
+      - "light_rig.prompt_clause"
+      - "style_state.line_weight_clause"
+      - "style_state.wash_softness_clause"
+      - "style_state.tonal_density_clause"
+      - "style_state.shading_aggression_clause"
+      - "genre.forbidden_grammar_clause"
+      - "resolution.width"
+      - "resolution.height"
+    optional:
+      "character.wardrobe_override":
+        default_when_missing: ""
+        description: "Per-panel wardrobe variation (rare; mostly inherited from character_design)"
+      "continuity.breath_phase_clause":
+        default_when_missing: ""
+        description: "For somatic archetypes (chest_breath_micro etc.) only"
+      "archetype.background_blur_clause":
+        default_when_missing: "soft-focus background, shallow depth of field, subject in sharp foreground, background atmospherically blurred and supportive (not competing detail)"
+        description: "v0.6.1: how aggressively to blur the scene context behind the subject; archetype may override default"
+
+  # L1, L3, L4 templates land in Phase C alongside inventory authoring.
+  # Schema-reserved here as empty so the registry shape is stable.
+  L1:
+    required: []
+    optional: {}
+  L3:
+    required: []
+    optional: {}
+  L4:
+    required: []
+    optional: {}

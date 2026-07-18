@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.local/schemas/research/research_brief_v1.schema.json",
+  "title": "Pearl Research Brief v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "brief_id",
+    "title",
+    "input_summary",
+    "issue_description",
+    "what_is_broken",
+    "decision_to_make",
+    "unknowns",
+    "missing_evidence",
+    "exact_questions",
+    "hypotheses_to_test",
+    "constraints",
+    "markets_locales_platforms",
+    "good_output_should_include",
+    "source_rules",
+    "explicit_exclusions",
+    "phoenix_omega_context",
+    "routing_preview",
+    "raw_context_excerpt"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "brief_id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string" },
+    "created_at_utc": { "type": "string" },
+    "input_summary": { "type": "string" },
+    "issue_description": { "type": "string" },
+    "what_is_broken": { "type": "array", "items": { "type": "string" } },
+    "decision_to_make": { "type": "array", "items": { "type": "string" } },
+    "unknowns": { "type": "array", "items": { "type": "string" } },
+    "missing_evidence": { "type": "array", "items": { "type": "string" } },
+    "exact_questions": { "type": "array", "items": { "type": "string" } },
+    "hypotheses_to_test": { "type": "array", "items": { "type": "string" } },
+    "constraints": { "type": "array", "items": { "type": "string" } },
+    "markets_locales_platforms": {
+      "type": "object",
+      "required": ["markets", "locales", "platforms"],
+      "properties": {
+        "markets": { "type": "array", "items": { "type": "string" } },
+        "locales": { "type": "array", "items": { "type": "string" } },
+        "platforms": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "routing_controls": {
+      "type": "object",
+      "properties": {
+        "explicit_markets": { "type": "array", "items": { "type": "string" } },
+        "explicit_locales": { "type": "array", "items": { "type": "string" } },
+        "explicit_platforms": { "type": "array", "items": { "type": "string" } },
+        "hint_precedence": { "type": "string" }
+      }
+    },
+    "good_output_should_include": { "type": "array", "items": { "type": "string" } },
+    "source_rules": {
+      "type": "object",
+      "required": ["preferred_sources", "acceptable_sources", "weak_sources", "source_languages"],
+      "properties": {
+        "preferred_sources": { "type": "array", "items": { "type": "string" } },
+        "acceptable_sources": { "type": "array", "items": { "type": "string" } },
+        "weak_sources": { "type": "array", "items": { "type": "string" } },
+        "source_languages": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "explicit_exclusions": { "type": "array", "items": { "type": "string" } },
+    "phoenix_omega_context": {
+      "type": "object",
+      "required": ["affected_subsystems", "relevant_files", "implementation_constraints"],
+      "properties": {
+        "affected_subsystems": { "type": "array", "items": { "type": "string" } },
+        "relevant_files": { "type": "array", "items": { "type": "object" } },
+        "implementation_constraints": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "routing_preview": {
+      "type": "object",
+      "required": ["likely_provider", "routing_signals"],
+      "properties": {
+        "likely_provider": { "type": "string" },
+        "routing_signals": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "raw_context_excerpt": { "type": "string" }
+  },
+  "additionalProperties": true
+}

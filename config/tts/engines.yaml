@@ -1,0 +1,49 @@
+# TTS engine config for freebie audio (asset pipeline).
+# Authority: V4 Freebies + Immersion Ecosystem plan §3.3.
+# mapping: freebie_type → engine. Lock voices: ElevenLabs "Rachel", OpenAI "nova".
+
+engines:
+  elevenlabs:
+    api_key_env: ELEVENLABS_API_KEY
+    default_voice: "Rachel"
+    voices:
+      guided: "Rachel"
+      journal: "Rachel"
+  openai:
+    api_key_env: OPENAI_API_KEY
+    default_voice: "nova"
+    voices:
+      affirmations: "nova"
+      default: "nova"
+  cosyvoice2:
+    base_url_env: COSYVOICE_URL
+    default_url: "http://192.168.1.112:9880"
+    supported_languages: [zh-CN, zh-TW, zh-HK, ja, ko, en]
+    voice_cache_endpoint: "/api/v3/voices/"
+    synthesis_endpoint: "/api/v3/cross-lingual/with-cache"
+    health_endpoint: "/api/v1/health"
+    built_in_voices: [chinese_female, chinese_male, japanese_male, cantonese_female, english_female, english_male, korean_female]
+    notes: "CosyVoice2 on Pearl Star. Zero-shot cloning via reference audio."
+  edge_tts:
+    api_key_env: null  # Free Microsoft service, no API key needed
+    languages: [zh-CN, zh-TW, ja, ko, en, es, fr, de, id, pt-BR, hu]
+    voices:
+      zh-CN: "zh-CN-XiaoxiaoNeural"
+      zh-TW: "zh-TW-HsiaoChenNeural"
+      ja: "ja-JP-NanamiNeural"
+      ko: "ko-KR-SunHiNeural"
+
+mapping:
+  guided_audio: elevenlabs
+  audio_journal_prompts: elevenlabs
+  affirmations_audio: openai
+  mini_audio: openai
+  default: openai
+
+# CJK presenter audio routing (used by generate_presenter_audio.py)
+cjk_mapping:
+  briefing_jp: cosyvoice
+  briefing_kr: cosyvoice
+  briefing_cn: cosyvoice
+  briefing_tw: cosyvoice
+  cjk_fallback: edge_tts

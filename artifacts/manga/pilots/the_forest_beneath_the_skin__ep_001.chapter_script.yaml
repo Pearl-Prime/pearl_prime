@@ -1,0 +1,110 @@
+# PILOT — TEACHER-MODE manga (Tier-1 authored). One mode only: TEACHER. No music.
+# Catalog series "The Forest Beneath the Skin" (stillness_press / dark_fantasy).
+# Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md): dark_fantasy teacher-vessel = the Keeper
+# + the living land. ahjan's body_first_not_mind doctrine is EARNED through the genre,
+# never spoken as advice. Reader contract: taught. (Render still gated; this is the STORY.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: stillness_press__en_US__dark_fantasy__series02
+catalog_title: "The Forest Beneath the Skin"
+chapter_id: ep_001
+title: "The Forest Beneath the Skin — Episode 1: The Warden Who Would Not Sleep"
+mode: teacher                         # XOR — never music
+manga_author: Hana Tidecalm           # teacher-archetype EI author (ahjan lineage)
+teacher_id: ahjan
+teacher_doctrine_anchor: body_first_not_mind
+brand_id: stillness_press
+genre: dark_fantasy
+topic: somatic_healing                # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Teacher-mode 3-beat skeleton (doctrine earned, not inserted):
+mode_beats:
+  wound: page_1-2   (the doctrine's ABSENCE — the Warden fights the body it should feel)
+  turn:  page_4-5   (the teaching LANDS through a genre action — a hand on the ground)
+  renewal: page_6   (begin again — the world changes because the Warden now knows)
+
+main_characters:
+  - id: rin
+    name: Rin
+    role: >-
+      protagonist — the Warden of the inner forest. Walls off the overgrowth, sword
+      always drawn, never sleeps. (Unstated: the body that has braced for a war that
+      is not happening.)
+    visual_anchor: bark-and-iron plate grown too tight at the shoulders; dark-ringed eyes; chipped blade; one jade leaf caught in the hair.
+  - id: keeper
+    name: The Keeper                  # dark_fantasy TEACHER-VESSEL
+    role: >-
+      the doctrine, as a character. Old, calm, sits more than stands; watches the
+      forest, not Rin. Speaks ahjan's body-first doctrine as observation, never advice.
+    visual_anchor: moss-grey robe, bare feet on roots, hands open on the knees, eyes half-closed.
+  - id: the_vigil
+    name: The Vigil                   # the monster = hypervigilance; cannot be cut, only met
+    role: a pale many-eyed stag-wolf that never blinks and mirrors Rin's bracing exactly.
+
+scene_palette:
+  primary: deep forest indigo + black bark
+  secondary: cold mist grey-blue (the held breath)
+  accent: jade green (living roots; the leaf; the dawn that comes)
+  turn_palette: dawn-gold through the canopy (pages 5-6 only)
+
+pages:
+  # ── WOUND: the Warden fights the body it should feel ───────────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — the body as a dark-fantasy realm; the wall = bracing",
+         scene: "Splash from above. A vast forest whose trees are veins and whose canopy is a cage of pale ribs; roots glow faint jade like a slow pulse. A seam of thorned iron barricades, hand-built, scars the living woods. Mist sits low and tight — a breath held too long."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the one who fights the body instead of feeling it",
+         scene: "RIN, the Warden, patrols the barricade in bark-iron plate too tight at the shoulders, blade drawn, eyes ringed dark. The forest behind is beautiful and wild; Rin's back is turned to it, facing only the wall."}
+      - {panel_id: ep001_003, beat_type: spatial, intent: "hypervigilance — the strike comes before the seeing (doctrine's ABSENCE)",
+         scene: "Close: a white-knuckled hand on the hilt. A soft vine reaches up and brushes the iron; Rin flinches and strikes it down before looking. The cut weeps jade sap."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: arrival, intent: "the monster IS Rin's bracing, given a body",
+         scene: "From the mist steps THE VIGIL — pale, antlered, its flank scattered with open eyes that never blink. It stops at the wall and mirrors Rin's stance exactly. It does not charge; it waits to be watched back."}
+      - {panel_id: ep001_005, beat_type: action, intent: "control breeds more control — force multiplies the alarm",
+         scene: "Rin swings; the blade passes through mist, and where it cuts, the Vigil splits into three, then nine, each with the same unblinking eyes. The harder Rin fights, the more of it there is."}
+      - {panel_id: ep001_006, beat_type: collapse, intent: "the body reaches to soothe ON ITS OWN — doctrine SHOWN, a page before the Keeper names it (earned, not lectured)",
+         scene: "Rin drops to one knee, blade-tip dragging the roots, edges of the panel blurring with sleeplessness. And — unbidden, unnoticed by Rin — the free hand drifts up and presses flat to the chest. The hand knew to reach for the heart before Rin did. The nine Vigils settle around, patient, unhurt."}
+
+  # ── The Keeper (teacher-vessel) — body-first, as observation ───────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: character, intent: "the teacher watches the body, not the story about it",
+         scene: "Low among the roots, easy to miss: THE KEEPER, seated, moss-grey, bare feet, hands open, half-closed eyes on the forest — not on Rin, not on the Vigil, as though both were weather."}
+      - {panel_id: ep001_008, beat_type: dialogue, intent: "DOCTRINE (ahjan) — stop correcting; start seeing",
+         scene: "The Keeper speaks without turning. KEEPER: \"You keep sharpening the blade against the candle. You have never once watched the candle.\""}
+      - {panel_id: ep001_009, beat_type: dialogue, intent: "the symptom is a signal, not an enemy",
+         scene: "RIN (ragged, gesturing at the nine Vigils): \"It attacks me. It never stops.\"  KEEPER (quiet): \"It is not attacking. It is telling you what this ground has carried. You stopped listening — so it learned to shout.\""}
+
+  # ── TURN: the teaching lands through a genre action ────────────────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: revelation, intent: "BODY_FIRST_NOT_MIND — rendered as the land's pulse",
+         scene: "The Keeper lays one palm flat on the forest floor. Beneath the soil the jade roots pulse — a heartbeat made visible, spreading under Rin's knees too. KEEPER: \"It knew before you did. It always knows first. The mind walks in late and calls it panic, and takes the credit for arriving.\""}
+      - {panel_id: ep001_011, beat_type: choice, intent: "the first time the Warden touches the body instead of arming it",
+         scene: "Rin stares at the blade, then at the warm pulsing ground — and slowly, unsure, lays a bare hand against the roots. The earth is warm. Behind, the thorned iron wall groans, strained, as if something it was holding shut has begun, slightly, to give."}
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: turn, intent: "meet the bracing instead of fighting it (noticing without correcting)",
+         scene: "Rin does not raise the blade. Rin breathes — one full, shaking breath — and looks at the nearest Vigil completely, without trying to change it. Eye to too-many-eyes. For the first time, Rin does not flinch."}
+      - {panel_id: ep001_013, beat_type: release, intent: "hypervigilance, finally allowed to lie down",
+         scene: "The Vigil's many eyes soften and close, one by one. The great pale creature folds its legs and lies down in the roots beside Rin — not gone, but resting. The nine reflections sink back into one."}
+      - {panel_id: ep001_014, beat_type: transformation, intent: "the defenses were never the enemy — they become the growth",
+         scene: "The thorned iron wall blooms: where Rin hammered barricades, branches bud and flower; the seam knits over with jade leaves. Mist lifts off the canopy like a held breath let go. Dawn-gold pours through the ribs above."}
+
+  # ── RENEWAL: begin again ───────────────────────────────────────────────────
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_015, beat_type: resolution, intent: "not fixed — believed",
+         scene: "Wide, breathing. The forest still vast, still wild, but lighter, mist thinned to gold. Rin sits among the roots, blade laid down, one hand on the chest, eyes closed. The Vigil sleeps nearby. The Keeper is already small in the distance, walking on, having asked for nothing."}
+      - {panel_id: ep001_016, beat_type: close, intent: "TEACHER close — body-first as benediction, not instruction",
+         scene: "Final panel. A single new jade root unfurls where the wall used to stand. Small caption, the Keeper's voice, like a closing chord: \"Begin again. The body has been waiting, this whole time, to be believed.\""}
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine never appears as a self-help line; it is dramatized
+  through the dark_fantasy vessel (Keeper + living land + the Vigil that can only be MET,
+  not cut). If this were music-mode it would have NO Keeper and NO doctrine — a song/
+  sound-motif would carry the same arc wordlessly (see the_cockpit_remembers_the_song).

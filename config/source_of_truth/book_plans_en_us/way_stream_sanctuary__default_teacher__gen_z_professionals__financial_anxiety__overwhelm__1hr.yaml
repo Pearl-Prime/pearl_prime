@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__financial_anxiety__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__steady_ground__1hr
+  name: Steady Ground — for Young Professionals (One-Hour)
+installment_number: 1
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Financial Anxiety: The Overwhelm Response (1)'
+subtitle: A Field Guide for Gen Z Professionals Navigating Financial Anxiety
+cover_tagline: Rent, loans, the group dinner, your future — all due at once, in your
+  chest.
+description:
+  short_blurb: It's not one bill. It's all of them, plus the ones coming, plus the
+    future you can't see your way into. This is a one-hour money anxiety reset for
+    the young professional drowning in financial demands that never line up neatly.
+  long_description: 'The notification comes in and your whole chest tightens before
+    you''ve even read the number. Rent. Then the student loan. Then the card you swore
+    you''d pay off. Then someone in the group chat picks a restaurant that costs a
+    day''s pay, and somewhere underneath all of it is the bigger one you can''t even
+    look at directly: the future, retirement, a down payment, the sense that everyone
+    else got a manual you never received. This book is for the young professional
+    drowning not in a single money problem, but in the sheer pileup of them, all due,
+    all at once, all in your body.
+
+
+    Financial overwhelm isn''t the same as being broke. You might be doing okay on
+    paper and still feel underwater, because the demands don''t arrive politely one
+    at a time, they swarm. Your brain tries to hold rent and loans and the cost of
+    just existing in your twenties all in the same anxious breath, and it floods.
+    You freeze. You avoid the banking app for a week. You''re not irresponsible. You''re
+    a person being asked to do high-stakes math with no margin and a constant tide
+    of ''you should already have this figured out.''
+
+
+    In one hour, this isn''t a budgeting course. It''s a way to stop drowning long
+    enough to breathe. You''ll recognize the specific feeling of every financial demand
+    landing at once, and name it in the moment instead of reading it as proof you''re
+    failing at adulthood. Then you''ll go down into the overwhelm instead of trying
+    to spreadsheet your way out of the panic, because the dread isn''t really about
+    any one number, it''s about believing you have to solve your entire financial
+    life in a single sitting. And you''ll come back with a steadier body and a clearer
+    sense of what actually needs you today versus what your anxiety dragged forward
+    from five years out.
+
+
+    This will not promise to fix your finances. It will not hand you a get-rich plan,
+    a debt-payoff hack, or a budgeting app that makes the demands stop swarming, because
+    the real problem in this moment isn''t your money, it''s the flood. No morning
+    routine. No reframe where crushing financial pressure becomes ''motivation.''
+
+
+    What it will give you is the difference between a hard money month and a flooded
+    nervous system, and a way back to solid ground when the tide comes in again. You
+    don''t have to hold every bill in your chest at the same time. You''re allowed
+    to face one. You''re allowed to set the rest down until it''s actually their turn.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - young professionals
+  - money anxiety for young professionals
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- The Psychology of Money (Morgan Housel) — reframes money as behavior and emotion,
+  not just math
+- Your Money or Your Life (Vicki Robin & Joe Dominguez) — secular reset of your whole
+  relationship to earning and spending
+- Four Thousand Weeks (Oliver Burkeman) — on the impossibility of solving an entire
+  future in one anxious sitting
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

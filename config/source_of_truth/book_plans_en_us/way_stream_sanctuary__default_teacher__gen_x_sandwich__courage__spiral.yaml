@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__courage__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__courage.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__brave_world
+  name: Brave in the World — for the Sandwich Generation
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Building Courage: Escaping the Mental Loop (1)'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Courage for Gen X Sandwich (Breaking the Thought Loop)
+cover_tagline: One unsent text. Four hours of your mind running it into the ground.
+description:
+  short_blurb: 'You didn''t say the thing — and now your mind won''t stop rehearsing
+    every version of what happens if you do. This book is about the spiral: the way
+    one held-back sentence becomes a thousand thoughts that keep you up, eat the day,
+    and convince you the conversation is more dangerous than it is. It teaches you
+    to step out of the loop without having to win it.'
+  long_description: 'It started with one thing you didn''t say to your sister about
+    the money, or to your mother about the move, or to your teenager about the thing
+    you saw. You let it pass. And your mind took that one unspoken sentence and spun
+    it into a thousand: what they''ll say, what you''ll say back, what it means about
+    the last twenty years, how it goes wrong, how it ends the relationship, how it''s
+    already too late. Three hours later you''re still in it, and you haven''t said
+    a word out loud.
+
+
+    This book is for you — the one holding aging parents and growing kids at once,
+    lying awake while your brain litigates a conversation that hasn''t happened. You
+    are not overthinking because you''re weak. You''re caught in a loop that feels
+    like problem-solving and is actually just suffering on repeat, and the unsaid
+    thing is the fuel it runs on.
+
+
+    The spiral is the exact engine here. One thought becomes a thousand because the
+    mind treats every imagined version as something it has to resolve before you''re
+    allowed to rest. But the loop has no exit inside itself — every lap spawns the
+    next, and "figuring it out" is the trap wearing a helpful face.
+
+
+    Getting free of it takes three moves. Recognition: you learn to catch the spiral
+    early, to feel the moment one thought starts cloning itself, and to name it for
+    what it is instead of mistaking it for thinking. Descent: instead of fighting
+    the thoughts or trying to win the argument in your head, you go down underneath
+    them to the thing you''re avoiding saying — because the loop is almost always
+    circling a sentence you won''t let yourself speak. Integration: you come back
+    able to step out of the rehearsal and into the actual conversation, where one
+    real exchange ends what a thousand imagined ones never could.
+
+
+    This book will not teach you to stop your thoughts. It won''t promise a quiet
+    mind or hand you a technique that shuts the loop off on command. The spinning
+    may always start. What changes is that you stop boarding it. You stop treating
+    every lap as required.
+
+
+    No thought logs. No thought-stopping drills. No "just let it go." Just a clear
+    account of how the loop actually works and where the door out of it is — usually
+    the conversation you''ve been spiraling to avoid.
+
+
+    The thousand thoughts are not the truth. They''re one held breath, multiplied.
+    You''re allowed to say the one real thing and let the rest fall quiet.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  - brave
+  secondary:
+  - the sandwich generation
+  - courage for the sandwich generation
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: elena_petrova
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — secular take on the loop and
+  not boarding every thought.
+- Unwinding Anxiety (Judson Brewer) — neuroscience-grounded map of how worry loops
+  self-perpetuate.
+- Chatter (Ethan Kross) — the science of the inner spiral and how to step out of it.
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

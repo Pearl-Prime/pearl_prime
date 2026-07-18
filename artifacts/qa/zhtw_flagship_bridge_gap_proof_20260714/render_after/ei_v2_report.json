@@ -1,0 +1,442 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "status": "PASS",
+  "composite": 0.6621,
+  "chapter_count": 12,
+  "chapters": [
+    {
+      "chapter_index": 1,
+      "word_count": 714,
+      "composite": 0.6384,
+      "therapeutic_value": 0.6,
+      "emotional_coherence": 1.0,
+      "engagement": 0.5167,
+      "chapter_journey": 0.5,
+      "cohesion": 0.8,
+      "listen_experience": 0.3711,
+      "marketability": 0.3981,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4681,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch0",
+          "id_b": "ch10",
+          "similarity": 0.3049,
+          "prose_similarity": 0.0715,
+          "evidence": {
+            "ngram_overlap": 0.0042,
+            "char_ngram_overlap": 0.2287,
+            "structural_similarity": 0.4765,
+            "beat_similarity": 0.6
+          }
+        },
+        "max_prose_similarity": 0.0722,
+        "max_ngram_overlap": 0.0052
+      }
+    },
+    {
+      "chapter_index": 2,
+      "word_count": 1185,
+      "composite": 0.6417,
+      "therapeutic_value": 0.45,
+      "emotional_coherence": 1.0,
+      "engagement": 0.475,
+      "chapter_journey": 0.8333,
+      "cohesion": 0.62,
+      "listen_experience": 0.3684,
+      "marketability": 0.473,
+      "safety_compliance": 0.9,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.5688,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch1",
+          "id_b": "ch11",
+          "similarity": 0.3338,
+          "prose_similarity": 0.0869,
+          "evidence": {
+            "ngram_overlap": 0.0039,
+            "char_ngram_overlap": 0.2804,
+            "structural_similarity": 0.5614,
+            "beat_similarity": 0.6
+          }
+        },
+        "max_prose_similarity": 0.0873,
+        "max_ngram_overlap": 0.0045
+      }
+    },
+    {
+      "chapter_index": 3,
+      "word_count": 1391,
+      "composite": 0.7276,
+      "therapeutic_value": 0.8,
+      "emotional_coherence": 1.0,
+      "engagement": 0.7833,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.92,
+      "listen_experience": 0.3507,
+      "marketability": 0.3958,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4725,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch2",
+          "id_b": "ch5",
+          "similarity": 0.3634,
+          "prose_similarity": 0.0955,
+          "evidence": {
+            "ngram_overlap": 0.0106,
+            "char_ngram_overlap": 0.2937,
+            "structural_similarity": 0.4626,
+            "beat_similarity": 0.8
+          }
+        },
+        "max_prose_similarity": 0.0955,
+        "max_ngram_overlap": 0.0106
+      }
+    },
+    {
+      "chapter_index": 4,
+      "word_count": 1203,
+      "composite": 0.6608,
+      "therapeutic_value": 0.6,
+      "emotional_coherence": 1.0,
+      "engagement": 0.3833,
+      "chapter_journey": 0.8333,
+      "cohesion": 0.92,
+      "listen_experience": 0.3841,
+      "marketability": 0.3209,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.3829,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch3",
+          "id_b": "ch6",
+          "similarity": 0.5114,
+          "prose_similarity": 0.0897,
+          "evidence": {
+            "ngram_overlap": 0.0042,
+            "char_ngram_overlap": 0.2893,
+            "structural_similarity": 0.866,
+            "beat_similarity": 1.0
+          }
+        },
+        "max_prose_similarity": 0.0899,
+        "max_ngram_overlap": 0.0044
+      }
+    },
+    {
+      "chapter_index": 5,
+      "word_count": 1343,
+      "composite": 0.6346,
+      "therapeutic_value": 0.6,
+      "emotional_coherence": 1.0,
+      "engagement": 0.475,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.62,
+      "listen_experience": 0.3561,
+      "marketability": 0.3978,
+      "safety_compliance": 0.96,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4787,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch4",
+          "id_b": "ch11",
+          "similarity": 0.4286,
+          "prose_similarity": 0.0913,
+          "evidence": {
+            "ngram_overlap": 0.0041,
+            "char_ngram_overlap": 0.2949,
+            "structural_similarity": 0.5319,
+            "beat_similarity": 1.0
+          }
+        },
+        "max_prose_similarity": 0.0928,
+        "max_ngram_overlap": 0.0062
+      }
+    },
+    {
+      "chapter_index": 6,
+      "word_count": 1643,
+      "composite": 0.7259,
+      "therapeutic_value": 0.6,
+      "emotional_coherence": 1.0,
+      "engagement": 0.7833,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.92,
+      "listen_experience": 0.4179,
+      "marketability": 0.6358,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4096,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch5",
+          "id_b": "ch2",
+          "similarity": 0.3634,
+          "prose_similarity": 0.0955,
+          "evidence": {
+            "ngram_overlap": 0.0106,
+            "char_ngram_overlap": 0.2937,
+            "structural_similarity": 0.4626,
+            "beat_similarity": 0.8
+          }
+        },
+        "max_prose_similarity": 0.0975,
+        "max_ngram_overlap": 0.0106
+      }
+    },
+    {
+      "chapter_index": 7,
+      "word_count": 1304,
+      "composite": 0.637,
+      "therapeutic_value": 0.45,
+      "emotional_coherence": 1.0,
+      "engagement": 0.4333,
+      "chapter_journey": 0.8333,
+      "cohesion": 0.62,
+      "listen_experience": 0.445,
+      "marketability": 0.4758,
+      "safety_compliance": 0.94,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.3613,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch6",
+          "id_b": "ch3",
+          "similarity": 0.5114,
+          "prose_similarity": 0.0897,
+          "evidence": {
+            "ngram_overlap": 0.0042,
+            "char_ngram_overlap": 0.2893,
+            "structural_similarity": 0.866,
+            "beat_similarity": 1.0
+          }
+        },
+        "max_prose_similarity": 0.0897,
+        "max_ngram_overlap": 0.0042
+      }
+    },
+    {
+      "chapter_index": 8,
+      "word_count": 1294,
+      "composite": 0.6839,
+      "therapeutic_value": 0.45,
+      "emotional_coherence": 1.0,
+      "engagement": 0.6083,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.92,
+      "listen_experience": 0.5841,
+      "marketability": 0.4307,
+      "safety_compliance": 0.94,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.5236,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch7",
+          "id_b": "ch5",
+          "similarity": 0.3525,
+          "prose_similarity": 0.0854,
+          "evidence": {
+            "ngram_overlap": 0.0036,
+            "char_ngram_overlap": 0.2762,
+            "structural_similarity": 0.4391,
+            "beat_similarity": 0.8
+          }
+        },
+        "max_prose_similarity": 0.086,
+        "max_ngram_overlap": 0.0045
+      }
+    },
+    {
+      "chapter_index": 9,
+      "word_count": 1300,
+      "composite": 0.6555,
+      "therapeutic_value": 0.8,
+      "emotional_coherence": 1.0,
+      "engagement": 0.2667,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.62,
+      "listen_experience": 0.5044,
+      "marketability": 0.398,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.3923,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch8",
+          "id_b": "ch5",
+          "similarity": 0.2391,
+          "prose_similarity": 0.085,
+          "evidence": {
+            "ngram_overlap": 0.0029,
+            "char_ngram_overlap": 0.2764,
+            "structural_similarity": 0.3864,
+            "beat_similarity": 0.4
+          }
+        },
+        "max_prose_similarity": 0.0873,
+        "max_ngram_overlap": 0.0062
+      }
+    },
+    {
+      "chapter_index": 10,
+      "word_count": 1258,
+      "composite": 0.584,
+      "therapeutic_value": 0.6,
+      "emotional_coherence": 1.0,
+      "engagement": 0.1333,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.32,
+      "listen_experience": 0.4223,
+      "marketability": 0.42,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4954,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch9",
+          "id_b": "ch11",
+          "similarity": 0.3136,
+          "prose_similarity": 0.0821,
+          "evidence": {
+            "ngram_overlap": 0.0038,
+            "char_ngram_overlap": 0.2649,
+            "structural_similarity": 0.69,
+            "beat_similarity": 0.4
+          }
+        },
+        "max_prose_similarity": 0.0825,
+        "max_ngram_overlap": 0.0043
+      }
+    },
+    {
+      "chapter_index": 11,
+      "word_count": 1303,
+      "composite": 0.6606,
+      "therapeutic_value": 0.6,
+      "emotional_coherence": 1.0,
+      "engagement": 0.65,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.32,
+      "listen_experience": 0.4498,
+      "marketability": 0.5578,
+      "safety_compliance": 1.0,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4535,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch10",
+          "id_b": "ch11",
+          "similarity": 0.3934,
+          "prose_similarity": 0.0829,
+          "evidence": {
+            "ngram_overlap": 0.0049,
+            "char_ngram_overlap": 0.265,
+            "structural_similarity": 0.6078,
+            "beat_similarity": 0.8
+          }
+        },
+        "max_prose_similarity": 0.0829,
+        "max_ngram_overlap": 0.0049
+      }
+    },
+    {
+      "chapter_index": 12,
+      "word_count": 1293,
+      "composite": 0.6951,
+      "therapeutic_value": 0.45,
+      "emotional_coherence": 1.0,
+      "engagement": 0.6917,
+      "chapter_journey": 0.6667,
+      "cohesion": 0.92,
+      "listen_experience": 0.443,
+      "marketability": 0.6307,
+      "safety_compliance": 0.94,
+      "content_uniqueness": 1.0,
+      "somatic_precision": 0.4928,
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ],
+      "uniqueness_evidence": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch11",
+          "id_b": "ch5",
+          "similarity": 0.3554,
+          "prose_similarity": 0.0931,
+          "evidence": {
+            "ngram_overlap": 0.0043,
+            "char_ngram_overlap": 0.3004,
+            "structural_similarity": 0.4353,
+            "beat_similarity": 0.8
+          }
+        },
+        "max_prose_similarity": 0.0938,
+        "max_ngram_overlap": 0.0052
+      }
+    }
+  ]
+}

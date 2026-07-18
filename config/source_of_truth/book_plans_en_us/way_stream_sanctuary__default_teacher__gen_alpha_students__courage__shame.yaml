@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__courage__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__courage.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__brave_world
+  name: Brave in the World — for Students
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Building Courage: Carrying What You Can''t Say (1)'
+subtitle: A Field Guide for Gen Alpha Students Navigating Courage
+cover_tagline: It's not that you're scared to speak. It's that some part of you decided
+  you're the problem.
+description:
+  short_blurb: 'Under the fear of speaking up is usually something quieter and older:
+    a buried belief that there''s something wrong with you, and if you open your mouth
+    everyone will finally see it. This is a field guide to that belief — where it
+    hides, how it runs your decisions, and what happens when you finally drag it into
+    the light.'
+  long_description: 'There''s the surface fear — being called on, going first, saying
+    the wrong thing. And then there''s the thing underneath it, the part you''d never
+    say out loud: a quiet, certain feeling that something about you is wrong, and
+    that if you speak up, people will see it. So you stay small. You don''t volunteer.
+    You let the silence cover for you, and you tell yourself it''s just nerves.
+
+
+    This book is for the student carrying that second thing. The one who isn''t really
+    afraid of the question — who''s afraid of being seen and found lacking. Whose
+    courage gets eaten, before it ever reaches your hand, by a belief you didn''t
+    choose and can''t quite name.
+
+
+    That belief has a name, and naming it is where everything starts to shift. It''s
+    shame — not the loud embarrassment of tripping in the hallway, but the slow, background
+    conviction that you are somehow less, and that your job is to hide it. Shame is
+    a brilliant liar. It poses as humility, as realism, as just knowing your place.
+    It convinces you that staying quiet is protection, when it''s really a cage.
+
+
+    We''re going to name what shame actually sounds like in your own head — the exact
+    sentences it feeds you before you decide not to try. Then we''ll go down into
+    it instead of running, because shame only keeps its power in the dark. You look
+    straight at the buried belief, the one that says there''s something wrong with
+    you, and you start to see it for what it is: not a fact about you, but a story
+    you absorbed, often from people who were carrying their own. And we''ll talk about
+    what becomes possible when the thing you can''t say finally gets said — to yourself
+    first.
+
+
+    This book will not hand you confidence or tell you to just love yourself. That
+    advice is useless and you know it. It won''t pretend the belief vanishes the moment
+    you spot it. Shame is sticky and old and it argues back. What changes isn''t that
+    it disappears — it''s that you stop mistaking it for the truth. You start hearing
+    it as a voice instead of as your own verdict.
+
+
+    You are not the problem you''ve been quietly convinced you are. The thing you
+    can''t say is not proof of anything except how long you''ve carried it alone.
+    You''re allowed to set it down. You''re allowed to be seen — exactly as you are,
+    unfixed — and find out that the worst thing you believed about yourself was never
+    true.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  - brave
+  secondary:
+  - students
+  - courage for students
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: nina_vazquez
+comp_titles:
+- The Gifts of Imperfection (Brené Brown) — separates shame from who you actually
+  are
+- I Thought It Was Just Me (Brené Brown) — maps how shame runs quietly underneath
+  everyday silence
+- How to Be Yourself (Ellen Hendriksen) — dismantles the belief that there's a flaw
+  everyone will see
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

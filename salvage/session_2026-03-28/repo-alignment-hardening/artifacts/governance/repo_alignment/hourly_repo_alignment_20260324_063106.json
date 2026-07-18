@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-03-24T16:31:06Z",
+  "finished_at": "2026-03-24T16:31:06Z",
+  "repo_root": "/Users/ahjan/.codex-tmp/repo-alignment-hardening",
+  "dry_run": false,
+  "report_label": null,
+  "success": false,
+  "failure_reason": "argument-parse failed: unrecognized arguments: --not-a-real-flag",
+  "backup_branch": null,
+  "synced_main": false,
+  "merged_prs": [],
+  "pruned_branches": [],
+  "blocked_prs": [],
+  "run_context": {
+    "argv": [
+      "--not-a-real-flag"
+    ]
+  },
+  "branch_census_summary": {},
+  "branch_census_path": null,
+  "notes": [],
+  "actions": [
+    {
+      "kind": "error",
+      "target": "argv",
+      "status": "parse-error",
+      "details": "unrecognized arguments: --not-a-real-flag"
+    }
+  ]
+}

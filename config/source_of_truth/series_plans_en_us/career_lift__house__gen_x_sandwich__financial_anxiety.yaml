@@ -1,0 +1,72 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: career_lift__house__gen_x_sandwich__financial_anxiety
+brand: career_lift
+teacher: null
+persona: gen_x_sandwich
+topic: financial_anxiety
+byline_author: tomas_bramble
+arc:
+  installment_1:
+    book_id: career_lift__house__gen_x_sandwich__financial_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__financial_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: career_lift__house__gen_x_sandwich__financial_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__financial_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: career_lift__house__gen_x_sandwich__financial_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__financial_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A steady, honest companion for the Gen X squeeze — facing money
+  fear about parents, kids, and a retirement that keeps moving without being told
+  to hustle harder, manifest abundance, or pretend the numbers don't scare you.
+bestseller_hook_family: ''
+emotional_engine: financial_anxiety_recognition
+comp_series:
+- Financial Feelings (Lindsay Bryan-Podvin) — names money as an emotional, not just
+  mathematical, problem for an anxious adult reader
+- The Sandwich Generation Survival series (various, AARP-adjacent) — speaks to the
+  exact dual-caregiving squeeze without finance-bro hype
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — validates
+  the felt overwhelm of mid-life people stretched in every direction and stays warm,
+  not clinical'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 47 to 56
+  where_they_are: It's a Tuesday night, the dishwasher is running, your kid's tuition
+    deposit is due Friday, and your mother's assisted-living invoice came in the same
+    mail. You're standing at the kitchen counter with your phone open to the banking
+    app, doing the math you already did this morning, and the number hasn't changed.
+  what_they_need: To be told the truth — that the squeeze is real, that they're not
+    bad with money, and that they can keep moving through the fear instead of waiting
+    for it to lift first.
+  what_they_avoid: Hustle-culture pep talks, 'abundance mindset' coaching, finance
+    bros, anyone under forty telling them to cut the lattes, and any voice that treats
+    a genuine generational money squeeze as a personal failure of attitude.
+series_voice_markers:
+  register: encouraging, forward-looking, grounded; warm and practical, honest about
+    the fear; the voice of someone a chapter or two ahead of you on the same road,
+    not a financial advisor and not a guru
+  sentence_rhythm: plainspoken and steady, mostly short to medium sentences with the
+    occasional long breath; lands hard truths in simple words, then gives you room
+    before the next one
+  metaphor_family: the next chapter and the turning page, the path that opens ahead,
+    the step up that costs something, the room you haven't entered yet, the draft
+    you're still writing — never machinery, military, productivity, or biohacking
+_needs_authoring: false

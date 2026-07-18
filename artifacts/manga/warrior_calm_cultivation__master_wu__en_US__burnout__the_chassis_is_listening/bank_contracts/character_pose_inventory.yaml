@@ -1,0 +1,24 @@
+schema_version: 1.0.0
+series_id: warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening
+brand_id: warrior_calm_cultivation
+locale: en_US
+genre: mecha
+authority_spec: docs/specs/MANGA_LAYER_RENDER_CONTRACT_SPEC.md
+m5_prep: true
+notes: M5-prep bank contract (no-GPU). Layers are SPECCED; REAL renders await Pearl
+  Star via RESUME_COMMANDS.sh (Q-MANGA-03 envelope).
+poses:
+- pose_id: seated_cockpit
+  description: Pilot seated, jaw set, hands on controls.
+  render_resolution:
+  - 1080
+  - 1920
+  provenance_target: REAL
+  status: specced_awaiting_gpu
+- pose_id: threshold_stand
+  description: Pilot at cockpit threshold, half in machine breath.
+  render_resolution:
+  - 1080
+  - 1920
+  provenance_target: REAL
+  status: specced_awaiting_gpu

@@ -1,0 +1,225 @@
+# Manga Repo Inventory
+# Generated: 2026-04-19
+# Sprint: manga-native-system-layer verification
+# Scope: main repo only (/_wt_beatmap, /_wt_inj, .claude/worktrees excluded)
+
+## SECTION 1: GITHUB WORKFLOWS (10 files)
+.github/workflows/manga-backend-flip.yml
+.github/workflows/manga-image-bank-build.yml
+.github/workflows/manga-image-gen.yml
+.github/workflows/manga-operator-setup-verify.yml
+.github/workflows/manga-pipeline.yml
+.github/workflows/manga-quality-forensic-analysis.yml
+.github/workflows/manga-rollout-notify.yml
+.github/workflows/manga-smoke-test.yml
+.github/workflows/manga-stash-reminder.yml
+.github/workflows/weekly-manga-rollout.yml
+
+## SECTION 2: SWIFT UI (1 file)
+PhoenixControl/Views/MangaStrategyView.swift
+
+## SECTION 3: ARTIFACTS / MANGA PLANS (2 files)
+artifacts/manga/MANGA_CATALOG_PLAN.md
+artifacts/manga/MANGA_FULL_CATALOG_PLAN.md
+
+## SECTION 4: MANGA SERIES ARTIFACTS (1 file)
+artifacts/manga/anxiety_series/series/manga_author_identity.json
+
+## SECTION 5: MANGA BOOK IMAGES (4 files)
+artifacts/manga_book/ch01_webtoon.png
+artifacts/manga_book/ch02_webtoon.png
+artifacts/manga_book/ch03_webtoon.png
+artifacts/manga_book/ch04_webtoon.png
+
+## SECTION 6: ONBOARDING PROOF MEDIA
+artifacts/onboarding_proof_media/images/cmp_fmt_manga_v1.png
+artifacts/onboarding_proof_media/videos/cmp_fmt_manga_v1/cmp_fmt_manga_v1.mp4
+
+## SECTION 7: RESEARCH FILES (5 files)
+artifacts/research/global_manga_distribution_strategy.md
+artifacts/research/manga_genre_writing_styles_2026_04_04.md    # SUBSTANTIVE - full genre playbook
+artifacts/research/manga_genre_writing_styles_placeholder.md
+artifacts/research/manga_publishing_revenue_strategy.md
+artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md
+artifacts/research/western_illustrated_styles_2026_04_04.md    # Cross-format comparison
+
+## SECTION 8: BRAND-WIZARD APP ASSETS
+brand-wizard-app/dist/onboarding/proof/cmp_fmt_manga_v1.png
+brand-wizard-app/dist/onboarding/proof/cmp_fmt_manga_v1.svg
+brand-wizard-app/dist/onboarding/proof/generated/cmp_fmt_manga_v1.png
+brand-wizard-app/public/onboarding/proof/cmp_fmt_manga_v1.png
+brand-wizard-app/public/onboarding/proof/cmp_fmt_manga_v1.svg
+brand-wizard-app/public/onboarding/proof/generated/cmp_fmt_manga_v1.png
+
+## SECTION 9: CONFIG / MANGA (15 files)
+config/manga/asset_selection_priority.yaml
+config/manga/brand_illustration_styles.yaml    # SUBSTANTIVE - per-brand visual DNA including josei ref
+config/manga/brand_lora_plans.yaml
+config/manga/gate_registry.yaml
+config/manga/genre_ite_profiles.yaml           # SUBSTANTIVE - 10 genre ITE profiles incl iyashikei
+config/manga/ite_config.yaml
+config/manga/manga_brand_series_plan.yaml
+config/manga/manga_gates.yaml                  # SUBSTANTIVE - 4 QA gates
+config/manga/page_and_layout_enums.yaml
+config/manga/panel_layouts.yaml
+config/manga/sabido_roles.yaml
+config/manga/style_archetypes.yaml             # SUBSTANTIVE - 8 visual style archetypes
+config/manga/teacher_character_prompts.yaml
+config/manga/workspace_layout.yaml
+config/manga/teaching_library/                 # (subdirectory with atoms)
+
+## SECTION 10: CONFIG / AUTHORING MANGA AUTHORS
+config/authoring/manga_authors/schema.yaml     # SUBSTANTIVE - manga author EI schema v1.0
+config/authoring/manga_authors/lin_yuxi_zh_tw_002.yaml
+
+## SECTION 11: CONFIG / TTS
+config/tts/manga_character_voice_bank.yaml
+
+## SECTION 12: CONFIG / WEEKLY ROLLOUT
+config/weekly_rollout/manga_rollout.yaml
+
+## SECTION 13: DOCS (11 files)
+docs/MANGA_GTM_PLAN.md
+docs/MANGA_IMPLEMENTATION_OUTLINE.md
+docs/MANGA_MODE_STRATEGY.docx
+docs/MANGA_PIPELINE_COMPLETE_GUIDE.md
+docs/MANGA_PIPELINE_ONBOARDING.md
+docs/MANGA_PRODUCTION_PIPELINE.md
+docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md
+docs/deep_research_manga_deepseek.txt
+docs/deep_research_manga_gemini.txt
+docs/deep_research_manga_rakuten.txt
+docs/manga_gtm_briefing.html
+docs/manga_tech_notes.txt
+docs/research/manga_platform_research_2026.md
+
+## SECTION 14: OLD CHAT SPECS
+old_chat_specs/chat_manga_live.txt
+
+## SECTION 15: PHOENIX V4 MANGA (45 Python files — PRIMARY CODEBASE)
+phoenix_v4/manga/__init__.py
+phoenix_v4/manga/asset_resolver.py
+phoenix_v4/manga/chapter/__init__.py
+phoenix_v4/manga/chapter/chapter_production.py      # SUBSTANTIVE - runs lettering
+phoenix_v4/manga/chapter/lettering_from_script.py   # SUBSTANTIVE - speech bubble system
+phoenix_v4/manga/chapter/page_compose.py
+phoenix_v4/manga/chapter/visual_from_script.py
+phoenix_v4/manga/chapter/writer.py
+phoenix_v4/manga/chapter/writer_stub.py
+phoenix_v4/manga/config.py
+phoenix_v4/manga/image_backend.py
+phoenix_v4/manga/ite_pipeline.py
+phoenix_v4/manga/llm/__init__.py
+phoenix_v4/manga/llm/client.py
+phoenix_v4/manga/memory/__init__.py
+phoenix_v4/manga/memory/series_memory_merge.py
+phoenix_v4/manga/models/__init__.py
+phoenix_v4/manga/models/leakage.py
+phoenix_v4/manga/models/paths.py
+phoenix_v4/manga/models/stage_ids.py
+phoenix_v4/manga/models/validation.py
+phoenix_v4/manga/models/workspace_layout.py
+phoenix_v4/manga/panel_prompt_manifest.py
+phoenix_v4/manga/prompts/chapter_writer_prompt.txt
+phoenix_v4/manga/qc/__init__.py
+phoenix_v4/manga/qc/chapter_qc.py                  # SUBSTANTIVE - QA gate system
+phoenix_v4/manga/qc/gate_registry.py
+phoenix_v4/manga/qc/ite_scorer.py
+phoenix_v4/manga/runner/__init__.py
+phoenix_v4/manga/runner/chapter_runner.py
+phoenix_v4/manga/runner/dag_order.py
+phoenix_v4/manga/runner/revision_policy.py
+phoenix_v4/manga/runner/stage_manifest_io.py
+phoenix_v4/manga/sdf/__init__.py
+phoenix_v4/manga/sdf/stub.py
+phoenix_v4/manga/series/__init__.py
+phoenix_v4/manga/series/emit.py
+phoenix_v4/manga/series/genre.py
+phoenix_v4/manga/series/manga_author_resolver.py
+phoenix_v4/manga/series/series_asset_registry.py
+phoenix_v4/manga/series/story_architect.py          # SUBSTANTIVE - hash-seeded beat selection
+phoenix_v4/manga/series/visual_identity.py          # SUBSTANTIVE - style + lettering bibles
+phoenix_v4/manga/transmission.py
+phoenix_v4/manga/visual_prompt_compiler.py
+
+## SECTION 16: RESEARCH (non-artifacts/)
+research/2026-03-31_manga-selfhelp-page-counts.md
+
+## SECTION 17: SCHEMAS
+schemas/manga/manga_common.schema.json
+
+## SECTION 18: SCRIPTS (12 files)
+scripts/catalog/dump_manga_series_plan_json.py
+scripts/ci/flip_manga_backend.py
+scripts/ci/smoke_manga_chapter_runner.py
+scripts/duration/plan_manga_pages.py
+scripts/image_generation/comfyui_workflows/flux_img2img_manga.json
+scripts/image_generation/comfyui_workflows/flux_ip_adapter_manga.json
+scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json
+scripts/image_generation/generate_manga_character_views.py
+scripts/image_generation/manga_teacher_batch.py
+scripts/manga/colab_manga_test.ipynb
+scripts/manga/generate_manga_author.py
+scripts/manga/r2_manga_release.py
+scripts/manga/run_manga_chapter.py
+scripts/manga/validate_manga_author_collisions.py
+scripts/manga/validate_manga_json.py
+scripts/manga/validate_manga_series_catalog_bounds.py
+scripts/release/build_manga_webtoon.py
+scripts/run_manga_pipeline.py
+scripts/weekly_manga_rollout.py
+
+## SECTION 19: SPECS (12 files — AUTHORITATIVE SYSTEM DESIGN)
+specs/AI_MANGA_PIPELINE_SUMMARY.md
+specs/MANGA_AUTHOR_SYSTEM_SPEC.md                   # SUBSTANTIVE - EI author identity
+specs/MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md
+specs/MANGA_CHAPTER_WRITER_SPEC.md
+specs/MANGA_GENRE_AGENT_SPEC.md                     # SUBSTANTIVE - structural embedding doctrine
+specs/MANGA_LAYOUT_AGENT_SPEC.md
+specs/MANGA_MODE_SYSTEM_SPEC.md                     # SUBSTANTIVE - full manga mode architecture
+specs/MANGA_PRODUCTION_PIPELINE_SPEC.md
+specs/MANGA_SERIES_BIBLE_SPEC.md
+specs/MANGA_STORY_ARCHITECT_SPEC.md                 # SUBSTANTIVE - beat/hook architecture
+specs/MANGA_TEACHING_LIBRARY_SPEC.md
+specs/MANGA_TEXT_RENDERING_SPEC.md
+
+## SECTION 20: TESTS (18 files)
+tests/duration/test_plan_manga_pages.py
+tests/test_manga_asset_resolver.py
+tests/test_manga_author_system.py
+tests/test_manga_catalog_parity.py
+tests/test_manga_chapter_production_integration.py
+tests/test_manga_chapter_runner_e2e_replay.py
+tests/test_manga_chapter_visual.py
+tests/test_manga_chapter_writer.py
+tests/test_manga_lettering_from_script.py
+tests/test_manga_pipeline_image_bank_gate.py
+tests/test_manga_runcomfy_backend.py
+tests/test_manga_runner_revision_features.py
+tests/test_manga_schema_refs.py
+tests/test_manga_schemas.py
+tests/test_manga_series_setup.py
+tests/test_manga_transmission.py
+tests/test_manga_visual_prompt_compiler.py
+tests/test_manga_writer_stub.py
+
+## SUMMARY
+Total files (main repo, excluding worktrees): ~160 files
+Substantive manga system files: ~45 Python source, 12 spec/docs, 10+ config YAMLs
+Genre coverage in config/manga/genre_ite_profiles.yaml:
+  shonen, seinen, shojo, sports, horror, iyashikei, cultivation, manhwa, webtoon_romance, isekai
+Genre coverage in config/authoring/manga_authors/schema.yaml (genre_tie_in enum):
+  iyashikei, seinen, shonen, shojo, josei, sports, horror, slice_of_life,
+  cultivation, manhwa_psychological, webtoon_romance, isekai
+Visual grammars in config/manga/style_archetypes.yaml (8 styles):
+  hyper_clean_cinematic, dark_psychological, cozy_iyashikei, webtoon_vertical_romance,
+  meme_chaotic_humor, power_progression, social_media_simulacra, interactive_branching
+Existing QA gates (config/manga/manga_gates.yaml):
+  MANGA.PROMPT.STRUCTURE, MANGA.PROMPT.TOKEN_BUDGET,
+  MANGA.TEACHING.PANEL_EXPRESSION, MANGA.SILENCE.STRUCTURE
+Chapter-end hooks: YES — chapter_end_hook field in story_architect.py + MANGA_STORY_ARCHITECT_SPEC.md §12
+Determinism: YES — hashlib.sha256 in story_architect.py + title_id/brand_id seeding
+Lettering/speech bubbles: YES — phoenix_v4/manga/chapter/lettering_from_script.py
+Josei in schema: YES (genre_tie_in enum in manga_authors/schema.yaml)
+Josei in ITE profiles: NO (gap identified)
+chapter_hook_family enum: NOT YET (hooks exist as freeform text, not typed enum)

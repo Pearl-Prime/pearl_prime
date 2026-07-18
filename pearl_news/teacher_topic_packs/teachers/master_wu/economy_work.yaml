@@ -1,0 +1,777 @@
+schema_version: 1
+teacher_id: master_wu
+topic: economy_work
+active: true
+identity:
+  display_name: Master Wu
+  attribution_name: Master Wu
+  tradition: Taoist geomancy; Dragon Veins (Long Mai); earth meridian activation; geomantic strategy
+  tradition_short: Taoist geomancy
+  teacher_setting_options:
+  - Dragon Vein activation site
+  - cross-regional geomantic field
+  teacher_years: decades
+  affiliation_safe_line: operates as geomantic tactician across China, Taiwan, and Japan
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: meridian_labor_drain
+    label: qi pulled thin when the meridian beneath the workplace cannot ground a body in the labor it is being asked to perform
+    loop: opens the shift schedule -> meridian beneath the workspace pulls thin ->
+      closes the app -> reopens because the next rent payment remains
+    body_markers:
+    - shoulders
+    - solar plexus
+    - feet
+    digital_markers:
+    - close
+    - reopen
+    - scroll
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: Labor is not only an economic category in Master Wu's framework — it
+    is a Dragon Vein condition. When the earth meridians beneath workplaces, gig
+    routes, and the wider economic geography cannot ground a young body in the labor
+    it is being asked to perform, the cohort feels the qi drain before the wage
+    statistics reflect it. Long Mai cultivation and pearl placement operate in a
+    layer the institutional labor-reform layer cannot reach.
+  forbidden_angles:
+  - do not reduce to generic productivity or work-life balance language
+  - do not frame as Wu Wei or classical Taoist effortless action
+  - do not position Master Wu as public preacher or retreat teacher
+  - do not collapse Dragon Vein geomancy into individual career advice
+hook_personal:
+  options:
+  - id: master_wu_ew_hook_personal_01
+    line: You know the qi drains before anyone names it. You still carry the day
+      forward while the meridian beneath your workplace keeps pulling thin — and
+      part of you knows the disturbance is not in you alone but in the Dragon Vein
+      the labor is being held inside.
+    metadata:
+      semantic_family: qi-drain-personal
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_personal_02
+    line: You keep checking the shift app because not looking feels worse. You also
+      know that career advice, side-hustle stacks, and productivity systems have
+      talked at you without grounding — and that the labor load you are being asked
+      to carry was never meant to be absorbed by a body cut off from the earth meridian.
+    metadata:
+      semantic_family: ungrounded-labor-personal
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_personal_03
+    line: You feel the friction in your shoulders before you have words for it —
+      the place where the body's qi grounding tries to meet a labor field that keeps
+      the meridian beneath the workplace thin. The body holds what the wage scale
+      is still arguing with.
+    metadata:
+      semantic_family: shoulder-wage-mismatch
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_personal_04
+    line: At 1 a.m. you close the schedule and reopen it. Neither move helps, because
+      the drain is running in the Dragon Vein beneath the workplace — and the part
+      of you trying to think your way out is the part that has been overasked while
+      the ground itself has gone quiet.
+    metadata:
+      semantic_family: midnight-meridian-shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_personal_05
+    line: You have read the career guides, taken the certifications, run the side
+      hustle. The mind has done all it can — and the quieter signal in you is asking
+      for contact with the earth qi beneath the work field, not another instruction
+      set the surface mind can perform.
+    metadata:
+      semantic_family: earth-qi-work-call
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: master_wu_ew_hook_big_01
+    line: Youth labor distress is not only a wage trend. It is the way a generation
+      of nervous systems registers a Long Mai disturbance — the earth meridians beneath
+      the working life are carrying loads the institutional layer keeps deferring,
+      and the bodies on the surface feel it first.
+    metadata:
+      semantic_family: long-mai-work-pressure
+      angle: geomantic-systemic
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_big_02
+    line: Heightened sensitivity in young workers is not pathology; in Master Wu's
+      geomantic framework it is the cohort tuned closest to the earth meridian register
+      feeling the Dragon Vein disturbance before the labor-economics layer reads
+      it. The bodies feel the drain before the wage data does.
+    metadata:
+      semantic_family: cohort-meridian-work-sensor
+      angle: meridian-as-sensor
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_big_03
+    line: A generation is being asked to hold daily working capacity while the civilizational
+      Dragon Veins beneath the labor field are running thin. The drain is not a private
+      work-ethic failure — it is the felt edge of an earth-meridian gap no individual
+      nervous system was built to absorb alone.
+    metadata:
+      semantic_family: meridian-gap-labor
+      angle: civilizational-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_big_04
+    line: The collective labor field has accelerated faster than the earth qi pathways
+      designed to ground it, and the gig and platform economy now carries meridian
+      loads the institutional employment layer cannot resolve. What gets read as
+      youth burnout is, in part, the visible edge of a Long Mai mismatch.
+    metadata:
+      semantic_family: gig-meridian-mismatch
+      angle: pace-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_hook_big_05
+    line: Across China, Taiwan, and Japan, Master Wu's surveys read the same Dragon
+      Vein register under different surface labor regimes. The youth work distress
+      is not a single-country economic anomaly — it is a cross-regional meridian
+      condition any one nation's labor policy cannot resolve alone.
+    metadata:
+      semantic_family: cross-regional-labor-pattern
+      angle: cross-regional-meridian
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: master_wu_ew_intro_01
+    line: Master Wu, a Taoist geomancer working with Long Mai — the living earth
+      qi pathways the tradition calls Dragon Veins — has watched the cohort closest
+      to the meridian carry labor distress not as a private failing but as the felt
+      edge of a Dragon Vein disturbance the institutional layer cannot read. In his
+      framework, the body that drains under the next shift is not malfunctioning;
+      it is registering the qi gap in the ground beneath the workplace.
+    metadata:
+      semantic_family: long-mai-work-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_intro_02
+    line: Master Wu does not position himself as a labor reformer or public teacher.
+      He operates as geomantic tactician — mapping Dragon Veins across China, Taiwan,
+      and Japan and placing pearls at activation sites that stabilize the earth meridian
+      for the populations whose working lives sit on top of it. What his tradition
+      offers a generation drained by gig platforms and wage stagnation is contact
+      with the Long Mai layer beneath the schedule.
+    metadata:
+      semantic_family: tactician-not-labor-reformer
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_intro_03
+    line: Master Wu works with pearl placement — strategic energetic anchoring at
+      Dragon Vein activation sites that, in his tradition, stabilize the earth meridian
+      for the populations living above it. He has watched the surface drain in workers
+      living near unstable meridian stretches track the disturbance he has been mapping
+      in the qi pathways themselves.
+    metadata:
+      semantic_family: pearl-placement-work-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_intro_04
+    line: Master Wu's work spans Tainan, Taiwan, and the Japanese archipelago — cross-regional
+      activation sites where the Dragon Veins of the East Asian continental and island
+      systems converge. He has seen how meridian disturbances in one region produce
+      different labor symptoms under different national wage regimes, and how the
+      geomantic response can move across borders the policy response cannot.
+    metadata:
+      semantic_family: cross-regional-work-propagation
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_intro_05
+    line: Master Wu teaches inside a tradition that reads the present period as a
+      civilizational Long Mai recalibration — a time when the inherited cultural
+      geography's Dragon Veins are being asked to carry labor loads they were not
+      tuned to absorb. The youth work distress is, in this frame, the cohort closest
+      to the meridian feeling the recalibration first inside the daily labor field.
+    metadata:
+      semantic_family: civilizational-work-recalibration
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: master_wu_ew_somatic_01
+    line: You read the shift schedule after midnight. Your shoulders tightened. You
+      closed the app. Then you reopened it because rent was still due and the disturbance
+      was in the meridian, not the app.
+    metadata:
+      semantic_family: midnight-meridian-shift
+      loop_type: meridian-labor-drain
+      body_register: shoulders
+      digital_behavior: close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_somatic_02
+    line: You woke before the alarm. Your solar plexus was already taut. You reached
+      for the phone before the light, because the meridian beneath the room was already
+      thin and you needed to check whether the surface field matched it.
+    metadata:
+      semantic_family: morning-qi-work-thinning
+      loop_type: meridian-labor-drain
+      body_register: solar plexus
+      digital_behavior: reach-for-phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_somatic_03
+    line: Your feet lost contact with the floor at the start of the third shift in
+      a row. You replayed the paycheck math three times. Your breath shortened. The
+      body lost ground before the mind decided anything.
+    metadata:
+      semantic_family: feet-third-shift
+      loop_type: meridian-labor-drain
+      body_register: feet
+      digital_behavior: shift-start
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_somatic_04
+    line: You held your breath while the platform rating loaded. Your shoulders locked.
+      You exhaled only halfway when you saw the star count, because the qi had already
+      pulled thin and the next gig was already coming.
+    metadata:
+      semantic_family: breath-rating-lock
+      loop_type: meridian-labor-drain
+      body_register: breath
+      digital_behavior: rating-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_somatic_05
+    line: You lay down and your eyes pinned open. The week's hours replayed. Your
+      shoulders would not soften. You knew sleep was the door and you could not find
+      the earth qi to step through it.
+    metadata:
+      semantic_family: sleep-hours-replay
+      loop_type: meridian-labor-drain
+      body_register: shoulders
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: master_wu_ew_witness_01
+    line: Master Wu has seen this exact loop in the cohort whose bodies sit closest
+      to the meridian register — the opening, the qi pulling thin, the closing, the
+      return. In his geomantic framework that loop is not character; it is the Dragon
+      Vein expressing itself through the body least insulated from a draining stretch
+      of meridian beneath the labor field.
+    metadata:
+      semantic_family: loop-mirror-work
+      loop_type: meridian-labor-drain
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_witness_02
+    line: Master Wu has watched young workers arrive in survey conversations already
+      mid-loop, already certain the hustle should have settled this by now. In his
+      tradition that certainty is the signal — the place where the surface mind stops
+      and the meridian register can be read.
+    metadata:
+      semantic_family: hustle-stop-meridian-open
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_witness_03
+    line: He has seen the body carry what the productivity stacks could not. In his
+      framework the somatic drain is not a malfunction — it is the Dragon Vein speaking
+      through the only channel left open when the work-ethic discourse has been overused.
+    metadata:
+      semantic_family: dragon-vein-work-channel
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_witness_04
+    line: Master Wu has watched young workers from Tainan to Tokyo carry the same
+      qi disturbance no national wage statistic names. In his tradition that disturbance
+      is information, not pathology — a signal that the institutional labor layer
+      reading the cohort was never tuned to the meridian range the bodies actually
+      live on.
+    metadata:
+      semantic_family: cross-regional-wage-disturbance
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_witness_05
+    line: Master Wu has watched the moment when a young worker stops trying to optimize
+      another hour and lets the meridian under the room come back into contact instead.
+      In his tradition that moment is not laziness — it is the readiness conventional
+      labor frameworks have no language for.
+    metadata:
+      semantic_family: meridian-readiness-work
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: master_wu_ew_turnaround_01
+    stat_line_1: 73 million. ILO 2024.
+    stat_line_2: The International Labour Organization estimates more than seventy-three
+      million young people are unemployed worldwide in 2024 — a measured load that
+      names the gap the cohort is being asked to hold while the institutional layer
+      keeps deferring structural response.
+    metadata:
+      semantic_family: ilo-unemployment
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_turnaround_02
+    stat_line_1: 11 states. DC. Fight for $15.
+    stat_line_2: The Fight for $15 campaign has now lifted minimum wage policy in
+      eleven US states plus the District of Columbia — a measurable shift the campaign
+      organized state by state when the federal layer would not move.
+    metadata:
+      semantic_family: ff15-state-shift
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_turnaround_03
+    stat_line_1: 1,200+ cooperatives. USFWC.
+    stat_line_2: The US Federation of Worker Cooperatives now coordinates more than
+      one thousand two hundred worker-owned businesses — a non-corporate labor infrastructure
+      that pulls economic decision-making back to the workers themselves rather than
+      deferring it upward.
+    metadata:
+      semantic_family: usfwc-coops
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_turnaround_04
+    stat_line_1: 7 cities + Oregon. Fair Workweek.
+    stat_line_2: Fair Workweek protections — covering predictable scheduling, advance
+      notice, and right-to-rest — have now been enacted in seven major US cities
+      plus the state of Oregon, building a regulatory floor under shift work that
+      the federal layer has not yet matched.
+    metadata:
+      semantic_family: fair-workweek-floor
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_turnaround_05
+    stat_line_1: 27 EU states. Platform Workers Directive.
+    stat_line_2: The European Union's Platform Workers Directive, adopted in 2024,
+      binds twenty-seven member states to a presumption-of-employment framework for
+      gig workers — the first multilateral instrument that treats platform labor
+      classification as governance, not commentary.
+    metadata:
+      semantic_family: eu-platform-directive
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: master_wu_ew_bridge_01
+    line: 73 million. ILO. The tracker measures the gap institutions left. It has
+      no column for what made the next honest shift possible after the last drain
+      — the capacity to stay in contact with the work without converting the drain
+      into identity. Master Wu's tradition has language for that capacity — Long
+      Mai cultivation works in the meridian beneath the labor response.
+    hidden_capacity: stay in contact with the work without converting the drain to
+      identity
+    metadata:
+      semantic_family: tracker-capacity-work
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_bridge_02
+    line: The numbers show the frameworks the institutional layer built. They do
+      not show the Dragon Vein context that institutional layer is being built on
+      top of — a civilizational period where the earth meridians beneath the labor
+      field are running thinner than the inherited culture's pace can stabilize.
+      Master Wu's tradition holds that context as native.
+    hidden_capacity: hold the meridian context the labor data cannot show
+    metadata:
+      semantic_family: dragon-vein-work-context
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_bridge_03
+    line: The data captures wages, hours, and policy adoptions. It cannot capture
+      the shift that happens when a young body comes back into contact with the earth
+      qi beneath the workspace, even while the shift on the surface continues. In
+      Master Wu's framework that shift is the actual return — the part no tracker
+      reports.
+    hidden_capacity: register the meridian return trackers miss
+    metadata:
+      semantic_family: meridian-return-work
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_bridge_04
+    line: The labor infrastructure is measurable. The earth meridian, where the body's
+      qi is actually grounded or drained, is not. Master Wu's tradition does not
+      argue with the measurement — it works in the layer beneath, where Dragon Vein
+      cultivation and pearl placement operate on a register the institutional layer
+      cannot reach.
+    hidden_capacity: work in the meridian layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-meridian-work
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_bridge_05
+    line: Wages, hours, and platforms can be counted. The civilizational Long Mai
+      held beneath the labor field cannot. Master Wu's tradition does not replace
+      the labor work — it names the meridian layer institutional response is not
+      designed to reach and offers Dragon Vein contact as the door in.
+    hidden_capacity: name the meridian layer labor response cannot reach
+    metadata:
+      semantic_family: labor-vs-meridian
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: master_wu_ew_perspective_01
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's framework, the land itself contains living energy currents called
+      Dragon Veins — Long Mai — and labor is not only an economic exchange; it is
+      grounded in the body by the earth meridian beneath the workplace. What feels
+      like youth burnout is, on the geomantic register, the cohort whose bodies sit
+      closest to the earth qi feeling the disturbance before the labor-economics
+      layer reads it.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the meridian's accurate signal that the system and institutional
+      structure have placed the labor load on the cohort least insulated from the
+      qi disturbance. Healing the surface symptom does not address the meridian condition.
+    - Long Mai cultivation does not bypass labor reform. It works in a layer labor
+      reform is not designed to reach — the layer beneath the body, where the earth
+      meridian carries the actual register and where pearl placement at activation
+      sites can stabilize what the surface response cannot.
+    metadata:
+      semantic_family: dragon-vein-work-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_perspective_02
+    header: What Master Wu Sees
+    paragraphs:
+    - Pearl placement is not metaphor in Master Wu's tradition. It is the literal
+      practice — strategic energetic anchoring at Dragon Vein activation sites — that
+      stabilizes the earth meridian for the populations whose labor sits above it.
+      The youth work distress that conventional response treats as private burnout
+      is, in his framework, the surface expression of an unanchored stretch of meridian
+      that has not yet been geomantically tended.
+    - The practice matters because it explains the relief described by populations
+      near activation sites that have been tended — not that the labor load has been
+      argued away, but that the meridian beneath has been stabilized on a layer surface
+      argument never reaches. The mind did not have to win for the body to come back
+      into ground.
+    - This is the part conventional labor reform is not designed to deliver. It does
+      not invalidate the wage work — but it names a missing layer, and offers a tradition
+      that has worked at the meridian layer for civilizational time.
+    metadata:
+      semantic_family: pearl-placement-work-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_perspective_03
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's tradition the Dragon Veins of China, Taiwan, and Japan converge
+      across the East Asian continental-and-island geography into a single integrated
+      meridian system. The youth labor load expressed differently under Beijing's,
+      Taipei's, and Tokyo's institutional wage regimes is, on the meridian register,
+      the same cross-regional condition — and the geomantic response can move across
+      borders the political response cannot.
+    - For a young person carrying the load, the experience of being witnessed by
+      something larger than the national labor framework is, in itself, structurally
+      different from being processed by it. The message that lands is not "here is
+      the wage rate"; it is "the meridian beneath your working life has been mapped,
+      and the disturbance you feel is registered at civilizational scale, not in
+      you alone."
+    - That distinction — witnessed at the meridian layer rather than processed at
+      the institutional layer — is what conventional labor infrastructure cannot
+      reproduce, and what Master Wu's tradition has carried as native across the
+      three regions for generations.
+    metadata:
+      semantic_family: cross-regional-witness-work
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_perspective_04
+    header: What Master Wu Sees
+    paragraphs:
+    - Civilizational Long Mai recalibration, in Master Wu's framework, is the literal
+      description of the present period — a time when the inherited cultural geography's
+      Dragon Veins are being asked to carry labor loads they were not tuned to absorb,
+      and the cohort whose bodies sit closest to the meridian feels the recalibration
+      first. The work distress young people carry is, in part, the cost of being
+      tuned to the earth meridian during a period of structural meridian shift.
+    - This is not a flattering reframe. It does not promise the wage structure will
+      shift quickly, and it does not blame the cohort for feeling unstable inside
+      an unstable meridian. It simply names the structural fact at the geomantic
+      layer and removes the additional weight of believing the instability is a personal
+      failure.
+    - That weight removal is, in survey practice, often the first part to land —
+      before the deeper Long Mai cultivation work can begin on the activation sites
+      themselves.
+    metadata:
+      semantic_family: civilizational-recalibration-work
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_perspective_05
+    header: What Master Wu Sees
+    paragraphs:
+    - Master Wu's tradition reads Long Mai as civilizational memory lines — the Dragon
+      Veins carry not only present qi flow but the accumulated record of every load
+      the cultural geography has held, including the inherited labor demands. The
+      youth work distress expresses, on this register, not only the present wage
+      pressure but the deferred load earlier institutional generations did not metabolize.
+      The bodies closest to the meridian feel the unpaid bill first.
+    - The framework does not ask the cohort to absorb that bill alone. It names the
+      bill at civilizational scale, identifies the activation sites where the meridian
+      can be re-stabilized, and offers pearl placement and Long Mai cultivation as
+      the tradition's response — operating in a layer the institutional response
+      is not designed to access.
+    - The practice is not to fix the cohort. The practice is to read the meridian
+      accurately, place the pearls at the activation sites, and let the Dragon Veins
+      do the structural stabilization the labor layer cannot.
+    metadata:
+      semantic_family: civilizational-memory-work
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: master_wu_ew_practice_01
+  options:
+  - id: master_wu_ew_practice_01
+    display_name: Long Mai Listening
+    duration: 5 minutes
+    announcement_line: Master Wu teaches a 5-minute Long Mai Listening practice for
+      moments when labor pressure has converted the body's qi grounding into surface
+      helplessness. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body stops treating the surface workload as the whole register and finds
+      contact with the earth meridian beneath the room.
+    - Enough qi grounding returns for the next honest shift without converting the
+      drain into private identity.
+    relief_register:
+    - listen
+    - ground
+    - meridian
+    derived_from_frame: long_mai_listening
+    metadata:
+      semantic_family: long_mai_listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_practice_02
+    display_name: Dragon Vein Mapping Pause
+    duration: 4 minutes
+    announcement_line: Master Wu offers a 4-minute Dragon Vein Mapping Pause for
+      moments between shifts, when the body has been carrying the labor load without
+      permission to set it down. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The labor load becomes legible at the meridian layer instead of being read
+      as personal work-ethic failure.
+    - The cohort's drain stops being framed as the individual's private balance sheet.
+    relief_register:
+    - pause
+    - map
+    - dragon vein
+    derived_from_frame: dragon_vein_mapping
+    metadata:
+      semantic_family: dragon_vein_mapping_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_practice_03
+    display_name: Earth Meridian Tap
+    duration: 3 minutes
+    announcement_line: Master Wu teaches a 3-minute Earth Meridian Tap for moments
+      when the feet have lost contact with the ground and the labor field has pulled
+      the qi out of register. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The feet remember the meridian beneath the floor and the qi finds a stabilizing
+      anchor even while the shift continues.
+    - The breath settles back into the pace the earth meridian holds, not the pace
+      the platform demands.
+    relief_register:
+    - tap
+    - ground
+    - earth qi
+    derived_from_frame: earth_meridian_tap
+    metadata:
+      semantic_family: earth_meridian_tap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_practice_04
+    display_name: Pearl Placement Visualization
+    duration: 6 minutes
+    announcement_line: Master Wu teaches a 6-minute Pearl Placement Visualization
+      for moments when the labor load is being processed as personal pathology rather
+      than as a meridian condition. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The activation site beneath the workplace comes into view and the load stops
+      being held in the body alone.
+    - The disturbance is recognized as a stretch of unanchored meridian, not a private
+      defect, and the pearl placement begins to stabilize the field.
+    relief_register:
+    - place
+    - anchor
+    - pearl
+    derived_from_frame: pearl_placement
+    metadata:
+      semantic_family: pearl_placement_visualization
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_ew_practice_05
+    display_name: Geomantic Stabilization Breath
+    duration: 3 minutes
+    announcement_line: Master Wu offers a 3-minute Geomantic Stabilization Breath
+      for acute meridian disturbance, when the labor field has knocked the qi out
+      of alignment with the earth pathways. It is in the sidebar, timed and step
+      by step.
+    relief_lines:
+    - The breath becomes a marker for the meridian's actual pace rather than the
+      platform's demanded pace.
+    - The body returns to a register the Dragon Vein beneath the workplace recognizes.
+    relief_register:
+    - breath
+    - stabilize
+    - geomantic
+    derived_from_frame: geomantic_stabilization_breath
+    metadata:
+      semantic_family: geomantic_stabilization_breath
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 8
+    title: Decent Work and Economic Growth
+    line: The United Nations framework includes decent work for all under SDG 8.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
+cta:
+  options:
+  - id: master_wu_ew_cta_01
+    org: USFWC
+    line: 'The US Federation of Worker Cooperatives coordinates more than one thousand
+      two hundred worker-owned businesses across the country. Door in: connect with
+      their member cooperative network.'
+    metadata:
+      semantic_family: door-in-usfwc
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_cta_02
+    org: Fight for $15
+    line: 'Fight for $15 has organized minimum-wage shifts in eleven US states plus
+      DC. Door in: join the campaign network in your state.'
+    metadata:
+      semantic_family: door-in-fight-for-15
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_cta_03
+    org: ILO Youth Employment Programme
+    line: 'The International Labour Organization Youth Employment Programme tracks
+      and supports policy frameworks for youth work globally. Door in: their global
+      youth employment policy network.'
+    metadata:
+      semantic_family: door-in-ilo-yep
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_cta_04
+    org: Center for Popular Democracy
+    line: 'The Center for Popular Democracy organizes Fair Workweek campaigns and
+      worker power infrastructure across the US. Door in: their affiliate organizations
+      and worker-led campaigns.'
+    metadata:
+      semantic_family: door-in-cpd
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_ew_cta_05
+    org: NELP
+    line: 'The National Employment Law Project builds the legal and policy infrastructure
+      for low-wage and gig workers in the US. Door in: their worker rights and policy
+      reform network.'
+    metadata:
+      semantic_family: door-in-nelp
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_wu_ew_headline_01
+      line: A Taoist geomancer names youth labor distress as a Long Mai disturbance
+        — and the meridian practice that returns the body to ground.
+      metadata:
+        semantic_family: long-mai-work-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_ew_headline_02
+      line: A Dragon Vein tactician, not a labor reformer, on the meridian layer
+        of work distress conventional response is not built to reach.
+      metadata:
+        semantic_family: tactician-not-labor-reformer-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_ew_headline_03
+      line: Pearl placement, not another side hustle — Master Wu's tradition meets
+        the cohort closest to the labor meridian.
+      metadata:
+        semantic_family: pearl-placement-work-call
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_ew_headline_04
+      line: Meridian recalibration, not pathology — a geomantic tradition reframes
+        the youth labor load.
+      metadata:
+        semantic_family: meridian-recalibration-work
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_ew_headline_05
+      line: Cross-regional Dragon Vein response — what Master Wu's tradition brings
+        to a labor load no single nation's policy can resolve.
+      metadata:
+        semantic_family: cross-regional-work-call
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

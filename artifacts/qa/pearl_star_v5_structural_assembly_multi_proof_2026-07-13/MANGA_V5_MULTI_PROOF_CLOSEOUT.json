@@ -1,0 +1,89 @@
+{
+  "manga-v5-structural-multi-proof": "completed",
+  "root": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13",
+  "panel_count": 4,
+  "panels": [
+    {
+      "manga-v5-structural-multi-proof-panel": "completed",
+      "panel_id": "p01_standing_wide_clear_floor",
+      "structural_template_id": "standing_room_scene",
+      "panel_type_id": "establish_standing_room",
+      "source_v5_panel_dir": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p01_standing_wide_clear_floor/source_v5_panel",
+      "manifest": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/assembly_manifest.yaml",
+      "structural_plan": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p01_standing_wide_clear_floor/structural_plan.json",
+      "final_composite": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p01_standing_wide_clear_floor.png",
+      "gate_report": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p01_standing_wide_clear_floor/gate_report.json",
+      "required_gates": [
+        "L2_QUALITY",
+        "L0_SUPPORT_ZONE"
+      ],
+      "gate_passed": true,
+      "final_differs_from_model_layer_00": true,
+      "final_sha256": "91ef54ca54e8a5c2f9d54b31a5ec44ddc97a4b79c12216dd5869ca68b4d060c1",
+      "model_layer_00_sha256": "9d8552c1d4bce26a72f2f96588e91ad6b9a7ee7890e165fdf5b249c38655da72"
+    },
+    {
+      "manga-v5-structural-multi-proof-panel": "completed",
+      "panel_id": "p02_standing_medium_clear_floor",
+      "structural_template_id": "standing_room_scene",
+      "panel_type_id": "action_standing_room",
+      "source_v5_panel_dir": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p02_standing_medium_clear_floor/source_v5_panel",
+      "manifest": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/assembly_manifest.yaml",
+      "structural_plan": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p02_standing_medium_clear_floor/structural_plan.json",
+      "final_composite": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p02_standing_medium_clear_floor.png",
+      "gate_report": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p02_standing_medium_clear_floor/gate_report.json",
+      "required_gates": [
+        "L2_QUALITY",
+        "L0_SUPPORT_ZONE"
+      ],
+      "gate_passed": true,
+      "final_differs_from_model_layer_00": true,
+      "final_sha256": "ddb077654f6bc05edb2469b4fc0857a6c2d1d8c843f0762768c4be9461b74afd",
+      "model_layer_00_sha256": "cde20c6eb81dd901601544d910b9566f75309994285c6109fd2fd230c2789079"
+    },
+    {
+      "manga-v5-structural-multi-proof-panel": "completed",
+      "panel_id": "p03_seated_table_intentional_support",
+      "structural_template_id": "seated_table_scene",
+      "panel_type_id": "dialogue_seated_table",
+      "source_v5_panel_dir": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p03_seated_table_intentional_support/source_v5_panel",
+      "manifest": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/assembly_manifest.yaml",
+      "structural_plan": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p03_seated_table_intentional_support/structural_plan.json",
+      "final_composite": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p03_seated_table_intentional_support.png",
+      "gate_report": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p03_seated_table_intentional_support/gate_report.json",
+      "required_gates": [
+        "L2_QUALITY",
+        "L0_SUPPORT_ZONE"
+      ],
+      "gate_passed": true,
+      "final_differs_from_model_layer_00": true,
+      "final_sha256": "dba96a25687e7fd77306a0b57883bbe0002bbdc7cafa9cda3a748d6b4103c1c5",
+      "model_layer_00_sha256": "a4a9e6a5c48202dcac2e34c13e34214ff7835dbe6ae07d7a6305d0cb10e436ff"
+    },
+    {
+      "manga-v5-structural-multi-proof-panel": "completed",
+      "panel_id": "p04_standing_l3_prop_separate",
+      "structural_template_id": "standing_room_scene",
+      "panel_type_id": "establish_standing_room",
+      "source_v5_panel_dir": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p04_standing_l3_prop_separate/source_v5_panel",
+      "manifest": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/assembly_manifest.yaml",
+      "structural_plan": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p04_standing_l3_prop_separate/structural_plan.json",
+      "final_composite": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p04_standing_l3_prop_separate.png",
+      "gate_report": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/p04_standing_l3_prop_separate/gate_report.json",
+      "required_gates": [
+        "L2_QUALITY",
+        "L0_SUPPORT_ZONE"
+      ],
+      "gate_passed": true,
+      "final_differs_from_model_layer_00": true,
+      "final_sha256": "e2a99ba4ca32b3b4f05aca55e79093da7943ae1238a44f3ac9b60bd12ebee904",
+      "model_layer_00_sha256": "c12d236f6bb4938916774e8e9a5c6cdb5d5e6e96bc6d37c60c32f6d3bc0afd91"
+    }
+  ],
+  "all_gate_passed": true,
+  "all_final_differs_from_layer_00": true,
+  "honest_limitations": [
+    "Deterministic QA visuals only; not final production art.",
+    "Does not claim manga 100% green."
+  ]
+}

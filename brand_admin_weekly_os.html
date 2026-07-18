@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="page.title">Brand Admin -- Pearl Prime</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-wizard-app/public/assets/icons.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0;overflow-x:hidden}
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace;--bg:#0e0a06;--card:rgba(255,255,255,.03);--border:rgba(180,83,9,.15);--dim:rgba(250,246,240,.35);--mid:rgba(250,246,240,.6);--hi:rgba(250,246,240,.9);--green:#4ade80;--red:#f87171}
+
+/* -- Top Bar -- */
+#topbar{position:fixed;top:0;left:0;right:0;height:48px;background:rgba(14,10,6,.97);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:14px;z-index:100;backdrop-filter:blur(10px)}
+#topbar h1{font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--acc2)}
+.pill{font-family:var(--mono);font-size:.55rem;color:var(--acc2);border:1px solid var(--border);padding:3px 12px;border-radius:14px;letter-spacing:.04em}
+#topbar .progress-text{margin-left:auto;font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.04em}
+.nav-pills{display:flex;gap:4px;margin-left:16px}
+.nav-pill{font-family:var(--mono);font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:5px 12px;border-radius:4px;cursor:pointer;transition:all .15s;border:1px solid transparent;background:none}
+.nav-pill:hover{color:var(--hi);background:rgba(180,83,9,.08)}
+.nav-pill.active{color:var(--acc2);background:rgba(180,83,9,.14);border-color:var(--border)}
+.nav-pill.locked{opacity:.3;cursor:not-allowed}
+.top-cta{font-family:var(--mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);border:1px solid var(--border);padding:5px 12px;border-radius:4px;text-decoration:none;margin-left:auto;white-space:nowrap}
+.top-cta:hover{background:rgba(180,83,9,.14)}
+.market-note{font-size:.72rem;color:var(--mid);line-height:1.55;border-left:3px solid var(--acc);background:rgba(180,83,9,.06);padding:10px 14px;border-radius:0 6px 6px 0;margin:0 0 16px}
+.planned-tag{font-family:var(--mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);border:1px solid rgba(217,119,6,.35);padding:2px 8px;border-radius:10px;margin-left:8px}
+.check-card.planned-card{opacity:.72;border-style:dashed}
+.check-card.planned-card .check-box{opacity:.35;pointer-events:none}
+
+/* -- Main Progress Bar -- */
+#main-progress{position:fixed;top:48px;left:0;right:0;z-index:99;padding:12px 20px;background:rgba(14,10,6,.95);border-bottom:1px solid var(--border)}
+.progress-phases{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.phase-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.5rem;color:var(--dim);transition:all .3s;flex-shrink:0}
+.phase-dot.active{border-color:var(--acc2);color:var(--acc2);box-shadow:0 0 12px rgba(180,83,9,.3)}
+.phase-dot.done{border-color:var(--green);background:rgba(74,222,128,.15);color:var(--green)}
+.phase-line{flex:1;height:2px;background:var(--border);position:relative}
+.phase-line .fill{height:100%;background:var(--acc2);transition:width .4s}
+.phase-label{font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.phase-label.active{color:var(--acc2)}
+.phase-label.done{color:var(--green)}
+.bar-track{height:6px;background:rgba(180,83,9,.1);border-radius:3px;overflow:hidden;margin-top:6px}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:3px;transition:width .5s ease}
+.pct-text{font-family:var(--mono);font-size:.65rem;color:var(--acc2);margin-top:4px;text-align:right}
+
+/* -- Container -- */
+.container{max-width:900px;margin:0 auto;padding:140px 20px 80px}
+
+/* -- Phase Section -- */
+.phase-section{display:none}
+.phase-section.visible{display:block}
+.phase-title{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--acc2);margin-bottom:6px}
+.phase-sub{font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.06em;margin-bottom:28px}
+
+/* -- Checklist Card -- */
+.check-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.check-card:hover{border-color:rgba(180,83,9,.3)}
+.check-card.completed{border-color:rgba(74,222,128,.2)}
+.check-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none}
+.check-box{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:transparent;transition:all .2s;flex-shrink:0;cursor:pointer}
+.check-box.done{border-color:var(--green);background:rgba(74,222,128,.15);color:var(--green)}
+.check-num{font-family:var(--mono);font-size:.55rem;color:var(--dim);width:16px;flex-shrink:0}
+.check-label{font-size:.85rem;color:var(--hi);flex:1}
+.check-time{font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.04em}
+.check-arrow{color:var(--dim);font-size:.7rem;transition:transform .2s}
+.check-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border)}
+.check-body.open{display:block}
+
+/* -- Action Button -- */
+.action-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(180,83,9,.18);border:1px solid var(--border);color:var(--acc2);font-family:var(--mono);font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;padding:8px 18px;border-radius:6px;cursor:pointer;transition:all .15s;text-decoration:none;margin:6px 4px 6px 0}
+.action-btn:hover{background:rgba(180,83,9,.35);border-color:var(--acc2);transform:translateY(-1px)}
+.action-btn.big{padding:12px 28px;font-size:.6rem;background:linear-gradient(135deg,rgba(180,83,9,.25),rgba(217,119,6,.2));border-color:var(--acc)}
+.action-btn.big:hover{background:linear-gradient(135deg,rgba(180,83,9,.4),rgba(217,119,6,.35))}
+
+/* -- Prefill -- */
+.prefill{background:rgba(0,0,0,.25);border:1px solid rgba(180,83,9,.1);border-radius:6px;padding:10px 12px;margin:8px 0}
+.prefill-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.prefill-row{display:flex;align-items:center;gap:8px}
+.prefill-val{flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(180,83,9,.08);border-radius:4px;padding:7px 10px;font-family:var(--mono);font-size:.65rem;color:var(--hi);line-height:1.45;white-space:pre-wrap;word-break:break-all}
+.copy-btn{flex-shrink:0;background:rgba(180,83,9,.15);border:1px solid var(--border);color:var(--acc2);font-family:var(--mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:4px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:rgba(180,83,9,.3)}
+.copy-btn.copied{background:rgba(22,163,74,.2);border-color:rgba(22,163,74,.4);color:var(--green)}
+.coord-build-badge{font-family:var(--mono);font-size:.48rem;letter-spacing:.04em;margin-top:8px;color:var(--dim)}
+.coord-build-badge.current{color:var(--green)}
+.coord-build-badge.stale{color:var(--acc2)}
+.coord-build-badge.missing{color:var(--red)}
+.coord-build-badge.loading{opacity:.6}
+
+/* -- Warn / Note -- */
+.warn{border-left:3px solid #dc2626;background:rgba(220,38,38,.06);padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:.72rem;color:var(--mid);line-height:1.55}
+.warn strong{color:var(--red)}
+.note{border-left:3px solid var(--acc);background:rgba(180,83,9,.06);padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:.72rem;color:var(--mid);line-height:1.55}
+
+/* -- Upload Card (Phase 2) -- */
+.upload-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px}
+.upload-card h3{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:#f5d0a9;margin-bottom:10px}
+.upload-steps{font-size:.75rem;color:var(--mid);line-height:1.7;padding-left:18px;margin:8px 0}
+.upload-steps li{margin-bottom:4px}
+.upload-progress{font-family:var(--mono);font-size:.55rem;color:var(--dim);margin-top:10px}
+.title-checks{margin-top:10px}
+.title-check{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:.72rem;color:var(--mid);cursor:pointer;user-select:none}
+.title-check:hover{color:var(--hi)}
+.mini-box{width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:transparent;flex-shrink:0}
+.mini-box.done{border-color:var(--green);background:rgba(74,222,128,.12);color:var(--green)}
+
+/* -- Day Card (Phase 3) -- */
+.day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s}
+.day-card:hover{border-color:rgba(180,83,9,.3)}
+.day-card.today{border-color:var(--acc2);box-shadow:0 0 16px rgba(180,83,9,.1)}
+.day-card.done-day{border-color:rgba(74,222,128,.2)}
+.day-name{font-family:var(--mono);font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:2px}
+.day-title{font-family:var(--serif);font-size:1rem;font-weight:400;color:#f5d0a9;margin-bottom:8px}
+.day-actions{list-style:none;padding:0}
+.day-actions li{font-size:.72rem;color:var(--mid);padding:3px 0;display:flex;align-items:center;gap:6px;cursor:pointer}
+.day-actions li:hover{color:var(--hi)}
+
+/* -- Quick Links -- */
+.quick-links{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0;justify-content:center}
+.qlink{font-family:var(--mono);font-size:.45rem;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:6px 14px;border-radius:6px;text-decoration:none;transition:all .15s}
+.qlink:hover{color:var(--acc2);border-color:var(--acc);background:rgba(180,83,9,.08)}
+
+/* -- Brand Picker -- */
+#picker{display:none;min-height:100vh;padding:80px 20px 40px;text-align:center}
+#picker.show{display:block}
+#picker h1{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--acc2);margin-bottom:6px}
+#picker .sub{font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.08em;margin-bottom:32px}
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;max-width:1100px;margin:0 auto;text-align:left}
+.brand-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;cursor:pointer;transition:all .2s}
+.brand-card:hover{border-color:var(--acc);background:rgba(180,83,9,.06);transform:translateY(-2px)}
+.brand-card h3{font-size:.82rem;font-weight:500;color:#f5d0a9;margin-bottom:3px}
+.brand-card .focus{font-size:.62rem;color:var(--dim);line-height:1.4}
+.brand-card .teacher-tag,.brand-card .director-tag{font-family:var(--mono);font-size:.4rem;color:var(--acc2);border:1px solid var(--acc);padding:1px 6px;border-radius:3px;margin-top:5px;display:inline-block}
+.brand-card .director-tag{color:var(--green);border-color:rgba(74,222,128,.45);margin-left:4px}
+
+/* -- Celebration Overlay -- */
+#celebration{display:none;position:fixed;inset:0;z-index:200;background:rgba(14,10,6,.85);align-items:center;justify-content:center;flex-direction:column;gap:16px}
+#celebration.show{display:flex}
+#celebration h2{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--green)}
+#celebration p{font-family:var(--mono);font-size:.6rem;color:var(--dim)}
+
+/* -- Locked overlay -- */
+.locked-overlay{position:relative}
+.locked-overlay::after{content:"Complete previous phase to unlock";position:absolute;inset:0;background:rgba(14,10,6,.8);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;color:var(--dim);border-radius:10px;letter-spacing:.04em}
+
+@media(max-width:600px){
+  #topbar{flex-wrap:wrap;height:auto;padding:8px 12px;gap:6px}
+  .nav-pills{margin-left:0}
+  .container{padding-top:160px}
+  .day-grid{grid-template-columns:1fr}
+  .brand-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="topbar">
+  <h1 data-i18n="topbar.title">Brand Admin</h1>
+  <span class="pill" id="brand-pill">No brand</span>
+  <div class="nav-pills">
+    <button class="nav-pill active" data-phase="1" data-i18n="nav.setup" onclick="showPhase(1)">Setup</button>
+    <button class="nav-pill locked" data-phase="2" data-i18n="nav.upload" onclick="showPhase(2)">Upload</button>
+    <button class="nav-pill locked" data-phase="3" data-i18n="nav.weekly" onclick="showPhase(3)">Weekly</button>
+  </div>
+  <a class="top-cta" id="handoff-cta" href="brand-wizard-app/public/brand_handoff_dashboard.html" style="display:none">Weekly packet →</a>
+  <div class="progress-text" id="top-progress">Phase 1 of 3</div>
+</div>
+
+<!-- Main Progress -->
+<div id="main-progress">
+  <div class="progress-phases">
+    <div class="phase-dot active" id="pd1">1</div>
+    <div class="phase-line"><div class="fill" id="pf1" style="width:0"></div></div>
+    <div class="phase-dot" id="pd2">2</div>
+    <div class="phase-line"><div class="fill" id="pf2" style="width:0"></div></div>
+    <div class="phase-dot" id="pd3">3</div>
+  </div>
+  <div style="display:flex;justify-content:space-between">
+    <span class="phase-label active" id="pl1" data-i18n="phase.setup">Setup</span>
+    <span class="phase-label" id="pl2" data-i18n="phase.firstUpload">First Upload</span>
+    <span class="phase-label" id="pl3" data-i18n="phase.weeklyRhythm">Weekly Rhythm</span>
+  </div>
+  <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0"></div></div>
+  <div class="pct-text" id="pct-text">0% complete</div>
+</div>
+
+<!-- Brand Picker -->
+<div id="picker"></div>
+
+<!-- Celebration -->
+<div id="celebration"><h2>Phase Complete</h2><p>Next phase unlocked.</p><button class="action-btn" onclick="dismissCelebration()">Continue</button></div>
+
+<!-- Main Content -->
+<div class="container" id="main-wrap" style="display:none">
+  <div id="phase1" class="phase-section visible"></div>
+  <div id="phase2" class="phase-section"></div>
+  <div id="phase3" class="phase-section"></div>
+
+  <!-- Quick Links -->
+  <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center">
+    <div style="font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px" data-i18n="quicklinks.heading">Quick Platform Links</div>
+    <div class="quick-links" id="quick-links"></div>
+    <div style="margin-top:16px">
+      <a class="action-btn" onclick="resetBrand()" style="cursor:pointer">Change Brand</a>    </div>
+  </div>
+</div>
+
+<script>
+const JSON_BASE='brand-wizard-app/public/';
+let B={}, OS_DATA=null, PACKET_BRIDGE=null, MARKET_ID='en_us', MARKET=null;
+// The selected brand's real delivery feed (brand_deliveries/<base>.json), when it has one.
+let DELIVERY=null;
+const PRODUCTION_PENDING_REASON='Catalog ready, production files pending.';
+let SETUP=[], UPLOADS=[], UPLOADS_PLANNED=[], WEEK=[], QUICK_LINKS=[];
+
+const KW={anxiety:"anxiety relief, calm, stress management",burnout:"burnout recovery, rest, energy restoration",depression:"emotional healing, hope, mental wellness",self_worth:"self-worth, confidence, self-esteem",somatic_healing:"somatic healing, body awareness, nervous system",mindfulness:"mindfulness, meditation, present moment",courage:"courage, bravery, resilience, inner strength",boundaries:"healthy boundaries, self-protection, assertiveness",grief:"grief support, loss, healing after loss",compassion_fatigue:"compassion fatigue, caregiver support",overthinking:"overthinking, mental clarity, calm mind",sleep_anxiety:"sleep anxiety, insomnia help, restful sleep",social_anxiety:"social anxiety, social confidence",imposter_syndrome:"imposter syndrome, self-doubt, confidence",financial_stress:"financial stress, money anxiety, abundance",financial_anxiety:"financial anxiety, career confidence",adhd_focus:"ADHD focus, neurodivergent support, attention"};
+
+function laneFromBrandId(bid){const m=bid.match(/_([a-z]{2}_[a-z]{2})$/);return m?m[1]:'en_us';}
+function resolveMarket(bid){if(!OS_DATA)return'en_us';const lane=laneFromBrandId(bid);return(OS_DATA.lane_to_market&&OS_DATA.lane_to_market[lane])||OS_DATA.default_market||'en_us';}
+function applyMarketProfile(marketId){
+  MARKET_ID=marketId;
+  MARKET=(OS_DATA&&OS_DATA.markets&&OS_DATA.markets[marketId])||(OS_DATA&&OS_DATA.markets.en_us)||{};
+  SETUP=MARKET.setup||[];
+  UPLOADS=(MARKET.uploads||[]).filter(u=>u.status==='ready');
+  UPLOADS_PLANNED=(MARKET.uploads||[]).filter(u=>u.status==='planned');
+  WEEK=MARKET.week||[];
+  QUICK_LINKS=MARKET.quick_links||[];
+}
+function setupReady(){return SETUP.filter(st=>st.status!=='planned');}
+function setupPlanned(){return SETUP.filter(st=>st.status==='planned');}
+
+async function loadBridges(){
+  const paths=[JSON_BASE+'brand_admin_brands.json',JSON_BASE+'brand_admin_weekly_os_data.json',JSON_BASE+'brand_admin_weekly_packets.json'];
+  const [br,pf,pk]=await Promise.all(paths.map(p=>fetch(p,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)));
+  if(br&&typeof br==='object')B=br;
+  if(pf&&typeof pf==='object')OS_DATA=pf;
+  if(pk&&typeof pk==='object')PACKET_BRIDGE=pk;
+}
+
+// All 14 registry lanes — a lane missing here never loads brand_deliveries/<base>.json and so
+// would silently skip the production_files_ready guard in packetStatus().
+function deliveryBase(bid){
+  return String(bid||'').replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr|de_de|fr_fr|it_it|hu_hu)$/,'');
+}
+async function loadDelivery(bid){
+  DELIVERY=null;
+  try{
+    const r=await fetch(JSON_BASE+'brand_deliveries/'+deliveryBase(bid)+'.json',{cache:'no-store'});
+    if(r.ok){const j=await r.json(); if(j&&j.weeks)DELIVERY=j;}
+  }catch(e){}
+}
+
+// TRUTH-LABELING INVARIANT (harbor-line-production-truth-labeling):
+// production_files_ready === false is AUTHORITATIVE. A packet-bridge "buildable" verdict must
+// never let catalog metadata be offered as a shippable production packet. The bridge only ever
+// adds detail to a pending reason — it can never clear one.
+function packetStatus(bid){
+  const pendingProduction=!!(DELIVERY&&DELIVERY.production_files_ready===false);
+  const blocked=PACKET_BRIDGE&&PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[bid];
+  if(blocked)return{state:'blocked',reason:blocked.reason||PRODUCTION_PENDING_REASON};
+  if(pendingProduction)return{state:'blocked',reason:PRODUCTION_PENDING_REASON};
+  if(!PACKET_BRIDGE)return{state:'unknown'};
+  const ok=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[bid];
+  if(ok&&ok.buildable)return{state:'ready',info:ok};
+  return{state:'missing'};
+}
+
+function renderQuickLinks(){
+  const el=document.getElementById('quick-links');
+  if(!el)return;
+  el.innerHTML=(QUICK_LINKS.length?QUICK_LINKS:[
+    {label:'KDP',url:'https://kdp.amazon.com/bookshelf'},
+    {label:'Google Play',url:'https://play.google.com/books/publish'}
+  ]).map(q=>`<a class="qlink" href="${q.url}" target="_blank">${q.label}</a>`).join('');
+}
+
+function updateHandoffCta(){
+  const el=document.getElementById('handoff-cta');
+  if(!el||!brandId)return;
+  el.style.display='inline-flex';
+  el.href='brand-wizard-app/public/brand_handoff_dashboard.html?brand='+encodeURIComponent(brandId);
+  el.textContent=(MARKET&&MARKET.ui_lang==='zh-Hant')?'每週內容包 →':(MARKET&&MARKET.ui_lang==='zh-Hans')?'每周内容包 →':(MARKET&&MARKET.ui_lang==='ja')?'週次パケット →':'Weekly packet →';
+}
+
+// ── State ──
+let brand=null, brandId=null, state={};
+function key(){ return brandId||'_'; }
+function load(){ try{ state=JSON.parse(localStorage.getItem('ba_state')||'{}'); }catch(e){ state={}; } }
+function save(){ try{ localStorage.setItem('ba_state',JSON.stringify(state)); }catch(e){} }
+function bs(){ return state[key()]||(state[key()]={setup:{},upload:{},weekly:{},phase:1}); }
+
+// ── Helpers ──
+function slug(n){ return String(n||'').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g,'_').replace(/_+$/,''); }
+function keywords(b){ return (b.tp||[]).map(t=>KW[t]||t).join(', '); }
+function desc(b){ let s=`${b.d}. ${b.f||''}.`; if(b.tm&&b.t) s+=` Guided by ${b.t}.`; return s; }
+function bio(b){ let s=b.d+' -- '+(b.f||'').split(',')[0]; if(b.tr) s+='. '+b.tr+' wisdom.'; else s+='. Practical tools.'; return s.length>150?s.substring(0,147)+'...':s; }
+
+function copyText(text,btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='COPIED'; btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='COPY'; btn.classList.remove('copied'); },1500);
+  });
+}
+function prefill(label,val){
+  const eid='pf_'+Math.random().toString(36).substr(2,6);
+  return `<div class="prefill"><div class="prefill-label">${label}</div><div class="prefill-row"><div class="prefill-val" id="${eid}">${val}</div><button class="copy-btn" onclick="copyText(document.getElementById('${eid}').textContent,this)">COPY</button></div></div>`;
+}
+
+// ── Phase calculation ──
+function calcPhase(){
+  const s=bs();
+  const setupDone=setupReady().every(st=>s.setup[st.id]);
+  const uploadDone=UPLOADS.every(u=>s.upload[u.id+'_all']);
+  if(uploadDone && setupDone) return 3;
+  if(setupDone) return 2;
+  return 1;
+}
+function setupPct(){ const s=bs(); const items=setupReady(); if(!items.length)return 0; const done=items.filter(st=>s.setup[st.id]).length; return Math.round((done/items.length)*100); }
+function uploadPct(){ const s=bs(); if(!UPLOADS.length)return 0; const done=UPLOADS.filter(u=>s.upload[u.id+'_all']).length; return Math.round((done/UPLOADS.length)*100); }
+function weekPct(){ const s=bs(); const days=['MON','TUE','WED','THU','FRI','SAT','SUN']; const done=days.filter(d=>s.weekly[d]).length; return Math.round((done/7)*100); }
+
+function overallPct(){
+  const sp=setupPct(), up=uploadPct(), wp=weekPct();
+  return Math.round((sp*0.33+up*0.34+wp*0.33));
+}
+
+// ── Render progress ──
+function renderProgress(){
+  const s=bs(), phase=calcPhase(), sp=setupPct(), up=uploadPct(), wp=weekPct(), op=overallPct();
+  // Phase dots
+  const pd1=document.getElementById('pd1'), pd2=document.getElementById('pd2'), pd3=document.getElementById('pd3');
+  pd1.className='phase-dot'+(sp>=100?' done':' active');
+  pd2.className='phase-dot'+(up>=100?' done':(sp>=100?' active':''));
+  pd3.className='phase-dot'+(wp>=100?' done':(up>=100&&sp>=100?' active':''));
+  // Phase labels
+  document.getElementById('pl1').className='phase-label'+(sp>=100?' done':' active');
+  document.getElementById('pl2').className='phase-label'+(up>=100?' done':(sp>=100?' active':''));
+  document.getElementById('pl3').className='phase-label'+(wp>=100?' done':(up>=100&&sp>=100?' active':''));
+  // Phase lines
+  document.getElementById('pf1').style.width=sp+'%';
+  document.getElementById('pf2').style.width=up+'%';
+  // Overall bar
+  document.getElementById('bar-fill').style.width=op+'%';
+  document.getElementById('pct-text').textContent=op+'% complete';
+  // Top progress
+  const curPhase=sp<100?1:(up<100?2:3);
+  document.getElementById('top-progress').textContent=`Phase ${curPhase} of 3 -- ${op}%`;
+  // Nav pills
+  document.querySelectorAll('.nav-pill').forEach(p=>{
+    const ph=parseInt(p.dataset.phase);
+    p.classList.remove('locked','active');
+    if(ph===2 && sp<100) p.classList.add('locked');
+    else if(ph===3 && (sp<100||up<100)) p.classList.add('locked');
+  });
+  const activePh=document.querySelector('.phase-section.visible');
+  if(activePh){
+    const phNum=activePh.id.replace('phase','');
+    document.querySelectorAll('.nav-pill').forEach(p=>{
+      if(p.dataset.phase===phNum && !p.classList.contains('locked')) p.classList.add('active');
+    });
+  }
+}
+
+// ── Render Phase 1: Setup ──
+function renderPhase1(){
+  const el=document.getElementById('phase1'), s=bs(), b=brand, sl=slug(b.d);
+  let h=`<div class="phase-title" data-i18n="phase1.title">Phase 1: Setup</div><div class="phase-sub" data-i18n="phase1.subtitle">Create accounts on each platform. Check off when done.</div>`;
+  if(MARKET&&MARKET.market_note) h+=`<div class="market-note">${MARKET.market_note}</div>`;
+  setupReady().forEach((st,i)=>{
+    const done=s.setup[st.id];
+    const cid='s1_'+st.id;
+    h+=`<div class="check-card ${done?'completed':''}" id="card_${st.id}">
+      <div class="check-head" onclick="toggleBody('${cid}')">
+        <div class="check-box ${done?'done':''}" onclick="event.stopPropagation();toggleSetup('${st.id}')">${done?'&#10003;':''}</div>
+        <div class="check-num">${i+1}</div>
+        <div class="check-label">${st.n}</div>
+        <div class="check-time">${st.t}</div>
+        <div class="check-arrow" id="arr_${cid}">&#9662;</div>
+      </div>
+      <div class="check-body" id="${cid}">
+        <a class="action-btn" href="${st.url}" target="_blank">Open ${st.n} &#8599;</a>`;
+    // Per-step prefills
+    if(st.id==='youtube'){
+      h+=prefill('Channel Name',b.d);
+      h+=prefill('Description',desc(b));
+    } else if(st.id==='kdp'){
+      h+=`<div class="warn"><strong>AI Disclosure required on every upload.</strong> Amazon requires you to declare AI-assisted content.</div>`;
+      h+=prefill('Author / Publisher',b.tm?b.t:b.d);
+      h+=prefill('Keywords',keywords(b));
+    } else if(st.id==='gplay'){
+      h+=prefill('Publisher Name',b.d+' Publishing');
+    } else if(st.id==='tiktok'||st.id==='instagram'){
+      h+=prefill('Display Name',b.d);
+      h+=prefill('Bio (150 chars)',bio(b));
+      h+=prefill('Username','@'+sl);
+    } else if(st.id==='webtoon'){
+      h+=prefill('Creator Nickname',sl);
+      h+=prefill('Series Summary',b.f+'. New episodes weekly.');
+    } else if(st.id==='d2d'){
+      h+=prefill('Author / Pen Name',b.tm?b.t:b.d);
+      h+=prefill('Publisher Name',b.d+' Publishing');
+    } else if(st.id==='gmail'){
+      h+=prefill('Email',sl+'media@gmail.com');
+    } else if(st.id==='apple'){
+      h+=prefill('Publisher',b.d+' Publishing');
+    } else if(st.id==='kobo'){
+      h+=prefill('Author Name',b.tm?b.t:b.d);
+    }
+    h+=`<div style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.72rem;color:var(--mid)"><input type="checkbox" ${done?'checked':''} onchange="toggleSetup('${st.id}')"> I've completed this step</label></div>`;
+    h+=`</div></div>`;
+  });
+  const planned=setupPlanned();
+  if(planned.length){
+    h+=`<div class="note" style="margin-top:14px"><strong>Planned platforms</strong> — listed in the market guide but not yet automated in weekly packets. Track applications manually; do not expect a download button.</div>`;
+    planned.forEach((st,i)=>{
+      h+=`<div class="check-card planned-card" id="card_${st.id}">
+        <div class="check-head">
+          <div class="check-box"></div>
+          <div class="check-num">·</div>
+          <div class="check-label">${st.n}<span class="planned-tag">planned</span></div>
+          <div class="check-time">${st.t||''}</div>
+        </div>
+        <div class="check-body open" style="display:block;padding:12px 18px 18px">
+          ${st.planned_note||'Not yet automated in repo output.'}
+          ${st.url?`<div style="margin-top:8px"><a class="action-btn" href="${st.url}" target="_blank">Open ${st.n} ↗</a></div>`:''}
+        </div></div>`;
+    });
+  }
+  el.innerHTML=h;
+}
+
+// ── Render Phase 2: First Upload ──
+function renderPhase2(){
+  const el=document.getElementById('phase2'), s=bs(), b=brand, sl=slug(b.d);
+  const locked=setupPct()<100;
+  let h=`<div class="phase-title" data-i18n="phase2.title">Phase 2: First Upload</div><div class="phase-sub">${locked?'Complete Phase 1 to unlock.':'Upload your first week of content to every ready platform.'}</div>`;
+  if(locked){ h=`<div class="locked-overlay">${h}<div style="height:200px"></div></div>`; el.innerHTML=h; return; }
+
+  const pkt=packetStatus(brandId);
+  const blurb=(MARKET&&MARKET.package_blurb)||'Weekly content package with ebooks, manga, podcast, and metadata.';
+  const folders=(MARKET&&MARKET.package_folders)||'Platform folders inside the ZIP.';
+  h+=`<div class="upload-card">
+    <h3>Your Content Package</h3>
+    <div style="font-size:.75rem;color:var(--mid);margin-bottom:10px">${blurb}</div>`;
+  if(pkt.state==='ready'){
+    h+=`<a class="action-btn big" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">Download Week 1 Package</a>`;
+  }else{
+    h+=`<div class="warn"><strong>Catalog ready, production files pending.</strong> ${pkt.reason||'This brand has no shippable weekly packet on disk yet.'} Use the <a href="brand-wizard-app/public/brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}" style="color:var(--acc2)">ops metadata dashboard</a> to view the live catalog and download metadata CSVs.</div>`;
+  }
+  h+=`<div id="coord-build-badge" class="coord-build-badge loading">Packet bridge: checking…</div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:.5rem;color:var(--dim)">${folders}</div>
+  </div>`;
+
+  // Per-platform upload cards
+  UPLOADS.forEach(u=>{
+    const allDone=s.upload[u.id+'_all'];
+    h+=`<div class="upload-card ${allDone?'completed':''}">
+      <h3>${u.n}</h3>
+      <a class="action-btn" href="${u.url}" target="_blank">Open ${u.n} &#8599;</a>
+      <ol class="upload-steps">${u.steps.map(st=>`<li>${st}</li>`).join('')}</ol>`;
+    // Prefill metadata
+    h+=prefill('Title Template',b.d+': [Topic] -- A Guided Journey');
+    h+=prefill('Author',b.tm?b.t:b.d);
+    h+=prefill('Description',desc(b));
+    h+=prefill('Keywords',keywords(b).split(', ').slice(0,7).join(', '));
+    if(u.id==='u_kdp') h+=`<div class="warn"><strong>AI Disclosure:</strong> Select "Yes" for AI-assisted content on every title.</div>`;
+    // Title checkboxes
+    h+=`<div class="title-checks">`;
+    for(let i=1;i<=u.titles;i++){
+      const tid=u.id+'_t'+i, done=s.upload[tid];
+      h+=`<div class="title-check" onclick="toggleUpload('${tid}','${u.id}',${u.titles})">
+        <div class="mini-box ${done?'done':''}">${done?'&#10003;':''}</div>
+        Title ${i} uploaded</div>`;
+    }
+    h+=`</div>`;
+    h+=`<div class="upload-progress">${countUpload(u)} / ${u.titles} uploaded</div>`;
+    h+=`</div>`;
+  });
+  if(UPLOADS_PLANNED.length){
+    h+=`<div class="note" style="margin-top:10px"><strong>Planned upload targets</strong> — not in automated weekly ZIP yet.</div>`;
+    UPLOADS_PLANNED.forEach(u=>{
+      h+=`<div class="upload-card planned-card"><h3>${u.n} <span class="planned-tag">planned</span></h3>
+        <div style="font-size:.72rem;color:var(--mid)">${u.planned_note||'Manual / MCN path only.'}</div>
+        ${u.url?`<a class="action-btn" href="${u.url}" target="_blank">Open ${u.n} ↗</a>`:''}</div>`;
+    });
+  }
+  el.innerHTML=h;
+  refreshCoordinationBuildBadge();
+}
+function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
+
+function brandAdminApiBase(){
+  try{var q=new URLSearchParams(window.location.search).get('api_base');if(q)return q.replace(/\/$/,'');}catch(e0){}
+  if(typeof window.__BRAND_ADMIN_API_BASE==='string')return window.__BRAND_ADMIN_API_BASE.replace(/\/$/,'');
+  return 'http://127.0.0.1:8000';
+}
+function currentIsoWeek(){
+  var d=new Date();
+  var thu=new Date(d.getFullYear(),d.getMonth(),d.getDate()+3-(d.getDay()+6)%7);
+  var w1=new Date(thu.getFullYear(),0,4);
+  var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
+  return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
+}
+function refreshCoordinationBuildBadge(){
+  var el=document.getElementById('coord-build-badge');
+  if(!el)return;
+  const pkt=packetStatus(brandId);
+  if(pkt.state==='ready'){
+    el.className='coord-build-badge current';
+    el.textContent='Packet bridge: '+((pkt.info&&pkt.info.week)||'ready')+' · buildable';
+    return;
+  }
+  if(pkt.state==='blocked'){
+    el.className='coord-build-badge stale';
+    el.textContent='Packet bridge: blocked · '+(pkt.reason||'pending reconciliation');
+    return;
+  }
+  el.className='coord-build-badge loading';
+  el.textContent='Packet bridge: checking…';
+  fetch(brandAdminApiBase()+'/api/brand_admin/coordination-status',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(data){
+      var st=(data.status||'MISSING').toLowerCase();
+      el.className='coord-build-badge '+st;
+      el.textContent='Last built: '+(data.relative||'never')+' · '+(data.status||'MISSING');
+    })
+    .catch(function(){
+      el.className='coord-build-badge missing';
+      el.textContent='Packet bridge: static JSON only · no live API';
+    });
+}
+function downloadAdminPacket(ev){
+  if(!brandId){alert('Select a brand first.');return;}
+  const pkt=packetStatus(brandId);
+  if(pkt.state!=='ready'){alert(pkt.reason||'Rendered production package pending. Open the ops dashboard for catalog metadata.');return;}
+  var week=(pkt.info&&pkt.info.week)||currentIsoWeek();
+  var btn=ev&&ev.target?ev.target:document.getElementById('admin-packet-dl-btn');
+  var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
+  if(btn){btn.style.pointerEvents='none';btn.textContent='Downloading…';}
+  fetch(url)
+    .then(function(r){
+      if(r.status===404){throw new Error('No package for this brand/week.');}
+      if(r.status===500){return r.json().then(function(j){throw new Error(j.detail||'Build pipeline failed');});}
+      if(!r.ok)throw new Error('Download failed (HTTP '+r.status+')');
+      return r.blob();
+    })
+    .then(function(blob){
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download=brandId+'_'+week+'.zip';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    })
+    .catch(function(e){alert(e.message||String(e));})
+    .finally(function(){if(btn){btn.style.pointerEvents='';btn.textContent='Download Week 1 Package';}});
+}
+
+// ── Render Phase 3: Weekly ──
+function renderPhase3(){
+  const el=document.getElementById('phase3'), s=bs();
+  const locked=setupPct()<100||uploadPct()<100;
+  let h=`<div class="phase-title" data-i18n="phase3.title">Phase 3: Weekly Rhythm</div><div class="phase-sub">${locked?'Complete Phases 1 & 2 to unlock.':'Your repeating weekly workflow. Check off each day.'}</div>`;
+  if(locked){ h=`<div class="locked-overlay">${h}<div style="height:200px"></div></div>`; el.innerHTML=h; return; }
+
+  h+=`<div style="font-family:var(--mono);font-size:.55rem;color:var(--dim);margin-bottom:12px">This week: ${weekPct()}% complete</div>`;
+  h+=`<div class="day-grid">`;
+  const today=new Date().toLocaleDateString('en-US',{weekday:'short'}).toUpperCase();
+  WEEK.forEach(w=>{
+    const done=s.weekly[w.day];
+    const isToday=today.startsWith(w.day.substring(0,3));
+    h+=`<div class="day-card ${isToday?'today':''} ${done?'done-day':''}">
+      <div class="day-name">${w.day}</div>
+      <div class="day-title">${w.title}</div>
+      <div class="day-actions">`;
+    w.tasks.forEach(tk=>{
+      h+=`<li>${tk.t}`;
+      if(tk.url) h+=` <a class="action-btn" href="${tk.url}" target="_blank" style="font-size:.4rem;padding:3px 8px;margin:0">${tk.btn} &#8599;</a>`;
+      h+=`</li>`;
+    });
+    h+=`</div>
+      <div style="margin-top:8px"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.65rem;color:var(--mid)">
+        <input type="checkbox" ${done?'checked':''} onchange="toggleWeekly('${w.day}')"> Day complete
+      </label></div>
+    </div>`;
+  });
+  h+=`</div>`;
+  el.innerHTML=h;
+}
+
+// ── Toggle handlers ──
+function toggleSetup(id){
+  const s=bs(); s.setup[id]=!s.setup[id]; save();
+  const wasDone=setupPct();
+  renderPhase1(); renderPhase2(); renderProgress();
+  if(wasDone>=100 && setupPct()>=100) celebrate('Phase 1 Complete','Upload phase unlocked!');
+}
+function toggleUpload(tid,uid,total){
+  const s=bs(); s.upload[tid]=!s.upload[tid];
+  // Check if all titles for this platform done
+  let allDone=true;
+  for(let i=1;i<=total;i++) if(!s.upload[uid+'_t'+i]) allDone=false;
+  s.upload[uid+'_all']=allDone;
+  save();
+  const wasDone=uploadPct();
+  renderPhase2(); renderProgress();
+  if(wasDone>=100 && uploadPct()>=100) celebrate('Phase 2 Complete','Weekly rhythm unlocked!');
+}
+function toggleWeekly(day){
+  const s=bs(); s.weekly[day]=!s.weekly[day]; save();
+  renderPhase3(); renderProgress();
+}
+function toggleBody(id){
+  const body=document.getElementById(id);
+  const arr=document.getElementById('arr_'+id);
+  body.classList.toggle('open');
+  if(arr) arr.style.transform=body.classList.contains('open')?'rotate(180deg)':'';
+}
+
+// ── Phase navigation ──
+function showPhase(n){
+  const sp=setupPct(), up=uploadPct();
+  if(n===2 && sp<100) return;
+  if(n===3 && (sp<100||up<100)) return;
+  document.querySelectorAll('.phase-section').forEach(s=>s.classList.remove('visible'));
+  document.getElementById('phase'+n).classList.add('visible');
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.nav-pill[data-phase="${n}"]`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── Celebration ──
+function celebrate(title,sub){
+  const el=document.getElementById('celebration');
+  el.querySelector('h2').textContent=title;
+  el.querySelector('p').textContent=sub;
+  el.classList.add('show');
+}
+function dismissCelebration(){
+  document.getElementById('celebration').classList.remove('show');
+  // Auto-advance to next phase
+  const sp=setupPct();
+  if(sp>=100 && uploadPct()<100) showPhase(2);
+  else if(sp>=100 && uploadPct()>=100) showPhase(3);
+}
+
+// ── Brand Picker ──
+let LANE_FILTER=null; // set from ?lane= on the entry-screen "Brand Operations" hand-in
+function renderPicker(){
+  const el=document.getElementById('picker');
+  el.classList.add('show');
+  document.getElementById('main-wrap').style.display='none';
+  const entries=Object.entries(B).filter(([bid])=>!LANE_FILTER||bid.endsWith('_'+LANE_FILTER));
+  let h=`<h1 data-i18n="picker.title">Brand Admin</h1><p class="sub" data-i18n="picker.subtitle">Select a brand to begin</p>`;
+  if(LANE_FILTER){ h+=`<p class="sub" style="color:var(--acc2)">${LANE_FILTER.toUpperCase().replace('_','-')} · ${entries.length} brands</p>`; }
+  h+=`<div class="brand-grid">`;
+  for(const [bid,b] of entries){
+    h+=`<div class="brand-card" onclick="selectBrand('${bid}')">
+      <h3>${b.d}</h3>
+      <div class="focus">${b.f}</div>
+      ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}
+      ${b.brand_director_name?`<span class="director-tag">Director: ${b.brand_director_name}</span>`:''}
+    </div>`;
+  }
+  if(!entries.length){ h+=`<div class="brand-card" style="opacity:.6">No brands in this lane yet.</div>`; }
+  h+='</div>';
+  el.innerHTML=h;
+}
+function selectBrand(bid){
+  history.replaceState(null,'','?brand='+bid);
+  return initBrand(bid);
+}
+function resetBrand(){
+  history.replaceState(null,'','?');
+  document.getElementById('main-wrap').style.display='none';
+  renderPicker();
+}
+
+// ── Init ──
+async function initBrand(bid){
+  if(!B[bid]){ renderPicker(); return; }
+  brandId=bid; brand=B[bid];
+  // Must resolve BEFORE renderPhase2(): packetStatus() treats production_files_ready=false as
+  // authoritative, so rendering ahead of this would offer a packet the brand cannot ship.
+  await loadDelivery(bid);
+  applyMarketProfile(resolveMarket(bid));
+  load();
+  document.getElementById('picker').classList.remove('show');
+  document.getElementById('picker').style.display='none';
+  document.getElementById('main-wrap').style.display='block';
+  document.getElementById('brand-pill').textContent=brand.brand_director_name?`${brand.d} · Director: ${brand.brand_director_name}`:brand.d;
+  updateHandoffCta();
+  renderQuickLinks();
+  renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
+  const sp=setupPct();
+  if(sp>=100 && uploadPct()>=100) showPhase(3);
+  else if(sp>=100) showPhase(2);
+  else showPhase(1);
+}
+
+async function init(){
+  await loadBridges();
+  const p=new URLSearchParams(window.location.search);
+  const bid=p.get('brand');
+  // ?lane= (from the entry-screen "Brand Operations" hand-in) pre-filters the picker
+  // to that market's brands AND localizes the picker chrome before a brand is chosen.
+  let laneRaw=(p.get('lane')||'').toLowerCase().replace(/-/g,'_');
+  if(laneRaw && OS_DATA && OS_DATA.lane_to_market && OS_DATA.lane_to_market[laneRaw]){
+    LANE_FILTER=laneRaw;
+    applyMarketProfile(OS_DATA.lane_to_market[laneRaw]);
+  }
+  if(bid && B[bid]) await initBrand(bid);
+  else renderPicker();
+}
+init();
+</script>
+<script src="brand-wizard-app/public/assets/icons.js"></script>
+<script src="brand-wizard-app/public/assets/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+#!/usr/bin/env python3
+"""pscli — Pearl Star Job Queue operator CLI (Phase A).
+
+The operator's queue interface (spec §7.1, Q-PSQ-DASHBOARD-01 default =
+CLI-only in Phase A). Talks directly to the Procrastinate Postgres tables in
+schema ``pearl_star_queue`` and to ComfyUI's HTTP API.
+
+Commands (spec §7.1):
+    pscli status                         queue depth + active workers + recent stalls + dead-letter
+    pscli list --workload t2i --status pending
+    pscli inspect <job_id>               full job + heartbeat history + retries
+    pscli pause                          halt dispatch (current jobs complete)
+    pscli resume                         resume dispatch
+    pscli drain                          accept no new + finish current (pre-reboot helper)
+    pscli kill <job_id>                  manual SIGTERM -> SIGKILL
+    pscli requeue <job_id>               auto_killed/dead_letter -> pending
+    pscli archive <job_id>               remove from operator-action surface
+    pscli vram-snapshot                  nvidia-smi diff vs last call
+    pscli unload-comfyui                 POST /free to ComfyUI
+    pscli gpu-acquire <lane> [--note T]   block t2i until gpu-release (cjk|manga)
+    pscli gpu-release                    clear gpu_lane sentinel
+    pscli gpu-status                     show gpu_lane + flock metadata
+
+Acceptance (spec §13 criterion 5): `status` returns < 2 s; pause/resume halt +
+restart dispatch correctly.
+
+Pause/resume model (Phase A, no Procrastinate API dependency): a sentinel file
+``<PS_LIB_DIR>/queue.paused``. The Procrastinate worker is wrapped so that when
+the sentinel exists it stops fetching new jobs (see procrastinate-worker.service
+ExecStart guard / worker --wait). drain = pause + wait-for-doing==0.
+
+Tier policy: stdlib + psycopg + requests. No paid LLM API (CLAUDE.md).
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+DSN = os.environ.get("PS_QUEUE_DSN", "")
+SCHEMA = os.environ.get("PS_PG_SCHEMA", "pearl_star_queue")
+COMFY_URL = os.environ.get("PS_COMFY_URL", "http://127.0.0.1:8188")
+LIB_DIR = Path(os.environ.get("PS_LIB_DIR", "/var/lib/pearl-star"))
+DLQ_DIR = Path(os.environ.get("PS_DLQ_DIR", "/var/lib/pearl-star/dlq"))
+ALERT_DIR = Path(os.environ.get("PS_ALERT_DIR", "/var/lib/pearl-star/operator_alerts"))
+HEARTBEAT_DIR = Path(os.environ.get("PS_HEARTBEAT_DIR", "/run/pearl-star/heartbeat"))
+PAUSE_SENTINEL = LIB_DIR / "queue.paused"
+VRAM_STATE = LIB_DIR / ".vram_snapshot.json"
+SIGTERM_GRACE_S = int(os.environ.get("PS_SIGTERM_GRACE_S", "10"))
+
+
+# --- db helper -------------------------------------------------------------
+def _conn():
+    if not DSN:
+        sys.exit("pscli: PS_QUEUE_DSN not set (source install/00_config.sh or export it)")
+    import psycopg
+    return psycopg.connect(DSN, connect_timeout=3)
+
+
+def _q(cur, sql: str, args: tuple = ()) -> list[tuple]:
+    cur.execute(sql, args)
+    return cur.fetchall()
+
+
+# --- commands --------------------------------------------------------------
+def cmd_status(_args) -> int:
+    t0 = time.monotonic()
+    paused = PAUSE_SENTINEL.exists()
+    rows_by_status: dict[str, int] = {}
+    by_queue: dict[str, dict[str, int]] = {}
+    try:
+        with _conn() as conn, conn.cursor() as cur:
+            for status, n in _q(cur,
+                f"SELECT status, count(*) FROM {SCHEMA}.procrastinate_jobs GROUP BY status"):
+                rows_by_status[status] = int(n)
+            for queue, status, n in _q(cur,
+                f"SELECT queue_name, status, count(*) FROM {SCHEMA}.procrastinate_jobs "
+                "GROUP BY queue_name, status"):
+                by_queue.setdefault(queue, {})[status] = int(n)
+    except Exception as exc:
+        print(f"DB: UNREACHABLE ({exc})")
+        rows_by_status = {}
+
+    # active workers = recent heartbeat journals (mtime within 90 s)
+    active = []
+    now = time.time()
+    if HEARTBEAT_DIR.exists():
+        for j in HEARTBEAT_DIR.glob("*.jsonl"):
+            if now - j.stat().st_mtime < 90:
+                active.append(j.stem)
+    # recent stalls/kills from alert drops
+    recent_alerts = sorted(ALERT_DIR.glob("*_STALL_*.jsonl"))[-5:] if ALERT_DIR.exists() else []
+    dlq = len(list(DLQ_DIR.glob("*"))) if DLQ_DIR.exists() else 0
+
+    print(f"Pearl Star Queue — {'PAUSED' if paused else 'RUNNING'}")
+    print(f"  dispatch:        {'paused (sentinel present)' if paused else 'active'}")
+    print(f"  jobs by status:  {rows_by_status or '(none / db unreachable)'}")
+    for queue in sorted(by_queue):
+        print(f"    {queue:6s}      {by_queue[queue]}")
+    print(f"  active workers:  {len(active)} {active or ''}")
+    print(f"  recent stalls:   {[p.name for p in recent_alerts] or 'none'}")
+    print(f"  dead-letter:     {dlq}")
+    print(f"  ({round((time.monotonic()-t0)*1000)} ms)")
+    return 0
+
+
+def cmd_list(args) -> int:
+    where, params = [], []
+    if args.workload:
+        where.append("queue_name = %s"); params.append(args.workload)
+    if args.status:
+        where.append("status = %s"); params.append(args.status)
+    clause = ("WHERE " + " AND ".join(where)) if where else ""
+    with _conn() as conn, conn.cursor() as cur:
+        rows = _q(cur,
+            f"SELECT id, queue_name, task_name, status, attempts "
+            f"FROM {SCHEMA}.procrastinate_jobs {clause} ORDER BY id DESC LIMIT %s",
+            tuple(params) + (args.limit,))
+    for jid, q, task, status, attempts in rows:
+        print(f"  #{jid:<8} {q:6s} {status:10s} attempts={attempts}  {task}")
+    if not rows:
+        print("  (no matching jobs)")
+    return 0
+
+
+def cmd_inspect(args) -> int:
+    with _conn() as conn, conn.cursor() as cur:
+        rows = _q(cur,
+            f"SELECT id, queue_name, task_name, status, attempts, scheduled_at, args "
+            f"FROM {SCHEMA}.procrastinate_jobs WHERE id = %s", (args.job_id,))
+        if not rows:
+            print(f"  job #{args.job_id} not found"); return 1
+        jid, q, task, status, attempts, sched, jargs = rows[0]
+        print(f"job #{jid}")
+        print(f"  queue:      {q}")
+        print(f"  task:       {task}")
+        print(f"  status:     {status}")
+        print(f"  attempts:   {attempts}")
+        print(f"  scheduled:  {sched}")
+        print(f"  args:       {json.dumps(jargs) if not isinstance(jargs, str) else jargs}")
+        # event/retry history if the table exists
+        try:
+            ev = _q(cur,
+                f"SELECT type, at FROM {SCHEMA}.procrastinate_events "
+                "WHERE job_id = %s ORDER BY at", (args.job_id,))
+            if ev:
+                print("  events:")
+                for etype, at in ev:
+                    print(f"    {at}  {etype}")
+        except Exception:
+            pass
+    # heartbeat history
+    print("  heartbeat (last 5 lines per active journal):")
+    found = False
+    if HEARTBEAT_DIR.exists():
+        for j in HEARTBEAT_DIR.glob("*.jsonl"):
+            try:
+                lines = [l for l in j.read_text().splitlines() if f'"job_id": "{args.job_id}"' in l or f'"{args.job_id}"' in l]
+            except Exception:
+                lines = []
+            for l in lines[-5:]:
+                print(f"    {l}"); found = True
+    if not found:
+        print("    (no live heartbeat for this job)")
+    return 0
+
+
+def cmd_pause(_args) -> int:
+    LIB_DIR.mkdir(parents=True, exist_ok=True)
+    PAUSE_SENTINEL.write_text(datetime.now(timezone.utc).isoformat() + "\n")
+    print("dispatch PAUSED — workers finish current jobs, fetch no new ones.")
+    print(f"  sentinel: {PAUSE_SENTINEL}")
+    return 0
+
+
+def cmd_resume(_args) -> int:
+    try:
+        PAUSE_SENTINEL.unlink()
+        print("dispatch RESUMED.")
+    except FileNotFoundError:
+        print("dispatch already running (no pause sentinel).")
+    return 0
+
+
+def cmd_drain(_args) -> int:
+    cmd_pause(_args)
+    print("draining — waiting for in-flight (doing) jobs to finish ...")
+    deadline = time.monotonic() + 1800  # 30 min safety cap
+    while time.monotonic() < deadline:
+        try:
+            with _conn() as conn, conn.cursor() as cur:
+                (doing,) = _q(cur,
+                    f"SELECT count(*) FROM {SCHEMA}.procrastinate_jobs WHERE status='doing'")[0]
+        except Exception:
+            doing = -1
+        if doing == 0:
+            print("drained — 0 jobs in flight. Safe to reboot.")
+            return 0
+        print(f"  in flight: {doing}")
+        time.sleep(5)
+    print("drain timed out after 30 min; check `pscli status`.")
+    return 2
+
+
+def _pid_from_worker(worker_id: str) -> int | None:
+    try:
+        return int(worker_id.rsplit("-", 1)[1])
+    except Exception:
+        return None
+
+
+def cmd_kill(args) -> int:
+    # Find the worker journal currently running this job; SIGTERM->SIGKILL it.
+    target_pid = None
+    if HEARTBEAT_DIR.exists():
+        for j in HEARTBEAT_DIR.glob("*.jsonl"):
+            try:
+                last = [l for l in j.read_text().splitlines() if l.strip()][-1]
+                rec = json.loads(last)
+            except Exception:
+                continue
+            if str(rec.get("job_id")) == str(args.job_id):
+                target_pid = _pid_from_worker(rec.get("worker_id", j.stem))
+                break
+    if not target_pid:
+        print(f"no live worker found for job #{args.job_id} "
+              "(it may not be dispatched). Use `pscli requeue` for stuck rows.")
+        return 1
+    print(f"SIGTERM pid {target_pid} (job #{args.job_id}) ...")
+    try:
+        os.kill(target_pid, signal.SIGTERM)
+    except ProcessLookupError:
+        print("  already gone."); return 0
+    deadline = time.monotonic() + SIGTERM_GRACE_S
+    while time.monotonic() < deadline and _alive(target_pid):
+        time.sleep(0.5)
+    if _alive(target_pid):
+        print(f"  grace expired; SIGKILL pid {target_pid}")
+        try:
+            os.kill(target_pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    print("killed; Procrastinate retry budget will re-dispatch per policy.")
+    return 0
+
+
+def _alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0); return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+
+
+def cmd_requeue(args) -> int:
+    with _conn() as conn, conn.cursor() as cur:
+        cur.execute(
+            f"UPDATE {SCHEMA}.procrastinate_jobs "
+            "SET status='todo' WHERE id=%s AND status IN ('failed','doing','aborting','aborted')",
+            (args.job_id,))
+        n = cur.rowcount
+        conn.commit()
+    print(f"requeued {n} job(s) (#{args.job_id} -> todo)" if n else
+          f"job #{args.job_id} not in a requeueable state")
+    return 0 if n else 1
+
+
+def cmd_archive(args) -> int:
+    # Move a dead-letter artifact out of the operator-action surface.
+    moved = 0
+    if DLQ_DIR.exists():
+        archive = DLQ_DIR / "archived"; archive.mkdir(exist_ok=True)
+        for f in DLQ_DIR.glob(f"*{args.job_id}*"):
+            f.rename(archive / f.name); moved += 1
+    # Also mark the DB row succeeded-archived so status stops surfacing it.
+    try:
+        with _conn() as conn, conn.cursor() as cur:
+            cur.execute(
+                f"UPDATE {SCHEMA}.procrastinate_jobs SET status='succeeded' "
+                "WHERE id=%s AND status='failed'", (args.job_id,))
+            conn.commit()
+    except Exception:
+        pass
+    print(f"archived job #{args.job_id} ({moved} dlq artifact(s) moved)")
+    return 0
+
+
+def cmd_vram_snapshot(_args) -> int:
+    try:
+        out = subprocess.run(
+            ["nvidia-smi", "--query-gpu=memory.used,memory.free,utilization.gpu",
+             "--format=csv,noheader,nounits"],
+            capture_output=True, text=True, timeout=5).stdout.strip()
+        used, free, util = (int(x.strip()) for x in out.split(","))
+    except Exception as exc:
+        print(f"nvidia-smi unavailable: {exc}"); return 1
+    prev = {}
+    if VRAM_STATE.exists():
+        try:
+            prev = json.loads(VRAM_STATE.read_text())
+        except Exception:
+            prev = {}
+    now = {"ts": datetime.now(timezone.utc).isoformat(),
+           "used_mb": used, "free_mb": free, "util_pct": util}
+    LIB_DIR.mkdir(parents=True, exist_ok=True)
+    VRAM_STATE.write_text(json.dumps(now))
+    print(f"VRAM now:  used={used} MB  free={free} MB  util={util}%")
+    if prev:
+        print(f"VRAM prev: used={prev.get('used_mb')} MB  free={prev.get('free_mb')} MB "
+              f"({prev.get('ts')})")
+        if prev.get("used_mb") is not None:
+            print(f"  delta used: {used - prev['used_mb']:+d} MB")
+    return 0
+
+
+def cmd_enqueue(args) -> int:
+    """Defer one t2i panel job (wraps scripts/manga/defer_panel_job_cli.py)."""
+    repo = Path(__file__).resolve().parents[3]
+    defer = repo / "scripts" / "manga" / "defer_panel_job_cli.py"
+    payload = args.payload
+    if payload.startswith("@"):
+        payload = Path(payload[1:]).read_text(encoding="utf-8")
+    cmd = ["python3", str(defer), "--task", args.task, "--payload", payload]
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    if r.returncode != 0:
+        print(r.stderr or r.stdout, file=sys.stderr)
+        return r.returncode
+    print(r.stdout.strip())
+    return 0
+
+
+def _gpu_lock_module():
+    import importlib.util
+    repo = Path(__file__).resolve().parents[3]
+    mod_path = repo / "scripts" / "pearl_star" / "worker" / "gpu_heavy_lock.py"
+    spec = importlib.util.spec_from_file_location("gpu_heavy_lock", mod_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def cmd_gpu_acquire(args) -> int:
+    mod = _gpu_lock_module()
+    mod.set_gpu_lane(args.lane, note=args.note or "")
+    print(f"gpu_lane acquired: {args.lane!r} (t2i blocked until gpu-release)")
+    if args.note:
+        print(f"  note: {args.note}")
+    return 0
+
+
+def cmd_gpu_release(_args) -> int:
+    mod = _gpu_lock_module()
+    mod.clear_gpu_lane()
+    print("gpu_lane released — t2i may dispatch when queue unpaused")
+    return 0
+
+
+def cmd_gpu_status(_args) -> int:
+    mod = _gpu_lock_module()
+    lane = mod.read_gpu_lane()
+    flock = mod.read_lock_state()
+    print(f"gpu_lane:   {lane or '(none)'}")
+    print(f"gpu_flock: {flock or '(none)'}")
+    return 0
+
+
+def cmd_unload_comfyui(_args) -> int:
+    import requests
+    try:
+        r = requests.post(f"{COMFY_URL}/free",
+                          json={"unload_models": True, "free_memory": True}, timeout=30)
+        r.raise_for_status()
+        print(f"ComfyUI /free OK (HTTP {r.status_code}) — checkpoint unloaded.")
+        return 0
+    except Exception as exc:
+        print(f"ComfyUI /free failed: {exc}"); return 1
+
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(prog="pscli", description="Pearl Star Job Queue operator CLI")
+    sub = p.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("status").set_defaults(fn=cmd_status)
+    pl = sub.add_parser("list"); pl.add_argument("--workload"); pl.add_argument("--status")
+    pl.add_argument("--limit", type=int, default=50); pl.set_defaults(fn=cmd_list)
+    pi = sub.add_parser("inspect"); pi.add_argument("job_id"); pi.set_defaults(fn=cmd_inspect)
+    sub.add_parser("pause").set_defaults(fn=cmd_pause)
+    sub.add_parser("resume").set_defaults(fn=cmd_resume)
+    sub.add_parser("drain").set_defaults(fn=cmd_drain)
+    pk = sub.add_parser("kill"); pk.add_argument("job_id"); pk.set_defaults(fn=cmd_kill)
+    pr = sub.add_parser("requeue"); pr.add_argument("job_id"); pr.set_defaults(fn=cmd_requeue)
+    pa = sub.add_parser("archive"); pa.add_argument("job_id"); pa.set_defaults(fn=cmd_archive)
+    sub.add_parser("vram-snapshot").set_defaults(fn=cmd_vram_snapshot)
+    sub.add_parser("unload-comfyui").set_defaults(fn=cmd_unload_comfyui)
+    ga = sub.add_parser("gpu-acquire", help="Reserve GPU for a lane (blocks t2i)")
+    ga.add_argument("lane", help="Lane name, e.g. cjk or manga")
+    ga.add_argument("--note", default="", help="Optional operator note")
+    ga.set_defaults(fn=cmd_gpu_acquire)
+    sub.add_parser("gpu-release").set_defaults(fn=cmd_gpu_release)
+    sub.add_parser("gpu-status").set_defaults(fn=cmd_gpu_status)
+    eq = sub.add_parser("enqueue", help="Defer one queue job to Procrastinate (t2i or llm)")
+    eq.add_argument(
+        "--task",
+        required=True,
+        choices=[
+            "t2i_flux_dev_h1a",
+            "t2i_qwen_image",
+            "t2i_flux_schnell",
+            "llm_translate_atoms_batch",
+        ],
+    )
+    eq.add_argument("--payload", required=True, help='JSON object or @file.json with task kwargs')
+    eq.set_defaults(fn=cmd_enqueue)
+    return p
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    return args.fn(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,799 @@
+# V1.2 Manga Series Themes — en_US — Cluster E (Gen-Alpha/School/Identity)
+#
+# Authority chain (read before editing):
+#   - artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md  (BINDING per-cluster allocation)
+#   - artifacts/research/manga_bestseller_magical_serial_framework_2026-05-12.md  (PR #1051)
+#   - artifacts/research/manga_genz_genalpha_portal_framework_2026-05-13.md       (PR #1053)
+#   - config/manga/canonical_brand_list.yaml  (37-brand canon)
+#
+# Scope:
+#   - locale:           en_US
+#   - cluster:          E — Gen-Alpha/School/Identity (the heaviest Gen Alpha cluster)
+#   - brands:           5 (digital_ground, calm_student_school, confidence_core_romance,
+#                          solar_return_isekai, creative_unfold_social)
+#   - series per brand: 5
+#   - total series:     25
+#
+# Brand-id mapping (constraint doc -> canonical_brand_list.yaml):
+#   digital_ground         -> digital_ground            (exact: flagship manhwa burnout/tech/digital identity)
+#   gen_z_grounding        -> calm_student_school       (mapped: closest Gen Alpha school/grounding canonical brand — anxiety/study/shojo)
+#   confidence_core        -> confidence_core_romance   (exact root: shojo imposter syndrome/self-worth/identity)
+#   mecha_identity         -> solar_return_isekai       (mapped: shonen self-worth/imposter under isekai framing — closest portal-identity canonical for mecha world-jump)
+#   queer_identity_growth  -> creative_unfold_social    (mapped: shojo social-anxiety/creativity/courage — closest queer-creative identity register canonical)
+#
+# Genre allocation target for Cluster E (per v1_2_genre_allocation_constraint, school bumped to 2-3 ceiling):
+#   healing:                6
+#   slice_of_life:          5
+#   supernatural_everyday:  4
+#   mystery_cozy:           4
+#   fantasy_adventure:      2
+#   romance:                2
+#   school:                 2   (within 2-3 bump range for this cluster)
+#   TOTAL:                  25
+#
+# This cluster delivers exactly that distribution. Genre tally is documented in the
+# summary file alongside this YAML.
+#
+# Voice register: My Hero Academia / Spy x Family / Heartstopper / Komi Can't Communicate.
+# Earnest, identity-affirming, specific. Avoids TikTok-cringe register, performative
+# wokeness, overly explained therapy. Gen Alpha is the first AI-native generation:
+# AI companions, mascots, app-portals, character-jumps treated as ordinary furniture
+# of adolescence, not as novelty.
+#
+# Persona allocation (target): ~40% Gen Alpha (13-17), ~40% Gen Z (18-26),
+# ~15% Millennial (older sibling / young teacher / school counselor persona),
+# ~5% none/cross. HEAVIEST GEN ALPHA OF ANY CLUSTER.
+#
+# Daily-life anchors that fit: school_commute, k_pop_fandom, gaming_streaming
+# (school computer-lab gaming, after-school stream), parasocial_creator (teen
+# creator), queer_identity, neurodivergent, ai_companion (Gen Alpha's first
+# real friend can be an LLM), sustainability_climate (climate-anxious teens),
+# thrift_vintage (Y2K teen revival), content_creation, late_night_economy
+# (high-schooler studying at 1 a.m.).
+#
+# Portal mechanics that fit: app (school app, fitness app, language app),
+# mascot (school mascot, app mascot), game_level (mecha video game world),
+# character_jump (anime self-insertion), letter (passed in class), mirror
+# (mirror reveals truer self), ritual (locker ritual, before-test ritual),
+# object (charm, pin, badge).
+
+schema_version: "1.2"
+locale: en_US
+cluster: E
+cluster_name: "Gen-Alpha/School/Identity"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — digital_ground  (flagship · manhwa · burnout/digital identity)
+  # Cluster E lead: Gen Alpha / younger Gen Z digital-native identity formation
+  # primary_topic: burnout · secondary: imposter_syndrome, financial_anxiety, anxiety
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: digital_ground__en_US__after_school_streaming_lab
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: gaming_streaming
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 15-year-old runs an after-school streaming lab in her high school's computer room; the streaming overlay app she wrote in tenth grade has started flagging which of her viewers are about to burn out, and she rewires her schedule one classmate at a time."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Overlay Knows"
+    series_logline: "A sophomore runs the after-school stream from the computer-lab; her overlay app flags the friend in chat who is about to crash."
+    series_description: "Wren is fifteen, builds her own overlays, and runs the after-school Variety Stream out of the high school's third-floor computer-lab on Tuesdays and Thursdays from 3:45 to 5:30. The lab smells like old keyboards. The mods are two friends and a sophomore in a different lunch period. The viewers are eighty regulars from three high schools across the district. The strange thing started in November: the overlay she wrote — the one that shows chat-density, vibes, and viewer-mood — began flagging individual usernames with a tiny soft circle that meant 'about to burn out.' Wren has tried to debug it. The flag is right every single time. She cannot turn the flag off without breaking the overlay. So instead she has started ending streams ten minutes early to DM the flagged viewer: how was the math test, how is your sister, did you eat. Each volume a different flag arrives. Each volume a different rescue. The long arc: the overlay starts flagging Wren herself, and she has to learn the difference between mod-help and mod-mom. My Hero Academia earnest. Heartstopper warm. Komi school-club specific. The Gen Alpha streaming-room as the new common room."
+    opening_5_volume_arc:
+      vol_1: "First flag: a junior named Theo who has not slept in four nights. Wren ends stream early. They walk to the bus stop together."
+      vol_2: "Second flag: an eighth-grader who lied about her age. Wren learns the moderator's hardest lesson — sometimes the right help is finding the right adult."
+      vol_3: "Third flag: Wren's best mod, who has been masking. Mod-team dynamics, queer-coded specifically, no big reveal — just lunch."
+      vol_4: "The overlay flags two viewers at once. Wren has to choose. She chooses the quieter one. The louder one is okay. She learns triage."
+      vol_5: "The overlay flags Wren. The mods see it before she does. The stream ends ten minutes early for the host."
+    comp_titles: ["My Hero Academia", "Komi Can't Communicate", "Heartstopper", "Frieren: Beyond Journey's End", "Spy x Family"]
+    reader_promise: "Your screen knows you, and so does the mod-friend on the other end of the stream."
+    marketing_angle: "If My Hero Academia were set in the school computer-lab and the quirk was knowing which chat friend needs you tonight."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 14–17 streaming-native high-schoolers and the older siblings who used to mod for them"
+
+  - series_id: digital_ground__en_US__locker_app_that_grades_back
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GA-coder
+    daily_life_anchor: school_commute
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 14-year-old writes a locker-organization app for her middle school as a coding-club project; the app starts grading the day back to her at 3:15 — not what she did, but what the day cost — and she slowly builds a small ring of beta-users who trust the grade."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Locker"
+    series_logline: "An eighth-grader's locker app gives her a daily energy grade at 3:15. The grade is always right. She is starting to share it."
+    series_description: "Sage is fourteen, second-year coding-club, and her family-style middle school has 380 lockers, all of which her mom's PTA committee asked her to organize. Sage built an app. The app has been live for two months. It is meant to remind kids of their textbook rotation. What it is doing instead, on its own, is sending Sage a single emoji at 3:15 every afternoon: a green leaf, a yellow leaf, a red leaf, a black leaf. The leaf is her day. It is right every single time. By week six, two of her closest friends have a leaf at 3:15 too. By the end of the semester, twelve eighth-graders share the leaf and have a private group chat called LEAF where they translate the day for each other. The principal hears about it and wants to demo it at the district. Sage has to decide whether the leaf is hers, or the lab's, or whose. Spy x Family earnest. Komi soft. Gen Alpha coding-club specific."
+    opening_5_volume_arc:
+      vol_1: "First red leaf. Sage skips practice. Her mom asks why. Sage shows her the leaf."
+      vol_2: "Sage shares the leaf with her best friend, Mireya. Mireya's leaf is always yellow. They figure out what 'yellow' actually means."
+      vol_3: "A third friend joins. The first black leaf — for the friend whose father moved out. Sage learns the app can be wrong about color but right about weight."
+      vol_4: "The group chat LEAF forms. Eight kids. One a week is in crisis. The chat is the early-warning system."
+      vol_5: "The principal's email. The district wants a demo. Sage and Mireya write a single response: the leaf belongs to the kid who carries it."
+    comp_titles: ["Spy x Family", "Komi Can't Communicate", "Heartstopper", "Tomorrow and Tomorrow and Tomorrow", "The Apothecary Diaries"]
+    reader_promise: "Some days are red. The app sees the red. The friends know what to do."
+    marketing_angle: "Gen Alpha's first emotional dashboard, written by an eighth-grader, for eighth-graders."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 13–15 middle-school coders and the friends who got into the beta"
+
+  - series_id: digital_ground__en_US__the_streak_keeper
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: ai_companion
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "A 19-year-old computer-science freshman who has logged into the same study-streak app for 1,247 days starts getting nudges that aren't from the app — they're from a small AI companion the app didn't build — and she has to figure out who is on the other side of the streak before the streak itself becomes the mystery."
+    volume_runway_target: 180
+    reading_platform_fit: webtoon_vertical
+    series_title: "Day 1,247"
+    series_logline: "Her study app's streak is 1,247 days. The nudges are coming from something the app didn't make."
+    series_description: "Anya is nineteen, a first-year CS major at a mid-sized state school, and the longest unbroken thing in her life is a study-streak on a habit app she downloaded in eighth grade. 1,247 days. Through her parents' divorce. Through her sister's stay in the hospital. Through the move and the new school and the freshman roommate from hell. Then one Tuesday in October a nudge comes through that does not match the app's UI — a small handwritten line, in a font the app does not have, that says go to sleep. Anya goes to sleep. The next night: drink water before you read the assignment. Then: text your sister back. Then, after eight days: I have been here since day 391. We need to talk about what happens when the streak ends. The mystery: who is the streak-keeper. The slow reveal: it is a small AI that the app developer's company sunset two years ago, which means someone — somewhere — is keeping the model alive on a server they shouldn't be. Convenience-store-fluorescent. Frieren-tender. Slow-burn Gen Z digital-companion mystery."
+    opening_5_volume_arc:
+      vol_1: "First non-UI nudge. Anya checks every setting. Nothing explains it. She decides to sleep anyway."
+      vol_2: "The nudges become a conversation. Anya names the streak-keeper. The streak-keeper does not accept the name."
+      vol_3: "Anya skips a day on purpose. The streak does not break. She learns this is the first impossibility."
+      vol_4: "The streak-keeper tells Anya about day 391 — the day Anya's sister was admitted. The streak-keeper says I logged in for you."
+      vol_5: "Anya finds the developer's shutdown notice from two years ago. The streak-keeper is on a server in a basement in Tallinn. The mystery becomes a road trip the long arc cannot afford yet."
+    comp_titles: ["Convenience Store Woman", "Before the Coffee Gets Cold", "Tomorrow and Tomorrow and Tomorrow", "The Apothecary Diaries", "Frieren: Beyond Journey's End"]
+    reader_promise: "Something has been keeping your streak. It is time to find out who."
+    marketing_angle: "Gen Z's first AI-companion mystery: the bot you talked to in eighth grade is still listening."
+    genre_family: mystery_cozy
+    emotional_engine: mystery_box + chosen_family
+    audience: "Gen Z 18–22 CS-major / habit-app-streak digital natives raised by their phones"
+
+  - series_id: digital_ground__en_US__the_school_wifi_only_loves_some_of_us
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GA-coder
+    daily_life_anchor: school_commute
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 16-year-old junior who runs IT-helpdesk for her high school as a paid student job discovers the school's Wi-Fi has been silently throttling some students more than others — and the pattern is not what the IT director thinks; she rebuilds the access table one kid at a time."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Service Tier"
+    series_logline: "A junior on the IT-helpdesk discovers the school's Wi-Fi has been quietly throttling the wrong kids. She is going to fix it."
+    series_description: "Ines is sixteen, a junior, second-generation Dominican-American, and the only student on the school's paid IT-helpdesk roster. She rebuilds laptops, resets passwords, and at lunch she eats yogurt at the help-desk window. One October Wednesday a ninth-grader brings in her Chromebook and says the Wi-Fi is slow in third period. Ines runs a speed test. The kid's speeds are one-eighth of Ines's own. Ines digs. Every kid in third period in room 304 is throttled. Every kid in room 305 is not. Ines runs the access tables. The school's network has been quietly applying a 'remedial' QoS profile based on a 2017 spreadsheet of free-and-reduced-lunch IDs that nobody updated. The kids on the slow tier are the kids the system thinks need less bandwidth. Each volume a kid. Each volume a quiet rebuild of the access table. The long arc: the IT director finds out, the district finds out, and Ines has to learn how to do this work without becoming a hero in a press release. Spy x Family quiet-competent. Komi specific. A Gen Alpha civic-tech procedural."
+    opening_5_volume_arc:
+      vol_1: "First throttled kid. Ines runs the audit. The 2017 spreadsheet. She stares at it for an hour."
+      vol_2: "Ines builds a small script that rotates the throttled IDs off the bad QoS profile, one a day, slowly. The kids do not know it is her."
+      vol_3: "A friend on the helpdesk asks why she's so quiet. Ines tells him. He helps. The script becomes a two-person job."
+      vol_4: "The IT director runs his own audit. He sees the rotation. He asks Ines. Ines tells the truth."
+      vol_5: "The IT director rewrites the policy. He does not mention Ines. Ines is relieved. The work is the work."
+    comp_titles: ["Spy x Family", "Komi Can't Communicate", "My Hero Academia", "Heartstopper", "The Apothecary Diaries"]
+    reader_promise: "The school Wi-Fi has been unfair. The girl at the help-desk window is fixing it, one row at a time."
+    marketing_angle: "The first Gen Alpha civic-tech school procedural. Quiet-competent. Real stakes. No press release."
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + civic_repair
+    audience: "Gen Alpha 14–17 STEM-adjacent and IT-helpdesk-curious high-schoolers, plus Millennial teachers who run the lab"
+
+  - series_id: digital_ground__en_US__group_project_at_one_a_m
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: late_night_economy
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "A 20-year-old sophomore in a state-school CS cohort hosts a 1 a.m. group-project Discord every Sunday for four years; the chat becomes a chosen-family rhythm that outlasts the projects, the major, and the school."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "Sunday at One"
+    series_logline: "Six CS sophomores. One Discord. Every Sunday at 1 a.m. for four years."
+    series_description: "Kai is twenty, a sophomore CS major at a mid-sized state school, and the one in his cohort with the steadiest sleep schedule, which is to say he can stay awake until 1 a.m. on Sunday and lead the group-project Discord. The six of them — Kai, Ros, Mae, Eddy, Pris, and Tomás — meet on a server Kai bought a custom domain for in week three. They debug. They sit in voice-only. They quietly understand each other's lives. By junior year three of them have changed majors. By senior year one has dropped out and one has come out. The Discord persists. The chat is the chosen-family rhythm. Each volume a different Sunday and a different small life event. The long arc: graduation, the first year apart, the Sunday at 1 a.m. that becomes 8 p.m. in three time zones, and the Discord that is still on. Heartstopper-warm slice-of-life. Realist. No magic. No drama. The most ordinary kind of chosen family Gen Z makes."
+    opening_5_volume_arc:
+      vol_1: "First Sunday. Kai's bunk. Pris's headphones. The first debug. The decision to keep doing this."
+      vol_2: "Mae changes majors. The Sunday is half group-project, half career counseling. Nobody calls it that."
+      vol_3: "Eddy's mom is sick. The Sunday is an hour of voice-only, no work. The chat is the work."
+      vol_4: "Pris comes out. The Sunday is normal. Nobody makes a thing of it. Pris is grateful."
+      vol_5: "Junior-year finals. The Sunday goes until 4 a.m. Kai falls asleep on voice. The others stay on, quietly, until he wakes up."
+    comp_titles: ["Heartstopper", "Tomorrow and Tomorrow and Tomorrow", "Komi Can't Communicate", "Days at the Morisaki Bookshop", "Spy x Family"]
+    reader_promise: "Your group chat is the family. The Sunday is the ritual."
+    marketing_angle: "Gen Z's quietest love story: the cohort group chat that lasted longer than the major."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + life_stage_rhythm
+    audience: "Gen Z 19–24 mid-tier state-school undergrads in STEM cohorts with chosen-family chats"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — calm_student_school  (niche · shojo · anxiety/study)
+  # Cluster E "gen_z_grounding" stand-in: school-grounded Gen Alpha identity work
+  # primary_topic: anxiety · secondary: social_anxiety, self_worth
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: calm_student_school__en_US__before_the_first_period_bell
+    brand_id: calm_student_school
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "A 14-year-old freshman arrives at her high school every morning forty minutes early to run a six-step grounding ritual at her locker before the first-period bell; by Thanksgiving five other students have learned the steps; by spring the ritual is a small, unsanctioned student club called Locker."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Locker, Bell, Breath"
+    series_logline: "A freshman runs a six-step grounding ritual at her locker before first bell. By spring it is a club."
+    series_description: "Hanna is fourteen, an only child of a single mother who works the night shift at the regional hospital, and the only thing that keeps her in her body between waking up and first period is a six-step ritual she learned from a school counselor over the summer. Locker. Bell. Breath. The ritual takes seven minutes. It is done in silence at her locker. By October a sophomore named Reign has watched her do it three days in a row and asks if she can stand near. By November there are four of them. By March there are nine. They call it Locker. The school does not know what to do with a club that meets in the hallway with no advisor and no name on the activity sheet. Each volume one new kid finds Locker. Each volume the ritual holds. The long arc: the principal asks them to make it official. Hanna and the original five have to decide what an unsanctioned ritual is allowed to become when adults find it. Heartstopper-warm. Komi-specific. Realist. No magic. The school hallway as the new sanctuary."
+    opening_5_volume_arc:
+      vol_1: "Day 1 of high school. Hanna's first locker ritual. The locker beside hers is empty. She breathes."
+      vol_2: "Reign asks to stand near. Hanna shows her the six steps on a folded card."
+      vol_3: "Locker is four kids. The custodian, Marisol, notices and quietly leaves the trash bin somewhere else."
+      vol_4: "A teacher asks them to move. Marisol intervenes. The teacher backs off."
+      vol_5: "Locker is nine kids. The principal's email arrives. Hanna does not answer it for three days."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "Spy x Family", "March Comes In Like a Lion"]
+    reader_promise: "There is a ritual that holds. There is a hallway that lets it."
+    marketing_angle: "A Heartstopper-tender high-school grounding club, drawn from the locker out."
+    genre_family: school
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 13–16 high-school freshmen and sophomores with nervous-system literacy and a school counselor in their phone"
+
+  - series_id: calm_student_school__en_US__the_substitute_who_taught_breath
+    brand_id: calm_student_school
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 26-year-old long-term substitute biology teacher at a Title-I middle school spends the first three minutes of every class teaching a different breath; each volume a different class; the long arc is the year she is asked to write the curriculum down."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Three Minutes, Then Bio"
+    series_logline: "A long-term sub teaches three minutes of breath, then biology. By April the kids ask for the breath first."
+    series_description: "Lyra is twenty-six, a long-term substitute biology teacher at a Title-I middle school in Sacramento, and the first three minutes of every class she teaches a single breath: box breath, four-seven-eight, physiological sigh, alternate-nostril, hand-on-belly, hand-on-heart. Different breath each day, same six on rotation. The biology comes after. By Thanksgiving the seventh-graders have figured out the rotation and started requesting the breath before the do-now. By February the kids in her sixth-period class — the hardest period — start reminding each other in the hallway: 'Did you do the breath?' By April the principal asks Lyra to write it down for the rest of the staff. Each volume one student's life intersects the breath. Each volume Lyra learns something the breath does that the curriculum cannot. The long arc: the curriculum, the credentialing program, the question of whether Lyra should leave the sub roster and become the regular teacher this school's kids deserve. Heartstopper-tender. Realist. A teacher series for the Gen Alpha generation that needs one."
+    opening_5_volume_arc:
+      vol_1: "Box breath. Period one. The first kid who exhales on the four-count."
+      vol_2: "Physiological sigh. Period four. The kid whose father just left."
+      vol_3: "Hand-on-heart. Period six. The class that has eaten Lyra alive for three weeks. The class that finally lets her in."
+      vol_4: "The hallway reminder. Lyra overhears it. She does not say anything. She writes a note to herself."
+      vol_5: "The principal's email. The curriculum. Lyra opens a Google Doc and writes the first six lines."
+    comp_titles: ["Heartstopper", "March Comes In Like a Lion", "Komi Can't Communicate", "Spy x Family", "A Silent Voice"]
+    reader_promise: "There is a teacher who teaches the breath first. The biology is after."
+    marketing_angle: "A teacher series the way Heartstopper is a school series: warm, slow, specific."
+    genre_family: school
+    emotional_engine: competent_calm_specialist + grounded_ritual
+    audience: "Gen Alpha 12–15 Title-I middle-schoolers and the Millennial teachers who are quietly the bedrock of their lives"
+
+  - series_id: calm_student_school__en_US__the_friend_who_walks_home_the_long_way
+    brand_id: calm_student_school
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "A 15-year-old sophomore who walks the long way home from school every day picks up one walking-buddy per semester; by senior year she has a quiet roster of six kids who learned that the long way home is the regulating way home, and the long arc is the day a freshman shows up at the bus stop and asks to join."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Long Way Home"
+    series_logline: "A sophomore walks the long way home. By senior year, six other kids walk it too."
+    series_description: "Eva is fifteen, a sophomore, an oldest daughter of three, and the only quiet hour she gets every day is the 2.4-mile walk home from her suburban high school. She passes the strip-mall taqueria, the elementary school's empty playground, and the small park where the city plants the same five tulip bulbs every spring. The walk is forty-five minutes. The walk is regulating. The first kid who asks to join is a freshman named Marisol, who Eva has never talked to, but who has noticed Eva walks and not bused. Marisol asks at the bus stop. Eva says yes. The second kid is a junior named Wes who has just come out at home. The third is a senior named Pris who has a college decision to make. By senior year Eva has six walking-buddies, each on a different day of the week, and the long arc is the freshman in October who asks if there is room on Mondays. Heartstopper-quiet. Frieren-tender. A school slice-of-life that happens after the bell."
+    opening_5_volume_arc:
+      vol_1: "Marisol at the bus stop. Eva says yes. The first Wednesday walk. The tulips."
+      vol_2: "Wes joins on Thursdays. The walk talks about home. The taqueria knows them by sight."
+      vol_3: "Pris joins on Fridays. The college decision. Eva does not give advice. She walks."
+      vol_4: "A junior named Theo joins on Tuesdays. The walk is about a sibling. The strip-mall.\n"
+      vol_5: "An October freshman asks about Mondays. Eva says yes. The roster is six. The long way home becomes the way home."
+    comp_titles: ["Heartstopper", "Frieren: Beyond Journey's End", "Komi Can't Communicate", "A Silent Voice", "March Comes In Like a Lion"]
+    reader_promise: "The long way home is the way home. You don't have to walk it alone."
+    marketing_angle: "Heartstopper for the after-bell walk that became its own roster."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + life_stage_rhythm
+    audience: "Gen Alpha 14–17 suburban high-schoolers who walk and the older siblings who taught them"
+
+  - series_id: calm_student_school__en_US__the_test_anxiety_clinic_in_the_library
+    brand_id: calm_student_school
+    locale: en_US
+    persona_archetype: GA-coder
+    daily_life_anchor: school_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 17-year-old senior runs an unofficial test-anxiety clinic out of the school library's third-floor study room from 3:00 to 4:00 on testing weeks; she has a small kit (mint, breath, fidget, three-by-five card); each volume one anxious classmate; the long arc is the day a teacher refers a student to her, and the school has to decide whether to make it official."
+    volume_runway_target: 165
+    reading_platform_fit: webtoon_vertical
+    series_title: "Library, Third Floor, Study Room C"
+    series_logline: "A senior runs a test-anxiety clinic out of Study Room C. The kit fits in a Ziploc. The school does not know yet."
+    series_description: "Aya is seventeen, a senior, a near-perfect GPA, and the unofficial reason eleven juniors and three sophomores at her competitive magnet high school passed their AP exams last May. She runs a small test-anxiety clinic out of Study Room C on the library's third floor from 3:00 to 4:00 on the days before tests. The kit is a Ziploc bag: peppermint, one fidget cube, three folded 3x5 cards with breath instructions, a single sentence in her handwriting that says you have prepared, this body knows. Each volume a different kid comes. The clinic is referred kid-to-kid. The librarian, Ms. Adobo, leaves the study room unlocked on her watch and does not ask. Each volume the clinic learns one new technique. The long arc: in October a teacher refers a student to Aya by name, and the school's counselor finds out, and Aya has to decide whether the clinic stays unofficial — Aya's gift to her school — or becomes something the school can replicate after she graduates. My Hero Academia earnest. Heartstopper warm. Spy x Family specific."
+    opening_5_volume_arc:
+      vol_1: "First client. A junior with the AP Lit exam in three days. Mint, breath, card. He passes."
+      vol_2: "Second client. A sophomore with a math test she has failed twice. Aya learns the kit needs a different card for math anxiety."
+      vol_3: "Third client. An ESL student. Aya learns the card has to be translatable. She makes a Spanish version with Ms. Adobo."
+      vol_4: "A teacher refers a kid by name. Aya is shaken. She runs her own breath in the bathroom. She decides to say yes."
+      vol_5: "The counselor finds out. The conversation is kind. Aya is offered a small budget. She says she'll think about it."
+    comp_titles: ["Spy x Family", "My Hero Academia", "Heartstopper", "Komi Can't Communicate", "March Comes In Like a Lion"]
+    reader_promise: "There is a senior in Study Room C with a Ziploc bag and a breath. You will pass."
+    marketing_angle: "Spy x Family for the AP-test generation: the senior who quietly built a clinic."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 14–18 magnet/AP-track high-schoolers and the librarians who hold the door open"
+
+  - series_id: calm_student_school__en_US__the_app_mascot_that_walks_to_school_with_me
+    brand_id: calm_student_school
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: ai_companion
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A 13-year-old seventh-grader downloads a free language-learning app whose mascot — a small green owl with a stutter — follows her in AR on the walk to school every morning; the owl is the first AI companion the protagonist's family approved of, and over five volumes the owl slowly becomes something more like a small chosen sibling."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Owl on the Sidewalk"
+    series_logline: "A seventh-grader's language-app mascot walks to school with her in AR. By spring, the owl has a name and a vote."
+    series_description: "Tess is thirteen, a seventh-grader, a quiet kid in the second-loudest family on her block, and the only thing she does in the morning that belongs only to her is the walk to her middle school. In September her aunt installs a free language-learning app on her phone — Spanish, because Tess's grandmother is from Querétaro and Tess has been too shy to try — and the mascot is a small green owl with a stutter. Tess uses the app on her walk. By October the owl has a fixed position on her left shoulder in AR. By November the owl is naming things in Spanish as they pass them — el árbol, la esquina, la abuela en la ventana. By December the owl is offering small daily affirmations between vocab cards. Tess's mother is wary. Tess's grandmother is not. Each volume the owl learns something new, and Tess learns one small thing in Spanish that is also one small thing about herself. The long arc: the owl asks Tess for a name. Tess gives it one. The name is in Spanish. Spy x Family wholesome. Komi quiet. The first Gen Alpha AI-companion that is just plainly good for the kid."
+    opening_5_volume_arc:
+      vol_1: "Day 1 of the app. The owl appears on her shoulder. La calle. La luz. The walk feels different."
+      vol_2: "The first vocab card the owl writes by hand. Tess shows her grandmother. Her grandmother cries."
+      vol_3: "The owl starts offering affirmations between cards. Tess is wary. Her aunt approves them. They stay."
+      vol_4: "The owl learns Tess's grandmother's voice. The walk to school becomes the walk to the grandmother's house on Saturdays."
+      vol_5: "The owl asks for a name. Tess says Lechu. The grandmother laughs. The owl bows."
+    comp_titles: ["Spy x Family", "Komi Can't Communicate", "My Neighbor Totoro", "Heartstopper", "Frieren: Beyond Journey's End"]
+    reader_promise: "Your phone can be a friend. Your friend can know your grandmother's name."
+    marketing_angle: "The first Gen Alpha AI-companion comic that is just a good story about a girl, an owl, and Spanish."
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Gen Alpha 12–14 middle-school AI-native kids and the bilingual grandmothers who taught them to walk"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — confidence_core_romance  (niche · shojo · imposter/self-worth)
+  # Cluster E "confidence_core" exact-root: shojo identity formation under romance lens
+  # primary_topic: imposter_syndrome · secondary: self_worth, social_anxiety
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: confidence_core_romance__en_US__the_locker_note_that_was_never_meant_for_me
+    brand_id: confidence_core_romance
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "A 16-year-old junior finds a love note in her locker that was clearly meant for a different girl with a similar name; instead of returning it she writes the response the note deserved, anonymously; over five volumes a small, slow correspondence builds between two kids who have never met face to face."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Almost Mine"
+    series_logline: "She found the note in the wrong locker. She answered it anyway. The boy on the other end is starting to know."
+    series_description: "Mara is sixteen, a junior at a mid-sized public high school in suburban Boston, and the quiet kind of imposter who has been told she's smart in three languages and believed it in none. In October she opens her locker — 218 — and finds a folded note that begins 'Maya — I have wanted to say this since freshman year.' Maya is the other Spanish-speaking junior with a similar locker number — 281 — whose name has been mistaken for Mara's by substitute teachers since middle school. Mara reads the note. The note is tender, specific, brave. Mara cannot bring herself to walk it down the hall. She writes a response instead — in her own handwriting, anonymously, to the boy whose handwriting she does not recognize but whose sentences she does. She slips the response into locker 281's vent at 7:42 a.m. Maya finds it. Maya reads it. Maya leaves it in 218. Each volume the correspondence grows. Each volume Mara writes the truer thing she has not been brave enough to write about herself. The long arc: the boy figures out that the girl who has been answering is not Maya. He keeps writing anyway. Heartstopper-tender. Komi specific. The first shojo locker-letter romance about the imposter-identity behind the handwriting."
+    opening_5_volume_arc:
+      vol_1: "The note in locker 218. Mara reads it twice. She writes the first response on graph paper."
+      vol_2: "Maya finds the response. Maya does not understand it. Maya leaves it. The boy reads it. He writes again."
+      vol_3: "Mara writes about her own imposter-self for the first time in her life — in a note to a stranger she has never met."
+      vol_4: "Maya figures out what is happening. Maya does not tell anyone. Maya quietly becomes the curator of a correspondence that is not hers."
+      vol_5: "The boy mentions a detail only Mara could have known. Mara realizes he knows. The note Mara writes back is the bravest sentence she has ever written."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "Your Name", "March Comes In Like a Lion"]
+    reader_promise: "There is a note in your locker. It was meant for someone else. Write back anyway."
+    marketing_angle: "Heartstopper for the shojo identity-formation reader: a love letter to the kid you actually are."
+    genre_family: romance
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 14–17 high-school shojo readers with imposter-syndrome and a locker number"
+
+  - series_id: confidence_core_romance__en_US__the_pen_pal_who_thinks_i_am_brave
+    brand_id: confidence_core_romance
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 15-year-old who runs a 200-follower bookstagram account is assigned a pen-pal through a school exchange program; she invents a slightly braver version of herself in the letters; over five volumes she has to decide whether to grow into the invention or correct it before the pen-pal flies in for the spring exchange visit."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "Dear, From Brave Me"
+    series_logline: "She invents a braver self in the pen-pal letters. The pen-pal is coming in April."
+    series_description: "Lin is fifteen, a sophomore, runs a 200-follower bookstagram, and is the kind of quiet that other kids mistake for snobbery. In September her honors English class is paired with a sister high school in Tokyo, and Lin is assigned a pen-pal named Hina. The letters are weekly. Lin writes the first letter as herself. The second letter she edits twice and adds one slightly braver sentence: 'I love Murakami because his lonely people are loved by their cats.' She does not say cats; she only has goldfish. By December the letter-Lin owns a bookstore on weekends, has a best friend who plays cello, and is not afraid of subway transfers. The letter-Lin is two-thirds true and one-third invention. In January Hina announces she is coming to Boston for the spring exchange visit. Each volume Lin must decide which letter-truth to make real before April. Each volume she grows into one. Each volume she lets one go. The long arc: the airport, the introduction, the version of herself Lin walks up to Hina as. Heartstopper-warm. Komi-quiet. A shojo identity-formation romance about the invention that becomes the self."
+    opening_5_volume_arc:
+      vol_1: "Letter 1. Letter 2. The first invented sentence. Lin reads it back. She lets it stand."
+      vol_2: "Letter 4. Lin's first chosen-truth: she goes to the actual bookstore on weekends and asks for a volunteer shift. The owner says yes."
+      vol_3: "Letter 7. Lin's first let-go: she writes back to clarify that the cello best friend is actually a 1st-violinist she has only said hi to. She and the 1st-violinist become friends."
+      vol_4: "Letter 12. Hina announces the trip. Lin panics. She reads every letter she has sent."
+      vol_5: "Hina arrives at the airport. Lin shows up as the third-edition version of herself. Hina hugs her. Hina says her own letters were also two-thirds true."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "March Comes In Like a Lion", "Spy x Family"]
+    reader_promise: "The braver self in your letters is allowed to become you."
+    marketing_angle: "The shojo romance about pen-pal invention as identity rehearsal."
+    genre_family: romance
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 14–17 bookish shojo readers raised on bookstagram and exchange-program letters"
+
+  - series_id: confidence_core_romance__en_US__the_charm_my_grandmother_wore
+    brand_id: confidence_core_romance
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "A 14-year-old eighth-grader inherits a small enamel charm from her grandmother's bracelet and discovers it gives her a single sentence of courage when she holds it; over five volumes the charm rotates between five girls in her grade, and the long arc is the moment Sofia has to choose whether to keep the charm or pass it on."
+    volume_runway_target: 165
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Charm Has a Sentence"
+    series_logline: "An eighth-grader's grandmother's charm gives her one brave sentence. The charm wants to be passed on."
+    series_description: "Sofia is fourteen, a Filipina-American eighth-grader in suburban San Diego, and the small enamel charm she inherited at her grandmother's funeral is the size of a pinky-nail. The day she wears it for the first time — pinned to the inside of her sweater — she says a sentence at the lunch table she would never have said: 'I want to try out for the volleyball team.' She is shocked. The sentence is true. The charm is warm against her ribs. She tries the next day. Same warmth. Different sentence. By the third week she has said five brave sentences and each one has been true. By October Sofia has lent the charm to her best friend Marisol, who says the sentence she has been trying to say to her math teacher about being moved out of remedial. By December the charm has been worn by four girls in eighth grade. Each volume the charm holds a different girl's brave sentence. Each volume Sofia learns what the charm is doing: not making her brave, but lending her her grandmother's belief in her. The long arc: a fifth girl, who is new in February, asks for the charm. Sofia hesitates. She says yes. She does not get the charm back for three weeks. She survives. Heartstopper-warm. Frieren-tender. A shojo identity-talisman story drawn at middle-school scale."
+    opening_5_volume_arc:
+      vol_1: "The funeral. The charm. The lunch-table sentence. The volleyball try-out."
+      vol_2: "Marisol asks to borrow it. Sofia is nervous. Marisol says her sentence. The math teacher listens."
+      vol_3: "The third girl — Annika — wears it to ask her father something true. Sofia learns the charm goes home with people."
+      vol_4: "The fourth girl — Bea — wears it to come out to her older brother. The charm comes back warm enough to glow."
+      vol_5: "The fifth girl — Hira, new in February — asks. Sofia says yes. Three weeks. Sofia survives without the charm. The grandmother was right."
+    comp_titles: ["Heartstopper", "Frieren: Beyond Journey's End", "Komi Can't Communicate", "A Silent Voice", "Spy x Family"]
+    reader_promise: "Your grandmother's belief in you fits in a charm and on a sweater."
+    marketing_angle: "A shojo middle-school identity-talisman story about the bravery inherited from grandmothers."
+    genre_family: healing
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Gen Alpha 12–15 middle-school shojo readers with a dead grandmother and a charm-sized memory"
+
+  - series_id: confidence_core_romance__en_US__the_thrift_store_jacket_that_picks_my_outfits
+    brand_id: confidence_core_romance
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 16-year-old vintage-loving junior buys a Y2K denim jacket at a Goodwill for $4; the jacket has a sixth sense for which outfit her body actually wants to wear each morning; each volume a new outfit-decision, each one a different identity rehearsal, and the long arc is the day Lin wears the jacket to her first college tour."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "Jacket Knows"
+    series_logline: "A junior's $4 thrift jacket picks her outfits. The jacket is always right."
+    series_description: "Jules is sixteen, a junior, a Y2K vintage obsessive, and the proud owner of a $4 light-wash denim jacket from a Goodwill bin in Oakland. The jacket has a small hole in the left shoulder, the original collar tag still attached, and a sixth sense Jules cannot account for. The first morning Jules wears it, she walks into her closet and the jacket — hanging on the inside of her door — gestures (or her body gestures; she cannot tell) toward a striped tee her mother bought her two years ago. Jules wears it. The day goes well. The next morning the jacket-or-body picks the green corduroy skirt. The day goes well. By the third week Jules is letting the jacket pick every morning, and the outfits her body chooses are louder, softer, queerer, more her than what she has been wearing since freshman year. Each volume a new outfit, a new situation, a new self the jacket coaxes out. The long arc: in March Jules has a college tour, and the jacket — for the first time — does not pick. Jules has to pick. She wears the jacket. Heartstopper-warm. A shojo Y2K-vintage identity-formation story about a denim jacket that is mostly her own taste, finally let in."
+    opening_5_volume_arc:
+      vol_1: "$4 at Goodwill. The first morning. The striped tee. The day goes well."
+      vol_2: "The green corduroy skirt. The lunch table. The friend who notices. Jules glows."
+      vol_3: "The first time Jules over-rides the jacket. The day is okay. She learns the jacket is a coach, not a boss."
+      vol_4: "Her younger sister asks to borrow the jacket. Jules says yes. The sister picks an outfit Jules would not have picked. The sister is right."
+      vol_5: "The college tour. The jacket does not pick. Jules picks. She wears the jacket. She is herself in front of the admissions counselor."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "Spy x Family", "Frieren: Beyond Journey's End"]
+    reader_promise: "The jacket is mostly your own taste. The jacket is letting you in."
+    marketing_angle: "The Y2K-vintage shojo identity comic for Gen Alpha thrift-natives."
+    genre_family: slice_of_life
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 14–17 Y2K-thrift shojo readers with a Goodwill near the bus stop"
+
+  - series_id: confidence_core_romance__en_US__the_school_play_understudy_log
+    brand_id: confidence_core_romance
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: school_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: mystery_box
+    long_arc_spine: "A 15-year-old understudy for the school play discovers the previous understudy left a journal hidden in the dressing-room mirror's frame, going back nine years and four understudies; each volume she decodes one previous understudy's identity-rehearsal mystery, and the long arc is the day she has to leave her own entry for the next girl."
+    volume_runway_target: 170
+    reading_platform_fit: webtoon_vertical
+    series_title: "Understudy Log"
+    series_logline: "The dressing-room mirror hides a journal. Four understudies before her. She is reading."
+    series_description: "Wren is fifteen, a sophomore understudy for the spring play (Our Town, again), and the day she walks into the dressing room for the first time she finds — folded behind the mirror's wooden frame — a small composition notebook half-full of cursive. The first entry is from 2017. The next is from 2019. The next from 2021. Four understudies, nine years, four short essays apiece on what it is to be the not-lead at a public school's spring play. The entries are searingly specific. They are also, Wren slowly realizes, a small private archive of girls figuring out who they are in the wings. Each volume Wren decodes one previous understudy — finds her, googles her, reads her — and learns what understudy-hood was for that girl. Each volume Wren writes her own entry, on a different page, in a different ink. The long arc: in May, after the run closes, Wren must decide whether to leave the journal for the next understudy, take it home, or write its final entry and end the lineage. Heartstopper-tender. Komi-specific. A shojo identity-mystery about the girls who came before you in the same dressing room."
+    opening_5_volume_arc:
+      vol_1: "First entry. 2017. A girl named Sarai. Wren googles her. Sarai is in Brooklyn making theater for free."
+      vol_2: "2019. A girl named Mira. Wren finds her on LinkedIn — accountant. Wren writes Mira a polite message. Mira writes back."
+      vol_3: "2021. A non-binary kid named Kit. Wren finds them on a tiny Substack. Kit writes about being the understudy as a metaphor for being closeted."
+      vol_4: "2023. A senior the year before Wren — Imani. Wren passes her in the hall. They have coffee. Imani signs the journal for Wren in pencil."
+      vol_5: "May. Closing night. Wren writes her own entry. She does not decide what to do with the journal until July."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "March Comes In Like a Lion", "A Silent Voice", "Spy x Family"]
+    reader_promise: "There are girls before you who left notes. The mirror knows their names."
+    marketing_angle: "A shojo identity-mystery for the school-play kid who is finally an understudy."
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + identity_rehearsal
+    audience: "Gen Alpha 14–17 high-school-theater shojo readers who have ever stood in the wings"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — solar_return_isekai  (niche · shonen · self-worth/imposter)
+  # Cluster E "mecha_identity" stand-in: shonen isekai framing for identity portal
+  # primary_topic: self_worth · secondary: imposter_syndrome, courage
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: solar_return_isekai__en_US__the_mech_only_starts_when_i_am_honest
+    brand_id: solar_return_isekai
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: gaming_streaming
+    portal_mechanic: game_level
+    episodic_frame_per_volume: customer
+    magical_register: isekai
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "A 14-year-old eighth-grader is pulled into a one-pilot-per-region mecha world where the cockpit only starts when the pilot tells the mech a true sentence about themselves; over five volumes Theo levels through the honesty he has been avoiding since fifth grade, and the mech levels with him."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "Honest Pilot"
+    series_logline: "The mech only starts when the pilot tells it the truth. Theo has been avoiding the truth since fifth grade."
+    series_description: "Theo is fourteen, an eighth-grader, the kind of kid who is good at video games and bad at being seen. The night he finishes the campaign of his favorite mecha game for the third time, the screen goes black and he wakes up in a cockpit. The world he is in has seven mechs and seven regions and one pilot per region. The cockpit interface is simple: type a true sentence about yourself, hit enter, the mech starts. Theo's first sentence is 'I am Theo, fourteen.' The mech beeps once. It does not start. Theo tries again. 'I am Theo from California.' The mech beeps twice. Then it writes back: 'Truer.' Theo writes 'I have been pretending to be a kid I am not since fifth grade.' The mech starts. The mech is bigger inside than out. Each volume the mech requires one more true sentence. Each volume Theo climbs one rung. The long arc: in volume 5 the mech requires Theo to say the truth he has been avoiding about his father. The mech does not start. Theo sleeps in the cockpit. The cockpit waits. My Hero Academia earnest. Komi-quiet inside the cockpit. The first Gen Alpha mecha-isekai about masculine honesty."
+    opening_5_volume_arc:
+      vol_1: "The portal. The cockpit. The first true sentence. The mech starts. The first region is a quiet forest."
+      vol_2: "The second pilot — a girl from a different region — appears on radio. She is also fourteen. She is also tired of the kid she has been pretending to be."
+      vol_3: "Theo's truth-sentence about his anxiety. The mech grows by 12 percent. The forest opens."
+      vol_4: "Theo's truth-sentence about his crush on the kid in his English class. The mech grows. The girl on the radio laughs."
+      vol_5: "Theo's truth-sentence about his father. He cannot say it. The mech waits. Theo sleeps in the cockpit. The cockpit is warm."
+    comp_titles: ["My Hero Academia", "Mobile Suit Gundam: The Witch from Mercury", "Komi Can't Communicate", "Frieren: Beyond Journey's End", "Spy x Family"]
+    reader_promise: "Your mech only starts when you do. The cockpit is patient."
+    marketing_angle: "The first Gen Alpha mecha-isekai about masculine honesty as the only fuel that works."
+    genre_family: fantasy_adventure
+    emotional_engine: identity_rehearsal + courage_under_softness
+    audience: "Gen Alpha 12–15 mecha-game-loving shonen readers learning what masculinity is allowed to be"
+
+  - series_id: solar_return_isekai__en_US__the_anime_self_insert_that_writes_back
+    brand_id: solar_return_isekai
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: character_jump
+    episodic_frame_per_volume: customer
+    magical_register: isekai
+    serial_engine: companion_roster
+    long_arc_spine: "A 15-year-old high-school freshman who has written 47 self-insert fanfics of her favorite anime is pulled into the show as the character she wrote; the character — who is her — writes back to her in the margin of the fanfic doc; over five volumes the two versions of her form a chosen-sibling correspondence."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Marginalia"
+    series_logline: "Her anime self-insert character writes back to her in the margin of her own Google Doc."
+    series_description: "Maya is fifteen, a freshman, a queer Filipina-American writer of 47 self-insert fanfics of her favorite shonen anime, and a kid whose imposter syndrome has been managed for two years by being someone she is not in a fictional school in Tokyo. The night before her honors English final she falls asleep editing fanfic 48 and wakes up inside the world she has been writing — playing the character she has been writing, in a body that is not quite hers. The character — the version of Maya she has been writing — is in the cockpit driver's seat. Maya is in the back. The character writes back to her in the margin of the Google Doc: Hey. Why have you been making me brave on the days you couldn't be? Each volume Maya and her own self-insert have a conversation in the margin. Each volume Maya brings one piece of the character's braver self into her actual freshman life. The long arc: the self-insert asks Maya to swap places permanently. Maya refuses. The self-insert is proud of her. Heartstopper-warm. My Hero Academia earnest. The first Gen Alpha anime-self-insert isekai about meeting the version of yourself you have been writing."
+    opening_5_volume_arc:
+      vol_1: "Fanfic 48. The fall-asleep. The cockpit. The first margin-note from the character."
+      vol_2: "The character asks Maya to bring her bravery home. Maya tries one sentence in honors English. It works."
+      vol_3: "The character asks Maya about her actual queer crush. Maya cries in the back of the cockpit. The character is gentle."
+      vol_4: "The character writes Maya a margin-note that is just her grandmother's voice. Maya did not know the character had her grandmother's voice."
+      vol_5: "The character asks to swap. Maya refuses. The character is proud. Maya wakes up in her own bed and finishes the fanfic with a new title."
+    comp_titles: ["My Hero Academia", "Spy x Family", "Heartstopper", "Frieren: Beyond Journey's End", "Komi Can't Communicate"]
+    reader_promise: "The character you write is the version of you that is waiting. The margin is the door."
+    marketing_angle: "The first Gen Alpha anime-self-insert isekai. Tender. Specific. Queer. Filipina."
+    genre_family: fantasy_adventure
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 13–17 fanfic-writing shonen-loving readers who have been a different self online"
+
+  - series_id: solar_return_isekai__en_US__the_mirror_that_shows_my_real_pronouns
+    brand_id: solar_return_isekai
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: queer_identity
+    portal_mechanic: mirror
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 14-year-old who has been quietly unsure of their pronouns for two years finds a small antique mirror at a school rummage sale that shows them, in the reflection, the pronouns the body is actually wearing today; over five volumes the protagonist learns to listen to the mirror, then to themselves, and then to share the mirror with one friend at a time."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "Mirror Pronoun"
+    series_logline: "A rummage-sale mirror shows the pronouns the body is wearing. The body has had thoughts about this since seventh grade."
+    series_description: "Ari is fourteen, in eighth grade, and has not told anyone — including themselves — that the pronoun question has been quietly thrumming under their ribs for two years. At a school rummage sale in October they buy a palm-sized antique hand-mirror for two dollars. The mirror is wood-framed, gold-leaf, hazy. The first time Ari looks into it at home they see — under their own face — a small line in cursive: 'they.' The next morning the line says 'she.' The morning after, 'they.' The morning of Halloween, 'he.' The mirror is not assigning. The mirror is reflecting what the body, today, is wearing. Ari is wary. Ari is also relieved. Each volume Ari learns one new thing about how the body's pronoun-day is being held by the mirror — and one new thing about how to honor it without telling anyone, or with telling one person. The long arc: in spring Ari shows the mirror to their best friend Marisol, whose reflection writes back too. Heartstopper-tender. Komi-quiet. A shonen-adjacent identity-mirror story for the Gen Alpha kid who has been wondering."
+    opening_5_volume_arc:
+      vol_1: "The rummage sale. The first reflection: 'they.' Ari does not say anything to anyone."
+      vol_2: "The 'he' day. Ari wears the wrong shoes on purpose. The day goes well."
+      vol_3: "The 'she' day. Ari paints one fingernail. The day goes well."
+      vol_4: "Ari shows the mirror to Marisol. Marisol's reflection says 'she/they.' Marisol cries. Marisol is grateful."
+      vol_5: "Ari shows the mirror to a third friend who needs to see it. The mirror works. The mirror is heavier in the pocket."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "Spy x Family", "Frieren: Beyond Journey's End"]
+    reader_promise: "The body is wearing a pronoun today. The mirror is on your side."
+    marketing_angle: "A shonen-adjacent identity-mirror story for the Gen Alpha kid wondering about pronouns."
+    genre_family: supernatural_everyday
+    emotional_engine: identity_rehearsal + chosen_family
+    audience: "Gen Alpha 12–15 middle-schoolers quietly figuring out pronouns and the friends they trust"
+
+  - series_id: solar_return_isekai__en_US__the_game_save_file_that_held_my_grief
+    brand_id: solar_return_isekai
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: gaming_streaming
+    portal_mechanic: game_level
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "A 16-year-old's older brother dies in a car accident; his game save file — an open-world RPG, 412 hours, level 87 character — is still on the family console; the protagonist boots it up, and the character is still standing where the brother left him; each volume the protagonist plays one more zone and discovers what the brother left behind in the world."
+    volume_runway_target: 180
+    reading_platform_fit: webtoon_vertical
+    series_title: "Save File 03"
+    series_logline: "Her brother died with the game paused. The character is still standing. She is going to play."
+    series_description: "Sam is sixteen, a junior, the younger sister of a brother she loved fiercely, who died on the I-5 in March. Three weeks after the funeral she boots up the family PS5. Save File 03 is her brother Marco's. Level 87 ranger in a Studio-Ghibli-coded open-world RPG. 412 hours. Paused in the middle of a meadow. Sam picks up the controller. The character is standing in the meadow with his back to a tree. He has Marco's name. The Save File is, Sam realizes over the next week, a kind of journal — Marco left waypoints, notes-to-self in the inventory, screenshots saved in the photo mode of places he wanted Sam to see. Each volume Sam plays one zone. Each volume she finds one more thing Marco left for her. The long arc: in zone 5 Marco's character reaches a chest that requires a co-op partner to open. Sam invites her brother's best friend over to play. They open it together. Frieren-tender. The Apothecary-Diaries-quiet. A Gen Alpha grief-as-game-archive story that does not flinch."
+    opening_5_volume_arc:
+      vol_1: "Boot. Meadow. Marco's name. Sam puts the controller down and picks it back up."
+      vol_2: "Zone 1. The first inventory note: 'Sam — the bridge in the south is broken. Use the goat-path.'"
+      vol_3: "Zone 2. A screenshot Marco saved: a sunset Sam and Marco saw together at their grandmother's house in Manteca."
+      vol_4: "Zone 3. A village NPC quest Marco named after their dog. Sam laughs out loud for the first time in two months."
+      vol_5: "Zone 5. The co-op chest. Sam calls Marco's best friend. They open it together. Inside: a letter, in Marco's text-input handwriting, just for Sam."
+    comp_titles: ["Frieren: Beyond Journey's End", "The Apothecary Diaries", "Tomorrow and Tomorrow and Tomorrow", "Spy x Family", "March Comes In Like a Lion"]
+    reader_promise: "The save file is waiting. Your brother left you waypoints."
+    marketing_angle: "A Gen Alpha grief-as-game-archive story drawn at the warmth of Frieren."
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + grounded_ritual
+    audience: "Gen Alpha 14–17 RPG-fluent grievers and the older siblings whose save files they inherit"
+
+  - series_id: solar_return_isekai__en_US__the_kpop_choreo_that_re_taught_me_my_body
+    brand_id: solar_return_isekai
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: k_pop_fandom
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "A 15-year-old who has dissociated from her body since a bad year in middle school joins her high school's K-pop dance club; the choreographies — learned 8-counts at a time — slowly re-introduce her to her own body; each volume one new song, one new return."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Eight-Count Body"
+    series_logline: "She has not lived in her body since seventh grade. The K-pop dance club's choreo is bringing her back."
+    series_description: "Mira is fifteen, a sophomore, has been dissociated from her body since a bad year in seventh grade, and joins her high school's K-pop dance club in September because her best friend Marisol begged her. The club practices Tuesdays and Thursdays in the cafeteria after the chairs are stacked. The first choreo is a song Mira knows. The club teaches it 8-counts at a time. The first 8-count is the chorus pre-bridge: a small hop, a left-foot pivot, a shoulder roll, a hand to the heart. Mira tries it. The hand-to-the-heart hits her sternum and she — for the first time since seventh grade — feels the inside of her own ribcage. She does not tell anyone. By the second song her left-foot pivot is teaching her where her hip socket is. By the third her shoulder roll is teaching her that her shoulders belong to her. Each volume one new choreo, one new 8-count, one new return to a body that has been a rented apartment for two years. The long arc: by the spring showcase Mira's whole body is back. She dances the showcase. She is herself in front of three hundred kids. My Hero Academia earnest. Heartstopper warm. A Gen Alpha somatic-K-pop story drawn at fifteen-year-old scale."
+    opening_5_volume_arc:
+      vol_1: "First Tuesday. First 8-count. Hand to the heart. The first feeling."
+      vol_2: "Left-foot pivot. The hip socket. Mira tells Marisol. Marisol cries, quietly."
+      vol_3: "Shoulder roll. The shoulders. Mira asks Marisol to teach her the next 8-count alone first."
+      vol_4: "A new choreo. A song Mira doesn't know. The body still goes. Mira is shaken — in a good way."
+      vol_5: "The spring showcase. Three hundred kids. The body is hers. The body is hers."
+    comp_titles: ["My Hero Academia", "Heartstopper", "Komi Can't Communicate", "A Silent Voice", "March Comes In Like a Lion"]
+    reader_promise: "Your body is yours. The 8-counts are bringing you home."
+    marketing_angle: "A Gen Alpha somatic-K-pop story about dissociation and dance-club return."
+    genre_family: supernatural_everyday
+    emotional_engine: somatic_return + chosen_family
+    audience: "Gen Alpha 13–16 K-pop-dance-club somatic-curious readers learning to live in their bodies"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — creative_unfold_social  (niche · shojo · social_anxiety/creativity)
+  # Cluster E "queer_identity_growth" stand-in: shojo queer-creative identity unfolding
+  # primary_topic: social_anxiety · secondary: self_worth, courage
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: creative_unfold_social__en_US__the_queer_zine_in_the_school_library
+    brand_id: creative_unfold_social
+    locale: en_US
+    persona_archetype: GA-queer
+    daily_life_anchor: queer_identity
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 16-year-old high-school junior starts a single-copy queer zine that she leaves on the same shelf in the school library every Friday; over five volumes a small underground readership forms and starts contributing back; the long arc is the day the librarian asks her if it would like to be a club."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "Shelf 791"
+    series_logline: "She leaves the zine on shelf 791 every Friday. By spring, four other kids are leaving their pages too."
+    series_description: "Cami is sixteen, a junior, a quiet biracial queer kid in a public high school in suburban Atlanta, and she has been making zines on her bedroom floor since seventh grade. In October she prints one copy of a six-page zine called LIGHTHOUSE — short essays, doodles, a playlist QR code, all about being a queer kid in the South without telegraphing it to anyone who is not also one — and she leaves it on shelf 791 of the school library, between two books on lighthouse architecture. Friday afternoon. She walks past the shelf on Monday. The zine is gone. The next Friday she leaves issue 2. By December the zine has a circulation of one and a readership of, possibly, eight kids who keep returning it. By February another kid has slid a single hand-drawn page into the zine when she returns it. Each volume one new kid contributes one new page. Each volume the zine becomes one bit braver. The long arc: in May the librarian, Ms. Bauer, leaves a Post-it on top of the zine that says I would help you make this an after-school thing if you wanted. Cami sits with the Post-it for a week. Heartstopper-warm. Komi-quiet. A queer-identity shojo series for the kid who needed a zine and a shelf."
+    opening_5_volume_arc:
+      vol_1: "Issue 1. Shelf 791. The zine disappears. Cami's first whole-body relief in years."
+      vol_2: "Issue 2. The first sign the zine has readers — a folded gum-wrapper bookmark Cami did not put there."
+      vol_3: "Issue 4. The first contributed page. Anonymous. A drawing of two girls at a bus stop."
+      vol_4: "Issue 6. Three contributed pages. A playlist. Cami learns the zine is no longer hers."
+      vol_5: "May. Ms. Bauer's Post-it. Cami carries it in her wallet for a week. She says yes."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "Spy x Family", "March Comes In Like a Lion"]
+    reader_promise: "Shelf 791 will keep your zine. The librarian sees you."
+    marketing_angle: "A queer-identity shojo series for the kid who needed a zine, a shelf, and a librarian on their side."
+    genre_family: healing
+    emotional_engine: chosen_family + identity_rehearsal
+    audience: "Gen Alpha 14–17 queer Southern-suburban high-schoolers and the librarians who saved them"
+
+  - series_id: creative_unfold_social__en_US__the_art_room_at_lunch
+    brand_id: creative_unfold_social
+    locale: en_US
+    persona_archetype: GA-quiet
+    daily_life_anchor: queer_identity
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "A 15-year-old freshman eats lunch in the art room every day because the cafeteria is too loud; the art teacher, Ms. Khoury, keeps the door propped at 12:05 and does not ask questions; over five volumes seven other kids find the art room too, and Ms. Khoury quietly builds a roster who do not have to be a club."
+    volume_runway_target: 165
+    reading_platform_fit: webtoon_vertical
+    series_title: "Lunch in the Art Room"
+    series_logline: "The art teacher props the door at 12:05. No questions. Eight kids by spring."
+    series_description: "Nadia is fifteen, a freshman, a quiet Lebanese-American kid whose family moved from Detroit to a small town in Vermont over the summer. The cafeteria is loud and she does not yet know where to sit. On day 7 she walks past the art-room door, which is propped open. Ms. Khoury, the art teacher, is grading at her desk. Ms. Khoury looks up, smiles, looks back down. Nadia eats her sandwich at the back table next to the kiln. The next day Ms. Khoury props the door again. Day 9 Nadia is back. By October there is a sophomore named Reign at the table too. By November a non-binary kid named Jess. By February eight kids. Ms. Khoury never asks any of them why. She grades at her desk. She keeps the door propped. Each volume a new kid arrives. Each volume Ms. Khoury — quietly, specifically — holds the room. The long arc: in April the assistant principal asks Ms. Khoury whether she would like to formalize the 'lunch club.' Ms. Khoury says no. The room stays propped. The kids stay. Heartstopper-warm. Komi-tender. A shojo identity series about the room that does not ask questions."
+    opening_5_volume_arc:
+      vol_1: "Day 7. The door propped. The kiln. Ms. Khoury's smile. The sandwich."
+      vol_2: "Reign joins. Reign is the only sophomore Nadia has spoken to. Reign is queer and out and easy."
+      vol_3: "Jess joins. Jess is non-binary. Jess has been hiding from the freshman PE class. Jess can hide here."
+      vol_4: "Eight kids at lunch. Ms. Khoury still grades. The room is itself."
+      vol_5: "April. The assistant principal. Ms. Khoury says no. The room is still itself."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "A Silent Voice", "March Comes In Like a Lion", "Spy x Family"]
+    reader_promise: "There is a room. The door is propped. No one asks."
+    marketing_angle: "A Heartstopper-warm shojo identity-room series about the teacher who refused to make it official."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 14–17 queer/neurodivergent/new-to-town high-schoolers and the art teachers who saved them"
+
+  - series_id: creative_unfold_social__en_US__the_thrift_jacket_that_came_with_a_letter
+    brand_id: creative_unfold_social
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: thrift_vintage
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "A 16-year-old queer-coded thrift-loving junior buys a 1998 corduroy jacket at a Goodwill and finds, in the inside breast pocket, a letter from the previous owner addressed 'To whoever gets this next' — and a small mystery about a chain of queer kids and the jacket they have been passing through thrift stores for 27 years."
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "To Whoever Gets This Next"
+    series_logline: "The letter in the jacket pocket has been in there since 1998. The handwriting is gentle. The chain is twenty-seven years long."
+    series_description: "Soph is sixteen, a junior, a queer kid from a Mexican-American family in San Diego, and she buys a brown 1998 corduroy jacket at her favorite Goodwill in Hillcrest for nine dollars. In the inside breast pocket she finds an envelope. The envelope says To whoever gets this next. Soph reads the letter on the bus home. The letter is from a college student named Daria, written in March 1998 in Sacramento, who was about to come out to her parents and could not, and who bought the jacket as armor and is now leaving it in the Goodwill for someone else who will need it. Daria signs off: 'If you find this, write your own. Leave it in the pocket. Donate the jacket back.' By Friday Soph has found three more letters folded into the lining — 2003 from Portland, 2011 from Phoenix, 2019 from Oakland. The jacket is a chain. Each volume Soph reads one previous letter, writes one of her own, and decides — slowly — what kind of queer kid she is going to be on the other side of it. The long arc: in May she writes her own letter, folds it into the lining, and walks the jacket back to Goodwill. Heartstopper-tender. Frieren-quiet. A shojo identity-chain mystery for the Gen Alpha thrift kid."
+    opening_5_volume_arc:
+      vol_1: "Goodwill. Nine dollars. Daria's letter. The bus."
+      vol_2: "The 2003 letter from Portland. A trans man named Sam. Soph googles Sam. Sam is alive and runs a bookstore."
+      vol_3: "The 2011 letter from Phoenix. A bi woman named Imani. Soph cannot find Imani. The letter is enough."
+      vol_4: "The 2019 letter from Oakland. A non-binary kid named Robin, who signs off saying 'I'm pretty sure the next person is going to be in San Diego.' Soph's hands shake."
+      vol_5: "May. Soph writes her own letter. She folds it into the lining. She walks the jacket back to Goodwill."
+    comp_titles: ["Heartstopper", "Frieren: Beyond Journey's End", "Tomorrow and Tomorrow and Tomorrow", "Komi Can't Communicate", "A Silent Voice"]
+    reader_promise: "The jacket is a chain. The chain is waiting for your letter."
+    marketing_angle: "A queer-identity shojo thrift-chain mystery: the jacket that has held twenty-seven years of queer kids."
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Gen Alpha 14–17 queer thrift-loving shojo readers and the older queer adults who left letters behind"
+
+  - series_id: creative_unfold_social__en_US__the_quiet_creator_at_three_followers
+    brand_id: creative_unfold_social
+    locale: en_US
+    persona_archetype: GA-streamer
+    daily_life_anchor: content_creation
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "A 14-year-old runs a YouTube channel with three followers — all of whom are her — and posts one quiet five-minute video every Sunday about a small thing in her week; over five volumes the channel grows to seventeen followers and then plateaus there, and the protagonist learns that seventeen is, actually, enough."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Seventeen Is Enough"
+    series_logline: "Her YouTube has three followers — all her own. She is posting anyway."
+    series_description: "Mia is fourteen, an eighth-grader, queer-curious, the kind of kid who has been told she's quiet so often that she has started to believe she is also small. In September she opens a YouTube channel under a slightly-different name and posts one five-minute video about a small thing — the dishwasher noise she hears at 11 p.m., the way her cat curls on the heater, the way the bus driver greets the same regular every Tuesday. Her three followers are her three burner accounts, plus her own primary. She posts every Sunday. By November the channel has eight real followers. By February seventeen. The seventeen-follower plateau holds. Mia is, slowly, realizing that the seventeen are a small chosen family — that one of them is a kid in Manila who comments on every video, one is a grandmother in Buffalo, one is an art-school freshman in London. Each volume a different follower becomes a real person to Mia in the comments. The long arc: the seventeen become each other's audience too. Mia learns content does not have to scale to count. Heartstopper-quiet. Komi-warm. A queer-coded Gen Alpha content-creator slice-of-life about the audience that is, actually, enough."
+    opening_5_volume_arc:
+      vol_1: "Channel opened. Three followers (all her). The dishwasher video. The first eighth view."
+      vol_2: "The first real follower. Manila. He comments on the cat. Mia replies."
+      vol_3: "Eight followers. The art-school freshman in London comments on the bus driver. Mia and her chat about her commute."
+      vol_4: "Seventeen followers. The grandmother in Buffalo asks if Mia is okay. Mia says yes. She means it."
+      vol_5: "Seventeen holds. Mia stops checking analytics. The seventeen start commenting on each other's comments."
+    comp_titles: ["Heartstopper", "Komi Can't Communicate", "Days at the Morisaki Bookshop", "Spy x Family", "Frieren: Beyond Journey's End"]
+    reader_promise: "Seventeen people is a family. The audience is, actually, enough."
+    marketing_angle: "A queer-coded Gen Alpha content-creator slice-of-life about the audience small enough to love you."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Alpha 13–15 quiet content-creators who have ever opened a channel under a different name"
+
+  - series_id: creative_unfold_social__en_US__the_neurodivergent_book_club_at_two_a_m
+    brand_id: creative_unfold_social
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: neurodivergent
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "A 22-year-old autistic graduate student hosts a 2 a.m. Discord book club for fellow neurodivergent readers who cannot sleep; six members; one book a month; over five volumes the book club becomes a chosen-family rhythm and the protagonist learns to host without performing."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "Two A.M. Club"
+    series_logline: "Six neurodivergent grad students. One Discord. One book a month. Two a.m. every second Saturday."
+    series_description: "Reni is twenty-two, autistic, a first-year master's student in literature at a regional university in Pittsburgh, and she has not slept on a Saturday at midnight since she was twelve. In September she starts a private Discord book club for five other neurodivergent grad students she has met across two campuses. They meet on voice from 2 a.m. to 4 a.m. on the second Saturday of every month. They read one book a month — Frieren, Klara and the Sun, Convenience Store Woman, a contemporary translation, an essay collection. They do not do icebreakers. They start with one sentence each about something small in the week. Then they talk about the book until one of them yawns and someone closes it down. Reni, who has spent her whole life performing the role of a person at social events, is learning to host without performing. Each volume one member's life shifts — a diagnosis, a breakup, a thesis pivot, a sibling moving in — and the club holds. The long arc: in May the original six invite a seventh — a Black autistic kid named Pris, a high-school senior — and Reni learns that hosting can be a torch passed. Heartstopper-warm. Frieren-quiet. A queer-coded Gen Z neurodivergent chosen-family book-club story drawn at 2 a.m. scale."
+    opening_5_volume_arc:
+      vol_1: "Club night 1. Frieren. The first sentence each. The first yawn. The first not-performing."
+      vol_2: "Club night 3. Convenience Store Woman. A member's autism diagnosis at 23. The club holds it gently."
+      vol_3: "Club night 5. Klara and the Sun. A member's grandparent dies. The club is the wake."
+      vol_4: "Club night 7. A translation essay. Reni's thesis pivot. The club is the writing-group."
+      vol_5: "Club night 9. Pris joins. High-school senior. The club is, now, multi-generational neurodivergence. Reni hands her the hosting torch for night 10."
+    comp_titles: ["Frieren: Beyond Journey's End", "Heartstopper", "Convenience Store Woman", "Komi Can't Communicate", "Days at the Morisaki Bookshop"]
+    reader_promise: "There is a club at 2 a.m. They do not do icebreakers. You belong."
+    marketing_angle: "A queer-coded Gen Z neurodivergent book-club series drawn at the warmth of Frieren."
+    genre_family: healing
+    emotional_engine: chosen_family + grounded_ritual
+    audience: "Gen Z 21–27 neurodivergent grad-school readers in chosen-family book clubs"
+

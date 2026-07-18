@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — 音樂人省思問卷</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0a06;
+    --card: rgba(28, 22, 16, 0.65);
+    --card-border: rgba(180, 145, 90, 0.18);
+    --txt: #faf6f0;
+    --muted: rgba(250, 246, 240, 0.55);
+    --helper: rgba(250, 246, 240, 0.42);
+    --amber: #d97706;
+    --amber-soft: rgba(217, 119, 6, 0.12);
+    --amber-line: rgba(217, 119, 6, 0.35);
+    --rule: rgba(250, 246, 240, 0.08);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', 'JetBrains Mono', monospace;
+    --required: #f5a623;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--txt); font-family: var(--sans);
+    min-height: 100vh; padding: 56px 20px 96px;
+    background-image: radial-gradient(ellipse at top, rgba(217, 119, 6, 0.05) 0%, transparent 50%);
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+
+  /* Header chrome — matches wizard */
+  header { text-align: center; margin-bottom: 56px; }
+  header .logo {
+    font-family: var(--mono); font-size: 0.6rem; color: var(--amber);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: var(--serif); font-size: 2.6rem; font-weight: 500;
+    letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 14px;
+  }
+  header h1 em { font-style: italic; font-weight: 400; color: var(--amber); }
+  header p {
+    color: var(--muted); font-size: 0.95rem; line-height: 1.65;
+    max-width: 560px; margin: 0 auto; font-weight: 300;
+  }
+
+  /* Progress bar */
+  .progress { height: 2px; background: var(--rule); border-radius: 2px; margin-bottom: 40px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--amber), #f5a623); width: 0%; transition: width 0.3s; }
+
+  /* Sections — card pattern from wizard */
+  .section {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 32px; margin-bottom: 24px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .section-title {
+    font-family: var(--mono); font-size: 0.6rem; color: var(--amber);
+    letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+    margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  /* Fields */
+  .field { margin-bottom: 22px; }
+  .field:last-child { margin-bottom: 0; }
+  label.field-label {
+    display: block; font-family: var(--sans); font-size: 0.875rem;
+    font-weight: 500; color: var(--txt); margin-bottom: 4px;
+  }
+  .hint {
+    display: block; font-family: var(--sans); font-size: 0.78rem;
+    color: var(--helper); font-weight: 300; margin-top: 3px;
+    margin-bottom: 10px; line-height: 1.5; font-style: italic;
+  }
+  .required { color: var(--required); margin-left: 4px; }
+
+  /* Text inputs */
+  input[type="text"], input[type="url"], textarea, select {
+    width: 100%; background: rgba(14, 10, 6, 0.6); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 11px 14px; color: var(--txt);
+    font-size: 0.92rem; font-family: var(--sans); font-weight: 300;
+    outline: none; transition: border-color 0.2s, background 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(250, 246, 240, 0.28); font-style: italic; }
+  input:focus, textarea:focus, select:focus { border-color: var(--amber-line); background: rgba(14, 10, 6, 0.85); }
+  textarea { resize: vertical; min-height: 84px; line-height: 1.55; }
+
+  select {
+    appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23d97706' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+    cursor: pointer;
+  }
+  select option { background: var(--bg); color: var(--txt); }
+
+  /* Radio + Check groups — wizard card style */
+  .radio-group, .check-group { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .radio-group.cols, .check-group.cols { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) { .radio-group.cols, .check-group.cols { grid-template-columns: 1fr; } }
+  .opt-card {
+    display: flex; flex-direction: column; gap: 4px; cursor: pointer;
+    background: rgba(14, 10, 6, 0.4); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 12px 14px; transition: all 0.15s;
+  }
+  .opt-card:hover { border-color: rgba(217, 119, 6, 0.25); background: rgba(14, 10, 6, 0.65); }
+  .opt-card:has(input:checked) { border-color: var(--amber); background: var(--amber-soft); }
+  .opt-card-title {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 0.875rem; font-weight: 500; color: var(--txt);
+  }
+  .opt-card input[type="radio"], .opt-card input[type="checkbox"] {
+    accent-color: var(--amber); width: 14px; height: 14px; cursor: pointer;
+  }
+  .opt-card-example {
+    font-family: var(--sans); font-size: 0.74rem; color: var(--helper);
+    font-weight: 300; font-style: italic; line-height: 1.45; padding-left: 23px;
+  }
+
+  /* Inline multi-cols field row */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+
+  /* Multi-URL / multi-collab dynamic inputs */
+  .multi-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .multi-row input { flex: 1; }
+  .multi-row-remove {
+    background: transparent; border: 1px solid var(--rule); color: var(--muted);
+    border-radius: 6px; padding: 6px 10px; font-size: 0.8rem; cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .multi-row-remove:hover { border-color: var(--amber-line); color: var(--amber); }
+  .multi-add-btn {
+    margin-top: 4px; background: transparent; border: 1px dashed var(--card-border);
+    color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 0.78rem;
+    font-family: var(--mono); letter-spacing: 0.04em; cursor: pointer; transition: all 0.15s;
+  }
+  .multi-add-btn:hover { border-color: var(--amber-line); color: var(--amber); background: var(--amber-soft); }
+
+  /* File upload drop zone */
+  .file-drop {
+    border: 1px dashed var(--card-border); border-radius: 10px;
+    padding: 24px 16px; text-align: center; cursor: pointer;
+    color: var(--muted); font-size: 0.85rem;
+    transition: border-color 0.15s, background 0.15s; margin-bottom: 12px;
+  }
+  .file-drop:hover { border-color: var(--amber-line); background: rgba(14, 10, 6, 0.5); color: var(--txt); }
+  .file-drop input[type="file"] { display: none; }
+  .file-drop-icon { font-size: 1.4rem; margin-bottom: 6px; opacity: 0.7; }
+  .file-drop strong { color: var(--amber); font-weight: 500; }
+  .file-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .file-chip {
+    font-family: var(--mono); font-size: 0.72rem; padding: 4px 10px;
+    background: var(--amber-soft); border: 1px solid var(--amber-line); color: var(--txt);
+    border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .file-chip button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.85rem; line-height: 1; padding: 0; }
+  .file-chip button:hover { color: var(--amber); }
+
+  /* Submit button — matches wizard primary CTA */
+  .submit-wrap { text-align: center; margin-top: 28px; }
+  .submit-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #1a1410; color: var(--txt);
+    font-family: var(--sans); font-weight: 700; font-size: 0.95rem;
+    border: 1px solid var(--amber); border-radius: 16px;
+    padding: 14px 36px; cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 6px 24px rgba(217, 119, 6, 0.15);
+  }
+  .submit-btn:hover { transform: translateY(-1px); background: var(--amber-soft); box-shadow: 0 8px 28px rgba(217, 119, 6, 0.25); }
+  .submit-btn .arrow { color: var(--amber); }
+
+  /* Success state */
+  #success { display: none; text-align: center; padding: 80px 20px; }
+  #success .icon { font-size: 3rem; margin-bottom: 16px; }
+  #success h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; margin-bottom: 10px; }
+  #success p { color: var(--muted); font-size: 0.92rem; }
+  #success .step1-note { font-family: var(--mono); font-size: 0.72rem; color: var(--amber); margin-top: 18px; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">Pearl Prime · Music Mode</div>
+    <h1>音樂人 <em>省思</em> 問卷</h1>
+    <p>讓 Pearl Prime 了解你的聲音、技藝，以及音樂背後的療癒意圖。你的回答將形塑 AI 生成的省思、陪伴歌曲，以及後續品牌精靈的欄位。</p>
+  </header>
+
+  <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <form id="survey-form">
+
+    <!-- 01 IDENTITY -->
+    <div class="section">
+      <div class="section-title">01 · 身分</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">顯示名稱 <span class="required">*</span></label>
+          <span class="hint">你希望公開使用的名稱 — 藝名或本名皆可。</span>
+          <input type="text" name="display_name" placeholder="例如 Iris Moss" required>
+        </div>
+        <div class="field">
+          <label class="field-label">活躍年資</label>
+          <span class="hint">你發行音樂大約多久了。</span>
+          <select name="years_active">
+            <option value="">— 請選擇 —</option>
+            <option value="0_1">未滿 1 年</option>
+            <option value="1_3">1–3 年</option>
+            <option value="4_7">4–7 年</option>
+            <option value="8_15">8–15 年</option>
+            <option value="16_25">16–25 年</option>
+            <option value="25_plus">25 年以上</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">主要曲風 <span class="required">*</span></label>
+        <span class="hint">最能定義你聲音的單一曲風。</span>
+        <select name="primary_genre" required>
+          <option value="">— 請選擇 —</option>
+          <option>獨立民謠</option>
+          <option>創作歌手</option>
+          <option>氛圍／持續音</option>
+          <option>爵士</option>
+          <option>嘻哈／饒舌</option>
+          <option>R&B／靈魂</option>
+          <option>電子／IDM</option>
+          <option>流行</option>
+          <option>搖滾／獨立搖滾</option>
+          <option>古典／新古典</option>
+          <option>世界／傳統</option>
+          <option>靈修／神聖</option>
+          <option>口白詩</option>
+          <option>實驗</option>
+          <option>其他</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label">次要曲風</label>
+        <span class="hint">選擇所有也形塑你聲音的曲風。可多選。</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="indie_folk"> 獨立民謠</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="ambient"> 氛圍／持續音</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="jazz"> 爵士</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="hip_hop"> 嘻哈／饒舌</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="electronic"> 電子／IDM</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="rb_soul"> R&B／靈魂</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="classical"> 古典／新古典</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="devotional"> 靈修／神聖</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="world"> 世界／傳統</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="experimental"> 實驗</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">主要樂器</label>
+        <span class="hint">可多選 — 你作品中最核心的樂器。</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="voice"> 人聲</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="acoustic_guitar"> 木吉他</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="electric_guitar"> 電吉他</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="piano"> 鋼琴／鍵盤</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="synth"> 合成器</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="drums"> 鼓／打擊樂</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="bass"> 貝斯</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="strings"> 弦樂（小提琴／大提琴等）</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="winds"> 管樂／銅管</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="production"> 製作／DAW</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="field_voice_memo"> 實地錄音／語音備忘</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="lyre"> 里拉琴／豎琴</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="crystal_bowls"> 水晶缽／頌缽</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="frequency_instruments"> 頻率樂器（音叉、銅鑼、風鈴）</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="other_instrument"> 其他</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">音樂形式</label>
+        <span class="hint">你的作品最自然採取的發行形式。</span>
+        <select name="music_format">
+          <option value="">— 請選擇 —</option>
+          <option value="single">單曲／獨立歌曲</option>
+          <option value="ep">EP（3–6 首）</option>
+          <option value="album">專輯／LP</option>
+          <option value="continuous_soundscape">連續音景／長篇</option>
+          <option value="meditation_session">引導冥想／頌缽浴</option>
+          <option value="loop_cycle">循環（無縫、可重複）</option>
+          <option value="live_improvisation">現場即興</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 02 THEMES & VOICE -->
+    <div class="section">
+      <div class="section-title">02 · 主題與聲音</div>
+
+      <div class="field">
+        <label class="field-label">主要主題 <span class="required">*</span></label>
+        <span class="hint">最多選 3 項 — 你作品所探索的核心情感領域。</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="recovery"> 復原</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="grief"> 哀傷</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="quiet_courage"> 靜默的勇氣</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="presence"> 臨在</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="memory"> 記憶</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="spirituality"> 靈性</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="longing"> 渴望</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="solitude"> 獨處</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="belonging"> 歸屬</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="body_wisdom"> 身體智慧／具身</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="heartbreak"> 心碎</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="joy"> 喜悅</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">你刻意迴避的主題</label>
+        <span class="hint">你在作品中拒絕的美學或情感領域。</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="glamour"> 魅惑</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="pain_aesthetic"> 痛苦美學</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="toxic_positivity"> 有毒正能量</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="trauma_porn"> 創傷消費</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="romance_idealization"> 愛情理想化</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="despair_no_hope"> 毫無希望的絕望</span></label>
+        </div>
+      </div>
+
+      <!-- KEY FREE-TEXT FIELD #1 -->
+      <div class="field">
+        <label class="field-label">你希望聽者感受到什麼 <span class="required">*</span></label>
+        <span class="hint">用你自己的話 — 你最重要的單一聽者意圖。2–3 句。</span>
+        <textarea name="listener_hope_one" rows="3" placeholder="例如：他們能與一個微小而真實的感受同在，而非逃避它 — 不確定是可以承受的，甚至是神聖的。" required></textarea>
+      </div>
+    </div>
+
+    <!-- 03 VOICE & CRAFT -->
+    <div class="section">
+      <div class="section-title">03 · 聲音與技藝</div>
+
+      <div class="field">
+        <label class="field-label">歌詞人稱</label>
+        <span class="hint">你的歌詞傾向使用的人稱。</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="first_person"> 第一人稱（「我」）</span>
+            <span class="opt-card-example">「我走過晨光」 — 創作歌手最常見。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="second_person"> 第二人稱（「你」）</span>
+            <span class="opt-card-example">「當你悲傷醒來…」 — 直接對聽者說話。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="third_person"> 第三人稱</span>
+            <span class="opt-card-example">「她望著雨」 — 敘事的距離感。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="mixed"> 混合</span>
+            <span class="opt-card-example">不同歌曲使用不同視角。</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">語域／語氣</label>
+        <span class="hint">你作品所處的語言語域。</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="plain_spoken"> 平實直白</span>
+            <span class="opt-card-example">日常語言、不堆砌隱喻 — Frank Ocean、John Prine。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="poetic"> 詩意／典雅</span>
+            <span class="opt-card-example">鮮明意象、刻意的技藝 — Joanna Newsom、Sufjan Stevens。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="conversational"> 口語對話</span>
+            <span class="opt-card-example">像對朋友說話的節奏 — Big Thief、Phoebe Bridgers。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="spiritual"> 靈性／靈修</span>
+            <span class="opt-card-example">神聖或冥想的語域 — Krishna Das、Ólafur Arnalds、福音。</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">節奏</label>
+        <span class="hint">你作品整體的能量與律動。</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="pacing" value="slow"> 緩慢／稀疏</span>
+            <span class="opt-card-example">長停頓、留白呼吸 — 氛圍、後搖、沉思民謠。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="pacing" value="varied"> 多變</span>
+            <span class="opt-card-example">在歌曲內與整體作品間都有動態變化。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="pacing" value="driving"> 推進／律動</span>
+            <span class="opt-card-example">向前推進、反覆的律動 — 舞曲、嘻哈、Motorik。</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">招牌手法</label>
+        <span class="hint">選擇定義你聲音、反覆出現的技藝手法。</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="returning_imagery"> 反覆意象（例如清晨、海洋、門口）</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="short_refrain"> 短句疊句</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="repetition"> 重複／吟誦</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="silence_use"> 運用靜默／留白</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="storytelling"> 長篇敘事</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="found_sound"> 織入採集聲響／實地錄音</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="harmony_stacking"> 和聲堆疊</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="modal_drone"> 調式持續音</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 MATERIAL FOR REFLECTION -->
+    <div class="section">
+      <div class="section-title">04 · 省思素材</div>
+
+      <div class="field">
+        <label class="field-label">試金石曲目（自己的或影響來源）</label>
+        <span class="hint">代表你所處情感世界的歌曲。上傳音訊檔<em>並／或</em>貼上連結 — 兩者皆可。</span>
+
+        <label class="file-drop" for="touchstone_files">
+          <div class="file-drop-icon">♫</div>
+          <div><strong>點擊上傳</strong> 或將音訊檔拖曳至此</div>
+          <div style="margin-top:4px; font-size:.72rem; opacity:.6;">MP3、WAV、FLAC、M4A — 可多檔</div>
+          <input type="file" id="touchstone_files" name="touchstone_files" accept="audio/*" multiple>
+        </label>
+        <div class="file-chips" id="touchstone-chips"></div>
+
+        <div id="touchstone-urls">
+          <div class="multi-row">
+            <input type="url" name="touchstone_urls[]" placeholder="https://open.spotify.com/track/… 或 YouTube 連結">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="touchstone-urls" data-name="touchstone_urls[]" data-placeholder="https://open.spotify.com/track/… 或 YouTube 連結">＋ 新增另一個曲目網址</button>
+      </div>
+
+      <div class="field">
+        <label class="field-label">主要合作者（選填）</label>
+        <span class="hint">製作人、共同創作者、工程師或其他關鍵創意夥伴的名字。每列一位。</span>
+        <div id="collaborators-rows">
+          <div class="multi-row">
+            <input type="text" name="key_collaborators[]" placeholder="姓名 — 角色（例如 Iris Moss — 共同製作人）">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="collaborators-rows" data-name="key_collaborators[]" data-placeholder="姓名 — 角色">＋ 新增另一位合作者</button>
+      </div>
+
+      <div class="field">
+        <label class="field-label">連結／引用</label>
+        <span class="hint">Spotify、Bandcamp、Apple Music、SoundCloud、個人網站、媒體報導，以及其他值得連結的內容。可多筆新增。</span>
+        <div id="citation-urls">
+          <div class="multi-row">
+            <input type="url" name="citation_urls[]" placeholder="https://artistname.bandcamp.com/… 或 Spotify 藝人頁面">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="citation-urls" data-name="citation_urls[]" data-placeholder="https://artistname.bandcamp.com/…">＋ 新增另一個連結</button>
+      </div>
+    </div>
+
+    <!-- 05 HEALING INTENT -->
+    <div class="section">
+      <div class="section-title">05 · 療癒意圖</div>
+
+      <!-- KEY FREE-TEXT FIELD #2 -->
+      <div class="field">
+        <label class="field-label">用你自己的話描述療癒意圖 <span class="required">*</span></label>
+        <span class="hint">你的音樂幫助療癒、開啟或騰出空間給什麼？這會形塑省思的框架。</span>
+        <textarea name="what_helps_heal" rows="4" placeholder="例如：透過誠實的歌詞帶來靜定 — 為微小的恐懼命名而不戲劇化。讓聽者感到在不確定中並不孤單。" required></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">你拒絕的身心健康框架</label>
+        <span class="hint">你<em>不</em>希望出現在省思中的套路。可多選。</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="pain_required"> 「深度需要痛苦」</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="toxic_positivity"> 有毒正能量</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="wellness_productivity"> 把身心健康當成生產力</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="healing_journey_cliche"> 「療癒之旅」陳腔濫調</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="trauma_overuse"> 濫用「創傷」</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="inspiration_porn"> 勵志消費</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="hustle_culture"> 拚搏文化</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="spiritual_bypass"> 靈性逃避</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">想放大的聽者回饋</label>
+        <span class="hint">選填。你收到、希望 Pearl Prime 延伸發揮的回饋。每列一句。</span>
+        <div id="listener-quotes">
+          <div class="multi-row">
+            <input type="text" name="listener_quotes[]" placeholder="例如：「你安靜的歌讓我有空間呼吸。」">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="listener-quotes" data-name="listener_quotes[]" data-placeholder="例如：「你的歌讓我覺得不那麼孤單。」">＋ 新增另一則引述</button>
+      </div>
+    </div>
+
+    <!-- 06 OUTPUT PREFERENCES -->
+    <div class="section">
+      <div class="section-title">06 · 輸出偏好</div>
+
+      <div class="field">
+        <label class="field-label">歌詞形式</label>
+        <span class="hint">若 Pearl Prime 生成歌詞陪伴，應採用哪種形式？</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="free_verse"> 自由詩</span>
+            <span class="opt-card-example">無固定格律或押韻。現代詩風格 — Mary Oliver、Ocean Vuong、當代詩擂台。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="structured"> 結構／押韻</span>
+            <span class="opt-card-example">帶押韻的主歌－副歌形式 — 傳統流行、民謠、聖詩、嘻哈。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="prose_poem"> 散文詩</span>
+            <span class="opt-card-example">段落形式的詩意語言、無斷行 — Anne Carson、Claudia Rankine。</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="no_lyrics"> 請勿生成歌詞</span>
+            <span class="opt-card-example">純器樂／音景 — Pearl Prime 不生成任何文字。</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">省思視角</label>
+        <span class="hint">Pearl Prime 的散文省思應以誰的聲音敘述？</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="reflection_perspective" value="musician"> 以音樂人身分（第一人稱）</span>
+            <span class="opt-card-example">以你作為藝術家的視角書寫：「我感受到…」「當我寫下這首…」</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="reflection_perspective" value="listener"> 以聽者身分</span>
+            <span class="opt-card-example">以聽眾的視角書寫：「當我聽到這首歌，我的身體…」</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="reflection_perspective" value="mixed"> 混合</span>
+            <span class="opt-card-example">部分段落為音樂人視角、部分為聽者視角 — Pearl Prime 交替使用。</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">歌詞段落長度</label>
+        <span class="hint">對生成歌詞段落長度的任何限制。</span>
+        <select name="lyric_length_block">
+          <option value="">— 無限制 —</option>
+          <option value="3_7">短 — 每段 3–7 行</option>
+          <option value="8_14">中 — 每段 8–14 行（典型主歌）</option>
+          <option value="15_24">長 — 每段 15–24 行（延伸）</option>
+          <option value="25_plus">極長 — 每段 25 行以上</option>
+        </select>
+      </div>
+
+      <!-- KEY FREE-TEXT FIELD #3 (optional) -->
+      <div class="field">
+        <label class="field-label">其他想讓 Pearl Prime 知道的事</label>
+        <span class="hint">選填。任何上面未涵蓋的內容 — 特殊限制、獻詞、背景脈絡。</span>
+        <textarea name="freeform_notes" rows="3" placeholder="例如：這份問卷是為我的下一張專輯，獻給已故的祖母…"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn">送出省思問卷 <span class="arrow">→</span></button>
+    </div>
+
+  </form>
+
+  <div id="success">
+    <div class="icon">🎵</div>
+    <h2>已收到問卷。</h2>
+    <p>正在處理你的音樂人檔案 — 品牌精靈將在步驟 1 接續。</p>
+    <div class="step1-note">正前往精靈…</div>
+  </div>
+
+</div>
+
+<script>
+  // ─────────────────────────────────────────────
+  // Progress bar — counts filled fields
+  // ─────────────────────────────────────────────
+  function getFields() {
+    return Array.from(document.querySelectorAll('#survey-form input, #survey-form textarea, #survey-form select'))
+      .filter(el => el.type !== 'file');
+  }
+  function updateProgress() {
+    const fields = getFields();
+    let filled = 0;
+    fields.forEach(f => {
+      if (f.type === 'checkbox' || f.type === 'radio') { if (f.checked) filled++; }
+      else if (f.value && f.value.trim()) filled++;
+    });
+    const pct = fields.length ? Math.round((filled / fields.length) * 100) : 0;
+    document.getElementById('progress-fill').style.width = Math.min(100, pct) + '%';
+  }
+  document.getElementById('survey-form').addEventListener('input', updateProgress);
+  document.getElementById('survey-form').addEventListener('change', updateProgress);
+
+  // ─────────────────────────────────────────────
+  // Multi-row dynamic inputs (URLs, collaborators, quotes)
+  // ─────────────────────────────────────────────
+  document.querySelectorAll('.multi-add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const name = btn.dataset.name;
+      const placeholder = btn.dataset.placeholder || '';
+      const target = document.getElementById(targetId);
+      const row = document.createElement('div');
+      row.className = 'multi-row';
+      const inputType = name.startsWith('touchstone_urls') || name.startsWith('citation_urls') ? 'url' : 'text';
+      row.innerHTML = `
+        <input type="${inputType}" name="${name}" placeholder="${placeholder}">
+        <button type="button" class="multi-row-remove" aria-label="Remove">×</button>
+      `;
+      row.querySelector('.multi-row-remove').addEventListener('click', () => { row.remove(); updateProgress(); });
+      target.appendChild(row);
+      row.querySelector('input').focus();
+    });
+  });
+
+  // ─────────────────────────────────────────────
+  // Cap 主要主題 at 3 selections
+  // ─────────────────────────────────────────────
+  const PRIMARY_THEMES_MAX = 3;
+  const primaryThemeBoxes = Array.from(
+    document.querySelectorAll('input[type="checkbox"][name="primary_themes[]"]')
+  );
+  function enforcePrimaryThemeCap() {
+    const checkedCount = primaryThemeBoxes.filter(b => b.checked).length;
+    const atCap = checkedCount >= PRIMARY_THEMES_MAX;
+    primaryThemeBoxes.forEach(b => {
+      const card = b.closest('.opt-card');
+      if (!b.checked) {
+        b.disabled = atCap;
+        if (card) {
+          card.style.opacity = atCap ? '0.4' : '';
+          card.style.cursor = atCap ? 'not-allowed' : 'pointer';
+        }
+      } else if (card) {
+        card.style.opacity = '';
+        card.style.cursor = 'pointer';
+      }
+    });
+  }
+  primaryThemeBoxes.forEach(b => b.addEventListener('change', enforcePrimaryThemeCap));
+  enforcePrimaryThemeCap();
+
+  // ─────────────────────────────────────────────
+  // File upload — show chips for selected files
+  // ─────────────────────────────────────────────
+  const fileInput = document.getElementById('touchstone_files');
+  const chipsBox = document.getElementById('touchstone-chips');
+  let pickedFiles = [];
+  fileInput.addEventListener('change', (e) => {
+    const newFiles = Array.from(e.target.files || []);
+    pickedFiles = pickedFiles.concat(newFiles);
+    renderChips();
+    fileInput.value = '';
+    updateProgress();
+  });
+  function renderChips() {
+    chipsBox.innerHTML = '';
+    pickedFiles.forEach((f, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'file-chip';
+      chip.innerHTML = `♫ ${escapeHtml(f.name)} <button type="button" aria-label="Remove file" data-i="${i}">×</button>`;
+      chip.querySelector('button').addEventListener('click', () => {
+        pickedFiles.splice(i, 1); renderChips(); updateProgress();
+      });
+      chipsBox.appendChild(chip);
+    });
+  }
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // ─────────────────────────────────────────────
+  // Touchstone audio upload — R2/Workers wiring
+  //
+  // Endpoint contract (override via window.PHOENIX_TOUCHSTONE_UPLOAD_URL):
+  //   POST <upload_url>  multipart/form-data  field "file"
+  //   → 200 { "key": "<r2-object-key>", "url": "<public-or-signed-url>" }
+  //
+  // TODO(binding): no R2 bucket is bound to this static Cloudflare Pages
+  // deployment yet (brand-wizard-app/wrangler.toml is [site]-only; the
+  // /wizard/music-survey/save FastAPI backend has no upload route). Until a
+  // Pages Function or Worker with an [[r2_buckets]] binding (or a presigned-URL
+  // issuer) is added, the POST below fails fast and we fall back to inlining
+  // small files as base64 data so the touchstone audio is actually carried in
+  // the persisted payload — not just filenames. Wire the endpoint, then this
+  // path uploads to R2 with no further client change.
+  // ─────────────────────────────────────────────
+  const TOUCHSTONE_UPLOAD_URL =
+    (typeof window !== 'undefined' && window.PHOENIX_TOUCHSTONE_UPLOAD_URL) ||
+    '/wizard/music-survey/upload';
+  const TOUCHSTONE_INLINE_MAX_BYTES = 2 * 1024 * 1024; // 2 MB base64-inline cap
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(reader.error || new Error('read failed'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function uploadTouchstoneFile(file) {
+    const meta = { name: file.name, size: file.size, type: file.type || '' };
+    // 1) Try the real upload endpoint (R2/Workers when wired).
+    try {
+      const body = new FormData();
+      body.append('file', file, file.name);
+      const resp = await fetch(TOUCHSTONE_UPLOAD_URL, { method: 'POST', body });
+      if (resp.ok) {
+        const out = await resp.json().catch(() => ({}));
+        return { ...meta, uploaded: true, key: out.key || null, url: out.url || null };
+      }
+    } catch (_) { /* endpoint absent / offline — fall through to inline */ }
+    // 2) Fallback: inline small files so data is carried, not just the name.
+    if (file.size <= TOUCHSTONE_INLINE_MAX_BYTES) {
+      try {
+        const dataUrl = await fileToBase64(file);
+        return { ...meta, uploaded: false, inline: true, data_url: dataUrl };
+      } catch (_) { /* read failure — record name-only stub below */ }
+    }
+    return {
+      ...meta,
+      uploaded: false,
+      inline: false,
+      note: 'upload endpoint unavailable and file exceeds inline cap; name retained only',
+    };
+  }
+
+  // ─────────────────────────────────────────────
+  // Submit handler — upload touchstones, persist + redirect into wizard step 1
+  // (PRESERVED: localStorage keys + redirect target unchanged from 2026-06-03)
+  // ─────────────────────────────────────────────
+  document.getElementById('survey-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = this.querySelector('.submit-btn');
+    if (submitBtn) submitBtn.disabled = true;
+
+    const fd = new FormData(this);
+    const data = {};
+    const arrayKeys = new Set();
+    // Walk all entries — collect [] suffix keys as arrays
+    for (const [k, v] of fd.entries()) {
+      if (k.endsWith('[]')) {
+        const cleanK = k.slice(0, -2);
+        arrayKeys.add(cleanK);
+        if (!data[cleanK]) data[cleanK] = [];
+        if (v != null && String(v).trim() !== '') data[cleanK].push(v);
+      } else {
+        data[k] = v;
+      }
+    }
+
+    // Upload touchstone audio (R2/Workers when wired; inline fallback otherwise).
+    let touchstoneRecords = [];
+    try {
+      touchstoneRecords = await Promise.all(pickedFiles.map(uploadTouchstoneFile));
+    } catch (_) {
+      touchstoneRecords = pickedFiles.map(f => ({ name: f.name, size: f.size, uploaded: false }));
+    }
+    // Structured upload records (key/url/inline data) drive downstream pickup.
+    data.touchstone_uploads = touchstoneRecords;
+    // Back-compat: keep the legacy names-only array some consumers still read.
+    data.touchstone_files = touchstoneRecords.map(r => r.name);
+
+    // Persist for wizard / YAML emit pickup
+    try {
+      localStorage.setItem('phoenix_musician_reflections', JSON.stringify({
+        savedAt: new Date().toISOString(),
+        reflections: data
+      }));
+      // Reaffirm music-books mode (set by Music Books CTA on the wizard's IntroJourney)
+      localStorage.setItem('phoenix_book_mode', JSON.stringify({
+        mode: 'music', teacher: null
+      }));
+    } catch (_) { /* private mode / quota — non-fatal */ }
+
+    console.log('Intake data:', JSON.stringify(data, null, 2));
+    document.getElementById('survey-form').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    // Advance to wizard step 1 (same target the teacher_showcase chooseTeacher flow uses)
+    setTimeout(function () {
+      window.location.href = '/wizard.html?mode=music&step=1';
+    }, 900);
+  });
+</script>
+</body>
+</html>

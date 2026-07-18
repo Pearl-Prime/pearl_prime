@@ -1,0 +1,110 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__financial_anxiety__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__money_fears
+  name: Money Without Panic — for Professional Women
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Number in Your Head: The Overthinking Spiral'
+subtitle: Escaping the Mental Loop — Financial Anxiety for Millennial Women Professionals
+  (Breaking the Thought Loop)
+cover_tagline: One late-night thought about money, and suddenly you're forty years
+  into a future that hasn't happened.
+description:
+  short_blurb: It starts with one thought — a bill, a number, a what-if — and ten
+    minutes later you've catastrophized your entire future at 2am. This is for the
+    professional woman whose financial anxiety runs as a thought loop. It won't stop
+    the thoughts; it'll teach you how to step out of the spiral instead of riding
+    it down.
+  long_description: 'It''s 2am and you''re awake because of one thought. It started
+    small — a bill you forgot, a number you glanced at, a passing what-if — and your
+    mind took it and ran. Now you''re broke, then jobless, then old and alone and
+    out of options, a whole catastrophe assembled in the dark from a single spark.
+    You know, somewhere, that it''s just a loop. But knowing that has never once stopped
+    it from carrying you all the way down.
+
+
+    This book is for the professional woman whose money fear lives in her head as
+    a runaway chain of thought. You''re not careless — you''re the opposite. You''re
+    the one who runs every scenario, who plans for problems that haven''t arrived,
+    whose competence at work is fueled by the same engine that turns one worry into
+    a thousand at night. The spiral feels like vigilance. It feels like the responsible
+    thing, like if you just think it through one more time you''ll finally arrive
+    somewhere safe. You never do. The loop has no exit built into it, because its
+    real job was never to solve anything — it was to discharge a feeling you haven''t
+    let yourself feel directly. And it''s exhausting you.
+
+
+    Grace Adeyemi shows you the actual mechanics of the loop: the spark, the acceleration,
+    the way each thought hands off to a worse one until the future feels decided.
+    You''ll learn to catch the spiral early — the bodily tells before the story builds
+    momentum, the first half-second when you could still get off the ride. Then, instead
+    of arguing with the thoughts or trying to think your way to calm, you''ll go down
+    to the felt sensation underneath them, the raw thing in the chest or the gut that
+    the thinking is racing to cover, where loops can''t run because there''s no story
+    to grip. You come back able to notice the first thought without being obligated
+    to follow it for an hour.
+
+
+    This is not a financial-planning book. No projections to run, no calculators,
+    no five-step plan to bulletproof your future. It will not promise that the anxious
+    thoughts stop coming or that the right amount of preparation will finally make
+    you feel safe. The spark will still light; minds do this, and yours is good at
+    it. What changes is whether you have to ride it all the way down, or whether you
+    can let the thought arrive and pass without booking the next sixty minutes of
+    your night.
+
+
+    Written in plain, secular, no-nonsense language you can reach for the next time
+    your mind starts building the catastrophe — direct, grounded, warm but never woo.
+
+
+    The thought is allowed to arrive. You are allowed not to chase it.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - professional women
+  - money anxiety for professional women
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: grace_adeyemi
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — secular take on stepping out
+  of compulsive thought loops
+- Unwinding Anxiety (Judson Brewer) — maps the mechanics of the worry habit and how
+  to interrupt it
+- The Financial Anxiety Solution (Lindsay Bryan-Podvin) — grounded, judgment-free
+  help for money worry that runs as runaway thinking
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

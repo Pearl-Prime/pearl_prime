@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "p01_clean_mecha_hangar_floor_l2_clean_mecha",
+  "layer_class": "L2",
+  "genre": "mecha",
+  "style_register": "mecha_mecha",
+  "crop_class": "full_figure",
+  "room_capable": true,
+  "abstract_stage_eligible": false,
+  "scene_contamination": false,
+  "light": {
+    "azimuth": "ambient"
+  },
+  "implied_camera": {
+    "angle_bucket": "eye_level"
+  },
+  "anchor": {
+    "point": "feet",
+    "y_px": 896
+  },
+  "eye_y_px": 261.32,
+  "figure_height_m": 5.8,
+  "pose_context": "standing",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "clean",
+    "role": "single_subject_cutout",
+    "subject": "mecha",
+    "contains_background": false,
+    "contains_environment": false,
+    "contains": [
+      "mecha"
+    ],
+    "background_context": []
+  }
+}

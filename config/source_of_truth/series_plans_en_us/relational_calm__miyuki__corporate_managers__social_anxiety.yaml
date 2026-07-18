@@ -1,0 +1,82 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: relational_calm__miyuki__corporate_managers__social_anxiety
+brand: relational_calm
+teacher: miyuki
+persona: corporate_managers
+topic: social_anxiety
+byline_author: gideon_stern
+arc:
+  installment_1:
+    book_id: relational_calm__miyuki__corporate_managers__social_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__social_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: relational_calm__miyuki__corporate_managers__social_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__social_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: relational_calm__miyuki__corporate_managers__social_anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__social_anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the manager who looks composed in every room and is bracing
+  the whole time: a quiet, unhurried companion that meets your social fear without
+  trying to coach it away — no scripts, no performance, no more noise added to an
+  already-crowded mind. Each book enters the same fear through a different door, and
+  none of them asks you to perform calm. They ask you to set the performance down.'
+bestseller_hook_family: ''
+emotional_engine: social_anxiety_recognition
+comp_series:
+- The Let Them Theory / Mel Robbins single-volume (Mel Robbins) — names the exhausting
+  habit of managing how others see you and hands it back, which is exactly the load
+  these managers carry into every room
+- Unfu*k Yourself series (Gary John Bishop) — direct, stripped-down, second-person
+  address with no fluff, the same plainspoken register Bare Form Books reaches for
+  without the swagger
+- The Wisdom of Anxiety (Sheryl Paul) — treats anxiety as a signal to be met rather
+  than a defect to be fixed, the same refusal-to-coach-it-away stance that defines
+  this series
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-50
+  where_they_are: It is 8:52 in the morning and the team is filing into the conference
+    room. You called this meeting. You are at the head of the table with your laptop
+    open to an agenda you rewrote four times last night, and your heart is going as
+    if something is about to happen — though nothing is, except that people are about
+    to look at you and wait for you to begin. You smile. You say good morning in the
+    steady voice you have practiced for years. Underneath it, you are bracing.
+  what_they_need: To understand that the fear firing in safe rooms is not a character
+    flaw or a leadership gap — it is an alarm misreading the room — and to be met
+    without being managed; to stop treating their own nervous system as one more underperformer
+    to coach; to feel, for once, like the steady voice and the bracing body can occupy
+    the same room without one having to win.
+  what_they_avoid: Communication hacks, executive-presence coaching, power-posing,
+    fake-it-till-you-make-it, anything that frames their fear as a personal-brand
+    problem to optimize, and self-help that adds five more techniques to a mind already
+    running too many.
+series_voice_markers:
+  register: spare, clear, unadorned; a quiet presence that strips away the noise rather
+    than adding to it; gentle and direct, addressed to one tired person in the next
+    room, never to a conference hall; never clinical, never preachy, never hustle
+  sentence_rhythm: short declaratives that land and leave space, set against the occasional
+    longer line that opens and exhales; deliberate white space between thoughts; the
+    unsaid given room to settle; no piled-up clauses, no exclamation, no jargon
+  metaphor_family: bare form and empty space — the room with nothing extra in it,
+    the threshold and the doorway you keep approaching, the stillness between two
+    people, the unsaid that settles, clean morning light, the breath in a quiet room,
+    what remains when the clutter falls away
+_needs_authoring: false

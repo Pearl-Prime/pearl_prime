@@ -1,0 +1,79 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__gen_z_professionals__depression
+brand: awakening_press
+teacher: adi_da
+persona: gen_z_professionals
+topic: depression
+byline_author: tara_petrova
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__gen_z_professionals__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__gen_z_professionals__depression__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__depression__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: awakening_press__adi_da__gen_z_professionals__depression__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__depression__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You are not the gray weight you've been carrying. Beneath the
+  flatness, the numbness, the quiet conviction that something in you is broken, there
+  is an awareness that was never touched by any of it. This series doesn't try to
+  fix your depression or argue you out of it. It walks beside you while you stop believing
+  you are the dream you woke up inside of.
+bestseller_hook_family: ''
+emotional_engine: depression_recognition
+comp_series:
+- The Untethered Soul (Michael A. Singer) — same loosening of identification from
+  the inner voice and the heaviness, written for the awakened-curious rather than
+  the clinical
+- When Things Fall Apart (Pema Chödrön) — meets the dark without trying to fix it,
+  reverent and plainspoken about sitting in what hurts
+- Reasons to Stay Alive (Matt Haig) — intimate first-person companionship for the
+  young and depressed, the felt texture of the gray rather than a treatment plan
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 23-29, early-career professional, raised online
+  where_they_are: It's 11pm on a Tuesday. The laptop is finally closed, the Slack
+    notifications have gone quiet, and you're sitting on the edge of your bed in a
+    room you pay too much for, phone glowing in your hand, scrolling without reading.
+    From the outside today went fine — you replied to everything, you smiled in the
+    standup. Inside there's a flat gray ceiling pressing down that's been there so
+    long you've stopped noticing it's not the sky.
+  what_they_need: Permission to stop performing okayness. Language for a heaviness
+    that isn't dramatic enough to name and won't lift no matter what they achieve.
+    A way to relate to the dark without being told to fight it, fix it, or be grateful
+    it isn't worse — and the dawning recognition that the one who notices the heaviness
+    is not made of it.
+  what_they_avoid: Spiritual bypassing and 'just raise your vibration' platitudes.
+    Hustle-coded self-help that reframes depression as a motivation problem. Clinical
+    flatness and symptom checklists. Toxic positivity. Anyone who confuses awakening
+    with another thing to optimize and achieve.
+series_voice_markers:
+  register: spacious, awakening, quietly radical; intimate not lofty; reverent without
+    dogma; the voice of someone sitting in the dim room with you, not a clinician
+    across a desk or a guru on a stage
+  sentence_rhythm: unhurried; short declaratives that land and leave silence after
+    them, occasionally opening into one long breath of a sentence; never rushed, never
+    urgent, no exclamation, plenty of white space
+  metaphor_family: waking from a dream, the open sky behind the weather, the light
+    already present in the room, the loosening of a grip you didn't know you were
+    holding, coming home to what was never lost
+_needs_authoring: false

@@ -1,0 +1,133 @@
+# Structural template registry — STRUCTURAL_COMPOSITION_MVP
+# Separate from PANEL_TYPE_SYSTEM_V1 storytelling taxonomy.
+schema_version: "1.1.0"
+registry_id: structural_templates_mvp_v2
+
+templates:
+  seated_table_scene:
+    template_id: seated_table_scene
+    description: "Character seated at table with pelvis/seat contact; no floating torso."
+    story_purpose: "dialogue, reflection, or decision while intentionally supported"
+    allowed_layers: [L0, L1, L2, L3, L4]
+    default_transform: {tx_pct: 52, ty_pct: 68, uniform_scale: 0.72}
+    required_support_proof: [seated_on]
+    allowed_relations: [seated_on, resting_on, held_by, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: seat_or_table, min: 1}
+      - {category: character, role: primary_subject, min: 1}
+    contact_rule: seated_point_in_polygon
+    forbid: [floating_readable_room_torso, floating_readable_room_prop]
+    fail_modes: [missing_seat_support, contact_outside_support_polygon]
+    overlay: {emit_support_overlay: true, overlay_from: resolved_transform}
+
+  standing_room_scene:
+    template_id: standing_room_scene
+    description: "Full/standing figure with feet-on-floor contact in readable room."
+    story_purpose: "establishing, movement, confrontation, or threshold choice"
+    allowed_layers: [L0, L1, L2, L3, L4]
+    default_transform: {tx_pct: 50, ty_pct: 86, uniform_scale: 0.62}
+    required_support_proof: [standing_on]
+    allowed_relations: [standing_on, resting_on, held_by, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: floor, min: 1}
+      - {category: character, role: primary_subject, min: 1}
+    contact_rule: standing_point_in_polygon
+    forbid: [floating_readable_room_torso, floating_readable_room_prop]
+    fail_modes: [missing_floor_support, contact_outside_support_polygon]
+    overlay: {emit_support_overlay: true, overlay_from: resolved_transform}
+
+  closeup_subject_scene:
+    template_id: closeup_subject_scene
+    description: "Tight subject framing with explicit frame/held support; no invented floor requirement."
+    story_purpose: "recognition, reaction, intimacy, or identity turn"
+    allowed_layers: [L0, L2, L4]
+    default_transform: {tx_pct: 50, ty_pct: 50, uniform_scale: 1.0}
+    required_support_proof: [held_by]
+    allowed_relations: [held_by, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: frame, min: 1}
+      - {category: character, role: primary_subject, min: 1}
+    contact_rule: frame_support
+    forbid: [floating_readable_room_prop]
+    fail_modes: [missing_frame_support, full_body_floor_contract_applied_to_closeup]
+    overlay: {emit_support_overlay: false, overlay_from: resolved_transform}
+
+  prop_insert_scene:
+    template_id: prop_insert_scene
+    description: "One isolated prop/object insert; character support is neither selected nor required."
+    story_purpose: "clue, object callback, evidence, or symbolic insert"
+    allowed_layers: [L0, L3, L4]
+    default_transform: {tx_pct: 50, ty_pct: 55, uniform_scale: 1.0}
+    required_support_proof: [resting_on]
+    allowed_relations: [resting_on, held_by, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: object_support, min: 1}
+      - {category: prop, role: primary_object, min: 1}
+    contact_rule: prop_point_in_polygon
+    forbid: [floating_readable_room_prop]
+    fail_modes: [character_selected_as_prop, missing_object_support]
+    overlay: {emit_support_overlay: true, overlay_from: resolved_transform}
+
+  two_character_dialogue_scene:
+    template_id: two_character_dialogue_scene
+    description: "Two characters share one readable support environment with separate transforms."
+    story_purpose: "dialogue, conflict, repair, or relationship turn"
+    allowed_layers: [L0, L1, L2, L3, L4]
+    default_transform: {tx_pct: 50, ty_pct: 84, uniform_scale: 0.58}
+    required_support_proof: [standing_on]
+    allowed_relations: [standing_on, seated_on, resting_on, held_by, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: shared_support, min: 1}
+      - {category: character, role: dialogue_subject, min: 2}
+    contact_rule: each_character_contact_in_polygon
+    forbid: [floating_readable_room_torso]
+    fail_modes: [missing_second_character, overlapping_identity_slots, unsupported_character]
+    overlay: {emit_support_overlay: true, overlay_from: resolved_transform}
+
+  action_impact_scene:
+    template_id: action_impact_scene
+    description: "Grounded action/impact with explicit subject support and optional debris/FX."
+    story_purpose: "action turn, consequence, impact, or rupture"
+    allowed_layers: [L0, L1, L2, L3, L4]
+    default_transform: {tx_pct: 50, ty_pct: 84, uniform_scale: 0.72}
+    required_support_proof: [standing_on]
+    allowed_relations: [standing_on, resting_on, held_by, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: action_ground, min: 1}
+      - {category: character, role: primary_subject, min: 1}
+    contact_rule: standing_point_in_polygon
+    forbid: [floating_readable_room_torso, floating_readable_room_prop]
+    fail_modes: [impact_without_grounding, debris_misclassified_as_subject]
+    overlay: {emit_support_overlay: true, overlay_from: resolved_transform}
+
+  symbolic_metaphor_scene:
+    template_id: symbolic_metaphor_scene
+    description: "A symbolic image with an explicitly supported subject or prop."
+    story_purpose: "metaphor plant, recurrence, transformation, or callback return"
+    allowed_layers: [L0, L2, L3, L4]
+    default_transform: {tx_pct: 50, ty_pct: 55, uniform_scale: 0.9}
+    required_support_proof: [held_by]
+    allowed_relations: [held_by, resting_on, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: symbolic_frame, min: 1}
+      - {category: prop, role: symbolic_subject, min: 1}
+    contact_rule: symbolic_support
+    forbid: [floating_readable_room_prop]
+    fail_modes: [symbol_without_doctrine_id, unsupported_symbolic_prop]
+    overlay: {emit_support_overlay: false, overlay_from: resolved_transform}
+
+  establishing_environment_scene:
+    template_id: establishing_environment_scene
+    description: "Environment-first establishing image with a supported environment anchor prop."
+    story_purpose: "place, scale, atmosphere, or spatial re-establishment"
+    allowed_layers: [L0, L1, L3, L4]
+    default_transform: {tx_pct: 50, ty_pct: 80, uniform_scale: 0.5}
+    required_support_proof: [resting_on]
+    allowed_relations: [resting_on, occluded_by]
+    required_nodes:
+      - {category: support_surface, role: environment, min: 1}
+      - {category: prop, role: environment_anchor, min: 1}
+    contact_rule: environment_anchor_support
+    forbid: [floating_readable_room_prop]
+    fail_modes: [foreground_character_smuggled_into_environment_plate, missing_scale_anchor]
+    overlay: {emit_support_overlay: false, overlay_from: resolved_transform}

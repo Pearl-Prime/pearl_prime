@@ -1,0 +1,289 @@
+# Japan LINE Freebie Funnel — State Machine Definition
+#
+# Authority: docs/JAPAN_LINE_FREEBIE_FUNNEL_PLAN_2026-04-29.md
+# Mirrors:   funnel/burnout_reset/GHL_HANDBOFF.md (GHL email Proof Loop) + docs/FREEBIE_MARKETING_PLAN.md
+# Locale:    ja_JP only (TW / KR are separate planning streams)
+#
+# Notes
+# - This file defines the state machine. Per-state Japanese message copy lives in
+#   `messages.ja_JP.yaml` (slot keys must match `message_slot` here).
+# - Cadence has TWO profiles: `line_native_fast` (default — exploits LINE same-day reads)
+#   and `email_equivalent_slow` (mirrors GHL E1–E5 timing for comparative testing).
+# - Stage names map 1:1 to GHL stages; deviations from the GHL flow are documented
+#   inline with `# DEVIATION:` comments.
+
+schema_version: 1
+generated: "2026-04-29"
+
+funnel_id: japan_line_freebie_funnel
+locale: ja_JP
+default_speed_profile: line_native_fast
+
+# ---------------------------------------------------------------------------
+# Stage ladder (mirrors GHL: Awareness → Landing → Capture → Nurture → Upsell)
+# ---------------------------------------------------------------------------
+stages:
+  - id: awareness
+    description: "Reader sees ad/post/in-book CTA → clicks to message OA."
+    ghl_equivalent: awareness
+    line_primitives:
+      - line_ads_talk_head_view
+      - line_ads_smart_channel
+      - line_ads_lap_click_to_message
+      - voom_organic_post
+      - in_book_qr_to_oa
+    exit_event: click_to_message_or_friend_add
+
+  - id: landing
+    description: "Pre-friend-add surface explaining freebie + adds reward."
+    ghl_equivalent: landing
+    line_primitives:
+      - oa_profile_page          # always-visible OA bio + add button
+      - liff_landing_page        # optional richer surface
+    exit_event: friend_add_intent
+
+  - id: capture
+    description: "Friend-add event = lead created. Webhook 'follow' fires."
+    ghl_equivalent: capture
+    # DEVIATION: GHL captures (name, email, exercise) via form. LINE friend-add
+    # captures only userId + display name unless LINE Login OAuth is layered.
+    # Email/phone are NOT collected at this stage. See research §5 for compliance impact.
+    line_primitives:
+      - webhook_follow_event
+      - line_login_optional      # only when richer profile required
+    on_event: friend_add
+    actions:
+      - tag_contact: ["funnel_burnout_reset_jp", "topic_${topic}", "hub_${hub_id}", "brand_${brand_id}"]
+      - send_message: m1_welcome
+      - schedule_step_messages: ["m2", "m3", "m4", "m5", "m6"]
+      - update_rich_menu: stage_nurture
+
+  - id: nurture
+    description: "Proof Loop adapted to LINE: Exercise → Exercise → Story → Soft pitch."
+    ghl_equivalent: nurture_e1_e5
+    states:
+      - id: m1_welcome
+        message_slot: welcome_day_0
+        timing:
+          line_native_fast:    "+0h"        # immediate, on follow event
+          email_equivalent_slow: "+0h"
+        proof_loop_role: "exercise_1"
+        primary_action: "Send welcome + first somatic micro-exercise. Brand voice anchor message."
+        message_type: line_text_with_sticker
+        exit_condition: "auto-advance to m2"
+
+      - id: m2_second_exercise
+        message_slot: exercise_2_day_1
+        # RESEARCH-DRIVEN: front-end Proof Loop telescopes on LINE because open-rate
+        # half-life is hours (not days). Default +12h; A/B test +6h vs +12h before
+        # locking. Slow profile retains +24h for direct GHL-equivalent comparison.
+        # Source: artifacts/research/japan_line_freebie_funnel_market_research_2026-04-29.md §7.1
+        timing:
+          line_native_fast:    "+12h"
+          email_equivalent_slow: "+24h"
+        proof_loop_role: "exercise_2"   # different mechanism from M1
+        primary_action: "Second micro-exercise on a different mechanism. Audio clip option."
+        message_type: line_text_or_audio
+        exit_condition: "auto-advance to m3"
+        send_window_jst: "20:00-21:30 (Sun/Tue/Wed/Thu — avoid Fri eve, Sat morning)"
+
+      - id: m3_story
+        message_slot: story_day_3
+        timing:
+          line_native_fast:    "+72h"        # Day 3 — compressed from GHL D4
+          email_equivalent_slow: "+72h"      # Day 3 also (E3 in GHL = +72h)
+        proof_loop_role: "story"
+        primary_action: "Transformation story from book's STORY atoms. No offer yet."
+        message_type: line_long_text
+        exit_condition: "auto-advance to m4 after min 96h"
+
+      - id: m4_soft_pitch
+        message_slot: soft_pitch_day_7
+        timing:
+          line_native_fast:    "+168h"       # Day 7
+          email_equivalent_slow: "+168h"     # Day 7 (E3+96h ≥ 48h gap satisfied)
+        proof_loop_role: "soft_pitch"
+        primary_action: "Introduce book gently. Link card to Pearl Prime Storefront SKU (pearlprime.shop/ja-JP/book/<brand_id>/<inner_key>). No coupon."  # AMENDMENT-2026-06-04.3 §14 HARD CTA cutover: external BookWalker / Amazon JP paid links replaced with storefront SKU URL.
+        message_type: line_link_card
+        # The 48h-min-gap-from-story-to-offer rule (per FREEBIE_MARKETING_PLAN.md) is
+        # honored: m3→m4 = 96h. Do not compress below 48h.
+        exit_condition: "auto-advance to m5"
+
+  - id: hard_pitch
+    description: "Coupon-gated explicit offer."
+    ghl_equivalent: upsell_e4
+    states:
+      - id: m5_hard_pitch
+        message_slot: hard_pitch_day_14
+        timing:
+          line_native_fast:    "+336h"       # Day 14
+          email_equivalent_slow: "+504h"     # Day 21 in slow profile
+        proof_loop_role: "hard_pitch"
+        primary_action: "Explicit purchase pitch with LINE-native coupon (¥-discount or %-off)."
+        message_type: line_coupon_message
+        exit_condition: "auto-advance to m6 unless purchased"
+
+  - id: post_purchase
+    description: "Thank-you + review ask + cross-sell branch."
+    ghl_equivalent: upsell_e5_post_purchase
+    states:
+      - id: m6_post_purchase_thanks
+        message_slot: post_purchase_thanks
+        timing:
+          on_event: purchase_confirmed
+        primary_action: "Thank-you message. Review request. Tag as buyer."
+        message_type: line_text
+        exit_condition: "tag buyer; route to cross_sell branch after +7d"
+
+      - id: m6b_cross_sell
+        message_slot: cross_sell_day_21
+        timing:
+          line_native_fast:    "+504h"       # Day 21
+          email_equivalent_slow: "+672h"     # Day 28
+        proof_loop_role: "more_books"
+        primary_action: "Recommend 2–3 related books from the same brand or hub."
+        message_type: line_carousel_link_cards
+        exit_condition: "terminal unless re-engaged"
+
+  - id: re_engage
+    description: "Inactive-friend reactivation."
+    ghl_equivalent: re_engagement
+    states:
+      - id: m7_re_engage
+        message_slot: re_engage_day_60
+        timing:
+          line_native_fast:    "+1440h"      # Day 60
+          email_equivalent_slow: "+1440h"    # Day 60 (same)
+        primary_action: "Soft re-engagement. New micro-exercise or seasonal hook."
+        message_type: line_text
+        exit_condition: "if no response in 30d → archive (do not unfriend; user owns block)"
+
+  - id: terminal
+    description: "End states."
+    states:
+      - id: blocked
+        # DEVIATION: GHL has explicit unsubscribe with copy line. LINE has no required
+        # unsubscribe link — block is one tap from the chat surface and removes the
+        # friend relationship entirely. Compliance: 特定電子メール法 does not apply to
+        # LINE messages (see research §5); LINE OA TOS governs cadence rules instead.
+        on_event: unfollow
+        action: "Tag contact as 'blocked'. Stop all step messages. Do not retry add."
+      - id: purchased
+        on_event: purchase_confirmed
+        action: "Tag contact as 'buyer_${book_slug}'. Route to post_purchase."
+
+# ---------------------------------------------------------------------------
+# Webhook event mapping (LINE → CRM event bus)
+# ---------------------------------------------------------------------------
+webhook_events:
+  follow:
+    description: "User added the OA as a friend. Equivalent to GHL 'contact created'."
+    crm_event: lead_created
+    triggers: [send_m1_welcome, schedule_drip, tag_initial]
+  unfollow:
+    description: "User blocked / removed the OA. Equivalent to GHL 'unsubscribed'."
+    crm_event: lead_blocked
+    triggers: [stop_drip, tag_blocked]
+  message:
+    description: "User sent a message. Triggers keyword auto-reply or human handover."
+    crm_event: inbound_message
+  postback:
+    description: "User tapped a rich menu cell or carousel button."
+    crm_event: rich_menu_click
+    triggers: [tag_intent, route_by_postback_data]
+  beacon:
+    description: "User's device entered a LINE Beacon range. Out of scope for v1."
+
+# ---------------------------------------------------------------------------
+# Tag schema (mirrors GHL Contacts API tag conventions)
+# ---------------------------------------------------------------------------
+tags:
+  funnel:
+    pattern: "funnel_${funnel_id}_jp"
+    example: "funnel_burnout_reset_jp"
+  topic:
+    pattern: "topic_${topic}"
+    example: "topic_burnout"
+  brand:
+    pattern: "brand_${brand_id}"
+    example: "brand_stillness_press"
+  hub:
+    pattern: "hub_${hub_id}"
+    example: "hub_iyashikei"
+  state:
+    pattern: "state_${state_id}"
+    example: "state_m4_soft_pitch_sent"
+  intent:
+    pattern: "intent_${intent}"
+    example: "intent_book_interested"
+  buyer:
+    pattern: "buyer_${book_slug}"
+    example: "buyer_burnout-reset-stillness-press"
+
+# ---------------------------------------------------------------------------
+# LIFF integration points (optional — gates richer interactions)
+# ---------------------------------------------------------------------------
+liff_endpoints:
+  quiz:
+    path: "/liff/quiz/${topic}"
+    purpose: "3-question persona/topic quiz → tailored PDF freebie + tag intent"
+    used_by_states: [m1_welcome]   # entry funnel format B (per plan §3)
+  exercise_2_interactive:
+    path: "/liff/exercise/${exercise_id}"
+    purpose: "Interactive somatic exercise (timer, breathwork visualizer) inside chat"
+    used_by_states: [m2_second_exercise]
+  book_preview:
+    path: "/liff/preview/${book_slug}"
+    purpose: "Sample chapter + 1-tap purchase routing to Pearl Prime Storefront SKU (pearlprime.shop/ja-JP/...)"  # AMENDMENT-2026-06-04.3 §14 HARD CTA cutover: external BookWalker / Amazon JP paths removed.
+    used_by_states: [m4_soft_pitch, m5_hard_pitch]
+
+# ---------------------------------------------------------------------------
+# Exit conditions / KPI gates (set targets in plan §"KPIs"; not enforced here)
+# ---------------------------------------------------------------------------
+kpi_gates:
+  friend_add_cpa:
+    target_jpy: null    # set in plan after research §2
+    threshold_action: "alert at 1.5× target"
+  drip_to_first_purchase_cvr:
+    target_pct: null    # set in plan after research §2
+    threshold_action: "iterate cadence / pitch copy"
+  arpaf_jpy:
+    description: "Average revenue per added friend, 60-day window"
+    target_jpy: null    # set in plan after research §2
+
+# ---------------------------------------------------------------------------
+# Multi-brand orchestration reference
+# ---------------------------------------------------------------------------
+oa_orchestration:
+  primary_model: per_brand_12_oas
+  fallback_model: hybrid_3_hubs
+  brand_registry_ref: "config/funnel/line_jp/oa_brand_registry.yaml"
+  per_brand_voice_ref: "config/catalog_planning/locale_brand_names.yaml"
+  primary_rationale: |
+    Per-brand 12 OAs at Standard tier (~¥180k/mo combined floor). Reasons (research §1, §7):
+    (a) each brand speaks to a distinct topic and reader register — collapsing them into a
+    hub erodes brand-trust and rich-menu space; (b) friend-add CPA stays low when the brand
+    promise is narrow; (c) 12 separate friend lists hedge against any single OA being
+    throttled by tier quota or LINE policy review; (d) 14-cell rich-menu shared across brands
+    (the 1-OA fallback) is operationally inferior — readers tap a brand cell expecting brand
+    voice, not a hub voice. Source: artifacts/research/japan_line_freebie_funnel_market_research_2026-04-29.md §7.5.
+  fallback_rationale: |
+    Hybrid 3-hub remains as a documented fallback if the operator cannot fund 12 Standard
+    accounts at launch. In hybrid mode, brand voice surfaces via per-brand step-message
+    variants and rich-menu landing routing. Cost: ~¥45k/mo combined at 3 hubs × Standard.
+
+# ---------------------------------------------------------------------------
+# Compliance toggles (see plan §"Compliance" + research §5)
+# ---------------------------------------------------------------------------
+compliance:
+  tokutei_shotorihiki_disclosure_required: true   # 特定商取引法
+  privacy_policy_link_required: true              # 個人情報保護法
+  age_gate_required: false                         # only if medical-claim freebies
+  medical_claim_blocklist:
+    - "treats anxiety"
+    - "cures depression"
+    - "guaranteed sleep"
+  permitted_register_examples:
+    - "整える"  # "tune / regulate" — wellness register, non-clinical
+    - "ととのう"
+    - "やわらげる"  # "soften"

@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__courage__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__courage__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__brave_world__1hr
+  name: Brave in the World — for Students (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Building Courage: The Rumination Trap'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Courage for Gen Alpha Students (The Overthinking Spiral)
+cover_tagline: One text you haven't sent. Forty versions of how it goes wrong.
+description:
+  short_blurb: You said one slightly weird thing in class, and now your brain has
+    written the entire movie of everyone hating you by Friday. This is a one-hour
+    look at the spiral — how a single thought multiplies into a thousand — for students
+    whose minds will not stop running the worst-case tape.
+  long_description: 'It starts with one thought. You said something a little off in
+    the group chat. Or you raised your hand and your voice cracked. Or a friend left
+    you on read. One small thing — and then your brain takes it and runs. What if
+    they think I''m annoying. What if they''re talking about me. What if this is why
+    I don''t really have close friends. What if I''m like this forever. By the time
+    you look up, you''ve lived through an entire imaginary catastrophe and you feel
+    as wrecked as if it actually happened.
+
+
+    This book is for the student whose mind spirals — where one thought becomes ten
+    becomes a thousand, each one feeling more true than the last, all of them feeding
+    the same pit in your stomach. You''re not overreacting on purpose. The spiral
+    is fast and it''s convincing and it always uses real details, which is exactly
+    why it''s so hard to step out of. It doesn''t feel like thinking. It feels like
+    seeing the truth.
+
+
+    In one hour, here''s the work. First, recognize it — learn the specific feeling
+    of a spiral starting, the way one thought hooks the next, so you can catch it
+    before it''s pulled you under. Second, go down into it — but not by following
+    every branch to its terrible end. Instead, get underneath the thoughts to the
+    feeling driving them, and notice that the spiral isn''t trying to solve anything;
+    it''s just a sped-up loop your mind runs when it''s anxious. Third, come back
+    — not by forcing yourself to ''think positive,'' but by learning to let a thought
+    be just a thought instead of a prophecy.
+
+
+    This will not promise a quiet mind. Your brain will still throw thoughts at you
+    — that''s what brains do. This book will not teach you to stop the spiral by arguing
+    with every thought, because you can''t out-argue a thing that generates a hundred
+    new objections a minute. There are no worksheets to fill out, no forced positivity,
+    no ''just don''t think about it.''
+
+
+    What changes is your relationship to the loop. Right now, when the spiral starts,
+    you''re inside it. By the end of this hour, you can be the one watching it spin
+    — close enough to feel it, far enough to know it''s not the truth, just the noise.
+
+
+    The text you haven''t sent is one text. The forty disasters your brain wrote are
+    not real and were never going to be. You''re allowed to let the thought pass without
+    chasing it. You don''t have to follow your mind everywhere it goes.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  secondary:
+  - students
+  - courage for students
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: nina_vazquez
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — secular take on watching anxious
+  thought-loops instead of obeying them
+- Unwinding Anxiety (Judson Brewer) — the science of how spirals form as habit loops
+  and how to step out
+- Detox Your Thoughts (Andrea Bonior) — practical, no-woo work on catching catastrophic
+  thinking before it takes over
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

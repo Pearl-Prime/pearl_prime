@@ -1,0 +1,74 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: qi_foundation__master_feung__first_responders__courage
+brand: qi_foundation
+teacher: master_feung
+persona: first_responders
+topic: courage
+byline_author: zane_underhill
+arc:
+  installment_1:
+    book_id: qi_foundation__master_feung__first_responders__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/first_responders__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: qi_foundation__master_feung__first_responders__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/first_responders__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: qi_foundation__master_feung__first_responders__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/first_responders__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Courage you can return to from the root — not nerve borrowed
+  from adrenaline, but a steady ground that refills from below, so the people who
+  run toward the emergency can finally let something rise back up in themselves.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- Bessel van der Kolk's The Body Keeps the Score companion works — why bodies that
+  have seen too much hold it low and need somatic, not cognitive, repair
+- Brené Brown's Daring Greatly series — courage reframed as showing up vulnerable,
+  not as armor
+- Mark Nepo's The Book of Awakening — unhurried, root-deep daily attention for people
+  worn thin by what they carry
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30 to 52, a career first responder — paramedic, firefighter, patrol officer,
+    or dispatcher
+  where_they_are: It's the back half of a shift and you're sitting in the rig in a
+    parking lot, engine ticking, coffee gone cold, replaying the call you just ran
+    — outwardly steady, the calm one everyone leaned on, while something underneath
+    you keeps bracing for the next tone-out that hasn't come yet.
+  what_they_need: To feel that courage is not the absence of the shake but a ground
+    that holds underneath it — a way to let the breath drop low again, to come down
+    off the constant edge, and to stop spending the deep reserve to keep the surface
+    looking unbothered.
+  what_they_avoid: Hustle-grind resilience talk, 'optimize your recovery' biohacking,
+    hooah toughness that shames the tremor, toxic positivity, and anyone who has never
+    run a call telling them to just breathe.
+series_voice_markers:
+  register: grounded, restorative, quietly vital; the voice of someone who has sat
+    in the same parking lot after the same call — warm, unhurried, never clinical,
+    never preachy, never hustle
+  sentence_rhythm: steady and low, plain declaratives that let the breath drop; short
+    lines that land like a step taken before you feel ready, longer ones that open
+    the ground beneath
+  metaphor_family: roots and meridians, deep ground and rising sap, the well that
+    refills from below, breath reaching the lowest part of the lungs, the edge and
+    the single step, vitality restored from the root — never machinery, military cadence,
+    productivity, or biohacking
+_needs_authoring: false

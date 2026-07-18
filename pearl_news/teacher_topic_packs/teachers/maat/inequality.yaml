@@ -1,0 +1,283 @@
+schema_version: 1
+teacher_id: maat
+topic: inequality
+active: true
+identity:
+  display_name: "Ma'at"
+  attribution_name: "Teacher Ma'at"
+  tradition: "Naqshbandi Sufi teacher (Hazrat Inayat Khan lineage; path of the heart; fanaa and dhikr)"
+  tradition_short: "Naqshbandi Sufi"
+  teacher_setting_options:
+    - "Sufi Circle"
+    - "sama gathering"
+  teacher_years: "Naqshbandi Tariqat lineage"
+  affiliation_safe_line: "has attended the United Spiritual Leaders Forum"
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: "13-29"
+  default_register: "phone-native, high-pressure, institution-skeptical"
+  daily_worlds:
+    - school
+    - home
+    - group chat
+    - commute
+    - public systems
+  tie_to_real_world_struggles:
+    - id: nafs_verdict
+      label: "structural inequality installing the nafs verdict — the grasping self's claim that worth tracks position"
+      loop: "reads the wealth chart -> chest tightens -> closes the app -> opens it because the chart is still the world"
+      body_markers: ["chest", "throat", "shoulders"]
+      digital_markers: ["close", "reopen", "scroll", "check again"]
+topic_fit:
+  fit_level: primary
+  fit_reason: "Inequality lands as the collective nafs made material; Sufi practice of fanaa dissolves the grasping self that the hierarchy keeps trying to install, while keeping the structural fight in view."
+  forbidden_angles:
+    - "do not preach acceptance of structural harm as spiritual surrender"
+    - "do not privatize inequality as a personal heart problem"
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: "You watch the rent climb past the wage. You also feel the slower drain — the way the gap keeps trying to tell you what the heart already refuses to accept."
+      semantic_family: "maat-inequality-hook-personal-rent"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_personal_02
+      line: "You read the wealth-share chart between classes. You also know what the chart is doing — translating a structural arrangement into a verdict the heart was never asked to consent to."
+      semantic_family: "maat-inequality-hook-personal-chart"
+      tone: grave
+      intensity: 4
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_personal_03
+      line: "You compared your starting salary with a friend in the group chat. The math was fast. The slower thing was what the comparison kept trying to do to how you see yourself."
+      semantic_family: "maat-inequality-hook-personal-chat"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response"]
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: "Inequality pressure is not only economic. It is the daily installation of a hierarchy of worth that the institutions perpetuating the gap refuse to name as their own design."
+      semantic_family: "maat-inequality-hook-big-design"
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_big_picture_02
+      line: "The wealthiest 1% captured nearly two-thirds of new global wealth since 2020. The arrangement is not narrating itself as policy. It is narrating itself as a verdict on the person it falls on."
+      semantic_family: "maat-inequality-hook-big-verdict"
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_big_picture_03
+      line: "When wages cannot meet rent and student debt grows faster than starting salaries, inequality stops being an abstraction. It becomes the daily field where young people are asked to negotiate with their own sense of inherent worth."
+      semantic_family: "maat-inequality-hook-big-field"
+      article_types: ["hard_news_spiritual_response"]
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: "Teacher Ma'at, a Naqshbandi Sufi teacher in the Hazrat Inayat Khan lineage, has watched in Sufi Circles what economic inequality does to young people. Students are not asking for permission to want fairness. They are asking how to keep the gap from rewriting the heart's own sense of inherent worth while the structural fight goes on."
+      semantic_family: "maat-inequality-intro-circles"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_intro_02
+      line: "Teacher Ma'at, rooted in the Naqshbandi Tariqat and the universal Sufism that Hazrat Inayat Khan carried West, has watched in sama gatherings the specific exhaustion of being on the smaller side of widening gaps. The teaching she offers does not resolve the structural arrangement. It protects the heart from inheriting the verdict the arrangement keeps trying to deliver."
+      semantic_family: "maat-inequality-intro-sama"
+      tone: grave
+      intensity: 4
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_intro_03
+      line: "Teacher Ma'at — born into the Naqshbandi Tariqat, trained as an MIT engineer, now teaching what the doctrine calls the path of the heart — has watched in weekly Sufi Circles how dhikr begins to dismantle the verdict that inequality installs. The students come to the circle carrying the gap. They leave carrying the question the gap could not finally answer."
+      semantic_family: "maat-inequality-intro-bridge"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response", "commentary"]
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: "You opened the rent listing. Your chest tightened. You closed the tab. Then you opened it again because the rent does not get smaller when you stop looking.\nLOOP_SEQUENCE: \"opened the listing. chest tightened. closed the tab. opened it again.\""
+      loop_type: "nafs_verdict"
+      body_register: "chest"
+      digital_behavior: "close-return"
+      article_types: ["hard_news_spiritual_response"]
+    - id: youth_somatic_02
+      line: "You saw the wealth-share post in your feed. Your shoulders tightened. You scrolled past it. Then you came back because the post was still the world.\nLOOP_SEQUENCE: \"saw the post. shoulders tightened. scrolled past. came back.\""
+      loop_type: "nafs_verdict"
+      body_register: "shoulders"
+      digital_behavior: "scroll-return"
+      article_types: ["hard_news_spiritual_response"]
+    - id: youth_somatic_03
+      line: "You compared paychecks with a friend in the group chat. Your throat tightened. You stopped typing. Then you sent the message anyway because pretending it was equal was its own kind of harm.\nLOOP_SEQUENCE: \"compared the paychecks. throat tightened. stopped typing. sent the message.\""
+      loop_type: "nafs_verdict"
+      body_register: "throat"
+      digital_behavior: "pause-return"
+      article_types: ["hard_news_spiritual_response"]
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: "Ma'at has seen this exact loop in the Sufi Circle — the chart, the tightening, the look away, and the return because the arrangement is still there when attention comes back."
+      semantic_family: "maat-inequality-witness-circle"
+      loop_type: "nafs_verdict"
+      article_types: ["hard_news_spiritual_response"]
+    - id: teacher_witness_02
+      line: "She has watched students arrive at sama gatherings carrying the verdict the gap keeps trying to deliver. The first thing the gathering offers is not consolation. It is dhikr — the disciplined remembrance of what the verdict cannot reach."
+      semantic_family: "maat-inequality-witness-dhikr"
+      loop_type: "nafs_verdict"
+      article_types: ["hard_news_spiritual_response"]
+    - id: teacher_witness_03
+      line: "Ma'at has watched the slower thing — the moment a student feels the nafs verdict and the heart's refusal of it as two distinct facts, no longer collapsed into one. The Naqshbandi tradition has been teaching that distinction for centuries."
+      semantic_family: "maat-inequality-witness-nafs"
+      loop_type: "nafs_verdict"
+      article_types: ["hard_news_spiritual_response"]
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: "1,200 mutual-aid networks. 47 countries."
+      stat_line_2: "Youth organizers are running cooperative housing pilots, wage transparency campaigns, and debt-strike legal clinics that treat dignity as infrastructure rather than personal achievement."
+      semantic_family: "maat-inequality-turnaround-coops"
+      article_types: ["hard_news_spiritual_response"]
+    - id: turnaround_02
+      stat_line_1: "1,200 mutual-aid networks. 47 countries."
+      stat_line_2: "Young people are filing wage-theft complaints, building cooperative supply chains, and publishing wealth-concentration records that institutional silence used to protect."
+      semantic_family: "maat-inequality-turnaround-files"
+      article_types: ["hard_news_spiritual_response"]
+    - id: turnaround_03
+      stat_line_1: "1,200 mutual-aid networks. 47 countries."
+      stat_line_2: "Student-led housing co-ops, tenant unions, and wage-research collectives are rewriting what dignity looks like in practice — not as a state of mind but as a set of arrangements that protect it."
+      semantic_family: "maat-inequality-turnaround-coops-alt"
+      article_types: ["hard_news_spiritual_response"]
+bridge:
+  options:
+    - id: bridge_01
+      line: "1,200 mutual-aid networks. 47 countries. The tracker measures what young people did. It has no column for what made the next step possible after another year of widening gaps — the capacity to refuse the verdict the nafs of the system keeps trying to install, while keeping the structural fight in view. The organizer who returned to the campaign needed it. So does the reader still in the loop. Ma'at's tradition has been refining the practice for centuries."
+      hidden_capacity: "refuse the nafs verdict while sustaining structural action"
+      semantic_family: "maat-inequality-bridge-nafs"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: bridge_02
+      line: "Inequality trackers count median wages and Gini coefficients. They do not count the inner capacity that lets a young person stay in contact with the math without converting the math into a verdict on the heart. That capacity — what dhikr cultivates — is what the next organizer needs. It is what the reader who reopened the listing needs too. The Naqshbandi tariqat has been protecting it through remembrance, not analysis."
+      hidden_capacity: "dhikr keeps the heart out of reach of the economic verdict"
+      semantic_family: "maat-inequality-bridge-dhikr"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: bridge_03
+      line: "1,200 mutual-aid networks. 47 countries. The number measures action. It does not measure the slower thing — the daily refusal of the hierarchy of worth that the gap keeps trying to deliver. The Sufi tradition holds that the longing of the heart for the Beloved does not come in higher and lower grades by race, class, or credential. The Sufi Circle is the weekly demonstration of that."
+      hidden_capacity: "hold inherent worth against economic arbitration"
+      semantic_family: "maat-inequality-bridge-longing"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: "What Ma'at Sees"
+      paragraphs:
+        - "Ma'at teaches that the nafs — the grasping lower self — is the mechanism of inequality. The lower self that distinguishes, ranks, and withholds is precisely what the Sufi path dissolves in the fire of Divine Love. Structural arrangements producing inequality are the collective nafs made material; and fanaa, the dissolution of the grasping self, is the inner transformation that those working for equity require in themselves, or the movement replicates the very dynamics it seeks to transform."
+        - "All are welcome — this is the Sufi teaching that Hazrat Inayat Khan brought West, and it is Ma'at's specific contribution to the inequality conversation. You do not have to be Muslim to be Sufi. The path of the heart is open to any soul that longs for the Beloved, regardless of where the social order has placed them. The divine does not observe the hierarchies that humans have constructed; the Sufi Circle is the weekly proof of this."
+        - "The longing itself is equal. The moth's yearning for the flame does not come in higher and lower grades by race, class, or credential. Ma'at teaches that the soul's capacity for love and for direct experience of the Divine is distributed equally at birth and suppressed unequally by circumstance. The Sufi Circle restores what the social arrangement has suppressed — not by demanding equity as a precondition, but by opening a door that the hierarchy has no authority to close."
+      semantic_family: "maat-inequality-perspective-nafs"
+      reframe_type: "self_to_system"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_perspective_02
+      header: "What Ma'at Sees"
+      paragraphs:
+        - "Ma'at reads the verdict that inequality keeps trying to deliver through fanaa — the dissolution of the false self in Divine Love. The verdict claims that worth tracks position in the social order. Fanaa is the inner practice that holds, again and again, that what is dissolved in love does not have position. This is not detachment from the structural fight. It is the inner ground that keeps the fight from becoming the same hierarchy in a different costume."
+        - "From there she turns to dhikr — remembrance — as daily practice. The breath returns. The Beloved's name returns. The mind that has been narrating the verdict for hours stops narrating, just for a moment, and the heart that the verdict was trying to colonize remembers what it was before the colonization began. Ma'at teaches that this is not escape. It is the recovery of the ground from which honest action becomes possible."
+        - "The reframe is precise: what feels like a personal failure — me, ranked, worth-less than the position the order assigned — is often the heart's accurate refusal of a verdict that the heart never had the standing to issue. The mind stops calling itself broken when it recognizes that the disorder is in the order, and that the dissolution of the false self does not wait for the dissolution of the false hierarchy."
+      semantic_family: "maat-inequality-perspective-fanaa"
+      reframe_type: "self_to_system"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_perspective_03
+      header: "What Ma'at Sees"
+      paragraphs:
+        - "Ma'at would name the damage precisely. Inequality is not only economic harm; it is the daily installation of a hierarchy of worth that the heart was never asked to consent to. The body knows it before the language catches up — the chest tightening when the rent posts, the shoulders shifting when the paystub arrives. That body is not malfunctioning. It is registering an arrangement that asks for trust while delivering hierarchy."
+        - "The Naqshbandi tradition does not respond by minimizing the arrangement. It responds by widening the field in which the arrangement is held. Sama — sacred listening — bypasses the analytical mind and speaks directly to the qalb, the spiritual heart. When the heart is steady, the arrangement can be named clearly without colonizing the inner ground from which the work of changing it proceeds."
+        - "The reframe matters: what feels like a personal fault — me, broken, wrong — is often the heart's accurate response to a system that keeps externalizing the cost of widening inequality onto the people it falls on. The mind stops calling itself broken when it sees that the real disorder is in the arrangement, and that the arrangement can be changed by the same people who are currently being asked to swallow it."
+      semantic_family: "maat-inequality-perspective-qalb"
+      reframe_type: "self_to_system"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+practice:
+  default_id: practice_01
+  options:
+    - id: practice_01
+      display_name: "5-minute Dhikr for the Inequality Loop"
+      duration: "5 minutes"
+      announcement_line: "Ma'at teaches a 5-minute Dhikr practice for moments when the gap is trying to deliver a verdict on the heart. It is in the sidebar, timed and step by step."
+      relief_lines:
+        - "The mind stops conflating the economic arrangement with a verdict on inherent worth."
+        - "A steadier ground returns for the next conversation, the next campaign, the next pay stub."
+      relief_register: ["capacity", "clarity", "act again"]
+      derived_from_frame: "dhikr"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: practice_02
+      display_name: "10-minute Sama Listening for the Verdict Loop"
+      duration: "10 minutes"
+      announcement_line: "Ma'at teaches a 10-minute Sama Listening practice — a single piece of devotional music, listened to with the chest, not the ears — for the moment when the math has started narrating itself as a verdict. It is in the sidebar, short enough to use before the meeting or after the listing."
+      relief_lines:
+        - "The hierarchy of worth that the gap installs loses its grip on the body."
+        - "Enough ground returns to keep the structural work in view without losing the worker."
+      relief_register: ["capacity", "clarity", "act again"]
+      derived_from_frame: "sama"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: practice_03
+      display_name: "5-minute Fanaa-of-the-Verdict Practice"
+      duration: "5 minutes"
+      announcement_line: "Ma'at teaches a 5-minute practice rooted in fanaa — the dissolution of the grasping self that the hierarchy keeps trying to install — for moments when the wage gap or rent gap has started rearranging the inner sense of worth. It is in the sidebar."
+      relief_lines:
+        - "The body stops carrying the economic verdict as if it were the truth about the self."
+        - "A clearer ground returns for the next concrete act of solidarity."
+      relief_register: ["capacity", "clarity", "act again"]
+      derived_from_frame: "fanaa"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+sdg:
+  primary:
+    id: "SDG 10"
+    title: "Reduced Inequalities"
+    line: "The United Nations has a framework for this through SDG 10 and its targets on income inequality, social protection, and equal opportunity."
+  fallback_un_tie:
+    line: "Pearl News is an independent nonprofit. We are not affiliated with the United Nations."
+cta:
+  options:
+    - id: cta_01
+      org: "Oxfam International"
+      line: "Oxfam International publishes the annual inequality dataset and runs youth campaigns on wealth concentration. Door in: https://www.oxfam.org/en/take-action"
+      semantic_family: "maat-inequality-cta-oxfam"
+      article_types: ["hard_news_spiritual_response"]
+    - id: cta_02
+      org: "Youth Action for Sustainability"
+      line: "Youth Action for Sustainability runs documentation projects on local wealth gaps and policy advocacy across the Global South. Door in: https://www.youthactionforsustainability.org"
+      semantic_family: "maat-inequality-cta-yas"
+      article_types: ["hard_news_spiritual_response"]
+    - id: cta_03
+      org: "UN DESA — Youth and the SDGs"
+      line: "UN DESA runs the Youth and SDGs portal with public submission windows for the High-Level Political Forum. Door in: https://www.un.org/development/desa/youth/"
+      semantic_family: "maat-inequality-cta-undesa"
+      article_types: ["hard_news_spiritual_response"]
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: "The Top 1% Captured Two-Thirds Of New Wealth Since 2020."
+        semantic_family: "maat-inequality-title1-wealth"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_1_02
+        line: "Rent Outran Wages Again This Quarter."
+        semantic_family: "maat-inequality-title1-rent"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_1_03
+        line: "Youth Are Carrying The Widest Income Gap In A Generation."
+        semantic_family: "maat-inequality-title1-gap"
+        article_types: ["hard_news_spiritual_response"]
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: "A Naqshbandi Sufi teacher names the verdict the gap keeps trying to deliver — and the dhikr that keeps the heart out of its reach."
+        semantic_family: "maat-inequality-title2-verdict"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_2_02
+        line: "The Hazrat Inayat Khan lineage holds that the longing of the heart for the Beloved does not come in higher and lower grades by race, class, or credential."
+        semantic_family: "maat-inequality-title2-longing"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_2_03
+        line: "Fanaa is the inner practice that dissolves the grasping self the social order is built to reproduce. The structural fight needs the inner practice. The inner practice does not wait."
+        semantic_family: "maat-inequality-title2-fanaa"
+        article_types: ["hard_news_spiritual_response"]
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: "article_id + slot + teacher_id + topic"
+  metadata_filters:
+    article_types: ["hard_news_spiritual_response", "commentary"]
+    intensity_range: [2, 4]

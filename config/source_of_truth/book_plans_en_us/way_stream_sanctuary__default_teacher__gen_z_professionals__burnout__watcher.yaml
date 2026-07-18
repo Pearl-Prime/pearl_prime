@@ -1,0 +1,110 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__burnout__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__depletion
+  name: Refill the Empty Well — for Young Professionals
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Burnout Recovery: The Space Between You and Your Anxiety (2)'
+subtitle: How to Create Distance from Anxious Thoughts and Find Clarity — Burnout
+  for Gen Z Professionals (Watching Your Thoughts Without Drowning)
+cover_tagline: Your mind is still at work at 2 a.m. You never clocked it out.
+description:
+  short_blurb: You replay the meeting. You draft the email in your head on a walk.
+    The watcher in you never stands down. This is real talk for young professionals
+    whose burnout is a mind that won't stop monitoring, and a way to finally let it
+    rest.
+  long_description: 'It''s 2 a.m. and you''re not awake because of caffeine. You''re
+    awake because part of you is still in the office, scanning. Did that message read
+    wrong. Is your boss annoyed. Should you have spoken up in the meeting, or spoken
+    up less. The meeting ended hours ago and the watcher inside you is still on shift,
+    still reviewing the footage, still bracing for a threat that left the building
+    before you did.
+
+
+    This is for you if you''re young in your career and burnout, for you, isn''t collapse,
+    it''s vigilance. The mind that never powers down. The constant low hum of monitoring
+    yourself, your performance, your standing, how you''re coming across. You''re
+    exhausted not from doing too much but from watching too much, and no one talks
+    about this version, because it looks like you''re fine. You''re functional. You
+    hit your deadlines. You''re just never off, not on the walk home, not in the shower,
+    not in the half-sleep where the day replays itself uninvited.
+
+
+    We begin with recognition: that hypervigilant narrator is not you, and it is not
+    keeping you safe. It''s a part of you that learned, somewhere, that the only way
+    to be okay was to never stop scanning for what might go wrong. Seeing it clearly
+    is the first crack of relief, the moment you realize you''ve been confusing a
+    smoke detector for your own voice.
+
+
+    Then we descend. Not a trick to silence the mind, the descent. We''ll go into
+    what the watcher is actually afraid of, why being perceived feels so high-stakes
+    when you''re early and unproven and convinced one wrong move ends it all, and
+    what''s underneath the endless self-surveillance when you finally stop running
+    from it. You turn toward the watcher instead of obeying it, and you find out it''s
+    a lot younger and more frightened than it sounds.
+
+
+    And you come back different. Not with a quiet mind, that''s a fantasy, and chasing
+    it is just more monitoring with better branding. You come back able to notice
+    the watcher without becoming it, able to let a thought pass without launching
+    an investigation, able to be off the clock in your own head while the work waits
+    where you left it.
+
+
+    This book will not promise you a still, empty mind. It won''t optimize your focus
+    or hand you a streak to maintain. There''s no practice here aimed at controlling
+    your thoughts, because control is the watcher''s whole game, and you can''t out-monitor
+    a monitor. What it offers is simpler and stranger: the permission to stop standing
+    guard over your own life.
+
+
+    The meeting is over. You''re allowed to come home now, all of you. Start here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - young professionals
+  - burnout for young professionals
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — maps the looping, monitoring mind and how to
+  step out of the habit loop
+- My Age of Anxiety (Scott Stossel) — a secular, candid account of the relentless
+  self-watching mind and what it costs
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — frames chronic vigilance as a stress cycle the body never gets to close'
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

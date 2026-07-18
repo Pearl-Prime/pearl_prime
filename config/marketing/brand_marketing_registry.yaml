@@ -1,0 +1,53 @@
+# Per-brand GHL / funnel marketing profiles.
+# Authority for matrix feed build, funnel page generation, and GHL admin handoffs.
+# Rollout: pilot (3) → wave2 (teacher brands) → all (37 archetypes × locale).
+
+schema_version: 1
+
+defaults:
+  locale: en_US
+  default_persona: corporate_managers
+  landing_base: https://brand-admin-onboarding-bu2.pages.dev
+  shop_base: https://pearlprime.shop
+  topics: all  # all = 15 topics from config/funnel/freebie_to_book_map.yaml
+
+brands:
+  stillness_press:
+    rollout_phase: pilot
+    ghl_enabled: true
+    display_name: Stillness Press
+    teacher_id: ahjan
+    default_persona: corporate_managers
+    funnel_path_prefix: null  # legacy /free/{slug}/ URLs
+    webhook_env: PHOENIX_GHL_FUNNEL_WEBHOOK_STILLNESS
+    catalog_plans: 164
+    catalog_live: 61
+    notes: GHL pilot — feed live, 15 funnel pages at /free/{slug}/
+
+  devotion_path:
+    rollout_phase: pilot
+    ghl_enabled: true
+    display_name: Open Vessel Press
+    teacher_id: sai_ma
+    default_persona: working_parents
+    funnel_path_prefix: devotion_path
+    webhook_env: PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION
+    catalog_plans: 107
+    catalog_live: 22
+    notes: Sai Maa teacher brand — funnel at /free/devotion_path/{slug}/
+
+  way_stream_sanctuary:
+    rollout_phase: pilot
+    ghl_enabled: true
+    display_name: Waystream Sanctuary
+    teacher_id: null
+    default_persona: corporate_managers
+    funnel_path_prefix: way_stream_sanctuary
+    webhook_env: PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM
+    catalog_plans: 800
+    catalog_live: 800
+    shop_url_source: brand_catalog  # not in pearl_prime en_US_catalog.csv
+    notes: Composite EPUB brand — shop URLs from brand_catalogs JSON
+
+# Remaining 34 archetypes: set ghl_enabled true when catalog + funnel pages ready.
+# Generate stub entries: python3 scripts/marketing/gen_brand_marketing_registry.py --fill-missing

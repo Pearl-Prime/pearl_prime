@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: warrior_calm__master_wu__entrepreneurs__courage
+brand: warrior_calm
+teacher: master_wu
+persona: entrepreneurs
+topic: courage
+byline_author: rowan_vance
+arc:
+  installment_1:
+    book_id: warrior_calm__master_wu__entrepreneurs__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: warrior_calm__master_wu__entrepreneurs__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: warrior_calm__master_wu__entrepreneurs__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the founder who has learned to perform fearlessness, a
+  quieter kind of courage: not the absence of fear, but the trained calm to act before
+  you feel ready, without armoring up, hyping yourself, or pretending the fear isn''t
+  there.'
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Daily Stoic series (Ryan Holiday) — short, grounded reflections on courage and
+  composure for people who lead under pressure, without hype.
+- The Practicing the Power of Now / Stillness companion line (Eckhart Tolle) — a calm,
+  present-tense voice that meets fear with stillness rather than force.
+- The Mountain Is You / self-sabotage line (Brianna Wiest) — interior, second-person
+  work on the hidden beliefs that keep capable people from acting on their own behalf.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-48
+  where_they_are: It's 11pm and the office is empty. The pitch is in nine hours, or
+    the launch goes live Monday, or the offer letter is sitting unsent in drafts.
+    You've read the deck four times. Your chest is tight, your jaw is set, and you've
+    already rehearsed every way it goes wrong. Everyone thinks you're the brave one.
+    You're sitting in the dark wondering when you'll feel ready enough to actually
+    press send.
+  what_they_need: To recognize that the fear at the edge is not a verdict on their
+    readiness, and to find a steadier place to act from — one decision, one step,
+    before the fear has fully cleared.
+  what_they_avoid: Hustle-culture grind, 'no pain no gain' bravado, toughness-as-armor,
+    pump-up motivation, toxic positivity, and anything that mistakes louder for braver.
+series_voice_markers:
+  register: grounded, disciplined, quietly strong — a warrior's calm that meets fear
+    without flinching; steady and spare, the voice of someone who has stood at the
+    edge themselves and is standing beside you, not above you; never clinical, never
+    preachy, never hustle
+  sentence_rhythm: short, weighted sentences with room to breathe between them; a
+    steadying cadence, like a hand on the shoulder before the door opens; plain words,
+    no jargon, the occasional long line that lands and then stops
+  metaphor_family: the still center in the storm, the gate that holds, the edge and
+    the single step, the breath before action, trained calm under pressure, what is
+    forged and what holds, the warrior with nothing left to prove — never machinery,
+    productivity, or biohacking
+_needs_authoring: false

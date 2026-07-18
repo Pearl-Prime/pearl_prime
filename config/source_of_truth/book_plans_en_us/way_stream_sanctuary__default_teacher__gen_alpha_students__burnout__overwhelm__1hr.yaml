@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__burnout__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__steady_ground__1hr
+  name: Steady Ground — for Students (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: Drowning in Demands (1)'
+subtitle: Drowning in Demands — Burnout for Gen Alpha Students (When Everything Is
+  Too Much)
+cover_tagline: The point where your brain just... stops. This is about that.
+description:
+  short_blurb: There's a moment in burnout where it's not panic, it's a flatline —
+    you open the laptop and nothing happens, you stare at the assignment and your
+    mind goes blank, and you can't tell if you're lazy or broken. You're neither.
+    This is a one-hour read about the shutdown point, and what's actually happening
+    when too much becomes nothing at all.
+  long_description: 'You know the moment. Everything''s due, the tabs are open, the
+    to-do list is screaming — and instead of speeding up, you go dead. You stare at
+    the screen and nothing moves. You scroll, not because it''s fun but because doing
+    the actual thing feels physically impossible. And underneath it runs the voice:
+    everyone else is handling this, so what is wrong with you.
+
+
+    Here''s what''s wrong with you: nothing. That blank, frozen, can''t-start feeling
+    has a name, and the name is not lazy. It''s the shutdown point — the place a mind
+    goes when there''s too much at once and no way to sort it, so it pulls its own
+    plug. You''re not avoiding the work because you don''t care. You''re stuck because
+    your system hit its ceiling and stopped, and then being stuck made the pile bigger,
+    which made the freeze worse. That loop is the actual problem, not your character.
+
+
+    This is the burnout book for the student who shuts down rather than melts down.
+    Jonah Kim doesn''t do pep talks. He walks you into the freeze on purpose instead
+    of piling more pressure on top of it: you stop trying to do all of it in one swing
+    and let yourself feel the true size of the load — because the shutdown is what
+    happens when you keep insisting the mountain is a molehill. Once you''ve felt
+    how big it honestly is, something shifts. The work doesn''t vanish. But it stops
+    being one undifferentiated, crushing blur and turns back into something with edges
+    — heavy, yes, but heavy you can actually stand in.
+
+
+    No time-blocking lives in these pages. No Pomodoro, no focus app, no lecture about
+    discipline, no cheerful ''just break it into smaller steps'' as if that thought
+    had never once occurred to you. The book won''t promise you''ll clear the backlog
+    by Friday or never freeze again. What it hands you is earlier recognition — the
+    ability to catch the shutdown the second it starts, so it stops reading as proof
+    you''re failing and starts reading as a signal: overloaded, asking for less, not
+    more.
+
+
+    Freezing when it''s genuinely too much doesn''t make you weak. It makes you a
+    person who ran into a real limit. You''re allowed to have a limit. You''re allowed
+    to stop, name the overload out loud, and set the whole mountain down before you
+    try to move it again. Give it an hour, and the shutdown point becomes a thing
+    you can read instead of a verdict you keep failing.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - students
+  - burnout for students
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — explains the physiology of overload without
+  blaming the person carrying it
+- Atomic Habits (James Clear) — the standard students reach for, but this book names
+  what to do when even small steps freeze you
+- Why Has Nobody Told Me This Before? (Julie Smith) — plain, practical mental-health
+  language for a young audience
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

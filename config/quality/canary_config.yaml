@@ -1,0 +1,27 @@
+# Canary run configuration for manuscript quality.
+# Used by scripts/ci/run_canary_100_books.py and related gates.
+
+schema_version: "1.1"
+
+# Sample size and arc selection
+sample_size: 100
+max_failures: 0
+
+# Optional: restrict to specific personas/topics for canary
+# personas: []
+# topics: []
+
+# Sentinel acceptance tuple (Hardening Spec).
+# Every canary run must include this tuple. If it fails, the canary fails.
+sentinel_defaults:
+  topic: overthinking
+  persona: gen_z_professionals
+  location: nyc_metro
+  teacher: ahjan
+  arc: F006
+  runtime: standard_book
+
+# EI v2 integration: dimension gates and hybrid scoring active in canary.
+ei_v2_integration:
+  enable_dimension_gates: true
+  enable_hybrid_scoring: true

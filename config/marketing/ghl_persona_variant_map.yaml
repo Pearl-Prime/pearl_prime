@@ -1,0 +1,26 @@
+# Persona + topic → Proof Loop variant (tight vs welcome_depth)
+# Authority: docs/FUNNEL_EMAIL_AUTOMATION_MAP.md
+
+schema_version: 1
+
+default_variant: tight
+
+persona_variants:
+  healthcare_rns: welcome_depth
+  first_responders: welcome_depth
+  working_parents: welcome_depth
+  corporate_managers: tight
+  gen_z_professionals: tight
+  gen_z_student: tight
+  nyc_executives: tight
+
+topic_variants:
+  grief: welcome_depth
+  compassion_fatigue: welcome_depth
+  somatic_healing: welcome_depth
+  depression: welcome_depth
+
+# Form aliases (legacy landing forms)
+persona_aliases:
+  professional: corporate_managers
+  caregiver: healthcare_rns

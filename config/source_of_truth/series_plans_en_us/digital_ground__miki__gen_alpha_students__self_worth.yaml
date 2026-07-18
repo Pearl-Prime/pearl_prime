@@ -1,0 +1,72 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: digital_ground__miki__gen_alpha_students__self_worth
+brand: digital_ground
+teacher: miki
+persona: gen_alpha_students
+topic: self_worth
+byline_author: hannah_gowan
+arc:
+  installment_1:
+    book_id: digital_ground__miki__gen_alpha_students__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: digital_ground__miki__gen_alpha_students__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: We will not help you fix what you think is broken about you
+  — because nothing is. These books sit with you in the exact moment your worth feels
+  conditional, name the engine running underneath it, and hand back the quiet certainty
+  that you were never the problem to begin with.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- Unfu*k Yourself series (Gary John Bishop) — blunt, plainspoken, anti-fluff self-talk
+  that respects the reader's intelligence
+- The Self-Love Workbook for Women / Teens series (Megan Logan) — accessible worth-and-shame
+  work that meets younger readers without condescension
+- How to Do the Work / companion library (Nicole LePera) — somatic, root-cause framing
+  of self-worth that names the pattern instead of just hyping you up
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 16 to 22 — late high school through the first years of college, the first generation
+    that has never known a self that wasn't also a profile
+  where_they_are: It's 1am and you're lying sideways across your bed, phone six inches
+    from your face, watching someone your age who already seems to have it all figured
+    out. You've read the same paragraph of the assignment four times. The group chat
+    went quiet an hour ago and you're still not sure if you said something weird.
+    Your thumb keeps moving on its own.
+  what_they_need: To hear, in language that doesn't sound like a guidance counselor
+    or a LinkedIn post, that their worth was never up for a vote — and that the constant
+    low-grade audit of themselves is a thing happening TO them, not proof of what
+    they are.
+  what_they_avoid: Boomer self-help, anyone who says 'just delete the app,' grindset
+    and hustle takes, toxic positivity, and any voice that treats them as a personal
+    brand to optimize or shames them for being online at all.
+series_voice_markers:
+  register: gen-z native, screen-literate, plainspoken and warm; ironic without being
+    cynical — the voice of a slightly-older friend who actually gets the internet
+    and would never tell you to log off. Never clinical, never corporate, never a
+    coach.
+  sentence_rhythm: Short declaratives that land like texts, then one longer sentence
+    that opens the chest. Fragments used on purpose, for breath. Direct address. The
+    pacing of someone talking to you quietly at 1am, not reading from slides.
+  metaphor_family: the present moment, the body in the room, the phone face-down on
+    the duvet, ground under bare feet, the breath between notifications, signal cutting
+    through noise, the screen going dark and your own face appearing in it — never
+    productivity, machinery, military, or self-optimization.
+_needs_authoring: false

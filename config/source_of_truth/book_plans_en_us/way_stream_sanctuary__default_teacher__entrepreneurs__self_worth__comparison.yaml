@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__self_worth__comparison
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__self_worth.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__worth_limits
+  name: Worth & Limits — for Founders
+installment_number: 1
+engine: comparison
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Voice That Says Not Enough: The Comparison Trap'
+subtitle: How Entrepreneurs Are Rewriting the Rules of Self-Worth
+cover_tagline: Your worth is fine until you open the feed. Then it's whatever someone
+  else just raised.
+description:
+  short_blurb: For founders whose sense of worth rises and falls with everyone else's
+    funding, growth, and exits. This is a grounded, secular look at how comparison
+    hijacks self-worth, the scoreboard you never stop checking. No gratitude lists,
+    no toxic positivity, just a clear way to stop outsourcing your value to the timeline.
+  long_description: 'You felt fine about the company this morning. Then a competitor
+    announced a raise, a peer posted a hockey-stick chart, an acquaintance from your
+    batch just exited, and now you feel like nothing. Same business, same traction,
+    same you. The only thing that changed is that you looked at someone else and ran
+    the math, and the math said behind, which your gut instantly translated to worth
+    less.
+
+
+    When your self-worth is pinned to a scoreboard that never stops updating, knowing
+    intellectually that comparison is a trap doesn''t help, because the comparison
+    isn''t an idea you''re having. It''s the operating system. Their valuation, their
+    headcount, their press, their growth rate, each one a fresh reading on your own
+    value, and the feed hands you a new number every time you refresh.
+
+
+    We name the mechanism for what it is, which is theft. Comparison takes your worth,
+    which was never meant to be a ranking, and converts it into a leaderboard position
+    you can lose to a stranger''s announcement. What you learn to catch is the precise
+    moment someone else''s milestone becomes a verdict on your value, and to feel
+    the drop when it lands, that sudden hollow in the chest. Naming the theft is the
+    first thing that stops it being automatic.
+
+
+    What we don''t reach for is a reframe. Not a gratitude practice, not count your
+    own wins instead. You go toward the fear underneath the comparing, that without
+    the scoreboard you wouldn''t know what you''re worth at all, that the metrics
+    are the only thing telling you you matter, and you let that be true for a moment
+    without rushing to fix it. The worth you keep losing to the feed is one you''ve
+    never let rest anywhere but the rankings. Letting it rest somewhere else is the
+    slow, real work.
+
+
+    The announcements keep coming. You just stop letting each one rewrite your value
+    in real time.
+
+
+    This won''t make you stop comparing or stop wanting to win. It won''t optimize
+    your mindset or hand you a gratitude list to recite when the envy hits, and nothing
+    here pretends the scoreboard doesn''t sting. The feed will keep posting numbers.
+
+
+    What you take with you is one line, for the next time someone else''s raise empties
+    you out: their milestone is not my measure, and the voice that says not enough
+    is just reading the wrong scoreboard. Your worth was never theirs to set. You''re
+    allowed to stop checking.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  - inner critic
+  secondary:
+  - founders
+  - self-worth for founders
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- The Comparison Cure (Lucy Sheridan) — a practical, secular reckoning with the comparison
+  habit that drains your self-worth
+- The Gifts of Imperfection (Brené Brown) — the foundational case for worth that doesn't
+  depend on out-measuring everyone
+- The Mountain Is You (Brianna Wiest) — a grounded look at the self-sabotage of tying
+  your value to an external scoreboard
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

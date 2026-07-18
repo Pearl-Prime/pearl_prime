@@ -1,0 +1,500 @@
+{
+  "gate": "workaround (_compose_positive @ #1726) vs merged compiler",
+  "decision_rule": "RETIRE only if compiler >= workaround on every fidelity dimension, every panel",
+  "verdict": {
+    "panel_count": 22,
+    "compiler_distinct_prompts": 22,
+    "compiler_all_distinct": true,
+    "compiler_all_scene_lead": true,
+    "compiler_all_shot_present": true,
+    "compiler_all_tail_intact": true,
+    "compiler_all_scenery_steered": true,
+    "no_fidelity_regression_any_panel": true
+  },
+  "panels": [
+    {
+      "panel_id": "p_1_0",
+      "camera": "establishing-wide",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Dawn over the hospice garden. Mist sits low over the wet gravel path; a single lamp still burns by the ward door., wide establishing shot, full environment, scenery | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Dawn over the hospice garden. Mist sits low over the wet gravel path; a single lamp still burns by the ward door., wide establishing shot, full environment, scenery, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, wide establishing shot, full environment, scenery, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_1_1",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara moves down the corridor at a clip, chart under one arm, already three rooms ahead in her mind. Nurses' shoes, no sound., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara moves down the corridor at a clip, chart under one arm, already three rooms ahead in her mind. Nurses' shoes, no sound., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_2_0",
+      "camera": "insert",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Close on her hands: a blanket squared at the corners, a water jug refilled, a curtain drawn \u2014 each task clean, quick, complete., close insert detail | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Close on her hands: a blanket squared at the corners, a water jug refilled, a curtain drawn \u2014 each task clean, quick, complete., close insert detail, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close insert detail, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_2_1",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "A colleague tries to catch her at the nurses' station; Amara is already turning away, kind and gone in the same motion., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "A colleague tries to catch her at the nurses' station; Amara is already turning away, kind and gone in the same motion., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_2_2",
+      "camera": "environmental-insert",
+      "scenery_camera": true,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "A sparrow lands on the windowsill outside, considers the glass, and is gone. The corridor holds its small echo., environmental insert, scenery detail, no people, empty of figures | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile, person, people, face, portrait, character, human figure, crowd"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "A sparrow lands on the windowsill outside, considers the glass, and is gone. The corridor holds its small echo., environmental insert, scenery detail, no people, empty of figures, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, environmental insert, scenery detail, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, person, people, face, portrait, character, human figure, crowd, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_3_0",
+      "camera": "over-shoulder",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Room seven. A man \u2014 Tomas \u2014 sits at his wife's bedside, not crying, not speaking, holding her hand with both of his. The monitor is off., over-the-shoulder shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Room seven. A man \u2014 Tomas \u2014 sits at his wife's bedside, not crying, not speaking, holding her hand with both of his. The monitor is off., over-the-shoulder shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, over-the-shoulder shot, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_3_1",
+      "camera": "close-up",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara's usual move surfaces: assess, comfort in one line, set the next task in motion. Her mouth opens., close-up | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara's usual move surfaces: assess, comfort in one line, set the next task in motion. Her mouth opens., close-up, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close-up, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_3_2",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Tomas does not look up from his wife's face. He answers as if from underwater, without heat, without need., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Tomas does not look up from his wife's face. He answers as if from underwater, without heat, without need., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_4_0",
+      "camera": "close-up",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "The script runs out in Amara's throat. There is nothing here to refill, square off, or schedule. Her hand hovers, useless, near the chart., close-up | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "The script runs out in Amara's throat. There is nothing here to refill, square off, or schedule. Her hand hovers, useless, near the chart., close-up, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close-up, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_4_1",
+      "camera": "wide",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "She stands in the doorway, half in, half out \u2014 the exact posture of her whole life \u2014 while the man keeps his vigil and the light climbs the wall., wide shot, full scene | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "She stands in the doorway, half in, half out \u2014 the exact posture of her whole life \u2014 while the man keeps his vigil and the light climbs the wall., wide shot, full scene, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, wide shot, full scene, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_5_0",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "An elder, Sai Ma, is already seated in the far corner of the room \u2014 sandalwood beads at her wrist, hands still. She has been there the whole time. Amara only now sees her., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "An elder, Sai Ma, is already seated in the far corner of the room \u2014 sandalwood beads at her wrist, hands still. She has been there the whole time. Amara only now sees her., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_5_1",
+      "camera": "close-up",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara, low, almost angry \u2014 the closest she comes to honesty \u2014 turns toward the elder., close-up | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara, low, almost angry \u2014 the closest she comes to honesty \u2014 turns toward the elder., close-up, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close-up, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_5_2",
+      "camera": "close-up",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Sai Ma turns one bead between thumb and finger, unhurried, and nods toward the empty chair on the other side of the bed., close-up | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Sai Ma turns one bead between thumb and finger, unhurried, and nods toward the empty chair on the other side of the bed., close-up, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close-up, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_6_0",
+      "camera": "wide",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara sets the chart down on the windowsill \u2014 the first thing all morning she puts down without finishing \u2014 and lowers herself into the empty chair., wide shot, full scene | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara sets the chart down on the windowsill \u2014 the first thing all morning she puts down without finishing \u2014 and lowers herself into the empty chair., wide shot, full scene, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, wide shot, full scene, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_6_1",
+      "camera": "environmental-insert",
+      "scenery_camera": true,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Dust turns slowly in the shaft of dawn light between the two of them. Nobody speaks. The eaves still drip., environmental insert, scenery detail, no people, empty of figures | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile, person, people, face, portrait, character, human figure, crowd"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Dust turns slowly in the shaft of dawn light between the two of them. Nobody speaks. The eaves still drip., environmental insert, scenery detail, no people, empty of figures, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, environmental insert, scenery detail, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, person, people, face, portrait, character, human figure, crowd, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_7_0",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Later. The break room. Amara holds a cooling cup of tea she has not drunk, the round long since over, the next tasks waiting and untouched., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Later. The break room. Amara holds a cooling cup of tea she has not drunk, the round long since over, the next tasks waiting and untouched., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_7_1",
+      "camera": "close-up",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "She looks at her own steady hands on the table \u2014 the hands that are so good at doing \u2014 as if seeing what they had been protecting her from., close-up | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "She looks at her own steady hands on the table \u2014 the hands that are so good at doing \u2014 as if seeing what they had been protecting her from., close-up, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close-up, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_8_0",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Evening. Amara passes room seven on her way out, coat on, bag on her shoulder. Tomas is still there. The chair beside him is empty again., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Evening. Amara passes room seven on her way out, coat on, bag on her shoulder. Tomas is still there. The chair beside him is empty again., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_8_1",
+      "camera": "close-up",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "She pauses at the threshold. This time the choosing is hers \u2014 slower, deliberate, against the old reflex to keep walking. She sets her bag down by the door., close-up | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "She pauses at the threshold. This time the choosing is hers \u2014 slower, deliberate, against the old reflex to keep walking. She sets her bag down by the door., close-up, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, close-up, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_8_2",
+      "camera": "medium",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Tomas looks up at her for the first time \u2014 not rescued, not lighter, only less alone. He moves his hand a little, making room at the bedside., medium shot | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Tomas looks up at her for the first time \u2014 not rescued, not lighter, only less alone. He moves his hand a little, making room at the bedside., medium shot, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_9_0",
+      "camera": "wide",
+      "scenery_camera": false,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara sits. Sai Ma is gone, but the empty corner holds a faint warmth, like a room someone has only just left. On the sill, a single white plum blossom has opened on the bare branch outside the glass., wide shot, full scene | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "Amara sits. Sai Ma is gone, but the empty corner holds a faint warmth, like a room someone has only just left. On the sill, a single white plum blossom has opened on the bare branch outside the glass., wide shot, full scene, serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, wide shot, full scene, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    },
+    {
+      "panel_id": "p_9_1",
+      "camera": "environmental-insert",
+      "scenery_camera": true,
+      "workaround": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "the plum blossom against the dusk, small and certain. Inside, two people keep a third one company. The eaves have stopped dripping., environmental insert, scenery detail, no people, empty of figures | serene figure, light flowing garments, peaceful aura, soft features, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, geometric grid, digital noise, repeating tile, person, people, face, portrait, character, human figure, crowd"
+      },
+      "compiler": {
+        "scene_leads": true,
+        "shot_present": true,
+        "tail_intact": true,
+        "scenery_steered": true,
+        "prompt": "the plum blossom against the dusk, small and certain. Inside, two people keep a third one company. The eaves have stopped dripping., environmental insert, scenery detail, no people, empty of figures, anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing, environmental insert, scenery detail, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+        "negative": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, dark, violent, horror, sharp angles, high contrast, person, people, face, portrait, character, human figure, crowd, geometric grid, digital noise, repeating tile"
+      },
+      "no_fidelity_regression": true
+    }
+  ]
+}

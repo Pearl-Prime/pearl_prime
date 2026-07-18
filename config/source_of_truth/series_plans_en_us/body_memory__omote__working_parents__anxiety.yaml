@@ -1,0 +1,94 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: body_memory__omote__working_parents__anxiety
+brand: body_memory
+teacher: omote
+persona: working_parents
+topic: anxiety
+byline_author: oscar_santos
+arc:
+  installment_1:
+    book_id: body_memory__omote__working_parents__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: body_memory__omote__working_parents__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: body_memory__omote__working_parents__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: body_memory__omote__working_parents__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: body_memory__omote__working_parents__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: body_memory__omote__working_parents__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: body_memory__omote__working_parents__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be asked to push through, fix yourself, or perform
+  calm. On this page you get to set the weight down for a while and remember that
+  the ground is still holding you, even on the days you are sure it isn't.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- Good Inside (Becky Kennedy) — meets overwhelmed parents with steadiness and zero
+  shame, the same warm holding tone instead of another fix-it system.
+- Burnout (Emily & Amelia Nagoski) — names the somatic stress cycle in the body and
+  offers completion rather than push-through, the same body-first relief this series
+  promises.
+- The Book of Boundaries (Melissa Urban) — practical, grounded, never preachy permission-giving
+  for depleted adults, sharing this series' register of holding without gripping.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to mid-40s
+  where_they_are: It's 6:40am. The lunchbox is half-packed, one kid is crying about
+    the wrong socks, a work message just lit up the phone face-down on the counter,
+    and your chest is already tight before the day has technically started. You are
+    standing in the kitchen telling everyone it's fine in a voice that does not match
+    the feeling in your body.
+  what_they_need: To understand that the tightness, the bracing, the never-off scanning
+    is the body keeping an old promise to keep everyone safe — and that they can be
+    met with steadiness instead of one more thing to manage.
+  what_they_avoid: Push-through toughness, 'just relax,' performative calm, productivity
+    hacks, biohacking, toxic positivity, and any advice that adds another task to
+    a person who is already carrying too much.
+series_voice_markers:
+  register: grounded, steady, holding; warm and plain, the voice of someone who sits
+    down beside you on the kitchen floor instead of standing over you with a clipboard.
+    Never clinical, never preachy, never hustle.
+  sentence_rhythm: short, weight-bearing sentences that let you exhale between them;
+    one clear idea set down at a time, with room around it; occasionally a longer
+    sentence that carries you and then lets you go.
+  metaphor_family: held ground and the earth beneath you; weight supported and set
+    down; roots and steadiness; the body remembering it is safe; what holds when everything
+    shakes; the ground that does not move. Never machinery, military, productivity,
+    or biohacking.
+_needs_authoring: false

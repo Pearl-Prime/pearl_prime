@@ -1,0 +1,633 @@
+# Phoenix Omega — Complete Brand Identity System
+# Authority: teacher_brand_lane_assignments.yaml, teacher_brand_archetypes.yaml
+#
+# 36 brands × 12 lanes = 432 brand instances worldwide (12 teacher + 24 standard per lane).
+# This file defines the English Global (base) identity for each brand.
+# Locale variants inherit base identity + locale suffix + translated tagline.
+#
+# NAMING RESEARCH SOURCES:
+#   Shambhala, Parallax Press, Sounds True, Snow Lion, Editora Sextante
+#   Pattern: mythic/cultural reference > navigation metaphor > nature + qualifier
+#   Avoid: trendy wellness words (mindful, zen, calm, glow)
+#   Audiobook-first: sensory/voice words signal format (Sounds True model)
+#
+# VISUAL SYSTEM:
+#   Each brand needs: colophon mark, 2 primary colors + 1 accent, 1 display font,
+#   1 body font, cover template, texture/pattern. Minimum 5 assets to launch.
+
+schema_version: 1
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  TEACHER MODE BRANDS (12)
+# ═══════════════════════════════════════════════════════════════════════════
+
+teacher_brands:
+
+  # ── 01 STILLNESS PRESS ─────────────────────────────────────────────────
+  stillness_press:
+    teacher: ahjan
+    display_name: "Stillness Press"
+    tagline: "When the alarm won't stop, learn to see it"
+    description: >
+      Stillness Press publishes contemplative works rooted in Buddhist inner-light
+      tradition. Every title teaches nervous system literacy — not relaxation, but
+      recognition. Founded on Ahjan's principle that the alarm is information,
+      not an enemy. Forest-refuge and simplicity strands (renunciation, enough
+      already exists) live here as alternate moods alongside the core alarm-recognition voice.
+    brand_identity:
+      colophon: "Bell silhouette (single stroke, no fill)"
+      primary_colors: ["#4A5568", "#E2E8F0"]     # slate + cloud white
+      accent_color: "#C9A227"                      # warm gold
+      display_font: "Cormorant Garamond"           # elegant serif
+      body_font: "Source Sans Pro"
+      cover_template: "minimalist_gradient"
+      texture: "ink_wash_subtle"
+      mood: "Contemplative, spacious, unhurried"
+      cover_style: >
+        Muted slate-to-white gradient. Single calligraphic element centered.
+        Title in warm gold Cormorant Garamond. No photos. No faces.
+        Feels like the moment after the bell stops ringing.
+      alternate_mood_options:
+        deep_forest_green: "#2D3B2D"
+        parchment: "#F5F0E8"
+        bark_brown_accent: "#8B7355"
+        secondary_texture: "pressed_leaf"
+        secondary_cover_template: "earth_tones"
+        secondary_mood: "Forest silence, monastic simplicity — optional palette for renunciation-themed titles"
+
+  # ── 02 CLEAR SEEING BOOKS ─────────────────────────────────────────────
+  cognitive_clarity:
+    teacher: kenjin  # OPD-105: brand wholesale-migrated joshin (Shingon) -> kenjin (Soto Zen)
+    display_name: "Clear Seeing Books"
+    tagline: "The mind was never the problem"
+    description: >
+      Clear Seeing Books publishes Zen inquiry works that dissolve thought loops
+      rather than manage them. Kenjin Roshi's direct-pointing method: if you can
+      see the thinker, you are not the thinker. No stories. No strategies. Just seeing.
+    brand_identity:
+      colophon: "Enso circle (single brush stroke, open at top)"
+      primary_colors: ["#1A1A2E", "#FFFFFF"]       # near-black + pure white
+      accent_color: "#718096"                       # steel grey
+      display_font: "EB Garamond"
+      body_font: "Inter"
+      cover_template: "bold_monochrome"
+      texture: "rice_paper_grain"
+      mood: "Spare, direct, nothing extra"
+      cover_style: >
+        Black or white background. One word or phrase in enormous type.
+        No imagery. No decoration. The cover IS the teaching — nothing to
+        hold onto. Enso colophon small, bottom right.
+
+  # ── 03 FELT SENSE PUBLISHING ──────────────────────────────────────────
+  somatic_wisdom:
+    teacher: pamela_fellows
+    display_name: "Felt Sense Publishing"
+    tagline: "The body already knows"
+    description: >
+      Felt Sense Publishing bridges Western somatic therapy and polyvagal science
+      for high-functioning perfectionists. Pamela Fellows teaches the science of
+      WHY the body holds what the mind won't touch. Evidence-based. Body-first.
+    brand_identity:
+      colophon: "Spiral (golden ratio, single line)"
+      primary_colors: ["#F7F3EE", "#5C4A3A"]       # warm cream + espresso
+      accent_color: "#C47A8A"                        # dusty rose
+      display_font: "Playfair Display"
+      body_font: "Nunito Sans"
+      cover_template: "warm_soft"
+      texture: "linen_weave"
+      mood: "Clinical warmth, embodied intelligence, trustworthy"
+      cover_style: >
+        Warm cream linen background. Anatomical illustration detail (hand, spine,
+        rib cage) in fine line. Dusty rose accent. Playfair Display title.
+        Feels like a therapy office bookshelf — not clinical, not woo.
+
+  # ── 04 ROOT & MERIDIAN PRESS ──────────────────────────────────────────
+  qi_foundation:
+    teacher: master_feung
+    display_name: "Root & Meridian Press"
+    tagline: "Rebuild from where it starts"
+    description: >
+      Root & Meridian Press publishes Chinese internal arts — Qigong, Taiji,
+      meridian cultivation. Master Feung teaches that you're not tired because
+      you work too hard; you're tired because your foundation was never built.
+      Energy as architecture, not supplement.
+    brand_identity:
+      colophon: "Dantian dot within circle (三丹田 reference)"
+      primary_colors: ["#5D4E37", "#E8D5A3"]       # earth brown + warm sand
+      accent_color: "#C9A227"                        # old gold
+      display_font: "Noto Serif"
+      body_font: "Noto Sans"
+      cover_template: "earth_tones"
+      texture: "bamboo_paper"
+      mood: "Rooted, ancient-modern bridge, architectural"
+      cover_style: >
+        Warm earth tones. Meridian line diagram or taiji symbol abstracted
+        as geometric art. Gold accents. Noto Serif for cross-locale consistency.
+        Feels like a practitioner's manual, not a coffee table book.
+
+  # ── 05 PRESENT TENSE BOOKS ────────────────────────────────────────────
+  digital_ground:
+    teacher: miki
+    display_name: "Present Tense Books"
+    tagline: "You exist beyond the feed"
+    description: >
+      Present Tense Books publishes mindfulness works for the generation that
+      grew up online. Miki teaches presence in a world designed to keep you
+      scrolling. Japanese forest bathing meets digital-age awareness. Not anti-tech.
+      Pro-presence.
+    brand_identity:
+      colophon: "Pine needle cluster (3 needles, Japanese style)"
+      primary_colors: ["#0F172A", "#E0F2FE"]       # midnight blue + ice blue
+      accent_color: "#22D3EE"                        # cyan glow
+      display_font: "Space Grotesk"
+      body_font: "DM Sans"
+      cover_template: "dark_minimal"
+      texture: "pixel_grain_subtle"
+      mood: "Digital-native calm, nocturnal, screen-glow aesthetic"
+      cover_style: >
+        Dark midnight blue base. Single glowing element — a tree, a breath,
+        a moment. Cyan accent like a notification you actually want.
+        Space Grotesk type. Feels native to the phone but pointing beyond it.
+
+  # ── 06 FEATHER & SCALE PRESS ──────────────────────────────────────────
+  heart_balance:
+    teacher: maat
+    display_name: "Feather & Scale Press"
+    tagline: "What the heart already knows"
+    description: >
+      Feather & Scale Press publishes Egyptian wisdom tradition works on truth,
+      balance, and shadow integration. Maat's teaching: the heart is weighed
+      against the feather of truth. Your shadow honored equally with your light.
+    brand_identity:
+      colophon: "Feather on one side of a scale (Ma'at weighing)"
+      primary_colors: ["#1E1B4B", "#FEF3C7"]       # deep indigo + papyrus gold
+      accent_color: "#F59E0B"                        # amber
+      display_font: "Cinzel"
+      body_font: "Crimson Text"
+      cover_template: "sacred_cosmic"
+      texture: "papyrus_subtle"
+      mood: "Ceremonial, truthful, ancient-weight"
+      cover_style: >
+        Deep indigo or black background. Gold geometric element — scale, feather,
+        eye of truth. Cinzel capitals. Amber accents. Feels like opening a
+        book that has been waiting for you specifically.
+
+  # ── 07 BARE FORM BOOKS (per OPD-111: teacher=miyuki) ──────────────────
+  relational_calm:
+    teacher: miyuki
+    display_name: "Bare Form Books"
+    tagline: "Nothing extra. Nothing missing."
+    description: >
+      Bare Form Books publishes Japanese-contemplative-rooted works on radical
+      acceptance and shame dissolution. Miyuki's teaching: this moment, including
+      your shame, is already complete. Spare, precise, no extra words. Wabi-sabi
+      as publishing philosophy.
+    brand_identity:
+      colophon: "Single horizontal brush stroke (一 — ichi, 'one')"
+      primary_colors: ["#FAFAF9", "#44403C"]       # warm white + stone grey
+      accent_color: "#A8A29E"                       # ash
+      display_font: "Cormorant Infant"
+      body_font: "IBM Plex Sans"
+      cover_template: "calm_minimal"
+      texture: "washi_paper"
+      mood: "Wabi-sabi, imperfect, complete"
+      cover_style: >
+        Almost entirely white or stone grey. One small imperfect element —
+        a crack, a single stroke, an off-center dot. Cormorant Infant in
+        lowercase. Maximum 6 words visible. The emptiness is the design.
+
+  # ── 08 IRON GATE PRESS ────────────────────────────────────────────────
+  warrior_calm:
+    teacher: master_wu
+    display_name: "Iron Gate Press"
+    tagline: "The fiercer the pressure, the stiller you become"
+    description: >
+      Iron Gate Press publishes martial/spiritual works on composure under
+      extreme pressure. Master Wu teaches the warrior's paradox through Wu Wei —
+      not suppression, not willpower. Composure as martial art.
+    brand_identity:
+      colophon: "Gate symbol (鉄門 — iron gate, two vertical lines + horizontal bar)"
+      primary_colors: ["#18181B", "#A1A1AA"]       # charcoal + gunmetal
+      accent_color: "#DC2626"                       # crimson
+      display_font: "Bebas Neue"
+      body_font: "Roboto Condensed"
+      cover_template: "high_contrast"
+      texture: "brushed_metal"
+      mood: "Contained intensity, martial discipline, compressed power"
+      cover_style: >
+        Black background. Sharp, condensed Bebas Neue type in white or
+        crimson. No soft edges. A single red element — a seal, a line,
+        a character. Feels like something a warrior would carry.
+
+  # ── 09 NIGHT ARCHITECTURE BOOKS ───────────────────────────────────────
+  sleep_restoration:
+    teacher: master_sha
+    display_name: "Night Architecture Books"
+    tagline: "Sleep is not something you force"
+    description: >
+      Night Architecture Books publishes Chinese healing tradition works on
+      sleep as sacred repair. Master Sha teaches that insomnia is an energy
+      architecture problem, not a willpower problem. Rebuilding the system
+      that enables sleep, not chasing the symptom.
+    brand_identity:
+      colophon: "Crescent moon within arch (architectural doorway to sleep)"
+      primary_colors: ["#0C0A20", "#312E81"]       # deep night + indigo
+      accent_color: "#A78BFA"                       # soft violet
+      display_font: "DM Serif Display"
+      body_font: "Outfit"
+      cover_template: "dark_minimal"
+      texture: "velvet_grain"
+      mood: "Nocturnal, architectural, restful depth"
+      cover_style: >
+        Near-black to deep indigo gradient. Soft violet accent — a moon,
+        a doorway, an arch. DM Serif Display, slightly oversized.
+        Feels like the book itself is lowering the lights.
+
+  # ── 10 HELD GROUND PRESS ──────────────────────────────────────────────
+  body_memory:
+    teacher: omote
+    display_name: "Held Ground Press"
+    tagline: "Where the body keeps what the mind released"
+    description: >
+      Held Ground Press publishes Japanese body-practice works on grief
+      processing through somatic tradition. Omote teaches through the Noh
+      principle — the body remembers what the mind erased. Shiatsu, seasonal
+      healing, the body as archive.
+    brand_identity:
+      colophon: "Hand pressing ground (two lines — palm and earth)"
+      primary_colors: ["#44403C", "#D6D3D1"]       # warm charcoal + clay
+      accent_color: "#A3785E"                       # terracotta
+      display_font: "Literata"
+      body_font: "Work Sans"
+      cover_template: "earth_tones"
+      texture: "clay_grain"
+      mood: "Grounded, body-heavy, earthy, seasonal"
+      cover_style: >
+        Warm charcoal or clay tones. Subtle body impression — a hand,
+        a shoulder line, a footprint. Terracotta accent. Literata serif.
+        Feels like the book has weight and warmth in your hands.
+
+  # ── 11 EMBER & ASH PUBLISHING ─────────────────────────────────────────
+  solar_return:
+    teacher: ra
+    display_name: "Ember & Ash Publishing"
+    tagline: "What grows after the burn"
+    description: >
+      Ember & Ash publishes Egyptian solar tradition works that reframe burnout
+      as initiation. Ra teaches that the fire that burns you down is the same
+      fire that rebuilds you. Not recovery. Transformation.
+    brand_identity:
+      colophon: "Flame emerging from ash (single upward stroke from horizontal base)"
+      primary_colors: ["#1C1917", "#FEF2F2"]       # soot black + ash white
+      accent_color: "#EA580C"                       # ember orange
+      display_font: "Bitter"
+      body_font: "Source Sans Pro"
+      cover_template: "high_contrast"
+      texture: "charcoal_grain"
+      mood: "Post-fire clarity, phoenix energy, stark renewal"
+      cover_style: >
+        Black-to-white gradient (bottom to top, like ash settling).
+        Single ember-orange element — a spark, a sun disk, a line of fire.
+        Bitter typeface, weighted. Feels like holding something that survived.
+
+  # ── 12 OPEN VESSEL PRESS ──────────────────────────────────────────────
+  devotion_path:
+    teacher: sai_ma
+    display_name: "Open Vessel Press"
+    tagline: "For those who forgot to include themselves"
+    description: >
+      Open Vessel Press publishes Indian bhakti tradition works on devotion
+      turned inward. Sai Ma teaches that caregivers who pour love outward
+      must learn to receive. Surrender as doorway, not defeat.
+    brand_identity:
+      colophon: "Open bowl/vessel (single curved line, open at top)"
+      primary_colors: ["#FDF4FF", "#7E22CE"]       # lotus white + deep purple
+      accent_color: "#F9A8D4"                       # blush pink
+      display_font: "Spectral"
+      body_font: "Karla"
+      cover_template: "premium_soft"
+      texture: "silk_weave"
+      mood: "Devotional warmth, feminine grace, receiving energy"
+      cover_style: >
+        Soft purple-to-white gradient or lotus white base. Subtle floral
+        or lotus element. Blush pink accent. Spectral serif, elegant.
+        Feels like being held without being told what to do.
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  STANDARD MODE BRANDS (24)
+# ═══════════════════════════════════════════════════════════════════════════
+
+standard_brands:
+
+  stabilizer:
+    display_name: "Harbor Line Books"
+    tagline: "Calm for the system that won't stop running"
+    description: "Nervous system regulation for burned-out professionals. Evidence-based somatic tools."
+    brand_identity:
+      colophon: "Harbor wave (single curved line)"
+      primary_colors: ["#64748B", "#F1F5F9"]
+      accent_color: "#38BDF8"
+      display_font: "DM Serif Display"
+      body_font: "Inter"
+      cover_template: "minimalist_gradient"
+      mood: "Safe harbor, clinical calm"
+
+  optimizer:
+    display_name: "Daybreak Editions"
+    tagline: "Sharper mornings, clearer days"
+    description: "Focus and dopamine management for high-efficiency achievers."
+    brand_identity:
+      colophon: "Rising line (ascending diagonal)"
+      primary_colors: ["#1E293B", "#F8FAFC"]
+      accent_color: "#3B82F6"
+      display_font: "Sora"
+      body_font: "Inter"
+      cover_template: "geometric_anchor"
+      mood: "Precise, forward, electric"
+
+  night_reset:
+    display_name: "Still Hour Press"
+    tagline: "For the hours between midnight and mercy"
+    description: "Sleep and night-anxiety works for creative insomniacs."
+    brand_identity:
+      colophon: "Moon sliver"
+      primary_colors: ["#0F172A", "#1E293B"]
+      accent_color: "#818CF8"
+      display_font: "Playfair Display"
+      body_font: "Outfit"
+      cover_template: "dark_minimal"
+      mood: "Nocturnal, soft-edged, hypnotic"
+
+  career_lift:
+    display_name: "Next Chapter Press"
+    tagline: "When the path forward isn't visible yet"
+    description: "Career transition and meaning-making for mid-career professionals."
+    brand_identity:
+      colophon: "Open door silhouette"
+      primary_colors: ["#334155", "#FFFFFF"]
+      accent_color: "#F59E0B"
+      display_font: "Montserrat"
+      body_font: "Source Sans Pro"
+      cover_template: "bold_typography"
+      mood: "Direct, purposeful, steady"
+
+  adhd_forge:
+    display_name: "Livewire Books"
+    tagline: "Built different. Not broken."
+    description: "Neurodivergent-affirming tools and focus systems."
+    brand_identity:
+      colophon: "Lightning bolt (stylized)"
+      primary_colors: ["#134E4A", "#F0FDFA"]
+      accent_color: "#F97316"
+      display_font: "Space Grotesk"
+      body_font: "DM Sans"
+      cover_template: "vibrant_shapes"
+      mood: "Energetic, affirming, electric"
+
+  longevity_lab:
+    display_name: "Long Arc Press"
+    tagline: "The science of more good years"
+    description: "Evidence-based healthspan and longevity optimization."
+    brand_identity:
+      colophon: "Long curve (logarithmic arc)"
+      primary_colors: ["#FFFFFF", "#166534"]
+      accent_color: "#86EFAC"
+      display_font: "Archivo"
+      body_font: "Inter"
+      cover_template: "clean_white_minimal"
+      mood: "Clinical, refined, optimistic"
+
+  creative_unfold:
+    display_name: "Blank Canvas Books"
+    tagline: "Before the masterpiece, the permission"
+    description: "Creative confidence and artistic permission for students and makers."
+    brand_identity:
+      colophon: "Unfolding paper crane (mid-fold)"
+      primary_colors: ["#FFFBEB", "#92400E"]
+      accent_color: "#F472B6"
+      display_font: "Caveat"
+      body_font: "Nunito"
+      cover_template: "whimsical_illustrated"
+      mood: "Playful, handmade, permission-giving"
+
+  resilient_parent:
+    display_name: "Stolen Moment Press"
+    tagline: "Three minutes between chaos and you"
+    description: "Micro-format tools for overwhelmed parents. Zero guilt."
+    brand_identity:
+      colophon: "Small clock (no hands — time suspended)"
+      primary_colors: ["#FFF7ED", "#78716C"]
+      accent_color: "#FB923C"
+      display_font: "Merriweather"
+      body_font: "Karla"
+      cover_template: "warm_soft"
+      mood: "Tender, brief, no-pressure"
+
+  executive_calm:
+    display_name: "Granite Ridge Publishing"
+    tagline: "Steady when the room is not"
+    description: "Composure and presence for corporate leaders and board-level executives."
+    brand_identity:
+      colophon: "Mountain ridge line (angular, minimal)"
+      primary_colors: ["#1C1917", "#D4D4D8"]
+      accent_color: "#B45309"
+      display_font: "Fraunces"
+      body_font: "Source Serif Pro"
+      cover_template: "dark_elegant"
+      mood: "Authoritative, premium, quiet power"
+
+  trauma_path:
+    display_name: "Soft Ground Books"
+    tagline: "Safety first. Always."
+    description: "Trauma-informed recovery with clinical-grade care and body-based safety."
+    brand_identity:
+      colophon: "Nest shape (curved protective form)"
+      primary_colors: ["#FFFBEB", "#78716C"]
+      accent_color: "#A3785E"
+      display_font: "Literata"
+      body_font: "Work Sans"
+      cover_template: "earth_tones"
+      mood: "Safe, grounding, no sharp edges"
+
+  spiritual_ground:
+    display_name: "Deep Well Publishing"
+    tagline: "For seekers who outgrew the surface"
+    description: "Cross-tradition contemplative works for spiritually curious professionals."
+    brand_identity:
+      colophon: "Concentric circles (ripple/well)"
+      primary_colors: ["#1E1B4B", "#EEF2FF"]
+      accent_color: "#A78BFA"
+      display_font: "Spectral"
+      body_font: "IBM Plex Sans"
+      cover_template: "abstract_symbolic"
+      mood: "Deep, contemplative, layered"
+
+  focus_sprint:
+    display_name: "Launchpad Press"
+    tagline: "Build without burning"
+    description: "Sustained performance for startup founders. Focus meets recovery."
+    brand_identity:
+      colophon: "Arrow ascending (clean geometric)"
+      primary_colors: ["#0F172A", "#F8FAFC"]
+      accent_color: "#22D3EE"
+      display_font: "Sora"
+      body_font: "Inter"
+      cover_template: "geometric_anchor"
+      mood: "Launch energy, clean, velocity"
+
+  hormone_reset:
+    display_name: "Tide & Cycle Books"
+    tagline: "Your body is not betraying you"
+    description: "Hormone health and body sovereignty for women 35+."
+    brand_identity:
+      colophon: "Wave cycle (sinusoidal, organic)"
+      primary_colors: ["#FFF1F2", "#9F1239"]
+      accent_color: "#FB7185"
+      display_font: "Lora"
+      body_font: "Nunito Sans"
+      cover_template: "warm_soft"
+      mood: "Cyclical, empowering, body-honoring"
+
+  stoic_edge:
+    display_name: "Anvil Books"
+    tagline: "Forged, not fragile"
+    description: "Stoic mental toughness and growth for young men."
+    brand_identity:
+      colophon: "Anvil (minimal geometric)"
+      primary_colors: ["#1C1917", "#F5F5F4"]
+      accent_color: "#71717A"
+      display_font: "Oswald"
+      body_font: "Roboto"
+      cover_template: "high_contrast"
+      mood: "Hard, clean, no excuses"
+
+  calm_student:
+    display_name: "Blue Exam Press"
+    tagline: "Your worth is not your GPA"
+    description: "Exam anxiety and identity for Gen Z students."
+    brand_identity:
+      colophon: "Open book spine (V shape)"
+      primary_colors: ["#EFF6FF", "#1E40AF"]
+      accent_color: "#60A5FA"
+      display_font: "Space Grotesk"
+      body_font: "DM Sans"
+      cover_template: "bold_modern"
+      mood: "Young, direct, permission"
+
+  healing_ground:
+    display_name: "Midday Press"
+    tagline: "Reset without leaving your desk"
+    description: "Micro-reset tools for chronic stress workers. Lunch-break length."
+    brand_identity:
+      colophon: "Sun at zenith (circle with downward rays)"
+      primary_colors: ["#FFFBEB", "#92400E"]
+      accent_color: "#FBBF24"
+      display_font: "DM Serif Display"
+      body_font: "Karla"
+      cover_template: "warm_soft"
+      mood: "Midday warmth, accessible, quick"
+
+  bio_flow:
+    display_name: "Signal Path Books"
+    tagline: "Measure what matters. Feel what you measure."
+    description: "Biohacking with embodiment. Optimization meets nervous system."
+    brand_identity:
+      colophon: "Waveform pulse (EKG-style single beat)"
+      primary_colors: ["#F0FDF4", "#14532D"]
+      accent_color: "#4ADE80"
+      display_font: "JetBrains Mono"
+      body_font: "Inter"
+      cover_template: "clean_white_minimal"
+      mood: "Data-driven, embodied, precise"
+
+  confidence_core:
+    display_name: "Threshold Books"
+    tagline: "The doorway you've been standing in front of"
+    description: "Social anxiety and showing-up practice for adults."
+    brand_identity:
+      colophon: "Doorway arch (simple)"
+      primary_colors: ["#FAFAF9", "#57534E"]
+      accent_color: "#D97706"
+      display_font: "Libre Baskerville"
+      body_font: "Source Sans Pro"
+      cover_template: "minimalist_gradient"
+      mood: "Threshold moment, gentle push"
+
+  relationship_clarity:
+    display_name: "Two Chairs Press"
+    tagline: "The conversation that changes everything"
+    description: "Couples communication repair and relational intelligence."
+    brand_identity:
+      colophon: "Two chairs facing (minimal line)"
+      primary_colors: ["#FFF7ED", "#44403C"]
+      accent_color: "#E11D48"
+      display_font: "Merriweather"
+      body_font: "Lora"
+      cover_template: "warm_soft"
+      mood: "Intimate, honest, two-person"
+
+  morning_momentum:
+    display_name: "First Light Publishing"
+    tagline: "Own the morning. Own the day."
+    description: "Morning ritual and day-architecture for early risers."
+    brand_identity:
+      colophon: "Horizon line with rising dot"
+      primary_colors: ["#FFFBEB", "#1C1917"]
+      accent_color: "#F59E0B"
+      display_font: "Montserrat"
+      body_font: "Inter"
+      cover_template: "bold_typography"
+      mood: "Dawn energy, decisive, warm"
+
+  minimal_mind:
+    display_name: "Clearwater Books"
+    tagline: "Less noise. More signal."
+    description: "Digital overwhelm recovery and intentional attention."
+    brand_identity:
+      colophon: "Single water drop (minimal)"
+      primary_colors: ["#F8FAFC", "#475569"]
+      accent_color: "#06B6D4"
+      display_font: "DM Sans"
+      body_font: "Inter"
+      cover_template: "calm_minimal"
+      mood: "Crystal clear, spacious, restful"
+
+  high_performer:
+    display_name: "Close Rate Press"
+    tagline: "Confidence that converts"
+    description: "Pre-performance mental tools for competitive sales and high-stakes roles."
+    brand_identity:
+      colophon: "Target circle (single ring)"
+      primary_colors: ["#18181B", "#FAFAFA"]
+      accent_color: "#EF4444"
+      display_font: "Bebas Neue"
+      body_font: "Roboto Condensed"
+      cover_template: "high_contrast"
+      mood: "Locked in, sharp, competitive"
+
+  gentle_growth:
+    display_name: "Tender Root Books"
+    tagline: "A safe place to start"
+    description: "First-step therapeutic exploration for therapy newcomers."
+    brand_identity:
+      colophon: "Seedling (two leaves, thin stem)"
+      primary_colors: ["#F0FDF4", "#4ADE80"]
+      accent_color: "#86EFAC"
+      display_font: "Nunito"
+      body_font: "Karla"
+      cover_template: "whimsical_illustrated"
+      mood: "Tender, safe, beginning"
+
+  legacy_builder:
+    display_name: "Second Mountain Press"
+    tagline: "The chapter you didn't plan is the one that matters"
+    description: "Midlife reinvention and meaning-making for 45+ adults."
+    brand_identity:
+      colophon: "Two mountain peaks (second taller)"
+      primary_colors: ["#1C1917", "#D6D3D1"]
+      accent_color: "#78716C"
+      display_font: "Fraunces"
+      body_font: "Source Serif Pro"
+      cover_template: "dark_elegant"
+      mood: "Gravitas, second act, earned wisdom"

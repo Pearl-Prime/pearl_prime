@@ -1,0 +1,110 @@
+# PILOT — MUSIC-MODE manga (Tier-1 authored). One mode only: MUSIC. No teacher, no doctrine.
+# Demonstrates the music-mode wrapper for the MECHA genre (per MANGA_MODE_WRAPPER_DESIGN.md):
+# music-vessel = the SYNC-SONG. The musician-author's sound carries the arc; the reader is
+# made to FEEL (overwhelm -> flow), never taught. Nothing is explained. (Render still gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: music_mode_demo__en_US__mecha__series01
+catalog_title: "The Cockpit Remembers the Song"
+chapter_id: ep_001
+title: "The Cockpit Remembers the Song — Episode 1: Static"
+mode: music                           # XOR — never teacher
+manga_author: Sora Vesper             # MUSICIAN-archetype EI author (NOT a teacher)
+musician_id: sora_vesper
+teacher_id: null                      # none — music-mode carries no doctrine
+genre: mecha
+felt_topic: overwhelm                 # interior, FELT through sound — never named, never taught
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Music-mode 3-beat skeleton (the motif carries the arc — open / mid / close):
+mode_beats:
+  opening_motif: page_2   (the sound enters — a half-remembered hum in the hangar)
+  mid_recurrence: page_4  (bestseller beat — forcing fails; the motif RETURNS, transformed; the link finds itself)
+  closing_resolution: page_6  (the held note releases; pilot and machine breathe as one)
+
+main_characters:
+  - id: aoi
+    name: Aoi Saeki
+    role: >-
+      protagonist — a cadet pilot who cannot make the neural link "take." The others
+      force the sync; when Aoi forces it, the machine rejects her into static. (Unstated,
+      never taught: the body that braces cannot belong. Here it is carried by SOUND, not a lesson.)
+    visual_anchor: small frame swallowed by an oversized flight harness; chewed sleeve cuffs; a cracked pair of earbuds always around the neck.
+  - id: sable
+    name: Sable                       # the mecha — the MUSIC-VESSEL itself
+    role: >-
+      an old decommissioned unit no one else can run. Beneath its dead systems, a faint
+      residual HUM — one frequency, like a half-finished melody. It does not obey. It answers.
+    visual_anchor: matte charcoal plating, one amber sensor that flickers in time with sound; scarred, patient, enormous.
+  - id: kessler
+    name: Instructor Kessler
+    role: drill instructor — believes the link is MASTERED by force. A foil, not a teacher; he gives no wisdom and earns none.
+
+scene_palette:
+  primary: hangar dark — wet concrete, sodium-amber work lights
+  secondary: cockpit blue-white (the forced-sync glare)
+  accent: warm amber (Sable's sensor; the one light that pulses with the song)
+  resolution_palette: dawn through the hangar doors (page 6 only)
+
+pages:
+  # ── The problem: forcing the link (no music yet — only static) ─────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — mecha hangar; the cost of forcing",
+         scene: "A cavernous hangar, ranked war-machines hung in gantries like sleeping giants. Cadets jack into their units; neural links snap blue. Sound design: a hard mechanical CHORD of locks engaging."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the one who cannot force her way in",
+         scene: "AOI, small in an oversized harness, jacks into the old unit SABLE. KESSLER barks: \"Override the resistance, cadet. Make it obey.\" Aoi grits her teeth and PUSHES."}
+      - {panel_id: ep001_003, beat_type: failure, intent: "forcing breeds rejection (overwhelm, shown not named)",
+         scene: "Cockpit floods blue-white; the link SCREAMS static across the panel — jagged, all sharp edges. Aoi is thrown back, ears ringing, the cracked earbuds knocked from her neck. Sable goes dark. Kessler, disgusted, walks off."}
+
+  # ── OPENING MOTIF: the sound enters ────────────────────────────────────────
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: quiet, intent: "alone with the machine; the world goes still",
+         scene: "Night. The hangar empty, work-lights low. Aoi sits on the floor against Sable's enormous foot, earbuds in but playing nothing, knees to her chest."}
+      - {panel_id: ep001_005, beat_type: opening_motif, intent: "MUSIC-VESSEL enters — a half-melody Aoi half-remembers; felt, never explained",
+         scene: "Sable's amber sensor flickers — once, twice. From somewhere deep in its dead chassis: a faint HUM. One frequency. A few notes of something unfinished — and Aoi's breath catches, because she half-knows it, the way you half-know a song from before you had the words for anything. Render it as a soft hand-lettered sound-motif curling up through the panel (not narration — a sound): a single rising line of melody that stops just short of resolving."}
+      - {panel_id: ep001_006, beat_type: response, intent: "she answers without thinking — the body that braces, humming",
+         scene: "Aoi lifts her head. Without deciding to, she hums the few notes back — completing them. Sable's amber light steadies, holds. Neither of them does anything else. The panel is almost silent except the two-part hum."}
+
+  # ── Escalation: the sortie, forcing fails again ────────────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: action, intent: "stakes — the genre's engine",
+         scene: "Klaxons. A live sortie — the cadets launch; a thing is coming over the ridge, vast and fast. Aoi is sent up in Sable because no one else will take the old unit."}
+      - {panel_id: ep001_008, beat_type: crisis, intent: "under pressure she reverts to forcing — overwhelm peaks",
+         scene: "Mid-air, the enemy on her. Aoi panics and PUSHES the link the way Kessler taught — override, dominate. Sable SEIZES, static screaming, limbs locking. She is going to fall."}
+
+  # ── MID RECURRENCE (bestseller beat): the motif returns, transformed ───────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_009, beat_type: turn, intent: "she stops forcing — and reaches for the SOUND, not the lesson",
+         scene: "Eyes shut, falling, out of options — Aoi stops pushing. Her hand goes not to the throttle but to her throat. And she HUMS. The same few notes from the hangar floor."}
+      - {panel_id: ep001_010, beat_type: mid_recurrence, intent: "BESTSELLER BEAT — the motif RETURNS, the static resolves INTO the song",
+         scene: "Sable's amber sensor blazes. The screaming static doesn't stop so much as RESOLVE — the jagged edges bend into the melody, the same rising line from page 2, now full, harmonized, huge. Render the sound-motif filling the whole panel, the static lines becoming staff-lines becoming the song. The link doesn't obey. It JOINS."}
+      - {panel_id: ep001_011, beat_type: flow, intent: "from forcing to flow — felt, never explained",
+         scene: "Aoi and Sable move as one — the catch, the pivot, the strike — fluid, unforced, like a duet. No command lines on screen; just the two-part hum and the amber light. She is not driving the machine. They are playing the same thing."}
+
+  # ── CLOSING RESOLUTION: the held note releases ─────────────────────────────
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: aftermath, intent: "the threat passes; quiet returns",
+         scene: "The thing is down. The other units hang back, staring. Sable settles to one knee in the rubble, gentle, and powers its weapons down on its own."}
+      - {panel_id: ep001_013, beat_type: closing_resolution, intent: "the motif resolves the way a held breath does",
+         scene: "Inside the cockpit, Aoi opens her eyes. Sable's amber sensor pulses slow, in time with her breathing now. The hum thins to a single sustained note — and then, softly, lets go. Resolved. Render the sound-motif settling, the last line of melody coming to rest."}
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_014, beat_type: image, intent: "belonging — carried entirely by sound",
+         scene: "Dawn through the hangar doors. Aoi, exhausted, rests her forehead against the cockpit glass; on the other side of it, Sable's amber light glows steady. She slots the cracked earbuds back in — and this time leaves them silent, because the quiet is enough."}
+      - {panel_id: ep001_015, beat_type: close, intent: "MUSIC close — no moral, just the feeling that has changed",
+         scene: "Final panel, pulled wide and still. The old machine and the small pilot, one light between them. Closing music-caption, the musician's sign-off — a last bar of the melody, and beneath it, small: \"— and the cockpit remembered the rest of the song.\""}
+
+wrapper_note: >-
+  Music-mode only. There is NO Keeper, NO doctrine, NO teaching line — the arc
+  (forcing/overwhelm -> flow/belonging) is carried entirely by the SYNC-SONG, the
+  mecha genre's native music-vessel. The reader is anchored, not instructed. If this
+  were teacher-mode it would have a mechanic-mentor who co-regulates the pilot and
+  SAYS the doctrine; here the machine just answers the song. Same wellness interior
+  (overwhelm soothed), opposite contract.

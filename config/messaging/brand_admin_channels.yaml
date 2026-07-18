@@ -1,0 +1,27 @@
+# Brand Admin Notification Channels
+#
+# Maps each brand to the messaging channels its admin team monitors.
+# Used by scripts/distribution/distribute_to_brand_admins.py to fan-out
+# notifications across Slack, Discord, Telegram, and legacy channels.
+#
+# Keys:
+#   brand  - internal brand slug
+#   admins - list of channel+recipient pairs (channel must be in ALL_CHANNELS)
+#
+# Example entry:
+#   - brand: acme
+#     admins:
+#       - channel: slack
+#         to: C0123456789          # Slack channel ID
+#       - channel: telegram
+#         to: "-1001234567890"     # Telegram group chat ID
+
+brands:
+  - brand: default
+    admins:
+      - channel: slack
+        to: ""           # fill in your default Slack channel ID
+      - channel: discord
+        to: ""           # fill in your default Discord channel ID
+      - channel: telegram
+        to: ""           # fill in your default Telegram chat ID

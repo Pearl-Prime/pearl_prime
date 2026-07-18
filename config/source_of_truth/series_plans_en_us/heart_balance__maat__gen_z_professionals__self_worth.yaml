@@ -1,0 +1,68 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_balance__maat__gen_z_professionals__self_worth
+brand: heart_balance
+teacher: maat
+persona: gen_z_professionals
+topic: self_worth
+byline_author: yara_tam
+arc:
+  installment_1:
+    book_id: heart_balance__maat__gen_z_professionals__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_balance__maat__gen_z_professionals__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A heart-centered reckoning with your own worth — not a louder
+  argument for why you're enough, but a quieter scale where your value stops depending
+  on the verdict. We won't help you win the case for yourself; we'll help you set
+  the case down.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The School of Life series (The School of Life) — calm, essayistic emotional education
+  for thoughtful young adults, the same un-preachy register
+- The Tara Brach RAIN / Radical Acceptance books (Tara Brach) — meeting your own unworthiness
+  with recognition instead of repair
+- Good Vibes, Good Life and its sequels (Vex King) — self-worth for a Gen Z readership,
+  but where ours stays clear-eyed about cost rather than affirmational
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 22-29
+  where_they_are: It's 11:40pm on a Tuesday and they're still half-working — Slack
+    open in one tab, a half-written reply in another, a third where they're reading
+    a peer's launch announcement and feeling their stomach drop. The day technically
+    ended hours ago. They did enough. They cannot feel that they did enough.
+  what_they_need: To recognize the buried equation running underneath the overwork
+    — worth = output, worth = approval, worth = never falling behind — and to feel,
+    even once, that their value isn't a number waiting to be totaled at the end of
+    the day.
+  what_they_avoid: Affirmation-mirror self-love, hustle-culture pep talks, 'just believe
+    in yourself,' anything that treats low self-worth as a confidence bug to be patched,
+    and any book that's secretly one more thing to optimize.
+series_voice_markers:
+  register: balanced, warm, discerning — a heart-centered voice about worth and limits;
+    gentle but clear-eyed, weighs things fairly without flattering you or scolding
+    you; never clinical, never preachy, never hustle
+  sentence_rhythm: even, weighted sentences that come to rest — a longer observed
+    line, then a short one set down like the other half of a scale; pauses where you'd
+    actually breathe
+  metaphor_family: the feather and the scale, weight and balance, the heart weighed
+    against a feather, equilibrium and the steady center, what you give and what you
+    keep, the fulcrum that holds
+_needs_authoring: false

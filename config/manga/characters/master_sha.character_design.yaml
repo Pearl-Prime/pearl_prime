@@ -1,0 +1,205 @@
+character_design:
+  series_id: sleeprest_en_01   # OPERATOR-CONFIRM: no en_US sleep_restoration series row exists in brand_lora_plans.yaml or manga_profiles/series/; series_id slug + locale are guessed (mirrors stillness_en_01 convention). Confirm the intended series_id, locale, market_demo, genre_family, and subgenre.
+  brand_id: sleep_restoration
+  locale: en_US               # OPERATOR-CONFIRM: locale guessed en_US (no series profile exists for master_sha; sleep_restoration could ship ja_JP/zh_TW first)
+  market_demo: josei          # OPERATOR-CONFIRM: market_demo guessed josei (mirrors gold template; a Chinese-male-elder healer could plausibly route seinen/mature instead)
+  genre_family: healing       # OPERATOR-CONFIRM: genre_family guessed healing (brand_lora notes "healing presence"; confirm against canonical_genre_list.yaml)
+  subgenre: iyashikei_sleep_arc   # OPERATOR-CONFIRM: subgenre invented to parallel stillness_en_01's iyashikei_anxiety_arc; confirm the real sleep-restoration subgenre
+  character_id: master_sha    # no character name in brand_lora_plans.yaml character_loras.master_sha → teacher_id used as character_id per instructions
+  character_role: teacher_protagonist   # OPERATOR-CONFIRM: role guessed; brand_lora says "healing presence" (teacher-author EI character) but does not state whether he is the series protagonist or a recurring teacher-guide
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml character_loras.master_sha.notes: 'Chinese male, healing presence, luminous calm' (trigger_word sha_sr, ip_adapter_weight 0.84, style_ref sleep_restoration)"
+    - "brand_lora_plans.yaml brand_style_loras.sleep_restoration.notes: 'Luminous night tones with soft energy glow' (trigger_word style_sr)"
+    - "brand_lora_plans.yaml character_loras.master_sha.reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]; training_steps 1500"
+    - "Derived ethnicity/gender/age anchor: Chinese male elder, healer/physician register (distinct from cross-brand Chinese-male-elder kin master_feung=qigong, master_wu=martial)"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Aged Chinese scholar-physician face: long, low-contour, ascetic. angular_long
+    # (Inoue Vagabond sumi-brush seinen-realist) is DIRECTLY opposite Mira Aoki's
+    # soft_round josei face and reads as an elder healer, not a youthful lead.
+    face_shape:
+      value: angular_long   # OPERATOR-CONFIRM: face_shape guessed (brand_lora gives ethnicity/gender/presence only, not facial geometry). Alt for a gentler healer read: oval or elongated.
+      lockout: yes
+      mangaka_tradition: "Inoue Vagabond-style angular_long (sumi-brush seinen-realist elder) — aged scholar-physician contour"
+
+    # AXIS 2 — eye_geometry
+    # Small, hooded, single-lid, minimal-lash, narrow-ish — aged East-Asian male
+    # elder with a half-lowered healing-calm gaze. Maximally far from Mira's
+    # medium/almond/double-lid/minimal early-30s josei eye.
+    eye_geometry:
+      size: small             # OPERATOR-CONFIRM: eye sub-attributes guessed from "Chinese male elder, luminous calm"
+      shape: hooded
+      spacing: standard
+      lid_fold: single
+      eyelash_density: minimal
+      lockout: yes
+      note: "single-lid + hooded + small + weathered warm_medium skin (axis 10) signals aged East-Asian-coded male; half-lowered lids carry the 'luminous calm' / healing-presence read"
+
+    # AXIS 3 — nose_construction
+    # Seinen-realist elder: longer, slightly aquiline bridge, nostrils drawn —
+    # the opposite register from Mira's short rounded implied-nostril iyashikei nose.
+    nose_construction:
+      bridge_angle: aquiline   # OPERATOR-CONFIRM: nose sub-attributes guessed (not specified in brand_lora)
+      bridge_length: long
+      tip_shape: narrow
+      nostril_visibility: drawn
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # Resting neutral_soft (healing calm, not stern); jaw narrowed/softened by age;
+    # thin lips largely framed by a long beard. Bow_mouth forbidden for josei (N/A here).
+    mouth_jaw:
+      resting_expression: neutral_soft   # OPERATOR-CONFIRM: mouth/jaw sub-attributes guessed
+      jaw_width: medium
+      chin_shape: rounded
+      lip_shape: thin_both
+      lockout: yes
+      note: "lower face largely framed by the long beard (axis 5); resting neutral_soft encodes 'luminous calm' rather than gekiga sternness"
+
+    # AXIS 5 — hair
+    # THE silhouette separator. Long flowing SILVER/WHITE hair swept back, no part,
+    # straight, PLUS a long flowing white beard = the healer-sage silhouette.
+    # This separates master_sha from cross-brand Chinese-male-elder kin
+    # (master_wu warrior → expected topknot/bound; master_feung qigong) AND from
+    # Mira's long brown side-part wavy hair.
+    hair:
+      length: long_to_waist     # OPERATOR-CONFIRM: hair length/parting/texture guessed (brand_lora silent on hair)
+      parting: no_part_swept_back
+      fringe_style: no_fringe
+      texture: straight
+      color_signal: white_signaled
+      signature_shape_note: "long flowing silver hair swept straight back PLUS a long white flowing beard (chest-length) — the healer-sage silhouette readable in pure outline; beard sways/settles as a stillness cue in slow sleep-arc panels. OPERATOR-CONFIRM: full long beard is a guess; confirm beard vs. clean-shaven elder."
+      lockout: yes
+
+    # AXIS 6 — build (lockout: no per template default)
+    # Tall, lean, upright elder frame; less individuating than face.
+    build:
+      height_implied: tall
+      frame_density: small
+      shoulder_ratio: average
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # Flowing layered HEALER/PHYSICIAN robe (NOT a martial gi — that is master_wu's
+    # warrior_calm lane; NOT modern). Indigo night-toned robe ties to the brand's
+    # "luminous night tones" style note. pre_industrial era signal.
+    wardrobe_register:
+      era_signal: pre_industrial   # OPERATOR-CONFIRM: era guessed pre_industrial (timeless robed-healer register); could be meiji_taisho or fantasy_setting depending on series world
+      personality_encoding:
+        - indigo_layered_healers_robe        # night-toned robe → brand "luminous night tones"
+        - wide_draped_sleeves
+        - knotted_cloth_sash
+        - soft_cloth_shoes                    # quiet, grounded — not martial boots
+      formality: ceremonial         # OPERATOR-CONFIRM: formality guessed (robed-healer reads ceremonial/formal rather than business_casual)
+      lockout: yes
+
+    # AXIS 8 — posture_default (lockout: no per template default)
+    # Rooted, symmetric, contained stillness — the "luminous calm" anchor.
+    posture_default:
+      energy: contained
+      symmetry: symmetric
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # Elder ("elder presence" / "healing presence"). 60s with full age cues — the
+    # single clearest separator from Mira's early_30s. Directly from brand_lora.
+    age_signaling:
+      apparent_age_decade: 60s     # OPERATOR-CONFIRM: exact decade guessed (brand_lora says "elder/healing presence"; could read 50s or 70s_plus)
+      visible_age_cues:
+        - full_crow_feet
+        - deep_nasolabial_fold
+        - grey_at_temples
+        - jowl_softening
+      lockout: yes
+
+    # AXIS 10 — skin_treatment (lockout: no per template default)
+    # Weathered elder skin; warm_medium East-Asian-coded tone.
+    skin_treatment:
+      texture: weathered
+      tone: warm_medium            # OPERATOR-CONFIRM: tone guessed warm_medium (Chinese male elder); confirm against any brand reference art
+      lockout: no
+
+    # AXIS 11 — accessories
+    # UNIQUE high-leverage signature — explicitly NOT Mira's jade pendant.
+    # A softly-GLOWING crescent moonstone amulet on a knotted dark cord:
+    # ties directly to sleep_restoration ("luminous night tones with soft energy
+    # glow") and doubles as the healing/sleep through-line object (he cups it when
+    # settling a restless sleeper). Distinct from any martial/qigong prop.
+    accessories:
+      glasses: none
+      jewelry: signature_piece
+      signature_item: "softly-glowing pale crescent moonstone amulet on a knotted dark cord — the series visual through-line; emits the 'soft energy glow' of the brand style, cupped in both hands when he settles a restless sleeper (healing/regulation gesture); the glow is the single luminous accent the eye returns to in night-toned panels"   # OPERATOR-CONFIRM: signature_item invented to fit brand 'luminous night/soft glow' + sleep theme; confirm or swap (alt: hanging herb-gourd/calabash, or a small lantern)
+      secondary_signature_item: "long carved wooden healer's staff, leaned not gripped — quiet vertical anchor in standing panels"   # OPERATOR-CONFIRM: secondary item guessed
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Indigo/deep-night primary directly from brand style note "Luminous night
+    # tones with soft energy glow." Luminous lavender glow accent = the moonstone.
+    # Opposite of Mira's warm_cream/jade. In B&W, master_sha anchors DARK
+    # (deep robe = high-value mass); the moonstone glow is the single bright dot.
+    color_signal:
+      palette_primary: indigo          # from brand "luminous night tones"
+      palette_accent: lavender         # OPERATOR-CONFIRM: luminous-glow accent guessed (no exact "luminous glow" value in axes vocab; lavender chosen as closest night-glow accent — alt: slate)
+      palette_secondary: slate
+      bw_register_note: "master_sha renders DARK-anchored (deep indigo robe + dark cord = the heaviest value mass in a panel) — the inverse of Mira's mid-grey, low-contrast anchoring. The moonstone amulet glow is the single high-key bright dot the eye returns to against the dark robe and night-toned background."
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # Locked (lockout: yes): face_shape, eye_geometry, nose_construction,
+    # mouth_jaw, hair, wardrobe_register, age_signaling, accessories, color_signal.
+    # Free (lockout: no, per template defaults): build, posture_default, skin_treatment.
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: sleep_restoration
+      cross_brand_kin_to_check:
+        - master_feung   # qi_foundation_cultivation — Chinese male elder (qigong); separate via hair/wardrobe/accessories/color
+        - master_wu      # warrior_calm — Chinese male elder (martial); separate via hair (sage vs warrior), wardrobe (healer robe vs gi), accessories, color
+        - mira_aoki      # stillness_press — opposite on gender, age decade, face_shape, hair, accessories, color (cross-brand, 7-axis threshold)
+      collisions_detected: []
+      note: "No on-disk 12-axis character_design instance exists yet for any Chinese-male-elder kin (master_feung/master_wu are LoRA-roster rows only). Hard pairwise solver pass is pending those designs; this draft is pre-emptively separated on hair, accessories.signature_item, wardrobe_register, and color_signal."
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md   # OPERATOR-CONFIRM: this authority path is cited by the gold template (stillness_en_01) but the file is NOT present on disk in this branch; confirm canonical routing-spec path
+    engines_in_play:
+      - flux_schnell      # simple objects, backgrounds, decompression archetypes
+      - flux_dev          # mid-shots, hands, character-in-scene (per character_loras base_model FLUX.1-dev)
+      - qwen_image_pulid  # face close-ups (identity-critical elder face)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "Per brand_lora_plans.yaml, master_sha's named-cast LoRA (trigger sha_sr, ip_adapter_weight 0.84) is the eventual face-consistency asset, but LoRA training is DEFERRED (Pearl Star ComfyUI commission, operator-attended) — PuLID-FLUX-FaceNet from the canonical reference sheet (front/three_quarter/profile/expression) suffices for production until the LoRA is trained. OPERATOR-CONFIRM: re-derive against the real routing spec's chapter-count LoRA threshold once that spec is located."
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - age_signaling
+        - wardrobe_register
+        - accessories
+        - color_signal
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    reference_images_needed:        # mirrors brand_lora_plans.yaml character_loras.master_sha
+      - front_portrait
+      - three_quarter_view
+      - profile_view
+      - expression_sheet
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
+    # Phase C reference sheet target (Qwen+PuLID), mirroring gold-template convention:
+    # artifacts/manga/character_references/sleep_restoration/master_sha/{front,three_quarter,profile,expression_sheet}.png

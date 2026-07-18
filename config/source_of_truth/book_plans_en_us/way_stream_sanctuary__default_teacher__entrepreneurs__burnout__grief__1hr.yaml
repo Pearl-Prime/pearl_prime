@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__burnout__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__steady_ground__1hr
+  name: Steady Ground — for Founders (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'After the Flame: The Grief That Doesn''t Leave'
+subtitle: A Real Talk Guide to Burnout for Entrepreneurs
+cover_tagline: The company is still standing. Something in you isn't, and you can't
+  name what you lost.
+description:
+  short_blurb: You built it, and somewhere along the way it cost you something you
+    never agreed to spend. This one-hour reset is for the founder who isn't burned
+    out so much as quietly bereaved — of the energy, the certainty, or the person
+    they were before the company ate them. There's no comeback plan here. Just an
+    honest hour with what's actually gone.
+  long_description: 'It''s late, the dashboard says the company is fine, and you feel
+    nothing. Not relief, not pride — a flat, grey absence where the fire used to be.
+    You keep waiting to bounce back, and you don''t, and you can''t say why, because
+    nothing technically died. But something did. The version of you that started this
+    thing with both hands open. The friendships that thinned while you shipped. The
+    certainty that the cost would be worth it. You scroll past a photo from three
+    years ago and don''t recognize the lightness on your own face.
+
+
+    This hour is for the founder carrying a loss they were never allowed to grieve.
+    The one who lost a cofounder and got a Slack announcement instead of a funeral.
+    The one who sold and felt orphaned the morning after the wire cleared. The one
+    who is still here, still operating, still grieving the self who got quietly traded
+    for the runway. You don''t get sympathy cards for any of it. The world just says
+    congratulations and asks what''s next, and you learn to perform an enthusiasm
+    you stopped feeling a long time ago.
+
+
+    First you name it: this is grief, not weakness, not a motivation problem you can
+    fix with a better quarter. Then you go down into it instead of optimizing around
+    it — you let the absence be real, sit with what the company actually took, stop
+    pretending the flame went out because you got lazy. It went out because you fed
+    it everything you had, and then some you didn''t. And then you come back up, not
+    patched, but changed: able to hold both the building and the cost in the same
+    hand, in the same hour, without one cancelling the other out.
+
+
+    This will not hand you your old self back. It won''t promise the fire returns
+    on schedule, or that the right framework makes the loss net out. There is no five-step
+    recovery here, no productivity reframe, no morning routine that resurrects who
+    you were. What''s gone is gone, and part of this hour is finally stopping the
+    search for it.
+
+
+    What you get instead is the one thing nobody offers a founder: permission to set
+    the building down for sixty minutes and grieve what it cost you, in plain words,
+    without anyone calling it failure. Not to fix it. Not to extract a lesson. Just
+    to let it be true, out loud, for once. The company can wait an hour. You''ve been
+    waiting a great deal longer than that.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - founders
+  - burnout for founders
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- Burnout (Nagoski) — names the body's stress cycle so exhaustion stops reading as
+  a character flaw
+- It's OK That You're Not OK (Devine) — secular permission to grieve a loss the world
+  refuses to acknowledge
+- How to Do Nothing (Odell) — pushback on the relentless productivity story founders
+  live inside
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,81 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: body_memory__omote__working_parents__compassion_fatigue
+brand: body_memory
+teacher: omote
+persona: working_parents
+topic: compassion_fatigue
+byline_author: quinn_janssen
+arc:
+  installment_1:
+    book_id: body_memory__omote__working_parents__compassion_fatigue__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: body_memory__omote__working_parents__compassion_fatigue__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: body_memory__omote__working_parents__compassion_fatigue__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be told to give more, give better, or give from
+  a fuller heart. You will be shown the ground under the giving — the place in you
+  that runs dry, and what it actually takes to let it refill. These books stay with
+  the working parent who has poured out for everyone and has nothing left for themselves,
+  and they hold that emptiness without rushing to fix it.
+bestseller_hook_family: ''
+emotional_engine: compassion_fatigue_recognition
+comp_series:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names caregiver depletion as a real physiological cost, not a willpower failure,
+  the same ground these books stand on'
+- The Book of Boundaries (Melissa Urban) — gives exhausted givers permission to stop
+  pouring out, in a plain, non-shaming voice that matches this series' register
+- Real Self-Care (Pooja Lakshmin) — rejects performative self-care and toxic positivity
+  for working caregivers, the exact thing this avatar flinches from
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-48
+  where_they_are: It is 9:40pm. The kids are finally down, the dishwasher is running,
+    a colleague's text is still unanswered, and you are sitting on the edge of the
+    bed with your shoes still on, unable to remember the last thing anyone did for
+    you. You gave all day — to your children, your aging parent, your team, the person
+    who needed you at 4pm — and the well came up dry hours ago, but you kept lowering
+    the bucket anyway.
+  what_they_need: Permission to be empty without it meaning they have failed; a way
+    to feel the cost in their own body before it becomes resentment or numbness; the
+    recognition that they cannot give from a cup nobody is filling, and that refilling
+    it is not selfish but structural.
+  what_they_avoid: Being told to 'practice self-care,' to 'just say no,' to relax
+    on command, or to push through because their family needs them. They flinch from
+    anything that adds one more task to the list, anything performatively calm, anything
+    that treats their depletion as a mindset problem instead of a real and earned
+    exhaustion.
+series_voice_markers:
+  register: grounded, steady, holding — the voice of someone who has sat with their
+    own emptiness and is not afraid of yours; warm and plain, never clinical, never
+    preachy, never a wellness pitch
+  sentence_rhythm: short load-bearing sentences set down like stones, then a longer
+    one that lets the breath out; pauses where the reader is meant to feel something
+    rather than learn it; second person throughout, close enough to be the voice in
+    the next room
+  metaphor_family: the well that runs dry and what it takes to let it refill, the
+    empty cup, weight carried and finally set down, solid ground under a shaking body,
+    roots that hold in a storm, the earth that does not move when everything else
+    does
+_needs_authoring: false

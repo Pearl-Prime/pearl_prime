@@ -1,0 +1,327 @@
+# Canonical Manga Brand List — Path X canon (37 manga brands)
+#
+# Path X canon — 37 manga brands; SEPARATE from the 24-archetype Pearl_Prime book
+# registry at config/brand_management/global_brand_registry.yaml. The 312 = 24 × 13
+# rows there are the BOOK pipeline (24 spiritual archetypes × 13 lanes = 312); they
+# do NOT govern the manga catalog. The manga side has 37 distinct brands derived
+# from market/genre strategy in docs/GENRE_PORTFOLIO_PLAN.md and governed by the
+# canonical reconciliation spec at specs/MANGA_CATALOG_RECONCILIATION_SPEC.md.
+#
+# Authority chain:
+#   - Strategic input (canonical):     docs/GENRE_PORTFOLIO_PLAN.md
+#   - Reconciliation spec (governing): specs/MANGA_CATALOG_RECONCILIATION_SPEC.md (PR #682)
+#   - This file (canonical list):      config/manga/canonical_brand_list.yaml
+#   - Series/topic plan (consumer):    config/manga/manga_brand_series_plan.yaml
+#
+# Operator decision 2026-04-27 (Path X): manga and book pipelines are intentionally
+# distinct. See docs/PEARL_ARCHITECT_STATE.md BR-CANON-01 (Path X cap entry).
+#
+# DO NOT MODIFY config/brand_registry.yaml or config/brand_management/global_brand_registry.yaml
+# from this list — those are book-pipeline canon and are governed elsewhere.
+#
+# Schema:
+#   schema_version: 1
+#   total_brands: 37
+#   tiers: flagship | core | niche  (per GENRE_PORTFOLIO_PLAN.md tier sections)
+#   brands: <brand_id>:
+#     tier:                flagship | core | niche
+#     demographic:         josei | seinen | shonen | shojo | manhwa
+#     primary_topic:       single canonical psychological/wellness topic (anchor)
+#     secondary_topics:    list of additional wellness topics carried by the brand
+#     notes:               human-readable one-line summary (from GENRE_PORTFOLIO_PLAN.md ##### header)
+#     manga_locales:       (optional) launch locales where this brand's MANGA lane
+#                          is expected. Omit  = all launch locales (default). Set to
+#                          restrict a market-exclusive brand so the plan-completeness
+#                          gate does not flag its absent non-lane manga plans as gaps
+#                          (e.g. bright_presence_tw_seinen is zh_TW-only per
+#                          OPD-20260627-001). Book/podcast surfaces are unaffected.
+#
+# Demographic taxonomy (manga reader-segment convention):
+#   josei     — adult women
+#   seinen    — adult men
+#   shonen    — boys / young men
+#   shojo     — girls / young women
+#   manhwa    — Korean webtoon (digital-native; demographic non-binary)
+
+schema_version: 1
+registry_id: manga_canonical_brand_list
+owner: pearl_brand
+status: active
+total_brands: 37
+total_flagship: 3
+total_core: 16
+total_niche: 18
+generated_from: docs/GENRE_PORTFOLIO_PLAN.md
+governing_spec: specs/MANGA_CATALOG_RECONCILIATION_SPEC.md
+last_updated: 2026-04-27
+
+brands:
+
+  # ── Flagship Brands (14–18 series target) ────────────────────────────────
+  stillness_press:
+    tier: flagship
+    demographic: josei
+    primary_topic: anxiety
+    secondary_topics: [somatic_healing, sleep, grief, trauma_recovery]
+    notes: Anxiety · Somatic · Sleep · Josei adult women
+
+  cognitive_clarity:
+    tier: flagship
+    demographic: seinen
+    primary_topic: overthinking
+    secondary_topics: [imposter_syndrome, burnout, boundaries]
+    notes: Overthinking · Psychology · CBT-adjacent · Seinen adult men
+
+  digital_ground:
+    tier: flagship
+    demographic: manhwa
+    primary_topic: burnout
+    secondary_topics: [imposter_syndrome, financial_anxiety, anxiety, somatic_healing]
+    notes: Burnout · Tech Worker · Digital Identity · Manhwa/Webtoon
+
+  # ── Core Brands (8–10 series target) ─────────────────────────────────────
+  sleep_restoration_iyashikei:
+    tier: core
+    demographic: josei
+    primary_topic: sleep
+    secondary_topics: [anxiety, grief, social_anxiety]
+    notes: Sleep · Night · Rest · Josei
+
+  somatic_wisdom_shojo:
+    tier: core
+    demographic: josei
+    primary_topic: somatic_healing
+    secondary_topics: [self_worth, social_anxiety, grief]
+    notes: Somatic Healing · Body Memory · Josei
+
+  relational_calm_iyashikei:
+    tier: core
+    demographic: josei
+    primary_topic: social_anxiety
+    secondary_topics: [boundaries, somatic_healing]
+    notes: Social Anxiety · Relationships · Josei
+
+  healing_ground_healing:
+    tier: core
+    demographic: josei
+    primary_topic: grief
+    secondary_topics: [boundaries, overthinking]
+    notes: Grief · General Healing · Josei
+
+  body_memory_shojo:
+    tier: core
+    demographic: josei
+    primary_topic: somatic_healing
+    secondary_topics: [trauma_recovery, shame, grief]
+    notes: Somatic Healing · Trauma · Josei
+
+  minimal_mind_healing:
+    tier: core
+    demographic: seinen
+    primary_topic: overthinking
+    secondary_topics: [anxiety, burnout]
+    notes: Overthinking · Mindfulness · Seinen
+
+  night_reset_healing:
+    tier: core
+    demographic: josei
+    primary_topic: sleep
+    secondary_topics: [anxiety, grief]
+    notes: Sleep · Rest · Night Routines · Josei
+
+  gentle_growth_healing:
+    tier: core
+    demographic: josei
+    primary_topic: self_worth
+    secondary_topics: [imposter_syndrome, social_anxiety]
+    notes: Self-Worth · Imposter Syndrome · Shojo
+
+  stabilizer_healing:
+    tier: core
+    demographic: seinen
+    primary_topic: burnout
+    secondary_topics: [overthinking, financial_anxiety]
+    notes: Burnout Recovery · Seinen
+
+  career_lift_workplace:
+    tier: core
+    demographic: josei
+    primary_topic: imposter_syndrome
+    secondary_topics: [social_anxiety, financial_anxiety, burnout]
+    notes: Imposter Syndrome · Workplace · Josei
+
+  high_performer_workplace:
+    tier: core
+    demographic: seinen
+    primary_topic: burnout
+    secondary_topics: [financial_anxiety, imposter_syndrome, overthinking]
+    notes: Burnout · Financial Anxiety · Seinen
+
+  executive_calm_workplace:
+    tier: core
+    demographic: seinen
+    primary_topic: burnout
+    secondary_topics: [overthinking, financial_anxiety]
+    notes: Burnout · Overthinking · Seinen
+
+  morning_momentum_workplace:
+    tier: core
+    demographic: shonen
+    primary_topic: burnout
+    secondary_topics: [courage, self_worth]
+    notes: Burnout · Motivation · Shonen
+
+  optimizer_workplace:
+    tier: core
+    demographic: seinen
+    primary_topic: overthinking
+    secondary_topics: [burnout, imposter_syndrome]
+    notes: Overthinking · Productivity · Seinen
+
+  focus_sprint_workplace:
+    tier: core
+    demographic: seinen
+    primary_topic: adhd_focus
+    secondary_topics: [imposter_syndrome, social_anxiety]
+    notes: ADHD · Focus · Seinen
+
+  heart_balance_shojo:
+    tier: core
+    demographic: josei
+    primary_topic: social_anxiety
+    secondary_topics: [boundaries, self_worth]
+    notes: Social Anxiety · Relationships · Josei
+
+  # ── Niche / Focused Brands (4–6 series target) ───────────────────────────
+  trauma_path_healing:
+    tier: niche
+    demographic: josei
+    primary_topic: grief
+    secondary_topics: [trauma_recovery, somatic_healing, shame]
+    notes: Grief · Trauma · Josei
+
+  resilient_parent_social:
+    tier: niche
+    demographic: josei
+    primary_topic: burnout
+    secondary_topics: [self_worth, boundaries]
+    notes: Burnout · Self-Worth · Josei
+
+  confidence_core_romance:
+    tier: niche
+    demographic: shojo
+    primary_topic: imposter_syndrome
+    secondary_topics: [self_worth, social_anxiety]
+    notes: Imposter Syndrome · Self-Worth · Shojo
+
+  relationship_clarity_romance:
+    tier: niche
+    demographic: josei
+    primary_topic: social_anxiety
+    secondary_topics: [boundaries, self_worth]
+    notes: Social Anxiety · Boundaries · Josei
+
+  adhd_forge_mystery:
+    tier: niche
+    demographic: shonen
+    primary_topic: adhd_focus
+    secondary_topics: [courage, self_worth]
+    notes: ADHD · Focus · Shonen
+
+  devotion_path_shonen:
+    # LOCKED register (2026-06-17): Open Vessel Press / Sai Ma is HEALING / IYASHIKEI
+    # (devotional-emotional-drama + supernatural-healing). NOT shonen / battle.
+    # Brand-id key retained for path/artifact stability; the register is healing.
+    tier: niche
+    demographic: josei              # iyashikei skews adult; shonen is wrong for this register
+    primary_topic: grief            # the second-cup arc — loss received, not resolved
+    secondary_topics: [compassion, courage]   # courage = courage-as-inner-work
+    notes: Grief · Compassion · Healing / Iyashikei
+
+  stoic_edge_battle:
+    tier: niche
+    demographic: seinen
+    primary_topic: courage
+    secondary_topics: [grief, self_worth, shame]
+    notes: Courage · Resilience · Seinen
+
+  warrior_calm_cultivation:
+    tier: niche
+    demographic: shonen
+    primary_topic: burnout
+    secondary_topics: [courage, somatic_healing]
+    notes: Burnout · Inner Peace · Shonen
+
+  spiritual_ground_supernatural:
+    tier: niche
+    demographic: josei
+    primary_topic: grief
+    secondary_topics: [self_worth, courage]
+    notes: Grief · Devotion · Josei
+
+  solar_return_isekai:
+    tier: niche
+    demographic: shonen
+    primary_topic: self_worth
+    secondary_topics: [imposter_syndrome, courage]
+    notes: Self-Worth · Isekai framing · Shonen
+
+  legacy_builder_memoir:
+    tier: niche
+    demographic: seinen
+    primary_topic: self_worth
+    secondary_topics: [grief, financial_anxiety, shame]
+    notes: Self-Worth · Purpose · Seinen
+
+  bio_flow_healing:
+    tier: niche
+    demographic: seinen
+    primary_topic: somatic_healing
+    secondary_topics: [overthinking, sleep]
+    notes: Body / Biology · Healing · Seinen
+
+  longevity_lab_healing:
+    tier: niche
+    demographic: seinen
+    primary_topic: somatic_healing
+    secondary_topics: [self_worth, grief]
+    notes: Health · Aging · Seinen
+
+  hormone_reset_healing:
+    tier: niche
+    demographic: josei
+    primary_topic: somatic_healing
+    secondary_topics: [self_worth, anxiety]
+    notes: Somatic · Hormonal · Josei
+
+  qi_foundation_cultivation:
+    tier: niche
+    demographic: seinen
+    primary_topic: somatic_healing
+    secondary_topics: [courage, burnout]
+    notes: Somatic (Eastern) · Cultivation · Seinen
+
+  creative_unfold_social:
+    tier: niche
+    demographic: shojo
+    primary_topic: social_anxiety
+    secondary_topics: [self_worth, courage]
+    notes: Social Anxiety · Creativity · Shojo
+
+  calm_student_school:
+    tier: niche
+    demographic: shojo
+    primary_topic: anxiety
+    secondary_topics: [social_anxiety, self_worth]
+    notes: Anxiety · Study · Shojo
+
+  bright_presence_tw_seinen:
+    tier: niche
+    demographic: seinen
+    primary_topic: social_anxiety
+    secondary_topics: [imposter_syndrome, self_worth]
+    notes: Social Anxiety · TW market · Seinen
+    # Taiwan-exclusive manga lane (Adi Da); non-zh_TW manga plans removed under
+    # OPD-20260627-001 (PRs #2215 en_US+ja_JP / #2217 ko_KR+zh_CN). See profile
+    # header config/source_of_truth/manga_profiles/brands/bright_presence_tw_seinen.yaml:7.
+    manga_locales: [zh_TW]

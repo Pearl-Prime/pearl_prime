@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Letter You Didn't Get to Send — Phoenix Omega</title>
+  <meta name="description" content="Some things only make sense on paper. A structured space to say what's left unsaid. No audience. No expectations.">
+  <meta property="og:title" content="The Letter You Didn't Get to Send — Phoenix Omega">
+  <meta property="og:description" content="A structured space to say what's left unsaid. No audience. No expectations.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0A0F; color: #F0EFE8; font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; min-height: 100vh; }
+    .container { max-width: 680px; margin: 0 auto; padding: 48px 20px 60px; }
+    .brand-tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8A82; margin-bottom: 32px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 6vw, 50px); font-weight: 500; line-height: 1.15; color: #F0EFE8; margin-bottom: 16px; }
+    .subhead { color: #8B8A82; font-size: 16px; margin-bottom: 40px; }
+    .card { background: #13131A; border-radius: 12px; padding: 32px; margin-bottom: 24px; }
+    .form-group { margin-bottom: 20px; }
+    label.field-label { display: block; font-size: 14px; color: #8B8A82; margin-bottom: 8px; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%; background: #1A1A24; border: 1px solid #2A2A3A; color: #F0EFE8;
+      border-radius: 8px; padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { border-color: #3B82F6; }
+    textarea { resize: vertical; min-height: 140px; }
+    .btn { background: #3B82F6; color: white; border: none; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s; width: 100%; }
+    .btn:hover { background: #2563EB; }
+    #tool-section { display: none; }
+    .error-msg { color: #EF4444; font-size: 13px; margin-top: 8px; display: none; }
+
+    /* Letter sections */
+    .letter-section { display: none; }
+    .letter-section.active { display: block; }
+
+    .section-indicator {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .section-dot {
+      flex: 1;
+      height: 3px;
+      background: #1E1E28;
+      border-radius: 3px;
+      transition: background 0.4s;
+    }
+    .section-dot.active { background: #3B82F6; }
+    .section-dot.done { background: #4B5563; }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #3B82F6;
+      margin-bottom: 10px;
+    }
+
+    .section-prompt {
+      font-size: 16px;
+      color: #F0EFE8;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .section-note {
+      font-size: 13px;
+      color: #8B8A82;
+      margin-bottom: 16px;
+    }
+
+    .divider-ornament {
+      text-align: center;
+      color: #2A2A3A;
+      font-size: 20px;
+      margin: 28px 0;
+      letter-spacing: 8px;
+    }
+
+    .continue-btn {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .continue-btn:hover { background: #2563EB; }
+
+    /* Full letter view (after all sections) */
+    #letter-complete { display: none; }
+
+    .complete-message {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #F0EFE8;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .complete-sub {
+      font-size: 14px;
+      color: #8B8A82;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .letter-full {
+      background: #1A1A24;
+      border: 1px solid #2A2A3A;
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .letter-full-section {
+      margin-bottom: 24px;
+    }
+
+    .letter-full-section:last-child { margin-bottom: 0; }
+
+    .letter-full-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 8px;
+    }
+
+    .letter-full-text {
+      font-size: 15px;
+      color: #F0EFE8;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+    }
+
+    .letter-divider { height: 1px; background: #2A2A3A; margin: 20px 0; }
+
+    .print-note { font-size: 13px; color: #8B8A82; text-align: center; margin-bottom: 12px; }
+
+    .btn-print {
+      background: transparent;
+      border: 1px solid #2A2A3A;
+      color: #F0EFE8;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .btn-print:hover { border-color: #3B82F6; }
+
+    .cta-banner { background: linear-gradient(135deg, #13131A 0%, #1A1A2E 100%); border: 1px solid #2A2A3A; border-radius: 12px; padding: 32px; margin-top: 40px; text-align: center; }
+    .cta-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8A82; margin-bottom: 12px; }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; color: #F0EFE8; margin-bottom: 8px; line-height: 1.3; }
+    .cta-subtitle { color: #8B8A82; font-size: 14px; margin-bottom: 24px; }
+    .cta-btn { display: inline-block; background: #3B82F6; color: white; border: none; border-radius: 8px; padding: 12px 32px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .cta-btn:hover { background: #2563EB; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #1E1E28; text-align: center; font-size: 13px; color: #8B8A82; }
+
+    @media print {
+      body { background: white; color: #111; }
+      .card { background: #f9f9f9; border: 1px solid #ddd; box-shadow: none; }
+      .letter-full { background: white; border: 1px solid #ddd; }
+      .letter-full-text { color: #111; }
+      .letter-full-label { color: #555; }
+      .btn-print, .cta-banner, footer, #form-section, .section-indicator, .continue-btn { display: none !important; }
+      .brand-tag { color: #555; }
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-ghl-webhook="">
+  <div class="container">
+    <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
+    <h1>Some things only make sense on paper.</h1>
+    <p class="subhead">A structured space to say what's left unsaid. No audience. No expectations.</p>
+
+    <!-- EMAIL CAPTURE -->
+    <div id="form-section" class="card">
+      <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get access to the letter template plus the Still Standing Series framework.</p>
+      <div class="form-group">
+        <label class="field-label" for="name">First name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="field-label" for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <p id="form-error" class="error-msg">Please enter your name and a valid email.</p>
+      <button class="btn" onclick="submitForm()">Access The Letter Template</button>
+    </div>
+
+    <!-- TOOL SECTION -->
+    <div id="tool-section">
+      <div class="card" id="letter-builder">
+        <div class="section-indicator">
+          <div class="section-dot active" id="dot-0"></div>
+          <div class="section-dot" id="dot-1"></div>
+          <div class="section-dot" id="dot-2"></div>
+          <div class="section-dot" id="dot-3"></div>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="letter-section active" id="sec-0">
+          <div class="section-tag">Opening</div>
+          <div class="section-prompt">Start with how you are right now. Not how you're supposed to be. How you actually are.</div>
+          <div class="section-note">Take as much space as you need.</div>
+          <textarea id="text-0" placeholder="Right now I am..."></textarea>
+          <button class="continue-btn" onclick="nextSection(1)">Continue</button>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="letter-section" id="sec-1">
+          <div class="section-tag">What You Miss</div>
+          <div class="section-prompt">What specifically do you miss? Not in general — specifically. The small things count.</div>
+          <div class="section-note">The particular details matter more than the general ones.</div>
+          <textarea id="text-1" placeholder="I miss..."></textarea>
+          <button class="continue-btn" onclick="nextSection(2)">Continue</button>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="letter-section" id="sec-2">
+          <div class="section-tag">What You Wish You'd Said</div>
+          <div class="section-prompt">If you had one more conversation, what would you actually say?</div>
+          <div class="section-note">You don't have to be careful here. Say the real thing.</div>
+          <textarea id="text-2" placeholder="I wish I'd told you..."></textarea>
+          <button class="continue-btn" onclick="nextSection(3)">Continue</button>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="letter-section" id="sec-3">
+          <div class="section-tag">What They Would Want for You</div>
+          <div class="section-prompt">What would they tell you right now, if they could?</div>
+          <div class="section-note">Write it as if they're speaking directly to you.</div>
+          <textarea id="text-3" placeholder="I think you would want me to..."></textarea>
+          <button class="continue-btn" onclick="completeLetter()">Complete the Letter</button>
+        </div>
+      </div>
+
+      <!-- Completed letter view -->
+      <div id="letter-complete">
+        <div class="card">
+          <div class="complete-message">The letter is complete.</div>
+          <div class="complete-sub">What you wrote belongs to you.</div>
+
+          <div class="letter-full">
+            <div class="letter-full-section">
+              <div class="letter-full-label">Opening</div>
+              <div class="letter-full-text" id="view-0"></div>
+            </div>
+            <div class="letter-divider"></div>
+            <div class="letter-full-section">
+              <div class="letter-full-label">What You Miss</div>
+              <div class="letter-full-text" id="view-1"></div>
+            </div>
+            <div class="letter-divider"></div>
+            <div class="letter-full-section">
+              <div class="letter-full-label">What You Wish You'd Said</div>
+              <div class="letter-full-text" id="view-2"></div>
+            </div>
+            <div class="letter-divider"></div>
+            <div class="letter-full-section">
+              <div class="letter-full-label">What They Would Want for You</div>
+              <div class="letter-full-text" id="view-3"></div>
+            </div>
+          </div>
+
+          <div class="print-note">Your words are not stored anywhere. Print or screenshot to keep them.</div>
+          <button class="btn-print" onclick="window.print()">Print My Letter</button>
+        </div>
+      </div>
+
+      <div class="cta-banner">
+        <div class="cta-label">Want the full system?</div>
+        <div class="cta-title">Still Standing Series:<br>The Shape of Missing</div>
+        <div class="cta-subtitle">Get Book 1 for $0.99</div>
+        <a href="https://pearlprime.shop/en-US/book/stillness_press/grief_corporate_managers_ahjan" rel="noopener" class="cta-btn">Get the Book — $0.99</a>
+      </div>
+    </div>
+
+    <footer>A free tool from Phoenix Omega — Inner Light Press</footer>
+  </div>
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('form-error').style.display = 'block';
+        return;
+      }
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
+      }
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'grief',
+        funnel_slug: 'grief-letter-template',
+        quiz_id: 'grief_letter_template',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_grief', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
+    }
+
+    function nextSection(idx) {
+      // Hide current, show next
+      document.querySelectorAll('.letter-section').forEach(s => s.classList.remove('active'));
+      document.getElementById('sec-' + idx).classList.add('active');
+
+      // Update dots
+      for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById('dot-' + i);
+        dot.classList.remove('active', 'done');
+        if (i < idx) dot.classList.add('done');
+        if (i === idx) dot.classList.add('active');
+      }
+
+      // Scroll to top of card
+      document.getElementById('letter-builder').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function completeLetter() {
+      const texts = [
+        document.getElementById('text-0').value.trim(),
+        document.getElementById('text-1').value.trim(),
+        document.getElementById('text-2').value.trim(),
+        document.getElementById('text-3').value.trim()
+      ];
+
+      // Populate full view
+      texts.forEach((t, i) => {
+        document.getElementById('view-' + i).textContent = t || '—';
+      });
+
+      // Update all dots to done
+      for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById('dot-' + i);
+        dot.classList.remove('active');
+        dot.classList.add('done');
+      }
+
+      document.getElementById('letter-builder').style.display = 'none';
+      document.getElementById('letter-complete').style.display = 'block';
+      document.getElementById('letter-complete').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {});
+});
+</script>
+</body>
+</html>

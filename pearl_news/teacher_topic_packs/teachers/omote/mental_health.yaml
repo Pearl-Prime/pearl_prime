@@ -1,0 +1,711 @@
+schema_version: 1
+teacher_id: omote
+topic: mental_health
+active: true
+identity:
+  display_name: Omote Sensei
+  attribution_name: Omote Sensei
+  tradition: Japanese spiritual-historical navigation and Yamato-gokoro awakening
+  tradition_short: Japanese spiritual-historical navigation
+  teacher_setting_options:
+  - pilgrimage route
+  - sacred site
+  teacher_years: lineage-bearing
+  affiliation_safe_line: teaches within the Japanese spiritual-historical tradition
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: inheritance_gap_overload
+    label: mental overload from witnessing what the inherited container is not built
+      to hold
+    loop: reads the headline -> jaw tightens -> puts the phone down -> picks it up
+      again because the body has no other place to put what it carries
+    body_markers:
+    - jaw
+    - chest
+    - breath
+    digital_markers:
+    - put the phone down
+    - pick it up again
+topic_fit:
+  fit_level: primary
+  fit_reason: Mental overload in a phone-native cohort is not only symptom; it is
+    the cost of being asked to witness more than the inherited container has been
+    built to hold. Omote Sensei's tradition reads the gap as inheritance, not pathology,
+    and offers sacred geography as the channel modern care does not deliver.
+  forbidden_angles:
+  - do not reduce to generic wellness
+  - do not frame the pressure as personal weakness
+  - do not use Noh theater as primary framework
+hook_personal:
+  options:
+  - id: omote_mh_hook_personal_01
+    line: You know the spiral before anyone names it. You also know that the inherited
+      toolkit — therapy, breathing apps, the screening questions — has been talking
+      at you without giving the body a place to actually put what it carries.
+    metadata:
+      semantic_family: inherited-toolkit-gap
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_personal_02
+    line: At 1 a.m. you put the phone down. The breath did not lengthen. You picked
+      it up again because the only inheritance you have for what to do with a 1 a.m.
+      body is the device itself — and the device is the thing that delivered the
+      load.
+    metadata:
+      semantic_family: midnight-no-other-inheritance
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_personal_03
+    line: The chest has been tight since the morning headline. You have done the
+      breathing app. You have done the screening. The chest is still tight — because
+      the layer the load is held in is not the layer the modern toolkit is built
+      to reach.
+    metadata:
+      semantic_family: layer-mismatch
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_personal_04
+    line: You are exhausted in a way the rest cannot touch. The sleep happens and
+      the exhaustion remains — because what you are carrying is not only personal,
+      and the inheritance that used to teach the body how to lay collective weight
+      down has thinned almost to vanishing.
+    metadata:
+      semantic_family: collective-weight-personal-rest
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_personal_05
+    line: A part of you knows the question is not how to fix yourself. The question
+      is what would it take to be inside an inheritance again — a long-view that
+      placed your load inside a longer arc than the news cycle.
+    metadata:
+      semantic_family: longer-arc-question
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: omote_mh_hook_big_01
+    line: Youth mental overload is not only about symptoms. It is what constant pressure
+      does to attention, rest, and the ability to stay human inside a culture that
+      has thinned the inheritances that used to hold each of those capacities.
+    metadata:
+      semantic_family: system-pressure
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_big_02
+    line: A generation is being asked to carry collective grief without ritual containers,
+      collective witness without intergenerational scaffolding, and collective fear
+      without the long-view that sacred geography once made available. The load is
+      not personal failure — it is architecture.
+    metadata:
+      semantic_family: missing-containers
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_big_03
+    line: The phone is now the primary delivery medium for the world's distress and
+      the primary place a young person has to put what arrives. That double role
+      is the architecture of overload — and it is not what any inheritance was designed
+      to do.
+    metadata:
+      semantic_family: device-double-role
+      angle: medium-architecture
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_big_04
+    line: Sacred geography in the Japanese tradition has held what the body could
+      not carry alone for centuries. The current question is whether a phone-native
+      generation can re-enter that geography in time for the inheritance to do the
+      work the medium was never built to do.
+    metadata:
+      semantic_family: geography-as-time-test
+      angle: tradition-meets-medium
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_hook_big_05
+    line: What gets read as a generational mental health crisis is, in part, the
+      visible edge of an inheritance gap — a culture that lost the long-view, the
+      ritual, and the lineage that used to keep collective weight from collapsing
+      into private symptom.
+    metadata:
+      semantic_family: inheritance-gap-frame
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: omote_mh_intro_01
+    line: Omote Sensei, a teacher of Japanese spiritual-historical navigation and
+      Yamato-gokoro awakening, has guided young pilgrims through Kyoto and the Yamato
+      region for decades. He has seen what overload does to a generation that has
+      been asked to witness without being given an inheritance to stand in.
+    metadata:
+      semantic_family: identity-seen-shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_intro_02
+    line: Omote Sensei teaches inside Project Phoenix, his pilgrimage and awakening
+      tour lineage based in Kyoto. He does not position himself as a mental health
+      teacher in the clinical sense — he is a guide through the sacred geography
+      that has held the long-view his tradition carries as native.
+    metadata:
+      semantic_family: guide-not-clinician
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_intro_03
+    line: Omote Sensei works from the principle that mental load is held in the body
+      and the body is held by inheritance. When the inheritance thins, the body is
+      asked to carry alone what no body was built to carry alone. His work is to
+      restore the channel between body and inheritance.
+    metadata:
+      semantic_family: body-inheritance-channel
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_intro_04
+    line: Omote Sensei has watched young pilgrims arrive already worn down by the
+      load the inherited container has not been carrying for them. In his tradition
+      Yamato-gokoro — the sincere heart-mind — is dormant rather than absent. The
+      work is to wake it inside the geography that has held it for centuries.
+    metadata:
+      semantic_family: yamato-gokoro-dormant
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_intro_05
+    line: Omote Sensei is a bilingual guide — speaking across the Japanese tradition
+      and the global generation now arriving to inherit it. His teaching is that
+      the modern toolkit was designed for symptoms, not for the inheritance gap that
+      makes the symptoms inevitable.
+    metadata:
+      semantic_family: bilingual-bridge
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+youth_somatic:
+  options:
+  - id: omote_mh_somatic_01
+    line: You read the update after midnight. Your jaw locked. You put the phone
+      face-down. Then you turned it back over because the body had no other place
+      to put the load.
+    metadata:
+      semantic_family: jaw-no-other-place
+      loop_type: midnight_overload
+      body_register: jaw
+      digital_behavior: phone face-down
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_somatic_02
+    line: You woke before the alarm. The chest was already tight. You reached for
+      the phone before you reached for the light, because the dread had arrived ahead
+      of consciousness and the device was the only ritual you had for the first hour.
+    metadata:
+      semantic_family: morning-dread-no-ritual
+      loop_type: morning_dread
+      body_register: chest
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_somatic_03
+    line: Your breath shortened mid-class when the headline arrived through a friend's
+      text. You read it. You replied with a flat emoji. The breath did not lengthen
+      again — because the only inheritance the day offered you for that moment was
+      to keep moving.
+    metadata:
+      semantic_family: breath-no-inheritance-pause
+      loop_type: classroom_alert
+      body_register: breath
+      digital_behavior: flat emoji reply
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_somatic_04
+    line: You scrolled past three crises in one minute. The stomach turned each time.
+      You did not name the turning — because the inheritance for what to do with
+      compound collective grief in 60 seconds has not been handed forward.
+    metadata:
+      semantic_family: compound-grief-fast-scroll
+      loop_type: scroll_compound
+      body_register: stomach
+      digital_behavior: rapid scroll
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_somatic_05
+    line: You lay down and the shoulders would not soften. You opened the phone to
+      escape and the same load was waiting. The body looked for a long-view and the
+      medium offered only the next post.
+    metadata:
+      semantic_family: shoulders-no-long-view
+      loop_type: sleep_resistance
+      body_register: shoulders
+      digital_behavior: open the phone to escape
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: omote_mh_witness_01
+    line: Omote Sensei has seen this exact loop in young pilgrims who arrive at the
+      Kyoto sites worn down by what the inherited container did not catch. In his
+      tradition the load is not pathology — it is Yamato-gokoro registering moral
+      weight without a ritual to lay it inside.
+    metadata:
+      semantic_family: yamato-registers-without-ritual
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_witness_02
+    line: He has watched young people walk the temple paths in silence, then sit
+      down inside the geography and feel, for the first time, that the load they
+      have been carrying has a name and a lineage. The recognition is not relief
+      first — it is the relief of being placed.
+    metadata:
+      semantic_family: placement-as-relief
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_witness_03
+    line: He has guided cohorts whose first hour at the site is spent tolerating
+      the absence of the phone. The withdrawal is the practice — and what surfaces
+      afterward is what the medium was preventing from being processed.
+    metadata:
+      semantic_family: phone-withdrawal-surfaces
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_witness_04
+    line: He has seen the moment when a young person asks, for the first time, what
+      their ancestors did with a load like this. In his tradition the question is
+      the door — the inheritance opens to whoever finally addresses it directly.
+    metadata:
+      semantic_family: ancestor-question-as-door
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_witness_05
+    line: He has watched the shift when a young pilgrim stops trying to solve the
+      load and lets the geography begin to hold it. In his tradition the shift is
+      not surrender — it is the body remembering that it was never meant to carry
+      alone.
+    metadata:
+      semantic_family: geography-takes-the-load
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: omote_mh_turnaround_01
+    stat_line_1: 320 campuses. 18 countries.
+    stat_line_2: Youth organizers are hosting peer circles, training listeners, and
+      forcing schools to treat mental health as infrastructure rather than private
+      weakness.
+    metadata:
+      semantic_family: youth-organizing-scale
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_turnaround_02
+    stat_line_1: 488 universities. JED Campus.
+    stat_line_2: The JED Foundation program now runs comprehensive mental health
+      frameworks across nearly five hundred US campuses, embedding peer support and
+      faculty training into day-to-day infrastructure rather than crisis aftermath.
+    metadata:
+      semantic_family: jed-campus-network
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_turnaround_03
+    stat_line_1: 5,600 voices. 7 countries.
+    stat_line_2: UNICEF's Global Coalition for Youth Mental Health gathered 5,600
+      young people aged 14-25 across seven countries to name the load themselves
+      before the agencies could.
+    metadata:
+      semantic_family: youth-collective-organizing
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_turnaround_04
+    stat_line_1: 14 million contacts. 988 Lifeline.
+    stat_line_2: Since the 988 Suicide and Crisis Lifeline launched in 2022, more
+      than fourteen million contacts have been routed through it — a resource pool
+      that did not exist three years ago.
+    metadata:
+      semantic_family: resource-pool-built
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_turnaround_05
+    stat_line_1: 53 member states. WHO Europe.
+    stat_line_2: The WHO Europe Child and Adolescent Health Strategy 2026-2030, adopted
+      in October 2025, binds fifty-three member states to report on adolescent mental
+      load against a 2030 deadline.
+    metadata:
+      semantic_family: policy-shift
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: omote_mh_bridge_01
+    line: 320 campuses. 18 countries. The tracker measures the workshops and peer
+      circles young people built. It does not measure the inheritance gap — the long-view,
+      ritual, and lineage that the modern toolkit has not been carrying for them.
+      Omote Sensei's tradition holds that long-view as native.
+    hidden_capacity: stand inside a long-view the toolkit does not transmit
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_bridge_02
+    line: The numbers show the scaffolding the young built. They do not show what
+      each organizer carries privately at 1 a.m. — the residue of every alert, every
+      conversation, every image the body absorbed without a place to put it.
+    hidden_capacity: address what each organizer carries privately
+    metadata:
+      semantic_family: private-residue
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_bridge_03
+    line: Policy frameworks track participation. They do not track moral exhaustion
+      — the kind that builds when a generation has been asked to witness for years
+      without ritual containers. Omote Sensei's tradition has carried such containers
+      for centuries.
+    hidden_capacity: rebuild a ritual container the toolkit does not carry
+    metadata:
+      semantic_family: moral-exhaustion-container
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_bridge_04
+    line: The data capture sessions, contacts, and policy adoptions. They cannot
+      capture the moment a young pilgrim sits inside sacred geography and feels,
+      for the first time, that what they have been carrying has a lineage. In Omote
+      Sensei's framework that moment is the relief no tracker reports.
+    hidden_capacity: register what the trackers cannot show
+    metadata:
+      semantic_family: lineage-recognition
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_bridge_05
+    line: The infrastructure is measurable. The Yamato-gokoro that conducts each
+      organizer through the load is not. Omote Sensei's tradition does not replace
+      the infrastructure work — it names the layer beneath it and offers the geography
+      that has held that layer in waking memory for generations.
+    hidden_capacity: name the layer beneath the measurement
+    metadata:
+      semantic_family: structural-vs-yamato-gokoro
+      article_types:
+      - hard_news_spiritual_response
+teacher_perspective:
+  options:
+  - id: omote_mh_perspective_01
+    header: What Omote Sensei Sees
+    paragraphs:
+    - Omote Sensei does not tell young people to calm down as if the overload were
+      a personal mistake. In his tradition the contraction they describe is Yamato-gokoro
+      registering moral weight — the sincere heart-mind doing the work it is built
+      to do. The problem is not the registering. The problem is that the inherited
+      toolkit has not given the body a place to stand inside what it carries.
+    - From there he turns to sacred geography. The temples of Nara, the shrines of
+      Kyoto, and the long-view sites of the Yamato region have held the memory of
+      collective weight for centuries. When a young pilgrim sits at one of these
+      sites, the work is not metaphor — the geography is doing part of the holding,
+      and the body recognizes that recognition before the mind does.
+    - That matters because what feels like private failure is, in his framework,
+      accurate response to an inheritance gap. The reframe does not remove the load.
+      It places it inside a tradition that has held loads like this before.
+    metadata:
+      semantic_family: teacher-diagnosis
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_perspective_02
+    header: What Omote Sensei Sees
+    paragraphs:
+    - In Omote Sensei's tradition Yamato-gokoro is the dormant inheritance — the
+      sincere heart-mind that has not been transmitted forward because the channels
+      that used to transmit it (sacred geography, ritual, intergenerational pilgrimage)
+      have been thinned by modern life. The young arrive with the capacity intact
+      and no ritual to wake it.
+    - His pilgrimage work is the ritual. Walking the Kyoto streets, sitting at the
+      Nara temple gates, standing inside the long-view of Yamato itself — these are
+      not tourism. They are activation. The geography is the teacher; he is the
+      bilingual guide.
+    - For a generation carrying mental load without a container, this is not another
+      instruction stack. It is a different mode of contact with what has come before.
+      The relief is not that the load lifts — it is that the load finally has a place
+      to be carried.
+    metadata:
+      semantic_family: dormant-inheritance
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_perspective_03
+    header: What Omote Sensei Sees
+    paragraphs:
+    - Spiritual history navigation is Omote Sensei's term for what he teaches. History
+      in his tradition is not a closed archive — it is a living field, and the cycles
+      of collective weight and restoration that the Yamato region has held are still
+      active in the geography. To walk the path is to enter that field.
+    - He does not promise the field removes the pain of the load. He promises it
+      gives the witness a lineage — a long-view that places the current weight inside
+      a longer arc than the modern news cycle, by design, can carry.
+    - In his framework the inability to find that arc inside the phone is not personal
+      failure. It is the architectural limit of the medium. The body has been asking
+      for a different scale of container, and the geography is one of the few that
+      has held.
+    metadata:
+      semantic_family: spiritual-history-navigation
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_perspective_04
+    header: What Omote Sensei Sees
+    paragraphs:
+    - Project Phoenix is the name Omote Sensei gives his pilgrimage work — the deliberate
+      activation of Yamato-gokoro in those arriving with loads the inherited toolkit
+      cannot hold. The name is not metaphor. The tradition holds that the inheritance
+      itself rises again when the conditions are arranged for it.
+    - For young people whose 1 a.m. is the phone and the day's headlines, those conditions
+      are not abstract. They are walking, silence, the absence of the phone, the
+      presence of a guide who is bilingual in the inheritance and the modernity that
+      has thinned it.
+    - The reframe matters because the modern read of mental overload is private failure.
+      In Omote Sensei's framework it is a culture that has not transmitted the inheritance
+      forward. The shift from private to inherited is the part that, in pilgrimage
+      practice, often lands first.
+    metadata:
+      semantic_family: project-phoenix-conditions
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_perspective_05
+    header: What Omote Sensei Sees
+    paragraphs:
+    - The principle Omote Sensei returns to is that mental overload is not a private
+      malfunction but a witness function operating without the scaffolding that used
+      to hold it. The body has not broken. The architecture around it has thinned.
+    - When the sacred geography re-enters the picture, the witness function is held
+      by something larger than the individual. In his tradition that is not metaphor
+      — the geography has been doing this work for centuries, and the body recognizes
+      the holding before the mind has language for it.
+    - For a phone-native cohort, the question is not whether to abandon the medium.
+      The question is whether the inheritance can be re-entered in time for the body
+      to remember that it was never meant to carry alone. Omote Sensei teaches that
+      it can be, and that the entry point is the geography itself.
+    metadata:
+      semantic_family: witness-without-scaffolding
+      article_types:
+      - hard_news_spiritual_response
+practice:
+  default_id: omote_mh_practice_01
+  options:
+  - id: omote_mh_practice_01
+    display_name: Yamato-gokoro Settling
+    duration: 4 minutes
+    announcement_line: Omote Sensei teaches a 4-minute Yamato-gokoro Settling practice
+      for moments when the load has built up faster than the body could lay it down.
+      It is in the sidebar, brief and usable inside ordinary life.
+    relief_lines:
+    - The contraction stops being read as weakness and is recognized as the heart-mind
+      registering weight it was built to register.
+    - Enough steadiness returns for the next honest move.
+    relief_register:
+    - settle
+    - heart-mind
+    - witness
+    derived_from_frame: yamato_gokoro_settling
+    metadata:
+      semantic_family: yamato-gokoro-settling
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_practice_02
+    display_name: Sacred Geography Recall
+    duration: 3 minutes
+    announcement_line: Omote Sensei offers a 3-minute Sacred Geography Recall — a
+      practice that places imagined feet on a remembered sacred site so the body
+      can register that the long-view exists even at 1 a.m. with only the device
+      available. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body registers a long-view that the medium is not built to carry.
+    - The load finds a container older than the toolkit delivering it.
+    relief_register:
+    - recall
+    - long-view
+    - geography
+    derived_from_frame: sacred_geography_recall
+    metadata:
+      semantic_family: sacred-geography-recall
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_practice_03
+    display_name: Spiritual-Historical Navigation Pause
+    duration: 7 minutes
+    announcement_line: Omote Sensei teaches a 7-minute Spiritual-Historical Navigation
+      Pause — placing the current load inside the long arc of cycles the tradition
+      has held before. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The current weight is placed inside a longer arc than the news cycle can show.
+    - The body remembers that cycles of restoration have followed cycles of weight
+      before.
+    relief_register:
+    - navigate
+    - arc
+    - restoration
+    derived_from_frame: spiritual_historical_pause
+    metadata:
+      semantic_family: spiritual-historical-pause
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_practice_04
+    display_name: Ancestor Lineage Inquiry
+    duration: 5 minutes
+    announcement_line: Omote Sensei teaches a 5-minute Ancestor Lineage Inquiry —
+      a quiet asking of what the inheritance carried in moments like this one, without
+      requiring a clean answer to arrive. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The question itself opens a door the medium has closed.
+    - The witness stops being alone with the load.
+    relief_register:
+    - inquire
+    - inheritance
+    - ancestor
+    derived_from_frame: ancestor_lineage_inquiry
+    metadata:
+      semantic_family: ancestor-lineage-inquiry
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_practice_05
+    display_name: Project Phoenix Pause Breath
+    duration: 3 minutes
+    announcement_line: Omote Sensei offers a 3-minute Project Phoenix Pause Breath
+      for the moments between checks, when the body has been carrying the load without
+      permission to lay it down. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The breath becomes a marker for the inheritance, not the medium.
+    - The body returns to a pace the heart-mind recognizes as its own.
+    relief_register:
+    - breath
+    - phoenix
+    - inheritance
+    derived_from_frame: project_phoenix_breath
+    metadata:
+      semantic_family: project-phoenix-breath
+      article_types:
+      - hard_news_spiritual_response
+sdg:
+  primary:
+    id: SDG 3
+    title: Good Health and Well-Being
+    line: The United Nations framework includes mental health and wellbeing in SDG
+      3.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
+cta:
+  options:
+  - id: omote_mh_cta_01
+    org: Crisis Text Line
+    line: 'If you or someone you know is in crisis, Crisis Text Line provides free,
+      24/7 support. Text HOME to 741741. Door in: join their network.'
+    metadata:
+      semantic_family: door-in-crisis-text
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_cta_02
+    org: 988 Suicide and Crisis Lifeline
+    line: 'If you or someone you know is in crisis, the 988 Suicide and Crisis Lifeline
+      provides free, 24/7 support across the United States. Call or text 988. Door
+      in: their network has handled more than fourteen million contacts since 2022.'
+    metadata:
+      semantic_family: door-in-988-lifeline
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_cta_03
+    org: The Trevor Project
+    line: 'If you are LGBTQ+ and under 25 and in crisis, The Trevor Project provides
+      free, 24/7 support by text, chat, or call. Text START to 678-678. Door in: a
+      network built for the specific cohort.'
+    metadata:
+      semantic_family: door-in-trevor-project
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_cta_04
+    org: NAMI HelpLine
+    line: 'For information, referrals, and peer support on mental health, the NAMI
+      HelpLine is available Monday through Friday. Call 1-800-950-NAMI (6264) or
+      text "HelpLine" to 62640. Door in: connect to the National Alliance on Mental
+      Illness network.'
+    metadata:
+      semantic_family: door-in-nami
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_mh_cta_05
+    org: Active Minds
+    line: 'Active Minds runs peer-led mental health communities on more than 650
+      US campuses. If a campus chapter exists where you are, it is a low-friction
+      door in.'
+    metadata:
+      semantic_family: door-in-active-minds
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: omote_mh_headline_01
+      line: A Kyoto-based teacher of Japanese spiritual-historical navigation reads
+        mental overload as Yamato-gokoro asking for a container the modern toolkit
+        has not built.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_mh_headline_02
+      line: Sacred geography, not symptom alone — Omote Sensei on the inheritance
+        gap behind the youth load.
+      metadata:
+        semantic_family: geography-not-symptom
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_mh_headline_03
+      line: Spiritual-historical navigation meets a phone-native cohort — Project
+        Phoenix and the long-view the body has been asking for.
+      metadata:
+        semantic_family: project-phoenix-meets-cohort
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_mh_headline_04
+      line: Yamato-gokoro, the sincere heart-mind — what an Omote Sensei pilgrimage
+        wakes that the screening tools cannot reach.
+      metadata:
+        semantic_family: yamato-gokoro-wake
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_mh_headline_05
+      line: Walking, silence, and the geography that holds — a Japanese teacher on
+        the inheritance gap behind a generation's mental load.
+      metadata:
+        semantic_family: inheritance-gap-frame
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    intensity_range:
+    - 2
+    - 4

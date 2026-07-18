@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__compassion_fatigue__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__compassion_fatigue.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__depletion
+  name: Refill the Empty Well — for Managers
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Compassion Fatigue: The Space Between You and Your Anxiety'
+subtitle: How Corporate Managers Are Rewriting the Rules of Compassion Fatigue
+cover_tagline: Off the clock, still scanning your team for who's about to break. This
+  is for that.
+description:
+  short_blurb: Caring for a team can leave you permanently on alert — reading every
+    silence, bracing for the next person to fall apart, even on your own time. This
+    is a real-talk guide for the manager whose care turned into hypervigilance, and
+    how to find space between you and the worry that never sleeps.
+  long_description: 'It''s Saturday. You are, in theory, off. But you caught the tone
+    of someone''s message right before you logged off Friday, and your mind will not
+    release it — is she okay, is he about to quit, did the quiet one in the standup
+    go quiet for a reason. You aren''t managing right now. You''re surveilling. Combing
+    your team for the next hairline crack, the next person about to give way, running
+    silent threat assessments on other people''s feelings during what is supposed
+    to be your own life.
+
+
+    This is the strangest mutation of compassion fatigue: the moment caring hardens
+    into a watch you can''t stand down from. You grew so finely tuned to your team''s
+    wellbeing that the tuning stopped having an off switch. You read every pause in
+    a chat thread as distress. You lie awake taking inventory of who seems fragile.
+    You can''t get through a weekend without some background process standing sentry
+    over everyone else''s emotional weather. It came from a good place — that attunement
+    is the very thing that makes people feel safe with you. But it has become a tower
+    you can''t climb down from, and the people you''re guarding have no idea you''re
+    still on duty at midnight.
+
+
+    What this book does is help you see the sentry clearly. It''s care that got trapped
+    in scanning mode and started mistaking surveillance for leadership, vigilance
+    for love. You''re not here to amputate your empathy — losing it is the last thing
+    you''d want. You''re here to step outside the watching long enough to look at
+    it, rather than living permanently inside it. You learn to catch yourself mid-scan.
+    You feel the line between genuinely caring about your people and compulsively
+    monitoring them for harm. You pry open a little space between yourself and the
+    dread, and you learn to breathe in there.
+
+
+    On the other side of that, the care is still intact — warm, attuned, the thing
+    your people rely on — but it''s no longer fused to the fear running underneath
+    it. You set the watch down deliberately, the way you''d hand off a shift, instead
+    of carrying it twenty-four hours a day as though their wellbeing lives or dies
+    on your attention.
+
+
+    There''s no off switch for empathy on offer here, and no tidy routine that finally
+    hushes the worried mind. The watching runs deep and it means well; peace isn''t
+    ending the care, it''s refusing to be governed by the fear beneath it. What you
+    take away is distance from the dread — the space where you choose when to tune
+    in, rather than monitoring without rest.
+
+
+    Your team can make it through a weekend without your eyes on them. You''re allowed
+    to come down from the tower and let your care, for once, rest too.'
+keywords:
+  primary:
+  - compassion fatigue
+  - caregiver burnout
+  - caring too much
+  - empathy fatigue
+  - helper burnout
+  - caregiver stress
+  secondary:
+  - managers
+  - compassion fatigue for managers
+bisac_codes:
+- SEL027000
+- SOC026000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — separating real care from over-responsibility
+- Don't Believe Everything You Think (Joseph Nguyen) — releasing the looping worry-thoughts
+- Trauma Stewardship (Laura van Dernoot Lipsky) — staying whole while holding others'
+  wellbeing
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

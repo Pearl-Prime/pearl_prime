@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__somatic_healing__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__somatic_healing.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__through_loss
+  name: Through the Low Places — for First Responders
+installment_number: 2
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Somatic Healing: The Witnessing Practice (1)'
+subtitle: A Field Guide for First Responders Navigating Somatic Healing
+cover_tagline: Your body is still scanning the scene long after the scene is clear.
+description:
+  short_blurb: 'For the first responder whose body never stood down: the back that
+    won''t face a door, the system that reads every room for threat, the alarm that
+    runs whether or not there''s danger. This is a real-talk book about hypervigilance
+    held in the body, not the mind. There''s no ''just breathe'' here. There''s an
+    honest look at the part of you that''s still on scene when there''s no scene left.'
+  long_description: 'The scene was cleared hours ago. Your body never got the message.
+    You still angle the chair so you can see the door. Your skin reads the room before
+    your conscious mind does, who''s off, what''s wrong, where the exit is. A sound
+    at the wrong pitch and you''re already half out of your seat, heart going, scanning,
+    before the thinking part of you has even caught up to what happened. Everyone
+    calls it good instincts. Nobody calls it what it actually is, which is a body
+    that has been on scene so long it has forgotten how to leave one.
+
+
+    This book is for the patrol officer, the firefighter, the paramedic, the dispatcher
+    whose hypervigilance isn''t a mindset you could talk yourself out of. It''s wired
+    into the body. The watcher lives in your gut and your spine and your startle reflex,
+    not in your thoughts. It kept you alive by reading danger faster than thought
+    ever could. The problem is that it does not know the call is over. It runs your
+    body at home, in bed, at the table, in line at the store, scanning for a threat
+    that isn''t there, and the constant physical readiness has worn a groove in you
+    that nothing seems able to smooth back out.
+
+
+    Marcus Reed writes for the dispatcher whose body stays on post long after they''ve
+    clocked out and gone home. The recognition comes first, the understanding that
+    the scanning, the startle, the back-to-the-wall instinct are not paranoia. They
+    are your nervous system standing guard with the only setting it was ever given.
+    Then the descent. Instead of fighting the vigilance or trying to think your way
+    calm, which never works on a body, you go down into the body that''s holding it.
+    Where the watch is actually kept. The call that taught it to never stop reading
+    the room. What it is still bracing against in a body that is, by every external
+    measure, safe. Integration is not ordering your body to feel safe, which it has
+    never once done on command. It is letting it learn slowly, in the tissue and not
+    in the head, that the scene is clear and it is finally allowed to come off post.
+
+
+    This will not tell you to just breathe. Your body knows the exact difference between
+    a breathing exercise and an actual all-clear, and you can''t fake the second one.
+    It will not hand you a routine that overrides instinct, and it will not treat
+    a threat-wired nervous system like a glitch to be patched. There is no shortcut
+    that talks a body out of what it learned in the field the hard way.
+
+
+    What there is instead is language for the watch your body keeps, so the next time
+    you catch yourself reading a safe room for danger you can name it and let your
+    body stand down by one degree on purpose. You have kept the body on post long
+    enough. You are allowed to let it come home. Standing down is not dropping your
+    guard. It is letting your body finally believe the call is over.'
+keywords:
+  primary:
+  - somatic healing
+  - body based healing
+  - nervous system regulation
+  - trauma in the body
+  - somatic therapy
+  - felt sense
+  secondary:
+  - first responders
+  - somatic healing for first responders
+bisac_codes:
+- SEL027000
+- PSY022000
+- HEA046000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- The Body Keeps the Score by Bessel van der Kolk
+- Waking the Tiger by Peter Levine
+- Widen the Window by Elizabeth Stanley
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

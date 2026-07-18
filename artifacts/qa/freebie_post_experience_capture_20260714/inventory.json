@@ -1,0 +1,159 @@
+{
+  "brand_id": "way_stream_sanctuary",
+  "campaign_payload_fields_preserved": [
+    "phoenix_e1_*",
+    "phoenix_e2_*",
+    "phoenix_e3_story_body",
+    "phoenix_bonus_pre_e3_*"
+  ],
+  "delivery_channels": [
+    "whatsapp",
+    "telegram",
+    "email",
+    "line",
+    "messenger"
+  ],
+  "page_count": 15,
+  "pages": [
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "breath_timer_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/anxiety-nervous-system-reset/index.html",
+      "slug": "anxiety-nervous-system-reset",
+      "topic": "anxiety",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "conversation_scripts_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/boundaries-script-kit/index.html",
+      "slug": "boundaries-script-kit",
+      "topic": "boundaries",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "companion_core_v2",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/burnout-energy-audit/index.html",
+      "slug": "burnout-energy-audit",
+      "topic": "burnout",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "burnout_checklist_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/compassion-fatigue-audit/index.html",
+      "slug": "compassion-fatigue-audit",
+      "topic": "compassion_fatigue",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "resistance_mapping_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/courage-decision-map/index.html",
+      "slug": "courage-decision-map",
+      "topic": "courage",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "thirty_day_tracker_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/depression-momentum-kit/index.html",
+      "slug": "depression-momentum-kit",
+      "topic": "depression",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "anxiety_assessment_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/financial-anxiety-check-in/index.html",
+      "slug": "financial-anxiety-check-in",
+      "topic": "financial_anxiety",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "journal_reflection_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/financial-stress-audit/index.html",
+      "slug": "financial-stress-audit",
+      "topic": "financial_stress",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "journal_reflection_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/grief-letter-template/index.html",
+      "slug": "grief-letter-template",
+      "topic": "grief",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "accountability_partner_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/imposter-evidence-log/index.html",
+      "slug": "imposter-evidence-log",
+      "topic": "imposter_syndrome",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "anxiety_assessment_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/overthinking-thought-sorter/index.html",
+      "slug": "overthinking-thought-sorter",
+      "topic": "overthinking",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "identity_sheet_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/self-worth-inventory/index.html",
+      "slug": "self-worth-inventory",
+      "topic": "self_worth",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "breath_timer_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/sleep-anxiety-wind-down/index.html",
+      "slug": "sleep-anxiety-wind-down",
+      "topic": "sleep_anxiety",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "emergency_kit_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/social-anxiety-toolkit/index.html",
+      "slug": "social-anxiety-toolkit",
+      "topic": "social_anxiety",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    },
+    {
+      "capture_timing_after": "tool_first_report_after_completion",
+      "capture_timing_before": "mixed_email_first_or_email_before_result",
+      "freebie_id": "breath_reset_structured_v1",
+      "path": "brand-wizard-app/public/free/way_stream_sanctuary/somatic-body-scan/index.html",
+      "slug": "somatic-body-scan",
+      "topic": "somatic_healing",
+      "webhook_exposure": "sanitized_empty_body_attr"
+    }
+  ],
+  "shared_js": [
+    "brand-wizard-app/public/free/js/phoenix_lead.js",
+    "brand-wizard-app/public/free/js/phoenix_funnel.js",
+    "brand-wizard-app/public/free/js/phoenix_tool.css"
+  ]
+}

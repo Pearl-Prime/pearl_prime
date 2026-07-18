@@ -1,0 +1,452 @@
+schema_version: 1.0.0
+genre: dark_fantasy
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  grief: strategy_01
+  despair: strategy_02
+  meaning: strategy_03
+  perseverance: strategy_04
+  loss: strategy_05
+character_pool:
+  protagonist:
+  - Vesper Holt
+  - Sera of the Ash Marches
+  - Kael Dray
+  - Wren the Last
+  - Ingrid Vael
+  companion:
+  - a centuries-old archivist who measures grief in seasons, not days
+  - a blind ferryman who knows every name the war took
+  - a young hedge-priest who has not yet learned to look away from the dead
+  - a worn mercenary-mentor who buried more friends than she can count
+  - a quiet apothecary who tends the dying and asks nothing in return
+  setting:
+  - a battlefield reclaimed by frost and white grass
+  - a half-drowned cathedral where bells still toll in the wind
+  - the long road between two ruined waystations
+  - a winter forest where the trees outlived the village
+  - a graveyard the maps have forgotten
+strategies:
+  strategy_01:
+    name: The One Who Stays Behind
+    archetype_template: damaged_carrier_outlives_everyone
+    description: 'GRIEF as outliving everyone you loved — the Frieren register. The protagonist''s lifespan,
+      or simply their survival, has outrun every companion they ever had; grief is not one funeral but
+      the slow accumulation of empty chairs. The device is the long memory: a world that forgets faster
+      than the carrier can. Grief is never resolved within the chapter, only learned as a weight one carries
+      differently. Opens on cost, closes on an image the reader holds.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, at the hour the light goes thin. A single weathered marker stands where a name
+          used to be legible. No one in frame. The wind has been wearing this place down for longer than
+          anyone now living remembers.'
+        camera_hint: env_transition_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} enters small against the ruin and kneels at the stone. They clear the moss
+          from the carving the way you tend something you have tended a hundred times before. Their face
+          does not change. That is the tell.'
+        camera_hint: figure_located_in_ruin
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 3
+        text: 'They speak a name aloud to the empty graveyard — then a second, then a third, the litany
+          of a whole generation. The reader understands the arithmetic without being shown a single funeral:
+          everyone in this ground was once someone {protagonist} walked beside.'
+        camera_hint: wound_echo_close
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 4
+        text: '{companion} waits a respectful distance back, then says only: ''You knew them all.'' Not
+          a question. They do not offer comfort — they offer the simple fact of being witnessed, which
+          is the first warmth in the chapter.'
+        camera_hint: warmth_moment_two_shot
+        mood_hint: ember_warmth
+        is_carrier: true
+      - beat: 5
+        text: '{companion} sets down a small ordinary thing — bread, a flask, a folded cloth — and they
+          share it sitting against the cold stone. For one panel the grief is not lighter, only borne
+          by two backs instead of one.'
+        camera_hint: tenderness_amid_cost
+        mood_hint: ember_warmth
+        is_carrier: false
+      - beat: 6
+        text: '{protagonist} almost says the thing they have never said to anyone — that they have begun
+          to forget a voice, a laugh, the exact color of someone''s eyes. The body holds it. The words
+          stay behind the teeth.'
+        camera_hint: interior_contradiction_close
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 7
+        text: 'Silence hold. Three beats with no words: wind moving the white grass, {protagonist}''s
+          hand flat against the carved name, the long road beyond the gate going pale in the dusk. The
+          chapter breathes out.'
+        camera_hint: silence_hold_sequence
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} stands. They do not wipe their eyes — there is nothing to wipe. They simply
+          gather their pack and turn toward the road, because the dead are not waiting and the living,
+          for now, still are. The choice lives in the feet.'
+        camera_hint: threshold_step
+        mood_hint: stark_white
+        is_carrier: true
+      - beat: 9
+        text: 'Ambiguous-forward final image: {protagonist} and {companion} walking out the forgotten
+          gate, the markers small behind them, the dusk swallowing the road ahead. No resolution. The
+          image rhymes with the opening stone at a deeper key — the reader understands a grief they had
+          no language for.'
+        camera_hint: ambiguous_forward_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a_name_spoken_to_an_empty_field
+        ch2: the_litany_that_does_not_end
+        ch3: two_figures_walking_from_the_graves_they_tend
+  strategy_02:
+    name: The Long Dark
+    archetype_template: walking_blind_through_the_endless_night
+    description: 'DESPAIR as the night that will not end. The device is literal: a darkness, a winter,
+      a journey through blind country where dawn keeps failing to arrive. The protagonist has lost the
+      belief that the road leads anywhere — they walk because the alternative is to lie down in the snow.
+      Despair is never argued away; it is outlasted by one more step. The turn is not hope restored but
+      the smallest refusal to stop, externalised in the body.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting} under a dark that has gone on too long — a winter with no thaw, a night the sun
+          keeps under-rising. A guttered lantern, almost out. No one in frame yet. The world has simply
+          stopped offering light.'
+        camera_hint: env_transition_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} trudges into frame bent against the cold, the dying lantern in one fist.
+          Each step costs more than the last and yields the same grey nothing. They have stopped looking
+          up at where the horizon should be.'
+        camera_hint: figure_located_in_ruin
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 3
+        text: They reach a waystation and find it cold, the fire long dead, the door swinging. The thing
+          they were walking toward is not here, and was perhaps never going to be. {protagonist} stands
+          very still in the doorway — the stillness of someone deciding whether to keep going at all.
+        camera_hint: cost_object_close
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 4
+        text: '{companion} is there in the dark — already inside, or arriving behind — and does not say
+          it will be all right. They say: ''I lost the road too, once. I am still here.'' A fact, not
+          a promise. The first warmth, and it is only a body in the same cold.'
+        camera_hint: warmth_moment_two_shot
+        mood_hint: ember_warmth
+        is_carrier: true
+      - beat: 5
+        text: '{companion} strikes a spark to the dead hearth — it catches small and low, nowhere near
+          enough to warm the room. But it is light, and they both watch it the way the half-frozen watch
+          any fire at all.'
+        camera_hint: tenderness_amid_cost
+        mood_hint: ember_warmth
+        is_carrier: false
+      - beat: 6
+        text: The weight presses back harder. {protagonist} looks at the tiny flame and the vast dark
+          beyond the broken door and the body wants, plainly, to sit down and not rise. They feel the
+          pull of it. They do not name it.
+        camera_hint: interior_contradiction_close
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 7
+        text: 'Silence hold. Three beats, no words: the small flame leaning in the draft, snow falling
+          slow past the doorway, {protagonist}''s breath going out in a long visible plume that does not
+          stop. The chapter holds its breath with them.'
+        camera_hint: silence_hold_sequence
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} bends, lifts a coal from the new fire into the dead lantern, and shields
+          it with one hand. Not hope — maintenance. They will carry this small light into the dark because
+          that is the only thing left to do with it. The refusal lives in the hands.'
+        camera_hint: threshold_step
+        mood_hint: stark_white
+        is_carrier: true
+      - beat: 9
+        text: 'Ambiguous-forward final image: {protagonist} stepping back out into the unbroken night,
+          the relit lantern a single point of warmth swallowed almost at once by the dark, {companion}
+          a half-step behind. No dawn. No promise of one. Only the walking, continued.'
+        camera_hint: ambiguous_forward_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a_coal_carried_into_the_dark
+        ch2: the_dawn_that_does_not_come
+        ch3: one_small_light_against_an_endless_night
+  strategy_03:
+    name: Why We Keep Walking
+    archetype_template: the_quest_with_no_reward_at_the_end
+    description: MEANING as the unanswerable question — why keep walking when the war is lost, the quest
+      yields no prize, the gods are silent. The device is the long pilgrimage with no shrine at its end.
+      The protagonist has done the asking and gotten no answer; meaning is not handed down but found,
+      sideways, in the act itself. The turn is not a revelation explained but a quiet recognition lived
+      through the body — never a speech about purpose.
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting} at the end of a road that simply stops — a shrine fallen, an altar empty, the
+          destination revealed to hold nothing. No one in frame. Whatever was promised here is long gone,
+          if it was ever real.'
+        camera_hint: env_transition_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} arrives at the empty altar after what the dust on their boots says was a
+          very long way. They wait, the way the faithful wait. Nothing answers. The silence where a sign
+          should be is its own kind of wound.'
+        camera_hint: figure_located_in_ruin
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 3
+        text: 'They set down the thing they carried all this way to lay here — and the gesture lands in
+          emptiness. No witness, no reward, no voice from the dark. {protagonist}''s shoulders ask the
+          question the caption never will: then what was any of it for.'
+        camera_hint: wound_echo_close
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 4
+        text: '{companion} has walked the whole road too and does not pretend to know the answer. They
+          say only: ''I came because you came.'' Not wisdom — company. The first warmth, and it points
+          at something the empty altar could not.'
+        camera_hint: warmth_moment_two_shot
+        mood_hint: ember_warmth
+        is_carrier: true
+      - beat: 5
+        text: On the way back down, they pass others on the road — a child given water, a stranger shown
+          the path, a grave they pause to right. None of it was the point of the journey. All of it happened
+          because of it.
+        camera_hint: tenderness_amid_cost
+        mood_hint: ember_warmth
+        is_carrier: false
+      - beat: 6
+        text: '{protagonist} stops on the ridge and looks back at the empty shrine, then down at the road
+          full of the small things that happened on the way to it. Something reorders behind their eyes.
+          They do not say what. The body knows before the mind would let it speak.'
+        camera_hint: interior_contradiction_close
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 7
+        text: 'Silence hold. Three beats, no words: the empty shrine small in the distance, {protagonist}''s
+          open hand where the offering used to be, the long road behind them catching the last light.
+          The chapter rests in the unsaid.'
+        camera_hint: silence_hold_sequence
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} turns from the shrine that gave nothing and starts back down the road that
+          gave everything, walking now like someone who has stopped waiting to be told why. The answer
+          was never going to come from the altar. The walking lives in the feet.'
+        camera_hint: threshold_step
+        mood_hint: stark_white
+        is_carrier: true
+      - beat: 9
+        text: 'Ambiguous-forward final image: {protagonist} and {companion} descending the road back into
+          the inhabited world, the empty shrine forgotten behind them, a stranger''s distant figure on
+          the path ahead. No doctrine. No declared purpose. The image rhymes with the empty altar — meaning
+          was in the road, not the end of it.'
+        camera_hint: ambiguous_forward_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: an_offering_laid_on_an_empty_altar
+        ch2: the_shrine_that_gives_no_answer
+        ch3: a_pilgrim_turning_back_toward_the_living
+  strategy_04:
+    name: The Scar That Holds the Blade
+    archetype_template: the_wound_reshapes_the_carrier_into_something_that_holds
+    description: 'PERSEVERANCE as the wound that becomes strength — not by healing but by being incorporated.
+      The device is the old injury that has reshaped how the protagonist stands, grips, fights: the hand
+      that no longer closes all the way now closes differently, and it holds. Perseverance is never declared
+      (the bible forbids ''he refused to give up''); it is shown as a body that has learned to move around
+      its breaking. The turn is the moment the scar takes the weight.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting} after a fight long over — a slope of frost-burned grass, a blade left standing
+          in the ground where someone fell. No one in frame. The cost of this place was paid a long time
+          ago and never refunded.'
+        camera_hint: env_transition_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} enters and lifts the blade with a hand that does not fully close — old damage,
+          an injury read in the careful, altered grip. The first attempt to raise it fails. The arm has
+          a memory of being broken.'
+        camera_hint: figure_located_in_ruin
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 3
+        text: They try the old form and the body refuses it — the stance that used to be theirs no longer
+          fits the shape they were left in. {protagonist} lowers the blade, breathing hard. The reader
+          sees the failure the protagonist narrates around with silence.
+        camera_hint: wound_echo_close
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 4
+        text: '{companion}, who carries scars of her own, watches and does not coach. She says: ''Stop
+          fighting the way you used to be. The hand you have is the hand you have.'' Not encouragement
+          — a fact about the body. The first warmth, and it is hard.'
+        camera_hint: warmth_moment_two_shot
+        mood_hint: ember_warmth
+        is_carrier: true
+      - beat: 5
+        text: '{companion} shows her own altered grip, her own compensating stance — the place where she,
+          too, was broken and learned to stand crooked-but-rooted. They share the silence of two bodies
+          that no longer work the way they were built to.'
+        camera_hint: tenderness_amid_cost
+        mood_hint: ember_warmth
+        is_carrier: false
+      - beat: 6
+        text: '{protagonist} stops trying to force the old form. They let the wounded hand find its own
+          way around the grip — lower, turned, wrong by every manual and right for the body they actually
+          have. Something settles. They do not announce it.'
+        camera_hint: interior_contradiction_close
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 7
+        text: 'Silence hold. Three beats, no words: the altered grip closing slow around the hilt, frost-breath
+          in the cold air, the blade lifting an inch, then steady. No dialogue. The chapter holds the
+          held weight.'
+        camera_hint: silence_hold_sequence
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} raises the blade fully now — through the scar, not despite it — and the broken
+          hand holds. The strength was never in being unbroken. It is in the shape the breaking left,
+          finally trusted. The perseverance lives in the grip.'
+        camera_hint: threshold_step
+        mood_hint: stark_white
+        is_carrier: true
+      - beat: 9
+        text: 'Ambiguous-forward final image: {protagonist} sheathing the blade and turning toward the
+          next stretch of road, the scarred hand resting easy now on the hilt, {companion} beside her.
+          No triumph, no cure. The image rhymes with the failed first lift — the wound did not close;
+          it became load-bearing.'
+        camera_hint: ambiguous_forward_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a_broken_hand_that_finally_holds
+        ch2: the_old_form_set_down_for_a_truer_one
+        ch3: a_blade_lifted_through_the_scar_not_despite_it
+  strategy_05:
+    name: The Empty Place at the Table
+    archetype_template: the_absence_that_keeps_the_shape_of_what_is_gone
+    description: 'LOSS as the absence that keeps its shape — the chair no one sits in, the second cup
+      still set out, the room kept exactly as it was. The device is the preserved space of the missing:
+      loss made visible by the outline it leaves. The protagonist arranges their whole life around an
+      emptiness, and the turn is not letting go but the first honest acknowledgment that the place is
+      empty — carried, never explained. Closes on an image, never a lesson.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting} where a hearth is set for two and only one is ever warmed — a second chair, a
+          second cup, a coat still hung by a door no one comes through. No one in frame. The room is arranged
+          around someone who is not here.'
+        camera_hint: env_transition_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} enters and moves through the careful ritual of two — pours the second cup,
+          sets the second place, leaves the chair untouched. The body performs the shape of a life that
+          ended without admitting it ended.'
+        camera_hint: figure_located_in_ruin
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 3
+        text: Their hand rests a moment too long on the back of the empty chair. The reader reads the
+          whole loss in the gesture — who sat here, that they will not again — without a single line of
+          caption naming it. The absence has more weight than any presence in the room.
+        camera_hint: wound_echo_close
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 4
+        text: '{companion} comes in from the cold and sees the two cups, the kept chair. They do not move
+          it. They simply sit in their own place, leaving the empty one empty, honoring the shape without
+          erasing it. The first warmth, and it asks for nothing.'
+        camera_hint: warmth_moment_two_shot
+        mood_hint: ember_warmth
+        is_carrier: true
+      - beat: 5
+        text: They share the meal in the company of the absence, the kept place between them like a third
+          presence. {companion} speaks of the missing one by name, easily, as if they were simply elsewhere
+          — and for one panel the room is less a shrine and more a memory shared.
+        camera_hint: tenderness_amid_cost
+        mood_hint: ember_warmth
+        is_carrier: false
+      - beat: 6
+        text: After {companion} sleeps, {protagonist} sits alone with the second cup gone cold and finally
+          looks at the empty chair as empty — not as a place being kept, but as a place that is gone.
+          The body sags into the truth it has been standing against for a long time.
+        camera_hint: interior_contradiction_close
+        mood_hint: deep_shadow
+        is_carrier: true
+      - beat: 7
+        text: 'Silence hold. Three beats, no words: the cold untouched cup, the firelight on the worn
+          back of the empty chair, {protagonist}''s hand opening slowly in their lap as if setting something
+          down. No dialogue. The chapter sits in the absence.'
+        camera_hint: silence_hold_sequence
+        mood_hint: fog_wash
+        is_carrier: true
+      - beat: 8
+        text: In the grey of morning {protagonist} sets out only one cup. Not forgetting — knowing. They
+          leave the chair where it is, because the shape of the loss is allowed to stay; they simply stop
+          pretending it will be filled. The acknowledgment lives in the single cup.
+        camera_hint: threshold_step
+        mood_hint: stark_white
+        is_carrier: true
+      - beat: 9
+        text: 'Ambiguous-forward final image: {protagonist} at the table with one cup and the still-empty
+          chair beside them, the coat still by the door, morning light coming thin through the window.
+          Nothing restored, nothing erased. The image rhymes with the opening two-set hearth — the place
+          is empty now, and known to be, and that is its own quiet kind of carrying on.'
+        camera_hint: ambiguous_forward_wide
+        mood_hint: ash_grey_stillness
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a_single_cup_where_two_used_to_be
+        ch2: the_chair_that_keeps_its_shape
+        ch3: an_empty_place_finally_seen_as_empty
+anti_pattern_rules:
+- forbidden_combination:
+  - caption_states_the_feeling
+  - she_felt_grief
+  - internal_monologue_names_the_emotion
+  reason: 'The cardinal sin of the lane bible: the wound is NAMED, never explained. A caption that says
+    ''she felt her grief'' or ''he refused to give up'' collapses the genre device into self-help. The
+    inner state must be carried by the world, the body, and silence — the reader supplies the feeling,
+    the page never labels it.'
+- forbidden_combination:
+  - turn_resolved_by_speech_explaining_the_moral
+  - companion_delivers_a_lesson
+  - cliffhanger_ending
+  - premature_rescue_that_undoes_the_cost
+  reason: Dark fantasy closes AMBIGUOUS-FORWARD, not on a cliffhanger (that is shonen grammar) and never
+    on a sermon. The psychological turn is a shift in the body — a dropped shoulder, a hand opening, a
+    chosen step — not a companion explaining what was learned. Hard-won meaning rescued by plot convenience
+    cheapens the entire arc; the cost must stand.

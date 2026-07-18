@@ -1,0 +1,27 @@
+# PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1 — M2 scaffold (docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md §3)
+project_id: PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1
+subsystem: marketing
+spec_ref: docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md#3-proposed-music-mode-freebie-types-v1-candidate-set
+freebie_tier: M2
+template_id: preview_clip_30s_v1
+name: 30-second preview clip
+asset_type: preview_clip_audio_or_video
+delivery_format: hosted_clip_with_on_screen_lyric_snippet
+sample_size: thirty_seconds
+gating_step: optional_email_for_full_track_or_pre_save
+copy_blocks:
+  CTA: Play 30s
+  body: |
+    You get thirty seconds of "{{track_title}}" with the lyric line that hits hardest burned on-screen so the hook lands even on mute-scroll.
+    Tap play on {{clip_url}} first; if you want the full journey, {{album_url}} is one swipe away without leaving this story arc.
+    When the drop date still matters, {{pre_save_url}} is the single next step—no second CTA competing for your thumb.
+    This clip is the same stem stack as the final master, so what you hear is the real arrangement, just time-boxed for feeds.
+  social_share: >-
+    30s of "{{track_title}}" with on-screen lyrics—hear the hook, then pre-save: {{clip_url}}
+cross_link_targets:
+  - template_id: companion_track_download_v1
+    relation: full_track_upgrade
+  - template_id: sample_ep_bundle_v1
+    relation: multi_track_depth
+  - template_id: lyric_poster_pdf_v1
+    relation: lyric_takeaway

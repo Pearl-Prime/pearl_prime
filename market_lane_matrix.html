@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Market × Lane Matrix</title>
+<style>
+:root{--bg:#f9fafb;--white:#fff;--border:#e5e7eb;--accent:#7c3aed;--ad:#5b21b6;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--red:#dc2626;--rl:#fef2f2;--text:#111827;--muted:#6b7280;--r:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+.hero{text-align:center;padding:44px 18px 24px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.3rem,3vw,2rem);font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#5b21b6,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);max-width:620px;margin:12px auto 0;font-size:.9rem}
+.nav-top{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.nav-top a{font-size:.75rem;font-weight:600;color:var(--ad);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--white)}
+.nav-top a.nav-wizard{border-color:var(--accent);background:#ede9fe;font-weight:700}
+.nav-top a.nav-wizard:hover{background:#ddd6fe}
+.banner{display:none;max-width:1000px;margin:16px auto;padding:12px 16px;background:var(--rl);border:1px solid #fecaca;border-radius:var(--r);color:#991b1b;font-size:.85rem}
+.banner.on{display:block}
+.mx{max-width:1100px;margin:0 auto;padding:24px 16px 40px}
+.desc{color:var(--muted);font-size:.88rem;margin:8px 0 18px;max-width:720px}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-size:.78rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:#f3f4f6;font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+.mono{font-family:ui-monospace,monospace;font-size:.68rem}
+.cel{display:flex;flex-direction:column;gap:4px}
+.n{font-weight:700}
+.n0{color:var(--muted)}
+.nok{color:var(--green)}
+.nwarn{color:var(--gold)}
+.nmiss{color:var(--red)}
+.pill{display:inline-block;font-size:.58rem;padding:2px 6px;border-radius:999px;background:var(--gl);color:var(--green);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0;font-size:.72rem;color:var(--muted)}
+.lane-preview{width:40px;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#f3f4f6;margin-top:6px;flex-shrink:0}
+.lane-preview img,.lane-preview video{width:100%;height:100%;object-fit:cover;display:block}
+.lane-preview .pv-ph{font-size:.55rem;padding:4px;text-align:center;line-height:1.2;color:var(--muted)}
+.foot{margin-top:28px;font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Market × Lane Matrix</h1>
+<p>Decision surface: what exists by market and lane, where proof is missing, and which comparison sets touch each cell — derived from the example registry.</p>
+<div class="nav-top">
+<a href="brand_onboarding_hub.html">Hub</a>
+<a class="nav-wizard" href="https://brand-admin-onboarding-bu2.pages.dev" target="_blank" rel="noopener">Live wizard</a>
+<a href="lane_examples_gallery.html">Examples Gallery</a>
+<a href="brand_admin_master_onboarding.html">Master Onboarding</a>
+<a href="brand_admin_weekly_os.html">Weekly OS</a>
+</div>
+</div>
+<div id="err" class="banner">Load failed. Serve repo root over HTTP and ensure <code>config/onboarding/example_registry.json</code> exists.</div>
+<div class="mx" id="main" style="display:none">
+<p class="desc"><strong>Pearl Marketing:</strong> Use this table before committing packaging budget — it links lanes and markets to concrete proof tiles and highlights gaps.</p>
+<div class="legend"><span class="pill">Ready</span> counts include only <code>status: ready</code>. Sets = distinct <code>comparison_set_id</code> values appearing in that cell. Empty cells = no registry rows yet.</div>
+<div id="table-wrap"></div>
+<p class="foot">Explainer metadata for “recommended for” copy lives in <code>config/onboarding/wizard_decision_explainer_data.json</code> (separate from this matrix).</p>
+</div>
+<script>
+(function(){
+var LANE_PREVIEW_ID={self_help:'pack_v1_vi_premium_v1',audiobook:'pack_v1_sys_audiobook_dominance_v1',manga:null,pearl_news:'pack_v1_mission_output_overview',breathwork_tools:'pack_v1_sys_eois_v1',tools:'pack_v1_sys_chaos_slot_v1',other:'pack_v1_mission_output_overview'};
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function clsReady(ready,total){if(ready===0)return'n nmiss';if(ready>=total)return'n nok';return'n nwarn'}
+function resolveUrl(path){if(!path)return '';if(/^https?:\/\//i.test(path))return path;return path;}
+function isVid(p){return p&&/\.(mp4|webm|ogg|mov)$/i.test(p);}
+function lanePreviewEl(lane, byId){
+  var pid=LANE_PREVIEW_ID[lane];if(!pid||!byId[pid])return null;
+  var r=byId[pid];var d=el('div','lane-preview');
+  if(r.status==='ready'&&r.asset_path){
+    if(isVid(r.asset_path)){var v=document.createElement('video');v.src=resolveUrl(r.asset_path);v.muted=true;v.playsInline=true;v.setAttribute('preload','metadata');d.appendChild(v);}
+    else{var im=document.createElement('img');im.alt='';im.src=resolveUrl(r.asset_path);d.appendChild(im);}
+  }else{var ph=el('div','pv-ph','Preview pending');d.appendChild(ph);}
+  return d;
+}
+function loadRegistryJson(){
+  return fetch('onboarding/example_registry.json').then(function(r){
+    if(!r.ok)throw new Error();
+    return r.json();
+  }).catch(function(){
+    return fetch('config/onboarding/example_registry.json').then(function(r){
+      if(!r.ok)throw new Error();
+      return r.json();
+    });
+  });
+}
+
+loadRegistryJson().then(function(rows){
+  document.getElementById('err').classList.remove('on');
+  document.getElementById('main').style.display='block';
+
+  var byId={};rows.forEach(function(r){byId[r.id]=r;});
+
+  var markets={};var lanes={};
+  rows.forEach(function(r){
+    markets[r.market]=1;lanes[r.lane]=1;
+  });
+  var mktList=Object.keys(markets).sort();
+  var laneList=Object.keys(lanes).sort();
+
+  var cell={};
+  rows.forEach(function(r){
+    var k=r.market+'|'+r.lane;
+    if(!cell[k])cell[k]={total:0,ready:0,planned:0,missing:0,sets:{}};
+    var c=cell[k];c.total++;c[r.status]=(c[r.status]||0)+1;
+    if(r.comparison_set_id)c.sets[r.comparison_set_id]=1;
+  });
+
+  var tbl=el('table');
+  var trh=el('tr');
+  trh.appendChild(el('th','','Market'));
+  laneList.forEach(function(l){trh.appendChild(el('th','',l.replace(/_/g,' ')))});
+  tbl.appendChild(trh);
+
+  mktList.forEach(function(m){
+    var tr=el('tr');
+    tr.appendChild(el('td','mono',m));
+    laneList.forEach(function(l){
+      var k=m+'|'+l;var d=cell[k];
+      var td=el('td');
+      if(!d){td.textContent='—';td.style.color='var(--muted)';tr.appendChild(td);return}
+      var wrap=el('div','cel');
+      var setN=Object.keys(d.sets).length;
+      wrap.appendChild(el('span','n '+clsReady(d.ready,d.total),String(d.ready)+' ready / '+d.total+' total'));
+      wrap.appendChild(el('span','mono','sets: '+setN));
+      if(d.missing)wrap.appendChild(el('span','nmiss',d.missing+' missing'));
+      if(d.planned)wrap.appendChild(el('span','nwarn',d.planned+' planned'));
+      if(setN){
+        var ids=Object.keys(d.sets).sort().join(', ');
+        wrap.appendChild(el('span','mono',ids));
+      }
+      var pv=lanePreviewEl(l, byId);if(pv)wrap.appendChild(pv);
+      td.appendChild(wrap);
+      tr.appendChild(td);
+    });
+    tbl.appendChild(tr);
+  });
+
+  document.getElementById('table-wrap').appendChild(tbl);
+}).catch(function(){document.getElementById('err').classList.add('on');});
+})();
+</script>
+</body>
+</html>

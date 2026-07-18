@@ -1,0 +1,113 @@
+schema_version: '1.0'
+brief_id: research-brief-b8a7e25ca0
+title: China self-help audio discovery prompt repair
+created_at_utc: '2026-07-14T07:36:25Z'
+input_summary: 'Prior Pearl_Research output for China self-help audio discovery was usable but too Western: it leaned on TikTok/Spotify assumptions, missed Xiaohongshu, Douyin, Bilibili, and Ximalaya evidence, and did not tell Phoenix Omega whether China metadata and funnel language should diverge from the global audiobook playbook.'
+issue_description: 'Prior Pearl_Research output for China self-help audio discovery was usable but too Western: it leaned on TikTok/Spotify assumptions, missed Xiaohongshu, Douyin, Bilibili, and Ximalaya evidence, and did not tell Phoenix Omega whether China metadata and funnel language should diverge from the global audiobook playbook.
+
+  '
+what_is_broken:
+- no Simplified Chinese source plan
+- no platform policy/source provenance
+- no comparison of Ximalaya vs Douyin vs Xiaohongshu
+- generic "Gen Z likes authenticity" advice
+decision_to_make:
+- Should China research be routed to Qwen / QuinChat first, and what should it ask so Phoenix Omega can decide whether to create China-specific metadata, consumer-language, and funnel configs?
+unknowns:
+- what local-language terms Chinese consumers use for burnout, sleep anxiety, and self-help audio
+- whether Ximalaya, Qingting, Douyin, Xiaohongshu, or Bilibili are the right discovery surfaces for this use case
+- what platform/compliance constraints affect claims and title wording
+missing_evidence:
+- 'Prior Pearl_Research output for China self-help audio discovery was usable but too Western: it leaned on TikTok/Spotify assumptions, missed Xiaohongshu, Douyin, Bilibili, and Ximalaya evidence, and did not tell Phoenix Omega whether China metadata and funnel language should diverge from the global audiobook playbook.'
+- no Simplified Chinese source plan
+- no platform policy/source provenance
+- Should China research be routed to Qwen / QuinChat first, and what should it ask so Phoenix Omega can decide whether to create China-specific metadata, consumer-language, and funnel configs?
+exact_questions:
+- Should China research be routed to Qwen / QuinChat first, and what should it ask so Phoenix Omega can decide whether to create China-specific metadata, consumer-language, and funnel configs?
+hypotheses_to_test:
+- 'The current failure may be caused by: no Simplified Chinese source plan'
+- 'The current failure may be caused by: no platform policy/source provenance'
+- 'The current failure may be caused by: no comparison of Ximalaya vs Douyin vs Xiaohongshu'
+- Provider-native prompts may produce stronger evidence than a single generic prompt.
+- The right answer may require preserving existing Phoenix Omega behavior while upgrading prompt quality before execution.
+- Chinese-language sources may materially change the China recommendation.
+constraints:
+- what platform/compliance constraints affect claims and title wording
+markets_locales_platforms:
+  markets:
+  - China
+  locales:
+  - zh-CN
+  platforms:
+  - Xiaohongshu
+  - Douyin
+  - Bilibili
+  - Ximalaya
+routing_controls:
+  explicit_markets:
+  - China
+  explicit_locales:
+  - zh-CN
+  explicit_platforms:
+  - Xiaohongshu
+  - Douyin
+  - Bilibili
+  - Ximalaya
+  hint_precedence: Explicit market, locale, and platform hints override transcript-only regional mentions during provider selection.
+good_output_should_include:
+- executive summary
+- direct answer to the operator's real question
+- evidence-backed findings
+- contradictions and ambiguities
+- recommended action
+- implementation implications for Phoenix Omega
+- open risks
+- provenance and sources
+source_rules:
+  preferred_sources:
+  - Simplified Chinese platform docs and industry reports
+  - China-native consumer research
+  - official platform documentation and policy pages
+  - primary market data, filings, or regulator publications
+  - credible industry reports and trade press
+  - academic or practitioner research with transparent methods
+  acceptable_sources:
+  - credible news analysis with named sources
+  - platform-native examples when clearly labeled as examples
+  - expert commentary only when triangulated against stronger sources
+  weak_sources:
+  - unsourced trend roundups
+  - affiliate SEO posts
+  - single-anecdote social media claims
+  - AI-generated summaries without source URLs
+  source_languages:
+  - Simplified Chinese primary sources
+  - Chinese-language platform docs, industry reports, regulatory notices, trade press, and academic sources
+  - English-language sources only for external triangulation
+explicit_exclusions:
+- US-only Spotify advice
+- generic TikTok marketing tips
+- uncited claims about Chinese Gen Z
+phoenix_omega_context:
+  affected_subsystems:
+  - pain_points
+  - Pearl_Research
+  - research prompts
+  - provider routing
+  relevant_files: []
+  implementation_constraints:
+  - Extend existing Pearl_Research flow rather than creating a disconnected toy flow.
+  - Keep routing explicit and inspectable.
+  - Do not perform downstream research in the prompt-generation stage.
+  - what platform/compliance constraints affect claims and title wording
+routing_preview:
+  likely_provider: Qwen / QuinChat-style China Deep Research
+  routing_signals:
+  - locales:zh-CN
+  - markets:China
+  - platforms:Xiaohongshu
+  - platforms:Douyin
+  - platforms:Bilibili
+  - platforms:Ximalaya
+raw_context_excerpt: "Prior Pearl_Research output for China self-help audio discovery was usable but too Western: it leaned on TikTok/Spotify assumptions, missed Xiaohongshu, Douyin, Bilibili, and Ximalaya evidence, and did not tell Phoenix Omega whether China metadata and funnel language should diverge from the global audiobook playbook.\n\n\nOperator: The China version is still mushy. It says \"use TikTok-style short clips\"\nbut the actual launch question is whether Phoenix should prioritize Xiaohongshu,\nDouyin, Bilibili, or Ximalaya for self-help audio discovery.\n\nFailing output symptom:\n- no Simplified Chinese source plan\n- no platform policy/source provenance\n- no comparison of Ximalaya vs Douyin vs Xiaohongshu\n- generic \"Gen Z likes authenticity\" advice\n\nDecision needed:\nShould China research be routed to Qwen / QuinChat first, and what should\nit ask so Phoenix Omega can decide whether to create China-specific\nmetadata, consumer-language, and funnel configs?\n\nUnknowns:\n\
+  - what local-language terms Chinese consumers use for burnout, sleep anxiety,\n  and self-help audio\n- whether Ximalaya, Qingting, Douyin, Xiaohongshu, or Bilibili are the right\n  discovery surfaces for this use case\n- what platform/compliance constraints affect claims and title wording\n\nExclude:\n- US-only Spotify advice\n- generic TikTok marketing tips\n- uncited claims about Chinese Gen Z\n\n\nEvaluation case for Pearl_Research prompt-generation layer.\n\nChina zh-CN Xiaohongshu Douyin Bilibili Ximalaya"

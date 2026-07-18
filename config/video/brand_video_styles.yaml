@@ -1,0 +1,438 @@
+# Per-brand video visual identity for YouTube, TikTok, IG Reels, Bilibili, Douyin.
+# Each brand visually distinct at thumbnail scale on platform shelves.
+# Wired to: brand_identity_system.yaml (colophon, colors, fonts),
+#           brand_style_tokens.yaml (topic→palette), brand_platform_matrix.yaml.
+schema_version: 1
+last_updated: "2026-04-08"
+
+# Audiobook video base style (from audiobook_style.yaml)
+audiobook_base:
+  background: "#000000"
+  text_color: "#FFFFFF"
+  text_font: serif
+  waveform: true
+  karaoke_subtitles: true
+
+brands:
+  stillness_press:
+    intro_colors: ["#64748B", "#D4A574"]
+    outro_colors: ["#D4A574", "#64748B"]
+    title_font: "Cormorant Garamond"
+    title_color: "#D4A574"
+    b_roll_palette: cool_calm  # anxiety/burnout topics → slate/mist tones
+    thumbnail_style:
+      background: "#1A1814"
+      accent_bar: "#D4A574"
+      text_color: "#F5F0E8"
+      teacher_overlay: true
+    subtitle_style:
+      font: "DM Sans"
+      color: "#F5F0E8"
+      shadow: true
+    colophon_animation: fade_in_hold  # 2s fade in, hold 3s
+    alternate_forest_mood:
+      intro_colors: ["#2D4A2A", "#D4A574"]
+      outro_colors: ["#D4A574", "#2D4A2A"]
+      title_font: "Lora"
+      thumbnail_style:
+        background: "#1A2A18"
+        accent_bar: "#2D4A2A"
+        text_color: "#F0EBE0"
+        teacher_overlay: true
+      subtitle_style: { font: "DM Sans", color: "#F0EBE0", shadow: true }
+
+  cognitive_clarity:
+    intro_colors: ["#1A1A1A", "#FFFFFF"]
+    outro_colors: ["#FFFFFF", "#1A1A1A"]
+    title_font: "Montserrat"
+    title_color: "#FFFFFF"
+    b_roll_palette: cool_calm
+    thumbnail_style:
+      background: "#0A0A0A"
+      accent_bar: "#8B7355"
+      text_color: "#FFFFFF"
+      teacher_overlay: true
+    subtitle_style: { font: "Montserrat", color: "#FFFFFF", shadow: true }
+    colophon_animation: sharp_cut  # instant on, hold 3s
+
+  somatic_wisdom:
+    intro_colors: ["#FFF5EE", "#C1666B"]
+    outro_colors: ["#C1666B", "#FFF5EE"]
+    title_font: "Nunito Sans"
+    title_color: "#C1666B"
+    b_roll_palette: warm_rise  # somatic/body topics → warm tones
+    thumbnail_style:
+      background: "#2A1A1A"
+      accent_bar: "#C1666B"
+      text_color: "#FFF5EE"
+      teacher_overlay: true
+    subtitle_style: { font: "Nunito Sans", color: "#FFF5EE", shadow: true }
+    colophon_animation: fade_in_hold
+
+  qi_foundation:
+    intro_colors: ["#8B7355", "#C5A03D"]
+    outro_colors: ["#C5A03D", "#8B7355"]
+    title_font: "Noto Serif SC"
+    title_color: "#C5A03D"
+    b_roll_palette: neutral_root
+    thumbnail_style:
+      background: "#1A1608"
+      accent_bar: "#C5A03D"
+      text_color: "#F5ECD7"
+      teacher_overlay: true
+    subtitle_style: { font: "Noto Sans SC", color: "#F5ECD7", shadow: true }
+    colophon_animation: brush_stroke  # calligraphic reveal
+
+  digital_ground:
+    intro_colors: ["#1E293B", "#22D3EE"]
+    outro_colors: ["#22D3EE", "#1E293B"]
+    title_font: "Inter"
+    title_color: "#22D3EE"
+    b_roll_palette: cool_calm
+    thumbnail_style:
+      background: "#0F172A"
+      accent_bar: "#22D3EE"
+      text_color: "#F0F9FF"
+      teacher_overlay: true
+    subtitle_style: { font: "Inter", color: "#F0F9FF", shadow: true }
+    colophon_animation: glitch_fade  # digital glitch + fade
+
+  heart_balance:
+    intro_colors: ["#312E81", "#F59E0B"]
+    outro_colors: ["#F59E0B", "#312E81"]
+    title_font: "Cinzel"
+    title_color: "#F59E0B"
+    b_roll_palette: warm_rise
+    thumbnail_style:
+      background: "#1E1B4B"
+      accent_bar: "#F59E0B"
+      text_color: "#EDE9FE"
+      teacher_overlay: true
+    subtitle_style: { font: "Cinzel", color: "#EDE9FE", shadow: true }
+    colophon_animation: geometric_reveal  # angular Egyptian motif build
+
+  relational_calm:
+    intro_colors: ["#F5F0E8", "#A0937D"]
+    outro_colors: ["#A0937D", "#F5F0E8"]
+    title_font: "Noto Serif JP"
+    title_color: "#8B7D6B"
+    b_roll_palette: neutral_root
+    thumbnail_style:
+      background: "#1A1814"
+      accent_bar: "#A0937D"
+      text_color: "#F5F0E8"
+      teacher_overlay: true
+    subtitle_style: { font: "Noto Sans JP", color: "#F5F0E8", shadow: false }
+    colophon_animation: fade_in_hold
+
+  warrior_calm:
+    intro_colors: ["#36454F", "#DC143C"]
+    outro_colors: ["#DC143C", "#36454F"]
+    title_font: "Noto Serif SC"
+    title_color: "#DC143C"
+    b_roll_palette: warm_rise
+    thumbnail_style:
+      background: "#1A1A1A"
+      accent_bar: "#DC143C"
+      text_color: "#F5F0E8"
+      teacher_overlay: true
+    subtitle_style: { font: "Noto Sans SC", color: "#F5F0E8", shadow: true }
+    colophon_animation: sharp_cut
+
+  sleep_restoration:
+    intro_colors: ["#1A0033", "#A78BFA"]
+    outro_colors: ["#A78BFA", "#1A0033"]
+    title_font: "Playfair Display"
+    title_color: "#A78BFA"
+    b_roll_palette: cool_calm
+    thumbnail_style:
+      background: "#0F0720"
+      accent_bar: "#8B5CF6"
+      text_color: "#EDE9FE"
+      teacher_overlay: true
+    subtitle_style: { font: "DM Sans", color: "#EDE9FE", shadow: true }
+    colophon_animation: glow_pulse  # soft violet glow pulse
+
+  body_memory:
+    intro_colors: ["#36454F", "#CD5C5C"]
+    outro_colors: ["#CD5C5C", "#36454F"]
+    title_font: "Noto Serif JP"
+    title_color: "#CD5C5C"
+    b_roll_palette: neutral_root
+    thumbnail_style:
+      background: "#1A1410"
+      accent_bar: "#A0522D"
+      text_color: "#F0E6D6"
+      teacher_overlay: true
+    subtitle_style: { font: "Noto Serif JP", color: "#F0E6D6", shadow: true }
+    colophon_animation: fade_in_hold
+
+  solar_return:
+    intro_colors: ["#1A1410", "#EA580C"]
+    outro_colors: ["#EA580C", "#1A1410"]
+    title_font: "Space Mono"
+    title_color: "#F97316"
+    b_roll_palette: warm_rise
+    thumbnail_style:
+      background: "#0A0806"
+      accent_bar: "#EA580C"
+      text_color: "#FFF7ED"
+      teacher_overlay: true
+    subtitle_style: { font: "Space Mono", color: "#FFF7ED", shadow: true }
+    colophon_animation: ember_particles  # floating ember particles
+
+  devotion_path:
+    intro_colors: ["#7C3AED", "#FBB6CE"]
+    outro_colors: ["#FBB6CE", "#7C3AED"]
+    title_font: "Playfair Display"
+    title_color: "#A855F7"
+    b_roll_palette: warm_rise
+    thumbnail_style:
+      background: "#1A0A2E"
+      accent_bar: "#A855F7"
+      text_color: "#FDF2F8"
+      teacher_overlay: true
+    subtitle_style: { font: "Playfair Display", color: "#FDF2F8", shadow: true }
+    colophon_animation: flowing_reveal  # ornamental flowing pattern
+
+  # ── Standard brands (no teacher_overlay in thumbnails) ──
+
+  stabilizer:
+    intro_colors: ["#64748B", "#38BDF8"]
+    outro_colors: ["#38BDF8", "#64748B"]
+    title_font: "DM Serif Display"
+    title_color: "#38BDF8"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#1E293B", accent_bar: "#38BDF8", text_color: "#F1F5F9", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#F1F5F9", shadow: true }
+    colophon_animation: fade_in_hold
+
+  optimizer:
+    intro_colors: ["#1E293B", "#3B82F6"]
+    outro_colors: ["#3B82F6", "#1E293B"]
+    title_font: "Sora"
+    title_color: "#3B82F6"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#0F172A", accent_bar: "#3B82F6", text_color: "#F8FAFC", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#F8FAFC", shadow: true }
+    colophon_animation: sharp_cut
+
+  night_reset:
+    intro_colors: ["#0F172A", "#818CF8"]
+    outro_colors: ["#818CF8", "#0F172A"]
+    title_font: "Playfair Display"
+    title_color: "#818CF8"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#0F0A2A", accent_bar: "#818CF8", text_color: "#E0E7FF", teacher_overlay: false }
+    subtitle_style: { font: "Outfit", color: "#E0E7FF", shadow: true }
+    colophon_animation: glow_pulse
+
+  career_lift:
+    intro_colors: ["#334155", "#F59E0B"]
+    outro_colors: ["#F59E0B", "#334155"]
+    title_font: "Montserrat"
+    title_color: "#F59E0B"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#1E293B", accent_bar: "#F59E0B", text_color: "#FFFFFF", teacher_overlay: false }
+    subtitle_style: { font: "Source Sans Pro", color: "#FFFFFF", shadow: true }
+    colophon_animation: fade_in_hold
+
+  adhd_forge:
+    intro_colors: ["#134E4A", "#F97316"]
+    outro_colors: ["#F97316", "#134E4A"]
+    title_font: "Space Grotesk"
+    title_color: "#F97316"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#042F2E", accent_bar: "#F97316", text_color: "#F0FDFA", teacher_overlay: false }
+    subtitle_style: { font: "DM Sans", color: "#F0FDFA", shadow: true }
+    colophon_animation: glitch_fade
+
+  longevity_lab:
+    intro_colors: ["#FFFFFF", "#166534"]
+    outro_colors: ["#166534", "#FFFFFF"]
+    title_font: "Archivo"
+    title_color: "#166534"
+    b_roll_palette: neutral_root
+    thumbnail_style: { background: "#14532D", accent_bar: "#86EFAC", text_color: "#F0FDF4", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#F0FDF4", shadow: true }
+    colophon_animation: fade_in_hold
+
+  creative_unfold:
+    intro_colors: ["#FFFBEB", "#F472B6"]
+    outro_colors: ["#F472B6", "#FFFBEB"]
+    title_font: "Caveat"
+    title_color: "#92400E"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#78350F", accent_bar: "#F472B6", text_color: "#FFFBEB", teacher_overlay: false }
+    subtitle_style: { font: "Nunito", color: "#FFFBEB", shadow: true }
+    colophon_animation: flowing_reveal
+
+  resilient_parent:
+    intro_colors: ["#FFF7ED", "#FB923C"]
+    outro_colors: ["#FB923C", "#FFF7ED"]
+    title_font: "Merriweather"
+    title_color: "#78716C"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#44403C", accent_bar: "#FB923C", text_color: "#FFF7ED", teacher_overlay: false }
+    subtitle_style: { font: "Karla", color: "#FFF7ED", shadow: true }
+    colophon_animation: fade_in_hold
+
+  executive_calm:
+    intro_colors: ["#1C1917", "#B45309"]
+    outro_colors: ["#B45309", "#1C1917"]
+    title_font: "Fraunces"
+    title_color: "#B45309"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#0C0A09", accent_bar: "#B45309", text_color: "#D4D4D8", teacher_overlay: false }
+    subtitle_style: { font: "Source Serif Pro", color: "#D4D4D8", shadow: true }
+    colophon_animation: fade_in_hold
+
+  trauma_path:
+    intro_colors: ["#FFFBEB", "#A3785E"]
+    outro_colors: ["#A3785E", "#FFFBEB"]
+    title_font: "Literata"
+    title_color: "#A3785E"
+    b_roll_palette: neutral_root
+    thumbnail_style: { background: "#44403C", accent_bar: "#A3785E", text_color: "#FFFBEB", teacher_overlay: false }
+    subtitle_style: { font: "Work Sans", color: "#FFFBEB", shadow: true }
+    colophon_animation: fade_in_hold
+
+  spiritual_ground:
+    intro_colors: ["#1E1B4B", "#A78BFA"]
+    outro_colors: ["#A78BFA", "#1E1B4B"]
+    title_font: "Spectral"
+    title_color: "#A78BFA"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#1E1B4B", accent_bar: "#A78BFA", text_color: "#EEF2FF", teacher_overlay: false }
+    subtitle_style: { font: "IBM Plex Sans", color: "#EEF2FF", shadow: true }
+    colophon_animation: glow_pulse
+
+  focus_sprint:
+    intro_colors: ["#0F172A", "#22D3EE"]
+    outro_colors: ["#22D3EE", "#0F172A"]
+    title_font: "Sora"
+    title_color: "#22D3EE"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#0F172A", accent_bar: "#22D3EE", text_color: "#F8FAFC", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#F8FAFC", shadow: true }
+    colophon_animation: sharp_cut
+
+  hormone_reset:
+    intro_colors: ["#FFF1F2", "#9F1239"]
+    outro_colors: ["#9F1239", "#FFF1F2"]
+    title_font: "Lora"
+    title_color: "#9F1239"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#881337", accent_bar: "#FB7185", text_color: "#FFF1F2", teacher_overlay: false }
+    subtitle_style: { font: "Nunito Sans", color: "#FFF1F2", shadow: true }
+    colophon_animation: flowing_reveal
+
+  stoic_edge:
+    intro_colors: ["#1C1917", "#71717A"]
+    outro_colors: ["#71717A", "#1C1917"]
+    title_font: "Oswald"
+    title_color: "#F5F5F4"
+    b_roll_palette: neutral_root
+    thumbnail_style: { background: "#0C0A09", accent_bar: "#71717A", text_color: "#F5F5F4", teacher_overlay: false }
+    subtitle_style: { font: "Roboto", color: "#F5F5F4", shadow: true }
+    colophon_animation: sharp_cut
+
+  calm_student:
+    intro_colors: ["#EFF6FF", "#1E40AF"]
+    outro_colors: ["#1E40AF", "#EFF6FF"]
+    title_font: "Space Grotesk"
+    title_color: "#1E40AF"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#1E3A8A", accent_bar: "#60A5FA", text_color: "#EFF6FF", teacher_overlay: false }
+    subtitle_style: { font: "DM Sans", color: "#EFF6FF", shadow: true }
+    colophon_animation: fade_in_hold
+
+  healing_ground:
+    intro_colors: ["#FFFBEB", "#FBBF24"]
+    outro_colors: ["#FBBF24", "#FFFBEB"]
+    title_font: "DM Serif Display"
+    title_color: "#92400E"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#78350F", accent_bar: "#FBBF24", text_color: "#FFFBEB", teacher_overlay: false }
+    subtitle_style: { font: "Karla", color: "#FFFBEB", shadow: true }
+    colophon_animation: fade_in_hold
+
+  bio_flow:
+    intro_colors: ["#F0FDF4", "#14532D"]
+    outro_colors: ["#14532D", "#F0FDF4"]
+    title_font: "JetBrains Mono"
+    title_color: "#4ADE80"
+    b_roll_palette: neutral_root
+    thumbnail_style: { background: "#052E16", accent_bar: "#4ADE80", text_color: "#F0FDF4", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#F0FDF4", shadow: true }
+    colophon_animation: sharp_cut
+
+  confidence_core:
+    intro_colors: ["#FAFAF9", "#D97706"]
+    outro_colors: ["#D97706", "#FAFAF9"]
+    title_font: "Libre Baskerville"
+    title_color: "#D97706"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#44403C", accent_bar: "#D97706", text_color: "#FAFAF9", teacher_overlay: false }
+    subtitle_style: { font: "Source Sans Pro", color: "#FAFAF9", shadow: true }
+    colophon_animation: fade_in_hold
+
+  relationship_clarity:
+    intro_colors: ["#FFF7ED", "#E11D48"]
+    outro_colors: ["#E11D48", "#FFF7ED"]
+    title_font: "Merriweather"
+    title_color: "#E11D48"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#44403C", accent_bar: "#E11D48", text_color: "#FFF7ED", teacher_overlay: false }
+    subtitle_style: { font: "Lora", color: "#FFF7ED", shadow: true }
+    colophon_animation: fade_in_hold
+
+  morning_momentum:
+    intro_colors: ["#FFFBEB", "#F59E0B"]
+    outro_colors: ["#F59E0B", "#FFFBEB"]
+    title_font: "Montserrat"
+    title_color: "#F59E0B"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#1C1917", accent_bar: "#F59E0B", text_color: "#FFFBEB", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#FFFBEB", shadow: true }
+    colophon_animation: fade_in_hold
+
+  minimal_mind:
+    intro_colors: ["#F8FAFC", "#06B6D4"]
+    outro_colors: ["#06B6D4", "#F8FAFC"]
+    title_font: "DM Sans"
+    title_color: "#475569"
+    b_roll_palette: cool_calm
+    thumbnail_style: { background: "#1E293B", accent_bar: "#06B6D4", text_color: "#F8FAFC", teacher_overlay: false }
+    subtitle_style: { font: "Inter", color: "#F8FAFC", shadow: false }
+    colophon_animation: fade_in_hold
+
+  high_performer:
+    intro_colors: ["#18181B", "#EF4444"]
+    outro_colors: ["#EF4444", "#18181B"]
+    title_font: "Bebas Neue"
+    title_color: "#EF4444"
+    b_roll_palette: warm_rise
+    thumbnail_style: { background: "#09090B", accent_bar: "#EF4444", text_color: "#FAFAFA", teacher_overlay: false }
+    subtitle_style: { font: "Roboto Condensed", color: "#FAFAFA", shadow: true }
+    colophon_animation: sharp_cut
+
+  gentle_growth:
+    intro_colors: ["#F0FDF4", "#4ADE80"]
+    outro_colors: ["#4ADE80", "#F0FDF4"]
+    title_font: "Nunito"
+    title_color: "#4ADE80"
+    b_roll_palette: neutral_root
+    thumbnail_style: { background: "#14532D", accent_bar: "#86EFAC", text_color: "#F0FDF4", teacher_overlay: false }
+    subtitle_style: { font: "Karla", color: "#F0FDF4", shadow: true }
+    colophon_animation: fade_in_hold
+
+  legacy_builder:
+    intro_colors: ["#1C1917", "#78716C"]
+    outro_colors: ["#78716C", "#1C1917"]
+    title_font: "Fraunces"
+    title_color: "#D6D3D1"
+    b_roll_palette: neutral_root
+    thumbnail_style: { background: "#0C0A09", accent_bar: "#78716C", text_color: "#D6D3D1", teacher_overlay: false }
+    subtitle_style: { font: "Source Serif Pro", color: "#D6D3D1", shadow: true }
+    colophon_animation: fade_in_hold

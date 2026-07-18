@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/series_memory_snapshot.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": ["artifact_type", "snapshot_of_series_memory_sha256"],
+      "properties": {
+        "artifact_type": { "const": "series_memory_snapshot" },
+        "snapshot_of_series_memory_sha256": {
+          "$ref": "manga_common.schema.json#/$defs/sha256_hex"
+        },
+        "facts": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  ]
+}

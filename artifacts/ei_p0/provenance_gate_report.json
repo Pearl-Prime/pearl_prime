@@ -1,0 +1,67 @@
+{
+  "n_atoms": 2418,
+  "n_rules": 109,
+  "provenance_violations": 0,
+  "own_doctrine_violations": 9,
+  "cross_teacher_violations": 10,
+  "feasible_provenance_and_own_doctrine": false,
+  "negative_control": {
+    "synthetic_atom": "Buddhism is best understood as an abstract intellectual system, a purely intellectual abstract framework separated from the material world.",
+    "tripped_rules": [
+      "Buddhism as abstract intellectual system"
+    ],
+    "blocked": true,
+    "exit_criterion_met": true
+  },
+  "note": "Provenance is EXACT (every atom maps to a known teacher). Framing detection is LEXICAL (term-density + proximity + negation guard) — a coarse free first-pass; true stance detection (X-is vs X-is-not) is a P1 semantic/NLI need. Cross-teacher trips show where one tradition's language would violate another's doctrine if atoms were mixed.",
+  "sample_cross_teacher_violations": [
+    {
+      "atom_id": "ahjan_TEACHING_049_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "miki",
+      "rule": "separating light transmission from the sacred site context"
+    },
+    {
+      "atom_id": "ahjan_TEACHING_095_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "adi_da",
+      "rule": "promising that spiritual practice leads to permanent enlightenment"
+    },
+    {
+      "atom_id": "ahjan_EXERCISE_019_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "adi_da",
+      "rule": "promising that spiritual practice leads to permanent enlightenment"
+    },
+    {
+      "atom_id": "ahjan_EXERCISE_026_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "adi_da",
+      "rule": "promising that spiritual practice leads to permanent enlightenment"
+    },
+    {
+      "atom_id": "ahjan_EXERCISE_032_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "adi_da",
+      "rule": "promising that spiritual practice leads to permanent enlightenment"
+    },
+    {
+      "atom_id": "ahjan_TEACHING_018_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "adi_da",
+      "rule": "promising that spiritual practice leads to permanent enlightenment"
+    },
+    {
+      "atom_id": "ahjan_TEACHING_031_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "master_feung",
+      "rule": "framing as martial arts or combat tradition teacher"
+    },
+    {
+      "atom_id": "ahjan_TEACHING_056_mined",
+      "atom_teacher": "ahjan",
+      "rule_teacher": "adi_da",
+      "rule": "promising that spiritual practice leads to permanent enlightenment"
+    }
+  ]
+}

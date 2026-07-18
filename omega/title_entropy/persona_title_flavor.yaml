@@ -1,0 +1,63 @@
+# Authority: SYSTEMS_DOCUMENTATION §29.2.5
+# Persona-specific vocabulary for title tone and {PersonaDescription}.
+
+personas:
+  nyc_exec:
+    title_tone: "Professionals"
+    persona_role: "Busy Professionals"
+  nyc_executives:
+    title_tone: "Executives"
+    persona_role: "Leaders and Executives"
+  gen_z_la:
+    title_tone: "Gen Z"
+    persona_role: "Content Creators and Hustlers"
+  healthcare_worker:
+    title_tone: "Healthcare Workers"
+    persona_role: "Healthcare Workers"
+  burned_out_professional:
+    title_tone: "Professionals"
+    persona_role: "Burned-Out Professionals"
+  bereaved_adult:
+    title_tone: "Adults"
+    persona_role: "Those Grieving"
+
+  # ── Devotion Path personas (Open Vessel Press / "Waystream Sanctuary") ──
+  # Natural reader-facing role names so {PersonaDescription} reads cleanly in
+  # persona_direct subtitles ("A Field Guide for <role> Navigating <keyword>").
+  corporate_managers:
+    title_tone: "Managers"
+    persona_role: "Managers"
+  entrepreneurs:
+    title_tone: "Founders"
+    persona_role: "Founders"
+  first_responders:
+    title_tone: "First Responders"
+    persona_role: "First Responders"
+  gen_alpha_students:
+    title_tone: "Students"
+    persona_role: "Students"
+  gen_x_sandwich:
+    title_tone: "the Sandwich Generation"
+    persona_role: "the Sandwich Generation"
+  gen_z_professionals:
+    title_tone: "Young Professionals"
+    persona_role: "Young Professionals"
+  gen_z_student:
+    title_tone: "College Students"
+    persona_role: "College Students"
+  healthcare_rns:
+    title_tone: "Nurses"
+    persona_role: "Nurses"
+  millennial_women_professionals:
+    title_tone: "Professional Women"
+    persona_role: "Professional Women"
+  tech_finance_burnout:
+    title_tone: "Professionals"
+    persona_role: "Tech and Finance Professionals"
+  working_parents:
+    title_tone: "Working Parents"
+    persona_role: "Working Parents"
+
+  default:
+    title_tone: "Readers"
+    persona_role: "Readers"

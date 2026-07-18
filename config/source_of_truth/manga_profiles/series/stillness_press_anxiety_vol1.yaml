@@ -1,0 +1,80 @@
+manga_profile_schema_version: "1.0.0"
+status: in_production
+created_at: "2026-04-20"
+profile_type: series
+
+# --- core identity ---
+title_id: stillness_press_anxiety_vol1
+brand_id: stillness_press
+teacher: ahjan
+
+market_demo: josei
+genre_family: healing
+subgenre: "anxiety_somatic_recovery"
+
+emotional_engine: cozy_restoration
+reader_promise: "You will find your way back to stillness even when the alarm is still ringing."
+
+serialization_engine: mood_based
+chapter_hook_family: almost_confession
+
+visual_grammar: iyashikei_minimalism
+line_weight_profile: light
+black_fill_ratio: 0.05
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 30
+  silent_panel_ratio: 0.45
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon
+
+# --- marketing & catalog ---
+series_title: "What the Body Holds"
+# Derived from somatic-iyashikei register: what anxiety stores in the body before the mind names it.
+# Cozy_restoration frame — the series is the holding, not the explanation.
+
+series_logline: >-
+  For when the anxiety hasn't stopped and you still need somewhere quiet to be.
+
+series_description: |
+  An adult woman in her late twenties moves through ordinary days carrying something she can't
+  quite name — the tight chest, the shoulder that won't drop, the 3am wakefulness that has no
+  reason. "What the Body Holds" doesn't explain her anxiety or resolve it. Chapter by chapter,
+  through long wordless sequences, unhurried morning light, and the small rituals of a life
+  still being lived, it sits with her exactly where she is. Readers finish each chapter quieter
+  than when they arrived — not because anything has been solved, but because someone finally
+  understood what it actually feels like.
+
+marketing_angle: |
+  Most healing content explains anxiety back to readers who already live it. This series doesn't.
+  Near-wordless pages (45% silent panels), near-zero ink fill, and earth-tone watercolor space
+  create a visual grammar the body responds to before the brain does — the pacing IS the
+  restoration. Distinctive in a crowded wellness-manga market because silence is the product,
+  not the wrapper.
+
+hook_lines:
+  - "Your body already knows what you're carrying."
+  - "Still counts as progress."
+
+comp_titles:
+  - "Mushishi (Yuki Urushibara)"
+  - "My Lesbian Experience With Loneliness (Nagata Kabi)"
+
+launch_priority: P0
+
+main_character_name: Hana
+# Japanese female name — flower / bloom. Soft, grounded, not aspirational.
+# Plausible for josei adult market, gen-z/millennial register.
+
+main_character_role: "copywriter between contracts"
+# Mirrors the reader: adult creative work, the between-project pause where anxiety surfaces.
+
+main_character_image_path: null
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

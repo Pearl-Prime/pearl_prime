@@ -1,0 +1,66 @@
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
+locale: en_US
+book_id_prefix: heart_balance__maat__working_parents__boundaries
+brand: heart_balance
+teacher: maat
+persona: working_parents
+topic: boundaries
+teacher_topic_score: 0.85
+teacher_persona_score: 0.75
+composite_fit: 0.8
+arc:
+  installment_1:
+    book_id: heart_balance__maat__working_parents__boundaries__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_balance__maat__working_parents__boundaries__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_balance__maat__working_parents__boundaries__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__false_alarm__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: |
+  3 books across engines of boundaries via the mythological-sincere, shojo+ dignity voice.
+bestseller_hook_family: recognition_descent
+emotional_engine: boundaries_recognition
+comp_series:
+- Set Boundaries, Find Peace (Tawwab)
+- Boundaries (Cloud & Townsend)
+- The Book of Boundaries (Hartwig)
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30–45
+  where_they_are: |
+    Bedtime routine done. Kid asleep, dishes undone, sitting in dark.
+  what_they_need: |
+    Doesn't call this 'a season' or ask them to be present more.
+  what_they_avoid: |
+    Mom-guilt meta-discourse.
+series_voice_markers:
+  register: mythological-sincere, shojo+ dignity
+  sentence_rhythm: balanced, heraldic, architectural
+  metaphor_family: scales, gold leaf, star maps
+  second_person_default: true
+main_character_name: Minerva
+main_character_role: working parent of young kids
+main_character_image_path: null
+main_character_lora_id: minerva_hb_us
+main_character_trigger_word: minerva_hb_us
+plan_source_path: config/manga/manga_brand_series_plan.yaml

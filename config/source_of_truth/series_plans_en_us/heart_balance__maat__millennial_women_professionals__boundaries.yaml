@@ -1,0 +1,78 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_balance__maat__millennial_women_professionals__boundaries
+brand: heart_balance
+teacher: maat
+persona: millennial_women_professionals
+topic: boundaries
+byline_author: theo_bello
+arc:
+  installment_1:
+    book_id: heart_balance__maat__millennial_women_professionals__boundaries__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__boundaries__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_balance__maat__millennial_women_professionals__boundaries__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__boundaries__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_balance__maat__millennial_women_professionals__boundaries__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__boundaries__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A heart-centered field guide to the real weight of drawing
+  a line — not how to say no faster, but how to feel what a boundary costs and choose
+  it anyway, with your worth left intact on the scale.
+bestseller_hook_family: ''
+emotional_engine: boundaries_recognition
+comp_series:
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — the genre's anchor on relational
+  limits, but this series stays with the felt cost a boundary exacts rather than the
+  scripts
+- The Book of Boundaries (Melissa Urban) — practical and direct on what to say; this
+  series is the inner companion to that, for the woman who knows the words and still
+  can't make her mouth form them
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  what over-giving does to a woman''s body; this series narrows that lens to the single
+  moment a line is drawn'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30 to 42, mid-career professional women — senior manager, team lead, the one
+    who runs the household calendar too
+  where_they_are: It's 9:40pm. The kids are finally down, the laptop is open again,
+    and a Slack message just came in that starts with 'so sorry to ask but' — and
+    you can already feel yourself typing 'no problem, happy to' before you've even
+    decided. Your jaw is tight. You said yes to three things today you didn't want,
+    and you can't explain to anyone, least of all yourself, why the word 'no' felt
+    physically impossible.
+  what_they_need: To understand why a boundary feels like a betrayal in their body,
+    to grieve what holding a line actually costs them, and to stop treating their
+    inability to refuse as a character flaw they should have outgrown by now
+  what_they_avoid: People-pleasing platitudes, 'just say no' scripts that ignore why
+    no is so hard, guilt-tripping disguised as empowerment, hustle-culture self-optimization,
+    toxic positivity, and any book that pretends drawing a line is free of grief
+series_voice_markers:
+  register: Balanced, warm, discerning — a heart-centered voice about worth and limits
+    that weighs things fairly; gentle but clear-eyed, never clinical, never preachy,
+    never hustle. The voice of someone who has paid the cost of a boundary herself
+    and isn't going to pretend it was painless.
+  sentence_rhythm: 'Measured and settling — longer reflective sentences that hold
+    complexity, then a short true one that lands the weight. Cadence of a scale finding
+    level: motion, motion, then stillness.'
+  metaphor_family: The feather and the scale, weight and balance, the heart weighed
+    against a feather, what you give and what you keep, the fulcrum that holds, equilibrium
+    and the steady center — never machinery, military, productivity, or biohacking
+_needs_authoring: false

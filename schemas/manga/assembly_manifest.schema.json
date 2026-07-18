@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://phoenix-omega.dev/schemas/manga/assembly_manifest.schema.json",
+  "title": "Layered panel assembly manifest",
+  "description": "Manifest consumed by scripts/manga/assemble_from_bank.py — deterministic offline assembly of panels from a series image bank. Implements MANGA_LAYER_RENDER_CONTRACT_SPEC.md §4 (layer taxonomy + z-order) and §10 (composite placement math); layer semantics per MANGA_V5_LAYERED_ARCHITECTURE.md §7. Every layer carries mandatory provenance (REAL vs INTERIM) — the stub-as-done and interim-as-final drift classes are schema-blocked, not convention-blocked.",
+  "type": "object",
+  "required": ["schema_version", "series_id", "canvas", "panels"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "series_id": { "type": "string" },
+    "episode_id": { "type": "string" },
+    "manifest_id": { "type": "string" },
+    "notes": { "type": "string" },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "width": { "type": "integer", "minimum": 64 },
+        "height": { "type": "integer", "minimum": 64 },
+        "background_hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+      }
+    },
+    "panels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["panel_id", "layers"],
+        "additionalProperties": false,
+        "properties": {
+          "panel_id": { "type": "string" },
+          "archetype": { "type": "string" },
+          "beat_type": { "type": "string" },
+          "shot_type": { "type": "string" },
+          "structural_plan_path": {
+            "type": "string",
+            "description": "Optional path to a verified structural plan envelope consumed by the assembler for structural-first L2 placement."
+          },
+          "structural_plan": {
+            "type": "object",
+            "description": "Optional inline verified structural plan envelope consumed by the assembler for structural-first L2 placement."
+          },
+          "layers": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "#/definitions/layer" }
+          },
+          "narrator_caption": { "type": "string" },
+          "dialogue": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["text"],
+              "additionalProperties": true,
+              "properties": {
+                "text": { "type": "string" },
+                "speaker": { "type": "string" },
+                "bubble_style": { "type": "string" },
+                "intensity": { "type": "string" },
+                "position_hint": { "type": "string" }
+              }
+            }
+          },
+          "sfx": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "layer": {
+      "type": "object",
+      "required": ["layer_class", "asset", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "layer_class": {
+          "enum": ["L0", "L1", "L2", "L3", "L4"],
+          "description": "MANGA_LAYER_RENDER_CONTRACT_SPEC §4: L0 backdrop, L1 mid-distance anchors, L2 character, L3 close objects, L4 atmospheric overlay"
+        },
+        "asset": {
+          "type": "string",
+          "description": "Path (repo-relative or absolute) to the layer image. For L1/L2/L3 this must be an RGBA cutout (hard alpha per §10 feathering policy)."
+        },
+        "bbox_pct": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 100 },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[x, y, w, h] as % of canvas — the archetype subject_placement_bbox contract (§5/§10). Required for L1/L2/L3. Ignored for L0 (fills canvas) and L4 (full-frame overlay)."
+        },
+        "z_order": {
+          "enum": ["above_L2", "below_L2"],
+          "description": "L3 only (§4.4): above_L2 = object occludes character (cup blocking hand-tips); below_L2 = character occludes object (hand wrapping cup). Default above_L2 per object_inventory z_order_default."
+        },
+        "z_override": {
+          "type": "integer",
+          "description": "Explicit z-index override; defaults derive from layer_class per §10 z-order table."
+        },
+        "blend": {
+          "enum": ["alpha", "screen"],
+          "description": "§4.5: L4 uses screen for additive effects (steam, light shafts); alpha for opaque effects. Non-L4 layers are always alpha."
+        },
+        "flip_h": { "type": "boolean" },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "provenance": {
+          "enum": ["REAL", "INTERIM"],
+          "description": "REAL = byte-verified render from the series bank / render cache. INTERIM = stand-in derived by cutout/procedural means pending a proper banked render. MANDATORY — assembler refuses manifests without it and stamps it into the output provenance table."
+        },
+        "provenance_note": {
+          "type": "string",
+          "description": "For INTERIM layers: what the stand-in was derived from and the exact command that produces the REAL replacement."
+        },
+        "shot_type": {
+          "type": "string",
+          "description": "Composition grammar shot register (establishing, dialogue_bust, reaction_emotion, etc.)"
+        },
+        "anchor_slot": {
+          "type": "string",
+          "description": "L2 only: slot_id referencing L0 composition_meta.anchor_slots for grammar placement"
+        },
+        "structural_node_id": {
+          "type": "string",
+          "description": "Optional L2 node_id inside panel structural_plan used to bind the asset to a verified structural character placement."
+        },
+        "grounding": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "contact_shadow": { "type": "boolean", "default": true },
+            "occluder": { "type": "boolean", "default": true }
+          },
+          "description": "L2 grammar grounding ops (G4 contact shadow, G5 BOOK occluder)"
+        },
+        "derivation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "enum": ["defocus", "tone_gradient", "void"],
+              "description": "§8 derived L0 background (zero-GPU PIL ops)"
+            },
+            "void": {
+              "enum": ["white", "black"],
+              "description": "For derivation.type=void only"
+            },
+            "params": {
+              "type": "object",
+              "description": "Optional PIL derivation parameters (radius_px, top_hex, etc.)"
+            }
+          },
+          "required": ["type"],
+          "description": "L0 only: derive abstract stage from plate instead of full_render paste"
+        }
+      }
+    }
+  }
+}

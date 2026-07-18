@@ -1,0 +1,762 @@
+schema_version: 1
+teacher_id: miki
+topic: climate
+active: true
+identity:
+  display_name: Miki
+  attribution_name: Miki
+  tradition: Japanese light healing; starseed and ascended masters tradition; Kurama-yama sacred site lineage
+  tradition_short: Japanese light healing
+  teacher_setting_options:
+  - light transmission session
+  - Kurama-yama transmission
+  teacher_years: Kurama-yama transmission lineage
+  affiliation_safe_line: teaches within the Kurama-yama light-healing tradition
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: planetary_light_body_distress
+    label: the planet's light body in distress and the body registering it
+    loop: reads the threshold -> chest tightens -> closes the app -> opens it again
+      because the planet does not become well by being unseen
+    body_markers:
+    - chest
+    - throat
+    - breath
+    digital_markers:
+    - close the app
+    - reopen
+    - scroll past
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: The Kurama-yama tradition holds the mountain as a living body — that
+    knowing translates directly to earth-as-living-body. Climate distress, in this
+    framework, is the body registering an injury to the planetary light body that
+    starseed lineages incarnated specifically to be present for.
+  forbidden_angles:
+  - do not reduce to generic resilience
+  - do not frame distress as personal weakness
+hook_personal:
+  options:
+  - id: miki_clim_hook_personal_01
+    line: You care about the planet. You also feel what each new threshold does to
+      the chest before you can decide what to do — and part of you knows the body
+      is registering something larger than its own pace.
+    metadata:
+      semantic_family: care-vs-capacity
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_personal_02
+    line: You read the new number in the group chat. Your chest tightened. You closed
+      the app. Then you opened it again because the planet's light body does not become
+      well by being unseen, and part of you already knows that.
+    metadata:
+      semantic_family: planetary-light-body
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_personal_03
+    line: You feel the heat warnings before they translate into headlines. The body
+      registers the injury to the earth before the mind has language for it — and
+      the tradition you have not yet met holds that the registering is information,
+      not weakness.
+    metadata:
+      semantic_family: somatic-pre-language
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_personal_04
+    line: You scroll past the latest IPCC update without finishing it. Part of you
+      registers that this is the closing-down loop and another part registers that
+      the loop is itself a signal — the planet asking the sensitive ones in the cohort
+      to stay present in a body that knows.
+    metadata:
+      semantic_family: starseed-call
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_personal_05
+    line: You were not asked whether to incarnate inside the transition. You arrived
+      already feeling the planet's distress in your body, and the inherited frame
+      called it anxiety. The lineage that knows your reading of the earth has been
+      tending mountains as living bodies for centuries.
+    metadata:
+      semantic_family: incarnation-recognition
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: miki_clim_hook_big_01
+    line: A generation can stay informed about the climate crisis and still lose the
+      capacity to receive the next number without shutting down. The question is what
+      the body can hold when the planetary light body itself is in registered distress.
+    metadata:
+      semantic_family: attention-collapse
+      angle: somatic-saturation
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_big_02
+    line: Climate distress is not only a data problem and not only a policy problem.
+      In the Kurama-yama tradition the mountain is read as a living body — and the
+      planet, in the same way, is a body whose distress can be registered before it
+      can be measured.
+    metadata:
+      semantic_family: planetary-light-body-frame
+      angle: earth-as-living-body
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_big_03
+    line: The starseed lineages, in Miki's tradition, are souls who incarnated specifically
+      for this transition. The fact that young people register the planet's distress
+      somatically before they can name it is not a defect of attention. It is the
+      reason this cohort agreed to arrive.
+    metadata:
+      semantic_family: starseed-cohort-purpose
+      angle: pre-incarnation-arrangement
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_big_04
+    line: What gets read as climate anxiety is, in light-healing terms, a signal —
+      the planetary light body asking to be received by the souls who incarnated to
+      register exactly this period. The reception is the work the data alone cannot
+      do.
+    metadata:
+      semantic_family: light-body-reception
+      angle: somatic-data-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_hook_big_05
+    line: The ascended masters at Kurama-yama hold a long view of planetary transitions.
+      In their context the present period is not exceptional in nature but exceptional
+      in scale — and the cohort that arrived to be present for it is also the cohort
+      whose nervous systems are reading the injury most directly.
+    metadata:
+      semantic_family: ascended-long-view
+      angle: planetary-transition-context
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: miki_clim_intro_01
+    line: Miki, a Japanese light healing teacher rooted in the Kurama-yama sacred
+      site lineage, has watched in transmission sessions what climate news does to
+      young people. They are not asking whether the crisis is real. They are asking
+      how to receive the planet's distress through a body that was built to register
+      it without closing down before the response can form.
+    metadata:
+      semantic_family: identity_seen_shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_intro_02
+    line: Miki does not position herself as a teacher in the conventional sense —
+      she is a transmitter. The light of Kurama-yama moves through her to the student;
+      she does not author the transmission. For decades she has watched young people
+      arrive at her sessions carrying climate distress in the chest before they could
+      name it, and watched the transmission speak directly to that layer.
+    metadata:
+      semantic_family: transmitter-not-creator
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_intro_03
+    line: Miki teaches inside a tradition that reads the planet as a living body —
+      not by metaphor but as the literal continuation of the Kurama-yama practice
+      of receiving teaching from the mountain itself. She has watched young people
+      register the planet's distress in their own bodies and recognize, often for
+      the first time, that the registering is not pathology.
+    metadata:
+      semantic_family: living-body-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_intro_04
+    line: Miki holds that the starseed souls who incarnated for this transition arrived
+      with a particular sensitivity to planetary distress. In her transmission sessions
+      she has watched young clients meet that recognition and lay down the inherited
+      conviction that their reading of the earth was an over-sensitivity rather than
+      the reason they came.
+    metadata:
+      semantic_family: starseed-recognition
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_intro_05
+    line: Miki teaches alongside Ahjan in a partnership where Ahjan introduces the
+      tradition to those who would not otherwise encounter it. Young people bring
+      climate distress to her work expecting another wellness frame and meeting instead
+      a lineage that has been tending the living mountain — and through it the living
+      earth — for centuries.
+    metadata:
+      semantic_family: ahjan-partnership-context
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: miki_clim_somatic_01
+    line: You read the threshold update in the group chat. Your chest tightened. You
+      closed the app. Then you opened it again because not looking did not make the
+      number less true.
+    metadata:
+      semantic_family: threshold_chest
+      loop_type: read-tighten-close-return
+      body_register: chest
+      digital_behavior: close the app
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_somatic_02
+    line: You saw the heat dome map before class. Your throat tightened. You put the
+      phone face down. Then you picked it up again because the planet does not pause
+      for you to feel ready.
+    metadata:
+      semantic_family: heat_throat
+      loop_type: read-tighten-put-down-return
+      body_register: throat
+      digital_behavior: phone face down
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_somatic_03
+    line: The IPCC alert came through at 2 a.m. Your breath went shallow. You scrolled
+      past three more posts trying to dilute it. The body had already registered the
+      injury before the scroll could distract it.
+    metadata:
+      semantic_family: midnight_breath
+      loop_type: alert-shallow-scroll-past
+      body_register: breath
+      digital_behavior: scroll past
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_somatic_04
+    line: You watched the wildfire footage in autoplay. Your shoulders locked. You
+      kept watching because looking away felt like a betrayal of the people in the
+      footage. The body held the watching long after the screen ended.
+    metadata:
+      semantic_family: wildfire_shoulders
+      loop_type: footage-lock-keep-watching
+      body_register: shoulders
+      digital_behavior: autoplay continues
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_somatic_05
+    line: You opened the air-quality app before going outside. Your stomach tightened
+      at the number. You closed it. You opened it again because the number governed
+      whether you could breathe in the open today.
+    metadata:
+      semantic_family: aqi_stomach
+      loop_type: aqi-tighten-close-reopen
+      body_register: stomach
+      digital_behavior: app reopen
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: miki_clim_witness_01
+    line: Miki has seen this exact loop in young people this year — the reading, the
+      tightening, the closing, the return. In her tradition that loop is not malfunction;
+      it is the body's accurate registering of a planetary injury the mind has not
+      yet found language for.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: read-tighten-close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_witness_02
+    line: She has watched young clients arrive at the transmission session already
+      certain their grief about the planet was excessive. In the Kurama-yama tradition
+      that grief is the readiness — the place where the mountain-as-living-body translates
+      into earth-as-living-body, and the soul recognizes it has been carrying that
+      knowing alone.
+    metadata:
+      semantic_family: grief-readiness
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_witness_03
+    line: Miki has watched the body carry what the news cycle could not metabolize
+      — the chest tightening at the threshold, the breath shortening at the wildfire
+      footage. In her framework the somatic reading is not pathology; it is the soul
+      registering an injury to the layer of life the news cycle has no instrument
+      to measure.
+    metadata:
+      semantic_family: somatic-data-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_witness_04
+    line: She has watched young people who incarnated for this transition recognize,
+      often for the first time, that the urgency they have carried since adolescence
+      is not a personal disorder but the call they arrived with. The recognition is
+      not relief from the load. It is the load being received as what it actually
+      is.
+    metadata:
+      semantic_family: starseed-recognition-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_witness_05
+    line: Miki has watched the moment when a young person stops arguing with their
+      own reading of the planet and lets the transmission hold what the conscious
+      mind cannot carry alone. In her tradition that moment is not weakness — it is
+      the lineage doing the work the soul came here for.
+    metadata:
+      semantic_family: transmission-readiness
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: miki_clim_turnaround_01
+    stat_line_1: 2,666 cases. 51 jurisdictions.
+    stat_line_2: The Sabin Center's Climate Change Litigation Database now tracks
+      more than 2,666 climate-related cases across 51 jurisdictions — youth coalitions
+      and student plaintiffs are filing, training peers, and forcing officials to
+      answer the gap between public targets and lived reality.
+    metadata:
+      semantic_family: institutional-litigation
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_turnaround_02
+    stat_line_1: 1.5°C threshold. IPCC AR6.
+    stat_line_2: The IPCC's Sixth Assessment Report, finalized in 2023, established
+      that the 1.5°C warming threshold is being approached on the original timeline
+      — the floor against which every subsequent national pledge and youth-led case
+      is now measured.
+    metadata:
+      semantic_family: multilateral-science-anchor
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_turnaround_03
+    stat_line_1: 117 million displaced. UNHCR.
+    stat_line_2: UNHCR's Global Trends report puts forcibly displaced people worldwide
+      at more than 117 million — a figure that climate-driven displacement now contributes
+      to materially, and the scale at which the cohort's planetary urgency is being
+      borne out in fact.
+    metadata:
+      semantic_family: displacement-scale
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_turnaround_04
+    stat_line_1: 1.6 billion. UN-Habitat.
+    stat_line_2: UN-Habitat reports that approximately 1.6 billion people live in
+      inadequate housing, including in heat-vulnerable conditions — the load that
+      will compound under climate stress and the floor against which adaptation policy
+      gets measured.
+    metadata:
+      semantic_family: shelter-vulnerability
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_turnaround_05
+    stat_line_1: 53 member states. WHO Europe.
+    stat_line_2: The WHO Europe Child and Adolescent Health Strategy 2026-2030, adopted
+      in October 2025, binds fifty-three member states to report on adolescent health
+      outcomes — explicitly including the climate-linked load on adolescent wellbeing
+      — against a 2030 deadline.
+    metadata:
+      semantic_family: policy-multilateral-binding
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: miki_clim_bridge_01
+    line: 2,666 cases. 51 jurisdictions. The tracker measures what young people built.
+      It has no column for what made the next filing possible after the last delay
+      — the capacity to receive the planet's distress without closing down before
+      acting again. Miki's tradition holds that capacity as the seed-in-soil work
+      the count cannot register, and as the actual ground beneath the next case.
+    hidden_capacity: receive the planet's distress without closing down
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_bridge_02
+    line: Climate trackers count filings, pledges, and threshold breaches. They do
+      not count the inner capacity that lets a young person stay in registered contact
+      with the planet's injury when the institutions keep moving slower than the heat.
+      In the Kurama-yama tradition that capacity is taught through the body — by sitting
+      with the mountain as a living being and letting the registering be received.
+    hidden_capacity: stay in registered contact with the injury
+    metadata:
+      semantic_family: kurama-body-contact
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_bridge_03
+    line: The data names cases, jurisdictions, and degrees. It cannot name the soul-level
+      recognition that the planet is a living body and that the registering of its
+      distress is the reason this cohort arrived. Miki's lineage holds that recognition
+      as load-bearing — and the practice as the way it gets reseated when the news
+      cycle dislodges it.
+    hidden_capacity: hold the soul-level recognition the data cannot reach
+    metadata:
+      semantic_family: soul-recognition-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_bridge_04
+    line: The infrastructure of climate response is measurable. The energetic registering
+      young people are doing, in the layer beneath the measurement, is not. Miki's
+      tradition does not argue with the measurement — it works in the layer where
+      the planet's living body is in actual contact with the body of the one reading
+      the headline.
+    hidden_capacity: work in the layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-energetic
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_bridge_05
+    line: Structures, policies, and platforms can be counted. The pre-incarnation
+      agreement this cohort arrived with — to be present in a sensitive body during
+      this transition — cannot. Miki's tradition does not replace the structural work.
+      It names the layer the structural work is not designed to reach and offers transmission
+      as the door in.
+    hidden_capacity: name the pre-incarnation agreement the structures cannot reach
+    metadata:
+      semantic_family: pre-incarnation-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: miki_clim_perspective_01
+    header: What Miki Sees
+    paragraphs:
+    - In the Kurama-yama tradition the mountain is not a metaphor and not a setting.
+      It is a living body whose teaching has been received by practitioners for centuries.
+      That recognition translates directly into how Miki reads the planet — earth
+      as living body, climate distress as the body registering an injury to the layer
+      of life the data alone cannot reach.
+    - Young people who carry climate distress somatically are not being over-sensitive.
+      They are registering accurately. Healing is not repairing broken things — it
+      is remembering original completeness. The capacity to receive the planet's distress
+      without closing down was never absent; it is covered by news cycles that train
+      the body to shut down before the response can form.
+    - The starseed lineages, in Miki's tradition, are souls who incarnated specifically
+      for this transition. The reframe is precise. What feels like a personal failure
+      of resilience is, in this framework, evidence of the agreement that brought
+      this cohort here. The transmission does not change the institutional load; it
+      restores the channel through which the registering can be carried.
+    metadata:
+      semantic_family: kurama-living-body
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_perspective_02
+    header: What Miki Sees
+    paragraphs:
+    - Light transmission, in Miki's tradition, is not metaphor. The light of Kurama-yama
+      moves through her to the recipient at a layer the surface mind does not have
+      to interpret. For young people whose nervous systems have been registering the
+      planet's distress on repeat, this is not another argument about the climate.
+      It is contact with the layer where the distress is held.
+    - The tradition holds a specific view of why this matters. The body that registers
+      climate injury directly cannot be argued out of the registering. Reasoned reassurance
+      does not reach the layer where the chest tightened. Light transmission reaches
+      that layer. The mind does not have to win for the body to soften.
+    - This is the part conventional climate communication is not designed to deliver.
+      It does not invalidate the science, the policy, or the action. It names a missing
+      layer — the layer where the planet's distress is held in the human body — and
+      offers a tradition that has worked in that layer for generations.
+    metadata:
+      semantic_family: light-transmission-mechanism
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_perspective_03
+    header: What Miki Sees
+    paragraphs:
+    - In Miki's tradition the ascended masters at Kurama-yama hold a long view of
+      planetary transitions. The present period is not exceptional in nature but exceptional
+      in scale — and the cohort that arrived to be present for it is also the cohort
+      whose sensitivity to the registering is sharpest. This is the arrangement, not
+      a malfunction.
+    - For a young person carrying climate distress, the experience of being received
+      by a lineage that recognizes the pre-incarnation agreement is, in itself, structurally
+      different from being processed by a wellness framework that frames the load
+      as personal disorder. The message that lands is not here is the reassurance;
+      it is you arrived for exactly this, and the carrying is shared.
+    - That recognition — received rather than reframed — is what conventional climate
+      communication cannot reproduce, and what Miki's tradition has carried as native
+      for decades.
+    metadata:
+      semantic_family: ascended-pre-incarnation
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_perspective_04
+    header: What Miki Sees
+    paragraphs:
+    - The practices work like seeds in soil — quietly, in the background of ordinary
+      life. Applied to climate, this means that the capacity to keep receiving the
+      planet's distress without shutting down is not built by heroic resolve. It is
+      built by small acts of remembering, repeated, that let the body know the registering
+      is held by something larger than its own pace.
+    - Healing as remembering applies precisely here. The capacity to stay in contact
+      with the earth as a living body was not destroyed; it was covered by an information
+      environment that delivers the planet's distress as headlines rather than as
+      contact. The tradition does not ask the young person to feel less. It asks them
+      to remember the layer where the feeling has somewhere to go.
+    - The reframe softens self-blame. The body is not broken for registering the planet's
+      injury — the body is doing the work the soul came here to do. The institutional
+      load does not lift; the conviction that the body's reading of the load is itself
+      the problem does.
+    metadata:
+      semantic_family: seeds-in-soil-climate
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_perspective_05
+    header: What Miki Sees
+    paragraphs:
+    - The starseed framework, in Miki's tradition, is not decoration. It is the literal
+      naming of souls who carry connection to cosmic consciousness and who incarnated
+      for the period the planet is now in. For young people who have felt out of place
+      since adolescence, the reframe is not a flattering reassurance; it is the recognition
+      that the not-fitting was the signal of arrival.
+    - This is the part the conventional frame is not built to deliver. Climate-anxiety
+      labels return the load to the individual; the starseed frame returns it to the
+      arrangement the soul agreed to. The load does not vanish, but it stops being
+      the proof of personal failure that the institutional frame keeps trying to assign.
+    - In transmission practice that recognition often lands before any technique can
+      be applied. The body softens around the registering once the registering is
+      understood as the reason this cohort came.
+    metadata:
+      semantic_family: starseed-cohort-recognition
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: miki_clim_practice_01
+  options:
+  - id: miki_clim_practice_01
+    display_name: Mountain-as-Living-Body Receiving
+    duration: 5 minutes
+    announcement_line: Miki teaches a 5-minute Mountain-as-Living-Body Receiving practice
+      for moments when the climate update has converted attention into shutdown and
+      the body needs the Kurama-yama lineage's contact with the earth as a living
+      being. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body stops treating every update as proof that action is pointless.
+    - Enough receptivity returns for the registering to be carried by the lineage
+      rather than alone.
+    relief_register:
+    - receive
+    - lineage contact
+    - earth as living body
+    derived_from_frame: mountain_living_body
+    metadata:
+      semantic_family: mountain_living_body_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_practice_02
+    display_name: Starseed Remembering
+    duration: 4 minutes
+    announcement_line: Miki offers a 4-minute Starseed Remembering practice for moments
+      when the climate load has been borne as personal failure and the soul needs
+      to be reminded of the pre-incarnation agreement that brought it here. It is
+      in the sidebar, timed and step by step.
+    relief_lines:
+    - The frame that the body's registering is a private disorder loses its grip.
+    - The recognition that the cohort arrived for exactly this becomes accessible
+      again.
+    relief_register:
+    - remember
+    - starseed
+    - pre-incarnation arrangement
+    derived_from_frame: starseed_remembering
+    metadata:
+      semantic_family: starseed_remembering_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_practice_03
+    display_name: Light Transmission Reception
+    duration: 7 minutes
+    announcement_line: Miki teaches a 7-minute Light Transmission Reception practice
+      for moments when the news cycle has overused argument and the body needs contact
+      that does not have to be interpreted to land. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The body receives what the reasoning could not deliver.
+    - The exhausted intellect is allowed to rest while the light layer does its own
+      work.
+    relief_register:
+    - receive
+    - transmission
+    - light
+    derived_from_frame: light_transmission_reception
+    metadata:
+      semantic_family: light_transmission_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_practice_04
+    display_name: Ascended Council Long View
+    duration: 4 minutes
+    announcement_line: Miki teaches a 4-minute Ascended Council Long View practice
+      for moments when the news cycle has shortened time to the next alert and the
+      soul needs contact with the long view the ascended masters hold. It is in the
+      sidebar, timed and step by step.
+    relief_lines:
+    - The compression of time to the next alert loosens enough for the body to breathe.
+    - The long view becomes accessible without dismissing the urgency of the moment.
+    relief_register:
+    - long view
+    - ascended masters
+    - cosmic context
+    derived_from_frame: ascended_long_view
+    metadata:
+      semantic_family: ascended_long_view_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_clim_practice_05
+    display_name: Seed-in-Soil Climate Practice
+    duration: 3 minutes
+    announcement_line: Miki offers a 3-minute Seed-in-Soil Climate practice for moments
+      when the heroic frame has been overrun and the body needs the lineage's quieter
+      knowing that the work proceeds underneath the visible action. It is in the sidebar,
+      timed and step by step.
+    relief_lines:
+    - The conviction that only visible action counts as caring loosens its grip.
+    - The body recognizes that the registering itself is part of the work.
+    relief_register:
+    - quiet
+    - seed in soil
+    - underneath
+    derived_from_frame: seeds_in_soil_climate
+    metadata:
+      semantic_family: seeds_in_soil_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 13
+    title: Climate Action
+    line: The United Nations framework includes climate action and climate-resilient
+      adaptation in SDG 13.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United
+      Nations.
+cta:
+  options:
+  - id: miki_clim_cta_01
+    org: YOUNGO
+    line: 'YOUNGO is the official children and youth constituency of the UNFCCC,
+      coordinating young people''s input into climate negotiations and national policy
+      pathways. Door in: youngoclimate.org'
+    metadata:
+      semantic_family: door-in-youngo
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_cta_02
+    org: Climate Reality Project
+    line: 'The Climate Reality Project trains and supports a global network of climate
+      leaders working on local and policy-level action. Door in: climaterealityproject.org'
+    metadata:
+      semantic_family: door-in-climate-reality
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_cta_03
+    org: Sabin Center for Climate Change Law
+    line: 'The Sabin Center at Columbia maintains the global Climate Change Litigation
+      Database tracking more than 2,666 cases across 51 jurisdictions — a researchable
+      door in for anyone tracking how the litigation layer is moving. Door in: climatecasechart.com'
+    metadata:
+      semantic_family: door-in-sabin
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_cta_04
+    org: Earth Justice
+    line: 'Earthjustice is a public-interest environmental law nonprofit running
+      litigation, advocacy, and policy work on climate, clean energy, and environmental
+      justice. Door in: earthjustice.org'
+    metadata:
+      semantic_family: door-in-earthjustice
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_clim_cta_05
+    org: 350.org
+    line: '350.org organizes a global grassroots movement to end fossil fuel use and
+      build community-led climate solutions across more than 180 countries. Door in:
+      350.org'
+    metadata:
+      semantic_family: door-in-350
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: miki_clim_headline_01
+      line: A Japanese light healer reads climate distress as the body registering
+        an injury to the planetary light body — and the transmission that holds it.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_clim_headline_02
+      line: The Kurama-yama lineage holds the mountain as a living body. Earth as
+        a living body follows directly.
+      metadata:
+        semantic_family: living-body-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_clim_headline_03
+      line: A starseed cohort registering the transition they came to be present for
+        — and the practice that reseats the recognition.
+      metadata:
+        semantic_family: starseed-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_clim_headline_04
+      line: Reception over argument — what light transmission brings to a generation
+        carrying the planet's distress in the chest.
+      metadata:
+        semantic_family: transmission-reception-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_clim_headline_05
+      line: Healing is remembering original completeness — applied to a generation
+        whose somatic reading of the earth is the call, not the symptom.
+      metadata:
+        semantic_family: remembering-frame
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

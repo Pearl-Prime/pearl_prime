@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__financial_anxiety__shame__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__steady_ground__1hr
+  name: Steady Ground — for Young Professionals (One-Hour)
+installment_number: 2
+engine: shame
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Financial Anxiety: Carrying What You Can''t Say (3)'
+subtitle: The Shame Response — Financial Anxiety for Gen Z Professionals (The Hidden
+  Weight of Shame)
+cover_tagline: It was never really about the money. It was about what the money says
+  about you.
+description:
+  short_blurb: The dread when you check your balance isn't just fear of the number
+    — it's the quiet verdict that you, specifically, are bad with money and maybe
+    bad, period. This is a one-hour money anxiety reset for the young professional
+    carrying financial shame.
+  long_description: 'You don''t avoid the banking app because of the number. You avoid
+    it because of what the number seems to say about you. That you''re behind. That
+    you should know better by now. That everyone your age has it together and you''re
+    the one quietly faking it. The dread isn''t really about dollars, it''s about
+    the verdict underneath, the buried belief that your financial situation is proof
+    there''s something wrong with you. This book is for the young professional carrying
+    not just money stress, but money shame, the kind that makes you flinch at your
+    own balance.
+
+
+    Financial shame is sneaky because it dresses up as responsibility. It tells you
+    the hot face and the tight stomach are just you ''caring about your finances.''
+    But shame doesn''t make you handle money better. It makes you hide from it. It
+    makes you swipe the card so you don''t have to feel the math, then hate yourself
+    afterward. It turns a debt into a referendum on your worth. And it isolates you
+    completely, because the whole point of shame is the conviction that you''re uniquely
+    broken and can''t let anyone see.
+
+
+    In one hour, this is a place to separate your bank balance from your worth. You''ll
+    recognize financial shame for what it is, a feeling masquerading as a fact, and
+    learn to catch it the moment it whispers ''this means something about who you
+    are.'' Then you''ll go down into it instead of outrunning it with another budgeting
+    promise, because the shame isn''t fixed by better numbers, it''s fixed by being
+    met instead of hidden. And you''ll come back able to look at your actual situation,
+    debt and all, without the voice that turns every figure into evidence against
+    you.
+
+
+    This will not promise to make you ''good with money.'' It will not hand you a
+    payoff plan, a credit-score hack, or a system that earns its way out of the shame,
+    because you can clear the debt and still believe you''re broken, and plenty of
+    people do. No morning routine. No forced silver lining where financial struggle
+    ''built character.''
+
+
+    What it will give you is the difference between a money problem and a verdict
+    on who you are, and the relief of realizing you were never the broken thing here,
+    you were just unmet. You''re allowed to owe money and still be okay. You''re allowed
+    to look at the number without the number looking back and calling you a name.
+    Let it just be a number.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - young professionals
+  - money anxiety for young professionals
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- The Gifts of Imperfection (Brené Brown) — secular roadmap out of shame and toward
+  self-worth that isn't earned
+- The Psychology of Money (Morgan Housel) — separates financial outcomes from personal
+  virtue and luck
+- Healing the Shame That Binds You (John Bradshaw) — names toxic shame as a learned
+  wound, not a true verdict on who you are
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

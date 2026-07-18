@@ -1,0 +1,141 @@
+{
+  "strategy_profile": "intimate_voice",
+  "story_mix_profile": "intimate_voice",
+  "status": "PASS",
+  "book_idea": "prediction-as-evidence swap",
+  "book_motif": "The Alarm (chest and phone)",
+  "requested_budget": {
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "QUOTE": 0,
+    "ENCOURAGEMENT": 2,
+    "TROUBLESHOOTING": 1,
+    "REFLECTION_QUESTION": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "EXTERNAL_STORY": 2
+  },
+  "fulfilled_counts": {
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "QUOTE": 0,
+    "ENCOURAGEMENT": 2,
+    "TROUBLESHOOTING": 1,
+    "REFLECTION_QUESTION": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "EXTERNAL_STORY": 2
+  },
+  "underfilled_budget_by_class": {},
+  "supported_underfilled_budget_by_class": {},
+  "capability_gaps": {},
+  "supply_provenance_by_class": {
+    "REFLECTION_QUESTION": "authored_bank",
+    "TROUBLESHOOTING": "authored_bank",
+    "EXTERNAL_STORY": "authored_bank",
+    "CITED_EVIDENCE": "authored_bank",
+    "WISDOM_ESSENCE": "authored_bank",
+    "AUTHOR_COMMENTARY": "authored_bank",
+    "ENCOURAGEMENT": "atom_pool",
+    "QUOTE": "authored_bank"
+  },
+  "assignment_diagnostics_by_class": {
+    "REFLECTION_QUESTION": {
+      "budget": 3,
+      "assigned": 3,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "TROUBLESHOOTING": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "QUOTE": {
+      "budget": 0,
+      "assigned": 0,
+      "pool_size": 12,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "ENCOURAGEMENT": {
+      "budget": 2,
+      "assigned": 2,
+      "pool_size": 21,
+      "supply_provenance": "atom_pool",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "CITED_EVIDENCE": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "EXTERNAL_STORY": {
+      "budget": 2,
+      "assigned": 2,
+      "pool_size": 20,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "WISDOM_ESSENCE": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 12,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "AUTHOR_COMMENTARY": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 10,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    }
+  },
+  "actual_accent_counts": {
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "QUOTE": 0,
+    "ENCOURAGEMENT": 2,
+    "TROUBLESHOOTING": 1,
+    "REFLECTION_QUESTION": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "EXTERNAL_STORY": 2
+  },
+  "actual_accent_chapter_share": 0.6666666666666666,
+  "chapters_with_accents": [
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    11,
+    12
+  ],
+  "chapter_share": 0.6666666666666666,
+  "nearest_exemplar_id": null,
+  "nearest_exemplar_label": null,
+  "nearest_exemplar_score": 0,
+  "budget_alignment_delta": {
+    "WISDOM_ESSENCE": 0,
+    "CITED_EVIDENCE": 0,
+    "ENCOURAGEMENT": 0,
+    "TROUBLESHOOTING": 0,
+    "REFLECTION_QUESTION": 0,
+    "AUTHOR_COMMENTARY": 0,
+    "EXTERNAL_STORY": 0
+  },
+  "contract_id": "cli_demo_trace_run_composite_contract_v1"
+}

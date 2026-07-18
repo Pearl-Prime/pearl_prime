@@ -1,0 +1,351 @@
+schema_version: 1
+teacher_id: sai_ma
+topic: partnerships
+active: true
+identity:
+  display_name: Sai Maa
+  attribution_name: Sai Maa
+  tradition: Hindu Vishnuswami lineage teacher (Jagadguru; Divine Feminine; Shakti transmission)
+  tradition_short: Hindu Vishnuswami lineage
+  teacher_setting_options:
+  - Brain Illumination teaching session
+  - Diksha transmission
+  teacher_years: Vishnuswami Jagadguru lineage
+  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - home
+  - group chat
+  - commute
+  - public systems
+  tie_to_real_world_struggles:
+  - id: patron_client_drag
+    label: partnership designs that produce dependency rather than mutual flowering
+    loop: reads the partnership announcement -> chest tightens -> closes the tab -> opens it because the patron-client shape is still visible underneath
+    body_markers:
+    - chest
+    - shoulders
+    - jaw
+    digital_markers:
+    - close
+    - reopen
+    - skim
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: 'Partnerships across institutional power asymmetries can be entered as transaction or as communion; Sai Maa''s teaching of the Divine Feminine as embodied force and cultivating-masters-not-followers reframes partnership as mutual flowering rather than patron-client dependency.'
+  forbidden_angles:
+  - do not preach unity-consciousness as a substitute for accountability
+  - do not frame the disillusionment of being on the smaller side as personal cynicism
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: You read another joint-statement press release. You also know what the last three from the same partners actually produced once the cameras left.
+    semantic_family: sai_ma-partnerships-hook-personal-press
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_personal_02
+    line: You said yes to the youth advisory seat. You also know the meeting is at 11 a.m. on a Wednesday, scheduled by people who do not need to skip a shift to attend.
+    semantic_family: sai_ma-partnerships-hook-personal-seat
+    tone: grave
+    intensity: 4
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_personal_03
+    line: You scroll the partner logos at the bottom of the report. You also know which logos showed up to the launch and which logos have been quiet since.
+    semantic_family: sai_ma-partnerships-hook-personal-logos
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: Partnerships are no longer only an institutional-design question. They are a daily test of whether the people most affected by an outcome have any say in how the partners structure the work.
+    semantic_family: sai_ma-partnerships-hook-big-design
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_big_picture_02
+    line: SDG 17 names partnerships as the operating mechanism for the other sixteen goals. The mechanism has been measured. Most multi-stakeholder partnerships fail their stated youth-inclusion targets within 24 months of launch.
+    semantic_family: sai_ma-partnerships-hook-big-sdg17
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_big_picture_03
+    line: The partnership form has been used as both genuine collaboration and as institutional cover. The difference is rarely visible at launch — it is visible 18 months in, when the press conference is over and the convening organization decides which partner gets to keep showing up.
+    semantic_family: sai_ma-partnerships-hook-big-cover
+    article_types:
+    - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: Sai Maa, the first female Jagadguru in 2,700 years of the Vishnuswami lineage, has watched young people return from interfaith and civic partnerships with the same question. They are not asking whether collaboration matters. They are asking how to stay in genuine partnership when the larger partner keeps extracting more than they bring.
+    semantic_family: sai_ma-partnerships-intro-jagadguru
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_intro_02
+    line: Sai Maa, rooted in the Vishnuswami lineage and the integrated humanitarian work of the Temple of Consciousness, has watched in Brain Illumination teaching sessions the specific exhaustion of being the smaller party in a partnership designed around the larger party's exit terms. The teaching she offers does not erase the asymmetry. It activates the inner ground from which the smaller partner can choose mutual flowering over patron-client dependency.
+    semantic_family: sai_ma-partnerships-intro-mutual
+    tone: grave
+    intensity: 4
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_intro_03
+    line: Sai Maa — Jagadguru, humanitarian, founder of Humanity in Unity — has watched in decades of Diksha work the specific moment when a student stops seeking a patron and starts inhabiting their own mastery. That shift is the precondition for partnerships that change what is possible. The students bringing partnership questions to her teaching are asking how to inhabit it in institutional rooms designed to delay it.
+    semantic_family: sai_ma-partnerships-intro-diksha
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: 'You read the joint press release. Your shoulders tightened. You closed the tab. Then you opened it again because the names listed were not changing. LOOP_SEQUENCE: "read the release. shoulders tightened. closed the tab. opened it again."'
+    loop_type: patron_client_drag
+    body_register: shoulders
+    digital_behavior: close-return
+    article_types:
+    - hard_news_spiritual_response
+  - id: youth_somatic_02
+    line: 'You opened the partnership invitation. Your jaw tightened. You skimmed past it. Then you came back because saying no had its own cost too. LOOP_SEQUENCE: "opened the invitation. jaw tightened. skimmed past. came back."'
+    loop_type: patron_client_drag
+    body_register: jaw
+    digital_behavior: skim-return
+    article_types:
+    - hard_news_spiritual_response
+  - id: youth_somatic_03
+    line: 'You read the new MOU between the two organizations. Your chest tightened. You set the phone down. Then you picked it up because your friend on the smaller side was already in the group chat. LOOP_SEQUENCE: "read the MOU. chest tightened. put the phone down. picked it up again."'
+    loop_type: patron_client_drag
+    body_register: chest
+    digital_behavior: put-down-return
+    article_types:
+    - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Sai Maa has seen this exact loop in young people returning from partnership work — the release, the tightening, the look away, and the return because the people on the smaller side were still in it.
+    semantic_family: sai_ma-partnerships-witness-loop
+    loop_type: patron_client_drag
+    article_types:
+    - hard_news_spiritual_response
+  - id: teacher_witness_02
+    line: She has watched students enter partnerships seeking a patron and leave them carrying invisible labor that the larger partner publicly took credit for. The Vishnuswami lineage does not wave that away. It names it as a mismatch between the partnership's stated form and the consciousness from which it was actually designed.
+    semantic_family: sai_ma-partnerships-witness-labor
+    loop_type: patron_client_drag
+    article_types:
+    - hard_news_spiritual_response
+  - id: teacher_witness_03
+    line: Sai Maa has watched the slower thing — the way young partners learn to feel patron-client dependency as a tightening in the body before the contract names it. The teaching she offers is not skepticism. It is the disciplined recognition that genuine partnership requires both parties to be inhabiting their own mastery, not their assigned role in the hierarchy.
+    semantic_family: sai_ma-partnerships-witness-mastery
+    loop_type: patron_client_drag
+    article_types:
+    - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 480 youth-led coalitions. 33 countries.
+    stat_line_2: Young partners are running open-books co-governance pilots, refusing nondisclosure-by-default in MOUs, and publishing partner accountability scorecards even when the larger partners ask them not to.
+    semantic_family: sai_ma-partnerships-turnaround-cogov
+    article_types:
+    - hard_news_spiritual_response
+  - id: turnaround_02
+    stat_line_1: 480 youth-led coalitions. 33 countries.
+    stat_line_2: Youth partnership networks are documenting which partnerships kept their inclusion targets and which did not — and publishing the lists where the funders that wrote the original MOUs can find them.
+    semantic_family: sai_ma-partnerships-turnaround-targets
+    article_types:
+    - hard_news_spiritual_response
+  - id: turnaround_03
+    stat_line_1: 480 youth-led coalitions. 33 countries.
+    stat_line_2: Young people are building South-South knowledge networks, running peer-to-peer convenings that bypass the convener-extractor model, and treating the partnership as infrastructure rather than as PR.
+    semantic_family: sai_ma-partnerships-turnaround-southsouth
+    article_types:
+    - hard_news_spiritual_response
+bridge:
+  options:
+  - id: bridge_01
+    line: 480 youth-led coalitions. 33 countries. The tracker measures what young people built. It has no column for what made the next partnership possible after the last one delivered extraction in collaborative language — the capacity to keep inhabiting mastery in rooms designed to assign client roles. The partner who came back needed it. So does the reader still in the loop. Sai Maa's lineage has been transmitting that capacity for centuries.
+    hidden_capacity: inhabit own mastery in rooms designed for patron-client dependency
+    semantic_family: sai_ma-partnerships-bridge-mastery
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: bridge_02
+    line: Partnership trackers count signatures and joint statements. They do not count the inner capacity that lets a young partner stay engaged after the dominant partner has used the partnership as cover. That capacity — what Diksha activates in the brain's own non-competitive engagement — is what the next organizer needs. It is what the reader who reopened the listing needs too. The Vishnuswami lineage works directly on it.
+    hidden_capacity: activate the brain's non-competitive collaborative engagement
+    semantic_family: sai_ma-partnerships-bridge-diksha
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: bridge_03
+    line: 480 youth-led coalitions. 33 countries. The count measures action. It does not measure the slower thing — the discipline of moving in genuine partnership with people whose institutional power is shaped to extract from yours. Sai Maa teaches that the Divine Feminine — receptive, integrating, embodied — is the force partnerships across difference actually require. Most partnership work that fails has been operating without it.
+    hidden_capacity: integrate the receptive Divine Feminine force in partnership work
+    semantic_family: sai_ma-partnerships-bridge-feminine
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: What Sai Maa Sees
+    paragraphs:
+    - Sai Maa teaches that the Divine Feminine as embodied living reality — not as symbolic representation but as active Shakti — is the force that makes genuine partnership possible. Partnerships between individuals, institutions, or nations that lack the receptive, integrating quality of the Divine Feminine remain at the level of transaction rather than communion. Unity consciousness — the direct experiential recognition of non-separation — is the inner ground from which true partnership becomes possible.
+    - Cultivating masters not followers applies directly to partnership design. Structures that create dependency rather than developing the capacity of all parties are not in alignment with the Jagadguru vision Sai Maa carries. The Shakti transmission moves toward the flowering of every participant's own realization — the exact opposite of the patron-client dynamic that too many international partnerships inadvertently replicate, even when their stated framework calls itself collaboration.
+    - Love and compassion as planetary healing force operate at every scale — from the two-person coaching relationship to the international partnership framework. The Vishnuswami lineage teaches that the quality of the inner state of those entering a partnership determines its depth and sustainability. Diksha — light transmission — activates the brain's own capacity for non-competitive, genuinely collaborative engagement that the world's most intractable problems require.
+    semantic_family: sai_ma-partnerships-perspective-feminine
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_perspective_02
+    header: What Sai Maa Sees
+    paragraphs:
+    - Sai Maa reads partnership strain through the inner state of the parties entering the room. The smaller partner who has been conditioned to seek a patron will, in practice, draw out the patron in the larger partner — and the structural arrangement will then validate that role on both sides. The Vishnuswami teaching shifts the conditioning at its root, not by demanding the larger partner change first but by activating the smaller partner's recognition that mastery is not assigned by institutional position.
+    - From there Sai Maa turns to the integrated humanitarian work that the Temple of Consciousness embodies. Partnership without humanitarian grounding is performance; humanitarian work without partnership at the level of consciousness is exhaustion. The Jagadguru lineage holds that these are not two practices. They are two faces of the same work. Sai Maa applies this to the question of how partnership tables actually decide who matters.
+    - 'The reframe is precise: what feels like a personal failure of cooperative skill — me, broken, wrong for noticing the asymmetry — is often the soul''s accurate refusal of a partnership designed to maintain dependency while calling itself collaboration. The mind stops calling itself broken when the consciousness behind the design is named clearly, and the design is recognized as changeable by the same people currently being asked to consent to it.'
+    semantic_family: sai_ma-partnerships-perspective-mastery
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_perspective_03
+    header: What Sai Maa Sees
+    paragraphs:
+    - Sai Maa would name the asymmetry precisely. Most institutional partnerships are not failures of intention. They are arrangements designed by parties with very different exit costs. The party that can walk away cheaply will tend, in practice, to set the terms. The Vishnuswami lineage does not respond by pretending the exit costs are equal. It responds by activating the inner ground from which the smaller partner can decide whether the partnership remains worth its costs to them.
+    - Inter-tradition partnership — Sai Maa's recognition that she has received visitations from Jesus, St. Germain, and Archangel Michael as authentically as from the Hindu tradition — is the operational frame. Partnership across tradition lines, like partnership across institutional power, requires the parties to recognize each other as faces of the same divine reality. The partnership that cannot do this remains transactional, and transactional partnerships exhaust the smaller party first.
+    - 'The reframe matters: what feels like a personal failure — me, broken, wrong for noticing the extraction — is often the soul''s accurate response to a partnership designed around mismatched exit costs. The mind stops calling itself broken when it sees that the real disorder is in the design of the partnership, and that the design can be changed by the same partners who are currently being asked to consent to it.'
+    semantic_family: sai_ma-partnerships-perspective-inter-tradition
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+practice:
+  default_id: practice_01
+  options:
+  - id: practice_01
+    display_name: 5-minute Brain Illumination Reset
+    duration: 5 minutes
+    announcement_line: Sai Maa teaches a 5-minute Brain Illumination Reset for moments when a partnership has started extracting in collaborative language and the smaller partner needs the inner ground clear before the next conversation. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The competitive grip on the conversation softens; mutual flowering becomes thinkable again.
+    - A steadier ground returns for the next MOU revision, the next decision about whether to stay in.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: brain_illumination
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: practice_02
+    display_name: 5-minute Mastery Recognition
+    duration: 5 minutes
+    announcement_line: Sai Maa teaches a 5-minute Mastery Recognition practice — rooted in cultivating-masters-not-followers — for the moment when a partnership is trying to assign a client role. It is in the sidebar, short enough to use before the call or after the meeting.
+    relief_lines:
+    - The patron-client dynamic that the design installs stops being inhabited as inevitable.
+    - Enough ground returns to choose engagement or refusal on the work's actual terms.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: cultivating_masters
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: practice_03
+    display_name: 5-minute Shakti Listening for Partnership
+    duration: 5 minutes
+    announcement_line: Sai Maa teaches a 5-minute practice rooted in Shakti transmission as receptive integrating force — for moments before a partnership meeting where the smaller partner needs to enter from the Divine Feminine ground rather than from the assigned client position. It is in the sidebar.
+    relief_lines:
+    - The body recognizes the room, the people, and the actual stakes of the meeting.
+    - A clearer ground returns for the next agreement, refusal, or honest pause.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: shakti_transmission
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+sdg:
+  primary:
+    id: SDG 17
+    title: Partnerships for the Goals
+    line: The United Nations has a framework for this through SDG 17 and its targets on multi-stakeholder partnerships, data, monitoring, and accountability.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
+cta:
+  options:
+  - id: cta_01
+    org: Major Group for Children and Youth (UN MGCY)
+    line: 'The UN Major Group for Children and Youth coordinates youth input into UN partnership processes including the High-Level Political Forum. Door in: https://www.unmgcy.org'
+    semantic_family: sai_ma-partnerships-cta-mgcy
+    article_types:
+    - hard_news_spiritual_response
+  - id: cta_02
+    org: Restless Development
+    line: 'Restless Development runs youth-led research and accountability work on partnership outcomes across the Global South. Door in: https://restlessdevelopment.org'
+    semantic_family: sai_ma-partnerships-cta-restless
+    article_types:
+    - hard_news_spiritual_response
+  - id: cta_03
+    org: Partners for Youth Empowerment Network
+    line: 'PYE Global runs peer-to-peer partnership trainings that treat collaboration as a practice, not a press release. Door in: https://pyeglobal.org'
+    semantic_family: sai_ma-partnerships-cta-pye
+    article_types:
+    - hard_news_spiritual_response
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: Most Multi-Stakeholder Partnerships Miss Their Youth-Inclusion Targets.
+      semantic_family: sai_ma-partnerships-title1-miss
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_1_02
+      line: SDG 17 Is The Mechanism. The Mechanism Is Underperforming.
+      semantic_family: sai_ma-partnerships-title1-sdg17
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_1_03
+      line: Young Partners Are Auditing The Partnerships That Use Their Names.
+      semantic_family: sai_ma-partnerships-title1-audit
+      article_types:
+      - hard_news_spiritual_response
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: A Vishnuswami Jagadguru names the patron-client design partnerships keep replicating — and the Diksha that activates a different way to enter the room.
+      semantic_family: sai_ma-partnerships-title2-jagadguru
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_2_02
+      line: Cultivating masters not followers is not metaphor. It is the operational test for whether a partnership design is in alignment with what it claims to do.
+      semantic_family: sai_ma-partnerships-title2-mastery
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_2_03
+      line: The Divine Feminine as embodied integrating force is the partnership variable most international frameworks have been missing.
+      semantic_family: sai_ma-partnerships-title2-feminine
+      article_types:
+      - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

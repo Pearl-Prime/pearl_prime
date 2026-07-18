@@ -1,0 +1,269 @@
+# Per-brand cover art generation specs for ComfyUI on Pearl Star.
+# 4 formats per brand. Each brand visually distinct at thumbnail scale.
+# Wired to: brand_identity_system.yaml (colors, colophon, cover_template),
+#           brand_lora_plans.yaml (trigger words), brand_illustration_styles.yaml (art style).
+schema_version: 1
+last_updated: "2026-04-08"
+
+formats:
+  kdp_ebook:
+    width: 1600
+    height: 2560
+    aspect: "5:8"
+    notes: "Amazon KDP standard. Title top-third, teacher figure center, colophon bottom."
+  audiobook_square:
+    width: 3200
+    height: 3200
+    aspect: "1:1"
+    notes: "ACX/Findaway/Spotify. Teacher face prominent, title large, brand colophon."
+  manga_cover:
+    width: 800
+    height: 1200
+    aspect: "2:3"
+    notes: "Webtoon/manga series cover. Dynamic composition, series title, episode badge."
+  social_thumb:
+    width: 1080
+    height: 1080
+    aspect: "1:1"
+    notes: "YouTube/IG/TikTok thumbnail. High contrast, readable at 120px scale."
+
+generation_defaults:
+  steps: 25
+  guidance: 3.5
+  sampler: euler
+  scheduler: normal
+  backend: comfyui  # COMFYUI_URL env var
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cover prompt authoring rules — TEXT-FREE FLUX renders + PIL typography overlay
+# Lineage: PR #1025 (Phase 2 P0 negative-prompt fix) + PR #1043 V1.1 smoke regression
+# Operator memory note: feedback_cover_text_overlay_two_stage
+# ─────────────────────────────────────────────────────────────────────────────
+# Two-stage cover architecture:
+#   Stage 1 (FLUX): renders imagery only — NO title, NO author name, NO subtitle
+#   Stage 2 (PIL):  composites typography downstream from per-format slot data
+#
+# AUTHORING RULES (apply to every cover positive_prompt for all brands):
+#   1. NEVER quote literal series titles or book titles inside positive_prompt
+#      (FLUX will hallucinate them as embedded typography — see PR #1043 smoke
+#      where "The Season After", "Mirror Crush", "Salary Story Hour" leaked).
+#   2. Use {title_area} / {colophon_area} placeholders ONLY — these are typography
+#      slot descriptions ("upper negative space for typography"), not text content.
+#   3. Describe series concept via emotional throughline / palette / composition,
+#      NOT via title quotation.
+#
+# NEGATIVE PROMPT PARITY (every cover render must include this block):
+text_free_negative_prompt: >
+  text, letters, words, watermark, signature, typography, logo, caption,
+  title text, book title text, embedded title, lettering, calligraphy,
+  signage, captions, subtitles, font glyphs, latin alphabet typography,
+  text characters, font, signs, writing, typography characters
+# ─────────────────────────────────────────────────────────────────────────────
+
+brands:
+  stillness_press:
+    character_lora: "ahjan_sp"
+    style_lora: "style_sp"
+    prompt_template: >
+      {format} cover art, style_sp ahjan_sp, contemplative ink wash illustration,
+      warm watercolor textures, slate and gold palette, soft natural light,
+      optional forest-naturalism variant: deep forest green or parchment base,
+      dappled light through trees, pressed-leaf organic textures, earth tones,
+      generous negative space, {title_area}, {colophon_area}
+    color_overlay: "rgba(100, 116, 139, 0.08)"  # slate wash; alternate rgba(45, 74, 42, 0.06) for forest strand
+    typography:
+      title_font: "Cormorant Garamond"
+      title_color: "#D4A574"
+      placement: top_third
+    colophon_position: bottom_center
+    alternate_typography:
+      title_font: "Libre Baskerville"
+      title_color: "#2D4A2A"
+      placement: top_third
+
+  cognitive_clarity:
+    character_lora: "kenjin_cc"
+    style_lora: "style_cc"
+    prompt_template: >
+      {format} cover art, style_cc kenjin_cc, stark zen ink illustration,
+      high contrast black and white, enso brush marks, minimal composition,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(26, 26, 26, 0.05)"
+    typography:
+      title_font: "Montserrat"
+      title_color: "#1A1A1A"
+      placement: center
+    colophon_position: bottom_right
+
+  somatic_wisdom:
+    character_lora: "pamela_sw"
+    style_lora: "style_sw"
+    prompt_template: >
+      {format} cover art, style_sw pamela_sw, soft clinical illustration,
+      cream and rose palette, clean modern lines, warm light,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(212, 160, 160, 0.06)"
+    typography:
+      title_font: "Nunito Sans"
+      title_color: "#C1666B"
+      placement: top_third
+    colophon_position: bottom_center
+
+  qi_foundation:
+    character_lora: "feung_qf"
+    style_lora: "style_qf"
+    prompt_template: >
+      {format} cover art, style_qf feung_qf, traditional Chinese brushwork,
+      earth and gold tones, flowing qi energy, seal script accents,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(197, 160, 61, 0.06)"
+    typography:
+      title_font: "Noto Serif SC"
+      title_color: "#8B7355"
+      placement: top_third
+    colophon_position: bottom_right
+
+  digital_ground:
+    character_lora: "miki_dg"
+    style_lora: "style_dg"
+    prompt_template: >
+      {format} cover art, style_dg miki_dg, digital minimalism illustration,
+      midnight blue and cyan, flat clean aesthetic, rounded forms,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(34, 211, 238, 0.05)"
+    typography:
+      title_font: "Inter"
+      title_color: "#22D3EE"
+      placement: center
+    colophon_position: bottom_center
+
+  heart_balance:
+    character_lora: "maat_hb"
+    style_lora: "style_hb"
+    prompt_template: >
+      {format} cover art, style_hb maat_hb, geometric Egyptian mysticism,
+      indigo and gold, hieroglyphic borders, dramatic lighting,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(49, 46, 129, 0.08)"
+    typography:
+      title_font: "Cinzel"
+      title_color: "#F59E0B"
+      placement: top_third
+    colophon_position: bottom_center
+
+  relational_calm:
+    character_lora: "miyuki_rc"  # per OPD-111
+    style_lora: "style_rc"
+    prompt_template: >
+      {format} cover art, style_rc miyuki_rc, wabi-sabi minimal illustration,
+      warm white and stone, maximum negative space, asymmetric composition,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(160, 147, 125, 0.04)"
+    typography:
+      title_font: "Noto Serif JP"
+      title_color: "#8B7D6B"
+      placement: off_center_left
+    colophon_position: bottom_right
+
+  warrior_calm:
+    character_lora: "wu_wc"
+    style_lora: "style_wc"
+    prompt_template: >
+      {format} cover art, style_wc wu_wc, martial ink illustration,
+      charcoal and crimson, dynamic brushwork, controlled power,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(220, 20, 60, 0.06)"
+    typography:
+      title_font: "Noto Serif SC"
+      title_color: "#DC143C"
+      placement: top_third
+    colophon_position: bottom_left
+
+  sleep_restoration:
+    character_lora: "sha_sr"
+    style_lora: "style_sr"
+    prompt_template: >
+      {format} cover art, style_sr sha_sr, luminous night illustration,
+      deep violet and soft glow, starfield background, healing energy,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(139, 92, 246, 0.06)"
+    typography:
+      title_font: "Playfair Display"
+      title_color: "#A78BFA"
+      placement: top_third
+    colophon_position: bottom_center
+
+  body_memory:
+    character_lora: "omote_bm"
+    style_lora: "style_bm"
+    prompt_template: >
+      {format} cover art, style_bm omote_bm, textured grief illustration,
+      charcoal and terracotta, aged paper grain, Noh theater weight,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(160, 82, 45, 0.06)"
+    typography:
+      title_font: "Noto Serif JP"
+      title_color: "#A0522D"
+      placement: center
+    colophon_position: bottom_left
+
+  solar_return:
+    character_lora: "ra_so"
+    style_lora: "style_so"
+    prompt_template: >
+      {format} cover art, style_so ra_so, ember abstraction illustration,
+      soot and orange, cosmic geometry, hard edge contrast,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(234, 88, 12, 0.06)"
+    typography:
+      title_font: "Space Mono"
+      title_color: "#F97316"
+      placement: center
+    colophon_position: bottom_right
+
+  devotion_path:
+    character_lora: "saima_dp"
+    style_lora: "style_dp"
+    prompt_template: >
+      {format} cover art, style_dp saima_dp, flowing devotion illustration,
+      purple and blush, ornate borders, warm soft light,
+      {title_area}, {colophon_area}
+    color_overlay: "rgba(124, 58, 237, 0.05)"
+    typography:
+      title_font: "Playfair Display"
+      title_color: "#7C3AED"
+      placement: top_third
+    colophon_position: bottom_center
+
+  # ── Standard brands (style_lora only — no character_lora) ──
+
+  stabilizer: { style_lora: "style_stab", prompt_template: "{format} cover art, style_stab, clinical harbor, slate and sky blue gradient, minimalist composition, {title_area}, {colophon_area}", color_overlay: "rgba(56, 189, 248, 0.06)", typography: { title_font: "DM Serif Display", title_color: "#38BDF8", placement: top_third }, colophon_position: bottom_center }
+  optimizer: { style_lora: "style_opt", prompt_template: "{format} cover art, style_opt, electric precision, charcoal and blue geometric, forward momentum, {title_area}, {colophon_area}", color_overlay: "rgba(59, 130, 246, 0.06)", typography: { title_font: "Sora", title_color: "#3B82F6", placement: center }, colophon_position: bottom_right }
+  night_reset: { style_lora: "style_nr", prompt_template: "{format} cover art, style_nr, nocturnal hypnotic, deep night and indigo, moon glow, {title_area}, {colophon_area}", color_overlay: "rgba(129, 140, 248, 0.06)", typography: { title_font: "Playfair Display", title_color: "#818CF8", placement: center }, colophon_position: bottom_center }
+  career_lift: { style_lora: "style_cl", prompt_template: "{format} cover art, style_cl, purposeful forward, slate and amber, bold composition, {title_area}, {colophon_area}", color_overlay: "rgba(245, 158, 11, 0.06)", typography: { title_font: "Montserrat", title_color: "#F59E0B", placement: top_third }, colophon_position: bottom_right }
+  adhd_forge: { style_lora: "style_af", prompt_template: "{format} cover art, style_af, electric affirming, teal and orange vibrant shapes, lightning energy, {title_area}, {colophon_area}", color_overlay: "rgba(249, 115, 22, 0.06)", typography: { title_font: "Space Grotesk", title_color: "#F97316", placement: center }, colophon_position: bottom_center }
+  longevity_lab: { style_lora: "style_ll", prompt_template: "{format} cover art, style_ll, clinical optimist, white and forest green, clean scientific, {title_area}, {colophon_area}", color_overlay: "rgba(134, 239, 172, 0.04)", typography: { title_font: "Archivo", title_color: "#166534", placement: top_third }, colophon_position: bottom_right }
+  creative_unfold: { style_lora: "style_cu", prompt_template: "{format} cover art, style_cu, whimsical handmade, cream and pink, paper texture collage, {title_area}, {colophon_area}", color_overlay: "rgba(244, 114, 182, 0.05)", typography: { title_font: "Caveat", title_color: "#92400E", placement: off_center_left }, colophon_position: bottom_center }
+  resilient_parent: { style_lora: "style_rp", prompt_template: "{format} cover art, style_rp, tender brief, cream and warm grey, soft domestic, {title_area}, {colophon_area}", color_overlay: "rgba(251, 146, 60, 0.05)", typography: { title_font: "Merriweather", title_color: "#78716C", placement: top_third }, colophon_position: bottom_center }
+  executive_calm: { style_lora: "style_ec", prompt_template: "{format} cover art, style_ec, granite authority, near-black and bronze, premium dark, {title_area}, {colophon_area}", color_overlay: "rgba(180, 83, 9, 0.06)", typography: { title_font: "Fraunces", title_color: "#B45309", placement: center }, colophon_position: bottom_right }
+  trauma_path: { style_lora: "style_tp", prompt_template: "{format} cover art, style_tp, safe earth, cream and terracotta, protective organic, {title_area}, {colophon_area}", color_overlay: "rgba(163, 120, 94, 0.05)", typography: { title_font: "Literata", title_color: "#A3785E", placement: top_third }, colophon_position: bottom_center }
+  spiritual_ground: { style_lora: "style_sg", prompt_template: "{format} cover art, style_sg, deep well, indigo and soft purple, concentric depth, {title_area}, {colophon_area}", color_overlay: "rgba(167, 139, 250, 0.06)", typography: { title_font: "Spectral", title_color: "#A78BFA", placement: center }, colophon_position: bottom_center }
+  focus_sprint: { style_lora: "style_fs", prompt_template: "{format} cover art, style_fs, launch velocity, midnight and cyan, ascending geometric, {title_area}, {colophon_area}", color_overlay: "rgba(34, 211, 238, 0.05)", typography: { title_font: "Sora", title_color: "#22D3EE", placement: center }, colophon_position: bottom_right }
+  hormone_reset: { style_lora: "style_hr", prompt_template: "{format} cover art, style_hr, cyclical empowering, blush and deep rose, wave motifs, {title_area}, {colophon_area}", color_overlay: "rgba(251, 113, 133, 0.05)", typography: { title_font: "Lora", title_color: "#9F1239", placement: top_third }, colophon_position: bottom_center }
+  stoic_edge: { style_lora: "style_se", prompt_template: "{format} cover art, style_se, forged steel, charcoal and grey, anvil stark high contrast, {title_area}, {colophon_area}", color_overlay: "rgba(113, 113, 122, 0.05)", typography: { title_font: "Oswald", title_color: "#71717A", placement: center }, colophon_position: bottom_left }
+  calm_student: { style_lora: "style_cs", prompt_template: "{format} cover art, style_cs, campus blue, light blue and navy, bold modern youthful, {title_area}, {colophon_area}", color_overlay: "rgba(96, 165, 250, 0.05)", typography: { title_font: "Space Grotesk", title_color: "#1E40AF", placement: center }, colophon_position: bottom_center }
+  healing_ground: { style_lora: "style_hg", prompt_template: "{format} cover art, style_hg, midday warmth, cream and warm yellow, sunlit accessible, {title_area}, {colophon_area}", color_overlay: "rgba(251, 191, 36, 0.05)", typography: { title_font: "DM Serif Display", title_color: "#92400E", placement: top_third }, colophon_position: bottom_center }
+  bio_flow: { style_lora: "style_bf", prompt_template: "{format} cover art, style_bf, signal pulse, white-green and forest, waveform data, {title_area}, {colophon_area}", color_overlay: "rgba(74, 222, 128, 0.04)", typography: { title_font: "JetBrains Mono", title_color: "#14532D", placement: center }, colophon_position: bottom_right }
+  confidence_core: { style_lora: "style_cc2", prompt_template: "{format} cover art, style_cc2, threshold moment, warm white and amber, doorway gentle, {title_area}, {colophon_area}", color_overlay: "rgba(217, 119, 6, 0.05)", typography: { title_font: "Libre Baskerville", title_color: "#D97706", placement: top_third }, colophon_position: bottom_center }
+  relationship_clarity: { style_lora: "style_rel", prompt_template: "{format} cover art, style_rel, intimate honest, cream and crimson, two-person warmth, {title_area}, {colophon_area}", color_overlay: "rgba(225, 29, 72, 0.05)", typography: { title_font: "Merriweather", title_color: "#E11D48", placement: top_third }, colophon_position: bottom_center }
+  morning_momentum: { style_lora: "style_mm", prompt_template: "{format} cover art, style_mm, dawn decisive, cream and amber, sunrise horizon bold, {title_area}, {colophon_area}", color_overlay: "rgba(245, 158, 11, 0.05)", typography: { title_font: "Montserrat", title_color: "#F59E0B", placement: top_third }, colophon_position: bottom_right }
+  minimal_mind: { style_lora: "style_min", prompt_template: "{format} cover art, style_min, crystal clear, almost white and cyan, maximum negative space, {title_area}, {colophon_area}", color_overlay: "rgba(6, 182, 212, 0.03)", typography: { title_font: "DM Sans", title_color: "#475569", placement: center }, colophon_position: bottom_center }
+  high_performer: { style_lora: "style_hp", prompt_template: "{format} cover art, style_hp, locked sharp, black and red, target focus high contrast, {title_area}, {colophon_area}", color_overlay: "rgba(239, 68, 68, 0.06)", typography: { title_font: "Bebas Neue", title_color: "#EF4444", placement: center }, colophon_position: bottom_right }
+  gentle_growth: { style_lora: "style_gg", prompt_template: "{format} cover art, style_gg, tender seedling, mint and green, garden delicate, {title_area}, {colophon_area}", color_overlay: "rgba(134, 239, 172, 0.04)", typography: { title_font: "Nunito", title_color: "#4ADE80", placement: top_third }, colophon_position: bottom_center }
+  legacy_builder: { style_lora: "style_lb", prompt_template: "{format} cover art, style_lb, second mountain, charcoal and warm taupe, dignified gravitas, {title_area}, {colophon_area}", color_overlay: "rgba(120, 113, 108, 0.06)", typography: { title_font: "Fraunces", title_color: "#78716C", placement: center }, colophon_position: bottom_right }
+
+# Production estimate (37 brands):
+# 37 brands × 4 formats = 148 base cover templates
+# × 12 lanes (locale brand name variants) = ~1,776 covers
+# + Series manga covers: 87 series × 1 cover = 87 manga covers
+# Grand total: ~1,863 cover renders

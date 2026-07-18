@@ -1,0 +1,107 @@
+# Weekly book rollout — matrix over brands × topics × personas × formats.
+# Runs weekly on Sunday 06:00 UTC; also on-demand.
+# Uses ubuntu-latest for prose rendering (no GPU required).
+# Manga lanes handled separately by manga-pipeline.yml (GPU-dependent).
+name: Weekly book rollout
+
+on:
+  workflow_dispatch:
+    inputs:
+      brands:
+        description: "Space-separated persona/brand ids (e.g. 'gen_z_professionals corporate_managers')"
+        required: true
+        default: "gen_z_professionals"
+      topics:
+        description: "Space-separated topic ids"
+        required: true
+        default: "anxiety"
+      formats:
+        description: "Space-separated runtime formats"
+        required: true
+        default: "standard_book"
+      quality_profile:
+        description: "Quality profile"
+        required: true
+        default: "production"
+  schedule:
+    # Every Sunday at 06:00 UTC
+    - cron: "0 6 * * 0"
+
+jobs:
+  rollout:
+    name: Rollout matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: pip install -r requirements-test.txt
+
+      - name: Run rollout matrix
+        env:
+          BRANDS: ${{ inputs.brands || 'gen_z_professionals' }}
+          TOPICS: ${{ inputs.topics || 'anxiety' }}
+          FORMATS: ${{ inputs.formats || 'standard_book' }}
+          QUALITY_PROFILE: ${{ inputs.quality_profile || 'production' }}
+        run: |
+          set -u
+          mkdir -p artifacts/rollout
+          SUMMARY="artifacts/rollout/SUMMARY.md"
+          echo "# Weekly rollout — $(date -u +%Y-%m-%d)" > "$SUMMARY"
+          echo "" >> "$SUMMARY"
+          echo "| Brand | Topic | Format | Result |" >> "$SUMMARY"
+          echo "|---|---|---|---|" >> "$SUMMARY"
+
+          FAILED=0
+          for brand in $BRANDS; do
+            for topic in $TOPICS; do
+              # Arc selection: default to {brand}__{topic}__overwhelm__F006.yaml if present, fall back otherwise.
+              ARC_PATH="config/source_of_truth/master_arcs/${brand}__${topic}__overwhelm__F006.yaml"
+              if [ ! -f "$ARC_PATH" ]; then
+                ARC_PATH=$(ls config/source_of_truth/master_arcs/${brand}__${topic}__*.yaml 2>/dev/null | head -1)
+                if [ -z "$ARC_PATH" ]; then
+                  echo "| $brand | $topic | — | SKIP (no arc) |" >> "$SUMMARY"
+                  continue
+                fi
+              fi
+              for fmt in $FORMATS; do
+                OUT_DIR="artifacts/rollout/${brand}__${topic}__${fmt}"
+                mkdir -p "$OUT_DIR"
+                set +e
+                PYTHONPATH=. python3 scripts/run_pipeline.py \
+                  --topic "$topic" --persona "$brand" --arc "$ARC_PATH" \
+                  --pipeline-mode spine --exercise-journeys --runtime-format "$fmt" \
+                  --no-job-check --render-book --render-dir "$OUT_DIR" \
+                  --out "$OUT_DIR/plan.json" \
+                  --no-generate-freebies --no-update-freebie-index \
+                  --quality-profile "$QUALITY_PROFILE" 2>&1 | tee "$OUT_DIR/stdout.txt"
+                RC=${PIPESTATUS[0]}
+                set -e
+                if [ "$RC" -eq 0 ]; then
+                  RESULT="PASS"
+                else
+                  RESULT="FAIL (rc=$RC)"
+                  FAILED=$((FAILED+1))
+                fi
+                echo "| $brand | $topic | $fmt | $RESULT |" >> "$SUMMARY"
+              done
+            done
+          done
+
+          echo "" >> "$SUMMARY"
+          echo "Failed runs: $FAILED" >> "$SUMMARY"
+          cat "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+          echo "failed_runs=$FAILED" >> $GITHUB_OUTPUT
+
+      - name: Upload rollout artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-rollout-${{ github.run_number }}
+          path: artifacts/rollout/
+          retention-days: 90

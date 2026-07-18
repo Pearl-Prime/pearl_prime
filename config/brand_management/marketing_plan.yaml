@@ -1,0 +1,368 @@
+# Global Marketing Plan — Per-Lane Strategies for 312 Brands
+# Authority: Pearl_Marketing + Pearl_Research + EI v2
+# Each brand lane gets a customized marketing strategy based on market research.
+# 48 Social handles content repurposing (1 book → 30-50 social posts via GHL).
+# Baseline: $0 ad budget. Knobs show ROI at $100, $500, $1K, $5K/month.
+
+schema_version: "1.0"
+
+# ── Global Strategy (applies to all lanes) ────────────────────────
+global_strategy:
+  mission: "Get the right content to the right person at the right moment."
+
+  # Content-first marketing: every marketing asset comes FROM the book content
+  content_marketing_stack:
+    - layer: "book"
+      description: "The core product — ebook, audiobook, pocket guide"
+    - layer: "freebie"
+      description: "Lead magnet — workbook, assessment, exercise tool"
+    - layer: "video"
+      description: "5 formats per book — YouTube, Shorts, TikTok, IG, LINE"
+    - layer: "social_posts"
+      description: "48 Social breaks each book into 30-50 posts via GHL"
+    - layer: "email"
+      description: "Proof loop sequence (E1-E5) from freebie signup"
+    - layer: "podcast"
+      description: "Atom-based episodes — discovery + nurture channel"
+
+  # Value ladder (same globally, prices vary by lane)
+  value_ladder:
+    - tier: "free"
+      product: "Freebie (workbook, tool, assessment)"
+      purpose: "Lead capture → email list"
+    - tier: "micro"
+      product: "$0.99 challenge / pocket guide"
+      purpose: "First purchase, review generation"
+    - tier: "standard"
+      product: "$3.99-$6.99 ebook + free companion"
+      purpose: "Core revenue product"
+    - tier: "premium"
+      product: "$14.99-$24.99 deep book + video companion"
+      purpose: "High-value for engaged readers"
+    - tier: "series"
+      product: "$4.99/installment × 7-14 books"
+      purpose: "Recurring revenue, reader retention"
+    - tier: "bundle"
+      product: "Book + course + app + community"
+      purpose: "Maximum LTV"
+
+  # 48 Social integration
+  forty_eight_social:
+    role: "Content repurposing engine"
+    input: "Book plan JSON + rendered prose + cover art"
+    output: "30-50 social media posts per book, scheduled across platforms"
+    ghl_integration:
+      email_campaigns: true        # proof loop E1-E5 already built
+      sms_campaigns: true          # opt-in only, book launch announcements
+      funnel_pages: true           # freebie landing pages per book
+      social_scheduling: true      # post scheduling to all platforms
+      crm_tracking: true           # reader journey: freebie → purchase → upsell
+    auto_approve: true              # DEFAULT: posts go live without admin review
+    review_mode: false              # admin can opt-in to manual review (not recommended)
+    status: "active — email campaigns live, social repurposing configured, auto-approve ON"
+
+# ── Per-Lane Marketing Strategy ───────────────────────────────────
+lane_strategies:
+
+  en_US:
+    primary_discovery: [google_play_search, youtube_organic, tiktok_organic]
+    secondary_discovery: [instagram_reels, podcast_crosspromo, reddit_organic]
+    paid_priority: [meta_ads, google_ads, amazon_ads]  # if budget available
+    content_repurposing:
+      posts_per_book: 50
+      platforms: [instagram, tiktok, facebook, twitter, pinterest, linkedin]
+    email_strategy:
+      provider: "ghl"  # GoHighLevel via 48 Social
+      sequence: "proof_loop_e1_e5"
+      expected_open_rate: 0.35
+      expected_click_rate: 0.08
+    video_strategy:
+      youtube_long: {frequency: "3/week", seo_focus: true}
+      youtube_shorts: {frequency: "daily", hook_first_2s: true}
+      tiktok: {frequency: "daily", trending_sounds: true}
+      instagram: {frequency: "3/week", carousel_mix: true}
+    cold_start_product: "$0.99 7-Day Anxiety Challenge"
+    review_strategy: "ARC (Advance Review Copy) to 50 beta readers before launch"
+    cultural_notes: "Direct CTA works. Evidence-based framing preferred. Somatic/nervous system language resonates."
+
+  ja_JP:
+    primary_discovery: [youtube_organic, line_organic, audiobook_jp]
+    secondary_discovery: [twitter_jp, note_com, voicy]
+    paid_priority: [line_ads, youtube_ads, twitter_ads_jp]
+    content_repurposing:
+      posts_per_book: 30
+      platforms: [twitter_jp, line, instagram, note_com]
+    email_strategy:
+      provider: "ghl"
+      sequence: "proof_loop_adapted_jp"
+      expected_open_rate: 0.25  # lower email engagement in Japan
+      expected_click_rate: 0.05
+    video_strategy:
+      youtube_long: {frequency: "2/week", subtitled: true}
+      youtube_shorts: {frequency: "3/week"}
+      tiktok: {frequency: "3/week"}
+      line: {frequency: "2/week", qr_code: true}
+    cold_start_product: "¥150 5分リセット (5-Minute Reset)"
+    review_strategy: "Influencer seeding on note.com and Voicy"
+    cultural_notes: "Indirect framing. Never say 'you have anxiety.' Say 'many people experience...' Keigo register. No direct CTA in ads — use curiosity hooks."
+
+  ko_KR:
+    primary_discovery: [naver_search, youtube_organic, instagram]
+    secondary_discovery: [kakao, tiktok, brunch_story]
+    paid_priority: [naver_ads, meta_ads, kakao_ads]
+    content_repurposing:
+      posts_per_book: 35
+      platforms: [instagram, naver_blog, kakao, twitter]
+    cold_start_product: "₩1,200 빨리빨리 리셋 (Quick Reset)"
+    cultural_notes: "Achievement culture resonance. '빨리빨리' (hurry hurry) micro-format preferred. K-beauty wellness crossover audience."
+
+  zh_TW:
+    primary_discovery: [google_play, youtube, line_tw]
+    secondary_discovery: [readmoo, kobo_tw, ptt_forum]
+    paid_priority: [meta_ads, google_ads, line_ads_tw]
+    content_repurposing:
+      posts_per_book: 30
+      platforms: [instagram, facebook, line, ptt]
+    cold_start_product: "NT$30 五分鐘重置 (5-Minute Reset)"
+    cultural_notes: "身心靈 (body-mind-spirit) framing works. Filial piety angle for parent topics. Traditional Chinese only."
+
+  zh_CN:
+    primary_discovery: [ximalaya, wechat_read, douyin]
+    secondary_discovery: [xiaohongshu, bilibili, dedao]
+    paid_priority: [wechat_moments, douyin_ads, ximalaya_promoted]
+    content_repurposing:
+      posts_per_book: 40
+      platforms: [wechat, douyin, xiaohongshu, weibo, bilibili]
+    cold_start_product: "Free on Ximalaya (build audience first)"
+    cultural_notes: "No Google Play. No direct mental health language — use '成长' (growth), '调节' (regulation). Fast-cut Douyin format. Community-driven via WeChat groups."
+
+  zh_HK:
+    primary_discovery: [google_play, youtube, instagram]
+    secondary_discovery: [openrice_community, lihkg_forum]
+    paid_priority: [meta_ads, google_ads]
+    cold_start_product: "HK$8 五分鐘重置"
+    cultural_notes: "Bilingual Cantonese/English. Political anxiety resonance. Compact formats for MTR commute."
+
+  zh_SG:
+    primary_discovery: [google_play, spotify, youtube]
+    secondary_discovery: [carousell, hardwarezone_forum]
+    paid_priority: [meta_ads, google_ads]
+    cold_start_product: "S$1.50 5-Minute Reset"
+    cultural_notes: "Trilingual (English/Chinese/Malay). Kiasu culture → achievement/competition angle. Practical framing."
+
+  es_US:
+    primary_discovery: [google_play, youtube_es, spotify]
+    secondary_discovery: [instagram, tiktok, facebook_groups]
+    paid_priority: [meta_ads_es, google_ads_es]
+    cold_start_product: "$0.99 Reto de 7 Días contra la Ansiedad"
+    cultural_notes: "Neutral LatAm Spanish. Family/community framing. Bilingual audience (code-switching OK in social)."
+
+  es_ES:
+    primary_discovery: [google_play, youtube, spotify]
+    secondary_discovery: [instagram, twitter_es]
+    paid_priority: [meta_ads, google_ads]
+    cold_start_product: "€0.99 Reto de 7 Días"
+    cultural_notes: "Castilian Spanish. Siesta culture → rest/recovery angle. More formal register than es_US."
+
+  fr_FR:
+    primary_discovery: [google_play, youtube, spotify, kobo_fr]
+    secondary_discovery: [instagram, tiktok_fr]
+    paid_priority: [meta_ads, google_ads]
+    cold_start_product: "€0.99 Défi 7 Jours"
+    cultural_notes: "France = #1 manga market in Europe. Manga self-help is FIRST MOVER opportunity. Philosophical framing resonates."
+
+  de_DE:
+    primary_discovery: [google_play, audible_de, youtube]
+    secondary_discovery: [instagram, spotify]
+    paid_priority: [meta_ads, google_ads, amazon_ads_de]
+    cold_start_product: "€0.99 7-Tage-Challenge"
+    cultural_notes: "Evidence-based framing REQUIRED. No spiritual language. 'Wissenschaftlich fundiert' (scientifically grounded) sells. Long-form preferred."
+
+  it_IT:
+    primary_discovery: [google_play, kobo, spotify]
+    secondary_discovery: [instagram, tiktok]
+    paid_priority: [meta_ads, google_ads]
+    cold_start_product: "€0.99 Sfida di 7 Giorni"
+    cultural_notes: "Family-centric framing. Emotional warmth in marketing. Mediterranean wellness angle."
+
+  hu_HU:
+    primary_discovery: [google_play, youtube, spotify]
+    secondary_discovery: [facebook_groups_hu]
+    paid_priority: [meta_ads]  # limited local ad platforms
+    cold_start_product: "299 Ft 7 Napos Kihívás"
+    cultural_notes: "GREENFIELD MARKET — self-help category 'virtually non-existent' in Hungarian. First mover advantage on everything. Facebook Groups are primary discovery channel."
+
+# ── Ad Budget Scenarios ───────────────────────────────────────────
+# Populated from artifacts/research/advertising_roi_research.md
+ad_budget_scenarios:
+  zero:
+    monthly_spend: 0
+    strategy: "Pure organic — content marketing, SEO, social, email, 48 Social repurposing"
+    expected_monthly_revenue_per_brand: "$0-$200 (months 1-6), $200-$500 (months 7-12)"
+    expected_roas: "infinite (no spend)"
+    channels: "BookTok/Shorts organic, Pinterest evergreen, podcast guesting, 48 Social 30-50 posts/book, email proof loop (2K subs = 100-300 sales/launch)"
+    key_metric: "Email list size — every 1,000 subscribers ≈ 50-150 sales per launch"
+    break_even: "Month 4-8 (depends on review velocity and email list growth)"
+
+  starter:
+    monthly_spend: 100
+    strategy: "Below viable threshold for most platforms — but can work on Reddit ($5/day) or LINE Japan ($3/day)"
+    allocation: "100% to single cheapest channel for this lane"
+    expected_roas: "0.5-1.5x"
+    expected_monthly_revenue: "$50-$150"
+    best_platforms_by_lane:
+      en_US: "Reddit Ads ($3-7 CPM, $0.43-$1.00 CPC, niche health targeting)"
+      ja_JP: "LINE Ads ($0.67-$1.52 CPM — cheapest in study, 3-5% CTR)"
+      ko_KR: "Naver Ads ($0.054 CPC — remarkably cheap search ads)"
+      zh_CN: "Not viable — WeChat minimum $7K campaign, Douyin minimum $500)"
+      de_DE: "Reddit Ads (German subreddits, evidence-based wellness targeting)"
+      hu_HU: "Meta Ads (Facebook Groups dominate Hungarian book discovery)"
+    note: "At $100/month, organic should still be primary. Paid is supplemental."
+
+  growth:
+    monthly_spend: 500
+    strategy: "Sweet spot for testing — 1-2 platforms with enough data to optimize"
+    allocation:
+      primary: "60% ($300) to best-performing platform"
+      secondary: "25% ($125) to second channel"
+      test: "15% ($75) to experimental channel"
+    expected_roas: "0.6-2.0x"
+    expected_monthly_revenue: "$300-$1,000"
+    expected_monthly_impressions: "50,000-150,000"
+    expected_monthly_clicks: "500-2,000"
+    expected_monthly_conversions: "10-40 book sales"
+    best_allocation_by_lane:
+      en_US: "Amazon Ads $300 ($0.30-$1.30 CPC, 2-5% conv) + TikTok $125 + Reddit $75"
+      ja_JP: "LINE $300 ($0.67 CPM!) + YouTube $125 + Twitter JP $75"
+      ko_KR: "Naver $300 ($0.054 CPC) + Meta $125 + Kakao $75"
+      fr_FR: "Meta $300 + Google $125 + Amazon FR $75"
+      de_DE: "Amazon DE $300 + Meta $125 + Google $75"
+    break_even: "Month 2-4 with consistent optimization"
+
+  scale:
+    monthly_spend: 1000
+    strategy: "Full funnel — paid starts outperforming organic after 90 days sustained"
+    allocation:
+      awareness: "40% ($400) — YouTube Shorts ads, TikTok Spark Ads, Meta reach"
+      retargeting: "35% ($350) — Meta retargeting, Google Display remarketing"
+      conversion: "25% ($250) — Amazon Sponsored Products, Google Search"
+    expected_roas: "0.8-2.5x"
+    expected_monthly_revenue: "$800-$2,500"
+    expected_monthly_impressions: "100,000-400,000"
+    expected_monthly_clicks: "1,500-5,000"
+    expected_monthly_conversions: "30-100 book sales"
+    key_insight: "At $1K/month, retargeting warm audiences (video viewers, site visitors) delivers 3-5x better ROAS than cold prospecting"
+    break_even: "Month 1-2 with retargeting; month 3-4 for full funnel"
+
+  enterprise:
+    monthly_spend: 5000
+    strategy: "Maximum reach — all channels + influencer seeding + PR"
+    allocation:
+      paid_social: "30% ($1,500) — Meta + TikTok + YouTube"
+      search_retail: "25% ($1,250) — Amazon Ads + Google Search"
+      retargeting: "20% ($1,000) — full cross-platform retargeting"
+      influencer: "15% ($750) — BookTok creators, wellness podcasters"
+      test_new: "10% ($500) — new platforms, new formats, A/B tests"
+    expected_roas: "0.8-3.0x"
+    expected_monthly_revenue: "$4,000-$15,000"
+    expected_monthly_impressions: "500,000-2,000,000"
+    expected_monthly_conversions: "100-500 book sales"
+    key_insight: "Short-form video drives 84% conversion increase. At $5K, invest heavily in video ad creative from existing pipeline output."
+
+  # Fleet-level recommendation (don't do all 312 brands at once)
+  fleet_rollout:
+    phase_1:
+      brands: 10
+      budget_per_brand: 500
+      total_monthly: 5000
+      duration: "3 months"
+      goal: "Identify top 3-5 performing brands and channels"
+    phase_2:
+      brands: 20
+      budget_per_brand: "500-1000 (winners get more)"
+      total_monthly: 10000
+      duration: "3 months"
+      goal: "Scale winners, kill non-performers"
+    phase_3:
+      brands: 50
+      budget_per_brand: "1000-5000 (tiered by performance)"
+      total_monthly: 50000
+      goal: "Full scale with optimized allocation"
+
+  # Platform cost reference (from research)
+  platform_costs:
+    amazon_ads: {cpc: "$0.30-$1.30", conversion: "2-5%", min_daily: "$10"}
+    tiktok_ads: {cpc: "$0.50-$1.00", conversion: "1-3%", min_daily: "$20", note: "40-50% cheaper than Facebook"}
+    reddit_ads: {cpm: "$3-7", cpc: "$0.43-$1.00", min_daily: "$5", note: "Underpriced for niche health"}
+    meta_ads: {cpm: "$20.70", cpc: "$1.50-$3.00", conversion: "1-2%", min_daily: "$20", note: "38% YoY CPM increase"}
+    google_ads: {cpc: "$1.00-$4.00", conversion: "2-4%", min_daily: "$15"}
+    line_japan: {cpm: "$0.67-$1.52", ctr: "3-5%", min_daily: "$5", note: "Cheapest platform found"}
+    naver_korea: {cpc: "$0.054", note: "Blog reviews more important than ads"}
+    youtube_ads: {cpv: "$0.10-$0.30", conversion: "0.5-1%", min_daily: "$20"}
+    wechat_china: {min_campaign: "$7,000+", note: "Enterprise only — not for brand-level testing"}
+
+# ── Marketing Dashboard Config ────────────────────────────────────
+dashboard:
+  location: "Phoenix Command UI"
+  features:
+    - name: "Ad Spend Simulator"
+      description: "Drag slider from $0 to $5K/month, see projected impressions/clicks/sales/revenue"
+      knobs: [monthly_budget, platform_allocation, target_audience, content_format]
+      graphs: [roas_curve, cpa_trend, revenue_projection, break_even_timeline]
+
+    - name: "Content Performance Matrix"
+      description: "Heatmap: topic × persona × format — colored by sales/engagement"
+      data_source: "artifacts/performance/{brand_id}/"
+
+    - name: "Lane Comparison"
+      description: "Side-by-side: all 13 lanes, sales, engagement, growth rate"
+      graphs: [lane_revenue_bar, lane_growth_line, lane_cpa_scatter]
+
+    - name: "Freebie Funnel Tracker"
+      description: "Funnel: freebie downloads → email signups → book purchases → upsells"
+      data_source: "funnel/ + GHL CRM data"
+
+    - name: "Video Performance"
+      description: "Per-platform video metrics: views, completion rate, click-through to book"
+      platforms: [youtube, youtube_shorts, tiktok, instagram, line]
+
+    - name: "48 Social ROI"
+      description: "Social post performance: impressions, engagement, link clicks per book"
+      data_source: "GHL social scheduling reports"
+
+# ── Presentation Outputs ──────────────────────────────────────────
+presentations:
+  # Full English presentation (all brands, all lanes)
+  master_deck:
+    format: "HTML + PDF"
+    language: "en"
+    sections:
+      - "Executive Summary"
+      - "Global Strategy Overview"
+      - "Per-Lane Market Analysis (13 lanes)"
+      - "Brand Portfolio (24 brands × 13 lanes)"
+      - "Content Audit Results (what to build, what to skip)"
+      - "Value Ladder + Pricing Strategy"
+      - "Video Marketing Strategy"
+      - "48 Social Content Repurposing"
+      - "Ad Budget Scenarios + ROI Projections"
+      - "Cold-Start Playbook"
+      - "Monthly Revenue Projections (realistic)"
+      - "Risk Analysis"
+    output: "artifacts/presentations/master_marketing_deck.html"
+
+  # Per-admin localized presentations
+  admin_deck:
+    format: "HTML + PDF"
+    language: "admin's locale language"
+    sections:
+      - "Your Brand Overview"
+      - "Your Market (lane-specific data)"
+      - "Your Content Calendar (this quarter)"
+      - "Your Platforms + Upload Schedule"
+      - "Your Ad Budget Options"
+      - "Your Freebie Funnel"
+      - "Your Weekly Checklist"
+      - "Your Performance Targets"
+    output: "artifacts/presentations/{brand_id}_marketing_plan.html"
+    localized: true  # generated in admin's language

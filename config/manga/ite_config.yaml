@@ -1,0 +1,131 @@
+# Implicit Therapeutic Engine (ITE) — manga pipeline parameters
+schema_version: "1.0.0"
+
+breath_engine:
+  target_bpm: 6
+  cycle_duration_s: 10
+  cycle_phases:
+    inhale_s: 2.5
+    hold_s: 2.5
+    exhale_s: 3.5
+    pause_s: 1.5
+  placement_rules:
+    min_sequences_per_chapter: 1
+    max_sequences_per_chapter: 4
+    first_sequence_min_page: 4
+    mandatory_after_emotional_band_min: 4
+    iyashikei_max_sequences: 6
+    horror_max_sequences: 1
+  phase_hints:
+    inhale: "progressively larger panels"
+    hold: "single wide panel with nature or horizon detail"
+    exhale: "decreasing size or quiet single panel"
+    pause: "wide gutter after exhale"
+
+color_arc:
+  phases:
+    # Opening / hook — moderate warm (matches spec §6 hook / user warm 3200K)
+    - name: warm
+      pct_range: [0, 20]
+      temp_center_k: 3200
+      temp_range_k: [3000, 3400]
+    - name: neutral
+      pct_range: [20, 45]
+      temp_center_k: 4500
+      temp_range_k: [4300, 4800]
+    # Mid chapter — cool (user 5500K)
+    - name: cool
+      pct_range: [45, 65]
+      temp_center_k: 5500
+      temp_range_k: [5200, 5800]
+    # Resolution band — must stay ≥5500K mean for ITE T-08 / spec §15
+    - name: resolution_cool
+      pct_range: [65, 85]
+      temp_center_k: 6000
+      temp_range_k: [5500, 6800]
+    - name: warm_glow
+      pct_range: [85, 100]
+      temp_center_k: 3500
+      temp_range_k: [3300, 3700]
+  final_segment_cool_ratio_pct: 15
+  genre_overrides:
+    horror:
+      phase_cool_bias_k: -400
+      resolution_brightness_cap: 0.25
+    romance:
+      global_warm_bias_k: 200
+    iyashikei:
+      global_warm_bias_k: 1000
+      saturation_floor_pct: 20
+    shonen:
+      tension_saturation_cap_pct: 85
+    seinen:
+      extend_turn_pct_range: [50, 75]
+
+fractal:
+  target_fd_range: [1.3, 1.5]
+  warn_fd_range: [1.1, 1.7]
+  source_categories: [arboreal, aquatic, atmospheric, geological]
+  section_minimums:
+    release_resolve_nature_panels_min: 1
+
+gutter:
+  width_classes:
+    tight:
+      mm: [2, 3]
+      multiplier: 0.5
+    standard:
+      mm: [4, 5]
+      multiplier: 1.0
+    wide:
+      mm: [6, 8]
+      multiplier: 2.0
+    breath:
+      mm: [10, 15]
+      multiplier: 4.0
+    page_break:
+      mm: [16, 24]
+      multiplier: 5.0
+  transition_rules:
+    max_consecutive_tight: 3
+    post_band4_min_class: wide
+    post_band5_min_class: breath
+    resolution_forbid_tight: true
+    resolution_final_pct: 25
+
+sabido:
+  role_definitions: [positive_model, negative_model, transitional]
+  forbidden_terms:
+    - therapy
+    - mindfulness
+    - meditation
+    - wellness
+    - self-care
+    - healing journey
+    - inner peace
+    - mental health
+
+stealth:
+  forbidden_therapy_terms:
+    - therapy
+    - psychotherapy
+    - mindfulness
+    - grounding
+    - breathing exercise
+    - meditation
+    - wellness
+    - self-care
+    - healing journey
+    - inner peace
+    - mental health
+    - calm down
+    - relax your body
+    - take a breath
+    - counselor
+    - counselling
+
+ite_qc:
+  resolution_temp_min_k: 5500
+  resolution_sat_max_pct: 55
+  vt_stealth_blocker_min: 0.5
+  composite_pass_min: 0.5

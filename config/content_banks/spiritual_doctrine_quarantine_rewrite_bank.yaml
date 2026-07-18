@@ -1,0 +1,491 @@
+---
+# spiritual_doctrine_quarantine_rewrite_bank.yaml
+# Authority: docs/CONTENT_FRAGMENT_VARIATION_WRITER_SPEC.md §7 + §8.8
+# Structure: Section A — quarantine_entries / Section B — secular_replacements
+# Source registries scanned: all 9 listed in the spec.
+
+# ══════════════════════════════════════════════════════════════════════
+# SECTION A — quarantine_entries
+# Exact text extracted from source registries. Do not edit original_text.
+# ══════════════════════════════════════════════════════════════════════
+
+quarantine_entries:
+
+  - quarantine_id: quarantine_buddhist_001
+    original_atom_id: ch04_sec06_exercise_f1
+    original_text: >
+      Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
+      the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
+      to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
+      literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
+      understanding of universal truths.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+      - productivity
+      - imposter_syndrome
+      - somatic_healing
+      - overthinking
+      - self_worth
+      - boundaries
+      - courage
+    replacement_bank_key: secular_replacement_buddha_emperor_wu
+    notes: >
+      Same atom appears at multiple chapter positions in anxiety.yaml and mirrors
+      in all 8 other secular-topic registries. The variant_id prefix changes
+      (ch04_, ch07_, etc.) but the content fingerprint is identical. All instances
+      are quarantined by this single entry.
+
+  - quarantine_id: quarantine_buddhist_002
+    original_atom_id: ch04_sec06_exercise_f2
+    original_text: >
+      Consequently, understanding the transient and dream-like nature of life is a significant step towards enlightenment.Seeking
+      Higher States of Mind:Buddhist practitioners strive to attain higher states of mind, characterized by increased
+      clarity, happiness, and a broader perspective on life. Through meditation, mindfulness, and compassionate action,
+      they purify their minds, gradually ascending to more elevated states of consciousness.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+      - productivity
+      - imposter_syndrome
+      - somatic_healing
+      - overthinking
+      - self_worth
+      - boundaries
+      - courage
+    replacement_bank_key: secular_replacement_higher_states
+    notes: >
+      F2 family. Also appears verbatim across somatic_healing.yaml, imposter_syndrome.yaml,
+      depression.yaml, overthinking.yaml, self_worth.yaml, financial_anxiety.yaml,
+      boundaries.yaml, courage.yaml under matching section/chapter structure.
+
+  - quarantine_id: quarantine_buddhist_003
+    original_atom_id: ch04_sec06_exercise_f3
+    original_text: >
+      It is a direct experience of life devoid of any mental constructs or illusions, a state of being in perfect
+      harmony with the universe.In conclusion, Buddhist enlightenment is a journey from ordinary states of mind to a
+      state of ultimate peace and clarity known as Nirvana. This path involves shifting to higher states of mind through
+      mindfulness, compassion, and meditation. However, the ultimate goal is to transcend all states of mind, leading
+      to a direct experience of reality beyond concepts, mental constructs, and even the self.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+      - productivity
+      - imposter_syndrome
+      - somatic_healing
+      - overthinking
+      - self_worth
+      - boundaries
+      - courage
+    replacement_bank_key: secular_replacement_nirvana_transcendence
+    notes: >
+      F3 family. Contains "Dharmakaya" equivalent language ("direct experience of reality beyond concepts")
+      and explicit Nirvana/transcendence claims. Appears in all 9 secular registries.
+
+  - quarantine_id: quarantine_buddhist_004
+    original_atom_id: forty_minutes_scene_family
+    original_text: >
+      The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows
+      something your mind is still arguing about.
+    source_registry: registry/anxiety.yaml
+    reason: registry duplicate family — same sentence appears across 7+ chapters
+    allowed_in_plans_with_frames: []
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+      - productivity
+      - imposter_syndrome
+      - somatic_healing
+      - overthinking
+      - self_worth
+      - boundaries
+      - courage
+    replacement_bank_key: secular_replacement_task_open_scene
+    notes: >
+      Not a doctrine atom — a duplicate recognition scene that appears at lines 34, 667, 1179, 1639,
+      2049, 2457, 2865, 3279 in anxiety.yaml. Quarantined here as a collision family.
+      Replace with anxiety_genz_scene_recognition_bank variants. "Forty minutes" is a specific
+      timestamp that creates fingerprint collision when repeated across chapters.
+
+  - quarantine_id: quarantine_buddhist_005
+    original_atom_id: enlightenment_journey_conclusion_family
+    original_text: >
+      Buddhist enlightenment is a journey from ordinary states of mind to a state of ultimate peace and clarity known as Nirvana.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine — enlightenment as standalone teaching claim
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+      - productivity
+      - imposter_syndrome
+      - somatic_healing
+      - overthinking
+      - self_worth
+      - boundaries
+      - courage
+    replacement_bank_key: secular_replacement_nirvana_transcendence
+    notes: >
+      Substring of quarantine_buddhist_003. Listed separately because it also appears as
+      a section header fragment ("In conclusion, Buddhist enlightenment is a journey...")
+      in multiple registries.
+
+  - quarantine_id: quarantine_buddhist_006
+    original_atom_id: seeking_higher_states_header_family
+    original_text: >
+      Seeking Higher States of Mind:Buddhist practitioners strive to attain higher states of mind, characterized by increased
+      clarity, happiness, and a broader perspective on life.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine — section header embedded in content block
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+    replacement_bank_key: secular_replacement_higher_states
+    notes: >
+      The malformed colon-separated header "Seeking Higher States of Mind:Buddhist..." appears
+      across all F2 variants in all 9 registries. It is a content-generation artifact where
+      a section label was appended without whitespace formatting. Quarantined as doctrine leakage.
+
+  - quarantine_id: quarantine_buddhist_007
+    original_atom_id: recognizing_teachings_enlightenment_family
+    original_text: >
+      Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
+      to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+      - productivity
+      - imposter_syndrome
+      - somatic_healing
+      - overthinking
+      - self_worth
+      - boundaries
+      - courage
+    replacement_bank_key: secular_replacement_buddha_emperor_wu
+    notes: >
+      Second malformed header pattern in F1. Both "Recognizing the Teachings of Enlightenment:"
+      and "Seeking Higher States of Mind:" fragments appear cross-registry in F1 and F2 families.
+
+  - quarantine_id: quarantine_buddhist_008
+    original_atom_id: consciousness_purification_family
+    original_text: >
+      Through meditation, mindfulness, and compassionate action, they purify their minds,
+      gradually ascending to more elevated states of consciousness.
+    source_registry: registry/anxiety.yaml
+    reason: off-topic doctrine — consciousness purification language not valid for secular topics
+    allowed_in_plans_with_frames: ["buddhist", "contemplative", "comparative_religion"]
+    blocked_in_plans_with_topics:
+      - anxiety
+      - depression
+      - financial_anxiety
+      - workplace
+      - gen_z_professionals
+    replacement_bank_key: secular_replacement_higher_states
+    notes: >
+      Tail of F2 family. "Purify their minds" and "elevated states of consciousness" are
+      doctrinal claims invalid in secular anxiety/workplace context. Bundled in F2 quarantine.
+
+
+# ══════════════════════════════════════════════════════════════════════
+# SECTION B — secular_replacements
+# Minimum 10 replacement atoms across all quarantined families.
+# All use 8 replacement directions from spec §8.8.
+# ══════════════════════════════════════════════════════════════════════
+
+secular_replacements:
+
+  # Replaces: quarantine_buddhist_001 / quarantine_buddhist_007
+  - replacement_id: secular_replacement_buddha_emperor_wu_001
+    replacement_bank_key: secular_replacement_buddha_emperor_wu
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      The self that feels most solid under pressure is often the self that is running the oldest script.
+      Naming that script is not the same as believing it.
+    topic_allowlist: ["anxiety", "imposter_syndrome", "self_worth", "depression"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.8
+      engagement: 0.8
+      practical_transfer: 0.7
+    collision_family: identity_script
+    replacement_direction: "replace named doctrine with chapter's secular mechanism"
+    signature_phrases: ["self that is running the oldest script"]
+    forbidden_terms: ["Buddha", "Emperor Wu", "enlightenment", "Dharma", "no one"]
+    notes_for_selector: "Secular replacement for identity-dissolution framing. No Buddhist reference."
+
+  - replacement_id: secular_replacement_buddha_emperor_wu_002
+    replacement_bank_key: secular_replacement_buddha_emperor_wu
+    slot_type: INTEGRATION
+    body: >
+      Identity under pressure is not a fixed point.
+      The part that says "this is who I am" is often the part that most needs to be questioned gently.
+    topic_allowlist: ["anxiety", "imposter_syndrome", "self_worth"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 3
+    intensity: 3
+    mechanism_depth: 2
+    ontgp_move: name
+    ei_v2_targets:
+      specificity: 0.8
+      engagement: 0.7
+      practical_transfer: 0.6
+    collision_family: identity_script
+    replacement_direction: "replace cosmic claims with grounded reader action"
+    signature_phrases: ["the part that says 'this is who I am' is often the part that most needs to be questioned gently"]
+    forbidden_terms: ["Buddha", "enlightenment", "Dharma", "Nirvana", "consciousness"]
+    notes_for_selector: "Secular identity-fluidity — no doctrine, grounded in reader experience."
+
+  # Replaces: quarantine_buddhist_002 / quarantine_buddhist_006 / quarantine_buddhist_008
+  - replacement_id: secular_replacement_higher_states_001
+    replacement_bank_key: secular_replacement_higher_states
+    slot_type: CHAPTER_TAKEAWAY
+    body: >
+      Clarity is not a permanent state. It is a temporary condition that practice makes more available.
+    topic_allowlist: ["anxiety", "depression", "overthinking", "somatic_healing"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: give
+    ei_v2_targets:
+      practical_transfer: 0.8
+      specificity: 0.8
+      engagement: 0.7
+    collision_family: clarity_as_practice
+    replacement_direction: "replace enlightenment language with learning, practice, or repair"
+    signature_phrases: ["temporary condition that practice makes more available"]
+    forbidden_terms: ["enlightenment", "higher states", "purify", "ascending", "elevated consciousness"]
+    notes_for_selector: "Secular clarity-as-practice. Replaces 'higher states of mind' framing without doctrinal import."
+
+  - replacement_id: secular_replacement_higher_states_002
+    replacement_bank_key: secular_replacement_higher_states
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      Mindfulness, when it works, works because it changes what the mind pays attention to —
+      not because it elevates the mind to a different state.
+    topic_allowlist: ["anxiety", "somatic_healing", "overthinking", "depression"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.7
+      practical_transfer: 0.7
+    collision_family: attention_mechanism
+    replacement_direction: "replace universal metaphysics with topic-specific observation"
+    signature_phrases: ["changes what the mind pays attention to — not because it elevates the mind to a different state"]
+    forbidden_terms: ["enlightenment", "higher states", "purify", "ascending", "elevated consciousness", "Buddhist"]
+    notes_for_selector: "Secular mechanism bridge for attention redirection. Demystifies mindfulness without doctrine."
+
+  - replacement_id: secular_replacement_higher_states_003
+    replacement_bank_key: secular_replacement_higher_states
+    slot_type: INTEGRATION
+    body: >
+      Increased clarity tends to come from reduced interference — less noise in the loop,
+      not a fundamentally different kind of mind.
+    topic_allowlist: ["anxiety", "depression", "overthinking"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: name
+    ei_v2_targets:
+      specificity: 0.8
+      engagement: 0.7
+      practical_transfer: 0.7
+    collision_family: clarity_as_practice
+    replacement_direction: "replace enlightenment language with learning, practice, or repair"
+    signature_phrases: ["reduced interference — less noise in the loop"]
+    forbidden_terms: ["enlightenment", "higher states", "purify", "ascending", "elevated consciousness"]
+    notes_for_selector: "Secular noise-reduction frame. Avoids elevated-mind language entirely."
+
+  # Replaces: quarantine_buddhist_003 / quarantine_buddhist_005
+  - replacement_id: secular_replacement_nirvana_transcendence_001
+    replacement_bank_key: secular_replacement_nirvana_transcendence
+    slot_type: CHAPTER_TAKEAWAY
+    body: >
+      The goal is not the absence of difficulty. It is a different relationship to it.
+    topic_allowlist: ["anxiety", "depression", "somatic_healing", "self_worth", "courage"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 3
+    intensity: 3
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      practical_transfer: 0.7
+    collision_family: difficulty_relationship
+    replacement_direction: "replace enlightenment language with learning, practice, or repair"
+    signature_phrases: ["not the absence of difficulty — a different relationship to it"]
+    forbidden_terms: ["Nirvana", "transcend", "enlightenment", "beyond self", "ultimate peace"]
+    notes_for_selector: "Secular relationship-to-difficulty reframe. Universal across topic list. No transcendence language."
+
+  - replacement_id: secular_replacement_nirvana_transcendence_002
+    replacement_bank_key: secular_replacement_nirvana_transcendence
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      What gets called peace in the literature is often just a sustained reduction in internal conflict —
+      not a special state, but a quieter one.
+    topic_allowlist: ["anxiety", "depression", "somatic_healing", "overthinking"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: name
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.7
+      practical_transfer: 0.6
+    collision_family: difficulty_relationship
+    replacement_direction: "replace cosmic claims with grounded reader action"
+    signature_phrases: ["not a special state, but a quieter one"]
+    forbidden_terms: ["Nirvana", "transcend", "enlightenment", "harmony with the universe", "direct experience of reality"]
+    notes_for_selector: "Secular peace-as-quiet-reduction. Demystifies without doctrinal reference."
+
+  # Replaces: quarantine_buddhist_004
+  - replacement_id: secular_replacement_task_open_scene_001
+    replacement_bank_key: secular_replacement_task_open_scene
+    slot_type: SCENE_RECOGNITION
+    body: >
+      The document is up and ready. You have read the first line three times
+      and your hands have not moved yet.
+    topic_allowlist: ["anxiety", "overthinking", "depression"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      engagement: 0.8
+      specificity: 0.8
+    collision_family: task_open_variant
+    replacement_direction: "replace named doctrine with chapter's secular mechanism"
+    signature_phrases: ["read the first line three times", "hands have not moved yet"]
+    forbidden_terms: ["forty minutes", "you have been looking at it", "task is open"]
+    notes_for_selector: "Secular task-open scene. First of two replacements for the forty-minutes duplicate."
+
+  - replacement_id: secular_replacement_task_open_scene_002
+    replacement_bank_key: secular_replacement_task_open_scene
+    slot_type: SCENE_RECOGNITION
+    body: >
+      The work is visible and accounted for.
+      Your body has already started bracing for it before you have typed a single word.
+    topic_allowlist: ["anxiety", "overthinking", "depression", "imposter_syndrome"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.8
+      somatic_precision: 0.7
+      engagement: 0.7
+    collision_family: task_open_variant
+    replacement_direction: "replace universal metaphysics with topic-specific observation"
+    signature_phrases: ["body has already started bracing for it before you have typed a single word"]
+    forbidden_terms: ["forty minutes", "you have been looking at it", "task is open"]
+    notes_for_selector: "Second secular task-open scene. Somatic bracing before action — distinct from reading-line variant."
+
+  - replacement_id: secular_replacement_general_secular_bridge_001
+    replacement_bank_key: secular_replacement_general
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      The patterns that feel most like personality are often the ones built most quickly under pressure.
+      Urgency shapes habits, and habits outlast the urgency that made them.
+    topic_allowlist: ["anxiety", "depression", "imposter_syndrome", "boundaries", "self_worth"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "workplace"]
+    frame_blocklist: ["buddhist", "christian", "spiritual", "contemplative"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: name
+    ei_v2_targets:
+      specificity: 0.8
+      engagement: 0.8
+      practical_transfer: 0.7
+    collision_family: habit_vs_character
+    replacement_direction: "prefer concrete lived examples over doctrinal exposition"
+    signature_phrases: ["patterns that feel most like personality", "urgency shapes habits and habits outlast the urgency"]
+    forbidden_terms: ["Buddha", "enlightenment", "Dharma", "Nirvana", "karma", "consciousness purification"]
+    notes_for_selector: "General secular mechanism bridge. Covers multiple topics without doctrinal reference."

@@ -1,0 +1,67 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__gen_z_professionals__self_worth
+brand: awakening_press
+teacher: adi_da
+persona: gen_z_professionals
+topic: self_worth
+byline_author: faye_gowan
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__gen_z_professionals__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__gen_z_professionals__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will stop trying to earn a worth you were never missing
+  — and recognize the one already here, beneath every performance review and every
+  comparison.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Untethered Soul series (Michael A. Singer) — the same loosening of identification
+  with the inner voice, made plain for a generation raised on metrics
+- Radical Acceptance / works of Tara Brach (Tara Brach) — meets the reader in self-judgment
+  without prescribing a fix, the tone this series lives in
+- The Power of Now companion line (Eckhart Tolle) — points past the striving self
+  to a presence already complete, without the dated mysticism
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 23-29
+  where_they_are: It's 8:47pm, the apartment is quiet, and you're still half-working
+    — laptop warm on your knees, Slack notifications you've already read, refreshing
+    a thread that decided nothing. You closed the day three hours ago and you're still
+    scanning it for the thing you did wrong.
+  what_they_need: To be met as a whole person who is already enough, not a project
+    to optimize; language for the quiet, awakening recognition that their worth was
+    never on the line; permission to set the measuring down without being told they're
+    lazy or broken.
+  what_they_avoid: Spiritual bypassing and guru-speak, 'raise your vibration' cliches,
+    toxic positivity, hustle culture dressed as growth, and any book that turns self-worth
+    into one more thing to achieve and fall short of.
+series_voice_markers:
+  register: spacious, awakening, quietly radical — intimate not lofty, reverent without
+    dogma; the voice of someone who has stopped performing and is sitting beside you,
+    not above you
+  sentence_rhythm: unhurried; short declaratives that land and leave silence, then
+    a longer breath that opens the sky behind the thought — patient, never urgent,
+    never selling
+  metaphor_family: waking from a dream, the light already present, the loosening of
+    identification, the open sky behind passing weather, coming home to what was never
+    lost
+_needs_authoring: false

@@ -1,0 +1,538 @@
+---
+# global_flow_glue_bank.yaml
+# Authority: docs/CONTENT_FRAGMENT_VARIATION_WRITER_SPEC.md §7
+# Slot type: FLOW_GLUE
+# Minimum: 20 variants
+# Legacy variants from _FLOW_GLUE_VARIANTS in phoenix_v4/rendering/book_renderer.py
+# are included below, marked is_legacy: true.
+
+selector_note: >
+  Flow glue is injected between paragraph blocks to maintain logical continuity
+  without summarizing. Select by content hash of the preceding paragraph to
+  ensure stable, repeatable picks across renders. No single variant_id may appear
+  more than twice in any single chapter. Prefer variants with different
+  collision_family values from the preceding and following glue choices.
+  Legacy variants are fully reusable but should not dominate a single chapter.
+
+variants:
+
+  # ── LEGACY VARIANTS (from _FLOW_GLUE_VARIANTS in book_renderer.py) ──────────
+
+  - variant_id: gfg_legacy_001
+    slot_type: FLOW_GLUE
+    body: >
+      That moment is not random; it is information your body has been holding.
+      In practice, you can see the same pattern return until you name it without shame.
+      This is why nervous system alarm often outlasts the event that tripped it.
+      What this means is simple: you are not broken — you are responding.
+      Notice one breath, choose one honest label for the sensation, and practice staying with it for ten seconds.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      embodiment: 0.7
+      practical_transfer: 0.6
+      engagement: 0.6
+    collision_family: body_before_logic
+    reusable_scope: global_micro_glue
+    is_legacy: true
+    signature_phrases: ["moment is not random", "nervous system alarm often outlasts"]
+    forbidden_terms: ["daylight along the sill"]
+    notes_for_selector: "Legacy paragraph glue. Contains 'What this means is simple' — acceptable in legacy only; new variants must not reuse this phrase."
+
+  - variant_id: gfg_legacy_002
+    slot_type: FLOW_GLUE
+    body: >
+      So when the feeling spikes, remember this is the mechanism your body uses when it cannot speak yet.
+      For example, tight jaw or shallow breath can be a signal, not a verdict.
+      Because the story runs fast, you can see where it tightens if you slow down for one sentence.
+      The point is protection can feel like panic.
+      Breathe once, write what you notice, and name what it is costing you today.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      embodiment: 0.8
+      somatic_precision: 0.7
+      practical_transfer: 0.6
+    collision_family: body_before_logic
+    reusable_scope: global_micro_glue
+    is_legacy: true
+    signature_phrases: ["feeling spikes", "protection can feel like panic"]
+    forbidden_terms: ["daylight along the sill"]
+    notes_for_selector: "Legacy body-first glue. Contains 'The point is' — acceptable in legacy only."
+
+  - variant_id: gfg_legacy_003
+    slot_type: FLOW_GLUE
+    body: >
+      Here is what looks like a small detail but often carries the whole pattern: your attention snapping back to the body.
+      Which means the work is insight plus repetition, not perfection.
+      That matters because shame speeds the spin and truth slows it.
+      What this means is simple: accurate language is a kindness to the nervous system.
+      Pause, notice the sensation without fixing it, and exhale longer on the next breath.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      embodiment: 0.7
+      somatic_precision: 0.6
+      engagement: 0.7
+    collision_family: observation_turn
+    reusable_scope: global_micro_glue
+    is_legacy: true
+    signature_phrases: ["attention snapping back to the body", "shame speeds the spin"]
+    forbidden_terms: ["daylight along the sill"]
+    notes_for_selector: "Legacy observation-turn glue. Contains 'What this means is simple' — acceptable in legacy only."
+
+  - variant_id: gfg_legacy_004
+    slot_type: FLOW_GLUE
+    body: >
+      Remember this when everything feels urgent: your body is answering an old question with a new day.
+      In practice, slow one loop and watch what softens.
+      This is why a tiny practice still counts — it trains recognition before reactivity.
+      The point is you can steer without forcing calm.
+      Name one thing you feel, choose a gentler next step, and breathe through it once.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      embodiment: 0.7
+      practical_transfer: 0.7
+      engagement: 0.6
+    collision_family: body_before_logic
+    reusable_scope: global_micro_glue
+    is_legacy: true
+    signature_phrases: ["body is answering an old question with a new day", "steer without forcing calm"]
+    forbidden_terms: ["daylight along the sill"]
+    notes_for_selector: "Legacy urgency-reframe glue. Contains 'The point is' — acceptable in legacy only."
+
+  # ── NEW VARIANTS ──────────────────────────────────────────────────────────────
+
+  - variant_id: gfg_005
+    slot_type: FLOW_GLUE
+    body: That reaction has a sequence worth seeing.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+    collision_family: naming_beat
+    signature_phrases: ["reaction has a sequence worth seeing"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Short naming beat. 8 words. Sequence-naming without mechanism claim."
+
+  - variant_id: gfg_006
+    slot_type: FLOW_GLUE
+    body: This is the pattern underneath the moment.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.6
+      specificity: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["pattern underneath the moment"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Classic naming beat. Compact. From spec §8.3 example set — new record."
+
+  - variant_id: gfg_007
+    slot_type: FLOW_GLUE
+    body: The order of these events is the interesting part.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+    collision_family: causal_pivot
+    signature_phrases: ["order of these events is the interesting part"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Causal pivot. Reorients reader to sequence rather than content."
+
+  - variant_id: gfg_008
+    slot_type: FLOW_GLUE
+    body: Once it is named, the loop is easier to interrupt.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      practical_transfer: 0.7
+      engagement: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["once it is named, the loop is easier to interrupt"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Third naming beat — consequence framing, not description."
+
+  - variant_id: gfg_009
+    slot_type: FLOW_GLUE
+    body: The signal makes more sense once the context is visible.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.6
+      specificity: 0.6
+    collision_family: observation_turn
+    signature_phrases: ["signal makes more sense once the context is visible"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Second observation-turn — context reveal, not body snap."
+
+  - variant_id: gfg_010
+    slot_type: FLOW_GLUE
+    body: That shift begins well before the feeling changes.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+    collision_family: causal_pivot
+    signature_phrases: ["shift begins well before the feeling changes"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Second causal pivot — temporal order emphasis."
+
+  - variant_id: gfg_011
+    slot_type: FLOW_GLUE
+    body: The body clocked this before the mind caught up.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      embodiment: 0.8
+      somatic_precision: 0.7
+      engagement: 0.6
+    collision_family: body_before_logic
+    signature_phrases: ["body clocked this before the mind caught up"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "New body-before-logic variant. Short, distinct from all legacy body-first glue."
+
+  - variant_id: gfg_012
+    slot_type: FLOW_GLUE
+    body: Contradiction is not the problem here — it is the data.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: contradiction_release
+    signature_phrases: ["contradiction is not the problem here — it is the data"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "First contradiction-release variant. Reframes internal conflict as information."
+
+  - variant_id: gfg_013
+    slot_type: FLOW_GLUE
+    body: Knowing the name does not fix it, but it changes what is possible.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      practical_transfer: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["knowing the name does not fix it", "changes what is possible"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Fourth naming beat — manages overclaim risk explicitly."
+
+  - variant_id: gfg_014
+    slot_type: FLOW_GLUE
+    body: Most of the urgency is borrowed from a different moment.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: causal_pivot
+    signature_phrases: ["urgency is borrowed from a different moment"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Third causal pivot — temporal borrowing frame, no somatic language."
+
+  - variant_id: gfg_015
+    slot_type: FLOW_GLUE
+    body: Tension and clarity can arrive at the same time.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: turn
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.6
+    collision_family: contradiction_release
+    signature_phrases: ["tension and clarity can arrive at the same time"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Second contradiction-release variant — coexistence framing."
+
+  - variant_id: gfg_016
+    slot_type: FLOW_GLUE
+    body: This is shorter than it feels.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.5
+    collision_family: declarative_short
+    signature_phrases: ["shorter than it feels"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "First declarative short — five words, maximum contrast with verbose glue."
+
+  - variant_id: gfg_017
+    slot_type: FLOW_GLUE
+    body: Feeling stuck is different from being stuck.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: declarative_short
+    signature_phrases: ["feeling stuck is different from being stuck"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Second declarative short — distinction frame, seven words."
+
+  - variant_id: gfg_018
+    slot_type: FLOW_GLUE
+    body: The next step is narrower than the feeling suggests.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: turn
+    ei_v2_targets:
+      practical_transfer: 0.7
+      engagement: 0.6
+    collision_family: observation_turn
+    signature_phrases: ["next step is narrower than the feeling suggests"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Third observation-turn — action-narrowing after context expansion."
+
+  - variant_id: gfg_019
+    slot_type: FLOW_GLUE
+    body: An alarm this loud usually has something quieter underneath it.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 3
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.7
+      specificity: 0.7
+    collision_family: causal_pivot
+    signature_phrases: ["alarm this loud usually has something quieter underneath"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Fourth causal pivot — meta-alarm frame, suitable for high-band chapters."
+
+  - variant_id: gfg_020
+    slot_type: FLOW_GLUE
+    body: Repetition is how patterns ask to be seen.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+    collision_family: declarative_short
+    signature_phrases: ["repetition is how patterns ask to be seen"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Third declarative short — pattern-visibility frame. Distinct rhythm from both prior declarative shorts."
+
+  - variant_id: gfg_021
+    slot_type: FLOW_GLUE
+    body: Calling it by its real name is the first cost the body stops paying alone.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      embodiment: 0.7
+    collision_family: naming_beat
+    signature_phrases: ["calling it by its real name", "first cost the body stops paying alone"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Fifth naming beat — somatic framing of naming as cost-sharing. Distinct from gfg_005/006/008/013 surface forms."
+
+  - variant_id: gfg_022
+    slot_type: FLOW_GLUE
+    body: The label is not the answer, but it changes the room you are answering in.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      practical_transfer: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["the label is not the answer", "changes the room you are answering in"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Sixth naming beat — overclaim-management frame as alternative to gfg_013. Different surface, same posture."
+
+  - variant_id: gfg_023
+    slot_type: FLOW_GLUE
+    body: A precise name turns a private weight into a shared one.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      embodiment: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["a precise name turns a private weight into a shared one"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Seventh naming beat — relational shift frame. Distinct from all prior naming beats (somatic, consequence, overclaim, pattern)."

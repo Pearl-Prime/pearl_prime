@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;font-family:'DM Sans',sans-serif;overflow:hidden}
+.view{display:none;width:100%;height:100%;flex-direction:column}
+.view.on{display:flex}
+.slides{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transform:translateX(28px);transition:opacity .35s ease,transform .35s ease;overflow:hidden}
+.slide.on{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.out{opacity:0;transform:translateX(-28px);transition:opacity .22s ease,transform .22s ease}
+.btm{height:50px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;border-top:1px solid var(--rule);background:var(--bg)}
+.b-brand{font-family:'Cormorant Garamond',serif;font-size:.88rem;font-weight:600;letter-spacing:.04em;cursor:pointer;background:none;border:none;padding:0;color:var(--ink)}
+.b-ctrl{display:flex;align-items:center;gap:.7rem}
+.b-dots{display:flex;gap:4px;align-items:center}
+.b-dot{width:4px;height:4px;border-radius:50%;cursor:pointer;transition:all .18s;border:none;padding:0;background:rgba(28,16,9,.14)}
+.b-dot.on{width:11px;border-radius:2px;background:#b45309}
+.b-cnt{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:#a08060}
+.b-btn{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .8rem;border-radius:1px;cursor:pointer;transition:all .18s;border:1px solid rgba(120,80,20,.2);color:#1c1009;background:transparent}
+.b-btn:hover{background:#1c1009;color:#faf6f0}
+.b-btn:disabled{opacity:.18;pointer-events:none}
+.pbar{height:2px;background:#b45309;width:0;transition:width .35s ease;flex-shrink:0}
+:root{
+  --bg:#faf6f0;--bg2:#f3ede3;--ink:#1c1009;--ink2:#7a6050;--ink3:#a08060;
+  --acc:#b45309;--acc2:#d97706;--rule:rgba(120,80,20,.1);
+  --serif:'Cormorant Garamond',serif;--mono:'DM Mono',monospace;
+  --jp:'Noto Sans JP',sans-serif;--tc:'Noto Sans TC',sans-serif;--sc:'Noto Sans SC',sans-serif;
+}
+.sp{padding:3rem 4.5rem 3.5rem;background:var(--bg);position:absolute;inset:0;overflow:auto}
+.sp2{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.sp2l{padding:3rem 2.5rem 3.5rem 4.5rem;display:flex;flex-direction:column;justify-content:center;background:var(--bg);overflow:auto}
+.sp2r{padding:3rem 3rem 3.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:.8rem;background:var(--bg2);border-left:1px solid var(--rule);overflow:auto}
+.eye{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:.8rem}
+.disp{font-family:var(--serif);font-weight:300;line-height:1.02;letter-spacing:-.02em;margin-bottom:1rem;font-size:clamp(1.9rem,4vw,3.5rem);color:var(--ink)}
+.disp em{font-style:italic;color:var(--acc)}
+.hl{font-family:var(--serif);font-weight:300;line-height:1.1;letter-spacing:-.01em;margin-bottom:.8rem;font-size:clamp(1.4rem,2.6vw,2.2rem);color:var(--ink)}
+.hl em{font-style:italic;color:var(--acc)}
+.bt{font-size:.83rem;font-weight:300;line-height:1.8;color:var(--ink2)}
+.qb{border-left:2px solid var(--acc);padding-left:1rem;font-family:var(--serif);font-size:1rem;font-style:italic;font-weight:300;line-height:1.5;color:var(--ink)}
+.srow{display:flex;gap:1.8rem;margin-top:1.4rem;flex-wrap:wrap}
+.snum{font-family:var(--serif);font-size:1.9rem;font-weight:600;line-height:1;display:block;color:var(--acc)}
+.slbl{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-top:.18rem;color:var(--ink3)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule)}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule)}
+.cell{padding:.85rem .8rem;display:flex;flex-direction:column;gap:.25rem;background:var(--bg)}
+.cell:nth-child(even){background:var(--bg2)}
+.cn{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;color:var(--acc)}
+.cnm{font-family:var(--serif);font-size:.9rem;font-weight:400;line-height:1.1;color:var(--ink)}
+.cm{font-family:var(--mono);font-size:.5rem;letter-spacing:.06em;color:var(--acc2)}
+.cd{font-size:.66rem;line-height:1.5;color:var(--ink2)}
+.card{padding:.85rem 1rem;display:flex;flex-direction:column;gap:.28rem;border:1px solid var(--rule);background:#fff}
+.clbl{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.cval{font-family:var(--serif);font-size:.9rem;font-weight:400;line-height:1.2;color:var(--ink)}
+.csub{font-size:.68rem;line-height:1.5;color:var(--ink2)}
+.dr{display:flex;gap:.6rem;padding:.45rem 0;border-bottom:1px solid var(--rule);align-items:flex-start}
+.dnum{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;min-width:28px;padding-top:2px;color:var(--ink3)}
+.dnm{font-family:var(--serif);font-size:.85rem;font-weight:400;line-height:1.1;margin-bottom:.08rem;color:var(--ink)}
+.dtk{font-size:.64rem;line-height:1.5;color:var(--ink2)}
+.cta-links{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem}
+.cta-a{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.36rem .82rem;border-radius:1px;text-decoration:none;border:1px solid rgba(180,83,9,.3);color:var(--acc)}
+.cta-b{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.36rem .82rem;border-radius:1px;cursor:pointer;border:1px solid rgba(28,16,9,.15);color:var(--ink2);background:transparent}
+.pill{font-family:var(--mono);font-size:.48rem;letter-spacing:.05em;padding:.12rem .35rem;border-radius:2px;border:1px solid rgba(180,83,9,.22);color:var(--acc)}
+.warn{padding:.5rem .85rem;border-left:2px solid var(--acc2);background:rgba(180,83,9,.05);font-size:.68rem;color:var(--ink2);line-height:1.65;margin-top:.7rem}
+/* STORY SLIDE */
+.story{position:absolute;inset:0;background:var(--bg);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr}
+.story-top{grid-column:1/-1;background:var(--bg);padding:1.4rem 4.5rem 1rem;border-bottom:1px solid var(--rule)}
+.story-left{padding:1rem 2rem 1.4rem 4.5rem;overflow:auto;display:flex;flex-direction:column;gap:.7rem;border-right:1px solid var(--rule)}
+.story-right{padding:1rem 3rem 1.4rem 2rem;display:flex;flex-direction:column;justify-content:center}
+.sb{border:1px solid var(--rule);background:#fff}
+.sb-head{padding:.45rem .85rem;background:var(--acc);font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.sb-body{padding:.6rem .85rem;display:flex;flex-direction:column;gap:.22rem}
+.sb-row{display:flex;align-items:flex-start;gap:.45rem;font-size:.7rem;color:var(--ink2);line-height:1.45}
+.sb-row::before{content:'›';color:var(--acc);font-size:.75rem;flex-shrink:0;margin-top:.05rem}
+/* REVENUE CHART */
+.rev-wrap{display:flex;flex-direction:column;gap:.5rem;height:100%}
+.rev-title{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.rev-big{font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--acc);line-height:1}
+.rev-sub{font-family:var(--mono);font-size:.46rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:.2rem}
+.rev-split{display:flex;flex-direction:column;gap:.25rem;margin:.3rem 0 .5rem}
+.rev-split-row{display:flex;align-items:center;gap:.5rem}
+.rev-split-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;min-width:120px;color:var(--ink2)}
+.rev-split-bar{flex:1;height:6px;background:rgba(28,16,9,.07);border-radius:3px;overflow:hidden}
+.rev-split-fill{height:100%;border-radius:3px}
+.rev-split-pct{font-family:var(--mono);font-size:.5rem;font-weight:600;min-width:32px;text-align:right}
+.bars{display:flex;align-items:flex-end;gap:2px;height:70px;margin-top:.3rem}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.bar-fill{width:100%;border-radius:2px 2px 0 0;min-height:2px}
+.bar-lbl{font-family:var(--mono);font-size:.36rem;color:var(--ink3);letter-spacing:.02em}
+/* LANDING */
+#v-landing{background:var(--bg);position:relative;align-items:center;justify-content:center}
+.land-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:clamp(8rem,18vw,18rem);font-weight:300;color:rgba(180,83,9,.04);pointer-events:none;user-select:none}
+.land-in{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+.l-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.5rem}
+.l-title span{color:var(--acc);font-style:italic}
+.l-tag{font-family:var(--serif);font-size:clamp(.88rem,1.6vw,1.15rem);font-weight:300;font-style:italic;color:var(--ink2);margin-bottom:2.5rem;max-width:480px}
+.l-prompt{font-size:.78rem;font-weight:300;color:var(--ink3);margin-bottom:1.4rem}
+.flags{display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap}
+.flag{display:flex;flex-direction:column;align-items:center;gap:.55rem;padding:1rem 1.4rem;border:1px solid var(--rule);background:rgba(180,83,9,.03);border-radius:2px;cursor:pointer;min-width:98px;transition:border-color .22s,background .22s,transform .22s}
+.flag:hover{border-color:var(--acc);background:rgba(180,83,9,.07);transform:translateY(-3px)}
+.f-em{font-size:2.1rem;line-height:1}
+.f-lb{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.f-sb{font-size:.62rem;color:var(--ink3);font-weight:300}
+</style>
+</head>
+<body>
+
+<!-- 首页 -->
+<div class="view on" id="v-landing">
+  <div class="land-bg">Pearl</div>
+  <div class="land-in">
+    <h1 class="l-title">Pearl <span>Prime</span></h1>
+    <p class="l-tag">古老智慧。启蒙智能。<br>提升下一代、改变世界的内容。</p>
+    <p class="l-prompt">请选择您的市场</p>
+    <div class="flags">
+      <div class="flag" onclick="location.href='pearl_prime_v6-3.html'"><span class="f-em">🇺🇸</span><span class="f-lb">USA</span><span class="f-sb">en-US</span></div>
+      <div class="flag" onclick="location.href='pearl_prime_v6-3-ja.html'"><span class="f-em">🇯🇵</span><span class="f-lb">日本</span><span class="f-sb">ja-JP</span></div>
+      <div class="flag" onclick="location.href='pearl_prime_v6-3-tw.html'"><span class="f-em">🇹🇼</span><span class="f-lb">台灣</span><span class="f-sb">zh-TW</span></div>
+      <div class="flag" onclick="showPath('cn')" style="border-color:var(--acc)"><span class="f-em">🇨🇳</span><span class="f-lb">中国大陆</span><span class="f-sb">zh-CN</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 中国大陆路径 ══ -->
+<div class="view" id="v-cn">
+  <div class="pbar" id="pb-cn"></div>
+  <div class="slides" id="sl-cn">
+
+    <!-- CN 1: 故事＋收益 -->
+    <div class="slide on" style="background:var(--bg)">
+      <div class="story">
+        <div class="story-top">
+          <div class="hl" style="margin-bottom:.25rem">为下一代需求而生的智慧。<br><em>精准地大规模传递。</em></div>
+          <p class="bt" style="max-width:820px;font-size:.8rem">Pearl Prime 是一套疗愈内容制作系统，源自统一精神领袖论坛的精神导师教导。<strong style="color:var(--ink);font-weight:500">由 Ei — 启蒙智能 — 驱动。</strong>古老智慧。为下一代的挑战与志向而生 — 触达中国3.45亿喜马拉雅用户和4.15亿千禧一代，通过您的中国公司实体。</p>
+        </div>
+        <div class="story-left">
+          <div class="sb">
+            <div class="sb-head">Pearl Prime — 内容平台每周提供：</div>
+            <div class="sb-body">
+              <div class="sb-row">有声书（简体中文・Ei 朗读）</div>
+              <div class="sb-row">电子书（简体中文・EPUB 3.0）</div>
+              <div class="sb-row">漫画（抖音原生视觉内容）</div>
+              <div class="sb-row">播客（微信集成）</div>
+            </div>
+          </div>
+          <div class="sb">
+            <div class="sb-head">您 — 品牌总监 — 通过您的中国公司上传至：</div>
+            <div class="sb-body">
+              <div class="sb-row">喜马拉雅 Ximalaya — 3.45亿用户 · 内容创作者平台</div>
+              <div class="sb-row">得到 Dedao — 5000万以上付费用户 · 向编辑团队提案</div>
+              <div class="sb-row">微信读书 WeChat Read · 网易云音乐 NetEase Cloud Music</div>
+              <div class="sb-row">注意：Google Play · Findaway · Audible — 在中国境内无法使用</div>
+            </div>
+          </div>
+          <div class="sb">
+            <div class="sb-head">48Social — Pearl Prime 独家合作伙伴 — 每日自动发布至：</div>
+            <div class="sb-body">
+              <div class="sb-row">抖音 Douyin · 微信 WeChat · 哔哩哔哩 Bilibili · 小红书 Xiaohongshu · 微博 Weibo</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-right">
+          <div class="rev-wrap" id="chart-cn"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CN 2: 起源 -->
+    <div class="slide">
+      <div class="sp2">
+        <div class="sp2l">
+          <div class="eye">起源 · 根源</div>
+          <h2 class="hl">源自<em>真正导师</em><br>的智慧。</h2>
+          <span style="font-family:var(--sc);font-size:.75rem;font-weight:300;color:var(--ink3);letter-spacing:.08em;margin-bottom:.8rem;display:block">统一精神领袖论坛 — 灵性根源，现代表达</span>
+          <p class="bt" style="margin-bottom:.8rem">统一精神领袖论坛汇聚了来自多元智慧传统的精神导师，怀抱一个目标：<br><br>
+          &nbsp;&nbsp;→ 将古老的启蒙教导带给下一代<br>
+          &nbsp;&nbsp;→ 提升他们的生命<br>
+          &nbsp;&nbsp;→ 赋予他们塑造更启蒙未来的力量</p>
+          <p class="bt" style="margin-bottom:1rem">Pearl Prime 就是答案。将伟大导师智慧整合的知识库，由 Ei — 启蒙智能 — 处理。在中国，通过3.45亿用户已在使用的平台触达他们。</p>
+          <div class="qb">「灵性根源。疗愈内容。为下一代而生。」<br><span style="font-size:.74rem;color:var(--ink3);font-style:normal;font-family:'DM Sans',sans-serif;display:block;margin-top:.25rem">Spiritual roots. Therapeutic content. For the next generation.</span></div>
+        </div>
+        <div class="sp2r">
+          <div class="card"><div class="clbl">根源</div><div class="cval">United Spiritual Leaders Forum</div><div class="csub" style="font-family:var(--sc)">精神导师与年轻新兴教师在此汇聚，共同创造植根于真正传承智慧的疗愈 AI — 世界从未见过的创举。</div></div>
+          <div class="card"><div class="clbl">引擎</div><div class="cval">Ei — 启蒙智能</div><div class="csub">以研究为基础的 Gen Z 与 Gen Alpha 心理启发式方法和躯体感知模型，驱动遗传算法、导师复合知识库与机器学习。</div></div>
+          <div class="card"><div class="clbl">使命</div><div class="cval">改变年轻人 — 改变世界</div><div class="csub" style="font-family:var(--sc)">古老智慧应对现代挑战——同龄压力、社交焦虑、身份认同——用这一代真正使用的格式和平台。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CN 3: 系统架构 -->
+    <div class="slide sp">
+      <div class="eye">系统架构</div>
+      <h2 class="hl">四个层次。<em>一条完整的链条。</em></h2>
+      <div class="g4" style="margin-top:.8rem">
+        <div class="cell"><span class="cn">01</span><div class="cnm">导师</div><div class="cm">智慧来源</div><div class="cd">世界观・教义・传承・灵性基调。什么是真实。应如何被理解。</div></div>
+        <div class="cell"><span class="cn">02</span><div class="cnm">Ei</div><div class="cm">传递智能</div><div class="cd">读者诊断・情感序列・节奏・个性化。这位读者下一步需要什么。</div></div>
+        <div class="cell"><span class="cn">03</span><div class="cnm">品牌</div><div class="cm">市场表达</div><div class="cd">封面・声音・定位・平台包装。面向市场的身份。</div></div>
+        <div class="cell"><span class="cn">04</span><div class="cnm">产出</div><div class="cm">读者即用产品</div><div class="cd">书籍・有声书・漫画・播客。每项资产追踪并对应市场配置。</div></div>
+      </div>
+      <div class="qb" style="margin-top:1.1rem">导师定义意义。Ei 定义传递。</div>
+    </div>
+
+    <!-- CN 4: 品牌角度 -->
+    <div class="slide sp">
+      <div class="eye">品牌角度 · 五个切入点</div>
+      <h2 class="hl" style="margin-bottom:.9rem">每个角度对应<em>已验证的读者需求。</em></h2>
+      <div class="g5">
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">神经系统</div><div class="cm">动词：调节</div><div class="cd">压力・焦虑・倦怠・躯体感知。搜索量最高。</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">身份与方向</div><div class="cm">动词：发现</div><div class="cd">目的・清晰・自我・价值观。Gen Z 主要群体。</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">情感疗愈</div><div class="cm">动词：释放</div><div class="cd">创伤・悲伤・修复・韧性。</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">表现与专注</div><div class="cm">动词：构建</div><div class="cd">心流・纪律・成果。高溢价价格接受度。</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">灵性觉醒</div><div class="cm">动词：忆起</div><div class="cd">意识・法・临在。</div></div>
+      </div>
+    </div>
+
+    <!-- CN 5: 48Social -->
+    <div class="slide">
+      <div class="sp2">
+        <div class="sp2l">
+          <div class="eye">48Social · Pearl Prime 独家合作 · 中国社交媒体引擎</div>
+          <h2 class="hl">Pearl Prime 已与<br>48Social 达成<br><em>独家合作。</em></h2>
+          <p class="bt" style="margin-bottom:.8rem">48Social 是一家独立公司 — Pearl Prime 的独家有机营销伙伴。在中国，它完全在原生平台运营 — 抖音、微信、哔哩哔哩、小红书 — 疗愈内容在这里真正实现病毒式传播。</p>
+          <div style="display:flex;flex-direction:column;gap:.28rem;margin-top:.4rem">
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--ink2)">以简体中文提取情感高潮</span></div>
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--ink2)">抖音视频 · 小红书生活方式帖子 · 微信公众号</span></div>
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--ink2)">微信社群群组传播</span></div>
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--acc)">发现 → 喜马拉雅 · 得到 · 微信读书</span></div>
+          </div>
+        </div>
+        <div class="sp2r">
+          <div class="card"><div class="clbl">CN 平台</div><div class="cval">抖音 Douyin · 微信 WeChat · 哔哩哔哩 Bilibili · 小红书 · 微博</div><div class="csub">抖音是第一短视频发现平台。小红书主导健康养生。哔哩哔哩服务更深度内容和年轻人群。</div></div>
+          <div class="card"><div class="clbl">收益贡献</div><div class="cval">第12个月社交加成 $850–$3,400</div><div class="csub">您收益的 4.8% — 已内建于模型。喜马拉雅内容在抖音上病毒传播可在数天内带来数百万次收听。</div></div>
+          <div class="card"><div class="clbl">独家合作</div><div class="cval">48Social 是一家独立公司</div><div class="csub">Pearl Prime 已签订独家协议。您以 4.8% 享用其完整中国配销引擎 — 无需设置费、无代理费用。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CN 6: 主体设置 -->
+    <div class="slide">
+      <div class="sp2">
+        <div class="sp2l">
+          <div class="eye">市场准入 · 如何在中国运营</div>
+          <h2 class="hl">中国需要<br>一家中国公司。<br><em>以下是运作方式。</em></h2>
+          <p class="bt" style="margin-bottom:.8rem">Google Play 和 Findaway 等西方平台完全无法在中国大陆分发 — 即使通过中国公司也不行。在中国分发意味着使用中国自己的平台：<strong style="color:var(--ink);font-weight:500">喜马拉雅 Ximalaya</strong>（中国版 Audible — 3.45亿用户）、<strong style="color:var(--ink);font-weight:500">得到 Dedao</strong>（中国版 MasterClass — 5000万付费用户）、<strong style="color:var(--ink);font-weight:500">微信读书 WeChat Read</strong>（微信内置电子书阅读器，13亿用户）和<strong style="color:var(--ink);font-weight:500">网易云音乐 NetEase Cloud Music</strong>（正在扩展有声书业务）。</p>
+          <p class="bt" style="margin-bottom:.9rem">要上传到这些平台，您需要一家在中国注册的公司。您有三条路径：</p>
+          <div class="qb">这不是障碍 — 这是进入14亿人口和全球增长最快的音频内容市场的入口。</div>
+        </div>
+        <div class="sp2r">
+          <div class="card">
+            <div class="clbl">选项 A — 使用您已有的公司</div>
+            <div class="cval">如果您或合作伙伴已拥有中国公司</div>
+            <div class="csub">将其注册为喜马拉雅、得到、微信读书和网易云的内容创作者。Pearl Prime 提供内容。您通过现有主体上传。最快路径 — 可立即启动。</div>
+          </div>
+          <div class="card">
+            <div class="clbl">选项 B — 创建您自己的中国公司</div>
+            <div class="cval">外商独资企业（WFOE）— 您全资拥有的中国注册公司</div>
+            <div class="csub">外商独资企业（WFOE）是一家您作为外国人可100%持有的中国公司。通过中国商业律师设立。耗时3–6个月。Pearl Prime 为您对接经验丰富的法律合作伙伴。最适合长期控制与收益归属。</div>
+          </div>
+          <div class="card">
+            <div class="clbl">选项 C — 通过持牌中国分销商运营</div>
+            <div class="cval">分销合作伙伴持有平台账号并代为上传</div>
+            <div class="csub">这类合作伙伴（称为多频道网络 MCN 机构）已在喜马拉雅、得到和微信读书拥有经过验证的账号。您提供内容，他们处理上传、平台合规和账号管理。收益从平台经由他们流向您。启动最快 — 无需设立公司。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CN 7: 每周节奏 -->
+    <div class="slide sp">
+      <div class="eye">品牌总监 · 每周工作节奏 · 通过您的中国公司</div>
+      <h2 class="hl" style="margin-bottom:.9rem">您<em>每周</em>的工作。</h2>
+      <div class="g2">
+        <div style="background:var(--bg);padding:.75rem 1rem">
+          <div class="dr"><span class="dnum">周一</span><div><div class="dnm">先做合规检查</div><div class="dtk">下载内容包。上传前先做合规检查。中国平台的退件会影响账号信誉。</div></div></div>
+          <div class="dr"><span class="dnum">周二</span><div><div class="dnm">提交至喜马拉雅</div><div class="dtk">登录您中国公司的创作者账号。提交有声书。以人民币定价（¥15–¥45）。审核时间：24–72小时。</div></div></div>
+          <div class="dr"><span class="dnum">周三</span><div><div class="dnm">提交至得到＋微信读书</div><div class="dtk">将电子书提交至微信读书入口。得到：向编辑团队提案。提交至网易云音乐创作者平台。</div></div></div>
+          <div class="dr" style="border-bottom:none"><span class="dnum">周四</span><div><div class="dnm">确认所有平台</div><div class="dtk">查看审核队列。中国平台退件通常需要修改内容。截图已审核内容以备合规记录。</div></div></div>
+        </div>
+        <div style="background:var(--bg2);padding:.75rem 1rem">
+          <div class="dr"><span class="dnum">周五</span><div><div class="dnm">社交审核</div><div class="dtk">批准抖音视频。审核小红书帖子。批准微信公众号内容。</div></div></div>
+          <div class="dr"><span class="dnum">周六</span><div><div class="dnm">收益审核</div><div class="dtk">查看喜马拉雅、得到、微信读书、网易云。以人民币记录。喜马拉雅收听量是关键中国指标。</div></div></div>
+          <div class="dr" style="border-bottom:none"><span class="dnum">周日</span><div><div class="dnm">规划与合规准备</div><div class="dtk">查看中国文化日历（春节、清明、劳动节、国庆节）。确认 MCN 机构状态。休息。</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CN 8: 收益细分 -->
+    <div class="slide" style="background:var(--bg);overflow:hidden">
+      <div style="height:100%;overflow-y:auto;padding:2.5rem 4rem 3rem">
+        <div class="eye">Pearl Prime · 中国市场 · zh-CN</div>
+        <h2 style="font-family:var(--serif);font-size:1.6rem;font-weight:300;margin:.3rem 0 1.2rem;color:var(--ink)">平台指南与收益细分 · <em style="font-style:italic;color:var(--acc)">中国</em></h2>
+        <div style="padding:.4rem .7rem;border-left:2px solid var(--acc2);background:rgba(180,83,9,.04);font-size:.68rem;color:var(--ink2);line-height:1.6;margin-bottom:1rem">⚠ Google Play 和 Findaway 在中国大陆无法运营。以下所有平台均需中国注册公司实体。首次上传前需进行法律审查。</div>
+
+        <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:.8rem 0 .4rem">有声书平台</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:1.2rem">
+          <tr><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">平台</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">版税</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">提交至</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">备注</th></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">喜马拉雅 Ximalaya</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--acc)">收益分成</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">ximalaya.com → 内容创作者平台</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">月活3.45亿。中国主导音频平台 — 相当于 Audible + Spotify 的总和。主要中国渠道。</td></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">网易云音乐 NetEase Music</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--acc)">收益分成</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">music.163.com → 创作者中心</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">正在扩展有声书业务。年轻用户群体。适合 Gen Z 身份认同和健康内容。</td></tr>
+        </table>
+
+        <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:.8rem 0 .4rem">电子书与知识平台</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:1.2rem">
+          <tr><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">平台</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">版税</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">提交至</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">备注</th></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">得到 Dedao</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--acc)">议定</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">igetget.com → 向编辑团队提案</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">5000万以上付费用户。中国版 MasterClass — 高端知识购买者。先向编辑提案。高价值受众。</td></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">微信读书 WeChat Read</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--acc)">收益分成</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">weread.qq.com → 书单出版商提交</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">内置于微信 — 13亿用户曝光。读者社交分享划线内容。高度有机传播。</td></tr>
+        </table>
+
+        <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:.8rem 0 .4rem">社交分发（48Social CN）</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.72rem;margin-bottom:1.5rem">
+          <tr><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">平台</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">形式</th><th style="font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:.36rem .6rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">备注</th></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">抖音 Douyin</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">短视频</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">中国版 TikTok。喜马拉雅内容在抖音病毒传播可在数天内带来数百万次收听。</td></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">小红书 Xiaohongshu</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">图文帖子</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">中国版 Instagram。健康内容表现极佳。神经系统角度的主要发现渠道。</td></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">微信 WeChat 朋友圈</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">社交分享</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">口碑放大。读者直接分享微信读书划线和喜马拉雅章节。</td></tr>
+          <tr><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">哔哩哔哩 Bilibili</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">长视频＋短视频</td><td style="padding:.32rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.66rem">Gen Z 主导。动漫与健康交叉受众。适合身份认同和灵性觉醒角度。</td></tr>
+        </table>
+
+        <div style="padding:.4rem .7rem;border-left:2px solid var(--acc2);background:rgba(180,83,9,.04);font-size:.68rem;color:var(--ink2);line-height:1.65;margin-bottom:1.2rem">中国市场 M1–M3 增长较慢，原因是主体设置和平台入驻需要4–8周。与JP/TW相比，M12上行空间更大，得益于喜马拉雅3.45亿月活用户。</div>
+        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.4rem">月度成长 · M1–M12 · 6个试点品牌</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.75rem;margin-bottom:1.5rem">
+          <tr><th style="font-family:var(--mono);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);padding:.4rem .65rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">月份</th><th style="font-family:var(--mono);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);padding:.4rem .65rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">合计</th><th style="font-family:var(--mono);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);padding:.4rem .65rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">喜马拉雅 Ximalaya (70%)</th><th style="font-family:var(--mono);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);padding:.4rem .65rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">得到 + 微信读书 + 网易云 (30%)</th></tr>
+          <tr><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">M1</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">$300</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$210</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$90</td></tr>
+          <tr><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">M3</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">$900</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$630</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$270</td></tr>
+          <tr><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">M6</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">$1,800</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$1,260</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$540</td></tr>
+          <tr><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">M9</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">$2,600</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$1,820</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$780</td></tr>
+          <tr style="background:rgba(180,83,9,.05)"><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">M12</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--acc);font-weight:500">$3,200</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$2,240</td><td style="padding:.38rem .65rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$960</td></tr>
+          <tr style="background:var(--bg2)"><td style="padding:.38rem .65rem;color:var(--ink);font-weight:500">Y1 合计</td><td style="padding:.38rem .65rem;color:var(--acc);font-weight:500">$19,800</td><td style="padding:.38rem .65rem;color:var(--ink2)">约 $13,860</td><td style="padding:.38rem .65rem;color:var(--ink2)">约 $5,940</td></tr>
+        </table>
+        <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.4rem">品牌别 · 稳定期月收益（第12个月）</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.68rem;margin-bottom:1.2rem">
+          <tr><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">品牌（zh-CN）</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">角度</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">月收益</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">喜马拉雅</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">其他</th></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500;font-family:'Noto Sans SC',sans-serif">睡眠修复</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">神经系统</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$620</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$434</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$186</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500;font-family:'Noto Sans SC',sans-serif">压力稳定器</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">神经系统</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$580</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$406</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$174</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500;font-family:'Noto Sans SC',sans-serif">专注引擎</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">表现与专注</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$540</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$378</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$162</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500;font-family:'Noto Sans SC',sans-serif">内在安全感</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">情感疗愈</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$490</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$343</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$147</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500;font-family:'Noto Sans SC',sans-serif">Z世代落地</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">身份认同</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$490</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$343</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$147</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500;font-family:'Noto Sans SC',sans-serif">正念觉醒</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">灵性觉醒</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$480</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$336</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$144</td></tr>
+          <tr style="background:var(--bg2)"><td style="padding:.3rem .5rem;color:var(--ink);font-weight:500" colspan="2">合计 · 6个品牌</td><td style="padding:.3rem .5rem;color:var(--acc);font-weight:500">$3,200</td><td style="padding:.3rem .5rem;color:var(--ink2)">$2,240</td><td style="padding:.3rem .5rem;color:var(--ink2)">$960</td></tr>
+        </table>
+        <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.4rem">平台别 · 第12个月收益分配</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.68rem;margin-bottom:1rem">
+          <tr><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">平台</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">类型</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">比例</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">M12收益</th><th style="font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:.32rem .5rem;text-align:left;border-bottom:2px solid var(--rule);background:var(--bg2)">备注</th></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">喜马拉雅 Ximalaya</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">有声书（主导）</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--acc)">70%</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$2,240</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">月活3.45亿。中国主导音频平台。</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">得到 Dedao</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">知识/电子书</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--acc)">14%</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$448</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">5000万以上付费用户。高端知识购买者。</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">微信读书 WeChat Read</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">电子书</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--acc)">10%</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$320</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">内置于微信。13亿用户基础曝光。</td></tr>
+          <tr><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink);font-weight:500">网易云音乐 NetEase Music</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">有声书</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--acc)">6%</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2)">$192</td><td style="padding:.3rem .5rem;border-bottom:1px solid var(--rule);color:var(--ink2);font-size:.62rem">正在扩展有声书业务。年轻用户群体。</td></tr>
+          <tr style="background:var(--bg2)"><td style="padding:.3rem .5rem;color:var(--ink);font-weight:500" colspan="2">合计</td><td style="padding:.3rem .5rem;color:var(--acc);font-weight:500">100%</td><td style="padding:.3rem .5rem;color:var(--acc);font-weight:500">$3,200</td><td style="padding:.3rem .5rem"></td></tr>
+        </table>
+        <div style="padding:.45rem .7rem;border-left:2px solid var(--acc2);background:rgba(180,83,9,.04);font-size:.68rem;color:var(--ink2);line-height:1.65">喜马拉雅内容在抖音上病毒传播可在数天内带来数百万次收听 — 中国在所有四个市场中拥有最高的上行乘数。收益流向您的中国公司实体。首次上传前需进行法律审查。</div>
+      </div>
+    </div>
+
+    <!-- CN 9: 结语 -->
+    <div class="slide" style="background:#1c1009;position:absolute;inset:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));overflow-y:auto">
+      <div style="padding:3rem 2.5rem 3.5rem 4.5rem;display:flex;flex-direction:column;justify-content:center">
+        <div class="eye" style="color:var(--acc2)">Pearl Prime · 中国大陆 · 品牌总监</div>
+        <div style="font-size:.74rem;font-weight:300;color:rgba(250,246,240,.28);margin-bottom:.7rem;letter-spacing:.08em">古老智慧，疗愈内容，为中国的下一代。</div>
+        <h2 style="font-family:var(--serif);font-weight:300;line-height:1.05;letter-spacing:-.02em;font-size:clamp(1.9rem,3.8vw,3.2rem);color:#faf6f0;margin-bottom:.9rem">一个世代正在等待。<br><em style="color:var(--acc2)">成为将智慧<br>带给他们的人。</em></h2>
+        <p style="font-size:.82rem;font-weight:300;line-height:1.8;color:rgba(250,246,240,.48);max-width:400px;margin-bottom:1rem">中国的 Gen Z 与 Gen Alpha 正在面对同龄压力、社交焦虑、身份认同与倦怠 — 就在此刻。古老智慧直接回应他们面对的一切。Pearl Prime 将这份智慧交到您手中，以他们真正使用的格式呈现。</p>
+        <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.25);margin-bottom:.5rem">品牌精灵将会：</div>
+        <div style="display:flex;flex-direction:column;gap:.2rem;margin-bottom:1.2rem">
+          <div style="font-size:.72rem;color:rgba(250,246,240,.52)">→ 逐步引导您完成品牌总监入门</div>
+          <div style="font-size:.72rem;color:rgba(250,246,240,.52)">→ 展示真实内容、平台与实绩</div>
+          <div style="font-size:.72rem;color:rgba(250,246,240,.52)">→ 为您匹配适合的品牌角度与市场</div>
+          <div style="font-size:.72rem;color:rgba(250,246,240,.52)">→ 让您准备好上传第一批书目并开始获利</div>
+        </div>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+          <a href="https://brand-admin-onboarding-bu2.pages.dev/wizard-zh" style="font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.52rem 1.2rem;border-radius:1px;text-decoration:none;background:var(--acc);color:#fff;border:1px solid var(--acc)">成为品牌总监 ↗</a>
+          <button onclick="showLanding()" style="font-family:var(--mono);font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;padding:.52rem 1rem;border-radius:1px;cursor:pointer;border:1px solid rgba(250,246,240,.1);color:rgba(250,246,240,.28);background:transparent">← 选择其他市场</button>
+        </div>
+      </div>
+      <div style="padding:3rem 3.5rem 3.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:.9rem;border-left:1px solid rgba(250,246,240,.06)">
+        <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.25);margin-bottom:.1rem">您将服务的世代</div>
+        <div style="border:1px solid rgba(250,246,240,.07);background:rgba(250,246,240,.03);padding:.85rem 1rem">
+          <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.35rem">Gen Z · 1997–2012年生</div>
+          <div style="font-size:.7rem;color:rgba(250,246,240,.5);line-height:1.65">在身份认同、社会比较、学业压力与焦虑中成长的数字原住民。他们想要感觉真实、说他们语言、真正有帮助的内容。Pearl Prime 每天以他们已在使用的格式传递。</div>
+        </div>
+        <div style="border:1px solid rgba(250,246,240,.07);background:rgba(250,246,240,.03);padding:.85rem 1rem">
+          <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.35rem">Gen Alpha · 2013年至今生</div>
+          <div style="font-size:.7rem;color:rgba(250,246,240,.5);line-height:1.65">完全在智能手机时代出生的第一代。视觉优先。短视频原生。比任何一代更快速成长。Pearl Prime 以漫画、短视频和音频与他们相遇 — 专为他们实际的学习方式而建。</div>
+        </div>
+        <div style="border:1px solid rgba(250,246,240,.07);background:rgba(250,246,240,.03);padding:.85rem 1rem">
+          <div style="font-family:var(--mono);font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.35rem">机会 · 中国</div>
+          <div style="font-size:.7rem;color:rgba(250,246,240,.5);line-height:1.65">没有人正在以他们的格式、为他们的挑战、以他们的语言大规模地将古老启蒙智慧传递给这个世代。Pearl Prime 是第一个。您可以成为将它带给中国的人。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="btm"><button class="b-brand" onclick="showLanding()">Pearl<span style="color:var(--acc)">Prime</span> <span style="font-family:var(--mono);font-size:.46rem;opacity:.35">🇨🇳</span></button><div class="b-ctrl"><div class="b-dots" id="d-cn"></div><span class="b-cnt" id="c-cn">1/9</span><button class="b-btn" id="bb-cn" onclick="nav('cn',-1)" disabled>← 上一页</button><button class="b-btn" id="bn-cn" onclick="nav('cn',1)">下一页 →</button></div></div>
+</div>
+
+<script>
+var cur={cn:0};
+var tot={cn:9};
+
+var RD={
+  cn:{peak:'$3,200',platformNote:'喜马拉雅为主 + 得到 + 微信读书 · 通过中国公司 · 纯有机流量',
+    vals:[300,700,1200,1700,2100,2500,2700,2900,3000,3050,3150,3200],
+    splits:[{l:'您 — 品牌总监',p:80,c:'#b45309'},{l:'USLF 老师',p:10,c:'#c87030'},{l:'Pearl Prime',p:5,c:'#d97706'},{l:'48 Social',p:5,c:'#a08060'}]}
+};
+
+function buildChart(p){
+  var el=document.getElementById('chart-'+p);
+  if(!el)return;
+  var d=RD[p];
+  var max=Math.max.apply(null,d.vals);
+  var h='';
+  h+='<div class="rev-title">您保留的收益</div>';
+  h+='<div style="margin:.15rem 0 .08rem">';
+  h+='<div style="font-family:var(--mono);font-size:.52rem;color:var(--ink3);letter-spacing:.06em;margin-bottom:.1rem">成长至</div>';
+  h+='<div class="rev-big">'+d.peak+'</div>';
+  h+='<div class="rev-sub">每月 · 第12个月达成</div>';
+  h+='</div>';
+  h+='<div style="font-size:.6rem;color:var(--acc);font-family:var(--mono);letter-spacing:.05em;margin:.2rem 0 .4rem">'+d.platformNote+'</div>';
+  h+='<div class="bars">';
+  var months=['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
+  for(var i=0;i<d.vals.length;i++){
+    var bh=Math.round((d.vals[i]/max)*62);
+    var last=(i===d.vals.length-1);
+    h+='<div class="bar-col">';
+    h+='<div class="bar-fill" style="height:'+bh+'px;background:'+(last?'var(--acc)':'rgba(180,83,9,.3)')+'"></div>';
+    h+='<div class="bar-lbl">'+months[i]+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  h+='<div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:.45rem 0 .28rem">收益分配</div>';
+  h+='<div class="rev-split">';
+  for(var j=0;j<d.splits.length;j++){
+    var s=d.splits[j];
+    h+='<div class="rev-split-row">';
+    h+='<span class="rev-split-lbl">'+s.l+'</span>';
+    h+='<div class="rev-split-bar"><div class="rev-split-fill" style="width:'+s.p+'%;background:'+s.c+'"></div></div>';
+    h+='<span class="rev-split-pct" style="color:'+s.c+'">'+s.p+'%</span>';
+    h+='</div>';
+  }
+  h+='</div>';
+  el.innerHTML=h;
+}
+
+function showLanding(){
+  document.getElementById('v-cn').classList.remove('on');
+  document.getElementById('v-landing').classList.add('on');
+}
+
+function showPath(p){
+  document.getElementById('v-landing').classList.remove('on');
+  document.getElementById('v-'+p).classList.add('on');
+  buildDots(p);updateNav(p);buildChart(p);
+}
+
+function nav(p,dir){
+  var next=cur[p]+dir;
+  if(next<0||next>=tot[p])return;
+  var ss=document.querySelectorAll('#sl-'+p+' .slide');
+  ss[cur[p]].classList.remove('on');ss[cur[p]].classList.add('out');
+  setTimeout(function(){ss[cur[p]].classList.remove('out');},240);
+  cur[p]=next;ss[next].classList.add('on');updateNav(p);
+}
+
+function buildDots(p){
+  var el=document.getElementById('d-'+p);el.innerHTML='';
+  for(var i=0;i<tot[p];i++){
+    var d=document.createElement('button');
+    d.className='b-dot'+(i===0?' on':'');
+    (function(idx){d.onclick=function(){jumpTo(p,idx);};})(i);
+    el.appendChild(d);
+  }
+}
+
+function jumpTo(p,idx){
+  var ss=document.querySelectorAll('#sl-'+p+' .slide');
+  ss[cur[p]].classList.remove('on');cur[p]=idx;ss[idx].classList.add('on');updateNav(p);
+}
+
+function updateNav(p){
+  var c=cur[p],t=tot[p];
+  document.getElementById('c-'+p).textContent=(c+1)+'/'+t;
+  document.getElementById('bb-'+p).disabled=c===0;
+  document.getElementById('bn-'+p).disabled=c===t-1;
+  document.getElementById('bn-'+p).textContent=c===t-1?'完成':'下一页 →';
+  document.getElementById('pb-'+p).style.width=((c+1)/t*100)+'%';
+  var dots=document.querySelectorAll('#d-'+p+' .b-dot');
+  dots.forEach(function(d,i){d.classList.toggle('on',i===c);});
+}
+
+document.addEventListener('keydown',function(e){
+  var active=['cn'].find(function(p){return document.getElementById('v-'+p).classList.contains('on');});
+  if(!active)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')nav(active,1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')nav(active,-1);
+  if(e.key==='Escape')showLanding();
+});
+
+// 默认显示 CN 标签
+window.addEventListener('DOMContentLoaded',function(){
+  showPath('cn');
+});
+</script>
+</body>
+</html>

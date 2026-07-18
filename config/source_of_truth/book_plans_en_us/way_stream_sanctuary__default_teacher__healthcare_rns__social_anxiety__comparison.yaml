@@ -1,0 +1,112 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__social_anxiety__comparison
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__social_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__brave_world
+  name: Brave in the World — for Nurses
+installment_number: 1
+engine: comparison
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Social Anxiety: Measuring Yourself Against Everyone (2)'
+subtitle: A Real Talk Guide to Social Anxiety for Healthcare Rns
+cover_tagline: Her win isn't your loss. Your nervous system just hasn't been told.
+description:
+  short_blurb: Another nurse gets the praise, the charge role, the confident ease
+    in the room — and something in you drops, like their good day is a verdict on
+    yours. This is a book for nurses about the reflex that turns everyone else's success
+    into proof of your own failure. It won't tell you to stop comparing. It'll show
+    you what the comparison is actually measuring, and why it always rigs the result.
+  long_description: 'She walks onto the unit and the room seems to lighten around
+    her. The doctors listen when she talks. She charts fast, charts clean, never seems
+    to second-guess. Patients ask for her by name. And every time you watch it, something
+    in your stomach drops — not because you wish her ill, but because her ease feels
+    like a measurement of you, and you keep coming up short. By the end of the shift
+    you''ve decided you don''t belong on this floor at all.
+
+
+    This book is for the nurse who can''t stop measuring. The one scanning the breakroom
+    for who looks more competent, who got the compliment, who the charge nurse trusts.
+    Who scrolls past another nurse''s certification or new job or effortless confidence
+    and feels not inspired but indicted. If other people''s success lands in your
+    body as your own failure, this is for you — and it is not because you''re petty.
+    It''s because the comparison machine is running, and it never runs fair.
+
+
+    We start by naming what''s actually happening. Comparison feels like information
+    — like you''re objectively reading the room and accurately placing yourself near
+    the bottom. But you''re not measuring. You''re comparing your inside, every doubt
+    and tremor and 3 a.m. panic, against her outside, the only part of her you can
+    see. It is a rigged scale. You weigh your whole messy interior against her polished
+    surface and call the result truth, and the result is always the same: she''s fine,
+    you''re failing.
+
+
+    Then we go down into it. Not to make you stop comparing — you won''t, the reflex
+    is too old and too fast — but to feel it happen in real time and see the trick
+    inside it. You''ll learn to catch the exact moment the measuring starts, that
+    drop in the gut when someone else shines, and to recognize it as a sensation rather
+    than a fact. You''ll learn the difference between admiring another nurse and disappearing
+    into the comparison, because they start in the same place and end in completely
+    different rooms.
+
+
+    This is not a self-love book. No affirmations about your worth, no gratitude practice,
+    no "stay in your own lane" pep talk. We''re not going to convince you you''re
+    better than you think. We''re going to help you stop running a measurement that
+    was never built to give you an honest answer.
+
+
+    What changes is the grip. Other nurses will keep being good at things — that doesn''t
+    stop — but their good stops registering as your verdict. You feel the drop and
+    don''t follow it into the story. You watch her shine and let it just be her shining,
+    instead of a referendum on you.
+
+
+    Her success was never a measurement of you. It was only ever hers. You''re allowed
+    to stop keeping a score nobody else is even playing.'
+keywords:
+  primary:
+  - social anxiety
+  - social phobia
+  - fear of people
+  - shyness help
+  - social confidence
+  - fear of judgment
+  secondary:
+  - nurses
+  - social anxiety for nurses
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- The Comparison Cure (Lisa Bobby) — why measuring your insides against everyone's
+  outsides always rigs the result
+- Daring Greatly (Brené Brown) — the scarcity reflex that turns someone else's enough
+  into your not-enough
+- The Gifts of Imperfection (Brené Brown) — letting another person's shine just be
+  theirs instead of a verdict on you
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

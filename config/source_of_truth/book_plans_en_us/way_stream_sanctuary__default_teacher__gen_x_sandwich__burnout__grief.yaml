@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__burnout__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__depletion
+  name: Refill the Empty Well — for the Sandwich Generation
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Burnout Recovery: After the Loss'
+subtitle: A Real Talk Guide to Burnout for Gen X Sandwich
+cover_tagline: You're not tired. You're grieving the life you don't have time to live.
+description:
+  short_blurb: Burnout doesn't always look like exhaustion. Sometimes it looks like
+    the quiet ache of mourning who you used to be, before everyone needed you at once.
+    This is a grounded, secular book about the grief buried inside caregiver burnout,
+    written for the people holding two generations up with nothing left for themselves.
+  long_description: 'It hits you in the car, usually. Parked in the lot between your
+    mother''s neurologist and your kid''s school pickup, engine off, and something
+    in your chest just gives way. You''re not sad about anything you can point to.
+    You''re just empty in a way that feels older than tiredness.
+
+
+    That emptiness has a name, and it isn''t laziness or weakness. It''s grief. Underneath
+    the burnout of caring for aging parents and growing kids at the same time, you
+    are quietly mourning. The version of you who had a Saturday. The career you put
+    on a shelf. The parent who used to know your name. The future you assumed you''d
+    get to. Nobody held a funeral for any of it, so you''ve been carrying the loss
+    with no place to set it down.
+
+
+    If you''re the one running the medication spreadsheet and the carpool, the one
+    who answers the 2am call and still shows up at breakfast, this was written for
+    you. There''s no scolding here about being grateful you still have your parents,
+    and no self-care checklist to bolt onto the list that''s already crushing you.
+
+
+    Instead, it starts by helping you see the grief for what it is, instead of mistaking
+    it for failure. Then it goes down into that grief with you, slowly, because the
+    way out is not around. Together you''ll put words to the losses, even the ones
+    that feel too small or too shameful to count, like grieving a mother who is still
+    alive but no longer knows your name, or missing a marriage that now runs on logistics.
+    You''ll find language for the resentment that rides shotgun with the love, so
+    it stops poisoning you in silence. And you surface again, not fixed, but lighter,
+    because something you''ve carried alone for years finally got witnessed.
+
+
+    This is not recovery in the sense of getting your old life back. That life is
+    gone, and pretending otherwise is part of what''s exhausting you. It''s about
+    letting yourself feel the weight you''ve been carrying so it stops being invisible,
+    so it stops leaking out as numbness and short fuses and that hollow feeling in
+    the parking lot.
+
+
+    You are allowed to grieve while everyone is still alive and still needs you. You
+    are allowed to miss your own life. Naming that loss is not disloyal to the people
+    you love. It''s the first honest breath you''ve taken in a long time, and you
+    can take it here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - the sandwich generation
+  - burnout for the sandwich generation
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sam_meridian
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names the physiology of depletion without spiritual gloss'
+- It's OK That You're Not OK (Megan Devine) — refuses to fix grief and instead makes
+  room for it
+- The Body Keeps the Score (Bessel van der Kolk) — shows how unprocessed loss lives
+  in the body, not the mind
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

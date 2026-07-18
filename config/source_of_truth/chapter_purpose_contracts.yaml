@@ -1,0 +1,495 @@
+# Canonical chapter purpose contracts per arc tier (Arc-First emotional escalation).
+# chapter_index is 0-based. assign_chapter_purpose_contracts maps runtime arc + count to these jobs.
+version: 1
+
+tier_by_chapter_count:
+  micro_book: [3, 5]
+  short_book: [6, 8]
+  standard_book: [8, 12]
+  extended_book: [13, 18]
+  deep_book: [19, 99]
+
+arcs:
+  micro_book:
+    jobs:
+      - chapter_index: 0
+        emotional_job: recognition
+        reader_promise: "The reader feels accurately named without being overwhelmed."
+        forbidden_repeats: []
+        required_escalation: "Open with recognition only — no practices yet."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+      - chapter_index: 1
+        emotional_job: mechanism
+        reader_promise: "The reader sees what the pattern does in real time."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Shift from naming to explaining the loop."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 2
+        emotional_job: practice
+        reader_promise: "The reader leaves with one embodied move that fits the arc."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "First concrete skill; keep exercises minimal and sequenced."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 3
+        emotional_job: integration
+        reader_promise: "The reader senses how insight and body-state connect across days."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Weave prior beats without re-explaining the whole mechanism."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 4
+        emotional_job: resolution
+        reader_promise: "The reader closes with a workable self-definition and next step."
+        forbidden_repeats: ["recognition", "mechanism", "practice"]
+        required_escalation: "Land the arc; avoid introducing new mechanisms."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+
+  short_book:
+    jobs:
+      - chapter_index: 0
+        emotional_job: recognition
+        reader_promise: "Name the pain with precision; earn trust before tools."
+        forbidden_repeats: []
+        required_escalation: "Recognition only; no exercises."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+      - chapter_index: 1
+        emotional_job: mechanism
+        reader_promise: "Explain the pattern the nervous system is running."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Move from symptom story to mechanism clarity."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 2
+        emotional_job: deepening
+        reader_promise: "Show body-level consequences of staying in the loop."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Felt cost, not new diagnosis."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 3
+        emotional_job: reframe
+        reader_promise: "Offer what the pattern protected before judging it."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Compassionate reframe without repeating mechanism lecture."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 4
+        emotional_job: practice
+        reader_promise: "Deliver the first real skill with narrative earning."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "One primary exercise path; avoid stacking unrelated drills."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 5
+        emotional_job: deepening
+        reader_promise: "Surface shame or grief layer without collapsing into confession porn."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Deeper affect, not a second mechanism chapter."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 6
+        emotional_job: integration
+        reader_promise: "Show how small shifts compound across contexts."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Bridge chapters; avoid re-opening the cold open."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 7
+        emotional_job: resolution
+        reader_promise: "Close with identity-level clarity and sustainable next steps."
+        forbidden_repeats: ["recognition", "practice"]
+        required_escalation: "Resolution tone; taper exercises."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+
+  standard_book:
+    jobs:
+      - chapter_index: 0
+        emotional_job: recognition
+        reader_promise: "The reader names the pain without exercises yet."
+        forbidden_repeats: []
+        required_escalation: "Establish trust and specificity; no practices."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+      - chapter_index: 1
+        emotional_job: mechanism
+        reader_promise: "Explain the pattern the body-mind keeps replaying."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Mechanism clarity after recognition."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 2
+        emotional_job: deepening
+        reader_promise: "Show embodied consequences and costs of the loop."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Body truth, not another abstract mechanism pass."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 3
+        emotional_job: reframe
+        reader_promise: "Reveal what the pattern protected before you shame it."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Reframe without repeating ch1 mechanism essay."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 4
+        emotional_job: practice
+        reader_promise: "Land the first real skill with earned pacing."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Primary skill chapter; cap exercise sprawl."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 5
+        emotional_job: deepening
+        reader_promise: "Work shame or grief layer with dignity."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Affective depth distinct from ch2 body-cost pass."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 6
+        emotional_job: mechanism
+        reader_promise: "Map nervous-system logic without retreading ch1."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Second mechanism pass must add new map, not repeat ch1."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 7
+        emotional_job: reframe
+        reader_promise: "Support identity shift with fresh evidence."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Identity-level turn distinct from ch3 reframe."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 8
+        emotional_job: practice
+        reader_promise: "Second skill set that builds on the first without repeating it."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "New move; avoid duplicating ch4 drills."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 9
+        emotional_job: integration
+        reader_promise: "Show how changes compound across days and relationships."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Integration weave; no cold-open recognition reset."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 10
+        emotional_job: resolution
+        reader_promise: "Offer a new self-definition the reader can carry."
+        forbidden_repeats: ["recognition", "practice"]
+        required_escalation: "Arrival language; taper new mechanisms."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 11
+        emotional_job: resolution
+        reader_promise: "Orient forward without stacking new exercises."
+        forbidden_repeats: ["recognition", "practice", "mechanism"]
+        required_escalation: "Forward path; no exercise dump."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+
+  extended_book:
+    jobs:
+      - chapter_index: 0
+        emotional_job: recognition
+        reader_promise: "Name the pain with care; allow one brief embodied anchor after recognition lands."
+        forbidden_repeats: []
+        required_escalation: "Trust and orientation first; one short practice may follow the reflection seam."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 1
+        emotional_job: mechanism
+        reader_promise: "Explain the loop with concrete markers."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "First mechanism pass."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 2
+        emotional_job: deepening
+        reader_promise: "Embodied costs and signals."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Body-level deepening."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 3
+        emotional_job: reframe
+        reader_promise: "Function-of-pattern compassion."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "First reframe."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 4
+        emotional_job: practice
+        reader_promise: "First skill chapter."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Earned practice."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 5
+        emotional_job: deepening
+        reader_promise: "Shame or grief layer."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Affective deepening."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 6
+        emotional_job: mechanism
+        reader_promise: "Second map: social or relational circuitry."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "New mechanism angle."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 7
+        emotional_job: reframe
+        reader_promise: "Identity-supporting reframe."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Second reframe distinct from ch3."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 8
+        emotional_job: practice
+        reader_promise: "Second skill track."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "New practice set."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 9
+        emotional_job: integration
+        reader_promise: "Cross-context compounding."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Integration pass one."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 10
+        emotional_job: deepening
+        reader_promise: "Relationship or boundary depth."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Relational deepening distinct from ch5."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 11
+        emotional_job: mechanism
+        reader_promise: "Advanced nervous-system or cognition map."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Third mechanism must add novelty."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 12
+        emotional_job: practice
+        reader_promise: "Consolidation practice with fewer steps."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Tightened practice."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 13
+        emotional_job: integration
+        reader_promise: "Second integration weave."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Synthesis without cold open."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 14
+        emotional_job: reframe
+        reader_promise: "Late identity stabilization."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Late reframe; avoid repeating ch7."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 15
+        emotional_job: deepening
+        reader_promise: "Meaning-making without metaphysical absolutes unless spiritual_first."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Meaning layer."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 16
+        emotional_job: resolution
+        reader_promise: "Self-definition update."
+        forbidden_repeats: ["recognition", "practice"]
+        required_escalation: "Penultimate landing."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 17
+        emotional_job: resolution
+        reader_promise: "Forward path; minimal new content."
+        forbidden_repeats: ["recognition", "practice", "mechanism"]
+        required_escalation: "Close the arc."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+
+  deep_book:
+    jobs:
+      - chapter_index: 0
+        emotional_job: recognition
+        reader_promise: "Name the pain; no exercises."
+        forbidden_repeats: []
+        required_escalation: "Orientation."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+      - chapter_index: 1
+        emotional_job: mechanism
+        reader_promise: "First mechanism map."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Mechanism."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 2
+        emotional_job: deepening
+        reader_promise: "Embodied cost."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Deepening."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 3
+        emotional_job: reframe
+        reader_promise: "Protective function reframe."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Reframe."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 4
+        emotional_job: practice
+        reader_promise: "Skill one."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Practice."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 5
+        emotional_job: deepening
+        reader_promise: "Affective layer."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Deepening two."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 6
+        emotional_job: mechanism
+        reader_promise: "Second map."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Mechanism two."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 7
+        emotional_job: reframe
+        reader_promise: "Identity-support."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Reframe two."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 8
+        emotional_job: practice
+        reader_promise: "Skill two."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Practice two."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 9
+        emotional_job: integration
+        reader_promise: "First synthesis."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Integration."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 10
+        emotional_job: deepening
+        reader_promise: "Relational depth."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Deepening three."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 11
+        emotional_job: mechanism
+        reader_promise: "Advanced map."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Mechanism three."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 12
+        emotional_job: practice
+        reader_promise: "Consolidation practice."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Practice three."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 13
+        emotional_job: integration
+        reader_promise: "Second synthesis."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Integration two."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 14
+        emotional_job: reframe
+        reader_promise: "Late reframe."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Reframe three."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 15
+        emotional_job: deepening
+        reader_promise: "Meaning layer."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Deepening four."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 16
+        emotional_job: mechanism
+        reader_promise: "Optional late map — must be novel."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Mechanism four."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 17
+        emotional_job: practice
+        reader_promise: "Maintenance skill."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Practice four."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 2
+      - chapter_index: 18
+        emotional_job: integration
+        reader_promise: "Third synthesis."
+        forbidden_repeats: ["recognition", "mechanism"]
+        required_escalation: "Integration three."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 19
+        emotional_job: deepening
+        reader_promise: "Community or legacy perspective."
+        forbidden_repeats: ["recognition"]
+        required_escalation: "Deepening five."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 20
+        emotional_job: resolution
+        reader_promise: "Penultimate identity landing."
+        forbidden_repeats: ["recognition", "practice"]
+        required_escalation: "Resolution A."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
+      - chapter_index: 21
+        emotional_job: resolution
+        reader_promise: "Forward path; taper exercises."
+        forbidden_repeats: ["recognition", "practice", "mechanism"]
+        required_escalation: "Resolution B."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+      - chapter_index: 22
+        emotional_job: resolution
+        reader_promise: "Optional coda chapter — reflective, low novelty."
+        forbidden_repeats: ["recognition", "mechanism", "practice"]
+        required_escalation: "Coda."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0
+      - chapter_index: 23
+        emotional_job: resolution
+        reader_promise: "Final send-off."
+        forbidden_repeats: ["recognition", "mechanism", "practice"]
+        required_escalation: "Close."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 0

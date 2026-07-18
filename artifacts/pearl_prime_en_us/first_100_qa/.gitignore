@@ -1,0 +1,8 @@
+# Per-book renders and BookSpecs are large (3200+ files, ~70MB).
+# Generated locally by scripts/pearl_prime_en_us/assemble_first_100_qa.py.
+# Aggregate evidence lives in:
+#   - assembly_summary.json (this directory, committed)
+#   - filter_report.json    (this directory, committed)
+#   - ../bestseller_audit_20260513.tsv (committed)
+renders/
+specs/

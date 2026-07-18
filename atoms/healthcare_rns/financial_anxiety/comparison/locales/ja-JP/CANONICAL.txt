@@ -1,0 +1,274 @@
+## RECOGNITION v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+ジェームスは同僚が家を買うのを見ています。比較がやってきます。「私はこれができない。彼らは経済的に安定している。私は違う。」胸が締め付けられます。比較は、彼が持っていないものを彼に見せています。不安は比較を不十分さの証拠として使っています。
+---
+
+## RECOGNITION v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/recognition/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+マリアは同僚が退職貯蓄について話すのを聞きます。比較：「彼らは十分な額を持っている。私は絶対に持てない。」胸が重くなります。不安は彼らの間に隔たりを作っています。
+---
+
+## RECOGNITION v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/recognition/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+エイミーは同僚が休暇中の様子を見ます。比較：「彼らは旅行を買える余裕がある。私にはない。」胸が締め付けられます。不安は自分を他者と比較して、自分が不十分だと判断しています。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/recognition/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+ローサは同僚が安心について話すのを聞きます。比較：「彼らは安全を感じている。私は感じていない。」胸が重くなります。不安は彼女の不十分さの証拠を作り出しています。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/recognition/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+ダニは同僚が簡単に貯蓄するのを見ます。比較：「彼らは安定している。私は苦しんでいる。」手が冷たくなります。不安は比較を使って、彼女が失敗していることを証明しようとしています。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+ジェームスは今、常に同僚と自分を比較しています。メカニズムは、比較が彼の不十分さを確認しているということです。彼は持っていないものに焦点を当てています。胸は常に締め付けられています。不安は比較によって強化されています。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/mechanism_proof/micro/v02.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+マリアは今、他の人が持っているものを絶対に持てないと確信しています。メカニズムは、比較が証拠になったということです。隔たりが永続的に思えるので、彼女は努力することをやめました。胸は硬くなっています。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+エイミーは同僚をうらやんでいます。メカニズムは、比較が恨みを作り出したということです。彼女は他の人が持っているものに焦点を当てています。不安は増していきます。彼女は疲れ果てています。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+ローサは安心を感じることをあきらめています。メカニズムは、比較が安心は他の人のものだと彼女を確信させたということです。彼女は不十分さを受け入れています。胸は塞がっています。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/mechanism_proof/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+ダニは今、自分は財務で失敗していると確信しています。メカニズムは、比較が恥を作り出したということです。彼女は自分の苦しみに焦点を当てています。不安は常に存在しています。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+ジェームスは同僚の家を見るのをやめます。実験は自分の財務に焦点を当てることです。彼の財務状態は良好です。彼は比較するのをやめます。胸が少し開きます。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+マリアは同僚の退職貯蓄を追跡するのをやめます。彼女は自分の貯蓄に焦点を当てます。それは十分です。胸が少し開きます。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+エイミーは休暇をうらやむのをやめます。彼女は自分の予算がうまく機能していることを認識します。彼女は自分の手段の範囲内で旅行することができます。呼吸が楽になります。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+ローサは安心を比較するのをやめます。彼女は自分のものを認識します。彼女は貯蓄を持っています。彼女は安定を持っています。胸が少し開きます。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+ダニは貯蓄スタイルを比較するのをやめます。彼女は自分のペースを認識します。彼女は安定を構築しています。手が少し温かくなります。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+ジェームスは自分の経済状況を知っています。比較しません。胸は開いています。手は温かいです。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+マリアは退職貯蓄を構築しています。比較していません。胸はより開いています。彼女は自分自身の道に焦点を当てています。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+エイミーは予算内で楽しんでいます。うらやんでいません。呼吸は楽です。彼女は自分の選択に満足しています。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+ローサは自分の安心を感じています。比較していません。胸は開いています。彼女は構築しています。彼女は安全です。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+ダニは着実に貯蓄しています。比較していません。手は温かいです。彼女は安全です。
+---
+
+## TURNING_POINT v06
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+ケイコは残業代がカーローン支払いをカバーするかどうかを計算しています。比較エンジンは誰か他の人の見える成功と測定しています。ケイコの喉が締まります。パターンが今、注意を要求しています。熱く、切実に、待つのを拒否しています。ケイコはそれが要求するのを見ています。今回、従うのではなく、ケイコはその要求がどこから来るのかを追跡しています。それは腹から始まります。考えに移ります。考えは物語を構築します。物語は言っています。「今行動しないと、すべてを失う」。ケイコは物語を調べます。物語には証拠がありません。喉には本当の感覚があります。物語は緊迫感を作り出しています。ケイコは物語に従わずに感覚を持ちます。感覚は残ります。物語は聴き手を失います。フレームが変わります。パターンは大きい声を上げています。でも、大きな声は真実ではありません。
+---
+
+## TURNING_POINT v07
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/turning_point/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+ノーラは学生ローン支払いをカバーするのに必要な日当シフトの数を数えています。利用可能な日数よりも数字が多いです。比較エンジンが最大音量に達します。ノーラの頭皮がチクチクしています。ノーラの指が震えています。すべてが今この瞬間に縮小しています。崩壊か突破か、中間地点はありません。ノーラはピークの内側に立っています。パターンが言っています。「これが君だ」。ノーラがそれを聞きます。初めて、ノーラはそれを事実としてではなく、文として聞いています。文は間違っていることができます。ノーラの体は強度で揺れています。揺れは本当です。文は解釈です。ノーラは揺れを文から分離しています。体はまだ震えています。アイデンティティの主張は溶けていきます。メトリックスはそれ自身の選別性の下で崩壊します。フレームは開きます。
+---
+
+## EMBODIMENT v06
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/comparison/embodiment/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: self_claim
+---
+トマスは残業を断っています。銀行口座が抗議しています。体は金銭よりも休息を必要としています。比較エンジンが起動します。トマスの指が震えています。熱が上昇します。トマスは熱を認識しています。それから背を向けません。トマスは誰か他の人の成果と自分自身を順位を付けずに一緒に保ちます。古いパターンが発火

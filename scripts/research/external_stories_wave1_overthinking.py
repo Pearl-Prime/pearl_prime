@@ -1,0 +1,406 @@
+"""Overthinking topic — Wave 1 external stories corpus."""
+OVERTHINKING_STORIES = [
+    {
+        "story_id": "ext_over_mythic_buridan_ass_v01",
+        "type": "mythic",
+        "emotional_shape": "humor",
+        "story": (
+            "Medieval philosophy tells of Buridan's ass — a donkey equally hungry and thirsty, "
+            "placed exactly between hay and water, unable to decide which need to satisfy first, "
+            "and starving while deliberating. The parable is absurd on purpose: perfect balance "
+            "between options becomes paralysis.\n\n"
+            "Overthinking often feels sophisticated — weighing every variable — but the ass is "
+            "the honest mirror. Analysis without a stopping rule is not wisdom. It is hunger "
+            "next to water while the mind writes another pros-and-cons list. The humor is gentle: "
+            "your catastrophe is also a donkey meme philosophers have told for centuries."
+        ),
+        "source": "Buridan's ass — medieval decision paradox",
+        "citation": "Buridan, J. commentaries on Aristotle; standard philosophy of decision retelling.",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_zh_cn_qi_ren_v01",
+        "type": "mythic",
+        "emotional_shape": "humor",
+        "story": (
+            "《列子·天瑞》载杞人忧天：有人担心天塌地陷，寝食难安，旁人晓之以理，"
+            "他才稍安。成语后来专指无谓的过度忧虑——但原典里的身体反应是真实的："
+            "失眠、食欲消失、反复求证。\n\n"
+            "中文读者一听'杞人忧天'便知过度思虑之弊，却常忽略故事也承认"
+            "忧者的痛苦并非假装。反思点在于：有些担心可被知识缓解，有些则"
+            "需要身体从'预演灾难'模式里被轻轻带回当下。"
+        ),
+        "source": "杞人忧天 — 《列子》",
+        "citation": "《列子·天瑞》；刘向辑录传统",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["zh_CN", "zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_historical_churchill_decisions_v01",
+        "type": "historical",
+        "emotional_shape": "contrast",
+        "story": (
+            "Winston Churchill's wartime memos show a leader who could deliberate endlessly — "
+            "red-penciling drafts, demanding more data, walking the halls at 2 a.m. — and still "
+            "issue decisive orders before dawn. Colleagues described both exhaustive analysis "
+            "and sudden action, not one without the other.\n\n"
+            "Overthinking is not always inability to act. Sometimes it is the mind's rehearsal "
+            "room before the lever is pulled. Churchill's contrast is useful: rumination with a "
+            "deadline can be strategy, not pathology — until the rehearsal outlasts the war's "
+            "need for a decision. The hinge is whether thought serves motion or replaces it."
+        ),
+        "source": "Winston Churchill — wartime decision-making",
+        "citation": "Churchill, W. The Second World War memoirs; Gilbert, M. Churchill: A Life (1991).",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "Western political figure — verified public record only.",
+    },
+    {
+        "story_id": "ext_over_film_beautiful_mind_v01",
+        "type": "film",
+        "emotional_shape": "contrast",
+        "story": (
+            "A Beautiful Mind portrays mathematician John Nash's struggle with schizophrenia — "
+            "including periods when paranoid ideation flooded his ability to trust perception. "
+            "The film's dramatized arc shows Nash learning to discriminate which thoughts require "
+            "engagement and which must be walked past without negotiation.\n\n"
+            "Overthinking at clinical intensity is not 'just worry harder.' But for subclinical "
+            "listeners, Nash's later strategy offers a secular metaphor: not every thought earns "
+            "a seat at the table. Some lines of reasoning are noise wearing a suit. The contrast "
+            "is discipline without self-contempt — notice, label, decline to follow."
+        ),
+        "source": "A Beautiful Mind (2001), Universal Pictures",
+        "citation": "Howard, R. (dir.) A Beautiful Mind. Universal, 2001; Nasar, S. biography (1998).",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "Mental illness portrayed; nominative reference, not clinical advice.",
+    },
+    {
+        "story_id": "ext_over_sports_chuck_knoblauch_v01",
+        "type": "sports",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Yankees second baseman Chuck Knoblauch developed 'the yips' — overthinking a throw "
+            "he had made thousands of times, he began sailing balls into the stands. Sports "
+            "psychology case studies cite his visible hesitation: the mind inserting a camera "
+            "between hand and glove until muscle memory could not run.\n\n"
+            "Athletic overthinking is embodied proof that analysis can sabotage automation. "
+            "The cautionary note for daily life: the spreadsheet in your head during a simple "
+            "email or handshake is the same mechanism. Thought arrives to help, stays to "
+            "direct, and suddenly you cannot release the ball."
+        ),
+        "source": "Chuck Knoblauch — throwing yips",
+        "citation": "ESPN retrospective on Knoblauch yips; sports psychology literature on performance breakdown.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_business_paralysis_analysis_v01",
+        "type": "business",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Kodak and Blockbuster are often cited in business schools alongside a quieter pattern: "
+            "teams that commissioned endless studies while competitors shipped. Intel under Andy Grove "
+            "famously warned that 'only the paranoid survive' — but Grove also demanded decision "
+            "dates, because paranoia without deadlines becomes churn.\n\n"
+            "Corporate overthinking is meetings about meetings, decks that refine risk color but "
+            "never pick a lane. The cautionary lesson mirrors personal rumination: intelligence "
+            "multiplies scenarios faster than it closes them. Strategy requires a calendar, not "
+            "only a spreadsheet."
+        ),
+        "source": "Corporate analysis paralysis — business case patterns",
+        "citation": "Grove, A. Only the Paranoid Survive (1996); Christensen, C. disruption case studies.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_ted_rumination_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "Psychologist Guy Winch, in TED talks on emotional first aid, describes rumination — "
+            "replaying conversations, drafting imaginary arguments, scanning for mistakes — as a "
+            "habit that feels like problem-solving but rarely produces new information. Studies "
+            "link repetitive thought to depression maintenance and sleep disruption.\n\n"
+            "The breakthrough is naming the loop: overthinking is not depth; it is a stuck "
+            "refresh button. Winch's practical contrast — set a ten-minute worry window, then "
+            "change physical context — gives listeners permission to treat thoughts as events, "
+            "not commands. Discipline without denying the feeling's pull."
+        ),
+        "source": "Guy Winch — TED talks on rumination",
+        "citation": "Winch, G. TED Talk 'Why we all need to practice emotional first aid'; Winch, Emotional First Aid (2013).",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_moth_wedding_speech_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "humor",
+        "story": (
+            "Moth tellers often recount overthinking a wedding toast — rewriting index cards in "
+            "the bathroom, debating whether the second joke insults Aunt Carol, practicing tone "
+            "in the mirror until the moment sounds rehearsed and hollow. The punchline is usually "
+            "that the speech that landed was the shorter, messier one.\n\n"
+            "Social overthinking is performance multiplied by love — you care, so the mind "
+            "generates seventeen versions of embarrassment. Hearing it on stage normalizes the "
+            "absurdity. The audience did not want perfection. They wanted presence. The humor "
+            "loosens the grip of the draft that will never be final enough."
+        ),
+        "source": "The Moth — wedding and speech anxiety stories",
+        "citation": "The Moth podcast archive; wedding toast story themes.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["en_US", "universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_fresh_air_insomnia_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "Fresh Air interviews on insomnia and anxiety frequently return to the same hour: "
+            "3 a.m., when the brain reopen cases closed at noon — an email tone, a parenting "
+            "mistake, a number on a statement. Guests describe not sleeping because thinking "
+            "feels like preparation, even when preparation has no dawn task attached.\n\n"
+            "Night overthinking borrows tomorrow's energy for imaginary trials. Fresh Air's "
+            "quiet register — clinicians and memoirists side by side — helps listeners hear "
+            "that the courtroom is closed. The thoughts are real; the verdict can wait for "
+            "coffee and daylight."
+        ),
+        "source": "Fresh Air — insomnia and nighttime rumination episodes",
+        "citation": "NPR Fresh Air sleep and anxiety archives; interview themes on 3 a.m. worry.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_zh_tw_exam_pressure_v01",
+        "type": "pop_culture",
+        "emotional_shape": "cautionary",
+        "story": (
+            "台灣升學制度長年把『考試』做成全家的時間軸：補習班、模考、志願序"
+            "反覆演算。新聞與紀錄片記錄學生失眠、反覆檢查答案卡、考上後仍"
+            "無法停止擔心下一關——過度思考從考場延伸到人生每一個選擇。\n\n"
+            "這不是個人『想太多』的道德問題，而是制度把不確定性壓在年輕人身上"
+            "的結果。台灣聽眾聽見這個故事，常點頭於『明明已經考了100分，"
+            "還在想若當初少寫一個字』的身體記憶。"
+        ),
+        "source": "台灣升學壓力與考試文化",
+        "citation": "教育部統計；台灣升學制度研究；媒體紀錄補教與學生壓力",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_ja_jp_perfectionism_v01",
+        "type": "pop_culture",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "日本では『完璧主義』と『考えすぎ』がセットで語られることが多い。"
+            "手紙の一言、敬語の一段、職場の返信タイミング——相手の顔が見えない"
+            "まま何度も下書きを直す。SNSでは『メンヘラ』などのレッテルと"
+            "戦いながら、過剰な自省が日常化している。\n\n"
+            "過剰思考は、配慮の裏返しでもある。相手を傷つけたくないという"
+            "優しさが、送信ボタンの前でループする。日本語圏の聴衆には、"
+            "『気遣い』と『停止できない頭』の距離が近い。"
+        ),
+        "source": "日本の完璧主義・過剰配慮文化",
+        "citation": "内閣府 青少年白書；心理学研究（完璧主義と不安）",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["ja_JP"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_book_hamlet_v01",
+        "type": "book",
+        "emotional_shape": "contrast",
+        "story": (
+            "Shakespeare's Hamlet is literature's longest meditation on delay — to act or not, "
+            "to trust the ghost, to kill Claudius at prayer. Soliloquies turn impulse into "
+            "philosophy until bodies pile on stage. Audiences for four centuries have recognized "
+            "themselves in a prince who thinks past the moment action would suffice.\n\n"
+            "Hamlet is not a mental-health manual. As cultural reference, he embodies "
+            "overthinking as tragedy: intelligence that cannot land. The contrast invites a "
+            "question without mockery — which of your current loops are conscience, and which "
+            "are theater your life keeps funding?"
+        ),
+        "source": "Hamlet — William Shakespeare",
+        "citation": "Shakespeare, W. Hamlet (c. 1600); Arden Shakespeare critical editions.",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_storycorps_regret_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "tearjerker",
+        "story": (
+            "StoryCorps conversations about regret often feature elders replaying a single "
+            "conversation — words not said, moves not made — for decades. The overthinking is "
+            "retrospective: the mind edits a film that cannot be reshot, searching for the "
+            "branch where courage lived.\n\n"
+            "These recordings are tearful and ordinary. They teach that rumination about the past "
+            "feels like loyalty to someone you hurt or left. The gentle pivot is not 'stop caring.' "
+            "It is noticing when memory becomes a courtroom with no appeals process — and when "
+            "the living deserve today's attention more than yesterday's rewrite."
+        ),
+        "source": "StoryCorps — regret and life-review conversations",
+        "citation": "StoryCorps archive; National Day of Listening regret-themed segments.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_film_social_network_v01",
+        "type": "film",
+        "emotional_shape": "cautionary",
+        "story": (
+            "The Social Network depicts Mark Zuckerberg coding Facemash and Facebook while "
+            "relationships fracture — scenes of rapid iteration paired with obsessive replay "
+            "of slights and status. Whether or not every scene is historically precise, the "
+            "film's cultural takeaway is familiar: the mind that outthinks social hurt can "
+            "build empires and still eat alone in a conference room.\n\n"
+            "Overthinking grievances can fuel achievement and starve connection. The cautionary "
+            "mirror is not anti-ambition. It asks whether your mental loops serve creation or "
+            "revenge — and whether the scoreboard you are building measures the life you want."
+        ),
+        "source": "The Social Network (2010), Columbia Pictures",
+        "citation": "Fincher, D. (dir.) The Social Network. Columbia, 2010; Mezrich, B. The Accidental Billionaires (2009).",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_sports_simone_manual_v01",
+        "type": "sports",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "Gymnasts describe 'mental blocks' on skills they have landed thousands of times — "
+            "the body freezes while the mind runs catastrophe footage. Simone Biles, beyond "
+            "Tokyo's twisties, has spoken about needing to relearn trust panel by panel, "
+            "thought by thought, not muscling through.\n\n"
+            "Overthinking in sport is not abstract. It is a split second where cognition "
+            "overrides motor scripts. Biles naming the block publicly gave language to anyone "
+            "whose expertise suddenly demands conscious micromanagement. The breakthrough is "
+            "permission to scale back until the automatic returns — speed is not always virtue."
+        ),
+        "source": "Simone Biles — mental blocks in gymnastics",
+        "citation": "Biles interviews on mental blocks; sports psychology literature on skill regression.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_business_intel_grove_v01",
+        "type": "business",
+        "emotional_shape": "contrast",
+        "story": (
+            "Andy Grove, former Intel CEO, built a culture of constructive worry — scenario "
+            "planning, competitive fear, red-flag meetings. He also institutionalized 'constructive "
+            "confrontation' with deadlines: worry must terminate in a decision owner and date, "
+            "or it is theater.\n\n"
+            "For overthinkers in careers, Grove offers a contrast model. Paranoia is fuel; "
+            "calendar is brake. The mind may generate fifty futures by lunch — leadership "
+            "discipline asks which future gets a prototype this week. Thinking without a "
+            "ship date is hobby; with one, it is strategy."
+        ),
+        "source": "Andy Grove — Intel decision culture",
+        "citation": "Grove, A. High Output Management (1983); Only the Paranoid Survive (1996).",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_over_pop_culture_paradox_choice_v01",
+        "type": "pop_culture",
+        "emotional_shape": "contrast",
+        "story": (
+            "Psychologist Barry Schwartz's 'paradox of choice' research — popularized in TED "
+            "talks and his book — shows that more options can increase regret, paralysis, and "
+            "second-guessing. Supermarket jam studies and 401(k) enrollment patterns suggest "
+            "the mind treats every extra door as responsibility to optimize.\n\n"
+            "Modern overthinking is partly inventory management: streaming menus, dating apps, "
+            "career ladders. Schwartz does not preach minimalism as moral superiority. He "
+            "names the cognitive tax of abundance — permission to satisfice, to pick good-enough "
+            "and close the browser tab without a tribunal."
+        ),
+        "source": "Barry Schwartz — paradox of choice",
+        "citation": "Schwartz, B. The Paradox of Choice (2004); Schwartz TED Talk on choice.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["overthinking"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+]

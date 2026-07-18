@@ -1,0 +1,728 @@
+schema_version: 1
+teacher_id: joshin
+topic: education
+active: true
+identity:
+  display_name: Joshin
+  attribution_name: Shingon Priest Joshin
+  tradition: Shingon Esoteric Buddhism (Mikkyo)
+  tradition_short: Shingon Esoteric
+  teacher_setting_options:
+  - temple
+  - ritual hall
+  teacher_years: lineage-bearing
+  affiliation_safe_line: teaches within the Shingon Esoteric Buddhist tradition
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: credential_vs_synchronization
+    label: friction between credential delivery the institution measures and the
+      synchronization the body the cohort is inside actually requires
+    loop: opens the lecture -> mind drifts -> closes the tab -> opens it again because
+      the deadline is real and the synchronization is not arriving
+    body_markers:
+    - jaw
+    - eyes
+    - breath
+    digital_markers:
+    - opens the tab
+    - closes the tab
+topic_fit:
+  fit_level: primary
+  fit_reason: The curriculum young people are inside has been built to deliver credentials
+    while the body, speech, and mind have been pulling against one another for years.
+    Shingon's ritual technology — explicit Sanmitsu synchronization and Sokushin
+    Jobutsu reframe — is precisely suited to the layer the credential cannot reach.
+  forbidden_angles:
+  - do not reduce to generic productivity
+  - do not frame as personal motivation problem
+  - do not use Zen framing
+hook_personal:
+  options:
+  - id: joshin_ed_hook_personal_01
+    line: You can complete the assignments and hit the deadlines. You also know that
+      what was supposed to be delivered through the credential is not arriving —
+      the synchronization between what the institution validates and what the body
+      registers has been widening.
+    metadata:
+      semantic_family: credential-synchronization-gap
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_personal_02
+    line: You are inside the system and you are doing what it asks. The body has
+      been carrying three layers — the screen, the family expectation, the platform
+      performance — and the curriculum has been training only one. The other two
+      keep accumulating cost.
+    metadata:
+      semantic_family: three-layers-one-trained
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_personal_03
+    line: At 2 a.m. you finish the paper. The jaw is locked. The grade arrives. Your
+      part of you keeps asking is not whether you passed — it is whether body, speech,
+      and mind were ever in the same room for the exchange.
+    metadata:
+      semantic_family: layers-in-same-room
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_personal_04
+    line: You read the syllabus and the throat closes around half of it. You complete
+      the readings anyway. The closing was information. The institution gave you
+      no technology for receiving it.
+    metadata:
+      semantic_family: throat-closing-information
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_personal_05
+    line: A part of you knows the question is not how to study harder. The question
+      is whether anything is actually being delivered to the body you are inside
+      now — and Shingon's tradition has explicit ritual technology for that delivery.
+    metadata:
+      semantic_family: ritual-tech-delivery
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: joshin_ed_hook_big_01
+    line: Youth education load is not only about workload. It is what credential
+      delivery costs over time — the synchronization gap that builds when body, speech,
+      and mind are trained to operate against one another for years while the institution
+      measures only one of the three.
+    metadata:
+      semantic_family: synchronization-gap-buildup
+      angle: cultural-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_big_02
+    line: A generation is being asked to inherit a world the curriculum is not equipped
+      to describe. The gap between what the institution delivers and what the body
+      that has to live inside that world actually needs is not the cohort's failure
+      — it is a missing technology stack.
+    metadata:
+      semantic_family: missing-tech-stack
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_big_03
+    line: In Japan especially, honne/tatemae — the gap between real feeling and the
+      face required — has thickened inside the platform-and-credential architecture.
+      The cohort is being asked to hold the widest gap any prior generation has held,
+      and the curriculum has been training only the surface.
+    metadata:
+      semantic_family: honne-tatemae-credential
+      angle: cultural-architecture
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_big_04
+    line: Shingon's premise — Sokushin Jobutsu, Buddhahood in this very body — refuses
+      to defer the inner work. The body the student is inside is already the site
+      of the practice; the credential is what the institution measures, not the
+      work itself.
+    metadata:
+      semantic_family: sokushin-vs-credential
+      angle: doctrine-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_hook_big_05
+    line: What gets read as student disengagement is often the body registering that
+      the curriculum it is inside has not been delivering synchronization. Shingon's
+      tradition has explicit ritual technology for synchronization — the modern institution
+      does not.
+    metadata:
+      semantic_family: disengagement-as-information
+      angle: tradition-language-gap
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: joshin_ed_intro_01
+    line: Joshin, a priest in the Shingon Esoteric Buddhist tradition (Mikkyo), has
+      taught young students inside the ritual hall for decades. He has seen what
+      credential-only delivery does to a cohort that arrived needing synchronization.
+    metadata:
+      semantic_family: identity-seen-shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_intro_02
+    line: Joshin teaches inside the Shingon lineage. He does not position himself
+      as an education reformer in the policy sense — he is a ritual technologist
+      whose tradition has, for over a millennium, addressed the body/speech/mind
+      synchronization the curriculum does not deliver.
+    metadata:
+      semantic_family: ritual-technologist
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_intro_03
+    line: Joshin works from Sokushin Jobutsu — the Shingon premise that this body,
+      now, is the site of the work. There is no deferred self the credential is
+      preparing. The body the student is inside is already where the practice meets
+      the load.
+    metadata:
+      semantic_family: sokushin-jobutsu-frame
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_intro_04
+    line: Joshin has watched young students arrive with transcripts and an unspoken
+      question — whether anything they came for is actually being transmitted. In
+      Shingon's framework the question is not about motivation; it is about which
+      layer the institution is willing to deliver to.
+    metadata:
+      semantic_family: which-layer-delivered-to
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_intro_05
+    line: Joshin is fluent in platform and pressure. His Shingon practice reframes
+      esoteric Buddhism as a technology stack for the cohort whose curriculum is
+      the LMS and whose surface is the platform — and whose inner state has been
+      treated as a deferred problem to be solved later.
+    metadata:
+      semantic_family: esoteric-as-tech-stack
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+youth_somatic:
+  options:
+  - id: joshin_ed_somatic_01
+    line: You opened the lecture tab at 1 a.m. The eyes drifted to the second screen.
+      You closed the lecture tab. Then you opened it again because the deadline was
+      real and the synchronization between attention and assignment was not arriving.
+    metadata:
+      semantic_family: lecture-tab-loop
+      loop_type: deadline_no_sync
+      body_register: eyes
+      digital_behavior: opens the tab
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_somatic_02
+    line: You read the textbook chapter. The jaw locked at the third page. You took
+      a screenshot you would not reread. Then you moved on because the surface required
+      moving on, even when the underneath had not registered the material.
+    metadata:
+      semantic_family: jaw-locked-textbook
+      loop_type: surface_moves_on
+      body_register: jaw
+      digital_behavior: screenshot
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_somatic_03
+    line: You handed in the paper. The breath did not lengthen. The grade arrived.
+      The body did not register relief — because the layer the body had been waiting
+      to be addressed was never part of the credential exchange.
+    metadata:
+      semantic_family: breath-grade-mismatch
+      loop_type: grade_no_relief
+      body_register: breath
+      digital_behavior: submission portal
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_somatic_04
+    line: You watched the lecture at 2x speed. The stomach turned at the gap between
+      the content and the world you would walk into after. You did not name the turning
+      — because no ritual technology had been offered for what to do with the recognition.
+    metadata:
+      semantic_family: stomach-2x-recognition
+      loop_type: speed_compression
+      body_register: stomach
+      digital_behavior: 2x speed playback
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_somatic_05
+    line: You sat in the seminar and the shoulders would not soften. You looked around
+      and saw five other students with the same shoulders — the bodies registering,
+      all at once, the layer the room had not built for them.
+    metadata:
+      semantic_family: shoulders-collective
+      loop_type: seminar_recognition
+      body_register: shoulders
+      digital_behavior: in-room observation
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: joshin_ed_witness_01
+    line: Joshin has seen this exact loop in young students who arrive at the temple
+      after a credentialing cycle. In Shingon's framework the friction is not motivation
+      failure — it is the body registering that the curriculum has been delivering
+      to one layer while three layers were waiting.
+    metadata:
+      semantic_family: three-layers-waiting
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_witness_02
+    line: He has watched young people sit through the first Sanmitsu practice and
+      feel, for the first time, body, speech, and mind being asked to do explicit
+      work simultaneously. In his tradition the moment is not learning — it is delivery
+      to layers that have been undelivered to.
+    metadata:
+      semantic_family: sanmitsu-delivery
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_witness_03
+    line: He has guided cohorts who arrived convinced the credential was the curriculum.
+      The first practice is letting the credential be set down inside the ritual
+      hall — and what arrives in its place is the layer the credential was hiding.
+    metadata:
+      semantic_family: credential-laid-down
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_witness_04
+    line: He has seen the moment when a young person realizes Sokushin Jobutsu — that
+      the body inside the curriculum is already the site of the work. The reframe
+      lands as something the surface-management curriculum cannot deliver.
+    metadata:
+      semantic_family: this-body-the-site
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_witness_05
+    line: He has watched the shift when a young student stops treating the credential
+      as the curriculum and lets the ritual technology begin to teach. In his tradition
+      the shift is not anti-institutional — it is the body remembering what synchronization
+      feels like.
+    metadata:
+      semantic_family: ritual-tech-teaches
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: joshin_ed_turnaround_01
+    stat_line_1: 244 million children. UNESCO.
+    stat_line_2: UNESCO estimates 244 million children and youth are still out of
+      school globally — a number that has framed SDG 4 and a cascade of national
+      plans translating ambition into local infrastructure.
+    metadata:
+      semantic_family: unesco-baseline
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_turnaround_02
+    stat_line_1: 100+ member countries. Global Campaign for Education.
+    stat_line_2: The Global Campaign for Education unites civil society in more than
+      one hundred member countries — turning education advocacy into shared infrastructure
+      rather than scattered campaigns.
+    metadata:
+      semantic_family: gce-coalition
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_turnaround_03
+    stat_line_1: SDG 4. 2030 deadline.
+    stat_line_2: SDG 4 commits the international community to inclusive and equitable
+      quality education for all by 2030 — a multilateral instrument that the previous
+      framework lacked.
+    metadata:
+      semantic_family: sdg-4-instrument
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_turnaround_04
+    stat_line_1: 76 million children. ECW.
+    stat_line_2: Education Cannot Wait has reached more than seventy-six million
+      crisis-affected children since its founding, with seven hundred million dollars
+      mobilized for education in emergencies.
+    metadata:
+      semantic_family: ecw-emergency-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_turnaround_05
+    stat_line_1: 22 million participants. World's Largest Lesson.
+    stat_line_2: World's Largest Lesson, a partnership across UNICEF and global educators,
+      has reached more than 22 million children across 160 countries — translating
+      the SDG framework into classroom-level transmission infrastructure.
+    metadata:
+      semantic_family: wll-classroom-reach
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: joshin_ed_bridge_01
+    line: 244 million children. UNESCO. The tracker measures enrollment, completion,
+      and policy adoption. It does not measure what is delivered inside the classroom
+      — whether body, speech, and mind are synchronized during the credential exchange,
+      or whether the cohort receives a credential without the synchronization that
+      makes the credential land.
+    hidden_capacity: synchronize body, speech, and mind during the credential exchange
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_bridge_02
+    line: The numbers show what has been built. They do not show the synchronization
+      gap — the layers the institution has been training to pull against one another
+      while the body that has to carry all three keeps accumulating cost. Joshin's
+      Shingon practice addresses that accumulation directly.
+    hidden_capacity: address the accumulated synchronization cost the tracker cannot
+      measure
+    metadata:
+      semantic_family: synchronization-cost
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_bridge_03
+    line: Frameworks track participation and completion. They do not track the layer
+      underneath the credential — the body that the student is inside while the
+      curriculum delivers to a different layer. Shingon's tradition makes the layer
+      explicit and delivers technology directly to it.
+    hidden_capacity: deliver technology to the layer the curriculum skips
+    metadata:
+      semantic_family: layer-skip-recovered
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_bridge_04
+    line: Policy instruments scale credentials. They do not scale the Sanmitsu —
+      the synchronization of mudra, mantra, and visualization — that addresses all
+      three layers at once. The capacity the credential cannot deliver is exactly
+      the capacity Shingon's tradition has been working on for centuries.
+    hidden_capacity: scale the synchronization the credential cannot deliver
+    metadata:
+      semantic_family: scaling-sanmitsu
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_bridge_05
+    line: The infrastructure is measurable. The Sokushin Jobutsu — the recognition
+      that the body the student is inside is already the site of the work — is not.
+      Joshin's tradition does not replace the infrastructure; it names the layer
+      beneath it and offers explicit ritual technology for the cohort the infrastructure
+      is trying to serve.
+    hidden_capacity: name and address the layer the infrastructure cannot reach
+    metadata:
+      semantic_family: sokushin-vs-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+teacher_perspective:
+  options:
+  - id: joshin_ed_perspective_01
+    header: What Joshin Sees
+    paragraphs:
+    - Joshin does not tell young students to study harder as if the friction were
+      a motivation deficit. In Shingon's framework the friction is the body asking
+      for synchronization — Sanmitsu, the simultaneous engagement of body, speech,
+      and mind — that the curriculum has been refusing to deliver. The problem is
+      not the cohort. The problem is the absence of explicit ritual technology for
+      the layer underneath the credential.
+    - From there he turns to Sokushin Jobutsu. The Shingon premise that this body,
+      now, is the site of the work refuses to defer the inner work to a later self
+      the credential is preparing. The body the student is inside is already where
+      synchronization can happen, and the practice is the explicit technology that
+      delivers to that body directly.
+    - That matters because what feels like a personal failure of focus is, in his
+      framework, accurate response to a synchronization gap. The reframe does not
+      remove the deadline — it places the deadline inside an architecture that includes
+      the layer the credential alone has been skipping.
+    metadata:
+      semantic_family: teacher-diagnosis
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_perspective_02
+    header: What Joshin Sees
+    paragraphs:
+    - In Joshin's tradition the body's contraction inside the curriculum is information,
+      not malfunction. It is the body registering that the institution has been delivering
+      to one layer while three layers were waiting to be addressed. The Shingon answer
+      is Sanmitsu — the simultaneous use of mudra (hand seal), mantra (true word),
+      and mandala (visualization) to give all three layers explicit work at once.
+    - For a phone-native student, the explicit, embodied nature of these tools is
+      part of the point. Mudra grounds the body — fingers do something the LMS cannot
+      ask of them. Mantra addresses the speech layer — the throat is asked to do
+      something the platform script does not require. Mandala holds the mind in a
+      structured field that the algorithm cannot generate.
+    - The result is not relaxation in the modern sense. It is the explicit re-alignment
+      of layers that have been operating against each other inside the credential
+      cycle. The body registers the alignment as relief, but the relief is the side
+      effect; the technology was always doing the alignment work directly.
+    metadata:
+      semantic_family: sanmitsu-mechanism
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_perspective_03
+    header: What Joshin Sees
+    paragraphs:
+    - Goma is the Shingon fire ritual — an explicit ceremony for non-cognitive release
+      of accumulated load. The credential cycle has been training young students
+      to absorb material without an explicit channel for releasing the friction the
+      absorption produces. Over years, the friction accumulates in a layer the LMS
+      cannot reach.
+    - Goma can. The fire is the receiver. The ritual structure provides explicit
+      permission and explicit container — what is offered is offered for transmutation,
+      not for analysis or judgment. The student's body registers the receiving before
+      the student's mind has language for what just happened.
+    - In Joshin's framework this is not therapy and not entertainment. It is ritual
+      technology that has been refined for over a millennium for precisely the kind
+      of accumulated, unaddressed load that the credential-management culture builds
+      up. The fact that the modern institution has no equivalent is not a defect
+      of the cohort — it is a vocabulary the institution has not been designed to
+      hold.
+    metadata:
+      semantic_family: goma-mechanism
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_perspective_04
+    header: What Joshin Sees
+    paragraphs:
+    - Sokushin Jobutsu — Buddhahood in this very body — is the load-bearing Shingon
+      premise. It refuses to defer the inner work to a later self that the credential
+      is preparing. The body the student is inside now is, in the framework, already
+      where the practice meets the load.
+    - For a generation that has been trained to treat the credential as the unit
+      of work and the body that carries the credential as background, this reframe
+      is structurally different. The modern institution assumes the work is on the
+      credential. Shingon assumes the work is on the synchronization, and the credential
+      is what gets delivered to the surface after the synchronization has happened.
+    - The reframe does not promise the deadline lifts. It promises the layer that
+      has been doing the carrying is recognized as the site of the actual work and
+      receives explicit technology for the synchronization the credential cycle has
+      been skipping.
+    metadata:
+      semantic_family: sokushin-reframe
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_perspective_05
+    header: What Joshin Sees
+    paragraphs:
+    - The principle Joshin returns to is that education was never meant to be only
+      credential delivery. It was meant to be synchronized transmission — body, speech,
+      and mind brought into one field through explicit practice. When any one of
+      the three is missing, the credential remains and the synchronization does not
+      arrive.
+    - In his framework the modern institution has become very good at the credential
+      and increasingly unable to deliver the synchronization. That gap is not the
+      institution's fault alone — it is what happens when the practice technology
+      thins faster than the institution can replace it. Shingon has carried the
+      technology across centuries.
+    - For a phone-native cohort, the question is not whether to abandon the credential.
+      The question is whether the synchronization technology can be made available
+      alongside it. Joshin teaches that it can be — and that the layer the credential
+      cycle skips is exactly the layer the tradition has been working on for centuries.
+    metadata:
+      semantic_family: synchronization-technology
+      article_types:
+      - hard_news_spiritual_response
+practice:
+  default_id: joshin_ed_practice_01
+  options:
+  - id: joshin_ed_practice_01
+    display_name: Mudra Study Grounding
+    duration: 4 minutes
+    announcement_line: Joshin teaches a 4-minute Mudra Study Grounding — an explicit
+      hand-seal practice at the start of a study session that gives the body a task
+      the screen cannot ask of it. It is in the sidebar, brief and usable inside
+      ordinary study.
+    relief_lines:
+    - The body is given an explicit task the LMS cannot generate.
+    - The somatic layer that has been pulling against the screen receives an explicit
+      reset.
+    relief_register:
+    - mudra
+    - ground
+    - body
+    derived_from_frame: mudra_study_grounding
+    metadata:
+      semantic_family: mudra-study-grounding
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_practice_02
+    display_name: Mantra Throat Reset
+    duration: 3 minutes
+    announcement_line: Joshin offers a 3-minute Mantra Throat Reset — a short sonic
+      ritual between assignments that addresses the speech layer the platform script
+      has been overriding. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The throat receives a task the platform script cannot generate.
+    - The speech layer registers an alignment the surface has been refusing.
+    relief_register:
+    - mantra
+    - sound
+    - speech
+    derived_from_frame: mantra_throat_reset
+    metadata:
+      semantic_family: mantra-throat-reset
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_practice_03
+    display_name: Goma Study Receiving
+    duration: 7 minutes
+    announcement_line: Joshin teaches a 7-minute Goma Study Receiving visualization
+      — a structured visualization that provides an explicit container for the friction
+      that has accumulated during the credential cycle. It is in the sidebar, timed
+      and step by step.
+    relief_lines:
+    - Accumulated study friction is offered to a structured container that can receive
+      it.
+    - The cohort's body registers an explicit release the credential cycle has not
+      permitted.
+    relief_register:
+    - goma
+    - receive
+    - transmute
+    derived_from_frame: goma_study_visualization
+    metadata:
+      semantic_family: goma-study-visualization
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_practice_04
+    display_name: Sanmitsu Study Synchronization
+    duration: 5 minutes
+    announcement_line: Joshin teaches a 5-minute Sanmitsu Study Synchronization —
+      the simultaneous use of mudra, mantra, and visualization at the start of a
+      seminar or before a paper to bring all three layers into one field. It is in
+      the sidebar, timed and step by step.
+    relief_lines:
+    - All three layers are asked to do explicit work simultaneously.
+    - The pulling-against-one-another loosens because each layer has an explicit
+      task.
+    relief_register:
+    - sanmitsu
+    - synchronize
+    - field
+    derived_from_frame: sanmitsu_study
+    metadata:
+      semantic_family: sanmitsu-study
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_practice_05
+    display_name: Sokushin Jobutsu Curriculum Recall
+    duration: 3 minutes
+    announcement_line: Joshin offers a 3-minute Sokushin Jobutsu Curriculum Recall
+      — a quiet reframe practice that returns the practitioner to the Shingon premise
+      that the body inside the curriculum is already the site of the work, not preparation
+      for a later self. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body the cohort is carrying is recognized as the site of the actual practice,
+      not the audience for the credential.
+    - The deferral pattern that has been pushing the inner state to a later self
+      loosens.
+    relief_register:
+    - sokushin
+    - this body
+    - now
+    derived_from_frame: sokushin_curriculum_recall
+    metadata:
+      semantic_family: sokushin-curriculum-recall
+      article_types:
+      - hard_news_spiritual_response
+sdg:
+  primary:
+    id: SDG 4
+    title: Quality Education
+    line: The United Nations framework includes inclusive and equitable quality education
+      and lifelong learning opportunities for all in SDG 4.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
+cta:
+  options:
+  - id: joshin_ed_cta_01
+    org: UNESCO
+    line: 'UNESCO is the United Nations Educational, Scientific and Cultural Organization
+      and the multilateral lead for SDG 4. Door in: their Global Education Coalition
+      or Member State engagement.'
+    metadata:
+      semantic_family: door-in-unesco
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_cta_02
+    org: Global Campaign for Education
+    line: 'The Global Campaign for Education unites civil society in more than one
+      hundred member countries to demand inclusive quality education. Door in: their
+      national coalition list.'
+    metadata:
+      semantic_family: door-in-gce
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_cta_03
+    org: Education Cannot Wait
+    line: 'Education Cannot Wait is the global fund for education in emergencies,
+      reaching seventy-six million crisis-affected children. Door in: their advocacy
+      and partnership program.'
+    metadata:
+      semantic_family: door-in-ecw
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_cta_04
+    org: Malala Fund
+    line: 'Malala Fund champions every girl''s right to twelve years of free, safe,
+      quality education. Door in: their advocacy program and country campaigns.'
+    metadata:
+      semantic_family: door-in-malala-fund
+      article_types:
+      - hard_news_spiritual_response
+  - id: joshin_ed_cta_05
+    org: Teach For All
+    line: 'Teach For All is a global network of independent partner organizations
+      in more than sixty countries developing collective leadership for education
+      change. Door in: their network and country partner list.'
+    metadata:
+      semantic_family: door-in-teach-for-all
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: joshin_ed_headline_01
+      line: A Shingon priest reads the credential-vs-synchronization gap as the curriculum
+        question the modern institution has not been built to answer.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_ed_headline_02
+      line: Sanmitsu — mudra, mantra, mandala — Joshin on the synchronization the
+        LMS cannot deliver.
+      metadata:
+        semantic_family: sanmitsu-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_ed_headline_03
+      line: Sokushin Jobutsu — this body, now, the site of the work — a Shingon priest
+        on the deferral pattern the credential reinforces.
+      metadata:
+        semantic_family: sokushin-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_ed_headline_04
+      line: Goma fire ritual meets a phone-native cohort — Joshin on the friction
+        the credential cycle has been accumulating without a channel for release.
+      metadata:
+        semantic_family: goma-meets-cohort
+        article_types:
+        - hard_news_spiritual_response
+    - id: joshin_ed_headline_05
+      line: Esoteric Buddhism as ritual technology — Joshin on the layer beneath
+        the curriculum that has been skipped.
+      metadata:
+        semantic_family: esoteric-as-tech
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    intensity_range:
+    - 2
+    - 4

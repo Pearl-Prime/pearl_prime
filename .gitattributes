@@ -1,0 +1,119 @@
+# Git LFS tracking — binary assets that bloat git history
+# Authority: docs/GIT_LFS_MIGRATION_PLAN.md
+# Date: 2026-04-10
+
+# Audio
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.m4a filter=lfs diff=lfs merge=lfs -text
+*.m4b filter=lfs diff=lfs merge=lfs -text
+*.ogg filter=lfs diff=lfs merge=lfs -text
+*.flac filter=lfs diff=lfs merge=lfs -text
+
+# Video
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text
+
+# Images (large binaries)
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+
+# Cloudflare Pages wizard assets — must be regular git blobs (CF Pages does not pull LFS)
+brand-wizard-app/public/onboarding/proof/wizard/*.png -filter -diff -merge text
+brand-wizard-app/public/onboarding/proof/wizard/*.jpg -filter -diff -merge text
+brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge text
+
+# Documents (binary formats)
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.docx filter=lfs diff=lfs merge=lfs -text
+*.xlsx filter=lfs diff=lfs merge=lfs -text
+*.xls filter=lfs diff=lfs merge=lfs -text
+
+# Archives & project files
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.lpf filter=lfs diff=lfs merge=lfs -text
+
+# OS images & packages (guard against pearl_star-type incidents)
+*.iso filter=lfs diff=lfs merge=lfs -text
+*.deb filter=lfs diff=lfs merge=lfs -text
+
+# ML model weights (guard against accidental commits)
+*.safetensors filter=lfs diff=lfs merge=lfs -text
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.onnx filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+
+# Cloudflare Pages wizard assets — must be regular git blobs (CF Pages does not pull LFS)
+# IMPORTANT: use -text to prevent CRLF normalization from corrupting binary PNG/MP3 data
+brand-wizard-app/public/onboarding/proof/wizard/*.png -filter -diff -merge -text
+brand-wizard-app/public/onboarding/proof/wizard/*.jpg -filter -diff -merge -text
+brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge -text
+
+# Teacher portrait photos — un-LFS'd 2026-05-16 after GitHub LFS budget
+# exhaustion broke the live brand-admin-onboarding deploy. Each photo
+# is <=1MB (passes .github/workflows/no-binary-blobs.yml guard); total
+# ~10MB added to git as regular blobs. PR #1118's Pillow-based drift
+# guard (scripts/ci/check_teacher_photo_drift.py) still works on real
+# PNG bytes. Cloudflare Pages does not pull LFS; without this override,
+# all 13 portraits serve as 130-byte pointer text on the live site.
+teacher_pics/*.png -filter -diff -merge -text
+brand-wizard-app/public/teacher_pics/*.png -filter -diff -merge -text
+
+# Manga-style teacher header portraits — operator-supplied 2026-05-17 for
+# the section-header avatar (NOT the left nav). Each ≤950 KB under the
+# 1 MB no-binary-blobs cap. Un-LFS for the same reason as the photos
+# above: GitHub LFS budget is exhausted, so any LFS-tracked file shows
+# as a 130-byte pointer on the live site.
+brand-wizard-app/public/teacher_pics/manga/*.png -filter -diff -merge -text
+
+# Three specific manga portraits broken on live (LFS pointers leaking as
+# 130-byte text — ahjan, joshin, pamela_fellows). Same un-LFS pattern;
+# each ≤755 KB so under the no-binary-blobs guard. The rest of
+# brand-wizard-app/public/assets/manga_covers/*.png stays LFS-tracked
+# (those files happen to serve correctly from Cloudflare's deploy cache).
+brand-wizard-app/public/assets/manga_covers/ahjan_portrait.png -filter -diff -merge -text
+brand-wizard-app/public/assets/manga_covers/joshin_portrait.png -filter -diff -merge -text
+brand-wizard-app/public/assets/manga_covers/pamela_fellows_portrait.png -filter -diff -merge -text
+
+# Brand-1 deep build (Layer 2 validation) — small KDP deliverables committed as
+# regular git blobs, NOT LFS. Rationale: the GitHub LFS budget is exhausted (see
+# teacher_pics note above), so LFS-tracked files land as 130-byte pointers with no
+# real bytes pushed. These cover PNGs (<110 KB) and EPUBs (<110 KB) are all well
+# under the no-binary-blobs.yml 1 MB cap, so they ship correctly as plain blobs.
+artifacts/catalog/brand1_deep/**/*.png -filter -diff -merge -text
+artifacts/catalog/brand1_deep/**/*.epub -filter -diff -merge -text
+
+# Brand Director weekly deliverables (e.g. Open Vessel Press) — the rendered
+# webtoon vertical strip (.png) + manga book (.pdf) the dashboard serves directly.
+# Un-LFS'd for the same reason as teacher_pics above: Cloudflare Pages does not
+# pull LFS, so an LFS-tracked file would serve as a 130-byte pointer and the
+# image/PDF would not load. Each is < 1 MB (palette-PNG + JPEG-in-PDF), under the
+# no-binary-blobs.yml cap and safe as a plain git blob.
+#
+# IMPORTANT — this catch-all is placed AFTER the generic *.pdf / *.png LFS rules
+# above so that, for a deliveries asset, this -filter rule WINS (last match in
+# .gitattributes wins). The earlier narrow `**/kdp/*.pdf` + `**/webtoon/*.png`
+# rules only covered those two subdirs, so a deliveries PDF in any OTHER subdir
+# still resolved to `filter: lfs` and a naive `git add` produced a broken
+# ~131-byte LFS pointer instead of a plain blob. This broad pattern covers the
+# whole deliveries tree.
+brand-wizard-app/public/deliveries/** -filter -diff -merge -text
+
+# Dashboard cover thumbs: small JPEGs for CF Pages (full covers stay gitignored).
+brand-wizard-app/public/assets/cover_thumbs/** -filter -diff -merge -text
+
+# LFS→R2 offload V1 pilot — regenerable composed_v4_qwen render tree (forward-only).
+# Authority: docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md
+# Manifest: artifacts/manifests/lfs_offload/stillness_press_alarm_composed_v4_ep_001.tsv
+artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/composed_v4_qwen/** -filter -diff -merge -text
+
+# CI regression fixtures must be real bytes (not LFS pointers)
+tests/fixtures/manga/blob_gate/*.png -filter -diff -merge -text
+
+# Mecha structural QA proof PNGs are tiny generated fixtures; keep them as
+# real bytes so PR proof packets remain usable while LFS budget is exhausted.
+artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/*.png -filter -diff -merge -text
+artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/**/*.png -filter -diff -merge -text

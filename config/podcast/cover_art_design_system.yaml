@@ -1,0 +1,1073 @@
+# Generated from config/catalog_planning/brand_identity_system.yaml — podcast cover automation.
+schema_version: 1
+global_specs:
+  canvas_size: 3000x3000
+  safe_zone_px: 150
+  format: JPEG
+  quality: 95
+  color_space: RGB
+  dpi: 72
+  mobile_test_size: 60x60
+platform_overrides:
+  spotify:
+    min_px: 1400
+    max_px: 3000
+    formats:
+    - jpeg
+    - png
+  apple_podcasts:
+    min_px: 1400
+    max_px: 3000
+    formats:
+    - jpeg
+    - png
+    dpi: 72
+  kkbox:
+    min_px: 800
+    max_px: 2500
+    max_filesize_kb: 2048
+cjk_typography:
+  ja-JP:
+    primary_font: Noto Serif JP
+    fallback_font: M PLUS 1p
+    min_size_pt: 48
+    text_direction: horizontal
+    furigana: false
+  ko-KR:
+    primary_font: Pretendard
+    fallback_font: Noto Sans KR
+    min_size_pt: 44
+  zh-CN:
+    primary_font: Source Han Sans SC
+    fallback_font: Noto Sans SC
+    min_size_pt: 44
+  zh-TW:
+    primary_font: Source Han Sans TC
+    fallback_font: Noto Sans TC
+    min_size_pt: 44
+  zh-HK:
+    primary_font: Source Han Sans HC
+    fallback_font: Noto Sans HK
+    min_size_pt: 44
+positioning_variants:
+  somatic_companion:
+    background_modifier: warm_shift(+10)
+    texture: organic
+    colophon_opacity: 0.4
+  research_guide:
+    background_modifier: cool_shift(+5)
+    texture: geometric
+    colophon_opacity: 0.7
+  elder_stabilizer:
+    background_modifier: darken(15%)
+    texture: minimal
+    colophon_opacity: 0.5
+brand_templates:
+  stillness_press:
+    background:
+      type: gradient
+      colors:
+      - '#4A5568'
+      - '#E2E8F0'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/stillness_press.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Cormorant Garamond
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Cormorant Garamond
+      weight: 400
+      size_pt: 36
+      color: '#C9A227'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  cognitive_clarity:
+    background:
+      type: gradient
+      colors:
+      - '#1A1A2E'
+      - '#FFFFFF'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/cognitive_clarity.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: EB Garamond
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: EB Garamond
+      weight: 400
+      size_pt: 36
+      color: '#718096'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  somatic_wisdom:
+    background:
+      type: gradient
+      colors:
+      - '#F7F3EE'
+      - '#5C4A3A'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/somatic_wisdom.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Playfair Display
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Playfair Display
+      weight: 400
+      size_pt: 36
+      color: '#C47A8A'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  qi_foundation:
+    background:
+      type: gradient
+      colors:
+      - '#5D4E37'
+      - '#E8D5A3'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/qi_foundation.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Noto Serif
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Noto Serif
+      weight: 400
+      size_pt: 36
+      color: '#C9A227'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  digital_ground:
+    background:
+      type: gradient
+      colors:
+      - '#0F172A'
+      - '#E0F2FE'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/digital_ground.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Space Grotesk
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Space Grotesk
+      weight: 400
+      size_pt: 36
+      color: '#22D3EE'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  heart_balance:
+    background:
+      type: gradient
+      colors:
+      - '#1E1B4B'
+      - '#FEF3C7'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/heart_balance.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Cinzel
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Cinzel
+      weight: 400
+      size_pt: 36
+      color: '#F59E0B'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  relational_calm:
+    background:
+      type: gradient
+      colors:
+      - '#FAFAF9'
+      - '#44403C'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/relational_calm.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Cormorant Infant
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Cormorant Infant
+      weight: 400
+      size_pt: 36
+      color: '#A8A29E'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  warrior_calm:
+    background:
+      type: gradient
+      colors:
+      - '#18181B'
+      - '#A1A1AA'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/warrior_calm.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Bebas Neue
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Bebas Neue
+      weight: 400
+      size_pt: 36
+      color: '#DC2626'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  sleep_restoration:
+    background:
+      type: gradient
+      colors:
+      - '#0C0A20'
+      - '#312E81'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/sleep_restoration.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: DM Serif Display
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: DM Serif Display
+      weight: 400
+      size_pt: 36
+      color: '#A78BFA'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  body_memory:
+    background:
+      type: gradient
+      colors:
+      - '#44403C'
+      - '#D6D3D1'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/body_memory.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Literata
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Literata
+      weight: 400
+      size_pt: 36
+      color: '#A3785E'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  solar_return:
+    background:
+      type: gradient
+      colors:
+      - '#1C1917'
+      - '#FEF2F2'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/solar_return.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Bitter
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Bitter
+      weight: 400
+      size_pt: 36
+      color: '#EA580C'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  devotion_path:
+    background:
+      type: gradient
+      colors:
+      - '#FDF4FF'
+      - '#7E22CE'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/devotion_path.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Spectral
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Spectral
+      weight: 400
+      size_pt: 36
+      color: '#F9A8D4'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  stabilizer:
+    background:
+      type: gradient
+      colors:
+      - '#64748B'
+      - '#F1F5F9'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/stabilizer.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: DM Serif Display
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: DM Serif Display
+      weight: 400
+      size_pt: 36
+      color: '#38BDF8'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  optimizer:
+    background:
+      type: gradient
+      colors:
+      - '#1E293B'
+      - '#F8FAFC'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/optimizer.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Sora
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Sora
+      weight: 400
+      size_pt: 36
+      color: '#3B82F6'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  night_reset:
+    background:
+      type: gradient
+      colors:
+      - '#0F172A'
+      - '#1E293B'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/night_reset.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Playfair Display
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Playfair Display
+      weight: 400
+      size_pt: 36
+      color: '#818CF8'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  career_lift:
+    background:
+      type: gradient
+      colors:
+      - '#334155'
+      - '#FFFFFF'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/career_lift.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Montserrat
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Montserrat
+      weight: 400
+      size_pt: 36
+      color: '#F59E0B'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  adhd_forge:
+    background:
+      type: gradient
+      colors:
+      - '#134E4A'
+      - '#F0FDFA'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/adhd_forge.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Space Grotesk
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Space Grotesk
+      weight: 400
+      size_pt: 36
+      color: '#F97316'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  longevity_lab:
+    background:
+      type: gradient
+      colors:
+      - '#FFFFFF'
+      - '#166534'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/longevity_lab.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Archivo
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Archivo
+      weight: 400
+      size_pt: 36
+      color: '#86EFAC'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  creative_unfold:
+    background:
+      type: gradient
+      colors:
+      - '#FFFBEB'
+      - '#92400E'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/creative_unfold.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Caveat
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Caveat
+      weight: 400
+      size_pt: 36
+      color: '#F472B6'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  resilient_parent:
+    background:
+      type: gradient
+      colors:
+      - '#FFF7ED'
+      - '#78716C'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/resilient_parent.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Merriweather
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Merriweather
+      weight: 400
+      size_pt: 36
+      color: '#FB923C'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  executive_calm:
+    background:
+      type: gradient
+      colors:
+      - '#1C1917'
+      - '#D4D4D8'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/executive_calm.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Fraunces
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Fraunces
+      weight: 400
+      size_pt: 36
+      color: '#B45309'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  trauma_path:
+    background:
+      type: gradient
+      colors:
+      - '#FFFBEB'
+      - '#78716C'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/trauma_path.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Literata
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Literata
+      weight: 400
+      size_pt: 36
+      color: '#A3785E'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  spiritual_ground:
+    background:
+      type: gradient
+      colors:
+      - '#1E1B4B'
+      - '#EEF2FF'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/spiritual_ground.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Spectral
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Spectral
+      weight: 400
+      size_pt: 36
+      color: '#A78BFA'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  focus_sprint:
+    background:
+      type: gradient
+      colors:
+      - '#0F172A'
+      - '#F8FAFC'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/focus_sprint.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Sora
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Sora
+      weight: 400
+      size_pt: 36
+      color: '#22D3EE'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  hormone_reset:
+    background:
+      type: gradient
+      colors:
+      - '#FFF1F2'
+      - '#9F1239'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/hormone_reset.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Lora
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Lora
+      weight: 400
+      size_pt: 36
+      color: '#FB7185'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  stoic_edge:
+    background:
+      type: gradient
+      colors:
+      - '#1C1917'
+      - '#F5F5F4'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/stoic_edge.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Oswald
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Oswald
+      weight: 400
+      size_pt: 36
+      color: '#71717A'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  calm_student:
+    background:
+      type: gradient
+      colors:
+      - '#EFF6FF'
+      - '#1E40AF'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/calm_student.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Space Grotesk
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Space Grotesk
+      weight: 400
+      size_pt: 36
+      color: '#60A5FA'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  healing_ground:
+    background:
+      type: gradient
+      colors:
+      - '#FFFBEB'
+      - '#92400E'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/healing_ground.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: DM Serif Display
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: DM Serif Display
+      weight: 400
+      size_pt: 36
+      color: '#FBBF24'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  bio_flow:
+    background:
+      type: gradient
+      colors:
+      - '#F0FDF4'
+      - '#14532D'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/bio_flow.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: JetBrains Mono
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: JetBrains Mono
+      weight: 400
+      size_pt: 36
+      color: '#4ADE80'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  confidence_core:
+    background:
+      type: gradient
+      colors:
+      - '#FAFAF9'
+      - '#57534E'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/confidence_core.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Libre Baskerville
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Libre Baskerville
+      weight: 400
+      size_pt: 36
+      color: '#D97706'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  relationship_clarity:
+    background:
+      type: gradient
+      colors:
+      - '#FFF7ED'
+      - '#44403C'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/relationship_clarity.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Merriweather
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Merriweather
+      weight: 400
+      size_pt: 36
+      color: '#E11D48'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  morning_momentum:
+    background:
+      type: gradient
+      colors:
+      - '#FFFBEB'
+      - '#1C1917'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/morning_momentum.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Montserrat
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Montserrat
+      weight: 400
+      size_pt: 36
+      color: '#F59E0B'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  minimal_mind:
+    background:
+      type: gradient
+      colors:
+      - '#F8FAFC'
+      - '#475569'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/minimal_mind.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: DM Sans
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: DM Sans
+      weight: 400
+      size_pt: 36
+      color: '#06B6D4'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  high_performer:
+    background:
+      type: gradient
+      colors:
+      - '#18181B'
+      - '#FAFAFA'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/high_performer.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Bebas Neue
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Bebas Neue
+      weight: 400
+      size_pt: 36
+      color: '#EF4444'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  gentle_growth:
+    background:
+      type: gradient
+      colors:
+      - '#F0FDF4'
+      - '#4ADE80'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/gentle_growth.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Nunito
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Nunito
+      weight: 400
+      size_pt: 36
+      color: '#86EFAC'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3
+  legacy_builder:
+    background:
+      type: gradient
+      colors:
+      - '#1C1917'
+      - '#D6D3D1'
+      direction: 135deg
+    colophon:
+      asset: assets/brand/colophon/legacy_builder.svg
+      placement: top-left
+      size_px: 200
+      opacity: 0.6
+    title:
+      font: Fraunces
+      weight: 700
+      size_pt: 72
+      color: '#FFFFFF'
+      placement: center
+      max_lines: 2
+    subtitle:
+      font: Fraunces
+      weight: 400
+      size_pt: 36
+      color: '#78716C'
+      placement: below-title
+    mood_overlay:
+      blur_radius: 20
+      overlay_opacity: 0.3

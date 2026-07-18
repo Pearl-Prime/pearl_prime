@@ -1,0 +1,64 @@
+[
+  {
+    "article_id": "2c30324a887c06c5",
+    "language": "en",
+    "feed_item": {
+      "id": "2c30324a887c06c5",
+      "url": "https://news.un.org/feed/view/en/story/2026/04/1167348",
+      "title": "As Colombia elections near, Security Council hears calls for calm",
+      "published": "2026-04-21T12:00:00+00:00"
+    },
+    "template_id": "hard_news_spiritual_response",
+    "atom_ids_used": {
+      "news_event": [
+        "2c30324a887c06c5"
+      ],
+      "youth_impact": [],
+      "teacher_quotes_practices": [
+        "pamela_fellows"
+      ],
+      "sdg_refs": [
+        "16"
+      ]
+    },
+    "teacher_used": {
+      "teacher_id": "pamela_fellows",
+      "display_name": "Pamela Fellows",
+      "tradition": "Heartfulness Coaching; embodied awakening; heart-mind reconnection; beyond mindfulness"
+    },
+    "expansion": {
+      "ran": true,
+      "failed": true,
+      "retries": 0
+    },
+    "validation": {
+      "passed": false,
+      "failed_gates": [
+        "teacher_three_points",
+        "youth_anchor",
+        "no_banned_phrases"
+      ],
+      "gate_count": 8,
+      "passed_count": 5
+    },
+    "model_used": "qwen",
+    "ei_composite": 0.5734,
+    "ei_flags": [],
+    "prompt_version": "expansion_system_v2",
+    "qc_results": {
+      "timestamp": "2026-04-21T22:58:49.691795+00:00",
+      "fact_check_completeness": "PASS",
+      "youth_impact_specificity": "PASS",
+      "sdg_un_accuracy": "PASS",
+      "promotional_tone_detector": "PASS",
+      "un_endorsement_detector": "PASS"
+    },
+    "signatures": {
+      "headline_sig": "130c014e8b9c62bc",
+      "lede_sig": "aedae6e72ef65f25",
+      "teacher_sig": "pamela_fellows",
+      "sdg_sig": "16"
+    },
+    "built_at": "2026-04-21T22:58:49.702633+00:00"
+  }
+]

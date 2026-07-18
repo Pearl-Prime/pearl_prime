@@ -1,0 +1,348 @@
+# Bestseller Cover Composition Templates — per-genre composition contract.
+#
+# Source: artifacts/research/bestseller_composition_templates_2026-05-03.md (R4).
+# Consumer: scripts/publish/render_kdp_cover.py (R5 will rewrite the renderer
+# to read this YAML and produce non-overlapping zone composites per genre).
+#
+# Why this file exists:
+#   R1's typography YAML (kdp_cover_typography.yaml) gives font/weight/size
+#   per genre but no explicit imagery_zone bbox, no flat-color flag, no
+#   FLUX-bypass flag. R3's text overlay landed text on top of FLUX focal
+#   elements because the renderer had no contract for "where the focal
+#   element is" vs. "where the title goes." This YAML closes that contract.
+#
+# Coordinate convention:
+#   Origin top-left. Canvas 1600x2560 (KDP self-help portrait).
+#   All zones are [x_min_pct, y_min_pct, x_max_pct, y_max_pct] of canvas.
+#   1% x = 16 px, 1% y = 25.6 px.
+#
+# Renderer logic (R5 to implement):
+#   1. Look up genre -> template.
+#   2. If templates[genre].imagery_zone is null: skip FLUX entirely.
+#      Paint flat palette.primary.hex on full canvas. Composite type
+#      into title/subtitle/author zones in palette.secondary.hex.
+#   3. Else: call FLUX with the genre's flux_aspect ratio and the
+#      per-genre prompt from artifacts/research/bestseller_composition_templates_2026-05-03.md
+#      §11. Composite the FLUX output into imagery_zone of the canvas.
+#      Paint palette.primary.hex into the rest of the canvas. Composite
+#      type per zone bboxes.
+#   4. Validate title legibility at 100x160 thumbnail before declaring
+#      success.
+#
+# All overlap_rule values are "no_overlap" by deliberate choice — eliminates
+# the matte/legibility bug class that broke Session-7 probes.
+
+schema_version: 1
+last_updated: "2026-05-03"
+canvas:
+  width: 1600
+  height: 2560
+
+universal_rules:
+  min_title_pct_canvas_height: 14
+  max_fonts_per_cover: 2
+  max_colors_per_cover: 3
+  safe_zone_margin_pct: 3
+  thumbnail_legibility_test:
+    width: 100
+    height: 160
+    min_ocr_confidence: 0.7
+  vertical_separation:
+    title_above_imagery_min_band_pct: 6
+    title_below_imagery_min_band_pct: 8
+  author_zone_max_y_pct: 96
+  author_zone_min_y_pct: 88
+
+templates:
+
+  anxiety:
+    primary_archetype: "Centered-band-with-symbol"
+    imagery_zone:    {x_pct: [12, 88], y_pct: [44, 78]}
+    title_zone:      {x_pct: [8, 92],  y_pct: [10, 34]}
+    subtitle_zone:   {x_pct: [15, 85], y_pct: [35, 41]}
+    author_zone:     {x_pct: [25, 75], y_pct: [91, 96]}
+    accent_zone:     {x_pct: [46, 54], y_pct: [42, 43]}
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#F5EFE3", role: "neutral_band_and_title_bg"}
+      secondary: {hex: "#1E3A8A", role: "imagery_field_or_type"}
+      accent:    {hex: "#D67C3A", role: "focal_highlight"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   false
+    flux_aspect:     "1.40:1"
+    flux_subject:    "single open hand emerging from soft indigo shadow at lower edge of frame"
+
+  sleep_anxiety:
+    primary_archetype: "Night-sky-vignette"
+    imagery_zone:    {x_pct: [30, 70], y_pct: [8, 32]}
+    title_zone:      {x_pct: [10, 90], y_pct: [44, 72]}
+    subtitle_zone:   {x_pct: [18, 82], y_pct: [73, 80]}
+    author_zone:     {x_pct: [30, 70], y_pct: [92, 96]}
+    accent_zone:     null
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#1A2A4E", role: "background_field"}
+      secondary: {hex: "#F2E9D0", role: "type_fill"}
+      accent:    {hex: "#D4B370", role: "moon_glow"}
+    type_size_ratios: {title: 14, subtitle: 3.5, author: 2.2}
+    type_dominant:   false
+    flux_aspect:     "1.04:1"
+    flux_subject:    "single luminous crescent moon centered upper third of square frame"
+
+  grief:
+    primary_archetype: "Centered-serif-on-cream-with-tiny-symbol"
+    imagery_zone:    {x_pct: [38, 62], y_pct: [58, 78]}
+    title_zone:      {x_pct: [10, 90], y_pct: [20, 46]}
+    subtitle_zone:   {x_pct: [20, 80], y_pct: [47, 53]}
+    author_zone:     {x_pct: [30, 70], y_pct: [89, 94]}
+    accent_zone:     null
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#F5EFE3", role: "background_field"}
+      secondary: {hex: "#1F2A2A", role: "type_fill"}
+      accent:    {hex: "#97A48B", role: "focal_object"}
+    type_size_ratios: {title: 14, subtitle: 3.5, author: 2.2}
+    type_dominant:   false
+    flux_aspect:     "0.75:1"
+    flux_subject:    "single small dusty-sage feather on cream off-white field, generous empty space"
+
+  boundaries:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#D67054", role: "background_field"}
+      secondary: {hex: "#F5EFE3", role: "type_fill"}
+      accent:    {hex: "#1E3A8A", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+
+  self_worth:
+    primary_archetype: "Type-on-warm-earth"
+    imagery_zone:    null
+    title_zone:      {x_pct: [10, 90], y_pct: [12, 40]}
+    subtitle_zone:   {x_pct: [18, 82], y_pct: [42, 50]}
+    author_zone:     {x_pct: [20, 80], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [46, 54], y_pct: [70, 71]}
+    symbol_zone:     {x_pct: [35, 65], y_pct: [56, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#C9663D", role: "background_field"}
+      secondary: {hex: "#F5EFE3", role: "type_fill"}
+      accent:    {hex: "#3A1F12", role: "deep_type_or_glyph"}
+    type_size_ratios: {title: 22, subtitle: 4, author: 4}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+
+  overthinking:
+    primary_archetype: "Tangle-line-and-bold-type"
+    imagery_zone:    {x_pct: [15, 85], y_pct: [58, 82]}
+    title_zone:      {x_pct: [8, 92],  y_pct: [12, 42]}
+    subtitle_zone:   {x_pct: [18, 82], y_pct: [43, 50]}
+    author_zone:     {x_pct: [30, 70], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [46, 54], y_pct: [51, 55]}
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#C7CCD0", role: "background_field"}
+      secondary: {hex: "#F0F2F4", role: "type_fill"}
+      accent:    {hex: "#1E76B6", role: "punctum_and_accent_word"}
+    type_size_ratios: {title: 22, subtitle: 4, author: 2.5}
+    type_dominant:   false
+    flux_aspect:     "1.82:1"
+    flux_subject:    "single continuous black ink line on cool gray off-white field, knot resolving into clean horizontal sweep"
+
+  imposter_syndrome:
+    primary_archetype: "Hot-color-flat-and-bold-script-mix"
+    imagery_zone:    null
+    title_zone:      {x_pct: [6, 94],  y_pct: [11, 41]}
+    subtitle_zone:   {x_pct: [15, 85], y_pct: [43, 51]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [80, 84]}
+    symbol_zone:     {x_pct: [32, 68], y_pct: [57, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#FF6B6B", role: "background_field"}
+      secondary: {hex: "#FFF6E5", role: "type_fill"}
+      accent:    {hex: "#D4A934", role: "italic_accent_word"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.8}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+
+  burnout:
+    primary_archetype: "Small-symbol-still"
+    imagery_zone:    {x_pct: [35, 65], y_pct: [58, 80]}
+    title_zone:      {x_pct: [8, 92],  y_pct: [14, 46]}
+    subtitle_zone:   {x_pct: [18, 82], y_pct: [47, 53]}
+    author_zone:     {x_pct: [30, 70], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [46, 54], y_pct: [54, 55]}
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#D8A8A0", role: "background_field"}
+      secondary: {hex: "#F5EFE3", role: "type_fill"}
+      accent:    {hex: "#D4A934", role: "focal_amber_highlight"}
+    type_size_ratios: {title: 18, subtitle: 3.5, author: 2.5}
+    type_dominant:   false
+    flux_aspect:     "0.85:1"
+    flux_subject:    "single small wilting leaf hanging from a thin stem, dusty-rose and cream palette"
+
+  courage:
+    primary_archetype: "Mountain-or-horizon-silhouette"
+    imagery_zone:    {x_pct: [0, 100], y_pct: [62, 88]}
+    title_zone:      {x_pct: [10, 90], y_pct: [14, 46]}
+    subtitle_zone:   {x_pct: [18, 82], y_pct: [47, 53]}
+    author_zone:     {x_pct: [20, 80], y_pct: [92, 96]}
+    accent_zone:     {x_pct: [42, 58], y_pct: [58, 60]}
+    overlap_rule:    "no_overlap"
+    palette_count:   3
+    palette:
+      primary:   {hex: "#C9663D", role: "background_field"}
+      secondary: {hex: "#F5EFE3", role: "type_fill"}
+      accent:    {hex: "#D4A934", role: "summit_glow_or_sun"}
+    type_size_ratios: {title: 18, subtitle: 3.5, author: 4}
+    type_dominant:   false
+    flux_aspect:     "2.40:1"
+    flux_subject:    "wide horizontal mountain silhouette across full lower frame, terracotta and cream palette"
+
+# Per-book genre mapping for our 13 books (operator catalog).
+# R5 looks up book_id -> genre -> template.
+  # ── Waystream composite secular topics (type-dominant, no-GPU abstract) ──
+  depression:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#4A5568", role: "background_field"}
+      secondary: {hex: "#E2E8F0", role: "type_fill"}
+      accent:    {hex: "#2B6CB0", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+  social_anxiety:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#5B7C99", role: "background_field"}
+      secondary: {hex: "#F0EAD6", role: "type_fill"}
+      accent:    {hex: "#C05621", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+  somatic_healing:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#5F7355", role: "background_field"}
+      secondary: {hex: "#EFE9DC", role: "type_fill"}
+      accent:    {hex: "#B7791F", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+  compassion_fatigue:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#8B6F6F", role: "background_field"}
+      secondary: {hex: "#F2E9E4", role: "type_fill"}
+      accent:    {hex: "#2C5282", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+  financial_anxiety:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#2C5F6B", role: "background_field"}
+      secondary: {hex: "#EDE6D6", role: "type_fill"}
+      accent:    {hex: "#B7791F", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+  financial_stress:
+    primary_archetype: "Type-takeover-on-warm-flat"
+    imagery_zone:    null
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
+    accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
+    overlap_rule:    "no_overlap"
+    palette_count:   2
+    palette:
+      primary:   {hex: "#4A4A52", role: "background_field"}
+      secondary: {hex: "#ECE6DA", role: "type_fill"}
+      accent:    {hex: "#C05621", role: "single_word_accent"}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
+    type_dominant:   true
+    flux_aspect:     null
+    flux_subject:    null
+
+book_genre_map:
+  ahjan_anxiety:           "anxiety"
+  joshin_anxiety:          "anxiety"
+  pamela_fellows_anxiety:  "anxiety"
+  omote_sleep_anxiety:     "sleep_anxiety"
+  master_sha_grief:        "grief"
+  sai_ma_grief:            "grief"
+  maat_boundaries:         "boundaries"
+  adi_da_self_worth:       "self_worth"
+  miyuki_overthinking:     "overthinking"  # per OPD-111 — "The Loop Breaker" is miyuki's
+  miki_imposter_syndrome:  "imposter_syndrome"
+  ra_imposter_syndrome:    "imposter_syndrome"
+  master_feung_burnout:    "burnout"
+  master_wu_courage:       "courage"

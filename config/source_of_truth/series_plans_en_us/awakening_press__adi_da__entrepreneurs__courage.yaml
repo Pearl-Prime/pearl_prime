@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__entrepreneurs__courage
+brand: awakening_press
+teacher: adi_da
+persona: entrepreneurs
+topic: courage
+byline_author: zane_ibrahim
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__entrepreneurs__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__entrepreneurs__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: awakening_press__adi_da__entrepreneurs__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will stop trying to manufacture courage and begin to recognize
+  the steadiness that was already underneath the fear — the part of you that was never
+  actually in danger, even when the whole venture felt like it was.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Untethered Soul (Michael A. Singer) — same loosening of identification with
+  the anxious inner voice, made practical for someone under real-world pressure
+- When Things Fall Apart (Pema Chodron) — leans into the felt experience of fear and
+  groundlessness as a doorway rather than a problem to defeat
+- The Sedona Method (Hale Dwoskin) — releasing the grip rather than building force,
+  which is the spine of this whole series
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to 40s
+  where_they_are: It is 2am and the company is technically still alive, but you are
+    awake again, jaw tight, running the numbers and the conversations and the worst-case
+    version of tomorrow's call — bracing yourself to do the thing you already know
+    you have to do, and finding the tank empty.
+  what_they_need: To feel the difference between real danger and a nervous system
+    that treats every decision as a cliff edge — and to act from something steadier
+    than the fear, without first having to feel fearless.
+  what_they_avoid: Hustle-culture bravado, fake-it-til-you-make-it confidence hacks,
+    guru certainty, anyone who tells them to just push through, and any version of
+    courage that is one more thing to optimize and fail at.
+series_voice_markers:
+  register: spacious, awakening, quietly radical; intimate and grounded, the voice
+    of someone who has built and nearly lost and stopped mistaking the fear for the
+    truth; reverent without dogma, never clinical, never hustle, never preachy
+  sentence_rhythm: long settling sentences that open room to breathe, broken by short
+    ones that land like a hand on the shoulder; second person throughout; no exclamation,
+    no jargon
+  metaphor_family: waking from a dream of danger, the open sky behind the weather,
+    the light already on in the room, the loosening of who you thought you had to
+    be, coming home to a steadiness that was never gone
+_needs_authoring: false

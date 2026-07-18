@@ -1,0 +1,60 @@
+# Structural Composition MVP — validation profile
+schema_version: "1.1.0"
+profile_id: structural_composition_mvp_v2
+scope:
+  archetypes:
+    - seated_table_scene
+    - standing_room_scene
+    - closeup_subject_scene
+    - prop_insert_scene
+    - two_character_dialogue_scene
+    - action_impact_scene
+    - symbolic_metaphor_scene
+    - establishing_environment_scene
+  notes: "Expanded production-scope structural templates; genre/panel mapping remains explicit."
+
+thresholds:
+  seated_contact_px_tolerance:
+    authority_path: config/manga/composition_validation.yaml
+    authority_key: thresholds.seated_contact_px_tolerance
+    current_value: 6.0
+    units: px
+    enforcement_status: bound
+  standing_contact_px_tolerance:
+    authority_path: config/manga/composition_validation.yaml
+    authority_key: thresholds.standing_contact_px_tolerance
+    current_value: 8.0
+    units: px
+    enforcement_status: bound
+  max_uniform_scale:
+    authority_path: config/manga/composition_validation.yaml
+    authority_key: thresholds.max_uniform_scale
+    current_value: 3.0
+    units: ratio
+    enforcement_status: bound
+  max_rotation_deg:
+    authority_path: config/manga/composition_validation.yaml
+    authority_key: thresholds.max_rotation_deg
+    current_value: 15.0
+    units: degrees
+    enforcement_status: bound
+  min_uniform_scale:
+    authority_path: config/manga/composition_validation.yaml
+    authority_key: thresholds.min_uniform_scale
+    current_value: 0.15
+    units: ratio
+    enforcement_status: bound
+
+known_node_categories: [support_surface, character, prop, occluder, contact_shadow]
+known_relations: [seated_on, standing_on, resting_on, held_by, occluded_by]
+allowed_transform_ops: [translate, uniform_scale, rotate]
+forbidden_transform_ops: [non_uniform_scale, perspective_warp, free_deform]
+acceptance_canon:
+  universal_horizon_ratio_law: false
+  note: "Support/contact graph + shared transform remain canonical."
+lettering_status:
+  live_assembler_path: phoenix_v4/manga/chapter/bubble_render.py::render_bubbles_onto_panel
+  richer_v2_exists: phoenix_v4/manga/chapter/bubble_render_v2.py
+  v2_on_assembler_call_path: false
+  compiled_safe_zone_qc: scripts/manga/validate_layer.py::check_lettering_safe_zones_clear
+  structural_mvp_rewired_lettering: false

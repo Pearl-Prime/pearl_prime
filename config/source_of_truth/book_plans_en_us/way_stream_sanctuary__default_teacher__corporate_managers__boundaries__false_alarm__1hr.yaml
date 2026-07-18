@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__boundaries__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__boundaries__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__worth_limits__1hr
+  name: Worth & Limits — for Managers (One-Hour)
+installment_number: 2
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Line You Never Drew: Misreading the Danger Signal'
+subtitle: A Real Talk Guide to Boundaries for Corporate Managers
+cover_tagline: Saying no felt dangerous. It wasn't. Your body just hasn't caught up.
+description:
+  short_blurb: The thought of declining a request, pushing back on a deadline, or
+    leaving a Slack unanswered sets off something physical — tight chest, fast pulse,
+    a flood of dread. This one-hour reset shows you that the alarm is real but the
+    threat isn't, and teaches you to tell the difference in the moment your hand hovers
+    over send.
+  long_description: 'Your skip-level asks for the deck by Monday. It''s already Friday,
+    your team is fried, and the reasonable thing is to say "we''ll have it Wednesday."
+    You go to type it and your whole body lights up — heart pounding, stomach dropping,
+    the distinct sense that something is about to go very wrong. So you type "on it"
+    instead, and the alarm goes quiet, and you''ve just torched another weekend to
+    silence a danger that was never there.
+
+
+    This is for the manager whose nervous system treats a boundary like a threat.
+    You''re not weak and you''re not bad at your job — you''re well-trained. Somewhere
+    along the way your body learned that holding a line gets you hurt, so now it fires
+    the full alarm the instant you try: the same surge you''d feel if the building
+    were actually on fire, deployed against the act of asking for two more days.
+
+
+    This hour works in three moves. The first is simply catching the false alarm mid-fire
+    and feeling, plainly, the gap between "this is dangerous" and "this is just unfamiliar."
+    A pushback that makes your hands shake is not evidence that pushing back is unsafe;
+    it''s evidence that your body has a smoke detector wired to the wrong stimulus.
+    The second move is the part most advice skips. You don''t override the alarm with
+    willpower or breathing tricks. You go down into the sensation itself — the racing,
+    the dread — and you stay with it without obeying it, long enough to watch the
+    feeling crest and pass while nothing collapses. The threat the alarm promised
+    does not arrive. And on the third move you surface changed: able to feel the surge
+    and send the message anyway, because you now know the spike is information about
+    your past, not a forecast of your future.
+
+
+    This will not make you calm. It won''t hand you a regulated nervous system in
+    sixty minutes or a technique to never feel the dread again. The alarm may still
+    go off for a long time — that''s not failure, that''s biology. What changes is
+    that you stop letting a false signal write your emails. You learn to act with
+    the alarm blaring and discover, over and over, that you were safe the whole time.
+
+
+    You are allowed to feel afraid and do it anyway. The fear is not a stop sign.
+    The next time your chest seizes over a two-line message, you can let it seize
+    — and press send.'
+keywords:
+  primary:
+  - setting boundaries
+  - how to say no
+  - people pleasing
+  - healthy boundaries
+  - stop people pleasing
+  secondary:
+  - managers
+  - boundaries for managers
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- FAM000000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- When the Body Says No (Gabor Maté) — how chronic self-suppression and a miscalibrated
+  stress response wear the body down
+- The Anxiety Toolkit (Alice Boyes) — practical, secular handling of physical anxiety
+  in high-stakes work moments
+- Unwinding Anxiety (Judson Brewer) — a neuroscientist on how the fear habit fires
+  and how to stay with it instead of feeding it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

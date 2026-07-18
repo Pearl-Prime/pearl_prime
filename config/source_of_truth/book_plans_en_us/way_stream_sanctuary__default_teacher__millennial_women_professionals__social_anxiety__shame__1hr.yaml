@@ -1,0 +1,113 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__social_anxiety__shame__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__social_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__brave_world__1hr
+  name: Brave in the World — for Professional Women (One-Hour)
+installment_number: 3
+engine: shame
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Social Anxiety: What Shame Does to You (1)'
+subtitle: The Shame Response — Social Anxiety for Millennial Women Professionals (The
+  Hidden Weight of Shame)
+cover_tagline: You're sure that if they really saw you, they'd back away.
+description:
+  short_blurb: Underneath your social anxiety is a quiet conviction that there is
+    something wrong with you, and that any real exposure will give you away. This
+    is the one-hour read for the professional woman who performs "fine" all day while
+    certain that the real her is unlikable, too much, or not enough. It won't coach
+    you to fake confidence harder. It'll go down to the belief doing the damage and
+    look it in the eye.
+  long_description: 'You can do the meeting. You can make the small talk. But the
+    entire time, a part of you is braced — certain that if anyone got too close, saw
+    the real you, heard what you actually think behind your face, they''d quietly
+    back away. So you manage the impression instead. You laugh at the right beats,
+    you keep it light, you make your excuses and leave before you can be found out.
+    People call you warm and put-together, and you drive home wrung out from a full
+    day of hiding the thing you''re sure is wrong with you.
+
+
+    Your social anxiety was never really about people — it''s about a buried belief
+    that you, specifically, are defective, and that any real connection is just exposure
+    with a delay on it. You feel like an imposter inside the group, privately sure
+    you''re tolerated rather than actually liked, reading every awkward pause as the
+    moment they''re finally starting to see it.
+
+
+    Name the thing running the whole show: shame is not the truth about you. It''s
+    a belief you absorbed somewhere — about being too much, or not enough, or just
+    fundamentally off — and you''ve spent years treating it as a fact the world is
+    one honest moment away from discovering. Your social fear isn''t caution or good
+    manners. It''s the constant, exhausting labor of keeping a self you''ve decided
+    is unlovable safely out of view.
+
+
+    Spend one sitting going down into that belief instead of trying to outperform
+    it. You''ll learn to feel the hot, sinking certainty that you''re wrong and stay
+    with it long enough to recognize it as a wound, not a verdict. You''ll separate
+    "that interaction was awkward" from "I am unacceptable," because shame fuses those
+    two into one, and your entire hiding strategy runs on the fusion staying invisible.
+
+
+    This won''t make you instantly likable or install the confidence you''ve been
+    performing for years. It won''t reframe you into someone who feels worthy of connection
+    on command or never dreads being truly seen. The point isn''t to erase the shame
+    — it''s to stop letting a belief you didn''t choose convince you that you have
+    to hide in order to be tolerated.
+
+
+    What changes is the diagnosis: you finally caught the lie underneath the fear.
+    The next time you''re certain that being truly seen would cost you everything,
+    you''ll know what''s actually happening — not that you''re defective, but that
+    an old wound is still convinced you are. And you''ll let yourself be a little
+    more visible anyway.
+
+
+    The wound has been lying to you for years. You''re allowed to be seen, and to
+    stay in the room when you are.'
+keywords:
+  primary:
+  - social anxiety
+  - social phobia
+  - fear of people
+  - social confidence
+  - fear of judgment
+  secondary:
+  - professional women
+  - social anxiety for professional women
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sofia_marchetti
+comp_titles:
+- I Thought It Was Just Me (But It Isn't) (Brené Brown) — how shame convinces you
+  that being seen means being rejected
+- How to Be Yourself (Ellen Hendriksen) — the inner critic at the root of social anxiety,
+  and how to quiet it
+- The Gifts of Imperfection (Brené Brown) — trading the performance of worthiness
+  for the real, visible self
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

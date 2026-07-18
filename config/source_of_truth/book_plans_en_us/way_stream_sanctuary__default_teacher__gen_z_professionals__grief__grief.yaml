@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__grief__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__grief.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__through_loss
+  name: Through the Low Places — for Young Professionals
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Grief: After the Loss (1)'
+subtitle: A Real Talk Guide to Grief for Gen Z Professionals
+cover_tagline: You took two days off. The loss is still here. It doesn't run on a
+  work calendar.
+description:
+  short_blurb: Someone or something is gone, and the world gave you a long weekend
+    and expected you back at full capacity. This is a field guide for the young professional
+    grieving inside a life that won't pause for it. It won't tell you to heal on schedule
+    — it gives you honest company for going through it.
+  long_description: 'The loss happened, and then Monday came anyway. You logged back
+    in with your camera off and a flat "hey" in the chat, and now you''re supposed
+    to be productive while something inside you has caved in. Maybe it was a person.
+    Maybe a relationship, a version of home, a future you were counting on. Whatever
+    it was, it didn''t ask your manager''s permission to gut you, and it isn''t going
+    to resolve by the time your bereavement days run out.
+
+
+    You are grieving in plain sight and almost entirely alone — crying in the bathroom
+    between meetings, given a card and a casserole the first week and total silence
+    after, surrounded by friends who mean well but have never lost anything yet and
+    don''t know what to say. You''re carrying something enormous through a world built
+    for people who feel fine, and you''ve started to wonder if the way you''re grieving
+    is wrong — too much, too long, too messy. It isn''t. There''s no correct way and
+    no schedule, no matter what the productivity of your life implies.
+
+
+    Wren Adler doesn''t offer stages to complete or a timeline to hit. Grief isn''t
+    a project. The work here is older. Recognition: letting the loss be as big as
+    it is, naming it without shrinking it to fit your calendar. Descent: going down
+    into it instead of staying busy on top of it — because the grief you outrun at
+    work just waits for you at 2 a.m. Integration: not closure, not moving on, but
+    learning to carry what happened in a way that lets you keep living — changed,
+    but here.
+
+
+    This will not promise you''ll be "back to normal" by any date, or that there''s
+    a right amount of time, or that doing it well means doing it quietly. There is
+    no exercise that makes a real loss smaller. What it offers instead is honest,
+    unsentimental company — plain language for what you''re inside of, and permission
+    to grieve at the size and speed that''s actually yours, not the one the office
+    assumes.
+
+
+    You''ll learn to stop measuring your grief against how long the world thinks it
+    should take. You''ll stop apologizing for still being in it. You''ll find you
+    can fall apart and still show up — not because you''ve recovered, but because
+    both are allowed to be true.
+
+
+    You don''t owe anyone a tidy version of this. You don''t have to be done. Grief
+    takes as long as it takes, and you''re allowed to take it. Close the laptop tonight
+    and let it be exactly as heavy as it is.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  - losing someone
+  secondary:
+  - young professionals
+  - grief for young professionals
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — the definitive secular case against
+  grieving on a timeline
+- The Year of Magical Thinking (Joan Didion) — unsentimental, precise account of grief
+  as it actually feels
+- Bearing the Unbearable (Joanne Cacciatore) — grounded companionship for carrying
+  loss, not curing it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: somatic_wisdom__pamela_fellows__healthcare_rns__sleep_anxiety
+brand: somatic_wisdom
+teacher: pamela_fellows
+persona: healthcare_rns
+topic: sleep_anxiety
+byline_author: suki_dunmore
+arc:
+  installment_1:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__sleep_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__sleep_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__sleep_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__sleep_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the nurse who can soothe everyone but herself at 2am:
+  a body-first, trauma-informed way back to sleep that never asks you to push through,
+  override, or out-discipline your own nervous system — only to let the braced places
+  soften and the ground hold you again.'
+bestseller_hook_family: ''
+emotional_engine: sleep_anxiety_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case that the
+  body holds what the mind can't, and healing has to go through it, not around it
+- Why We Sleep (Matthew Walker) — the cultural touchstone for sleep-deprived caregivers,
+  here met with compassion instead of one more alarming statistic
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
+  completing the body''s stress response rather than willing it away, written for
+  women running on empty in caregiving roles'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 29-52
+  where_they_are: It's 2:40am after a string of nights, or the dead middle of a day-sleep
+    with the blackout curtains drawn. You did everything right — you're exhausted,
+    the shift is over — and your body is lying flat but wide awake, jaw set, shoulders
+    up near your ears, listening for a call light that isn't there.
+  what_they_need: To feel safe enough in their own body to let go of the watch — a
+    felt sense of the bed holding them, the breath lengthening on its own, the nervous
+    system allowed to come down off shift instead of being ordered to.
+  what_they_avoid: Sleep-hygiene checklists barked like orders, 'just stop thinking
+    about it,' optimization and tracking, white-knuckle discipline, and anything that
+    treats a body shaped by years of emergencies as a problem to override rather than
+    a system to settle.
+series_voice_markers:
+  register: embodied, grounded, gently somatic and trauma-informed; the voice of a
+    fellow nurse sitting on the edge of your bed in the dark — never a clinician at
+    the foot of it, never hustle, never push-through
+  sentence_rhythm: slow and breath-paced; short grounding sentences that let the body
+    land between them, then a longer settling line that exhales; second person throughout,
+    present-tense, the cadence of someone helping you down off high alert
+  metaphor_family: the body's felt sense; breath and the weight of the bed; tension
+    held in the jaw and shoulders and finally released; the nervous system settling
+    like weather passing; the ground beneath the mattress; warmth returning to a braced,
+    guarded place; coming down off shift
+_needs_authoring: false

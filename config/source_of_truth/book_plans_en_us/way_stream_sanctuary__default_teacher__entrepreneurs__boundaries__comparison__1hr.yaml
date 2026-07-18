@@ -1,0 +1,100 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__boundaries__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__boundaries__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__worth_limits__1hr
+  name: Worth & Limits — for Founders (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Setting Boundaries: When Other People''s Success Feels Like Your Failure'
+subtitle: A Real Talk Guide to Boundaries for Entrepreneurs
+cover_tagline: Their launch is not your verdict.
+description:
+  short_blurb: You keep moving the line because someone else's company is further
+    along. This is the hour you stop letting the highlight reel set your boundaries
+    for you. Not so you'll compete better, but so you can finally tell where you end
+    and the noise begins.
+  long_description: 'It''s the fundraise announcement that lands in your feed at 11pm.
+    The founder two years behind you, suddenly two rounds ahead. You weren''t going
+    to check Twitter. You checked Twitter. And now you''re rewriting tomorrow''s roadmap,
+    killing the boundary you set this morning, telling yourself you''ll sleep when
+    you''re as far along as they are.
+
+
+    This hour is for the founder who sets limits and then quietly abandons them every
+    time the comparison hits. You said you''d stop taking calls after seven. Then
+    a competitor shipped, and you took the call. You said this hire was non-negotiable.
+    Then you saw a leaner team raise more, and you cut it. You promised your partner
+    one real weekend. Then a peer''s launch went viral on a Saturday, and you opened
+    the laptop. The line keeps moving, and it''s never you moving it.
+
+
+    First, we get honest about what''s actually happening: your boundaries aren''t
+    yours anymore. They''re set by whoever you measured yourself against last. That''s
+    not your discipline failing. That''s comparison wired straight into your limits,
+    so every external signal gets to rewrite what you''re willing to give. From there
+    we go down into it instead of optimizing around it. We sit with the specific ache
+    of watching someone else''s outside while you''re stuck inside your own grind,
+    and we stop pretending the next comparison will be the one that finally settles
+    you. It won''t. There is no number that makes the feed go quiet, no round big
+    enough to call the question closed. What changes is that you come back able to
+    feel the difference between a limit you chose and a limit the highlight reel chose
+    for you — and to tell which one you''re about to break.
+
+
+    This will not promise you''ll stop comparing. Founders compare; the whole market
+    runs on it. It won''t hand you a boundary-setting framework or a notification-detox
+    plan or a morning ritual to armor you against everyone else''s wins. It won''t
+    tell you to want it less. What it will do is give you back the authorship of your
+    own line, so the next time someone''s metrics blow up your timeline, you can notice
+    the pull, name it for what it is, and not hand them your evening.
+
+
+    You are allowed to run your company at the pace of your company. You are allowed
+    to keep a limit no one else can see the reason for. The line you never drew is
+    still yours to draw.'
+keywords:
+  primary:
+  - setting boundaries
+  - how to say no
+  - people pleasing
+  - healthy boundaries
+  - stop people pleasing
+  secondary:
+  - founders
+  - boundaries for founders
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- FAM000000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- The Subtle Art of Not Giving a F*ck (Mark Manson) — choosing what to measure yourself
+  by, on purpose
+- Essentialism (Greg McKeown) — protecting the line on what actually matters
+- Boundaries (Henry Cloud & John Townsend) — the foundational case for owning your
+  own limits
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

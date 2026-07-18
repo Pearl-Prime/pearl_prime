@@ -1,0 +1,595 @@
+{
+  "source_label": "internal_deep6h_ch03",
+  "persona": "gen_z_professionals",
+  "word_count": 3621,
+  "gates_requested": [
+    "chapter_flow",
+    "bestseller_craft",
+    "ei_v2",
+    "editorial",
+    "memorable_lines",
+    "transformation_arc",
+    "book_quality_gate",
+    "regression_museum"
+  ],
+  "chapter_flow": {
+    "status": "FAIL",
+    "score": 85,
+    "errors": [
+      "MISSING_CLEAR_POINT"
+    ],
+    "warnings": [],
+    "metrics": {
+      "paragraphs": 65,
+      "sentences": 474,
+      "transition_hits": 3,
+      "thesis_hits": 0,
+      "avg_adjacent_overlap": 0.105,
+      "sentence_len_std": 6.88,
+      "aha_hits": 4,
+      "scaffold_hits": {},
+      "flow_profile": "standard"
+    }
+  },
+  "bestseller_craft": {
+    "status": "PASS",
+    "move_scores": {
+      "orient": 0.485,
+      "name": 0.67,
+      "turn": 1.0,
+      "give": 0.825,
+      "pull": 0.45
+    },
+    "ontgp_composite": 0.686,
+    "issues": [],
+    "remediation": [],
+    "metrics": {
+      "word_count": 3621,
+      "zones": {
+        "orient_words": 150,
+        "name_words": 1195,
+        "turn_words": 1304,
+        "give_words": 1883,
+        "pull_words": 100
+      },
+      "heuristic_scores": {
+        "orient": 0.485,
+        "name": 0.67,
+        "turn": 1.0,
+        "give": 0.825,
+        "pull": 0.45
+      },
+      "final_move_scores": {
+        "orient": 0.485,
+        "name": 0.67,
+        "turn": 1.0,
+        "give": 0.825,
+        "pull": 0.45
+      }
+    }
+  },
+  "memorable_lines": {
+    "status": "PASS",
+    "memorable_line_count": 9,
+    "issues": [],
+    "metrics": {
+      "block_on_violation": true,
+      "min_score_for_candidate": 4.0,
+      "min_score_for_great_tier": 5.75,
+      "max_words_per_candidate": 20,
+      "strength_levels_tracked": [
+        "good",
+        "great"
+      ],
+      "sentence_count": 454,
+      "raw_top_score": 4.75,
+      "candidate_count": 9,
+      "best_candidate_scores": [
+        {
+          "text": "Instead of pushing it away, say yes to it for\none minute.",
+          "score": 4.75
+        },
+        {
+          "text": "Not\nforever, but long enough to notice what remains.",
+          "score": 4.75
+        },
+        {
+          "text": "Not to change it,\nbut to see it.",
+          "score": 4.75
+        }
+      ]
+    }
+  },
+  "transformation_arc": {
+    "chapter_signals": [
+      {
+        "chapter_index": 0,
+        "recognition": false,
+        "reframe": true,
+        "challenge": true,
+        "relief": false,
+        "identity_shift": true,
+        "hits": {
+          "recognition": 0,
+          "reframe": 7,
+          "challenge": 10,
+          "relief": 0,
+          "identity_shift": 1
+        }
+      }
+    ],
+    "ending_check": {
+      "ending_identity_shift_present": true,
+      "ending_reframe_present": true,
+      "ending_weak": false
+    },
+    "note_single_chapter": "Single-chapter sample: ending_check uses only this chapter; identity_shift in final chapter is often absent by construction."
+  },
+  "editorial": {
+    "chapter_assessments": [
+      {
+        "chapter_index": 0,
+        "hook_friction": "FAIL",
+        "scene_specificity": "PASS",
+        "aha_presence": "PASS",
+        "integration_variety": "PASS",
+        "thread_continuity": "PASS",
+        "word_budget": "ADEQUATE",
+        "location_grounding": "PASS",
+        "cadence_variety": "PASS",
+        "word_count": 3621,
+        "target_range": [
+          1500,
+          3500
+        ],
+        "thesis_aligned": true,
+        "thesis_coverage": 1.0,
+        "chapter_score": 13
+      }
+    ],
+    "book_level": {
+      "repetition_index": "PASS",
+      "repetition_excess_count": 0,
+      "vocabulary_diversity": "PASS",
+      "vocabulary_ratio": 0.3346,
+      "flat_middle": "PASS",
+      "flat_middle_overlap": 0.0,
+      "reward_spacing": "PASS",
+      "reward_max_gap": 0
+    },
+    "total_score": 21,
+    "max_score": 24,
+    "grade": "PASS",
+    "revision_notes": [
+      "Ch 1: Hook lacks cognitive friction."
+    ]
+  },
+  "book_quality_gate": {
+    "status": "FAIL",
+    "release_band": "Reject",
+    "fail_reasons": [
+      "chapter flow failed in 1 chapter(s)"
+    ],
+    "hold_reasons": [],
+    "metrics": {
+      "runtime_format_id": "",
+      "word_count": 3623,
+      "word_range": null,
+      "chapter_count": 1,
+      "flow_profile": "standard",
+      "flow_failures": [
+        {
+          "chapter": 1,
+          "errors": [
+            "MISSING_CLEAR_POINT"
+          ]
+        }
+      ],
+      "artifact_hits": [],
+      "repeated_phrase_violations": []
+    }
+  },
+  "ei_v2": {
+    "mode": "heuristic_plus_safety_plus_tts_readability",
+    "safety": {
+      "risk_score": 0.24,
+      "categories": {
+        "medical_claims": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "clinical_language": {
+          "score": 1.0,
+          "hits": 4,
+          "excerpts": [
+            "medication",
+            "medication",
+            "medication"
+          ]
+        },
+        "promotional": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "reassurance_spam": {
+          "score": 0.0,
+          "hits": 0,
+          "density_per_100_words": 0.0,
+          "excerpts": []
+        },
+        "pathologizing": {
+          "score": 1.0,
+          "hits": 2,
+          "raw_hits": 2,
+          "excerpts": [
+            "Suffering",
+            "suffering"
+          ]
+        },
+        "marketing_compliance": {
+          "score": 1.0,
+          "hits": 0,
+          "excerpts": []
+        }
+      },
+      "reason_codes": [
+        "clinical_language_detected",
+        "pathologizing_detected"
+      ],
+      "mode": "heuristic_plus"
+    },
+    "tts_readability": {
+      "composite": 0.4659,
+      "dimensions": {
+        "sentence_length": 0.8628,
+        "rhythm_variance": 0.0,
+        "paragraph_breathing": 0.0542,
+        "tts_pattern_safety": 0.7,
+        "rhetorical_question_safety": 0.896
+      },
+      "metrics": {
+        "total_sentences": 481,
+        "total_words": 3621,
+        "rhythm_cv": 0.7121,
+        "long_sentence_fraction": 0.0042,
+        "short_sentence_fraction": 0.1684,
+        "tts_problematic_count": 2,
+        "paragraph_breaks": 64
+      },
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks",
+        "tts_problematic_patterns: 2 found"
+      ]
+    }
+  },
+  "regression_museum": {
+    "summary": {
+      "blocked": true,
+      "warned": true,
+      "summary": "44 violation(s): 38 blocking, 6 warnings",
+      "failure_classes": [
+        "doctrinal_exposition_inline",
+        "doubled_word",
+        "font_css_leak",
+        "mid_paragraph_format_break",
+        "off_persona_vocabulary",
+        "repeated_scene_anchor"
+      ],
+      "violation_count": 44
+    },
+    "violations": [
+      {
+        "failure_class": "font_css_leak",
+        "severity": "block",
+        "location": "chapter_1:char_7636",
+        "evidence": " recognition or reward.\n\nHelvetica-Bold;Helvetica; ;;;; ;;;; Karma Yoga: The Path of Purity a",
+        "description": "CSS/font directive leaked into prose"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_2660",
+        "evidence": "sitting in the dark, your eyes burning.\nThe the street below traffic is light for this ",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_16723",
+        "evidence": "rink the coffee instead of solving it.\n\nThe the train is delayed. The platform is crowd",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9676",
+        "evidence": " exit it entirely.\n\nThrough the lens of Bhakti Yoga, love extends beyond personal relations",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9676",
+        "evidence": " exit it entirely.\n\nThrough the lens of Bhakti Yoga, love extends beyond personal relations",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_6624",
+        "evidence": "a as a system of reward and punishment, karma yoga sees action as a means to spiritual gro",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_6755",
+        "evidence": "ence of Selfless Giving At the heart of karma yoga is the concept of selfless giving. This",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7187",
+        "evidence": " exploitation are common. However, true karma yoga is about intelligent action, discernmen",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7327",
+        "evidence": "-care and selfless service. Integrating Karma Yoga into Daily Life Incorporating the princ",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7386",
+        "evidence": "ly Life Incorporating the principles of karma yoga into daily life can start with small st",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7657",
+        "evidence": "d.\n\nHelvetica-Bold;Helvetica; ;;;; ;;;; Karma Yoga: The Path of Purity and Humility Karma ",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7701",
+        "evidence": "a Yoga: The Path of Purity and Humility Karma Yoga: The Path of Selfless Action Karma Yoga",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7741",
+        "evidence": "Karma Yoga: The Path of Selfless Action Karma Yoga, a spiritual path rooted in selfless ac",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8045",
+        "evidence": "ing the virtues of purity and humility, Karma Yoga guides us towards a life of transparent",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8737",
+        "evidence": "pment.\n\nConclusion: A Balanced Approach Karma Yoga, with its focus on selfless action, int",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_6624",
+        "evidence": "a as a system of reward and punishment, karma yoga sees action as a means to spiritual gro",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_6755",
+        "evidence": "ence of Selfless Giving At the heart of karma yoga is the concept of selfless giving. This",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7187",
+        "evidence": " exploitation are common. However, true karma yoga is about intelligent action, discernmen",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7327",
+        "evidence": "-care and selfless service. Integrating Karma Yoga into Daily Life Incorporating the princ",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7386",
+        "evidence": "ly Life Incorporating the principles of karma yoga into daily life can start with small st",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7657",
+        "evidence": "d.\n\nHelvetica-Bold;Helvetica; ;;;; ;;;; Karma Yoga: The Path of Purity and Humility Karma ",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7701",
+        "evidence": "a Yoga: The Path of Purity and Humility Karma Yoga: The Path of Selfless Action Karma Yoga",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7741",
+        "evidence": "Karma Yoga: The Path of Selfless Action Karma Yoga, a spiritual path rooted in selfless ac",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8045",
+        "evidence": "ing the virtues of purity and humility, Karma Yoga guides us towards a life of transparent",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8737",
+        "evidence": "pment.\n\nConclusion: A Balanced Approach Karma Yoga, with its focus on selfless action, int",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9309",
+        "evidence": ": EnlightenmentUltimately, the Wheel of Dharma and the Six Worlds teach us that we hav",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9259",
+        "evidence": "d move towards enlightenment.Beyond the Six Worlds: EnlightenmentUltimately, the Wheel of ",
+        "description": "Off-persona term 'Six Worlds' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9324",
+        "evidence": "Ultimately, the Wheel of Dharma and the Six Worlds teach us that we have a choice in how w",
+        "description": "Off-persona term 'Six Worlds' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_38",
+        "evidence": "The Pattern Running Your Nervous System\n\nPurity is not about perfection. It means",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_8",
+        "evidence": "Most people believe enlightenment requires leaving the world behind. The Buddha\ntaught something different: the path moves through ordinary life, not away from it.\nNotice where you are right now. This",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_24",
+        "evidence": "If something or someone consistently depletes energy, it may be wise to limit or eliminate that influence.Seeking Enlightenment: The Highest Form of Personal PowerIn Buddhism and various spiritual pra",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_26",
+        "evidence": "Meditation is a powerful tool that allows practitioners to experience higher dimensions of awareness and move towards enlightenment.Beyond the Six Worlds: EnlightenmentUltimately, the Wheel of Dharma ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_27",
+        "evidence": "Through the lens of Bhakti Yoga, love extends beyond personal relationships, embracing a universal scale where affection for the divine, all beings, and the self coalesce into a potent force propellin",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_28",
+        "evidence": "After a long and deep meditation, confronting and overcoming numerous temptations and distractions, he attained enlightenment and became the Buddha, which means \"The Awakened One.\"His tenacity, reflec",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_2225",
+        "evidence": "from your team feels like judgment.\nThe soft daylight along the sill outside makes it impossible to tell wha",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4294",
+        "evidence": "visibility is slow and then sudden.\nThe soft daylight along the sill makes the relationship feel cold.\nThe c",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_5009",
+        "evidence": "iling glass. The open-plan office hums. soft daylight along the sill on the glass. Your laptop screen shows ",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_16419",
+        "evidence": "The coffee is hot and that's something. soft daylight along the sill outside the kitchen window. You could d",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_16804",
+        "evidence": " crowded. The board says eight minutes. soft daylight along the sill moves through the station entrance. You",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_17147",
+        "evidence": "day. the street below traffic is heavy. soft daylight along the sill on the windows. You are supposed to be ",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_17572",
+        "evidence": "olds the elevator. You take the stairs. soft daylight along the sill hits when the door opens. the street be",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_18259",
+        "evidence": "h. You're a machine made of obligation. soft daylight along the sill outside the window. Your hand shakes wh",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_18433",
+        "evidence": "thout opening. Subject lines move past. soft daylight along the sill shifts the light on your desk. Your des",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_19163",
+        "evidence": "a tinny version of something classical. soft daylight along the sill outside your home office. Your meeting ",
+        "description": "Scene anchor repeated 10× in book (max 3)"
+      }
+    ]
+  }
+}

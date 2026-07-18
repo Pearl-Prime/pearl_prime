@@ -1,0 +1,100 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__self_worth__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__self_worth__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__worth_limits__1hr
+  name: Worth & Limits — for Young Professionals (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Voice That Says Not Enough: Measuring Yourself Against Everyone (1)'
+subtitle: How Gen Z Professionals Are Rewriting the Rules of Self-Worth
+cover_tagline: Your worth has been outsourced to a feed of people you'll never catch.
+description:
+  short_blurb: Every scroll, every promotion announcement, every peer who seems further
+    along quietly re-prices what you think you're worth. This is a one-hour look at
+    how comparison became the voice that says you're not enough.
+  long_description: 'Someone from your graduating class just posted the new title,
+    the new company, the carousel of a life that looks like it''s running three steps
+    ahead of yours. You''re happy for them. You also feel something drop in your stomach,
+    and within seconds the voice has done its math: they have it together, you''re
+    behind, you''re not enough. You didn''t choose that verdict. Comparison handed
+    it to you in the time it took the photo to load, and this book is about the moment
+    it does.
+
+
+    This is for young professionals running an invisible race they never entered —
+    measuring an early career against everyone''s curated middle, against the peer
+    who got promoted, the founder your age, the endless feed of people who appear
+    to have figured out something you haven''t. The voice that says "not enough" doesn''t
+    feel like comparison. It feels like a plain reading of the facts. That''s exactly
+    how it keeps working — it disguises a reflex as the truth.
+
+
+    First you name it: the not-enough verdict isn''t an assessment of you, it''s the
+    output of a machine that runs every time you measure your inside against someone''s
+    outside. Then you go down into it instead of trying to out-achieve it. You learn
+    the precise feel of the comparison hit — the drop, the heat, the urgent need to
+    prove something, the way it sends you to refresh the very feed that just cut you
+    — and you stop treating it as information about your worth. You don''t drown it
+    in positive self-talk. You watch it run until you can see the gears. And you come
+    back able to catch the voice mid-sentence, the next time a feed or a peer or a
+    milestone sets it off.
+
+
+    This will not promise you''ll stop comparing. You''re human and the feed is endless
+    — you won''t go cold turkey, and a book that swore you would is selling you something.
+    It won''t optimize you into someone who finally feels ahead. What it offers is
+    the ability to hear "not enough" and recognize the voice for what it is: comparison
+    talking, not a fact about your worth.
+
+
+    Your worth was never up for a vote, and it was definitely never decided by a stranger''s
+    highlight reel. The race you''re losing is one nobody''s actually running. You''re
+    allowed to stop measuring and find out what you''re worth when no one''s ahead
+    of you — and you can start the moment the voice does.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  secondary:
+  - young professionals
+  - self-worth for young professionals
+  - one hour
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- The Gifts of Imperfection (Brené Brown) — the standard on worthiness that isn't
+  earned through achievement
+- The Comparison Trap (Andy Steiger) — secular look at how measuring against others
+  distorts self-perception
+- Maybe You Should Talk to Someone (Lori Gottlieb) — how the stories we tell about
+  being "behind" quietly run our lives
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

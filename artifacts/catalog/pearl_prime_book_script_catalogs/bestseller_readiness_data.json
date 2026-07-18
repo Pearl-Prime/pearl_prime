@@ -1,0 +1,1574 @@
+{
+  "generated_at_utc": "2026-04-28T21:34:07.973492+00:00",
+  "source_csvs": [
+    "artifacts/catalog/pearl_prime_book_script_catalogs/en_US_catalog.csv",
+    "artifacts/catalog/pearl_prime_book_script_catalogs/ja_JP_catalog.csv",
+    "artifacts/catalog/pearl_prime_book_script_catalogs/zh_TW_catalog.csv",
+    "artifacts/catalog/pearl_prime_book_script_catalogs/zh_CN_catalog.csv"
+  ],
+  "per_locale": {
+    "en_US": {
+      "row_count": 1478,
+      "status_breakdown": {
+        "ready": 1478
+      },
+      "blocked_composite_bands": {},
+      "ready_composite_bands": {
+        "ge_0.70": 1478
+      },
+      "high_potential_blocked": [],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
+      "brands_zero_ready": [],
+      "topic_ready_counts": {
+        "adhd_focus": 86,
+        "anxiety": 113,
+        "boundaries": 101,
+        "burnout": 125,
+        "compassion_fatigue": 78,
+        "courage": 92,
+        "depression": 96,
+        "financial_anxiety": 34,
+        "financial_stress": 34,
+        "grief": 98,
+        "imposter_syndrome": 95,
+        "mindfulness": 115,
+        "overthinking": 65,
+        "self_worth": 124,
+        "sleep_anxiety": 77,
+        "social_anxiety": 73,
+        "somatic_healing": 72
+      },
+      "persona_ready_counts": {
+        "corporate_managers": 123,
+        "millennial_women_professionals": 150,
+        "tech_finance_burnout": 143,
+        "gen_z_professionals": 140,
+        "first_responders": 129,
+        "educators": 136,
+        "working_parents": 133,
+        "entrepreneurs": 117,
+        "gen_z_student": 96,
+        "healthcare_rns": 140,
+        "gen_x_sandwich": 127,
+        "gen_alpha_students": 44
+      },
+      "brand_ready_counts": {
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122
+      },
+      "distinct_titles_in_ready": 698,
+      "distinct_title_subtitle_in_ready": 1478,
+      "distinct_brand_title_subtitle_in_ready": 1478,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "Quiet Money Without Panic",
+          "count": 8
+        },
+        {
+          "title": "Quiet Worth More Than Your Balance",
+          "count": 6
+        },
+        {
+          "title": "Grounded Money Without Panic",
+          "count": 6
+        },
+        {
+          "title": "Together Worthy Without Proof",
+          "count": 6
+        },
+        {
+          "title": "Restful The Long Way Back",
+          "count": 6
+        },
+        {
+          "title": "Bright The Quiet That Stays",
+          "count": 6
+        },
+        {
+          "title": "Devoted Land in the Moment",
+          "count": 6
+        },
+        {
+          "title": "Quiet Stop Pouring from an Empty Cup",
+          "count": 5
+        },
+        {
+          "title": "Quiet The Fear That Built You",
+          "count": 5
+        },
+        {
+          "title": "Quiet The Soft Landing",
+          "count": 5
+        },
+        {
+          "title": "Quiet The Smaller Yes",
+          "count": 5
+        },
+        {
+          "title": "Clear Edge Work",
+          "count": 5
+        },
+        {
+          "title": "Clear Thought Traffic",
+          "count": 5
+        },
+        {
+          "title": "Embodied Permission to Drift",
+          "count": 5
+        },
+        {
+          "title": "Embodied Slow Attention",
+          "count": 5
+        }
+      ],
+      "title_subtitle_duplication_top": [],
+      "subtitle_duplication_top": [
+        {
+          "subtitle": "A Recovery Companion for Burnout Survivors — for frontline workers",
+          "count": 6
+        },
+        {
+          "subtitle": "A 90-Second Mindfulness Practice for Anywhere — for teachers and educators",
+          "count": 6
+        },
+        {
+          "subtitle": "Building Boundaries from the Inside Out — for millennial women professionals",
+          "count": 6
+        },
+        {
+          "subtitle": "Working With Your ADHD Brain Instead of Against It — for teachers and educators",
+          "count": 6
+        },
+        {
+          "subtitle": "A Adhd Focus Practice for Neurodivergent Adults — for Gen Z professionals",
+          "count": 5
+        },
+        {
+          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System — for mid-level leaders",
+          "count": 5
+        },
+        {
+          "subtitle": "Crossing Out of Anxiety One Moment at a Time — for millennial women professionals",
+          "count": 5
+        },
+        {
+          "subtitle": "Crossing Out of Anxiety One Moment at a Time — for working parents",
+          "count": 5
+        },
+        {
+          "subtitle": "A Grief Recovery Companion for the Worst Days — for tech and finance pros",
+          "count": 5
+        },
+        {
+          "subtitle": "Returning to Self Worth Without Performing — for healthcare workers",
+          "count": 5
+        },
+        {
+          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace — for tech and finance pros",
+          "count": 5
+        },
+        {
+          "subtitle": "Burnout Recovery for People Who Can't Stop — for teachers and educators",
+          "count": 5
+        },
+        {
+          "subtitle": "How to Build Unshakable Self Worth and Confidence — for tech and finance pros",
+          "count": 5
+        },
+        {
+          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem — for founders",
+          "count": 5
+        },
+        {
+          "subtitle": "Working With Your ADHD Brain Instead of Against It — for Gen Z professionals",
+          "count": 5
+        }
+      ],
+      "weak_title_count": 0,
+      "weak_subtitle_count": 176,
+      "weak_title_reason_counts": {},
+      "weak_subtitle_reason_counts": {
+        "starts_with::how to": 132,
+        "starts_with::a guide to": 44
+      },
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "Held Unlock the Freeze",
+          "subtitle": "A Somatic Guide to Nervous System Reset and Trauma Release — for healthcare workers"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "Held Where the Love Goes",
+          "subtitle": "A Grief Companion for Year One and After — for healthcare workers"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "Restful The 3 AM Mind",
+          "subtitle": "A Guide to Overcoming Insomnia and Sleep Anxiety — for healthcare workers"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "Steady Jump Scared",
+          "subtitle": "A Guide to Building Courage and Facing the Unknown — for frontline workers"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "Held Carry It Lightly",
+          "subtitle": "A Daily Grief Practice for the Long Walk — for the sandwich generation"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "Held The Body's Slow Yes",
+          "subtitle": "Returning Through Somatic Healing at Body Speed — for the sandwich generation"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "Clear Thought Traffic",
+          "subtitle": "Breaking Free from Overthinking, Worry, and Analysis Paralysis — for tech and finance pros"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "Devoted Jump Scared",
+          "subtitle": "A Guide to Building Courage and Facing the Unknown — for healthcare workers"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "Grounded Broke and Breathing",
+          "subtitle": "A Somatic Guide to Financial Anxiety Recovery — for Gen Z students"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_stress",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "Grounded Broke and Breathing",
+          "subtitle": "A Somatic Guide to Financial Stress Recovery — for Gen Z professionals"
+        }
+      ],
+      "all_brands": [
+        "body_memory",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "heart_balance",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "all_topics": [
+        "adhd_focus",
+        "anxiety",
+        "boundaries",
+        "burnout",
+        "compassion_fatigue",
+        "courage",
+        "depression",
+        "financial_anxiety",
+        "financial_stress",
+        "grief",
+        "imposter_syndrome",
+        "mindfulness",
+        "overthinking",
+        "self_worth",
+        "sleep_anxiety",
+        "social_anxiety",
+        "somatic_healing"
+      ],
+      "all_personas": [
+        "corporate_managers",
+        "educators",
+        "entrepreneurs",
+        "first_responders",
+        "gen_alpha_students",
+        "gen_x_sandwich",
+        "gen_z_professionals",
+        "gen_z_student",
+        "healthcare_rns",
+        "millennial_women_professionals",
+        "tech_finance_burnout",
+        "working_parents"
+      ],
+      "needs_title_synthesis_locale_native": 0,
+      "needs_title_synthesis_en_only": 0,
+      "high_potential_blocked_total_at_or_above_0_65": 0
+    },
+    "ja_JP": {
+      "row_count": 1478,
+      "status_breakdown": {
+        "ready": 1478
+      },
+      "blocked_composite_bands": {},
+      "ready_composite_bands": {
+        "ge_0.70": 1478
+      },
+      "high_potential_blocked": [],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
+      "brands_zero_ready": [],
+      "topic_ready_counts": {
+        "adhd_focus": 86,
+        "anxiety": 113,
+        "boundaries": 101,
+        "burnout": 125,
+        "compassion_fatigue": 78,
+        "courage": 92,
+        "depression": 96,
+        "financial_anxiety": 34,
+        "financial_stress": 34,
+        "grief": 98,
+        "imposter_syndrome": 95,
+        "mindfulness": 115,
+        "overthinking": 65,
+        "self_worth": 124,
+        "sleep_anxiety": 77,
+        "social_anxiety": 73,
+        "somatic_healing": 72
+      },
+      "persona_ready_counts": {
+        "corporate_managers": 123,
+        "millennial_women_professionals": 150,
+        "tech_finance_burnout": 143,
+        "gen_z_professionals": 140,
+        "first_responders": 129,
+        "educators": 136,
+        "working_parents": 133,
+        "entrepreneurs": 117,
+        "gen_z_student": 96,
+        "healthcare_rns": 140,
+        "gen_x_sandwich": 127,
+        "gen_alpha_students": 44
+      },
+      "brand_ready_counts": {
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122
+      },
+      "distinct_titles_in_ready": 699,
+      "distinct_title_subtitle_in_ready": 1478,
+      "distinct_brand_title_subtitle_in_ready": 1478,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "お金への不安を超えて、静かな日々へ",
+          "count": 8
+        },
+        {
+          "title": "やわらかな睡眠の不安との対話",
+          "count": 6
+        },
+        {
+          "title": "やすらかな考えすぎ回復の歩み",
+          "count": 6
+        },
+        {
+          "title": "抑うつを超えて、抱きしめる日々へ",
+          "count": 6
+        },
+        {
+          "title": "燃え尽きを超えて、明るい日々へ",
+          "count": 6
+        },
+        {
+          "title": "明るいお金への不安との対話",
+          "count": 6
+        },
+        {
+          "title": "静かな勇気の手当て",
+          "count": 5
+        },
+        {
+          "title": "静かなインポスター症候群の手当て",
+          "count": 5
+        },
+        {
+          "title": "静かなインポスター症候群との対話",
+          "count": 5
+        },
+        {
+          "title": "睡眠の不安を超えて、静かな日々へ",
+          "count": 5
+        },
+        {
+          "title": "静かな身体の癒しとの対話",
+          "count": 5
+        },
+        {
+          "title": "澄んだ燃え尽き回復の歩み",
+          "count": 5
+        },
+        {
+          "title": "からだに宿る不安の手当て",
+          "count": 5
+        },
+        {
+          "title": "からだに宿る身体の癒し回復の歩み",
+          "count": 5
+        },
+        {
+          "title": "燃え尽きのあとに、根づいた日々",
+          "count": 5
+        }
+      ],
+      "title_subtitle_duplication_top": [],
+      "subtitle_duplication_top": [
+        {
+          "subtitle": "自己肯定回復のための、しずかな歩み — 起業家へ",
+          "count": 7
+        },
+        {
+          "subtitle": "マインドフルネス回復のための、しずかな歩み — テック・金融で働く人へ",
+          "count": 6
+        },
+        {
+          "subtitle": "不安回復のための、しずかな歩み — Z世代の働き手へ",
+          "count": 5
+        },
+        {
+          "subtitle": "喪失とかなしみ回復のための、しずかな歩み — 現場の最前線へ",
+          "count": 5
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — テック・金融で働く人へ",
+          "count": 4
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — ミレニアル世代の女性へ",
+          "count": 4
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — Z世代の働き手へ",
+          "count": 4
+        },
+        {
+          "subtitle": "集中の困難回復のための、しずかな歩み — 教える人へ",
+          "count": 4
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — テック・金融で働く人へ",
+          "count": 4
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — Z世代の働き手へ",
+          "count": 4
+        },
+        {
+          "subtitle": "不安回復のための、しずかな歩み — 現場の最前線へ",
+          "count": 3
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — 働く親へ",
+          "count": 3
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — 教える人へ",
+          "count": 3
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — 働く親へ",
+          "count": 3
+        },
+        {
+          "subtitle": "考えすぎ回復のための、しずかな歩み — 働く親へ",
+          "count": 3
+        }
+      ],
+      "weak_title_count": 1478,
+      "weak_subtitle_count": 1478,
+      "weak_title_reason_counts": {
+        "ultra_short_title": 1478
+      },
+      "weak_subtitle_reason_counts": {
+        "too_short": 1478
+      },
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "抱きしめる喪失とかなしみとの対話",
+          "subtitle": "喪失とかなしみのあとに、抱きしめる静けさを取り戻す — 医療従事者へ"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "身体の癒しのあとに、抱きしめる日々",
+          "subtitle": "抱きしめる暮らしへの、身体の癒し回復の手引き — 医療従事者へ"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "やすらかな睡眠の不安の手当て",
+          "subtitle": "睡眠の不安を抜けるための、やすらかな日々への手引き — 医療従事者へ"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "ゆるがぬ勇気の手当て",
+          "subtitle": "勇気を抜けるための、ゆるがぬ日々への手引き — 現場の最前線へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "喪失とかなしみのあとに、抱きしめる日々",
+          "subtitle": "抱きしめる暮らしへの、喪失とかなしみ回復の手引き — サンドイッチ世代へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "身体の癒しのあとに、抱きしめる日々",
+          "subtitle": "抱きしめる暮らしへの、身体の癒し回復の手引き — サンドイッチ世代へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "澄んだ考えすぎの手当て",
+          "subtitle": "考えすぎを抜けるための、澄んだ日々への手引き — テック・金融で働く人へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "ささげる勇気との対話",
+          "subtitle": "勇気のあとに、ささげる静けさを取り戻す — 医療従事者へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "お金への不安のあとに、落ち着いた日々",
+          "subtitle": "落ち着いた暮らしへの、お金への不安回復の手引き — Z世代の働き手へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "imposter_syndrome",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "インポスター症候群のあとに、落ち着いた日々",
+          "subtitle": "落ち着いた暮らしへの、インポスター症候群回復の手引き — Z世代の働き手へ"
+        }
+      ],
+      "all_brands": [
+        "body_memory",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "heart_balance",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "all_topics": [
+        "adhd_focus",
+        "anxiety",
+        "boundaries",
+        "burnout",
+        "compassion_fatigue",
+        "courage",
+        "depression",
+        "financial_anxiety",
+        "financial_stress",
+        "grief",
+        "imposter_syndrome",
+        "mindfulness",
+        "overthinking",
+        "self_worth",
+        "sleep_anxiety",
+        "social_anxiety",
+        "somatic_healing"
+      ],
+      "all_personas": [
+        "corporate_managers",
+        "educators",
+        "entrepreneurs",
+        "first_responders",
+        "gen_alpha_students",
+        "gen_x_sandwich",
+        "gen_z_professionals",
+        "gen_z_student",
+        "healthcare_rns",
+        "millennial_women_professionals",
+        "tech_finance_burnout",
+        "working_parents"
+      ],
+      "needs_title_synthesis_locale_native": 0,
+      "needs_title_synthesis_en_only": 0,
+      "high_potential_blocked_total_at_or_above_0_65": 0
+    },
+    "zh_TW": {
+      "row_count": 2818,
+      "status_breakdown": {
+        "ready": 2658,
+        "blocked_score": 160
+      },
+      "blocked_composite_bands": {
+        "0.50_no_signal": 60,
+        "0.55_to_0.65": 84,
+        "0.66_to_0.69_just_below": 16
+      },
+      "ready_composite_bands": {
+        "ge_0.70": 2658
+      },
+      "high_potential_blocked": [
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "first_responders",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "educators",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "working_parents",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "entrepreneurs",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "gen_x_sandwich",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "gen_alpha_students",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "gen_z_student",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "first_responders",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "educators",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "working_parents",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "entrepreneurs",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "gen_alpha_students",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "gen_z_student",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "first_responders",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "educators",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "working_parents",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "entrepreneurs",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "gen_x_sandwich",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "gen_alpha_students",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "gen_z_student",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "overthinking",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        }
+      ],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
+      "brands_zero_ready": [],
+      "topic_ready_counts": {
+        "adhd_focus": 140,
+        "anxiety": 189,
+        "boundaries": 177,
+        "burnout": 194,
+        "compassion_fatigue": 133,
+        "courage": 165,
+        "depression": 165,
+        "financial_anxiety": 100,
+        "financial_stress": 100,
+        "grief": 174,
+        "imposter_syndrome": 167,
+        "mindfulness": 181,
+        "overthinking": 141,
+        "self_worth": 200,
+        "sleep_anxiety": 149,
+        "social_anxiety": 145,
+        "somatic_healing": 138
+      },
+      "persona_ready_counts": {
+        "corporate_managers": 225,
+        "millennial_women_professionals": 259,
+        "tech_finance_burnout": 252,
+        "gen_z_professionals": 251,
+        "first_responders": 231,
+        "educators": 238,
+        "working_parents": 235,
+        "entrepreneurs": 213,
+        "gen_z_student": 192,
+        "healthcare_rns": 241,
+        "gen_x_sandwich": 223,
+        "gen_alpha_students": 98
+      },
+      "brand_ready_counts": {
+        "sleep_repair_tw": 192,
+        "stabilizer_tw": 192,
+        "panic_first_aid_tw": 192,
+        "gen_z_grounding_tw": 192,
+        "grief_companion_tw": 192,
+        "inner_security_tw": 192,
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122,
+        "bright_presence_tw": 28
+      },
+      "distinct_titles_in_ready": 1187,
+      "distinct_title_subtitle_in_ready": 2658,
+      "distinct_brand_title_subtitle_in_ready": 2658,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "穿越睡眠焦慮，走向悲傷陪伴的時光",
+          "count": 7
+        },
+        {
+          "title": "安睡的步調，走出倦怠",
+          "count": 7
+        },
+        {
+          "title": "穿越界限，走向睡眠修復的時光",
+          "count": 6
+        },
+        {
+          "title": "睡眠修復的經濟壓力的同行",
+          "count": 6
+        },
+        {
+          "title": "Z 世代踏實的悲傷的同行",
+          "count": 6
+        },
+        {
+          "title": "穿越想太多，走向Z 世代踏實的時光",
+          "count": 6
+        },
+        {
+          "title": "Z 世代踏實的步調，走出社交焦慮",
+          "count": 6
+        },
+        {
+          "title": "悲傷陪伴的專注困難的同行",
+          "count": 6
+        },
+        {
+          "title": "悲傷陪伴的經濟壓力的同行",
+          "count": 6
+        },
+        {
+          "title": "冒牌者症候群之後，悲傷陪伴的日子",
+          "count": 6
+        },
+        {
+          "title": "悲傷陪伴的想太多指引",
+          "count": 6
+        },
+        {
+          "title": "平衡的自我價值指引",
+          "count": 6
+        },
+        {
+          "title": "溫柔的睡眠焦慮的同行",
+          "count": 6
+        },
+        {
+          "title": "明亮的冒牌者症候群的同行",
+          "count": 6
+        },
+        {
+          "title": "穿越倦怠，走向睡眠修復的時光",
+          "count": 5
+        }
+      ],
+      "title_subtitle_duplication_top": [],
+      "subtitle_duplication_top": [],
+      "weak_title_count": 2658,
+      "weak_subtitle_count": 2056,
+      "weak_title_reason_counts": {
+        "ultra_short_title": 2658
+      },
+      "weak_subtitle_reason_counts": {
+        "too_short": 2056
+      },
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的步調，走出悲傷",
+          "subtitle": "當悲傷停不下來時的承接的指引 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的身體療癒指引",
+          "subtitle": "走出身體療癒，邁向承接的日子 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "安睡的步調，走出睡眠焦慮",
+          "subtitle": "當睡眠焦慮停不下來時的安睡的指引 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "勇氣之後，穩定的日子",
+          "subtitle": "穩定的生活，勇氣復原的同行者 — 寫給第一線救援人員"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "悲傷之後，承接的日子",
+          "subtitle": "承接的生活，悲傷復原的同行者 — 寫給夾心世代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "承接的身體療癒指引",
+          "subtitle": "走出身體療癒，邁向承接的日子 — 寫給夾心世代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "想太多之後，清明的日子",
+          "subtitle": "清明的生活，想太多復原的同行者 — 寫給科技與金融工作者"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "穿越勇氣，走向皈依的時光",
+          "subtitle": "勇氣復原途中的皈依的陪伴 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "imposter_syndrome",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "穿越冒牌者症候群，走向踏實的時光",
+          "subtitle": "冒牌者症候群復原途中的踏實的陪伴 — 寫給 Z 世代學生"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "social_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "穿越社交焦慮，走向踏實的時光",
+          "subtitle": "社交焦慮復原途中的踏實的陪伴 — 寫給 Z 世代學生"
+        }
+      ],
+      "all_brands": [
+        "body_memory",
+        "bright_presence_tw",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "gen_z_grounding_tw",
+        "grief_companion_tw",
+        "heart_balance",
+        "inner_security_tw",
+        "panic_first_aid_tw",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_repair_tw",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stabilizer_tw",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "all_topics": [
+        "adhd_focus",
+        "anxiety",
+        "boundaries",
+        "burnout",
+        "compassion_fatigue",
+        "courage",
+        "depression",
+        "financial_anxiety",
+        "financial_stress",
+        "grief",
+        "imposter_syndrome",
+        "mindfulness",
+        "overthinking",
+        "self_worth",
+        "sleep_anxiety",
+        "social_anxiety",
+        "somatic_healing"
+      ],
+      "all_personas": [
+        "corporate_managers",
+        "educators",
+        "entrepreneurs",
+        "first_responders",
+        "gen_alpha_students",
+        "gen_x_sandwich",
+        "gen_z_professionals",
+        "gen_z_student",
+        "healthcare_rns",
+        "millennial_women_professionals",
+        "tech_finance_burnout",
+        "working_parents"
+      ],
+      "needs_title_synthesis_locale_native": 0,
+      "needs_title_synthesis_en_only": 0,
+      "high_potential_blocked_total_at_or_above_0_65": 40
+    },
+    "zh_CN": {
+      "row_count": 2630,
+      "status_breakdown": {
+        "ready": 2630
+      },
+      "blocked_composite_bands": {},
+      "ready_composite_bands": {
+        "ge_0.70": 2630
+      },
+      "high_potential_blocked": [],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
+      "brands_zero_ready": [],
+      "topic_ready_counts": {
+        "adhd_focus": 140,
+        "anxiety": 185,
+        "boundaries": 173,
+        "burnout": 191,
+        "compassion_fatigue": 132,
+        "courage": 164,
+        "depression": 162,
+        "financial_anxiety": 100,
+        "financial_stress": 100,
+        "grief": 170,
+        "imposter_syndrome": 167,
+        "mindfulness": 181,
+        "overthinking": 137,
+        "self_worth": 196,
+        "sleep_anxiety": 149,
+        "social_anxiety": 145,
+        "somatic_healing": 138
+      },
+      "persona_ready_counts": {
+        "corporate_managers": 225,
+        "millennial_women_professionals": 252,
+        "tech_finance_burnout": 245,
+        "gen_z_professionals": 242,
+        "first_responders": 231,
+        "educators": 238,
+        "working_parents": 235,
+        "entrepreneurs": 213,
+        "gen_z_student": 192,
+        "healthcare_rns": 236,
+        "gen_x_sandwich": 223,
+        "gen_alpha_students": 98
+      },
+      "brand_ready_counts": {
+        "sleep_repair_cn": 192,
+        "stabilizer_cn": 192,
+        "panic_first_aid_cn": 192,
+        "gen_z_grounding_cn": 192,
+        "grief_companion_cn": 192,
+        "inner_security_cn": 192,
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122
+      },
+      "distinct_titles_in_ready": 1178,
+      "distinct_title_subtitle_in_ready": 2630,
+      "distinct_brand_title_subtitle_in_ready": 2630,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "睡眠修复的社交焦虑指南",
+          "count": 7
+        },
+        {
+          "title": "恐慌急救的节奏，走出焦虑",
+          "count": 7
+        },
+        {
+          "title": "悲伤陪伴的身体疗愈指南",
+          "count": 7
+        },
+        {
+          "title": "内在安稳的节奏，走出过度思虑",
+          "count": 7
+        },
+        {
+          "title": "止息的节奏，走出悲伤",
+          "count": 7
+        },
+        {
+          "title": "正念之后，恐慌急救的日子",
+          "count": 6
+        },
+        {
+          "title": "恐慌急救的睡眠焦虑指南",
+          "count": 6
+        },
+        {
+          "title": "恐慌急救的社交焦虑指南",
+          "count": 6
+        },
+        {
+          "title": "自我价值之后，Z 世代安身的日子",
+          "count": 6
+        },
+        {
+          "title": "倦怠之后，内在安稳的日子",
+          "count": 6
+        },
+        {
+          "title": "穿越冒名顶替综合征，走向内在安稳的日子",
+          "count": 6
+        },
+        {
+          "title": "自我价值之后，承接的日子",
+          "count": 6
+        },
+        {
+          "title": "明亮的节奏，走出金钱焦虑",
+          "count": 6
+        },
+        {
+          "title": "穿越边界，走向睡眠修复的日子",
+          "count": 5
+        },
+        {
+          "title": "穿越睡眠焦虑，走向睡眠修复的日子",
+          "count": 5
+        }
+      ],
+      "title_subtitle_duplication_top": [],
+      "subtitle_duplication_top": [],
+      "weak_title_count": 2630,
+      "weak_subtitle_count": 2037,
+      "weak_title_reason_counts": {
+        "ultra_short_title": 2630
+      },
+      "weak_subtitle_reason_counts": {
+        "too_short": 2037
+      },
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的悲伤指南",
+          "subtitle": "走出悲伤，迈向承接的日子 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的身体疗愈的同行",
+          "subtitle": "身体疗愈恢复期的承接的日子 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "安睡的节奏，走出睡眠焦虑",
+          "subtitle": "当睡眠焦虑无法停止时的安睡的指引 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "穿越勇气，走向稳定的日子",
+          "subtitle": "勇气恢复期的稳定的陪伴 — 写给一线响应人员"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "承接的节奏，走出悲伤",
+          "subtitle": "当悲伤无法停止时的承接的指引 — 写给夹心一代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "穿越身体疗愈，走向承接的日子",
+          "subtitle": "身体疗愈恢复期的承接的陪伴 — 写给夹心一代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "清明的过度思虑指南",
+          "subtitle": "走出过度思虑，迈向清明的日子 — 写给科技与金融从业者"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "勇气之后，皈依的日子",
+          "subtitle": "皈依的生活，勇气恢复的同行者 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "imposter_syndrome",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "穿越冒名顶替综合征，走向踏实的日子",
+          "subtitle": "冒名顶替综合征恢复期的踏实的陪伴 — 写给 Z 世代职场人"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "social_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "踏实的社交焦虑的同行",
+          "subtitle": "社交焦虑恢复期的踏实的日子 — 写给 Z 世代职场人"
+        }
+      ],
+      "all_brands": [
+        "body_memory",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "gen_z_grounding_cn",
+        "grief_companion_cn",
+        "heart_balance",
+        "inner_security_cn",
+        "panic_first_aid_cn",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_repair_cn",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stabilizer_cn",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "all_topics": [
+        "adhd_focus",
+        "anxiety",
+        "boundaries",
+        "burnout",
+        "compassion_fatigue",
+        "courage",
+        "depression",
+        "financial_anxiety",
+        "financial_stress",
+        "grief",
+        "imposter_syndrome",
+        "mindfulness",
+        "overthinking",
+        "self_worth",
+        "sleep_anxiety",
+        "social_anxiety",
+        "somatic_healing"
+      ],
+      "all_personas": [
+        "corporate_managers",
+        "educators",
+        "entrepreneurs",
+        "first_responders",
+        "gen_alpha_students",
+        "gen_x_sandwich",
+        "gen_z_professionals",
+        "gen_z_student",
+        "healthcare_rns",
+        "millennial_women_professionals",
+        "tech_finance_burnout",
+        "working_parents"
+      ],
+      "needs_title_synthesis_locale_native": 0,
+      "needs_title_synthesis_en_only": 0,
+      "high_potential_blocked_total_at_or_above_0_65": 0
+    }
+  },
+  "cross_locale": {
+    "triples_per_locale": {
+      "en_US": 1478,
+      "ja_JP": 1478,
+      "zh_TW": 2818,
+      "zh_CN": 2630
+    },
+    "triples_common_to_all_4": 1478,
+    "triples_en_only_vs_zh": 0,
+    "triples_zh_unique": 2492,
+    "universal_brands": [
+      "body_memory",
+      "cognitive_clarity",
+      "devotion_path",
+      "digital_ground",
+      "heart_balance",
+      "qi_foundation",
+      "relational_calm",
+      "sleep_restoration",
+      "solar_return",
+      "somatic_wisdom",
+      "stillness_press",
+      "warrior_calm"
+    ],
+    "locale_specific_brands": {
+      "en_US": [],
+      "ja_JP": [],
+      "zh_TW": [
+        "bright_presence_tw",
+        "gen_z_grounding_tw",
+        "grief_companion_tw",
+        "inner_security_tw",
+        "panic_first_aid_tw",
+        "sleep_repair_tw",
+        "stabilizer_tw"
+      ],
+      "zh_CN": [
+        "gen_z_grounding_cn",
+        "grief_companion_cn",
+        "inner_security_cn",
+        "panic_first_aid_cn",
+        "sleep_repair_cn",
+        "stabilizer_cn"
+      ]
+    },
+    "ready_rate_per_locale": {
+      "en_US": 100.0,
+      "ja_JP": 100.0,
+      "zh_TW": 94.3,
+      "zh_CN": 100.0
+    },
+    "listing_ready_per_locale": {
+      "en_US": 1478,
+      "ja_JP": 1478,
+      "zh_TW": 2658,
+      "zh_CN": 2630
+    },
+    "distinct_listing_units_per_locale": {
+      "en_US": 1478,
+      "ja_JP": 1478,
+      "zh_TW": 2658,
+      "zh_CN": 2630
+    }
+  },
+  "ready_threshold": 0.7
+}

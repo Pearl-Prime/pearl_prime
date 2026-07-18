@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 4-Minute Body Scan — Phoenix Omega</title>
+  <meta name="description" content="Your body has been trying to tell you something. 4 minutes. 4 zones. No experience needed.">
+  <meta property="og:title" content="The 4-Minute Body Scan — Phoenix Omega">
+  <meta property="og:description" content="4 minutes. 4 zones. No experience needed.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0A0F; color: #F0EFE8; font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; min-height: 100vh; }
+    .container { max-width: 680px; margin: 0 auto; padding: 48px 20px 60px; }
+    .brand-tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8A82; margin-bottom: 32px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 6vw, 50px); font-weight: 500; line-height: 1.15; color: #F0EFE8; margin-bottom: 16px; }
+    .subhead { color: #8B8A82; font-size: 16px; margin-bottom: 40px; }
+    .card { background: #13131A; border-radius: 12px; padding: 32px; margin-bottom: 24px; }
+    .form-group { margin-bottom: 20px; }
+    label.field-label { display: block; font-size: 14px; color: #8B8A82; margin-bottom: 8px; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%; background: #1A1A24; border: 1px solid #2A2A3A; color: #F0EFE8;
+      border-radius: 8px; padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { border-color: #3B82F6; }
+    textarea { resize: vertical; min-height: 80px; }
+    .btn { background: #3B82F6; color: white; border: none; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s; width: 100%; }
+    .btn:hover { background: #2563EB; }
+    #tool-section { display: none; }
+    .error-msg { color: #EF4444; font-size: 13px; margin-top: 8px; display: none; }
+
+    /* Body silhouette zone indicator */
+    .zone-map {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+
+    .zone-segment {
+      border-radius: 8px;
+      transition: all 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #8B8A82;
+      border: 1px solid #1E1E28;
+      background: #13131A;
+    }
+
+    .zone-segment.active {
+      background: #1E2D4A;
+      border-color: #3B82F6;
+      color: #3B82F6;
+    }
+
+    .zone-segment.done {
+      background: #0D2010;
+      border-color: #22C55E;
+      color: #22C55E;
+    }
+
+    .zone-head { width: 80px; height: 56px; border-radius: 50%; }
+    .zone-torso { width: 120px; height: 52px; }
+    .zone-belly { width: 110px; height: 48px; }
+    .zone-legs { width: 100px; height: 64px; border-radius: 0 0 12px 12px; }
+
+    /* Timer */
+    .timer-display { text-align: center; margin: 24px 0; }
+    .timer-ring { position: relative; width: 140px; height: 140px; margin: 0 auto 16px; }
+    .timer-ring svg { transform: rotate(-90deg); }
+    .bg-circle { fill: none; stroke: #1E1E28; stroke-width: 6; }
+    .progress-circle { fill: none; stroke: #3B82F6; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 376.99; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; }
+    .timer-time { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500; color: #F0EFE8; }
+
+    .zone-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #3B82F6; margin-bottom: 6px; }
+    .zone-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; color: #F0EFE8; margin-bottom: 16px; }
+    .zone-instruction { font-size: 15px; color: #8B8A82; line-height: 1.8; background: #1A1A24; border-radius: 8px; padding: 18px; margin-bottom: 20px; }
+    .notice-prompt { font-size: 14px; color: #F0EFE8; margin-bottom: 10px; }
+
+    .btn-row { display: flex; gap: 12px; margin-top: 20px; }
+    .btn-outline { flex: 1; background: transparent; border: 1px solid #2A2A3A; color: #F0EFE8; border-radius: 8px; padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: #3B82F6; }
+    .btn-primary-sm { flex: 1; background: #3B82F6; color: white; border: none; border-radius: 8px; padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .btn-primary-sm:hover { background: #2563EB; }
+
+    .completion-msg { text-align: center; padding: 36px 0; }
+    .completion-msg .big { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; color: #F0EFE8; margin-bottom: 10px; }
+    .completion-msg .small { color: #8B8A82; font-size: 15px; }
+
+    .cta-banner { background: linear-gradient(135deg, #13131A 0%, #1A1A2E 100%); border: 1px solid #2A2A3A; border-radius: 12px; padding: 32px; margin-top: 40px; text-align: center; }
+    .cta-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B8A82; margin-bottom: 12px; }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; color: #F0EFE8; margin-bottom: 8px; line-height: 1.3; }
+    .cta-subtitle { color: #8B8A82; font-size: 14px; margin-bottom: 24px; }
+    .cta-btn { display: inline-block; background: #3B82F6; color: white; border: none; border-radius: 8px; padding: 12px 32px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .cta-btn:hover { background: #2563EB; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #1E1E28; text-align: center; font-size: 13px; color: #8B8A82; }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-ghl-webhook="">
+  <div class="container">
+    <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
+    <h1>Your body has been trying to tell you something.</h1>
+    <p class="subhead">4 minutes. 4 zones. No experience needed.</p>
+
+    <div id="form-section" class="card">
+      <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get the full Body Scan protocol plus the Body Knows Series framework.</p>
+      <div class="form-group">
+        <label class="field-label" for="name">First name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="field-label" for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <p id="form-error" class="error-msg">Please enter your name and a valid email.</p>
+      <button class="btn" onclick="submitForm()">Access The 4-Minute Body Scan</button>
+    </div>
+
+    <div id="tool-section">
+      <div class="card">
+        <!-- Zone map -->
+        <div class="zone-map">
+          <div class="zone-segment zone-head" id="seg-0">Jaw &amp; Face</div>
+          <div class="zone-segment zone-torso" id="seg-1">Shoulders &amp; Chest</div>
+          <div class="zone-segment zone-belly" id="seg-2">Belly &amp; Back</div>
+          <div class="zone-segment zone-legs" id="seg-3">Legs &amp; Feet</div>
+        </div>
+
+        <div id="zone-content"></div>
+      </div>
+
+      <div class="cta-banner">
+        <div class="cta-label">Want the full system?</div>
+        <div class="cta-title">The Body Knows Series:<br>Held by the Body</div>
+        <div class="cta-subtitle">Get Book 1 for $0.99</div>
+        <a href="https://pearlprime.shop/en-US/book/stillness_press/somatic_healing_corporate_managers_ahjan" rel="noopener" class="cta-btn">Get the Book — $0.99</a>
+      </div>
+    </div>
+
+    <footer>A free tool from Phoenix Omega — Inner Light Press</footer>
+  </div>
+
+  <script>
+    const zones = [
+      {
+        label: "Zone 1 of 4",
+        title: "Jaw & Face",
+        instruction: "Unclench your jaw. Let your tongue drop from the roof of your mouth. Soften the space between your eyebrows. What do you notice here?",
+        prompt: "What did you find in this zone?"
+      },
+      {
+        label: "Zone 2 of 4",
+        title: "Shoulders & Chest",
+        instruction: "Drop your shoulders away from your ears. Take one breath into your chest — feel it expand. Where is there holding here?",
+        prompt: "What did you find in this zone?"
+      },
+      {
+        label: "Zone 3 of 4",
+        title: "Belly & Lower Back",
+        instruction: "Put one hand on your belly. Is it soft or held? What's the quality of sensation in your lower back right now?",
+        prompt: "What did you find in this zone?"
+      },
+      {
+        label: "Zone 4 of 4",
+        title: "Legs & Feet",
+        instruction: "Feel the weight of your legs. Feel the contact your feet make with the floor. What's here?",
+        prompt: "What did you find in this zone?"
+      }
+    ];
+
+    const circumference = 2 * Math.PI * 60;
+    let currentZone = 0;
+    let timerInterval = null;
+    let secondsLeft = 60;
+
+    function submitForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('form-error').style.display = 'block';
+        return;
+      }
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
+        renderZone(0);
+      }
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'somatic_healing',
+        funnel_slug: 'somatic-body-scan',
+        quiz_id: 'body_scan_timer',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_somatic_healing', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
+    }
+
+    function renderZone(idx) {
+      currentZone = idx;
+      secondsLeft = 60;
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+
+      // Update segments
+      for (let i = 0; i < 4; i++) {
+        const seg = document.getElementById('seg-' + i);
+        seg.classList.remove('active', 'done');
+        if (i < idx) seg.classList.add('done');
+        if (i === idx) seg.classList.add('active');
+      }
+
+      const z = zones[idx];
+      const isLast = idx === 3;
+
+      document.getElementById('zone-content').innerHTML = `
+        <div class="zone-label">${z.label}</div>
+        <div class="zone-title">${z.title}</div>
+
+        <div class="timer-display">
+          <div class="timer-ring">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+              <circle class="bg-circle" cx="70" cy="70" r="60"/>
+              <circle class="progress-circle" id="prog-circle" cx="70" cy="70" r="60"/>
+            </svg>
+            <div class="timer-time" id="timer-time">1:00</div>
+          </div>
+        </div>
+
+        <div class="zone-instruction">${z.instruction}</div>
+
+        <div class="notice-prompt">${z.prompt} <span style="color:#8B8A82;">(optional)</span></div>
+        <textarea id="zone-note" placeholder="What you notice..."></textarea>
+
+        <div class="btn-row">
+          <button class="btn-outline" id="start-btn" onclick="startTimer()">Start Zone</button>
+          <button class="btn-primary-sm" onclick="nextZone()">${isLast ? 'Complete Scan' : 'Next Zone'}</button>
+        </div>
+      `;
+    }
+
+    function updateCircle() {
+      const circle = document.getElementById('prog-circle');
+      if (!circle) return;
+      const progress = secondsLeft / 60;
+      circle.style.strokeDashoffset = circumference * (1 - progress);
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      const btn = document.getElementById('start-btn');
+      btn.textContent = 'Running...';
+      btn.disabled = true;
+
+      timerInterval = setInterval(() => {
+        secondsLeft--;
+        const secs = secondsLeft % 60;
+        document.getElementById('timer-time').textContent = `0:${secs.toString().padStart(2, '0')}`;
+        updateCircle();
+        if (secondsLeft <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          if (currentZone < 3) setTimeout(() => nextZone(), 800);
+          else setTimeout(() => showCompletion(), 800);
+        }
+      }, 1000);
+    }
+
+    function nextZone() {
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      if (currentZone < 3) renderZone(currentZone + 1);
+      else showCompletion();
+    }
+
+    function showCompletion() {
+      for (let i = 0; i < 4; i++) {
+        const seg = document.getElementById('seg-' + i);
+        seg.classList.remove('active');
+        seg.classList.add('done');
+      }
+      document.getElementById('zone-content').innerHTML = `
+        <div class="completion-msg">
+          <div class="big">The scan is complete.</div>
+          <div class="small">What you found is information. That's all it is.</div>
+        </div>
+      `;
+    }
+  </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {
+    if (typeof renderZone === 'function') renderZone(0);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/series_continuity_state.schema.json",
+  "title": "Manga Series Continuity State",
+  "description": "Episode-close serial memory: rival/motif/pressure state for planning and writer input.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "series_id",
+    "last_episode_id",
+    "volume_arc_position",
+    "settled_state",
+    "rival_state",
+    "motif_state",
+    "active_pressures",
+    "set_pieces_fired",
+    "unresolved_hooks"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "artifact_type": { "const": "series_continuity_state" },
+    "series_id": { "type": "string", "minLength": 1 },
+    "last_episode_id": { "type": "string" },
+    "volume_arc_position": {
+      "type": "object",
+      "required": ["volume", "chapter_in_volume", "volume_title"],
+      "properties": {
+        "volume": { "type": "integer", "minimum": 1 },
+        "chapter_in_volume": { "type": "integer", "minimum": 1 },
+        "volume_title": { "type": "string" }
+      }
+    },
+    "settled_state": {
+      "type": "string",
+      "description": "What the protagonist believes is resolved at episode close (must be re-broken next ep)."
+    },
+    "rival_state": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rival_id", "state"],
+        "properties": {
+          "rival_id": { "type": "string" },
+          "state": { "type": "string" },
+          "last_seen_episode": { "type": "string" }
+        }
+      }
+    },
+    "motif_state": {
+      "type": "object",
+      "description": "Music-mode motif progression; teacher-mode may use vessel_state instead.",
+      "properties": {
+        "condition": { "type": "string" },
+        "lettering_state": { "type": "string" },
+        "vessel_state": { "type": "string" }
+      }
+    },
+    "active_pressures": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "pressure ids from serial_spine.named_pressures currently live on-page."
+    },
+    "set_pieces_fired": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "set_piece_registry ids used in episodes through last_episode_id."
+    },
+    "unresolved_hooks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_episode_mandate": {
+      "type": "object",
+      "properties": {
+        "episode_id": { "type": "string" },
+        "must_rebreak": { "type": "string" },
+        "must_plant": { "type": "array", "items": { "type": "string" } },
+        "forbidden": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

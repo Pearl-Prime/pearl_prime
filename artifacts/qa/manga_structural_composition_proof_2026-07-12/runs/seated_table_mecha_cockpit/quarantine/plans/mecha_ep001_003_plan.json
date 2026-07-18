@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "envelope_id": "plan_mecha_ep001_003",
+  "transform_model": "structural_mvp_v1",
+  "structural_template_id": "seated_table_scene",
+  "panel_type_id": "dialogue_seated_table",
+  "plan_body": {
+    "panel_id": "mecha_ep001_003",
+    "canvas": {
+      "width": 1080,
+      "height": 1920
+    },
+    "structural_template_id": "seated_table_scene",
+    "panel_type_id": "dialogue_seated_table",
+    "required_support_proof": [
+      "seated_on"
+    ],
+    "allowed_relations": [
+      "seated_on",
+      "resting_on",
+      "held_by",
+      "occluded_by"
+    ],
+    "support_graph": {
+      "nodes": [
+        {
+          "node_id": "cockpit_seat",
+          "category": "support_surface",
+          "role": "seat_or_table",
+          "support_polygon_pct": [
+            [
+              30.0,
+              74.0
+            ],
+            [
+              70.0,
+              74.0
+            ],
+            [
+              72.0,
+              88.0
+            ],
+            [
+              28.0,
+              88.0
+            ]
+          ]
+        },
+        {
+          "node_id": "pilot",
+          "category": "character",
+          "role": "primary_subject",
+          "contact_point_pct": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "e_seated_cockpit",
+          "relation": "seated_on",
+          "from_node": "pilot",
+          "to_node": "cockpit_seat"
+        }
+      ]
+    },
+    "resolved_placements": [
+      {
+        "node_id": "pilot",
+        "transform": {
+          "tx_pct": 50.0,
+          "ty_pct": 80.0,
+          "uniform_scale": 1.0,
+          "rotation_deg": 0.0,
+          "transform_model": "structural_mvp_v1"
+        }
+      }
+    ],
+    "transform_model": "structural_mvp_v1"
+  },
+  "plan_hash": "c2732d17d786eb8840353241e205a15996172d20b7e1a2b7d4e2fc8c388e8eca",
+  "validation": {
+    "status": "pass",
+    "failures": []
+  }
+}

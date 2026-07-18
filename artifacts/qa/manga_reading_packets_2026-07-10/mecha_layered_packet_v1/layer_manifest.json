@@ -1,0 +1,114 @@
+{
+  "packet_id": "mecha_layered_packet_v1",
+  "series_id": "warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening",
+  "acceptance_layer": "system_working",
+  "hero_panel_id": "ep001_003",
+  "hero_final_panel": "hero_final_panel.png",
+  "hero_layer_stack": "hero_layer_stack.png",
+  "provenance_source": "assembled/ep_001_human_readability_proof/_provenance.json",
+  "assembly_manifest": "assembly_manifests/ep_001_from_continuity.yaml",
+  "mapping_type": "exact_panel_level",
+  "hero_layers": [
+    {
+      "layer_class": "L0",
+      "z": 0,
+      "role": "background_plate",
+      "source_asset": "image_bank/L0/cockpit_interior.png",
+      "packet_copy": "layers/L0_cockpit_interior.png",
+      "derivation": "defocus",
+      "provenance": "REAL",
+      "bytes": 3581417
+    },
+    {
+      "layer_class": "L2",
+      "z": 20,
+      "role": "character_figure",
+      "source_asset": "image_bank/L2/seated_cockpit.png",
+      "packet_copy": "layers/L2_seated_cockpit.png",
+      "anchor_slot": "seated_cockpit",
+      "bbox_pct": [
+        24,
+        18,
+        52,
+        62
+      ],
+      "provenance": "REAL",
+      "bytes": 3548619
+    }
+  ],
+  "all_panels": [
+    {
+      "panel_id": "ep001_001",
+      "layers": [
+        "L0:hangar_pre_dawn"
+      ],
+      "multi_layer": false
+    },
+    {
+      "panel_id": "ep001_002",
+      "layers": [
+        "L0:hangar_pre_dawn",
+        "L3:glove_pad"
+      ],
+      "multi_layer": true
+    },
+    {
+      "panel_id": "ep001_003",
+      "layers": [
+        "L0:cockpit_interior",
+        "L2:seated_cockpit"
+      ],
+      "multi_layer": true,
+      "hero": true
+    },
+    {
+      "panel_id": "ep001_006",
+      "layers": [
+        "L0:cockpit_interior"
+      ],
+      "multi_layer": false
+    },
+    {
+      "panel_id": "ep001_008",
+      "layers": [
+        "L0:cockpit_interior",
+        "L2:threshold_stand"
+      ],
+      "multi_layer": true
+    },
+    {
+      "panel_id": "ep001_011",
+      "layers": [
+        "L0:cockpit_interior",
+        "L3:telemetry_panel"
+      ],
+      "multi_layer": true
+    },
+    {
+      "panel_id": "ep001_013",
+      "layers": [
+        "L0:hangar_pre_dawn"
+      ],
+      "multi_layer": false
+    },
+    {
+      "panel_id": "ep001_035",
+      "layers": [
+        "L0:hangar_pre_dawn"
+      ],
+      "multi_layer": false
+    }
+  ],
+  "claims": {
+    "proves": [
+      "Native mecha bank REAL assets assemble into readable panels",
+      "Exact panel-to-layer mapping for ep001_003 via assembly provenance",
+      "L0+L2 layered composition with anchor_slot grounding"
+    ],
+    "does_not_prove": [
+      "PROVEN-AT-BAR blind-judged quality",
+      "Full 35-panel continuity export",
+      "Cross-genre stillness salvage compatibility"
+    ]
+  }
+}

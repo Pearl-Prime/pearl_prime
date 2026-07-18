@@ -1,0 +1,113 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__social_anxiety__shame__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__social_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__brave_world__1hr
+  name: Brave in the World — for First Responders (One-Hour)
+installment_number: 3
+engine: shame
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Social Anxiety: Carrying What You Can''t Say (1)'
+subtitle: When You Feel Fundamentally Wrong — Social Anxiety for First Responders
+  (The Hidden Weight of Shame)
+cover_tagline: You can face anyone on a call. It's being seen that you can't stand.
+description:
+  short_blurb: 'Around people, a quiet verdict runs underneath everything: that if
+    they really looked, they''d find the thing wrong with you. This is the hour for
+    the shame that makes being seen feel like exposure. This isn''t reassurance. It''s
+    the hour you stop hauling a belief that was never the truth about you.'
+  long_description: 'You can knock on a stranger''s door on the worst night of their
+    life. You can give orders to a panicking crowd. But put you in a room where people
+    might actually see you, off-duty, off-script, just you, and something locks up.
+    A quiet certainty that if they looked close enough they''d find it, the flaw,
+    the defect, the thing you''ve spent your whole life making sure no one catches.
+
+
+    This book is for the first responder whose social anxiety is really shame in disguise.
+    The one who''s fearless on a call and frozen at the party, because a call doesn''t
+    require being seen and the party does. The one who deflects every personal question,
+    who keeps it about the job, who''d rather be needed than known. The one who''s
+    sure that under the uniform and the competence there''s something defective, and
+    that being seen is just the moment before someone finds out.
+
+
+    The engine here is shame, and it changes the whole math of being around people.
+    It''s not that you fear the room. It''s that you fear what the room might see.
+    Shame says the problem isn''t something you did, it''s something you are, and
+    in a culture that treats any visible need as weakness, you learned to never let
+    anyone look too long. So you armor up around people, you stay useful so you never
+    have to be vulnerable, and you carry the private verdict that you, specifically,
+    are the one who can''t afford to be seen.
+
+
+    This is a one-hour reset built around going toward the thing instead of hiding
+    it harder. First you name the belief out loud, in plain words, so it stops running
+    the show from the dark where shame is strongest. Then you go down into it, into
+    where it actually started, which is almost never the moment you blame and almost
+    always something older than the job. Then you come back up, with the weight named
+    and examined and finally set down where you can see it clearly.
+
+
+    This hour will not tell you everyone likes you. It won''t argue you out of the
+    feeling with reassurance, because shame doesn''t lose arguments, it just goes
+    quiet and waits for the next room. It won''t promise being seen will suddenly
+    feel safe. What it will do is pull you loose from the verdict, so "there''s something
+    wrong with me" stops being the fact you brace against in every room and becomes
+    a sentence you can finally hold up to the light and read.
+
+
+    You are allowed to be the one who runs toward the worst of it and still flinches
+    at being known. Those two things were never a contradiction. The defect you''ve
+    been hiding from every room was a wound all along, and wounds don''t make you
+    unfit to be seen. They make you human, which is the one thing being a first responder
+    keeps teaching you to never let anyone see.
+
+
+    You don''t have to say it. But you can stop believing it, and you can let one
+    room see you anyway.'
+keywords:
+  primary:
+  - social anxiety
+  - social phobia
+  - fear of people
+  - social confidence
+  - fear of judgment
+  secondary:
+  - first responders
+  - social anxiety for first responders
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: cole_bennett
+comp_titles:
+- Daring Greatly (Brené Brown) — the foundational secular work on shame and the terror
+  of being truly seen
+- The Gifts of Imperfection (Brené Brown) — targets the buried belief that you're
+  fundamentally flawed and must hide it from others
+- How to Be Yourself (Ellen Hendriksen) — a clinical, non-spiritual account of social
+  anxiety rooted in the fear of a hidden defect being exposed
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

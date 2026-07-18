@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__depression__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__depression.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__through_loss
+  name: Through the Low Places — for First Responders
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Weight Without a Name: The Grief That Doesn''t Leave'
+subtitle: A Real Talk Guide to Depression for First Responders
+cover_tagline: You carried everyone out. Nobody came back for the part of you that
+  stayed at the scene.
+description:
+  short_blurb: For the first responder whose depression isn't sadness but grief that
+    never got logged, never got debriefed, never got to leave. This is a plain-spoken
+    book about the weight you've been calling 'fine' for years. There's no fixing
+    it here. There's just finally naming what it actually is.
+  long_description: 'There''s a particular flatness you don''t bring up at shift change.
+    Not the bad calls everyone expects to rattle you, the ones that come with an incident
+    number and a debrief. This is the gray that settled in afterward and never lifted,
+    the heaviness that has no paperwork attached to it. You did the job. You clocked
+    out. You went home and ate something and slept badly. And somewhere in there,
+    a part of you stayed at the scene, and it has been getting heavier every year
+    since, and at some point you started calling it depression because at least that
+    word fits on a form.
+
+
+    This book is for the cop, the medic, the firefighter, the dispatcher who has spent
+    a career running toward what everyone else runs away from, and who is quietly
+    hauling around losses that never got mourned because there was always another
+    call right behind the last one. The pediatric code you don''t describe to anyone.
+    The partner who didn''t make it home. The version of you that existed before you
+    learned, in detail, what people are capable of doing to each other. None of it
+    got grieved. It just got filed.
+
+
+    Marcus Reed writes like a man who has sat in the rig at three in the morning and
+    knows the difference between tired and gone. In these pages, depression gets named
+    for what it so often is underneath the diagnosis: grief with no off-ramp. The
+    recognition comes first, the plain fact that the weight has a name and the name
+    is not weak. Then comes the descent. You stop trying to claw your way up out of
+    it and you let yourself go down into it instead, into the calls you boxed up,
+    the people you couldn''t save, the self you have been mourning all this time without
+    ever giving yourself permission to. Not to relive any of it. Just to let it weigh
+    what it actually weighs. Then integration, the part nobody warns you about, where
+    you come back up still carrying all of it but no longer carrying it alone, and
+    no longer pretending it amounts to nothing.
+
+
+    This will not hand you a wellness routine. It will not tell you to think positive
+    before a night shift or breathe your way out of the things you have seen. There
+    is no protocol in here that turns grief into a closed case, because that is not
+    how grief works and you already know it.
+
+
+    What there is instead is language for the thing sitting in your chest, so the
+    next time it presses down at four in the morning you can name it instead of going
+    under quietly. You were trained to run into the worst day of a stranger''s life.
+    Nobody ever trained you to grieve the ones you couldn''t pull out. You are allowed
+    to set this down long enough to look at it. That isn''t breaking. That is the
+    first honest thing you''ve done for yourself in a long time.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - first responders
+  - depression for first responders
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- The Body Keeps the Score by Bessel van der Kolk
+- It's OK That You're Not OK by Megan Devine
+- Tribe by Sebastian Junger
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

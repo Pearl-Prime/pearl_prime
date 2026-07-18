@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__sleep_anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__sleep_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__restless_mind__1hr
+  name: Quiet the Restless Mind — for Young Professionals (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Sleep Anxiety: Escaping the Mental Loop (3)'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Sleep Anxiety for Gen Z Professionals (Breaking the Thought Loop)
+cover_tagline: One thought at 3am. By 4 you've narrated your entire life falling apart.
+description:
+  short_blurb: 'You wake with one small worry and your mind chains it into a full
+    catastrophe before sunrise. This is the one-hour edition of the sleep work for
+    young professionals: how the 3am spiral builds one thought into a thousand, and
+    how to step off it without pretending the dark isn''t loud.'
+  long_description: 'You wake up at 3am with one thought. Just one — the thing you
+    said in the meeting, maybe. And then your mind does what it does in the dark:
+    it builds. They took it the wrong way, your manager noticed, your reviews are
+    slipping, the promotion''s gone, you''re behind everyone you graduated with, you''ve
+    already failed and just haven''t been told yet. By the time the sky starts to
+    gray, you''ve lived through the collapse of your entire life, link by link, on
+    no sleep, over nothing.
+
+
+    This is for the young professional whose 3am mind doesn''t worry once — it spirals.
+    The dark removes every distraction that holds the chain back during the day, so
+    one small thought hooks the next, each slightly worse, until you''re at the bottom
+    of a catastrophe you assembled from a single ordinary moment. You''re new enough
+    to all of this that you can''t yet tell a small thing from the end of everything,
+    so at 3am the spiral treats it all as the end of everything.
+
+
+    This is the one-hour edition. One sitting, no filler, and not a fix. The arc:
+    first, recognition — you learn to catch the spiral as it spins in the dark, to
+    feel one thought becoming a chain, instead of surfacing at dawn already convinced
+    your life is over. Then, descent: instead of grabbing each thought to argue it
+    down (which only adds links and wakes you more), you go down into the spinning
+    itself and let it run without climbing on. Then you come back, not thought-free,
+    but able to see a 3am worry as a 3am worry — loud, but not prophecy.
+
+
+    This book will not promise you''ll stop waking up. It will not give you a thought-stopping
+    trick, a nightly journaling system, or a reason to feel ashamed of your 3am brain.
+    It will not tell you to think positive at 3am — positive thinking is still you,
+    white-knuckling the wheel in the dark. The spiral is allowed to start. What changes
+    is that you no longer have to ride it until sunrise.
+
+
+    Written in direct, grounded language by Ravi Chandra, this is for the version
+    of you lying awake at 4am, having mentally lost the job, the future, and the whole
+    plot over one replayed sentence. You''ll learn what the loop is made of, and you''ll
+    have a way to step off it the next time one 3am thought tries to become a thousand.
+
+
+    It''s the dark talking. The story isn''t true yet. You can let it go and let morning
+    come.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - can't sleep
+  secondary:
+  - young professionals
+  - sleep anxiety for young professionals
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ravi_chandra
+comp_titles:
+- Chatter (Ethan Kross) — secular science of the looping inner voice that runs loudest
+  alone
+- Hello Sleep (Jade Wu) — reframes the 3am wake-up and spiral without sleep-hygiene
+  moralizing
+- Don't Believe Everything You Think (Joseph Nguyen) — plainly separates a single
+  thought from the catastrophe built on it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

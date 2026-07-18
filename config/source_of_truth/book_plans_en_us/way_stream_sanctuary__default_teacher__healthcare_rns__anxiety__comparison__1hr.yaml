@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__anxiety__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__calm_alarm__1hr
+  name: Calm the Alarm — for Nurses (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Anxiety Relief: Measuring Yourself Against Everyone (2)'
+subtitle: A Field Guide for Healthcare Rns Navigating Anxiety
+cover_tagline: The nurse next to you is not actually ahead of you.
+description:
+  short_blurb: You scrub in, you chart, you cover the extra shift, and somehow you
+    still feel a step behind everyone on the unit. This is the one-hour reset for
+    the nurse whose anxiety keeps measuring her against people who only ever show
+    you their good days. Read it in a single sitting and stop letting the scoreboard
+    run your nervous system.
+  long_description: 'You''re standing at the med cart and the new grad two rooms down
+    is getting praised at the desk, and something in your chest tightens before you''ve
+    even finished the thought. She''s faster. She''s calmer. She''s going to pass
+    you. By the time you''ve hung the next bag, your alarm has built a whole ranking,
+    and you''re at the bottom of it.
+
+
+    This hour is for the nurse who walks off a fully competent shift feeling like
+    she lost. You can run a code, catch the order nobody else caught, and hold a dying
+    patient''s hand — and still drive home certain that everyone on the floor is doing
+    it better than you. You measure against the charge nurse who never seems rattled,
+    against the friend who left for the NP program, against the version of you that
+    you imagined you''d be by now.
+
+
+    Here''s the recognition: comparison is not information. It''s an alarm. It fires
+    fastest when you''re depleted, and a nurse is almost always depleted. The thing
+    you''re calling proof — "she''s ahead, I''m behind" — is a feeling wearing the
+    costume of a fact.
+
+
+    Then we go down into it, because that''s the only way through. Not to silence
+    the comparison, not to talk you into confidence you don''t feel, but to stand
+    inside the moment it grips you and see what it''s actually made of. You''ll learn
+    to feel the exact second the scoreboard switches on at the nurses'' station, and
+    to recognize that you are comparing your unedited, exhausted insides to a coworker''s
+    three-second hallway highlight reel. You come back to the floor able to name it
+    the next time it happens: that''s the alarm, not the truth.
+
+
+    This book will not promise you''ll stop comparing. It won''t optimize you into
+    the most confident nurse on the unit or hand you affirmations to repeat in the
+    supply closet. There''s no morning routine here, no gratitude list, no pretending
+    the staffing isn''t brutal. The work is quieter and more honest than that.
+
+
+    What you get instead is the ground back under your feet — the ability to let another
+    nurse be good at her job without it meaning something is wrong with you. You are
+    allowed to be exactly as far along as you are. You are allowed to do hard, skilled,
+    invisible work and not rank it against anyone. The alarm will keep lying. You
+    don''t have to keep believing it.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - nurses
+  - anxiety for nurses
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- The Gifts of Imperfection (Brené Brown) — names the worthiness story underneath
+  chronic comparison
+- The Comparison Cure (Lucy Sheridan) — a secular, practical reset for measuring yourself
+  against everyone
+- Burnout (Emily Nagoski & Amelia Nagoski) — explains why depleted caregivers get
+  hit hardest by the not-enough feeling
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

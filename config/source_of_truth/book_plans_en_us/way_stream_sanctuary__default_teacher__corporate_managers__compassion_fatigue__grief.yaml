@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__compassion_fatigue__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__compassion_fatigue.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__depletion
+  name: Refill the Empty Well — for Managers
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Compassion Fatigue: Living with What You''ve Lost'
+subtitle: A Real Talk Guide to Compassion Fatigue for Corporate Managers
+cover_tagline: You used to care without trying. Now caring costs you everything. That's
+  a loss.
+description:
+  short_blurb: Caring for a team takes something out of you that doesn't always come
+    back. When the part of you that gave a damn quietly burns out, it isn't laziness
+    — it's a real loss worth grieving. This is a real-talk guide for managers who
+    ran out of compassion and need to mourn it before they can find their way back.
+  long_description: 'You notice it in a one-on-one. Someone you genuinely like is
+    telling you about something hard, and where there used to be a tug in your chest,
+    there''s a checklist. You nod. You say the right words in the right order. But
+    the caring itself — the involuntary, no-effort caring you used to feel for your
+    people — simply isn''t firing. And the part that scares you isn''t that it switched
+    off. It''s that you can''t switch it back on, and somewhere in you, a voice has
+    quietly stopped trying.
+
+
+    Here''s what nobody warned you about management: caring for people runs on a supply,
+    and the supply is finite. You absorbed every team member''s stress. You went to
+    bat for every report. You carried other people''s worst days home and lay awake
+    holding them. And the well all of that was drawn from did exactly what wells do
+    when you never stop pulling — it ran dry. You''ve decided this means you''ve gone
+    cold, that you''ve become the kind of boss you swore you''d never be. You haven''t.
+    You''ve sustained a loss, and the loss is real: the open-hearted version of you
+    who could give freely, before giving started costing this much.
+
+
+    Compassion fatigue is not a defect of character. It''s an injury — the specific
+    wound of people whose job is to feel for others — and injuries are meant to be
+    grieved, not willed away. So the first honest move is to mourn out loud. The warm,
+    available manager you were is depleted, and pretending otherwise is exactly why
+    every check-in leaves you feeling like an impostor. Then you go toward the cost
+    rather than around it: you sit with what all that giving actually took, the slow
+    erosion you mistook for simply being good at the work.
+
+
+    On the far side of that is not a refilled tank to drain again. It''s a different
+    way of caring entirely — one that has a floor under it, one that doesn''t require
+    you to bleed in order for it to count. You stop performing a warmth you don''t
+    feel and start offering the smaller, truer kind you can actually sustain.
+
+
+    What this book will never do is coach you to refill so you can give even more.
+    No self-care hacks, no empathy drills designed to wring fresh compassion out of
+    dry ground. It assumes something genuine was spent, and that you can''t summon
+    it back by command. What it hands you instead is the permission to grieve the
+    price of caring — to mourn the open heart this job slowly shut, and to stop despising
+    yourself for having a limit you never knew you had.
+
+
+    You are allowed to be sad about what caring took. You are allowed to stop pouring
+    from empty. And you are allowed to care again, on terms that don''t require you
+    to vanish.'
+keywords:
+  primary:
+  - compassion fatigue
+  - caregiver burnout
+  - caring too much
+  - empathy fatigue
+  - helper burnout
+  - caregiver stress
+  secondary:
+  - managers
+  - compassion fatigue for managers
+bisac_codes:
+- SEL027000
+- SOC026000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Trauma Stewardship (Laura van Dernoot Lipsky) — the cost of caring for others as
+  your job
+- It's OK That You're Not OK (Megan Devine) — grieving a loss the world doesn't recognize
+- Burnout (Emily Nagoski & Amelia Nagoski) — emotional exhaustion in people who give
+  for a living
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

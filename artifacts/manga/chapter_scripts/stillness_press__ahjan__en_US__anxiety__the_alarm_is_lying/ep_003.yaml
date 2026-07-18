@@ -1,0 +1,483 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 3
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_003 — "Saturday, 11:14 AM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan (Buddhist contemporary; alarm-systems / pause)
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_002:
+#   Three days have passed. Same Mira Aoki. Same jade pendant. The Q3
+#   review went well enough; the teaching held. Today is different —
+#   Saturday, no work, mother visiting from the suburbs. New activation
+#   source: relational, not professional. Same teaching applies.
+#
+# Episode arc — generalization across context:
+#   safety opening (Saturday morning rhythm) → small ramp (mom is on
+#   her way) → ground (apartment ritual) → climax (coffee shop —
+#   mother brings up the father) → Long Drop (park bench, alone) →
+#   completion (home, kettle, "Different day. Same self. Steadier.")
+#
+# SCROLL THERAPEUTIC TEST (PR #631 Decision 6):
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (sunlight on windowsill succulent)
+#   2. ≥3 oscillations activation/ground ...... ✓ 4 oscillations
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~9 activation / ~21 ground panels
+#   4. Closes with completion ................. ✓ panels 28-30 settle
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS (different mix from ep_001/ep_002 — avoid repetition):
+#   Tea Beat (panels 1-2 callback, 30 closing)
+#   Anchor Panel — NEW anchor (windowsill succulent, panels 1, 6, 27)
+#   Awe-Pullback (panel 15 — coffee shop window onto the street, sky)
+#   Pendulation Pair (5-7 ↔ 8-9, 12-14 ↔ 16-17, 18-19 ↔ 20-22)
+#   Long Drop (panel 26 — park bench wide silent)
+#   Continuity callback: jade pendant touch (panel 7, 16); smoke detector
+#   image returns once but now WITHOUT visual prompt — purely internal
+#   (panel 21 caption only — graduation)
+#
+# DOCTRINAL ANCHOR (ahjan, Buddhist contemporary):
+#   The practice generalizes — the same noticing that worked at the office
+#   works in the kitchen with a parent. NOT enlightenment, NOT mastery.
+#   Just the second-time application showing the muscle is there.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_003
+title: "The Alarm Is Lying — Episode 3: Saturday, 11:14 AM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]   # populated by translation pipeline (PR #652)
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist (UX researcher; mid-career; quietly anxious)
+    visual_anchor: "long brown hair, cream sweater + jeans today (weekend register); jade pendant visible at neckline"
+  - id: mother
+    name: Hanako Aoki
+    age: 62
+    role: "Mira's mother (visiting from the suburbs; warm but holds the family history; speaks 5-6 lines total; loving, never antagonist)"
+    visual_anchor: "silver-streaked dark hair pinned back, soft mauve cardigan, small pearl earrings, gentle eyes with crinkle lines"
+
+scene_palette:
+  primary: warm cream + soft Saturday gold
+  secondary: muted sage (apartment plants) + pale rose (coffee shop)
+  accent: jade green (pendant + succulent + park-bench-shadow continuity)
+  coffeeshop_palette: warm cafe amber + window-light blue
+  park_palette: late-afternoon golden green + soft sky lavender
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (30 panels — tighter than ep_001's 35, similar to ep_002's 32)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_003_p01
+    panels:
+
+      # ── OPENING — Saturday morning safety cue (ANCHOR PANEL introduction) ──
+      - panel_id: ep003_001
+        scene: |
+          Close-up — a small succulent on a sunny windowsill. Jade-green
+          leaves with the same hue as Mira's pendant. Mid-morning Saturday
+          light, warmer than weekday light, slower. A single droplet of
+          dew on one leaf. Camera POV slightly upward.
+        beat_type: ~     # first panel
+        intent: "ANCHOR PANEL introduction + SAFETY CUE inside first 800 px"
+        silence_confirmed: true
+
+      - panel_id: ep003_002
+        scene: |
+          Wider — Mira at the kitchen table, in cream sweater and jeans,
+          holding a mug of tea. The window with the succulent visible
+          behind her. The apartment is tidy. A half-folded blanket on
+          the couch in the background.
+        beat_type: micro
+        intent: "TEA BEAT callback — continuity from ep_001 closing + ep_002 closing"
+        narrator_caption_by_locale:
+          en_US: "Saturday. Eleven fourteen."
+
+      - panel_id: ep003_003
+        scene: |
+          Close on Mira's hand — slowly turning a page in a small paperback
+          book on the table. Her thumb at the corner. The mug at the
+          frame edge, steam still rising.
+        beat_type: micro
+        intent: "Sensory anchor — reading register, slow Saturday rhythm"
+
+      # ── SMALL RAMP — the phone buzzes ──────────────────────────────────
+      - panel_id: ep003_004
+        scene: |
+          The phone face-up on the table now. The screen lights with a
+          notification: "Mom — be there in 5 :)". A small emoji.
+        beat_type: spatial
+        intent: "Small activation trigger — anticipated, not surprise"
+        dialogue_lines: []
+
+      - panel_id: ep003_005
+        scene: |
+          Tight on Mira's face — eyes glancing at the phone. A small breath.
+          The shoulders rise half a degree.
+        beat_type: micro
+        intent: "Activation 1 — relational, smaller than work-onset"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      # ── GROUND 1 — Pendulation: the succulent ─────────────────────────
+      - panel_id: ep003_006
+        scene: |
+          Mira's gaze travels from phone to the windowsill. The succulent.
+          The same droplet of dew, evaporating slowly. The light is
+          unchanged.
+        beat_type: micro
+        intent: "ANCHOR PANEL reference — the plant is still here"
+
+      - panel_id: ep003_007
+        scene: |
+          Close — Mira's right hand briefly touches the jade pendant at
+          her neckline. Eyes still on the windowsill. The shoulders
+          settle back down.
+        beat_type: micro
+        intent: "Pendulation — touch-anchor returns Mira to ground"
+        narrator_caption_by_locale:
+          en_US: "Still here."
+
+      # ── MOTHER ARRIVES — small scene ──────────────────────────────────
+      - panel_id: ep003_008
+        scene: |
+          Wide — Mira opening the apartment door. Her mother (Hanako Aoki,
+          early 60s, silver-streaked dark hair pinned back, soft mauve
+          cardigan, small pearl earrings, gentle eyes). A modest tote bag
+          on her shoulder. They smile at each other.
+        beat_type: standard
+        intent: "Mother arrives — warm, not loaded"
+        dialogue_lines:
+          - speaker: mother
+            text_by_locale:
+              en_US: "There she is."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep003_009
+        scene: |
+          Mid-shot — small hug at the doorway. Mother's hand briefly on
+          Mira's back. Both faces soft. The succulent visible in the
+          background through the open kitchen.
+        beat_type: spatial
+        intent: "Physical contact — safety register, not threat"
+        silence_confirmed: true
+
+      # ── COFFEE SHOP — easy banter ─────────────────────────────────────
+      - panel_id: ep003_010
+        scene: |
+          Cut to a small neighborhood coffee shop. Wooden tables, hanging
+          plants. Late-morning Saturday energy — a couple at the counter,
+          a man with a laptop. Mira and her mother at a window table,
+          two ceramic cups. Soft conversation.
+        beat_type: standard
+        intent: "Scene transition — apartment → coffee shop (mid-distance setting)"
+        dialogue_lines:
+          - speaker: mother
+            text_by_locale:
+              en_US: "Are you sleeping?"
+            intensity: gentle
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep003_011
+        scene: |
+          Close on Mira — small smile. She's not lying, just deflecting
+          a little. The window light catches her hair.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Some nights more than others."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      # ── ACTIVATION 2 — the father comes up ────────────────────────────
+      - panel_id: ep003_012
+        scene: |
+          Mother's hands wrap around her coffee cup. Her face turns slightly
+          toward the window. A small pause before she speaks.
+        beat_type: micro
+        intent: "Beat — incoming topic shift; reader feels it before Mira does"
+
+      - panel_id: ep003_013
+        scene: |
+          Close — mother's face, softer now, looking out the window.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mother
+            text_by_locale:
+              en_US: "Your father used to do this — read on Saturday mornings. Same chair. The same hour."
+            intensity: tender
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_center
+
+      - panel_id: ep003_014
+        scene: |
+          Close on Mira's face — the chest tightens, visible micro-shift in
+          the eyes. Not panic. Old grief plus current activation. She holds
+          the cup still.
+        beat_type: micro
+        intent: "Activation 2 — relational/grief activation, distinct from work"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      # ── AWE-PULLBACK — coffee shop window onto the street ─────────────
+      - panel_id: ep003_015
+        scene: |
+          Wide pullback through the coffee shop window. From outside-looking-
+          in: the cafe is small inside a wide Saturday street, pale sky,
+          a few pedestrians, the city continuing. Mira and her mother are
+          a small composition in a big-windowed scene. Light from the
+          street. The panel is intentionally over-wide.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — vast space rendering the conversation small but held"
+        silence_confirmed: true
+
+      # ── GROUND 2 — Pendulation: the pendant + a plant outside ─────────
+      - panel_id: ep003_016
+        scene: |
+          Back to medium — Mira inside the cafe again. Her right hand
+          finds the jade pendant at her neck. Two fingers. A slow inhale.
+          Eyes briefly toward the window — a flower box on the sidewalk
+          outside with the same shade of green leaves.
+        beat_type: spatial
+        intent: "BREATH BRACKET — inhale, ground via pendant + visual rhyme"
+
+      - panel_id: ep003_017
+        scene: |
+          Mira looks back at her mother. The expression shifts — not
+          armored, not collapsed. Available.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "I forget that sometimes."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      # ── ACTIVATION 3 — Mira voices something hard ─────────────────────
+      - panel_id: ep003_018
+        scene: |
+          Mid-shot — Mira's hands on the table. One thumb pressing lightly
+          into the other palm. The cup has been set down. She's about to
+          say something that has been waiting.
+        beat_type: micro
+        intent: "Activation 3 — outbound now, not inbound"
+
+      - panel_id: ep003_019
+        scene: |
+          Mira's face — eyes wet but not spilling, voice steady.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "I miss him in places I didn't know were his."
+            intensity: tender
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_center
+
+      # ── GROUND 3 — mother's response, the conversation lands ──────────
+      - panel_id: ep003_020
+        scene: |
+          Mother's face — listening. No fixing. Her hand slides across the
+          table to rest near Mira's, not on top, just close.
+        beat_type: micro
+        intent: "Witness — mother holds without managing"
+
+      - panel_id: ep003_021
+        scene: |
+          Black panel — almost black, very thin frame of light at the
+          edges. Caption strip across the middle. NO visual cue this
+          time — the teaching frame is purely internal now.
+        beat_type: micro
+        intent: "Internalized teaching — graduation from external prompt"
+        narrator_caption_by_locale:
+          en_US: "It's not danger. It's just steam."
+        silence_confirmed: true
+
+      - panel_id: ep003_022
+        scene: |
+          Back to the cafe. Mira's hand finds her mother's hand, briefly
+          squeezes. Both faces softer now. The cups still on the table.
+          Window light unchanged.
+        beat_type: spatial
+        intent: "Small completion within the climax — the conversation held"
+        silence_confirmed: true
+
+      # ── MOTHER LEAVES — small transition ──────────────────────────────
+      - panel_id: ep003_023
+        scene: |
+          Wider — both at the cafe door, mother adjusting her cardigan,
+          tote bag back on her shoulder. Outside light spills in.
+        beat_type: standard
+        dialogue_lines:
+          - speaker: mother
+            text_by_locale:
+              en_US: "Call me Sunday."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep003_024
+        scene: |
+          Mira nodding, small smile. Mother turns toward the street.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "I will."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      # ── PARK WALK — the post-activation processing ────────────────────
+      - panel_id: ep003_025
+        scene: |
+          Wide — Mira walking alone now, down a tree-lined street toward
+          a small neighborhood park. Late-afternoon light, golden. Her
+          hands in her jacket pockets. Mid-distance. Camera follows from
+          behind.
+        beat_type: standard
+        intent: "Scene transition — cafe → park"
+
+      # ── LONG DROP — park bench, silent ────────────────────────────────
+      - panel_id: ep003_026
+        scene: |
+          Wide silent panel. Mira on a wooden park bench, three-quarter
+          back-view. A few people in the distance walking dogs. The
+          light is honey-gold through the trees. Wind moves the leaves.
+          NO TEXT, NO CAPTION, NO SFX. Composition includes deliberate
+          empty sky above her — long vertical scroll space.
+        beat_type: long_drop
+        intent: "LONG DROP — post-conversation decompression. Reader exhales here."
+        silence_confirmed: true
+        dialogue_lines: []
+
+      - panel_id: ep003_027
+        scene: |
+          Close — Mira's hand on the bench beside her. A small leaf has
+          landed on the wood. Same jade green as the succulent and the
+          pendant. She picks it up gently, turns it between her fingers.
+        beat_type: micro
+        intent: "ANCHOR PANEL final reference — the visual through-line completes"
+
+      # ── COMPLETION — home, evening, kettle bookend ────────────────────
+      - panel_id: ep003_028
+        scene: |
+          Cut to evening. Mira's kitchen. Soft dusk light from the window.
+          The succulent on the sill visible — same droplet long since
+          evaporated; the plant is unchanged. She is setting the kettle
+          on the stove. Quiet apartment.
+        beat_type: standard
+        intent: "Scene transition — park → home"
+
+      - panel_id: ep003_029
+        scene: |
+          Close on the kettle, beginning to steam. Same kettle as ep_001
+          and ep_002. The visual rhyme is the point.
+        beat_type: spatial
+        intent: "TEA BEAT bookend — closing the circuit"
+        sfx_by_locale:
+          en_US: ["hsss..."]
+
+      - panel_id: ep003_030
+        scene: |
+          Final panel — Mira at the table, fresh cup of tea, the small leaf
+          from the park bench set beside the mug. Soft smile, eyes peaceful,
+          a little tired. The succulent visible behind her. Caption strip
+          below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Different day. Same self. Steadier."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 3 of 10 (per stillness_press chapters_per_volume in
+    en_US manga catalog). The teaching generalizes across contexts —
+    work (ep_002), now family/grief (ep_003). Mira does not "have it
+    figured out." She has it as a muscle that activates faster on
+    second/third use. Iyashikei convention: small shifts only.
+    The reader leaves the episode with a regulated nervous system,
+    not with Mira "healed."
+  pacing_vs_prior: |
+    30 panels (vs ep_001's 35, ep_002's 32). Tightest so far; the
+    cadence sharpens as the practice internalizes. The Saturday
+    setting lets the panels breathe (more spatial / micro, fewer
+    standard) — different texture from the weekday-work-driven ep_001+ep_002.
+  continuity_callbacks: |
+    - Tea cup (panel 2, 29, 30) — bookends all three episodes
+    - Jade pendant (panel 7, 16) — color anchor PR #631 §16
+    - Succulent on windowsill (panel 1, 6, 27 via the leaf) — NEW
+      anchor introduced this episode; will become a recurring object
+      across remaining episodes
+    - Smoke detector image — DOES NOT appear visually; the caption
+      "It's not danger. It's just steam." (panel 21) returns purely
+      as internal text. Graduation from external prompt to internal
+      practice. This is doctrinal: the teaching is no longer about
+      the image, just the noticing.
+    - Cream sweater + Mira's hair (every panel) — character lock-in
+      for visual_from_script_v3
+  mother_handling: |
+    Six lines total. Never antagonist, never threat. The activation
+    she causes is real but the conversation lands. Mira's grief about
+    the father is real and held but not dramatized. Per iyashikei
+    convention: the source of small activation is humanized fully.
+    The mother is a person with her own losses, not a plot device.
+  long_drop_position: |
+    Panel 26 — park bench. Wider than ep_001's Long Drop (kitchen),
+    similar tonal weight to ep_002's rooftop. Different setting each
+    episode keeps the Long Drop visually fresh. The pattern: Long Drop
+    always AFTER the climax but before the kitchen-bookend completion.
+  translation_handoff: |
+    Same as ep_001/ep_002 — text_by_locale dicts populated for en_US
+    only. Run scripts/manga/translate_chapter_script.py to fill ja_JP /
+    zh_TW / zh_CN. Locked terminology in iyashikei_glossary.py covers
+    the new "Saturday" + "Different day. Same self. Steadier." callbacks.
+  doctrinal_anchor_ahjan: |
+    The teaching applied without a visible prompt (panel 21) is the
+    doctrinal claim: ahjan's framework is not about constant external
+    reminders. The internal noticing IS the practice. Iyashikei +
+    Buddhist contemporary convergence — small shifts, internal muscle,
+    no fanfare.
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION (same pipeline as ep_001/ep_002)
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)

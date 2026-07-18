@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__burnout__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__steady_ground__1hr
+  name: Steady Ground — for First Responders (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: The Grief That Doesn''t Leave (1)'
+subtitle: A Field Guide for First Responders Navigating Burnout
+cover_tagline: Some calls you carry home. This is for the one you never put down.
+description:
+  short_blurb: You did the job. You followed the protocol. And someone still didn't
+    make it home. This is a one-hour read for the first responder carrying a grief
+    that nobody filed paperwork for. Not a debrief, not a fix. A place to finally
+    set it down where someone understands the weight.
+  long_description: 'You''re three shifts past it now. You''ve eaten meals, written
+    reports, made small talk in the bay. And it''s still there — the call that didn''t
+    go your way, the face, the radio traffic that loops at 3 a.m. You did everything
+    right and someone is still gone, and nobody handed you a place to put that. So
+    you carried it back into the rig, into your kitchen, into bed.
+
+
+    This hour is for you — the firefighter, the medic, the cop, the dispatcher who
+    learned early that you don''t get to fall apart on scene, so you stopped falling
+    apart at all. The one who calls it ''fine'' because the alternative has no off-ramp
+    during a twelve. The grief you''re carrying isn''t weakness and it isn''t a debrief
+    you skipped. It''s the cost of caring about people on the worst day of their lives,
+    over and over, with no time built in to feel any of it.
+
+
+    We start by naming it plainly, because you''ve been calling it stress when it''s
+    loss. Then we go down into it — not to relive the call, not to ''process'' on
+    command, but to stop bracing against a grief that was never going to obey a schedule.
+    You''ll see why it surfaces in the truck, in the shower, at the dinner table —
+    usually when you finally stop moving — and why shoving it down has only made it
+    louder, not gone. And then you come back up — still the person who runs toward
+    what everyone runs from, but no longer at war with what that costs you.
+
+
+    This will not give you closure. There''s no clean ending where the call stops
+    mattering, and any book that promises one is lying to a professional who knows
+    better. It won''t tell you to leave the work, journal your feelings, or ''find
+    balance.'' It won''t pretend the next bad one isn''t coming. What it will do is
+    stop treating your grief like a malfunction to suppress and start treating it
+    like proof you''re still human under the turnout gear.
+
+
+    Marcus Reed writes for the people who hold the line and pay for it quietly. No
+    platitudes, no toxic positivity, no asking you to be grateful for the trauma.
+    Just one honest hour, in plain language you can actually use at 3 a.m. when it
+    comes back around.
+
+
+    You don''t have to be over it to set it down for an hour. Start here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - first responders
+  - burnout for first responders
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the unfinished stress cycle that
+  grief leaves stuck in the body
+- It's OK That You're Not OK (Megan Devine) — refuses the 'closure' script and meets
+  grief without trying to fix it
+- Tribe (Sebastian Junger) — speaks directly to those who serve under fire and the
+  toll of carrying it home
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

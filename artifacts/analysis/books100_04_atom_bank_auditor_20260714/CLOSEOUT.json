@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "lane": "04_atom_bank_auditor",
+  "branch": "agent/books100-atom-bank-health-20260714",
+  "base_sha": "b507f3029e2aa7e5d9adfdb258b16d17910dc4fe",
+  "status": "READY_FOR_OPERATOR_PR",
+  "files_changed": [
+    "artifacts/qa/atom_bank_health_20260714/atom_bank_health.tsv",
+    "artifacts/qa/atom_bank_health_20260714/high_risk_tuples.json",
+    "artifacts/qa/atom_bank_health_20260714/tuple_health_summary.md",
+    "artifacts/qa/atom_bank_health_20260714/writer_backlog.md",
+    "scripts/qa/audit_atom_bank_health.py",
+    "tests/qa/test_audit_atom_bank_health.py"
+  ],
+  "tests": [
+    {
+      "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 /Users/ahjan/phoenix_omega/docs/books_100_multi_lane_pr_kit/lanes/04_atom_bank_auditor/apply.py /Users/ahjan/phoenix_omega_worktrees/books100-20260714/04_atom_bank_auditor",
+      "exit_code": 0,
+      "result_tail": "Atom-bank auditor installed. No commit created.\n"
+    },
+    {
+      "command": "python3 -m pytest -q tests/qa/test_audit_atom_bank_health.py",
+      "exit_code": 0,
+      "result_tail": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0\nrootdir: /Users/ahjan/phoenix_omega_worktrees/books100-20260714/04_atom_bank_auditor\nconfigfile: pytest.ini\nplugins: anyio-4.12.1\ncollected 7 items\n\ntests/qa/test_audit_atom_bank_health.py .......                          [100%]\n\n============================== 7 passed in 1.05s ===============================\n"
+    },
+    {
+      "command": "python3 scripts/qa/audit_atom_bank_health.py",
+      "exit_code": 0,
+      "result_tail": "{\n  \"artifact_root\": \"/Users/ahjan/phoenix_omega_worktrees/books100-20260714/04_atom_bank_auditor/artifacts/qa/atom_bank_health_20260714\",\n  \"tuples_scanned\": 762,\n  \"high_risk_count\": 756,\n  \"acceptance_sentinel\": {\n    \"tuple\": \"corporate_managers/burnout/overwhelm\",\n    \"found\": true,\n    \"high_risk\": true,\n    \"risk_reasons\": [\n      \"engine_depth_or_band_deficit\",\n      \"missing_required_arc_bands:1,2,3\",\n      \"required_band_depth_below_2\",\n      \"HOOK_real_depth=8<12\",\n      \"placeholder_debt_in_1_banks\"\n    ]\n  }\n}\n"
+    }
+  ],
+  "blockers": [],
+  "truth": {
+    "fresh_production_render_completed": false,
+    "books_100_production_ready": false
+  }
+}

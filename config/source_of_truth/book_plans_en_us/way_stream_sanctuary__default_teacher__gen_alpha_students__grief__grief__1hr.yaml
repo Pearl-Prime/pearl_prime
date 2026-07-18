@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__grief__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__grief__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__through_loss__1hr
+  name: Through the Low Places — for Students (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Grief: Living with What You''ve Lost (1)'
+subtitle: A Field Guide for Gen Alpha Students Navigating Grief
+cover_tagline: You lost someone, and everyone wants you back to normal already.
+description:
+  short_blurb: Something or someone is gone, and the world expected you to move on
+    weeks ago. This hour is for the student living with a loss that hasn't gotten
+    smaller. It won't tell you they're in a better place. It will give you room to
+    live with what's missing.
+  long_description: 'It happened, and for a while everyone was kind about it. Then
+    the texts stopped, the world moved on, and you were left holding something that
+    did not get smaller just because people stopped asking. You lost someone, or something
+    that mattered as much as a someone, and now you''re supposed to be back to normal,
+    back in class, back to fine. You''re not. You go through the day with a gap where
+    they used to be, and you''ve gotten good at hiding it.
+
+
+    This hour is for the student living with real loss. Not the metaphor kind, the
+    actual kind, where a person or a relationship or a whole life you had is just
+    gone and isn''t coming back. The kind where you laugh at something and then remember,
+    and the floor drops out again, right in the middle of a normal day.
+
+
+    Jonah Kim writes the way someone talks when they''ve stopped trying to make grief
+    sound okay. First, recognition: what you''re carrying is loss, and it''s allowed
+    to be exactly this big, and naming it does not mean getting over it. Then the
+    descent: instead of packing the grief away so other people can be comfortable,
+    you go down into it on purpose. You let the missing be there, in your chest, in
+    your hands, without rushing to the part where it''s supposed to make sense. You
+    stop performing recovery and let yourself actually miss them.
+
+
+    This book will not tell you they''re in a better place. It will not say everything
+    happens for a reason or that time heals all wounds or that you''re so strong for
+    handling it well. It will not hand you stages to get through on a schedule. Loss
+    does not need to be turned into growth before you''re allowed to feel it, and
+    you do not owe anyone a version of you that''s already moved on.
+
+
+    What you get is plain language for what''s actually true right now, words you
+    can hold onto when the grief hits you in the hallway or at 2am. You''ll stop apologizing
+    for still being sad. You''ll stop measuring your grief against how long people
+    think it should last.
+
+
+    One hour. The loss will still be real when it ends. Nothing here makes it smaller.
+    But you''ll have let yourself live with it honestly for a little while, instead
+    of hiding it. You''re allowed to still be grieving, and you''re allowed to carry
+    what''s missing without a deadline.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  secondary:
+  - students
+  - grief for students
+  - one hour
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — refuses the silver lining and the grief-on-a-schedule
+  myth
+- The Year of Magical Thinking (Joan Didion) — unsentimental, clear-eyed account of
+  living with real loss
+- Bittersweet (Susan Cain) — makes room for sorrow as something to live with, not
+  fix
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

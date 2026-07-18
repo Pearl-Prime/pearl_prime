@@ -1,0 +1,121 @@
+# Flagship QA ladder — runs the spine pipeline across all runtime formats
+# at the flagship quality profile and uploads reports as artifacts.
+# On-demand via workflow_dispatch; not scheduled (long runs are operator-triggered).
+name: Book flagship QA ladder
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Topic id (e.g. anxiety, grief, burnout)"
+        required: true
+        default: "anxiety"
+      persona:
+        description: "Persona id"
+        required: true
+        default: "gen_z_professionals"
+      arc:
+        description: "Arc YAML filename under config/source_of_truth/master_arcs/"
+        required: true
+        default: "gen_z_professionals__anxiety__overwhelm__F006.yaml"
+      formats:
+        description: "Space-separated runtime formats"
+        required: true
+        default: "micro_book_15 micro_book_20 short_book_30 standard_book extended_book_2h deep_book_4h deep_book_6h"
+      quality_profile:
+        description: "Quality profile (flagship | production | draft)"
+        required: true
+        default: "flagship"
+
+jobs:
+  qa-ladder:
+    name: Flagship QA ladder
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: pip install -r requirements-test.txt
+
+      - name: Run flagship QA ladder
+        id: ladder
+        env:
+          TOPIC: ${{ inputs.topic }}
+          PERSONA: ${{ inputs.persona }}
+          ARC: ${{ inputs.arc }}
+          FORMATS: ${{ inputs.formats }}
+          QUALITY_PROFILE: ${{ inputs.quality_profile }}
+        run: |
+          set -u
+          mkdir -p artifacts/qa_ladder
+          REJECTS=0
+          HOLDS=0
+          PASSES=0
+          SUMMARY="artifacts/qa_ladder/SUMMARY.md"
+          echo "# Flagship QA ladder — $TOPIC × $PERSONA" > "$SUMMARY"
+          echo "Arc: $ARC" >> "$SUMMARY"
+          echo "Quality profile: $QUALITY_PROFILE" >> "$SUMMARY"
+          echo "" >> "$SUMMARY"
+          echo "| Format | Chapter flow | Book quality | Scene anti-gen | ONTGP | Result |" >> "$SUMMARY"
+          echo "|---|---|---|---|---|---|" >> "$SUMMARY"
+
+          for fmt in $FORMATS; do
+            OUT_DIR="artifacts/qa_ladder/$fmt"
+            mkdir -p "$OUT_DIR"
+            echo "::group::$fmt"
+            set +e
+            PYTHONPATH=. python3 scripts/run_pipeline.py \
+              --topic "$TOPIC" --persona "$PERSONA" \
+              --arc "config/source_of_truth/master_arcs/$ARC" \
+              --pipeline-mode spine --exercise-journeys --runtime-format "$fmt" \
+              --no-job-check --render-book --render-dir "$OUT_DIR" \
+              --out "$OUT_DIR/plan.json" \
+              --no-generate-freebies --no-update-freebie-index \
+              --quality-profile "$QUALITY_PROFILE" 2>&1 | tee "$OUT_DIR/stdout.txt"
+            RC=${PIPESTATUS[0]}
+            set -e
+            echo "::endgroup::"
+
+            # Parse gate results from stdout
+            FLOW=$(grep -oE "Chapter flow gate: [A-Z]+" "$OUT_DIR/stdout.txt" | tail -1 | awk '{print $NF}')
+            BQ=$(grep -oE "book quality gate: [A-Za-z]+" "$OUT_DIR/stdout.txt" | tail -1 | awk '{print $NF}')
+            SAG=$(grep -oE "Scene anchor density cap: [A-Z]+" "$OUT_DIR/stdout.txt" | tail -1 | awk '{print $NF}')
+            ONTGP=$(grep -oE "ONTGP score [0-9.]+" "$OUT_DIR/stdout.txt" | tail -1 | awk '{print $NF}')
+            SAG=${SAG:-PASS}
+            if [ "$RC" -ne 0 ]; then
+              RESULT="REJECT"
+              REJECTS=$((REJECTS+1))
+            elif [ "$BQ" = "Hold" ]; then
+              RESULT="Hold"
+              HOLDS=$((HOLDS+1))
+            else
+              RESULT="Pass"
+              PASSES=$((PASSES+1))
+            fi
+            echo "| $fmt | $FLOW | $BQ | $SAG | $ONTGP | $RESULT |" >> "$SUMMARY"
+          done
+
+          echo "" >> "$SUMMARY"
+          echo "**Totals:** $PASSES Pass · $HOLDS Hold · $REJECTS Reject" >> "$SUMMARY"
+
+          cat "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+          echo "rejects=$REJECTS" >> $GITHUB_OUTPUT
+
+      - name: Upload QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagship-qa-ladder-${{ inputs.topic }}-${{ inputs.persona }}
+          path: artifacts/qa_ladder/
+          retention-days: 60
+
+      - name: Fail if >3 rejects
+        if: steps.ladder.outputs.rejects > 3
+        run: |
+          echo "::error::More than 3 formats rejected (${{ steps.ladder.outputs.rejects }})"
+          exit 1

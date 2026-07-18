@@ -1,0 +1,546 @@
+# Default pen-name author per brand when run_pipeline does not receive --author.
+# Authority: SYSTEMS_V4.md — "resolve author from brand".
+# First matching row wins (brand_id required; optional topic_ids, persona_ids, series_ids to narrow).
+#
+# author_pool: list of {author_id, voice_lock, tier} — used by anti-spam rotation
+#   per docs/PEN_NAME_AUTHOR_SYSTEM.md (no voice appears > 2× per brand within a locale)
+# topic_ids/persona_ids in a row narrow which author to pick for a given book
+
+assignments:
+  # ─── BRAND 1: stillness_press (teacher: ahjan) ───
+  # 12 pen-name authors, all bio'd in config/catalog_planning/teacher_brand_author_roster.yaml §01
+  # Topic-affinity rules (first matching row wins) below the pool route books to fitting authors.
+
+  - brand_id: stillness_press
+    default_author: lena_thorne   # anxiety+sleep_anxiety primary — most common topic in catalog
+    author_pool:
+      - { author_id: lena_thorne,     voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 1 }
+      - { author_id: daniel_voss,     voice_lock: onwK4e9ZLuTAKqWW03F9, tier: 1 }
+      - { author_id: mira_santos,     voice_lock: pMsXgVXv3BLzUgSXRplE, tier: 1 }
+      - { author_id: kai_okafor,      voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 1 }
+      - { author_id: ruth_alder,      voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 1 }
+      - { author_id: sam_meridian,    voice_lock: Yko7PKHZNXotIFUBG7I9, tier: 2 }
+      - { author_id: noor_ibrahim,    voice_lock: oWAxZDx7w5VEj9dCyTzz, tier: 2 }
+      - { author_id: tara_woodfield,  voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 2 }
+      - { author_id: rowan_beck,      voice_lock: onwK4e9ZLuTAKqWW03F9, tier: 2 }
+      - { author_id: mae_rivers,      voice_lock: oWAxZDx7w5VEj9dCyTzz, tier: 2 }
+      - { author_id: silas_grant,     voice_lock: ODq5zmih8GrVes37Dizd, tier: 2 }
+      - { author_id: iris_tam,        voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 2 }
+
+  # Topic-affinity rules for stillness_press (narrow author by topic when --author not passed)
+  - brand_id: stillness_press
+    topic_ids: [anxiety]
+    default_author: lena_thorne   # also: rowan_beck (alternate)
+  - brand_id: stillness_press
+    topic_ids: [sleep_anxiety]
+    default_author: lena_thorne   # also: iris_tam
+  - brand_id: stillness_press
+    topic_ids: [burnout]
+    default_author: daniel_voss   # also: tara_woodfield
+  - brand_id: stillness_press
+    topic_ids: [imposter_syndrome]
+    default_author: daniel_voss
+  - brand_id: stillness_press
+    topic_ids: [grief]
+    default_author: mira_santos   # also: mae_rivers
+  - brand_id: stillness_press
+    topic_ids: [self_worth]
+    default_author: mira_santos   # also: silas_grant
+  - brand_id: stillness_press
+    topic_ids: [social_anxiety]
+    default_author: kai_okafor
+  - brand_id: stillness_press
+    topic_ids: [overthinking]
+    default_author: kai_okafor    # also: rowan_beck
+  - brand_id: stillness_press
+    topic_ids: [boundaries]
+    default_author: ruth_alder    # also: tara_woodfield
+  - brand_id: stillness_press
+    topic_ids: [compassion_fatigue]
+    default_author: ruth_alder    # also: mae_rivers
+  - brand_id: stillness_press
+    topic_ids: [somatic_healing]
+    default_author: sam_meridian  # also: iris_tam
+  - brand_id: stillness_press
+    topic_ids: [depression]
+    default_author: sam_meridian  # also: silas_grant
+  - brand_id: stillness_press
+    topic_ids: [courage]
+    default_author: noor_ibrahim
+  - brand_id: stillness_press
+    topic_ids: [financial_anxiety, financial_stress]
+    default_author: noor_ibrahim
+  # Catalog topics not directly in any author's primary topics — assign to nearest fit
+  - brand_id: stillness_press
+    topic_ids: [mindfulness]
+    default_author: rowan_beck    # environmental psychologist; closest fit
+  - brand_id: stillness_press
+    topic_ids: [adhd_focus]
+    default_author: kai_okafor    # Gen Z, overthinking-adjacent
+
+  - brand_id: cognitive_clarity
+    default_author: null
+    # No default: use --author explicitly or teacher-only book.
+
+  # ─── BRAND: clear_seeing_books ───
+  - brand_id: clear_seeing_books
+    topic_ids: [overthinking]
+    default_author: ada_park
+  - brand_id: clear_seeing_books
+    topic_ids: [anxiety]
+    default_author: ada_park
+  - brand_id: clear_seeing_books
+    topic_ids: [self_worth]
+    default_author: joel_crane
+  - brand_id: clear_seeing_books
+    topic_ids: [boundaries]
+    default_author: joel_crane
+  - brand_id: clear_seeing_books
+    topic_ids: [social_anxiety]
+    default_author: hana_lee
+  - brand_id: clear_seeing_books
+    topic_ids: [imposter_syndrome]
+    default_author: hana_lee
+  - brand_id: clear_seeing_books
+    topic_ids: [burnout]
+    default_author: marcus_stone
+  - brand_id: clear_seeing_books
+    topic_ids: [depression]
+    default_author: marcus_stone
+  - brand_id: clear_seeing_books
+    topic_ids: [grief]
+    default_author: yuki_tanabe
+  - brand_id: clear_seeing_books
+    topic_ids: [courage]
+    default_author: yuki_tanabe
+  - brand_id: clear_seeing_books
+    topic_ids: [financial_stress]
+    default_author: elliot_vane
+  - brand_id: clear_seeing_books
+    topic_ids: [sleep_anxiety]
+    default_author: elliot_vane
+  - brand_id: clear_seeing_books
+    default_author: ada_park   # brand default + pool; listed LAST so it can't shadow the topic rows
+    author_pool:
+      - { author_id: ada_park, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 1 }
+      - { author_id: joel_crane, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 1 }
+      - { author_id: hana_lee, voice_lock: cgSgspJ2msm6, tier: 2 }
+      - { author_id: marcus_stone, voice_lock: pNInz6obpgDQGcFmaJgB, tier: 1 }
+      - { author_id: yuki_tanabe, voice_lock: XrExE9yKIg1WjnnlVkGX, tier: 2 }
+      - { author_id: elliot_vane, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 2 }
+
+  # ─── BRAND: felt_sense_publishing ───
+  - brand_id: felt_sense_publishing
+    topic_ids: [anxiety]
+    default_author: claire_ashford
+  - brand_id: felt_sense_publishing
+    topic_ids: [somatic_healing]
+    default_author: ben_archer
+  - brand_id: felt_sense_publishing
+    topic_ids: [burnout]
+    default_author: james_fielding
+  - brand_id: felt_sense_publishing
+    topic_ids: [imposter_syndrome]
+    default_author: james_fielding
+  - brand_id: felt_sense_publishing
+    topic_ids: [grief]
+    default_author: vera_osei
+  - brand_id: felt_sense_publishing
+    topic_ids: [self_worth]
+    default_author: vera_osei
+  - brand_id: felt_sense_publishing
+    topic_ids: [social_anxiety]
+    default_author: alex_navarro
+  - brand_id: felt_sense_publishing
+    topic_ids: [overthinking]
+    default_author: alex_navarro
+  - brand_id: felt_sense_publishing
+    topic_ids: [boundaries]
+    default_author: helen_cross
+  - brand_id: felt_sense_publishing
+    topic_ids: [compassion_fatigue]
+    default_author: helen_cross
+  - brand_id: felt_sense_publishing
+    topic_ids: [depression]
+    default_author: omar_brooks
+  - brand_id: felt_sense_publishing
+    topic_ids: [courage]
+    default_author: omar_brooks
+  - brand_id: felt_sense_publishing
+    topic_ids: [financial_anxiety]
+    default_author: suki_moreno
+  - brand_id: felt_sense_publishing
+    topic_ids: [sleep_anxiety]
+    default_author: suki_moreno
+  - brand_id: felt_sense_publishing
+    default_author: claire_ashford   # brand default + pool; listed LAST so it can't shadow the topic rows
+    author_pool:
+      - { author_id: claire_ashford, voice_lock: XB0fDUnXU5powFXDhCwa, tier: 1 }
+      - { author_id: james_fielding, voice_lock: ZQe5CZNOzWyzPSCn5a3c, tier: 1 }
+      - { author_id: vera_osei, voice_lock: pMsXgVXv3BLzUgSXRplE, tier: 1 }
+      - { author_id: alex_navarro, voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 2 }
+      - { author_id: helen_cross, voice_lock: z9fAnlkpzviPz146aGWa, tier: 2 }
+      - { author_id: omar_brooks, voice_lock: Yko7PKHZNXotIFUBG7I9, tier: 2 }
+      - { author_id: suki_moreno, voice_lock: piTKgcLEGmPE4e6mEKli, tier: 2 }
+      - { author_id: ben_archer, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 1 }
+
+  # ─── BRAND: devotion_path (teacher: sai_ma) — imprint "Open Vessel Press" ───
+  # Teacher-bylined devotional brand: byline "Sai Maa" (the teacher). Resolved when --teacher sai_ma
+  # routes brand_id -> devotion_path (resolve_brand_for_teacher). author entry: config/author_registry.yaml.
+  - brand_id: devotion_path
+    default_author: sai_ma
+
+
+  # ═══ MINTED TEACHER POOLS (Q-BYLINE-POOL-SOURCE-02 = A, OPD-20260702-004) ═══
+  # 9 roster-skeleton brands + 2 new brands (adi_da→bright_shore_press,
+  # joshin→koya_gate_press). Pen-names minted deterministically via
+  # scripts/brand_management/gen_author_rosters.py --mint-teacher-pools.
+  # voice_lock reuses the existing ElevenLabs valid set (never invented).
+  # sai_ma / sai_maa is NEVER an author byline (teacher credited separately).
+
+  # ─── bare_form_books (teacher: miyuki) ───
+  - brand_id: bare_form_books
+    default_author: soren_fairlie
+    author_pool:
+      - { author_id: soren_fairlie, voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 1 }
+      - { author_id: rafe_okafor, voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 1 }
+      - { author_id: mira_adler, voice_lock: XB0fDUnXU5powFXDhCwa, tier: 2 }
+      - { author_id: hannah_keller, voice_lock: XrExE9yKIg1WjnnlVkGX, tier: 2 }
+      - { author_id: adam_devlin, voice_lock: Yko7PKHZNXotIFUBG7I9, tier: 2 }
+  - brand_id: bare_form_books
+    topic_ids: [self_worth]
+    default_author: soren_fairlie
+  - brand_id: bare_form_books
+    topic_ids: [social_anxiety]
+    default_author: rafe_okafor
+  - brand_id: bare_form_books
+    topic_ids: [boundaries]
+    default_author: mira_adler
+  - brand_id: bare_form_books
+    topic_ids: [grief]
+    default_author: hannah_keller
+  - brand_id: bare_form_books
+    topic_ids: [compassion_fatigue]
+    default_author: adam_devlin
+
+  # ─── bright_shore_press (teacher: adi_da) ───  # NEW-ARTIFACT-JUSTIFIED brand row
+  - brand_id: bright_shore_press
+    default_author: kai_jorda
+    author_pool:
+      - { author_id: kai_jorda, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 1 }
+      - { author_id: jonah_woodfield, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 1 }
+      - { author_id: bea_vazquez, voice_lock: ODq5zmih8GrVes37Dizd, tier: 1 }
+      - { author_id: opal_oakes, voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 1 }
+      - { author_id: otis_halloran, voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 2 }
+      - { author_id: kess_meridian, voice_lock: XB0fDUnXU5powFXDhCwa, tier: 2 }
+      - { author_id: iris_hale, voice_lock: XrExE9yKIg1WjnnlVkGX, tier: 2 }
+      - { author_id: nina_marsh, voice_lock: Yko7PKHZNXotIFUBG7I9, tier: 2 }
+  - brand_id: bright_shore_press
+    topic_ids: [self_worth]
+    default_author: kai_jorda
+  - brand_id: bright_shore_press
+    topic_ids: [grief]
+    default_author: jonah_woodfield
+  - brand_id: bright_shore_press
+    topic_ids: [anxiety]
+    default_author: bea_vazquez
+  - brand_id: bright_shore_press
+    topic_ids: [overthinking]
+    default_author: opal_oakes
+  - brand_id: bright_shore_press
+    topic_ids: [boundaries]
+    default_author: otis_halloran
+  - brand_id: bright_shore_press
+    topic_ids: [depression]
+    default_author: kess_meridian
+  - brand_id: bright_shore_press
+    topic_ids: [burnout]
+    default_author: iris_hale
+  - brand_id: bright_shore_press
+    topic_ids: [courage]
+    default_author: nina_marsh
+
+  # ─── ember_and_ash_publishing (teacher: ra) ───
+  - brand_id: ember_and_ash_publishing
+    default_author: ivo_stern
+    author_pool:
+      - { author_id: ivo_stern, voice_lock: pNInz6obpgDQGcFmaJgB, tier: 1 }
+      - { author_id: vera_fenwick, voice_lock: piTKgcLEGmPE4e6mEKli, tier: 1 }
+      - { author_id: cleo_whitlock, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 1 }
+      - { author_id: sam_peral, voice_lock: z9fAnlkpzviPz146aGWa, tier: 2 }
+      - { author_id: oscar_reyes, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 2 }
+      - { author_id: dora_dunmore, voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 2 }
+  - brand_id: ember_and_ash_publishing
+    topic_ids: [burnout]
+    default_author: ivo_stern
+  - brand_id: ember_and_ash_publishing
+    topic_ids: [courage]
+    default_author: vera_fenwick
+  - brand_id: ember_and_ash_publishing
+    topic_ids: [depression]
+    default_author: cleo_whitlock
+  - brand_id: ember_and_ash_publishing
+    topic_ids: [self_worth]
+    default_author: sam_peral
+  - brand_id: ember_and_ash_publishing
+    topic_ids: [imposter_syndrome]
+    default_author: oscar_reyes
+  - brand_id: ember_and_ash_publishing
+    topic_ids: [somatic_healing]
+    default_author: dora_dunmore
+
+  # ─── feather_and_scale_press (teacher: maat) ───
+  - brand_id: feather_and_scale_press
+    default_author: rowan_tam
+    author_pool:
+      - { author_id: rowan_tam, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 1 }
+      - { author_id: cole_holt, voice_lock: z9fAnlkpzviPz146aGWa, tier: 1 }
+      - { author_id: gideon_sable, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 1 }
+      - { author_id: talia_lamont, voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 2 }
+      - { author_id: selin_rivers, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 2 }
+      - { author_id: kai_marchetti, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 2 }
+  - brand_id: feather_and_scale_press
+    topic_ids: [grief]
+    default_author: rowan_tam
+  - brand_id: feather_and_scale_press
+    topic_ids: [self_worth]
+    default_author: cole_holt
+  - brand_id: feather_and_scale_press
+    topic_ids: [boundaries]
+    default_author: gideon_sable
+  - brand_id: feather_and_scale_press
+    topic_ids: [courage]
+    default_author: talia_lamont
+  - brand_id: feather_and_scale_press
+    topic_ids: [depression]
+    default_author: selin_rivers
+  - brand_id: feather_and_scale_press
+    topic_ids: [somatic_healing]
+    default_author: kai_marchetti
+
+  # ─── held_ground_press (teacher: omote) ───
+  - brand_id: held_ground_press
+    default_author: hana_stern
+    author_pool:
+      - { author_id: hana_stern, voice_lock: pMsXgVXv3BLzUgSXRplE, tier: 1 }
+      - { author_id: uma_fenwick, voice_lock: pNInz6obpgDQGcFmaJgB, tier: 1 }
+      - { author_id: basil_whitlock, voice_lock: piTKgcLEGmPE4e6mEKli, tier: 1 }
+      - { author_id: ruth_peral, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 2 }
+      - { author_id: marcus_reyes, voice_lock: z9fAnlkpzviPz146aGWa, tier: 2 }
+      - { author_id: caleb_dunmore, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 2 }
+  - brand_id: held_ground_press
+    topic_ids: [grief]
+    default_author: hana_stern
+  - brand_id: held_ground_press
+    topic_ids: [somatic_healing]
+    default_author: uma_fenwick
+  - brand_id: held_ground_press
+    topic_ids: [self_worth]
+    default_author: basil_whitlock
+  - brand_id: held_ground_press
+    topic_ids: [depression]
+    default_author: ruth_peral
+  - brand_id: held_ground_press
+    topic_ids: [compassion_fatigue]
+    default_author: marcus_reyes
+  - brand_id: held_ground_press
+    topic_ids: [boundaries]
+    default_author: caleb_dunmore
+
+  # ─── iron_gate_press (teacher: master_feung) ───
+  - brand_id: iron_gate_press
+    default_author: ana_bennett
+    author_pool:
+      - { author_id: ana_bennett, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 1 }
+      - { author_id: sofia_lowell, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 1 }
+      - { author_id: liam_estes, voice_lock: ODq5zmih8GrVes37Dizd, tier: 1 }
+      - { author_id: zane_santos, voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 2 }
+      - { author_id: hale_raman, voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 2 }
+      - { author_id: rowan_janssen, voice_lock: XB0fDUnXU5powFXDhCwa, tier: 2 }
+      - { author_id: cole_calder, voice_lock: XrExE9yKIg1WjnnlVkGX, tier: 2 }
+  - brand_id: iron_gate_press
+    topic_ids: [anxiety]
+    default_author: ana_bennett
+  - brand_id: iron_gate_press
+    topic_ids: [burnout]
+    default_author: sofia_lowell
+  - brand_id: iron_gate_press
+    topic_ids: [courage]
+    default_author: liam_estes
+  - brand_id: iron_gate_press
+    topic_ids: [imposter_syndrome]
+    default_author: zane_santos
+  - brand_id: iron_gate_press
+    topic_ids: [financial_anxiety]
+    default_author: hale_raman
+  - brand_id: iron_gate_press
+    topic_ids: [boundaries]
+    default_author: rowan_janssen
+  - brand_id: iron_gate_press
+    topic_ids: [self_worth]
+    default_author: cole_calder
+
+  # ─── koya_gate_press (teacher: joshin) ───  # NEW-ARTIFACT-JUSTIFIED brand row
+  - brand_id: koya_gate_press
+    default_author: soren_janssen
+    author_pool:
+      - { author_id: soren_janssen, voice_lock: pNInz6obpgDQGcFmaJgB, tier: 1 }
+      - { author_id: rafe_calder, voice_lock: piTKgcLEGmPE4e6mEKli, tier: 1 }
+      - { author_id: mira_frost, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 1 }
+      - { author_id: hannah_reed, voice_lock: z9fAnlkpzviPz146aGWa, tier: 1 }
+      - { author_id: adam_harlow, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 2 }
+      - { author_id: nico_zhao, voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 2 }
+      - { author_id: esme_sarto, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 2 }
+      - { author_id: jarra_stern, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 2 }
+  - brand_id: koya_gate_press
+    topic_ids: [overthinking]
+    default_author: soren_janssen
+  - brand_id: koya_gate_press
+    topic_ids: [anxiety]
+    default_author: rafe_calder
+  - brand_id: koya_gate_press
+    topic_ids: [self_worth]
+    default_author: mira_frost
+  - brand_id: koya_gate_press
+    topic_ids: [boundaries]
+    default_author: hannah_reed
+  - brand_id: koya_gate_press
+    topic_ids: [grief]
+    default_author: adam_harlow
+  - brand_id: koya_gate_press
+    topic_ids: [depression]
+    default_author: nico_zhao
+  - brand_id: koya_gate_press
+    topic_ids: [compassion_fatigue]
+    default_author: esme_sarto
+  - brand_id: koya_gate_press
+    topic_ids: [sleep_anxiety]
+    default_author: jarra_stern
+
+  # ─── night_architecture_books (teacher: master_sha) ───
+  - brand_id: night_architecture_books
+    default_author: priya_hale
+    author_pool:
+      - { author_id: priya_hale, voice_lock: z9fAnlkpzviPz146aGWa, tier: 1 }
+      - { author_id: eli_marsh, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 1 }
+      - { author_id: rhea_fairlie, voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 1 }
+      - { author_id: iona_okafor, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 2 }
+      - { author_id: daniel_adler, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 2 }
+      - { author_id: grace_keller, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 2 }
+  - brand_id: night_architecture_books
+    topic_ids: [sleep_anxiety]
+    default_author: priya_hale
+  - brand_id: night_architecture_books
+    topic_ids: [depression]
+    default_author: eli_marsh
+  - brand_id: night_architecture_books
+    topic_ids: [burnout]
+    default_author: rhea_fairlie
+  - brand_id: night_architecture_books
+    topic_ids: [somatic_healing]
+    default_author: iona_okafor
+  - brand_id: night_architecture_books
+    topic_ids: [anxiety]
+    default_author: daniel_adler
+  - brand_id: night_architecture_books
+    topic_ids: [self_worth]
+    default_author: grace_keller
+
+  # ─── open_vessel_press (teacher: sai_ma) ───
+  - brand_id: open_vessel_press
+    default_author: eli_harlow
+    author_pool:
+      - { author_id: eli_harlow, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 1 }
+      - { author_id: rhea_zhao, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 1 }
+      - { author_id: iona_sarto, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 1 }
+      - { author_id: daniel_stern, voice_lock: ODq5zmih8GrVes37Dizd, tier: 2 }
+      - { author_id: grace_fenwick, voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 2 }
+      - { author_id: tomas_whitlock, voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 2 }
+  - brand_id: open_vessel_press
+    topic_ids: [compassion_fatigue]
+    default_author: eli_harlow
+  - brand_id: open_vessel_press
+    topic_ids: [grief]
+    default_author: rhea_zhao
+  - brand_id: open_vessel_press
+    topic_ids: [self_worth]
+    default_author: iona_sarto
+  - brand_id: open_vessel_press
+    topic_ids: [boundaries]
+    default_author: daniel_stern
+  - brand_id: open_vessel_press
+    topic_ids: [depression]
+    default_author: grace_fenwick
+  - brand_id: open_vessel_press
+    topic_ids: [somatic_healing]
+    default_author: tomas_whitlock
+
+  # ─── present_tense_books (teacher: miki) ───
+  - brand_id: present_tense_books
+    default_author: ruth_grant
+    author_pool:
+      - { author_id: ruth_grant, voice_lock: onwK4e9ZLuTAKqWW03F9, tier: 1 }
+      - { author_id: marcus_vidal, voice_lock: pMsXgVXv3BLzUgSXRplE, tier: 1 }
+      - { author_id: caleb_rourke, voice_lock: pNInz6obpgDQGcFmaJgB, tier: 1 }
+      - { author_id: pia_kestrel, voice_lock: piTKgcLEGmPE4e6mEKli, tier: 2 }
+      - { author_id: lior_beck, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 2 }
+      - { author_id: linnea_chandra, voice_lock: z9fAnlkpzviPz146aGWa, tier: 2 }
+  - brand_id: present_tense_books
+    topic_ids: [social_anxiety]
+    default_author: ruth_grant
+  - brand_id: present_tense_books
+    topic_ids: [overthinking]
+    default_author: marcus_vidal
+  - brand_id: present_tense_books
+    topic_ids: [anxiety]
+    default_author: caleb_rourke
+  - brand_id: present_tense_books
+    topic_ids: [sleep_anxiety]
+    default_author: pia_kestrel
+  - brand_id: present_tense_books
+    topic_ids: [self_worth]
+    default_author: lior_beck
+  - brand_id: present_tense_books
+    topic_ids: [depression]
+    default_author: linnea_chandra
+
+  # ─── root_and_meridian_press (teacher: master_wu) ───
+  - brand_id: root_and_meridian_press
+    default_author: wren_bramble
+    author_pool:
+      - { author_id: wren_bramble, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 1 }
+      - { author_id: faye_tindale, voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 1 }
+      - { author_id: soren_kim, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 1 }
+      - { author_id: rafe_gable, voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 2 }
+      - { author_id: mira_yardley, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 2 }
+      - { author_id: hannah_renn, voice_lock: ODq5zmih8GrVes37Dizd, tier: 2 }
+      - { author_id: adam_adeyemi, voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 2 }
+  - brand_id: root_and_meridian_press
+    topic_ids: [burnout]
+    default_author: wren_bramble
+  - brand_id: root_and_meridian_press
+    topic_ids: [somatic_healing]
+    default_author: faye_tindale
+  - brand_id: root_and_meridian_press
+    topic_ids: [sleep_anxiety]
+    default_author: soren_kim
+  - brand_id: root_and_meridian_press
+    topic_ids: [depression]
+    default_author: rafe_gable
+  - brand_id: root_and_meridian_press
+    topic_ids: [self_worth]
+    default_author: mira_yardley
+  - brand_id: root_and_meridian_press
+    topic_ids: [boundaries]
+    default_author: hannah_renn
+  - brand_id: root_and_meridian_press
+    topic_ids: [anxiety]
+    default_author: adam_adeyemi
+
+  # Example: assign default author per brand when books are author-bound
+  # - brand_id: brand_zen_daily
+  #   default_author: luna_hart
+  # - brand_id: brand_resilience_path
+  #   default_author: kai_nakamura
+  # - brand_id: brand_depth_work
+  #   default_author: marcus_cole

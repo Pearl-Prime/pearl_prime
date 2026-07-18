@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pearl Prime — Brand Director Operations</title>
+  <style>
+    :root {
+      --bg: #0e0a06; --card: #1a1410; --card2: #201810; --border: rgba(180, 83, 9, 0.22);
+      --amber: #b45309; --amber2: #d97706; --cream: #faf6f0; --muted: rgba(250, 246, 240, 0.45);
+      --green: #22c55e; --yellow: #facc15; --blue: #60a5fa; --purple: #a78bfa;
+      --font: "Segoe UI", system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      --mono: ui-monospace, "DM Mono", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--cream); line-height: 1.55; min-height: 100vh; }
+    header { border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; background: linear-gradient(180deg, #120c08, var(--bg)); display: flex; align-items: center; gap: 1rem; }
+    header h1 { font-size: 1.1rem; font-weight: 600; color: var(--amber2); }
+    header .subtitle { font-size: 0.75rem; color: var(--muted); font-family: var(--mono); }
+    .page { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    .top-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .brand-name { font-size: 1.25rem; font-weight: 700; color: var(--cream); }
+    .week-badge { font-family: var(--mono); font-size: 0.7rem; background: rgba(180,83,9,0.2); color: var(--amber2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; }
+    .btn { padding: 7px 15px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--cream); font-size: 0.78rem; cursor: pointer; transition: all .15s; }
+    .btn:hover { background: rgba(180,83,9,0.25); border-color: var(--amber2); }
+    .btn.primary { background: rgba(180,83,9,0.35); border-color: var(--amber2); color: var(--amber2); font-weight: 600; }
+    .btn.primary:hover { background: rgba(180,83,9,0.55); }
+    .btn.sm { padding: 4px 11px; font-size: 0.72rem; }
+    .actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge { font-family: var(--mono); font-size: 0.65rem; padding: 3px 9px; border-radius: 10px; border: 1px solid; }
+    .badge-green { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.1); }
+    .slots-summary { background: rgba(180,83,9,0.10); border: 1px solid var(--border); border-radius: 8px; padding: 11px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem; font-size: 0.8rem; }
+    .slots-summary .lbl { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    .slots-summary .chip { font-family: var(--mono); font-size: 0.72rem; color: var(--cream); background: var(--card2); border: 1px solid var(--border); border-radius: 20px; padding: 3px 11px; }
+    .slots-summary .chip b { color: var(--amber2); }
+    .identity-strip { background: rgba(250,246,240,0.035); border: 1px solid rgba(180,83,9,0.16); border-radius: 8px; padding: 9px 14px; display: flex; gap: 10px; flex-wrap: wrap; margin: -0.5rem 0 1.5rem; font-size: 0.75rem; color: var(--muted); }
+    .identity-strip .identity-item { font-family: var(--mono); }
+    .identity-strip b { color: var(--cream); font-family: var(--font); font-weight: 600; }
+    .real-files { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; padding: 12px 16px; margin-bottom: 1.5rem; }
+    .rf-head { font-size: 0.85rem; font-weight: 700; color: var(--green); }
+    .rf-note { font-size: 0.7rem; color: var(--muted); margin: 3px 0 10px; }
+    .rf-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 6px 0; border-top: 1px solid rgba(34,197,94,0.12); }
+    .rf-plat { font-family: var(--mono); font-size: 0.66rem; color: var(--cream); min-width: 132px; }
+    .rf-link { font-family: var(--mono); font-size: 0.7rem; color: var(--green); text-decoration: none; border: 1px solid rgba(34,197,94,0.4); border-radius: 5px; padding: 3px 9px; }
+    .rf-link:hover { background: rgba(34,197,94,0.15); }
+    .rf-kb { color: var(--muted); }
+    .platform-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1.1rem; overflow: hidden; }
+    .platform-head { padding: 13px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .platform-icon { font-size: 1.2rem; }
+    .platform-name { font-size: 0.95rem; font-weight: 600; }
+    .platform-count { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+    .platform-dls { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    .platform-body { padding: 12px 16px 14px; }
+    .mode-tag { font-family: var(--mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+    .mode-bulk { color: var(--green); border-color: var(--green); background: rgba(34,197,94,0.08); }
+    .mode-single { color: var(--yellow); border-color: var(--yellow); background: rgba(250,204,21,0.07); }
+    .mode-rss { color: var(--blue); border-color: var(--blue); background: rgba(96,165,250,0.08); }
+    .howto { background: rgba(0,0,0,0.28); border: 1px solid rgba(180,83,9,0.16); border-radius: 7px; padding: 10px 13px; margin-bottom: 12px; }
+    .howto > summary { font-size: 0.66rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .07em; color: var(--amber2); cursor: pointer; list-style: none; outline: none; }
+    .howto > summary::-webkit-details-marker { display: none; }
+    .howto > summary::before { content: "▾ "; color: var(--muted); }
+    .howto:not([open]) > summary::before { content: "▸ "; }
+    .howto ol { margin: 9px 0 0; padding-left: 1.3rem; }
+    .howto li { font-size: 0.76rem; color: var(--cream); margin: 5px 0; }
+    .title-list { list-style: none; }
+    .title-list li { padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1); display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
+    .title-list li:last-child { border-bottom: none; }
+    .title-num { font-family: var(--mono); color: var(--muted); font-size: 0.65rem; min-width: 18px; align-self: flex-start; padding-top: 2px; }
+    .title-text { flex: 1; }
+    .title-sub { display: block; font-size: 0.66rem; color: var(--muted); }
+    .format-badge { font-size: 0.6rem; font-family: var(--mono); padding: 1px 7px; border-radius: 10px; border: 1px solid; white-space: nowrap; }
+    .fmt-ebook { border-color: var(--blue); color: var(--blue); }
+    .fmt-audiobook { border-color: var(--purple); color: var(--purple); }
+    .fmt-episode { border-color: var(--yellow); color: var(--yellow); }
+    .fmt-manga { border-color: var(--amber2); color: var(--amber2); }
+    .history-list { list-style: none; }
+    .history-row { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 9px; cursor: pointer; transition: all .15s; }
+    .history-row:hover { border-color: var(--amber2); background: rgba(180,83,9,0.12); }
+    .history-week { font-family: var(--mono); font-weight: 600; color: var(--amber2); min-width: 96px; }
+    .history-meta { font-size: 0.75rem; color: var(--muted); flex: 1; }
+    .history-go { font-size: 0.72rem; color: var(--amber2); }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
+    .book-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+    .book-cover { display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-size: 0.95rem; color: #fff; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .book-cover--text { min-height: 150px; padding: 14px; }
+    .book-cover--img { aspect-ratio: 5 / 8; padding: 0; background: #0a0a0f; overflow: hidden; }
+    .book-cover--img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .book-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .book-title { font-size: 0.85rem; font-weight: 600; }
+    .book-sub { font-size: 0.68rem; color: var(--muted); font-style: italic; }
+    .book-desc { font-size: 0.72rem; color: var(--muted); flex: 1; }
+    .book-angle { font-size: 0.66rem; font-family: var(--mono); color: var(--amber2); border-top: 1px solid rgba(180,83,9,0.15); padding-top: 7px; }
+    .section-title { font-size: 0.85rem; font-weight: 600; color: var(--cream); margin: 0 0 1rem; }
+    .viewing-note { font-size: 0.72rem; color: var(--muted); font-family: var(--mono); margin-bottom: 1rem; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1 id="ui-h1">Brand Director Operations</h1>
+    <div class="subtitle" id="ui-sub">Pearl Prime · weekly content packet</div>
+  </div>
+</header>
+
+<div class="page">
+  <div class="top-bar">
+    <span class="brand-name" id="brand-name">…</span>
+    <span class="week-badge" id="week-label">—</span>
+    <span class="badge badge-green" id="ui-handoff">Weekly handoff</span>
+    <div class="actions">
+      <button class="btn primary" id="ui-dlall" onclick="downloadAll()">⬇ Download all packets</button>
+      <button class="btn" id="ui-history" onclick="showView('history')">🕘 Review History</button>
+      <button class="btn" id="ui-catalog" onclick="showView('catalog')">📚 View Catalog</button>
+      <a class="btn" id="ui-weekly-os" href="brand_admin_weekly_os.html">📅 Weekly OS</a>
+    </div>
+  </div>
+  <div class="identity-strip" id="identity-strip"></div>
+
+  <div id="view-weekly">
+    <div class="viewing-note hidden" id="history-note"></div>
+    <div class="slots-summary" id="slots-summary"></div>
+    <div class="viewing-note" id="ui-files-note"></div>
+    <div id="real-files"></div>
+    <div id="platforms"></div>
+  </div>
+
+  <div id="view-history" class="hidden">
+    <div class="top-bar" style="margin-bottom:1rem">
+      <h3 class="section-title" id="ui-history-h" style="margin:0">Review History</h3>
+      <div class="actions"><button class="btn sm" id="ui-history-back" onclick="showView('weekly')">← Back to this week</button></div>
+    </div>
+    <p class="viewing-note" id="ui-history-intro">Every weekly packet since this brand launched. Click a week to reopen its packet.</p>
+    <ul class="history-list" id="history-list"></ul>
+  </div>
+
+  <div id="view-catalog" class="hidden">
+    <div class="top-bar" style="margin-bottom:1rem">
+      <h3 class="section-title" style="margin:0"><span id="ui-catalog-h">Full Catalog —</span> <span id="catalog-brand"></span></h3>
+      <div class="actions"><button class="btn sm" id="ui-catalog-back" onclick="showView('weekly')">← Back to this week</button></div>
+    </div>
+    <p class="viewing-note" id="catalog-count"></p>
+    <div class="catalog-grid" id="catalog-grid"></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ════════════════════════════════════════════════════════════════════════
+// Single-brand Brand Director Operations. Brand + market are FIXED from
+// ?brand=<unified_id> (lane suffix → market). ja_jp → Japanese UI + Japan
+// platform set; everything else → English + US set. Each platform shows ONE
+// download + action-only steps (exactly what the director does — no automatic
+// behavior, no jargon). Titles/metadata are deterministic placeholders.
+// ════════════════════════════════════════════════════════════════════════
+
+// ── UI chrome strings ──────────────────────────────────────────────────────
+const CHROME = {
+  en: {
+    h1:"Brand Director Operations", sub:"Pearl Prime · weekly content packet", handoff:"Weekly handoff",
+    dlAll:"⬇ Download all packets", history:"🕘 Review History", catalog:"📚 View Catalog",
+    reviewHistory:"Review History", historyIntro:"Every weekly packet since this brand launched. Click a week to reopen its packet.",
+    filesNote:"Each download is the exact platform intake file with all your titles' metadata. Attach your rendered manuscript, cover, and audio files (from your book production) at upload.",
+    realFiles:"Your real production files", realFilesNote:"The actual rendered books + assets for this week — download and upload as-is.",
+    back:"← Back to this week", fullCatalog:"Full Catalog —", openPacket:"Open packet →",
+    thisWeek:"This week", storeSep:" · ",
+    ebookNoun:"ebooks", audiobookNoun:"audiobooks", episodeNoun:"episodes", mangaNoun:"chapters",
+    fmt:{ebooks:"ebook", audiobooks:"audiobook", episodes:"episode", manga:"webtoon/manga"},
+    toStores:(c,noun,s)=>`<b>${c}</b> ${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`${n} ${noun} this week`,
+    howto:(l)=>`How to upload to ${l}`,
+    historyMeta:(e,a,p,tag)=>`${e} ebooks · ${a} audiobooks · ${p} episodes · ${tag}`,
+    thisWeekTag:"this week", weeksAgo:(n)=>`${n} week${n>1?"s":""} ago`,
+    catalogCount:(n)=>`${n} titles in catalog`,
+    viewingPast:(w)=>`Viewing past week <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ jump to current week",
+    weeklyOs:"📅 Weekly OS (setup rhythm)",
+    brandDirector:"Brand Director", productionPendingTitle:"Catalog ready, production files pending",
+    catalogReady:"Catalog ready", productionPending:"Production files pending", weeklyPacketPending:"Weekly packet pending", weeklyPacketReady:"Weekly packet ready",
+    catalogBlockedNote:"Catalog metadata is live. Production files and a shippable weekly packet are still pending.",
+    metadataOpsTitle:"Catalog metadata ops queue", metadataOpsNote:"Use these catalog metadata files to prepare store intake. Production files are still pending; upload only after rendered files arrive.",
+    metadataDownloads:"⬇ Download metadata CSVs", metadataDownload:"⬇ Metadata CSV",
+    openCatalogAction:"Open catalog", downloadsPending:"Downloads pending",
+  },
+  ja: {
+    h1:"ブランドディレクター運用", sub:"Pearl Prime · 週次コンテンツパケット", handoff:"週次ハンドオフ",
+    dlAll:"⬇ すべてのパケットをダウンロード", history:"🕘 履歴を見る", catalog:"📚 カタログを見る",
+    reviewHistory:"履歴", historyIntro:"このブランドの開始以降の週次パケットです。週を選ぶと、そのパケットをもう一度開けます。",
+    filesNote:"各ダウンロードは、全タイトルのメタデータを含む各プラットフォームの正式な入稿ファイルです。原稿・表紙・音声ファイル（制作済みの本のファイル）は、アップロード時に添付してください。",
+    realFiles:"制作済みファイル", realFilesNote:"今週の実際に制作された本・アセットです。ダウンロードしてそのままアップロードできます。",
+    back:"← 今週に戻る", fullCatalog:"カタログ —", openPacket:"パケットを開く →",
+    thisWeek:"今週", storeSep:"・",
+    ebookNoun:"冊", audiobookNoun:"タイトル", episodeNoun:"エピソード", mangaNoun:"話",
+    fmt:{ebooks:"電子書籍", audiobooks:"オーディオブック", episodes:"エピソード", manga:"ウェブトゥーン/マンガ"},
+    toStores:(c,noun,s)=>`<b>${c}</b>${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`今週 ${n}${noun}`,
+    howto:(l)=>`${l} の公開手順`,
+    historyMeta:(e,a,p,tag)=>`電子書籍${e}・オーディオブック${a}・エピソード${p}・${tag}`,
+    thisWeekTag:"今週", weeksAgo:(n)=>`${n}週間前`,
+    catalogCount:(n)=>`カタログ ${n}タイトル`,
+    viewingPast:(w)=>`過去の週 <b style="color:var(--amber2)">${w}</b> を表示中`, jumpCurrent:"→ 今週へ",
+    weeklyOs:"📅 週次OS（セットアップ）",
+    brandDirector:"ブランドディレクター", productionPendingTitle:"カタログ準備済み・制作ファイル待ち",
+    catalogReady:"カタログ準備済み", productionPending:"制作ファイル待ち", weeklyPacketPending:"週次パケット待ち", weeklyPacketReady:"週次パケット準備済み",
+    catalogBlockedNote:"カタログ情報は公開済みです。制作ファイルと公開可能な週次パケットはまだ待機中です。",
+    metadataOpsTitle:"カタログメタデータ運用キュー", metadataOpsNote:"ストア入稿準備用のカタログメタデータです。制作ファイルはまだ待機中のため、完成ファイル到着後にアップロードしてください。",
+    metadataDownloads:"⬇ メタデータCSVをダウンロード", metadataDownload:"⬇ メタデータCSV",
+    openCatalogAction:"カタログを開く", downloadsPending:"ダウンロード準備中",
+  },
+  "zh-Hant": {
+    h1:"品牌總監營運", sub:"Pearl Prime · 每週內容包", handoff:"每週交接",
+    dlAll:"⬇ 下載所有內容包", history:"🕘 檢視歷史", catalog:"📚 檢視書目",
+    reviewHistory:"歷史紀錄", historyIntro:"自本品牌上線以來的每週內容包。點選某一週即可重新開啟該週的內容包。",
+    filesNote:"每個下載都是各平台的正式上架檔案，內含所有書目的中繼資料。上傳時請附上你製作完成的稿件、封面與音訊檔案（來自你的書籍製作）。",
+    realFiles:"你的實際製作檔案", realFilesNote:"本週實際製作完成的書籍與素材——下載後即可直接上傳。",
+    back:"← 返回本週", fullCatalog:"完整書目 —", openPacket:"開啟內容包 →",
+    thisWeek:"本週", storeSep:"、",
+    ebookNoun:"本", audiobookNoun:"部", episodeNoun:"集", mangaNoun:"話",
+    fmt:{ebooks:"電子書", audiobooks:"有聲書", episodes:"單集", manga:"webtoon/漫畫"},
+    toStores:(c,noun,s)=>`<b>${c}</b>${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`本週 ${n}${noun}`,
+    howto:(l)=>`${l} 的上架教學`,
+    historyMeta:(e,a,p,tag)=>`電子書${e}・有聲書${a}・單集${p}・${tag}`,
+    thisWeekTag:"本週", weeksAgo:(n)=>`${n} 週前`,
+    catalogCount:(n)=>`書目共 ${n} 本`,
+    viewingPast:(w)=>`正在檢視過去的一週 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本週",
+    weeklyOs:"📅 每週營運節奏（Weekly OS）",
+    brandDirector:"品牌總監", productionPendingTitle:"書目已就緒，製作檔案待完成",
+    catalogReady:"書目已就緒", productionPending:"製作檔案待完成", weeklyPacketPending:"每週內容包待完成", weeklyPacketReady:"每週內容包已就緒",
+    catalogBlockedNote:"書目中繼資料已上線。製作檔案與可交付的每週內容包仍待完成。",
+    metadataOpsTitle:"書目中繼資料營運佇列", metadataOpsNote:"這些是商店上架準備用的書目中繼資料。製作檔案仍待完成；請在渲染檔案抵達後再上傳。",
+    metadataDownloads:"⬇ 下載中繼資料 CSV", metadataDownload:"⬇ 中繼資料 CSV",
+    openCatalogAction:"開啟書目", downloadsPending:"下載尚未開放",
+  },
+  "zh-Hans": {
+    h1:"品牌总监运营", sub:"Pearl Prime · 每周内容包", handoff:"每周交接",
+    dlAll:"⬇ 下载所有内容包", history:"🕘 查看历史", catalog:"📚 查看书目",
+    reviewHistory:"历史记录", historyIntro:"自本品牌上线以来的每周内容包。点击某一周即可重新打开该周的内容包。",
+    filesNote:"每个下载都是各平台的正式上架文件，包含所有书目的元数据。上传时请附上你制作完成的稿件、封面和音频文件（来自你的书籍制作）。",
+    realFiles:"你的实际制作文件", realFilesNote:"本周实际制作完成的书籍和素材——下载后即可直接上传。",
+    back:"← 返回本周", fullCatalog:"完整书目 —", openPacket:"打开内容包 →",
+    thisWeek:"本周", storeSep:"、",
+    ebookNoun:"本", audiobookNoun:"部", episodeNoun:"集", mangaNoun:"话",
+    fmt:{ebooks:"电子书", audiobooks:"有声书", episodes:"单集", manga:"webtoon/漫画"},
+    toStores:(c,noun,s)=>`<b>${c}</b>${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`本周 ${n}${noun}`,
+    howto:(l)=>`${l} 的上架教程`,
+    historyMeta:(e,a,p,tag)=>`电子书${e}・有声书${a}・单集${p}・${tag}`,
+    thisWeekTag:"本周", weeksAgo:(n)=>`${n} 周前`,
+    catalogCount:(n)=>`书目共 ${n} 本`,
+    viewingPast:(w)=>`正在查看过去的一周 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本周",
+    weeklyOs:"📅 每周运营节奏（Weekly OS）",
+    brandDirector:"品牌总监", productionPendingTitle:"书目已就绪，制作文件待完成",
+    catalogReady:"书目已就绪", productionPending:"制作文件待完成", weeklyPacketPending:"每周内容包待完成", weeklyPacketReady:"每周内容包已就绪",
+    catalogBlockedNote:"书目元数据已上线。制作文件与可交付的每周内容包仍待完成。",
+    metadataOpsTitle:"书目元数据运营队列", metadataOpsNote:"这些是商店上架准备用的书目元数据。制作文件仍待完成；请在渲染文件到位后再上传。",
+    metadataDownloads:"⬇ 下载元数据 CSV", metadataDownload:"⬇ 元数据 CSV",
+    openCatalogAction:"打开书目", downloadsPending:"下载尚未开放",
+  },
+};
+
+// ── Platform sets (each step = a single action the director takes) ─────────
+const PLATFORMS_US = [
+  { id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"Bulk upload", modeClass:"mode-bulk", dlLabel:"⬇ Google Play bulk CSV",
+    steps:[
+      "Download this packet.",
+      "Sign in to <b>Google Play Books Partner Center</b> → <b>Book Catalog</b>.",
+      "<b>Advanced options → Upload book list</b> → pick the book-list file from the packet.",
+      "<b>Advanced options → Upload content files → Choose files</b> → pick the book files from the packet.",
+      "Set each book to <b>For sale</b>.",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ KDP metadata CSV",
+    steps:[
+      "Download this packet.",
+      "Sign in to <b>KDP</b> → <b>+ Create → Kindle eBook</b>.",
+      "Copy the title's details from the packet into the fields (title, description, keywords, categories).",
+      "When KDP asks about AI content, answer <b>Yes</b>.",
+      "Upload that title's ebook file and cover from the packet.",
+      "Enter your price → <b>Publish</b>. Do this for each title.",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Apple metadata CSV",
+    steps:[
+      "Download this packet.",
+      "Sign in at <b>authors.apple.com</b> → <b>Submit a New Book</b>.",
+      "Upload the title's ebook file, sample, and cover from the packet.",
+      "Copy the title's details from the packet into the fields.",
+      "Enter your price → <b>Submit</b>. Do this for each title.",
+    ] },
+  { id:"inaudio", label:"Voices by INaudio", icon:"🎧", feed:"audiobooks", dlType:"audiobook_csv",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Audiobook metadata",
+    steps:[
+      "Download this packet.",
+      "Sign in at <b>inaudio.com</b> → <b>Add new audiobook</b>.",
+      "Copy the title's details from the packet into the fields.",
+      "Turn on <b>digital voice narration</b>.",
+      "Upload the cover, then the audio files from the packet in the order shown.",
+      "Enter your price → <b>Submit</b>. Do this for each title.",
+    ] },
+  { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"Weekly episode", modeClass:"mode-rss", dlLabel:"⬇ Episode sheet",
+    steps:[
+      "Download this packet.",
+      "Log in to <b>Spotify for Creators</b>.",
+      "<b>New Episode</b> → upload this week's audio file from the packet.",
+      "Copy the episode title, number, and description from the packet.",
+      "Set the date → <b>Publish</b>.",
+    ] },
+  { id:"webtoon", label:"Webtoon · Manga", icon:"🖼", feed:"manga", dlType:"manga_csv",
+    mode:"Weekly chapter", modeClass:"mode-rss", dlLabel:"⬇ Chapter sheet",
+    steps:[
+      "Download this packet.",
+      "Grab this week's rendered files from <b>Your real production files</b> below — the <b>vertical strip (.png)</b> for Webtoon and the <b>manga PDF</b> for print/KDP.",
+      "Webtoon Canvas (canvas.webtoons.com) → <b>Publish → New Episode</b> → upload the vertical strip image.",
+      "Copy the chapter title, number, and description from the packet.",
+      "For the print/KDP manga edition, upload the manga PDF as the manuscript.",
+      "Set the date → <b>Publish</b>. One chapter per week.",
+    ] },
+];
+
+const PLATFORMS_JP = [
+  { id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"一括アップロード", modeClass:"mode-bulk", dlLabel:"⬇ Google Play 一括CSV",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>Google Play Books パートナーセンター</b>にサインインし、<b>Book Catalog</b> を開きます。",
+      "<b>Advanced options → Upload book list</b> で、パケットのブックリストファイルを選びます。",
+      "<b>Advanced options → Upload content files → Choose files</b> で、パケットの本のファイルを選びます。",
+      "各本を <b>For sale</b> に設定します。",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ KDP メタデータCSV",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>KDP</b>（kdp.amazon.co.jp）にログインし、<b>「+ 作成」→「Kindle本（電子書籍）」</b>を選びます。",
+      "パケットの内容を各項目（タイトル・紹介文・キーワード・カテゴリー）に貼り付けます。",
+      "AIコンテンツの質問には <b>「はい」</b> と答えます。",
+      "パケットの原稿ファイルと表紙を <b>「電子書籍の原稿をアップロード」「電子書籍の表紙をアップロード」</b> からアップロードします。",
+      "価格を入力し <b>「Kindle本を出版」</b> をクリックします。本ごとに繰り返します。",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータCSV",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>authors.apple.com</b> にサインインし、<b>Submit a New Book</b> をクリックします。",
+      "パケットのEPUBファイル・サンプル・表紙をアップロードします。",
+      "パケットの内容を各項目に貼り付けます（言語は Japanese）。",
+      "価格を設定し <b>Submit</b> をクリックします。本ごとに繰り返します。",
+    ] },
+  { id:"kobo", label:"楽天Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータCSV",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>Kobo Writing Life</b>（kobo.com/writinglife）にログインします。",
+      "<b>「電子書籍を作成」</b> をクリックし、パケットの内容（タイトル・著者・紹介文）を貼り付けます。",
+      "パケットのEPUBファイルと表紙をアップロードします。",
+      "価格を入力し <b>「電子書籍を出版」</b> をクリックします。本ごとに繰り返します。",
+    ] },
+  { id:"audiobook_jp", label:"audiobook.jp", icon:"🎧", feed:"audiobooks", dlType:"audiobook_csv",
+    mode:"申し込み", modeClass:"mode-single", dlLabel:"⬇ オーディオブック メタデータ",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>オトバンクの配信申し込みフォーム</b>（business.audiobook.jp）を開きます。",
+      "パケットの内容（タイトル・著者・紹介文・カテゴリー）を入力します。",
+      "パケットの音声ファイルと表紙を添付します。",
+      "ナレーションは <b>AI音声</b> であることを申告します（パケットの定型文を使います）。",
+      "申し込みを送信します。",
+    ] },
+  { id:"podcast", label:"ポッドキャスト · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"毎週エピソード", modeClass:"mode-rss", dlLabel:"⬇ エピソード表",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>Spotify for Creators</b>（creators.spotify.com）にログインします。",
+      "<b>「新しいエピソード」</b> から、パケットの音声ファイルをアップロードします。",
+      "パケットのエピソードタイトル・番号・概要を貼り付けます。",
+      "日付を設定し <b>「公開」</b> をクリックします。",
+    ] },
+  { id:"webtoon", label:"ウェブトゥーン · マンガ", icon:"🖼", feed:"manga", dlType:"manga_csv",
+    mode:"毎週1話", modeClass:"mode-rss", dlLabel:"⬇ 話データ",
+    steps:[
+      "このパケットをダウンロードします。",
+      "下の <b>制作済みファイル</b> から今週のファイルを取得します — ウェブトゥーン用の <b>縦スクロール画像（.png）</b> と、印刷/KDP用の <b>マンガPDF</b> です。",
+      "<b>LINEマンガ インディーズ</b> または <b>ピッコマ</b>、<b>Webtoon Canvas</b> で <b>新規エピソード</b> を作成し、縦スクロール画像をアップロードします。",
+      "パケットの話タイトル・番号・概要を貼り付けます。",
+      "印刷/KDP版はマンガPDFを原稿としてアップロードします。",
+      "日付を設定し <b>「公開」</b> します。週1話のペースで繰り返します。",
+    ] },
+];
+
+// Traditional Chinese (Taiwan/HK) — international self-publishing set, localized.
+const PLATFORMS_TW = [
+  { id:"google_play", label:"Google Play 圖書", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"批次上傳", modeClass:"mode-bulk", dlLabel:"⬇ Google Play 批次 CSV",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>Google Play 圖書合作夥伴中心</b> → <b>圖書目錄</b>。",
+      "<b>進階選項 → 上傳書單</b>，選擇內容包中的書單檔案。",
+      "<b>進階選項 → 上傳內容檔案 → 選擇檔案</b>，選擇內容包中的書籍檔案。",
+      "將每本書設為 <b>販售中</b>。",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ KDP 中繼資料 CSV",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>KDP</b> → <b>+ 建立 → Kindle 電子書</b>。",
+      "將內容包中的書名、簡介、關鍵字、分類複製到對應欄位。",
+      "當 KDP 詢問 AI 內容時，選擇 <b>是</b>。",
+      "上傳該書的電子書檔案與封面（來自內容包）。",
+      "輸入售價 → <b>出版</b>。每本書重複此步驟。",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Apple 中繼資料 CSV",
+    steps:[
+      "下載這個內容包。",
+      "在 <b>authors.apple.com</b> 登入 → <b>Submit a New Book</b>。",
+      "上傳該書的電子書檔案、試閱與封面（來自內容包）。",
+      "將內容包中的書籍資訊複製到對應欄位（語言選 Chinese (Traditional)）。",
+      "輸入售價 → <b>Submit</b>。每本書重複此步驟。",
+    ] },
+  { id:"kobo", label:"樂天 Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Kobo 中繼資料 CSV",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>Kobo Writing Life</b>（kobo.com/writinglife）。",
+      "點選 <b>建立新電子書</b>，貼上內容包中的書名、作者與簡介。",
+      "上傳內容包中的 EPUB 檔案與封面。",
+      "輸入售價 → <b>出版</b>。每本書重複此步驟。",
+    ] },
+  { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"每週單集", modeClass:"mode-rss", dlLabel:"⬇ 單集表",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>Spotify for Creators</b>。",
+      "<b>新增單集</b> → 上傳本週的音訊檔案（來自內容包）。",
+      "複製內容包中的單集標題、集數與說明。",
+      "設定日期 → <b>發佈</b>。",
+    ] },
+  { id:"webtoon", label:"Webtoon · 漫畫", icon:"🖼", feed:"manga", dlType:"manga_csv",
+    mode:"每週一話", modeClass:"mode-rss", dlLabel:"⬇ 章節表",
+    steps:[
+      "下載這個內容包。",
+      "從下方 <b>你的實際製作檔案</b> 取得本週檔案——Webtoon 用的 <b>直式長條圖（.png）</b>，以及印刷/KDP 用的 <b>漫畫 PDF</b>。",
+      "在 <b>LINE Webtoon Canvas</b>（canvas.webtoons.com）→ <b>發佈 → 新增單集</b>，上傳直式長條圖。",
+      "複製內容包中的章節標題、集數與說明。",
+      "印刷/KDP 版請上傳漫畫 PDF 作為稿件。",
+      "設定日期 → <b>發佈</b>。每週一話。",
+    ] },
+];
+
+// Simplified Chinese (China/SG) — international self-publishing set, localized.
+const PLATFORMS_CN = [
+  { id:"google_play", label:"Google Play 图书", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"批量上传", modeClass:"mode-bulk", dlLabel:"⬇ Google Play 批量 CSV",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>Google Play 图书合作伙伴中心</b> → <b>图书目录</b>。",
+      "<b>高级选项 → 上传书单</b>，选择内容包中的书单文件。",
+      "<b>高级选项 → 上传内容文件 → 选择文件</b>，选择内容包中的书籍文件。",
+      "将每本书设为 <b>在售</b>。",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ KDP 元数据 CSV",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>KDP</b> → <b>+ 创建 → Kindle 电子书</b>。",
+      "将内容包中的书名、简介、关键词、分类复制到对应字段。",
+      "当 KDP 询问 AI 内容时，选择 <b>是</b>。",
+      "上传该书的电子书文件与封面（来自内容包）。",
+      "输入售价 → <b>出版</b>。每本书重复此步骤。",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Apple 元数据 CSV",
+    steps:[
+      "下载这个内容包。",
+      "在 <b>authors.apple.com</b> 登录 → <b>Submit a New Book</b>。",
+      "上传该书的电子书文件、试读与封面（来自内容包）。",
+      "将内容包中的书籍信息复制到对应字段（语言选 Chinese (Simplified)）。",
+      "输入售价 → <b>Submit</b>。每本书重复此步骤。",
+    ] },
+  { id:"kobo", label:"Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Kobo 元数据 CSV",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>Kobo Writing Life</b>（kobo.com/writinglife）。",
+      "点击 <b>创建新电子书</b>，粘贴内容包中的书名、作者与简介。",
+      "上传内容包中的 EPUB 文件与封面。",
+      "输入售价 → <b>出版</b>。每本书重复此步骤。",
+    ] },
+  { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"每周单集", modeClass:"mode-rss", dlLabel:"⬇ 单集表",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>Spotify for Creators</b>。",
+      "<b>新增单集</b> → 上传本周的音频文件（来自内容包）。",
+      "复制内容包中的单集标题、集数与说明。",
+      "设置日期 → <b>发布</b>。",
+    ] },
+  { id:"webtoon", label:"Webtoon · 漫画", icon:"🖼", feed:"manga", dlType:"manga_csv",
+    mode:"每周一话", modeClass:"mode-rss", dlLabel:"⬇ 章节表",
+    steps:[
+      "下载这个内容包。",
+      "从下方 <b>你的实际制作文件</b> 获取本周文件——Webtoon 用的 <b>竖版长条图（.png）</b>，以及印刷/KDP 用的 <b>漫画 PDF</b>。",
+      "在 <b>Webtoon Canvas</b>（canvas.webtoons.com）→ <b>发布 → 新增单集</b>，上传竖版长条图。",
+      "复制内容包中的章节标题、集数与说明。",
+      "印刷/KDP 版请上传漫画 PDF 作为稿件。",
+      "设置日期 → <b>发布</b>。每周一话。",
+    ] },
+];
+
+const CATALOG_START = new Date(2026, 4, 4);
+const WEEKLY_EBOOKS = 8, WEEKLY_AUDIOBOOKS = 3, WEEKLY_EPISODES = 2, WEEKLY_MANGA = 1;
+
+// Catalog content (placeholder) — per market so the view reads naturally.
+const CAT_EN = {
+  titles:["The Open Vessel","Returning to Stillness","Devotion Without Religion","The Unhurried Heart","Emptiness as Refuge","The Ground That Holds You","Surrender Is Not Defeat","The Quiet That Remains","Becoming Transparent","The Grace of Enough","Resting in What Is","The End of Seeking","Tender Awareness","The Sacred Ordinary","Letting the Bottom Fall Out","Home Before Thought","The Mercy of Slowness","Nothing to Fix","The Field of Allowing","Trust the Unfolding","The Wordless Yes","Soft Front, Strong Back","The Permission to Pause","Faith Without Certainty"],
+  descs:["A contemplative path back to presence — short chapters for the overwhelmed.","Burnout recovery without dogma: rest as a spiritual practice.","Devotion stripped of religion — for the spiritually homesick.","Nervous-system stillness for people who can't stop bracing.","Letting go when control was the only thing that kept you safe.","Identity rebuild after everything you organized your life around fell away."],
+  angles:["For the spiritually weary","Burnout recovery · no dogma","Nervous-system rest","Identity rebuild after collapse","Overthinkers welcome","Grief-literate stillness"],
+  keywords:["spiritual practice","mindfulness for burnout","contemplative living","letting go","inner stillness","devotion without religion","nervous system"],
+  cats:["Religion & Spirituality","Self-Help","Body, Mind & Spirit"],
+};
+const CAT_JA = {
+  titles:["空(うつ)の器","静けさへ還る","宗教なき祈り","急がない心","余白という安らぎ","あなたを支える大地","明け渡しは敗北ではない","残りつづける静寂","透明になる","足るを知る恵み","あるがままに憩う","探し求めることの終わり"],
+  descs:["圧倒された心のための、現在(いま)へ還る短い瞑想の道。","教義のない燃え尽き回復——休息を実践として。","宗教を脱いだ祈り——心のよりどころを求める人へ。","緊張を手放せない神経系のための静けさ。","制御だけが安全だった人へ、手放すということ。","拠り所を失ったあとの、自己の再構築。"],
+  angles:["心が疲れた人へ","燃え尽き回復・教義なし","神経系を休める","崩壊からの再生","考えすぎる人へ","悲しみに寄り添う静けさ"],
+  keywords:["スピリチュアル","マインドフルネス","瞑想","手放す","内なる静けさ","燃え尽き回復","自律神経"],
+  cats:["宗教・スピリチュアル","自己啓発","心理学"],
+};
+const CAT_ZH_HANT = {
+  titles:["空的容器","回歸寧靜","無宗教的虔敬","不慌不忙的心","以空為庇護","承接你的大地","臣服不是失敗","留存的靜默","變得透明","足夠的恩典","安住於當下","追尋的終點"],
+  descs:["為不堪負荷的心而寫——回到當下的觀想之路，篇章短小。","沒有教條的倦怠復原：把休息當作一種修行。","脫去宗教的虔敬——寫給心靈上無家可歸的人。","為無法停止緊繃的神經系統而寫的寧靜。","當掌控是唯一讓你安全的東西時，學習放手。","當你賴以組織人生的一切崩解後，重建自我。"],
+  angles:["寫給心靈疲憊的人","倦怠復原・沒有教條","安頓神經系統","崩解之後的重建","歡迎想太多的人","懂得哀傷的寧靜"],
+  keywords:["靈性修行","為倦怠而生的正念","觀想式生活","放手","內在寧靜","無宗教的虔敬","神經系統"],
+  cats:["宗教與靈性","自我成長","身心靈"],
+};
+const CAT_ZH_HANS = {
+  titles:["空的容器","回归宁静","无宗教的虔敬","不慌不忙的心","以空为庇护","承接你的大地","臣服不是失败","留存的静默","变得透明","足够的恩典","安住于当下","追寻的终点"],
+  descs:["为不堪重负的心而写——回到当下的观想之路，篇章短小。","没有教条的倦怠恢复：把休息当作一种修行。","脱去宗教的虔敬——写给心灵上无家可归的人。","为无法停止紧绷的神经系统而写的宁静。","当掌控是唯一让你安全的东西时，学习放手。","当你赖以组织人生的一切崩解后，重建自我。"],
+  angles:["写给心灵疲惫的人","倦怠恢复・没有教条","安顿神经系统","崩解之后的重建","欢迎想太多的人","懂得哀伤的宁静"],
+  keywords:["灵性修行","为倦怠而生的正念","观想式生活","放手","内在宁静","无宗教的虔敬","神经系统"],
+  cats:["宗教与灵性","自我成长","身心灵"],
+};
+const COVER_HUES = [18, 32, 268, 200, 150, 340];
+
+// ── Market state (set in boot) ──────────────────────────────────────────────
+let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press", directorName:"", directorId:"", directorStatus:""};
+let MARKET = "us", LANG = "en", CURRENCY = "usd", PLATFORMS = PLATFORMS_US, T = CHROME.en, CAT = CAT_EN;
+let REAL_CATALOG = null; // the brand's actual books (from brand_catalogs/<base>.json) when available
+let REAL_DELIVERY = null; // the brand's actual rendered files (from brand_deliveries/<base>.json) when available
+let PACKET_BRIDGE = null;
+let PACKET_BLOCK = null;
+const DELIV_PLAT = {kdp:"Amazon KDP", google_play:"Google Play", apple_books:"Apple Books", kobo:"Rakuten Kobo", audiobook:"Audiobook", audible:"Audible", google_play_audiobook:"Google Play Audiobook", spotify_podcast:"Podcast · Spotify", apple_podcasts:"Podcast · Apple", webtoon:"Webtoon", piccoma:"Piccoma", line_manga:"LINE Manga", pearl_news:"Pearl News"};
+let currentWeekIdx = null;
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function productionPendingDetail(s){
+  return String(s || "")
+    .replace(/^catalog ready,\s*production files pending\s*[—-]\s*/i, "")
+    .replace(/packet dir is a seed scaffold\s*\(([^)]*)\);\s*no shippable content yet/i, "Seed scaffold detected ($1); rendered production files have not been published yet.")
+    .replace(/no shippable content yet/ig, "rendered production files have not been published yet");
+}
+function packetBridgeStatus(brandId){
+  if(!PACKET_BRIDGE)return null;
+  const blocked=PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[brandId];
+  if(blocked)return{state:"blocked",reason:blocked.reason||"Catalog ready, production files pending."};
+  const ready=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[brandId];
+  if(ready&&ready.buildable)return{state:"ready",info:ready};
+  return null;
+}
+// TRUTH-LABELING INVARIANT (harbor-line-production-truth-labeling):
+// production_files_ready === false is AUTHORITATIVE. A packet-bridge "ready" verdict must
+// never let catalog metadata be presented as shippable production files. The bridge only
+// ever adds detail to a pending reason — it can never clear one.
+function resolvePacketBlock(bridgeVerdict, delivery){
+  const pendingProduction = !!(delivery && delivery.production_files_ready === false);
+  if(bridgeVerdict && bridgeVerdict.state === "blocked") return bridgeVerdict;
+  if(pendingProduction) return {state:"blocked", reason:"Catalog ready, production files pending."};
+  return bridgeVerdict;
+}
+function isPacketBlocked(){ return PACKET_BLOCK&&PACKET_BLOCK.state==="blocked"; }
+function hasCatalogMetadata(){ return !!(REAL_CATALOG && REAL_CATALOG.length); }
+function canDownloadMetadata(){ return !isPacketBlocked() || hasCatalogMetadata(); }
+function applyPacketBlockUi(){
+  const blocked=isPacketBlocked();
+  const metadataLive=hasCatalogMetadata();
+  const downloadsDisabled=blocked&&!metadataLive;
+  const dlAll=document.getElementById("ui-dlall");
+  if(dlAll){
+    dlAll.disabled=downloadsDisabled;
+    dlAll.style.opacity=downloadsDisabled?"0.45":"1";
+    dlAll.style.cursor=downloadsDisabled?"not-allowed":"";
+    dlAll.textContent=blocked&&metadataLive?(T.metadataDownloads||"Download metadata CSVs"):blocked?(T.downloadsPending||"Downloads pending"):T.dlAll;
+  }
+  let banner=document.getElementById("packet-block-banner");
+  if(blocked){
+    const msg=productionPendingDetail(PACKET_BLOCK.reason)||"No shippable content yet.";
+    const title=T.productionPendingTitle||"Catalog ready, production files pending";
+    if(!banner){
+      banner=document.createElement("div");
+      banner.id="packet-block-banner";
+      banner.className="viewing-note";
+      banner.style.cssText="border:1px solid var(--amber2);padding:12px;margin-bottom:12px;color:var(--amber2)";
+      document.getElementById("view-weekly").insertBefore(banner,document.getElementById("slots-summary"));
+    }
+    banner.innerHTML=`<strong>${title}.</strong> ${esc(msg)}${metadataLive?`<br><span style="color:var(--muted)">${esc(T.metadataOpsNote||"Catalog metadata is available for ops prep.")}</span>`:""}`;
+  }else if(banner){ banner.remove(); }
+}
+function pad(a, n){ a = (a||[]).slice(0,n); while (a.length < n) a.push(""); return a; }
+
+// ── ISO-week helpers ──────────────────────────────────────────────────────
+function isoWeek(d) {
+  const t = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(t.getFullYear(), 0, 4);
+  const wn = 1 + Math.round(((t - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  return `${t.getFullYear()}-W${String(wn).padStart(2,"0")}`;
+}
+function weekHistory() {
+  const out = [], now = new Date();
+  let d = new Date(CATALOG_START.getTime());
+  while (d <= now) { const l = isoWeek(d); if (!out.includes(l)) out.push(l); d = new Date(d.getTime() + 7*86400000); }
+  return out.reverse();
+}
+function currentWeekLabel() { return isoWeek(new Date()); }
+function weekLabelFor(idx){ const h = weekHistory(); return (idx==null) ? currentWeekLabel() : h[idx]; }
+
+// ── Deterministic catalog ───────────────────────────────────────────────────
+function slug(s){ const x = String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); return x || "title"; }
+function isbnFor(i){ return "978" + String(1000000000 + i * 7919).slice(0,10); }
+function priceFor(i){ const lo = i % 3 === 0; if (CURRENCY === "jpy") return lo ? "500" : "700"; if (CURRENCY === "twd") return lo ? "150" : "220"; if (CURRENCY === "cny") return lo ? "25" : "35"; return lo ? "4.99" : "5.99"; }
+function audioPrice(){ return CURRENCY === "jpy" ? "1500" : CURRENCY === "twd" ? "350" : CURRENCY === "cny" ? "45" : "9.99"; }
+
+function renderIdentityStrip() {
+  const el = document.getElementById("identity-strip");
+  if (!el) return;
+  const director = BRAND.directorName || "—";
+  const packetLabel = isPacketBlocked()
+    ? T.productionPending
+    : (PACKET_BLOCK && PACKET_BLOCK.state === "ready" ? T.weeklyPacketReady : T.weeklyPacketPending);
+  el.innerHTML =
+    `<span class="identity-item">${T.brandDirector}: <b>${esc(director)}</b></span>` +
+    `<span class="identity-item">${T.catalogReady}: <b>${REAL_CATALOG && REAL_CATALOG.length ? REAL_CATALOG.length : "—"}</b></span>` +
+    `<span class="identity-item">${packetLabel}</span>`;
+}
+
+function buildCatalog() {
+  if (REAL_CATALOG && REAL_CATALOG.length) {
+    return REAL_CATALOG.map((b, i) => ({
+      title: b.title, subtitle: b.subtitle || "", desc: b.desc || "", angle: b.angle || "",
+      longDesc: b.long_desc || b.desc || "", author: b.author || "", cover: b.cover || "",
+      isbn: b.isbn || "PENDING", price: b.price || priceFor(i), audioP: b.audioPrice || audioPrice(),
+      keywords: (b.keywords && b.keywords.length) ? b.keywords : CAT.keywords,
+      cats: (b.bisac && b.bisac.length) ? b.bisac : CAT.cats,
+      hue: COVER_HUES[i % COVER_HUES.length],
+    }));
+  }
+  return CAT.titles.map((title, i) => ({
+    title, subtitle: "", desc: CAT.descs[i % CAT.descs.length], angle: CAT.angles[i % CAT.angles.length],
+    longDesc: CAT.descs[i % CAT.descs.length], author: "",
+    isbn: isbnFor(i), price: priceFor(i), audioP: audioPrice(),
+    keywords: CAT.keywords, cats: CAT.cats, hue: COVER_HUES[i % COVER_HUES.length],
+  }));
+}
+function buildPacket(weekIdx) {
+  const cat = buildCatalog(), n = cat.length;
+  const start = (weekIdx * WEEKLY_EBOOKS) % n;
+  const ebooks = [];
+  for (let i = 0; i < WEEKLY_EBOOKS; i++) ebooks.push(cat[(start + i) % n]);
+  const audiobooks = ebooks.slice(0, WEEKLY_AUDIOBOOKS);
+  const episodes = ebooks.slice(0, WEEKLY_EPISODES).map((b, i) => ({...b, epNum: weekIdx * WEEKLY_EPISODES + i + 1}));
+  // Manga / webtoon: one chapter per week (matches devotion_path weekly cadence).
+  const manga = ebooks.slice(0, WEEKLY_MANGA).map((b, i) => ({...b, epNum: weekIdx * WEEKLY_MANGA + i + 1}));
+  return { ebooks, audiobooks, episodes, manga };
+}
+function packetFor(idx){ const h = weekHistory(); const realIdx = (idx==null) ? 0 : idx; return buildPacket(h.length - 1 - realIdx); }
+function feedFor(pkt, p){ return pkt[p.feed] || []; }
+
+// ── Downloads ──────────────────────────────────────────────────────────────
+function dl(name, text, mime) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], {type: mime || "text/plain"}));
+  a.download = name; a.click();
+}
+function row(arr, sep){ return arr.map(v => sep === "\t" ? String(v) : `"${String(v).replace(/"/g,'""')}"`).join(sep || ","); }
+function buildMetadataFile(p, week, pkt) {
+  const items = feedFor(pkt, p), pc = `price_${CURRENCY}`;
+  const langTag = CURRENCY === "jpy" ? "ja-JP" : CURRENCY === "twd" ? "zh-TW" : CURRENCY === "cny" ? "zh-CN" : "en-US", pub = BRAND.label;
+  const au = b => b.author || pub;                 // narrating teacher, else the imprint (composite)
+  const stem = b => b.file_stem || b.book_id || slug(b.title);
+  const ef = b => `${stem(b)}.epub`, cf = b => `${stem(b)}.jpg`;
+  if (p.dlType === "gp_booklist") {
+    // Google Play Books bulk book-list (tab-delimited flat file) — full metadata.
+    const head = ["identifier","title","subtitle","contributor","description","language",pc,"publisher","bisac_1","bisac_2","bisac_3","maturity_rating","content_file","cover_file"];
+    const rows = items.map(b => [b.isbn||"PENDING", b.title, b.subtitle, au(b), b.longDesc||b.desc, langTag, b.price, pub, ...pad(b.cats,3), "EVERYONE", ef(b), `${stem(b)}_frontcover.jpg`]);
+    return {name:`google_play_booklist__${BRAND.id}__${week}.txt`, text:[head, ...rows].map(r => row(r,"\t")).join("\n"), mime:"text/plain"};
+  }
+  if (p.dlType === "kdp_csv") {
+    // Amazon KDP — the fields a director copy-pastes into the Kindle eBook form.
+    const head = ["title","subtitle","author","publisher","description","language","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3",pc,"ai_text","ai_images","ai_translation","manuscript_file","cover_file"];
+    const rows = items.map(b => [b.title, b.subtitle, au(b), pub, b.longDesc||b.desc, langTag, ...pad(b.keywords,7), ...pad(b.cats,3), b.price, "Yes","Yes","No", ef(b), cf(b)]);
+    return {name:`kdp_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (p.dlType === "ebook_csv") {
+    // Apple Books / Rakuten Kobo — web-form fields + the files to attach.
+    const head = ["title","subtitle","author","publisher","description","language","category",pc,"isbn","epub_file","sample_file","cover_file"];
+    const rows = items.map(b => [b.title, b.subtitle, au(b), pub, b.longDesc||b.desc, langTag, (b.cats&&b.cats[0])||CAT.cats[0], b.price, b.isbn||"PENDING", ef(b), `${stem(b)}_sample.epub`, cf(b)]);
+    return {name:`${p.id}_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (p.dlType === "audiobook_csv") {
+    const head = ["title","author","narrator","publisher","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
+    const rows = items.map(b => [b.title, au(b), LANG==="ja"?"AI音声":LANG==="zh-Hant"?"AI語音":LANG==="zh-Hans"?"AI语音":"Digital voice (AI)", pub, b.isbn||"PENDING", b.longDesc||b.desc, (b.cats&&b.cats[0])||CAT.cats[0], b.audioP||audioPrice(), "Yes", `${stem(b)}/01_opening.mp3; ${stem(b)}/chapters/*.mp3; ${stem(b)}/99_closing.mp3; ${stem(b)}/retail_sample.mp3`, `${stem(b)}_cover.jpg`]);
+    return {name:`${p.id}_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (p.dlType === "podcast_csv") {
+    const head = ["episode_number","episode_title","publish_date","description","explicit","audio_file"];
+    const rows = items.map(b => [b.epNum, `Ep ${b.epNum}: ${b.title}`, week, b.longDesc||b.desc, "No", `${BRAND.id}_ep${String(b.epNum).padStart(3,"0")}.mp3`]);
+    return {name:`podcast_episodes__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (p.dlType === "manga_csv") {
+    // Webtoon / manga — the fields a director copy-pastes into a Webtoon Canvas /
+    // LINE Manga / Piccoma episode, plus the rendered files to attach (the
+    // vertical strip .png for webtoon, the manga .pdf for print/KDP).
+    const head = ["chapter_number","chapter_title","publish_date","description","genre","webtoon_strip_file","manga_pdf_file"];
+    const rows = items.map(b => [b.epNum, `Ch ${b.epNum}: ${b.title}`, week, b.longDesc||b.desc, "Healing / Iyashikei", `${BRAND.id}_ch${String(b.epNum).padStart(3,"0")}_webtoon.png`, `${BRAND.id}_ch${String(b.epNum).padStart(3,"0")}_manga.pdf`]);
+    return {name:`webtoon_manga_chapters__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+}
+function dlPacket(pid) {
+  if (!canDownloadMetadata()) return;
+  const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
+  const p = PLATFORMS.find(x => x.id === pid);
+  const f = p && buildMetadataFile(p, week, pkt);
+  if (f) dl(f.name, f.text, f.mime);
+}
+function downloadAll() {
+  if (!canDownloadMetadata()) return;
+  const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
+  const head = ["channel","format","title","id","description",`price_${CURRENCY}`,"week","brand"];
+  const rows = [head];
+  PLATFORMS.forEach(p => feedFor(pkt, p).forEach(b =>
+    rows.push([p.label, T.fmt[p.feed], (p.feed==="episodes"?`Ep ${b.epNum}: ${b.title}`:p.feed==="manga"?`Ch ${b.epNum}: ${b.title}`:b.title), (b.isbn||b.epNum||""), b.desc, (b.price||audioPrice()), week, BRAND.label])));
+  const prefix = isPacketBlocked() ? "catalog_metadata" : "all_packets";
+  dl(`${prefix}__${BRAND.id}__${week}.csv`, rows.map(r => row(r)).join("\n"), "text/csv");
+}
+
+// ── Renders ───────────────────────────────────────────────────────────────
+function renderWeekly() {
+  const idx = currentWeekIdx, week = weekLabelFor(idx), pkt = packetFor(idx);
+  document.getElementById("brand-name").textContent = BRAND.label;
+  document.getElementById("week-label").textContent = week;
+  renderIdentityStrip();
+
+  const note = document.getElementById("history-note");
+  if (idx == null) note.classList.add("hidden");
+  else { note.classList.remove("hidden"); note.innerHTML = `${T.viewingPast(week)} &nbsp;·&nbsp; <a href="#" onclick="goThisWeek();return false" style="color:var(--amber2)">${T.jumpCurrent}</a>`; }
+
+  if (isPacketBlocked()) {
+    const metadataLive = hasCatalogMetadata();
+    const catalogCount = metadataLive ? REAL_CATALOG.length : 0;
+    document.getElementById("slots-summary").innerHTML =
+      `<span class="lbl">📦 ${T.productionPendingTitle}</span>` +
+      `<span class="chip">${T.catalogCount(catalogCount)}</span>` +
+      `<span class="chip">${metadataLive ? (T.metadataOpsTitle||"Catalog metadata ops queue") : T.productionPending}</span>`;
+    document.getElementById("ui-files-note").textContent = metadataLive ? T.metadataOpsNote : T.catalogBlockedNote;
+    document.getElementById("real-files").innerHTML = "";
+    const statusCard =
+      `<div class="platform-card"><div class="platform-body">` +
+      `<div class="section-title">${T.productionPendingTitle}</div>` +
+      `<p class="viewing-note">${esc(productionPendingDetail(PACKET_BLOCK.reason) || "No shippable content yet.")}</p>` +
+      `<button class="btn sm primary" onclick="showView('catalog')">${T.openCatalogAction}</button>` +
+      `</div></div>`;
+    const metadataCards = metadataLive ? PLATFORMS.map(p => {
+      const items = feedFor(pkt, p);
+      const fmtClass = p.feed === "audiobooks" ? "fmt-audiobook" : p.feed === "episodes" ? "fmt-episode" : p.feed === "manga" ? "fmt-manga" : "fmt-ebook";
+      const noun = p.feed === "audiobooks" ? T.audiobookNoun : p.feed === "episodes" ? T.episodeNoun : p.feed === "manga" ? T.mangaNoun : T.ebookNoun;
+      const titles = items.map((b, i) => {
+        const label = p.feed === "episodes" ? `Ep ${b.epNum}: ${b.title}` : p.feed === "manga" ? `Ch ${b.epNum}: ${b.title}` : b.title;
+        const sub = b.subtitle ? `<span class="title-sub">${esc(b.subtitle)}</span>` : "";
+        return `<li><span class="title-num">${i+1}.</span><span class="title-text">${esc(label)}${sub}</span><span class="format-badge ${fmtClass}">${T.fmt[p.feed]}</span></li>`;
+      }).join("");
+      return `<div class="platform-card">
+        <div class="platform-head">
+          <span class="platform-icon">${p.icon || "📦"}</span>
+          <span class="platform-name">${p.label}</span>
+          <span class="mode-tag ${p.modeClass}">${T.metadataOpsTitle||"Catalog metadata ops queue"}</span>
+          <span class="platform-count">${T.countThisWeek(items.length, noun)}</span>
+          <span class="platform-dls"><button class="btn sm primary" onclick="dlPacket('${p.id}')">${T.metadataDownload||"Metadata CSV"}</button></span>
+        </div>
+        <div class="platform-body">
+          <p class="viewing-note">${esc(T.metadataOpsNote||"Production files are still pending.")}</p>
+          <ul class="title-list">${titles}</ul>
+        </div>
+      </div>`;
+    }).join("") : "";
+    document.getElementById("platforms").innerHTML = statusCard + metadataCards;
+    applyPacketBlockUi();
+    return;
+  }
+
+  document.getElementById("ui-files-note").textContent = T.filesNote;
+  const ebookStores = PLATFORMS.filter(p => p.feed === "ebooks").map(p => p.label).join(T.storeSep);
+  const audioStore = (PLATFORMS.find(p => p.feed === "audiobooks") || {}).label || "";
+  const podStore = (PLATFORMS.find(p => p.feed === "episodes") || {}).label || "";
+  document.getElementById("slots-summary").innerHTML =
+    `<span class="lbl">📦 ${T.thisWeek}</span>` +
+    `<span class="chip">${T.toStores(pkt.ebooks.length, T.ebookNoun, ebookStores)}</span>` +
+    (audioStore ? `<span class="chip">${T.toStores(pkt.audiobooks.length, T.audiobookNoun, audioStore)}</span>` : "") +
+    (podStore ? `<span class="chip">${T.toStores(pkt.episodes.length, T.episodeNoun, podStore)}</span>` : "");
+
+  document.getElementById("platforms").innerHTML = PLATFORMS.map(p => {
+    const items = feedFor(pkt, p);
+    const fmtClass = p.feed === "audiobooks" ? "fmt-audiobook" : p.feed === "episodes" ? "fmt-episode" : p.feed === "manga" ? "fmt-manga" : "fmt-ebook";
+    const noun = p.feed === "audiobooks" ? T.audiobookNoun : p.feed === "episodes" ? T.episodeNoun : p.feed === "manga" ? T.mangaNoun : T.ebookNoun;
+    const titles = items.map((b, i) => {
+      const label = p.feed === "episodes" ? `Ep ${b.epNum}: ${b.title}` : p.feed === "manga" ? `Ch ${b.epNum}: ${b.title}` : b.title;
+      const sub = b.subtitle ? `<span class="title-sub">${esc(b.subtitle)}</span>` : "";
+      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${esc(label)}${sub}</span><span class="format-badge ${fmtClass}">${T.fmt[p.feed]}</span></li>`;
+    }).join("");
+    return `<div class="platform-card">
+      <div class="platform-head">
+        <span class="platform-icon">${p.icon || "📦"}</span>
+        <span class="platform-name">${p.label}</span>
+        <span class="mode-tag ${p.modeClass}">${p.mode}</span>
+        <span class="platform-count">${T.countThisWeek(items.length, noun)}</span>
+        <span class="platform-dls"><button class="btn sm primary" ${!canDownloadMetadata()?"disabled style=\"opacity:.45;cursor:not-allowed\"":""} onclick="dlPacket('${p.id}')">${isPacketBlocked()?(T.metadataDownload||"Metadata CSV"):p.dlLabel}</button></span>
+      </div>
+      <div class="platform-body">
+        <details class="howto" open>
+          <summary>${T.howto(p.label)}</summary>
+          <ol>${p.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+        </details>
+        <ul class="title-list">${titles}</ul>
+      </div>
+    </div>`;
+  }).join("");
+
+  // Real production files — actual rendered books/assets, when this brand has them.
+  const rfEl = document.getElementById("real-files");
+  if (REAL_DELIVERY && REAL_DELIVERY.weeks) {
+    const wk = REAL_DELIVERY.latest_week || Object.keys(REAL_DELIVERY.weeks).sort().pop();
+    const plats = REAL_DELIVERY.weeks[wk] || {};
+    const groups = Object.entries(plats).map(([pk, files]) => {
+      const links = (files || []).filter(f => !/\.(md|cue)$/i.test(f.file))
+        .map(f => `<a class="rf-link" href="${f.url}" download>⬇ ${esc(f.file)} <span class="rf-kb">${f.kb}KB</span></a>`).join(" ");
+      return links ? `<div class="rf-group"><span class="rf-plat">${DELIV_PLAT[pk] || pk}</span>${links}</div>` : "";
+    }).join("");
+    rfEl.innerHTML = groups
+      ? `<div class="real-files"><div class="rf-head">✅ ${T.realFiles} — ${wk}</div><div class="rf-note">${T.realFilesNote}</div>${groups}</div>`
+      : "";
+  } else { rfEl.innerHTML = ""; }
+  applyPacketBlockUi();
+}
+
+function renderHistory() {
+  const h = weekHistory();
+  document.getElementById("history-list").innerHTML = h.map((wk, i) => {
+    const tag = i === 0 ? T.thisWeekTag : T.weeksAgo(i);
+    return `<li class="history-row" onclick="openWeek(${i})">
+      <span class="history-week">${wk}</span>
+      <span class="history-meta">${T.historyMeta(WEEKLY_EBOOKS, WEEKLY_AUDIOBOOKS, WEEKLY_EPISODES, tag)}</span>
+      <span class="history-go">${T.openPacket}</span>
+    </li>`;
+  }).join("");
+}
+
+function renderCatalog() {
+  const cat = buildCatalog();
+  document.getElementById("catalog-brand").textContent = BRAND.label;
+  document.getElementById("catalog-count").textContent = T.catalogCount(cat.length);
+  document.getElementById("catalog-grid").innerHTML = cat.map(b => `
+    <div class="book-card">
+      <div class="book-cover ${b.cover ? "book-cover--img" : "book-cover--text"}"${b.cover ? "" : ` style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))"`}>${b.cover ? `<img src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy" onerror="const p=this.parentElement;p.classList.remove('book-cover--img');p.classList.add('book-cover--text');p.style.background='linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))';p.textContent=this.alt;this.remove();">` : esc(b.title)}</div>
+      <div class="book-body">
+        <div class="book-title">${esc(b.title)}</div>
+        ${b.subtitle ? `<div class="book-sub">${esc(b.subtitle)}</div>` : ""}
+        <div class="book-desc">${esc(b.desc)}</div>
+        ${b.angle ? `<div class="book-angle">▸ ${esc(b.angle)}</div>` : ""}
+      </div>
+    </div>`).join("");
+}
+
+// ── View switching ──────────────────────────────────────────────────────────
+function showView(name) {
+  ["weekly","history","catalog"].forEach(v => document.getElementById("view-" + v).classList.toggle("hidden", v !== name));
+  if (name === "history") renderHistory();
+  if (name === "catalog") renderCatalog();
+  window.scrollTo(0, 0);
+}
+function openWeek(i) { currentWeekIdx = (i === 0) ? null : i; renderWeekly(); showView("weekly"); }
+function goThisWeek() { currentWeekIdx = null; renderWeekly(); }
+
+// ── Chrome + boot ────────────────────────────────────────────────────────────
+function setText(id, txt){ const e = document.getElementById(id); if (e) e.textContent = txt; }
+function applyChrome() {
+  document.documentElement.lang = LANG;
+  document.title = "Pearl Prime — " + T.h1;
+  setText("ui-h1", T.h1); setText("ui-sub", T.sub); setText("ui-handoff", T.handoff);
+  setText("ui-dlall", T.dlAll); setText("ui-history", T.history); setText("ui-catalog", T.catalog);
+  setText("ui-weekly-os", T.weeklyOs);
+  setText("ui-history-h", T.reviewHistory); setText("ui-history-back", T.back); setText("ui-history-intro", T.historyIntro);
+  setText("ui-files-note", T.filesNote);
+  setText("ui-catalog-h", T.fullCatalog); setText("ui-catalog-back", T.back);
+}
+function humanize(id){ return id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/,"").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()); }
+async function liveAssignmentFor(id) {
+  try {
+    const r = await fetch(`api/onboarding/assignment?brand=${encodeURIComponent(id)}`, {cache:"no-store"});
+    if (r.ok) {
+      const j = await r.json();
+      return j && j.brand_director_name ? j : null;
+    }
+  } catch (_e) {}
+  return null;
+}
+async function boot() {
+  const qid = new URLSearchParams(location.search).get("brand");
+  const id = qid || BRAND.id;
+  const lane = (id.match(/_([a-z]{2}_[a-z]{2})$/) || [])[1] || "en_us";
+  // Lane suffix → market + language. Traditional (zh-Hant) and Simplified
+  // (zh-Hans) are distinct scripts and never interchangeable.
+  if (lane === "ja_jp") { MARKET = "jp"; LANG = "ja"; CURRENCY = "jpy"; PLATFORMS = PLATFORMS_JP; CAT = CAT_JA; }
+  else if (lane === "zh_tw" || lane === "zh_hk") { MARKET = "tw"; LANG = "zh-Hant"; CURRENCY = "twd"; PLATFORMS = PLATFORMS_TW; CAT = CAT_ZH_HANT; }
+  else if (lane === "zh_cn" || lane === "zh_sg") { MARKET = "cn"; LANG = "zh-Hans"; CURRENCY = "cny"; PLATFORMS = PLATFORMS_CN; CAT = CAT_ZH_HANS; }
+  else { MARKET = "us"; LANG = "en"; CURRENCY = "usd"; PLATFORMS = PLATFORMS_US; CAT = CAT_EN; }
+  T = CHROME[LANG];
+  applyChrome();
+  let bridge = {};
+  try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}
+  const info = bridge[id] || {};
+  const liveAssignment = await liveAssignmentFor(id);
+  BRAND = {
+    id,
+    label: (liveAssignment && liveAssignment.display_brand) || info.d || humanize(id),
+    directorName: (liveAssignment && liveAssignment.brand_director_name) || info.brand_director_name || "",
+    directorId: (liveAssignment && liveAssignment.brand_director_id) || info.brand_director_id || "",
+    directorStatus: (liveAssignment && liveAssignment.brand_director_status) || info.brand_director_status || "",
+  };
+  const wos = document.getElementById("ui-weekly-os");
+  if (wos) wos.href = "/brand_admin_weekly_os.html?brand=" + encodeURIComponent(id);
+  // All 14 registry lanes — a lane missing here never loads brand_deliveries/<base>.json and
+  // so would silently skip the production_files_ready guard above.
+  const base = id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr|de_de|fr_fr|it_it|hu_hu)$/, "");
+  // Pull the brand's REAL catalog (book plans are en_US only, so US/English view only).
+  REAL_CATALOG = null;
+  if (LANG === "en") {
+    try { const r = await fetch(`brand_catalogs/${base}.json`, {cache:"no-store"}); if (r.ok) { const j = await r.json(); if (j && j.books && j.books.length) REAL_CATALOG = j.books; } } catch (_e) {}
+  }
+  // Pull the brand's REAL rendered files (only brands with rendered output have a feed).
+  REAL_DELIVERY = null;
+  try { const r = await fetch(`brand_deliveries/${base}.json`, {cache:"no-store"}); if (r.ok) { const j = await r.json(); if (j && j.weeks) REAL_DELIVERY = j; } } catch (_e) {}
+  if (REAL_DELIVERY) {
+    if (REAL_DELIVERY.display_brand) BRAND.label = REAL_DELIVERY.display_brand;
+    if (!BRAND.directorName && REAL_DELIVERY.brand_director_name) BRAND.directorName = REAL_DELIVERY.brand_director_name;
+    if (!BRAND.directorId && REAL_DELIVERY.brand_director_id) BRAND.directorId = REAL_DELIVERY.brand_director_id;
+    if (!BRAND.directorStatus && REAL_DELIVERY.brand_director_status) BRAND.directorStatus = REAL_DELIVERY.brand_director_status;
+  }
+  try { const r = await fetch("brand_admin_weekly_packets.json", {cache:"no-store"}); if (r.ok) PACKET_BRIDGE = await r.json(); } catch (_e) {}
+  PACKET_BLOCK = resolvePacketBlock(packetBridgeStatus(id), REAL_DELIVERY);
+  renderWeekly();
+}
+boot();
+</script>
+</body>
+</html>

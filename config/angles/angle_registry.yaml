@@ -1,0 +1,1689 @@
+# Angle Integration Layer — Registry v2 (V4.7).
+# Authority: docs/specs/ANGLE_REGISTRY_SSOT_V2_SPEC.md
+# Catalog source of truth: docs/plans/ANGLE_CATALOG_V2_2026-05-20.md (91 named angles)
+# Journey schema source: docs/plans/OPD-116-117_BOOK_ANGLE_AS_JOURNEY_PLAN_2026-05-20.md §3.2
+#
+# Schema v2 (additive; v1 readers still parse this file):
+#   - Universal angles: full structural fields (arc_variant, framing_mode, chapter_1_role_bias,
+#     integration_reinforcement_type) + display_name + core_frame + journey block.
+#   - Topic-specific angles: declare parent_universal: <UNIVERSAL_ID>. Structural fields and
+#     journey block are inherited from the parent chain (resolved by
+#     phoenix_v4.planning.angle_resolver.resolve_angle_with_inheritance).
+#     Any leaf field overrides the inherited value.
+#   - Soft-deprecated v1 angles carry deprecated: true + successor_angle_id; books in flight
+#     continue to resolve them, new books should use the successor.
+#
+# Arc-First remains authoritative. Angle chooses variant (arc_path when set).
+# Journey content (core_mantras values, layer_progression.assertion text, named_object_by_topic
+# values) is TODO — authored by Pearl_Editor as commissioned per angle × topic × persona.
+
+schema_version: 2
+authority: docs/specs/ANGLE_REGISTRY_SSOT_V2_SPEC.md
+catalog_source: docs/plans/ANGLE_CATALOG_V2_2026-05-20.md
+journey_schema_source: docs/plans/OPD-116-117_BOOK_ANGLE_AS_JOURNEY_PLAN_2026-05-20.md
+
+# ── Valid analogy_lens values (per OPD-116-117 §2.5) ──────────────────────────
+# fractal | dimensional_revelation | doorway | machine_slowly_revealed |
+# mythic_recurrence | progressive_compression | book_is_the_angle
+#
+# ── Valid framing_mode values (per phoenix_v4/planning/angle_bias.py) ─────────
+# debunk | framework | reveal | leverage
+#
+# ── Topic clusters (15) ───────────────────────────────────────────────────────
+# anxiety, overthinking, burnout, imposter_syndrome, grief, self_worth, shame,
+# depression, relationships, trauma, purpose_meaning, habits_behavior,
+# spirituality, body_image, money, addiction, adhd, divorce, courage,
+# compassion_fatigue, boundaries, sleep_anxiety, social_anxiety,
+# relationship_anxiety, financial_anxiety
+# (named_object_by_topic uses the canonical topic_id; nulls are TODO Pearl_Editor commissions.)
+
+angles:
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 20 UNIVERSAL ANGLES (per ANGLE_CATALOG_V2 §2)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  VERDICT:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Verdict"
+    core_frame: "The reader is living a verdict that was passed before they could speak"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: mythic_recurrence
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  SILENT_VERDICT:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Silent Verdict"
+    core_frame: "A judgment narrating in your voice that you've never heard out loud"
+    successor_of: WRONG_PROBLEM
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: mythic_recurrence
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  INVISIBLE_THRESHOLD:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: orientation
+    framing_mode: reveal
+    display_name: "The Invisible Threshold"
+    core_frame: "Every symptom is a doorway you've been standing at without knowing"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: doorway
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  FAMILIAR_RETURN:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Familiar Return"
+    core_frame: "Repetition becomes identity — patterns harden into the self"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: fractal
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  BORROWED_COORDINATES:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: orientation
+    framing_mode: framework
+    display_name: "The Borrowed Coordinates"
+    core_frame: "Suffering from an outdated internal map you inherited"
+    successor_of: MAP_PROMISE
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: progressive_compression
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  INHERITED_ECHO:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Inherited Echo"
+    core_frame: "Personality as transmission — echoes through generations"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: dimensional_revelation
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  UNNAMED_THIRST:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Unnamed Thirst"
+    core_frame: "Destructive behaviors as misrecognized legitimate hunger"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: fractal
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  USEFUL_SIGNAL:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Useful Signal"
+    core_frame: "Symptoms as information beneath the noise"
+    successor_of: HIDDEN_TRUTH
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: progressive_compression
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  SILENT_SIGNAL:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Silent Signal"
+    core_frame: "The quiet message under the loud one"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: progressive_compression
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  PERFORMANCE:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Performance"
+    core_frame: "You no longer know where performing ends and self begins"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: machine_slowly_revealed
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  PRACTICED_PERFORMANCE:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Practiced Performance"
+    core_frame: "Survival adaptation that hardened into identity"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: machine_slowly_revealed
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  GRADUAL_DISAPPEARANCE:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Gradual Disappearance"
+    core_frame: "Slow drift from meaning, embodiment, self"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: mythic_recurrence
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  INTERNAL_SPLIT:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Internal Split"
+    core_frame: "Suffering when parts of self separate (mind/body, adult/child)"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: dimensional_revelation
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  IDENTITY_SPLIT:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Identity Split"
+    core_frame: "Two selves running on parallel tracks, never meeting"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: dimensional_revelation
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  INVISIBLE_PULL:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    display_name: "The Invisible Pull"
+    core_frame: "Currents shaping life unconsciously — gravity you can feel but can't see"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: fractal
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  DOWNWARD_PULL:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: mechanism_focus
+    framing_mode: leverage
+    display_name: "The Downward Pull"
+    core_frame: "Specific gravity well of depression/collapse"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: fractal
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  CONCEPT_ARCHITECTURE:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: orientation
+    framing_mode: framework
+    display_name: "The Concept Architecture"
+    core_frame: "Your life is structurally generated — suffering is architectural before emotional"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: machine_slowly_revealed
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  MIRROR_REVERSAL:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    display_name: "The Mirror Reversal"
+    core_frame: "What you reject in others is what you cannot bear in yourself (and vice versa)"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: doorway
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  TIME_LOOP_BREAK:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: mechanism_focus
+    framing_mode: leverage
+    display_name: "The Time Loop Break"
+    core_frame: "The trap is not the event — it's the loop replaying it; the doorway is interruption"
+    journey:
+      named_object_by_topic:
+        anxiety: null
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: mythic_recurrence
+      core_mantras:
+        - "TODO: Pearl_Editor commission — 3-5 mantras"
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "TODO"
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "TODO"
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "TODO"
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "TODO"
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "TODO"
+
+  ENGINE:
+    arc_variant: ARC_STANDARD_A_v6
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: mechanism_focus
+    framing_mode: leverage
+    display_name: "The Engine"
+    core_frame: "Something running you from the inside, not just a system you observe"
+    successor_of: ONE_LEVER
+    journey:
+      named_object_by_topic:
+        anxiety: "The Mechanism"
+        overthinking: null
+        burnout: null
+        imposter_syndrome: null
+        grief: null
+        self_worth: null
+        shame: null
+        depression: null
+        relationship_anxiety: null
+        social_anxiety: null
+        sleep_anxiety: null
+        boundaries: null
+        courage: null
+        financial_anxiety: null
+        compassion_fatigue: null
+        body_image: null
+        money: null
+        addiction: null
+        adhd: null
+        divorce: null
+      analogy_lens: machine_slowly_revealed
+      core_mantras:
+        - "It's not YOU. It's The Mechanism."
+        - "The Mechanism speaks in your voice."
+        - "The Mechanism turns temporary pain into permanent identity."
+        - "Awareness interrupts The Mechanism."
+        - "The moment you can observe it, you are already larger than it."
+        - "The doorway opens the moment observation returns."
+      layer_progression:
+        - layer: 1
+          phase: definition
+          chapter_range: [1, 2]
+          assertion: "It's not YOU. It's The Mechanism."
+        - layer: 2
+          phase: pattern_recognition
+          chapter_range: [3, 5]
+          assertion: "The Mechanism follows the same shape every time."
+        - layer: 3
+          phase: identity_implications
+          chapter_range: [6, 7]
+          assertion: "What protected you once may now be imprisoning you."
+        - layer: 4
+          phase: civilizational_spiritual
+          chapter_range: [8, 10]
+          assertion: "The Mechanism doesn't only run in you. It runs in systems."
+          optional_for_topics: [sleep_anxiety, boundaries, courage]
+        - layer: 5
+          phase: transcendence_reintegration
+          chapter_range: [11, 12]
+          assertion: "The moment you can observe The Mechanism, you are already larger than it."
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 71 TOPIC-SPECIFIC ANGLES (per ANGLE_CATALOG_V2 §3)
+  # Each declares parent_universal; structural fields + journey are inherited.
+  # Override only display_name, core_frame, use_when (semantic, not structural).
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # ── Identity & self-worth (§3) ────────────────────────────────────────────
+  BORROWED_SELF:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Borrowed Self"
+    core_frame: "Identity built from others' expectations"
+    use_when: "Identity built from others' expectations"
+
+  PERFORMED_IDENTITY:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Performed Identity"
+    core_frame: "The whole self has become performance"
+    use_when: "The whole self has become performance"
+
+  INHERITED_SMALLNESS:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Inherited Smallness"
+    core_frame: "Self-image limited by family transmission"
+    use_when: "Self-image limited by family transmission"
+
+  MISTAKEN_ORIGIN:
+    parent_universal: INVISIBLE_THRESHOLD
+    display_name: "The Mistaken Origin"
+    core_frame: "The reader has misidentified the starting point of their story"
+    use_when: "The reader has misidentified the starting point of their story"
+
+  COLLAPSED_CENTER:
+    parent_universal: INTERNAL_SPLIT
+    display_name: "The Collapsed Center"
+    core_frame: "The self has folded inward — no place to stand from"
+    use_when: "The self has folded inward — no place to stand from"
+
+  # ── Anxiety & fear (§3) ───────────────────────────────────────────────────
+  PREDICTED_CATASTROPHE:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Predicted Catastrophe"
+    core_frame: "Anticipatory anxiety — rehearsing disaster"
+    use_when: "Anticipatory anxiety — rehearsing disaster"
+
+  PROTECTIVE_ALARM:
+    parent_universal: USEFUL_SIGNAL
+    display_name: "The Protective Alarm"
+    core_frame: "Anxiety as legitimate alarm misfiring in modern context"
+    use_when: "Anxiety topic; reframe symptom as information"
+    journey:
+      # 12-shape flagship ladder (2026-07-07): one distinct callback per chapter
+      # ch2-12; leaf progression overrides the inherited 5-layer USEFUL_SIGNAL
+      # ladder (merge_angle_journey leaf-wins). Bodies live in
+      # atoms/gen_z_professionals/anxiety/ANGLE_CALLBACK/PROTECTIVE_ALARM/level_N.yaml.
+      layer_progression:
+      - {layer: 1, phase: definition, chapter_range: [2, 2], assertion: "The alarm is not broken — it is misfiring, and the witness can notice the tightening before you react."}
+      - {layer: 2, phase: pattern_recognition, chapter_range: [3, 3], assertion: "The alarm follows the same four-step shape every time — scan, predict, brace, recover incomplete."}
+      - {layer: 3, phase: pattern_recognition, chapter_range: [4, 4], assertion: "The brace is a budget — chemistry spent before the mind gets a vote."}
+      - {layer: 4, phase: pattern_recognition, chapter_range: [5, 5], assertion: "The scan never checks ownership — it spends your body on emergencies that were never yours."}
+      - {layer: 5, phase: identity_implications, chapter_range: [6, 6], assertion: "Identity is not the enemy — confusing the alarm for identity is."}
+      - {layer: 6, phase: identity_implications, chapter_range: [7, 7], assertion: "The catastrophe you keep living through is the rehearsal, not the event."}
+      - {layer: 7, phase: civilizational_spiritual, chapter_range: [8, 8], assertion: "The alarm is loyal and it is outdated — both can be true without either being an indictment of you."}
+      - {layer: 8, phase: civilizational_spiritual, chapter_range: [9, 9], assertion: "Aspiration is a mood; what survives a bad week is infrastructure."}
+      - {layer: 9, phase: civilizational_spiritual, chapter_range: [10, 10], assertion: "When the alarm rings in a new building, it is new data, not old doom."}
+      - {layer: 10, phase: transcendence_reintegration, chapter_range: [11, 11], assertion: "Activation and competence can coexist — you can be loud inside and precise outside."}
+      - {layer: 11, phase: transcendence_reintegration, chapter_range: [12, 12], assertion: "A body that can tell alarm from information does not need silence to be free."}
+
+  REHEARSED_DISASTER:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Rehearsed Disaster"
+    core_frame: "The mind running simulations against an imagined room"
+    use_when: "The mind running simulations against an imagined room"
+
+  IMAGINED_THREAT:
+    parent_universal: SILENT_VERDICT
+    display_name: "The Imagined Threat"
+    core_frame: "Threats that exist only inside the body's prediction"
+    use_when: "Threats that exist only inside the body's prediction"
+
+  NERVOUS_ARCHITECTURE:
+    parent_universal: CONCEPT_ARCHITECTURE
+    display_name: "The Nervous Architecture"
+    core_frame: "Anxiety as the structure of the nervous system itself"
+    use_when: "Anxiety as the structure of the nervous system itself"
+
+  # ── Burnout & overachievement (§3) ────────────────────────────────────────
+  PRODUCTIVE_COLLAPSE:
+    parent_universal: GRADUAL_DISAPPEARANCE
+    display_name: "The Productive Collapse"
+    core_frame: "Looking functional while collapsing"
+    use_when: "Looking functional while collapsing"
+
+  ENDLESS_PROVING:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Endless Proving"
+    core_frame: "Worth contingent on continuous demonstration"
+    use_when: "Worth contingent on continuous demonstration"
+
+  HOLLOW_ACHIEVEMENT:
+    parent_universal: UNNAMED_THIRST
+    display_name: "The Hollow Achievement"
+    core_frame: "Reaching the goal and feeling nothing"
+    use_when: "Reaching the goal and feeling nothing"
+
+  USEFUL_EXHAUSTION:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Useful Exhaustion"
+    core_frame: "Exhaustion as identity-confirming evidence"
+    use_when: "Exhaustion as identity-confirming evidence"
+
+  INVISIBLE_COST:
+    parent_universal: CONCEPT_ARCHITECTURE
+    display_name: "The Invisible Cost"
+    core_frame: "The price the body has been paying that no ledger tracks"
+    use_when: "The price the body has been paying that no ledger tracks"
+
+  # ── Relationships & attachment (§3) ───────────────────────────────────────
+  FAMILIAR_WOUND:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Familiar Wound"
+    core_frame: "Picking the same wound in different people"
+    use_when: "Picking the same wound in different people"
+
+  PERFORMED_CLOSENESS:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Performed Closeness"
+    core_frame: "Intimacy that is technique not presence"
+    use_when: "Intimacy that is technique not presence"
+
+  REPEATED_STRANGER:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Repeated Stranger"
+    core_frame: "The new person who is the old one wearing a different face"
+    use_when: "The new person who is the old one wearing a different face"
+
+  UNSPOKEN_CONTRACT:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Unspoken Contract"
+    core_frame: "Implicit relational agreements no one named"
+    use_when: "Implicit relational agreements no one named"
+
+  BORROWED_LONELINESS:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Borrowed Loneliness"
+    core_frame: "Inherited isolation pattern from family of origin"
+    use_when: "Inherited isolation pattern from family of origin"
+
+  # ── Trauma & healing (§3) ─────────────────────────────────────────────────
+  FROZEN_MOMENT:
+    parent_universal: TIME_LOOP_BREAK
+    display_name: "The Frozen Moment"
+    core_frame: "A specific instant the system never released"
+    use_when: "A specific instant the system never released"
+
+  LOYAL_ADAPTATION:
+    parent_universal: PROTECTIVE_ALARM
+    display_name: "The Loyal Adaptation"
+    core_frame: "Symptoms as devoted survival mechanisms"
+    use_when: "Symptoms as devoted survival mechanisms"
+
+  USEFUL_ARMOR:
+    parent_universal: PROTECTIVE_ALARM
+    display_name: "The Useful Armor"
+    core_frame: "Protection that outlived its threat"
+    use_when: "Protection that outlived its threat"
+
+  INTERRUPTED_SELF:
+    parent_universal: INTERNAL_SPLIT
+    display_name: "The Interrupted Self"
+    core_frame: "The version of you the trauma stopped from finishing"
+    use_when: "The version of you the trauma stopped from finishing"
+
+  CARRIED_WEIGHT:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Carried Weight"
+    core_frame: "Pain you didn't generate but kept carrying"
+    use_when: "Pain you didn't generate but kept carrying"
+
+  # ── Purpose & meaning (§3) ────────────────────────────────────────────────
+  DEFERRED_LIFE:
+    parent_universal: GRADUAL_DISAPPEARANCE
+    display_name: "The Deferred Life"
+    core_frame: "Living in 'after this, then I'll really start'"
+    use_when: "Living in 'after this, then I'll really start'"
+
+  MISTAKEN_DIRECTION:
+    parent_universal: BORROWED_COORDINATES
+    display_name: "The Mistaken Direction"
+    core_frame: "Heading somewhere you never actually chose"
+    use_when: "Heading somewhere you never actually chose"
+
+  INHERITED_AMBITION:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Inherited Ambition"
+    core_frame: "Pursuing what was wanted FOR you"
+    use_when: "Pursuing what was wanted FOR you"
+
+  MISSING_PERMISSION:
+    parent_universal: SILENT_VERDICT
+    display_name: "The Missing Permission"
+    core_frame: "Waiting for an authorization that won't arrive externally"
+    use_when: "Waiting for an authorization that won't arrive externally"
+
+  UNLIVED_VERSION:
+    parent_universal: INTERNAL_SPLIT
+    display_name: "The Unlived Version"
+    core_frame: "The self that has not been allowed to surface"
+    use_when: "The self that has not been allowed to surface"
+
+  # ── Grief & loss (§3) ─────────────────────────────────────────────────────
+  UNFINISHED_GOODBYE:
+    parent_universal: TIME_LOOP_BREAK
+    display_name: "The Unfinished Goodbye"
+    core_frame: "The conversation never had"
+    use_when: "The conversation never had"
+
+  CONTINUED_PRESENCE:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Continued Presence"
+    core_frame: "The loved one still operating in the body"
+    use_when: "The loved one still operating in the body"
+
+  SUSPENDED_TIME:
+    parent_universal: TIME_LOOP_BREAK
+    display_name: "The Suspended Time"
+    core_frame: "Time stopped at the moment of loss"
+    use_when: "Time stopped at the moment of loss"
+
+  UNNAMED_AFTER:
+    parent_universal: INVISIBLE_THRESHOLD
+    display_name: "The Unnamed After"
+    core_frame: "The life that exists post-loss that no one taught you to live"
+    use_when: "The life that exists post-loss that no one taught you to live"
+
+  REARRANGED_WORLD:
+    parent_universal: CONCEPT_ARCHITECTURE
+    display_name: "The Rearranged World"
+    core_frame: "Reality structurally altered; the old map no longer fits"
+    use_when: "Reality structurally altered; the old map no longer fits"
+
+  # ── Habits & behavior (§3) ────────────────────────────────────────────────
+  REWARDED_PATTERN:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Rewarded Pattern"
+    core_frame: "Behaviors persist because they paid off once"
+    use_when: "Behaviors persist because they paid off once"
+
+  UNCONSCIOUS_AGREEMENT:
+    parent_universal: SILENT_VERDICT
+    display_name: "The Unconscious Agreement"
+    core_frame: "A contract the self made without consulting the self"
+    use_when: "A contract the self made without consulting the self"
+
+  PRACTICED_ESCAPE:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Practiced Escape"
+    core_frame: "The same exit dressed in different clothes"
+    use_when: "The same exit dressed in different clothes"
+
+  FAMILIAR_RUIN:
+    parent_universal: DOWNWARD_PULL
+    display_name: "The Familiar Ruin"
+    core_frame: "The collapse that feels like coming home"
+    use_when: "The collapse that feels like coming home"
+
+  DAILY_DISAPPEARANCE:
+    parent_universal: GRADUAL_DISAPPEARANCE
+    display_name: "The Daily Disappearance"
+    core_frame: "Small absences from self that add up"
+    use_when: "Small absences from self that add up"
+
+  # ── Spirituality & awakening (§3) ─────────────────────────────────────────
+  MISTAKEN_SILENCE:
+    parent_universal: SILENT_SIGNAL
+    display_name: "The Mistaken Silence"
+    core_frame: "Quiet mistaken for emptiness"
+    use_when: "Quiet mistaken for emptiness"
+
+  PRACTICED_STILLNESS:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Practiced Stillness"
+    core_frame: "Spiritual bypass — stillness as performance"
+    use_when: "Spiritual bypass — stillness as performance"
+
+  REMEMBERED_WHOLENESS:
+    parent_universal: INVISIBLE_THRESHOLD
+    display_name: "The Remembered Wholeness"
+    core_frame: "The state never lost, only forgotten"
+    use_when: "The state never lost, only forgotten"
+
+  FORGOTTEN_GROUND:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Forgotten Ground"
+    core_frame: "The substrate the modern self stopped feeling"
+    use_when: "The substrate the modern self stopped feeling"
+
+  LONG_ARRIVAL:
+    parent_universal: TIME_LOOP_BREAK
+    display_name: "The Long Arrival"
+    core_frame: "Coming home to what was always present"
+    use_when: "Coming home to what was always present"
+
+  # ── Imposter syndrome (§3) ────────────────────────────────────────────────
+  IMPOSTERS_PERFORMANCE:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Imposter's Performance"
+    core_frame: "The reader's whole job is performing competence"
+    use_when: "The reader's whole job is performing competence; possessive form for emphasis"
+
+  # ── Body image (§3) ──────────────────────────────────────────────────────
+  UNWANTED_REFLECTION:
+    parent_universal: INTERNAL_SPLIT
+    display_name: "The Unwanted Reflection"
+    core_frame: "The mirror shows someone the reader does not consent to being"
+    use_when: "The mirror shows someone the reader does not consent to being"
+
+  BORROWED_STANDARD:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Borrowed Standard"
+    core_frame: "Beauty norms installed before the reader had language for them"
+    use_when: "Beauty norms installed before the reader had language for them"
+
+  WATCHED_BODY:
+    parent_universal: SILENT_VERDICT
+    display_name: "The Watched Body"
+    core_frame: "Living inside a body that is permanently observed"
+    use_when: "Living inside a body that is permanently observed"
+
+  REFUSED_HUNGER:
+    parent_universal: UNNAMED_THIRST
+    display_name: "The Refused Hunger"
+    core_frame: "Disordered eating as silenced need"
+    use_when: "Disordered eating as silenced need"
+
+  COMPARED_SELF:
+    parent_universal: BORROWED_COORDINATES
+    display_name: "The Compared Self"
+    core_frame: "Self-worth measured against a moving feed of bodies"
+    use_when: "Self-worth measured against a moving feed of bodies"
+
+  # ── Money & financial life (§3) ───────────────────────────────────────────
+  SCARCITY_ECHO:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Scarcity Echo"
+    core_frame: "Money panic inherited from generations earlier"
+    use_when: "Money panic inherited from generations earlier"
+
+  BORROWED_WORTH:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Borrowed Worth"
+    core_frame: "Net worth conflated with self worth"
+    use_when: "Net worth conflated with self worth"
+
+  INVISIBLE_LEDGER:
+    parent_universal: CONCEPT_ARCHITECTURE
+    display_name: "The Invisible Ledger"
+    core_frame: "A running tally of debt, fear, and obligation the body keeps without consent"
+    use_when: "A running tally of debt, fear, and obligation the body keeps without consent"
+
+  INHERITED_LACK:
+    parent_universal: INHERITED_ECHO
+    display_name: "The Inherited Lack"
+    core_frame: "'There's never enough' as a transmitted nervous-system state, not a fact"
+    use_when: "'There's never enough' as a transmitted nervous-system state, not a fact"
+
+  PERFORMED_ABUNDANCE:
+    parent_universal: PRACTICED_PERFORMANCE
+    display_name: "The Performed Abundance"
+    core_frame: "Spending or display as armor against scarcity narrative"
+    use_when: "Spending or display as armor against scarcity narrative"
+
+  # ── Addiction & compulsion (§3) ───────────────────────────────────────────
+  USEFUL_NUMBNESS:
+    parent_universal: UNNAMED_THIRST
+    display_name: "The Useful Numbness"
+    core_frame: "The substance/behavior is the part of you that survived"
+    use_when: "The substance/behavior is the part of you that survived"
+
+  FAMILIAR_ESCAPE:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Familiar Escape"
+    core_frame: "The exit route memorized so completely it feels like preference"
+    use_when: "The exit route memorized so completely it feels like preference"
+
+  BORROWED_RELIEF:
+    parent_universal: UNNAMED_THIRST
+    display_name: "The Borrowed Relief"
+    core_frame: "Outsourcing internal regulation to an external substance/ritual"
+    use_when: "Outsourcing internal regulation to an external substance/ritual"
+
+  REWARDED_DISAPPEARANCE:
+    parent_universal: GRADUAL_DISAPPEARANCE
+    display_name: "The Rewarded Disappearance"
+    core_frame: "The body's discovery that absence is easier than presence"
+    use_when: "The body's discovery that absence is easier than presence"
+
+  CYCLED_RETURN:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Cycled Return"
+    core_frame: "The relapse arc as ritual, not weakness"
+    use_when: "The relapse arc as ritual, not weakness"
+
+  # ── ADHD & attention (§3) ─────────────────────────────────────────────────
+  FRAGMENTED_ATTENTION:
+    parent_universal: INTERNAL_SPLIT
+    display_name: "The Fragmented Attention"
+    core_frame: "Awareness scattered across too many incomplete loops"
+    use_when: "Awareness scattered across too many incomplete loops"
+
+  MISFIRING_ENGINE:
+    parent_universal: ENGINE
+    display_name: "The Misfiring Engine"
+    core_frame: "Brain wired for a different environment than the one it lives in"
+    use_when: "Brain wired for a different environment than the one it lives in"
+
+  BORROWED_RHYTHM:
+    parent_universal: BORROWED_COORDINATES
+    display_name: "The Borrowed Rhythm"
+    core_frame: "Trying to use a neurotypical pacing system that doesn't fit"
+    use_when: "Trying to use a neurotypical pacing system that doesn't fit"
+
+  INTERRUPTED_ARRIVAL:
+    parent_universal: TIME_LOOP_BREAK
+    display_name: "The Interrupted Arrival"
+    core_frame: "Tasks never quite finished because attention left before completion"
+    use_when: "Tasks never quite finished because attention left before completion"
+
+  BRANCHING_NOW:
+    parent_universal: CONCEPT_ARCHITECTURE
+    display_name: "The Branching Now"
+    core_frame: "The present moment splitting into 7 parallel possibilities"
+    use_when: "The present moment splitting into 7 parallel possibilities"
+
+  # ── Divorce & separation (§3) ─────────────────────────────────────────────
+  UNFINISHED_STORY:
+    parent_universal: TIME_LOOP_BREAK
+    display_name: "The Unfinished Story"
+    core_frame: "A narrative the body keeps trying to complete after the relationship ended"
+    use_when: "A narrative the body keeps trying to complete after the relationship ended"
+
+  COLLAPSED_FUTURE:
+    parent_universal: CONCEPT_ARCHITECTURE
+    display_name: "The Collapsed Future"
+    core_frame: "The imagined-life infrastructure that died with the marriage"
+    use_when: "The imagined-life infrastructure that died with the marriage"
+
+  RETURNED_SELF:
+    parent_universal: FAMILIAR_RETURN
+    display_name: "The Returned Self"
+    core_frame: "Meeting the version of you the relationship had buried"
+    use_when: "Meeting the version of you the relationship had buried"
+
+  UNBUILT_GROUND:
+    parent_universal: INVISIBLE_THRESHOLD
+    display_name: "The Unbuilt Ground"
+    core_frame: "Standing on what was supposed to be foundation and finding open air"
+    use_when: "Standing on what was supposed to be foundation and finding open air"
+
+  WITNESSED_SEPARATION:
+    parent_universal: INTERNAL_SPLIT
+    display_name: "The Witnessed Separation"
+    core_frame: "The part of you grieving while the part of you was relieved"
+    use_when: "The part of you grieving while the part of you was relieved"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 4 LEGACY V1 ANGLES (soft-deprecated; operator decision 2026-05-20)
+  # Books in flight may still resolve these; new books should use successor_angle_id.
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  WRONG_PROBLEM:
+    arc_variant: ARC_STANDARD_A_v2
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: problem_inversion
+    framing_mode: debunk
+    deprecated: true
+    successor_angle_id: SILENT_VERDICT
+    deprecation_note: "Soft-deprecated 2026-05-20 per Angle Catalog v2 (operator decision). New books should use SILENT_VERDICT."
+
+  MAP_PROMISE:
+    arc_variant: ARC_STANDARD_A_v3
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: orientation
+    framing_mode: framework
+    deprecated: true
+    successor_angle_id: BORROWED_COORDINATES
+    deprecation_note: "Soft-deprecated 2026-05-20 per Angle Catalog v2 (operator decision). New books should use BORROWED_COORDINATES."
+
+  HIDDEN_TRUTH:
+    arc_variant: ARC_STANDARD_A_v4
+    chapter_1_role_bias: destabilization
+    integration_reinforcement_type: revelation
+    framing_mode: reveal
+    deprecated: true
+    successor_angle_id: USEFUL_SIGNAL
+    deprecation_note: "Soft-deprecated 2026-05-20 per Angle Catalog v2 (operator decision). New books should use USEFUL_SIGNAL."
+
+  ONE_LEVER:
+    arc_variant: ARC_STANDARD_A_v5
+    chapter_1_role_bias: recognition
+    integration_reinforcement_type: mechanism_focus
+    framing_mode: leverage
+    deprecated: true
+    successor_angle_id: ENGINE
+    deprecation_note: "Soft-deprecated 2026-05-20 per Angle Catalog v2 (operator decision). New books should use ENGINE."
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# CatalogPlanner topic → angle_id map (v2). Resolver consults this BEFORE
+# series-domain heuristics. Mapped angle_id must be declared above AND must NOT
+# be deprecated (deprecated angles raise a warning at resolution time).
+# Selection rationale: §6 of docs/plans/ANGLE_CATALOG_V2_2026-05-20.md.
+# ═════════════════════════════════════════════════════════════════════════════
+catalog_planner_resolution:
+  version: 2
+  topic_angle_map:
+    anxiety: PROTECTIVE_ALARM
+    overthinking: SILENT_VERDICT
+    burnout: INVISIBLE_COST
+    imposter_syndrome: IMPOSTERS_PERFORMANCE
+    grief: UNFINISHED_GOODBYE
+    self_worth: BORROWED_SELF
+    shame: INHERITED_SMALLNESS
+    depression: DOWNWARD_PULL
+    relationship_anxiety: FAMILIAR_WOUND
+    social_anxiety: NERVOUS_ARCHITECTURE
+    sleep_anxiety: NERVOUS_ARCHITECTURE
+    boundaries: UNSPOKEN_CONTRACT
+    courage: INVISIBLE_THRESHOLD
+    financial_anxiety: INHERITED_AMBITION
+    compassion_fatigue: UNNAMED_THIRST
+    body_image: WATCHED_BODY
+    money: SCARCITY_ECHO
+    addiction: USEFUL_NUMBNESS
+    adhd: MISFIRING_ENGINE
+    divorce: UNFINISHED_STORY

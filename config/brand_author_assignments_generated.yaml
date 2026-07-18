@@ -1,0 +1,1204 @@
+_generated_by: scripts/brand_management/gen_author_rosters.py
+_note: 'SUPERSET: curated brand_author_assignments.yaml rows + generated composite
+  rosters. Pen names are deterministic placeholders; re-point to pen_name_teacher_profiles.yaml
+  for bios/voices.'
+assignments:
+- brand_id: stillness_press
+  default_author: lena_thorne
+  author_pool:
+  - author_id: lena_thorne
+    voice_lock: EXAVITQu4vr4xnSDxMaL
+    tier: 1
+  - author_id: daniel_voss
+    voice_lock: onwK4e9ZLuTAKqWW03F9
+    tier: 1
+  - author_id: mira_santos
+    voice_lock: pMsXgVXv3BLzUgSXRplE
+    tier: 1
+  - author_id: kai_okafor
+    voice_lock: TxGEqnHWrfWFTfGW9XjX
+    tier: 1
+  - author_id: ruth_alder
+    voice_lock: ThT5KcBeYPX3keUQqHPh
+    tier: 1
+  - author_id: sam_meridian
+    voice_lock: Yko7PKHZNXotIFUBG7I9
+    tier: 2
+  - author_id: noor_ibrahim
+    voice_lock: oWAxZDx7w5VEj9dCyTzz
+    tier: 2
+  - author_id: tara_woodfield
+    voice_lock: ThT5KcBeYPX3keUQqHPh
+    tier: 2
+  - author_id: rowan_beck
+    voice_lock: onwK4e9ZLuTAKqWW03F9
+    tier: 2
+  - author_id: mae_rivers
+    voice_lock: oWAxZDx7w5VEj9dCyTzz
+    tier: 2
+  - author_id: silas_grant
+    voice_lock: ODq5zmih8GrVes37Dizd
+    tier: 2
+  - author_id: iris_tam
+    voice_lock: LcfcDJNUP1GQjkzn1xUU
+    tier: 2
+- brand_id: stillness_press
+  topic_ids:
+  - anxiety
+  default_author: lena_thorne
+- brand_id: stillness_press
+  topic_ids:
+  - sleep_anxiety
+  default_author: lena_thorne
+- brand_id: stillness_press
+  topic_ids:
+  - burnout
+  default_author: daniel_voss
+- brand_id: stillness_press
+  topic_ids:
+  - imposter_syndrome
+  default_author: daniel_voss
+- brand_id: stillness_press
+  topic_ids:
+  - grief
+  default_author: mira_santos
+- brand_id: stillness_press
+  topic_ids:
+  - self_worth
+  default_author: mira_santos
+- brand_id: stillness_press
+  topic_ids:
+  - social_anxiety
+  default_author: kai_okafor
+- brand_id: stillness_press
+  topic_ids:
+  - overthinking
+  default_author: kai_okafor
+- brand_id: stillness_press
+  topic_ids:
+  - boundaries
+  default_author: ruth_alder
+- brand_id: stillness_press
+  topic_ids:
+  - compassion_fatigue
+  default_author: ruth_alder
+- brand_id: stillness_press
+  topic_ids:
+  - somatic_healing
+  default_author: sam_meridian
+- brand_id: stillness_press
+  topic_ids:
+  - depression
+  default_author: sam_meridian
+- brand_id: stillness_press
+  topic_ids:
+  - courage
+  default_author: noor_ibrahim
+- brand_id: stillness_press
+  topic_ids:
+  - financial_anxiety
+  - financial_stress
+  default_author: noor_ibrahim
+- brand_id: stillness_press
+  topic_ids:
+  - mindfulness
+  default_author: rowan_beck
+- brand_id: stillness_press
+  topic_ids:
+  - adhd_focus
+  default_author: kai_okafor
+- brand_id: cognitive_clarity
+  default_author: null
+- brand_id: adhd_forge
+  default_author: adam_castellan
+  author_pool:
+  - author_id: adam_castellan
+    tier: 1
+  - author_id: nico_crane
+    tier: 1
+  - author_id: esme_thorne
+    tier: 1
+  - author_id: mae_meridian
+    tier: 1
+  - author_id: devon_hale
+    tier: 2
+  - author_id: hana_marsh
+    tier: 2
+- brand_id: adhd_forge
+  topic_ids:
+  - adhd_focus
+  default_author: adam_castellan
+- brand_id: adhd_forge
+  topic_ids:
+  - anxiety
+  default_author: nico_crane
+- brand_id: adhd_forge
+  topic_ids:
+  - imposter_syndrome
+  default_author: esme_thorne
+- brand_id: adhd_forge
+  topic_ids:
+  - overthinking
+  default_author: mae_meridian
+- brand_id: awakening_press
+  default_author: liam_underhill
+  author_pool:
+  - author_id: liam_underhill
+    tier: 1
+  - author_id: zane_ibrahim
+    tier: 1
+  - author_id: tara_petrova
+    tier: 1
+  - author_id: wren_nolan
+    tier: 1
+  - author_id: faye_gowan
+    tier: 2
+  - author_id: soren_kim
+    tier: 2
+- brand_id: awakening_press
+  topic_ids:
+  - boundaries
+  default_author: liam_underhill
+- brand_id: awakening_press
+  topic_ids:
+  - courage
+  default_author: zane_ibrahim
+- brand_id: awakening_press
+  topic_ids:
+  - depression
+  default_author: tara_petrova
+- brand_id: awakening_press
+  topic_ids:
+  - grief
+  default_author: wren_nolan
+- brand_id: awakening_press
+  topic_ids:
+  - self_worth
+  default_author: faye_gowan
+- brand_id: bio_flow
+  default_author: lior_whitlock
+  author_pool:
+  - author_id: lior_whitlock
+    tier: 1
+  - author_id: iris_beck
+    tier: 1
+  - author_id: nina_chandra
+    tier: 1
+  - author_id: juno_pryce
+    tier: 1
+  - author_id: wade_voss
+    tier: 2
+  - author_id: sam_bello
+    tier: 2
+- brand_id: bio_flow
+  topic_ids:
+  - overthinking
+  default_author: lior_whitlock
+- brand_id: bio_flow
+  topic_ids:
+  - sleep
+  default_author: iris_beck
+- brand_id: bio_flow
+  topic_ids:
+  - somatic_healing
+  default_author: nina_chandra
+- brand_id: body_memory
+  default_author: oscar_santos
+  author_pool:
+  - author_id: oscar_santos
+    tier: 1
+  - author_id: dora_raman
+    tier: 1
+  - author_id: quinn_janssen
+    tier: 1
+  - author_id: suki_calder
+    tier: 1
+  - author_id: theo_castellan
+    tier: 2
+  - author_id: ravi_crane
+    tier: 2
+- brand_id: body_memory
+  topic_ids:
+  - anxiety
+  default_author: oscar_santos
+- brand_id: body_memory
+  topic_ids:
+  - burnout
+  default_author: dora_raman
+- brand_id: body_memory
+  topic_ids:
+  - compassion_fatigue
+  default_author: quinn_janssen
+- brand_id: body_memory
+  topic_ids:
+  - mindfulness
+  default_author: suki_calder
+- brand_id: body_memory
+  topic_ids:
+  - sleep_anxiety
+  default_author: theo_castellan
+- brand_id: calm_student
+  default_author: yara_fenwick
+  author_pool:
+  - author_id: yara_fenwick
+    tier: 1
+  - author_id: noor_whitlock
+    tier: 1
+  - author_id: priya_beck
+    tier: 1
+  - author_id: eli_chandra
+    tier: 1
+  - author_id: rhea_pryce
+    tier: 2
+  - author_id: lena_voss
+    tier: 2
+- brand_id: calm_student
+  topic_ids:
+  - anxiety
+  default_author: yara_fenwick
+- brand_id: calm_student
+  topic_ids:
+  - self_worth
+  default_author: noor_whitlock
+- brand_id: calm_student
+  topic_ids:
+  - social_anxiety
+  default_author: priya_beck
+- brand_id: career_lift
+  default_author: grace_iverson
+  author_pool:
+  - author_id: grace_iverson
+    tier: 1
+  - author_id: tomas_bramble
+    tier: 1
+  - author_id: maya_tam
+    tier: 1
+  - author_id: brid_holt
+    tier: 1
+  - author_id: rowan_sable
+    tier: 2
+  - author_id: cole_alder
+    tier: 2
+- brand_id: career_lift
+  topic_ids:
+  - courage
+  default_author: grace_iverson
+- brand_id: career_lift
+  topic_ids:
+  - financial_anxiety
+  default_author: tomas_bramble
+- brand_id: career_lift
+  topic_ids:
+  - imposter_syndrome
+  default_author: maya_tam
+- brand_id: confidence_core
+  default_author: kira_meridian
+  author_pool:
+  - author_id: kira_meridian
+    tier: 1
+  - author_id: yara_hale
+    tier: 1
+  - author_id: noor_marsh
+    tier: 1
+  - author_id: priya_fairlie
+    tier: 1
+  - author_id: eli_stern
+    tier: 2
+  - author_id: rhea_fenwick
+    tier: 2
+- brand_id: confidence_core
+  topic_ids:
+  - imposter_syndrome
+  default_author: kira_meridian
+- brand_id: confidence_core
+  topic_ids:
+  - self_worth
+  default_author: yara_hale
+- brand_id: confidence_core
+  topic_ids:
+  - social_anxiety
+  default_author: noor_marsh
+- brand_id: creative_unfold
+  default_author: tomas_castellan
+  author_pool:
+  - author_id: tomas_castellan
+    tier: 1
+  - author_id: maya_crane
+    tier: 1
+  - author_id: brid_thorne
+    tier: 1
+  - author_id: rowan_meridian
+    tier: 1
+  - author_id: cole_hale
+    tier: 2
+  - author_id: gideon_marsh
+    tier: 2
+- brand_id: creative_unfold
+  topic_ids:
+  - boundaries
+  default_author: tomas_castellan
+- brand_id: creative_unfold
+  topic_ids:
+  - courage
+  default_author: maya_crane
+- brand_id: creative_unfold
+  topic_ids:
+  - self_worth
+  default_author: brid_thorne
+- brand_id: devotion_path
+  default_author: dora_alder
+  author_pool:
+  - author_id: dora_alder
+    tier: 1
+  - author_id: quinn_bennett
+    tier: 1
+  - author_id: suki_lowell
+    tier: 1
+  - author_id: theo_estes
+    tier: 1
+  - author_id: ravi_adeyemi
+    tier: 2
+  - author_id: kira_ellison
+    tier: 2
+- brand_id: devotion_path
+  topic_ids:
+  - boundaries
+  default_author: dora_alder
+- brand_id: devotion_path
+  topic_ids:
+  - compassion_fatigue
+  default_author: quinn_bennett
+- brand_id: devotion_path
+  topic_ids:
+  - depression
+  default_author: suki_lowell
+- brand_id: devotion_path
+  topic_ids:
+  - grief
+  default_author: theo_estes
+- brand_id: digital_ground
+  default_author: talia_petrova
+  author_pool:
+  - author_id: talia_petrova
+    tier: 1
+  - author_id: mira_nolan
+    tier: 1
+  - author_id: hannah_gowan
+    tier: 1
+  - author_id: adam_kim
+    tier: 1
+  - author_id: nico_gable
+    tier: 2
+  - author_id: esme_yardley
+    tier: 2
+- brand_id: digital_ground
+  topic_ids:
+  - boundaries
+  default_author: talia_petrova
+- brand_id: digital_ground
+  topic_ids:
+  - imposter_syndrome
+  default_author: mira_nolan
+- brand_id: digital_ground
+  topic_ids:
+  - self_worth
+  default_author: hannah_gowan
+- brand_id: digital_ground
+  topic_ids:
+  - social_anxiety
+  default_author: adam_kim
+- brand_id: executive_calm
+  default_author: gideon_thorne
+  author_pool:
+  - author_id: gideon_thorne
+    tier: 1
+  - author_id: talia_meridian
+    tier: 1
+  - author_id: mira_hale
+    tier: 1
+  - author_id: hannah_marsh
+    tier: 1
+  - author_id: adam_fairlie
+    tier: 2
+  - author_id: nico_stern
+    tier: 2
+- brand_id: executive_calm
+  topic_ids:
+  - anxiety
+  default_author: gideon_thorne
+- brand_id: executive_calm
+  topic_ids:
+  - burnout
+  default_author: talia_meridian
+- brand_id: executive_calm
+  topic_ids:
+  - imposter_syndrome
+  default_author: mira_hale
+- brand_id: focus_sprint
+  default_author: caleb_keller
+  author_pool:
+  - author_id: caleb_keller
+    tier: 1
+  - author_id: pia_devlin
+    tier: 1
+  - author_id: lior_reyes
+    tier: 1
+  - author_id: iris_dunmore
+    tier: 1
+  - author_id: nina_underhill
+    tier: 2
+  - author_id: juno_ibrahim
+    tier: 2
+- brand_id: focus_sprint
+  topic_ids:
+  - adhd_focus
+  default_author: caleb_keller
+- brand_id: focus_sprint
+  topic_ids:
+  - imposter_syndrome
+  default_author: pia_devlin
+- brand_id: focus_sprint
+  topic_ids:
+  - social_anxiety
+  default_author: lior_reyes
+- brand_id: gentle_growth
+  default_author: pia_estes
+  author_pool:
+  - author_id: pia_estes
+    tier: 1
+  - author_id: lior_adeyemi
+    tier: 1
+  - author_id: iris_ellison
+    tier: 1
+  - author_id: nina_vance
+    tier: 1
+  - author_id: juno_woodfield
+    tier: 2
+  - author_id: wade_vazquez
+    tier: 2
+- brand_id: gentle_growth
+  topic_ids:
+  - imposter_syndrome
+  default_author: pia_estes
+- brand_id: gentle_growth
+  topic_ids:
+  - self_worth
+  default_author: lior_adeyemi
+- brand_id: gentle_growth
+  topic_ids:
+  - social_anxiety
+  default_author: iris_ellison
+- brand_id: healing_ground
+  default_author: ana_zhao
+  author_pool:
+  - author_id: ana_zhao
+    tier: 1
+  - author_id: sofia_grant
+    tier: 1
+  - author_id: liam_vidal
+    tier: 1
+  - author_id: zane_rourke
+    tier: 1
+  - author_id: tara_okafor
+    tier: 2
+  - author_id: wren_adler
+    tier: 2
+- brand_id: healing_ground
+  topic_ids:
+  - boundaries
+  default_author: ana_zhao
+- brand_id: healing_ground
+  topic_ids:
+  - grief
+  default_author: sofia_grant
+- brand_id: healing_ground
+  topic_ids:
+  - overthinking
+  default_author: liam_vidal
+- brand_id: heart_balance
+  default_author: theo_bello
+  author_pool:
+  - author_id: theo_bello
+    tier: 1
+  - author_id: ravi_iverson
+    tier: 1
+  - author_id: kira_bramble
+    tier: 1
+  - author_id: yara_tam
+    tier: 1
+  - author_id: noor_holt
+    tier: 2
+  - author_id: priya_sable
+    tier: 2
+- brand_id: heart_balance
+  topic_ids:
+  - boundaries
+  default_author: theo_bello
+- brand_id: heart_balance
+  topic_ids:
+  - financial_stress
+  default_author: ravi_iverson
+- brand_id: heart_balance
+  topic_ids:
+  - imposter_syndrome
+  default_author: kira_bramble
+- brand_id: heart_balance
+  topic_ids:
+  - self_worth
+  default_author: yara_tam
+- brand_id: heart_transmission
+  default_author: kai_chandra
+  author_pool:
+  - author_id: kai_chandra
+    tier: 1
+  - author_id: jonah_pryce
+    tier: 1
+  - author_id: bea_voss
+    tier: 1
+  - author_id: opal_bello
+    tier: 1
+  - author_id: otis_iverson
+    tier: 2
+  - author_id: silas_bramble
+    tier: 2
+  - author_id: elena_tam
+    tier: 2
+- brand_id: heart_transmission
+  topic_ids:
+  - anxiety
+  default_author: kai_chandra
+- brand_id: heart_transmission
+  topic_ids:
+  - courage
+  default_author: jonah_pryce
+- brand_id: heart_transmission
+  topic_ids:
+  - grief
+  default_author: bea_voss
+- brand_id: heart_transmission
+  topic_ids:
+  - mindfulness
+  default_author: opal_bello
+- brand_id: heart_transmission
+  topic_ids:
+  - overthinking
+  default_author: otis_iverson
+- brand_id: heart_transmission
+  topic_ids:
+  - self_worth
+  default_author: silas_bramble
+- brand_id: high_performer
+  default_author: eli_bennett
+  author_pool:
+  - author_id: eli_bennett
+    tier: 1
+  - author_id: rhea_lowell
+    tier: 1
+  - author_id: lena_estes
+    tier: 1
+  - author_id: ana_adeyemi
+    tier: 1
+  - author_id: sofia_ellison
+    tier: 2
+  - author_id: liam_vance
+    tier: 2
+- brand_id: high_performer
+  topic_ids:
+  - burnout
+  default_author: eli_bennett
+- brand_id: high_performer
+  topic_ids:
+  - financial_anxiety
+  default_author: rhea_lowell
+- brand_id: high_performer
+  topic_ids:
+  - imposter_syndrome
+  default_author: lena_estes
+- brand_id: high_performer
+  topic_ids:
+  - overthinking
+  default_author: ana_adeyemi
+- brand_id: hormone_reset
+  default_author: opal_estes
+  author_pool:
+  - author_id: opal_estes
+    tier: 1
+  - author_id: otis_adeyemi
+    tier: 1
+  - author_id: silas_ellison
+    tier: 1
+  - author_id: elena_vance
+    tier: 1
+  - author_id: ivo_woodfield
+    tier: 2
+  - author_id: vera_vazquez
+    tier: 2
+- brand_id: hormone_reset
+  topic_ids:
+  - anxiety
+  default_author: opal_estes
+- brand_id: hormone_reset
+  topic_ids:
+  - self_worth
+  default_author: otis_adeyemi
+- brand_id: hormone_reset
+  topic_ids:
+  - somatic_healing
+  default_author: silas_ellison
+- brand_id: legacy_builder
+  default_author: nina_rourke
+  author_pool:
+  - author_id: nina_rourke
+    tier: 1
+  - author_id: juno_okafor
+    tier: 1
+  - author_id: wade_adler
+    tier: 1
+  - author_id: sam_keller
+    tier: 1
+  - author_id: oscar_devlin
+    tier: 2
+  - author_id: dora_reyes
+    tier: 2
+- brand_id: legacy_builder
+  topic_ids:
+  - courage
+  default_author: nina_rourke
+- brand_id: legacy_builder
+  topic_ids:
+  - financial_stress
+  default_author: juno_okafor
+- brand_id: legacy_builder
+  topic_ids:
+  - self_worth
+  default_author: wade_adler
+- brand_id: longevity_lab
+  default_author: vera_ellison
+  author_pool:
+  - author_id: vera_ellison
+    tier: 1
+  - author_id: ruth_vance
+    tier: 1
+  - author_id: marcus_woodfield
+    tier: 1
+  - author_id: caleb_vazquez
+    tier: 1
+  - author_id: pia_oakes
+    tier: 2
+  - author_id: lior_frost
+    tier: 2
+- brand_id: longevity_lab
+  topic_ids:
+  - grief
+  default_author: vera_ellison
+- brand_id: longevity_lab
+  topic_ids:
+  - self_worth
+  default_author: ruth_vance
+- brand_id: longevity_lab
+  topic_ids:
+  - somatic_healing
+  default_author: marcus_woodfield
+- brand_id: minimal_mind
+  default_author: opal_hale
+  author_pool:
+  - author_id: opal_hale
+    tier: 1
+  - author_id: otis_marsh
+    tier: 1
+  - author_id: silas_fairlie
+    tier: 1
+  - author_id: elena_stern
+    tier: 1
+  - author_id: ivo_fenwick
+    tier: 2
+  - author_id: vera_whitlock
+    tier: 2
+- brand_id: minimal_mind
+  topic_ids:
+  - anxiety
+  default_author: opal_hale
+- brand_id: minimal_mind
+  topic_ids:
+  - burnout
+  default_author: otis_marsh
+- brand_id: minimal_mind
+  topic_ids:
+  - overthinking
+  default_author: silas_fairlie
+- brand_id: morning_momentum
+  default_author: nico_underhill
+  author_pool:
+  - author_id: nico_underhill
+    tier: 1
+  - author_id: esme_ibrahim
+    tier: 1
+  - author_id: mae_petrova
+    tier: 1
+  - author_id: devon_nolan
+    tier: 1
+  - author_id: hana_gowan
+    tier: 2
+  - author_id: uma_kim
+    tier: 2
+- brand_id: morning_momentum
+  topic_ids:
+  - burnout
+  default_author: nico_underhill
+- brand_id: morning_momentum
+  topic_ids:
+  - courage
+  default_author: esme_ibrahim
+- brand_id: morning_momentum
+  topic_ids:
+  - self_worth
+  default_author: mae_petrova
+- brand_id: night_reset
+  default_author: dora_sable
+  author_pool:
+  - author_id: dora_sable
+    tier: 1
+  - author_id: quinn_alder
+    tier: 1
+  - author_id: suki_bennett
+    tier: 1
+  - author_id: theo_lowell
+    tier: 1
+  - author_id: ravi_estes
+    tier: 2
+  - author_id: kira_adeyemi
+    tier: 2
+- brand_id: night_reset
+  topic_ids:
+  - anxiety
+  default_author: dora_sable
+- brand_id: night_reset
+  topic_ids:
+  - overthinking
+  default_author: quinn_alder
+- brand_id: night_reset
+  topic_ids:
+  - sleep_anxiety
+  default_author: suki_bennett
+- brand_id: optimizer
+  default_author: daniel_whitlock
+  author_pool:
+  - author_id: daniel_whitlock
+    tier: 1
+  - author_id: grace_beck
+    tier: 1
+  - author_id: tomas_chandra
+    tier: 1
+  - author_id: maya_pryce
+    tier: 1
+  - author_id: brid_voss
+    tier: 2
+  - author_id: rowan_bello
+    tier: 2
+- brand_id: optimizer
+  topic_ids:
+  - burnout
+  default_author: daniel_whitlock
+- brand_id: optimizer
+  topic_ids:
+  - imposter_syndrome
+  default_author: grace_beck
+- brand_id: optimizer
+  topic_ids:
+  - overthinking
+  default_author: tomas_chandra
+- brand_id: qi_foundation
+  default_author: liam_dunmore
+  author_pool:
+  - author_id: liam_dunmore
+    tier: 1
+  - author_id: zane_underhill
+    tier: 1
+  - author_id: tara_ibrahim
+    tier: 1
+  - author_id: wren_petrova
+    tier: 1
+  - author_id: faye_nolan
+    tier: 2
+  - author_id: soren_gowan
+    tier: 2
+- brand_id: qi_foundation
+  topic_ids:
+  - burnout
+  default_author: liam_dunmore
+- brand_id: qi_foundation
+  topic_ids:
+  - courage
+  default_author: zane_underhill
+- brand_id: qi_foundation
+  topic_ids:
+  - self_worth
+  default_author: tara_ibrahim
+- brand_id: qi_foundation
+  topic_ids:
+  - somatic_healing
+  default_author: wren_petrova
+- brand_id: relational_calm
+  default_author: maya_meridian
+  author_pool:
+  - author_id: maya_meridian
+    tier: 1
+  - author_id: brid_hale
+    tier: 1
+  - author_id: rowan_marsh
+    tier: 1
+  - author_id: cole_fairlie
+    tier: 1
+  - author_id: gideon_stern
+    tier: 2
+  - author_id: talia_fenwick
+    tier: 2
+- brand_id: relational_calm
+  topic_ids:
+  - anxiety
+  default_author: maya_meridian
+- brand_id: relational_calm
+  topic_ids:
+  - mindfulness
+  default_author: brid_hale
+- brand_id: relational_calm
+  topic_ids:
+  - overthinking
+  default_author: rowan_marsh
+- brand_id: relational_calm
+  topic_ids:
+  - sleep_anxiety
+  default_author: cole_fairlie
+- brand_id: relational_calm
+  topic_ids:
+  - social_anxiety
+  default_author: gideon_stern
+- brand_id: relationship_clarity
+  default_author: theo_quill
+  author_pool:
+  - author_id: theo_quill
+    tier: 1
+  - author_id: ravi_santos
+    tier: 1
+  - author_id: kira_raman
+    tier: 1
+  - author_id: yara_janssen
+    tier: 1
+  - author_id: noor_calder
+    tier: 2
+  - author_id: priya_castellan
+    tier: 2
+- brand_id: relationship_clarity
+  topic_ids:
+  - boundaries
+  default_author: theo_quill
+- brand_id: relationship_clarity
+  topic_ids:
+  - compassion_fatigue
+  default_author: ravi_santos
+- brand_id: relationship_clarity
+  topic_ids:
+  - grief
+  default_author: kira_raman
+- brand_id: resilient_parent
+  default_author: jonah_santos
+  author_pool:
+  - author_id: jonah_santos
+    tier: 1
+  - author_id: bea_raman
+    tier: 1
+  - author_id: opal_janssen
+    tier: 1
+  - author_id: otis_calder
+    tier: 1
+  - author_id: silas_castellan
+    tier: 2
+  - author_id: elena_crane
+    tier: 2
+- brand_id: resilient_parent
+  topic_ids:
+  - boundaries
+  default_author: jonah_santos
+- brand_id: resilient_parent
+  topic_ids:
+  - burnout
+  default_author: bea_raman
+- brand_id: resilient_parent
+  topic_ids:
+  - compassion_fatigue
+  default_author: opal_janssen
+- brand_id: sleep_restoration
+  default_author: silas_voss
+  author_pool:
+  - author_id: silas_voss
+    tier: 1
+  - author_id: elena_bello
+    tier: 1
+  - author_id: ivo_iverson
+    tier: 1
+  - author_id: vera_bramble
+    tier: 1
+  - author_id: ruth_tam
+    tier: 2
+  - author_id: marcus_holt
+    tier: 2
+- brand_id: sleep_restoration
+  topic_ids:
+  - courage
+  default_author: silas_voss
+- brand_id: sleep_restoration
+  topic_ids:
+  - depression
+  default_author: elena_bello
+- brand_id: sleep_restoration
+  topic_ids:
+  - grief
+  default_author: ivo_iverson
+- brand_id: sleep_restoration
+  topic_ids:
+  - self_worth
+  default_author: vera_bramble
+- brand_id: sleep_restoration
+  topic_ids:
+  - somatic_healing
+  default_author: ruth_tam
+- brand_id: solar_return
+  default_author: zane_vazquez
+  author_pool:
+  - author_id: zane_vazquez
+    tier: 1
+  - author_id: tara_oakes
+    tier: 1
+  - author_id: wren_frost
+    tier: 1
+  - author_id: faye_reed
+    tier: 1
+  - author_id: soren_harlow
+    tier: 2
+  - author_id: daniel_zhao
+    tier: 2
+- brand_id: solar_return
+  topic_ids:
+  - courage
+  default_author: zane_vazquez
+- brand_id: solar_return
+  topic_ids:
+  - imposter_syndrome
+  default_author: tara_oakes
+- brand_id: solar_return
+  topic_ids:
+  - overthinking
+  default_author: wren_frost
+- brand_id: solar_return
+  topic_ids:
+  - self_worth
+  default_author: faye_reed
+- brand_id: somatic_wisdom
+  default_author: dora_devlin
+  author_pool:
+  - author_id: dora_devlin
+    tier: 1
+  - author_id: quinn_reyes
+    tier: 1
+  - author_id: suki_dunmore
+    tier: 1
+  - author_id: theo_underhill
+    tier: 1
+  - author_id: ravi_ibrahim
+    tier: 2
+  - author_id: kira_petrova
+    tier: 2
+- brand_id: somatic_wisdom
+  topic_ids:
+  - anxiety
+  default_author: dora_devlin
+- brand_id: somatic_wisdom
+  topic_ids:
+  - burnout
+  default_author: quinn_reyes
+- brand_id: somatic_wisdom
+  topic_ids:
+  - sleep_anxiety
+  default_author: suki_dunmore
+- brand_id: somatic_wisdom
+  topic_ids:
+  - somatic_healing
+  default_author: theo_underhill
+- brand_id: spiritual_ground
+  default_author: priya_rourke
+  author_pool:
+  - author_id: priya_rourke
+    tier: 1
+  - author_id: eli_okafor
+    tier: 1
+  - author_id: rhea_adler
+    tier: 1
+  - author_id: lena_keller
+    tier: 1
+  - author_id: ana_devlin
+    tier: 2
+  - author_id: sofia_reyes
+    tier: 2
+- brand_id: spiritual_ground
+  topic_ids:
+  - courage
+  default_author: priya_rourke
+- brand_id: spiritual_ground
+  topic_ids:
+  - grief
+  default_author: eli_okafor
+- brand_id: spiritual_ground
+  topic_ids:
+  - self_worth
+  default_author: rhea_adler
+- brand_id: stabilizer
+  default_author: yara_fenwick
+  author_pool:
+  - author_id: yara_fenwick
+    tier: 1
+  - author_id: noor_whitlock
+    tier: 1
+  - author_id: priya_beck
+    tier: 1
+  - author_id: eli_chandra
+    tier: 1
+  - author_id: rhea_pryce
+    tier: 2
+  - author_id: lena_voss
+    tier: 2
+- brand_id: stabilizer
+  topic_ids:
+  - anxiety
+  default_author: yara_fenwick
+- brand_id: stabilizer
+  topic_ids:
+  - burnout
+  default_author: noor_whitlock
+- brand_id: stabilizer
+  topic_ids:
+  - somatic_healing
+  default_author: priya_beck
+- brand_id: still_forest
+  default_author: ruth_reed
+  author_pool:
+  - author_id: ruth_reed
+    tier: 1
+  - author_id: marcus_harlow
+    tier: 1
+  - author_id: caleb_zhao
+    tier: 1
+  - author_id: pia_grant
+    tier: 1
+  - author_id: lior_vidal
+    tier: 2
+  - author_id: iris_rourke
+    tier: 2
+- brand_id: still_forest
+  topic_ids:
+  - anxiety
+  default_author: ruth_reed
+- brand_id: still_forest
+  topic_ids:
+  - depression
+  default_author: marcus_harlow
+- brand_id: still_forest
+  topic_ids:
+  - overthinking
+  default_author: caleb_zhao
+- brand_id: still_forest
+  topic_ids:
+  - somatic_healing
+  default_author: pia_grant
+- brand_id: stoic_edge
+  default_author: talia_petrova
+  author_pool:
+  - author_id: talia_petrova
+    tier: 1
+  - author_id: mira_nolan
+    tier: 1
+  - author_id: hannah_gowan
+    tier: 1
+  - author_id: adam_kim
+    tier: 1
+  - author_id: nico_gable
+    tier: 2
+  - author_id: esme_yardley
+    tier: 2
+- brand_id: stoic_edge
+  topic_ids:
+  - courage
+  default_author: talia_petrova
+- brand_id: stoic_edge
+  topic_ids:
+  - grief
+  default_author: mira_nolan
+- brand_id: stoic_edge
+  topic_ids:
+  - self_worth
+  default_author: hannah_gowan
+- brand_id: stoic_edge
+  topic_ids:
+  - shame
+  default_author: adam_kim
+- brand_id: trauma_path
+  default_author: priya_rourke
+  author_pool:
+  - author_id: priya_rourke
+    tier: 1
+  - author_id: eli_okafor
+    tier: 1
+  - author_id: rhea_adler
+    tier: 1
+  - author_id: lena_keller
+    tier: 1
+  - author_id: ana_devlin
+    tier: 2
+  - author_id: sofia_reyes
+    tier: 2
+- brand_id: trauma_path
+  topic_ids:
+  - grief
+  default_author: priya_rourke
+- brand_id: trauma_path
+  topic_ids:
+  - shame
+  default_author: eli_okafor
+- brand_id: trauma_path
+  topic_ids:
+  - somatic_healing
+  default_author: rhea_adler
+- brand_id: trauma_path
+  topic_ids:
+  - trauma_recovery
+  default_author: lena_keller
+- brand_id: warrior_calm
+  default_author: maya_adeyemi
+  author_pool:
+  - author_id: maya_adeyemi
+    tier: 1
+  - author_id: brid_ellison
+    tier: 1
+  - author_id: rowan_vance
+    tier: 1
+  - author_id: cole_woodfield
+    tier: 1
+  - author_id: gideon_vazquez
+    tier: 2
+  - author_id: talia_oakes
+    tier: 2
+- brand_id: warrior_calm
+  topic_ids:
+  - boundaries
+  default_author: maya_adeyemi
+- brand_id: warrior_calm
+  topic_ids:
+  - burnout
+  default_author: brid_ellison
+- brand_id: warrior_calm
+  topic_ids:
+  - courage
+  default_author: rowan_vance
+- brand_id: warrior_calm
+  topic_ids:
+  - imposter_syndrome
+  default_author: cole_woodfield

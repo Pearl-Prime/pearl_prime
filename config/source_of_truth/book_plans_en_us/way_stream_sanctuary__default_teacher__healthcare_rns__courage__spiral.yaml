@@ -1,0 +1,112 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__courage__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__courage.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__brave_world
+  name: Brave in the World — for Nurses
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Building Courage: Escaping the Mental Loop (2)'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Courage for Healthcare Rns (The Overthinking Spiral)
+cover_tagline: One thing you didn't say at 2 p.m. Ten thousand replays by midnight.
+description:
+  short_blurb: 'You didn''t say the thing — and now your mind won''t let it go. One
+    small moment becomes a thousand thoughts: what you should have said, what they
+    think of you now, what it means about you. This is a book for nurses about the
+    mental loop that runs after the silence, and how to climb out of it without pretending
+    it never started.'
+  long_description: 'It''s hours after your shift and you''re still in it. The moment
+    you stayed quiet — the order you didn''t question, the comment you let pass, the
+    thing you meant to say and didn''t — has become a tape on a loop. What you should
+    have said. How you should have said it. What they must think of you now. Whether
+    they noticed. Whether it means what you''re afraid it means. One unsaid sentence,
+    and your mind has built an entire courtroom around it, and you''re losing the
+    case at 1 a.m. with a shift in five hours.
+
+
+    This book is for the nurse who carries the whole day home in her head. The one
+    who can prioritize a six-patient assignment without missing a beat but can''t
+    stop re-litigating a thirty-second hallway exchange. Who lies awake running the
+    conversation that already happened, then running the one she''s dreading tomorrow,
+    then both at once. If a single moment of silence can spawn a thousand thoughts,
+    this is for you.
+
+
+    We start by naming the loop for what it is. The spiral feels like problem-solving
+    — like if you just think it through one more time you''ll find the answer, the
+    perfect sentence, the proof you''re okay. But it isn''t solving anything. It''s
+    the same three thoughts wearing new clothes, and the wakeful, over-trained, hypervigilant
+    mind that makes you a good nurse is exactly the mind that won''t put the day down.
+
+
+    Then we go down into it instead of fighting it. You won''t be told to think positive
+    or push the thoughts away — you''ve tried, and they come back louder. Instead
+    you''ll learn to feel the pull of the spiral and recognize the exact moment it
+    starts, the hook that drops you in. You''ll learn the difference between a thought
+    that''s telling you something and a thought that''s just spinning, because the
+    spiral disguises itself as the former while being entirely the latter.
+
+
+    This is not a thought-stopping technique or a worksheet to fill out before bed.
+    There''s no rubber band on the wrist, no gratitude list, no five-step protocol.
+    We''re not going to give you a tidier mind. The over-thinking part of you is also
+    the part that catches the deteriorating patient — we''re not deleting it, we''re
+    teaching it that it''s allowed to be off the clock.
+
+
+    What changes is your relationship to the loop. The thoughts still come — minds
+    like yours don''t go quiet — but you stop mistaking the spinning for thinking,
+    and you stop climbing in. You catch the hook earlier. You feel the pull and don''t
+    follow it down. The replay starts, and instead of running it for three hours,
+    you notice it running, and let it.
+
+
+    You don''t have to solve the moment you didn''t speak. You just have to stop living
+    it on repeat. The day is allowed to end when the shift does.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  - brave
+  secondary:
+  - nurses
+  - courage for nurses
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — seeing the spiral as spinning,
+  not solving
+- Chatter (Ethan Kross) — why the inner voice loops at night and how to step out of
+  the replay
+- Unwinding Anxiety (Judson Brewer) — catching the hook that drops you into the loop
+  before you're already in it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

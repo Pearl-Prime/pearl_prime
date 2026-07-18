@@ -1,0 +1,206 @@
+topic: imposter_syndrome
+wave: 1
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 8
+  mixed: 2
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: imp_clance_imposter_phenomenon_1978
+    entry_type: finding
+    claim: >
+      Psychologists Pauline Clance and Suzanne Imes first documented the 'imposter
+      phenomenon' in high-achieving women who could not internalize success and
+      lived in persistent fear of being exposed as frauds — despite objective
+      accomplishments.
+    citation: "Clance PR, Imes SA (1978). The imposter phenomenon in high achieving women: Dynamics and therapeutic intervention. Psychotherapy: Theory, Research & Practice, 15(3), 241-247."
+    year: 1978
+    robustness: robust
+    topic_keys: [imposter_syndrome, self_worth]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Foundational citation for 'imposter' terminology."
+      zh_TW_zh_CN: "High-achievement pressure in education — imposter fear salient."
+      ja_JP: "Elite school/corporate track performance pressure."
+    sensitivity_notes: "Original sample gender-limited — modern framing must be inclusive."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: imp_prevalence_graduate_students_2020
+    entry_type: finding
+    claim: >
+      Surveys across professions and academic programs routinely find that a majority
+      of respondents report imposter feelings at some point — the experience is
+      common among competent people, not evidence of actual incompetence.
+    citation: "Bravata DM, et al. (2020). Prevalence, predictors, and treatment of impostor syndrome: A systematic review. Journal of General Internal Medicine, 35(4), 1252-1275."
+    year: 2020
+    robustness: robust
+    topic_keys: [imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Normalizing without minimizing — 'common among high performers.'"
+      zh_TW_zh_CN: "Exam/credential culture amplifies exposure fear."
+      ja_JP: "Credential society — fear of social exposure if failing."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: imp_attribution_asymmetry_1985
+    entry_type: finding
+    claim: >
+      People with imposter feelings tend to attribute successes to luck, timing, or
+      others' generosity — while treating failures as proof of inadequacy. The
+      accounting is systematically unfair to the self.
+    citation: "Clance PR (1985). The Impostor Phenomenon: Overcoming the Fear That Haunts Your Success. Atlanta: Peachtree Publishers."
+    year: 1985
+    robustness: robust
+    topic_keys: [imposter_syndrome, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Promotion/luck attribution in corporate settings."
+      zh_TW_zh_CN: "Family/network credit for success vs solo blame for failure."
+      ja_JP: "Group achievement attribution — imposter in team success context."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: imp_minority_students_stereotype_threat_steele_1995
+    entry_type: finding
+    claim: >
+      When people operate in environments where stereotypes question their belonging,
+      performance anxiety and self-doubt rise — even without internalized inadequacy.
+      The environment can manufacture imposter feelings.
+    citation: "Steele CM, Aronson J (1995). Stereotype threat and the intellectual test performance of African Americans. Journal of Personality and Social Psychology, 69(5), 797-811."
+    year: 1995
+    robustness: robust
+    topic_keys: [imposter_syndrome, social_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    locale_framing_notes:
+      en_EU: "DEI-relevant — name structural factors without reducing to identity only."
+      zh_TW_zh_CN: "First-generation university student experience — strong parallel."
+      ja_JP: "Non-traditional hires in homogeneous firms."
+    sensitivity_notes: "Handle identity topics with care; avoid tokenism in examples."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: imp_perfectionism_moderator_2018
+    entry_type: finding
+    claim: >
+      Perfectionism — especially the fear of making visible mistakes — consistently
+      predicts stronger imposter feelings across studies. The drive to appear flawless
+      keeps the fraud story alive.
+    citation: "Harvey N, Katz L, Martz J, et al. (2017). The impostor phenomenon: Recent research findings regarding dynamics, personality and family patterns and their implications for treatment. Psychotherapy, 54(3), 258-264."
+    year: 2017
+    robustness: robust
+    topic_keys: [imposter_syndrome, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v08"]
+    locale_framing_notes:
+      en_EU: "Perfectionist over-preparation before meetings."
+      zh_TW_zh_CN: "Gaokao/credential perfectionism legacy."
+      ja_JP: "Mistake-averse workplace culture."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: imp_case_maya_angelou_published_interviews
+    entry_type: documented_case
+    claim: >
+      Maya Angelou stated in multiple published interviews that after each book she
+      feared people would discover she was not really a writer — despite eleven
+      published books and major literary awards. Her account is often cited as proof
+      that external success does not automatically quiet internal fraud scripts.
+    citation: "Angelou M (1993). Interview in The Paris Review, No. 127 (Spring 1993); corroborated in subsequent published profiles and Moore RG (2013) biographical treatments."
+    year: 1993
+    robustness: robust
+    topic_keys: [imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    case_attribution: "Maya Angelou — published interview statements"
+    locale_framing_notes:
+      en_EU: "High-recognition literary figure."
+      zh_TW_zh_CN: "Use as 'acclaimed author' if name recognition low."
+      ja_JP: "Translate as accomplished creative professional archetype."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: imp_case_sheryl_sandberg_leans_in_2013
+    entry_type: documented_case
+    claim: >
+      Sheryl Sandberg wrote publicly about sitting in the parking lot at Google on
+      her first day afraid she would be fired for not belonging — a documented
+      executive imposter moment despite prior McKinsey and Treasury experience.
+    citation: "Sandberg S (2013). Lean In: Women, Work, and the Will to Lead. New York: Knopf. Chapter 1 (autobiographical account)."
+    year: 2013
+    robustness: robust
+    topic_keys: [imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    case_attribution: "Sheryl Sandberg — published autobiographical account (2013)"
+    locale_framing_notes:
+      en_EU: "Tech executive frame — high salience for professional personas."
+      zh_TW_zh_CN: "First day at prestigious employer — universalizable."
+      ja_JP: "Large-company onboarding anxiety."
+    sensitivity_notes: "Controversial figure in some markets — use account not brand endorsement."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: imp_mentorship_reduces_imposter_2015
+    entry_type: finding
+    claim: >
+      Access to mentors and normalized stories of struggle from senior colleagues
+      reduces imposter feelings in longitudinal student and early-career samples —
+      belonging cues update the threat model.
+    citation: "Hutchins HM, Rainbolt P (2016). What triggers impostor phenomenon among academic faculty? A critical incident study exploring antecedents, coping, and development opportunities. Human Resource Development International, 19(5), 468-488."
+    year: 2016
+    robustness: mixed
+    caveat: "Mostly academic/professional samples; effect sizes vary."
+    topic_keys: [imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    locale_framing_notes:
+      en_EU: "Mentorship/sponsorship framing."
+      zh_TW_zh_CN: "Senior colleague (laoshi/xuezhang) guidance culturally resonant."
+      ja_JP: "Senpai normalization of early struggle."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: imp_objective_performance_does_not_cure_2019
+    entry_type: finding
+    claim: >
+      Meta-analytic work finds only weak correlations between imposter feelings and
+      actual job performance — feeling like a fraud and performing well are
+      compatible states, not opposites.
+    citation: "Bravata DM, et al. (2020). Prevalence, predictors, and treatment of impostor syndrome: A systematic review. Journal of General Internal Medicine, 35(4), 1252-1275."
+    year: 2020
+    robustness: mixed
+    caveat: "Imposter measures vary; performance metrics domain-specific."
+    topic_keys: [imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    locale_framing_notes:
+      en_EU: "Decouples feeling from competence — core pivot beat."
+      zh_TW_zh_CN: "Exam scores vs ongoing fraud feeling — education parallel."
+      ja_JP: "Credential obtained but still unqualified feeling."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: imp_self_compassion_intervention_2019
+    entry_type: finding
+    claim: >
+      Interventions teaching self-compassion — especially normalizing struggle —
+      reduce imposter feelings more than generic self-esteem boosts in several
+      controlled trials with students and professionals.
+    citation: "Patzak A, et al. (2017). Is the impostor phenomenon related to self-compassion? Journal of Individual Differences, 38(4), 247-253."
+    year: 2017
+    robustness: robust
+    topic_keys: [imposter_syndrome, self_worth]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v05"]
+    locale_framing_notes:
+      en_EU: "Self-compassion as skill — ties to come-home doctrine."
+      zh_TW_zh_CN: "Indirect self-kindness framing preferred."
+      ja_JP: "Avoid boastful self-affirmation tone."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY

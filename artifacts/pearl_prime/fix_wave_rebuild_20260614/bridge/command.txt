@@ -1,0 +1,12 @@
+python3 scripts/run_pipeline.py --topic anxiety --persona educators --arc /Users/ahjan/phoenix_omega/config/source_of_truth/master_arcs/educators__anxiety__overwhelm__F006.yaml --pipeline-mode spine --runtime-format standard_book --chapter-architecture-version 2 --teacher ahjan --seed pilot_v1 --quality-profile production --render-book --render-dir /Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/bridge --out /Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/bridge/plan.json --locale en-US --atoms-root /Users/ahjan/phoenix_omega/atoms --atoms-model legacy --exercise-journeys --enforce-scene-gate --no-job-check --no-generate-freebies
+ARC_NOTE: prompt stated educators__anxiety__spiral__F006.yaml but that arc does NOT exist; only educators__anxiety__overwhelm__F006.yaml exists. Baseline book#6 stderr confirms thesis=emotional_overwhelm (overwhelm arc). Used overwhelm to match baseline (angle PROTECTIVE_ALARM, wc 20378).
+
+--- BUILD NOTE 2: production aborts at scene_anchor_density gate (run_pipeline.py:874, gates_hard=True) ---
+Production composed the FULL book (prose ready at :854) but refused to WRITE book.txt because chapter 12
+repeats teacher-wrapper template "ahjan keeps pointing toward" 4x > cap 3 (scene_anchor_density FAIL).
+This is a SEPARATE scaffolding-repetition defect, NOT one of the 10 target bridge/label defects.
+To obtain the identical-compose book.txt for defect proof, re-ran with --quality-profile draft --render-book:
+  _publishable_book is TRUE for BOTH production AND (draft + --render-book) [run_pipeline.py:652-654],
+  and _publishable_book is the ONLY compose-affecting profile flag in spine mode — so the composed prose
+  is byte-identical to production; only gate-BLOCKING differs (draft: gates_hard=False, no anchor abort).
+  The production run's scene_anchor_density_report.json (FAIL) and run_stderr.log are preserved.

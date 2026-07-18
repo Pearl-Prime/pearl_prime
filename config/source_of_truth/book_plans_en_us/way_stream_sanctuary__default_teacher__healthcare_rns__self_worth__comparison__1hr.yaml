@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__self_worth__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__self_worth__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__worth_limits__1hr
+  name: Worth & Limits — for Nurses (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Voice That Says Not Enough: The Comparison Habit (2)'
+subtitle: A Real Talk Guide to Self-Worth for Healthcare Rns
+cover_tagline: She got the praise, the charge role, the 'natural' label. You did the
+  same work and felt invisible.
+description:
+  short_blurb: 'Watch the nurse who gets singled out — the one called a natural, fast-tracked
+    to charge, praised in front of the unit — and a voice starts up: not enough, not
+    enough. This is a one-hour, secular read for nurses who can''t stop measuring
+    their own worth against everyone else on the floor. It won''t tell you to be happy
+    for her. It''ll show you why their win keeps registering as your verdict.'
+  long_description: 'Someone gets named. Nurse of the quarter, or just the offhand
+    ''she''s a natural'' from the attending, or the charge spot that opened up and
+    went to her. And before you can even decide how you feel about it, a voice is
+    already running underneath: not enough. You did the same twelve hours, caught
+    the same deteriorating patient, held the same family together — and somehow her
+    version counted and yours dissolved into the background.
+
+
+    This one-hour read is for the nurse whose sense of worth got outsourced to a comparison
+    she can''t win. It''s not jealousy, exactly. It''s that you''ve made other people
+    the measurement instrument for your own value — and the readout always comes back
+    low. Every nurse who''s faster, smoother, more visibly appreciated becomes more
+    proof of the thing you already half-believe: that you''re behind, that you''re
+    filler, that the floor would run identically without you.
+
+
+    We''re going to name the move in plain words you can catch yourself making: your
+    worth is not a ranking. Comparison feels like data, but it''s a rigged instrument
+    — it only ever shows you their finished surface against your raw, unedited insides.
+    You''re stacking her best, most public moment against your most private doubt
+    and calling the gap a measurement of who you are. It isn''t. It''s a category
+    error you''ve been making so long it feels like seeing clearly.
+
+
+    Then we go down into it instead of papering over it with affirmations. We get
+    specific about the exact second the voice fires — the flush when she''s praised,
+    the way your own good shift suddenly feels like nothing — and we stay in it. We
+    follow ''not enough'' down to its root and find that it was never really about
+    her at all. She''s just the screen you''ve been projecting an older verdict onto.
+
+
+    This book will not make you the best nurse on the unit, and it won''t teach you
+    to stop noticing who''s getting noticed. It will not hand you self-esteem like
+    a badge or promise you''ll feel valuable on command. What it will do is cut the
+    wire between their wins and your worth — so another nurse can be brilliant, can
+    be praised, can be promoted, and it costs you nothing, because your value was
+    never up for a vote in the first place.
+
+
+    You come back from this able to watch someone else shine and stay solid, because
+    you finally stopped letting the room decide what you''re worth.
+
+
+    Their win was never your verdict. You don''t get measured by standing next to
+    her — you were never on the scale to begin with.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  secondary:
+  - nurses
+  - self-worth for nurses
+  - one hour
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- The Comparison Cure (Lisa Cypers Kamen)
+- The Gifts of Imperfection (Brené Brown)
+- The Self-Esteem Workbook (Glenn R. Schiraldi)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

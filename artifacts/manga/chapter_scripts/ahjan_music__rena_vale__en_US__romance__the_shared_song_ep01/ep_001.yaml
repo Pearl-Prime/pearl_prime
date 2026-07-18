@@ -1,0 +1,167 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: ahjan_music__rena_vale__en_US__romance__the_shared_song_ep01
+chapter_id: ep_001
+title: The Shared Song — Episode 1
+manga_author: Rena Vale
+musician_id: ahjan
+brand_id: ahjan_music
+mode: music
+genre: romance_josei_drama
+vessel: the shared song
+engine: belonging
+locale: en_US
+default_locale: en_US
+available_locales:
+- en_US
+- ja_JP
+- zh_CN
+- zh_TW
+main_characters:
+- id: mira
+  name: Mira Chen
+  age: 29
+  role: protagonist — songwriter who stops before the bridge
+  visual_anchor: damp hair, soft sweater, pencil callus on right middle finger
+- id: ren
+  name: Ren Okada
+  age: 31
+  role: beloved who rests — models ease; never lectures
+  visual_anchor: open collar, takeout bag, unhurried hands
+scene_palette:
+  primary: warm lamp amber
+  secondary: soft indigo night
+  accent: staff-paper cream
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: Evening apartment. Warm lamp. A half-written melody on staff paper on the
+      table. No one singing yet.
+    beat_type: micro
+    silence_confirmed: true
+    intent: opening motif — alone
+  - panel_id: ep001_002
+    scene: Close on hands. Mira hums a two-bar phrase under her breath while washing
+      a cup. The tune is incomplete.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: She always stops before the bridge.
+      ja_JP: '[ja_JP] She always stops before the bridge.'
+      zh_TW: '[zh_TW] She always stops before the bridge.'
+      zh_CN: '[zh_CN] She always stops before the bridge.'
+  - panel_id: ep001_003
+    scene: Phone face-down. A message light. She does not pick it up. The hum cuts
+      off.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_004
+    scene: Medium on Mira — guarded, soft sweater, hair still damp. She looks at the
+      staff paper like it might ask something of her.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: Not tonight.
+        ja_JP: '[ja_JP] Not tonight.'
+        zh_TW: '[zh_TW] Not tonight.'
+        zh_CN: '[zh_CN] Not tonight.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_005
+    scene: Knock at the door — soft, not urgent. She freezes. The unfinished phrase
+      hangs in the room.
+    beat_type: micro
+    intent: wound — bracing in love
+  - panel_id: ep001_006
+    scene: Door opens a hand-width. Ren stands in the hall with takeout and no speech
+      prepared. He is unhurried.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_007
+    scene: Ren sets the food down. He does not fill the silence. He hums — the same
+      two bars, then stops where she always stops.
+    beat_type: micro
+    intent: mid — shared motif
+  - panel_id: ep001_008
+    scene: Mira's shoulders drop a fraction. She did not teach him the tune. He learned
+      it by being near it.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: He doesn't finish it for her.
+      ja_JP: '[ja_JP] He doesn''t finish it for her.'
+      zh_TW: '[zh_TW] He doesn''t finish it for her.'
+      zh_CN: '[zh_CN] He doesn''t finish it for her.'
+  - panel_id: ep001_009
+    scene: They sit. Chopsticks. The staff paper between them. Ren taps the table
+      once — an invitation, not a demand.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        en_US: Whenever.
+        ja_JP: '[ja_JP] Whenever.'
+        zh_TW: '[zh_TW] Whenever.'
+        zh_CN: '[zh_CN] Whenever.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_010
+    scene: Mira hums the two bars. Ren joins on the second pass. On the third, she
+      lets the bridge happen — one note further than before.
+    beat_type: micro
+    intent: closing — song unforced
+  - panel_id: ep001_011
+    scene: 'Wide: two people at a small table. Lamp. Food. The phrase lands and rests.
+      No lesson. No speech.'
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_012
+    scene: Close on the staff paper. A pencil adds one bar. Not finished. Kept.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: The song can wait. We don't have to.
+      ja_JP: '[ja_JP] The song can wait. We don''t have to.'
+      zh_TW: '[zh_TW] The song can wait. We don''t have to.'
+      zh_CN: '[zh_CN] The song can wait. We don''t have to.'
+  - panel_id: ep001_013
+    scene: Mira's hand next to Ren's on the table. Not gripping. Resting.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_014
+    scene: Door still unlocked. Night air. The tune does not need an audience.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_015
+    scene: Final small panel — soft field of warm color.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: End of Episode 1 — The Shared Song
+      ja_JP: '[ja_JP] End of Episode 1 — The Shared Song'
+      zh_TW: '[zh_TW] End of Episode 1 — The Shared Song'
+      zh_CN: '[zh_CN] End of Episode 1 — The Shared Song'
+  - panel_id: ep001_016
+    scene: Typographic breath. Empty bar of music fading.
+    beat_type: micro
+    silence_confirmed: true
+notes:
+  pacing: 'Sixteen panels. Music-mode: motif felt, not explained. Opening alone →
+    mid shared → closing one bar further.'
+  bubble_style_register: Whisper/soft only. No doctrine captions.
+  sfx_policy: None — the hummed phrase is the score.
+craft_notes: 'VESSEL: the shared song (romance_josei_drama / music) — config/manga/manga_mode_vessels.yaml.
+
+  MODE: music (XOR — no teacher vessel, no teacher_id).
+
+  MUSIC BRAND: ahjan_music (Q-M4-01 default; first active in music_brand_registry.yaml).
+
+  SPEC: docs/specs/MUSIC_MODE_MANGA_V1_SPEC.md — diegetic motif, no fourth-wall musician
+  monologue.
+
+  Musician NEVER named in-story. EI character-author: Rena Vale.
+
+  ACCEPTANCE: authored + gate-floor + craft-reviewed — not claimed bestseller.'

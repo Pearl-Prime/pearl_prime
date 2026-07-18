@@ -1,0 +1,23 @@
+{
+  "plan_id": "test-vce-001",
+  "segments": [
+    {
+      "segment_id": "seg-a",
+      "text": "When anxiety shows up, it is often your nervous system asking for attention rather than the enemy you imagine.",
+      "start_char": 0,
+      "end_char": 120,
+      "slot_id": "slot-intro",
+      "primary_atom_id": "atom-a",
+      "atom_refs": [{ "atom_id": "atom-a", "weight": 1.0, "role": "primary" }]
+    },
+    {
+      "segment_id": "seg-b",
+      "text": "You can notice the feeling, name it gently, and let the breath slow without forcing the moment to fix itself overnight.",
+      "start_char": 121,
+      "end_char": 260,
+      "slot_id": "slot-body",
+      "primary_atom_id": "atom-b",
+      "atom_refs": [{ "atom_id": "atom-b", "weight": 1.0, "role": "primary" }]
+    }
+  ]
+}

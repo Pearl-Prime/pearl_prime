@@ -1,0 +1,147 @@
+{
+  "strategy_profile": "intimate_voice",
+  "story_mix_profile": "intimate_voice",
+  "status": "PASS",
+  "book_idea": "prediction-as-evidence swap",
+  "book_motif": "The Alarm (chest and phone)",
+  "requested_budget": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "fulfilled_counts": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "underfilled_budget_by_class": {},
+  "supported_underfilled_budget_by_class": {},
+  "capability_gaps": {},
+  "supply_provenance_by_class": {
+    "REFLECTION_QUESTION": "authored_bank",
+    "TROUBLESHOOTING": "authored_bank",
+    "EXTERNAL_STORY": "authored_bank",
+    "CITED_EVIDENCE": "authored_bank",
+    "WISDOM_ESSENCE": "authored_bank",
+    "AUTHOR_COMMENTARY": "authored_bank",
+    "ENCOURAGEMENT": "atom_pool",
+    "QUOTE": "authored_bank"
+  },
+  "assignment_diagnostics_by_class": {
+    "REFLECTION_QUESTION": {
+      "budget": 3,
+      "assigned": 3,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "TROUBLESHOOTING": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "QUOTE": {
+      "budget": 3,
+      "assigned": 3,
+      "pool_size": 12,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "ENCOURAGEMENT": {
+      "budget": 2,
+      "assigned": 2,
+      "pool_size": 21,
+      "supply_provenance": "atom_pool",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "CITED_EVIDENCE": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "EXTERNAL_STORY": {
+      "budget": 2,
+      "assigned": 2,
+      "pool_size": 20,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "WISDOM_ESSENCE": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 12,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "AUTHOR_COMMENTARY": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 10,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    }
+  },
+  "actual_accent_counts": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "actual_accent_chapter_share": 0.75,
+  "chapters_with_accents": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    9,
+    10,
+    12
+  ],
+  "chapter_share": 0.75,
+  "exemplar_config_present": true,
+  "exemplar_config_path": "config/authoring/bestseller_enrichment_signatures.yaml",
+  "exemplar_pool_size": 1,
+  "nearest_exemplar_id": "badass_habits_anxiety_flagship_v1",
+  "nearest_exemplar_label": "Intimate-voice anxiety flagship (research signature)",
+  "nearest_exemplar_score": 45,
+  "budget_alignment_delta": {
+    "ENCOURAGEMENT": 0,
+    "QUOTE": 0,
+    "AUTHOR_COMMENTARY": 0,
+    "WISDOM_ESSENCE": 0,
+    "CITED_EVIDENCE": 0,
+    "TROUBLESHOOTING": 0,
+    "EXTERNAL_STORY": 0,
+    "REFLECTION_QUESTION": 0
+  },
+  "warnings": [],
+  "contract_id": "enhancement_contract_v1"
+}

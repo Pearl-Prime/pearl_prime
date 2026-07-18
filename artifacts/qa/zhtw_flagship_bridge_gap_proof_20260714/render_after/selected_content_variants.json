@@ -1,0 +1,2150 @@
+{
+  "schema_version": 1,
+  "stage": "selected_content_variants",
+  "topic": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "",
+  "runtime_format": "extended_book_2h",
+  "chapters": [
+    {
+      "number": 1,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v22",
+          "source": "persona_atom",
+          "source_id": "HOOK v22+stack4",
+          "target_words": 476,
+          "actual_words": 176,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_DEFINITION",
+          "variant_id": "",
+          "atom_id": "angle_def:PROTECTIVE_ALARM",
+          "source": "angle_atom",
+          "source_id": "angle_def:PROTECTIVE_ALARM",
+          "target_words": 50,
+          "actual_words": 47,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 420,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch1:story_1:recognition:overwhelm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch1:story_1:recognition:overwhelm:v03",
+          "target_words": 50,
+          "actual_words": 92,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v11",
+          "source": "persona_atom",
+          "source_id": "PIVOT v11",
+          "target_words": 50,
+          "actual_words": 39,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v03",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v03",
+          "target_words": 284,
+          "actual_words": 259,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "med_007",
+          "source": "practice_library",
+          "source_id": "med_007",
+          "target_words": 80,
+          "actual_words": 64,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch1:story_1:mechanism_proof:overwhelm:v05",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch1:story_1:mechanism_proof:overwhelm:v05",
+          "target_words": 50,
+          "actual_words": 101,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch1:story_1:turning_point:overwhelm:v08",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch1:story_1:turning_point:overwhelm:v08",
+          "target_words": 50,
+          "actual_words": 130,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v19",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v19",
+          "target_words": 50,
+          "actual_words": 26,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v46",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v46",
+          "target_words": 240,
+          "actual_words": 341,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v13",
+          "source": "persona_atom",
+          "source_id": "THREAD v13",
+          "target_words": 50,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v05",
+          "source": "persona_atom",
+          "source_id": "HOOK v05+stack4",
+          "target_words": 476,
+          "actual_words": 150,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L1",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L1",
+          "target_words": 476,
+          "actual_words": 216,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 1
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 420,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch2:story_2:recognition:overwhelm:v18",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch2:story_2:recognition:overwhelm:v18",
+          "target_words": 50,
+          "actual_words": 162,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v15",
+          "source": "persona_atom",
+          "source_id": "PIVOT v15",
+          "target_words": 50,
+          "actual_words": 51,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v01",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v01",
+          "target_words": 284,
+          "actual_words": 316,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "cyclic_sighing",
+          "source": "practice_library",
+          "source_id": "cyclic_sighing",
+          "target_words": 80,
+          "actual_words": 152,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch2:story_2:mechanism_proof:overwhelm:v22",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch2:story_2:mechanism_proof:overwhelm:v22",
+          "target_words": 50,
+          "actual_words": 158,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch2:story_2:turning_point:overwhelm:v18",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch2:story_2:turning_point:overwhelm:v18",
+          "target_words": 50,
+          "actual_words": 162,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v16",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v16",
+          "target_words": 50,
+          "actual_words": 23,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v36",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v36",
+          "target_words": 240,
+          "actual_words": 238,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v21",
+          "source": "persona_atom",
+          "source_id": "THREAD v21",
+          "target_words": 50,
+          "actual_words": 71,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v09",
+          "source": "persona_atom",
+          "source_id": "HOOK v09+stack4",
+          "target_words": 476,
+          "actual_words": 164,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L2",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L2",
+          "target_words": 476,
+          "actual_words": 222,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 420,
+          "actual_words": 112,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch3:story_3:recognition:overwhelm:v19",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch3:story_3:recognition:overwhelm:v19",
+          "target_words": 50,
+          "actual_words": 145,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v17",
+          "source": "persona_atom",
+          "source_id": "PIVOT v17",
+          "target_words": 50,
+          "actual_words": 44,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v05",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v05",
+          "target_words": 284,
+          "actual_words": 326,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "body_003",
+          "source": "practice_library",
+          "source_id": "body_003",
+          "target_words": 80,
+          "actual_words": 136,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch3:story_3:mechanism_proof:overwhelm:v23",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch3:story_3:mechanism_proof:overwhelm:v23",
+          "target_words": 50,
+          "actual_words": 153,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch3:story_3:embodiment:overwhelm:v20",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch3:story_3:embodiment:overwhelm:v20",
+          "target_words": 50,
+          "actual_words": 138,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v03",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v03",
+          "target_words": 50,
+          "actual_words": 19,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v37",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v37",
+          "target_words": 240,
+          "actual_words": 199,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v22",
+          "source": "persona_atom",
+          "source_id": "THREAD v22",
+          "target_words": 50,
+          "actual_words": 68,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v26",
+          "source": "persona_atom",
+          "source_id": "HOOK v26+stack4",
+          "target_words": 476,
+          "actual_words": 146,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L3",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L3",
+          "target_words": 476,
+          "actual_words": 201,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 3
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 420,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch4:story_4:recognition:overwhelm:v20",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch4:story_4:recognition:overwhelm:v20",
+          "target_words": 50,
+          "actual_words": 143,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v03",
+          "source": "persona_atom",
+          "source_id": "PIVOT v03",
+          "target_words": 50,
+          "actual_words": 37,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v04",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v04",
+          "target_words": 284,
+          "actual_words": 338,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "sens_001",
+          "source": "practice_library",
+          "source_id": "sens_001",
+          "target_words": 80,
+          "actual_words": 182,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch4:story_4:mechanism_proof:overwhelm:v24",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch4:story_4:mechanism_proof:overwhelm:v24",
+          "target_words": 50,
+          "actual_words": 173,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch4:story_4:turning_point:overwhelm:v20",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch4:story_4:turning_point:overwhelm:v20",
+          "target_words": 50,
+          "actual_words": 144,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v12",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v12",
+          "target_words": 50,
+          "actual_words": 24,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v38",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v38",
+          "target_words": 240,
+          "actual_words": 184,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v23",
+          "source": "persona_atom",
+          "source_id": "THREAD v23",
+          "target_words": 50,
+          "actual_words": 73,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v03",
+          "source": "persona_atom",
+          "source_id": "HOOK v03+stack4",
+          "target_words": 436,
+          "actual_words": 169,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L4",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L4",
+          "target_words": 436,
+          "actual_words": 206,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 384,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch5:story_5:recognition:overwhelm:v21",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch5:story_5:recognition:overwhelm:v21",
+          "target_words": 50,
+          "actual_words": 217,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v06",
+          "source": "persona_atom",
+          "source_id": "PIVOT v06",
+          "target_words": 50,
+          "actual_words": 24,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v02",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v02",
+          "target_words": 259,
+          "actual_words": 317,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "integ_012",
+          "source": "practice_library",
+          "source_id": "integ_012",
+          "target_words": 202,
+          "actual_words": 153,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch5:story_5:mechanism_proof:overwhelm:v25",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch5:story_5:mechanism_proof:overwhelm:v25",
+          "target_words": 50,
+          "actual_words": 202,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch5:story_5:turning_point:overwhelm:v21",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch5:story_5:turning_point:overwhelm:v21",
+          "target_words": 50,
+          "actual_words": 227,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v09",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v09",
+          "target_words": 50,
+          "actual_words": 27,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v39",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v39",
+          "target_words": 219,
+          "actual_words": 364,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v24",
+          "source": "persona_atom",
+          "source_id": "THREAD v24",
+          "target_words": 50,
+          "actual_words": 64,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v02",
+          "source": "persona_atom",
+          "source_id": "HOOK v02+stack4",
+          "target_words": 476,
+          "actual_words": 166,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L5",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L5",
+          "target_words": 476,
+          "actual_words": 211,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 5
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 420,
+          "actual_words": 112,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch6:story_6:recognition:overwhelm:v22",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch6:story_6:recognition:overwhelm:v22",
+          "target_words": 50,
+          "actual_words": 193,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v14",
+          "source": "persona_atom",
+          "source_id": "PIVOT v14",
+          "target_words": 50,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v06",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v06",
+          "target_words": 284,
+          "actual_words": 298,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "thought_022",
+          "source": "practice_library",
+          "source_id": "thought_022",
+          "target_words": 80,
+          "actual_words": 158,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch6:story_6:mechanism_proof:overwhelm:v26",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch6:story_6:mechanism_proof:overwhelm:v26",
+          "target_words": 50,
+          "actual_words": 204,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch6:story_6:embodiment:overwhelm:v21",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch6:story_6:embodiment:overwhelm:v21",
+          "target_words": 50,
+          "actual_words": 183,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v17",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v17",
+          "target_words": 50,
+          "actual_words": 23,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v40",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v40",
+          "target_words": 240,
+          "actual_words": 344,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v25",
+          "source": "persona_atom",
+          "source_id": "THREAD v25",
+          "target_words": 50,
+          "actual_words": 62,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v25",
+          "source": "persona_atom",
+          "source_id": "HOOK v25+stack4",
+          "target_words": 436,
+          "actual_words": 159,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L6",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L6",
+          "target_words": 436,
+          "actual_words": 196,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 6
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 384,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch7:story_7:recognition:overwhelm:v23",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch7:story_7:recognition:overwhelm:v23",
+          "target_words": 50,
+          "actual_words": 205,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v18",
+          "source": "persona_atom",
+          "source_id": "PIVOT v18",
+          "target_words": 50,
+          "actual_words": 36,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v07",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v07",
+          "target_words": 259,
+          "actual_words": 325,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "thought_002",
+          "source": "practice_library",
+          "source_id": "thought_002",
+          "target_words": 202,
+          "actual_words": 136,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch7:story_7:mechanism_proof:overwhelm:v27",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch7:story_7:mechanism_proof:overwhelm:v27",
+          "target_words": 50,
+          "actual_words": 202,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch7:story_7:turning_point:overwhelm:v23",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch7:story_7:turning_point:overwhelm:v23",
+          "target_words": 50,
+          "actual_words": 224,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v13",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v13",
+          "target_words": 50,
+          "actual_words": 28,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v41",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v41",
+          "target_words": 219,
+          "actual_words": 347,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v26",
+          "source": "persona_atom",
+          "source_id": "THREAD v26",
+          "target_words": 50,
+          "actual_words": 69,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v12",
+          "source": "persona_atom",
+          "source_id": "HOOK v12+stack4",
+          "target_words": 436,
+          "actual_words": 148,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L7",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L7",
+          "target_words": 436,
+          "actual_words": 191,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 7
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 384,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch8:story_8:recognition:overwhelm:v24",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch8:story_8:recognition:overwhelm:v24",
+          "target_words": 50,
+          "actual_words": 213,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v20",
+          "source": "persona_atom",
+          "source_id": "PIVOT v20",
+          "target_words": 50,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v08",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v08",
+          "target_words": 259,
+          "actual_words": 288,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "eye_softening",
+          "source": "practice_library",
+          "source_id": "eye_softening",
+          "target_words": 202,
+          "actual_words": 123,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch8:story_8:mechanism_proof:overwhelm:v28",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch8:story_8:mechanism_proof:overwhelm:v28",
+          "target_words": 50,
+          "actual_words": 227,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch8:story_8:turning_point:overwhelm:v24",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch8:story_8:turning_point:overwhelm:v24",
+          "target_words": 50,
+          "actual_words": 233,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v20",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v20",
+          "target_words": 50,
+          "actual_words": 24,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v42",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v42",
+          "target_words": 219,
+          "actual_words": 392,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v27",
+          "source": "persona_atom",
+          "source_id": "THREAD v27",
+          "target_words": 50,
+          "actual_words": 54,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v27",
+          "source": "persona_atom",
+          "source_id": "HOOK v27+stack4",
+          "target_words": 434,
+          "actual_words": 143,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L8",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L8",
+          "target_words": 434,
+          "actual_words": 203,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 8
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 383,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch9:story_9:recognition:overwhelm:v25",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch9:story_9:recognition:overwhelm:v25",
+          "target_words": 50,
+          "actual_words": 224,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v02",
+          "source": "persona_atom",
+          "source_id": "PIVOT v02",
+          "target_words": 50,
+          "actual_words": 40,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v09",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v09",
+          "target_words": 383,
+          "actual_words": 273,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "integ_018",
+          "source": "practice_library",
+          "source_id": "integ_018",
+          "target_words": 80,
+          "actual_words": 158,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch9:story_9:mechanism_proof:overwhelm:v29",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch9:story_9:mechanism_proof:overwhelm:v29",
+          "target_words": 50,
+          "actual_words": 212,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch9:story_9:embodiment:overwhelm:v22",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch9:story_9:embodiment:overwhelm:v22",
+          "target_words": 50,
+          "actual_words": 210,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v10",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v10",
+          "target_words": 50,
+          "actual_words": 28,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v43",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v43",
+          "target_words": 220,
+          "actual_words": 404,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v28",
+          "source": "persona_atom",
+          "source_id": "THREAD v28",
+          "target_words": 50,
+          "actual_words": 51,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v06",
+          "source": "persona_atom",
+          "source_id": "HOOK v06+stack4",
+          "target_words": 402,
+          "actual_words": 176,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L9",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L9",
+          "target_words": 402,
+          "actual_words": 203,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 9
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 354,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch10:story_10:recognition:overwhelm:v26",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch10:story_10:recognition:overwhelm:v26",
+          "target_words": 50,
+          "actual_words": 219,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v13",
+          "source": "persona_atom",
+          "source_id": "PIVOT v13",
+          "target_words": 50,
+          "actual_words": 36,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v10",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v10",
+          "target_words": 354,
+          "actual_words": 268,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "refl_015",
+          "source": "practice_library",
+          "source_id": "refl_015",
+          "target_words": 187,
+          "actual_words": 110,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch10:story_10:mechanism_proof:overwhelm:v30",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch10:story_10:mechanism_proof:overwhelm:v30",
+          "target_words": 50,
+          "actual_words": 223,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch10:story_10:embodiment:overwhelm:v23",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch10:story_10:embodiment:overwhelm:v23",
+          "target_words": 50,
+          "actual_words": 215,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v07",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v07",
+          "target_words": 50,
+          "actual_words": 19,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v44",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v44",
+          "target_words": 203,
+          "actual_words": 365,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v29",
+          "source": "persona_atom",
+          "source_id": "THREAD v29",
+          "target_words": 50,
+          "actual_words": 88,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v30",
+          "source": "persona_atom",
+          "source_id": "HOOK v30+stack4",
+          "target_words": 434,
+          "actual_words": 181,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L10",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L10",
+          "target_words": 434,
+          "actual_words": 215,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 10
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 383,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch11:story_11:recognition:overwhelm:v27",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch11:story_11:recognition:overwhelm:v27",
+          "target_words": 50,
+          "actual_words": 212,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v16",
+          "source": "persona_atom",
+          "source_id": "PIVOT v16",
+          "target_words": 50,
+          "actual_words": 31,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v11",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v11",
+          "target_words": 383,
+          "actual_words": 263,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "extended_exhale",
+          "source": "practice_library",
+          "source_id": "extended_exhale",
+          "target_words": 80,
+          "actual_words": 136,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch11:story_11:mechanism_proof:overwhelm:v31",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch11:story_11:mechanism_proof:overwhelm:v31",
+          "target_words": 50,
+          "actual_words": 215,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch11:story_11:turning_point:overwhelm:v25",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch11:story_11:turning_point:overwhelm:v25",
+          "target_words": 50,
+          "actual_words": 242,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v15",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v15",
+          "target_words": 50,
+          "actual_words": 27,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v45",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v45",
+          "target_words": 220,
+          "actual_words": 379,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v30",
+          "source": "persona_atom",
+          "source_id": "THREAD v30",
+          "target_words": 50,
+          "actual_words": 84,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v14",
+          "source": "persona_atom",
+          "source_id": "HOOK v14+stack4",
+          "target_words": 385,
+          "actual_words": 164,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb:PROTECTIVE_ALARM:L11",
+          "source": "angle_atom",
+          "source_id": "angle_cb:PROTECTIVE_ALARM:L11",
+          "target_words": 385,
+          "actual_words": 196,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 11
+          }
+        },
+        {
+          "slot_type": "SCENE",
+          "variant_id": "",
+          "atom_id": "SCENE v30",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 338,
+          "actual_words": 112,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "scene_ladder": [
+              {
+                "archetype": null,
+                "depth_level": 1
+              }
+            ]
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch12:story_12:recognition:overwhelm:v28",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch12:story_12:recognition:overwhelm:v28",
+          "target_words": 50,
+          "actual_words": 218,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "PIVOT",
+          "variant_id": "",
+          "atom_id": "PIVOT v10",
+          "source": "persona_atom",
+          "source_id": "PIVOT v10",
+          "target_words": 50,
+          "actual_words": 42,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v15",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v15",
+          "target_words": 338,
+          "actual_words": 275,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "refl_034",
+          "source": "practice_library",
+          "source_id": "refl_034",
+          "target_words": 80,
+          "actual_words": 123,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch12:story_12:mechanism_proof:overwhelm:v32",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch12:story_12:mechanism_proof:overwhelm:v32",
+          "target_words": 50,
+          "actual_words": 218,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:twelve_shape:ch12:story_12:embodiment:overwhelm:v24",
+          "source": "story_plan",
+          "source_id": "story_plan:twelve_shape:ch12:story_12:embodiment:overwhelm:v24",
+          "target_words": 50,
+          "actual_words": 245,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TAKEAWAY",
+          "variant_id": "",
+          "atom_id": "TAKEAWAY v19",
+          "source": "persona_atom",
+          "source_id": "TAKEAWAY v19",
+          "target_words": 50,
+          "actual_words": 26,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v46",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v46",
+          "target_words": 359,
+          "actual_words": 341,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "THREAD",
+          "variant_id": "",
+          "atom_id": "THREAD v31",
+          "source": "persona_atom",
+          "source_id": "THREAD v31",
+          "target_words": 50,
+          "actual_words": 122,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    }
+  ]
+}

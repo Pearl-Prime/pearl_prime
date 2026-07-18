@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__burnout__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__depletion
+  name: Refill the Empty Well — for First Responders
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'After the Flame: The Weight You Carry'
+subtitle: A Real Talk Guide to Burnout for First Responders
+cover_tagline: The job ended. The weight you carried out of it didn't.
+description:
+  short_blurb: You came home, but part of you is still on a call that went bad. This
+    is a book for first responders carrying a grief nobody filed paperwork for. It
+    won't try to talk you out of it. It will help you stop pretending it isn't there.
+  long_description: 'You''re sitting in the rig after the worst call of the month,
+    and everyone''s making jokes, and you''re laughing too, and somewhere underneath
+    you feel a weight that has no name. You go home. You eat. You sleep, or you don''t.
+    And the weight is still there in the morning. It doesn''t show up on any report.
+    Nobody debriefed it. But you carry it into the next shift, and the next, until
+    carrying it is just how your body feels now.
+
+
+    This is for the firefighter, the medic, the cop, the dispatcher who learned early
+    that you don''t get to fall apart on scene. You stuffed it down because the job
+    required it, and stuffing it down worked, right up until it stopped working. You
+    started snapping at people who didn''t earn it. You started drinking the edge
+    off, or running yourself into the ground at the gym, or going quiet in a way your
+    family noticed before you did. What you''re carrying is grief. Not the kind with
+    a funeral. The kind that accumulates one call at a time, for the ones you couldn''t
+    save, for the faces you can still describe years later, for the version of yourself
+    who walked in the door on day one believing you could fix anything.
+
+
+    This book names it first, because nobody at the station will. Burnout in this
+    line of work isn''t weakness and it isn''t tiredness you can sleep off on a long
+    weekend. It''s grief that never got anywhere to go, so it went into your shoulders
+    and your sleep and the space between you and the people you love. So we go down
+    into it instead of around it. We sit with the calls you don''t talk about, the
+    ones you''ve never said out loud. We let the weight be real, because pretending
+    it isn''t real is what''s been quietly costing you the most. And then we come
+    back up. Not lighter, exactly. Changed. Carrying it differently, like something
+    that belongs to you instead of something crushing you from the inside.
+
+
+    This will not promise you closure. It will not hand you a four-step routine to
+    optimize your recovery or a checklist that makes the dead stop visiting your sleep.
+    There is no fix here, because grief was never a malfunction to be fixed. What''s
+    here is recognition, and the strange, steadying relief of finally calling the
+    thing by its real name after years of calling it nothing at all.
+
+
+    You don''t have to be over it. You were never supposed to be over it. You''re
+    allowed to still be carrying it, and you''re allowed to set it down for a while,
+    too.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - first responders
+  - burnout for first responders
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) - how unprocessed trauma lives in
+  the body long after the call ends
+- It's OK That You're Not OK (Megan Devine) - grief as something to carry, not cure,
+  with none of the forced positivity
+- Tribe (Sebastian Junger) - why people who serve struggle to come home, and what
+  the homecoming actually asks of them
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

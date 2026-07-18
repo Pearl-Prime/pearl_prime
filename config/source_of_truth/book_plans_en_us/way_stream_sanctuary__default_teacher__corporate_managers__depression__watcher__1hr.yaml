@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__depression__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__through_loss__1hr
+  name: Through the Low Places — for Managers (One-Hour)
+installment_number: 3
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: The Witnessing Practice'
+subtitle: How to Create Distance from Anxious Thoughts and Find Clarity
+cover_tagline: Part of you has been on watch for months. Let it stand down.
+description:
+  short_blurb: There's a part of you scanning the room in every meeting, reading the
+    silence after you speak, replaying what your skip-level meant by 'noted.' It never
+    clocks out. This hour is about the exhausting distance between you and the mind
+    that won't stop watching.
+  long_description: 'You said your piece in the leadership sync and now there''s a
+    voice running the tape: did that land, did the VP go quiet because she disagreed,
+    is the silence in the team channel about you. The watcher in your head has been
+    on shift for months. It tracks tone in every one-on-one, scans for the layoff
+    signal in every all-hands, narrates the meaning behind a one-word reply. You go
+    home and it''s still on duty, and the strangest part is how far away you feel
+    from your own life while it runs, like you''re reviewing the footage instead of
+    living the day.
+
+
+    This hour is for the manager whose mind never stands down. The hypervigilant one,
+    always a half-step outside the moment, watching yourself manage instead of just
+    managing. It looks like competence from the outside. Inside it''s a low, grinding
+    exhaustion, and a flatness that crept in while you weren''t looking, the cost
+    of a sentry that was supposed to keep you safe and instead put a pane of glass
+    between you and everything you''re standing in.
+
+
+    Waystream is secular and plain about this. We won''t tell you to silence the thoughts
+    or breathe them away. We start by naming the watcher honestly: a part of you that
+    took the night shift to protect you and forgot how to clock out. Then you go down
+    into the space between you and it, the gap where you''ve quietly been living,
+    and instead of fighting the vigilance you turn and look at it. You let the sentry
+    be tired. You stop identifying with the running commentary and start noticing
+    you are the one it''s been talking to all along. For one hour the distance closes
+    a little, and the glass thins.
+
+
+    This book will not promise a quiet mind or a manager who never second-guesses
+    a meeting again. It won''t tell you the watching is a flaw to delete, or that
+    the right mindset shuts it off. The vigilance came from somewhere real, some moment
+    it actually was the thing that saved you. What this offers is a way to recognize
+    the watcher, go down into the space between you and your own anxiety, and come
+    back able to stand inside a moment instead of guarding it from the doorway.
+
+
+    You don''t have to keep watch to stay safe in your own job. The sentry is allowed
+    to rest, and so is the part of you that''s been standing behind it, waiting for
+    permission to come back into the room.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - managers
+  - depression for managers
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — shows how the watching mind becomes a habit
+  loop, and how to step out of it
+- The Untethered Soul (Michael Singer) — secular framing of the inner narrator you
+  keep mistaking for yourself
+- Why Has Nobody Told Me This Before? (Julie Smith) — practical, no-woo handling of
+  a mind that won't switch off
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

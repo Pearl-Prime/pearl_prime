@@ -1,0 +1,131 @@
+# Therapeutic Sound Effects Bank Index
+# Authority: Plan — Therapeutic Sound Effects Bank + Intelligent Layer Composition
+# All sounds: CC0 licensed from Freesound.org (no attribution needed)
+# Selection: deterministic hash (category, channel_id, plan_id)
+# Anti-spam: 8 variants per category, ±3% pitch shift, combination tracking
+
+schema_version: "1.0"
+
+# ── Categories ────────────────────────────────────────────────────
+categories:
+
+  nature_ambient:
+    description: "Rain, ocean, wind, forest, birds, water — background atmosphere"
+    therapeutic_role: "Parasympathetic activation via natural soundscape"
+    frequency_range_hz: [200, 4000]
+    default_level_db: -28
+    variants:
+      - {id: "nat_rain_gentle_01", file: "nature_ambient/rain_gentle_01.mp3", duration_s: 60, tags: [rain, gentle, steady]}
+      - {id: "nat_rain_gentle_02", file: "nature_ambient/rain_gentle_02.mp3", duration_s: 60, tags: [rain, soft, varying]}
+      - {id: "nat_ocean_waves_01", file: "nature_ambient/ocean_waves_01.mp3", duration_s: 60, tags: [ocean, waves, rhythmic]}
+      - {id: "nat_ocean_waves_02", file: "nature_ambient/ocean_waves_02.mp3", duration_s: 60, tags: [ocean, distant, calm]}
+      - {id: "nat_forest_birds_01", file: "nature_ambient/forest_birds_01.mp3", duration_s: 60, tags: [forest, birds, morning]}
+      - {id: "nat_wind_gentle_01", file: "nature_ambient/wind_gentle_01.mp3", duration_s: 60, tags: [wind, breeze, soft]}
+      - {id: "nat_stream_water_01", file: "nature_ambient/stream_water_01.mp3", duration_s: 60, tags: [water, stream, flowing]}
+      - {id: "nat_night_crickets_01", file: "nature_ambient/night_crickets_01.mp3", duration_s: 60, tags: [night, crickets, peaceful]}
+
+  body_somatic:
+    description: "Breathing rhythm, heartbeat — somatic grounding"
+    therapeutic_role: "Interoception activation, breath entrainment at 6 BPM"
+    frequency_range_hz: [100, 1000]
+    default_level_db: -26
+    variants:
+      - {id: "body_breath_slow_01", file: "body_somatic/breath_slow_01.mp3", duration_s: 30, tags: [breath, slow, 6bpm]}
+      - {id: "body_breath_slow_02", file: "body_somatic/breath_slow_02.mp3", duration_s: 30, tags: [breath, gentle, rhythmic]}
+      - {id: "body_heartbeat_rest_01", file: "body_somatic/heartbeat_rest_01.mp3", duration_s: 30, tags: [heartbeat, resting, 60bpm]}
+      - {id: "body_heartbeat_rest_02", file: "body_somatic/heartbeat_rest_02.mp3", duration_s: 30, tags: [heartbeat, slow, calm]}
+      - {id: "body_breath_ocean_01", file: "body_somatic/breath_ocean_01.mp3", duration_s: 30, tags: [breath, ocean, sync]}
+      - {id: "body_sigh_release_01", file: "body_somatic/sigh_release_01.mp3", duration_s: 10, tags: [sigh, release, exhale]}
+      - {id: "body_breath_deep_01", file: "body_somatic/breath_deep_01.mp3", duration_s: 30, tags: [breath, deep, grounding]}
+      - {id: "body_pulse_gentle_01", file: "body_somatic/pulse_gentle_01.mp3", duration_s: 30, tags: [pulse, subtle, steady]}
+
+  resonant_tone:
+    description: "Singing bowl (110-528 Hz), chimes, bells, kalimba"
+    therapeutic_role: "Vagal tone activation, polyvagal safety signaling in 500-2000 Hz band"
+    frequency_range_hz: [110, 2000]
+    default_level_db: -22
+    variants:
+      - {id: "res_bowl_528hz_01", file: "resonant_tone/bowl_528hz_01.mp3", duration_s: 15, tags: [bowl, 528hz, love]}
+      - {id: "res_bowl_396hz_01", file: "resonant_tone/bowl_396hz_01.mp3", duration_s: 15, tags: [bowl, 396hz, liberation]}
+      - {id: "res_chime_wind_01", file: "resonant_tone/chime_wind_01.mp3", duration_s: 8, tags: [chime, wind, gentle]}
+      - {id: "res_chime_single_01", file: "resonant_tone/chime_single_01.mp3", duration_s: 5, tags: [chime, single, clear]}
+      - {id: "res_bell_temple_01", file: "resonant_tone/bell_temple_01.mp3", duration_s: 10, tags: [bell, temple, deep]}
+      - {id: "res_kalimba_01", file: "resonant_tone/kalimba_01.mp3", duration_s: 8, tags: [kalimba, melody, warm]}
+      - {id: "res_bowl_long_01", file: "resonant_tone/bowl_long_01.mp3", duration_s: 30, tags: [bowl, sustain, meditation]}
+      - {id: "res_tingsha_01", file: "resonant_tone/tingsha_01.mp3", duration_s: 5, tags: [tingsha, bright, marking]}
+
+  transition_marker:
+    description: "Soft whoosh, page turn, gentle sweep — scene transitions"
+    therapeutic_role: "Orienting response (mild novelty) without startle"
+    frequency_range_hz: [500, 4000]
+    default_level_db: -24
+    variants:
+      - {id: "trans_whoosh_soft_01", file: "transition_marker/whoosh_soft_01.mp3", duration_s: 2, tags: [whoosh, soft, air]}
+      - {id: "trans_whoosh_soft_02", file: "transition_marker/whoosh_soft_02.mp3", duration_s: 2, tags: [whoosh, gentle, sweep]}
+      - {id: "trans_page_turn_01", file: "transition_marker/page_turn_01.mp3", duration_s: 1, tags: [page, turn, paper]}
+      - {id: "trans_page_turn_02", file: "transition_marker/page_turn_02.mp3", duration_s: 1, tags: [page, flip, soft]}
+      - {id: "trans_sweep_warm_01", file: "transition_marker/sweep_warm_01.mp3", duration_s: 3, tags: [sweep, warm, rising]}
+      - {id: "trans_brush_01", file: "transition_marker/brush_01.mp3", duration_s: 1, tags: [brush, texture, subtle]}
+      - {id: "trans_click_soft_01", file: "transition_marker/click_soft_01.mp3", duration_s: 0.5, tags: [click, mechanical, quiet]}
+      - {id: "trans_shimmer_01", file: "transition_marker/shimmer_01.mp3", duration_s: 3, tags: [shimmer, sparkle, gentle]}
+
+  silence_breath:
+    description: "Subtle tone fade, resonance decay — marking breath pauses"
+    therapeutic_role: "Parasympathetic window — marks intentional silence for co-regulation"
+    frequency_range_hz: [200, 800]
+    default_level_db: -30
+    variants:
+      - {id: "sil_tone_fade_01", file: "silence_breath/tone_fade_01.mp3", duration_s: 5, tags: [tone, fade, out]}
+      - {id: "sil_tone_fade_02", file: "silence_breath/tone_fade_02.mp3", duration_s: 5, tags: [tone, gentle, descend]}
+      - {id: "sil_resonance_01", file: "silence_breath/resonance_01.mp3", duration_s: 8, tags: [resonance, decay, sustain]}
+      - {id: "sil_hum_low_01", file: "silence_breath/hum_low_01.mp3", duration_s: 10, tags: [hum, low, warm]}
+      - {id: "sil_room_tone_01", file: "silence_breath/room_tone_01.mp3", duration_s: 10, tags: [room, ambient, neutral]}
+      - {id: "sil_breath_space_01", file: "silence_breath/breath_space_01.mp3", duration_s: 5, tags: [breath, space, open]}
+      - {id: "sil_pad_soft_01", file: "silence_breath/pad_soft_01.mp3", duration_s: 10, tags: [pad, soft, atmospheric]}
+      - {id: "sil_fade_warm_01", file: "silence_breath/fade_warm_01.mp3", duration_s: 5, tags: [fade, warm, ending]}
+
+  tension_release:
+    description: "Low warm hum (>100 Hz), distant thunder, resolution chime"
+    therapeutic_role: "Mild sympathetic activation (peak) → parasympathetic release (resolve)"
+    frequency_range_hz: [100, 2000]
+    default_level_db: -24
+    variants:
+      - {id: "ten_hum_warm_01", file: "tension_release/hum_warm_01.mp3", duration_s: 15, tags: [hum, warm, tension]}
+      - {id: "ten_hum_warm_02", file: "tension_release/hum_warm_02.mp3", duration_s: 15, tags: [hum, deep, building]}
+      - {id: "ten_thunder_dist_01", file: "tension_release/thunder_distant_01.mp3", duration_s: 8, tags: [thunder, distant, gentle]}
+      - {id: "ten_resolve_chime_01", file: "tension_release/resolve_chime_01.mp3", duration_s: 5, tags: [chime, resolve, bright]}
+      - {id: "ten_resolve_chime_02", file: "tension_release/resolve_chime_02.mp3", duration_s: 5, tags: [chime, release, warm]}
+      - {id: "ten_drone_soft_01", file: "tension_release/drone_soft_01.mp3", duration_s: 20, tags: [drone, soft, suspense]}
+      - {id: "ten_release_sigh_01", file: "tension_release/release_sigh_01.mp3", duration_s: 3, tags: [release, breath, relief]}
+      - {id: "ten_rain_thunder_01", file: "tension_release/rain_thunder_01.mp3", duration_s: 15, tags: [rain, thunder, cathartic]}
+
+# ── Arc → Category Mapping ────────────────────────────────────────
+arc_to_sfx:
+  hook:
+    primary: nature_ambient
+    secondary: null
+    layers: 1
+  build:
+    primary: nature_ambient
+    secondary: body_somatic
+    layers: 2
+  peak:
+    primary: tension_release
+    secondary: transition_marker
+    layers: 2
+  release:
+    primary: resonant_tone
+    secondary: nature_ambient
+    layers: 2
+  resolve:
+    primary: resonant_tone
+    secondary: silence_breath
+    layers: 1  # fades to 1 layer by end
+
+# ── Level Map (dB below narration) ────────────────────────────────
+arc_to_level_db:
+  hook: -28
+  build: -26
+  peak: -22
+  release: -24
+  resolve: -26  # fades to -30 by end

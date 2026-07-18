@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__somatic_healing__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__somatic_healing.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__through_loss
+  name: Through the Low Places — for Nurses
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Somatic Healing: Too Many Things, Not Enough You (1)'
+subtitle: How Healthcare Rns Are Rewriting the Rules of Somatic Healing
+cover_tagline: Your body kept the score the whole time you ignored it.
+description:
+  short_blurb: You learned to override hunger, exhaustion, and the full bladder you
+    couldn't leave the floor to empty — until your body stopped sending signals you
+    could read. This is a book for nurses about the overwhelm that lives in the body,
+    and the shutdown it builds toward. It won't optimize your recovery. It'll help
+    you feel yourself again.
+  long_description: 'You haven''t eaten since the start of the shift. You can''t remember
+    the last time you sat. There''s a tension in your shoulders that''s been there
+    so long it feels like part of your skeleton, and a low buzz in your chest you
+    stopped noticing around year three. Your body has been sending signals the entire
+    time. You got very, very good at not reading them — and now, off the clock, you
+    can''t feel much of anything below your neck at all.
+
+
+    This book is for the nurse who has spent years overriding the body''s basic alarms
+    to keep working. You learned to ignore hunger, to push past the exhaustion, to
+    hold it because there was no one to cover you for ninety seconds. Every override
+    was small. Stacked across thousands of shifts, they taught your body to stop sending
+    signals you''d only have to refuse — and the overwhelm you couldn''t feel arriving
+    built quietly toward a shutdown you can''t think your way out of.
+
+
+    Years as a hospital chaplain put Oscar Bello beside nurses running on empty, and
+    he writes about what the body remembers and the shutdown point it reaches when
+    too much has been overridden for too long. Recognition: feeling, again, the signals
+    you trained yourself to mute — the tension, the buzz, the held breath, the place
+    where your body went quiet. Descent: going down into the body instead of staying
+    up in your head where it''s been safer to live, where the sensations couldn''t
+    reach you. Integration: coming back online inside your own body, able to feel
+    the overwhelm building before it flips the breaker, present in the only body you''ll
+    get.
+
+
+    This book will not optimize your recovery or hand you a somatic protocol to run
+    between shifts. It will not tell you to do a body scan at the nurses'' station
+    or that you''d feel fine if you hydrated and stretched. It will not treat your
+    numbed-out body as a system to debug and tune. There is no fix here, no biohack
+    for a nervous system you spent years teaching to go silent so you could keep moving.
+
+
+    What it offers is plain language for what the body holds — words you can use the
+    next time you catch yourself overriding a signal you should be allowed to answer.
+    You learned to leave your body to get through the work. It kept the score anyway.
+    You are allowed to come back into it slowly, without a program, without a goal.
+    You are allowed to feel the overwhelm instead of waking up already shut down.
+    You are allowed to live below your own neck again.'
+keywords:
+  primary:
+  - somatic healing
+  - body based healing
+  - nervous system regulation
+  - trauma in the body
+  - somatic therapy
+  - felt sense
+  secondary:
+  - nurses
+  - somatic healing for nurses
+bisac_codes:
+- SEL027000
+- PSY022000
+- HEA046000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — how overwhelm and trauma lodge
+  in the body and resurface there
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — completing
+  the body''s stress response instead of overriding it'
+- Waking the Tiger (Peter Levine) — the body's role in holding and releasing accumulated
+  overwhelm
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

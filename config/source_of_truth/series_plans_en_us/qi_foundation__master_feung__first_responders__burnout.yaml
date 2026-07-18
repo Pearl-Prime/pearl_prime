@@ -1,0 +1,77 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: qi_foundation__master_feung__first_responders__burnout
+brand: qi_foundation
+teacher: master_feung
+persona: first_responders
+topic: burnout
+byline_author: liam_dunmore
+arc:
+  installment_1:
+    book_id: qi_foundation__master_feung__first_responders__burnout__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/first_responders__burnout__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: qi_foundation__master_feung__first_responders__burnout__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/first_responders__burnout__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: qi_foundation__master_feung__first_responders__burnout__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/first_responders__burnout__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the first responder running on empty: a grounded, unhurried
+  way back to the body''s deep energy — not another demand to be stronger, but permission
+  to let the well refill from below.'
+bestseller_hook_family: ''
+emotional_engine: burnout_recognition
+comp_series:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  exhaustion as an unfinished physiological cycle, not a willpower failure, the way
+  this series treats a dry root'
+- When the Body Says No (Gabor Maté) — locates chronic depletion in the body's quiet
+  signals rather than the mind's effort, matching this series' somatic, root-level
+  lens
+- 'Rest: Why You Get More Done When You Work Less (Alex Soojung-Kim Pang) — reframes
+  recovery as the source of vitality rather than a reward for output, the same permission
+  this series extends to first responders'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 29-52
+  where_they_are: It's the end of a back-to-back, the bunker gear is still damp, and
+    you're sitting in the parking lot of the station unable to make your hands turn
+    the key. The radio chatter is finally quiet but your body hasn't gotten the message.
+    You've given everything to the call all shift, and there is nothing left over
+    for the drive home.
+  what_they_need: To understand that burnout isn't weakness or a character flaw —
+    it's a root that has run dry from being asked to give without ever being allowed
+    to take back in. They need a way to stop bracing, to let the ground hold them,
+    and to feel something quiet return from underneath.
+  what_they_avoid: Hustle-culture resilience talks, 'just push through,' wellness
+    checklists that become one more shift to work, toxic positivity, peer-support
+    clichés, and anyone who treats their exhaustion as a performance problem to optimize.
+series_voice_markers:
+  register: grounded, restorative, quietly vital; warm and unhurried, never clinical,
+    never preachy, never hustle — the voice of someone who has sat in the same parking
+    lot and knows not to rush you
+  sentence_rhythm: long, settling sentences that let the breath drop, broken by short
+    plain ones that land like a hand on the shoulder; cadence slows the reader down
+    rather than pushing them forward
+  metaphor_family: roots and meridians, the well that refills from below, deep ground
+    and rising sap, breath reaching the lowest part of the lungs, what flows again
+    when a blockage clears, vitality restored from the root — never machinery, military
+    cadence, productivity, or biohacking
+_needs_authoring: false

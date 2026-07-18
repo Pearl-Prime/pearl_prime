@@ -1,0 +1,78 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: digital_ground__miki__gen_z_professionals__social_anxiety
+brand: digital_ground
+teacher: miki
+persona: gen_z_professionals
+topic: social_anxiety
+byline_author: adam_kim
+arc:
+  installment_1:
+    book_id: digital_ground__miki__gen_z_professionals__social_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__social_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: digital_ground__miki__gen_z_professionals__social_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__social_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: digital_ground__miki__gen_z_professionals__social_anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__social_anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Naming social anxiety in language you can actually use the
+  next time it happens — so the feeling stops being proof something is wrong with
+  you and starts being something you can stand next to. No log-off cure, no networking
+  hacks, no turning yourself into a more confident brand. Just recognition, and the
+  relief of no longer being alone inside the pattern.
+bestseller_hook_family: ''
+emotional_engine: social_anxiety_recognition
+comp_series:
+- Unfuck Yourself series (Gary John Bishop) — plainspoken, profane, anti-platitude
+  self-talk that meets a younger reader where they actually are.
+- The Anxiety Workbook / How to Be Yourself adjacent shelf (Ellen Hendriksen) — social-anxiety-specific,
+  warm and de-shaming rather than exposure-drill clinical.
+- Burnout & Big Feelings shelf (Liz Fosslien & Mollie West Duffy) — illustrated, emotionally
+  literate, built for early-career readers who live online and want feelings named,
+  not fixed.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 22-29
+  where_they_are: Standing just outside the conference room, hand on the door, watching
+    everyone already seated and laughing through the glass — phone in the other hand
+    because looking busy is easier than walking in. They've rehearsed the first thing
+    they'll say four times and it already sounds wrong.
+  what_they_need: To understand what their nervous system is actually doing in rooms
+    full of people, and why it makes sense — without being told to 'just put yourself
+    out there,' download a confidence app, or treat their personality as a problem
+    to fix before the next standup.
+  what_they_avoid: Boomer self-help and 'just log off' platitudes; LinkedIn-influencer
+    confidence advice; grindset and networking-hack content; toxic positivity that
+    tells them to fake it; anything that frames their quiet as a personal brand to
+    optimize or shames them for living half their life on a screen.
+series_voice_markers:
+  register: Gen-Z native, screen-literate, plainspoken and warm; ironic without being
+    cynical — a smart slightly-older friend who actually gets the group chat, the
+    read receipt, the dread of the camera-on meeting; never clinical, never a coach,
+    never hustle.
+  sentence_rhythm: Short declaratives that land like texts, then one longer breath
+    of recognition. Plain words. White space where a clinician would put a bullet
+    list. The pacing of someone talking to you, not presenting at you.
+  metaphor_family: The present moment and the body in the room; the phone face-down
+    on the table; ground under your feet; the breath between notifications; the doorway
+    you're standing in; signal cutting through noise — never productivity, machinery,
+    military, or self-optimization.
+_needs_authoring: false

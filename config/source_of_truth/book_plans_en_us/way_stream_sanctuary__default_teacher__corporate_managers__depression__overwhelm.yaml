@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__depression__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__depression.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__through_loss
+  name: Through the Low Places — for Managers
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Overcoming Depression: When Everything Is Too Much'
+subtitle: A Field Guide for Corporate Managers Navigating Depression
+cover_tagline: The to-do list isn't the problem. The flood underneath it is.
+description:
+  short_blurb: When depression and overwhelm arrive together, every small task feels
+    like lifting a car. The inbox, the standup, the one decision you've been avoiding
+    for a week — all of it lands at once, and you freeze. This is a book for the manager
+    drowning in too-much-at-once while everyone assumes you've got it handled.
+  long_description: 'It''s 9:14 a.m. and you''re already underwater. Forty-one unread
+    emails. Three ''quick questions'' in Slack that aren''t quick. A direct report
+    who needs a hard conversation you''ve rescheduled twice. And instead of starting
+    anywhere, you''re staring at the screen, frozen, while a voice underneath it all
+    says: I can''t. Not won''t. Can''t.
+
+
+    This book is for the manager where the flood meets the flat. Where overwhelm —
+    too much, too fast, all landing at once — has fused with the heavy, low pull of
+    depression until you can''t tell where one ends and the other begins. You used
+    to be the person who triaged chaos for a living. Now opening the calendar makes
+    your chest tighten and your mind go white. You''re not lazy. You''re not failing.
+    You''re flooded, and a flooded system can''t think its way to dry land.
+
+
+    We''ll move through three turns. Recognition first: you''ll learn to tell overwhelm
+    apart from the depression sitting under it — because the everything-at-once feeling
+    and the nothing-matters feeling need different things, and treating one like the
+    other is why nothing has worked. Then descent: the counterintuitive move at the
+    center of this book. Instead of fighting the flood with a better system — another
+    app, another framework, a more aggressive prioritization scheme — you stop swimming.
+    You let the wave be the size it is. You let yourself sink to where you can feel
+    the floor under your feet again. Then integration: you surface able to take one
+    real step, not because you ''beat'' the overwhelm, but because you stopped treating
+    a nervous-system flood like a planning failure.
+
+
+    There is no productivity system in here. No inbox-zero method, no Eisenhower matrix,
+    no time-blocking ritual that will finally make it all fit. Waystream doesn''t
+    optimize you. We''re not going to promise this turns you into a calmer, higher-output
+    leader. The point isn''t more output. The point is that you stop drowning.
+
+
+    What you will get is plain, usable language for the moment the flood hits in the
+    middle of a workday — words for what''s happening in your body when everything
+    becomes too much at once, and a way back to the ground that doesn''t require you
+    to first clear the list. You''ll learn the difference between a real priority
+    and a panic siren, between resting and collapsing, between the overwhelm screaming
+    and you deciding.
+
+
+    You don''t have to get to the bottom of the list to be allowed to breathe. You
+    don''t have to feel capable to be capable. You can put it all down — yes, all
+    of it, the whole impossible pile — right here, for the length of these pages,
+    and let the water go still.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - managers
+  - depression for managers
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — the science of a flooded stress response
+  and why willpower can't drain it
+- Why Has Nobody Told Me This Before? (Julie Smith) — plain, in-the-moment tools for
+  a mind that's gone white under pressure
+- Four Thousand Weeks (Oliver Burkeman) — releases the fantasy that the right system
+  will finally let you do it all
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

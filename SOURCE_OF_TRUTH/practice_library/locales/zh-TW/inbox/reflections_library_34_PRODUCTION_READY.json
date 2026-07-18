@@ -1,0 +1,78 @@
+{
+  "content_type": "zh-TW_locale_partial",
+  "locale": "zh-TW",
+  "source_file": "reflections_library_34_PRODUCTION_READY.json",
+  "note": "LOCALIZATION-ADDED (flagship_phase2_layer6): partial zh-TW translation covering ONLY the exercise ids actually used by the zh-TW gen_z_professionals x anxiety x overwhelm/F006 flagship render. This is NOT full parity with the English source file of the same name (which has many more exercises). phoenix_v4/exercises/practice_library_loader.py::load_practice_library() currently globs SOURCE_OF_TRUTH/practice_library/inbox/*_PRODUCTION_READY.json with no locale parameter at all -- this file is inert until Pearl_Dev adds locale-aware loading (e.g. prefer an id match from SOURCE_OF_TRUTH/practice_library/locales/{locale}/inbox/ before falling back to the English inbox, analogous to phoenix_v4/exercises/practice_library_loader.py load_component_templates()'s existing locale fallback pattern).",
+  "exercises": [
+    {
+      "id": "refl_015",
+      "name": "轉換覺察",
+      "exercise_type": "reflections",
+      "duration_seconds": 60,
+      "difficulty": "beginner",
+      "tags": [
+        "transitions",
+        "awareness",
+        "presence"
+      ],
+      "text": "你現在正處於一個轉換之中，從你先前在做的事，過渡到這個練習。轉換整天都在發生。我們很少停下來注意它們。這個特定的轉換感覺起來像什麼？你是如何抵達新的時刻的？",
+      "components": {
+        "bridge": {
+          "full": "把書放下。不是為了修復什麼，只是給自己一個不同的片刻輸入。",
+          "lean": "把書放下。"
+        },
+        "intro": {
+          "full": "這是轉換覺察。只要看著就好。你不需要相信這一點，試試看就好。",
+          "lean": "這是轉換覺察。只要看著就好。"
+        },
+        "description": {
+          "full": "你現在正處於一個轉換之中，從你先前在做的事，過渡到這個練習。轉換整天都在發生。我們很少停下來注意它們。這個特定的轉換感覺起來像什麼？你是如何抵達新的時刻的？",
+          "lean": "轉換整天都在發生。我們很少停下來注意它們。這個特定的轉換感覺起來像什麼？你是如何抵達新的時刻的？"
+        },
+        "aha": {
+          "full": "現在，我要你注意一件事。注意你的心跑到哪裡去了。那是有用的資訊。無論發生了什麼——或沒有發生什麼——都恰恰是對的。",
+          "lean": "現在，注意你的心跑到哪裡去了。那是有用的資訊。"
+        },
+        "integration": {
+          "full": "現在，在你繼續往下之前，讓它在這一天中自然轉變形狀。從這一刻起，什麼都不必改變。繼續前進。",
+          "lean": "在你繼續往下之前，讓它在這一天中自然轉變形狀。繼續前進。"
+        }
+      }
+    },
+    {
+      "id": "refl_034",
+      "name": "回家",
+      "exercise_type": "reflections",
+      "duration_seconds": 60,
+      "difficulty": "beginner",
+      "tags": [
+        "home",
+        "belonging",
+        "return"
+      ],
+      "text": "家不只是一個地方。是一種感覺。一種歸屬感。此刻，當你與你的呼吸和身體連結時，你正在回到自己心中的家。無論你身在何處，你永遠都能回到這個內在的家。你屬於這裡。你一直都是。",
+      "components": {
+        "bridge": {
+          "full": "你的身體需要這個練習。不是為了修復什麼，只是給自己一個不同的片刻輸入。",
+          "lean": "你的身體需要這個練習。"
+        },
+        "intro": {
+          "full": "這是回家。看見早已存在的東西。你不需要相信這一點，試試看就好。",
+          "lean": "這是回家。看見早已存在的東西。"
+        },
+        "description": {
+          "full": "家不只是一個地方。是一種感覺。一種歸屬感。此刻，當你與你的呼吸和身體連結時，你正在回到自己心中的家。無論你身在何處，你永遠都能回到這個內在的家。你屬於這裡。你一直都是。",
+          "lean": "家不只是一個地方。是一種感覺。一種歸屬感。你屬於這裡。"
+        },
+        "aha": {
+          "full": "現在，我要你注意一件事。注意你是否讓自己感到驚訝。無論浮現了什麼都是有效的。無論發生了什麼——或沒有發生什麼——都恰恰是對的。",
+          "lean": "現在，注意你是否讓自己感到驚訝。無論浮現了什麼都是有效的。"
+        },
+        "integration": {
+          "full": "現在，在你繼續往下之前，與它同在。不要去解決它。從這一刻起，什麼都不必改變。這樣就夠了。",
+          "lean": "在你繼續往下之前，與它同在。不要去解決它。這樣就夠了。"
+        }
+      }
+    }
+  ]
+}

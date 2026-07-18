@@ -1,0 +1,223 @@
+# Machine-readable legacy template inventory (repo-relative paths).
+# Zip archives exist on disk but extracted YAML trees are NOT present until unpacked.
+# template_expand2/ — vendor + persona batch drop (see artifacts/audit/TEMPLATE_EXPAND2_INGEST_AUDIT.md).
+schema_version: 1
+source_root: template_expand
+source_root_expand2: template_expand2
+
+libraries:
+  v4_therapeutic:
+    path: template_expand/_extracted/audiobook_template_v4
+    archive: template_expand/audiobook_template_v4.zip
+    status: available
+    source_type: zip_imported
+    role: section_scaffold
+    chapters: 2
+    sections_per_chapter: irregular
+    sections_present: 2
+    variants_per_section: 1
+    file_format: yaml
+    naming_convention: chapter_{NN}/section_{NN}/variant_{F*}.yaml with keys title and text (block scalar body)
+    avg_words_per_section: 81
+    total_words: 162
+    recommended_use: section_packet_scaffold
+
+  v2_full:
+    path: template_expand/audiobook_template_v2_full
+    archive: template_expand/audiobook_template_v2_full.zip
+    status: missing
+    role: full_library_reference
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: reference_only
+
+  v2_bestseller:
+    path: template_expand/audiobook_template_v2_bestseller
+    archive: template_expand/audiobook_template_v2_bestseller.zip
+    status: missing
+    role: depth_style_library
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: style_reference
+
+  v2_somatic:
+    path: template_expand2/_extracted/qaudiobook_template_v2_somatic/sections_somatic_v2
+    archive: template_expand2/qaudiobook_template_v2_somatic.zip
+    status: available
+    source_type: zip_imported
+    role: section_scaffold
+    chapters: 12
+    sections_per_chapter: 10
+    variants_per_section: 5
+    total_section_yaml_files: 600
+    file_format: yaml
+    naming_convention: sections_somatic_v2/chapter_{NN}/section_{NN}_<type>/fN.yaml with key content (block scalar)
+    avg_words_per_section: 153
+    total_words: 92325
+    recommended_use: section_packet_composer_primary
+
+  v2_somatic_template_expand_legacy:
+    path: template_expand/audiobook_template_v2_SOMATIC
+    archive: template_expand/audiobook_template_v2_somatic.zip
+    status: missing
+    role: somatic_depth_library
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: legacy_path_placeholder_until_extracted
+
+  v2_both:
+    path: template_expand/audiobook_templates_v2_BOTH
+    archive: template_expand/audiobook_templates_v2_BOTH.zip
+    status: missing
+    role: combined_library_reference
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: reference_only
+
+  # Persona atom libraries (template_expand2) — reference inventory; not section YAML grids.
+  midlife_women_complete_atoms:
+    path: template_expand2/_extracted/midlife_women_complete
+    archive: template_expand2/midlife_women_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 8
+    recommended_use: atom_import_source
+
+  midlife_women_520_atoms:
+    path: template_expand2/_extracted/midlife_women_520_atoms
+    archive: template_expand2/midlife_women_520_atoms.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  nyc_executives_combined_atoms:
+    path: template_expand2/_extracted/nyc_executives_combined
+    archive: template_expand2/nyc_executives_combined.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 12
+    recommended_use: atom_import_source
+
+  parents_teens_complete_atoms:
+    path: template_expand2/_extracted/parents_teens_complete
+    archive: template_expand2/parents_teens_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  creatives_freelancers_complete_atoms:
+    path: template_expand2/_extracted/creatives_freelancers_complete
+    archive: template_expand2/creatives_freelancers_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  sf_founders_complete_atoms:
+    path: template_expand2/_extracted/sf_founders_complete
+    archive: template_expand2/sf_founders_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  smb_owners_complete_atoms:
+    path: template_expand2/_extracted/smb_owners_complete
+    archive: template_expand2/smb_owners_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 4
+    recommended_use: atom_import_source
+
+  phase3_all_personas_atoms:
+    path: template_expand2/_extracted/phase3_all_personas
+    archive: template_expand2/phase3_all_personas.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 50
+    recommended_use: atom_import_source
+
+  integrated_chapters:
+    path: template_expand/complete_chapters_integrated.md
+    status: available
+    role: stitched_baseline_reference
+    chapters: 12
+    sections_per_chapter: full_chapter_stitched
+    variants_per_section: 1
+    recommended_use: baseline_reference_not_slot_feed
+
+  chapter_bridges:
+    path: template_expand/chapter_bridges_all.md
+    status: available
+    role: bridge_library
+    chapters: 12
+    sections_per_chapter: 2
+    variants_per_section: 1
+    recommended_use: transition_snippets
+
+  hooks_code:
+    path: template_expand/01_hooks.py
+    status: available
+    role: code_embedded_variant_library
+    chapters: 12
+    sections_per_chapter: not_yaml
+    variants_per_section: 5
+    recommended_use: code_embedded_until_yaml_extracted
+
+  old_pose_chat:
+    path: old_chat_specs/old_chat_pose_book_template.txt
+    status: available
+    role: prompt_lineage_and_10_section_schema
+    chapters: n_a
+    sections_per_chapter: n_a
+    variants_per_section: n_a
+    recommended_use: historical_only
+
+  old_persona_chat:
+    path: old_chat_specs/old_claude_template_persona_stuff.txt
+    status: available
+    role: persona_depth_and_mechanism_lineage
+    chapters: n_a
+    sections_per_chapter: n_a
+    variants_per_section: n_a
+    recommended_use: historical_only
+
+section_roles:
+  section_01: hook
+  section_02: scene
+  section_03: reflection
+  section_04: exercise
+  section_05: scene
+  section_06: teacher_doctrine
+  section_07: reflection
+  section_08: exercise
+  section_09: scene
+  section_10: integration
+
+six_hour_targets:
+  chapters: 12
+  sections_per_chapter: 10
+  target_total_words: 54000
+  target_words_per_section: 450
+
+on_disk_layout:
+  note: >
+    Zip archives unpack under template_expand/_extracted/<zip_basename_without_suffix>/ or
+    template_expand2/_extracted/<zip_basename_without_suffix>/.
+    The loader resolves index path, then _extracted/<archive_stem>, then _extracted/<library_id>.
+    Preferred section files: chapter_{NN}/section_{NN}/variant_{F*}.yaml (YAML body in text/content/body/prose).
+    Somatic v2 (v2_somatic): sections_somatic_v2/chapter_{NN}/section_{NN}_<type>/fN.yaml with key content.

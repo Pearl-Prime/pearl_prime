@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__financial_anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__steady_ground__1hr
+  name: Steady Ground — for the Sandwich Generation (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Financial Anxiety: Escaping the Mental Loop (1)'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Financial Anxiety for Gen X Sandwich (Breaking the Thought Loop)
+cover_tagline: One bill at 2 a.m. becomes every worst-case scenario for everyone you're
+  responsible for.
+description:
+  short_blurb: It starts with one expense and ends, twenty minutes later, with your
+    parents in a state home and your kids' futures wrecked — all of it playing out
+    in your head at 2 a.m. This one-hour reset is for the money spiral that turns
+    a single thought into a thousand. Not to make you think positive — to help you
+    step out of the loop.
+  long_description: 'It always starts small. One unexpected bill, one glance at the
+    bank app, one number that''s lower than you hoped. And then your mind is off:
+    if this month is tight, then next month, then the car, then I can''t cover Mom''s
+    care, then she ends up somewhere awful, then the kids'' college, then they resent
+    me, then we lose the house — and it''s 2 a.m. and you''ve lived through six catastrophes
+    that haven''t happened, your heart pounding like they have. One thought became
+    a thousand, and you can''t find the exit.
+
+
+    This is for you — the one in the middle of the sandwich generation, where every
+    financial worry has extra weight because it''s not just your future on the line,
+    it''s your parents'' care and your kids'' lives too. The spiral feels like planning,
+    like being responsible, like staying ahead of disaster. But it isn''t solving
+    anything. It''s just running the same dread on a loop until you''re wrung out.
+
+
+    This is a one-hour reset, built in three stages. Recognition: you learn to catch
+    the spiral early — to feel the moment a single money worry hooks into the next
+    and the whole runaway chain starts pulling — instead of waking up at the bottom
+    of it. Descent: instead of trying to think your way to the end of the chain or
+    arguing with each catastrophe, you go down underneath the spinning, into the raw
+    fear it''s circling, and let yourself feel the thing the loop is trying to outrun.
+    Integration: you come back up able to step out of the current — to have a money
+    worry without it dragging you through every disaster downstream.
+
+
+    This book will not tell you to just think positive, replace the thoughts, or trust
+    that it''ll all work out. The fears the spiral chases are often real risks — the
+    loop just can''t resolve them, only replay them. What changes is that you stop
+    getting swept the whole way down every time one thought catches. You learn to
+    watch the spiral start and decline the ride.
+
+
+    In plain language you can use the next time your mind takes off at midnight, you''ll
+    get a way to name it — "that''s the spiral, not a forecast" — and a way back to
+    solid ground that doesn''t require silencing the worry. You don''t have to follow
+    every fear to its worst possible end to prove you care. You''re allowed to feel
+    one money worry as one worry, and let the rest go. For one hour, step out of the
+    loop and put your feet back on the floor. Start here.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - the sandwich generation
+  - money anxiety for the sandwich generation
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sam_meridian
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — the brain mechanics of the worry-loop and how
+  to step out of it
+- The Psychology of Money (Morgan Housel) — why financial fear runs on emotion, not
+  arithmetic
+- Don't Believe Everything You Think (Joseph Nguyen) — loosening the grip of a single
+  thought before it spirals
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

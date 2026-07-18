@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__grief__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__grief.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__through_loss
+  name: Through the Low Places — for Tech & Finance Professionals
+installment_number: 2
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Grief: Watching Your Thoughts Without Drowning (5)'
+subtitle: How Tech Finance Burnout Are Rewriting the Rules of Grief
+cover_tagline: Grief turned your mind into a tripwire.
+description:
+  short_blurb: Since the loss, your mind won't stand down — it scans for the next
+    blow, braces before every call, refuses to let you rest in case something else
+    gets taken. This is for the griever whose vigilance became armor. Not how to disarm
+    it. How to find room to breathe beside it.
+  long_description: 'After the loss, something in you went on permanent alert. You
+    used to be sharp because the job demanded it; now you''re sharp because some part
+    of you is convinced the next catastrophe is already loading. You brace before
+    you answer the phone. You pre-grieve people who are perfectly fine. You scan the
+    team, the numbers, your own body for the first sign that something else is about
+    to be taken. The grief is real, but so is this: a watcher that switched on the
+    day everything changed and has not slept since.
+
+
+    This book is for the tech and finance professional whose grief curdled into hypervigilance.
+    The person who lost something and responded the only way their training knew —
+    by trying to monitor reality closely enough to never be blindsided again. The
+    engineer who can''t stop running failure scenarios. The analyst whose risk lens
+    has turned inward and now models every way the people they love could disappear.
+    It''s grief wearing the armor of control, and the armor is so heavy you can barely
+    move under it.
+
+
+    We name the watcher first — separate the bracing, scanning sentry from the grieving
+    person underneath who is just trying not to get hurt again. Then we go down into
+    it. Not to rip the armor off (it went on for a reason, and that reason was real)
+    but to find the space between you and the vigilance, the small clearing where
+    you can actually feel the loss instead of standing guard against the next one.
+    We don''t fix the watcher or talk you out of caring. We give you somewhere to
+    stand that isn''t braced for impact.
+
+
+    This book will not promise that the scanning stops or that you''ll feel safe again
+    on schedule. It won''t sell you serenity or tell you to simply trust that nothing
+    else bad will happen. There''s no protocol here that disarms a grieving, vigilant
+    mind — and a mind this sharp would see through one anyway.
+
+
+    What it gives you is plain, usable language for the watcher and the room beside
+    it — words you can reach for the next time you catch yourself bracing for a blow
+    that hasn''t come, so you can step back instead of standing guard all night. You
+    don''t have to monitor the whole world to survive your loss. You''re allowed to
+    put the armor down for a minute. The vigilance isn''t love — it''s fear in love''s
+    clothing, and there''s a version of you underneath it that''s still allowed to
+    rest.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  - losing someone
+  secondary:
+  - tech & finance professionals
+  - grief for tech & finance professionals
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ana_reyes
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — honors grief without rushing it toward
+  safety or closure
+- Unwinding Anxiety (Judson Brewer) — the loop mechanics of a brain stuck scanning
+  for the next threat
+- The Grieving Brain (Mary-Frances O'Connor) — the neuroscience of a mind that keeps
+  bracing for more loss
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

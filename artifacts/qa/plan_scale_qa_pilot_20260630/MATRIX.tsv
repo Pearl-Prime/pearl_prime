@@ -1,0 +1,15 @@
+persona	topic	duration	buildability	plan_cohesion	plan_chapters	asm_chapters	count_match	struct_equiv	register	ei_v2	ei_composite	book_pass	proxy_validity	leakage
+corporate_managers	burnout	micro_book_15	PLANNABLE	PASS	7	5	False	False	PASS	PASS	0.6148	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	burnout	micro_book_20	PLANNABLE	PASS	7	6	False	False	PASS	PASS	0.6016	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	burnout	short_book_30	PLANNABLE	PASS	7	8	False	False	PASS	PASS	0.5958	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	burnout	standard_book	PLANNABLE	PASS	7	12	False	False	PASS	PASS	0.6261	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	burnout	extended_book_2h	PLANNABLE	PASS	7	12	False	False	FAIL	PASS	0.6182	PASS	BROKEN	CLEAN
+corporate_managers	burnout	deep_book_4h	PLANNABLE	PASS	7	12	False	False	PASS	PASS	0.6411	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	burnout	deep_book_6h	BUILD_FAIL	PASS	7	12	False	False	MISSING	MISSING	None	MISSING	INCONCLUSIVE	NO_BOOK
+corporate_managers	anxiety	micro_book_15	PLANNABLE	PASS	20	5	False	False	PASS	PASS	0.5865	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	anxiety	micro_book_20	PLANNABLE	PASS	20	6	False	False	PASS	PASS	0.6107	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	anxiety	short_book_30	PLANNABLE	PASS	20	8	False	False	PASS	PASS	0.6162	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	anxiety	standard_book	PLANNABLE	PASS	20	12	False	False	PASS	PASS	0.632	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	anxiety	extended_book_2h	PLANNABLE	PASS	20	12	False	False	PASS	PASS	0.6547	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	anxiety	deep_book_4h	PLANNABLE	PASS	20	12	False	False	PASS	PASS	0.6395	PASS	STRUCTURAL_BREAK	CLEAN
+corporate_managers	anxiety	deep_book_6h	PLANNABLE	PASS	20	12	False	False	WARN	PASS	0.6661	PASS	STRUCTURAL_BREAK	CLEAN

@@ -1,0 +1,289 @@
+{
+  "schema_version": "1.0.0",
+  "canonical_pr": "853",
+  "canonical_pr_url": "https://github.com/Ahjan108/phoenix_omega_v4.8/pull/853",
+  "canonical_sha_composite": [
+    {
+      "sha": "8070e81fd8a4c590f697da68b0baf5afc8f15a70",
+      "short": "8070e81fd",
+      "pr": "853",
+      "subject": "feat(pearl_news): five-layout sidebar system + --layout CLI + governing spec (PR-2 of 2)",
+      "merged_at": "2026-05-04T15:26:18Z",
+      "on_origin_main": true,
+      "scope": "Structural baseline \u2014 5-layout system (default/dock/wide/editorial/scroll_story), 5-card sidebar markup, CSS",
+      "files_touched": [
+        "pearl_news/pipeline/assemble_v52.py",
+        "pearl_news/pipeline/run_article_pipeline.py",
+        "scripts/run_pearl_news_teacher_batch.py",
+        "tests/test_pearl_news_sidebar_v52.py",
+        "docs/PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md"
+      ]
+    },
+    {
+      "sha": "b64caf846",
+      "pr": "1105",
+      "subject": "fix(pearl_news): kill WordPress wpautop phantom <p> that steals the sidebar grid cell",
+      "merged_at": "2026-05-13T21:01:48Z",
+      "on_origin_main": true,
+      "scope": "WordPress wpautop fix \u2014 prevents stray <p> tags from breaking the .article-container grid"
+    },
+    {
+      "sha": "6e7dc92778cb7f422f4e40748600e0ab31cf50fc",
+      "short": "6e7dc9277",
+      "pr": null,
+      "subject": "fix(pearl_news): restore PR #853 sidebar structure for v2 (operator git-first restore)",
+      "authored_at": "2026-05-19T11:01:41-10:00",
+      "on_origin_main": false,
+      "branch_only": "agent/pearl-news-section-order-fix",
+      "scope": "Operator-authored restore of PR #853's 5-card sidebar into v2 templates (after a v2 commit had replaced it with a single static practice-card). Restored: exercise-card with toggleExercise + step dots, cta-card slot, 5-card density."
+    },
+    {
+      "sha": "45733349ad689d5a3ff789458e80fca3d82ddede",
+      "short": "45733349a",
+      "pr": null,
+      "subject": "feat(pearl_news): v2 \u2014 mini-app launcher + SDG bullets + disclaimer relocate + long-form Gen Z atoms + teacher-view rewrite",
+      "authored_at": "2026-05-19T10:46:24-10:00",
+      "on_origin_main": false,
+      "branch_only": "agent/pearl-news-section-order-fix",
+      "scope": "cta-card replaces practice-label with mini-app launcher (reaction_id \u2192 app slug from reaction_to_app.yaml); SDG card grows to 3-bullet detail; new file pearl_news/config/reaction_to_app.yaml"
+    },
+    {
+      "sha": "78f115fe3c9b2ad3a9c968573e97a26f50b71e5a",
+      "short": "78f115fe3",
+      "pr": null,
+      "subject": "feat(pearl_news): interactive Hot Take Poll + Editorial Take submission + EI v2 ingest stub",
+      "authored_at": "2026-05-19T11:40:04-10:00",
+      "on_origin_main": false,
+      "branch_only": "agent/pearl-news-section-order-fix",
+      "scope": "Adds clickable <button class=pn-poll-option> + <button class=pn-take-submit>; inline pnReaderSignal IIFE that POSTs to /wp-json/pearl-news/v1/signal with localStorage tally and mailto fallback; new file pearl_news/pipeline/reader_signal_ingest.py for aggregation"
+    },
+    {
+      "sha": "d0075d31d743e9ca01d7b4377eff3514c0ce513a",
+      "short": "d0075d31d",
+      "pr": null,
+      "subject": "feat(pearl_news): WP must-use plugin for /wp-json/pearl-news/v1/signal (Phase 2)",
+      "authored_at": "2026-05-19T12:16:48-10:00",
+      "on_origin_main": false,
+      "branch_only": "agent/pearl-news-section-order-fix",
+      "deployed_live": true,
+      "deployed_note": "Deployed plugin exposes 10 endpoints (/signal, /poll, /editorial, /advocate, /freebie, /feedback + 4 GET variants). Repo plugin at d0075d31d implements only /signal + /signal/aggregate. Q-PNS-PLUGIN-DRIFT-01: operator accepted the lag for this PR; full plugin source pull deferred to a follow-up workstream.",
+      "scope": "New file pearl_news/wp_plugin/pearl-news-signal.php (~280 LOC). REST routes: POST /wp-json/pearl-news/v1/signal, GET /wp-json/pearl-news/v1/signal/aggregate/<article_id>. Rate-limit + honeypot + IP-hash anonymization."
+    },
+    {
+      "sha": "cd661ce64a2351036b9d2620645fdb1374814436",
+      "short": "cd661ce64",
+      "pr": null,
+      "subject": "feat(pearl_news): new hard_news_v2 template \u2014 3-title block + 4-section body",
+      "authored_at": "2026-05-19T08:31:38-10:00",
+      "on_origin_main": true,
+      "landed_via_pr": "1447",
+      "scope": "Template definition file pearl_news/article_templates/hard_news_v2.yaml \u2014 replaces hard_news_spiritual_response for forward-going hard news."
+    },
+    {
+      "sha": "ab010c548",
+      "pr": null,
+      "subject": "style(pearl_news): v2 title block \u2014 suppress body H1 + restyle subhead/deks",
+      "authored_at": "2026-05-19",
+      "on_origin_main": true,
+      "landed_via_pr": "1443 (inherited via 78f115fe3 file content)",
+      "scope": "Suppresses <h1> emission in body (WP renders post title elsewhere); adds .v2-headline-dek-1 and .v2-headline-dek-2 div emissions + CSS."
+    },
+    {
+      "sha": "e789a540bd76a9dbaff5907986b76cf42d39db58",
+      "short": "e789a540b",
+      "pr": "1429 (open) / 1448 (this)",
+      "subject": "feat(pearl_news): heading variant pools + deterministic selector",
+      "authored_at": "2026-05-23T13:51:52+09:00",
+      "on_origin_main": true,
+      "landed_via_pr": "1447 (heading_variants.yaml + heading_selector.py) + 1448 (assemble_v52.py wiring)",
+      "scope": "5-variant pools per teacher/topic \u00d7 locale; blake2b-deterministic selection; wired into _SECTION_HEADERS_BY_LANG resolution."
+    }
+  ],
+  "live_anchor": {
+    "url": "https://pearlnewsuna.org/?p=3724",
+    "post_id": 3724,
+    "category_id": 33,
+    "category_name": "World Health",
+    "fetched_at": "2026-06-04T16:42:01Z",
+    "byte_count": 345261,
+    "structural_markers": {
+      "tdb_block_count": 24,
+      "td_pb_row_count": 15,
+      "sidebar_card_count": 8,
+      "sidebar_card_unique": 5,
+      "exercise_card_count": 5,
+      "cta_card_count": 6,
+      "pn_poll_option_count": 15,
+      "pn_take_submit_count": 4,
+      "pn_reader_signal_count": 1
+    }
+  },
+  "theme_template_markers": {
+    "tdb_block_count_min": 24,
+    "td_pb_row_count_min": 15,
+    "sidebar_card_count_min": 5,
+    "exercise_card_count_min": 1,
+    "cta_card_count_min": 1,
+    "categories_required_nonempty": true,
+    "topic_to_category_map_required": "scripts/pearl_news/generate_writer_article.py TOPIC_TO_CATEGORY"
+  },
+  "function_inventory_ref": "docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md",
+  "version_history_ref": "docs/PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md",
+  "spec_amendment_ref": "docs/PEARL_NEWS_WRITER_SPEC.md#S-sidebar-restoration-protocol",
+  "ci_gate_ref": "scripts/ci/check_pearl_news_sidebar_parity.py",
+  "regression_test_ref": "tests/test_pearl_news_sidebar_parity.py",
+  "functions": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "FB1",
+    "FB2",
+    "FB3",
+    "FB4",
+    "FB5",
+    "FB6"
+  ],
+  "function_test_fingerprints": {
+    "F1_exercise_timer": {
+      "required_markers": [
+        "<div class=\"sidebar-card exercise-card\" id=\"exerciseCard\">",
+        "id=\"exerciseTimer\"",
+        "id=\"exerciseBtn\"",
+        "onclick=\"toggleExercise()\"",
+        "class=\"step-dot\"",
+        "function toggleExercise()",
+        "function advanceStep()"
+      ],
+      "min_step_dots": 5
+    },
+    "F2_cta_mini_app_launcher": {
+      "required_markers": [
+        "<div class=\"sidebar-card cta-card\">",
+        "class=\"cta-title\"",
+        "class=\"cta-body\""
+      ],
+      "_note": "H3 text varies (\"Free Tools\" in current renderer / \"Free Practice Tool\" in live 3724) \u2014 shape-checked only, not text-matched. cta-title + cta-body required.",
+      "optional_when_no_app_deployed": "Launch button suppressed; sidebar still renders the card",
+      "secondary_anchor_marker": "Read the practice in this article"
+    },
+    "F3_sdg_connection": {
+      "required_markers": [
+        "<h3>SDG Connection</h3>",
+        "sdg-badge"
+      ],
+      "_note": "Bullet count depends on sdg_news_topic_mapping.yaml lookup; synthetic probe article does not populate bullets. The parity gate verifies shape (h3 + badge); content is verified by tests/test_pearl_news_sidebar_parity.py against the live snapshot.",
+      "data_source": "pearl_news/config/sdg_news_topic_mapping.yaml"
+    },
+    "F4_hot_take_poll": {
+      "required_markers": [
+        "<div class=\"sidebar-card pn-poll-card\"",
+        "data-pn-article-id=",
+        "<h3>Hot Take Poll</h3>",
+        "class=\"pn-poll-options\"",
+        "class=\"pn-poll-option\"",
+        "data-pn-value=",
+        "class=\"pn-poll-bar\"",
+        "class=\"pn-poll-count\"",
+        "class=\"pn-poll-status\""
+      ],
+      "min_poll_options": 3,
+      "endpoint": "/wp-json/pearl-news/v1/signal",
+      "endpoint_payload_shape": {
+        "kind": "poll_vote",
+        "article_id": "<string>",
+        "value": "<string>",
+        "ts": "<iso8601>"
+      }
+    },
+    "F5_editorial_input_take": {
+      "required_markers": [
+        "<div class=\"sidebar-card pn-take-card\"",
+        "data-pn-article-id=",
+        "<h3>Your Take \u2192 Editorial Input</h3>",
+        "class=\"pn-take-input cocreation-input\"",
+        "class=\"pn-take-submit\"",
+        "class=\"pn-take-status\""
+      ],
+      "endpoint": "/wp-json/pearl-news/v1/signal",
+      "endpoint_payload_shape": {
+        "kind": "take",
+        "article_id": "<string>",
+        "text": "<string>",
+        "ts": "<iso8601>"
+      }
+    },
+    "INFRA_reader_signal_iife": {
+      "required_markers": [
+        "(function pnReaderSignal()",
+        "const ENDPOINT = '/wp-json/pearl-news/v1/signal'",
+        "const MAILTO_FALLBACK = 'editorial@pearlnewsuna.org'",
+        "fetch(ENDPOINT",
+        "localStorage"
+      ]
+    },
+    "FB1_v2_title_block": {
+      "required_markers": [
+        "class=\"v2-headline-dek-1\"",
+        "class=\"v2-headline-dek-2\""
+      ],
+      "_note": "V2 title block (cd661ce64 + ab010c548). H1 is SUPPRESSED in body (WP renders post title); the two deks render here. Class names canonical: v2-headline-dek-1 (static 'How this news is affecting Gen Z') + v2-headline-dek-2 (variant 'A {tradition_role} Shares A Helpful Insight' from heading_variants.yaml teacher_sees axis)."
+    },
+    "FB2_v2_section_headers": {
+      "required_markers": [
+        "class=\"section-header\""
+      ],
+      "_note": "V2 body uses <div id='sec-X' class='section-header'>LABEL</div> for each section header \u2014 NOT nested <h2>. Canonical 3724 has 6 such divs; minimum 5 required (News Summary / How Gen Z / Teacher / Take Action / Your Voice).",
+      "min_count": 5
+    },
+    "FB3_gen_z_section_label": {
+      "required_markers": [
+        "How this news is affecting Gen Z"
+      ],
+      "_note": "Default v2 Gen Z section heading (variant pool from heading_variants.yaml gen_z_impact axis, 5 variants per topic \u00d7 locale). The default English variant appears in dek-1 AND section-header \u2014 minimum 2 occurrences."
+    },
+    "FB4_teacher_section_label": {
+      "required_markers": [
+        "Shares A Helpful Insight"
+      ],
+      "_note": "V2 teacher section heading (variant pool teacher_sees axis). Tradition-role based \u2014 'A {tradition_role} Shares A Helpful Insight' / similar. Appears in dek-2 AND section-header."
+    },
+    "FB5_take_action_section": {
+      "required_markers": [
+        "Take Action Now!"
+      ],
+      "_note": "V2 CTA boilerplate \u2014 wires body to sidebar Vote + Submit. Mandatory; without it, the sidebar's purpose is invisible to the reader."
+    },
+    "FB6_your_voice_section": {
+      "required_markers": [
+        "Your Voice Has Power"
+      ],
+      "_note": "V2 CTA closer \u2014 frames reader response as editorial input, not comment. Mandatory."
+    }
+  },
+  "canonical_snapshot_file": "artifacts/pearl_news/snapshots/CANONICAL_SIDEBAR.html",
+  "canonical_snapshot_bytes": 17573,
+  "last_verified_iso": "2026-06-06T15:00:00Z",
+  "verified_by": "Pearl_News session 2026-06-06 PR #1448 (v2 body wiring + body F-IDs FB1-FB6)",
+  "deprecated_versions": [],
+  "open_operator_questions": [
+    {
+      "id": "Q-PNS-PLUGIN-DRIFT-01",
+      "status": "open",
+      "summary": "Deployed WP plugin has 8 endpoints not in repo; operator approved accepting lag for this PR; follow-up workstream needed to either pull live source or author additional endpoints"
+    },
+    {
+      "id": "Q-PNS-CANONICAL-01-COMPOSITE",
+      "status": "answered",
+      "summary": "Canonical is composite of 6 SHAs across PR #853 (on main), PR #1105 (on main), and 4 branch-only commits on agent/pearl-news-section-order-fix"
+    },
+    {
+      "id": "Q-PNS-HERO-01",
+      "status": "pending",
+      "summary": "Hero-image placement \u2014 operator flagged in prior session as wrong; canonical position matches post 3724"
+    }
+  ],
+  "canonical_article_file": "artifacts/pearl_news/snapshots/CANONICAL_ARTICLE.html",
+  "canonical_article_bytes": 41884
+}

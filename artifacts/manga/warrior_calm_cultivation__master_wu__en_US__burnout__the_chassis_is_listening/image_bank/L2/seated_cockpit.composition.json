@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "seated_cockpit",
+  "layer_class": "L2",
+  "style_register": "mecha_cockpit",
+  "crop_class": "bust",
+  "pose_id": "seated_cockpit",
+  "pose_context": "cockpit",
+  "implied_camera": {
+    "angle_bucket": "eye_level",
+    "el_crossing": "chest"
+  },
+  "room_capable": true,
+  "abstract_stage_eligible": true,
+  "scene_contamination": true,
+  "requires_occluder": false,
+  "diegetic_pair": "cockpit_interior:seated_cockpit",
+  "genre": "mecha",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "blocked",
+    "role": "single_subject_cutout",
+    "subject": "pilot",
+    "contains_background": true,
+    "contains_environment": true,
+    "contains": ["pilot", "cockpit", "mecha", "environment"],
+    "background_context": ["cockpit", "mecha", "environment"],
+    "blocker": "legacy L2 is a cockpit scene, not one alpha-separable pilot or mecha cutout"
+  }
+}

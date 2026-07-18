@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__millennial_women_professionals__self_worth
+brand: heart_transmission
+teacher: junko
+persona: millennial_women_professionals
+topic: self_worth
+byline_author: silas_bramble
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__millennial_women_professionals__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__millennial_women_professionals__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will be met, not measured. This series treats your worth
+  as something already true — not a score to raise, a brand to build, or a problem
+  to fix — and speaks to it the way one heart speaks to another, quietly and without
+  conditions.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Untethered Soul series (Michael A. Singer) — interior, unhurried spiritual prose
+  that frees the reader from the self they keep defending, without a single hack
+- How to Do the Work / companion volumes (Nicole LePera) — speaks directly to high-functioning
+  women carrying a hidden sense of not-enoughness, warmly rather than clinically
+- The Gifts of Imperfection series (Brené Brown) — meets shame and worthiness head-on
+  with tenderness, the emotional register this series lives in
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: late twenties to late thirties
+  where_they_are: It's a little after nine on a weeknight. The laptop is closed but
+    she's still half-working in her head — replaying the meeting, rereading the message
+    she sent, doing the quiet math on whether she's enough yet. She is competent,
+    well-reviewed, the one others lean on. And she is privately certain that if anyone
+    saw the whole of her, they'd find the place where she falls short.
+  what_they_need: To stop earning her own right to exist. To feel, even for an evening,
+    that her worth isn't contingent on output, on being chosen, or on outrunning the
+    woman she keeps comparing herself to. A voice that sits with her rather than coaching
+    her.
+  what_they_avoid: Self-improvement framed as another performance review. Affirmations
+    that feel like lying. 'Confidence hacks,' hustle dressed as healing, and the bright,
+    brittle positivity that tells her to be grateful instead of letting her be honest.
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the unhurried warmth of someone
+    who has set the work down and is simply present with you, speaking close — never
+    a clinician, never a coach, never a cheerleader
+  sentence_rhythm: unhurried and breath-paced; mostly short to medium sentences with
+    room between them, the occasional long line that opens like an exhale, frequent
+    direct address that lands softly rather than instructs
+  metaphor_family: the heart and what passes between two of them; light handed from
+    one palm to another; the warmth of presence in a quiet room; the unguarded moment;
+    what is transmitted without words; the open hand that asks for nothing back
+_needs_authoring: false

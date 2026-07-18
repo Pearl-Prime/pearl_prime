@@ -1,0 +1,702 @@
+family_id: mindfulness
+family_name: "Mindfulness / Present-Moment Attention / Managerial Half-Presence"
+adjacent_topics: [overwhelm, stress, focus, reactivity]
+primary_mechanism: overwhelm
+allowed_engines: [overwhelm, shame, comparison]
+
+reader_starting_state: >
+  Reader is a competent manager whose attention is almost never where their body is. They are
+  physically in the one-on-one while mentally drafting the email they will send after it; they
+  sit in the meeting already three meetings ahead. The mind runs a continuous background process
+  of triage, anticipation, and rehearsal, and it does not stop when the workday does. They have
+  come to treat this racing, half-present quality as the cost of seniority — the price of holding
+  a lot. Each completed task buys a few seconds of quiet before the next item loads. They suspect
+  they are missing things — the look on a report's face, the actual content of a decision, the
+  texture of an ordinary afternoon — but they do not see what could be done about it short of
+  having less to manage. They are waiting for the workload to drop to a level where presence
+  becomes possible again.
+
+reader_ending_state: >
+  Reader can see the racing pattern as a pattern — a trained default of the attention, not a
+  fixed fact about how a busy mind has to work. They have felt, in their own body, the difference
+  between being three meetings ahead and being in the room, and they can name that difference when
+  it happens. They have noticed that attention is something that wanders and can be returned, many
+  times, without that return being a failure or an achievement. They have a beginning practice of
+  coming back to the present through the body, available between meetings and inside them — not a
+  state of permanent calm, but a different relationship to where their attention is, one they can
+  return to rather than one they have to reach.
+
+what_makes_this_family_different: >
+  This family requires precision and a refusal of every meditation cliche a skeptical manager has
+  already dismissed. The reader's overwhelm will activate if the book asks them to slow down, empty
+  the mind, or add a practice to a schedule that is already the problem — it will register as one
+  more thing to fail at, or as soft retreat-culture that does not understand the load they carry.
+  Present-moment attention must be framed as a trainable return, not a state to achieve: the work
+  is not to stop the mind racing but to notice that it has raced and come back, repeatedly, without
+  drama. The body must be established as the anchor — the one part of the reader that is always in
+  the present — before any attention practice is offered, or the practice becomes another head-only
+  exercise. Unlike stress management (which is about lowering arousal) or productivity systems
+  (which is about doing more of the right things), this family is about the gap between being
+  somewhere and being present there — the chronic cost of attention that is always one step ahead
+  of the moment it is in. The book must take the workload seriously and never pretend the answer
+  is to care less.
+
+chapters:
+  chapter_01:
+    number: 1
+    role: recognition
+    working_title: "Three Meetings Ahead"
+    thesis: >
+      Most managers who struggle with presence are running an automatic, invisible process that
+      keeps the attention perpetually ahead of the body — anticipating the next item, rehearsing
+      the next conversation, triaging the next fire — while the present moment passes through
+      largely unattended. They didn't choose this. They often don't notice it's happening. But
+      it is running through nearly every meeting, every commute, every dinner.
+    emotional_job: >
+      Reader feels the precise shock of recognition — not the vague "I'm busy" of generic
+      self-help, but the specific "someone has described the actual experience of being in a room
+      while three meetings ahead." The chapter must name the half-presence with enough accuracy
+      that the reader stops and re-reads it.
+    practical_job: >
+      Name the racing default: the attention that is always one or two steps ahead of where the
+      body is. Show how automatic it is — that it loads the next item before the current one is
+      finished, that it produces the next worry before the reader can choose to be where they are.
+      Distinguish this involuntary racing from useful planning, forethought, or appropriate
+      anticipation.
+    what_changes:
+      Before: "My mind just moves fast. That's what running a team requires."
+      After: "There is a specific pattern running. My attention is almost never where my body is.
+        And I never decided to live one step ahead of every room I'm in."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Offering any practice or fix in chapter 1
+      - Confusing the racing mind with anxiety or burnout (acknowledge overlap, don't collapse)
+      - Making the pattern sound like a simple matter of "being too busy" (too narrow)
+      - Reassuring the reader that they can fix this easily (too early; they won't believe it)
+    recommended_enrichments:
+      - Opening scene: reader in a one-on-one, physically nodding while drafting the next email
+      - The speed of the racing — the next item loads before the current one is complete
+      - The way being three meetings ahead feels like competence rather than absence
+    claim_someone_could_argue: >
+      Some would argue that anticipating, planning ahead, and running multiple threads at once
+      is exactly the job — that managers who don't think two moves ahead get blindsided, and the
+      racing mind is the engine of good leadership, not a problem to solve.
+    why_this_chapter_exists: >
+      The reader cannot work with the racing pattern until they can see it. Most managers with this
+      pattern experience the half-presence as simply how a busy mind operates, not as a trained
+      default that runs them. Making the pattern visible is the entire work of this chapter, and it
+      is prerequisite for everything else.
+    what_comes_next: >
+      Chapter 2 asks how the attention got trained this way — what conditions and incentives wired
+      the mind to live perpetually ahead of the moment.
+
+  chapter_02:
+    number: 2
+    role: mechanism
+    working_title: "How the Mind Got Trained to Race"
+    thesis: >
+      The racing default was not installed in a single moment. It was trained gradually by an
+      environment that rewards being ahead — by overlapping demands, by the relief of clearing the
+      next thing, by the constant low-grade pressure of more inputs than any one mind can hold in
+      the present. Comparison feeds it too: the sense that everyone else is on top of it sharpens
+      the urge to stay one step ahead of being caught behind.
+    emotional_job: >
+      Reader understands — not as an excuse but as a fact — that the racing has a history. It was
+      trained by something. That it was trained means it is not the permanent shape of a senior
+      mind. This is not yet comforting; it is just accurate. The emotion here is more curious than
+      relieved.
+    practical_job: >
+      Describe the mechanism of overwhelm-training: how repeated experience of more-than-can-be-held
+      teaches the attention to triage and pre-load constantly. Name the comparison component
+      specifically: how watching peers appear effortlessly on top of everything sharpens the drive
+      to stay ahead. Do this without turning it into a personal-history excavation or requiring the
+      reader to locate the moment it started.
+    what_changes:
+      Before: "This is just what a high-volume job does to your head. It's the role."
+      After: "The racing was trained by conditions, many of them ordinary. It has a logic.
+        It wasn't inevitable, and it isn't fixed."
+    required_sections: [HOOK, MECHANISM_DIAGRAM, SCENE, REFLECTION]
+    forbidden_moves:
+      - Turning this into blaming the company, the culture, or modern work in general
+      - Suggesting the reader needs to identify the original moment the racing began
+      - Making the mechanism feel clinical or pathological
+      - Resolving the mechanism with understanding alone (insight is not a practice)
+    recommended_enrichments:
+      - How constant triage becomes a habit of attention: pre-loading the next thing automatically
+      - The specific way overload teaches the mind that the present is the least urgent thing in it
+      - How comparison ("everyone else seems on top of it") tightens the drive to stay ahead
+    claim_someone_could_argue: >
+      Some would argue that an attention trained by high demand is simply an attention that has
+      adapted well — that staying ahead of a heavy load is a learned competence, not a malfunction,
+      and that managers who lose it fall behind.
+    why_this_chapter_exists: >
+      Seeing the racing (ch01) without understanding how it was trained leaves it feeling fixed and
+      inevitable. The mechanism chapter makes the pattern historical rather than essential. This is
+      the cognitive ground for everything that follows — the racing is not who you are; it is a
+      default your attention learned and is still running.
+    what_comes_next: >
+      Chapter 3 moves from the cognitive to the somatic — the body as the one part of the reader
+      that is always already in the present, available as an anchor rather than overridden.
+
+  chapter_03:
+    number: 3
+    role: somatic_legitimacy
+    working_title: "The Body Is Already in the Room"
+    thesis: >
+      The mind can be three meetings ahead, but the body is always exactly where it is — in this
+      chair, with this breath, with these specific physical sensations. The racing has a physiology
+      too: the held breath, the tight jaw, the forward lean, the hum of low-grade urgency. These
+      are not signs of weakness. They are the body carrying a mind that lives ahead of it. The body
+      can be returned to — but first it must be noticed, not overridden.
+    emotional_job: >
+      Reader recognizes the physical signature of half-presence as something they have lived for
+      years without naming. The relief of recognition — "that braced, forward-leaning feeling has
+      a name and a location" — is different from intellectual understanding. The chapter legitimizes
+      the body as an anchor without dramatizing it or making it a relaxation exercise.
+    practical_job: >
+      Name the specific somatic signatures of the racing mind: the shallow held breath, the clenched
+      jaw, the shoulders pulled toward the next thing, the restless hum. Then establish the counter-
+      fact: the body is always in the present, whatever the mind is doing. Explain why the body works
+      as an anchor — it cannot be three meetings ahead. Give the reader language to notice where their
+      body actually is when the mind has left the room.
+    what_changes:
+      Before: "By the afternoon I'm wired and braced and I don't know why. That's just a long day."
+      After: "That braced, forward-leaning state has a name and a place in my body. And my body is
+        the one part of me that is actually here. I can notice it without having to fix it."
+    required_sections: [HOOK, SOMATIC_INVENTORY, SCENE, REFLECTION]
+    forbidden_moves:
+      - Treating the body work as a relaxation or breathing protocol (not the role of this chapter)
+      - Suggesting the reader can think their way back into the present
+      - Conflating the racing-mind physiology with anxiety physiology (related but distinct)
+      - Turning this chapter into a guided body-scan exercise with steps
+    recommended_enrichments:
+      - The distinction between where the body is (here) and where the attention has gone (ahead)
+      - How the physical bracing arrives below awareness and is mistaken for normal tiredness
+      - The body as the reliable anchor precisely because it cannot be anywhere but the present
+    claim_someone_could_argue: >
+      Some would argue that bodily sensations are just noise — that a serious manager works through
+      the physical signals rather than attending to them, and that paying attention to your jaw and
+      breath in a meeting is a distraction from the actual work.
+    why_this_chapter_exists: >
+      The reader who cannot locate their own body cannot use it as an anchor, and every later
+      attention practice will stay stuck in the head — the very place the racing lives. This chapter
+      establishes the body as the always-present ground before any return practice is offered.
+      Without it, "come back to the present" remains an abstraction with nowhere to land.
+    what_comes_next: >
+      Chapter 4 names the full cost of chronic half-presence — what it actually spends, in work and
+      in life, that the reader has mistaken for the normal price of the job.
+
+  chapter_04:
+    number: 4
+    role: cost_exposure
+    working_title: "The Cost of Being Half-Here"
+    thesis: >
+      Living one step ahead of every moment is expensive in ways that don't show up on any
+      dashboard. The reader has been half-present for so long that the missed conversations, the
+      thin afternoons, and the decisions made without full attention feel like baseline reality.
+      Naming the cost is the first step toward imagining anything different.
+    emotional_job: >
+      Reader contacts, perhaps for the first time, the actual cost of attention that is never where
+      the body is. Not as self-pity but as honest accounting. This has been spending something real.
+      The chapter creates space for the reader to acknowledge that without immediately rushing to
+      fix it.
+    practical_job: >
+      Name the specific costs of half-presence: the report whose real concern was missed because the
+      reader was drafting a reply; the decisions made at sixty percent attention; the meetings that
+      had to be redone because no one was fully in the first one; the evenings that dissolved because
+      the mind was still at work; the texture of ordinary days that passed unregistered. Quantify
+      nothing, but make the cost vivid.
+    what_changes:
+      Before: "I get through a lot. A bit of multitasking is the only way the volume works."
+      After: "I've been paying for the volume with my presence. It's been costing me conversations,
+        decisions, and afternoons I didn't know I was spending."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Turning cost into motivation for adopting a practice quickly
+      - Making cost only about productivity or business outcomes
+      - Allowing the reader to use the cost as evidence that they are a bad manager
+      - Reassuring the reader that the cost is worth it because it's how they handle the load
+    recommended_enrichments:
+      - The specific moment of realizing you missed what someone actually said to you
+      - How being half-present means being absent from your own life outside work too
+      - The baseline thinness of experience that has been mistaken for "just being busy"
+    claim_someone_could_argue: >
+      Some would argue that partial attention is the rational allocation of a scarce resource — that
+      a manager who gave full presence to every interaction would never get through the day, and
+      that strategic half-attention is simply triage done well.
+    why_this_chapter_exists: >
+      The reader who doesn't feel the cost clearly will not have sufficient reason to do the
+      genuinely demanding work that follows. Cost exposure also breaks the myth that half-presence
+      is neutral or efficient — it has been expensive, and the reader deserves to know that.
+    what_comes_next: >
+      Chapter 5 examines the core belief that keeps the racing running: the conviction that presence
+      will become possible once the workload finally drops.
+
+  chapter_05:
+    number: 5
+    role: hidden_belief
+    working_title: "When Things Calm Down"
+    thesis: >
+      Underneath the racing is a belief that functions like a promise: once the workload drops, once
+      this quarter ends, once the team is fully staffed, presence will become possible again. The
+      problem with this belief is not that less load would help — it is that the threshold of "calm
+      enough" keeps moving. Each time the reader reaches it, it relocates. The belief is
+      unfalsifiable and therefore inescapable as long as it stays unexamined.
+    emotional_job: >
+      Reader experiences the discomfort of recognizing a belief they have been living inside without
+      knowing they held it. The emotion is something like waking up — not pleasant, but orienting.
+      Not relief; recognition.
+    practical_job: >
+      Name the threshold belief explicitly: "When things calm down, I'll be present again." Show its
+      self-reinforcing structure: when the quiet period arrives and the racing doesn't stop, the
+      conclusion is never "the belief is wrong" but always "this isn't calm enough yet." Name the
+      specific places the threshold migrates: after this launch, after this hire, after this review
+      cycle, in retirement. Show how the belief is structured to be unfalsifiable.
+    what_changes:
+      Before: "I'll be able to actually be present once this stretch is over. I'm almost there."
+      After: "Every calm stretch I've reached, the racing kept going and the threshold moved. I've
+        been treating presence as something the calendar will hand me. It won't."
+    required_sections: [HOOK, SCENE, BELIEF_INVENTORY, REFLECTION]
+    forbidden_moves:
+      - Resolving the belief with a counterargument (too early)
+      - Making this a chapter about time management or workload reduction
+      - Implying that workload doesn't matter or that the reader should just care less
+      - Using "the present moment" as a destination-noun to be arrived at
+    recommended_enrichments:
+      - The specific experience of a long-awaited quiet week arriving and the mind still racing
+      - How the mind immediately repopulates any cleared space with the next thing to get ahead of
+      - The difference between a lighter calendar and a present attention — they are not the same
+    claim_someone_could_argue: >
+      Some would argue that the workload genuinely is the problem — that telling an overloaded
+      manager their presence is a trainable attention rather than a function of their schedule lets
+      organizations off the hook for impossible demands, and that the honest answer is fewer
+      meetings, not better attention.
+    why_this_chapter_exists: >
+      Without naming the threshold belief, the reader will keep treating the next quiet stretch as
+      the thing that will restore presence. This belief is the engine that keeps the racing
+      unexamined. Once named as a structural feature, not a reasonable expectation, the reader can
+      begin to question the premise rather than waiting out the calendar again.
+    what_comes_next: >
+      Chapter 6 delivers the destabilizing evidence: the calm periods never restored presence, and
+      the data is already in the reader's own experience.
+
+  chapter_06:
+    number: 6
+    role: destabilization
+    working_title: "The Calm Stretches You Already Had"
+    thesis: >
+      The reader does not need to wait for the workload to drop to find out whether less load
+      restores presence. They already have abundant data. Every vacation where the mind kept
+      planning, every quiet week where they raced anyway, every "after this is over" that came and
+      went — all of it is evidence. The reader's own experience is the argument that waiting for
+      calm is the wrong strategy.
+    emotional_job: >
+      Reader experiences productive disorientation — the specific feeling of having a trusted plan
+      ("I'll be present when things calm down") exposed as ineffective. This is uncomfortable. It is
+      also the first moment of genuine possibility in the book: if waiting for calm is the wrong
+      strategy, a different one is not yet foreclosed.
+    practical_job: >
+      Walk the reader through their own evidence: the specific calm periods that were supposed to
+      restore presence, the vacations where the racing continued, how quickly the attention re-loaded
+      the next thing the moment space opened. Show the pattern in their own data. Do not require the
+      reader to produce new evidence — help them read what they already have.
+    what_changes:
+      Before: "I just need things to settle down and I'll get my attention back."
+      After: "Things have settled down many times. The racing didn't stop. I've been running this
+        experiment for years and the results have been consistent."
+    required_sections: [HOOK, EVIDENCE_REVIEW, SCENE, REFLECTION]
+    forbidden_moves:
+      - Leaving the reader without any forward orientation (destabilize then partially stabilize)
+      - Turning this into a meditation on futility or the impossibility of modern work
+      - Suggesting that effort and planning are pointless
+      - Making the reader feel foolish for not having seen this earlier
+    recommended_enrichments:
+      - The specific cognitive move that protects the belief: "this time will be different / calmer"
+      - How the mind discounts the evidence of calm-stretches-that-didn't-help
+      - The strange comfort of waiting for the workload to fix something attention has to fix
+    claim_someone_could_argue: >
+      Some would argue that the calm stretches were never actually calm — that there is no real
+      down period in a senior role, and that the reader simply hasn't experienced enough genuine
+      slack to know whether it would restore their presence.
+    why_this_chapter_exists: >
+      Naming the belief (ch05) is necessary but not sufficient. The reader needs to see the belief
+      tested against their own evidence — not in the abstract. This chapter makes it personal and
+      immediate. Without this confrontation, the reader leaves with an intellectual understanding of
+      the belief and keeps waiting out the calendar unchanged.
+    what_comes_next: >
+      Chapter 7 shows how chronic half-presence shapes the reader's working relationships — the
+      specific ways being three meetings ahead prevents the people around them from being met.
+
+  chapter_07:
+    number: 7
+    role: relational_consequence
+    working_title: "The People You're Not Quite With"
+    thesis: >
+      When attention is always one step ahead, relationships at work become transactions processed
+      at partial bandwidth. The reader is not in the conversation to be with the person — they are
+      in it to clear it and move to the next. And partial presence, however skilled the nodding,
+      cannot produce the experience of someone feeling genuinely met. The people who report to the
+      reader can tell, even when they can't say it, that they have most of the body and very little
+      of the attention.
+    emotional_job: >
+      Reader recognizes the relational dimension of half-presence — the specific quiet failure of
+      being physically available to their team while never quite arriving in real contact with any
+      of them. This should feel more tender than any previous chapter. The reader is not being
+      criticized; they are being seen.
+    practical_job: >
+      Name the specific relational dynamics produced by half-presence: the report who stops bringing
+      real concerns because they sense the reader is already gone; the decisions rushed because the
+      next meeting is pulling; the team member who feels managed rather than known; the way comparison
+      and triage rank people by urgency rather than meeting them. Show how the racing mind quietly
+      teaches a team that they get a fraction of their manager.
+    what_changes:
+      Before: "I'm available to my team. My door is open, I take all the one-on-ones."
+      After: "I've been available in body and three meetings ahead in attention. I'm not sure how
+        much of those one-on-ones the person actually got of me."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Blaming the reader's team or the people in it
+      - Implying the reader is incapable of genuine connection
+      - Turning this into communication tactics or active-listening technique
+      - Making the chapter only about direct reports (include peers, family, anyone met half-present)
+    recommended_enrichments:
+      - The specific experience of a report visibly deciding not to raise the thing that mattered
+      - How triage-ranking people by urgency means the quiet ones are met least
+      - The way half-presence follows the reader home, into conversations that aren't work at all
+    claim_someone_could_argue: >
+      Some would argue that managers cannot afford full presence with every person — that a degree
+      of efficient, partial attention is appropriate triage in a role with too many people to meet
+      fully, and that wanting to be fully present with everyone is unrealistic.
+    why_this_chapter_exists: >
+      The relational cost of half-presence must be seen before the reader can care about presence
+      for any reason beyond personal calm. The reader who understands this only intellectually will
+      not understand why returning to the present matters in the rooms where the work and the
+      relationships actually happen. Relationships are where the cost lands hardest.
+    what_comes_next: >
+      Chapter 8 turns the attention back on the reader: who are you when you're not racing — what is
+      left of you, and of an ordinary moment, when the mind isn't already somewhere else?
+
+  chapter_08:
+    number: 8
+    role: identity_fracture
+    working_title: "Who You Are When You're Not Racing"
+    thesis: >
+      The racing has run so long that many managers cannot distinguish between themselves and the
+      perpetual forward motion of their attention. The question of who you are when you're not three
+      meetings ahead is not abstract — it is genuinely destabilizing, because so much of the
+      reader's sense of being competent, on top of it, and worth their seniority is built on the
+      racing itself.
+    emotional_job: >
+      Reader sits with genuine uncertainty about who they are in a still moment, in a way that is
+      productive rather than threatening. The chapter does not demand an answer; it opens a question
+      that needs to stay open for the later chapters to land. The emotion is more curious than
+      frightened by the end.
+    practical_job: >
+      Help the reader distinguish between racing-dependent self-concepts (I am someone who stays
+      ahead, who holds it all, who is never caught behind) and dimensions of being that exist in the
+      present (what they actually notice, prefer, perceive when the mind is in the room). Do not
+      offer the alternative — introduce the question as a genuine opening.
+    what_changes:
+      Before: "I know who I am at work. I'm the person who stays ahead of everything and doesn't
+        drop the ball."
+      After: "That's the racing describing itself. I'm not sure who I am in a meeting I'm fully in.
+        That uncertainty is new and real."
+    required_sections: [HOOK, IDENTITY_INVENTORY, SCENE, REFLECTION]
+    forbidden_moves:
+      - Providing the alternative way of being too early
+      - Implying the racing self is false and a "true present self" waits underneath
+      - Making the question feel like a crisis without orientation
+      - Turning this into a spiritual or philosophical inquiry about the self
+    recommended_enrichments:
+      - What is actually present in a moment when the forward-motion stops, even briefly
+      - The specific strangeness of not knowing who you are without the next thing pulling you
+      - How the racing has provided a constant structure that was mistaken for identity
+    claim_someone_could_argue: >
+      Some would argue that a manager genuinely is the sum of their drive and forethought — that
+      there is no separate self apart from the momentum that makes them effective, and that looking
+      for a quieter "real self" underneath is a category error and possibly a path to passivity.
+    why_this_chapter_exists: >
+      The practical work of ch09-11 requires that the reader have already met the question of who
+      they are when not racing as a real, open question — not as a threat and not as something
+      they've answered. This chapter creates the opening the later chapters move through.
+    what_comes_next: >
+      Chapter 9 gives the reader their first practical tool: noticing that the attention has left
+      the room, and returning it, without that return being either a failure or a feat.
+
+  chapter_09:
+    number: 9
+    role: practical_interruption
+    working_title: "Noticing You've Left, and Coming Back"
+    thesis: >
+      You cannot stop the mind from racing — not yet, and possibly not ever completely. What you can
+      do is learn to notice that the attention has gone ahead, and to return it to the present
+      through the body. The work is not to keep the mind still. It is the return itself — done many
+      times, without drama. That noticing-and-returning is where everything changes.
+    emotional_job: >
+      Reader experiences the concrete possibility of a different relationship to their wandering
+      attention — not a still mind, but a small, repeatable act of coming back that does not require
+      the racing to stop first. This is the first moment of genuine agency in the book.
+    practical_job: >
+      Introduce the specific practice of the return: noticing when the attention has gone ahead
+      ("I'm in this meeting but already in the next one"), using the body as the anchor to come back
+      (the breath, the feet, the contact of the chair), and treating each return as ordinary rather
+      than as success or failure. Establish the core reframe of the practice: the return is the
+      practice; wandering is not a failure of it. The practice is small and concrete. Do not oversell
+      its effects.
+    what_changes:
+      Before: "When I catch my mind miles away, I just push harder to focus, and lose it again."
+      After: "When I catch my mind ahead of the room, I can come back through my body. It wanders
+        again. I come back again. That's the practice, not the problem."
+    required_sections: [HOOK, PRACTICE_DESIGN, SCENE, REFLECTION]
+    forbidden_moves:
+      - Implying the practice will quiet the mind or stop the racing
+      - Turning the return into a concentration drill or a willpower exercise
+      - Making the practice sound like positive thinking or forced calm
+      - Claiming the practice will be easy or will feel immediately better
+    recommended_enrichments:
+      - The specific texture of catching yourself ahead: the body's bracing, the internal pull forward
+      - What "coming back" looks like in concrete situations (a meeting, a hallway, a commute)
+      - How the racing physiology (ch03) shows up during the return and can simply be noticed
+    claim_someone_could_argue: >
+      Some would argue that constantly returning your attention is just a more elaborate form of
+      distraction-management — that the mind wanders for good reasons, often toward genuine problems
+      that need solving, and that pulling it back to "the present" interrupts the very thinking the
+      job requires.
+    why_this_chapter_exists: >
+      All the cognitive and somatic work of chapters 1-8 needs a practice — a specific, repeatable
+      action the reader can take when they catch themselves racing. Without this chapter, the book
+      produces insight without any embodied experience of returning. The practice of noticing and
+      coming back is the experiential foundation for the reframe and the shift that follow.
+    what_comes_next: >
+      Chapter 10 delivers the reframe: attention is not a state you achieve and hold, but a return
+      you make, again and again.
+
+  chapter_10:
+    number: 10
+    role: reframe
+    working_title: "Attention Is a Return, Not a State"
+    thesis: >
+      Present-moment attention is not a calm, cleared state that a disciplined manager achieves and
+      then maintains. It is the act of returning — noticing the attention has gone ahead and bringing
+      it back through the body, over and over. The wandering is not a failure of the practice. The
+      return is the practice. This reframe dissolves the impossible standard the reader has been
+      quietly failing against.
+    emotional_job: >
+      Reader experiences the specific relief of having presence recontextualized — not as a serene
+      state they keep failing to reach (which would feel like one more inadequacy) but as a return
+      anyone can make, available no matter how busy the mind. This is different from being told to
+      "be present" — it is being given an accurate account of what attention actually is.
+    practical_job: >
+      Reframe presence from a state to a return: the mind will keep racing; presence is not its
+      silence but the repeatable act of coming back. Show that the wandering is not the enemy and the
+      number of returns is not a scorecard. Give the reader a specific way to hold a wandering moment
+      differently: "My attention left — and I can return it" rather than "I failed to stay present."
+    what_changes:
+      Before: "I tried to be present and my mind kept wandering, so I'm bad at this."
+      After: "My mind wandering isn't the failure. Noticing and coming back is the whole thing.
+        I can do that as many times as it takes, and each return counts."
+    required_sections: [HOOK, REFRAME, SCENE, REFLECTION]
+    forbidden_moves:
+      - Telling the reader the racing mind is simply wrong or should be silenced
+      - Replacing presence with an affirmation or a feeling of calm to chase
+      - Making this chapter feel like a focus-hack or productivity technique
+      - Turning the reframe into a quick fix or a trick
+    recommended_enrichments:
+      - The specific cognitive move: from "stay present" to "notice and return"
+      - How treating the return as the practice removes the standard the reader kept failing
+      - What it means to count returns as the work rather than as evidence of inadequacy
+    claim_someone_could_argue: >
+      Some would argue that reframing attention as endless returning lowers the bar — that it lets
+      people off the hook for genuine focus by relabeling chronic distraction as "practice," and
+      that real concentration is a state, achievable and worth demanding of oneself.
+    why_this_chapter_exists: >
+      The reframe is the pivot of the entire book. Everything before it has been building toward it:
+      the reader needed to see the racing (ch01), understand its training (ch02), feel the body as
+      anchor (ch03), name its cost (ch04), examine the waiting-for-calm belief (ch05), confront it
+      with their own evidence (ch06), see its relational cost (ch07), and loosen its hold on their
+      identity (ch08) before they could receive a reframe that actually lands. Delivered earlier,
+      this chapter would be a platitude. Delivered here, it is earned.
+    what_comes_next: >
+      Chapter 11 builds on the reframe by asking: what would a different relationship to your own
+      attention actually look like, lived inside a full and demanding workday?
+
+  chapter_11:
+    number: 11
+    role: self_relation_shift
+    working_title: "Presence Inside a Full Day"
+    thesis: >
+      It is possible to relate to your own attention not as something to perfect or hold still, but
+      as something that wanders and returns, available between meetings and inside them, even on the
+      heaviest days. This is not an arrival at calm; it is a practice. And it is built through the
+      accumulation of small returns from ch09 — coming back to the body, in the room, again and
+      again, while the work goes on.
+    emotional_job: >
+      Reader senses the texture of a different way of being with their own attention — not as a
+      concept but as something they have already tasted in the returns from ch09. The emotion here
+      is something quieter than hope: recognition of a present that is always available to come back
+      to, even mid-fire.
+    practical_job: >
+      Name what the shift looks like in specific moments: the mind races ahead in a meeting, the body
+      braces, the reader notices and returns to the breath and the room, the meeting continues. Over
+      time this becomes a relationship with attention — not a still mind, but the actual racing mind
+      that can, with practice, be brought back to where the body is. Give the reader language for this
+      ongoing practice inside a demanding day, not in a quiet room set aside for it.
+    what_changes:
+      Before: "I'll be present once I carve out time for it, away from all this."
+      After: "Presence isn't somewhere I go when the day clears. It's a return I can make in the
+        middle of the meeting I'm in right now, and again in the next one."
+    required_sections: [HOOK, SCENE, PRACTICE_UNDER_PRESSURE, REFLECTION]
+    forbidden_moves:
+      - Claiming the racing will end or that presence will become permanent
+      - Using any of the family-specific prohibited terms (just breathe, clear your mind, be present
+        as a platitude, find your zen, live in the now)
+      - Turning the shift into a productivity upgrade with a present-moment label
+      - Making this chapter sound like a meditation practice or a retreat experience
+    recommended_enrichments:
+      - The specific experience of the mind racing ahead during a high-stakes meeting and being
+        noticed and returned, without the meeting stopping
+      - How the comparison and triage habits continue but no longer fully run the attention
+      - What "a relationship with your attention" means in practice — a present you can return to,
+        not a state you have to maintain
+    claim_someone_could_argue: >
+      Some would argue that trying to be present in the middle of a demanding day is naive — that
+      real attention work requires protected, quiet time, and that expecting presence inside back-to-
+      back meetings just sets the reader up to fail at both the meetings and the practice.
+    why_this_chapter_exists: >
+      The reframe of ch10 is cognitive. The shift here is embodied and lived inside the actual
+      conditions of the reader's work. Without this chapter, the reader has a new way of thinking
+      about attention but not a new way of being with it on a normal, overloaded Tuesday. This
+      chapter builds the bridge between intellectual reframe and lived practice.
+    what_comes_next: >
+      Chapter 12 integrates everything into a frame for ongoing life — not a conclusion, but an
+      orientation toward what the reader is building and how to keep returning to it.
+
+  chapter_12:
+    number: 12
+    role: integration
+    working_title: "Coming Back, Again and Again"
+    thesis: >
+      A present attention — one you can return to through the body, in the middle of a full day — is
+      not a state that arrives and stays. It is something built through practice, lost and returned
+      to, maintained through the ongoing work of noticing you've gone ahead and coming back. This is
+      not the end of the racing mind. It is the beginning of not being run by it.
+    emotional_job: >
+      Reader closes the book with something solid rather than something inspiring. Not a peak of calm
+      but a sense of ground: I know what the practice is, I have begun it, I know what it feels like
+      to be in the room and what it feels like to have left it. The emotion is steady rather than
+      elevated.
+    practical_job: >
+      Name what a present attention is and what it is not: it is not the silencing of the racing
+      mind, not permanent calm, not a state achieved once and kept. It is the accumulated practice of
+      noticing the attention has gone ahead, returning it through the body, and being where you are
+      without needing the workload to drop first. Give the reader a frame for the ongoing practice
+      that doesn't require them to be done.
+    what_changes:
+      Before: "Once I get good at this, my mind will finally stay present."
+      After: "The practice isn't something I finish. It's something I return to — in this meeting,
+        and the next one. I've already begun. That matters."
+    required_sections: [HOOK, INTEGRATION_MAP, SCENE, REFLECTION]
+    forbidden_moves:
+      - Any promise that the racing mind will be eliminated or silenced
+      - Making present attention sound like permanent calm or a cleared mind
+      - Closing with affirmation or inspirational framing
+      - Using any of the prohibited terms as the final note
+    recommended_enrichments:
+      - What the reader has built across the twelve chapters, named specifically
+      - The racing revisited: it will start again; here is what you now have when it does
+      - The specific quality the reader is building: not a still mind but a reliable return
+    claim_someone_could_argue: >
+      Some would argue that genuine change in attention requires sustained formal training — long-
+      term practice, structured instruction, protected time — and that a book can at best create
+      intellectual understanding without producing any real change in how a busy manager's attention
+      actually behaves.
+    why_this_chapter_exists: >
+      The book must close by landing on something real. A chapter of inspiration would betray every
+      honest thing the book has said. Integration names the actual situation: the reader has begun a
+      practice of returning, the practice continues, and that beginning is not nothing — it is
+      everything the book can honestly give.
+    what_comes_next: >
+      The book is complete. The practice continues — one return at a time.
+
+sequencing_rules:
+  must_come_before:
+    - Mechanism (ch02) must come after recognition (ch01) — the racing must be visible before its training can be examined
+    - Somatic legitimacy (ch03) must come after mechanism (ch02) — the body as anchor lands better once the racing is understood as trained
+    - Cost exposure (ch04) must come before hidden belief (ch05) — reader must feel the cost of half-presence before examining the belief that defers it
+    - Destabilization (ch06) must come after hidden belief (ch05) — the waiting-for-calm belief must be named before evidence dismantles it
+    - Identity fracture (ch08) must come after relational consequence (ch07) — relational cost makes the identity question concrete
+    - Reframe (ch10) must come after practical interruption (ch09) — the embodied experience of returning must precede the cognitive reframe
+    - Self-relation shift (ch11) must come after reframe (ch10) — cognitive ground required for the lived shift
+  cannot_come_too_early:
+    - Reframe cannot arrive before ch09 — "attention is a return" registers as a platitude without the full preceding arc and a felt return
+    - Present-attention-inside-a-full-day language cannot appear before ch11 — too early and it becomes a productivity slogan
+    - Self-relation shift cannot arrive before practical interruption — reader needs the embodied experience of returning first
+  saved_for_late_book:
+    - Integration is always last
+    - Self-relation shift is always second-to-last
+    - Reframe and practical interruption must be late-middle (ch09-10)
+
+tone_and_pacing:
+  intensity_profile: [high, medium, high, medium, high, high, medium, high, medium, medium, medium, low]
+  trust_curve: >
+    This family requires patient, precise trust-building with a reader who has dismissed mindfulness
+    as soft before. Trust is built through accuracy — when the reader encounters a description of
+    being three meetings ahead that is more exact than anything they've privately admitted, they
+    trust. Trust is never built through calm-promises or retreat-culture language. It is built by
+    naming the racing correctly and by taking the workload seriously. The intensity front-loads in
+    recognition, mechanism, and the body chapter before easing slightly for the cost chapters, then
+    returning for destabilization. The back half is less intense but more demanding in a different
+    register — it asks the reader to practice, not just to understand.
+  action_timing: >
+    First practice arrives at chapter 9. Before that, only recognition and examination. Premature
+    practice would be absorbed by the same overwhelm and self-monitoring that drive the problem —
+    one more thing to get ahead of and fail at.
+  mechanism_timing: >
+    Mechanism arrives at ch02, immediately after recognition. This family needs to understand how
+    the attention was trained to race before any body or cost work, because the cognitive frame
+    makes the subsequent embodied work less threatening to an overloaded mind.
+  permission_timing: >
+    Permission to let the mind wander and simply return arrives at ch09. Permission to practice
+    presence inside a full day, rather than waiting for protected quiet, arrives at ch11. Both must
+    be earned through the preceding work.
+
+prohibited_terms:
+  global:
+    - journey
+    - transform
+    - heal
+    - self-care
+    - wellness
+    - empower
+    - empowering
+    - overcome
+    - conquer
+    - battle
+    - fight
+    - warrior
+    - survivor
+    - thrive
+    - manifest
+    - authentic self
+    - best self
+    - inner child
+    - trigger warning
+    - safe space
+    - toxic
+    - self-love
+    - higher self
+    - spiritual awakening
+    - "you've got this"
+    - "be gentle with yourself"
+  family_specific:
+    - "just breathe"
+    - "clear your mind"
+    - "be present (as a platitude)"
+    - "live in the now"
+    - "find your zen"
+    - namaste
+    - third eye
+    - chakra
+    - "monkey mind"
+    - "quiet the mind"
+    - enlightenment

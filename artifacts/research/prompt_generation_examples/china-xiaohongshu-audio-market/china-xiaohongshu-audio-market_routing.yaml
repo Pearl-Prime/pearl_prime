@@ -1,0 +1,12 @@
+route_id: china_qwen
+provider_id: qwen_china
+provider_display_name: Qwen / QuinChat-style China Deep Research
+prompt_key: qwen_china
+signals:
+- locales:zh-CN
+- markets:China
+- platforms:Xiaohongshu
+- platforms:Douyin
+- platforms:Bilibili
+- platforms:Ximalaya
+score: 700

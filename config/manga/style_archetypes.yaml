@@ -1,0 +1,42 @@
+schema_version: 1
+
+style_archetypes:
+  hyper_clean_cinematic:
+    prompt: "anime, cinematic lighting, glossy textures, lens flare, detailed eyes, vibrant colors, high quality, 4k"
+    negative: "sketch, rough lines, flat colors, chibi, deformed"
+  dark_psychological:
+    prompt: "manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone"
+    negative: "colorful, cute, chibi, pastel, bright, happy"
+  cozy_iyashikei:
+    prompt: "anime, pastel colors, soft lighting, warm tones, rounded shapes, gentle, cozy, watercolor style, healing"
+    negative: "dark, violent, horror, sharp angles, high contrast"
+  webtoon_vertical_romance:
+    prompt: "webtoon style, full color, soft shading, fashion illustration, beautiful eyes, atmospheric background, romantic"
+    negative: "sketch, rough, dark, horror, chibi"
+  meme_chaotic_humor:
+    prompt: "manga, exaggerated expressions, rough sketch style, comedic, 4-koma style, bold lines, reaction face"
+    negative: "realistic, photographic, serious, dark"
+  power_progression:
+    prompt: "anime, dynamic action pose, energy effects, speed lines, dramatic angle, shonen style, battle aura, intense"
+    negative: "static, calm, slice of life, pastel"
+  social_media_simulacra:
+    prompt: "modern anime style, flat UI elements, smartphone screen, text message bubbles, digital aesthetic, clean lines"
+    negative: "fantasy, medieval, traditional, painterly"
+  interactive_branching:
+    prompt: "anime, clean digital art, cel shaded, choice indicators, game UI elements, visual novel style"
+    negative: "sketch, rough, painterly, dark"
+  grounded_realism:
+    prompt: "manga, thick ink lines, heavy blacks, expressive line weight, raw realistic style, seinen aesthetic, detailed backgrounds, emotional close-ups"
+    negative: "colorful, glossy, pastel, chibi, cute, digital smooth"
+  ornate_fantasy:
+    prompt: "manga, detailed architecture, elaborate costume design, ceremonial aesthetic, world-building panels, intricate linework, fantasy illustration"
+    negative: "modern, casual, sketch, rough, plain background"
+  sensory_closeup:
+    prompt: "manga, warm ink, food illustration style, sensory detail, steam, texture close-up, cozy kitchen aesthetic, soft tones, inviting"
+    negative: "dark, action, violence, cold, stark"
+  symbolic_reflection:
+    prompt: "manga, minimalist panels, symbolic imagery, contemplative spacing, essay-style illustration, metaphor visual, sparse line"
+    negative: "action, crowded, busy, high contrast, dark"
+  comedic_deformation:
+    prompt: "manga, 4-koma style, exaggerated reaction face, super-deformed, chibi burst, comedy timing panel, bold expression lines, sweat drops"
+    negative: "realistic, serious, dark, horror, cinematic"

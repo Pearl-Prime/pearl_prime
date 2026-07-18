@@ -1,0 +1,76 @@
+# Video upload cadence — platform-specific pacing for audiobook videos.
+# Authority: docs/RELEASE_VELOCITY_AND_SCHEDULE.md, docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md
+#
+# One book = 41-61 videos. Drip them over weeks, not dump all at once.
+# These caps are INDEPENDENT of book/audiobook release velocity (safe_velocity.yaml).
+
+schema_version: 1
+
+video_platforms:
+  youtube:
+    long_form:
+      new_channel:
+        per_day: 1
+        per_week: [3, 5]
+      established:
+        per_day: 2
+        per_week: [7, 14]
+    shorts:
+      new_channel:
+        per_day: 2
+        per_week: [7, 14]
+      established:
+        per_day: 3
+        per_week: [14, 21]
+    notes: "YouTube rewards consistency > volume. 1/day long + 1-2/day shorts is ideal."
+
+  tiktok:
+    per_day: 3
+    per_week: [7, 21]
+    api_hard_limit_per_day: 20
+    notes: "TikTok Content Posting API: 20/day hard cap. Organic best practice: 1-3/day."
+
+  instagram_reels:
+    per_day: 2
+    per_week: [7, 14]
+    notes: "IG algorithm favors 1-2 Reels/day. More = diminishing returns."
+
+  bilibili:
+    per_day: 1
+    per_week: [3, 7]
+    notes: "Quality > quantity in CN market."
+
+  douyin:
+    per_day: 3
+    per_week: [7, 21]
+    notes: "Similar to TikTok. Higher volume tolerance."
+
+# Drip schedule for a single book's videos
+book_video_drip:
+  long_form_chapters:
+    release_interval_days: 1
+    batch_size: 1
+    notes: "1 chapter/day. 20 chapters = 20 days of long-form."
+  shorts:
+    release_interval_hours: 8
+    batch_size: 1
+    start_offset_days: -3
+    notes: "Start shorts 3 days BEFORE first chapter (teasers). 3/day across platforms."
+  full_audiobook:
+    release_offset_days: 21
+    notes: "Drop full audiobook after all chapters are out."
+
+# Cross-brand spacing (prevent multiple brands flooding same platform)
+cross_brand:
+  min_hours_between_brands: 4
+  max_brands_per_day_per_platform: 3
+  notes: "Same platform, different brand = 4h gap minimum."
+
+# Per-book estimated video production
+per_book_video_output:
+  long_form_chapters: 20
+  shorts_per_chapter: [1, 2]
+  full_audiobook: 1
+  total_range: [41, 61]
+  drip_duration_days: 60
+  notes: "One book fuels ~2 months of daily uploads across platforms."

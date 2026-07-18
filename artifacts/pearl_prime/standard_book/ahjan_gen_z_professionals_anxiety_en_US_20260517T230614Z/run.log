@@ -1,0 +1,32 @@
+WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).
+Warning: atoms_model missing in spec; derived from config (legacy_personas) -> legacy
+Template routing: anxiety×gen_z_professionals×standard_book → v2_somatic
+Content bank registry unavailable: /Users/ahjan/phoenix_omega/.claude/worktrees/loving-merkle-ac65d2/config/content_banks/anxiety_corporate_managers_scene_recognition_bank.yaml: variant 'acmr_001' missing keys ['band', 'ei_v2_targets', 'forbidden_terms', 'frame_allowlist', 'frame_blocklist', 'intensity', 'mechanism_depth', 'ontgp_move', 'persona_allowlist', 'runtime_allowlist', 'signature_phrases', 'slot_type', 'topic_allowlist', 'topic_blocklist']
+Exercise journey outcome mismatch ch=1 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500']
+Exercise journey outcome mismatch ch=2 thesis=emotional_overwhelm violations=['awareness: need>=0.650 got=0.500', 'regulation: need>=0.800 got=0.500']
+Exercise journey outcome mismatch ch=3 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500', 'integration: need>=0.450 got=0.000']
+Exercise journey outcome mismatch ch=4 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500']
+Exercise journey outcome mismatch ch=5 thesis=emotional_overwhelm violations=['awareness: need>=0.650 got=0.500']
+Exercise journey outcome mismatch ch=6 thesis=emotional_overwhelm violations=['awareness: need>=0.650 got=0.500', 'integration: need>=0.500 got=0.000']
+Exercise journey outcome mismatch ch=7 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500']
+Exercise journey outcome mismatch ch=8 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500']
+Exercise journey outcome mismatch ch=9 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500', 'regulation: need>=0.850 got=0.500']
+Exercise journey outcome mismatch ch=10 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500', 'integration: need>=0.400 got=0.000']
+Exercise journey outcome mismatch ch=11 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500', 'regulation: need>=0.850 got=0.500']
+Exercise journey outcome mismatch ch=12 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500']
+Exercise governance: dropped EXERCISE slot in chapter 1 (cap=0).
+Exercise governance: dropped EXERCISE slot in chapter 1 (cap=0).
+EXERCISE FALLBACK: Using library_34 for chapter 0 topic anxiety persona gen_z_professionals. No registry or teacher exercise was available for this slot — add EXERCISE coverage upstream if this is unexpected.
+Exercise governance: dropped EXERCISE slot in chapter 2 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 3 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 4 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 6 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 7 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 8 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 10 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 11 (cap=1).
+Exercise governance: dropped EXERCISE slot in chapter 12 (cap=0).
+Exercise governance: dropped EXERCISE slot in chapter 12 (cap=0).
+Chapter contract: chapter 12: emotional_job 'resolution' matches previous chapter — escalation contract may be weak
+EXERCISE FALLBACK: Using library_34 for chapter 11 topic anxiety persona gen_z_professionals. No registry or teacher exercise was available for this slot — add EXERCISE coverage upstream if this is unexpected.
+Scene anchor density cap: FAIL — repeated >3-word phrases exceed cap 2. Report: artifacts/pearl_prime/standard_book/ahjan_gen_z_professionals_anxiety_en_US_20260517T230614Z/scene_anchor_density_report.json

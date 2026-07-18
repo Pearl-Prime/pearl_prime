@@ -1,0 +1,384 @@
+# Authority: SYSTEMS_DOCUMENTATION §29.2.5, EXPERIENCE_LAYER_ANTI_SPAM_SPEC §16
+# Title/subtitle structural templates. Variables: PrimaryKeyword, ScenarioPhrase,
+# PersonaDescription, PromiseClause, DistressVerb, OutcomeVerb, N, FormatUnit,
+# EngineAngle (new: human-readable phrase from engine_title_angles.yaml).
+#
+# ANTI-SPAM DESIGN: 8 title templates across 4 grammar families.
+# Each brand uses a DIFFERENT family mix so the same topic produces
+# structurally different titles under different brands.
+# Reference: New Harbinger (scientific/workbook), Hay House (reader-addressed),
+# Sounds True (evocative/journey), Shambhala (philosophical/contemplative).
+
+title_templates:
+  # --- Grammar Family A: Direct statement (New Harbinger style) ---
+  scenario_direct: "{PrimaryKeyword}"
+  scenario_promise: "{PrimaryKeyword}: {PromiseClause}"
+
+  # --- Grammar Family B: Reader-addressed (Hay House style) ---
+  persona_targeted: "{PrimaryKeyword} for {PersonaDescription}"
+  outcome_focused: "How to {OutcomeVerb} and Take Back Your Mind"
+
+  # --- Grammar Family C: Metaphorical / evocative (Sounds True style) ---
+  metaphor_title: "{EngineAngle}"
+  journey_title: "{EngineAngle}: {PromiseClause}"
+  # Topic-anchored evocative: the curated series title (or topic keyword) LEADS so
+  # the book is never off-topic, with the engine angle as the rotating creative half.
+  series_metaphor: "{SeriesTitle}: {EngineAngle}"
+  topic_metaphor: "{PrimaryKeyword}: {EngineAngle}"
+  # Formula 4 (research): hook first (no keyword), keyword in descriptive half after colon.
+  formula4_hook: "{EngineAngle}: {PrimaryKeyword}"
+  formula4_series: "{SeriesTitle}: {PrimaryKeyword}"
+  formula4_guide: "{EngineAngle}: A Guide to {PrimaryKeyword}"
+
+  # --- Grammar Family D: Scientific / method (workbook style) ---
+  method_title: "The {PrimaryKeyword} Method"
+  guide_title: "A Practical Guide to {OutcomeVerb}"
+
+# ─── SUBTITLE TEMPLATES ──────────────────────────────────────────────────
+# Three lengths: none (no subtitle), short (tagline, <8 words), long (full sentence).
+# Each template is tagged with its length class. The generator picks based on
+# brand subtitle_strategy weights, then fills from the matching pool.
+#
+# Content tags: persona_direct (names persona), topic_direct (names topic keyword),
+# metaphor (pure evocative), location (includes {Location} variable when present).
+# Brand content_mix weights control the % of each tag in the candidate set.
+
+subtitle_templates:
+
+  # ─── SHORT subtitles (tagline / colon-join style, <8 words) ───
+  # These join into the title as "Title: Tagline" in the plan output.
+  short_gentle:       { text: "A Path Back to Stillness", length: short, content: metaphor }
+  short_permission:   { text: "You Were Never Broken", length: short, content: metaphor }
+  short_body:         { text: "A Nervous System Reset", length: short, content: topic_direct }
+  short_method:       { text: "A Practical System for {PrimaryKeyword}", length: short, content: topic_direct }
+  short_persona:      { text: "For {PersonaDescription}", length: short, content: persona_direct }
+  short_location:     { text: "Voices from {Location}", length: short, content: location }
+  short_promise:      { text: "{PromiseClause}", length: short, content: metaphor }
+  short_mechanism:    { text: "What Your Body Already Knows", length: short, content: metaphor }
+
+  # ─── LONG subtitles (full sentence, 10-20 words) ───
+  three_part:         { text: "How to {OutcomeVerb}, {Action1}, and {Action2}", length: long, content: topic_direct }
+  how_to_stack:       { text: "How to {Action1}, {Action2}, and {Action3}", length: long, content: topic_direct }
+  micro_promise:      { text: "A Proven Path to {OutcomeVerb} and Find Lasting Calm", length: long, content: metaphor }
+  numbered_steps:     { text: "{N} {FormatUnit} to {OutcomeVerb} and Reclaim Your Peace of Mind", length: long, content: topic_direct }
+  practical_tools:    { text: "Practical Tools for {PersonaDescription} Who {DistressVerb} Under Pressure", length: long, content: persona_direct }
+  gentle_promise:     { text: "A Gentle Approach to {PrimaryKeyword} That Meets You Where You Are", length: long, content: topic_direct }
+  science_backed:     { text: "Evidence-Based Strategies to {OutcomeVerb} and Build Lasting Change", length: long, content: topic_direct }
+  body_first:         { text: "Body-Based Practices for {PrimaryKeyword} and Nervous System Reset", length: long, content: topic_direct }
+  identity_shift:     { text: "How {PersonaDescription} Are Rewriting the Rules of {PrimaryKeyword}", length: long, content: persona_direct }
+  permission_grant:   { text: "You Do Not Have to {DistressVerb} Anymore — A Path to {OutcomeVerb}", length: long, content: metaphor }
+  invisible_script:   { text: "The Hidden Pattern Behind Your {PrimaryKeyword} — and How to Break It", length: long, content: topic_direct }
+  mechanism_reveal:   { text: "What Your {PrimaryKeyword} Is Really Telling You — and What to Do About It", length: long, content: topic_direct }
+  somatic_anchor:     { text: "A Nervous System Approach to {OutcomeVerb} and Feeling Safe in Your Body", length: long, content: metaphor }
+  daily_ritual:       { text: "{N} Minutes a Day to {OutcomeVerb} and Build Lasting Resilience", length: long, content: topic_direct }
+  profession_specific: { text: "A Field Guide for {PersonaDescription} Navigating {PrimaryKeyword}", length: long, content: persona_direct }
+  generation_voice:   { text: "A Real Talk Guide to {PrimaryKeyword} for {PersonaDescription}", length: long, content: persona_direct }
+  location_grounded:  { text: "A Guide for {PersonaDescription} in {Location} Navigating {PrimaryKeyword}", length: long, content: location }
+  engine_hook:        { text: "{EngineSubtitleHook}", length: long, content: metaphor }
+
+  # ─── Engine-bearing subtitles (Waystream + distinctness regen) ───
+  # Each template injects {EngineSubtitleHook} and/or {EngineShortPhrase} so
+  # books sharing persona×topic×format but differing by engine get unique subs.
+  engine_persona_hook:  { text: "{EngineSubtitleHook} for {PersonaDescription}", length: long, content: persona_direct }
+  engine_topic_persona: { text: "{EngineShortPhrase} — {PrimaryKeyword} for {PersonaDescription}", length: long, content: persona_direct }
+  engine_voice:         { text: "A Real Talk Guide to {PrimaryKeyword}: {EngineSubtitleHook}", length: long, content: persona_direct }
+  engine_field_guide:   { text: "A Field Guide to {EngineShortPhrase} for {PersonaDescription}", length: long, content: persona_direct }
+  engine_reset:         { text: "A {FormatUnit} Reset Through {EngineShortPhrase} for {PersonaDescription}", length: long, content: persona_direct }
+
+# ─── BRAND PREFERENCES ────────────────────────────────────────────────────
+# Each brand has:
+#   title: preferred title template IDs
+#   subtitle: preferred subtitle template IDs (from any length class)
+#   subtitle_strategy:
+#     none_pct:  % of books with NO subtitle (punchy standalone title)
+#     short_pct: % with SHORT subtitle (colon-joined tagline)
+#     long_pct:  % with LONG subtitle (full separate sentence)
+#     Must sum to ~1.0. Generator uses seeded roll to pick mode per book.
+#   content_mix:
+#     persona_direct: weight for naming persona in subtitle
+#     topic_direct:   weight for naming topic keyword in subtitle
+#     metaphor:       weight for pure evocative/metaphorical subtitle
+#     location:       weight for including location name (when location in book)
+#     Weights are relative; generator normalizes. Higher = more likely.
+#
+# ANTI-SPAM: No two brands share the same (subtitle_strategy + content_mix) profile.
+
+brand_template_preferences:
+
+  # ─── Calm / Contemplative cluster ───
+  stillness_press:
+    title: [metaphor_title, journey_title]
+    subtitle: [short_gentle, short_permission, somatic_anchor, engine_hook]
+    subtitle_strategy: { none_pct: 0.30, short_pct: 0.40, long_pct: 0.30 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.15, metaphor: 0.70, location: 0.10 }
+
+  spiritual_ground:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_mechanism, gentle_promise, permission_grant]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.35, long_pct: 0.40 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.10, metaphor: 0.80, location: 0.05 }
+
+  healing_ground:
+    title: [metaphor_title, journey_title]
+    subtitle: [short_body, body_first, somatic_anchor, engine_hook]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.30, long_pct: 0.55 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.30, metaphor: 0.50, location: 0.10 }
+
+  # ─── Practical / Regulation cluster ───
+  stabilizer:
+    title: [scenario_direct, scenario_promise]
+    subtitle: [short_method, micro_promise, three_part, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.25, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.50, metaphor: 0.25, location: 0.10 }
+
+  stoic_edge:
+    title: [metaphor_title, scenario_direct]
+    subtitle: [short_mechanism, science_backed, invisible_script]
+    subtitle_strategy: { none_pct: 0.35, short_pct: 0.30, long_pct: 0.35 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.25, metaphor: 0.65, location: 0.05 }
+
+  bio_flow:
+    title: [method_title, guide_title]
+    subtitle: [short_body, body_first, science_backed, somatic_anchor]
+    subtitle_strategy: { none_pct: 0.05, short_pct: 0.20, long_pct: 0.75 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
+
+  # ─── Performance / Action cluster ───
+  high_performer:
+    title: [method_title, outcome_focused]
+    subtitle: [short_method, practical_tools, numbered_steps, profession_specific]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.20, long_pct: 0.60 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.40, metaphor: 0.10, location: 0.15 }
+
+  optimizer:
+    title: [guide_title, method_title]
+    subtitle: [short_method, science_backed, practical_tools, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.25, long_pct: 0.60 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.55, metaphor: 0.20, location: 0.10 }
+
+  focus_sprint:
+    title: [guide_title, outcome_focused]
+    subtitle: [short_method, numbered_steps, practical_tools, daily_ritual]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.50, metaphor: 0.15, location: 0.15 }
+
+  # ─── Narrative / Growth cluster ───
+  gentle_growth:
+    title: [journey_title, persona_targeted]
+    subtitle: [short_gentle, short_permission, gentle_promise, permission_grant]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.45, long_pct: 0.40 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.15, metaphor: 0.55, location: 0.10 }
+
+  creative_unfold:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_permission, short_gentle, micro_promise, identity_shift]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.40, long_pct: 0.35 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.10, metaphor: 0.70, location: 0.05 }
+
+  legacy_builder:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_mechanism, gentle_promise, science_backed, invisible_script]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.30, long_pct: 0.50 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.20, metaphor: 0.60, location: 0.10 }
+
+  # ─── Identity / Confidence cluster ───
+  confidence_core:
+    title: [outcome_focused, method_title]
+    subtitle: [short_persona, practical_tools, science_backed, identity_shift]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.15, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.40, topic_direct: 0.30, metaphor: 0.15, location: 0.15 }
+
+  executive_calm:
+    title: [method_title, scenario_direct]
+    subtitle: [short_method, short_persona, numbered_steps, profession_specific]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.30, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.35, metaphor: 0.10, location: 0.20 }
+
+  career_lift:
+    title: [method_title, guide_title]
+    subtitle: [short_persona, practical_tools, numbered_steps, identity_shift]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.40, metaphor: 0.10, location: 0.15 }
+
+  # ─── Youth / Reset cluster ───
+  calm_student:
+    title: [persona_targeted, outcome_focused]
+    subtitle: [short_persona, short_promise, numbered_steps, generation_voice]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.40, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.30, topic_direct: 0.25, metaphor: 0.30, location: 0.15 }
+
+  night_reset:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_permission, gentle_promise, permission_grant]
+    subtitle_strategy: { none_pct: 0.30, short_pct: 0.40, long_pct: 0.30 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.20, metaphor: 0.70, location: 0.05 }
+
+  minimal_mind:
+    title: [metaphor_title, scenario_direct]
+    subtitle: [short_mechanism, short_gentle, invisible_script, science_backed]
+    subtitle_strategy: { none_pct: 0.40, short_pct: 0.35, long_pct: 0.25 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.20, metaphor: 0.70, location: 0.05 }
+
+  # ─── Specialized cluster ───
+  trauma_path:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_permission, gentle_promise, engine_hook]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.35, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.15, metaphor: 0.70, location: 0.05 }
+
+  hormone_reset:
+    title: [guide_title, method_title]
+    subtitle: [short_body, short_method, science_backed, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.05, short_pct: 0.20, long_pct: 0.75 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.60, metaphor: 0.15, location: 0.10 }
+
+  longevity_lab:
+    title: [method_title, guide_title]
+    subtitle: [short_method, science_backed, numbered_steps, daily_ritual]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.25, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
+
+  adhd_forge:
+    title: [method_title, outcome_focused]
+    subtitle: [short_method, practical_tools, numbered_steps, daily_ritual]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.25, long_pct: 0.60 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.45, metaphor: 0.20, location: 0.15 }
+
+  resilient_parent:
+    title: [persona_targeted, scenario_promise]
+    subtitle: [short_persona, practical_tools, numbered_steps, generation_voice]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.15, long_pct: 0.75 }
+    content_mix: { persona_direct: 0.40, topic_direct: 0.30, metaphor: 0.15, location: 0.15 }
+
+  relationship_clarity:
+    title: [outcome_focused, guide_title]
+    subtitle: [short_method, practical_tools, how_to_stack, profession_specific]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.25, topic_direct: 0.45, metaphor: 0.15, location: 0.15 }
+
+  morning_momentum:
+    title: [scenario_promise, outcome_focused]
+    subtitle: [short_method, short_promise, numbered_steps, daily_ritual]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.35, long_pct: 0.50 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.45, metaphor: 0.25, location: 0.15 }
+
+  # cognitive_clarity (Kenjin) — evidence/method register. Engine-bearing metaphor lead
+  # (distinct per engine) + method title; science-backed topic-forward subtitles.
+  # short_method dropped from the subtitle set: it repeats {PrimaryKeyword} already in
+  # the method title and dedup-strips to a dangling "A Practical System for".
+  cognitive_clarity:
+    title: [metaphor_title, method_title]
+    subtitle: [science_backed, numbered_steps, mechanism_reveal, invisible_script]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
+
+  # ─── Devotion / Contemplative cluster ───
+  # Open Vessel Press ("Waystream Sanctuary", teacher sai_ma). Per
+  # persona_in_titles_strategy_research.md: creative/emotional MAIN title
+  # (EngineAngle) + persona-targeted SUBTITLE that NAMES the persona AND carries
+  # the topic keyword. subtitle_strategy heavily favors `long` so MOST books get a
+  # full persona+keyword subtitle. content_mix favors persona_direct.
+  # Preferred subtitle templates are the persona_direct LONG variants that both
+  # NAME the persona AND FILL {PrimaryKeyword}, and that read cleanly with any
+  # keyword shape — noun ("imposter syndrome") or gerund ("building courage"):
+  #   profession_specific  "A Field Guide for {Persona} Navigating {Keyword}"
+  #   identity_shift       "How {Persona} Are Rewriting the Rules of {Keyword}"
+  #   generation_voice     "A Real Talk Guide to {Keyword} for {Persona}"
+  # The topic_direct "Your {Keyword}" templates (invisible_script / mechanism_reveal)
+  # are deliberately NOT preferred: they drop the persona and mangle gerund keywords
+  # ("Your Building Courage"). They still surface in the alternate editorial
+  # candidates (9-12) via the global pool. Location weight = 0 (devotion books have
+  # no location); {N}/{FormatUnit} numbered templates are omitted.
+  devotion_path:
+    title: [metaphor_title, journey_title]
+    subtitle: [profession_specific, identity_shift, generation_voice]
+    subtitle_strategy: { none_pct: 0.05, short_pct: 0.15, long_pct: 0.80 }
+    content_mix: { persona_direct: 0.55, topic_direct: 0.30, metaphor: 0.15, location: 0.00 }
+
+  # ─── Waystream Sanctuary (composite, NO teacher — secular imprint) ───
+  # Engine-bearing templates first so each (persona, topic, engine, format) cell
+  # gets a distinct subtitle string (800/800 anti-spam). LONG-ONLY strategy.
+  way_stream_sanctuary:
+    title: [formula4_hook, formula4_series, formula4_guide, series_metaphor, metaphor_title, journey_title]
+    subtitle: [engine_persona_hook, engine_topic_persona, engine_voice, engine_field_guide, engine_reset, generation_voice, profession_specific, identity_shift]
+    subtitle_strategy: { none_pct: 0.0, short_pct: 0.0, long_pct: 1.0 }
+    content_mix: { persona_direct: 0.65, topic_direct: 0.25, metaphor: 0.10, location: 0.00 }
+
+  # ─── EN_US_CATALOG_ENGINE_REPOINT_V1_SPEC §5: the other 5 en_US brands ───
+  # Each brand has a DISTINCT (subtitle_strategy + content_mix) profile so the same
+  # topic produces structurally different titles/subtitles per brand (anti-spam §16).
+  # NONE clone devotion_path's mix; each is tuned to the brand's voice register.
+
+  # somatic_wisdom (Pamela Fellows) — soft-clinical josei, body-paced, sensation-anchored.
+  # Body-first metaphor lean; persona rarely named (the body is the subject, not the role).
+  somatic_wisdom:
+    title: [metaphor_title, journey_title]
+    subtitle: [short_body, body_first, somatic_anchor, engine_hook]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.45, long_pct: 0.35 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.35, metaphor: 0.55, location: 0.05 }
+
+  # digital_ground (Miki) — grounded, modern, real-talk for a wired generation.
+  # Engine-bearing journey lead (distinct per engine) + scenario; persona AND topic
+  # forward in the subtitle (names who + what plainly).
+  digital_ground:
+    title: [journey_title, scenario_promise]
+    subtitle: [short_persona, generation_voice, practical_tools, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.30, long_pct: 0.55 }
+    content_mix: { persona_direct: 0.40, topic_direct: 0.35, metaphor: 0.15, location: 0.10 }
+
+  # sleep_restoration (Master Sha) — nocturnal, gentle, restorative.
+  # Evocative journey titles; metaphor-heavy; higher none_pct for punchy bedside titles.
+  sleep_restoration:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_permission, somatic_anchor, gentle_promise]
+    subtitle_strategy: { none_pct: 0.35, short_pct: 0.40, long_pct: 0.25 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.20, metaphor: 0.70, location: 0.05 }
+
+  # solar_return (Ra) — mythic renewal, empowering rebirth arc.
+  # Journey + outcome titles; balanced metaphor + persona (the reader is the hero).
+  solar_return:
+    title: [journey_title, outcome_focused]
+    subtitle: [short_promise, identity_shift, permission_grant, gentle_promise]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.30, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.30, topic_direct: 0.20, metaphor: 0.45, location: 0.05 }
+
+  # heart_balance (Maat) — tender, relational, weighing the heart.
+  # Journey + persona-targeted titles; persona named + metaphor (relationship-forward).
+  heart_balance:
+    title: [journey_title, persona_targeted]
+    subtitle: [short_persona, gentle_promise, identity_shift, permission_grant]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.35, long_pct: 0.50 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.15, metaphor: 0.40, location: 0.10 }
+
+  default:
+    # Shared Formula-4 defaults for brands without explicit prefs (qi_foundation,
+    # relational_calm, warrior_calm, body_memory, heart_transmission). Long-only
+    # subtitles so persona+keyword land in the subtitle field, not colon-joined.
+    title: [formula4_hook, formula4_series, formula4_guide, scenario_direct, outcome_focused]
+    subtitle: [engine_persona_hook, engine_topic_persona, profession_specific, generation_voice, engine_field_guide, short_method, three_part]
+    subtitle_strategy: { none_pct: 0.0, short_pct: 0.0, long_pct: 1.0 }
+    content_mix: { persona_direct: 0.65, topic_direct: 0.25, metaphor: 0.10, location: 0.00 }
+
+# Micro-promise clauses per brand (for {PromiseClause})
+micro_promises:
+  default:
+    - "How to Stop Freezing and Speak Up with Confidence"
+    - "How to Calm Your Mind and Show Up Fully"
+    - "A Clear Path from Overwhelm to Calm"
+    - "Practical Relief for a Restless Mind"
+  stabilizer:
+    - "How to Stop Freezing in Meetings and Speak Up with Confidence"
+    - "How to Calm Your Nerves and Show Up with Confidence"
+  stillness_press:
+    - "A Gentle Return to Stillness"
+    - "Finding Peace in the Middle of It All"
+    - "When the Noise Inside Finally Quiets"
+  cognitive_clarity:
+    - "Evidence-Based Tools for a Clearer Mind"
+    - "A Research-Backed Approach to Mental Clarity"
+  high_performer:
+    - "A Performance-Ready System for Your Mind"
+    - "The Mental Edge for High-Stakes Moments"
+  trauma_path:
+    - "A Compassionate Path Through What Happened"
+    - "Healing at the Pace Your Nervous System Needs"

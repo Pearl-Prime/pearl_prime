@@ -1,0 +1,36 @@
+# Atoms parse-sweep guard — fails a PR the instant a clean atoms/**/CANONICAL.txt is
+# mangled into the #1590 metadata-less "## <LABEL> vNN" over-match (-> NO_STORY_POOL), or
+# regresses check (D): a block's prose body is a bare, unauthored next-header label (the
+# un-promoted sibling of the #1590 defect — see check_canonical_atom_parse_sweep.py docstring).
+#
+# REQUIRED CHECK (Protect main ruleset). The pull_request trigger is intentionally NOT
+# path-filtered: a required status check must report on EVERY PR to main, or GitHub blocks
+# the merge waiting for a status that never arrives (path-filter + required = deadlock). The
+# sweep is cheap (~1 min) and passes trivially when no atoms changed. Do NOT re-add a paths:
+# filter to pull_request, and do NOT remove `name: parse-sweep` (the required-check context
+# and config/governance/required_checks.yaml both pin that exact name).
+name: Atoms parse sweep
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - 'atoms/**'
+      - 'scripts/ci/check_canonical_atom_parse_sweep.py'
+      - 'scripts/ci/check_canonical_atom_parse_sweep_baseline.txt'
+      - 'scripts/ci/check_canonical_atom_parse_sweep_stub_baseline.txt'
+      - 'phoenix_v4/planning/assembly_compiler.py'
+jobs:
+  parse-sweep:
+    name: parse-sweep
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install -q pyyaml
+      - name: Run CANONICAL.txt parse-sweep guard (checks A/B/C/D)
+        run: PYTHONPATH=. python3 scripts/ci/check_canonical_atom_parse_sweep.py

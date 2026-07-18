@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__anxiety__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__calm_alarm__1hr
+  name: Calm the Alarm — for Tech & Finance Professionals (One-Hour)
+installment_number: 2
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Anxiety Relief: The False Alarm Response (4)'
+subtitle: How to Recognize When Anxiety Is a False Alarm — and What to Do Instead
+  — Anxiety for Tech Finance Burnout (When Your Mind Screams Danger)
+cover_tagline: Your body is screaming danger. Nothing is actually wrong.
+description:
+  short_blurb: Your heart is pounding over an unread Slack message and your nervous
+    system is treating a code review like a predator. This is a one-hour reset for
+    tech and finance professionals whose alarm fires constantly with no real threat
+    behind it. It teaches you to read the false alarm for what it is and stop obeying
+    a signal that's wrong.
+  long_description: 'A message comes in marked urgent and your stomach drops before
+    you''ve read a word. Your chest tightens at a calendar invite with no agenda.
+    Your heart slams during a deploy, a market open, a one-on-one that turns out to
+    be nothing. Your body is convinced you''re in danger. You''re sitting in a chair.
+    Nothing is actually wrong.
+
+
+    This is for the engineer who feels the adrenaline hit before the pager even confirms
+    an incident, the trader whose body reacts to a red candle like a physical threat,
+    the PM who walks into a routine review already braced for impact. People whose
+    alarm system has been firing so often, for so long, that it no longer waits for
+    a real reason. You read "got a sec?" and your whole system lights up. The dread
+    lands a full second before your thinking brain catches up and says it''s fine
+    — and by then the adrenaline is already in your blood.
+
+
+    Here''s the mechanism: the same wiring built to save you from a predator now treats
+    a Jira notification as one. The threat response doesn''t know the difference between
+    a real emergency and a Tuesday. It can''t tell a hostile email from a hostile
+    animal, so it floods you — heart, gut, breath, that electric dread — over things
+    that cannot actually hurt you. The problem was never that you''re weak or dramatic.
+    The problem is a smoke detector that goes off when you make toast.
+
+
+    This book won''t tell you to breathe deeply and think positive and the panic will
+    lift. It won''t hand you a morning routine that supposedly inoculates you by 9am.
+    It won''t promise the alarm never fires again — it''s old wiring and it''s staying.
+    What it does is teach you to recognize the false alarm in the moment, go down
+    into the sensation instead of fighting it or fleeing it, and come back knowing
+    the difference between a signal and a fact.
+
+
+    In about an hour you''ll have a clear read on your own alarm: what trips it, what
+    it feels like in your body, and what to do the next time it screams danger over
+    nothing. Not a technique to suppress it. A way to feel it fire and not hand it
+    the controls — to let your body do its loud thing while you keep moving through
+    your actual, un-dangerous day.
+
+
+    The alarm is lying. It''s loud, it''s physical, it''s convincing, and it is wrong
+    about the threat. You can let it ring and keep your hands on your own day. You
+    don''t have to believe everything your body shouts at you.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - tech & finance professionals
+  - anxiety for tech & finance professionals
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: daniel_cho
+comp_titles:
+- When Panic Attacks (David D. Burns) — secular, mechanism-first take on a body that
+  sounds the alarm over nothing
+- Hope and Help for Your Nerves (Claire Weekes) — the classic on facing the false
+  alarm instead of fighting it
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the science of a stress response
+  that fires at the wrong threats
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,220 @@
+{
+ "generated": "2026-07-01",
+ "what": "Catalog atom-stub debt remaining after THE GATE loader hardening + priority HOOK fill.",
+ "loader_status": "prose_resolver._parse_block_file_with_prose now DROPS these stub variants from the selectable pool; a cell with <3 real variants raises InsufficientVariantsError under the runtime gate (never ships the stub).",
+ "summary": {
+  "base_files_with_stub_variants": 12,
+  "base_stub_variants_total": 300,
+  "base_cells_raising_under_runtime_gate": 0,
+  "locale_files_with_stub_variants": 22,
+  "locale_stub_variants_total": 660
+ },
+ "base_tail": [
+  {
+   "cell": "corporate_managers/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 8,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "first_responders/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 8,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "first_responders/financial_anxiety/HOOK/CANONICAL.txt",
+   "real_variants": 5,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "gen_alpha_students/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 5,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "gen_alpha_students/financial_anxiety/HOOK/CANONICAL.txt",
+   "real_variants": 5,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "gen_x_sandwich/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 8,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "gen_x_sandwich/financial_anxiety/HOOK/CANONICAL.txt",
+   "real_variants": 5,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "gen_z_professionals/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 8,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "healthcare_rns/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 8,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "healthcare_rns/financial_anxiety/HOOK/CANONICAL.txt",
+   "real_variants": 5,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "working_parents/burnout/HOOK/CANONICAL.txt",
+   "real_variants": 8,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  },
+  {
+   "cell": "working_parents/financial_anxiety/HOOK/CANONICAL.txt",
+   "real_variants": 5,
+   "stub_variants": 25,
+   "raises_under_runtime_gate": false
+  }
+ ],
+ "locale_tail": [
+  {
+   "cell": "corporate_managers/burnout/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "corporate_managers/financial_anxiety/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "first_responders/burnout/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "first_responders/burnout/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "first_responders/financial_anxiety/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "first_responders/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_alpha_students/burnout/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_alpha_students/burnout/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_alpha_students/financial_anxiety/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_alpha_students/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_x_sandwich/burnout/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_x_sandwich/burnout/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_x_sandwich/financial_anxiety/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_x_sandwich/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "gen_z_professionals/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "healthcare_rns/burnout/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "healthcare_rns/financial_anxiety/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "healthcare_rns/financial_anxiety/HOOK/locales/zh-CN/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "healthcare_rns/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "working_parents/burnout/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "working_parents/burnout/HOOK/locales/zh-TW/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  },
+  {
+   "cell": "working_parents/financial_anxiety/HOOK/locales/ja-JP/CANONICAL.txt",
+   "real_variants": 0,
+   "stub_variants": 30,
+   "raises_under_runtime_gate": true
+  }
+ ]
+}

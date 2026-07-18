@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Onboarding proof presentation (PNG)</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--border:#334155;--text:#f8fafc;--muted:#94a3b8;--accent:#a78bfa;--r:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
+a{color:var(--accent)}
+.hero{padding:40px 24px 28px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#1e1b4b,var(--bg))}
+.hero h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-.03em}
+.hero p{color:var(--muted);max-width:760px;margin:14px auto 0;font-size:.95rem}
+.nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.nav a{font-size:.8rem;font-weight:600;color:var(--accent);text-decoration:none;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card)}
+.nav a:hover{border-color:var(--accent)}
+section{max-width:1200px;margin:0 auto;padding:36px 20px 60px}
+h2{font-size:1.15rem;font-weight:800;margin:32px 0 16px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.slide{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);display:flex;flex-direction:column}
+.slide img{width:100%;height:auto;display:block;vertical-align:bottom;background:#020617}
+.slide .cap{padding:14px 16px 18px;font-size:.78rem;color:var(--muted)}
+.slide .cap strong{display:block;color:var(--text);font-size:.85rem;margin-bottom:6px;font-family:ui-monospace,monospace}
+.mission{max-width:900px;margin:0 auto 40px}
+.mission .slide img{aspect-ratio:1080/1440;object-fit:cover}
+.foot{text-align:center;padding:32px 20px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+code{font-size:.85em;background:var(--card);padding:2px 8px;border-radius:6px}
+.canon{font-size:.8rem;color:var(--accent);margin-top:12px}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Onboarding proof — PNG presentation deck</h1>
+<p>Raster tiles from <code>example_registry.json</code>. Full registry UI: <code>../lane_examples_gallery.html</code>.</p>
+<p class="canon"><strong>Live:</strong> <a href="https://brand-admin-onboarding-bu2.pages.dev/onboarding/presentation.html">https://brand-admin-onboarding-bu2.pages.dev/onboarding/presentation.html</a></p>
+<div class="nav">
+<a href="../brand_onboarding_hub.html">Hub</a>
+<a href="../brand_admin_master_onboarding.html">Master onboarding</a>
+<a href="../lane_examples_gallery.html">Lane gallery</a>
+<a href="https://brand-admin-onboarding-bu2.pages.dev" target="_blank" rel="noopener">Live wizard</a>
+</div>
+</div>
+
+<section>
+<h2>Mission</h2>
+<div id="mission-slot" class="mission"></div>
+<h2>Visual identity pack</h2>
+<div id="vi-deck" class="deck"></div>
+<h2>Archetypes</h2>
+<div id="arch-deck" class="deck"></div>
+<h2>Systems boards</h2>
+<div id="sys-deck" class="deck"></div>
+<h2>Comparison &amp; gallery (rest)</h2>
+<div id="rest-deck" class="deck"></div>
+</section>
+
+<p class="foot">PNGs: <code>/onboarding/proof/**/*.png</code> · <code>python3 scripts/onboarding/generate_onboarding_proof_pngs.py</code></p>
+
+<script>
+(function(){
+var MISSION = 'pack_v1_mission_output_overview';
+var VI = ['pack_v1_vi_calm_v1','pack_v1_vi_dark_v1','pack_v1_vi_earthy_v1','pack_v1_vi_bold_v1','pack_v1_vi_premium_v1','pack_v1_vi_mysterious_v1'];
+var ARCH = ['pack_v1_arch_nervous_system_v1','pack_v1_arch_identity_direction_v1','pack_v1_arch_emotional_healing_v1','pack_v1_arch_performance_focus_v1','pack_v1_arch_spiritual_awakening_v1'];
+var SYS = ['pack_v1_sys_eois_v1','pack_v1_sys_controlled_contrast_v1','pack_v1_sys_audiobook_dominance_v1','pack_v1_sys_binge_loop_v1','pack_v1_sys_social_wiring_v1','pack_v1_sys_chaos_slot_v1','pack_v1_sys_transformation_promise_v1'];
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function slide(row){
+  var s=el('div','slide');
+  var im=document.createElement('img');
+  im.alt=row.caption||row.id;
+  im.src=row.asset_path;
+  s.appendChild(im);
+  var cap=el('div','cap');
+  cap.appendChild(el('strong',null,row.id));
+  cap.appendChild(document.createTextNode(row.caption||''));
+  s.appendChild(cap);
+  return s;
+}
+function isRasterProof(p){
+  if(!p||typeof p!=='string')return false;
+  return /\.(png|jpe?g|webp|gif|svg)$/i.test(p);
+}
+fetch('example_registry.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){
+  var byId={};
+  rows.forEach(function(r){byId[r.id]=r;});
+  var m=document.getElementById('mission-slot');
+  if(byId[MISSION] && byId[MISSION].asset_path) m.appendChild(slide(byId[MISSION]));
+  var vi=document.getElementById('vi-deck');
+  VI.forEach(function(id){if(byId[id] && byId[id].asset_path) vi.appendChild(slide(byId[id]));});
+  var ar=document.getElementById('arch-deck');
+  ARCH.forEach(function(id){if(byId[id] && byId[id].asset_path) ar.appendChild(slide(byId[id]));});
+  var sy=document.getElementById('sys-deck');
+  SYS.forEach(function(id){if(byId[id] && byId[id].asset_path) sy.appendChild(slide(byId[id]));});
+  var rest=document.getElementById('rest-deck');
+  var skip={};[MISSION].concat(VI,ARCH,SYS).forEach(function(x){skip[x]=1});
+  rows.filter(function(r){
+    if(skip[r.id])return false;
+    var p=r.asset_path||'';
+    if(!isRasterProof(p))return false;
+    if(/\.(mp3|wav|m4a)$/i.test(p))return false;
+    return r.status==='ready';
+  }).sort(function(a,b){return a.id.localeCompare(b.id);}).forEach(function(r){rest.appendChild(slide(r));});
+}).catch(function(){
+  document.querySelector('section').insertBefore(el('p',null,'Could not load registry. Serve <code>brand-wizard-app/public</code> (see <code>scripts/dev/serve_brand_admin_public.sh</code>) or open the <a href="https://brand-admin-onboarding-bu2.pages.dev/onboarding/presentation.html">live deck</a>.'), document.querySelector('section').firstChild);
+});
+})();
+</script>
+</body>
+</html>

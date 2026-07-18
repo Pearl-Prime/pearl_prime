@@ -1,0 +1,94 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 人说学校在为你的人生做准备。有些日子却像它在训练你怀疑自己的注意力，并从不真正面对难处。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 教育压力也是品格问题：学校口称深度与关怀，却以可度量的能力取代品格养成；在年轻人从未学会诚实面对难处之处，鬼（oni）便扎根。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Omote Sensei传授日本圣性生活与净化之道，在实修中见到学生把学业压力当作散漫注意即道德缺陷来背负。他们不问教育是否重要，而问在大和心（Yamato-gokoro）——诚恳心——已从课程中剥离、代之以表演时，学习意味着什么。
+    - id: teacher_intro_02
+      line: Omote Sensei立足于日本传统。他在实修中见到学生已被保护其免于失败与不适的制度耗尽；传统认为教育须包含与难处的诚实相遇之实践，否则真正艰难降临时鬼（oni）将扎根。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |-
+        你打开作业门户。身体绷紧。你切走。功课仍在，于是你又回来，无论系统是否帮你托住。
+        LOOP_SEQUENCE: "opened the portal. body tensed. switched away. came back."
+    - id: youth_somatic_02
+      line: |-
+        你在应用里看到截止日。肩与下颌收紧。你切换标签页。事情仍须完成，于是你又返回。
+        LOOP_SEQUENCE: "saw the deadline. shoulders and jaw tightened. switched tabs. returned."
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Omote Sensei见过这一序列——任务出现、身体绷紧、注意离开，又在一直误名问题的制度内折返努力。日本传统不责怪学生，而点名剥除了品格养成与诚实难处的课程体系。
+    - id: teacher_witness_02
+      line: 他也见学生背负这一循环——门户打开、身体紧张、标签切换，同一压力又将其拉回。传统认为，在年轻人未被教导诚实面对难处之处，鬼（oni）最易扎根。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 410 workshops. 27 cities.
+      stat_line_2: 年轻人在组织工作坊、发起运动，学生与青年教育工作者已在建立学习支持、更健康的时间表与对注意友好的学习空间。
+    - id: turnaround_02
+      stat_line_1: 410 workshops. 27 cities.
+      stat_line_2: 年轻人在组织并举办同伴小组、培训倾听者，并推动学校将品格与诚实难处纳入学习方程，而非仅办活动与租场地。
+bridge:
+  options:
+    - id: bridge_01
+      line: 410场工作坊。27座城市。追踪器衡量改革与学习支持，却没有一栏记录：又一日碎片化之后，诚实回到学业何以可能——不把制度的混乱内化为个人失败、仍能面对难处的容量。回到门户的学生需要它。Omote Sensei的传统数代培育大和心（Yamato-gokoro）与对难处的诚实相遇。
+    - id: bridge_02
+      line: 数字衡量项目与改革，却不衡量：当年轻人终于拥有包含诚实面对——非能力表演，而以道德情感而非算计行动——的实践时，会发生什么。下一次诚实学习需要那种容量。Omote Sensei的传统称之为大和心（Yamato-gokoro）：对自己、共同体与学业本身的诚信。
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Omote Sensei所见
+      paragraphs:
+        - Omote Sensei不会先称学生“分心”。他先点名制度。在日本圣传统中，教育从不与品格养成分离——涵养大和心（Yamato-gokoro），即以道德情感而非算计行动之诚恳心。将品格养成从课程剥离、代之以可度量能力的现代体系，培养出技术能干却不知如何诚信生活的人；传统视之为制度的失败，而非学生的失败。
+        - 由此转向鬼（oni）。作为内在之苦的鬼（oni），最易在年轻人未被教导诚实面对难处之处扎根。保护学生免于失败、不适与道德复杂的教育并不培养坚韧成人；它培养的是首次遭遇真正艰难时因从未培养面对实践而鬼（oni）被激活的成人。
+        - 这是重构：感到“我有毛病——我坏了、错了”常是对紊乱学习环境的准确解读；传统主张，在制度与结构从未为所要求者设计的前提下，教育须包含与难处的诚实相遇。
+    - id: teacher_perspective_02
+      header: Omote Sensei所见
+      paragraphs:
+        - 在Omote Sensei的传统中，散漫的注意不仅是认知问题，更是品格问题——缺少只能通过实践涵养的诚恳在场，即大和心（Yamato-gokoro）。当制度口称深度与关怀，却以碎片化与表演组织日常时，传统追问：面对难处的实践何在。
+        - 圣地理教导：学与何地学同等重要。对完全经由屏幕受教的年轻人，传统指出一种特定丧失：缺少植根于地方的知识——唯有在景观中持续身体在场、在其记忆与对注意的要求中才能生成的理解。
+        - 在此框架下，自责缓和。问题不是学生懒惰，也不是挣扎者“不该”挣扎。问题是制度剥离了诚恳学习的条件，却把结果归咎于学生。Omote Sensei的传统给出标准：对自己、共同体与学业本身的诚信。
+practice:
+  options:
+    - id: practice_01
+      display_name: 净化与服务实践
+      announcement_line: Omote Sensei教授四分钟的「净化与服务实践」，用于学业压力使心智对自身“表演”的时刻。内容在侧栏，简短而有结构。
+      relief_lines:
+        - 所累积者可被面对并释放。
+        - 足以支撑下一步诚实行动的稳定感会回来。
+    - id: practice_02
+      display_name: 净化与服务实践
+      announcement_line: Omote Sensei教授四分钟的「净化与服务实践」，用于作业门户与碎片化的一日已使内在生活需要净化之时。内容在侧栏，短到可在课前或任务之间使用。
+      relief_lines:
+        - 表演的鬼（oni）以诚实观照相会。
+        - 诚恳心为下一步回归。
+sdg:
+  primary:
+    line: 联合国通过可持续发展目标4及其优质教育相关目标，为这一问题提供框架。
+  fallback_un_tie:
+    line: Pearl News为独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+    - id: cta_01
+      line: UNESCO全球教育联盟与学生倡导团体均在此提供可行入口。入口：https://www.unesco.org/en/education/globaleducationcoalition
+    - id: cta_02
+      line: 若下一步不在彼处，学生主导的教育正义团体在地方与国家层面从事同类框架工作。入口：加入其网络。
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 学校谈论学习，却在破坏学习的条件。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 一位日本传统教师将失焦读作制度错位的迹象，并点名大和心（Yamato-gokoro）。
+      - id: headline_layer_2_02
+        line: Omote Sensei点出品格养成被剥离时学业压力的作用，并提供诚实面对难处的实践。

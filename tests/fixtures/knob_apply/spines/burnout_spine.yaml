@@ -1,0 +1,648 @@
+family_id: burnout
+family_name: "Burnout / Overfunctioning"
+adjacent_topics: [compassion_fatigue, depression, anxiety]
+primary_mechanism: overwhelm
+allowed_engines: [overwhelm, watcher, grief]
+
+reader_starting_state: >
+  Reader is exhausted but still performing. They have been running on empty so long they have
+  forgotten what full felt like. They are irritable, cynical, and disconnected from work and
+  relationships they used to care about. They have tried rest and still feel hollow afterward.
+  They wake up tired. They go through the motions. They believe the problem is they haven't
+  rested enough, worked efficiently enough, or managed their stress well enough. They are
+  quietly waiting for the vacation, the promotion, the project's end — the moment when they
+  will finally feel okay again. That moment has not come.
+
+reader_ending_state: >
+  Reader understands that burnout is not a rest deficit — it is a collapse in the relationship
+  between self and capacity. They have named the overfunctioning pattern that drove the collapse:
+  the specific mechanism of doing more to feel less useless. They have begun to separate their
+  sense of worth from their output. They have a rebuilt, non-punishing relationship with their
+  own limits — one that doesn't require productivity to justify existence. They are not fixed.
+  They are oriented differently.
+
+what_makes_this_family_different: >
+  Burnout readers will immediately try to optimize recovery. The moment a book suggests rest,
+  the burned-out reader begins scheduling rest, measuring rest, tracking rest quality. This is
+  the same drive that caused the collapse, now applied to recovery. The book must name the
+  optimization instinct as part of the disease before any repair is possible. Additionally,
+  this family requires legitimizing exhaustion before ANY reframing — the reader who still feels
+  guilty for being tired cannot hear anything else. The grief engine is also active here in a
+  way it isn't in other families: the reader is mourning a version of themselves who cared,
+  who had energy, who was present. That loss must be honored before forward motion. The watcher
+  engine names the dissociation many burnout readers experience — watching their own life
+  happen at a remove, feeling like a camera operator rather than a participant. These three
+  engines (overwhelm, watcher, grief) are all live simultaneously, making this family uniquely
+  layered.
+
+chapters:
+  chapter_01:
+    number: 1
+    role: recognition
+    working_title: "This Is Not Tiredness"
+    thesis: >
+      Burnout is a specific condition with a specific signature — not tiredness, not stress,
+      not laziness — and most people who have it are the last to name it correctly.
+    emotional_job: >
+      Reader feels seen for the first time — not as someone who is struggling with stress, but
+      as someone experiencing something specific that has a name and a shape. The chapter does
+      not ask them to feel better; it asks them to recognize themselves.
+    practical_job: >
+      Distinguish burnout from tiredness, from depression, from overwork. Name the specific
+      phenomenology: the cynicism, the disconnection from caring, the going-through-motions quality,
+      the flatness that persists through rest. Give the reader a vocabulary for what they are
+      already experiencing.
+    what_changes:
+      Before: "I'm just tired. I need a vacation. I need to manage my time better."
+      After: "What I have been calling tiredness has a different shape. It has a name. And it is
+        not fixed by the things I've been trying."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Offering any solution or hope in chapter 1
+      - Pathologizing the reader or suggesting clinical intervention
+      - Conflating burnout with depression (acknowledge adjacency, don't collapse the distinction)
+      - Using tiredness as a synonym
+      - Any suggestion that the reader chose this
+    recommended_enrichments:
+      - Opening scene: reader watching themselves go through a morning routine that once felt meaningful
+      - The "flat" texture of burnout vs the "heavy" texture of depression
+      - The watcher quality: narrating your own life from the outside
+    claim_someone_could_argue: >
+      Some would argue that burnout is just a trendy label for being overworked, and that
+      the solution is simply to work less — naming it differently just medicalizes a scheduling
+      problem.
+    why_this_chapter_exists: >
+      Reader cannot move toward understanding the mechanism until they correctly identify what
+      they are experiencing. Most burnout readers have been misdiagnosing themselves for months
+      or years. Correct identification is not just naming — it reorganizes everything that follows.
+    what_comes_next: >
+      Chapter 2 moves from naming the condition to naming the cost — not the tiredness cost,
+      but the specific cost to caring capacity, to relationship, to meaning.
+
+  chapter_02:
+    number: 2
+    role: cost_exposure
+    working_title: "What You're Actually Losing"
+    thesis: >
+      The real cost of burnout is not lost energy — it is lost caring. The exhaustion most
+      people notice is the surface. What is disappearing underneath is the capacity to give a damn.
+    emotional_job: >
+      Reader confronts what burnout is actually taking from them — not productivity metrics, but
+      the texture of being alive: caring about the people they love, feeling present in moments
+      that matter, experiencing work as meaningful rather than mechanical. This chapter creates
+      appropriate grief, not alarm.
+    practical_job: >
+      Name the specific losses: relational presence, emotional availability, connection to purpose,
+      the ability to be moved by things that once moved them. Distinguish these from energy loss.
+      Help the reader inventory what has gone quiet in them.
+    what_changes:
+      Before: "I need to fix my energy levels so I can get back to performing."
+      After: "What I'm losing isn't performance capacity. What I'm losing is something I actually
+        care about losing."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Turning cost into motivation for productivity recovery
+      - Making the losses about career or professional outcomes first
+      - Reassuring the reader that they will get it back (too early)
+      - Using guilt as the mechanism for cost exposure
+    recommended_enrichments:
+      - Scene: reader failing to feel moved by something they used to love
+      - The grief engine activated here: mourning the pre-burnout self
+      - The specific quality of cynicism as self-protection against further disappointment
+    claim_someone_could_argue: >
+      Some would argue that reduced caring is adaptive — that people who care less perform
+      more consistently and avoid emotional volatility. Detachment, not engagement, is the
+      professional ideal.
+    why_this_chapter_exists: >
+      Without naming the real cost, the reader will continue to optimize for energy management
+      rather than understanding what has actually collapsed. Cost must be made vivid and personal
+      before mechanism can land.
+    what_comes_next: >
+      Chapter 3 asks: why did this happen? Not in terms of circumstances, but in terms of the
+      belief that made the overfunctioning feel necessary.
+
+  chapter_03:
+    number: 3
+    role: hidden_belief
+    working_title: "The Equation You Never Questioned"
+    thesis: >
+      Underneath burnout is an equation the reader has never consciously examined: worth equals
+      usefulness. Not worth is enhanced by usefulness — worth IS usefulness. When you stop
+      producing, you stop mattering.
+    emotional_job: >
+      Reader experiences the discomfort of recognition — not of something shameful, but of
+      something so foundational they had no idea it was an assumption rather than a fact. The
+      equation feels obvious once named. That obviousness is the point.
+    practical_job: >
+      Name the worth-equals-usefulness equation. Show how it operates: why rest feels wrong,
+      why illness feels like failure, why vacation requires earning, why saying no produces
+      dread rather than relief. Help the reader trace where this equation came from without
+      turning it into a blame exercise.
+    what_changes:
+      Before: "I'm burned out because I worked too hard."
+      After: "I worked that hard because stopping felt like disappearing. And I never questioned
+        whether that was true."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Resolving the belief in this chapter (too early)
+      - Making the belief origin a trauma narrative (this chapter isn't therapy)
+      - Implying the reader is broken for holding this belief
+      - Offering the corrective belief before the current one is fully visible
+    recommended_enrichments:
+      - Inventory exercise: what does it feel like to do nothing useful for one hour?
+      - The specific anxiety that arises when productivity stops
+      - Cultural and family-of-origin dimensions without over-psychologizing
+    claim_someone_could_argue: >
+      Some would argue that worth and usefulness SHOULD be linked — that people who contribute
+      more should feel better about themselves, and building this connection is what motivates
+      achievement and social participation.
+    why_this_chapter_exists: >
+      The reader cannot stop overfunctioning until they understand what the overfunctioning is
+      defending against. The hidden belief is the engine. Without naming it, every practical
+      intervention will fail.
+    what_comes_next: >
+      Chapter 4 moves from the belief to the body — the physical collapse that is not weakness
+      but the system's honest report on what the belief has required.
+
+  chapter_04:
+    number: 4
+    role: somatic_legitimacy
+    working_title: "Your Body Was Telling the Truth"
+    thesis: >
+      The physical collapse of burnout — the exhaustion that persists through sleep, the
+      inflammation, the immune dysfunction — is not weakness. It is the body accurately reporting
+      the cost of sustained overfunctioning. The body was never wrong.
+    emotional_job: >
+      Reader stops being at war with their body. The body stopped being a reliable ally months
+      or years ago, and the reader has been frustrated with it — pushing through, managing
+      symptoms, treating fatigue as a malfunction. This chapter reframes the body as a witness,
+      not a traitor.
+    practical_job: >
+      Explain the stress physiology of sustained activation: chronic cortisol, immune suppression,
+      the body's cost accounting. Name specific burnout somatic signatures: the wired-but-tired
+      quality, the flatness of the nervous system after prolonged hyperactivation, the way rest
+      stops being restorative. Validate that the reader's body is responding logically.
+    what_changes:
+      Before: "My body is failing me. I need to fix it so I can function again."
+      After: "My body was accurately reporting what the overfunctioning was costing. It was never
+        the problem."
+    required_sections: [HOOK, SCENE, SOMATIC_INVENTORY, REFLECTION]
+    forbidden_moves:
+      - Medical advice or clinical recommendations
+      - Turning somatic legitimacy into a wellness protocol
+      - Implying the body can be fixed without addressing the pattern
+      - Using "listen to your body" as if this is new or sufficient information
+    recommended_enrichments:
+      - The specific texture of burnout fatigue versus ordinary tiredness
+      - The way chronic high performance trains the body to ignore its own signals
+      - Why sleep and rest fail to restore: the system is still activated
+    claim_someone_could_argue: >
+      Some would argue that the body's complaints are often exaggerated by sedentary lifestyles
+      and that the solution is building physical resilience through exercise and discipline, not
+      validating exhaustion.
+    why_this_chapter_exists: >
+      Many burnout readers are at war with their own physical experience. This war is part of
+      the pattern. Somatic legitimacy must be established before the reader can work with their
+      own signals rather than against them. Without this chapter, the mechanism chapter lands
+      as intellectual but not embodied.
+    what_comes_next: >
+      Chapter 5 names the specific mechanism driving the whole pattern: overfunctioning as
+      a strategy for managing the dread of worthlessness.
+
+  chapter_05:
+    number: 5
+    role: mechanism
+    working_title: "Doing More to Feel Less Useless"
+    thesis: >
+      Overfunctioning is not a personality type or a work ethic. It is a specific coping
+      mechanism: when the threat of worthlessness rises, doing more temporarily suppresses it.
+      The more has to keep increasing because the relief is temporary. This is the engine
+      of burnout.
+    emotional_job: >
+      Reader sees their own behavior clearly for the first time — not as ambition, not as
+      responsibility, but as a loop they have been running. This recognition is not shameful;
+      it is clarifying. The chapter creates a moment of "oh, that's what I've been doing."
+    practical_job: >
+      Name the overfunctioning mechanism precisely: the specific loop of worthlessness threat,
+      doing-more response, temporary relief, and threshold escalation. Distinguish overfunctioning
+      from work ethic, ambition, and conscientiousness. Show the loop operating in specific
+      scenarios: taking on more when a project ends, volunteering when exhausted, being unable
+      to delegate.
+    what_changes:
+      Before: "I work hard because I'm responsible and the work matters."
+      After: "I work this hard partly because stopping produces dread, and doing more is the
+        only thing that quiets it temporarily."
+    required_sections: [HOOK, MECHANISM_DIAGRAM, SCENE, REFLECTION]
+    forbidden_moves:
+      - Collapsing overfunctioning and workaholism (related but distinct)
+      - Shaming the reader for the mechanism
+      - Suggesting willpower can interrupt the mechanism at this stage
+      - Turning the mechanism into a productivity diagnosis
+    recommended_enrichments:
+      - The specific moment when completing a task fails to produce satisfaction and the reader
+        immediately pivots to the next thing
+      - The rescuing dimension: overfunctioning in relationships as well as work
+      - The loop accelerating under stress rather than slowing down
+    claim_someone_could_argue: >
+      Some would argue that what looks like overfunctioning is simply conscientiousness and
+      high standards — that high performers who work hard are meeting real demands, not
+      compensating for internal inadequacy.
+    why_this_chapter_exists: >
+      Without naming the specific mechanism, the reader cannot work with it. All the legitimizing
+      of chapters 1-4 points toward this: the recognition that something specific is being driven,
+      not just experienced. Mechanism clarity is required before any interruption is possible.
+    what_comes_next: >
+      Chapter 6 delivers the hardest truth: rest alone will not fix this. The reader must
+      understand why recharging doesn't change the pattern.
+
+  chapter_06:
+    number: 6
+    role: destabilization
+    working_title: "Why the Vacation Didn't Work"
+    thesis: >
+      Rest is not the solution to burnout because burnout is not a rest deficit. Resting and
+      returning to the same pattern will produce the same outcome. The reader's strategy is
+      wrong — not inefficient, but wrong in kind.
+    emotional_job: >
+      Reader experiences the productive discomfort of having a cherished belief dismantled.
+      The belief that "I just need enough rest" is protecting the reader from a harder truth.
+      This chapter removes that protection carefully and replaces it with something more solid:
+      an accurate picture of what actually needs to change.
+    practical_job: >
+      Show why rest fails to resolve burnout: the overfunctioning mechanism is still in place,
+      so recovery produces the renewed capacity to overfunction at the same rate. The reader
+      comes back from vacation ready to catch up, not restored. Name what rest actually addresses
+      (activation level) versus what it doesn't address (the relationship to capacity and worth).
+    what_changes:
+      Before: "I just need a long enough break and then I'll be okay."
+      After: "Rest is necessary but not sufficient. Something in the pattern itself needs to
+        change, and rest doesn't touch it."
+    required_sections: [HOOK, SCENE, DESTABILIZATION, REFLECTION]
+    forbidden_moves:
+      - Dismissing rest as irrelevant (it's necessary but not sufficient)
+      - Pivoting immediately to solutions after the destabilization
+      - Letting the chapter become alarming without the stabilizing reframe
+      - Turning this into a critique of vacation culture
+    recommended_enrichments:
+      - The specific experience of returning from a break and immediately feeling behind
+      - The guilt that accompanies rest for high-overfunctioners
+      - Why the optimization instinct now applies to rest itself
+    claim_someone_could_argue: >
+      Some would argue that the problem is simply insufficient rest — that people who feel
+      burned out after vacation didn't take long enough breaks, and the solution is extended
+      sabbaticals rather than reconsidering the work pattern.
+    why_this_chapter_exists: >
+      The reader's current strategy (get enough rest) will never produce the outcome they want.
+      This must be named clearly before any alternative strategy can be introduced. Without
+      destabilization, the practical chapters will be absorbed into the existing optimization
+      framework and fail.
+    what_comes_next: >
+      Chapter 7 goes deeper into what the pattern costs at the identity level: who is the
+      reader if they are not useful?
+
+  chapter_07:
+    number: 7
+    role: identity_fracture
+    working_title: "Who Are You When You're Not Useful?"
+    thesis: >
+      For many burnout sufferers, usefulness is not just a value — it is identity. The question
+      "who am I when I'm not producing?" is not rhetorical. It is a genuine crisis of
+      self-definition that the overfunctioning pattern has been deferring.
+    emotional_job: >
+      Reader sits with the discomfort of identity instability — the experience of not knowing
+      who they are outside of their roles and output. This is not created by the chapter; it
+      already exists in the reader. The chapter names it and makes it survivable by showing
+      that the instability is the result of a pattern, not a character truth.
+    practical_job: >
+      Help the reader identify the roles and outputs that currently constitute their self-concept.
+      Name the pattern of identity-through-function. Distinguish between "I am someone who works
+      hard" (a true statement about behavior) and "I am my work" (an identity collapse that
+      makes stopping feel like self-erasure). Introduce the question without requiring the answer.
+    what_changes:
+      Before: "I know who I am. I'm someone who gets things done."
+      After: "I know what I do. I'm much less certain who I am when the doing stops. That
+        uncertainty has been there for a while."
+    required_sections: [HOOK, SCENE, IDENTITY_INVENTORY, REFLECTION]
+    forbidden_moves:
+      - Answering the identity question in this chapter (that's ch11's job)
+      - Implying the reader is shallow for having work-based identity
+      - Making this chapter about career meaning (too narrow)
+      - Resolving the fracture prematurely with reassurance
+    recommended_enrichments:
+      - The watcher engine: the reader observing their own life rather than inhabiting it
+      - What happens in conversation when someone asks "what do you do?" vs "who are you?"
+      - The specific panic that arises during extended rest or illness when output stops
+    claim_someone_could_argue: >
+      Some would argue that building identity around work and contribution is healthy and
+      appropriate — that purpose derived from productivity is a legitimate form of meaning,
+      not a pathology to be corrected.
+    why_this_chapter_exists: >
+      Burnout cannot be resolved at the behavioral level alone. The reader's identity is
+      structured around output, which makes rest feel like self-destruction. This fracture
+      must be made visible and named as a pattern — not a flaw — before any self-relation
+      shift is possible.
+    what_comes_next: >
+      Chapter 8 moves the lens outward to show how the overfunctioning pattern operates
+      in relationships — not just in work.
+
+  chapter_08:
+    number: 8
+    role: relational_consequence
+    working_title: "The People You're Rescuing"
+    thesis: >
+      Overfunctioning doesn't stay at work. It moves into relationships as rescuing — doing
+      for others what they could do for themselves, taking on emotional labor that isn't yours,
+      making yourself indispensable. And the resentment that follows is not ingratitude; it
+      is the cost of a system where no one is actually receiving care.
+    emotional_job: >
+      Reader sees the relational dimension of their pattern with neither shame nor self-pity.
+      They may feel recognized in a way that is uncomfortable but not accusatory. The chapter
+      opens space for honest examination of how the overfunctioning pattern manifests with
+      people they love.
+    practical_job: >
+      Name the relational forms of overfunctioning: fixing instead of listening, anticipating
+      needs before they are expressed, making yourself the load-bearing wall in every system,
+      the specific resentment that builds when others don't seem to need you as much as you
+      need them to need you. Connect this explicitly to the worth-equals-usefulness equation.
+    what_changes:
+      Before: "I give so much to the people I love. I don't understand why I feel so alone."
+      After: "What I've been calling care has also been a way of making myself necessary.
+        And that's not the same as connection."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Blaming the reader's relationships or partners
+      - Implying the reader's relationships are transactional or false
+      - Making relational consequences the primary focus rather than the pattern
+      - Offering communication scripts or relationship advice
+    recommended_enrichments:
+      - The specific texture of resentment that comes from giving more than you want to give
+      - The difference between rescuing and support
+      - How overfunctioning can prevent intimacy by making vulnerability unnecessary
+    claim_someone_could_argue: >
+      Some would argue that anticipating others' needs and taking on extra responsibility
+      in relationships is an expression of love and competence — that high-functioning people
+      simply carry more because they are more capable.
+    why_this_chapter_exists: >
+      Burnout is often framed as a work problem, but the overfunctioning mechanism operates
+      across domains. Readers who address the work dimension while leaving the relational
+      dimension untouched will rebuild the same pattern in different clothes. The relational
+      cost also matters: their people are affected.
+    what_comes_next: >
+      Chapter 9 introduces the reframe — not as consolation, but as a factual reorientation.
+      Capacity is finite. That fact is not a failure.
+
+  chapter_09:
+    number: 9
+    role: reframe
+    working_title: "Capacity Is Not a Character Flaw"
+    thesis: >
+      Human capacity is finite. This is not a weakness to overcome or a constraint to optimize
+      around — it is a biological and psychological fact. Protecting finite capacity is not
+      selfishness; it is accurate accounting.
+    emotional_job: >
+      Reader begins to experience something like relief — not because the problem is solved,
+      but because the framing has shifted. The chapter offers the first real ground: the idea
+      that limits are not moral failures. This should feel like solid earth after a long time
+      without it.
+    practical_job: >
+      Reframe limits from character evidence to factual reality. Show that the people who are
+      most afraid of their limits are often the ones with the most sophisticated capacity —
+      they have spent years learning to override signals that less driven people would respect.
+      Introduce the concept of capacity as something to have a relationship with rather than
+      to optimize or ignore.
+    what_changes:
+      Before: "I need to expand my capacity so I can do everything that matters."
+      After: "My capacity is what it is. The question is whether I'm willing to have an honest
+        relationship with it."
+    required_sections: [HOOK, REFRAME, SCENE, REFLECTION]
+    forbidden_moves:
+      - Turning this into a productivity or optimization chapter
+      - Suggesting specific rest amounts or recovery protocols
+      - Implying the reader should simply do less (without the identity work to support it)
+      - Making limits sound like contentment or settling
+    recommended_enrichments:
+      - The specific inversion: high capacity people are often the worst at respecting their limits
+      - The difference between accepting limits and surrendering ambition
+      - What it would mean to spend capacity deliberately rather than reactively
+    claim_someone_could_argue: >
+      Some would argue that human capacity is far more elastic than we believe — that limits
+      are largely psychological, and that discipline, purpose, and training can extend what
+      most people treat as fixed constraints.
+    why_this_chapter_exists: >
+      The reader cannot build a different relationship to capacity while still treating
+      capacity as a moral variable. The reframe doesn't solve the problem; it makes the
+      actual solution accessible. Without this chapter, the practical interruption of ch10
+      will be absorbed into the same optimization loop.
+    what_comes_next: >
+      Chapter 10 moves from reframe to practice — one small, specific, deliberate act of not-doing
+      that is not rest but a genuine interruption of the pattern.
+
+  chapter_10:
+    number: 10
+    role: practical_interruption
+    working_title: "The Thing You Don't Do"
+    thesis: >
+      The first practical move against overfunctioning is not adding rest — it is making one
+      deliberate choice to not-do something you would have done. This is not the same as rest.
+      It is a small act of defiance against the worth-equals-usefulness equation.
+    emotional_job: >
+      Reader experiences the strangeness — and the possibility — of not-doing something that
+      the overfunctioning pattern would have required. The chapter makes space for the discomfort
+      of that choice while showing that the discomfort is survivable.
+    practical_job: >
+      Give the reader a specific, concrete practice: identify one task, request, or obligation
+      that the pattern requires but is not actually required. Not-do it. Notice what happens
+      internally. This is not a productivity hack; it is a deliberate experiment in discovering
+      that worth survives non-usefulness. The practice is small by design — the point is the
+      noticing, not the volume of change.
+    what_changes:
+      Before: "I need to do all of this. To not do it would be irresponsible."
+      After: "I chose not to do one thing. I noticed the dread. The dread passed. I'm still here."
+    required_sections: [HOOK, PRACTICE_DESIGN, SCENE, REFLECTION]
+    forbidden_moves:
+      - Turning not-doing into a productivity optimization (not-doing the unimportant to do more important)
+      - Scaling the practice too large too early
+      - Framing this as self-care or as rest
+      - Using guilt removal as the metric for success
+    recommended_enrichments:
+      - The specific quality of the dread that arises when the pattern is interrupted
+      - How the internal watcher narrates the choice — "this is selfish," "someone will be disappointed"
+      - What "the dread passed" actually feels like when it does
+    claim_someone_could_argue: >
+      Some would argue that the path out of burnout requires large structural changes —
+      different jobs, different relationships, different life arrangements — and that small
+      behavioral experiments are inadequate responses to systemic exhaustion.
+    why_this_chapter_exists: >
+      Understanding the mechanism and reframing capacity are necessary but not sufficient.
+      The reader needs one concrete embodied experience of interrupting the pattern before
+      the self-relation shift of ch11 can land. The practice creates the experiential ground
+      for what follows.
+    what_comes_next: >
+      Chapter 11 takes the practice further into a different relationship with the self —
+      one that doesn't require productivity to feel acceptable.
+
+  chapter_11:
+    number: 11
+    role: self_relation_shift
+    working_title: "Worth Without Output"
+    thesis: >
+      It is possible to have a different relationship to yourself — one in which your existence
+      doesn't require continuous justification through productivity. This is not an insight that
+      arrives intellectually. It is a relationship built through repeated small experiences
+      of surviving the worthlessness dread.
+    emotional_job: >
+      Reader begins to sense — not just intellectually but in some embodied way — that the
+      relationship to themselves is changeable. Not changed: changeable. The chapter honors how
+      strange and effortful this is while insisting it is possible because it is practiced, not
+      revealed.
+    practical_job: >
+      Describe the specific quality of a different self-relation: noticing the worthlessness
+      dread without being directed by it, being aware of the overfunctioning impulse without
+      obeying it, treating capacity as a resource to steward rather than a limit to overcome.
+      Give the reader language for the work they are actually doing when they practice this.
+    what_changes:
+      Before: "My value is what I produce. I know this isn't entirely true but I feel it as
+        completely true."
+      After: "I can feel the old equation activate and I can also notice it activating. That
+        gap is new. I can work in that gap."
+    required_sections: [HOOK, SCENE, PRACTICE_UNDER_PRESSURE, REFLECTION]
+    forbidden_moves:
+      - Claiming the self-relation shift is complete by the end of this chapter
+      - Turning worth-without-output into a spiritual or philosophical position
+      - Bypassing the difficulty with affirmations or positive self-talk
+      - Suggesting the old equation will stop activating
+    recommended_enrichments:
+      - The grief engine revisited — mourning the pre-burnout self while also recognizing
+        that the pre-burnout self was already running the damaging pattern
+      - What the watcher notices when the overfunctioning impulse arises and is not acted on
+      - The specific work of building a relationship with your own existence that doesn't
+        require performance
+    claim_someone_could_argue: >
+      Some would argue that separating worth from productivity produces complacency —
+      that the drive to earn your place is what produces excellence, and removing it will
+      make people settle for less than they're capable of.
+    why_this_chapter_exists: >
+      This is the chapter the whole book has been building toward. The practical interruption
+      of ch10 creates the experiential ground; this chapter names what is being built across
+      those experiences. Without this chapter, the book ends at insight without landing in
+      a changed relationship.
+    what_comes_next: >
+      Chapter 12 closes with integration — not a conclusion, but an orientation toward what
+      the reader is building and how to keep building it after the book ends.
+
+  chapter_12:
+    number: 12
+    role: integration
+    working_title: "Rebuilding From the Inside"
+    thesis: >
+      Recovery from burnout is not a return to a previous state. The previous state produced
+      the burnout. What is being built is something different: a self that has a sustainable
+      relationship with its own capacity, built on worth that doesn't require depletion as proof.
+    emotional_job: >
+      Reader feels something like hope without it being saccharine. The book has been honest
+      about difficulty throughout; this chapter earns the forward orientation by not pretending
+      the work is done. The reader leaves with a sense of continuing — not concluded.
+    practical_job: >
+      Name what has changed and what hasn't: the pattern will try to reassert itself, the
+      worthlessness dread will return, the overfunctioning impulse will be loud in moments
+      of stress. What is different is the reader's relationship to those signals — the growing
+      gap between impulse and action, the growing capacity to notice without obeying. Give
+      the reader a frame for the ongoing work that doesn't make it feel like another thing
+      to optimize.
+    what_changes:
+      Before: "I need to get back to who I was before the burnout."
+      After: "The person I was before was already running this pattern. What I'm building is
+        something the person before didn't have: a relationship with my own limits that doesn't
+        require constant override."
+    required_sections: [HOOK, INTEGRATION_MAP, SCENE, REFLECTION]
+    forbidden_moves:
+      - False resolution: implying the work is complete
+      - Making ongoing vigilance sound like a burden
+      - Returning to any productivity or optimization framing
+      - Closing with generic inspiration or motivation
+    recommended_enrichments:
+      - The grief engine one final time: honor what was lost and what was never quite there
+      - What it means to build slowly rather than to optimize rapidly
+      - The reader's new relationship to their own worth as something tended, not earned
+    claim_someone_could_argue: >
+      Some would argue that the best recovery from burnout is a new environment — a different
+      job, different responsibilities, a fresh start — rather than internal work that can be
+      done in any context.
+    why_this_chapter_exists: >
+      The book cannot end with the self-relation shift alone. Readers need to understand what
+      they are continuing into — not what they are leaving behind. Integration names the
+      ongoing practice and honors the fact that it is work, not arrival.
+    what_comes_next: >
+      The book is complete. The reader continues.
+
+sequencing_rules:
+  must_come_before:
+    - Somatic legitimacy (ch04) must come before mechanism (ch05)
+    - Hidden belief (ch03) must come before identity fracture (ch07)
+    - Mechanism (ch05) must come before destabilization (ch06)
+    - Reframe (ch09) must come before practical interruption (ch10)
+    - Practical interruption (ch10) must come before self_relation_shift (ch11)
+  cannot_come_too_early:
+    - Identity fracture cannot appear before ch06 — reader needs mechanism context first
+    - Reframe cannot appear before ch07 — identity work must precede framing shift
+    - Self-relation shift cannot appear before ch09 — reframe is required ground
+  saved_for_late_book:
+    - Integration must be last
+    - Self-relation shift must be second-to-last or third-to-last
+    - Practical interruption must come after both mechanism and reframe
+
+tone_and_pacing:
+  intensity_profile: [medium, high, high, medium, high, high, high, medium, medium, low, medium, low]
+  trust_curve: >
+    The book earns trust slowly. Chapter 1 asks for recognition, not commitment. Chapters 2-3
+    deepen recognition before asking the reader to examine their beliefs. The mechanism chapters
+    (4-6) are the most demanding intellectually and emotionally. Chapters 7-8 are intimate and
+    relational. Chapters 9-12 are the earned return — reframe, practice, and integration after
+    the difficult middle work.
+  action_timing: >
+    First concrete practice arrives at chapter 10. Before that, the book asks only for
+    recognition, acknowledgment, and honest examination. Early action chapters would misfire
+    for this reader — they would turn practice into optimization.
+  mechanism_timing: >
+    The mechanism (ch05) arrives after the reader has been legitimized (ch01-04). Naming the
+    mechanism before legitimizing the experience would feel accusatory. The mechanism after
+    legitimization feels clarifying.
+  permission_timing: >
+    Permission to limit, to not-do, to rest deliberately arrives at ch09-10. Before this, the
+    book has been preparing the reader to receive that permission without immediately optimizing it.
+
+prohibited_terms:
+  global:
+    - journey
+    - transform
+    - heal
+    - self-care
+    - wellness
+    - mindfulness
+    - empower
+    - empowering
+    - overcome
+    - conquer
+    - battle
+    - fight
+    - warrior
+    - survivor
+    - thrive
+    - manifest
+    - authentic self
+    - best self
+    - inner child
+    - trigger warning
+    - safe space
+    - toxic
+    - self-love
+    - "you've got this"
+    - "be gentle with yourself"
+  family_specific:
+    - optimize (when applied to rest or recovery)
+    - recharge (implies battery metaphor; use capacity-relationship language instead)
+    - "work-life balance"
+    - hustle
+    - high achiever (flattens the mechanism into personality)
+    - burnout cure
+    - recovery plan

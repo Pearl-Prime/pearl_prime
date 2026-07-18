@@ -1,0 +1,100 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__burnout__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__steady_ground__1hr
+  name: Steady Ground — for Managers (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: Drowning in Demands'
+subtitle: The Overwhelm Response
+cover_tagline: It's not that you can't handle it. It's that all of it arrived at once.
+description:
+  short_blurb: 'For the manager drowning in a tab-stack of crises with no bottom in
+    sight. This is one hour to stop trying to do everything and start by doing the
+    only honest thing: putting it all down for a moment so you can actually see it.
+    No system. No triage matrix. Just enough ground to stand on.'
+  long_description: 'It''s 4:47 and there are nineteen unread Slacks, two of them
+    with your name and a red dot, a deck due tomorrow you haven''t opened, a direct
+    report who needs you, a skip-level who''s asking why, and a personal life somewhere
+    on the other side of all of it. Your chest is tight. You keep starting things
+    and not finishing them. The list isn''t a list anymore. It''s a wall of water,
+    and you''re underneath it.
+
+
+    Here''s what almost no one says out loud to a manager: you are not failing at
+    your job. You are absorbing more inputs than any human nervous system was built
+    to hold. When you''re the one everything routes through, overwhelm isn''t a sign
+    you''re bad at this. It''s the predictable result of being the place where the
+    whole org''s pressure lands. The problem was never your capacity. It''s that nobody
+    ever taught you what to do when capacity gets blown past, except to grind harder,
+    which is exactly the thing making it worse and burning down what''s left of you.
+
+
+    What happens here is not productivity. First you name it: this is overwhelm, not
+    incompetence, and the difference matters because you treat them differently. Then,
+    instead of attacking the pile, you do the counterintuitive thing the body needs.
+    You stop. You let it all be too much, on purpose, for a minute, because the racing
+    is itself part of why you can''t see straight. You go down underneath the noise
+    to the one true thing: right now, in this body, you are okay, even with all of
+    it still undone. From that ground, the wall of water becomes a list again. Not
+    solved. Just survivable.
+
+
+    Don''t come here for a framework, an inbox-zero method, or a way to do all of
+    it faster. This hour won''t promise the pile goes away, because it won''t, not
+    tonight. It refuses the lie that the answer to too much is more discipline. What
+    it gives you instead is the thing underneath the thing: a way to stop the internal
+    flood so you can meet the actual work without your whole system screaming.
+
+
+    You are allowed to not have it handled. You are allowed to set the whole crushing
+    weight of it down for one hour and breathe. The work will still be there. But
+    you''ll meet it as a person who can see, instead of someone going under. Put it
+    down. You can pick up what matters after.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - managers
+  - burnout for managers
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Four Thousand Weeks (Oliver Burkeman) — accepts you can't do it all and stops pretending
+  otherwise
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — explains what chronic overload actually
+  does to the body
+- Essentialism (Greg McKeown) — gives permission to stop absorbing everything and
+  choose the few that matter
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

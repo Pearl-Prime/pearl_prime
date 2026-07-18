@@ -1,0 +1,181 @@
+# Quote bank — grief / ja_JP — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: grief
+locale_cluster: ja_JP
+wave: 2
+quote_count: 12
+quotes:
+- quote_id: quote_w2_grief_ja_jp_basho_v01
+  text: 夏草や兵どもが夢の跡
+  text_en: Summer grass — where warriors dreamed.
+  author: 松尾芭蕉
+  primary_source: 『奥の細道》
+  verified_via: 芭蕉奥の細道
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v03
+  secular_safe: true
+  sensitivity_notes: Seasons/nature — secular consolation
+  position_fit: opener
+- quote_id: quote_w2_grief_ja_jp_kotowaza_v01
+  text: 雨降って地固まる。
+  text_en: After rain, the ground hardens.
+  author: ことわざ
+  primary_source: 日本国語大辞典
+  verified_via: 広辞苑
+  public_domain: y
+  topic_keys:
+  - grief
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: Endurance
+  position_fit: closer
+- quote_id: quote_w2_depression_ja_jp_basho_v03
+  text: 閑さや岩にしみ入る蝉の声
+  text_en: Such stillness — cicada voices seep into rocks.
+  author: 松尾芭蕉
+  primary_source: 芭蕉句
+  verified_via: 芭蕉全集
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: Nature/stillness
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_ja_jp_basho_v02_depression
+  text: 夏草や兵どもが夢の跡
+  text_en: Summer grass — where warriors dreamed.
+  author: 松尾芭蕉
+  primary_source: 『奥の細道》
+  verified_via: 芭蕉奥の細道
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_ja_jp_basho_v02_financial_stress
+  text: 夏草や兵どもが夢の跡
+  text_en: Summer grass — where warriors dreamed.
+  author: 松尾芭蕉
+  primary_source: 『奥の細道》
+  verified_via: 芭蕉奥の細道
+  public_domain: y
+  topic_keys:
+  - financial_stress
+  - grief
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_ja_jp_basho_v02_grief
+  text: 夏草や兵どもが夢の跡
+  text_en: Summer grass — where warriors dreamed.
+  author: 松尾芭蕉
+  primary_source: 『奥の細道》
+  verified_via: 芭蕉奥の細道
+  public_domain: y
+  topic_keys:
+  - grief
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_ja_jp_basho_v02_sleep_anxiety
+  text: 夏草や兵どもが夢の跡
+  text_en: Summer grass — where warriors dreamed.
+  author: 松尾芭蕉
+  primary_source: 『奥の細道》
+  verified_via: 芭蕉奥の細道
+  public_domain: y
+  topic_keys:
+  - sleep_anxiety
+  - grief
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_anxiety_ja_jp_basho_narrow_road_v01_depression
+  text: 行く春や鳥啼魚の目は泪
+  text_en: Departing spring — the birds cry and the eyes of fish are filled with tears.
+  author: 松尾芭蕉
+  primary_source: 『おくのほそ道』初句付近（元禄2年）
+  verified_via: 国文学研究資料館 おくのほそ道 底本
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  doctrine_keys: &id002
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_anxiety_ja_jp_basho_narrow_road_v01_grief
+  text: 行く春や鳥啼魚の目は泪
+  text_en: Departing spring — the birds cry and the eyes of fish are filled with tears.
+  author: 松尾芭蕉
+  primary_source: 『おくのほそ道』初句付近（元禄2年）
+  verified_via: 国文学研究資料館 おくのほそ道 底本
+  public_domain: y
+  topic_keys:
+  - grief
+  doctrine_keys: *id002
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_anxiety_ja_jp_basho_narrow_road_v01_social_anxiety
+  text: 行く春や鳥啼魚の目は泪
+  text_en: Departing spring — the birds cry and the eyes of fish are filled with tears.
+  author: 松尾芭蕉
+  primary_source: 『おくのほそ道』初句付近（元禄2年）
+  verified_via: 国文学研究資料館 おくのほそ道 底本
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  - grief
+  doctrine_keys: *id002
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_anxiety_ja_jp_soseki_myriad_v01_grief
+  text: 月が綺麗ですね。
+  text_en: The moon is beautiful, isn't it?
+  author: 夏目漱石
+  primary_source: 漱石友人伝記・『吾輩は猫である』時代の逸話（「I love you」訳話の原典は逸話だが月の句は『山の月』等に類似表現）
+  verified_via: 漱石研究における月の美学；『山の月』等 PD 作品
+  public_domain: y
+  topic_keys:
+  - grief
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: 間接的表現の文化参照
+  position_fit: closer
+- quote_id: quote_w2_fill_anxiety_ja_jp_ryokan_v01_depression
+  text: 住吉の岸に吹く風の、身にしみて、涙ぐまざるを得ざりき。
+  text_en: The wind blowing on the Sumiyoshi shore pierced my body — I could not help but weep.
+  author: 良寛
+  primary_source: 良寛和歌（良寛全集）
+  verified_via: 良寛全集 岩波
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener

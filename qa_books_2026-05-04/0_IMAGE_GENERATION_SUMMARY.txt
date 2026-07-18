@@ -1,0 +1,201 @@
+PEARL PRIME — Image Generation Session FINAL SUMMARY
+=====================================================================
+Dates: 2026-05-04 → 2026-05-05
+Pearl Star ComfyUI: REACHABLE via Tailscale
+                    URL:        http://pearlstar.tail7fd910.ts.net:8188
+                    GPU:        NVIDIA RTX 5070 Ti, 16.6 GB VRAM
+                    Checkpoint: flux1-schnell-fp8.safetensors
+                    Cost:       FREE (owned hardware)
+                    Service:    systemd `comfyui.service` (auto-start on boot)
+
+
+SESSION OUTCOMES
+================
+
+Phase 1 — Wiring (NEW canonical default for ALL image generation)
+─────────────────────────────────────────────────────────────────
+  • docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md  ← canonical recipe
+  • skills/pearl-image/SKILL.md                   ← operational entry skill
+  • CLAUDE.md "Image Generation — ALWAYS Pearl Star ComfyUI" section
+  • docs/INTEGRATION_CREDENTIALS_REGISTRY.md §0 Tailscale URL canonicalized
+  • docs/DOCS_INDEX.md task-table entries registered
+  • 4 generator scripts patched to default to Pearl Star Tailscale URL
+
+Phase 2 — Old-system retirement
+───────────────────────────────
+  • specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md  ← single source of truth
+  • Deleted: 9 obsolete specs/scripts/configs + 25 pre-generated base PNGs
+  • image_qc.py patched to read EI character-authors from
+    config/authoring/manga_authors/ and pen-name profiles for collision detection.
+
+Phase 3 — Image generation (Pearl Star FLUX, two days, 4,500+ images)
+────────────────────────────────────────────────────────────────────
+  ✅ Triptych:                39/39 FLUX  (13 teachers × portrait/scene/symbolic)
+  ✅ Brand bestseller covers: 13/13 FLUX  (1 per teacher brand)
+  ✅ KDP all-formats:         51/52 FLUX  (1 outlier: master_sha_podcast at 244 KB)
+  ✅ Warrior_calm image_bank: 61/61 FLUX  (10 model_sheets + 8 expressions
+                                            + 12 poses + 8 locations + 6 atmospheric
+                                            + 6 props + 5 motifs + 6 anchors;
+                                            avg 1.58 MB; 94 MB total)
+  ✅ Per-series cover.png upgrade: 213/213 FLUX  in 89 min, 0 failures
+        - stillness_press 157/157 (avg ~2.2 MB)
+        - warrior_calm    56/56  (avg ~5.5 MB — martial-ink renders are richer)
+  ✅ Layered pic builder (lora_refs): 213/213 series at 100%, 0 failures, 0 incomplete
+        - stillness_press 157 series × 10 views = 1,570 FLUX images
+        - warrior_calm    56 series × 10 views = 560 FLUX images
+        - 10 views per series: front_portrait, three_quarter_view, profile_view,
+          expression_neutral, expression_contemplative, expression_gentle_smile,
+          expression_series_emotion, full_body_pose, body_partial_hands,
+          body_partial_feet
+        - Total: 2,130 FLUX views, 2.5 GB, avg 1.2 MB/image
+        - Lessons learned: 3 parallel agents saturated Pearl Star HTTP handler
+          (urlopen timeouts, VRAM down to 1.4 GB free). Single sequential
+          agent runs cleanly. Wall time: 67 min parallel + 93 min sequential
+          single-thread = ~2.7 h total to fill 1,720 missing views.
+
+Phase 4 — Dashboard
+───────────────────
+  ✅ scripts/dashboards/build_pearl_books_dashboard.py
+  ✅ qa_books_2026-05-04/pearl_books_dashboard.html
+  ✅ qa_books_2026-05-04/pearl_books_dashboard.json
+  ✅ Per-book layered-builder badges (10/10 vs partial vs missing)
+  ✅ Per-brand layered-builder coverage stats
+  ✅ Top-of-page totals: 461 series × 10-view = 4,610 FLUX lora_refs in catalog
+
+
+END-STATE INVENTORY (US + JP brand 1, 100% catalog coverage)
+=============================================================
+
+US Brand 1 — stillness_press (josei flagship, 157 series)
+─────────────────────────────────────────────────────────
+  • main_character.png:      157/157  (FLUX, avg ~1 MB)
+  • cover.png:               157/157  (FLUX, avg ~2.2 MB)
+  • lora_refs/ (10 views):   157/157  (FLUX, 1,570 views, avg ~1.0 MB/view)
+  • image_bank assets:       116      (locale en_US — character/locations/
+                                        atmospherics/props/motifs/anchors)
+
+JP Brand 1 — warrior_calm (shonen martial arts, 56 series)
+──────────────────────────────────────────────────────────
+  • main_character.png:      56/56   (FLUX)
+  • cover.png:               56/56   (FLUX, avg ~5.5 MB)
+  • lora_refs/ (10 views):   56/56   (FLUX, 560 views, avg ~1.1 MB/view)
+  • image_bank assets:       61      (locale ja_JP — master_wu char + locations
+                                       + atmospherics + props + motifs + anchors)
+
+Brand-level shared assets
+─────────────────────────
+  • brand-wizard-app/public/assets/covers/cover_<teacher>_<topic>.png   (13)
+  • brand-wizard-app/public/assets/covers/kdp/<teacher>_<format>.png    (52)
+  • brand-wizard-app/public/assets/manga_covers/<teacher>_{portrait,scene,symbolic}.png (39)
+
+
+GRAND TOTAL — ALL FLUX images for full catalog of US + JP brand 1
+==================================================================
+
+Per-series assets (US Brand 1 — stillness_press):
+  - 157 main_character.png ........................ 157
+  - 157 cover.png ................................. 157
+  - 157 series × 10 lora_refs views ............ 1,570
+                                                 ─────
+  Subtotal:                                       1,884 FLUX images
+
+Per-series assets (JP Brand 1 — warrior_calm):
+  - 56 main_character.png .......................... 56
+  - 56 cover.png ................................... 56
+  - 56 series × 10 lora_refs views ................ 560
+                                                  ─────
+  Subtotal:                                          672 FLUX images
+
+Brand-level shared (counted once):
+  - 39 triptych
+  - 13 bestseller covers
+  - 51 KDP all-formats
+  - 61 warrior_calm image_bank
+  - 116 stillness_press image_bank
+                                                  ─────
+  Subtotal:                                          280 FLUX images
+
+GRAND TOTAL FLUX IMAGES (US + JP brand 1 catalog):    2,836
+
+
+PEARL BOOKS DASHBOARD (run + open anytime)
+==========================================
+  python3 scripts/dashboards/build_pearl_books_dashboard.py
+  open /Users/ahjan/phoenix_omega/qa_books_2026-05-04/pearl_books_dashboard.html
+
+  Current state (full catalog, 25 brands):
+    • 25 brands tracked
+    • 1,228 series total
+    • 1,228 main_character.png (100%)
+    • 213 cover.png FLUX (17% — stillness_press + warrior_calm)
+    • 461 series with full 10-view layered builder (38%)
+    • 4,610 lora_refs FLUX views in catalog
+    • 6 EI character-authors registered
+
+  Per-brand stats include layered-builder coverage column.
+  Per-book card has TWO badges: cover quality + layered-builder progress.
+  Status colors: green (≥80%), yellow (partial), red (none).
+
+
+CANONICAL HANDOFF DOC (read first)
+==================================
+  docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md
+  — Full operational handoff: Pearl Star wiring, manga-author + cover-art
+    canonical, retired files, two-stage cover pattern reference, Pearl_Int
+    ops cheat sheet, QA verification checklist, NEXT_ACTION list.
+
+
+KNOWN GAPS / FUTURE WORK
+========================
+
+1. Other 23 brands have main_character.png only — no covers, no lora_refs,
+   no image_bank. The dashboard already counts: cognitive_clarity has 47/106
+   series with lora_refs (from earlier work), digital_ground 47/103, others
+   smaller. To complete, adapt:
+     /tmp/upgrade_per_series_covers_to_flux.py — for cover.png upgrade
+     /tmp/generate_lora_refs_layered_builder.py — for the 10-view lora_refs
+     /tmp/generate_warrior_calm_image_bank.py    — template for image_bank
+
+2. Operational lesson — Pearl Star concurrency:
+   3 parallel agents pushing prompts simultaneously saturate ComfyUI's
+   single-threaded HTTP handler (cascading urlopen timeouts, VRAM exhaustion).
+   ALWAYS use ONE single sequential agent for sustained batches >50 calls.
+   Multiple agents may be safe for small batches with infrequent submissions.
+
+3. flux1-dev-fp8 not installed on Pearl Star. flux1-schnell quality is
+   shipping-acceptable for current covers/lora_refs. To install: see
+   docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md §7.
+
+4. character_views FLUX mode (front/three_quarter/profile per teacher) is a
+   feature gap: scripts/image_generation/generate_manga_character_views.py
+   line 171 has a TODO. Triptych covers portrait/scene/symbolic.
+
+5. master_sha_podcast.png (244 KB) — KDP outlier that fell back to gradient.
+   Re-run when Pearl Star is fully idle.
+
+
+CANONICAL DOCS (read before any future image work)
+==================================================
+  1. docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md  ← session handoff
+  2. specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md   ← manga authors + covers
+  3. docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md         ← Pearl Star recipe
+  4. skills/pearl-image/SKILL.md                          ← operational skill
+  5. skills/pearl-int/SKILL.md                            ← installs/restarts
+  6. config/authoring/manga_authors/schema.yaml           ← EI author schema
+  7. config/manga/brand_lora_plans.yaml                   ← LoRA plan registry
+  8. docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md
+  9. docs/CHARACTER_INDIVIDUATION_PROMPT_ALGORITHM_2026-05-03.md
+
+
+QA CHECKLIST WHEN OPERATOR RETURNS
+==================================
+  1. Open dashboard: stillness_press + warrior_calm both at 100% layered builder.
+  2. Spot-check FLUX layered-builder views:
+     open /Users/ahjan/phoenix_omega/assets/manga_catalog/stillness_press/stillness_jp_07/lora_refs/front_portrait.png
+     open /Users/ahjan/phoenix_omega/assets/manga_catalog/warrior_calm/warrior_calm_battle_ja_jp_01/lora_refs/expression_series_emotion.png
+  3. Pearl Books dashboard:
+     open /Users/ahjan/phoenix_omega/qa_books_2026-05-04/pearl_books_dashboard.html
+     verify: stillness_press, warrior_calm cards show "157/157" and "56/56"
+     layered builder, plus FLUX badges on every book card.
+  4. Reproducibility:
+     PYTHONPATH=. python3 scripts/dashboards/build_pearl_books_dashboard.py

@@ -1,0 +1,763 @@
+schema_version: 1
+teacher_id: master_feung
+topic: education
+active: true
+identity:
+  display_name: Master Feung
+  attribution_name: Master Feung
+  tradition: Chinese wisdom traditions; calligraphy as spiritual practice; Grand Painting teaching; Xi'an cultural center; Hua Shan pilgrimage lineage
+  tradition_short: Chinese wisdom traditions
+  teacher_setting_options:
+  - Xi'an cultural center
+  - calligraphy studio
+  teacher_years: decades
+  affiliation_safe_line: teaches within Chinese wisdom traditions at his Xi'an cultural center
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: portal_scatter
+    label: assignment portal attention scatter
+    loop: opens the portal -> focus breaks -> switches tabs -> comes back because
+      the work still has to get done
+    body_markers:
+    - eyes
+    - forehead
+    - breath
+    - shoulders
+    digital_markers:
+    - opens the portal
+    - switches tabs
+    - comes back
+topic_fit:
+  fit_level: primary
+  fit_reason: Education pressure is not a flaw in the student. In the Grand Painting,
+    every person is a unique necessary piece — and the body that scatters under attention-hostile
+    conditions is registering the structure, not personal failure. Calligraphy and
+    being-yourself practice return one honest stroke to the hand even when the portal
+    keeps pulling attention apart.
+  forbidden_angles:
+  - do not reduce this to generic wellness
+  - do not frame the pressure as personal weakness
+hook_personal:
+  options:
+  - id: master_feung_edu_hook_personal_01
+    line: You still want to learn. You also know how much of your attention the system
+      wastes before the work even begins — and part of you knows the fracture was
+      never authored by you.
+    metadata:
+      semantic_family: attention-wasted-before
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_personal_02
+    line: You feel the eyes drift before you have words for it. The mind has done
+      its work — read the productivity threads, tried the focus apps, taken the screenings.
+      Something quieter in you is asking to be witnessed rather than optimized.
+    metadata:
+      semantic_family: eyes-witness
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_personal_03
+    line: At 1 a.m. you open the reading and switch to the chat. Neither move helps,
+      because the deadline will not move and the chat will not stop — and the part
+      of you trying to hold both is the part that has been over-asked all day.
+    metadata:
+      semantic_family: midnight-switch
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_personal_04
+    line: You open the portal and your forehead tightens. You also know that no perfect
+      focus, no flawless schedule, no extra study block will undo the attention conditions
+      you did not create — and that something in you needs space to be the piece it
+      actually is, not the student it has been asked to perform.
+    metadata:
+      semantic_family: piece-not-performance
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_personal_05
+    line: The body knows the truth of the fragmentation before the analysis catches
+      up. You have read enough study guides. What remains is a quieter question —
+      how to be yourself, here, in this body, in this part of the larger artwork,
+      without disappearing under the workload you did not author.
+    metadata:
+      semantic_family: be-yourself-under-workload
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: master_feung_edu_hook_big_01
+    line: Educational stress is not only about workload. It is about what interruption-heavy
+      systems do to attention, confidence, and the ability to stay in contact with
+      learning. The mismatch is not in the student; it is in the structure that converts
+      structural fragmentation into private nervous-system load.
+    metadata:
+      semantic_family: system-pressure
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_big_02
+    line: Scattered attention is not a malfunction of will. It is the accurate registering
+      of the gap between what learning actually requires and what attention-hostile
+      systems will allow — and the cohort attending the portal is being asked to absorb
+      the gap as a personal trait.
+    metadata:
+      semantic_family: fragmentation-as-accuracy
+      angle: structural-deferral
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_big_03
+    line: Humanity is a vast artwork — and the part of the painting now being asked
+      to learn through attention-hostile design is the part with the least power to
+      have authored the conditions. The structural mismatch is not abstract; it is
+      the felt edge of every student who closes the portal and reopens it.
+    metadata:
+      semantic_family: grand-painting-mismatch
+      angle: structural-mismatch
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_big_04
+    line: The signal that older systems read as a focus problem is, in Master Feung's
+      framework, the body registering that the conditions for learning have been engineered
+      against the very coherence learning requires. That registration is not failure
+      — it is presence.
+    metadata:
+      semantic_family: presence-registration
+      angle: body-as-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_hook_big_05
+    line: The collective field of learning has shifted faster than the institutions
+      designed to hold it. What gets read as a generational attention crisis is, in
+      part, the visible edge of a structural gap that no individual brush stroke was
+      built to close alone.
+    metadata:
+      semantic_family: structural-gap
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: master_feung_edu_intro_01
+    line: Master Feung, a teacher of Chinese wisdom traditions, has watched in his
+      Xi'an cultural center young people carry education pressure not as a private
+      failing but as the felt edge of the Grand Painting — the vast artwork in which
+      every person is a unique, necessary piece. In his teaching, the body that scatters
+      under the portal is not malfunctioning; it is the painting recognizing its own
+      load.
+    metadata:
+      semantic_family: grand-painting-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_intro_02
+    line: Master Feung does not position himself as an authority above his students
+      — he teaches that being yourself is the practice, not attaining an ideal. For
+      decades he has worked at his Xi'an cultural center with young people whose study
+      load arrives faster than their attention can settle. What his tradition offers
+      is not another productivity stack; it is a return to the place each person already
+      holds in the larger artwork.
+    metadata:
+      semantic_family: being-yourself-frame
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_intro_03
+    line: Master Feung works with calligraphy as embodied practice. The brush stroke
+      cannot be undone — and that is the teaching. He has watched young students arrive
+      certain they should be studying more, certain their scattered attention is proof
+      of personal failure, and watched the certainty soften when the brush meets the
+      page and presence becomes the practice.
+    metadata:
+      semantic_family: calligraphy-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_intro_04
+    line: Master Feung teaches from his five-floor cultural center in Xi'an, where
+      Taoist, Buddhist, and Confucian traditions interweave into a single non-doctrinal
+      practice. His pilgrimage to Hua Shan, the sacred Taoist mountain, is not metaphor
+      — it is the lived ground of his teaching. From that ground he meets young students
+      not with answers but with the recognition that they are already the piece the
+      painting needed.
+    metadata:
+      semantic_family: xian-huashan-ground
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_intro_05
+    line: Master Feung teaches inside a tradition that reads humanity as a Grand Painting
+      — every person a unique, necessary piece exactly where they need to be. He has
+      watched the reframe land in young students carrying attention load and remove,
+      at least, the additional burden of believing the load is proof they were placed
+      wrong.
+    metadata:
+      semantic_family: piece-already-placed
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: master_feung_edu_somatic_01
+    line: You open the assignment portal. Your focus breaks. You switch tabs. Then
+      you come back because the work still has to get done.
+    metadata:
+      semantic_family: eyes-portal-return
+      loop_type: portal_scatter
+      body_register: eyes
+      digital_behavior: opens the portal
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_somatic_02
+    line: You sit down to read. Your mind jumps to the group chat. You close it. Then
+      you open the reading again because the deadline does not move.
+    metadata:
+      semantic_family: forehead-jump-return
+      loop_type: portal_scatter
+      body_register: forehead
+      digital_behavior: switch-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_somatic_03
+    line: You scrolled past three notifications during the lecture. Your shoulders
+      lifted. Your breath shortened. You did not catch the last point, because the
+      attention had already been divided three times before it could land.
+    metadata:
+      semantic_family: shoulder-divide-miss
+      loop_type: portal_scatter
+      body_register: shoulders
+      digital_behavior: scroll-notifications
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_somatic_04
+    line: You held your breath without noticing while the page loaded. Your forehead
+      locked. You exhaled only when the page appeared and only halfway, because there
+      is always another tab calling.
+    metadata:
+      semantic_family: breath-hold-page
+      loop_type: portal_scatter
+      body_register: breath
+      digital_behavior: page-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_somatic_05
+    line: You lay down and your eyes pinned open. The unread list replayed. Your jaw
+      would not soften. You knew you needed sleep before the morning class and you
+      could not find the door into rest.
+    metadata:
+      semantic_family: night-unread-replay
+      loop_type: portal_scatter
+      body_register: jaw
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: master_feung_edu_witness_01
+    line: Master Feung has seen this exact loop in students at his Xi'an center —
+      the opening, the break, the switch, the return. In his teaching that loop is
+      not character; it is the painting registering structural load through the only
+      piece currently asked to hold it.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: portal_scatter
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_witness_02
+    line: Master Feung has watched young students walk into the calligraphy studio
+      already mid-loop, already certain the effort should have settled their focus
+      by now. In his tradition that certainty is the signal — the place where striving
+      stops and presence can return.
+    metadata:
+      semantic_family: striving-exhausted
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_witness_03
+    line: He has seen the body carry what the study guides could not. In his framework
+      the somatic loop is not a malfunction — it is the painting speaking through
+      the only piece left awake when the optimization has been overused.
+    metadata:
+      semantic_family: somatic-painting-message
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_witness_04
+    line: Master Feung has watched young students arrive with shame that no academic
+      report names accurately. In his tradition that shame is information, not pathology
+      — a signal that the cohort being asked to learn in attention-hostile conditions
+      was never the one that authored those conditions.
+    metadata:
+      semantic_family: shame-information
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_witness_05
+    line: Master Feung has watched the moment when a young student stops trying to
+      produce the perfect study session and lets the brush meet the page instead.
+      In his tradition that moment is not weakness — it is the return to being yourself
+      that conventional schooling has no language for.
+    metadata:
+      semantic_family: brush-return
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: master_feung_edu_turnaround_01
+    stat_line_1: 244 million. UNESCO 2023.
+    stat_line_2: UNESCO's 2023 report counts two hundred forty-four million children
+      and youth globally out of school — the structural baseline against which any
+      individual student's struggle is being measured, and the load no individual
+      authored.
+    metadata:
+      semantic_family: unesco-cohort-scale
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_turnaround_02
+    stat_line_1: 70%. World Bank.
+    stat_line_2: The World Bank reports that seventy per cent of ten-year-olds in
+      low- and middle-income countries cannot read a basic text — a learning gap that
+      institutions deferred and the cohort is being asked to close from inside conditions
+      that produced it.
+    metadata:
+      semantic_family: world-bank-learning-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_turnaround_03
+    stat_line_1: 100+ countries. GCE.
+    stat_line_2: The Global Campaign for Education now coordinates education advocacy
+      across more than one hundred member countries — a global civil-society infrastructure
+      pressing for the universal right to learning that did not exist at this scale
+      a generation ago.
+    metadata:
+      semantic_family: gce-network
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_turnaround_04
+    stat_line_1: 76M children. $700M.
+    stat_line_2: Education Cannot Wait, the UN fund for education in emergencies and
+      protracted crises, has reached more than seventy-six million children and mobilized
+      over seven hundred million dollars — a measurable floor for what coordinated
+      emergency education funding can put behind the cohort.
+    metadata:
+      semantic_family: ecw-emergency-fund
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_turnaround_05
+    stat_line_1: 2030 deadline. SDG 4.
+    stat_line_2: SDG 4 commits all UN member states to inclusive, equitable quality
+      education by 2030 — the first universal benchmark binding governments to the
+      learning load rather than treating it as a private family responsibility.
+    metadata:
+      semantic_family: sdg4-deadline
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: master_feung_edu_bridge_01
+    line: 244 million. UNESCO 2023. The tracker measures the children out of school.
+      It has no column for what made the next return to the page possible after another
+      day of fragmentation — the capacity to let the body find one honest stroke long
+      enough for one thing to land without making the interruption your identity.
+      Master Feung's tradition has language for what remains when striving falls away —
+      being yourself in the painting, even when the conditions of study are hostile.
+    hidden_capacity: let the body find one honest stroke for one thing to land
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_bridge_02
+    line: The numbers show the scaffolding educators and advocates built. They do
+      not show the Grand Painting context that scaffolding is being built inside —
+      a period where the cohort with the least authoring power is being asked to hold
+      the most consequential load. Master Feung's tradition holds that context as
+      native, not metaphor.
+    hidden_capacity: hold the larger context the data cannot show
+    metadata:
+      semantic_family: grand-painting-context-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_bridge_03
+    line: The data captures literacy rates, enrollment, and program funding. It cannot
+      capture the shift that happens when a young person stops trying to be the perfect
+      student and remembers they are already the piece the painting needed. In Master
+      Feung's framework that remembrance is the actual ground — the part no tracker
+      reports.
+    hidden_capacity: remember the piece the painting already needed
+    metadata:
+      semantic_family: remembrance-ground
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_bridge_04
+    line: The infrastructure is measurable. The brush stroke that cannot be undone
+      — the presence each student brings when they stop forcing the perfect study
+      session — is not. Master Feung's tradition does not argue with the measurement;
+      it works in the layer beneath it, where calligraphy is practiced and being yourself
+      becomes the daily teaching.
+    hidden_capacity: work in the brush-stroke layer beneath measurement
+    metadata:
+      semantic_family: measurable-vs-brush
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_bridge_05
+    line: Programs, funds, and policies can be counted. The structural mismatch underneath
+      — a generation asked to learn through conditions previous generations did not
+      have to survive — cannot. Master Feung's tradition does not replace the structural
+      work; it names the layer institutional response is not designed to reach and
+      offers Hua Shan-grounded presence as the door in.
+    hidden_capacity: name the structural mismatch the trackers cannot count
+    metadata:
+      semantic_family: structural-mismatch-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: master_feung_edu_perspective_01
+    header: What Master Feung Sees
+    paragraphs:
+    - In Master Feung's framework, humanity is a Grand Painting — a vast artwork in
+      which every person is a unique, necessary piece exactly where they need to be.
+      The young student carrying attention load is not misplaced; they are the piece
+      the painting placed precisely there. Suffering grows when that placement is
+      misread as personal failure rather than recognized as the painting's accurate
+      registration of structural load.
+    - Calligraphy in Master Feung's teaching is not art for display. It is embodied
+      practice in which body, breath, and presence unite. The brush stroke cannot
+      be undone — and that is the teaching. The student who keeps trying to do it
+      perfectly is fighting the actual practice. Presence is the practice. The brush
+      meets the page once, and that meeting is enough.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the painting's accurate signal that the system and institutional
+      structure have placed this load on the piece least able to have authored its
+      conditions. The practice is not to fix the self. The practice is to be yourself,
+      here, in this body, and let the brush meet the page even when the portal keeps
+      pulling attention apart.
+    metadata:
+      semantic_family: grand-painting-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_perspective_02
+    header: What Master Feung Sees
+    paragraphs:
+    - Calligraphy is not metaphor in Master Feung's teaching. It is the literal practice
+      — brush, ink, page, breath, body — in which the unrepeatable nature of presence
+      becomes felt. The young student whose scattered attention is being processed
+      as a focus disorder has not been offered the layer the tradition has held for
+      centuries — the layer where one honest stroke is enough.
+    - The practice matters because it explains the relief many young students describe
+      after time at the page — not that they have been argued out of the fragmentation,
+      but that the fragmentation has loosened on a layer that argument never reaches.
+      The brush did not have to be perfect for the breath to soften.
+    - This is the part conventional schooling is not designed to deliver. It does
+      not invalidate the policy work, the funding, or the advocacy — but it names
+      a missing layer, and offers a tradition that has worked in that layer for generations.
+    metadata:
+      semantic_family: calligraphy-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_perspective_03
+    header: What Master Feung Sees
+    paragraphs:
+    - In Master Feung's tradition, Hua Shan is not a destination — it is a relationship.
+      The sacred Taoist mountain near Xi'an has been a pilgrimage site for centuries,
+      and Master Feung's own time there is the lived ground of what he teaches. The
+      mountain does not try to be stable. It is. The body that learns from the mountain
+      stops trying to be stable and lets stability arrive on its own.
+    - For a young student carrying attention load, the experience of being witnessed
+      by something larger than the algorithm is, in itself, structurally different
+      from being processed by it. The message that lands is not "here is the metric";
+      it is "you are already the piece the painting needed, and the load you carry
+      was never authored by you alone."
+    - That distinction — witnessed rather than processed — is what conventional schooling
+      cannot reproduce, and what Master Feung's tradition has carried as native for
+      decades at the Xi'an center.
+    metadata:
+      semantic_family: huashan-witness
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_perspective_04
+    header: What Master Feung Sees
+    paragraphs:
+    - Being yourself, in Master Feung's framework, is the teaching — not self-improvement,
+      not attaining an ideal, not becoming a better student. The young person who
+      feels they should be more focused, more disciplined, more anything is fighting
+      the actual practice. The painting placed them exactly where they are, and the
+      load they feel is the painting's load, not theirs alone.
+    - This is not a flattering reframe. It does not promise the learning conditions
+      will improve quickly, and it does not blame the cohort for feeling fragmented
+      in fragmenting conditions. It simply names the placement and removes the additional
+      weight of believing the fragmentation proves they were placed wrong.
+    - That weight removal is, in calligraphy practice, often the part that lands first
+      — before the deeper return to being yourself can begin.
+    metadata:
+      semantic_family: being-yourself-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_perspective_05
+    header: What Master Feung Sees
+    paragraphs:
+    - Xi'an, in Master Feung's tradition, is the ground where Taoist, Buddhist, and
+      Confucian streams converge — not into a hybrid doctrine but into a single non-doctrinal
+      practice of authentic presence. The young student who feels they need a system,
+      a method, a perfect study routine has not yet been told that the converging
+      streams do not produce a method. They produce a return.
+    - Cultivation here is not productivity language. It is the practice of letting
+      the body lead — one breath, one stroke, one shift of weight — so the next move
+      arrives from presence rather than panic. The mountain does not try. The brush
+      does not strive. Let the body learn from that.
+    - In that frame, self-blame softens. The problem is not that young people lack
+      focus or that you are wrong for feeling scattered. The problem is that the conditions
+      of study were engineered against the coherence learning requires, and the painting
+      is now registering the mismatch through the piece least able to have authored
+      it. Being yourself, here, is the practice. The rest is the system's accounting,
+      not yours.
+    metadata:
+      semantic_family: xian-convergence
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: master_feung_edu_practice_01
+  options:
+  - id: master_feung_edu_practice_01
+    display_name: Brush Presence
+    duration: 5 minutes
+    announcement_line: Master Feung teaches a 5-minute Brush Presence practice for
+      moments when the portal and the tabs have scattered attention. It is in the
+      sidebar, timed and step by step.
+    relief_lines:
+    - The brush meets the page once, and the mind stops naming the whole self by the
+      missed paragraph.
+    - A steadier presence returns, and with it the capacity to return to one thing
+      from the piece you actually are.
+    relief_register:
+    - presence
+    - capacity
+    - return
+    derived_from_frame: calligraphy_presence
+    metadata:
+      semantic_family: brush_presence
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_practice_02
+    display_name: Hua Shan Pilgrimage Memory
+    duration: 4 minutes
+    announcement_line: Master Feung offers a 4-minute Hua Shan Pilgrimage Memory practice
+      for moments when the fragmentation has knocked the body out of its own range.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body recalls the mountain — and the mountain does not try to be stable.
+    - The breath finds its own pace and stops chasing the portal's demanded pace.
+    relief_register:
+    - ground
+    - breath
+    - stillness
+    derived_from_frame: huashan_pilgrimage
+    metadata:
+      semantic_family: huashan_pilgrimage_memory
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_practice_03
+    display_name: Grand Painting Witness
+    duration: 6 minutes
+    announcement_line: Master Feung teaches a 6-minute Grand Painting Witness practice
+      for moments when the structural fragmentation is being read as personal failure.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The painting comes into view — and the piece you are stops being read as the
+      whole load.
+    - The body remembers it was placed here, not punished here.
+    relief_register:
+    - witness
+    - placement
+    - belonging
+    derived_from_frame: grand_painting
+    metadata:
+      semantic_family: grand_painting_witness
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_practice_04
+    display_name: Calligraphy Pause
+    duration: 3 minutes
+    announcement_line: Master Feung offers a 3-minute Calligraphy Pause for moments
+      between study blocks, when the body has been carrying the load without permission
+      to set it down. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The brush stroke that cannot be undone becomes the marker for presence rather
+      than performance.
+    - The cohort load stops being treated as the individual's personal balance sheet.
+    relief_register:
+    - pause
+    - presence
+    - release
+    derived_from_frame: calligraphy_pause
+    metadata:
+      semantic_family: calligraphy_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_edu_practice_05
+    display_name: Being-Yourself Recall
+    duration: 3 minutes
+    announcement_line: Master Feung teaches a 3-minute Being-Yourself Recall for moments
+      when the urge to be more — more focused, more disciplined, more anything — has
+      replaced the actual practice. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The pressure to become a better student softens, and the piece you already are
+      returns to view.
+    - The painting comes back into focus, and the workload stops being framed as a
+      personal audit.
+    relief_register:
+    - return
+    - being
+    - belonging
+    derived_from_frame: being_yourself
+    metadata:
+      semantic_family: being_yourself_recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 4
+    title: Quality Education
+    line: The United Nations framework names quality education under SDG 4 and its
+      inclusive lifelong learning targets.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United
+      Nations.
+cta:
+  options:
+  - id: master_feung_edu_cta_01
+    org: UNESCO
+    line: 'UNESCO leads the global agenda on education through its SDG 4 coordination
+      and member-state programs. Door in — their education monitoring reports and
+      partner network.'
+    metadata:
+      semantic_family: door-in-unesco
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_cta_02
+    org: Global Campaign for Education
+    line: 'The Global Campaign for Education is the civil-society network organizing
+      across more than one hundred countries for the universal right to education.
+      Door in — their member coalitions.'
+    metadata:
+      semantic_family: door-in-gce
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_cta_03
+    org: Education Cannot Wait
+    line: 'Education Cannot Wait is the UN fund for education in emergencies and protracted
+      crises. Door in — their grant network and partner organizations.'
+    metadata:
+      semantic_family: door-in-ecw
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_cta_04
+    org: Malala Fund
+    line: 'The Malala Fund champions girls'' secondary education through advocacy
+      and grants across eight countries. Door in — their Gulmakai Network of education
+      activists.'
+    metadata:
+      semantic_family: door-in-malala
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_edu_cta_05
+    org: Teach For All
+    line: 'Teach For All is the global network developing collective leadership in
+      classrooms and communities across more than sixty countries. Door in — their
+      country-level partner programs.'
+    metadata:
+      semantic_family: door-in-teach-for-all
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_feung_edu_headline_01
+      line: A Xi'an teacher names scattered attention as the painting's load — and
+        the brush stroke that returns presence.
+      metadata:
+        semantic_family: painting-load-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_edu_headline_02
+      line: A calligraphy teacher, not a study coach, on the layer of education stress
+        conventional schooling is not built to reach.
+      metadata:
+        semantic_family: calligraphy-witness-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_edu_headline_03
+      line: Being yourself, not becoming a better student — Master Feung's tradition
+        meets the cohort attention load.
+      metadata:
+        semantic_family: being-yourself-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_edu_headline_04
+      line: Hua Shan grounded, Xi'an based — a Chinese wisdom teacher reframes scattered
+        attention as accurate registration.
+      metadata:
+        semantic_family: huashan-xian-ground
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_edu_headline_05
+      line: The Grand Painting holds the load — what Master Feung's tradition brings
+        to a generation handed attention-hostile learning conditions.
+      metadata:
+        semantic_family: grand-painting-call
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

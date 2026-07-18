@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__financial_stress__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__money_fears
+  name: Money Without Panic — for Managers
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Paycheck Pressure: The Shame Response'
+subtitle: A Real Talk Guide to Financial Stress for Corporate Managers
+cover_tagline: You run the budget meeting, then sit in your car not knowing how you'd
+  cover a bad month.
+description:
+  short_blurb: 'The financial stress is bad enough; the part you can''t say is worse:
+    that someone at your level shouldn''t be this exposed, and the fact that you are
+    feels like a secret failure. This book is about the buried belief under the silence
+    and what it costs to keep performing fine. No public reckoning, no balance-sheet
+    confession, no shame piled on the shame.'
+  long_description: 'You just ran the budget review, and you ran it well: clear, unhurried,
+    the person the whole room defers to on the numbers. Then you walk out to your
+    car and sit there, engine off, and the thing you didn''t bring into that room
+    settles in next to you. One bad quarter for this household and you honestly don''t
+    know what you''d do. And right behind that comes the heavier weight, the conviction
+    that a manager at your level, on your salary, should never be standing this close
+    to the edge, and that being here at all means you got something fundamental wrong.
+
+
+    This book is for the corporate manager whose money stress comes wrapped in a shame
+    they can''t say, and it''s about the wrapping as much as the stress. The way you''d
+    let a colleague go on assuming you''re comfortable rather than admit how exposed
+    you actually are. The way "someone like me shouldn''t be like this" hums along
+    under the competence, so you keep the whole thing welded shut, and the welding
+    pulls more out of you than the stress on its own ever would.
+
+
+    Waystream doesn''t deal in confession or catharsis. It names the mechanism and
+    leaves it in the open. Shame insists the problem is you and not your situation,
+    and it survives only as long as it stays hidden and unexamined. You start by surfacing
+    the private verdict you''ve been carrying, the sentence about what your circumstances
+    supposedly prove about your worth. Then you turn and face it, not to drown in
+    it but to keep it in plain light long enough to see it for what it is: a belief,
+    not a fact about you. That facing is quieter than the dread that built it, and
+    it''s the whole of the work. You come back able to hold the real condition of
+    your finances next to the real measure of your value without letting one rewrite
+    the other.
+
+
+    This book will not fix your money and it will not orchestrate a cathartic unburdening.
+    It won''t claim that saying it to enough people makes it evaporate. It will not
+    shame you for feeling shame, or suggest a stronger person would have risen above
+    it. You don''t have to perform a breakthrough to use a word of it.
+
+
+    What it hands you is language for what you''ve kept sealed, and a way to put down
+    the belief that being exposed makes you a fraud. Direct, secular, no theater.
+    Written for someone who has been steady in public and alone with this in the parking
+    lot for far too long.
+
+
+    Standing close to the edge is a circumstance, not a character. You can stop treating
+    it as a verdict, and the first place to stop is with yourself.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - managers
+  - financial stress for managers
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Daring Greatly (Brené Brown) — the secular mechanics of shame and what hiding our
+  perceived failures costs
+- The Psychology of Money (Morgan Housel) — untangling financial circumstance from
+  self-worth and status
+- Maybe You Should Talk to Someone (Lori Gottlieb) — examining a buried belief honestly
+  without staging a performance of it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

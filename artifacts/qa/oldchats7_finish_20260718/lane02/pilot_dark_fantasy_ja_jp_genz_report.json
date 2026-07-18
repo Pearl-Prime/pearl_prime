@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "manga_story_excellence_realization_report",
+  "status": "PASS",
+  "production_blocking": false,
+  "series_id": "df_pass",
+  "chapter_id": "ch01",
+  "chapter_number": 1,
+  "genre_id": "dark_fantasy",
+  "strategy_genre": "dark_fantasy",
+  "relevance_genre": "dark_fantasy",
+  "target_market": "ja_JP",
+  "target_audience": "gen_z",
+  "score": 100,
+  "threshold": 85,
+  "gates": [
+    {
+      "gate_id": "MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "config/manga/canonical_genre_list.yaml",
+          "text": "dark_fantasy",
+          "reason": "canonical genre"
+        },
+        {
+          "path": "config/source_of_truth/manga_story_strategies/dark_fantasy_strategies.yaml",
+          "text": "dark_fantasy_strategies.yaml",
+          "reason": "strategy bank"
+        },
+        {
+          "path": "config/manga/main_character_interaction_grammar.yaml",
+          "text": "dark_fantasy",
+          "reason": "interaction grammar"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.ARCHITECT_CONTEXT",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "story_architecture_handoff.modern_reader_context",
+          "text": "present",
+          "reason": "architect context"
+        },
+        {
+          "path": "phoenix_v4/manga/prompts/chapter_writer_prompt.txt",
+          "text": "modern_reader_context",
+          "reason": "prompt doctrine"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.ALIAS_COHERENCE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "config/manga/story_genre_alias_coherence.yaml",
+          "text": "dark_fantasy",
+          "reason": "alias coherence"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.MODERN_READER_REALIZATION",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Last train platform; dead battery phone at 1%; hidden app opens on the platform map.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (hidden app)"
+        },
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Last train platform; dead battery phone at 1%; hidden app opens on the platform map.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (train)"
+        },
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Last train platform; dead battery phone at 1%; hidden app opens on the platform map.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (map)"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "debt, cost, burns, burn, delete",
+          "reason": "object creates conflict-change pressure"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "want",
+          "reason": "protagonist desire visible"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "cost",
+          "reason": "cost by page two"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.GENRE_CORE_PLEASURE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "dead",
+          "reason": "genre-core class wound"
+        },
+        {
+          "path": "pages[*]",
+          "text": "debt",
+          "reason": "genre-core class oath_debt"
+        },
+        {
+          "path": "pages[*]",
+          "text": "enter",
+          "reason": "genre-core class survival_choice"
+        },
+        {
+          "path": "pages[*]",
+          "text": "cost",
+          "reason": "genre-core class moral_bodily_cost"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.INTERACTION_REALIZATION",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "dyad,machine",
+          "reason": "interaction targets"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.PAGE_ONE_HOOK",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[0]",
+          "text": "Last train platform; dead battery phone at 1%; hidden app opens on the platform map. Protagonist stares at the debt line on the platform map. The hidden app opens without network and marks a debt alre",
+          "reason": "page-one concrete hook"
+        },
+        {
+          "path": "pages[1]",
+          "text": "Station announcement calls a fantasy-world name only her dead sibling used. That name... only they called me that. That name... only they called me that. Platform door opens to a battlefield road; ent",
+          "reason": "page-two turn reason"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.MARKET_NATIVE_SURFACE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "train platform",
+          "reason": "ja_JP market surface"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.BLAND_FALLBACK_LINT",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "specificity ok",
+          "reason": "anti-blandness"
+        }
+      ]
+    }
+  ],
+  "repair_packet": null
+}

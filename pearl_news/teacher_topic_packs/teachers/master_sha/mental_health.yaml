@@ -1,0 +1,561 @@
+schema_version: 1
+teacher_id: master_sha
+topic: mental_health
+active: true
+identity:
+  display_name: Master Sha
+  attribution_name: Dr. and Master Zhi Gang Sha
+  tradition: Tao Grandmaster; soul healing; Tao Calligraphy as high-frequency healing field
+  tradition_short: Tao Source
+  teacher_setting_options:
+  - teaching space
+  - transmission
+  teacher_years: decades
+  affiliation_safe_line: holds both Western medical (MD) and Traditional Chinese Medicine credentials; eleven New York Times bestselling author
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: soul_blockage_loop
+    label: spiral as soul-body-mind disharmony the surface response cannot reach
+    loop: reads the warning -> mind races -> puts the phone down -> picks it up again because the spiral is already running
+    body_markers:
+    - jaw
+    - stomach
+    - breath
+    digital_markers:
+    - put the phone down
+    - pick it up again
+topic_fit:
+  fit_level: primary
+  fit_reason: Soul healing precedes body and mind healing; what young people experience as anxiety and depression is, in the tradition, a soul-body-mind disharmony that Tao Calligraphy's high-frequency field, Tao Song's sacred sound, and Tao Hands' blessings address at the layer beneath the symptom.
+  forbidden_angles:
+  - do not reduce to generic wellness
+  - do not frame the pressure as personal weakness
+  - do not reduce Tao Calligraphy to artistic or decorative practice
+hook_personal:
+  options:
+  - id: master_sha_mh_hook_personal_01
+    line: You know the spiral before anyone names it. You still carry the day forward while feeling less sure your mind can keep doing this pace — and part of you knows the friction is sitting on a layer deeper than the mind, where soul healing has not yet been offered.
+    metadata:
+      semantic_family: personal-pressure
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_personal_02
+    line: You keep reading the updates because not looking feels worse. You also know that therapists, screenings, and self-help have spoken to the mind without relief — and that something underneath the mind is asking to be reached at a different frequency.
+    metadata:
+      semantic_family: truth-vs-overload
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_personal_03
+    line: You feel the friction in your jaw before you have words for it — the part of you that is told to be fine running into the part that already knows the pace is not sustainable. The body is holding what the mind is still trying to argue with, and the layer below the body has not been touched.
+    metadata:
+      semantic_family: soul-body-mind-disharmony
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_personal_04
+    line: At 1 a.m. you put the phone down and pick it up again. Neither move helps, because the spiral was already running — and the part of you trying to think your way out is the part that has been talked at too much already. Soul healing, in the tradition, begins exactly where the intellect ends.
+    metadata:
+      semantic_family: midnight-spiral
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_personal_05
+    line: You have read the threads, taken the screenings, done the breathing app. The mind has done all it can — and something at the soul level is asking for the kind of contact only a high-frequency healing field can deliver.
+    metadata:
+      semantic_family: exhausted-intellect
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: master_sha_mh_hook_big_01
+    line: Youth mental overload is not only about symptoms. It is about what constant pressure does to attention, rest, and the soul-body-mind harmony that the tradition holds is the actual target — and about the frequency layer that surface response is not built to reach.
+    metadata:
+      semantic_family: system-pressure
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_big_02
+    line: Heightened distress in young people is not pathology alone. The Tao Source tradition reads it as soul-body-mind disharmony amplified by a culture that asks the mind to carry what only soul healing can release — and the reframe does not remove the suffering, it names the layer that has gone unaddressed.
+    metadata:
+      semantic_family: institutional-delay
+      angle: soul-priority
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_big_03
+    line: A generation is being asked to hold meaning through a transition where the inherited structures cannot reach the soul layer where the load is actually carried. The overload is not a private failure — it is the visible edge of a healing field that has not yet been offered at scale.
+    metadata:
+      semantic_family: meaning-structure-dissolving
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_big_04
+    line: The signal that conventional systems read as anxiety is, in the Tao Grandmaster's framework, a frequency disturbance — the soul registering that the world it was prepared for is no longer the world it has to live in, and asking for a healing field that meets it at its actual range.
+    metadata:
+      semantic_family: cosmic-recalibration
+      angle: frequency-shift
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_hook_big_05
+    line: The collective field has shifted faster than the institutions designed to hold it. What gets read as a youth mental health crisis is, in part, the visible edge of a frequency mismatch between the inherited culture and the lives now being lived inside it — a mismatch Tao Calligraphy's healing field is built to bridge.
+    metadata:
+      semantic_family: frequency-mismatch
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: master_sha_mh_intro_01
+    line: 'Dr. and Master Zhi Gang Sha — both a Western MD and a TCM physician, and the author of eleven New York Times bestsellers — has watched young people carry mental overload as both real suffering and something the Tao Source framework names precisely: soul-body-mind disharmony that the conscious mind alone cannot resolve. Soul healing, the tradition holds, precedes body and mind healing. Tao Calligraphy''s high-frequency field is built to reach exactly that layer.'
+    metadata:
+      semantic_family: identity_seen_shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_intro_02
+    line: Dr. and Master Sha holds credentials that almost never coexist — a Western medical degree and TCM physicianship, applied for decades to young people whose minds have been talked at by therapists, algorithms, and self-help content without relief. What the Tao Source tradition offers is not another instruction stack; it is a high-frequency healing field that reaches the soul layer where the load is actually held.
+    metadata:
+      semantic_family: dual-credential-precision
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_intro_03
+    line: Master Sha teaches Tao Calligraphy — not as cultural art, but as a healing field whose high-frequency strokes carry transmission directly into the soul-body-mind system. He has watched young clients move through the same loop screening tools name as anxiety, and watched the loop loosen when the field, not the explanation, is received.
+    metadata:
+      semantic_family: tao-calligraphy-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_intro_04
+    line: Master Sha works with Tao Song — sacred sound and vibrational healing that, in the Tao Source tradition, transforms cells, energy channels, and the soul body itself. In transmission space he has seen young people meet that vibration and recognize, often for the first time, that their distress is being addressed at the layer where it actually lives.
+    metadata:
+      semantic_family: tao-song-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_intro_05
+    line: Master Sha teaches inside a Tao Grandmaster lineage that reads this period as one in which universal love is the operating force most needed and least available. Tao Hands — energetic blessings delivered through the field — is one of the methods his tradition has carried for exactly the kind of overload now visible across the cohort.
+    metadata:
+      semantic_family: tao-hands-lineage
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: master_sha_mh_somatic_01
+    line: You read the update after midnight. Your mind sped up. You put the phone down. Then you picked it up again because the spiral was already running, and the layer underneath the spiral has not yet been touched.
+    metadata:
+      semantic_family: midnight_spiral
+      loop_type: midnight_spiral
+      body_register: jaw
+      digital_behavior: put the phone down
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_somatic_02
+    line: You wake before the alarm. Your stomach is already tight. You reach for the phone before you reach for the light, because the dread is already there and the soul has not yet been met where it is.
+    metadata:
+      semantic_family: morning_dread
+      loop_type: morning_dread
+      body_register: stomach
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_somatic_03
+    line: Your jaw clenches when the notification sound comes through. You replay the last conversation three times. Your breath shortens. The body ran the loop before you decided anything — and the field it has been asking for has not yet arrived.
+    metadata:
+      semantic_family: jaw-clench-replay
+      loop_type: jaw_clench
+      body_register: jaw
+      digital_behavior: notification sound
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_somatic_04
+    line: You hold your breath without noticing while the screen loads. Your shoulders lift. You exhale only when you see the message and only halfway, because there is always another message coming, and the soul has not been given a register to land in.
+    metadata:
+      semantic_family: notification-anticipation
+      loop_type: notification_hold
+      body_register: breath
+      digital_behavior: screen load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_somatic_05
+    line: You lie down and your eyes pin open. The day replays. Your jaw will not soften. You know sleep is the thing that would help — and you cannot find the door into it because the door is on a layer the mind alone does not control.
+    metadata:
+      semantic_family: sleep-resistance
+      loop_type: sleep_resistance
+      body_register: jaw
+      digital_behavior: lying down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: master_sha_mh_witness_01
+    line: Master Sha has seen this exact loop in those who come to receive. In the Tao Source framework that pressure is not character; it is soul-body-mind disharmony asking to be met by a healing field when the intellect is exhausted.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: midnight_spiral
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_witness_02
+    line: Master Sha has watched young people walk into the transmission space already mid-loop, already certain the intellect should have solved this by now. In the tradition that certainty is the signal — the place where the mind stops and the soul-level field can be received.
+    metadata:
+      semantic_family: intellect-exhausted-call
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_witness_03
+    line: He has seen the body carry what the explanations could not. In his framework the somatic loop is not a malfunction — it is the soul speaking through the only channel left open when the words have been overused, and Tao Hands is one of the tradition's responses built for exactly that moment.
+    metadata:
+      semantic_family: somatic-soul-message
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_witness_04
+    line: Master Sha has watched young clients arrive with a frequency disturbance that no screening tool names. In the Tao Source tradition that disturbance is information, not pathology — and the high-frequency calligraphic field is built to address it at the cellular and soul layer simultaneously.
+    metadata:
+      semantic_family: frequency-disturbance-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_witness_05
+    line: Master Sha has watched the moment when a young person stops trying to produce an answer and lets the field do its work instead. In the tradition that moment is not weakness — it is readiness for universal love to operate at the soul level, which conventional care has no language for.
+    metadata:
+      semantic_family: reception-readiness
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: master_sha_mh_turnaround_01
+    stat_line_1: 320 campuses. 18 countries.
+    stat_line_2: Youth organizers are hosting peer circles, organizing listener training, and forcing schools to treat mental health support as infrastructure, not private weakness.
+    metadata:
+      semantic_family: institutional-action
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_turnaround_02
+    stat_line_1: 488 universities. JED Campus.
+    stat_line_2: The JED Foundation program now runs comprehensive mental health frameworks across nearly five hundred US campuses, embedding peer support and faculty training into the day-to-day infrastructure rather than the crisis aftermath.
+    metadata:
+      semantic_family: peer-network-growth
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_turnaround_03
+    stat_line_1: 5,600 voices. 7 countries.
+    stat_line_2: UNICEF's Global Coalition for Youth Mental Health gathered 5,600 young people aged 14-25 across seven countries to surface what conventional reporting had missed — and the cohort named the load themselves before the agencies could.
+    metadata:
+      semantic_family: youth-collective-organizing
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_turnaround_04
+    stat_line_1: 14 million contacts. 988 Lifeline.
+    stat_line_2: Since the 988 Suicide and Crisis Lifeline launched in 2022, more than fourteen million contacts have been routed through it — a resource pool that did not exist three years ago and now carries weight every night.
+    metadata:
+      semantic_family: resource-pool-built
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_turnaround_05
+    stat_line_1: 53 member states. WHO Europe.
+    stat_line_2: The WHO Europe Child and Adolescent Health Strategy 2026-2030, adopted in October 2025, binds fifty-three member states to report on adolescent mental load against a 2030 deadline — the first multilateral instrument that treats the cohort load as governance, not commentary.
+    metadata:
+      semantic_family: policy-shift
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: master_sha_mh_bridge_01
+    line: 320 campuses. 18 countries. The tracker measures the workshops and peer circles young people built. It has no column for what made the next honest reach-out possible — the capacity to receive a healing field when the mind has been talked at by therapists, algorithms, and self-help content without relief. The Tao Source tradition offers a different mode of contact — Tao Calligraphy's high-frequency field bypasses the exhausted intellect and operates at the soul layer where distress is actually held.
+    hidden_capacity: receive a high-frequency healing field when the intellect is exhausted
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_bridge_02
+    line: The numbers show the scaffolding the young built. They do not show the cosmic context that scaffolding is being built inside — a period in which the Tao Grandmaster lineage holds universal love is the operating force most needed and least available. Tao Source holds that context as native, not metaphor.
+    hidden_capacity: hold the universal-love context the data cannot show
+    metadata:
+      semantic_family: cosmic-context-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_bridge_03
+    line: The data captures sessions, contacts, and policy adoptions. It cannot capture the frequency that shifts when a young person stops being talked at and receives a healing field at the soul layer. In the Tao Source framework that shift is the actual relief — the part no tracker reports.
+    hidden_capacity: register the frequency shift the trackers miss
+    metadata:
+      semantic_family: frequency-data-gap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_bridge_04
+    line: The infrastructure is measurable. The soul body, where the load is actually held, is not. The Tao Source tradition does not argue with the measurement — it works in the layer beneath it, where soul healing precedes body and mind healing as the structural ordering of any lasting change.
+    hidden_capacity: work in the soul layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-soul
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_bridge_05
+    line: Structures, policies, and platforms can be counted. The soul-body-mind disharmony underneath cannot. The Tao Source tradition does not replace the structural work — it names the layer institutional response is not designed to reach and offers Tao Calligraphy, Tao Song, and Tao Hands as the methods built for exactly that layer.
+    hidden_capacity: name the soul layer institutional response cannot reach
+    metadata:
+      semantic_family: structural-vs-soul
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: master_sha_mh_perspective_01
+    header: What Master Sha Sees
+    paragraphs:
+    - Soul healing precedes body and mind healing. Much of what young people experience as anxiety or depression is, in the Tao Source framework, soul-body-mind disharmony that the conscious mind alone cannot resolve. The mind is not the only intelligence; the soul carries information the mind has lost access to, and healing begins when the soul layer is met first.
+    - Tao Calligraphy is not artistic practice. In the tradition each character is a high-frequency healing field — the calligraphic strokes carry transmission directly into the soul-body-mind system. For young people who have been talked at without relief, the field offers a different mode of contact that bypasses the exhausted intellect entirely.
+    - The reframe does not remove the structural pressure. It names the layer institutional response is not designed to reach, and it offers a tradition that has worked in that layer for generations. Universal love is the operating force; the methods are the channels through which it moves.
+    metadata:
+      semantic_family: soul_healing_reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_perspective_02
+    header: What Master Sha Sees
+    paragraphs:
+    - Tao Calligraphy is a healing technology, not a cultural art. Each character emerges as a high-frequency field whose strokes carry the transmission of Tao Source. For a generation talked at by therapists, algorithms, and self-help stacks, this is not another voice — it is a different layer of contact entirely.
+    - The mechanism matters because it explains the relief many young people describe after a transmission — not that they have been argued out of the spiral, but that the spiral has loosened on a layer that argument never reaches. The mind did not have to win for the soul body to soften.
+    - This is the part conventional care is not designed to deliver. The tradition does not invalidate conventional care — it names a missing layer, and offers methods that have worked in that layer across generations of practice.
+    metadata:
+      semantic_family: tao-calligraphy-mechanism
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_perspective_03
+    header: What Master Sha Sees
+    paragraphs:
+    - Tao Song is sacred sound. In the tradition the vibration is not metaphor — it is a literal frequency that transforms cells, energy channels, and the soul body itself. The mechanism is precise, and it has been worked through systematically for decades by a teacher who holds both Western MD and TCM credentials.
+    - For a young person carrying mental overload, the experience of being met by a healing vibration at the soul level is structurally different from being processed by a screening tool. What lands is not "here is the rule"; it is the vibrational layer underneath the rule has been touched.
+    - That distinction — received at the soul layer rather than processed at the symptom layer — is what conventional infrastructure cannot reproduce, and what the Tao Source tradition has carried as native for generations.
+    metadata:
+      semantic_family: tao-song-perspective
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_perspective_04
+    header: What Master Sha Sees
+    paragraphs:
+    - Tao Hands is energetic blessing — a transmission method through which universal love operates directly into the soul-body-mind system. It is not a technique; it is a channel for the operating force the tradition holds is the actual healer.
+    - This is not a flattering reframe. It does not promise the pain will lift quickly, and it does not blame the cohort for feeling unstable in an unstable structure. It names that universal love is what young people are starving for — and that the tradition's methods are built specifically to transmit it.
+    - The weight removal that happens when universal love is received at the soul level is, in transmission practice, often the part that lands first — before the deeper soul work can begin.
+    metadata:
+      semantic_family: tao-hands-perspective
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_perspective_05
+    header: What Master Sha Sees
+    paragraphs:
+    - Soul frequency, in the Tao Source tradition, is the layer of a person that resonates with Tao — the layer beneath personality, beneath conditioning, beneath the script the world has handed them. When that frequency is met by a healing field, the surface load does not disappear, but it stops being the only signal.
+    - Recalibration is the tradition's word for what is happening when a young person moves through a period of heightened sensitivity. The system reads it as pathology because the system has no other category. Tao Source reads it as the soul tuning toward a frequency the inherited culture was not built to transmit.
+    - The practice is not to fix the recalibration. The practice is to receive it, and to let Tao Calligraphy, Tao Song, and Tao Hands hold what conventional care cannot.
+    metadata:
+      semantic_family: frequency-recalibration
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: master_sha_mh_practice_01
+  options:
+  - id: master_sha_mh_practice_01
+    display_name: Tao Calligraphy Listening
+    duration: 5 minutes
+    announcement_line: Master Sha teaches a 5-minute Tao Calligraphy Listening practice for moments when the spiral is running and the mind has been trying too hard to figure it out on its own. The high-frequency calligraphic field does the work the explanation cannot. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The mind stops treating every thought surge as proof of brokenness.
+    - The soul layer is met by the healing field directly.
+    relief_register:
+    - receive
+    - calligraphy
+    - frequency field
+    derived_from_frame: tao_calligraphy_listening
+    metadata:
+      semantic_family: tao_calligraphy_listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_practice_02
+    display_name: Tao Song Pause
+    duration: 3 minutes
+    announcement_line: Master Sha offers a 3-minute Tao Song Pause for the moments between notifications, when the body has been carrying the load without permission to set it down. Sacred sound meets the soul-body-mind layer at the vibrational level. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The frequency mismatch between the day's pace and the body's actual range becomes audible.
+    - Sacred sound reaches what the spoken word cannot.
+    relief_register:
+    - sound
+    - vibration
+    - sacred song
+    derived_from_frame: tao_song_pause
+    metadata:
+      semantic_family: tao_song_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_practice_03
+    display_name: Tao Hands Receiving
+    duration: 7 minutes
+    announcement_line: Master Sha teaches a 7-minute Tao Hands Receiving practice for moments when explanation has been overused and the body needs a different kind of contact. Energetic blessing is delivered through the field — not produced by the mind. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body receives the blessing the words could not deliver.
+    - The exhausted intellect is allowed to rest while the field does its own work.
+    relief_register:
+    - receive
+    - blessing
+    - energetic transmission
+    derived_from_frame: tao_hands_receiving
+    metadata:
+      semantic_family: tao_hands_receiving
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_practice_04
+    display_name: Soul Healing Recall
+    duration: 4 minutes
+    announcement_line: Master Sha teaches a 4-minute Soul Healing Recall for moments when the inner argument is running in circles and the body has forgotten the order — soul first, then body, then mind. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The order returns — soul healing, then body healing, then mind healing.
+    - The argument stops being something to win and becomes something to release.
+    relief_register:
+    - soul
+    - order
+    - precedence
+    derived_from_frame: soul_healing_recall
+    metadata:
+      semantic_family: soul_healing_recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_mh_practice_05
+    display_name: Universal Love Breath
+    duration: 3 minutes
+    announcement_line: Master Sha offers a 3-minute Universal Love Breath for moments of acute disharmony, when the day's pace has knocked the soul-body-mind system out of alignment. Universal love is the operating force; the breath becomes its channel. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The breath becomes a marker for the field's actual presence rather than the day's demanded pace.
+    - Universal love returns as the operating force the body recognizes.
+    relief_register:
+    - breath
+    - love
+    - operating force
+    derived_from_frame: universal_love_breath
+    metadata:
+      semantic_family: universal_love_breath
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 3
+    title: Good Health and Well-Being
+    line: The United Nations framework includes mental health and wellbeing in SDG 3.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
+cta:
+  options:
+  - id: master_sha_mh_cta_01
+    org: Crisis Text Line
+    line: 'If you or someone you know is in crisis, Crisis Text Line provides free, 24/7 support. Text HOME to 741741. Door in: join their network.'
+    metadata:
+      semantic_family: door-in-crisis-text
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_cta_02
+    org: 988 Suicide and Crisis Lifeline
+    line: 'If you or someone you know is in crisis, the 988 Suicide and Crisis Lifeline provides free, 24/7 support across the United States. Call or text 988. Door in: their network has handled more than fourteen million contacts since 2022.'
+    metadata:
+      semantic_family: door-in-988-lifeline
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_cta_03
+    org: The Trevor Project
+    line: 'If you are LGBTQ+ and under 25 and in crisis, The Trevor Project provides free, 24/7 support by text, chat, or call. Text START to 678-678. Door in: a network built for the specific cohort.'
+    metadata:
+      semantic_family: door-in-trevor-project
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_cta_04
+    org: NAMI HelpLine
+    line: 'For information, referrals, and peer support on mental health, the NAMI HelpLine is available Monday through Friday. Call 1-800-950-NAMI (6264) or text "HelpLine" to 62640. Door in: connect to the National Alliance on Mental Illness network.'
+    metadata:
+      semantic_family: door-in-nami
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_mh_cta_05
+    org: Active Minds
+    line: 'Active Minds runs peer-led mental health communities on more than 650 US campuses. If a campus chapter exists where you are, it is a low-friction door in. If one does not, the national network can connect you to peers who built the same infrastructure elsewhere.'
+    metadata:
+      semantic_family: door-in-active-minds
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_sha_mh_headline_01
+      line: A Tao Grandmaster names mental overload as soul-body-mind disharmony — and the high-frequency field that meets it.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_mh_headline_02
+      line: An MD and TCM physician on the layer of distress conventional care is not built to reach.
+      metadata:
+        semantic_family: dual-credential-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_mh_headline_03
+      line: Tao Calligraphy, not another instruction stack — the healing field meets the exhausted intellect where it is.
+      metadata:
+        semantic_family: tao-calligraphy-practice
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_mh_headline_04
+      line: Soul healing first, then body and mind — the Tao Source ordering the inherited system has not been built for.
+      metadata:
+        semantic_family: soul-priority-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_mh_headline_05
+      line: Universal love as operating force — what Tao Song and Tao Hands bring to a generation talked at without relief.
+      metadata:
+        semantic_family: universal-love-call
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

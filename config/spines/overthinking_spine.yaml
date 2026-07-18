@@ -1,0 +1,587 @@
+family_id: overthinking
+family_name: "Overthinking / Spiral"
+adjacent_topics: [anxiety, sleep_anxiety, depression]
+primary_mechanism: spiral
+allowed_engines: [spiral, watcher, false_alarm]
+
+reader_starting_state: >
+  The reader spends enormous energy thinking. They replay conversations, analyze
+  what they said and what it meant, anticipate every possible outcome, and rehearse
+  scenarios that haven't happened yet. They believe this thinking is protecting them —
+  that if they think carefully enough, for long enough, they will eventually land on
+  the answer that makes them feel safe. They've been told to "stop overthinking" and
+  found it impossible, which has added a layer of self-criticism to the exhaustion.
+  They are intelligent people who are tired of being at war with their own minds.
+
+reader_ending_state: >
+  The reader can observe a spiral forming without being immediately swept into it.
+  They understand why the spiral runs — it is not a character flaw or a bad habit
+  but a threat-response pattern that learned to use thinking as its primary tool.
+  They have found body-based entry points that can interrupt the loop before it
+  goes fully cognitive. They have stopped fighting the fact that they think a lot
+  and started working with how they think — directing the analytical mind toward
+  what it can actually resolve, and recognizing when it is running on a problem
+  it cannot solve.
+
+what_makes_this_family_different: >
+  The reader's greatest tool — their analytical intelligence — is precisely what
+  gets recruited into the problem. The spiral is not stupidity. It is the over-application
+  of a smart survival strategy. The book must honor the intelligence that drives the
+  spiral while naming the trap: thinking cannot resolve uncertainty, and the spiral
+  IS the attempt to think one's way to safety. Every move in this book must respect
+  the reader's mind while showing them where that mind is being misused. The book
+  must never position overthinking as a habit to break — it is a threat-response
+  pattern, and it will not respond to willpower or distraction.
+
+chapters:
+  chapter_01:
+    number: 1
+    role: recognition
+    working_title: "The Loop You're Already In"
+    thesis: >
+      Overthinking is not a personality trait or a character flaw — it is a specific
+      pattern: a loop that runs without a conclusion, feeding itself on the very
+      uncertainty it is trying to resolve.
+    emotional_job: >
+      Give the reader the first moment of recognition — not shame, not diagnosis,
+      but the specific relief of being seen accurately. The reader should feel:
+      "Someone finally named what I actually do."
+    practical_job: >
+      Define the spiral pattern precisely enough that the reader can recognize it
+      in real time. Distinguish it from productive thinking, rumination, and worry.
+      Introduce the concept of the loop as a structure, not a character.
+    what_changes: >
+      Before: "I'm an overthinker. That's just who I am."
+      After: "I run a specific loop pattern. That pattern has a shape I can learn to see."
+    required_sections: [HOOK, SCENE, REFLECTION]
+    forbidden_moves:
+      - Telling the reader to "just notice" the loop without explaining what to look for
+      - Suggesting that naming the pattern will stop it
+      - Using the word "journey" or implying easy resolution is near
+      - Framing overthinking as laziness or avoidance
+    recommended_enrichments:
+      - A detailed scene of one full spiral loop from inside the reader's experience
+      - A diagram or verbal map of how one thought chains to the next
+      - 'A short inventory: "Does this sound like you?" with specific behaviors, not traits'
+    claim_someone_could_argue: >
+      Some people would argue that careful, thorough thinking is just conscientiousness —
+      and that calling it a problem is pathologizing a valuable trait.
+    why_this_chapter_exists: >
+      Without precise recognition, the reader will apply generic advice to a
+      specific problem. This chapter gives them the vocabulary and the specific shape
+      of what they're dealing with before anything else can land.
+    what_comes_next: >
+      Once the reader can see the loop from the outside, they need to know what
+      it feels like from the inside — in their body, not their head.
+
+  chapter_02:
+    number: 2
+    role: somatic_legitimacy
+    working_title: "What the Spiral Feels Like Before It Has Words"
+    thesis: >
+      The overthinking spiral is not just a cognitive event — it lives in the body
+      first. The tension, the restlessness, the particular exhaustion that follows
+      an hour of looping: these are not side effects. They are the primary event.
+    emotional_job: >
+      Legitimate the physical experience of overthinking as real data, not weakness.
+      The reader should feel less alone in their body and less confused about why
+      they're so tired when they've "just been thinking."
+    practical_job: >
+      Map the somatic signature of overthinking — where it lives in the body, what
+      it feels like before it has words, and why the body registers cognitive
+      spiraling as physical threat. Introduce the body as a potential ally rather
+      than just a casualty.
+    what_changes: >
+      Before: "I don't know why I'm so exhausted. I haven't done anything."
+      After: "My body has been running a threat response. That's why I'm exhausted."
+    required_sections: [SCENE, SOMATIC_MAP, REFLECTION]
+    forbidden_moves:
+      - Reducing somatic experience to breathing exercises
+      - Suggesting the body is the "solution" before the mechanism is understood
+      - Using "grounding technique" language
+      - Implying that awareness of the body will stop the spiral
+    recommended_enrichments:
+      - A body-scan description written from the reader's probable experience
+      - Explanation of why the nervous system treats cognitive threat as physical threat
+      - Distinction between the spiral's onset sensations and its peak
+    claim_someone_could_argue: >
+      Some would argue that mind and body are genuinely separate, and that thinking
+      is a purely cognitive activity with only incidental physical effects.
+    why_this_chapter_exists: >
+      If the reader only understands the spiral cognitively, they will try to solve
+      it cognitively — which feeds it. Body-level awareness must come before any
+      intervention can be introduced.
+    what_comes_next: >
+      Now that we've located the spiral in the body, we can look at what's actually
+      driving it — the mechanical structure of how thought chains into threat.
+
+  chapter_03:
+    number: 3
+    role: mechanism
+    working_title: "How a Thought Becomes a Catastrophe"
+    thesis: >
+      The spiral has a specific mechanical structure: one thought generates a question,
+      the question generates a threat, the threat demands resolution, and the demand
+      for resolution generates more thinking — not because the thinker is broken,
+      but because the brain learned to treat uncertainty as danger.
+    emotional_job: >
+      Replace self-blame with structural understanding. The reader should feel
+      that the spiral makes sense — that it's doing exactly what it was built to do,
+      even though what it was built to do is not what they need right now.
+    practical_job: >
+      Walk through the catastrophic chaining process step by step. Show how a
+      neutral observation becomes a worst-case scenario through a series of logical
+      but unverifiable steps. Introduce the concept of the false alarm engine:
+      the body's alarm system triggering on cognitive uncertainty as though it were
+      physical danger.
+    what_changes: >
+      Before: "I don't know why I go from fine to terrified so fast."
+      After: "I can see the chain of steps my mind takes. It's a pattern, not a breakdown."
+    required_sections: [MECHANISM_DIAGRAM, SCENE, ANALYSIS]
+    forbidden_moves:
+      - Presenting the mechanism as something wrong with the reader's brain
+      - Introducing any intervention at this stage (too early)
+      - Suggesting the spiral can be stopped by understanding it
+      - Conflating the spiral with depression or clinical anxiety disorder
+    recommended_enrichments:
+      - A step-by-step walk-through of one spiral from trigger to exhaustion
+      - Naming the specific question-generating move ("But what if...")
+      - Brief explanation of threat-detection neuroscience in plain language
+    claim_someone_could_argue: >
+      Some would argue that worst-case thinking is rational risk management —
+      that imagining bad outcomes helps you prepare for them.
+    why_this_chapter_exists: >
+      The reader cannot intervene in a mechanism they can't see. This chapter
+      makes the invisible visible so that future chapters can work with the structure.
+    what_comes_next: >
+      Understanding the mechanism reveals something underneath it: the spiral is
+      running in service of a belief the reader may not know they hold.
+
+  chapter_04:
+    number: 4
+    role: hidden_belief
+    working_title: "The Promise the Spiral Makes"
+    thesis: >
+      Beneath every overthinking spiral is a belief: that thinking is the path to
+      safety. That if the thinker is thorough enough, careful enough, exhaustive
+      enough, they will eventually arrive at certainty — and certainty will bring
+      relief. This belief is the engine's fuel.
+    emotional_job: >
+      Create the specific discomfort of recognition — not shame, but the quiet
+      shock of seeing a belief you've held without knowing you held it. The reader
+      should feel something shift, not just intellectually but in their chest.
+    practical_job: >
+      Name the core belief explicitly: "Thinking enough will make me safe." Show
+      how this belief was likely functional at some point — how it protected the
+      reader in a context where careful thinking actually did prevent harm. Show
+      why it stopped working as a universal strategy.
+    what_changes: >
+      Before: "I just want to figure it out."
+      After: "I'm trying to think my way to safety. But safety isn't at the end of more thinking."
+    required_sections: [BELIEF_EXCAVATION, SCENE, HISTORICAL_CONTEXT]
+    forbidden_moves:
+      - Telling the reader the belief is "wrong" without honoring when it was right
+      - Introducing alternatives before the belief has been fully named
+      - Suggesting the reader simply "choose" a different belief
+      - Framing the belief as irrational — it has its own logic
+    recommended_enrichments:
+      - A scene of the reader waiting for the moment of certainty that never arrives
+      - The question: "What would it mean if you couldn't think your way to safety?"
+      - A brief look at where careful thinking does work and where it doesn't
+    claim_someone_could_argue: >
+      Some would argue that more thorough preparation does reduce risk in many
+      domains — and that planning is genuinely protective.
+    why_this_chapter_exists: >
+      Interventions that don't address the underlying belief will be experienced
+      as tricks — and the spiral will reassert itself. This chapter is the belief
+      surgery that makes everything after it possible.
+    what_comes_next: >
+      If the belief is that thinking will eventually deliver safety, then the
+      next question is: why hasn't it? What keeps the threshold from being reached?
+
+  chapter_05:
+    number: 5
+    role: destabilization
+    working_title: "The Threshold That Never Comes"
+    thesis: >
+      The spiral runs on the promise of a threshold: a point at which thinking
+      will be complete and safety will arrive. That threshold doesn't exist.
+      More thinking does not approach it. This is not a failure of effort — it
+      is a structural impossibility.
+    emotional_job: >
+      Create a specific kind of relief through honesty: the reader has been
+      working toward something that could never be reached. It's not that they
+      failed. It's that the destination was always fictional.
+    practical_job: >
+      Show, through the reader's own experience, that more thinking has never
+      delivered the promised certainty — that the spiral always ends through
+      exhaustion or distraction, not resolution. Introduce the idea that the
+      spiral cannot be completed; it can only be interrupted.
+    what_changes: >
+      Before: "I just need to think about it more until I figure it out."
+      After: "There is no 'figured out' at the end of this. The spiral doesn't complete."
+    required_sections: [EVIDENCE_REVIEW, SCENE, REALIZATION]
+    forbidden_moves:
+      - Suggesting that giving up on certainty is "acceptance" in a passive sense
+      - Introducing the interruption strategy before the impossibility has landed
+      - Framing this as hopeless — this is a relief, not a defeat
+      - Using the word "mindfulness" anywhere near this chapter
+    recommended_enrichments:
+      - A series of questions: "Has the spiral ever actually delivered certainty?"
+      - The distinction between resolution (finishing) and relief (exhaustion)
+      - What it means that the spiral always ends, just not in the way it promised
+    claim_someone_could_argue: >
+      Some would argue that persistent effort eventually produces insight — that
+      the person who thought longest about a problem did eventually solve it.
+    why_this_chapter_exists: >
+      The reader has to stop expecting the spiral to deliver before they can
+      relate to it differently. This is the moment of structural surrender — not
+      giving up, but stopping the chase for the destination that isn't there.
+    what_comes_next: >
+      Once the reader sees the spiral cannot complete itself, the cost of letting
+      it run becomes visible in a new way.
+
+  chapter_06:
+    number: 6
+    role: cost_exposure
+    working_title: "What the Spiral Has Been Spending"
+    thesis: >
+      The spiral has a ledger. It costs attention, presence, relational quality,
+      and the capacity to act — and because the spiral operates on the promise of
+      safety, the reader has been paying these costs willingly, believing the
+      return was worth it.
+    emotional_job: >
+      Create sober grief rather than guilt. The reader should feel the specific
+      weight of what the spiral has taken without feeling blamed for the taking.
+      This is not "you ruined things." It is "here is what you've been spending,
+      and what you got back."
+    practical_job: >
+      Map the concrete costs: the conversations the reader wasn't present for,
+      the decisions not made, the relationships strained by distance or by being
+      the person who processes everything aloud, the physical toll. Make the
+      ledger specific, not abstract.
+    what_changes: >
+      Before: "The overthinking is a problem but at least I'm being careful."
+      After: "The spiral has costs I've been accepting without fully seeing them."
+    required_sections: [COST_INVENTORY, SCENE, HONEST_ACCOUNTING]
+    forbidden_moves:
+      - Making the reader feel stupid for having paid these costs
+      - Introducing hope or relief too quickly after the accounting
+      - Framing relationships as "damaged" in a permanent way
+      - Using cost as motivation ("you need to fix this")
+    recommended_enrichments:
+      - A scene in which the reader was physically present but mentally absent
+      - The specific cost of processing aloud on people who care about them
+      - The cost to the reader's relationship with their own judgment
+    claim_someone_could_argue: >
+      Some would argue that careful people make better decisions in the long run
+      and that the relational costs are worth the risk reduction.
+    why_this_chapter_exists: >
+      The reader needs to want something different. Cost exposure is the honest
+      prerequisite. But the cost must land as grief, not guilt, or the reader
+      will defend against it.
+    what_comes_next: >
+      Now that the cost is visible, the reader needs a different relationship to
+      the spiral — not stopping it, but watching it. The watcher engine.
+
+  chapter_07:
+    number: 7
+    role: reframe
+    working_title: "Watching the Spiral Instead of Being It"
+    thesis: >
+      There is a position from which the spiral can be observed without being
+      inhabited. This is not detachment or suppression — it is the development
+      of a watching stance that sits slightly outside the loop and can see it
+      as a pattern rather than as reality.
+    emotional_job: >
+      Give the reader their first experience of distance from the spiral —
+      not by stopping it, but by finding the position from which it can be
+      watched. This should feel like a small but genuine relief, not a technique.
+    practical_job: >
+      Introduce the watcher engine: the capacity to observe thought without
+      merging with it. Distinguish this from suppression (pushing thoughts
+      away) and distraction (replacing them). Show what it looks like to watch
+      a spiral forming without immediately responding to its conclusions.
+    what_changes: >
+      Before: "When the spiral starts, I'm inside it before I know it."
+      After: "I can sometimes see the spiral from a step outside. Not always. But sometimes."
+    required_sections: [CONCEPT_INTRODUCTION, SCENE, PRACTICE_SKETCH]
+    forbidden_moves:
+      - Presenting the watcher as a technique to stop the spiral
+      - Suggesting the watcher position is easy to reach or maintain
+      - Using "meditation" or "mindfulness" framing
+      - Implying that watching the spiral means it will slow down or stop
+    recommended_enrichments:
+      - The distinction between observing and suppressing
+      - A scene in which the reader notices the spiral from outside — even briefly
+      - The question: "What does the spiral look like when you're not in it?"
+    claim_someone_could_argue: >
+      Some would argue that watching your thoughts is itself a form of rumination —
+      that the only way out is to act, not to observe.
+    why_this_chapter_exists: >
+      Before any interruption can work, the reader needs to be able to see the
+      spiral as a pattern distinct from themselves. The watcher is the prerequisite
+      for every practical move that follows.
+    what_comes_next: >
+      The watcher position gives us an entry point. Now we need to know how to
+      actually interrupt the loop — and that interruption must start in the body,
+      not the mind.
+
+  chapter_08:
+    number: 8
+    role: practical_interruption
+    working_title: "Getting Out of the Loop Before the Words Start"
+    thesis: >
+      The most effective interruption of the spiral happens before it goes fully
+      cognitive — at the somatic level, before the thought-chain has built momentum.
+      Body-first interruption is not a distraction. It is a direct intervention
+      in the threat-response system that fuels the spiral.
+    emotional_job: >
+      Give the reader something concrete to do that respects the difficulty of
+      the problem. This should feel neither too simple nor too demanding. The
+      reader should believe this could actually work for them specifically.
+    practical_job: >
+      Teach one or two body-first interruption moves in specific, physical terms:
+      not as breathing exercises but as nervous system interventions. Explain
+      why these work at the mechanism level. Distinguish between "doing this once"
+      and "doing this before the spiral has momentum."
+    what_changes: >
+      Before: "When the spiral starts I try to think my way out or distract myself."
+      After: "I have a body-first move I can use at the onset, before the thinking accelerates."
+    required_sections: [MECHANISM_LINK, PRACTICAL_INSTRUCTION, TIMING_GUIDE]
+    forbidden_moves:
+      - Presenting this as a simple habit
+      - Suggesting it will stop the spiral every time
+      - Using "grounding technique" language
+      - Introducing cognitive reframing at this stage (too soon)
+    recommended_enrichments:
+      - Specific physical description of the body-first move and what it's interrupting
+      - Timing: what does "early enough" mean in practice?
+      - What to do when you've missed the early window and are already mid-spiral
+    claim_someone_could_argue: >
+      Some would argue that physical interventions are just sophisticated
+      distraction — and that the spiral will return the moment the distraction ends.
+    why_this_chapter_exists: >
+      The reader needs a real, usable move before the book ends. This is the
+      first practical delivery — and it must be rooted in the mechanism so it
+      doesn't feel arbitrary.
+    what_comes_next: >
+      A practical tool now exists. But who does the reader believe themselves to be?
+      The identity question must be addressed before the tool can be integrated.
+
+  chapter_09:
+    number: 9
+    role: identity_fracture
+    working_title: "I Am Not My Spiral"
+    thesis: >
+      "I'm an overthinker" is a false frame. It collapses a behavior pattern into
+      an identity — and once it's identity, it can't be changed without threatening
+      the self. The reader is someone whose mind learned to run threat detection.
+      That is different from being a person whose nature is to overthink.
+    emotional_job: >
+      Destabilize the identity label without threatening the reader's sense of self.
+      The goal is not "you are not who you think you are" but rather "the label
+      you've been using is too small and too permanent for what's actually happening."
+    practical_job: >
+      Walk through the difference between "I am an overthinker" and "I have a
+      mind that runs threat detection under uncertainty." Show what becomes possible
+      when the identity label is loosened. Introduce the concept of the watchful
+      mind as a different kind of self-description — one that honors the pattern
+      without making it destiny.
+    what_changes: >
+      Before: "This is just who I am. I've always been like this."
+      After: "This is a pattern my mind learned. It's not my identity. It can shift."
+    required_sections: [LABEL_EXAMINATION, ALTERNATIVE_FRAMING, REFLECTION]
+    forbidden_moves:
+      - Suggesting the reader should "just decide" to see themselves differently
+      - Implying the old identity was wrong or stupid
+      - Introducing the "best self" frame (prohibited)
+      - Making this feel like a positive affirmation exercise
+    recommended_enrichments:
+      - Where the "overthinker" label came from in the reader's life
+      - What it cost to accept that label as permanent
+      - The specific difference between "I am" and "I do when threatened"
+    claim_someone_could_argue: >
+      Some would argue that identity-based labeling is useful — that calling
+      yourself an overthinker creates helpful self-awareness and frames the pattern
+      as stable enough to address.
+    why_this_chapter_exists: >
+      Without the identity shift, the reader will try to manage the spiral while
+      remaining someone defined by it. The identity chapter makes permanent change
+      structurally possible.
+    what_comes_next: >
+      With a new self-description available, the reader must test whether these
+      moves hold when the stakes are high and the spiral is strong.
+
+  chapter_10:
+    number: 10
+    role: practice_under_pressure
+    working_title: "When It's Hard: Using the Tools in Real Conditions"
+    thesis: >
+      Every insight and tool in this book was developed for easy moments. The
+      real test is the high-stakes situation: the relationship conversation, the
+      work decision, the 3 a.m. loop that won't stop. The tools work there too —
+      but they work differently, and the reader needs to know what to expect.
+    emotional_job: >
+      Acknowledge that everything learned so far is harder under pressure — and
+      that this is not a failure of the reader or the approach. Build realistic
+      confidence: not "this will work perfectly" but "this is what working imperfectly
+      in a real situation actually looks like."
+    practical_job: >
+      Walk through a high-stakes spiral scenario in detail. Show which tools apply
+      and in what order. Distinguish between what helps and what makes it worse.
+      Address the specific conditions that make the spiral hardest to interrupt:
+      sleep deprivation, relational threat, career uncertainty.
+    what_changes: >
+      Before: "These ideas make sense but I don't think they'd hold when things are actually bad."
+      After: "I've rehearsed this mentally. I know what partial success looks like in hard moments."
+    required_sections: [HIGH_STAKES_SCENE, TOOL_APPLICATION, REALISTIC_ASSESSMENT]
+    forbidden_moves:
+      - Suggesting the tools will make the hard moments easy
+      - Introducing new concepts at this stage (execute, don't expand)
+      - Framing setbacks as failure rather than data
+      - Promising that practice will make the spiral disappear
+    recommended_enrichments:
+      - The 3 a.m. spiral scenario in particular detail
+      - What "partial success" looks like in real terms
+      - How to recover after a full spiral that ran unchecked
+    claim_someone_could_argue: >
+      Some would argue that high-pressure moments are not the time to practice
+      new approaches — that you should only try new tools when the stakes are low.
+    why_this_chapter_exists: >
+      The reader needs to meet their actual conditions, not the ideal conditions.
+      This chapter closes the gap between "understanding" and "using."
+    what_comes_next: >
+      Practice under pressure reveals something that deserves to be named directly:
+      what thinking can do and what it genuinely cannot do.
+
+  chapter_11:
+    number: 11
+    role: reframe
+    working_title: "What Thinking Is Actually For"
+    thesis: >
+      Thinking is powerful and useful — in the domains where it is powerful and
+      useful. It cannot resolve uncertainty about the future, repair relational
+      wounds in the mind, or produce safety. The analytical mind, redirected to
+      what it can actually do, is a genuine asset.
+    emotional_job: >
+      Give the reader back their intelligence — not as something that was wrong
+      or broken, but as something that was misdirected. The reader should feel
+      something like pride in their capacity to think, alongside clarity about
+      where that capacity works and where it doesn't.
+    practical_job: >
+      Map, specifically, what thinking is good for and what it is not good for.
+      Show where the analytical mind excels: structured problems with bounded
+      uncertainty, creative work, preparation that ends at a natural stop point.
+      Show where it fails: open-ended uncertainty, relational interpretation,
+      self-reassurance. This is not a limit — it is a specification.
+    what_changes: >
+      Before: "I don't trust my own thinking anymore."
+      After: "I know what my thinking is for. And I know what to do when it runs past its domain."
+    required_sections: [DOMAIN_MAP, ASSET_RECOVERY, INTEGRATION_SKETCH]
+    forbidden_moves:
+      - Framing this as "thinking less"
+      - Suggesting the reader should suppress or manage their intelligence
+      - Using the word "balance" as though there's a simple equilibrium to reach
+      - Making this feel like a limitation chapter when it is actually a liberation chapter
+    recommended_enrichments:
+      - A map of "thinking domains" with clear examples
+      - A description of what it feels like to use thinking in its correct domain
+      - The moment when a spiral is recognized and redirected, not suppressed
+    claim_someone_could_argue: >
+      Some would argue that uncertainty resolution is exactly what analytical
+      thinking is for — that the goal of careful thinking is to reduce the space
+      of what's unknown.
+    why_this_chapter_exists: >
+      Without this chapter, the book ends with a deficit model: the reader knows
+      what thinking can't do, but not what it can. This is the recovery of the
+      intelligence that was always the reader's strength.
+    what_comes_next: >
+      The reader now knows what they're working with. The final chapter names
+      who they are when they work with it.
+
+  chapter_12:
+    number: 12
+    role: integration
+    working_title: "The Watchful Mind as Home"
+    thesis: >
+      The reader who has moved through this book is not someone who overthinks less —
+      they are someone who has a different relationship with how they think. The spiral
+      will come back. The difference is that it no longer runs the whole operation.
+    emotional_job: >
+      Give the reader a resting place — not a destination of completion, but a
+      genuine sense of having arrived at something new. The ending should feel earned,
+      not uplifting. The reader should feel more at home in their own mind than when
+      they started.
+    practical_job: >
+      Integrate the book's full architecture: what the reader now knows, what they
+      can do, and who they are in relation to their own thinking. Name the specific
+      identity of someone who lives with a watchful mind — not fighting it, not
+      being controlled by it, but knowing how to be in it.
+    what_changes: >
+      Before: "My mind is exhausting. I can't control it."
+      After: "My mind is watchful. I know how to be with it. That's enough."
+    required_sections: [INTEGRATION_SCENE, IDENTITY_ARRIVAL, CLOSING_FRAME]
+    forbidden_moves:
+      - Promising the spiral won't return
+      - Using the word "overcome" or "conquer"
+      - Making the ending feel like a graduation or a cure
+      - Suggesting the reader should be grateful for having gone through this
+    recommended_enrichments:
+      - A scene of the reader noticing a spiral starting and relating to it differently
+      - The specific quality of being in a watchful mind that knows what it is
+      - What the reader carries forward — named concretely, not abstractly
+    claim_someone_could_argue: >
+      Some would argue that integration is never really complete — that calling
+      anything an ending is premature and sets the reader up for disappointment.
+    why_this_chapter_exists: >
+      The reader began in exhaustion and confusion. They deserve an ending that
+      is honest about imperfection but genuinely different from where they started.
+      This chapter closes the arc.
+    what_comes_next: >
+      There is no next. This is the close.
+
+sequencing_rules:
+  must_come_before:
+    - somatic_legitimacy must precede practical_interruption (body before intervention)
+    - mechanism must precede hidden_belief (structure before belief)
+    - destabilization must precede cost_exposure (the impossibility before the cost)
+    - watcher must precede practical_interruption (observing before interrupting)
+    - identity_fracture must precede integration (self-concept shift before arrival)
+  cannot_come_too_early:
+    - practical_interruption cannot appear before chapter 7
+    - identity_fracture cannot appear before chapter 8
+    - reframe cannot appear before mechanism is established (chapter 3)
+  saved_for_late_book:
+    - integration must be the final chapter
+    - practice_under_pressure must come after practical_interruption
+    - identity_fracture must come after cost_exposure
+
+tone_and_pacing:
+  intensity_profile: [medium, medium, high, high, high, high, medium, medium, medium, high, medium, low]
+  trust_curve: >
+    The reader begins suspicious — they've been given advice before that didn't work.
+    Trust is earned slowly through precision: naming their experience accurately
+    in chapters 1-3 before offering anything. Chapters 4-6 spend the earned trust
+    on difficult truths (the belief, the impossibility, the cost). Chapters 7-9
+    rebuild with tools and identity. Chapters 10-12 work from established trust.
+  action_timing: >
+    No action instructions before chapter 8. The reader must understand the
+    mechanism completely before any tool is introduced. Premature tools will be
+    experienced as dismissive.
+  mechanism_timing: >
+    Mechanism is introduced in chapter 3 and reinforced throughout. It is the
+    spine of the book. Every subsequent chapter refers back to it.
+  permission_timing: >
+    Permission to be a watchful person — someone who thinks a lot and that's okay —
+    must not come before chapter 9. Too early, and it feels like enabling. At
+    chapter 9, having named the cost and the pattern, it lands as genuine liberation.
+
+prohibited_terms:
+  global: [journey, transform, heal, self-care, wellness, mindfulness, empower,
+           empowering, overcome, conquer, battle, fight, warrior, survivor, thrive,
+           manifest, authentic self, best self, inner child, trigger warning,
+           safe space, toxic, self-love, you've got this, be gentle with yourself]
+  family_specific: [stop overthinking, just stop, habit, bad habit, distract yourself,
+                    redirect your thoughts, think positive, reframe your thoughts,
+                    just breathe, count to ten, just accept uncertainty, let go]

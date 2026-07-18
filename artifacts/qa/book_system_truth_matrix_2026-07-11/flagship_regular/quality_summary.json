@@ -1,0 +1,155 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "",
+  "runtime_format": "extended_book_2h",
+  "book_plan_id": "ref_anxiety_genz_6h_v1",
+  "quality_profile": "production",
+  "gates_run": true,
+  "gates_hard": true,
+  "gates": {
+    "chapter_flow": {
+      "status": "PASS",
+      "report": "chapter_flow_report.json"
+    },
+    "register_gate": {
+      "status": "PASS",
+      "verdict": "ADVISORY",
+      "failure_counts_by_id": {
+        "F6": 1,
+        "F13": 1
+      },
+      "report": "register_gate_report.json"
+    },
+    "bestseller_craft": {
+      "status": "PASS",
+      "overall_score": 0.6376
+    },
+    "ei_v2": {
+      "status": "PASS",
+      "composite": 0.7237,
+      "report": "ei_v2_report.json"
+    },
+    "editorial": {
+      "status": "WARN",
+      "report": "editorial_report.json"
+    },
+    "memorable_lines": {
+      "status": "WARN",
+      "chapters_with_two_or_more_quotable_lines": 10,
+      "chapter_count": 12,
+      "report": "memorable_line_report.json"
+    },
+    "transformation_arc": {
+      "status": "WARN",
+      "report": "transformation_heatmap.json"
+    },
+    "book_pass": {
+      "status": "PASS",
+      "report": "book_pass_report.json"
+    }
+  },
+  "quality_gate_failures": [],
+  "overall_status": "WARN",
+  "book_quality_gate": {
+    "release_band": "Pass",
+    "report_path": "artifacts/qa/book_system_truth_matrix_2026-07-11/flagship_regular/book_quality_report.json",
+    "fail_reasons": [],
+    "hold_reasons": []
+  },
+  "pre_depth_total_words": 20960,
+  "post_depth_total_words": 20960,
+  "frame": "somatic_first",
+  "governance_report": {
+    "exercise_slots_dropped": [],
+    "exercise_slot_contract_violations": [
+      {
+        "chapter": 1,
+        "chapter_index": 0,
+        "exercise_count": 1,
+        "effective_max": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      }
+    ],
+    "chapter_contract_warnings": [],
+    "frame_governance_chapters": [],
+    "frame_softened_sentences": [],
+    "frame_stripped_sentences": [],
+    "frame_hard_fail_reasons": [],
+    "accent_render_audit": [
+      {
+        "chapter": 3,
+        "class": "CITED_EVIDENCE",
+        "accent_id": "anx_emotion_differentiation_kashdan_2010",
+        "position": "after_HOOK",
+        "provenance": null,
+        "rendered_excerpt": "A documented finding worth naming before we go further. People who can name specific emotions \u2014 distinguishing anxious from ashamed, irritated from afraid \u2014 tend to cope more flexibly than people who experience everythin",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 3,
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_storycorps_911_v01",
+        "position": "after_HOOK",
+        "provenance": null,
+        "rendered_excerpt": "This is not fiction from this book's cast \u2014 it is a cited story from elsewhere. StoryCorps recorded hundreds of conversations about September 11, 2001 \u2014 spouses describing last phone calls, children asking why a parent d",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 3,
+        "class": "AUTHOR_COMMENTARY",
+        "accent_id": "ac_ravi_anxiety_admission_body_lead_v01",
+        "position": "after_REFLECTION",
+        "provenance": null,
+        "rendered_excerpt": "This one took me the longest to believe \u2014 that the body could lead and the explanation could arrive second. I had built a career on being the person who had the answer before the question finished loading. Letting the ch",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 3,
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v12",
+        "position": "after_turning_point",
+        "provenance": null,
+        "rendered_excerpt": "You are allowed to do the work without loving the work. Not everything needs to be a passion. ---  Let that land before the next story beat.",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 3,
+        "class": "WISDOM_ESSENCE",
+        "accent_id": "we_anx_standing_down_permission_v01",
+        "position": "before_THREAD",
+        "provenance": null,
+        "rendered_excerpt": "The body often stays at post because no one ever gave it permission to stand down. Shoulders up. Breath guarded. Jaw set. The system learned that unclenching equals exposure, that rest equals danger, that competence requ",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 8,
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_ted_mcgonigal_stress_v01",
+        "position": "after_REFLECTION",
+        "provenance": null,
+        "rendered_excerpt": "This is not fiction from this book's cast \u2014 it is a cited story from elsewhere. Health psychologist Kelly McGonigal, in her widely cited TED talk 'How to Make Stress Your Friend,' revisits research on stress beliefs: peo",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 8,
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v18",
+        "position": "after_turning_point",
+        "provenance": null,
+        "rendered_excerpt": "You are allowed to need therapy without a crisis. Prevention is not dramatic. ---  Let that land before the next story beat.",
+        "present_in_manuscript": true
+      }
+    ],
+    "twelve_shape_delivery_mode": "minimal"
+  },
+  "exercise_slots_dropped": [],
+  "chapter_contract_warnings": [],
+  "frame_governance_chapters": [],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": []
+}

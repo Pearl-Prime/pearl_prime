@@ -1,0 +1,34 @@
+# China digital content tax / withholding notes (research reference only).
+# Authority: docs/RESEARCH_INTEGRATION_DEV_SPEC.md §2 PR-RI-006.
+# Not tax or legal advice; verify with qualified professionals and current law.
+schema_version: 1
+document_type: cn_digital_tax_withholding_reference
+
+vat_on_digital_content_percent_range:
+  low: 6
+  high: 13
+  depends_on: "product type"
+  _source:
+    file: artifacts/research/web_search_gap_fill_2026_03_23.md
+    section: "## China (zh-CN) Market — Additional Data / ### Tax Rates"
+    note: "VAT on digital content: 6%-13% depending on product type."
+    extracted_at: "2026-03-31"
+
+withholding_and_progressive_rates:
+  labor_remuneration_standard_deduction_percent: 20
+  monthly_personal_exemption_rmb: 5000
+  progressive_tax_rates_note: "3%-45%"
+  _source:
+    file: artifacts/research/web_search_gap_fill_2026_03_23.md
+    section: "## China (zh-CN) Market — Additional Data / ### Tax Rates"
+    note: "Bullets on labor remuneration deduction, personal exemption, progressive rates."
+    extracted_at: "2026-03-31"
+
+digital_platform_tax_reporting:
+  effective_month: "June 2025"
+  summary: "New digital platform tax reporting requirements effective June 2025"
+  _source:
+    file: artifacts/research/web_search_gap_fill_2026_03_23.md
+    section: "## China (zh-CN) Market — Additional Data / ### Tax Rates"
+    note: "Final bullet in Tax Rates subsection."
+    extracted_at: "2026-03-31"

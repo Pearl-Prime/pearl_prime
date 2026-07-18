@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__self_worth__shame__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__self_worth__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__worth_limits__1hr
+  name: Worth & Limits — for Working Parents (One-Hour)
+installment_number: 2
+engine: shame
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Voice That Says Not Enough: When You Feel Fundamentally Wrong (3)'
+subtitle: The Shame Response — Self-Worth for Working Parents (The Hidden Weight of
+  Shame)
+cover_tagline: The voice that says 'not enough' isn't telling you the truth. It's
+  just old, and loud.
+description:
+  short_blurb: There's a voice that says you're failing as a parent, falling short
+    at work, fundamentally not enough, and you've spent years believing it. This is
+    the hour where you turn toward that voice instead of obeying or arguing with it,
+    and find the worth it's been hiding from you.
+  long_description: 'You closed the bedroom door after a hard bedtime, leaned against
+    the wall, and the voice started: you''re not patient enough, not present enough,
+    not doing enough, you''re failing the one job that matters. You know that voice.
+    You''ve believed it for years. That''s exactly who this hour is for.
+
+
+    This is for the working parent who carries a buried conviction that they are,
+    at the core, not enough. The one who hears ''bad mom,'' ''bad dad,'' ''fraud at
+    work and fraud at home'' in their own head and takes it as a report on reality.
+    You''re not lazy and you''re not failing. You''re living with shame, the quiet
+    belief that something is wrong with you, and it has been narrating your life in
+    your own voice.
+
+
+    First, you''ll recognize it for what it is: that voice is not the truth and it''s
+    not you. It''s shame, old and practiced, the belief you absorbed somewhere long
+    ago that your worth has to be earned and you''re always running a deficit. It
+    feels like insight. It''s just an old wound that learned to talk.
+
+
+    Then you go down into it, because you cannot think your way out of shame and you''ve
+    already tried. Not arguing with the voice, not drowning it in affirmations, but
+    turning toward it and feeling where it actually lives, how young it is, how long
+    you''ve let it have the last word on who you are. This is the descent, and it''s
+    tender, and it''s the way through.
+
+
+    And you come back changed, with your worth and the voice pulled apart. The hard
+    bedtime does not mean you''re failing. The dropped ball at work does not mean
+    you''re a fraud. Your worth as a parent and a person is not a verdict to be reached
+    at the end of each day, it was never up for the voice to decide, the shame just
+    convinced you it was.
+
+
+    This hour will not make the voice disappear or replace it with a cheerful one.
+    It won''t fix you, because nothing about you needs fixing. It won''t optimize
+    your confidence or hand you a script to repeat until you believe it. What it will
+    do is loosen shame''s grip on your sense of worth, so ''not enough'' stops landing
+    as fact.
+
+
+    The voice that says you''re not enough is old, and it''s loud, and it is wrong
+    about you. You are allowed to stop taking it as the truth.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  secondary:
+  - working parents
+  - self-worth for working parents
+  - one hour
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: hannah_stern
+comp_titles:
+- I Thought It Was Just Me (Brené Brown) — secular, foundational work on shame and
+  not-enoughness
+- The Gifts of Imperfection (Brené Brown) — worthiness that isn't earned by performance
+- Real Self-Care (Pooja Lakshmin) — written for depleted parents reclaiming worth
+  from guilt
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

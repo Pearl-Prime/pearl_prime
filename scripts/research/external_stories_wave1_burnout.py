@@ -1,0 +1,407 @@
+"""Burnout topic — Wave 1 external stories corpus."""
+BURNOUT_STORIES = [
+    {
+        "story_id": "ext_burn_mythic_sisyphus_v01",
+        "type": "mythic",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Sisyphus, punished by the gods, must push a boulder uphill forever — only to watch "
+            "it roll back each time he nears the summit. Albert Camus later read the myth as absurd "
+            "heroism: one must imagine Sisyphus happy. But the image before philosophy is simpler: "
+            "exhaustion with no finish line.\n\n"
+            "Burnout is not always dramatic collapse. Sometimes it is Sisyphean competence — "
+            "emails cleared, boulder returned, inbox refilled. The body learns that effort no "
+            "longer purchases rest. The cautionary note is not laziness. It is a system that "
+            "confuses motion with meaning until the pushers cannot remember why the hill matters."
+        ),
+        "source": "Greek myth — Sisyphus",
+        "citation": "Homer, Odyssey XI.593–600; Camus, A. The Myth of Sisyphus (1942).",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_sports_naomi_osaka_v01",
+        "type": "sports",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "Naomi Osaka withdrew from the 2021 French Open after conflicts over mandatory press "
+            "obligations, citing mental health and long-running burnout from the tour's demands. "
+            "She was fined; she paused anyway. In subsequent essays she described depression and "
+            "the pressure of being a global face before she felt like a finished person.\n\n"
+            "Athletic burnout is often misread as softness. Osaka's public pause named the trade: "
+            "visibility buys sponsorship but spends nervous-system currency. Her breakthrough was "
+            "not a trophy — it was refusing to keep performing wellness for cameras while running "
+            "on empty behind them."
+        ),
+        "source": "Naomi Osaka — 2021 French Open withdrawal",
+        "citation": "Osaka, N. Time essay June 2021; Roland-Garros statements May 2021; WTA press archives.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_business_amazon_warehouse_v01",
+        "type": "business",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Investigative reporting on Amazon fulfillment centers documented scan rates, timed "
+            "bathroom breaks, injury rates, and turnover so high that bodies are treated as "
+            "interchangeable throughput. Workers described bone-deep fatigue — not one bad week "
+            "but seasons of speed-up without recovery.\n\n"
+            "Burnout at scale is policy, not personality. When metrics reward only output, the "
+            "warehouse teaches what white-collar jobs echo quietly: you are a slot in a machine "
+            "that does not sleep. Naming institutional burnout is the first refusal of shame "
+            "that pretends the problem is an individual's poor boundaries."
+        ),
+        "source": "Amazon warehouse working conditions — investigative reporting",
+        "citation": "Reveal/Center for Investigative Reporting Amazon warehouse series; OSHA injury data; Congressional testimony 2021.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_film_whiplash_v01",
+        "type": "film",
+        "emotional_shape": "contrast",
+        "story": (
+            "In Damien Chazelle's Whiplash, jazz drummer Andrew Neiman accepts abuse from conductor "
+            "Terence Fletcher in exchange for greatness — bleeding fingers, isolation, panic attacks "
+            "reframed as dedication. The film asks whether art requires destruction of the self, "
+            "and leaves the viewer queasy at the applause in the final frame.\n\n"
+            "Burnout culture often wears Fletcher's face: no sleep, no mercy, brilliance as "
+            "excuse. Whiplash is nominative mirror, not prescription — a contrast story for "
+            "anyone who confuses depletion with seriousness and calls the wreckage 'passion.'"
+        ),
+        "source": "Whiplash (2014), Bold Films",
+        "citation": "Chazelle, D. (dir.) Whiplash. Bold Films/Sony Pictures Classics, 2014.",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_historical_florence_nightingale_v01",
+        "type": "historical",
+        "emotional_shape": "underdog",
+        "story": (
+            "Florence Nightingale revolutionized nursing in the Crimean War — and collapsed afterward "
+            "with what historians now read as chronic illness and probable burnout, bedridden for "
+            "years while still writing reforms from a sickroom. She did not retire from purpose; "
+            "her body retired from the front.\n\n"
+            "The underdog lesson is double: care work can save thousands while extracting the "
+            "caregiver. Nightingale's later decades prove that burnout does not always look like "
+            "quitting. Sometimes it looks like genius reduced to a desk and a ceiling, still "
+            "fighting systems from a body that cannot stand."
+        ),
+        "source": "Florence Nightingale — post-Crimea illness and work",
+        "citation": "Bostridge, M. Florence Nightingale (2008); Nightingale's collected writings; British Library archives.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_moth_teacher_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "tearjerker",
+        "story": (
+            "Moth storytellers who teach in under-resourced schools often describe a particular "
+            "fatigue: crying in the parking lot after car line, grading until midnight, loving "
+            "students while resenting the job that owns their Sundays. One common line — 'I used "
+            "to think I was bad at self-care; now I think the system is bad at letting me care.'\n\n"
+            "Teacher burnout is emotional labor without replenishment. The tearjerker is not "
+            "dramatic failure in the classroom. It is a dedicated adult running on fumes while "
+            "still remembering every child's name. Recognition is not permission to quit tomorrow — "
+            "it is refusal to call depletion moral weakness."
+        ),
+        "source": "The Moth — teacher burnout stories",
+        "citation": "The Moth Radio Hour education-themed episodes; teacher burnout story slams.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["en_US", "universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_fresh_air_caregiver_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "Fresh Air episodes on caregiving — parents of disabled children, adult children of "
+            "aging parents, nurses leaving the profession — share a quiet recognition: burnout "
+            "arrives as numbness, not only tears. Guests describe making lunch on autopilot while "
+            "grief and resentment sit in the same pan, unspoken at church or at work.\n\n"
+            "Caregiver burnout is often invisible because love is supposed to be infinite. "
+            "Hearing someone on NPR name the exhaustion without divorcing the love lets listeners "
+            "exhale. The body is not betraying devotion. It is asking for a witness."
+        ),
+        "source": "Fresh Air — caregiving and caregiver burnout episodes",
+        "citation": "NPR Fresh Air archive; caregiver burnout interview themes (2015–2024).",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_zh_cn_zhuge_liang_v01",
+        "type": "historical",
+        "emotional_shape": "tearjerker",
+        "story": (
+            "《三国演义》写诸葛亮北伐七年，'食少事烦，其能久乎'——病逝五丈原时五十四岁。"
+            "史家与演义都留下一位丞相在国力不济、君主多疑、战线漫长中硬撑的形象："
+            "才智绝顶，身体被政务与战事一寸寸耗尽。\n\n"
+            "倦怠不一定是现代病。它也可能是'明知不可为而为之'的慢性透支——"
+            "责任感把睡眠、饮食、退路全部让位给未竟之业。诸葛亮的结局提醒："
+            "再强的系统，也经不起长年无恢复的高负荷。"
+        ),
+        "source": "诸葛亮 — 北伐与五丈原病逝",
+        "citation": "陈寿《三国志·蜀志·诸葛亮传》；罗贯中《三国演义》第一百零四回",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["zh_CN", "zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_zh_tw_nurse_shortage_v01",
+        "type": "historical",
+        "emotional_shape": "cautionary",
+        "story": (
+            "台灣護理人力長年短缺，健保給付與班表壓力使護理師過勞、離職率居高不下。"
+            "疫情期間，媒體記錄下連續值班、防護裝備下的脱水與崩潰——許多護理師說"
+            "不是怕病毒，而是怕撐不完下一班。\n\n"
+            "醫療 burnout 是制度性問題：當一個人照顧十幾床病人，身體的警報不是"
+            "抗壓性差，而是數學上的不可能。台灣聽眾聽見這些故事，常在同一句裡"
+            "同時感到感激與心酸——因為被照顧者也知道，照顧者正在燃盡。"
+        ),
+        "source": "台灣護理人力短缺與過勞議題",
+        "citation": "台灣護理學會人力調查；衛生福利部護理人力統計；疫情期間護理人員報導",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_ja_jp_salaryman_v01",
+        "type": "business",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "日本のサラリーマン文化は、長時間残業、飲み会、休暇取得率の低さを"
+            "美徳のように語ってきた。メディアは『過労自殺』『うつ』『退職代行』と"
+            "並べて、同じ構造の別の出口を見せる。現場では、朝の満員電車で"
+            "目を閉じているだけの疲労が、年次評価では『意欲』に換算されない。\n\n"
+            "burnout は、やる気の欠如ではなく、やる気を前提に設計された"
+            "組織への適応限界である。日本語圏の聴衆にとって、これは個人の"
+            "性格ではなく、職場の空気の話だ。"
+        ),
+        "source": "日本のサラリーマン労働文化",
+        "citation": "厚生労働省 長時間労働の実態；労働政策研究・研修機構報告書",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["ja_JP"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_ted_brown_play_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "Researcher Stuart Brown, in TED and clinical work on play, argues that chronic "
+            "deprivation of play correlates with rigidity, depression, and burnout — not because "
+            "play is frivolous but because it is how mammals reset threat detection. Adults who "
+            "schedule only productivity lose the neurology of relief.\n\n"
+            "Burnout recovery narratives often start with permission: doodling, pickup games, "
+            "useless hobbies. Brown's contrast is scientific and gentle — the opposite of hustle "
+            "culture is not laziness. It is restoring a behavior evolution wired for survival, "
+            "not for quarterly metrics."
+        ),
+        "source": "Stuart Brown — play deprivation and burnout research",
+        "citation": "Brown, S. TED Talk 'Play is more than fun'; Brown & Vaughan, Play (2009).",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_business_medical_residents_v01",
+        "type": "business",
+        "emotional_shape": "cautionary",
+        "story": (
+            "U.S. medical residency programs have long required eighty-hour weeks and overnight "
+            "shifts — a training model defended as tradition and attacked as dangerous. Studies "
+            "link resident burnout to medical errors, depression, and attrition from medicine "
+            "entirely. Libby Zion's death in 1984 helped spark reform debates that continue "
+            "decades later.\n\n"
+            "Institutional burnout dresses in white coats. The cautionary arc is not 'doctors "
+            "are weak.' It is that a culture requiring self-destruction to enter a healing "
+            "profession exports exhaustion into every patient encounter. The body keeps the "
+            "score of the schedule."
+        ),
+        "source": "Medical resident duty hours and burnout",
+        "citation": "Accreditation Council for Graduate Medical Education duty-hour standards; Shanafelt et al. physician burnout studies; Libby Zion case history.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["en_US", "universal"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_storycorps_nurse_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "tearjerker",
+        "story": (
+            "StoryCorps booths have captured nurses telling grandchildren why they stayed through "
+            "COVID — and why some finally left. A recurring detail: the smell of antiseptic on "
+            "days off, hands cracked from washing, the moral injury of triaging who gets a bed. "
+            "Love for patients and hatred of the conditions share one shift.\n\n"
+            "Pandemic burnout did not invent the problem; it magnified it. These recordings are "
+            "primary-source proof that exhaustion can coexist with heroism without canceling either. "
+            "The tearjerker is hearing someone say 'I am proud and I am done' in the same breath — "
+            "and knowing both can be true without canceling the years of care."
+        ),
+        "source": "StoryCorps — nursing and pandemic caregiver stories",
+        "citation": "StoryCorps COVID-19 archive; National Nurses United testimony themes.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_film_journalism_spotlight_v01",
+        "type": "film",
+        "emotional_shape": "underdog",
+        "story": (
+            "Spotlight follows Boston Globe reporters uncovering clergy abuse — months of dead ends, "
+            "lawyers circling, editors weighing lawsuits against truth. The burnout is moral and "
+            "procedural: witnesses who hang up, folders that multiply, the temptation to let "
+            "someone else carry the next call.\n\n"
+            "Mission-driven work burns differently. The underdog is not the article — it is the "
+            "reporter's sleep debt and the marriage strained by secrecy. Spotlight reminds that "
+            "justice stories cost the nervous systems of the people who stay on the phone after "
+            "five o'clock."
+        ),
+        "source": "Spotlight (2015), Open Road Films",
+        "citation": "McCarthy, T. (dir.) Spotlight. Open Road Films, 2015; Boston Globe investigative series 2002.",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["en_US", "universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "Institutional abuse theme; nominative reference only.",
+    },
+    {
+        "story_id": "ext_burn_pop_culture_hustle_v01",
+        "type": "pop_culture",
+        "emotional_shape": "contrast",
+        "story": (
+            "Silicon Valley 'hustle culture' — sleep-when-you're-dead slogans, founder worship, "
+            "996 memes imported from tech overseas — became a pop-culture aesthetic before backlash "
+            "documented heart attacks in thirty-year-olds and 'quiet quitting' as counter-label. "
+            "The contrast is stark: the same Instagram quotes that glorified grind now sit beside "
+            "burnout memoirs topping bestseller lists.\n\n"
+            "Cultural burnout is collective narrative whiplash. One decade's virtue ('outwork "
+            "everyone') becomes the next decade's diagnosis. Naming the turn does not erase "
+            "debt from the hustle years — but it can stop the shame of a body that finally "
+            "said no, and let rest count as data instead of defeat."
+        ),
+        "source": "Hustle culture — tech and social media discourse",
+        "citation": "Odell, J. How to Do Nothing (2019); reporting on 996.ICU movement; burnout memoir trend analyses 2021–2023.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_burn_sports_andre_agassi_v01",
+        "type": "sports",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "In his autobiography Open, Andre Agassi writes that he hated tennis — a confession "
+            "shocking from an eight-time Grand Slam champion. He describes childhood forced by "
+            "his father, methamphetamine use in 1997, and years performing excellence while "
+            "emotionally vacant. Recovery involved leaving the tour, rebuilding identity, and "
+            "returning on his own terms.\n\n"
+            "Elite burnout is not always overtraining. Sometimes it is performing a life you "
+            "never chose. Agassi's breakthrough was honesty that threatened his brand and saved "
+            "his personhood — proof that the scoreboard can read 'win' while the inner ledger "
+            "reads empty, and that naming the emptiness can be the first real victory."
+        ),
+        "source": "Andre Agassi — Open autobiography",
+        "citation": "Agassi, A. with Moehringer, J.R. Open (2009); ATP career record.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "Substance use referenced; public autobiography facts only.",
+    },
+    {
+        "story_id": "ext_burn_historical_marie_curie_v01",
+        "type": "historical",
+        "emotional_shape": "underdog",
+        "story": (
+            "Marie Curie worked in a poorly ventilated shed isolating radium — years of radiation "
+            "exposure she did not yet understand, combined with grief after Pierre's death and "
+            "public scandal. She continued teaching, fundraising for institutes, and running a "
+            "mobile X-ray unit during World War I while her health deteriorated.\n\n"
+            "Burnout meets sacrifice without romance here. Curie's drive advanced science and "
+            "cost her body — a underdog story not of laziness versus grit, but of a mind that "
+            "could not stop while the tissue slowly failed. The lesson is limits, not lesser "
+            "devotion: even pioneers need shields the era did not provide."
+        ),
+        "source": "Marie Curie — laboratory work and wartime service",
+        "citation": "Quinn, S. Marie Curie (1995); Curie Nobel lectures; French National Archives.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["burnout"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+]

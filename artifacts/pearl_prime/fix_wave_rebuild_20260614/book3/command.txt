@@ -1,0 +1,26 @@
+# Canonical spine build — VERIFY-1 book#3 (gen_z_professionals × financial_anxiety)
+# Run with system python3 3.9.6 (== Xcode python3 the pilot used), PYTHONPATH=repo root.
+PYTHONPATH=/Users/ahjan/phoenix_omega python3 /Users/ahjan/phoenix_omega/scripts/run_pipeline.py \
+  --topic financial_anxiety --persona gen_z_professionals \
+  --arc /Users/ahjan/phoenix_omega/config/source_of_truth/master_arcs/gen_z_professionals__financial_anxiety__spiral__F006.yaml \
+  --pipeline-mode spine --runtime-format standard_book \
+  --chapter-architecture-version 2 --teacher ahjan --seed pilot_v1 \
+  --quality-profile production --render-book \
+  --render-dir /Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/book3 \
+  --out /Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/book3/plan.json \
+  --locale en-US --atoms-root /Users/ahjan/phoenix_omega/atoms --atoms-model legacy \
+  --exercise-journeys --enforce-scene-gate --no-job-check --no-generate-freebies
+
+# PREREQUISITE REPAIR (applied before the build; see repair_spiral_story.py):
+# atoms/gen_z_professionals/financial_anxiety/spiral/CANONICAL.txt had 10 empty
+# stub blocks (no path: line) introduced by the lane fix -> whole-file
+# validation failed -> tuple-viability NO_STORY_POOL hard-abort BEFORE Stage 1.
+# Removed the 10 empty stubs (corruption removal, no content authored); file
+# then validated clean (33 STORY atoms, all 5 bands) and the build proceeded.
+
+# REGISTER GATE (origin/main 1269-line version; branch version is gutted to 904 lines):
+git show origin/main:phoenix_v4/quality/register_gate.py > /tmp/register_gate_main.py
+PYTHONPATH=/Users/ahjan/phoenix_omega python3 /tmp/register_gate_main.py \
+  --book   /Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/book3/book.txt \
+  --teacher ahjan --persona gen_z_professionals --topic financial_anxiety \
+  --output /Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/book3/register_gate_report.json

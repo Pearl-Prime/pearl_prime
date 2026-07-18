@@ -1,0 +1,111 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__somatic_healing__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__somatic_healing.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__through_loss
+  name: Through the Low Places — for Students
+installment_number: 2
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Somatic Healing: Watching Your Thoughts Without Drowning'
+subtitle: A Field Guide for Gen Alpha Students Navigating Somatic Healing
+cover_tagline: Your body's been on high alert so long you forgot it could stand down.
+  This is how it learns to.
+description:
+  short_blurb: For the student whose body never fully relaxes — shoulders up, stomach
+    tight, senses scanning, even when nothing's wrong. This is a real-talk guide to
+    the hypervigilant body that's been braced for so long it feels normal. No breathing-app
+    fixes — just the truth about why your body won't stand down, and how it slowly
+    learns it's allowed to.
+  long_description: 'Notice your shoulders right now. There''s a decent chance they''re
+    up near your ears and you didn''t even know it. For you, braced is the default
+    — tight stomach, shallow breath, eyes and ears half-scanning the room — and you''ve
+    been like this so long you forgot a body could feel any other way.
+
+
+    This book is for the student living in a hypervigilant body. Vigilance isn''t
+    only in your thoughts; it lives in your muscles, your gut, your breath. When your
+    body has spent months or years on alert — through stress, through things that
+    weren''t safe, through a world that kept demanding you be ''on'' — it stops standing
+    down even when the threat is gone. You''re not anxious for no reason. Your body
+    is doing exactly what it learned to do, just long after it needed to.
+
+
+    First, you''ll learn to feel the armor — the constant low hum of tension, the
+    way your eyes sweep a room before you''ve decided to look, the deep unclench that
+    always seems one step out of reach. Most advice lectures your mind and completely
+    overlooks the body that''s been wearing a flak jacket under everything this whole
+    time. Here, you start by locating exactly where the plating sits.
+
+
+    Then, rather than going to battle with the alertness, this book lets you settle
+    down into it. You''ll find out what shifts when you stop ordering your body to
+    relax on command and let the armored body stay armored — met with curiosity instead
+    of irritation. Bit by bit, in small unremarkable moments, your system begins to
+    register that the gear can come off. Not because you wrestled it loose. Because
+    it finally received the one message it actually responds to: that right here,
+    right now, there''s enough safety to set the weight down.
+
+
+    And then something is different — not a body that never tightens, but a you that
+    can feel the plates lock into place and feel them release again.
+
+
+    A few promises this book won''t make. There is no instant calm in here. No magic
+    breathing count dressed up as a cure, no ''just relax,'' no morning routine, no
+    good-vibes veneer. It won''t pretend a body that''s been braced for years lets
+    go over a single afternoon. And if the alertness is bolted to something that genuinely
+    hurt you, or it''s wrecking your sleep or your ability to function, it tells you
+    straight: get a counselor or a doctor into this with you. What''s on offer instead
+    is a real understanding of your own keyed-up body, so it can — slowly, for real
+    — lay the armor down.
+
+
+    Staying braced was never the price of being safe. Unclenching isn''t a reward
+    you have to earn first. Your body is allowed to set the weight down — one small,
+    genuine moment at a time.'
+keywords:
+  primary:
+  - somatic healing
+  - body based healing
+  - nervous system regulation
+  - trauma in the body
+  - somatic therapy
+  - felt sense
+  secondary:
+  - students
+  - somatic healing for students
+bisac_codes:
+- SEL027000
+- PSY022000
+- HEA046000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — definitive secular account of how
+  the body stays on alert and learns to settle
+- Anchored (Deb Dana) — clear, practical guide to a nervous system stuck in a guarded
+  state
+- Widen the Window (Elizabeth Stanley) — science-based approach to releasing a body
+  chronically braced for threat
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

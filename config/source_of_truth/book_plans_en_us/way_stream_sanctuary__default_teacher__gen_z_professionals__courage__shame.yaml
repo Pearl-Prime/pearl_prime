@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__courage__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__courage.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__brave_world
+  name: Brave in the World — for Young Professionals
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Thing You Won''t Say: The Hidden Weight of Shame'
+subtitle: A Field Guide for Gen Z Professionals Navigating Courage
+cover_tagline: It's not that you can't say it. It's that some part of you believes
+  you're not allowed to take up the room.
+description:
+  short_blurb: 'The thing you won''t say stays unsaid because of a quieter belief
+    underneath it: that wanting more, asking for more, or being seen would expose
+    something wrong with you. This is a secular look at the shame response — the buried
+    conviction that you''re fundamentally too much or not enough — and how it runs
+    your career from backstage. It won''t fix you, because you were never broken.'
+  long_description: 'You rehearsed the ask for a week. Then you sat in the one-on-one
+    and heard yourself say ''no worries, whenever''s fine.'' Again. The raise, the
+    title, the seat on the project — the thing you won''t say isn''t blocked by fear
+    of a bad outcome. It''s blocked by something older: a sense that you, specifically,
+    don''t get to want that out loud.
+
+
+    This is for you, early in your working life, watching coworkers ask for things
+    like it costs them nothing. You assume they''re just more confident. What''s actually
+    running you is shame — not the loud, blushing kind, but the quiet structural belief
+    that being fully seen would reveal you as a fraud, too much, not enough, found
+    out. So you shrink the ask. You over-apologize in the email. You make yourself
+    small enough to be safe and call it being easy to work with.
+
+
+    Shame is the most invisible of the engines because it doesn''t feel like an emotion.
+    It feels like a fact about you. Recognition is learning to catch the move — the
+    flinch, the deflection, the ''it''s fine'' — and trace it back to the belief instead
+    of treating the belief as true. Descent is the hard part and the whole point:
+    going down into the shame instead of performing your way out of it, sitting with
+    the part of you that decided long ago you had to earn the right to take up space.
+    Nobody is born believing they have to qualify for it; that idea got installed
+    somewhere, by someone, long before this job — and you''ve been paying interest
+    on it in every meeting since. You don''t dismantle it by arguing. You go underneath
+    it, feel the whole weight of it, and stop fleeing — not to wallow, but to discover
+    it''s just an old sentence and not the size of your life. And integration is what''s
+    left when you''ve felt it all the way through: a steadier sense that your worth
+    was never actually on the table in that meeting, and never up for the group to
+    vote on.
+
+
+    Written in language you can reach for the next time you feel yourself disappearing
+    in a room, this is direct and unsentimental. Ravi Chandra doesn''t tell you you''re
+    enough. He shows you how to stop auditioning for it.
+
+
+    This book will not hand you self-esteem like a certificate. It won''t reframe
+    you into someone shinier or give you affirmations to recite. There is nothing
+    here to fix, because the belief that you need fixing is the thing we''re walking
+    into. The shame may not vanish. But it can stop being the floor you stand on.
+
+
+    You were allowed to want it the whole time. Even out loud.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  - brave
+  secondary:
+  - young professionals
+  - courage for young professionals
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ravi_chandra
+comp_titles:
+- I Thought It Was Just Me (But It Isn't) (Brené Brown) — names shame as the silent
+  engine, separates it from guilt
+- The Gifts of Imperfection (Brené Brown) — worth isn't earned by performance
+- How to Be Yourself (Ellen Hendriksen) — dismantles the inner critic that says you're
+  being watched and found wanting
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

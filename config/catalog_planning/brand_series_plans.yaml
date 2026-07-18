@@ -1,0 +1,588 @@
+# Per-brand × per-lane series/episode plans for manga and illustrated content.
+# Lane intensity: HEAVY (3 series teacher / 2 series standard), MEDIUM (1 series + one-offs), LIGHT (one-off art only).
+# Wired to: series_templates.yaml (angles), series_roadmap_registry.yaml (band_curves),
+#           brand_illustration_styles.yaml (art_style_ref).
+#
+# MANGA MODE:
+#   teacher — brand has a teacher character. Exactly 1 series uses teacher/student theme
+#             (teacher_student_series: true). Other series are regular.
+#   regular — brand has no teacher. All series are character-driven, no teacher figure.
+schema_version: 1
+last_updated: "2026-04-20"
+
+lane_intensity:
+  heavy: [japan, korea, france, china, taiwan]  # 3 series per brand
+  medium: [latam, brazil, indonesia]             # 1 series + one-off art
+  light: [english_global, dach, spain, italy, hungary, zh_HK, zh_SG]  # one-off illustration packages
+  # zh_HK + zh_SG: Phase 3 markets — conservative light rollout. High-margin bilingual
+  # audiences (see artifacts/research/global_manga_distribution_strategy.md §zh_HK §zh_SG).
+
+# Episode production estimates (for planning)
+panel_estimates:
+  standard_episode: 46   # panels per manga episode
+  short_episode: 28      # panels for anthology/short episodes
+
+brands:
+  stillness_press:
+    teacher: ahjan
+    manga_mode: teacher
+    art_style_ref: stillness_press
+    primary_topic: anxiety
+    secondary_topic: burnout
+    anthology_topic: somatic_healing
+    heavy_lanes:
+      series_a:
+        teacher_student_series: true
+        title: "The Alarm Within"
+        description: "Ahjan guides a student through anxiety recognition — learning to read the body's alarm system"
+        topic: anxiety
+        angle_source: anxiety
+        episode_count: 10
+        band_curve: gentle_rise
+        search_intent: problem_solving
+        primary_mechanism: nervous_system_safety
+        panel_estimate: 460
+      series_b:
+        title: "Ember and Rest"
+        topic: burnout
+        angle_source: burnout
+        episode_count: 8
+        band_curve: crisis_landing
+        search_intent: life_transition
+        primary_mechanism: overwhelm_containment
+        panel_estimate: 368
+      series_c:
+        title: "Body Letters"
+        topic: somatic_healing
+        angle_source: somatic_healing
+        episode_count: 5
+        band_curve: wave_cycle
+        search_intent: deep_dive
+        primary_mechanism: nervous_system_safety
+        panel_estimate: 140
+      series_d:
+        teacher_student_series: true
+        description: "Ahjan walks a student through the forest edge — learning where natural boundaries live"
+        title: "The Forest Edge"
+        topic: boundaries
+        angle_source: boundaries
+        episode_count: 8
+        band_curve: steady_build
+        search_intent: behavioral_change
+        primary_mechanism: overwhelm_containment
+        panel_estimate: 368
+    medium_lanes:
+      series_a:
+        title: "The Alarm Within"
+        topic: anxiety
+        episode_count: 6
+        panel_estimate: 276
+      series_b:
+        title: "The Forest Edge"
+        topic: boundaries
+        episode_count: 6
+        panel_estimate: 276
+    light_lanes:
+      package: covers_plus_key_visuals
+      cover_count: 3
+      key_visual_count: 3
+
+  cognitive_clarity:
+    teacher: kenjin
+    manga_mode: teacher
+    art_style_ref: cognitive_clarity
+    primary_topic: overthinking
+    secondary_topic: imposter_syndrome
+    anthology_topic: self_worth
+    heavy_lanes:
+      series_a:
+        teacher_student_series: true
+        description: "Kenjin guides a student through the seeing mind — learning to observe thoughts without being captured"
+        title: "The Seeing Mind"
+        topic: overthinking
+        angle_source: overthinking
+        episode_count: 10
+        band_curve: steady_build
+        search_intent: behavioral_change
+        primary_mechanism: spiral_grounding
+        panel_estimate: 460
+      series_b:
+        title: "Impostor's Mirror"
+        topic: imposter_syndrome
+        angle_source: imposter_syndrome
+        episode_count: 7
+        band_curve: two_peak
+        search_intent: identity_repair
+        primary_mechanism: shame_reduction
+        panel_estimate: 322
+      series_c:
+        title: "Worth Without Proof"
+        topic: self_worth
+        angle_source: self_worth
+        episode_count: 5
+        band_curve: gentle_rise
+        search_intent: identity_validation
+        primary_mechanism: comparison_release
+        panel_estimate: 140
+    medium_lanes:
+      series_a:
+        title: "The Seeing Mind"
+        topic: overthinking
+        episode_count: 6
+        panel_estimate: 276
+    light_lanes:
+      package: covers_plus_key_visuals
+      cover_count: 3
+      key_visual_count: 3
+
+  somatic_wisdom:
+    teacher: pamela_fellows
+    manga_mode: teacher
+    art_style_ref: somatic_wisdom
+    primary_topic: anxiety
+    secondary_topic: somatic_healing
+    anthology_topic: compassion_fatigue
+    heavy_lanes:
+      series_a:
+        teacher_student_series: true
+        description: "Pamela guides a student through the body's knowledge — learning to read somatic signals"
+        title: "The Body Knows"
+        topic: anxiety
+        angle_source: anxiety
+        episode_count: 10
+        band_curve: wave_cycle
+        search_intent: problem_solving
+        primary_mechanism: nervous_system_safety
+        panel_estimate: 460
+      series_b:
+        title: "Felt Sense"
+        topic: somatic_healing
+        angle_source: somatic_healing
+        episode_count: 7
+        band_curve: gentle_rise
+        search_intent: deep_dive
+        primary_mechanism: nervous_system_safety
+        panel_estimate: 322
+      series_c:
+        title: "Caretaker's Rest"
+        topic: compassion_fatigue
+        angle_source: compassion_fatigue
+        episode_count: 5
+        band_curve: crisis_landing
+        search_intent: crisis_management
+        primary_mechanism: overwhelm_containment
+        panel_estimate: 140
+    medium_lanes:
+      series_a:
+        title: "The Body Knows"
+        topic: anxiety
+        episode_count: 6
+        panel_estimate: 276
+    light_lanes:
+      package: covers_plus_key_visuals
+      cover_count: 3
+      key_visual_count: 3
+
+  qi_foundation:
+    teacher: master_feung
+    manga_mode: teacher
+    art_style_ref: qi_foundation
+    primary_topic: burnout
+    secondary_topic: somatic_healing
+    anthology_topic: courage
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Master Feung teaches a student root and breath — learning qi cultivation for resilience", title: "Root and Breath", topic: burnout, angle_source: burnout, episode_count: 10, band_curve: wave_cycle, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 460 }
+      series_b: { title: "Meridian Maps", topic: somatic_healing, angle_source: somatic_healing, episode_count: 7, band_curve: gentle_rise, search_intent: deep_dive, primary_mechanism: nervous_system_safety, panel_estimate: 322 }
+      series_c: { title: "Iron Silk", topic: courage, angle_source: courage, episode_count: 5, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: false_alarm_reframe, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Root and Breath", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  digital_ground:
+    teacher: miki
+    manga_mode: teacher
+    art_style_ref: digital_ground
+    primary_topic: anxiety
+    secondary_topic: sleep_anxiety
+    anthology_topic: overthinking
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Miki guides a student through the scroll stop — learning digital-age nervous system regulation", title: "Scroll Stop", topic: anxiety, angle_source: anxiety, episode_count: 10, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 460 }
+      series_b: { title: "Dark Mode", topic: sleep_anxiety, angle_source: sleep_anxiety, episode_count: 7, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: overwhelm_containment, panel_estimate: 322 }
+      series_c: { title: "Infinite Scroll", topic: overthinking, angle_source: overthinking, episode_count: 5, band_curve: two_peak, search_intent: behavioral_change, primary_mechanism: spiral_grounding, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Scroll Stop", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  heart_balance:
+    teacher: maat
+    manga_mode: teacher
+    art_style_ref: heart_balance
+    primary_topic: self_worth
+    secondary_topic: boundaries
+    anthology_topic: grief
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Maat guides a student through the scales — learning shadow work as self-worth recalibration", title: "Scales of Ma'at", topic: self_worth, angle_source: self_worth, episode_count: 10, band_curve: two_peak, search_intent: identity_repair, primary_mechanism: shame_reduction, panel_estimate: 460 }
+      series_b: { title: "The Shadow Gate", topic: boundaries, angle_source: boundaries, episode_count: 8, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: comparison_release, panel_estimate: 368 }
+      series_c: { title: "River of Duat", topic: grief, angle_source: acute_loss_arc, episode_count: 5, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: grief_integration, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Scales of Ma'at", topic: self_worth, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  relational_calm:
+    teacher: miyuki  # per OPD-111
+    manga_mode: teacher
+    art_style_ref: relational_calm
+    primary_topic: boundaries
+    secondary_topic: anxiety
+    anthology_topic: self_worth
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Miyuki guides a student through the empty cup — learning radical acceptance in relationships", title: "The Empty Cup", topic: boundaries, angle_source: boundaries, episode_count: 8, band_curve: gentle_rise, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { title: "Still Water", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_c: { title: "Enough", topic: self_worth, angle_source: self_worth, episode_count: 5, band_curve: steady_build, search_intent: identity_validation, primary_mechanism: comparison_release, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "The Empty Cup", topic: boundaries, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  warrior_calm:
+    teacher: master_wu
+    manga_mode: teacher
+    art_style_ref: warrior_calm
+    primary_topic: anxiety
+    secondary_topic: burnout
+    anthology_topic: courage
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Master Wu trains a student at the iron gate — learning martial composure under pressure", title: "Iron Gate", topic: anxiety, angle_source: anxiety, episode_count: 10, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: false_alarm_reframe, panel_estimate: 460 }
+      series_b: { title: "Ash and Steel", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: crisis_landing, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_c: { title: "First Strike", topic: courage, angle_source: courage, episode_count: 5, band_curve: two_peak, search_intent: behavioral_change, primary_mechanism: false_alarm_reframe, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Iron Gate", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  sleep_restoration:
+    teacher: master_sha
+    manga_mode: teacher
+    art_style_ref: sleep_restoration
+    primary_topic: sleep_anxiety
+    secondary_topic: anxiety
+    anthology_topic: somatic_healing
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Master Sha guides a student through night architecture — learning to build sleep from the inside", title: "Night Architecture", topic: sleep_anxiety, angle_source: sleep_anxiety, episode_count: 8, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { title: "The Quiet Hour", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_c: { title: "Body Almanac", topic: somatic_healing, angle_source: somatic_healing, episode_count: 5, band_curve: gentle_rise, search_intent: deep_dive, primary_mechanism: nervous_system_safety, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Night Architecture", topic: sleep_anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  body_memory:
+    teacher: omote
+    manga_mode: teacher
+    art_style_ref: body_memory
+    primary_topic: grief
+    secondary_topic: somatic_healing
+    anthology_topic: depression
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Omote guides a student through held ground — learning to let the body process what the mind cannot", title: "Held Ground", topic: grief, angle_source: acute_loss_arc, episode_count: 8, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: grief_integration, panel_estimate: 368 }
+      series_b: { title: "The Body Remembers", topic: somatic_healing, angle_source: somatic_healing, episode_count: 7, band_curve: gentle_rise, search_intent: deep_dive, primary_mechanism: nervous_system_safety, panel_estimate: 322 }
+      series_c: { title: "Weight of Days", topic: depression, angle_source: depression, episode_count: 5, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: grief_integration, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Held Ground", topic: grief, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  solar_return:
+    teacher: ra
+    manga_mode: teacher
+    art_style_ref: solar_return
+    primary_topic: burnout
+    secondary_topic: depression
+    anthology_topic: courage
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Ra guides a student through ember and ash — learning that burnout is initiation, not failure", title: "Ember and Ash", topic: burnout, angle_source: burnout, episode_count: 10, band_curve: two_peak, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 460 }
+      series_b: { title: "Gravity Well", topic: depression, angle_source: depression, episode_count: 8, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: grief_integration, panel_estimate: 368 }
+      series_c: { title: "After the Fire", topic: courage, angle_source: courage, episode_count: 5, band_curve: gentle_rise, search_intent: life_transition, primary_mechanism: false_alarm_reframe, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Ember and Ash", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  devotion_path:
+    teacher: sai_ma
+    manga_mode: teacher
+    art_style_ref: devotion_path
+    primary_topic: self_worth
+    secondary_topic: compassion_fatigue
+    anthology_topic: boundaries
+    heavy_lanes:
+      series_a: { teacher_student_series: true, description: "Sai Ma guides a student through the open vessel — learning devotion as self-worth practice", title: "Open Vessel", topic: self_worth, angle_source: self_worth, episode_count: 10, band_curve: gentle_rise, search_intent: identity_validation, primary_mechanism: shame_reduction, panel_estimate: 460 }
+      series_b: { title: "The Giver's Rest", topic: compassion_fatigue, angle_source: compassion_fatigue, episode_count: 7, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: overwhelm_containment, panel_estimate: 322 }
+      series_c: { title: "Sacred Limit", topic: boundaries, angle_source: boundaries, episode_count: 5, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 140 }
+    medium_lanes: { series_a: { title: "Open Vessel", topic: self_worth, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  # ─── STANDARD BRANDS (manga_mode: regular — no teacher figure, 2 series heavy) ───
+
+  stabilizer:
+    manga_mode: regular
+    art_style_ref: stabilizer
+    primary_topic: anxiety
+    secondary_topic: burnout
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Harbor Lines", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Still Water Rising", topic: burnout, angle_source: burnout, episode_count: 6, band_curve: crisis_landing, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Harbor Lines", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  optimizer:
+    manga_mode: regular
+    art_style_ref: optimizer
+    primary_topic: burnout
+    secondary_topic: overthinking
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Sharp Morning", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Loop Break", topic: overthinking, angle_source: overthinking, episode_count: 6, band_curve: two_peak, search_intent: behavioral_change, primary_mechanism: spiral_grounding, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Sharp Morning", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  night_reset:
+    manga_mode: regular
+    art_style_ref: night_reset
+    primary_topic: sleep_anxiety
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Still Hour", topic: sleep_anxiety, angle_source: sleep_anxiety, episode_count: 8, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Night Signal", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Still Hour", topic: sleep_anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  career_lift:
+    manga_mode: regular
+    art_style_ref: career_lift
+    primary_topic: imposter_syndrome
+    secondary_topic: burnout
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Next Door", topic: imposter_syndrome, angle_source: imposter_syndrome, episode_count: 8, band_curve: two_peak, search_intent: identity_repair, primary_mechanism: shame_reduction, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Career Ashes", topic: burnout, angle_source: burnout, episode_count: 6, band_curve: crisis_landing, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Next Door", topic: imposter_syndrome, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  adhd_forge:
+    manga_mode: regular
+    art_style_ref: adhd_forge
+    primary_topic: overthinking
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Livewire", topic: overthinking, angle_source: overthinking, episode_count: 8, band_curve: wave_cycle, search_intent: behavioral_change, primary_mechanism: spiral_grounding, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Spark and Ground", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Livewire", topic: overthinking, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  longevity_lab:
+    manga_mode: regular
+    art_style_ref: longevity_lab
+    primary_topic: somatic_healing
+    secondary_topic: burnout
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Long Arc", topic: somatic_healing, angle_source: somatic_healing, episode_count: 8, band_curve: steady_build, search_intent: deep_dive, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Recovery Protocol", topic: burnout, angle_source: burnout, episode_count: 6, band_curve: gentle_rise, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Long Arc", topic: somatic_healing, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  creative_unfold:
+    manga_mode: regular
+    art_style_ref: creative_unfold
+    primary_topic: self_worth
+    secondary_topic: imposter_syndrome
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Blank Canvas", topic: self_worth, angle_source: self_worth, episode_count: 8, band_curve: gentle_rise, search_intent: identity_validation, primary_mechanism: comparison_release, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Permission Slip", topic: imposter_syndrome, angle_source: imposter_syndrome, episode_count: 6, band_curve: two_peak, search_intent: identity_repair, primary_mechanism: shame_reduction, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Blank Canvas", topic: self_worth, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  resilient_parent:
+    manga_mode: regular
+    art_style_ref: resilient_parent
+    primary_topic: compassion_fatigue
+    secondary_topic: boundaries
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Stolen Moments", topic: compassion_fatigue, angle_source: compassion_fatigue, episode_count: 8, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "The Fence Line", topic: boundaries, angle_source: boundaries, episode_count: 6, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Stolen Moments", topic: compassion_fatigue, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  executive_calm:
+    manga_mode: regular
+    art_style_ref: executive_calm
+    primary_topic: anxiety
+    secondary_topic: burnout
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Granite Ridge", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "The Quiet Floor", topic: burnout, angle_source: burnout, episode_count: 6, band_curve: crisis_landing, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Granite Ridge", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  trauma_path:
+    manga_mode: regular
+    art_style_ref: trauma_path
+    primary_topic: anxiety
+    secondary_topic: depression
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Soft Ground", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: gentle_rise, search_intent: crisis_management, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Under the Weight", topic: depression, angle_source: depression, episode_count: 6, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: grief_integration, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Soft Ground", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  spiritual_ground:
+    manga_mode: regular
+    art_style_ref: spiritual_ground
+    primary_topic: self_worth
+    secondary_topic: boundaries
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Deep Well", topic: self_worth, angle_source: self_worth, episode_count: 8, band_curve: steady_build, search_intent: identity_validation, primary_mechanism: shame_reduction, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Sacred Fence", topic: boundaries, angle_source: boundaries, episode_count: 6, band_curve: gentle_rise, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Deep Well", topic: self_worth, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  focus_sprint:
+    manga_mode: regular
+    art_style_ref: focus_sprint
+    primary_topic: burnout
+    secondary_topic: overthinking
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Launchpad", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: two_peak, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Sprint Reset", topic: overthinking, angle_source: overthinking, episode_count: 6, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: spiral_grounding, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Launchpad", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  hormone_reset:
+    manga_mode: regular
+    art_style_ref: hormone_reset
+    primary_topic: anxiety
+    secondary_topic: somatic_healing
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Tide and Cycle", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Body Calendar", topic: somatic_healing, angle_source: somatic_healing, episode_count: 6, band_curve: gentle_rise, search_intent: deep_dive, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Tide and Cycle", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  stoic_edge:
+    manga_mode: regular
+    art_style_ref: stoic_edge
+    primary_topic: burnout
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Anvil", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Cold Forge", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: two_peak, search_intent: behavioral_change, primary_mechanism: false_alarm_reframe, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Anvil", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  calm_student:
+    manga_mode: regular
+    art_style_ref: calm_student
+    primary_topic: anxiety
+    secondary_topic: imposter_syndrome
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Blue Exam", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Not Your GPA", topic: imposter_syndrome, angle_source: imposter_syndrome, episode_count: 6, band_curve: two_peak, search_intent: identity_repair, primary_mechanism: shame_reduction, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Blue Exam", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  healing_ground:
+    manga_mode: regular
+    art_style_ref: healing_ground
+    primary_topic: burnout
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Midday Reset", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Desk Break", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Midday Reset", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  bio_flow:
+    manga_mode: regular
+    art_style_ref: bio_flow
+    primary_topic: somatic_healing
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Signal Path", topic: somatic_healing, angle_source: somatic_healing, episode_count: 8, band_curve: steady_build, search_intent: deep_dive, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Biofeedback", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Signal Path", topic: somatic_healing, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  confidence_core:
+    manga_mode: regular
+    art_style_ref: confidence_core
+    primary_topic: self_worth
+    secondary_topic: imposter_syndrome
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Threshold", topic: self_worth, angle_source: self_worth, episode_count: 8, band_curve: gentle_rise, search_intent: identity_validation, primary_mechanism: comparison_release, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "The Doorway", topic: imposter_syndrome, angle_source: imposter_syndrome, episode_count: 6, band_curve: two_peak, search_intent: identity_repair, primary_mechanism: shame_reduction, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Threshold", topic: self_worth, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  relationship_clarity:
+    manga_mode: regular
+    art_style_ref: relationship_clarity
+    primary_topic: boundaries
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Two Chairs", topic: boundaries, angle_source: boundaries, episode_count: 8, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "The Conversation", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: gentle_rise, search_intent: social_belonging, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Two Chairs", topic: boundaries, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  morning_momentum:
+    manga_mode: regular
+    art_style_ref: morning_momentum
+    primary_topic: burnout
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "First Light", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: two_peak, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Dawn Protocol", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "First Light", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  minimal_mind:
+    manga_mode: regular
+    art_style_ref: minimal_mind
+    primary_topic: overthinking
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Clear Water", topic: overthinking, angle_source: overthinking, episode_count: 8, band_curve: gentle_rise, search_intent: behavioral_change, primary_mechanism: spiral_grounding, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Less Noise", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Clear Water", topic: overthinking, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  high_performer:
+    manga_mode: regular
+    art_style_ref: high_performer
+    primary_topic: anxiety
+    secondary_topic: burnout
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Close Rate", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: steady_build, search_intent: behavioral_change, primary_mechanism: false_alarm_reframe, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "Top Floor", topic: burnout, angle_source: burnout, episode_count: 6, band_curve: two_peak, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Close Rate", topic: anxiety, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  gentle_growth:
+    manga_mode: regular
+    art_style_ref: gentle_growth
+    primary_topic: self_worth
+    secondary_topic: anxiety
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Tender Root", topic: self_worth, angle_source: self_worth, episode_count: 8, band_curve: gentle_rise, search_intent: identity_validation, primary_mechanism: comparison_release, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "First Leaf", topic: anxiety, angle_source: anxiety, episode_count: 6, band_curve: gentle_rise, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Tender Root", topic: self_worth, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+  legacy_builder:
+    manga_mode: regular
+    art_style_ref: legacy_builder
+    primary_topic: burnout
+    secondary_topic: depression
+    heavy_lanes:
+      series_a: { teacher_student_series: false, title: "Second Mountain", topic: burnout, angle_source: burnout, episode_count: 8, band_curve: two_peak, search_intent: life_transition, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_b: { teacher_student_series: false, title: "The Chapter After", topic: depression, angle_source: depression, episode_count: 6, band_curve: crisis_landing, search_intent: crisis_management, primary_mechanism: grief_integration, panel_estimate: 276 }
+    medium_lanes: { series_a: { title: "Second Mountain", topic: burnout, episode_count: 6, panel_estimate: 276 } }
+    light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
+
+# Production totals (for planning — updated for 37 brands):
+# Teacher brands (13): heavy 3 series, medium 1, light art-only
+# Standard brands (24): heavy 2 series, medium 1, light art-only
+# Heavy lanes: (13×3) + (24×2) = 39 + 48 = 87 series
+#   Series A: 13 × ~9 avg = ~117 episodes × 46 panels = ~5,382 panels
+#   Series B: 13 × ~7.5 avg = ~98 episodes × 46 panels = ~4,508 panels
+#   Series C: 13 × 5 = 65 episodes × 28 panels = ~1,820 panels
+#   Total heavy: ~11,710 panels across 5 heavy lanes = ~58,550 panel renders
+# Medium lanes: 13 × 1 series × 6 ep × 46 panels = ~3,588 panels × 3 lanes = ~10,764
+# Light lanes: 13 × 6 key visuals × 5 lanes = ~390 images
+# Grand total manga panel estimate: ~69,704 panel renders

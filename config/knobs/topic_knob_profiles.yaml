@@ -1,0 +1,2029 @@
+# config/knobs/topic_knob_profiles.yaml
+# Phoenix Omega V4 — Per-Topic Knob Profiles
+# Authority: spine YAML > bestseller research > engine bindings > experience_defaults
+# DO NOT modify config/spines/ — this file shapes spine expression, not spine structure
+# Generated: 2026-04-10 | Project: proj_state_convergence_20260328
+
+topics:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  anxiety:
+    primary_mechanism: false_alarm
+    allowed_engines: [false_alarm, spiral, watcher, overwhelm, shame, comparison, grief]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: medium
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: none
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: medium
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: medium          # ch1-4 only; rises to high from ch5 onward per spine sequencing_rules
+      spirituality_level: moderate
+      compression: light                # spine's trust_curve requires unhurried recognition arc
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: low
+        mechanism_depth: light          # body terms only per spine ch04 forbidden_moves
+        practical_vs_contemplative: contemplative
+        teacher_presence: high
+      mid_book:                         # ch5-8
+        exercise_density: medium
+        mechanism_depth: medium
+        practical_vs_contemplative: contemplative_first
+      late_book:                        # ch9-12
+        exercise_density: high
+        practical_vs_contemplative: balanced
+        reflection_depth: high
+
+    dangerous_combinations:
+      - knobs: [exercise_density_high, emotional_temperature_clinical]
+        chapter_range: ch1-4
+        reason: >
+          Action before legitimacy. Spine explicitly forbids practice before ch05.
+          Clinical tone + early exercises triggers more alarm in alarm-system readers.
+          Most common failure mode: "too academic too fast" (Goodreads pattern from
+          Anxiety and Phobia Workbook audio complaints).
+      - knobs: [mechanism_depth_high, reflection_depth_high]
+        chapter_range: ch1-2
+        reason: >
+          Front-loads cognitive load before emotional recognition lands. Spine ch01
+          forbidden_moves: "Do not explain the mechanism yet." Reader disengages.
+          Goodreads pattern: "felt like a textbook."
+      - knobs: [compression_heavy, story_density_low]
+        chapter_range: all
+        reason: >
+          Removes narrative anchor that builds trust in early chapters. Spine requires
+          precision recognition via scene before any concept. Heavy compression
+          removes the scenes the alarm-reader needs to feel seen.
+      - knobs: [spirituality_level_high, emotional_temperature_warm]
+        chapter_range: ch1-4
+        reason: >
+          Spiritual framing before mechanism is named reads as toxic positivity for
+          alarm-system readers. The alarm interprets "trust the universe" as evidence
+          the book doesn't understand the problem.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page, naver_audiobook]
+        conflict: >
+          Platform episode format (5–20 min) conflicts with measured pacing_profile.
+          Spine requires 12-chapter arc with ch1-4 purely recognition; episode
+          format cannot sustain the trust-build.
+        resolution: >
+          Do not run anxiety spine in micro_book_15 or serialized format.
+          Minimum viable unit is short_book_30. Spotify format (10-20 min chapters)
+          is borderline — needs compression: light with explicit chapter bridges.
+      - platform: [spotify]
+        conflict: >
+          Spotify preferred_structures include myth_killer and atomic, which both
+          require early payoff. Anxiety spine forbids any action before ch05.
+        resolution: >
+          Use promise_engine structure on Spotify. Avoid myth_killer.
+          Compensate for shorter chapters with tighter scene specificity.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Every top-performing book in this research validates the reader's experience
+          before offering any framework or exercise. Books that begin with 'here's
+          what to do' underperform books that begin with 'here's what you're feeling.'"
+        implication: >
+          Validates contemplative_first and low exercise_density in early chapters.
+          story_density: high is non-negotiable for the recognition arc.
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Workbook-format books like Bourne's underperform in audio format because
+          the exercises require writing. Narrative anxiety books (Dare, First We
+          Make the Beast Beautiful) perform better in audio."
+        implication: >
+          exercise_density ceiling matters for audio runtime_target. Narrative
+          (story_density: high) is the audio-first default for anxiety.
+      - source: config/experience/experience_defaults.yaml
+        field: by_topic.anxiety.reader_intent
+        finding: "calm_down"
+        implication: >
+          Reader intent is emotional regulation, not skill acquisition. Warm
+          emotional_temperature is mandatory. Practical exercises serve the
+          calm_down intent only after trust is built.
+      - source: config/spines/anxiety_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: "First real practice arrives in chapter 5 and is intentionally small."
+        implication: >
+          Hard floor on exercise_density: low in ch1-4. Any early exercise is a
+          spine violation regardless of knob setting.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I'm managing my anxiety well enough that no one can see it, but 'well
+          enough' is a full-time job on top of my actual job."
+        implication: >
+          teacher_presence: high is warranted. Reader is in performance mode; author
+          disclosure of personal struggle with alarm breaks the isolation of the
+          private performance.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  grief:
+    primary_mechanism: grief
+    allowed_engines: [grief, watcher]
+    forbidden_engines: [false_alarm, spiral, shame, comparison, overwhelm]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: light
+      reflection_depth: high
+      pacing_profile: slow
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative
+      teacher_presence: high
+      spirituality_level: secular_to_moderate   # reader-determined; see hard_ceilings
+      compression: none
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      pacing_profile: measured          # spine action_timing: practice not until ch09
+      emotional_temperature: warm
+      story_density: high               # 70% witness/validation per Devine analysis
+      exercise_density: none            # until ch09 — see spine sequencing_rules
+
+    hard_ceilings:
+      exercise_density: low             # Devine deliberately avoids prescriptive exercises
+      practical_vs_contemplative: contemplative   # NO practical before ch09 — absolute
+      compression: none                 # trust curve requires every chapter to carry witness
+      mechanism_depth: medium           # mechanism must not arrive before ch06
+      spirituality_level: moderate      # ceiling; grief readers span secular/spiritual
+
+    phase_overrides:
+      early_book:                       # ch1-4 — pure witnessing phase
+        exercise_density: none
+        mechanism_depth: none
+        practical_vs_contemplative: contemplative
+        reflection_depth: high
+        pacing_profile: slow
+      mid_book:                         # ch5-8
+        mechanism_depth: light
+        practical_vs_contemplative: contemplative
+        exercise_density: none
+      late_book:                        # ch9-12
+        exercise_density: low           # invitations, not prescriptions (Devine model)
+        practical_vs_contemplative: contemplative_first
+        mechanism_depth: medium
+
+    dangerous_combinations:
+      - knobs: [exercise_density_medium, chapter_range_ch1-8]
+        chapter_range: ch1-8
+        reason: >
+          Spine absolute: "No practice of any kind before chapter_09 — early practice
+          reads as fixing-energy and breaks the family contract." This is the most
+          conservative ceiling of any topic in the set. Any exercise before ch09
+          collapses the witnessing posture the spine requires.
+      - knobs: [pacing_profile_fast, compression_light]
+        chapter_range: all
+        reason: >
+          Grief reader needs time to absorb. Bestseller research: "Audio listeners
+          frequently pause and re-listen to validation passages." Fast pacing with
+          light compression removes the breath that grief requires. Completion rate
+          will crater.
+      - knobs: [mechanism_depth_high, chapter_range_ch1-5]
+        chapter_range: ch1-5
+        reason: >
+          Spine mechanism_timing: "The absence-as-presence mechanism is introduced
+          in chapter 6, after the reader has been witnessed (ch2), had their costs
+          named (ch3), had their belief surfaced (ch4), and had their body response
+          legitimized (ch5). Explanation before witnessing is not tolerated by grief."
+      - knobs: [narrative_structure_myth_killer, spirituality_level_none]
+        chapter_range: all
+        reason: >
+          Myth-killer structures require a payoff move that grief spine explicitly
+          forbids. "This family must never feel like progress toward resolution."
+          Myth-killer implies a wrong belief will be corrected; grief reader has no
+          wrong belief — only loss. Mismatched structure breaks the contract.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page, naver_audiobook, spotify]
+        conflict: >
+          Episode/short formats require episode-level payoff. Grief spine forbids
+          forward momentum in any chapter before ch09. Short chapters on platforms
+          like ximalaya (max 20 min) cannot sustain the witnessing arc.
+        resolution: >
+          Grief should not run in micro_book_15 or serialized format.
+          Minimum format: standard_book. Do not use atomic or myth_killer structures
+          on any platform for grief.
+      - platform: [audible, apple_books]
+        conflict: >
+          preferred_structures include promise_engine (acceptable) and gladwell_spiral
+          (borderline — spiral implies forward arc). Neither requires early payoff
+          if implementation honors the spine's witnessing-first sequence.
+        resolution: >
+          Use promise_engine on Audible/Apple. Gladwell_spiral acceptable only if
+          the "revelation" arrives at ch06 or later. Do not use van_der_kolk structure
+          — it implies trauma processing arc which grief spine explicitly resists.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "It's OK That You're Not OK: story:reflection ratio: 70% witness/validation,
+          20% reframe, 10% practice invitation. Devine deliberately avoids prescriptive
+          exercises because telling grievers what to do is a category of harm."
+        implication: >
+          story_density: high and exercise_density: low are validated by the #1
+          bestseller in this topic. Practices framed as invitations, not requirements.
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Books that push 'meaning-making' too early in the grief arc" and
+          "Books that rush to resilience and silver linings without sitting with
+          the darkness" are explicitly listed under What DOESN'T Work.
+        implication: >
+          practical_vs_contemplative: contemplative through ch08 is mandatory.
+          narrative_structure must not imply resolution as destination.
+      - source: config/spines/grief_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: >
+          "First and only real practice arrives in chapter 9. This is deliberately
+          late — later than any other family."
+        implication: >
+          exercise_density: none floor through ch08. This is the most conservative
+          action timing of all 15 topics.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I don't have time to grieve properly so I grieve in my car on the way
+          to meetings." (millennial_women_professionals persona)
+        implication: >
+          teacher_presence: high required. Reader is isolated in performance mode.
+          Author witness is the primary mechanism, not instruction.
+
+    requires_human_decision:
+      - knob: spirituality_level
+        question: >
+          Grief readers span the full secular-to-spiritual spectrum. The spine does
+          not constrain spirituality_level except to note "The Wild Edge of Sorrow"
+          (spiritually inflected) is a community favorite alongside Devine (secular).
+          Should the default be secular with option to moderate, or should there be
+          a persona-driven switch at catalog-planning time?
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  burnout:
+    primary_mechanism: overwhelm
+    allowed_engines: [overwhelm, watcher, grief]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: medium
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      pacing_profile: measured          # optimization instinct will attack any urgency signal
+      exercise_density: none            # through ch09; spine action_timing: ch10 is first practice
+
+    hard_ceilings:
+      exercise_density: medium          # high exercise density invites optimization of recovery
+      spirituality_level: secular       # burnout readers (tech_finance persona) resist spiritual framing
+      compression: moderate             # grief engine requires space to mourn pre-burnout self
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: light
+      mid_book:                         # ch5-9
+        mechanism_depth: medium
+        exercise_density: none          # spine: practice not until ch10
+        reflection_depth: medium
+      late_book:                        # ch10-12
+        exercise_density: low           # deliberate, non-optimizable
+        practical_vs_contemplative: balanced
+        pacing_profile: slow            # recovery phase should decelerate
+
+    dangerous_combinations:
+      - knobs: [exercise_density_high, pacing_profile_fast]
+        chapter_range: all
+        reason: >
+          The burned-out reader will immediately optimize recovery. Spine: "The moment
+          a book suggests rest, the burned-out reader begins scheduling rest, measuring
+          rest, tracking rest quality. This is the same drive that caused the collapse."
+          High exercise density + fast pacing is the trigger for optimization of recovery.
+      - knobs: [practical_vs_contemplative_practical, chapter_range_ch1-9]
+        chapter_range: ch1-9
+        reason: >
+          Spine action_timing: "First concrete practice arrives at chapter 10. Before
+          that, the book asks only for recognition, acknowledgment, and honest
+          examination. Early action chapters would misfire for this reader — they would
+          turn practice into optimization."
+      - knobs: [spirituality_level_high, teacher_presence_low]
+        chapter_range: ch1-6
+        reason: >
+          Burnout readers in tech/finance persona are skeptical of spiritual framing
+          and need evidence-based grounding. High spirituality without strong author
+          disclosure reads as motivational content; tech_finance_burnout invisible
+          script: "I optimized everything and I'm still burnt out, which means it
+          must be something wrong with me." Spiritual pivot without grounding
+          confirms the self-blame.
+
+    platform_conflicts:
+      - platform: [spotify]
+        conflict: >
+          Spotify preferred_structures include atomic and myth_killer, both requiring
+          early chapter payoff. Burnout spine requires 10 chapters of recognition and
+          examination before any practice. Atomic format cannot sustain the arc.
+        resolution: >
+          Run short_book_30 on Spotify with promise_engine or gladwell_spiral only.
+          Compress chapters but do not compress arc phases.
+      - platform: [ximalaya, kakao_page]
+        conflict: >
+          Episode format incompatible with spine's grief engine requirement — mourning
+          the pre-burnout self requires sustained narrative arc, not episodes.
+        resolution: Do not run burnout in micro or serialized format on any platform.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Nagoski & Nagoski: distinction between 'burnout' (incomplete stress cycles)
+          and 'tiredness' in the first chapter — immediately gives readers a new
+          vocabulary." Story:reflection ratio: 60% story, 25% science, 15% exercise.
+        implication: >
+          story_density: high matches the #1 bestseller. exercise_density ceiling is
+          validated — Nagoski runs medium, not high. Science-backed but accessible.
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Books that prescribe self-care as solution without addressing
+          structural/systemic causes" listed under What DOESN'T Work for burnout.
+        implication: >
+          practical_vs_contemplative: contemplative_first. Cannot give recovery
+          prescriptions without first legitimizing the structural collapse.
+      - source: config/experience/experience_defaults.yaml
+        field: by_topic.burnout.reader_intent
+        finding: "calm_down; outcome_type: behavioral_change"
+        implication: >
+          Reader wants calm first, then change. This maps to contemplative_first in
+          early chapters, shifting to balanced in late book. behavioral_change outcome
+          means some practical density is appropriate — but late and deliberate.
+      - source: config/spines/burnout_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: "First concrete practice arrives at chapter 10."
+        implication: >
+          exercise_density: none floor through ch09. No exceptions.
+
+    requires_human_decision:
+      - knob: teacher_presence
+        question: >
+          Burnout spine mentions watcher engine (dissociation — watching life happen
+          at a remove). Some teacher_presence: high approaches use confessional author
+          disclosure; others use the author-as-observer posture. Which teacher mode
+          (confessional vs. observational) is default for burnout, and should this
+          vary by engine_binding?
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  self_worth:
+    primary_mechanism: shame
+    allowed_engines: [shame, comparison]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: high
+      reflection_depth: high
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: none
+      narrative_structure: brene_brown
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high               # shame needs recognition via story; concepts alone activate defense
+      mechanism_depth: medium           # scorecard must be examined at length before any alternative
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: medium          # premature practice co-opted by performance patterns
+      spirituality_level: moderate      # "love yourself" registers as toxic positivity to scorecard reader
+      compression: light                # shame physiology must be legitimized somatically — cannot rush
+
+    phase_overrides:
+      early_book:                       # ch1-5 — scorecard examination and somatic legitimacy
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: high           # scorecard architecture must be fully visible (ch02)
+      mid_book:                         # ch6-9
+        exercise_density: none          # spine: "First practice arrives at chapter 9"
+        reflection_depth: high
+        practical_vs_contemplative: contemplative_first
+      late_book:                        # ch9-12
+        exercise_density: low
+        practical_vs_contemplative: balanced
+
+    dangerous_combinations:
+      - knobs: [emotional_temperature_clinical, mechanism_depth_high]
+        chapter_range: ch1-3
+        reason: >
+          Clinical tone activates shame response. Spine: "reader's shame response
+          will activate if the book moves toward unconditional ground too quickly —
+          it will register as toxic positivity, as platitude." Cold mechanism without
+          warm recognition is the activation pattern.
+      - knobs: [exercise_density_medium, chapter_range_ch1-8]
+        chapter_range: ch1-8
+        reason: >
+          Spine: "Premature practice would be co-opted by the same performance patterns
+          driving the problem." The scorecard reader will use early exercises to
+          perform self-improvement rather than examine the scorecard.
+      - knobs: [spirituality_level_high, chapter_range_ch1-10]
+        chapter_range: ch1-10
+        reason: >
+          Spine: "The scorecard must be examined at length before any alternative is
+          offered." Spiritual reframing of worth before the scorecard is fully visible
+          registers as the generic "you are enough" content the reader has already
+          rejected. Spine: "if the book moves toward unconditional ground too quickly
+          — it will register as toxic positivity."
+      - knobs: [compression_heavy, story_density_low]
+        chapter_range: all
+        reason: >
+          Shame needs story-level recognition. Without named scenes, the reader's
+          scorecard reads the concept chapters as confirmation they need to do more
+          work, not as recognition of a shared pattern. story_density: high is the
+          trust-builder for this family.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page, naver_audiobook]
+        conflict: >
+          Short episode format cannot sustain 9-chapter recognition-before-practice arc.
+          Spine: "Reframe cannot arrive before ch09 — will register as toxic positivity
+          without full preceding arc."
+        resolution: >
+          Do not run self_worth in micro format. Minimum standard_book.
+      - platform: [spotify]
+        conflict: >
+          Spotify's preferred_structures include myth_killer. Self-worth's scorecard
+          is not a myth — it is a real mechanism that must be examined, not
+          debunked. myth_killer structure breaks the family contract.
+        resolution: >
+          Use brene_brown or promise_engine on Spotify. Never myth_killer for self_worth.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Brené Brown discloses her own shame research breakdown [as] method. Impersonal
+          clinical writing underperforms intimate disclosure in Goodreads reviews and
+          completion rates."
+        implication: >
+          teacher_presence: high is validated for the shame engine. narrative_structure:
+          brene_brown is the best-practice model for this topic.
+      - source: config/spines/self_worth_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: "First practice arrives at chapter 9. Before that, only recognition and examination."
+        implication: >
+          exercise_density: none floor through ch08. Non-negotiable.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "My worth is tied to my output, which is why I can't rest without feeling
+          guilty." (millennial_women_professionals persona)
+        implication: >
+          practical_vs_contemplative: contemplative_first. Reader is in production mode.
+          Any early practical ask reads as another output demand.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  imposter_syndrome:
+    primary_mechanism: shame
+    allowed_engines: [shame, comparison]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: high
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm_clinical
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: medium
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+
+    hard_floors:
+      mechanism_depth: high             # comparison mechanism must arrive at ch02 — architecturally essential
+      emotional_temperature: warm_clinical  # "content must respect the reader's intelligence"
+      story_density: medium
+
+    hard_ceilings:
+      spirituality_level: secular       # accomplished readers reject motivational/spiritual reframing
+      exercise_density: medium          # "reader's over-preparation instinct will resist practice"
+      practical_vs_contemplative: contemplative_first   # until ch09
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        mechanism_depth: high           # comparison engine at ch02 — spine: "architecturally essential"
+        exercise_density: none
+        teacher_presence: low           # spine: don't make chapter about high achievers in self-congratulatory way
+      mid_book:                         # ch5-8
+        mechanism_depth: high
+        exercise_density: none          # spine: practice at ch09+
+        reflection_depth: high
+      late_book:                        # ch9-12
+        exercise_density: low
+        practical_vs_contemplative: balanced
+
+    dangerous_combinations:
+      - knobs: [emotional_temperature_warm, mechanism_depth_low]
+        chapter_range: ch1-4
+        reason: >
+          Generic warmth without intellectual rigor reads as "content addressed to
+          less capable people who simply need encouragement." Spine: book must
+          "respect the reader's intelligence." Warm without precise mechanism
+          breaks trust with this reader.
+      - knobs: [teacher_presence_high, spirituality_level_moderate]
+        chapter_range: all
+        reason: >
+          Spiritual or confessional author disclosure reads as "generic confidence-
+          building or content that doesn't respect the reader's accomplishments."
+          Trust is built through "specificity and intelligence — when the book
+          demonstrates that it understands the mechanism better than the reader's
+          private articulation." Visible author emotion without mechanism reads as
+          motivational content.
+      - knobs: [exercise_density_medium, chapter_range_ch1-8]
+        chapter_range: ch1-8
+        reason: >
+          Spine: "reader's over-preparation instinct will resist practice until the
+          mechanism has been fully named — premature practice will be over-prepared
+          and therefore fail to produce the experience of not-performing." Any
+          exercise before ch09 gets co-opted by the hyper-preparation drive.
+      - knobs: [narrative_structure_promise_engine, compression_heavy]
+        chapter_range: all
+        reason: >
+          Promise engine + heavy compression removes the mechanism rigor required
+          for this reader. Imposter syndrome reader needs to see the mechanism
+          dissected before the "promise" of change lands as anything other than
+          a motivational slogan.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page]
+        conflict: Episode format cannot sustain 9-chapter examination arc.
+        resolution: Do not run imposter_syndrome in micro or serialized format.
+      - platform: [spotify]
+        conflict: >
+          myth_killer and atomic structures both shortcut the comparison+shame
+          mechanism chain that imposter syndrome spine requires.
+        resolution: Use gladwell_spiral on Spotify. Compress chapters, not arc phases.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Books that treat imposter syndrome as a confidence problem solvable by
+          positive affirmation" listed under What DOESN'T Work. "Books that focus
+          on performing confidence rather than building internal security."
+        implication: >
+          spirituality_level: secular and emotional_temperature: warm_clinical (not
+          cheerleading) are validated. mechanism_depth: high is the differentiator.
+      - source: config/spines/imposter_syndrome_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "Comparison comes before shame in this family, reversing the order of
+          self_worth. Naming the comparison mechanism first is architecturally essential."
+        implication: >
+          mechanism_depth: high in early_book is a spine rule, not a knob preference.
+          The early mechanism distinction between this topic and self_worth is load-bearing.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I know I got here because I worked harder than everyone else, but I still
+          feel like I'm about to be exposed as someone who just works harder than
+          everyone else." (millennial_women_professionals)
+        implication: >
+          teacher_presence: medium — disclosure must be intellectual, not confessional.
+          Author evidence (not emotion) builds trust with this reader.
+
+    requires_human_decision:
+      - knob: teacher_presence
+        question: >
+          Imposter syndrome spine says "don't make the chapter about high achievers
+          in a way that feels self-congratulatory." This limits teacher_presence options.
+          Should teacher_presence be set to medium (intellectual disclosure only) or
+          should a new value (teacher_presence: analytical) be added to the knob schema?
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  boundaries:
+    primary_mechanism: shame
+    allowed_engines: [shame, comparison, false_alarm]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: medium
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: none
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high               # scripts and composite cases are the primary vehicle
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: medium          # spine action_timing: practice arrives at ch09
+      spirituality_level: moderate      # faith-based ceiling; The Gift of Boundaries shows ceiling
+      compression: light
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: light
+      mid_book:                         # ch5-8 — somatic alarm, cost, destabilization
+        exercise_density: none
+        practical_vs_contemplative: contemplative_first
+        mechanism_depth: medium
+      late_book:                        # ch9-12
+        exercise_density: medium        # scripts and limit-setting practice
+        practical_vs_contemplative: balanced
+        mechanism_depth: medium
+
+    dangerous_combinations:
+      - knobs: [exercise_density_high, emotional_temperature_warm]
+        chapter_range: ch1-8
+        reason: >
+          Spine: "Action before legitimacy fails." Boundaries exercise too early
+          (scripts before the alarm is legitimized) reads as advice the reader has
+          already tried and found painful. "They have tried saying no once or twice,
+          felt the flood of guilt that followed, and concluded that it wasn't worth it."
+      - knobs: [practical_vs_contemplative_practical, chapter_range_ch1-8]
+        chapter_range: ch1-8
+        reason: >
+          Spine: the false alarm on saying no must be legitimized before any practice.
+          "This is not a book about protecting yourself from difficult people. It is
+          a book about clarity." Practical framing before mechanism reads as technique
+          delivery without the understanding that makes technique meaningful.
+      - knobs: [spirituality_level_high, narrative_structure_promise_engine]
+        chapter_range: all
+        reason: >
+          Faith-based ceiling exists for secular personas. Bestseller research shows
+          faith-based boundaries books (Tawwab, TerKeurst, Cloud) serve distinct
+          audiences. Mixing spiritual framing into secular promise_engine breaks
+          trust for secular readers.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page]
+        conflict: Episode format cannot hold the 9-chapter pre-practice arc.
+        resolution: Do not run boundaries in micro or serialized format.
+      - platform: [audible, apple_books]
+        conflict: >
+          "Scripts for difficult conversations work well in audio — listeners often
+          replay these sections." (bestseller research) Late-book exercise density
+          should emphasize audio-native script delivery.
+        resolution: >
+          Increase story_density in late_book for audio platforms. Use scripts
+          (not worksheets) as the exercise delivery mode for audio runtime_target.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Set Boundaries, Find Peace: 50% composite case stories from therapy
+          practice, 30% framework, 20% exercise. Common reader praise: 'The scripts
+          are gold — I actually used one this week.'"
+        implication: >
+          story_density: high is the vehicle. exercise_density: medium in late book
+          maps to the Tawwab model. Scripts over worksheets for this topic.
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Books that define boundaries theoretically without offering scripts or
+          language" listed under What DOESN'T Work.
+        implication: >
+          Late-book exercise_density: medium is required. But it must arrive after
+          legitimacy — medium density in late book, none in early.
+      - source: config/spines/boundaries_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: "The first practical ask arrives in ch09 — after the reader has been given the somatic legitimacy, the belief examination, the mechanism, the cost, the destabilization, the relational stakes, and the identity question."
+        implication: >
+          exercise_density: none floor through ch08.
+
+    requires_human_decision:
+      - knob: spirituality_level
+        question: >
+          Two of the top-5 bestsellers for boundaries are explicitly faith-based
+          (TerKeurst, Cloud). Should there be a faith_variant knob profile for
+          boundaries that raises spirituality_level ceiling to high, or should
+          faith-based content be handled as a separate topic variant?
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  depression:
+    primary_mechanism: watcher
+    allowed_engines: [watcher, grief, overwhelm]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: none
+      mechanism_depth: light
+      reflection_depth: low             # reader is reading from behind glass — heavy reflection load fails
+      pacing_profile: slow
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative
+      teacher_presence: medium
+      spirituality_level: secular
+      compression: none
+      narrative_structure: van_der_kolk
+      runtime_target: standard
+
+    hard_floors:
+      pacing_profile: slow              # spine: "lowest intensity opening of any family"
+      emotional_temperature: warm
+      exercise_density: none            # absolute floor through ch07; spine: "first practical ask at ch08"
+      practical_vs_contemplative: contemplative  # through ch07
+      reflection_depth: none            # in ch1-3: cannot ask depleted reader for heavy reflection
+
+    hard_ceilings:
+      exercise_density: low             # ch08+; any more is pep-talk energy
+      mechanism_depth: medium           # depression spine: mechanism arrives at ch04; must not front-load
+      compression: none                 # depleted reader requires unhurried chapters
+      reflection_depth: medium          # ceiling; heavy reflection load breaks depleted reader
+      spirituality_level: moderate      # ceiling; Johann Hari's secular-journalistic model is the benchmark
+
+    phase_overrides:
+      early_book:                       # ch1-3 — watcher recognition, zero activation demand
+        exercise_density: none
+        mechanism_depth: none
+        reflection_depth: none
+        practical_vs_contemplative: contemplative
+        pacing_profile: slow
+        story_density: high
+      mid_book:                         # ch4-7
+        mechanism_depth: light
+        reflection_depth: low
+        exercise_density: none
+      late_book:                        # ch8-12
+        exercise_density: low           # "genuinely microscopic" per spine
+        reflection_depth: medium
+        practical_vs_contemplative: contemplative_first
+        pacing_profile: measured
+
+    dangerous_combinations:
+      - knobs: [exercise_density_medium, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Most dangerous combination for depression. Spine: "not 'start with
+          something small' as encouragement, but genuinely tiny as a structural
+          requirement. The reader experiencing collapsed energy cannot 'just start.'"
+          Any exercise before ch08 is a pep-talk — the thing the spine explicitly
+          forbids. Also: Goodreads pattern for Feeling Good: "Doesn't address
+          situational or structural depression well. Workbooks that pile exercises
+          on a reader who may lack the energy to engage them."
+      - knobs: [pacing_profile_measured, compression_light]
+        chapter_range: all
+        reason: >
+          Depression spine requires the lowest intensity opening of all families.
+          Even measured pacing risks activation demand the depleted reader cannot
+          meet. Compression removes the quiet that depression reader needs.
+      - knobs: [reflection_depth_high, chapter_range_ch1-5]
+        chapter_range: ch1-5
+        reason: >
+          Reader is reading from behind glass. Spine: "Meaning-making cannot come
+          before any experience of aliveness has returned — to offer meaning while
+          the reader is fully numb is to offer food to someone who cannot taste."
+          Heavy reflection asks while reader is still numb lands as confirmation
+          they are broken.
+      - knobs: [narrative_structure_promise_engine, practical_vs_contemplative_balanced]
+        chapter_range: ch1-7
+        reason: >
+          Promise engine + balanced practical implies the reader can act on the
+          promise. Depression reader cannot. This combination sets up the book to
+          fail the reader's real capacity. van_der_kolk structure (body-first,
+          non-prescriptive) is the validated model for this topic.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page, naver_audiobook, spotify]
+        conflict: >
+          Short formats require chapter-level payoff. Depression spine has no payoff
+          before ch08. Micro-format on this topic will fail completion targets.
+        resolution: >
+          Depression must run in standard_book minimum. No micro, no serialized.
+          Audio chapters should be 18-24 min (low end of sweet spot) given slow pacing.
+      - platform: [audible]
+        conflict: >
+          "Feeling Good underperforms in audio because thought record exercises
+          require writing." exercise_density: low in late book must be audio-native
+          (somatic, spoken, not written).
+        resolution: >
+          For audio runtime_target, replace written exercises with somatic and
+          spoken exercises. Ensure "pause the recording" bridge before any exercise.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Offers exercises that are calibrated for low-energy readers (not 30-minute
+          meditations when someone can't get out of bed)" listed in Scoring Rubric
+          for depression. "Workbooks that pile exercises on a reader who may lack
+          the energy to engage them" listed under What DOESN'T Work.
+        implication: >
+          exercise_density floor at none through ch07. Late-book exercises must be
+          genuinely microscopic. reflection_depth ceiling at medium at all times.
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Lost Connections performs better in audio — its journalistic narrative
+          is designed for listening." Hari's voice: "journalistic warmth, investigative
+          curiosity, treats reader as a fellow traveler rather than a patient."
+        implication: >
+          narrative_structure: van_der_kolk and story_density: high are the validated
+          model. Teacher_presence: medium (fellow traveler, not guide).
+      - source: config/spines/depression_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: >
+          "The first practical ask arrives in ch08 — the latest of any family in the
+          set. The action ask is genuinely microscopic. No earlier action should be
+          offered."
+        implication: >
+          exercise_density: none absolute floor through ch07. This and grief are
+          the two most conservative ceilings in the set.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "Depression doesn't look like I thought it would on me, so I thought it
+          wasn't real." (millennial_women_professionals)
+        implication: >
+          Story density must include recognition of non-dramatic depression presentation.
+          Watcher mechanism (behind glass) must be named in ch01 precisely.
+
+    requires_human_decision:
+      - knob: teacher_presence
+        question: >
+          Depression spine describes the book as needing to feel like "sitting beside
+          the reader, not guiding them." This is different from both high teacher_presence
+          (confessional guide) and low teacher_presence (invisible author). Is there a
+          separate teacher_presence value needed — "witness" or "companion" — or should
+          medium be documented as meaning this posture for depression?
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  courage:
+    primary_mechanism: false_alarm
+    allowed_engines: [false_alarm, shame, spiral]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: medium
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: balanced
+      teacher_presence: high
+      spirituality_level: secular
+      compression: light
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: medium
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: high            # high is achievable by late book; but must be earned
+      spirituality_level: moderate
+      compression: moderate
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: low           # mechanism and legitimacy before action
+        practical_vs_contemplative: contemplative_first
+        mechanism_depth: medium
+      mid_book:                         # ch5-8 — EARLIEST action ramp of any topic
+        exercise_density: medium        # spine: "first action ask at ch05 — earlier than any family"
+        practical_vs_contemplative: balanced
+      late_book:                        # ch9-12
+        exercise_density: high
+        practical_vs_contemplative: practical_first
+        pacing_profile: measured
+
+    dangerous_combinations:
+      - knobs: [exercise_density_low, pacing_profile_slow]
+        chapter_range: ch5-12
+        reason: >
+          Courage reader came for permission to act. Spine: "Unlike most families,
+          this family moves toward action relatively quickly — by ch04-05." After
+          the mechanism is named, slow pacing and low exercise density breaks the
+          family contract. This is the only topic where contemplative lean past ch05
+          is dangerous.
+      - knobs: [practical_vs_contemplative_contemplative, chapter_range_ch5-12]
+        chapter_range: ch5-12
+        reason: >
+          Spine: "Permission to act with the alarm running is given in ch04-ch05.
+          Unlike the other families, permission in this family is primarily permission
+          to act rather than permission to feel or be." Contemplative framing past
+          ch05 re-licenses the preparation loop.
+      - knobs: [emotional_temperature_clinical, mechanism_depth_low]
+        chapter_range: ch1-4
+        reason: >
+          Courage reader needs the alarm honored before they will act. Clinical tone
+          without warmth reads as "just do it" advice. Bestseller research: "Courage
+          books that define courage as absence of fear — this creates a shame feedback
+          loop for readers who are afraid."
+      - knobs: [spirituality_level_high, exercise_density_low]
+        chapter_range: ch5-12
+        reason: >
+          Spiritual framing without concrete action asks re-introduces "gather more
+          readiness before acting" energy — exactly what this topic must dismantle.
+
+    platform_conflicts:
+      - platform: [spotify]
+        conflict: >
+          Spotify preferred_structures include myth_killer and atomic, both of which
+          work for this topic — courage spine earns action faster than other topics.
+          However, myth_killer must still honor ch1-4 mechanism arc.
+        resolution: >
+          Courage is the most platform-flexible topic. myth_killer is acceptable on
+          Spotify if ch1-3 still name the alarm mechanism. Atomic is acceptable
+          if ch05 delivers the first action ask on schedule.
+      - platform: [ximalaya, kakao_page]
+        conflict: >
+          Episode format is borderline for courage because action comes earlier than
+          other topics. However, the mechanism arc still requires ch1-4.
+        resolution: >
+          Short format on courage can run with compression: moderate. Do not compress
+          the mechanism arc; compress only late-book integration chapters.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Daring Greatly: reframes the entire concept [of courage] within the first
+          chapter. 55% story, 30% research framework, 15% applied practice."
+          "Books that treat courage as a trait rather than a practice" listed under
+          What DOESN'T Work.
+        implication: >
+          story_density: high and teacher_presence: high are validated (Brown models
+          vulnerability). Courage = practice, not trait, maps to high late-book
+          exercise_density.
+      - source: config/spines/courage_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: >
+          "The first action ask arrives in ch05 — earlier than in any other family
+          in the set. The reader came for action, and the book must give it."
+        implication: >
+          Courage has the EARLIEST exercise_density ramp of all 15 topics. This is
+          why exercise_density rises to medium at ch05 (mid_book phase_override)
+          while all other topics remain at low or none at that point.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I'm brave at work but terrified in my own life, which means I haven't
+          actually figured out what bravery is." (millennial_women_professionals)
+        implication: >
+          teacher_presence: high with author disclosure of personal alarm experience
+          is the trust mechanism for this reader. Mechanism clarity + personal
+          disclosure + early action = the Brené Brown model validated for courage.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  overthinking:
+    primary_mechanism: spiral
+    allowed_engines: [spiral, watcher, false_alarm]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: high
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: medium
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+
+    hard_floors:
+      mechanism_depth: medium           # spiral mechanism is the spine of the book; must be thorough
+      emotional_temperature: warm
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: medium          # "No action instructions before chapter 8"
+      practical_vs_contemplative: contemplative_first
+      spirituality_level: secular       # "just let go" / spiritual bypass is worst-in-class for this reader
+      compression: moderate
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        mechanism_depth: high
+        practical_vs_contemplative: contemplative
+      mid_book:                         # ch5-8
+        mechanism_depth: high
+        exercise_density: none          # spine: "No action before ch8"
+      late_book:                        # ch8-12 (ch7+ per spine)
+        exercise_density: low
+        practical_vs_contemplative: balanced
+        mechanism_depth: medium
+
+    dangerous_combinations:
+      - knobs: [exercise_density_medium, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "No action instructions before chapter 8. The reader must understand
+          the mechanism completely before any tool is introduced. Premature tools
+          will be experienced as dismissive." The overthinking reader will use any
+          tool as another thing to think about.
+      - knobs: [spirituality_level_moderate, practical_vs_contemplative_contemplative]
+        chapter_range: all
+        reason: >
+          Overthinking spine's prohibited terms include "just accept uncertainty"
+          and "let go." Spiritual framing of the spiral as something to release
+          or surrender is the exact move this reader has already tried and found
+          useless. Spiritual bypass breaks trust immediately.
+      - knobs: [mechanism_depth_low, story_density_low]
+        chapter_range: all
+        reason: >
+          Spine: "Every move in this book must respect the reader's mind while
+          showing them where that mind is being misused." Low mechanism without
+          stories to anchor it reads as the generic "stop overthinking" advice the
+          reader has already rejected. They came because they are intelligent and
+          they know the problem. Surface-level mechanism breaks the contract.
+
+    platform_conflicts:
+      - platform: [spotify]
+        conflict: >
+          myth_killer structure names a wrong belief and corrects it — but overthinking
+          reader's belief ("thinking protects me") is not a myth; it's a partially
+          true belief that becomes a trap. myth_killer reads as dismissive.
+        resolution: >
+          Use gladwell_spiral on Spotify — the spiral structure mirrors the topic.
+          No myth_killer for overthinking.
+      - platform: [ximalaya, kakao_page]
+        conflict: Episode format cannot hold 8-chapter mechanism arc before any practice.
+        resolution: Do not run overthinking in micro or serialized format.
+
+    research_citations:
+      - source: config/experience/experience_defaults.yaml
+        field: by_topic.overthinking.reader_intent
+        finding: "understand_self; outcome_type: cognitive_clarity"
+        implication: >
+          mechanism_depth: high is directly aligned with reader intent. This reader
+          wants cognitive clarity, not comfort. gladwell_spiral narrative structure
+          (revelatory unfolding) matches the cognitive_clarity outcome type.
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Mechanism specificity beats motivational language. Readers rate books
+          higher when the author explains a concrete biological, psychological, or
+          systemic mechanism."
+        implication: >
+          mechanism_depth: high through entire book. This is the differentiating
+          knob for overthinking vs. anxiety (which uses medium mechanism depth).
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I've made success by thinking three steps ahead, so now my brain won't
+          stop doing it and I'm exhausted by things that haven't happened."
+        implication: >
+          The intelligence of the spiral must be honored before the trap is named.
+          teacher_presence: medium — the author must demonstrate intelligence to
+          earn the reader's trust, not warmth alone.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  compassion_fatigue:
+    primary_mechanism: overwhelm
+    allowed_engines: [overwhelm, watcher, grief]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: light
+      narrative_structure: brene_brown
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm       # spine: "meet them with the same quality of care they extend to others"
+      story_density: high               # the caring reader needs to feel received, not instructed
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: low             # spine: action at ch08+; workbook format fails depleted caregivers
+      spirituality_level: moderate
+      compression: light
+      practical_vs_contemplative: contemplative_first   # through ch07
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: light
+        reflection_depth: medium
+      mid_book:                         # ch5-8
+        exercise_density: none
+        mechanism_depth: medium
+        reflection_depth: medium
+      late_book:                        # ch9-12
+        exercise_density: low
+        practical_vs_contemplative: balanced
+        pacing_profile: measured
+
+    dangerous_combinations:
+      - knobs: [exercise_density_high, emotional_temperature_warm]
+        chapter_range: ch1-7
+        reason: >
+          The depleted caregiver will immediately evaluate any exercise as another
+          thing to give. Bestseller research: "The workbook format feels clinical
+          when I'm already depleted." High exercise density breaks the "receive
+          the reader" posture the spine requires.
+      - knobs: [practical_vs_contemplative_practical, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "cannot be a book that tells them to care less or protect themselves
+          more — that framing will feel like a betrayal of their identity." Practical
+          framing before the mechanism is named reads as the generic "set better
+          limits" advice the reader has already received and found hollow.
+      - knobs: [story_density_low, teacher_presence_low]
+        chapter_range: ch1-5
+        reason: >
+          This reader has given stories without receiving them. Low story density +
+          low teacher presence gives them a concept-heavy book that mirrors the
+          transactional care they're already trapped in. The spine's posture requires
+          the book itself to model receiving.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page, naver_audiobook]
+        conflict: >
+          Episode format cannot sustain the receiving posture required by the spine.
+          Short chapters with payoff requirements break the caregiving-inversion model.
+        resolution: Do not run compassion_fatigue in micro or serialized format.
+      - platform: [audible, apple_books]
+        conflict: >
+          Besteller research: "Audio versions that work include conversational chapters
+          with clear exercise pause points. Dense academic text underperforms in audio."
+        resolution: >
+          Ensure exercise_density: low in late book uses audio-native formats (somatic,
+          not written). Use explicit pause bridges before any practice invitation.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Compassion fatigue books skew toward professional and clinical audiences;
+          print workbook format dominates over audio." "Needs more personal narrative"
+          listed as common reader complaint.
+        implication: >
+          story_density: high is the correction for the dominant market failure.
+          Narrative-first compassion fatigue book is differentiated from the workbook
+          competition.
+      - source: config/spines/compassion_fatigue_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "The book must model the posture it recommends: receive the reader the
+          way the reader has never been received."
+        implication: >
+          emotional_temperature: warm and story_density: high are the delivery
+          mechanism for the spine's core posture. teacher_presence: high with author
+          disclosure of personal caregiving depletion.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I've been the therapist in every room, and somewhere I stopped knowing
+          how to ask for help."
+        implication: >
+          teacher_presence: high — the reader needs to see the author occupy the
+          receiver position. Confessional author disclosure is load-bearing.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  social_anxiety:
+    primary_mechanism: false_alarm
+    allowed_engines: [false_alarm, shame, comparison]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: high
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: medium
+      spirituality_level: secular
+      compression: none
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high               # reader is hypervigilant about being judged; precision recognition builds trust
+      pacing_profile: measured
+
+    hard_ceilings:
+      exercise_density: medium          # "No exposure instruction before chapter 8"
+      spirituality_level: secular       # "just be yourself" is in prohibited terms
+      compression: light
+      practical_vs_contemplative: contemplative_first   # through ch07
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        mechanism_depth: high           # false alarm mechanism at ch03
+        teacher_presence: low           # don't position author as confident socializer
+      mid_book:                         # ch5-8
+        mechanism_depth: high
+        exercise_density: none
+        reflection_depth: medium
+      late_book:                        # ch8-12
+        exercise_density: medium        # exposure at ch08
+        practical_vs_contemplative: balanced
+        mechanism_depth: medium
+
+    dangerous_combinations:
+      - knobs: [teacher_presence_high, exercise_density_medium]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "tone throughout must never be upbeat, reassuring, or promotional —
+          those registers will activate the reader's alarm." High teacher presence
+          with cheerleading energy (even warm cheerleading) activates the social
+          anxiety reader's threat-detection. They are hypervigilant for being judged
+          even by a book.
+      - knobs: [exercise_density_medium, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "No exposure instruction before chapter 8. The false alarm, shame
+          engine, and safety behavior mechanisms must all be fully in place before
+          any exposure is introduced. Premature exposure instruction will be
+          experienced as 'just do it' advice and will be rejected."
+      - knobs: [narrative_structure_myth_killer, mechanism_depth_low]
+        chapter_range: all
+        reason: >
+          myth_killer implies a wrong belief will be corrected with the right
+          information. Social anxiety reader knows their belief is technically
+          wrong — knowing it's wrong does not stop the alarm. Low mechanism +
+          myth-killer structure reads as the generic confidence content this
+          reader has already encountered.
+
+    platform_conflicts:
+      - platform: [ximalaya, kakao_page, naver_audiobook]
+        conflict: Episode format cannot hold 8-chapter mechanism arc before exposure.
+        resolution: Do not run social_anxiety in micro or serialized format.
+      - platform: [spotify]
+        conflict: >
+          myth_killer and atomic are in Spotify preferred_structures. Both conflict
+          with the spine's patience requirement.
+        resolution: Use promise_engine on Spotify. Never myth_killer for social_anxiety.
+
+    research_citations:
+      - source: config/spines/social_anxiety_spine.yaml
+        field: tone_and_pacing.trust_curve
+        finding: >
+          "This reader is hypervigilant about being judged — even by a book. Trust
+          is built through precision in chapters 1-3: naming their experience so
+          accurately that the reader feels recognized rather than evaluated."
+        implication: >
+          story_density: high is the trust mechanism. The scene-level precision
+          must be higher than in other topics because the reader is monitoring
+          for evaluation at all times.
+      - source: config/spines/social_anxiety_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "The book must not tell the reader they are more interesting than they think.
+          That is condescending and will be rejected."
+        implication: >
+          teacher_presence ceiling. Warm but non-reassuring. The author's job is
+          mechanism clarity, not encouragement.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I can network and present to hundreds, but a casual dinner party feels
+          impossible."
+        implication: >
+          The competence/context split is load-bearing for story selection. Stories
+          must show the reader's relaxed-self, not confirm their performance identity.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  sleep_anxiety:
+    primary_mechanism: false_alarm
+    allowed_engines: [false_alarm, spiral, overwhelm]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: medium
+      spirituality_level: secular
+      compression: light
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: medium
+      pacing_profile: measured
+      mechanism_depth: medium           # central paradox must be established early and held
+
+    hard_ceilings:
+      exercise_density: medium          # any exercise framed as technique breaks the anti-protocol message
+      spirituality_level: secular       # sleep anxiety reader is already in control-seeking mode
+      compression: light
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none          # spine: all protocols named as the problem before any alternative
+        practical_vs_contemplative: contemplative
+        mechanism_depth: medium
+        teacher_presence: medium
+      mid_book:                         # ch5-8
+        mechanism_depth: medium
+        exercise_density: none
+        reflection_depth: medium
+      late_book:                        # ch9-12
+        exercise_density: low
+        practical_vs_contemplative: balanced
+        mechanism_depth: low
+
+    dangerous_combinations:
+      - knobs: [exercise_density_medium, chapter_range_all]
+        chapter_range: all
+        reason: >
+          Spine: "Almost every tip the reader has already tried is making the alarm
+          louder by treating sleep as something to be achieved through performance.
+          The book cannot offer a better sleep protocol — it must dismantle the
+          protocol orientation entirely." Any exercise that looks like a technique
+          re-activates the performance orientation. Medium exercise density is a
+          spine violation.
+      - knobs: [practical_vs_contemplative_practical, chapter_range_ch1-8]
+        chapter_range: ch1-8
+        reason: >
+          Practical framing before the protocol is named as the problem reads as
+          "a better sleep tip." Reader has tried better tips. Practical before
+          mechanism is the category error the spine is designed to prevent.
+      - knobs: [spirituality_level_moderate, teacher_presence_high]
+        chapter_range: ch1-6
+        reason: >
+          Sleep anxiety reader is in hyper-control mode. Invisible script: "Sleep
+          is the one thing I can't optimize my way into, and that terrifies me more
+          than actual insomnia." Spiritual + confessional framing before the control
+          paradox is named reads as yet another thing to try. Activates optimization
+          of the spiritual approach.
+
+    platform_conflicts:
+      - platform: [spotify]
+        conflict: >
+          myth_killer is in Spotify preferred_structures and works for this topic —
+          the myth is "effort improves sleep." However myth_killer must still name
+          the paradox through ch1-3 before dismantling.
+        resolution: >
+          Sleep anxiety is one of the more platform-flexible topics. myth_killer
+          acceptable on Spotify if paradox naming arrives before the myth-kill move.
+      - platform: [audible]
+        conflict: >
+          "Somatic instructions in audio: work well when they use the imperative
+          mood with slow pacing" (bestseller research). Sleep topic is inherently
+          audio-native (bedtime listening context).
+        resolution: >
+          For audible runtime_target, late-book exercise_density: low exercises
+          should be somatic and spoken-instruction only. No writing exercises.
+          Prioritize slow pacing and deliberate breath-point spacing in prose.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "Chapter length sweet spot for audiobooks: 18–28 minutes." Sleep anxiety
+          is inherently audio-native (bedtime listening context).
+        implication: >
+          runtime_target: standard. Chapter structure optimized for ~22-minute
+          audio chapters. pacing_profile: measured aligns with 18-28 min window.
+      - source: config/spines/sleep_anxiety_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "Almost every tip the reader has already tried is making the alarm louder
+          by treating sleep as something to be achieved through performance. The book
+          cannot offer a better sleep protocol — it must dismantle the protocol
+          orientation entirely."
+        implication: >
+          exercise_density: low ceiling (not medium or high) is the knob implication
+          of this spine rule. Any exercise that appears to be a technique re-activates
+          the performance trap.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I can't sleep because I'm thinking about not being able to sleep, and
+          that spiral is the most honest thing about me."
+        implication: >
+          The spiral engine (catastrophic sleep-thought chains) is active alongside
+          the false_alarm engine. mechanism_depth must address both. story_density:
+          high anchored in the specific bedtime experience.
+
+    requires_human_decision: []
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  financial_anxiety:
+    primary_mechanism: overwhelm
+    allowed_engines: [overwhelm, spiral, shame]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: none
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: medium
+      pacing_profile: measured
+      exercise_density: none            # through ch07; shame blocks cognition until ch08
+
+    hard_ceilings:
+      exercise_density: medium          # book is NOT a personal finance manual
+      spirituality_level: secular       # "abundance mindset" is a trust-breaker for avoidant readers
+      compression: light
+      practical_vs_contemplative: contemplative_first   # through ch07
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: medium
+      mid_book:                         # ch5-8 — shame and avoidance confrontation
+        exercise_density: none          # spine: "reader cannot act while shame is unnamed"
+        mechanism_depth: medium
+        reflection_depth: medium
+      late_book:                        # ch8-12
+        exercise_density: low           # one look — the smallest financial act
+        practical_vs_contemplative: balanced
+        mechanism_depth: low
+
+    dangerous_combinations:
+      - knobs: [exercise_density_medium, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "practical_interruption (ch08) must not arrive before shame has
+          been held (reader cannot act while shame is unnamed)." Any financial
+          exercise before ch08 will be blocked by shame. Reader will close the
+          book rather than do an exercise that confirms their worst fear about
+          what the numbers will show.
+      - knobs: [spirituality_level_moderate, practical_vs_contemplative_balanced]
+        chapter_range: ch1-6
+        reason: >
+          "Abundance mindset" or spiritual money frameworks activate shame in
+          avoidant financial readers. If you're avoiding looking at your bank account,
+          being told to manifest abundance or trust the universe reads as evidence
+          the book doesn't understand the problem.
+      - knobs: [mechanism_depth_high, story_density_low]
+        chapter_range: ch1-3
+        reason: >
+          Bestseller research: "Books that assume financial anxiety is purely a
+          knowledge problem (information-only approach)" listed under What DOESN'T
+          Work. High mechanism without stories reads as the financial literacy
+          content the reader is already too ashamed to engage.
+
+    platform_conflicts:
+      - platform: [ximalaya, wechat_read, dedao]
+        conflict: >
+          Chinese platforms have strict content moderation; financial stress/shame
+          content may be moderated. Consumer language must be verified for each locale.
+        resolution: >
+          Flag financial_anxiety for locale-specific content moderation review
+          before publishing to zh-CN platforms. zh-TW, zh-HK, zh-SG have different
+          moderation requirements.
+      - platform: [spotify]
+        conflict: myth_killer works for the avoidance narrative but must not arrive before shame is named.
+        resolution: Use promise_engine. myth_killer acceptable if shame engine fully named in ch1-5.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "I Will Teach You to Be Rich: Ch. 1 reframes 'rich' as a personal definition
+          rather than a number — immediately reduces shame and widens the reader's
+          permission to engage." Common reader praise: "Finally a money book that
+          doesn't make me feel stupid."
+        implication: >
+          story_density: high with shame legitimization first. The #1 bestseller's
+          opening move is shame reduction, not financial instruction.
+      - source: config/spines/financial_anxiety_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: "First practical act arrives at chapter 8 — the one look."
+        implication: >
+          exercise_density: none floor through ch07.
+      - source: config/spines/financial_anxiety_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "This book is not a personal finance manual. Its job is to make the reader
+          able to look at their situation clearly — which is the prerequisite for any
+          practical action, not a replacement for it."
+        implication: >
+          exercise_density ceiling: medium (not high). Spirituality ceiling:
+          secular — "abundance mindset" is not this book's territory.
+
+    requires_human_decision:
+      - knob: practical_vs_contemplative
+        question: >
+          The one financial act at ch08 ("looking at one number") is both practical
+          and contemplative — it is an action that functions as a somatic experiment.
+          Should the late-book practical_vs_contemplative be set to balanced or
+          practical_first? The distinction matters for whether follow-on financial
+          steps are introduced in ch09-12.
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  financial_stress:
+    primary_mechanism: overwhelm
+    allowed_engines: [overwhelm, spiral, shame]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: none
+      narrative_structure: promise_engine
+      runtime_target: standard
+
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high               # real hardship reader must feel taken seriously, not soothed
+      pacing_profile: measured
+      exercise_density: none            # through ch07
+
+    hard_ceilings:
+      exercise_density: medium          # this is NOT a personal finance manual
+      spirituality_level: secular       # HARDEST CEILING IN THE SET — see below
+      compression: none
+      practical_vs_contemplative: contemplative_first   # through ch07
+
+    phase_overrides:
+      early_book:                       # ch1-4
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: medium
+        emotional_temperature: warm
+      mid_book:                         # ch5-8 — shame, destabilization, first look
+        exercise_density: none          # spine: ch08 is "making the pile finite"
+        mechanism_depth: medium
+        reflection_depth: medium
+      late_book:                        # ch8-12
+        exercise_density: low
+        practical_vs_contemplative: balanced
+        mechanism_depth: low
+
+    dangerous_combinations:
+      - knobs: [spirituality_level_moderate, chapter_range_ch1-10]
+        chapter_range: ch1-10
+        reason: >
+          THE MOST DANGEROUS COMBINATION FOR FINANCIAL_STRESS. Consumer language
+          file: "I make good money and still live like I'm one mistake away from
+          losing everything." Financial stress reader is under REAL pressure.
+          Invisible script: "I calculate my financial safety margin like other people
+          count sheep." Any spiritual framing ("trust abundance," "money flows to you")
+          before the real hardship is fully honored reads as minimization of a real
+          threat and immediately destroys trust. This is distinct from financial_anxiety
+          where avoidance is the primary pattern — financial_stress readers are often
+          highly engaged with their real situation. Spiritual bypass at any point
+          before ch11 is a spine violation.
+      - knobs: [exercise_density_medium, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "reader cannot act while shame is blocking cognition." Shame must
+          be named (ch03) and the overwhelm mechanism explained (ch04) before any
+          practical step is possible. Early exercises land as confirmation the book
+          doesn't understand the weight of real financial pressure.
+      - knobs: [pacing_profile_fast, compression_light]
+        chapter_range: all
+        reason: >
+          Financial stress reader is carrying real weight. Spine: "the pile is
+          finite; you can see it" — this realization takes time to build. Fast
+          pacing with compression removes the legitimation arc that makes the reader
+          feel their real situation has been taken seriously.
+      - knobs: [practical_vs_contemplative_practical, chapter_range_ch1-7]
+        chapter_range: ch1-7
+        reason: >
+          Spine: "Emotional regulation is prerequisite to practical action, not a
+          supplement to it." This is the defining rule for financial_stress vs.
+          financial_anxiety. Neither topic can receive practical steps before
+          emotional grounding. Financial_stress has real hardship — practical-first
+          framing in early chapters reads as advice that ignores the magnitude of
+          the real situation.
+
+    platform_conflicts:
+      - platform: [ximalaya, wechat_read, dedao, netease_cloud]
+        conflict: >
+          Chinese platforms: financial stress content requires locale-specific review.
+          Content about debt, bankruptcy, or economic hardship may be moderated
+          differently by locale. zh-CN platforms require government compliance review.
+        resolution: >
+          Flag financial_stress for locale-specific content moderation review for
+          all zh-* locales. Do not assume zh-TW and zh-CN have equivalent moderation.
+      - platform: [spotify]
+        conflict: myth_killer is borderline — the myth (hardship = permanent failure) is real.
+        resolution: >
+          promise_engine is safer. If myth_killer used, ensure the "myth" is the
+          shame-based belief that the situation is unsurvivable, not the real hardship itself.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "The Psychology of Money: opens with a story contrasting a park attendant
+          who became a millionaire through frugal investing with a high-earning
+          executive who went bankrupt — immediately establishes: behavior matters
+          more than knowledge." "Too abstract if you're in financial crisis and need
+          immediate help" listed as Common Reader Complaint.
+        implication: >
+          Financial_stress reader needs more grounding than Housel's philosophical
+          approach. story_density: high must include real-hardship scenes, not
+          philosophical vignettes. The Housel model works for financial_anxiety;
+          financial_stress needs heavier emotional legitimation.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "I make good money and still live like I'm one mistake away from losing
+          everything." AND "I have money but I don't have security, which is the
+          opposite problem but feels just as terrifying."
+        implication: >
+          SPIRITUALITY_LEVEL CEILING RATIONALE: Both invisible scripts show readers
+          with real financial anxiety even when objectively stable. Spiritual money
+          frameworks are not merely inaccessible to these readers — they actively
+          invalidate the real threat experience. spirituality_level ceiling is
+          secular (never moderate or higher) for financial_stress. This is the
+          hardest spirituality ceiling of the 15 topics.
+      - source: config/spines/financial_stress_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "The hardship is real. This is the structural distinction between
+          financial_stress and financial_anxiety: in financial_stress, the threat
+          response is proportionate to an actual threat. The book cannot minimize
+          the stress or frame it as a perception problem."
+        implication: >
+          emotional_temperature: warm is the floor — but the warmth cannot be
+          soothing-warm (minimizing). It must be bearing-witness-warm. This is the
+          distinction: grief_level witness posture for the financial reality.
+
+    requires_human_decision:
+      - knob: spirituality_level
+        question: >
+          spirituality_level: secular is the hard ceiling based on invisible scripts
+          and spine rules. However, some financial stress readers use faith communities
+          as support systems. Should there be a faith_variant path where spirituality
+          is permitted only in the framing of community support (not abundance/manifestation)?
+          If so, what is the ceiling value for that variant?
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  somatic_healing:
+    primary_mechanism: watcher
+    allowed_engines: [watcher, overwhelm]
+
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: medium
+      reflection_depth: medium
+      pacing_profile: slow
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: medium
+      spirituality_level: secular_to_moderate   # wider range than most; body awareness spans traditions
+      compression: none
+      narrative_structure: van_der_kolk
+      runtime_target: standard
+
+    hard_floors:
+      pacing_profile: measured          # observation-before-intervention cannot be rushed
+      emotional_temperature: warm
+      story_density: medium
+
+    hard_ceilings:
+      exercise_density: low             # spine: titration is the rule; catharsis-seeking is prohibited
+      compression: none                 # observation arc cannot be compressed
+      practical_vs_contemplative: contemplative_first   # through ch05
+      spirituality_level: moderate      # ceiling; above moderate breaks secular-entry access
+
+    phase_overrides:
+      early_book:                       # ch1-5 — observation orientation ONLY
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: light          # watcher mechanism at ch03; before that, observation naming only
+        pacing_profile: slow
+      mid_book:                         # ch6-9 — first titration; overwhelm handling
+        exercise_density: low           # spine: "first practice at ch06: titration of one small sensation"
+        practical_vs_contemplative: contemplative_first
+        mechanism_depth: medium
+      late_book:                        # ch10-12
+        exercise_density: low
+        practical_vs_contemplative: balanced
+        pacing_profile: measured
+
+    dangerous_combinations:
+      - knobs: [exercise_density_medium, chapter_range_ch1-5]
+        chapter_range: ch1-5
+        reason: >
+          OBSERVATION_BEFORE_INTERVENTION IS NON-NEGOTIABLE. Spine: "practical_interruption
+          (ch06) — must follow destabilization; otherwise it arrives before the reader
+          has seen why their current strategies are not working." Any exercise before
+          ch06 breaks the observation orientation. For somatic_healing, this is the
+          most structurally critical constraint of any topic in the set. Reader who
+          has been living at a distance from their body will treat any early exercise
+          as another form of doing-at-the-body rather than with it.
+      - knobs: [exercise_density_high, chapter_range_all]
+        chapter_range: all
+        reason: >
+          Spine: "The promise of catharsis or dramatic release is explicitly forbidden:
+          it sets expectations that this work rarely delivers and can cause readers
+          to push themselves past their actual capacity." High exercise density
+          implies volume; somatic_healing requires titration (one small sensation
+          at a time). High density breaks the titration principle at any chapter.
+      - knobs: [narrative_structure_promise_engine, practical_vs_contemplative_balanced]
+        chapter_range: ch1-5
+        reason: >
+          Promise engine implies a transformation destination. Somatic_healing spine:
+          "They have not had a breakthrough. They have built a capacity." The promise
+          of catharsis or dramatic change breaks the spine's deliberately modest arc.
+          Any structure that implies "breakthrough" is dangerous for this topic.
+      - knobs: [spirituality_level_high, mechanism_depth_low]
+        chapter_range: all
+        reason: >
+          High spiritual framing without somatic mechanism narrows access to readers
+          who already have a spiritual body framework. Somatic_healing serves readers
+          "without requiring that any specific pathology be present." High spirituality
+          + low mechanism excludes the secular-disconnected reader who is the primary
+          entry point.
+
+    platform_conflicts:
+      - platform: [audible, apple_books]
+        conflict: >
+          "Somatic instructions in audio: work well when they use the imperative mood
+          with slow pacing" (bestseller research). Somatic_healing is inherently
+          audio-compatible if exercises are slow and somatic.
+        resolution: >
+          Late-book exercise_density: low should use audio-native somatic instructions.
+          All exercises must include explicit "pause here" bridges. No written exercises.
+          pacing_profile: slow especially during exercise delivery.
+      - platform: [ximalaya, kakao_page]
+        conflict: >
+          Episode format cannot sustain 6-chapter observation arc before first practice.
+          Short chapters with implicit payoff requirements break the titration model.
+        resolution: Do not run somatic_healing in micro or serialized format.
+
+    research_citations:
+      - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+        finding: >
+          "The Body Keeps the Score (van der Kolk, 2014): Ch. 1 names hypervigilance
+          somatically before explaining the nervous system → shifts to exercises in
+          later chapters." 376+ weeks NYT Paperback Nonfiction bestseller list.
+        implication: >
+          narrative_structure: van_der_kolk is the direct model for somatic_healing.
+          Body-naming before mechanism is the spine's core sequence. Late exercise
+          arrival validated by the #1 bestseller in adjacent somatic space.
+      - source: config/spines/somatic_healing_spine.yaml
+        field: what_makes_this_family_different
+        finding: >
+          "The observation-before-intervention sequence is non-negotiable: the reader
+          who has been pushing through their body's signals for years must first learn
+          to listen before they can work with what they hear."
+        implication: >
+          This is explicitly flagged as non-negotiable in the spine. Any knob
+          combination that delivers intervention before observation (exercises before
+          ch06) is a prohibited spine violation, not merely a suboptimal choice.
+      - source: config/spines/somatic_healing_spine.yaml
+        field: tone_and_pacing.action_timing
+        finding: "First practice arrives at chapter 6: titration of one small sensation."
+        implication: >
+          exercise_density: none floor through ch05. Absolute.
+      - source: marketing_deep_research/04_invisible_scripts.yaml
+        finding: >
+          "My body has been keeping score longer than I've been paying attention
+          to it." (millennial_women_professionals)
+        implication: >
+          The body-keeping-score framing (van_der_kolk resonance) is the recognition
+          vehicle. story_density: high must include the specific experience of not-
+          noticing the body's signals. teacher_presence: medium with author disclosure
+          of their own body-distance experience.
+
+    requires_human_decision:
+      - knob: spirituality_level
+        question: >
+          Somatic healing spans traditions — secular body awareness, trauma-informed,
+          and contemplative/spiritual (yoga, meditation, Indigenous body practices).
+          The spine does not constrain spirituality_level above secular. Should the
+          default be secular_to_moderate (current setting), with a persona-driven
+          switch? Or should spirituality_level be left as requires_human_decision
+          for every somatic_healing catalog entry?
+  mindfulness:
+    primary_mechanism: overwhelm
+    allowed_engines:
+    - overwhelm
+    - shame
+    - comparison
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: high
+      reflection_depth: high
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high
+      mechanism_depth: medium
+      pacing_profile: measured
+    hard_ceilings:
+      exercise_density: medium
+      spirituality_level: secular
+      compression: light
+    phase_overrides:
+      early_book:
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: high
+      mid_book:
+        exercise_density: none
+        reflection_depth: high
+        practical_vs_contemplative: contemplative_first
+      late_book:
+        exercise_density: low
+        practical_vs_contemplative: balanced
+    dangerous_combinations: []
+    platform_conflicts:
+    - platform:
+      - ximalaya
+      - kakao_page
+      - naver_audiobook
+      conflict: 'Short episode format cannot sustain 9-chapter recognition-before-practice arc. Spine: "Reframe
+        cannot arrive before ch09 — will register as toxic positivity without full preceding arc."
+
+        '
+      resolution: 'Do not run self_worth in micro format. Minimum standard_book.
+
+        '
+    - platform:
+      - spotify
+      conflict: 'Spotify''s preferred_structures include myth_killer. Self-worth''s scorecard is not a myth
+        — it is a real mechanism that must be examined, not debunked. myth_killer structure breaks the family
+        contract.
+
+        '
+      resolution: 'Use brene_brown or promise_engine on Spotify. Never myth_killer for self_worth.
+
+        '
+    research_citations:
+    - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+      finding: '"Brené Brown discloses her own shame research breakdown [as] method. Impersonal clinical
+        writing underperforms intimate disclosure in Goodreads reviews and completion rates."
+
+        '
+      implication: 'teacher_presence: high is validated for the shame engine. narrative_structure: brene_brown
+        is the best-practice model for this topic.
+
+        '
+    - source: config/spines/self_worth_spine.yaml
+      field: tone_and_pacing.action_timing
+      finding: First practice arrives at chapter 9. Before that, only recognition and examination.
+      implication: 'exercise_density: none floor through ch08. Non-negotiable.
+
+        '
+    - source: marketing_deep_research/04_invisible_scripts.yaml
+      finding: '"My worth is tied to my output, which is why I can''t rest without feeling guilty." (millennial_women_professionals
+        persona)
+
+        '
+      implication: 'practical_vs_contemplative: contemplative_first. Reader is in production mode. Any early
+        practical ask reads as another output demand.
+
+        '
+    requires_human_decision: []
+  adhd_focus:
+    primary_mechanism: overwhelm
+    allowed_engines:
+    - overwhelm
+    - shame
+    - comparison
+    knob_defaults:
+      story_density: high
+      exercise_density: medium
+      mechanism_depth: high
+      reflection_depth: high
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: balanced
+      teacher_presence: high
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high
+      mechanism_depth: medium
+      pacing_profile: measured
+    hard_ceilings:
+      exercise_density: medium
+      spirituality_level: secular
+      compression: light
+    phase_overrides:
+      early_book:
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: high
+      mid_book:
+        exercise_density: none
+        reflection_depth: high
+        practical_vs_contemplative: contemplative_first
+      late_book:
+        exercise_density: low
+        practical_vs_contemplative: balanced
+    dangerous_combinations: []
+    platform_conflicts:
+    - platform:
+      - ximalaya
+      - kakao_page
+      - naver_audiobook
+      conflict: 'Short episode format cannot sustain 9-chapter recognition-before-practice arc. Spine: "Reframe
+        cannot arrive before ch09 — will register as toxic positivity without full preceding arc."
+
+        '
+      resolution: 'Do not run self_worth in micro format. Minimum standard_book.
+
+        '
+    - platform:
+      - spotify
+      conflict: 'Spotify''s preferred_structures include myth_killer. Self-worth''s scorecard is not a myth
+        — it is a real mechanism that must be examined, not debunked. myth_killer structure breaks the family
+        contract.
+
+        '
+      resolution: 'Use brene_brown or promise_engine on Spotify. Never myth_killer for self_worth.
+
+        '
+    research_citations:
+    - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+      finding: '"Brené Brown discloses her own shame research breakdown [as] method. Impersonal clinical
+        writing underperforms intimate disclosure in Goodreads reviews and completion rates."
+
+        '
+      implication: 'teacher_presence: high is validated for the shame engine. narrative_structure: brene_brown
+        is the best-practice model for this topic.
+
+        '
+    - source: config/spines/self_worth_spine.yaml
+      field: tone_and_pacing.action_timing
+      finding: First practice arrives at chapter 9. Before that, only recognition and examination.
+      implication: 'exercise_density: none floor through ch08. Non-negotiable.
+
+        '
+    - source: marketing_deep_research/04_invisible_scripts.yaml
+      finding: '"My worth is tied to my output, which is why I can''t rest without feeling guilty." (millennial_women_professionals
+        persona)
+
+        '
+      implication: 'practical_vs_contemplative: contemplative_first. Reader is in production mode. Any early
+        practical ask reads as another output demand.
+
+        '
+    requires_human_decision: []

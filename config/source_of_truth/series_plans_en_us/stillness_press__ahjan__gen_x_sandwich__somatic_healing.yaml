@@ -1,0 +1,66 @@
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
+locale: en_US
+book_id_prefix: stillness_press__ahjan__gen_x_sandwich__somatic_healing
+brand: stillness_press
+teacher: ahjan
+persona: gen_x_sandwich
+topic: somatic_healing
+teacher_topic_score: 0.5
+teacher_persona_score: 0.5
+composite_fit: 0.5
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__gen_x_sandwich__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__gen_x_sandwich__somatic_healing__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__somatic_healing__overwhelm__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: |
+  You'll learn to come back into a body that learned to ignore itself. 7 books across engines of the same underlying capacity — each one enters the work from a different angle.
+bestseller_hook_family: recognition_descent
+emotional_engine: somatic_healing_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — trauma-body foundational
+- Waking the Tiger (Peter Levine) — somatic experiencing
+- My Grandmother's Hands (Resmaa Menakem) — racialized somatic voice
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 47–62
+  where_they_are: |
+    After a phone call with their mom's doctor. Their kid's college tuition bill on the counter. Silent kitchen.
+  what_they_need: |
+    Someone who acknowledges the compression of being simultaneously responsible for generations.
+  what_they_avoid: |
+    Mindfulness-for-beginners. Anything that ignores the time-poverty.
+series_voice_markers:
+  register: intimate, persona-specific, no management-speak
+  sentence_rhythm: somatic-pacing — sentences match breath
+  metaphor_family: body sensations, weather-of-the-body, nature — never productivity, mechanical, military
+  second_person_default: true
+  taboo:
+  - No rewire-your-brain language
+  - No morning-routine prescriptions
+  - No therapy-as-solution closing
+  - No religious framing
+main_character_name: Sophia
+main_character_role: office director, parent of teen + caregiver to aging parent
+main_character_image_path: null
+main_character_lora_id: sophia_sp_us
+main_character_trigger_word: sophia_sp_us
+plan_source_path: config/manga/manga_brand_series_plan.yaml

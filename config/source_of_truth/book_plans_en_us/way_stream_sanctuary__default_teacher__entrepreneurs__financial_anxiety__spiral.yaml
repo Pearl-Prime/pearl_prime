@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__financial_anxiety__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__money_fears
+  name: Money Without Panic — for Founders
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Number in Your Head: When One Thought Becomes a Thousand'
+subtitle: Escaping the Mental Loop — Financial Anxiety for Entrepreneurs (Breaking
+  the Thought Loop)
+cover_tagline: One missed forecast, and twenty minutes later you've mentally shut
+  the company down.
+description:
+  short_blurb: It starts with one thought — a soft month — and ends, somehow, with
+    you laying everyone off and explaining the failure to your parents. This is a
+    field guide for founders whose money fear runs as a runaway thought loop. It won't
+    promise to silence the spiral; it will teach you to catch the first link in the
+    chain before it drags the whole company down with it.
+  long_description: 'It always starts small. One number comes in under forecast. Then:
+    if this month is soft, the quarter''s soft. If the quarter''s soft, we miss the
+    milestone. If we miss the milestone, the round falls through. If the round falls
+    through, we''re out of cash by spring, and then it''s layoffs, and then it''s
+    the all-hands where you tell everyone, and then it''s the call to the investors,
+    and then it''s explaining to your family why the thing you bet everything on is
+    gone. Twenty minutes. One data point. You have just lived through the destruction
+    of your company in vivid detail, and none of it has happened.
+
+
+    This book is for the founder whose money fear isn''t a feeling — it''s a chain
+    reaction. A single trigger and your mind sprints down the entire failure cascade,
+    each link pulling the next, until you''re standing at the worst-case ending as
+    if it already arrived. You can''t out-logic it; by the time you notice, you''re
+    already at the bottom. The thoughts feel like planning. They are not planning.
+    Planning has a stopping point. The spiral doesn''t.
+
+
+    Priya Raman writes for the runaway loop specifically. First, recognition: you''ll
+    learn to spot the very first link — the original thought, before it recruits the
+    next ten — because that''s the only place the chain can actually be interrupted.
+    Once you''re three links in, you''re not reasoning, you''re falling. Then, descent.
+    Instead of fighting the spiral or trying to think your way to a calmer conclusion,
+    you go down underneath the thoughts to the fear that''s actually generating them,
+    and you let that fear be felt instead of narrated. The body can hold a fear it
+    cannot hold a thousand thoughts about. Then you come back up, the chain broken,
+    with one real number in front of you and nothing catastrophic attached to it yet.
+
+
+    This is not a thought-stopping technique or a cognitive trick that makes the loop
+    disappear forever. The spiral will start again — probably this week. What changes
+    is that you learn to recognize the first link as the first link, and step off
+    the chain before it builds the whole apocalypse out of one slow Tuesday.
+
+
+    A single soft number is a single soft number. It is not the future, it is not
+    the verdict, it is not the end — it is one fact, sitting still, waiting for you
+    to look at it without the avalanche. You''re allowed to stop the story before
+    it finishes. The ending it''s racing toward hasn''t been written, and most days
+    it never will be.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - founders
+  - money anxiety for founders
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — catching a thought before it
+  becomes a runaway story
+- Unwinding Anxiety (Judson Brewer) — interrupting the loop where worry feeds on itself
+- Rewire Your Anxious Brain (Catherine Pittman & Elizabeth Karle) — how a single trigger
+  snowballs into a cascade
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

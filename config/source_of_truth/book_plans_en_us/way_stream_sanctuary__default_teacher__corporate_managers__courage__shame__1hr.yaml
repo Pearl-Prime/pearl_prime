@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__courage__shame__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__courage__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__brave_world__1hr
+  name: Brave in the World — for Managers (One-Hour)
+installment_number: 2
+engine: shame
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Building Courage: Carrying What You Can''t Say'
+subtitle: Carrying What You Can't Say
+cover_tagline: Everyone thinks you've got it together. You're sure that if they looked
+  closely, they'd find the thing.
+description:
+  short_blurb: 'There''s a belief you carry into every meeting: that something is
+    wrong with you, and your whole job is keeping it hidden. This is a one-hour, unsentimental
+    look at the shame a manager hauls behind a competent face. You won''t be told
+    you''re enough. You''ll be shown what you''ve been guarding, and what it costs
+    to keep guarding it.'
+  long_description: 'It lives just under the surface of every room you run. You give
+    the update, you make the call, you sound exactly like someone who belongs in that
+    chair, and the entire time a quieter voice is doing the real labor, the labor
+    of making sure nobody catches sight of it. The thing. The flaw you''re sure is
+    in there, the reason the title never quite feels earned, the part of yourself
+    you long ago filed as the problem and have spent years keeping out of the light.
+
+
+    This book is for the manager who is privately certain they''re a fraud in a competent
+    costume. You''re the one people bring their problems to, the one who''s meant
+    to have the answer, and that is precisely what makes the shame so heavy, because
+    you can''t set it down without putting the whole performance at risk. You over-prepare
+    so no gap can show. You take routine feedback like a body blow. You hear "can
+    we talk?" and instantly assume the jig is finally up. The draining part was never
+    the work. It''s the concealment.
+
+
+    In one hour we do the single thing shame can''t withstand, which is steady, direct
+    attention. You start by naming the exact belief you''ve been carrying, the bare
+    sentence underneath all the bracing, because shame loses a measure of its hold
+    the instant it''s forced to say its own name. Then you go down. Not to be talked
+    out of it with a ledger of your accomplishments, but to see it for what it is,
+    something that got installed in you long before this job and has been impersonating
+    the truth ever since. Then you come back up, still carrying it on some days, but
+    no longer running an entire career as a cover operation.
+
+
+    This book will not tell you that you''re enough. That''s a slogan, you''ve heard
+    it, and it bounced clean off, because shame doesn''t answer to reassurance. There''s
+    no affirmation here, no exercise that dissolves it, no promise that you''ll stride
+    into the next meeting at last believing in yourself. You won''t be optimized into
+    wholeness. What you''ll get is the difference between having a feeling and being
+    run by one.
+
+
+    Waystream is secular and plain-spoken. We put usable words on what''s moving in
+    you, words for the conference table, the performance review, the long quiet after
+    someone''s handed you criticism that landed too hard. You are not a defect that
+    learned to manage people. You''re a person carrying something old that was never
+    the truth about you.
+
+
+    You are allowed to be seen and stay in the room.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  secondary:
+  - managers
+  - courage for managers
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
+comp_titles:
+- Daring Greatly (Brené Brown) — the definitive secular work on shame, hiding, and
+  the cost of armoring up at work
+- The Secret Thoughts of Successful Women (Valerie Young) — names the impostor belief
+  that high-performing leaders guard hardest
+- Mindset (Carol S. Dweck) — reframes the buried "something is wrong with me" as a
+  fixed-mindset story, not a verdict
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,110 @@
+# Quote bank — boundaries / zh_CN — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: boundaries
+locale_cluster: zh_CN
+wave: 2
+quote_count: 7
+quotes:
+- quote_id: quote_w2_boundaries_zh_cn_confucius_v01
+  text: 己所不欲，勿施于人。
+  text_en: What you do not want done to yourself, do not do to others.
+  author: 孔子
+  primary_source: 《论语·颜渊》
+  verified_via: ctext.org
+  public_domain: y
+  topic_keys:
+  - boundaries
+  - compassion_fatigue
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_social_zh_cn_zhuangzi_v01
+  text: 子非鱼，安知鱼之乐？
+  text_en: You are not a fish — how can you know the fish's joy?
+  author: 庄子
+  primary_source: 《庄子·秋水》
+  verified_via: ctext.org
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  - boundaries
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_anxiety_zh_cn_confucius_analects_12_v01_boundaries
+  text: 己所不欲，勿施于人。
+  text_en: What you do not want done to yourself, do not do to others.
+  author: 孔子
+  primary_source: 《论语·颜渊》
+  verified_via: ctext.org 论语 颜渊
+  public_domain: y
+  topic_keys:
+  - boundaries
+  - social_anxiety
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_anxiety_zh_cn_confucius_analects_12_v01_social_anxiety
+  text: 己所不欲，勿施于人。
+  text_en: What you do not want done to yourself, do not do to others.
+  author: 孔子
+  primary_source: 《论语·颜渊》
+  verified_via: ctext.org 论语 颜渊
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  - boundaries
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_anxiety_zh_cn_wang_yangming_02_v01_boundaries
+  text: 此心光明，亦复何言。
+  text_en: This mind is bright — what more is there to say?
+  author: 王阳明
+  primary_source: 《王阳明全集》临终遗言
+  verified_via: 传习录及全集标准版本
+  public_domain: y
+  topic_keys:
+  - boundaries
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_burnout_zh_cn_laozi_ddj_09_v01_compassion_fatigue
+  text: 持而盈之，不如其已。
+  text_en: To hold and fill to overflowing — better to stop in time.
+  author: 老子
+  primary_source: 《道德经》第九章
+  verified_via: ctext.org 道德经 9
+  public_domain: y
+  topic_keys:
+  - compassion_fatigue
+  - boundaries
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_financial_zh_cn_confucius_v05_boundaries
+  text: 君子爱财，取之有道。
+  text_en: The noble person values wealth but obtains it by the right Way.
+  author: 谚语（《论语·里仁》精神）
+  primary_source: 《论语·里仁》：'富与贵，是人之所欲也'
+  verified_via: 论语 里仁篇
+  public_domain: y
+  topic_keys:
+  - boundaries
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: 成语化出，典出论语
+  position_fit: either

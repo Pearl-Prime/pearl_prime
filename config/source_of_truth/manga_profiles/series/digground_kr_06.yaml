@@ -1,0 +1,79 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-22"
+profile_type: series
+
+title_id: digground_kr_06
+brand_id: digital_ground
+locale: ko_KR
+teacher: miki
+
+market_demo: josei
+genre_family: healing
+subgenre: "sleep_anxiety_tech_aesthetic"
+
+emotional_engine: cozy_restoration
+reader_promise: "You will find the part of your sleep that the phone took."
+
+serialization_engine: episodic
+chapter_hook_family: arrival
+
+visual_grammar: social_media_simulacra
+line_weight_profile: light
+black_fill_ratio: 0.06
+screentone_profile: none
+color_palette: "full_color_dark_mode_teal_navy"
+
+pacing:
+  words_per_page_target: 45
+  silent_panel_ratio: 0.40
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: minimal
+adaptation_targets:
+  - webtoon
+  - vertical_teaser
+
+series_title: "야간 모드"
+series_title_en: "Night Mode"
+
+series_logline: >-
+  A UX designer who cannot sleep tries one intervention per night and documents it.
+  The series is designed to be read in the dark.
+
+series_description: |
+  She designs apps for a living. She cannot sleep. Each episode of this series is
+  one night: one intervention tried (no screens, white noise, breathing, early wake,
+  sleep restriction therapy), one result (inconclusive, mostly). The visual aesthetic
+  mimics phone interface aesthetics — dark background, muted teal and navy highlights,
+  notification-style chapter headers. It is meant to be read in bed in the dark on
+  a phone. The irony is intentional. Platform: LINE Manga global distribution /
+  Bilibili Comics for CN market crossover.
+
+marketing_angle: |
+  Sleep anxiety content told from inside the tech worker's specific experience —
+  someone who makes the apps that are keeping her awake. Visual design mimics
+  dark-mode phone UI. Cross-platform appeal: KR + CN through LINE/Bilibili.
+  Extremely high mobile-first optimization.
+
+comp_titles:
+  - "Night is Short, Walk on Girl (Tomihiko Morimi) — night register, not topic"
+  - "Sleep (Haruki Murakami short story) — protagonist register"
+
+platform_primary: "LINE Manga"
+platform_secondary: "Bilibili Comics"
+format_note: "Vertical scroll, dark palette, full color. Biweekly. 40–55 panels."
+
+launch_priority: P1
+
+main_character_name: "수민" # Su-min
+main_character_name_romanized: Su-min
+main_character_role: "UX designer, 28, product of the apps she builds"
+main_character_image_path: null
+
+topic_mapping:
+  - sleep_anxiety
+  - burnout
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md

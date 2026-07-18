@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "job_id": "job-default_teacher-overthinking-ebook-2026-04-18",
+  "pipeline": "ebook",
+  "created": "2026-04-18T07:23:36+0000",
+  "guide_path": "docs/EBOOK_PIPELINE_COMPLETE_GUIDE.md",
+  "guide_acknowledged": true,
+  "workspace": "/Users/ahjan/phoenix_omega/artifacts/pipeline_workspace/genz_student_overthinking_2hr_20260418",
+  "params": {
+    "topic": "overthinking",
+    "locale": "en-US",
+    "persona": "gen_z_student",
+    "arc_path": "/Users/ahjan/phoenix_omega/config/source_of_truth/master_arcs/gen_z_student__overthinking__spiral__F003.yaml",
+    "teacher": "default_teacher"
+  },
+  "stages": [
+    {
+      "name": "preflight",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "book_spec",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "format_plan",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "compile",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "prose_render",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "quality_gate",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "freebie_gen",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "epub_build",
+      "status": null,
+      "output": null,
+      "ts": null
+    },
+    {
+      "name": "distribute",
+      "status": null,
+      "output": null,
+      "ts": null
+    }
+  ]
+}

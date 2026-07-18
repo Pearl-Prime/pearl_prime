@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__financial_anxiety__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__money_fears
+  name: Money Without Panic — for Students
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Anxiety: The Shutdown Point'
+subtitle: A Real Talk Guide to Financial Anxiety for Gen Alpha Students
+cover_tagline: When the money math gets so loud your whole brain just powers off.
+description:
+  short_blurb: You sit down to look at your account, your loans, the textbook you
+    can't afford, and somewhere in the middle of it your brain just quits. This is
+    a book about that exact moment of shutdown, written for students by someone who
+    isn't going to hand you a budget template. It names what's happening instead of
+    pretending it's a willpower problem.
+  long_description: 'It usually hits when you finally open the banking app, or the
+    tuition portal, or the group chat where everyone''s splitting a bill you can''t
+    actually cover. The number lands, and then there are six more numbers behind it,
+    and your brain doesn''t get scared so much as it goes dark. You close the tab.
+    You tell yourself you''ll deal with it later. Later becomes a permanent address.
+
+
+    This book is for the student who isn''t bad with money so much as flooded by it.
+    The one with rent, loans, a meal plan that ran out, a part-time job that doesn''t
+    quite cover it, and a phone full of notifications you''ve learned to swipe away
+    without reading. There''s the textbook you still haven''t bought, the lab fee
+    that showed up out of nowhere, the friend who fronted you for the last group dinner
+    and hasn''t asked about it yet but might. If you''ve ever frozen mid-task because
+    there was simply too much coming at you at once, this was written for you and
+    not for some imaginary person with a spreadsheet and a calm Sunday.
+
+
+    The engine here is overwhelm: not one big terror, but the pile. Too many numbers,
+    too many deadlines, too many decisions stacked on a brain that''s already running
+    on four hours of sleep and a vending-machine dinner. You''ll learn to recognize
+    the exact moment the pile tips into shutdown, the body signs that come right before
+    the lights go out, what''s actually happening when your mind blanks instead of
+    solving. Then, instead of forcing yourself back to the spreadsheet, you go down
+    into the overwhelm, separate the pile back into single objects, and find the one
+    thing in front of you that''s actually yours to handle today.
+
+
+    No budgeting app gets recommended in these pages. No morning routine, no envelope
+    system, no chirpy reframe about how debt is just a mindset. This book will not
+    optimize your finances and it will not pretend a paragraph can pay your bill.
+    What it will do is hand you words for the shutdown so that the next time the number
+    lands and your brain starts going dark, you can name it out loud, stay in the
+    room with it, and pull one real thing out of the pile instead of swiping the whole
+    thing away again.
+
+
+    You are allowed to not have it all figured out at twenty. The shutdown isn''t
+    proof you''re failing. It''s just a brain doing the most human thing there is
+    when too much arrives at once. Start where the pile is heaviest, and read.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - students
+  - money anxiety for students
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: jonah_kim
+comp_titles:
+- Burnout (Emily and Amelia Nagoski) — names the stress cycle in the body instead
+  of treating it as a willpower problem
+- The Financial Diet (Chelsea Fagan) — frank, jargon-free money talk aimed at young
+  people just starting out
+- Why Has Nobody Told Me This Before? (Julie Smith) — short, practical mental-health
+  tools written in plain, non-clinical language
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

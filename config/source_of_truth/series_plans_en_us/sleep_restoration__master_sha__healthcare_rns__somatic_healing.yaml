@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: sleep_restoration__master_sha__healthcare_rns__somatic_healing
+brand: sleep_restoration
+teacher: master_sha
+persona: healthcare_rns
+topic: somatic_healing
+byline_author: ruth_tam
+arc:
+  installment_1:
+    book_id: sleep_restoration__master_sha__healthcare_rns__somatic_healing__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: sleep_restoration__master_sha__healthcare_rns__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the nurse whose body never clocked out: a steady, nocturnal
+  companion that sits with what you''ve been holding since your last shift — and lets
+  you set it down, in the small hours, without being told to be strong, to optimize,
+  or to heal on a schedule.'
+bestseller_hook_family: ''
+emotional_engine: somatic_healing_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational text on how the
+  body stores what the mind sets aside; this series translates that recognition into
+  nights a nurse can actually use.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the unfinished stress that lives in caregivers'' bodies; shares this series'' refusal
+  to call exhaustion a personal failing.'
+- When the Body Says No (Gabor Maté) — on what chronic self-suppression costs the
+  body of those who care for others; the same tenderness toward people who've spent
+  themselves keeping everyone else alive.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 29-52, a floor RN working 12-hour rotations
+  where_they_are: It's 2am and the shift ended hours ago, but your body is still on
+    the unit — heart still quick, jaw still set, hand half-reaching for an alarm that
+    isn't ringing. The house is dark and quiet and you are wide awake inside a body
+    that won't believe it's safe to rest.
+  what_they_need: Permission to feel how much your body has been carrying — every
+    code, every loss, every double — and a way to let some of it go down and out,
+    in the dark, without a worksheet or a morning routine.
+  what_they_avoid: Self-care that sounds like another task, 'put your own oxygen mask
+    on first' platitudes, resilience training, sleep hacks, and anything that treats
+    your exhaustion as a mindset problem you should be able to push through.
+series_voice_markers:
+  register: Steady, nocturnal, quietly architectural — the voice of someone sitting
+    up with you in the dark room, who has seen what the body holds and isn't frightened
+    by it; holds without fixing, never clinical, never a coach.
+  sentence_rhythm: Short, weight-bearing sentences set beside longer ones that settle
+    and exhale; pauses where a breath would go; plain words carrying heavy things,
+    the way you'd speak softly to someone who finally stopped pretending they were
+    fine.
+  metaphor_family: Night and the dark room, foundations and what bears a load, weight
+    set down and the floor that holds it, the body settling toward the ground, the
+    long hours before dawn, the structure that stays standing while you let go.
+_needs_authoring: false

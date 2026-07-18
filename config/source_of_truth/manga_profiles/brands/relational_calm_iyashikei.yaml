@@ -1,0 +1,36 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+# Profile type: brand-genre lane template. All series within this brand+genre
+# lane use this profile. Per-series variation comes from seed selection.
+
+title_id: relational_calm_iyashikei
+brand_id: relational_calm
+teacher: miyuki
+
+market_demo: josei
+genre_family: healing
+subgenre: "relational_shame_recovery"
+
+emotional_engine: tenderness
+reader_promise: "You will remember what it feels like to belong to yourself first."
+
+serialization_engine: mood_based
+chapter_hook_family: ambiguous_line
+
+visual_grammar: soft_shojo_decorative
+line_weight_profile: light
+black_fill_ratio: 0.06
+screentone_profile: decorative
+
+pacing:
+  words_per_page_target: 35
+  silent_panel_ratio: 0.50
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: minimal
+adaptation_targets:
+  - print
+  - webtoon

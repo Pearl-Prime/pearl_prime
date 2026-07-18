@@ -1,0 +1,121 @@
+# Exercise component assembly rules.
+# Ordered list — first matching rule wins.
+# Each rule specifies match conditions and component modes (full/skip).
+# NOTE (operator directive, 2026-05-29): the `lean` mode is DEPRECATED. No
+# STORY or EXERCISE may ever be truncated, so the assembler treats LEAN as a
+# no-op (resolves to FULL). Any remaining `lean` value here would render in
+# full anyway; rules use `full`/`skip` only. `skip` omits a wrapper entirely
+# (a flow choice) but never shortens authored content.
+# bridge_tone: "gentle" triggers the softer bridge variant for post-emotional content.
+#
+# OPD-113 (2026-05-20): added `introduction` mode per rule. Maps to operator's
+# Part 1 of the 5-part exercise structure — the explicit "Now we're going to
+# do an exercise" cue. When unset, defaults to mirror the `intro` mode.
+#
+# Operator's 5-part mapping:
+#   1. introduction → introduction_templates.yaml ("Now we're going to do a practice.")
+#   2. description  → intro field / intro_templates.yaml ("This is a X practice...")
+#   3. guidance     → description field / atom text
+#   4. aha          → aha field
+#   5. integration  → integration field
+
+version: 1
+
+rules:
+  - name: quick_repeat
+    description: "Exercise repeated in this session — still rendered in full"
+    # Operator directive (2026-05-29): no exercise may ever be leaned/truncated.
+    # This rule previously skipped every wrapper and leaned the description,
+    # collapsing a repeated exercise to ~3 setup sentences and dropping the
+    # authored aha + integration entirely. It now renders the complete 5-part
+    # structure so every exercise is FULL on every path (spine AND legacy),
+    # every runtime, every chapter. The rule is retained (not deleted) so the
+    # repeat_count match still resolves deterministically — it just no longer
+    # shortens or omits any authored content.
+    match:
+      repeat_count_gte: 2
+    components:
+      bridge: full
+      introduction: full
+      intro: full
+      description: full
+      aha: full
+      integration: full
+
+  - name: emotional_pivot
+    description: "Heavy emotional content just landed — full gentle transition into exercise"
+    match:
+      emotional_state: heavy
+    components:
+      bridge: full
+      introduction: full   # OPD-113
+      intro: full
+      description: full
+      aha: full
+      integration: full
+    bridge_tone: gentle
+
+  - name: flow_state
+    description: "Reader is in good rhythm — full entry, skip integration to keep momentum"
+    match:
+      emotional_state: flow
+    components:
+      # Operator directive (2026-05-29): lean is disabled — emitted components
+      # render in full. (intro/integration remain skipped to preserve the
+      # in-flow momentum; skipping a wrapper is not truncation of authored
+      # content, and the description/aha guidance is always full.)
+      bridge: full
+      introduction: full
+      intro: skip
+      description: full
+      aha: full
+      integration: skip
+
+  - name: session_close
+    description: "Final exercise of chapter/session — skip entry, land fully"
+    match:
+      is_session_close: true
+    components:
+      bridge: skip
+      introduction: full   # OPD-113: explicit cue is still required at session close
+      intro: full          # OPD-113: keep description visible even at close so the
+                           # exercise is identifiable; was 'skip' pre-OPD-113
+      description: full
+      aha: full
+      integration: full
+
+  - name: familiar_new_context
+    description: "Reader knows this exercise but it's applied to a new topic"
+    match:
+      first_encounter: false
+      repeat_count_lte: 1
+    components:
+      bridge: full         # 2026-05-29: lean disabled — render the full bridge
+      introduction: full   # OPD-113: every exercise still gets the explicit cue
+      intro: full          # OPD-113: keep the named description (was 'lean')
+      description: full
+      aha: full
+      integration: full
+
+  - name: first_encounter
+    description: "Reader has never done this exercise — full preparation"
+    match:
+      first_encounter: true
+    components:
+      bridge: full
+      introduction: full   # OPD-113
+      intro: full
+      description: full
+      aha: full
+      integration: full
+
+  - name: default
+    description: "No specific context — full everything"
+    match: {}
+    components:
+      bridge: full         # 2026-05-29: lean disabled — render the full bridge
+      introduction: full   # OPD-113
+      intro: full
+      description: full
+      aha: full
+      integration: full

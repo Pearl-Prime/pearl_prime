@@ -1,0 +1,64 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__gen_z_professionals__grief
+brand: awakening_press
+teacher: adi_da
+persona: gen_z_professionals
+topic: grief
+byline_author: wren_nolan
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__gen_z_professionals__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__gen_z_professionals__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You don't have to fix the grief or get over it on a schedule.
+  These books sit beside you in the loss and help you recognize what was never actually
+  lost — the awareness underneath the ache, the part of you that was whole before
+  the story of who you should be by now.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- It's OK That You're Not OK (Megan Devine) — names grief as something to be tended,
+  not cured, and refuses the timeline everyone else imposes
+- When Things Fall Apart (Pema Chödrön) — meets the worst moments with spacious, non-fixing
+  presence rooted in awakening rather than positivity
+- The Untethered Soul (Michael A. Singer) — points past the anxious, narrating self
+  to the quiet awareness underneath it, in plainspoken non-guru language
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early-to-mid twenties
+  where_they_are: It's a Tuesday and you're back at your desk forty-eight hours after
+    the funeral, answering Slack messages with a face that looks fine, while something
+    enormous sits in your chest that nobody at work has the language to ask about.
+  what_they_need: Permission to stop performing okayness, and a quiet way to be with
+    loss that doesn't treat grief as a problem to optimize, a project to finish, or
+    a sign that something is wrong with them.
+  what_they_avoid: Five-stage frameworks, hustle-grief ('use the pain as fuel'), spiritual
+    bypassing, anyone who says 'everything happens for a reason,' and the pressure
+    to be healed in time for the next standup.
+series_voice_markers:
+  register: spacious, awakening, quietly radical; intimate not lofty; the voice of
+    someone who has sat in the same dark and isn't in a hurry to turn the lights on
+  sentence_rhythm: long settling sentences that open out, then a short one that lands;
+    pauses left in on purpose; never clipped, never clinical, never a checklist
+  metaphor_family: the open sky behind passing weather, waking from a dream you mistook
+    for everything, the light that was in the room the whole time, coming home to
+    what was never lost, the loosening of a grip you didn't know you were holding
+_needs_authoring: false

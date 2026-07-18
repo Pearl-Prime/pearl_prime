@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__steady_ground__1hr
+  name: Steady Ground — for Professional Women (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: Living with What You''ve Lost (2)'
+subtitle: A Field Guide for Millennial Women Professionals Navigating Burnout
+cover_tagline: You didn't just burn out. You lost the version of you who could do
+  it all.
+description:
+  short_blurb: Burnout isn't only exhaustion. It's a quiet grief for the woman who
+    used to thrive on this, who answered every email and never dropped the ball. This
+    is one hour to name that loss out loud and stop pretending you're the same person
+    who walked in.
+  long_description: 'It''s 9 p.m. and you''re staring at your laptop, and the work
+    that used to light you up feels like sand in your mouth. You''re not lazy. You''re
+    not failing. Something in you has gone quiet, and you keep waiting for it to come
+    back the way you''d wait for a fever to break. It hasn''t. This hour is for the
+    woman who built a career on being the one who could handle anything, the one who
+    said yes, stayed late, kept the whole thing running, and now can''t find the person
+    who used to do that without flinching.
+
+
+    This is for you if you''ve been calling it burnout when what you actually feel
+    is loss. The grief of the ambition that used to feel like yours. The grief of
+    the colleague you were before the thing that broke you, before the team you loved
+    got restructured, before the role you wanted went to someone else, before your
+    body simply stopped cooperating. You keep trying to optimize your way back to
+    her. She''s not coming back, and reading her your to-do list won''t change that.
+
+
+    So we won''t try. First you''ll recognize it plainly: this is grief, not a productivity
+    problem, and you''ve been treating a wound like a scheduling error. Then you''ll
+    go down into it instead of around it. You''ll let yourself feel the actual size
+    of what you lost, not just the job energy but the certainty that came with it,
+    the version of you who knew she could push through anything and be fine. You''ll
+    stop rushing to reframe the loss as a growth opportunity, and just let it be a
+    loss for a minute. And then you''ll come back up, still you, but no longer pretending
+    nothing happened. Not fixed. Changed.
+
+
+    This book will not hand you a recovery routine. It won''t promise you''ll love
+    your job again by Monday, or that the right boundaries will restore the old fire.
+    It won''t tell you this was secretly a gift. Some of it was just a loss, and you''re
+    allowed to call it one without finding the lesson first.
+
+
+    What it will do is sit with you in the part most advice skips: the hour where
+    you stop performing recovery and let yourself grieve the worker you were, so the
+    woman you actually are now has somewhere to stand. You don''t have to get her
+    back to be whole. You don''t have to know what''s next to put this down. You''re
+    allowed to mourn the version of you that this job used up, and then keep living
+    as the one who''s still here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - professional women
+  - burnout for professional women
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: grace_adeyemi
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names exhaustion in women''s bodies without a hustle-fix'
+- It's OK That You're Not OK (Megan Devine) — refuses to rush grief into recovery
+  or silver linings
+- The Body Keeps the Score (Bessel van der Kolk) — explains why the loss lives in
+  your body, not your calendar
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

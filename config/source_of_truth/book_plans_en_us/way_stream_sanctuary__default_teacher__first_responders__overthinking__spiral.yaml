@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__overthinking__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__overthinking.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__restless_mind
+  name: Quiet the Restless Mind — for First Responders
+installment_number: 2
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Thought That Won''t Leave: Escaping the Mental Loop'
+subtitle: How First Responders Are Rewriting the Rules of Overthinking
+cover_tagline: One thought about the shift. Then a thousand.
+description:
+  short_blurb: It starts with one moment from the job and ends with you somehow questioning
+    every call you've ever run. This book is for first responders whose mind takes
+    a single thread and pulls until the whole thing unravels. It won't stop the spiral
+    on demand — it'll show you the floor it always lands on.
+  long_description: 'It was one thought. Something about a decision you made on a
+    run — a beat where you wonder if you read it right. That''s all it should''ve
+    been. But your mind doesn''t stop at one. It pulls the thread, and now you''re
+    three years and forty calls deep, re-litigating every judgment you''ve ever made
+    under pressure, and you couldn''t tell anyone where the first thought ended and
+    the avalanche began.
+
+
+    This is for the responder whose head turns one second of doubt into a full review
+    board at 1am. You know the spiral. It usually waits until the gear''s off and
+    the house is quiet, and then it runs the tape — not the call that actually went
+    sideways, but the slow accumulation of every what-if you''ve never had time to
+    feel during a shift. One judgment call summons the next, and the next, until you''re
+    not reviewing a decision anymore. You''re on trial for your competence, and the
+    jury is just you, exhausted, at one in the morning.
+
+
+    You''ll learn to catch the spiral at the top, in the small moment before it becomes
+    a thousand — not to slam the door on it, but to see it for the mechanism it is.
+    A mind built to anticipate every outcome on scene doesn''t know how to stop anticipating
+    when there''s nothing left to anticipate. Then you''ll go down into it on purpose.
+    Instead of bracing against the descent, you''ll follow the thread all the way
+    to the bottom — slowly, without grabbing for the next worry to confirm the first
+    — and find what''s actually there. Not a hundred separate failures. One tired
+    person who has been carrying every call alone and has never been allowed to set
+    them down. You''ll sit with that person a while. You''ll let it be true before
+    you try to make it better, because the rushing past it is exactly what kept the
+    spiral spinning.
+
+
+    What changes is not that the spiral never starts. It''s that you stop being afraid
+    of where it goes. You learn the bottom is solid. The thread runs out. And the
+    thing waiting down there was never a verdict on your competence — it was just
+    the weight you never had a place to put.
+
+
+    This book will not promise you a quiet head or a trick to shut the spiral off
+    mid-fall. It won''t hand you a thought-stopping drill to run between calls. There''s
+    nothing to fix here, because the spiral isn''t a malfunction — it''s a thorough
+    mind with nowhere safe to land.
+
+
+    You are allowed to follow it down and discover the floor was there the whole time.'
+keywords:
+  primary:
+  - stop overthinking
+  - overthinking help
+  - rumination
+  - racing thoughts
+  - quiet the mind
+  - analysis paralysis
+  secondary:
+  - first responders
+  - overthinking for first responders
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: cole_bennett
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — the habit-loop mechanics of a mind that won't
+  stop running scenarios
+- Maybe You Should Talk to Someone (Lori Gottlieb) — the relief of following a thread
+  all the way down instead of bracing against it
+- Burnout (Emily and Amelia Nagoski) — completing the stress cycle the job never lets
+  you finish
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

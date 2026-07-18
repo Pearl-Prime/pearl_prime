@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__anxiety__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__calm_alarm__1hr
+  name: Calm the Alarm — for Nurses (One-Hour)
+installment_number: 4
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Anxiety Relief: Too Many Things, Not Enough You (2)'
+subtitle: Drowning in Demands — Anxiety for Healthcare Rns (When Everything Is Too
+  Much)
+cover_tagline: Four call lights, two new admits, a phone that won't stop. The moment
+  you go blank — that's this book.
+description:
+  short_blurb: Everything hit at once and your brain just... stopped. This is the
+    one-hour reset for the nurse who knows the exact moment the floor becomes too
+    much and the lights go out behind her eyes. Read it in a single sitting and learn
+    what's actually happening at the shutdown point — and how to come back.
+  long_description: 'You know the moment. Three patients are circling, the phone is
+    ringing, a family member is in your face, the pump is alarming, and somewhere
+    in there a doctor wants a callback. For one beat you can hold it all — and then
+    you can''t. The inputs pile past some invisible line and your brain goes white.
+    You''re standing in the hallway, fully trained, and you cannot think of the next
+    thing to do.
+
+
+    This hour is for the nurse who hits the shutdown point on a regular basis and
+    walks away thinking she''s the problem. You''re not slow and you''re not weak.
+    You are a finite human being absorbing an infinite number of demands, and there
+    is a threshold where the system protects itself by going offline. The blankness
+    isn''t a character flaw. It''s a circuit breaker.
+
+
+    The recognition is that overwhelm isn''t the same as having too much to do — every
+    nurse always has too much to do. Overwhelm is too much arriving at once, with
+    no gap to put any of it down. The anxiety alarm reads that flood as failure: you
+    can''t handle this, everyone else can. But the freeze you feel at the worst moment
+    of the shift isn''t you failing the job. It''s your nervous system tripping under
+    a genuinely impossible load.
+
+
+    Then we go down into the shutdown point itself, instead of bullying yourself past
+    it. Not time-management hacks, not a prioritization matrix to run while a patient
+    is crashing — that''s just one more input on the pile. Instead you''ll learn to
+    feel the exact edge where you tip from full to blank, and to meet the freeze without
+    panicking about the freeze. You come back to the floor able to recognize it in
+    real time: that''s the shutdown point, not the end of my competence — and able
+    to find the one next action instead of all of them at once.
+
+
+    This book will not promise to make the floor manageable. It won''t optimize your
+    workflow or pretend that better triage fixes a staffing crisis. No productivity
+    system, no morning routine, no toxic positivity about "thriving under pressure."
+    The honesty is that the load is too big, and you still have to be in it.
+
+
+    What changes is what happens at the edge. You stop reading the blankness as proof
+    you don''t belong here, and start treating it as a signal you''ve been asked to
+    hold more than any one person can. You are allowed to reach your limit. You are
+    allowed to do the next single thing and let the rest wait. The alarm calls it
+    falling apart. It''s a built-in brake, and you can learn to ride it.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - nurses
+  - anxiety for nurses
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — the stress-cycle science behind the caregiver
+  shutdown
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — secular physiology of acute overload
+  and the stress response
+- Do Nothing (Celeste Headlee) — pushing back on the always-more demand that drives
+  the freeze
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

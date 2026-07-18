@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__depression__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__through_loss__1hr
+  name: Through the Low Places — for Professional Women (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: Drowning in Demands (2)'
+subtitle: The Overwhelm Response — Depression for Millennial Women Professionals (When
+  Everything Is Too Much)
+cover_tagline: It's not that you can't cope. It's that everything arrived at once
+  and never left.
+description:
+  short_blurb: When the heaviness you call depression is really too much hitting you
+    all at once, this one-hour reset meets you there. Written for professional women
+    drowning in inputs while looking completely on top of it. No life-hacks. Just
+    a way to set the load down.
+  long_description: 'Your inbox is a wall. Your calendar is a wall. Behind them: three
+    group chats you owe replies to, your mother''s voicemail from Tuesday, the thing
+    at work that is quietly falling apart and that you can''t tell anyone about, the
+    friendships you keep meaning to get back to, the dentist, the car, the version
+    of rest you vaguely remember. You''ve started calling the heaviness depression.
+    But if you''re honest, it doesn''t feel like emptiness — it feels like a hundred
+    things at once, all of them addressed to you, all of them due, until something
+    in you just dimmed to survive it.
+
+
+    You may be the woman who looks like she has it handled and is, in fact, buried
+    alive under the handling. Who color-codes the chaos so that no one can see it''s
+    chaos. Who lies awake running the math on everything she owes everyone, and wakes
+    up already behind on a day that hasn''t started. Who genuinely can''t tell anymore
+    whether she is depressed, or simply carrying a load that no single human being
+    was ever built to carry alone.
+
+
+    The work here starts with getting the diagnosis right, because the wrong label
+    sends you to the wrong fix. What''s actually happening usually isn''t a deficit
+    of will — it''s overwhelm: too much, too constant, with no gap anywhere to recover
+    in. Once you can see that clearly, you do the counterintuitive thing. Instead
+    of speeding up to clear the pile, you stop, and you let yourself feel the full,
+    honest size of it without immediately leaping to solve it. You stand in the middle
+    of too-much and let it be too much, just for a while. And from that strange stillness,
+    something sorts itself: you start to see the difference between what is genuinely
+    yours to carry and what you''ve simply been holding because no one ever told you
+    that you were allowed to set it down.
+
+
+    What you won''t be handed here is another system. No inbox-zero method, no productivity
+    framework, no five-step plan to reclaim your morning, no breathing trick that
+    promises bliss on the other side of it. The problem was never that you hadn''t
+    found the right app or the right hack. The problem is the sheer volume of it,
+    and the quiet lie that drowning under an impossible amount is a personal failing
+    instead of a math problem.
+
+
+    You''ll leave with words for the moment the whole load lands on you at once —
+    and with the right to put it down, even briefly, without first earning the rest.
+
+
+    You are not weak for being overwhelmed by an objectively overwhelming amount.
+    Let this hour be the gap nobody scheduled for you, the one you''ve been refusing
+    to give yourself.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - professional women
+  - depression for professional women
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: grace_adeyemi
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski)
+- Four Thousand Weeks (Oliver Burkeman)
+- How to Keep House While Drowning (KC Davis)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

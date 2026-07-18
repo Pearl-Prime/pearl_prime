@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__depression__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__depression.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__through_loss
+  name: Through the Low Places — for Young Professionals
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Weight Without a Name: Too Many Things, Not Enough You'
+subtitle: A Real Talk Guide to Depression for Gen Z Professionals
+cover_tagline: It's not that you can't handle it. It's that there was never an amount
+  a human could.
+description:
+  short_blurb: The notifications never stop, the goalpost keeps moving, and somewhere
+    in the noise the heaviness set in and never left. This is for the young professional
+    who looks like they're keeping up while quietly drowning. It won't add one more
+    thing to your plate — it names why the plate was never the problem.
+  long_description: 'You open your laptop and your chest tightens before you''ve read
+    a single message. There are too many tabs, too many pings, too many people who
+    need a thing from you by end of day, and underneath the static is a low gray weight
+    that the busyness was supposed to outrun. It didn''t. You''re not behind because
+    you''re lazy. You''re flooded — and the flood has been on long enough that it
+    started to feel like depression.
+
+
+    You are drowning in demands, even if your job description never used that word.
+    Your calendar is a wall of color, your phone buzzes through dinner, and you answer
+    "how are you" with "busy" because it''s true and because it''s easier than the
+    real answer. You came up being told that more effort fixes everything, so when
+    more effort stopped working you assumed something was wrong with you. Nothing
+    is wrong with you. The volume is wrong, and you''ve been absorbing it with your
+    whole nervous system.
+
+
+    Wren Adler isn''t here to optimize your inbox or sell you a productivity system
+    that promises calm by Q3. This goes the other direction. Recognition: seeing that
+    the heaviness isn''t a character flaw, it''s what a person feels when too much
+    arrives at once for too long. Descent: turning toward the overwhelm instead of
+    sprinting from it — letting yourself feel the size of what you''ve been carrying
+    without immediately triaging it into a to-do list. Integration: coming back able
+    to tell the difference between what''s actually yours to hold and what the world
+    simply handed you and called urgent.
+
+
+    This will not promise you inbox zero or a life with no pressure. It won''t teach
+    you to do more in less time. There is no hack that makes an unlivable pace livable,
+    and pretending otherwise is how you got here. What it offers instead is the relief
+    of naming the real problem — not your output, the input — and a way to stand in
+    the middle of the flood without letting it become the weather of your whole life.
+
+
+    You''ll learn to feel the difference between the depression that needs care and
+    the overwhelm that needs less — because nonstop demand can manufacture a heaviness
+    that looks exactly like a chemical one. You''ll stop grading yourself on how much
+    you absorbed today. You''ll find that setting something down is not quitting;
+    it''s the first accurate move you''ve made in months.
+
+
+    You are allowed to not keep up with a pace no one could keep up with. You don''t
+    have to earn the right to feel flooded. Put the phone face-down. Let it be too
+    much, out loud, for once — and start from there.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - young professionals
+  - depression for young professionals
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — explains the physiology of being chronically
+  overloaded, not weak
+- Four Thousand Weeks (Oliver Burkeman) — secular case against optimizing your way
+  out of finite time
+- How to Keep House While Drowning (KC Davis) — compassionate, no-shame help when
+  demands exceed capacity
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

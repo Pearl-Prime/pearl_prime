@@ -1,0 +1,153 @@
+schema_version: "1.0"
+description: >
+  Quality checklist for the Translation Comparator Loop.
+  Adapted from config/audiobook_script/comparison_checklist_v2.yaml.
+  5 gates: 2 hard (must pass) + 3 scored (aggregate >= 0.75).
+checklist_version: "1.0.0"
+last_updated: "2026-04-01"
+
+scoring:
+  min_scored_pass_threshold: 0.75
+  score_scale: [0.0, 1.0]
+  hard_gate_failure_routing: manual_review
+
+gates:
+
+  - gate_id: semantic_fidelity
+    name: Semantic Fidelity
+    description: >
+      Translation preserves the original therapeutic content's core meaning.
+      No ideas added, removed, or shifted. Second-person voice preserved.
+      Emotional tone (gentle, validating, zero judgment) preserved.
+    type: hard
+    judge_instruction: >
+      Compare the translation to the English source variant by variant.
+      Score pass=true only if meaning is fully preserved for ALL variants.
+      The second-person voice ("You are allowed to...") must be preserved
+      in the target language's equivalent construction. Flag any added,
+      removed, or shifted ideas.
+    defect_format: "variant N: [added/removed/shifted] -> specific text"
+    prompt_patch_format: "Restore the following meaning from the English source: {defect_list}"
+
+  - gate_id: format_integrity
+    name: Format Integrity
+    description: >
+      All 20 ## TYPE vNN headers preserved in English. All --- delimiters
+      preserved. Exactly 20 variants in output. No explanations or notes added.
+    type: hard
+    judge_instruction: >
+      Verify: (1) exactly 20 variants, (2) all headers like "## PIVOT v01"
+      preserved in English, (3) all --- delimiters preserved, (4) no
+      preamble, commentary, or translator notes added. Return pass=true
+      only if ALL format rules are satisfied.
+    defect_format: "List each format violation with variant number"
+    prompt_patch_format: "Fix format: {defect_list}. Headers MUST stay English. Exactly 20 variants. No notes."
+
+  - gate_id: native_language_fit
+    name: Native Regional Language Fit
+    description: >
+      Reads as native writing for the target locale, not as a translation.
+      No calqued English idioms, no register mixing, no translationese.
+      Highest-weight scored gate.
+    type: scored
+    weight: 2.5
+    judge_instruction: >
+      Evaluate as a native speaker of the target locale. Score 0.0-1.0:
+      1.0 = completely natural, locale-authentic expression. Penalize
+      calqued idioms, English word-order carryover, non-regional vocabulary,
+      and any phrasing that reads as "translated from English."
+    defect_format: "variant N: [draft text] -> [suggested native alternative]"
+    prompt_patch_format: "Replace these non-native expressions: {defect_list}"
+
+  - gate_id: cultural_adaptation
+    name: Cultural Adaptation
+    description: >
+      Locale-specific cultural framing where natural. Therapeutic concepts
+      adapted to local understanding without losing precision.
+    type: scored
+    weight: 2.0
+    judge_instruction: >
+      Score 0.0-1.0: does the translation use culturally resonant framing
+      for the target locale? For example, ja-JP should reference wa/harmony
+      where natural; zh-CN should use collective framing; ko-KR should
+      reference jeong/nunchi where appropriate. Do NOT force cultural
+      references — score for naturalness of adaptation.
+    defect_format: "variant N: missed cultural adaptation opportunity at [text]"
+    prompt_patch_format: "Improve cultural adaptation: {defect_list}"
+
+  - gate_id: therapeutic_register
+    name: Therapeutic Register Consistency
+    description: >
+      Consistent therapeutic register throughout. PERMISSION atoms must use
+      gentle, validating tone. PIVOT atoms must be warm but direct.
+      TAKEAWAY atoms must be crisp and quotable. Register appropriate for
+      the locale's self-help genre conventions.
+    type: scored
+    weight: 1.5
+    judge_instruction: >
+      Score 0.0-1.0: is the therapeutic register consistent and appropriate?
+      Check: PERMISSION = gentle/validating, PIVOT = warm/direct,
+      TAKEAWAY = crisp/quotable, THREAD = curious/inviting,
+      STORY = narrative/immersive. Penalize register shifts within a file.
+    defect_format: "variant N: register issue at [text] — expected [register], got [register]"
+    prompt_patch_format: "Fix register: {defect_list}"
+
+locale_overrides:
+  ja-JP:
+    additional_checks:
+      - "丁寧語 (polite register) throughout; no casual forms unless in dialogue"
+      - "Reference wa/harmony, mu/emptiness, ikigai where natural"
+  ko-KR:
+    additional_checks:
+      - "Formal speech level (hapshoche/haeyoche) consistent"
+      - "Reference jeong/정, nunchi/눈치 where natural"
+  zh-CN:
+    additional_checks:
+      - "Simplified Chinese only; collective framing"
+      - "Reference he/和/harmony, dao/道 where natural"
+  zh-TW:
+    additional_checks:
+      - "Traditional Chinese; literary register"
+      - "No Mainland PRC cultural references"
+  zh-HK:
+    additional_checks:
+      - "Traditional Chinese; Cantonese-influenced vocabulary where natural"
+  zh-SG:
+    additional_checks:
+      - "Simplified Chinese; Singapore multicultural context"
+
+  # ─── Added 2026-07-09 (translation source-pack lane) ───────────────────────
+  # These 7 locales previously had NO locale_overrides block at all — a translator
+  # or judge working these locales fell back to the generic gates with zero
+  # locale grounding (an english-stub gap in the quality contract itself, not in
+  # any translated content). Guidance below is sourced from the register/cultural
+  # notes already ratified in locale_registry.yaml and content_roots_by_locale.yaml
+  # — no new cultural claims are introduced here.
+  es-US:
+    additional_checks:
+      - "Neutral Latin American Spanish register (not Castilian) — no vosotros forms, no c/z distinction"
+      - "Second-person voice via tú (informal, warm), consistent with US Hispanic self-help register"
+  es-ES:
+    additional_checks:
+      - "Castilian Spanish register: vosotros verb forms and c/z distinction required (do not use neutral es-US forms)"
+      - "Second-person voice via tú, consistent with Spain wellness/self-help genre conventions"
+  fr-FR:
+    additional_checks:
+      - "Second-person voice via tu (informal), not vous, consistent with French self-help conventions"
+      - "Stoic/existentialist, philosophical framing is culturally accepted alongside somatic language — do not flatten to purely clinical tone"
+  de-DE:
+    additional_checks:
+      - "Second-person voice via du (informal), consistent with DACH (Germany/Austria/Switzerland) wellness register"
+      - "Evidence-based, science-grounded framing preferred; avoid overtly spiritual language — keep the secular nervous-system/neuroscience angle"
+  it-IT:
+    additional_checks:
+      - "Second-person voice via tu (informal), consistent with Italian wellness/self-development framing"
+      - "Avoid clinical/diagnostic language in reader-facing copy; prefer wellness and self-development register"
+  hu-HU:
+    additional_checks:
+      - "Second-person voice via te (informal), consistent with Hungarian wellness/self-development register"
+      - "Mental health stigma remains higher than Western Europe — prefer wellness/self-development framing over clinical language"
+  pt-BR:
+    additional_checks:
+      - "Neutral Brazilian Portuguese register (not European Portuguese) — avoid vós verb forms and European PT vocabulary"
+      - "Second-person voice via você, consistent with Brazilian self-help/comics-adjacent register"

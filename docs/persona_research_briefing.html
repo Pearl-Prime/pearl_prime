@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persona Research Briefing — Market Fit Analysis</title>
+<style>
+:root{--bg:#f9fafb;--white:#fff;--card:#f8f8fa;--border:#e5e7eb;--accent:#7c3aed;--al:#ede9fe;--ad:#5b21b6;--red:#dc2626;--rl:#fef2f2;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--blue:#2563eb;--bl:#eff6ff;--orange:#ea580c;--ol:#fff7ed;--pink:#db2777;--pl:#fdf2f8;--text:#111827;--muted:#6b7280;--light:#9ca3af;--r:16px;--rs:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.hero{text-align:center;padding:60px 24px 36px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:.92rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:.75rem;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.dot-g{background:var(--green)}.dot-y{background:var(--gold)}.dot-p{background:var(--accent)}.dot-b{background:var(--blue)}.dot-r{background:var(--red)}
+.mx{max-width:1000px;margin:0 auto;padding:0 20px}
+.tn{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tn-inner{max-width:1000px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.tn-inner::-webkit-scrollbar{display:none}
+.tb{padding:11px 14px;font-size:.74rem;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s}
+.tb:hover{color:var(--text);border-bottom-color:var(--border)}
+.tb.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tp{display:none;padding:44px 0 36px}
+.tp.on{display:block;animation:fu .35s ease}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:700;margin-bottom:6px}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.desc{color:var(--muted);font-size:.88rem;max-width:660px;margin-bottom:18px;line-height:1.65}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.sx{border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;background:var(--white)}
+.sx .pct{font-size:2rem;font-weight:900;line-height:1}
+.sx .lb{font-size:.82rem;font-weight:600;margin-top:4px}
+.sx .sub{font-size:.7rem;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;font-size:.65rem;padding:3px 8px;border-radius:999px;font-weight:600}
+.tag-g{background:var(--gl);color:var(--green)}.tag-p{background:var(--al);color:var(--accent)}.tag-o{background:var(--ol);color:var(--orange)}.tag-b{background:var(--bl);color:var(--blue)}.tag-r{background:var(--rl);color:var(--red)}.tag-pk{background:var(--pl);color:var(--pink)}.tag-y{background:var(--gol);color:var(--gold)}
+.dt{width:100%;border-collapse:collapse;margin:14px 0;font-size:.78rem}
+.dt th{background:var(--al);color:var(--ad);padding:8px 10px;text-align:left;font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--accent)}
+.dt td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.dt tr:hover td{background:rgba(124,58,237,.03)}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px}
+.rc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;transition:.25s}
+.rc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.rc h4{font-size:.88rem;font-weight:700;margin-bottom:4px}
+.rc p{font-size:.75rem;color:var(--muted);line-height:1.5}
+.rc .rc-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.sep{margin:28px 0 20px;border-top:1px solid var(--border);padding-top:20px}
+.mbox{background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(220,38,38,.03));border:1px solid var(--border);border-radius:var(--r);padding:28px;margin-bottom:20px;text-align:center}
+.mbox p{font-size:.95rem;color:var(--text);font-style:italic;max-width:640px;margin:0 auto;line-height:1.7}
+.mbox .big{font-size:1.15rem;font-weight:700;font-style:normal;margin-bottom:4px}
+.persona-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px;transition:.25s}
+.persona-card:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.persona-card .p-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.persona-card .p-name{font-size:.95rem;font-weight:700}
+.persona-card .p-age{font-size:.72rem;color:var(--muted)}
+.persona-card .p-topics{margin:8px 0}
+.persona-card .p-gap{background:var(--rl);border:1px solid #fecaca;border-radius:var(--rs);padding:10px;margin-top:10px;font-size:.75rem;color:#991b1b;line-height:1.5}
+.persona-card .p-gap strong{color:var(--red)}
+.persona-card .p-platform{font-size:.73rem;color:var(--muted);margin-top:6px}
+.locale-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px;transition:.25s}
+.locale-card:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.locale-card .l-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.locale-card .l-flag{font-size:1.6rem}
+.locale-card .l-name{font-size:1rem;font-weight:700}
+.locale-card .l-stat{font-size:.73rem;color:var(--muted);line-height:1.5;margin-bottom:8px}
+.locale-card .l-topics{margin:8px 0}
+.locale-card .l-culture{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--rs);padding:10px;margin-top:10px;font-size:.73rem;color:#166534;line-height:1.5}
+.locale-card .l-culture strong{color:var(--green)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.platform-grid{width:100%;border-collapse:collapse;margin:14px 0;font-size:.72rem}
+.platform-grid th{background:var(--al);color:var(--ad);padding:6px 8px;text-align:center;font-weight:700;font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--accent);white-space:nowrap}
+.platform-grid td{padding:5px 8px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
+.platform-grid tr:hover td{background:rgba(124,58,237,.03)}
+.cell-ebook{background:#dbeafe;color:#1e40af;font-weight:600;border-radius:4px}
+.cell-audio{background:#d1fae5;color:#065f46;font-weight:600;border-radius:4px}
+.cell-manga{background:#ffedd5;color:#9a3412;font-weight:600;border-radius:4px}
+.cell-stream{background:#ede9fe;color:#5b21b6;font-weight:600;border-radius:4px}
+.cell-mixed{background:#fef3c7;color:#92400e;font-weight:600;border-radius:4px}
+.gap-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px;transition:.25s;position:relative;overflow:hidden}
+.gap-card:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.gap-card .g-rank{position:absolute;top:0;left:0;width:36px;height:36px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;border-radius:0 0 var(--rs) 0}
+.gap-card .g-body{padding-left:44px}
+.gap-card .g-title{font-size:.92rem;font-weight:700;margin-bottom:4px}
+.gap-card .g-personas{font-size:.73rem;color:var(--muted);margin-bottom:6px}
+.gap-card .g-size{font-size:.78rem;font-weight:600;color:var(--accent)}
+.gap-card .g-landscape{font-size:.72rem;color:var(--muted);margin-top:6px;line-height:1.5}
+.foot{background:linear-gradient(135deg,var(--accent),#6d28d9,#581c87);padding:28px 20px;text-align:center;color:#fff;margin-top:36px}
+.foot h2{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.foot p{font-size:.84rem;color:rgba(255,255,255,.65);margin:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0;font-size:.72rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+.legend-box{width:14px;height:14px;border-radius:3px;display:inline-block}
+@media(max-width:700px){
+.sr{grid-template-columns:1fr 1fr}
+.grid-2,.grid-3{grid-template-columns:1fr}
+.rg{grid-template-columns:1fr}
+.platform-grid{font-size:.6rem}
+.platform-grid th,.platform-grid td{padding:3px 4px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+<h1>Persona / Topic / Locale Research Briefing</h1>
+<p>Market-fit analysis across 10 personas, 12 locales, and 12 therapeutic topics. Data compiled 2026-03-30 from primary platform research, WHO data, and publisher intelligence.</p>
+<div class="badges">
+<span class="badge"><span class="dot dot-p"></span> 10 Personas</span>
+<span class="badge"><span class="dot dot-g"></span> 12 Locales</span>
+<span class="badge"><span class="dot dot-y"></span> 12 Topics</span>
+<span class="badge"><span class="dot dot-b"></span> 40+ Platforms</span>
+<span class="badge"><span class="dot dot-r"></span> $53B+ Market</span>
+</div>
+</div>
+
+<!-- TABS -->
+<nav class="tn"><div class="tn-inner">
+<button class="tb on" onclick="showTab(0)">Overview</button>
+<button class="tb" onclick="showTab(1)">US Personas</button>
+<button class="tb" onclick="showTab(2)">Asia-Pacific</button>
+<button class="tb" onclick="showTab(3)">Europe &amp; LatAm</button>
+<button class="tb" onclick="showTab(4)">Platform Map</button>
+<button class="tb" onclick="showTab(5)">Market Gaps</button>
+</div></nav>
+
+<div class="mx">
+
+<!-- TAB 0: OVERVIEW -->
+<div class="tp on" id="tab0">
+<div class="sl">Overview</div>
+<h2>Global Therapeutic Content Market</h2>
+<p class="desc">The self-improvement market is valued at $53.32B globally (2026), projected to reach $83.67B by 2035 at 5.13% CAGR. The audiobook segment alone reached $7.85B in 2025, with non-fiction/self-help as the fastest-growing genre at 27% CAGR.</p>
+
+<div class="sr">
+<div class="sx">
+<div class="pct" style="color:var(--accent)">10</div>
+<div class="lb">Personas</div>
+<div class="sub">US-based target segments</div>
+</div>
+<div class="sx">
+<div class="pct" style="color:var(--green)">12</div>
+<div class="lb">Locales</div>
+<div class="sub">en-US + 6 Asian + 6 EU/LatAm</div>
+</div>
+<div class="sx">
+<div class="pct" style="color:var(--gold)">12</div>
+<div class="lb">Topics</div>
+<div class="sub">Therapeutic categories</div>
+</div>
+<div class="sx">
+<div class="pct" style="color:var(--blue)">40+</div>
+<div class="lb">Platforms</div>
+<div class="sub">Distribution channels mapped</div>
+</div>
+</div>
+
+<div class="mbox">
+<p class="big">63% of self-help buyers cite mental health as their primary motivation.</p>
+<p>The books segment is the fastest-growing at 7%+ CAGR through 2030. Audiobooks growing at 10.58% CAGR with Audible holding 63% market share.</p>
+</div>
+
+<div class="sep"></div>
+<h3>Top 10 Market Gaps -- Ranked by Opportunity</h3>
+<p class="desc">These represent the highest-priority content gaps across all personas and locales.</p>
+
+<div class="rg">
+
+<div class="rc">
+<h4><span class="tag tag-r">#1</span> Integrated Overthinking + Burnout + Boundaries</h4>
+<p>No leading title combines all three into one framework for professional women. ~$2B+ addressable market across the largest buyer demographic.</p>
+<div class="rc-meta"><span class="tag tag-p">Millennial Women</span><span class="tag tag-p">Working Parents</span><span class="tag tag-p">Corporate Managers</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-r">#2</span> First Responder Somatic Healing Audiobook</h4>
+<p>4M+ potential listeners with 10% PTSD rates. Near-zero supply of first-responder-specific somatic healing content.</p>
+<div class="rc-meta"><span class="tag tag-p">First Responders</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-r">#3</span> Sandwich Generation Caregiver Self-Help</h4>
+<p>25% of US adults are sandwich caregivers. Almost no dedicated titles despite unique triple burden of burnout + financial anxiety + anticipatory grief.</p>
+<div class="rc-meta"><span class="tag tag-p">Gen X Sandwich</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-o">#4</span> Gen Z Native-Voice Workplace Anxiety</h4>
+<p>77% of Gen Z do self-help. Market speaks about them, not to them. Need short-form, conversational format.</p>
+<div class="rc-meta"><span class="tag tag-p">Gen Z Professionals</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-o">#5</span> Nurse Burnout Mainstream Breakout</h4>
+<p>80% compassion fatigue prevalence among 4M+ US nurses. No bestseller exists -- current titles have only hundreds of reviews.</p>
+<div class="rc-meta"><span class="tag tag-p">Healthcare RNs</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-o">#6</span> Teen-Facing Sleep + Self-Worth Audiobook</h4>
+<p>48% YA audiobook growth in H1 2025. Content vacuum for teens in their own voice about sleep anxiety and self-worth.</p>
+<div class="rc-meta"><span class="tag tag-p">Gen Alpha Students</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-b">#7</span> Tech-Specific AI Anxiety + Imposter Syndrome</h4>
+<p>40% of tech workers report AI-induced imposter syndrome. No dedicated audiobook for this intersection.</p>
+<div class="rc-meta"><span class="tag tag-p">Tech &amp; Finance Burnout</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-b">#8</span> Financial Anxiety + Mental Wellness for Entrepreneurs</h4>
+<p>70% of small business owners report heightened financial anxiety. Existing titles split finance vs mindset.</p>
+<div class="rc-meta"><span class="tag tag-p">Entrepreneurs</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-b">#9</span> Father / Co-Parent Burnout</h4>
+<p>The parental burnout market is 95%+ "mommy burnout." Fathers and co-parents are invisible in the category.</p>
+<div class="rc-meta"><span class="tag tag-p">Working Parents</span></div>
+</div>
+
+<div class="rc">
+<h4><span class="tag tag-b">#10</span> Male Manager Imposter Syndrome</h4>
+<p>75% stat is female-only; male experience is invisible. Books skew heavily toward women. Male managers have zero dedicated titles.</p>
+<div class="rc-meta"><span class="tag tag-p">Corporate Managers</span></div>
+</div>
+
+</div>
+</div>
+
+<!-- TAB 1: US PERSONAS -->
+<div class="tp" id="tab1">
+<div class="sl">US Market</div>
+<h2>10 US Personas</h2>
+<p class="desc">Each persona includes demand signals, top 3 topics, best platform, and the key market gap identified.</p>
+
+<!-- Persona 1 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">1. Millennial Women Professionals</span><br><span class="p-age">Ages 28-45 | Largest self-help buyer demographic (avg buyer age: 38)</span></div>
+<span class="tag tag-g">$2B+ addressable</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-p">Overthinking</span> <span class="tag tag-o">Burnout</span> <span class="tag tag-b">Boundaries</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible (women 35-54 are prime self-help audiobook demo) | <strong>Secondary:</strong> Libby</p>
+<div class="p-gap"><strong>Gap:</strong> No leading title combines overthinking + burnout + boundaries into one integrated framework for professional women. Also missing: audiobook-first formats designed for commute listening.</div>
+</div>
+
+<!-- Persona 2 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">2. Tech &amp; Finance Burnout</span><br><span class="p-age">Ages 25-55 | 40% cite AI-induced imposter syndrome</span></div>
+<span class="tag tag-o">Blue ocean</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-o">Burnout</span> <span class="tag tag-p">Overthinking</span> <span class="tag tag-r">Imposter Syndrome</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible (68% of category buyers aged 25-44) | <strong>Secondary:</strong> Spotify</p>
+<div class="p-gap"><strong>Gap:</strong> No bestselling title addresses tech-sector burnout combined with AI-induced imposter syndrome. Existing burnout books are generalist. The intersection of tech-specific stressors with somatic/sleep impacts is unserved.</div>
+</div>
+
+<!-- Persona 3 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">3. Entrepreneurs</span><br><span class="p-age">Ages 22-50 | 70% report heightened financial anxiety</span></div>
+<span class="tag tag-y">High demand</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-r">Financial Anxiety</span> <span class="tag tag-o">Burnout</span> <span class="tag tag-p">Overthinking</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible + Kindle combo | <strong>Secondary:</strong> Apple Books</p>
+<div class="p-gap"><strong>Gap:</strong> No leading title merges financial anxiety management with entrepreneurial mental wellness. Split between pure finance (Psychology of Money) and pure mindset (Atomic Habits).</div>
+</div>
+
+<!-- Persona 4 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">4. Working Parents</span><br><span class="p-age">Ages 25-50 | 48% report "completely overwhelming" stress (APA)</span></div>
+<span class="tag tag-r">Underserved</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-o">Burnout</span> <span class="tag tag-b">Boundaries</span> <span class="tag tag-p">Overthinking</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible (commute/hands-free) | <strong>Secondary:</strong> Libby (price-sensitive)</p>
+<div class="p-gap"><strong>Gap:</strong> Parental burnout is a WHO-recognized condition with almost no dedicated bestselling audiobooks. Father/co-parent burnout is essentially invisible (95%+ "mommy burnout").</div>
+</div>
+
+<!-- Persona 5 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">5. Gen X Sandwich Generation</span><br><span class="p-age">Ages 35-65 | 25% of US adults are sandwich caregivers</span></div>
+<span class="tag tag-r">Most underserved</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-o">Burnout</span> <span class="tag tag-r">Financial Anxiety</span> <span class="tag tag-pk">Grief</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible + Libby (zero free hands; price sensitivity) | <strong>Secondary:</strong> Kindle</p>
+<div class="p-gap"><strong>Gap:</strong> Perhaps the most underserved persona. No bestseller addresses the unique triple burden: caregiver burnout + dual-direction financial costs + anticipatory grief + guilt. Existing caregiving books are clinical, not self-help.</div>
+</div>
+
+<!-- Persona 6 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">6. Corporate Managers</span><br><span class="p-age">Ages 25-55 | 75% of female executives report imposter syndrome</span></div>
+<span class="tag tag-o">Gender gap</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-r">Imposter Syndrome</span> <span class="tag tag-o">Burnout</span> <span class="tag tag-b">Boundaries</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible (core corporate demo) | <strong>Secondary:</strong> LinkedIn Learning</p>
+<div class="p-gap"><strong>Gap:</strong> Male managers have almost no imposter syndrome titles. No bestseller addresses the manager-specific combination of imposter syndrome + team burnout responsibility + boundary-setting.</div>
+</div>
+
+<!-- Persona 7 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">7. Gen Z Professionals</span><br><span class="p-age">Ages 22-35 | 46% have a formal mental health diagnosis</span></div>
+<span class="tag tag-p">Format gap</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-p">Overthinking / Anxiety</span> <span class="tag tag-r">Imposter Syndrome</span> <span class="tag tag-pk">Social Anxiety</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Spotify (52% of audiobook audience is 18-34) | <strong>Secondary:</strong> YouTube</p>
+<div class="p-gap"><strong>Gap:</strong> No bestseller speaks in Gen Z's native voice about professional anxiety. "The Anxious Generation" is about Gen Z, not for them. Format must be short (2.5 hrs max), conversational, podcast-style.</div>
+</div>
+
+<!-- Persona 8 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">8. Healthcare RNs</span><br><span class="p-age">Ages 25-50 | 80% compassion fatigue rate among 4M+ nurses</span></div>
+<span class="tag tag-r">Fragmented</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-pk">Compassion Fatigue</span> <span class="tag tag-o">Burnout</span> <span class="tag tag-b">Boundaries</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Kindle (shift work; reference format) | <strong>Secondary:</strong> Audible</p>
+<div class="p-gap"><strong>Gap:</strong> The nurse burnout market is fragmented and low-profile -- no breakout bestseller despite 80% prevalence across 4M+ nurses. Most titles are academic. Massive gap for a warm, narrative-driven audiobook. Shift-worker sleep anxiety is unaddressed.</div>
+</div>
+
+<!-- Persona 9 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">9. Gen Alpha Students</span><br><span class="p-age">Ages 13-22 | 58% report burnout by age 12</span></div>
+<span class="tag tag-y">48% YA growth</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-p">Overthinking / Anxiety</span> <span class="tag tag-b">Sleep Anxiety</span> <span class="tag tag-pk">Self-Worth</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Spotify (first digital-native gen; 500K+ titles) | <strong>Secondary:</strong> YouTube</p>
+<div class="p-gap"><strong>Gap:</strong> Nearly all teen anxiety content is written for parents about teens, not for teens themselves. No breakout audiobook speaks directly to 13-22 year-olds. Format must be under 3 hours, conversational, podcast-hybrid.</div>
+</div>
+
+<!-- Persona 10 -->
+<div class="persona-card">
+<div class="p-header">
+<div><span class="p-name">10. First Responders</span><br><span class="p-age">Ages 22-55 | 4M+ population; PTSD rate 3x general population</span></div>
+<span class="tag tag-r">Widest gap</span>
+</div>
+<div class="p-topics">
+<span class="tag tag-g">Somatic Healing</span> <span class="tag tag-b">Sleep Anxiety</span> <span class="tag tag-o">Burnout / Grief</span>
+</div>
+<p class="p-platform"><strong>Best platform:</strong> Audible (privacy/stigma; discreet consumption) | <strong>Secondary:</strong> Podcast apps</p>
+<div class="p-gap"><strong>Gap:</strong> The widest supply-demand gap of any persona. No mainstream audiobook combines somatic healing + sleep recovery + moral injury for first responders. "The Body Keeps the Score" (50K+ reviews) is general; the only first-responder title has just 800 reviews.</div>
+</div>
+
+</div>
+
+<!-- TAB 2: ASIA-PACIFIC -->
+<div class="tp" id="tab2">
+<div class="sl">Asia-Pacific</div>
+<h2>6 Asian Locales</h2>
+<p class="desc">Acute mental health crises converge with rapidly growing digital audio markets. China's sleep economy alone targets $140B by 2030.</p>
+
+<!-- zh-TW -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1F9;&#x1F1FC;</span><span class="l-name">zh-TW -- Taiwan</span></div>
+<div class="l-stat"><strong>Mental health market:</strong> US$596M (3.11% CAGR) | <strong>Headline:</strong> ~40% of adults experience poor sleep; CMD prevalence doubled to 23.8% over 20 years</div>
+<div class="l-topics">
+<span class="tag tag-b">Sleep Anxiety (失眠)</span> <span class="tag tag-o">Burnout Recovery (職業倦怠)</span> <span class="tag tag-p">Gen Z Mental Health (青年心理健康)</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Type</th><th>Key Data</th></tr>
+<tr><td>Readmoo (讀墨)</td><td>E-book + audiobook</td><td>#1 in Taiwan; NT$250M rev; 93% audiobook growth</td></tr>
+<tr><td>博客來 (Books.com)</td><td>Online bookstore</td><td>15M copies/year; NT$200M+ e-book sales</td></tr>
+<tr><td>Kobo (樂天)</td><td>E-book + audiobook</td><td>~NT$250M rev; international catalog</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use 身心健康 (body-mind health), 自我照顧 (self-care), 心靈成長 (inner growth), TCM-adjacent wellness language. <strong>Don't:</strong> Direct psychiatric terminology, 精神疾病 (mental illness), overly Western therapy framing.</div>
+</div>
+
+<!-- zh-HK -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1ED;&#x1F1F0;</span><span class="l-name">zh-HK -- Hong Kong</span></div>
+<div class="l-stat"><strong>Mental health market (2029):</strong> US$189.4M | <strong>Headline:</strong> Burnout doubled to 49% of workforce; 46% of adults show depression/anxiety symptoms</div>
+<div class="l-topics">
+<span class="tag tag-o">Finance Sector Burnout (職業倦怠)</span> <span class="tag tag-b">Sleep Repair (失眠)</span> <span class="tag tag-p">Gen Z Mental Health</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Type</th><th>Key Data</th></tr>
+<tr><td>Readmoo</td><td>E-book/audiobook</td><td>Major traffic source for Traditional Chinese content</td></tr>
+<tr><td>Storytel</td><td>Audiobook streaming</td><td>Available in wider APAC; SG$9.90/mo</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use 壓力管理 (stress management), 職場健康 (workplace health), Cantonese-inflected Traditional Chinese. <strong>Don't:</strong> 精神病 (mental illness), implying personal weakness, Mainland Simplified Chinese.</div>
+</div>
+
+<!-- zh-CN -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1E8;&#x1F1F3;</span><span class="l-name">zh-CN -- China</span></div>
+<div class="l-stat"><strong>Mental wellness market:</strong> US$1,106M (9.89% CAGR) | <strong>Headline:</strong> 500M+ people with sleep disorders; sleep economy projected >RMB 1T ($140B) by 2030</div>
+<div class="l-topics">
+<span class="tag tag-o">996 Burnout / Involution (内卷焦慮)</span> <span class="tag tag-b">Sleep Disorders (失眠)</span> <span class="tag tag-p">Youth Mental Health Crisis</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>MAU</th><th>Key Data</th></tr>
+<tr><td>Ximalaya (喜马拉雅)</td><td>345M MAU</td><td>70%+ market share; RMB 196M single-day knowledge festival</td></tr>
+<tr><td>Dedao (得到)</td><td>Knowledge-focused</td><td>Premium business/self-improvement courses</td></tr>
+<tr><td>WeChat Read</td><td>WeChat ecosystem</td><td>Social features; free + premium</td></tr>
+<tr><td>Douyin (抖音)</td><td>Short video</td><td>Self-help top sellers via affiliate/direct sales</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use 心理健康 (psychological health), 自我成长 (self-growth), 内卷/躺平 (involution/lying flat), 养生 (TCM wellness), Simplified Chinese. <strong>Don't:</strong> 精神病 (mental illness), Western therapy terminology, Traditional Chinese characters.</div>
+</div>
+
+<!-- zh-SG -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1F8;&#x1F1EC;</span><span class="l-name">zh-SG -- Singapore</span></div>
+<div class="l-stat"><strong>Health & wellness market:</strong> US$18.8B (9.50% CAGR) | <strong>Headline:</strong> 68% Gen Z burnout rate -- highest of any generation; 61% overall employee burnout</div>
+<div class="l-topics">
+<span class="tag tag-o">Gen Z Burnout & Hustle Culture</span> <span class="tag tag-b">Sleep Deprivation</span> <span class="tag tag-r">Workplace Burnout Recovery</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Type</th><th>Key Data</th></tr>
+<tr><td>Storytel</td><td>Audiobook streaming</td><td>First SEA market; 85K+ titles; SG$9.90/mo</td></tr>
+<tr><td>Audible</td><td>Audiobook</td><td>Available via Amazon</td></tr>
+<tr><td>Readmoo</td><td>E-book/audiobook</td><td>Chinese-language content for SG Chinese readers</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use bilingual English + Mandarin, multicultural sensitivity (Chinese/Malay/Indian), "mental wellness." <strong>Don't:</strong> Assume single cultural norm, mono-ethnic approach, "mental illness" framing.</div>
+</div>
+
+<!-- ja-JP -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1EF;&#x1F1F5;</span><span class="l-name">ja-JP -- Japan</span></div>
+<div class="l-stat"><strong>Audiobook market (2029):</strong> US$426.5M (11.49% CAGR) | <strong>Headline:</strong> OECD worst sleep (7h42m); 1,057 work-related mental health cases in FY2024; 1.46M hikikomori</div>
+<div class="l-topics">
+<span class="tag tag-o">Karoshi & Burnout (過労死)</span> <span class="tag tag-b">Sleep Deprivation</span> <span class="tag tag-pk">Hikikomori & Social Withdrawal</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Type</th><th>Key Data</th></tr>
+<tr><td>Audible.jp</td><td>Audiobook</td><td>Unlimited at ¥1,500/mo; top titles include 嫌われる勇気</td></tr>
+<tr><td>audiobook.jp</td><td>Audiobook</td><td>Competing platform with unlimited plan</td></tr>
+<tr><td>Amazon.co.jp Kindle</td><td>E-book</td><td>Dominant e-book platform</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use 体調管理 (condition management), 心の健康 (health of the heart), セルフケア, 疲労回復 (fatigue recovery), 睡眠改善 (sleep improvement). <strong>Don't:</strong> 精神健康 (mental health), psychiatric labels, discuss mental health at work openly. Stigma is stronger than in Taiwan or Australia.</div>
+</div>
+
+<!-- ko-KR -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1F0;&#x1F1F7;</span><span class="l-name">ko-KR -- South Korea</span></div>
+<div class="l-stat"><strong>Mental health market:</strong> US$8,542M | <strong>Digital MH (2035):</strong> $3.6B (18.55% CAGR) | <strong>Headline:</strong> Suicide is #1 cause of death ages 10-39; 43% of students have contemplated suicide</div>
+<div class="l-topics">
+<span class="tag tag-o">Burnout (번아웃)</span> <span class="tag tag-r">수능 Stress & Gen Z Mental Health</span> <span class="tag tag-g">K-Wellness Trend</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Type</th><th>Key Data</th></tr>
+<tr><td>Millie's Library (밀리의서재)</td><td>E-book subscription</td><td>#1 platform; ~200K books; 70% of Top 100 bestsellers</td></tr>
+<tr><td>YES24</td><td>Online bookstore</td><td>Major retailer; eBook bestsellers</td></tr>
+<tr><td>Ridi (리디)</td><td>E-book/webtoon</td><td>Self-help charts; Atomic Habits prominent</td></tr>
+<tr><td>Kakao Page</td><td>Webtoon/web novel</td><td>Collaboration with Millie for web novel content</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use 자기계발 (self-development), 힐링 (healing), 웰니스 (wellness), 마음 챙김 (mindfulness). <strong>Don't:</strong> 정신질환 (mental illness), clinical burnout diagnosis language, implying personal failure.</div>
+</div>
+
+</div>
+
+<!-- TAB 3: EUROPE & LATAM -->
+<div class="tp" id="tab3">
+<div class="sl">Europe &amp; Latin America</div>
+<h2>6 EU / LatAm Locales</h2>
+<p class="desc">Germany leads Europe in audiobook revenue. Brazil has the world's highest anxiety prevalence. France is shifting toward developpement personnel. Spain has unprecedented government mental health investment.</p>
+
+<!-- es-US -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1FA;&#x1F1F8;</span><span class="l-name">es-US -- US Hispanic</span></div>
+<div class="l-stat"><strong>Population:</strong> 63.7M (19% of US) | <strong>Treatment gap:</strong> 21.4% have mental health conditions but only 14.6% receive treatment | <strong>Spanish audiobook share:</strong> 27% of global</div>
+<div class="l-topics">
+<span class="tag tag-pk">Generational Trauma</span> <span class="tag tag-p">Anxiety & Acculturative Stress</span> <span class="tag tag-b">Family Dynamics & Boundaries</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Position</th><th>Notes</th></tr>
+<tr><td>Audible (Spanish)</td><td>Market leader</td><td>~600 new Spanish titles/year from US publishers</td></tr>
+<tr><td>Spotify</td><td>Rising challenger</td><td>713M MAU; Spanish content growing</td></tr>
+<tr><td>Google Play Books</td><td>Secondary</td><td>Popular with mobile-first Hispanic consumers</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use sanacion (healing), bienestar emocional, personalismo, dichos (oral folklore). Latin American accents preferred. <strong>Don't:</strong> Clinical jargon, English-first approaches, "therapy-speak."</div>
+</div>
+
+<!-- es-ES -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1EA;&#x1F1F8;</span><span class="l-name">es-ES -- Spain</span></div>
+<div class="l-stat"><strong>Audiobook market share:</strong> 57% of global Spanish-language | <strong>Self-help growth:</strong> +47% (2022-2023) | <strong>Mental health:</strong> 34% affected; +175% MH sick leave since pandemic</div>
+<div class="l-topics">
+<span class="tag tag-o">Burnout (Agotamiento Laboral)</span> <span class="tag tag-p">Anxiety & Emotional Management</span> <span class="tag tag-pk">Self-Esteem & Purpose</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Position</th><th>Notes</th></tr>
+<tr><td>Audible.es</td><td>Dominant (~80%)</td><td>EUR 5M investment in Spain production</td></tr>
+<tr><td>Storytel Espana</td><td>Challenger</td><td>"Netflix for audiobooks" strategy</td></tr>
+<tr><td>Podimo</td><td>Growing</td><td>Podcast-first with audiobook expansion</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Prefer practical, psychologist-backed (Marian Rojas Estape model). Emphasize conciliacion (work-life balance). <strong>Don't:</strong> American-style motivational tone.</div>
+</div>
+
+<!-- fr-FR -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1EB;&#x1F1F7;</span><span class="l-name">fr-FR -- France</span></div>
+<div class="l-stat"><strong>Audiobook market:</strong> ~USD $330M (23.68% CAGR) | <strong>64% of adults 18-35 bought a self-help book (2024)</strong> | Meditation retreats 3x increase 2020-2023</div>
+<div class="l-topics">
+<span class="tag tag-o">Burn-out & Sens au Travail</span> <span class="tag tag-p">Anxiete & Gestion du Stress</span> <span class="tag tag-pk">Confiance en Soi</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Position</th><th>Notes</th></tr>
+<tr><td>Audible.fr</td><td>Market leader</td><td>Amazon Unlimited integration (March 2025)</td></tr>
+<tr><td>Nextory</td><td>Strong #2</td><td>350K+ titles; EUR 9.99/month</td></tr>
+<tr><td>Spotify (FR)</td><td>Fast-growing</td><td>Launched Oct 2024; 12% MoM growth; EUR 1M French-language investment</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use developpement personnel, bien-etre, epanouissement. Philosophical, intellectual tone (Christophe Andre model). <strong>Don't:</strong> NEVER say "self-help" (English term rejected). Avoid prescriptive American tone.</div>
+</div>
+
+<!-- de-DE -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1E9;&#x1F1EA;</span><span class="l-name">de-DE -- Germany</span></div>
+<div class="l-stat"><strong>Audiobook market (2030):</strong> USD $705.3M (25.1% CAGR) | <strong>44% of employees burned out</strong> | MH sick days +54% in 10 years | EUR 10B+ annual cost</div>
+<div class="l-topics">
+<span class="tag tag-o">Burnout-Syndrom & Erschopfung</span> <span class="tag tag-g">Achtsamkeit (Mindfulness)</span> <span class="tag tag-b">Schlaf (Sleep) & Erholung</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Position</th><th>Notes</th></tr>
+<tr><td>Audible.de</td><td>Co-leader</td><td>500K+ titles; EUR 9.95/month</td></tr>
+<tr><td>BookBeat</td><td>Co-leader</td><td>~700K monthly paying users; 1M+ titles</td></tr>
+<tr><td>Spotify (DE)</td><td>Fast-growing</td><td>Launched April 2025; 350K titles; 10% MoM growth</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Evidence-based, professorial, structured. Prof. Dr. titles carry weight. Use Ratgeber, Achtsamkeit, Personlichkeitsentwicklung. <strong>Don't:</strong> Casual or motivational tone.</div>
+</div>
+
+<!-- hu-HU -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1ED;&#x1F1FA;</span><span class="l-name">hu-HU -- Hungary</span></div>
+<div class="l-stat"><strong>eBook market:</strong> USD $3.18M (near-flat) | <strong>Book market declining:</strong> -3.69% CAGR | <strong>Highest personal stigma</strong> toward mental health help-seeking in studied EU countries</div>
+<div class="l-topics">
+<span class="tag tag-p">Szorongas (Anxiety)</span> <span class="tag tag-pk">Onismeret (Self-Knowledge)</span> <span class="tag tag-b">Kapcsolati Problemak (Relationships)</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Position</th><th>Notes</th></tr>
+<tr><td>Libri-Bookline</td><td>Dominant</td><td>60 retail stores + largest online bookstore; Jaffa Publishing</td></tr>
+<tr><td>Google Play Books</td><td>Secondary</td><td>Mobile-first for younger demographics</td></tr>
+<tr><td>Bookline Reader</td><td>Growing</td><td>Subscription e-audiobooks; expanding catalog</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Use onismeret (self-knowledge), lelki egeszseg (soul health), szemelyes fejlodes. Gentle, normalizing. <strong>Don't:</strong> Frame as "fixing" mental illness. Post-communist legacy = high stigma. No national anti-stigma program exists.</div>
+</div>
+
+<!-- pt-BR -->
+<div class="locale-card">
+<div class="l-header"><span class="l-flag">&#x1F1E7;&#x1F1F7;</span><span class="l-name">pt-BR -- Brazil</span></div>
+<div class="l-stat"><strong>WHO:</strong> World's highest anxiety (9.3% / ~18.6M people) | <strong>Digital content:</strong> +21.6% (2024) | <strong>Subscriptions:</strong> +64% | <strong>Webtoon CAGR:</strong> 40%+ in LatAm</div>
+<div class="l-topics">
+<span class="tag tag-p">Ansiedade (Anxiety)</span> <span class="tag tag-y">Habitos & Produtividade</span> <span class="tag tag-pk">Saude Mental & Autoconhecimento</span>
+</div>
+<table class="dt" style="margin-top:10px">
+<tr><th>Platform</th><th>Position</th><th>Notes</th></tr>
+<tr><td>Tocalivros</td><td>Local leader</td><td>800+ self-produced titles; Sao Paulo-based</td></tr>
+<tr><td>Ubook</td><td>Local leader</td><td>6M+ registered users; 18 countries</td></tr>
+<tr><td>Social Comics</td><td>Manga/comics</td><td>"Netflix for comics"; subscription-based</td></tr>
+<tr><td>Audible Brazil</td><td>New entrant</td><td>Recently launched; competing with locals</td></tr>
+</table>
+<div class="l-culture"><strong>Do:</strong> Blend scientific credibility with spiritual resonance. Use autoajuda, autoconhecimento, bem-estar. Cafe com Deus Pai was #1 book in all of Brazil for 2024 AND 2025. <strong>Don't:</strong> Ignore religious/spiritual framing which outperforms secular self-help.</div>
+</div>
+
+</div>
+
+<!-- TAB 4: PLATFORM MAP -->
+<div class="tp" id="tab4">
+<div class="sl">Distribution</div>
+<h2>Platform Map -- Locales x Platforms</h2>
+<p class="desc">Color-coded by primary content format. This maps the distribution landscape across all 12 locales with 40+ platforms identified.</p>
+
+<div class="legend">
+<span><span class="legend-box" style="background:#dbeafe"></span> Ebook</span>
+<span><span class="legend-box" style="background:#d1fae5"></span> Audiobook</span>
+<span><span class="legend-box" style="background:#ffedd5"></span> Manga / Webtoon</span>
+<span><span class="legend-box" style="background:#ede9fe"></span> Streaming / Subscription</span>
+<span><span class="legend-box" style="background:#fef3c7"></span> Mixed / Multi-format</span>
+</div>
+
+<div style="overflow-x:auto">
+<table class="platform-grid">
+<tr>
+<th>Locale</th>
+<th>Audible</th>
+<th>Spotify</th>
+<th>Kindle</th>
+<th>Libby</th>
+<th>Local #1</th>
+<th>Local #2</th>
+<th>Manga / Webtoon</th>
+</tr>
+<tr>
+<td style="font-weight:700">en-US</td>
+<td class="cell-audio">Primary</td>
+<td class="cell-audio">Gen Z</td>
+<td class="cell-ebook">Reference</td>
+<td class="cell-ebook">Library</td>
+<td class="cell-mixed">Apple Books</td>
+<td class="cell-audio">YouTube</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">zh-TW</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-mixed">Readmoo</td>
+<td class="cell-ebook">博客來</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">zh-HK</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-mixed">Readmoo</td>
+<td class="cell-stream">Storytel</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">zh-CN</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-audio">Ximalaya</td>
+<td class="cell-mixed">WeChat Read</td>
+<td style="color:var(--light)">Douyin</td>
+</tr>
+<tr>
+<td style="font-weight:700">zh-SG</td>
+<td class="cell-audio">Available</td>
+<td class="cell-audio">Podcasts</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-stream">Storytel</td>
+<td class="cell-mixed">Readmoo</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">ja-JP</td>
+<td class="cell-audio">Primary</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-ebook">Dominant</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-audio">audiobook.jp</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">ko-KR</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-stream">Millie</td>
+<td class="cell-ebook">YES24</td>
+<td class="cell-manga">Kakao/Naver</td>
+</tr>
+<tr>
+<td style="font-weight:700">es-US</td>
+<td class="cell-audio">Leader</td>
+<td class="cell-audio">Rising</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-ebook">Library</td>
+<td class="cell-ebook">Google Play</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">es-ES</td>
+<td class="cell-audio">~80%</td>
+<td style="color:var(--light)">Not yet</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-stream">Storytel ES</td>
+<td class="cell-audio">Podimo</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">fr-FR</td>
+<td class="cell-audio">Leader</td>
+<td class="cell-audio">Fast-growing</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-stream">Nextory</td>
+<td class="cell-ebook">Kobo</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">de-DE</td>
+<td class="cell-audio">Co-leader</td>
+<td class="cell-audio">Fast-growing</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-stream">BookBeat</td>
+<td class="cell-ebook">Thalia/Tolino</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">hu-HU</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-ebook">Limited</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-mixed">Libri-Bookline</td>
+<td class="cell-ebook">Google Play</td>
+<td style="color:var(--light)">--</td>
+</tr>
+<tr>
+<td style="font-weight:700">pt-BR</td>
+<td class="cell-audio">New entrant</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td style="color:var(--light)">--</td>
+<td class="cell-audio">Tocalivros</td>
+<td class="cell-audio">Ubook</td>
+<td class="cell-manga">Social Comics</td>
+</tr>
+</table>
+</div>
+
+<div class="sep"></div>
+<h3>Key Platform Insights</h3>
+<div class="rg">
+<div class="rc">
+<h4>Audible Dominance</h4>
+<p>Leads in 7 of 12 locales (en-US, es-US, es-ES, fr-FR, de-DE, ja-JP, zh-SG). 63% global market share. But absent from zh-TW, zh-HK, zh-CN, ko-KR, hu-HU.</p>
+</div>
+<div class="rc">
+<h4>Spotify's Gen Z Play</h4>
+<p>52% of audiobook audience aged 18-34. Fast-growing in FR (12% MoM), DE (10% MoM). Not yet launched audiobooks in Spain. Critical for Gen Z and Gen Alpha personas.</p>
+</div>
+<div class="rc">
+<h4>Local Platform Power</h4>
+<p>Ximalaya (345M MAU, China), Millie (Korea), Readmoo (Taiwan/HK), Libri-Bookline (Hungary), Tocalivros/Ubook (Brazil) dominate their locales.</p>
+</div>
+<div class="rc">
+<h4>Manga/Webtoon Opportunity</h4>
+<p>Korea (Kakao Page, Naver), Brazil (Social Comics, WEBTOON), and China (Douyin) have active manga/webtoon ecosystems. 40%+ CAGR in Latin America.</p>
+</div>
+</div>
+
+</div>
+
+<!-- TAB 5: MARKET GAPS -->
+<div class="tp" id="tab5">
+<div class="sl">Opportunities</div>
+<h2>Top 10 Market Gaps -- Priority Ranked</h2>
+<p class="desc">Each gap is ranked by the combination of addressable market size, supply scarcity, and persona urgency. These represent the clearest blue-ocean opportunities.</p>
+
+<!-- Gap 1 -->
+<div class="gap-card">
+<div class="g-rank">1</div>
+<div class="g-body">
+<div class="g-title">No Integrated Overthinking + Burnout + Boundaries Title</div>
+<div class="g-personas">Personas: Millennial Women Professionals, Working Parents, Corporate Managers</div>
+<div class="g-size">~$2B+ addressable (largest buyer demographic)</div>
+<div class="g-landscape">Current bestsellers treat these as separate problems. "Burnout" (Nagoski, 8,582 reviews) comes closest but is not persona-specific. No single title integrates all three for professional women. Audiobook-first format for commuters (52% consume during commutes) is missing.</div>
+</div>
+</div>
+
+<!-- Gap 2 -->
+<div class="gap-card">
+<div class="g-rank">2</div>
+<div class="g-body">
+<div class="g-title">First Responder Somatic Healing Audiobook</div>
+<div class="g-personas">Personas: First Responders (4M+ US population)</div>
+<div class="g-size">4M+ potential listeners, near-zero supply</div>
+<div class="g-landscape">"The Body Keeps the Score" (50,000+ reviews) is general trauma. "Bulletproof Spirit" is closest first-responder title with only 800 reviews. No somatic audiobook is tailored to first responder culture. Somatic approach suits their resistance to talk-therapy modalities.</div>
+</div>
+</div>
+
+<!-- Gap 3 -->
+<div class="gap-card">
+<div class="g-rank">3</div>
+<div class="g-body">
+<div class="g-title">Sandwich Generation Caregiver Self-Help</div>
+<div class="g-personas">Personas: Gen X Sandwich Generation (25% of US adults)</div>
+<div class="g-size">25% of US adults (~65M people), almost no dedicated titles</div>
+<div class="g-landscape">No bestseller addresses the unique triple burden: caregiver burnout + dual-direction financial costs ($10K/yr avg) + anticipatory grief. Existing caregiving books are clinical/educational (Springer, Caregiver Action Network). Audiobook format is critical -- caregivers have zero free hands.</div>
+</div>
+</div>
+
+<!-- Gap 4 -->
+<div class="gap-card">
+<div class="g-rank">4</div>
+<div class="g-body">
+<div class="g-title">Gen Z Native-Voice Workplace Anxiety</div>
+<div class="g-personas">Personas: Gen Z Professionals (46% with formal MH diagnosis)</div>
+<div class="g-size">77% doing self-help; market speaks about them, not to them</div>
+<div class="g-landscape">"The Anxious Generation" (Haidt, 15K+ reviews) targets parents/policymakers. "Generation Anxiety" (Cook) is clinical. Need: short-form (2.5 hrs max), conversational, podcast-style. "Don't Believe Everything You Think" gets format right but lacks workplace specificity.</div>
+</div>
+</div>
+
+<!-- Gap 5 -->
+<div class="gap-card">
+<div class="g-rank">5</div>
+<div class="g-body">
+<div class="g-title">Nurse Burnout Mainstream Breakout</div>
+<div class="g-personas">Personas: Healthcare RNs (4M+ US nurses)</div>
+<div class="g-size">80% compassion fatigue rate, no bestseller exists</div>
+<div class="g-landscape">Market is fragmented: "Compassion Fatigue and Burnout in Nursing" (300 reviews), "Nurses Matter" (200 reviews). Compare to 50K+ reviews for general wellness titles. Most are clinical/academic (Springer Publishing). Gap for warm, narrative-driven, Brene Brown-accessible content. Shift-worker sleep anxiety almost completely unaddressed.</div>
+</div>
+</div>
+
+<!-- Gap 6 -->
+<div class="gap-card">
+<div class="g-rank">6</div>
+<div class="g-body">
+<div class="g-title">Teen-Facing Sleep + Self-Worth Audiobook</div>
+<div class="g-personas">Personas: Gen Alpha Students (58% report burnout by age 12)</div>
+<div class="g-size">48% YA audiobook growth (H1 2025); content vacuum</div>
+<div class="g-landscape">"Anxious Generation for Teens" CBT workbook exists but is derivative. No standalone audiobook speaks directly to 13-22 year-olds about sleep anxiety and self-worth. Must be under 3 hours, conversational, podcast-hybrid. Sleep content for teens beyond "put your phone down" is nonexistent.</div>
+</div>
+</div>
+
+<!-- Gap 7 -->
+<div class="gap-card">
+<div class="g-rank">7</div>
+<div class="g-body">
+<div class="g-title">Tech-Specific AI Anxiety + Imposter Syndrome</div>
+<div class="g-personas">Personas: Tech &amp; Finance Burnout</div>
+<div class="g-size">40% report AI-induced imposter syndrome (Devsu 2025)</div>
+<div class="g-landscape">Existing burnout books are generalist. No title addresses the intersection of always-on culture, AI disruption anxiety, rapid obsolescence fear with somatic/sleep impacts. Blue ocean for a "vertical development" title targeting the $11B+ industry workforce.</div>
+</div>
+</div>
+
+<!-- Gap 8 -->
+<div class="gap-card">
+<div class="g-rank">8</div>
+<div class="g-body">
+<div class="g-title">Financial Anxiety + Mental Wellness for Entrepreneurs</div>
+<div class="g-personas">Personas: Entrepreneurs</div>
+<div class="g-size">70% report heightened financial anxiety (IMF 2024)</div>
+<div class="g-landscape">Split market: "The Psychology of Money" (30K+ reviews) is pure finance. "Atomic Habits" (150K+ reviews) is pure mindset. No title merges financial decision-making frameworks with anxiety/overthinking coping strategies. The "anxious entrepreneur" niche has only low-profile entrants.</div>
+</div>
+</div>
+
+<!-- Gap 9 -->
+<div class="gap-card">
+<div class="g-rank">9</div>
+<div class="g-body">
+<div class="g-title">Father / Co-Parent Burnout</div>
+<div class="g-personas">Personas: Working Parents</div>
+<div class="g-size">Market is 95%+ "mommy burnout"</div>
+<div class="g-landscape">Parental burnout is WHO-recognized but all major titles target mothers: "Mommy Burnout" (Ziegler), "Parental Burnout" (Campbell). Father-specific burnout is invisible despite 48% of parents reporting overwhelming stress (APA). No co-parenting dynamics content exists.</div>
+</div>
+</div>
+
+<!-- Gap 10 -->
+<div class="gap-card">
+<div class="g-rank">10</div>
+<div class="g-body">
+<div class="g-title">Male Manager Imposter Syndrome</div>
+<div class="g-personas">Personas: Corporate Managers</div>
+<div class="g-size">75% stat is female-only; male experience invisible</div>
+<div class="g-landscape">"New Manager with Imposter Syndrome?" (Knight) is explicitly for women. No bestseller addresses male managers' psychological safety. Most leadership books focus on performance, not the leader's own mental health. Additionally, no title handles the combination of imposter syndrome + team burnout responsibility.</div>
+</div>
+</div>
+
+<div class="sep"></div>
+<h3>Opportunity Score by Locale (EU/LatAm)</h3>
+<table class="dt">
+<tr><th>Locale</th><th>Audiobook Market Size</th><th>Self-Help Penetration</th><th>Mental Health Need</th><th>Stigma</th><th>Score</th></tr>
+<tr><td>de-DE</td><td>Largest in EU (USD $705M by 2030)</td><td>High</td><td>Very High (44% burnout)</td><td>Moderate-Low</td><td style="font-weight:900;color:var(--accent)">9/10</td></tr>
+<tr><td>pt-BR</td><td>Fast-growing (+64% subs)</td><td>Very High</td><td>Highest globally (9.3%)</td><td>Moderate</td><td style="font-weight:900;color:var(--accent)">9/10</td></tr>
+<tr><td>fr-FR</td><td>Large (USD $330M, 23.7% CAGR)</td><td>Growing (64% of 18-35)</td><td>High (25% anxiety increase)</td><td>Moderate</td><td style="font-weight:900;color:var(--green)">8/10</td></tr>
+<tr><td>es-ES</td><td>57% of global Spanish-lang</td><td>High (+47% growth)</td><td>High (34% affected)</td><td>Low (govt investment)</td><td style="font-weight:900;color:var(--green)">8/10</td></tr>
+<tr><td>es-US</td><td>Fastest-growing (27% share)</td><td>Moderate</td><td>High (21.4%)</td><td>Moderate-High</td><td style="font-weight:900;color:var(--gold)">7/10</td></tr>
+<tr><td>hu-HU</td><td>Very small (USD $3.18M)</td><td>Very Low</td><td>High but underreported</td><td>Very High</td><td style="font-weight:900;color:var(--muted)">5/10</td></tr>
+</table>
+
+</div>
+
+</div><!-- /mx -->
+
+<div class="foot">
+<h2>Phoenix Omega -- Persona Research Briefing</h2>
+<p>Data compiled 2026-03-30 | pearl_research | 10 personas | 12 locales | 12 topics | 40+ platforms</p>
+</div>
+
+<script>
+function showTab(n){
+  document.querySelectorAll('.tp').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+  document.getElementById('tab'+n).classList.add('on');
+  document.querySelectorAll('.tb')[n].classList.add('on');
+}
+</script>
+</body>
+</html>

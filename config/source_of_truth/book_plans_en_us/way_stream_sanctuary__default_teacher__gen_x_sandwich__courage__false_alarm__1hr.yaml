@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__courage__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__courage__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__brave_world__1hr
+  name: Brave in the World — for the Sandwich Generation (One-Hour)
+installment_number: 1
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Building Courage: When Fear Lies to You'
+subtitle: A Field Guide for Gen X Sandwich Navigating Courage
+cover_tagline: Your body sounds the alarm before you've said a word. That doesn't
+  mean there's danger.
+description:
+  short_blurb: You're the one holding everyone together — your parents, your kids,
+    the whole machine — and the one thing you need to say keeps dying in your throat.
+    This is an hour about the false alarm your body fires the second you go to speak,
+    and how to stay in the room with it instead of swallowing the words again.
+  long_description: 'It''s the conversation you''ve rehearsed in the car. The one
+    with the doctor, your sibling, your boss, your mother — and the second the moment
+    arrives, your chest goes tight, your face heats, and the words you needed evaporate.
+    You smile. You say it''s fine. You drive home furious at yourself, replaying the
+    version where you actually said it.
+
+
+    This hour is for you: the one in the middle. Aging parents on one side, your own
+    kids on the other, and somewhere underneath all of it, a version of you that has
+    things to say and a body that won''t let you say them. You''ve started to believe
+    you''re just not brave — that other people are built for this and you missed the
+    wiring. You aren''t, and you didn''t. What you have is a false alarm. A nervous
+    system that fires full danger the instant you''re about to be seen, even when
+    the only thing actually at risk is a moment of discomfort and someone''s passing
+    opinion of you.
+
+
+    Elena Petrova names exactly what''s happening when the alarm goes off, in words
+    you can actually reach for the next time your throat closes. First, recognition:
+    that heat and tightness isn''t proof you''re about to fail or proof the stakes
+    are real — it''s an old alarm misreading a hard conversation as a threat to your
+    survival. Then the descent. Instead of bolting, over-explaining, or going quiet
+    and hating yourself for it, you learn to stay in the room with the sensation.
+    To let the surge crest without obeying it. To feel your heart slam and notice,
+    slowly, that nothing is actually attacking you — that the danger your body is
+    so sure of has no body of its own. You stop bracing against the feeling and start
+    letting it move through. And then you come back changed. Not fearless. Not finally
+    fixed. Just no longer convinced the alarm is telling the truth about what you
+    can survive.
+
+
+    This book will not hand you a script or a five-step formula for confident communication.
+    It won''t tell you to power-pose in the bathroom, rehearse harder, or fix your
+    anxiety before the call. There is nothing here to optimize. The fear may well
+    show up again the next time you have to speak — and that is not a failure or a
+    relapse, that''s a body doing an old job badly. What changes is that you stop
+    mistaking the alarm for the answer, and stop letting a surge of adrenaline file
+    the decision for you.
+
+
+    You are allowed to feel the surge and say the thing anyway. You don''t have to
+    wait until you''re calm. You don''t have to be unafraid first. You only have to
+    stop letting a false alarm decide, one swallowed sentence at a time, what stays
+    unsaid in your life.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  secondary:
+  - the sandwich generation
+  - courage for the sandwich generation
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: elena_petrova
+comp_titles:
+- Dare (Barry McDonagh) — reframes the panic surge as a false alarm you can let pass
+  instead of fighting
+- The Body Keeps the Score (Bessel van der Kolk) — explains why the body fires danger
+  signals the situation doesn't warrant
+- When Panic Attacks (David D. Burns) — practical, secular work on staying with fear
+  instead of fleeing it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

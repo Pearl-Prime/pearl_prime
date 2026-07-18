@@ -1,0 +1,178 @@
+{
+  "_meta": {
+    "description": "Shōnen manga cover generation workflow for FLUX.1-dev",
+    "genre": "shonen",
+    "version": "1.0.0",
+    "created": "2026-04-18",
+    "spec_ref": "specs/manga_cover_flux_workflows.md",
+    "notes": [
+      "Designed for Pearl Star 16GB VRAM with FLUX.1-dev fp8 quantization.",
+      "Default resolution 1024x1600 (tankōbon ratio).",
+      "OpenPose ControlNet inputs are patched in at runtime if character sheet exists.",
+      "Seed, steps, resolution, and prompts are runtime-patched by cover_generator.py.",
+      "Higher CFG (7.0) and euler_ancestral sampler for vibrant high-energy output."
+    ]
+  },
+  "nodes": {
+    "1": {
+      "class_type": "UNETLoader",
+      "_meta": {
+        "title": "Load FLUX Model"
+      },
+      "inputs": {
+        "unet_name": "flux1-dev-fp8.safetensors",
+        "weight_dtype": "fp8_e4m3fn"
+      }
+    },
+    "2": {
+      "class_type": "DualCLIPLoader",
+      "_meta": {
+        "title": "Load CLIP (T5 + CLIP-L)"
+      },
+      "inputs": {
+        "clip_name1": "t5xxl_fp8_e4m3fn.safetensors",
+        "clip_name2": "clip_l.safetensors",
+        "type": "flux"
+      }
+    },
+    "3": {
+      "class_type": "VAELoader",
+      "_meta": {
+        "title": "Load VAE"
+      },
+      "inputs": {
+        "vae_name": "ae.safetensors"
+      }
+    },
+    "4": {
+      "class_type": "CLIPTextEncodeFlux",
+      "_meta": {
+        "title": "Positive Prompt (Shōnen Cover)"
+      },
+      "inputs": {
+        "clip": ["2", 0],
+        "clip_l": "title-safe zone: upper 22% canvas reserved keep sky gradient simple, spine-safe zone: leftmost 12% reserved solid color band, full-body dynamic action pose, teenage male protagonist centered 55% canvas width occupying canvas from knee-level to top of hair facing slightly right, dramatic motion blur on fists and cape edges, confident aggressive expression wide eyes with strong catchlight sharp jaw spiky black hair with highlights, battle-worn school uniform with torn sleeve detail, high-contrast manga cover art crisp linework cel-shading with hard shadow cutoffs no soft gradients on character bold black outlines 2-3px weight, vibrant saturated color palette primary colors dominant crimson red electric blue brilliant white strong yellow accent, dynamic speed lines radiating from character center debris particles mid-air distant city skyline silhouette atmospheric haze separating foreground from background bright orange-to-deep-blue gradient sky suggesting late afternoon battle, dramatic rim light from upper-left secondary warm fill from right strong cast shadow on ground plane specular highlights on character hair and knuckles backlit dust particles catching light, high-energy triumph-on-the-horizon physical peak power escalation masculine bravado forward momentum, full bleed to canvas edges no white border high detail density on character, professional manga cover illustration Shueisha Weekly Shonen Jump aesthetic trending on ArtStation award-winning manga art",
+        "t5xxl": "title-safe zone: upper 22% canvas reserved keep sky gradient simple, spine-safe zone: leftmost 12% reserved solid color band, full-body dynamic action pose, teenage male protagonist centered 55% canvas width occupying canvas from knee-level to top of hair facing slightly right, dramatic motion blur on fists and cape edges, confident aggressive expression wide eyes with strong catchlight sharp jaw spiky black hair with highlights, battle-worn school uniform with torn sleeve detail, high-contrast manga cover art crisp linework cel-shading with hard shadow cutoffs no soft gradients on character bold black outlines 2-3px weight, vibrant saturated color palette primary colors dominant crimson red electric blue brilliant white strong yellow accent, dynamic speed lines radiating from character center debris particles mid-air distant city skyline silhouette atmospheric haze separating foreground from background bright orange-to-deep-blue gradient sky suggesting late afternoon battle, dramatic rim light from upper-left secondary warm fill from right strong cast shadow on ground plane specular highlights on character hair and knuckles backlit dust particles catching light, high-energy triumph-on-the-horizon physical peak power escalation masculine bravado forward momentum, full bleed to canvas edges no white border high detail density on character, professional manga cover illustration Shueisha Weekly Shonen Jump aesthetic trending on ArtStation award-winning manga art",
+        "guidance": 7.0
+      }
+    },
+    "5": {
+      "class_type": "CLIPTextEncodeFlux",
+      "_meta": {
+        "title": "Negative Prompt (Shōnen Cover)"
+      },
+      "inputs": {
+        "clip": ["2", 0],
+        "clip_l": "feminine features on male protagonist, soft rounded jawline, pastel palette, watercolor softness, static standing pose without energy, photorealistic render, adult nudity or sexual content, gore excessive beyond genre norm, western superhero anatomy over-muscled, dark horror atmosphere, muted desaturated colors, symmetrical static composition, watermark, text overlay, embedded title text, low resolution, blurry, jpeg artifacts, compression artifacts, anatomical errors extra fingers fused fingers six fingers deformed face, uncanny valley, AI face artifacts, western comic book style",
+        "t5xxl": "feminine features on male protagonist, soft rounded jawline, pastel palette, watercolor softness, static standing pose without energy, photorealistic render, adult nudity or sexual content, gore excessive beyond genre norm, western superhero anatomy over-muscled, dark horror atmosphere, muted desaturated colors, symmetrical static composition, watermark, text overlay, embedded title text, low resolution, blurry, jpeg artifacts, compression artifacts, anatomical errors extra fingers fused fingers six fingers deformed face, uncanny valley, AI face artifacts, western comic book style",
+        "guidance": 7.0
+      }
+    },
+    "6": {
+      "class_type": "EmptyLatentImage",
+      "_meta": {
+        "title": "Canvas Size (Shōnen Tankōbon)"
+      },
+      "inputs": {
+        "width": 1024,
+        "height": 1600,
+        "batch_size": 1
+      }
+    },
+    "7": {
+      "class_type": "KSampler",
+      "_meta": {
+        "title": "FLUX KSampler (Shōnen)"
+      },
+      "inputs": {
+        "model": ["1", 0],
+        "positive": ["4", 0],
+        "negative": ["5", 0],
+        "latent_image": ["6", 0],
+        "seed": 87654321,
+        "steps": 35,
+        "cfg": 7.0,
+        "sampler_name": "euler_ancestral",
+        "scheduler": "karras",
+        "denoise": 1.0
+      }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "_meta": {
+        "title": "VAE Decode"
+      },
+      "inputs": {
+        "samples": ["7", 0],
+        "vae": ["3", 0]
+      }
+    },
+    "9": {
+      "class_type": "SaveImage",
+      "_meta": {
+        "title": "Save Shōnen Cover"
+      },
+      "inputs": {
+        "images": ["8", 0],
+        "filename_prefix": "shonen_cover"
+      }
+    },
+    "10": {
+      "class_type": "ControlNetLoader",
+      "_meta": {
+        "title": "Load OpenPose ControlNet (optional — patch in at runtime)"
+      },
+      "inputs": {
+        "control_net_name": "flux-controlnet-openpose.safetensors"
+      }
+    },
+    "11": {
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Character Sheet Pose Map Input (patched at runtime)"
+      },
+      "inputs": {
+        "image": "protagonist_sheet.pose.png",
+        "upload": "image"
+      }
+    },
+    "12": {
+      "class_type": "ControlNetApplyAdvanced",
+      "_meta": {
+        "title": "Apply OpenPose ControlNet (Shōnen pose)",
+        "note": "This node is in the workflow but bypassed when no character sheet exists. cover_generator.py patches the conditioning chain to skip nodes 10-12 when controlnet_config is None."
+      },
+      "inputs": {
+        "positive": ["4", 0],
+        "negative": ["5", 0],
+        "control_net": ["10", 0],
+        "image": ["11", 0],
+        "strength": 0.65,
+        "start_percent": 0.0,
+        "end_percent": 0.6
+      }
+    }
+  },
+  "links": [
+    [1, "1", 0, "7", 0],
+    [2, "2", 0, "4", 0],
+    [3, "2", 0, "5", 0],
+    [4, "3", 0, "8", 1],
+    [5, "4", 0, "7", 1],
+    [6, "5", 0, "7", 2],
+    [7, "6", 0, "7", 3],
+    [8, "7", 0, "8", 0],
+    [9, "8", 0, "9", 0],
+    [10, "10", 0, "12", 2],
+    [11, "11", 0, "12", 3],
+    [12, "12", 0, "7", 1],
+    [13, "12", 1, "7", 2]
+  ],
+  "version": 0.4,
+  "config": {
+    "links_on_top_of_nodes": false,
+    "align_to_grid": true,
+    "controlnet_active": true,
+    "controlnet_bypass_when_no_pose_map": true
+  }
+}

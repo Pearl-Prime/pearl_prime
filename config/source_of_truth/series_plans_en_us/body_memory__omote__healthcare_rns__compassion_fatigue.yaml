@@ -1,0 +1,76 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: body_memory__omote__healthcare_rns__compassion_fatigue
+brand: body_memory
+teacher: omote
+persona: healthcare_rns
+topic: compassion_fatigue
+byline_author: quinn_janssen
+arc:
+  installment_1:
+    book_id: body_memory__omote__healthcare_rns__compassion_fatigue__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: body_memory__omote__healthcare_rns__compassion_fatigue__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: body_memory__omote__healthcare_rns__compassion_fatigue__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will be met exactly where you are — emptied out from caring
+  for everyone but yourself — and shown how to set the weight down without being told
+  to care less. This series does not ask the nurse in you to toughen up, push through,
+  or find the silver lining. It gives the part of you that has been holding everyone
+  else a place to finally be held.
+bestseller_hook_family: ''
+emotional_engine: compassion_fatigue_recognition
+comp_series:
+- Trauma Stewardship (Laura van Dernoot Lipsky) — the foundational text on the cost
+  of caring, written for helpers who absorb suffering for a living
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the depletion of caregivers without ever blaming them for it'
+- When the Body Says No (Gabor Mate) — connects unspoken emotional cost to what the
+  body finally does with it, in plain, humane language
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28-52
+  where_they_are: It is 6:40am and you are sitting in your car in the hospital parking
+    structure with the engine off, badge already clipped on, hands still on the wheel.
+    You cannot remember the drive here. Inside, twelve more hours are waiting — the
+    call lights, the families, the chart that is never caught up. You feel nothing,
+    and the nothing scares you more than the exhaustion ever did.
+  what_they_need: To hear that the numbness is not a character flaw but a wound from
+    giving more than any human has to give — and to be shown, gently, how to come
+    back into a body that has been on alert for years, without abandoning the work
+    or the patients they still love.
+  what_they_avoid: Self-care listicles, 'put your own oxygen mask on first' platitudes,
+    resilience trainings that put the burnout back on them, anyone who says 'you just
+    need a vacation,' and any voice that mistakes their compassion for a problem to
+    be managed.
+series_voice_markers:
+  register: grounded, steady, holding; the voice of a fellow nurse who has stood at
+    the same med cart at 3am and lived to feel again — warm and plain, never clinical,
+    never the wellness-officer who has never run a code
+  sentence_rhythm: calm and load-bearing; short declarative sentences that set something
+    down, then a longer one that stays with you; pauses where a tired reader can breathe;
+    never breathless, never a list of demands
+  metaphor_family: the ground that holds, weight set down and supported, the well
+    and the empty cup, roots and steadiness, the body remembering it is safe, what
+    stays solid when everything in the unit is shaking
+_needs_authoring: false

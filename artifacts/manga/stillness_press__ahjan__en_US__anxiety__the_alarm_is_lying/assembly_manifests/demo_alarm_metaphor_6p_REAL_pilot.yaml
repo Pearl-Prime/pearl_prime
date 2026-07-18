@@ -1,0 +1,171 @@
+schema_version: 1.0.0
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+episode_id: ep_001
+manifest_id: demo_alarm_metaphor_6p_REAL_pilot
+notes: 'M5 LOW-pri pilot: INTERIM L1/L3/L4 replaced with REAL Pearl Star renders (jobs
+  495-497, t2i_flux_dev_h1a). L0/L2 remain REAL from April bank.'
+canvas:
+  width: 1080
+  height: 1920
+  background_hex: '#FFFFFF'
+panels:
+- panel_id: demo_p1_therapist_memory
+  archetype: character_at_table_medium
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
+    provenance: REAL
+  - layer_class: L1
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L1/wall_alarm_green_idle.png
+    bbox_pct:
+    - 64
+    - 7
+    - 14
+    - 8
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_3210c57437fb_alpha.png
+    bbox_pct:
+    - 24
+    - 28
+    - 56
+    - 66
+    provenance: REAL
+  narrator_caption: Once, my therapist said something I didn't believe.
+- panel_id: demo_p2_alarm_gaze
+  archetype: character_quiet_face
+  shot_type: reaction_emotion
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
+    provenance: REAL
+    derivation:
+      type: defocus
+  - layer_class: L1
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L1/wall_alarm_green_idle.png
+    bbox_pct:
+    - 18
+    - 5
+    - 20
+    - 11
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_aaaf0385e52e_alpha.png
+    bbox_pct:
+    - 26
+    - 24
+    - 54
+    - 72
+    provenance: REAL
+  narrator_caption: He said the body's alarm system is older than the body's wisdom.
+- panel_id: demo_p3_kettle_macro
+  archetype: kettle_steam_macro
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
+    provenance: REAL
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L3/kettle_on_burner_boiling.png
+    bbox_pct:
+    - 30
+    - 42
+    - 44
+    - 40
+    z_order: above_L2
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  - layer_class: L4
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L4/steam_wisp_rising.png
+    blend: screen
+    opacity: 0.85
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  narrator_caption: It can't tell smoke from steam.
+- panel_id: demo_p4_watching_kettle
+  archetype: shared_scene_medium
+  shot_type: establishing
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
+    provenance: REAL
+    derivation:
+      type: defocus
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_6003bcacf3a5_alpha.png
+    bbox_pct:
+    - 8
+    - 26
+    - 52
+    - 70
+    provenance: REAL
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L3/kettle_on_burner_boiling.png
+    bbox_pct:
+    - 62
+    - 55
+    - 30
+    - 26
+    z_order: above_L2
+    flip_h: true
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  - layer_class: L4
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L4/steam_wisp_rising.png
+    blend: screen
+    opacity: 0.55
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  sfx:
+  - shhhh
+- panel_id: demo_p5_noticing
+  archetype: character_quiet_face
+  shot_type: reaction_emotion
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
+    provenance: REAL
+    derivation:
+      type: defocus
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_2fb7ddd5e1a3_alpha.png
+    bbox_pct:
+    - 22
+    - 22
+    - 58
+    - 74
+    provenance: REAL
+  dialogue:
+  - text: Oh.
+    speaker: mira_internal
+    bubble_style: cloud_thought
+    intensity: whisper
+    position_hint: top_right
+- panel_id: demo_p6_resolution
+  archetype: character_at_table_medium
+  shot_type: establishing
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
+    provenance: REAL
+    derivation:
+      type: defocus
+  - layer_class: L1
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L1/wall_alarm_green_idle.png
+    bbox_pct:
+    - 70
+    - 8
+    - 10
+    - 6
+    provenance: REAL
+    provenance_note: Pearl Star t2i_flux_dev_h1a pilot jobs 495-497 (OPD-20260704-007)
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_ebbbf9da6966_alpha.png
+    bbox_pct:
+    - 24
+    - 28
+    - 56
+    - 68
+    provenance: REAL
+  narrator_caption: I don't have to believe it yet. I just have to notice it once.

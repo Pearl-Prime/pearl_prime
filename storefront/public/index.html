@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pearl Prime — Books, Audiobooks &amp; Manga for a Quieter Mind</title>
+  <meta name="description" content="Pearl Prime: calm-tech books, audiobooks, and manga for anxiety, focus, sleep, and burnout. A quieter shelf for a noisy world." />
+  <meta name="theme-color" content="#0e0a06" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles/storefront.css" />
+</head>
+<body>
+  <div id="app" aria-busy="true"></div>
+
+  <!-- Runtime config. snipcartKey is injected at deploy time (operator-provided public key);
+       empty key => local fallback cart for verification. locale = launch default. -->
+  <script>
+    window.PP_CONFIG = {
+      snipcartKey: "",
+      locale: "en-US",
+      snipcartVersion: "3.7.1"
+    };
+  </script>
+  <script type="module" src="./app/main.js"></script>
+</body>
+</html>

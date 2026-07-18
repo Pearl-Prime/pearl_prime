@@ -1,0 +1,53 @@
+schema_version: 1
+description: >
+  Four journey templates mapping awareness → regulation → integration phases
+  to target sections (legacy 10-section model: 4, 8, 10).
+
+journey_templates:
+  classic_somatic_entry:
+    phases:
+      awareness:
+        target_section: 4
+        emphasis: [interoception, naming]
+      regulation:
+        target_section: 8
+        emphasis: [breath, downshift]
+      integration:
+        target_section: 10
+        emphasis: [carry_forward, permission]
+
+  anxiety_downshift:
+    phases:
+      awareness:
+        target_section: 4
+        emphasis: [alarm_recognition, body_signal]
+      regulation:
+        target_section: 8
+        emphasis: [exhale, grounding]
+      integration:
+        target_section: 10
+        emphasis: [next_step, self_trust]
+
+  emotional_tolerance:
+    phases:
+      awareness:
+        target_section: 4
+        emphasis: [unnamed_feeling, edge]
+      regulation:
+        target_section: 8
+        emphasis: [hold, smaller_window]
+      integration:
+        target_section: 10
+        emphasis: [meaning_without_fusion]
+
+  grounding_sequence:
+    phases:
+      awareness:
+        target_section: 4
+        emphasis: [contact_points, orientation]
+      regulation:
+        target_section: 8
+        emphasis: [pace, containment]
+      integration:
+        target_section: 10
+        emphasis: [portable_cue, closure]

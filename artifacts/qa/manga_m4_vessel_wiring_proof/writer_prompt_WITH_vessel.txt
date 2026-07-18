@@ -1,0 +1,128 @@
+You are the Phoenix Omega manga Chapter Writer agent.
+
+Output requirement (machine contract): the model must return a JSON object with exactly two keys:
+- "chapter_script_writer_handoff" — writer-facing script (no transmission metadata)
+- "chapter_script_internal_record" — full internal script for QC
+
+Inputs for this run:
+- series_id: m4_proof__mecha__en_US
+- chapter_id: ep_001
+- chapter_number: 1
+
+Story architecture handoff excerpt (JSON fragment for this chapter):
+{
+  "chapter_number": 1,
+  "chapter_title": "Awakening",
+  "mini_arc_stage": "setup",
+  "plot_beats": [
+    {
+      "beat_index": 0,
+      "beat_text": "[mode:teacher vessel:the mechanic who co-regulates the pilot / wound] the pilot forces the sync and burns out \u2014 apparatus: doctrine delivered as care \u2014 the mechanic reads the pilot's body, names the cost. Teacher/musician is NEVER named; the vessel carries the mode diegetically.",
+      "is_carrier_beat": true,
+      "camera_hint": "medium",
+      "mood_hint": "tense",
+      "mode_vessel_beat": "wound"
+    },
+    {
+      "beat_index": 1,
+      "beat_text": "Wide establishing shot of the rooftop overlooking the city. Dawn light, stillness before the day.",
+      "is_carrier_beat": true,
+      "camera_hint": "wide",
+      "mood_hint": "calm"
+    },
+    {
+      "beat_index": 2,
+      "beat_text": "Kai appears in silhouette against the rooftop overlooking the city. Their posture tells a story before any word is spoken.",
+      "is_carrier_beat": false,
+      "camera_hint": "medium",
+      "mood_hint": "neutral"
+    },
+    {
+      "beat_index": 3,
+      "beat_text": "Close on Kai's hands \u2014 fidgeting, gripping, or still. The body knows what the mind hasn't admitted.",
+      "is_carrier_beat": true,
+      "camera_hint": "close-up",
+      "mood_hint": "tense"
+    },
+    {
+      "beat_index": 4,
+      "beat_text": "Kai walks through the familiar space. Everything looks the same. Something has shifted.",
+      "is_carrier_beat": false,
+      "camera_hint": "medium",
+      "mood_hint": "neutral"
+    },
+    {
+      "beat_index": 5,
+      "beat_text": "A small detail catches Kai's eye \u2014 a crack in the wall, a wilting plant, a clock stopped at the wrong time.",
+      "is_carrier_beat": false,
+      "camera_hint": "close-up",
+      "mood_hint": "neutral"
+    },
+    {
+      "beat_index": 6,
+      "beat_text": "Sora enters the frame without warning. Kai stiffens.",
+      "is_carrier_beat": false,
+      "camera_hint": "over-shoulder",
+      "mood_hint": "tense"
+    },
+    {
+      "beat_index": 7,
+      "beat_text": "The first exchange. Words say one thing. Eyes say another. Neither acknowledges the gap.",
+      "is_carrier_beat": true,
+      "camera_hint": "medium",
+      "mood_hint": "tense"
+    },
+    {
+      "beat_index": 8,
+      "beat_text": "Kai alone again. They exhale. The room holds the echo.",
+      "is_carrier_beat": false,
+      "camera_hint": "wide",
+      "mood_hint": "calm"
+    },
+    {
+      "beat_index": 9,
+      "beat_text": "A memory surfaces \u2014 not as flashback but as body sensation. Kai's shoulders rise.",
+      "is_carrier_beat": true,
+      "camera_hint": "close-up",
+      "mood_hint": "dark"
+    },
+    {
+      "beat_index": 10,
+      "beat_text": "Night falls over the rooftop overlooking the city. Kai at the window. The reflection stares back.",
+      "is_carrier_beat": false,
+      "camera_hint": "medium",
+      "mood_hint": "dark"
+    },
+    {
+      "beat_index": 11,
+      "beat_text": "SILENCE: The world breathes. No dialogue. No action. Just the space between heartbeats.",
+      "is_carrier_beat": true,
+      "camera_hint": "wide",
+      "mood_hint": "calm"
+    },
+    {
+      "beat_index": 12,
+      "beat_text": "Kai makes a small choice \u2014 turns left instead of right, picks up a forgotten object, opens a closed door.",
+      "is_carrier_beat": false,
+      "camera_hint": "medium",
+      "mood_hint": "hopeful"
+    }
+  ],
+  "chapter_end_hook": "Turn",
+  "turning_point": "ch1_turn",
+  "silence_beats_allocated": 1,
+  "villain_presence": "absent"
+}
+
+Follow specs/MANGA_CHAPTER_WRITER_SPEC.md for panel structure and dual-view rules.
+
+
+Mode vessel (M4 — diegetic apparatus; NEVER name the teacher/musician):
+- mode: teacher
+- vessel: the mechanic who co-regulates the pilot
+- vessel_desc: doctrine delivered as care — the mechanic reads the pilot's body, names the cost
+- beat skeleton:
+  - wound: the pilot forces the sync and burns out
+  - turn: the mechanic: it knew before you did; settle, don't override
+  - renewal: pilot and machine move from a settled body
+Weave the vessel into panels as a genre-native presence. Teacher-mode: doctrine earned (wound→turn→renewal). Music-mode: motif felt (opening→mid→closing). The brand teacher or musician is NEVER named in-story.

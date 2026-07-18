@@ -1,0 +1,72 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__working_parents__grief
+brand: heart_transmission
+teacher: junko
+persona: working_parents
+topic: grief
+byline_author: bea_voss
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__working_parents__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__working_parents__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You don't have to be done grieving to be a good parent. This
+  series sits with the mother and father who lost someone and never got to fall apart
+  — and it offers no schedule, no stages to complete, only the company of a voice
+  that understands what it is to hold a loss in one hand and a child's hand in the
+  other.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- It's OK That You're Not OK (Megan Devine) — refuses the grief-stages script and
+  meets loss as something to be carried, not cured
+- The Year of Magical Thinking (Joan Didion) — the disorienting, ongoing aftermath
+  of losing someone while life keeps demanding you function
+- Bearing the Unbearable (Joanne Cacciatore) — tender, unhurried companionship for
+  the bereaved that never rushes them toward 'better'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-48
+  where_they_are: It's 7:40am and you're packing a lunch with hands that still work
+    even though the rest of you stopped a while ago. Someone is gone. The kids need
+    their shoes. You smiled at the school gate yesterday and a parent said how well
+    you're coping, and you wanted to lie down on the pavement. Tonight, after the
+    house goes quiet, the grief will come and find you in the kitchen — and you'll
+    have maybe twenty minutes before someone calls for water.
+  what_they_need: Permission to grieve in the cracks of a life that won't pause for
+    them — to be told the love and the loss can live in the same body as the lunchboxes
+    and the bedtimes, and that they are not failing their children by being a person
+    who is hurting.
+  what_they_avoid: Stages-of-grief checklists, 'closure', toxic positivity, anyone
+    who says the person is in a better place, and any book that treats their heartbreak
+    as a problem to be optimized away before they're allowed back to normal.
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the voice of someone who has
+    sat in the same dim kitchen at midnight, who speaks close and unhurried and never
+    once reaches for a clipboard
+  sentence_rhythm: tidal — long, gentle sentences that carry you out, then a short
+    one that holds you; pauses left open the way grief leaves rooms open; never clipped,
+    never clinical
+  metaphor_family: the heart and what passes between two of them, light passed hand
+    to hand, the warmth of a presence still felt in a doorway, the open hand that
+    holds without gripping, breath shared in a quiet room, what love transmits without
+    words — never machinery, never stages or systems
+_needs_authoring: false

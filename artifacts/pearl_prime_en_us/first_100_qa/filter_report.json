@@ -1,0 +1,360 @@
+{
+  "timestamp": "2026-05-12T16:06:07.928496+00:00",
+  "target": 200,
+  "over_allocate": 400,
+  "specs_allocated": 400,
+  "kept": 200,
+  "dropped": 50,
+  "dropped_details": [
+    {
+      "spec_file": "book_0011_self_worth_educators.spec.json",
+      "persona": "educators",
+      "topic": "self_worth",
+      "teacher": "miki",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0012_sleep_anxiety_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "sleep_anxiety",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0023_grief_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "grief",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0024_imposter_syndrome_educators.spec.json",
+      "persona": "educators",
+      "topic": "imposter_syndrome",
+      "teacher": "ahjan",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0025_overthinking_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "overthinking",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0036_financial_anxiety_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "financial_anxiety",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0037_financial_stress_educators.spec.json",
+      "persona": "educators",
+      "topic": "financial_stress",
+      "teacher": "master_wu",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0038_grief_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "grief",
+      "teacher": "omote",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0049_courage_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "courage",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0050_depression_educators.spec.json",
+      "persona": "educators",
+      "topic": "depression",
+      "teacher": "master_feung",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0051_financial_anxiety_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "financial_anxiety",
+      "teacher": "miki",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0063_compassion_fatigue_educators.spec.json",
+      "persona": "educators",
+      "topic": "compassion_fatigue",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0064_courage_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "courage",
+      "teacher": "ahjan",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0076_boundaries_educators.spec.json",
+      "persona": "educators",
+      "topic": "boundaries",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0077_burnout_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "burnout",
+      "teacher": "master_wu",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0088_social_anxiety_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "social_anxiety",
+      "teacher": "ahjan",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0089_somatic_healing_educators.spec.json",
+      "persona": "educators",
+      "topic": "somatic_healing",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0090_anxiety_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "anxiety",
+      "teacher": "master_feung",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0101_self_worth_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "self_worth",
+      "teacher": "master_wu",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0102_sleep_anxiety_educators.spec.json",
+      "persona": "educators",
+      "topic": "sleep_anxiety",
+      "teacher": "omote",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0103_social_anxiety_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "social_anxiety",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0115_overthinking_educators.spec.json",
+      "persona": "educators",
+      "topic": "overthinking",
+      "teacher": "miki",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0116_self_worth_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "self_worth",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0127_financial_stress_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "financial_stress",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0128_grief_educators.spec.json",
+      "persona": "educators",
+      "topic": "grief",
+      "teacher": "ahjan",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0129_imposter_syndrome_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "imposter_syndrome",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0140_depression_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "depression",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0141_financial_anxiety_educators.spec.json",
+      "persona": "educators",
+      "topic": "financial_anxiety",
+      "teacher": "master_wu",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0142_financial_stress_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "financial_stress",
+      "teacher": "omote",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0153_compassion_fatigue_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "compassion_fatigue",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0154_courage_educators.spec.json",
+      "persona": "educators",
+      "topic": "courage",
+      "teacher": "master_feung",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0155_depression_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "depression",
+      "teacher": "miki",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0166_boundaries_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "boundaries",
+      "teacher": "omote",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0167_burnout_educators.spec.json",
+      "persona": "educators",
+      "topic": "burnout",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0168_compassion_fatigue_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "compassion_fatigue",
+      "teacher": "ahjan",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0179_somatic_healing_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "somatic_healing",
+      "teacher": "miki",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0181_boundaries_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "boundaries",
+      "teacher": "master_wu",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0193_social_anxiety_educators.spec.json",
+      "persona": "educators",
+      "topic": "social_anxiety",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0194_somatic_healing_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "somatic_healing",
+      "teacher": "master_feung",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0206_self_worth_educators.spec.json",
+      "persona": "educators",
+      "topic": "self_worth",
+      "teacher": "omote",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0207_sleep_anxiety_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "sleep_anxiety",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0218_grief_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "grief",
+      "teacher": "master_feung",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0219_imposter_syndrome_educators.spec.json",
+      "persona": "educators",
+      "topic": "imposter_syndrome",
+      "teacher": "miki",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0220_overthinking_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "overthinking",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0231_financial_anxiety_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "financial_anxiety",
+      "teacher": "ra",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0232_financial_stress_educators.spec.json",
+      "persona": "educators",
+      "topic": "financial_stress",
+      "teacher": "ahjan",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0233_grief_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "grief",
+      "teacher": "joshin",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0244_courage_gen_z_student.spec.json",
+      "persona": "gen_z_student",
+      "topic": "courage",
+      "teacher": "junko",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0245_depression_educators.spec.json",
+      "persona": "educators",
+      "topic": "depression",
+      "teacher": "master_wu",
+      "reason": "no_master_arc"
+    },
+    {
+      "spec_file": "book_0246_financial_anxiety_midlife_women.spec.json",
+      "persona": "midlife_women",
+      "topic": "financial_anxiety",
+      "teacher": "omote",
+      "reason": "no_master_arc"
+    }
+  ]
+}

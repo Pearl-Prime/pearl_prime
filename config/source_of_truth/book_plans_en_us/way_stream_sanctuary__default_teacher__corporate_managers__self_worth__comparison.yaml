@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__self_worth__comparison
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__self_worth.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__worth_limits
+  name: Worth & Limits — for Managers
+installment_number: 1
+engine: comparison
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Voice That Says Not Enough: Beyond the Highlight Reel'
+subtitle: The Comparison Habit
+cover_tagline: Your worth keeps moving because you keep pegging it to people who are
+  also unsure of theirs.
+description:
+  short_blurb: You assess whether you're enough by stacking yourself against everyone
+    around you, and the verdict changes by the hour. This book is about how comparison
+    hollows out your sense of worth one ranking at a time. No affirmations. Just a
+    clear look at why measuring yourself against others can never land you anywhere
+    stable.
+  long_description: 'Someone on your team got the recognition, or the peer manager
+    got the promotion, or you scrolled past a former colleague''s win, and within
+    seconds your sense of your own worth dropped through the floor. Not because anything
+    about you changed. Because the measurement moved. That''s the mechanism this book
+    is about: the habit of deciding whether you''re enough by checking where you rank.
+
+
+    This is for the manager whose self-worth is wired to a scoreboard. On a good day
+    you''re ahead and you feel solid. On a bad day someone''s further along and you
+    feel like nothing you''ve done counts. You lead capably, you''re trusted, and
+    underneath it your worth swings wildly because it''s pinned to people who keep
+    moving — and to a comparison that was never built to hold weight.
+
+
+    Recognition first: comparison can''t produce worth, only ranking. And ranking
+    is unstable by design, because there is always someone ahead, always a metric
+    where you fall short, always a version of further-along to lose to. You compare
+    your whole messy inside to everyone''s curated outside and read the gap as a statement
+    about your value. It isn''t. It''s just the scoreboard doing what scoreboards
+    do — and the board never closes, so the verdict you''re chasing never actually
+    arrives.
+
+
+    Then we go down into it instead of climbing for a better position. We get specific
+    about the moment your worth drops — who triggers it, when, what it feels like
+    in your body, the exact internal math of ''they''re ahead, so I''m less.'' We
+    look at how early the ranking started: the grades, the rankings, the sibling or
+    classmate you were always measured beside. Not to talk you into feeling great
+    about yourself. To stay with the drop long enough that you stop accepting a ranking
+    as a readout of your worth.
+
+
+    What you come back with isn''t high self-esteem or a louder inner cheerleader.
+    It''s the ability to catch the comparison in motion and see it for what it is
+    — a measurement that can never settle, attached to a worth that was never supposed
+    to be measured this way. That catch is where the swinging slows.
+
+
+    This book will not pump up your confidence or hand you daily worth-building exercises.
+    It won''t promise you''ll stop comparing. You''ll still feel the drop when someone
+    pulls ahead. You''ll just stop treating that drop as the truth about whether you''re
+    enough.
+
+
+    You are allowed to be enough without ranking first. Your worth was never on the
+    board.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  - inner critic
+  secondary:
+  - managers
+  - self-worth for managers
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- The Gifts of Imperfection (Brené Brown) — on releasing worth from comparison and
+  external scorecards
+- The Six Pillars of Self-Esteem (Nathaniel Branden) — the secular classic on worth
+  grounded internally
+- Mindset (Carol Dweck) — reframes self-judgment away from fixed ranking
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

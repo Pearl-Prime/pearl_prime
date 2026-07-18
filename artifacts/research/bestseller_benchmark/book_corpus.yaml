@@ -1,0 +1,176 @@
+# Bestseller benchmark — commercial target list + internal gate-distribution probe
+#
+# LEGAL / METHODOLOGY
+# - The ten commercial titles below are the sprint corpus (metadata + public URLs).
+#   First-chapter text for those titles was NOT committed: operator ingest is still
+#   required (Kindle sample, library loan export, or publisher excerpt).
+# - Gate scores under artifacts/research/bestseller_benchmark/scores/ were produced
+#   from in-repo Phoenix manuscript chapters (deep_book_6h) plus one canary slice
+#   (qa scratch standard_book ch1). Those files are NOT the copyrighted text of the
+#   commercial titles. They quantify how the gate stack behaves on long-form Phoenix
+#   prose while commercial chapters are sourced.
+#
+# Prior context: three-title anecdote (Bourne / Wilson / Breslin) referenced in sprint
+# brief; extend with this N=10 distribution probe + N=1 canary — not a substitute
+# for title-identified commercial chapters.
+
+version: 1
+session_id: bestseller-benchmark-gate-calibration-20260418
+persona: gen_z_professionals
+
+internal_calibration:
+  description: >
+    Ten consecutive first chapters from artifacts/qa/_scratch_pp_ahjan_genz_anxiety/
+    deep_book_6h/book.txt (word counts 3.3k–6.5k each). Used only to measure gate
+    variance and museum false-positive density on long Phoenix prose.
+  sample_globs:
+    - artifacts/research/bestseller_benchmark/samples/internal_deep6h_ch*.txt
+
+canary:
+  label: qa_scratch_standard_book_chapter_1
+  path: artifacts/research/bestseller_benchmark/samples/_canary_standard_book_ch1.txt
+  source_render: artifacts/qa/_scratch_pp_ahjan_genz_anxiety/standard_book/book.txt
+  note: >
+    This artifact matches the museum stress fixture opening ("soft daylight along the sill").
+    It is useful as a worst-case canary for detectors, not as proof of shipping prose quality.
+
+commercial_targets:
+  - id: atomic_habits
+    title: "Atomic Habits"
+    author: "James Clear"
+    isbn_13: "978-0735211299"
+    year: 2018
+    region: US
+    category: habits / behavior change (commercial ceiling reference)
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "Long-running US nonfiction category leader on major retailer charts."
+    text_sample_source: "Operator: Kindle / retailer sample / library digital loan"
+    text_sample_url: "https://www.amazon.com/dp/0735211299"
+    legal_sample_path: null
+
+  - id: anxiety_phobia_workbook
+    title: "The Anxiety and Phobia Workbook"
+    author: "Edmund J. Bourne"
+    isbn_13: "978-1684032277"
+    year: 2020
+    region: US
+    category: clinical workbook / anxiety
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "Perennial top seller in Amazon US 'Anxiety Disorders' workbook cluster."
+    text_sample_source: "Operator: library loan or Kindle sample"
+    text_sample_url: "https://www.amazon.com/s?k=Anxiety+and+Phobia+Workbook+Bourne"
+    legal_sample_path: null
+
+  - id: beast_beautiful
+    title: "First, We Make the Beast Beautiful"
+    author: "Sarah Wilson"
+    isbn_13: "978-0062991121"
+    year: 2019
+    region: AU
+    category: anxiety memoir / literary self-help
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "Strong AU origin story; widely reviewed in US/UK anxiety memoir lane."
+    text_sample_source: "Operator: Kindle sample / Google Books preview"
+    text_sample_url: "https://www.amazon.com/s?k=First+We+Make+the+Beast+Beautiful"
+    legal_sample_path: null
+
+  - id: dare
+    title: "Dare"
+    author: "Niall Breslin (Bressie)"
+    isbn_13: "978-1529345394"
+    year: 2021
+    region: IE
+    category: anxiety / performance / Gen-Z voice
+    format: trade_paperback
+    author_tier: celebrity
+    commercial_note: "Irish market breakout with UK/US editions; strong audio adjacency."
+    text_sample_source: "Operator: Kindle sample"
+    text_sample_url: "https://www.amazon.com/s?k=Dare+Bressie"
+    legal_sample_path: null
+
+  - id: burnout_nagoski
+    title: "Burnout: The Secret to Unlocking the Stress Cycle"
+    author: "Emily Nagoski; Amelia Nagoski"
+    isbn_13: "978-1984818328"
+    year: 2020
+    region: US
+    category: burnout / stress science
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "NYT nonfiction extended run; book-club and workplace wellness staple."
+    text_sample_source: "Operator: Kindle sample"
+    text_sample_url: "https://www.amazon.com/dp/1984818325"
+    legal_sample_path: null
+
+  - id: boundaries_tawwab
+    title: "Set Boundaries, Find Peace"
+    author: "Nedra Glover Tawwab"
+    isbn_13: "978-0593198165"
+    year: 2021
+    region: US
+    category: boundaries / relationships
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "Long tail US bestseller list presence in boundaries category."
+    text_sample_source: "Operator: Kindle sample"
+    text_sample_url: "https://www.amazon.com/dp/0593198166"
+    legal_sample_path: null
+
+  - id: big_feelings
+    title: "Big Feelings"
+    author: "Mollie West Duffy; Liz Fosslien"
+    isbn_13: "978-0593421294"
+    year: 2022
+    region: US
+    category: workplace anxiety / illustrated
+    format: illustrated_hardcover
+    author_tier: established
+    commercial_note: "Illustrated business/self-help crossover; strong workplace persona match."
+    text_sample_source: "Operator: Kindle sample / publisher excerpt"
+    text_sample_url: "https://www.amazon.com/s?k=Big+Feelings+West+Duffy+Fosslien"
+    legal_sample_path: null
+
+  - id: comfort_book
+    title: "The Comfort Book"
+    author: "Matt Haig"
+    isbn_13: "978-0525534156"
+    year: 2020
+    region: UK
+    category: literary short-form comfort / mental health adjacent
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "UK-originated title with US bestseller presence."
+    text_sample_source: "Operator: Kindle sample"
+    text_sample_url: "https://www.amazon.com/dp/0525534156"
+    legal_sample_path: null
+
+  - id: dont_get_angry_jp
+    title: "怒らないこと / Don't Get Angry"
+    author: "Alubomulle Sumanasara"
+    isbn_13: "978-4041034440"
+    year: 2019
+    region: JP
+    category: anger / emotional regulation (JP domestic bestseller lane)
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "High-volume JP self-help list history; verify current Oricon rank via Rakuten/Books.or.jp when sourcing."
+    text_sample_source: "Operator: Japanese retailer sample / bilingual excerpt where licensed"
+    text_sample_url: "https://www.amazon.co.jp/s?k=%E6%80%92%E3%82%89%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8+%E3%82%B9%E3%83%9E%E3%83%8A%E3%82%B5%E3%83%A9"
+    legal_sample_path: null
+
+  - id: mindful_day
+    title: "The Mindful Day"
+    author: "Laurie J. Cameron"
+    isbn_13: "978-1426218363"
+    year: 2018
+    region: US
+    category: mindfulness / workplace productivity bridge
+    format: trade_paperback
+    author_tier: established
+    commercial_note: "Steady US mindfulness category seller."
+    text_sample_source: "Operator: Kindle sample"
+    text_sample_url: "https://www.amazon.com/s?k=The+Mindful+Day+Laurie+Cameron"
+    legal_sample_path: null

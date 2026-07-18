@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__sleep_anxiety__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__sleep_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__restless_mind__1hr
+  name: Quiet the Restless Mind — for Nurses (One-Hour)
+installment_number: 1
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Sleep Anxiety: The False Alarm Response (1)'
+subtitle: A Field Guide for Healthcare Rns Navigating Sleep Anxiety
+cover_tagline: Your body says danger. The room is dark, quiet, and completely safe.
+description:
+  short_blurb: It's 3am, you're wired and pinned to the mattress, heart going like
+    something's wrong — and nothing is. This hour is for the nurse whose body sounds
+    a full alarm in a safe, empty room. It won't promise you sleep. It'll show you
+    how to let the alarm ring without obeying it.
+  long_description: 'It''s 3am. The room is dark and silent and nothing is happening.
+    But your body didn''t get the message. Your heart is up, your chest is tight,
+    there''s that electric hum under the skin that on a shift would mean someone''s
+    about to go bad. Except there''s no someone. There''s just you, flat on your back,
+    staring at the ceiling, fully alarmed in a perfectly safe room, exhausted past
+    the point of sense and still unable to come down.
+
+
+    This hour is for the nurse whose nervous system can''t tell the difference between
+    a real night-shift emergency and a quiet bedroom at three in the morning. You''ve
+    spent years teaching your body that darkness and stillness can flip to crisis
+    in a second — it''s the job, it''s how you survived nights. So now, the moment
+    you lie down, the alarm arms itself out of pure habit. The danger signal fires
+    with no danger underneath it, and you lie there answering a call that isn''t real,
+    scanning a room that holds nothing but you.
+
+
+    You''ll start by naming it for what it is: a false alarm. Not a sign that something''s
+    wrong with you, not a problem to fix before you''re allowed to rest — just a body
+    sounding a klaxon over an empty hallway. Then, instead of fighting the wiredness
+    or trying to force the off-ramp into sleep, you''ll go down into it. You''ll let
+    the alarm ring all the way through without leaping up to handle it. You''ll feel
+    the surge of wired-but-exhausted, the awful both-at-once of it, and you''ll stay
+    lying down inside it. That''s the turn: the body can scream and you don''t have
+    to scramble. The alarm can sound in an empty room and you can let it sound.
+
+
+    What you come back with isn''t a guaranteed eight hours. It''s the discovery that
+    you can be wide awake and alarmed and still resting — that lying still in the
+    dark while the alarm fades is not the same as failing at sleep. The pressure to
+    fix the night, to make sleep happen on a deadline, is half of what kept you up.
+    Let that pressure go and the body, eventually, follows on its own clock.
+
+
+    This book will not promise you sleep, or a routine that knocks you out, or a way
+    to make the 3am wiredness never come again. There''s no sleep hack here, no breathing
+    count to perform on yourself like a procedure with a target number. Some nights
+    the alarm will still ring. You''ll just stop treating it like a code, stop leaping
+    up to work a problem that isn''t there.
+
+
+    The alarm is allowed to ring. You are allowed to lie here and let it.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - can't sleep
+  secondary:
+  - nurses
+  - sleep anxiety for nurses
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- Why We Sleep (Matthew Walker) — the science that takes the pressure off and explains
+  the wired-tired 3am state
+- The Sleep Solution (W. Chris Winter) — blunt, secular sleep-doctor approach that
+  defuses the panic about not sleeping
+- Hello Sleep (Jade Wu) — works with the anxious, over-trying mind instead of selling
+  another bedtime routine
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

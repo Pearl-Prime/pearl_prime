@@ -1,0 +1,75 @@
+/* Shared somatic tool footer — Phoenix Omega freebie funnel */
+.phoenix-tool-footer {
+  max-width: 640px;
+  margin: 32px auto 24px;
+  padding: 20px 16px;
+  text-align: center;
+  border-top: 1px solid rgba(240, 239, 232, 0.08);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(240, 239, 232, 0.55);
+}
+
+.phoenix-tool-footer-text {
+  margin-bottom: 12px;
+}
+
+.phoenix-tool-footer-link {
+  display: inline-block;
+  color: #c8a84b;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.phoenix-tool-footer-link:hover {
+  color: #dfc06a;
+}
+
+.phoenix-email-gate {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(240, 239, 232, 0.08);
+}
+
+.phoenix-email-gate label {
+  display: block;
+  font-size: 13px;
+  color: rgba(240, 239, 232, 0.5);
+  margin-bottom: 8px;
+}
+
+.phoenix-email-gate input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background: #1a1a24;
+  border: 1px solid #2a2a3a;
+  color: #f0efe8;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.phoenix-email-gate .phoenix-gate-error {
+  color: #ef4444;
+  font-size: 13px;
+  display: none;
+  margin-bottom: 8px;
+}
+
+.phoenix-progress-bar {
+  height: 3px;
+  background: #1e1e28;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.phoenix-progress-fill {
+  height: 100%;
+  background: #3b82f6;
+  width: 0%;
+  transition: width 0.25s ease;
+}

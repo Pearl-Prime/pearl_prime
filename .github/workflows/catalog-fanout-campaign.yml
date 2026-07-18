@@ -1,0 +1,280 @@
+# Cloud-native MULTI-LOCALE catalog fan-out campaign: one dispatch runs every
+# (locale, brand) pair under target to 800 book-plan skeletons via the bridge
+# (no LLM), one PR per ≤180-file chunk, polling BOTH required checks then
+# squash-merging. Self-sequencing on GitHub — zero local babysitting, laptop-off.
+#
+# REQUIRES repo secret CATALOG_PAT (repo + workflow scope). Idempotent: pure
+# additions only; brands already at target are skipped by discover.
+#
+# discover emits a {locale, brand, slug} matrix — the slug is computed once per
+# entry, so the empty-slug failure class (book_plans_/) is structurally impossible.
+#
+# Default = the 5 full-topic-fit Western locales. de_DE runs via the single-locale
+# workflow; hu_HU needs a topic-fit prune (7 fit topics) so pass it explicitly only
+# after that handling; CJK6 is translation/voice-gated downstream.
+name: Catalog fan-out — multi-locale campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      locales:
+        description: Space-separated registry lane_ids (e.g. "fr_FR es_ES it_IT")
+        required: false
+        default: 'fr_FR es_ES es_US it_IT pt_BR'
+        type: string
+      target:
+        description: Target plan count per brand
+        required: false
+        default: '800'
+        type: string
+      force_when_queue_hot:
+        description: >-
+          Override queue-pressure guard (default false). Set true only for deliberate
+          operator reruns when GitHub Actions is already congested.
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: catalog-fanout-campaign
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  discover:
+    name: Discover (locale × brand) under-target pairs
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.list.outputs.matrix }}
+      count: ${{ steps.list.outputs.count }}
+    steps:
+      - name: Guard — CATALOG_PAT must be set
+        env:
+          PAT: ${{ secrets.CATALOG_PAT }}
+        run: |
+          if [ -z "$PAT" ]; then
+            echo "::error::CATALOG_PAT secret is not set. Add a PAT (repo + workflow scope) named CATALOG_PAT, then re-run."
+            exit 1
+          fi
+          echo "CATALOG_PAT present."
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PyYAML
+        run: python -m pip install --quiet pyyaml
+
+      - name: Queue pressure guard
+        env:
+          FORCE_WHEN_QUEUE_HOT: ${{ github.event.inputs.force_when_queue_hot }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${FORCE_WHEN_QUEUE_HOT}" = "true" ]; then
+            python3 scripts/ci/gha_queue_pressure_guard.py --force
+          else
+            python3 scripts/ci/gha_queue_pressure_guard.py
+          fi
+
+      - name: Compute (locale, brand, slug) matrix
+        id: list
+        env:
+          LOCALES_INPUT: ${{ github.event.inputs.locales }}
+          TARGET: ${{ github.event.inputs.target }}
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python3 - <<'PYEOF' > /tmp/matrix.json
+          import os, json, collections, subprocess
+          from pathlib import Path
+          import yaml
+
+          from scripts.catalog.locale_paths import normalize_lane_id, locale_slug
+
+          locales = (os.environ.get("LOCALES_INPUT") or "").split()
+          target = int(os.environ.get("TARGET") or "800")
+          if not locales:
+              raise SystemExit("no locales provided")
+
+          reg = yaml.safe_load(Path(
+              "config/brand_management/global_brand_registry_unified.yaml").read_text())
+
+          include = []
+          for loc in locales:
+              lane_id = normalize_lane_id(loc)
+              slug = locale_slug(lane_id)
+              if not slug:
+                  raise SystemExit(f"empty slug for locale {loc!r} — refusing")
+              book_dir = f"config/source_of_truth/book_plans_{slug}/"
+              r = subprocess.run(
+                  ["git", "ls-tree", "-r", "--name-only", "origin/main", book_dir],
+                  capture_output=True, text=True)
+              have = collections.Counter()
+              for line in r.stdout.splitlines():
+                  have[Path(line).stem.split("__")[0]] += 1
+              base = {
+                  rec.get("brand_archetype_id")
+                  for rec in reg.get("brands", {}).values()
+                  if rec.get("lane_id") == lane_id and rec.get("brand_archetype_id")
+              }
+              brands = sorted((b for b in base if have.get(b, 0) < target),
+                              key=lambda b: have.get(b, 0))
+              for b in brands:
+                  include.append({"locale": lane_id, "brand": b, "slug": slug})
+
+          print(json.dumps({"include": include}))
+          PYEOF
+          MATRIX="$(cat /tmp/matrix.json)"
+          COUNT="$(python3 -c 'import json;print(len(json.load(open("/tmp/matrix.json"))["include"]))')"
+          if [ "$COUNT" = "0" ]; then
+            echo "::warning::no under-target (locale,brand) pairs — nothing to do."
+          fi
+          {
+            echo "matrix=${MATRIX}"
+            echo "count=${COUNT}"
+          } >> "$GITHUB_OUTPUT"
+          echo "Pairs to process: ${COUNT}"
+          cat /tmp/matrix.json
+
+  fanout:
+    name: ${{ matrix.brand }} (${{ matrix.locale }}) → target
+    needs: discover
+    if: ${{ needs.discover.outputs.count != '0' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      max-parallel: 2
+      fail-fast: false
+      matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
+    env:
+      GH_TOKEN: ${{ secrets.CATALOG_PAT }}
+      TARGET: ${{ github.event.inputs.target }}
+      BRAND: ${{ matrix.brand }}
+      LOCALE: ${{ matrix.locale }}
+      LOCALE_SLUG: ${{ matrix.slug }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CATALOG_PAT }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate + chunk + PR + merge
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          GIT_LFS_SKIP_SMUDGE: '1'
+        run: |
+          set -euo pipefail
+          TARGET="${TARGET:-800}"
+          if [ -z "${LOCALE_SLUG}" ]; then
+            echo "::error::LOCALE_SLUG empty (LOCALE='${LOCALE}') — aborting to avoid book_plans_/."
+            exit 1
+          fi
+          BOOK_DIR="config/source_of_truth/book_plans_${LOCALE_SLUG}"
+          SERIES_DIR="config/source_of_truth/series_plans_${LOCALE_SLUG}"
+          git config user.name "Pearl_Catalog (CI)"
+          git config user.email "catalog-ci@users.noreply.github.com"
+
+          git fetch origin main --quiet
+          COUNT=$(git ls-tree -r --name-only origin/main "$BOOK_DIR/" | grep -c "/${BRAND}__" || true)
+          echo "$BRAND ($LOCALE) has $COUNT plans on origin/main (target $TARGET)"
+          if [ "$COUNT" -ge "$TARGET" ]; then echo "Already complete — exiting."; exit 0; fi
+
+          python3 scripts/catalog/gen_brand_catalog_plan_csv.py --brand "$BRAND" --locale "$LOCALE" --out "/tmp/${BRAND}.csv"
+          python3 scripts/catalog/catalog_plan_csv_to_plan_yaml.py --csv "/tmp/${BRAND}.csv" --brand "$BRAND" --locale "$LOCALE" \
+            --out-books "/tmp/${BRAND}_books" --out-series "/tmp/${BRAND}_series"
+
+          git ls-tree -r --name-only origin/main "$BOOK_DIR/" > /tmp/origin_books.txt
+          git ls-tree -r --name-only origin/main "$SERIES_DIR/" > /tmp/origin_series.txt
+          : > /tmp/netnew.txt
+          for f in "/tmp/${BRAND}_books"/*.yaml; do
+            [ -e "$f" ] || continue
+            bn=$(basename "$f")
+            grep -q "/${bn}$" /tmp/origin_books.txt || echo "book|$f" >> /tmp/netnew.txt
+          done
+          for f in "/tmp/${BRAND}_series"/*.yaml; do
+            [ -e "$f" ] || continue
+            bn=$(basename "$f")
+            grep -q "/${bn}$" /tmp/origin_series.txt || echo "series|$f" >> /tmp/netnew.txt
+          done
+          NET=$(wc -l < /tmp/netnew.txt | tr -d ' ')
+          echo "$BRAND: $NET net-new files"
+          if [ "$NET" -eq 0 ]; then echo "Nothing to add — exiting."; exit 0; fi
+
+          split -l 180 /tmp/netnew.txt /tmp/chunk_
+          BATCH=0
+          for CHUNK in /tmp/chunk_*; do
+            BATCH=$((BATCH+1))
+            CHUNK_N=$(wc -l < "$CHUNK" | tr -d ' ')
+            git fetch origin main --quiet
+            BASE_TREE=$(git rev-parse "origin/main^{tree}")
+            BASE_COMMIT=$(git rev-parse origin/main)
+            IDX="/tmp/idx_${BRAND}_${BATCH}_$$"
+            rm -f "$IDX"
+            GIT_INDEX_FILE="$IDX" git read-tree "$BASE_TREE"
+            while IFS='|' read -r kind src; do
+              [ -z "$src" ] && continue
+              if [ "$kind" = "book" ]; then dir="book_plans_${LOCALE_SLUG}"; else dir="series_plans_${LOCALE_SLUG}"; fi
+              repo_path="config/source_of_truth/${dir}/$(basename "$src")"
+              hash=$(git hash-object -w "$src")
+              GIT_INDEX_FILE="$IDX" git update-index --add --cacheinfo "100644,$hash,$repo_path"
+            done < "$CHUNK"
+            NEW_TREE=$(GIT_INDEX_FILE="$IDX" git write-tree)
+            rm -f "$IDX"
+
+            if git diff-tree -r --name-status "$BASE_TREE" "$NEW_TREE" | grep -q "^D"; then
+              echo "::error::deletions detected for $BRAND ($LOCALE) batch $BATCH — aborting"; exit 1
+            fi
+
+            COMMIT=$(git commit-tree "$NEW_TREE" -p "$BASE_COMMIT" \
+              -m "feat(catalog): ${LOCALE} skeletons ${BRAND} batch ${BATCH} (${CHUNK_N} plans)")
+            BRANCH="ci/catalog-${LOCALE_SLUG}-${BRAND}-${GITHUB_RUN_ID}-b${BATCH}"
+            git push origin "${COMMIT}:refs/heads/${BRANCH}"
+
+            PR_URL=$(gh pr create --title "feat(catalog): ${LOCALE} skeletons ${BRAND} batch ${BATCH}" \
+              --body "Structural plan skeletons (\`_needs_authoring: true\`). Bridge-generated, no LLM. Pure additions for \`${LOCALE}\`. Automated by catalog-fanout-campaign.yml." \
+              --base main --head "$BRANCH")
+            PR=$(echo "$PR_URL" | grep -oE '[0-9]+$')
+            echo "Opened PR #$PR for $BRAND ($LOCALE) batch $BATCH"
+
+            STATE="pending"
+            for _ in $(seq 1 50); do
+              sleep 30
+              GOV=$(gh pr view "$PR" --json statusCheckRollup --jq '.statusCheckRollup[]|select(.name=="Verify governance")|.conclusion' 2>/dev/null || true)
+              PS=$(gh pr view "$PR" --json statusCheckRollup --jq '.statusCheckRollup[]|select(.name=="parse-sweep")|.conclusion' 2>/dev/null || true)
+              if [ "$GOV" = "SUCCESS" ] && [ "$PS" = "SUCCESS" ]; then STATE="green"; break; fi
+              if [ "$GOV" = "FAILURE" ] || [ "$PS" = "FAILURE" ]; then STATE="failed"; break; fi
+            done
+            if [ "$STATE" != "green" ]; then
+              echo "::warning::PR #$PR not green ($STATE) — leaving open for sweep"; continue
+            fi
+
+            gh pr merge "$PR" --squash --delete-branch || true
+            sleep 15
+            if [ "$(gh pr view "$PR" --json state --jq '.state')" != "MERGED" ]; then
+              sleep 30; gh pr merge "$PR" --squash --delete-branch || true
+            fi
+          done
+
+          git fetch origin main --quiet
+          FINAL=$(git ls-tree -r --name-only origin/main "$BOOK_DIR/" | grep -c "/${BRAND}__" || true)
+          echo "$BRAND FINAL ($LOCALE): $FINAL plans on origin/main"

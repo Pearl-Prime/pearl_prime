@@ -1,0 +1,168 @@
+# Manga Profile — Example 3: Josei Workplace Romance
+# Series: Generic josei workplace template
+# Demonstrates: longing emotional engine, grounded_josei_realism visual grammar,
+#               female-reader grammar (restraint, emotional precision, show-don't-tell)
+
+manga_profile_schema_version: "1.0.0"
+status: draft
+created_at: "2026-04-19"
+
+# --- core identity ---
+title_id: josei_workplace_romance_001
+brand_id: stillness_press
+# stillness_press: contemplative, grounded. Fits josei's emotional precision register.
+
+market_demo: josei
+# josei: adult women readers. 20s-40s demographic.
+# Grammar differs from shojo: no sparkle overlays, no flower effects, no chibi breaks.
+# Realism is the contract. Emotions are subtextual, not performed.
+
+genre_family: workplace
+subgenre: "slow_burn_office_romance_burnout"
+
+emotional_engine: longing
+# longing: reader aches for the connection that hasn't arrived yet.
+# The almost-moments are the content. Resolution would end the engine.
+# Works for multi-volume series where arrival is perpetually deferred.
+
+reader_promise: "You will feel the exact particular ache of wanting someone you cannot have at work."
+
+# --- serialization ---
+serialization_engine: relationship_escalation
+# relationship_escalation: emotional intimacy as the only progress axis.
+# Plot events exist only to create new proximity or distance between characters.
+# Each chapter = one rung on the emotional intimacy ladder (up OR down).
+
+chapter_hook_family: almost_confession
+# almost_confession: emotional disclosure stopped before completion.
+# "There's something I need to tell you—" CUT.
+# The josei reader has been here. They recognize exactly what was almost said.
+
+# --- visual grammar (THE FEMALE-READER GRAMMAR) ---
+visual_grammar: grounded_josei_realism
+# grounded_josei_realism: realistic character proportions (no chibi), natural expressions,
+# modern urban settings rendered with architectural detail.
+# NO: flower overlays, sparkle effects, super-deformed comedy breaks.
+# YES: close-up eyes holding emotion without exaggerating it, hands near but not touching,
+#      backgrounds that establish real workplace atmosphere.
+
+line_weight_profile: light
+# Light, fluid lines. Emotional weight comes from composition + expression, not ink weight.
+# Heavy lines would read as shonen aggression — wrong register entirely.
+
+black_fill_ratio: 0.08
+# Low black fill. Josei palette is muted, realistic tones.
+# Shadows suggest depth, not drama.
+
+screentone_profile: minimal
+# Minimal screen tones — selective use for blush/emotion moments.
+# No decorative pattern fills. Restraint is the visual grammar.
+
+# --- pacing contract (THE FEMALE-READER PACING CONTRACT) ---
+words_per_page_target: 52
+# Moderate word density. Dialogue is real-sounding, not punchy.
+# Characters speak in incomplete sentences, trail off, change their mind mid-sentence.
+# Internal monologue is allowed but must feel like thought, not narration.
+
+silent_panel_ratio: 0.28
+# Significant silence. The spaces between lines carry emotional weight.
+# A 3-panel sequence: character looks at door / door / character looks away
+# = a complete emotional statement without words.
+
+reaction_shot_frequency: high
+# High reaction shots — but RESTRAINED. A single micro-expression does more than
+# three exaggerated shojo reaction panels.
+# The reader's eye is trained on faces. Deliver on that.
+
+spread_frequency: rare
+# Rare spreads. Josei pacing is intimate, not epic.
+# A spread is reserved for the moment the reader has been waiting for all volume.
+
+narration_tolerance: moderate
+# Moderate narration. Internal monologue is permitted for emotional context
+# ("I've been pretending I don't notice him for three months now.").
+# BUT: never explain what the visual is already showing.
+# MDLG-11 (restraint_over_exposition) validates this series.
+# Violation example: showing character's trembling hands + caption saying
+# "Her heart was racing." = redundant. Caption OR visual, never both.
+
+# --- adaptation ---
+adaptation_targets:
+  - print
+  - webtoon
+# print: right-to-left reading, standard manga format.
+# webtoon: vertical scroll — the josei slow burn actually works well here
+#          because lingering panels extend naturally in vertical format.
+
+# --- operator notes ---
+series_notes: |
+  This profile demonstrates the core distinction between shojo and josei grammar:
+  1. No decorative visual effects (sparkle, flower, chibi deformation)
+  2. Emotional precision over emotional performance
+  3. Restraint-over-exposition: the reader fills the silence with their own longing
+  4. Realistic workplace detail matters — the reader LIVES this
+  5. Chapter hooks are almost_confession family, not new_rival or revelation
+     (no manufactured drama; the emotional territory IS the drama)
+
+  The MDLG-11 (restraint_over_exposition) gate should treat this series as
+  the canonical test case for josei grammar compliance.
+
+  Do not let the Chapter Writer add exclamation marks to internal monologue.
+  Josei characters think in period-ending sentences.
+
+compat_tags: []
+
+# --- marketing & catalog ---
+series_title: "What I Almost Said"
+# Derives from chapter_hook_family: almost_confession + emotional_engine: longing.
+# Reads as a real josei title: specific, character-voice, under 6 words.
+
+series_logline: >-
+  For the reader who has spent three months noticing someone who hasn't
+  noticed back.
+# 15 words. Reader-benefit forward. Captures longing engine precisely.
+
+positioning: >-
+  For readers of Honey and Clover who also want the ache to happen
+  inside a recognizable workplace, not around one.
+
+audience: |
+  She is 27-40, works in a real job — creative agency, corporate office,
+  somewhere with open-plan floors and too many meetings. At 11pm she is
+  replaying a moment from today: a glance held two seconds longer than
+  necessary, an email she almost sent. She does not expect the feeling
+  to go anywhere. That is the point.
+
+comp_titles:
+  - "Honey and Clover (Chica Umino)"
+  - "Nana (Ai Yazawa)"
+  - "Chihayafuru (Yuki Suetsugu)"
+  - "Why Love Hurts (Eva Illouz)"
+
+marketing_angle: |
+  The workplace romance that refuses to manufacture drama: no rival,
+  no confession scene, just the specific weight of sitting three desks
+  away from someone you want. Grounded_josei_realism means it looks
+  like your life, not a fantasy version of it.
+
+hook_lines:
+  - "For everyone who has an email they never sent."
+  - "Three desks away and ten thousand miles gone."
+  - "The ache without the catharsis. That's the point."
+
+launch_priority: P1
+# P1: strong category with proven josei readers. Comp titles confirmed sales.
+# Positioning requires differentiation from generic office romance — one sprint
+# of visual character work before launch-ready. P0 reserved for stronger
+# visual differentiation.
+
+main_character_name: Akari
+# Female. Common in josei, warm association (means "light"), not aspirational.
+# Plausible for adult josei market.
+
+main_character_role: "overworked junior art director"
+# Mirrors the reader: creative industries, mid-career, real job pressure.
+# "Burnout" element in subgenre visible through "overworked."
+
+main_character_image_path: null
+# RunComfy generation is Phase E — separate sprint.

@@ -1,0 +1,67 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 学びたい気持ちはまだあります。同時に、今の制度が注意をいかに速く散らし、努力を疲弊に変えるかも知っています。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 教育の負担は負荷だけではありません。学校がまだ注意と学びが働く条件をつくれるかどうかの問題です。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Wu（土地と修練の教師）は、実践の場で教育の圧力が若者に何をするかを見てきました。学生はもっと頑張る方法だけを問うのではありません。断片化を訓練し続ける環境のなかでどう安定するかを問っています。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        課題ポータルを開きます。集中が切れます。そらします。また戻ります。仕事はまだそこにあるからです。
+        LOOP_SEQUENCE: "ポータルを開いた。集中が切れた。そらした。戻った。"
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Wuはこのループそのものを見てきました。ポータルが開き、集中が切れ、そらし、仕事がまだ残るからの戻りです。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 410 workshops. 27 cities.
+      stat_line_2: 学生と教育者がワークショップを組み、ピアチュータリングを開き、注意を単に要求するのではなく守る教室改革を求めるキャンペーンをしています。
+bridge:
+  options:
+    - id: bridge_01
+      line: 410 workshops. 27 cities. トラッカーは若者がしたことを測ります。もう一つの遅れか破綻した対応のあと、次の一歩を可能にしたもの──断片化をアイデンティティにせず仕事に戻る容量──の欄はありません。戻ってきた人にはそれが要りました。そのループの読者にも要ります。Master Wuの教えには、その容量を守る言葉があります。
+      hidden_capacity: 真実に沿った行動へ戻る
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Wuが見ていること
+      paragraphs:
+        - Master Wuはまず場から始めます。注意、調整、努力は意志だけでなく条件によって形づくられます。
+        - 周りの場が断片的で不安定、あるいは厳しいとき、最初の誤りはその混乱を人への判断に翻訳することです。
+        - 「自分が壊れている、間違っている」に感じることが、しばしば悪く設計されたか劣化した制度・構造への正確な反応です。失敗として自分に名を貼る代わりに、圧力を生んだ条件を見ることができます。
+practice:
+  options:
+    - id: practice_01
+      display_name: 5-minute Return-to-Ground Practice
+      announcement_line: Master Wuは、教育の圧力が注意を無力感に変え始める瞬間のため、5分間のReturn-to-Ground Practiceを教えています。サイドバーに、時間どおり実用的に載せています。
+      relief_lines:
+        - 身体はあらゆる要求を全面の混乱だとするのをやめます。
+        - 次の正直な行動に足る調整が戻ります。
+sdg:
+  primary:
+    title: 質の高い教育
+    line: 国連はSDG 4とその質の高い教育の目標を通じて、これへの枠組みを示しています。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+    - id: cta_01
+      line: "UNESCOのGlobal Education Coalitionが、ここへの公的入口を提供しています。入口: https://www.unesco.org/en/education/globaleducationcoalition"
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 学生は制度が追いつくより速く集中を失っています。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 教師が、断片化した条件の下でも学びを可能に保つ闘いを名指します。

@@ -1,0 +1,901 @@
+# Extracted beatsheet — ep_002 "The Same Tuesday, 9:48 AM"
+#
+# Authoring method: FORWARD extraction from chapter_script + visual
+# cross-reference against V3.1 panels (ep002_001..032). This differs from
+# ep_001's Step 0 (reverse-extraction from continuity_state YAMLs).
+#
+# Source of truth (in order of precedence):
+#   1. artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_002.yaml
+#   2. artifacts/manga/.../panels_v3_qwen/ep_002/ep002_*.png  (visual confirmation)
+#   3. ep_001 beatsheet shape (defaults, header conventions, prop-evolution patterns)
+#
+# Schema authority: docs/specs/MANGA_BEATSHEET_SCHEMA.yaml
+# Design rationale: docs/PEARL_AUTHOR_BEATSHEET_DESIGN_NOTES.md
+#
+# What this beatsheet adds beyond ep_001's coverage:
+#   - NEW SCENES (not yet in scene_inventory; flagged as operator-backfill needed):
+#       street_sidewalk, office_lobby, office_elevator, office_waiting_area,
+#       office_meeting_room, office_corridor, office_stairwell, office_rooftop
+#   - NEW PROPS:
+#       jade_pendant (continuity through-line), charcoal_jacket, monstera_lobby,
+#       laptop_meeting, water_glass, candle, smoke_detector_meeting_room
+#   - NEW TEMPORALS used: late_morning (approx via 'morning'), midday, afternoon,
+#       evening, dusk (panel 30+)
+#   - NEW BEAT TYPES exercised: miyazaki_ma (panel 14 awe-pullback),
+#       long_drop (panel 29 rooftop)
+#   - NEW ARCHETYPES surfaced (per operator instruction "let ep_002+ surface
+#       what they need"):
+#       * Declared-but-unimplemented (per design notes §3 — 7 declared archetypes):
+#         walking_in_thought_medium (panels 5, 26)
+#         window_light_threshold     (panels 27, 28)
+#         miyazaki_ma_pause          (panel 14 — the awe-pullback)
+#       * Candidate new archetypes (not in iyashikei.yaml — need operator decision
+#         whether to add to the supported set):
+#         elevator_interior_micro_tension  (panel 11)
+#         secondary_character_face_close   (panels 17, 22 — Dr. Morimoto close-up)
+#         typographic_caption_card         (panel 24 — near-black + caption only)
+#   - MULTI-CHARACTER beats (panels 16-22, 25): Dr. Morimoto appears.
+#       ep_001 was single-character; ep_003 was planned to introduce mother.
+#       Per OPEN-7 in design notes, multi-character beats are V1.1 territory.
+#       This beatsheet declares Dr. Morimoto in stage_characters so the
+#       generator's schema-validation passes, but the operator will need to
+#       confirm multi-character semantics before round-trip / forward gen.
+#       Dr. Morimoto's role per chapter_script: "speaks 3 lines total, never
+#       close-up." Two of those panels (17, 22) are flagged as candidate
+#       archetype 'secondary_character_face_close' because they ARE close-ups
+#       under iyashikei convention — the chapter_script writer note conflicts
+#       with the chapter_script panel descriptions. Flagged in notes per beat.
+#
+# Beat → panel mapping: 1:1 (32 beats → 32 panels). Same V1 rule as ep_001.
+#
+# Tier policy: operator-authored structural classification + intent encoding.
+# No LLM-generated prose.
+
+schema_version: "1.0.0"
+beatsheet_type: episode
+authority_schema: docs/specs/MANGA_BEATSHEET_SCHEMA.yaml
+
+# ── Header (series + episode identity) ───────────────────────────────────────
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+series_profile_path: config/source_of_truth/manga_profiles/series/stillness_en_01.yaml
+scene_inventory_path: config/source_of_truth/manga_profiles/series/stillness_en_01.scene_inventory.yaml
+style_state_path:     config/source_of_truth/manga_profiles/series/stillness_en_01.style_state.yaml
+panel_template_path:  config/manga/panel_templates/iyashikei.yaml
+light_rig_library:    config/manga/light_rigs/iyashikei.yaml
+
+episode_id: ep_002
+chapter_script_path: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_002.yaml
+
+# Per chapter_script main_characters: Mira (protagonist) + Dr. Morimoto
+# (research director; 3 lines total, never close-up per writer notes but
+# panels 17/22 describe close-ups — operator decision needed).
+#
+# OPEN-7-A: ep_002 IS the multi-character cliff. Per design notes OPEN-7, the
+# beatsheet schema accepts multi-character stage_characters but the generator's
+# multi-character semantics were not exercised by ep_001's round-trip. The
+# operator + Pearl_Architect must confirm:
+#   - relational_field.implied_partner_position population semantics
+#   - per-character character_state block shape when only one is on_frame
+#   - active_entities list ordering convention
+# Until confirmed, treat ep_002 beatsheet as Phase 2 / requires generator
+# enhancement (per design notes §6 OPEN-7).
+stage_characters:
+  - mira_aoki
+  - dr_morimoto
+
+# ── Defaults inherited by beat 1 ─────────────────────────────────────────────
+#
+# Per chapter_script: ep_002 opens in the SAME kitchen as ep_001, on the SAME
+# Tuesday, at 9:48 AM (3 hours after ep_001's 6:47 AM dawn). Temporal advances
+# dawn → morning (already true on ep_001's ending state). Episode-end state
+# (panel 32) returns to kitchen at evening/dusk.
+#
+# Prop_state baseline: cup (from ep_001 bookend), jade_pendant (new continuity
+# through-line introduced on the table), phone face_down (series baseline),
+# succulent normal (series baseline).
+defaults:
+  scene_id: kitchen_table_aoki
+  temporal: morning                # 9:48 AM; ep_001 ended at 'morning' too
+
+  # light_rig_id derived per H1:
+  #   scene_inventory[kitchen_table_aoki].light_rigs ∩ {rigs supporting morning}
+  #   → K02_morning_window_neutral. No operator override.
+
+  prop_state:                      # series-level baseline + this-episode opening state
+    phone: face_down
+    succulent_in_clay_pot: normal
+    cup: empty                     # ep_001 closed at residual; ep_002 opens at "empty" (drop at bottom)
+    jade_pendant: on_table         # NEW prop — operator-authored introduction
+    charcoal_jacket: on_chair_back # NEW prop — operator-authored introduction
+    laptop: closed                 # ep_001 closed; remains as closed on the table
+
+  weather_anchor: clear_late_morning_sun   # operator: brighter than ep_001's soft_clouded_light
+
+# ── Beat list (1:1 with panels) ──────────────────────────────────────────────
+
+beats:
+
+  # ── OPENING — Tea Beat callback (continuity from ep_001) ──────────────────
+
+  - beat_id: b01
+    archetype: tea_beat_close_up
+    beat_type: micro
+    intent: "TEA BEAT callback — continuity anchor to ep_001 panel 30 (now empty, the morning has passed)"
+    notes: "no characters on stage; cup-only close-up establishes 'same Tuesday continued'"
+    character:
+      mira_aoki:
+        on_frame: false
+        role: implied_listener
+    shared_attention_anchor: cup
+
+  - beat_id: b02
+    archetype: character_quiet_face
+    beat_type: standard               # promoted: caption strip + temporal context-set
+    intent: "Wider — Mira at the table finishing notes. '9:48 AM. Twelve minutes.' establishes stakes."
+    character:
+      mira_aoki:
+        pose_id: front_portrait_seated_calm
+        expression_dial: 0.3          # baseline tension — meeting is 12 min away
+        emotional: calm_with_subtle_unease
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: "caption strip '9:48 AM. Twelve minutes.' encoded in chapter_script narrator_caption; lettering pipeline reads from there"
+
+  - beat_id: b03
+    archetype: hand_table_micro
+    beat_type: micro
+    intent: "Continuity through-line accent — pendant fastening"
+    character:
+      mira_aoki:
+        pose_id: hand_only_table       # archetype default; reframed as hand-at-neck via prop
+        expression_dial: 0.3            # held
+        hand_state: reaching_for_jade_pendant
+        gaze: at_named_object_jade_pendant
+    props:
+      jade_pendant: worn_at_neck        # state transition on_table → worn_at_neck (NEW enum value; flagged below)
+    shared_attention_anchor: jade_pendant
+    notes: |
+      Prop state value 'worn_at_neck' may not be in prop_evolution_enum yet —
+      operator backfill needed in MANGA_CONTINUITY_STATE_SPEC §2 prop enum.
+      Until then, generator may WARN on non-adjacent transition.
+
+  # ── ACTIVATION 1 — walking out, the body knows the meeting is coming ──────
+
+  - beat_id: b04
+    archetype: sparse_establishing_wide
+    beat_type: standard               # scene transition required: kitchen → street_sidewalk
+    intent: "Scene transition — apartment → street; late-morning Tuesday energy"
+    scene:
+      id: street_sidewalk              # NEW SCENE — not in scene_inventory.yaml yet (OPEN-A)
+      temporal: morning                # held
+      light_rig_id: K03_midday_bright_natural   # operator-pinned: outdoor late-morning bright
+    props_reset: true                  # leaving kitchen — snapshot kitchen props for restore at b30
+    props:
+      jade_pendant: worn_at_neck       # carried with character; persists across scene change
+      charcoal_jacket: being_put_on    # state transition on_chair_back → being_put_on
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: full_figure_walking_exterior   # CANDIDATE pose_id — not in ep_001 inventory
+        expression_dial: 0.3
+        emotional: calm_with_subtle_unease
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: |
+      OPEN-A: scene_id 'street_sidewalk' not in stillness_en_01.scene_inventory.yaml.
+      Operator backfill required. Candidate light_rigs: K02/K03/K05.
+      OPEN-B: pose_id 'full_figure_walking_exterior' is new. Pose library extension needed.
+
+  - beat_id: b05
+    archetype: walking_in_thought_medium     # TODO_NEW_ARCHETYPE — declared in iyashikei.yaml but not yet dispatched
+    beat_type: spatial
+    intent: "Subtle somatic register — she notices her body; right hand briefly touches pendant"
+    character:
+      mira_aoki:
+        pose_id: medium_walking_hand_at_pendant   # CANDIDATE pose_id
+        expression_dial: 0.4              # +0.1 — first activation register
+        emotional: calm_with_subtle_unease
+        gaze: middle_distance
+        hand_state: gripping_jade_pendant
+    shared_attention_anchor: jade_pendant
+    notes: |
+      ARCHETYPE FLAG: walking_in_thought_medium is in DECLARED_BUT_UNIMPLEMENTED_ARCHETYPES.
+      Generator will raise ArchetypeNotImplementedError until dispatch is added.
+      Per dispatch table needed (subject_type: character_medium, default pose: medium_walking,
+      default hand: variable, beat_type.primary: spatial).
+
+  - beat_id: b06
+    archetype: chest_breath_micro
+    beat_type: micro
+    intent: "Activation — recognized faster this time (vs ep_001 panel 5). Same somatic but smaller."
+    character:
+      mira_aoki:
+        pose_id: chest_breath_micro      # archetype default
+        expression_dial: 0.5             # +0.1 — sympathetic activation cue (lower peak than ep_001)
+        emotional: anxious
+        gaze: off_frame_down
+        hand_state: tucked_self_soothing
+        breath_phase: quickening         # D-cat: chest_breath_micro-only
+    shared_attention_anchor: null
+    notes: "lower peak than ep_001 b05 (0.4 → 0.5) intentional: faster recognition, less overwhelm"
+
+  - beat_id: b07
+    archetype: character_face_micro_tension
+    beat_type: micro
+    intent: "Recognition — 'There it is.' She notes the chest tightness without alarm."
+    character:
+      mira_aoki:
+        pose_id: front_portrait_seated_tense   # walking equivalent; pose library may need walking-tense variant
+        expression_dial: 0.4              # -0.1 — micro de-escalation via internal monologue
+        emotional: anxious_diminishing
+        gaze: middle_distance
+        hand_state: gripping_jade_pendant
+    shared_attention_anchor: null
+    tension_override: easing               # OPD-144: numeric -0.1 is "diminishing"; operator narrative is "easing/recognized"
+
+  # ── GROUND 1 — Pendulation pair: the lobby plant (NEW anchor) ─────────────
+
+  - beat_id: b08
+    archetype: sparse_establishing_wide
+    beat_type: standard               # scene transition: street → office_lobby
+    intent: "Setting transition — entering office lobby; first sight of new ANCHOR PANEL subject"
+    scene:
+      id: office_lobby                 # NEW SCENE — not in scene_inventory.yaml
+      temporal: morning
+      light_rig_id: K02_morning_window_neutral   # operator-pinned: cool concrete + window light
+    props:
+      monstera_lobby: present          # NEW prop — the lobby plant (anchor)
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: full_figure_walking_interior   # CANDIDATE pose_id
+        expression_dial: 0.4              # held
+        emotional: calm_with_subtle_unease
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: monstera_lobby
+    notes: |
+      OPEN-C: scene_id 'office_lobby' needs scene_inventory backfill.
+      OPEN-D: prop_id 'monstera_lobby' — distinct from the kitchen monstera which is
+      a scene-element (not a tracked prop). Lobby monstera IS tracked as anchor.
+
+  - beat_id: b09
+    archetype: seasonal_anchor_object
+    beat_type: micro
+    intent: "ANCHOR PANEL subject — the lobby plant. Jade-green leaves rhyme with pendant."
+    character:
+      mira_aoki:
+        on_frame: false                  # object-only panel, no L2 cutout
+        role: implied_listener
+    shared_attention_anchor: monstera_lobby
+    notes: "visual rhyme: monstera leaf color == jade_pendant color (continuity through-line)"
+
+  - beat_id: b10
+    archetype: character_quiet_face
+    beat_type: micro
+    intent: "Mira glances at plant; shoulders soften half a degree. Caption: 'Still here. The leaves are still here.'"
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: front_portrait_seated_calm   # walking-equivalent; pose library may need standing-calm variant
+        expression_dial: 0.3              # -0.1 — pendulation back via anchor
+        emotional: anxious_diminishing
+        gaze: at_named_object_monstera_lobby
+        hand_state: relaxed_open
+    shared_attention_anchor: monstera_lobby
+
+  # ── ACTIVATION 2 — elevator + waiting ─────────────────────────────────────
+
+  - beat_id: b11
+    # OPD-148 (2026-05-26): DOWNGRADE per Pearl_Architect brief recommendation.
+    # Operator: "elevator_interior_micro_tension — DOWNGRADE. The brief's
+    # reasoning is correct. Single beat, one episode, scene context carries the
+    # elevator semantics. Don't bloat the dispatch table for one panel."
+    # Was: elevator_interior_micro_tension (TODO_CANDIDATE_ARCHETYPE).
+    # Substitute: character_face_micro_tension (existing supported archetype).
+    # Elevator-specific framing handled via scene_specific_composition_clause
+    # in scene_context lookup once office_elevator scene_id is authored.
+    archetype: character_face_micro_tension
+    beat_type: standard               # scene transition lobby → elevator
+    intent: "Activation 2 — tight space with stranger; jaw tightens fractionally"
+    scene:
+      id: office_elevator              # NEW SCENE — not in scene_inventory.yaml
+      temporal: morning
+      light_rig_id: K07_night_lamp_warm   # operator-pinned candidate: enclosed interior, no window
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: medium_standing_facing_camera   # CANDIDATE pose_id
+        expression_dial: 0.5              # +0.2 — closed-space trigger
+        emotional: anxious
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: |
+      Downgraded to character_face_micro_tension per OPD-148.
+      Pre-downgrade rationale (kept for archive — explains why it was authored
+      as a candidate originally): elevator interior is a distinct iyashikei
+      composition register (enclosed, vertical motion, faceless extra in frame).
+      Closest existing supported archetype: character_face_micro_tension.
+      If operator declines this candidate, downgrade to character_face_micro_tension
+      with a scene_specific composition clause.
+
+  - beat_id: b12
+    archetype: hand_table_micro
+    beat_type: standard               # scene transition elevator → waiting area
+    intent: "Activation 2 sustained — waiting is harder than walking. Hands clasped on lap, knuckles pale."
+    scene:
+      id: office_waiting_area          # NEW SCENE — not in scene_inventory.yaml
+      temporal: morning
+      light_rig_id: K02_morning_window_neutral   # operator-pinned: office daylight
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: hands_clasped_on_lap   # CANDIDATE pose_id
+        expression_dial: 0.6              # +0.1 — held tension
+        emotional: anxious
+        gaze: middle_distance
+        hand_state: tucked_self_soothing
+    shared_attention_anchor: null
+    notes: "hand_table_micro chosen because hands-clasped-on-lap is hand-focused; pose_id 'hands_clasped_on_lap' may need pose-library extension"
+
+  - beat_id: b13
+    archetype: chest_breath_micro
+    beat_type: micro
+    intent: "Close on Mira's hands tremble + camera tilt up to face. Trying."
+    character:
+      mira_aoki:
+        pose_id: chest_breath_micro
+        expression_dial: 0.7              # +0.1 — peak of waiting tension
+        emotional: anxious
+        gaze: eyes_closed
+        hand_state: tucked_self_soothing
+        breath_phase: quickening
+    shared_attention_anchor: null
+
+  # ── AWE-PULLBACK — once-per-arc cousin ────────────────────────────────────
+
+  - beat_id: b14
+    archetype: miyazaki_ma_pause       # TODO_NEW_ARCHETYPE — declared but not yet dispatched
+    beat_type: miyazaki_ma             # the rare beat_type matches; explicit
+    intent: "AWE-PULLBACK — vast space rendering Mira small but held. Window wall + city skyline + sky."
+    scene:
+      id: office_waiting_area          # same scene; wide pullback within it
+      temporal: morning
+      light_rig_id: K02_morning_window_neutral
+    character:
+      mira_aoki:
+        on_frame: true                   # tiny figure visible in frame per V3.1
+        pose_id: full_figure_seated_tiny # CANDIDATE pose_id — figure as small element
+        expression_dial: 0.6              # -0.1 — vast-space pendulation begins
+        emotional: anxious_diminishing
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: |
+      ARCHETYPE FLAG: miyazaki_ma_pause is in DECLARED_BUT_UNIMPLEMENTED_ARCHETYPES.
+      Generator will raise ArchetypeNotImplementedError until dispatch is added.
+      Per dispatch table needed (subject_type: null OR character_tiny, default pose:
+      none / operator picks, beat_type.primary: miyazaki_ma, special: extra-wide aspect).
+      V3.1 PANEL 14 CONFIRMED: window wall + city skyline + clouds + jade pendant
+      visible on Mira mid-frame (V3.1 deviates from chapter_script's "vast space"
+      framing toward "Mira-portrait-with-skyline-window-behind"; chapter_script wins
+      for beatsheet — beatsheet encodes intent, not V3.1 render).
+
+  # ── GROUND 2 — Pendulation: breath and pendant ────────────────────────────
+
+  - beat_id: b15
+    archetype: chest_breath_micro
+    beat_type: micro
+    intent: "BREATH BRACKET — inhale, ground via pendant"
+    character:
+      mira_aoki:
+        pose_id: chest_breath_micro
+        expression_dial: 0.5              # -0.1 — micro de-escalation
+        emotional: anxious_diminishing
+        gaze: at_named_object_jade_pendant
+        hand_state: gripping_jade_pendant   # two fingers on pendant
+        breath_phase: inhale
+    shared_attention_anchor: jade_pendant
+
+  # ── CLIMAX — the meeting itself ───────────────────────────────────────────
+
+  - beat_id: b16
+    archetype: sparse_establishing_wide
+    beat_type: standard               # scene transition: waiting → meeting room
+    intent: "Activation 3 — the meeting starts; both characters at small round table"
+    scene:
+      id: office_meeting_room          # NEW SCENE — not in scene_inventory.yaml
+      temporal: morning
+      light_rig_id: K02_morning_window_neutral   # operator-pinned: cool meeting palette
+    props:
+      laptop_meeting: open_between_them   # NEW prop — meeting laptop (distinct from home laptop)
+      smoke_detector_meeting_room: steady_green   # NEW prop — wall element that becomes callback in b18
+      water_glass: full_on_table       # NEW prop — anticipates b21 reach
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: medium_seated_at_table   # CANDIDATE pose_id
+        expression_dial: 0.6              # +0.1 — climax begins
+        emotional: anxious
+        gaze: at_named_character_dr_morimoto
+        hand_state: relaxed_open
+      dr_morimoto:
+        on_frame: true                   # SECOND CHARACTER ON FRAME — multi-character beat
+        role: subject                    # both subjects in iyashikei meeting framing
+        pose_id: medium_seated_at_table_facing
+        expression_dial: 0.2              # neutral baseline; he's calm-professional
+        emotional: calm
+        gaze: at_named_character_mira_aoki
+        hand_state: relaxed_open
+    shared_attention_anchor: laptop_meeting
+    notes: |
+      MULTI-CHARACTER BEAT — first in ep_002. Per OPEN-7 / OPEN-7-A:
+      generator's multi-character semantics need confirmation. This beat encodes
+      both characters with on_frame=true + role=subject.
+      OPEN-E: scene_id 'office_meeting_room' needs scene_inventory backfill.
+
+  - beat_id: b17
+    # OPD-149 (2026-05-26): DEFINE accepted — secondary_character_face_close is
+    # now a supported iyashikei archetype (joint workstream with multi-character
+    # generator extension). Per brief §3.2 the subject_actor field is required
+    # to bind PuLID to the right reference sheet.
+    archetype: secondary_character_face_close
+    subject_actor: dr_morimoto             # OPD-149: parametrized on-frame focal character
+    beat_type: micro
+    intent: "Close on Dr. Morimoto. Speaking. Calm, professional. Not warm, not cold."
+    character:
+      mira_aoki:
+        on_frame: false                  # POV-from-Mira shot toward Morimoto
+        role: implied_listener
+      dr_morimoto:
+        on_frame: true
+        role: subject
+        pose_id: face_close_seated_calm
+        expression_dial: 0.2              # held
+        emotional: calm
+        gaze: at_named_character_mira_aoki
+        hand_state: relaxed_open
+    shared_attention_anchor: dr_morimoto
+    notes: |
+      Per OPD-149: DEFINE accepted. V3.1 PANEL 17 CONFIRMED close-up. The new
+      archetype binds PuLID to subject_actor=dr_morimoto reference sheet, not
+      protagonist's.
+
+      Per OPD-154 (2026-05-27, authority principle ratified): chapter_script
+      writer-note "never close-up" was aspirational shorthand for *empathic*
+      CUs (Mira's emotional register), NOT *observational* CUs of secondary
+      characters. b17 + b22 are observational — the camera reads Dr. Morimoto
+      as Mira reads him. The CU register carries the legibility iyashikei
+      meeting scenes need (patient vs impatient, warm vs neutral). V3.1
+      rendered correctly; V5.1 architecture reproduces that intent, not
+      corrects it. Panel description > writer-note when they conflict
+      (general principle, see OPD-154).
+
+  - beat_id: b18
+    archetype: seasonal_anchor_object
+    beat_type: micro
+    intent: "Continuity callback — the teaching image (smoke detector). Same composition as ep_001 b25."
+    character:
+      mira_aoki:
+        on_frame: false                  # POV-from-Mira; her hand visible on trackpad but no face
+        role: implied_listener
+      dr_morimoto:
+        on_frame: false                  # off-frame for this POV shot
+        role: implied_listener
+    shared_attention_anchor: smoke_detector_meeting_room
+    notes: |
+      Per chapter_script: "Same image as ep_001 panel 22 — the visual frame
+      returns." Pendulation rhyme to ep_001 b25 (smoke_detector context).
+      Rhyme partner reference: ep_001 b25 (cross-episode rhyme; rhyme_partner_beat
+      schema is intra-episode in v1.0 — cross-episode rhyme NOT yet supported).
+
+  - beat_id: b19
+    archetype: character_face_micro_tension
+    beat_type: micro
+    intent: "Mira's eyes flick from smoke detector back to Dr. Morimoto. Something settles. She begins to speak."
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: face_close_seated_speaking   # CANDIDATE pose_id — speaking variant
+        expression_dial: 0.5              # -0.1 — recognition lands
+        emotional: anxious_diminishing
+        gaze: at_named_character_dr_morimoto
+        hand_state: relaxed_open
+      dr_morimoto:
+        on_frame: false
+        role: implied_listener
+    shared_attention_anchor: null
+    tension_override: easing               # OPD-144: numerical -0.1 is "diminishing"; narrative is "easing"
+
+  # ── ACTIVATION 4 — mid-meeting wobble ─────────────────────────────────────
+
+  - beat_id: b20
+    archetype: character_face_micro_tension
+    beat_type: spatial                # time-jump within same scene; subtle palette shift
+    intent: "Realistic mid-meeting wobble. '...and the third — sorry. Give me one second.'"
+    scene:
+      id: office_meeting_room          # held
+      temporal: morning                # held (chapter_script: "subtle palette shift — slightly cooler"; not a full temporal transition)
+      light_rig_id: K02_morning_window_neutral
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: face_close_seated_speaking
+        expression_dial: 0.7              # +0.2 — wobble peak (within micro 0.3 bound)
+        emotional: anxious
+        gaze: middle_distance             # eyes glaze slightly
+        hand_state: gesturing_open
+      dr_morimoto:
+        on_frame: false                  # implied across the table
+        role: implied_listener
+    shared_attention_anchor: null
+    tension_override: rising
+
+  - beat_id: b21
+    archetype: hand_table_micro
+    beat_type: micro
+    intent: "Pause — operator-permission to pause. Mira reaches for water glass. Sip. Eyes briefly closed."
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: hand_only_reaching        # ep_001 b10 reuse; reaching-for-glass variant
+        expression_dial: 0.6              # -0.1
+        emotional: anxious_diminishing
+        gaze: eyes_closed
+        hand_state: reaching_for_water_glass
+      dr_morimoto:
+        on_frame: false
+        role: implied_listener
+    props:
+      water_glass: half_consumed         # state transition full_on_table → half_consumed (sip taken)
+    shared_attention_anchor: water_glass
+    notes: "rhymes structurally with ep_001 b10 (reaching) and ep_001 b19 (sip taken)"
+
+  - beat_id: b22
+    # OPD-149 (2026-05-26): DEFINE accepted (same as b17).
+    # OPD-154 (2026-05-27): authority principle ratified — observational CU
+    # (NOT empathic). See b17 notes for full reasoning.
+    archetype: secondary_character_face_close
+    subject_actor: dr_morimoto             # OPD-149: parametrized on-frame focal character
+    beat_type: micro
+    intent: "Dr. Morimoto across the table. Not impatient. Just waiting. 'Take your time.'"
+    character:
+      mira_aoki:
+        on_frame: false                  # POV-from-Mira
+        role: implied_listener
+      dr_morimoto:
+        on_frame: true
+        role: subject
+        pose_id: face_close_seated_calm
+        expression_dial: 0.2              # held
+        emotional: calm
+        gaze: at_named_character_mira_aoki
+        hand_state: relaxed_open
+    shared_attention_anchor: dr_morimoto
+    notes: "second instance of secondary_character_face_close (per OPD-149 DEFINE; OPD-154 authority principle confirms observational CU register); same composition as b17"
+
+  # ── GROUND 3 — internal anchor: the smoke detector frame applied ─────────
+
+  - beat_id: b23
+    archetype: character_quiet_face
+    beat_type: micro
+    intent: "Close on Mira's eyes — open now. Soft."
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: front_portrait_seated_calm
+        expression_dial: 0.4              # -0.2 (within micro 0.3 bound) — settling
+        emotional: present
+        gaze: middle_distance
+        hand_state: relaxed_open
+      dr_morimoto:
+        on_frame: false
+        role: implied_listener
+    shared_attention_anchor: null
+
+  - beat_id: b24
+    # OPD-150 (2026-05-26): DEFINE accepted — typographic_caption_card is now
+    # a supported iyashikei META archetype. Per brief §3.3 the caption_style
+    # and caption_text fields are required so the lettering pipeline can
+    # render the card directly (no L0/L1/L2/L3 stack).
+    archetype: typographic_caption_card
+    caption_style: mid_episode_strip      # OPD-150: mid-episode caption strip across near-black panel
+    caption_text: "It's not danger. It's just steam."   # from chapter_script narrator_caption_by_locale.en_US
+    beat_type: micro
+    intent: "ALMOST black panel — thin frame of light + caption strip. 'It's not danger. It's just steam.'"
+    character:
+      mira_aoki: null                    # explicit null → no character_state; no L2 cutout
+      dr_morimoto: null                  # explicit null
+    shared_attention_anchor: null
+    notes: |
+      Per OPD-150: DEFINE accepted. META archetype — generator emits
+      caption_text + caption_style + render_directive=typographic_only,
+      suppresses character_state for all stage_characters, drops
+      scene_state.light_rig_id. Downstream lettering pipeline composes the
+      near-black backdrop + thin edge-frame + caption strip directly. Same
+      pattern recommended for ep_001 b35 retroactive cleanup per OPEN-5.
+
+  - beat_id: b25
+    archetype: character_quiet_face
+    beat_type: micro
+    intent: "Back to Mira's face. Slightly steadier. She continues, voice a tone clearer."
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: front_portrait_seated_calm
+        expression_dial: 0.3              # -0.1 — settled
+        emotional: present
+        gaze: at_named_character_dr_morimoto
+        hand_state: relaxed_open
+      dr_morimoto:
+        on_frame: false                  # implied across the table
+        role: implied_listener
+    shared_attention_anchor: null
+
+  # ── POST-MEETING — hallway, body still humming ────────────────────────────
+
+  - beat_id: b26
+    archetype: walking_in_thought_medium   # TODO_NEW_ARCHETYPE (same as b05)
+    beat_type: standard               # scene transition meeting → corridor
+    intent: "Wider — Mira walking down corridor; meeting over but shoulders not relaxed yet"
+    scene:
+      id: office_corridor              # NEW SCENE — not in scene_inventory.yaml
+      temporal: morning                # extended; chapter_script implies time has passed but not full afternoon yet
+      light_rig_id: K02_morning_window_neutral
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: full_figure_walking_interior   # CANDIDATE pose_id (same as b08)
+        expression_dial: 0.4              # post-meeting residual
+        emotional: anxious_diminishing
+        gaze: middle_distance
+        hand_state: relaxed_open
+      dr_morimoto: null                  # left behind in meeting room
+    shared_attention_anchor: null
+    notes: |
+      ARCHETYPE FLAG: walking_in_thought_medium declared-but-unimplemented.
+      Second instance in ep_002 (b05, b26).
+      OPEN-F: scene_id 'office_corridor' needs scene_inventory backfill.
+      laptop_meeting prop carried with character (her arm) — needs adjacent
+      enum transition open_between_them → under_arm_carrying (NEW enum value).
+
+  - beat_id: b27
+    archetype: window_light_threshold   # TODO_NEW_ARCHETYPE — declared but not yet dispatched
+    beat_type: standard               # scene transition corridor → stairwell
+    intent: "Stairwell, going UP. Harsh fluorescent. Squints. Sensory regulation choice."
+    scene:
+      id: office_stairwell             # NEW SCENE — not in scene_inventory.yaml
+      temporal: morning
+      light_rig_id: K_flashback_cool_grey_blue   # operator-pinned: harsh fluorescent matches flashback rig
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: full_figure_climbing_stairs   # CANDIDATE pose_id
+        expression_dial: 0.4              # held
+        emotional: anxious_diminishing
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: |
+      ARCHETYPE FLAG: window_light_threshold declared-but-unimplemented.
+      First of two instances (b27, b28).
+      OPEN-G: scene_id 'office_stairwell' needs scene_inventory backfill.
+      Light_rig 'K_flashback_cool_grey_blue' is being reused for non-flashback
+      harsh fluorescent context — operator decision: pin this scene's rig
+      separately or reuse?
+
+  - beat_id: b28
+    archetype: window_light_threshold   # TODO_NEW_ARCHETYPE (same as b27)
+    beat_type: standard               # scene transition stairwell → rooftop reveal
+    intent: "Door pushes open — late-afternoon golden light spills onto face. Rooftop reveal."
+    scene:
+      id: office_rooftop               # NEW SCENE — not in scene_inventory.yaml
+      temporal: afternoon              # TEMPORAL ADVANCES — morning → midday → afternoon (skip midday per chapter_script "late-afternoon")
+      light_rig_id: K05_afternoon_golden   # operator-pinned: golden-hour reveal
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: full_figure_threshold_door   # CANDIDATE pose_id
+        expression_dial: 0.3              # -0.1 — light landing on face = pendulation
+        emotional: present
+        gaze: middle_distance             # squints into golden light
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: |
+      ARCHETYPE FLAG: window_light_threshold declared-but-unimplemented (2nd of 2).
+      TEMPORAL JUMP: morning → afternoon. Per H1 invariant 5, this requires
+      beat_type=standard+ (satisfied: this beat is standard). Per chapter_script
+      writer notes "32 panels covers morning to evening" — temporal MAY have
+      passed midday off-screen between b26 and b28. Validator will see literal
+      morning → afternoon which skips midday in the enum cycle. Operator
+      decision: accept the skip (chapter_script writer intent) or insert
+      midday-temporal-phase panel.
+      OPEN-H: scene_id 'office_rooftop' needs scene_inventory backfill.
+
+  # ── LONG DROP — the decompression beat (silent) ───────────────────────────
+
+  - beat_id: b29
+    archetype: long_drop_decompression
+    beat_type: long_drop               # the rare beat_type — explicit
+    intent: "LONG DROP — post-meeting decompression. Reader exhales here. NO TEXT, NO CAPTION, NO SFX."
+    character:
+      mira_aoki:
+        on_frame: true                   # back-three-quarter view; figure visible
+        pose_id: full_figure_standing_at_railing   # CANDIDATE pose_id (railing variant)
+        expression_dial: 0.2              # -0.1 — decompression base
+        emotional: present
+        gaze: middle_distance
+        hand_state: relaxed_open
+    shared_attention_anchor: null
+    notes: |
+      V3.1 PANEL 29 CONFIRMED: rooftop wide, Mira left-frame back-three-quarter,
+      golden-hour sky, city sprawl. Composition matches chapter_script intent.
+      Cross-reference: ep_001's long-drop (b29) was at kitchen window; ep_002's
+      is at the rooftop — same beat_type, different narrative position
+      (post-climax vs pre-teaching-landing). Composer treats identically.
+
+  # ── COMPLETION — home, kettle, the bookend ────────────────────────────────
+
+  - beat_id: b30
+    archetype: sparse_establishing_wide
+    beat_type: standard               # scene transition rooftop → kitchen + temporal afternoon→evening
+    intent: "Scene transition — back to the safe space. Evening. Lighting a small candle on the table."
+    scene:
+      id: kitchen_table_aoki           # SCENE RESTORE — back to kitchen
+      temporal: evening                # advances afternoon → evening (next-in-cycle; standard+ beat OK)
+      light_rig_id: K06_evening_warm_amber
+    props_restore_from_scene_exit: true   # restore kitchen prop_state snapshotted at b04
+    props:
+      candle: lit                      # NEW prop introduction
+      charcoal_jacket: on_chair_back   # restored to original position (transition: worn_at_neck/walking → on_chair_back)
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: full_figure_standing_at_kitchen   # CANDIDATE pose_id
+        expression_dial: 0.2              # -0.0 (held)
+        emotional: present
+        gaze: at_named_object_candle
+        hand_state: gesturing_open       # lighting motion
+    shared_attention_anchor: candle
+    notes: |
+      props_restore_from_scene_exit brings back: cup, jade_pendant (Mira removed
+      it on returning home — or did she? chapter_script doesn't specify), phone,
+      succulent, laptop. The jade_pendant return-to-table state should be
+      explicit; for now, beatsheet preserves 'worn_at_neck' until next-beat operator
+      override. Operator decision: where does jade_pendant rest at episode end?
+
+  - beat_id: b31
+    archetype: kettle_steam_macro
+    beat_type: spatial
+    intent: "TEA BEAT bookend — kettle steaming. Same kettle as ep_001. Visual rhyme is the point."
+    props:
+      kettle: on_burner_boiling        # introduce kettle for ep_002 (ep_001 ended at off_burner_residual_steam)
+                                        # NOTE: in beat-1 defaults we didn't carry kettle from ep_001;
+                                        # cross-episode prop carry-over is V1.1 — operator backfill needed.
+    character:
+      mira_aoki:
+        on_frame: false                  # archetype default: object-only panel
+        role: implied_listener
+    shared_attention_anchor: kettle
+
+  - beat_id: b32
+    archetype: tea_beat_close_up
+    beat_type: micro
+    intent: "Final panel — Mira's face at the table with fresh tea. Soft smile, peaceful. 'I noticed it. That's enough for today.'"
+    character:
+      mira_aoki:
+        on_frame: true
+        pose_id: hands_wrapping_cup       # archetype default — bookends ep_001 b02
+        expression_dial: 0.3              # +0.1 — joyful_quiet, mild positive valence
+        emotional: joyful_quiet
+        gaze: middle_distance
+        hand_state: wrapping_cup
+    props:
+      cup: full                          # NEW pour from the kettle (state transition empty → full)
+      kettle: off_burner_residual_steam  # adjacent-enum transition on_burner_boiling → off_burner_residual_steam
+    shared_attention_anchor: cup
+    notes: "intentional bookend with ep_001 b30 + ep_002 b01 (same cup, same wrap, peaceful close)"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES (Pearl_Author handoff)
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# OPEN-ITEMS this beatsheet surfaces (operator review needed before gen):
+#
+# OPEN-A through OPEN-H: NEW SCENES not in scene_inventory.yaml:
+#   - street_sidewalk      (b04)
+#   - office_lobby         (b08, b09, b10)
+#   - office_elevator      (b11)
+#   - office_waiting_area  (b12, b13, b14, b15)
+#   - office_meeting_room  (b16-b25)
+#   - office_corridor      (b26)
+#   - office_stairwell     (b27)
+#   - office_rooftop       (b28, b29)
+#   Operator MUST backfill scene_inventory.yaml with these 8 scenes,
+#   declaring scene_specific_composition_clause + light_rigs[] + render_resolution
+#   per existing scene-inventory schema. Without backfill, validator will FAIL
+#   on H1 light_rig_id derivation invariant.
+#
+# DECLARED-BUT-UNIMPLEMENTED ARCHETYPES surfaced (per design notes §3):
+#   - walking_in_thought_medium       (b05, b26)
+#   - miyazaki_ma_pause               (b14)
+#   - window_light_threshold          (b27, b28)
+#   Generator will raise ArchetypeNotImplementedError on these. Dispatch
+#   table needs extension per design-notes-§3 row format:
+#     archetype | default_pose_id | default_hand_state | special_fields |
+#       subject_type
+#   Suggested defaults per archetype above (in notes blocks).
+#
+# CANDIDATE NEW ARCHETYPES surfaced (not in iyashikei.yaml):
+#   - elevator_interior_micro_tension  (b11)
+#   - secondary_character_face_close   (b17, b22)
+#   - typographic_caption_card         (b24)
+#   Each needs operator decision: define + add to iyashikei.yaml, OR downgrade
+#   to closest supported archetype.
+#
+# MULTI-CHARACTER BEAT FIRST-TIME EXERCISE:
+#   - b16-b22, b25 stage Dr. Morimoto alongside Mira (8 beats).
+#   - Per OPEN-7 in design notes: multi-character semantics need generator
+#     enhancement (relational_field.implied_partner_position; per-character
+#     character_state shape; active_entities ordering).
+#   - This beatsheet declares both characters in stage_characters and encodes
+#     dr_morimoto's character_state block per beat. Generator must either
+#     extend dispatch OR raise a clear "multi-character not yet supported" error.
+#
+# NEW PROPS introduced this episode:
+#   - jade_pendant (b03; continuity through-line; state values: on_table,
+#       worn_at_neck — new enum value)
+#   - charcoal_jacket (b04; states: on_chair_back, being_put_on, on_chair_back again)
+#   - monstera_lobby (b08; anchor object; state: present)
+#   - laptop_meeting (b16; distinct from home laptop)
+#   - smoke_detector_meeting_room (b16; callback object)
+#   - water_glass (b16; sip prop)
+#   - candle (b30; completion accent)
+#   - kettle (b31; carry-over from ep_001 — cross-episode prop semantics need
+#       V1.1 confirmation per design-notes OPEN-7)
+#
+# NEW POSE_IDS surfaced (need pose-library extension before gen):
+#   - full_figure_walking_exterior, full_figure_walking_interior
+#   - medium_walking_hand_at_pendant
+#   - hands_clasped_on_lap
+#   - full_figure_seated_tiny
+#   - medium_seated_at_table, medium_seated_at_table_facing
+#   - face_close_seated_calm, face_close_seated_speaking
+#   - full_figure_standing_at_railing
+#   - full_figure_climbing_stairs, full_figure_threshold_door
+#   - full_figure_standing_at_kitchen
+#   - medium_standing_facing_camera
+#   Operator decision: extend the pose library OR map to existing pose_ids
+#   (front_portrait_seated_calm etc.) with scene_specific composition clauses.
+#
+# CONFIDENCE / READINESS:
+#   - Beatsheet is OPERATOR-AUTHORED-INTENT-COMPLETE per chapter_script.
+#   - It is NOT yet generator-ready: 8 new scenes + 3 declared-unimplemented
+#     archetypes + 3 candidate-new archetypes + multi-character semantics +
+#     ~12 new pose_ids each require an operator decision before round-trip /
+#     forward generation will succeed.
+#   - Recommended next step: operator review of the OPEN-items above; then
+#     either (a) extend scene_inventory + archetype dispatch + pose library
+#     to support, OR (b) downgrade panels to nearest supported archetype + scene
+#     and re-render via existing V5.1 pipeline.
+#   - Per Milestone C exit criteria, ep_002 forward-gen acceptance is operator
+#     §11 review on rendered output (not round-trip), so the validator failures
+#     on OPEN-items are EXPECTED-DURING-AUTHORING; they become BLOCKERS only
+#     when the operator pulls the trigger on render.
+#
+# CHAPTER-SCRIPT vs V3.1 DISCREPANCIES OBSERVED:
+#   - Panel 14 (awe-pullback): chapter_script says "vast space rendering Mira
+#       small but held"; V3.1 renders a portrait of Mira with skyline visible
+#       through window behind. V3.1 deviates toward portrait. Beatsheet
+#       encodes chapter_script intent (full_figure_seated_tiny + miyazaki_ma).
+#   - Panel 17, 22 (Dr. Morimoto): chapter_script writer-note says "never
+#       close-up"; chapter_script panel descriptions DO describe close-ups;
+#       V3.1 renders close-ups. Beatsheet encodes the close-ups (matches V3.1
+#       + matches panel description, ignores conflicting writer-note).
+#   - All other 29 panels: chapter_script ↔ V3.1 alignment confirmed during
+#       spot-check of panels 1, 8, 14, 24, 29.
+#
+# — end of ep_002 beatsheet —

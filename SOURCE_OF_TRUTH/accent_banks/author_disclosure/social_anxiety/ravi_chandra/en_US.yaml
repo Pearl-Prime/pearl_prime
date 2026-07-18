@@ -1,0 +1,88 @@
+# Author disclosure bank — social_anxiety / ravi_chandra / en_US — extension
+# status: pilot_extension — fourth live AUTHOR_DISCLOSURE cell, authored per
+# ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md section 11.
+# Reuses ravi_chandra's existing operator-approved bio (assets/authors/ravi_chandra/bio.yaml,
+# status: operator_approved, OPD-20260707-002) and the SAME already-ratified
+# bio_license_refs vocabulary established for the anxiety pilot
+# (SOURCE_OF_TRUTH/accent_banks/author_disclosure/anxiety/ravi_chandra/en_US.yaml).
+# ravi_chandra's registered topic_ids (config/author_registry.yaml) already
+# include social_anxiety alongside anxiety under one somatic_companion beat —
+# no new biographical claims are invented here; the same performed-calm-in-
+# standups experience is applied to the specific mechanics of being watched
+# (unmuting, camera on, waiting to be called on). This cell does NOT touch
+# gen_z_professionals:anxiety, which remains off-limits pending the
+# #5585/#5595 flagship-golden resolution.
+status: pilot_extension
+accent_class: AUTHOR_DISCLOSURE
+topic: social_anxiety
+author_id: ravi_chandra
+locale_cluster: en_US
+wave: extension_pilot_2026-07-14
+disclosure_count: 3
+bio_license_version: draft_pending_operator_approval_2026-07-14
+disclosures:
+- disclosure_id: ad_ravi_social_admission_unmute_v01
+  disclosure_function: failure_model
+  mode_allow: [composite, teacher_mode]
+  composite_safe: true
+  bio_license_refs:
+  - performed_calm_while_body_alarm_ran
+  - body_noise_as_information
+  topic_keys: [social_anxiety, anxiety]
+  allowed_positions: [after_PIVOT, after_REFLECTION]
+  register: witness
+  position_variants:
+    after_PIVOT:
+      body: |
+        I had a two-minute ritual before unmuting in a meeting: check my face, check my voice, check that nothing in me looked like it was under siege.
+        None of it was about the words I was about to say. It was damage control for an alarm only I could hear.
+        What changed was not getting braver on camera — it was letting the alarm exist without spending the two minutes hiding it first.
+        See if the next time you are waiting to be called on, you can let the noise be there instead of managing it away first.
+    after_REFLECTION:
+      body: |
+        I had a two-minute ritual before unmuting in a meeting: check my face, check my voice, check that nothing in me looked like it was under siege.
+        None of it was about the words I was about to say. It was damage control for an alarm only I could hear.
+        What changed was not getting braver on camera — it was letting the alarm exist without spending the two minutes hiding it first.
+        Carry that into what you just reflected on: can the noise be there without you managing it away first.
+
+- disclosure_id: ad_ravi_social_disclosure_ahjan_v01
+  disclosure_function: credibility
+  mode_allow: [teacher_mode]
+  composite_safe: false
+  bio_license_refs:
+  - ahjan_framework_observer
+  topic_keys: [social_anxiety]
+  doctrine_keys: [COMPOSITE_DOCTRINE v03]
+  allowed_positions: [after_REFLECTION]
+  register: witness
+  position_variants:
+    after_REFLECTION:
+      body: |
+        Ahjan's teaching on the alarm within reframed being watched as a trigger, not a flaw — the alarm doing its job a beat too early, not evidence I could not handle the room.
+        That distinction mattered more to me on camera than any script for what to say once I was unmuted.
+        I stopped needing the two minutes of preparation to feel entitled to speak.
+        Maybe it will help you separate what your body is signaling from what you assume it means about you being seen.
+
+- disclosure_id: ad_ravi_social_endorsement_name_the_freeze_v01
+  disclosure_function: vulnerability
+  mode_allow: [composite, teacher_mode]
+  composite_safe: true
+  bio_license_refs:
+  - watched_teammates_try_practices
+  - harder_to_gaslight_about_feeling
+  topic_keys: [social_anxiety]
+  allowed_positions: [before_THREAD, after_REFLECTION]
+  register: witness
+  position_variants:
+    before_THREAD:
+      body: |
+        I have watched teammates name the freeze out loud in their own head — "that is the alarm, not laziness" — right before they were called on.
+        It did not make the room feel smaller. It kept them from mistaking the freeze for proof they had nothing to offer.
+        The ones who kept naming it were not less nervous; they were harder to convince that the nerves disqualified them from the room.
+        Bring that same naming into the next chapter before you decide what your own freeze is evidence of.
+    after_REFLECTION:
+      body: |
+        I have watched teammates name the freeze out loud in their own head — "that is the alarm, not laziness" — right before they were called on.
+        It did not make the room feel smaller. It kept them from mistaking the freeze for proof they had nothing to offer.
+        The ones who kept naming it were not less nervous; they were harder to convince that the nerves disqualified them from the room.
+        Notice what naming it would change about what you just reflected on.

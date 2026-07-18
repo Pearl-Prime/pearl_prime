@@ -1,0 +1,2458 @@
+{
+  "schema_version": 1,
+  "stage": "enrichment_select",
+  "topic": "grief",
+  "teacher_id": "ahjan",
+  "persona_id": "gen_z_professionals",
+  "runtime_format": "standard_book",
+  "total_words": 13000,
+  "enrichment_audit": {
+    "total_slots": 120,
+    "slots_from_teacher": 60,
+    "slots_from_persona": 36,
+    "slots_from_registry": 22,
+    "slots_from_practice_library": 0,
+    "practice_library_warnings": 0,
+    "slots_empty": 2,
+    "slots_format_scaled": 0,
+    "format_word_cap_max": 13000,
+    "total_words": 13000,
+    "total_target_words": 11004,
+    "gap_details": [
+      {
+        "chapter": 7,
+        "slot_index": 6,
+        "slot_type": "REFLECTION"
+      },
+      {
+        "chapter": 8,
+        "slot_index": 6,
+        "slot_type": "REFLECTION"
+      }
+    ],
+    "persona_id": "gen_z_professionals",
+    "teacher_id": "ahjan",
+    "depth_modules_added": [
+      {
+        "chapter": 1,
+        "module": "witnessing_presence",
+        "source_type": "teacher_atom",
+        "words_added": 46,
+        "remaining_deficit": 280,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "witnessing_presence",
+        "source_type": "registry_variant",
+        "words_added": 144,
+        "remaining_deficit": 416,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "recognition_depth",
+        "source_type": "teacher_atom",
+        "words_added": 42,
+        "remaining_deficit": 774,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "recognition_depth",
+        "source_type": "persona_atom",
+        "words_added": 400,
+        "remaining_deficit": 774,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "recognition_depth",
+        "source_type": "registry_variant",
+        "words_added": 94,
+        "remaining_deficit": 1080,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "story_scene",
+        "source_type": "teacher_atom",
+        "words_added": 160,
+        "remaining_deficit": 1420,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "story_scene",
+        "source_type": "persona_atom",
+        "words_added": 500,
+        "remaining_deficit": 1420,
+        "depth_round": 0
+      },
+      {
+        "chapter": 1,
+        "module": "story_scene",
+        "source_type": "registry_variant",
+        "words_added": 94,
+        "remaining_deficit": 1826,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "witnessing_presence",
+        "source_type": "teacher_atom",
+        "words_added": 23,
+        "remaining_deficit": 551,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "witnessing_presence",
+        "source_type": "registry_variant",
+        "words_added": 65,
+        "remaining_deficit": 986,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "recognition_depth",
+        "source_type": "teacher_atom",
+        "words_added": 34,
+        "remaining_deficit": 1352,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "recognition_depth",
+        "source_type": "persona_atom",
+        "words_added": 400,
+        "remaining_deficit": 1352,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "recognition_depth",
+        "source_type": "registry_variant",
+        "words_added": 62,
+        "remaining_deficit": 1690,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "story_scene",
+        "source_type": "teacher_atom",
+        "words_added": 126,
+        "remaining_deficit": 2064,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "story_scene",
+        "source_type": "persona_atom",
+        "words_added": 500,
+        "remaining_deficit": 2064,
+        "depth_round": 0
+      },
+      {
+        "chapter": 2,
+        "module": "story_scene",
+        "source_type": "registry_variant",
+        "words_added": 62,
+        "remaining_deficit": 2502,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "witnessing_presence",
+        "source_type": "teacher_atom",
+        "words_added": 22,
+        "remaining_deficit": 716,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "witnessing_presence",
+        "source_type": "registry_variant",
+        "words_added": 72,
+        "remaining_deficit": 1144,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "recognition_depth",
+        "source_type": "teacher_atom",
+        "words_added": 31,
+        "remaining_deficit": 1513,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "recognition_depth",
+        "source_type": "persona_atom",
+        "words_added": 400,
+        "remaining_deficit": 1513,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "recognition_depth",
+        "source_type": "registry_variant",
+        "words_added": 79,
+        "remaining_deficit": 1834,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "story_scene",
+        "source_type": "teacher_atom",
+        "words_added": 83,
+        "remaining_deficit": 2251,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "story_scene",
+        "source_type": "persona_atom",
+        "words_added": 500,
+        "remaining_deficit": 2251,
+        "depth_round": 0
+      },
+      {
+        "chapter": 3,
+        "module": "story_scene",
+        "source_type": "registry_variant",
+        "words_added": 79,
+        "remaining_deficit": 2672,
+        "depth_round": 0
+      },
+      {
+        "chapter": 4,
+        "module": "witnessing_presence",
+        "source_type": "teacher_atom",
+        "words_added": 24,
+        "remaining_deficit": 576,
+        "depth_round": 0
+      },
+      {
+        "chapter": 4,
+        "module": "witnessing_presence",
+        "source_type": "registry_variant",
+        "words_added": 97,
+        "remaining_deficit": 979,
+        "depth_round": 0
+      },
+      {
+        "chapter": 4,
+        "module": "story_scene",
+        "source_type": "teacher_atom",
+        "words_added": 140,
+        "remaining_deficit": 1339,
+        "depth_round": 0
+      },
+      {
+        "chapter": 4,
+        "module": "story_scene",
+        "source_type": "persona_atom",
+        "words_added": 500,
+        "remaining_deficit": 1339,
+        "depth_round": 0
+      },
+      {
+        "chapter": 4,
+        "module": "story_scene",
+        "source_type": "registry_variant",
+        "words_added": 76,
+        "remaining_deficit": 1763,
+        "depth_round": 0
+      },
+      {
+        "chapter": 5,
+        "module": "mechanism_depth",
+        "source_type": "teacher_atom",
+        "words_added": 41,
+        "remaining_deficit": 757,
+        "depth_round": 0
+      },
+      {
+        "chapter": 5,
+        "module": "mechanism_depth",
+        "source_type": "persona_atom",
+        "words_added": 600,
+        "remaining_deficit": 757,
+        "depth_round": 0
+      },
+      {
+        "chapter": 5,
+        "module": "consequence_exposure",
+        "source_type": "teacher_atom",
+        "words_added": 49,
+        "remaining_deficit": 1108,
+        "depth_round": 0
+      },
+      {
+        "chapter": 5,
+        "module": "witnessing_presence",
+        "source_type": "teacher_atom",
+        "words_added": 46,
+        "remaining_deficit": 1562,
+        "depth_round": 0
+      },
+      {
+        "chapter": 5,
+        "module": "witnessing_presence",
+        "source_type": "registry_variant",
+        "words_added": 85,
+        "remaining_deficit": 1977,
+        "depth_round": 0
+      },
+      {
+        "chapter": 6,
+        "module": "mechanism_depth",
+        "source_type": "teacher_atom",
+        "words_added": 47,
+        "remaining_deficit": 743,
+        "depth_round": 0
+      },
+      {
+        "chapter": 6,
+        "module": "mechanism_depth",
+        "source_type": "persona_atom",
+        "words_added": 595,
+        "remaining_deficit": 743,
+        "depth_round": 0
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "role": "recognition",
+      "working_title": "The Sentence Running Your Life",
+      "thesis": "There is a sentence underneath everything you're doing right now, and it goes something like this: \"Once I'm past this, then I'll be okay.\" That sentence is not a plan. It is the thing keeping you from your own life.\n",
+      "total_words": 2234,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The teachings are not about becoming someone better. They are about seeing who you\nalready are when the noise stops. When you sit with this, the noise does stop. Not\nforever, but long enough to notice what remains.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_005",
+          "target_words": 100,
+          "actual_words": 38,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take.",
+          "source": "persona_atom",
+          "source_id": "SCENE v03",
+          "target_words": 104,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what's happening.\n\nEvery time you say that sentence—\n*\"Once I'm past this, then I'll be okay\"*—\n\nYou're training yourself to treat the grief like a gate.\n\nYou're saying:\n*\"This feeling means I can't. This feeling means I'm not ready. This feeling means I should wait.\"*\n\nAnd something inside you listens.\n\nBecause that's how it works. You learn.\n\nSo the next time you think about going somewhere, or saying something real, or letting yourself be seen—\n\nSomething inside says:\n*\"Wait. You're still grieving. That must mean it's not time yet.\"*\n\nAnd you feel it again.\n\nThat heaviness. That tightness. That pull to wait.\n\nNot because the thing itself is wrong.\n\nBut because you've been teaching yourself that *the grief* means stop.\n\n---\n\nAnd here's the hardest part—\n\nThe more you wait, the smaller your world gets.\n\nThe places you don't go. The conversations you don't have. The memories you don't speak out loud. The version of yourself you don't let exist.\n\nAll of it shrinks.\n\nAnd something inside notices.\n\nIt says:\n*\"Okay, so we're not doing that anymore. Got it. That must be too hard.\"*\n\nSo the next time feels harder.\n\nThe next thing feels bigger.\n\nThe next moment of connection feels further away.\n\nNot because you're getting worse.\n\nNot because the grief is winning.\n\nBut because you've been living by a sentence that sounds like patience—\n\nBut works like a cage.\n\n---",
+          "source": "registry",
+          "source_id": "ch01_sec05_reflection_f1",
+          "target_words": 77,
+          "actual_words": 233,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "In this discourse, we propose a more profound definition of meditation: \"Meditation is stopping thought.\"The Essence of Meditation: Stopping ThoughtMeditation, at its core, is about transcending the incessant chatter of the mind. Imagine your mind as a clear lake with a treasure, represented by gold, hidden at its bottom. Thoughts are like waves on the surface of this lake. As long as these waves persist, the treasure remains obscured from view. The conventional approach to meditation often involves calming the waves slightly to catch glimpses of the treasure's reflection.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_046_mined",
+          "target_words": 104,
+          "actual_words": 89,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The Slack profile picture of your former colleague is still there. You can't unread the announcement that they're gone. Your office desk neighbor is a stranger now. {street_name} this morning looked the same as yesterday. Inside is different. You pretend it's not.",
+          "source": "persona_atom",
+          "source_id": "SCENE v15",
+          "target_words": 101,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Awareness without judgment is the beginning of every transformation. You cannot change what you refuse to see.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_010",
+          "target_words": 93,
+          "actual_words": 17,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's the thing no one tells you about grief:\n\nThe struggle to get past it is often worse than the grief itself.\n\nThe grief is heavy, yes. The grief is real.\n\nBut the constant battle—the *\"I shouldn't feel this way still\"* and the *\"when will this end\"* and the *\"what's wrong with me that I'm still carrying this\"*—\n\nThat's what makes it unbearable.\n\nThe grief is weight.\n\nThe struggle is fighting against gravity.\n\n---\n\nWhat if you didn't have to fight?\n\nWhat if the grief could just be there—heavy, present, real—\n\nWithout the additional weight of trying to make it go away?\n\n---",
+          "source": "registry",
+          "source_id": "ch01_sec07_reflection_f1",
+          "target_words": 77,
+          "actual_words": 103,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Furthermore, the esoteric interpretation of the Wheel reminds us that we can experience the Six Worlds within our own consciousness and, through meditation and spiritual discipline, move beyond them to attain enlightenment.In essence, the Wheel of Dharma is a symbol of hope and liberation, guiding us toward a state of existence free from suffering and limitations, where we can experience the eternal truth and unity of all things. It is an invitation to embark on a spiritual journey that leads to the ultimate destination enlightenment.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_042_mined",
+          "target_words": 104,
+          "actual_words": 85,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your Slack status has been the same for three weeks. The company removed their status entirely. Your coffee shop table is where you notice small things like this. {street_name} goes on without noticing either. You keep your status the same out of some kind of solidarity.",
+          "source": "persona_atom",
+          "source_id": "SCENE v23",
+          "target_words": 93,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, return to one moment of clarity you have already had. Not a huge insight.\nA small one. Something you saw clearly without doubt. Sit with it. Remember what\nthat clarity felt like in your body. You have already accessed the capacity you need.\nYou have done this before. Begin again from there.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_000",
+          "target_words": 64,
+          "actual_words": 54,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?",
+          "source": "depth_module:witnessing_presence:teacher_atom",
+          "source_id": "depth_witnessing_presence_1",
+          "target_words": 163,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "There's a sentence you've been saying since the loss.\n\nYou probably don't even know you're saying it.\n\nIt shows up when someone asks how you're doing. When you think about mentioning their name. When you consider going back to that place, or looking at those photos, or letting yourself feel the full weight of what's missing.\n\nThe sentence is:\n\n*\"Once I'm past this, then I'll be okay.\"*\n\nOr maybe your version sounds like:\n\n*\"Once I stop feeling this way, I'll be myself again.\"*\n*\"Once enough time passes, this will lift.\"*\n*\"Once I've processed this, I can move forward.\"*\n*\"Once I'm through the worst of it, I'll know what to do.\"*\n\nSame sentence. Different words.\n\nAnd here's the thing—\n\nThis sentence sounds wise. It sounds patient. It sounds like you're being kind to yourself, waiting until you're ready.\n\nBut it's not.\n\nIt's a trap.\n\n---",
+          "source": "depth_module:witnessing_presence:registry_variant",
+          "source_id": "depth_witnessing_presence_1",
+          "target_words": 280,
+          "actual_words": 144,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "Your mind has the capacity to recognize truth. This capacity does not depend on\nbelief or faith. It depends on observation. When you look carefully at your own\nexperience, you see what is actually there, not what you thought would be there.",
+          "source": "depth_module:recognition_depth:teacher_atom",
+          "source_id": "depth_recognition_depth_1",
+          "target_words": 400,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "## HOOK v01 --- --- The layoff announcement came and your coworker was gone. Your chest went numb because you see them every day and then they didn't exist in this space anymore. Someone who knew the inside jokes and the shortcuts and the real version of the job just disappeared. --- ## HOOK v02 --- --- They're telling you to \"stay positive\" about the reorg and your jaw tightens. The person who trained you and sat next to you for two years is walking out with a box. You're supposed to keep working like they didn't just leave. --- ## HOOK v03 --- --- The role was eliminated and you know who had it and what they lost. Your stomach is tied up in knots about severance and job searches and whether they're okay. Someone's worth was calculated and deemed insufficient. --- ## HOOK v04 --- --- You're at your desk and there's an empty desk across from you. Your hands are moving through work in a building that's a little less full. The person who made this job tolerable is gone. --- ## HOOK v05 --- --- The role that felt like identity was restructured away and someone became unemployed. Your shoulders carry the weight of knowing them. You're still here and they're not and the unfairness is visible every morning. --- ## HOOK v06 --- --- You learned they were fired through a Slack notification. Your throat closed because you'd talked to them that morning. The job and the person just evaporated while you were in a meeting. --- ## HOOK v07 --- --- The job that felt like home is now just a job because the person who made it home is gone. Your chest is hollow. You're in the same seat but you're somewhere different now. --- ## HOOK v08 --- --- Your mentor left for a different company and your jaw clenched. The person who was your road map decided this place wasn't worth staying in. Now you're left looking at your own exit routes. --- ## HOOK v09 --- --- The all-hands announced the departures and there's a new gap in the org chart. Your hands know these gaps used to be people you worked with. Everyone moved on and the space they left is still here. --- ## HOOK v10 --- --- You reached for Slack to tell someone something and then",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_1",
+          "target_words": 400,
+          "actual_words": 400,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "What if I told you there's a rule you've been following since the loss?\n\n\nNot a rule someone taught you explicitly. Not something written down anywhere.\n\n\nJust a quiet instruction running in the background of your mind:\n\n\n*\"Wait until the grief passes.\"*\n\n\nIt sounds reasonable. Patient, even.\n\n\nBut here's what that rule actually says:\n\n\n*\"Who you are right now—grieving—isn't allowed to live.\"*\n\n\nAnd so you wait. For the weight to lift. For the ache to fade. For a version of yourself that feels whole again.\n\n\nThe rule keeps running. And you keep waiting.\n\n\n---",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_1",
+          "target_words": 400,
+          "actual_words": 94,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "The disciple arrived carrying the weight of a week's worth of unresolved decisions.\nShe had meditated every morning and still the clarity refused to come. She sat with\na senior teacher at the edge of the garden where the light came through the trees\nat an angle that made everything look unhurried.\n\nShe said she was afraid that the stillness was not working. That perhaps her mind\nwas too tangled for the practice to find its way in.\n\nThe teacher did not answer immediately. He watched the light move across the stones.\nThen he said: the light does not find its way in. The light is always present. What\nchanges is how much we stand in our own way.\n\nShe stayed with that for some time. The decisions were still unresolved when she\nleft. But the quality of holding them had changed. Something in the chest had moved\nfrom bracing to simply being present with what was not yet clear.",
+          "source": "depth_module:story_scene:teacher_atom",
+          "source_id": "depth_story_scene_1",
+          "target_words": 500,
+          "actual_words": 160,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "## SCENE v01 --- --- The Slack channel for the laid-off colleague is dark. Their name is still in the header but nothing below. Your WFH desk monitor shows the message thread unchanged. {weather_detail} afternoon moves on without them. You scroll without reading. --- ## SCENE v02 --- --- The all-hands meeting has a different shape this time. The chair where they usually sat is now filled. {street_name} outside moves normally and nobody else is stopping. Your Zoom tile is one less than it was. You mute yourself. --- ## SCENE v03 --- --- Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take. --- ## SCENE v04 --- --- The company Slack has a goodbye message no one asked for. The laying off happened on a {weather_detail} morning. Your coffee shop table is where you're reading about it. {street_name} below has fewer people walking to the office. You didn't know it would feel this way. --- ## SCENE v05 --- --- Your direct report is asking about the reorganization. They want to know if they're safe from the next cut. Your WFH desk doesn't have answers that are true. {weather_detail} light shows your face in the video call. You don't know what to say because you don't know either. --- ## SCENE v06 --- --- The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it. --- ## SCENE v07 --- --- Your Slack DMs to them are unread and permanent now. Their account might be deleted next month. Your WFH desk holds all these messages you sent. {transit_line} brings commuters but not this person. You don't delete the conversation. --- ## SCENE v08 --- --- The coworking space is less friendly without them. The lunch group chat has eight people instead of nine. {weather_detail} lunch outside is where you go alone now. {street_name} is too quiet with one less voice. Your coffee shop substitute is not the same. --- ## SCENE v09 --- --- The all-hands celebration happened without acknowledging the absence. People talked about growth and positive momentum. Your WFH desk felt dishonest watching it. {weather_detail} afternoon cast weird light on the contradiction. You didn't ask any questions. --- ## SCENE v10 --- --- Your manager said their position was eliminated. The word \"eliminated\" sits strange in your mouth when you repeat it. Your office desk still has their holiday card from last year. {street_name} outside has no one to walk home with. You leave it sitting there. --- ## SCENE v11 --- --- The Slack channel where they posted memes is archived. The archive is viewable but nobody",
+          "source": "depth_module:story_scene:persona_atom",
+          "source_id": "depth_story_scene_1",
+          "target_words": 500,
+          "actual_words": 500,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "What if I told you there's a rule you've been following since the loss?\n\n\nNot a rule someone taught you explicitly. Not something written down anywhere.\n\n\nJust a quiet instruction running in the background of your mind:\n\n\n*\"Wait until the grief passes.\"*\n\n\nIt sounds reasonable. Patient, even.\n\n\nBut here's what that rule actually says:\n\n\n*\"Who you are right now—grieving—isn't allowed to live.\"*\n\n\nAnd so you wait. For the weight to lift. For the ache to fade. For a version of yourself that feels whole again.\n\n\nThe rule keeps running. And you keep waiting.\n\n\n---",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_1",
+          "target_words": 500,
+          "actual_words": 94,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 2,
+      "role": "witnessing",
+      "working_title": "What It Actually Feels Like Inside",
+      "thesis": "There is the grief you show — functional, managed, appropriate — and there is the grief that happens when no one is watching. This chapter is about the second one. It asks to be seen.\n",
+      "total_words": 1902,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Every person carries the capacity for awakening. This capacity is not earned or\ngiven by another. It exists in you now. The work is simply to remove what covers it.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_011",
+          "target_words": 100,
+          "actual_words": 30,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The company Slack has a goodbye message no one asked for. The laying off happened on a {weather_detail} morning. Your coffee shop table is where you're reading about it. {street_name} below has fewer people walking to the office. You didn't know it would feel this way.",
+          "source": "persona_atom",
+          "source_id": "SCENE v04",
+          "target_words": 104,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Let's be clear about what that strategy did for you:\n\n**It kept you safe.**\n\nIn those early days, weeks, months — the waiting protected something that needed protecting.\n\nIt gave you space to fall apart in private.\nIt prevented you from making decisions you weren't ready to make.\nIt let the worst of the acute grief move through without an audience.\n\nThe strategy worked.\n\nNot perfectly. Not forever.\n\nBut in that season, it was exactly what you needed.\n\n---\n\nHere's what I want you to understand:\n\nThe waiting wasn't weakness. It was intelligence.\n\nYour system recognized a threat — the threat of falling apart, of being seen in pieces, of making it all worse — and it found a solution.\n\nWait. Protect. Survive.\n\nThat's not failure. That's adaptation.\n\n---",
+          "source": "registry",
+          "source_id": "ch02_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 129,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Conclusion: A Balanced Approach Karma Yoga, with its focus on selfless action, integrates seamlessly with the virtues of purity and humility. This holistic approach not only enhances our spiritual journey but also contributes to a more harmonious and compassionate world. It's a path of balance, where duty, selflessness, and spiritual growth converge, leading us towards a more fulfilled and purposeful life.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_057_mined",
+          "target_words": 104,
+          "actual_words": 61,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your video call shows the same people as the month before. One face is missing and nobody directly acknowledges it. Your coworking space feels like a memorial now. {street_name} outside continues its normal rhythm. You're the only one who seems to notice the absence.",
+          "source": "persona_atom",
+          "source_id": "SCENE v17",
+          "target_words": 101,
+          "actual_words": 44,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Your capacity to feel pain is the same capacity that lets you feel joy. You cannot numb one without dimming the other.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_011",
+          "target_words": 93,
+          "actual_words": 22,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what changed:\n\nThe conditions shifted. But the strategy didn't.\n\nEarly on, you needed protection. The grief was acute. The risk of falling apart was high. Waiting made sense.\n\nBut time passed.\n\nThe acute phase ended. The grief changed shape — still present, but different. More like weather than like drowning.\n\nAnd yet the sentence kept running:\n\n*\"Once I'm past this, then I'll be okay.\"*\n\nAs if the threat was still the same.\n\nAs if you were still in those first weeks.\n\nAs if waiting was still the smart move.\n\n---\n\nThe problem isn't that you built the shield.\n\nThe problem is that the shield became permanent.\n\nWhat was once protection is now prevention.\n\n---",
+          "source": "registry",
+          "source_id": "ch02_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 115,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Furthermore, the esoteric interpretation of the Wheel reminds us that we can experience the Six Worlds within our own consciousness and, through meditation and spiritual discipline, move beyond them to attain enlightenment.In essence, the Wheel of Dharma is a symbol of hope and liberation, guiding us toward a state of existence free from suffering and limitations, where we can experience the eternal truth and unity of all things. It is an invitation to embark on a spiritual journey that leads to the ultimate destination enlightenment.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_042_mined",
+          "target_words": 104,
+          "actual_words": 85,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk project roadmap shows their initiative crossed out. It'll be continued by someone else or abandoned. {transit_line} below brings the working world that moved on. {street_name} someone works somewhere else now. Your cursor stops on their name in the document. You don't delete it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v19",
+          "target_words": 93,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Take one situation that usually triggers you. Not the biggest one. A medium one.\nNext time it happens, pause for three breaths before responding. During those breaths,\nnotice what you feel. Do not try to change it. Just notice. This noticing is the\nentire practice. Do this one time. See what happens.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_001",
+          "target_words": 64,
+          "actual_words": 52,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "Your confusion is not a flaw. It is the mind being honest about what it has not yet seen. That honesty is valuable.",
+          "source": "depth_module:witnessing_presence:teacher_atom",
+          "source_id": "depth_witnessing_presence_2",
+          "target_words": 287,
+          "actual_words": 23,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "So here's what I need you to know about that sentence — the one you've been saying since the loss:\n\n**It made sense.**\n\nNot in a \"you were being dramatic\" way.\nNot in a \"you should be further along\" way.\n\nI mean: early in the grief, waiting until you felt steadier to act was *the smart move*.\n\nLet me show you what I mean.\n\n---",
+          "source": "depth_module:witnessing_presence:registry_variant",
+          "source_id": "depth_witnessing_presence_2",
+          "target_words": 500,
+          "actual_words": 65,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "The mind makes stories about itself all day long. These stories feel true because\nthey are familiar. You can learn to notice when a story is happening. This noticing\nis the beginning of change.",
+          "source": "depth_module:recognition_depth:teacher_atom",
+          "source_id": "depth_recognition_depth_2",
+          "target_words": 400,
+          "actual_words": 34,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "## HOOK v01 --- --- The layoff announcement came and your coworker was gone. Your chest went numb because you see them every day and then they didn't exist in this space anymore. Someone who knew the inside jokes and the shortcuts and the real version of the job just disappeared. --- ## HOOK v02 --- --- They're telling you to \"stay positive\" about the reorg and your jaw tightens. The person who trained you and sat next to you for two years is walking out with a box. You're supposed to keep working like they didn't just leave. --- ## HOOK v03 --- --- The role was eliminated and you know who had it and what they lost. Your stomach is tied up in knots about severance and job searches and whether they're okay. Someone's worth was calculated and deemed insufficient. --- ## HOOK v04 --- --- You're at your desk and there's an empty desk across from you. Your hands are moving through work in a building that's a little less full. The person who made this job tolerable is gone. --- ## HOOK v05 --- --- The role that felt like identity was restructured away and someone became unemployed. Your shoulders carry the weight of knowing them. You're still here and they're not and the unfairness is visible every morning. --- ## HOOK v06 --- --- You learned they were fired through a Slack notification. Your throat closed because you'd talked to them that morning. The job and the person just evaporated while you were in a meeting. --- ## HOOK v07 --- --- The job that felt like home is now just a job because the person who made it home is gone. Your chest is hollow. You're in the same seat but you're somewhere different now. --- ## HOOK v08 --- --- Your mentor left for a different company and your jaw clenched. The person who was your road map decided this place wasn't worth staying in. Now you're left looking at your own exit routes. --- ## HOOK v09 --- --- The all-hands announced the departures and there's a new gap in the org chart. Your hands know these gaps used to be people you worked with. Everyone moved on and the space they left is still here. --- ## HOOK v10 --- --- You reached for Slack to tell someone something and then",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_2",
+          "target_words": 400,
+          "actual_words": 400,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "Before we go further, I want to address something you might be thinking:\n\n\n*\"But what if the sentence is right? What if I really should wait?\"*\n\n\nHere's what I need you to understand:\n\n\nAt one point, you were right.\n\n\nThe sentence wasn't a mistake. It was intelligent. It was protection.\n\n\nAnd you need to see that before anything else can shift.\n\n\n---",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_2",
+          "target_words": 400,
+          "actual_words": 62,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "In the fourteenth century, Lahiri Mahasaya was a government clerk in Benares.\nHis desk was wood, his quill worn from morning correspondence. At midday he would\nwalk the same path to the river for meditation, then return to finish the afternoon's\nledgers.\n\nHis colleagues noticed nothing unusual. He filed forms correctly. He did not\nspeak of inner light or the clear light of reality. His attention moved between\nthe breath and the spreadsheet like water finding its level.\n\nYears later, travelers spoke of enlightenment moving through him. Not because he\nhad abandoned his post, but because he had made the post his practice. The teaching\nin this tradition says: the world itself is the path. Not the rejection of work,\nbut work transformed by focused attention.",
+          "source": "depth_module:story_scene:teacher_atom",
+          "source_id": "depth_story_scene_2",
+          "target_words": 500,
+          "actual_words": 126,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "## SCENE v01 --- --- The Slack channel for the laid-off colleague is dark. Their name is still in the header but nothing below. Your WFH desk monitor shows the message thread unchanged. {weather_detail} afternoon moves on without them. You scroll without reading. --- ## SCENE v02 --- --- The all-hands meeting has a different shape this time. The chair where they usually sat is now filled. {street_name} outside moves normally and nobody else is stopping. Your Zoom tile is one less than it was. You mute yourself. --- ## SCENE v03 --- --- Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take. --- ## SCENE v04 --- --- The company Slack has a goodbye message no one asked for. The laying off happened on a {weather_detail} morning. Your coffee shop table is where you're reading about it. {street_name} below has fewer people walking to the office. You didn't know it would feel this way. --- ## SCENE v05 --- --- Your direct report is asking about the reorganization. They want to know if they're safe from the next cut. Your WFH desk doesn't have answers that are true. {weather_detail} light shows your face in the video call. You don't know what to say because you don't know either. --- ## SCENE v06 --- --- The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it. --- ## SCENE v07 --- --- Your Slack DMs to them are unread and permanent now. Their account might be deleted next month. Your WFH desk holds all these messages you sent. {transit_line} brings commuters but not this person. You don't delete the conversation. --- ## SCENE v08 --- --- The coworking space is less friendly without them. The lunch group chat has eight people instead of nine. {weather_detail} lunch outside is where you go alone now. {street_name} is too quiet with one less voice. Your coffee shop substitute is not the same. --- ## SCENE v09 --- --- The all-hands celebration happened without acknowledging the absence. People talked about growth and positive momentum. Your WFH desk felt dishonest watching it. {weather_detail} afternoon cast weird light on the contradiction. You didn't ask any questions. --- ## SCENE v10 --- --- Your manager said their position was eliminated. The word \"eliminated\" sits strange in your mouth when you repeat it. Your office desk still has their holiday card from last year. {street_name} outside has no one to walk home with. You leave it sitting there. --- ## SCENE v11 --- --- The Slack channel where they posted memes is archived. The archive is viewable but nobody",
+          "source": "depth_module:story_scene:persona_atom",
+          "source_id": "depth_story_scene_2",
+          "target_words": 500,
+          "actual_words": 500,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "Before we go further, I want to address something you might be thinking:\n\n\n*\"But what if the sentence is right? What if I really should wait?\"*\n\n\nHere's what I need you to understand:\n\n\nAt one point, you were right.\n\n\nThe sentence wasn't a mistake. It was intelligent. It was protection.\n\n\nAnd you need to see that before anything else can shift.\n\n\n---",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_2",
+          "target_words": 500,
+          "actual_words": 62,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 3,
+      "role": "cost_exposure",
+      "working_title": "What The Waiting Costs",
+      "thesis": "The strategy of waiting to feel this until you can feel it safely is not free. It is costing you the present. Not the past — the present. The life you are postponing is not your future life. It is the one happening right now.\n",
+      "total_words": 1814,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Your mind has the capacity to recognize truth. This capacity does not depend on\nbelief or faith. It depends on observation. When you look carefully at your own\nexperience, you see what is actually there, not what you thought would be there.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_001",
+          "target_words": 100,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk project roadmap shows their initiative crossed out. It'll be continued by someone else or abandoned. {transit_line} below brings the working world that moved on. {street_name} someone works somewhere else now. Your cursor stops on their name in the document. You don't delete it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v19",
+          "target_words": 104,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what the sentence is really saying about you:\n\n*\"The grieving version of me isn't capable.\"*\n\n*\"The grieving version of me can't handle things.\"*\n\n*\"The grieving version of me shouldn't be seen.\"*\n\nEvery time you wait, you're reinforcing this belief.\n\nYou're saying: *\"Who I am right now — carrying this weight — isn't enough.\"*\n\nBut what if you're wrong?\n\nWhat if the grieving version of you is exactly as capable as any other version?\n\nJust heavier. Just carrying more.\n\nBut still capable.\n\n---",
+          "source": "registry",
+          "source_id": "ch03_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 83,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Through the lens of Bhakti Yoga, love extends beyond personal relationships, embracing a universal scale where affection for the divine, all beings, and the self coalesce into a potent force propelling us toward enlightenment.This comprehensive understanding of love closely aligns with Buddhist principles of compassion and selflessness, where the ultimate expression of love lies in selflessly seeking enlightenment not just for oneself but for all beings.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_031_mined",
+          "target_words": 104,
+          "actual_words": 66,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk project roadmap shows their initiative crossed out. It'll be continued by someone else or abandoned. {transit_line} below brings the working world that moved on. {street_name} someone works somewhere else now. Your cursor stops on their name in the document. You don't delete it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v19",
+          "target_words": 101,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Growth does not always look like forward movement. Sometimes it looks like staying when every part of you wants to run.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_012",
+          "target_words": 93,
+          "actual_words": 21,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's the myth you've been believing:\n\n*\"Grief is something that passes. And once it passes, I'll be able to live again.\"*\n\nThat's the story. That's the assumption underneath the waiting.\n\nBut here's what actually happens:\n\nGrief doesn't pass. It changes.\n\nThe acute phase ends. The constant ache becomes intermittent. The drowning becomes something more like weather.\n\nBut the absence is still there. The weight is still present.\n\nJust... different.\n\n---\n\nSo if you're waiting for the grief to be gone before you live —\n\nYou might be waiting for something that doesn't happen.\n\nNot because you're doing it wrong.\n\nBut because grief doesn't work like that.\n\n---",
+          "source": "registry",
+          "source_id": "ch03_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 107,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Helvetica; ;; ;; Meditation is a profound practice that has the potential to bring about a radical transformation in our lives. Let's explore how meditation when understood and practiced correctly, can lead us from the awareness of self and the transient finite world to the awareness of infinity and the essence of life.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_044_mined",
+          "target_words": 104,
+          "actual_words": 53,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The coffee shop owner asked about your colleague. They came in together sometimes. Your mouth can't form the explanation. {weather_detail} morning is when you usually saw them here. You're here alone now. You don't explain anything.",
+          "source": "persona_atom",
+          "source_id": "SCENE v18",
+          "target_words": 93,
+          "actual_words": 36,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice one moment of complete acceptance. Something you usually resist.\nA feeling. A thought. A circumstance. Instead of pushing it away, say yes to it for\none minute. Notice what happens. Often the thing you resist becomes bearable the\nmoment you stop resisting. Test this once.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_009",
+          "target_words": 64,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "You do not owe anyone your healing on a schedule. The mind clears when it is ready, not when you demand it.",
+          "source": "depth_module:witnessing_presence:teacher_atom",
+          "source_id": "depth_witnessing_presence_3",
+          "target_words": 369,
+          "actual_words": 22,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "Here's what the sentence has been doing to you.\n\n\nNot just what it costs.\n\nNot just what you're avoiding.\n\n\nBut what it does to **the way you see yourself**.\n\n\nBecause here's the thing about that sentence — \"once I'm past this, then I'll be okay\":\n\n\nIt doesn't just delay your actions.\n\n\n**It splits you in two.**\n\n\nAnd you've been living like that for so long, you don't even notice it anymore.\n\n\n---",
+          "source": "depth_module:witnessing_presence:registry_variant",
+          "source_id": "depth_witnessing_presence_3",
+          "target_words": 500,
+          "actual_words": 72,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "Your thoughts are not facts about the world. They are the mind's habit. Once you\nsee this, your relationship to thinking changes. The same thought can pass through\nwithout catching you.",
+          "source": "depth_module:recognition_depth:teacher_atom",
+          "source_id": "depth_recognition_depth_3",
+          "target_words": 400,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "## HOOK v01 --- --- The layoff announcement came and your coworker was gone. Your chest went numb because you see them every day and then they didn't exist in this space anymore. Someone who knew the inside jokes and the shortcuts and the real version of the job just disappeared. --- ## HOOK v02 --- --- They're telling you to \"stay positive\" about the reorg and your jaw tightens. The person who trained you and sat next to you for two years is walking out with a box. You're supposed to keep working like they didn't just leave. --- ## HOOK v03 --- --- The role was eliminated and you know who had it and what they lost. Your stomach is tied up in knots about severance and job searches and whether they're okay. Someone's worth was calculated and deemed insufficient. --- ## HOOK v04 --- --- You're at your desk and there's an empty desk across from you. Your hands are moving through work in a building that's a little less full. The person who made this job tolerable is gone. --- ## HOOK v05 --- --- The role that felt like identity was restructured away and someone became unemployed. Your shoulders carry the weight of knowing them. You're still here and they're not and the unfairness is visible every morning. --- ## HOOK v06 --- --- You learned they were fired through a Slack notification. Your throat closed because you'd talked to them that morning. The job and the person just evaporated while you were in a meeting. --- ## HOOK v07 --- --- The job that felt like home is now just a job because the person who made it home is gone. Your chest is hollow. You're in the same seat but you're somewhere different now. --- ## HOOK v08 --- --- Your mentor left for a different company and your jaw clenched. The person who was your road map decided this place wasn't worth staying in. Now you're left looking at your own exit routes. --- ## HOOK v09 --- --- The all-hands announced the departures and there's a new gap in the org chart. Your hands know these gaps used to be people you worked with. Everyone moved on and the space they left is still here. --- ## HOOK v10 --- --- You reached for Slack to tell someone something and then",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_3",
+          "target_words": 400,
+          "actual_words": 400,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "content": "Every time you say \"once I'm past this, then I'll be okay,\" you're creating a story in your head.\n\n\nA story about two people:\n\n\nThe person you are right now — grieving, heavy, not whole.\n\n\nAnd the person you'll become once the grief passes — light, present, yourself again.\n\n\nAnd the whole sentence is built on this belief:\n\n\n*Only the second person is allowed to live.*\n\n\nBut here's what you haven't noticed:\n\n\n**That second person never shows up.**\n\n\n---",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_3",
+          "target_words": 400,
+          "actual_words": 79,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "James has three alarms set for 6am. He wakes at 5:47 every morning\nin the dark, already counting. Meetings. Deliverables. The thing he said\nyesterday that landed wrong. He does not notice the counting. He notices\nonly that he is already tired before the first alarm sounds.\nThe body has been working since 3am. The mind caught up at 5:47.\nBy the time he reaches the office he has already spent the day's first\nreserves on a day that has not yet started.",
+          "source": "depth_module:story_scene:teacher_atom",
+          "source_id": "depth_story_scene_3",
+          "target_words": 500,
+          "actual_words": 83,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "## SCENE v01 --- --- The Slack channel for the laid-off colleague is dark. Their name is still in the header but nothing below. Your WFH desk monitor shows the message thread unchanged. {weather_detail} afternoon moves on without them. You scroll without reading. --- ## SCENE v02 --- --- The all-hands meeting has a different shape this time. The chair where they usually sat is now filled. {street_name} outside moves normally and nobody else is stopping. Your Zoom tile is one less than it was. You mute yourself. --- ## SCENE v03 --- --- Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take. --- ## SCENE v04 --- --- The company Slack has a goodbye message no one asked for. The laying off happened on a {weather_detail} morning. Your coffee shop table is where you're reading about it. {street_name} below has fewer people walking to the office. You didn't know it would feel this way. --- ## SCENE v05 --- --- Your direct report is asking about the reorganization. They want to know if they're safe from the next cut. Your WFH desk doesn't have answers that are true. {weather_detail} light shows your face in the video call. You don't know what to say because you don't know either. --- ## SCENE v06 --- --- The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it. --- ## SCENE v07 --- --- Your Slack DMs to them are unread and permanent now. Their account might be deleted next month. Your WFH desk holds all these messages you sent. {transit_line} brings commuters but not this person. You don't delete the conversation. --- ## SCENE v08 --- --- The coworking space is less friendly without them. The lunch group chat has eight people instead of nine. {weather_detail} lunch outside is where you go alone now. {street_name} is too quiet with one less voice. Your coffee shop substitute is not the same. --- ## SCENE v09 --- --- The all-hands celebration happened without acknowledging the absence. People talked about growth and positive momentum. Your WFH desk felt dishonest watching it. {weather_detail} afternoon cast weird light on the contradiction. You didn't ask any questions. --- ## SCENE v10 --- --- Your manager said their position was eliminated. The word \"eliminated\" sits strange in your mouth when you repeat it. Your office desk still has their holiday card from last year. {street_name} outside has no one to walk home with. You leave it sitting there. --- ## SCENE v11 --- --- The Slack channel where they posted memes is archived. The archive is viewable but nobody",
+          "source": "depth_module:story_scene:persona_atom",
+          "source_id": "depth_story_scene_3",
+          "target_words": 500,
+          "actual_words": 500,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "Every time you say \"once I'm past this, then I'll be okay,\" you're creating a story in your head.\n\n\nA story about two people:\n\n\nThe person you are right now — grieving, heavy, not whole.\n\n\nAnd the person you'll become once the grief passes — light, present, yourself again.\n\n\nAnd the whole sentence is built on this belief:\n\n\n*Only the second person is allowed to live.*\n\n\nBut here's what you haven't noticed:\n\n\n**That second person never shows up.**\n\n\n---",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_3",
+          "target_words": 500,
+          "actual_words": 79,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 4,
+      "role": "hidden_belief",
+      "working_title": "What You're Afraid Would Happen If You Stopped Managing",
+      "thesis": "Underneath the waiting strategy is a belief, rarely spoken: that if you let the grief in fully, you will fall apart in a way you cannot come back from. The strategy is not about control. It is about survival.\n",
+      "total_words": 1454,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The teachings are not about becoming someone better. They are about seeing who you\nalready are when the noise stops. When you sit with this, the noise does stop. Not\nforever, but long enough to notice what remains.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_005",
+          "target_words": 100,
+          "actual_words": 38,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The all-hands meeting shows the new organizational chart. Your WFH desk displays it on your screen. The empty box where they were is now filled. {weather_detail} afternoon makes the change official and permanent. You close the document.",
+          "source": "persona_atom",
+          "source_id": "SCENE v26",
+          "target_words": 104,
+          "actual_words": 37,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what the grief actually is:\n\n**Information.**\n\nNot a stop sign. Not a verdict. Not proof that you're not ready.\n\nJust information.\n\nIt says: *\"Something you loved is missing. Something changed. There's weight here.\"*\n\nThat's it.\n\nIt doesn't say: *\"You can't function.\"*\n\nIt doesn't say: *\"Stay home.\"*\n\nIt doesn't say: *\"Wait until I'm gone.\"*\n\nThose are interpretations you've added.\n\nThe grief itself is just weight. Just information. Just the body's way of holding what the mind hasn't figured out yet.\n\n---\n\nYou can carry information while you move.\n\nYou can hold weight while you act.\n\nThe grief is not a gate. It's just what you're carrying.\n\n---",
+          "source": "registry",
+          "source_id": "ch04_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 107,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "If something or someone consistently depletes energy, it may be wise to limit or eliminate that influence.Seeking Enlightenment: The Highest Form of Personal PowerIn Buddhism and various spiritual practices, the pursuit of personal power often leads to enlightenment. Enlightenment represents the highest form of personal power, characterized by spiritual awakening and heightened consciousness. While the path to enlightenment typically involves meditation and mindfulness, it can also be found in other domains, such as martial arts or career development.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_019_mined",
+          "target_words": 104,
+          "actual_words": 78,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your manager is hiring for the role again but under a different title. The job posting doesn't mention the person who left. Your WFH desk is where you see the open requisition. {street_name} shows people applying for a position that was someone. You don't forward it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v21",
+          "target_words": 101,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Awareness without judgment is the beginning of every transformation. You cannot change what you refuse to see.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_010",
+          "target_words": 93,
+          "actual_words": 17,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's why trying to fix the grief makes it worse:\n\nWhen you treat grief like a problem to solve, you add a second layer.\n\nLayer 1: The grief itself. Heavy, but carryable.\n\nLayer 2: The judgment about the grief. *\"I shouldn't still feel this way. Something is wrong. I need to fix this.\"*\n\nThe first layer is natural.\n\nThe second layer is what makes it unbearable.\n\n---\n\nThink about what happens when you try to \"process\" the grief:\n\nYou check: *\"Am I better yet?\"*\n\nYou notice you're not better.\n\nYou feel worse about not being better.\n\nThe grief stays. Plus now there's frustration. Plus now there's self-doubt.\n\nThe fixing adds weight. It doesn't remove it.\n\n---",
+          "source": "registry",
+          "source_id": "ch04_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 116,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Helvetica-Bold;Helvetica; ;;;; ;;;; Karma Yoga: The Path of Purity and Humility Karma Yoga: The Path of Selfless Action Karma Yoga, a spiritual path rooted in selfless action, emphasizes performing duties with dedication but without attachment to the outcomes. This form of yoga teaches that true fulfillment lies in serving others and finding unity with the world around us. Integrating the virtues of purity and humility, Karma Yoga guides us towards a life of transparent intentions and a humble approach to our actions.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_054_mined",
+          "target_words": 104,
+          "actual_words": 82,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk project roadmap shows their initiative crossed out. It'll be continued by someone else or abandoned. {transit_line} below brings the working world that moved on. {street_name} someone works somewhere else now. Your cursor stops on their name in the document. You don't delete it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v19",
+          "target_words": 93,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice one moment of not knowing. When you are about to react with\ncertainty, pause. What if you don't actually know what the other person meant? What\nif you don't know what comes next? Sit in this uncertainty for a few seconds. This\nopening is where wisdom lives.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_005",
+          "target_words": 64,
+          "actual_words": 50,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "You do not need to resolve this today. The willingness to look is enough. Let the looking do its work at its own pace.",
+          "source": "depth_module:witnessing_presence:teacher_atom",
+          "source_id": "depth_witnessing_presence_4",
+          "target_words": 300,
+          "actual_words": 24,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "Here's what nobody told you about the grief:\n\n\n**It's not the problem.**\n\n\nYour entire life since the loss, you've been trying to solve the grief.\n\n\nLike it's a puzzle.\n\nLike it's a glitch.\n\nLike it's something broken in you that needs to be fixed.\n\n\nAnd everything you've heard has basically said the same thing:\n\n\n*\"Here's how to process it.\"*\n\n*\"Here's how to work through it.\"*\n\n*\"Here's how to finally feel better.\"*\n\n\nAnd so you tried.\n\n\nBut here's what I need you to understand:\n\n\n**You weren't doing it wrong.**\n\n\n**You were trying to solve the wrong problem.**\n\n\n---",
+          "source": "depth_module:witnessing_presence:registry_variant",
+          "source_id": "depth_witnessing_presence_4",
+          "target_words": 500,
+          "actual_words": 97,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "When you work in the ordinary sense, you extract: hours for wage, effort for\noutcome. The spine is always checking—am I ahead, behind, making ground?\n\nBut there is another way. Call it karma yoga, or calling your work itself your\nmeditation. The mechanism is simple: you shift the center of gravity from personal\ngain to the work itself. You give the effort forward. Not expecting return.\n\nThis one change touches everything. A carpenter becomes carpenter, not for the\npaycheck, but because the hammer moving true is its own light. A manager stays\npresent with their team's difficulty instead of thinking, how fast can I rise?\n\nThe teaching is not mystical—it is almost mechanical. When you stop hoarding your\nattention, something shifts. The work feeds you differently. Not always easier.\nBut the quality of exhaustion becomes the quality of having given.",
+          "source": "depth_module:story_scene:teacher_atom",
+          "source_id": "depth_story_scene_4",
+          "target_words": 500,
+          "actual_words": 140,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "## SCENE v01 --- --- The Slack channel for the laid-off colleague is dark. Their name is still in the header but nothing below. Your WFH desk monitor shows the message thread unchanged. {weather_detail} afternoon moves on without them. You scroll without reading. --- ## SCENE v02 --- --- The all-hands meeting has a different shape this time. The chair where they usually sat is now filled. {street_name} outside moves normally and nobody else is stopping. Your Zoom tile is one less than it was. You mute yourself. --- ## SCENE v03 --- --- Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take. --- ## SCENE v04 --- --- The company Slack has a goodbye message no one asked for. The laying off happened on a {weather_detail} morning. Your coffee shop table is where you're reading about it. {street_name} below has fewer people walking to the office. You didn't know it would feel this way. --- ## SCENE v05 --- --- Your direct report is asking about the reorganization. They want to know if they're safe from the next cut. Your WFH desk doesn't have answers that are true. {weather_detail} light shows your face in the video call. You don't know what to say because you don't know either. --- ## SCENE v06 --- --- The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it. --- ## SCENE v07 --- --- Your Slack DMs to them are unread and permanent now. Their account might be deleted next month. Your WFH desk holds all these messages you sent. {transit_line} brings commuters but not this person. You don't delete the conversation. --- ## SCENE v08 --- --- The coworking space is less friendly without them. The lunch group chat has eight people instead of nine. {weather_detail} lunch outside is where you go alone now. {street_name} is too quiet with one less voice. Your coffee shop substitute is not the same. --- ## SCENE v09 --- --- The all-hands celebration happened without acknowledging the absence. People talked about growth and positive momentum. Your WFH desk felt dishonest watching it. {weather_detail} afternoon cast weird light on the contradiction. You didn't ask any questions. --- ## SCENE v10 --- --- Your manager said their position was eliminated. The word \"eliminated\" sits strange in your mouth when you repeat it. Your office desk still has their holiday card from last year. {street_name} outside has no one to walk home with. You leave it sitting there. --- ## SCENE v11 --- --- The Slack channel where they posted memes is archived. The archive is viewable but nobody",
+          "source": "depth_module:story_scene:persona_atom",
+          "source_id": "depth_story_scene_4",
+          "target_words": 500,
+          "actual_words": 500,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "content": "What if everything you've been told about grief is backwards?\n\n\nYou've been taught: *\"Process it first. Then live.\"*\n\n\nYou've been told: *\"The grief is the problem. Get through it.\"*\n\n\nBut here's the question nobody asks:\n\n\n**What if trying to get through it is what's keeping you stuck?**\n\n\nWhat if the grief itself was never actually stopping you?\n\n\nWhat if the only thing stopping you was the belief that you had to be past it first?\n\n\n---",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_4",
+          "target_words": 500,
+          "actual_words": 76,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 5,
+      "role": "somatic_legitimacy",
+      "working_title": "Grief in the Body",
+      "thesis": "The body does not experience grief as an emotion. It experiences it as a physical event — waves, thresholds, exhaustion, the strange animal fact of missing someone. The body's response to loss is not dysfunction. It is a genuine, physiological response to the removal of something real.\n",
+      "total_words": 1339,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Your mind has the capacity to recognize truth. This capacity does not depend on\nbelief or faith. It depends on observation. When you look carefully at your own\nexperience, you see what is actually there, not what you thought would be there.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_001",
+          "target_words": 100,
+          "actual_words": 42,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The all-hands meeting shows the new organizational chart. Your WFH desk displays it on your screen. The empty box where they were is now filled. {weather_detail} afternoon makes the change official and permanent. You close the document.",
+          "source": "persona_atom",
+          "source_id": "SCENE v26",
+          "target_words": 104,
+          "actual_words": 37,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what you're actually losing while you wait:\n\n**Time.** Days and weeks and months that don't come back.\n\n**Connection.** Relationships that fade when you're not present for them.\n\n**Momentum.** The ease of doing things that comes from doing them regularly.\n\n**Identity.** The sense of who you are that comes from participating in life.\n\n---\n\nThe grief takes something from you. That's true.\n\nBut the waiting takes even more.\n\nThe grief is unavoidable.\n\nThe waiting is a choice.\n\n---",
+          "source": "registry",
+          "source_id": "ch05_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 78,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "It reminds us that, no matter where we are in the cycle of reincarnation or states of mind, there is always an opportunity to elevate our consciousness and move closer to the truth.The stories shared in the text illustrate the transformative power of compassion, forgiveness, and the practice of the Dharma.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_041_mined",
+          "target_words": 104,
+          "actual_words": 51,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take.",
+          "source": "persona_atom",
+          "source_id": "SCENE v03",
+          "target_words": 101,
+          "actual_words": 47,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Awareness without judgment is the beginning of every transformation. You cannot change what you refuse to see.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_010",
+          "target_words": 93,
+          "actual_words": 17,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "There's a version of you that people don't get to see.\n\nNot the \"healed\" version — the you who's carrying the grief and still showing up.\n\nThat version exists. You've been that person before.\n\nBut every time you wait, you hide that version away.\n\nYou decide: *\"They can't see me like this.\"*\n\nBut \"like this\" is who you are right now.\n\nAnd if you keep hiding, no one gets to know who you've become.\n\n---\n\nThe world doesn't need the \"past it\" version of you.\n\nThe world can hold the grieving version too.\n\nBut only if you let yourself be seen.\n\n---",
+          "source": "registry",
+          "source_id": "ch05_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 102,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Conclusion Karma yoga offers a path to spiritual growth through the beauty of selfless action. In a world often driven by personal gain, this ancient wisdom provides a refreshing perspective on true happiness and fulfillment. By embracing the principles of karma yoga, one can find profound joy and purpose in the simple act of giving.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_063_mined",
+          "target_words": 104,
+          "actual_words": 55,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk now has windows open in a different arrangement. {weather_detail} light falls on things that moved. {transit_line} brings evening to a day that had one less meeting. Your calendar has one less person. You add their name to nothing.",
+          "source": "persona_atom",
+          "source_id": "SCENE v29",
+          "target_words": 93,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice one moment of complete acceptance. Something you usually resist.\nA feeling. A thought. A circumstance. Instead of pushing it away, say yes to it for\none minute. Notice what happens. Often the thing you resist becomes bearable the\nmoment you stop resisting. Test this once.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_009",
+          "target_words": 64,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "content": "What would your life look like if you believed your thoughts were just thoughts?\nIf you acted on some and ignored others, with no struggle? What decisions would\nchange? Who would you become if you stopped defending against your own mind?",
+          "source": "depth_module:mechanism_depth:teacher_atom",
+          "source_id": "depth_mechanism_depth_5",
+          "target_words": 399,
+          "actual_words": 41,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "content": "## STORY v01 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 1 --- She sat in the hustle culture for the third time that week, and for the third time the loss didn't ask permission arrived before she did. Not as a thought — as a sensation. A tightening behind the sternum that had nothing to do with the LinkedIn in front of her and everything to do with a version of safety she'd stopped believing in years ago. --- ## STORY v02 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 2 --- He told himself the mourning has no schedule was just how it worked. Everybody at the remote work carried it. But that Tuesday, when the side hustle landed and his hands went cold before he'd read the first line, he understood: the mourning has no schedule wasn't shared. It was his. It had always been his. --- ## STORY v03 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 2 --- The morning started the way mornings start when grief is running the show — with the gig economy already feeling like a debt instead of a plan. She moved through the hustle culture on muscle memory, and nobody noticed the difference, which was the part that hurt most. --- ## STORY v04 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 2 --- There was a moment — right after the doom-scroll and right before the next Slack — where everything went quiet. Not peaceful quiet. The kind of quiet where the absence that weighs gets louder because there's nothing left to drown it out. He stood in that quiet and didn't move. --- ## STORY v05 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 3 --- The student loans had gone well. Everyone said so. She smiled at the right times, answered the right questions, and walked to her car with the the space still running underneath the performance like a second pulse nobody could hear. --- ## STORY v06 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 2 --- He used to think the loss didn't ask permission would leave when the remote work improved. Then the remote work improved and the loss didn't ask permission stayed, and that was the day the story changed — not because something happened, but because the thing he'd been waiting for happened and it wasn't enough. --- ## STORY v07 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- She opened the side hustle and felt the mourning has no schedule before the words registered. Her body had read the notification faster than her eyes, and by the time her mind caught up, her jaw was already clenched. The hustle culture hadn't started yet. The day was already over. --- ## STORY v08 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- It wasn't the LinkedIn that broke something. It was the moment after — standing in the Slack, pretending the absence that weighs wasn't there, making small talk about the notification while his chest did something his face refused to acknowledge. --- ## STORY v09 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- The algorithm was supposed to be the safe part of the day. But she'd noticed the the space followed her there too, settling into the quiet like it had a reservation. There was no room in her life where the grief hadn't already unpacked. --- ## STORY v10 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- He didn't call it grief. He called it being thorough, being prepared, being",
+          "source": "depth_module:mechanism_depth:persona_atom",
+          "source_id": "depth_mechanism_depth_5",
+          "target_words": 600,
+          "actual_words": 600,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "content": "Sit and watch your breath. Notice when the mind pulls your attention away. Don't\npush the thoughts out. Don't make yourself wrong for having them. Can you observe\nthe moment when attention leaves the breath? What is that moment made of? Is it a\nbattle, or just a noticing?",
+          "source": "depth_module:consequence_exposure:teacher_atom",
+          "source_id": "depth_consequence_exposure_5",
+          "target_words": 400,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "consequence_exposure"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "Where in your life do you run from what is difficult? Can you name one place where\nyou use busy-ness, distraction, or sleep to not feel something? Not to change it,\nbut to see it. What would happen if you stopped running for just five breaths?",
+          "source": "depth_module:witnessing_presence:teacher_atom",
+          "source_id": "depth_witnessing_presence_5",
+          "target_words": 500,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_WITNESSING_PRESENCE",
+          "content": "Here's what you might be thinking:\n\n\n*\"Okay, but... what if I just wait a little longer?\"*\n\n\n*\"What if I'm almost past the worst of it?\"*\n\n\n*\"What if I just need a little more time?\"*\n\n\nAnd I get it.\n\n\nThe idea of acting while the grief is still there feels... risky.\n\n\nBut here's what I need you to see:\n\n\n**Waiting isn't neutral.**\n\n\nIt's not like you're just... pausing until you're ready.\n\n\n**Waiting has a cost.**\n\n\nAnd the longer you wait, the higher that cost gets.\n\n\n---",
+          "source": "depth_module:witnessing_presence:registry_variant",
+          "source_id": "depth_witnessing_presence_5",
+          "target_words": 500,
+          "actual_words": 85,
+          "enrichment_applied": [
+            "witnessing_presence"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 6,
+      "role": "mechanism",
+      "working_title": "The Absence Is a Presence",
+      "thesis": "The waves of grief are not random. They follow the pattern of what was lost — the moments when the lost person or thing would have been present. The absence is not empty. It has a shape. It shows up where the presence used to be.\n",
+      "total_words": 1164,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The Buddha taught that desire itself is not the problem. Wanting to eat when hungry\nis natural. The problem is the story we build around wanting. You can learn to want\nwithout the story.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_007",
+          "target_words": 100,
+          "actual_words": 34,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The Slack channel still exists but it's a monument. Your open office desk is surrounded by people who are still here. {street_name} shows normal commute patterns below. {weather_detail} day is the same as before except it's not. You scroll past the channel and don't think about clicking on it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 104,
+          "actual_words": 49,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's why you can't win the war against grief:\n\n**Grief isn't an invader. It's a response.**\n\nIt's your body's way of holding the weight of loss.\n\nIt's love with nowhere to go.\n\nYou can't fight love. You can't defeat it. You can't make it leave by force.\n\nYou can only learn to carry it differently.\n\n---\n\nThe war against grief is a war against part of yourself.\n\nAnd you can't win a war against yourself.\n\nYou can only end it.\n\n---",
+          "source": "registry",
+          "source_id": "ch06_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 81,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "This process involves understanding the Dharmakaya light, a manifestation of ultimate truth and enlightenment experienced at death, and the bardo, the intermediate state between death and rebirth.The teachings of Padmasambhava, a revered figure in Tibetan Buddhism, highlight the importance of the yoga of death and rebirth. This yoga is a tool for transformative spiritual growth, offering opportunities for radical shifts in consciousness at crucial points in the cycle of life and death.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_008_mined",
+          "target_words": 104,
+          "actual_words": 72,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your coworker mentioned getting drinks to celebrate the smaller team. Your open office desk suddenly feels too exposed. {street_name} bar is where they'd want you to go. {transit_line} brings people toward normal and you're not ready. You decline and stay home.",
+          "source": "persona_atom",
+          "source_id": "SCENE v25",
+          "target_words": 101,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Safety is not the absence of danger. It is the presence of connection. You were never meant to survive this alone.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_002",
+          "target_words": 93,
+          "actual_words": 21,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what happens when you stop fighting:\n\n**The grief doesn't get bigger.**\n\nThat's the fear, right? That if you stop fighting, the grief will take over.\n\nBut the opposite happens.\n\nWhen you stop fighting, the grief becomes just grief. Heavy, but carryable.\n\nThe extra weight was always the fighting. The resistance. The judgment.\n\n---\n\nGrief + fighting = unbearable.\n\nGrief alone = heavy, but manageable.\n\nThe war was always the problem.\n\n---",
+          "source": "registry",
+          "source_id": "ch06_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 72,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Conclusion Karma yoga offers a path to spiritual growth through the beauty of selfless action. In a world often driven by personal gain, this ancient wisdom provides a refreshing perspective on true happiness and fulfillment. By embracing the principles of karma yoga, one can find profound joy and purpose in the simple act of giving.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_063_mined",
+          "target_words": 104,
+          "actual_words": 55,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your coworker who sat across from you got cut in the last round. The open office desk is being cleared right now. {transit_line} brings rush hour but not them. Your hands rest on your own desk and don't move toward theirs. It's not your desk to take.",
+          "source": "persona_atom",
+          "source_id": "SCENE v03",
+          "target_words": 93,
+          "actual_words": 47,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice one moment of not knowing. When you are about to react with\ncertainty, pause. What if you don't actually know what the other person meant? What\nif you don't know what comes next? Sit in this uncertainty for a few seconds. This\nopening is where wisdom lives.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_005",
+          "target_words": 64,
+          "actual_words": 50,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "content": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing itself the problem, or the story you built around\nhaving it? Can you hold it lightly and still have it? What happens then?",
+          "source": "depth_module:mechanism_depth:teacher_atom",
+          "source_id": "depth_mechanism_depth_6",
+          "target_words": 395,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "content": "## STORY v01 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 1 --- She sat in the hustle culture for the third time that week, and for the third time the loss didn't ask permission arrived before she did. Not as a thought — as a sensation. A tightening behind the sternum that had nothing to do with the LinkedIn in front of her and everything to do with a version of safety she'd stopped believing in years ago. --- ## STORY v02 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 2 --- He told himself the mourning has no schedule was just how it worked. Everybody at the remote work carried it. But that Tuesday, when the side hustle landed and his hands went cold before he'd read the first line, he understood: the mourning has no schedule wasn't shared. It was his. It had always been his. --- ## STORY v03 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 2 --- The morning started the way mornings start when grief is running the show — with the gig economy already feeling like a debt instead of a plan. She moved through the hustle culture on muscle memory, and nobody noticed the difference, which was the part that hurt most. --- ## STORY v04 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 2 --- There was a moment — right after the doom-scroll and right before the next Slack — where everything went quiet. Not peaceful quiet. The kind of quiet where the absence that weighs gets louder because there's nothing left to drown it out. He stood in that quiet and didn't move. --- ## STORY v05 --- MECHANISM_DEPTH: 1 IDENTITY_STAGE: pre_awareness COST_TYPE: social COST_INTENSITY: 3 --- The student loans had gone well. Everyone said so. She smiled at the right times, answered the right questions, and walked to her car with the the space still running underneath the performance like a second pulse nobody could hear. --- ## STORY v06 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 2 --- He used to think the loss didn't ask permission would leave when the remote work improved. Then the remote work improved and the loss didn't ask permission stayed, and that was the day the story changed — not because something happened, but because the thing he'd been waiting for happened and it wasn't enough. --- ## STORY v07 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- She opened the side hustle and felt the mourning has no schedule before the words registered. Her body had read the notification faster than her eyes, and by the time her mind caught up, her jaw was already clenched. The hustle culture hadn't started yet. The day was already over. --- ## STORY v08 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- It wasn't the LinkedIn that broke something. It was the moment after — standing in the Slack, pretending the absence that weighs wasn't there, making small talk about the notification while his chest did something his face refused to acknowledge. --- ## STORY v09 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- The algorithm was supposed to be the safe part of the day. But she'd noticed the the space followed her there too, settling into the quiet like it had a reservation. There was no room in her life where the grief hadn't already unpacked. --- ## STORY v10 --- MECHANISM_DEPTH: 2 IDENTITY_STAGE: destabilization COST_TYPE: internal COST_INTENSITY: 3 --- He didn't call it grief. He called it",
+          "source": "depth_module:mechanism_depth:persona_atom",
+          "source_id": "depth_mechanism_depth_6",
+          "target_words": 595,
+          "actual_words": 595,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 7,
+      "role": "relational_consequence",
+      "working_title": "The Unspeakable",
+      "thesis": "Grief changes relationships. Not because the people around you have failed, and not because you have failed — but because there is something about this loss that cannot be transferred in words, and that untranslatability creates a specific kind of loneliness.\n",
+      "total_words": 470,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 1,
+        "gap": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The Buddha taught that desire itself is not the problem. Wanting to eat when hungry\nis natural. The problem is the story we build around wanting. You can learn to want\nwithout the story.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_007",
+          "target_words": 100,
+          "actual_words": 34,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk project roadmap shows their initiative crossed out. It'll be continued by someone else or abandoned. {transit_line} below brings the working world that moved on. {street_name} someone works somewhere else now. Your cursor stops on their name in the document. You don't delete it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v19",
+          "target_words": 104,
+          "actual_words": 46,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what small moves build:\n\n**Evidence.**\n\nEvery time you act while carrying the grief, you prove something to yourself.\n\n*\"I can do this. The grief doesn't stop me.\"*\n\nThat evidence accumulates.\n\nOne small move becomes two. Two becomes five. Five becomes a pattern.\n\nAnd the pattern changes the story.\n\n---\n\nThe old story: *\"I can't do things while grieving.\"*\n\nThe new story: *\"I've done many things while grieving.\"*\n\nSmall moves write the new story.\n\n---",
+          "source": "registry",
+          "source_id": "ch07_sec06_reflection_f1",
+          "target_words": 77,
+          "actual_words": 75,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "In this state, the anxieties of tomorrow, the burdens of yesterday, and the constraints of self-doubt fade away.States of Mind and PerceptionStates of mind determine our perception of reality. Just as a window can offer a view of the ocean or a dark alley, our state of mind shapes how we perceive the world. Meditation, therefore, is the practice of shifting to higher and brighter states of mind.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_049_mined",
+          "target_words": 104,
+          "actual_words": 68,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your video call shows the same people as the month before. One face is missing and nobody directly acknowledges it. Your coworking space feels like a memorial now. {street_name} outside continues its normal rhythm. You're the only one who seems to notice the absence.",
+          "source": "persona_atom",
+          "source_id": "SCENE v17",
+          "target_words": 101,
+          "actual_words": 44,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Your nervous system learned to protect you before you had words. Thank it. Then show it that the war ended years ago.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_003",
+          "target_words": 93,
+          "actual_words": 22,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "[CONTENT GAP: REFLECTION for grief ch7]",
+          "source": "gap",
+          "source_id": "gap",
+          "target_words": 77,
+          "actual_words": 6,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Whether you explore Buddhism, Christianity, Taoism, or other paths, the essence of light remains central. It beckons us to move beyond mere concepts and intellectual understanding and to embrace direct, experiential encounters with spiritual light.As you embark on your spiritual journey, consider the power of meditation, the transformative guidance of an enlightened teacher, and the structured pathways that lead to profound experiences of light. Remember that spiritual light transcends the dualities of the world, offering a glimpse into the boundless truth of existence.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_017_mined",
+          "target_words": 104,
+          "actual_words": 83,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk work hasn't changed but there's more of it. The person who left was doing what now falls to you. {weather_detail} evening comes and the task list doesn't shrink. Your manager hasn't mentioned extra pay. You don't ask.",
+          "source": "persona_atom",
+          "source_id": "SCENE v14",
+          "target_words": 93,
+          "actual_words": 40,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice returning. When you lose presence, return to the breath. When\nyou lose clarity, return to silence. When you lose ground, return to the body. The\npath is not about achieving something new. It is about returning to what is already\nhere. Do this daily. This is the whole practice.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_011",
+          "target_words": 64,
+          "actual_words": 52,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 8,
+      "role": "destabilization",
+      "working_title": "The Grief Doesn't End. The Waiting Is The Problem.",
+      "thesis": "The sentence \"once I'm past this, then I'll be okay\" is organized around an ending that does not exist. Grief does not end. It integrates. The project of waiting for it to be over is not a temporary strategy — it is a permanent deferral. And that deferral is costing you the one life you have.\n",
+      "total_words": 476,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 1,
+        "gap": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Most people believe enlightenment requires leaving the world behind. The Buddha\ntaught something different: the path moves through ordinary life, not away from it.\nNotice where you are right now. This moment contains everything you need to begin.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_000",
+          "target_words": 100,
+          "actual_words": 38,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The coworking space is less friendly without them. The lunch group chat has eight people instead of nine. {weather_detail} lunch outside is where you go alone now. {street_name} is too quiet with one less voice. Your coffee shop substitute is not the same.",
+          "source": "persona_atom",
+          "source_id": "SCENE v08",
+          "target_words": 104,
+          "actual_words": 43,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's the truth:\n\n**The volume of the grief doesn't dictate what you can do.**\n\nQuiet grief days — you can act.\n\nLoud grief days — you can also act.\n\nThe volume changes. Your capability doesn't.\n\n---\n\nYou've been letting the volume make decisions for you.\n\n*\"It's too loud today. I can't.\"*\n\nBut the volume is just volume. It's not a command.\n\nYou're still in charge of your choices.\n\nEven on the loudest days.\n\n---",
+          "source": "registry",
+          "source_id": "ch08_sec06_reflection_f1",
+          "target_words": 77,
+          "actual_words": 74,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Helvetica-Bold;Helvetica; ;;;; ;;;; Karma Yoga: The Joy of Selfless Action Introduction Karma Yoga, a fundamental aspect of the yogic philosophy, is often overshadowed by the more physically oriented practices. However, its significance lies in its transformative potential, guiding individuals towards a life of unattached action and pure giving. Understanding Karma Yoga Karma Yoga is rooted in the Bhagavad Gita's teachings, emphasizing action without attachment to outcomes. This path teaches that true happiness and fulfillment come from selfless service.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_058_mined",
+          "target_words": 104,
+          "actual_words": 78,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v06",
+          "target_words": 101,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "You do not need to earn rest. Rest is not a reward. It is a requirement. The guilt you feel about stopping is the very thing that needs to stop.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_006",
+          "target_words": 93,
+          "actual_words": 30,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "[CONTENT GAP: REFLECTION for grief ch8]",
+          "source": "gap",
+          "source_id": "gap",
+          "target_words": 77,
+          "actual_words": 6,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "In this state, the anxieties of tomorrow, the burdens of yesterday, and the constraints of self-doubt fade away.States of Mind and PerceptionStates of mind determine our perception of reality. Just as a window can offer a view of the ocean or a dark alley, our state of mind shapes how we perceive the world. Meditation, therefore, is the practice of shifting to higher and brighter states of mind.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_049_mined",
+          "target_words": 104,
+          "actual_words": 68,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The company sent flowers to someone who quit dramatically. Your coworking space is full of speculation about why. The person who was laid off got an email. Your desk is where you sit with this knowledge. You don't compare them.",
+          "source": "persona_atom",
+          "source_id": "SCENE v28",
+          "target_words": 93,
+          "actual_words": 40,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, when you notice a strong emotion, ask: where is this in my body? Feel\ninto it without trying to change it. The emotion will likely shift. Not because you\nfought it, but because you felt it. Do this once. Document what happens. This is how\nyou learn that emotions are not solid. They are movement.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_008",
+          "target_words": 64,
+          "actual_words": 57,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 9,
+      "role": "practical_interruption",
+      "working_title": "Tending the Loss",
+      "thesis": "There is something you can do that is not about getting past the grief and is not about sitting inside it unchanged. It is about tending what remains — the connection, the absence, the self that is still here. It is small, and it is real, and it is available.\n",
+      "total_words": 515,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Purity is not about perfection. It means removing what blocks clarity. When you\nstop running from the difficult parts of yourself, something shifts. This is how\nspiritual practice actually works.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_004",
+          "target_words": 100,
+          "actual_words": 30,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your manager said their position was eliminated. The word \"eliminated\" sits strange in your mouth when you repeat it. Your office desk still has their holiday card from last year. {street_name} outside has no one to walk home with. You leave it sitting there.",
+          "source": "persona_atom",
+          "source_id": "SCENE v10",
+          "target_words": 104,
+          "actual_words": 44,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice what's different in your relationships:\n\n**You're showing up differently.**\n\nNot hiding the grief. Not performing wholeness.\n\nJust being present. With whatever you're carrying.\n\n---\n\nPeople can feel the shift.\n\nYou're not gone anymore. Not waiting on the sidelines.\n\nYou're here. Grieving and here.\n\nThat's different. That's better.\n\nNot for the grief — the grief is the same.\n\nFor the connection. The presence. The being-in-your-life-ness.\n\n---",
+          "source": "registry",
+          "source_id": "ch09_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 66,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Helvetica; ;; ;; Selfless giving, also known as Karma Yoga, is a profound spiritual practice that transcends the boundaries of selfishness and leads to a greater sense of love and fulfillment in life. Rooted in the philosophy of selflessness and compassion, Karma Yoga emphasizes performing actions without attachment to personal gain or recognition.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_032_mined",
+          "target_words": 104,
+          "actual_words": 53,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The Slack channel still exists but it's a monument. Your open office desk is surrounded by people who are still here. {street_name} shows normal commute patterns below. {weather_detail} day is the same as before except it's not. You scroll past the channel and don't think about clicking on it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 101,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Safety is not the absence of danger. It is the presence of connection. You were never meant to survive this alone.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_002",
+          "target_words": 93,
+          "actual_words": 21,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice what's different in social situations:\n\n**You're going.**\n\nNot to every thing. Not forcing yourself.\n\nBut to some things. The ones that matter.\n\n---\n\nAnd when you're there, you're actually there.\n\nNot performing okay. Not counting the minutes until you can leave.\n\nJust... present. With the grief as your quiet companion.\n\n---\n\nPeople don't need you to be grief-free.\n\nThey just need you to show up.\n\nAnd you're doing that now.\n\n---",
+          "source": "registry",
+          "source_id": "ch09_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 72,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Through regular meditation practice, we can cultivate a heightened sense of empathy and an unwavering commitment to selfless giving.Empowering GivingSelfless giving is not merely about giving for the sake of it; it is about giving in a way that genuinely benefits others and uplifts their lives. Choosing our actions wisely and ensuring they contribute positively to others' well-being adds depth and meaning to our giving.Empowering giving is about making a conscious effort to address the real needs of others. It involves actively listening and empathizing with their struggles and challenges.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_035_mined",
+          "target_words": 104,
+          "actual_words": 90,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v06",
+          "target_words": 93,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Sit quietly for five minutes. Do nothing. Fix nothing. Change nothing. When your\nmind pulls away, bring attention back. This is the entire practice. Five minutes.\nOne time this week. That is your integration. The rest of the week, continue as\nyou normally do. Notice if anything shifts.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_002",
+          "target_words": 64,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 10,
+      "role": "identity_fracture",
+      "working_title": "Who Are You Now",
+      "thesis": "Significant loss changes the self. Not as metaphor — as fact. The person who existed inside the relationship, or the life, or the future that was lost is not fully intact. That is not failure. That is what loss does. The question is not how to get back to who you were. It is who you are now.\n",
+      "total_words": 528,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The mind makes stories about itself all day long. These stories feel true because\nthey are familiar. You can learn to notice when a story is happening. This noticing\nis the beginning of change.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_003",
+          "target_words": 100,
+          "actual_words": 34,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The video call window still shows their name in your recent calls. You could delete it but you don't. Your WFH desk keeps the conversation available like a choice. {weather_detail} twilight brings this moment of deciding to keep it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v24",
+          "target_words": 104,
+          "actual_words": 39,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's the story you tell yourself after a slip:\n\n*\"I'm back at the beginning.\"*\n\n*\"All that progress was fake.\"*\n\n*\"I'll never really be okay.\"*\n\nThat story feels true in the moment. The disappointment is real.\n\nBut the story isn't accurate.\n\n---\n\nOne slip doesn't erase a hundred small moves.\n\nOne hard day doesn't undo weeks of showing up.\n\nOne moment of waiting doesn't mean you're back to who you were before.\n\nThe story is wrong.\n\n---",
+          "source": "registry",
+          "source_id": "ch10_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 76,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Furthermore, the esoteric interpretation of the Wheel reminds us that we can experience the Six Worlds within our own consciousness and, through meditation and spiritual discipline, move beyond them to attain enlightenment.In essence, the Wheel of Dharma is a symbol of hope and liberation, guiding us toward a state of existence free from suffering and limitations, where we can experience the eternal truth and unity of all things. It is an invitation to embark on a spiritual journey that leads to the ultimate destination enlightenment.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_042_mined",
+          "target_words": 104,
+          "actual_words": 85,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk now has windows open in a different arrangement. {weather_detail} light falls on things that moved. {transit_line} brings evening to a day that had one less meeting. Your calendar has one less person. You add their name to nothing.",
+          "source": "persona_atom",
+          "source_id": "SCENE v29",
+          "target_words": 101,
+          "actual_words": 41,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Your nervous system learned to protect you before you had words. Thank it. Then show it that the war ended years ago.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_003",
+          "target_words": 93,
+          "actual_words": 22,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what a slip actually means:\n\n**You're human.**\n\nHumans carrying grief have hard days.\n\nHumans learning new patterns sometimes fall back to old ones.\n\nHumans making progress still stumble.\n\nThat's not failure. That's being human.\n\n---\n\nThe slip means:\n\nThe grief was loud. The old pattern was familiar. The new way was hard.\n\nSo you did the easy thing.\n\nThat's information. Not a verdict.\n\n---",
+          "source": "registry",
+          "source_id": "ch10_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 65,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Teachers who have mastered meditation and reached enlightened states can transfer their energy and consciousness to their students, facilitating profound spiritual experiences. This transfer can occur both in the teacher's presence and through focusing on the teacher's eternal mind.The Art of Dreaming and Dream YogaDreaming, particularly in the context of dream yoga, is a powerful practice for spiritual development. It involves being aware during dreams, exerting will within the dream state, and using dreams as a platform for spiritual exploration.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_024_mined",
+          "target_words": 104,
+          "actual_words": 80,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The Slack channel where they posted memes is archived. The archive is viewable but nobody posts anymore. Your WFH desk monitor shows the frozen history. {weather_detail} memory is all that remains accessible. Your cursor hovers and doesn't click.",
+          "source": "persona_atom",
+          "source_id": "SCENE v11",
+          "target_words": 93,
+          "actual_words": 38,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Choose one daily activity. Eating, walking, washing. Do it with full attention one\ntime this week. Notice the details. The texture. The temperature. The sensation.\nLet thoughts pass without following them. This is meditation embedded in life. You\ndon't need a cushion. You only need to pay attention.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_003",
+          "target_words": 64,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 11,
+      "role": "self_relation_shift",
+      "working_title": "The Loss Is Part of You Now",
+      "thesis": "Integration is not resolution. You do not finish grieving and arrive somewhere without the loss. The loss becomes part of the self that continues. The person you are now includes what happened. That is not a consolation. It is the actual structure of what comes next.\n",
+      "total_words": 545,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The Buddha taught that desire itself is not the problem. Wanting to eat when hungry\nis natural. The problem is the story we build around wanting. You can learn to want\nwithout the story.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_007",
+          "target_words": 100,
+          "actual_words": 34,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The coworking space is less friendly without them. The lunch group chat has eight people instead of nine. {weather_detail} lunch outside is where you go alone now. {street_name} is too quiet with one less voice. Your coffee shop substitute is not the same.",
+          "source": "persona_atom",
+          "source_id": "SCENE v08",
+          "target_words": 104,
+          "actual_words": 43,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what shifted:\n\n**Your identity.**\n\nYou used to be someone who waited.\n\nNow you're someone who carries.\n\n---\n\nThis isn't a small change.\n\nIdentity shapes everything. How you see yourself. What you believe you can do. How you show up.\n\nWhen you identified as *\"someone who can't function while grieving\"* — you couldn't.\n\nNow you identify as *\"someone who carries grief and lives anyway\"* — and you do.\n\n---\n\nYou built this new identity. One small move at a time.\n\nIt's yours now.\n\n---",
+          "source": "registry",
+          "source_id": "ch11_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 84,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "The younger brother's approach demonstrates the importance of applying willpower wisely, highlighting that personal power requires both strength and discernment.The Development of Personal PowerIn the initial stages of personal growth, it is crucial to focus on building willpower. Without a strong foundation of willpower, it becomes challenging to operate effectively in the world. The journey towards greater awareness and enlightenment begins with honing one's willpower. This might entail pushing through obstacles, cultivating discipline, and developing resilience.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_018_mined",
+          "target_words": 104,
+          "actual_words": 76,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The meeting room has been rearranged since your colleague left. The team is smaller and the space is larger. {street_name} view is the same but everything inside is different. You sit in a chair that doesn't feel right. You don't adjust it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v06",
+          "target_words": 101,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "Your nervous system learned to protect you before you had words. Thank it. Then show it that the war ended years ago.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_003",
+          "target_words": 93,
+          "actual_words": 22,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what you're not anymore:\n\n**You're not someone who waits for permission.**\n\nThe grief doesn't get to decide when you live.\n\n**You're not someone who believes the grief has to pass first.**\n\nYou know now: you can carry it while you move.\n\n**You're not someone who hides until they're \"ready.\"**\n\nYou show up before you're ready. Because ready doesn't come.\n\n---\n\nThese aren't small changes.\n\nThey're a complete rewrite of who you are.\n\n---",
+          "source": "registry",
+          "source_id": "ch11_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 74,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Purity in thought, word, and deed, coupled with the humility to serve without expectation, transforms ordinary actions into a spiritual pathway. Mindfulness and Compassion: Pivotal Practices In practicing Karma Yoga, mindfulness and compassion are crucial. They help us stay present and empathetic, essential qualities for maintaining purity and humility. By being mindful, we ensure our actions align with our spiritual goals, and through compassion, we connect deeply with others, enriching our journey on the path of Karma Yoga.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_056_mined",
+          "target_words": 104,
+          "actual_words": 78,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your video call shows the same people as the month before. One face is missing and nobody directly acknowledges it. Your coworking space feels like a memorial now. {street_name} outside continues its normal rhythm. You're the only one who seems to notice the absence.",
+          "source": "persona_atom",
+          "source_id": "SCENE v17",
+          "target_words": 93,
+          "actual_words": 44,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Sit quietly for five minutes. Do nothing. Fix nothing. Change nothing. When your\nmind pulls away, bring attention back. This is the entire practice. Five minutes.\nOne time this week. That is your integration. The rest of the week, continue as\nyou normally do. Notice if anything shifts.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_002",
+          "target_words": 64,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    },
+    {
+      "number": 12,
+      "role": "integration",
+      "working_title": "Carrying the Grief, Living the Life",
+      "thesis": "This is not the chapter where the grief is behind you. This is the chapter where you understand that the grief is part of how you walk forward. The connection to what was lost continues — changed in form, not ended. This is not the same as being okay. It is being present.\n",
+      "total_words": 559,
+      "source_breakdown": {
+        "teacher_atom": 5,
+        "persona_atom": 3,
+        "registry": 2
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Purity is not about perfection. It means removing what blocks clarity. When you\nstop running from the difficult parts of yourself, something shifts. This is how\nspiritual practice actually works.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_004",
+          "target_words": 100,
+          "actual_words": 30,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The Slack channel still exists but it's a monument. Your open office desk is surrounded by people who are still here. {street_name} shows normal commute patterns below. {weather_detail} day is the same as before except it's not. You scroll past the channel and don't think about clicking on it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v30",
+          "target_words": 104,
+          "actual_words": 49,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Here's what you actually learned:\n\n**You can carry grief and live at the same time.**\n\nNot sequentially. Simultaneously.\n\nThe grief doesn't have to pass for you to have a life.\n\n**The waiting was the problem, not the grief.**\n\nThe grief is weight. Heavy, but carryable.\n\nThe waiting was what shrunk your life.\n\n**You're stronger than you thought.**\n\nNot because the grief got lighter. Because you carried it anyway.\n\n---\n\nThese lessons stay with you.\n\nFor this grief. For future griefs. For anything heavy you have to carry.\n\n---",
+          "source": "registry",
+          "source_id": "ch12_sec03_reflection_f1",
+          "target_words": 77,
+          "actual_words": 88,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Teachers who have mastered meditation and reached enlightened states can transfer their energy and consciousness to their students, facilitating profound spiritual experiences. This transfer can occur both in the teacher's presence and through focusing on the teacher's eternal mind.The Art of Dreaming and Dream YogaDreaming, particularly in the context of dream yoga, is a powerful practice for spiritual development. It involves being aware during dreams, exerting will within the dream state, and using dreams as a platform for spiritual exploration.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_024_mined",
+          "target_words": 104,
+          "actual_words": 80,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your WFH desk project roadmap shows their initiative crossed out. It'll be continued by someone else or abandoned. {transit_line} below brings the working world that moved on. {street_name} someone works somewhere else now. Your cursor stops on their name in the document. You don't delete it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v19",
+          "target_words": 101,
+          "actual_words": 46,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "content": "The wound is not your enemy. It is the doorway you keep walking past. Turn toward it once and the whole hallway disappears.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_COMPRESSION_001",
+          "target_words": 93,
+          "actual_words": 23,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Let's be clear about what this is and isn't:\n\n**This isn't \"getting over it.\"**\n\nYou're not over it. You might never be. The loss is real and the absence stays.\n\n**This isn't \"moving on.\"**\n\nYou're not leaving anything behind. You're carrying it forward.\n\n**This isn't closure.**\n\nThere's no neat ending. No resolution. Just continuation.\n\n---\n\n**This is learning to live with.**\n\nCarrying. Including. Moving forward with the weight.\n\n**This is integration.**\n\nThe grief becomes part of your life, not something that stops your life.\n\n**This is choosing to live while grieving.**\n\nNot waiting. Living.\n\n---",
+          "source": "registry",
+          "source_id": "ch12_sec04_reflection_f1",
+          "target_words": 77,
+          "actual_words": 95,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "It's a dualistic view of reality.However, through the direct experience of light, as taught by an enlightened teacher or through meditation, this perception can transform. The space between the stars turns into gold light. What was once a stark contrast between bright stars and dark space becomes an awareness of all-encompassing, radiant light.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_016_mined",
+          "target_words": 104,
+          "actual_words": 53,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The Slack channel for the laid-off colleague is dark. Their name is still in the header but nothing below. Your WFH desk monitor shows the message thread unchanged. {weather_detail} afternoon moves on without them. You scroll without reading.",
+          "source": "persona_atom",
+          "source_id": "SCENE v01",
+          "target_words": 93,
+          "actual_words": 38,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Identify one belief you have about yourself that causes suffering. This week, assume\nit might not be entirely true. When the belief arises, notice it. Do not fight it.\nSimply hold it lightly and ask: is this actually true right now? Often the answer is\nno. Sometimes it is. Either way, you see the belief, not yourself.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_004",
+          "target_words": 64,
+          "actual_words": 57,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null
+        }
+      ],
+      "exercise_journey": null
+    }
+  ]
+}

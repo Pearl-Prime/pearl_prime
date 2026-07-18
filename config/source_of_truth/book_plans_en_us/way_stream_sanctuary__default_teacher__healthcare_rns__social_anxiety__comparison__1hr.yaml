@@ -1,0 +1,113 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__social_anxiety__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__social_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__brave_world__1hr
+  name: Brave in the World — for Nurses (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Social Anxiety: Beyond the Highlight Reel (6)'
+subtitle: A Field Guide for Healthcare Rns Navigating Social Anxiety
+cover_tagline: Her competence isn't a verdict on yours. It just feels like one.
+description:
+  short_blurb: The nurse beside you charts faster, gets praised in huddle, makes it
+    look effortless — and every win of hers lands as a quiet confirmation that you're
+    falling behind. This one-hour reset is for nurses who measure themselves against
+    everyone on the unit. It won't tell you you're great; it'll loosen the ruler you
+    keep holding up.
+  long_description: 'She started the same year you did and somehow she''s precepting
+    now. The new grad already seems sharper than you. The travel nurse moves through
+    a six-patient load like it''s nothing while you''re still behind on your charting.
+    You watch it all and do the math you always do — and the math always comes out
+    the same: everyone else is keeping up, and you''re the one who''s slipping.
+
+
+    This hour is for the nurse who can''t walk onto the unit without ranking herself
+    against it. The one who hears a colleague get praised in huddle and feels it as
+    a deduction from her own worth, who scrolls past another nurse''s certification
+    or new job and reads it as proof she''s behind. In a profession that runs on metrics
+    and watches everyone work side by side, the comparison never turns off.
+
+
+    Here''s the trap: comparison feels like information, but it''s measuring the wrong
+    thing. You''re holding up your insides — your doubt, your slow days, your near-misses
+    — against everyone else''s outsides, the version they show on the floor. Her competence
+    isn''t a verdict on yours. His confidence isn''t evidence of your failure. But
+    the ruler doesn''t know that. It just keeps measuring, and you keep coming up
+    short, because a rigged measurement always does.
+
+
+    We''ll name the moment first — the specific person, the specific sting, the instant
+    the ranking kicks in. Then we''ll go down into it rather than trying to argue
+    you into self-esteem, because you can''t affirmation your way out of a habit this
+    deep. You''ll learn to feel the comparison fire and recognize it for what it is:
+    a reflex, not a readout. And you''ll come back up able to stand next to a more
+    confident, faster, more praised colleague without it costing you anything.
+
+
+    The ranking happens in a fraction of a second, before you''ve consciously decided
+    anything — the new grad answers a question you fumbled, and the verdict lands
+    before you can stop it. You can''t outlaw that reflex. What you can do is catch
+    it a beat after it fires and feel it as a sensation instead of a fact: the drop
+    in your chest, the heat of falling behind, the urge to either shrink or prove
+    yourself. You let it be a feeling moving through you rather than news about your
+    competence. The faster nurse is still faster. You just stop subtracting her speed
+    from your own worth, because those were never the same ledger.
+
+
+    This won''t tell you you''re secretly the best nurse on the unit or hand you a
+    gratitude practice to recite. You''ll still feel the pull to measure when someone
+    makes it look easy. What changes is that you''ll stop treating the result as true.
+    The ruler can come up — you don''t have to read what it says.
+
+
+    You became a nurse to take care of people, not to win a race no one else is running.
+    Their success was never your failure. You''re allowed to put the ruler down and
+    just do your work.'
+keywords:
+  primary:
+  - social anxiety
+  - social phobia
+  - fear of people
+  - social confidence
+  - fear of judgment
+  secondary:
+  - nurses
+  - social anxiety for nurses
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- The Comparison Cure (Lisa Cypers Kamen) — directly targets the habit of measuring
+  yourself against others
+- The Gifts of Imperfection (Brené Brown) — secular case against the worth-by-comparison
+  trap
+- Mindset (Carol Dweck) — reframes others' success as information, not a verdict on
+  your ability
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

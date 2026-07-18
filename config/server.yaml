@@ -1,0 +1,33 @@
+# Phoenix Omega — Server Configuration
+# Authority: docs/SERVER_INFRASTRUCTURE_SPEC.md
+# Env-var overrides: PHOENIX_HOST, PHOENIX_PORT, PHOENIX_LOG_LEVEL,
+#   PHOENIX_API_KEY, PHOENIX_CORS_ORIGINS, PHOENIX_WORKERS
+
+host: "0.0.0.0"
+port: 8000
+log_level: "info"
+workers: 1
+
+# CORS: comma-separated origins or "*" for dev
+cors_origins: "http://localhost:3000,http://localhost:5173"
+
+# API key auth (header: X-API-Key). Empty = no auth (dev only).
+api_key: ""
+
+# Rate limiting (requests per minute per client IP)
+rate_limit_rpm: 120
+
+# Paths (relative to repo root)
+repo_root: "."
+artifacts_dir: "artifacts"
+config_dir: "config"
+
+# Health check thresholds
+health:
+  # Max seconds since last CI run before warning
+  ci_stale_seconds: 7200
+  # Required files that must exist for healthy status
+  required_files:
+    - "config/governance/system_registry.yaml"
+    - "config/source_of_truth/master_arc_registry.yaml"
+    - "phoenix_v4/__init__.py"

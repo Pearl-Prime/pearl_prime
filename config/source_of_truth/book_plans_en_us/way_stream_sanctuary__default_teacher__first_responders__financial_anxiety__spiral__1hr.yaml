@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__financial_anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__steady_ground__1hr
+  name: Steady Ground — for First Responders (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Financial Anxiety: Breaking the Thought Loop (1)'
+subtitle: The Rumination Trap — Financial Anxiety for First Responders (Breaking the
+  Thought Loop)
+cover_tagline: One bill, ten thousand thoughts. An hour to get out of the 3 a.m. money
+  loop.
+description:
+  short_blurb: One unexpected expense and suddenly your brain is twelve worst-cases
+    deep at 3 a.m. — and you're on shift in four hours. This is a one-hour read for
+    the first responder caught in the money spiral. Not a budget. A way to see how
+    one thought becomes a thousand, and how to step out of the loop.
+  long_description: 'It starts with one thing. The transmission. A medical bill. A
+    number on a statement that''s higher than you expected. And then your mind takes
+    off — what if the next one hits, what if you can''t cover it, what if the overtime
+    dries up, what if it''s always going to be like this. One worry becomes ten, ten
+    becomes a hundred, and now it''s 3 a.m., you''re staring at the ceiling, you''re
+    back on shift in four hours, and not one of those thousand thoughts has solved
+    anything.
+
+
+    This hour is for you — the firefighter, the medic, the cop, the dispatcher whose
+    mind grabs a single money worry and runs it straight into the ground at night.
+    The one who can stay ice-calm on the worst scene of someone''s life and then lie
+    awake catastrophizing about a bill. The spiral isn''t you being irrational. It''s
+    an overworked, sleep-short threat-detector doing what it does best — chasing every
+    branch of every worst case — except there''s no scene to manage, just the dark
+    and the loop.
+
+
+    We start by naming the spiral for what it is, because you''ve been treating it
+    as ''thinking it through'' when it''s the same dread circling on repeat. Then
+    we go down into it — not by arguing with each thought or trying to think your
+    way out, which only feeds the next lap, but by seeing the shape of the loop itself
+    and where it actually starts. You''ll learn why the spiral always strikes at 3
+    a.m., why solving one worry just summons the next, and what it feels like to step
+    off the wheel instead of riding it till dawn. Then you come back up — still alert,
+    still able to plan, but no longer hostage to the loop when it spins up.
+
+
+    This will not give you a financial plan. No budget, no debt strategy, no calculator
+    that makes the worry go away, no telling you to just think positive. It won''t
+    pretend the expense isn''t real or the future is certain. It won''t promise the
+    worried thoughts never come back. What it will do is stop treating your spiral
+    as a problem to out-think and start treating it as a loop you can learn to recognize
+    and step out of, even at 3 a.m. with a shift bearing down.
+
+
+    Marcus Reed writes for the people who stay steady for everyone else and unravel
+    alone in the dark. No woo, no hustle, no ''just stop worrying.'' Just one honest
+    hour, in plain words you can use the next time one bill turns into a thousand
+    thoughts.
+
+
+    You don''t have to silence the thoughts to step out of the loop for an hour. Start
+    here.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - first responders
+  - money anxiety for first responders
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- The Psychology of Money (Morgan Housel) — reframes money worry as emotion and behavior
+  rather than spreadsheet math
+- Don't Believe Everything You Think (Joseph Nguyen) — targets the runaway thought-loop
+  directly without selling positivity
+- Hardwiring Happiness (Rick Hanson) — explains the brain's negativity loop and how
+  to step out of the spiral it builds
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

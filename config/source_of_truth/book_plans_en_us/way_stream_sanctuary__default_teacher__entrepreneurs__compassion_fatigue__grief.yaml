@@ -1,0 +1,92 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__compassion_fatigue__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__compassion_fatigue.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__depletion
+  name: Refill the Empty Well — for Founders
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Compassion Fatigue: The Grief That Doesn''t Leave'
+subtitle: A Real Talk Guide to Compassion Fatigue for Entrepreneurs
+cover_tagline: You're not heartless. The well that fed everyone finally ran dry.
+description:
+  short_blurb: 'For the founder who gave so much of themselves to their team, users,
+    and mission that the caring ran out — and is quietly grieving the open-hearted
+    leader they used to be. This is a secular field guide to compassion fatigue: naming
+    the loss, mourning it honestly, and learning to care in a way that doesn''t leave
+    you empty. No empathy hacks, no promise you''ll feel everything you used to.'
+  long_description: 'It crept up on you. You started this company because you cared
+    — about the problem, about the people it would help, about the team you''d build.
+    Caring was the fuel. But somewhere along the way the caring started costing more
+    than it gave back. The team''s anxieties now live in your body. The customer''s
+    bad day becomes your bad night. You carry every layoff you''ve made and every
+    one you''ve narrowly avoided. And lately you''ve noticed something that scares
+    you: a numbness creeping in where the caring used to be, a flatness toward the
+    very people you''d once have done anything for. This book is for the founder who
+    gave so much of themselves to others that the well ran dry, and is now grieving
+    the loss of their own capacity to feel. The one who can''t admit that they''ve
+    started to dread the one-on-ones, that empathy now feels like a tax they can''t
+    afford. You are not heartless. You are experiencing compassion fatigue — the specific
+    exhaustion that comes from caring for people inside a system that never stops
+    asking — and underneath it is real grief. Grief for the open-hearted founder you
+    used to be, the one who hadn''t yet been worn down by holding everyone. Here we
+    name those losses plainly, the way a field guide names what''s in front of you.
+    We go down into the grief instead of guilting you back into caring harder, because
+    the numbness is not a moral failure — it is a wound from over-giving, and shaming
+    it only deepens it. You''ll learn the difference between the compassion you can
+    sustain and the self-abandonment you mistook for it. Then we come back up, not
+    to limitless giving, but to a steadier kind of care that doesn''t require you
+    to keep bleeding for it. This is not a leadership-hack book. It will not hand
+    you a stakeholder framework or tell you to lead with more empathy. It will not
+    promise you''ll feel everything you used to, because grief doesn''t run backward
+    and the version of you that gave without limit was already running on borrowed
+    reserves. What it offers instead is plain language for what caring has actually
+    cost you, and a way to mourn it honestly so the feeling can return on terms you
+    can survive. You are allowed to grieve the boundless caregiver you thought you''d
+    always be, while you learn to care in a way that doesn''t end with you empty.'
+keywords:
+  primary:
+  - compassion fatigue
+  - caregiver burnout
+  - caring too much
+  - empathy fatigue
+  - helper burnout
+  - caregiver stress
+  secondary:
+  - founders
+  - compassion fatigue for founders
+bisac_codes:
+- SEL027000
+- SOC026000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- Trauma Stewardship (van Dernoot Lipsky) — what years of absorbing others' suffering
+  quietly does to a caregiver
+- Burnout (Nagoski & Nagoski) — the specific toll of caring inside a system that never
+  stops asking
+- It's OK That You're Not OK (Devine) — letting yourself grieve a loss instead of
+  being shamed back into giving
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

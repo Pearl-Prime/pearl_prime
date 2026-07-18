@@ -1,0 +1,16 @@
+# Scene descriptions per visual_intent for FLUX image bank.
+# Batch builder uses topic palette + this scene for each (topic, visual_intent).
+# Authority: docs/VIDEO_IMAGE_MASTER_PROMPT_SPEC.md
+
+visual_intent_scenes:
+  HOOK_VISUAL:
+    scene: "a clear scroll-stopping moment, simple subject, strong readable silhouette, inviting pause"
+  CHARACTER_EMOTION:
+    scene: "hands in a contemplative pose, clear silhouette, emotional resonance without faces"
+  SYMBOLIC_METAPHOR:
+    scene: "a single symbolic object, readable shape, metaphorical and open to interpretation"
+  ENVIRONMENT_ATMOSPHERE:
+    scene: "a calm environment with gentle depth and solid surfaces, no figures, readable at thumbnail size"
+
+# Fallback when visual_intent not in map
+default_scene: "a contemplative moment, soft light, generous negative space, no faces"

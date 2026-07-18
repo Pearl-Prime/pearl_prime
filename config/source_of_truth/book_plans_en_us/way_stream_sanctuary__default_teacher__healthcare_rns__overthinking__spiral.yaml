@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__overthinking__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__overthinking.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__restless_mind
+  name: Quiet the Restless Mind — for Nurses
+installment_number: 2
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Stop Overthinking: Escaping the Mental Loop (1)'
+subtitle: How Healthcare Rns Are Rewriting the Rules of Overthinking
+cover_tagline: One thought about the shift becomes a thousand by midnight.
+description:
+  short_blurb: It starts with a single thought about a patient, a charting error,
+    a thing you said — and forty minutes later you've built a whole catastrophe. This
+    is a real-talk guide for nurses on how the mental loop actually works and how
+    to step out of it without forcing yourself to stop thinking.
+  long_description: 'It started small. One thought about the patient in room four,
+    or the thing you forgot to tell the next nurse, or the look the charge gave you.
+    And then your mind did what it does: it pulled the next thought, and the next,
+    until you''re lying there having a conversation with someone who isn''t in the
+    room, defending a decision nobody questioned, planning for a disaster that hasn''t
+    happened.
+
+
+    This book is for the nurse who can''t find the off switch. You''re trained to
+    think three steps ahead — to anticipate the decline, to catch the thing before
+    it becomes the thing. That forward-running mind is a clinical gift. But after
+    the shift, with nothing to act on, it doesn''t stop. It just keeps generating,
+    one thought hooking the next, and you call it overthinking when really it''s a
+    spiral with no floor.
+
+
+    The recognition is this: you are not having a thousand thoughts. You''re having
+    one thought a thousand times, each loop dressed up to look like new information.
+    The spiral feels like problem-solving. It isn''t. There''s nothing to solve at
+    1am, and the loop knows that — it just needs you to keep feeding it your attention.
+
+
+    We go down into the loop instead of trying to outrun it. You''ll learn to catch
+    the exact moment the spiral starts — the first hook, the pull toward the next
+    thought — and feel it in your body before it''s twenty rungs deep. Not to stop
+    thinking. You can''t command that, and trying just adds a thought about the thoughts.
+    The move is to stop following. To let the loop turn without climbing on. That''s
+    the descent. The integration: the spiral still starts, but you stop confusing
+    it for the truth.
+
+
+    This won''t make your mind quiet. It won''t optimize you into a person who sleeps
+    eight hours and never replays a code. There''s no thought-stopping trick here,
+    no rubber band on the wrist, no positive affirmation to drown the loop out. This
+    is about seeing the mechanism so clearly that the spiral stops passing for thinking.
+
+
+    You know how to act fast when something''s actually wrong. The hardest skill is
+    knowing when there''s nothing to act on — and letting the loop spin without you
+    in it. The thought that won''t leave doesn''t need you to solve it. It needs you
+    to stop answering. You''re allowed to let it talk to an empty room.'
+keywords:
+  primary:
+  - stop overthinking
+  - overthinking help
+  - rumination
+  - racing thoughts
+  - quiet the mind
+  - analysis paralysis
+  secondary:
+  - nurses
+  - overthinking for nurses
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: lena_frost
+comp_titles:
+- Chatter (Ethan Kross) — explains the inner loop and gives distance tools to break
+  the replay
+- Rewire Your Anxious Brain (Catherine Pittman) — shows the brain mechanics that keep
+  worry cycling
+- Don't Believe Everything You Think (Joseph Nguyen) — argues the looping thought
+  is not the same as reality
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

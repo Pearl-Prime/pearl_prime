@@ -1,0 +1,74 @@
+{
+  "manifest": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/assembly_manifest.yaml",
+  "manifest_sha256": "61a5055c4e9deaa8b72d09cc644b0dc69620c27eace108327e3706a31a3865e3",
+  "series_id": "pearl_star_mecha_clean_structural_proof",
+  "panels": 3,
+  "layers_total": 7,
+  "layers_real": 6,
+  "layers_interim": 1,
+  "records": [
+    {
+      "panel_id": "p01_clean_mecha_hangar_floor",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p01_clean_mecha_hangar_floor/source_v5_panel/layer_01.png",
+      "bytes": 52731,
+      "provenance": "REAL",
+      "provenance_note": "Deterministic clean mecha support plate."
+    },
+    {
+      "panel_id": "p01_clean_mecha_hangar_floor",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p01_clean_mecha_hangar_floor/source_v5_panel/layer_02.png",
+      "bytes": 7219,
+      "provenance": "REAL",
+      "provenance_note": "Clean single-subject mecha L2: mecha."
+    },
+    {
+      "panel_id": "p02_clean_pilot_threshold_floor_l3",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p02_clean_pilot_threshold_floor_l3/source_v5_panel/layer_01.png",
+      "bytes": 52694,
+      "provenance": "REAL",
+      "provenance_note": "Deterministic clean mecha support plate."
+    },
+    {
+      "panel_id": "p02_clean_pilot_threshold_floor_l3",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p02_clean_pilot_threshold_floor_l3/source_v5_panel/layer_02.png",
+      "bytes": 9114,
+      "provenance": "REAL",
+      "provenance_note": "Clean single-subject mecha L2: pilot."
+    },
+    {
+      "panel_id": "p02_clean_pilot_threshold_floor_l3",
+      "layer_class": "L3",
+      "z": 30,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p02_clean_pilot_threshold_floor_l3/source_v5_panel/layer_03.png",
+      "bytes": 5603,
+      "provenance": "INTERIM",
+      "provenance_note": "Clean isolated telemetry prop proving L3 purity gate."
+    },
+    {
+      "panel_id": "p03_clean_seated_pilot_cockpit_seat",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p03_clean_seated_pilot_cockpit_seat/source_v5_panel/layer_01.png",
+      "bytes": 62546,
+      "provenance": "REAL",
+      "provenance_note": "Deterministic clean mecha support plate."
+    },
+    {
+      "panel_id": "p03_clean_seated_pilot_cockpit_seat",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p03_clean_seated_pilot_cockpit_seat/source_v5_panel/layer_02.png",
+      "bytes": 8830,
+      "provenance": "REAL",
+      "provenance_note": "Clean single-subject mecha L2: pilot."
+    }
+  ]
+}

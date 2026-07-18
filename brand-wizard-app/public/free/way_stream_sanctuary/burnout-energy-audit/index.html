@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The 5-Minute Energy Audit | Waystream Sanctuary</title>
+  <meta name="description" content="10 reflection prompts to locate where your energy is actually going. Free from Waystream Sanctuary.">
+  <meta property="og:title" content="The 5-Minute Energy Audit — Free Workbook">
+  <meta property="og:description" content="10 questions that tell you more about your burnout than a month of productivity advice. Free from Waystream Sanctuary.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0F;
+      --surface: #13131A;
+      --accent: #3B82F6;
+      --text: #F0EFE8;
+      --secondary: #8B8A82;
+      --border: rgba(240,239,232,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--secondary);
+      font-size: 15px;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .capture-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .capture-card p {
+      color: var(--secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      background: rgba(240,239,232,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      width: 100%;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input::placeholder { color: var(--secondary); }
+    input:focus { border-color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    #tool-section { display: none; }
+    #tool-section.visible { display: block; }
+
+    .tool-intro {
+      margin-bottom: 36px;
+    }
+
+    .tool-intro h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tool-intro p {
+      color: var(--secondary);
+      font-size: 14px;
+    }
+
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .prompt-num {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .prompt-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    textarea {
+      background: rgba(240,239,232,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 12px 14px;
+      resize: vertical;
+      width: 100%;
+      min-height: 90px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea::placeholder { color: var(--secondary); }
+    textarea:focus { border-color: var(--accent); }
+
+    .print-row {
+      margin-top: 32px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-print {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--secondary);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 11px 22px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-print:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 14px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .cta-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 24px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-cta:hover { opacity: 0.88; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--secondary);
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
+    @media print {
+      .wordmark, .capture-card, .cta-banner, footer, .print-row { display: none !important; }
+      body { background: #fff; color: #000; }
+      .prompt-card { border: 1px solid #ddd; break-inside: avoid; }
+      textarea { border: 1px solid #ccc; color: #000; background: #fafafa; }
+      .prompt-q { color: #000; }
+      .prompt-num { color: #3B82F6; }
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="way_stream_sanctuary" data-topic="burnout" data-funnel-slug="burnout-energy-audit" data-post-experience-capture="1" data-ghl-webhook="">
+<div class="page-wrap">
+
+  <div class="wordmark">Waystream Sanctuary — Inner Light Press</div>
+
+  <h1>The 5-Minute Energy Audit</h1>
+  <p class="subtitle">Ten questions. Honest answers. A clearer picture of where you actually are.</p>
+
+  <div class="capture-card" id="capture-section">
+    <h2>Access the Free Workbook</h2>
+    <p>Your workbook answers stay in your browser. Email is used only to unlock the tool and start your nurture sequence.</p>
+    <form id="capture-form">
+      <div class="form-row">
+        <input type="text" placeholder="First name" autocomplete="given-name">
+        <input type="email" placeholder="Email address" required autocomplete="email">
+        <button type="submit" class="btn-primary">Access Free Energy Audit</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="tool-section">
+    <div class="tool-intro">
+      <h2>The Energy Audit</h2>
+      <p>Answer honestly. There's no right answer. There's just what's true right now.</p>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">01</div>
+      <div class="prompt-q">What did you do yesterday that you resented doing?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">02</div>
+      <div class="prompt-q">What's still open in your head that belongs on someone else's list?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">03</div>
+      <div class="prompt-q">When was the last time you did something just because you wanted to?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">04</div>
+      <div class="prompt-q">What are you tolerating right now that has no end date?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">05</div>
+      <div class="prompt-q">Where is your energy going that you didn't consciously agree to?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">06</div>
+      <div class="prompt-q">What would you stop doing if nobody noticed or cared?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">07</div>
+      <div class="prompt-q">What part of your work actually energizes you? (Be honest.)</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">08</div>
+      <div class="prompt-q">What's the one conversation you've been avoiding for over a week?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">09</div>
+      <div class="prompt-q">What would change if you said no to the next three requests?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">10</div>
+      <div class="prompt-q">What does rest actually look like for you — not sleep, rest?</div>
+      <textarea placeholder="Write what comes up..."></textarea>
+    </div>
+
+    <div class="print-row">
+      <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <p>Want the full system?</p>
+    <h3>The Recovery Road Series: The Collapse You Earned — $0.99</h3>
+    <a class="btn-cta" href="https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief" rel="noopener">Get Book 1 for $0.99</a>
+  </div>
+
+  <footer>A free tool from Waystream Sanctuary — Inner Light Press</footer>
+</div>
+
+<script>
+  document.getElementById('capture-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nameEl = document.querySelector('#capture-form input[type="text"]');
+    var emailEl = document.querySelector('#capture-form input[type="email"]');
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    function revealTool() {
+      document.getElementById('capture-section').style.display = 'none';
+      document.getElementById('tool-section').classList.add('visible');
+    }
+    if (!window.PhoenixLead) {
+      revealTool();
+      return;
+    }
+    PhoenixLead.captureLead({
+      email: email,
+      first_name: name,
+      topic: 'burnout',
+      funnel_slug: 'burnout-energy-audit',
+      quiz_id: 'capacity_assessment',
+      score: null,
+      score_band: null,
+      tags: ['source_freebie_quiz', 'quiz_burnout', 'freebie_captured']
+    }).then(revealTool).catch(revealTool);
+  });
+</script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script type="application/json" id="phoenix-evergreen-campaign-plan">
+{
+  "archetype_id": "capacity_assessment",
+  "bonus_pre_e3_benefit": "Gives the contact one more felt practice before the story email lands.",
+  "bonus_pre_e3_cta": "Open the bonus practice",
+  "bonus_pre_e3_html_template": "funnel/waystream_sanctuary/emails/email_bonus_pre_story.html",
+  "bonus_pre_e3_microcopy": "Send this before Email 3 only when welcome_depth is blank or missing.",
+  "bonus_pre_e3_send_if_welcome_depth_missing": true,
+  "bonus_pre_e3_short_description": "A pre-E3 bonus email for the welcome-depth fallback when GHL has no welcome_depth value.",
+  "bonus_pre_e3_title": "Bonus before the story: one extra burnout practice",
+  "bonus_pre_e3_tool_name": "Box breathing for depleted capacity",
+  "bonus_pre_e3_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex02_box_breathing.html?unlock=1",
+  "brand_id": "way_stream_sanctuary",
+  "campaign_plan_id": "waystream_burnout_energy_audit_evergreen_v1",
+  "content_type": "companion_workbook_pdf",
+  "e1_benefit": "Use it when burnout starts to take over and you need one immediate step.",
+  "e1_cta": "Open the audit",
+  "e1_microcopy": "No login wall. Keep this link for the moment you need it.",
+  "e1_short_description": "The free Waystream tool you requested for burnout.",
+  "e1_title": "Your burnout energy audit is ready",
+  "e1_tool_name": "Burnout Energy Audit",
+  "e1_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/burnout-energy-audit/",
+  "e2_benefit": "Pair it with yesterday\u2019s tool so your body gets the signal twice.",
+  "e2_cta": "Try the breathing practice",
+  "e2_microcopy": "Do it once today. Notice the smallest shift.",
+  "e2_short_description": "A second practice that keeps the first reset from being a one-off.",
+  "e2_title": "Box breathing for depleted capacity",
+  "e2_tool_name": "Box breathing for depleted capacity",
+  "e2_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex02_box_breathing.html?unlock=1",
+  "e3_benefit": "See the mechanism through a human moment instead of a lecture.",
+  "e3_cta": "Read the deeper path",
+  "e3_microcopy": "No pitch in this email. Just the story.",
+  "e3_short_description": "A short story about why the burnout reset can work in real life.",
+  "e3_story_body": "A Waystream reader once opened Burnout Energy Audit in the middle of an ordinary day, not a dramatic breaking point. The old pattern was already moving: burnout had started to feel like a command, and the body was treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It gives the body one repeatable cue that says, \"we can slow this down before it runs the whole day.\"",
+  "e3_title": "Why this works: a short burnout story",
+  "e3_tool_name": "Transformation story",
+  "e3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e4_benefit": "Use it when you want the full journey, not only the free tool.",
+  "e4_book_title": "The Waystream Guide to Burnout",
+  "e4_cta": "See the book",
+  "e4_microcopy": "The free tools are still yours. This is the next layer.",
+  "e4_short_description": "The first deeper Waystream book for this burnout pattern.",
+  "e4_title": "Recommended for you: The Waystream Guide to Burnout",
+  "e4_tool_name": "The Waystream Guide to Burnout",
+  "e4_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e5_benefit": "Choose the next book by the kind of support you want right now.",
+  "e5_book1_note": "Start here if you want the main Waystream path for burnout.",
+  "e5_book1_title": "The Waystream Guide to Burnout",
+  "e5_book1_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e5_book2_note": "Use this as the second recommendation once the first path feels familiar.",
+  "e5_book2_title": "The Follow-Up Waystream Guide for Burnout",
+  "e5_book2_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e5_book3_note": "Use this when you want the book path and free tools grouped together.",
+  "e5_book3_title": "The Burnout Calm Bundle",
+  "e5_book3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e5_cta": "See the reading path",
+  "e5_microcopy": "Start with the first recommendation if you are unsure.",
+  "e5_short_description": "A short list of next reads for burnout.",
+  "e5_title": "More Waystream books for burnout",
+  "e5_tool_name": "Waystream reading path",
+  "e5_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e6_benefit": "Use this after the first book if you want a second angle on the same pattern.",
+  "e6_book_title": "The Follow-Up Waystream Guide for Burnout",
+  "e6_cta": "Open recommendation 2",
+  "e6_microcopy": "Recommendation 2 is for continuity, not pressure.",
+  "e6_short_description": "A follow-up book recommendation for the next layer of burnout.",
+  "e6_title": "Book 2 recommendation for burnout",
+  "e6_tool_name": "The Follow-Up Waystream Guide for Burnout",
+  "e6_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e7_benefit": "Use the bundle when you want the tools and books in one mental shelf.",
+  "e7_bundle_title": "The Burnout Calm Bundle",
+  "e7_cta": "See the bundle path",
+  "e7_microcopy": "This is the cleanest path if you prefer everything in one place.",
+  "e7_short_description": "A bundle-style path that groups the next burnout supports together.",
+  "e7_title": "Book 3 bundle path for burnout",
+  "e7_tool_name": "The Burnout Calm Bundle",
+  "e7_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e8_benefit": "Take the next step now if you know you want the deeper support.",
+  "e8_cta": "Take the next step",
+  "e8_last_chance_note": "This is the last direct book nudge in the burnout freebie sequence.",
+  "e8_microcopy": "If not, keep the free tool. That still counts.",
+  "e8_short_description": "A final nudge before this burnout sequence quiets down.",
+  "e8_title": "Last chance to keep the burnout path close",
+  "e8_tool_name": "Last-chance reminder",
+  "e8_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief",
+  "e9_benefit": "Return to the simplest reset any time you need it.",
+  "e9_cta": "Reopen the free tool",
+  "e9_microcopy": "No new ask today. Just the tool again.",
+  "e9_short_description": "A still-here reminder with the original free tool link.",
+  "e9_title": "Still here: reopen Burnout Energy Audit",
+  "e9_tool_name": "Burnout Energy Audit",
+  "e9_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/burnout-energy-audit/",
+  "fallback_allowed": false,
+  "freebie_id": "companion_core_v2",
+  "funnel_variant": "evergreen_freebie_v1",
+  "locale": "en_US",
+  "quiz_id": "capacity_assessment",
+  "source_page_slug": "burnout-energy-audit",
+  "status": "active",
+  "topic": "burnout"
+}
+</script>
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+});
+</script>
+
+</body>
+</html>

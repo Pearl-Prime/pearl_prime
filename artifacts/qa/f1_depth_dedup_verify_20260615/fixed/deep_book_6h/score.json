@@ -1,0 +1,69 @@
+{
+  "arm": "fixed",
+  "format": "deep_book_6h",
+  "chapters": 12,
+  "words": 61097,
+  "verdict": "HARD_FAIL",
+  "F1": 121,
+  "F2": 39,
+  "F7": 12,
+  "total_findings": 175,
+  "F1_sizes": {
+    "2": 112,
+    "3": 2,
+    "4": 2,
+    "6": 1,
+    "9": 1,
+    "10": 1,
+    "12": 1,
+    "13": 1
+  },
+  "cluster_phrase_counts": {
+    "HOOK v02 'The task is open'": 13,
+    "EXERCISE 'Just thirty seconds'": 1,
+    "EXERCISE 'Now, I want you to notice'": 12,
+    "doctrine 'This is The Unspoken'": 1
+  },
+  "largest_f1": [
+    {
+      "size": 13,
+      "summary": "templated paragraph cluster size 13 (chapters [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])",
+      "excerpt": "The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows something your ca..."
+    },
+    {
+      "size": 12,
+      "summary": "templated paragraph cluster size 12 (chapters [1, 5, 6, 7, 8])",
+      "excerpt": "Just thirty seconds. Not to fix anything. Just to give yourself a different input for a moment."
+    },
+    {
+      "size": 10,
+      "summary": "templated paragraph cluster size 10 (chapters [1, 5, 6, 7, 8])",
+      "excerpt": "Now, I want you to notice something. Notice what came up first. Or not. Both are fine. Whatever happened \u2014 or did not ha..."
+    },
+    {
+      "size": 9,
+      "summary": "templated paragraph cluster size 9 (chapters [1, 5, 6, 7, 8])",
+      "excerpt": "This is The Unspoken. Notice. Do not analyze. You do not need to believe that. Just try it."
+    },
+    {
+      "size": 6,
+      "summary": "templated paragraph cluster size 6 (chapters [2, 3, 6, 7, 10, 12])",
+      "excerpt": "Same body. Different door. Watch what changes."
+    },
+    {
+      "size": 4,
+      "summary": "templated paragraph cluster size 4 (chapters [3, 4, 8, 11])",
+      "excerpt": "The phone was the first thing you touched this morning. Before coffee. Before a single thought that belonged to you."
+    },
+    {
+      "size": 4,
+      "summary": "templated paragraph cluster size 4 (chapters [5, 6, 7, 8])",
+      "excerpt": "Now, before you move on, your body will tell you when it needs this again. Nothing has to change from this moment forwar..."
+    },
+    {
+      "size": 3,
+      "summary": "templated paragraph cluster size 3 (chapters [1, 4, 8])",
+      "excerpt": "Here is the mechanism. Your body has an alarm system that is older than your job. It evolved to fire fast and ask questi..."
+    }
+  ]
+}

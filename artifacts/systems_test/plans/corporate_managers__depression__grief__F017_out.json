@@ -1,0 +1,311 @@
+{
+  "plan_hash": "3c6067c97e4d18ecd19b384f1288e8de",
+  "plan_id": "3c6067c97e4d18ecd19b384f1288e8de",
+  "chapter_slot_sequence": [
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "TAKEAWAY",
+      "INTEGRATION",
+      "THREAD"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION"
+    ]
+  ],
+  "atom_ids": [
+    "corporate_managers_depression_HOOK_v25",
+    "corporate_managers_depression_SCENE_v03",
+    "corporate_managers_depression_REFLECTION_v06",
+    "corporate_managers_depression_INTEGRATION_v03",
+    "corporate_managers_depression_overwhelm_EMBODIMENT_v04",
+    "corporate_managers_depression_HOOK_v06",
+    "corporate_managers_depression_SCENE_v02",
+    "corporate_managers_depression_REFLECTION_v18",
+    "placeholder:TAKEAWAY:ch1:slot3",
+    "corporate_managers_depression_INTEGRATION_v05",
+    "placeholder:THREAD:ch1:slot5",
+    "corporate_managers_depression_HOOK_v22",
+    "corporate_managers_depression_SCENE_v04",
+    "corporate_managers_depression_REFLECTION_v21",
+    "corporate_managers_depression_EXERCISE_v05",
+    "corporate_managers_depression_INTEGRATION_v07",
+    "corporate_managers_depression_grief_RECOGNITION_v15",
+    "corporate_managers_depression_HOOK_v13",
+    "corporate_managers_depression_SCENE_v01",
+    "corporate_managers_depression_REFLECTION_v03",
+    "corporate_managers_depression_INTEGRATION_v01",
+    "corporate_managers_depression_watcher_RECOGNITION_v07",
+    "corporate_managers_depression_HOOK_v12",
+    "placeholder:SCENE:ch4:slot1",
+    "corporate_managers_depression_REFLECTION_v20",
+    "corporate_managers_depression_EXERCISE_v06",
+    "placeholder:INTEGRATION:ch4:slot4",
+    "corporate_managers_depression_HOOK_v14",
+    "placeholder:SCENE:ch5:slot1",
+    "corporate_managers_depression_REFLECTION_v23",
+    "corporate_managers_depression_EXERCISE_v03",
+    "placeholder:INTEGRATION:ch5:slot4"
+  ],
+  "dominant_band_sequence": [
+    1,
+    null,
+    2,
+    3,
+    null,
+    null
+  ],
+  "arc_id": "corporate_managers_depression_grief_F017_gen",
+  "emotional_temperature_sequence": [
+    "cool",
+    "cool",
+    "warm",
+    "warm",
+    "hot",
+    "warm"
+  ],
+  "exercise_chapters": [
+    2,
+    4,
+    5
+  ],
+  "slot_sig": "MOD_pocket_guide:67c09d352c110790",
+  "format_id": "MOD_pocket_guide",
+  "runtime_format_id": "",
+  "output_format_id": "pocket_guide",
+  "output_format_name": "Pocket Guide",
+  "v4_freeze_enabled": true,
+  "locale": "en-US",
+  "territory": "US",
+  "atoms_model": "legacy",
+  "engine_id": "grief",
+  "angle_id": "at_work",
+  "reflection_strategy_sequence": [
+    "didactic",
+    "socratic",
+    "narrative_embedded",
+    "didactic",
+    "socratic",
+    "narrative_embedded"
+  ],
+  "chapter_archetypes": [
+    "intro_hook_heavy",
+    "legacy_uniform",
+    "deepen_mechanism",
+    "challenge_cost",
+    "resolve_integration",
+    "resolve_integration"
+  ],
+  "chapter_exercise_modes": [
+    "none",
+    "none",
+    "micro",
+    "none",
+    "micro",
+    "micro"
+  ],
+  "chapter_reflection_weights": [
+    "light",
+    "standard",
+    "standard",
+    "heavy",
+    "standard",
+    "standard"
+  ],
+  "chapter_story_depths": [
+    "standard",
+    "standard",
+    "standard",
+    "deep",
+    "micro",
+    "micro"
+  ],
+  "chapter_bestseller_structures": [
+    "case_file",
+    "ancestor",
+    "gladwell_spiral",
+    "zoom_lens",
+    "van_der_kolk",
+    "ancestor"
+  ],
+  "narrator_id": "default_narrator",
+  "cover_art_base": "assets/authors/cover_art/ahjan_base.png",
+  "cover_art_style_hint": "contemplative",
+  "cover_art_palette_tokens": [
+    "contemplative"
+  ],
+  "cover_variant_id": "ahjan",
+  "emotional_role_sequence": [
+    "recognition",
+    "recognition",
+    "destabilization",
+    "reframe",
+    "stabilization",
+    "integration"
+  ],
+  "emotional_role_sig": "r-r-d-f-s-i",
+  "book_structure_id": "linear_transformation",
+  "journey_shape_id": "recognition_to_agency",
+  "motif_id": "motif_cost",
+  "section_reorder_mode": "local_reflection_integration",
+  "reframe_profile_id": "balanced",
+  "variation_chapter_archetypes": [
+    "establish",
+    "expose",
+    "destabilize",
+    "reframe",
+    "stabilize",
+    "integrate"
+  ],
+  "variation_signature": "fc68836aea998eab3a101708b4b162d3",
+  "motif_injections": [
+    {
+      "chapter_index": 0,
+      "slot_index": 2,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 0,
+      "slot_index": 4,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 2,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 2,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 3,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 3,
+      "slot_index": 4,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 4,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 4,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 5,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 5,
+      "slot_index": 4,
+      "phrase": "The cost of not changing is already here."
+    }
+  ],
+  "reframe_injections": [
+    {
+      "chapter_index": 0,
+      "slot_index": 2,
+      "line_type": "constraint",
+      "text": "Progress isn't linear."
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 2,
+      "line_type": "worldview",
+      "text": "Safety comes before growth."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 2,
+      "line_type": "micro_reframe",
+      "text": "One breath can reset the script."
+    },
+    {
+      "chapter_index": 3,
+      "slot_index": 2,
+      "line_type": "constraint",
+      "text": "Progress isn't linear."
+    },
+    {
+      "chapter_index": 4,
+      "slot_index": 2,
+      "line_type": "worldview",
+      "text": "Change happens in relationship, not in isolation."
+    },
+    {
+      "chapter_index": 5,
+      "slot_index": 2,
+      "line_type": "micro_reframe",
+      "text": "One breath can reset the script."
+    }
+  ],
+  "freebie_bundle": [
+    "accountability_partner_v1"
+  ],
+  "cta_template_id": "tool_forward",
+  "freebie_slug": "depression-corporate-managers-accountability-partner-v1",
+  "freebie_bundle_with_formats": [
+    {
+      "freebie_id": "accountability_partner_v1",
+      "formats": [
+        "html",
+        "pdf"
+      ]
+    }
+  ],
+  "topic_id": "depression",
+  "persona_id": "corporate_managers"
+}

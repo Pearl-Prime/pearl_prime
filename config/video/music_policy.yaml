@@ -1,0 +1,49 @@
+# Arc/emotional_band -> preferred mood; segment-level override supported.
+
+arc_to_mood:
+  hook: subtle_curiosity
+  build: gentle_rise
+  release: calm_resolution
+emotional_band_overrides:
+  high_arousal_negative: subdued
+  low_arousal_positive: warm_neutral
+segment_level_override_supported: true
+
+# ── Therapeutic SFX intensity per arc section ─────────────────────
+# Maps arc sections to SFX presence and volume.
+# SFX is always light-touch: never louder than -22 dB below narration.
+sfx_intensity_map:
+  hook:
+    layers: 1
+    level_db: -28
+    categories: [nature_ambient]
+    note: "Barely audible. Sets atmosphere without drawing attention."
+  build:
+    layers: 2
+    level_db: -26
+    categories: [nature_ambient, body_somatic]
+    note: "Gentle layering. Body awareness cues begin."
+  peak:
+    layers: 2
+    level_db: -22
+    categories: [tension_release, transition_marker]
+    note: "Highest SFX presence. Still subtle — matches emotional intensity."
+  release:
+    layers: 2
+    level_db: -24
+    categories: [resonant_tone, nature_ambient]
+    note: "Resolution sounds. Singing bowl or chime marks the shift."
+  resolve:
+    layers: 1
+    level_db: -26
+    fade_to_db: -30
+    categories: [resonant_tone, silence_breath]
+    note: "Fades toward silence. Leaves space for the listener's own breath."
+
+# SFX must NEVER exceed these limits:
+sfx_hard_limits:
+  max_level_db: -20           # never louder than -20 dB below voice
+  max_layers: 2               # never more than 2 SFX layers simultaneously
+  fade_in_min_s: 1.0          # always fade in (no sudden sounds)
+  fade_out_min_s: 1.5         # always fade out
+  strategic_silence_exempt: true  # no SFX during strategic silence windows

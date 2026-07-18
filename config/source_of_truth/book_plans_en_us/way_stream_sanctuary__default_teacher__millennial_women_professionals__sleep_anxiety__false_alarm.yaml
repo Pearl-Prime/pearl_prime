@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__sleep_anxiety__false_alarm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__sleep_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__restless_mind
+  name: Quiet the Restless Mind — for Professional Women
+installment_number: 1
+engine: false_alarm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Sleep Anxiety: When Fear Lies to You'
+subtitle: A Real Talk Guide to Sleep Anxiety for Millennial Women Professionals
+cover_tagline: Nothing is wrong. So why is your body braced at 3am?
+description:
+  short_blurb: The house is quiet, the day is over, and your body is on high alert
+    anyway — heart going, mind insisting something needs handling right now. It doesn't.
+    This is a book about the false alarm that goes off the moment you finally lie
+    down.
+  long_description: 'It''s 3am. Nothing has happened. No emergency, no bad news, no
+    reason — and yet you are wide awake with your heart picking up speed, your body
+    braced like there is a deadline standing at the foot of the bed. The day is over.
+    The work will keep until morning. But your nervous system has decided that this
+    dark, still, undefended hour is the most dangerous time to be alive, and it has
+    gone ahead and sounded the alarm.
+
+
+    This is for the professional woman whose body waits until she finally lies down
+    to start panicking — the one who handled everything fine all day and now cannot
+    convince a single cell that it is safe to rest. You are not broken. Your alarm
+    system is simply firing in the one setting where it makes no sense at all: a quiet
+    bed, a sleeping house, a night in which there is genuinely nothing to fix and
+    nothing to do.
+
+
+    First you learn to name it for what it is — a false alarm, your body''s threat
+    detector tripping over nothing, the way a smoke detector shrieks at the steam
+    from a hot shower. Then, instead of fighting to force yourself back under (which
+    only confirms to your body that the threat must be real), you go down into the
+    alarm itself. You feel the surge of it without leaping to obey it. You stop bargaining
+    with the clock and doing the cruel math on how many hours are left. You let the
+    false alarm ring out into the dark and watch it do what alarms do when nothing
+    answers them — crest, thin out, and slowly loosen their grip on your chest. Sleep,
+    when it finally comes, comes precisely because you stopped standing guard against
+    the night.
+
+
+    This book will not promise to fix your sleep, or to optimize your nights, or to
+    hand you a wind-down routine that knocks you out by ten. There is no protocol
+    here that turns you into a person who never wakes at 3am again. What changes is
+    that the waking stops registering as a crisis — you stop treating a jolt of late-night
+    fear as evidence that something, somewhere, is actually wrong.
+
+
+    Written in plain, grounded language you can use the next time your body lies to
+    you in the dark. No sleep-hygiene checklists. No gentle instruction to simply
+    relax. Just an honest account of the false alarm and a way to lie inside it without
+    bracing against the mattress.
+
+
+    The alarm is going to go off at 3am. You don''t have to answer it, and you don''t
+    have to argue with it either. You can let your body sound its warning into the
+    dark and stay exactly where you are — safe, horizontal, and finally done fighting
+    the night.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - can't sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - sleep without medication
+  secondary:
+  - professional women
+  - sleep anxiety for professional women
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sofia_marchetti
+comp_titles:
+- Why We Sleep (Matthew Walker) — demystifies what's actually happening when you wake
+  in the night
+- Dare (Barry McDonagh) — teaches dropping the struggle with a panic surge instead
+  of fighting it
+- Hello Sleep (Jade Wu) — reframes nighttime waking as something other than a crisis
+  to solve
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

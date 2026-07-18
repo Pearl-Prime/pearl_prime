@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-14",
+  "repo": "Ahjan108/phoenix_omega_v4.8",
+  "pr": 5598,
+  "audited_head": "8eee1fdc80b01614edbacd3220c77183eeb35ca0",
+  "focused_parser_commit": "40742882eda99f47ec564634aec97decf74a02a3",
+  "mass_renumber_commit_reverted_by_script": "8eee1fdc80b01614edbacd3220c77183eeb35ca0",
+  "prepared_changes": [
+    "revert out-of-scope atom header renumbering",
+    "pool_index runtime require_unique_ids=False",
+    "prose_resolver runtime require_unique_ids=False",
+    "add runtime compatibility regression tests"
+  ],
+  "remote_mutation_performed": false,
+  "full_repo_tests_run_here": false,
+  "reason_full_repo_tests_not_run_here": "The connected GitHub identity is read-only and the active sandbox has no network checkout of the 2.8GB repository. The bundle runs the required tests in the user's real checkout before allowing push.",
+  "known_ci_before_fix": {
+    "atoms_parse_sweep": "success",
+    "core_tests": "failure",
+    "release_gates": "failure"
+  }
+}

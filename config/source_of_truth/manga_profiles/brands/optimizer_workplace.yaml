@@ -1,0 +1,33 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-19"
+profile_type: brand_genre_lane
+
+title_id: optimizer_workplace
+brand_id: optimizer
+
+market_demo: seinen
+genre_family: workplace
+subgenre: "burnout_recovery_performance"
+
+emotional_engine: rivalry
+reader_promise: "You will stop competing with a version of yourself that was already burning out."
+
+serialization_engine: arc_based
+chapter_hook_family: revelation
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.18
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 85
+  silent_panel_ratio: 0.20
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon

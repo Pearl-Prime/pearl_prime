@@ -1,0 +1,10 @@
+Using only the following analysis, output a single valid YAML object. No thinking, no markdown fences, only YAML.
+
+Schema:
+voice_notes: ["string"]
+metaphor_families: ["string"]
+localization_risks: ["string"]
+plain_language_alternates: ["string"]
+
+Analysis to convert to YAML:
+{{ANALYSIS_SUMMARY}}

@@ -1,0 +1,38 @@
+# Render-time parameters for run_render.py (FFmpeg). No separate mutation stage.
+# See docs/VIDEO_PIPELINE_FFMPEG_REFERENCE.md.
+
+# Crop offset guardrail: deterministic offsets must stay within this margin so we don't clip the subject.
+# offset_x ≤ crop_margin_pct% of width; offset_y ≤ crop_margin_pct% of height.
+crop_margin_pct: 6
+
+# ── P0 upgrades ──────────────────────────────────────────────────────────────
+
+# xfade transition between clips (items 1)
+# Set enabled: true to replace hard cuts with dissolve transitions.
+# transition: any xfade transition name supported by your FFmpeg build (e.g. dissolve, fade, wipeleft).
+# duration_s: crossfade overlap in seconds (0.5 recommended; must be < shortest clip duration).
+xfade:
+  enabled: false
+  transition: dissolve
+  duration_s: 0.5
+
+# Film grain / noise (item 3)
+# intensity: c0s value for the FFmpeg noise filter (0 = off, 15 = subtle, 30 = visible).
+# Default 15 adds gentle organic texture.
+noise:
+  enabled: false
+  intensity: 15
+
+# Vignette (item 4)
+# angle: vignette cone half-angle in radians (PI/5 ≈ 0.628 is a subtle darkening at edges).
+# Set 0 to disable.
+vignette:
+  enabled: false
+  angle: "PI/5"
+
+# Loudness normalisation (item 5)
+# normalize_loudness: apply pyloudnorm −16 LUFS normalisation to narration WAV/PCM before mixing.
+# target_lufs: target integrated loudness (YouTube standard −14; −16 is conservative).
+loudness:
+  normalize_loudness: false
+  target_lufs: -16.0

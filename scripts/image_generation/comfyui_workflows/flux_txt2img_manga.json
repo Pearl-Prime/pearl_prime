@@ -1,0 +1,47 @@
+{
+    "_meta": {
+        "name": "Phoenix Omega — FLUX txt2img Manga (H1=A canonical: dev-fp8 / 28 / 3.5 / dpmpp_2m / karras, webtoon vertical)",
+        "description": "EmptyLatent + KSampler denoise 1.0. Generator replaces {{positive_prompt}} / {{negative_prompt}}. Uses flux1-dev-fp8 at 28 steps cfg 3.5 dpmpp_2m / karras — H1=A canonical per docs/feedback_campaign_h1_h2_decisions and skills/pearl-int/references/manga_render_path_decision.md. Default dims 1080x1920 = WEBTOON vertical panel; callers may override via per-panel width/height. This is the brand-1 path (the_alarm_is_lying et al). Brand-2 V1 ship still uses schnell — see flux_txt2img_manga_brand2_schnell.json for that path.",
+        "version": "2.0.0",
+        "h1a_corrected": "PR #807 (2026-04-30) corrected flux_img2img_manga.json and flux_ip_adapter_manga.json to H1=A but missed this file; corrected 2026-06-02 (PR follow-up). flux_txt2img_manga_brand2_schnell.json preserves the schnell config for the brand-2 V1 ship path."
+    },
+    "1": {
+        "class_type": "CheckpointLoaderSimple",
+        "inputs": {"ckpt_name": "flux1-dev-fp8.safetensors"}
+    },
+    "2": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{positive_prompt}}", "clip": ["1", 1]}
+    },
+    "3": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{negative_prompt}}, text, words, letters, captions, watermark, signature, signs, writing, typography, text characters, font, lettering, logos, subtitles, calligraphy", "clip": ["1", 1]}
+    },
+    "4": {
+        "class_type": "EmptyLatentImage",
+        "inputs": {"width": 1080, "height": 1920, "batch_size": 1}
+    },
+    "5": {
+        "class_type": "KSampler",
+        "inputs": {
+            "seed": 42,
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
+            "denoise": 1.0,
+            "model": ["1", 0],
+            "positive": ["2", 0],
+            "negative": ["3", 0],
+            "latent_image": ["4", 0]
+        }
+    },
+    "6": {
+        "class_type": "VAEDecode",
+        "inputs": {"samples": ["5", 0], "vae": ["1", 2]}
+    },
+    "7": {
+        "class_type": "SaveImage",
+        "inputs": {"filename_prefix": "manga_panel", "images": ["6", 0]}
+    }
+}

@@ -1,0 +1,1927 @@
+{
+  "verdict": "HARD_FAIL",
+  "findings": [
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_000",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 3
+          },
+          {
+            "chapter": 3,
+            "para_index": 12
+          }
+        ],
+        "excerpt": "Ahjan's reading of this is precise: ... The teachings are not about becoming someone better. They are about seeing who y..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_001",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 6
+          },
+          {
+            "chapter": 3,
+            "para_index": 10
+          }
+        ],
+        "excerpt": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing its..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_002",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 10
+          },
+          {
+            "chapter": 6,
+            "para_index": 9
+          }
+        ],
+        "excerpt": "Where in your life do you run from what is difficult? Can you name one place where\nyou use busy-ness, distraction, or sl..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [1, 2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_003",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 16
+          },
+          {
+            "chapter": 2,
+            "para_index": 14
+          },
+          {
+            "chapter": 3,
+            "para_index": 15
+          }
+        ],
+        "excerpt": "The numbers do not stay still when you look away. The mug handle holds where you left it moves through the room. lurches..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_004",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 18
+          },
+          {
+            "chapter": 7,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "Drawing on Ahjan's mindfulness and somatic approach... Love and hate both arise from the same source in the mind. Neithe..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_005",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 27
+          },
+          {
+            "chapter": 5,
+            "para_index": 27
+          }
+        ],
+        "excerpt": "The first kind is meditation as escape. You sit down. You close your eyes.\nYou reach for the calm. You reach for the qui..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_006",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 28
+          },
+          {
+            "chapter": 5,
+            "para_index": 28
+          }
+        ],
+        "excerpt": "The second kind is meditation as showing up. You sit down. You close your\neyes. And instead of reaching for anything, yo..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_007",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 29
+          },
+          {
+            "chapter": 5,
+            "para_index": 29
+          }
+        ],
+        "excerpt": "Ahjan teaches the second kind. He says, \"You are not here to leave your\nlife. You are here to finally be in it.\" Escape ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_008",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 30
+          },
+          {
+            "chapter": 5,
+            "para_index": 30
+          }
+        ],
+        "excerpt": "When Ahjan teaches a student to sit, he is not teaching them how to feel\nbetter in twenty minutes. He is teaching them h..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_009",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 31
+          },
+          {
+            "chapter": 5,
+            "para_index": 31
+          }
+        ],
+        "excerpt": "This sounds simple. It is the hardest thing many people will ever do.\nBecause showing up means giving up the small const..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1])",
+      "evidence": {
+        "cluster_id": "f1_cluster_010",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 35
+          },
+          {
+            "chapter": 1,
+            "para_index": 50
+          }
+        ],
+        "excerpt": "The specific pattern of not looking, not knowing, not asking \u2014 and the way that not-looking creates its own form of safe..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_011",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 40
+          },
+          {
+            "chapter": 12,
+            "para_index": 31
+          }
+        ],
+        "excerpt": "This is a breath-based practice. You are not trying to breathe perfectly or deeply. You are giving your nervous system a..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_012",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 41
+          },
+          {
+            "chapter": 7,
+            "para_index": 29
+          }
+        ],
+        "excerpt": "This is the practice. Not to fix anything. Just to give yourself a different input for a moment."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2])",
+      "evidence": {
+        "cluster_id": "f1_cluster_013",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 3
+          },
+          {
+            "chapter": 2,
+            "para_index": 10
+          }
+        ],
+        "excerpt": "What Ahjan returns to again and again is this... The Buddha taught that desire itself is not the problem. Wanting to eat..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_014",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 6
+          },
+          {
+            "chapter": 3,
+            "para_index": 6
+          }
+        ],
+        "excerpt": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_015",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 18
+          },
+          {
+            "chapter": 3,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "Ahjan's reading of this is precise: ... Purity is not about perfection. It means removing what blocks clarity. When you\n..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_016",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 24
+          },
+          {
+            "chapter": 7,
+            "para_index": 22
+          }
+        ],
+        "excerpt": "The direct reports praised his handling of the situation. What they praised was the mask. Underneath it, the money fear ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2])",
+      "evidence": {
+        "cluster_id": "f1_cluster_017",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 38
+          },
+          {
+            "chapter": 2,
+            "para_index": 55
+          }
+        ],
+        "excerpt": "The physical sensation of financial dread \u2014 the stomach drop, the chest tightening, the slight nausea \u2014 is not a malfunc..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_018",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 44
+          },
+          {
+            "chapter": 7,
+            "para_index": 67
+          }
+        ],
+        "excerpt": "List the five people on your team by first name only. Say each name once. Slowly. These are real people. Present. Not he..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [2, 3, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_019",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 46
+          },
+          {
+            "chapter": 3,
+            "para_index": 43
+          },
+          {
+            "chapter": 5,
+            "para_index": 43
+          }
+        ],
+        "excerpt": "The win here is not calm. The win is noticing the alarm before it chooses for you.\nYou do not need to feel different yet..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_020",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 51
+          },
+          {
+            "chapter": 8,
+            "para_index": 60
+          }
+        ],
+        "excerpt": "At the end of a high-uncertainty day, sit in your chair before leaving. Do not stand yet. Count three things your team d..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_021",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 29
+          },
+          {
+            "chapter": 7,
+            "para_index": 13
+          }
+        ],
+        "excerpt": "The retention grant vested on a Thursday. Two hundred and forty thousand dollars converted from theoretical to real whil..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 4])",
+      "evidence": {
+        "cluster_id": "f1_cluster_022",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 31
+          },
+          {
+            "chapter": 4,
+            "para_index": 26
+          }
+        ],
+        "excerpt": "There was a version of him that existed before the 2am math took up permanent residence. He could barely remember that v..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_023",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 35
+          },
+          {
+            "chapter": 3,
+            "para_index": 52
+          }
+        ],
+        "excerpt": "Overwhelm is not the same as having a lot of financial complexity. It is the experience of financial information as an u..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_024",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 41
+          },
+          {
+            "chapter": 10,
+            "para_index": 40
+          }
+        ],
+        "excerpt": "After a performance review conversation, find a wall. Press your back against it. Feel the wall hold you. Solid. Breathe..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_025",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 48
+          },
+          {
+            "chapter": 6,
+            "para_index": 40
+          }
+        ],
+        "excerpt": "Stand up from your chair. Press both feet into the floor. Feel your weight. Steady. Name the three budget line items you..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 4])",
+      "evidence": {
+        "cluster_id": "f1_cluster_026",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 49
+          },
+          {
+            "chapter": 4,
+            "para_index": 44
+          }
+        ],
+        "excerpt": "Now, let's look at something subtle.\nYour shoulders may sit slightly lower than before. That shift may be only a centime..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_027",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 12
+          },
+          {
+            "chapter": 10,
+            "para_index": 19
+          }
+        ],
+        "excerpt": "Sarah gets the layoff notice. Real financial threat. Real loss of income. The alarm fires and for the first time it matc..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_028",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 14
+          },
+          {
+            "chapter": 11,
+            "para_index": 25
+          }
+        ],
+        "excerpt": "He didn't plan to stop. He just did \u2014 halfway through the quarterly review, mid-sentence, with the 2am math pressing aga..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_029",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 18
+          },
+          {
+            "chapter": 11,
+            "para_index": 11
+          }
+        ],
+        "excerpt": "David notices the financial comparison activates before his rational mind can intervene. He sees a peer's new car and hi..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_030",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 22
+          },
+          {
+            "chapter": 7,
+            "para_index": 47
+          }
+        ],
+        "excerpt": "He didn't call it financial anxiety. He called it being thorough, being prepared, being responsible at the KPI. But when..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_031",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 24
+          },
+          {
+            "chapter": 5,
+            "para_index": 23
+          }
+        ],
+        "excerpt": "The team meeting ended and she exhaled for what felt like the first time in hours. Nine seconds later, the shame around ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_032",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 28
+          },
+          {
+            "chapter": 7,
+            "para_index": 20
+          }
+        ],
+        "excerpt": "She woke at 4am again. Not to an alarm \u2014 to the scarcity alarm doing its pre-dawn inventory. The stakeholders she hadn't..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4])",
+      "evidence": {
+        "cluster_id": "f1_cluster_033",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 32
+          },
+          {
+            "chapter": 4,
+            "para_index": 46
+          }
+        ],
+        "excerpt": "The belief that readiness precedes action in the domain of financial anxiety is the trap. Readiness in this context is p..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_034",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 37
+          },
+          {
+            "chapter": 9,
+            "para_index": 40
+          }
+        ],
+        "excerpt": "Before the skip-level meeting, stop. Place both hands flat on your desk. Feel the surface. Cold or warm. Hard or soft. T..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_035",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 43
+          },
+          {
+            "chapter": 7,
+            "para_index": 73
+          }
+        ],
+        "excerpt": "Write your team's headcount on paper. The real number. Not the rumored cuts. Circle it. Set the pen down. Breathe in for..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_036",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 3
+          },
+          {
+            "chapter": 8,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "What Ahjan returns to again and again is this... Suffering is not a punishment. It is a signal. When you move toward wha..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [5, 8, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_037",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 21
+          },
+          {
+            "chapter": 8,
+            "para_index": 37
+          },
+          {
+            "chapter": 12,
+            "para_index": 16
+          }
+        ],
+        "excerpt": "Peak tension. The turning point approaches. Everything shifts."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_038",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 25
+          },
+          {
+            "chapter": 12,
+            "para_index": 22
+          }
+        ],
+        "excerpt": "He stopped, on purpose this time, in the middle of the Sunday-night budget narrative, the children asleep down the hall,..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_039",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 35
+          },
+          {
+            "chapter": 5,
+            "para_index": 52
+          }
+        ],
+        "excerpt": "Money shame is the belief that your financial situation reflects your worth as a person \u2014 your intelligence, your discip..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_040",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 41
+          },
+          {
+            "chapter": 6,
+            "para_index": 34
+          }
+        ],
+        "excerpt": "Open your calendar. Find one meeting this week you actually own. Not a status update. A decision. Write the word MINE ne..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_041",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 42
+          },
+          {
+            "chapter": 7,
+            "para_index": 74
+          }
+        ],
+        "excerpt": "Now, take a moment and reflect.\nBreathing at an even rhythm may have created a smoother internal tempo. Heart rate varia..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_042",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 48
+          },
+          {
+            "chapter": 8,
+            "para_index": 54
+          }
+        ],
+        "excerpt": "Pull up last quarter's performance data. Read the first line aloud. Your voice, not your fear's voice. Notice your jaw. ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_043",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 49
+          },
+          {
+            "chapter": 7,
+            "para_index": 68
+          }
+        ],
+        "excerpt": "Now, pause and examine what just happened.\nBreathing through the nose may have slowed your rhythm naturally. Nasal airfl..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [6, 10, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_044",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 3
+          },
+          {
+            "chapter": 10,
+            "para_index": 3
+          },
+          {
+            "chapter": 11,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "What Ahjan keeps pointing toward is... Most people believe enlightenment requires leaving the world behind. The Buddha\nt..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [6, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_045",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 11
+          },
+          {
+            "chapter": 7,
+            "para_index": 17
+          }
+        ],
+        "excerpt": "What Ahjan keeps pointing toward is... Helvetica; ;; ;; Enlightenment is a profound state of awareness and understanding..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_046",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 28
+          },
+          {
+            "chapter": 6,
+            "para_index": 44
+          }
+        ],
+        "excerpt": "The financial spiral is not random catastrophizing \u2014 it has a predictable architecture: one unpaid bill becomes a cascad..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [6, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_047",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 41
+          },
+          {
+            "chapter": 11,
+            "para_index": 43
+          }
+        ],
+        "excerpt": "Now, take a moment to assess your balance.\nRocking introduces predictable motion. Predictability reduces defensive activ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_048",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 11
+          },
+          {
+            "chapter": 10,
+            "para_index": 15
+          }
+        ],
+        "excerpt": "The story of his financial anxiety wasn't dramatic. It was cumulative. A hundred quarterly review moments where the 2am ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_049",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 15
+          },
+          {
+            "chapter": 8,
+            "para_index": 11
+          }
+        ],
+        "excerpt": "His daughter found the spreadsheet open on the kitchen iPad \u2014 the one with the column labeled \"Runway.\" She asked, in th..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_050",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 24
+          },
+          {
+            "chapter": 9,
+            "para_index": 19
+          }
+        ],
+        "excerpt": "She told her friend she was fine. She told the slide deck she was fine. She told the mirror she was fine. The shame arou..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_051",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 53
+          },
+          {
+            "chapter": 9,
+            "para_index": 26
+          }
+        ],
+        "excerpt": "In Ahjan's framework, the path begins with... Ahjan teaches that the first place to look is not the mind. The mind comes..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_052",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 54
+          },
+          {
+            "chapter": 9,
+            "para_index": 27
+          }
+        ],
+        "excerpt": "In the forest tradition Ahjan was trained in, this is not philosophy. It is\nobservation. Sit with anyone in the middle o..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_053",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 55
+          },
+          {
+            "chapter": 9,
+            "para_index": 28
+          }
+        ],
+        "excerpt": "So Ahjan begins where the actual signal is. Not at the level of belief, not\nat the level of self-talk, not at the level ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_054",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 56
+          },
+          {
+            "chapter": 9,
+            "para_index": 29
+          }
+        ],
+        "excerpt": "\"What is the body doing right now?\" That is the question he keeps coming back\nto. Not \"what are you thinking?\" Not \"what..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_055",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 57
+          },
+          {
+            "chapter": 9,
+            "para_index": 30
+          }
+        ],
+        "excerpt": "This is not a trick to bypass the mind. The mind is still welcome. But the\nmind has had its turn for most of your life, ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_056",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 58
+          },
+          {
+            "chapter": 9,
+            "para_index": 31
+          }
+        ],
+        "excerpt": "Ahjan says: look there first. Not always. Not for every question. But for\nthis one \u2014 the one about whatever fear or patt..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_057",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 75
+          },
+          {
+            "chapter": 9,
+            "para_index": 47
+          }
+        ],
+        "excerpt": "There is a cost the system never measures. The energy required to manage the headcount decision while performing the rol..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_058",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 13
+          },
+          {
+            "chapter": 9,
+            "para_index": 25
+          }
+        ],
+        "excerpt": "She did the math one more time, on paper, at the counter island, the way her father used to balance a checkbook. Mortgag..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_059",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 35
+          },
+          {
+            "chapter": 11,
+            "para_index": 15
+          }
+        ],
+        "excerpt": "He told himself the shame around numbers was just how it worked. Everybody at the KPI carried it. But that Tuesday, when..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_060",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 45
+          },
+          {
+            "chapter": 11,
+            "para_index": 23
+          }
+        ],
+        "excerpt": "David manages finances from current role. His chest is open. Sarah builds wealth. Her hands are warm. Kevin invests. His..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_061",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 49
+          },
+          {
+            "chapter": 8,
+            "para_index": 62
+          }
+        ],
+        "excerpt": "The antidote to avoidance is not a financial overhaul or a comprehensive budget or a plan. It is one look. One number. O..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_062",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 65
+          },
+          {
+            "chapter": 8,
+            "para_index": 66
+          }
+        ],
+        "excerpt": "So when the feeling spikes, remember this is the mechanism your body uses when it cannot speak yet. For example, tight j..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [9, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_063",
+        "instances": [
+          {
+            "chapter": 9,
+            "para_index": 23
+          },
+          {
+            "chapter": 12,
+            "para_index": 12
+          }
+        ],
+        "excerpt": "At the airport bar the VP next to him said he was thinking of downshifting, and for once he didn't ask if the man had ru..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_064",
+        "instances": [
+          {
+            "chapter": 9,
+            "para_index": 34
+          },
+          {
+            "chapter": 9,
+            "para_index": 49
+          }
+        ],
+        "excerpt": "The cost of financial anxiety is not only the financial cost \u2014 though that is real. It is the cognitive cost, the relati..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_065",
+        "instances": [
+          {
+            "chapter": 10,
+            "para_index": 28
+          },
+          {
+            "chapter": 10,
+            "para_index": 44
+          }
+        ],
+        "excerpt": "A financial fact \u2014 a balance, a debt, an income \u2014 is data about what happened. It is not a verdict about who the reader ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_066",
+        "instances": [
+          {
+            "chapter": 11,
+            "para_index": 37
+          },
+          {
+            "chapter": 11,
+            "para_index": 50
+          }
+        ],
+        "excerpt": "The identity shift this book is working toward is not \"I have my finances under control.\" It is: I am a person who can f..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [11, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_067",
+        "instances": [
+          {
+            "chapter": 11,
+            "para_index": 48
+          },
+          {
+            "chapter": 12,
+            "para_index": 39
+          }
+        ],
+        "excerpt": "What would this work look like if the financial anxiety were addressed structurally instead of individually. Not through..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_068",
+        "instances": [
+          {
+            "chapter": 12,
+            "para_index": 27
+          },
+          {
+            "chapter": 12,
+            "para_index": 41
+          }
+        ],
+        "excerpt": "Financial clarity is not the same as financial security. Clarity \u2014 being able to look at your situation and see its actu..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 7965,
+        "snippet": "or a moment.\n\nHere's a practice to work with.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.C: sentence starts with lowercase noun \"through\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "through the breakfast nook window this morning while you calculated the refi rate for the third time this quarter."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.C: sentence starts with lowercase noun \"and\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "and somatic approach..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 2,
+      "summary": "F2.C: sentence starts with lowercase noun \"and\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "and somatic approach..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 2,
+      "summary": "F2.C: sentence starts with lowercase noun \"and\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "and somatic approach..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 3,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 11730,
+        "snippet": "ted overload teaches you to stop asking for."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 4,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 4258,
+        "snippet": "ia says thank you and both of them move on.\nShe "
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 4,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 9034,
+        "snippet": "t it changes the room you are answering in.\n\nThe "
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 4,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 9110,
+        "snippet": "t it changes the room you are answering in."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 5,
+      "summary": "F2.C: sentence starts with lowercase noun \"and\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "and somatic approach..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 7,
+      "summary": "F2.C: sentence starts with lowercase noun \"and\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "and somatic approach..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 8,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 10644,
+        "snippet": "t it changes the room you are answering in.\n\nSo w"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 8,
+      "summary": "F2.C: sentence starts with lowercase noun \"the\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "the foundation of contemplative..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 9,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 7891,
+        "snippet": "n emotional processing practice to work with.\n\nWhen"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 9,
+      "summary": "F2.C: sentence starts with lowercase noun \"the\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "the foundation of contemplative..."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 3 chapters: [1, 2, 9]",
+      "evidence": {
+        "chapters": [
+          1,
+          2,
+          9
+        ],
+        "closing_line": "It is the first honest place this pattern asks for practice."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 2 chapters: [5, 10]",
+      "evidence": {
+        "chapters": [
+          5,
+          10
+        ],
+        "closing_line": "What remains is the sentence shame writes after the moment is over, when it tries to turn one event into identity."
+      }
+    },
+    {
+      "failure_id": "F6",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "pedagogical-cadence 4-gram repeated 3+ times: 23 distinct repeating cadences",
+      "evidence": {
+        "repeats": [
+          {
+            "cadence": [
+              3,
+              7,
+              5,
+              3
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              7,
+              5,
+              3,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              3,
+              5,
+              6
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              3,
+              5,
+              6,
+              3
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              6,
+              3,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              4,
+              4,
+              4
+            ],
+            "count": 4
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "count": 7
+          },
+          {
+            "cadence": [
+              3,
+              5,
+              5,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              5,
+              5,
+              10
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              12,
+              7,
+              7,
+              2
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              4,
+              5,
+              4,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              4,
+              5
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              4,
+              6,
+              5,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              9,
+              7,
+              2
+            ],
+            "count": 8
+          },
+          {
+            "cadence": [
+              9,
+              7,
+              2,
+              8
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              7,
+              2,
+              8,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              9,
+              13,
+              15,
+              11
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              3,
+              3,
+              3,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              3,
+              4,
+              6,
+              8
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              3,
+              4,
+              2,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              9,
+              15,
+              6,
+              8
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              7,
+              8,
+              4,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              5,
+              4,
+              8
+            ],
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 1,
+      "summary": "over-prescribed practice density: 16 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 16
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 2,
+      "summary": "over-prescribed practice density: 15 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 15
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 3,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 4,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 5,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 6,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 7,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 8,
+      "summary": "over-prescribed practice density: 20 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 20
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 9,
+      "summary": "over-prescribed practice density: 10 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 10
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 10,
+      "summary": "over-prescribed practice density: 11 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 11
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 11,
+      "summary": "over-prescribed practice density: 8 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 8
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 12,
+      "summary": "over-prescribed practice density: 7 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 7
+      }
+    }
+  ],
+  "book_metrics": {
+    "chapter_count": 12,
+    "word_count": 20993,
+    "teacher_id": "ahjan",
+    "persona_id": "corporate_managers",
+    "topic_id": "financial_anxiety",
+    "quality_profile": "production",
+    "spec_version": "1.0.0",
+    "f8_deferred": "anchor_corpus_required"
+  },
+  "suggested_lanes": [
+    "Pearl_Editor + Pearl_Writer (atom diversification) OR Pearl_Dev (renderer paragraph-template dedupe extension)",
+    "Pearl_Dev (renderer slot-fill validation; HARD-FAIL renderer artifact)",
+    "Pearl_Dev (closing-line uniqueness check in composer)",
+    "Pearl_Editor + Pearl_Writer (cadence variety in pedagogical-cadence atoms)",
+    "Pearl_Architect (per-chapter practice-density cap) + Pearl_Editor (atom routing)"
+  ]
+}

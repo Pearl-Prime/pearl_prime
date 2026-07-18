@@ -1,0 +1,65 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__millennial_women_professionals__grief
+brand: heart_transmission
+teacher: junko
+persona: millennial_women_professionals
+topic: grief
+byline_author: bea_voss
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__millennial_women_professionals__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__millennial_women_professionals__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You do not have to be over it, get past it, or turn your loss
+  into a lesson. This is grief met the way one heart meets another in a quiet room
+  — slowly, gently, with nothing required of you but to keep breathing through it.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- It's OK That You're Not OK (Megan Devine) — the genre standard for refusing to pathologize
+  or rush grief, met with steady companionship rather than fixes
+- The Year of Magical Thinking (Joan Didion) — interior, literary grief told from
+  inside the daze, honoring how loss scrambles an ordered, capable life
+- Bittersweet (Susan Cain) — makes longing and sorrow legible as part of a full inner
+  life rather than a malfunction to correct
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early thirties to early forties
+  where_they_are: She is back at her desk eleven days after the funeral, a meeting
+    invite blinking on the screen, mouthing 'I'm good, thanks' to a colleague who
+    asked — while under the table her thumb worries the edge of a phone that will
+    never light up with that person's name again.
+  what_they_need: permission to still be grieving long after the world expected her
+    to be fine, and a voice that sits with the loss instead of trying to fix it or
+    fast-forward her through it
+  what_they_avoid: five-stage frameworks, 'everything happens for a reason,' silver-lining
+    reframes, grief 'productivity,' and anyone who treats mourning as a problem to
+    be solved on a schedule
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the warmth of someone sitting
+    close in a dim kitchen at the end of a long day, never a clinician, never a coach,
+    never brisk
+  sentence_rhythm: unhurried and breath-paced; short plain sentences that land and
+    rest, opening now and then into one longer, tender line before settling again
+  metaphor_family: the heart and what passes between two of them, light handed from
+    one palm to another, the warmth of a held hand, the empty chair, the unguarded
+    moment, what stays after the words have stopped
+_needs_authoring: false

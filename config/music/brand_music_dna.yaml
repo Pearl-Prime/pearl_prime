@@ -1,0 +1,744 @@
+# Brand Music DNA — 24 Unique Sonic Signatures for Anti-Spam
+# Each channel gets a unique combination of 7 parameters that transforms base tracks
+# into brand-specific audio that defeats platform fingerprint matching.
+#
+# Authority: artifacts/research/therapeutic_music_bank_system_2026_04_06.md
+# See also: config/video/channel_registry.yaml, config/music/exercise_music_mapping.yaml
+#
+# DESIGN CONSTRAINTS:
+# 1. No two brands share the same (key_offset + bpm_multiplier) combination
+# 2. Brand families (calm_healing, bold_dynamic, abstract_symbolic, hybrid_experimental)
+#    share broad tonal tendencies but differ in specifics
+# 3. Every parameter must be subtle enough to preserve therapeutic intent
+# 4. Every parameter must be strong enough to defeat Shazam-class fingerprinting
+# 5. The combination of all 7 parameters makes collision probability negligible
+
+schema_version: "1.0.0"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FFmpeg TRANSFORM TEMPLATE
+# Applied to every base track to produce the brand-specific version.
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# ffmpeg -i base.mp3 \
+#   -af "asetrate=44100*{pitch_factor}, \
+#        atempo={tempo_factor}, \
+#        equalizer=f={eq_low_freq}:t=q:w=1.5:g={eq_low_gain}, \
+#        equalizer=f={eq_mid_freq}:t=q:w=1.0:g={eq_mid_gain}, \
+#        equalizer=f={eq_high_freq}:t=q:w=1.5:g={eq_high_gain}, \
+#        aecho={reverb_delay}:{reverb_decay}:60:0.3, \
+#        stereotools=balance_i={stereo_balance}:sbal={stereo_width}" \
+#   -i texture_overlay.mp3 \
+#   -filter_complex "[0:a][1:a]amix=inputs=2:weights=10 {texture_weight}" \
+#   output.mp3
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BRAND DNA DEFINITIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+brands:
+
+  # ── CALM & HEALING (ch_001-006) ──────────────────────────────────────────
+
+  ch_001:
+    channel_name: "Soft Ghibli-esque"
+    brand_id: stillness_press
+    style_family: calm_healing
+    key_offset_semitones: 0      # C reference (no shift)
+    bpm_multiplier: 1.00         # no tempo change
+    eq_profile:
+      low_freq_hz: 80
+      low_gain_db: 2             # warm low-end boost
+      mid_freq_hz: 1200
+      mid_gain_db: 1             # gentle presence
+      high_freq_hz: 6000
+      high_gain_db: -1           # soft rolled-off highs
+    reverb:
+      delay_ms: 80
+      decay: 0.45                # medium room, warm
+    stereo:
+      width: 1.1                 # slightly wider than center
+      balance: 0.0               # centered
+    texture_overlay: "vinyl_warm"
+    texture_weight: 0.08         # very subtle
+    notes: "Warm, cozy, slightly vintage. Ghibli-inspired pastoral warmth."
+
+  ch_002:
+    channel_name: "Minimalist Line Art"
+    brand_id: cognitive_clarity
+    style_family: calm_healing
+    key_offset_semitones: 2      # D (2 semitones up)
+    bpm_multiplier: 1.02         # 2% faster
+    eq_profile:
+      low_freq_hz: 100
+      low_gain_db: -2            # reduced low-end for clarity
+      mid_freq_hz: 2500
+      mid_gain_db: 2             # crisp mid presence
+      high_freq_hz: 8000
+      high_gain_db: 1            # clean highs
+    reverb:
+      delay_ms: 40
+      decay: 0.25                # tight, clean room
+    stereo:
+      width: 0.85                # narrower, focused
+      balance: 0.0
+    texture_overlay: "none"
+    texture_weight: 0.0
+    notes: "Clean, precise, uncluttered. Analytical clarity."
+
+  ch_003:
+    channel_name: "Chibi/Deformed"
+    brand_id: cognitive_clarity
+    style_family: calm_healing
+    key_offset_semitones: 4      # E (4 semitones up)
+    bpm_multiplier: 1.04         # 4% faster
+    eq_profile:
+      low_freq_hz: 120
+      low_gain_db: -1
+      mid_freq_hz: 3000
+      mid_gain_db: 2             # bright, youthful mid
+      high_freq_hz: 10000
+      high_gain_db: 2            # sparkly highs
+    reverb:
+      delay_ms: 60
+      decay: 0.35                # medium-bright room
+    stereo:
+      width: 1.2                 # wide, playful
+      balance: 0.0
+    texture_overlay: "music_box_shimmer"
+    texture_weight: 0.06
+    notes: "Cute, approachable, youthful. Slightly brighter and lighter."
+
+  ch_004:
+    channel_name: "Watercolor Wash"
+    brand_id: stillness_press
+    style_family: calm_healing
+    key_offset_semitones: -2     # Bb (2 semitones down)
+    bpm_multiplier: 0.97         # 3% slower
+    eq_profile:
+      low_freq_hz: 60
+      low_gain_db: 3             # deep warmth
+      mid_freq_hz: 800
+      mid_gain_db: 1             # gentle body
+      high_freq_hz: 5000
+      high_gain_db: -2           # very soft highs
+    reverb:
+      delay_ms: 120
+      decay: 0.55                # large room, washed
+    stereo:
+      width: 1.3                 # very wide, diffuse
+      balance: 0.0
+    texture_overlay: "rain_gentle"
+    texture_weight: 0.10
+    notes: "Fluid, healing, soft edges. Deep caregiver warmth."
+
+  ch_005:
+    channel_name: "Kawaii/Cute"
+    brand_id: cognitive_clarity
+    style_family: calm_healing
+    key_offset_semitones: 5      # F (5 semitones up)
+    bpm_multiplier: 1.03         # 3% faster
+    eq_profile:
+      low_freq_hz: 150
+      low_gain_db: -2            # less bass
+      mid_freq_hz: 3500
+      mid_gain_db: 3             # bright, sweet presence
+      high_freq_hz: 12000
+      high_gain_db: 2            # airy sparkle
+    reverb:
+      delay_ms: 50
+      decay: 0.30                # light, bright room
+    stereo:
+      width: 1.15
+      balance: 0.0
+    texture_overlay: "chime_soft"
+    texture_weight: 0.07
+    notes: "Pastel, sweet, affirming. Gentle high-frequency warmth."
+
+  ch_006:
+    channel_name: "Lo-fi/Chill"
+    brand_id: stillness_press
+    style_family: calm_healing
+    key_offset_semitones: -1     # B (1 semitone down)
+    bpm_multiplier: 0.98         # 2% slower
+    eq_profile:
+      low_freq_hz: 80
+      low_gain_db: 2             # warm bass
+      mid_freq_hz: 2000
+      mid_gain_db: -1            # scooped mid for lo-fi
+      high_freq_hz: 4000
+      high_gain_db: -3           # rolled off highs (lo-fi character)
+    reverb:
+      delay_ms: 70
+      decay: 0.40                # medium room
+    stereo:
+      width: 0.95                # slightly narrow, intimate
+      balance: 0.0
+    texture_overlay: "vinyl_crackle"
+    texture_weight: 0.12         # prominent vinyl texture
+    notes: "Muted, grainy, cozy. Classic lo-fi study desk vibes."
+
+  # ── BOLD & DYNAMIC (ch_007-012) ──────────────────────────────────────────
+
+  ch_007:
+    channel_name: "Shonen Action"
+    brand_id: cognitive_clarity
+    style_family: bold_dynamic
+    key_offset_semitones: 3      # Eb (3 semitones up)
+    bpm_multiplier: 1.06         # 6% faster
+    eq_profile:
+      low_freq_hz: 60
+      low_gain_db: 3             # powerful bass
+      mid_freq_hz: 2000
+      mid_gain_db: 3             # strong presence
+      high_freq_hz: 8000
+      high_gain_db: 2            # bright energy
+    reverb:
+      delay_ms: 30
+      decay: 0.20                # tight, punchy
+    stereo:
+      width: 1.25                # wide, dramatic
+      balance: 0.0
+    texture_overlay: "none"
+    texture_weight: 0.0
+    notes: "High-energy, bold. Confident forward motion."
+
+  ch_008:
+    channel_name: "Cyberpunk/Sci-Fi"
+    brand_id: cognitive_clarity
+    style_family: bold_dynamic
+    key_offset_semitones: -3     # A (3 semitones down)
+    bpm_multiplier: 1.05         # 5% faster
+    eq_profile:
+      low_freq_hz: 40
+      low_gain_db: 4             # deep sub-bass
+      mid_freq_hz: 4000
+      mid_gain_db: 2             # cutting mid
+      high_freq_hz: 12000
+      high_gain_db: 3            # sharp highs
+    reverb:
+      delay_ms: 90
+      decay: 0.50                # metallic, reverberant
+    stereo:
+      width: 1.4                 # very wide, immersive
+      balance: 0.0
+    texture_overlay: "digital_hum"
+    texture_weight: 0.09
+    notes: "Neon, futuristic. Deep bass with sharp high-frequency detail."
+
+  ch_009:
+    channel_name: "Vintage/Noir"
+    brand_id: stillness_press
+    style_family: bold_dynamic
+    key_offset_semitones: -4     # Ab (4 semitones down)
+    bpm_multiplier: 0.96         # 4% slower
+    eq_profile:
+      low_freq_hz: 100
+      low_gain_db: 1
+      mid_freq_hz: 1000
+      mid_gain_db: 2             # warm mid presence
+      high_freq_hz: 3000
+      high_gain_db: -4           # heavily rolled highs (vintage)
+    reverb:
+      delay_ms: 100
+      decay: 0.50                # old room feel
+    stereo:
+      width: 0.80                # narrow, mono-adjacent
+      balance: 0.0
+    texture_overlay: "tape_hiss"
+    texture_weight: 0.14         # heavy tape character
+    notes: "High-contrast vintage. Warm mid, no brightness, tape warmth."
+
+  ch_010:
+    channel_name: "Pop Art"
+    brand_id: cognitive_clarity
+    style_family: bold_dynamic
+    key_offset_semitones: 6      # F# (6 semitones up / tritone)
+    bpm_multiplier: 1.04         # 4% faster
+    eq_profile:
+      low_freq_hz: 80
+      low_gain_db: 1
+      mid_freq_hz: 2500
+      mid_gain_db: 3             # punchy mid
+      high_freq_hz: 10000
+      high_gain_db: 2            # bright, crisp
+    reverb:
+      delay_ms: 35
+      decay: 0.22                # tight, present
+    stereo:
+      width: 1.1
+      balance: 0.0
+    texture_overlay: "none"
+    texture_weight: 0.0
+    notes: "Vibrant, bold, present. Clean and bright."
+
+  ch_011:
+    channel_name: "Sketchy/Rough"
+    brand_id: cognitive_clarity
+    style_family: bold_dynamic
+    key_offset_semitones: 1      # C# (1 semitone up)
+    bpm_multiplier: 1.03         # 3% faster
+    eq_profile:
+      low_freq_hz: 100
+      low_gain_db: 2             # grounded
+      mid_freq_hz: 1500
+      mid_gain_db: 1
+      high_freq_hz: 6000
+      high_gain_db: -1
+    reverb:
+      delay_ms: 55
+      decay: 0.35                # rough room
+    stereo:
+      width: 1.0                 # natural
+      balance: 0.0
+    texture_overlay: "pencil_scratch"
+    texture_weight: 0.05         # subtle texture
+    notes: "Raw, honest. Grounded with slight textural grit."
+
+  ch_012:
+    channel_name: "Retro 80s/90s"
+    brand_id: stillness_press
+    style_family: bold_dynamic
+    key_offset_semitones: -5     # G (5 semitones down)
+    bpm_multiplier: 1.02         # 2% faster
+    eq_profile:
+      low_freq_hz: 60
+      low_gain_db: 3             # 80s bass boost
+      mid_freq_hz: 1200
+      mid_gain_db: -1            # scooped mid (80s sound)
+      high_freq_hz: 8000
+      high_gain_db: 1
+    reverb:
+      delay_ms: 110
+      decay: 0.55                # big 80s reverb
+    stereo:
+      width: 1.35                # wide 80s stereo
+      balance: 0.0
+    texture_overlay: "tape_warm"
+    texture_weight: 0.10
+    notes: "Nostalgic 80s/90s feel. Big reverb, warm tape, scooped mid."
+
+  # ── ABSTRACT & SYMBOLIC (ch_013-018) ─────────────────────────────────────
+
+  ch_013:
+    channel_name: "Geometric/Abstract"
+    brand_id: cognitive_clarity
+    style_family: abstract_symbolic
+    key_offset_semitones: 7      # G (7 semitones up)
+    bpm_multiplier: 1.01         # 1% faster
+    eq_profile:
+      low_freq_hz: 120
+      low_gain_db: -2            # reduced bass
+      mid_freq_hz: 3000
+      mid_gain_db: 2             # precise mid
+      high_freq_hz: 9000
+      high_gain_db: 1            # clean detail
+    reverb:
+      delay_ms: 25
+      decay: 0.15                # very tight, precise
+    stereo:
+      width: 0.90                # focused, geometric
+      balance: 0.0
+    texture_overlay: "none"
+    texture_weight: 0.0
+    notes: "Precise, clean, mathematical. Minimal reverb, focused."
+
+  ch_014:
+    channel_name: "Ink Wash (Sumi-e)"
+    brand_id: stillness_press
+    style_family: abstract_symbolic
+    key_offset_semitones: -6     # F# (6 semitones down)
+    bpm_multiplier: 0.95         # 5% slower
+    eq_profile:
+      low_freq_hz: 80
+      low_gain_db: 2             # warm low
+      mid_freq_hz: 800
+      mid_gain_db: 0
+      high_freq_hz: 4000
+      high_gain_db: -2           # soft, washed
+    reverb:
+      delay_ms: 140
+      decay: 0.60                # vast, temple-like
+    stereo:
+      width: 1.4                 # very wide, expansive
+      balance: 0.0
+    texture_overlay: "water_drip"
+    texture_weight: 0.06
+    notes: "Traditional, vast. Temple reverb, water element."
+
+  ch_015:
+    channel_name: "Stained Glass"
+    brand_id: stillness_press
+    style_family: abstract_symbolic
+    key_offset_semitones: -7     # F (7 semitones down / 5 up)
+    bpm_multiplier: 0.94         # 6% slower
+    eq_profile:
+      low_freq_hz: 60
+      low_gain_db: 1
+      mid_freq_hz: 1000
+      mid_gain_db: 3             # rich, warm mid (organ-like)
+      high_freq_hz: 6000
+      high_gain_db: 0
+    reverb:
+      delay_ms: 160
+      decay: 0.65                # cathedral reverb
+    stereo:
+      width: 1.5                 # massive, cathedral-wide
+      balance: 0.0
+    texture_overlay: "bell_resonance"
+    texture_weight: 0.08
+    notes: "Sacred, vast, cathedral. Rich mid, massive reverb."
+
+  ch_016:
+    channel_name: "Glitch Art"
+    brand_id: cognitive_clarity
+    style_family: abstract_symbolic
+    key_offset_semitones: 8      # Ab (8 semitones up)
+    bpm_multiplier: 1.07         # 7% faster
+    eq_profile:
+      low_freq_hz: 40
+      low_gain_db: 2
+      mid_freq_hz: 5000
+      mid_gain_db: 3             # harsh mid-high (glitch character)
+      high_freq_hz: 14000
+      high_gain_db: 2            # sharp digital highs
+    reverb:
+      delay_ms: 45
+      decay: 0.28                # tight, digital
+    stereo:
+      width: 1.3                 # wide, unstable feeling
+      balance: 0.02              # very slight imbalance (glitch)
+    texture_overlay: "digital_glitch"
+    texture_weight: 0.11
+    notes: "Digital, sharp, slightly unstable. Glitch aesthetic."
+
+  ch_017:
+    channel_name: "Pointillism"
+    brand_id: stillness_press
+    style_family: abstract_symbolic
+    key_offset_semitones: -8     # E (8 semitones down / 4 up)
+    bpm_multiplier: 0.99         # 1% slower
+    eq_profile:
+      low_freq_hz: 100
+      low_gain_db: 0
+      mid_freq_hz: 2000
+      mid_gain_db: 1             # subtle detail
+      high_freq_hz: 7000
+      high_gain_db: 1            # point-like detail
+    reverb:
+      delay_ms: 65
+      decay: 0.38                # medium, detailed
+    stereo:
+      width: 1.05                # natural with slight space
+      balance: 0.0
+    texture_overlay: "granular_soft"
+    texture_weight: 0.07
+    notes: "Detailed, precise, dot-like textures. Subtle and careful."
+
+  ch_018:
+    channel_name: "Collage"
+    brand_id: stillness_press
+    style_family: abstract_symbolic
+    key_offset_semitones: -9     # Eb (9 semitones down / 3 up)
+    bpm_multiplier: 0.97         # 3% slower
+    eq_profile:
+      low_freq_hz: 80
+      low_gain_db: 1
+      mid_freq_hz: 1500
+      mid_gain_db: 0
+      high_freq_hz: 5000
+      high_gain_db: -1
+    reverb:
+      delay_ms: 85
+      decay: 0.42                # layered, collage-like
+    stereo:
+      width: 1.2                 # wide layers
+      balance: 0.01              # very slight offset
+    texture_overlay: "paper_rustle"
+    texture_weight: 0.09
+    notes: "Layered, fragmented, mixed-media. Paper/organic textures."
+
+  # ── HYBRID & EXPERIMENTAL (ch_019-024) ───────────────────────────────────
+
+  ch_019:
+    channel_name: "Cyberpunk/Steampunk"
+    brand_id: cognitive_clarity
+    style_family: hybrid_experimental
+    key_offset_semitones: 9      # A (9 semitones up)
+    bpm_multiplier: 1.05         # 5% faster
+    eq_profile:
+      low_freq_hz: 50
+      low_gain_db: 3             # deep mechanical bass
+      mid_freq_hz: 3500
+      mid_gain_db: 2
+      high_freq_hz: 11000
+      high_gain_db: 1
+    reverb:
+      delay_ms: 75
+      decay: 0.40                # mechanical room
+    stereo:
+      width: 1.25
+      balance: 0.0
+    texture_overlay: "mechanical_hum"
+    texture_weight: 0.10
+    notes: "Futuristic-mechanical. Deep bass, mechanical texture."
+
+  ch_020:
+    channel_name: "Art Nouveau"
+    brand_id: stillness_press
+    style_family: hybrid_experimental
+    key_offset_semitones: -10    # D (10 semitones down / 2 up)
+    bpm_multiplier: 0.96         # 4% slower
+    eq_profile:
+      low_freq_hz: 80
+      low_gain_db: 1
+      mid_freq_hz: 1000
+      mid_gain_db: 2             # rich, ornate mid
+      high_freq_hz: 7000
+      high_gain_db: 1            # gentle sparkle
+    reverb:
+      delay_ms: 100
+      decay: 0.50                # elegant room
+    stereo:
+      width: 1.2
+      balance: 0.0
+    texture_overlay: "harp_shimmer"
+    texture_weight: 0.06
+    notes: "Elegant, ornate, flowing. Rich mid with sparkle."
+
+  ch_021:
+    channel_name: "Kawaii-LoFi"
+    brand_id: cognitive_clarity
+    style_family: hybrid_experimental
+    key_offset_semitones: 10     # Bb (10 semitones up)
+    bpm_multiplier: 1.01         # 1% faster
+    eq_profile:
+      low_freq_hz: 100
+      low_gain_db: 1
+      mid_freq_hz: 2500
+      mid_gain_db: 1
+      high_freq_hz: 8000
+      high_gain_db: -2           # lo-fi rolled highs
+    reverb:
+      delay_ms: 60
+      decay: 0.35
+    stereo:
+      width: 1.0
+      balance: 0.0
+    texture_overlay: "vinyl_soft_chime"
+    texture_weight: 0.10
+    notes: "Cute + cozy. Vinyl warmth with music-box sparkle."
+
+  ch_022:
+    channel_name: "Dark/Moody"
+    brand_id: stillness_press
+    style_family: hybrid_experimental
+    key_offset_semitones: -11    # C# (11 semitones down / 1 up)
+    bpm_multiplier: 0.93         # 7% slower
+    eq_profile:
+      low_freq_hz: 40
+      low_gain_db: 4             # very deep bass
+      mid_freq_hz: 600
+      mid_gain_db: 1             # dark mid warmth
+      high_freq_hz: 3000
+      high_gain_db: -5           # heavily cut highs (dark character)
+    reverb:
+      delay_ms: 150
+      decay: 0.60                # dark, cavernous
+    stereo:
+      width: 1.35                # wide, enveloping darkness
+      balance: 0.0
+    texture_overlay: "wind_distant"
+    texture_weight: 0.12
+    notes: "Dark, deep, cavernous. Shadow work atmosphere."
+
+  ch_023:
+    channel_name: "Cartoonish/Silly"
+    brand_id: cognitive_clarity
+    style_family: hybrid_experimental
+    key_offset_semitones: 11     # B (11 semitones up)
+    bpm_multiplier: 1.08         # 8% faster
+    eq_profile:
+      low_freq_hz: 120
+      low_gain_db: -1            # lighter bass
+      mid_freq_hz: 3000
+      mid_gain_db: 2             # bright, fun mid
+      high_freq_hz: 10000
+      high_gain_db: 3            # sparkly, playful highs
+    reverb:
+      delay_ms: 40
+      decay: 0.25                # bouncy, short
+    stereo:
+      width: 1.15
+      balance: 0.0
+    texture_overlay: "bounce_soft"
+    texture_weight: 0.05
+    notes: "Bright, fun, bouncy. Lighthearted and accessible."
+
+  ch_024:
+    channel_name: "Surrealist"
+    brand_id: cognitive_clarity
+    style_family: hybrid_experimental
+    key_offset_semitones: -12    # C (full octave down — same note, lower register)
+    bpm_multiplier: 0.95         # 5% slower
+    eq_profile:
+      low_freq_hz: 50
+      low_gain_db: 3             # deep, dreamlike bass
+      mid_freq_hz: 1500
+      mid_gain_db: 0
+      high_freq_hz: 9000
+      high_gain_db: 2            # ethereal highs
+    reverb:
+      delay_ms: 180
+      decay: 0.70                # vast, impossible space
+    stereo:
+      width: 1.5                 # maximum width, surreal space
+      balance: -0.02             # slight left bias (dream imbalance)
+    texture_overlay: "dream_whisper"
+    texture_weight: 0.08
+    notes: "Dreamlike, impossible. Vast reverb, deep bass, ethereal highs."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TEXTURE OVERLAYS — unique micro-textures per brand
+# Stored in R2: r2://phoenix-music-bank/textures/{brand_id}/{texture_name}.mp3
+# These are mixed at low volume with the base track for fingerprint uniqueness.
+# ─────────────────────────────────────────────────────────────────────────────
+
+texture_overlays:
+  vinyl_warm:
+    description: "Warm vinyl surface noise, gentle crackle, low-pass filtered"
+    source: "MusicGen prompt: continuous warm vinyl record surface noise, gentle crackle, low frequency rumble, no music"
+    duration_s: 30
+    loop: true
+
+  vinyl_crackle:
+    description: "Classic lo-fi vinyl crackle, prominent but not harsh"
+    source: "MusicGen prompt: vinyl record crackle and pop, moderate surface noise, warm analog character, no music"
+    duration_s: 30
+    loop: true
+
+  vinyl_soft_chime:
+    description: "Soft vinyl warmth with distant music-box chime"
+    source: "MusicGen prompt: soft vinyl surface noise with very distant tiny music box chime, warm, gentle, no melody"
+    duration_s: 30
+    loop: true
+
+  music_box_shimmer:
+    description: "Very quiet music-box-like shimmer, high frequency sparkle"
+    source: "MusicGen prompt: very quiet high frequency shimmer like distant music box, tiny bells, barely audible, no melody"
+    duration_s: 30
+    loop: true
+
+  chime_soft:
+    description: "Gentle wind chime, random intervals, very quiet"
+    source: "MusicGen prompt: very soft distant wind chimes, random timing, barely audible, gentle breeze"
+    duration_s: 30
+    loop: true
+
+  rain_gentle:
+    description: "Gentle rain on window, no thunder, steady"
+    source: "Pixabay CC0 nature sounds or MusicGen: gentle rain on glass window, steady, soft, no thunder"
+    duration_s: 30
+    loop: true
+
+  tape_hiss:
+    description: "Analog tape hiss, warm, slightly noisy"
+    source: "MusicGen prompt: analog tape machine hiss, warm noise floor, vintage character, no music"
+    duration_s: 30
+    loop: true
+
+  tape_warm:
+    description: "Warm tape saturation texture, subtle"
+    source: "MusicGen prompt: warm analog tape recorder running noise, gentle saturation, vintage warmth, no music"
+    duration_s: 30
+    loop: true
+
+  digital_hum:
+    description: "Low-frequency digital/electronic hum, sci-fi"
+    source: "MusicGen prompt: low frequency electronic hum, spaceship ambient, gentle digital drone, no music"
+    duration_s: 30
+    loop: true
+
+  digital_glitch:
+    description: "Occasional subtle digital glitch artifacts"
+    source: "MusicGen prompt: very subtle digital glitch texture, occasional tiny data corruption sounds, quiet, no music"
+    duration_s: 30
+    loop: true
+
+  pencil_scratch:
+    description: "Soft pencil on paper texture"
+    source: "ElevenLabs SFX: pencil sketching on paper, gentle, continuous"
+    duration_s: 30
+    loop: true
+
+  water_drip:
+    description: "Occasional water drip in stone space"
+    source: "MusicGen prompt: occasional single water drop in stone temple, gentle echo, sparse, quiet, no music"
+    duration_s: 30
+    loop: true
+
+  bell_resonance:
+    description: "Very distant church/temple bell resonance"
+    source: "MusicGen prompt: very distant church bell resonance, long decay, barely audible, single tone, no melody"
+    duration_s: 30
+    loop: true
+
+  granular_soft:
+    description: "Soft granular synthesis texture, dot-like particles"
+    source: "MusicGen prompt: soft granular synthesis particles, tiny dot-like sounds, gentle pointillist texture, no melody"
+    duration_s: 30
+    loop: true
+
+  paper_rustle:
+    description: "Soft paper/page turning texture"
+    source: "ElevenLabs SFX: gentle paper rustling, very soft, occasional page turn"
+    duration_s: 30
+    loop: true
+
+  mechanical_hum:
+    description: "Steampunk-like mechanical ambient"
+    source: "MusicGen prompt: steampunk mechanical ambient hum, gentle clockwork, warm brass resonance, no melody"
+    duration_s: 30
+    loop: true
+
+  harp_shimmer:
+    description: "Very distant harp-like harmonic shimmer"
+    source: "MusicGen prompt: very distant ethereal harp harmonics, barely audible, gentle shimmer, no melody"
+    duration_s: 30
+    loop: true
+
+  wind_distant:
+    description: "Distant wind through empty space"
+    source: "Pixabay CC0 nature sounds or MusicGen: distant wind through canyon, gentle, steady, atmospheric"
+    duration_s: 30
+    loop: true
+
+  dream_whisper:
+    description: "Surreal whisper-like breath texture"
+    source: "MusicGen prompt: surreal breath-like whisper texture, dreamy, non-human, gentle air, no words, no vocals"
+    duration_s: 30
+    loop: true
+
+  bounce_soft:
+    description: "Gentle bouncy rubbery texture"
+    source: "MusicGen prompt: gentle soft bouncy texture, cartoonish rubber, subtle, playful, no rhythm, no melody"
+    duration_s: 30
+    loop: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ANTI-SPAM VERIFICATION
+# No two brands share the same (key_offset, bpm_multiplier) pair.
+# ─────────────────────────────────────────────────────────────────────────────
+# ch_001: ( 0, 1.00) ch_002: ( 2, 1.02) ch_003: ( 4, 1.04) ch_004: (-2, 0.97)
+# ch_005: ( 5, 1.03) ch_006: (-1, 0.98) ch_007: ( 3, 1.06) ch_008: (-3, 1.05)
+# ch_009: (-4, 0.96) ch_010: ( 6, 1.04) -- NOTE: ch_010 shares bpm with ch_003
+#   but different key offset (6 vs 4), which is sufficient for fingerprint divergence.
+# ch_011: ( 1, 1.03) -- NOTE: shares bpm_multiplier with ch_005 but different key.
+# ch_012: (-5, 1.02) ch_013: ( 7, 1.01) ch_014: (-6, 0.95) ch_015: (-7, 0.94)
+# ch_016: ( 8, 1.07) ch_017: (-8, 0.99) ch_018: (-9, 0.97) -- NOTE: shares bpm
+#   with ch_004 but different key. ch_019: ( 9, 1.05) ch_020: (-10, 0.96)
+# ch_021: (10, 1.01) ch_022: (-11, 0.93) ch_023: (11, 1.08) ch_024: (-12, 0.95)
+#
+# RESULT: All 24 (key_offset, bpm_multiplier) pairs are unique.
+# Combined with unique EQ profiles, reverb, stereo, and texture overlays,
+# the probability of fingerprint collision between any two brands is negligible.

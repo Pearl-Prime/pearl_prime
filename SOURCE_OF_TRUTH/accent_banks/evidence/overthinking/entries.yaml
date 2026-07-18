@@ -1,0 +1,196 @@
+topic: overthinking
+wave: 2
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 8
+  mixed: 2
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: ovt_rumination_unanswerable_questions_1991
+    entry_type: finding
+    claim: >
+      The mind often loops on questions that thought cannot answer — what they meant,
+      what will happen, whether you chose right. Research on rumination shows these
+      loops rarely produce new information, only more distress.
+    citation: "Nolen-Hoeksema S (1991). Responses to depression and their effects on the duration of depressive episodes. Journal of Abnormal Psychology, 100(4), 569-582."
+    year: 1991
+    robustness: robust
+    topic_keys: [overthinking, anxiety, depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Doctrine v01 — loop asks unanswerable question."
+      zh_TW_zh_CN: "Family future-planning worry overlap."
+      ja_JP: "Workplace mistake replay loops."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: ovt_perfectionism_frost_1990
+    entry_type: finding
+    claim: >
+      Perfectionism — setting flawless standards and harsh self-criticism when they
+      are missed — predicts anxiety and overthinking more reliably than high standards
+      alone.
+    citation: "Frost RO, Marten P, Lahart C, Rosenblate R (1990). The dimensions of perfectionism. Cognitive Therapy and Research, 14(5), 449-468."
+    year: 1990
+    robustness: robust
+    topic_keys: [overthinking, perfectionism, imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v08"]
+    locale_framing_notes:
+      en_EU: "Perfectionism as overthinking driver — user-requested topic key."
+      zh_TW_zh_CN: "Exam/credential perfectionism."
+      ja_JP: "Mistake-averse workplace culture."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: ovt_worry_vs_problem_solving_borkovec_1985
+    entry_type: finding
+    claim: >
+      Worry mimics problem-solving but usually skips action — it rehearses catastrophe
+      without narrowing options. Distinguishing the two helps you exit the loop.
+    citation: "Borkovec TD, Robinson E, Pruzinsky T, DePree JA (1983). Preliminary exploration of worry: Some characteristics and processes. Behaviour Research and Therapy, 21(1), 9-16."
+    year: 1983
+    robustness: robust
+    topic_keys: [overthinking, anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Is this worry or a solvable problem?"
+      zh_TW_zh_CN: "Practical family problem-solving vs midnight rumination."
+      ja_JP: "Process improvement vs anxious rehearsal."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: ovt_somatic_anchoring_present_moment_2011
+    entry_type: finding
+    claim: >
+      Brief attention to bodily sensation — feet on floor, hands on chair — interrupts
+      abstract mental time-travel in experimental studies of mindfulness and grounding.
+    citation: "Hofmann SG, Sawyer AT, Witt AA, Oh D (2010). The effect of mindfulness-based therapy on anxiety and depression: A meta-analytic review. Journal of Consulting and Clinical Psychology, 78(2), 169-183."
+    year: 2010
+    robustness: mixed
+    caveat: "MBT meta-analysis — grounding is one component; effect sizes modest vs active controls."
+    topic_keys: [overthinking, somatic_healing]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v02"]
+    locale_framing_notes:
+      en_EU: "Body returns while mind travels — doctrine v02."
+      zh_TW_zh_CN: "Somatic focus culturally acceptable."
+      ja_JP: "Brief grounding before meetings."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: ovt_decision_fatigue_baumeister_2011
+    entry_type: finding
+    claim: >
+      Making many decisions depletes the quality of later choices in lab studies —
+      overthinking every small decision burns the same cognitive fuel big ones need.
+    citation: "Baumeister RF, Tierney J (2011). Willpower: Rediscovering the Greatest Human Strength. New York: Penguin. (Synthesizes decision fatigue studies; ego-depletion replication mixed — decision quality decline more robust.)"
+    year: 2011
+    robustness: mixed
+    caveat: "Ego-depletion model weakened; decision fatigue and choice overload have stronger replication than global willpower tank."
+    topic_keys: [overthinking, burnout]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v09"]
+    locale_framing_notes:
+      en_EU: "Automate small choices to protect deep thinking."
+      zh_TW_zh_CN: "Decision overload in caregiving + work."
+      ja_JP: "Reduce micro-decisions after long workdays."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: ovt_intolerance_uncertainty_dugas_1998
+    entry_type: finding
+    claim: >
+      Needing certainty before you can rest drives repetitive thinking — intolerance
+      of uncertainty predicts worry and OCD-spectrum loops across studies.
+    citation: "Dugas MJ, Gagnon F, Ladouceur R, Freeston MH (1998). Generalized anxiety disorder: A preliminary test of a conceptual model. Behaviour Research and Therapy, 36(2), 215-226."
+    year: 1998
+    robustness: robust
+    topic_keys: [overthinking, anxiety, financial_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v08"]
+    locale_framing_notes:
+      en_EU: "Certainty addiction in inbox checking."
+      zh_TW_zh_CN: "Future security planning loops."
+      ja_JP: "Career stability uncertainty."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: ovt_thought_defusion_hayes_2012
+    entry_type: finding
+    claim: >
+      Learning to notice thoughts as mental events — not commands — reduces fusion
+      with catastrophic stories in acceptance-based therapy trials.
+    citation: "Hayes SC, Strosahl KD, Wilson KG (2012). Acceptance and Commitment Therapy: The Process and Practice of Mindful Change, 2nd ed. New York: Guilford Press."
+    year: 2012
+    robustness: robust
+    topic_keys: [overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Thoughts are drafts, not orders."
+      zh_TW_zh_CN: "Mind-as-sky metaphor may resonate."
+      ja_JP: "Observing mind without fighting it."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: ovt_case_churchill_black_dog_1911
+    entry_type: documented_case
+    claim: >
+      Winston Churchill's published writings described recurring 'black dog' depressions
+      alongside wartime leadership — documenting that relentless mental activity and
+      heavy mood can coexist in high-functioning lives.
+    citation: "Churchill W (1930). A Roving Commission: My Early Life. London: Thornton Butterworth. (Black dog references in correspondence and later biographical collections, e.g., Gilbert M (1991).)"
+    year: 1930
+    robustness: robust
+    topic_keys: [overthinking, depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    case_attribution: "Winston Churchill — published autobiographical and biographical record"
+    locale_framing_notes:
+      en_EU: "High recognition historical figure."
+      zh_TW_zh_CN: "Use as 'public leader' archetype."
+      ja_JP: "Historical figure — recognition varies."
+    sensitivity_notes: "Historical figure with complex legacy — use mood pattern only, not political endorsement."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: ovt_sleep_loss_rumination_2018
+    entry_type: finding
+    claim: >
+      Sleep deprivation increases repetitive negative thinking the next day — the
+      2 a.m. loop is harder to exit when the brain is under-rested.
+    citation: "Nota JA, Coles ME (2018). Shorter sleep duration and longer sleep onset latency are related to difficulty disengaging attention from negative emotional images in individuals with elevated transdiagnostic repetitive negative thinking. Journal of Behavior Therapy and Experimental Psychiatry, 58, 114-122."
+    year: 2018
+    robustness: robust
+    topic_keys: [overthinking, sleep_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v09"]
+    locale_framing_notes:
+      en_EU: "Protect sleep to protect thinking."
+      zh_TW_zh_CN: "Night shift / caregiving sleep debt."
+      ja_JP: "Overwork → rumination spiral."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: ovt_scheduled_worry_time_borkovec_1983
+    entry_type: finding
+    claim: >
+      Containing worry to a fixed daily window — scheduled worry time — reduces total
+      worry hours in controlled trials for generalized anxiety.
+    citation: "Borkovec TD, Wilkinson L, Folensbee R, Lerman C (1983). Stimulus control applications to the treatment of worry. Behaviour Research and Therapy, 21(3), 247-251."
+    year: 1983
+    robustness: robust
+    topic_keys: [overthinking, anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "15-minute worry appointment — practical tool."
+      zh_TW_zh_CN: "Bounded planning time vs all-night rumination."
+      ja_JP: "Structured reflection period after work."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY

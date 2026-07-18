@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__financial_stress__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__money_fears
+  name: Money Without Panic — for Nurses
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Stress Management: The Overwhelm Response'
+subtitle: A Real Talk Guide to Financial Stress for Healthcare Rns
+cover_tagline: Mandatory overtime, a paycheck that never stretches, and a brain that
+  goes dark when you try to plan.
+description:
+  short_blurb: For the nurse stuck between what the job pays and what life costs,
+    where every attempt to get a handle on the money ends in a blank stare. This is
+    a plain-language field guide to the shutdown point — the moment financial pressure
+    stacks so high your system just quits. No budgets, no optimizing, just a way to
+    put forty things down and pick up one.
+  long_description: 'The pressure doesn''t come from one place. It''s the differential
+    that got cut, the overtime that''s mandatory but still not enough, the cost of
+    everything climbing while your base rate doesn''t, the patients you can''t stop
+    thinking about and the bills you can''t stop owing. You sit down to finally get
+    a handle on it — to make a plan, to look at the whole picture — and within a minute
+    you''re staring at the wall, brain gone dark, the laptop still open to nothing.
+    So you close it. You''ll deal with it later. Later does the same thing.
+
+
+    This book is for nurses caught between what the job pays and what life costs —
+    the ones holding a unit together on too little sleep and too little pay, who can
+    manage six patients but can''t make themselves manage one budget. Hear this clearly:
+    that''s not a discipline problem. You triage relentlessly all shift. The reason
+    you go blank isn''t that you can''t handle hard things — it''s that money doesn''t
+    show up as one hard thing. It shows up as everything at once, and when the load
+    crosses a line your nervous system shuts the whole panel down. That''s the shutdown
+    point, and it has a mechanism you can learn.
+
+
+    We name it first — the precise feel of the stack landing, the second the lights
+    go out and the wall-stare begins. Then we go down into it instead of fixing it,
+    because reaching for the fix is part of what''s pulling you under. You don''t
+    need a tighter spreadsheet after a sixteen-hour day. You need to see that the
+    overwhelm is one pressure wearing many faces, and that many things can be set
+    down so one thing can be picked up. We''ll work with what it takes to face a single
+    number when your body is braced for all of them. And you come back able to feel
+    the shutdown coming and stay at the table.
+
+
+    This is not a budgeting book and it will not promise to make you feel on top of
+    your money. The pay gap is real, the hours are inhuman, and no book closes that.
+    What it can give back is the moment between sitting down and going dark — so the
+    next move is actually yours.
+
+
+    You are allowed to face one thing and let the rest wait. The whole weight was
+    never yours to lift in a single sitting.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - nurses
+  - financial stress for nurses
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — built for caregivers running on chronic overload'
+- How to Keep House While Drowning (KC Davis) — shame-free method for the tasks you
+  freeze on under pressure
+- I Will Teach You to Be Rich (Ramit Sethi) — reduces money management to a few decisions
+  instead of an overwhelming whole
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: career_lift__house__gen_x_sandwich__courage
+brand: career_lift
+teacher: null
+persona: gen_x_sandwich
+topic: courage
+byline_author: grace_iverson
+arc:
+  installment_1:
+    book_id: career_lift__house__gen_x_sandwich__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: career_lift__house__gen_x_sandwich__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: career_lift__house__gen_x_sandwich__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You can find the courage to make the change you've been circling
+  — not by becoming a different person, but by taking one honest step before you feel
+  ready, even with everyone still counting on you.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- We Should All Be Millionaires / Rich AF money series (Rachel Rodgers) — career-courage
+  for people told to stay small, though louder and more hustle-forward than this gentler
+  sandwich-generation voice
+- The Daily Stoic series (Ryan Holiday) — short, repeatable readings on facing fear
+  and acting before you feel ready, with the steadiness this series shares but without
+  the mid-career-parent specificity
+- Untamed and its companion journal (Glennon Doyle) — permission-giving, second-person
+  intimacy about wanting more from your one life, kin in tone to the closing-line
+  voice here
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 47-58, Generation X, mid-to-late career
+  where_they_are: It's a Tuesday night, the dishwasher is running, your mother's pill
+    organizer is half-filled on the counter, and your kid's college deposit is due
+    Friday. You're sitting in the car in your own driveway twenty minutes after you
+    got home, scrolling a job posting you'll never apply to, rehearsing the conversation
+    with your boss you've rehearsed for three years and never had.
+  what_they_need: Permission to want more from this chapter of work without being
+    told to blow up their life, and a way to take one small, real step toward the
+    change while still holding up everyone who leans on them.
+  what_they_avoid: Girlboss and grindset hustle, 'manifest your dream job' affirmations,
+    influencer hype, toxic positivity, and any advice that treats career fear at fifty
+    as a mindset problem you should have outgrown.
+series_voice_markers:
+  register: Encouraging, forward-looking, grounded; the voice of a friend your age
+    who has stood at the same edge — warm and practical, honest about the fear, never
+    clinical, never preachy, never selling hustle.
+  sentence_rhythm: Plainspoken and varied; short declaratives that land like a hand
+    on your shoulder, opening into one longer sentence that walks the whole thought
+    through before it lets you go.
+  metaphor_family: The next chapter and the turning page, the path that opens ahead,
+    the cliff edge and the single step taken before you feel ready, the room you have
+    not entered yet, the draft of a life you are still writing.
+_needs_authoring: false

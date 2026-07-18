@@ -1,0 +1,1507 @@
+schema_version: 1.0.0
+generation_defaults:
+  duration_seconds: 30
+  model: musicgen-looper
+  top_k: 250
+  top_p: 0.95
+  temperature: 1.0
+  classifier_free_guidance: 3.0
+temperatures:
+- cold
+- cool
+- neutral
+- warm
+- hot
+anxiety:
+  cold:
+    bpm: null
+    key: E minor chromatic clusters
+    frequency_focus: theta 4-7 Hz binaural undertone
+    instruments:
+    - granular synth pad
+    - filtered white noise
+    - sub-bass breath
+    texture: sparse breath-like swells, irregular, fragmented air
+    prompt: continuous ambient drone, sparse fragmented granular synth pad in E minor, filtered white noise breath swells,
+      deep sub-bass undertone, irregular breathing texture, cold spacious reverb, dissonant clusters, no drums, no vocals,
+      no melody resolution, no rhythm, continuous seamless loop texture, anxious uneasy atmosphere
+  cool:
+    bpm: 52
+    key: E minor natural
+    frequency_focus: alpha 8-10 Hz carrier
+    instruments:
+    - soft synth pad
+    - reversed piano haze
+    - distant wind
+    texture: slow undulating pad, gentle LFO movement, wide stereo
+    prompt: continuous ambient texture, slow undulating soft synth pad in E minor at 52 BPM, reversed piano haze with long
+      reverb tail, distant wind texture, gentle LFO movement, wide stereo field, spacious and melancholic, no drums, no vocals,
+      no melody resolution, continuous seamless loop, reflective processing atmosphere
+  neutral:
+    bpm: 62
+    key: A minor pentatonic
+    frequency_focus: alpha 10 Hz center
+    instruments:
+    - warm pad
+    - muted plucked strings
+    - earth-tone drone
+    texture: steady ambient wash, grounded low-end, predictable
+    prompt: continuous ambient texture, steady warm synth pad in A minor pentatonic at 62 BPM, muted plucked string texture,
+      deep earth-tone drone layer, grounded low-end presence, predictable gentle movement, no drums, no vocals, no melody
+      resolution, continuous seamless loop, calm grounding atmosphere
+  warm:
+    bpm: 68
+    key: F Lydian
+    frequency_focus: alpha-low beta 10-13 Hz
+    instruments:
+    - soft piano harmonics
+    - warm pad
+    - light FM bell
+    texture: gentle rising pad, subtle harmonic shimmer, opening feel
+    prompt: continuous ambient texture, gentle warm synth pad in F Lydian mode at 68 BPM, soft piano harmonic overtones, light
+      FM synthesis bell shimmer, subtle rising harmonic movement, opening spacious feel, no drums, no vocals, no melody resolution,
+      continuous seamless loop, settling safe warm atmosphere
+  hot:
+    bpm: 80
+    key: C major pentatonic
+    frequency_focus: beta 13-18 Hz undertone
+    instruments:
+    - clean keys
+    - light rhythmic pulse
+    - airy synth lead
+    texture: bright forward motion, confident pulse, clear harmonics
+    prompt: continuous ambient texture, bright clean synth pad in C major pentatonic at 80 BPM, very subtle rhythmic pulse,
+      airy high synth shimmer, confident forward motion, clear open harmonics, no drums, no vocals, no melody resolution,
+      continuous seamless loop, empowered active bright atmosphere
+boundaries:
+  cold:
+    bpm: 48
+    key: B minor
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - low sub-bass
+    - industrial hum
+    - tight filtered pad
+    texture: heavy, pressured, walls closing in, oppressive drone
+    prompt: continuous ambient drone, heavy oppressive low sub-bass in B minor at 48 BPM, industrial hum texture, tight filtered
+      synth pad, pressured claustrophobic atmosphere, walls closing in feel, no drums, no vocals, no melody resolution, continuous
+      seamless loop, dark constrained tense drone
+  cool:
+    bpm: 58
+    key: D Dorian
+    frequency_focus: alpha 8-10 Hz
+    instruments:
+    - steel-toned pad
+    - clean sine layers
+    - sparse pluck
+    texture: structured but somber, defined edges, cool clarity
+    prompt: continuous ambient texture, structured steel-toned synth pad in D Dorian at 58 BPM, clean sine wave layers, sparse
+      plucked string texture, defined edges, cool clarity, somber but organized, no drums, no vocals, no melody resolution,
+      continuous seamless loop, contemplative structured atmosphere
+  neutral:
+    bpm: 65
+    key: Bb major
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - clean pad layers
+    - muted bell
+    - steady bass tone
+    texture: architectural, solid, stable foundations
+    prompt: continuous ambient texture, solid clean synth pad layers in Bb major at 65 BPM, muted bell overtones, steady deep
+      bass tone foundation, architectural stable feel, grounded and firm, no drums, no vocals, no melody resolution, continuous
+      seamless loop, stable grounded atmosphere
+  warm:
+    bpm: 72
+    key: Eb major
+    frequency_focus: alpha-beta 11-14 Hz
+    instruments:
+    - warm brass pad
+    - soft chord stabs
+    - grounded bass
+    texture: opening space, firm but gentle, defined warmth
+    prompt: continuous ambient texture, warm brass-like synth pad in Eb major at 72 BPM, soft sustained chord tones, grounded
+      bass foundation, opening spacious feel with firm gentle warmth, defined boundaries, no drums, no vocals, no melody resolution,
+      continuous seamless loop, confident warm structured atmosphere
+  hot:
+    bpm: 82
+    key: G major
+    frequency_focus: beta 14-18 Hz
+    instruments:
+    - confident pad
+    - rhythmic pulse
+    - clear overtones
+    texture: assertive clarity, confident boundaries, bright structure
+    prompt: continuous ambient texture, bright confident synth pad in G major at 82 BPM, very subtle rhythmic pulse, clear
+      harmonic overtones, assertive structured clarity, bright and open, no drums, no vocals, no melody resolution, continuous
+      seamless loop, empowered assertive atmosphere
+burnout:
+  cold:
+    bpm: null
+    key: D minor pentatonic
+    frequency_focus: delta-theta 2-6 Hz
+    instruments:
+    - detuned pad
+    - distant rumble
+    - breathy noise floor
+    texture: empty, depleted, hollow resonance, exhaustion drone
+    prompt: continuous ambient drone, hollow depleted detuned synth pad in D minor pentatonic, distant low rumble, breathy
+      noise floor texture, empty exhaustion atmosphere, no energy, hollow resonance, no drums, no vocals, no melody resolution,
+      no rhythm, continuous seamless loop, deeply fatigued still drone
+  cool:
+    bpm: 52
+    key: G minor
+    frequency_focus: theta-alpha 6-9 Hz
+    instruments:
+    - warm low pad
+    - filtered organ tone
+    - soft hiss
+    texture: slow recovery breath, gentle warmth underneath ash
+    prompt: continuous ambient texture, slow warm low synth pad in G minor at 52 BPM, filtered organ-like tone, soft white
+      noise hiss, slow recovery breathing feel, gentle warmth underneath, no drums, no vocals, no melody resolution, continuous
+      seamless loop, gentle tired recovery atmosphere
+  neutral:
+    bpm: 60
+    key: C Dorian
+    frequency_focus: alpha 9-11 Hz
+    instruments:
+    - muted Rhodes-like pad
+    - earth drone
+    - soft texture
+    texture: steady rest state, not pushing, grounded calm
+    prompt: continuous ambient texture, steady muted Rhodes-like synth pad in C Dorian at 60 BPM, deep earth drone layer,
+      soft granular texture, restful grounded calm, not pushing anywhere, no drums, no vocals, no melody resolution, continuous
+      seamless loop, restful grounded atmosphere
+  warm:
+    bpm: 68
+    key: F major
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - warm string pad
+    - gentle bells
+    - pastoral drone
+    texture: gentle replenishment, nourishing warmth, soft light
+    prompt: continuous ambient texture, warm string-like synth pad in F major at 68 BPM, gentle bell harmonics, pastoral drone
+      layer, nourishing warmth, soft light feel, replenishing energy, no drums, no vocals, no melody resolution, continuous
+      seamless loop, nurturing warm pastoral atmosphere
+  hot:
+    bpm: 76
+    key: A major
+    frequency_focus: beta 13-16 Hz
+    instruments:
+    - bright pad
+    - gentle rhythm
+    - hopeful overtones
+    texture: renewed energy, vitality returning, brightness
+    prompt: continuous ambient texture, bright warm synth pad in A major at 76 BPM, very subtle gentle rhythmic pulse, hopeful
+      harmonic overtones, renewed vitality, energy returning, brightness and clarity, no drums, no vocals, no melody resolution,
+      continuous seamless loop, revitalized hopeful atmosphere
+compassion_fatigue:
+  cold:
+    bpm: null
+    key: C minor
+    frequency_focus: delta-theta 3-6 Hz
+    instruments:
+    - distant reverb pad
+    - hollow sine
+    - breath noise
+    texture: emptied out, numbness, distant echoing void
+    prompt: continuous ambient drone, distant reverb-heavy synth pad in C minor, hollow sine wave tone, breath-like noise
+      texture, emptied numb atmosphere, echoing void, depleted compassion, no drums, no vocals, no melody resolution, no rhythm,
+      continuous seamless loop, numb exhausted drone
+  cool:
+    bpm: 53
+    key: F minor
+    frequency_focus: theta-alpha 6-9 Hz
+    instruments:
+    - deep pad
+    - muted cello-like synth
+    - low hum
+    texture: heavy tiredness, weighted but held, slow movement
+    prompt: continuous ambient texture, deep heavy synth pad in F minor at 53 BPM, muted cello-like sustained synth tone,
+      low resonant hum, weighted tiredness, slow held movement, compassion exhaustion, no drums, no vocals, no melody resolution,
+      continuous seamless loop, heavy tired held atmosphere
+  neutral:
+    bpm: 62
+    key: Ab Dorian
+    frequency_focus: alpha 9-11 Hz
+    instruments:
+    - warm ambient bed
+    - gentle drone
+    - soft pluck
+    texture: resting in stillness, no demands, permissive space
+    prompt: continuous ambient texture, warm ambient synth bed in Ab Dorian at 62 BPM, gentle low drone, soft plucked texture,
+      resting stillness, no demands, permissive spacious feel, no drums, no vocals, no melody resolution, continuous seamless
+      loop, still permissive restful atmosphere
+  warm:
+    bpm: 68
+    key: Db major
+    frequency_focus: alpha 10-13 Hz
+    instruments:
+    - tender pad
+    - light chime
+    - warm bass bloom
+    texture: self-directed kindness, softening, warmth returning
+    prompt: continuous ambient texture, tender warm synth pad in Db major at 68 BPM, light crystalline chime overtones, warm
+      bass bloom, self-kindness softening feel, warmth returning gradually, no drums, no vocals, no melody resolution, continuous
+      seamless loop, tender self-compassion atmosphere
+  hot:
+    bpm: 76
+    key: Bb major
+    frequency_focus: beta 13-16 Hz
+    instruments:
+    - clear warm pad
+    - gentle pulse
+    - hopeful shimmer
+    texture: refilled, boundaried compassion, renewed capacity
+    prompt: continuous ambient texture, clear warm synth pad in Bb major at 76 BPM, very subtle gentle pulse, hopeful high
+      shimmer overtones, renewed compassion capacity, refilled energy, boundaried warmth, no drums, no vocals, no melody resolution,
+      continuous seamless loop, renewed compassionate atmosphere
+courage:
+  cold:
+    bpm: 52
+    key: E minor
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - thin tremolo pad
+    - distant sub-pulse
+    - cold air
+    texture: fear-frozen, trembling edge, vulnerability exposed
+    prompt: continuous ambient texture, thin tremolo synth pad in E minor at 52 BPM, distant deep sub-bass pulse, cold airy
+      noise texture, fear-frozen trembling edge, vulnerability exposed, fragile, no drums, no vocals, no melody resolution,
+      continuous seamless loop, fearful vulnerable cold atmosphere
+  cool:
+    bpm: 60
+    key: A Dorian
+    frequency_focus: alpha 8-10 Hz
+    instruments:
+    - low warm pad
+    - emerging bass note
+    - muted pluck
+    texture: gathering resolve, sitting with fear, slow build
+    prompt: continuous ambient texture, low warm synth pad in A Dorian at 60 BPM, emerging deep bass note, muted plucked string
+      texture, gathering resolve, sitting with fear, slow building energy, no drums, no vocals, no melody resolution, continuous
+      seamless loop, resolving contemplative atmosphere
+  neutral:
+    bpm: 67
+    key: D Mixolydian
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - firm pad
+    - steady low pulse
+    - clear mid-range
+    texture: steady readiness, present, grounded determination
+    prompt: continuous ambient texture, firm grounded synth pad in D Mixolydian at 67 BPM, steady low bass pulse, clear mid-range
+      harmonic presence, grounded determination, steady readiness, present and centered, no drums, no vocals, no melody resolution,
+      continuous seamless loop, determined grounded atmosphere
+  warm:
+    bpm: 74
+    key: G major
+    frequency_focus: alpha-beta 12-15 Hz
+    instruments:
+    - warm brass-like pad
+    - gentle rhythm
+    - bright layers
+    texture: stepping forward, warmth in chest, opening confidence
+    prompt: continuous ambient texture, warm brass-like synth pad in G major at 74 BPM, very subtle gentle rhythmic motion,
+      bright harmonic layers, stepping forward confidence, warmth opening in chest, no drums, no vocals, no melody resolution,
+      continuous seamless loop, courageous warm opening atmosphere
+  hot:
+    bpm: 86
+    key: D major
+    frequency_focus: beta 15-20 Hz
+    instruments:
+    - strong pad
+    - confident pulse
+    - soaring harmonics
+    texture: bold movement, empowered, expansive action energy
+    prompt: continuous ambient texture, strong bright synth pad in D major at 86 BPM, confident subtle rhythmic pulse, soaring
+      high harmonic overtones, bold empowered movement, expansive action energy, no drums, no vocals, no melody resolution,
+      continuous seamless loop, bold empowered active atmosphere
+depression:
+  cold:
+    bpm: null
+    key: Eb minor
+    frequency_focus: delta 1-4 Hz
+    instruments:
+    - ultra-deep drone
+    - granular noise floor
+    - slow swell
+    texture: heavy stillness, gravity, dark weighted void
+    prompt: continuous ambient drone, ultra-deep heavy synth drone in Eb minor, granular dark noise floor, very slow barely-moving
+      swell, heavy weighted stillness, gravitational void, dark and deep, no drums, no vocals, no melody resolution, no rhythm,
+      continuous seamless loop, profound heavy dark drone
+  cool:
+    bpm: 48
+    key: G minor
+    frequency_focus: theta 4-7 Hz
+    instruments:
+    - dark warm pad
+    - distant piano-like ghost notes
+    - low hum
+    texture: gentle companionship in darkness, slow witness
+    prompt: continuous ambient texture, dark warm synth pad in G minor at 48 BPM, distant ghostly piano-like harmonics, low
+      resonant hum, gentle companionship in darkness, witnessing presence, no drums, no vocals, no melody resolution, continuous
+      seamless loop, compassionate dark slow atmosphere
+  neutral:
+    bpm: 58
+    key: D Dorian
+    frequency_focus: theta-alpha 7-10 Hz
+    instruments:
+    - muted pad
+    - gentle bass movement
+    - restrained texture
+    texture: present without pressure, steady dim light
+    prompt: continuous ambient texture, muted synth pad in D Dorian at 58 BPM, gentle low bass movement, restrained granular
+      texture, present without pressure, steady dim light feel, no drums, no vocals, no melody resolution, continuous seamless
+      loop, patient unpressured atmosphere
+  warm:
+    bpm: 66
+    key: Bb major
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - warm glow pad
+    - soft FM chime
+    - gentle rising tone
+    texture: first light, subtle warmth breaking through
+    prompt: continuous ambient texture, warm glowing synth pad in Bb major at 66 BPM, soft FM synthesis chime shimmer, gentle
+      rising harmonic tone, first light breaking through darkness, subtle warmth, no drums, no vocals, no melody resolution,
+      continuous seamless loop, gently brightening warm atmosphere
+  hot:
+    bpm: 74
+    key: F major
+    frequency_focus: alpha-beta 12-15 Hz
+    instruments:
+    - bright warm pad
+    - light pulse
+    - clear harmonics
+    texture: movement possible, gentle forward energy, hope
+    prompt: continuous ambient texture, bright warm synth pad in F major at 74 BPM, light rhythmic pulse undertone, clear
+      harmonic overtones, movement becoming possible, gentle forward energy, hopeful, no drums, no vocals, no melody resolution,
+      continuous seamless loop, hopeful brightening atmosphere
+financial_anxiety:
+  cold:
+    bpm: 52
+    key: F# minor
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - tight filtered pad
+    - nervous LFO
+    - constrained space
+    texture: tight, constricted, scarcity pressure, spiral
+    prompt: continuous ambient texture, tight constricted filtered synth pad in F sharp minor at 52 BPM, nervous LFO modulation,
+      constrained narrow stereo space, scarcity pressure spiral feel, tightening anxiety, no drums, no vocals, no melody resolution,
+      continuous seamless loop, constricted anxious tense atmosphere
+  cool:
+    bpm: 59
+    key: B Dorian
+    frequency_focus: alpha 8-10 Hz
+    instruments:
+    - muted pad
+    - careful pluck notes
+    - measured space
+    texture: processing worry, sitting with uncertainty
+    prompt: continuous ambient texture, muted synth pad in B Dorian at 59 BPM, careful sparse plucked string notes, measured
+      spacious reverb, processing worry, sitting with financial uncertainty, no drums, no vocals, no melody resolution, continuous
+      seamless loop, measured contemplative atmosphere
+  neutral:
+    bpm: 65
+    key: E Dorian
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - stable pad
+    - clean bass
+    - structured texture
+    texture: grounded pragmatism, steady presence
+    prompt: continuous ambient texture, stable grounded synth pad in E Dorian at 65 BPM, clean deep bass foundation, structured
+      granular texture, grounded pragmatism, steady neutral presence, no drums, no vocals, no melody resolution, continuous
+      seamless loop, pragmatic grounded atmosphere
+  warm:
+    bpm: 72
+    key: A major
+    frequency_focus: alpha-beta 11-14 Hz
+    instruments:
+    - warm clear pad
+    - gentle harmonic motion
+    - opening feel
+    texture: clarity emerging, manageable steps, relief beginning
+    prompt: continuous ambient texture, warm clear synth pad in A major at 72 BPM, gentle harmonic motion upward, opening
+      spacious feel, clarity emerging, manageable steps ahead, relief beginning, no drums, no vocals, no melody resolution,
+      continuous seamless loop, clarifying relieving atmosphere
+  hot:
+    bpm: 80
+    key: D major
+    frequency_focus: beta 14-18 Hz
+    instruments:
+    - bright structured pad
+    - confident pulse
+    - clear layers
+    texture: empowered planning, confidence in action, forward energy
+    prompt: continuous ambient texture, bright structured synth pad in D major at 80 BPM, confident subtle pulse, clear layered
+      harmonics, empowered planning energy, confidence in action, no drums, no vocals, no melody resolution, continuous seamless
+      loop, confident decisive atmosphere
+financial_stress:
+  cold:
+    bpm: 50
+    key: C# minor
+    frequency_focus: theta 4-7 Hz
+    instruments:
+    - heavy low drone
+    - pressure pad
+    - tight stereo
+    texture: crushing weight, overwhelm, drowning sensation
+    prompt: continuous ambient drone, heavy crushing low synth drone in C sharp minor at 50 BPM, pressure pad texture, tight
+      narrow stereo field, crushing weight overwhelm, drowning sensation, no drums, no vocals, no melody resolution, continuous
+      seamless loop, oppressive weighted dark atmosphere
+  cool:
+    bpm: 58
+    key: F# Dorian
+    frequency_focus: theta-alpha 7-9 Hz
+    instruments:
+    - dark warm pad
+    - slow bass movement
+    - gentle space
+    texture: holding the weight, beginning to breathe
+    prompt: continuous ambient texture, dark warm synth pad in F sharp Dorian at 58 BPM, slow deep bass movement, gentle spacious
+      reverb, holding the weight, beginning to breathe again, no drums, no vocals, no melody resolution, continuous seamless
+      loop, heavy but breathing atmosphere
+  neutral:
+    bpm: 65
+    key: B Dorian
+    frequency_focus: alpha 9-11 Hz
+    instruments:
+    - stable neutral pad
+    - measured texture
+    - clean
+    texture: level assessment, grounded in present reality
+    prompt: continuous ambient texture, stable neutral synth pad in B Dorian at 65 BPM, measured even texture, clean harmonic
+      foundation, level assessment, grounded in present reality, no drums, no vocals, no melody resolution, continuous seamless
+      loop, neutral grounded clear atmosphere
+  warm:
+    bpm: 71
+    key: E major
+    frequency_focus: alpha 10-13 Hz
+    instruments:
+    - warm pad
+    - gentle step-like motion
+    - hopeful bass
+    texture: pathway visible, burden lightening, practical warmth
+    prompt: continuous ambient texture, warm synth pad in E major at 71 BPM, gentle step-like upward harmonic motion, hopeful
+      bass warmth, pathway becoming visible, burden lightening, no drums, no vocals, no melody resolution, continuous seamless
+      loop, lightening hopeful warm atmosphere
+  hot:
+    bpm: 80
+    key: A major
+    frequency_focus: beta 13-17 Hz
+    instruments:
+    - forward pad
+    - structured rhythm hint
+    - bright
+    texture: active problem-solving energy, momentum
+    prompt: continuous ambient texture, forward-moving bright synth pad in A major at 80 BPM, structured subtle rhythmic hint,
+      bright clear harmonics, active problem-solving energy, productive momentum, no drums, no vocals, no melody resolution,
+      continuous seamless loop, productive energized atmosphere
+grief:
+  cold:
+    bpm: null
+    key: Eb minor
+    frequency_focus: delta-theta 2-5 Hz
+    instruments:
+    - ultra-deep drone
+    - distant reverb
+    - breath noise
+    texture: vast empty space, loss embodied, profound stillness
+    prompt: continuous ambient drone, ultra-deep vast synth drone in Eb minor, distant cavernous reverb, breath-like noise
+      texture, vast empty space of loss, profound stillness, embodied absence, no drums, no vocals, no melody resolution,
+      no rhythm, continuous seamless loop, vast profound grief drone
+  cool:
+    bpm: 46
+    key: Ab minor
+    frequency_focus: theta 4-7 Hz
+    instruments:
+    - low warm pad
+    - ghostly harmonics
+    - spacious reverb
+    texture: tears allowed, held sorrow, gentle witness
+    prompt: continuous ambient texture, low warm synth pad in Ab minor at 46 BPM, ghostly high harmonic overtones, deep spacious
+      reverb, held sorrow, tears allowed to flow, gentle witnessing, no drums, no vocals, no melody resolution, continuous
+      seamless loop, sorrowful held gentle atmosphere
+  neutral:
+    bpm: 56
+    key: F Dorian
+    frequency_focus: theta-alpha 7-10 Hz
+    instruments:
+    - muted pad
+    - distant bell tone
+    - patient drone
+    texture: sitting with absence, present to loss, still
+    prompt: continuous ambient texture, muted synth pad in F Dorian at 56 BPM, distant single bell-like tone, patient low
+      drone, sitting with absence, present to the loss, still presence, no drums, no vocals, no melody resolution, continuous
+      seamless loop, still patient grief atmosphere
+  warm:
+    bpm: 64
+    key: Db major
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - warm pad with shimmer
+    - soft chime
+    - gentle glow
+    texture: memory softening, tenderness, bittersweet light
+    prompt: continuous ambient texture, warm shimmering synth pad in Db major at 64 BPM, soft crystalline chime overtones,
+      gentle warm glow undertone, memory softening with tenderness, bittersweet light, no drums, no vocals, no melody resolution,
+      continuous seamless loop, bittersweet tender warm atmosphere
+  hot:
+    bpm: 72
+    key: Ab major
+    frequency_focus: alpha-beta 11-14 Hz
+    instruments:
+    - warm bright pad
+    - subtle forward motion
+    - hope
+    texture: integration, carrying forward, gentle renewal
+    prompt: continuous ambient texture, warm bright synth pad in Ab major at 72 BPM, subtle forward harmonic motion, hopeful
+      overtone shimmer, integration of loss, carrying love forward, gentle renewal, no drums, no vocals, no melody resolution,
+      continuous seamless loop, integrating hopeful warm atmosphere
+imposter_syndrome:
+  cold:
+    bpm: 55
+    key: B minor
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - thin sharp pad
+    - nervous high frequency
+    - cold space
+    texture: exposed, fraudulent, shrinking, surveillance feeling
+    prompt: continuous ambient texture, thin sharp synth pad in B minor at 55 BPM, nervous high frequency shimmer, cold exposed
+      stereo space, shrinking exposed feeling, surveillance atmosphere, fraudulent dread, no drums, no vocals, no melody resolution,
+      continuous seamless loop, exposed anxious cold atmosphere
+  cool:
+    bpm: 61
+    key: E minor pentatonic
+    frequency_focus: alpha 8-10 Hz
+    instruments:
+    - bluesy warm pad
+    - gentle low end
+    - reflective space
+    texture: acknowledging the fear, sitting with self-doubt
+    prompt: continuous ambient texture, warm bluesy synth pad in E minor pentatonic at 61 BPM, gentle deep low-end warmth,
+      reflective spacious reverb, acknowledging self-doubt, sitting with fear of being seen, no drums, no vocals, no melody
+      resolution, continuous seamless loop, reflective vulnerable atmosphere
+  neutral:
+    bpm: 67
+    key: A Dorian
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - stable warm pad
+    - honest texture
+    - steady bass
+    texture: grounded in evidence, neither inflated nor deflated
+    prompt: continuous ambient texture, stable honest warm synth pad in A Dorian at 67 BPM, steady deep bass foundation, grounded
+      even texture, neither inflated nor deflated, evidence-based presence, no drums, no vocals, no melody resolution, continuous
+      seamless loop, honest grounded atmosphere
+  warm:
+    bpm: 73
+    key: D Mixolydian
+    frequency_focus: alpha-beta 11-14 Hz
+    instruments:
+    - warm golden pad
+    - gentle affirmation tone
+    - opening
+    texture: recognizing competence, warmth toward self
+    prompt: continuous ambient texture, warm golden synth pad in D Mixolydian at 73 BPM, gentle affirming harmonic tones,
+      opening spacious feel, recognizing competence, warmth directed toward self, no drums, no vocals, no melody resolution,
+      continuous seamless loop, self-affirming warm atmosphere
+  hot:
+    bpm: 82
+    key: G major
+    frequency_focus: beta 14-18 Hz
+    instruments:
+    - bright confident pad
+    - assured pulse
+    - clear overtones
+    texture: confident ownership, belonging, forward stride
+    prompt: continuous ambient texture, bright confident synth pad in G major at 82 BPM, assured subtle rhythmic pulse, clear
+      bright overtones, confident ownership of skills, belonging, forward stride, no drums, no vocals, no melody resolution,
+      continuous seamless loop, confident belonging atmosphere
+overthinking:
+  cold:
+    bpm: 58
+    key: whole tone scale
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - granular swirl pad
+    - detuned layers
+    - scattered texture
+    texture: spiraling, fragmented, recursive, unresolved loops
+    prompt: continuous ambient texture, spiraling granular swirl synth pad in whole tone scale at 58 BPM, detuned overlapping
+      layers, scattered fragmented texture, recursive unresolved loops, mental spiral atmosphere, no drums, no vocals, no
+      melody resolution, continuous seamless loop, spiraling fragmented anxious atmosphere
+  cool:
+    bpm: 55
+    key: E minor
+    frequency_focus: theta-alpha 7-9 Hz
+    instruments:
+    - gentle descending pad
+    - low anchor tone
+    - smoothing
+    texture: slowing the spin, catching a single thread
+    prompt: continuous ambient texture, gentle descending synth pad in E minor at 55 BPM, low anchor bass tone, smoothing
+      granular texture, slowing the mental spin, catching a single thread of thought, no drums, no vocals, no melody resolution,
+      continuous seamless loop, slowing calming atmosphere
+  neutral:
+    bpm: 61
+    key: C pentatonic major
+    frequency_focus: alpha 9-11 Hz
+    instruments:
+    - simple warm pad
+    - single clean tone
+    - minimal
+    texture: one thing at a time, simple clear presence
+    prompt: continuous ambient texture, simple minimal warm synth pad in C major pentatonic at 61 BPM, single clean sustained
+      tone, minimal sparse texture, one thing at a time, simple clear present-moment awareness, no drums, no vocals, no melody
+      resolution, continuous seamless loop, minimal clear simple atmosphere
+  warm:
+    bpm: 66
+    key: F Lydian
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - dreamy floating pad
+    - light bell
+    - soft shimmer
+    texture: spacious mind, floating ease, thoughts settling
+    prompt: continuous ambient texture, dreamy floating synth pad in F Lydian at 66 BPM, light bell-like overtones, soft high
+      shimmer, spacious mind, thoughts settling like snow, floating ease, no drums, no vocals, no melody resolution, continuous
+      seamless loop, spacious dreamy settling atmosphere
+  hot:
+    bpm: 74
+    key: C major
+    frequency_focus: beta 12-15 Hz
+    instruments:
+    - clean bright pad
+    - gentle forward pulse
+    - clarity
+    texture: clear decisive thought, focused action
+    prompt: continuous ambient texture, clean bright synth pad in C major at 74 BPM, gentle forward rhythmic pulse, clear
+      decisive harmonics, clear focused thought, ready for action, mental clarity, no drums, no vocals, no melody resolution,
+      continuous seamless loop, focused clear decisive atmosphere
+self_worth:
+  cold:
+    bpm: 50
+    key: C minor
+    frequency_focus: theta 4-7 Hz
+    instruments:
+    - hollow low drone
+    - distant ghost tones
+    - thin pad
+    texture: worthlessness, collapsed, small, invisible
+    prompt: continuous ambient drone, hollow low synth drone in C minor at 50 BPM, distant ghostly high tones, thin fragile
+      pad layer, collapsed worthlessness, small and invisible feeling, no drums, no vocals, no melody resolution, continuous
+      seamless loop, collapsed hollow dark atmosphere
+  cool:
+    bpm: 58
+    key: G Dorian
+    frequency_focus: theta-alpha 7-9 Hz
+    instruments:
+    - dark warm pad
+    - emerging gentle tone
+    - slow rise
+    texture: acknowledging pain, beginning to be seen
+    prompt: continuous ambient texture, dark warm synth pad in G Dorian at 58 BPM, emerging gentle mid-range tone, slow rising
+      harmonic motion, acknowledging the pain of not feeling enough, beginning to be seen, no drums, no vocals, no melody
+      resolution, continuous seamless loop, emerging tender atmosphere
+  neutral:
+    bpm: 65
+    key: D Dorian
+    frequency_focus: alpha 9-11 Hz
+    instruments:
+    - grounded warm pad
+    - honest steady texture
+    texture: neither inflated nor deflated, simple presence
+    prompt: continuous ambient texture, grounded warm synth pad in D Dorian at 65 BPM, honest steady even texture, stable
+      harmonic foundation, neither inflated nor deflated, simple honest presence, no drums, no vocals, no melody resolution,
+      continuous seamless loop, honest grounded neutral atmosphere
+  warm:
+    bpm: 72
+    key: Bb major
+    frequency_focus: alpha 10-13 Hz
+    instruments:
+    - rich warm pad
+    - golden shimmer
+    - gentle bloom
+    texture: warmth toward self, golden light, deserving
+    prompt: continuous ambient texture, rich warm synth pad in Bb major at 72 BPM, golden shimmer overtones, gentle warm bass
+      bloom, warmth directed toward self, golden light of deserving, no drums, no vocals, no melody resolution, continuous
+      seamless loop, warm self-accepting golden atmosphere
+  hot:
+    bpm: 82
+    key: D Mixolydian
+    frequency_focus: beta 13-17 Hz
+    instruments:
+    - bright golden pad
+    - confident pulse
+    - soaring warmth
+    texture: radiant self-acceptance, confident presence
+    prompt: continuous ambient texture, bright golden synth pad in D Mixolydian at 82 BPM, confident subtle rhythmic pulse,
+      soaring warm harmonic overtones, radiant self-acceptance, confident worthy presence, no drums, no vocals, no melody
+      resolution, continuous seamless loop, radiant confident warm atmosphere
+sleep_anxiety:
+  cold:
+    bpm: 52
+    key: F# minor
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - unsettled pad
+    - dark nervous texture
+    - alert hum
+    texture: dread of night, hyper-alert in darkness, restless
+    prompt: continuous ambient texture, unsettled synth pad in F sharp minor at 52 BPM, dark nervous granular texture, alert
+      high-frequency hum, dreading the night, hyper-alert in darkness, restless body, no drums, no vocals, no melody resolution,
+      continuous seamless loop, restless night-dread atmosphere
+  cool:
+    bpm: 48
+    key: B minor pentatonic
+    frequency_focus: theta 4-7 Hz
+    instruments:
+    - dark warm pad
+    - low reassuring drone
+    - slow
+    texture: acknowledging the fear of sleeplessness
+    prompt: continuous ambient texture, dark warm synth pad in B minor pentatonic at 48 BPM, low reassuring drone undertone,
+      slow gentle movement, acknowledging fear of sleeplessness, dark but held, no drums, no vocals, no melody resolution,
+      continuous seamless loop, dark reassuring slow atmosphere
+  neutral:
+    bpm: 54
+    key: E Dorian
+    frequency_focus: theta 6-8 Hz
+    instruments:
+    - very gentle pad
+    - room-tone texture
+    - breath-like swell
+    texture: lying still, present to the room, breathing
+    prompt: continuous ambient texture, very gentle quiet synth pad in E Dorian at 54 BPM, room-tone noise texture, breath-like
+      gentle swell, lying still present to the room, simply breathing, no drums, no vocals, no melody resolution, continuous
+      seamless loop, quiet bedtime stillness atmosphere
+  warm:
+    bpm: 50
+    key: F Lydian
+    frequency_focus: delta-theta 3-6 Hz
+    instruments:
+    - dreamy floating pad
+    - ultra-soft chime
+    - dissolving edges
+    texture: softening into the pillow, release beginning
+    prompt: continuous ambient texture, dreamy floating synth pad in F Lydian at 50 BPM, ultra-soft crystalline chime barely
+      audible, dissolving soft edges, softening into the pillow, releasing into comfort, no drums, no vocals, no melody resolution,
+      continuous seamless loop, dreamy dissolving sleep atmosphere
+  hot:
+    bpm: 44
+    key: Db major
+    frequency_focus: delta 1-4 Hz
+    instruments:
+    - ultra-quiet warm drone
+    - barely-there shimmer
+    - breath
+    texture: deep surrender to sleep, melting, consciousness fading
+    prompt: continuous ambient drone, ultra-quiet warm synth drone in Db major at 44 BPM, barely-there high shimmer, breath-like
+      swell texture, deep surrender to sleep, consciousness softly fading, melting, no drums, no vocals, no melody resolution,
+      continuous seamless loop, deeply soporific sleep-inducing drone
+social_anxiety:
+  cold:
+    bpm: 57
+    key: C# minor
+    frequency_focus: theta 5-7 Hz
+    instruments:
+    - tight thin pad
+    - surveillance tone
+    - constricted
+    texture: exposed in a crowd, fight-or-flight, want to hide
+    prompt: continuous ambient texture, tight thin synth pad in C sharp minor at 57 BPM, nervous surveillance-like high tone,
+      constricted narrow space, exposed in a crowd, fight-or-flight activation, wanting to hide, no drums, no vocals, no melody
+      resolution, continuous seamless loop, exposed constricted anxious atmosphere
+  cool:
+    bpm: 58
+    key: F# Dorian
+    frequency_focus: alpha 8-10 Hz
+    instruments:
+    - warm private pad
+    - enclosed space feel
+    - gentle
+    texture: safe retreat, processing the exposure, decompressing
+    prompt: continuous ambient texture, warm private synth pad in F sharp Dorian at 58 BPM, enclosed intimate space feel,
+      gentle low-end warmth, safe retreat, processing social exposure, decompressing, no drums, no vocals, no melody resolution,
+      continuous seamless loop, private safe retreat atmosphere
+  neutral:
+    bpm: 63
+    key: B Dorian
+    frequency_focus: alpha 9-11 Hz
+    instruments:
+    - steady warm pad
+    - personal-space texture
+    - clean
+    texture: grounded alone, comfortable in own skin
+    prompt: continuous ambient texture, steady warm synth pad in B Dorian at 63 BPM, personal-space clean texture, grounded
+      even harmonics, comfortable in own skin, grounded alone, centered self, no drums, no vocals, no melody resolution, continuous
+      seamless loop, self-assured grounded atmosphere
+  warm:
+    bpm: 70
+    key: E major
+    frequency_focus: alpha 10-13 Hz
+    instruments:
+    - inviting warm pad
+    - gentle opening feel
+    - soft glow
+    texture: opening toward others, warmth without threat
+    prompt: continuous ambient texture, inviting warm synth pad in E major at 70 BPM, gentle opening spacious feel, soft warm
+      glow undertone, opening toward others without threat, safe social warmth, no drums, no vocals, no melody resolution,
+      continuous seamless loop, gently inviting warm atmosphere
+  hot:
+    bpm: 78
+    key: A major
+    frequency_focus: beta 13-16 Hz
+    instruments:
+    - bright warm pad
+    - social energy pulse
+    - open clarity
+    texture: social confidence, present and at ease with others
+    prompt: continuous ambient texture, bright warm synth pad in A major at 78 BPM, gentle social energy rhythmic pulse, open
+      clear harmonics, social confidence, at ease with others, present and engaged, no drums, no vocals, no melody resolution,
+      continuous seamless loop, socially confident open atmosphere
+somatic_healing:
+  cold:
+    bpm: null
+    key: A pentatonic minor
+    frequency_focus: delta-theta 3-6 Hz
+    instruments:
+    - deep body-resonance drone
+    - low frequency
+    - visceral
+    texture: body awareness in pain, sensation without judgment
+    prompt: continuous ambient drone, deep body-resonance synth drone in A minor pentatonic, low frequency visceral undertone,
+      organic body-like texture, body awareness in pain, sensation without judgment, deep presence, no drums, no vocals, no
+      melody resolution, no rhythm, continuous seamless loop, visceral body-aware deep drone
+  cool:
+    bpm: 48
+    key: D pentatonic minor
+    frequency_focus: theta 5-8 Hz
+    instruments:
+    - low warm pad
+    - slow body-like pulse
+    - organic texture
+    texture: gentle body scan, feeling into held tension
+    prompt: continuous ambient texture, low warm synth pad in D minor pentatonic at 48 BPM, slow body-like organic pulse,
+      warm organic texture, gentle body scan, feeling into held tension areas, no drums, no vocals, no melody resolution,
+      continuous seamless loop, body-scan gentle organic atmosphere
+  neutral:
+    bpm: 58
+    key: G pentatonic major
+    frequency_focus: alpha 8-10 Hz
+    instruments:
+    - breath-rate pad
+    - organic bell
+    - earth tone drone
+    texture: body at rest, present in sensation, breath-synced
+    prompt: continuous ambient texture, breath-rate synth pad in G major pentatonic at 58 BPM, organic bell-like overtone,
+      earth tone drone layer, body at rest, present in sensation, synced to breathing, no drums, no vocals, no melody resolution,
+      continuous seamless loop, body-present breath-synced atmosphere
+  warm:
+    bpm: 64
+    key: C pentatonic major
+    frequency_focus: alpha 10-12 Hz
+    instruments:
+    - warm enveloping pad
+    - gentle wave motion
+    - glow
+    texture: release and warmth flooding tissue, softening
+    prompt: continuous ambient texture, warm enveloping synth pad in C major pentatonic at 64 BPM, gentle wave-like motion,
+      warm glowing undertone, warmth flooding through body tissue, muscles softening, no drums, no vocals, no melody resolution,
+      continuous seamless loop, warm somatic release atmosphere
+  hot:
+    bpm: 70
+    key: F major pentatonic
+    frequency_focus: alpha-beta 11-14 Hz
+    instruments:
+    - vibrant warm pad
+    - gentle body-rhythm
+    - bright
+    texture: vital body energy, integration, aliveness
+    prompt: continuous ambient texture, vibrant warm synth pad in F major pentatonic at 70 BPM, gentle body-rhythm organic
+      pulse, bright alive harmonics, vital body energy flowing, somatic integration, aliveness, no drums, no vocals, no melody
+      resolution, continuous seamless loop, vital alive body-energy atmosphere
+brand_to_profiles:
+  stabilizer:
+    primary_topics:
+    - burnout
+    - anxiety
+    - somatic_healing
+    temperature_range:
+    - cool
+    - warm
+    notes: Parasympathetic activation focus. Evening wind-down.
+  optimizer:
+    primary_topics:
+    - overthinking
+    - imposter_syndrome
+    temperature_range:
+    - neutral
+    - hot
+    notes: Forward beta-range energy. Morning commute.
+  night_reset:
+    primary_topics:
+    - sleep_anxiety
+    - anxiety
+    - overthinking
+    temperature_range:
+    - cold
+    - warm
+    notes: 'Inverted activation: hot=deep sleep. Late night.'
+  career_lift:
+    primary_topics:
+    - imposter_syndrome
+    - burnout
+    - courage
+    temperature_range:
+    - cool
+    - hot
+    notes: Journey from stuck to momentum. Sunday planning.
+  adhd_forge:
+    primary_topics:
+    - overthinking
+    - self_worth
+    - anxiety
+    temperature_range:
+    - neutral
+    - hot
+    notes: Gentle structure needed. Afternoon focus.
+  longevity_lab:
+    primary_topics:
+    - somatic_healing
+    - anxiety
+    - burnout
+    temperature_range:
+    - neutral
+    - warm
+    notes: Body-forward, steady. Morning routine.
+  creative_unfold:
+    primary_topics:
+    - imposter_syndrome
+    - overthinking
+    - courage
+    temperature_range:
+    - cool
+    - hot
+    notes: Flow states. Lydian/dreamy modes preferred.
+  resilient_parent:
+    primary_topics:
+    - burnout
+    - compassion_fatigue
+    - anxiety
+    temperature_range:
+    - cold
+    - warm
+    notes: Deep rest, parasympathetic. Post kids bedtime.
+  executive_calm:
+    primary_topics:
+    - anxiety
+    - social_anxiety
+    - courage
+    temperature_range:
+    - cool
+    - neutral
+    notes: Controlled, architectural calm. Pre-meeting.
+  trauma_path:
+    primary_topics:
+    - somatic_healing
+    - anxiety
+    - grief
+    temperature_range:
+    - cold
+    - warm
+    notes: Slow, predictable, no surprises. Therapy integration.
+  spiritual_ground:
+    primary_topics:
+    - somatic_healing
+    - grief
+    - self_worth
+    temperature_range:
+    - cool
+    - warm
+    notes: Pentatonic, open, spacious. Morning meditation.
+  focus_sprint:
+    primary_topics:
+    - burnout
+    - overthinking
+    - anxiety
+    temperature_range:
+    - neutral
+    - hot
+    notes: Structured focus energy. Late night work.
+  hormone_reset:
+    primary_topics:
+    - somatic_healing
+    - anxiety
+    - burnout
+    temperature_range:
+    - cool
+    - warm
+    notes: Body-aware, cyclical. Evening health research.
+  stoic_edge:
+    primary_topics:
+    - courage
+    - self_worth
+    - boundaries
+    temperature_range:
+    - neutral
+    - hot
+    notes: Firm Dorian/Mixolydian modes. Gym drive.
+  calm_student:
+    primary_topics:
+    - anxiety
+    - overthinking
+    - sleep_anxiety
+    temperature_range:
+    - cold
+    - warm
+    notes: Young, accessible. Pre-exam evening.
+  healing_ground:
+    primary_topics:
+    - burnout
+    - somatic_healing
+    - anxiety
+    temperature_range:
+    - cool
+    - neutral
+    notes: Quick-acting parasympathetic. Lunch break.
+  bio_flow:
+    primary_topics:
+    - somatic_healing
+    - burnout
+    - overthinking
+    temperature_range:
+    - neutral
+    - hot
+    notes: Structured, data-mind-friendly. Quantified review.
+  confidence_core:
+    primary_topics:
+    - social_anxiety
+    - imposter_syndrome
+    - self_worth
+    temperature_range:
+    - cold
+    - warm
+    notes: Safety-first, then opening. Pre-social event.
+  relationship_clarity:
+    primary_topics:
+    - boundaries
+    - compassion_fatigue
+    - grief
+    temperature_range:
+    - cool
+    - warm
+    notes: Co-regulation, paired breath. Post-argument.
+  morning_momentum:
+    primary_topics:
+    - courage
+    - self_worth
+    - burnout
+    temperature_range:
+    - warm
+    - hot
+    notes: Morning activation energy. Sunrise drive.
+  minimal_mind:
+    primary_topics:
+    - overthinking
+    - anxiety
+    - burnout
+    temperature_range:
+    - cool
+    - neutral
+    notes: Minimal, stripped, quiet. Doomscroll recovery.
+  high_performer:
+    primary_topics:
+    - courage
+    - social_anxiety
+    - imposter_syndrome
+    temperature_range:
+    - neutral
+    - hot
+    notes: Assertive, clear, structured. Pre-call prep.
+  gentle_growth:
+    primary_topics:
+    - self_worth
+    - anxiety
+    - somatic_healing
+    temperature_range:
+    - cold
+    - warm
+    notes: Ultra-safe, slow, permissive. Journaling time.
+  legacy_builder:
+    primary_topics:
+    - grief
+    - self_worth
+    - courage
+    temperature_range:
+    - cool
+    - warm
+    notes: Deep, reflective, dignified. Life transition.
+brand_mappings:
+  stillness_press:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - courage
+    - depression
+    - grief
+    - sleep_anxiety
+    - social_anxiety
+    - somatic_healing
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: en_US
+  cognitive_clarity:
+    topics:
+    - boundaries
+    - financial_anxiety
+    - financial_stress
+    - imposter_syndrome
+    - overthinking
+    - self_worth
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: en_US
+  sleep_repair_tw:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_TW
+  stabilizer_tw:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_TW
+  panic_first_aid_tw:
+    topics:
+    - anxiety
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_TW
+  gen_z_grounding_tw:
+    topics:
+    - boundaries
+    - financial_anxiety
+    - financial_stress
+    - overthinking
+    - self_worth
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_TW
+  grief_companion_tw:
+    topics:
+    - compassion_fatigue
+    - depression
+    - grief
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_TW
+  inner_security_tw:
+    topics:
+    - anxiety
+    - boundaries
+    - imposter_syndrome
+    - self_worth
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_TW
+  sleep_repair_hk:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_HK
+  stabilizer_hk:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_HK
+  panic_first_aid_hk:
+    topics:
+    - anxiety
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_HK
+  gen_z_grounding_hk:
+    topics:
+    - boundaries
+    - financial_anxiety
+    - financial_stress
+    - overthinking
+    - self_worth
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_HK
+  grief_companion_hk:
+    topics:
+    - compassion_fatigue
+    - depression
+    - grief
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_HK
+  inner_security_hk:
+    topics:
+    - anxiety
+    - boundaries
+    - imposter_syndrome
+    - self_worth
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_HK
+  sleep_repair_cn:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_CN
+  stabilizer_cn:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_CN
+  panic_first_aid_cn:
+    topics:
+    - anxiety
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_CN
+  gen_z_grounding_cn:
+    topics:
+    - boundaries
+    - financial_anxiety
+    - financial_stress
+    - overthinking
+    - self_worth
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_CN
+  grief_companion_cn:
+    topics:
+    - compassion_fatigue
+    - depression
+    - grief
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_CN
+  inner_security_cn:
+    topics:
+    - anxiety
+    - boundaries
+    - imposter_syndrome
+    - self_worth
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_CN
+  sleep_repair_sg:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_SG
+  stabilizer_sg:
+    topics:
+    - anxiety
+    - burnout
+    - compassion_fatigue
+    - depression
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_SG
+  panic_first_aid_sg:
+    topics:
+    - anxiety
+    - sleep_anxiety
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_SG
+  gen_z_grounding_sg:
+    topics:
+    - boundaries
+    - financial_anxiety
+    - financial_stress
+    - overthinking
+    - self_worth
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_SG
+  grief_companion_sg:
+    topics:
+    - compassion_fatigue
+    - depression
+    - grief
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_SG
+  inner_security_sg:
+    topics:
+    - anxiety
+    - boundaries
+    - imposter_syndrome
+    - self_worth
+    - social_anxiety
+    temperatures:
+    - cold
+    - cool
+    - neutral
+    - warm
+    - hot
+    locale: zh_SG

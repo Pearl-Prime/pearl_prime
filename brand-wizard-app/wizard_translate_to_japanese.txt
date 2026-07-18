@@ -1,0 +1,436 @@
+BRANDWIZARD — JAPANESE TRANSLATION FILE
+========================================
+Instructions: Replace the right side of each line with your Japanese translation.
+- Keep the KEY (left of =) exactly as-is
+- {n} is a number placeholder — keep it exactly as {n}
+- Pearl Prime is a brand name — do NOT translate it
+- Use です/ます tone. Polite but not overly formal.
+- Keep: TikTok, Gen Z, Gen Alpha, YAML, archetype, persona
+========================================
+
+nav.back = Back
+nav.next = Next
+nav.steps_of = of
+nav.step = Step
+
+progress.step1 = Archetype
+progress.step2 = Reader
+progress.step3 = Moment
+progress.step4 = Voice
+progress.step5 = Impact
+progress.step6 = Visual
+progress.step7 = Topics
+progress.step8 = Market
+progress.step9 = Formats
+progress.step10 = Blueprint
+progress.step11 = Launch
+
+step1.eyebrow = Foundation
+step1.title = Choose your emotional world
+step1.subtitle = Your archetype is the feeling readers associate with you — across prose, covers, video, and social. Pick the worldview that matches how you want to show up.
+step1.helper = Each card includes a short vision of the world your brand invites readers into.
+step1.tip = This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.
+
+archetype.nervous_system.name = Stillness Lab
+archetype.nervous_system.tagline = When the body won't stop screaming
+archetype.nervous_system.tags.0 = Calm
+archetype.nervous_system.tags.1 = Somatic
+archetype.nervous_system.tags.2 = Regulation
+
+archetype.identity_direction.name = Compass Studio
+archetype.identity_direction.tagline = For those who feel lost but aren't broken
+archetype.identity_direction.tags.0 = Direction
+archetype.identity_direction.tags.1 = Identity
+archetype.identity_direction.tags.2 = Purpose
+
+archetype.emotional_healing.name = Soft Lantern
+archetype.emotional_healing.tagline = Grief doesn't follow a schedule
+archetype.emotional_healing.tags.0 = Healing
+archetype.emotional_healing.tags.1 = Grief
+archetype.emotional_healing.tags.2 = Tenderness
+
+archetype.performance_focus.name = Clear Mind Lab
+archetype.performance_focus.tagline = Cut the noise. Execute what matters.
+archetype.performance_focus.tags.0 = Focus
+archetype.performance_focus.tags.1 = Discipline
+archetype.performance_focus.tags.2 = Execution
+
+archetype.spiritual_awakening.name = Phoenix Rising
+archetype.spiritual_awakening.tagline = The old you has to die for the real you to live
+archetype.spiritual_awakening.tags.0 = Awakening
+archetype.spiritual_awakening.tags.1 = Meaning
+archetype.spiritual_awakening.tags.2 = Depth
+
+step2.eyebrow = Audience
+step2.title = Primary reader
+step2.subtitle = Every strong brand has a protagonist — the reader you lead with. Your catalog still reaches every segment; this choice shapes voice, covers, and hooks first.
+step2.tip = Still reaching everyone. We tune titles, packaging, and exercises to this reader first, then adapt across your archetype's other segments.
+step2.lane_label = Your lane
+step2.market_label = Your market
+
+persona.burned_out_pro.label = Burned-Out Professional
+persona.burned_out_pro.desc = Drained, numb, running on fumes
+persona.burned_out_pro.needs = Reset, relief, permission to stop
+
+persona.gen_z_seeker.label = Gen Z Navigator
+persona.gen_z_seeker.desc = Overwhelmed, comparing, scrolling
+persona.gen_z_seeker.needs = Direction, validation, real tools
+
+persona.gen_alpha.label = Gen Alpha Explorer
+persona.gen_alpha.desc = Growing up overstimulated, emotionally aware early
+persona.gen_alpha.needs = Age-appropriate tools, emotional vocabulary, safe guidance
+
+persona.grief_carrier.label = Grief Carrier
+persona.grief_carrier.desc = Loss, numbness, can't explain it
+persona.grief_carrier.needs = Witness, tenderness, not fixing
+
+persona.anxious_achiever.label = Anxious Achiever
+persona.anxious_achiever.desc = Succeeding outside, crumbling inside
+persona.anxious_achiever.needs = Nervous system support, honesty
+
+persona.spiritual_returner.label = Spiritual Returner
+persona.spiritual_returner.desc = Tried everything, still searching
+persona.spiritual_returner.needs = Depth, authenticity, no fluff
+
+persona.new_parent.label = Overwhelmed Parent
+persona.new_parent.desc = Lost identity, no time, guilt
+persona.new_parent.needs = Quick tools, self-compassion
+
+lane.self_help.label = Self-help books
+lane.self_help.hint = Long-form titles and programs for deep transformation.
+lane.manga.label = Manga / visual stories
+lane.manga.hint = Panel-first storytelling for youth and visual-native readers.
+lane.pearl_news.label = Pearl News editorial
+lane.pearl_news.hint = Article-led civic and narrative explainers.
+lane.tools.label = Breathwork / tools
+lane.tools.hint = Utility-first experiences and practical support flows.
+lane.hybrid.label = Hybrid lane
+lane.hybrid.hint = Blend book, manga, and editorial proof in one path.
+
+market.us.label = United States (en-US)
+market.us.hint = Primary launch market.
+market.japan.label = Japan (ja-JP)
+market.japan.hint = Localized visual and wording expectations.
+market.taiwan.label = Taiwan (zh-TW)
+market.taiwan.hint = Traditional Chinese market alignment.
+
+step3.eyebrow = Hook
+step3.title = The moment they reach for you
+step3.subtitle = Pick the scene where your reader is most open — titles, covers, and social hooks follow from here.
+step3.why_summary = Why this matters
+step3.why_detail = Strong brands speak to a moment, not only a demographic. This choice steers first lines, cover promise, and scroll-stopping hooks.
+
+moment.2am_overthinking.label = 2AM — Can't stop thinking
+moment.after_breakup.label = After a breakup or loss
+moment.burnout_cant_quit.label = Burned out but can't quit
+moment.feeling_behind.label = Feeling behind in life
+moment.panic_spike.label = Panic attack / anxiety spike
+moment.sunday_dread.label = Sunday dread before Monday
+
+step4.eyebrow = Voice
+step4.title = Shape your brand tone
+step4.subtitle = Four sliders — slide and watch the graphs move. Each axis changes how every sentence feels.
+step4.subtext = Next step shows what each position does for your reader.
+step4.position_of = Position {n} of 10
+
+voice.gentleDirect.left = Gentle
+voice.gentleDirect.right = Direct
+voice.gentleDirect.desc = Controls sentence softness, permission language vs imperative commands
+
+voice.simpleDeep.left = Simple
+voice.simpleDeep.right = Deep
+voice.simpleDeep.desc = Controls vocabulary density, metaphor layers, conceptual complexity
+
+voice.emotionalLogical.left = Emotional
+voice.emotionalLogical.right = Logical
+voice.emotionalLogical.desc = Controls story-to-data ratio, vulnerability level, analytical framing
+
+voice.spiritualPractical.left = Spiritual
+voice.spiritualPractical.right = Practical
+voice.spiritualPractical.desc = Controls tradition references, sacred language, tool-first vs meaning-first
+
+step5.eyebrow = Impact
+step5.title = What your tone does for readers
+step5.subtitle = Slide, then open impact below if you want the full read.
+step5.narrator_label = Narrator preview
+step5.narrator_subtext = Same comfort passage, three Edge TTS pipeline-demo voices. Pair what you hear with the sliders above.
+step5.voice_regulating = Regulating / calm
+step5.voice_warm = Warm empathetic
+step5.voice_direct = Direct / authority
+step5.how_it_lands = How this lands for readers
+
+step6.eyebrow = Look & feel
+step6.title = Visual world and emotional promise
+step6.subtitle = Pick a look, then the feelings you want readers to walk away with.
+step6.visual_label = Visual style
+step6.image_prompts = Image prompts (system)
+step6.emotions_label = Emotional outcomes
+step6.emotions_limit = (up to 5)
+step6.emotions_subtext = Pick up to five outcomes — they anchor titles and CTAs.
+step6.emotion_prompts_label = Prompt lines per outcome
+step6.tradition_label = Spiritual foundation
+step6.tradition_subtext = Optional — grounds vocabulary and references if you draw from a tradition.
+step6.tradition_placeholder = Select primary tradition (optional)...
+
+visual.calm_minimal.label = Calm / Minimal
+visual.calm_minimal.desc = Clean, airy, lots of white space
+visual.calm_minimal.mood = Serene, spacious, breathable
+
+visual.dark_intense.label = Dark / Intense
+visual.dark_intense.desc = Moody, contrast-heavy, dramatic
+visual.dark_intense.mood = Powerful, immersive, cinematic
+
+visual.earthy_organic.label = Earthy / Organic
+visual.earthy_organic.desc = Natural textures, warm tones
+visual.earthy_organic.mood = Grounded, warm, textured
+
+visual.bold_modern.label = Bold / Modern
+visual.bold_modern.desc = Sharp typography, geometric
+visual.bold_modern.mood = Energetic, decisive, striking
+
+visual.premium_soft.label = Premium / Geometric
+visual.premium_soft.desc = Refined, precise, luxury-positioned
+visual.premium_soft.mood = Elevated, geometric, timeless
+
+visual.sacred_cosmic.label = Mysterious / Deep
+visual.sacred_cosmic.desc = Atmospheric, contemplative, subtly luminous
+visual.sacred_cosmic.mood = Intriguing, expansive, still commercial
+
+emotion.finally_calm = Finally calm
+emotion.safe_in_body = Safe in my body
+emotion.clear_headed = Clear-headed
+emotion.in_control = In control
+emotion.permission_to_rest = Permission to rest
+emotion.energized = Energized
+emotion.connected_to_purpose = Connected to purpose
+emotion.released = Released
+emotion.less_alone = Less alone
+emotion.forgiven = Forgiven
+emotion.grounded = Grounded
+emotion.hopeful = Hopeful
+emotion.present = Present
+emotion.confident = Confident
+emotion.resilient = Resilient
+
+tradition.zen = Zen Buddhism
+tradition.sufi = Sufi mysticism
+tradition.vedanta = Vedanta
+tradition.vajrayana = Vajrayana
+tradition.taoism = Taoism
+tradition.stoicism = Stoicism
+tradition.buddhist_psych = Buddhist psychology
+tradition.somatic = Somatic therapy
+tradition.polyvagal = Polyvagal theory
+tradition.christian = Contemplative Christianity
+tradition.indigenous = Indigenous wisdom
+tradition.secular = Secular mindfulness
+tradition.breathwork = Breathwork science
+tradition.depth = Depth psychology
+
+step7.title = Claim Your Search Territory
+step7.subtitle = This page defines what your brand is about — the topics people search for that lead them to your content, and the angles your books use to frame their message. Your topic selections feed directly into title generation, keyword targeting, series planning, and ad campaigns across all platforms.
+step7.subtitle2 = Select generously — the system uses these as seeds to generate hundreds of specific title and keyword variations.
+step7.angles_label = Content Angles
+step7.angles_subtext = How your books open their argument. These framing modes determine whether your titles challenge, reveal, systematize, or reframe. Pick all that fit your brand voice.
+step7.topics_label = Topic Territory
+step7.topics_subtext = Select the search topics your brand will own. Organized by category — pick across multiple categories to build a well-rounded brand presence.
+step7.topics_selected = {n} topics selected
+
+angle.debunk.label = Debunk
+angle.framework.label = Framework
+angle.reveal.label = Reveal
+angle.leverage.label = Leverage
+angle.origin.label = Origin
+
+topic_cat.sleep_anxiety = Sleep & Anxiety
+topic_cat.burnout_work = Burnout & Work
+topic_cat.grief_healing = Grief & Healing
+topic_cat.identity_direction = Identity & Direction
+topic_cat.focus_performance = Focus & Performance
+topic_cat.meaning_spirituality = Meaning & Spirituality
+
+topic.anxiety-at-night = anxiety at night
+topic.overthinking = overthinking
+topic.panic-grounding = panic grounding
+topic.sunday-dread = sunday dread
+topic.burnout-recovery = burnout recovery
+topic.nervous-system-reset = nervous system reset
+topic.decision-fatigue = decision fatigue
+topic.phone-addiction = phone addiction
+topic.grief-timeline = grief timeline
+topic.toxic-relationship-healing = toxic relationship healing
+topic.intergenerational-trauma = intergenerational trauma
+topic.heartbreak-recovery = heartbreak recovery
+topic.emotional-numbness = emotional numbness
+topic.feeling-behind = feeling behind
+topic.quarter-life-crisis = quarter life crisis
+topic.identity-rebuild = identity rebuild
+topic.purpose-after-30 = purpose after 30
+topic.habit-building = habit building
+topic.ADHD-productivity = ADHD productivity
+topic.dopamine-detox = dopamine detox
+topic.deep-work = deep work
+topic.meditation-beginners = meditation beginners
+topic.meaning-after-loss = meaning after loss
+topic.spiritual-no-religion = spiritual no religion
+topic.inner-peace-chaos = inner peace in chaos
+topic.mindfulness-skeptics = mindfulness for skeptics
+
+step8.title = Market Intelligence
+step8.subtitle = Your creative vision is the soul of your brand. But soul alone doesn't pay rent. This page shows you how the system blends your unique direction with hard market data — real search volumes, proven buyer personas, and high-converting keyword territories — to ensure your catalog reaches the people who are already looking for what you're offering.
+step8.note = Nothing changes about your brand's voice or identity. We just make sure it shows up where the demand is.
+step8.youth_title = Youth Reach: Gen Z + Gen Alpha
+step8.youth_body = Every brand on Pearl Prime automatically serves Gen Z and Gen Alpha readers — no extra configuration needed. The system creates age-appropriate adaptations of your content: shorter formats tuned for mobile-first consumption, visual-first layouts optimized for scroll-based discovery, platform-native hooks for TikTok and YouTube Shorts, and fully illustrated manga-style editions for readers who think in images rather than paragraphs. Gen Alpha (born 2010–2025) is the first generation growing up with emotional vocabulary from day one — they're searching for mental health content at younger ages than any previous generation. Your brand meets them where they are.
+step8.shortform = Short-form first
+step8.shortform_desc = TikTok, Reels, Shorts optimized
+step8.manga = Manga editions
+step8.manga_desc = Full illustrated visual format
+step8.micro = Micro audiobooks
+step8.micro_desc = 15–30 min listens for mobile
+step8.blend_title = How the Blend Works
+step8.blend_body = We combine your creative direction — archetype, voice, topics, and angles — with proven high-performing search terms, audience segments, and real-time market signals. Your brand identity stays completely intact while the system ensures your catalog targets the topics people are actively searching for. This means your books appear where demand already exists, your titles match what people actually type into search bars, and your content reaches buyer personas with verified spending power. The result: your unique voice reaches the largest possible audience.
+step8.your_direction = Your Direction
+step8.your_direction_desc = Archetype, voice, topics, angles, visual style — preserved as your brand's unique creative identity
+step8.market_intel = Market Intelligence
+step8.market_intel_desc = Proven revenue personas, trending search terms, high-conversion keywords, and demand data matched to your archetype
+step8.personas_title = Proven Revenue Personas for Your Archetype
+step8.personas_subtext = These are the audience segments with verified purchasing power in your emotional territory. The system ensures your catalog reaches all of them.
+step8.topics_title = High-Performing Search Topics
+step8.topics_subtext = These search terms have verified monthly volume and conversion rates. Your titles and keywords will be optimized around these terms alongside your custom selections.
+
+step9.title = Format & Channel Choices
+step9.subtitle = Your format focus tells the catalog planner whether to optimize for visual-first short-form content or deep long-form books. Your channel selections determine where your brand publishes — each active channel adds content weight to the pipeline, meaning more formats, more variations, and more touchpoints with your audience.
+step9.format_label = Primary Format Focus
+step9.format_subtext = This is the most important format decision. It changes how the catalog planner distributes content across your entire brand.
+step9.manga_title = Manga / Visual
+step9.manga_desc = Illustrated panels, visual storytelling, manga-style layouts. Audiobooks default to short formats (15–30 min). Optimized for Gen Z and Gen Alpha visual-first consumption.
+step9.manga_active = Catalog planner will prioritize short-form audiobooks, visual content, and illustration-heavy formats across all channels.
+step9.book_title = Traditional Books
+step9.book_desc = Full-length narrative books, deep guided programs, comprehensive workbooks. Audiobooks in long formats (3–8 hrs). Optimized for depth-seeking readers.
+step9.book_active = Catalog planner will prioritize long-form books, complete programs, and in-depth series across all channels.
+step9.channels_label = Publishing Channels
+step9.channels_subtext = Select all channels you want your brand to publish through. Each channel generates dedicated content adapted for that platform's format, audience, and algorithm requirements.
+
+channel.audiobook.label = Audiobook
+channel.audiobook.desc = Full narrated audiobooks on Audible, Spotify, Apple Books, and 40+ platforms worldwide
+channel.audiobook.benefit = Listeners heal during commutes, walks, and sleepless nights — your voice becomes a companion in their most vulnerable private moments
+
+channel.yt_channel.label = YouTube Channel
+channel.yt_channel.desc = Daily video content — shorts, long-form talks, guided sessions, and visualized chapters
+channel.yt_channel.benefit = Visual learners process emotion through moving images — your brand becomes a daily presence in their feed, building trust through consistent showing up
+
+channel.tiktok.label = TikTok
+channel.tiktok.desc = Platform-native short-form video with trending audio, text overlays, and hook-first editing
+channel.tiktok.benefit = You catch people mid-scroll in moments of vulnerability — a 30-second clip can be the first step toward a life change
+
+channel.pocket_guide.label = Pocket Guide
+channel.pocket_guide.desc = Condensed 30–50 page quick-reference editions — the essential takeaways in a weekend read
+channel.pocket_guide.benefit = Overwhelmed readers who can't commit to a full book get immediate relief — a weekend read that delivers the essential transformation
+
+channel.7_day_guide.label = How to Do It in 7 Days
+channel.7_day_guide.desc = Compressed transformation protocol — one chapter per day, clear daily actions, quick wins
+channel.7_day_guide.benefit = Structure reduces overwhelm — readers who've failed at "read when you feel like it" thrive with daily assignments that build momentum
+
+channel.mastercourse.label = Mastercourse Series
+channel.mastercourse.desc = Multi-volume deep-dive series with progressive complexity — 4–8 books building on each other
+channel.mastercourse.benefit = Committed readers go deep over months — each volume builds on the last, creating the sustained practice that drives real, lasting change
+
+channel.workbook.label = Interactive Workbook
+channel.workbook.desc = Exercise-heavy companion with fill-in sections, tracking sheets, and guided reflection spaces
+channel.workbook.benefit = Writing activates different brain pathways than reading — workbooks turn passive consumption into active self-discovery and integration
+
+channel.daily_journal.label = Daily Journal
+channel.daily_journal.desc = 30–90 day guided journal — one prompt per day with space for writing and reflection
+channel.daily_journal.benefit = Daily prompts build the self-awareness muscle — readers develop an ongoing relationship with their own inner world, one page at a time
+
+step10.eyebrow = Reveal
+step10.title = Here is your brand
+step10.subtitle = Your choices — distilled first, then grouped so you can read the arc at a glance.
+step10.voice_preview_label = Audiobook voice — preview
+step10.voice_preview_subtext = Regulating narrator on the comfort benchmark.
+step10.section1 = 1 · Brand identity
+step10.section2 = 2 · How it shows up
+step10.section3 = 3 · What it promises
+step10.emotional_world = Emotional world
+step10.primary_reader = Primary reader
+step10.trigger_moment = Trigger moment
+step10.tradition = Tradition
+step10.visual_style = Visual style
+step10.publishing_context = Publishing context
+step10.lane = Lane
+step10.market = Market
+step10.format = Format
+step10.channels = Channels
+step10.channels_active = {n} active
+step10.emotional_outcomes = Emotional outcomes
+step10.topics = Topics
+step10.content_angles = Content angles
+step10.read_on_direction = Read on your direction
+step10.signal_scores = Signal scores
+step10.score_marketability = Marketability
+step10.score_marketability_desc = Alignment with proven market demand
+step10.score_youth = Youth Reach
+step10.score_youth_desc = Gen Z and Gen Alpha compatibility
+step10.score_impact = Life Impact
+step10.score_impact_desc = Transformation depth for your reader
+step10.score_reach = Platform Reach
+step10.score_reach_desc = Multi-channel distribution coverage
+step10.format_manga = Manga / visual
+step10.format_book = Books
+
+assessment.exceptional = Exceptional brand positioning. Your archetype, audience, and topic choices align powerfully with high-revenue market segments. This brand has strong commercial potential with deep reader impact.
+assessment.strong = Strong brand foundation. Your selections create a compelling identity with solid market alignment. A few more refinements could push this into exceptional territory.
+assessment.good = Good starting point. Your brand identity is taking shape — consider adding more topic selections and channel coverage to strengthen your market position.
+
+step11.eyebrow = Launch
+step11.title = Activate your brand
+step11.subtitle = Enter your details and we'll configure your Pearl Prime studio.
+step11.first_name = First name
+step11.last_name = Last name
+step11.email = Email address
+step11.phone = Phone
+step11.phone_placeholder = Phone number
+step11.country_code_label = Country code
+step11.launch_button = ACTIVATE BRAND STUDIO
+step11.not_ready = Complete the wizard to activate
+step11.success_title = Your brand is live.
+step11.success_subtitle = Pearl Prime is configuring your studio now.
+step11.download_yaml = Download brand config
+step11.show_yaml = Show YAML
+step11.hide_yaml = Hide YAML
+step11.choice_audit = Your choices and what they do
+step11.choice_system = System effect
+step11.choice_emotional = Emotional benefit
+
+choice.emotional_world = Emotional World
+choice.primary_reader = Primary Reader
+choice.trigger_moment = Trigger Moment
+choice.voice_tone = Voice Tone
+choice.voice_tone_value = {n} dimensions tuned
+choice.visual_style = Visual Style
+choice.emotional_outcomes = Emotional Outcomes
+choice.tradition = Spiritual Foundation
+choice.content_angles = Content Angles
+choice.search_territory = Search Territory
+choice.search_territory_value = {n} topics claimed
+choice.onboarding_lane = Onboarding Lane
+choice.onboarding_market = Onboarding Market
+choice.format_focus = Format Focus
+choice.channels = Publishing Channels
+choice.channels_value = {n} channels active
+
+intro.welcome.eyebrow = Pearl Prime Brand Studio
+intro.welcome.title = Build a brand that changes lives
+intro.welcome.subtitle = A 10-minute guided setup. Answer 11 questions. Walk away with a complete creative identity — archetype, voice, visual system, and catalog plan — ready to generate books, audiobooks, video, and social content at scale.
+intro.welcome.cta = Begin
+
+intro.journey.title = What you're about to build
+intro.journey.cta = Start the wizard
+intro.journey.back = Back
+
+intro.showcase.title = What Pearl Prime produces
+intro.showcase.cta = Continue
+intro.showcase.back = Back
+
+feedback.system_label = System effect
+feedback.emotional_label = Emotional benefit for your reader

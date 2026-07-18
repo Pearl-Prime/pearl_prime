@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Musician Reflections Intake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0a06;
+    --card: rgba(28, 22, 16, 0.65);
+    --card-border: rgba(180, 145, 90, 0.18);
+    --txt: #faf6f0;
+    --muted: rgba(250, 246, 240, 0.55);
+    --helper: rgba(250, 246, 240, 0.42);
+    --amber: #d97706;
+    --amber-soft: rgba(217, 119, 6, 0.12);
+    --amber-line: rgba(217, 119, 6, 0.35);
+    --rule: rgba(250, 246, 240, 0.08);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', 'JetBrains Mono', monospace;
+    --required: #f5a623;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--txt); font-family: var(--sans);
+    min-height: 100vh; padding: 56px 20px 96px;
+    background-image: radial-gradient(ellipse at top, rgba(217, 119, 6, 0.05) 0%, transparent 50%);
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+
+  /* Header chrome — matches wizard */
+  header { text-align: center; margin-bottom: 56px; }
+  header .logo {
+    font-family: var(--mono); font-size: 0.6rem; color: var(--amber);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: var(--serif); font-size: 2.6rem; font-weight: 500;
+    letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 14px;
+  }
+  header h1 em { font-style: italic; font-weight: 400; color: var(--amber); }
+  header p {
+    color: var(--muted); font-size: 0.95rem; line-height: 1.65;
+    max-width: 560px; margin: 0 auto; font-weight: 300;
+  }
+
+  /* Progress bar */
+  .progress { height: 2px; background: var(--rule); border-radius: 2px; margin-bottom: 40px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--amber), #f5a623); width: 0%; transition: width 0.3s; }
+
+  /* Sections — card pattern from wizard */
+  .section {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 32px; margin-bottom: 24px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .section-title {
+    font-family: var(--mono); font-size: 0.6rem; color: var(--amber);
+    letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+    margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  /* Fields */
+  .field { margin-bottom: 22px; }
+  .field:last-child { margin-bottom: 0; }
+  label.field-label {
+    display: block; font-family: var(--sans); font-size: 0.875rem;
+    font-weight: 500; color: var(--txt); margin-bottom: 4px;
+  }
+  .hint {
+    display: block; font-family: var(--sans); font-size: 0.78rem;
+    color: var(--helper); font-weight: 300; margin-top: 3px;
+    margin-bottom: 10px; line-height: 1.5; font-style: italic;
+  }
+  .required { color: var(--required); margin-left: 4px; }
+
+  /* Text inputs */
+  input[type="text"], input[type="url"], textarea, select {
+    width: 100%; background: rgba(14, 10, 6, 0.6); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 11px 14px; color: var(--txt);
+    font-size: 0.92rem; font-family: var(--sans); font-weight: 300;
+    outline: none; transition: border-color 0.2s, background 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(250, 246, 240, 0.28); font-style: italic; }
+  input:focus, textarea:focus, select:focus { border-color: var(--amber-line); background: rgba(14, 10, 6, 0.85); }
+  textarea { resize: vertical; min-height: 84px; line-height: 1.55; }
+
+  select {
+    appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23d97706' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+    cursor: pointer;
+  }
+  select option { background: var(--bg); color: var(--txt); }
+
+  /* Radio + Check groups — wizard card style */
+  .radio-group, .check-group { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .radio-group.cols, .check-group.cols { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) { .radio-group.cols, .check-group.cols { grid-template-columns: 1fr; } }
+  .opt-card {
+    display: flex; flex-direction: column; gap: 4px; cursor: pointer;
+    background: rgba(14, 10, 6, 0.4); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 12px 14px; transition: all 0.15s;
+  }
+  .opt-card:hover { border-color: rgba(217, 119, 6, 0.25); background: rgba(14, 10, 6, 0.65); }
+  .opt-card:has(input:checked) { border-color: var(--amber); background: var(--amber-soft); }
+  .opt-card-title {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 0.875rem; font-weight: 500; color: var(--txt);
+  }
+  .opt-card input[type="radio"], .opt-card input[type="checkbox"] {
+    accent-color: var(--amber); width: 14px; height: 14px; cursor: pointer;
+  }
+  .opt-card-example {
+    font-family: var(--sans); font-size: 0.74rem; color: var(--helper);
+    font-weight: 300; font-style: italic; line-height: 1.45; padding-left: 23px;
+  }
+
+  /* Inline multi-cols field row */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+
+  /* Multi-URL / multi-collab dynamic inputs */
+  .multi-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .multi-row input { flex: 1; }
+  .multi-row-remove {
+    background: transparent; border: 1px solid var(--rule); color: var(--muted);
+    border-radius: 6px; padding: 6px 10px; font-size: 0.8rem; cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .multi-row-remove:hover { border-color: var(--amber-line); color: var(--amber); }
+  .multi-add-btn {
+    margin-top: 4px; background: transparent; border: 1px dashed var(--card-border);
+    color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 0.78rem;
+    font-family: var(--mono); letter-spacing: 0.04em; cursor: pointer; transition: all 0.15s;
+  }
+  .multi-add-btn:hover { border-color: var(--amber-line); color: var(--amber); background: var(--amber-soft); }
+
+  /* File upload drop zone */
+  .file-drop {
+    border: 1px dashed var(--card-border); border-radius: 10px;
+    padding: 24px 16px; text-align: center; cursor: pointer;
+    color: var(--muted); font-size: 0.85rem;
+    transition: border-color 0.15s, background 0.15s; margin-bottom: 12px;
+  }
+  .file-drop:hover { border-color: var(--amber-line); background: rgba(14, 10, 6, 0.5); color: var(--txt); }
+  .file-drop input[type="file"] { display: none; }
+  .file-drop-icon { font-size: 1.4rem; margin-bottom: 6px; opacity: 0.7; }
+  .file-drop strong { color: var(--amber); font-weight: 500; }
+  .file-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .file-chip {
+    font-family: var(--mono); font-size: 0.72rem; padding: 4px 10px;
+    background: var(--amber-soft); border: 1px solid var(--amber-line); color: var(--txt);
+    border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .file-chip button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.85rem; line-height: 1; padding: 0; }
+  .file-chip button:hover { color: var(--amber); }
+
+  /* Submit button — matches wizard primary CTA */
+  .submit-wrap { text-align: center; margin-top: 28px; }
+  .submit-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #1a1410; color: var(--txt);
+    font-family: var(--sans); font-weight: 700; font-size: 0.95rem;
+    border: 1px solid var(--amber); border-radius: 16px;
+    padding: 14px 36px; cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 6px 24px rgba(217, 119, 6, 0.15);
+  }
+  .submit-btn:hover { transform: translateY(-1px); background: var(--amber-soft); box-shadow: 0 8px 28px rgba(217, 119, 6, 0.25); }
+  .submit-btn .arrow { color: var(--amber); }
+
+  /* Success state */
+  #success { display: none; text-align: center; padding: 80px 20px; }
+  #success .icon { font-size: 3rem; margin-bottom: 16px; }
+  #success h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; margin-bottom: 10px; }
+  #success p { color: var(--muted); font-size: 0.92rem; }
+  #success .step1-note { font-family: var(--mono); font-size: 0.72rem; color: var(--amber); margin-top: 18px; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">Pearl Prime · Music Mode</div>
+    <h1>Musician <em>Reflections</em> Intake</h1>
+    <p>Help Pearl Prime understand your voice, your craft, and the healing intent behind your music. Your responses shape the AI-generated reflections, companion songs, and brand-wizard fields ahead.</p>
+  </header>
+
+  <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <form id="survey-form">
+
+    <!-- 01 IDENTITY -->
+    <div class="section">
+      <div class="section-title">01 · Identity</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Display Name <span class="required">*</span></label>
+          <span class="hint">How you want to be known publicly — stage name or real name.</span>
+          <input type="text" name="display_name" placeholder="e.g. Iris Moss" required>
+        </div>
+        <div class="field">
+          <label class="field-label">Years Active</label>
+          <span class="hint">Roughly how long you've been releasing music.</span>
+          <select name="years_active">
+            <option value="">— pick one —</option>
+            <option value="0_1">Less than 1 year</option>
+            <option value="1_3">1–3 years</option>
+            <option value="4_7">4–7 years</option>
+            <option value="8_15">8–15 years</option>
+            <option value="16_25">16–25 years</option>
+            <option value="25_plus">25+ years</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Primary Genre <span class="required">*</span></label>
+        <span class="hint">The single genre that most defines your sound.</span>
+        <select name="primary_genre" required>
+          <option value="">— pick one —</option>
+          <option>Indie folk</option>
+          <option>Singer-songwriter</option>
+          <option>Ambient / drone</option>
+          <option>Jazz</option>
+          <option>Hip-hop / rap</option>
+          <option>R&B / soul</option>
+          <option>Electronic / IDM</option>
+          <option>Pop</option>
+          <option>Rock / indie rock</option>
+          <option>Classical / neoclassical</option>
+          <option>World / traditional</option>
+          <option>Devotional / sacred</option>
+          <option>Spoken word</option>
+          <option>Experimental</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Secondary Genres</label>
+        <span class="hint">Pick all that also shape your sound. Multi-select.</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="indie_folk"> Indie folk</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="ambient"> Ambient / drone</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="jazz"> Jazz</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="hip_hop"> Hip-hop / rap</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="electronic"> Electronic / IDM</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="rb_soul"> R&B / soul</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="classical"> Classical / neoclassical</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="devotional"> Devotional / sacred</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="world"> World / traditional</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="secondary_genres[]" value="experimental"> Experimental</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Primary Instruments</label>
+        <span class="hint">Multi-select — the instruments most central to your work.</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="voice"> Voice</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="acoustic_guitar"> Acoustic guitar</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="electric_guitar"> Electric guitar</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="piano"> Piano / keys</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="synth"> Synth</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="drums"> Drums / percussion</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="bass"> Bass</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="strings"> Strings (violin/cello/etc.)</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="winds"> Wind / brass</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="production"> Production / DAW</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="field_voice_memo"> Field recording / voice memo</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="lyre"> Lyre / harp</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="crystal_bowls"> Crystal bowls / singing bowls</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="frequency_instruments"> Frequency instruments (tuning forks, gongs, chimes)</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_instruments[]" value="other_instrument"> Other</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Music Format</label>
+        <span class="hint">The release shape your work most naturally takes.</span>
+        <select name="music_format">
+          <option value="">— pick one —</option>
+          <option value="single">Single / standalone song</option>
+          <option value="ep">EP (3–6 tracks)</option>
+          <option value="album">Album / LP</option>
+          <option value="continuous_soundscape">Continuous soundscape / long-form</option>
+          <option value="meditation_session">Guided meditation / sound bath session</option>
+          <option value="loop_cycle">Loop / cycle (seamless, repeatable)</option>
+          <option value="live_improvisation">Live improvisation</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 02 THEMES & VOICE -->
+    <div class="section">
+      <div class="section-title">02 · Themes &amp; Voice</div>
+
+      <div class="field">
+        <label class="field-label">Primary Themes <span class="required">*</span></label>
+        <span class="hint">Choose up to 3 — the core emotional territories your work explores.</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="recovery"> Recovery</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="grief"> Grief</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="quiet_courage"> Quiet courage</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="presence"> Presence</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="memory"> Memory</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="spirituality"> Spirituality</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="longing"> Longing</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="solitude"> Solitude</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="belonging"> Belonging</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="body_wisdom"> Body wisdom / embodiment</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="heartbreak"> Heartbreak</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="primary_themes[]" value="joy"> Joy</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Themes You Actively Avoid</label>
+        <span class="hint">Aesthetic or emotional territory you reject in your work.</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="glamour"> Glamour</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="pain_aesthetic"> Pain-as-aesthetic</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="toxic_positivity"> Toxic positivity</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="trauma_porn"> Trauma porn</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="romance_idealization"> Romance idealization</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="avoided_themes[]" value="despair_no_hope"> Despair with no hope</span></label>
+        </div>
+      </div>
+
+      <!-- KEY FREE-TEXT FIELD #1 -->
+      <div class="field">
+        <label class="field-label">What you want listeners to feel <span class="required">*</span></label>
+        <span class="hint">In your own words — your single most important listener intention. 2–3 sentences.</span>
+        <textarea name="listener_hope_one" rows="3" placeholder="e.g. That they can stay with a small, honest feeling instead of escaping it — that not knowing is bearable, even sacred." required></textarea>
+      </div>
+    </div>
+
+    <!-- 03 VOICE & CRAFT -->
+    <div class="section">
+      <div class="section-title">03 · Voice &amp; Craft</div>
+
+      <div class="field">
+        <label class="field-label">Lyric Person</label>
+        <span class="hint">Which voice your lyrics tend to use.</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="first_person"> First person ("I")</span>
+            <span class="opt-card-example">"I walked through morning light" — most common in singer-songwriter.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="second_person"> Second person ("you")</span>
+            <span class="opt-card-example">"When you wake up sad…" — direct address to the listener.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="third_person"> Third person</span>
+            <span class="opt-card-example">"She watches the rain" — storytelling distance, narrative.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="voice_person" value="mixed"> Mixed</span>
+            <span class="opt-card-example">Different songs use different POVs.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Register / Tone</label>
+        <span class="hint">The language register your work sits in.</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="plain_spoken"> Plain-spoken</span>
+            <span class="opt-card-example">Everyday language, no metaphor inflation — Frank Ocean, John Prine.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="poetic"> Poetic / elevated</span>
+            <span class="opt-card-example">Heightened imagery, deliberate craft — Joanna Newsom, Sufjan Stevens.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="conversational"> Conversational</span>
+            <span class="opt-card-example">Talking-to-a-friend cadence — Big Thief, Phoebe Bridgers.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="register" value="spiritual"> Spiritual / devotional</span>
+            <span class="opt-card-example">Sacred or contemplative register — Krishna Das, Ólafur Arnalds, gospel.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Pacing</label>
+        <span class="hint">The energy and motion across your work.</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="pacing" value="slow"> Slow / sparse</span>
+            <span class="opt-card-example">Long pauses, room to breathe — ambient, post-rock, contemplative folk.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="pacing" value="varied"> Varied</span>
+            <span class="opt-card-example">Dynamic shifts within songs and across the catalog.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="pacing" value="driving"> Driving / rhythmic</span>
+            <span class="opt-card-example">Forward motion, repetitive grooves — dance, hip-hop, motorik.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Signature Devices</label>
+        <span class="hint">Pick the recurring craft moves that define your voice.</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="returning_imagery"> Returning imagery (e.g. morning, ocean, doorway)</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="short_refrain"> Short refrain lines</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="repetition"> Repetition / incantation</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="silence_use"> Use of silence / negative space</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="storytelling"> Long-form storytelling</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="found_sound"> Found sound / field recordings woven in</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="harmony_stacking"> Harmony stacking</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="signature_devices[]" value="modal_drone"> Modal drone</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 MATERIAL FOR REFLECTION -->
+    <div class="section">
+      <div class="section-title">04 · Material for Reflection</div>
+
+      <div class="field">
+        <label class="field-label">Touchstone Tracks (your own or influences)</label>
+        <span class="hint">Songs that represent the emotional world you're working in. Upload audio files <em>and/or</em> paste links — both are accepted.</span>
+
+        <label class="file-drop" for="touchstone_files">
+          <div class="file-drop-icon">♫</div>
+          <div><strong>Click to upload</strong> or drag audio files here</div>
+          <div style="margin-top:4px; font-size:.72rem; opacity:.6;">MP3, WAV, FLAC, M4A — multiple OK</div>
+          <input type="file" id="touchstone_files" name="touchstone_files" accept="audio/*" multiple>
+        </label>
+        <div class="file-chips" id="touchstone-chips"></div>
+
+        <div id="touchstone-urls">
+          <div class="multi-row">
+            <input type="url" name="touchstone_urls[]" placeholder="https://open.spotify.com/track/… or YouTube link">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="touchstone-urls" data-name="touchstone_urls[]" data-placeholder="https://open.spotify.com/track/… or YouTube link">+ Add another track URL</button>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Key Collaborators (optional)</label>
+        <span class="hint">Producer, co-writer, engineer, or other key creative partner names. One per row.</span>
+        <div id="collaborators-rows">
+          <div class="multi-row">
+            <input type="text" name="key_collaborators[]" placeholder="Name — role (e.g. Iris Moss — co-producer)">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="collaborators-rows" data-name="key_collaborators[]" data-placeholder="Name — role">+ Add another collaborator</button>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Links / Citations</label>
+        <span class="hint">Spotify, Bandcamp, Apple Music, SoundCloud, personal site, press, anything else worth linking. Multi-add OK.</span>
+        <div id="citation-urls">
+          <div class="multi-row">
+            <input type="url" name="citation_urls[]" placeholder="https://artistname.bandcamp.com/… or Spotify artist page">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="citation-urls" data-name="citation_urls[]" data-placeholder="https://artistname.bandcamp.com/…">+ Add another link</button>
+      </div>
+    </div>
+
+    <!-- 05 HEALING INTENT -->
+    <div class="section">
+      <div class="section-title">05 · Healing Intent</div>
+
+      <!-- KEY FREE-TEXT FIELD #2 -->
+      <div class="field">
+        <label class="field-label">Healing intent in your own words <span class="required">*</span></label>
+        <span class="hint">What does your music help heal, open up, or make room for? This shapes the reflection framing.</span>
+        <textarea name="what_helps_heal" rows="4" placeholder="e.g. Stillness through honest lyric — naming small fears without dramatizing them. Letting listeners feel they aren't alone in not-knowing." required></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Wellness Framings You Reject</label>
+        <span class="hint">Tropes you do <em>not</em> want in your reflections. Multi-select.</span>
+        <div class="check-group cols">
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="pain_required"> "Pain required for depth"</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="toxic_positivity"> Toxic positivity</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="wellness_productivity"> Wellness as productivity</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="healing_journey_cliche"> "Healing journey" cliché</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="trauma_overuse"> "Trauma" overuse</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="inspiration_porn"> Inspiration porn</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="hustle_culture"> Hustle culture</span></label>
+          <label class="opt-card"><span class="opt-card-title"><input type="checkbox" name="wellness_rejects[]" value="spiritual_bypass"> Spiritual bypass</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Listener Responses to Amplify</label>
+        <span class="hint">Optional. Feedback you've received that you want Pearl Prime to riff on. One phrase per row.</span>
+        <div id="listener-quotes">
+          <div class="multi-row">
+            <input type="text" name="listener_quotes[]" placeholder="e.g. 'Your quiet songs made room for me to breathe.'">
+          </div>
+        </div>
+        <button type="button" class="multi-add-btn" data-target="listener-quotes" data-name="listener_quotes[]" data-placeholder="e.g. 'Your songs made me feel less alone.'">+ Add another quote</button>
+      </div>
+    </div>
+
+    <!-- 06 OUTPUT PREFERENCES -->
+    <div class="section">
+      <div class="section-title">06 · Output Preferences</div>
+
+      <div class="field">
+        <label class="field-label">Lyric Form</label>
+        <span class="hint">If Pearl Prime generates lyric companions, which form should it use?</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="free_verse"> Free verse</span>
+            <span class="opt-card-example">No fixed meter or rhyme. Modern poetic style — Mary Oliver, Ocean Vuong, contemporary slam.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="structured"> Structured / rhymed</span>
+            <span class="opt-card-example">Verse-chorus form with rhyme schemes — traditional pop, folk, hymns, hip-hop.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="prose_poem"> Prose poem</span>
+            <span class="opt-card-example">Poetic language in paragraph form, no line breaks — Anne Carson, Claudia Rankine.</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="lyric_form" value="no_lyrics"> No lyrics please</span>
+            <span class="opt-card-example">Instrumental / soundscape only — Pearl Prime generates no words.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Reflection Perspective</label>
+        <span class="hint">Whose voice should Pearl Prime's prose reflections speak from?</span>
+        <div class="radio-group">
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="reflection_perspective" value="musician"> As musician (first person)</span>
+            <span class="opt-card-example">Written from your perspective as the artist: "I felt…", "When I wrote this…"</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="reflection_perspective" value="listener"> As listener</span>
+            <span class="opt-card-example">Written from the audience's perspective: "When I hear this song, my body…"</span>
+          </label>
+          <label class="opt-card">
+            <span class="opt-card-title"><input type="radio" name="reflection_perspective" value="mixed"> Mixed</span>
+            <span class="opt-card-example">Some passages musician-POV, some listener-POV — Pearl Prime alternates.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Lyric Block Length</label>
+        <span class="hint">Any constraint on block length in generated lyrics.</span>
+        <select name="lyric_length_block">
+          <option value="">— no constraint —</option>
+          <option value="3_7">Short — 3–7 lines per block</option>
+          <option value="8_14">Medium — 8–14 lines per block (typical verse)</option>
+          <option value="15_24">Long — 15–24 lines per block (extended)</option>
+          <option value="25_plus">Very long — 25+ lines per block</option>
+        </select>
+      </div>
+
+      <!-- KEY FREE-TEXT FIELD #3 (optional) -->
+      <div class="field">
+        <label class="field-label">Anything else Pearl Prime should know</label>
+        <span class="hint">Optional. Anything that didn't fit above — special constraints, dedications, context.</span>
+        <textarea name="freeform_notes" rows="3" placeholder="e.g. This survey is for my next album, dedicated to my late grandmother…"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn">Submit Reflections Intake <span class="arrow">→</span></button>
+    </div>
+
+  </form>
+
+  <div id="success">
+    <div class="icon">🎵</div>
+    <h2>Intake received.</h2>
+    <p>Your musician profile is being processed — the brand wizard will pick this up at step 1.</p>
+    <div class="step1-note">advancing to wizard…</div>
+  </div>
+
+</div>
+
+<script>
+  // ─────────────────────────────────────────────
+  // Progress bar — counts filled fields
+  // ─────────────────────────────────────────────
+  function getFields() {
+    return Array.from(document.querySelectorAll('#survey-form input, #survey-form textarea, #survey-form select'))
+      .filter(el => el.type !== 'file');
+  }
+  function updateProgress() {
+    const fields = getFields();
+    let filled = 0;
+    fields.forEach(f => {
+      if (f.type === 'checkbox' || f.type === 'radio') { if (f.checked) filled++; }
+      else if (f.value && f.value.trim()) filled++;
+    });
+    const pct = fields.length ? Math.round((filled / fields.length) * 100) : 0;
+    document.getElementById('progress-fill').style.width = Math.min(100, pct) + '%';
+  }
+  document.getElementById('survey-form').addEventListener('input', updateProgress);
+  document.getElementById('survey-form').addEventListener('change', updateProgress);
+
+  // ─────────────────────────────────────────────
+  // Multi-row dynamic inputs (URLs, collaborators, quotes)
+  // ─────────────────────────────────────────────
+  document.querySelectorAll('.multi-add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const name = btn.dataset.name;
+      const placeholder = btn.dataset.placeholder || '';
+      const target = document.getElementById(targetId);
+      const row = document.createElement('div');
+      row.className = 'multi-row';
+      const inputType = name.startsWith('touchstone_urls') || name.startsWith('citation_urls') ? 'url' : 'text';
+      row.innerHTML = `
+        <input type="${inputType}" name="${name}" placeholder="${placeholder}">
+        <button type="button" class="multi-row-remove" aria-label="Remove">×</button>
+      `;
+      row.querySelector('.multi-row-remove').addEventListener('click', () => { row.remove(); updateProgress(); });
+      target.appendChild(row);
+      row.querySelector('input').focus();
+    });
+  });
+
+  // ─────────────────────────────────────────────
+  // Cap Primary Themes at 3 selections
+  // ─────────────────────────────────────────────
+  const PRIMARY_THEMES_MAX = 3;
+  const primaryThemeBoxes = Array.from(
+    document.querySelectorAll('input[type="checkbox"][name="primary_themes[]"]')
+  );
+  function enforcePrimaryThemeCap() {
+    const checkedCount = primaryThemeBoxes.filter(b => b.checked).length;
+    const atCap = checkedCount >= PRIMARY_THEMES_MAX;
+    primaryThemeBoxes.forEach(b => {
+      const card = b.closest('.opt-card');
+      if (!b.checked) {
+        b.disabled = atCap;
+        if (card) {
+          card.style.opacity = atCap ? '0.4' : '';
+          card.style.cursor = atCap ? 'not-allowed' : 'pointer';
+        }
+      } else if (card) {
+        card.style.opacity = '';
+        card.style.cursor = 'pointer';
+      }
+    });
+  }
+  primaryThemeBoxes.forEach(b => b.addEventListener('change', enforcePrimaryThemeCap));
+  enforcePrimaryThemeCap();
+
+  // ─────────────────────────────────────────────
+  // File upload — show chips for selected files
+  // ─────────────────────────────────────────────
+  const fileInput = document.getElementById('touchstone_files');
+  const chipsBox = document.getElementById('touchstone-chips');
+  let pickedFiles = [];
+  fileInput.addEventListener('change', (e) => {
+    const newFiles = Array.from(e.target.files || []);
+    pickedFiles = pickedFiles.concat(newFiles);
+    renderChips();
+    fileInput.value = '';
+    updateProgress();
+  });
+  function renderChips() {
+    chipsBox.innerHTML = '';
+    pickedFiles.forEach((f, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'file-chip';
+      chip.innerHTML = `♫ ${escapeHtml(f.name)} <button type="button" aria-label="Remove file" data-i="${i}">×</button>`;
+      chip.querySelector('button').addEventListener('click', () => {
+        pickedFiles.splice(i, 1); renderChips(); updateProgress();
+      });
+      chipsBox.appendChild(chip);
+    });
+  }
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // ─────────────────────────────────────────────
+  // Touchstone audio upload — R2/Workers wiring
+  //
+  // Endpoint contract (override via window.PHOENIX_TOUCHSTONE_UPLOAD_URL):
+  //   POST <upload_url>  multipart/form-data  field "file"
+  //   → 200 { "key": "<r2-object-key>", "url": "<public-or-signed-url>" }
+  //
+  // TODO(binding): no R2 bucket is bound to this static Cloudflare Pages
+  // deployment yet (brand-wizard-app/wrangler.toml is [site]-only; the
+  // /wizard/music-survey/save FastAPI backend has no upload route). Until a
+  // Pages Function or Worker with an [[r2_buckets]] binding (or a presigned-URL
+  // issuer) is added, the POST below fails fast and we fall back to inlining
+  // small files as base64 data so the touchstone audio is actually carried in
+  // the persisted payload — not just filenames. Wire the endpoint, then this
+  // path uploads to R2 with no further client change.
+  // ─────────────────────────────────────────────
+  const TOUCHSTONE_UPLOAD_URL =
+    (typeof window !== 'undefined' && window.PHOENIX_TOUCHSTONE_UPLOAD_URL) ||
+    '/wizard/music-survey/upload';
+  const TOUCHSTONE_INLINE_MAX_BYTES = 2 * 1024 * 1024; // 2 MB base64-inline cap
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(reader.error || new Error('read failed'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function uploadTouchstoneFile(file) {
+    const meta = { name: file.name, size: file.size, type: file.type || '' };
+    // 1) Try the real upload endpoint (R2/Workers when wired).
+    try {
+      const body = new FormData();
+      body.append('file', file, file.name);
+      const resp = await fetch(TOUCHSTONE_UPLOAD_URL, { method: 'POST', body });
+      if (resp.ok) {
+        const out = await resp.json().catch(() => ({}));
+        return { ...meta, uploaded: true, key: out.key || null, url: out.url || null };
+      }
+    } catch (_) { /* endpoint absent / offline — fall through to inline */ }
+    // 2) Fallback: inline small files so data is carried, not just the name.
+    if (file.size <= TOUCHSTONE_INLINE_MAX_BYTES) {
+      try {
+        const dataUrl = await fileToBase64(file);
+        return { ...meta, uploaded: false, inline: true, data_url: dataUrl };
+      } catch (_) { /* read failure — record name-only stub below */ }
+    }
+    return {
+      ...meta,
+      uploaded: false,
+      inline: false,
+      note: 'upload endpoint unavailable and file exceeds inline cap; name retained only',
+    };
+  }
+
+  // ─────────────────────────────────────────────
+  // Submit handler — upload touchstones, persist + redirect into wizard step 1
+  // (PRESERVED: localStorage keys + redirect target unchanged from 2026-06-03)
+  // ─────────────────────────────────────────────
+  document.getElementById('survey-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = this.querySelector('.submit-btn');
+    if (submitBtn) submitBtn.disabled = true;
+
+    const fd = new FormData(this);
+    const data = {};
+    const arrayKeys = new Set();
+    // Walk all entries — collect [] suffix keys as arrays
+    for (const [k, v] of fd.entries()) {
+      if (k.endsWith('[]')) {
+        const cleanK = k.slice(0, -2);
+        arrayKeys.add(cleanK);
+        if (!data[cleanK]) data[cleanK] = [];
+        if (v != null && String(v).trim() !== '') data[cleanK].push(v);
+      } else {
+        data[k] = v;
+      }
+    }
+
+    // Upload touchstone audio (R2/Workers when wired; inline fallback otherwise).
+    let touchstoneRecords = [];
+    try {
+      touchstoneRecords = await Promise.all(pickedFiles.map(uploadTouchstoneFile));
+    } catch (_) {
+      touchstoneRecords = pickedFiles.map(f => ({ name: f.name, size: f.size, uploaded: false }));
+    }
+    // Structured upload records (key/url/inline data) drive downstream pickup.
+    data.touchstone_uploads = touchstoneRecords;
+    // Back-compat: keep the legacy names-only array some consumers still read.
+    data.touchstone_files = touchstoneRecords.map(r => r.name);
+
+    // Persist for wizard / YAML emit pickup
+    try {
+      localStorage.setItem('phoenix_musician_reflections', JSON.stringify({
+        savedAt: new Date().toISOString(),
+        reflections: data
+      }));
+      // Reaffirm music-books mode (set by Music Books CTA on the wizard's IntroJourney)
+      localStorage.setItem('phoenix_book_mode', JSON.stringify({
+        mode: 'music', teacher: null
+      }));
+    } catch (_) { /* private mode / quota — non-fatal */ }
+
+    console.log('Intake data:', JSON.stringify(data, null, 2));
+    document.getElementById('survey-form').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    // Advance to wizard step 1 (same target the teacher_showcase chooseTeacher flow uses)
+    setTimeout(function () {
+      window.location.href = '/wizard.html?mode=music&step=1';
+    }, 900);
+  });
+</script>
+</body>
+</html>

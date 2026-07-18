@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__sleep_anxiety__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__sleep_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__restless_mind__1hr
+  name: Quiet the Restless Mind — for First Responders (One-Hour)
+installment_number: 1
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The 3am Mind: Misreading the Danger Signal'
+subtitle: A Field Guide for First Responders Navigating Sleep Anxiety
+cover_tagline: It's 3am and your body thinks it's on a call. It isn't.
+description:
+  short_blurb: You're flat on your back at 3am, wide awake, heart going, certain something
+    is wrong. This is the one-hour sleep reset for the first responder whose body
+    sounds the alarm the moment the lights go out. Not a sleep hack. A way to recognize
+    the false alarm for what it is, so you can stop fighting your own bed.
+  long_description: 'The house is dark. The shift is over. You should be asleep. Instead
+    it''s 3am and you''re staring at the ceiling with your heart going like the tones
+    just dropped — chest tight, mind sharp, body convinced something is wrong even
+    though nothing in this room is. The harder you try to sleep, the more awake you
+    get, because some part of you is still standing by for a call that isn''t coming.
+
+
+    This book is for you — the medic, the firefighter, the cop, the dispatcher whose
+    body learned that the quiet hours are when it gets called. The one whose nervous
+    system treats lying down as letting your guard down, and won''t allow it.
+
+
+    First, recognition: that 3am surge is a false alarm. Your body is firing its full
+    readiness response — adrenaline, racing thoughts, the works — with no emergency
+    attached. It''s the same system that snaps you awake and moving on a night shift,
+    except there''s no scene, no patient, no fire. Just you and a body that doesn''t
+    know it''s off duty. The fear that something''s wrong is lying to you, and it
+    feels true because it''s running on real hardware, the same hardware that has
+    saved real lives.
+
+
+    Then the descent. You stop fighting to fall asleep — that fight is what keeps
+    you up. Instead you turn toward the alarm in the body: the wired chest, the buzzing
+    limbs, the readiness with nowhere to go. You feel it without trying to make it
+    stop, without getting up, without solving the night, without checking the clock
+    to see how bad the morning will be. You let your body be activated without obeying
+    it. The alarm doesn''t get argued down. It gets witnessed. And a witnessed alarm,
+    for the first time, has somewhere to settle.
+
+
+    Integration is what you take into the next bad night and the one after that: the
+    ability to recognize the surge, name it for what it is, and stay in the bed without
+    the bed becoming a battlefield. Sleep stops being something you have to win.
+
+
+    This will not promise you eight hours, a routine that knocks you out, or a nervous
+    system that forgets every night shift it ever worked. You can''t hack your way
+    past a body trained the way yours was, and the training isn''t the enemy. What
+    it offers is a way to stop treating 3am as an emergency.
+
+
+    You''re not in danger. You''re just awake. One hour — keep it by the bed.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - can't sleep
+  secondary:
+  - first responders
+  - sleep anxiety for first responders
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: cole_bennett
+comp_titles:
+- Say Good Night to Insomnia (Gregg Jacobs) — ending the fight with the bed that keeps
+  you awake
+- The Sleep Solution (W. Chris Winter) — why trying harder to sleep backfires
+- The Body Keeps the Score (Bessel van der Kolk) — why a trained body sounds the alarm
+  at rest
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,24 @@
+schema_version: 1.0.0
+series_id: cognitive_clarity__en_US__psychological_thriller__series01
+brand_id: cognitive_clarity
+locale: en_US
+genre: psychological_thriller
+authority_spec: docs/specs/MANGA_LAYER_RENDER_CONTRACT_SPEC.md
+m5_prep: true
+notes: M5-prep bank contract (no-GPU). Layers are SPECCED; REAL renders await Pearl
+  Star via RESUME_COMMANDS.sh (Q-MANGA-03 envelope).
+scenes:
+- scene_id: office_after_hours
+  description: Dim office after hours. Dual monitors, empty chairs.
+  render_resolution:
+  - 1080
+  - 1920
+  provenance_target: REAL
+  status: specced_awaiting_gpu
+- scene_id: archive_corridor
+  description: Archive corridor. File labels, cool fluorescent light.
+  render_resolution:
+  - 1080
+  - 1920
+  provenance_target: REAL
+  status: specced_awaiting_gpu

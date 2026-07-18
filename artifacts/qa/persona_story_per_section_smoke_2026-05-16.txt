@@ -1,0 +1,151 @@
+========================================================================
+SMOKE EVIDENCE - patch (c): per-section selection for persona_story branch
+Date:   2026-05-16
+Branch: agent/persona-story-per-section-20260516
+Sibling PRs:
+  - #1136 (patch a - book-wide paragraph dedupe in book_renderer.py)
+  - #1137 (patch b - chapter/section-aware canonical-engine fallback)
+Source: artifacts/qa/dedupe_leak_diagnosis_2026-05-16.md
+        artifacts/canary/integration_smoke_2026-05-16/ (parent worktree)
+
+========================================================================
+Why patch (c) exists
+========================================================================
+Patch (b) modified the canonical-engine fallback branch in
+phoenix_v4/planning/injection_resolver.py:_find_story_content() but did NOT
+touch the earlier persona_story branch (the one reading
+atoms/{persona}/{topic}/STORY/CANONICAL.txt). When STORY/CANONICAL.txt
+exists, the persona_story branch fires first and short-circuits the
+canonical-engine branch entirely — so patch (b)'s per-section logic never
+runs.
+
+The 2026-05-16 integration smoke surfaced this:
+
+  all 3 PRs cherry-picked cleanly, patches in code, BUT persona_story
+  branch (around injection_resolver.py:475-479 per diagnosis) shadows
+  patch (b) and dumps STORY/CANONICAL.txt verbatim across all SCENE slots.
+  Canary book.txt has Tanya phrase x9 + 5 translator-refusal echoes -
+  neither closed by patch (b) because patch (b)'s code path never fires
+  when persona_story exists.
+
+Patch (c) extends the same per-section ARC-block selection that patch (b)
+applies to the canonical-engine fallback branch to the persona_story branch
+as well. It reuses the _split_canonical_into_atom_blocks() helper added by
+patch (b).
+
+========================================================================
+Method
+========================================================================
+Replay phoenix_v4.planning.injection_resolver.resolve_injections() against
+a synthetic STORY/CANONICAL.txt with 12 ## ARC vNN blocks (3 each for
+RECOGNITION / MECHANISM_PROOF / TURNING_POINT / EMBODIMENT). Drive 12
+chapters x 3 SCENE slots = 36 [STORY_INJECTION_POINT] resolutions, all
+through the persona_story branch (no engine-dir present, so the engine
+fallback would be the only alternative if persona_story were skipped — and
+the test asserts the persona_story branch did fire by inspecting the
+source tag `injection:persona_story:<arc>:<variant>`).
+
+Reproduction:
+  PYTHONPATH=. python3 /tmp/persona_story_smoke.py
+
+========================================================================
+Results
+========================================================================
+Shape: 12 ch x 3 sec = 36 injections
+
+PRE-PATCH baseline (extrapolated from the canary integration_smoke run,
+where every STORY slot received the whole STORY/CANONICAL.txt verbatim
+across all 36 slots; intra-chapter dedupe left ~9 verbatim repeats in
+book.txt for the Tanya phrase):
+
+  Distinct resolved bodies: 1   (the whole-file blob)
+  Worst-case repeat:        36/36  (100%)
+
+POST-PATCH (patch (c), this smoke):
+
+  Distinct resolved bodies: 11
+  Worst-case repeat:        5/36  (13%)
+
+Source distribution:
+  5x injection:persona_story:recognition:v02
+  5x injection:persona_story:mechanism_proof:v02
+  4x injection:persona_story:recognition:v03
+  4x injection:persona_story:embodiment:v02
+  3x injection:persona_story:turning_point:v02
+  3x injection:persona_story:turning_point:v03
+  3x injection:persona_story:turning_point:v01
+  3x injection:persona_story:embodiment:v01
+  2x injection:persona_story:mechanism_proof:v03
+  2x injection:persona_story:mechanism_proof:v01
+  2x injection:persona_story:embodiment:v03
+
+PSTORY_ markers in resolved bodies: 36 (every slot resolves)
+
+========================================================================
+Assertions
+========================================================================
+ASSERT distinct_bodies >= 8:        PASS  (11 >= 8)
+ASSERT worst_case_repeat <= 14:     PASS  (5 <= 14)
+
+========================================================================
+INTERPRETATION
+========================================================================
+Pre-patch (persona_story branch dumps whole file):
+  1 body filled all 36 slots verbatim; after intra-chapter dedupe, the
+  Tanya/Sarah verbatim leak surfaced as ~9 repeats in book.txt — the same
+  failure mode the diagnosis report flagged for the canonical-engine
+  branch, just via a different code path that patch (b) missed.
+
+Post-patch (this PR):
+  36 slots receive 11 distinct ARC bodies drawn from the same
+  STORY/CANONICAL.txt's individual ## ARC vNN sections. Worst-case repeat
+  drops from 36/36 (100%) to 5/36 (13%). The architectural fix - never
+  paste the whole file blob - now applies to BOTH branches of
+  _find_story_content().
+
+Chapter-band arc preference is preserved (RECOGNITION blocks dominate
+chapter band 1, EMBODIMENT blocks dominate chapter band 4) so the existing
+chord shape stays intact.
+
+Degraded-mode contract:
+  STORY/CANONICAL.txt files that don't use the ## ARC vNN convention fall
+  back to the pre-patch verbatim-paste behavior AND emit a
+  [persona_story] no ARC blocks found in <file>; degraded behavior,
+  consider authoring story_atoms WARNING log. Same shape as patch (b)'s
+  [canonical_fallback] degraded log.
+
+Per-pick telemetry:
+  [persona_story_per_section] selected ARC <pos> <vNN> for chapter <C>
+  section <S> from <file>  - INFO level, asserted in
+  test_persona_story_per_section_selection_log_emitted.
+
+========================================================================
+UNIT TESTS
+========================================================================
+tests/test_injection_resolver_persona_story.py - 10 tests, all pass.
+  - Different sections, different chapters select different blocks.
+  - Per-chapter arc-position preference: ch1 -> recognition band,
+    ch10 -> embodiment band.
+  - Determinism: same (chapter, section, seed) -> same body 3x in a row.
+  - Seed sensitivity: different book seeds diverge for at least some slots.
+  - Single-block STORY/CANONICAL.txt -> all slots receive that block.
+  - Plain-prose STORY/CANONICAL.txt -> degraded [persona_story] warning
+    log emitted at WARNING level.
+  - Per-pick selection telemetry log at INFO level.
+  - 36-slot canary-shape simulation: worst-case repeat <= 14 (below the
+    pre-patch leak threshold).
+  - Persona_story branch fires BEFORE the canonical-engine branch
+    (priority preserved, only the *content* the persona_story branch
+    returns changes).
+  - Too-short STORY/CANONICAL.txt with no ARC blocks falls through to the
+    next branch instead of returning empty.
+
+tests/test_injection_resolver.py                          - 13 pre-existing tests, all pass.
+tests/test_injection_resolver_canonical_fallback.py       - 12 patch-b tests, all pass.
+
+Run with:
+  PYTHONPATH=. python3 -m pytest tests/test_injection_resolver.py \
+    tests/test_injection_resolver_canonical_fallback.py \
+    tests/test_injection_resolver_persona_story.py -v
+
+Result: 35 passed in 0.66s

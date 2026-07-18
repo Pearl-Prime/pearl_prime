@@ -1,0 +1,435 @@
+{
+  "source_label": "internal_deep6h_ch08",
+  "persona": "gen_z_professionals",
+  "word_count": 3543,
+  "gates_requested": [
+    "chapter_flow",
+    "bestseller_craft",
+    "ei_v2",
+    "editorial",
+    "memorable_lines",
+    "transformation_arc",
+    "book_quality_gate",
+    "regression_museum"
+  ],
+  "chapter_flow": {
+    "status": "PASS",
+    "score": 100,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "paragraphs": 63,
+      "sentences": 468,
+      "transition_hits": 3,
+      "thesis_hits": 1,
+      "avg_adjacent_overlap": 0.109,
+      "sentence_len_std": 5.72,
+      "aha_hits": 5,
+      "scaffold_hits": {},
+      "flow_profile": "standard"
+    }
+  },
+  "bestseller_craft": {
+    "status": "WARN",
+    "move_scores": {
+      "orient": 0.5217,
+      "name": 0.67,
+      "turn": 0.87,
+      "give": 0.9667,
+      "pull": 0.32
+    },
+    "ontgp_composite": 0.6697,
+    "issues": [
+      "move_warn:pull",
+      "no_named_tension_or_question_in_closer"
+    ],
+    "remediation": [
+      "End with a named tension or sharp question — not a teaser slogan (overlay §7)."
+    ],
+    "metrics": {
+      "word_count": 3543,
+      "zones": {
+        "orient_words": 150,
+        "name_words": 1169,
+        "turn_words": 1275,
+        "give_words": 1843,
+        "pull_words": 100
+      },
+      "heuristic_scores": {
+        "orient": 0.5217,
+        "name": 0.67,
+        "turn": 0.87,
+        "give": 0.9667,
+        "pull": 0.32
+      },
+      "final_move_scores": {
+        "orient": 0.5217,
+        "name": 0.67,
+        "turn": 0.87,
+        "give": 0.9667,
+        "pull": 0.32
+      }
+    }
+  },
+  "memorable_lines": {
+    "status": "PASS",
+    "memorable_line_count": 6,
+    "issues": [],
+    "metrics": {
+      "block_on_violation": true,
+      "min_score_for_candidate": 4.0,
+      "min_score_for_great_tier": 5.75,
+      "max_words_per_candidate": 20,
+      "strength_levels_tracked": [
+        "good",
+        "great"
+      ],
+      "sentence_count": 439,
+      "raw_top_score": 5.0,
+      "candidate_count": 6,
+      "best_candidate_scores": [
+        {
+          "text": "You're checking your email instead.",
+          "score": 5.0
+        },
+        {
+          "text": "Not\nforever, but long enough to notice what remains.",
+          "score": 4.75
+        },
+        {
+          "text": "Not to change it,\nbut to see it.",
+          "score": 4.75
+        }
+      ]
+    }
+  },
+  "transformation_arc": {
+    "chapter_signals": [
+      {
+        "chapter_index": 0,
+        "recognition": false,
+        "reframe": true,
+        "challenge": true,
+        "relief": false,
+        "identity_shift": false,
+        "hits": {
+          "recognition": 0,
+          "reframe": 3,
+          "challenge": 8,
+          "relief": 0,
+          "identity_shift": 0
+        }
+      }
+    ],
+    "ending_check": {
+      "ending_identity_shift_present": false,
+      "ending_reframe_present": true,
+      "ending_weak": true
+    },
+    "note_single_chapter": "Single-chapter sample: ending_check uses only this chapter; identity_shift in final chapter is often absent by construction."
+  },
+  "editorial": {
+    "chapter_assessments": [
+      {
+        "chapter_index": 0,
+        "hook_friction": "FAIL",
+        "scene_specificity": "PASS",
+        "aha_presence": "ADEQUATE",
+        "integration_variety": "PASS",
+        "thread_continuity": "PASS",
+        "word_budget": "ADEQUATE",
+        "location_grounding": "PASS",
+        "cadence_variety": "PASS",
+        "word_count": 3543,
+        "target_range": [
+          1500,
+          3500
+        ],
+        "thesis_aligned": true,
+        "thesis_coverage": 1.0,
+        "chapter_score": 12
+      }
+    ],
+    "book_level": {
+      "repetition_index": "PASS",
+      "repetition_excess_count": 0,
+      "vocabulary_diversity": "PASS",
+      "vocabulary_ratio": 0.3234,
+      "flat_middle": "PASS",
+      "flat_middle_overlap": 0.0,
+      "reward_spacing": "PASS",
+      "reward_max_gap": 0
+    },
+    "total_score": 20,
+    "max_score": 24,
+    "grade": "PASS",
+    "revision_notes": [
+      "Ch 1: Hook lacks cognitive friction."
+    ]
+  },
+  "book_quality_gate": {
+    "status": "PASS",
+    "release_band": "Pass",
+    "fail_reasons": [],
+    "hold_reasons": [],
+    "metrics": {
+      "runtime_format_id": "",
+      "word_count": 3545,
+      "word_range": null,
+      "chapter_count": 1,
+      "flow_profile": "standard",
+      "flow_failures": [],
+      "artifact_hits": [],
+      "repeated_phrase_violations": []
+    }
+  },
+  "ei_v2": {
+    "mode": "heuristic_plus_safety_plus_tts_readability",
+    "safety": {
+      "risk_score": 0.24,
+      "categories": {
+        "medical_claims": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "clinical_language": {
+          "score": 1.0,
+          "hits": 12,
+          "excerpts": [
+            "medication",
+            "medication",
+            "medication"
+          ]
+        },
+        "promotional": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "reassurance_spam": {
+          "score": 0.0,
+          "hits": 0,
+          "density_per_100_words": 0.0,
+          "excerpts": []
+        },
+        "pathologizing": {
+          "score": 1.0,
+          "hits": 9,
+          "raw_hits": 9,
+          "excerpts": [
+            "Suffering",
+            "patient",
+            "Patient"
+          ]
+        },
+        "marketing_compliance": {
+          "score": 1.0,
+          "hits": 0,
+          "excerpts": []
+        }
+      },
+      "reason_codes": [
+        "clinical_language_detected",
+        "pathologizing_detected"
+      ],
+      "mode": "heuristic_plus"
+    },
+    "tts_readability": {
+      "composite": 0.5221,
+      "dimensions": {
+        "sentence_length": 0.8762,
+        "rhythm_variance": 0.0,
+        "paragraph_breathing": 0.0835,
+        "tts_pattern_safety": 1.0,
+        "rhetorical_question_safety": 0.9093
+      },
+      "metrics": {
+        "total_sentences": 478,
+        "total_words": 3543,
+        "rhythm_cv": 0.6073,
+        "long_sentence_fraction": 0.0,
+        "short_sentence_fraction": 0.1548,
+        "tts_problematic_count": 0,
+        "paragraph_breaks": 62
+      },
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks"
+      ]
+    }
+  },
+  "regression_museum": {
+    "summary": {
+      "blocked": true,
+      "warned": true,
+      "summary": "22 violation(s): 16 blocking, 6 warnings",
+      "failure_classes": [
+        "doctrinal_exposition_inline",
+        "doubled_word",
+        "font_css_leak",
+        "mid_paragraph_format_break",
+        "off_persona_vocabulary",
+        "repeated_scene_anchor"
+      ],
+      "violation_count": 22
+    },
+    "violations": [
+      {
+        "failure_class": "font_css_leak",
+        "severity": "block",
+        "location": "chapter_1:char_7247",
+        "evidence": "lf, and see life in its greater truth.\n\nHelvetica; ;; ;; All spiritual contemplation inevitab",
+        "description": "CSS/font directive leaked into prose"
+      },
+      {
+        "failure_class": "font_css_leak",
+        "severity": "block",
+        "location": "chapter_1:char_9890",
+        "evidence": " and correctly to reap their benefits.\n\nHelvetica; ;; ;; Meditation is a profound practice th",
+        "description": "CSS/font directive leaked into prose"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_13105",
+        "evidence": "umb. Index. The door is about to open.\n\nThe the street below commute. School pickup is ",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7339",
+        "evidence": "bly leads to the understanding of love. Bhakti Yoga is where love is essential to practice.",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7394",
+        "evidence": "where love is essential to practice. In Bhakti Yoga, love transcends mere feelings and sent",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7339",
+        "evidence": "bly leads to the understanding of love. Bhakti Yoga is where love is essential to practice.",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7394",
+        "evidence": "where love is essential to practice. In Bhakti Yoga, love transcends mere feelings and sent",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7099",
+        "evidence": "ear light of reality, also known as the Dharmakaya. By focusing on the inner light, in",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8891",
+        "evidence": "n, forgiveness, and the practice of the Dharma.\n\nIt is a direct experience of life dev",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8300",
+        "evidence": " individuals navigate the inner way. An enlightened teacher can direct students toward the various ",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_21",
+        "evidence": "When The Alarm Screams\n\nThe Buddha taught that desire itself is ",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_2",
+        "evidence": "Most people believe enlightenment requires leaving the world behind. The Buddha\ntaught something different: the path moves through ordinary life, not away from it.\nNotice where you are right now. This",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_21",
+        "evidence": "By consistently practicing mindfulness and letting go of negativity, individuals can elevate their state of mind and experience happiness in the simplicity of life.The inner way, which is considered m",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_25",
+        "evidence": "It reminds us that, no matter where we are in the cycle of reincarnation or states of mind, there is always an opportunity to elevate our consciousness and move closer to the truth.The stories shared ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_26",
+        "evidence": "It is a direct experience of life devoid of any mental constructs or illusions, a state of being in perfect harmony with the universe.In conclusion, Buddhist enlightenment is a journey from ordinary s",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_27",
+        "evidence": "It is a state of being beyond our ordinary concepts of good and bad, wants and aversions. True happiness and liberation are found when you transcend these worldly attachments.In the spiritual journey,",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4578",
+        "evidence": "hows the dashboard. Your standing desk. soft daylight along the sill on the glass behind your monitor. the s",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_5540",
+        "evidence": "f. You're not quite ready to go inside. soft daylight along the sill against the windshield. Your mother wil",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_10884",
+        "evidence": ". the street below traffic delayed you. soft daylight along the sill was not supposed to slow you down. Your",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_11877",
+        "evidence": "m is too warm. Your collar feels tight. soft daylight along the sill makes the windows humid. You type a res",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_13161",
+        "evidence": "elow commute. School pickup is at 3:15. soft daylight along the sill on your windshield. Your meeting is at ",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_14100",
+        "evidence": "he font seems smaller. You turn it off. soft daylight along the sill reflects off the polished surface. Some",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      }
+    ]
+  }
+}

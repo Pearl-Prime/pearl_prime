@@ -1,0 +1,110 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__social_anxiety__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__social_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__brave_world__1hr
+  name: Brave in the World — for Young Professionals (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Social Anxiety: Measuring Yourself Against Everyone (1)'
+subtitle: A Field Guide for Gen Z Professionals Navigating Social Anxiety
+cover_tagline: Everyone in the room looks like they've got it figured out. They don't.
+description:
+  short_blurb: You walk into the office, the call, the after-work drinks, and instantly
+    you're measuring — quicker, smoother, more put-together than you. This book is
+    about the comparison engine that turns every room into a ranking. In one hour,
+    learn to stop scoring yourself against people whose insides you cannot see.
+  long_description: 'You join the meeting and within seconds the math starts. She
+    speaks more clearly than you. He seems more relaxed. They all somehow know what
+    to say in the small-talk part, the part that makes your hands sweat. By the time
+    it''s your turn you''re not even present — you''re in last place in a competition
+    no one else knows is happening. You came to do your job and instead you spent
+    the hour losing to everyone in the room.
+
+
+    This book is for the young professional who cannot stop measuring. The one who
+    scrolls a coworker''s LinkedIn and feels behind, who reads confidence on every
+    face but their own, who treats every interaction as a leaderboard where they''re
+    slipping. You are not vain and you are not weak. Your mind is running an ancient
+    comparison engine built to track status for survival — and in an open-plan office
+    full of people performing their competence, that engine never gets to rest.
+
+
+    Recognition comes first: you learn to catch the exact moment the measuring starts
+    — the glance, the ranking, the silent verdict that you''re behind. And you learn
+    to see what the comparison is actually made of: their polished outside against
+    your unedited inside. You are comparing their highlight reel to your raw footage,
+    every single time, and calling the result the truth.
+
+
+    Then you go down into the comparison instead of trying to win it or shut it off.
+    Most advice says to stop comparing yourself, which is like being told to stop
+    being hungry. Instead you''ll turn toward the ache underneath the measuring —
+    the fear of not being enough that the ranking is trying to soothe — and stay with
+    it long enough to see it isn''t a fact about you. It''s just a feeling the engine
+    throws off.
+
+
+    You come back able to be in the room without scoring it. The comparisons will
+    still flicker — you''ll always notice who seems sharper. But you''ll recognize
+    the measuring as measuring, and you''ll know you don''t have to believe the standings.
+    That''s the change: not constant self-confidence, but the quiet of being out of
+    the race.
+
+
+    This will not optimize you into the most impressive person in the meeting. It
+    offers no confidence hacks, no morning affirmations, no instruction to just love
+    yourself. There are no worksheets. There is only the honest practice of catching
+    the engine and stepping out of the contest.
+
+
+    One hour. The next time you walk into a room and start losing to it — you''ll
+    recognize the comparison for what it is. And you''ll know you were never actually
+    behind.'
+keywords:
+  primary:
+  - social anxiety
+  - social phobia
+  - fear of people
+  - social confidence
+  - fear of judgment
+  secondary:
+  - young professionals
+  - social anxiety for young professionals
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ravi_chandra
+comp_titles:
+- The Comparison Cure (Lucy Sheridan) — secular, direct work on the habit of measuring
+  yourself against everyone.
+- The Mountain Is You (Brianna Wiest) — how comparison feeds self-sabotage and how
+  to drop it.
+- How to Be Yourself (Ellen Hendriksen) — practical science on social anxiety and
+  feeling judged.
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

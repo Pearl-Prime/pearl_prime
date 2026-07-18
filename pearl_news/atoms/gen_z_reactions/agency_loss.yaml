@@ -1,0 +1,56 @@
+schema_version: 1
+reaction_id: agency_loss
+display_name: "Agency Loss"
+description: >
+  Activates when a news event documents decisions being made about
+  the cohort without the cohort. Treaty drafts, AI policy, budget
+  allocations, school curricula — decided in rooms the cohort cannot
+  enter. Not about exclusion in the abstract — about the specific
+  story documenting it again.
+
+strong_topics:
+  - partnerships
+  - ai_regulation
+  - education
+  - economy_work
+
+variations:
+  - id: v1
+    text: >
+      The cohort already has the vocabulary for what this story
+      documents: 'voice without power.' Being consulted but not
+      counted. Being in the photograph but not in the budget meeting.
+      The story is not news because it happened; it is news because
+      it was finally counted as a pattern.
+
+  - id: v2
+    text: >
+      Gen Z reads this not as a discovery but as a confirmation.
+      They were told participation mattered. The audit says it
+      didn't. The reaction is not despair. It is a quieter shift —
+      time to build the alternate channel rather than wait for the
+      official one to start working.
+
+  - id: v3
+    text: >
+      What the story names is the gap between consultation and
+      decision. The cohort has been operating inside that gap for
+      years and has stopped expecting it to close on its own. The
+      article gives the gap a documented size. That is useful.
+
+  - id: v4
+    text: >
+      Agency-loss in this audience is not abstract. It is the
+      specific experience of being a stakeholder in a room where
+      the decisions get made elsewhere. The article documenting
+      this pattern at scale doesn't introduce a new feeling — it
+      labels one the cohort has been carrying without a label.
+
+  - id: v5
+    text: >
+      The story confirms what peer surveys, school-board minutes,
+      and partnership scorecards have been quietly adding up to:
+      seat at the table is not the same as vote in the room. Gen Z
+      reads the article and updates its expectation of where actual
+      decisions happen. That updating is what survival in a
+      consultative-asymmetry era looks like.

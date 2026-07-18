@@ -1,0 +1,431 @@
+# Teacher × Brand × Platform Lane Assignments
+# Authority: Owner directive 2026-04-07
+#
+# RULE (simple, universal):
+#
+# 1 TEACHER PER BRAND. Everywhere. No exceptions.
+#
+# On english_global and lanes 2–9, 11–12: 12 teacher brands (+ 24 standard = 36 per lane).
+# Taiwan (lane 10): 13 teacher brands (+ 24 standard = 37) — extra brand bright_presence_tw (Adi Da only).
+# Same brand name can appear in multiple lanes (e.g. stillness_press_tw),
+# but each brand-instance only ever promotes 1 teacher.
+#
+# Regional lanes need 36 brands each (12 teacher + 24 standard), except Taiwan: 37 (13 + 24).
+# That's fine — the brand admin for each handles promotion.
+# Former duplicate forest/simplicity brand merged into stillness_press (ahjan).
+#
+# Each brand's teacher gets ALL content:
+#   audiobooks, manga, video, exercises, freebies — everything.
+
+schema_version: 2
+
+# ─── PLATFORM LANE DEFINITIONS ────────────────────────────────────────────
+#
+# Each lane is a group of platforms where the SAME catalog is visible.
+# Publishing Teacher X on Brand A in Lane 1 means NO other brand in Lane 1
+# can publish Teacher X.
+
+# ─── 12 GLOBAL BRAND LANES (addressable markets) ────────────────────────
+#
+# A "lane" = an addressable market where a brand can build audience.
+# 1 teacher per brand per lane. 12 teacher brands + 24 standard = 36 brands per lane
+# (Taiwan: 13 + 24 = 37 — see summary).
+# 11 lanes × 36 + 1 lane × 37 = 433 total brand instances.
+#
+# Sources: docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md,
+#          docs/GLOBAL_PERSONA_MARKETING_PLAN.md,
+#          research/2026-03-30_europe-latam-persona-topic-market-fit.md
+
+brand_lanes:
+
+  # ── 1. ENGLISH GLOBAL ─────────────────────────────────────────────────
+  english_global:
+    markets: [US, UK, Canada, Australia, New_Zealand, Ireland, South_Africa]
+    locales: [en-US]
+    language: English
+    platforms: [amazon_kdp, audible_us, google_play_books, apple_books, kobo, spotify_findaway]
+    market_size: "$200-350M US self-help audiobook"
+    notes: "Biggest lane. Catalog visible across all English-speaking markets."
+
+  # ── 2. DACH ────────────────────────────────────────────────────────────
+  dach:
+    markets: [Germany, Austria, Switzerland]
+    locales: [de-DE]
+    language: German
+    platforms: [audible_de, amazon_kdp, google_play_books, apple_books, kobo, thalia, storytel]
+    market_size: "$705M projected 2030"
+    notes: "Largest EU audiobook market. Evidence-based framing required. Audible.de separate from US."
+
+  # ── 3. FRANCE ──────────────────────────────────────────────────────────
+  france:
+    markets: [France, Belgium_FR, Switzerland_FR]
+    locales: [fr-FR]
+    language: French
+    platforms: [audible_fr, amazon_kdp, google_play_books, apple_books, kobo, storytel]
+    market_size: "$330M (23.7% CAGR)"
+    notes: "2nd largest manga market outside Japan. Francophone Belgium + Swiss French included."
+
+  # ── 4. SPAIN ───────────────────────────────────────────────────────────
+  spain:
+    markets: [Spain]
+    locales: [es-ES]
+    language: "Castilian Spanish"
+    platforms: [amazon_kdp, google_play_books, apple_books, kobo, storytel]
+    market_size: "57% global Spanish-language audiobook share"
+    notes: "Castilian narration. Distinct from LATAM Spanish."
+
+  # ── 5. ITALY ───────────────────────────────────────────────────────────
+  italy:
+    markets: [Italy]
+    locales: [it-IT]
+    language: Italian
+    platforms: [audible_it, amazon_kdp, google_play_books, apple_books, kobo, storytel]
+    market_size: "Fastest-growing EU ebook (11.35% CAGR)"
+    notes: "3rd largest EU manga market."
+
+  # ── 6. LATIN AMERICA ──────────────────────────────────────────────────
+  latam:
+    markets: [Mexico, Colombia, Argentina, Chile, Peru, Ecuador, Venezuela, Central_America]
+    locales: [es-419, es-MX]
+    language: "Latin American Spanish"
+    platforms: [amazon_kdp, google_play_books, apple_books, kobo, spotify_findaway]
+    market_size: "$1.21B Spanish audiobook market (45.7% growth)"
+    notes: >
+      Neutral LATAM Spanish narration (not Castilian). Mexico dominant.
+      es-US Hispanic listeners prefer LATAM Spanish. 40%+ webtoon CAGR.
+
+  # ── 7. BRAZIL ──────────────────────────────────────────────────────────
+  brazil:
+    markets: [Brazil]
+    locales: [pt-BR]
+    language: "Brazilian Portuguese"
+    platforms: [amazon_kdp, audible_br, google_play_books, apple_books, kobo, spotify_findaway, tocalivros, ubook]
+    market_size: "6th largest book market globally. +64% audiobook subscriptions (2024)"
+    notes: >
+      Highest global anxiety prevalence (9.3%, 18.6M people).
+      Spiritual/devotional self-help outperforms secular (Café com Deus Pai = #1).
+      Opportunity score: 9/10.
+
+  # ── 8. JAPAN ───────────────────────────────────────────────────────────
+  japan:
+    markets: [Japan]
+    locales: [ja-JP]
+    language: Japanese
+    platforms: [audible_jp, audiobook_jp, amazon_kdp, google_play_books, apple_books, kobo_jp, spotify_findaway]
+    market_size: "$426.5M audiobook market"
+    notes: "Audible JP separate from US. Strongest manga culture. Record karoshi/MH claims."
+
+  # ── 9. KOREA ───────────────────────────────────────────────────────────
+  korea:
+    markets: [South_Korea]
+    locales: [ko-KR]
+    language: Korean
+    platforms: [naver_series, millie, kakao_page, ridi, yes24, google_play_books, apple_books, spotify_findaway]
+    market_size: "$3.6B digital MH market projected 2035. $1.54B webtoon (18.2% CAGR)"
+    notes: "Domestic platforms dominate. Healing (힐링) is dominant wellness keyword."
+
+  # ── 10. TAIWAN ─────────────────────────────────────────────────────────
+  taiwan:
+    markets: [Taiwan]
+    locales: [zh-TW]
+    language: "Traditional Chinese (Mandarin)"
+    platforms: [readmoo, books_com_tw, kkbox, google_play_books, apple_books, kobo]
+    market_size: "$596M mental health market. 40% insomnia prevalence"
+    notes: "Readmoo dominant. Tech sector burnout (竹科). KKBox for audio."
+
+  # ── 11. CHINA ──────────────────────────────────────────────────────────
+  china:
+    markets: [Mainland_China, Hong_Kong, Singapore]
+    locales: [zh-CN, zh-HK, zh-SG]
+    language: "Simplified + Traditional Chinese"
+    platforms: [ximalaya, wechat_read, netease_cloud, dedao, kuaikan, bilibili_comics, qq_comics]
+    market_size: "$140B sleep economy projected 2030. 500M+ sleep-disordered"
+    notes: >
+      Completely isolated (Great Firewall). MCN agent required for mainland.
+      HK + SG reachable via Ximalaya branches. One lane covers all three.
+
+  # ── 12. HUNGARY ────────────────────────────────────────────────────────
+  hungary:
+    markets: [Hungary]
+    locales: [hu-HU]
+    language: Hungarian
+    platforms: [google_play_books, apple_books, kobo, spotify_findaway]
+    market_size: "Small but high per-capita audio consumption. Minimal competition."
+    notes: "No Audible presence. Underserved = low competition = easy ranking."
+
+# ─── ASSIGNMENTS ─────────────────────────────────────────────────────────
+#
+# GLOBAL WEST: 1 teacher per brand (strict anti-spam).
+# REGIONAL LANES: same brand×teacher pairing with locale suffix on brand id.
+#
+# Structure:
+#   english_global → 12 teacher brands + 24 standard, 1 teacher each per teacher brand
+#   regional → same pattern with locale suffix (e.g. stillness_press_de)
+
+# ── ENGLISH GLOBAL (Lane 1) ───────────────────────────────────────────────
+
+english_global:
+  stillness_press:    { teacher: ahjan,           content: [audiobooks, manga, video, exercises, freebies] }
+  cognitive_clarity:  { teacher: kenjin,          content: [audiobooks, manga, video, exercises, freebies] }
+  somatic_wisdom:     { teacher: pamela_fellows,   content: [audiobooks, manga, video, exercises, freebies] }
+  qi_foundation:      { teacher: master_wu,     content: [audiobooks, manga, video, exercises, freebies] }
+  digital_ground:     { teacher: miki,             content: [audiobooks, manga, video, exercises, freebies] }
+  heart_balance:      { teacher: maat,             content: [audiobooks, manga, video, exercises, freebies] }
+  relational_calm:    { teacher: miyuki,            content: [audiobooks, manga, video, exercises, freebies] }
+  warrior_calm:       { teacher: master_feung,        content: [audiobooks, manga, video, exercises, freebies] }
+  sleep_restoration:  { teacher: master_sha,       content: [audiobooks, manga, video, exercises, freebies] }
+  body_memory:        { teacher: omote,            content: [audiobooks, manga, video, exercises, freebies] }
+  solar_return:       { teacher: ra,               content: [audiobooks, manga, video, exercises, freebies] }
+  devotion_path:      { teacher: sai_ma,           content: [audiobooks, manga, video, exercises, freebies] }
+
+# ── LANES 2-12: Same pattern — 12 teacher brands (+ 24 standard), 1 teacher each;
+# Taiwan adds bright_presence_tw (13th teacher brand). ───────────────────────
+#
+# Every lane gets the same teacher brand names with a locale suffix.
+# Brand naming: {base_brand}_{lane_suffix}
+# Content scope varies by market (manga strong in JP/KR/TW/FR, less in HU).
+
+  dach:           # Lane 2
+    stillness_press_de:     { teacher: ahjan }
+    cognitive_clarity_de:   { teacher: kenjin }
+    somatic_wisdom_de:      { teacher: pamela_fellows }
+    qi_foundation_de:       { teacher: master_wu }
+    digital_ground_de:      { teacher: miki }
+    heart_balance_de:       { teacher: maat }
+    relational_calm_de:     { teacher: miyuki }
+    warrior_calm_de:        { teacher: master_feung }
+    sleep_restoration_de:   { teacher: master_sha }
+    body_memory_de:         { teacher: omote }
+    solar_return_de:        { teacher: ra }
+    devotion_path_de:       { teacher: sai_ma }
+
+  france:         # Lane 3
+    stillness_press_fr:     { teacher: ahjan }
+    cognitive_clarity_fr:   { teacher: kenjin }
+    somatic_wisdom_fr:      { teacher: pamela_fellows }
+    qi_foundation_fr:       { teacher: master_wu }
+    digital_ground_fr:      { teacher: miki }
+    heart_balance_fr:       { teacher: maat }
+    relational_calm_fr:     { teacher: miyuki }
+    warrior_calm_fr:        { teacher: master_feung }
+    sleep_restoration_fr:   { teacher: master_sha }
+    body_memory_fr:         { teacher: omote }
+    solar_return_fr:        { teacher: ra }
+    devotion_path_fr:       { teacher: sai_ma }
+
+  spain:          # Lane 4
+    stillness_press_es:     { teacher: ahjan }
+    cognitive_clarity_es:   { teacher: kenjin }
+    somatic_wisdom_es:      { teacher: pamela_fellows }
+    qi_foundation_es:       { teacher: master_wu }
+    digital_ground_es:      { teacher: miki }
+    heart_balance_es:       { teacher: maat }
+    relational_calm_es:     { teacher: miyuki }
+    warrior_calm_es:        { teacher: master_feung }
+    sleep_restoration_es:   { teacher: master_sha }
+    body_memory_es:         { teacher: omote }
+    solar_return_es:        { teacher: ra }
+    devotion_path_es:       { teacher: sai_ma }
+
+  italy:          # Lane 5
+    stillness_press_it:     { teacher: ahjan }
+    cognitive_clarity_it:   { teacher: kenjin }
+    somatic_wisdom_it:      { teacher: pamela_fellows }
+    qi_foundation_it:       { teacher: master_wu }
+    digital_ground_it:      { teacher: miki }
+    heart_balance_it:       { teacher: maat }
+    relational_calm_it:     { teacher: miyuki }
+    warrior_calm_it:        { teacher: master_feung }
+    sleep_restoration_it:   { teacher: master_sha }
+    body_memory_it:         { teacher: omote }
+    solar_return_it:        { teacher: ra }
+    devotion_path_it:       { teacher: sai_ma }
+
+  latam:          # Lane 6
+    stillness_press_latam:     { teacher: ahjan }
+    cognitive_clarity_latam:   { teacher: kenjin }
+    somatic_wisdom_latam:      { teacher: pamela_fellows }
+    qi_foundation_latam:       { teacher: master_wu }
+    digital_ground_latam:      { teacher: miki }
+    heart_balance_latam:       { teacher: maat }
+    relational_calm_latam:     { teacher: miyuki }
+    warrior_calm_latam:        { teacher: master_feung }
+    sleep_restoration_latam:   { teacher: master_sha }
+    body_memory_latam:         { teacher: omote }
+    solar_return_latam:        { teacher: ra }
+    devotion_path_latam:       { teacher: sai_ma }
+
+  brazil:         # Lane 7
+    stillness_press_br:     { teacher: ahjan }
+    cognitive_clarity_br:   { teacher: kenjin }
+    somatic_wisdom_br:      { teacher: pamela_fellows }
+    qi_foundation_br:       { teacher: master_wu }
+    digital_ground_br:      { teacher: miki }
+    heart_balance_br:       { teacher: maat }
+    relational_calm_br:     { teacher: miyuki }
+    warrior_calm_br:        { teacher: master_feung }
+    sleep_restoration_br:   { teacher: master_sha }
+    body_memory_br:         { teacher: omote }
+    solar_return_br:        { teacher: ra }
+    devotion_path_br:       { teacher: sai_ma }
+
+  japan:          # Lane 8
+    stillness_press_jp:     { teacher: ahjan }
+    cognitive_clarity_jp:   { teacher: kenjin }
+    somatic_wisdom_jp:      { teacher: pamela_fellows }
+    qi_foundation_jp:       { teacher: master_wu }
+    digital_ground_jp:      { teacher: miki }
+    heart_balance_jp:       { teacher: maat }
+    relational_calm_jp:     { teacher: miyuki }
+    warrior_calm_jp:        { teacher: master_feung }
+    sleep_restoration_jp:   { teacher: master_sha }
+    body_memory_jp:         { teacher: omote }
+    solar_return_jp:        { teacher: ra }
+    devotion_path_jp:       { teacher: sai_ma }
+
+  korea:          # Lane 9
+    stillness_press_kr:     { teacher: ahjan }
+    cognitive_clarity_kr:   { teacher: kenjin }
+    somatic_wisdom_kr:      { teacher: pamela_fellows }
+    qi_foundation_kr:       { teacher: master_wu }
+    digital_ground_kr:      { teacher: miki }
+    heart_balance_kr:       { teacher: maat }
+    relational_calm_kr:     { teacher: miyuki }
+    warrior_calm_kr:        { teacher: master_feung }
+    sleep_restoration_kr:   { teacher: master_sha }
+    body_memory_kr:         { teacher: omote }
+    solar_return_kr:        { teacher: ra }
+    devotion_path_kr:       { teacher: sai_ma }
+
+  taiwan:         # Lane 10 (13 teacher-mode brands; Adi Da catalog exception)
+    stillness_press_tw:     { teacher: ahjan }
+    cognitive_clarity_tw:   { teacher: kenjin }
+    somatic_wisdom_tw:      { teacher: pamela_fellows }
+    qi_foundation_tw:       { teacher: master_wu }
+    digital_ground_tw:      { teacher: miki }
+    heart_balance_tw:       { teacher: maat }
+    relational_calm_tw:     { teacher: miyuki }
+    warrior_calm_tw:        { teacher: master_feung }
+    sleep_restoration_tw:   { teacher: master_sha }
+    body_memory_tw:         { teacher: omote }
+    solar_return_tw:        { teacher: ra }
+    devotion_path_tw:       { teacher: sai_ma }
+    bright_presence_tw:
+      teacher: adi_da
+      content: [audiobooks, manga, video, exercises, freebies]
+
+  china:          # Lane 11 (mainland + HK + SG)
+    stillness_press_cn:     { teacher: ahjan }
+    cognitive_clarity_cn:   { teacher: kenjin }
+    somatic_wisdom_cn:      { teacher: pamela_fellows }
+    qi_foundation_cn:       { teacher: master_wu }
+    digital_ground_cn:      { teacher: miki }
+    heart_balance_cn:       { teacher: maat }
+    relational_calm_cn:     { teacher: miyuki }
+    warrior_calm_cn:        { teacher: master_feung }
+    sleep_restoration_cn:   { teacher: master_sha }
+    body_memory_cn:         { teacher: omote }
+    solar_return_cn:        { teacher: ra }
+    devotion_path_cn:       { teacher: sai_ma }
+
+  hungary:        # Lane 12
+    stillness_press_hu:     { teacher: ahjan }
+    cognitive_clarity_hu:   { teacher: kenjin }
+    somatic_wisdom_hu:      { teacher: pamela_fellows }
+    qi_foundation_hu:       { teacher: master_wu }
+    digital_ground_hu:      { teacher: miki }
+    heart_balance_hu:       { teacher: maat }
+    relational_calm_hu:     { teacher: miyuki }
+    warrior_calm_hu:        { teacher: master_feung }
+    sleep_restoration_hu:   { teacher: master_sha }
+    body_memory_hu:         { teacher: omote }
+    solar_return_hu:        { teacher: ra }
+    devotion_path_hu:       { teacher: sai_ma }
+
+# ─── ASSIGNMENT SUMMARY ──────────────────────────────────────────────────
+
+summary:
+  rule: "1 teacher per brand. Everywhere. Simple."
+  taiwan_teacher_mode_exception: >
+    Taiwan (zh-TW) carries 13 teacher-mode brands: the usual 12 locale-suffixed rows
+    plus bright_presence_tw (Adi Da only). Adi Da does not appear on other lanes.
+
+  brand_lanes: 12
+  brands_per_lane_default: 36   # 24 standard + 12 teacher (non-Taiwan lanes)
+  brands_per_lane_taiwan: 37    # 24 standard + 13 teacher
+  total_brand_instances: 433    # 11 × 36 + 1 × 37
+
+  # ── TEACHER MODE BRANDS (12 per lane; 13 on Taiwan) ─────────────────────
+  # Each publishes content from ONE teacher. The brand IS that teacher's voice.
+  # Each has a unique persona × topic × emotional_job grouping.
+  # Full archetypes: config/catalog_planning/teacher_brand_archetypes.yaml
+  teacher_mode_brands:
+    count_per_lane_default: 12
+    count_per_lane_taiwan: 13
+    total: 145                  # 11 × 12 + 13
+    base_names:
+      - stillness_press       # ahjan        — alarm recognition + forest simplicity / renunciation strands
+      - cognitive_clarity     # kenjin       — overthinking_knowledge_worker / zen inquiry (OPD-105: was joshin)
+      - somatic_wisdom        # pamela_fellows — high_functioning_perfectionist / polyvagal science
+      - qi_foundation         # master_feung — energy_depleted_professional / qi cultivation
+      - digital_ground        # miki         — doomscrolling_gen_z / presence without phone
+      - heart_balance         # maat         — shadow_work_seeker / truth and balance
+      - relational_calm       # miyuki       — shame_carrying_people_pleaser / radical acceptance (OPD-111)
+      - warrior_calm          # master_wu    — high_stakes_performer / composure under fire
+      - sleep_restoration     # master_sha   — chronic_insomnia_sufferer / energy medicine
+      - body_memory           # omote        — unprocessed_grief_carrier / body-centered grief
+      - solar_return          # ra           — burnout_survivor_rebuilding / fire as initiation
+      - devotion_path         # sai_ma       — love_exhausted_caregiver / devotion turned inward
+      - bright_presence       # adi_da       — Taiwan lane only (locale row: bright_presence_tw)
+
+  # ── STANDARD MODE BRANDS (24 per lane) ─────────────────────────────────
+  # No teacher association. Persona/archetype-driven content.
+  # Automated pipeline: atoms, pen name authors, no teacher voice.
+  # Full archetypes: config/catalog_planning/brand_archetype_registry.yaml
+  standard_mode_brands:
+    count_per_lane: 24
+    total: 288                # 12 lanes × 24
+    base_names:
+      - stabilizer            # burned_out_professional — regulatory calm
+      - optimizer             # high_efficiency_achiever — momentum focus
+      - night_reset           # insomniac_creative — sleep induction
+      - career_lift           # mid_career_stalled — clarity & reflection
+      - adhd_forge            # neurodivergent_young_adult — varied energetic
+      - longevity_lab         # longevity_seeker — evidence-based optimization
+      - creative_unfold       # artistic_student — creative nurturing
+      - resilient_parent      # overwhelmed_parent — feel like a person again
+      - executive_calm        # corporate_leader — high-performance presence
+      - trauma_path           # trauma_recovery_adult — trauma-informed safety
+      - spiritual_ground      # spiritually_curious — contemplative presence
+      - focus_sprint          # startup_founder — sustain without burning
+      - hormone_reset         # women_35_plus — in control of body
+      - stoic_edge            # young_male_growth — mental toughness
+      - calm_student          # gen_z_student — stop spiraling
+      - healing_ground        # chronic_stress_worker — midday reset
+      - bio_flow              # biohacker — optimize and feel good
+      - confidence_core       # socially_anxious — feel okay showing up
+      - relationship_clarity  # couples_repair — repair and reconnect
+      - morning_momentum      # early_riser — set for the day
+      - minimal_mind          # digital_overwhelm — feel less scattered
+      - high_performer        # competitive_sales — confident under pressure
+      - gentle_growth         # therapy_newcomer — safe exploring
+      - legacy_builder        # 45_plus_reinventor — meaning in next chapter
+
+  lane_suffixes:
+    english_global: ""        # no suffix (base brand name)
+    dach: "_de"
+    france: "_fr"
+    spain: "_es"
+    italy: "_it"
+    latam: "_latam"
+    brazil: "_br"
+    japan: "_jp"
+    korea: "_kr"
+    taiwan: "_tw"
+    china: "_cn"
+    hungary: "_hu"
+
+  # Teacher-mode instances: 12 on each non-Taiwan lane; 13 on Taiwan (Adi Da extra).
+  teacher_reach: "145 teacher-mode brand rows (11 lanes × 12 + Taiwan × 13); Adi Da only on Taiwan"
+  standard_reach: "24 standard brands × 12 lanes = 288 standard-brand pairs"
+  total_reach: "433 brand instances worldwide (11×36 + Taiwan×37)"

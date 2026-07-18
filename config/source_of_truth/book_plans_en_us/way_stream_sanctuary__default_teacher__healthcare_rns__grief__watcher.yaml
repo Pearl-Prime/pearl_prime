@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__grief__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__grief.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__through_loss
+  name: Through the Low Places — for Nurses
+installment_number: 2
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Grief: Watching Your Thoughts Without Drowning (4)'
+subtitle: How Healthcare Rns Are Rewriting the Rules of Grief
+cover_tagline: You keep replaying it. Looking for the moment you could have changed
+  it.
+description:
+  short_blurb: After you lose one, your mind runs the tape again and again, hunting
+    for the call you should have made differently. This is a book for nurses about
+    the grief that hides inside hypervigilance — the second-guessing that won't stop.
+    It won't talk you out of the thoughts. It'll keep you from drowning in them.
+  long_description: 'You lost one, and now your mind won''t let it rest. You run the
+    tape: the vitals at 0300, the thing you noticed but didn''t escalate fast enough,
+    the order you waited on. You''re looking for the moment it could have gone another
+    way, the decision you''d take back if the watcher could just find it. It can''t.
+    So it runs the tape again. And again. At 3 a.m. With the lights off.
+
+
+    This book is for the nurse whose grief comes dressed as hypervigilance — whose
+    way of carrying a loss is to interrogate it forever, to put your own clinical
+    judgment on trial in a courtroom that never adjourns. The watching mind that catches
+    deterioration on shift is the same mind that, after a death, turns on itself and
+    scans the past for the error that would explain it, that would give the loss a
+    cause you could have controlled. It feels like diligence. It''s grief, looking
+    for somewhere to land.
+
+
+    As a hospital chaplain, Oscar Bello has watched nurses interrogate their own losses
+    for years, and he writes this about watching those thoughts without drowning.
+    Recognition: seeing that the endless replay isn''t problem-solving — there''s
+    no patient to save in the memory, only a loss your mind can''t accept it didn''t
+    control. Descent: going down into the grief underneath the second-guessing, instead
+    of staying up in the analysis where it''s safer to blame your own judgment than
+    to simply hurt. Integration: coming back able to hold what happened without prosecuting
+    yourself for it, the watcher allowed to rest because there was never a verdict
+    to reach.
+
+
+    This book will not talk you out of your thoughts or hand you a thought-stopping
+    technique. It will not tell you the death wasn''t on you and expect that to land
+    — the watcher has heard that and kept replaying anyway. It will not treat your
+    spiraling, second-guessing mind as a malfunction to correct. There is no fix here
+    for the fact that a patient is gone and you were in the room. This book won''t
+    pretend there is.
+
+
+    What it offers is plain language for the replay — words you can use the next time
+    it starts at 3 a.m. and your mind reaches for the tape. You learned to scan for
+    what you missed because scanning saves the next one. But you cannot save the one
+    already gone by convicting yourself nightly, and the grief underneath the watching
+    deserves to be felt, not litigated. You are allowed to stop running the tape.
+    You are allowed to grieve instead of investigate. You are allowed to let it rest.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  - losing someone
+  secondary:
+  - nurses
+  - grief for nurses
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- Chatter (Ethan Kross) — why the mind replays loss on a loop and how to break the
+  spiral
+- Option B (Sheryl Sandberg & Adam Grant) — facing grief and the relentless second-guessing
+  of 'what if'
+- Radical Acceptance (Tara Brach) — meeting painful thoughts without being pulled
+  under by them
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,1080 @@
+# config/registry/topic_chapter_titles.yaml
+# Phoenix Omega V4 — Topic Chapter Title Maps
+# Thin topic layer: chapter titles + hook purposes per topic
+# All 15 canonical topics including grief (for completeness)
+#
+# ch##.title     → chapter title (sounds like a real book chapter, not academic)
+# ch##.hook_purpose → section_01 HOOK purpose line (for generator)
+# Naming rules: specific mechanism, arc-role-matched, no prohibited terms
+#
+# Arc role reminder:
+#   ch01=recognition  ch02=origin     ch03=pattern      ch04=mechanism
+#   ch05=cost         ch06=turning_point ch07=first_practice ch08=difficulty
+#   ch09=integration  ch10=relapse    ch11=identity     ch12=forward
+
+---
+
+anxiety:
+  display_name: "Anxiety"
+  chapters:
+    ch01:
+      title: "The Alarm That Won't Stop Ringing"
+      hook_purpose: "Recognition — the false alarm reveal"
+      scene_digital_purpose: "Digital avoidance — the unsent reply"
+      scene_relational_purpose: "Relational avoidance — the edited response"
+      scene_social_purpose: "Social avoidance — the skipped room"
+      reflection_01_purpose: "Pattern naming — the trained response"
+      doctrine_purpose: "Teacher doctrine — alarm without danger"
+      reflection_02_purpose: "Cost preview — what avoidance compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement"
+      integration_01_purpose: "Landing — the alarm is real, the threat may not be"
+      integration_02_purpose: "Carry line — what you'll do differently now"
+    ch02:
+      title: "When The Alarm Made Sense"
+      hook_purpose: "Origin — when anxiety was accurate protection"
+      scene_purpose: "Origin scene — the moment the alarm was installed"
+      integration_purpose: "Landing — the old alarm, the new context"
+    ch03:
+      title: "The Pattern Running Your Nervous System"
+      hook_purpose: "Pattern — the anxiety loop revealed"
+      scene_purpose: "Pattern scene — the loop in action"
+      integration_purpose: "Landing — naming the loop is the first move"
+    ch04:
+      title: "What The Alarm Actually Does To Your Body"
+      hook_purpose: "Mechanism — fight/flight/freeze in real time"
+      scene_purpose: "Mechanism scene — body response in daily life"
+      integration_purpose: "Landing — the body is doing its job"
+    ch05:
+      title: "What Living On Alert Actually Costs"
+      hook_purpose: "Cost — exhaustion, avoidance, shrinking life"
+      scene_purpose: "Cost scene — the narrowed world"
+      integration_purpose: "Landing — cost is information not verdict"
+    ch06:
+      title: "Letting The Alarm Ring"
+      hook_purpose: "Turning point — feeling it without obeying it"
+      scene_purpose: "Turning point scene — staying in the room"
+      integration_purpose: "Landing — the alarm can run and you can move"
+    ch07:
+      title: "Small Exposures"
+      hook_purpose: "Practice — graduated approach, not avoidance"
+      scene_purpose: "Practice scene — the small deliberate step"
+      integration_purpose: "Landing — each exposure changes the prediction"
+    ch08:
+      title: "When The Alarm Screams"
+      hook_purpose: "Difficulty — the spike, the setback, the spiral"
+      scene_purpose: "Difficulty scene — peak alarm in real context"
+      integration_purpose: "Landing — intensity is not permanence"
+    ch09:
+      title: "When Your Body Learns It's Safe"
+      hook_purpose: "Integration — nervous system recalibration"
+      scene_purpose: "Integration scene — the moment the body updated"
+      integration_purpose: "Landing — the update is cumulative not instant"
+    ch10:
+      title: "When The Alarm Comes Back"
+      hook_purpose: "Relapse — the return is information not failure"
+      scene_purpose: "Relapse scene — the familiar feeling returns"
+      integration_purpose: "Landing — relapse is data about what to practice next"
+    ch11:
+      title: "Living With The Alarm On Low"
+      hook_purpose: "Identity — from anxious person to person who has anxiety"
+      scene_purpose: "Identity scene — operating with low background alarm"
+      integration_purpose: "Landing — this is the new baseline not a flaw"
+    ch12:
+      title: "What Opens When You Stop Waiting"
+      hook_purpose: "Forward — life beyond the alarm-avoidance loop"
+      scene_purpose: "Forward scene — the thing you do now that you couldn't before"
+      integration_purpose: "Landing — the alarm is yours now not the other way around"
+
+burnout:
+  display_name: "Burnout"
+  chapters:
+    ch01:
+      title: "The Efficiency That's Killing You"
+      hook_purpose: "Recognition — the productivity trap reveal"
+      scene_digital_purpose: "Digital productivity — the open tabs at midnight"
+      scene_relational_purpose: "Relational cancellation — the rescheduled everything"
+      scene_social_purpose: "Social withdrawal — the event you skipped to work"
+      reflection_01_purpose: "Pattern naming — doing more, feeling less"
+      doctrine_purpose: "Teacher doctrine — capacity has a floor"
+      reflection_02_purpose: "Cost preview — what running on empty compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to keep going"
+      integration_01_purpose: "Landing — more output is not more capacity"
+      integration_02_purpose: "Carry line — the thing that cracks first"
+    ch02:
+      title: "When Working Hard Made Sense"
+      hook_purpose: "Origin — when hustle was survival or identity"
+      scene_purpose: "Origin scene — the moment the habit of overdrive formed"
+      integration_purpose: "Landing — the old rule, the new cost"
+    ch03:
+      title: "The Pattern That Looks Like Dedication"
+      hook_purpose: "Pattern — the burnout loop disguised as virtue"
+      scene_purpose: "Pattern scene — the loop running as normal"
+      integration_purpose: "Landing — naming the pattern is not quitting"
+    ch04:
+      title: "What Chronic Overdrive Does To Your System"
+      hook_purpose: "Mechanism — HPA axis, cortisol, capacity depletion"
+      scene_purpose: "Mechanism scene — body signals ignored in daily grind"
+      integration_purpose: "Landing — the body is counting what the mind ignores"
+    ch05:
+      title: "What Never Stopping Actually Costs"
+      hook_purpose: "Cost — health, relationships, the work itself degrading"
+      scene_purpose: "Cost scene — the invisible toll made visible"
+      integration_purpose: "Landing — the cost is already paid; the question is what next"
+    ch06:
+      title: "Doing Less On Purpose"
+      hook_purpose: "Turning point — choosing rest as deliberate action"
+      scene_purpose: "Turning point scene — the intentional stop"
+      integration_purpose: "Landing — stopping is not failing the work"
+    ch07:
+      title: "Small Recoveries"
+      hook_purpose: "Practice — micro-rest, deliberate limits, recovery windows"
+      scene_purpose: "Practice scene — the small thing that actually refills"
+      integration_purpose: "Landing — recovery is skill not weakness"
+    ch08:
+      title: "When The Guilt Hits"
+      hook_purpose: "Difficulty — the shame of slowing down"
+      scene_purpose: "Difficulty scene — rest interrupted by the pull to do more"
+      integration_purpose: "Landing — guilt is the old rule running, not a verdict"
+    ch09:
+      title: "When Rest Stops Feeling Wrong"
+      hook_purpose: "Integration — nervous system learning that rest is safe"
+      scene_purpose: "Integration scene — the moment stillness felt tolerable"
+      integration_purpose: "Landing — the discomfort of rest is the discomfort of change"
+    ch10:
+      title: "When You Slip Back Into Overdrive"
+      hook_purpose: "Relapse — the old pull toward overwork returns"
+      scene_purpose: "Relapse scene — the project or crisis that pulls you back"
+      integration_purpose: "Landing — the slip is information about what needs practice"
+    ch11:
+      title: "Who You Are Without The Hustle"
+      hook_purpose: "Identity — worth not tied to output"
+      scene_purpose: "Identity scene — operating without the productivity identity"
+      integration_purpose: "Landing — you existed before the hustle defined you"
+    ch12:
+      title: "Sustainable Everything"
+      hook_purpose: "Forward — life with capacity left over"
+      scene_purpose: "Forward scene — the work that happens from a full tank"
+      integration_purpose: "Landing — this is not a lower standard, it's a truer one"
+
+self_worth:
+  display_name: "Self-Worth"
+  chapters:
+    ch01:
+      title: "The Condition You Didn't Know You Set"
+      hook_purpose: "Recognition — conditional worth reveal"
+      scene_digital_purpose: "Digital performance — the metric check"
+      scene_relational_purpose: "Relational performance — the approval read"
+      scene_social_purpose: "Social comparison — the room scan"
+      reflection_01_purpose: "Pattern naming — the invisible scorecard"
+      doctrine_purpose: "Teacher doctrine — worth is not a grade"
+      reflection_02_purpose: "Cost preview — what scorekeeping compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to earn"
+      integration_01_purpose: "Landing — the condition is the problem not the score"
+      integration_02_purpose: "Carry line — what you stop measuring first"
+    ch02:
+      title: "When Earning Worth Made Sense"
+      hook_purpose: "Origin — when performance was survival or love"
+      scene_purpose: "Origin scene — the moment worth became conditional"
+      integration_purpose: "Landing — the rule that made sense then, costs now"
+    ch03:
+      title: "The Measurement That Never Stops"
+      hook_purpose: "Pattern — the worthiness audit loop"
+      scene_purpose: "Pattern scene — the automatic score-check in daily life"
+      integration_purpose: "Landing — the audit runs without permission"
+    ch04:
+      title: "What Conditional Worth Does To Your Body"
+      hook_purpose: "Mechanism — shame physiology, approval seeking"
+      scene_purpose: "Mechanism scene — the body response to judgment"
+      integration_purpose: "Landing — the body registers worth-threat the same as danger"
+    ch05:
+      title: "What Living On Approval Actually Costs"
+      hook_purpose: "Cost — exhaustion of proving, shrinking to fit"
+      scene_purpose: "Cost scene — the thing you didn't do because of the score"
+      integration_purpose: "Landing — the cost is cumulative and invisible until now"
+    ch06:
+      title: "Worth Without Evidence"
+      hook_purpose: "Turning point — unconditional ground"
+      scene_purpose: "Turning point scene — doing without measuring"
+      integration_purpose: "Landing — you don't need to earn the right to exist"
+    ch07:
+      title: "Small Acts Without Scorekeeping"
+      hook_purpose: "Practice — doing without measuring the result"
+      scene_purpose: "Practice scene — the action that doesn't get graded"
+      integration_purpose: "Landing — the act is complete before the score"
+    ch08:
+      title: "When The Old Scorecard Screams"
+      hook_purpose: "Difficulty — comparison spike, shame surge"
+      scene_purpose: "Difficulty scene — the moment the scorecard returns loudest"
+      integration_purpose: "Landing — the screaming is the old system losing ground"
+    ch09:
+      title: "When Enough Stops Being A Moving Target"
+      hook_purpose: "Integration — stable self-worth, outcome decoupled from identity"
+      scene_purpose: "Integration scene — the moment the score didn't land"
+      integration_purpose: "Landing — the target stops moving when you stop chasing it"
+    ch10:
+      title: "When You Catch Yourself Earning Again"
+      hook_purpose: "Relapse — the earned-versus-inherent question returns"
+      scene_purpose: "Relapse scene — the familiar need to prove"
+      integration_purpose: "Landing — catching it early is the practice"
+    ch11:
+      title: "Who You Are When No One Is Watching"
+      hook_purpose: "Identity — worth without audience"
+      scene_purpose: "Identity scene — acting without external validation present"
+      integration_purpose: "Landing — who you are in private is the real answer"
+    ch12:
+      title: "What Opens When You Stop Proving"
+      hook_purpose: "Forward — life without the audition"
+      scene_purpose: "Forward scene — what you do when the scorecard is gone"
+      integration_purpose: "Landing — this is the life that was always available"
+
+imposter_syndrome:
+  display_name: "Imposter Syndrome"
+  chapters:
+    ch01:
+      title: "The Credential You Keep Calling Fake"
+      hook_purpose: "Recognition — the competence gap that isn't there"
+      scene_digital_purpose: "Digital exposure — the profile, the post, the title"
+      scene_relational_purpose: "Relational exposure — the introduction that felt like a lie"
+      scene_social_purpose: "Social exposure — the room where you don't belong"
+      reflection_01_purpose: "Pattern naming — the automatic disqualification"
+      doctrine_purpose: "Teacher doctrine — competence and confidence lag is normal"
+      reflection_02_purpose: "Cost preview — what hiding compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet certainty you'll be found out"
+      integration_01_purpose: "Landing — the credential is real, the verdict isn't"
+      integration_02_purpose: "Carry line — what you stop disclaiming first"
+    ch02:
+      title: "When Doubting Yourself Kept You Safe"
+      hook_purpose: "Origin — when self-doubt was protection from presumption"
+      scene_purpose: "Origin scene — the moment credibility became fragile"
+      integration_purpose: "Landing — the old protection, the new cost"
+    ch03:
+      title: "The Pattern That Looks Like Humility"
+      hook_purpose: "Pattern — the imposter loop disguised as modesty"
+      scene_purpose: "Pattern scene — the loop running as reasonable caution"
+      integration_purpose: "Landing — humility and self-erasure are not the same thing"
+    ch04:
+      title: "What Competence Anxiety Actually Does"
+      hook_purpose: "Mechanism — visibility shame, comparison to imagined peers"
+      scene_purpose: "Mechanism scene — the body response to being seen as competent"
+      integration_purpose: "Landing — the anxiety is about exposure not ability"
+    ch05:
+      title: "What Staying Small Actually Costs"
+      hook_purpose: "Cost — the opportunity passed, the voice left out"
+      scene_purpose: "Cost scene — the contribution that stayed hidden"
+      integration_purpose: "Landing — hiding is not free"
+    ch06:
+      title: "Showing The Work Anyway"
+      hook_purpose: "Turning point — contributing without the all-clear"
+      scene_purpose: "Turning point scene — the moment of visible contribution"
+      integration_purpose: "Landing — the work is real whether or not you feel ready"
+    ch07:
+      title: "Speaking Before You're Ready"
+      hook_purpose: "Practice — contributing before the imposter check passes"
+      scene_purpose: "Practice scene — the thing said before certainty arrived"
+      integration_purpose: "Landing — the voice earns its place by being used"
+    ch08:
+      title: "When The Exposure Fear Spikes"
+      hook_purpose: "Difficulty — the high-stakes visibility moment"
+      scene_purpose: "Difficulty scene — the presentation, promotion, public moment"
+      integration_purpose: "Landing — the spike is the system doing its job wrong"
+    ch09:
+      title: "When The Room Stops Feeling Like A Test"
+      hook_purpose: "Integration — belonging without proof"
+      scene_purpose: "Integration scene — the moment the room felt possible"
+      integration_purpose: "Landing — belonging is a decision, not a verdict"
+    ch10:
+      title: "When The Fraud Feeling Returns"
+      hook_purpose: "Relapse — the old certainty of exposure returns"
+      scene_purpose: "Relapse scene — the new challenge triggers the old response"
+      integration_purpose: "Landing — the return is the edge of the next growth zone"
+    ch11:
+      title: "Operating From Competence Not Certainty"
+      hook_purpose: "Identity — from imposter to practitioner who keeps learning"
+      scene_purpose: "Identity scene — acting from accumulated skill not perfect knowledge"
+      integration_purpose: "Landing — certainty is not the prerequisite you thought it was"
+    ch12:
+      title: "What You Build When You Stop Hiding"
+      hook_purpose: "Forward — contribution without the disclaimer"
+      scene_purpose: "Forward scene — the visible work that only you could do"
+      integration_purpose: "Landing — the room needed what you were withholding"
+
+boundaries:
+  display_name: "Boundaries"
+  chapters:
+    ch01:
+      title: "The No That Never Gets Said"
+      hook_purpose: "Recognition — the limit that exists but won't come out"
+      scene_digital_purpose: "Digital over-yes — the message you replied to at midnight"
+      scene_relational_purpose: "Relational over-yes — the request you agreed to and resented"
+      scene_social_purpose: "Social over-yes — the obligation you couldn't decline"
+      reflection_01_purpose: "Pattern naming — the cost of the unsaid no"
+      doctrine_purpose: "Teacher doctrine — limits are information not rejection"
+      reflection_02_purpose: "Cost preview — what chronic yes compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to be available"
+      integration_01_purpose: "Landing — the limit is real before it's spoken"
+      integration_02_purpose: "Carry line — what you stop agreeing to first"
+    ch02:
+      title: "When Saying Yes Kept You Safe"
+      hook_purpose: "Origin — when compliance was survival or love"
+      scene_purpose: "Origin scene — the moment no became dangerous"
+      integration_purpose: "Landing — the old rule, the new price"
+    ch03:
+      title: "The Loop That Looks Like Generosity"
+      hook_purpose: "Pattern — the limit-avoidance loop disguised as care"
+      scene_purpose: "Pattern scene — the yes that generates resentment"
+      integration_purpose: "Landing — resentment is the unpaid limit asking to be named"
+    ch04:
+      title: "What Happens In Your Body When You Can't Say No"
+      hook_purpose: "Mechanism — exposure fear, the body alarm on saying no"
+      scene_purpose: "Mechanism scene — the physical response to a limit moment"
+      integration_purpose: "Landing — the body knows the limit before the mind speaks it"
+    ch05:
+      title: "What Chronic Yes Actually Costs"
+      hook_purpose: "Cost — resentment, shrinking, the slow disappearance of preference"
+      scene_purpose: "Cost scene — the need that never got named"
+      integration_purpose: "Landing — every unnamed limit is a bill that compounds"
+    ch06:
+      title: "The No That Survives"
+      hook_purpose: "Turning point — the limit named with fear still present"
+      scene_purpose: "Turning point scene — the first named limit"
+      integration_purpose: "Landing — the world continued after the no"
+    ch07:
+      title: "Small Limits, Named Out Loud"
+      hook_purpose: "Practice — graduated limit-setting, low-stakes first"
+      scene_purpose: "Practice scene — the small specific limit"
+      integration_purpose: "Landing — each named limit makes the next one smaller"
+    ch08:
+      title: "When The Fear Spikes"
+      hook_purpose: "Difficulty — the relationship that pushes back on limits"
+      scene_purpose: "Difficulty scene — the limit that meets resistance"
+      integration_purpose: "Landing — pushback is information not proof you were wrong"
+    ch09:
+      title: "When Limits Stop Feeling Like Abandonment"
+      hook_purpose: "Integration — limits as care, not rejection"
+      scene_purpose: "Integration scene — the relationship that held through a limit"
+      integration_purpose: "Landing — the limit protected both people"
+    ch10:
+      title: "When The Old Yes Returns"
+      hook_purpose: "Relapse — the familiar pull toward over-compliance"
+      scene_purpose: "Relapse scene — the automatic yes before the limit could form"
+      integration_purpose: "Landing — catching the yes early is the practice"
+    ch11:
+      title: "Who You Are When You Have Preferences"
+      hook_purpose: "Identity — from accommodation to person with distinct needs"
+      scene_purpose: "Identity scene — operating with a named preference"
+      integration_purpose: "Landing — preference is not selfishness"
+    ch12:
+      title: "What Opens When You Stop Over-Giving"
+      hook_purpose: "Forward — relationships built on actual capacity"
+      scene_purpose: "Forward scene — the relationship that has room for both people"
+      integration_purpose: "Landing — this is what real availability looks like"
+
+depression:
+  display_name: "Low Mood"
+  chapters:
+    ch01:
+      title: "Living At A Distance From Your Own Life"
+      hook_purpose: "Recognition — the glass between you and your life"
+      scene_digital_purpose: "Digital distance — scrolling others' aliveness from behind glass"
+      scene_relational_purpose: "Relational distance — the conversation you watched yourself have"
+      scene_social_purpose: "Social distance — the room you were in but not present to"
+      reflection_01_purpose: "Pattern naming — the observer who can't get closer"
+      doctrine_purpose: "Teacher doctrine — the distance is a response not a character flaw"
+      reflection_02_purpose: "Cost preview — what the glass compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to stay outside"
+      integration_01_purpose: "Landing — the distance is a signal not a sentence"
+      integration_02_purpose: "Carry line — one thing that reaches through"
+    ch02:
+      title: "When Pulling Back Made Sense"
+      hook_purpose: "Origin — when distance was protection"
+      scene_purpose: "Origin scene — the moment withdrawal became the response"
+      integration_purpose: "Landing — the old protection, the new cost"
+    ch03:
+      title: "The Pattern That Looks Like Rest"
+      hook_purpose: "Pattern — the withdrawal loop disguised as recovery"
+      scene_purpose: "Pattern scene — the loop running as self-protection"
+      integration_purpose: "Landing — the loop deepens the distance it tries to escape"
+    ch04:
+      title: "What Low Mood Actually Does To The System"
+      hook_purpose: "Mechanism — the flatness, the volume turned down"
+      scene_purpose: "Mechanism scene — the absence of charge in daily moments"
+      integration_purpose: "Landing — the system is not broken, it is turned down"
+    ch05:
+      title: "What The Distance Actually Costs"
+      hook_purpose: "Cost — the life happening outside the glass"
+      scene_purpose: "Cost scene — the moment missed from behind the distance"
+      integration_purpose: "Landing — the cost is cumulative and quiet"
+    ch06:
+      title: "One Thing That Reaches Through"
+      hook_purpose: "Turning point — something lands despite the distance"
+      scene_purpose: "Turning point scene — the through-moment"
+      integration_purpose: "Landing — the through-moment proves the glass is not total"
+    ch07:
+      title: "Small Structures"
+      hook_purpose: "Practice — minimum viable structure, the one small thing"
+      scene_purpose: "Practice scene — the structure that holds space for return"
+      integration_purpose: "Landing — structure is a container for when presence returns"
+    ch08:
+      title: "When The Distance Is Loudest"
+      hook_purpose: "Difficulty — the period where nothing reaches through"
+      scene_purpose: "Difficulty scene — the flattest stretch"
+      integration_purpose: "Landing — the darkest stretch is not the permanent state"
+    ch09:
+      title: "When Something Lands Again"
+      hook_purpose: "Integration — the return of charge in moments"
+      scene_purpose: "Integration scene — the first thing that lands in a while"
+      integration_purpose: "Landing — the landing is the sign the distance is shifting"
+    ch10:
+      title: "When The Distance Returns"
+      hook_purpose: "Relapse — the familiar flatness after a lighter period"
+      scene_purpose: "Relapse scene — the return of distance after openness"
+      integration_purpose: "Landing — the return is information about what to tend"
+    ch11:
+      title: "Living While The Distance Is Still There"
+      hook_purpose: "Identity — operating from available capacity not full presence"
+      scene_purpose: "Identity scene — acting from what's there not what's missing"
+      integration_purpose: "Landing — showing up at half-capacity is still showing up"
+    ch12:
+      title: "What Life Looks Like From The Other Side"
+      hook_purpose: "Forward — the life available when the distance lifts"
+      scene_purpose: "Forward scene — the thing you reach for when closer"
+      integration_purpose: "Landing — this is what the structure was holding space for"
+
+courage:
+  display_name: "Courage"
+  chapters:
+    ch01:
+      title: "The Thing You're Not Doing"
+      hook_purpose: "Recognition — the action sitting undone"
+      scene_digital_purpose: "Digital hesitation — the draft that won't send"
+      scene_relational_purpose: "Relational hesitation — the conversation that keeps not happening"
+      scene_social_purpose: "Social hesitation — the visible thing you won't do"
+      reflection_01_purpose: "Pattern naming — the body alarm on forward motion"
+      doctrine_purpose: "Teacher doctrine — action precedes the all-clear"
+      reflection_02_purpose: "Cost preview — what waiting for readiness compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to wait"
+      integration_01_purpose: "Landing — the action doesn't require the alarm to stop"
+      integration_02_purpose: "Carry line — what you stop waiting for first"
+    ch02:
+      title: "When Caution Kept You Safe"
+      hook_purpose: "Origin — when holding back was accurate risk management"
+      scene_purpose: "Origin scene — the moment caution became the default"
+      integration_purpose: "Landing — the old caution, the new cost"
+    ch03:
+      title: "The Pattern That Looks Like Preparation"
+      hook_purpose: "Pattern — the delay loop disguised as readiness"
+      scene_purpose: "Pattern scene — the preparation that never reaches launch"
+      integration_purpose: "Landing — more preparation is not always more readiness"
+    ch04:
+      title: "What The Body Does Before A Brave Thing"
+      hook_purpose: "Mechanism — the alarm that fires on every forward move"
+      scene_purpose: "Mechanism scene — the physical response before action"
+      integration_purpose: "Landing — the alarm is not a veto"
+    ch05:
+      title: "What Waiting For The All-Clear Actually Costs"
+      hook_purpose: "Cost — the life not lived while waiting to feel ready"
+      scene_purpose: "Cost scene — the opportunity that passed while preparing"
+      integration_purpose: "Landing — the all-clear may never come"
+    ch06:
+      title: "Moving While The Alarm Runs"
+      hook_purpose: "Turning point — acting with the fear present"
+      scene_purpose: "Turning point scene — the first move made afraid"
+      integration_purpose: "Landing — the action changes what the fear predicted"
+    ch07:
+      title: "Small Moves Before The All-Clear"
+      hook_purpose: "Practice — graduated action, not elimination of fear"
+      scene_purpose: "Practice scene — the small deliberate step"
+      integration_purpose: "Landing — each move updates what the body predicts"
+    ch08:
+      title: "When The Alarm Is Loudest"
+      hook_purpose: "Difficulty — the high-stakes moment when fear peaks"
+      scene_purpose: "Difficulty scene — the moment that requires the most"
+      integration_purpose: "Landing — loud is not the same as right"
+    ch09:
+      title: "When Action Stops Feeling Like Risk"
+      hook_purpose: "Integration — the body updating its predictions"
+      scene_purpose: "Integration scene — the thing done that stopped feeling dangerous"
+      integration_purpose: "Landing — the update is earned by repeated action"
+    ch10:
+      title: "When The Alarm Returns"
+      hook_purpose: "Relapse — the hesitation returns at a higher level"
+      scene_purpose: "Relapse scene — the familiar freeze at a new threshold"
+      integration_purpose: "Landing — the next threshold is where the next practice is"
+    ch11:
+      title: "Who You Are When You Move Afraid"
+      hook_purpose: "Identity — from someone who waits to someone who moves"
+      scene_purpose: "Identity scene — operating from action rather than readiness"
+      integration_purpose: "Landing — moving afraid is the definition not the exception"
+    ch12:
+      title: "What You Build When You Stop Waiting"
+      hook_purpose: "Forward — the life built from repeated action under alarm"
+      scene_purpose: "Forward scene — what stands because you moved before you were ready"
+      integration_purpose: "Landing — this is not the absence of fear, it's its company"
+
+overthinking:
+  display_name: "Overthinking"
+  chapters:
+    ch01:
+      title: "The Loop That Won't Close"
+      hook_purpose: "Recognition — the thought that keeps returning"
+      scene_digital_purpose: "Digital rumination — the open tab that won't close"
+      scene_relational_purpose: "Relational rumination — the conversation replayed"
+      scene_social_purpose: "Social rumination — the thing said that keeps returning"
+      reflection_01_purpose: "Pattern naming — the thought chain that runs on its own"
+      doctrine_purpose: "Teacher doctrine — more analysis is not more clarity"
+      reflection_02_purpose: "Cost preview — what the loop compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to keep processing"
+      integration_01_purpose: "Landing — the loop is a pattern not a pursuit of truth"
+      integration_02_purpose: "Carry line — what you stop feeding first"
+    ch02:
+      title: "When Thinking More Was The Right Tool"
+      hook_purpose: "Origin — when analysis prevented real mistakes"
+      scene_purpose: "Origin scene — the moment that rewarded the overthinking"
+      integration_purpose: "Landing — the old tool, the wrong application"
+    ch03:
+      title: "The Pattern That Looks Like Due Diligence"
+      hook_purpose: "Pattern — the rumination loop disguised as thoroughness"
+      scene_purpose: "Pattern scene — the analysis that produces more questions"
+      integration_purpose: "Landing — the loop generates certainty-seeking not certainty"
+    ch04:
+      title: "What The Loop Actually Does To Decisions"
+      hook_purpose: "Mechanism — analysis paralysis, the thought-chain mechanism"
+      scene_purpose: "Mechanism scene — the decision that gets more unclear the longer it sits"
+      integration_purpose: "Landing — more thought changes the clarity curve at some point"
+    ch05:
+      title: "What Living In Your Head Actually Costs"
+      hook_purpose: "Cost — the present moment missed while processing it"
+      scene_purpose: "Cost scene — the experience observed rather than had"
+      integration_purpose: "Landing — the analysis is happening instead of the living"
+    ch06:
+      title: "Deciding Before The Loop Closes"
+      hook_purpose: "Turning point — acting before certainty arrives"
+      scene_purpose: "Turning point scene — the decision made with open questions"
+      integration_purpose: "Landing — the loop doesn't have to close before you move"
+    ch07:
+      title: "Small Decisions, Made Fast"
+      hook_purpose: "Practice — graduated decision-making, low stakes first"
+      scene_purpose: "Practice scene — the small choice made without analysis"
+      integration_purpose: "Landing — fast small decisions build the capacity for bigger ones"
+    ch08:
+      title: "When The Loop Runs Loudest"
+      hook_purpose: "Difficulty — the high-stakes rumination peak"
+      scene_purpose: "Difficulty scene — the important question the loop won't resolve"
+      integration_purpose: "Landing — the loop being loud does not mean it's working"
+    ch09:
+      title: "When The Loop Quiets On Its Own"
+      hook_purpose: "Integration — thought patterns settling through practice"
+      scene_purpose: "Integration scene — the moment the loop didn't start"
+      integration_purpose: "Landing — the quiet is the result of the practice"
+    ch10:
+      title: "When The Loop Comes Back"
+      hook_purpose: "Relapse — the familiar rumination returns"
+      scene_purpose: "Relapse scene — the old thought-chain at a new trigger"
+      integration_purpose: "Landing — the return is a flag for what to practice next"
+    ch11:
+      title: "Thinking Enough, Not More"
+      hook_purpose: "Identity — from overthinker to deliberate decider"
+      scene_purpose: "Identity scene — using thought as a tool not a habitat"
+      integration_purpose: "Landing — enough thinking is a different skill than more"
+    ch12:
+      title: "What You Do When The Loop Isn't Running"
+      hook_purpose: "Forward — the life available when analysis is a tool not a home"
+      scene_purpose: "Forward scene — what happens in the space the loop used to fill"
+      integration_purpose: "Landing — the loop was filling time you now have back"
+
+compassion_fatigue:
+  display_name: "Compassion Fatigue"
+  chapters:
+    ch01:
+      title: "The Caring That Has Nowhere Left To Go"
+      hook_purpose: "Recognition — the empty vessel reveal"
+      scene_digital_purpose: "Digital depletion — the request that arrives when nothing is left"
+      scene_relational_purpose: "Relational depletion — the need you couldn't meet"
+      scene_social_purpose: "Social depletion — the room that expected more than remained"
+      reflection_01_purpose: "Pattern naming — giving without a refill mechanism"
+      doctrine_purpose: "Teacher doctrine — the caring needs tending too"
+      reflection_02_purpose: "Cost preview — what the empty vessel compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to keep giving"
+      integration_01_purpose: "Landing — empty is not a character flaw"
+      integration_02_purpose: "Carry line — what you stop carrying first"
+    ch02:
+      title: "When Giving Everything Made Sense"
+      hook_purpose: "Origin — when full depletion was the requirement"
+      scene_purpose: "Origin scene — the role or relationship that established total giving"
+      integration_purpose: "Landing — the old standard, the new cost"
+    ch03:
+      title: "The Pattern That Looks Like Dedication"
+      hook_purpose: "Pattern — the depletion loop disguised as commitment"
+      scene_purpose: "Pattern scene — the loop of give-until-empty-repeat"
+      integration_purpose: "Landing — the loop depletes the very capacity it relies on"
+    ch04:
+      title: "What Caring Without Reserve Does To The Body"
+      hook_purpose: "Mechanism — depletion physiology, the caring capacity ceiling"
+      scene_purpose: "Mechanism scene — the body signals that nothing is left"
+      integration_purpose: "Landing — the body is counting what care is drawing from"
+    ch05:
+      title: "What Running Empty Actually Costs"
+      hook_purpose: "Cost — the caring that degrades, the person inside the caregiver"
+      scene_purpose: "Cost scene — the moment when the care became hollow"
+      integration_purpose: "Landing — poor care comes from a drained carer"
+    ch06:
+      title: "Holding Less On Purpose"
+      hook_purpose: "Turning point — less holding as deliberate maintenance"
+      scene_purpose: "Turning point scene — the care that was set down"
+      integration_purpose: "Landing — setting some down is how the rest stays possible"
+    ch07:
+      title: "Small Refills"
+      hook_purpose: "Practice — micro-recovery, deliberate input for the caring system"
+      scene_purpose: "Practice scene — the thing that actually puts something back"
+      integration_purpose: "Landing — refill is not luxury, it's maintenance"
+    ch08:
+      title: "When The Guilt Of Pulling Back Hits"
+      hook_purpose: "Difficulty — the shame of limits in a caring role"
+      scene_purpose: "Difficulty scene — the moment a limit met someone's need"
+      integration_purpose: "Landing — the guilt is the old standard running not a verdict"
+    ch09:
+      title: "When The Caring Feels Real Again"
+      hook_purpose: "Integration — refilled capacity, care from a fuller place"
+      scene_purpose: "Integration scene — the moment the caring landed differently"
+      integration_purpose: "Landing — full care is better care"
+    ch10:
+      title: "When The Depletion Returns"
+      hook_purpose: "Relapse — the familiar emptiness after a recovery"
+      scene_purpose: "Relapse scene — the old depletion pattern at a new demand"
+      integration_purpose: "Landing — the return is a flag not a failure"
+    ch11:
+      title: "Who You Are Inside The Role"
+      hook_purpose: "Identity — person before caregiver"
+      scene_purpose: "Identity scene — operating as a person who also cares"
+      integration_purpose: "Landing — the role doesn't have to erase the person"
+    ch12:
+      title: "Caring That Lasts"
+      hook_purpose: "Forward — sustainable care from a maintained vessel"
+      scene_purpose: "Forward scene — the care that's possible from a fuller place"
+      integration_purpose: "Landing — this is what committed caring looks like over time"
+
+social_anxiety:
+  display_name: "Social Anxiety"
+  chapters:
+    ch01:
+      title: "The Room You Keep Almost Entering"
+      hook_purpose: "Recognition — the exposure fear in social settings"
+      scene_digital_purpose: "Digital social alarm — the group chat that feels like a stage"
+      scene_relational_purpose: "Relational exposure — the one-on-one that triggers scrutiny"
+      scene_social_purpose: "Social exposure — the room where you're being read"
+      reflection_01_purpose: "Pattern naming — the body alarm on visibility"
+      doctrine_purpose: "Teacher doctrine — visibility fear is not social failure"
+      reflection_02_purpose: "Cost preview — what avoidance of rooms compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to stay on the edge"
+      integration_01_purpose: "Landing — the room is not assessing you the way you think"
+      integration_02_purpose: "Carry line — what you stop pre-rehearsing first"
+    ch02:
+      title: "When Being Watched Was A Problem"
+      hook_purpose: "Origin — when scrutiny was real and costly"
+      scene_purpose: "Origin scene — the moment social visibility became dangerous"
+      integration_purpose: "Landing — the old accuracy, the new over-application"
+    ch03:
+      title: "The Pattern That Looks Like Awareness"
+      hook_purpose: "Pattern — the social monitoring loop disguised as attentiveness"
+      scene_purpose: "Pattern scene — the hypervigilance in ordinary rooms"
+      integration_purpose: "Landing — the monitoring creates the performance it fears"
+    ch04:
+      title: "What The Body Does When Eyes Might Be On You"
+      hook_purpose: "Mechanism — visibility shame, the body response to social exposure"
+      scene_purpose: "Mechanism scene — the physical response to being seen"
+      integration_purpose: "Landing — the body prepares for threat that isn't there"
+    ch05:
+      title: "What Avoiding Rooms Actually Costs"
+      hook_purpose: "Cost — connection missed, voice left out"
+      scene_purpose: "Cost scene — the room not entered"
+      integration_purpose: "Landing — the cost of avoidance compounds quietly"
+    ch06:
+      title: "Entering Before The Alarm Clears"
+      hook_purpose: "Turning point — entering with the fear still present"
+      scene_purpose: "Turning point scene — the room entered before readiness"
+      integration_purpose: "Landing — entry is not the same as performance"
+    ch07:
+      title: "Small Presences"
+      hook_purpose: "Practice — low-stakes exposure, brief visible moments"
+      scene_purpose: "Practice scene — the small deliberate social step"
+      integration_purpose: "Landing — presence changes what the body predicts next time"
+    ch08:
+      title: "When The Social Alarm Peaks"
+      hook_purpose: "Difficulty — the high-visibility moment"
+      scene_purpose: "Difficulty scene — the most watched moment"
+      integration_purpose: "Landing — surviving the peak updates the threat model"
+    ch09:
+      title: "When Rooms Start To Feel Possible"
+      hook_purpose: "Integration — social nervous system recalibrating"
+      scene_purpose: "Integration scene — the room that felt different"
+      integration_purpose: "Landing — possibility is a shift, not a switch"
+    ch10:
+      title: "When The Alarm Returns At A New Door"
+      hook_purpose: "Relapse — the familiar exposure fear at a higher stake"
+      scene_purpose: "Relapse scene — the new room that triggers the old response"
+      integration_purpose: "Landing — the new threshold is where the next practice is"
+    ch11:
+      title: "Being In Rooms Without A Performance"
+      hook_purpose: "Identity — from person-who-avoids to person-who-enters"
+      scene_purpose: "Identity scene — operating in rooms without managing impression"
+      integration_purpose: "Landing — presence without performance is the new standard"
+    ch12:
+      title: "What The Room Gives Back"
+      hook_purpose: "Forward — the connection available after exposure practice"
+      scene_purpose: "Forward scene — the exchange that only happens in rooms you enter"
+      integration_purpose: "Landing — this is what the alarm was blocking"
+
+sleep_anxiety:
+  display_name: "Sleep Anxiety"
+  chapters:
+    ch01:
+      title: "The Bed That Became A Problem To Solve"
+      hook_purpose: "Recognition — sleep as threat rather than rest"
+      scene_digital_purpose: "Digital pre-sleep — the screen that doesn't slow"
+      scene_relational_purpose: "Relational night — the partner who sleeps while you don't"
+      scene_social_purpose: "Social tired — the daylight cost of the night before"
+      reflection_01_purpose: "Pattern naming — the effort that makes sleep harder"
+      doctrine_purpose: "Teacher doctrine — trying to sleep is not sleeping"
+      reflection_02_purpose: "Cost preview — what sleep effort compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to monitor sleep"
+      integration_01_purpose: "Landing — the alarm around sleep is the problem not the solution"
+      integration_02_purpose: "Carry line — what you stop tracking first"
+    ch02:
+      title: "When Monitoring Sleep Made Sense"
+      hook_purpose: "Origin — when sleep tracking served a real purpose"
+      scene_purpose: "Origin scene — the moment sleep became something to manage"
+      integration_purpose: "Landing — the old monitoring, the new interference"
+    ch03:
+      title: "The Pattern That Looks Like Good Sleep Hygiene"
+      hook_purpose: "Pattern — the sleep effort loop disguised as self-care"
+      scene_purpose: "Pattern scene — the routine that signals alertness not rest"
+      integration_purpose: "Landing — effort activates the system sleep needs quiet"
+    ch04:
+      title: "What The Body Does When Sleep Becomes A Task"
+      hook_purpose: "Mechanism — the alarm/arousal system, catastrophic sleep chains"
+      scene_purpose: "Mechanism scene — the body preparing for problem-solving at bedtime"
+      integration_purpose: "Landing — the preparation prevents what it's preparing for"
+    ch05:
+      title: "What Poor Sleep Actually Costs"
+      hook_purpose: "Cost — the daytime toll, the life run on low"
+      scene_purpose: "Cost scene — the day shaped by the night before"
+      integration_purpose: "Landing — the cost is real and also does not need more attention"
+    ch06:
+      title: "Letting The Night Be The Night"
+      hook_purpose: "Turning point — reducing effort as the intervention"
+      scene_purpose: "Turning point scene — the night approached differently"
+      integration_purpose: "Landing — less effort is the counterintuitive practice"
+    ch07:
+      title: "Small Disconnections"
+      hook_purpose: "Practice — graduated winding down, passive not active"
+      scene_purpose: "Practice scene — the small deliberate step away from alertness"
+      integration_purpose: "Landing — wind-down is not a task list"
+    ch08:
+      title: "When The Night Is Worst"
+      hook_purpose: "Difficulty — the 3am spiral, the sleepless stretch"
+      scene_purpose: "Difficulty scene — the peak of the sleepless night"
+      integration_purpose: "Landing — the worst night is not the permanent pattern"
+    ch09:
+      title: "When The Night Starts To Quiet"
+      hook_purpose: "Integration — sleep system recalibrating through less effort"
+      scene_purpose: "Integration scene — the night that was different"
+      integration_purpose: "Landing — the quiet is the result of stopping the effort"
+    ch10:
+      title: "When The Dread Returns"
+      hook_purpose: "Relapse — the familiar pre-bed anxiety returns"
+      scene_purpose: "Relapse scene — the bad run returns after a better stretch"
+      integration_purpose: "Landing — the return is information not reversal"
+    ch11:
+      title: "Sleeping Like Someone Who Doesn't Think About It"
+      hook_purpose: "Identity — from monitored sleeper to person who sleeps"
+      scene_purpose: "Identity scene — approaching night without the performance"
+      integration_purpose: "Landing — sleep is a background process not a foreground task"
+    ch12:
+      title: "What The Morning Feels Like After"
+      hook_purpose: "Forward — the day available from a quieter relationship with sleep"
+      scene_purpose: "Forward scene — morning from a place of less effort"
+      integration_purpose: "Landing — this is what the monitoring was trying to protect"
+
+financial_anxiety:
+  display_name: "Financial Anxiety"
+  chapters:
+    ch01:
+      title: "The Number That Won't Leave You Alone"
+      hook_purpose: "Recognition — money as constant background noise"
+      scene_digital_purpose: "Digital money — the banking app check at midnight"
+      scene_relational_purpose: "Relational money — the expense conversation avoided"
+      scene_social_purpose: "Social money — the event that costs what you don't have"
+      reflection_01_purpose: "Pattern naming — the amount and the anxiety uncoupled"
+      doctrine_purpose: "Teacher doctrine — the anxiety is not calibrated to the account"
+      reflection_02_purpose: "Cost preview — what money noise compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to monitor"
+      integration_01_purpose: "Landing — the number and the noise are separate problems"
+      integration_02_purpose: "Carry line — what you stop checking first"
+    ch02:
+      title: "When Watching The Numbers Was Survival"
+      hook_purpose: "Origin — when financial vigilance was accurate and necessary"
+      scene_purpose: "Origin scene — the moment money became something to fear"
+      integration_purpose: "Landing — the old accuracy, the new over-application"
+    ch03:
+      title: "The Pattern Running Behind Every Purchase"
+      hook_purpose: "Pattern — the money catastrophe loop"
+      scene_purpose: "Pattern scene — the small purchase that triggers the big scenario"
+      integration_purpose: "Landing — the loop runs regardless of the actual number"
+    ch04:
+      title: "What Financial Alarm Does To The Body"
+      hook_purpose: "Mechanism — overwhelm, catastrophic chains, money shame"
+      scene_purpose: "Mechanism scene — the physical response to money triggers"
+      integration_purpose: "Landing — the body responds to money threat like physical threat"
+    ch05:
+      title: "What Living On Financial Alert Actually Costs"
+      hook_purpose: "Cost — the decisions made from panic not planning"
+      scene_purpose: "Cost scene — the choice shaped by anxiety not numbers"
+      integration_purpose: "Landing — the anxiety degrades the thinking it's trying to protect"
+    ch06:
+      title: "One Number At A Time"
+      hook_purpose: "Turning point — specificity as antidote to fog"
+      scene_purpose: "Turning point scene — the moment one number replaced the whole picture"
+      integration_purpose: "Landing — shapes are smaller than fog"
+    ch07:
+      title: "Small Financial Moves"
+      hook_purpose: "Practice — one concrete action, not the whole picture"
+      scene_purpose: "Practice scene — the small specific financial step"
+      integration_purpose: "Landing — action on one number quiets the noise about all of them"
+    ch08:
+      title: "When The Financial Fear Spikes"
+      hook_purpose: "Difficulty — the unexpected expense, the fear peak"
+      scene_purpose: "Difficulty scene — the financial hit that triggers the worst case"
+      integration_purpose: "Landing — the spike is the alarm doing its job wrong"
+    ch09:
+      title: "When The Numbers Feel Manageable"
+      hook_purpose: "Integration — anxiety decoupled from the account balance"
+      scene_purpose: "Integration scene — the moment the numbers felt separate from the noise"
+      integration_purpose: "Landing — manageable is not solved, it's uncoupled"
+    ch10:
+      title: "When The Fear Returns"
+      hook_purpose: "Relapse — the familiar money noise returns"
+      scene_purpose: "Relapse scene — the number that triggers the old loop"
+      integration_purpose: "Landing — the return is information about what to practice"
+    ch11:
+      title: "Making Decisions From The Numbers Not The Noise"
+      hook_purpose: "Identity — from anxiety-driven spender to number-driven decider"
+      scene_purpose: "Identity scene — a financial decision made from data"
+      integration_purpose: "Landing — the decision made from numbers is different from one made from fear"
+    ch12:
+      title: "What Opens When The Noise Quiets"
+      hook_purpose: "Forward — financial thinking from a less alarmed place"
+      scene_purpose: "Forward scene — the plan made without the background noise"
+      integration_purpose: "Landing — this is what financial thinking is supposed to feel like"
+
+financial_stress:
+  display_name: "Financial Stress"
+  chapters:
+    ch01:
+      title: "The Math That Won't Add Up"
+      hook_purpose: "Recognition — the real pressure of numbers that don't work"
+      scene_digital_purpose: "Digital pressure — the account screen at the end of the month"
+      scene_relational_purpose: "Relational pressure — the money conversation that can't happen"
+      scene_social_purpose: "Social pressure — the gap between what's available and what's expected"
+      reflection_01_purpose: "Pattern naming — stress as fog that worsens the problem"
+      doctrine_purpose: "Teacher doctrine — the tightness is real, the fog is added"
+      reflection_02_purpose: "Cost preview — what money fog compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to avoid the numbers"
+      integration_01_purpose: "Landing — the pile has a shape even when it feels shapeless"
+      integration_02_purpose: "Carry line — what you stop avoiding first"
+    ch02:
+      title: "When Money Was Always Tight"
+      hook_purpose: "Origin — when financial stress was the baseline"
+      scene_purpose: "Origin scene — the household where money shaped everything"
+      integration_purpose: "Landing — the old scarcity, the current cost"
+    ch03:
+      title: "The Pattern That Looks Like Coping"
+      hook_purpose: "Pattern — avoidance of numbers disguised as stress management"
+      scene_purpose: "Pattern scene — the bill unopened, the account unchecked"
+      integration_purpose: "Landing — avoidance grows the pile it tries to escape"
+    ch04:
+      title: "What Chronic Money Pressure Does To The System"
+      hook_purpose: "Mechanism — overwhelm, saturation, the constant low-grade weight"
+      scene_purpose: "Mechanism scene — the body carrying the financial pressure"
+      integration_purpose: "Landing — the body is holding what the mind tries to avoid"
+    ch05:
+      title: "What The Fog Actually Costs"
+      hook_purpose: "Cost — decisions made from fog not clarity"
+      scene_purpose: "Cost scene — the financial choice made worse by the stress"
+      integration_purpose: "Landing — clarity is free once the fog lifts"
+    ch06:
+      title: "One Piece Of The Pile"
+      hook_purpose: "Turning point — one number, not the whole problem"
+      scene_purpose: "Turning point scene — the single number examined"
+      integration_purpose: "Landing — one piece held is smaller than the pile imagined"
+    ch07:
+      title: "Small Financial Honesty"
+      hook_purpose: "Practice — looking at one number without the whole story"
+      scene_purpose: "Practice scene — the small financial look that doesn't spiral"
+      integration_purpose: "Landing — looking is the first move not the whole solution"
+    ch08:
+      title: "When The Pressure Is Heaviest"
+      hook_purpose: "Difficulty — the peak financial stress moment"
+      scene_purpose: "Difficulty scene — the actual crisis or near-crisis"
+      integration_purpose: "Landing — the heaviest moment has a floor even when invisible"
+    ch09:
+      title: "When The Numbers Feel Smaller"
+      hook_purpose: "Integration — clarity replacing fog"
+      scene_purpose: "Integration scene — the financial picture that felt different"
+      integration_purpose: "Landing — smaller is not solved, it's visible"
+    ch10:
+      title: "When The Pressure Returns"
+      hook_purpose: "Relapse — the familiar financial fog returns"
+      scene_purpose: "Relapse scene — the new expense or setback that returns the weight"
+      integration_purpose: "Landing — the return is information about what to practice"
+    ch11:
+      title: "Making Decisions From What's Real"
+      hook_purpose: "Identity — from avoider to someone who looks at the numbers"
+      scene_purpose: "Identity scene — a financial decision made from the actual numbers"
+      integration_purpose: "Landing — looking is a different relationship than avoiding"
+    ch12:
+      title: "What Life Looks Like From The Other Side Of The Pile"
+      hook_purpose: "Forward — financial life from clarity not fog"
+      scene_purpose: "Forward scene — the plan made when the pile has a shape"
+      integration_purpose: "Landing — the shape was always there under the fog"
+
+somatic_healing:
+  display_name: "Somatic Healing"
+  chapters:
+    ch01:
+      title: "The Body That's Been Trying To Tell You Something"
+      hook_purpose: "Recognition — body signals that predate language"
+      scene_digital_purpose: "Digital body — the tension that arrives with the notification"
+      scene_relational_purpose: "Relational body — the tightening before a difficult conversation"
+      scene_social_purpose: "Social body — the physical shift in certain rooms"
+      reflection_01_purpose: "Pattern naming — the body speaking before the mind catches up"
+      doctrine_purpose: "Teacher doctrine — the body is not wrong, it is early"
+      reflection_02_purpose: "Cost preview — what ignoring body signals compounds"
+      reflection_03_purpose: "Recognition deepening — the quiet agreement to override sensation"
+      integration_01_purpose: "Landing — the signal is accurate even when the content is unclear"
+      integration_02_purpose: "Carry line — what you start noticing first"
+    ch02:
+      title: "When Overriding The Body Made Sense"
+      hook_purpose: "Origin — when body signals were inconvenient or dangerous to follow"
+      scene_purpose: "Origin scene — the moment body signals got suppressed"
+      integration_purpose: "Landing — the old override, the current cost"
+    ch03:
+      title: "The Pattern That Looks Like Pushing Through"
+      hook_purpose: "Pattern — the body-suppression loop disguised as resilience"
+      scene_purpose: "Pattern scene — the override running as normal"
+      integration_purpose: "Landing — the push-through stores what it bypasses"
+    ch04:
+      title: "What Stored Tension Actually Does"
+      hook_purpose: "Mechanism — body storage, the watcher observing sensation"
+      scene_purpose: "Mechanism scene — the held pattern in daily movement"
+      integration_purpose: "Landing — the body holds what wasn't processed"
+    ch05:
+      title: "What Disconnection From The Body Actually Costs"
+      hook_purpose: "Cost — the information lost, the capacity diminished"
+      scene_purpose: "Cost scene — the decision made without body input"
+      integration_purpose: "Landing — the body is an intelligence being excluded"
+    ch06:
+      title: "Staying With The Sensation"
+      hook_purpose: "Turning point — observation without suppression"
+      scene_purpose: "Turning point scene — the sensation stayed with"
+      integration_purpose: "Landing — staying is the practice not the achievement"
+    ch07:
+      title: "Small Body Practices"
+      hook_purpose: "Practice — micro-attunement, graduated body contact"
+      scene_purpose: "Practice scene — the small deliberate body check"
+      integration_purpose: "Landing — small is the right size for a new skill"
+    ch08:
+      title: "When The Body Gets Loud"
+      hook_purpose: "Difficulty — the overwhelming sensation, the peak body response"
+      scene_purpose: "Difficulty scene — the strongest body signal"
+      integration_purpose: "Landing — loud sensation is not dangerous sensation"
+    ch09:
+      title: "When The Body Starts To Trust"
+      hook_purpose: "Integration — body-mind connection strengthening"
+      scene_purpose: "Integration scene — the moment the body felt safe enough to signal clearly"
+      integration_purpose: "Landing — trust is built through repeated stays"
+    ch10:
+      title: "When The Override Returns"
+      hook_purpose: "Relapse — the familiar suppression reflex returns"
+      scene_purpose: "Relapse scene — the moment the push-through wins again"
+      integration_purpose: "Landing — noticing the override is already different"
+    ch11:
+      title: "Living With A Body That Gets A Vote"
+      hook_purpose: "Identity — from override to partnership with body"
+      scene_purpose: "Identity scene — a decision that included body input"
+      integration_purpose: "Landing — the body is a collaborator not a problem"
+    ch12:
+      title: "What The Body Knows That You Needed To Hear"
+      hook_purpose: "Forward — life informed by body intelligence"
+      scene_purpose: "Forward scene — the thing known through the body not around it"
+      integration_purpose: "Landing — this is the intelligence that was always available"
+
+grief:
+  display_name: "Grief"
+  chapters:
+    ch01:
+      title: "The Sentence That Quietly Runs Your Life"
+      hook_purpose: "Recognition — the sentence reveal"
+      scene_digital_purpose: "Digital avoidance — the post"
+      scene_relational_purpose: "Relational avoidance — the message"
+      scene_social_purpose: "Social avoidance — the event"
+      reflection_01_purpose: "Pattern naming — brain training"
+      doctrine_purpose: "Teacher doctrine statement — core worldview"
+      reflection_02_purpose: "Pattern deepening — cost preview"
+      reflection_03_purpose: "Recognition deepening"
+      integration_01_purpose: "Landing — the invitation"
+      integration_02_purpose: "Carry line"
+    ch02:
+      title: "When It Made Sense"
+      hook_purpose: "Origin — the protection narrative"
+      scene_purpose: "Origin scene"
+      integration_purpose: "Landing"
+    ch03:
+      title: "The Pattern You Didn't Know Was Running You"
+      hook_purpose: "Pattern reveal"
+      scene_purpose: "Pattern scene"
+      integration_purpose: "Landing"
+    ch04:
+      title: "What The Feeling Actually Does"
+      hook_purpose: "Mechanism proof"
+      scene_purpose: "Mechanism scene"
+      integration_purpose: "Landing"
+    ch05:
+      title: "What Waiting Actually Costs You"
+      hook_purpose: "Cost accounting"
+      scene_purpose: "Cost scene"
+      integration_purpose: "Landing"
+    ch06:
+      title: "Ending the War"
+      hook_purpose: "Turning point"
+      scene_purpose: "Turning point scene"
+      integration_purpose: "Landing"
+    ch07:
+      title: "Small Moves"
+      hook_purpose: "First practice"
+      scene_purpose: "Practice scene"
+      integration_purpose: "Landing"
+    ch08:
+      title: "When It Gets Loud"
+      hook_purpose: "Difficulty peak"
+      scene_purpose: "Difficulty scene"
+      integration_purpose: "Landing"
+    ch09:
+      title: "When It Becomes Automatic"
+      hook_purpose: "Integration"
+      scene_purpose: "Integration scene"
+      integration_purpose: "Landing"
+    ch10:
+      title: "When You Slip"
+      hook_purpose: "Relapse handling"
+      scene_purpose: "Relapse scene"
+      integration_purpose: "Landing"
+    ch11:
+      title: "Who You're Becoming"
+      hook_purpose: "Identity shift"
+      scene_purpose: "Identity scene"
+      integration_purpose: "Landing"
+    ch12:
+      title: "What Comes Next"
+      hook_purpose: "Forward look"
+      scene_purpose: "Forward scene"
+      integration_purpose: "Landing"

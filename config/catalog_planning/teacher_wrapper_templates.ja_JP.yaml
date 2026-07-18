@@ -1,0 +1,112 @@
+# Teacher Wrapper Templates (ja_JP)
+# スロット変数: {TEACHER_NAME}, {TRADITION}, {TRADITION_SHORT},
+#               {PRACTICE_NAME}, {TEACHING_LINEAGE}
+# 権威: Big View Phase 2
+# 使用箇所: コンテンツアトムのラッパー注入、description_templates パイプライン
+
+locale: ja_JP
+
+# ── 指名モード ─────────────────────────────────────────────────────────────
+# 教師名を明示的に使用する。ブランド戦略が指名帰属を許す場合に使用
+# (プラットフォームごと・週ごと・ブランドごとに指名教師書籍は3冊以下)。
+
+named:
+  intro_wrapper:
+    pattern: "{TEACHER_NAME} によれば、{TEACHING_LINEAGE} はこう教えてくれる……"
+    variants:
+      - "{TEACHER_NAME} の教えでは、その道はこうして始まる……"
+      - "{TEACHER_NAME} の {TEACHING_LINEAGE} のアプローチに拠ると……"
+      - "{TEACHER_NAME} はこれを {TRADITION_SHORT} の土台として語る……"
+    slot_requirements: [TEACHER_NAME, TEACHING_LINEAGE]
+
+  exercise_wrapper:
+    pattern: "{TEACHER_NAME} の {PRACTICE_NAME}"
+    variants:
+      - "{TEACHER_NAME} から伝わる一つの実践:{PRACTICE_NAME}"
+      - "{PRACTICE_NAME}({TEACHER_NAME} による指導)"
+    slot_requirements: [TEACHER_NAME, PRACTICE_NAME]
+
+  conclusion_wrapper:
+    pattern: "{TEACHER_NAME} が繰り返し示してくれるように、{TRADITION_SHORT} は到達点ではない……"
+    variants:
+      - "{TEACHER_NAME} の {TEACHING_LINEAGE} が指し示すのは、ひとつの真実だ……"
+      - "{TEACHER_NAME} の言い方を借りれば、{TRADITION_SHORT} の伝統はこう誘いかける……"
+    slot_requirements: [TEACHER_NAME, TRADITION_SHORT, TEACHING_LINEAGE]
+
+# ── 一般化モード ────────────────────────────────────────────────────────────
+# 教師名は使用しない。教えと伝統を用いる。
+# カタログ出力の65〜70%で推奨。
+#
+# アンチパターン(一般化モードでは決して使わない):
+#   ✗ 「X 師いわく……」
+#   ✗ 「ある先生と出会って……」
+#   ✗ 「[特定の個人] によれば……」
+#
+# 必須の言い換え:
+#   ✓ 「[伝統] によれば……」
+#   ✓ 「[伝統] の仕事に出会ったのは……」
+#   ✓ 「[伝統] の伝統はこう説く……」
+
+generalized:
+  intro_wrapper:
+    pattern: "{TRADITION} によれば、その道はこうして始まる……"
+    variants:
+      - "{TRADITION} の伝統はこう教えている……"
+      - "{TRADITION_SHORT} の系譜の中で、実践者たちは古くからこう知ってきた……"
+      - "{TRADITION} の仕事に出会ったのは、ちょうどこんな時期だった……"
+      - "{TRADITION} に根ざしたこのアプローチは、こう説く……"
+    slot_requirements: [TRADITION]
+
+  exercise_wrapper:
+    pattern: "{TRADITION} の伝統から伝わる一つの実践"
+    variants:
+      - "{TRADITION_SHORT} の実践から:{PRACTICE_NAME}"
+      - "{PRACTICE_NAME} への {TRADITION} 的アプローチ"
+      - "{TRADITION_SHORT} のひとつの技法:{PRACTICE_NAME}"
+    slot_requirements: [TRADITION]
+
+  conclusion_wrapper:
+    pattern: "{TRADITION} の伝統は、本質へ還ることを私たちに促している……"
+    variants:
+      - "{TRADITION_SHORT} の核心にあるのは、形を変えて繰り返し差し出される、ひとつの素朴な誘いだ……"
+      - "{TRADITION} は完璧さを求めない — 誠実に現前していることだけを求める……"
+      - "{TRADITION} の系譜が指し示し続けているのは、こういうことだ……"
+    slot_requirements: [TRADITION, TRADITION_SHORT]
+
+# ── 混合モード ──────────────────────────────────────────────────────────────
+# 特定の教師も、特定の伝統も指定しない。複数の源泉から引く。
+# カタログの10〜15%程度 — 普遍的/伝統横断の書籍に使用。
+
+composite:
+  intro_wrapper:
+    pattern: "伝統と系譜を越えて、繰り返し現れるひとつの洞察がある……"
+    variants:
+      - "東洋の実践であれ、西洋の実践であれ、教えそのものは同じだ……"
+      - "世界各地の観想的伝統の中から、この原則が立ち上がってくる……"
+      - "研究も、古の実践も、生きられた経験も、ひとつの方向を指している……"
+    slot_requirements: []
+
+  exercise_wrapper:
+    pattern: "伝統を横断するひとつの実践"
+    variants:
+      - "多くの伝統に共通して見られる実践"
+      - "観想的研究とソマティック研究から導かれたひとつのエクササイズ"
+    slot_requirements: []
+
+  conclusion_wrapper:
+    pattern: "エビデンスと諸伝統が重なり合って指し示すのは、こういうことだ……"
+    variants:
+      - "文化と時代を越えて、差し出される誘いは同じだ……"
+      - "古いものであれ新しいものであれ、道は結局ここへ戻ってくる……"
+    slot_requirements: []
+
+# ── スロットレジストリ ──────────────────────────────────────────────────────
+# teacher_id → 指名モード用のスロットデフォルト値の対応。
+# 生成時に brand_teacher_matrix.yaml から取り込まれる。
+# 書籍ごとの上書きはカタログ行またはアトム CANONICAL.txt で行う。
+
+slot_defaults:
+  TRADITION: "観想的"
+  TRADITION_SHORT: "観想的"
+  TEACHING_LINEAGE: "マインドフルネスとソマティック"
+  PRACTICE_NAME: "この実践"

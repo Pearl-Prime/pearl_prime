@@ -1,0 +1,77 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__entrepreneurs__depression
+brand: awakening_press
+teacher: adi_da
+persona: entrepreneurs
+topic: depression
+byline_author: tara_petrova
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__entrepreneurs__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__entrepreneurs__depression__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__depression__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: awakening_press__adi_da__entrepreneurs__depression__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__depression__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the founder who is quietly numb behind a thriving company
+  — a way of meeting depression not as a problem to be fixed or optimized away, but
+  as a fog passing across a sky that was never the fog. You will not be handed a turnaround
+  plan for your inner life. You will be shown the one thing in you that was never
+  depressed, and was never the company either.
+bestseller_hook_family: ''
+emotional_engine: depression_recognition
+comp_series:
+- The Untethered Soul (Michael A. Singer) — for the same move of stepping back from
+  the self that suffers to the awareness watching it, in plain non-dogmatic language
+- When Things Fall Apart (Pema Chödrön) — for meeting the dark and the groundlessness
+  directly rather than escaping it, with tenderness instead of fixing
+- Lost Connections (Johann Hari) — for reframing depression as a meaningful signal
+  in a high-pressure achievement life rather than a personal defect to medicate away
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-52
+  where_they_are: It is 6:40am and the metrics are green and the team is excited and
+    you are sitting in the parked car in the garage, hand still on the wheel, unable
+    to make yourself walk in — because some part of you went dark months ago and you
+    have been running the company on autopilot, smiling on the calls, dreading the
+    silence after.
+  what_they_need: To hear, without being shamed for it, that the flatness is not failure
+    and not weakness — and that the self who built the company is not the self they
+    actually are. They need permission to stop performing aliveness long enough to
+    notice that something underneath is still awake.
+  what_they_avoid: Hustle-culture pep talks, 'high-performer burnout' rebrands, gratitude-journal
+    toxic positivity, anything that treats their inner life as a system to optimize,
+    and any spiritual book that asks them to 'raise their vibration' or pretend the
+    darkness isn't real.
+series_voice_markers:
+  register: spacious, awakening, quietly radical; reverent without dogma; intimate,
+    like someone sitting beside you in the dark who isn't afraid of it; never clinical,
+    never preachy, never a turnaround memo
+  sentence_rhythm: long, settling sentences that open room to breathe, punctuated
+    by short bare lines that land like a hand on the shoulder; the pacing of someone
+    slowing you down on purpose
+  metaphor_family: weather moving across an unmoved sky, waking from a dream you mistook
+    for your life, the light that was in the room before you switched anything on,
+    loosening a grip you forgot you were holding, coming home to what was never actually
+    lost
+_needs_authoring: false

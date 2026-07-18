@@ -1,0 +1,740 @@
+# V1.2 themes — Cluster D (Relational/Connection/Family) × zh_CN
+# 25 series = 5 brands × 5 series — Simplified Chinese (mainland-natural)
+# Brand mapping (from PR #1065/#1070):
+#   relational_calm_iyashikei
+#   confidence_core_romance (← inner_security)
+#   bright_presence_tw_seinen
+#   heart_balance_shojo (← found_family_shojo)
+#   resilient_parent_social (← communal_warmth)
+# Constraint: artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md
+schema_version: "1.2"
+locale: zh_CN
+cluster: D
+cluster_name: "Relational/Connection/Family"
+total_series_target: 25
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — relational_calm_iyashikei (核心 · josei · 社交焦虑/边界)
+  # 5 series: healing×2, supernatural_everyday×1, slice_of_life×1, mystery_cozy×1
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: relational_calm_iyashikei__zh_CN__bu_shang_suo_de_chu_zu_wu
+    brand_id: relational_calm_iyashikei
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: door
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "二十六岁的杭州姑娘把出租屋的门每周一到周五晚上七点到十一点不上锁,让她的小群聊朋友们随时可以来落脚。慢慢她发现这间老破小的房子自己在记录:谁在沙发上睡过,谁可以走得更近,谁这次不行。她学会读房子的语气,也学会读自己神经系统的语气。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "不上锁的出租屋"
+    series_logline: "苏柠把门每天留四个小时不上锁,给她在杭州的几个朋友;房子开始替她数它疼的那几个人。"
+    series_description: "苏柠二十六岁,在杭州一家社区大学做学生事务老师。二十一岁那年她和老家彻底安静下来后,她跟大学里凑出来的那几个朋友说过一句话——周一到周五晚上七点到十一点,门不上锁,谁累了都可以进来。三年下来,房子已经认得这几个常客了:暖气片在小陶过敏的那几天会自己咔嗒响一声;厨房灯在玛茜下了夜班回来的时候会自己变柔;沙发那一面靠垫,每次小俊她爸来杭州的那一夜会多出一个。苏柠不去较劲。她学会读这间房子的语法,跟她自己神经系统的语法是同一种——谁能靠近,什么距离是安全的,门口允许的是哪一种身体。每一卷有一个新的人来敲门:多年不联系的表姐、前任的新男友、奶奶过世后再没见过的亲堂弟。房子慢慢给出答复。罗小黑战记的温度,葬送的芙莉莲的耐性,一个读过所有神经系统书的不上锁的门。"
+    opening_5_volume_arc:
+      vol_1: "小陶的过敏,玛茜的夜班。第一周房子开始自己运转,苏柠给它取了个名字——叫『屋子』。"
+      vol_2: "小俊她爸来杭州。沙发多了一个靠垫。苏柠学到,屋子愿意给她爱的人留出一块替他们悲伤的地方。"
+      vol_3: "第一个陌生人——朋友的朋友,刚分手。门多走了九十秒才开。苏柠学到『安全』是屋子定的,不是她定的。"
+      vol_4: "前任带新男友来敲门。门没开。苏柠在门里地上坐了一会儿,给前任发了一条很温和的微信。"
+      vol_5: "多年没联系的亲堂妹来敲门。暖气片没有响。苏柠要决定:让屋子认识一个新的人,还是,屋子是对的。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "深夜食堂", "镖人"]
+    reader_promise: "你的那几个朋友有地方落脚,屋子也站在你这一边。"
+    marketing_angle: "把『罗小黑战记』搬进一间不上锁的杭州老破小——屋子会替你数它疼的那几个人。"
+    genre_family: healing
+    emotional_engine: chosen_family + boundaried_belonging
+    audience: "24 至 29 岁、一线/新一线城市独居、有朋友群聊作为情感依靠的 Gen Z"
+
+  - series_id: relational_calm_iyashikei__zh_CN__zhou_ri_qi_dian_de_xiao_lv_ben
+    brand_id: relational_calm_iyashikei
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "二十五岁的成都设计师跟五个朋友约定每个周日晚上七点在自己出租屋的小饭桌吃同样轮换的菜单。桌上有一只奶奶给的小绿本,每周聚会前,本子上会出现一句话——是今晚某个朋友最需要听到的那句。字迹谁都不认识。他们学会不张扬地读它。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "周日七点的小绿本"
+    series_logline: "五个朋友。一张小饭桌。一只奶奶留下的小绿本,每周替他们中的一个写好一句话。"
+    series_description: "乐之二十五岁,在成都一家品牌设计工作室做初级设计师,是他们这个朋友群里出租屋最大的那一个,所以周日七点定在他这里。他们五个——娜娜、小贝、迪戈、米拉,加上乐之——吃一份轮换的家常菜,开一瓶最便宜的还能喝的酒,在桌上一只小绿本上轮流写几行字。这只本子是乐之的外婆走之前给他的。本子放在桌上,谁都可以翻。怪的是,每个周日吃饭之前,本子里已经写好了一句话——是当晚他们中的某一个最需要听到的那句,字迹谁都不像。他们学会了不张扬,学会了在合适的时候让一个人翻到那一页。一卷一个人轮到。长线是:某一个周日,有一个新的人被带到这张桌上,本子也替这个人写了一句。一人之下的踏实底色,深夜食堂的桌子,葬送的芙莉莲的耐性。"
+    opening_5_volume_arc:
+      vol_1: "娜娜本来要接的那个升职。本子里写:『周二还可以改主意』。她周三改的。"
+      vol_2: "小贝她妈生病了。本子里写:『告诉迪戈』。迪戈他爸是同一个病。"
+      vol_3: "迪戈带新男朋友来。本子替这位男朋友也写了一句。乐之到第四卷才给他看。"
+      vol_4: "男朋友看到自己那一句,决定留在这个群里。本子从此替六个人写。"
+      vol_5: "米拉要去深圳。本子替她写最后一句。椅子留着。本子继续替她写。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "解忧杂货店 (中文版)", "葬送的芙莉莲"]
+    reader_promise: "你们每周的那顿饭,有一只本子记得每个人来这里要找的那一句。"
+    marketing_angle: "把『深夜食堂』和『解忧杂货店』合成一只奶奶留下的小绿本——周日七点替你们写好那一句。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + ritual_as_belonging
+    audience: "24 至 28 岁、一线/新一线城市头几年工作、有一个稳定朋友群的 Gen Z"
+
+  - series_id: relational_calm_iyashikei__zh_CN__tu_shu_guan_de_shi_wu_zhao_ling_chu
+    brand_id: relational_calm_iyashikei
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十二岁、社恐的大三学生在市图书馆失物招领处兼职。每一件失物背后,其实是一段被她主人也弄丢了的友谊。她把东西还回去,顺便把那段友谊还回去——慢一些,笨一些,从不准时。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "图书馆的失物招领处"
+    series_logline: "苏屿在图书馆守失物招领处;那些被遗忘的东西,属于一段段也被遗忘的友情。"
+    series_description: "苏屿二十二岁,武汉一所省属大学大三在读,每周二十小时在市图书馆失物招领处兼职——一个开着白炽灯、紧贴着借还书台后面的小屋。她社恐到那种课本式的程度:『请出示一下证件好吗』这句话,她在心里练过两千遍。每一卷她把一样东西还给一位失主,而每一样东西都是一段被这个人放下的友情留下的尾巴:高中最好的朋友送的歌单 U 盘、合租室友的一盆吊兰、夏令营换的那只编织手链。苏屿不讲大道理。她把东西还给对方,看对方决定要不要给那位朋友发微信。有的发了。有的没发。长线是:她自己十六岁时和最好的朋友画过的一张画,某一天也出现在失物招领处。一卷一个客人。社恐的、安静的、慢慢回温的。"
+    opening_5_volume_arc:
+      vol_1: "U 盘那张歌单。失主已经三十岁了,她没打电话,只是在地下车库里听完了。"
+      vol_2: "室友的那盆吊兰。两位室友三年没说过话。吊兰快死了。苏屿摸出了正确的浇水周期。"
+      vol_3: "夏令营手链。那位朋友已经过世了。失主还不知道。苏屿用够久的沉默替她讲了出来。"
+      vol_4: "苏屿自己那张高中画出现在失物招领处。她没翻开背后的失物登记联。"
+      vol_5: "她翻开登记联。给那位前最好的朋友发了一条微信。说『你还在吗』。本卷结束在那条对话框里。图书馆闭馆灯。"
+    comp_titles: ["一人之下", "罗小黑战记", "解忧杂货店 (中文版)", "深夜食堂", "葬送的芙莉莲"]
+    reader_promise: "那段你放下的友情,在失物招领处留了张小票。"
+    marketing_angle: "把『解忧杂货店』搬进市图书馆失物招领处,值班的是一个跟你一样社恐的大三女生。"
+    genre_family: healing
+    emotional_engine: rekindled_intimacy + competent_calm_specialist
+    audience: "20 至 24 岁、大学/刚毕业、社恐、有一段说不清楚的旧友情的 Gen Z"
+
+  - series_id: relational_calm_iyashikei__zh_CN__zhuan_zu_de_yi_nian_qi_yue
+    brand_id: relational_calm_iyashikei
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: month
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "两个陌生人在豆瓣租房小组拼了一年的转租合同,在一年里慢慢发明了三十六条没有名字的关系细则;每卷一个月,长线是合同到期那天他们要不要给这段关系起个名字。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "转租的一年期约"
+    series_logline: "两个陌生人,一份合同,十二个月小默契。到第六个月的时候,他们已经需要给它起个名字了。"
+    series_description: "苏野二十四岁,刚从一段四年的恋爱里走出来;陈愈二十六岁,刚念完研究生。两个人都需要一间能住的房子。豆瓣租房小组上那份转租合同正好——一年,北京双井,两室一厅,合用厨房。到第二个月,他们已经发明了周三晚上一起做意面的小习惯,周日晚上不打扰对方的安静时段,还有那条没说出口的规则——卫生纸归谁买。第四个月他们在同一张沙发上各自发自己的微信。第六个月两个人都没在跟谁谈恋爱,他们之间也没有在谈——他们在做三十六件像恋爱、又像友情、还没有名字的小事。每一卷一个月。一整套是十二卷。长线就是合同到期那天他们要不要给这件事起个名字。慢热的爱情线。不上肉,直到他们决定它有名字。Honey Lemon Soda 的温度,带着实打实的房租。"
+    opening_5_volume_arc:
+      vol_1: "一月。合同签下来。第一个周三的意面。陈愈不吃葱,苏野星期二才学到。"
+      vol_2: "二月。第一次吵架——这次该谁给中介发消息。两个人发明了周日安静时段。"
+      vol_3: "三月。苏野前任发微信。陈愈那个周三一个人做的意面。苏野还是回家了。"
+      vol_4: "四月。陈愈他妈来北京。问他们俩是不是在一起。两个人都没接话。他妈请他们一起吃了顿涮羊肉。"
+      vol_5: "五月。两个人合力装了一个宜家书架。架子上两人的书都有。架子上没有一个分类是写他们俩的。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "葬送的芙莉莲", "Honey Lemon Soda"]
+    reader_promise: "那段还没有名字的友情,在它有名字之前,已经攒下了它自己的细则。"
+    marketing_angle: "把『Honey Lemon Soda』搬到一份北京双井的豆瓣转租合同上,慢热到第十二个月。"
+    genre_family: romance
+    emotional_engine: slow_proximity + ritual_as_belonging
+    audience: "23 至 28 岁、北上广深第一份工作、第一次拼租的 Gen Z + 准 Mill"
+
+  - series_id: relational_calm_iyashikei__zh_CN__qi_qun_liao_li_de_xi_an
+    brand_id: relational_calm_iyashikei
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十三岁的女主在父母家收拾老物件时,翻出来一摞她初中 QQ 群里打印出来的聊天记录。她跟现在的朋友群一起重看——结果当年那几个十三岁的同学,开始在新的群聊里回话。"
+    volume_runway_target: 125
+    reading_platform_fit: webtoon_vertical
+    series_title: "群聊里的西安"
+    series_logline: "苏阮在父母家翻出来一摞初一 QQ 群打印出来的聊天记录;她现在的朋友群开始替自己的十三岁回话,而十三岁的那几个,也回了。"
+    series_description: "苏阮三十三岁,在西安做新媒体内容主理人。回老家小寨那套老房子帮父母收拾的时候,她在床底纸箱里找出一摞 A4 打印纸——初一那年她和六个同学的 QQ 群,打了整整三百多页的群聊记录,她妈当年帮她打印下来留着。苏阮拍照发给她现在那几个三十多岁的朋友群,本来只是开玩笑。结果当晚,她现在那个群里出现了一条不是她们任何人发的消息,字迹和发言习惯完全是她十三岁的那一个同学:『你们后来怎么样了』。她们一开始以为是恶作剧。第二条出现的时候,所有人都安静下来。一卷一个十三岁的同学。她们替自己的十三岁,接起那一句没回完的话——一些十三岁的同学过得很好,一些没有。慢慢苏阮明白,她现在这个群,其实早就在替她那个初一群活着。"
+    opening_5_volume_arc:
+      vol_1: "第一句话出现。班上那个画画很好的女同学,她现在在哪儿。苏阮她们试着回了一句。第二天发现回话没显示,但她们群里多了一句新的——『画我没再画了』。"
+      vol_2: "那个总是欺负苏阮的男生,他十三岁那时候过得也不好。苏阮成年的群替十三岁的苏阮回了一段长话。"
+      vol_3: "数学课代表。她考上了西交大,后来没了消息。苏阮托现在那个群里在西安的朋友查到了她家。"
+      vol_4: "苏阮自己十三岁的那一条出现在群里。她现在这个群替她回。"
+      vol_5: "最后一个同学,谁都不记得她姓什么。苏阮的群替她拼回了她的名字。打印纸最后一页是她说的最后一句。"
+    comp_titles: ["一人之下", "罗小黑战记", "解忧杂货店 (中文版)", "深夜食堂", "葬送的芙莉莲"]
+    reader_promise: "你现在的朋友群,可以替你那个十三岁的群回那一句没回完的话。"
+    marketing_angle: "把『解忧杂货店』装进一只 2008 年的 QQ 群里——十三岁的那几个,会在你三十三岁的群里回话。"
+    genre_family: mystery_cozy
+    emotional_engine: rekindled_intimacy + named_and_seen
+    audience: "30 至 38 岁、初中时代有 QQ 群记忆、现在仍在维系一个稳定朋友群的 Mill"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — confidence_core_romance (← inner_security · shojo 自我价值)
+  # 5 series: healing×1, slice_of_life×1, supernatural_everyday×1, mystery_cozy×1, fantasy_adventure×1
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: confidence_core_romance__zh_CN__chun_jie_hui_jia_de_di_qi_nian
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "二十七岁的深漂女主连续七年回老家过春节,每一年餐桌都被七大姑八大姨的『多大了』撕一遍。今年她带回去的那本旅行日记,每翻开一页,饭桌上的某一位长辈,会自己讲出来一段当年同岁的故事——年纪的话被替换成了那段故事。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "春节回家的第七年"
+    series_logline: "苏念二十七岁,深漂第七年。今年她带回老家的那本日记,会让饭桌上的姑姑舅舅们替自己讲出当年同岁那一段——『多大了』被换成了那段故事。"
+    series_description: "苏念二十七岁,在深圳一家互联网公司做产品经理,深漂第七年。她每年腊月二十八回河北沧州老家,饭桌上一定会被七大姑八大姨问『今年多大了』『有对象没』『考虑要孩子吗』。今年她揣回去的是一本她自己旅行时写的小日记,她妈带头翻。翻到二十七岁那一页的时候,姑姑突然停下来,讲了一段她自己二十七岁那年在唐山做纺织工的事——苏念从没听她讲过。一卷一位长辈。她们每个人的二十七岁,饭桌从此把『多大了』那一句换成那段故事。日记其实没字,字是她们自己说出来才有的。一人之下的家族戏台底色,深夜食堂的桌子,葬送的芙莉莲对长辈的耐性。"
+    opening_5_volume_arc:
+      vol_1: "大姑的纺织厂二十七岁。苏念第一次听她讲。"
+      vol_2: "二舅二十七岁那年开始跑长途货车,讲到他怎么决定不再跑的那一天。"
+      vol_3: "小姑二十七岁那年生病。苏念二十七岁刚做完一个大体检。两个人在厨房洗碗时,自己讲到了那个数据。"
+      vol_4: "苏念她妈二十七岁那年才生她。她妈翻到那一页,只说了一句『我那时候比你还急』。"
+      vol_5: "饭桌上最沉默的那位舅公,翻到他二十七岁那一页。他终于讲了。苏念把日记带回深圳,新的一页留给自己。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "解忧杂货店 (中文版)", "葬送的芙莉莲"]
+    reader_promise: "回家过年那一桌『多大了』,可以换成饭桌上每一个人自己那段二十七岁的故事。"
+    marketing_angle: "把『深夜食堂』搬到老家年三十的圆桌上——日记替你的长辈讲出他们当年的二十七岁。"
+    genre_family: healing
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "25 至 30 岁、北上广深漂、每年回老家过春节、被催婚催育的 Gen Z + 准 Mill"
+
+  - series_id: confidence_core_romance__zh_CN__chong_zu_jia_ting_de_zhou_mo_zhuo
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-tween
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "十三岁的女孩在妈妈再婚后,跟继父和继弟一起住进上海一套两居室。每个周末,四个人围着一张折叠桌打牌、做饭、看电影——慢慢发明一套四个人才有意义的家庭仪式。每一卷一个仪式被定下来。"
+    volume_runway_target: 125
+    reading_platform_fit: webtoon_vertical
+    series_title: "重组家庭的周末桌"
+    series_logline: "十三岁的安乐,妈妈再婚后跟着搬进上海的两居室;每个周末,折叠桌上慢慢发明四个人才认得的小仪式。"
+    series_description: "安乐十三岁,初一在读,在上海徐汇区一套九十年代两居室。妈妈半年前再婚,她和妈妈、继父、十一岁的继弟阿凡,从此是一家四口。客厅放不下一张正经的饭桌,只好放了张折叠桌。每个周末——周五晚上、周六全天、周日傍晚——他们四个人围着这张折叠桌打『跑得快』、看一部老港片、做一顿四个人都吃的饭。仪式不是大人定的,是慢慢长出来的:谁洗碗那一周谁就能选片;打牌赢家可以让另外三个人替自己做一件小事;周日傍晚那顿饭一定吃面。安乐从一开始的『他不是我爸』,到后来发现『阿凡的玩具我有时候会自己去玩』。一卷一个新仪式被记下来。罗小黑战记的孩子目光,Heartstopper 在亚洲家庭里的版本。"
+    opening_5_volume_arc:
+      vol_1: "搬进来第一个周五。安乐不肯坐折叠桌。妈妈不催她。第一个仪式由阿凡发明——打『跑得快』赢的人可以选片。"
+      vol_2: "周六做饭。继父教阿凡切土豆丝。安乐站旁边,接过了一把。"
+      vol_3: "安乐学校发烧。继父接她回家。回家路上没说话。家里折叠桌上已经摆好了她常喝的板蓝根。"
+      vol_4: "阿凡他妈来上海探望阿凡。折叠桌那个周末多了一把椅子。安乐学到——这张桌可以扩。"
+      vol_5: "安乐的生日。四个人都坐下来。安乐第一次叫继父『叔叔』,继父没追加什么。仪式之一:生日那顿饭一定吃长寿面。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "深夜食堂", "Honey Lemon Soda"]
+    reader_promise: "重组的家,也可以慢慢长出一张只有你们四个认得的折叠桌。"
+    marketing_angle: "把『Heartstopper』搬进上海徐汇的两居室——折叠桌是新家的图腾。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + ritual_as_belonging
+    audience: "11 至 15 岁、父母再婚或重组家庭的 Gen Alpha 中学生,以及她们的妈妈一代"
+
+  - series_id: confidence_core_romance__zh_CN__lao_jia_xiao_qu_de_nai_nai_men
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-tween
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "十二岁的女孩暑假回老家小区,发现小区花园里那群打牌的奶奶,每一位都有一只布兜,布兜里装着一个小孩的小烦恼——是这个小区现在某个小孩的烦恼。奶奶们替这些烦恼一件一件找解法。女主慢慢加入。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "老家小区的奶奶们"
+    series_logline: "果果十二岁,暑假回济南老家小区,发现奶奶们的布兜里替小区每一个小孩装着一件小烦恼。"
+    series_description: "果果十二岁,济南本地人,父母离婚后跟着妈妈搬到北京;暑假姥姥要她回济南老家小区住一个月。小区是 1998 年的老国企家属院,花园里那群下午两点准时来打『升级』的奶奶,姥姥是常客之一。果果第一周就发现,每个奶奶身边都挎一只手织布兜,里面装着一个一个用红线扎好的小布卷。她有一天看姥姥从布兜里掏出一卷,打开里面写着『楼下小宇——晚上一个人睡害怕』。第二天楼下小宇家的爷爷送了一个夜灯过去。果果一卷参与一个小孩的烦恼。奶奶们不是什么神秘组织,只是用了几十年合作的眼睛。一人之下的家族底色,罗小黑战记的小孩眼神,葬送的芙莉莲对长辈的尊敬。"
+    opening_5_volume_arc:
+      vol_1: "小宇怕黑。果果跟着姥姥去送夜灯。学到布兜的事。"
+      vol_2: "二楼小敏她爸常年在外地,小敏想要一只玩偶。奶奶们合织了一只。果果第一次帮忙。"
+      vol_3: "三楼小磊跟同学吵架。奶奶们派果果去陪小磊放学,什么都不说,就一起走。"
+      vol_4: "果果自己的布卷出现在姥姥的布兜里:『爸妈分开她不知道怎么说』。果果不肯打开看。"
+      vol_5: "姥姥替果果打开。果果哭了一场。奶奶们没有解法,但她们围着她打了一下午牌。果果学会:有些烦恼不解,只陪。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "深夜食堂", "镖人"]
+    reader_promise: "你那个老家小区的奶奶们,记得你现在的小烦恼。"
+    marketing_angle: "把『罗小黑战记』搬进济南老家小区的下午两点——奶奶们的布兜替小孩们装着烦恼。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "10 至 14 岁、有姥姥/奶奶在老家、暑假回去住过的 Gen Alpha 小学高年级到初一"
+
+  - series_id: confidence_core_romance__zh_CN__shi_pin_tong_hua_de_xing_qi_wu
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-tween
+    daily_life_anchor: home_apartment
+    portal_mechanic: portal_phone
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "十一岁的留守女孩每周五晚上八点跟在广州打工的爸妈视频。视频通话里,屏幕背后会多一个人——是这个时段里另一个想念家人的人。爸妈不知道。她替屏幕背后的那个人,慢慢回了一些没人替他/她回的话。"
+    volume_runway_target: 125
+    reading_platform_fit: webtoon_vertical
+    series_title: "视频通话的星期五"
+    series_logline: "晓禾十一岁,周五晚上八点跟爸妈视频;屏幕背后总会多出来一个人——是这个时段另一个想念家人的人。"
+    series_description: "晓禾十一岁,留守儿童,跟外婆住在贵州贞丰山区一个木结构二楼。爸妈在广州花都做服装厂工,每周五晚上八点准时跟她视频通话一次,从来不漏。第三个学期的某个周五,晓禾发现视频画面里,爸妈身后的厂区出租屋角落,多了一个人——一个明显不属于那间房间的小男孩,十岁左右,在画面里坐着,没人看得见他。下一个周五,是一个老人。再下一个,是一个二十多岁的女孩。晓禾慢慢明白:屏幕画面把这个时段里另一个特别想家的人借了进来。爸妈看不见她在跟她屏幕后那个人无声说话。她替这个人说她想跟自己家人说的话。一卷一个借进来的人。长线是某一周,屏幕里出现的是她小时候过世的爷爷。一人之下式安静的山区底色,罗小黑战记的视角,镖人对距离的耐性。"
+    opening_5_volume_arc:
+      vol_1: "第一个被借进来的——同小区另一户人家的小男孩。晓禾比划了一个『你妈妈也想你』。"
+      vol_2: "一个广州本地的老人。他在视频里看着晓禾爸妈。晓禾比了一个『他们对我很好』。"
+      vol_3: "二十多岁的女孩。她哭着。晓禾把屏幕调亮一点。"
+      vol_4: "一个跟晓禾差不多大的女孩,在另一个山村里。晓禾用手语比了她外婆教她的『冷了多加件衣服』。"
+      vol_5: "屏幕里是晓禾过世的爷爷。她不慌。她比划了一句『我们都好』。爸妈以为她在做鬼脸。视频结束。"
+    comp_titles: ["一人之下", "罗小黑战记", "镖人", "葬送的芙莉莲", "深夜食堂"]
+    reader_promise: "周五晚上八点那通视频,可以替屏幕背后那个想家的人,也回一句话。"
+    marketing_angle: "把『一人之下』的安静和『罗小黑战记』的小孩目光,装进一通山区到广州的视频通话。"
+    genre_family: fantasy_adventure
+    emotional_engine: parasocial_to_real + named_and_seen
+    audience: "10 至 14 岁、留守或常年不能跟父母一起住的 Gen Alpha 山区小学高年级"
+
+  - series_id: confidence_core_romance__zh_CN__biao_xiong_mei_de_xia_ke_zhan
+    brand_id: confidence_core_romance
+    locale: zh_CN
+    persona_archetype: GA-tween
+    daily_life_anchor: home_apartment
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "十三岁的女孩跟一个比她大半岁的表哥,从小一起在两家爷爷奶奶之间过暑假。表哥十三岁那年突然不再跟她讲话。女孩在两位老人家里的衣柜深处一前一后翻出了同一本信集——表兄妹之间没寄出去的信。一卷拆一封。"
+    volume_runway_target: 125
+    reading_platform_fit: webtoon_vertical
+    series_title: "表兄妹的下客栈"
+    series_logline: "知夏十三岁,跟表哥小桐十三岁这年安静下来;她在爷爷奶奶两边的衣柜里前后翻出来一本没寄出去的信集。"
+    series_description: "知夏十三岁,初一,跟表哥小桐都是杭州人,小时候每个暑假轮流在外婆家和奶奶家住——两家差两条街,孩子之间从初一开始也只有他们俩。十三岁这年小桐突然不再跟她讲话,只发表情包。这个暑假她在外婆家衣柜最深处翻出来一本旧的硬皮笔记本,里面是小桐五年级到现在写的一些没寄给她的信。她从奶奶家衣柜深处也翻出了一本——是她自己五年级到现在写的没寄给他的。每一卷她拆一封,他不知道她在拆;她也开始替自己拆。一年里两个十三岁的人,有很多没法在群聊里直说的话。罗小黑战记里小孩的耐性,Heartstopper 的纯度,葬送的芙莉莲对慢的尊敬。"
+    opening_5_volume_arc:
+      vol_1: "第一封小桐写的:『你打篮球比我还好我有点不开心』。知夏拆完愣了好久。她写了回信,没寄。"
+      vol_2: "知夏自己写过的一封:『我外婆比奶奶疼我,我们家是不是不公平』。她重新读了一遍。"
+      vol_3: "小桐写的:『我喜欢同班那个男生,我不知道该不该告诉你』。知夏在奶奶家床头放了一只表哥喜欢的零食。"
+      vol_4: "知夏写的:『初一开学我被孤立了一个月,我没告诉你』。她把这封信夹进了表哥的笔记本里。"
+      vol_5: "暑假最后一天。两个人没说话,在外婆家阳台一起吃西瓜。知夏发现表哥的笔记本上又多了一封她没拆过的信。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "Heartstopper", "深夜食堂"]
+    reader_promise: "你跟那个表兄妹/表姐弟之间没说的话,可以一封一封慢慢拆开。"
+    marketing_angle: "『Heartstopper』里的少年纯度,放进杭州两家爷爷奶奶之间的那间衣柜。"
+    genre_family: mystery_cozy
+    emotional_engine: rekindled_intimacy + named_and_seen
+    audience: "11 至 15 岁、跟表兄妹一起长大、青春期开始疏远的 Gen Alpha"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — bright_presence_tw_seinen (seinen 明亮临在 · 男性向温柔)
+  # 5 series: supernatural_everyday×2, healing×1, slice_of_life×1, fantasy_adventure×1
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: bright_presence_tw_seinen__zh_CN__san_dian_ban_de_xiao_chi_dian
+    brand_id: bright_presence_tw_seinen
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: late_night_economy
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十八岁的男主在重庆一条老街盘下一间凌晨三点半才开门的小吃店。来他这里坐下吃一碗的人,大多是这座城里这个时段唯一还醒着的——出租车司机、夜班护士、刚下班的程序员。每一卷一个人。他自己也是从凌晨三点半的那一年熬过来的。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "三点半的小吃店"
+    series_logline: "陈雷凌晨三点半开门,卖小面和抄手;来吃的人,都是重庆这一刻唯一还醒着的那一个。"
+    series_description: "陈雷二十八岁,重庆江北人,三十年前他爸就在解放碑后面这条小巷开过一家通宵小面馆。他爸去世后,陈雷盘下来重新开,但他改了营业时间——凌晨三点半到早上七点,只开这三个半小时。这个时段醒着的人很少:刚收车的出租车司机,夜班医院走出来的护士,熬完一个上线版本的程序员,刚结束一晚演出的乐队鼓手,跟最后一个客人告别的酒吧老板。陈雷只卖小面、抄手、一杯酒酿。客人坐下来,大多不说话。他不主动。一卷一个客人,他听到一段这个时段才说得出来的话。他自己十九岁那年也熬过一年三点半,他知道那种话怎么接。镖人式的耐性,深夜食堂的桌子,一人之下的市井底色。"
+    opening_5_volume_arc:
+      vol_1: "出租车司机一个月没回家。陈雷给他多盛了一勺红油。"
+      vol_2: "夜班护士查完一夜房,坐下来就哭。陈雷给她加了一杯酒酿,什么都不说。"
+      vol_3: "程序员上线了一个会被裁的版本。陈雷给他抄手里放了多一颗胡椒。"
+      vol_4: "陈雷自己十九岁那年的同班同学进门。两个人没认出来对方。"
+      vol_5: "同班同学走的时候付了三份钱——陈雷的、自己的、还有那张他十九岁那年常坐的椅子的。陈雷收下了。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "镖人", "葬送的芙莉莲"]
+    reader_promise: "凌晨三点半还醒着的那个你,有人替你盛一碗小面。"
+    marketing_angle: "把『深夜食堂』搬到重庆解放碑后面那条小巷的凌晨三点半。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + named_and_seen
+    audience: "25 至 35 岁、夜班/熬夜工种为主、有过『一个人醒着』时段的男性 Gen Z + Mill"
+
+  - series_id: bright_presence_tw_seinen__zh_CN__lao_jia_xiang_ying_chuan_lian_xi_dian
+    brand_id: bright_presence_tw_seinen
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十二岁的男主回老家天津继承了父亲留下来的小区音响修理点。送来修的老式音响里,常常会播出来一段这家人某位长辈年轻时候的录音——本人自己都不记得录过。他修的不只是音响,是这些家庭里没接上的话。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "老家巷尾音响修理店"
+    series_logline: "周陆回老家天津接他爸留下来的小修理铺;送来修的旧音响,有时候会响出长辈年轻时录过、自己都忘了的那段话。"
+    series_description: "周陆三十二岁,在上海做了七年音响工程师,他爸去世后他回了天津,接手了爸爸在河西区一条老巷里开了二十年的『陆记音响修理』。送来修的大都是九十年代的老组合音响、老收音机、磁带机。第二个月他就发现,有些机器修好通电的瞬间,会响出来一段这台机器原主人——某位长辈年轻时候录过、本人早就忘了的话:对孩子的一句道歉,对配偶的一句没说出口的感谢,对自己年轻时的一句懊悔。周陆不刻意做什么,他只是把这段录音整理好,装在一只小磁带里,放在机器旁边一起还给客人。客人有的当时就哭了,有的过了三个月才回来谢他。一卷一户人家。镖人的克制,一人之下的市井,深夜食堂的桌子。"
+    opening_5_volume_arc:
+      vol_1: "一台老组合音响,响出一位父亲二十年前对儿子那句没说出口的『对不起』。儿子今年也四十岁了。"
+      vol_2: "一台收音机,响出一位老人对刚走的老伴的一句『当年想跟你说,我也害怕』。"
+      vol_3: "一台磁带机,客人是个三十岁的女儿。响的是她妈二十年前的一段录音。她现在跟妈不说话。"
+      vol_4: "周陆自己他爸的那台老胆机送来修。响出来他爸对自己年轻时的一段录音。周陆听完去厨房做了饭。"
+      vol_5: "邻居送来一台旧机器,本来已经准备扔了。响出来的不是录音,是空白。周陆告诉邻居:这一台,不缺什么。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "镖人", "葬送的芙莉莲"]
+    reader_promise: "你爸/你妈那段没说出口的话,有人替它修出来。"
+    marketing_angle: "把『深夜食堂』装进天津河西区一条巷子的老音响修理铺。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "30 至 50 岁、上一代父母在身边或刚走、男性 Gen X + Mill"
+
+  - series_id: bright_presence_tw_seinen__zh_CN__chu_zu_che_lao_si_de_jia
+    brand_id: bright_presence_tw_seinen
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: late_night_economy
+    portal_mechanic: portal_phone
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "西安出租车老司机,五十岁,夜班车。仪表盘上那只他女儿小时候送的小老虎挂件,会在某些乘客上车后开始轻轻摇——这个乘客今晚要回家,但他/她自己还不知道。老司机不点破,只是把车开向他们没说出口的那个地址。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "出租车老司的家"
+    series_logline: "马师傅,五十岁,夜班车;仪表盘上女儿的小老虎挂件知道哪位乘客今晚要回家。"
+    series_description: "马师傅五十岁,西安人,跑了二十二年出租车。女儿五岁那年送给他的一只小老虎布偶,挂在仪表盘上挂了二十年。这两年他发现这只小老虎会在某些乘客上车后轻轻摇——他试过,只有当那个乘客其实今晚需要回一趟家时才摇,无论那个家是父母家、是前妻家、是儿时住过的老屋。乘客们坐上来,说去酒吧、去夜店、去公司加班,马师傅不点破,只是把车多开几条街,慢慢导到那个『家』的方向。有的乘客中途要求下车去那个真正的地址,有的没有。马师傅都不强求。一卷一位乘客。镖人的克制,一人之下的市井底色。马师傅自己女儿今年二十五,在北京工作,半年没回西安了。"
+    opening_5_volume_arc:
+      vol_1: "二十六岁的年轻人说去酒吧,小老虎摇了。马师傅开向他十年没去的爸妈家。乘客没让停。"
+      vol_2: "四十岁的女白领说去公司,小老虎摇了。马师傅开向她离婚的丈夫家。她让停,但回家后给前夫发了一条信息。"
+      vol_3: "六十岁的退休教师说去医院,小老虎摇了。马师傅开向了他师范学院的老宿舍。乘客哭了。"
+      vol_4: "马师傅自己女儿春节回西安,坐他的车。小老虎一路没摇。马师傅笑了——女儿已经在家了。"
+      vol_5: "一位陌生人上车,坚持要去最远的高速口。小老虎一路平静。马师傅明白:这位今晚不需要回家,他只是想走一段路。"
+    comp_titles: ["一人之下", "罗小黑战记", "镖人", "深夜食堂", "葬送的芙莉莲"]
+    reader_promise: "今晚你说去某个地方,有人替你看到你其实想回家的那一刻。"
+    marketing_angle: "把『一人之下』里的师徒目光,放进西安一辆夜班出租车的方向盘。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + competent_calm_specialist
+    audience: "35 至 55 岁、家里有未成年子女或老人、男性 Mill + Gen X 长尾"
+
+  - series_id: bright_presence_tw_seinen__zh_CN__lao_jiu_jie_de_li_fa_shi
+    brand_id: bright_presence_tw_seinen
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六岁的男主回长沙老家盘下了爷爷传下来的理发店——一间开了五十年的老店。每一卷一个客人坐下来理发,慢慢讲出他/她跟家里某一位长辈之间那句没说完的话。男主不是心理咨询师,他只是会理发,听别人说话是这个职业自带的功能。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "老旧街的理发师"
+    series_logline: "周一杰二十六岁,回长沙接他爷爷开了五十年的理发店;客人坐下来,慢慢讲一段跟家里人没说完的话。"
+    series_description: "周一杰二十六岁,长沙人,大学在广州读市场营销,毕业回家。他爷爷去年走了,留下来开了五十年的『周记理发』,在长沙老火车站后面一条快要拆迁的旧街上。一杰不是科班理发师,他是边干边学的。客人大多是这条街上住了几十年的老街坊,以及一些慕名而来的年轻人。他的工具简单——剃刀、剪刀、热毛巾。坐下来理一次发四十分钟,客人慢慢开口。一卷一位客人,讲的不是什么大事,都是跟自己家里某一位长辈之间没说出口的那一句:父亲去年走了那一句『谢谢』,母亲今年要做手术那一句『我陪你』,跟自己儿子吵了三年那一句『我那时候不该』。一杰不接茬,他只剃发,然后说一句『修好了』。镖人的克制,深夜食堂的桌子,一人之下的师徒底色。"
+    opening_5_volume_arc:
+      vol_1: "六十岁的老街坊,父亲走了。坐下来理发的四十分钟里,他第一次说出『谢谢』。"
+      vol_2: "二十多岁的女生,准备结婚。她在剃刀靠近耳后那一下,说出她对她妈没说的那一句。"
+      vol_3: "一杰自己的爸来理发。父子俩没说什么,但一杰把爷爷生前最后那把剃刀拿出来用。"
+      vol_4: "一位儿子跟他爸三年没说话,儿子今年三十岁,坐下来理了二十分钟。一杰把他爸常坐的那张椅子也擦了一下。"
+      vol_5: "这条街要拆迁了。最后一天营业,街坊们排到门外。一杰一个一个接,直到深夜。深夜最后一位客人,是他爷爷生前的徒弟。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "镖人", "葬送的芙莉莲"]
+    reader_promise: "你跟家里那位长辈没说完的话,可以在一次理发的四十分钟里慢慢说出来。"
+    marketing_angle: "把『深夜食堂』搬进长沙老火车站后面一条快拆迁的旧街理发店。"
+    genre_family: slice_of_life
+    emotional_engine: rekindled_intimacy + competent_calm_specialist
+    audience: "28 至 45 岁、跟家里上一代有未说完的话、男性 Mill"
+
+  - series_id: bright_presence_tw_seinen__zh_CN__shan_shang_ye_xue_de_xin_xiang
+    brand_id: bright_presence_tw_seinen
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: nature_routine
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十五岁的男主在云南大理苍山脚下做民宿管家,屋后那个老式邮筒一年只有头场冬雪那天会响。投进去的信,会被风送给收信人——前提是这位收信人是他/她血缘里仍在挂念主人的某一位长辈,无论这位长辈是否还活着。"
+    volume_runway_target: 175
+    reading_platform_fit: manga_traditional
+    series_title: "山上夜雪的信箱"
+    series_logline: "罗远在大理苍山脚下守一间民宿;屋后老邮筒,头场冬雪那天才收信,投进去的信会找到血缘里仍在挂念你的那位长辈。"
+    series_description: "罗远三十五岁,昆明人,五年前辞掉了银行的工作,在大理苍山脚下盘下一间老白族民居改的民宿。屋后院子那只 1970 年代的绿色铁皮邮筒,五年里他一直觉得只是装饰物。第三年的冬天,头场雪那一天的清晨,邮筒突然咔嗒响了一下,他打开看里面有一封他自己没写过的信。地址写着昆明他外公的老屋——外公已经过世十年。罗远把信寄了。第二年头场雪,邮筒又响了。这一次他明白了:这只邮筒一年只在头场雪那一天工作,而且,投进去的信只送达给血缘里仍在挂念主人的那一位长辈。每一卷一位客人,在那个冬天住进民宿,投了一封信。这位长辈可能还活着,可能没了。镖人的克制,葬送的芙莉莲的耐性,一人之下的安静师徒底色。"
+    opening_5_volume_arc:
+      vol_1: "第一位客人,深圳来的女白领,给已经去世的奶奶投了一封。当晚下雪。回家路上她接到她妈电话,梦见了奶奶。"
+      vol_2: "第二位,一对夫妻吵架来散心,丈夫投了一封给在世的父亲。回家后他第一次给爸打电话。"
+      vol_3: "第三位,一个二十多岁的姑娘投给从未见过面的外公——他在她出生前就走了。雪那天她梦见了一个老人坐在山上喝茶。"
+      vol_4: "罗远自己想给外公投信,他写了三个晚上,第四天去投——邮筒没响。罗远学到:轮到自己的时候,信要慢慢写,不一定要寄。"
+      vol_5: "邮筒最后一次响。这一次的信不是任何客人投的,而是邮筒自己有一封信要寄出——给罗远。是他外公留给他的。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "镖人", "深夜食堂"]
+    reader_promise: "血缘里仍在挂念你的那位长辈,有一只邮筒一年只在头场雪那天替你们送一次信。"
+    marketing_angle: "把『葬送的芙莉莲』的耐性,放进大理苍山脚下一个老白族民居的院子。"
+    genre_family: fantasy_adventure
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "30 至 50 岁、上一代长辈在世或刚走、男性 Mill + Gen X"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — heart_balance_shojo (← found_family_shojo · josei 关系平衡)
+  # 5 series: healing×1, supernatural_everyday×1, slice_of_life×1, mystery_cozy×1, fantasy_adventure×1
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: heart_balance_shojo__zh_CN__zhao_yang_zhi_jian_de_xiao_xiao_mei
+    brand_id: heart_balance_shojo
+    locale: zh_CN
+    persona_archetype: GA-tween
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "十四岁的女孩跟比她小八岁的妹妹一起,在妈妈生病那一年照顾彼此。她们在家里发明了一套小仪式——早上六点半敲妹妹的房门、晚上八点一起读半小时、周日上午把妈妈的药盒整理一遍。妈妈半年后好转。仪式留了下来。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "朝阳之间的小小妹"
+    series_logline: "苏照阳十四岁、妹妹小昭六岁;妈妈生病那一年,姐妹之间慢慢发明了一套留下来的小仪式。"
+    series_description: "苏照阳十四岁,北京海淀区初二在读;妹妹小昭六岁,刚上一年级。妈妈三十八岁那一年查出甲状腺癌中期,治疗半年。爸爸一个人撑不下,加班到深夜。姐妹俩在那半年里慢慢发明了一套小仪式:早上六点半姐姐敲妹妹的房门一下,妹妹敲回去两下;晚上八点两个人在妹妹床上读半小时书,谁累就早睡;周日上午两个人把妈妈这一周的药盒整理一遍,姐姐念名字,妹妹放进药盒里。妈妈半年后好转。仪式没有取消,留下来了。一卷一个仪式被定下来,长线是妹妹七岁生日那天,姐姐发现妹妹自己已经开始替家里发明新的小仪式。Heartstopper 的少年纯度,罗小黑战记的小孩眼睛,葬送的芙莉莲的耐性。"
+    opening_5_volume_arc:
+      vol_1: "六点半敲门的事。妹妹第一次敲回去两下。"
+      vol_2: "晚上八点的半小时读书。妹妹问『妈妈会好的吗』,姐姐说『我们一起在这儿』。"
+      vol_3: "周日的药盒。妹妹第一次自己念名字给姐姐听。"
+      vol_4: "妈妈好转那一周。两个人在沙发上一起睡着了。爸爸盖了被子。"
+      vol_5: "妹妹七岁生日。她自己发明了新仪式——每周六上午抱一下妈妈一分钟。姐姐学会:她已经可以接住一些。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "Heartstopper", "深夜食堂"]
+    reader_promise: "你跟妹妹/弟弟之间替家里撑过的那一段时间,值得有一套自己的小仪式。"
+    marketing_angle: "把『Heartstopper』的少年纯度,放进一对北京海淀姐妹替妈妈撑过的半年里。"
+    genre_family: healing
+    emotional_engine: ritual_as_belonging + named_and_seen
+    audience: "11 至 15 岁、有弟妹、家里出过一次大事的 Gen Alpha + Z 早期"
+
+  - series_id: heart_balance_shojo__zh_CN__ge_wei_he_ji_de_kuai_di_zhan
+    brand_id: heart_balance_shojo
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十三岁的女主在南京一家社区菜鸟驿站打工。同一个小区里,常常会有同一户人家寄给自己家另一位成员的快递——母亲寄给儿子的、姐姐寄给妹妹的、丈夫寄给前妻的。女主代取代寄,慢慢替整个小区的家人之间送了好几年没说出口的话。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "格位合计的快递站"
+    series_logline: "苏小苑在南京一家社区菜鸟驿站,替小区的家人之间替彼此送一些没说出口的话。"
+    series_description: "苏小苑二十三岁,刚毕业一年,在南京鼓楼一家社区菜鸟驿站做日常运营。驿站每天进出几百个包裹,但其中常常有一些奇怪的——同一栋楼,甚至同一户,寄件人和收件人是同一户人家不同成员:三楼那位老太太寄给六楼的儿子(他们三年没说话)、十八楼那位姐姐寄给八楼的妹妹(妹妹刚分手)、二号楼那位前夫寄给五号楼的前妻(他们去年离婚)。包裹里大多是小东西——一双袜子,一袋家乡的特产,一盒她小时候喜欢吃的糕。小苑代取代寄,慢慢替这些家人之间送了几年没说出口的话。一卷一户人家。一人之下的市井底色,罗小黑战记的小镇眼睛。"
+    opening_5_volume_arc:
+      vol_1: "三楼老太太寄给六楼儿子的一双手织毛袜。儿子取了。回家给妈打电话。"
+      vol_2: "十八楼姐姐寄给八楼妹妹的一盒糕。妹妹哭了一下午。"
+      vol_3: "前夫寄给前妻一袋他们去年一起买过的茶。前妻没回信,但下一周回寄了一包。"
+      vol_4: "小苑自己收到自己爸爸寄过来的一个包裹。她爸在另一个城市。她拆完坐在驿站门口很久。"
+      vol_5: "驿站要关门改造一个月。小区的家人们怕送不出。小苑提议大家在门口的墙上贴小纸条,继续替彼此送话。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "解忧杂货店 (中文版)", "葬送的芙莉莲"]
+    reader_promise: "你跟家里那个人没说出口的话,有一个社区驿站替你送。"
+    marketing_angle: "把『解忧杂货店』装进南京鼓楼一家社区菜鸟驿站。"
+    genre_family: slice_of_life
+    emotional_engine: rekindled_intimacy + named_and_seen
+    audience: "22 至 30 岁、独居在一线/新一线城市、和原生家庭有一些没说完的话的 Gen Z"
+
+  - series_id: heart_balance_shojo__zh_CN__ban_jiao_lao_xiao_qu_de_mao_zhang_gui
+    brand_id: heart_balance_shojo
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: pet_companion
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "二十五岁的女主搬进苏州一个老破小,小区里有一只黑白社区猫,大家叫『猫掌柜』。猫认得小区里每一户人家正在不和的那一对家人,会自己跑到正确的那一家阳台上趴一趴,提醒人下楼去见见对方。每一卷一户人家。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "搬进老小区的猫掌柜"
+    series_logline: "苏雨搬进苏州沧浪区的老破小,小区里那只猫掌柜会替不和的家人们记得彼此。"
+    series_description: "苏雨二十五岁,本地姑娘,在一家国企做行政。搬出爸妈家、独立住到苏州沧浪区一个九十年代老破小,主要是给自己一点空间。小区里有一只黑白社区猫,十一岁,大家都叫它『猫掌柜』。它认得每一户人家。它常常会跑到某一家阳台上趴半小时,然后下来再去另一家阳台。苏雨第三个月发现规律——猫每次趴的两家,其实是一对正在不和、最近又没说话的家人。被趴的人下楼遛弯总会撞见另一边那位也下来散心的。猫掌柜不强求什么,只是提醒一下。一卷一户人家。罗小黑战记的猫主视角,一人之下的小区底色,葬送的芙莉莲的耐性。苏雨自己跟她妈也三年没好好说话——猫掌柜会不会有一天也来她家阳台。"
+    opening_5_volume_arc:
+      vol_1: "二楼父亲跟五楼儿子三年没说话。猫掌柜先去了二楼。父子俩在小区水龙头边撞见。"
+      vol_2: "六楼老姐妹俩半年没说话。猫掌柜两家阳台都去。两个人在小区门口超市排队时撞见。"
+      vol_3: "十一楼母亲跟十八楼女儿。母亲在猫掌柜趴的那一天下楼,看到女儿正在卸车送过来的东西。"
+      vol_4: "苏雨自己阳台第一次有了猫掌柜。第二天她妈打电话来说她爸住院了。"
+      vol_5: "苏雨回爸妈家陪了三天。回小区第一天,猫掌柜在她门口睡着。苏雨学到——它会等你回来。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "深夜食堂", "镖人"]
+    reader_promise: "你跟家里那个人之间的那段沉默,有一只小区猫记得。"
+    marketing_angle: "把『罗小黑战记』的猫主视角放进苏州沧浪区一个老破小的阳台。"
+    genre_family: supernatural_everyday
+    emotional_engine: rekindled_intimacy + chosen_family
+    audience: "23 至 30 岁、刚独立独居、跟父母一代有一些距离的 Gen Z 女性"
+
+  - series_id: heart_balance_shojo__zh_CN__hui_yi_jia_zu_qun_de_di_yi_tian
+    brand_id: heart_balance_shojo
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: portal_phone
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十岁的女主从家族微信群退出半年后,在某一天打开微信发现自己被加回了群里——这次群里多了一些她从未见过、但姓氏跟她一样的人。这些人是她家族里上一代或更早的、已经过世的亲人。每一卷一位长辈在群里发一句话。"
+    volume_runway_target: 125
+    reading_platform_fit: webtoon_vertical
+    series_title: "回家族群的第一天"
+    series_logline: "苏念三十岁,从家族群退出半年后被加回去;群里多出来一些已经走了的亲人。"
+    series_description: "苏念三十岁,在成都做新媒体。三年前她跟她妈那一辈起了一次大冲突,从家族大群里退了出来,半年没回。半年后某一个晚上,她突然看到群消息——她被加回了群里。群里多了一些她没见过的微信号,头像都是老照片,昵称也跟她家族的姓氏一样,但她不认得。第二天她拉爸爸问,爸爸说群里没有那些人。第三天她明白:这些是上一代或者更早的、已经过世的家族成员。他们不主动说话,只在群里看一些事情发生的时候发一句。比如:她表姐升职那天,她过世的姑奶奶发了一句『恭喜啊』。她跟她妈和好那天,她过世的外公发了一句『慢慢来』。一卷一位长辈说一句话。长线是她跟她妈三年前那次大冲突,有一位长辈知道事情其实是怎样的。"
+    opening_5_volume_arc:
+      vol_1: "表姐升职。已故的姑奶奶发了一句『恭喜啊』。苏念第一次看到。"
+      vol_2: "二舅生病。已故的外公发了一句『去看看他』。爸爸真的去了。"
+      vol_3: "苏念跟她妈视频。已故的太外婆发了一句『她不会说,但她想你』。"
+      vol_4: "苏念给她妈打电话。已故的外公在群里发了一句『我那时候也是这样跟我妈的』。"
+      vol_5: "苏念回了一次成都老家,跟妈妈在阳台说话。群里所有的已故长辈都没发,只发了一个表情:『鼓掌』。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "深夜食堂", "解忧杂货店 (中文版)"]
+    reader_promise: "你家族群里那些没机会见过的长辈,其实一直在替你点头。"
+    marketing_angle: "把『一人之下』的家族祖辈视角,搬进你家三十块钱组建的家族微信群。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "28 至 40 岁、跟家族群有过冲突或正在和原生家庭和解的 Mill 女性"
+
+  - series_id: heart_balance_shojo__zh_CN__hu_li_jia_de_di_san_jin_yuan_zi
+    brand_id: heart_balance_shojo
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: nature_routine
+    portal_mechanic: door
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十一岁的女主从城里回到山东老家祖宅过暑假,发现老宅第三进院子里住着一家狐狸——三代同堂的小狐狸家。她们家曾经也是三代同堂,十年前奶奶走后就分了。一卷一只狐狸,慢慢替她也补回一段家。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "狐狸家的第三进院子"
+    series_logline: "苏漾二十一岁,暑假回山东曲阜老宅;第三进院子里住着一家三代同堂的小狐狸。"
+    series_description: "苏漾二十一岁,济南本地姑娘,大三放暑假回山东曲阜老家祖宅住一个月——这套晚清的三进院子十年前奶奶过世后就空了,父辈五个兄妹平时谁都不太回。她一个人住进来,第三天发现第三进院子里——平时大家都不进去——住着一家小狐狸:一只老母狐狸,一只成年狐狸,两只小狐狸,三代同堂。她们不怕她,她也不赶她们。每一卷她跟一只狐狸学到一件事,慢慢理解她自己家曾经也是三代同堂的样子:奶奶在的时候,五个兄妹是怎么坐一桌的;父亲那一辈年轻时是怎么吵架又和好的;她小时候跟堂兄妹是怎么在院子里跑的。狐狸们不是奶奶的化身,她们只是住在这里的一家。一人之下的祖宅底色,罗小黑战记的妖怪温度,葬送的芙莉莲的耐性。"
+    opening_5_volume_arc:
+      vol_1: "老母狐狸。苏漾第一次进第三进院子。她把奶奶留下的一只搪瓷盘借给了狐狸们当水盘。"
+      vol_2: "成年狐狸。苏漾发现成年狐狸每天傍晚带小狐狸出门一趟。她想起爸爸小时候也带她在院子里溜达。"
+      vol_3: "两只小狐狸吵架。一只咬了另一只。第二天它们又一起睡。苏漾给二叔打了第一通电话。"
+      vol_4: "老母狐狸不见了三天。苏漾以为她走了。第四天回来。她明白:有些长辈只是去歇一下。"
+      vol_5: "暑假最后一天。苏漾要回济南。狐狸们在第三进院子门口排了一排。苏漾把奶奶的那只搪瓷盘留下了。来年再回来。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "镖人", "深夜食堂"]
+    reader_promise: "你家曾经的三代同堂,也许只是搬到了某一进院子。"
+    marketing_angle: "把『罗小黑战记』的小妖怪温度,搬进山东曲阜一座晚清三进祖宅的第三进院子。"
+    genre_family: fantasy_adventure
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "20 至 26 岁、老家有祖宅或上一辈大家庭记忆的 Gen Z"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — resilient_parent_social (← communal_warmth · josei 社群温暖)
+  # 5 series: healing×1, slice_of_life×1, supernatural_everyday×1, mystery_cozy×1, horror×1
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: resilient_parent_social__zh_CN__liu_shou_er_tong_de_xing_qi_san
+    brand_id: resilient_parent_social
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "三十八岁的女主回贵州老家小镇开了一家课后托管中心,带着六个父母在外打工的留守孩子。每周三晚上是『写信日』——孩子给父母写一封信,女主帮他们装好快递。半年后,父母们开始也回信。一卷一个孩子,一卷一个家庭被慢慢重新连起来。"
+    volume_runway_target: 175
+    reading_platform_fit: webtoon_vertical
+    series_title: "留守儿童的星期三"
+    series_logline: "周老师三十八岁,回贵州毕节老家小镇开了一家课后托管,带着六个留守孩子;星期三晚上是写信日。"
+    series_description: "周老师三十八岁,贵州毕节人,在广州做了十二年小学老师,父亲去年走了之后辞职回了老家小镇。她在镇上盘下一间小铺面,开了一家课后托管中心,接了六个孩子,父母都在广东打工——这种孩子在镇上至少有几十个。她的托管不是补课,是陪写作业、陪吃饭、陪写信。每周三晚上六点半到八点是『写信日』,孩子们给在广东的爸妈写一封信,周老师帮他们装信封贴邮票寄出去。一开始,父母们不回——他们不会写,也舍不得花心思。三个月后开始有父母回一些短信。半年后开始有父母在工厂宿舍里第一次给孩子写完整的回信。一卷一个孩子,一卷一个家庭的慢慢重连。镖人的克制,深夜食堂的桌子,一人之下的小镇底色。"
+    opening_5_volume_arc:
+      vol_1: "第一个写信日。十岁的小宇写给广州父母『我数学考了六十二分』。父母没回。周老师没说话。"
+      vol_2: "小宇的爸第三周回了一张照片——他在车间机器前比了一个『加油』。小宇在托管里哭了一会儿。"
+      vol_3: "九岁的小敏给妈写『我同桌讲我妈是骗子』。妈第二个礼拜回信。小敏的妈不识字,信是隔壁老乡帮她写的。"
+      vol_4: "周老师自己父亲走那年她也没在身边。她跟孩子们一起写,写给已经走了的父亲。"
+      vol_5: "春节那一周父母回家。镇上的六户人家在托管里办了一顿合伙饭。每个孩子把这一年写的信留了一封自己读出来。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "镖人", "葬送的芙莉莲"]
+    reader_promise: "留守的孩子和外出的父母之间,可以靠一封一封星期三的信慢慢接回来。"
+    marketing_angle: "把『深夜食堂』的桌子搬进贵州毕节一家课后托管的星期三晚上六点半。"
+    genre_family: healing
+    emotional_engine: rekindled_intimacy + competent_calm_specialist
+    audience: "30 至 50 岁、教育/社工从业者、关心留守儿童议题、家里有未成年子女的 Mill"
+
+  - series_id: resilient_parent_social__zh_CN__xiao_qu_ma_ma_hui_de_zhou_si_tang
+    brand_id: resilient_parent_social
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三十五岁的全职妈妈在自家小区组了一个『周四下午妈妈会』:每周四下午两点到四点,六个妈妈带小孩在小区会所聚会。两年下来,会成了她们彼此的家。每一卷一位妈妈,一卷一个被这个会接住的小危机。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "小区妈妈会的周四堂"
+    series_logline: "苏蓝三十五岁,自家小区组的周四下午妈妈会,两年后变成她们六个人彼此的家。"
+    series_description: "苏蓝三十五岁,西安人,生了二胎之后辞职做全职妈妈。生二胎那年她在小区组了一个微信群,叫『周四下午』——每周四下午两点到四点,六个妈妈带小孩在小区会所聚一聚。两年下来,这个会成了她们彼此的家:谁家产后抑郁、谁家老人住院、谁家孩子在学校被欺负、谁家想离婚、谁家想再生一个,大家在这两个小时里把话说出来,也把饭分着吃。一卷一个妈妈,一卷一个被这个会接住的小危机。没有大爆点。Heartstopper 的少年纯度搬到三十多岁的妈妈群里,镖人的克制,深夜食堂的桌子。苏蓝自己也有一段过去——她大学时那个最好的朋友,生了孩子之后没人接住,她错过了她。"
+    opening_5_volume_arc:
+      vol_1: "苏蓝的产后抑郁。她在第一次会上说不出口。第三次会上才说。其他五个妈妈一个一个分了她家那一晚的菜。"
+      vol_2: "玛丽的老人住院。会上轮流接她家两个孩子放学。"
+      vol_3: "小琳的孩子在学校被欺负。会上一起替她写了去学校的信。"
+      vol_4: "美君想离婚。会上没人给意见,只一起陪她在会所坐了一下午。"
+      vol_5: "苏蓝大学那个最好的朋友联系上她。也是个妈。苏蓝把她也带到了周四下午。会变成七个人。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "镖人", "葬送的芙莉莲"]
+    reader_promise: "你那个产后没人接住的时段,可以靠一个小区六个妈妈的周四下午接住。"
+    marketing_angle: "把『深夜食堂』搬进西安一个小区会所周四下午两点。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + ritual_as_belonging
+    audience: "30 至 42 岁、有未成年子女、住小区有妈妈群的 Mill 女性"
+
+  - series_id: resilient_parent_social__zh_CN__chong_qing_lao_xiao_qu_de_jiao_huan_chu
+    brand_id: resilient_parent_social
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十六岁的女主在重庆一个老破小搞了一个『邻里交换处』——居民可以把家里多出来的东西拿来,需要的人拿走,免费。每一卷一个家庭的某个东西被另一户人家拿走,慢慢替两户人家接上一段缘分。来交换的东西,常常会带着原主人的一段没说出口的话。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "重庆老小区的交换处"
+    series_logline: "周晚三十六岁,在重庆江北一个老破小做了个邻里交换处;来交换的东西替原主人替别人讲了几句话。"
+    series_description: "周晚三十六岁,重庆本地姑娘,大学毕业后做了十年公益,去年辞职回到江北一个九十年代老破小社区。她在小区单元楼下用一个二手的木架子做了一个『邻里交换处』:每家把家里多出来的、还能用的东西拿来,谁需要谁拿走,免费。第三个月她注意到一个奇怪的事——居民们拿来交换的东西,常常会在被拿走后短时间内引出原主人一段没说出口的话。一只旧砂锅被楼上独居老人拿走,原主人(楼下的中年女儿)那天给妈打了第一通电话。一双婴儿小鞋被三号楼新生儿家拿走,原主人(已经五十岁的失独父亲)第一次跟周晚讲了他儿子的事。一卷一户人家的一件东西。一人之下的小区市井,深夜食堂的桌子,葬送的芙莉莲的耐性。"
+    opening_5_volume_arc:
+      vol_1: "一只旧砂锅。楼下女儿和她妈那个月开始重新通电话。"
+      vol_2: "一双婴儿鞋。失独父亲第一次跟周晚讲他儿子的名字。"
+      vol_3: "一本旧菜谱。一对刚离婚的夫妻在交换处门口撞见。"
+      vol_4: "周晚自己拿出去一只她奶奶留下的茶碗。被谁拿走的,她没看见。第二天她奶奶老朋友找上门——是她家邻居的姑妈。"
+      vol_5: "小区要拆迁。交换处最后一天,所有曾经在这里交换过东西的人,带一件新的东西来。周晚把每件东西的故事记成一册。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "镖人", "葬送的芙莉莲"]
+    reader_promise: "你家里那件用不上的东西,会替你跟另一户人家替你讲一段话。"
+    marketing_angle: "把『解忧杂货店』搬进重庆江北一个九十年代老破小的单元楼下。"
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + named_and_seen
+    audience: "30 至 50 岁、住老小区、关心邻里关系的 Mill + Gen X"
+
+  - series_id: resilient_parent_social__zh_CN__qun_liao_li_de_shi_zong_ren_kou
+    brand_id: resilient_parent_social
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: portal_phone
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十二岁的家庭社工女主负责一个全国寻人志愿者的微信群。群里偶尔会出现一些没人邀请的新成员——是被寻找的那些走失家人发的消息。一卷一个家庭,一卷一句他们没机会说出口的话被群里替他们说出来。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "群聊里的失踪人口"
+    series_logline: "苏知三十二岁,负责一个全国寻亲志愿者群;群里偶尔会出现没人加过的新成员。"
+    series_description: "苏知三十二岁,在北京一家家庭社工机构做志愿者协调员。她负责一个三千多人的全国寻人微信群——成员都是在找走失家人的家属,以及帮忙转发线索的志愿者。两年前的某一天她发现群里多了一个微信号——头像是空白的,昵称只有一个字,没人加过它,但它在线。它发了一句话:『我在浙江』。苏知是个理性的人,但群里那位寻找儿子十二年的母亲第二天去了浙江,真的找到了。后来这种事情又发生过几次。每一卷一个家庭。这些没人邀请的成员,有的还活着但被这十几年的距离耗光了,有的没了。一人之下的祖辈视角搬到微信群里。镖人的克制。"
+    opening_5_volume_arc:
+      vol_1: "『我在浙江』。那位母亲找到了儿子。儿子那十二年的事情,慢慢说。"
+      vol_2: "另一个新成员发『不要再找了』。那位丈夫的妻子已经走了。苏知陪他在群里坐了一整夜。"
+      vol_3: "一位走失了三十年的父亲。新成员只发了一张老照片。家属认出来了,那个父亲两年前在新疆过世。"
+      vol_4: "苏知自己外婆走失过一次——只走失了一天。她想到这件事,在群里第一次发了私人的事。群里有人替她接了一句。"
+      vol_5: "新成员第一次发了一段长话——是关于群里所有家属那些没说出口的话怎么继续说下去。苏知把这段话装订成册,在机构内部传阅。"
+    comp_titles: ["一人之下", "罗小黑战记", "镖人", "深夜食堂", "葬送的芙莉莲"]
+    reader_promise: "你家里那个走失的人,也许只是换了一种方式在群里看着你们。"
+    marketing_angle: "把『一人之下』的祖辈视角放进一个三千人的寻亲微信群。"
+    genre_family: mystery_cozy
+    emotional_engine: rekindled_intimacy + inherited_wisdom
+    audience: "30 至 50 岁、家里有走失家人或长期分离亲属、关心寻亲议题的 Mill + Gen X"
+
+  - series_id: resilient_parent_social__zh_CN__zhong_yuan_jie_de_can_zhuo
+    brand_id: resilient_parent_social
+    locale: zh_CN
+    persona_archetype: ML-mid
+    daily_life_anchor: home_apartment
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: occult_cosmic
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十四岁的女主每年中元节回老家武汉,妈妈坚持要在饭桌上多摆一副碗筷。这两年她注意到那副碗筷的那一头,会冷得不像一个空座位。家族里有一些事情上一代没让小孩知道。一卷一年的中元节,一卷一段被悄悄锁起来的家事被慢慢打开。"
+    volume_runway_target: 125
+    reading_platform_fit: manga_traditional
+    series_title: "中元节的餐桌"
+    series_logline: "苏念三十四岁,中元节回武汉老家;饭桌上那副多摆的碗筷,那一头有点冷。"
+    series_description: "苏念三十四岁,在上海做媒体。每年农历七月十五中元节,她妈坚持她一定要回武汉老家吃一顿饭——餐桌上一直多摆一副碗筷,妈妈说『给走了的人留个位置』。苏念小时候以为是个习俗。三十二岁那年的中元节,她坐在桌边突然感觉到那副多摆的碗筷那一边,空气是冷的——不是夏天的凉,是冬天的冷。一卷一年的中元节。一些她从来不知道的家事被妈妈和姑姑们慢慢说出来:那个空位是给苏念出生前夭折的一个哥哥的;另一年的空位是给爷爷自杀的那个朋友的;再另一年是给小姑年轻时打掉的孩子的。家里没人邪门,只是有几代人来不及说的话。苏念学会慢慢替家里把这些位置认下来。这部里的『冷』不是惊吓,是悲伤。一人之下的祖辈视角,镖人的克制,葬送的芙莉莲的耐性。不血腥,无恶灵,只有家族里没说完的话。"
+    opening_5_volume_arc:
+      vol_1: "三十二岁那年。第一次感觉到那副碗筷的冷。妈妈终于讲了苏念出生前夭折的那个哥哥。"
+      vol_2: "三十三岁。空位是给爷爷一个朋友的——这个朋友的故事爷爷一直没讲过。"
+      vol_3: "三十四岁。空位是给小姑年轻时那个孩子的。小姑跟苏念在厨房说了三个小时。"
+      vol_4: "外婆那一年中元节身体不好,没能下楼。苏念替她摆碗筷。空位多了两副——外婆能感觉到一些苏念感觉不到的人。"
+      vol_5: "苏念问妈:『以后我也要摆吗?』妈说:『摆。每一代有每一代要替的位置。』苏念回上海后,自己一个人住的小餐桌上,中元节那天也多摆了一副。"
+    comp_titles: ["一人之下", "罗小黑战记", "镖人", "葬送的芙莉莲", "深夜食堂"]
+    reader_promise: "你家中元节多摆的那副碗筷,那一头是几代人没说完的话。"
+    marketing_angle: "把『一人之下』里家族祖辈的克制悲伤,放进武汉一户人家中元节的圆桌上。"
+    genre_family: horror
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "30 至 50 岁、家族里有过隐瞒的事、关心家族叙事的 Mill + Gen X"

@@ -1,0 +1,461 @@
+# Manga Character Voice Bank — character voices for manga video dialogue
+# Authority: docs/VOICE_MEDIUM_PERSONA_TOPIC_RESEARCH.md, config/manga/teacher_character_prompts.yaml
+# Date: 2026-04-09
+# Each teacher's manga character needs:
+#   - narrator: steady, measured audiobook narrator voice
+#   - teacher_character: matches manga personality
+#   - student_1: primary student/listener character
+#   - student_2: secondary supporting character
+#   - inner_monologue: reflective variant of teacher voice
+# CosyVoice2 preferred for all manga voices (better character cloning)
+# ElevenLabs BANNED for ja-JP
+
+schema_version: 1
+
+# ─── TEACHER CHARACTERS (registry ids) ───────────────────────────────────
+
+characters:
+
+  # 01 — Ahjan (main teacher, wise guide)
+  ahjan:
+    display_name: Ahjan
+    style_archetype: wise_guide
+    manga_personality: calm, wise, compassionate, grounded authority, nature-connected when teaching forest-refuge strands
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_calm_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_warm_01, notes: "warm sensei voice, moderate pace"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_bright_01, notes: "eager female student"}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_energetic_01, notes: "curious male student"}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_warm_01, prosody_override: {rate: 0.85, pitch: -5}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_steady_01, edge_fallback: ko-KR-InJoonNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_warm_01, prosody_override: {rate: 0.85, pitch: -5}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_steady_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_warm_01, prosody_override: {rate: 0.85, pitch: -5}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_steady_01, edge_fallback: zh-CN-YunyangNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_warm_01, prosody_override: {rate: 0.85, pitch: -5}}
+
+  # 02 — Adi Da (mystical elder)
+  adi_da:
+    display_name: Adi Da
+    style_archetype: mystical_elder
+    manga_personality: deep, transcendent, slow, spacious presence
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_deep_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_deep_01, notes: "deep elder voice, very slow"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_gentle_01, notes: "reverent female student"}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_calm_01, notes: "contemplative male student"}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_deep_01, prosody_override: {rate: 0.75, pitch: -8}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_deep_01, edge_fallback: ko-KR-InJoonNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_steady_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_deep_01, prosody_override: {rate: 0.75, pitch: -8}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_deep_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_steady_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_deep_01, prosody_override: {rate: 0.75, pitch: -8}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_deep_01, edge_fallback: zh-CN-YunjianNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_steady_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_deep_01, prosody_override: {rate: 0.75, pitch: -8}}
+
+  # 03 — Master Feung (martial arts master)
+  master_feung:
+    display_name: Master Feung
+    style_archetype: martial_arts_master
+    manga_personality: disciplined, precise, commanding, controlled energy
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_deep_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_deep_01, notes: "commanding sensei, low pitch"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_energetic_01, notes: "determined young student"}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_deep_01, edge_fallback: ko-KR-InJoonNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_deep_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_deep_01, edge_fallback: zh-CN-YunjianNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+
+  # 05 — Sai Maa (divine mother)
+  sai_ma:
+    display_name: Sai Maa
+    style_archetype: divine_mother
+    manga_personality: radiant, compassionate, expansive, loving authority
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_mature_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_compassionate_01, notes: "warm divine mother voice"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_compassionate_01, prosody_override: {rate: 0.80, pitch: -3}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_mature_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_mature_01, prosody_override: {rate: 0.80, pitch: -3}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_mature_01, edge_fallback: zh-TW-HsiaoYuNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_mature_01, prosody_override: {rate: 0.80, pitch: -3}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_mature_01, edge_fallback: zh-CN-XiaoyiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_mature_01, prosody_override: {rate: 0.80, pitch: -3}}
+
+  # 06 — Ra (cosmic visionary)
+  ra:
+    display_name: Ra
+    style_archetype: cosmic_visionary
+    manga_personality: transcendent, vast perspective, otherworldly calm
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_steady_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_calm_01, notes: "otherworldly calm, measured"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_calm_01, prosody_override: {rate: 0.75, pitch: -8}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_steady_01, edge_fallback: ko-KR-InJoonNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_steady_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_steady_01, prosody_override: {rate: 0.75, pitch: -8}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_steady_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_steady_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_steady_01, prosody_override: {rate: 0.75, pitch: -8}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_steady_01, edge_fallback: zh-CN-YunyangNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_steady_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_steady_01, prosody_override: {rate: 0.75, pitch: -8}}
+
+  # 07 — Junko (energetic healer)
+  junko:
+    display_name: Junko
+    style_archetype: energetic_healer
+    manga_personality: vibrant, enthusiastic, warm energy, genki
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_bright_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_bright_01, notes: "genki healer, bright and warm"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_bright_01, prosody_override: {rate: 0.85, pitch: -3}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_bright_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_bright_01, prosody_override: {rate: 0.85, pitch: -3}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_bright_01, edge_fallback: zh-TW-HsiaoChenNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_bright_01, prosody_override: {rate: 0.85, pitch: -3}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_bright_01, edge_fallback: zh-CN-XiaoxiaoNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_energetic_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_bright_01, prosody_override: {rate: 0.85, pitch: -3}}
+
+  # 07b — Miyuki (Kyoto lay-contemplative; OPD-111)
+  miyuki:
+    display_name: Miyuki
+    style_archetype: quiet_contemplative
+    manga_personality: quiet steady presence, mature warm, kitchen-table teacher register, lay-secular Japanese contemplative
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_mature_warm_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_mature_warm_01, notes: "Kyoto lay teacher, quiet warm mature; wabi-sabi register"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_mature_warm_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_mature_warm_01, edge_fallback: zh-TW-HsiaoChenNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_mature_warm_01, edge_fallback: zh-CN-XiaoxiaoNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      en-US:
+        narrator: {provider: cosyvoice2, reference_id: en_f_mature_warm_01, edge_fallback: en-US-AriaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: en_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: en_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: en_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: en_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+
+  # 08 — Miki (gentle nurturer)
+  miki:
+    display_name: Miki
+    style_archetype: gentle_nurturer
+    manga_personality: soft-spoken, nurturing, patient, maternal warmth
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_gentle_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_gentle_01, notes: "soft nurturing voice"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_soft_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_gentle_01, prosody_override: {rate: 0.85, pitch: -2}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_gentle_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_soft_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_gentle_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_gentle_01, edge_fallback: zh-TW-HsiaoChenNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_clear_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_gentle_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_gentle_01, edge_fallback: zh-CN-XiaoxiaoNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_clear_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_gentle_01, prosody_override: {rate: 0.85, pitch: -2}}
+
+  # 09 — Master Wu (Taoist sage)
+  master_wu:
+    display_name: Master Wu
+    style_archetype: taoist_sage
+    manga_personality: playful wisdom, paradoxical, unhurried, amused
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_warm_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_warm_01, notes: "amused elder, slightly playful"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_warm_01, edge_fallback: ko-KR-HyunsuMultilingualNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_warm_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_warm_01, edge_fallback: zh-CN-YunxiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_energetic_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
+
+  # 10 — Pamela Fellows (clinical wisdom)
+  pamela_fellows:
+    display_name: Pamela Fellows
+    style_archetype: clinical_wisdom
+    manga_personality: professional, warm authority, evidence-based, nurturing
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_mature_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_mature_01, notes: "professional nurturing"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_calm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_mature_01, prosody_override: {rate: 0.85, pitch: -2}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_mature_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_steady_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_mature_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_mature_01, edge_fallback: zh-TW-HsiaoYuNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_steady_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_mature_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_mature_01, edge_fallback: zh-CN-XiaoyiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_steady_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_mature_01, prosody_override: {rate: 0.85, pitch: -2}}
+
+  # 11 — Joshin (zen practitioner)
+  joshin:
+    display_name: Joshin
+    style_archetype: zen_practitioner
+    manga_personality: minimalist, precise, cool clarity, direct
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_steady_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_steady_01, notes: "precise zen clarity"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_soft_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_steady_01, prosody_override: {rate: 0.80, pitch: -3}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_steady_01, edge_fallback: ko-KR-InJoonNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_steady_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_soft_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_steady_01, prosody_override: {rate: 0.80, pitch: -3}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_steady_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_steady_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_clear_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_steady_01, prosody_override: {rate: 0.80, pitch: -3}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_steady_01, edge_fallback: zh-CN-YunyangNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_steady_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_clear_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_steady_01, prosody_override: {rate: 0.80, pitch: -3}}
+
+  # 12 — Maat (cosmic truth)
+  maat:
+    display_name: Ma'at
+    style_archetype: cosmic_truth
+    manga_personality: balanced, just, archetypal feminine, timeless
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_soft_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_compassionate_01, notes: "timeless archetypal feminine"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_calm_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_compassionate_01, prosody_override: {rate: 0.80, pitch: -5}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_gentle_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_steady_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_mature_01, prosody_override: {rate: 0.80, pitch: -5}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_clear_01, edge_fallback: zh-TW-HsiaoYuNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_steady_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_mature_01, prosody_override: {rate: 0.80, pitch: -5}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_clear_01, edge_fallback: zh-CN-XiaoyiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_mature_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_steady_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_bright_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_mature_01, prosody_override: {rate: 0.80, pitch: -5}}
+
+  # 13 — Omote (empathic mirror)
+  omote:
+    display_name: Omote
+    style_archetype: empathic_mirror
+    manga_personality: reflective, mirroring, gentle, attuned
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_soft_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_soft_01, notes: "reflective, attuned"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_soft_01, prosody_override: {rate: 0.85, pitch: -2}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_soft_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_soft_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_soft_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_gentle_01, edge_fallback: zh-TW-HsiaoChenNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_clear_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_gentle_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_gentle_01, edge_fallback: zh-CN-XiaoxiaoNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_clear_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_gentle_01, prosody_override: {rate: 0.85, pitch: -2}}
+
+  # 14 — Master Sha (healing energy master — from teacher_character_prompts)
+  master_sha:
+    display_name: Master Sha
+    style_archetype: healing_energy_master
+    manga_personality: powerful, focused, concentrated energy, direct healer
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_m_deep_01, edge_fallback: ja-JP-KeitaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_m_deep_01, notes: "concentrated power, low register"}
+        student_1: {provider: cosyvoice2, reference_id: ja_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_m_deep_01, edge_fallback: ko-KR-InJoonNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_m_deep_01, edge_fallback: zh-TW-YunJheNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_m_deep_01, edge_fallback: zh-CN-YunjianNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_m_deep_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
+
+# ─── TOTALS ───────────────────────────────────────────────────────────────
+# 14 teachers × 5 voice slots × 4 CJK locales = 280 character voice entries
+# (zh-HK assignments follow zh-TW patterns, add when zh-HK manga launches)

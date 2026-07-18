@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__depression__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__depression.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__through_loss
+  name: Through the Low Places — for Tech & Finance Professionals
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Overcoming Depression: After the Loss (2)'
+subtitle: A Real Talk Guide to Depression for Tech Finance Burnout
+cover_tagline: The high-functioning version of falling apart.
+description:
+  short_blurb: You're still shipping, still in every standup, still closing — and
+    underneath it something has gone gray and quiet and heavy. This is a plain-language
+    map of the weight that has no name yet, written for the people who keep performing
+    while it sits on their chest. Not a fix. A way to finally call it what it is.
+  long_description: 'It doesn''t announce itself. You''re still answering Slack inside
+    four minutes, still the one who jumps on the incident bridge, still hitting your
+    numbers. From the outside you look fine — maybe even sharp. But somewhere in the
+    last few months the color drained out. Meetings you used to live for feel like
+    wading through wet sand. You close the laptop and there''s nothing on the other
+    side of the day. You can''t point to a single thing that went wrong, which is
+    exactly why you can''t explain it to anyone, including yourself.
+
+
+    This book is for the high-functioner carrying a weight that doesn''t have a name
+    yet. The senior engineer, the analyst, the PM, the person three rungs up who is
+    quietly grieving something they can''t locate — a version of themselves, an ambition,
+    a feeling of being alive at work that left without telling you. It is depression
+    that wears your competence like a costume, and the costume is so good that no
+    one, including you, is allowed to see what''s underneath. You ship, you smile
+    on the standup, you take the 1:1 — and the gap between how you look and how you
+    feel gets a little wider every week.
+
+
+    First we name it. Not ''burnout,'' not ''just tired'' — we get specific about
+    what the gray actually is and where in your body you''ve been storing it. Then
+    we go down into it. Not to fix it, not to optimize your sleep stack or your morning
+    protocol, but to stop running from the thing and actually feel the shape of what
+    you''ve lost. That descent is the part everyone skips, because your whole training
+    is to escalate, resolve, and close the ticket. This is not a ticket. You come
+    back up changed — not cured, not ''back to baseline,'' but able to carry the weight
+    without pretending it isn''t there.
+
+
+    What this book will not do: it will not promise you''ll be your old self by Q3.
+    It won''t hand you a habit tracker or tell you the problem is your discipline.
+    There is no productivity hack hiding in here, no reframe that makes the heaviness
+    convenient.
+
+
+    What it will do is talk to you straight, in words you can actually use the next
+    time you''re staring at a screen at 9pm with nothing left. You''re allowed to
+    not know what''s wrong yet. You''re allowed to set it down for a minute. Naming
+    the weight is not weakness — it''s the first honest thing you''ve done in a while.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - tech & finance professionals
+  - depression for tech & finance professionals
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ana_reyes
+comp_titles:
+- Lost Connections (Johann Hari) — reframes depression as something happening to you,
+  not a flaw in you
+- Burnout (Emily Nagoski & Amelia Nagoski) — completing the stress cycle in a body
+  that never gets to finish it
+- The Midnight Library (Matt Haig) — sitting honestly with the lives and selves you
+  grieve not living
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

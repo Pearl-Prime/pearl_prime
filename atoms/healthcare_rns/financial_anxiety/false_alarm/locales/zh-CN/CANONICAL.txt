@@ -1,0 +1,311 @@
+## RECOGNITION v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+詹姆斯查看银行余额。误报来了：钱正在消失。他要无家可归了。现实是，他的账户安然无恙。是焦虑在制造紧急状态。他的胸口发紧。胃部下沉。财务焦虑已经校准了他的神经系统，让他在即使稳定时也相信匮乏的存在。
+---
+
+## RECOGNITION v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/recognition/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+玛丽亚遇到一笔意外扣款。误报响起：我要失去一切了。现实是：那只是一笔小额扣款。是焦虑在制造灾难。她的双手冰凉。胸口发紧。财务焦虑在不停地拉响紧急警报。
+---
+
+## RECOGNITION v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/recognition/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+艾米想着她的储蓄。误报出现：这不够。她需要更多。她永远都不够。现实是：她一直在规律储蓄。是焦虑在制造一种永恒的不足感。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/recognition/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+罗莎想到退休。误报响起：她永远无法退休。她要工作一辈子。现实是：她正在为退休做准备。是焦虑在制造无助感。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/recognition/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+达尼收到一张账单。误报出现：灾难降临。她落后了。现实是：这只是常规流程。是焦虑让每一次财务互动都感觉像是一场紧急状态。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+詹姆斯强迫性地检查账户。这种机制在于，检查是为了防止误报。但它反而强化了误报。他已习得金钱永远不安全这一信念。他的胸口总是发紧。双手总是冰凉。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v02.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+玛丽亚总是在审查财务状况。这种机制在于，审查本应带来安全感。但它只带来了过度警觉。她被那些误报警报弄得精疲力竭。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+艾米 perpetually 担忧储蓄。这种机制在于，担忧本应激励储蓄。但它只制造了焦虑。她的身体疲惫不堪。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+罗莎对退休进行灾难化想象。这种机制在于，灾难化想象本应激励规划。但它只制造了绝望。她已停止尝试。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+达尼回避看账单。这种机制在于，回避本应带来平静。但它只制造了更多的焦虑。账单还在那里。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+詹姆斯查看账户。误报来了。他观察道：这是那个模式。账户没事。焦虑在撒谎。他的双手微微变暖。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+玛丽亚遇到一笔扣款。误报开始。她观察道：小额扣款。我没事。是焦虑在制造紧急状态。她的胸口微微舒展。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+艾米想着储蓄。警报响起。她观察道：我在储蓄。这就够了。焦虑在撒谎。她的呼吸变得轻松。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+罗莎想到退休。警报响起。她观察道：我在积累。我有时间。焦虑在灾难化。她的胸口微微舒展。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+达尼收到一张账单。警报响起。她观察道：常规账单。我没事。是焦虑在制造紧急状态。她的胸口舒展。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+詹姆斯可以查看账户而不惊慌。警报声变小了。他的胸口更开阔。双手更温暖。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+玛丽亚可以接收扣款通知而不进行灾难化想象。警报声变小了。她的胸口舒展。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+艾米可以思考储蓄而不感到紧急。警报声变小了。她的呼吸更轻松。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+罗莎可以怀着希望思考退休。警报声变小了。她的胸口舒展。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+达尼可以收到账单而不惊慌。警报声变小了。她的胸口舒展。
+---
+
+## TURNING_POINT v06
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+克莱尔计算加班费是否足以支付车贷。当没有真实威胁存在时，警报系统发出了危险信号。克莱尔的肋骨收紧。这个模式此刻要求被关注——炽热、急切、拒绝等待。克莱尔注视着它的索求。这一次，克莱尔没有顺从，而是追踪这索求的起源。它始于喉咙。它蔓延至思绪。思绪构建了一个故事。这个故事说：立刻行动，否则失去一切。克莱尔审视这个故事。这个故事没有证据。肋骨的紧缩是真实的感受。这个故事制造了虚假的紧迫感。克莱尔容纳着这种感受，而不追随这个故事。感受依然存在。但故事失去了听众。框架发生了转变：模式很响亮，但响亮并不等于真理。
+---
+
+## TURNING_POINT v07
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/turning_point/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+马库斯计算需要多少个按日计酬的轮班才能覆盖学生贷款还款，而所需的数量超过了可用的天数。警报系统达到了最大音量。马库斯的肠胃翻腾。头皮发麻。一切都缩小到这个时刻——要么崩溃，要么突破，没有中间地带。马库斯伫立在这巅峰之中。模式说：这就是你的样子。马库斯听到了。第一次，马库斯把它听成一句话，而不是一个事实。一句话可能是错的。马库斯的身体因这种强度而颤抖。颤抖是真实的。那句话只是解读。马库斯将颤抖与那句话分离开来。身体仍在震颤。但关于身份的宣称消散了。警报鸣响，而身体识别出那只是噪音。框架裂开了一道缝隙。
+---
+
+## EMBODIMENT v06
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: self_claim
+---
+埃琳娜拒绝了加班。银行账户在抗议。但身体比金钱更需要休息。警报系统激活。埃琳娜的头皮发麻。热浪涌起。埃琳娜认出了这股热意。没有转身逃避。埃琳娜让警报鸣响，却依然行动，身体嗡嗡作响，但双手稳定。旧的模式 firing，但埃琳娜依然基于新的理解去行动。埃琳娜的手指颤抖，但双手继续移动。身份不是那个模式。身份是埃琳娜在模式运行时所做的事。埃琳娜做着当下正确的事，尽管背景中模式在尖叫。尖叫声渐弱为低鸣。低鸣渐弱为一个事实：模式存在。埃琳娜也存在。它们不是同一件事。
+---
+
+## EMBODIMENT v07
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/embodiment/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: self_claim
+---
+拉维告诉伴侣：我们需要改变计划。这场对话是他们数月来一直回避的。强度达到最大。拉维的喉咙发紧。肠胃翻腾。警报系统以最高音量咆哮。每根神经都在说：屈服。拉维没有屈服。拉维站在风暴中心，基于新的身份行动——不是对抗模式，而是穿越它。模式是噪音。行动是信号。拉维的身体承载着两者。危机并没有定义拉维。拉维的回应定义了拉维。拉维顶着这一刻的全部重量前行。重量是真实的。崩溃并未发生。拉维穿过了巅峰，从另一端走出来，依然站立。依然在选择。
+---
+
+## MECHANISM_PROOF v06
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+格蕾丝追踪对加班的依赖：需要钱，接轮班，失去健康，需要钱治病。格蕾丝的手指颤抖。热度上升。当没有真实威胁存在时，警报系统发出了危险信号。这次，格蕾丝追踪了这个序列：触发点、身体反应、思维 cascade、行为牵引。触发点是外部的。身体反应是自动的。思维 cascade 是没有实际危险的威胁探测。行为牵引才是造成代价的部分。格蕾丝现在清晰地看到了代价。当模式运行其回路时，格蕾丝的肋骨收紧。模式之所以持续，是因为警报的误报从未得到纠正，因为格蕾丝在了解到情况安全之前就回避了情境。这种持续性并不神秘。这种持续性是机械性的。看见机器并不能让机器停止。看见机器揭示了机器并不是格蕾丝。
+---
+
+## MECHANISM_PROOF v07
+---
+path: story_atoms/healthcare_rns/anchored/financial_anxiety/false_alarm/mechanism_proof/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+但丁计算出，以目前的速度，学生贷款的偿还期将超过他的职业生涯。数学是一堵墙。强度达到峰值。但丁的肠胃翻腾。头皮发麻。警报系统全功率运行。但丁注视着它运行。即使在最大音量下，机制也遵循相同的序列：模糊刺激、威胁解读、身体动员、回避或逃避、解脱、强化。在五级强度下，这个序列与二级强度时完全相同。改变的只有振幅。模式在更高强度下并不会变得更聪明。它只是变得更大声。但丁的身体吸收了这音量。但丁的思维绘制出这个回路。这个回路没有内置出口——它在循环。循环之所以持续，是因为它以自身的输出为食。但丁看到了这种喂食。看到喂食并不能停止循环。看到喂食揭示了循环有一个结构。结构是可以被中断的。
+---

@@ -1,0 +1,439 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 7
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_007 — "Monday, 8:14 AM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_006:
+#   The day after the honest Sunday call. Monday morning commute. The
+#   practice does NOT save Mira from a small anxious spiral. She catches
+#   herself mid-spiral, returns, catches herself again. The episode's
+#   doctrinal contribution: the practice is not a finished state. It is
+#   a returning, over and over.
+#
+# Episode arc — the practice fails, and that is also the practice:
+#   safety opening (kitchen morning, tea, succulent) → ramp (running
+#   late by 4 minutes) → climax (subway car spiral — projection about
+#   work, replays old conversation) → ground (catch the spiral late,
+#   return) → ramp 2 (at the desk, spiral resumes) → ground (catch
+#   again, smaller) → Long Drop (bathroom mirror, two minutes alone)
+#   → completion (back at desk, work, succulent visible)
+#
+# SCROLL THERAPEUTIC TEST:
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (kettle steam + warm window)
+#   2. ≥3 oscillations activation/ground ...... ✓ 5 oscillations (more this episode — the point)
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~11 activation / ~21 ground panels
+#   4. Closes with completion ................. ✓ panels 30-32 settle
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS (NEW: imperfect-practice register):
+#   Tea Beat (panels 1-2 opening, 32 closing — full bookend returns)
+#   Anchor Panel — kitchen succulent + office succulent BOTH appear
+#     (panels 1, 31) — the visual rhyme is now home/work continuity
+#   Awe-Pullback (panel 14 — subway car wide shot, fluorescent-lit)
+#   Pendulation Pair (5-7 ↔ 8-10, 11-13 ↔ 14-16, 17-19 ↔ 20-22, 23-25 ↔ 26-28)
+#   Long Drop (panel 26 — office bathroom mirror, silent two-minute beat)
+#   Continuity callback: jade pendant fidget (panels 7, 22) — for the
+#   first time the pendant touch is also a FIDGET. The practice has
+#   nuance. The same gesture can be ground OR habit.
+#
+# DOCTRINAL ANCHOR:
+#   The practice is not a state Mira has achieved. It is a movement she
+#   makes, fails to make, makes again, fails, makes again. The teaching:
+#   the alarm will keep going off. The practice is the returning, not
+#   the staying. The reader must leave this episode KNOWING this — that
+#   the prior episodes' successes were not the destination.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_007
+title: "The Alarm Is Lying — Episode 7: Monday, 8:14 AM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist
+    visual_anchor: "long brown hair pulled back hastily today (running late), cream sweater under charcoal jacket, jade pendant visible, grey trousers, sneakers"
+
+scene_palette:
+  primary: warm Monday morning gold + cream
+  secondary: cool subway fluorescent + pale office daylight
+  accent: jade green (pendant + both succulents)
+  subway_palette: fluorescent white + cool steel grey
+  bathroom_palette: cool sanitary white + soft mirror light
+  desk_palette: warm office gold (same as ep_005)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (32 panels — fuller because of the multiple oscillation cycles)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_007_p01
+    panels:
+
+      # ── OPENING — Monday morning, running a little late ────────────────
+      - panel_id: ep007_001
+        scene: |
+          Close — the kettle on the stove, mid-steam. Soft Monday-morning
+          light through the kitchen window. The succulent on the sill,
+          unchanged. A faster pace to the steam than usual (the kettle
+          has just begun; she's reaching for it).
+        beat_type: ~
+        intent: "ANCHOR PANEL — same kettle + succulent; SAFETY CUE in 800 px"
+        silence_confirmed: true
+
+      - panel_id: ep007_002
+        scene: |
+          Wider — Mira at the kitchen counter, half-dressed for work (cream
+          sweater on, jacket draped over a chair). Hair pulled back in a
+          quick clip. Pouring tea into a travel mug. The clock on the wall:
+          8:14 AM.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Monday. Eight fourteen. Four minutes late."
+
+      # ── RAMP — running, the body knows ─────────────────────────────────
+      - panel_id: ep007_003
+        scene: |
+          Mira pulling on the jacket, slinging her bag, picking up the
+          travel mug. The succulent gets a half-glance, no time to touch
+          it.
+        beat_type: spatial
+        intent: "Hurried — practice anchors get skipped in the rush"
+
+      - panel_id: ep007_004
+        scene: |
+          Wide — Mira walking quickly down the apartment building hallway
+          toward the elevator. The jade pendant visible bouncing slightly
+          at her neckline as she walks.
+        beat_type: standard
+        intent: "Pace contrast — visible difference from ep_003's Saturday calm"
+
+      - panel_id: ep007_005
+        scene: |
+          Close on Mira's face in the elevator. Eyes on the floor numbers
+          ticking down. Jaw a little tense.
+        beat_type: micro
+        intent: "Activation 1 — running-late stress, mild"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      # ── GROUND 1 — small breath in the elevator ────────────────────────
+      - panel_id: ep007_006
+        scene: |
+          Tight close — Mira's chest. Slow exhale. Her hand briefly at the
+          pendant. The shoulders settle half a degree.
+        beat_type: micro
+        intent: "Pendulation — practice fires even in motion"
+
+      - panel_id: ep007_007
+        scene: |
+          Elevator doors opening. Lobby beyond. Mira already walking
+          forward.
+        beat_type: spatial
+
+      # ── SUBWAY CAR — the spiral starts ─────────────────────────────────
+      - panel_id: ep007_008
+        scene: |
+          Cut to a subway car interior. Mid-morning Monday — packed but
+          not crushing. Mira standing, one hand on the overhead bar. The
+          travel mug in the other hand. Fluorescent cool light. Her
+          reflection visible in the dark window opposite.
+        beat_type: standard
+        intent: "Scene transition — apartment → subway commute"
+
+      - panel_id: ep007_009
+        scene: |
+          Close on Mira's face. The eyes start to glaze — the mind has
+          drifted to a Friday-night work email she did not fully address.
+          The spiral is starting. The body responds.
+        beat_type: micro
+        intent: "Activation 2 — spiral onset; the practice has NOT caught it yet"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      - panel_id: ep007_010
+        scene: |
+          Close — Mira's hand tightens on the overhead bar. Knuckles a
+          fraction paler. She does not notice. The mind is rehearsing
+          a future conversation with her manager.
+        beat_type: micro
+        intent: "The practice fails to catch this one"
+
+      - panel_id: ep007_011
+        scene: |
+          Mira's reflection in the dark subway window — half-visible,
+          fragmented by the train's motion. Her mouth slightly tight.
+          She is not looking at the reflection.
+        beat_type: spatial
+        intent: "Externalization — the reader sees what Mira does not"
+
+      # ── PEAK SPIRAL — internal monologue ────────────────────────────────
+      - panel_id: ep007_012
+        scene: |
+          Black panel, almost black, very thin frame of light. Caption
+          across the middle.
+        beat_type: micro
+        intent: "Internal spiral — the projection takes over"
+        narrator_caption_by_locale:
+          en_US: "She is going to ask why I didn't reply. I should have replied. I should have."
+
+      - panel_id: ep007_013
+        scene: |
+          Back to Mira on the subway — face slightly farther into the
+          spiral. Mouth a little tighter. Travel mug at her side now,
+          tea forgotten.
+        beat_type: micro
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      # ── AWE-PULLBACK — wide subway car, fluorescent ─────────────────────
+      - panel_id: ep007_014
+        scene: |
+          Wide pullback of the subway car interior. Mira small among other
+          commuters — a man with headphones, a woman reading, a teenager
+          on her phone, an older man with a folded newspaper. All of them
+          quiet, each in their own small interior weather. Fluorescent
+          light, the train's motion blurring the dark windows beyond.
+          Intentionally over-wide.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — Mira's spiral is one of many quiet interiors"
+        silence_confirmed: true
+
+      # ── GROUND 2 — late catch ──────────────────────────────────────────
+      - panel_id: ep007_015
+        scene: |
+          Close on Mira — a sudden small recognition in her eyes. The
+          mind catches itself. She has been spiraling.
+        beat_type: micro
+        intent: "Catch — late, but real. The practice arrives finally."
+
+      - panel_id: ep007_016
+        scene: |
+          Close — Mira's hand at the pendant. Three fingers. A slow exhale
+          that is visibly steadier than the breath was. The reflection in
+          the window now meets her gaze briefly.
+        beat_type: micro
+        intent: "Ground 2 — practice fires, but Mira's expression carries the cost"
+
+      - panel_id: ep007_017
+        scene: |
+          Mira's face — softer now, but tired. The spiral has taken
+          something. She is not unscathed.
+        beat_type: micro
+
+      # ── OFFICE LOBBY — small ramp resumes ──────────────────────────────
+      - panel_id: ep007_018
+        scene: |
+          Wide — Mira stepping out of the office building's revolving door
+          into the lobby. The reception desk, the elevator bank. Her hand
+          still on the travel mug.
+        beat_type: standard
+
+      - panel_id: ep007_019
+        scene: |
+          Close — Mira in the elevator. Eyes on the floor indicator. The
+          spiral resumes faintly. The mind: rehearsing again.
+        beat_type: micro
+        intent: "Activation 3 — second spiral onset; the practice does not get to rest"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      # ── DESK — small explicit failure ──────────────────────────────────
+      - panel_id: ep007_020
+        scene: |
+          Mira at her desk, laptop open. The office succulent visible in
+          its corner pot — same cutting from ep_005. She has set the
+          travel mug down. She has not yet started working.
+        beat_type: standard
+
+      - panel_id: ep007_021
+        scene: |
+          Close — her eyes on the inbox. The email subject from Friday
+          night visible. A small inhale catches in her throat.
+        beat_type: micro
+        intent: "Activation peak in workspace"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      # ── PENDULATION 3 — the pendant fidget (NOT ground this time) ─────
+      - panel_id: ep007_022
+        scene: |
+          Close on Mira's hand at the pendant — but the gesture is
+          quicker, more anxious. Fingers tugging the chain slightly. This
+          is fidget, not anchor.
+        beat_type: micro
+        intent: "DOCTRINAL — the same gesture can be ground OR habit; here it is habit"
+
+      - panel_id: ep007_023
+        scene: |
+          Mira's face — recognizing what her hand is doing. A small
+          half-smile that is mostly rueful.
+        beat_type: micro
+        intent: "Meta-noticing — recognizing the gesture isn't doing the work"
+
+      - panel_id: ep007_024
+        scene: |
+          Close on her hand — releasing the pendant. Setting both palms
+          flat on the desk instead. The grounding-via-surface beat.
+        beat_type: micro
+        intent: "Re-choice — finding ground through different means"
+
+      # ── GROUND 3 — surface contact, slow ───────────────────────────────
+      - panel_id: ep007_025
+        scene: |
+          Wider — Mira at the desk, hands flat, eyes closed. Office hum
+          around her. Late-morning light shifting through the blinds.
+          The breath finds the rhythm.
+        beat_type: spatial
+        intent: "BREATH BRACKET via surface-contact instead of pendant"
+
+      # ── LONG DROP — bathroom mirror, two minutes silent ────────────────
+      - panel_id: ep007_026
+        scene: |
+          Wide silent panel. Mira in an office bathroom, alone. She is
+          standing at the sink, hands braced on the counter, looking at
+          her own reflection. The fluorescent light is cool. Her face is
+          tired but unarmored. Two minutes of nothing. NO TEXT, NO
+          CAPTION, NO SFX.
+        beat_type: long_drop
+        intent: "LONG DROP — the silent self-meeting after a hard morning"
+        silence_confirmed: true
+        dialogue_lines: []
+
+      - panel_id: ep007_027
+        scene: |
+          Close — Mira's hand turning on the cold water tap. Water in the
+          basin. Her other hand reaching down.
+        beat_type: micro
+        intent: "Sensory ground — cold water on the wrists"
+
+      - panel_id: ep007_028
+        scene: |
+          Close on her wrists under the cold water. A long beat. Eyes
+          closed. Reset.
+        beat_type: micro
+
+      # ── COMPLETION — back at desk, work resumes ────────────────────────
+      - panel_id: ep007_029
+        scene: |
+          Mira back at her desk. The succulent in its corner pot, the
+          travel mug, the laptop. She is sitting, hands on the keyboard
+          now. Starting to type a reply to the Friday-night email — slow,
+          deliberate.
+        beat_type: standard
+        intent: "Scene transition — bathroom → desk; the day continues"
+
+      - panel_id: ep007_030
+        scene: |
+          Close on the laptop screen — a partial reply visible. The
+          opening line: "Apologies for the delay — quick thoughts:" A
+          small ordinary sentence.
+        beat_type: micro
+        intent: "Doctrinal — ordinary work continues; the spiral was real but is not all of the day"
+
+      - panel_id: ep007_031
+        scene: |
+          Wider — Mira's desk. The succulent's leaves catching late-morning
+          office light. Mira typing, posture loose now, not tight. The
+          window blinds striped across her.
+        beat_type: micro
+
+      - panel_id: ep007_032
+        scene: |
+          Final panel — close on the desk: the succulent, the travel mug
+          (now half-empty), and Mira's hand near the keyboard, briefly
+          still. Caption strip below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "It went off. I came back. It will go off again. I will come back."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 7 of 10. The "practice is not a state" episode. Critical for
+    the series — without it, the prior episodes risk reading as a steady
+    climb toward "healed." Iyashikei convention requires the show of
+    imperfection: the practice fails to catch the spiral early, catches
+    it late, fails to fully ground the second spiral, finds ground
+    through a different gesture (palms on desk). The reader leaves
+    KNOWING the practice is a returning, not a destination. Doctrinally
+    this is ahjan's exact frame: the alarm is real and recurrent; the
+    practice is the returning, not the staying.
+  pacing_vs_prior: |
+    32 panels (back up from ep_006's 28). More oscillations (5 instead
+    of 3-4) — necessary to show the multi-spiral pattern. The Long
+    Drop at panel 26 sits later than usual (bathroom rather than open-
+    air location) — different texture; the cold-water beat at 27-28
+    is a sensory ground new to the series.
+  continuity_callbacks: |
+    - Kettle bookend (panel 1, with no closing kettle — the bookend
+      is intentionally INCOMPLETE this episode; the practice has not
+      yet circled back to the evening register. Future episodes resume
+      the closing kettle.)
+    - Jade pendant: panel 6 (ground), panel 22 (FIDGET — first time
+      the same gesture is shown as habit not anchor), panel 24
+      (released, replaced with surface contact)
+    - Succulents: home kitchen (panel 1), office desk (panel 20, 29,
+      31, 32) — both visible this episode; the visual rhyme is the
+      whole-day continuity
+    - Travel mug — NEW prop; the morning's tea carried into the day;
+      a small visual through-line for the episode
+    - Cream sweater under charcoal jacket — same character lock-in
+    - "It is not danger. It is just steam." caption — DOES NOT
+      appear; the practice is fully internalized
+  craft_notes: |
+    The pendant-as-fidget moment (panel 22) is the doctrinal critical
+    point of the episode. Every prior episode has shown the pendant
+    touch as ground. ep_007 shows that the SAME gesture can become
+    habit / avoidance / nervous tic. The practice is not the gesture;
+    the practice is the meta-noticing that catches when the gesture
+    has gone hollow. This is core ahjan-doctrine framing.
+  long_drop_position: |
+    Panel 26 — office bathroom mirror. Seven Long Drops, seven distinct
+    locations across the series so far (kitchen, rooftop, park bench,
+    window seat, shared walk, balcony, bathroom mirror). Variety
+    structurally required.
+  closing_caption: |
+    "It went off. I came back. It will go off again. I will come back."
+    Four sentences, two pairs. The caption explicitly names the
+    returning-not-staying frame. Most direct doctrinal naming in the
+    series so far. Justified by this being THE imperfect-practice
+    episode — the reader needs the frame stated.
+  translation_handoff: |
+    Same as prior episodes — text_by_locale dicts populated for en_US
+    only. New locked phrases: "It went off. I came back. It will go
+    off again. I will come back." (panel 32); "She is going to ask
+    why I didn't reply. I should have replied. I should have."
+    (panel 12 — the spiral content).
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)

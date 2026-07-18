@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__financial_anxiety__shame__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__steady_ground__1hr
+  name: Steady Ground — for Managers (One-Hour)
+installment_number: 2
+engine: shame
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Financial Anxiety: What Shame Does to You'
+subtitle: What Shame Does to You
+cover_tagline: You make good money and you're scared all the time. You're allowed
+  to say that here.
+description:
+  short_blurb: For the manager carrying a money fear they can't admit to anyone, because
+    on paper they have no right to it. This is one hour to set down the secret shame
+    of being financially anxious while looking successful, and to stop performing
+    the okayness you don't feel. No frameworks. Just permission to stop hiding.
+  long_description: 'Everyone thinks you''ve made it. The title, the salary, the house,
+    the way people assume you''re set. And underneath it, you carry a thing you''ve
+    never said out loud: you''re terrified about money, and you feel like you have
+    no right to be. So you don''t tell your partner the real depth of it. You don''t
+    tell your friends. You nod when people envy your position. You perform the confidence
+    of someone who has it handled, and the gap between that performance and the fear
+    in your chest has its own name, and the name is shame.
+
+
+    This is the particular trap of the financially anxious manager: you believe you''re
+    not even allowed to feel it. You grew up with less, or you didn''t, and either
+    way you''ve absorbed the belief that someone in your position who still lies awake
+    about money must be doing something wrong, must be a fraud, must be the one person
+    who can''t manage what everyone else handles fine. That belief, that something
+    is secretly wrong with you, is heavier than any number on any statement. And you''ve
+    been carrying it completely alone, behind a face that says everything''s great,
+    for longer than you''d admit.
+
+
+    What this hour does is not advice, and it''s not a pep talk about how you''re
+    doing fine actually. It goes to the buried thing. First you name it: I am ashamed
+    of being afraid about money, and the shame has kept me silent. Then you go down
+    into it instead of managing the optics. You stop performing the okayness for one
+    hour and let the truth be true: the fear is real, you''ve hidden it, and hiding
+    it has made it grow in the dark. You meet the belief that you''re a fraud and
+    you see it for what it is, an old story, not a verdict. And then you come back
+    up, the fear maybe still there, but no longer welded to the shame, no longer a
+    secret eating you from inside.
+
+
+    Nothing here will fix your finances, audit your spending, or prove your fear is
+    unfounded. No one is going to tell you to be grateful for what you have, because
+    shame doesn''t respond to gratitude lectures, it responds to being seen. This
+    hour refuses the performance that says successful people don''t get scared. What
+    it offers is the one thing the shame can''t survive: a place to set it down and
+    say the unsayable thing without anyone deciding you''re less than you were.
+
+
+    You''ve been carrying this where no one can see it. For one hour, you can put
+    it down and stop pretending. The fear is allowed. You are not a fraud for having
+    it. You''re a person who got good at hiding, and you''re allowed to stop.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - managers
+  - money anxiety for managers
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- Daring Greatly (Brené Brown) — dismantles shame and the exhausting performance of
+  having it all together
+- The Psychology of Money (Morgan Housel) — normalizes that money fear is universal,
+  even among the outwardly successful
+- The Gifts of Imperfection (Brené Brown) — directly confronts the hidden belief that
+  something is wrong with you
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

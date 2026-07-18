@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__steady_ground__1hr
+  name: Steady Ground — for Professional Women (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: When Everything Is Too Much (1)'
+subtitle: Practical Tools to Regain Control When Life Feels Unmanageable — Burnout
+  for Millennial Women Professionals (When Everything Is Too Much)
+cover_tagline: Everything is urgent, nothing is finished, and you're the one holding
+  all of it.
+description:
+  short_blurb: When the inbox, the Slack pings, the deadlines, and the people who
+    need you all hit at once, your nervous system stops being able to tell big from
+    small. This is one hour to stop drowning in the pile and feel the ground under
+    one single thing again.
+  long_description: 'You open your laptop and the day comes at you all at once: forty-one
+    unread, three meetings you''re underprepared for, a deliverable that was due yesterday,
+    a text from your mom you haven''t answered in a week. Your chest tightens. You
+    toggle between tabs without finishing anything, and the harder you try to get
+    on top of it, the more it multiplies. This hour is for the woman who is unmistakably
+    good at her job and is quietly going under, because there is simply too much,
+    and it all wants her at the same time.
+
+
+    This is for you if competence stopped being the problem a while ago. You can do
+    any one of these things. It''s the all-at-once that flattens you, the way every
+    task feels equally on fire, the way you can''t decide what to do first so you
+    do a little of everything and finish none of it. You''ve tried better systems.
+    You''ve tried waking up earlier. The pile doesn''t shrink, because the issue was
+    never your method. It''s that you''re carrying more than any one person was built
+    to hold and still expecting yourself to feel calm about it.
+
+
+    So we''re not going to optimize the pile. First you''ll recognize what overwhelm
+    actually is: not a character flaw, not poor time management, but a nervous system
+    that''s lost the ability to sort big from small because everything is screaming
+    at once. Then you''ll go down into it instead of bracing against it, and feel
+    what''s underneath the buzzing. Then you''ll come back up able to put your hand
+    on one real thing, not because the list got shorter, but because you did.
+
+
+    This book will not give you a productivity system. It won''t promise inbox zero,
+    or a color-coded method that finally makes it all manageable. It won''t tell you
+    to just delegate, as if the problem were that you hadn''t thought of that. The
+    flood is real, and you''re not failing for feeling it.
+
+
+    What it offers is the part the productivity advice skips: how to stop white-knuckling
+    the whole avalanche and let your system come down far enough to touch one thing
+    at a time. You don''t have to get on top of all of it to stop drowning. You don''t
+    have to feel calm about your workload to set the pile down for an hour. You''re
+    allowed to stop holding everything at once, starting now.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - professional women
+  - burnout for professional women
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: grace_adeyemi
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — completes the stress response instead of just managing the load'
+- Four Thousand Weeks (Oliver Burkeman) — accepts you can't do it all rather than
+  promising a faster system
+- How to Keep House While Drowning (KC Davis) — meets overwhelm with compassion, not
+  another optimization scheme
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

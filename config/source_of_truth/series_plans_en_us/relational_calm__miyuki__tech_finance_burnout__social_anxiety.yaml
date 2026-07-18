@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: relational_calm__miyuki__tech_finance_burnout__social_anxiety
+brand: relational_calm
+teacher: miyuki
+persona: tech_finance_burnout
+topic: social_anxiety
+byline_author: gideon_stern
+arc:
+  installment_1:
+    book_id: relational_calm__miyuki__tech_finance_burnout__social_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__social_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: relational_calm__miyuki__tech_finance_burnout__social_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__social_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: relational_calm__miyuki__tech_finance_burnout__social_anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__social_anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A quiet room for the high-functioning professional whose social
+  anxiety hides behind competence — three doorways into the same crowded mind, each
+  stripping away the performance instead of polishing it, so you stop managing how
+  you come across and start taking up the space you're already in.
+bestseller_hook_family: ''
+emotional_engine: social_anxiety_recognition
+comp_series:
+- Unwinding Anxiety (Judson Brewer) — names the loop and works with it instead of
+  fighting it; same respect for the high-functioning, overthinking mind.
+- 'How to Be Yourself: Quiet Your Inner Critic (Ellen Hendriksen) — the definitive
+  social-anxiety companion for capable people who go silent in the room.'
+- 'Quiet: The Power of Introverts (Susan Cain) — for readers who are tired of being
+  told their stillness is something to fix.'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28 to 44
+  where_they_are: It's 8:54am and the all-hands starts in six minutes. You've muted
+    yourself, turned the camera off, and you're rehearsing the one sentence you might
+    have to say so it lands clean. Your calendar is green all afternoon and your chest
+    is not. You closed a deal yesterday and you still can't picture walking into the
+    team lunch.
+  what_they_need: To understand that the dread isn't a character flaw or a skill gap
+    — it's an alarm, a hidden belief, and a comparison habit doing exactly what they
+    were built to do; and to find a way to be in a room without first earning the
+    right to be there.
+  what_they_avoid: Networking tips, 'executive presence' coaching, communication hacks,
+    exposure-therapy boot camps, anything that treats their quiet as a bug to be fixed,
+    and any book that confuses confidence with volume.
+series_voice_markers:
+  register: spare, clear, unadorned; a quiet presence that says only what is needed;
+    gentle and direct, never clinical, never coaching, never hustle — the voice of
+    someone sitting across an empty table who has nowhere else to be
+  sentence_rhythm: short declaratives that land and stop; longer breath-lines that
+    open and then settle; deliberate white space between thoughts, the way a near-empty
+    room holds sound
+  metaphor_family: bare form and empty space — the room with nothing extra in it,
+    the stillness between two people, the unsaid that settles, clean light through
+    a window, the breath taken in a quiet room, what remains when the clutter falls
+    away
+_needs_authoring: false

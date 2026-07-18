@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__depression__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__depression.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__through_loss
+  name: Through the Low Places — for Professional Women
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Overcoming Depression: The Observer''s Mind (5)'
+subtitle: The Witnessing Practice — Depression for Millennial Women Professionals
+  (The Observer's Mind)
+cover_tagline: Your mind never clocks out. It's been scanning for the next threat
+  since you were old enough to read a room.
+description:
+  short_blurb: The part of you that monitors everything never gets to rest. This is
+    a field guide for the professional woman whose mind is always three moves ahead,
+    bracing for what could go wrong. It won't tell you to relax. It'll show you why
+    the watcher won't stand down, and how to let it.
+  long_description: 'You replay the meeting on the drive home, scanning your own face
+    for what you got wrong. You read your boss''s two-word reply four times for hidden
+    weather. You walk into a room and clock the mood before you''ve taken off your
+    coat. Some part of you is always on duty, always watching, always one step ahead
+    of a danger that mostly never comes. And it is exhausting in a way that no weekend
+    fixes.
+
+
+    This book is for the professional woman whose mind never powers down. The one
+    who got good, young, at reading the room, at anticipating the disappointment,
+    at managing other people''s reactions before they happened, because somewhere
+    along the line being watchful kept her safe. Now it runs on its own. You call
+    it overthinking. You call it anxiety. You call it being on top of things. Underneath
+    all those names is a watcher that has never once been told the threat has passed.
+
+
+    Grace Adeyemi writes about that watcher with respect, not as a glitch to silence
+    but as a part of you that learned hypervigilance for a reason. First, recognition:
+    the constant scanning, the bracing, the three-moves-ahead loop, that''s not a
+    personality flaw and it''s not something you can think your way out of by deciding
+    to chill. Then descent. Instead of trying to shut the watcher off, this book turns
+    toward it, helps you feel the exhaustion of standing guard and ask, gently, what
+    it''s still protecting you from. Then integration: not a mind gone quiet by force,
+    but a watcher that can finally, sometimes, stand down, because some part of you
+    has let it know it''s allowed to.
+
+
+    This is not a calm-down plan. There''s no breathing exercise that orders the vigilance
+    away, no positive self-talk that out-argues a nervous system convinced it''s the
+    only thing keeping you safe. It will not promise you a serene mind or a self that
+    never scans the horizon again. The watching came from somewhere, and this book
+    honors that. What it gives you instead is a clear-eyed understanding of the part
+    of you that never rests, and a way to speak to it, in the car after the meeting,
+    the next time you catch yourself bracing for an impact that isn''t coming.
+
+
+    If you''ve spent years being praised for how sharp and prepared and three-steps-ahead
+    you are, while quietly never feeling safe, this book sees both at once. You don''t
+    have to keep guarding a door no one is standing at anymore. The watcher is allowed
+    to come off duty. You can start letting it know tonight.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - professional women
+  - depression for professional women
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: grace_adeyemi
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — secular, mechanism-level look at why worry loops
+  self-perpetuate
+- The Body Keeps the Score (Bessel van der Kolk) — explains hypervigilance as a body
+  stuck in old danger
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — for the over-responsible who
+  manage everyone's reactions but their own
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,215 @@
+{
+  "persona": "corporate_managers",
+  "topic": "burnout",
+  "runtime_format": "deep_book_6h",
+  "arc": "config/source_of_truth/master_arcs/corporate_managers__burnout__overwhelm__F003.yaml",
+  "engine_type": "overwhelm",
+  "plan": {
+    "ok": true,
+    "runtime_format": "deep_book_6h",
+    "stub_format": false,
+    "word_range": [
+      50000,
+      72000
+    ],
+    "format_chapter_count": 20,
+    "arc_chapter_count": 7,
+    "chapter_count": 7,
+    "dominant_band_sequence": [
+      1,
+      2,
+      2,
+      3,
+      4,
+      3,
+      2
+    ],
+    "intensity_sequence": [
+      2,
+      3,
+      3,
+      4,
+      3,
+      3,
+      2
+    ],
+    "cost_chapter_index": 3,
+    "chapters": [
+      {
+        "index": 0,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 1,
+        "intensity": 2,
+        "bestseller_structure": "zoom_lens"
+      },
+      {
+        "index": 1,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 2,
+        "intensity": 3,
+        "bestseller_structure": "case_file"
+      },
+      {
+        "index": 2,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 2,
+        "intensity": 3,
+        "bestseller_structure": "case_file"
+      },
+      {
+        "index": 3,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 3,
+        "intensity": 4,
+        "bestseller_structure": "ancestor"
+      },
+      {
+        "index": 4,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 4,
+        "intensity": 3,
+        "bestseller_structure": "atomic"
+      },
+      {
+        "index": 5,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 3,
+        "intensity": 3,
+        "bestseller_structure": "brene_brown"
+      },
+      {
+        "index": 6,
+        "arc_position": [
+          "HOOK",
+          "SCENE",
+          "STORY",
+          "REFLECTION",
+          "INTEGRATION"
+        ],
+        "band": 2,
+        "intensity": 2,
+        "bestseller_structure": "gladwell_spiral"
+      }
+    ],
+    "_plan_cohesion_verdict": "PASS"
+  },
+  "plan_cohesion": {
+    "verdict": "PASS",
+    "issues": [],
+    "checks": {
+      "chapter_count_matches": true,
+      "arc_coverage": true,
+      "band_smoothness": true,
+      "final_below_peak": true,
+      "dwell_macro_cadence": true,
+      "structure_variety": true,
+      "cost_chapter_placement": true
+    }
+  },
+  "render_dir": "artifacts/qa/plan_scale_qa_pilot_20260630/renders/deep_book_6h__corporate_managers__burnout",
+  "pipeline_exit": 1,
+  "row": {
+    "duration": "deep_book_6h",
+    "topic": "burnout",
+    "render_dir": "artifacts/qa/plan_scale_qa_pilot_20260630/renders/deep_book_6h__corporate_managers__burnout",
+    "pipeline_exit": null,
+    "words": null,
+    "chapter_flow": "MISSING",
+    "register": "MISSING",
+    "register_verdict": "",
+    "register_f_counts": {},
+    "ei_v2": "MISSING",
+    "ei_composite": null,
+    "craft": "MISSING",
+    "craft_score": null,
+    "book_pass": "MISSING",
+    "cohesion": "MISSING",
+    "cohesion_issues": [],
+    "verdict": "INCOMPLETE",
+    "quality_gate_failures": [],
+    "overall_status": "MISSING"
+  },
+  "buildability": "BUILD_FAIL",
+  "equivalence": {
+    "plan_chapters": 7,
+    "assembled_chapters": 12,
+    "assembled_chapter_source": "selected_content_variants.chapters",
+    "chapter_count_match": false,
+    "count_divergence": {
+      "format_default": 20,
+      "arc_ssot": 7,
+      "plan_used": 7,
+      "assembled": 12,
+      "format_vs_assembled_mismatch": true,
+      "arc_vs_assembled_mismatch": true
+    },
+    "assembled_words": null,
+    "plan_word_range": [
+      50000,
+      72000
+    ],
+    "word_in_range": null,
+    "structural_equivalence": false,
+    "plan_cohesion": "PASS",
+    "assembled_register": "MISSING",
+    "assembled_ei_v2": "MISSING",
+    "assembled_book_pass": "MISSING",
+    "quality_proxy": "INCONCLUSIVE",
+    "structural_proxy": "BROKEN",
+    "proxy_validity": "INCONCLUSIVE",
+    "drift": [
+      "chapter_count plan(arc-first)=7 assembled=12 (src=selected_content_variants.chapters)"
+    ]
+  },
+  "leakage": {
+    "status": "NO_BOOK",
+    "hits": [],
+    "contract_gate": "SKIPPED"
+  },
+  "ei_v2": {
+    "ei_composite": null,
+    "ei_status": "MISSING",
+    "cohesion_pass": 0,
+    "cohesion_warn": 0,
+    "cohesion_fail": 0,
+    "bestseller_craft": null,
+    "bestseller_status": "MISSING",
+    "therapeutic": null
+  }
+}

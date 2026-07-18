@@ -1,0 +1,51 @@
+{
+  "video_id": "video-test-vce-001",
+  "plan_id": "test-vce-001",
+  "config_hash": "9f489a7fc4fb011e",
+  "retention_curve_stub": [
+    {
+      "t_s": 3,
+      "pct": 0.92
+    },
+    {
+      "t_s": 15,
+      "pct": 0.78
+    },
+    {
+      "t_s": 30,
+      "pct": 0.65
+    },
+    {
+      "t_s": 60,
+      "pct": 0.55
+    }
+  ],
+  "hook_effectiveness_ranking": [
+    {
+      "hook_type": "light_reveal",
+      "score": 0.71,
+      "sample_n": 120
+    }
+  ],
+  "completion_rate_tracking": 0.62,
+  "ab_test_variables": {
+    "thumbnail_variant": "A",
+    "hook_type": "light_reveal",
+    "pacing_variant": "standard",
+    "music_mood": "calm",
+    "color_grade_preset": "neutral"
+  },
+  "shot_planner_feedback": {
+    "suggested_pacing_tweak": "hold",
+    "hook_type_rank": [
+      {
+        "hook_type": "light_reveal",
+        "score": 0.71,
+        "sample_n": 120
+      }
+    ],
+    "drop_off_seconds": [
+      60
+    ]
+  }
+}

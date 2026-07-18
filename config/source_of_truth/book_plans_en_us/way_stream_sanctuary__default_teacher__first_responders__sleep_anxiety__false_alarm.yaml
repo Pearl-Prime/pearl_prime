@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__sleep_anxiety__false_alarm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__sleep_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__restless_mind
+  name: Quiet the Restless Mind — for First Responders
+installment_number: 1
+engine: false_alarm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Sleep Anxiety: Why Your Brain Cries Wolf'
+subtitle: A Real Talk Guide to Sleep Anxiety for First Responders
+cover_tagline: Body's exhausted. Brain's convinced something's wrong.
+description:
+  short_blurb: You're flat-out tired but the second your head hits the pillow your
+    system spikes like a call just came in. This book is for first responders whose
+    body treats lying down in the dark as a threat. It won't sell you a sleep hack
+    — it'll show you why your alarm fires hardest at the exact moment you're trying
+    to rest.
+  long_description: 'You''re wrecked. The shift took everything and you can barely
+    keep your eyes open on the couch. Then you lie down, kill the light, and something
+    flips. Your heart picks up. Your mind sharpens. Your body braces like the tones
+    are about to drop — except there''s nothing coming, just you, in the dark, more
+    awake than you''ve been all day.
+
+
+    This is for the responder who can fall asleep anywhere except the one place they''re
+    supposed to. The recliner at the station, the passenger seat, the couch with the
+    TV on — fine. The actual bed, lights out, nothing to do but rest — and the alarm
+    goes off. Not because anything''s wrong. Because your nervous system learned that
+    stillness and darkness are when the bad calls live in your memory, and lying down
+    with no task is the most exposed you ever feel. On shift you''re moving, deciding,
+    doing. In bed there''s nothing between you and the day you just had, and the body
+    reads that gap as danger.
+
+
+    You''ll learn to recognize this for the false alarm it is: a body sounding the
+    threat tone at the precise moment there is no threat. The danger isn''t in the
+    room. It''s that, for the first time all day, there''s nothing to do but be with
+    yourself, and your wiring reads that quiet as the calm before something terrible.
+    Then you''ll go down into the alarm instead of fighting to outlast it. You''ll
+    stop trying to force the sleep and start meeting the braced, waiting body underneath
+    — the part still half-listening for the radio, still holding the tension of a
+    shift that technically ended hours ago. You''ll stay with it in the dark, not
+    as a problem to solve before morning but as a part of you that''s still on, still
+    waiting to be told it can stand down. That waiting is what''s keeping you up.
+    Not the dark. The watch you never ended.
+
+
+    What changes is not that you drop off the moment you lie down. It''s that the
+    dark stops being a scene. You learn the spike for what it is — a signal, not a
+    warning — and you stop treating bedtime like a call you have to stay ready for.
+    The alarm can fire and you can let it pass, because you finally know it''s lying.
+
+
+    This book will not hand you a sleep routine or a breathing trick to grind through
+    before your next early. It won''t optimize your rest. There''s nothing to fix,
+    because you don''t have a sleep problem — you have an alarm that goes off loudest
+    in the quiet, and it can learn the quiet is safe.
+
+
+    You are allowed to lie down and let the dark be just the dark.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - can't sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - sleep without medication
+  secondary:
+  - first responders
+  - sleep anxiety for first responders
+bisac_codes:
+- SEL036000
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: cole_bennett
+comp_titles:
+- Why We Sleep (Matthew Walker) — what actually happens to a body fighting its own
+  rest
+- The Body Keeps the Score (Bessel van der Kolk) — why stillness and dark trigger
+  a trauma-trained alarm
+- Hello Sleep (Jade Wu) — working with a nervous system that treats bedtime as a threat,
+  not against it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

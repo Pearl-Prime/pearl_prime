@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__somatic_healing__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__somatic_healing.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__through_loss
+  name: Through the Low Places — for Working Parents
+installment_number: 2
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Somatic Healing: The Observer''s Mind'
+subtitle: A Field Guide for Working Parents Navigating Somatic Healing
+cover_tagline: Your nervous system has been on guard so long it forgot there's an
+  off switch.
+description:
+  short_blurb: For working parents living in a body that never stands down — scanning,
+    bracing, on alert even when nothing's wrong. A grounded, secular guide to the
+    hypervigilant body and how to watch its alarm without being run by it.
+  long_description: 'Nothing is wrong, and your body doesn''t believe you. The kids
+    are asleep, the house is quiet, and you''re still scanning — listening for a cry,
+    bracing for the thing that hasn''t happened, your nervous system on a watch shift
+    that never seems to end. Years of being the one who catches everything have wired
+    your body to stay alert, and now it can''t tell the difference between a real
+    threat and a quiet Tuesday night.
+
+
+    This book is for the working parent whose hypervigilance has become physical.
+    The watcher isn''t just in your thoughts — it''s in your startle response, your
+    shallow breathing, the way you can''t fully settle even when you finally have
+    a minute. You''ve been the safety net for so long that your body forgot it was
+    ever allowed to stand down, and the constant low-grade alert has become so normal
+    you''ve stopped noticing it''s there.
+
+
+    Writing as Hannah Stern, Waystream Sanctuary helps you meet the watching body
+    without trying to override it by force. First, recognition: feeling the alert
+    state in your body for what it is — a system that''s been protecting everyone
+    for years, not a flaw to fix. Then the descent: turning toward the bracing instead
+    of pushing past it or numbing it with one more scroll, the move the always-on
+    parent is never given permission to make. Then you come back able to notice the
+    alarm without obeying it, to feel the scan start and not be swept into it.
+
+
+    This is real talk, not a relaxation script. No body-scan worksheet to perfect.
+    No morning routine. No spiritual language about energy or presence — just secular,
+    grounded attention to what chronic hypervigilance does to a nervous system, and
+    how to send it a real signal that it''s allowed to rest.
+
+
+    It will not promise to switch off your alertness on command — a body that''s been
+    guarding for years doesn''t disarm because you told it to, and this book won''t
+    pretend your vigilance came from nowhere. It won''t optimize your nervous system.
+    It will not tell you the watching is the problem, because it started as the part
+    of you keeping your people safe.
+
+
+    What it offers is a way to feel the alarm without being run by it, so your body
+    can finally come off shift now and then.
+
+
+    You are allowed to stand down. The watch can wait. Your body has earned the rest.'
+keywords:
+  primary:
+  - somatic healing
+  - body based healing
+  - nervous system regulation
+  - trauma in the body
+  - somatic therapy
+  - felt sense
+  secondary:
+  - working parents
+  - somatic healing for working parents
+bisac_codes:
+- SEL027000
+- PSY022000
+- HEA046000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: hannah_stern
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — defines the hypervigilant body
+  and why it won't power down
+- Anchored (Deb Dana) — secular, jargon-light polyvagal tools for a nervous system
+  stuck on alert
+- Widen the Window (Elizabeth Stanley) — grounded science on coming out of chronic
+  survival mode without spiritual framing
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

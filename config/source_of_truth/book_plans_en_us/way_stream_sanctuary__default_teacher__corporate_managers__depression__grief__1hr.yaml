@@ -1,0 +1,100 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__depression__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__through_loss__1hr
+  name: Through the Low Places — for Managers (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: The Weight You Carry'
+subtitle: A Real Talk Guide to Depression for Corporate Managers
+cover_tagline: The meeting ended. The flatness didn't.
+description:
+  short_blurb: Something is gone and you can't quite say what. You still run the standups,
+    still send the updates, but the color has drained out of work that used to mean
+    something. This is a one-hour sit-down with the gray weight you've been managing
+    around for weeks.
+  long_description: 'You close the laptop after another full day and feel almost nothing.
+    Not relief, not pride, not even the tiredness that used to mean you''d done something.
+    Just a flat gray weight where the work used to land. Your team still gets your
+    replies. Your calendar still fills. But somewhere back there a thing you cared
+    about ended, or quietly died, and nobody held a meeting about it, so you''ve been
+    managing on top of the loss like it''s a deprioritized ticket that keeps rolling
+    to next sprint.
+
+
+    This hour is for the manager who is still functioning and secretly hollow. The
+    one who got the title, survived the reorg, shipped the thing, and then watched
+    the meaning go missing without a clear cause. You don''t have a crisis you can
+    name. That''s exactly the problem. The weight has no name, so you can''t put it
+    on a roadmap, so you keep carrying it into every standup and calling it tired.
+
+
+    Waystream doesn''t do morning routines or forced gratitude. We start by naming
+    what''s actually here: a loss that never got marked, running underneath the dashboards.
+    Then you go down into the flatness instead of trying to optimize your way out
+    of it. You stop treating the gray as a performance bug and start treating it as
+    grief that put on a work badge. You sit with the part of you that misses something,
+    even a version of the job, even a version of yourself you thought you''d still
+    be by now, and you let that be real for sixty minutes. And then you come back
+    up, not fixed, but no longer pretending the weight isn''t there.
+
+
+    This book will not hand you a productivity system. It will not tell you to reframe
+    the loss as growth, or to be grateful you still have the role. It will not promise
+    the heaviness lifts on schedule. What it offers is the harder, plainer thing:
+    a way to recognize the unnamed loss you''ve been performing over, go down into
+    it without flinching, and walk back into the standup carrying less, because you
+    finally stopped pretending you weren''t carrying anything at all.
+
+
+    You''re allowed to grieve something that didn''t come with a funeral, something
+    nobody else even registered as a death. Even at work. Even if you''re the one
+    who''s supposed to keep everyone else moving, and there''s no one above you whose
+    actual job is to notice that, somewhere along the way, you quietly stopped.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - managers
+  - depression for managers
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — names how unprocessed loss lives
+  in the body, not just the mind
+- It's OK That You're Not OK (Megan Devine) — refuses the fix-it script and lets grief
+  simply be acknowledged
+- Burnout (Emily Nagoski & Amelia Nagoski) — explains the gap between finishing the
+  work and feeling anything from it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

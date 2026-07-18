@@ -1,0 +1,111 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__overthinking__false_alarm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__overthinking__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__restless_mind__1hr
+  name: Quiet the Restless Mind — for First Responders (One-Hour)
+installment_number: 1
+engine: false_alarm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Stop Overthinking: When Fear Lies to You'
+subtitle: A Field Guide for First Responders Navigating Overthinking
+cover_tagline: Your body is sounding an alarm. There is no fire.
+description:
+  short_blurb: You ran a call clean, made the right moves, did your job — and your
+    mind still won't let it go. This is the one-hour reset for the first responder
+    whose head keeps replaying a threat that already passed. Not to talk you out of
+    it. To show you what your body is actually doing, so the next time it happens
+    you have somewhere to stand.
+  long_description: 'It''s hours after the shift. The scene is cleared, the report
+    is filed, you''re off the clock — and your chest is still braced like the tones
+    are about to drop. The thought won''t leave. Did I miss something. Should I have
+    done it faster. What if next time. Your training keeps you scanning for the threat
+    even though the threat is gone, and the more you turn the thought over, the more
+    real the danger feels.
+
+
+    This book is for you — the medic, the firefighter, the officer, the dispatcher,
+    the one whose nervous system was built to stay switched on and never got the manual
+    for switching off. The one who looks fine at the kitchen table and is running
+    a call in their head.
+
+
+    First, recognition: that gripping, looping thought is not a warning you need to
+    solve. It''s a false alarm. Your body is firing the same alert it fires on a real
+    scene — adrenaline, tight breath, racing mind — except there''s no call. The fear
+    is lying to you, and it''s very, very convincing, because the same system that
+    keeps you alive on the job is the one going off now.
+
+
+    Then the part nobody trains you for: descent. Instead of arguing with the thought
+    or trying to shut it down, you go down into what''s actually happening in your
+    body — the clench in the gut, the heat in the chest, the hum in the hands — and
+    you stay there without fixing it. You stop treating the thought as a problem to
+    be solved and start treating the sensation underneath it as something that can
+    be felt all the way through. You learn to feel the alarm without obeying it. That''s
+    the skill. Not silence. Recognition.
+
+
+    Integration is what you carry back into the next shift and the long quiet after
+    it: a way to be inside your own hypervigilant mind without it running the room.
+    The thought may still come. The replay may still start. But it stops being an
+    order you have to follow, and starts being weather you can stand in. You''ll know
+    what it is.
+
+
+    This will not promise you a quiet mind on command, a hack to delete the loop,
+    or a version of you that stops caring about the work. There''s no optimizing your
+    way out of a nervous system that''s seen what yours has seen, and you were never
+    meant to. What it offers is a place to put your feet when the alarm goes off and
+    there''s no fire.
+
+
+    You don''t have to win the argument with the thought. You just have to stop believing
+    it''s the truth. One hour. Read it tonight, after the shift, when the thought
+    won''t put itself down.'
+keywords:
+  primary:
+  - stop overthinking
+  - overthinking help
+  - rumination
+  - racing thoughts
+  - quiet the mind
+  secondary:
+  - first responders
+  - overthinking for first responders
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: cole_bennett
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — why the alarm outlasts the danger
+  and lives in the body
+- Unwinding Anxiety (Judson Brewer) — the mechanics of a worry loop and how it feeds
+  itself
+- When Panic Attacks (David Burns) — naming fear's distortions instead of obeying
+  them
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

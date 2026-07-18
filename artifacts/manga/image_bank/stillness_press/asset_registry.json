@@ -1,0 +1,341 @@
+{
+  "brand_id": "stillness_press",
+  "locale": "en_US",
+  "generated_at": "2026-04-16T05:48:13.628317+00:00",
+  "ip_adapter_available": false,
+  "ip_adapter_note": "Pearl Star ComfyUI has no IPAdapter nodes installed; all images generated with txt2img workflow",
+  "character_refs": {
+    "ahjan": {
+      "model_sheets": [
+        "character/ahjan/model_sheets/ahjan_front_neutral.png",
+        "character/ahjan/model_sheets/ahjan_front_speaking.png",
+        "character/ahjan/model_sheets/ahjan_3quarter_left.png",
+        "character/ahjan/model_sheets/ahjan_3quarter_right.png",
+        "character/ahjan/model_sheets/ahjan_profile_left.png",
+        "character/ahjan/model_sheets/ahjan_profile_right.png",
+        "character/ahjan/model_sheets/ahjan_seated_meditation.png",
+        "character/ahjan/model_sheets/ahjan_seated_teaching.png",
+        "character/ahjan/model_sheets/ahjan_walking.png",
+        "character/ahjan/model_sheets/ahjan_bowing.png",
+        "character/ahjan/model_sheets/ahjan_hands_detail.png",
+        "character/ahjan/model_sheets/ahjan_face_detail.png"
+      ],
+      "expressions": [
+        "character/ahjan/expressions/ahjan_expr_calm.png",
+        "character/ahjan/expressions/ahjan_expr_compassion.png",
+        "character/ahjan/expressions/ahjan_expr_insight.png",
+        "character/ahjan/expressions/ahjan_expr_questioning.png",
+        "character/ahjan/expressions/ahjan_expr_warmth.png",
+        "character/ahjan/expressions/ahjan_expr_stillness.png",
+        "character/ahjan/expressions/ahjan_expr_surprise_gentle.png",
+        "character/ahjan/expressions/ahjan_expr_grief_compassion.png"
+      ],
+      "poses": [
+        "character/ahjan/poses/ahjan_pose_standing_open.png",
+        "character/ahjan/poses/ahjan_pose_standing_gesturing.png",
+        "character/ahjan/poses/ahjan_pose_standing_listening.png",
+        "character/ahjan/poses/ahjan_pose_walking_path.png",
+        "character/ahjan/poses/ahjan_pose_seated_lotus.png",
+        "character/ahjan/poses/ahjan_pose_seated_zazen.png",
+        "character/ahjan/poses/ahjan_pose_seated_chair_teaching.png",
+        "character/ahjan/poses/ahjan_pose_kneeling_garden.png",
+        "character/ahjan/poses/ahjan_pose_standing_window.png",
+        "character/ahjan/poses/ahjan_pose_bow_greeting.png",
+        "character/ahjan/poses/ahjan_pose_hands_tea.png",
+        "character/ahjan/poses/ahjan_pose_reading_scroll.png",
+        "character/ahjan/poses/ahjan_pose_outdoors_looking.png",
+        "character/ahjan/poses/ahjan_pose_silhouette_path.png",
+        "character/ahjan/poses/ahjan_pose_close_listening.png",
+        "character/ahjan/poses/ahjan_pose_resting_tree.png"
+      ],
+      "anchor_panel": "anchor_panels/anchor_01_face_neutral.png",
+      "ip_adapter_source": "character/ahjan/model_sheets/ahjan_front_neutral.png",
+      "ip_adapter_weight": 0.85,
+      "ip_adapter_status": "unavailable \u2014 nodes not installed on Pearl Star"
+    }
+  },
+  "location_refs": {
+    "loc_meditation_hall": {
+      "path": "backgrounds/locations/location_loc_meditation_hall.png"
+    },
+    "loc_temple_garden": {
+      "path": "backgrounds/locations/location_loc_temple_garden.png"
+    },
+    "loc_forest_path": {
+      "path": "backgrounds/locations/location_loc_forest_path.png"
+    },
+    "loc_forest_clearing": {
+      "path": "backgrounds/locations/location_loc_forest_clearing.png"
+    },
+    "loc_riverside": {
+      "path": "backgrounds/locations/location_loc_riverside.png"
+    },
+    "loc_hermitage_interior": {
+      "path": "backgrounds/locations/location_loc_hermitage_interior.png"
+    },
+    "loc_hermitage_exterior": {
+      "path": "backgrounds/locations/location_loc_hermitage_exterior.png"
+    },
+    "loc_rooftop_city": {
+      "path": "backgrounds/locations/location_loc_rooftop_city.png"
+    },
+    "loc_library_small": {
+      "path": "backgrounds/locations/location_loc_library_small.png"
+    },
+    "loc_open_field": {
+      "path": "backgrounds/locations/location_loc_open_field.png"
+    },
+    "loc_mountain_path": {
+      "path": "backgrounds/locations/location_loc_mountain_path.png"
+    },
+    "loc_tearoom": {
+      "path": "backgrounds/locations/location_loc_tearoom.png"
+    },
+    "loc_water_reflection": {
+      "path": "backgrounds/locations/location_loc_water_reflection.png"
+    },
+    "loc_corridor_light": {
+      "path": "backgrounds/locations/location_loc_corridor_light.png"
+    },
+    "loc_garden_bench": {
+      "path": "backgrounds/locations/location_loc_garden_bench.png"
+    },
+    "loc_winter_room": {
+      "path": "backgrounds/locations/location_loc_winter_room.png"
+    },
+    "loc_dawn_temple_steps": {
+      "path": "backgrounds/locations/location_loc_dawn_temple_steps.png"
+    },
+    "loc_empty_dojo": {
+      "path": "backgrounds/locations/location_loc_empty_dojo.png"
+    }
+  },
+  "prop_refs": {
+    "prop_tea_bowl": {
+      "path": "props/prop_tea_bowl.png"
+    },
+    "prop_bell": {
+      "path": "props/prop_bell.png"
+    },
+    "prop_incense": {
+      "path": "props/prop_incense.png"
+    },
+    "prop_scroll": {
+      "path": "props/prop_scroll.png"
+    },
+    "prop_cushion_zafu": {
+      "path": "props/prop_cushion_zafu.png"
+    },
+    "prop_lantern_stone": {
+      "path": "props/prop_lantern_stone.png"
+    },
+    "prop_lantern_paper": {
+      "path": "props/prop_lantern_paper.png"
+    },
+    "prop_walking_staff": {
+      "path": "props/prop_walking_staff.png"
+    },
+    "prop_book_open": {
+      "path": "props/prop_book_open.png"
+    },
+    "prop_stone_path": {
+      "path": "props/prop_stone_path.png"
+    },
+    "prop_water_bowl": {
+      "path": "props/prop_water_bowl.png"
+    },
+    "prop_maple_leaf": {
+      "path": "props/prop_maple_leaf.png"
+    }
+  },
+  "motif_refs": {
+    "motif_bell": {
+      "stages": [
+        "motifs/motif_bell/stage_1.png",
+        "motifs/motif_bell/stage_2.png",
+        "motifs/motif_bell/stage_3.png"
+      ]
+    },
+    "motif_path": {
+      "stages": [
+        "motifs/motif_path/stage_1.png",
+        "motifs/motif_path/stage_2.png",
+        "motifs/motif_path/stage_3.png"
+      ]
+    },
+    "motif_light": {
+      "stages": [
+        "motifs/motif_light/stage_1.png",
+        "motifs/motif_light/stage_2.png",
+        "motifs/motif_light/stage_3.png"
+      ]
+    },
+    "motif_water": {
+      "stages": [
+        "motifs/motif_water/stage_1.png",
+        "motifs/motif_water/stage_2.png",
+        "motifs/motif_water/stage_3.png"
+      ]
+    },
+    "motif_tree": {
+      "stages": [
+        "motifs/motif_tree/stage_1.png",
+        "motifs/motif_tree/stage_2.png",
+        "motifs/motif_tree/stage_3.png"
+      ]
+    },
+    "motif_hands": {
+      "stages": [
+        "motifs/motif_hands/stage_1.png",
+        "motifs/motif_hands/stage_2.png",
+        "motifs/motif_hands/stage_3.png"
+      ]
+    }
+  },
+  "atmospheric_refs": {
+    "atm_warm_mist_gold": {
+      "path": "backgrounds/atmospheric/atm_warm_mist_gold.png"
+    },
+    "atm_deep_forest_green": {
+      "path": "backgrounds/atmospheric/atm_deep_forest_green.png"
+    },
+    "atm_cool_slate_rain": {
+      "path": "backgrounds/atmospheric/atm_cool_slate_rain.png"
+    },
+    "atm_parchment_blank": {
+      "path": "backgrounds/atmospheric/atm_parchment_blank.png"
+    },
+    "atm_dawn_orange_horizon": {
+      "path": "backgrounds/atmospheric/atm_dawn_orange_horizon.png"
+    },
+    "atm_night_indigo_stars": {
+      "path": "backgrounds/atmospheric/atm_night_indigo_stars.png"
+    },
+    "atm_autumn_amber": {
+      "path": "backgrounds/atmospheric/atm_autumn_amber.png"
+    },
+    "atm_soft_white_breath": {
+      "path": "backgrounds/atmospheric/atm_soft_white_breath.png"
+    }
+  },
+  "panel_refs": {
+    "covers": [
+      {
+        "asset_id": "cover_forest_figure",
+        "path": "panels/covers/cover_forest_figure.png"
+      },
+      {
+        "asset_id": "cover_meditation_bell",
+        "path": "panels/covers/cover_meditation_bell.png"
+      },
+      {
+        "asset_id": "cover_seated_window",
+        "path": "panels/covers/cover_seated_window.png"
+      },
+      {
+        "asset_id": "cover_path_alone",
+        "path": "panels/covers/cover_path_alone.png"
+      }
+    ],
+    "chapter_openers": [
+      {
+        "asset_id": "opener_dawn_temple",
+        "path": "panels/chapter_openers/opener_dawn_temple.png"
+      },
+      {
+        "asset_id": "opener_meditation_hall_empty",
+        "path": "panels/chapter_openers/opener_meditation_hall_empty.png"
+      },
+      {
+        "asset_id": "opener_forest_wide",
+        "path": "panels/chapter_openers/opener_forest_wide.png"
+      },
+      {
+        "asset_id": "opener_seasons_autumn",
+        "path": "panels/chapter_openers/opener_seasons_autumn.png"
+      },
+      {
+        "asset_id": "opener_city_rooftop_night",
+        "path": "panels/chapter_openers/opener_city_rooftop_night.png"
+      },
+      {
+        "asset_id": "opener_river_dawn",
+        "path": "panels/chapter_openers/opener_river_dawn.png"
+      }
+    ],
+    "silence": [
+      {
+        "asset_id": "silence_breath",
+        "path": "panels/silence/silence_breath.png"
+      },
+      {
+        "asset_id": "silence_listening",
+        "path": "panels/silence/silence_listening.png"
+      },
+      {
+        "asset_id": "silence_space",
+        "path": "panels/silence/silence_space.png"
+      },
+      {
+        "asset_id": "silence_tea_steam",
+        "path": "panels/silence/silence_tea_steam.png"
+      },
+      {
+        "asset_id": "silence_path_diverge",
+        "path": "panels/silence/silence_path_diverge.png"
+      },
+      {
+        "asset_id": "silence_water_still",
+        "path": "panels/silence/silence_water_still.png"
+      },
+      {
+        "asset_id": "silence_light_change",
+        "path": "panels/silence/silence_light_change.png"
+      },
+      {
+        "asset_id": "silence_bell_aftermath",
+        "path": "panels/silence/silence_bell_aftermath.png"
+      }
+    ]
+  },
+  "anchor_refs": [
+    {
+      "anchor_panel_id": "anchor_01_face_neutral",
+      "path": "anchor_panels/anchor_01_face_neutral.png"
+    },
+    {
+      "anchor_panel_id": "anchor_02_full_body_standing",
+      "path": "anchor_panels/anchor_02_full_body_standing.png"
+    },
+    {
+      "anchor_panel_id": "anchor_03_seated_meditation",
+      "path": "anchor_panels/anchor_03_seated_meditation.png"
+    },
+    {
+      "anchor_panel_id": "anchor_04_teaching_gesture",
+      "path": "anchor_panels/anchor_04_teaching_gesture.png"
+    },
+    {
+      "anchor_panel_id": "anchor_05_silhouette",
+      "path": "anchor_panels/anchor_05_silhouette.png"
+    },
+    {
+      "anchor_panel_id": "anchor_06_expression_compassion",
+      "path": "anchor_panels/anchor_06_expression_compassion.png"
+    }
+  ],
+  "total_assets": 116,
+  "categories_complete": [
+    "model_sheets",
+    "expressions",
+    "poses",
+    "locations",
+    "atmospheric",
+    "covers",
+    "chapter_openers",
+    "silence",
+    "props",
+    "motifs",
+    "anchors"
+  ]
+}

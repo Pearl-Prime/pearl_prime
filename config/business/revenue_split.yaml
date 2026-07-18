@@ -1,0 +1,39 @@
+# Canonical Revenue Split — Single Source of Truth
+# Update ONLY this file. All docs, scripts, and dashboards must reference these values.
+# Last updated: 2026-04-22
+# Authority: Owner decision — enforced across all marketing materials and projections
+
+schema_version: "1.0"
+
+revenue_split:
+  brand_director:   0.80   # 80% — Brand Admin keeps the majority; paid 15th of each month
+  uslf_teachers:    0.10   # 10% — Goes directly to support the USLF teachers (all global sales)
+  pearl_prime:      0.05   #  5% — For delivering and generating your content
+  forty_eight_social: 0.05 #  5% — For marketing your content (48 Social exclusive deal)
+
+# Human-readable labels (for UI / pitch decks)
+labels:
+  brand_director:    "You (Brand Director)"
+  uslf_teachers:     "USLF Teachers"
+  pearl_prime:       "Pearl Prime"
+  forty_eight_social: "48 Social"
+
+# Display colors (hex — matches pitch deck and brand-wizard-app)
+colors:
+  brand_director:    "#8b5cf6"   # primary purple
+  uslf_teachers:     "#7c3aed"   # accent purple
+  pearl_prime:       "#a78bfa"   # pearl prime purple (50% opacity)
+  forty_eight_social: "#c4b5fd"  # 48 social purple (30% opacity)
+
+# Payment schedule
+payment:
+  brand_director_payment_day: 15   # 15th of each month
+  currency: "USD"
+  minimum_payout_usd: 10.00
+
+# Notes
+notes:
+  - "Splits apply to net revenue after platform fees (Amazon KDP, Google Play, etc.)"
+  - "Teacher royalty is pooled across all USLF teachers — not per individual teacher"
+  - "48 Social is a separate company; Pearl Prime has an exclusive partnership deal"
+  - "No upfront costs, no inventory, no shipping charged to brand director"

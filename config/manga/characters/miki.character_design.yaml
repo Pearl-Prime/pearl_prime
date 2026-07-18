@@ -1,0 +1,223 @@
+character_design:
+  series_id: digital_ground_manhwa
+  brand_id: digital_ground
+  locale: en_US
+  market_demo: shojo            # OPERATOR-CONFIRM: brand-lane template digital_ground_manhwa.yaml = market_demo:shojo / genre_family:school. Korean series digground_kr_01 uses seinen (a per-series burnout variation, protagonist Ji-eun, NOT the teacher). For the teacher-character (miki, Gen-Z, age 16-28) shojo/school is the brand-DNA-correct demo; confirm the teacher-character series rides the brand lane, not the seinen burnout lane.
+  genre_family: school
+  subgenre: digital_age_identity_grounding
+  character_id: miki
+  character_role: teacher_character        # OPERATOR-CONFIRM: EI teacher-author rendered as in-world manga character per Manga Author System memory (full EI disclosure is a feature); confirm "teacher_character" vs "protagonist" role label for the solver.
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml character_loras.miki: trigger_word miki_dg; style_ref digital_ground; ip_adapter_weight 0.85; notes: 'Japanese-American female, Gen Z bearing, digital native energy'"
+    - "teacher_brand_archetypes.yaml digital_ground/miki: tradition 'Japanese Mindfulness — forest bathing, modern presence, digital-age awareness'; gtm persona doomscrolling_gen_z; age_range [16, 28]; emotional_job 'exist without the phone'; primary_moment identity_through_feed"
+    - "brand_identity_system.yaml digital_ground (Present Tense Books): primary_colors midnight blue #0F172A + ice blue #E0F2FE; accent cyan glow #22D3EE; mood 'Digital-native calm, nocturnal, screen-glow aesthetic'; colophon pine-needle cluster (3 needles); cover_style 'single glowing element, cyan accent like a notification you actually want'"
+    - "digital_ground_manhwa.yaml brand-genre lane: market_demo shojo; genre_family school; subgenre digital_age_identity_grounding; visual_grammar social_media_simulacra; line_weight_profile light"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Differentiation from Mira Aoki (cross-brand, soft_round): miki is OVAL.
+    # Oval gives a crisp contemporary Gen-Z line under the social_media_simulacra
+    # visual grammar without Mira's iyashikei low-contour softness. Adachi-style
+    # oval reads "modern young adult", not "child-soft" (round) or "josei-mature"
+    # (heart_shaped). Derived from brand_lora "Gen Z bearing, digital native energy".
+    face_shape:
+      value: oval
+      lockout: yes
+      mangaka_tradition: "Adachi-style oval (Touch, Cross Game) — modern young-adult neutral, crisp contemporary line"
+      # OPERATOR-CONFIRM: brand_lora states ethnicity/gender/Gen-Z bearing but not face geometry; 'oval' is the derived best-guess (vs soft_round/round) to separate from Mira's soft_round.
+
+    # AXIS 2 — eye_geometry
+    # LARGE upturned double-lid with MODERATE lashes — expressive Gen-Z digital-
+    # native register. Deliberately NOT Mira's (medium / almond / minimal lash).
+    # Upturned (tsurime) reads alert/online-generation; large+moderate stays under
+    # the shojo dated-sparkle line (extra_large + heavy_decorative is forbidden and
+    # avoided — see solver). Highest-leverage divergence axis after hair.
+    eye_geometry:
+      size: large
+      shape: upturned
+      spacing: standard
+      lid_fold: double
+      eyelash_density: moderate
+      lockout: yes
+      note: "double_lid + warm_light skin (axis 10) keeps East-Asian/Japanese-American coding per brand_lora; size:large + shape:upturned + eyelash:moderate = expressive-but-modern Gen-Z, explicitly clear of the extra_large/heavy_decorative shojo anti-pattern (axis_patterns 2G Takeuchi sparkle)"
+      # OPERATOR-CONFIRM: eye sub-attributes (size/shape/spacing/lashes) are all derived — brand_lora gives only 'Gen Z bearing'. Confirm large+upturned vs a calmer medium+almond if a softer teacher read is wanted.
+
+    # AXIS 3 — nose_construction
+    # Short upturned, narrow, drawn-light. The social_media_simulacra light line
+    # weight wants a delicate nose; 'drawn' (not implied) suits a contemporary
+    # shojo-school register more than Mira's iyashikei 'implied'.
+    nose_construction:
+      bridge_angle: short_upturned
+      bridge_length: short
+      tip_shape: narrow
+      nostril_visibility: drawn
+      lockout: yes
+      # OPERATOR-CONFIRM: entire nose construction is derived (brand_lora silent on nose); confirm 'drawn' light line vs 'implied' if a softer minimalist face is preferred.
+
+    # AXIS 4 — mouth_jaw
+    # Resting slight_smile carries miki's approachable Gen-Z teacher warmth (the
+    # brand voice is "pro-presence, not anti-tech" — friendly, not austere).
+    # Forbidden bow_mouth avoided. Narrow jaw + soft_pointed chin keeps the oval.
+    mouth_jaw:
+      resting_expression: slight_smile
+      jaw_width: narrow
+      chin_shape: soft_pointed
+      lip_shape: thin_upper_full_lower
+      lockout: yes
+      # OPERATOR-CONFIRM: resting_expression 'slight_smile' is a derived read of miki's approachable brand voice; brand_lora does not specify expression. Confirm vs 'neutral_soft'.
+
+    # AXIS 5 — hair
+    # THE KILLER DIFFERENTIATOR vs Mira (long_to_waist / side_left / slight_wave /
+    # brown). miki = CHIN-LENGTH ASYMMETRIC BLUNT BOB, black base, with a single
+    # dyed CYAN streak framing one side — a digital-native styling tell that maps
+    # the brand's cyan-glow (#22D3EE) accent onto the character silhouette itself.
+    # Radically different silhouette ID; this single axis alone clears collision.
+    hair:
+      length: chin_bob
+      parting: asymmetric
+      fringe_style: straight_blunt
+      texture: straight
+      color_signal: black
+      signature_shape_note: "asymmetric blunt chin-bob, longer on the left; a single dyed cyan streak (#22D3EE, the brand accent) frames the right cheek — her one piece of self-styling rebellion, the 'notification you actually want' rendered as hair; in B&W the streak reads as the lone high-value lock of hair"
+      lockout: yes
+      # OPERATOR-CONFIRM: brand_lora gives no hairstyle; the chin_bob + cyan streak is the derived high-leverage silhouette (chosen specifically to be maximally far from Mira's long wavy brown). Confirm streak color/placement and whether a dyed streak fits the teacher's canon.
+
+    # AXIS 6 — build
+    # Per template default — build is low-leverage; solver does not lock.
+    # Small/narrow frame consistent with a youthful Gen-Z teen read.
+    build:
+      height_implied: short
+      frame_density: small
+      shoulder_ratio: narrow
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # Contemporary 2020s Gen-Z streetwear-casual: oversized graphic hoodie, the
+    # translucent-shell headphones (axis 11), cargo/wide-leg pants, chunky
+    # sneakers. Casual formality (NOT business_casual like Mira) — she's a
+    # digital-native, not an office knowledge worker. Era + items both diverge.
+    wardrobe_register:
+      era_signal: contemporary_2020s
+      personality_encoding:
+        - oversized_graphic_hoodie        # the everyday Gen-Z signature layer
+        - translucent_shell_headphones_round_neck   # paired with accessories axis 11
+        - wide_leg_cargo_pants
+        - chunky_platform_sneakers
+      formality: casual
+      lockout: yes
+      # OPERATOR-CONFIRM: wardrobe items are derived from the Gen-Z digital-native brand persona (brand_lora gives no garments). Confirm streetwear register vs a calmer 'forest-bathing' earth-tone look given the shinrin-yoku tradition half of the brand.
+
+    # AXIS 8 — posture_default
+    # Relaxed-grounded with a slight phone-down forward ease — the 'presence
+    # practice' the brand teaches. Low-leverage; solver leaves free.
+    posture_default:
+      energy: neutral
+      symmetry: slight_right_lean
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # Brand persona age_range [16, 28]; teacher reads YOUNG (Gen-Z digital native).
+    # 'teen' is the honest youngest-leaning pick (vs Mira's early_30s — a full
+    # generation apart, high-leverage separation). Smooth youthful skin, no age
+    # cues, faint screen-glow under-eye (the doomscrolling tell, reframed).
+    age_signaling:
+      apparent_age_decade: teen
+      visible_age_cues:
+        - youthful_skin_overall
+        - no_smile_lines_visible
+        - smooth_brow_at_rest
+        - faint_screen_glow_under_eye      # the doomscrolling tell, lit cyan in screen-glow panels
+      lockout: yes
+      # OPERATOR-CONFIRM: 'late_teens' is not an allowed enum value, so 'teen' is used; brand age_range is [16,28]. Confirm 'teen' vs 'early_20s' for the teacher's apparent age (she is a teacher, which may read older than a student protagonist).
+
+    # AXIS 10 — skin_treatment
+    # Clean, warm_light — consistent with eye_geometry East-Asian coding and the
+    # Japanese-American brand_lora ethnicity. Low-leverage; solver leaves free.
+    skin_treatment:
+      texture: clean
+      tone: warm_light
+      lockout: no
+
+    # AXIS 11 — accessories
+    # UNIQUE high-leverage signature (NOT Mira's jade pendant): TRANSLUCENT-SHELL
+    # OVER-EAR HEADPHONES worn around the neck — her somatic anchor and the
+    # brand's "exist without the phone" tension made physical (she wears them but
+    # is learning to take them off / sit in silence). The cyan LED on the cups is
+    # the brand accent through-line, the counterpart to Mira's jade-green dot.
+    accessories:
+      glasses: none
+      jewelry: minimal
+      signature_item: "translucent-shell over-ear headphones (smoke-grey clear plastic, cyan #22D3EE LED ring on each cup) worn around the neck — her grounding object and the brand's central tension: she reaches for them when overwhelmed, and the practice is learning to leave them down; the cyan LED is the recurring accent dot, replacing Mira's jade pendant"
+      secondary_signature_item: "phone in a clear case, screen-down on the table in tea/breath-beat panels (the 'pro-presence' gesture — visible but turned away)"
+      lockout: yes
+      # OPERATOR-CONFIRM: headphones-as-signature is derived from the brand's 'exist without the phone' emotional_job; brand_lora names no prop. Confirm headphones vs the brand colophon's pine-needle motif as the recurring object.
+
+    # AXIS 12 — color_signal
+    # Brand palette is midnight-blue (#0F172A) + ice-blue (#E0F2FE) + cyan glow
+    # (#22D3EE), nocturnal screen-glow. Mapped to allowed enum: slate primary +
+    # deep_teal accent (closest in-vocab to the cyan-glow identity). Explicitly
+    # NOT Mira's warm_cream/jade-green. In B&W, miki anchors COOL-DARK (nocturnal),
+    # the inverse of Mira's pale mid-grey — the cyan streak/LED is her lone accent.
+    color_signal:
+      palette_primary: slate            # OPERATOR-CONFIRM: brand cyan #22D3EE / midnight #0F172A is not a literal enum value; 'slate' is the closest allowed primary. Confirm slate vs indigo/navy for the midnight-blue base.
+      palette_accent: deep_teal         # OPERATOR-CONFIRM: maps brand cyan-glow #22D3EE; 'cyan' is not in the allowed enum, 'deep_teal' is the nearest. The rendered accent should be brand cyan #22D3EE.
+      palette_secondary: navy
+      bw_register_note: "miki anchors COOL-DARK / nocturnal (inverse of Mira's pale mid-grey) — midnight wardrobe = deep grey value, screen-glow lighting from below; the dyed cyan hair-streak + the headphone LED ring are the single high-value accents the eye returns to per panel"
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # face_shape, eye_geometry, nose_construction, mouth_jaw, hair,
+    # wardrobe_register, age_signaling, accessories, color_signal
+    # (build, posture_default, skin_treatment intentionally `lockout: no` per template defaults)
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: digital_ground          # no same-brand teacher-character design exists yet; Korean protagonist series (Ji-eun/Jun-hyeok/Su-min) are protagonists, not teacher-characters
+      cross_brand_scope: all_core12         # cross-brand threshold = 7 locked-axis matches
+      collisions_detected: []
+      distinctness_note: "vs Mira Aoki (stillness_press, cross-brand): diverges on face_shape (oval vs soft_round), eye_geometry (large/upturned/moderate vs medium/almond/minimal), hair (chin_bob/asymmetric/black+cyan-streak vs long_to_waist/side_left/brown-wavy), age_signaling (teen vs early_30s), accessories (headphones vs jade pendant), color_signal (slate/deep_teal cool-dark vs warm_cream/jade) — 6 of 9 locked axes diverge on high-leverage values, well past the cross-brand 7-match REJECT threshold (only 3 axes could match, max)"
+      shojo_anti_pattern_guard: "eye_geometry deliberately size:large + eyelash:moderate (NOT extra_large + heavy_decorative) — clears forbidden rule shojo_eye_in_josei pattern even though this demo is shojo; no forbidden_combination triggered"
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    # Per-archetype 3-model routing (engine_router.py dispatches per archetype).
+    # Authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    # This is a COLOR/screen-glow shojo-school series (slate/cyan nocturnal
+    # palette), so Animagine B&W routing does not apply — engine_router selects
+    # per archetype as below.
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    engines_in_play:
+      - flux_schnell      # simple objects, backgrounds, phone/screen props, decompression archetypes
+      - flux_dev          # mid-shots, hands, headphones-in-scene, character-in-environment
+      - qwen_image_pulid  # face close-ups (identity-critical — large upturned eyes + cyan streak)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "Named recurring teacher-character routes via PuLID-FLUX-FaceNet face-lock (brand_lora_plans.miki provides the 4-view reference set: front/three-quarter/profile/expression-sheet at ip_adapter_weight 0.85). Per CHARACTER_INDIVIDUATION_PIPELINE_SPEC, dedicated LoRA training is DEFERRED — character_loras.miki is a Pearl Star ComfyUI commission, and the named-recurring-cast convention uses PuLID-FaceNet from the canonical character sheet until the 12+-chapter LoRA threshold is crossed. PuLID-FLUX-FaceNet alone suffices for consistency now."
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - wardrobe_register
+        - age_signaling
+        - accessories
+        - color_signal
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
+    # Will be populated by Phase C (reference sheet generation via Qwen+PuLID):
+    # artifacts/manga/character_references/digital_ground/miki/{front,three_quarter,profile,expression_sheet}.png

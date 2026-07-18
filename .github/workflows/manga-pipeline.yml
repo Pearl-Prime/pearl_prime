@@ -1,0 +1,82 @@
+# Manga pipeline — parameterized brand × topic × genre × persona run.
+# Requires self-hosted runner with label `pearl-star-gpu` for ComfyUI/panel gen.
+# On-demand via workflow_dispatch.
+name: Manga pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: "Brand / persona id"
+        required: true
+        default: "gen_z_professionals"
+      topic:
+        description: "Topic id"
+        required: true
+        default: "anxiety"
+      genre:
+        description: "Manga genre (e.g. shonen, shojo, seinen, josei)"
+        required: true
+        default: "shonen"
+      chapter_count:
+        description: "Number of chapters to render"
+        required: true
+        default: "3"
+
+jobs:
+  manga:
+    name: Manga render
+    # Falls back to ubuntu-latest if pearl-star-gpu runner is not registered;
+    # jobs that require GPU will fail fast with a clear error in that case.
+    runs-on: [self-hosted, pearl-star-gpu]
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify GPU runner context
+        run: |
+          echo "Runner: $(hostname)"
+          nvidia-smi || { echo "::error::nvidia-smi unavailable — not on GPU runner"; exit 1; }
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements-test.txt
+
+      - name: Run manga pipeline
+        env:
+          BRAND: ${{ inputs.brand }}
+          TOPIC: ${{ inputs.topic }}
+          GENRE: ${{ inputs.genre }}
+          CHAPTER_COUNT: ${{ inputs.chapter_count }}
+          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+        run: |
+          mkdir -p artifacts/manga
+          PYTHONPATH=. python3 scripts/run_manga_pipeline.py \
+            --brand "$BRAND" --topic "$TOPIC" --genre "$GENRE" \
+            --persona gen_z_professionals \
+            --render-book \
+            --output-dir artifacts/manga 2>&1 | tee artifacts/manga/stdout.txt
+
+      - name: Summarize
+        if: always()
+        run: |
+          echo "## Manga pipeline: $BRAND × $TOPIC × $GENRE" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Chapters requested: $CHAPTER_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "Files produced:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          find artifacts/manga -type f | head -40 >> $GITHUB_STEP_SUMMARY || true
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload manga artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manga-${{ inputs.brand }}-${{ inputs.topic }}-${{ inputs.genre }}-${{ github.run_number }}
+          path: artifacts/manga/
+          retention-days: 60

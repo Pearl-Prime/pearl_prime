@@ -1,0 +1,40 @@
+# TEACHER-MANGA-30S-VIDEO-V1 — localized 30s spine (meaning-matched to anchor prose; not verbatim)
+project_id: PRJ-TEACHER-MANGA-30S-VIDEO-V1
+teacher_id: master_wu
+brand_id: warrior_calm
+locale: zh_TW
+anchor_prose_path: artifacts/audiobook_samples/_prose/master_wu_courage_ch1.txt
+total_seconds: 30
+
+beats:
+  - id: hook
+    start_s: 0
+    end_s: 6
+    text: 晨光抹上石桌，茶香先暖指尖。「談的不是逞強，是勇氣。」師父話音一落，肩頸先繃成細線。
+    sensory_anchor: 岩院裡的微風混著泥土與茶煙；掌心貼著溫杯的邊緣
+    mc_action: 捧起杯子又放下，把注意力停在指尖的薄汗
+
+  - id: struggle
+    start_s: 6
+    end_s: 22
+    text: 你走進林子腳掌鬆軟——怕的不是岩，是你心裡「撐不住」的預設比石頭還硬。
+    embodied_dis_ease: 下腹發空；大腿前側發緊；呼吸想深卻卡住在上胸
+    mc_action: 指節在石面上反覆磨擦，像在找一個能抓牢的凹槽
+
+  - id: release
+    start_s: 22
+    end_s: 30
+    text: 揣著發抖摸下一凸起目光只換「這一步」頂會自己抬頭一口茶順進胃在怕裡站穩一息。
+    signature_practice: 把恐懼具身化為攀爬節奏：吸—伸—蹬—換點一步，重複三段式微進
+    mc_action: 對準岩縫試探第一個支點，吐氣的同時把球心放在腳掌中央
+
+reading_rate_basis: >-
+  config/localization/locale_registry.yaml — zh-TW: Traditional Chinese (Taiwan); tts_locale_code zh-TW;
+  primary cosyvoice2; notes emphasize Taiwan Mandarin flavor — script uses Taiwan-preferred lexical choices in formal spoken narration.
+
+word_count_target: Approx. 95–112 Traditional Chinese characters total (density ≈ en 65–80 words @ 30s)
+estimated_character_count_script: 120
+estimated_seconds: 30
+
+voice_notes: >-
+  Warrior Calm cultivation register: disciplined diction without melodrama; Sifu voice warm-steady, second-person embodied.

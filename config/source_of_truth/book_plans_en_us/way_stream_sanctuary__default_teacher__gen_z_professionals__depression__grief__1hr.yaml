@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__depression__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__through_loss__1hr
+  name: Through the Low Places — for Young Professionals (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: The Grief That Doesn''t Leave (4)'
+subtitle: How Gen Z Professionals Are Rewriting the Rules of Depression
+cover_tagline: When something ends and the color goes out of everything you used to
+  like.
+description:
+  short_blurb: Something you counted on is gone, and instead of sadness you got flatness.
+    This is a one-hour, no-fixing read for young professionals carrying a loss-shaped
+    heaviness the calendar refuses to make room for.
+  long_description: 'You keep telling people you''re fine, because the thing you lost
+    wasn''t supposed to wreck you this much. A relationship, a friendship, the version
+    of your twenties you assumed you''d be living by now, a person, a place, a future
+    you''d already half-furnished in your head. And yet here you are at your desk,
+    three weeks later, watching the cursor blink, and the part of you that used to
+    want things has gone quiet. Not loud sadness. A grayer thing. A weight that never
+    picked up a name.
+
+
+    This hour is for you if you lost something real and then watched it curdle into
+    a low, dragging heaviness nobody at work can see. The Slack messages still get
+    answered. The deliverables still ship. But food tastes like nothing, your phone
+    feels like a chore, and you''ve started to suspect this flatness is just who you
+    are now. It isn''t. It''s grief that didn''t get to be grief, so it went underground
+    and turned the lights down.
+
+
+    We''ll move through this in three honest passes. In recognition, you name what
+    this actually is — not weakness, not laziness, but mourning that went quiet and
+    dimmed everything behind it. You''ll get plain words for the gray, so you can
+    catch it the next time it settles over an ordinary afternoon. In descent, you
+    go down into the heaviness instead of bullying yourself out of it with one more
+    productivity hack. You sit with the loss the way it actually lives in your body
+    — the tight chest, the heavy arms, the four o''clock crash that has nothing to
+    do with caffeine. In integration, you come back up carrying it differently. Not
+    lighter because you fixed it. Lighter because you stopped fighting the weight
+    and let it be something you''re allowed to hold.
+
+
+    Here''s what this hour will not do. It won''t promise the heaviness lifts by Monday.
+    It won''t hand you a morning routine, a gratitude list, or a five-step framework
+    for optimizing your way out of mourning. It won''t tell you the loss was secretly
+    a gift, or that you''ll understand it all someday. Grief isn''t a performance
+    review, and you are not behind on it.
+
+
+    What it will do is stay with you, plainly, for sixty minutes — and let you quit
+    pretending the color came back when it didn''t. You don''t have to be okay yet.
+    You don''t have to make this loss mean something useful. You''re allowed to set
+    the weight down for a minute, right here, with someone who won''t tell you to
+    cheer up and won''t check the clock while you do it.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - young professionals
+  - depression for young professionals
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: wren_adler
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — gives grief permission to exist without
+  being fixed or fast-tracked
+- The Body Keeps the Score (Bessel van der Kolk) — shows how loss and overwhelm settle
+  into the body, not just the mind
+- Maybe You Should Talk to Someone (Lori Gottlieb) — an honest look at sitting inside
+  pain instead of rushing past it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

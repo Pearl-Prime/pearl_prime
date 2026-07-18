@@ -1,0 +1,353 @@
+# Cross-Genre Blending Rules — Phoenix Omega Manga Cookbook Companion
+#
+# Status: AUTHORITY (new, this PR — research-only).
+# Schema version: 1.0
+# Created: 2026-05-02
+#
+# Purpose:
+#   When a series sits across two genres (operator's stillness_jp_07 dark_fantasy +
+#   somatic_fantasy iyashikei; jp_16 isekai + healing; mecha + iyashikei "After the
+#   Cockpit" hypothetical), the cookbook needs a deterministic rule for which
+#   genre's drawing tradition wins on which axis. This file specifies that rule
+#   for the 20 most common cross-genre pairs.
+#
+# Token-weighting cross-reference (cited HuggingFace + sd_embed):
+#   - Animagine XL 4.0 (SDXL-base) — supports `(token:1.2)` syntax via
+#     lpw_stable_diffusion_xl pipeline. Most expressive of the three.
+#     https://huggingface.co/docs/diffusers/using-diffusers/weighted_prompts
+#   - FLUX-schnell — supports weighting via sd_embed
+#     `get_weighted_text_embeddings_flux1` (added Aug 2024) but HF docs note
+#     "prompt weighting doesn't necessarily help for newer models like Flux"
+#     — weight values >1.3 often produce no visible change. Cap at 1.3 effective.
+#     https://github.com/xhinker/sd_embed
+#   - Qwen-Image — Qwen2.5-VL text encoder (T5-family bidirectional), no
+#     documented `(token:weight)` syntax; responds to natural-language
+#     emphasis ("strongly emphasizing X", "with prominent Y") rather than
+#     parenthetical weights. Rewrite as prose.
+#     https://github.com/QwenLM/Qwen-Image
+#
+# Cross-references (SHA-pinned):
+cross_references:
+  cookbook_research:
+    path: docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md
+    sha: 2881dd970bf2433e2225800ac6f73b1dd0281be5
+    pr: 802
+    sections_referenced: ["§2.3 (weight syntax for FLUX)"]
+  community_assets_audit:
+    path: docs/COMMUNITY_ASSETS_AUDIT_2026-04-29.md
+    sha: f4c50142b63df134d2f34c10a4a761bd9015c910
+    pr: 803
+    sections_referenced: ["Base diffusion model"]
+
+schema_version: "1.0"
+last_updated: "2026-05-02"
+pairs_total: 20
+
+pairs:
+
+  # ── 1. healing + slice_of_life — WORKING REGISTER ──────────────────────────
+  healing_plus_slice_of_life:
+    operator_status: working_anchor
+    drawing_tradition_wins: slice_of_life
+    expression_palette_wins: healing_iyashikei
+    token_weighting:
+      animagine: "(soft pastel:1.2), (gentle line art:1.15), domestic scene, slice of life manga, calm composition"
+      qwen_prose: "soft pastel palette emphasized, with gentle line art and a calm domestic composition"
+    why_it_works: "both registers share compositional DNA (mid-shot, daily-life, low ink density); minimal conflict — operator's stable case"
+    failed_blend_mode:
+      name: moe_drift
+      pattern: "slice_of_life leans into fanservice eye-render"
+      corrective: "weight down (big eyes:0.7), weight up (natural proportions:1.2)"
+    working_anchor_mangaka:
+      - { name: "Kiyohiko Azuma", works: ["Yotsuba&!"], url: "https://en.wikipedia.org/wiki/Yotsuba%26!" }
+      - { name: "Kozue Amano", works: ["ARIA"], url: "https://en.wikipedia.org/wiki/Aria_(manga)" }
+
+  # ── 2. mecha + iyashikei — CURRENTLY FAILING ───────────────────────────────
+  mecha_plus_iyashikei:
+    operator_status: failing_blend_after_the_cockpit
+    drawing_tradition_wins:
+      should: iyashikei
+      what_actually_happens: mecha_drags_panel_toward_density
+      why: "token-stack is fighting itself; mecha tokens have stronger training-set gravity"
+    expression_palette_wins: iyashikei
+    token_weighting:
+      animagine: "(soft iyashikei atmosphere:1.4), (calm slice of life:1.3), pilot in casual clothes, distant mecha silhouette, (mechanical detail:0.5), warm lighting, screentone shading"
+      qwen_prose: "a calm slice-of-life scene strongly emphasized; a small mecha silhouette in the distant background, mechanical detail kept minimal"
+    failed_blend_mode:
+      name: cockpit_bleed
+      pattern: "mech keeps getting drawn at full Sunrise/Bandai detail; iyashikei evaporates"
+      corrective:
+        - "move mecha out of frame or to silhouette"
+        - "explicit (mechanical detail:0.4)"
+        - "prefer Qwen-Image over Animagine — Qwen de-emphasizes 'mecha' tokens vs Animagine's anime-trained bias"
+    working_anchor_mangaka:
+      - { name: "Yoshikazu Yasuhiko", works: ["Mobile Suit Gundam: The Origin"], url: "https://en.wikipedia.org/wiki/Yoshikazu_Yasuhiko", note: "domestic-life-around-mecha pages" }
+      - { name: "Hayao Miyazaki", works: ["Nausicaä of the Valley of the Wind manga"], url: "https://en.wikipedia.org/wiki/Nausica%C3%A4_of_the_Valley_of_the_Wind_(manga)", note: "between-battle quiet pages" }
+
+  # ── 3. dark_fantasy + psychological_horror ─────────────────────────────────
+  dark_fantasy_plus_psychological_horror:
+    drawing_tradition_wins: dark_fantasy_miura_grade_ink_density
+    expression_palette_wins: psychological_horror_face_first_dread
+    token_weighting:
+      animagine: "(Berserk style ink:1.3), (psychological dread expression:1.2), heavy crosshatching, dark fantasy setting, distorted gaze, monochrome"
+      flux_schnell_caps_at: 1.2
+    failed_blend_mode:
+      name: splatter_drift
+      pattern: "the blend collapses to gore-horror, losing psychological subtlety"
+      corrective: "down-weight (blood:0.6), up-weight (unsettling atmosphere:1.3), (silent dread:1.2)"
+    working_anchor_mangaka:
+      - { name: "Kentarō Miura", works: ["Berserk"], url: "https://en.wikipedia.org/wiki/Berserk_(manga)" }
+      - { name: "Junji Ito", works: ["Uzumaki"], url: "https://en.wikipedia.org/wiki/Uzumaki" }
+
+  # ── 4. romance + workplace — josei convention ─────────────────────────────
+  romance_plus_workplace:
+    drawing_tradition_wins: workplace_suits_mid_range_office_screentone
+    expression_palette_wins: romance_josei_eye_light_blush_screen
+    token_weighting:
+      animagine: "josei manga, office setting, business attire, (subtle blush:1.2), (eye highlight:1.15), soft screentone, intimate two-shot"
+      qwen_prose: "subtle blush and eye highlights emphasized in josei office setting"
+    failed_blend_mode:
+      name: shoujo_bubble_drift
+      pattern: "sparkles and flower backgrounds invade the office"
+      corrective: "explicitly negative-prompt sparkle effects, flower background, school uniform"
+    working_anchor_mangaka:
+      - { name: "Kaoru Mori", works: ["Emma"], url: "https://en.wikipedia.org/wiki/Emma_(manga)", note: "Victorian-workplace josei" }
+      - { name: "Akiko Higashimura", works: ["Princess Jellyfish"], url: "https://en.wikipedia.org/wiki/Princess_Jellyfish" }
+
+  # ── 5. comedy + horror — gag-horror subgenre ──────────────────────────────
+  comedy_plus_horror:
+    drawing_tradition_wins: horror_ink_density_body_distortion
+    expression_palette_wins: comedy_deformation_reaction_faces_SD_inserts
+    token_weighting:
+      animagine: "(gag horror manga:1.3), exaggerated reaction face, (body horror element:1.1), comedic timing panel, screentone, monochrome"
+      flux_schnell_note: "may flatten the comedy beat — prefer Animagine here"
+    failed_blend_mode:
+      name: tonal_collapse
+      pattern: "horror eats the comedy → straight horror"
+      corrective: "keep at least one SD/chibi insert per page; weight (comedic deformation:1.25)"
+    working_anchor_mangaka:
+      - { name: "Kazuo Umezu", works: ["Makoto-chan"], url: "https://en.wikipedia.org/wiki/Kazuo_Umezu", note: "gag-horror pioneer" }
+      - { name: "Junji Ito", works: ["Junji Ito's Cat Diary"], url: "https://en.wikipedia.org/wiki/Junji_Ito%27s_Cat_Diary" }
+
+  # ── 6. mecha + sci_fi_cyberpunk ───────────────────────────────────────────
+  mecha_plus_sci_fi_cyberpunk:
+    drawing_tradition_wins: sci_fi_cyberpunk_architectural_background_dominance_nihei
+    expression_palette_wins: mecha_mechanical_detail_render
+    token_weighting:
+      flux_schnell_preferred: "best architectural fidelity"
+      flux_schnell_prompt: "cyberpunk megastructure, mecha in architectural scale, technical line art, dense urban background, monochrome ink"
+      avoid_weight_above: 1.2
+    failed_blend_mode:
+      name: toy_render
+      pattern: "mecha drawn at hobby-kit scale loses cyberpunk environmental dread"
+      corrective: "force scale relationships ('mecha small in frame, megastructure dominant')"
+    working_anchor_mangaka:
+      - { name: "Tsutomu Nihei", works: ["Knights of Sidonia"], url: "https://en.wikipedia.org/wiki/Tsutomu_Nihei" }
+      - { name: "Masamune Shirow", works: ["Appleseed"], url: "https://en.wikipedia.org/wiki/Appleseed_(manga)" }
+
+  # ── 7. sports + slice_of_life — kyūdō, quiet-sports ───────────────────────
+  sports_plus_slice_of_life:
+    drawing_tradition_wins: slice_of_life_low_ink_contemplative_framing
+    expression_palette_wins: sports_body_in_motion_dialed_down
+    token_weighting:
+      animagine: "(quiet sports manga:1.3), kyudo archery, contemplative pose, soft screentone, slice of life atmosphere, (speedlines:0.4)"
+    failed_blend_mode:
+      name: shonen_burst_drift
+      pattern: "speedlines explode and kill the quiet"
+      corrective: "explicit (speedlines:0.4) or negative-prompt them"
+    working_anchor_mangaka:
+      - { name: "Tatsuhiko Ogawa / Kotoko Ayano", works: ["Tsurune"], url: "https://en.wikipedia.org/wiki/Tsurune" }
+      - { name: "Tsubasa Yamaguchi", works: ["Blue Period"], url: "https://en.wikipedia.org/wiki/Blue_Period_(manga)", note: "art-as-practice register" }
+
+  # ── 8. isekai + healing — karoshi-reincarnation iyashikei ─────────────────
+  isekai_plus_healing:
+    operator_status: stillness_jp_16_subregister
+    drawing_tradition_wins: healing_soft_palette_gentle_line
+    expression_palette_wins: healing
+    token_weighting:
+      animagine: "(isekai healing manga:1.3), (soft pastel palette:1.2), pastoral fantasy village, gentle line art, calm composition, slice of life"
+      qwen_prose: "pastoral fantasy village in healing-isekai register, emphasized soft pastel palette"
+    failed_blend_mode:
+      name: harem_cheat_skill_drift
+      pattern: "isekai pulls toward fanservice and combat"
+      corrective: "negative prompt harem, sword, battle, fanservice; explicit positive pastoral, agricultural, cooking, daily life"
+    working_anchor_mangaka:
+      - { name: "Kanata Yanagino", works: ["By the Grace of the Gods"], url: "https://en.wikipedia.org/wiki/By_the_Grace_of_the_Gods" }
+      - { name: "Kinosuke Naitō / Hidari", works: ["Saihate no Paladin"], url: "https://en.wikipedia.org/wiki/The_Faraway_Paladin" }
+
+  # ── 9. battle + cultivation — manhwa-adjacent ─────────────────────────────
+  battle_plus_cultivation:
+    drawing_tradition_wins: cultivation_manhwa_full_color_vertical
+    expression_palette_wins: battle_impact_density_qi_as_speedline
+    token_weighting:
+      flux_or_animagine: "(xianxia battle:1.3), qi energy explosion, flowing robes mid-combat, manhua vertical composition, vibrant color, dynamic angle"
+    failed_blend_mode:
+      name: shonen_mono_drift
+      pattern: "reverts to monochrome screentone fight, losing manhua color identity"
+      corrective: "explicit `full color, manhua, vertical scroll composition` and negative `monochrome, screentone`"
+    working_anchor_mangaka:
+      - { name: "Tang Jia San Shao / Mu Feng Chun", works: ["Soul Land"], url: "https://soulland.fandom.com/wiki/List_of_Tang_Jia_San_Shao's_Works" }
+      - { name: "Chugong / DUBU", works: ["Solo Leveling"], url: "https://en.wikipedia.org/wiki/Solo_Leveling" }
+
+  # ── 10. food + iyashikei — WORKING REGISTER ───────────────────────────────
+  food_plus_iyashikei:
+    operator_status: working_anchor
+    drawing_tradition_wins: food_dish_as_hero
+    expression_palette_wins: iyashikei_warm_tone_restraint
+    token_weighting:
+      animagine: "(intimate counter scene:1.2), detailed food, steam rising, (warm iyashikei tone:1.2), soft screentone, single character eating, manga panel"
+    failed_blend_mode:
+      name: cooking_show_render
+      pattern: "food becomes glossy/photoreal and breaks manga register"
+      corrective: "explicit `hand-drawn line, manga style food, screentone shading`; negative `photorealistic, glossy render`"
+    working_anchor_mangaka:
+      - { name: "Yarō Abe", works: ["Shinya Shokudō"], url: "https://en.wikipedia.org/wiki/Shin%27ya_Shokud%C5%8D" }
+      - { name: "Chie Shinohara", works: ["Wakako Zake"], url: "https://tvtropes.org/pmwiki/pmwiki.php/Manga/WakakoZake" }
+
+  # ── 11. historical + romance — gothic_romance subgenre ────────────────────
+  historical_plus_romance:
+    drawing_tradition_wins: historical_textile_period_fidelity_mori_grade
+    expression_palette_wins: romance_eye_light_blush_gaze_framing
+    token_weighting:
+      animagine: "(Victorian period dress:1.3), (lace detail:1.2), (romantic gaze:1.15), gothic mansion interior, candle lighting, josei manga"
+      qwen_strong_for: "period text/architecture"
+    failed_blend_mode:
+      name: costume_drama_drift
+      pattern: "costume detail overwhelms emotional read"
+      corrective: "weight (intimate framing:1.2), (eye highlight:1.15)"
+    working_anchor_mangaka:
+      - { name: "Kaoru Mori", works: ["Emma", "A Bride's Story"], url: "https://en.wikipedia.org/wiki/Kaoru_Mori" }
+      - { name: "Riyoko Ikeda", works: ["The Rose of Versailles"], url: "https://en.wikipedia.org/wiki/Rose_of_Versailles" }
+
+  # ── 12. fantasy_adventure + slice_of_life — Frieren register ──────────────
+  fantasy_adventure_plus_slice_of_life:
+    drawing_tradition_wins: slice_of_life_calm_panel_grammar
+    expression_palette_wins: fantasy_costume_staff_world_flavor_rendered_restrained
+    token_weighting:
+      animagine: "(quiet fantasy manga:1.3), Frieren style, fantasy travel scene, soft line art, contemplative composition, gentle screentone, mage in robes"
+    failed_blend_mode:
+      name: adventure_burst_drift
+      pattern: "combat speedlines invade quiet travel"
+      corrective: "negative `battle, speedlines, dynamic action`; positive `walking, resting, conversation`"
+    working_anchor_mangaka:
+      - { name: "Kanehito Yamada / Tsukasa Abe", works: ["Frieren: Beyond Journey's End"], url: "https://en.wikipedia.org/wiki/Frieren" }
+      - { name: "Sōsuke Tōka", works: ["Ranking of Kings"], url: "https://en.wikipedia.org/wiki/Ranking_of_Kings" }
+
+  # ── 13. graphic_medicine + memoir — documentary-illustration ──────────────
+  graphic_medicine_plus_memoir:
+    drawing_tradition_wins: memoir_loose_line_voice_driven
+    expression_palette_wins: graphic_medicine_clinical_restraint_anatomical_care
+    token_weighting:
+      flux_schnell: "documentary memoir comic, simple line art, clinical setting, single character introspection, restrained composition, journal style"
+    failed_blend_mode:
+      name: aestheticised_illness_drift
+      pattern: "heavy screentone glamorises medical reality"
+      corrective: "keep flat tone; negative `dramatic lighting, sparkle, fanservice`"
+    working_anchor_mangaka:
+      - { name: "Nagata Kabi", works: ["My Lesbian Experience with Loneliness"], url: "https://en.wikipedia.org/wiki/My_Lesbian_Experience_With_Loneliness" }
+      - { name: "Yoshitoki Ōima", works: ["A Silent Voice"], url: "https://en.wikipedia.org/wiki/A_Silent_Voice" }
+
+  # ── 14. school + comedy — gag-school subgenre ─────────────────────────────
+  school_plus_comedy:
+    drawing_tradition_wins: comedy_deformation_SD_reaction
+    expression_palette_wins: school_uniform_iconography
+    token_weighting:
+      animagine: "(gag school manga:1.3), (exaggerated reaction:1.2), school uniform, classroom, SD chibi insert, comedic timing, screentone"
+    failed_blend_mode:
+      name: polished_slice_of_life_drift
+      pattern: "comedy beats lose chibi punctuation"
+      corrective: "explicit (SD deformation panel:1.2)"
+    working_anchor_mangaka:
+      - { name: "Bisco Hatori", works: ["Ouran High School Host Club"], url: "https://en.wikipedia.org/wiki/Ouran_High_School_Host_Club" }
+      - { name: "Kōji Kumeta", works: ["Sayonara Zetsubou Sensei"], url: "https://en.wikipedia.org/wiki/Sayonara,_Zetsubou-Sensei" }
+
+  # ── 15. supernatural_everyday + slice_of_life — Mushishi register ─────────
+  supernatural_everyday_plus_slice_of_life:
+    drawing_tradition_wins: slice_of_life_mundane_background_fidelity
+    expression_palette_wins: supernatural_everyday_delicate_ethereal_disturbance
+    token_weighting:
+      qwen_preferred: "natural-language prose is best"
+      qwen_prose: "a mundane laundromat scene strongly emphasized, with subtle ethereal wisps of light barely visible in the background, soft line art, quiet composition"
+      animagine: "(Mushishi style:1.3), mundane setting, (subtle ethereal element:1.1), soft gradient, gentle line"
+    failed_blend_mode:
+      name: shonen_monster_drift
+      pattern: "the spirit gets rendered as a shōnen creature"
+      corrective: "explicit `wisps, blur, gradient`; negative `monster, creature, defined form`"
+    working_anchor_mangaka:
+      - { name: "Yuki Urushibara", works: ["Mushishi"], url: "https://en.wikipedia.org/wiki/Mushishi" }
+      - { name: "Hitoshi Iwaaki", works: ["Parasyte"], url: "https://en.wikipedia.org/wiki/Parasyte", note: "quiet pages" }
+
+  # ── 16. essay + autobiographical — Nagata Kabi register ───────────────────
+  essay_plus_autobiographical:
+    drawing_tradition_wins: essay_loose_line_sketch_quality
+    expression_palette_wins: autobiographical_single_tone_intimate_framing
+    token_weighting:
+      flux_schnell: "autobiographical essay manga, simple line drawing, single tone screentone, single character introspection, sparse background"
+      avoid_weight_above_on_flux: 1.2
+    failed_blend_mode:
+      name: polished_shojo_drift
+      pattern: "line gets refined and intimacy collapses"
+      corrective: "explicit `rough line art, casual sketch quality`; negative `clean digital line, polished render`"
+    working_anchor_mangaka:
+      - { name: "Nagata Kabi", works: ["My Lesbian Experience with Loneliness", "My Solo Exchange Diary"], url: "https://en.wikipedia.org/wiki/Nagata_Kabi" }
+      - { name: "Rieko Saibara", works: ["gag-essay manga (1990s–)"], url: "https://en.wikipedia.org/wiki/Rieko_Saibara" }
+
+  # ── 17. sports + comedy — Slam Dunk early-volumes register ────────────────
+  sports_plus_comedy:
+    drawing_tradition_wins: sports_body_in_motion
+    expression_palette_wins: comedy_reaction_faces_SD_inserts_on_court
+    token_weighting:
+      animagine: "(shounen sports manga:1.3), basketball, dynamic motion, (comedic reaction face:1.15), SD chibi insert, sweat, screentone"
+    failed_blend_mode:
+      name: late_slam_dunk_drift
+      pattern: "pure-sports register loses gag punctuation"
+      corrective: "enforce at least one SD insert per scene"
+    working_anchor_mangaka:
+      - { name: "Takehiko Inoue", works: ["Slam Dunk early arcs"], url: "https://en.wikipedia.org/wiki/Slam_Dunk_(manga)" }
+      - { name: "Mitsuru Adachi", works: ["Touch"], url: "https://en.wikipedia.org/wiki/Touch_(manga)" }
+
+  # ── 18. psychological_horror + romance — gothic-romance + dread overlay ───
+  psychological_horror_plus_romance:
+    drawing_tradition_wins: psychological_horror_face_first_dread_eye_distortion
+    expression_palette_wins: romance_intimate_framing_gaze_emotional
+    token_weighting:
+      animagine: "(gothic romance manga:1.3), (psychological unease:1.2), intimate two-shot, candle lighting, distorted gaze, screentone shading, monochrome"
+    failed_blend_mode:
+      name: pole_collapse
+      pattern: "horror evaporates into pure romance OR romance softens into pure dread"
+      corrective: "keep equal weights on (romantic intimacy:1.2) and (unsettling atmosphere:1.2); never let one exceed the other by >0.2"
+    working_anchor_mangaka:
+      - { name: "Shuzo Oshimi", works: ["Welcome Back, Alice", "Blood on the Tracks"], url: "https://en.wikipedia.org/wiki/Welcome_Back,_Alice" }
+      - { name: "Moto Hagio", works: ["The Heart of Thomas"], url: "https://en.wikipedia.org/wiki/The_Heart_of_Thomas" }
+
+  # ── 19. mecha + battle — classical Gundam register ────────────────────────
+  mecha_plus_battle:
+    drawing_tradition_wins: mecha_mechanical_detail_render
+    expression_palette_wins: battle_impact_speedlines_dramatic_angle
+    token_weighting:
+      animagine: "(Gundam style mecha battle:1.3), (mechanical detail:1.2), dynamic angle, explosion, speedlines, monochrome ink, dramatic composition"
+      flux_schnell: "handles mech-detail well too"
+    failed_blend_mode:
+      name: super_robot_drift
+      pattern: "mecha simplified to mascot proportions losing weight"
+      corrective: "explicit `realistic mechanical proportions, heavy machine, scale detail`"
+    working_anchor_mangaka:
+      - { name: "Yoshikazu Yasuhiko", works: ["Mobile Suit Gundam: The Origin"], url: "https://en.wikipedia.org/wiki/Mobile_Suit_Gundam:_The_Origin" }
+      - { name: "Yasuo Ohtagaki", works: ["Gundam Thunderbolt"], url: "https://en.wikipedia.org/wiki/Mobile_Suit_Gundam_Thunderbolt" }
+
+  # ── 20. family + healing — Yotsuba register, domestic iyashikei ───────────
+  family_plus_healing:
+    drawing_tradition_wins: family_azuma_round_line_full_body_domestic
+    expression_palette_wins: healing_soft_palette_gentle_screentone
+    token_weighting:
+      animagine: "(Yotsuba style:1.3), (gentle round line art:1.2), domestic interior, family scene, (warm pastel:1.15), screentone, calm composition"
+      qwen_prose: "Yotsuba-style gentle round line art and warm domestic atmosphere emphasized"
+    failed_blend_mode:
+      name: moe_drift
+      pattern: "family register slips toward fanservice eye-render"
+      corrective: "weight down (big eyes:0.7); weight up (natural child proportions:1.2), (lived-in clutter:1.1)"
+    working_anchor_mangaka:
+      - { name: "Kiyohiko Azuma", works: ["Yotsuba&!"], url: "https://en.wikipedia.org/wiki/Yotsuba%26!" }
+      - { name: "Hiromu Arakawa", works: ["Silver Spoon"], url: "https://en.wikipedia.org/wiki/Silver_Spoon_(manga)" }
+
+# ── End of cross_genre_blending_rules.yaml ──────────────────────────────────

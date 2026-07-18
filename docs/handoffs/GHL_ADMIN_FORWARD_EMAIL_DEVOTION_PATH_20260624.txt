@@ -1,0 +1,62 @@
+Subject: GHL setup — Open Vessel Press (Devotion Path) — feed + 15 free tools
+
+Hi,
+
+One-time GHL setup for **Open Vessel Press (Devotion Path)** — Sai Maa teacher brand, persona **working parents**.
+
+---
+
+## 1) Weekly email feed (Proof Loop E1–E5)
+
+- Import workflows **WF1–WF4** (steps in attached PROOF_LOOP_WORKFLOW_TEMPLATE.md)
+- Paste this feed URL (same path every Monday; Phoenix replaces the JSON each week):
+
+```
+https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/devotion_path/en_US/{week}/marketing_feed.json
+```
+
+Example this week (2026-W26):
+
+```
+https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/devotion_path/en_US/2026-W26/marketing_feed.json
+```
+
+- Map **3 fields** on each feed item: `cta_url`, `pricing`, `content_type`
+- Full schema and merge tags: attached GHL_INTEGRATION_GUIDE.md
+
+**Feed notes (Devotion Path):**
+- E1 funnel URLs use brand-prefixed paths: `/free/devotion_path/{slug}/`
+- E4 paid offers link to **pearlprime.shop** (Sai Maa teacher SKUs)
+- Grief topic is template-only (no book CTA in feed)
+
+---
+
+## 2) Funnel capture (15 interactive pages)
+
+- Base path: `https://phoenix-brand-admin.pages.dev/free/devotion_path/`
+- Create **one Inbound Webhook** workflow for all 15 quiz/tool landings
+- Map JSON fields per attached GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md
+  (`email`, `first_name`, `quiz_id`, `topic`, `funnel_slug`, `score`, `score_band`, `tags`)
+
+---
+
+## Attachments (4)
+
+1. ghl/GHL_ADMIN_START_HERE.md
+2. GHL_INTEGRATION_GUIDE.md
+3. ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md
+4. GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md
+
+---
+
+## Please reply with
+
+```
+PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION=<REDACTED_GHL_WEBHOOK_URL>
+Feed URL confirmed: yes
+Sub-account name:
+Workflows published: yes/no
+Test contact created: yes/no
+```
+
+Thanks!

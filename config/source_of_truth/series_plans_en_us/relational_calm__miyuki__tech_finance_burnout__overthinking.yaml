@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: relational_calm__miyuki__tech_finance_burnout__overthinking
+brand: relational_calm
+teacher: miyuki
+persona: tech_finance_burnout
+topic: overthinking
+byline_author: rowan_marsh
+arc:
+  installment_1:
+    book_id: relational_calm__miyuki__tech_finance_burnout__overthinking__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__overthinking__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: relational_calm__miyuki__tech_finance_burnout__overthinking__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__overthinking__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: relational_calm__miyuki__tech_finance_burnout__overthinking__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__overthinking__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A quiet room for the over-analyzing mind. We will not teach
+  you to think faster or argue better. We will help you set the extra thinking down,
+  see the bare shape of what is actually here, and let the silence between thoughts
+  come back.
+bestseller_hook_family: ''
+emotional_engine: overthinking_recognition
+comp_series:
+- Don't Believe Everything You Think (Joseph Nguyen) — strips overthinking down to
+  the thought beneath the thought; the same bare, anti-hack register.
+- The Untethered Soul (Michael A. Singer) — quiet, spacious teaching about watching
+  the mind instead of obeying it; matches the stillness this series promises.
+- Stop Overthinking (Nick Trenton) — same core sufferer and search intent, but our
+  series answers it with bare-form calm instead of technique stacking.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 29 to 44
+  where_they_are: It is 11:40 on a Tuesday night. The laptop is shut but you are still
+    in the meeting, replaying the one sentence you said wrong, drafting the Slack
+    message you will not send, running the same loop you ran an hour ago. The room
+    is dark and quiet and your mind is the only thing still working overtime.
+  what_they_need: Permission to stop solving. A way to tell a real signal from a false
+    one. Enough quiet to hear their own life again, without a single hack, framework,
+    or optimization layered on top.
+  what_they_avoid: Productivity systems, 'communication hacks', mindset hustle, forced
+    positivity, and any book that treats their overthinking as one more thing to fix
+    faster.
+series_voice_markers:
+  register: spare, clear, unadorned; a quiet presence in the room rather than a coach
+    at a whiteboard; gentle and direct, never clinical, never preachy, never hustle
+  sentence_rhythm: short declaratives that land and stop; the occasional long sentence
+    that opens like a held breath, then a deliberate pause; plenty of white space,
+    nothing crowded
+  metaphor_family: bare form and empty space, the room with nothing extra in it, the
+    stillness between two people, the unsaid that finally settles, clean light, the
+    breath in a quiet room, what remains when the clutter falls away
+_needs_authoring: false

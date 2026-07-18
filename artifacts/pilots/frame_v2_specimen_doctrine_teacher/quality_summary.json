@@ -1,0 +1,294 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "master_sha",
+  "quality_profile": "draft",
+  "gates_run": true,
+  "gates_hard": false,
+  "gate_failures": [],
+  "overall_status": "PASS",
+  "book_pass_gate": "SKIPPED_SPINE_MODE",
+  "pre_depth_total_words": 5663,
+  "post_depth_total_words": 13000,
+  "frame": "somatic_first",
+  "exercise_slots_dropped": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 2,
+      "chapter_index": 1,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 3,
+      "chapter_index": 2,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 4,
+      "chapter_index": 3,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 6,
+      "chapter_index": 5,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 7,
+      "chapter_index": 6,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 8,
+      "chapter_index": 7,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    }
+  ],
+  "chapter_contract_warnings": [
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 1,
+          "excerpt": "The frequency of your heart determines the life you live."
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "love\\s+melts\\s+all",
+          "line": 11,
+          "excerpt": "Love melts all blockages."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.1426978818283166
+    },
+    {
+      "chapter": 2,
+      "chapter_index": 1,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "The frequency of love, repeated, begins to shift your inner atmosphere."
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 13,
+          "excerpt": "Karma is not punishment."
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 29,
+          "excerpt": "He chants softly, not words but a tone that carries the frequency of love."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.15550755939524838
+    },
+    {
+      "chapter": 5,
+      "chapter_index": 4,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "The frequency of love, repeated, begins to shift your inner atmosphere."
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 47,
+          "excerpt": "The frequency of gratitude does not require belief to begin working."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.22526315789473683
+    },
+    {
+      "chapter": 6,
+      "chapter_index": 5,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "every\\s+organ",
+          "line": 23,
+          "excerpt": "Every organ has a frequency."
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "disease\\s+is",
+          "line": 23,
+          "excerpt": "Disease is dissonance."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.082010582010582
+    },
+    {
+      "chapter": 7,
+      "chapter_index": 6,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "Blockages melt in the frequency of love.\" Continue for 5-10 minutes, letting the light move at its own pace."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.2647887323943662
+    },
+    {
+      "chapter": 8,
+      "chapter_index": 7,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "every\\s+organ",
+          "line": 13,
+          "excerpt": "Every organ has a frequency."
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "disease\\s+is",
+          "line": 13,
+          "excerpt": "Disease is dissonance."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.30835734870317005
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "love\\s+melts\\s+all",
+          "line": 13,
+          "excerpt": "Love melts all blockages."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.2537688442211055
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "The frequency of love, repeated, begins to shift your inner atmosphere."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.21158690176322417
+    }
+  ],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": []
+}

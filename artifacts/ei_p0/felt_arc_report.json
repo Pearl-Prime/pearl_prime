@@ -1,0 +1,123 @@
+{
+  "book": "book_ahjan_anxiety_15min.txt",
+  "book_words": 5568,
+  "somatic_state_fit": 0.8799,
+  "valence_rmse": 0.1238,
+  "arousal_rmse": 0.1164,
+  "observation_before_intervention_ok": true,
+  "notes": [
+    "arousal stays measured before the mechanism chapter (observation-first OK)."
+  ],
+  "arc": [
+    {
+      "chapter": 1,
+      "role": "recognition",
+      "intended_valence": 0.45,
+      "intended_arousal": 0.5,
+      "measured_valence": 0.3131,
+      "measured_arousal": 0.3022,
+      "vad_hits": 35
+    },
+    {
+      "chapter": 2,
+      "role": "somatic_legitimacy",
+      "intended_valence": 0.5,
+      "intended_arousal": 0.45,
+      "measured_valence": 0.5012,
+      "measured_arousal": 0.4278,
+      "vad_hits": 52
+    },
+    {
+      "chapter": 3,
+      "role": "mechanism",
+      "intended_valence": 0.52,
+      "intended_arousal": 0.42,
+      "measured_valence": 0.5144,
+      "measured_arousal": 0.4118,
+      "vad_hits": 35
+    },
+    {
+      "chapter": 4,
+      "role": "hidden_belief",
+      "intended_valence": 0.42,
+      "intended_arousal": 0.55,
+      "measured_valence": 0.5279,
+      "measured_arousal": 0.3907,
+      "vad_hits": 24
+    },
+    {
+      "chapter": 5,
+      "role": "destabilization",
+      "intended_valence": 0.35,
+      "intended_arousal": 0.65,
+      "measured_valence": 0.4816,
+      "measured_arousal": 0.4219,
+      "vad_hits": 31
+    },
+    {
+      "chapter": 6,
+      "role": "practical_interruption",
+      "intended_valence": 0.5,
+      "intended_arousal": 0.45,
+      "measured_valence": 0.4788,
+      "measured_arousal": 0.422,
+      "vad_hits": 36
+    },
+    {
+      "chapter": 7,
+      "role": "cost_exposure",
+      "intended_valence": 0.38,
+      "intended_arousal": 0.58,
+      "measured_valence": 0.4955,
+      "measured_arousal": 0.42,
+      "vad_hits": 55
+    },
+    {
+      "chapter": 8,
+      "role": "reframe",
+      "intended_valence": 0.55,
+      "intended_arousal": 0.45,
+      "measured_valence": 0.497,
+      "measured_arousal": 0.4233,
+      "vad_hits": 56
+    },
+    {
+      "chapter": 9,
+      "role": "self_relation_shift",
+      "intended_valence": 0.6,
+      "intended_arousal": 0.4,
+      "measured_valence": 0.5007,
+      "measured_arousal": 0.4277,
+      "vad_hits": 43
+    },
+    {
+      "chapter": 10,
+      "role": "practice_under_pressure",
+      "intended_valence": 0.52,
+      "intended_arousal": 0.5,
+      "measured_valence": 0.4859,
+      "measured_arousal": 0.4422,
+      "vad_hits": 52
+    },
+    {
+      "chapter": 11,
+      "role": "identity_fracture",
+      "intended_valence": 0.5,
+      "intended_arousal": 0.52,
+      "measured_valence": 0.5254,
+      "measured_arousal": 0.4209,
+      "vad_hits": 45
+    },
+    {
+      "chapter": 12,
+      "role": "integration",
+      "intended_valence": 0.68,
+      "intended_arousal": 0.35,
+      "measured_valence": 0.3516,
+      "measured_arousal": 0.2835,
+      "vad_hits": 35
+    }
+  ],
+  "vad_licence_flag": "REVIEW: confirm open licence before commercial ship (roadmap risk #4)",
+  "citations": "grounds nervous-system claims in a transparent VAD lexicon (RCG-007); measures prose against the spine's intended pedagogy arc (RCG-022)"
+}

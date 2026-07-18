@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__depression__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__through_loss__1hr
+  name: Through the Low Places — for Working Parents (One-Hour)
+installment_number: 3
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: The Witnessing Practice (3)'
+subtitle: How to Create Distance from Anxious Thoughts and Find Clarity — Depression
+  for Working Parents (Watching Your Thoughts Without Drowning)
+cover_tagline: The scoreboard in your head never resets. Tonight you don't have to
+  read it.
+description:
+  short_blurb: Every snap, every flubbed meeting, every way you fell short gets logged
+    and replayed — and the tally never says you did fine. This one-hour reset is for
+    the working parent worn down by a mind that prosecutes every day. It won't make
+    the verdict stop. It'll teach you to hear it without believing it.
+  long_description: 'You snapped at your kid over nothing this morning, and you''ve
+    been re-watching the clip ever since. The look on their face. Your own voice,
+    too sharp. By lunch you''re also replaying the meeting where you said the wrong
+    thing, and by the time you''re brushing teeth at night there''s a running scoreboard
+    of every way you fell short today — and it never, not once, posts a number you
+    can live with.
+
+
+    This is for the parent whose low patch lives less in the heart than in a mind
+    that refuses to clock out. You don''t just have a bad day; you prosecute it. Every
+    exchange gets a post-game breakdown. You read your kid''s mood for evidence you''re
+    damaging them and your manager''s two-word reply for evidence you''re about to
+    be exposed. And the standard advice — think positive, challenge the thought, reframe
+    it — only hands that inner auditor fresh material, one more performance for it
+    to grade. The problem was never that you weren''t paying close enough attention.
+    It''s that you cannot look away.
+
+
+    What this hour offers first is an accurate name for that auditor: not conscience,
+    not diligence, but a frightened part of you convinced that the instant it stops
+    tracking everything, the whole operation collapses and you fail the people you
+    love. Then it teaches a move that sounds small and changes everything — how to
+    take one step back and notice the scoring as it happens, to let the commentary
+    keep running without climbing inside each sentence and believing it. By the end
+    you''ll be moving through an ordinary working-parent day with that voice still
+    narrating in the background, but no longer holding the wheel.
+
+
+    None of this makes the mind fall silent. It won''t pretend the second-guessing
+    ends, the replays stop, the 2 a.m. audit of your failures finally shuts off. A
+    vigilant mind doesn''t take that order, and dressing it up as a goal just becomes
+    one more test you''re flunking. What you get instead is room — the difference
+    between being trapped inside the argument and stepping far enough back to hear
+    it as just an argument, one your kid''s name happens to be stapled to.
+
+
+    You don''t have to win the case the voice keeps building. You don''t have to believe
+    a verdict simply because it arrived in your own voice and felt like the truth.
+    You can be a thoughtful, deeply devoted parent and still set the scoreboard down
+    for sixty minutes. Read this when the house has gone quiet and the auditor is
+    loudest — long enough to learn that you are the one listening to the noise, never
+    the noise itself.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - working parents
+  - depression for working parents
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: hannah_stern
+comp_titles:
+- Unwinding Anxiety (Judson Brewer) — the practical science of stepping back from
+  looping mental habits
+- Self-Compassion (Kristin Neff) — replacing the relentless inner critic with a steadier
+  inner stance
+- Chatter (Ethan Kross) — why the inner voice spirals and how to get distance from
+  it
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

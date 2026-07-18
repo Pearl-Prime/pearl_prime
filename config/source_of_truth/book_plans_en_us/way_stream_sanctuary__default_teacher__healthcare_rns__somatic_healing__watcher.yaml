@@ -1,0 +1,105 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__somatic_healing__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__somatic_healing.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__through_loss
+  name: Through the Low Places — for Nurses
+installment_number: 2
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Somatic Healing: Watching Your Thoughts Without Drowning (1)'
+subtitle: A Real Talk Guide to Somatic Healing for Healthcare Rns
+cover_tagline: Your body never came off high alert. Even on your days off.
+description:
+  short_blurb: The alarm that snaps you awake at a changing monitor never fully switches
+    off — your body stays braced even at home, even asleep. This is a book for nurses
+    about the hypervigilance that lives in the nervous system, and how to read it
+    instead of drowning in it. It won't teach you to relax on command. It'll help
+    you notice you're braced.
+  long_description: 'A door slams at home and you''re up out of the chair before you''ve
+    thought about it, heart going, scanning the room. Nothing''s wrong. Your body
+    doesn''t know that yet. It''s been braced for so many shifts — primed to move
+    the second a monitor changes its tone, the second a patient''s breathing shifts
+    — that the bracing has become your baseline. You are off duty. Your nervous system
+    never got the memo.
+
+
+    This book is for the nurse whose hypervigilance has stopped being a state and
+    become a setting. The body that snaps to attention at the alarm is doing exactly
+    what the job demands; on the floor, that readiness is the difference between catching
+    the change and missing it. But it was meant to switch off between codes, and yours
+    stopped switching off, and now you carry the braced body everywhere — into your
+    bed, into your weekend, into the quiet that should feel like rest and instead
+    feels like waiting for the next alarm.
+
+
+    Oscar Bello knows what years on alert do to a person — he is a hospital chaplain
+    who has sat beside the depleted — and he writes about watching the body''s vigilance
+    without drowning in it. Recognition: feeling where you''re braced — the held shoulders,
+    the shallow breath, the readiness humming under your skin even when nothing is
+    happening. Descent: going down into the bracing instead of trying to force it
+    loose, instead of demanding your body stand down on command the way it never will.
+    Integration: coming back able to read your own alert system, to notice you''re
+    primed and let it ease on its own terms — ready when you''re on, settling when
+    you''re off.
+
+
+    This book will not teach you to relax on cue. It will not tell you to take a deep
+    breath and let it all go, or that you''d settle if you just did the right wind-down
+    routine. It will not treat your braced nervous system as a glitch to reset. There
+    is no fix here, no off-switch to install in a body that learned to stay ready
+    because staying ready kept your patients alive.
+
+
+    What it offers is plain language for the alert that won''t stand down — words
+    you can use the next time a slammed door launches you out of a chair on your day
+    off. You learned to keep your body primed because the alarm is real and the stakes
+    are life. You are allowed to notice the bracing without ordering it to stop. You
+    are allowed to let the readiness ease when there''s nothing to catch. You are
+    allowed to come off high alert in the one place that was supposed to be safe —
+    your own body, finally at rest.'
+keywords:
+  primary:
+  - somatic healing
+  - body based healing
+  - nervous system regulation
+  - trauma in the body
+  - somatic therapy
+  - felt sense
+  secondary:
+  - nurses
+  - somatic healing for nurses
+bisac_codes:
+- SEL027000
+- PSY022000
+- HEA046000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- The Body Keeps the Score (Bessel van der Kolk) — how a nervous system stuck on high
+  alert holds onto vigilance
+- Accessing the Healing Power of the Vagus Nerve (Stanley Rosenberg) — the physiology
+  of a body that won't stand down, in plain terms
+- Anchored (Deb Dana) — reading your own nervous-system states instead of forcing
+  calm
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

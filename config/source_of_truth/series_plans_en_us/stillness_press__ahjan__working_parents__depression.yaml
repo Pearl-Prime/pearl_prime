@@ -1,0 +1,77 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stillness_press__ahjan__working_parents__depression
+brand: stillness_press
+teacher: ahjan
+persona: working_parents
+topic: depression
+byline_author: sam_meridian
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__working_parents__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__working_parents__depression__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: stillness_press__ahjan__working_parents__depression__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the working parent who is quietly going under — not the
+  loud kind of depression, but the grey, going-through-the-motions kind that hides
+  behind packed lunches and a working smile. This series doesn't ask you to feel grateful
+  or push through. It sits beside the part of you that has nothing left, and helps
+  you recognize what the flatness has been protecting — without turning your own recovery
+  into one more thing you're failing at.
+bestseller_hook_family: ''
+emotional_engine: depression_recognition
+comp_series:
+- Reasons to Stay Alive / Notes on a Nervous Planet (Matt Haig) — plainspoken, non-clinical
+  companionship for depression that refuses to perform recovery
+- The Comfort Book (Matt Haig) — short, spacious passages you can read when you have
+  nothing left, made for the grey days rather than the good ones
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the exhaustion of carrying invisible labor without shaming the one carrying it'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-46
+  where_they_are: It's 9:40pm. The kids are finally down, the dishwasher is running,
+    and you're sitting on the edge of the bed you haven't gotten into yet — phone
+    in hand, not reading it. Tomorrow's lunches aren't made. You used to feel things
+    about days like this; now there's just a flat grey hum where the feeling should
+    be. You tell everyone you're tired. Tired isn't the word, but it's the one that
+    doesn't lead to more questions.
+  what_they_need: To hear that the numbness is not laziness or ingratitude — that
+    a flattened, can't-feel-it depression is a real thing the mind does to survive
+    a load that never lets up. To be met without being fixed, and to find one honest
+    place to set the weight down for an hour without abandoning anyone.
+  what_they_avoid: Hustle-culture pep talks, 'just be present with your kids' guilt,
+    gratitude-journal homework, optimize-your-morning routines, toxic positivity,
+    and any book that adds a self-improvement task to a life that is already at capacity.
+series_voice_markers:
+  register: contemplative, spacious, grounded; the unhurried voice of someone who
+    has sat in the same grey themselves and is not in a hurry to pull you out of it
+    — never clinical, never a coach, never hustle
+  sentence_rhythm: long settling sentences that let a breath land, broken by short
+    plain ones that tell the truth; the pace of someone speaking quietly across a
+    kitchen table late at night, leaving room between the lines
+  metaphor_family: stillness and weather — settling water, low grey light, the pause
+    between, open ground, the weight you've been carrying, the lamp left on in a dark
+    house — never productivity, machinery, military, or biohacking
+_needs_authoring: false

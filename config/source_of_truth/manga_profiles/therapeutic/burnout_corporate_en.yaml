@@ -1,0 +1,59 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+therapeutic_lane: burnout
+
+title_id: burnout_corporate_en
+brand_id: burnout_corporate
+locale_primary: en
+
+market_demo: seinen
+genre_family: graphic_medicine
+subgenre: "corporate_burnout_mechanism_explained"
+
+emotional_engine: catharsis
+reader_promise: "You will feel the exact moment the system failed you — and finally understand why your body went quiet before your mind did."
+
+serialization_engine: arc_based
+chapter_hook_family: betrayal
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.22
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 85
+  silent_panel_ratio: 0.25
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: moderate
+
+adaptation_targets:
+  - print
+  - webtoon
+
+series_notes: |
+  Corporate burnout from the graphic medicine angle — nervous system depletion,
+  the slow-boil that precedes collapse, the organization's role in the breakdown.
+  Catharsis engine: the release comes from having the mechanism witnessed and named.
+  Betrayal hook: reader enters through the moment the implicit contract was broken.
+  Research basis: therapeutic_manga_wellness_market_research_2026_04_04.md §burnout §corporate
+  Reader promise anchors to craving: Catharsis (#3) + Named-ness (#11).
+  EN-first. Skeleton locales await localization sprint.
+
+locale_skeletons:
+  - {locale: ja_JP, status: skeleton_awaits_localization_sprint}
+  - {locale: ko_KR, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_TW, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_CN, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_HK, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_SG, status: skeleton_awaits_localization_sprint}
+  - {locale: de_DE, status: skeleton_awaits_localization_sprint}
+  - {locale: fr_FR, status: skeleton_awaits_localization_sprint}
+  - {locale: es_ES, status: skeleton_awaits_localization_sprint}
+  - {locale: es_US, status: skeleton_awaits_localization_sprint}
+  - {locale: it_IT, status: skeleton_awaits_localization_sprint}
+  - {locale: pt_BR, status: skeleton_awaits_localization_sprint}

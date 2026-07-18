@@ -1,0 +1,59 @@
+name: Docs CI
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'docs/**'
+      - 'specs/**'
+      - 'ONBOARDING.md'
+      - 'config/onboarding/**'
+      - 'brand-wizard-app/public/onboarding/**'
+      - 'scripts/ci/check_docs_governance.py'
+      - 'scripts/ci/check_church_yaml_no_sensitive_tokens.py'
+      - 'scripts/ci/validate_onboarding_registry.py'
+      - 'scripts/ci/check_agent_registry.py'
+      - 'config/agents/agent_registry.yaml'
+      - 'artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv'
+      - '.github/workflows/docs-ci.yml'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'docs/**'
+      - 'specs/**'
+      - 'ONBOARDING.md'
+      - 'config/onboarding/**'
+      - 'brand-wizard-app/public/onboarding/**'
+      - 'scripts/ci/check_docs_governance.py'
+      - 'scripts/ci/check_church_yaml_no_sensitive_tokens.py'
+      - 'scripts/ci/validate_onboarding_registry.py'
+      - 'scripts/ci/check_agent_registry.py'
+      - 'config/agents/agent_registry.yaml'
+      - 'artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv'
+      - '.github/workflows/docs-ci.yml'
+
+jobs:
+  docs-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Docs governance (links + freshness + inventory + authority)
+        run: |
+          PYTHONPATH=. python scripts/ci/check_docs_governance.py --check-inventory
+      - name: Church YAML no sensitive tokens (ssn, account_number, etc.)
+        run: python scripts/ci/check_church_yaml_no_sensitive_tokens.py
+      - name: Validate onboarding registry JSON
+        run: python scripts/ci/validate_onboarding_registry.py
+      # P0-1 (docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md §2): agent_registry ↔ subsystem map drift.
+      # WARN MODE until the documented registry↔map orphans (e.g. pearl_devops per open question
+      # Q-ASIV2-DEVOPS-AGENT-01) are resolved. Flip `|| echo ...` to a hard gate once the registry is
+      # reconciled so silent drift cannot reappear. Tier-2 safe: no LLM/network calls.
+      - name: Install PyYAML (agent registry validator)
+        run: python -m pip install --quiet "pyyaml>=6"
+      - name: Agent registry consistency (WARN — see Q-ASIV2-DEVOPS-AGENT-01)
+        run: |
+          PYTHONPATH=. python scripts/ci/check_agent_registry.py \
+            || echo "::warning title=agent_registry drift::check_agent_registry found registry↔SUBSYSTEM_AUTHORITY_MAP drift; resolve orphans then make this step blocking."

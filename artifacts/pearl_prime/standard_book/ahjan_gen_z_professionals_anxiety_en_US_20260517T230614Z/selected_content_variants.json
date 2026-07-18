@@ -1,0 +1,1770 @@
+{
+  "schema_version": 1,
+  "stage": "selected_content_variants",
+  "topic": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "ahjan",
+  "runtime_format": "standard_book",
+  "chapters": [
+    {
+      "number": 1,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch01_sec01_hook_f4",
+          "atom_id": "HOOK v32",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v32+ch01_sec01_hook_f4+ahjan_HOOK_006",
+          "target_words": 100,
+          "actual_words": 107,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_0:recognition:overwhelm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_0:recognition:overwhelm:v03",
+          "target_words": 129,
+          "actual_words": 92,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch01_sec05_reflection_f2",
+          "atom_id": "REFLECTION v17",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v17+ch01_sec05_reflection_f2",
+          "target_words": 94,
+          "actual_words": 327,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_003_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_003_mined",
+          "target_words": 138,
+          "actual_words": 87,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_0:mechanism_proof:overwhelm:v05",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_0:mechanism_proof:overwhelm:v05",
+          "target_words": 124,
+          "actual_words": 81,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "ch01_sec06_teacherdoctrine_d02",
+          "atom_id": "TEACHER_DOCTRINE v01",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v01+ch01_sec06_teacherdoctrine_d02+ahjan_TEACHING_077_mined",
+          "target_words": 114,
+          "actual_words": 297,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch01_sec07_reflection_f1",
+          "atom_id": "REFLECTION v31",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v31+ch01_sec07_reflection_f1",
+          "target_words": 94,
+          "actual_words": 281,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_013_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_013_mined",
+          "target_words": 139,
+          "actual_words": 90,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "breath_anchor_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_0:turning_point:overwhelm:v08",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_0:turning_point:overwhelm:v08",
+          "target_words": 114,
+          "actual_words": 130,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch01_sec09_integration_f3",
+          "atom_id": "INTEGRATION v29",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v29+ch01_sec09_integration_f3+ahjan_INTEGRATION_005",
+          "target_words": 79,
+          "actual_words": 283,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch02_sec01_hook_f2",
+          "atom_id": "HOOK v56",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v56+ch02_sec01_hook_f2+ahjan_HOOK_008",
+          "target_words": 100,
+          "actual_words": 185,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_1:recognition:overwhelm:v06",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:recognition:overwhelm:v06",
+          "target_words": 129,
+          "actual_words": 94,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch02_sec03_reflection_f1",
+          "atom_id": "REFLECTION v16",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v16+ch02_sec03_reflection_f1",
+          "target_words": 94,
+          "actual_words": 335,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_064_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_064_mined",
+          "target_words": 138,
+          "actual_words": 85,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_1:mechanism_proof:overwhelm:v06",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:mechanism_proof:overwhelm:v06",
+          "target_words": 124,
+          "actual_words": 126,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v03+ahjan_TEACHING_022_mined",
+          "target_words": 114,
+          "actual_words": 281,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch02_sec04_reflection_f1",
+          "atom_id": "REFLECTION v19",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v19+ch02_sec04_reflection_f1",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_013_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_013_mined",
+          "target_words": 139,
+          "actual_words": 90,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "breath_anchor_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_1:turning_point:overwhelm:v09",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:turning_point:overwhelm:v09",
+          "target_words": 114,
+          "actual_words": 130,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch02_sec09_integration_f3",
+          "atom_id": "INTEGRATION v06",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v06+ch02_sec09_integration_f3+ahjan_INTEGRATION_009",
+          "target_words": 79,
+          "actual_words": 187,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch03_sec01_hook_f5",
+          "atom_id": "HOOK v61",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v61+ch03_sec01_hook_f5+ahjan_HOOK_003",
+          "target_words": 100,
+          "actual_words": 161,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_2:recognition:overwhelm:v10",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:recognition:overwhelm:v10",
+          "target_words": 129,
+          "actual_words": 121,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch03_sec03_reflection_f2",
+          "atom_id": "REFLECTION v32",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v32+ch03_sec03_reflection_f2",
+          "target_words": 94,
+          "actual_words": 273,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_015_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_015_mined",
+          "target_words": 138,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "body_scan_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_2:mechanism_proof:overwhelm:v14",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:mechanism_proof:overwhelm:v14",
+          "target_words": 124,
+          "actual_words": 128,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v03+ahjan_TEACHING_093_mined",
+          "target_words": 114,
+          "actual_words": 295,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch03_sec04_reflection_f2",
+          "atom_id": "REFLECTION v25",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v25+ch03_sec04_reflection_f2",
+          "target_words": 94,
+          "actual_words": 333,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_024_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_024_mined",
+          "target_words": 139,
+          "actual_words": 86,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_2:embodiment:overwhelm:v12",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:embodiment:overwhelm:v12",
+          "target_words": 114,
+          "actual_words": 88,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch03_sec08_integration_f1",
+          "atom_id": "INTEGRATION v30",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v30+ch03_sec08_integration_f1+ahjan_INTEGRATION_003",
+          "target_words": 79,
+          "actual_words": 280,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch04_sec01_hook_f1",
+          "atom_id": "HOOK v74",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v74+ch04_sec01_hook_f1+ahjan_HOOK_000",
+          "target_words": 100,
+          "actual_words": 164,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_0:recognition:overwhelm:v12",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:recognition:overwhelm:v12",
+          "target_words": 129,
+          "actual_words": 139,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch04_sec03_reflection_f2",
+          "atom_id": "REFLECTION v22",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v22+ch04_sec03_reflection_f2",
+          "target_words": 94,
+          "actual_words": 335,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_048_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_048_mined",
+          "target_words": 138,
+          "actual_words": 78,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_0:mechanism_proof:overwhelm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:mechanism_proof:overwhelm:v01",
+          "target_words": 124,
+          "actual_words": 85,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v05",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v05+ahjan_TEACHING_020_mined",
+          "target_words": 114,
+          "actual_words": 281,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch04_sec04_reflection_f3",
+          "atom_id": "REFLECTION v22",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v22+ch04_sec04_reflection_f3",
+          "target_words": 94,
+          "actual_words": 336,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_041_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_041_mined",
+          "target_words": 139,
+          "actual_words": 54,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_0:turning_point:overwhelm:v11",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:turning_point:overwhelm:v11",
+          "target_words": 114,
+          "actual_words": 129,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch04_sec07_integration_f3",
+          "atom_id": "INTEGRATION v08",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v08+ch04_sec07_integration_f3+ahjan_INTEGRATION_002",
+          "target_words": 79,
+          "actual_words": 175,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch05_sec01_hook_f3",
+          "atom_id": "HOOK v22",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v22+ch05_sec01_hook_f3+ahjan_HOOK_002",
+          "target_words": 100,
+          "actual_words": 78,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_1:recognition:overwhelm:v14",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:recognition:overwhelm:v14",
+          "target_words": 129,
+          "actual_words": 118,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch05_sec03_reflection_f3",
+          "atom_id": "REFLECTION v23",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v23+ch05_sec03_reflection_f3",
+          "target_words": 94,
+          "actual_words": 333,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_003_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_003_mined",
+          "target_words": 138,
+          "actual_words": 90,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_1:mechanism_proof:overwhelm:v08",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:mechanism_proof:overwhelm:v08",
+          "target_words": 124,
+          "actual_words": 43,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v01",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v01+ahjan_TEACHING_049_mined",
+          "target_words": 114,
+          "actual_words": 276,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch05_sec04_reflection_f2",
+          "atom_id": "REFLECTION v25",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v25+ch05_sec04_reflection_f2",
+          "target_words": 94,
+          "actual_words": 333,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_029_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_029_mined",
+          "target_words": 139,
+          "actual_words": 32,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_1:turning_point:overwhelm:v14",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:turning_point:overwhelm:v14",
+          "target_words": 114,
+          "actual_words": 104,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch05_sec07_integration_f3",
+          "atom_id": "INTEGRATION v16",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v16+ch05_sec07_integration_f3+ahjan_INTEGRATION_004",
+          "target_words": 79,
+          "actual_words": 183,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch06_sec01_hook_f1",
+          "atom_id": "HOOK v32",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v32+ch06_sec01_hook_f1+ahjan_HOOK_003",
+          "target_words": 100,
+          "actual_words": 116,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_2:recognition:overwhelm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:recognition:overwhelm:v01",
+          "target_words": 129,
+          "actual_words": 80,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch06_sec03_reflection_f1",
+          "atom_id": "REFLECTION v25",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v25+ch06_sec03_reflection_f1",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_026_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_026_mined",
+          "target_words": 138,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "body_scan_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_2:mechanism_proof:overwhelm:v09",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:mechanism_proof:overwhelm:v09",
+          "target_words": 124,
+          "actual_words": 154,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v03+ahjan_TEACHING_093_mined",
+          "target_words": 114,
+          "actual_words": 294,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch06_sec04_reflection_f1",
+          "atom_id": "REFLECTION v13",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v13+ch06_sec04_reflection_f1",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_053_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_053_mined",
+          "target_words": 139,
+          "actual_words": 73,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_2:embodiment:overwhelm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:embodiment:overwhelm:v02",
+          "target_words": 114,
+          "actual_words": 108,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch06_sec07_integration_f3",
+          "atom_id": "INTEGRATION v21",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v21+ch06_sec07_integration_f3+ahjan_INTEGRATION_007",
+          "target_words": 79,
+          "actual_words": 176,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch07_sec01_hook_f1",
+          "atom_id": "HOOK v11",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v11+ch07_sec01_hook_f1+ahjan_HOOK_000",
+          "target_words": 100,
+          "actual_words": 106,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_0:recognition:overwhelm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:recognition:overwhelm:v02",
+          "target_words": 129,
+          "actual_words": 88,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch07_sec06_reflection_f2",
+          "atom_id": "REFLECTION v01",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v01+ch07_sec06_reflection_f2",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_014_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_014_mined",
+          "target_words": 138,
+          "actual_words": 71,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_0:mechanism_proof:overwhelm:v20",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:mechanism_proof:overwhelm:v20",
+          "target_words": 124,
+          "actual_words": 113,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v03+ahjan_TEACHING_062_mined",
+          "target_words": 114,
+          "actual_words": 288,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v19",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v19",
+          "target_words": 94,
+          "actual_words": 284,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_040_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_040_mined",
+          "target_words": 139,
+          "actual_words": 89,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_0:turning_point:overwhelm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:turning_point:overwhelm:v04",
+          "target_words": 114,
+          "actual_words": 110,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch07_sec07_integration_f1",
+          "atom_id": "INTEGRATION v29",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v29+ch07_sec07_integration_f1+ahjan_INTEGRATION_002",
+          "target_words": 79,
+          "actual_words": 287,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch08_sec01_hook_f2",
+          "atom_id": "HOOK v30",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v30+ch08_sec01_hook_f2+ahjan_HOOK_011",
+          "target_words": 100,
+          "actual_words": 83,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_1:recognition:overwhelm:v05",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:recognition:overwhelm:v05",
+          "target_words": 129,
+          "actual_words": 100,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch08_sec06_reflection_f3",
+          "atom_id": "REFLECTION v25",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v25+ch08_sec06_reflection_f3",
+          "target_words": 94,
+          "actual_words": 49,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_015_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_015_mined",
+          "target_words": 138,
+          "actual_words": 52,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_1:mechanism_proof:overwhelm:v10",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:mechanism_proof:overwhelm:v10",
+          "target_words": 124,
+          "actual_words": 146,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v01",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v01+ahjan_COMPRESSION_010",
+          "target_words": 114,
+          "actual_words": 216,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v07",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v07",
+          "target_words": 94,
+          "actual_words": 2,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_011_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_011_mined",
+          "target_words": 139,
+          "actual_words": 52,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_1:turning_point:overwhelm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:turning_point:overwhelm:v03",
+          "target_words": 114,
+          "actual_words": 118,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch08_sec07_integration_f2",
+          "atom_id": "INTEGRATION v14",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v14+ch08_sec07_integration_f2+ahjan_INTEGRATION_006",
+          "target_words": 79,
+          "actual_words": 264,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch09_sec01_hook_f2",
+          "atom_id": "HOOK v71",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v71+ch09_sec01_hook_f2+ahjan_HOOK_000",
+          "target_words": 100,
+          "actual_words": 180,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_2:recognition:overwhelm:v07",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:recognition:overwhelm:v07",
+          "target_words": 129,
+          "actual_words": 59,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch09_sec03_reflection_f1",
+          "atom_id": "REFLECTION v25",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v25+ch09_sec03_reflection_f1",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_033_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_033_mined",
+          "target_words": 138,
+          "actual_words": 97,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_2:mechanism_proof:overwhelm:v12",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:mechanism_proof:overwhelm:v12",
+          "target_words": 124,
+          "actual_words": 131,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v01",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v01+ahjan_TEACHING_043_mined",
+          "target_words": 114,
+          "actual_words": 287,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch09_sec04_reflection_f3",
+          "atom_id": "REFLECTION v17",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v17+ch09_sec04_reflection_f3",
+          "target_words": 94,
+          "actual_words": 49,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_010_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_010_mined",
+          "target_words": 139,
+          "actual_words": 74,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "breath_anchor_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_2:embodiment:overwhelm:v10",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:embodiment:overwhelm:v10",
+          "target_words": 114,
+          "actual_words": 107,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch09_sec07_integration_f3",
+          "atom_id": "INTEGRATION v29",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v29+ch09_sec07_integration_f3+ahjan_INTEGRATION_008",
+          "target_words": 79,
+          "actual_words": 290,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch10_sec01_hook_f2",
+          "atom_id": "HOOK v85",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v85+ch10_sec01_hook_f2+ahjan_HOOK_010",
+          "target_words": 100,
+          "actual_words": 165,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_0:recognition:overwhelm:v09",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:recognition:overwhelm:v09",
+          "target_words": 129,
+          "actual_words": 128,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch10_sec03_reflection_f2",
+          "atom_id": "REFLECTION v32",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v32+ch10_sec03_reflection_f2",
+          "target_words": 94,
+          "actual_words": 273,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_050_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_050_mined",
+          "target_words": 138,
+          "actual_words": 93,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "body_scan_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_0:mechanism_proof:overwhelm:v21",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:mechanism_proof:overwhelm:v21",
+          "target_words": 124,
+          "actual_words": 110,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v03+ahjan_TEACHING_003_mined",
+          "target_words": 114,
+          "actual_words": 277,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch10_sec04_reflection_f2",
+          "atom_id": "REFLECTION v13",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v13+ch10_sec04_reflection_f2",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_047_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_047_mined",
+          "target_words": 139,
+          "actual_words": 89,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_0:turning_point:overwhelm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:turning_point:overwhelm:v02",
+          "target_words": 114,
+          "actual_words": 110,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch10_sec07_integration_f1",
+          "atom_id": "INTEGRATION v32",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v32+ch10_sec07_integration_f1+ahjan_INTEGRATION_001",
+          "target_words": 79,
+          "actual_words": 212,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch11_sec01_hook_f3",
+          "atom_id": "HOOK v67",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v67+ch11_sec01_hook_f3+ahjan_HOOK_001",
+          "target_words": 100,
+          "actual_words": 180,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_1:recognition:overwhelm:v11",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:recognition:overwhelm:v11",
+          "target_words": 129,
+          "actual_words": 127,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch11_sec03_reflection_f3",
+          "atom_id": "REFLECTION v01",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v01+ch11_sec03_reflection_f3",
+          "target_words": 94,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_023_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_023_mined",
+          "target_words": 138,
+          "actual_words": 69,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_1:mechanism_proof:overwhelm:v11",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:mechanism_proof:overwhelm:v11",
+          "target_words": 124,
+          "actual_words": 149,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v03+ahjan_TEACHING_014_mined",
+          "target_words": 114,
+          "actual_words": 287,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch11_sec04_reflection_f1",
+          "atom_id": "REFLECTION v19",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v19+ch11_sec04_reflection_f1",
+          "target_words": 94,
+          "actual_words": 330,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_018_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_018_mined",
+          "target_words": 139,
+          "actual_words": 82,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "breath_anchor_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_1:turning_point:overwhelm:v13",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:turning_point:overwhelm:v13",
+          "target_words": 114,
+          "actual_words": 143,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch11_sec07_integration_f3",
+          "atom_id": "INTEGRATION v10",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v10+ch11_sec07_integration_f3+ahjan_INTEGRATION_007",
+          "target_words": 79,
+          "actual_words": 175,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch12_sec01_hook_f5",
+          "atom_id": "HOOK v41",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "HOOK v41+ch12_sec01_hook_f5+ahjan_HOOK_006",
+          "target_words": 100,
+          "actual_words": 125,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_2:recognition:overwhelm:v13",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_2:recognition:overwhelm:v13",
+          "target_words": 129,
+          "actual_words": 120,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch12_sec03_reflection_f1",
+          "atom_id": "REFLECTION v21",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v21+ch12_sec03_reflection_f1",
+          "target_words": 94,
+          "actual_words": 48,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_009_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_009_mined",
+          "target_words": 138,
+          "actual_words": 95,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "awareness",
+          "journey_exercise_id": "sensation_tracking_v1",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_2:mechanism_proof:overwhelm:v17",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_2:mechanism_proof:overwhelm:v17",
+          "target_words": 124,
+          "actual_words": 101,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v04",
+          "source": "persona_atom+teacher_atom",
+          "source_id": "TEACHER_DOCTRINE v04+ahjan_TEACHING_015_mined",
+          "target_words": 114,
+          "actual_words": 285,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch12_sec04_reflection_f3",
+          "atom_id": "REFLECTION v03",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v03+ch12_sec04_reflection_f3",
+          "target_words": 94,
+          "actual_words": 49,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "ahjan_EXERCISE_000_mined",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_000_mined",
+          "target_words": 139,
+          "actual_words": 73,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": "regulation",
+          "journey_exercise_id": "extended_exhale_v2",
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_2:embodiment:overwhelm:v13",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_2:embodiment:overwhelm:v13",
+          "target_words": 114,
+          "actual_words": 113,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch12_sec07_integration_f1",
+          "atom_id": "INTEGRATION v17",
+          "source": "persona_atom+registry+teacher_atom",
+          "source_id": "INTEGRATION v17+ch12_sec07_integration_f1+ahjan_INTEGRATION_003",
+          "target_words": 79,
+          "actual_words": 179,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    }
+  ]
+}

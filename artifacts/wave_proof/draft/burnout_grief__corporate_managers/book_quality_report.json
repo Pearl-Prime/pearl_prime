@@ -1,0 +1,202 @@
+{
+  "status": "WARN",
+  "release_band": "Hold",
+  "fail_reasons": [],
+  "hold_reasons": [
+    "repeated phrase density above book cap"
+  ],
+  "metrics": {
+    "runtime_format_id": "standard_book",
+    "word_count": 20373,
+    "word_range": [
+      9000,
+      22000
+    ],
+    "chapter_count": 12,
+    "flow_profile": "standard",
+    "flow_failures": [],
+    "artifact_hits": [],
+    "repeated_phrase_violations": [
+      {
+        "phrase": "moves through the room",
+        "count": 28,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "a passing shadow at",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "a passing shadow at the",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "holds steady moves through",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "holds steady moves through the",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "holds steady moves through the room",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "passing shadow at the",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "steady moves through the",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "steady moves through the room",
+        "count": 17,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "going to do a",
+        "count": 15,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "where you left it",
+        "count": 15,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "a passing shadow at the sill",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "at the sill holds",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "at the sill holds steady",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "at the sill holds steady moves",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "holds where you left",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "holds where you left it",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "passing shadow at the sill",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "passing shadow at the sill holds",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "shadow at the sill",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      }
+    ]
+  }
+}

@@ -1,0 +1,688 @@
+# Operator-readable fail-fast gate template.
+# Read this as a book outline. If chapters 1-3 feel coherent, the full build is authorized.
+# This is NOT machine-executable yet — it's the content spec the wiring targets.
+#
+# Target reader: 25-35 year old professional, burned out, intelligent, skeptical of self-help
+# Voice: direct, non-patronizing, somatic-aware, does not moralize
+# Arc shape: physiological truth → tools → habits → identity shift
+
+template_id: anxiety_gen_z_professionals_overwhelm_v1
+topic: anxiety
+persona: gen_z_professionals
+theme: overwhelm
+total_chapters: 12
+sections_per_chapter: 8
+v2_somatic_slot_mapping:
+  section_01_hook: opening_hook
+  section_02_scene: context_scene
+  section_03_reflection: mechanism_explanation
+  section_04_exercise: body_practice_awareness
+  section_05_scene: story_character
+  section_06_teacherdoctrine: reframe_or_doctrine
+  section_07_reflection: reader_mirror
+  section_08_integration: chapter_close_and_bridge
+
+chapters:
+  - chapter_number: 1
+    title: "The Overwhelm Is Not Your Fault"
+    arc_role: establishing_the_problem
+    emotional_temperature: cool
+    thesis: "The overwhelm you're carrying is not a personal failure — it's a physiological response to an impossible environment."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Arrest attention with one vivid, specific moment of overwhelm that gen-z professionals recognize immediately — the body memory of dread, not a concept"
+        word_count_target: "120-150"
+        example_beat: "The Sunday night scroll that turns into 2am dread about Monday's Slack backlog. Phone still in hand. No new notifications. You're checking anyway."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Establish the environmental conditions that make this overwhelm normal and widespread — not a personal failure, a structural one"
+        word_count_target: "180-220"
+        example_beat: "The always-on expectation that came with remote work, flattened hierarchy, and the 'we're a family here' culture. The erasure of the commute boundary. Slack as ambient obligation."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain in plain language WHY the anxious brain treats work overwhelm as a survival threat — the neurological mechanism without jargon"
+        word_count_target: "200-250"
+        example_beat: "Threat detection → cortisol spike → tunnel vision → decision paralysis is NOT weakness, it's mammal hardware running on software designed for predators, not performance reviews."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "First somatic check-in — slow, non-threatening. Just notice, don't fix. Something they can do in 90 seconds right now."
+        word_count_target: "150-200"
+        example_beat: "Put one hand on your chest. Notice the breath. Don't change it. Now notice what's tight. You don't have to do anything with it yet."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "One named composite character who lives this — specific enough to feel true, not a case study, a person"
+        word_count_target: "200-250"
+        example_beat: "Jordan, 27, UX designer at a mid-size startup in Austin. Hasn't taken a full lunch break since March. Signs off Slack at 11pm, reopens it at 6am."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "Install the foundational reframe of the book: overwhelm as signal, not character flaw. The nervous system is doing its job. The environment is the problem."
+        word_count_target: "180-220"
+        example_beat: "Your brain is doing exactly what it was built to do. The problem is not the equipment — the problem is the environment the equipment is being asked to run in."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Bring it back to the reader's own body — gentle recognition, not diagnosis. Second-person, warm but not syrupy."
+        word_count_target: "120-150"
+        example_beat: "If you're reading this at 11pm with 47 tabs open, that's not ambition. That's your nervous system stuck in emergency mode."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "One clean landing sentence that names what just happened. One sentence that makes the reader want chapter 2."
+        word_count_target: "60-80"
+        example_beat: "In the next chapter, we start with the smallest possible intervention — and it works in under two minutes."
+
+  - chapter_number: 2
+    title: "Two Minutes Before the Spiral"
+    arc_role: first_tool
+    emotional_temperature: cool
+    thesis: "Before the spiral takes over, there is a two-minute window. This chapter gives you the one tool that works in that window."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Capture the specific moment the spiral begins — the recognition of its first signal before it accelerates. Visceral and accurate."
+        word_count_target: "120-150"
+        example_beat: "There's a moment — usually around 9:42am on a Tuesday — when the calendar stacks wrong, the thread gets long, and your chest tightens. That's the window."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Show what happens when the window closes — the full spiral, the aftermath, the recovery cost. Make the case for catching it early."
+        word_count_target: "180-220"
+        example_beat: "Twenty minutes of reactive Slack. A decision made from cortisol. An email you regret by afternoon. Not because you're bad at your job — because the window closed before you saw it."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain the two-minute window scientifically — the cortisol curve, the point of no return, why early intervention is physiologically different from late intervention"
+        word_count_target: "200-250"
+        example_beat: "Cortisol has a half-life. In the first two minutes, the body can still downregulate. After that, you're riding the wave. This is not a metaphor — it's the actual chemistry."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "Teach the two-minute physiological interrupt: box breathing or extended exhale. Specific, step-by-step, no fluff. Timed."
+        word_count_target: "200-250"
+        example_beat: "Inhale for four counts. Hold for four. Exhale for six. The extended exhale activates the vagus nerve. Do it twice. That's it. That's the whole thing."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show the character using this tool in a workplace moment — unglamorous, real, slightly awkward. It works anyway."
+        word_count_target: "200-250"
+        example_beat: "Jordan, bathroom stall, 9:47am. One hand on the sink. Four counts in. Six out. Back to the meeting in three minutes. No one noticed."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The doctrine of small interventions: you don't need to transform yourself, you need a pause long enough for your prefrontal cortex to come back online."
+        word_count_target: "180-220"
+        example_beat: "You don't need to become a different person. You need your frontal lobe back. Two minutes buys you that."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to identify their specific trigger — the exact moment their window opens. Personalizing the practice."
+        word_count_target: "120-150"
+        example_beat: "What's yours? Is it the 9am Slack flood? The calendar block that shows up wrong? The email you didn't expect? Name it now, before you need it."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the tool. Bridge to the body — the next chapter goes deeper into what the body is doing during overwhelm."
+        word_count_target: "60-80"
+        example_beat: "The next chapter explains what's actually happening in your body during overwhelm — and why understanding it changes what you do about it."
+
+  - chapter_number: 3
+    title: "Your Body Has Been Keeping Score"
+    arc_role: somatic_foundation
+    emotional_temperature: cool
+    thesis: "Anxiety lives in the body before it lives in the mind. Your body has been keeping score of every unprocessed moment."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with a body sensation the reader hasn't named but will immediately recognize — the physical residue of chronic overwhelm"
+        word_count_target: "120-150"
+        example_beat: "That tightness across your shoulders that's been there for three years. The jaw you clench during calls. The shallow breath that never quite reaches your belly. These are not stress. These are stored stress."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Walk through a typical gen-z professional workday as a somatic event — what the body is experiencing hour by hour, not what the calendar shows"
+        word_count_target: "200-250"
+        example_beat: "8am: cortisol spike from phone check before coffee. 9am: second spike from Slack notification. 11am: meeting adrenaline. 2pm: glucose crash plus meeting overrun. 5pm: 'done' but not decompressed."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain somatic storage: how unprocessed stress is held in the body, why it accumulates, what the accumulation looks like physiologically"
+        word_count_target: "200-250"
+        example_beat: "The nervous system doesn't distinguish between a deadline and a predator. Every stressor that isn't resolved through movement or rest gets stored as muscle tension, shallow breath, altered posture."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "Somatic body scan — a slow, non-judgmental inventory of where tension lives. Five minutes, eyes open okay, no performance required."
+        word_count_target: "200-250"
+        example_beat: "Start at your feet. Are they flat on the floor? Now ankles, calves. Just notice. Don't fix anything. Up to your hips. Your lower back. The chest. The shoulders. The jaw. Just a report, not a verdict."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show what happens when someone finally pays attention to their body after months of ignoring it — the recognition, not the breakdown"
+        word_count_target: "200-250"
+        example_beat: "Jordan, doing this scan for the first time, realizes she has been holding her breath during every Slack notification for eight months. Just that. Nothing dramatic. Just that."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "Introduce the somatic resolution principle: the body needs to complete what the mind interrupted. Stress isn't resolved by thinking about it."
+        word_count_target: "180-220"
+        example_beat: "You cannot think your way out of a physiological state. You can only move through it. That's what the rest of this book is about."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to acknowledge one body signal they've been ignoring. Just one. Nothing to fix yet."
+        word_count_target: "120-150"
+        example_beat: "What's the signal your body has been sending that you've been treating as background noise? It has a name. You've probably been calling it something else."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the somatic truth. Bridge to regulation — the next chapter teaches the body's own regulation mechanism."
+        word_count_target: "60-80"
+        example_beat: "The next chapter shows you how to work with your nervous system instead of against it — starting with the one thing you already do 23,000 times a day."
+
+  - chapter_number: 4
+    title: "The Nervous System You Were Never Taught About"
+    arc_role: somatic_regulation
+    emotional_temperature: warm
+    thesis: "Your nervous system has a built-in deactivation switch. You just were never taught how to use it."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the absurdity of never being taught how our own nervous system works — frame this as the missing operating manual"
+        word_count_target: "120-150"
+        example_beat: "You were taught algebra. You were taught the branches of government. You were not taught how to turn off your own stress response. That's the gap."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Show what happens at an unconscious level during a high-stakes work moment — the sympathetic activation that most people experience as 'pressure'"
+        word_count_target: "180-220"
+        example_beat: "The all-hands before the product launch. Heart rate climbing. Thoughts accelerating. A sense that you are too slow and too fast at the same time. That's not nerves. That's your threat system at full volume."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain the parasympathetic nervous system — the deactivation switch — in plain, non-clinical language. Vagus nerve basics without the wellness-speak."
+        word_count_target: "200-250"
+        example_beat: "The vagus nerve runs from your brainstem to your gut. It is the brake on your stress response. It responds to slow exhalation, gentle touch, cold water on the face. This is not woo — this is anatomy."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "Teach the extended exhale as a vagal tone exercise — the most research-backed, lowest-barrier regulation tool available anywhere, any time"
+        word_count_target: "200-250"
+        example_beat: "Your exhale activates the vagus nerve. So any breath where the exhale is longer than the inhale is physiologically regulating. Four in, six out. Right now. In your chair. Before the next Slack message."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show the character discovering this works in an unexpected high-stakes moment — the surprise, the skepticism, the evidence"
+        word_count_target: "200-250"
+        example_beat: "Jordan, before presenting to the board for the first time. Three extended exhales in the elevator. Thinks: that won't work. Gets in the room. Realizes her hands have stopped shaking."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The regulation doctrine: you can't control what activates your stress response. You can train how fast you recover from it."
+        word_count_target: "180-220"
+        example_beat: "Resilience is not the absence of activation. Resilience is speed of recovery. And recovery is a skill, not a personality trait."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader when they most need regulation and have never had a tool for it. Specific work moment, not generic stress."
+        word_count_target: "120-150"
+        example_beat: "Think of the one meeting you dread. The one inbox thread you avoid. What would three regulated breaths before that look like?"
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the regulation principle. Bridge to the social dimension — overwhelm is not just internal, it's relational."
+        word_count_target: "60-80"
+        example_beat: "The next chapter takes on something harder: the anxiety that comes from other people — and what to do when your regulation gets hijacked by someone else's."
+
+  - chapter_number: 5
+    title: "Other People's Urgency Is Not Your Emergency"
+    arc_role: social_workplace_dimension
+    emotional_temperature: warm
+    thesis: "The workplace is a transmission system for other people's anxiety. Learning to distinguish your nervous system from theirs is the skill no one talks about."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the experience of absorbing someone else's panic — the coregulation (or dysregulation) that happens in shared work environments"
+        word_count_target: "120-150"
+        example_beat: "Your manager is spiraling in the thread and suddenly your chest is tight too. You didn't read anything alarming. You read their alarm, and your body caught it."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Map the social transmission routes of workplace anxiety: Slack tone, video call faces, manager behavior, team meeting energy"
+        word_count_target: "180-220"
+        example_beat: "Slack message without punctuation. A reply that's three words when you expected ten. Cc'd on something you weren't on before. The ambient panic of an open-plan office. These are biological inputs, not just informational ones."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain co-regulation and mirror neurons — how we literally catch each other's nervous system states — without making it sound woo"
+        word_count_target: "200-250"
+        example_beat: "Mirror neurons mean your nervous system is running a constant simulation of the people around you. You don't observe anxiety — you partially experience it. This is not weakness. This is what humans are for."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "The nervous system check-in question: Is this mine? A three-part somatic practice for distinguishing absorbed anxiety from original anxiety."
+        word_count_target: "200-250"
+        example_beat: "When you notice activation: stop. Ask: what happened in the last ten minutes? Was the trigger mine, or did I inherit it? Breathe. Check whether the sensation changes when you separate the source."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show a workplace dynamic where the character catches someone else's anxiety and has to navigate it — the human complexity, not just the tool"
+        word_count_target: "200-250"
+        example_beat: "Jordan in a sprint retrospective. Her tech lead is scared about the roadmap and expressing it as criticism. Jordan's chest tightens. Is she failing? No. She's absorbing. The practice is to notice the difference."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The doctrine of nervous system sovereignty: you can feel compassion for someone else's panic without taking it on as your own to solve"
+        word_count_target: "180-220"
+        example_beat: "Their urgency is information. It is not a directive. You can receive it without fusing with it. This is not coldness. This is clarity."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to identify the person or team dynamic that most reliably dysregulates them. Name the pattern without blame."
+        word_count_target: "120-150"
+        example_beat: "Who in your work life most reliably hijacks your nervous system? You don't have to fix it today. You just have to see it."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the social nervous system concept. Bridge to the cognitive patterns — the thought loops that sustain the anxiety after the trigger is gone."
+        word_count_target: "60-80"
+        example_beat: "Even after the meeting ends, the anxiety doesn't always leave. The next chapter is about the thought patterns that keep it running."
+
+  - chapter_number: 6
+    title: "The Meeting Is Over But Your Brain Hasn't Left"
+    arc_role: social_aftermath
+    emotional_temperature: warm
+    thesis: "Rumination is not thinking — it's a stuck loop. Understanding the difference is the first step to actually stopping it."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the experience of post-meeting replay — the specific form gen-z professionals experience rumination in"
+        word_count_target: "120-150"
+        example_beat: "The meeting ended at 3. It's 8pm and you're still litigating the thing you said at 2:47. Not thinking about it — litigating it. With yourself. Losing."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Map the post-work rumination terrain: commute replay, dinner distraction, bedtime spiral. Show the specific digital triggers."
+        word_count_target: "180-220"
+        example_beat: "The scroll before sleep. Checking the thread to see if they responded to your clarification. They haven't. Your brain fills in the silence. It fills it wrong."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Distinguish rumination from productive problem-solving: the two brain states, why rumination feels like it's helping, why it isn't"
+        word_count_target: "200-250"
+        example_beat: "Rumination uses the same brain region as deliberate thinking, which is why it feels productive. It isn't. It's a looping threat appraisal with no exit condition. It can only stop — not be solved."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "Pattern interrupt for rumination — a physical displacement technique, not a cognitive one. Movement or temperature, not reframing."
+        word_count_target: "200-250"
+        example_beat: "When the loop starts: cold water on the wrists. Walk to a different room. Change posture dramatically. These work because they disrupt the body state that sustains the thought loop."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show the character mid-rumination and applying a physical interrupt — the awkward, imperfect version that works anyway"
+        word_count_target: "200-250"
+        example_beat: "Jordan, 11pm, standing in the kitchen, wrists under cold water for thirty seconds. Thinks: this is ridiculous. Notices the loop has stopped. Goes back to bed."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The doctrine of loop-stopping vs. loop-solving: rumination cannot be solved by thinking, only interrupted by state change"
+        word_count_target: "180-220"
+        example_beat: "You cannot think your way out of a rumination loop. You can only change the physical state that's sustaining it. The mind follows the body out."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to identify their rumination triggers and their current (usually ineffective) response to them"
+        word_count_target: "120-150"
+        example_beat: "What's your loop? The Slack message, the meeting, the performance review comment that sat wrong? And what do you do right now when it starts? Does it work?"
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the rumination distinction. Bridge to catastrophizing — the future-oriented version of the same problem."
+        word_count_target: "60-80"
+        example_beat: "Rumination loops backward. The next chapter is about the loops that run forward — into futures that almost certainly won't happen."
+
+  - chapter_number: 7
+    title: "The Catastrophe That Hasn't Happened Yet"
+    arc_role: cognitive_catastrophizing
+    emotional_temperature: warm
+    thesis: "Catastrophizing is your brain running simulations for threats. It's a feature, not a bug — but it's miscalibrated for modern work."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the specific catastrophizing thought pattern gen-z professionals have around job security, performance, and social judgment"
+        word_count_target: "120-150"
+        example_beat: "One missed deadline becomes a performance review becomes a PIP becomes unemployment becomes moving back in with your parents. Your brain ran this sequence in eleven seconds while waiting for the meeting to start."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Map the catastrophizing terrain specific to gen-z professionals: tech layoffs, social media performance anxiety, cancel culture fear at work"
+        word_count_target: "180-220"
+        example_beat: "Gen Z watched companies dissolve in 2020, 2022, 2023. The threat response is calibrated against a real landscape of uncertainty. The catastrophizing isn't irrational — it's just unmodulated."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain threat simulation as an adaptive feature — the brain running worst-case scenarios as threat preparation — and why it misfires in low-stakes contexts"
+        word_count_target: "200-250"
+        example_beat: "Your brain is a prediction machine. It simulates threats so you can prepare for them. The problem is it can't easily distinguish 'my manager sent a short reply' from 'there is a lion.' The simulation runs anyway."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "The probability check + body anchor: a two-part cognitive + somatic practice for catching catastrophizing mid-spiral"
+        word_count_target: "200-250"
+        example_beat: "Step one: what's the actual probability of the worst-case outcome? Assign a number. Step two: put your feet flat on the floor and say out loud: I am here, not there. The future is not here yet."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show a character catching a catastrophizing spiral before it lands — the internal narration, the pause, the return to present"
+        word_count_target: "200-250"
+        example_beat: "Jordan, reading a one-line reply from her skip-level: 'Can we chat?' Brain: I'm being laid off. Pause. Feet on floor. What's the probability? Maybe 8%. What else could this be? Fifteen things."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The present-tense doctrine: the only thing actually happening is what's happening now. Everything else is your brain's threat simulation, not reality."
+        word_count_target: "180-220"
+        example_beat: "The catastrophe hasn't happened. It may never happen. Right now, the only emergency is the one your nervous system invented. That's useful information, not a character flaw."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to name their most-visited catastrophic scenario — the one their brain returns to most reliably. Defang it by naming it."
+        word_count_target: "120-150"
+        example_beat: "What's your brain's favorite catastrophe? Name it. Give it a silly name if that helps. The unnamed catastrophe has more power than the named one."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the catastrophizing pattern. Bridge to chronic anxiety habits — the lifestyle patterns that keep the baseline elevated."
+        word_count_target: "60-80"
+        example_beat: "The next chapter is about the habits — the ones you don't think of as related to anxiety — that are keeping your baseline higher than it needs to be."
+
+  - chapter_number: 8
+    title: "The Invisible Habits Keeping You Wired"
+    arc_role: lifestyle_patterns
+    emotional_temperature: warm
+    thesis: "Anxiety is not just a thought pattern or a body state — it's a lifestyle ecology. Some habits you don't even know you have are keeping you stuck in high alert."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the revelation that something the reader does every day without thinking is contributing to their baseline anxiety"
+        word_count_target: "120-150"
+        example_beat: "The first thing you do in the morning is check your phone. Before coffee. Before the bathroom. This is a choice that sets your nervous system for the day. You probably didn't know you were making it."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Walk through a gen-z professional's daily habit loop and identify the specific anxiety-amplifying behaviors most common in that lifestyle"
+        word_count_target: "180-220"
+        example_beat: "Phone in bed → cortisol spike → coffee before eating → second cortisol spike → skip lunch → reactive afternoon → alcohol to decompress → poor sleep → repeat. The system reinforces itself."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain the HPA axis and cortisol management: how daily habits modulate baseline anxiety before any stressor enters the picture"
+        word_count_target: "200-250"
+        example_beat: "Your hypothalamic-pituitary-adrenal axis regulates cortisol. Morning light, meal timing, alcohol, sleep debt, and screen exposure all modulate how high your cortisol baseline sits. Most people are managing anxiety while standing on a baseline they've accidentally elevated."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "The morning nervous system protocol: three specific, low-barrier habit swaps for the first 30 minutes of the day that lower baseline cortisol"
+        word_count_target: "200-250"
+        example_beat: "Phone off the nightstand. Light before screen. Protein before caffeine. Not because wellness influencers said so — because the research on cortisol timing is unambiguous."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show a character making one small habit change and noticing the downstream effect — unglamorous, imperfect, real"
+        word_count_target: "200-250"
+        example_beat: "Jordan started leaving her phone charger in the kitchen three weeks ago. She still checks it within five minutes of waking. But the five-minute gap changed something. She can name what it changed."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The ecology doctrine: anxiety is a system property, not an episode. Changing one habit in the ecosystem changes the whole system's baseline."
+        word_count_target: "180-220"
+        example_beat: "You don't have to overhaul your life. You have to find the one habit that's currently load-bearing for your anxiety. Change that one. The rest follows."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to identify the one habit they're most resistant to changing — and to notice what that resistance is telling them"
+        word_count_target: "120-150"
+        example_beat: "What's the habit you already know you should change but haven't? Not the one you're experimenting with — the one you're avoiding. That's usually the load-bearing one."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the habit ecology concept. Bridge to sustainable practice — how to actually build a nervous system practice that sticks."
+        word_count_target: "60-80"
+        example_beat: "The next chapter is about building something that actually sticks — not a morning routine, a nervous system practice. The difference matters."
+
+  - chapter_number: 9
+    title: "Building Something That Actually Sticks"
+    arc_role: habit_building
+    emotional_temperature: warm
+    thesis: "Most anxiety management tools fail not because they don't work but because they're designed wrong. The architecture matters as much as the practice."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the specific experience of trying and abandoning anxiety tools — not because of discipline failure but because of design failure"
+        word_count_target: "120-150"
+        example_beat: "You downloaded the meditation app. You used it for eleven days. The streak died and you felt worse about yourself than before you started. This is not a willpower problem. This is a design problem."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Map the failure modes of typical anxiety management tools for gen-z professionals: too time-intensive, too visible, too identity-threatening"
+        word_count_target: "180-220"
+        example_beat: "The 20-minute meditation requires quiet you don't have. The journaling requires a morning you don't have. The therapy requires a financial stability many don't have. The tools weren't designed for this life."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain habit architecture: the role of implementation intentions, environmental design, and minimum viable practice in making things stick"
+        word_count_target: "200-250"
+        example_beat: "The research on habit formation is clear: the environment changes behavior faster than intention does. A practice that requires zero willpower in a low-willpower moment will outlast one that requires a lot of willpower in a high-willpower moment."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "Design-your-own practice: a structured process for creating a personalized minimum viable nervous system practice that fits the reader's actual life"
+        word_count_target: "200-250"
+        example_beat: "What's the smallest thing you can do, at the moment you most need regulation, in the environment you're actually in? That's your practice. Not the ideal one. The real one."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show the character designing a practice that actually fits their life — not glamorous, not Instagram-worthy, functional"
+        word_count_target: "200-250"
+        example_beat: "Jordan's practice: three box breaths in the elevator before each floor change. That's it. Two minutes total, distributed across the day, requiring no change to her schedule."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The minimum viable practice doctrine: a practice you actually do is infinitely more effective than a practice you aspire to do"
+        word_count_target: "180-220"
+        example_beat: "Perfect is the enemy of regulated. The most elegant nervous system practice is the one you do today, in the bathroom, in the elevator, before the call starts."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to commit to one minimum viable practice and identify the exact moment and location they will do it"
+        word_count_target: "120-150"
+        example_beat: "When will you do this? Where will you be? What will trigger you to remember? Not a general intention — a specific implementation intention."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the practice design principle. Bridge to identity — the deepest layer, who you are when the anxiety is quiet."
+        word_count_target: "60-80"
+        example_beat: "Building the practice is about behavior. The next chapter is about something deeper — who you are when the anxiety isn't in charge."
+
+  - chapter_number: 10
+    title: "Sustainable Regulation Across Time"
+    arc_role: long_term_sustainability
+    emotional_temperature: warm
+    thesis: "Regulation is not a destination — it's a practice that changes with your life. The skill is adapting it, not perfecting it once."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the experience of having a practice that worked, then a life change that disrupted it — and the learning in the disruption"
+        word_count_target: "120-150"
+        example_beat: "You had it working. Then you changed jobs. Or moved. Or the relationship ended. And the practice dissolved with the structure it was embedded in. This is not failure. This is information."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Map the life disruption points most common for gen-z professionals in their late 20s and how each one typically disrupts existing nervous system practices"
+        word_count_target: "180-220"
+        example_beat: "Job change. City move. Relationship change. Promotion into management. Layoff. Each one reorganizes the environmental scaffolding that a practice depends on. The practice needs to be rebuilt, not abandoned."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain neuroplasticity and practice adaptation: how the nervous system continues to change, how to rebuild after disruption, the rolling baseline concept"
+        word_count_target: "200-250"
+        example_beat: "Neuroplasticity means your nervous system continues to reorganize based on repeated inputs. A disruption is a reset, not an erasure. You rebuild faster than you built the first time."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "The quarterly nervous system audit: a structured review process for assessing whether your current practice still fits your current life"
+        word_count_target: "200-250"
+        example_beat: "Four questions, once per quarter: What's my current baseline? Is my practice still accessible in my actual day? Where am I most dysregulated? What one change would address the most? That's the audit."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show the character rebuilding their practice after a major life disruption — what they kept, what they changed, the non-linear path"
+        word_count_target: "200-250"
+        example_beat: "Jordan, six months after a job change. Old practice didn't fit the new commute. Built a new one in two weeks by asking one question: when am I most activated in this new life? Answer: the 8am train. New practice: there."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The adaptive practice doctrine: a practice that can't flex with your life will break. Build for adaptation, not optimization."
+        word_count_target: "180-220"
+        example_beat: "The goal is not a perfect practice. The goal is a relationship with your nervous system that you can maintain across the changes your life will inevitably bring."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader what life change is most likely coming for them and how they might adapt their practice through it"
+        word_count_target: "120-150"
+        example_beat: "What change is coming? Promotion, move, relationship, family? You don't have to solve it now. You just have to know that your practice will need to shift with it."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the adaptive practice principle. Bridge to acute anxiety — the chapter for when things get serious."
+        word_count_target: "60-80"
+        example_beat: "The next chapter is about something different: when anxiety becomes acute. When the tools from the other chapters aren't enough. What to do then."
+
+  - chapter_number: 11
+    title: "When It Gets Serious: Crisis Tools"
+    arc_role: acute_crisis_tools
+    emotional_temperature: hot
+    thesis: "When anxiety becomes acute — panic, shutdown, dissociation — the tools change. This chapter is the one you might need most and hope to use least."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the experience of a panic response or anxiety crisis — specific, physiological, honest about how terrifying it is in the moment"
+        word_count_target: "120-150"
+        example_beat: "Your heart is racing. You can't take a full breath. The room feels slightly wrong. You know rationally that you're not dying. Your body doesn't know that."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Distinguish acute anxiety from chronic anxiety — what it looks like, what triggers it for this demographic, what makes it different from everyday overwhelm"
+        word_count_target: "180-220"
+        example_beat: "Panic attacks. Shutdown. The kind of dissociation where you get to the end of the workday with no memory of it. These are different from overwhelm. They require different tools."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain the physiology of acute anxiety responses — panic, freeze, shutdown — without pathologizing them. These are nervous system states, not mental illness."
+        word_count_target: "200-250"
+        example_beat: "Panic is a sympathetic storm. Shutdown is dorsal vagal collapse. Neither is a psychiatric emergency in most cases — they're nervous system states with specific physiological profiles and specific physiological off-ramps."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "Three acute regulation techniques: cold water, physiological sigh, grounding through five senses. Specific, research-supported, step-by-step."
+        word_count_target: "200-250"
+        example_beat: "Physiological sigh: two quick inhales through the nose, one long exhale through the mouth. Deflates the air sacs in the lungs. Activates the vagus nerve faster than any other breath pattern. It works in under thirty seconds."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Show a character managing an acute anxiety response in a public work setting — the internal navigation, the imperfect containment, the recovery"
+        word_count_target: "200-250"
+        example_beat: "Jordan, mid-presentation, when the panic starts. Grips the table edge. Presses feet into the floor. Takes two quick inhales and one long out. Continues. Nobody knew."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "When to seek professional support: clear, non-stigmatizing, direct guidance on when self-regulation tools are not enough"
+        word_count_target: "180-220"
+        example_beat: "If acute anxiety is happening multiple times per week and interfering with your ability to function, this book is not enough. That's not a failure. That's information. Therapy, medication, or both — these are tools like any other."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Ask the reader to assess whether their anxiety is chronic-manageable or acute-escalating. Direct, non-judgmental, with a clear next step for each answer."
+        word_count_target: "120-150"
+        example_beat: "How often are you having responses that feel like what we described in this chapter? Once a month? Once a week? Every day? The frequency is a signal. Listen to it."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Land the acute/chronic distinction and the professional support signal. Bridge to integration — the final chapter about identity."
+        word_count_target: "60-80"
+        example_beat: "The last chapter is about something quieter: who you are when anxiety is not running the show. That person has always been there."
+
+  - chapter_number: 12
+    title: "Who You Are Without the Overwhelm"
+    arc_role: integration_identity
+    emotional_temperature: warm
+    thesis: "You are not your anxiety. You are the person who learned to work with it. That person is different from who you were when you started — and that matters."
+    sections:
+      - section_id: opening_hook
+        slot_type: HOOK
+        job: "Open with the quiet that follows regulation — the unfamiliar spaciousness of a nervous system that isn't in emergency mode. For many readers, this will be new."
+        word_count_target: "120-150"
+        example_beat: "There's a moment — usually a Tuesday afternoon, nothing dramatic — when you notice you're not braced. The shoulders are down. The breath is in your belly. Nothing is wrong. You forgot this was possible."
+
+      - section_id: context_scene
+        slot_type: SCENE
+        job: "Describe what regulated life looks like for a gen-z professional — the specific changes in decision quality, relationships, and work that become possible"
+        word_count_target: "180-220"
+        example_beat: "Decisions from calm instead of cortisol. Conversations without the anticipatory armor. Weekends that actually rest instead of just interrupting. This is not a fantasy — it's the downstream effect of a lower baseline."
+
+      - section_id: mechanism_explanation
+        slot_type: REFLECTION
+        job: "Explain the identity shift that comes with long-term nervous system work — the way the self-concept changes when anxiety is no longer the organizing principle"
+        word_count_target: "200-250"
+        example_beat: "When anxiety has organized your behavior for years, removing it as the primary driver requires a reconstruction. Who are you when you're not managing a threat? That question is not trivial. It's the work of this chapter."
+
+      - section_id: body_practice_awareness
+        slot_type: EXERCISE
+        job: "The future-self somatic visualization: a grounded, non-woo practice for accessing the felt sense of the regulated self"
+        word_count_target: "200-250"
+        example_beat: "Sit with both feet on the floor. Close your eyes or soften your gaze. Imagine yourself one year from now, having practiced what you've learned here. Where are you sitting? How is your body positioned? What's different about how the room feels? Stay there for two minutes."
+
+      - section_id: story_character
+        slot_type: SCENE
+        job: "Return to Jordan at some distance — show the specific, un-idealized changes in her life. Not a transformation montage — a true account."
+        word_count_target: "200-250"
+        example_beat: "Jordan, eight months later. Still works hard. Still has tight days. Still catches herself in the spiral sometimes. But the spiral is shorter. The recovery is faster. She can name what's happening now. That's the difference."
+
+      - section_id: reframe_or_doctrine
+        slot_type: TEACHER_DOCTRINE
+        job: "The final doctrine: regulation is not calm, it's capacity. The goal was never to feel nothing — it was to be able to feel everything without being controlled by it."
+        word_count_target: "180-220"
+        example_beat: "You were not trying to become someone who doesn't feel anxiety. You were learning to be someone who can feel it, work with it, and choose what happens next. That's a fundamentally different person. That person is you."
+
+      - section_id: reader_mirror
+        slot_type: REFLECTION
+        job: "Final reader acknowledgment: what they've done, what they've learned, what's available to them now that wasn't available at the start of the book"
+        word_count_target: "150-200"
+        example_beat: "You came here overwhelmed. You're leaving with a nervous system you understand better, tools that work in your actual life, and the knowledge that none of this is permanent — it's all workable. That's not a small thing."
+
+      - section_id: chapter_close_and_bridge
+        slot_type: INTEGRATION
+        job: "Final landing: one sentence about what it means to carry this knowledge. Not an ending — a beginning."
+        word_count_target: "60-80"
+        example_beat: "The overwhelm will come back. Now you know what to do with it."
+
+# Arc shape summary (for operator go/no-go):
+# Ch 1-2: Establish the problem + first foothold (physiological truth + first tool)
+# Ch 3-4: Body-mind connection (somatic storage + nervous system regulation)
+# Ch 5-6: Social/workplace dimension (co-regulation + rumination)
+# Ch 7-8: Cognitive patterns + lifestyle ecology (catastrophizing + invisible habits)
+# Ch 9-10: Building sustainable practice (design + long-term adaptation)
+# Ch 11: Acute crisis tools (when self-regulation isn't enough)
+# Ch 12: Integration — identity shift and what's now possible
+
+# Operator fail-fast gate:
+# Read chapters 1, 4, and 12.
+# Ask: does the arc feel earned by chapter 12? Do the tools build on each other?
+# Does this read like a book a 28-year-old burned-out UX designer would actually finish?
+# If yes → authorize the wiring build.
+# If no → the thesis is wrong and we saved 3 weeks.

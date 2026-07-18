@@ -1,0 +1,241 @@
+/* ══════════════════════════════════════════════════════════
+   Pearl Prime — Premium Icon System
+   Replaces emoji with monochrome SVG line icons
+   ══════════════════════════════════════════════════════════ */
+
+:root {
+  --icon-stroke: rgba(250,246,240,.45);
+  --icon-accent: #d97706;
+  --icon-size: 28px;
+  --icon-size-lg: 40px;
+  --icon-size-sm: 18px;
+}
+
+/* Base icon class */
+.pp-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex-shrink: 0;
+}
+.pp-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--icon-stroke);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pp-icon.lg { --icon-size: var(--icon-size-lg); }
+.pp-icon.sm { --icon-size: var(--icon-size-sm); }
+.pp-icon.accent svg { stroke: var(--icon-accent); }
+
+/* ── Premium card system ───────────────────────────── */
+.pp-card {
+  background: rgba(14,10,6,.6);
+  border: 1px solid rgba(180,83,9,.1);
+  border-radius: 4px;
+  padding: 1.2rem;
+  transition: border-color .2s, background .2s;
+}
+.pp-card:hover {
+  border-color: rgba(180,83,9,.25);
+  background: rgba(180,83,9,.04);
+}
+.pp-card.interactive {
+  cursor: pointer;
+}
+.pp-card.interactive:hover {
+  transform: translateY(-1px);
+}
+
+/* Card variants */
+.pp-card.narrative {
+  padding: 1.6rem 1.4rem;
+  border-left: 2px solid rgba(180,83,9,.2);
+  border-radius: 0 4px 4px 0;
+}
+.pp-card.metric {
+  text-align: center;
+  padding: 1rem .8rem;
+}
+.pp-card.metric .pp-metric-val {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #d97706;
+  line-height: 1.2;
+}
+.pp-card.metric .pp-metric-lbl {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: .42rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.3);
+  margin-top: .3rem;
+}
+.pp-card.tool {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .8rem 1rem;
+}
+.pp-card.proof {
+  position: relative;
+  overflow: hidden;
+}
+.pp-card.proof::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, #d97706, transparent);
+}
+
+/* ── Premium button system ─────────────────────────── */
+.pp-btn {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: .5rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .5rem 1.2rem;
+  border: 1px solid rgba(180,83,9,.2);
+  border-radius: 2px;
+  background: transparent;
+  color: rgba(250,246,240,.5);
+  cursor: pointer;
+  transition: all .18s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+.pp-btn:hover {
+  border-color: #d97706;
+  color: rgba(250,246,240,.9);
+  background: rgba(180,83,9,.06);
+}
+.pp-btn.primary {
+  background: #b45309;
+  border-color: #b45309;
+  color: #fff;
+}
+.pp-btn.primary:hover {
+  background: #d97706;
+  border-color: #d97706;
+}
+.pp-btn.secondary {
+  border-color: rgba(180,83,9,.15);
+  color: rgba(250,246,240,.4);
+}
+.pp-btn.secondary:hover {
+  color: rgba(250,246,240,.7);
+}
+
+/* ── Premium hero section ──────────────────────────── */
+.pp-hero {
+  position: relative;
+  padding: 3rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+.pp-hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(180,83,9,.2), transparent);
+}
+.pp-hero-title {
+  font-family: var(--serif, "Cormorant Garamond", serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  color: #d97706;
+  margin-bottom: .4rem;
+  letter-spacing: .02em;
+}
+.pp-hero-sub {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: .55rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.25);
+}
+
+/* ── Premium section dividers ──────────────────────── */
+.pp-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(180,83,9,.15), transparent);
+  margin: 2rem 0;
+}
+
+/* ── Premium label/badge ───────────────────────────── */
+.pp-label {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: .4rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.25);
+}
+.pp-badge {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: .38rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .15rem .5rem;
+  border: 1px solid rgba(180,83,9,.15);
+  border-radius: 1px;
+  color: rgba(250,246,240,.35);
+}
+.pp-badge.active {
+  background: rgba(180,83,9,.1);
+  border-color: rgba(180,83,9,.3);
+  color: #d97706;
+}
+
+/* ── Grid layouts ──────────────────────────────────── */
+.pp-grid { display: grid; gap: 1rem; }
+.pp-grid-2 { grid-template-columns: 1fr 1fr; }
+.pp-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.pp-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.pp-grid-auto { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+@media (max-width: 768px) {
+  .pp-grid-2, .pp-grid-3, .pp-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Flow diagram ──────────────────────────────────── */
+.pp-flow {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pp-flow-step {
+  background: rgba(180,83,9,.06);
+  border: 1px solid rgba(180,83,9,.15);
+  border-radius: 3px;
+  padding: .6rem 1rem;
+  text-align: center;
+  min-width: 90px;
+}
+.pp-flow-step-title {
+  font-family: var(--mono, "DM Mono", monospace);
+  font-size: .5rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #d97706;
+}
+.pp-flow-step-sub {
+  font-size: .42rem;
+  color: rgba(250,246,240,.3);
+  margin-top: .15rem;
+}
+.pp-flow-arrow {
+  color: rgba(180,83,9,.3);
+  font-size: .8rem;
+  flex-shrink: 0;
+}

@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__burnout__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__steady_ground__1hr
+  name: Steady Ground — for First Responders (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'After the Flame: Drowning in Demands'
+subtitle: The Shutdown Point — Burnout for First Responders (When Everything Is Too
+  Much)
+cover_tagline: Too many calls, not enough you. An hour to stop drowning in the day.
+description:
+  short_blurb: Back-to-back runs, mandatory overtime, a pager that won't quit — and
+    somewhere in there a body that stopped knowing how to come down. This is a one-hour
+    read for the first responder buried under too much at once. Not time management.
+    A way to breathe when the calls won't stop coming.
+  long_description: 'It''s not one big thing. It''s the volume. The tones drop again
+    before you''ve cleared the last one. The overtime you can''t say no to. The reports
+    stacking up, the texts from home, the equipment check, the next address already
+    in your head. Somewhere in the pile, your nervous system stopped resetting between
+    calls, and now ''too much'' isn''t a bad shift — it''s just Tuesday.
+
+
+    This hour is for you — the medic, the firefighter, the officer, the dispatcher
+    running hot for so long you forgot there was another setting. The one who can
+    triage a multi-car wreck but can''t figure out why a full inbox makes your chest
+    tighten. You''re not disorganized and you''re not soft. You''re a person whose
+    alarm has been pinned to ON for months, and a pinned alarm doesn''t make you faster
+    — it makes everything feel like an emergency, even the dishes, even a text that
+    can wait.
+
+
+    We start by naming what overwhelm actually is in your body, because you''ve been
+    treating it like a to-do problem when it''s a capacity problem. Then we go down
+    into it — not by adding a system, a planner, or one more thing to manage, but
+    by letting the floodwater drop enough that you can see your own feet again. You''ll
+    learn why ''just push through'' has been quietly making it worse, and what it
+    feels like when the pile stops running the whole show. Then you come back up —
+    still the person who handles what others can''t, but no longer handling it at
+    a full sprint with no brakes.
+
+
+    This will not give you a productivity system. No color-coded calendar, no morning
+    routine, no five habits of high performers. It won''t tell you to do more with
+    less or be grateful for the grind. It won''t pretend the call volume is going
+    to drop. What it will do is stop treating your overwhelm as a personal failing
+    and start treating it as the predictable result of carrying too much, for too
+    long, with no slack built in.
+
+
+    Marcus Reed writes for the people who run the calls everyone else dials 911 to
+    avoid. No hustle, no optimization, no asking you to grind harder. Just one honest
+    hour, in plain words you can reach for the next time the tones drop and your chest
+    goes tight.
+
+
+    You don''t have to clear the pile to put it down for an hour. Start here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - first responders
+  - burnout for first responders
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — explains why chronic overload keeps the
+  body stuck on high alert
+- Do Nothing (Celeste Headlee) — challenges the 'push harder' reflex without selling
+  a productivity system
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — shows what relentless stress does
+  to a body that never gets to stand down
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

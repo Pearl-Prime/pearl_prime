@@ -1,0 +1,131 @@
+.DS_Store
+actions-runner/
+.github_token
+github_access_token.rtf
+cloudflare_workers_ai.txt
+# Local-only Cloudflare API material (never commit)
+docs/cloudflare_credentials.txt
+.claude/cloudflare_credentials.txt
+**/cloudflare_credentials.txt
+.env
+.env.wordpress.local
+.messaging_channels.local.yaml
+.integration_sources.local.yaml
+config/local/ghl_funnel_webhook.url
+docs/all_credentials.txt
+
+# Video platform credential setup (never commit)
+.credentials.env
+credentials_manifest.yaml
+scripts/video/credential_setup/credentials_manifest.yaml
+
+# Brand admin platform credential vault (server/crypto.py: Fernet → artifacts/admin_credentials/<brand>.enc).
+# Encrypted at rest, but the per-brand .enc store and any exported Fernet key must NEVER be committed.
+artifacts/admin_credentials/
+# Setup-helper per-brand launch links — contain brand emails (operator-only, never commit).
+artifacts/onboarding/setup_helper_brand_links.tsv
+
+# Qwen API credential fallbacks (never commit real keys)
+docs/qwen_api_base_url.txt
+docs/qwen_api_key.txt
+docs/qwen_model.txt
+# ElevenLabs / local key files (never commit)
+docs/11.txt
+11.txt
+*.rtf
+*.rtfc
+git_token.rtf
+git_token.rtfc
+.venv/
+.wrangler/
+.pytest_cache/
+__pycache__/
+*.pyc
+artifacts/backup_logs/*.log
+artifacts/cleanup_logs/
+# Showcase generated assets (large binary — regenerate via scripts)
+artifacts/showcase/video/
+artifacts/showcase/audio/
+artifacts/governance/repo_alignment/
+
+# Generated / temp directories
+artifacts/feeds/
+scripts/feeds/
+
+# Vite production build (CI builds on deploy)
+brand-wizard-app/dist/
+
+# Large binary assets (regenerate from pipeline — do NOT commit)
+assets/sentence_bank/
+assets/music_bank/base/
+assets/music_bank/by_brand/
+artifacts/produced/
+artifacts/video/vid_*/
+artifacts/video/test-*/
+
+# ElevenLabs briefing outputs (regenerate via scripts/onboarding/generate_briefing_narration.py)
+artifacts/onboarding_audio/*.mp3
+artifacts/onboarding_audio/segments/
+artifacts/onboarding_audio/_ffmpeg_concat_list.txt
+# CosyVoice2 reference clips (local extraction; regenerate from voice_clone_reference_library.yaml)
+assets/tts/reference_clips/
+
+# Root cleanup archive (local safety net — not tracked)
+archive/root_cleanup_2026_04_10/
+
+# Node modules (all projects)
+node_modules/
+
+# OS images and packages (never commit — see pearl_star/ incident)
+*.iso
+*.deb
+*.rpm
+/pearl_star/
+
+# Published copies for Pages (optional local deploy bundle)
+brand-wizard-app/public/onboarding/audio/*.mp3
+anxiety_hack/section-0001.mp3
+anxiety_hack/
+anxiety_hack/
+anxiety_hack.lpf
+
+# Podcast pilot render outputs (regenerate via scripts/podcast/run_podcast_pipeline.py)
+artifacts/podcast_pilot/podcast/
+artifacts/podcast_pilot/_test_assemble/
+artifacts/podcast_pilot/_asm_test/
+artifacts/podcast_pilot/_dry.mp3
+# Manga image bank PNGs (large binary — regenerate via scripts/image_generation/)
+artifacts/manga/image_bank/**/*.png
+artifacts/manga/image_bank/**/GENERATION_FAILURES.tsv
+
+# Manga rendered binaries — canonical home is R2 (see brand_admin_handoff manifest.json)
+# Per-PR panel renders + bubble-composed panels + webtoon strips + segments stay local
+# during dev; r2_sync.py uploads them; only the handoff manifest + UPLOAD_GUIDE commit.
+artifacts/manga/panel_renders/**/*.png
+artifacts/manga/panel_renders/**/*.jpg
+artifacts/manga/episodes/**/*.png
+artifacts/manga/episodes/**/*.jpg
+artifacts/manga/episodes/**/panel_images_manifest.json
+
+# Root cleanup archive (local safety net — not tracked)
+archive/root_cleanup_2026_04_10/
+
+# Pearl Star LoRA reference images (generated, large, per-run)
+assets/manga_catalog/
+
+# Cloud-native agents Layer 2 — local R2 mirror (gitignored, blobs live in R2)
+artifacts/r2_cache/
+
+# Phase 1 ToonOut: 885 MB BiRefNet anime-FT weights (operator pulls separately)
+models/cutout/
+
+# Brand onboarding submissions — carry the admin's email (operator data, never commit).
+artifacts/onboarding/submissions/
+artifacts/onboarding/submissions_log.tsv
+artifacts/onboarding/roster_assignments.yaml
+artifacts/onboarding/teacher_claims.yaml
+artifacts/covers/
+brand-wizard-app/public/assets/covers/
+
+# M6 blind-10 comparator scans (licensed operator assets — not git)
+artifacts/qa/manga_blind10_*/comparators/*.pdf

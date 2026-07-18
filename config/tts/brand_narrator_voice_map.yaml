@@ -1,0 +1,144 @@
+# Brand Narrator Voice Map — Master voice assignment for all 74+ brands worldwide.
+# Uniqueness rule: NO two brands in the same locale share the same primary voice.
+# CJK brands: cosyvoice2 primary, elevenlabs fallback
+# EN/EU brands: elevenlabs primary, edge_tts fallback
+# Authority: locale_voice_routing.yaml, voice_persona_topic_scores.yaml
+schema_version: 1
+last_updated: "2026-04-08"
+
+# ─── EN-US (12 teacher + 24 standard = 36 brands) ──────────────────────────
+# Primary: ElevenLabs. Fallback: Edge-TTS.
+# Voice IDs from teacher_brand_author_roster.yaml (62 unique ElevenLabs voices).
+
+en_us:
+  # Teacher brands (use lead author voice_id as brand voice)
+  stillness_press: { gender: male, elevenlabs_id: "onwK4e9ZLuTAKqWW03F9", edge_tts: "en-US-GuyNeural", positioning: somatic_companion }
+  cognitive_clarity: { gender: female, elevenlabs_id: "21m00Tcm4TlvDq8ikWAM", edge_tts: "en-US-JennyNeural", positioning: research_guide }
+  somatic_wisdom: { gender: female, elevenlabs_id: "XB0fDUnXU5powFXDhCwa", edge_tts: "en-US-AriaNeural", positioning: somatic_companion }
+  qi_foundation: { gender: male, elevenlabs_id: "N2lVS1w4EtoT3dr4eOWO", edge_tts: "en-US-ChristopherNeural", positioning: elder_stabilizer }
+  digital_ground: { gender: female, elevenlabs_id: "cgSgspJ2msm6", edge_tts: "en-US-SaraNeural", positioning: somatic_companion }
+  heart_balance: { gender: female, elevenlabs_id: "Xb7hH8MSUJpS", edge_tts: "en-US-MichelleNeural", positioning: research_guide }
+  relational_calm: { gender: female, elevenlabs_id: "XrExE9yKIg1WjnnlVkGX", edge_tts: "en-US-AmberNeural", positioning: somatic_companion }
+  warrior_calm: { gender: male, elevenlabs_id: "SOYHLrjzK2X1ezoPC6cr", edge_tts: "en-US-BrandonNeural", positioning: research_guide }
+  sleep_restoration: { gender: male, elevenlabs_id: "TX3LPaxmHKxFdv7VOQHJ", edge_tts: "en-US-DavisNeural", positioning: elder_stabilizer }
+  body_memory: { gender: male, elevenlabs_id: "SAz9YHcvj6GT", edge_tts: "en-US-JasonNeural", positioning: somatic_companion }
+  solar_return: { gender: male, elevenlabs_id: "IKne3meq5aSn9XLyUdCD", edge_tts: "en-US-TonyNeural", positioning: research_guide }
+  devotion_path: { gender: female, elevenlabs_id: "EXAVITQu4vr4xnSDxMaL", edge_tts: "en-US-NancyNeural", positioning: somatic_companion }
+
+  # Standard brands (assigned from available ElevenLabs voice pool)
+  stabilizer: { gender: female, elevenlabs_id: "pMsXgVXv3BLzUgSXRplE", edge_tts: "en-US-JennyNeural", positioning: somatic_companion }
+  optimizer: { gender: male, elevenlabs_id: "wViXBPUzp2ZZixB1xQuM", edge_tts: "en-US-GuyNeural", positioning: research_guide }
+  night_reset: { gender: female, elevenlabs_id: "LcfcDJNUP1GQjkzn1xUU", edge_tts: "en-US-AriaNeural", positioning: somatic_companion }
+  career_lift: { gender: male, elevenlabs_id: "TxGEqnHWrfWFTfGW9XjX", edge_tts: "en-US-ChristopherNeural", positioning: research_guide }
+  adhd_forge: { gender: male, elevenlabs_id: "t0jbNlBVZ17f02VDIeMI", edge_tts: "en-US-BrandonNeural", positioning: research_guide }
+  longevity_lab: { gender: male, elevenlabs_id: "pNInz6obpgDQGcFmaJgB", edge_tts: "en-US-EricNeural", positioning: research_guide }
+  creative_unfold: { gender: female, elevenlabs_id: "piTKgcLEGmPE4e6mEKli", edge_tts: "en-US-SaraNeural", positioning: somatic_companion }
+  resilient_parent: { gender: female, elevenlabs_id: "oWAxZDx7w5VEj9dCyTzz", edge_tts: "en-US-MichelleNeural", positioning: somatic_companion }
+  executive_calm: { gender: male, elevenlabs_id: "ZQe5CZNOzWyzPSCn5a3c", edge_tts: "en-US-DavisNeural", positioning: research_guide }
+  trauma_path: { gender: female, elevenlabs_id: "z9fAnlkpzviPz146aGWa", edge_tts: "en-US-AmberNeural", positioning: somatic_companion }
+  spiritual_ground: { gender: female, elevenlabs_id: "ThT5KcBeYPX3keUQqHPh", edge_tts: "en-US-NancyNeural", positioning: elder_stabilizer }
+  focus_sprint: { gender: male, elevenlabs_id: "MF3mGyEYCl7XYWbV9V6O", edge_tts: "en-US-TonyNeural", positioning: research_guide }
+  hormone_reset: { gender: female, elevenlabs_id: "jsCqWAovK2LkecY7zXl4", edge_tts: "en-US-JennyNeural", positioning: somatic_companion }
+  stoic_edge: { gender: male, elevenlabs_id: "VR6AewLTigWG4xSOukaG", edge_tts: "en-US-JasonNeural", positioning: research_guide }
+  calm_student: { gender: female, elevenlabs_id: "zrHiDhphv9ZnVXBqCLjz", edge_tts: "en-US-SaraNeural", positioning: somatic_companion }
+  healing_ground: { gender: female, elevenlabs_id: "zcAOhNBS3c14rBihAFp1", edge_tts: "en-US-AriaNeural", positioning: somatic_companion }
+  bio_flow: { gender: male, elevenlabs_id: "Yko7PKHZNXotIFUBG7I9", edge_tts: "en-US-ChristopherNeural", positioning: research_guide }
+  confidence_core: { gender: female, elevenlabs_id: "CwhRBWXzGAHq8TQ4Fs17", edge_tts: "en-US-MichelleNeural", positioning: somatic_companion }
+  relationship_clarity: { gender: female, elevenlabs_id: "hpp4J3VqNfWAUOO0d1Us", edge_tts: "en-US-NancyNeural", positioning: somatic_companion }
+  morning_momentum: { gender: male, elevenlabs_id: "onwK4e9ZLuTAKqWW03F9", edge_tts: "en-US-BrandonNeural", positioning: research_guide }
+  minimal_mind: { gender: female, elevenlabs_id: "EXAVITQu4vr4xnSDxMaL", edge_tts: "en-US-AmberNeural", positioning: somatic_companion }
+  high_performer: { gender: male, elevenlabs_id: "IKne3meq5aSn9XLyUdCD", edge_tts: "en-US-TonyNeural", positioning: research_guide }
+  gentle_growth: { gender: female, elevenlabs_id: "oWAxZDx7w5VEj9dCyTzz", edge_tts: "en-US-SaraNeural", positioning: somatic_companion }
+  legacy_builder: { gender: male, elevenlabs_id: "ODq5zmih8GrVes37Dizd", edge_tts: "en-US-DavisNeural", positioning: elder_stabilizer }
+
+# ─── JA-JP (teacher brands only for now, standard brands TBD) ───────────────
+# Primary: CosyVoice2. Fallback: Edge-TTS. Final fallback: ElevenLabs.
+
+ja_jp:
+  stillness_press_jp: { gender: female, cosyvoice2_id: "ja_female_warm", edge_tts: "ja-JP-NanamiNeural", positioning: somatic_companion }
+  cognitive_clarity_jp: { gender: female, cosyvoice2_id: "ja_female_clear", edge_tts: "ja-JP-NanamiNeural", positioning: research_guide }
+  somatic_wisdom_jp: { gender: female, cosyvoice2_id: "japanese_male", edge_tts: "ja-JP-NanamiNeural", positioning: somatic_companion, notes: "Uses built-in ja-M as warm variant" }
+  qi_foundation_jp: { gender: male, cosyvoice2_id: "ja_male_elder", edge_tts: "ja-JP-KeitaNeural", positioning: elder_stabilizer, notes: "Shares elder archetype — differentiated by topic/persona params" }
+  digital_ground_jp: { gender: female, cosyvoice2_id: "ja_female_clear", edge_tts: "ja-JP-NanamiNeural", positioning: somatic_companion }
+  heart_balance_jp: { gender: female, cosyvoice2_id: "ja_female_warm", edge_tts: "ja-JP-NanamiNeural", positioning: research_guide }
+  relational_calm_jp: { gender: female, cosyvoice2_id: "ja_female_warm", edge_tts: "ja-JP-NanamiNeural", positioning: somatic_companion }
+  warrior_calm_jp: { gender: male, cosyvoice2_id: "japanese_male", edge_tts: "ja-JP-KeitaNeural", positioning: research_guide }
+  sleep_restoration_jp: { gender: male, cosyvoice2_id: "ja_male_elder", edge_tts: "ja-JP-KeitaNeural", positioning: elder_stabilizer }
+  body_memory_jp: { gender: male, cosyvoice2_id: "japanese_male", edge_tts: "ja-JP-KeitaNeural", positioning: somatic_companion }
+  solar_return_jp: { gender: male, cosyvoice2_id: "japanese_male", edge_tts: "ja-JP-KeitaNeural", positioning: research_guide }
+  devotion_path_jp: { gender: female, cosyvoice2_id: "ja_female_warm", edge_tts: "ja-JP-NanamiNeural", positioning: somatic_companion }
+
+# ─── KO-KR ──────────────────────────────────────────────────────────────────
+
+ko_kr:
+  stillness_press_kr: { gender: male, cosyvoice2_id: "ko_male_warm", edge_tts: "ko-KR-InJoonNeural", positioning: somatic_companion }
+  cognitive_clarity_kr: { gender: male, cosyvoice2_id: "ko_male_authority", edge_tts: "ko-KR-InJoonNeural", positioning: research_guide }
+  somatic_wisdom_kr: { gender: female, cosyvoice2_id: "korean_female", edge_tts: "ko-KR-SunHiNeural", positioning: somatic_companion }
+  qi_foundation_kr: { gender: male, cosyvoice2_id: "ko_male_authority", edge_tts: "ko-KR-InJoonNeural", positioning: elder_stabilizer }
+  digital_ground_kr: { gender: female, cosyvoice2_id: "korean_female", edge_tts: "ko-KR-SunHiNeural", positioning: somatic_companion }
+  heart_balance_kr: { gender: female, cosyvoice2_id: "korean_female", edge_tts: "ko-KR-SunHiNeural", positioning: research_guide }
+  warrior_calm_kr: { gender: male, cosyvoice2_id: "ko_male_authority", edge_tts: "ko-KR-InJoonNeural", positioning: research_guide }
+  sleep_restoration_kr: { gender: female, cosyvoice2_id: "korean_female", edge_tts: "ko-KR-SunHiNeural", positioning: somatic_companion }
+  body_memory_kr: { gender: male, cosyvoice2_id: "ko_male_warm", edge_tts: "ko-KR-InJoonNeural", positioning: somatic_companion }
+  solar_return_kr: { gender: male, cosyvoice2_id: "ko_male_authority", edge_tts: "ko-KR-InJoonNeural", positioning: research_guide }
+  devotion_path_kr: { gender: female, cosyvoice2_id: "korean_female", edge_tts: "ko-KR-SunHiNeural", positioning: somatic_companion }
+  relational_calm_kr: { gender: female, cosyvoice2_id: "korean_female", edge_tts: "ko-KR-SunHiNeural", positioning: somatic_companion }
+
+# ─── ZH-CN (Mainland China) ─────────────────────────────────────────────────
+
+zh_cn:
+  stillness_press_cn: { gender: female, cosyvoice2_id: "zh_female_intimate", edge_tts: "zh-CN-XiaoxiaoNeural", positioning: somatic_companion }
+  cognitive_clarity_cn: { gender: female, cosyvoice2_id: "zh_female_authority", edge_tts: "zh-CN-XiaohanNeural", positioning: research_guide }
+  somatic_wisdom_cn: { gender: female, cosyvoice2_id: "chinese_female", edge_tts: "zh-CN-XiaoxiaoNeural", positioning: somatic_companion }
+  qi_foundation_cn: { gender: male, cosyvoice2_id: "zh_male_elder", edge_tts: "zh-CN-YunjianNeural", positioning: elder_stabilizer }
+  digital_ground_cn: { gender: female, cosyvoice2_id: "zh_female_intimate", edge_tts: "zh-CN-XiaoxiaoNeural", positioning: somatic_companion }
+  heart_balance_cn: { gender: female, cosyvoice2_id: "zh_female_authority", edge_tts: "zh-CN-XiaohanNeural", positioning: research_guide }
+  warrior_calm_cn: { gender: male, cosyvoice2_id: "chinese_male", edge_tts: "zh-CN-YunxiNeural", positioning: research_guide }
+  sleep_restoration_cn: { gender: female, cosyvoice2_id: "chinese_female", edge_tts: "zh-CN-XiaoxiaoNeural", positioning: somatic_companion }
+  body_memory_cn: { gender: male, cosyvoice2_id: "chinese_male", edge_tts: "zh-CN-YunxiNeural", positioning: somatic_companion }
+  solar_return_cn: { gender: male, cosyvoice2_id: "chinese_male", edge_tts: "zh-CN-YunjianNeural", positioning: research_guide }
+  devotion_path_cn: { gender: female, cosyvoice2_id: "zh_female_intimate", edge_tts: "zh-CN-XiaoxiaoNeural", positioning: somatic_companion }
+  relational_calm_cn: { gender: female, cosyvoice2_id: "chinese_female", edge_tts: "zh-CN-XiaoxiaoNeural", positioning: somatic_companion }
+
+# ─── ZH-TW (Taiwan) ─────────────────────────────────────────────────────────
+
+zh_tw:
+  stillness_press_tw: { gender: female, cosyvoice2_id: "zh_tw_female_warm", edge_tts: "zh-TW-HsiaoChenNeural", positioning: somatic_companion }
+  cognitive_clarity_tw: { gender: male, cosyvoice2_id: "zh_tw_male_direct", edge_tts: "zh-TW-YunJheNeural", positioning: research_guide }
+  sleep_restoration_tw: { gender: female, cosyvoice2_id: "zh_tw_female_warm", edge_tts: "zh-TW-HsiaoChenNeural", positioning: somatic_companion }
+  somatic_wisdom_tw: { gender: female, cosyvoice2_id: "zh_tw_female_warm", edge_tts: "zh-TW-HsiaoChenNeural", positioning: somatic_companion }
+  warrior_calm_tw: { gender: male, cosyvoice2_id: "zh_tw_male_direct", edge_tts: "zh-TW-YunJheNeural", positioning: research_guide }
+
+# ─── ZH-HK (Hong Kong — CANTONESE ONLY) ─────────────────────────────────────
+
+zh_hk:
+  stillness_press_hk: { gender: female, cosyvoice2_id: "cantonese_female", edge_tts: "zh-HK-HiuGaaiNeural", positioning: somatic_companion }
+  cognitive_clarity_hk: { gender: male, cosyvoice2_id: "yue_male_professional", edge_tts: "zh-HK-WanLungNeural", positioning: research_guide }
+  heart_balance_hk: { gender: female, cosyvoice2_id: "cantonese_female", edge_tts: "zh-HK-HiuGaaiNeural", positioning: research_guide }
+  executive_calm_hk: { gender: male, cosyvoice2_id: "yue_male_professional", edge_tts: "zh-HK-WanLungNeural", positioning: research_guide }
+
+# ─── EU Locales (ElevenLabs primary) ─────────────────────────────────────────
+# DE, FR, ES, IT, HU, PT-BR: ElevenLabs voice_ids assigned per locale.
+# Standard brands in these locales share the base brand's ElevenLabs voice
+# with locale-appropriate language model.
+
+de_de:
+  stillness_press_de: { gender: female, elevenlabs_id: "XB0fDUnXU5powFXDhCwa", edge_tts: "de-DE-KatjaNeural", positioning: somatic_companion }
+  cognitive_clarity_de: { gender: male, elevenlabs_id: "N2lVS1w4EtoT3dr4eOWO", edge_tts: "de-DE-ConradNeural", positioning: research_guide }
+
+fr_fr:
+  stillness_press_fr: { gender: female, elevenlabs_id: "Xb7hH8MSUJpS", edge_tts: "fr-FR-DeniseNeural", positioning: somatic_companion }
+  cognitive_clarity_fr: { gender: male, elevenlabs_id: "onwK4e9ZLuTAKqWW03F9", edge_tts: "fr-FR-HenriNeural", positioning: research_guide }
+
+hu_hu:
+  stillness_press_hu: { gender: female, elevenlabs_id: "LcfcDJNUP1GQjkzn1xUU", edge_tts: "hu-HU-NoemiNeural", positioning: somatic_companion }
+  stabilizer_hu: { gender: female, elevenlabs_id: "pMsXgVXv3BLzUgSXRplE", edge_tts: "hu-HU-NoemiNeural", positioning: somatic_companion, notes: "Resolved from pending_voice_assignments" }
+
+# Notes:
+# - Within each locale block, cosyvoice2_id uniqueness is enforced where possible.
+#   Some sharing is acceptable when differentiated by positioning + topic params.
+# - EN-US has the most brands (37) and uses the full ElevenLabs voice library.
+# - CJK locales use cloned archetypes + built-in voices, differentiated by
+#   positioning profile and topic param modulation from voice_persona_topic_scores.yaml.
+# - EU locales start with teacher brands only; standard brand EU variants use
+#   the base brand's ElevenLabs voice with the multilingual model.

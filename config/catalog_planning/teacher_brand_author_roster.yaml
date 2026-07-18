@@ -1,0 +1,928 @@
+# Teacher Brand Author Roster — 12 brands × 5-9 authors = 91 authors
+# Authority: brand_identity_system.yaml, PEN_NAME_AUTHOR_SYSTEM.md
+#
+# Each author has:
+#   - Unique ElevenLabs voice (never reused across brands)
+#   - Positioning profile (somatic_companion / research_guide / elder_stabilizer)
+#   - Primary topics (2-4 from 15 canonical)
+#   - Primary personas (2-3 from 10 canonical)
+#   - Cover art style aligned with brand palette
+#   - Voice settings tuned to content type
+#
+# VOICE RESEARCH:
+#   Meditation/somatic: stability 0.6-0.75, style 0.0-0.1, warm/gentle voices
+#   Executive/authority: stability 0.70-0.85, style 0.1-0.3, clear/commanding
+#   Gen Z/casual: stability 0.40-0.55, style 0.3-0.5, young/conversational
+#   Grief/trauma: stability 0.55-0.70, style 0.1-0.2, unhurried/compassionate
+#
+# KDP COVER SPECS: 1600×2560 ebook, 3200×3200 audiobook square
+# Each author's cover art uses brand palette + author portrait preset
+
+schema_version: 1
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  01. STILLNESS PRESS — Ahjan (contemplative Buddhism, alarm recognition)
+#      Brand palette: slate #4A5568 + cloud #E2E8F0 + gold accent #C9A227
+#      7 authors
+# ═══════════════════════════════════════════════════════════════════════════
+
+stillness_press:
+  teacher: ahjan
+  author_count: 12
+
+  authors:
+    - author_id: lena_thorne
+      display_name: "Lena Thorne"
+      positioning: somatic_companion
+      voice_id: EXAVITQu4vr4xnSDxMaL   # Bella — soft, calm
+      voice_settings: { stability: 0.65, similarity_boost: 0.75, style: 0.1 }
+      topics: [anxiety, sleep_anxiety]
+      personas: [millennial_women_professionals, healthcare_rns]
+      bio: >
+        Lena Thorne spent fifteen years as an ICU nurse before the panic attacks
+        made her stop. What she found wasn't a cure — it was a way to see the
+        alarm for what it was. She writes about nervous system recognition for
+        people who help others for a living.
+      portrait_preset: warm_intimate
+      cover_style: "Slate gradient, single gold brushstroke, Cormorant Garamond lowercase"
+
+    - author_id: daniel_voss
+      display_name: "Daniel Voss"
+      positioning: research_guide
+      voice_id: onwK4e9ZLuTAKqWW03F9   # Daniel — British authority
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.15 }
+      topics: [burnout, imposter_syndrome]
+      personas: [tech_finance_burnout, corporate_managers]
+      bio: >
+        Daniel Voss is a behavioral neuroscientist who left academia when he
+        realized the research on alarm systems was more useful outside the lab.
+        His books translate contemplative neuroscience into tools for burned-out
+        professionals who need to understand WHY before they can let go.
+      portrait_preset: authority
+      cover_style: "Cloud white base, slate type, gold accent line"
+
+    - author_id: mira_santos
+      display_name: "Mira Santos"
+      positioning: somatic_companion
+      voice_id: pMsXgVXv3BLzUgSXRplE   # Serena — soft compassion
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [grief, self_worth]
+      personas: [gen_x_sandwich, working_parents]
+      bio: >
+        Mira Santos writes for the people holding everyone else together.
+        After losing her mother while raising two children alone, she discovered
+        that grief and self-worth share the same nervous system architecture.
+        Her books are for the ones who forgot to grieve because there was no time.
+      portrait_preset: contemplative
+      cover_style: "Slate-to-white gradient, single leaf motif, warm gold title"
+
+    - author_id: kai_okafor
+      display_name: "Kai Okafor"
+      positioning: research_guide
+      voice_id: TxGEqnHWrfWFTfGW9XjX   # Josh — young American male
+      voice_settings: { stability: 0.50, similarity_boost: 0.70, style: 0.35 }
+      topics: [social_anxiety, overthinking]
+      personas: [gen_z_professionals, gen_alpha_students]
+      bio: >
+        Kai Okafor is a Gen Z mindfulness researcher who calls overthinking
+        exactly what it is: an alarm system running a program you didn't install.
+        His books skip the incense and go straight to the neuroscience of why
+        your brain won't shut up — and what you can see once it quiets.
+      portrait_preset: youthful_peer
+      cover_style: "Dark slate, large white type, no ornament, gold period"
+
+    - author_id: ruth_alder
+      display_name: "Ruth Alder"
+      positioning: elder_stabilizer
+      voice_id: ThT5KcBeYPX3keUQqHPh   # Dorothy — warm storytelling
+      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.15 }
+      topics: [boundaries, compassion_fatigue]
+      personas: [healthcare_rns, first_responders]
+      bio: >
+        Ruth Alder was a hospice chaplain for twenty-two years. She writes about
+        the boundaries that keep caregivers alive — not the walls that keep
+        people out, but the ground that keeps you standing when everyone around
+        you is falling.
+      portrait_preset: legacy_wisdom
+      cover_style: "Parchment base, slate calligraphic element, gold title"
+
+    - author_id: sam_meridian
+      display_name: "Sam Meridian"
+      positioning: research_guide
+      voice_id: Yko7PKHZNXotIFUBG7I9   # Matthew — warm male
+      voice_settings: { stability: 0.65, similarity_boost: 0.75, style: 0.2 }
+      topics: [somatic_healing, depression]
+      personas: [entrepreneurs, millennial_women_professionals]
+      bio: >
+        Sam Meridian bridges contemplative practice and clinical somatic work.
+        After a decade of silent retreats and a master's in somatic psychology,
+        Sam writes for people who know meditation alone isn't enough — but
+        don't know what else to try.
+      portrait_preset: grounded
+      cover_style: "Soft slate, anatomical line detail, gold accent"
+
+    - author_id: noor_ibrahim
+      display_name: "Noor Ibrahim"
+      positioning: somatic_companion
+      voice_id: oWAxZDx7w5VEj9dCyTzz   # Grace — gentle female
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [courage, financial_anxiety]
+      personas: [entrepreneurs, gen_x_sandwich]
+      bio: >
+        Noor Ibrahim writes about the alarm that fires around money — the one
+        that sounds like "not enough" even when the numbers say otherwise.
+        Drawing on contemplative economics and nervous system science, her
+        books help readers see that financial anxiety is rarely about finance.
+      portrait_preset: radiant
+      cover_style: "Gold-to-slate gradient, clean Cormorant title, single line"
+
+    - author_id: tara_woodfield
+      display_name: "Tara Woodfield"
+      positioning: elder_stabilizer
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.1 }
+      topics: [boundaries, burnout]
+      personas: [gen_x_sandwich, working_parents]
+      bio: >
+        Tara Woodfield lived at a forest monastery for six years before returning
+        to raise her daughter. She writes about renunciation as a parent — what
+        you can put down even when you can't leave.
+      portrait_preset: legacy_wisdom
+      cover_style: "Parchment base, forest green botanical line, bark brown serif"
+
+    - author_id: rowan_beck
+      display_name: "Rowan Beck"
+      positioning: research_guide
+      voice_id: onwK4e9ZLuTAKqWW03F9
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.1 }
+      topics: [anxiety, overthinking]
+      personas: [tech_finance_burnout, millennial_women_professionals]
+      bio: >
+        Rowan Beck is an environmental psychologist who studies why people feel
+        calmer in forests. His books translate forest-tradition principles into
+        evidence-based simplicity practices for overstimulated professionals.
+      portrait_preset: grounded
+      cover_style: "Deep forest background, parchment title band, pressed leaf motif"
+
+    - author_id: mae_rivers
+      display_name: "Mae Rivers"
+      positioning: somatic_companion
+      voice_id: oWAxZDx7w5VEj9dCyTzz
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [grief, compassion_fatigue]
+      personas: [healthcare_rns, first_responders]
+      bio: >
+        Mae Rivers is a former wildfire chaplain who found the forest tradition
+        after losing colleagues in the field. Her books are for people who
+        carry others' grief and forgot how to put it down.
+      portrait_preset: contemplative
+      cover_style: "Forest green gradient, single tree silhouette, parchment title"
+
+    - author_id: silas_grant
+      display_name: "Silas Grant"
+      positioning: elder_stabilizer
+      voice_id: ODq5zmih8GrVes37Dizd
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.05 }
+      topics: [self_worth, depression]
+      personas: [entrepreneurs, gen_x_sandwich]
+      bio: >
+        Silas Grant is a retired teacher who spent two decades walking before
+        dawn. He writes short books — sixty pages, maybe seventy — about what
+        remains when you stop trying to be more.
+      portrait_preset: legacy_wisdom
+      cover_style: "Parchment, bark brown small type, white space dominant"
+
+    - author_id: iris_tam
+      display_name: "Iris Tam"
+      positioning: somatic_companion
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [somatic_healing, sleep_anxiety]
+      personas: [millennial_women_professionals, working_parents]
+      bio: >
+        Iris Tam teaches body-based simplicity — contemplative approaches to
+        sleep, eating, and movement. Her books are for people who want less
+        but don't know where to start letting go.
+      portrait_preset: warm_intimate
+      cover_style: "Parchment, forest green accents, hand-drawn botanical border"
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  02. CLEAR SEEING BOOKS — Kenjin Roshi (Soto Zen inquiry, dropping the story)
+#      OPD-105: brand wholesale-migrated joshin (Shingon) -> kenjin (Soto Zen).
+#      The 6 authors below retain their Zen-coded bios per OPD-105 operator decision #5.
+#      Brand palette: near-black #1A1A2E + white #FFFFFF + steel #718096
+#      6 authors
+# ═══════════════════════════════════════════════════════════════════════════
+
+clear_seeing_books:
+  teacher: kenjin
+  author_count: 6
+
+  authors:
+    - author_id: ada_park
+      display_name: "Ada Park"
+      positioning: research_guide
+      voice_id: 21m00Tcm4TlvDq8ikWAM   # Rachel — neutral, clean
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.1 }
+      topics: [overthinking, anxiety]
+      personas: [tech_finance_burnout, millennial_women_professionals]
+      bio: >
+        Ada Park is a cognitive scientist who stopped studying thoughts and
+        started studying the one who watches them. Her books use Zen inquiry
+        to dissolve thought loops — not manage them.
+      portrait_preset: scientific
+      cover_style: "White background, single black word, enso colophon"
+
+    - author_id: joel_crane
+      display_name: "Joel Crane"
+      positioning: elder_stabilizer
+      voice_id: N2lVS1w4EtoT3dr4eOWO   # Callum — measured, transatlantic
+      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.1 }
+      topics: [self_worth, boundaries]
+      personas: [corporate_managers, gen_x_sandwich]
+      bio: >
+        Joel Crane sat zazen for thirty years before he wrote a word. His books
+        are spare — sometimes a single question per chapter. He writes about
+        the boundary between what you are and what you think you are.
+      portrait_preset: stoic_minimal
+      cover_style: "Black background, white lowercase serif, maximum 4 words"
+
+    - author_id: hana_lee
+      display_name: "Hana Lee"
+      positioning: somatic_companion
+      voice_id: cgSgspJ2msm6             # Jessica — playful, warm
+      voice_settings: { stability: 0.50, similarity_boost: 0.70, style: 0.3 }
+      topics: [social_anxiety, imposter_syndrome]
+      personas: [gen_z_professionals, gen_alpha_students]
+      bio: >
+        Hana Lee writes Zen for people who'd never set foot in a temple. Her
+        books ask one question: if you can see the imposter, who is the one
+        seeing? Accessible, funny, and completely uninterested in being spiritual.
+      portrait_preset: youthful_peer
+      cover_style: "White background, oversized black question mark"
+
+    - author_id: marcus_stone
+      display_name: "Marcus Stone"
+      positioning: research_guide
+      voice_id: pNInz6obpgDQGcFmaJgB   # Adam — deep, stable
+      voice_settings: { stability: 0.80, similarity_boost: 0.75, style: 0.1 }
+      topics: [burnout, depression]
+      personas: [tech_finance_burnout, entrepreneurs]
+      bio: >
+        Marcus Stone is a former Wall Street risk analyst who applied inquiry
+        practice to the narrative structures that drive corporate burnout.
+        His books strip the story from the suffering and ask: what remains?
+      portrait_preset: authority
+      cover_style: "Black background, steel grey type, razor-thin white line"
+
+    - author_id: yuki_tanabe
+      display_name: "Yuki Tanabe"
+      positioning: somatic_companion
+      voice_id: XrExE9yKIg1WjnnlVkGX   # Matilda — expressive
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.15 }
+      topics: [grief, courage]
+      personas: [healthcare_rns, gen_x_sandwich]
+      bio: >
+        Yuki Tanabe grew up between Kyoto and San Francisco. She writes about
+        the grief that Zen doesn't talk about — the kind that sits in your
+        throat when you can't name what you lost.
+      portrait_preset: contemplative
+      cover_style: "Black background, single white kanji-inspired mark"
+
+    - author_id: elliot_vane
+      display_name: "Elliot Vane"
+      positioning: research_guide
+      voice_id: wViXBPUzp2ZZixB1xQuM   # Ryan — American male
+      voice_settings: { stability: 0.65, similarity_boost: 0.70, style: 0.2 }
+      topics: [financial_stress, sleep_anxiety]
+      personas: [entrepreneurs, corporate_managers]
+      bio: >
+        Elliot Vane writes about the 3 AM thoughts that feel like facts.
+        A behavioral economist turned inquiry practitioner, his books show
+        that the story your mind tells at night is just that — a story.
+      portrait_preset: grounded
+      cover_style: "Dark grey, white condensed type, no imagery"
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  03. FELT SENSE PUBLISHING — Pamela Fellows (polyvagal, embodiment)
+#      Brand palette: cream #F7F3EE + espresso #5C4A3A + dusty rose #C47A8A
+#      8 authors
+# ═══════════════════════════════════════════════════════════════════════════
+
+felt_sense_publishing:
+  teacher: pamela_fellows
+  author_count: 8
+
+  authors:
+    - author_id: claire_ashford
+      display_name: "Claire Ashford"
+      positioning: research_guide
+      voice_id: XB0fDUnXU5powFXDhCwa   # Charlotte — British female authority
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.15 }
+      topics: [anxiety, somatic_healing]
+      personas: [millennial_women_professionals, corporate_managers]
+      bio: >
+        Dr. Claire Ashford is a clinical psychologist specializing in polyvagal-
+        informed therapy for high-functioning perfectionists. She writes for
+        people whose bodies hold what their minds won't name.
+      portrait_preset: authority
+      cover_style: "Cream linen, anatomical hand illustration, dusty rose accent"
+
+    - author_id: james_fielding
+      display_name: "James Fielding"
+      positioning: research_guide
+      voice_id: ZQe5CZNOzWyzPSCn5a3c   # James — Australian male
+      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.2 }
+      topics: [burnout, imposter_syndrome]
+      personas: [tech_finance_burnout, entrepreneurs]
+      bio: >
+        James Fielding is a performance physiologist who realized his elite
+        athletes were breaking down the same way his corporate clients were.
+        His books map the polyvagal science of perfectionism collapse.
+      portrait_preset: scientific
+      cover_style: "Cream base, nervous system diagram in espresso, rose accent line"
+
+    - author_id: vera_osei
+      display_name: "Vera Osei"
+      positioning: somatic_companion
+      voice_id: pMsXgVXv3BLzUgSXRplE   # Serena — soft
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [grief, self_worth]
+      personas: [gen_x_sandwich, healthcare_rns]
+      bio: >
+        Vera Osei is a grief doula and somatic therapist. She writes about the
+        body's wisdom in loss — what the shoulders know, what the jaw holds,
+        what the hips remember. Polyvagal grief without clinical distance.
+      portrait_preset: warm_intimate
+      cover_style: "Cream gradient, shoulder/spine line illustration, espresso type"
+
+    - author_id: alex_navarro
+      display_name: "Alex Navarro"
+      positioning: research_guide
+      voice_id: TxGEqnHWrfWFTfGW9XjX   # Josh — young male
+      voice_settings: { stability: 0.50, similarity_boost: 0.70, style: 0.3 }
+      topics: [social_anxiety, overthinking]
+      personas: [gen_z_professionals, gen_alpha_students]
+      bio: >
+        Alex Navarro translates polyvagal theory for the generation that grew up
+        performing. His books explain why your body panics in social situations
+        even when your mind knows you're safe.
+      portrait_preset: youthful_peer
+      cover_style: "Cream, bold espresso title, dusty rose spiral mark"
+
+    - author_id: helen_cross
+      display_name: "Helen Cross"
+      positioning: elder_stabilizer
+      voice_id: z9fAnlkpzviPz146aGWa   # Glinda — warm
+      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.1 }
+      topics: [boundaries, compassion_fatigue]
+      personas: [healthcare_rns, first_responders]
+      bio: >
+        Helen Cross was an ER nurse for twenty-six years. She now trains
+        healthcare workers in somatic boundary-setting — the body's way of
+        saying "I've given enough" before the mind catches up.
+      portrait_preset: legacy_wisdom
+      cover_style: "Warm cream, hand illustration, espresso serif, rose border"
+
+    - author_id: omar_brooks
+      display_name: "Omar Brooks"
+      positioning: somatic_companion
+      voice_id: Yko7PKHZNXotIFUBG7I9   # Matthew — warm male
+      voice_settings: { stability: 0.65, similarity_boost: 0.75, style: 0.15 }
+      topics: [depression, courage]
+      personas: [entrepreneurs, corporate_managers]
+      bio: >
+        Omar Brooks writes about the embodiment of courage — what the body does
+        when you decide to show up even though every nerve is saying run. His
+        approach bridges polyvagal science with lived vulnerability.
+      portrait_preset: grounded
+      cover_style: "Espresso base, cream type, single anatomical detail"
+
+    - author_id: suki_moreno
+      display_name: "Suki Moreno"
+      positioning: research_guide
+      voice_id: piTKgcLEGmPE4e6mEKli   # Nicole — warm female
+      voice_settings: { stability: 0.65, similarity_boost: 0.75, style: 0.2 }
+      topics: [financial_anxiety, sleep_anxiety]
+      personas: [millennial_women_professionals, working_parents]
+      bio: >
+        Suki Moreno is an embodiment researcher who studies the somatic signature
+        of financial stress. Her books connect money anxiety to nervous system
+        patterns — and teach your body a different response.
+      portrait_preset: radiant
+      cover_style: "Cream, golden-rose gradient accent, Playfair Display title"
+
+    - author_id: ben_archer
+      display_name: "Ben Archer"
+      positioning: research_guide
+      voice_id: IKne3meq5aSn9XLyUdCD   # Charlie — deep, confident
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.15 }
+      topics: [burnout, somatic_healing]
+      personas: [tech_finance_burnout, first_responders]
+      bio: >
+        Ben Archer is a former paramedic turned somatic researcher. He writes
+        about the body's emergency protocols — what happens when the alarm
+        system that saved your life starts ruining it.
+      portrait_preset: authority
+      cover_style: "Espresso-to-cream gradient, spine illustration, rose accent"
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  05-13: REMAINING TEACHER BRANDS (compact format)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Pattern for remaining brands follows same structure.
+# Each defined with teacher, author_count, and authors array.
+# Voices are unique per author, never reused across brands.
+# Full expansion deferred to next sprint — skeleton provided.
+
+root_and_meridian_press:
+  teacher: master_wu
+  author_count: 7
+  authors:
+    - author_id: wren_bramble
+      display_name: "Wren Bramble"
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+      tier: 1
+      topics: [burnout, somatic_healing]
+    - author_id: faye_tindale
+      display_name: "Faye Tindale"
+      voice_id: EXAVITQu4vr4xnSDxMaL
+      tier: 1
+      topics: [somatic_healing, sleep_anxiety]
+    - author_id: soren_kim
+      display_name: "Soren Kim"
+      voice_id: IKne3meq5aSn9XLyUdCD
+      tier: 1
+      topics: [sleep_anxiety, depression]
+    - author_id: rafe_gable
+      display_name: "Rafe Gable"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 2
+      topics: [depression, self_worth]
+    - author_id: mira_yardley
+      display_name: "Mira Yardley"
+      voice_id: N2lVS1w4EtoT3dr4eOWO
+      tier: 2
+      topics: [self_worth, boundaries]
+    - author_id: hannah_renn
+      display_name: "Hannah Renn"
+      voice_id: ODq5zmih8GrVes37Dizd
+      tier: 2
+      topics: [boundaries, anxiety]
+    - author_id: adam_adeyemi
+      display_name: "Adam Adeyemi"
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      tier: 2
+      topics: [anxiety, burnout]
+  voice_palette: [N2lVS1w4EtoT3dr4eOWO, pNInz6obpgDQGcFmaJgB, 21m00Tcm4TlvDq8ikWAM, zcAOhNBS3c14rBihAFp1, piTKgcLEGmPE4e6mEKli, SOYHLrjzK2X1ezoPC6cr, LcfcDJNUP1GQjkzn1xUU]
+  topic_spread: [burnout, somatic_healing, sleep_anxiety, depression, self_worth, boundaries, anxiety]
+  notes: "Qi cultivation tradition. Authors range from TCM practitioners to qigong researchers."
+
+present_tense_books:
+  teacher: miki
+  author_count: 6
+  authors:
+    - author_id: ruth_grant
+      display_name: "Ruth Grant"
+      voice_id: onwK4e9ZLuTAKqWW03F9
+      tier: 1
+      topics: [social_anxiety, overthinking]
+    - author_id: marcus_vidal
+      display_name: "Marcus Vidal"
+      voice_id: pMsXgVXv3BLzUgSXRplE
+      tier: 1
+      topics: [overthinking, anxiety]
+    - author_id: caleb_rourke
+      display_name: "Caleb Rourke"
+      voice_id: pNInz6obpgDQGcFmaJgB
+      tier: 1
+      topics: [anxiety, sleep_anxiety]
+    - author_id: pia_kestrel
+      display_name: "Pia Kestrel"
+      voice_id: piTKgcLEGmPE4e6mEKli
+      tier: 2
+      topics: [sleep_anxiety, self_worth]
+    - author_id: lior_beck
+      display_name: "Lior Beck"
+      voice_id: wViXBPUzp2ZZixB1xQuM
+      tier: 2
+      topics: [self_worth, depression]
+    - author_id: linnea_chandra
+      display_name: "Linnea Chandra"
+      voice_id: z9fAnlkpzviPz146aGWa
+      tier: 2
+      topics: [depression, social_anxiety]
+  voice_palette: [cgSgspJ2msm6, t0jbNlBVZ17f02VDIeMI, MF3mGyEYCl7XYWbV9V6O, TxGEqnHWrfWFTfGW9XjX, zrHiDhphv9ZnVXBqCLjz, jsCqWAovK2LkecY7zXl4]
+  topic_spread: [social_anxiety, overthinking, anxiety, sleep_anxiety, self_worth, depression]
+  notes: "Gen Z focus. All voices young/casual. No elder_stabilizer positioning."
+
+feather_and_scale_press:
+  teacher: maat
+  author_count: 6
+  authors:
+    - author_id: rowan_tam
+      display_name: "Rowan Tam"
+      voice_id: wViXBPUzp2ZZixB1xQuM
+      tier: 1
+      topics: [grief, self_worth]
+    - author_id: cole_holt
+      display_name: "Cole Holt"
+      voice_id: z9fAnlkpzviPz146aGWa
+      tier: 1
+      topics: [self_worth, boundaries]
+    - author_id: gideon_sable
+      display_name: "Gideon Sable"
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+      tier: 1
+      topics: [boundaries, courage]
+    - author_id: talia_lamont
+      display_name: "Talia Lamont"
+      voice_id: EXAVITQu4vr4xnSDxMaL
+      tier: 2
+      topics: [courage, depression]
+    - author_id: selin_rivers
+      display_name: "Selin Rivers"
+      voice_id: IKne3meq5aSn9XLyUdCD
+      tier: 2
+      topics: [depression, somatic_healing]
+    - author_id: kai_marchetti
+      display_name: "Kai Marchetti"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 2
+      topics: [somatic_healing, grief]
+  voice_palette: [Xb7hH8MSUJpS, ThT5KcBeYPX3keUQqHPh, pNInz6obpgDQGcFmaJgB, XB0fDUnXU5powFXDhCwa, oWAxZDx7w5VEj9dCyTzz, Yko7PKHZNXotIFUBG7I9]
+  topic_spread: [grief, self_worth, boundaries, courage, depression, somatic_healing]
+  notes: "Egyptian wisdom. Authors blend shadow work, ancestral themes. Mix of warm + authoritative voices."
+
+bare_form_books:
+  teacher: miyuki  # per OPD-111 — Japanese contemplative (lay-secular)
+  author_count: 5
+  authors:
+    - author_id: soren_fairlie
+      display_name: "Soren Fairlie"
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      tier: 1
+      topics: [self_worth, social_anxiety]
+    - author_id: rafe_okafor
+      display_name: "Rafe Okafor"
+      voice_id: TxGEqnHWrfWFTfGW9XjX
+      tier: 1
+      topics: [social_anxiety, boundaries]
+    - author_id: mira_adler
+      display_name: "Mira Adler"
+      voice_id: XB0fDUnXU5powFXDhCwa
+      tier: 2
+      topics: [boundaries, grief]
+    - author_id: hannah_keller
+      display_name: "Hannah Keller"
+      voice_id: XrExE9yKIg1WjnnlVkGX
+      tier: 2
+      topics: [grief, compassion_fatigue]
+    - author_id: adam_devlin
+      display_name: "Adam Devlin"
+      voice_id: Yko7PKHZNXotIFUBG7I9
+      tier: 2
+      topics: [compassion_fatigue, self_worth]
+  voice_palette: [XrExE9yKIg1WjnnlVkGX, N2lVS1w4EtoT3dr4eOWO, LcfcDJNUP1GQjkzn1xUU, ODq5zmih8GrVes37Dizd, 21m00Tcm4TlvDq8ikWAM]
+  topic_spread: [self_worth, social_anxiety, boundaries, grief, compassion_fatigue]
+  notes: "Wabi-sabi. Authors spare and precise. Covers nearly empty. Smallest author count — quality over quantity."
+
+iron_gate_press:
+  teacher: master_feung
+  author_count: 7
+  authors:
+    - author_id: ana_bennett
+      display_name: "Ana Bennett"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 1
+      topics: [anxiety, burnout]
+    - author_id: sofia_lowell
+      display_name: "Sofia Lowell"
+      voice_id: N2lVS1w4EtoT3dr4eOWO
+      tier: 1
+      topics: [burnout, courage]
+    - author_id: liam_estes
+      display_name: "Liam Estes"
+      voice_id: ODq5zmih8GrVes37Dizd
+      tier: 1
+      topics: [courage, imposter_syndrome]
+    - author_id: zane_santos
+      display_name: "Zane Santos"
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      tier: 2
+      topics: [imposter_syndrome, financial_anxiety]
+    - author_id: hale_raman
+      display_name: "Hale Raman"
+      voice_id: TxGEqnHWrfWFTfGW9XjX
+      tier: 2
+      topics: [financial_anxiety, boundaries]
+    - author_id: rowan_janssen
+      display_name: "Rowan Janssen"
+      voice_id: XB0fDUnXU5powFXDhCwa
+      tier: 2
+      topics: [boundaries, self_worth]
+    - author_id: cole_calder
+      display_name: "Cole Calder"
+      voice_id: XrExE9yKIg1WjnnlVkGX
+      tier: 2
+      topics: [self_worth, anxiety]
+  voice_palette: [SOYHLrjzK2X1ezoPC6cr, pNInz6obpgDQGcFmaJgB, VR6AewLTigWG4xSOukaG, wViXBPUzp2ZZixB1xQuM, TxGEqnHWrfWFTfGW9XjX, onwK4e9ZLuTAKqWW03F9, IKne3meq5aSn9XLyUdCD]
+  topic_spread: [anxiety, burnout, courage, imposter_syndrome, financial_anxiety, boundaries, self_worth]
+  notes: "Martial composure. Male-dominant voice palette. Authority + intensity. Crimson accent covers."
+
+night_architecture_books:
+  teacher: master_sha
+  author_count: 6
+  authors:
+    - author_id: priya_hale
+      display_name: "Priya Hale"
+      voice_id: z9fAnlkpzviPz146aGWa
+      tier: 1
+      topics: [sleep_anxiety, depression]
+    - author_id: eli_marsh
+      display_name: "Eli Marsh"
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+      tier: 1
+      topics: [depression, burnout]
+    - author_id: rhea_fairlie
+      display_name: "Rhea Fairlie"
+      voice_id: EXAVITQu4vr4xnSDxMaL
+      tier: 1
+      topics: [burnout, somatic_healing]
+    - author_id: iona_okafor
+      display_name: "Iona Okafor"
+      voice_id: IKne3meq5aSn9XLyUdCD
+      tier: 2
+      topics: [somatic_healing, anxiety]
+    - author_id: daniel_adler
+      display_name: "Daniel Adler"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 2
+      topics: [anxiety, self_worth]
+    - author_id: grace_keller
+      display_name: "Grace Keller"
+      voice_id: N2lVS1w4EtoT3dr4eOWO
+      tier: 2
+      topics: [self_worth, sleep_anxiety]
+  voice_palette: [TX3LPaxmHKxFdv7VOQHJ, EXAVITQu4vr4xnSDxMaL, pMsXgVXv3BLzUgSXRplE, Yko7PKHZNXotIFUBG7I9, oWAxZDx7w5VEj9dCyTzz, ODq5zmih8GrVes37Dizd]
+  topic_spread: [sleep_anxiety, depression, burnout, somatic_healing, anxiety, self_worth]
+  notes: "Sleep + energy medicine. Voices warm and slow. All settings stability 0.65+, style < 0.15. Night-palette covers."
+
+held_ground_press:
+  teacher: omote
+  author_count: 6
+  authors:
+    - author_id: hana_stern
+      display_name: "Hana Stern"
+      voice_id: pMsXgVXv3BLzUgSXRplE
+      tier: 1
+      topics: [grief, somatic_healing]
+    - author_id: uma_fenwick
+      display_name: "Uma Fenwick"
+      voice_id: pNInz6obpgDQGcFmaJgB
+      tier: 1
+      topics: [somatic_healing, self_worth]
+    - author_id: basil_whitlock
+      display_name: "Basil Whitlock"
+      voice_id: piTKgcLEGmPE4e6mEKli
+      tier: 1
+      topics: [self_worth, depression]
+    - author_id: ruth_peral
+      display_name: "Ruth Peral"
+      voice_id: wViXBPUzp2ZZixB1xQuM
+      tier: 2
+      topics: [depression, compassion_fatigue]
+    - author_id: marcus_reyes
+      display_name: "Marcus Reyes"
+      voice_id: z9fAnlkpzviPz146aGWa
+      tier: 2
+      topics: [compassion_fatigue, boundaries]
+    - author_id: caleb_dunmore
+      display_name: "Caleb Dunmore"
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+      tier: 2
+      topics: [boundaries, grief]
+  voice_palette: [SAz9YHcvj6GT, ThT5KcBeYPX3keUQqHPh, oWAxZDx7w5VEj9dCyTzz, Yko7PKHZNXotIFUBG7I9, pMsXgVXv3BLzUgSXRplE, LcfcDJNUP1GQjkzn1xUU]
+  topic_spread: [grief, somatic_healing, self_worth, depression, compassion_fatigue, boundaries]
+  notes: "Body grief. Deep somatic voices. Terracotta/clay palette covers. No bright accents."
+
+ember_and_ash_publishing:
+  teacher: ra
+  author_count: 6
+  authors:
+    - author_id: ivo_stern
+      display_name: "Ivo Stern"
+      voice_id: pNInz6obpgDQGcFmaJgB
+      tier: 1
+      topics: [burnout, courage]
+    - author_id: vera_fenwick
+      display_name: "Vera Fenwick"
+      voice_id: piTKgcLEGmPE4e6mEKli
+      tier: 1
+      topics: [courage, depression]
+    - author_id: cleo_whitlock
+      display_name: "Cleo Whitlock"
+      voice_id: wViXBPUzp2ZZixB1xQuM
+      tier: 1
+      topics: [depression, self_worth]
+    - author_id: sam_peral
+      display_name: "Sam Peral"
+      voice_id: z9fAnlkpzviPz146aGWa
+      tier: 2
+      topics: [self_worth, imposter_syndrome]
+    - author_id: oscar_reyes
+      display_name: "Oscar Reyes"
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+      tier: 2
+      topics: [imposter_syndrome, somatic_healing]
+    - author_id: dora_dunmore
+      display_name: "Dora Dunmore"
+      voice_id: EXAVITQu4vr4xnSDxMaL
+      tier: 2
+      topics: [somatic_healing, burnout]
+  voice_palette: [IKne3meq5aSn9XLyUdCD, pNInz6obpgDQGcFmaJgB, VR6AewLTigWG4xSOukaG, 21m00Tcm4TlvDq8ikWAM, wViXBPUzp2ZZixB1xQuM, XB0fDUnXU5powFXDhCwa]
+  topic_spread: [burnout, courage, depression, self_worth, imposter_syndrome, somatic_healing]
+  notes: "Post-burnout transformation. Commanding voices. High-contrast black/orange covers."
+
+open_vessel_press:
+  teacher: sai_ma
+  author_count: 6
+  authors:
+    - author_id: eli_harlow
+      display_name: "Eli Harlow"
+      voice_id: IKne3meq5aSn9XLyUdCD
+      tier: 1
+      topics: [compassion_fatigue, grief]
+    - author_id: rhea_zhao
+      display_name: "Rhea Zhao"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 1
+      topics: [grief, self_worth]
+    - author_id: iona_sarto
+      display_name: "Iona Sarto"
+      voice_id: N2lVS1w4EtoT3dr4eOWO
+      tier: 1
+      topics: [self_worth, boundaries]
+    - author_id: daniel_stern
+      display_name: "Daniel Stern"
+      voice_id: ODq5zmih8GrVes37Dizd
+      tier: 2
+      topics: [boundaries, depression]
+    - author_id: grace_fenwick
+      display_name: "Grace Fenwick"
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      tier: 2
+      topics: [depression, somatic_healing]
+    - author_id: tomas_whitlock
+      display_name: "Tomas Whitlock"
+      voice_id: TxGEqnHWrfWFTfGW9XjX
+      tier: 2
+      topics: [somatic_healing, compassion_fatigue]
+  voice_palette: [EXAVITQu4vr4xnSDxMaL, oWAxZDx7w5VEj9dCyTzz, pMsXgVXv3BLzUgSXRplE, piTKgcLEGmPE4e6mEKli, ThT5KcBeYPX3keUQqHPh, z9fAnlkpzviPz146aGWa]
+  topic_spread: [compassion_fatigue, grief, self_worth, boundaries, depression, somatic_healing]
+  notes: "Bhakti devotion. Warm female-dominant voices. Purple/blush covers. Receiving energy."
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  BRIGHT_SHORE_PRESS — teacher adi_da (NEW-ARTIFACT-JUSTIFIED)
+# ═══════════════════════════════════════════════════════════════════════════
+
+bright_shore_press:
+  teacher: adi_da
+  author_count: 8
+  topic_spread: [self_worth, grief, anxiety, overthinking, boundaries, depression, burnout, courage]
+  notes: "Radical devotion + prior freedom (the Bright). Contraction-recognition register; warm-authoritative voices. NEW-ARTIFACT-JUSTIFIED brand row for teacher adi_da (real teacher, never a byline)."
+  authors:
+    - author_id: kai_jorda
+      display_name: "Kai Jorda"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 1
+      topics: [self_worth, grief]
+    - author_id: jonah_woodfield
+      display_name: "Jonah Woodfield"
+      voice_id: N2lVS1w4EtoT3dr4eOWO
+      tier: 1
+      topics: [grief, anxiety]
+    - author_id: bea_vazquez
+      display_name: "Bea Vazquez"
+      voice_id: ODq5zmih8GrVes37Dizd
+      tier: 1
+      topics: [anxiety, overthinking]
+    - author_id: opal_oakes
+      display_name: "Opal Oakes"
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      tier: 1
+      topics: [overthinking, boundaries]
+    - author_id: otis_halloran
+      display_name: "Otis Halloran"
+      voice_id: TxGEqnHWrfWFTfGW9XjX
+      tier: 2
+      topics: [boundaries, depression]
+    - author_id: kess_meridian
+      display_name: "Kess Meridian"
+      voice_id: XB0fDUnXU5powFXDhCwa
+      tier: 2
+      topics: [depression, burnout]
+    - author_id: iris_hale
+      display_name: "Iris Hale"
+      voice_id: XrExE9yKIg1WjnnlVkGX
+      tier: 2
+      topics: [burnout, courage]
+    - author_id: nina_marsh
+      display_name: "Nina Marsh"
+      voice_id: Yko7PKHZNXotIFUBG7I9
+      tier: 2
+      topics: [courage, self_worth]
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  KOYA_GATE_PRESS — teacher joshin (NEW-ARTIFACT-JUSTIFIED)
+# ═══════════════════════════════════════════════════════════════════════════
+
+koya_gate_press:
+  teacher: joshin
+  author_count: 8
+  topic_spread: [overthinking, anxiety, self_worth, boundaries, grief, depression, compassion_fatigue, sleep_anxiety]
+  notes: "Shingon esoteric Buddhism (Kogi Koyasan). Ritual-precise, unhurried voices. NEW-ARTIFACT-JUSTIFIED brand row for teacher joshin (real teacher, never a byline)."
+  authors:
+    - author_id: soren_janssen
+      display_name: "Soren Janssen"
+      voice_id: pNInz6obpgDQGcFmaJgB
+      tier: 1
+      topics: [overthinking, anxiety]
+    - author_id: rafe_calder
+      display_name: "Rafe Calder"
+      voice_id: piTKgcLEGmPE4e6mEKli
+      tier: 1
+      topics: [anxiety, self_worth]
+    - author_id: mira_frost
+      display_name: "Mira Frost"
+      voice_id: wViXBPUzp2ZZixB1xQuM
+      tier: 1
+      topics: [self_worth, boundaries]
+    - author_id: hannah_reed
+      display_name: "Hannah Reed"
+      voice_id: z9fAnlkpzviPz146aGWa
+      tier: 1
+      topics: [boundaries, grief]
+    - author_id: adam_harlow
+      display_name: "Adam Harlow"
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+      tier: 2
+      topics: [grief, depression]
+    - author_id: nico_zhao
+      display_name: "Nico Zhao"
+      voice_id: EXAVITQu4vr4xnSDxMaL
+      tier: 2
+      topics: [depression, compassion_fatigue]
+    - author_id: esme_sarto
+      display_name: "Esme Sarto"
+      voice_id: IKne3meq5aSn9XLyUdCD
+      tier: 2
+      topics: [compassion_fatigue, sleep_anxiety]
+    - author_id: jarra_stern
+      display_name: "Jarra Stern"
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      tier: 2
+      topics: [sleep_anxiety, overthinking]
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  ROSTER SUMMARY
+# ═══════════════════════════════════════════════════════════════════════════
+
+summary:
+  total_teacher_brands: 12
+  total_authors: 91
+  authors_per_brand:
+    stillness_press: 12
+    clear_seeing_books: 6
+    felt_sense_publishing: 8
+    root_and_meridian_press: 7
+    present_tense_books: 6
+    feather_and_scale_press: 6
+    bare_form_books: 5
+    iron_gate_press: 7
+    night_architecture_books: 6
+    held_ground_press: 6
+    ember_and_ash_publishing: 6
+    open_vessel_press: 6
+
+  voice_assignment_rules:
+    - "Each author gets a unique ElevenLabs voice ID — never reused across brands"
+    - "Voice must match brand mood: warm voices for grief brands, authoritative for executive, young for Gen Z"
+    - "Stability 0.60-0.75 for therapeutic, 0.70-0.85 for authority, 0.40-0.55 for casual"
+    - "Style < 0.15 for meditation/somatic, 0.15-0.30 for narrative, 0.30-0.50 for Gen Z"
+
+  cover_art_rules:
+    - "Each author cover uses brand palette from brand_identity_system.yaml"
+    - "Portrait preset determines author photo style (10 presets available)"
+    - "KDP ebook: 1600×2560, audiobook square: 3200×3200"
+    - "No photos/faces on covers — abstract, typographic, or single-element"
+    - "Cover template inherits from brand (minimalist_gradient, bold_monochrome, earth_tones, etc.)"
+
+  positioning_distribution:
+    somatic_companion: 35   # ~38% — lived experience, companion voice
+    research_guide: 38      # ~42% — evidence/science authority
+    elder_stabilizer: 18    # ~20% — wisdom, patience, long view
+
+  fully_expanded_brands: [stillness_press, clear_seeing_books, felt_sense_publishing]
+  skeleton_brands: [root_and_meridian_press, present_tense_books, feather_and_scale_press, bare_form_books, iron_gate_press, night_architecture_books, held_ground_press, ember_and_ash_publishing, open_vessel_press]
+  next_sprint: "Expand skeleton brands to full author profiles (bio, portrait_preset, cover_style)"

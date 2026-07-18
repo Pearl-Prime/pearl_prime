@@ -1,0 +1,129 @@
+schema_version: "1.0"
+cases:
+  - id: china_xiaohongshu_audio_market
+    prompt_id: pain_points
+    title: "China self-help audio discovery prompt repair"
+    issue_description: >
+      Prior Pearl_Research output for China self-help audio discovery was usable
+      but too Western: it leaned on TikTok/Spotify assumptions, missed
+      Xiaohongshu, Douyin, Bilibili, and Ximalaya evidence, and did not tell
+      Phoenix Omega whether China metadata and funnel language should diverge
+      from the global audiobook playbook.
+    transcript: |
+      Operator: The China version is still mushy. It says "use TikTok-style short clips"
+      but the actual launch question is whether Phoenix should prioritize Xiaohongshu,
+      Douyin, Bilibili, or Ximalaya for self-help audio discovery.
+
+      Failing output symptom:
+      - no Simplified Chinese source plan
+      - no platform policy/source provenance
+      - no comparison of Ximalaya vs Douyin vs Xiaohongshu
+      - generic "Gen Z likes authenticity" advice
+
+      Decision needed:
+      Should China research be routed to Qwen / QuinChat first, and what should
+      it ask so Phoenix Omega can decide whether to create China-specific
+      metadata, consumer-language, and funnel configs?
+
+      Unknowns:
+      - what local-language terms Chinese consumers use for burnout, sleep anxiety,
+        and self-help audio
+      - whether Ximalaya, Qingting, Douyin, Xiaohongshu, or Bilibili are the right
+        discovery surfaces for this use case
+      - what platform/compliance constraints affect claims and title wording
+
+      Exclude:
+      - US-only Spotify advice
+      - generic TikTok marketing tips
+      - uncited claims about Chinese Gen Z
+    markets: ["China"]
+    locales: ["zh-CN"]
+    platforms: ["Xiaohongshu", "Douyin", "Bilibili", "Ximalaya"]
+    source_preferences:
+      - "Simplified Chinese platform docs and industry reports"
+      - "China-native consumer research"
+    exclusions:
+      - "US-only Spotify advice"
+      - "generic TikTok marketing tips"
+
+  - id: japan_line_funnel
+    prompt_id: platform
+    title: "Japan LINE and Rakuten funnel prompt repair"
+    issue_description: >
+      Pearl_Research needs a stronger Japan-native prompt before deciding how
+      Phoenix Omega should update the Japan LINE freebie funnel, Rakuten Kobo
+      positioning, and audiobook metadata assumptions.
+    transcript: |
+      Session notes:
+      The previous output was plausible but thin. It mixed US email funnel logic
+      into Japan, assumed generic "mobile-first" behavior, and did not prove
+      the LINE cadence or Rakuten/Amazon JP split with Japanese sources.
+
+      Failing output:
+      - no Japanese-language source requirement
+      - no LINE Official Account / LIFF / rich menu evidence
+      - no Rakuten Kobo vs Amazon JP vs Audible Japan comparison
+      - no language/register guidance for self-help funnel copy
+
+      Decision:
+      Should the Japan lane use Rakuten Chat AI / Japan-native deep research
+      before Phoenix changes config/funnel/line_jp/oa_brand_registry.yaml and
+      downstream metadata rules?
+
+      Missing evidence:
+      - current LINE OA read/click behavior
+      - Japanese self-help/audiobook discovery terms
+      - platform policy constraints and metadata norms
+      - what not to import from US email funnels
+
+      Do not include generic global advice. Surface contradictions and open risks.
+    markets: ["Japan"]
+    locales: ["ja-JP"]
+    platforms: ["LINE", "Rakuten Kobo", "Audible Japan", "Amazon JP"]
+    source_preferences:
+      - "Japanese-language platform docs"
+      - "Japanese market reports and trade press"
+    exclusions:
+      - "generic global funnel advice"
+      - "US-only email marketing benchmarks"
+
+  - id: global_social_media_pipeline
+    prompt_id: semantic_trend
+    title: "Global social media pipeline research prompt repair"
+    issue_description: >
+      Phoenix Omega needs a global deep-research prompt to decide how to build
+      a reusable book-to-social pipeline across YouTube Shorts, Instagram,
+      TikTok, Pinterest, and email without overfitting to one platform.
+    transcript: |
+      Messy session:
+      Pearl_Research came back with a decent but shallow summary: "repurpose
+      book content into social posts." That is not enough for implementation.
+
+      What is broken:
+      - no decision framework for which platforms get which content shapes
+      - no evidence-backed cadence or asset-sizing recommendations
+      - no comparison between educational clips, quote cards, carousel posts,
+        freebie captures, and email proof-loop reuse
+      - no source-quality rules
+
+      Decision needed:
+      What should Phoenix Omega automate first: extraction, captions, image
+      generation, video assembly, scheduling, or analytics feedback?
+
+      Unknowns:
+      - what current platform mechanics matter in 2026
+      - which formats lead to owned-list capture instead of vanity engagement
+      - what should be excluded from automation because it needs human review
+
+      Good output should include implementation implications for Phoenix Omega,
+      tables, recommended action, open risks, and provenance.
+    markets: ["Global"]
+    locales: ["en-US"]
+    platforms: ["YouTube Shorts", "Instagram", "TikTok", "Pinterest", "Email"]
+    source_preferences:
+      - "official platform docs"
+      - "credible creator economy reports"
+      - "current benchmark studies with methods"
+    exclusions:
+      - "single-platform hacks"
+      - "generic content marketing advice"

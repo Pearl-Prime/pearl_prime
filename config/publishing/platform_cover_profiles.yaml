@@ -1,0 +1,225 @@
+# Platform Cover Output Profiles
+# Authority: docs/authoring/BOOK_COVER_UNIFIED_RESEARCH_2026-07-01.md §3 (platform matrix),
+#            §4 (2026-07-01 web-revalidated launch-critical numbers), §7 lane 1.
+# Lead audit: artifacts/release/COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md
+# Export contract: docs/authoring/AUTHOR_COVER_ART_SPEC.md §6 (PNG+JPEG, JPEG quality-step ≤2MB), §8.
+#
+# WHAT THIS IS
+#   One machine-readable registry of per-platform cover OUTPUT profiles so exporters
+#   (lanes 3-4, after PR #4269) read sizes / formats / safe-areas from config instead
+#   of hardcoding. Pure DATA — no render code, no resize logic here.
+#
+# WHAT THIS IS NOT
+#   Not a render config. Not a design spec. Platform is the non-destructive L5
+#   adaptation layer (Q-LEVELS-01 default, OPD-20260701-001): a profile sets only
+#   aspect / size / format / safe-area — it NEVER changes the core L1-L4 design.
+#   The two-stage doctrine still holds: FLUX renders imagery only; PIL composites
+#   text within the safe_area/text_zone hints below. No text-in-FLUX-prompt guidance.
+#
+# LAUNCH PRIORITY (Q-PLATFORM-PRIORITY-01 default, OPD-20260701-001):
+#   0 = KDP (current output already matches)
+#   1 = Google Play ebook + Kobo   (the 3:4 ebook gap — first targets beyond KDP)
+#   2 = audiobook square            (Google Play audiobook + ACX + Findaway; 2400²→3000²)
+#   3 = everything else (Apple, B&N — already satisfied by the portrait master)
+#   Lanes 3-4 build exporters in this order.
+#
+# MASTER-RENDER NOTE (Q-PROFILE-MASTER-01 default): render once at the LARGEST size per
+#   family (portrait 2500×3500, square 3000×3000) then downscale per profile. That WIRING
+#   is lanes 3-4; this file only records the target sizes. See render_masters below.
+#
+# SCOPE NOTE (Q-PROFILE-EXTRA-01 default): ebook + audiobook only this lane. Print /
+#   paperback (KDP Print bleed/trim) is a LATER lane with different math — not encoded here.
+#
+# source_verified: 2026-07-01 for Google Play / Kobo / ACX (web-revalidated, research §4);
+#                  2026-04-10 for the rest (COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md).
+
+version: 1
+registry_type: platform_cover_profiles
+authority_doc: docs/authoring/BOOK_COVER_UNIFIED_RESEARCH_2026-07-01.md
+
+# Largest master per family; render once, downscale per profile (wiring = lanes 3-4).
+render_masters:
+  # Portrait master is the Kobo high-DPI 2500x3500 (research §4 "prefer for Kobo-first").
+  # NB: 2500x3500 is 5:7 (~0.714), taller than a pure 3:4 (0.75) — downscale/crop per
+  # profile aspect at export time (lanes 3-4). It comfortably covers KDP/GP/Apple/B&N portrait.
+  portrait: { width: 2500, height: 3500, aspect_ratio: "5:7", note: "Kobo high-DPI master; crop to each profile aspect on export" }
+  square:   { width: 3000, height: 3000, aspect_ratio: "1:1" }   # ACX future-proof master; covers GP audiobook + Findaway
+
+profiles:
+
+  # ---- launch_priority 0 : KDP (already matches current output) -------------------
+  kdp_ebook:
+    platform: "Amazon KDP"
+    surface: ebook
+    aspect_ratio: { ratio: "5:8", decimal: 0.625 }
+    size_recommended: { width: 1600, height: 2560 }
+    size_min: { width: 625, height: 1000 }
+    max_dimension: null
+    formats: [jpeg, tiff, png]         # jpeg/tiff on upload; png for EPUB embed
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 300
+    max_file_mb: 50
+    borders_allowed: true
+    letterbox_allowed: false
+    marketing_copy_allowed: true
+    safe_area: { top_pct: 6, bottom_pct: 6, left_pct: 6, right_pct: 6 }
+    launch_priority: 0
+    source_url: "https://kdp.amazon.com/en_US/help/topic/G200645690"
+    source_verified: "2026-04-10"
+    notes: "Ratio must be >= 1.6:1 (5:8 = 0.625). Current renderer output matches; do not change."
+
+  # ---- launch_priority 1 : Google Play ebook + Kobo (the 3:4 gap) -----------------
+  google_play_ebook:
+    platform: "Google Play Books"
+    surface: ebook
+    aspect_ratio: { ratio: "portrait", decimal: null }   # front cover inside EPUB; no fixed ratio
+    size_recommended: { width: 1600, height: 2560 }        # satisfied by portrait master
+    size_min: { min_dimension: 640 }                       # 640 min on the smaller dimension
+    max_dimension: 7200
+    formats: [jpeg, png, tiff, pdf]
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 300
+    max_file_mb: 2000                                      # file cap < 2 GB
+    borders_allowed: true
+    letterbox_allowed: false
+    marketing_copy_allowed: true
+    safe_area: { top_pct: 6, bottom_pct: 6, left_pct: 6, right_pct: 6 }
+    launch_priority: 1
+    source_url: "https://support.google.com/books/partner/answer/3424254"
+    source_verified: "2026-07-01"
+    notes: "EPUB must contain a front cover. Satisfied by the portrait master; min dimension 640."
+
+  kobo_ebook:
+    platform: "Kobo Writing Life"
+    surface: ebook
+    aspect_ratio: { ratio: "3:4", decimal: 0.75 }
+    # size_recommended is the ASPECT-EXACT 3:4 target (1920x2560 = 0.75, research §3.1
+    # "Need >=1920x2560"). size_high_dpi_master (2500x3500) is the research §4 "prefer for
+    # Kobo-first" master — note it is 5:7 (0.714), taller than a pure 3:4, so it is carried
+    # separately and NOT used for the aspect-decimal validation contract.
+    size_recommended: { width: 1920, height: 2560 }        # >= 1920x2560, exact 3:4 (research §3.1)
+    size_high_dpi_master: { width: 2500, height: 3500 }    # research §4 preferred high-DPI master (5:7, not pure 3:4)
+    size_min: { width: 1400, height: 1873 }                # REJECT below (research §4, 2026-07-01); ~0.748 ~= 3:4
+    max_dimension: null
+    formats: [jpg, png]                                    # RGB only; no CMYK, no TIFF
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 300
+    max_file_mb: 5
+    borders_allowed: true
+    letterbox_allowed: false
+    marketing_copy_allowed: true
+    safe_area: { top_pct: 6, bottom_pct: 6, left_pct: 6, right_pct: 6 }
+    launch_priority: 1
+    source_url: "https://kobowritinglife.zendesk.com/hc/en-us/articles/360059385711-Cover-Image-Tips"
+    source_verified: "2026-07-01"
+    notes: "KDP 5:8 (0.625) != Kobo 3:4 (0.75) — WRONG-ASPECT if a KDP 1600x2560 asset is submitted. Reject below 1400x1873; prefer 2500x3500."
+
+  # ---- launch_priority 2 : audiobook square (GP audiobook + ACX + Findaway) -------
+  google_play_audiobook:
+    platform: "Google Play Books"
+    surface: audiobook
+    aspect_ratio: { ratio: "1:1", decimal: 1.0 }
+    size_recommended: { width: 2400, height: 2400 }
+    size_min: { width: 1024, height: 1024 }
+    max_dimension: 7200
+    formats: [jpeg, png]
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 72
+    max_file_mb: 2000
+    borders_allowed: false
+    letterbox_allowed: false                               # no 3D mockup / letterbox
+    marketing_copy_allowed: true
+    safe_area: { top_pct: 8, bottom_pct: 8, left_pct: 8, right_pct: 8 }
+    launch_priority: 2
+    source_url: "https://support.google.com/books/partner/answer/14187606"
+    source_verified: "2026-07-01"
+    notes: "GAP — square not generated for the book path today. No 3D mockup or letterbox."
+
+  acx_audiobook:
+    platform: "ACX / Audible"
+    surface: audiobook
+    aspect_ratio: { ratio: "1:1", decimal: 1.0 }
+    size_recommended: { width: 3000, height: 3000 }        # future-proof (research §4 drift-up)
+    size_min: { width: 2400, height: 2400 }
+    max_dimension: null
+    formats: [jpg, png, tif]                               # export JPG for ACX
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 72
+    max_file_mb: 5
+    borders_allowed: false                                 # true square, NO borders/letterboxing
+    letterbox_allowed: false
+    marketing_copy_allowed: false                          # title+author only; NO marketing copy
+    safe_area: { top_pct: 8, bottom_pct: 8, left_pct: 8, right_pct: 8 }
+    launch_priority: 2
+    source_url: "https://help.acx.com/s/article/cover-art-requirements"
+    source_verified: "2026-07-01"
+    notes: "24-bit RGB, true square, no borders/letterboxing, < 5MB. Title + author required; no marketing copy. Export JPG."
+
+  findaway_voices_audiobook:
+    platform: "Google Play / Voices by INaudio (Findaway)"
+    surface: audiobook
+    aspect_ratio: { ratio: "1:1", decimal: 1.0 }
+    size_recommended: { width: 2400, height: 2400 }
+    size_min: { width: 2400, height: 2400 }
+    max_dimension: null
+    formats: [jpeg, png]                                   # JPEG preferred (<= 2MB upload)
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 72
+    max_file_mb: 2
+    borders_allowed: false
+    letterbox_allowed: false
+    marketing_copy_allowed: false                          # strip any "AUDIOBOOK" badge; unbadged variant
+    safe_area: { top_pct: 8, bottom_pct: 8, left_pct: 8, right_pct: 8 }
+    launch_priority: 2
+    source_url: "https://help.acx.com/s/article/cover-art-requirements"
+    source_verified: "2026-04-10"
+    notes: "No borders/letterboxing. Rejects auto-generated/template-stamped look. Submit UNBADGED (strip 'AUDIOBOOK' callouts). JPEG <= 2MB."
+
+  # ---- launch_priority 3 : already satisfied by the portrait master ---------------
+  apple_books_ebook:
+    platform: "Apple Books"
+    surface: ebook
+    aspect_ratio: { ratio: "portrait", decimal: null }
+    size_recommended: { width: 1600, height: 2560 }
+    size_min: { min_dimension: 1400 }                      # 1400 on the short side
+    max_dimension: null
+    formats: [jpeg, png]
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 300
+    max_file_mb: null
+    borders_allowed: true
+    letterbox_allowed: false
+    marketing_copy_allowed: true
+    safe_area: { top_pct: 6, bottom_pct: 6, left_pct: 6, right_pct: 6 }
+    launch_priority: 3
+    source_url: "https://help.apple.com/itc/booksassetguide/en.lproj/itc1bda991ba.html"
+    source_verified: "2026-04-10"
+    notes: "Do not upscale small sources. Interior image cap ~5.6 Mpx. Satisfied by portrait master; 1400 short-side min."
+
+  barnes_noble_ebook:
+    platform: "B&N / NOOK Press"
+    surface: ebook
+    aspect_ratio: { ratio: "portrait", decimal: null }
+    size_recommended: { width: 1400, height: 1400 }        # >= 1400x1400
+    size_min: { width: 750, height: 750 }
+    max_dimension: null
+    formats: [jpg, png]
+    color_mode: RGB
+    dpi_min: 72
+    dpi_recommended: 72
+    max_file_mb: 2                                          # 5 KB - 2 MB
+    borders_allowed: true
+    letterbox_allowed: false
+    marketing_copy_allowed: true
+    safe_area: { top_pct: 6, bottom_pct: 6, left_pct: 6, right_pct: 6 }
+    launch_priority: 3
+    source_url: "https://artifacts/release/COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md"
+    source_verified: "2026-04-10"
+    notes: "5 KB - 2 MB. Satisfied by the portrait master."

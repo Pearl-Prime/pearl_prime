@@ -1,0 +1,356 @@
+{
+  "plan_hash": "c7372b6765ded83e320de55921e64b19",
+  "plan_id": "c7372b6765ded83e320de55921e64b19",
+  "chapter_slot_sequence": [
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "INTEGRATION"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION"
+    ]
+  ],
+  "atom_ids": [
+    "educators_anxiety_HOOK_v08",
+    "educators_anxiety_SCENE_v14",
+    "educators_anxiety_REFLECTION_v11",
+    "educators_anxiety_INTEGRATION_v02",
+    "educators_anxiety_shame_RECOGNITION_v02",
+    "educators_anxiety_HOOK_v11",
+    "educators_anxiety_SCENE_v10",
+    "educators_anxiety_REFLECTION_v29",
+    "educators_anxiety_EXERCISE_v13",
+    "educators_anxiety_INTEGRATION_v01",
+    "educators_anxiety_grief_TURNING_POINT_v03",
+    "educators_anxiety_HOOK_v27",
+    "educators_anxiety_SCENE_v20",
+    "educators_anxiety_REFLECTION_v01",
+    "educators_anxiety_EXERCISE_v16",
+    "educators_anxiety_INTEGRATION_v03",
+    "educators_anxiety_spiral_RECOGNITION_v04",
+    "educators_anxiety_HOOK_v07",
+    "educators_anxiety_SCENE_v21",
+    "educators_anxiety_REFLECTION_v13",
+    "educators_anxiety_INTEGRATION_v05",
+    "educators_anxiety_shame_RECOGNITION_v04",
+    "educators_anxiety_HOOK_v06",
+    "educators_anxiety_SCENE_v27",
+    "educators_anxiety_REFLECTION_v21",
+    "educators_anxiety_EXERCISE_v07",
+    "educators_anxiety_INTEGRATION_v04",
+    "educators_anxiety_HOOK_v25",
+    "educators_anxiety_SCENE_v04",
+    "educators_anxiety_REFLECTION_v27",
+    "educators_anxiety_INTEGRATION_v06",
+    "educators_anxiety_HOOK_v15",
+    "educators_anxiety_SCENE_v28",
+    "educators_anxiety_REFLECTION_v03",
+    "educators_anxiety_EXERCISE_v09",
+    "educators_anxiety_INTEGRATION_v07",
+    "educators_anxiety_HOOK_v19",
+    "educators_anxiety_SCENE_v29",
+    "educators_anxiety_REFLECTION_v19",
+    "educators_anxiety_EXERCISE_v22",
+    "placeholder:INTEGRATION:ch7:slot4"
+  ],
+  "dominant_band_sequence": [
+    2,
+    3,
+    4,
+    4,
+    null,
+    null,
+    null,
+    null
+  ],
+  "arc_id": "educators_anxiety_overwhelm_8",
+  "emotional_temperature_sequence": [
+    "cool",
+    "cool",
+    "warm",
+    "warm",
+    "warm",
+    "hot",
+    "hot",
+    "warm"
+  ],
+  "exercise_chapters": [
+    1,
+    2,
+    4,
+    6,
+    7
+  ],
+  "slot_sig": "MOD_pocket_guide:7b49b9c6cfb7a19e",
+  "format_id": "MOD_pocket_guide",
+  "runtime_format_id": "",
+  "output_format_id": "pocket_guide",
+  "output_format_name": "Pocket Guide",
+  "v4_freeze_enabled": true,
+  "locale": "en-US",
+  "territory": "US",
+  "atoms_model": "cluster",
+  "engine_id": "overwhelm",
+  "angle_id": "at_work",
+  "reflection_strategy_sequence": [
+    "didactic",
+    "socratic",
+    "narrative_embedded",
+    "didactic",
+    "socratic",
+    "narrative_embedded",
+    "didactic",
+    "socratic"
+  ],
+  "chapter_archetypes": [
+    "intro_hook_heavy",
+    "deepen_mechanism",
+    "deepen_mechanism",
+    "challenge_cost",
+    "resolve_integration",
+    "legacy_uniform",
+    "practice_heavy",
+    "resolve_integration"
+  ],
+  "chapter_exercise_modes": [
+    "none",
+    "micro",
+    "micro",
+    "none",
+    "micro",
+    "none",
+    "full",
+    "micro"
+  ],
+  "chapter_reflection_weights": [
+    "light",
+    "standard",
+    "standard",
+    "heavy",
+    "standard",
+    "standard",
+    "light",
+    "standard"
+  ],
+  "chapter_story_depths": [
+    "standard",
+    "standard",
+    "standard",
+    "deep",
+    "micro",
+    "standard",
+    "micro",
+    "micro"
+  ],
+  "narrator_id": "default_narrator",
+  "cover_art_base": "assets/authors/cover_art/ahjan_base.png",
+  "cover_art_style_hint": "contemplative",
+  "cover_art_palette_tokens": [
+    "contemplative"
+  ],
+  "cover_variant_id": "ahjan",
+  "emotional_role_sequence": [
+    "recognition",
+    "destabilization",
+    "destabilization",
+    "reframe",
+    "stabilization",
+    "reframe",
+    "stabilization",
+    "integration"
+  ],
+  "emotional_role_sig": "r-d-d-f-s-f-s-i",
+  "book_structure_id": "linear_transformation",
+  "journey_shape_id": "linear_rise",
+  "motif_id": "motif_cost",
+  "section_reorder_mode": "local_reflection_integration",
+  "reframe_profile_id": "balanced",
+  "variation_chapter_archetypes": [
+    "establish",
+    "expose",
+    "destabilize",
+    "reframe",
+    "stabilize",
+    "integrate",
+    "establish",
+    "expose"
+  ],
+  "variation_signature": "7b0477ca5b57984858196c8b70835c45",
+  "motif_injections": [
+    {
+      "chapter_index": 0,
+      "slot_index": 2,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 0,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 4,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 2,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 3,
+      "slot_index": 2,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 3,
+      "slot_index": 4,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 4,
+      "slot_index": 2,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 4,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 5,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 6,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    }
+  ],
+  "reframe_injections": [
+    {
+      "chapter_index": 0,
+      "slot_index": 2,
+      "line_type": "constraint",
+      "text": "You don't have to do it all at once."
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 2,
+      "line_type": "worldview",
+      "text": "Change happens in relationship, not in isolation."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 2,
+      "line_type": "micro_reframe",
+      "text": "You're not behind; you're exactly where you are."
+    },
+    {
+      "chapter_index": 3,
+      "slot_index": 2,
+      "line_type": "constraint",
+      "text": "Progress isn't linear."
+    },
+    {
+      "chapter_index": 4,
+      "slot_index": 2,
+      "line_type": "worldview",
+      "text": "Your nervous system is doing its best."
+    },
+    {
+      "chapter_index": 5,
+      "slot_index": 2,
+      "line_type": "micro_reframe",
+      "text": "One breath can reset the script."
+    },
+    {
+      "chapter_index": 6,
+      "slot_index": 2,
+      "line_type": "constraint",
+      "text": "You don't have to do it all at once."
+    },
+    {
+      "chapter_index": 7,
+      "slot_index": 2,
+      "line_type": "worldview",
+      "text": "Safety comes before growth."
+    }
+  ],
+  "freebie_bundle": [
+    "breath_reset_structured_v1"
+  ],
+  "cta_template_id": "tool_forward",
+  "freebie_slug": "anxiety-educators-breath-reset-structured-v1",
+  "freebie_bundle_with_formats": [
+    {
+      "freebie_id": "breath_reset_structured_v1",
+      "formats": [
+        "html"
+      ]
+    }
+  ],
+  "topic_id": "anxiety",
+  "persona_id": "educators"
+}

@@ -1,0 +1,99 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety
+brand: somatic_wisdom
+teacher: pamela_fellows
+persona: healthcare_rns
+topic: anxiety
+byline_author: dora_devlin
+arc:
+  installment_1:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Body-based, trauma-informed companions for nurses whose nervous
+  systems never clocked out — meeting the anxiety in the body that carries other people's
+  emergencies, without one more protocol to push through.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case that the
+  body, not willpower, holds anxiety and trauma, written for the reader who lives
+  that truth in her own chest.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
+  names that finishing a shift is not the same as finishing the stress, which is exactly
+  the gap a nurse falls into nightly.'
+- 'Anchored: How to Befriend Your Nervous System (Deb Dana) — polyvagal, gentle, body-first;
+  treats the nervous system as something to be met and soothed rather than fixed or
+  overridden.'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28 to 52
+  where_they_are: It's 11:40pm, the shift ended forty minutes ago, and she's sitting
+    in her car in the hospital parking structure with the engine off. Her hands are
+    finally still but her chest isn't. The unit is behind her, but her body hasn't
+    been told. Her shoulders are still up around her ears the way they've been since
+    report, and she can't remember the last time she felt them come down.
+  what_they_need: To understand that the alarm in her body is not a character flaw
+    or a sign she isn't cut out for this — it's a nervous system that learned to stay
+    ready, and can be taught, gently and on its own timeline, that it's allowed to
+    come down. Practices she can do in a supply closet, a car, a break that got cut
+    short.
+  what_they_avoid: Self-care that sounds like another assignment. 'Just breathe' from
+    someone who has never run a code. Bubble baths and gratitude lists. Anything that
+    says push through, override it, mind over matter — she already pushes through
+    for a living, and her body is the one keeping the receipt.
+series_voice_markers:
+  register: embodied, grounded, gently somatic; trauma-informed; speaks from and to
+    a body that has been holding too much for too long; the voice of a colleague who
+    finally sat down beside you, not a charge nurse and not a clinician with a worksheet
+  sentence_rhythm: long settling sentences that let the breath out, broken by short
+    ones that land like a hand on the shoulder; unhurried, never clipped; the pacing
+    of someone who knows you don't rush a nervous system
+  metaphor_family: the felt sense; breath and ground; tension held in the jaw, shoulders,
+    the floor of the belly, and slowly released; the nervous system settling like
+    weather passing; warmth returning to a place that braced; the body as something
+    that kept you safe and is allowed, now, to rest
+_needs_authoring: false

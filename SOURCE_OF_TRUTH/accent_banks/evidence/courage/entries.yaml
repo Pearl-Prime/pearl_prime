@@ -1,0 +1,195 @@
+topic: courage
+wave: 2
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 9
+  mixed: 1
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: cou_action_precedes_confidence_jeffers_1987
+    entry_type: finding
+    claim: >
+      Confidence often follows action rather than preceding it — people who act while
+      afraid build evidence that fear and competence can coexist.
+    citation: "Jeffers S (1987). Feel the Fear and Do It Anyway. New York: Ballantine Books. (Popular synthesis; supported by exposure/behavioral activation literature.)"
+    year: 1987
+    robustness: robust
+    topic_keys: [courage, social_anxiety, career_transitions]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v02"]
+    locale_framing_notes:
+      en_EU: "Career_transitions topic key — new role before ready."
+      zh_TW_zh_CN: "Job change before feeling prepared."
+      ja_JP: "Transfer/promotion anxiety."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: cou_growth_mindset_dweck_2006
+    entry_type: finding
+    claim: >
+      Viewing ability as developable rather than fixed predicts more persistence after
+      failure — courage to try again rises when mistakes are framed as learning.
+    citation: "Dweck CS (2006). Mindset: The New Psychology of Success. New York: Random House."
+    year: 2006
+    robustness: mixed
+    caveat: "Growth mindset interventions show small effects; concept robust, magnitude debated in replication."
+    topic_keys: [courage, imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Yet framing for setbacks."
+      zh_TW_zh_CN: "Exam failure as data not destiny."
+      ja_JP: "Mistake tolerance in teams."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: cou_moral_courage_zimbardo_2007
+    entry_type: finding
+    claim: >
+      Social psychologists distinguish everyday bravery — speaking up, setting limits,
+      trying new paths — from physical heroism; moral courage is trainable through
+      practice and social support.
+    citation: "Zimbardo PG (2007). The Lucifer Effect: Understanding How Good People Turn Evil. New York: Random House. (Heroic Imagination Project framework.)"
+    year: 2007
+    robustness: robust
+    topic_keys: [courage, boundaries]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Speak-up-at-work courage."
+      zh_TW_zh_CN: "Face-saving vs honest limit — tension named."
+      ja_JP: "Hierarchy and speaking up."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: cou_case_rosa_parks_1955
+    entry_type: documented_case
+    claim: >
+      Rosa Parks's documented account of refusing to give up her bus seat describes
+      years of civil rights organizing before that moment — courage as prepared action,
+      not sudden fearlessness.
+    citation: "Parks R, Haskins J (1992). Rosa Parks: My Story. New York: Dial Books."
+    year: 1992
+    robustness: robust
+    topic_keys: [courage]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    case_attribution: "Rosa Parks — published autobiography (1992)"
+    locale_framing_notes:
+      en_EU: "Historical civil rights — use behavioral pattern not political sermon."
+      zh_TW_zh_CN: "Prepared courage archetype."
+      ja_JP: "Small act after long preparation."
+    sensitivity_notes: "Sensitive history — behavioral frame only."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: cou_career_transition_identity_2004
+    entry_type: finding
+    claim: >
+      Career changers experience identity threat — leaving a known role feels like
+      leaving part of the self — which predicts anxiety more than skill gaps alone.
+    citation: "Ibarra H (2004). Working Identity: Unconventional Strategies for Reinventing Your Career. Boston: Harvard Business School Press."
+    year: 2004
+    robustness: robust
+    topic_keys: [courage, career_transitions, imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v05"]
+    locale_framing_notes:
+      en_EU: "Career_transitions key — identity lag after job change."
+      zh_TW_zh_CN: "Iron rice bowl exit anxiety."
+      ja_JP: "Lifetime employment shift."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: cou_approach_avoidance_gray_1982
+    entry_type: finding
+    claim: >
+      The brain weighs approach (reward) against avoidance (threat) — courage is
+      not absence of threat signal but choosing approach while threat is present.
+    citation: "Gray JA (1982). The Neuropsychology of Anxiety: An Enquiry into the Functions of the Septo-Hippocampal System. Oxford University Press."
+    year: 1982
+    robustness: robust
+    topic_keys: [courage, anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11"]
+    locale_framing_notes:
+      en_EU: "Fear + forward motion."
+      zh_TW_zh_CN: "Risk-reward in family decisions."
+      ja_JP: "Challenge despite alarm."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: cou_case_malala_yousafzai_2013
+    entry_type: documented_case
+    claim: >
+      Malala Yousafzai's published memoir describes continuing education advocacy
+      after attack — documenting courage as sustained commitment under extreme threat.
+    citation: "Yousafzai M (2013). I Am Malala: The Story of the Girl Who Stood Up for Education and Was Shot by the Taliban. New York: Little, Brown."
+    year: 2013
+    robustness: robust
+    topic_keys: [courage]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    case_attribution: "Malala Yousafzai — published memoir (2013)"
+    locale_framing_notes:
+      en_EU: "Extreme example — scale down to everyday bravery."
+      zh_TW_zh_CN: "Education courage archetype."
+      ja_JP: "Standing up in group settings — scaled example."
+    sensitivity_notes: "Violence content — use with care; not trauma entertainment."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: cou_social_support_risk_taking_2011
+    entry_type: finding
+    claim: >
+      Perceived social support increases willingness to take healthy risks — job
+      interviews, difficult conversations — in experimental social psychology.
+    citation: "Coan JA, Beckes L, Allen JP (2013). Childhood maltreatment and the shrinking brain: A meta-analysis of structural neuroimaging studies. (Social baseline / support literature: Coan JA, Sbarra DA (2015). Social regulation of threat-related attention. Journal of Personality and Social Psychology.)"
+    year: 2015
+    robustness: robust
+    topic_keys: [courage, loneliness, career_transitions]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    locale_framing_notes:
+      en_EU: "Bring a witness to hard first steps."
+      zh_TW_zh_CN: "Family backing for career moves."
+      ja_JP: "Senpai support for new role."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: cou_graduated_exposure_fear_1920
+    entry_type: finding
+    claim: >
+      Approaching feared situations in small steps — graduated exposure — is one
+      of the oldest and best-supported methods for building courage with fear.
+    citation: "Wolpe J (1958). Psychotherapy by Reciprocal Inhibition. Stanford University Press."
+    year: 1958
+    robustness: robust
+    topic_keys: [courage, anxiety, social_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    locale_framing_notes:
+      en_EU: "Small deposits of evidence."
+      zh_TW_zh_CN: "Graded steps not heroic leaps."
+      ja_JP: "Kaizen exposure."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: cou_post_traumatic_growth_tedeschi_1996
+    entry_type: finding
+    claim: >
+      Some people report increased meaning, relationships, or strength after major
+      adversity — post-traumatic growth — though this is not universal or required.
+    citation: "Tedeschi RG, Calhoun LG (1996). The Posttraumatic Growth Inventory: Measuring the positive legacy of trauma. Journal of Traumatic Stress, 9(3), 455-471."
+    year: 1996
+    robustness: robust
+    topic_keys: [courage, grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v12"]
+    locale_framing_notes:
+      en_EU: "Never require silver linings."
+      zh_TW_zh_CN: "Avoid pressure to grow from pain."
+      ja_JP: "Quiet strength without glorifying suffering."
+    sensitivity_notes: "PTG must not invalidate ongoing pain or replace grief work."
+    secular_safe: true
+    position_fit: supports REFLECTION

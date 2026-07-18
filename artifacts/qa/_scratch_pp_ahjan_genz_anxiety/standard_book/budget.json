@@ -1,0 +1,1024 @@
+{
+  "total_words": 13000,
+  "chapter_count": 12,
+  "chapters": [
+    {
+      "chapter": 1,
+      "working_title": "The Alarm That Won't Stop Ringing",
+      "words": 1839,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 30,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 58,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 53,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 52,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 22,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 53,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 54,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 55,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 34,
+          "source": "depth_module:recognition_depth:teacher_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 400,
+          "source": "depth_module:recognition_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 24,
+          "source": "depth_module:recognition_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 88,
+          "source": "depth_module:story_scene:teacher_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 500,
+          "source": "depth_module:story_scene:persona_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 24,
+          "source": "depth_module:story_scene:registry_variant"
+        },
+        {
+          "type": "DEPTH_PERSONA_SPECIFICITY",
+          "target_words": 300,
+          "actual_words": 300,
+          "source": "depth_module:persona_specificity:persona_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "working_title": "When The Alarm Made Sense",
+      "words": 1968,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 31,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 59,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 45,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 56,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 22,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 85,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 56,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 46,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 42,
+          "source": "depth_module:recognition_depth:teacher_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 400,
+          "source": "depth_module:recognition_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 24,
+          "source": "depth_module:recognition_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 185,
+          "source": "depth_module:story_scene:teacher_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 500,
+          "source": "depth_module:story_scene:persona_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 24,
+          "source": "depth_module:story_scene:registry_variant"
+        },
+        {
+          "type": "DEPTH_PERSONA_SPECIFICITY",
+          "target_words": 300,
+          "actual_words": 300,
+          "source": "depth_module:persona_specificity:persona_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "working_title": "The Pattern Running Your Nervous System",
+      "words": 1696,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 30,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 61,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 89,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 58,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 23,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 83,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 50,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 55,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 375,
+          "actual_words": 38,
+          "source": "depth_module:recognition_depth:teacher_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 400,
+          "source": "depth_module:recognition_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 24,
+          "source": "depth_module:recognition_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 168,
+          "source": "depth_module:story_scene:teacher_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 500,
+          "source": "depth_module:story_scene:persona_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 24,
+          "source": "depth_module:story_scene:registry_variant"
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "working_title": "What The Alarm Actually Does To Your Body",
+      "words": 1254,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 38,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 62,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 92,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 46,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 30,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 84,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 56,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 57,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 360,
+          "actual_words": 173,
+          "source": "depth_module:story_scene:teacher_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 500,
+          "source": "depth_module:story_scene:persona_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 24,
+          "source": "depth_module:story_scene:registry_variant"
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "working_title": "What Living On Alert Actually Costs",
+      "words": 1886,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 30,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 63,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 89,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 54,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 22,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 96,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 61,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 55,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 354,
+          "actual_words": 46,
+          "source": "depth_module:mechanism_depth:teacher_atom"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 46,
+          "source": "depth_module:mechanism_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 600,
+          "source": "depth_module:mechanism_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_SOMATIC_DETAIL",
+          "target_words": 300,
+          "actual_words": 300,
+          "source": "depth_module:somatic_detail:exercise_atom"
+        },
+        {
+          "type": "DEPTH_SOMATIC_DETAIL",
+          "target_words": 300,
+          "actual_words": 89,
+          "source": "depth_module:somatic_detail:teacher_atom"
+        },
+        {
+          "type": "DEPTH_SOMATIC_DETAIL",
+          "target_words": 300,
+          "actual_words": 149,
+          "source": "depth_module:somatic_detail:practice_library"
+        },
+        {
+          "type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "target_words": 400,
+          "actual_words": 47,
+          "source": "depth_module:consequence_exposure:teacher_atom"
+        },
+        {
+          "type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "target_words": 400,
+          "actual_words": 46,
+          "source": "depth_module:consequence_exposure:registry_variant"
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "working_title": "Letting The Alarm Ring",
+      "words": 1354,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 34,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 51,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 83,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 62,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 30,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 46,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 56,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 52,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 410,
+          "actual_words": 50,
+          "source": "depth_module:mechanism_depth:teacher_atom"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 46,
+          "source": "depth_module:mechanism_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 600,
+          "source": "depth_module:mechanism_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_SOMATIC_DETAIL",
+          "target_words": 151,
+          "actual_words": 151,
+          "source": "depth_module:somatic_detail:exercise_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "working_title": "Small Exposures",
+      "words": 508,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 33,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 60,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 91,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 48,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 20,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 6,
+          "source": "gap"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 84,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 62,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 57,
+          "source": "teacher_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "working_title": "When The Alarm Screams",
+      "words": 485,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 34,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 60,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 89,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 50,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 21,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 6,
+          "source": "gap"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 66,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 60,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 52,
+          "source": "teacher_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "working_title": "When Your Body Learns It's Safe",
+      "words": 497,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 29,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 63,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 68,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 56,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 28,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 46,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 62,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 52,
+          "source": "teacher_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "working_title": "When The Alarm Comes Back",
+      "words": 516,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 38,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 59,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 45,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 56,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 22,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 82,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 63,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 57,
+          "source": "teacher_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "working_title": "Living With The Alarm On Low",
+      "words": 512,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 31,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 58,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 78,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 62,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 28,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 47,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 68,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 46,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 48,
+          "source": "teacher_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 12,
+      "working_title": "The Life That's Possible Now",
+      "words": 485,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 100,
+          "actual_words": 28,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 104,
+          "actual_words": 60,
+          "source": "persona_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 85,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 101,
+          "actual_words": 46,
+          "source": "persona_atom"
+        },
+        {
+          "type": "TEACHER_DOCTRINE",
+          "target_words": 93,
+          "actual_words": 20,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "REFLECTION",
+          "target_words": 77,
+          "actual_words": 46,
+          "source": "registry"
+        },
+        {
+          "type": "EXERCISE",
+          "target_words": 104,
+          "actual_words": 45,
+          "source": "teacher_atom"
+        },
+        {
+          "type": "SCENE",
+          "target_words": 93,
+          "actual_words": 57,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 64,
+          "actual_words": 52,
+          "source": "teacher_atom"
+        }
+      ]
+    }
+  ],
+  "source": "spine_pipeline",
+  "word_count": 12236,
+  "pre_depth_total_words": 6134,
+  "post_depth_total_words": 13000
+}

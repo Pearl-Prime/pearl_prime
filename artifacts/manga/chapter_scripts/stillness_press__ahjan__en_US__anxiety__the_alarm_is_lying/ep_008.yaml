@@ -1,0 +1,456 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 8
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_008 — "Thursday, 7:23 PM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_007:
+#   Three days later. The practice as returning, not destination, has
+#   settled. Tonight: first date with Kenji — someone Mira met through
+#   a friend last month. Different relational stakes than mother / Yara /
+#   coworkers. New activation: vulnerability with someone new.
+#
+# Episode arc — vulnerability with a stranger:
+#   safety opening (apartment, getting ready, slow) → ramp (walking
+#   to the wine bar) → ground (arrival, eye contact) → climax (Mira
+#   shares something true about her week — small honesty, not big
+#   confession) → ground (Kenji's response steady, not heroic) →
+#   Long Drop (walking home alone, late evening) → completion (kitchen,
+#   tea, "I let him see me. He stayed.")
+#
+# SCROLL THERAPEUTIC TEST:
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (mirror + warm bathroom light)
+#   2. ≥3 oscillations activation/ground ...... ✓ 3 oscillations
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~7 activation / ~22 ground panels
+#   4. Closes with completion ................. ✓ panels 27-29 settle
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS:
+#   Tea Beat (panel 28 closing — kettle bookend returns after absence in ep_007)
+#   Anchor Panel — wine bar window plant (panel 11) + apartment succulent
+#     (panels 1, 29) — anchor migrates
+#   Awe-Pullback (panel 14 — wine bar interior wide, candle-lit)
+#   Pendulation Pair (4-6 ↔ 7-9, 13-15 ↔ 16-18, 19-21 ↔ 22-23)
+#   Long Drop (panel 24 — walking-home silent solo, dark streets + windows)
+#   Continuity callback: jade pendant (panels 7, 17 — both as ground, not
+#   fidget — practice settled back after ep_007's nuance lesson)
+#
+# DOCTRINAL ANCHOR:
+#   Vulnerability with a stranger is the next-level test. Kenji is not
+#   an old pattern (like mother), not a peer with shared context (like
+#   Yara), not a colleague (like Dr. Morimoto). He is a new person. The
+#   practice: choose to be seen, without explaining yourself first. The
+#   reader leaves knowing Mira allowed real contact.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_008
+title: "The Alarm Is Lying — Episode 8: Thursday, 7:23 PM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist
+    visual_anchor: "long brown hair down (date register), cream silk blouse + dark jeans, jade pendant visible at neckline, small gold earrings, light makeup"
+  - id: kenji
+    name: Kenji Tanaka
+    age: 35
+    role: "Mira's date (architect; quietly thoughtful; speaks 6-7 lines; not romantic-savior, just a person who is also showing up)"
+    visual_anchor: "short black hair with a small natural wave, round wire glasses, soft olive-green button-down over a dark t-shirt, dark grey trousers"
+
+scene_palette:
+  primary: warm evening gold + cream
+  secondary: deep wine bar amber + soft candlelight gold
+  accent: jade green (Mira's pendant + a small wine bar plant on the bar shelf)
+  wine_bar_palette: low amber + dark wood + candle warmth
+  walk_home_palette: soft purple streetlight + apartment windows golden
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (29 panels)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_008_p01
+    panels:
+
+      # ── OPENING — apartment, getting ready ─────────────────────────────
+      - panel_id: ep008_001
+        scene: |
+          Close-up — a small bathroom mirror, soft warm vanity light. The
+          jade pendant being fastened around Mira's neck from behind (her
+          hands visible). The mirror also catches the edge of a candle
+          (lit, slow flame). The kitchen succulent visible past the
+          bathroom doorway.
+        beat_type: ~
+        intent: "SAFETY CUE first 800 px — pendant ritual as date-prep grounding"
+        silence_confirmed: true
+
+      - panel_id: ep008_002
+        scene: |
+          Wider — Mira in the bathroom mirror, cream silk blouse, small
+          gold earrings, light makeup. She is studying her own face. Not
+          critical, not vain. Curious.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Thursday. Seven twenty-three."
+
+      - panel_id: ep008_003
+        scene: |
+          Close — Mira's hand on the bathroom counter beside the pendant.
+          A small ring with a green stone she sometimes wears. She picks
+          it up, turns it, sets it down. Doesn't put it on.
+        beat_type: micro
+        intent: "Small choice — restraint, not adornment"
+
+      # ── RAMP — walking out, the body knows ──────────────────────────────
+      - panel_id: ep008_004
+        scene: |
+          Wide — Mira leaving the apartment building, a small leather
+          jacket over her shoulders. Early evening, soft purple-gold sky.
+          The street has Thursday post-work warmth — restaurants opening
+          their doors, people walking dogs.
+        beat_type: standard
+
+      - panel_id: ep008_005
+        scene: |
+          Close on Mira walking, eyes forward. A small flutter visible
+          in the soft tension around her mouth.
+        beat_type: micro
+        intent: "Activation 1 — first-date anticipation; mild but real"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      # ── GROUND 1 — pendulation: streetscape ─────────────────────────────
+      - panel_id: ep008_006
+        scene: |
+          Mid-shot — Mira passing a small park along the way. A streetlight
+          just coming on. Her eyes go briefly to a tree branch, the
+          leaves backlit gold by the lamp. The same green family as her
+          pendant.
+        beat_type: spatial
+        intent: "ANCHOR — visual rhyme catches her without effort"
+
+      - panel_id: ep008_007
+        scene: |
+          Close — Mira's hand brushing the jade pendant once, gently. Not
+          fidget this time. A confirming touch.
+        beat_type: micro
+        intent: "Pendant as ground — distinguishing this from ep_007's fidget"
+
+      # ── ARRIVAL — wine bar ──────────────────────────────────────────────
+      - panel_id: ep008_008
+        scene: |
+          Wide — Mira pausing outside a wine bar. Warm amber light spilling
+          out through the window. Inside, low tables, candles, a small bar
+          counter. A few couples already seated. Through the glass: Kenji
+          waiting at a small table near the back, looking at his phone but
+          not anxiously.
+        beat_type: standard
+        intent: "Establishing the meeting space; Kenji visible in advance"
+
+      - panel_id: ep008_009
+        scene: |
+          Mira pushing the door open. A small bell sound. Warmth and amber
+          light coming over her face.
+        beat_type: spatial
+
+      # ── KENJI — first eye contact ───────────────────────────────────────
+      - panel_id: ep008_010
+        scene: |
+          Mid-shot — Kenji looking up, putting his phone away. He stands
+          briefly as Mira approaches. Olive-green shirt, round wire
+          glasses. A small genuine smile, not performed.
+        beat_type: standard
+        dialogue_lines:
+          - speaker: kenji
+            text_by_locale:
+              en_US: "Hey. I'm Kenji."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep008_011
+        scene: |
+          Close on the small wine bar plant on a wooden shelf beside the
+          table — a pothos, jade-green leaves trailing. The visual rhyme
+          extends into this new space.
+        beat_type: micro
+        intent: "ANCHOR migration — the green motif appears in the new place"
+
+      # ── EASY START — drinks, small talk ─────────────────────────────────
+      - panel_id: ep008_012
+        scene: |
+          Wider — Mira and Kenji seated, two glasses of wine arriving from
+          a server. Soft candlelight on the table, low conversation around.
+          Both leaning slightly forward, listening.
+        beat_type: standard
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Mira. Sorry I'm a few minutes late — the trains."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      - panel_id: ep008_013
+        scene: |
+          Close on Kenji — small headshake, smile.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kenji
+            text_by_locale:
+              en_US: "Always the trains. It's fine."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      # ── AWE-PULLBACK — wine bar interior wide ──────────────────────────
+      - panel_id: ep008_014
+        scene: |
+          Wide pullback of the wine bar interior. Low amber light, scattered
+          tables with couples and small groups. Mira and Kenji's table near
+          the back, candle in the middle. The bar counter on one side,
+          the front window glowing onto the dark street. Intentionally
+          over-wide.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — the date held in a wider warmth"
+
+      # ── ACTIVATION 2 — the choice to disclose ───────────────────────────
+      - panel_id: ep008_015
+        scene: |
+          Close on Mira — Kenji's question lingering in the air ("how has
+          your week been?"). The choice: small-talk version or honest.
+          The body knows what she is about to do.
+        beat_type: micro
+        intent: "Activation 2 — pre-disclosure beat"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      - panel_id: ep008_016
+        scene: |
+          Close on Mira's hand on the stem of the wine glass. Steadying.
+          Eyes briefly down at the candle on the table.
+        beat_type: micro
+
+      # ── GROUND 2 — the practice fires; she chooses honesty ─────────────
+      - panel_id: ep008_017
+        scene: |
+          Close — Mira's hand at the jade pendant, two fingers. A short
+          exhale. Eyes back up to Kenji.
+        beat_type: micro
+        intent: "Pendulation — practice as ground for the choice"
+
+      - panel_id: ep008_018
+        scene: |
+          Mid-shot — Mira speaking. Soft, unhurried.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Honestly? Long. Some of it hard. I had an honest conversation with my mom on Sunday I'd been avoiding for years."
+            intensity: tender
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      # ── KENJI'S RESPONSE — steady, not heroic ──────────────────────────
+      - panel_id: ep008_019
+        scene: |
+          Close on Kenji's face — receiving. Not leaning forward to fix,
+          not pulling back. Just listening. His glass set down without him
+          looking at it.
+        beat_type: micro
+        intent: "Witness — same gesture shape as Yara in ep_005 / mother in ep_006"
+
+      - panel_id: ep008_020
+        scene: |
+          Wider — Kenji speaking now, his hands loose on the table. Light
+          falls across his glasses.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kenji
+            text_by_locale:
+              en_US: "That sounds like the kind of thing that takes a year to recover from. Or maybe a year to feel grateful for. I don't know which yet."
+            intensity: tender
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep008_021
+        scene: |
+          Close on Mira's face — a real small laugh. The relief of being
+          heard without being fixed or performed-for.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Probably both."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      # ── GROUND 3 — the evening continues, easy ──────────────────────────
+      - panel_id: ep008_022
+        scene: |
+          Wider — both of them at the table, mid-conversation now. Soft
+          candlelight. Two wine glasses, one shared dish arriving — small
+          plates, olives and bread. Easy.
+        beat_type: standard
+        intent: "Settled register — the disclosure landed; the evening continues"
+
+      - panel_id: ep008_023
+        scene: |
+          Close — the candle on the table, the dish, Kenji's hand reaching
+          for a piece of bread. Mira's hand picking up an olive. Hands
+          near but not touching.
+        beat_type: micro
+        intent: "Sensory continuation — small shared food beat"
+
+      # ── LONG DROP — walking home alone ─────────────────────────────────
+      - panel_id: ep008_024
+        scene: |
+          Wide silent panel. Mira walking home alone, late evening now —
+          dark blue sky, golden streetlights, apartment windows glowing
+          warm. Her leather jacket on, hands in pockets. The street is
+          quiet, a few late strollers. The wine bar far behind her now.
+          NO TEXT, NO CAPTION, NO SFX.
+        beat_type: long_drop
+        intent: "LONG DROP — post-date integration. Reader exhales."
+        silence_confirmed: true
+        dialogue_lines: []
+
+      - panel_id: ep008_025
+        scene: |
+          Close — Mira's hand briefly at the jade pendant as she walks. A
+          small smile she doesn't perform. Just present.
+        beat_type: micro
+
+      - panel_id: ep008_026
+        scene: |
+          Mid-shot — Mira approaching her apartment building. The lobby
+          warm-lit ahead of her. A small inhale visible.
+        beat_type: spatial
+
+      # ── COMPLETION — kitchen, kettle, the practice has rooms ──────────
+      - panel_id: ep008_027
+        scene: |
+          Cut to Mira's kitchen. Late evening. She has shed the jacket,
+          unhooked the gold earrings (placed on the counter). Setting the
+          kettle on the stove. The succulent on the sill catching the
+          warm kitchen light.
+        beat_type: standard
+        intent: "Scene transition — street → kitchen"
+
+      - panel_id: ep008_028
+        scene: |
+          Close on the kettle, beginning to steam. Same kettle as ep_001-
+          006 (skipping ep_007). The bookend resumes.
+        beat_type: spatial
+        sfx_by_locale:
+          en_US: ["hsss..."]
+
+      - panel_id: ep008_029
+        scene: |
+          Final panel — Mira at the kitchen table with a fresh cup of
+          tea. Jade pendant still around her neck. The succulent visible
+          in the window behind her. Eyes peaceful, not tired. Caption
+          strip below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "I let him see me. He stayed."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 8 of 10. The vulnerability-with-a-stranger episode. Critical
+    placement: it follows ep_007's "practice is not a state" so that
+    the reader does NOT mistake this for "Mira is now fully healed and
+    ready for love." She is just present enough to let one honest
+    sentence land. Kenji is a possibility, not a resolution. Iyashikei
+    convention: no kiss, no romantic crescendo, no "happily ever after"
+    — just one shared evening that did not pretend.
+  pacing_vs_prior: |
+    29 panels. Roughly 7 activation / 22 ground (well within 1:2.5).
+    The wine bar scene is the longest sustained mid-distance setting
+    in the series so far (panels 10-23 = 14 panels in one venue). The
+    Long Drop at panel 24 is brief but tonally necessary.
+  continuity_callbacks: |
+    - Kettle bookend RETURNS (panel 28) after intentional absence in
+      ep_007's closing. The kettle is a marker of the evening register
+      finding its way back.
+    - Jade pendant as ground (panel 7, 17, 25) — explicitly ground,
+      not fidget. The series has now distinguished the two and ep_008
+      shows the practice settled back to its ground-meaning.
+    - Succulent on the kitchen sill (panel 1, 27, 29) — full visual
+      bracket on the episode
+    - Wine bar pothos plant (panel 11) — the green motif migrates into
+      the date-setting; the practice goes everywhere
+    - Smoke detector image — absent
+    - "It is not danger" caption — absent
+    - Cream silk blouse — date-register variation of cream sweater; same
+      color family character lock-in
+  kenji_handling: |
+    Six lines total. Kenji is fully a person, not a romantic device.
+    His response at panel 20 — "the kind of thing that takes a year
+    to recover from. Or maybe a year to feel grateful for. I don't
+    know which yet." — is doctrinally important: he does NOT fix,
+    he does NOT minimize, he does NOT escalate the emotional register.
+    He acknowledges the size of what Mira shared without making it
+    larger than she made it. This is iyashikei + literary fiction
+    convention: the right witness for the moment.
+  craft_notes: |
+    The choice at panel 15 (small-talk version vs honest version) is
+    the doctrinal pivot of the episode. Mira has the practice to
+    notice the pre-disclosure activation and STILL choose disclosure.
+    The teaching reaches its mid-stage maturity: it is not for
+    PROTECTING her from contact, it is for ALLOWING her into contact.
+  long_drop_position: |
+    Panel 24 — solo walk home, late evening. Eighth Long Drop,
+    eighth distinct location across the series (kitchen, rooftop,
+    park bench, window seat, shared walk, balcony, bathroom mirror,
+    solo nighttime walk). Variety holding.
+  closing_caption: |
+    "I let him see me. He stayed." Two sentences. The simplest
+    closing caption in the series so far. Justified by the episode's
+    weight being carried in the prose; the caption only names the
+    quiet outcome.
+  translation_handoff: |
+    Same as prior episodes — text_by_locale dicts populated for en_US
+    only. New locked phrases: "I let him see me. He stayed." (panel 29);
+    Kenji's "the kind of thing that takes a year to recover from"
+    (panel 20).
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)

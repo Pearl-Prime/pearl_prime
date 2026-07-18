@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__overthinking__false_alarm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__overthinking.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__restless_mind
+  name: Quiet the Restless Mind — for Working Parents
+installment_number: 1
+engine: false_alarm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Stop Overthinking: The False Alarm Response (6)'
+subtitle: A Real Talk Guide to Overthinking for Working Parents
+cover_tagline: The danger isn't real. The dread feels like it is. Here's the difference.
+description:
+  short_blurb: You replay the same conversation, the same email, the same parenting
+    decision until your chest goes tight and your jaw locks. This is your body's alarm
+    firing over a thought, not a threat. This is a plain-spoken guide to recognizing
+    the false alarm for what it is, so you can stop treating an idea like an emergency.
+  long_description: 'You''re loading the dishwasher and a thought arrives: did I handle
+    that thing at work badly? And before you''ve finished the sentence in your head,
+    your stomach drops, your shoulders climb toward your ears, and you''re standing
+    in your own kitchen flooded with a dread that has nowhere to go. Nothing happened.
+    Nobody''s hurt. The kids are fine. But your body didn''t get the memo, and now
+    you''re running on adrenaline over a thought you can''t even prove is true.
+
+
+    This is for the working parent whose mind treats every loose end like a live wire.
+    You who lie awake re-litigating a Slack message. You who feel the same surge of
+    alarm whether the threat is a deadline or a daydream. You''re not broken and you''re
+    not weak. Your alarm system is just firing on a false signal, and nobody ever
+    taught you to tell the difference.
+
+
+    So we start there. First we name it plainly: this is the false alarm response,
+    the body''s danger reflex going off when there is no danger. Then, instead of
+    bolting away from the feeling, we turn and go toward it. You''ll learn what the
+    false alarm actually feels like from the inside, where it lands in your body first,
+    and why your usual move, trying to think your way to certainty, only feeds it.
+    We don''t fix the thought. We don''t make it correct or final. We let it be a
+    thought while your nervous system slowly learns it was never an emergency. That''s
+    where it settles: not into a quieter mind, but into a body that stops believing
+    every alarm.
+
+
+    This is real talk, written for someone who has eleven minutes between bedtime
+    and collapse. No worksheets. No morning routine you''ll resent by Wednesday. No
+    telling you to breathe and be grateful while your chest is still tight. Just an
+    honest account of what''s happening inside you and a way of meeting it that doesn''t
+    require you to win an argument with your own brain.
+
+
+    Nothing in here promises a mind that never sounds the alarm again. It will not
+    optimize you. What it hands you instead is recognition, the kind that changes
+    how the next 3pm dread feels, because you''ll know what it is the moment it hits.
+    The thought will still come. The drop in your stomach will still come. But you''ll
+    be the parent who knows the difference between a fire and a smoke detector with
+    a low battery. You''re allowed to put the phone down. You''re allowed to let the
+    alarm ring and stay in your kitchen anyway.'
+keywords:
+  primary:
+  - stop overthinking
+  - overthinking help
+  - rumination
+  - racing thoughts
+  - quiet the mind
+  - analysis paralysis
+  secondary:
+  - working parents
+  - overthinking for working parents
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: tomas_vidal
+comp_titles:
+- The Anxiety and Phobia Workbook (Edmund Bourne) — secular, body-first map of how
+  false danger signals fire
+- Unwinding Anxiety (Judson Brewer) — names the anxious loop and how feeding it with
+  certainty backfires
+- Hardwiring Happiness (Rick Hanson) — plain neuroscience of why the brain over-weights
+  threat
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

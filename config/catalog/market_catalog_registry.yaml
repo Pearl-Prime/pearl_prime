@@ -1,0 +1,493 @@
+# Big View Market Catalog Registry — sourced from existing configs
+# Generated: 2026-04-22
+# Source files:
+#   config/catalog_planning/brand_teacher_matrix.yaml  (12 global-west teacher brands)
+#   config/catalog_planning/brand_teacher_matrix_zh.yaml  (24 zh brands: 6 base × 4 CJK locales)
+#   config/catalog_planning/locale_brand_names.yaml  (12 market locales)
+#   config/catalog/catalog_generation_config.yaml  (locale/tier definitions)
+# Authority: Big View Phase 1
+#
+# PROVENANCE (2026-05-29): the per-market `content_mix` percentages here are a
+# 2026-04-22 PLANNING ARTIFACT, NOT research-grounded. Authoritative per-market
+# format mix (ebook vs manga/webtoon) = config/catalog/catalog_generation_config.yaml
+# ::lane_content_mix (cites global_manga_distribution_strategy.md §6.1). Do NOT cite
+# this content_mix for format %. Known stale: japan manga 60 here vs lane_content_mix
+# 70 vs research 40. C-1/C-2 closed 2026-07-04: taiwan + france now carry manga tracks
+# (MANGA_MARKET_INTEGRATION_V1_SPEC §C; #2795 stood down — conflicting).
+# EU / LATAM / Brazil / Hungary / HK / SG content_mix are PLACEHOLDERS — their catalog
+# plans (docs/EUROPE_CATALOG_PLAN.md, docs/LATAM_CATALOG_PLAN.md) mark format+genre
+# "TO RESEARCH" (unfilled scaffolds).
+
+version: "1.0"
+generated: "2026-04-22"
+
+# ── Market definitions ───────────────────────────────────────────────────────
+# 13 markets from catalog_generation_config.yaml locales.
+# Grouped: Primary (5), Secondary (4 + CJK split), Tertiary (2 + CJK split).
+# Teacher brands (12) apply to all non-CJK markets.
+# ZH brands (24 = 6 × 4 locale groups) apply to zh_TW, zh_CN, zh_HK, zh_SG.
+
+markets:
+
+  # ── PRIMARY ──────────────────────────────────────────────────────────────
+
+  us:
+    market_id: us
+    locale: en_US
+    market_name: "United States"
+    language: en
+    currency: USD
+    tier: primary
+    brands:
+      # 12 global-west teacher brands — English global names
+      - stillness_press       # Stillness Press
+      - cognitive_clarity     # Clear Seeing Books
+      - somatic_wisdom        # Felt Sense Publishing
+      - qi_foundation         # Root & Meridian Press
+      - digital_ground        # Present Tense Books
+      - heart_balance         # Feather & Scale Press
+      - relational_calm       # Bare Form Books
+      - warrior_calm          # Iron Gate Press
+      - sleep_restoration     # Night Architecture Books
+      - body_memory           # Held Ground Press
+      - solar_return          # Wildfire Letters
+      - devotion_path         # Open Heart Books
+    brand_count: 12
+    business_tracks: [ebook, audiobook, podcast, manga]
+    platform_strategy: [amazon_kdp, google_play, apple_books, spotify_podcasts, audible]
+    content_mix:
+      ebook: 55
+      audiobook: 25
+      podcast: 10
+      manga: 10
+
+  japan:
+    market_id: japan
+    locale: ja_JP
+    market_name: "Japan"
+    language: ja
+    currency: JPY
+    tier: primary
+    brands:
+      # 12 global-west teacher brands — Japanese locale names from locale_brand_names.yaml
+      - stillness_press       # 静心社 (Seishinsha)
+      - cognitive_clarity     # 直見堂 (Chokuken-dō)
+      - somatic_wisdom        # 体知社 (Taichi-sha)
+      - qi_foundation         # 氣根社 (Kikon-sha)
+      - digital_ground        # 今此処社 (Ima Koko Sha)
+      - heart_balance         # 羽と秤社 (Hane to Hakari Sha)
+      - relational_calm       # 素形堂 (Sokei-dō)
+      - warrior_calm          # 鉄門社 (Tetsumon-sha)
+      - sleep_restoration     # 夜の設計社 (Yoru no Sekkei Sha)
+      - body_memory           # 体記堂 (Taiki-dō)
+      - solar_return          # 燼と灰社 (Jin to Hai Sha)
+      - devotion_path         # 開器社 (Kaiki-sha)
+    brand_count: 12
+    business_tracks:
+      - id: manga_partnership
+        description: "Manga company partnership — manga-first, physical doujin + digital app"
+        platforms: [manga_app_partners, physical_doujin, booth_pm]
+      - id: digital_publishing
+        description: "Standard digital publishing"
+        platforms: [google_play, amazon_jp, rakuten_kobo, apple_books_jp]
+    platform_strategy: [manga_app_partners, amazon_jp, rakuten_kobo, apple_books_jp]
+    content_mix:
+      manga: 60
+      ebook: 30
+      audiobook: 10
+    notes: "Dual-track: manga partnership lane (60%) + digital publishing lane (40%)"
+
+  korea:
+    market_id: korea
+    locale: ko_KR
+    market_name: "South Korea"
+    language: ko
+    currency: KRW
+    tier: primary
+    brands:
+      # 12 global-west teacher brands — Korean locale names from locale_brand_names.yaml
+      - stillness_press       # 고요한마음 (Goyohan Maeum)
+      - cognitive_clarity     # 맑은눈북스 (Malgeun Nun Bukseu)
+      - somatic_wisdom        # 몸의지혜 (Mom-ui Jihye)
+      - qi_foundation         # 기의뿌리 (Gi-ui Ppuri)
+      - digital_ground        # 지금여기북스 (Jigeum Yeogi Bukseu)
+      - heart_balance         # 깃과저울 (Git-gwa Jeoul)
+      - relational_calm       # 맨모습북스 (Maen Moseup Bukseu)
+      - warrior_calm          # 철문북스 (Cheolmun Bukseu)
+      - sleep_restoration     # 밤의건축 (Bam-ui Geonchuk)
+      - body_memory           # (locale name TBD from locale_brand_names.yaml)
+      - solar_return          # (locale name TBD)
+      - devotion_path         # (locale name TBD)
+    brand_count: 12
+    business_tracks: [ebook, audiobook, webtoon]
+    platform_strategy: [kakao_page, yes24, ridi, apple_books_kr]
+    content_mix:
+      ebook: 50
+      audiobook: 20
+      webtoon: 30
+
+  germany:
+    market_id: germany
+    locale: de_DE
+    market_name: "Germany / DACH"
+    language: de
+    currency: EUR
+    tier: primary
+    brands:
+      # 12 brands — DACH locale names from locale_brand_names.yaml
+      - stillness_press       # Stille Verlag
+      - cognitive_clarity     # Klarsicht Verlag
+      - somatic_wisdom        # Körperwissen Verlag
+      - qi_foundation         # Qi-Quelle Verlag
+      - digital_ground        # Jetzt Verlag
+      - heart_balance         # Feder & Waage Verlag
+      - relational_calm       # Nackte Form Verlag
+      - warrior_calm          # Eisernes Tor Verlag
+      - sleep_restoration     # Nachtwerk Verlag
+      - body_memory           # Getragener Boden Verlag
+      - solar_return          # Wildfeuer Verlag
+      - devotion_path         # Offenes Herz Verlag
+    brand_count: 12
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [amazon_de, google_play, apple_books_de, thalia, storytel_de]
+    content_mix:
+      ebook: 65
+      audiobook: 35
+
+  france:
+    market_id: france
+    locale: fr_FR
+    market_name: "France"
+    language: fr
+    currency: EUR
+    tier: primary
+    brands:
+      # 12 brands — French locale names from locale_brand_names.yaml
+      - stillness_press       # Éditions du Silence
+      - cognitive_clarity     # Éditions Claire Vue
+      - somatic_wisdom        # Éditions du Corps Sage
+      - qi_foundation         # Éditions Racine & Méridien
+      - digital_ground        # Éditions Temps Présent
+      - heart_balance         # Éditions Plume et Balance
+      - relational_calm       # Éditions Forme Nue
+      - warrior_calm          # Éditions Porte de Fer
+      - sleep_restoration     # Éditions Architecture de Nuit
+      - body_memory           # (locale name TBD)
+      - solar_return          # (locale name TBD)
+      - devotion_path         # (locale name TBD)
+    brand_count: 12
+    # C-2 (MANGA_MARKET_INTEGRATION_V1_SPEC §C): France #1 EU manga market — 30% manga slice.
+    business_tracks: [ebook, audiobook, manga]
+    platform_strategy: [amazon_fr, google_play, apple_books_fr, fnac, storytel_fr]
+    content_mix:
+      ebook: 45
+      audiobook: 25
+      manga: 30
+
+  # ── SECONDARY ────────────────────────────────────────────────────────────
+
+  taiwan:
+    market_id: taiwan
+    locale: zh_TW
+    market_name: "Taiwan"
+    language: zh-TW
+    currency: TWD
+    tier: secondary
+    brands:
+      # 6 zh-TW specific brands from brand_teacher_matrix_zh.yaml
+      - sleep_repair_tw
+      - stabilizer_tw
+      - panic_first_aid_tw
+      - gen_z_grounding_tw
+      - grief_companion_tw
+      - inner_security_tw
+      # 12 teacher brands also available in zh-TW locale names
+      - stillness_press       # 靜心出版
+      - cognitive_clarity     # 明見出版
+      - somatic_wisdom        # 身知出版
+      - qi_foundation         # 根脈出版
+      - digital_ground        # 此刻出版
+      - heart_balance         # 羽秤出版
+      - relational_calm       # 素形出版
+      - warrior_calm          # 鐵門出版
+      - sleep_restoration     # 夜築出版
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+      # Taiwan-only Adi Da teacher-mode brand (per config/manga/manga_brand_series_plan.yaml:13,381
+      # and config/manga/canonical_brand_list.yaml:309 bright_presence_tw_seinen).
+      # Added 2026-04-28 for Pearl Prime book script catalog so Taiwan reflects the
+      # full 19-brand surface (12 teacher + 6 zh-specific + 1 Adi Da Taiwan-only).
+      - bright_presence_tw    # 朗在出版 (Adi Da, Taiwan exclusive teacher-mode brand)
+    brand_count: 19  # 6 zh-specific + 12 teacher + 1 Adi Da Taiwan-exclusive
+    # C-1 (MANGA_MARKET_INTEGRATION_V1_SPEC §C): Taiwan 55% manga slice; 274 plans ready.
+    business_tracks: [ebook, audiobook, manga]
+    platform_strategy: [readmoo, google_play, apple_books_tw, amazon_tw, webtoon_canvas, line_manga_indies, bookwalker]
+    content_mix:
+      ebook: 30
+      audiobook: 15
+      manga: 55
+
+  china:
+    market_id: china
+    locale: zh_CN
+    market_name: "China Mainland"
+    language: zh-CN
+    currency: CNY
+    tier: secondary
+    brands:
+      # 6 zh-CN specific brands from brand_teacher_matrix_zh.yaml
+      - sleep_repair_cn
+      - stabilizer_cn
+      - panic_first_aid_cn
+      - gen_z_grounding_cn
+      - grief_companion_cn
+      - inner_security_cn
+      # 12 teacher brands in zh-CN locale names
+      - stillness_press       # 静心文化
+      - cognitive_clarity     # 明见文化
+      - somatic_wisdom        # 身知文化
+      - qi_foundation         # 根脉文化
+      - digital_ground        # 此刻文化
+      - heart_balance         # 羽秤文化
+      - relational_calm       # 素形文化
+      - warrior_calm          # 铁门文化
+      - sleep_restoration     # 夜筑文化
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+    brand_count: 18
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [dangdang, jingdong, weread, ximalaya, duokan]
+    content_mix:
+      ebook: 70
+      audiobook: 30
+    notes: "Content subject to local regulatory review; pipeline via Qwen/CJK6 lane"
+
+  hong_kong:
+    market_id: hong_kong
+    locale: zh_HK
+    market_name: "Hong Kong"
+    language: zh-HK
+    currency: HKD
+    tier: secondary
+    brands:
+      # 6 zh-HK specific brands from brand_teacher_matrix_zh.yaml
+      - sleep_repair_hk
+      - stabilizer_hk
+      - panic_first_aid_hk
+      - gen_z_grounding_hk
+      - grief_companion_hk
+      - inner_security_hk
+      # 12 teacher brands (use zh-TW locale names for Traditional Chinese)
+      - stillness_press
+      - cognitive_clarity
+      - somatic_wisdom
+      - qi_foundation
+      - digital_ground
+      - heart_balance
+      - relational_calm
+      - warrior_calm
+      - sleep_restoration
+      - body_memory
+      - solar_return
+      - devotion_path
+    brand_count: 18
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [google_play, apple_books_hk, kobo]
+    content_mix:
+      ebook: 75
+      audiobook: 25
+
+  spain:
+    market_id: spain
+    locale: es_ES
+    market_name: "Spain"
+    language: es-ES
+    currency: EUR
+    tier: secondary
+    brands:
+      # 12 teacher brands — Spain locale names from locale_brand_names.yaml
+      - stillness_press       # Editorial Quietud
+      - cognitive_clarity     # Editorial Mirada Clara
+      - somatic_wisdom        # Editorial Sentir
+      - qi_foundation         # Editorial Raíz y Meridiano
+      - digital_ground        # Editorial Ahora
+      - heart_balance         # Editorial Pluma y Balanza
+      - relational_calm       # Editorial Forma Desnuda
+      - warrior_calm          # Editorial Puerta de Hierro
+      - sleep_restoration     # Editorial Arquitectura Nocturna
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+    brand_count: 12
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [amazon_es, google_play, apple_books_es, casa_del_libro]
+    content_mix:
+      ebook: 65
+      audiobook: 35
+
+  latam:
+    market_id: latam
+    locale: es_US
+    market_name: "Latin America (Spanish)"
+    language: es-LATAM
+    currency: USD
+    tier: secondary
+    brands:
+      # 12 teacher brands — LATAM locale names from locale_brand_names.yaml
+      - stillness_press       # Editorial Quietud
+      - cognitive_clarity     # Editorial Mirada Clara
+      - somatic_wisdom        # Editorial Sentir
+      - qi_foundation         # Editorial Raíz y Meridiano
+      - digital_ground        # Editorial Ahora
+      - heart_balance         # Editorial Pluma y Balanza
+      - relational_calm       # Editorial Forma Pura
+      - warrior_calm          # Editorial Puerta de Hierro
+      - sleep_restoration     # Editorial Arquitectura Nocturna
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+    brand_count: 12
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [amazon_mx, google_play, apple_books, scribd]
+    content_mix:
+      ebook: 65
+      audiobook: 35
+
+  brazil:
+    market_id: brazil
+    locale: pt_BR
+    market_name: "Brazil"
+    language: pt-BR
+    currency: BRL
+    tier: secondary
+    brands:
+      # 12 teacher brands — Brazil locale names from locale_brand_names.yaml
+      - stillness_press       # Editora Quietude
+      - cognitive_clarity     # Editora Visão Clara
+      - somatic_wisdom        # Editora Sentir
+      - qi_foundation         # Editora Raiz e Meridiano
+      - digital_ground        # Editora Agora
+      - heart_balance         # Editora Pena e Balança
+      - relational_calm       # Editora Forma Pura
+      - warrior_calm          # Editora Portão de Ferro
+      - sleep_restoration     # Editora Arquitetura da Noite
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+    brand_count: 12
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [amazon_br, google_play, apple_books_br, livraria_cultura]
+    content_mix:
+      ebook: 65
+      audiobook: 35
+
+  italy:
+    market_id: italy
+    locale: it_IT
+    market_name: "Italy"
+    language: it
+    currency: EUR
+    tier: secondary
+    brands:
+      # 12 teacher brands — Italy locale names from locale_brand_names.yaml
+      - stillness_press       # Edizioni Quiete
+      - cognitive_clarity     # Edizioni Sguardo Chiaro
+      - somatic_wisdom        # Edizioni Corpo Saggio
+      - qi_foundation         # Edizioni Radice e Meridiano
+      - digital_ground        # Edizioni Tempo Presente
+      - heart_balance         # Edizioni Piuma e Bilancia
+      - relational_calm       # Edizioni Forma Nuda
+      - warrior_calm          # Edizioni Porta di Ferro
+      - sleep_restoration     # Edizioni Architettura Notturna
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+    brand_count: 12
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [amazon_it, google_play, apple_books_it, ibs]
+    content_mix:
+      ebook: 65
+      audiobook: 35
+
+  # ── TERTIARY ─────────────────────────────────────────────────────────────
+
+  singapore:
+    market_id: singapore
+    locale: zh_SG
+    market_name: "Singapore"
+    language: zh-SG
+    currency: SGD
+    tier: tertiary
+    brands:
+      # 6 zh-SG specific brands from brand_teacher_matrix_zh.yaml
+      - sleep_repair_sg
+      - stabilizer_sg
+      - panic_first_aid_sg
+      - gen_z_grounding_sg
+      - grief_companion_sg
+      - inner_security_sg
+      # English teacher brands also relevant (English is official language)
+      - stillness_press
+      - cognitive_clarity
+      - somatic_wisdom
+      - qi_foundation
+      - digital_ground
+      - heart_balance
+      - relational_calm
+      - warrior_calm
+      - sleep_restoration
+      - body_memory
+      - solar_return
+      - devotion_path
+    brand_count: 18
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [google_play, apple_books, amazon_sg, kobo]
+    content_mix:
+      ebook: 70
+      audiobook: 30
+
+  hungary:
+    market_id: hungary
+    locale: hu_HU
+    market_name: "Hungary"
+    language: hu
+    currency: HUF
+    tier: tertiary
+    brands:
+      # 12 teacher brands — Hungarian locale names from locale_brand_names.yaml
+      - stillness_press       # Csend Kiadó
+      - cognitive_clarity     # Tiszta Látás Kiadó
+      - somatic_wisdom        # Testbölcsesség Kiadó
+      - qi_foundation         # Gyökér és Forrás Kiadó
+      - digital_ground        # Most Kiadó
+      - heart_balance         # Toll és Mérleg Kiadó
+      - relational_calm       # Puszta Forma Kiadó
+      - warrior_calm          # Vaskapu Kiadó
+      - sleep_restoration     # Éjszakai Építészet Kiadó
+      - body_memory           # (TBD)
+      - solar_return          # (TBD)
+      - devotion_path         # (TBD)
+    brand_count: 12
+    business_tracks: [ebook, audiobook]
+    platform_strategy: [amazon_de, google_play, apple_books, libri_hu]
+    content_mix:
+      ebook: 70
+      audiobook: 30
+
+# ── Market Summary ──────────────────────────────────────────────────────────
+summary:
+  total_markets: 14  # 1 US + 13 international = 14 distinct market configs
+  # (germany counts as DACH covering de_DE+at+ch; latam covers multiple countries)
+  primary_markets: [us, japan, korea, germany, france]
+  secondary_markets: [taiwan, china, hong_kong, spain, latam, brazil, italy]
+  tertiary_markets: [singapore, hungary]
+  teacher_brands_global_west: 12  # from brand_teacher_matrix.yaml
+  zh_cjk_brands: 24              # from brand_teacher_matrix_zh.yaml (6 × 4 locales)
+  japan_dual_track: true
+  notes: >
+    The 312-brand target (from Big View spec) = 12 teacher brands × ~14 market locales +
+    24 zh-specific brands. Currently: 12 global-west + 24 zh = 36 distinct brand entities,
+    deployed across 14 market locales. Full 312-brand target requires per-locale brand splits
+    for all secondary/tertiary markets. Phase 2 scope item.

@@ -1,0 +1,52 @@
+schema_version: "1.0.0"
+artifact_type: series_continuity_state
+series_id: stillness_press__en_US__dark_fantasy__series02
+last_episode_id: ep_001
+
+volume_arc_position:
+  volume: 1
+  chapter_in_volume: 1
+  volume_title: "The Warden Who Would Not Sleep"
+
+settled_state: >-
+  Rin met the Vigil without striking; one wall seam bloomed. Rin believes meeting
+  works — but only in calm after the storm.
+
+rival_state:
+  - rival_id: iron_warden_patrol
+    state: not_yet_arrived — V1 close seed only in spine
+    last_seen_episode: ep_001
+
+motif_state:
+  vessel_state: keeper_plus_living_land — hand on roots; Vigil resting not gone
+
+active_pressures:
+  - the_vigil
+  - keeper_sealed_region
+  - iron_wardens
+
+set_pieces_fired:
+  - bestiary_reveal
+  - meeting_stillness
+  - wall_fall_bloom
+  - keeper_koan
+  - map_page
+
+unresolved_hooks:
+  - Marsh of the Swallowed Voice named on map but unexplored
+  - Iron Warden patrol promised at volume close — not yet on page
+  - Keeper's sealed region — untouched
+  - Vigil sleeps — will return with next storm
+
+next_episode_mandate:
+  episode_id: ep_002
+  must_rebreak: >-
+    The Vigil must return in a NEW storm context; meeting that worked once must
+    not carry — Rin re-braces or multiplies the creature. Iron Warden patrol
+    arrives offering a stronger wall.
+  must_plant:
+    - iron_wardens — patrol visible; doctrine clash meeting vs wall offered
+    - map_page — Marsh of the Swallowed Voice entered
+  forbidden:
+    - one-and-done cure of hypervigilance
+    - Keeper gives advice speech

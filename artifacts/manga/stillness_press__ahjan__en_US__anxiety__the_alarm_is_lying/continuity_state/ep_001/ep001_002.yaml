@@ -1,0 +1,35 @@
+schema_version: 1.0.0
+panel_id: ep001_002
+inherits_from: ep001_001
+beat_type: standard
+archetype: tea_beat_close_up
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: dawn
+  light_rig_id: K01_dawn_window_warm
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: hands_wrapping_cup
+    expression_dial: 0.2
+    emotional: calm
+    gaze_direction: off_frame_down
+    hand_state: wrapping_cup
+prop_state:
+  cup: full
+  phone: face_down
+  succulent_in_clay_pot: normal
+continuity_invariants:
+- scene jump bedroom -> kitchen on spatial beat (allowed)
+- phone state persists face_down
+- cup is first introduced in this panel; no prev to compare
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: cup
+  implied_partner_position: null
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0

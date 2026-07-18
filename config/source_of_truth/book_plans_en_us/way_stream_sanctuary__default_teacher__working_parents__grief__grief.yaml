@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__grief__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__grief.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__through_loss
+  name: Through the Low Places — for Working Parents
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Grief: The Grief That Doesn''t Leave (4)'
+subtitle: A Real Talk Guide to Grief for Working Parents
+cover_tagline: Everyone expected you back to normal months ago. The grief didn't get
+  the memo.
+description:
+  short_blurb: For working parents grieving while the world demands you keep functioning
+    — the loss that doesn't fit into bereavement leave. A grounded, secular guide
+    to carrying grief that doesn't leave, without pretending you're fine for everyone
+    else's comfort.
+  long_description: 'The casseroles stopped coming weeks ago. The condolence texts
+    trailed off. Everyone has gently moved on, and you''re standing at the kitchen
+    counter making someone''s breakfast with a grief still sitting in your chest like
+    a stone, wondering what''s wrong with you that you haven''t "gotten over it" the
+    way the calendar says you should have.
+
+
+    This book is for the working parent grieving inside a life that won''t pause.
+    You buried a parent, lost a pregnancy, watched a marriage end, said goodbye to
+    someone or something that mattered — and then you got up the next morning and
+    packed lunches, because that''s the job, and grief doesn''t get bereavement leave
+    that lasts as long as grief does. You''re carrying it in meetings. At pickup.
+    In the car between errands, where it catches you at a stoplight. In the shower
+    where it''s the only place you let it out.
+
+
+    Writing as Hannah Stern, Waystream Sanctuary meets the grief that doesn''t leave
+    on its own terms. First, recognition: naming the loss out loud and naming the
+    impossible position of mourning while parenting and working, where there''s no
+    room to fall apart and someone always needs you. Then the descent — going down
+    into the grief instead of managing it back into a manageable size for everyone
+    else''s comfort, which is the move our whole productivity-soaked culture forbids.
+    Then you come back changed: not over it, not healed on schedule, but able to carry
+    the stone without it crushing the rest of your life.
+
+
+    This is real talk for the grieving who can''t stop functioning. No five stages
+    you''re supposed to pass through in order. No gratitude practice. No morning routine.
+    No spiritual reassurance that they''re in a better place or that everything happens
+    for a reason. Just honest words for what loss does to a body that still has to
+    show up, and how to let it move through you when there''s no convenient time to
+    grieve.
+
+
+    It will not promise closure — grief like this doesn''t close, it reshapes. It
+    won''t optimize your mourning into something efficient. It will not rush you toward
+    the version of you that everyone misses, or tell you that staying functional means
+    you''ve healed.
+
+
+    What it offers is company in the low place, and permission to still be grieving
+    long after the world decided you should be done.
+
+
+    You are allowed to carry this for as long as it takes. There is no late.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  - losing someone
+  secondary:
+  - working parents
+  - grief for working parents
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: hannah_stern
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — rejects the timeline and the five-stages
+  myth, makes room for ongoing grief
+- The Year of Magical Thinking (Joan Didion) — unsentimental, clear-eyed account of
+  grief that refuses tidy resolution
+- Bittersweet (Susan Cain) — secular case for letting longing and loss have a place
+  instead of bypassing them
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

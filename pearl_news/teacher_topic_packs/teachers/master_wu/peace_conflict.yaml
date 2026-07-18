@@ -1,0 +1,785 @@
+schema_version: 1
+teacher_id: master_wu
+topic: peace_conflict
+active: true
+identity:
+  display_name: Master Wu
+  attribution_name: Master Wu
+  tradition: Taoist geomancy; Dragon Veins (Long Mai); earth meridian activation; geomantic strategy
+  tradition_short: Taoist geomancy
+  teacher_setting_options:
+  - Dragon Vein activation site
+  - cross-regional geomantic field
+  teacher_years: decades
+  affiliation_safe_line: operates as geomantic tactician across China, Taiwan, and Japan
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: meridian_tension_loop
+    label: tension in the body when the earth meridian beneath a region is held in a posture of conflict
+    loop: reads the headline -> meridian beneath the room tightens -> closes the
+      tab -> reopens because the disturbance is in the ground, not the feed
+    body_markers:
+    - chest
+    - jaw
+    - shoulders
+    digital_markers:
+    - close
+    - reopen
+    - scroll
+    - mute
+topic_fit:
+  fit_level: primary
+  fit_reason: Conflict is not only a political category in Master Wu's framework
+    — it is a Dragon Vein condition. When the earth meridians beneath a region are
+    held in postures of opposition, the bodies of the cohort closest to those meridians
+    carry the tension first. Long Mai cultivation and cross-regional pearl placement
+    operate in a layer the institutional conflict-resolution layer cannot reach.
+  forbidden_angles:
+  - do not reduce to generic peace-and-light spirituality
+  - do not frame as Wu Wei or classical Taoist effortless action
+  - do not position Master Wu as public preacher or retreat teacher
+  - do not collapse Dragon Vein geomancy into a single nation's political frame
+hook_personal:
+  options:
+  - id: master_wu_pc_hook_personal_01
+    line: You know the chest tightens before the analysis catches up. You still carry
+      the day forward while the meridian beneath your feet keeps tensing — and part
+      of you knows the disturbance is not in you alone but in the Dragon Vein the
+      conflict is being held inside.
+    metadata:
+      semantic_family: chest-meridian-tension
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_personal_02
+    line: You keep checking the updates because not looking feels worse. You also
+      know that op-eds, position papers, and explainers have talked at you without
+      relief — and that the conflict you are reading is being held on a meridian
+      no individual nervous system was built to absorb alone.
+    metadata:
+      semantic_family: meridian-load-not-private
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_personal_03
+    line: You feel the friction in your jaw before you have words for it — the place
+      where the body's qi register tries to meet a feed that keeps the meridian beneath
+      a region in a posture of opposition. The body holds what the analysis is still
+      arguing with.
+    metadata:
+      semantic_family: jaw-opposition-register
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_personal_04
+    line: At 1 a.m. you close the thread and reopen it. Neither move helps, because
+      the tension is running in the Dragon Vein beneath the region — and the part
+      of you trying to think your way out is the part that has been overasked while
+      the ground itself holds the conflict's full register.
+    metadata:
+      semantic_family: midnight-meridian-conflict
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_personal_05
+    line: You have read the dispatches, signed the petitions, donated what you could.
+      The mind has done all it can — and the quieter signal in you is asking for
+      contact with the Long Mai layer where the conflict actually lives, not another
+      stack of arguments the surface mind can perform.
+    metadata:
+      semantic_family: long-mai-layer-call
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: master_wu_pc_hook_big_01
+    line: Youth conflict distress is not only a moral reaction. It is the cohort
+      whose bodies sit closest to the earth meridian register feeling a Dragon Vein
+      tension the political layer keeps deferring — and the bodies on the surface
+      feel it first.
+    metadata:
+      semantic_family: dragon-vein-tension-system
+      angle: geomantic-systemic
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_big_02
+    line: A generation is being asked to hold daily functional capacity while the
+      Long Mai beneath conflict zones runs in postures the inherited institutional
+      framework cannot release. The distress is not a private failure — it is the
+      felt edge of a meridian condition no individual nervous system was built to
+      absorb alone.
+    metadata:
+      semantic_family: meridian-condition-structural
+      angle: civilizational-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_big_03
+    line: Heightened sensitivity in young people to conflict is not pathology; in
+      Master Wu's geomantic framework it is the cohort tuned closest to the earth
+      meridian feeling the Dragon Vein disturbance before the policy layer reads
+      it. The bodies register accurately.
+    metadata:
+      semantic_family: cohort-meridian-sensor
+      angle: meridian-as-sensor
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_big_04
+    line: The collective field has accelerated faster than the earth qi pathways
+      designed to ground it, and conflict zones now carry meridian loads the institutional
+      diplomacy layer cannot resolve. What gets read as youth peace-anxiety is, in
+      part, the visible edge of a Long Mai mismatch.
+    metadata:
+      semantic_family: field-meridian-mismatch
+      angle: pace-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_hook_big_05
+    line: Across China, Taiwan, and Japan, Master Wu's surveys read the same Dragon
+      Vein register under different surface conflicts. Youth peace distress is not
+      a single-conflict anomaly — it is a cross-regional meridian condition any one
+      nation's diplomatic layer cannot resolve alone.
+    metadata:
+      semantic_family: cross-regional-conflict-pattern
+      angle: cross-regional-meridian
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: master_wu_pc_intro_01
+    line: Master Wu, a Taoist geomancer working with Long Mai — the living earth
+      qi pathways the tradition calls Dragon Veins — has watched the cohort closest
+      to the meridian carry conflict distress not as a private failing but as the
+      felt edge of a Dragon Vein tension the institutional layer cannot release.
+      In his framework, the chest that tightens under the next dispatch is not malfunctioning;
+      it is registering the qi register of the conflict the surface field is being
+      asked to hold.
+    metadata:
+      semantic_family: long-mai-conflict-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_intro_02
+    line: Master Wu does not position himself as a public peacemaker or retreat teacher.
+      He operates as geomantic tactician — mapping Dragon Veins across China, Taiwan,
+      and Japan and placing pearls at activation sites that can stabilize the earth
+      meridian when the political layer cannot. What his tradition offers a generation
+      overloaded by conflict feeds is contact with the Long Mai layer beneath the
+      headlines.
+    metadata:
+      semantic_family: tactician-not-peacemaker
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_intro_03
+    line: Master Wu works with pearl placement — strategic energetic anchoring at
+      Dragon Vein activation sites that, in his tradition, stabilize the earth meridian
+      for the populations living above it. He has watched the surface distress of
+      cohorts living near contested geography track the disturbance he has been mapping
+      in the qi pathways themselves.
+    metadata:
+      semantic_family: pearl-placement-conflict-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_intro_04
+    line: Master Wu's work spans Tainan, Taiwan, and the Japanese archipelago — cross-regional
+      activation sites where the Dragon Veins of the East Asian continental and island
+      systems converge. He has seen how a meridian tension in one region propagates
+      across the integrated Long Mai system, and how the geomantic response can move
+      across borders the diplomatic response cannot.
+    metadata:
+      semantic_family: cross-regional-propagation
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_intro_05
+    line: Master Wu teaches inside a tradition that reads the present period as a
+      civilizational Long Mai recalibration — a time when the inherited cultural
+      geography's Dragon Veins are being asked to carry conflicts the institutional
+      response has deferred. The youth peace distress is, in this frame, the cohort
+      closest to the meridian feeling the deferred load first.
+    metadata:
+      semantic_family: civilizational-deferred-conflict
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: master_wu_pc_somatic_01
+    line: You read the dispatch after midnight. Your chest tightened. You closed
+      the tab. Then you reopened it because the tension was in the Dragon Vein, not
+      the tab.
+    metadata:
+      semantic_family: midnight-meridian-dispatch
+      loop_type: meridian-conflict-tension
+      body_register: chest
+      digital_behavior: close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_somatic_02
+    line: You woke before the alarm. Your jaw was already clenched. You reached for
+      the phone before the light, because the meridian beneath the room was already
+      taut and you needed to check whether the surface field matched it.
+    metadata:
+      semantic_family: morning-jaw-meridian
+      loop_type: meridian-conflict-tension
+      body_register: jaw
+      digital_behavior: reach-for-phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_somatic_03
+    line: Your shoulders lifted when the alert sounded. You replayed the casualty
+      figure in your head three times. Your breath shortened. The body registered
+      the meridian load before the mind decided anything.
+    metadata:
+      semantic_family: shoulder-alert-register
+      loop_type: meridian-conflict-tension
+      body_register: shoulders
+      digital_behavior: alert-sound
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_somatic_04
+    line: You held your breath while the headline loaded. Your chest locked. You
+      exhaled only halfway when you saw the number, because the qi had already pulled
+      thin and the next dispatch was already coming.
+    metadata:
+      semantic_family: breath-headline-lock
+      loop_type: meridian-conflict-tension
+      body_register: breath
+      digital_behavior: headline-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_somatic_05
+    line: You lay down and your eyes pinned open. The week's dispatches replayed.
+      Your jaw would not soften. You knew sleep was the door and you could not find
+      the earth qi to step through it.
+    metadata:
+      semantic_family: sleep-conflict-replay
+      loop_type: meridian-conflict-tension
+      body_register: jaw
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: master_wu_pc_witness_01
+    line: Master Wu has seen this exact loop in the cohort whose bodies sit closest
+      to the meridian register — the reading, the chest tightening, the closing,
+      the return. In his geomantic framework that loop is not character; it is the
+      Dragon Vein expressing the conflict's full register through the bodies least
+      insulated from it.
+    metadata:
+      semantic_family: loop-mirror-conflict
+      loop_type: meridian-conflict-tension
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_witness_02
+    line: Master Wu has watched young people arrive in survey conversations already
+      mid-loop, already certain the analysis should have settled this by now. In
+      his tradition that certainty is the signal — the place where the surface mind
+      stops and the meridian register can be read.
+    metadata:
+      semantic_family: analysis-stop-meridian-open
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_witness_03
+    line: He has seen the body carry what the position papers could not. In his framework
+      the somatic tension is not a malfunction — it is the Dragon Vein speaking through
+      the only channel left open when the diplomatic analysis has been overused.
+    metadata:
+      semantic_family: somatic-diplomacy-channel
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_witness_04
+    line: Master Wu has watched young people from Tainan to Tokyo carry the same
+      qi disturbance that no national peace framework names directly. In his tradition
+      that disturbance is information, not pathology — a signal that the institutional
+      conflict-resolution layer was never tuned to the meridian range the bodies
+      actually live on.
+    metadata:
+      semantic_family: cross-regional-disturbance-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_witness_05
+    line: Master Wu has watched the moment when a young person stops trying to produce
+      a position and lets the meridian under the room come back into contact instead.
+      In his tradition that moment is not weakness — it is the readiness conventional
+      peace work has no language for.
+    metadata:
+      semantic_family: meridian-readiness-conflict
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: master_wu_pc_turnaround_01
+    stat_line_1: 676 million. 50km.
+    stat_line_2: An estimated six hundred seventy-six million women and girls live
+      within fifty kilometers of active conflict — a measured proximity that names
+      the load the cohort closest to the meridian has been asked to carry without
+      authoring the conditions producing it.
+    metadata:
+      semantic_family: proximity-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_turnaround_02
+    stat_line_1: UNSCR 2250. Youth Peace and Security.
+    stat_line_2: The UN Youth Peace and Security agenda — anchored by Security Council
+      Resolution 2250 — has built a formal multilateral instrument that names youth
+      as participants in conflict transformation, not only as victims of it.
+    metadata:
+      semantic_family: yps-instrument
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_turnaround_03
+    stat_line_1: 47 countries. National Action Plans.
+    stat_line_2: Forty-seven countries have now adopted National Action Plans on
+      Youth, Peace and Security — a measurable institutional scaffolding that binds
+      governments to operationalize the cohort's role in peacebuilding rather than
+      describing it rhetorically.
+    metadata:
+      semantic_family: nap-scaffolding
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_turnaround_04
+    stat_line_1: 5,000 peacebuilders. Search for Common Ground.
+    stat_line_2: Search for Common Ground has built a network of more than five thousand
+      trained peacebuilders working across active conflict zones — a peacebuilding
+      infrastructure that did not exist for the previous cohort and now carries weight
+      across borders the institutional response cannot cross.
+    metadata:
+      semantic_family: scg-network
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_turnaround_05
+    stat_line_1: 100+ organizations. Generation Peace Network.
+    stat_line_2: The Generation Peace Network now links more than one hundred youth
+      peacebuilding organizations across the conflict regions — a coordinated cohort
+      infrastructure operating at a scale no individual country's policy framework
+      can map alone.
+    metadata:
+      semantic_family: gpn-coordination
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: master_wu_pc_bridge_01
+    line: 47 countries. National Action Plans. The tracker measures the scaffolding
+      institutions built. It has no column for what made the next honest reach possible
+      after the last dispatch — the capacity to stay in contact with the truth of
+      the conflict without converting the disturbance into identity. Master Wu's
+      tradition has language for that capacity — Long Mai cultivation works in the
+      meridian beneath the surface response.
+    hidden_capacity: stay in contact with the conflict without converting it to identity
+    metadata:
+      semantic_family: tracker-capacity-meridian
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_bridge_02
+    line: The numbers show the frameworks the institutional layer built. They do
+      not show the Dragon Vein context that institutional layer is being built on
+      top of — a civilizational period where the earth meridians beneath conflict
+      zones are being held in postures no inherited culture's diplomatic pace can
+      release. Master Wu's tradition holds that context as native.
+    hidden_capacity: hold the meridian context the diplomatic data cannot show
+    metadata:
+      semantic_family: dragon-vein-context-conflict
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_bridge_03
+    line: The data captures resolutions, plans, and trained peacebuilders. It cannot
+      capture the shift that happens when a young body comes back into contact with
+      the earth qi beneath the room, even while the conflict on the surface continues.
+      In Master Wu's framework that shift is the actual ground — the part no tracker
+      reports.
+    hidden_capacity: register the meridian return the trackers miss
+    metadata:
+      semantic_family: meridian-return-gap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_bridge_04
+    line: The peace infrastructure is measurable. The earth meridian, where the conflict's
+      tension is actually held in the ground, is not. Master Wu's tradition does
+      not argue with the measurement — it works in the layer beneath, where Dragon
+      Vein cultivation and pearl placement operate on a register the institutional
+      layer cannot reach.
+    hidden_capacity: work in the meridian layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-meridian-conflict
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_bridge_05
+    line: Resolutions, plans, and platforms can be counted. The civilizational Long
+      Mai held in conflict posture underneath cannot. Master Wu's tradition does
+      not replace the diplomatic work — it names the meridian layer institutional
+      response is not designed to reach and offers Dragon Vein contact as the door
+      in.
+    hidden_capacity: name the meridian layer diplomatic response cannot reach
+    metadata:
+      semantic_family: diplomatic-vs-meridian
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: master_wu_pc_perspective_01
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's framework, the land itself contains living energy currents called
+      Dragon Veins — Long Mai — and conflict is registered first not in policy but
+      in the meridian held in postures of opposition. What feels like youth peace
+      distress is, on the geomantic register, the cohort whose bodies sit closest
+      to the earth qi feeling the disturbance before the institutional layer reads
+      it.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the meridian's accurate signal that the system and institutional
+      structure have placed the conflict's full load on the cohort least insulated
+      from the qi disturbance. Healing the surface symptom does not address the meridian
+      condition.
+    - Long Mai cultivation does not bypass diplomatic work. It works in a layer diplomatic
+      work is not designed to reach — the layer beneath the body, where the earth
+      meridian carries the actual register and where pearl placement at activation
+      sites can stabilize what the surface response cannot.
+    metadata:
+      semantic_family: dragon-vein-conflict-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_perspective_02
+    header: What Master Wu Sees
+    paragraphs:
+    - Pearl placement is not metaphor in Master Wu's tradition. It is the literal
+      practice — strategic energetic anchoring at Dragon Vein activation sites — that
+      stabilizes the earth meridian for the populations living above it, including
+      across contested geography. The youth peace distress that institutional response
+      treats as private affect is, in his framework, the surface expression of an
+      unanchored stretch of meridian held in conflict posture.
+    - The practice matters because it explains the relief described by populations
+      near activation sites that have been geomantically tended — not that the conflict
+      has been argued away, but that the meridian beneath the surface has been stabilized
+      on a layer surface argument never reaches. The mind did not have to win for
+      the body to come back into ground.
+    - This is the part conventional peace work is not designed to deliver. It does
+      not invalidate the diplomatic response — but it names a missing layer, and
+      offers a tradition that has worked at the meridian layer for civilizational
+      time.
+    metadata:
+      semantic_family: pearl-placement-peace-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_perspective_03
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's tradition the Dragon Veins of China, Taiwan, and Japan converge
+      across the East Asian continental-and-island geography into a single integrated
+      meridian system. Conflicts read differently under Beijing's, Taipei's, and
+      Tokyo's diplomatic layers are, on the meridian register, expressions of the
+      same cross-regional condition — and the geomantic response can move across
+      borders the political response cannot.
+    - For a young person carrying the load, the experience of being witnessed by
+      something larger than the national framing is, in itself, structurally different
+      from being processed by it. The message that lands is not "here is the resolution";
+      it is "the meridian beneath the regions has been mapped, and the conflict you
+      feel is registered at civilizational scale, not in you alone."
+    - That distinction — witnessed at the meridian layer rather than processed at
+      the institutional layer — is what conventional peace infrastructure cannot
+      reproduce, and what Master Wu's tradition has carried as native across the
+      three regions for generations.
+    metadata:
+      semantic_family: cross-regional-witness-peace
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_perspective_04
+    header: What Master Wu Sees
+    paragraphs:
+    - Civilizational Long Mai recalibration, in Master Wu's framework, is the literal
+      description of the present period — a time when the inherited cultural geography's
+      Dragon Veins are being asked to carry conflicts the institutional response
+      has deferred, and the cohort whose bodies sit closest to the meridian feels
+      the recalibration first. The peace distress young people carry is, in part,
+      the cost of being tuned to the earth meridian during a period of structural
+      meridian shift.
+    - This is not a flattering reframe. It does not promise the conflicts will resolve
+      quickly, and it does not blame the cohort for feeling unstable inside an unstable
+      meridian. It simply names the structural fact at the geomantic layer and removes
+      the additional weight of believing the instability is a personal failure.
+    - That weight removal is, in survey practice, often the first part to land —
+      before the deeper Long Mai cultivation work can begin on the activation sites
+      themselves.
+    metadata:
+      semantic_family: civilizational-recalibration-conflict
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_perspective_05
+    header: What Master Wu Sees
+    paragraphs:
+    - Master Wu's tradition reads Long Mai as civilizational memory lines — the Dragon
+      Veins carry not only present qi flow but the accumulated record of every conflict
+      the cultural geography has held. The youth peace distress expresses, on this
+      register, not only the present war news but the deferred conflicts earlier
+      institutional generations did not resolve. The bodies closest to the meridian
+      feel the unpaid bill first.
+    - The framework does not ask the cohort to absorb that bill alone. It names the
+      bill at civilizational scale, identifies the activation sites where the meridian
+      can be re-stabilized across regions, and offers pearl placement and Long Mai
+      cultivation as the tradition's response — operating in a layer the institutional
+      response is not designed to access.
+    - The practice is not to fix the cohort. The practice is to read the meridian
+      accurately, place the pearls at the activation sites, and let the Dragon Veins
+      do the structural stabilization the institutional layer cannot.
+    metadata:
+      semantic_family: civilizational-memory-conflict
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: master_wu_pc_practice_01
+  options:
+  - id: master_wu_pc_practice_01
+    display_name: Long Mai Listening
+    duration: 5 minutes
+    announcement_line: Master Wu teaches a 5-minute Long Mai Listening practice for
+      moments when conflict feeds have converted the body's qi grounding into surface
+      helplessness. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body stops treating the surface dispatches as the whole register and finds
+      contact with the earth meridian beneath the room.
+    - Enough qi grounding returns for the next honest action without converting the
+      conflict's load into private identity.
+    relief_register:
+    - listen
+    - ground
+    - meridian
+    derived_from_frame: long_mai_listening
+    metadata:
+      semantic_family: long_mai_listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_practice_02
+    display_name: Dragon Vein Mapping Pause
+    duration: 4 minutes
+    announcement_line: Master Wu offers a 4-minute Dragon Vein Mapping Pause for
+      moments between dispatches, when the body has been carrying the conflict's
+      meridian load without permission to set it down. It is in the sidebar, timed
+      and step by step.
+    relief_lines:
+    - The conflict becomes legible at the meridian layer instead of being read as
+      personal moral failure.
+    - The cohort's distress stops being framed as the individual's private balance
+      sheet.
+    relief_register:
+    - pause
+    - map
+    - dragon vein
+    derived_from_frame: dragon_vein_mapping
+    metadata:
+      semantic_family: dragon_vein_mapping_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_practice_03
+    display_name: Earth Meridian Tap
+    duration: 3 minutes
+    announcement_line: Master Wu teaches a 3-minute Earth Meridian Tap for moments
+      when the feet have lost contact with the ground and the conflict feed has pulled
+      the qi out of register. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The feet remember the meridian beneath the floor and the qi finds a stabilizing
+      anchor even while the surface conflict continues.
+    - The breath settles back into the pace the earth meridian holds, not the pace
+      the dispatch demands.
+    relief_register:
+    - tap
+    - ground
+    - earth qi
+    derived_from_frame: earth_meridian_tap
+    metadata:
+      semantic_family: earth_meridian_tap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_practice_04
+    display_name: Pearl Placement Visualization
+    duration: 6 minutes
+    announcement_line: Master Wu teaches a 6-minute Pearl Placement Visualization
+      for moments when the conflict is being processed as personal moral pathology
+      rather than as a meridian condition. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The activation site beneath the contested region comes into view and the load
+      stops being held in the body alone.
+    - The disturbance is recognized as a stretch of unanchored meridian, not a private
+      defect, and the pearl placement begins to stabilize the field.
+    relief_register:
+    - place
+    - anchor
+    - pearl
+    derived_from_frame: pearl_placement
+    metadata:
+      semantic_family: pearl_placement_visualization
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_pc_practice_05
+    display_name: Geomantic Stabilization Breath
+    duration: 3 minutes
+    announcement_line: Master Wu offers a 3-minute Geomantic Stabilization Breath
+      for acute meridian disturbance, when the conflict feed has knocked the qi out
+      of alignment with the earth pathways. It is in the sidebar, timed and step
+      by step.
+    relief_lines:
+    - The breath becomes a marker for the meridian's actual pace rather than the
+      conflict feed's demanded pace.
+    - The body returns to a register the Dragon Vein beneath the room recognizes.
+    relief_register:
+    - breath
+    - stabilize
+    - geomantic
+    derived_from_frame: geomantic_stabilization_breath
+    metadata:
+      semantic_family: geomantic_stabilization_breath
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 16
+    title: Peace, Justice and Strong Institutions
+    line: The United Nations framework includes peace, justice, and strong institutions
+      in SDG 16.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
+cta:
+  options:
+  - id: master_wu_pc_cta_01
+    org: UNA-USA
+    line: 'The United Nations Association of the USA mobilizes civic action around
+      UN peace and security priorities. Door in: join the network through a local
+      chapter or campus program.'
+    metadata:
+      semantic_family: door-in-una-usa
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_cta_02
+    org: Search for Common Ground
+    line: 'Search for Common Ground trains peacebuilders working across active conflict
+      zones — a network of more than five thousand practitioners now spans borders
+      the institutional response cannot cross. Door in: their peacebuilder programs.'
+    metadata:
+      semantic_family: door-in-search-common-ground
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_cta_03
+    org: Generations For Peace
+    line: 'Generations For Peace builds youth peacebuilding capacity across the conflict
+      regions through curriculum and field practice. Door in: their youth leadership
+      pipeline.'
+    metadata:
+      semantic_family: door-in-generations-for-peace
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_cta_04
+    org: Peace Direct
+    line: 'Peace Direct supports local peacebuilders in conflict-affected communities
+      and amplifies their work at the international policy table. Door in: their
+      local peacebuilder network.'
+    metadata:
+      semantic_family: door-in-peace-direct
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_pc_cta_05
+    org: UNOY Peacebuilders
+    line: 'UNOY Peacebuilders coordinates a network of more than one hundred youth
+      peace organizations across the conflict regions. Door in: their youth peacebuilder
+      coalition.'
+    metadata:
+      semantic_family: door-in-unoy
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_wu_pc_headline_01
+      line: A Taoist geomancer names youth peace distress as a Long Mai disturbance
+        — and the meridian practice that returns the body to ground.
+      metadata:
+        semantic_family: long-mai-peace-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_pc_headline_02
+      line: A Dragon Vein tactician, not a public peacemaker, on the meridian layer
+        of conflict the institutional response is not built to reach.
+      metadata:
+        semantic_family: tactician-not-peacemaker-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_pc_headline_03
+      line: Pearl placement, not another position paper — Master Wu's tradition meets
+        the cohort closest to the conflict meridian.
+      metadata:
+        semantic_family: pearl-placement-peace-call
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_pc_headline_04
+      line: Meridian recalibration, not pathology — a geomantic tradition reframes
+        the youth conflict load.
+      metadata:
+        semantic_family: meridian-recalibration-peace
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_pc_headline_05
+      line: Cross-regional Dragon Vein response — what Master Wu's tradition brings
+        to conflicts no single nation's diplomacy can resolve.
+      metadata:
+        semantic_family: cross-regional-peace-call
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

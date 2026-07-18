@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__financial_anxiety__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__steady_ground__1hr
+  name: Steady Ground — for Nurses (One-Hour)
+installment_number: 1
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Financial Anxiety: When Everything Is Too Much (4)'
+subtitle: A Field Guide for Healthcare Rns Navigating Financial Anxiety
+cover_tagline: You save lives all day and still can't open the banking app at night.
+  Both things are true.
+description:
+  short_blurb: You can run a code without your hands shaking, then sit in your car
+    and feel your chest lock at the thought of your own bank balance. When the money
+    worry hits all at once — bills, loans, the shift you picked up just to stay even
+    — something in you just shuts down. This one-hour reset is about that exact freeze,
+    and how to come back from it.
+  long_description: 'It''s the parking lot after a twelve, and instead of starting
+    the car you''re staring at your phone, thumb hovering over the banking app you
+    can''t quite make yourself open. The student loans. The credit card. The car payment.
+    The overtime you took just to tread water and the way it still wasn''t enough.
+    It all arrives in one wave, and your chest goes tight and your mind goes white.
+    You''re a nurse. You spend twelve hours making fast, clean, life-and-death decisions
+    about other people, and then your own money lands on you all at once and the deciding
+    part of you simply locks up. You sit there in the dark with the engine off, going
+    nowhere.
+
+
+    This hour is for the nurse who is drowning in money worry and can''t even bring
+    themselves to look at the numbers. Not the one who needs a budgeting app — you''ve
+    downloaded three, and opened none of them twice. This is for the one who freezes
+    the instant it all crashes in together: the amount you make, the amount you owe,
+    and the strange, specific shame of being underwater while doing work this hard
+    and this important.
+
+
+    You start by naming the freeze for what it is. Not irresponsibility. Not being
+    "bad with money." It''s overwhelm reaching the point where the system shuts the
+    door to protect itself — your nervous system slamming closed because everything
+    financial arrived at the same instant and there was no room left to hold any of
+    it. Then you go down into that exact moment instead of fleeing it with another
+    picked-up shift. You feel what the lock-up actually is in your body — the held
+    breath, the white noise, the urge to do anything but look — so you can recognize
+    it before it swallows the whole night. And you come back able to face one piece.
+    Just one number. One line. Not the entire crushing total demanding to be solved
+    before you''re allowed to breathe.
+
+
+    This book will not promise to fix your finances, hand you a debt-payoff plan,
+    or teach you to do more with a paycheck that already isn''t enough. It won''t
+    tell you the answer is to budget harder or pick up one more shift. It will not
+    pretend that working in healthcare should somehow have made money fear leave you
+    alone.
+
+
+    What it gives you is the plain truth about that freeze and a way back from it
+    in one honest hour: how to recognize the shutdown the moment it starts, how to
+    thaw, how to look at a single number without the entire weight of your financial
+    life landing on your chest at once. You are not weak because the math overwhelmed
+    you. No one can hold a whole financial life inside one breath. Let it be one piece.
+    You''re allowed to come up for air before you look again.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - nurses
+  - money anxiety for nurses
+  - one hour
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- I Will Teach You to Be Rich (Ramit Sethi) — defuses money overwhelm into one small
+  action at a time
+- Your Money or Your Life (Vicki Robin) — reframes the money-for-hours trade many
+  nurses live inside
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the shutdown response when too
+  much hits at once
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

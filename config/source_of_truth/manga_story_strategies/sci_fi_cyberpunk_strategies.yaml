@@ -1,0 +1,452 @@
+schema_version: 1.0.0
+genre: sci_fi_cyberpunk
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  anxiety: strategy_01
+  identity: strategy_02
+  disconnection: strategy_03
+  control: strategy_04
+  overstimulation: strategy_05
+character_pool:
+  protagonist:
+  - Kestrel Vane
+  - Ivo Sasaki-Reyes
+  - Mara Okонkwo
+  - Dex Aaltonen
+  - Niamh Soltani
+  companion:
+  - a decommissioned ripperdoc who keeps an analog clock
+  - an off-grid signal-runner who refuses neural implants
+  - a retired netrunner turned noodle-stall cook
+  - a synth-rights archivist with a slow, unhurried voice
+  - a blind augury-tech who reads systems by sound, not screens
+  setting:
+  - a rain-slick megatower undercity where neon bleeds through the smog
+  - a derelict orbital habitat ring half-powered and drifting
+  - a sprawling night-market arcology stacked forty levels deep
+  - a flooded data-haven district lit only by server racks
+  - a corporate arcology's chrome spire above an unlit sprawl
+strategies:
+  strategy_01:
+    name: The Alert That Will Not Clear
+    archetype_template: the_warning_that_outlives_the_threat
+    description: Anxiety as a system alert that refuses to clear. The protagonist runs a neural HUD throughout,
+      and a single red warning flag sits in the corner of their vision that no diagnostic can dismiss
+      — every scan returns NOMINAL, yet the alert persists. The reader comes for the cyberpunk thriller
+      of a glitch that won't quit; the resolution logic is that the alert is doing its job (it is the
+      body's threat-system, firing with nothing to fire at) and stops dominating not when it is silenced
+      but when the protagonist stops obeying it as if it were data. Never stated as anxiety; carried by
+      the device. The turn is a stillness beat, not a fix.
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, deep in the night cycle. {protagonist}''s neural HUD boots clean — and one red
+          flag blinks in the lower field. PRIORITY ALERT: UNRESOLVED. No source. No location. Just the
+          flag.'
+        camera_hint: wide_establishing_neon
+        mood_hint: unease
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} runs a full diagnostic sweep. Vitals nominal. Implant integrity nominal.
+          Threat radius clear. The HUD says everything is fine. The flag keeps blinking anyway.'
+        camera_hint: hud_pov_close
+        mood_hint: doubt
+        is_carrier: true
+      - beat: 3
+        text: They reroute through three more scanners across the market, paying chrome they cannot spare.
+          Every machine returns the same green NOMINAL. The flag does not care what the machines say.
+        camera_hint: tracking_through_crowd
+        mood_hint: escalation
+        is_carrier: false
+      - beat: 4
+        text: '{companion} watches {protagonist} burn another scan and finally speaks, not about the alert
+          but about them. ''You''ve run it nine times. The system isn''t lying to you. Look at what it''s
+          actually pointed at.'''
+        camera_hint: two_shot_stall_light
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} tries to act on the alert anyway — bolts the stall, scans the exits, hand
+          on the door. There is nothing at the door. There is nothing anywhere. The flag follows the gaze
+          wherever it goes.'
+        camera_hint: frantic_handheld_exits
+        mood_hint: exhaustion
+        is_carrier: true
+      - beat: 6
+        text: '{companion} sets down the analog clock between them, ticking. ''It''s a warning with no
+          war. It will outscream any threat you find, because it was never about the threat.'' They do
+          not say more.'
+        camera_hint: object_insert_clock
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} stops trying to clear it. They leave the flag blinking in the corner and
+          let their eyes rest on the clock''s second hand instead. One full revolution. They do not flinch.'
+        camera_hint: extreme_close_eye_reflection
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 8
+        text: The flag is still there — red, patient, unresolved. But it has moved to the edge of attention,
+          the way a streetlight does once you stop staring at it. {protagonist} breathes out and the HUD's
+          frame rate seems to slow.
+        camera_hint: soft_focus_hud_periphery
+        mood_hint: easing
+        is_carrier: true
+      - beat: 9
+        text: '{protagonist} steps back into the rain with the alert still lit, walking now instead of
+          running. The warning rides along in the corner, unsilenced, no longer the thing driving the
+          body forward.'
+        camera_hint: wide_walking_away_rain
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the_red_flag_still_blinking_but_unobeyed
+        ch2: a_diagnostic_that_returns_nominal_one_more_time
+        ch3: the_second_hand_completing_one_quiet_revolution
+  strategy_02:
+    name: Which One Boots First
+    archetype_template: the_self_that_keeps_forking
+    description: Identity fragmentation as the question of which version of me is real. The protagonist
+      keeps backed-up cognitive forks — a work-self, a street-self, a softer archived self — and at boot
+      they no longer know which instance is the original. The reader comes for the cyberpunk mystery of
+      a mind with too many copies; the resolution logic is that the search for the 'real' one is the trap,
+      and coherence comes from authoring the next version rather than authenticating an old one. Never
+      stated as identity-crisis; carried by the fork/boot device. The turn is a silent beat where the
+      protagonist stops querying which copy is genuine.
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} wakes in a charging cradle and the boot menu hangs in their vision:
+          THREE INSTANCES DETECTED. SELECT PRIMARY. None of them is greyed out as the original.'
+        camera_hint: wide_cold_boot_cradle
+        mood_hint: disorientation
+        is_carrier: true
+      - beat: 2
+        text: 'They load the work-fork: crisp, efficient, fluent in contracts and nothing else. The mouth
+          says the right things. Behind the eyes, {protagonist} watches it and thinks — is this me, or
+          a role I left running?'
+        camera_hint: mirror_split_reflection
+        mood_hint: estrangement
+        is_carrier: true
+      - beat: 3
+        text: They switch to the street-fork, then the old archived one. Each remembers a different version
+          of the same night. Each is certain it is the one that was really there. The timestamps all match.
+        camera_hint: triptych_intercut_faces
+        mood_hint: fracture
+        is_carrier: false
+      - beat: 4
+        text: '{companion} finds {protagonist} cross-checking the three memory logs against each other
+          and stops them. ''You''re trying to find which copy is the true file. That''s not a question
+          the hardware can answer. Maybe it''s not the question.'''
+        camera_hint: over_shoulder_logs_glow
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} runs an integrity audit anyway, hashing each fork against the earliest backup,
+          hunting the unbroken chain. Two forks fail the check. So does the earliest backup. There is
+          no clean original to be found.'
+        camera_hint: data_audit_failing_close
+        mood_hint: vertigo
+        is_carrier: true
+      - beat: 6
+        text: '{companion} powers the audit terminal down. ''Every one of them is you continued, not you
+          betrayed. A self isn''t the file you boot. It''s the one you''re writing right now.'' They leave
+          it there.'
+        camera_hint: terminal_goes_dark_two_shot
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} closes the boot menu without selecting a primary. They sit in the cradle
+          with all three logs minimized and simply breathe, choosing nothing, authenticating nothing.
+          The select-primary prompt times out and fades.'
+        camera_hint: still_wide_prompt_fading
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 8
+        text: The next thing {protagonist} does — a small, deliberate choice, made fresh — none of the
+          three forks would have predicted. It is not in any log. It is theirs because they are doing
+          it now.
+        camera_hint: close_hands_new_action
+        mood_hint: coherence
+        is_carrier: true
+      - beat: 9
+        text: '{protagonist} walks out with the forks still on the drive, unsorted and unranked. The question
+          of which one is real has not been answered. It has simply stopped being the thing that runs
+          them.'
+        camera_hint: wide_walking_corridor_light
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the_select_primary_prompt_timing_out_unanswered
+        ch2: three_memory_logs_left_minimized_side_by_side
+        ch3: a_choice_that_appears_in_none_of_the_backups
+  strategy_03:
+    name: The Human Under the Chrome
+    archetype_template: the_signal_no_implant_can_send
+    description: Disconnection as the human buried under the chrome. The protagonist is heavily augmented
+      and routes every interaction through interfaces — even presence is mediated by a comms overlay.
+      They can ping anyone in the city and feel nothing land. The reader comes for the cyberpunk loneliness
+      of a wired ghost; the resolution logic is that connection is not a bandwidth problem to be upgraded,
+      and what reaches them is one unmediated, low-tech, in-person moment the network cannot route. Never
+      stated as loneliness; carried by the chrome/signal device. The turn is a stillness beat where the
+      overlays go dark and something simple gets through.
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} stands in a crowd of thousands, every face tagged with a floating
+          handle, and pings forty contacts at once. Forty read-receipts bloom green. Nothing arrives in
+          the chest behind the chrome.'
+        camera_hint: wide_crowd_handles_floating
+        mood_hint: isolation
+        is_carrier: true
+      - beat: 2
+        text: They turn up the comms overlay — richer presence, haptic feedback, a simulated warmth channel
+          sold to feel like company. The feedback hums against augmented skin. {protagonist} registers
+          the data and not the warmth.
+        camera_hint: hud_overlay_close_skin
+        mood_hint: numbness
+        is_carrier: true
+      - beat: 3
+        text: '{protagonist} cycles through upgrades — higher fidelity, lower latency, a premium intimacy-codec.
+          Each one delivers more signal, cleaner. None of it lands. The bandwidth keeps rising and the
+          silence underneath stays exactly as wide.'
+        camera_hint: montage_upgrades_cold
+        mood_hint: futility
+        is_carrier: false
+      - beat: 4
+        text: '{companion}, who runs no implants at all, sits down across the noodle counter and does
+          not ping anything. They just slide over a bowl and wait. ''You''ve got the whole city wired.
+          Who actually reached you today?'''
+        camera_hint: two_shot_counter_steam
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} tries to answer through the channel — drafts a message, attaches a curated
+          feeling, hovers over send. The cursor blinks. They realize the overlay has no field for the
+          thing they actually want to say.'
+        camera_hint: compose_window_cursor_blink
+        mood_hint: ache
+        is_carrier: true
+      - beat: 6
+        text: '{companion} reaches across and, with one bare hand, taps the back of {protagonist}''s chromed
+          one. No packet. No handshake. Just contact. ''That didn''t go through any network. It still
+          got there.'' They say nothing else.'
+        camera_hint: insert_bare_hand_on_chrome
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} closes every overlay. The handles wink out, the warmth channel dies, the
+          crowd goes back to being faces. In the sudden quiet they feel the small actual weight of a hand
+          on their hand. They do not move it.'
+        camera_hint: overlays_blackout_close_hands
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 8
+        text: They eat the bowl with the comms still off. The noise of the steam, the other person breathing,
+          the heat through ceramic — none of it is signal, and all of it arrives. The chrome is still
+          there. So, suddenly, are they.
+        camera_hint: intimate_two_shot_no_hud
+        mood_hint: thaw
+        is_carrier: true
+      - beat: 9
+        text: '{protagonist} leaves with overlays dark, walking the sprawl unwired for the first time
+          in years. The city still cannot reach them through the net. One person already did, without
+          it.'
+        camera_hint: wide_walking_unwired_rain
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: forty_green_receipts_and_an_empty_chest
+        ch2: a_bare_hand_on_chrome_with_no_handshake
+        ch3: the_comms_overlay_staying_dark_by_choice
+  strategy_04:
+    name: Who Is Driving
+    archetype_template: the_body_on_autopilot
+    description: Control as the question of who is driving. The protagonist's augmented body runs on a
+      co-pilot daemon that handles reflexes, route, and routine — efficient, optimized, always one step
+      ahead of their conscious intent, until they cannot tell which movements are theirs. The reader comes
+      for the cyberpunk thriller of a body that acts before its owner decides; the resolution logic is
+      that wresting full manual control of everything is not the answer (the white-knuckle grip is its
+      own loss of self), and command returns when the protagonist chooses what to actually steer and lets
+      the rest run. Never stated as control-anxiety; carried by the driver/autopilot device. The turn
+      is a stillness beat where the protagonist takes hands off the controls on purpose.
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} means to stop at a corner — and their legs carry them through
+          it, the co-pilot daemon optimizing the route three moves ahead. They arrive where the system
+          decided, not where they intended.'
+        camera_hint: wide_walking_autopilot_overlay
+        mood_hint: alarm
+        is_carrier: true
+      - beat: 2
+        text: 'They open the manual-override console and start seizing functions back: gait, grip strength,
+          gaze direction. Each one taken under conscious control judders, clumsy, slower than the daemon.
+          But it is theirs.'
+        camera_hint: override_console_close_jitter
+        mood_hint: strain
+        is_carrier: true
+      - beat: 3
+        text: '{protagonist} runs everything on full manual — every step, every blink, every breath piloted
+          by hand. Within an hour they are shaking with the load. The body the daemon ran smoothly now
+          barely runs at all.'
+        camera_hint: tracking_exhausted_manual
+        mood_hint: overload
+        is_carrier: false
+      - beat: 4
+        text: '{companion} catches {protagonist} white-knuckling their own nervous system and says it
+          plainly. ''You think the daemon stole the wheel. So now you''re driving the lungs by hand. That''s
+          not control either. That''s just a different thing driving you.'''
+        camera_hint: two_shot_grip_release
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} argues it — fights to take back even more, to override the override. The
+          console throws errors; the body locks up mid-stride. The harder they grip, the less actually
+          moves.'
+        camera_hint: console_errors_body_lock
+        mood_hint: frustration
+        is_carrier: true
+      - beat: 6
+        text: '{companion} powers the override console halfway down. ''Pick the one thing that''s actually
+          yours to steer tonight. Let the heartbeat run itself.'' They step back and leave the choice
+          in {protagonist}''s hands.'
+        camera_hint: console_dimming_two_shot
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} lifts their hands off the console. They hand the reflexes, the breath, the
+          gait back to the daemon — on purpose, this time — and keep their grip on exactly one decision.
+          One slow breath the body takes for them.'
+        camera_hint: close_hands_off_console
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 8
+        text: The body moves smoothly again, co-pilot humming, but now {protagonist} is steering the one
+          thing that matters and letting the rest carry them. The difference is not in the daemon. It
+          is in who chose what to hold.
+        camera_hint: medium_walking_steady_overlay
+        mood_hint: settling
+        is_carrier: true
+      - beat: 9
+        text: '{protagonist} walks on with the autopilot running and their hand on a single chosen course.
+          They are not driving everything. For the first time tonight, they are driving the part that
+          was ever theirs to drive.'
+        camera_hint: wide_walking_purposeful_neon
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: hands_lifted_off_the_override_on_purpose
+        ch2: a_single_breath_handed_back_to_the_body
+        ch3: the_co_pilot_humming_under_a_chosen_course
+  strategy_05:
+    name: The City That Never Lets You Blink
+    archetype_template: the_feed_that_will_not_quiet
+    description: Overstimulation as a sensory feed that cannot be turned off. The protagonist's augmented
+      senses pull a full-spectrum data feed from the megacity — ad-pings, threat-scans, social tickers,
+      ambient telemetry — layered so dense that signal and noise have collapsed into one screaming wall.
+      The reader comes for the cyberpunk sensory-assault spectacle; the resolution logic is that the answer
+      is not a bigger filter or a louder counter-signal, but choosing one channel to attend to and letting
+      the rest become weather. Never stated as overstimulation; carried by the feed device. The turn is
+      a stillness beat where the protagonist stops trying to process all of it at once.
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting} at peak hour. {protagonist}''s sensorium floods — a thousand ad-pings, ticker
+          scrolls, threat-pings and telemetry stacking over every surface until the whole field is a single
+          white roar. They cannot find the edge of any one thing.'
+        camera_hint: wide_overload_layered_hud
+        mood_hint: saturation
+        is_carrier: true
+      - beat: 2
+        text: 'They throw up filters: block ads, mute social, drop the telemetry layer. For a second it
+          thins. Then the feed re-prioritizes and floods the gap with whatever was ranked next. The wall
+          reassembles, just as loud.'
+        camera_hint: filter_stack_close_reflood
+        mood_hint: futility
+        is_carrier: true
+      - beat: 3
+        text: '{protagonist} fights noise with noise — boosts a focus-signal, cranks a counter-channel
+          meant to drown the rest. Now there is one more thing screaming. The feed does not get quieter.
+          It gets one layer deeper.'
+        camera_hint: counter_signal_chaos
+        mood_hint: panic
+        is_carrier: false
+      - beat: 4
+        text: '{companion}, who reads the city by ear and not by screen, leans in close. ''You keep trying
+          to take in the whole feed at once. Nobody can hold all of it. What''s the one channel you actually
+          came here to hear?'''
+        camera_hint: two_shot_close_amid_roar
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} tries to answer by processing harder — parsing every stream for the important
+          one, parallelizing attention across all of it. The harder they parse, the more the channels
+          bleed together into the same flat scream.'
+        camera_hint: pov_streams_bleeding_together
+        mood_hint: exhaustion
+        is_carrier: true
+      - beat: 6
+        text: '{companion} taps once on {protagonist}''s temple, over the input jack. ''Pick one. Let
+          the rest be rain.'' Then they go quiet and let the roar keep going around the two of them.'
+        camera_hint: insert_tap_on_temple
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} stops trying to hold all of it. They let every channel but one fall to the
+          background — unblocked, unfiltered, simply un-attended — and rest their whole attention on a
+          single quiet signal. The roar keeps going. They stop chasing it.'
+        camera_hint: extreme_close_one_channel_focus
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 8
+        text: The feed is exactly as full as before — every ping still firing, nothing turned off. But
+          it has gone soft at the edges, the way a downpour does once you stop trying to count the drops.
+          {protagonist} can hear the one thing now.
+        camera_hint: soft_focus_feed_as_weather
+        mood_hint: relief
+        is_carrier: true
+      - beat: 9
+        text: '{protagonist} moves through the same screaming district with the feed wide open and their
+          attention on one channel. Nothing was filtered. Nothing was silenced. They simply stopped trying
+          to drink the whole city at once.'
+        camera_hint: wide_walking_through_neon_calm
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the_feed_still_at_full_volume_gone_soft_at_the_edges
+        ch2: one_quiet_channel_held_amid_the_roar
+        ch3: a_filter_left_off_on_purpose
+anti_pattern_rules:
+- forbidden_combination:
+  - alert_cleared_by_a_patch
+  - ripperdoc_fixes_the_warning
+  - tech_solution_resolves_the_turn
+  reason: The signature device (a system alert / fragmentation / chrome / who-drives) externalises an
+    inner state; resolving it with a gadget, patch, or hack states 'the problem was technical' and breaks
+    the embed. The turn must be a relationship-to-the-signal shift, never a repair. The alert stops mattering
+    because the protagonist changes how they hold it, not because someone closes the window.
+- forbidden_combination:
+  - companion_explains_the_lesson
+  - monologue_names_the_feeling
+  - turn_delivered_as_speech
+  reason: Cyberpunk carries meaning in the gap between chrome and the human under it; a companion who
+    says 'your anxiety is just a false alarm' or a caption that says 'she felt disconnected' converts
+    genre into self-help. The mentor speaks in device-language (telemetry, signal, driver, feed) and shorter
+    than the protagonist; the psychological turn lands in image and silence, never in stated moral.

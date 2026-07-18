@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
+locale: en_US
+book_id_prefix: stillness_press__ahjan__gen_z_student__sleep_anxiety
+brand: stillness_press
+teacher: ahjan
+persona: gen_z_student
+topic: sleep_anxiety
+teacher_topic_score: 0.5
+teacher_persona_score: 0.5
+composite_fit: 0.5
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__gen_z_student__sleep_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__sleep_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__gen_z_student__sleep_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__sleep_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: stillness_press__ahjan__gen_z_student__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: |
+  You'll learn to understand what your body is doing at 3am without needing to force sleep. 3 books across engines of the same underlying capacity — each one enters the work from a different angle.
+bestseller_hook_family: recognition_descent
+emotional_engine: sleep_anxiety_recognition
+comp_series:
+- Why We Sleep (Matthew Walker) — science foundation
+- The Sleep Book (Guy Meadows) — ACT-based surrender framing
+- Say Good Night to Insomnia (Gregg Jacobs) — CBT-I adjacent
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 18–24
+  where_they_are: |
+    Between assignments at 1am. Too wired to sleep, too tired to keep working. Knows this cycle.
+  what_they_need: |
+    Voice that takes them seriously without mothering them. Acknowledges the scale of the future they inherited.
+  what_they_avoid: |
+    'You'll figure it out.' Career-services optimism. 'Self-care' checklists.
+series_voice_markers:
+  register: intimate, persona-specific, no management-speak
+  sentence_rhythm: longer, unhurried sentences — no punchy copy
+  metaphor_family: night, water, animals settling — never productivity, mechanical, military
+  second_person_default: true
+  taboo:
+  - No rewire-your-brain language
+  - No morning-routine prescriptions
+  - No therapy-as-solution closing
+  - No religious framing
+main_character_name: Casey
+main_character_role: junior in university, debt-aware, future-pessimistic
+main_character_image_path: null
+main_character_lora_id: casey_sp_us
+main_character_trigger_word: casey_sp_us
+plan_source_path: config/manga/manga_brand_series_plan.yaml

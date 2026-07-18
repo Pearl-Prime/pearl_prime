@@ -1,0 +1,88 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: adhd_forge__house__gen_z_student__anxiety
+brand: adhd_forge
+teacher: null
+persona: gen_z_student
+topic: anxiety
+byline_author: nico_crane
+arc:
+  installment_1:
+    book_id: adhd_forge__house__gen_z_student__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: adhd_forge__house__gen_z_student__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: adhd_forge__house__gen_z_student__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: adhd_forge__house__gen_z_student__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: adhd_forge__house__gen_z_student__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: adhd_forge__house__gen_z_student__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: adhd_forge__house__gen_z_student__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: >
+  You'll learn to recognize what your anxious mind is actually doing — in class,
+  in the group chat, at 2am scrolling — without trying to fix it, optimize it, or
+  white-knuckle it into silence. Seven books, seven different doorways into the
+  same restless feeling. Each one meets the anxiety from a new angle, in language
+  that sounds like a friend who gets it, not a worksheet.
+bestseller_hook_family: recognition_descent
+emotional_engine: anxiety_recognition
+comp_series:
+- "Unfuck Your Brain (Faith G. Harper) — blunt, science-honest, zero condescension"
+- "How to Keep House While Drowning (KC Davis) — gentle, shame-free, meets you where you are"
+- "We're All Mad Here (Claire Eastham) — young, real-talk anxiety memoir, recognition over cure"
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: "18–24"
+  where_they_are: >
+    It's 1am in a dorm room lit by a laptop, three tabs of an unstarted assignment
+    open, the group chat still buzzing, and their chest is tight over something they
+    can't even point to — pretty sure they're behind, pretty sure everyone else has
+    it figured out.
+  what_they_need: >
+    Someone who talks to them like a smart friend who has actually felt this — who
+    names the anxiety honestly instead of handing them a coping worksheet or a
+    diagnosis.
+  what_they_avoid: >
+    Clinical jargon. Boomer 'just breathe' advice. Toxic productivity hacks. Anything
+    that sounds like a pamphlet from the counseling center waiting room.
+series_voice_markers:
+  register: "warm, real-talk, a little dry; the voice of a friend texting you back at 1am, not a therapist or a textbook"
+  sentence_rhythm: "short and direct, punchy; fragments allowed for emphasis; occasional longer line when the feeling needs room"
+  metaphor_family: "campus and student life, screens and group chats, the body, weather — never clinical, military, or corporate-productivity"
+  second_person_default: true
+_needs_authoring: false

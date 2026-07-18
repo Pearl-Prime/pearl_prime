@@ -1,0 +1,114 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__imposter_syndrome__comparison
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__imposter_syndrome.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__worth_limits
+  name: Worth & Limits — for Nurses
+installment_number: 1
+engine: comparison
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Imposter Syndrome: When Other People''s Success Feels Like Your Failure'
+subtitle: A Real Talk Guide to Imposter Syndrome for Healthcare Rns
+cover_tagline: Everyone else looks like they belong here. You're sure they can tell
+  you don't.
+description:
+  short_blurb: You scan the floor and every other nurse seems to know exactly what
+    they're doing while you're one question away from being found out. This is about
+    imposter syndrome through the lens of comparison — measuring your inside against
+    everyone else's outside until you're certain you're the only fraud in scrubs.
+    It will not tell you you're amazing. It will show you what you've actually been
+    comparing.
+  long_description: 'There''s a particular kind of exhaustion in feeling like the
+    only one faking it. You watch the nurse next to you move through the shift like
+    she was born knowing, the resident who never hesitates, the preceptor who has
+    an answer for everything — and you do the math you always do. They belong. You''re
+    performing. Any minute now someone''s going to look closely and realize the seat
+    you''re in was never really yours.
+
+
+    You run on comparison and come up short every time. You treat every confident
+    colleague as proof of your own fraudulence. You''ve earned the license, passed
+    the boards, kept patients alive on the worst nights — and you still feel like
+    the imposter in a room full of real nurses, because everyone else seems so certain
+    and you''re drowning in doubt.
+
+
+    It helps to name what you''re actually doing, because it''s a specific and unfair
+    trick of the mind: you are comparing your inside to their outside. You know every
+    doubt you''ve ever had, every shaky moment, every time you double-checked a dose
+    you should''ve known cold. You know none of theirs. So of course they look like
+    they belong and you feel like you snuck in. You''re matching your full, unedited
+    interior against their visible surface and calling the gap evidence. It isn''t
+    evidence. It''s a measurement error you make a hundred times a shift.
+
+
+    From there we drop into the moment the comparison fires and the imposter feeling
+    floods in. Not to argue you out of it, because you can''t logic your way past
+    a feeling this old. We''ll stay in it and look at what''s underneath. Usually
+    it''s not really about competence at all. It''s a younger fear that being found
+    out as ordinary, as uncertain, as still-learning, would mean you don''t deserve
+    the place you fought for. That fear doesn''t need a pep talk. It needs you to
+    stop using strangers'' composure as the ruler.
+
+
+    You won''t reach the end suddenly sure of yourself. The comparison will still
+    fire when the confident nurse breezes past. What changes is that you''ll catch
+    it — you''ll recognize the instant you start grading your messy interior against
+    someone''s clean exterior, and you''ll know that gap is a trick of the angle,
+    not a truth about your right to be there.
+
+
+    Skip this if you want confidence hacks or a way to own your expertise; you won''t
+    become a nurse who never doubts herself on the floor. The single thing it offers
+    is that the comparison feeding your imposter feeling loses its authority — so
+    the next time everyone else looks like they belong, you''ll know what you''re
+    really measuring.
+
+
+    You earned the seat. You''re allowed to feel uncertain in it and still be the
+    one who belongs there.'
+keywords:
+  primary:
+  - imposter syndrome
+  - feeling like a fraud
+  - self doubt at work
+  - confidence at work
+  - perfectionism
+  - imposter syndrome help
+  secondary:
+  - nurses
+  - imposter syndrome for nurses
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL031000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- The Secret Thoughts of Successful Women (Valerie Young) — the definitive secular
+  book on imposter syndrome and its patterns
+- The Gifts of Imperfection (Brené Brown) — on comparison, worthiness, and the inside-vs-outside
+  trap
+- Mindset (Carol Dweck) — on how the fixed belief that you should already know reframes
+  learning as fraud
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

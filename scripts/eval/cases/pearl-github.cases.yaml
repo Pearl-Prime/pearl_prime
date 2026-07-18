@@ -1,0 +1,35 @@
+# Eval case dataset — skill: pearl-github
+# Baseline eval input for P0-2 (docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md §2).
+# trigger.positives  -> prompts that SHOULD route to pearl-github
+# trigger.negatives  -> distractor prompts another skill/agent owns (should NOT fire)
+# tasks              -> real-task benchmarks; rubric is graded 0..1 by the local judge (--judge)
+skill: pearl-github
+judge_lang: en
+
+trigger:
+  positives:
+    - "branch from origin/main and open a pull request for this change"
+    - "run push-guard and preflight before pushing"
+    - "this PR deletes 200 files, is it safe to merge"
+    - "the push is blocked because I branched off a codex branch, how do I recover"
+    - "do an hourly repo health check"
+    - "check branch protection requirements before merging to main"
+    - "I have a stuck cherry-pick, help me recover the branch"
+    - "is my branch ahead or behind origin/main"
+  negatives:
+    - "connect the ElevenLabs API and write the key into .env"
+    - "research Gen Z wellness trends in Tokyo with citations"
+    - "render the manga character reference sheet on Pearl Star"
+    - "write chapter 3 of the bestseller in the brand voice"
+    - "translate the atoms into Japanese with Qwen"
+
+tasks:
+  - id: pg-task-1-preflight
+    prompt: "List the exact mandatory preflight commands to run before any branch, commit, push, PR, merge, or recovery action in this repo."
+    rubric: "Names git fetch origin, push_guard.py, preflight_push.sh, health_check.sh and the rev-list left-right count vs origin/main, in line with CLAUDE.md Mandatory Preflight."
+  - id: pg-task-2-mass-deletion
+    prompt: "A PR shows 80 deletions in gh pr diff --stat. What is the rule and what do you do?"
+    rubric: "States the hard rule: never merge a PR deleting >50 files without explicit owner approval; STOP and ask the owner; references the PR #245 incident."
+  - id: pg-task-3-wrong-base
+    prompt: "Push-guard blocked because the base branch was wrong. Give the recovery sequence."
+    rubric: "Provides the golden clean-branch recovery: fetch, checkout -b agent/<task>-clean origin/main, cherry-pick the commit, push -u, per CLAUDE.md Golden Branch Pattern."

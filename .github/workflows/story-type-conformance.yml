@@ -1,0 +1,54 @@
+# Story-type conformance + hard gate — enforces docs/STORY_TYPES_AND_STRUCTURES.md
+# §7/§3/§9 on tagged STORY atoms and story_atoms/anchored prose.
+#
+# --conformance-only: blocks ONLY on §7 schema violations of TAGGED atoms. Legacy
+# 5-element FAILs never fail this path; UNtagged persona pools can't violate it.
+#
+# --hard-gate: blocks on CHARACTER_STUDY_UNNAMED, LOW_STORY_TYPE_VARIETY, and §7.
+# Applied to story_atoms/anchored (Claude authoring lane) and tagged teacher STORY
+# atoms. Persona atoms/ catalog stays on --conformance-only until authoring lands.
+name: Story-type conformance
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'atoms/**/STORY/**'
+      - 'SOURCE_OF_TRUTH/**/STORY/**'
+      - 'story_atoms/**'
+      - 'phoenix_v4/quality/story_atom_lint.py'
+      - 'config/teachers/teacher_registry.yaml'
+      - '.github/workflows/story-type-conformance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'atoms/**/STORY/**'
+      - 'SOURCE_OF_TRUTH/**/STORY/**'
+      - 'story_atoms/**'
+      - 'phoenix_v4/quality/story_atom_lint.py'
+jobs:
+  story-type-conformance:
+    name: story-type-conformance
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install -q pyyaml
+      - name: Teacher-mode STORY atoms (tagged) — §7 conformance
+        run: |
+          PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
+            --path SOURCE_OF_TRUTH --conformance-only \
+            --json-out artifacts/ops/story_type_conformance_teacher.json
+      - name: Anchored story_atoms — hard gate (NAMED + variety + §7)
+        run: |
+          PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
+            --path story_atoms --hard-gate \
+            --json-out artifacts/ops/story_type_hard_gate_anchored.json
+      - name: Persona STORY pools — §7 conformance only (no-op until authoring)
+        run: |
+          PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
+            --path atoms --story-only --conformance-only \
+            --json-out artifacts/ops/story_type_conformance_pools.json

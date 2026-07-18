@@ -1,0 +1,502 @@
+schema_version: 1.0.0
+genre: sports_competition
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  focus: strategy_01
+  perfectionism: strategy_02
+  teamwork: strategy_03
+  failure_recovery: strategy_04
+  self_belief: strategy_05
+character_pool:
+  protagonist:
+  - Maya Ortega
+  - Kenji Tanaka
+  - Devon Pryce
+  - Aisha Bello
+  - Sora Lindqvist
+  companion:
+  - a retired-champion coach who speaks in three words or fewer
+  - an aging equipment manager who has watched a thousand finals from the bench
+  - a former teammate turned trainer who never made the cut herself
+  - a quiet assistant coach who times everything and praises nothing
+  - an elder dojo-keeper who sweeps the floor before every session
+  setting:
+  - a municipal sports complex an hour before dawn
+  - a rain-streaked outdoor track under stadium floodlights
+  - an empty gymnasium with the scoreboard still warm from last night's game
+  - a worn community pool with one lane roped off
+  - a school field at the ragged end of practice when everyone else has gone home
+strategies:
+  strategy_01:
+    name: The One Ball at the Line
+    archetype_template: noise_silenced_to_the_single_thing
+    description: 'FOCUS / ADHD told through the free-throw line. The protagonist''s attention is a stadium
+      full of noise — the crowd, the scoreboard clock, the trash talk, the score they''re down by, the
+      play they botched a minute ago, all of it equally loud and equally close. The sport''s signature
+      device is the bounce-pass routine at the line: the deliberate narrowing of the entire roaring world
+      down to one ball, one rim, one breath. The turn is not ''learning to concentrate'' — it is the discovery
+      that focus is not silencing the noise but choosing, physically, the one thing among it. The mentor
+      never says ''block it out''; the mentor changes what the protagonist is allowed to hold.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. Tied game, final minutes. {protagonist} is fouled and sent to the line — and
+          everything arrives at once: the horn, the wall of voices, the shot clock from the last possession
+          still ringing in their ears, the scoreboard, the bench yelling a play. Every sound is the same
+          volume. Every one feels equally urgent.'
+        camera_hint: wide_establishing_chaos
+        mood_hint: flooded
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} bounces the ball to set up the free throw and loses count. Was that two bounces
+          or three? The routine — the one anchor that should be automatic — has gone slippery. Their eyes
+          dart: rim, crowd, clock, a heckler''s sign, the rim again. The shot goes up rushed and clangs
+          off the front iron.'
+        camera_hint: rapid_darting_cuts
+        mood_hint: scattered
+        is_carrier: true
+      - beat: 3
+        text: Timeout. On the bench, {companion} does not talk about the miss. They take the towel from
+          {protagonist}'s hands — the fidget, the thing the hands were doing instead of resting — and
+          simply hold it. 'You are trying to watch nine things. The ball is one of them.'
+        camera_hint: close_two_shot_bench
+        mood_hint: redirected
+        is_carrier: true
+      - beat: 4
+        text: Back at the line for the second shot. {protagonist} tries to force the noise away — clamps
+          down, jaw tight, willing the crowd to vanish. It gets louder. Fighting the roar is just one
+          more thing to do at the same time as everything else.
+        camera_hint: tight_strained_face
+        mood_hint: straining
+        is_carrier: false
+      - beat: 5
+        text: Then {protagonist} stops fighting. They let the noise stay exactly where it is — and lower
+          their eyes to the orange seams of the ball in their hands. One bounce. The crowd does not get
+          quieter. It gets further away.
+        camera_hint: extreme_close_ball_in_hands
+        mood_hint: narrowing
+        is_carrier: true
+      - beat: 6
+        text: A held beat. Just the ball, the two hands, the small sound of leather on hardwood. No clock.
+          No score. No sign in the third row. The widest shot in the world has shrunk to the size of one
+          sphere — and for the length of a single breath, nothing else is being asked of them.
+        camera_hint: silent_isolated_macro
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} shoots. The form is clean — not because the gym went silent, but because
+          they finally let only one thing be loud. The ball rolls the rim once and drops. They are already
+          not thinking about whether it went in; they were only ever thinking about the release.'
+        camera_hint: follow_arc_clean
+        mood_hint: clarity
+        is_carrier: true
+      - beat: 8
+        text: 'Play resumes. The noise is back to full volume and it does not matter now — {protagonist}
+          moves through it carrying one thing at a time: the pass, then the cut, then the screen. The
+          roar is weather. They are choosing, over and over, where to put the single beam of their attention.'
+        camera_hint: flowing_in_game_motion
+        mood_hint: anchored
+        is_carrier: true
+      - beat: 9
+        text: Afterward, the empty gym. {protagonist} stands alone at the line and bounces the ball —
+          two, deliberate, counted. {companion} sweeps near the baseline and says nothing. The routine
+          is not a superstition anymore. It is a door they now know how to walk through.
+        camera_hint: quiet_wide_empty_court
+        mood_hint: grounded
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The scoreboard reads what it reads — but {protagonist} is still standing at the line in their
+          mind, listening for the one sound under all the others.
+        ch2: Tomorrow there will be a louder gym, a bigger crowd, a higher score to be down by. The question
+          is no longer how to make it quiet. It is which single thing they will choose to hear.
+        ch3: '{companion} leaves the towel folded on the bench and walks out. {protagonist} looks at their
+          own hands — and for the first time, they are still.'
+  strategy_02:
+    name: The Split That Is Never Enough
+    archetype_template: personal_best_that_can_never_satisfy
+    description: 'PERFECTIONISM told through the stopwatch and the lap split. The protagonist is a runner
+      who beats their own record and feels nothing but the next, smaller increment they failed to shave.
+      The sport''s signature device is the digital split flashing at the line: a number that is always
+      a fraction short of the number in their head. The turn is not ''learning to accept second place''
+      — it is the moment the athlete runs a stretch where they cannot see the clock at all, and discovers
+      the running was the thing, not the readout. The mentor times every lap and never once says ''good'',
+      because the protagonist has to stop needing the word.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} crosses the line and the stopwatch in {companion}''s hand flashes
+          a number — a personal best, faster than they have ever run. {protagonist} reads it and their
+          face does not change. They are already calculating the four-tenths of a second they think they
+          left on the final bend.'
+        camera_hint: close_on_stopwatch_face
+        mood_hint: unsatisfied
+        is_carrier: true
+      - beat: 2
+        text: Another lap. {protagonist} runs it perfectly clean and still, at the line, winces — the
+          split was good, not good enough, never the impossible number that lives one decimal lower than
+          whatever they actually achieve. The record they broke an hour ago has already become the bare
+          minimum.
+        camera_hint: medium_runner_at_line
+        mood_hint: relentless
+        is_carrier: true
+      - beat: 3
+        text: '{companion} clicks the watch, looks at the time, and says nothing. No ''well done''. No
+          number read aloud. They just reset the watch and nod at the start line. {protagonist} waits
+          half a second for the praise that does not come — and feels how badly they were waiting for
+          it.'
+        camera_hint: two_shot_trackside
+        mood_hint: withheld
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} demands the number — ''What did I run?'' {companion} turns the watch face
+          away, into their own palm. ''You felt the lap. Tell me about the lap.'' {protagonist} has no
+          answer. They were not in the lap. They were in the number the lap would become.'
+        camera_hint: tight_face_off
+        mood_hint: exposed
+        is_carrier: false
+      - beat: 5
+        text: Last set of the night. The floodlights catch the rain. {companion} pockets the stopwatch
+          entirely — no clock, no split, no readout at the line. 'Run it for nothing.' {protagonist} steps
+          to the start with nothing to chase and nothing to fail.
+        camera_hint: wide_rain_floodlights
+        mood_hint: untethered
+        is_carrier: true
+      - beat: 6
+        text: Mid-backstretch, no clock anywhere, {protagonist}'s stride opens. For three strides there
+          is no number — only the slap of spikes, the burn in the lungs, the cold air, the simple animal
+          fact of moving fast through the dark. A held beat with no measurement in it at all.
+        camera_hint: tracking_silent_stride
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} crosses the line and instinctively looks for the time — and there is no watch.
+          {companion}''s hands are empty and open. For one disoriented moment {protagonist} has no idea
+          if the run was good. And the run was still the best one they have ever felt.'
+        camera_hint: close_searching_for_clock
+        mood_hint: discovery
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} laughs — short, surprised, almost winded. The number was never the run. The
+          run was the run. They walk the lane breathing hard, and the absence of a readout does not feel
+          like a loss. It feels like the first time the running belonged to them.'
+        camera_hint: walking_recovery_breath
+        mood_hint: release
+        is_carrier: true
+      - beat: 9
+        text: Later, {protagonist} picks up the stopwatch from the bench and turns it over in their hand.
+          They start it, watch the digits climb, and — deliberately — set it back down without running
+          against it. The clock is a tool now. It is no longer the judge.
+        camera_hint: close_hands_with_stopwatch
+        mood_hint: grounded
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The personal best still stands in the logbook. {protagonist} has finally stopped reading
+          it as an accusation.
+        ch2: There will always be a faster number one decimal away. {protagonist} steps to the line tomorrow
+          knowing the number is not where the running lives.
+        ch3: '{companion} leaves the stopwatch running on the empty bench, digits climbing into the dark
+          — measuring nothing, chasing no one. {protagonist} walks past it without looking.'
+  strategy_03:
+    name: The Baton You Cannot Run Alone
+    archetype_template: the_self_sufficient_one_who_must_be_handed_to
+    description: 'TEAMWORK told through the relay baton and the exchange zone. The protagonist is the
+      fastest leg on the squad and privately believes the team slows them down — they would rather run
+      the whole distance themselves. The sport''s signature device is the baton handoff: the one moment
+      in track where your speed is worth nothing unless someone else''s hand meets yours inside the zone.
+      The turn is not ''learning that teammates are nice'' — it is the visceral discovery that the baton,
+      the thing the whole race is about, literally cannot be carried solo, and that trusting the exchange
+      means looking forward and letting go before you can see it land. The mentor never lectures about
+      unity; the mentor just keeps making them practice the one thing they cannot do alone.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, relay practice. {protagonist} blazes their leg — clearly the fastest runner
+          on the squad — then botches the handoff, slowing up to look back for the next runner, killing
+          the momentum. They finish the rep frustrated. ''I''d be faster if I just ran the whole thing
+          myself.'''
+        camera_hint: wide_relay_exchange_zone
+        mood_hint: isolated_pride
+        is_carrier: true
+      - beat: 2
+        text: Again. {protagonist} runs brilliantly and again decelerates into the exchange, distrustful,
+          glancing over their shoulder for the teammate's hand instead of trusting it will be there. The
+          baton fumbles at the edge of the zone. Their individual speed, the thing they are proudest of,
+          keeps producing a failed pass.
+        camera_hint: medium_fumbled_handoff
+        mood_hint: friction
+        is_carrier: true
+      - beat: 3
+        text: '{companion} stops the drill. They do not give a speech about the team. They take the baton,
+          press it into {protagonist}''s palm, and close their fingers around it. ''This. One person can
+          sprint. One person cannot finish this race. That is the whole point of the baton.'''
+        camera_hint: close_baton_in_hand
+        mood_hint: instruction
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} tries to over-control the next exchange — slows down even more, turns fully
+          around to watch the handoff happen, makes sure with their own eyes. It is the safest pass and
+          the slowest one. Watching the baton land costs exactly the speed the race is run for.'
+        camera_hint: tight_overcontrolled_pass
+        mood_hint: clutching
+        is_carrier: false
+      - beat: 5
+        text: '{companion} sets it up one more time and says only: ''Eyes front. Run your line. Trust
+          the hand.'' {protagonist} settles into the blocks for the incoming leg with the instruction
+          sitting heavy — to hand off the thing without turning to see it caught.'
+        camera_hint: blocks_low_angle
+        mood_hint: bracing
+        is_carrier: true
+      - beat: 6
+        text: 'The incoming runner calls the mark. {protagonist} reaches the baton back into the empty
+          air behind them — eyes locked forward, not looking, running full speed into a handoff they cannot
+          see. A held beat: the arm extended back, the open palm, the absolute trust of the unwatched
+          exchange.'
+        camera_hint: silent_extended_arm_no_look
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: The baton lands in the next runner's hand — solid, clean, full-speed, because {protagonist}
+          finally let go without checking. The momentum carries straight through the zone unbroken. The
+          pass works precisely because they did not slow down to make sure of it.
+        camera_hint: clean_full_speed_exchange
+        mood_hint: release
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} pulls up after the zone, hands on knees, and watches their teammate carry
+          the baton down the track — carrying it faster than {protagonist} could have run that leg. For
+          the first time, watching someone else hold the thing does not feel like losing it. It feels
+          like the race actually starting.'
+        camera_hint: wide_watching_teammate_run
+        mood_hint: opening
+        is_carrier: true
+      - beat: 9
+        text: Practice ends. {protagonist} and the squad walk off together, passing the baton hand to
+          hand absently as they go — a small habit now, no drama in it. {companion} racks the equipment
+          and watches them leave as four, not one. {protagonist} is no longer trying to run the whole
+          thing alone.
+        camera_hint: quiet_group_walking_off
+        mood_hint: belonging
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The baton sits in the rack, scuffed from a hundred exchanges. It was never built to be carried
+          by one pair of hands — {protagonist} finally believes that.
+        ch2: 'On race day there will be a stranger''s hand reaching back for theirs in a zone they cannot
+          fully see. {protagonist} knows now what the race asks: run your line, and trust the hand.'
+        ch3: '{companion} leaves the four of them passing the baton in the dusk, hand to hand to hand.
+          The fastest runner on the squad is, at last, only one leg of something longer.'
+  strategy_04:
+    name: The Catch You Get Up From
+    archetype_template: the_drop_that_lost_it_and_the_return_to_the_spot
+    description: 'FAILURE_RECOVERY told through the dropped catch that lost the final and the return to
+      that exact spot on the field. The protagonist had the game-winning ball in their hands and dropped
+      it; the whole season ended on their error, and they have not been able to be in that spot — physically
+      or in their mind — since. The sport''s signature device is the catching drill at the precise location
+      of the drop: the same patch of turf, the same ball arc, run again and again until the body can be
+      there without flinching. The turn is not ''forgiving yourself'' as a stated idea — it is the somatic
+      moment of standing on the spot, catching the ball clean, and feeling the ground hold instead of
+      swallow. The mentor never says ''everyone fails''; the mentor just keeps throwing to the same place.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} stands at the far end of the field, looking at one specific patch
+          of turf the way you look at a place where something happened. In their memory the ball is in
+          the air, the final on the line, the catch theirs to make — and then on the ground, and then
+          the silence of a whole team''s season ending.'
+        camera_hint: wide_lone_figure_field
+        mood_hint: haunted
+        is_carrier: true
+      - beat: 2
+        text: '{companion} jogs a bucket of balls onto the field and sets up to throw — toward that exact
+          spot. {protagonist}''s body tightens before the first ball even leaves the hand. They drift,
+          half a step, away from the patch of grass where it happened. The feet do not want to stand there.'
+        camera_hint: medium_flinch_drift
+        mood_hint: avoidance
+        is_carrier: true
+      - beat: 3
+        text: The first throw comes to the spot. {protagonist} reaches — and pulls the hands back a fraction
+          early, the catch dropping through the exact gap it dropped through before. The hands have learned
+          to brace for the failure. The ground feels like it is waiting to take another one.
+        camera_hint: close_hands_pulling_back
+        mood_hint: fear
+        is_carrier: true
+      - beat: 4
+        text: '{companion} does not react to the drop. They pick up another ball. ''Same spot.'' Not unkind.
+          Not encouraging. Just the fact of the next ball and the same patch of grass. {protagonist} understands
+          they are not being asked to forget it. They are being asked to stand in it.'
+        camera_hint: two_shot_bucket_of_balls
+        mood_hint: steadying
+        is_carrier: false
+      - beat: 5
+        text: '{protagonist} walks back and plants both feet on the exact spot — the one they have been
+          avoiding. They make themselves stop drifting. They stand where it happened and they stay there,
+          ready, refusing for once to give the ground that ran out from under them.'
+        camera_hint: low_angle_feet_planted
+        mood_hint: bracing
+        is_carrier: true
+      - beat: 6
+        text: '{companion} holds the ball, not throwing yet. {protagonist} stands on the spot in the floodlit
+          quiet, hands open, breathing. No throw. No catch. Just a body choosing to occupy the place it
+          has been fleeing for a season — a held beat of staying put on the worst patch of grass they
+          own.'
+        camera_hint: silent_held_on_the_spot
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: The throw comes. {protagonist} stays — does not pull back, does not flinch the hands early
+          — and the ball thuds into the palms and sticks. Clean. On the spot. The ground holds. It was
+          always going to hold; it was the bracing, not the grass, that kept dropping the ball.
+        camera_hint: close_clean_catch_secured
+        mood_hint: relief
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} catches the next one, and the next, on the same spot, the body relearning
+          that this place is just a place. The drop is still real; the lost final still happened. But
+          the patch of turf is no longer a trapdoor. It is somewhere they can stand and do their job.'
+        camera_hint: rhythm_repeated_catches
+        mood_hint: rebuilding
+        is_carrier: true
+      - beat: 9
+        text: The bucket is empty. {protagonist} stands on the spot a last moment, then walks off it easily,
+          the way you walk off any piece of ground. {companion} gathers the balls without comment. The
+          error is not erased — it is carried now, instead of hidden from. They got up from the place
+          they fell.
+        camera_hint: wide_walking_off_the_spot
+        mood_hint: grounded
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The spot on the field is just grass again — scuffed, ordinary, no longer a wound. {protagonist}
+          can stand on it now.
+        ch2: The next final will put another ball in the air with everything riding on it. {protagonist}
+          knows the catch is not the test; staying, after the drop, is the test, and they have started
+          to pass it.
+        ch3: '{companion} carries the empty bucket toward the gate and looks back once at {protagonist},
+          still out on the field, standing easy on the spot where the season ended. Getting up, it turns
+          out, is a place you walk back to.'
+  strategy_05:
+    name: The Empty Net and the Quiet Before
+    archetype_template: the_shot_only_you_can_take
+    description: 'SELF_BELIEF told through the penalty kick: the protagonist, the ball, the keeper, and
+      a net that is mostly open — a shot no one else can take and no one else can blame. The protagonist
+      defers, passes, plays safe, lets others take the decisive moment because their own judgment is the
+      one thing they do not trust. The sport''s signature device is the penalty spot: the loneliest twelve
+      yards in sport, where the net is enormous and open and the only thing in the way is the kicker''s
+      belief in their own foot. The turn is not a pep talk that installs confidence — it is the still
+      moment over the ball when the protagonist stops auditioning for permission and simply trusts the
+      strike they have hit ten thousand times in practice. The mentor refuses to tell them where to put
+      it; the mentor makes them choose.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. The squad runs penalties. When it is {protagonist}''s turn they step up and
+          then look to the bench — ''Where do you want it? Which corner?'' — waiting for someone to make
+          the call for them. The net is wide open in front of them and they cannot make themselves decide.'
+        camera_hint: wide_penalty_spot_looking_back
+        mood_hint: deferring
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} kicks where they imagine they are supposed to, not where they feel — a borrowed
+          decision — and the keeper reads the hesitation and saves it easily. The shot was technically
+          fine. It had no one behind it. The doubt arrived in the body before the foot ever did.'
+        camera_hint: medium_tentative_strike_saved
+        mood_hint: hollow
+        is_carrier: true
+      - beat: 3
+        text: '{companion} retrieves the ball and sets it back on the spot. {protagonist} looks at them
+          for the instruction. {companion} just steps back and folds their arms. ''I am not taking this
+          one. You are. I do not get to know where it goes.'' They will not give the answer. The choice
+          is being handed back.'
+        camera_hint: two_shot_arms_folded
+        mood_hint: withheld
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} stalls — re-spots the ball, glances at the keeper, glances at the bench,
+          runs the calculation outward, looking everywhere except inward for the one thing only they can
+          supply. Every direction they look for permission is a direction the belief is not. It was never
+          going to come from out there.'
+        camera_hint: tight_searching_eyes
+        mood_hint: searching
+        is_carrier: false
+      - beat: 5
+        text: '{protagonist} stops looking up. They place the ball, take their steps back, and fix their
+          eyes on the one spot in the net they — not the bench, not the coach — actually want to hit.
+          For the first time the decision is theirs and nobody else''s, and there is no one left to blame
+          if it misses.'
+        camera_hint: close_eyes_on_target
+        mood_hint: deciding
+        is_carrier: true
+      - beat: 6
+        text: The held beat over the ball. Just {protagonist}, the spot, the wide quiet net, the keeper
+          a small shape far away. No bench in the frame. No instruction. Only the foot they have struck
+          a thousand balls with and the choice they have finally agreed to own. A breath. The world narrows
+          to one strike.
+        camera_hint: silent_over_the_ball
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} strikes it — clean, committed, exactly where they chose — and the ball is
+          in the net before the keeper can move, not because of placement alone but because the whole
+          body finally went with it. The conviction is what beat the keeper. The foot was always good
+          enough.'
+        camera_hint: follow_committed_strike
+        mood_hint: conviction
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} does not celebrate so much as exhale. They walk back from the spot knowing
+          something has shifted that has nothing to do with the goal: they made a call, trusted it, and
+          it held. The next one they will own too, made or missed. The belief did not come from the ball
+          going in. It came first.'
+        camera_hint: walking_back_exhale
+        mood_hint: ownership
+        is_carrier: true
+      - beat: 9
+        text: Practice winds down. {protagonist} places one more ball on the spot, alone now, no keeper,
+          no bench — and strikes it into the open net just to feel the decision be theirs. {companion}
+          watches from the gate and says nothing, because there is nothing left to give. {protagonist}
+          already has it.
+        camera_hint: quiet_lone_penalty_dusk
+        mood_hint: grounded
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The net is open the way it is always open — enormous, undefended, terrifying. {protagonist}
+          has stopped waiting for someone to tell them where to aim.
+        ch2: There will be a penalty someday with a real crowd and a real final on it, and no bench allowed
+          to choose for them. {protagonist} knows now the belief has to arrive before the ball does.
+        ch3: '{companion} leaves {protagonist} striking balls into the empty net in the failing light,
+          each one a small private vote for their own foot. No one is giving permission anymore. No one
+          needs to.'
+anti_pattern_rules:
+- forbidden_combination:
+  - coach_explains_the_lesson
+  - locker_room_speech_naming_the_moral
+  - voiceover_states_the_psychology
+  reason: The genre must carry the topic. The instant a mentor or narrator says the quiet part aloud ('focus
+    on what you can control', 'you don't need to be perfect'), the device stops working and it becomes
+    self-help with a jersey on. The turn must be EXTERNALISED in the sport's signature object — the ball,
+    the clock, the baton, the net — and the reader is trusted to feel it. Companions speak in observation
+    and instruction, never in interpretation.
+- forbidden_combination:
+  - scoreboard_resolves_the_arc
+  - trophy_as_proof_of_growth
+  - win_equals_healed
+  - buzzer_beater_as_the_turn
+  reason: 'Mirrors the mecha exemplar: outcome is secondary to the exchange. If winning the game is what
+    proves the inner shift, the story teaches that worth is conditional on victory — the opposite of every
+    topic here. The psychological turn must land BEFORE and INDEPENDENT of the final result; the scoreboard,
+    when it appears, is almost an afterthought the reader barely registers. Never let the buzzer-beater
+    BE the carrier beat — the stillness before it is.'

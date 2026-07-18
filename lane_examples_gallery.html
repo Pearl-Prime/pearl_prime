@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Lane Examples Gallery (Output Proof)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-wizard-app/public/assets/icons.css">
+<style>
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace;--bg:#0e0a06;--card:rgba(255,255,255,.03);--border:rgba(180,83,9,.15);--dim:rgba(250,246,240,.35);--mid:rgba(250,246,240,.6);--hi:rgba(250,246,240,.9);--green:#4ade80;--red:#f87171;--r:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"DM Sans",-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#faf6f0;line-height:1.65;font-size:15px}
+a{color:var(--acc2)}
+.hero{text-align:center;padding:48px 20px 28px;background:linear-gradient(180deg,rgba(180,83,9,.06),var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-family:var(--serif);font-size:clamp(1.35rem,3.5vw,2.1rem);font-weight:600;letter-spacing:-.03em;color:var(--acc2)}
+.hero p{font-size:.9rem;color:var(--dim);max-width:640px;margin:12px auto 0}
+.banner{display:none;margin:0 auto 20px;max-width:900px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);color:var(--red);padding:12px 16px;border-radius:var(--r);font-size:.85rem}
+.banner.on{display:block}
+.mx{max-width:1100px;margin:0 auto;padding:28px 20px 48px}
+.nav-top{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.nav-top a{font-size:.78rem;font-weight:600;color:var(--acc2);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--card)}
+.nav-top a:hover{border-color:var(--acc2)}
+.nav-top a.nav-wizard{border-color:var(--acc2);background:rgba(217,119,6,.1);font-weight:700}
+.nav-top a.nav-wizard:hover{background:rgba(217,119,6,.18)}
+.sl{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.13em;color:var(--acc2);font-weight:700;margin-bottom:8px}
+h2{font-family:var(--serif);font-size:1.35rem;font-weight:600;margin:28px 0 8px;letter-spacing:-.02em;color:var(--hi)}
+.desc{color:var(--dim);font-size:.88rem;max-width:720px;margin-bottom:20px}
+.set-board{border:1px solid var(--border);border-radius:var(--r);background:var(--card);padding:18px;margin-bottom:22px}
+.set-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:14px}
+.set-id{font-family:var(--mono);font-size:.78rem;background:rgba(255,255,255,.05);color:var(--mid);padding:4px 10px;border-radius:8px}
+.pill{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+.pill-ready{background:rgba(74,222,128,.1);color:var(--green)}
+.pill-planned{background:rgba(217,119,6,.1);color:var(--acc2)}
+.pill-missing{background:rgba(248,113,113,.1);color:var(--red)}
+.pill-stale{background:rgba(8,145,178,.1);color:#22d3ee}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.tile{border:2px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);display:flex;flex-direction:column}
+.tile.support{border-style:dashed;border-color:var(--acc);background:rgba(180,83,9,.04)}
+.tile .ph{aspect-ratio:3/4;background:linear-gradient(145deg,rgba(255,255,255,.02),rgba(255,255,255,.05));display:flex;align-items:center;justify-content:center;position:relative}
+.tile .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.tile .ph video.proof-video{width:100%;height:100%;object-fit:cover;display:block;background:#111}
+.tile .ph.audio-ph{aspect-ratio:auto;min-height:72px;padding:12px;align-items:stretch;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))}
+.tile .ph.audio-ph audio.proof-audio{width:100%;max-width:100%}
+.tile.support .ph{aspect-ratio:4/5}
+.featured-mission .tile{max-width:520px;margin:0 auto}
+.featured-mission .ph{aspect-ratio:16/9}
+.pending-note{text-align:center;padding:16px;font-size:.78rem;color:var(--dim)}
+.pending-note strong{display:block;color:var(--hi);margin-bottom:4px}
+.meta{padding:12px 12px 14px;font-size:.72rem}
+.meta .id{font-family:var(--mono);font-weight:600;color:var(--acc2);word-break:break-all}
+.meta .cap{margin-top:6px;color:var(--dim);line-height:1.45}
+.lane-section{margin-top:32px;padding-top:8px;border-top:1px dashed var(--border)}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-family:var(--mono);font-size:.62rem;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.05);color:var(--dim)}
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-size:.8rem;color:var(--dim)}
+kbd{font-family:var(--mono);font-size:.7em;padding:1px 5px;border:1px solid var(--border);border-radius:4px;background:rgba(255,255,255,.05);color:var(--mid)}
+code{font-family:var(--mono);font-size:.85em;color:var(--mid)}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Lane Examples Gallery</h1>
+<p>Live view of the output-proof registry: comparison sets, ready vs planned vs missing, product proof vs persona supporting visuals, and stale-ready fallbacks when assets fail.</p>
+<div class="nav-top">
+<a href="brand_onboarding_hub.html">Onboarding Hub</a>
+<a href="onboarding/presentation.html">PNG deck</a>
+<a class="nav-wizard" href="https://brand-admin-onboarding-bu2.pages.dev" target="_blank" rel="noopener">Live wizard</a>
+<a href="market_lane_matrix.html">Market × Lane Matrix</a>
+<a href="brand_admin_master_onboarding.html">Master Onboarding</a>
+<a href="brand_admin_weekly_os.html">Weekly OS</a>
+</div>
+</div>
+<div id="fetch-err" class="banner mx">Could not load <kbd>config/onboarding/example_registry.json</kbd>. Serve this repo from its root (e.g. <kbd>python3 -m http.server 8765</kbd>) so fetch works.</div>
+<div class="mx" id="main" style="display:none">
+<p class="desc"><strong>Pearl Prez + Pearl Marketing:</strong> This page is the first "show me the system" artifact — it proves the registry, status rules, and proof intent before the full React wizard carries the story.</p>
+
+<div id="pack-v1-featured" style="display:none"></div>
+<div id="sets-anchor"></div>
+<h2>Comparison sets</h2>
+<p class="desc">Rows grouped by <code>comparison_set_id</code> (locked v1 boards from the real-example spec).</p>
+<div id="comparison-sets"></div>
+
+<h2 class="lane-section">Standalone gallery rows</h2>
+<p class="desc">Registry entries without a comparison set (anchor examples and supporting visuals).</p>
+<div id="standalone"></div>
+
+<div class="foot">Source: <code>config/onboarding/example_registry.json</code> — sync copy for the wizard: <code>brand-wizard-app/public/onboarding/</code>. Deployed app: Cloudflare project <code>brand-admin-onboarding</code> (see docs).</div>
+</div>
+
+<script src="brand-wizard-app/public/assets/icons.js"></script>
+<script src="brand-wizard-app/public/assets/i18n.js"></script>
+<script>
+(function(){
+var LANES_ORDER = ['self_help','audiobook','manga','pearl_news','breathwork_tools','tools','other'];
+var SET_ORDER_FIRST = ['cmp_voice_narrator_contrast_v1','cmp_voice_benchmark_passages_v1','cmp_visual_identity_v1','cmp_archetypes_v1','cmp_systems_v1'];
+var MISSION_PACK_ID = 'pack_v1_mission_output_overview';
+var REPO_STATIC_MODE = false;
+function loadRegistryJson(){
+  return fetch('onboarding/example_registry.json').then(function(r){
+    if(!r.ok)throw new Error('pages-miss');
+    REPO_STATIC_MODE=false;
+    return r.json();
+  }).catch(function(){
+    return fetch('config/onboarding/example_registry.json').then(function(r){
+      if(!r.ok)throw new Error('repo-miss');
+      REPO_STATIC_MODE=true;
+      return r.json();
+    });
+  });
+}
+
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function resolveAssetUrl(path){
+  if(!path)return path;
+  if(path.indexOf('http://')===0||path.indexOf('https://')===0)return path;
+  if(REPO_STATIC_MODE && path.indexOf('/onboarding/')===0)return 'brand-wizard-app/public'+path;
+  return path;
+}
+function isVideoAsset(path){
+  if(!path||typeof path!=='string')return false;
+  return /\.(mp4|webm|ogg|mov)$/i.test(path);
+}
+function isAudioAsset(path){
+  if(!path||typeof path!=='string')return false;
+  return /\.(mp3|wav|ogg|m4a|aac)$/i.test(path);
+}
+function sortComparisonSetKeys(keys){
+  return keys.sort(function(a,b){
+    var ia=SET_ORDER_FIRST.indexOf(a);var ib=SET_ORDER_FIRST.indexOf(b);
+    if(ia<0)ia=999;if(ib<0)ib=999;
+    if(ia!==ib)return ia-ib;
+    return a.localeCompare(b);
+  });
+}
+function statusPill(st, stale){var p=el('span','pill');if(stale){p.classList.add('pill-stale');p.textContent='Stale ready';return p}if(st==='ready'){p.classList.add('pill-ready');p.textContent='Ready'}else if(st==='planned'){p.classList.add('pill-planned');p.textContent='Planned'}else{p.classList.add('pill-missing');p.textContent='Missing'}return p}
+
+function renderPlaceholder(row, stale){
+  var d=el('div','pending-note');
+  var strong=stale?'Asset failed (treat as proof-pending)':'Proof pending';
+  var line=row.status==='planned'?'Planned — packaging not verified in-repo yet.':row.status==='missing'?'Reserved slot — not generated yet.':'Registry marked ready but visual unavailable.';
+  d.innerHTML='<strong>'+strong+'</strong>'+line+'<div class="tag-row"><span class="tag">'+row.lane+'</span><span class="tag">'+row.market+'</span><span class="tag">'+(row.persona||'')+'</span></div>';
+  if(row.placeholder_reason && !stale){
+    var pr=el('div','cap');pr.style.marginTop='10px';pr.style.fontSize='.74rem';pr.style.fontStyle='normal';pr.textContent=row.placeholder_reason;d.appendChild(pr);
+  }
+  return d;
+}
+
+function renderTile(row){
+  var isSupport = row.visual_category==='persona' || row.production_fidelity==='supporting_visual';
+  var tile=el('div',isSupport?'tile support':'tile');
+  var ph=el('div','ph');
+  var stale=false;
+  if(row.status!=='ready'){
+    ph.appendChild(renderPlaceholder(row,false));
+  } else if(row.asset_path){
+    var url=resolveAssetUrl(row.asset_path);
+    if(isAudioAsset(row.asset_path)){
+      ph.classList.add('audio-ph');
+      var aud=document.createElement('audio');
+      aud.className='proof-audio';
+      aud.src=url;
+      aud.controls=true;
+      aud.setAttribute('preload','metadata');
+      aud.onerror=function(){
+        stale=true;
+        ph.innerHTML='';
+        ph.classList.remove('audio-ph');
+        ph.appendChild(renderPlaceholder(row,true));
+      };
+      ph.appendChild(aud);
+    } else if(isVideoAsset(row.asset_path)){
+      var vid=document.createElement('video');
+      vid.className='proof-video';
+      vid.src=url;
+      vid.controls=true;
+      vid.muted=true;
+      vid.playsInline=true;
+      vid.setAttribute('preload','metadata');
+      vid.onerror=function(){
+        stale=true;
+        ph.innerHTML='';
+        ph.appendChild(renderPlaceholder(row,true));
+      };
+      ph.appendChild(vid);
+    } else {
+    var img=document.createElement('img');
+    img.alt=row.caption||row.id;
+    img.src=url;
+    img.onload=function(){};
+    img.onerror=function(){
+      stale=true;
+      ph.innerHTML='';
+      ph.appendChild(renderPlaceholder(row,true));
+    };
+    ph.appendChild(img);
+    }
+  } else {
+    ph.appendChild(renderPlaceholder(row,false));
+  }
+  tile.appendChild(ph);
+  var meta=el('div','meta');
+  var head=el('div');head.style.display='flex';head.style.flexWrap='wrap';head.style.gap='6px';head.style.alignItems='center';
+  head.appendChild(statusPill(row.status,false));
+  head.appendChild(el('span','tag',row.proof_intent||''));
+  meta.appendChild(head);
+  meta.appendChild(el('div','id',row.id));
+  meta.appendChild(el('div','cap',row.caption||''));
+  if(isSupport){
+    var note=el('div','cap');note.style.marginTop='6px';note.style.color='var(--acc2)';note.textContent='Supporting visual — distinct from product proof.';
+    meta.appendChild(note);
+  }
+  if(row.source==='onboarding_seed_asset'){
+    var seed=el('div','cap');seed.style.marginTop='4px';seed.style.fontSize='.68rem';seed.style.color='#22d3ee';seed.textContent='Interim in-repo seed asset — swap for pipeline export when ready.';meta.appendChild(seed);
+  }
+  tile.appendChild(meta);
+  return tile;
+}
+
+function sortLane(a,b){
+  var ia=LANES_ORDER.indexOf(a.lane);var ib=LANES_ORDER.indexOf(b.lane);
+  if(ia<0)ia=99;if(ib<0)ib=99;
+  if(ia!==ib)return ia-ib;
+  return (a.id||'').localeCompare(b.id||'');
+}
+
+loadRegistryJson().then(function(rows){
+  document.getElementById('fetch-err').classList.remove('on');
+  document.getElementById('main').style.display='block';
+
+  var missionRow=null;
+  var workRows=[];
+  rows.forEach(function(row){
+    if(row.id===MISSION_PACK_ID)missionRow=row;
+    else workRows.push(row);
+  });
+
+  if(missionRow){
+    var feat=document.getElementById('pack-v1-featured');
+    feat.style.display='block';
+    feat.appendChild(el('h2',null,'Image Pack v1 — featured'));
+    feat.appendChild(el('p','desc','Mission overview anchor (<code>'+MISSION_PACK_ID+'</code>) — trust layer per specs/BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md.'));
+    var fm=el('div','featured-mission');
+    fm.appendChild(renderTile(missionRow));
+    feat.appendChild(fm);
+  }
+
+  var bySet={};var standalone=[];
+  workRows.forEach(function(row){
+    if(row.comparison_set_id) {
+      if(!bySet[row.comparison_set_id])bySet[row.comparison_set_id]=[];
+      bySet[row.comparison_set_id].push(row);
+    } else standalone.push(row);
+  });
+
+  var setsEl=document.getElementById('comparison-sets');
+  sortComparisonSetKeys(Object.keys(bySet)).forEach(function(sid){
+    var board=el('div','set-board');
+    var head=el('div','set-head');
+    head.appendChild(el('span','set-id',sid));
+    var members=bySet[sid].slice().sort(sortLane);
+    var readyC=members.filter(function(m){return m.status==='ready'}).length;
+    var missC=members.filter(function(m){return m.status==='missing'}).length;
+    head.appendChild(el('span','tag',members.length+' tiles · '+readyC+' ready · '+missC+' missing'));
+    board.appendChild(head);
+    var g=el('div','grid');
+    members.forEach(function(m){g.appendChild(renderTile(m))});
+    board.appendChild(g);
+    setsEl.appendChild(board);
+  });
+
+  var solo=document.getElementById('standalone');
+  var sg=el('div','grid');
+  standalone.sort(sortLane).forEach(function(m){sg.appendChild(renderTile(m))});
+  solo.appendChild(sg);
+
+}).catch(function(){
+  document.getElementById('fetch-err').classList.add('on');
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__burnout__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__depletion
+  name: Refill the Empty Well — for Tech & Finance Professionals
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Burnout Recovery: The Grief That Doesn''t Leave (5)'
+subtitle: How Tech Finance Burnout Are Rewriting the Rules of Burnout
+cover_tagline: You didn't lose your motivation. You lost something, and nobody called
+  it a loss.
+description:
+  short_blurb: You used to be the person who could carry it all, and now you can barely
+    open the laptop. This is a grief book disguised as a burnout book, for the engineer,
+    trader, or operator who burned out so slowly they never got to mourn the version
+    of themselves that ran on pure drive. No optimization. No comeback arc. Just the
+    truth about what's gone and how to stand inside it.
+  long_description: 'There was a version of you who shipped on no sleep and called
+    it a personality. Who answered the page at 3 a.m. and felt useful. Who took the
+    harder role, the bigger book, the on-call week nobody wanted, and ran on the quiet
+    pride of being the one who could take it. That person is gone. Not on vacation.
+    Gone. And the strangest part is that no one held a service, because on paper you''re
+    still here, still on the org chart, still expected to be exactly who you were.
+
+
+    This book is for the tech and finance professional who didn''t crash so much as
+    fade. The senior engineer who can''t remember the last time a green build felt
+    like anything. The PM, the trader, the analyst who looks fine in standup and feels
+    like a hollowed-out shell by lunch. If you keep waiting to bounce back and the
+    bounce keeps not coming, read this knowing it was written for exactly that gap.
+
+
+    First, recognition. What you''re carrying isn''t laziness or a motivation problem
+    you can hack. It''s grief. You lost a self — the high-output, always-available,
+    identity-fused-with-the-job self — and grief that nobody names just sits in the
+    body as fatigue, flatness, a low static hum of wrongness you can''t debug.
+
+
+    Then, descent. This is the part the productivity world skips. You don''t fix grief
+    by setting a better goal. You go down into it. You let yourself actually register
+    that the old engine is cold and isn''t restarting, that some of what you gave
+    the work you will not get back, that the role you mortgaged your nervous system
+    for would replace you in a week. You stop sprinting away from the empty feeling
+    and you sit on its floor.
+
+
+    And then, slowly, integration. Not a triumphant return. You come back up carrying
+    the loss instead of running from it — and something loosens. You start to tell
+    the difference between rest and collapse. You stop negotiating with a self who
+    no longer exists.
+
+
+    This book will not promise you''ll get your old drive back, because you shouldn''t
+    want it back the way it was. It won''t hand you a morning routine or a recovery
+    sprint or a reframe that makes the loss productive. It refuses to optimize your
+    grief.
+
+
+    What it offers is plain and unsentimental: language for what actually happened
+    to you, and permission to grieve it on company time, in a chair, with no deliverable
+    attached. You''re allowed to have lost something. You''re allowed to say so.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - tech & finance professionals
+  - burnout for tech & finance professionals
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: ana_reyes
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names burnout as a physiological state you complete, not a character flaw you
+  fix'
+- It's OK That You're Not OK (Megan Devine) — refuses to rush or optimize grief and
+  lets the loss simply be real
+- The Year of Magical Thinking (Joan Didion) — a clear-eyed, secular account of loss
+  that refuses to tidy grief into a lesson
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

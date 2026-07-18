@@ -1,0 +1,119 @@
+name: Regression Museum Gate
+
+# Every PR that touches phoenix_v4, config, or tests runs the museum.
+# Blocking violations → exit 1 → PR cannot merge.
+# Add "Regression Museum Gate / gate" to the Protect main required checks.
+
+on:
+  pull_request:
+    paths:
+      - "phoenix_v4/**"
+      - "config/**"
+      - "tests/**"
+      # CI-ALLOWLIST: legacy-registry-ok — paths trigger, not a run_pipeline invocation
+      - "scripts/run_pipeline.py"
+  workflow_dispatch:
+    inputs:
+      persona:
+        description: "Persona to validate (default: gen_z_professionals)"
+        required: false
+        default: "gen_z_professionals"
+
+jobs:
+  gate:
+    name: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml pytest
+
+      - name: Run museum gates on known-bad fixture (ratchet test)
+        run: |
+          PYTHONPATH=. python3 -m pytest tests/test_regression_museum_backfill.py -v \
+            --tb=short --no-header 2>&1 | tee museum_ratchet.log
+          # pytest exit code propagates — job fails if any test fails
+
+      - name: Run museum gates on canary fixture (fast smoke check)
+        run: |
+          PYTHONPATH=. python3 - <<'EOF'
+          import json, sys
+          from pathlib import Path
+          from phoenix_v4.quality.regression_museum import run_museum_gates
+
+          fixture = Path("tests/fixtures/regression_museum/known_bad_book.txt")
+          if not fixture.exists():
+              print("ERROR: Known-bad fixture missing — cannot run smoke check.")
+              sys.exit(1)
+
+          import re
+
+          def load_flat_book(path, persona):
+              raw = path.read_text(encoding="utf-8", errors="replace")
+              parts = re.split(r"(?m)^(Chapter \d+.*?)$", raw)
+              chapters = []
+              i, idx = 1, 1
+              while i + 1 < len(parts):
+                  chapters.append({
+                      "index": idx,
+                      "heading": parts[i].strip(),
+                      "text": (parts[i + 1] if i + 1 < len(parts) else "").strip(),
+                      "exercise_atom_ids": [],
+                  })
+                  idx += 1
+                  i += 2
+              if not chapters:
+                  chapters = [{"index": 1, "heading": "Book", "text": raw, "exercise_atom_ids": []}]
+              return {"chapters": chapters, "persona": persona}
+
+          persona = "${{ github.event.inputs.persona || 'gen_z_professionals' }}"
+          book = load_flat_book(fixture, persona)
+          result = run_museum_gates(book, persona=persona)
+
+          print("\n=== Regression Museum Results ===")
+          print(result["summary"])
+          for v in result["violations"]:
+              icon = "BLOCK" if v.severity == "block" else "WARN"
+              print(f"  [{icon}] {v.failure_class} @ {v.location}")
+              print(f"         {v.evidence[:100].strip()}")
+
+          Path("artifacts").mkdir(exist_ok=True)
+          Path("artifacts/regression_museum_violations.json").write_text(
+              json.dumps(
+                  [{"failure_class": v.failure_class, "severity": v.severity,
+                    "location": v.location, "evidence": v.evidence[:200],
+                    "description": v.description}
+                   for v in result["violations"]],
+                  indent=2
+              )
+          )
+
+          # The known-bad fixture MUST be blocked — that's the ratchet invariant.
+          # (If it's NOT blocked, a detector was deleted or weakened.)
+          if not result["blocked"]:
+              print("\nFATAL: Known-bad fixture was NOT blocked — a detector was weakened or removed.")
+              sys.exit(1)
+
+          print("\nSmoke check passed: known-bad fixture correctly blocked.")
+          sys.exit(0)
+          EOF
+
+      - name: Upload violations report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-museum-violations
+          path: |
+            artifacts/regression_museum_violations.json
+            museum_ratchet.log
+          if-no-files-found: ignore

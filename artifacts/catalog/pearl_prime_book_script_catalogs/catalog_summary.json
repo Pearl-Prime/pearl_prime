@@ -1,0 +1,95 @@
+{
+  "generated_at": "2026-04-28T21:33:36Z",
+  "generator_version": "5ef8ceb4c305",
+  "totals": {
+    "en_US": {
+      "rows": 1478,
+      "ready": 1127,
+      "blocked": 351,
+      "by_status": {
+        "blocked_arc_missing": 351,
+        "ready": 1127
+      }
+    },
+    "ja_JP": {
+      "rows": 1478,
+      "ready": 1127,
+      "blocked": 351,
+      "by_status": {
+        "blocked_arc_missing": 351,
+        "ready": 1127
+      }
+    },
+    "zh_TW": {
+      "rows": 2818,
+      "ready": 2049,
+      "blocked": 769,
+      "by_status": {
+        "blocked_arc_missing": 609,
+        "blocked_score": 160,
+        "ready": 2049
+      }
+    },
+    "zh_CN": {
+      "rows": 2630,
+      "ready": 2021,
+      "blocked": 609,
+      "by_status": {
+        "blocked_arc_missing": 609,
+        "ready": 2021
+      }
+    }
+  },
+  "preconditions": {
+    "genre_reconciliation_completed": true,
+    "pearl_prime_structure_locked": "12x10x5",
+    "bestseller_overlay_ref": "docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md"
+  },
+  "source_files": [
+    {
+      "path": "config/catalog/market_catalog_registry.yaml",
+      "sha256": "8bcda709f465e4deddf00c29427801df22af2baad75640bd7427db2cdf5ce281"
+    },
+    {
+      "path": "config/catalog/catalog_generation_config.yaml",
+      "sha256": "91adb1d0b8fdf7be8d5dc5b4b525beae2c971b8a266abdb3c3d18483e07b7e0c"
+    },
+    {
+      "path": "config/catalog_planning/canonical_topics.yaml",
+      "sha256": "a4535802fc3cbcb4881fbae79bd7bf66add1c492c19f2c0a78708ed847400a15"
+    },
+    {
+      "path": "config/catalog_planning/canonical_personas.yaml",
+      "sha256": "5143e14b7c7178433dc007f786c563667cda6d7c6218a395fc9d7a61153fc6bf"
+    },
+    {
+      "path": "config/catalog_planning/teacher_topic_persona_scores.yaml",
+      "sha256": "4033f149eb5bd650692162baee27f943135284afc06b39d56af179ebbddb7a9c"
+    },
+    {
+      "path": "config/catalog_planning/teacher_brand_archetypes.yaml",
+      "sha256": "88c0eaccd2a4fdc19df35dbcffdf7c66142775703d7ebb775eab9b4266181b3a"
+    },
+    {
+      "path": "config/catalog_planning/brand_teacher_matrix_zh.yaml",
+      "sha256": "6935328c5666f7fec6bdd1a9a43f0099e6f6423f261cadb84e1f9679aba908dd"
+    },
+    {
+      "path": "config/catalog_planning/locale_brand_names.yaml",
+      "sha256": "42448ad1ab13c0258de803b91e492718a332107bc48a10e72c0ce66cd7903537"
+    },
+    {
+      "path": "config/format_selection/format_registry.yaml",
+      "sha256": "85fbb7d6229311eca380b9f5b5c07e9f27c0260eb62d5535c5c078d615daff8e"
+    },
+    {
+      "path": "config/manga/canonical_genre_list.yaml",
+      "sha256": "08cc01e2d786a3c0c5747078f5edc39545b1868be61d67504601d45416afe3f5"
+    }
+  ],
+  "fixup_applied": {
+    "name": "ready_predicate_on_disk_verification",
+    "applied_at": "2026-05-16T06:43:48Z",
+    "note": "Re-applied verify_ready_files_on_disk to existing CSVs in-place. No rows deleted; only readiness_status / blockers / notes flipped on rows where arc/registry/atoms did not resolve on disk."
+  }
+}

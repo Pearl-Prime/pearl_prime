@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "stage": "golden_chapter_pilot",
+  "chapter_number": 1,
+  "working_title": "The Alarm That Won't Stop Ringing",
+  "chapter_thesis": "There is a part of you that is always scanning — and you've been so good at living inside that scan that you've mistaken it for just being the kind of person you are.\n",
+  "word_count": 784,
+  "selected_source_fragments": [
+    {
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v29+stack1",
+      "excerpt": "Your body started keeping score before you did. It has been presenting the invoice in small ways ever since.\n\nSomething shifted around month eight. You have been trying to locate it since."
+    },
+    {
+      "slot_type": "SCENE",
+      "source": "persona_atom",
+      "source_id": "SCENE v29",
+      "excerpt": "Someone stops at your desk. You take out one earbud. They ask a question. Your screen is behind you — open, visible. {weather_detail} through the office window above your monitor. You answer. They nod and walk away. You put the earbud back. {street_name} is there below. Your screen is still open behind you. You turn back to it."
+    },
+    {
+      "slot_type": "REFLECTION",
+      "source": "registry",
+      "source_id": "ch01_sec05_reflection_f2",
+      "excerpt": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?"
+    },
+    {
+      "slot_type": "INTEGRATION",
+      "source": "registry",
+      "source_id": "ch01_sec09_integration_f1",
+      "excerpt": "This week, return to one moment of clarity you have already had. Not a huge insight.\nA small one. Something you saw clearly without doubt. Sit with it. Remember what\nthat clarity felt like in your body. You have already accessed the capacity you need.\nYou have done this before. Begin again from there."
+    },
+    {
+      "slot_type": "DEPTH_RECOGNITION_DEPTH",
+      "source": "depth_module:recognition_depth:persona_atom",
+      "source_id": "depth_recognition_depth_1",
+      "excerpt": "## HOOK v01 --- --- You did everything they said to do. Your chest has not gotten the memo. --- ## HOOK v02 --- --- The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows something your calendar doesn't. --- ## HOOK v03 --- --- The phone was the first thing you touched this morning. Before coffee. Before a single thought that belonged to you. --- ## "
+    },
+    {
+      "slot_type": "DEPTH_RECOGNITION_DEPTH",
+      "source": "depth_module:recognition_depth:registry_variant",
+      "source_id": "depth_recognition_depth_1",
+      "excerpt": "The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows something your calendar doesn't."
+    },
+    {
+      "slot_type": "DEPTH_STORY_SCENE",
+      "source": "depth_module:story_scene:persona_atom",
+      "source_id": "depth_story_scene_1",
+      "excerpt": "## SCENE v01 --- --- Your badge beeps at the door. The lobby smells like recycled air. {street_name} is visible through the glass. Your bag cuts into your left shoulder. The elevator button is already lit. Someone steps in behind you. The doors close. Your phone screen is on. The floor number ticks up. The doors open. The hallway is the same hallway. --- ## SCENE v02 --- --- The {transit_line} lur"
+    },
+    {
+      "slot_type": "DEPTH_STORY_SCENE",
+      "source": "depth_module:story_scene:registry_variant",
+      "source_id": "depth_story_scene_1",
+      "excerpt": "The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows something your calendar doesn't."
+    },
+    {
+      "slot_type": "DEPTH_PERSONA_SPECIFICITY",
+      "source": "depth_module:persona_specificity:persona_atom",
+      "source_id": "depth_persona_specificity_1",
+      "excerpt": "## HOOK v01 --- --- You did everything they said to do. Your chest has not gotten the memo. --- ## HOOK v02 --- --- The task is open. You have been looking at it for forty minutes. This is not laziness. Your body knows something your calendar doesn't. --- ## HOOK v03 --- --- The phone was the first thing you touched this morning. Before coffee. Before a single thought that belonged to you. --- ## "
+    }
+  ],
+  "prose_before_sanitize_excerpt": "The Alarm That Won't Stop Ringing\n\nYour body started keeping score before you did. It has been presenting the invoice in small ways ever since.\n\nSomething shifted around month eight. You have been trying to locate it since.\n\nSomeone stops at your desk. You take out one earbud. They ask a question. Your screen is behind you — open, visible. Gray daylight filters in through the office window above your monitor. You answer. They nod and walk away. You put the earbud back. Traffic moves one floor down. Your screen is still open behind you. You turn back to it.\n\nStay with the moment a second longer. The pattern usually shows itself before the explanation does.\n\nUnderneath the feeling is a simple mechanism: the body knows before the mind does — trust the body. When the alarm runs the response, y",
+  "synthesized_chapter_excerpt": "The Alarm That Won't Stop Ringing\n\nYour body started keeping score before you did. It has been presenting the invoice in small ways ever since.\n\nSomething shifted around month eight. You have been trying to locate it since.\n\nSomeone stops at your desk. You take out one earbud. They ask a question. Your screen is behind you — open, visible. Gray daylight filters in through the office window above your monitor. You answer. They nod and walk away. You put the earbud back. Traffic moves one floor down. Your screen is still open behind you. You turn back to it.\n\nStay with the moment a second longer. The pattern usually shows itself before the explanation does.\n\nUnderneath the feeling is a simple mechanism: the body knows before the mind does — trust the body. When the alarm runs the response, your nervous system treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments feel heavy.\n\nThe point is that the body knows before the mind does — trust the body.\n\nNotice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just fo",
+  "repair_notes": [],
+  "artifact_leakage_audit": {
+    "status": "PASS",
+    "patterns_matched": []
+  },
+  "repeated_phrase_audit": {
+    "status": "PASS",
+    "worst": []
+  },
+  "golden_readiness": {
+    "artifact_leakage": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "repeated_scene_furniture": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "voice_coherence": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "mechanism_clear": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "aha_moment": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "exercise_tied_to_tension": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "ending_bridge": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "human_read": {
+      "status": "REQUIRED_MANUAL",
+      "prompt": "Read aloud once. Pass only if the chapter feels authored: one clear mechanism, one credible turn, one exercise that fits the tension, no 'stitched fragments' smell.",
+      "chapter_thesis": "There is a part of you that is always scanning — and you've been so good at living inside that scan that you've mistaken it for just being the kind of person you are.\n",
+      "working_title": "The Alarm That Won't Stop Ringing"
+    },
+    "automated_overall": "PASS",
+    "notes": []
+  },
+  "rmttp_heuristic": {
+    "recognition": "PASS",
+    "mechanism": "PASS",
+    "turn": "PASS",
+    "practice": "PASS",
+    "pull": "PASS"
+  },
+  "acceptance_note": "Do not claim bestseller readiness. Evaluate: golden path, source gaps, or leakage."
+}

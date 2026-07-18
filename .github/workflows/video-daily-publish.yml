@@ -1,0 +1,139 @@
+# Video Daily Publish — Stage 18 Upload/Publish CI Workflow
+#
+# Runs daily at 14:00 UTC (6 AM PT) and uploads rendered videos to all enabled
+# platforms for each brand using a matrix strategy.
+#
+# Required GitHub Secrets (per brand suffix _SP, _CC):
+#   YouTube:  YT_CLIENT_ID_<suffix>, YT_CLIENT_SECRET_<suffix>, YT_REFRESH_TOKEN_<suffix>
+#   TikTok:   TIKTOK_CLIENT_KEY_<suffix>, TIKTOK_CLIENT_SECRET_<suffix>
+#
+# Concurrency is grouped per brand to prevent duplicate uploads.
+# Each platform step uses continue-on-error; the job fails only if all platforms fail.
+
+name: Video Daily Publish
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # 14:00 UTC = 6:00 AM PT
+  workflow_dispatch:
+
+env:
+  PYTHONPATH: ${{ github.workspace }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false  # Don't cancel sibling brand if one fails
+      matrix:
+        brand: [SP, CC]
+
+    concurrency:
+      group: video-publish-${{ matrix.brand }}
+      cancel-in-progress: false  # Never cancel an in-progress upload
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install \
+            google-api-python-client \
+            google-auth-oauthlib \
+            requests
+
+      - name: Locate platform variants
+        id: variants
+        run: |
+          # Stage 15 (platform adapter) writes platform_variants.json under artifacts/video/.
+          # Pick the most recent one; the upload script takes it as a positional arg.
+          VARIANTS="$(find artifacts/video -name 'platform_variants*.json' -type f 2>/dev/null \
+            | head -n 1)"
+          if [ -z "${VARIANTS}" ]; then
+            echo "::warning::No platform_variants.json found under artifacts/video — nothing to upload."
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Using variants: ${VARIANTS}"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "path=${VARIANTS}" >> "$GITHUB_OUTPUT"
+            echo "video_dir=$(dirname "${VARIANTS}")/rendered" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload to YouTube
+        id: youtube
+        if: steps.variants.outputs.found == 'true'
+        continue-on-error: true
+        env:
+          YT_CLIENT_ID_${{ matrix.brand }}: ${{ secrets[format('YT_CLIENT_ID_{0}', matrix.brand)] }}
+          YT_CLIENT_SECRET_${{ matrix.brand }}: ${{ secrets[format('YT_CLIENT_SECRET_{0}', matrix.brand)] }}
+          YT_REFRESH_TOKEN_${{ matrix.brand }}: ${{ secrets[format('YT_REFRESH_TOKEN_{0}', matrix.brand)] }}
+        run: |
+          mkdir -p artifacts/video/upload_logs
+          python scripts/video/run_upload.py \
+            "${{ steps.variants.outputs.path }}" \
+            --brand-suffix ${{ matrix.brand }} \
+            --platforms youtube \
+            --video-dir "${{ steps.variants.outputs.video_dir }}" \
+            --no-dry-run \
+            --no-job-check \
+            -o artifacts/video/upload_logs/youtube_${{ matrix.brand }}_${{ github.run_number }}.json \
+            2>&1 | tee artifacts/video/upload_logs/youtube_${{ matrix.brand }}_${{ github.run_number }}.log
+
+      - name: Upload to TikTok
+        id: tiktok
+        if: steps.variants.outputs.found == 'true'
+        continue-on-error: true
+        env:
+          TIKTOK_CLIENT_KEY_${{ matrix.brand }}: ${{ secrets[format('TIKTOK_CLIENT_KEY_{0}', matrix.brand)] }}
+          TIKTOK_CLIENT_SECRET_${{ matrix.brand }}: ${{ secrets[format('TIKTOK_CLIENT_SECRET_{0}', matrix.brand)] }}
+        run: |
+          mkdir -p artifacts/video/upload_logs
+          python scripts/video/run_upload.py \
+            "${{ steps.variants.outputs.path }}" \
+            --brand-suffix ${{ matrix.brand }} \
+            --platforms tiktok \
+            --video-dir "${{ steps.variants.outputs.video_dir }}" \
+            --no-dry-run \
+            --no-job-check \
+            -o artifacts/video/upload_logs/tiktok_${{ matrix.brand }}_${{ github.run_number }}.json \
+            2>&1 | tee artifacts/video/upload_logs/tiktok_${{ matrix.brand }}_${{ github.run_number }}.log
+
+      - name: Fail if all platforms failed
+        if: steps.youtube.outcome == 'failure' && steps.tiktok.outcome == 'failure'
+        run: |
+          echo "::error::All platform uploads failed for brand ${{ matrix.brand }}."
+          exit 1
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upload-logs-${{ matrix.brand }}-${{ github.run_number }}
+          path: artifacts/video/upload_logs/
+          retention-days: 30
+
+      - name: Write job summary
+        if: always()
+        run: |
+          BRAND="${{ matrix.brand }}"
+          YT_STATUS="${{ steps.youtube.outcome }}"
+          TT_STATUS="${{ steps.tiktok.outcome }}"
+
+          echo "## Video Daily Publish — Brand: \`${BRAND}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Platform | Outcome |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|----------|---------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| YouTube  | ${YT_STATUS} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| TikTok   | ${TT_STATUS} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "_Run \`${{ github.run_number }}\` · triggered by \`${{ github.event_name }}\`_" \
+            >> "$GITHUB_STEP_SUMMARY"

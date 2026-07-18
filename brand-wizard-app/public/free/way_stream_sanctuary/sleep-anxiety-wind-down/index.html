@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 8-Minute Wind-Down — Waystream Sanctuary</title>
+  <meta name="description" content="Your brain needs a job at bedtime. Give it one. 3 phases. 8 minutes. Built for the midnight overthinker.">
+  <meta property="og:title" content="The 8-Minute Wind-Down — Waystream Sanctuary">
+  <meta property="og:description" content="3 phases. 8 minutes. Built for the midnight overthinker.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0A0A0F;
+      color: #F0EFE8;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 20px 60px;
+    }
+
+    .brand-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 6vw, 50px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: #F0EFE8;
+      margin-bottom: 16px;
+    }
+
+    .subhead {
+      color: #8B8A82;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #13131A;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label.field-label {
+      display: block;
+      font-size: 14px;
+      color: #8B8A82;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      background: #1A1A24;
+      border: 1px solid #2A2A3A;
+      color: #F0EFE8;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus { border-color: #3B82F6; }
+    textarea { resize: vertical; min-height: 120px; }
+
+    .btn {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .btn:hover { background: #2563EB; }
+
+    #tool-section { display: none; }
+
+    /* Phase indicator */
+    .phase-track {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .phase-dot {
+      flex: 1;
+      height: 4px;
+      background: #1E1E28;
+      border-radius: 4px;
+      transition: background 0.4s;
+    }
+
+    .phase-dot.active { background: #3B82F6; }
+    .phase-dot.done { background: #22C55E; }
+
+    /* Timer */
+    .timer-display {
+      text-align: center;
+      margin: 28px 0;
+    }
+
+    .timer-ring {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 20px;
+    }
+
+    .timer-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .timer-ring .bg-circle {
+      fill: none;
+      stroke: #1E1E28;
+      stroke-width: 6;
+    }
+
+    .timer-ring .progress-circle {
+      fill: none;
+      stroke: #3B82F6;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 439.82;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .timer-time {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 500;
+      color: #F0EFE8;
+      letter-spacing: -1px;
+    }
+
+    .phase-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #3B82F6;
+      margin-bottom: 8px;
+    }
+
+    .phase-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #F0EFE8;
+      margin-bottom: 20px;
+    }
+
+    .phase-instructions {
+      font-size: 15px;
+      color: #8B8A82;
+      line-height: 1.8;
+      background: #1A1A24;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-outline {
+      flex: 1;
+      background: transparent;
+      border: 1px solid #2A2A3A;
+      color: #F0EFE8;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-outline:hover { border-color: #3B82F6; }
+
+    .btn-primary-sm {
+      flex: 1;
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary-sm:hover { background: #2563EB; }
+
+    .completion-msg {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .completion-msg .big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 500;
+      color: #F0EFE8;
+      margin-bottom: 12px;
+    }
+
+    .completion-msg .small {
+      color: #8B8A82;
+      font-size: 15px;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, #13131A 0%, #1A1A2E 100%);
+      border: 1px solid #2A2A3A;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .cta-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 12px;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: #F0EFE8;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .cta-subtitle { color: #8B8A82; font-size: 14px; margin-bottom: 24px; }
+
+    .cta-btn {
+      display: inline-block;
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .cta-btn:hover { background: #2563EB; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #1E1E28;
+      text-align: center;
+      font-size: 13px;
+      color: #8B8A82;
+    }
+
+    .error-msg { color: #EF4444; font-size: 13px; margin-top: 8px; display: none; }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="way_stream_sanctuary" data-topic="sleep_anxiety" data-funnel-slug="sleep-anxiety-wind-down" data-post-experience-capture="1" data-ghl-webhook="">
+  <div class="container">
+    <div class="brand-tag">Waystream Sanctuary — Inner Light Press</div>
+
+    <h1>Your brain needs a job at bedtime. Give it one.</h1>
+    <p class="subhead">3 phases. 8 minutes. Built for the midnight overthinker.</p>
+
+    <!-- EMAIL CAPTURE -->
+    <div id="form-section" class="card">
+      <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get the full Wind-Down protocol plus the Quiet Night Collection framework.</p>
+      <div class="form-group">
+        <label class="field-label" for="name">First name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="field-label" for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <p id="form-error" class="error-msg">Please enter your name and a valid email.</p>
+      <button class="btn" onclick="submitForm()">Access The 8-Minute Wind-Down</button>
+    </div>
+
+    <!-- TOOL SECTION -->
+    <div id="tool-section">
+      <div class="card">
+        <div class="phase-track">
+          <div class="phase-dot" id="dot-0"></div>
+          <div class="phase-dot" id="dot-1"></div>
+          <div class="phase-dot" id="dot-2"></div>
+        </div>
+
+        <div id="phase-content"></div>
+      </div>
+
+      <div class="cta-banner">
+        <div class="cta-label">Want the full system?</div>
+        <div class="cta-title">Quiet Night Collection:<br>The Quiet Hour</div>
+        <div class="cta-subtitle">Get Book 1 for $0.99</div>
+        <a href="https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm" rel="noopener" class="cta-btn">Get the Book — $0.99</a>
+      </div>
+    </div>
+
+    <footer>A free tool from Waystream Sanctuary — Inner Light Press</footer>
+  </div>
+
+  <script>
+    const phases = [
+      {
+        label: "Phase 1 of 3",
+        title: "Body Release",
+        duration: 180,
+        instructions: "Unclench your jaw. Drop your shoulders. Ungrip your hands.\n\nStart at your face and work down: forehead → jaw → shoulders → hands → belly → legs → feet.\n\nTension you find is not a problem. It's just information. Release what you can.",
+        hasTextarea: false
+      },
+      {
+        label: "Phase 2 of 3",
+        title: "Breath Reset",
+        duration: 180,
+        instructions: "Breathe in for 4 counts. Pause for 2. Out for 6.\n\nDon't force it. Just let the exhale be longer than the inhale.\n\nYour nervous system is listening to your breath.",
+        hasTextarea: false
+      },
+      {
+        label: "Phase 3 of 3",
+        title: "Mind Dump",
+        duration: 120,
+        instructions: "Give your brain permission to stop holding it. It's written. It's safe. You can stop now.",
+        hasTextarea: true,
+        textareaPlaceholder: "Write every open loop in your head right now. Tasks, worries, anything. No order needed. Just empty it."
+      }
+    ];
+
+    let currentPhase = 0;
+    let timerInterval = null;
+    let secondsLeft = 0;
+    let totalSeconds = 0;
+    const circumference = 2 * Math.PI * 70;
+
+    function submitForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!name || !emailRe.test(email)) {
+        document.getElementById('form-error').style.display = 'block';
+        return;
+      }
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
+        renderPhase(0);
+      }
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'sleep_anxiety',
+        funnel_slug: 'sleep-anxiety-wind-down',
+        quiz_id: 'wind_down_breath',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_sleep_anxiety', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
+    }
+
+    function renderPhase(idx) {
+      currentPhase = idx;
+      const phase = phases[idx];
+      secondsLeft = phase.duration;
+      totalSeconds = phase.duration;
+
+      // Update dots
+      for (let i = 0; i < 3; i++) {
+        const dot = document.getElementById('dot-' + i);
+        dot.classList.remove('active', 'done');
+        if (i < idx) dot.classList.add('done');
+        if (i === idx) dot.classList.add('active');
+      }
+
+      const mins = Math.floor(secondsLeft / 60);
+      const secs = secondsLeft % 60;
+      const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+      const textarea = phase.hasTextarea
+        ? `<textarea placeholder="${phase.textareaPlaceholder}" style="margin-bottom:24px;"></textarea>`
+        : '';
+
+      const nextLabel = idx < 2 ? 'Move to Next Phase' : 'Finish';
+
+      document.getElementById('phase-content').innerHTML = `
+        <div class="phase-label">${phase.label}</div>
+        <div class="phase-title">${phase.title}</div>
+
+        <div class="timer-display">
+          <div class="timer-ring">
+            <svg width="160" height="160" viewBox="0 0 160 160">
+              <circle class="bg-circle" cx="80" cy="80" r="70"/>
+              <circle class="progress-circle" id="prog-circle" cx="80" cy="80" r="70"/>
+            </svg>
+            <div class="timer-time" id="timer-time">${timeStr}</div>
+          </div>
+        </div>
+
+        <div class="phase-instructions" id="phase-instr">${phase.instructions.replace(/\n/g, '<br>')}</div>
+        ${textarea}
+
+        <div class="btn-row">
+          <button class="btn-outline" id="start-btn" onclick="startTimer()">Start Phase</button>
+          <button class="btn-primary-sm" onclick="nextPhase()">${nextLabel}</button>
+        </div>
+      `;
+
+      updateCircle();
+    }
+
+    function updateCircle() {
+      const circle = document.getElementById('prog-circle');
+      if (!circle) return;
+      const progress = secondsLeft / totalSeconds;
+      const offset = circumference * (1 - progress);
+      circle.style.strokeDashoffset = offset;
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      document.getElementById('start-btn').textContent = 'Running...';
+      document.getElementById('start-btn').disabled = true;
+
+      timerInterval = setInterval(() => {
+        secondsLeft--;
+        const mins = Math.floor(secondsLeft / 60);
+        const secs = secondsLeft % 60;
+        document.getElementById('timer-time').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        updateCircle();
+
+        if (secondsLeft <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          if (currentPhase < 2) {
+            setTimeout(() => nextPhase(), 800);
+          } else {
+            setTimeout(() => showCompletion(), 800);
+          }
+        }
+      }, 1000);
+    }
+
+    function nextPhase() {
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      if (currentPhase < 2) {
+        renderPhase(currentPhase + 1);
+      } else {
+        showCompletion();
+      }
+    }
+
+    function showCompletion() {
+      for (let i = 0; i < 3; i++) {
+        document.getElementById('dot-' + i).classList.remove('active');
+        document.getElementById('dot-' + i).classList.add('done');
+      }
+      document.getElementById('phase-content').innerHTML = `
+        <div class="completion-msg">
+          <div class="big">The protocol is done.</div>
+          <div class="small">Put down the phone.</div>
+        </div>
+      `;
+    }
+  </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script type="application/json" id="phoenix-evergreen-campaign-plan">
+{
+  "archetype_id": "wind_down_breath",
+  "bonus_pre_e3_benefit": "Gives the contact one more felt practice before the story email lands.",
+  "bonus_pre_e3_cta": "Open the bonus practice",
+  "bonus_pre_e3_html_template": "funnel/waystream_sanctuary/emails/email_bonus_pre_story.html",
+  "bonus_pre_e3_microcopy": "Send this before Email 3 only when welcome_depth is blank or missing.",
+  "bonus_pre_e3_send_if_welcome_depth_missing": true,
+  "bonus_pre_e3_short_description": "A pre-E3 bonus email for the welcome-depth fallback when GHL has no welcome_depth value.",
+  "bonus_pre_e3_title": "Bonus before the story: one extra sleep anxiety practice",
+  "bonus_pre_e3_tool_name": "Body scan for the night alarm",
+  "bonus_pre_e3_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1",
+  "brand_id": "way_stream_sanctuary",
+  "campaign_plan_id": "waystream_sleep_anxiety_wind_down_evergreen_v1",
+  "content_type": "somatic_html_tool",
+  "e1_benefit": "Use it when sleep anxiety starts to take over and you need one immediate step.",
+  "e1_cta": "Open the wind-down",
+  "e1_microcopy": "No login wall. Keep this link for the moment you need it.",
+  "e1_short_description": "The free Waystream tool you requested for sleep anxiety.",
+  "e1_title": "Your sleep anxiety wind-down is ready",
+  "e1_tool_name": "Sleep Anxiety Wind-Down",
+  "e1_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/sleep-anxiety-wind-down/",
+  "e2_benefit": "Pair it with yesterday\u2019s tool so your body gets the signal twice.",
+  "e2_cta": "Try the body scan",
+  "e2_microcopy": "Do it once today. Notice the smallest shift.",
+  "e2_short_description": "A second practice that keeps the first reset from being a one-off.",
+  "e2_title": "A body scan for the night alarm",
+  "e2_tool_name": "Body scan for the night alarm",
+  "e2_url": "https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1",
+  "e3_benefit": "See the mechanism through a human moment instead of a lecture.",
+  "e3_cta": "Read the deeper path",
+  "e3_microcopy": "No pitch in this email. Just the story.",
+  "e3_short_description": "A short story about why the sleep anxiety reset can work in real life.",
+  "e3_story_body": "A Waystream reader once opened Sleep Anxiety Wind-Down in the middle of an ordinary day, not a dramatic breaking point. The old pattern was already moving: sleep anxiety had started to feel like a command, and the body was treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It gives the body one repeatable cue that says, \"we can slow this down before it runs the whole day.\"",
+  "e3_title": "Why this works: a short sleep anxiety story",
+  "e3_tool_name": "Transformation story",
+  "e3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e4_benefit": "Use it when you want the full journey, not only the free tool.",
+  "e4_book_title": "The Waystream Guide to Sleep Anxiety",
+  "e4_cta": "See the book",
+  "e4_microcopy": "The free tools are still yours. This is the next layer.",
+  "e4_short_description": "The first deeper Waystream book for this sleep anxiety pattern.",
+  "e4_title": "Recommended for you: The Waystream Guide to Sleep Anxiety",
+  "e4_tool_name": "The Waystream Guide to Sleep Anxiety",
+  "e4_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e5_benefit": "Choose the next book by the kind of support you want right now.",
+  "e5_book1_note": "Start here if you want the main Waystream path for sleep anxiety.",
+  "e5_book1_title": "The Waystream Guide to Sleep Anxiety",
+  "e5_book1_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e5_book2_note": "Use this as the second recommendation once the first path feels familiar.",
+  "e5_book2_title": "The Follow-Up Waystream Guide for Sleep Anxiety",
+  "e5_book2_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e5_book3_note": "Use this when you want the book path and free tools grouped together.",
+  "e5_book3_title": "The Sleep Anxiety Calm Bundle",
+  "e5_book3_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e5_cta": "See the reading path",
+  "e5_microcopy": "Start with the first recommendation if you are unsure.",
+  "e5_short_description": "A short list of next reads for sleep anxiety.",
+  "e5_title": "More Waystream books for sleep anxiety",
+  "e5_tool_name": "Waystream reading path",
+  "e5_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e6_benefit": "Use this after the first book if you want a second angle on the same pattern.",
+  "e6_book_title": "The Follow-Up Waystream Guide for Sleep Anxiety",
+  "e6_cta": "Open recommendation 2",
+  "e6_microcopy": "Recommendation 2 is for continuity, not pressure.",
+  "e6_short_description": "A follow-up book recommendation for the next layer of sleep anxiety.",
+  "e6_title": "Book 2 recommendation for sleep anxiety",
+  "e6_tool_name": "The Follow-Up Waystream Guide for Sleep Anxiety",
+  "e6_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e7_benefit": "Use the bundle when you want the tools and books in one mental shelf.",
+  "e7_bundle_title": "The Sleep Anxiety Calm Bundle",
+  "e7_cta": "See the bundle path",
+  "e7_microcopy": "This is the cleanest path if you prefer everything in one place.",
+  "e7_short_description": "A bundle-style path that groups the next sleep anxiety supports together.",
+  "e7_title": "Book 3 bundle path for sleep anxiety",
+  "e7_tool_name": "The Sleep Anxiety Calm Bundle",
+  "e7_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e8_benefit": "Take the next step now if you know you want the deeper support.",
+  "e8_cta": "Take the next step",
+  "e8_last_chance_note": "This is the last direct book nudge in the sleep anxiety freebie sequence.",
+  "e8_microcopy": "If not, keep the free tool. That still counts.",
+  "e8_short_description": "A final nudge before this sleep anxiety sequence quiets down.",
+  "e8_title": "Last chance to keep the sleep anxiety path close",
+  "e8_tool_name": "Last-chance reminder",
+  "e8_url": "https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm",
+  "e9_benefit": "Return to the simplest reset any time you need it.",
+  "e9_cta": "Reopen the free tool",
+  "e9_microcopy": "No new ask today. Just the tool again.",
+  "e9_short_description": "A still-here reminder with the original free tool link.",
+  "e9_title": "Still here: reopen Sleep Anxiety Wind-Down",
+  "e9_tool_name": "Sleep Anxiety Wind-Down",
+  "e9_url": "https://brand-admin-onboarding-bu2.pages.dev/free/way_stream_sanctuary/sleep-anxiety-wind-down/",
+  "fallback_allowed": false,
+  "freebie_id": "breath_timer_v1",
+  "funnel_variant": "evergreen_freebie_v1",
+  "locale": "en_US",
+  "quiz_id": "wind_down_breath",
+  "source_page_slug": "sleep-anxiety-wind-down",
+  "status": "active",
+  "topic": "sleep_anxiety"
+}
+</script>
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {
+    if (typeof renderPhase === 'function') renderPhase(0);
+  });
+});
+</script>
+</body>
+</html>

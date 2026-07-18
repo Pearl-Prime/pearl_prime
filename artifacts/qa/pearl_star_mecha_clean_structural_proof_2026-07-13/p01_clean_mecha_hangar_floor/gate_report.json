@@ -1,0 +1,66 @@
+{
+  "manifest": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/assembly_manifest.yaml",
+  "panel": {
+    "panel_id": "p01_clean_mecha_hangar_floor",
+    "shot_type": "establishing",
+    "passed": true,
+    "ops_applied": [
+      "STRUCT_support_plan",
+      "G3_horizon_scale",
+      "G6_defringe",
+      "G4_contact_shadow_under_L2"
+    ],
+    "gates": [
+      {
+        "gate": "L0_STRUCTURAL_PURITY",
+        "severity": "PASS",
+        "message": "contract=mecha_clean_structural_layer_v1 role=environment_support subject=environment"
+      },
+      {
+        "gate": "L2_STRUCTURAL_PURITY",
+        "severity": "PASS",
+        "message": "contract=mecha_clean_structural_layer_v1 role=single_subject_cutout subject=mecha"
+      },
+      {
+        "gate": "G1",
+        "severity": "PASS",
+        "message": "full_figure \u00d7 full_render \u2192 LEGAL+ops"
+      },
+      {
+        "gate": "G2",
+        "severity": "PASS",
+        "message": "angle_bucket match (eye_level)"
+      },
+      {
+        "gate": "G8",
+        "severity": "PASS",
+        "message": "light azimuth compatible (ambient/ambient)"
+      },
+      {
+        "gate": "L2_QUALITY",
+        "severity": "PASS",
+        "message": "single clean subject main_component_ratio=1.0 significant_components=1"
+      },
+      {
+        "gate": "L0_SUPPORT_ZONE",
+        "severity": "PASS",
+        "message": "zone=clear_hangar_floor kind=floor mode=standing_floor"
+      },
+      {
+        "gate": "placement",
+        "severity": "PASS",
+        "message": "structural_plan_hash=07e3a5052e33b459a84e8c826432cda04e8b90e255610d9dce21cbd77f9a43e0"
+      },
+      {
+        "gate": "G3",
+        "severity": "PASS",
+        "message": "horizon-ratio scale within tolerance"
+      },
+      {
+        "gate": "G4",
+        "severity": "PASS",
+        "message": "contact shadow rendered"
+      }
+    ]
+  }
+}

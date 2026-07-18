@@ -1,0 +1,5242 @@
+{
+  "schema_version": "1.0",
+  "generated_from": "config/brand_management/brand_admin_weekly_os_platforms.yaml",
+  "default_market": "en_us",
+  "lane_to_market": {
+    "en_us": "en_us",
+    "ja_jp": "ja_jp",
+    "zh_tw": "zh_tw",
+    "zh_cn": "zh_cn",
+    "ko_kr": "ko_kr",
+    "es_us": "es_us",
+    "es_es": "es_es",
+    "fr_fr": "fr_fr",
+    "de_de": "de_de",
+    "it_it": "it_it",
+    "hu_hu": "hu_hu",
+    "pt_br": "pt_br",
+    "zh_hk": "zh_hk",
+    "zh_sg": "zh_sg"
+  },
+  "markets": {
+    "en_us": {
+      "lane_suffixes": [
+        "en_us"
+      ],
+      "ui_lang": "en",
+      "market_note": null,
+      "package_blurb": "8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google Account",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 min",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube Channel",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Books",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "t": "30 min",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok Business",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram Business",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/en/challenge/publish",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Log in to KDP Bookshelf",
+            "Click 'Create New Title' > Kindle eBook",
+            "Enter title, subtitle, author, description (use COPY buttons below)",
+            "Upload EPUB from KDP/ folder",
+            "Upload cover from KDP/ folder",
+            "Set price ($2.99-9.99 for 70% royalty) and publish",
+            "Repeat for each title"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Books",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Open Partner Center",
+            "Click 'Add Book' > 'Add New Book'",
+            "Upload EPUB from GooglePlay/ folder",
+            "Fill in metadata (use COPY buttons)",
+            "Upload cover image",
+            "Set pricing and territories",
+            "Submit for review"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Open Apple Books for Authors",
+            "Click 'New Book'",
+            "Upload EPUB 3.3 from AppleBooks/ folder",
+            "Enter metadata",
+            "Upload cover",
+            "Set pricing and publish"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/en/challenge/publish",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Open WEBTOON Creator Studio",
+            "Select your series (or create new)",
+            "Click 'Add Episode'",
+            "Upload panels from WEBTOON/ folder (800px wide, JPG)",
+            "Add episode title and thumbnail",
+            "Publish episode"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Log in to Kobo Writing Life",
+            "Click 'Create New eBook'",
+            "Upload EPUB and cover",
+            "Enter metadata",
+            "Set pricing and territories",
+            "Publish"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Open TikTok Creator",
+            "Tap '+' to upload",
+            "Select MP4 from Video/ folder",
+            "Add caption with hashtags",
+            "Post"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Open YouTube Studio",
+            "Click 'Create' > 'Upload Video'",
+            "Select MP4 from Video/ folder",
+            "Add title, description, tags (use COPY buttons)",
+            "Set thumbnail and publish"
+          ]
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Download Package",
+          "tasks": [
+            {
+              "t": "Download this week's content package",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "KDP Upload Day",
+          "tasks": [
+            {
+              "t": "Upload 6 titles to Amazon KDP",
+              "btn": "Open KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Multi-Platform",
+          "tasks": [
+            {
+              "t": "Upload to Google Play Books",
+              "btn": "Open GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Upload to Apple Books",
+              "btn": "Open AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Upload to Kobo",
+              "btn": "Open Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Manga + D2D",
+          "tasks": [
+            {
+              "t": "Upload manga episodes to WEBTOON",
+              "btn": "Open WEBTOON",
+              "url": "https://www.webtoons.com/en/challenge/publish"
+            },
+            {
+              "t": "Upload remaining to Draft2Digital",
+              "btn": "Open D2D",
+              "url": "https://draft2digital.com"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Video Day",
+          "tasks": [
+            {
+              "t": "Post TikTok videos",
+              "btn": "Open TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "Upload YouTube videos",
+              "btn": "Open YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Post Instagram Reels",
+              "btn": "Open IG",
+              "url": "https://www.instagram.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Review",
+          "tasks": [
+            {
+              "t": "Check KDP reports",
+              "btn": "KDP Reports",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Check YouTube Analytics",
+              "btn": "YT Analytics",
+              "url": "https://studio.youtube.com/channel/analytics"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Rest",
+          "tasks": [
+            {
+              "t": "System auto-refreshes next week's queue. Take the day off."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/en/challenge/publish"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "LINE",
+          "url": "https://manager.line.biz"
+        }
+      ]
+    },
+    "ja_jp": {
+      "lane_suffixes": [
+        "ja_jp"
+      ],
+      "ui_lang": "ja",
+      "market_note": "Japan market — Kobo + audiobook.jp + LINE Manga paths. Weekly packet axes match international MVP bundle.",
+      "package_blurb": "週次パケット：電子書籍・オーディオブック・ポッドキャスト・マンガ（国際MVP軸）。",
+      "package_folders": "GooglePlay / KDP / AppleBooks / Kobo / Podcast / Manga / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google アカウント",
+          "url": "https://accounts.google.com/signup",
+          "t": "5分",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play ブックス",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25分",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (.co.jp)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20分",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "t": "30分",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "楽天Kobo Writing Life",
+          "url": "https://www.kobo.com/jp/ja/p/writinglife",
+          "t": "20分",
+          "status": "ready"
+        },
+        {
+          "id": "line_oa",
+          "n": "LINE公式アカウント",
+          "url": "https://manager.line.biz",
+          "t": "20分",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "LINEマンガ / Webtoon",
+          "url": "https://www.webtoons.com/ja/challenge/publish",
+          "t": "20分",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "t": "15分",
+          "status": "ready"
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_gplay",
+          "n": "Google Play ブックス",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "パートナーセンターでEPUB一括アップロード",
+            "メタデータCSVをアップロード",
+            "販売設定"
+          ]
+        },
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "KDPにログイン",
+            "Kindle本を1冊ずつ作成",
+            "AI利用は「はい」",
+            "EPUBと表紙をアップロード"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "新規ブック提出",
+            "EPUB・表紙アップロード",
+            "メタデータ入力"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "楽天Kobo",
+          "url": "https://www.kobo.com/jp/ja/p/writinglife",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "電子書籍を作成",
+            "EPUBと表紙",
+            "価格設定"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "Webtoon / LINEマンガ",
+          "url": "https://www.webtoons.com/ja/challenge/publish",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "新規エピソード",
+            "縦スクロール画像アップロード",
+            "公開"
+          ]
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "パケット取得",
+          "tasks": [
+            {
+              "t": "今週のコンテンツパケットをダウンロード",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "KDP",
+          "tasks": [
+            {
+              "t": "KDPへ6冊アップロード",
+              "btn": "KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Play + Apple + Kobo",
+          "tasks": [
+            {
+              "t": "Google Play",
+              "btn": "GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Apple Books",
+              "btn": "AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Kobo",
+              "btn": "Kobo",
+              "url": "https://www.kobo.com/jp/ja/p/writinglife"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "マンガ",
+          "tasks": [
+            {
+              "t": "Webtoon / LINEマンガに1話",
+              "btn": "Webtoon",
+              "url": "https://www.webtoons.com/ja/challenge/publish"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "ポッドキャスト + SNS",
+          "tasks": [
+            {
+              "t": "Spotify for Creators",
+              "btn": "Spotify",
+              "url": "https://creators.spotify.com"
+            },
+            {
+              "t": "YouTube",
+              "btn": "YT",
+              "url": "https://studio.youtube.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "レビュー",
+          "tasks": [
+            {
+              "t": "KDPレポート確認",
+              "btn": "Reports",
+              "url": "https://kdp.amazon.com/reports"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "休息",
+          "tasks": [
+            {
+              "t": "来週のキューは自動更新。休みましょう。"
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://www.kobo.com/jp/ja/p/writinglife"
+        },
+        {
+          "label": "LINE",
+          "url": "https://manager.line.biz"
+        },
+        {
+          "label": "Webtoon",
+          "url": "https://www.webtoons.com/ja/challenge/publish"
+        }
+      ]
+    },
+    "zh_tw": {
+      "lane_suffixes": [
+        "zh_tw"
+      ],
+      "ui_lang": "zh-Hant",
+      "market_note": "台灣市場優先節奏。Readmoo、博客來、KKBOX、Comico 在指南中列為目標平台，但 repo 週包尚未自動產出對應上架檔 — 標示為 planned，勿當成可下載。",
+      "package_blurb": "週包含國際自出版軸（Google Play / Kobo / Apple / KDP）+ Podcast + Webtoon 漫畫。台灣原生平台需另行申請帳號。",
+      "package_folders": "GooglePlay / Kobo / AppleBooks / KDP / Podcast / WEBTOON / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google 帳號",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "line_oa",
+          "n": "LINE 官方帳號",
+          "url": "https://manager.line.biz",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play 圖書（台灣）",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "readmoo",
+          "n": "Readmoo 讀墨",
+          "url": "https://readmoo.com/publisher",
+          "t": "申請 2 週",
+          "status": "planned",
+          "planned_note": "台灣最大原生電子書平台 — 需出版社審核；週包尚無 Readmoo 專用輸出。"
+        },
+        {
+          "id": "books_tw",
+          "n": "博客來電子書",
+          "url": "mailto:ebook@books.com.tw",
+          "t": "洽談 3–4 週",
+          "status": "planned",
+          "planned_note": "需出版社合約 — 非自助上傳；repo 尚未自動化。"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life（台灣）",
+          "url": "https://www.kobo.com/tw/zh/p/writinglife",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books（台灣）",
+          "url": "https://authors.apple.com",
+          "t": "30 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "LINE Webtoon Canvas（繁中）",
+          "url": "https://www.webtoons.com/zh-hant/creators",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "t": "15 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "kkbox",
+          "n": "KKBOX",
+          "url": "https://www.kkbox.com/tw/tw/apply",
+          "t": "申請中",
+          "status": "planned",
+          "planned_note": "有聲書平台 — 需直接洽談；repo 尚無 KKBOX 週包輸出。"
+        },
+        {
+          "id": "comico",
+          "n": "Comico",
+          "url": "https://www.comico.com.tw",
+          "t": "編輯審核",
+          "status": "planned",
+          "planned_note": "漫畫策展平台 — 需申請；非 Canvas 自助流程。"
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_gplay",
+          "n": "Google Play 圖書",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "登入合作夥伴中心",
+            "上傳 GooglePlay/ 資料夾 EPUB",
+            "批次上傳書單 CSV",
+            "設定台灣售價（TWD）",
+            "提交審核"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://www.kobo.com/tw/zh/p/writinglife",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "登入 Kobo",
+            "建立新電子書",
+            "上傳 EPUB 與封面",
+            "設定台灣區域與 TWD 定價",
+            "出版"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Submit a New Book",
+            "上傳 EPUB（繁體中文）",
+            "語言選 Chinese (Traditional)",
+            "設定台灣區域定價"
+          ]
+        },
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "登入 KDP",
+            "逐本建立 Kindle 電子書",
+            "AI 內容選「是」",
+            "上傳 EPUB 與封面"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "LINE Webtoon Canvas",
+          "url": "https://www.webtoons.com/zh-hant/creators",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "開啟創作者後台",
+            "新增單集",
+            "上傳 WEBTOON/ 直式長條圖（800px 寬）",
+            "繁中標題與說明",
+            "發佈"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "上傳 Video/ MP4",
+            "加入繁中 caption",
+            "發佈"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "上傳 Video/ MP4",
+            "繁中標題與說明",
+            "發佈"
+          ]
+        },
+        {
+          "id": "u_readmoo",
+          "n": "Readmoo 讀墨",
+          "url": "https://readmoo.com/publisher",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "待出版社帳號核准後手動上傳 EPUB — 週包尚無 Readmoo 專檔。"
+        },
+        {
+          "id": "u_books_tw",
+          "n": "博客來電子書",
+          "url": "mailto:ebook@books.com.tw",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "需出版社合約 — 非自動化上傳。"
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "下載週包",
+          "tasks": [
+            {
+              "t": "下載本週內容包（國際自出版軸）",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "台灣電子書優先",
+          "tasks": [
+            {
+              "t": "Google Play 圖書批次上傳",
+              "btn": "Google Play",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Kobo Writing Life 上架",
+              "btn": "Kobo",
+              "url": "https://www.kobo.com/tw/zh/p/writinglife"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Apple + KDP",
+          "tasks": [
+            {
+              "t": "Apple Books（繁體 / 台灣區）",
+              "btn": "Apple Books",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Amazon KDP 逐本上架",
+              "btn": "KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "漫畫週",
+          "tasks": [
+            {
+              "t": "LINE Webtoon Canvas 發佈一話",
+              "btn": "Webtoon",
+              "url": "https://www.webtoons.com/zh-hant/creators"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Podcast + 社群",
+          "tasks": [
+            {
+              "t": "Spotify for Creators 單集",
+              "btn": "Spotify",
+              "url": "https://creators.spotify.com"
+            },
+            {
+              "t": "LINE / TikTok / YouTube 短影音",
+              "btn": "LINE",
+              "url": "https://manager.line.biz"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "檢視 + 申請追蹤",
+          "tasks": [
+            {
+              "t": "檢查 Google Play / Kobo 報表",
+              "btn": "Reports",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "追蹤 Readmoo / 博客來申請進度（planned 平台）",
+              "btn": "Readmoo",
+              "url": "https://readmoo.com/publisher"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "休息",
+          "tasks": [
+            {
+              "t": "系統自動刷新下週佇列。今天休息。"
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://www.kobo.com/tw/zh/p/writinglife"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "LINE Webtoon",
+          "url": "https://www.webtoons.com/zh-hant/creators"
+        },
+        {
+          "label": "Readmoo",
+          "url": "https://readmoo.com/publisher"
+        },
+        {
+          "label": "LINE",
+          "url": "https://manager.line.biz"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        }
+      ]
+    },
+    "zh_cn": {
+      "lane_suffixes": [
+        "zh_cn"
+      ],
+      "ui_lang": "zh-Hans",
+      "market_note": "中国大陆需 MCN/持牌代理才能上国内平台。国际自出版轴（Google Play / KDP / Apple）可自助；喜马拉雅等国内平台标为 planned，勿假装已自动化。",
+      "package_blurb": "周包含国际自出版轴 + Podcast + Webtoon。国内平台需 MCN 代理 — 见 planned 项。",
+      "package_folders": "GooglePlay / KDP / AppleBooks / Podcast / WEBTOON / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google 账号",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play 图书",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "t": "30 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://www.kobo.com/writinglife",
+          "t": "20 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "ximalaya",
+          "n": "喜马拉雅",
+          "url": "https://www.ximalaya.com/zhubo",
+          "t": "MCN 代理",
+          "status": "planned",
+          "planned_note": "大陆有声平台 — 需国内运营商/MCN；credential 字段存在但 repo 周包未自动化国内上架。"
+        },
+        {
+          "id": "wechat_reading",
+          "n": "微信读书",
+          "url": "https://weread.qq.com",
+          "t": "MCN 代理",
+          "status": "planned",
+          "planned_note": "需出版许可证 + MCN — 外国实体不可自助上架。"
+        },
+        {
+          "id": "dedao",
+          "n": "得到",
+          "url": "https://www.dedao.cn",
+          "t": "MCN 代理",
+          "status": "planned",
+          "planned_note": "需内容审核 + 国内实体 — planned。"
+        },
+        {
+          "id": "webtoon",
+          "n": "Webtoon / 快看",
+          "url": "https://www.webtoons.com/zh/challenge/publish",
+          "t": "20 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "t": "15 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "bilibili",
+          "n": "哔哩哔哩",
+          "url": "https://member.bilibili.com",
+          "t": "MCN 代理",
+          "status": "planned",
+          "planned_note": "国内漫画/视频 — 需 MCN 与内容审核。"
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_gplay",
+          "n": "Google Play 图书",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "登录合作伙伴中心",
+            "上传 GooglePlay/ EPUB",
+            "批量书单 CSV",
+            "设置定价",
+            "提交审核"
+          ]
+        },
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "登录 KDP",
+            "逐本创建 Kindle 电子书",
+            "AI 内容选「是」",
+            "上传 EPUB 与封面"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Submit a New Book",
+            "上传 EPUB（简体中文）",
+            "语言选 Chinese (Simplified)",
+            "设置定价"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "Webtoon Canvas",
+          "url": "https://www.webtoons.com/zh/challenge/publish",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "创作者后台新增单集",
+            "上传 WEBTOON/ 条图",
+            "发布"
+          ]
+        },
+        {
+          "id": "u_ximalaya",
+          "n": "喜马拉雅",
+          "url": "https://www.ximalaya.com/zhubo",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "需 MCN 代理上传 — repo 周包无国内专档。"
+        },
+        {
+          "id": "u_wechat",
+          "n": "微信读书",
+          "url": "https://weread.qq.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "需 MCN + 出版许可 — 非自动化。"
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "下载周包",
+          "tasks": [
+            {
+              "t": "下载本周国际自出版内容包",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "Google Play + KDP",
+          "tasks": [
+            {
+              "t": "Google Play 批量上传",
+              "btn": "Google Play",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "KDP 逐本上架",
+              "btn": "KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Apple Books",
+          "tasks": [
+            {
+              "t": "Apple Books（简体）上架",
+              "btn": "Apple Books",
+              "url": "https://authors.apple.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "漫画",
+          "tasks": [
+            {
+              "t": "Webtoon Canvas 发布一话",
+              "btn": "Webtoon",
+              "url": "https://www.webtoons.com/zh/challenge/publish"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Podcast + 视频",
+          "tasks": [
+            {
+              "t": "Spotify for Creators",
+              "btn": "Spotify",
+              "url": "https://creators.spotify.com"
+            },
+            {
+              "t": "YouTube 短视频",
+              "btn": "YouTube",
+              "url": "https://studio.youtube.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "MCN 进度",
+          "tasks": [
+            {
+              "t": "与 MCN 代理确认国内平台审核状态（planned 项）",
+              "btn": "MCN",
+              "url": null
+            },
+            {
+              "t": "检查 Google Play / KDP 报表",
+              "btn": "Reports",
+              "url": "https://play.google.com/books/publish"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "休息",
+          "tasks": [
+            {
+              "t": "系统自动刷新下周队列。今天休息。"
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Webtoon",
+          "url": "https://www.webtoons.com/zh/challenge/publish"
+        },
+        {
+          "label": "喜马拉雅",
+          "url": "https://www.ximalaya.com/zhubo"
+        }
+      ]
+    },
+    "ko_kr": {
+      "lane_suffixes": [
+        "ko_kr"
+      ],
+      "ui_lang": "ko",
+      "market_note": "한국 시장 우선 리듬. 국제 자가출판 축(KDP / Google Play / Apple / Kobo) + YouTube / TikTok / Instagram + WEBTOON 도전만화는 셀프 등록으로 바로 시작할 수 있습니다. 리디북스·네이버 시리즈·카카오페이지·밀리의 서재·YES24·교보문고 등 국내 대형 전자책/웹소설 플랫폼은 출판사·제휴사 심사를 거쳐야 하므로 planned으로 표시했습니다. 셀프 서비스처럼 오해하지 마세요 — repo 주간 패킷은 아직 이들 플랫폼용 업로드 파일을 자동 생성하지 않습니다.",
+      "package_blurb": "주간 패킷: 전자책 · 오디오북 · 팟캐스트 · 웹툰(국제 MVP 축). 국내 대형 플랫폼은 별도 제휴 신청이 필요합니다.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Kobo / WEBTOON / Video / Podcast / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google 계정",
+          "url": "https://accounts.google.com/signup",
+          "t": "5분",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube 채널",
+          "url": "https://studio.youtube.com",
+          "t": "15분",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20분",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play 북스",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25분",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "t": "30분",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20분",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15분",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15분",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "네이버 웹툰 도전만화",
+          "url": "https://comic.naver.com/challenge",
+          "t": "20분",
+          "status": "ready"
+        },
+        {
+          "id": "ridibooks",
+          "n": "리디북스 (RIDI)",
+          "url": "https://ridibooks.com",
+          "t": "심사 2~3주",
+          "status": "planned",
+          "planned_note": "국내 최대 전자책 플랫폼 — 출판사·PB 파트너 심사 필요. 셀프 업로드 아님. repo 주간 패킷에 리디 전용 출력 없음."
+        },
+        {
+          "id": "naver_series",
+          "n": "네이버 시리즈",
+          "url": "https://series.naver.com",
+          "t": "제휴 협의",
+          "status": "planned",
+          "planned_note": "CP(콘텐츠 제공사) 계약 필요 — 개인 셀프 등록 불가. planned."
+        },
+        {
+          "id": "kakao_page",
+          "n": "카카오페이지",
+          "url": "https://page.kakao.com",
+          "t": "제휴 협의",
+          "status": "planned",
+          "planned_note": "CP 계약·에이전시 경유 필요 — 셀프 서비스 아님. planned."
+        },
+        {
+          "id": "millie",
+          "n": "밀리의 서재",
+          "url": "https://www.millie.co.kr",
+          "t": "제휴 협의",
+          "status": "planned",
+          "planned_note": "구독형 전자책 — 출판사 콘텐츠 공급 계약 필요. 개인 셀프 등록 불가."
+        },
+        {
+          "id": "yes24",
+          "n": "YES24 eBook",
+          "url": "https://www.yes24.com",
+          "t": "제휴 협의",
+          "status": "planned",
+          "planned_note": "전자책 유통 계약 필요 — 셀프 업로드 아님. repo 미자동화."
+        },
+        {
+          "id": "kyobo",
+          "n": "교보문고",
+          "url": "https://www.kyobobook.co.kr",
+          "t": "제휴 협의",
+          "status": "planned",
+          "planned_note": "출판사·유통 계약 필요 — 개인 셀프 등록 불가. planned."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "KDP 서재에 로그인",
+            "'새 제목 만들기' > Kindle eBook 클릭",
+            "제목·부제·저자·설명 입력 (아래 복사 버튼 사용)",
+            "KDP/ 폴더에서 EPUB 업로드",
+            "KDP/ 폴더에서 표지 업로드",
+            "가격 설정($2.99-9.99, 70% 인세) 후 출판",
+            "각 제목마다 반복"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play 북스",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "파트너 센터 열기",
+            "'도서 추가' 클릭",
+            "GooglePlay/ 폴더에서 EPUB 업로드",
+            "메타데이터 입력 (복사 버튼 사용)",
+            "표지 업로드",
+            "한국(KRW) 가격·판매 지역 설정",
+            "심사 제출"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Apple Books for Authors 열기",
+            "'새 도서' 클릭",
+            "AppleBooks/ 폴더에서 EPUB 3.3 업로드",
+            "언어 Korean 선택 후 메타데이터 입력",
+            "표지 업로드",
+            "가격 설정 후 출판"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Kobo Writing Life 로그인",
+            "'새 eBook 만들기' 클릭",
+            "EPUB과 표지 업로드",
+            "메타데이터 입력",
+            "가격·판매 지역 설정",
+            "출판"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "네이버 웹툰 도전만화",
+          "url": "https://comic.naver.com/challenge",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "네이버 로그인 후 도전만화 작가 페이지 열기",
+            "작품 선택 (또는 새 작품 등록)",
+            "'회차 등록' 클릭",
+            "WEBTOON/ 폴더의 세로 스크롤 이미지 업로드(690px 폭 권장)",
+            "회차 제목·썸네일 추가",
+            "발행"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/upload",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "TikTok 업로드 열기",
+            "Video/ 폴더에서 MP4 선택",
+            "한국어 캡션·해시태그 추가",
+            "게시"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "YouTube 스튜디오 열기",
+            "'만들기' > '동영상 업로드'",
+            "Video/ 폴더에서 MP4 선택",
+            "제목·설명·태그 입력 (복사 버튼 사용)",
+            "썸네일 설정 후 게시"
+          ]
+        },
+        {
+          "id": "u_ridibooks",
+          "n": "리디북스 (RIDI)",
+          "url": "https://ridibooks.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "출판사·PB 파트너 승인 후 수동 EPUB 등록 — 주간 패킷에 리디 전용 파일 없음."
+        },
+        {
+          "id": "u_naver_series",
+          "n": "네이버 시리즈",
+          "url": "https://series.naver.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "CP 계약 후 콘텐츠 공급 — 자동 업로드 아님."
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "패킷 다운로드",
+          "tasks": [
+            {
+              "t": "이번 주 콘텐츠 패킷 다운로드(국제 자가출판 축)",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "KDP 업로드",
+          "tasks": [
+            {
+              "t": "Amazon KDP에 6개 제목 업로드",
+              "btn": "KDP 열기",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "멀티 플랫폼",
+          "tasks": [
+            {
+              "t": "Google Play 북스 업로드",
+              "btn": "Google Play",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Apple Books 업로드",
+              "btn": "Apple Books",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Kobo 업로드",
+              "btn": "Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "웹툰의 날",
+          "tasks": [
+            {
+              "t": "네이버 웹툰 도전만화에 회차 발행",
+              "btn": "도전만화",
+              "url": "https://comic.naver.com/challenge"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "영상 & 팟캐스트",
+          "tasks": [
+            {
+              "t": "TikTok 영상 게시",
+              "btn": "TikTok",
+              "url": "https://www.tiktok.com/upload"
+            },
+            {
+              "t": "YouTube 영상 업로드",
+              "btn": "YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Instagram 릴스 게시",
+              "btn": "Instagram",
+              "url": "https://www.instagram.com"
+            },
+            {
+              "t": "Spotify for Creators 팟캐스트",
+              "btn": "Spotify",
+              "url": "https://creators.spotify.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "리뷰 & 제휴 추적",
+          "tasks": [
+            {
+              "t": "KDP 리포트 확인",
+              "btn": "KDP 리포트",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "YouTube 분석 확인",
+              "btn": "YT 분석",
+              "url": "https://studio.youtube.com/channel/analytics"
+            },
+            {
+              "t": "리디·네이버 시리즈 제휴 진행 상황 확인(planned 플랫폼)",
+              "btn": "RIDI",
+              "url": "https://ridibooks.com"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "휴식",
+          "tasks": [
+            {
+              "t": "다음 주 큐는 자동 갱신됩니다. 오늘은 쉬세요."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/upload"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "도전만화",
+          "url": "https://comic.naver.com/challenge"
+        },
+        {
+          "label": "RIDI",
+          "url": "https://ridibooks.com"
+        },
+        {
+          "label": "네이버 시리즈",
+          "url": "https://series.naver.com"
+        }
+      ]
+    },
+    "es_us": {
+      "lane_suffixes": [
+        "es_us"
+      ],
+      "ui_lang": "es",
+      "market_note": "Mercado hispano de EE. UU. — mismo territorio que en-US (tiendas de EE. UU.), pero con metadatos y portadas en español. Todas las plataformas son autoservicio; no se requieren plataformas latinas con acceso por agencia.",
+      "package_blurb": "8 ebooks + 4 manga + 3 micro = 15 títulos. Portadas, metadatos y video incluidos (en español).",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Kobo / BN / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Cuenta de Google",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 min",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "Canal de YouTube",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (EE. UU., español)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Libros",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books (EE. UU.)",
+          "url": "https://authors.apple.com",
+          "t": "30 min",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "bn",
+          "n": "Barnes & Noble Press",
+          "url": "https://press.barnesandnoble.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas (español)",
+          "url": "https://www.webtoons.com/es/challenge",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "spotify",
+          "n": "Spotify for Creators (audio)",
+          "url": "https://creators.spotify.com",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "storytel",
+          "n": "Storytel LatAm",
+          "url": "https://www.storytel.com",
+          "t": "solicitud 2–4 semanas",
+          "status": "planned",
+          "planned_note": "Plataforma de audiolibros con distribución en LatAm — requiere contrato con distribuidor/editorial; el paquete semanal aún no genera un archivo específico para Storytel."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en tu Estante de KDP",
+            "Haz clic en 'Crear nuevo título' > eBook de Kindle",
+            "Ingresa título, subtítulo, autor y descripción en español (usa los botones COPIAR de abajo)",
+            "Selecciona el idioma 'Español'",
+            "Sube el EPUB desde la carpeta KDP/",
+            "Sube la portada desde la carpeta KDP/",
+            "Fija el precio ($2.99-9.99 para regalías del 70 %) y publica",
+            "Repite con cada título"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Libros",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Abre el Centro de Partners",
+            "Haz clic en 'Añadir libro' > 'Añadir libro nuevo'",
+            "Sube el EPUB desde la carpeta GooglePlay/",
+            "Completa los metadatos en español (usa los botones COPIAR)",
+            "Sube la imagen de portada",
+            "Fija el precio y los territorios (EE. UU.)",
+            "Envía a revisión"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Abre Apple Books para Autores",
+            "Haz clic en 'Nuevo libro'",
+            "Sube el EPUB 3.3 desde la carpeta AppleBooks/",
+            "Ingresa los metadatos y elige el idioma 'Español'",
+            "Sube la portada",
+            "Fija el precio (tienda de EE. UU.) y publica"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en Kobo Writing Life",
+            "Haz clic en 'Crear nuevo eBook'",
+            "Sube el EPUB y la portada",
+            "Ingresa los metadatos en español",
+            "Fija el precio y los territorios",
+            "Publica"
+          ]
+        },
+        {
+          "id": "u_bn",
+          "n": "Barnes & Noble Press",
+          "url": "https://press.barnesandnoble.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en B&N Press",
+            "Haz clic en 'Create New Project' > eBook",
+            "Sube el EPUB desde la carpeta BN/",
+            "Ingresa los metadatos en español y elige el idioma 'Spanish'",
+            "Sube la portada",
+            "Fija el precio y publica"
+          ]
+        },
+        {
+          "id": "u_d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en Draft2Digital",
+            "Haz clic en 'Add New Book'",
+            "Sube el EPUB y la portada",
+            "Completa los metadatos en español",
+            "Selecciona los canales de distribución",
+            "Publica"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/es/challenge",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Abre el Estudio de Creadores de WEBTOON",
+            "Selecciona tu serie (o crea una nueva)",
+            "Haz clic en 'Añadir episodio'",
+            "Sube los paneles desde la carpeta WEBTOON/ (800px de ancho, JPG)",
+            "Añade el título del episodio y la miniatura en español",
+            "Publica el episodio"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abre TikTok Creator",
+            "Toca '+' para subir",
+            "Selecciona el MP4 desde la carpeta Video/",
+            "Añade el texto con hashtags en español",
+            "Publica"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abre YouTube Studio",
+            "Haz clic en 'Crear' > 'Subir video'",
+            "Selecciona el MP4 desde la carpeta Video/",
+            "Añade título, descripción y etiquetas en español (usa los botones COPIAR)",
+            "Fija la miniatura y publica"
+          ]
+        },
+        {
+          "id": "u_spotify",
+          "n": "Spotify for Creators",
+          "url": "https://creators.spotify.com",
+          "titles": 2,
+          "status": "ready",
+          "audio": true,
+          "steps": [
+            "Abre Spotify for Creators",
+            "Crea un episodio o audiolibro",
+            "Sube el audio desde la carpeta Video/ o de audio",
+            "Añade título y descripción en español",
+            "Publica"
+          ]
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Descargar el paquete",
+          "tasks": [
+            {
+              "t": "Descarga el paquete de contenido de esta semana",
+              "btn": "Descargar",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "Día de subida a KDP",
+          "tasks": [
+            {
+              "t": "Sube 6 títulos a Amazon KDP (español)",
+              "btn": "Abrir KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Multiplataforma",
+          "tasks": [
+            {
+              "t": "Sube a Google Play Libros",
+              "btn": "Abrir GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Sube a Apple Books",
+              "btn": "Abrir AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Sube a Kobo",
+              "btn": "Abrir Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Manga + B&N / D2D",
+          "tasks": [
+            {
+              "t": "Sube los episodios de manga a WEBTOON",
+              "btn": "Abrir WEBTOON",
+              "url": "https://www.webtoons.com/es/challenge"
+            },
+            {
+              "t": "Sube a Barnes & Noble Press",
+              "btn": "Abrir B&N",
+              "url": "https://press.barnesandnoble.com"
+            },
+            {
+              "t": "Sube el resto a Draft2Digital",
+              "btn": "Abrir D2D",
+              "url": "https://draft2digital.com"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Día de video + audio",
+          "tasks": [
+            {
+              "t": "Publica los videos de TikTok",
+              "btn": "Abrir TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "Sube los videos de YouTube",
+              "btn": "Abrir YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Publica Reels en Instagram",
+              "btn": "Abrir IG",
+              "url": "https://www.instagram.com"
+            },
+            {
+              "t": "Publica el audio en Spotify for Creators",
+              "btn": "Abrir Spotify",
+              "url": "https://creators.spotify.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Revisión",
+          "tasks": [
+            {
+              "t": "Revisa los informes de KDP",
+              "btn": "Informes KDP",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Revisa las estadísticas de YouTube",
+              "btn": "Analíticas YT",
+              "url": "https://studio.youtube.com/channel/analytics"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Descanso",
+          "tasks": [
+            {
+              "t": "El sistema actualiza automáticamente la cola de la próxima semana. Tómate el día libre."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "B&N Press",
+          "url": "https://press.barnesandnoble.com"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/es/challenge"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "Spotify",
+          "url": "https://creators.spotify.com"
+        }
+      ]
+    },
+    "es_es": {
+      "lane_suffixes": [
+        "es_es"
+      ],
+      "ui_lang": "es",
+      "market_note": "Mercado España (castellano). Territorio separado de es-US: no mezclar cargas ni catálogos entre EE. UU. hispano y España. Amazon.es, Google Play, Apple Books (ES), Kobo (fuerte en España vía Fnac/Rakuten), StreetLib y Draft2Digital son autoservicio (ready). Casa del Libro/Tagus, Lantia y los canales de biblioteca Bookwire/Odilo requieren editor o agregador — marcados como planned; el paquete semanal del repo aún no genera archivos de subida para ellos.",
+      "package_blurb": "8 ebooks + 4 manga + 3 micro = 15 títulos. Portadas, metadatos y vídeo incluidos. Eje internacional de autopublicación para España.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Kobo / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Cuenta de Google",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 min",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "Canal de YouTube",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (Amazon.es)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Libros",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books (ES)",
+          "url": "https://authors.apple.com",
+          "t": "30 min",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life (España, vía Fnac/Rakuten)",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "streetlib",
+          "n": "StreetLib",
+          "url": "https://streetlib.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram Business",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas (español)",
+          "url": "https://www.webtoons.com/es/challenge/publish",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "casadellibro",
+          "n": "Casa del Libro / Tagus",
+          "url": "https://www.casadellibro.com/publica-con-nosotros",
+          "t": "gestión editorial 3–4 sem",
+          "status": "planned",
+          "planned_note": "Plataforma española de referencia (Tagus) — requiere sello editorial o agregador; no es autoservicio. El paquete semanal del repo aún no genera archivos para Tagus."
+        },
+        {
+          "id": "lantia",
+          "n": "Lantia Publishing",
+          "url": "https://lantia.me",
+          "t": "alta editorial",
+          "status": "planned",
+          "planned_note": "Agregador español de autoedición — requiere cuenta de editor y contrato; carga aún no automatizada en el repo."
+        },
+        {
+          "id": "bookwire",
+          "n": "Bookwire / Odilo (canal bibliotecas)",
+          "url": "https://www.bookwire.es",
+          "t": "acuerdo con agregador",
+          "status": "planned",
+          "planned_note": "Canal de bibliotecas y streaming (Odilo) — mediado por agregador, no autoservicio; el paquete semanal no produce salida propia todavía."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en la estantería de KDP",
+            "Pulsa 'Crear nuevo título' > eBook Kindle",
+            "Introduce título, subtítulo, autor y descripción (usa los botones COPIAR)",
+            "Sube el EPUB desde la carpeta KDP/",
+            "Sube la portada desde la carpeta KDP/",
+            "Fija el precio en EUR (2,99–9,99 € para el 70 % de regalías) y publica",
+            "Repite con cada título"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Libros",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Abre el Centro de Partners",
+            "Pulsa 'Añadir libro' > 'Añadir libro nuevo'",
+            "Sube el EPUB desde la carpeta GooglePlay/",
+            "Rellena los metadatos (usa los botones COPIAR)",
+            "Sube la imagen de portada",
+            "Fija precios y territorios (incluye España)",
+            "Envía a revisión"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Abre Apple Books para autores",
+            "Pulsa 'Nuevo libro'",
+            "Sube el EPUB 3.3 desde la carpeta AppleBooks/",
+            "Introduce los metadatos (idioma: español)",
+            "Sube la portada",
+            "Fija precios para el territorio ES y publica"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en Kobo Writing Life",
+            "Pulsa 'Crear nuevo eBook'",
+            "Sube el EPUB y la portada",
+            "Introduce los metadatos en español",
+            "Fija precio en EUR y territorio España (distribución vía Fnac/Rakuten)",
+            "Publica"
+          ]
+        },
+        {
+          "id": "u_streetlib",
+          "n": "StreetLib",
+          "url": "https://streetlib.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en StreetLib Publish",
+            "Crea un nuevo libro",
+            "Sube el EPUB y la portada",
+            "Rellena los metadatos en español",
+            "Selecciona las tiendas de destino (España + internacional)",
+            "Distribuye"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/es/challenge/publish",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Abre WEBTOON Creator Studio",
+            "Selecciona tu serie (o crea una nueva)",
+            "Pulsa 'Añadir episodio'",
+            "Sube las viñetas desde la carpeta WEBTOON/ (800 px de ancho, JPG)",
+            "Añade título del episodio y miniatura en español",
+            "Publica el episodio"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abre TikTok Creator",
+            "Pulsa '+' para subir",
+            "Selecciona el MP4 desde la carpeta Video/",
+            "Añade el pie con hashtags en español",
+            "Publica"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abre YouTube Studio",
+            "Pulsa 'Crear' > 'Subir vídeo'",
+            "Selecciona el MP4 desde la carpeta Video/",
+            "Añade título, descripción y etiquetas (usa los botones COPIAR)",
+            "Fija la miniatura y publica"
+          ]
+        },
+        {
+          "id": "u_d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com",
+          "titles": 0,
+          "status": "ready",
+          "steps": [
+            "Inicia sesión en Draft2Digital",
+            "Pulsa 'Add New Book'",
+            "Sube el EPUB y la portada",
+            "Rellena los metadatos en español",
+            "Selecciona canales de distribución adicionales",
+            "Publica"
+          ]
+        },
+        {
+          "id": "u_casadellibro",
+          "n": "Casa del Libro / Tagus",
+          "url": "https://www.casadellibro.com/publica-con-nosotros",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Alta manual mediante sello editorial o agregador — no autoservicio; el paquete semanal aún no genera archivo propio para Tagus."
+        },
+        {
+          "id": "u_lantia",
+          "n": "Lantia Publishing",
+          "url": "https://lantia.me",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Carga tras aprobación de cuenta de editor — no automatizada en el repo todavía."
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Descargar paquete",
+          "tasks": [
+            {
+              "t": "Descarga el paquete de contenido de esta semana",
+              "btn": "Descargar",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "Día de KDP",
+          "tasks": [
+            {
+              "t": "Sube 6 títulos a Amazon KDP (Amazon.es)",
+              "btn": "Abrir KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Multiplataforma",
+          "tasks": [
+            {
+              "t": "Sube a Google Play Libros",
+              "btn": "Abrir GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Sube a Apple Books (ES)",
+              "btn": "Abrir AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Sube a Kobo",
+              "btn": "Abrir Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Manga + agregadores",
+          "tasks": [
+            {
+              "t": "Sube episodios de manga a WEBTOON",
+              "btn": "Abrir WEBTOON",
+              "url": "https://www.webtoons.com/es/challenge/publish"
+            },
+            {
+              "t": "Distribuye el resto por StreetLib y Draft2Digital",
+              "btn": "Abrir StreetLib",
+              "url": "https://streetlib.com"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Día de vídeo",
+          "tasks": [
+            {
+              "t": "Publica vídeos en TikTok",
+              "btn": "Abrir TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "Sube vídeos a YouTube",
+              "btn": "Abrir YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Publica Reels en Instagram",
+              "btn": "Abrir IG",
+              "url": "https://www.instagram.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Revisión + seguimiento",
+          "tasks": [
+            {
+              "t": "Revisa los informes de KDP",
+              "btn": "Informes KDP",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Revisa las analíticas de YouTube",
+              "btn": "Analíticas YT",
+              "url": "https://studio.youtube.com/channel/analytics"
+            },
+            {
+              "t": "Haz seguimiento de las altas en Casa del Libro/Tagus y Lantia (plataformas planned)",
+              "btn": "Casa del Libro",
+              "url": "https://www.casadellibro.com/publica-con-nosotros"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Descanso",
+          "tasks": [
+            {
+              "t": "El sistema actualiza la cola de la próxima semana automáticamente. Tómate el día libre."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "StreetLib",
+          "url": "https://streetlib.com"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/es/challenge/publish"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "Casa del Libro",
+          "url": "https://www.casadellibro.com/publica-con-nosotros"
+        }
+      ]
+    },
+    "fr_fr": {
+      "lane_suffixes": [
+        "fr_fr"
+      ],
+      "ui_lang": "fr",
+      "market_note": "Marché France. Axe international en libre-service : KDP (Amazon.fr), Google Play Livres, Apple Books, Kobo Writing Life (très fort en France via la Fnac), Vivlio, 7switch, Librinova, StreetLib et Draft2Digital. La distribution en librairies (Bookelis/Librinova) et l'agrégation Numilog/Immatériel restent sur validation éditeur — voir les entrées planned. Ne présentez pas les plateformes planned comme automatisées.",
+      "package_blurb": "Pack hebdo : 8 e-books + 4 mangas + 3 micro-formats = 15 titres. Couvertures, métadonnées et vidéos incluses.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Kobo / Vivlio / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Compte Google",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 min",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "Chaîne YouTube",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (Amazon.fr)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Livres",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books (FR)",
+          "url": "https://authors.apple.com",
+          "t": "30 min",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "vivlio",
+          "n": "Vivlio (ex-TEA / ePagine)",
+          "url": "https://pro.vivlio.com",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "sept_switch",
+          "n": "7switch",
+          "url": "https://www.7switch.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "librinova",
+          "n": "Librinova",
+          "url": "https://www.librinova.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "streetlib",
+          "n": "StreetLib",
+          "url": "https://www.streetlib.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas (français)",
+          "url": "https://www.webtoons.com/fr/challenge",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "bookelis",
+          "n": "Bookelis — distribution librairies",
+          "url": "https://www.bookelis.com",
+          "t": "validation éditeur 2–3 sem.",
+          "status": "planned",
+          "planned_note": "Diffusion vers les librairies françaises — nécessite validation éditeur ; le pack hebdo ne produit pas encore de fichier dédié Bookelis."
+        },
+        {
+          "id": "numilog",
+          "n": "Numilog / Immatériel (agrégation)",
+          "url": "https://www.immateriel.fr",
+          "t": "contrat 3–4 sem.",
+          "status": "planned",
+          "planned_note": "Agrégation vers bibliothèques et libraires numériques (Numilog, Immatériel.fr) — contrat éditeur requis, non automatisé dans le repo."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP (Amazon.fr)",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Se connecter à l'étagère KDP",
+            "Cliquer sur « Créer un nouveau titre » > eBook Kindle",
+            "Saisir titre, sous-titre, auteur et description (utiliser les boutons COPIER ci-dessous)",
+            "Téléverser l'EPUB depuis le dossier KDP/",
+            "Téléverser la couverture depuis le dossier KDP/",
+            "Fixer le prix (2,99–9,99 € pour 70 % de redevance) et publier",
+            "Répéter pour chaque titre"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Livres",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Ouvrir le Centre partenaires",
+            "Cliquer sur « Ajouter un livre » > « Ajouter un nouveau livre »",
+            "Téléverser l'EPUB depuis le dossier GooglePlay/",
+            "Renseigner les métadonnées (boutons COPIER)",
+            "Téléverser l'image de couverture",
+            "Définir prix et territoires",
+            "Soumettre pour examen"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books (FR)",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Ouvrir Apple Books pour les auteurs",
+            "Cliquer sur « New Book »",
+            "Téléverser l'EPUB 3.3 depuis le dossier AppleBooks/",
+            "Saisir les métadonnées (langue : Français)",
+            "Téléverser la couverture",
+            "Définir le prix et publier"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Se connecter à Kobo Writing Life",
+            "Cliquer sur « Create New eBook »",
+            "Téléverser l'EPUB et la couverture",
+            "Saisir les métadonnées",
+            "Définir prix et territoires (France, Fnac incluse)",
+            "Publier"
+          ]
+        },
+        {
+          "id": "u_vivlio",
+          "n": "Vivlio (ex-TEA)",
+          "url": "https://pro.vivlio.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Se connecter à l'espace pro Vivlio",
+            "Ajouter un nouveau titre",
+            "Téléverser l'EPUB et la couverture",
+            "Renseigner les métadonnées et le prix",
+            "Diffuser vers le réseau de libraires partenaires"
+          ]
+        },
+        {
+          "id": "u_streetlib",
+          "n": "StreetLib",
+          "url": "https://www.streetlib.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Se connecter à StreetLib Publish",
+            "Créer un nouveau livre",
+            "Téléverser l'EPUB et la couverture",
+            "Renseigner les métadonnées",
+            "Sélectionner les canaux de distribution FR",
+            "Publier"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas (français)",
+          "url": "https://www.webtoons.com/fr/challenge",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Ouvrir le Creator Studio WEBTOON",
+            "Sélectionner votre série (ou en créer une)",
+            "Cliquer sur « Ajouter un épisode »",
+            "Téléverser les planches depuis le dossier WEBTOON/ (800 px de large, JPG)",
+            "Ajouter titre d'épisode et vignette",
+            "Publier l'épisode"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Ouvrir TikTok Creator",
+            "Toucher « + » pour téléverser",
+            "Sélectionner le MP4 du dossier Video/",
+            "Ajouter une légende avec hashtags",
+            "Publier"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Ouvrir YouTube Studio",
+            "Cliquer sur « Créer » > « Mettre en ligne une vidéo »",
+            "Sélectionner le MP4 du dossier Video/",
+            "Ajouter titre, description, tags (boutons COPIER)",
+            "Définir la miniature et publier"
+          ]
+        },
+        {
+          "id": "u_d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com",
+          "titles": 2,
+          "status": "ready",
+          "steps": [
+            "Se connecter à Draft2Digital",
+            "Cliquer sur « Add New Book »",
+            "Téléverser l'EPUB et la couverture",
+            "Renseigner les métadonnées",
+            "Sélectionner les canaux et publier"
+          ]
+        },
+        {
+          "id": "u_bookelis",
+          "n": "Bookelis — librairies",
+          "url": "https://www.bookelis.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Téléversement manuel après validation éditeur — le pack hebdo ne produit pas encore de fichier dédié Bookelis."
+        },
+        {
+          "id": "u_numilog",
+          "n": "Numilog / Immatériel",
+          "url": "https://www.immateriel.fr",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Contrat éditeur requis — diffusion non automatisée."
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Télécharger le pack",
+          "tasks": [
+            {
+              "t": "Télécharger le pack de contenu de la semaine",
+              "btn": "Télécharger",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "Journée KDP",
+          "tasks": [
+            {
+              "t": "Téléverser 6 titres sur Amazon KDP (Amazon.fr)",
+              "btn": "Ouvrir KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Multi-plateformes",
+          "tasks": [
+            {
+              "t": "Téléverser sur Google Play Livres",
+              "btn": "Ouvrir GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Téléverser sur Apple Books",
+              "btn": "Ouvrir AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Téléverser sur Kobo (Fnac)",
+              "btn": "Ouvrir Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Réseau FR + manga",
+          "tasks": [
+            {
+              "t": "Diffuser via Vivlio, 7switch et StreetLib",
+              "btn": "Ouvrir Vivlio",
+              "url": "https://pro.vivlio.com"
+            },
+            {
+              "t": "Publier un épisode manga sur WEBTOON Canvas",
+              "btn": "Ouvrir WEBTOON",
+              "url": "https://www.webtoons.com/fr/challenge"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Journée vidéo",
+          "tasks": [
+            {
+              "t": "Publier les vidéos TikTok",
+              "btn": "Ouvrir TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "Mettre en ligne les vidéos YouTube",
+              "btn": "Ouvrir YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Publier les Reels Instagram",
+              "btn": "Ouvrir IG",
+              "url": "https://www.instagram.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Bilan + suivi",
+          "tasks": [
+            {
+              "t": "Consulter les rapports KDP",
+              "btn": "Rapports KDP",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Consulter YouTube Analytics",
+              "btn": "YT Analytics",
+              "url": "https://studio.youtube.com/channel/analytics"
+            },
+            {
+              "t": "Suivre l'avancement des demandes Bookelis / Numilog (plateformes planned)",
+              "btn": "Bookelis",
+              "url": "https://www.bookelis.com"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Repos",
+          "tasks": [
+            {
+              "t": "Le système actualise automatiquement la file de la semaine prochaine. Prenez votre journée."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "Vivlio",
+          "url": "https://pro.vivlio.com"
+        },
+        {
+          "label": "7switch",
+          "url": "https://www.7switch.com"
+        },
+        {
+          "label": "Librinova",
+          "url": "https://www.librinova.com"
+        },
+        {
+          "label": "StreetLib",
+          "url": "https://www.streetlib.com"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/fr/challenge"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        }
+      ]
+    },
+    "de_de": {
+      "lane_suffixes": [
+        "de_de"
+      ],
+      "ui_lang": "de",
+      "market_note": "Deutscher Markt — Tolino dominiert den deutschen E-Book-Handel (Thalia, Weltbild, Hugendubel, Osiander). Über Tolino Media self-publishst du in diesen Verbund. KDP, Google Play Bücher, Apple Books, Kobo, BoD, neobooks und Draft2Digital sind self-serve. Audible ACX ist in DE nicht per Self-Service verfügbar — als planned markiert.",
+      "package_blurb": "8 E-Books + 4 Manga + 3 Micro = 15 Titel. Cover, Metadaten und Video inklusive. Tolino-Media-Verbund für den deutschen Handel.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Tolino / Kobo / BoD / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google-Konto",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube-Kanal",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (Amazon.de)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Bücher",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books (DE)",
+          "url": "https://authors.apple.com",
+          "t": "30 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "tolino",
+          "n": "Tolino Media",
+          "url": "https://partner.tolino-media.de",
+          "t": "25 Min.",
+          "status": "ready",
+          "note": "Self-Publishing in den Tolino-Verbund — Thalia, Weltbild, Hugendubel & Partner."
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "bod",
+          "n": "BoD (Books on Demand)",
+          "url": "https://www.bod.de",
+          "t": "25 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "neobooks",
+          "n": "neobooks",
+          "url": "https://www.neobooks.com",
+          "t": "20 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas (deutsch)",
+          "url": "https://www.webtoons.com/de/challenge",
+          "t": "20 Min.",
+          "status": "ready"
+        },
+        {
+          "id": "acx",
+          "n": "Audible ACX",
+          "url": "https://www.acx.com",
+          "t": "Agentur-gebunden",
+          "status": "planned",
+          "planned_note": "Audible ACX ist in Deutschland nicht für Self-Publisher freigeschaltet — Hörbuch-Vertrieb läuft über Aggregatoren/Agenturen; Repo-Wochenpaket erzeugt noch keine ACX-Ausgabe."
+        },
+        {
+          "id": "skoobe",
+          "n": "Skoobe / Bibliotheks-Flatrate",
+          "url": "https://www.skoobe.de",
+          "t": "Verlags-/Aggregator-gebunden",
+          "status": "planned",
+          "planned_note": "Flatrate- und Bibliothekskanäle (Skoobe, Onleihe) laufen über Verlag oder Aggregator — kein Self-Service; noch nicht automatisiert."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Bei KDP-Bücherregal anmelden",
+            "„Neuen Titel erstellen“ > Kindle-eBook",
+            "Titel, Untertitel, Autor, Beschreibung eingeben (COPY-Buttons unten nutzen)",
+            "EPUB aus KDP/-Ordner hochladen",
+            "Cover aus KDP/-Ordner hochladen",
+            "Preis setzen (2,99–9,99 € für 70 % Tantieme) und veröffentlichen",
+            "Für jeden Titel wiederholen"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Bücher",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Partner Center öffnen",
+            "„Buch hinzufügen“ > „Neues Buch hinzufügen“",
+            "EPUB aus GooglePlay/-Ordner hochladen",
+            "Metadaten ausfüllen (COPY-Buttons nutzen)",
+            "Coverbild hochladen",
+            "Preise und Länder (DE) festlegen",
+            "Zur Prüfung einreichen"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Apple Books für Autoren öffnen",
+            "„Neues Buch“ anklicken",
+            "EPUB 3.3 aus AppleBooks/-Ordner hochladen",
+            "Metadaten eingeben",
+            "Cover hochladen",
+            "Preise (DE) setzen und veröffentlichen"
+          ]
+        },
+        {
+          "id": "u_tolino",
+          "n": "Tolino Media",
+          "url": "https://partner.tolino-media.de",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Bei Tolino Media Partner anmelden",
+            "„Neues E-Book anlegen“",
+            "EPUB aus Tolino/-Ordner hochladen",
+            "Metadaten und Kategorien (Thema) eingeben",
+            "Cover hochladen",
+            "Preis in EUR festlegen — Vertrieb in Thalia / Weltbild / Hugendubel / Tolino",
+            "Veröffentlichen"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Bei Kobo Writing Life anmelden",
+            "„Neues eBook erstellen“",
+            "EPUB und Cover hochladen",
+            "Metadaten eingeben",
+            "Preise und Länder festlegen",
+            "Veröffentlichen"
+          ]
+        },
+        {
+          "id": "u_bod",
+          "n": "BoD (Books on Demand)",
+          "url": "https://www.bod.de",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Bei myBoD anmelden",
+            "„E-Book veröffentlichen“",
+            "EPUB und Cover hochladen",
+            "Metadaten und Preis (EUR) eingeben",
+            "Vertrieb in den deutschen Buchhandel freigeben",
+            "Veröffentlichen"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/de/challenge",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "WEBTOON Creator Studio öffnen",
+            "Serie auswählen (oder neu anlegen)",
+            "„Episode hinzufügen“",
+            "Panels aus WEBTOON/-Ordner hochladen (800px breit, JPG)",
+            "Episodentitel und Thumbnail hinzufügen",
+            "Episode veröffentlichen"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "TikTok Creator öffnen",
+            "Auf „+“ zum Hochladen tippen",
+            "MP4 aus Video/-Ordner auswählen",
+            "Caption mit Hashtags hinzufügen",
+            "Posten"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "YouTube Studio öffnen",
+            "„Erstellen“ > „Video hochladen“",
+            "MP4 aus Video/-Ordner auswählen",
+            "Titel, Beschreibung, Tags eingeben (COPY-Buttons nutzen)",
+            "Thumbnail setzen und veröffentlichen"
+          ]
+        },
+        {
+          "id": "u_acx",
+          "n": "Audible ACX",
+          "url": "https://www.acx.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Kein Self-Service in DE — Hörbuch über Aggregator/Agentur; Repo-Wochenpaket erzeugt noch keine ACX-Ausgabe."
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Paket herunterladen",
+          "tasks": [
+            {
+              "t": "Content-Paket dieser Woche herunterladen",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "KDP-Upload-Tag",
+          "tasks": [
+            {
+              "t": "6 Titel zu Amazon KDP hochladen",
+              "btn": "KDP öffnen",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Tolino + Multi-Plattform",
+          "tasks": [
+            {
+              "t": "Tolino Media hochladen (Thalia / Weltbild / Hugendubel)",
+              "btn": "Tolino",
+              "url": "https://partner.tolino-media.de"
+            },
+            {
+              "t": "Google Play Bücher hochladen",
+              "btn": "GP öffnen",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Apple Books hochladen",
+              "btn": "AB öffnen",
+              "url": "https://authors.apple.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Kobo + BoD + Manga",
+          "tasks": [
+            {
+              "t": "Zu Kobo hochladen",
+              "btn": "Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            },
+            {
+              "t": "Zu BoD hochladen",
+              "btn": "BoD",
+              "url": "https://www.bod.de"
+            },
+            {
+              "t": "Manga-Episoden zu WEBTOON hochladen",
+              "btn": "WEBTOON",
+              "url": "https://www.webtoons.com/de/challenge"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Video- & Podcast-Tag",
+          "tasks": [
+            {
+              "t": "TikTok-Videos posten",
+              "btn": "TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "YouTube-Videos hochladen",
+              "btn": "YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Instagram Reels posten",
+              "btn": "IG",
+              "url": "https://www.instagram.com"
+            },
+            {
+              "t": "Spotify for Creators",
+              "btn": "Spotify",
+              "url": "https://creators.spotify.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Auswertung",
+          "tasks": [
+            {
+              "t": "KDP-Berichte prüfen",
+              "btn": "KDP-Berichte",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Tolino-Media-Verkäufe prüfen",
+              "btn": "Tolino",
+              "url": "https://partner.tolino-media.de"
+            },
+            {
+              "t": "YouTube-Analytics prüfen",
+              "btn": "YT-Analytics",
+              "url": "https://studio.youtube.com/channel/analytics"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Ruhetag",
+          "tasks": [
+            {
+              "t": "Das System aktualisiert die Warteschlange für nächste Woche automatisch. Mach heute frei."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Tolino Media",
+          "url": "https://partner.tolino-media.de"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "BoD",
+          "url": "https://www.bod.de"
+        },
+        {
+          "label": "neobooks",
+          "url": "https://www.neobooks.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/de/challenge"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        }
+      ]
+    },
+    "it_it": {
+      "lane_suffixes": [
+        "it_it"
+      ],
+      "ui_lang": "it",
+      "market_note": "Mercato Italia. Asse internazionale self-serve (Amazon.it / Google Play Libri / Apple Books / Kobo / StreetLib / Youcanprint / Draft2Digital) attivabile in autonomia. Kobo è forte in Italia grazie a Mondadori/laFeltrinelli; StreetLib e Youcanprint sono aggregatori nati in Italia. IBS.it/laFeltrinelli diretto, Bookrepublic e Storytel restano planned: passano da editore o aggregatore e il pacchetto settimanale del repo non genera ancora file di caricamento dedicati — non trattarli come scaricabili.",
+      "package_blurb": "8 ebook + 4 manga + 3 micro = 15 titoli. Copertine, metadati e video inclusi. Asse self-publishing internazionale; le piattaforme italiane dirette richiedono account a parte.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Kobo / StreetLib / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Account Google",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 min",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "Canale YouTube",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (Amazon.it)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Libri",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books (IT)",
+          "url": "https://authors.apple.com",
+          "t": "30 min",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "streetlib",
+          "n": "StreetLib",
+          "url": "https://streetlib.com",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "youcanprint",
+          "n": "Youcanprint",
+          "url": "https://www.youcanprint.it",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram Business",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas (italiano)",
+          "url": "https://www.webtoons.com/it/challenge/publish",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "ibs_feltrinelli",
+          "n": "IBS.it / laFeltrinelli (diretto)",
+          "url": "mailto:selfpublishing@lafeltrinelli.it",
+          "t": "contatto 3–4 settimane",
+          "status": "planned",
+          "planned_note": "Vendita diretta sulle librerie online italiane — passa da editore/aggregatore, non è caricamento self-serve; il pacchetto settimanale non genera ancora file dedicati."
+        },
+        {
+          "id": "bookrepublic",
+          "n": "Bookrepublic",
+          "url": "https://www.bookrepublic.it/publishers/",
+          "t": "richiesta 2 settimane",
+          "status": "planned",
+          "planned_note": "Distributore/store italiano — accesso via editore o aggregatore; nessun output automatico nel repo per ora."
+        },
+        {
+          "id": "storytel",
+          "n": "Storytel Italia",
+          "url": "https://www.storytel.com/it/diventa-autore",
+          "t": "valutazione editoriale",
+          "status": "planned",
+          "planned_note": "Abbonamento audiolibri — l'ingresso passa da editore/aggregatore audio; il pacchetto settimanale non produce ancora un file Storytel."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP (Amazon.it)",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Accedi alla Libreria KDP",
+            "Clicca 'Crea nuovo titolo' > eBook Kindle",
+            "Inserisci titolo, sottotitolo, autore, descrizione (usa i pulsanti COPIA qui sotto)",
+            "Carica l'EPUB dalla cartella KDP/",
+            "Carica la copertina dalla cartella KDP/",
+            "Imposta il prezzo (2,99–9,99 € per il 70% di royalty) e pubblica",
+            "Ripeti per ogni titolo"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Libri",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Apri il Centro partner",
+            "Clicca 'Aggiungi libro' > 'Aggiungi nuovo libro'",
+            "Carica l'EPUB dalla cartella GooglePlay/",
+            "Compila i metadati (usa i pulsanti COPIA)",
+            "Carica l'immagine di copertina",
+            "Imposta prezzi e territori",
+            "Invia per la revisione"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books (IT)",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Apri Apple Books for Authors",
+            "Clicca 'New Book'",
+            "Carica l'EPUB 3.3 dalla cartella AppleBooks/",
+            "Inserisci i metadati (lingua: Italiano)",
+            "Carica la copertina",
+            "Imposta i prezzi per l'Italia e pubblica"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Accedi a Kobo Writing Life",
+            "Clicca 'Crea nuovo eBook'",
+            "Carica EPUB e copertina",
+            "Inserisci i metadati",
+            "Imposta prezzi e territori (forte in Italia via Mondadori/laFeltrinelli)",
+            "Pubblica"
+          ]
+        },
+        {
+          "id": "u_streetlib",
+          "n": "StreetLib",
+          "url": "https://streetlib.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Accedi a StreetLib Publish",
+            "Crea un nuovo libro",
+            "Carica EPUB e copertina",
+            "Inserisci i metadati",
+            "Seleziona i canali di distribuzione (store italiani inclusi)",
+            "Pubblica"
+          ]
+        },
+        {
+          "id": "u_youcanprint",
+          "n": "Youcanprint",
+          "url": "https://www.youcanprint.it",
+          "titles": 2,
+          "status": "ready",
+          "steps": [
+            "Accedi a Youcanprint",
+            "Crea un nuovo titolo (eBook)",
+            "Carica EPUB e copertina",
+            "Compila i metadati in italiano",
+            "Imposta prezzo e distribuzione",
+            "Pubblica"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas (italiano)",
+          "url": "https://www.webtoons.com/it/challenge/publish",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Apri WEBTOON Creator Studio",
+            "Seleziona la tua serie (o creane una nuova)",
+            "Clicca 'Aggiungi episodio'",
+            "Carica le tavole dalla cartella WEBTOON/ (800px di larghezza, JPG)",
+            "Aggiungi titolo dell'episodio e miniatura",
+            "Pubblica l'episodio"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Apri TikTok Creator",
+            "Tocca '+' per caricare",
+            "Seleziona l'MP4 dalla cartella Video/",
+            "Aggiungi la caption con gli hashtag",
+            "Pubblica"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Apri YouTube Studio",
+            "Clicca 'Crea' > 'Carica video'",
+            "Seleziona l'MP4 dalla cartella Video/",
+            "Aggiungi titolo, descrizione, tag (usa i pulsanti COPIA)",
+            "Imposta la miniatura e pubblica"
+          ]
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Scarica il pacchetto",
+          "tasks": [
+            {
+              "t": "Scarica il pacchetto di contenuti di questa settimana",
+              "btn": "Scarica",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "Giornata KDP",
+          "tasks": [
+            {
+              "t": "Carica 6 titoli su Amazon KDP (Amazon.it)",
+              "btn": "Apri KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Multi-piattaforma",
+          "tasks": [
+            {
+              "t": "Carica su Google Play Libri",
+              "btn": "Apri GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Carica su Apple Books",
+              "btn": "Apri AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Carica su Kobo",
+              "btn": "Apri Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Aggregatori italiani + manga",
+          "tasks": [
+            {
+              "t": "Carica su StreetLib (store italiani)",
+              "btn": "Apri StreetLib",
+              "url": "https://streetlib.com"
+            },
+            {
+              "t": "Carica su Youcanprint",
+              "btn": "Apri YCP",
+              "url": "https://www.youcanprint.it"
+            },
+            {
+              "t": "Pubblica un episodio su WEBTOON",
+              "btn": "Apri WEBTOON",
+              "url": "https://www.webtoons.com/it/challenge/publish"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Giornata video",
+          "tasks": [
+            {
+              "t": "Pubblica i video su TikTok",
+              "btn": "Apri TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "Carica i video su YouTube",
+              "btn": "Apri YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Pubblica i Reels su Instagram",
+              "btn": "Apri IG",
+              "url": "https://www.instagram.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Revisione + pratiche planned",
+          "tasks": [
+            {
+              "t": "Controlla i report KDP",
+              "btn": "Report KDP",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Controlla YouTube Analytics",
+              "btn": "YT Analytics",
+              "url": "https://studio.youtube.com/channel/analytics"
+            },
+            {
+              "t": "Segui le pratiche IBS.it/laFeltrinelli, Bookrepublic e Storytel (piattaforme planned)",
+              "btn": "Bookrepublic",
+              "url": "https://www.bookrepublic.it/publishers/"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Riposo",
+          "tasks": [
+            {
+              "t": "Il sistema aggiorna automaticamente la coda della prossima settimana. Prenditi il giorno libero."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "StreetLib",
+          "url": "https://streetlib.com"
+        },
+        {
+          "label": "Youcanprint",
+          "url": "https://www.youcanprint.it"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/it/challenge/publish"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        }
+      ]
+    },
+    "hu_hu": {
+      "lane_suffixes": [
+        "hu_hu"
+      ],
+      "ui_lang": "hu",
+      "market_note": "Magyar piac — kicsi piac, sok csatorna kézi vagy tervezett. Az Amazon KDP, Google Play Könyvek, Apple Books és Draft2Digital önkiszolgáló módon elérhető; a magyar natív platformok (Publio, Libri-Bookline / eKönyv, DiBook) külön jelentkezést vagy kiadói szerződést igényelnek — planned, ne kezeld letölthetőként. A Kobo magyar jelenléte gyenge.",
+      "package_blurb": "Heti csomag: e-könyvek + manga + mikrotartalom (nemzetközi önkiadói tengely). A magyar natív platformokhoz külön fiók/jelentkezés kell.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / D2D / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google-fiók",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 perc",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube-csatorna",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 perc",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 perc",
+          "status": "ready",
+          "planned_note": "Működik magyar tartalommal; a magyar nyelvű metaadat-mezők korlátozottak, de a feltöltés és értékesítés megy."
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Könyvek",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 perc",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "t": "30 perc",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 perc",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram Business",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 perc",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok Business",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 perc",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/en/challenge/publish",
+          "t": "20 perc",
+          "status": "ready"
+        },
+        {
+          "id": "publio",
+          "n": "Publio (publio.hu)",
+          "url": "https://www.publio.hu",
+          "t": "jelentkezés 1–2 hét",
+          "status": "planned",
+          "planned_note": "Magyar önkiadói e-könyv-platform — valós, de regisztráció/jóváhagyás alapú; a heti csomag még nem állít elő Publio-specifikus kimenetet."
+        },
+        {
+          "id": "bookline",
+          "n": "Libri-Bookline / eKönyv (bookline.hu)",
+          "url": "mailto:ekonyv@bookline.hu",
+          "t": "kiadói egyeztetés 3–4 hét",
+          "status": "planned",
+          "planned_note": "Kiskereskedő-kapuval — nem önkiszolgáló feltöltés; kiadói szerződést igényel, a repo nem automatizálja."
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 perc",
+          "status": "planned",
+          "planned_note": "Gyenge magyar piaci jelenlét — technikailag önkiszolgáló, de a magyar értékesítés alacsony; planned, amíg nincs valós kereslet."
+        },
+        {
+          "id": "dibook",
+          "n": "DiBook",
+          "url": "https://www.dibook.hu",
+          "t": "kiadói egyeztetés",
+          "status": "planned",
+          "planned_note": "Magyar digitális könyv-forgalmazó — kapcsolatfelvétel alapú; nem automatizált a heti csomagban."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Jelentkezz be a KDP Bookshelfre",
+            "Kattints a 'Create New Title' > Kindle eBook lehetőségre",
+            "Add meg a címet, alcímet, szerzőt és leírást (használd a lenti COPY gombokat)",
+            "Töltsd fel az EPUB-ot a KDP/ mappából",
+            "Töltsd fel a borítót a KDP/ mappából",
+            "Állíts be árat (2,99–9,99 $ a 70%-os jogdíjhoz) és publikálj",
+            "Ismételd meg minden címnél"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Könyvek",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Nyisd meg a Partner Centert",
+            "Kattints az 'Add Book' > 'Add New Book' lehetőségre",
+            "Töltsd fel az EPUB-ot a GooglePlay/ mappából",
+            "Töltsd ki a metaadatokat (COPY gombok)",
+            "Töltsd fel a borítót",
+            "Állítsd be az árat és a régiót (Magyarország, HUF)",
+            "Küldd be ellenőrzésre"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Nyisd meg az Apple Books for Authorst",
+            "Kattints a 'New Book' gombra",
+            "Töltsd fel az EPUB 3.3-at az AppleBooks/ mappából",
+            "Add meg a metaadatokat (nyelv: magyar)",
+            "Töltsd fel a borítót",
+            "Állíts be árat és publikálj"
+          ]
+        },
+        {
+          "id": "u_d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Jelentkezz be a Draft2Digitalbe",
+            "Kattints az 'Add New Book' gombra",
+            "Töltsd fel az EPUB-ot és a borítót",
+            "Add meg a metaadatokat",
+            "Válaszd ki a terjesztési boltokat",
+            "Publikálj"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas",
+          "url": "https://www.webtoons.com/en/challenge/publish",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Nyisd meg a WEBTOON Creator Studiót",
+            "Válaszd ki a sorozatod (vagy hozz létre újat)",
+            "Kattints az 'Add Episode' gombra",
+            "Töltsd fel a paneleket a WEBTOON/ mappából (800px széles, JPG)",
+            "Add hozzá az epizódcímet és a bélyegképet",
+            "Publikáld az epizódot"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Nyisd meg a TikTok Creatort",
+            "Koppints a '+' gombra a feltöltéshez",
+            "Válaszd ki az MP4-et a Video/ mappából",
+            "Adj feliratot hashtagekkel",
+            "Posztolj"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Nyisd meg a YouTube Studiót",
+            "Kattints a 'Create' > 'Upload Video' lehetőségre",
+            "Válaszd ki az MP4-et a Video/ mappából",
+            "Add meg a címet, leírást, címkéket (COPY gombok)",
+            "Állítsd be a bélyegképet és publikálj"
+          ]
+        },
+        {
+          "id": "u_publio",
+          "n": "Publio (publio.hu)",
+          "url": "https://www.publio.hu",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "A fiók jóváhagyása után kézi EPUB-feltöltés — a heti csomag még nem tartalmaz Publio-specifikus fájlt."
+        },
+        {
+          "id": "u_bookline",
+          "n": "Libri-Bookline / eKönyv",
+          "url": "mailto:ekonyv@bookline.hu",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Kiadói szerződést igényel — nem automatizált feltöltés."
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Csomag letöltése",
+          "tasks": [
+            {
+              "t": "Töltsd le a heti tartalomcsomagot (nemzetközi önkiadói tengely)",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "KDP feltöltési nap",
+          "tasks": [
+            {
+              "t": "Tölts fel 6 címet az Amazon KDP-re",
+              "btn": "KDP megnyitása",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Több platform",
+          "tasks": [
+            {
+              "t": "Feltöltés a Google Play Könyvekbe (HU / HUF)",
+              "btn": "GP megnyitása",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Feltöltés az Apple Booksba",
+              "btn": "AB megnyitása",
+              "url": "https://authors.apple.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Manga + D2D",
+          "tasks": [
+            {
+              "t": "Manga-epizódok feltöltése a WEBTOON-ra",
+              "btn": "WEBTOON megnyitása",
+              "url": "https://www.webtoons.com/en/challenge/publish"
+            },
+            {
+              "t": "A többi feltöltése a Draft2Digitalre",
+              "btn": "D2D megnyitása",
+              "url": "https://draft2digital.com"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Videónap",
+          "tasks": [
+            {
+              "t": "TikTok-videók posztolása",
+              "btn": "TikTok megnyitása",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "YouTube-videók feltöltése",
+              "btn": "YouTube megnyitása",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Instagram Reels posztolása",
+              "btn": "IG megnyitása",
+              "url": "https://www.instagram.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Áttekintés + jelentkezések követése",
+          "tasks": [
+            {
+              "t": "Nézd meg a KDP-jelentéseket",
+              "btn": "KDP jelentések",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Kövesd a magyar platformok (Publio / Bookline — planned) jelentkezési állapotát",
+              "btn": "Publio",
+              "url": "https://www.publio.hu"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Pihenés",
+          "tasks": [
+            {
+              "t": "A rendszer automatikusan frissíti a jövő heti sort. Vedd ki a napot."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/en/challenge/publish"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "Publio",
+          "url": "https://www.publio.hu"
+        }
+      ]
+    },
+    "pt_br": {
+      "lane_suffixes": [
+        "pt_br"
+      ],
+      "ui_lang": "pt",
+      "market_note": "Mercado do Brasil. Eixo internacional de autopublicação (Amazon.com.br KDP / Google Play Livros / Apple Books / Kobo / Draft2Digital / StreetLib) totalmente self-service. Áudio via Spotify for Creators. Plataformas nativas de audiolivro (Ubook, Storytel, Tocalivros) e distribuidoras de agência (Skeelo, Simplíssimo/AGBook) exigem contrato ou curadoria — marcadas como planned; o pacote semanal ainda não gera arquivos de upload para elas.",
+      "package_blurb": "8 e-books + 4 mangás + 3 micro = 15 títulos. Capas, metadados e vídeo inclusos. Eixo de autopublicação BR pronto para publicar.",
+      "package_folders": "KDP / GooglePlay / AppleBooks / Kobo / StreetLib / WEBTOON / Video / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Conta Google",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 min",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "Canal no YouTube",
+          "url": "https://www.youtube.com/channel_switcher",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP (Amazon.com.br)",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play Livros",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 min",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "t": "30 min",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "streetlib",
+          "n": "StreetLib",
+          "url": "https://www.streetlib.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 min",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "WEBTOON Canvas (português)",
+          "url": "https://www.webtoons.com/pt/challenge",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "spotify",
+          "n": "Spotify for Creators",
+          "url": "https://creators.spotify.com",
+          "t": "20 min",
+          "status": "ready"
+        },
+        {
+          "id": "ubook",
+          "n": "Ubook (audiolivro)",
+          "url": "https://www.ubook.com",
+          "t": "contato 3–4 semanas",
+          "status": "planned",
+          "planned_note": "Maior plataforma de audiolivro do Brasil — distribuição por agência/contrato, não é upload self-service; o pacote semanal ainda não gera arquivo próprio para o Ubook."
+        },
+        {
+          "id": "skeelo",
+          "n": "Skeelo",
+          "url": "https://www.skeelo.com",
+          "t": "curadoria editorial",
+          "status": "planned",
+          "planned_note": "Distribuição por curadoria/parceria — requer aprovação editorial; sem saída automatizada no repositório."
+        },
+        {
+          "id": "simplissimo",
+          "n": "Simplíssimo / AGBook",
+          "url": "https://www.simplissimo.com.br",
+          "t": "cadastro de distribuidora",
+          "status": "planned",
+          "planned_note": "Distribuidora brasileira (AGBook) para lojas nacionais — exige cadastro/contrato; não automatizado hoje."
+        },
+        {
+          "id": "storytel_br",
+          "n": "Storytel Brasil",
+          "url": "https://www.storytel.com/br",
+          "t": "contato agência",
+          "status": "planned",
+          "planned_note": "Assinatura de audiolivro — catálogo entra via agregadora/agência, sem upload direto do autor."
+        },
+        {
+          "id": "tocalivros",
+          "n": "Tocalivros",
+          "url": "https://www.tocalivros.com",
+          "t": "contato editorial",
+          "status": "planned",
+          "planned_note": "Plataforma nacional de audiolivro/e-book — ingestão por contrato; o pacote semanal ainda não produz arquivo dedicado."
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP (Amazon.com.br)",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "Entre na Estante do KDP",
+            "Clique em 'Criar novo título' > eBook Kindle",
+            "Preencha título, subtítulo, autor e descrição (use os botões COPIAR abaixo)",
+            "Envie o EPUB da pasta KDP/",
+            "Envie a capa da pasta KDP/",
+            "Defina o preço (R$ 8,90–29,90 para 70% de royalties) e publique",
+            "Repita para cada título"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play Livros",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "Abra o Centro de Parceiros",
+            "Clique em 'Adicionar livro' > 'Adicionar novo livro'",
+            "Envie o EPUB da pasta GooglePlay/",
+            "Preencha os metadados (use os botões COPIAR)",
+            "Envie a imagem de capa",
+            "Defina preço e territórios (Brasil / BRL)",
+            "Envie para revisão"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Abra o Apple Books for Authors",
+            "Clique em 'New Book'",
+            "Envie o EPUB 3.3 da pasta AppleBooks/",
+            "Preencha os metadados (idioma: Português (Brasil))",
+            "Envie a capa",
+            "Defina o preço para o Brasil e publique"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://writinglife.kobobooks.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Entre no Kobo Writing Life",
+            "Clique em 'Criar novo eBook'",
+            "Envie o EPUB e a capa",
+            "Preencha os metadados",
+            "Defina preço e territórios (Brasil / BRL)",
+            "Publique"
+          ]
+        },
+        {
+          "id": "u_d2d",
+          "n": "Draft2Digital",
+          "url": "https://draft2digital.com/signup",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Entre no Draft2Digital",
+            "Clique em 'Add New Book'",
+            "Envie o EPUB da pasta metadata",
+            "Preencha os metadados",
+            "Selecione as lojas de distribuição",
+            "Publique"
+          ]
+        },
+        {
+          "id": "u_streetlib",
+          "n": "StreetLib",
+          "url": "https://www.streetlib.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Entre no StreetLib Publish",
+            "Clique em 'Novo livro'",
+            "Envie o EPUB e a capa",
+            "Preencha os metadados (BRL)",
+            "Selecione as lojas brasileiras e internacionais",
+            "Distribua"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "WEBTOON Canvas (português)",
+          "url": "https://www.webtoons.com/pt/challenge",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "Abra o Creator Studio do WEBTOON",
+            "Selecione sua série (ou crie uma nova)",
+            "Clique em 'Adicionar episódio'",
+            "Envie os painéis da pasta WEBTOON/ (800px de largura, JPG)",
+            "Adicione título e miniatura do episódio",
+            "Publique"
+          ]
+        },
+        {
+          "id": "u_tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/creator",
+          "titles": 3,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abra o TikTok",
+            "Toque em '+' para enviar",
+            "Selecione o MP4 da pasta Video/",
+            "Adicione a legenda com hashtags em português",
+            "Publique"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abra o YouTube Studio",
+            "Clique em 'Criar' > 'Enviar vídeo'",
+            "Selecione o MP4 da pasta Video/",
+            "Adicione título, descrição e tags (use os botões COPIAR)",
+            "Defina a miniatura e publique"
+          ]
+        },
+        {
+          "id": "u_spotify",
+          "n": "Spotify for Creators",
+          "url": "https://creators.spotify.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "Abra o Spotify for Creators",
+            "Crie ou selecione o programa",
+            "Envie o áudio da pasta Podcast/",
+            "Preencha título e descrição do episódio",
+            "Publique"
+          ]
+        },
+        {
+          "id": "u_ubook",
+          "n": "Ubook (audiolivro)",
+          "url": "https://www.ubook.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Ingestão por agência/contrato — envio manual após aprovação; o pacote semanal ainda não gera arquivo dedicado para o Ubook."
+        },
+        {
+          "id": "u_storytel",
+          "n": "Storytel Brasil",
+          "url": "https://www.storytel.com/br",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "Catálogo entra via agregadora — não é upload direto do autor; não automatizado hoje."
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "Baixar o Pacote",
+          "tasks": [
+            {
+              "t": "Baixe o pacote de conteúdo desta semana",
+              "btn": "Baixar",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "Dia do KDP",
+          "tasks": [
+            {
+              "t": "Envie 6 títulos para a Amazon KDP (.com.br)",
+              "btn": "Abrir KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Multiplataforma",
+          "tasks": [
+            {
+              "t": "Enviar para o Google Play Livros",
+              "btn": "Abrir GP",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Enviar para o Apple Books",
+              "btn": "Abrir AB",
+              "url": "https://authors.apple.com"
+            },
+            {
+              "t": "Enviar para o Kobo",
+              "btn": "Abrir Kobo",
+              "url": "https://writinglife.kobobooks.com"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "Mangá + Distribuição",
+          "tasks": [
+            {
+              "t": "Publicar episódios de mangá no WEBTOON Canvas",
+              "btn": "Abrir WEBTOON",
+              "url": "https://www.webtoons.com/pt/challenge"
+            },
+            {
+              "t": "Distribuir o restante no Draft2Digital e StreetLib",
+              "btn": "Abrir D2D",
+              "url": "https://draft2digital.com"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "Vídeo + Áudio",
+          "tasks": [
+            {
+              "t": "Postar vídeos no TikTok",
+              "btn": "Abrir TikTok",
+              "url": "https://www.tiktok.com/creator"
+            },
+            {
+              "t": "Enviar vídeos no YouTube",
+              "btn": "Abrir YouTube",
+              "url": "https://studio.youtube.com"
+            },
+            {
+              "t": "Postar Reels no Instagram",
+              "btn": "Abrir IG",
+              "url": "https://www.instagram.com"
+            },
+            {
+              "t": "Publicar áudio no Spotify for Creators",
+              "btn": "Abrir Spotify",
+              "url": "https://creators.spotify.com"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "Revisão + Acompanhamento",
+          "tasks": [
+            {
+              "t": "Conferir os relatórios do KDP",
+              "btn": "Relatórios KDP",
+              "url": "https://kdp.amazon.com/reports"
+            },
+            {
+              "t": "Conferir o YouTube Analytics",
+              "btn": "YT Analytics",
+              "url": "https://studio.youtube.com/channel/analytics"
+            },
+            {
+              "t": "Acompanhar cadastros de agência/audiolivro (itens planned)",
+              "btn": "Ubook",
+              "url": "https://www.ubook.com"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "Descanso",
+          "tasks": [
+            {
+              "t": "O sistema atualiza a fila da próxima semana automaticamente. Tire o dia de folga."
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://writinglife.kobobooks.com"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        },
+        {
+          "label": "WEBTOON",
+          "url": "https://www.webtoons.com/pt/challenge"
+        },
+        {
+          "label": "D2D",
+          "url": "https://draft2digital.com"
+        },
+        {
+          "label": "StreetLib",
+          "url": "https://www.streetlib.com"
+        },
+        {
+          "label": "Spotify",
+          "url": "https://creators.spotify.com"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com"
+        },
+        {
+          "label": "Ubook",
+          "url": "https://www.ubook.com"
+        }
+      ]
+    },
+    "zh_hk": {
+      "lane_suffixes": [
+        "zh_hk"
+      ],
+      "ui_lang": "zh-Hant",
+      "market_note": "香港市場：繁體中文，Google Play 圖書為主、Apple Books 次之。有聲書以粵語旁白為主（與台灣國語旁白分開製作）— 需經 Findaway Voices 聚合，repo 週包尚未自動產出粵語有聲檔，標為 planned。",
+      "package_blurb": "週包含國際自出版軸（Google Play / Apple / Kobo / KDP）+ Webtoon 繁中漫畫。香港有聲書（粵語）需另行製作，非自動輸出。",
+      "package_folders": "GooglePlay / AppleBooks / Kobo / KDP / WEBTOON / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google 帳號",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play 圖書（香港）",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books（香港）",
+          "url": "https://authors.apple.com",
+          "t": "30 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life（香港）",
+          "url": "https://www.kobo.com/hk/zh/p/writinglife",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "LINE Webtoon Canvas（繁中）",
+          "url": "https://www.webtoons.com/zh-hant/creators",
+          "t": "20 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "t": "15 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 分鐘",
+          "status": "ready"
+        },
+        {
+          "id": "findaway",
+          "n": "Findaway Voices（粵語有聲書）",
+          "url": "https://findawayvoices.com",
+          "t": "聚合審核",
+          "status": "planned",
+          "planned_note": "粵語有聲書經 Findaway 分發至 Apple Books Audio / Spotify — 需另行錄製粵語旁白；repo 週包尚無粵語有聲檔輸出。"
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_gplay",
+          "n": "Google Play 圖書",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "登入合作夥伴中心",
+            "上傳 GooglePlay/ 資料夾 EPUB（繁體）",
+            "地區選香港，幣別 HKD",
+            "批次上傳書單 CSV",
+            "提交審核"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Submit a New Book",
+            "上傳 EPUB（Chinese Traditional）",
+            "地區選 Hong Kong",
+            "設定 HKD 定價"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://www.kobo.com/hk/zh/p/writinglife",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "登入 Kobo",
+            "建立新電子書",
+            "上傳 EPUB 與封面",
+            "設定香港區域",
+            "出版"
+          ]
+        },
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "逐本建立 Kindle 電子書",
+            "AI 內容選「是」",
+            "上傳 EPUB 與封面（繁體）"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "LINE Webtoon Canvas",
+          "url": "https://www.webtoons.com/zh-hant/creators",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "新增單集",
+            "上傳 WEBTOON/ 直式長條圖（800px 寬）",
+            "繁中標題與說明",
+            "發佈（可與台灣共用）"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "上傳 Video/ MP4",
+            "繁中標題與說明",
+            "發佈"
+          ]
+        },
+        {
+          "id": "u_findaway",
+          "n": "Findaway Voices（粵語）",
+          "url": "https://findawayvoices.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "需先錄製粵語旁白 — repo 週包尚無粵語有聲檔。"
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "下載週包",
+          "tasks": [
+            {
+              "t": "下載本週內容包（國際自出版軸）",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "香港電子書優先",
+          "tasks": [
+            {
+              "t": "Google Play 圖書批次上傳（香港）",
+              "btn": "Google Play",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Apple Books（繁體 / 香港區）",
+              "btn": "Apple Books",
+              "url": "https://authors.apple.com"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Kobo + KDP",
+          "tasks": [
+            {
+              "t": "Kobo Writing Life 上架",
+              "btn": "Kobo",
+              "url": "https://www.kobo.com/hk/zh/p/writinglife"
+            },
+            {
+              "t": "Amazon KDP 逐本上架",
+              "btn": "KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "漫畫週",
+          "tasks": [
+            {
+              "t": "LINE Webtoon Canvas 發佈一話（繁中，與台灣共用）",
+              "btn": "Webtoon",
+              "url": "https://www.webtoons.com/zh-hant/creators"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "社群短影音",
+          "tasks": [
+            {
+              "t": "TikTok / YouTube / Instagram 短影音（粵語 caption）",
+              "btn": "TikTok",
+              "url": "https://www.tiktok.com/creator"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "檢視",
+          "tasks": [
+            {
+              "t": "檢查 Google Play / Apple 報表",
+              "btn": "Reports",
+              "url": "https://play.google.com/books/publish"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "休息",
+          "tasks": [
+            {
+              "t": "系統自動刷新下週佇列。今天休息。"
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://www.kobo.com/hk/zh/p/writinglife"
+        },
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "LINE Webtoon",
+          "url": "https://www.webtoons.com/zh-hant/creators"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        }
+      ]
+    },
+    "zh_sg": {
+      "lane_suffixes": [
+        "zh_sg"
+      ],
+      "ui_lang": "zh-Hans",
+      "market_note": "新加坡市场：简体中文为主，英文并行。同一套全球账号启用 Singapore 区域即可自助上架（Amazon.sg 2023 起支持电子书）。有声书经 Findaway Voices 分发至 Spotify SG / Apple Audio SG — 需另录普通话旁白，标为 planned。可与 en_US 版本互相「also available in」交叉推广。",
+      "package_blurb": "周包含国际自出版轴（KDP SG / Apple / Google Play / Kobo）+ Webtoon。有声书（普通话）需另录，非自动输出。",
+      "package_folders": "KDP / AppleBooks / GooglePlay / Kobo / WEBTOON / metadata.csv",
+      "setup": [
+        {
+          "id": "gmail",
+          "n": "Google 账号",
+          "url": "https://accounts.google.com/signup",
+          "t": "5 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "kdp",
+          "n": "Amazon KDP（Singapore 商店）",
+          "url": "https://kdp.amazon.com/signup",
+          "t": "20 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "apple",
+          "n": "Apple Books（新加坡）",
+          "url": "https://authors.apple.com",
+          "t": "30 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "gplay",
+          "n": "Google Play 图书（新加坡）",
+          "url": "https://play.google.com/books/publish/",
+          "t": "25 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "kobo",
+          "n": "Kobo Writing Life（新加坡）",
+          "url": "https://www.kobo.com/sg/en/p/writinglife",
+          "t": "20 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "webtoon",
+          "n": "Webtoon Canvas",
+          "url": "https://www.webtoons.com/en/creators",
+          "t": "20 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "t": "15 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "tiktok",
+          "n": "TikTok",
+          "url": "https://www.tiktok.com/signup",
+          "t": "15 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "instagram",
+          "n": "Instagram",
+          "url": "https://www.instagram.com/accounts/emailsignup/",
+          "t": "15 分钟",
+          "status": "ready"
+        },
+        {
+          "id": "findaway",
+          "n": "Findaway Voices（普通话有声书）",
+          "url": "https://findawayvoices.com",
+          "t": "聚合审核",
+          "status": "planned",
+          "planned_note": "普通话有声书经 Findaway 分发至 Spotify SG / Apple Audio SG — 需另录旁白；repo 周包尚无有声档输出。"
+        }
+      ],
+      "uploads": [
+        {
+          "id": "u_kdp",
+          "n": "Amazon KDP（SG）",
+          "url": "https://kdp.amazon.com/bookshelf",
+          "titles": 6,
+          "status": "ready",
+          "steps": [
+            "逐本创建 Kindle 电子书",
+            "AI 内容选「是」",
+            "上传 EPUB 与封面（简体）",
+            "启用 Singapore 商店",
+            "开启与 en_US 版本的 also-available-in 关联"
+          ]
+        },
+        {
+          "id": "u_apple",
+          "n": "Apple Books（SG）",
+          "url": "https://authors.apple.com",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "Submit a New Book",
+            "上传 EPUB（Chinese Simplified）",
+            "地区选 Singapore",
+            "设置 SGD 定价"
+          ]
+        },
+        {
+          "id": "u_gplay",
+          "n": "Google Play 图书",
+          "url": "https://play.google.com/books/publish",
+          "titles": 4,
+          "status": "ready",
+          "steps": [
+            "登录合作伙伴中心",
+            "上传 GooglePlay/ EPUB",
+            "地区选 Singapore",
+            "批量书单 CSV",
+            "提交审核"
+          ]
+        },
+        {
+          "id": "u_kobo",
+          "n": "Kobo Writing Life",
+          "url": "https://www.kobo.com/sg/en/p/writinglife",
+          "titles": 3,
+          "status": "ready",
+          "steps": [
+            "登录 Kobo",
+            "创建新电子书",
+            "上传 EPUB 与封面",
+            "启用新加坡区域",
+            "出版"
+          ]
+        },
+        {
+          "id": "u_webtoon",
+          "n": "Webtoon Canvas",
+          "url": "https://www.webtoons.com/en/creators",
+          "titles": 2,
+          "status": "ready",
+          "manga": true,
+          "steps": [
+            "创作者后台新增单集",
+            "上传 WEBTOON/ 条图（简体）",
+            "发布"
+          ]
+        },
+        {
+          "id": "u_youtube",
+          "n": "YouTube",
+          "url": "https://studio.youtube.com",
+          "titles": 2,
+          "status": "ready",
+          "video": true,
+          "steps": [
+            "上传 Video/ MP4",
+            "简体标题与说明",
+            "发布"
+          ]
+        },
+        {
+          "id": "u_findaway",
+          "n": "Findaway Voices（普通话）",
+          "url": "https://findawayvoices.com",
+          "titles": 0,
+          "status": "planned",
+          "planned_note": "需先录制普通话旁白 — repo 周包尚无有声档。"
+        }
+      ],
+      "week": [
+        {
+          "day": "MON",
+          "title": "下载周包",
+          "tasks": [
+            {
+              "t": "下载本周国际自出版内容包",
+              "btn": "Download",
+              "url": null
+            }
+          ]
+        },
+        {
+          "day": "TUE",
+          "title": "KDP + Apple（新加坡）",
+          "tasks": [
+            {
+              "t": "Amazon KDP SG 逐本上架（简体）",
+              "btn": "KDP",
+              "url": "https://kdp.amazon.com/bookshelf"
+            },
+            {
+              "t": "Apple Books SG 上架",
+              "btn": "Apple Books",
+              "url": "https://authors.apple.com"
+            }
+          ]
+        },
+        {
+          "day": "WED",
+          "title": "Google Play + Kobo",
+          "tasks": [
+            {
+              "t": "Google Play 图书（新加坡）",
+              "btn": "Google Play",
+              "url": "https://play.google.com/books/publish"
+            },
+            {
+              "t": "Kobo Writing Life 上架",
+              "btn": "Kobo",
+              "url": "https://www.kobo.com/sg/en/p/writinglife"
+            }
+          ]
+        },
+        {
+          "day": "THU",
+          "title": "漫画",
+          "tasks": [
+            {
+              "t": "Webtoon Canvas 发布一话（简体）",
+              "btn": "Webtoon",
+              "url": "https://www.webtoons.com/en/creators"
+            }
+          ]
+        },
+        {
+          "day": "FRI",
+          "title": "社群短视频",
+          "tasks": [
+            {
+              "t": "TikTok / YouTube / Instagram 短视频",
+              "btn": "TikTok",
+              "url": "https://www.tiktok.com/creator"
+            }
+          ]
+        },
+        {
+          "day": "SAT",
+          "title": "检视",
+          "tasks": [
+            {
+              "t": "检查 KDP / Apple / Google Play 报表",
+              "btn": "Reports",
+              "url": "https://kdp.amazon.com/reports"
+            }
+          ]
+        },
+        {
+          "day": "SUN",
+          "title": "休息",
+          "tasks": [
+            {
+              "t": "系统自动刷新下周队列。今天休息。"
+            }
+          ]
+        }
+      ],
+      "quick_links": [
+        {
+          "label": "KDP",
+          "url": "https://kdp.amazon.com/bookshelf"
+        },
+        {
+          "label": "Apple Books",
+          "url": "https://authors.apple.com"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/books/publish"
+        },
+        {
+          "label": "Kobo",
+          "url": "https://www.kobo.com/sg/en/p/writinglife"
+        },
+        {
+          "label": "Webtoon",
+          "url": "https://www.webtoons.com/en/creators"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://studio.youtube.com"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/creator"
+        }
+      ]
+    }
+  }
+}

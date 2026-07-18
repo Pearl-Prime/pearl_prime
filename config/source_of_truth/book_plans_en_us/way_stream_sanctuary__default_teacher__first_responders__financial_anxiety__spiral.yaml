@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__financial_anxiety__spiral
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__money_fears
+  name: Money Without Panic — for First Responders
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Anxiety: Escaping the Mental Loop'
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+  — Financial Anxiety for First Responders (The Overthinking Spiral)
+cover_tagline: It's 3 a.m. and one unpaid bill has become every disaster your career
+  has ever shown you.
+description:
+  short_blurb: For the first responder whose off-duty brain treats a single money
+    worry like an incoming call that never clears. This is a real-talk guide to the
+    late-night money spiral — how one thought becomes a thousand at 3 a.m. — and how
+    to stand down from it without pretending it isn't there.
+  long_description: 'It starts with one thing. A bill you forgot. A number that came
+    in lower than you needed. And then your brain, trained to imagine every worst
+    case so you can survive the real one, takes that single thread and runs the whole
+    catastrophe — late fee to missed payment to repo to losing the house to your family
+    watching you fail. You''re lying in bed after a brutal set of shifts and your
+    mind is running a scenario like it''s prepping for a call. Except there''s no
+    call. There''s just you, the ceiling, and a thousand thoughts spun out of one.
+
+
+    This book is for the first responders who spiral about money in the dark. The
+    cop, the medic, the firefighter, the dispatcher whose hypervigilance is a gift
+    on the job and a punishment off it. The same brain that keeps you alive on scene
+    won''t let you rest at home, because it can''t tell the difference between a real
+    emergency and an imagined one — and money is the perfect fuel. Endless, open-ended,
+    always one bad month from disaster, never the kind of problem you can clear and
+    walk away from.
+
+
+    We name the mechanism plainly: this is a spiral, and a spiral is your threat-detection
+    system stuck in the on position with nothing real to detect. Then we go down into
+    it — we follow the thoughts to see how the trick works, how the first true worry
+    recruits ten invented ones, how 3 a.m. lies with total confidence and the morning
+    quietly takes most of it back. You''ll learn to catch the jump from "this bill
+    is late" to "my life is ending" — that exact seam where one became a thousand
+    — and to stop treating a 2 a.m. forecast as fact. We don''t shut the brain off;
+    you can''t, and the books that promise you can are lying. What we do instead is
+    slower and it actually holds: we teach the brain to recognize the spiral as it
+    starts and to stand down. To clear the call that was never dispatched.
+
+
+    This is not a debt-payoff plan or a sleep-hack listicle. No worksheets. No gratitude
+    journaling at dawn. No pretending the worry is irrational — sometimes the money
+    really is tight. The point isn''t to delete the thought. It''s to stop letting
+    one thought run the whole night.
+
+
+    You stand down from real scenes all the time. You''re allowed to stand down from
+    the ones your own mind invents.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - first responders
+  - money anxiety for first responders
+bisac_codes:
+- SEL036000
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- Don't Believe Everything You Think (Joseph Nguyen) — secular, plain-language work
+  on how a single thought snowballs and how to let it pass
+- Rewire Your Anxious Brain (Catherine Pittman & Elizabeth Karle) — explains the threat-detection
+  brain that fuels 3 a.m. spirals
+- The Worry Trick (David Carbonell) — shows how anxiety recruits one fear into a thousand
+  and how to stop feeding the loop
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

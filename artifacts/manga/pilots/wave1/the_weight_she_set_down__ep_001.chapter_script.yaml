@@ -1,0 +1,114 @@
+# PILOT (wave1) — TEACHER-MODE manga (Tier-1 authored). One mode only: TEACHER. No music.
+# Genre: romance_josei_drama. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# josei teacher-vessel = THE BELOVED WHO RESTS. No one lectures the guarded lead to soften; an
+# older, unhurried partner simply MODELS it — how she sets things down, how she lets a silence be.
+# The doctrine is learned off another body's EASE. ahjan's earn_rest_in_the_body lineage; never
+# spoken as advice. Reader contract: taught. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: stillness_press__en_US__romance_josei_drama__series01
+catalog_title: "The Weight She Set Down"
+chapter_id: ep_001
+title: "The Weight She Set Down — Episode 1: The Woman Who Let the Cup Be Empty"
+mode: teacher                         # XOR — never music
+manga_author: Hana Tidecalm           # teacher-archetype EI author (ahjan lineage)
+teacher_id: ahjan
+teacher_doctrine_anchor: worth_is_not_earned_by_doing
+brand_id: stillness_press
+genre: romance_josei_drama
+topic: self_worth                     # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Teacher-mode 3-beat skeleton (doctrine learned off another body's EASE, not inserted):
+mode_beats:
+  wound: page_1-2     (the doctrine's ABSENCE — the lead earns love by over-doing, never resting)
+  turn:  page_4-5     (the teaching LANDS by watching the beloved REST and stay loved anyway)
+  renewal: page_6     (begin again — she lets herself be loved at rest, not for the labor)
+
+main_characters:
+  - id: aiko
+    name: Aiko
+    role: >-
+      protagonist — runs a small flower shop and earns every relationship by over-giving:
+      first to arrive, last to sit, the cup always for someone else. Believes she is worth
+      keeping only while useful. (Unstated: worth tied to output; never named on the page.)
+    visual_anchor: apron always on, sleeves always rolled, a perpetual to-do list in her breast pocket; warm tired eyes; hands chapped from work she won't put down.
+  - id: rumi
+    name: Rumi                         # josei TEACHER-VESSEL — the beloved who rests
+    role: >-
+      a regular who became something more. The doctrine, as a person at ease. Never tells
+      Aiko to slow down; she simply MODELS rest — sets her bag down, lets a silence sit, leaves
+      a cup empty without apologizing. Worth-without-earning lives in her body, never in advice.
+    visual_anchor: soft unhurried posture; a book she actually finishes; takes off her coat the moment she sits; a way of letting her shoulders drop that Aiko can't stop watching.
+  - id: the_empty_chair
+    name: The Second Chair             # the recurring object — the seat Aiko never takes
+    role: the chair across the little shop table; through the chapter it is the seat Aiko keeps refusing, until she doesn't.
+
+scene_palette:
+  primary: late-afternoon flower-shop gold + green
+  secondary: cool grey of the closing hour (when Aiko works alone, unrested)
+  accent: warm rose-pink (the empty cup poured for HER; the chair finally taken)
+  turn_palette: low honey light on two women, one at rest (pages 4-5)
+
+pages:
+  # ── WOUND: love earned by over-doing, never by resting ─────────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — josei warmth; the small shop as the heart",
+         scene: "A tiny corner flower shop in the gold of late afternoon, buckets of stems, a little table with two chairs by the window. Tender, lived-in, romantic. AIKO moves through it without ever stopping, apron on, doing five things at once."}
+      - {panel_id: ep001_002, beat_type: character, intent: "worth tied to output (doctrine's ABSENCE)",
+         scene: "RUMI arrives for their standing afternoon tea. Aiko lights up — and immediately overdoes: refills Rumi's cup before it's low, fetches a cushion, a snack, fusses with the bouquet, apologizing for the smallest pause. She never once sits down. The second chair stays empty."}
+      - {panel_id: ep001_003, beat_type: spatial, intent: "she pours for everyone, never for herself",
+         scene: "Close: Aiko pours tea into Rumi's cup, into a customer's cup, into a cup for the neighbor — and her own cup sits empty and forgotten at the edge of the table. She is the one who serves. To stop serving, some part of her believes, is to stop being kept."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: action, intent: "she performs usefulness as love",
+         scene: "The afternoon with Rumi becomes a one-woman show of doing: Aiko rearranges the window display mid-conversation, wraps a free bouquet 'just because,' won't let Rumi lift a finger. Every act is sweet and exhausting. She is auditioning, and she doesn't know it."}
+      - {panel_id: ep001_005, beat_type: collapse, intent: "the cost — she can't receive, so she can't rest",
+         scene: "Rumi gently says 'Sit with me a minute?' and pats the empty chair. Aiko's whole body flinches at the idea of just sitting. 'In a sec — let me just—' and she's up again, wiping a clean counter, hands shaking slightly. To be still, with nothing to offer, terrifies her more than any amount of work."}
+      - {panel_id: ep001_006, beat_type: quiet, intent: "the beloved gives no lecture — only her own ease",
+         scene: "Rumi doesn't argue and doesn't chase. She simply settles deeper into her own chair, takes off her coat, lets her shoulders drop all the way, and opens her book — completely at rest, asking for nothing, performing nothing. She lets the silence be. Aiko, mid-fuss, can't stop sneaking glances at how easy it looks."}
+
+  # ── Rumi (teacher-vessel) — rest, modeled ──────────────────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: detail, intent: "the doctrine lives in the beloved's body, not a line",
+         scene: "Close on RUMI: she finishes her tea and — without a flicker of apology — sets the empty cup down and leaves it empty. She doesn't leap up to wash it. She doesn't fill the silence. She just rests in the warm shop, present and unhurried. Aiko watches the empty cup like it's a miracle she's not allowed."}
+      - {panel_id: ep001_008, beat_type: response, intent: "worth-without-earning, SHOWN not told",
+         scene: "Aiko keeps waiting for the moment Rumi needs something, the moment she can be useful again. It doesn't come. And Rumi, resting, looks up at Aiko with plain, unearned warmth — loving her right now, while Aiko is doing absolutely nothing for her. Nothing is explained. Aiko's hands slow, confused by being wanted at rest."}
+      - {panel_id: ep001_009, beat_type: dialogue, intent: "the only near-line — an observation, never advice",
+         scene: "Rumi, eyes still soft, says only, lightly: 'You poured everyone a cup but yourself.' Not a lesson. Just a thing she noticed. Then she goes back to her book, leaving the noticing to land on its own."}
+
+  # ── TURN: the teaching lands — she lets herself rest and stay loved ────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: revelation, intent: "WORTH_IS_NOT_EARNED — she is wanted with empty hands",
+         scene: "Aiko looks at her own forgotten empty cup. Then at Rumi, at ease, who pours — for the first time in the whole chapter — tea into AIKO's empty cup, and slides it toward the second chair. An invitation to be served, not to serve. The honey light. Aiko's eyes well up and she doesn't know why."}
+      - {panel_id: ep001_011, beat_type: choice, intent: "the hardest act — to sit down with nothing to offer",
+         scene: "Aiko's hands hover over the apron strings. Every instinct says find a task. Instead — slowly, terrified, copying the ease she watched — she unties the apron, lets it drop over the counter, and crosses to the empty second chair. She sits. She has nothing in her hands. No one is being served. The shop does not fall apart."}
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: turn, intent: "she receives — the body learns rest off another's ease",
+         scene: "Aiko, in the chair at last, wraps both chapped hands around the warm cup Rumi poured her. She drinks her own tea. Her shoulders, copying Rumi's, drop — all the way down, for the first time. She is being loved while doing nothing, and the floor holds."}
+      - {panel_id: ep001_013, beat_type: release, intent: "self-worth, unhooked from output",
+         scene: "A long quiet between the two women in the gold light, two empty cups now, two resting bodies. Aiko exhales the breath she's held for years. Rumi reaches over and simply holds her hand — not as a reward for anything. Just because she's there. Aiko lets her hand be held instead of using it."}
+      - {panel_id: ep001_014, beat_type: transformation, intent: "she was never loved for the labor — that was the lie",
+         scene: "Wide, tender: the little shop, the window full of flowers, two women at the small table, both chairs full at last, both cups empty, neither apologizing. The thing Aiko thought she had to earn was here the whole time, waiting for her to stop running long enough to take it."}
+
+  # ── RENEWAL: begin again ───────────────────────────────────────────────────
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_015, beat_type: resolution, intent: "not fixed — finally at rest, still loved",
+         scene: "Closing hour, soft rose dusk. Aiko, apron off, sits in the second chair with Rumi as the shop quietly empties of light. The to-do list is still in the apron on the counter, untouched, and the world has not ended. She is keepable while still."}
+      - {panel_id: ep001_016, beat_type: close, intent: "TEACHER close — worth-without-earning, learned off a body, never a moral",
+         scene: "Final panel. A new afternoon. Rumi arrives, and this time Aiko — before fetching anything — pours two cups, sets them both down, and sits, leaving her own cup full for herself. She learned it by watching, not by being told. Small caption, in Rumi's unhurried voice, like a closing breath: 'You were always allowed to sit down. Pour your own cup too.'"}
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine (you are loved at rest; worth is not earned by doing) is never a
+  self-help line — it is dramatized through the josei vessel: a beloved who MODELS ease (sets the cup
+  down, lets the silence be, pours for Aiko), and Aiko EARNS the lesson by watching another body be
+  at rest and stay loved. No musician, no song, no sound-motif. If this were music-mode it would have
+  NO Rumi-as-teacher and NO doctrine — a shared tune passing between the two women would carry the
+  same arc wordlessly. Interior topic (self-worth / love conditioned on output) never named on the page.

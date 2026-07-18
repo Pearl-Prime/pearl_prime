@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__courage__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__courage.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__brave_world
+  name: Brave in the World — for Founders
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Thing You Won''t Say: Carrying What You Can''t Say'
+subtitle: How Entrepreneurs Are Rewriting the Rules of Courage
+cover_tagline: You think you built a company. Shame thinks you got away with something.
+description:
+  short_blurb: Somewhere underneath the metrics and the momentum is a quiet conviction
+    that there's something wrong with you, and that one day the room will find out.
+    This is the real-talk guide for founders who confuse that buried belief with humility,
+    and let it run the company in the dark.
+  long_description: 'You close the round, hit the milestone, get the press — and within
+    a day the floor is back: the low, familiar sense that you''re not actually the
+    person they think they invested in. That if anyone saw how you really operate,
+    how much you don''t know, how scared you are, the whole thing would collapse.
+    So you overwork to stay ahead of being found out. You don''t ask the question
+    that would expose the gap. You build a brave-looking company on top of a private
+    belief that you''re fundamentally not enough.
+
+
+    This book is for the founder carrying that belief into every room. The one who
+    reads impostor syndrome think-pieces and nods and still feels it at 2 a.m. The
+    one who can''t take a compliment, can''t delegate the thing that would reveal
+    a weakness, can''t say the sentence that starts with "I don''t know." Shame isn''t
+    loud like fear. It''s the water you''ve been swimming in so long you stopped noticing
+    it was there.
+
+
+    You''ll start by naming it — separating the actual feeling of shame from the thousand
+    strategies you''ve built to outrun it. Then you go down into it, which is the
+    part everyone skips. Not to fix it, not to affirm it away, but to feel the specific
+    shape of "something is wrong with me" without immediately doing something about
+    it. You''ll see where it came from, how old it actually is, and how little it
+    has to do with your company. And you come back able to act without first auditing
+    whether you''re worthy of acting — because that audit was never going to come
+    back clean, and it was never the point.
+
+
+    This will not give you self-worth as a finished product, and it won''t replace
+    the belief with a better affirmation. You can''t think your way out of shame;
+    you''ve been trying for years. There are no gratitude lists here, no "you are
+    enough" mantras to repeat at the mirror, no morning ritual to install. Just an
+    honest descent into the thing you''ve spent your whole career managing around
+    — and what becomes possible when you stop letting it pick which sentences you''re
+    allowed to say.
+
+
+    The belief that something''s wrong with you is going to keep showing up. You can
+    keep building around it in the dark, or you can let it be there and say the thing
+    anyway. You were never going to earn your way out of this. You can just stop hiding.'
+keywords:
+  primary:
+  - building courage
+  - facing fear
+  - overcoming fear
+  - do it scared
+  - fear of failure
+  - brave
+  secondary:
+  - founders
+  - courage for founders
+bisac_codes:
+- SEL031000
+- SEL024000
+- SEL027000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: devon_hale
+comp_titles:
+- Daring Greatly (Brené Brown) — the foundational secular text on shame and the courage
+  to be seen.
+- The Gifts of Imperfection (Brené Brown) — names the worthiness belief underneath
+  impostor feelings without affirmation-speak.
+- Self-Compassion (Kristin Neff) — a non-woo path to acting without first auditing
+  whether you deserve to.
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

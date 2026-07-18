@@ -1,0 +1,73 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: digital_ground__miki__gen_alpha_students__social_anxiety
+brand: digital_ground
+teacher: miki
+persona: gen_alpha_students
+topic: social_anxiety
+byline_author: adam_kim
+arc:
+  installment_1:
+    book_id: digital_ground__miki__gen_alpha_students__social_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__social_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: digital_ground__miki__gen_alpha_students__social_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__social_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: digital_ground__miki__gen_alpha_students__social_anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__social_anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: We will not tell you to log off, touch grass, or just put yourself
+  out there. We sit with you in the exact moment social anxiety hits — the group chat
+  left on read, the seat you don't take, the party you're already rehearsing in the
+  bathroom — and name what your body is doing in language you can actually use, without
+  ever treating you like a problem to optimize or a brand to grow.
+bestseller_hook_family: ''
+emotional_engine: social_anxiety_recognition
+comp_series:
+- Insecure (TV adaptation companions) / What I Wish I Knew at 18 (Dennis Trittin)
+  — peer-voiced guidance for the just-out-of-childhood reader who hates being lectured
+- The Anxiety Survival Guide for Teens (Jennifer Shannon) — names the anxious-brain
+  mechanism for high schoolers without clinical distance
+- How to Be Yourself (Ellen Hendriksen) — social anxiety treated as a misfiring system,
+  not a character flaw, in warm second person
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 14 to 18, high school, the first fully screen-native generation
+  where_they_are: Standing at the edge of the cafeteria with a tray that's getting
+    heavy, scanning for a table where you won't have to ask, while your phone buzzes
+    with a group chat you can see everyone else is in.
+  what_they_need: To understand that the dread before they say anything out loud isn't
+    proof they're broken — it's an old alarm misfiring — and to have words for it
+    that don't come from a 50-year-old guidance counselor or a TikTok telling them
+    to fake confidence.
+  what_they_avoid: Boomer self-help, 'just be yourself' platitudes, grindset confidence
+    hacks, toxic positivity, and anyone who acts like being anxious online is a personal
+    failure instead of a Tuesday.
+series_voice_markers:
+  register: Gen-z native, screen-literate, plainspoken and warm; the voice of a slightly-older
+    friend who actually gets the internet — ironic without being cynical, never clinical,
+    never a coach, never hustle
+  sentence_rhythm: Short declaratives that land like texts, then one longer breath
+    that opens up; second person throughout; fragments only when a teenager would
+    actually pause there; no jargon, no worksheet voice
+  metaphor_family: The present moment, the body in the room, the phone face-down,
+    ground under your feet, the breath between notifications, signal cutting through
+    noise — never productivity, machinery, military, or self-optimization
+_needs_authoring: false

@@ -1,0 +1,783 @@
+schema_version: 1
+teacher_id: master_wu
+topic: education
+active: true
+identity:
+  display_name: Master Wu
+  attribution_name: Master Wu
+  tradition: Taoist geomancy; Dragon Veins (Long Mai); earth meridian activation; geomantic strategy
+  tradition_short: Taoist geomancy
+  teacher_setting_options:
+  - Dragon Vein activation site
+  - cross-regional geomantic field
+  teacher_years: decades
+  affiliation_safe_line: operates as geomantic tactician across China, Taiwan, and Japan
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: meridian_attention_thinning
+    label: attention thinning when the meridian beneath the schooling field cannot ground a body
+    loop: opens the textbook -> meridian beneath the desk thins -> switches away
+      -> comes back because the work remains but the qi grounding does not
+    body_markers:
+    - eyes
+    - solar plexus
+    - feet
+    digital_markers:
+    - switch
+    - refresh
+    - scroll
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: Schooling is not only a curriculum question in Master Wu's framework
+    — it is a Dragon Vein condition. When the earth meridians beneath classrooms,
+    libraries, and the wider schooling field cannot ground a young body, the cohort
+    feels the qi thinning before the test scores reflect it. Long Mai cultivation
+    and pearl placement operate in a layer the institutional reform layer cannot
+    reach.
+  forbidden_angles:
+  - do not reduce to generic learning-and-growth language
+  - do not frame as Wu Wei or classical Taoist effortless action
+  - do not position Master Wu as public preacher or retreat teacher
+  - do not collapse Dragon Vein geomancy into pedagogical individualism
+hook_personal:
+  options:
+  - id: master_wu_edu_hook_personal_01
+    line: You know the focus thins before anyone names it. You still carry the day
+      forward while the qi in your chest keeps pulling out of register with the work
+      — and part of you knows the disturbance is not in you alone but in the meridian
+      beneath the room you are trying to study in.
+    metadata:
+      semantic_family: focus-meridian-thinning
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_personal_02
+    line: You keep opening the tab because closing it feels worse. You also know
+      that productivity systems, study apps, and tutoring stacks have talked at you
+      without grounding — and that the attention you are being asked to hold was
+      never meant to be carried by a body cut off from the earth meridian.
+    metadata:
+      semantic_family: ungrounded-attention-personal
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_personal_03
+    line: You feel the disturbance in your solar plexus before you have words for
+      it — the place where the body's qi grounding tries to meet a schooling field
+      that keeps the meridian beneath the desk thin. The body holds what the syllabus
+      is still arguing with.
+    metadata:
+      semantic_family: solar-plexus-syllabus-mismatch
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_personal_04
+    line: At 1 a.m. you reopen the document and close it again. Neither move helps,
+      because the focus is running thin in the Dragon Vein beneath the room — and
+      the part of you trying to push through is the part that has been overasked
+      while the ground itself has gone quiet.
+    metadata:
+      semantic_family: midnight-meridian-study
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_personal_05
+    line: You have read the study guides, taken the practice tests, used the apps.
+      The mind has done all it can — and the quieter signal in you is asking for
+      contact with the earth qi beneath the schooling field, not another instruction
+      set the surface mind can perform.
+    metadata:
+      semantic_family: earth-qi-school-call
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: master_wu_edu_hook_big_01
+    line: Youth education distress is not only a curriculum trend. It is the way
+      a generation of nervous systems registers a Long Mai disturbance — the earth
+      meridians beneath schooling life are carrying loads the institutional reform
+      layer keeps deferring, and the bodies on the surface feel it first.
+    metadata:
+      semantic_family: long-mai-school-pressure
+      angle: geomantic-systemic
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_big_02
+    line: Heightened sensitivity to schooling pressure is not pathology; in Master
+      Wu's geomantic framework it is the cohort tuned closest to the earth meridian
+      register feeling the Dragon Vein disturbance the curriculum layer cannot read.
+      The bodies feel the meridian gap before the test scores do.
+    metadata:
+      semantic_family: cohort-meridian-school-sensor
+      angle: meridian-as-sensor
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_big_03
+    line: A generation is being asked to hold daily attention while the civilizational
+      Dragon Veins beneath schooling are running thin. The fragmentation is not a
+      private learning disability — it is the felt edge of an earth-meridian gap
+      no individual nervous system was built to absorb alone.
+    metadata:
+      semantic_family: meridian-gap-attention
+      angle: civilizational-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_big_04
+    line: The collective schooling field has accelerated faster than the earth qi
+      pathways designed to ground attention. What gets read as a youth focus crisis
+      is, in part, the visible edge of a Long Mai mismatch — the pace of the surface
+      schooling field exceeding the pace at which the Dragon Veins beneath can stabilize
+      a body in learning.
+    metadata:
+      semantic_family: schooling-pace-meridian-mismatch
+      angle: pace-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_hook_big_05
+    line: Across China, Taiwan, and Japan, Master Wu's surveys read the same Dragon
+      Vein register under different surface schooling systems. The youth focus distress
+      is not a single-country pedagogy problem — it is a cross-regional meridian
+      condition the institutions of any single nation cannot resolve alone.
+    metadata:
+      semantic_family: cross-regional-schooling-pattern
+      angle: cross-regional-meridian
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: master_wu_edu_intro_01
+    line: Master Wu, a Taoist geomancer working with Long Mai — the living earth
+      qi pathways the tradition calls Dragon Veins — has watched the cohort closest
+      to the meridian carry schooling overload not as a private learning failing
+      but as the felt edge of a Dragon Vein disturbance the curriculum layer cannot
+      read. In his framework, the body that drifts under the next assignment is not
+      malfunctioning; it is registering the qi gap in the ground beneath the desk.
+    metadata:
+      semantic_family: long-mai-school-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_intro_02
+    line: Master Wu does not position himself as an education reformer or public
+      teacher. He operates as geomantic tactician — mapping Dragon Veins across China,
+      Taiwan, and Japan and placing pearls at activation sites that stabilize the
+      earth meridian for the populations whose schooling lives on top of it. What
+      his tradition offers a generation overloaded by schooling demands is contact
+      with the Long Mai layer beneath the schedule.
+    metadata:
+      semantic_family: tactician-not-reformer
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_intro_03
+    line: Master Wu works with pearl placement — strategic energetic anchoring at
+      Dragon Vein activation sites that, in his tradition, stabilize the earth meridian
+      for the populations living above it. He has watched the surface focus thinning
+      in students living near unstable meridian stretches track the disturbance he
+      has been mapping in the qi pathways themselves.
+    metadata:
+      semantic_family: pearl-placement-school-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_intro_04
+    line: Master Wu's work spans Tainan, Taiwan, and the Japanese archipelago — cross-regional
+      activation sites where the Dragon Veins of the East Asian continental and island
+      systems converge. He has seen how meridian disturbances in one region produce
+      different schooling symptoms under different national curricula, and how the
+      geomantic response can move across borders the curricular response cannot.
+    metadata:
+      semantic_family: cross-regional-school-propagation
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_intro_05
+    line: Master Wu teaches inside a tradition that reads the present period as a
+      civilizational Long Mai recalibration — a time when the inherited cultural
+      geography's Dragon Veins are being asked to carry loads they were not tuned
+      to absorb. The youth schooling overload is, in this frame, the cohort closest
+      to the meridian feeling the recalibration first inside the daily learning field.
+    metadata:
+      semantic_family: civilizational-school-recalibration
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: master_wu_edu_somatic_01
+    line: You opened the document after midnight. Your eyes drifted. You switched
+      tabs. Then you switched back because the work was still there and the disturbance
+      was in the meridian, not the tab.
+    metadata:
+      semantic_family: midnight-meridian-document
+      loop_type: meridian-attention-thinning
+      body_register: eyes
+      digital_behavior: switch-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_somatic_02
+    line: You woke before the alarm. Your solar plexus was already taut. You reached
+      for the phone before the textbook, because the meridian beneath the room was
+      already thin and you needed to check whether the surface field matched it.
+    metadata:
+      semantic_family: morning-qi-school-thinning
+      loop_type: meridian-attention-thinning
+      body_register: solar plexus
+      digital_behavior: reach-for-phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_somatic_03
+    line: Your feet lost contact with the floor when the assignment loaded. You replayed
+      the deadline in your head three times. Your breath shortened. The body lost
+      ground before the mind decided anything.
+    metadata:
+      semantic_family: feet-deadline-ungrounded
+      loop_type: meridian-attention-thinning
+      body_register: feet
+      digital_behavior: assignment-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_somatic_04
+    line: You held your breath while the page loaded. Your chest locked. You exhaled
+      only halfway when you saw the prompt, because the qi had already pulled thin
+      and the next assignment was already coming.
+    metadata:
+      semantic_family: breath-prompt-lock
+      loop_type: meridian-attention-thinning
+      body_register: breath
+      digital_behavior: page-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_somatic_05
+    line: You lay down and your eyes pinned open. The week's deadlines replayed.
+      Your solar plexus would not soften. You knew sleep was the door and you could
+      not find the earth qi to step through it.
+    metadata:
+      semantic_family: sleep-deadlines-replay
+      loop_type: meridian-attention-thinning
+      body_register: solar plexus
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: master_wu_edu_witness_01
+    line: Master Wu has seen this exact loop in the cohort whose bodies sit closest
+      to the meridian register — the opening, the qi thinning, the switching away,
+      the return. In his geomantic framework that loop is not character; it is the
+      Dragon Vein expressing itself through the body least insulated from a thinning
+      stretch of meridian beneath the schooling field.
+    metadata:
+      semantic_family: loop-mirror-school
+      loop_type: meridian-attention-thinning
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_witness_02
+    line: Master Wu has watched young people arrive in survey conversations already
+      mid-loop, already certain the discipline should have settled this by now. In
+      his tradition that certainty is the signal — the place where the surface mind
+      stops and the meridian register can be read.
+    metadata:
+      semantic_family: discipline-stop-meridian-open
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_witness_03
+    line: He has seen the body carry what the productivity systems could not. In
+      his framework the somatic loop is not a malfunction — it is the Dragon Vein
+      speaking through the only channel left open when the schooling stack has been
+      overused.
+    metadata:
+      semantic_family: dragon-vein-school-channel
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_witness_04
+    line: Master Wu has watched young people from Tainan to Tokyo carry the same
+      qi disturbance no national curriculum names. In his tradition that disturbance
+      is information, not pathology — a signal that the institutional schooling layer
+      reading the cohort was never tuned to the meridian range the bodies actually
+      live on.
+    metadata:
+      semantic_family: cross-regional-curriculum-disturbance
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_witness_05
+    line: Master Wu has watched the moment when a young person stops trying to push
+      through and lets the meridian under the room come back into contact instead.
+      In his tradition that moment is not laziness — it is the readiness conventional
+      schooling has no language for.
+    metadata:
+      semantic_family: meridian-readiness-school
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: master_wu_edu_turnaround_01
+    stat_line_1: 244 million. UNESCO.
+    stat_line_2: UNESCO estimates that two hundred forty-four million children are
+      currently out of school worldwide — a measured access gap that names the load
+      the cohort is being asked to hold while the institutional layer keeps deferring
+      structural response.
+    metadata:
+      semantic_family: unesco-access-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_turnaround_02
+    stat_line_1: 100+ countries. Global Campaign for Education.
+    stat_line_2: The Global Campaign for Education now spans more than one hundred
+      member countries — a coordinated coalition pushing the right-to-education framework
+      into national policy at a scale no single ministry can match alone.
+    metadata:
+      semantic_family: gce-coalition
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_turnaround_03
+    stat_line_1: SDG 4. 2030 deadline.
+    stat_line_2: Sustainable Development Goal 4 binds UN member states to inclusive
+      and equitable quality education for all by 2030 — a multilateral instrument
+      that names the cohort's access as governance, not commentary.
+    metadata:
+      semantic_family: sdg4-instrument
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_turnaround_04
+    stat_line_1: 76 million reached. Education Cannot Wait.
+    stat_line_2: Education Cannot Wait — the UN's global fund for education in emergencies
+      — has now reached more than seventy-six million children in crisis-affected
+      contexts, a financing infrastructure that did not exist a decade ago and now
+      carries weight where national systems cannot.
+    metadata:
+      semantic_family: ecw-reach
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_turnaround_05
+    stat_line_1: 22 million participants. 160 countries.
+    stat_line_2: The World's Largest Lesson has now reached twenty-two million participants
+      across one hundred sixty countries — a youth-facing educational infrastructure
+      built around the Sustainable Development Goals that connects classrooms across
+      borders that institutional curricula cannot cross.
+    metadata:
+      semantic_family: worlds-largest-lesson
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: master_wu_edu_bridge_01
+    line: 244 million. UNESCO. The tracker measures the access gap institutions left.
+      It has no column for what made the next honest attempt at the page possible
+      after the last drift — the capacity to stay in contact with the work without
+      converting the focus failure into identity. Master Wu's tradition has language
+      for that capacity — Long Mai cultivation works in the meridian beneath the
+      schooling response.
+    hidden_capacity: stay in contact with the work without converting the drift to
+      identity
+    metadata:
+      semantic_family: tracker-capacity-school
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_bridge_02
+    line: The numbers show the frameworks the institutional layer built. They do
+      not show the Dragon Vein context that institutional layer is being built on
+      top of — a civilizational period where the earth meridians beneath schooling
+      life are running thinner than the inherited culture's pace can stabilize. Master
+      Wu's tradition holds that context as native.
+    hidden_capacity: hold the meridian context the schooling data cannot show
+    metadata:
+      semantic_family: dragon-vein-school-context
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_bridge_03
+    line: The data captures enrollments, lessons, and policy adoptions. It cannot
+      capture the shift that happens when a young body comes back into contact with
+      the earth qi beneath the desk and the focus finds its own register again. In
+      Master Wu's framework that shift is the actual return — the part no tracker
+      reports.
+    hidden_capacity: register the focus return trackers miss
+    metadata:
+      semantic_family: focus-return-gap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_bridge_04
+    line: The schooling infrastructure is measurable. The earth meridian, where attention
+      is actually grounded or thinned, is not. Master Wu's tradition does not argue
+      with the measurement — it works in the layer beneath, where Dragon Vein cultivation
+      and pearl placement operate on a register the institutional layer cannot reach.
+    hidden_capacity: work in the meridian layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-meridian-school
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_bridge_05
+    line: Curricula, policies, and platforms can be counted. The civilizational Long
+      Mai held beneath the schooling field cannot. Master Wu's tradition does not
+      replace the curricular work — it names the meridian layer institutional response
+      is not designed to reach and offers Dragon Vein contact as the door in.
+    hidden_capacity: name the meridian layer curriculum response cannot reach
+    metadata:
+      semantic_family: curricular-vs-meridian
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: master_wu_edu_perspective_01
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's framework, the land itself contains living energy currents called
+      Dragon Veins — Long Mai — and attention is not only a cognitive function; it
+      is held in the body by the earth meridian beneath the schooling field. What
+      feels like a youth focus crisis is, on the geomantic register, the cohort whose
+      bodies sit closest to the earth qi feeling the disturbance before the curriculum
+      layer reads it.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the meridian's accurate signal that the system and institutional
+      structure have placed the schooling load on the cohort least insulated from
+      the qi disturbance. Healing the surface symptom does not address the meridian
+      condition.
+    - Long Mai cultivation does not bypass schooling. It works in a layer schooling
+      is not designed to reach — the layer beneath the body, where the earth meridian
+      carries the actual register and where pearl placement at activation sites can
+      stabilize what the surface response cannot.
+    metadata:
+      semantic_family: dragon-vein-school-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_perspective_02
+    header: What Master Wu Sees
+    paragraphs:
+    - Pearl placement is not metaphor in Master Wu's tradition. It is the literal
+      practice — strategic energetic anchoring at Dragon Vein activation sites — that
+      stabilizes the earth meridian for the populations whose schooling lives above
+      it. The youth focus distress that conventional response treats as private inattention
+      is, in his framework, the surface expression of an unanchored stretch of meridian
+      that has not yet been geomantically tended.
+    - The practice matters because it explains the relief described by populations
+      near activation sites that have been tended — not that the schooling load has
+      been argued away, but that the meridian beneath has been stabilized on a layer
+      surface argument never reaches. The mind did not have to win for the body to
+      come back into ground.
+    - This is the part conventional schooling reform is not designed to deliver.
+      It does not invalidate the curricular response — but it names a missing layer,
+      and offers a tradition that has worked at the meridian layer for civilizational
+      time.
+    metadata:
+      semantic_family: pearl-placement-school-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_perspective_03
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's tradition the Dragon Veins of China, Taiwan, and Japan converge
+      across the East Asian continental-and-island geography into a single integrated
+      meridian system. The youth schooling load expressed differently under Beijing's,
+      Taipei's, and Tokyo's institutional curricula is, on the meridian register,
+      the same cross-regional condition — and the geomantic response can move across
+      borders the political response cannot.
+    - For a young person carrying the load, the experience of being witnessed by
+      something larger than the national curriculum is, in itself, structurally different
+      from being processed by it. The message that lands is not "here is the test
+      score"; it is "the meridian beneath your schooling has been mapped, and the
+      disturbance you feel is registered at civilizational scale, not in you alone."
+    - That distinction — witnessed at the meridian layer rather than processed at
+      the institutional layer — is what conventional schooling infrastructure cannot
+      reproduce, and what Master Wu's tradition has carried as native across the
+      three regions for generations.
+    metadata:
+      semantic_family: cross-regional-witness-school
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_perspective_04
+    header: What Master Wu Sees
+    paragraphs:
+    - Civilizational Long Mai recalibration, in Master Wu's framework, is the literal
+      description of the present period — a time when the inherited cultural geography's
+      Dragon Veins are being asked to carry schooling loads they were not tuned to
+      absorb, and the cohort whose bodies sit closest to the meridian feels the recalibration
+      first. The schooling overload young people carry is, in part, the cost of being
+      tuned to the earth meridian during a period of structural meridian shift.
+    - This is not a flattering reframe. It does not promise the schooling system
+      will become humane quickly, and it does not blame the cohort for feeling unstable
+      inside an unstable meridian. It simply names the structural fact at the geomantic
+      layer and removes the additional weight of believing the instability is a personal
+      failure.
+    - That weight removal is, in survey practice, often the first part to land —
+      before the deeper Long Mai cultivation work can begin on the activation sites
+      themselves.
+    metadata:
+      semantic_family: civilizational-recalibration-school
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_perspective_05
+    header: What Master Wu Sees
+    paragraphs:
+    - Master Wu's tradition reads Long Mai as civilizational memory lines — the Dragon
+      Veins carry not only present qi flow but the accumulated record of every load
+      the cultural geography has held, including the inherited schooling demands.
+      The youth focus distress expresses, on this register, not only the present
+      pressure but the deferred load earlier institutional generations did not metabolize.
+    - The framework does not ask the cohort to absorb that bill alone. It names the
+      bill at civilizational scale, identifies the activation sites where the meridian
+      can be re-stabilized, and offers pearl placement and Long Mai cultivation as
+      the tradition's response — operating in a layer the institutional response
+      is not designed to access.
+    - The practice is not to fix the cohort. The practice is to read the meridian
+      accurately, place the pearls at the activation sites, and let the Dragon Veins
+      do the structural work the curricular layer cannot.
+    metadata:
+      semantic_family: civilizational-memory-school
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: master_wu_edu_practice_01
+  options:
+  - id: master_wu_edu_practice_01
+    display_name: Long Mai Listening
+    duration: 5 minutes
+    announcement_line: Master Wu teaches a 5-minute Long Mai Listening practice for
+      moments when schooling pressure has converted the body's qi grounding into
+      surface helplessness. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body stops treating the surface workload as the whole register and finds
+      contact with the earth meridian beneath the room.
+    - Enough qi grounding returns for the next honest attempt at the page without
+      converting the focus failure into identity.
+    relief_register:
+    - listen
+    - ground
+    - meridian
+    derived_from_frame: long_mai_listening
+    metadata:
+      semantic_family: long_mai_listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_practice_02
+    display_name: Dragon Vein Mapping Pause
+    duration: 4 minutes
+    announcement_line: Master Wu offers a 4-minute Dragon Vein Mapping Pause for
+      moments between assignments, when the body has been carrying the schooling
+      load without permission to set it down. It is in the sidebar, timed and step
+      by step.
+    relief_lines:
+    - The schooling load becomes legible at the meridian layer instead of being read
+      as a personal learning defect.
+    - The cohort's focus disturbance stops being framed as the individual's private
+      balance sheet.
+    relief_register:
+    - pause
+    - map
+    - dragon vein
+    derived_from_frame: dragon_vein_mapping
+    metadata:
+      semantic_family: dragon_vein_mapping_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_practice_03
+    display_name: Earth Meridian Tap
+    duration: 3 minutes
+    announcement_line: Master Wu teaches a 3-minute Earth Meridian Tap for moments
+      when the feet have lost contact with the ground and the schooling field has
+      pulled the qi out of register. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The feet remember the meridian beneath the floor and the qi finds a stabilizing
+      anchor even while the assignment continues.
+    - The breath settles back into the pace the earth meridian holds, not the pace
+      the deadline demands.
+    relief_register:
+    - tap
+    - ground
+    - earth qi
+    derived_from_frame: earth_meridian_tap
+    metadata:
+      semantic_family: earth_meridian_tap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_practice_04
+    display_name: Pearl Placement Visualization
+    duration: 6 minutes
+    announcement_line: Master Wu teaches a 6-minute Pearl Placement Visualization
+      for moments when the schooling load is being processed as personal pathology
+      rather than as a meridian condition. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The activation site beneath the school comes into view and the load stops being
+      held in the body alone.
+    - The disturbance is recognized as a stretch of unanchored meridian, not a private
+      defect, and the pearl placement begins to stabilize the field.
+    relief_register:
+    - place
+    - anchor
+    - pearl
+    derived_from_frame: pearl_placement
+    metadata:
+      semantic_family: pearl_placement_visualization
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_edu_practice_05
+    display_name: Geomantic Stabilization Breath
+    duration: 3 minutes
+    announcement_line: Master Wu offers a 3-minute Geomantic Stabilization Breath
+      for acute meridian disturbance, when the schooling field has knocked the qi
+      out of alignment with the earth pathways. It is in the sidebar, timed and step
+      by step.
+    relief_lines:
+    - The breath becomes a marker for the meridian's actual pace rather than the
+      schedule's demanded pace.
+    - The body returns to a register the Dragon Vein beneath the room recognizes.
+    relief_register:
+    - breath
+    - stabilize
+    - geomantic
+    derived_from_frame: geomantic_stabilization_breath
+    metadata:
+      semantic_family: geomantic_stabilization_breath
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 4
+    title: Quality Education
+    line: The United Nations framework includes inclusive and equitable quality education
+      under SDG 4.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
+cta:
+  options:
+  - id: master_wu_edu_cta_01
+    org: UNESCO
+    line: 'UNESCO coordinates global education frameworks and reports on out-of-school
+      children worldwide. Door in: their education programs and youth engagement
+      pipelines.'
+    metadata:
+      semantic_family: door-in-unesco
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_cta_02
+    org: Global Campaign for Education
+    line: 'The Global Campaign for Education coordinates a coalition across more
+      than one hundred member countries pushing the right-to-education framework
+      into national policy. Door in: their member network.'
+    metadata:
+      semantic_family: door-in-gce
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_cta_03
+    org: Education Cannot Wait
+    line: 'Education Cannot Wait — the UN global fund for education in emergencies
+      — has reached more than seventy-six million children in crisis-affected contexts.
+      Door in: support their financing of education in crisis.'
+    metadata:
+      semantic_family: door-in-ecw
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_cta_04
+    org: Malala Fund
+    line: 'The Malala Fund invests in education advocates and activists building
+      the right-to-education infrastructure for girls in the regions where the gap
+      is widest. Door in: support their education advocacy network.'
+    metadata:
+      semantic_family: door-in-malala-fund
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_edu_cta_05
+    org: Teach For All
+    line: 'Teach For All is the global network of independent education organizations
+      working to expand access and equity in schooling. Door in: their member-country
+      teacher and leadership pipelines.'
+    metadata:
+      semantic_family: door-in-teach-for-all
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_wu_edu_headline_01
+      line: A Taoist geomancer names youth focus distress as a Long Mai disturbance
+        — and the meridian practice that returns attention to ground.
+      metadata:
+        semantic_family: long-mai-school-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_edu_headline_02
+      line: A Dragon Vein tactician, not an education reformer, on the meridian layer
+        of schooling distress conventional response is not built to reach.
+      metadata:
+        semantic_family: tactician-not-reformer-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_edu_headline_03
+      line: Pearl placement, not another study app — Master Wu's tradition meets
+        the cohort closest to the schooling meridian.
+      metadata:
+        semantic_family: pearl-placement-school-call
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_edu_headline_04
+      line: Meridian recalibration, not pathology — a geomantic tradition reframes
+        the youth schooling load.
+      metadata:
+        semantic_family: meridian-recalibration-school
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_edu_headline_05
+      line: Cross-regional Dragon Vein response — what Master Wu's tradition brings
+        to a schooling load no single nation's curriculum can resolve.
+      metadata:
+        semantic_family: cross-regional-school-call
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__burnout__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__steady_ground__1hr
+  name: Steady Ground — for the Sandwich Generation (One-Hour)
+installment_number: 3
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Burnout Recovery: The Observer''s Mind (1)'
+subtitle: Watching Your Thoughts Without Drowning — Burnout for Gen X Sandwich (The
+  Observer's Mind)
+cover_tagline: The part of you that's always scanning for the next emergency — and
+  never, ever stands down.
+description:
+  short_blurb: After enough 2 a.m. phone calls, your mind learns to stay on watch
+    all the time, bracing for the next crisis with your parents or your kids. This
+    one-hour reset is for the hypervigilant part of you that can't power down — not
+    to silence it, but to stop being pulled under by it.
+  long_description: 'Some part of you never fully relaxes anymore. Even on a good
+    day, even when everyone''s fine, there''s a watcher in your head scanning the
+    horizon — was that cough something, is the school going to call, did Dad take
+    his pills, what am I forgetting. You''ve had enough real emergencies that your
+    mind decided the only safe setting is on. And now it won''t switch off, even when
+    you''re lying in bed exhausted, replaying every worst case.
+
+
+    This is for you — the one in the middle of the sandwich generation, the designated
+    person who has to stay ready because when something goes wrong with your parents
+    or your kids, you''re the one who handles it. That hypervigilance made sense.
+    It''s kept people safe. But it''s also draining you dry, because a mind that never
+    stands down never rests, and a body on permanent alert eventually burns out.
+
+
+    This is a one-hour reset, and it moves in three stages. Recognition: you learn
+    to see the watcher as a part of you, not the whole of you — to notice when you''re
+    observing your own anxious thoughts spin without being swept into the current.
+    Descent: instead of obeying every alarm or trying to argue the watcher quiet,
+    you go down underneath it, into the fear it''s been guarding, and let yourself
+    feel what it''s so busy protecting you from. Integration: you come back up able
+    to stay aware without drowning in it — present enough to actually rest, even while
+    the watcher keeps its post.
+
+
+    This book will not tell you to stop worrying, or that positive thinking will quiet
+    your mind, or that if you just meditated more the vigilance would vanish. The
+    watcher isn''t a flaw to delete. The dangers it tracks are partly real. What changes
+    is your relationship to it: you stop being yanked under by every thought it throws
+    up, and learn to let the mental noise pass overhead while you stay on the ground.
+
+
+    In plain language you can use the next time your mind won''t stop scanning, you''ll
+    get a way to name it — "that''s the watcher, not the truth" — and a way to be
+    with the hum of hypervigilance without going under. You don''t have to win the
+    argument with your own anxiety. You don''t have to stay braced every waking minute
+    to be a good son, daughter, or parent. For one hour, let the watcher keep watch
+    while the rest of you finally sets the weight down. Start here.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - the sandwich generation
+  - burnout for the sandwich generation
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sam_meridian
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — what chronic stress-activation does to
+  a body that never gets the all-clear
+- Unwinding Anxiety (Judson Brewer) — working with the worry-loop instead of fighting
+  it head-on
+- The Body Keeps the Score (Bessel van der Kolk) — why a mind stuck on high alert
+  can't simply be told to relax
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

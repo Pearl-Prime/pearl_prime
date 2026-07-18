@@ -1,0 +1,51 @@
+# Render defaults — FFmpeg encode presets, CRF tuning, and codec selection.
+# Authority: specs/VIDEO_CONTENT_ENGINE_DEV_SPEC.md §7
+#
+# Used by scripts/video/vce_ffmpeg_builders.py quality_tuning() and
+# scripts/video/run_render.py for per-quality CRF offsets and x264 presets.
+# Per-platform CRF overrides live in config/video/platform_compliance.yaml.
+
+# Quality tiers (CLI --quality flag maps to one of these)
+quality_tiers:
+  draft:
+    crf_offset: 4          # +4 from base CRF (faster, lower quality)
+    x264_preset: veryfast
+    description: "Fast preview renders for editorial review"
+  standard:
+    crf_offset: 0          # No offset from base CRF
+    x264_preset: medium
+    description: "Production quality — default for daily publishing"
+  high:
+    crf_offset: -2         # -2 from base CRF (slower, higher quality)
+    x264_preset: slow
+    description: "Maximum quality — hero content, launch videos"
+
+# Base CRF per format (before quality tier offset). Lower = better quality.
+# Platform-specific CRF overrides in platform_compliance.yaml take precedence
+# when run_platform_adapter.py renders per-platform variants.
+base_crf_by_format:
+  short: 23
+  mid: 22
+  long: 22
+  motion_comic: 21
+  lofi: 25            # Lofi streams tolerate higher CRF; saves bandwidth
+  exercise: 23
+
+# Pixel format — all platforms require yuv420p for compatibility
+pixel_format: yuv420p
+
+# Codec defaults
+codec:
+  video: libx264
+  audio: aac
+  audio_bitrate_kbps: 128   # Overridden per format in format_specs.yaml
+
+# CRF clamp range (safety guardrails)
+crf_min: 10
+crf_max: 45
+
+# Thumbnail extraction defaults
+thumbnail:
+  format: jpg
+  quality: 92          # JPEG quality (1-100)
+  fallback_frame_pct: 25  # If no thumbnail_frame_ref, use frame at 25% of duration

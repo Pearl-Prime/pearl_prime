@@ -1,0 +1,109 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__financial_stress__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__money_fears
+  name: Money Without Panic — for Founders
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Financial Stress Management: The Shutdown Point'
+subtitle: How Entrepreneurs Are Rewriting the Rules of Financial Stress
+cover_tagline: When managing the money becomes a second full-time job you're failing
+  at.
+description:
+  short_blurb: Payroll, taxes, vendor terms, the runway model, the personal finances
+    you've stopped opening — managing the money has become its own crushing job, and
+    there's too much of it at once. This is a plain field guide for founders drowning
+    in the operational weight of company cash. No new system, no fix — just a way
+    to stand inside the pile without it owning every hour.
+  long_description: 'There''s the company. And then there''s the second company —
+    the one made entirely of money you have to manage. Payroll runs and tax deadlines.
+    Vendor terms and the corporate card you''re afraid to check. The runway model
+    that needs updating again. The estimated taxes. The personal account you''ve quietly
+    stopped logging into because you already know. Every one of these is a live wire,
+    and they''re all humming at once, and somewhere in there is the actual product
+    you''re supposed to be building. The pressure isn''t one bill. It''s all of it,
+    stacked, with no bottom in sight.
+
+
+    This book is for the founder buried under the sheer operational load of keeping
+    a company solvent — not one scary number, but the relentless too-muchness of managing
+    all of them. You''re not bad at this. There is genuinely too much of it for one
+    nervous system to hold, and you''ve been holding it anyway, which is why every
+    new line item lands like the one that finally breaks you.
+
+
+    Priya Raman writes straight at that state and doesn''t pretend to shrink the workload.
+    First, recognition: you''ll learn to catch the exact moment the admin tips from
+    "a lot to manage" into "too much to be inside of" — the freeze in front of the
+    open laptop, the tab you close without reading, the invoice you''ll deal with
+    tomorrow for the ninth day running. Then, descent. Instead of bracing against
+    the whole humming stack, she has you stop and let it be the full, ugly size it
+    actually is — name every wire in the panel out loud, including the personal account
+    — because the part that exhausts you isn''t the work, it''s the effort of pretending
+    the work is smaller than it is. Only then does one question become answerable:
+    of all of this, what has a real deadline this week, and what just feels like it
+    does? Almost nothing in the pile is actually due today. Then you come back up,
+    still the person who has to run the money, but no longer running all of it in
+    your body at once.
+
+
+    This is not a finance-ops system or a productivity overhaul. No app, no morning
+    ritual, no promise that the right spreadsheet finally makes the load weightless.
+    The money will keep needing management; the second job doesn''t end. Some weeks
+    will still flatten you. What changes is that you stop trying to hold the entire
+    ledger in your chest between the moments it genuinely needs you, and start setting
+    it down in the gaps.
+
+
+    You are not failing because it''s too much. It is too much — running a company
+    and being its whole back office is two jobs, and you''ve been doing both without
+    anyone telling you that you''re allowed to do them one task at a time. So do the
+    one with the nearest deadline, badly if you have to, and let the rest keep humming.
+    It was always going to hum. It does not need you to listen to all of it at once.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - founders
+  - financial stress for founders
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: priya_raman
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) — surviving a load that genuinely exceeds
+  one person's capacity
+- Essentialism (Greg McKeown) — choosing the one thing that's actually due over the
+  undifferentiated pile
+- Profit First (Mike Michalowicz) — the operational weight of managing a company's
+  cash, made human
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

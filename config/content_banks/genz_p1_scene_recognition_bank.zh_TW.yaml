@@ -1,0 +1,1277 @@
+locale: zh_TW
+burnout_genz_scene_recognition:
+
+- variant_id: bgsr_001
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    第二杯咖啡喝到一半,你說不出它有沒有在起作用。第一杯也沒有。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.7
+    engagement: 0.7
+  collision_family: coffee_stopped_working
+  signature_phrases: ["second coffee is half gone", "cannot tell if it is doing anything"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Home/desk setting. Stimulant tolerance ceiling — somatic, no diagnosis."
+
+- variant_id: bgsr_002
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    十四則未讀訊息,你一路滑過去,只停在那些看起來回得動的。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: dm_pileup
+  signature_phrases: ["fourteen unread DMs", "ones that feel answerable"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Slack/DM setting. Depletion-driven triage — behavioral observation, no judgment."
+
+- variant_id: bgsr_003
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    教學影片已經播了九分鐘,講者講了什麼你一句都想不起來。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: attention_fog
+  signature_phrases: ["tutorial has been playing for nine minutes", "cannot recall anything the speaker has said"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Laptop setting. Cognitive depletion — ends on absence of retention, not emotional label."
+
+- variant_id: bgsr_004
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你說你明天會做。那已經是六個明天以前的事了。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: deferred_tomorrow
+  signature_phrases: ["said you would do it tomorrow", "six tomorrows ago"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Any setting. Temporal slippage observation — behavioral, no self-blame offered."
+
+- variant_id: bgsr_005
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    晚上11:04,你靜音滑著手機,沒笑,沒收藏任何東西,只有大拇指還在動。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.7
+    engagement: 0.8
+  collision_family: numb_scroll_late
+  signature_phrases: ["11:04 pm", "just moving your thumb"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Late-night phone setting. Numb scroll — ends on motor observation, no interpretation."
+
+- variant_id: bgsr_006
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    健身包從禮拜天就放在門邊。今天是禮拜四。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: stalled_gym_bag
+  signature_phrases: ["gym bag is by the door", "Today is Thursday"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Apartment setting. Object-as-time-marker — concrete detail, no moralizing."
+
+- variant_id: bgsr_007
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    視窗切得太快,你不小心把該留的那一個關掉,有一秒想不起來自己剛才在做什麼。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: task_switching_blur
+  signature_phrases: ["closed the wrong tab", "could not remember for a second what you were working on"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Laptop setting. Switching-cost event — behavioral observation, not productivity frame."
+
+- variant_id: bgsr_008
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    洗澡是一天裡你唯一會坐下來的時段。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.7
+  collision_family: bodily_depletion
+  signature_phrases: ["shower is the part of the day where you sit down"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Bathroom setting. Depletion as posture — somatic observation, single sentence."
+
+- variant_id: bgsr_009
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    筆電從早上七點開到現在,晚餐時間都過了。你不確定上一次站起來是什麼時候。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.7
+    engagement: 0.7
+  ontgp_move: orient
+  collision_family: hybrid_work_overrun
+  signature_phrases: ["laptop has been open since 7 am", "not sure when you last stood up"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Hybrid/home setting. Duration-of-sitting observation. Uses 'laptop has been open' (the anxiety bank forbidden phrase 'has been open' is avoided — this one is about the laptop, not the message window). REVIEW."
+
+- variant_id: bgsr_010
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    有人問你這個週末做了什麼,你想不出半件具體的事。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: weekend_blur
+  signature_phrases: ["what you did this weekend", "could not remember a single specific thing"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Workplace/Monday setting. Memory flatness — social exchange framing, no diagnosis."
+
+- variant_id: bgsr_011
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    那封關於你上個月還很期待的旅行的信到了,你讀它的方式跟讀水電帳單一模一樣。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: flattened_anticipation
+  signature_phrases: ["trip you were excited about last month", "the same way you read a utility bill"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Inbox setting. Flattened affect — simile-based observation, no diagnosis."
+
+- variant_id: bgsr_012
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    這禮拜你已經在同一家店點了第三次外送,因為決定要吃什麼感覺又像開一場會。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: decision_fatigue_food
+  signature_phrases: ["same place for the third time this week", "deciding felt like another meeting"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Home/delivery setting. Decision-fatigue observation — behavioral, with work-frame simile."
+
+- variant_id: bgsr_013
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你明天的行事曆塞了六場連在一起的會議。兩個禮拜前你就已經對它沒有任何感覺了。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: calendar_flattening
+  signature_phrases: ["six meetings back to back", "stopped feeling anything about it two weeks ago"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Calendar setting. Affective flattening — distinct from anxiety bank's anticipatory-dread calendar variant."
+
+- variant_id: bgsr_014
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    爸媽傳訊息問你有沒有好好吃飯,你低頭看向那盤已經一小時沒動過的飯。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.7
+    engagement: 0.8
+  collision_family: parental_text_mismatch
+  signature_phrases: ["parental text asks if you are eating enough", "plate you have not touched in an hour"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Home setting. Care-message and body-evidence mismatch — no self-judgment."
+
+- variant_id: bgsr_015
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你打了一段很用心的回覆,最後還是只按了一個讚。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: dm_pileup
+  signature_phrases: ["thoughtful reply", "sent a thumbs-up instead"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Slack setting. Response downgrade — second depletion-on-messaging variant."
+
+- variant_id: bgsr_016
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    LinkedIn通知跳出來說有人在徵你夢想中的職位。你沒點開就把分頁關掉。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: flattened_anticipation
+  signature_phrases: ["dream role", "closed the tab without opening it"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "LinkedIn setting. Second flattened-anticipation variant — opportunity without activation."
+
+- variant_id: bgsr_017
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    在下午兩點和兩點半之間,你盯著牆,沒有拿任何事情去填那段時間。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    engagement: 0.7
+    specificity: 0.8
+  collision_family: meeting_gap_stall
+  signature_phrases: ["between the 2 pm and the 2:30", "did not fill the time with anything"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Workplace setting. Inter-meeting stall — behavioral observation, no interpretation."
+
+- variant_id: bgsr_018
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你打開冰箱,站了一下,關上,回到椅子上坐下,什麼也沒吃。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.7
+    engagement: 0.7
+  collision_family: bodily_depletion
+  signature_phrases: ["opened the fridge, stood there, closed it", "sat back down without eating"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Apartment setting. Second bodily-depletion variant — kitchen, not shower."
+
+- variant_id: bgsr_019
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    特休剩很多,你想不出任何一件真的想拿它去做的事。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: pto_blank
+  signature_phrases: ["PTO balance is high", "anything you would actually want to do with it"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "HR portal setting. Anhedonic planning gap — specific workplace object."
+
+- variant_id: bgsr_020
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你闔上筆電,一天就這樣結束了,那種「做完了」的感覺並沒有出現。
+  topic_allowlist: ["burnout"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: hybrid_work_overrun
+  signature_phrases: ["closed the laptop and the day was over", "feeling of being done did not arrive"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Hybrid/home setting. Second overrun variant — boundary without recovery."
+
+
+# ── OVERTHINKING / GEN_Z_PROFESSIONALS ───────────────────────────────────────
+
+overthinking_genz_scene_recognition:
+
+- variant_id: ogsr_001
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    同一則回覆你已經改了四次,最新的版本跟第一版幾乎一樣。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: draft_rewrite_loop
+  signature_phrases: ["rewritten the same reply four times", "almost identical to the first"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Slack/DM setting. Iteration convergence failure — behavioral observation, no judgment."
+
+- variant_id: ogsr_002
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    十四個分頁開著,你一個也沒在讀。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: browser_tab_spiral
+  signature_phrases: ["Fourteen tabs are open", "not reading any of them"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Browser setting. Cognitive fan-out — ends on absence of action."
+
+- variant_id: ogsr_003
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    從廚房走回座位的路上,你在心裡預演一場對話——一場你其實根本不必跟任何人進行的對話。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: imagined_conversation
+  signature_phrases: ["rehearsing the conversation", "do not actually have to have with anyone"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Apartment/hallway setting. Imagined-dialogue loop — observational, no advice."
+
+- variant_id: ogsr_004
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你又把同一個症狀搜了一次,心裡知道結果會跟今天早上看到的一模一樣。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: repeat_search_loop
+  signature_phrases: ["googled the same symptom again", "results would say what they said this morning"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Phone/browser setting. Reassurance-seeking via search — behavioral, no clinical framing."
+
+- variant_id: ogsr_005
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    這個決定一直在分岔。每走進一條岔路,盡頭又多出兩條。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.3
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: branching_decision
+  signature_phrases: ["decision keeps branching", "two more at the end of it"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Any setting. Decision-tree spiral — structural observation, no resolution offered."
+
+- variant_id: ogsr_006
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你點開寄件備份確認訊息真的寄出去了,兩分鐘後又去看了一次。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: confirmation_check_loop
+  signature_phrases: ["checked the sent folder", "checked it again two minutes later"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Inbox setting. Verification compulsion — behavioral observation, distinct from anxiety bank's draft variant."
+
+- variant_id: ogsr_007
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    那則只打了一半的訊息在螢幕上停了十九分鐘。同樣三個字你已經打了又刪、刪了又打兩次。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: draft_rewrite_loop
+  signature_phrases: ["half-written message", "typed and deleted the same three words twice"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Messaging setting. Second draft-loop variant — micro-edits rather than full rewrites."
+
+- variant_id: ogsr_008
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你反覆打開同一個分頁,只為了確認那場會議真的是四點。它就是。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: confirmation_check_loop
+  signature_phrases: ["same tab to make sure the meeting is really at four", "It is."]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Calendar setting. Second confirmation-loop variant — time verification."
+
+- variant_id: ogsr_009
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在為六天後的一對一準備要說什麼話。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: imagined_conversation
+  signature_phrases: ["1:1 that is six days away"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Workplace setting. Second imagined-conversation variant — with a future-scheduled person."
+
+- variant_id: ogsr_010
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    只有一句話的回覆,你讀了五遍,想找出背後到底在想什麼。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: subtext_mining
+  signature_phrases: ["one-sentence reply five times", "looking for what was behind it"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Slack/inbox setting. Subtext analysis — cognitive observation, no label."
+
+- variant_id: ogsr_011
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    十四個分頁你一個也不敢關,因為每一個都可能是那個答案。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: browser_tab_spiral
+  signature_phrases: ["cannot close any of the fourteen tabs", "each one might still be the answer"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Browser setting. Second tab-spiral variant — closure resistance, not fan-out."
+
+- variant_id: ogsr_012
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你開了一份文件要寫筆記,又開了另一份文件來規劃那份筆記要怎麼寫。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.3
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: meta_planning
+  signature_phrases: ["plan about the note"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Notes/docs setting. Meta-planning loop — behavioral observation, recursive frame."
+
+- variant_id: ogsr_013
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    訊息一送出去,你腦中立刻跑過四種被誤讀的版本。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: post_send_scenarios
+  signature_phrases: ["immediately imagined four ways it could be misread"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Messaging setting. Post-send scenario generation — cognitive observation, no diagnosis."
+
+- variant_id: ogsr_014
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    凌晨一點,你還沒睡,因為你還在腦中跑早上要怎麼開口。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: imagined_conversation
+  signature_phrases: ["1 am and you are not asleep", "running through what you will say in the morning"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Bed setting. Third imagined-conversation variant — pre-event at night."
+
+- variant_id: ogsr_015
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你列了一份優缺點清單。為了確認第一份列對了,你又列了第二份、更短的那份。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.3
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: meta_planning
+  signature_phrases: ["pros and cons list", "to decide if the first one was right"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Notes setting. Second meta-planning variant — recursive validation loop."
+
+- variant_id: ogsr_016
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在群組問大家該怎麼辦,三小時過去了,你還是沒點開那些回覆。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: advice_avoidance
+  signature_phrases: ["asked the group chat what to do", "have not opened the replies"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Group chat setting. Advice-seeking with avoidance — behavioral observation."
+
+- variant_id: ogsr_017
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在捷運上,反覆推敲主管說「好」的時候到底是什麼意思。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: subtext_mining
+  signature_phrases: ["what the manager meant by okay"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Commute setting. Second subtext-mining variant — single-word interpretation."
+
+- variant_id: ogsr_018
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    兩個選項差不多。你已經衡量了一個小時,它們還是差不多。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: branching_decision
+  signature_phrases: ["two options are roughly equal", "still roughly equal"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Any setting. Second branching-decision variant — tie-weight loop rather than fan-out."
+
+- variant_id: ogsr_019
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你去看寄出去的訊息,只為了確認結尾那個表情符號選對了沒。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.8
+    specificity: 0.9
+  collision_family: post_send_scenarios
+  signature_phrases: ["emoji at the end was the right one"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Messaging setting. Second post-send variant — tonal micro-detail, not scenario fan-out."
+
+- variant_id: ogsr_020
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    事情已經決定了,你還在想,怕有哪個版本你還沒考慮到。
+  topic_allowlist: ["overthinking"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.3
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: post_decision_loop
+  signature_phrases: ["already decided and you keep thinking about it", "version you have not considered yet"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Any setting. Post-decision loop — cognitive observation, no resolution."
+
+
+# ── SHAME / GEN_Z_PROFESSIONALS ──────────────────────────────────────────────
+
+shame_genz_scene_recognition:
+
+- variant_id: shgsr_001
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    會議上你把那句話說出口了。接下來的那陣安靜,你到現在都還在聽。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: post_meeting_replay
+  signature_phrases: ["said the thing in the meeting", "quiet that followed is what you are still listening to"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Meeting setting. Post-utterance silence — ends on auditory-cognitive observation."
+
+- variant_id: shgsr_002
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    那個玩笑沒笑點。下一個人轉移話題前,那兩秒的空白你感覺得到。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.7
+    engagement: 0.9
+  collision_family: joke_silence
+  signature_phrases: ["joke did not land", "two seconds it took for the next person to change the subject"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Social/meeting setting. Timed social gap — somatic registration of duration."
+
+- variant_id: shgsr_003
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你一直在回頭讀自己傳出去的訊息,想找出那個讓沒人回應的瑕疵。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: self_message_audit
+  signature_phrases: ["rereading your own message looking for the flaw"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Slack/inbox setting. Self-directed audit — cognitive observation, no reassurance offered."
+
+- variant_id: shgsr_004
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    群組在你那則訊息之後變安靜了,那種安靜跟平常的安靜感覺不一樣。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: groupchat_silence
+  signature_phrases: ["feels different from the other quiets"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open", "Slack channel went quiet after your message"]
+  notes_for_selector: "Group chat setting. Qualitative silence — distinct from anxiety bank's Slack-silence variant (this one is social chat, not work)."
+
+- variant_id: shgsr_005
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    全員大會上你的鏡頭是開的,講者旁邊突然蹦出你自己的臉,你還沒準備好。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.6
+    engagement: 0.9
+  collision_family: camera_exposure
+  signature_phrases: ["camera was on in the all-hands", "shot of your own face that appeared next to the speaker"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Video call setting. Self-image exposure — somatic/visual observation."
+
+- variant_id: shgsr_006
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在全頻道訊息裡打了一個錯字,從發現到現在已經又看了四次。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: public_typo
+  signature_phrases: ["typo in the message you sent to the whole channel", "seen it four times since you noticed it"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Slack/broadcast setting. Public-error reoccurrence — behavioral observation."
+
+- variant_id: shgsr_007
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在想像他們現在在一場你不在的對話裡,會怎麼形容你。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: imagined_third_party
+  signature_phrases: ["imagining how they are describing you", "conversation that you are not in right now"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Any setting. Third-party imagined audit — cognitive observation, no refutation."
+
+- variant_id: shgsr_008
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在大會議上問了一個問題,現在正在一遍一遍回放那句話,找裡面聽起來很菜的地方。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: post_meeting_replay
+  signature_phrases: ["replaying the sentence looking for the part that sounded basic"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Meeting setting. Second post-meeting-replay variant — question rather than statement."
+
+- variant_id: shgsr_009
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你話講到一半自己把它收回去了,那個差點脫口的版本,感覺還在喉嚨裡。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.7
+    engagement: 0.8
+  collision_family: mid_sentence_retract
+  signature_phrases: ["took back what you said mid-sentence", "version that almost came out"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Social/meeting setting. Mid-utterance retract — somatic trace, no judgment."
+
+- variant_id: shgsr_010
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    有人聽到你說的話笑了,你分不出那是哪一種笑。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    engagement: 0.9
+    specificity: 0.8
+  collision_family: joke_silence
+  signature_phrases: ["laughed at the thing you said", "could not tell which way"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Social setting. Second joke-silence variant — ambiguous laugh rather than absent laugh."
+
+- variant_id: shgsr_011
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    早上那則私訊在對方那端還是「未讀」,你已經點開那個視窗確認兩次了。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: read_receipt_watching
+  signature_phrases: ["still unread on their end", "opened the chat twice to check"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "DM setting. Read-receipt vigilance — behavioral observation, no catastrophizing."
+
+- variant_id: shgsr_012
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你開口訂正自己的時候,聲音比平常高了一點。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.7
+  collision_family: voice_tell
+  signature_phrases: ["corrected yourself out loud", "voice that was slightly higher than your usual one"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Meeting/social setting. Voice-pitch tell — precise somatic observation."
+
+- variant_id: shgsr_013
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在想像他們讀到你訊息的那一瞬間,臉上會是什麼表情。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    engagement: 0.9
+    specificity: 0.9
+  collision_family: imagined_third_party
+  signature_phrases: ["exact face they made when they read your message"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Messaging setting. Second imagined-third-party variant — visual rather than verbal."
+
+- variant_id: shgsr_014
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    咖啡店裡人很多,你忽然意識到自己坐著的姿勢。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.7
+  collision_family: visible_body_awareness
+  signature_phrases: ["coffee shop is crowded", "suddenly aware of how you are sitting"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Cafe setting. Embodied self-consciousness — somatic observation, no diagnosis."
+
+- variant_id: shgsr_015
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你說你沒事,然後聽著那三個字離開嘴巴以後的聲音。
+  topic_allowlist: ["shame"]
+  topic_blocklist: []
+  persona_allowlist: ["gen_z_professionals"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.8
+    engagement: 0.8
+  collision_family: voice_tell
+  signature_phrases: ["listened to the way the word sounded after it left your mouth"]
+  forbidden_terms: ["forty minutes", "has been open", "you have been looking at it", "task is open"]
+  notes_for_selector: "Social setting. Second voice-tell variant — post-utterance auditory self-monitoring. Distinct from depression bank's 'said fine' which ends on inner question."

@@ -1,0 +1,163 @@
+# Manga mode-wrapper vessels — teacher-mode XOR music-mode, per genre.
+# Authority: artifacts/manga/pilots/MANGA_MODE_WRAPPER_DESIGN.md + GENRE_VESSEL_SKETCHES.md (#1788).
+# One mode per series. The mode is baked into the genre via a NATIVE VESSEL, at a 3-beat skeleton:
+#   teacher: wound -> turn (doctrine earned) -> renewal      (reader is TAUGHT)
+#   music:   opening-motif -> mid-recurrence -> closing       (reader is made to FEEL)
+# Consumed by phoenix_v4/manga/mode/vessels.py. Additive config; no behavior change unless a
+# series sets `mode`.
+
+schema_version: 1
+genres:
+
+  iyashikei:
+    teacher:
+      vessel: "the tea-house hands"
+      vessel_desc: "an elder whose daily ritual IS the doctrine; learned by watching hands, not hearing words"
+      beats: {wound: "the cadet who can't rest forces the ritual", turn: "watching the hands, the body settles before the mind agrees", renewal: "the ritual kept, lightly, on its own"}
+    music:
+      vessel: "the wind-chime that keeps the season"
+      vessel_desc: "one small melody threaded through the daily world, returning each chapter"
+      beats: {opening: "the chime enters the ordinary day", mid: "the chime returns under pressure, unchanged", closing: "the same notes land softer, because the listener changed"}
+
+  dark_fantasy:
+    teacher:
+      vessel: "the Keeper / the living land"
+      vessel_desc: "an oracle-keeper and the land's pulse that KNOWS; doctrine as observation, never advice"   # gold: the_forest_beneath_the_skin
+      beats: {wound: "the warden fights the body it should feel", turn: "a hand on the warm ground — it knew first", renewal: "the wall blooms; begin again"}
+    music:
+      vessel: "song-magic / the bard against the dark"
+      vessel_desc: "a melody that holds back the dark; the world bends to the song"
+      beats: {opening: "a half-song drifts through the cursed wood", mid: "the song returns, full, where force failed", closing: "the dark quiets as the melody resolves"}
+
+  mecha:
+    teacher:
+      vessel: "the mechanic who co-regulates the pilot"
+      vessel_desc: "doctrine delivered as care — the mechanic reads the pilot's body, names the cost"
+      beats: {wound: "the pilot forces the sync and burns out", turn: "the mechanic: it knew before you did; settle, don't override", renewal: "pilot and machine move from a settled body"}
+    music:
+      vessel: "the sync-song"
+      vessel_desc: "the pilot tunes the machine by finding the sound; the link JOINS, not obeys"   # gold: the_cockpit_remembers_the_song
+      beats: {opening: "a half-remembered hum from the dead chassis", mid: "forcing fails; the static RESOLVES into the song", closing: "the held note releases; they breathe as one"}
+
+  supernatural_mystery:
+    teacher:
+      vessel: "the medium who reads the cold"
+      vessel_desc: "the unseen she reads is the body's signal — the cold spot arrives a breath before the ghost"
+      beats: {wound: "the apprentice trusts the eyes, misses the body", turn: "feel the cold first; the body knew the haunting", renewal: "the case closed by feeling, not deducing"}
+    music:
+      vessel: "the song only the haunted can hear"
+      vessel_desc: "the dead leave a half-finished melody; laying them to rest = finishing it"
+      beats: {opening: "a phantom phrase recurs, incomplete", mid: "the melody nears completion at the reveal", closing: "the song finishes and goes quiet — grief released"}
+
+  psychological_thriller:
+    teacher:
+      vessel: "the detective who reads bodies"
+      vessel_desc: "the body confesses before the mouth; the protege's panic is data, not malfunction"
+      beats: {wound: "the lead distrusts their own alarm", turn: "the jaw, the held breath — the body told the truth first", renewal: "the case solved by reading the body"}
+    music:
+      vessel: "the motif that arrives one beat early"
+      vessel_desc: "a two-note figure plays just before every reveal; dread as the body's alarm, scored"
+      beats: {opening: "the motif tightens the chest before the clue", mid: "the figure peaks at the pivot", closing: "the motif completes instead of cutting off"}
+
+  romance_josei_drama:
+    teacher:
+      vessel: "the beloved who rests"
+      vessel_desc: "no lecture — an unhurried partner MODELS the doctrine; learned off another body's ease"
+      beats: {wound: "the guarded lead braces in love", turn: "watching the beloved set things down, the guard slips", renewal: "rest, shared, unforced"}
+    music:
+      vessel: "the shared song"
+      vessel_desc: "one tune passes between two people; who hums it, when, charts the romance"
+      beats: {opening: "the tune, sung alone", mid: "the bridge, sung together at the turn", closing: "the song, unforced, walls down"}
+
+  workplace_drama:
+    teacher:
+      vessel: "the custodian who's seen the cycles"
+      vessel_desc: "a night-shift veteran; doctrine in small acts — when to put the pen down"
+      beats: {wound: "the lead sprints toward collapse", turn: "the shoulders already answered; the veteran names it", renewal: "a sustainable pace, kept"}
+    music:
+      vessel: "the after-hours frequency"
+      vessel_desc: "two office tempos — the forced sprint and a slower hum by the copier"
+      beats: {opening: "the sprint tempo drives the floor", mid: "the slower beat surfaces at the break", closing: "the lead drops to the sustainable tempo"}
+
+  sci_fi_cyberpunk:
+    teacher:
+      vessel: "the wetware elder / old hacker"
+      vessel_desc: "the meat knows what the augments override; the body's alarm is truer than the feed"
+      beats: {wound: "the lead trusts the optimized feed over the body", turn: "the elder: trust the wetware's alarm", renewal: "the body re-trusted beneath the upgrades"}
+    music:
+      vessel: "the pirate frequency — the soul in the hum"
+      vessel_desc: "a filtered-out signal the city scrubbed; re-finding it is re-finding the muted body"
+      beats: {opening: "static, and one warm analog tone beneath", mid: "the frequency breaks through the scrub", closing: "the tone lands; the body, unmuted"}
+
+  psychological_horror:
+    teacher:
+      vessel: "the survivor who turns toward it"
+      vessel_desc: "the horror is the body's truth refusing silence; the only way out is THROUGH"
+      beats: {wound: "the lead flees the dread, feeding it", turn: "the survivor: meet it, don't flee", renewal: "met, the horror loses its grip"}
+    music:
+      vessel: "the corrupted lullaby"
+      vessel_desc: "a tune the horror warped; restore it clean, note by note"
+      beats: {opening: "the lullaby, warped and wrong", mid: "the first clean notes return", closing: "the lullaby whole again — terror to ground"}
+
+  action_battle:
+    teacher:
+      vessel: "the sensei of the settled strike"
+      vessel_desc: "the hardest blow comes from a quiet body; lose by forcing, win by flowing"
+      beats: {wound: "the student forces every bout and loses", turn: "from a settled body, the strike lands", renewal: "strength from stillness, kept"}
+    music:
+      # M4 C-grade upgrade: pulse-as-score made diegetic (armor resonance, not abstract drum)
+      vessel: "the armor that keeps the pulse"
+      vessel_desc: "battle armor hums with the fighter's heart — ragged when forcing, a clean tone when settled; the score is the suit, not a narrator"
+      beats: {opening: "the armor hums ragged under strain", mid: "mid-clash the tone cleans as the body unclenches", closing: "steady hum; the turn felt in the metal before the blow"}
+
+  historical_period:
+    teacher:
+      # M4 C-grade upgrade: craft-master made period-specific (hand knows before mind)
+      vessel: "the workshop hands that refuse hurry"
+      vessel_desc: "a period craftsperson (swordsmith, calligrapher, weaver) whose hands stop when the apprentice forces — doctrine is the pause the material demands, never a speech"
+      beats: {wound: "the apprentice rushes and the material fails", turn: "the hands stop; the body knew the grain first", renewal: "one slow correct motion, kept"}
+    music:
+      vessel: "the folk song down the eras"
+      vessel_desc: "one melody survives generations; belonging carried by the song outliving its singers"
+      beats: {opening: "the song, old, half-forgotten", mid: "the melody binds a generation at the turn", closing: "the song reaches the lead — continuity felt"}
+
+  isekai:
+    teacher:
+      vessel: "the guide who trusts old instincts"
+      vessel_desc: "the body's old-world alarms are the truest map; the body adapts faster than the mind"
+      beats: {wound: "the stranger over-thinks the new world", turn: "the guide: trust the body's old map", renewal: "at home in the body, in any world"}
+    music:
+      # M4 C-grade upgrade: home-song as the only translating magic (not generic BGM)
+      vessel: "the hummed bar that still works here"
+      vessel_desc: "one half-remembered phrase from the old world is the only spell that translates — not power fantasy, belonging; the lead hums it when the new rules fail"
+      beats: {opening: "a hummed bar, out of place under two moons", mid: "the phrase opens a door no map showed", closing: "the same bar fits the new world — home, relocated"}
+
+  sports_competition:
+    teacher:
+      vessel: "the coach of the unclenched"
+      vessel_desc: "the choke is bracing, the flow is release; drills the body until it stops auditioning"
+      beats: {wound: "the athlete grips and chokes", turn: "unclench; the body performs when it stops performing", renewal: "flow, repeatable"}
+    music:
+      vessel: "the inner beat / team chant"
+      vessel_desc: "the stride has a tempo; under pressure it scatters, then re-finds itself"
+      beats: {opening: "the beat, steady in warm-up", mid: "the tempo re-finds itself mid-race", closing: "the race turns on the beat, not the will"}
+
+  school_coming_of_age:
+    teacher:
+      vessel: "the senpai who pays quiet attention"
+      vessel_desc: "no speeches — being SEEN accurately by someone older models the doctrine"
+      beats: {wound: "the lead performs to be liked", turn: "seen as they are, the performing eases", renewal: "growing into being seen"}
+    music:
+      vessel: "the song the year is set to"
+      vessel_desc: "one club tune, picked up in spring, mastered by winter; growing up as the song maturing"
+      beats: {opening: "the tune, fumbled in spring", mid: "the song matures at the year's turn", closing: "mastered by winter — the self, grown"}
+
+  cultivation_martial:
+    teacher:
+      vessel: "the master of the lower gate"
+      vessel_desc: "cultivation IS body-first — the dantian knows before the mind; force ruptures, settling opens"
+      beats: {wound: "the disciple forces the meridians and ruptures", turn: "settle; the lower gate opens on its own", renewal: "cultivation from stillness"}
+    music:
+      vessel: "the sound-sect's flute"
+      vessel_desc: "a school that cultivates through tone; qi moves on the melody"
+      beats: {opening: "a single tone, the breath behind it", mid: "breath and note become one line", closing: "mastery felt as the sound finding the body"}

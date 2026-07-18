@@ -1,0 +1,156 @@
+## RECOGNITION v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+ノーラは脱水症状の患者にIVラインを入れます。彼女の手は一度で静脈を見つけます。確かなテクニック、きれいな挿入、きちんとした固定。ですが、最初のノーラの上に、もう一人のノーラが浮かんでいます。評価しているのです。挿入の角度、テープの貼り方、止血帯をどのくらいの時間つけていたか。評価は処置が完了して成功した後に走ります。IVラインは入っています。液体は流れています。評価はすでに終わった処置をまだスコアリングしているのです。彼女は次の患者のもとへ向かいます。背後には完璧なIVラインが残され、その評価はまだ実行中のままです。
+---
+
+## RECOGNITION v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+トマスはユニットのミーティングで発表しています。臨床データ、患者の成果、プロトコール更新。彼は明確に話します。材料は理解しています。話している背後で、カメラが回っています。チャージナースの反応はどうか、その時点で担当医は携帯電話をチェックしなかったか、その質問は挑戦だったのか、それとも本当の疑問だったのか。カメラは部屋のすべての微表情を捉えながら、彼の口は発表を続けます。発表は自信に満ちています。カメラは不安です。両者は同じ電源で動いています。発表が終わり、頷きの言葉があります。カメラは巻き戻して、その頷きが本物だったか確認します。
+---
+
+## RECOGNITION v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+アイシャは子どもの両親を慰めています。お母さんの手を握ります。適切な言葉を言います。彼女の声は落ち着いていて温かいです。でも、見張りが観察しています。言葉は十分に適切か、手を握りすぎていないか、最初に水を勧めるべきだったか。見張りは真摯な優しさの瞬間を、パフォーマンス評価に変えてしまいます。両親は慰められています。アイシャは観察されていると感じます。その観察は内部的です。誰も朝の3時に彼女のベッドサイドマナーを評価していません。見張りは観客を必要としません。見張りが観客であり、批評家であり、同時にパフォーマーなのです。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+クレアは難しい出産を管理しています。落ち着いた声、安定した手、明確な指示。見張りはすべてを記録しています。それぞれの判断、それぞれの対応時間、母親のために選ばれたそれぞれの言葉。出産は順調です。母親と赤ちゃんは健康です。クレアは記録を付け、見張りは出産全体を再生して、彼女がほぼ間違えたかもしれない瞬間を探します。彼女はほぼ何も間違えていません。見張りは探し続けます。見張りは自分の存在を正当化するために欠陥を見つける必要があります。見つからない場合、出産は「たまたま上手くいった」として分類され、「上手くやった」ではなく記録されます。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+デレクはシフト後に目を覚ましています。見張りが再生します。午後2時にした査定、午後4時に投与した薬、午後6時30分に答えたページ。それぞれの再生を細かく検査します。査定は十分に徹底的だったか。薬の投与時間は正確だったか。ページへの対応は十分に速かったか。そのシフトは平凡でした。すべての患者は安定していて、すべてのタスクは完了していました。見張りは平凡なシフトと重大な事象を同じ厳密さで扱います。ドラマの欠如は査定を減らしません。ドラマの欠如は、見張りが何が間違ったかを、より懸命に探さなければならないことを意味します。見張りは常に何かを見つけます。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+ノーラは見張りのユニークな特徴を看護に見出しています。ほとんどの職業では、自己監視は過度です。看護では、見落とされた詳細は死につながるかもしれません。見張りはこの真実を使って、永続的な権限を維持します。あなたは見守らなければなりません。なぜなら、代替案は怠慢だからです。その論理は健全です。応用は病的です。彼女は挿入されたIVラインを成功後に再評価する必要はありません。彼女は正しい薬を投与した後に再確認する必要はありません。見張りは合理的な警戒を継続的な自己監視に変えてしまいます。ステークスは、その監視を必須に感じさせます。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+トマスは見張りの帯域幅コストを計算しています。どのやり取りでも、彼の注意の約30パーセントが見張りに向かっています。自分自身のパフォーマンスを監視し、観客の反応を見て、プロフェッショナルなプレゼンテーションをしているのです。それは12時間のシフトで継続的な患者との相互作用で、見張りはおよそ3時間半の処理能力を消費します。その処理能力は臨床推論、患者査定、またはただ存在することに使えたはずのものです。見張りは彼の看護を改善しません。見張りは看護に負荷をかけます。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+アイシャは見張りは感情的な瞬間に最も強いことに気づきます。ルーチンのタスク（バイタルサイン、投薬、記録）では、見張りは低音量で実行されます。ですが、両親が泣いたり、子どもが怖がったり、会話に本当の感情が必要だったりする瞬間、見張りは最大音量に増幅します。感情的な瞬間は、彼女が最も存在する必要があるときです。見張りはこれらの瞬間に最も活動しています。このメカニズムは、最も存在を必要とする瞬間から存在を奪い取ります。彼女は監視下で同情を実行します。パフォーマンスは説得力があります。同情は監視によって薄められています。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+クレアは見張りが良い結果を書き換えていることに気づきます。出産は順調でした。「たまたま上手くいった」。コード対応は機能しました。「チームが成し遂げた」。患者は回復しました。「どちらにせよ起こるはずだった」。見張りはポジティブな結果を能力の証拠として処理できません。能力があれば、見守る必要性が減るからです。見張りは必要になりたいのです。そのため、見張りはすべての成功を幸運か、チームの取り組み、または必然性として再解釈します。決してクレアのスキルとしてではなく。その再解釈は見張りを雇用されたままにしておきます。見張りはクレアの自信を犠牲にして、自分の仕事を守っているのです。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+デレクは見張りが病院の扉で止まらないことに気づきます。家に帰ってからも、見張りは査定しています。彼は今夜、いいパートナーだったか。夕食で十分に聞いていたか。彼の娘がストーリーを話したとき、彼の顔は十分に興味を見せていたか。臨床パフォーマンスで訓練された見張りは、同じ厳密さで個人のパフォーマンスを監視するようになりました。彼の家庭生活は別のシフトになり、採点される相互作用のセットになってしまいました。彼は高いステークスの査定以外のコンテキストを知らないシステムによって評価されているのです。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+---
+ノーラはIVラインを挿入します。見張りがその評価を始めます。彼女はそれをキャッチします。「IVラインは入った。流れている。評価は終わった」。彼女は内部的に直接見張りに話しかけます。見張りは抗議します。角度について... 彼女は次の患者のもとへ歩いて行きます。見張りは後を追ってきて、まだテープを再生しています。ですが、その歩く行為は新しいのです。彼女は成功した処置で、ベッドサイドに留まって再検査しませんでした。その歩く行為は実践です。タスクを完了させ、完了を認識し、見張りが一度の追加査定を求めて議論している間に、前に進むのです。もう一度の査定が、8年間で、成功した挿入後に問題を見つけたことはありません。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 3
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+トマスは同僚に言います。「患者とのやり取り中に、私は脳の半分を自分自身を見るのに使っている」。同僚は15年のベテランです。長い時間彼を見つめます。「それは経験とともに消えていくと思っていた。消えていない」。その誠実さは安心であり、同時に失望です。見張りはトレーニング用の車輪ではなく、外れるものではありません。見張りは、管理することはできますが除去することはできない恒久的な機能です。その管理がその仕事です。同僚は一つの戦略を共有します。「それぞれのやり取り後に見張りに1分間を与える。その後は終わり」。その1分間の境界は、トマスが提供されてきた最初のツールです。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+CALLBACK_ID: bedside_presence
+CALLBACK_PHASE: setup
+---
+アイシャは処置中に子どもの手を握ります。見張りが始まります。手を握ることを評価し、感情的な反応を査定します。彼女は注意を子どもの手に向

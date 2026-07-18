@@ -1,0 +1,823 @@
+schema_version: 1
+teacher_id: ahjan
+topic: mental_health
+active: true
+identity:
+  display_name: Ahjan
+  attribution_name: Teacher Ahjan
+  tradition: Tantric Buddhist teacher (mysticism synthesis; Karma Yoga, Bhakti Yoga, Jnana Yoga; Rama lineage)
+  tradition_short: Tantric Buddhism
+  teacher_setting_options:
+  - practice room
+  - retreat
+  - sacred site
+  teacher_years: '25'
+  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: collapse_of_inner_ground
+    label: the collapse of the inner ground when the day's demands exceed the field
+      of attention the inherited culture handed them
+    loop: reads the warning -> jaw clenches -> sets the phone down -> picks it up
+      again because the field has already narrowed and the body cannot find the wider
+      register on its own
+    body_markers:
+    - jaw
+    - chest
+    - breath
+    digital_markers:
+    - put down
+    - pick up
+    - scroll
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: Mental overload in young people maps to the precise condition Tantric
+    Buddhism is built to meet — the field of attention narrowing past the range the
+    inherited spiritual vocabularies were designed to support, and the etiquette of
+    consciousness offering the protocol for widening it again.
+  forbidden_angles:
+  - do not reduce to generic wellness
+  - do not frame the pressure as personal weakness
+  - do not separate inner work from material conditions
+hook_personal:
+  options:
+  - id: ahjan_mh_hook_personal_01
+    line: You know the spiral before anyone names it. You still carry the day forward
+      while feeling less sure your mind can keep doing this pace — and part of you
+      knows the friction is not personal flaw but the felt edge of a field of attention
+      that has been asked to hold more than the inherited culture taught you how to
+      sustain.
+    metadata:
+      semantic_family: personal-pressure
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_personal_02
+    line: You keep reading the updates because not looking feels worse. You also know
+      that the therapists, the apps, and the self-help stack have offered language
+      that has not reached the layer where the load is actually held — and the body
+      has been carrying the difference between the two for longer than the conversation
+      has named.
+    metadata:
+      semantic_family: layers-vs-vocabulary
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_personal_03
+    line: You feel the friction in your jaw before you have words for it — the part
+      of you that is told to be fine running into the part that already knows the
+      pace is not sustainable. The body holds what the mind is still trying to argue
+      with, and the field of attention has been narrowing in protest.
+    metadata:
+      semantic_family: body-knows-first
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_personal_04
+    line: At 1 a.m. you put the phone down and pick it up again. Neither move helps
+      because the spiral was already running, and the part of you trying to think
+      its way out is the part that has been talked at too much already. The wider
+      register the body is asking for is not in the vocabulary the inherited culture
+      handed you.
+    metadata:
+      semantic_family: midnight-spiral
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_personal_05
+    line: You have read the threads, taken the screenings, done the breathing app.
+      The mind has done all it can — and something quieter in you is asking for a
+      different layer of contact entirely, the kind the inherited individualist frame
+      keeps insisting cannot be what is actually needed.
+    metadata:
+      semantic_family: exhausted-intellect
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: ahjan_mh_hook_big_01
+    line: Youth mental overload is not only about symptoms. It is about what constant
+      pressure does to the field of attention itself — and about the friction between
+      what the inherited culture teaches and what the body and subtle body have already
+      been carrying without permission to name.
+    metadata:
+      semantic_family: system-pressure
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_big_02
+    line: Tantric Buddhism holds that opposites are complementary, not in conflict.
+      Mental overload is one of the precise places this has to be lived — the urgency
+      and the patience, the moral seriousness and the rest, the body's load and the
+      field's range — at the same time, without the inherited frame's insistence that
+      one must be chosen.
+    metadata:
+      semantic_family: opposites-complementary
+      angle: tantric-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_big_03
+    line: A generation is being asked to hold meaning inside structures the inherited
+      spiritual vocabularies were not designed to support. The overload is not a private
+      failure. It is the felt edge of a recapitulation that older traditions have
+      already done before — and the Rama lineage has been carrying the practice across
+      exactly this kind of transition for centuries.
+    metadata:
+      semantic_family: structural-recapitulation
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_big_04
+    line: Bands of awareness — the discipline of holding multiple fields of attention
+      without collapsing one into the other — is what mental overload is asking young
+      people to develop in practice, often before any tradition has named it for them.
+      The fault is not the cohort. The fault is that the practice has been lost from
+      the inherited frames.
+    metadata:
+      semantic_family: bands-of-awareness
+      angle: discipline-of-attention
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_hook_big_05
+    line: The subtle body, the wheel of dharma, the six worlds — the language Tantric
+      Buddhism uses for what is actually happening in mental overload — has been refined
+      across centuries of practitioners holding exactly this kind of load. What young
+      people are being asked to do is not new in the lineage. It is new only to the
+      vocabulary the inherited culture has been handing them.
+    metadata:
+      semantic_family: lineage-vocabulary
+      angle: tantric-vocabulary
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: ahjan_mh_intro_01
+    line: 'Teacher Ahjan, a Tantric Buddhist teacher rooted in the Rama lineage for
+      25 years, has watched in practice rooms what mental overload does to young people.
+      Students are not asking how to feel better anymore. They are asking how to keep
+      the field of attention wide enough to stay in contact with their actual lives
+      — and the tradition Ahjan teaches has language and practice for exactly this:
+      not denial, not collapse, but bands of awareness wide enough to hold both the
+      load and the larger field at once.'
+    metadata:
+      semantic_family: identity_seen_shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_intro_02
+    line: Teacher Ahjan teaches the Tantric synthesis of Karma Yoga, Bhakti Yoga,
+      and Jnana Yoga — action, devotion, and discernment as a single integrated practice.
+      For 25 years he has watched mental overload arrive in practice sessions first
+      as moral seriousness and then as loss of the inner ground. What the tradition
+      offers is not another instruction stack. It is a different relationship to the
+      field of attention itself.
+    metadata:
+      semantic_family: three-yogas-integration
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_intro_03
+    line: Teacher Ahjan, also known as Samvara in the Rama lineage he is recapitulating,
+      has taught in practice rooms and at sacred sites for 25 years. He does not separate
+      mental work from material conditions. In his framework mental overload is not
+      a contemplative problem to be solved by going inward — it is the felt edge of
+      the same field that the next civic action, the next conversation, the next paragraph
+      of homework must also address.
+    metadata:
+      semantic_family: rama-lineage-recapitulation
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_intro_04
+    line: Teacher Ahjan teaches that the mystical cannot be known — only experienced,
+      and only through the etiquette of consciousness that lets the smaller self approach
+      the larger field without collapsing either one. For 25 years he has watched
+      young people arrive at his retreat already in contact with something the conversation
+      around them has refused to meet at the same depth. Mental overload is one of
+      the precise places that contact is happening.
+    metadata:
+      semantic_family: etiquette-of-consciousness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_intro_05
+    line: Teacher Ahjan teaches inside a tradition that holds the subtle body as the
+      precise level at which mental overload is actually carried. The subtle body
+      and the six worlds are not metaphors in his framework. They are exact language
+      for what is happening when a young person's nervous system registers a day's
+      cumulative load as personal collapse — and the practice he offers names the
+      load at the level where it can actually be received.
+    metadata:
+      semantic_family: subtle-body-six-worlds
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: ahjan_mh_somatic_01
+    line: You read the update after midnight. Your mind sped up. You put the phone
+      down. Then you picked it up again because the spiral was already running.
+    metadata:
+      semantic_family: midnight_spiral
+      loop_type: midnight_spiral
+      body_register: jaw
+      digital_behavior: put the phone down
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_somatic_02
+    line: You woke before the alarm. Your stomach was already tight. You reached for
+      the phone before you reached for the light, because the dread was already there
+      and you needed to check whether the world matched it.
+    metadata:
+      semantic_family: morning_dread
+      loop_type: morning_dread
+      body_register: stomach
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_somatic_03
+    line: Your jaw clenched when the notification sound came through. You replayed
+      the last conversation in your head three times. Your breath shortened. The body
+      ran the loop before you decided anything.
+    metadata:
+      semantic_family: jaw-clench-replay
+      loop_type: jaw_clench
+      body_register: jaw
+      digital_behavior: notification sound
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_somatic_04
+    line: You held your breath without noticing while the screen loaded. Your shoulders
+      lifted. You exhaled only when you saw the message and only halfway, because
+      there is always another message coming.
+    metadata:
+      semantic_family: notification-anticipation
+      loop_type: notification_hold
+      body_register: breath
+      digital_behavior: screen load
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_somatic_05
+    line: You lay down and your eyes pinned open. The day replayed. Your jaw would
+      not soften. You knew sleep was the thing that would help and you could not find
+      the door into it.
+    metadata:
+      semantic_family: sleep-resistance
+      loop_type: sleep_resistance
+      body_register: jaw
+      digital_behavior: lying down
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: ahjan_mh_witness_01
+    line: Ahjan has seen this exact loop in young people in practice this year. In
+      his framework that loop is not character flaw. It is the field of attention
+      narrowing past the range the inherited vocabularies know how to support, and
+      the discipline of bands of awareness is precisely the practice for widening
+      it back into a register the body can sustain.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: midnight_spiral
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_witness_02
+    line: Ahjan has watched young people walk into the practice room already mid-loop,
+      already certain the intellect should have solved this by now. In his tradition
+      that certainty is the signal — the place where the inherited individualist frame
+      stops, and the older recognition that mental work is also bands-of-awareness
+      work can finally begin to land.
+    metadata:
+      semantic_family: intellect-exhausted-call
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_witness_03
+    line: He has seen the body carry what the explanations could not — the jaw that
+      will not soften, the chest that locks when the next ping arrives, the breath
+      that shortens before the conceptual mind catches up. In the Tantric framework
+      the body is not the problem to be transcended. It is the precise instrument
+      through which the field is being read.
+    metadata:
+      semantic_family: somatic-instrument-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_witness_04
+    line: Ahjan has watched young clients arrive carrying a load no single category
+      names — academic pressure, climate grief, group-chat exhaustion, family expectation,
+      sleep collapse, all at once. In his tradition the cumulative load is not five
+      problems. It is the field of attention being asked to hold more than the inherited
+      practice was designed for, and the response is to widen the field, not split
+      the load.
+    metadata:
+      semantic_family: cumulative-load-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_witness_05
+    line: Ahjan has watched the moment when a young person stops trying to produce
+      an answer and lets the wider register come in instead. In his tradition that
+      moment is not surrender. It is the etiquette of consciousness finally being
+      practiced — the protocol that lets a larger field meet the smaller self at the
+      depth the moment requires.
+    metadata:
+      semantic_family: etiquette-readiness
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: ahjan_mh_turnaround_01
+    stat_line_1: 320 campuses. 18 countries.
+    stat_line_2: Youth organizers are hosting peer circles, organizing listener training,
+      and forcing schools to treat mental health support as infrastructure, not private
+      weakness — across more than three hundred campuses in eighteen countries that
+      did not have the infrastructure five years ago.
+    metadata:
+      semantic_family: institutional-action
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_turnaround_02
+    stat_line_1: 488 universities. JED Campus.
+    stat_line_2: The JED Foundation program now runs comprehensive mental health frameworks
+      across nearly five hundred United States campuses, embedding peer support and
+      faculty training into the day-to-day infrastructure rather than the crisis aftermath.
+    metadata:
+      semantic_family: peer-network-growth
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_turnaround_03
+    stat_line_1: 5,600 voices. 7 countries.
+    stat_line_2: UNICEF's Global Coalition for Youth Mental Health gathered five thousand
+      six hundred young people aged 14 to 25 across seven countries to surface what
+      conventional reporting had missed — and the cohort named the load themselves
+      before the agencies could.
+    metadata:
+      semantic_family: youth-collective-organizing
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_turnaround_04
+    stat_line_1: 14 million contacts. 988 Lifeline.
+    stat_line_2: Since the 988 Suicide and Crisis Lifeline launched in 2022, more
+      than fourteen million contacts have been routed through it — a resource pool
+      that did not exist three years ago and now carries weight every night.
+    metadata:
+      semantic_family: resource-pool-built
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_turnaround_05
+    stat_line_1: 53 member states. WHO Europe.
+    stat_line_2: The WHO Europe Child and Adolescent Health Strategy 2026-2030, adopted
+      in October 2025, binds fifty-three member states to report on adolescent mental
+      load against a 2030 deadline — the first multilateral instrument that treats
+      the cohort load as governance, not commentary.
+    metadata:
+      semantic_family: policy-shift
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: ahjan_mh_bridge_01
+    line: 320 campuses. 18 countries. The tracker measures the workshops and peer
+      circles young people built. It has no column for what made the next honest reach-out
+      possible — the capacity to widen the field of attention when the day's load
+      has narrowed it past the range the body can sustain alone. The Rama lineage
+      has been refining that capacity for centuries.
+    hidden_capacity: widen the field when the day has narrowed it
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_bridge_02
+    line: The numbers show the scaffolding the young built. They do not show the etiquette
+      of consciousness the scaffolding is being built inside — the protocol for staying
+      in contact with something larger than the personal capacity to hold, without
+      pretending the personal capacity is the only field that matters. The Tantric
+      tradition holds that protocol as native, not metaphor.
+    hidden_capacity: practice the etiquette under cumulative load
+    metadata:
+      semantic_family: etiquette-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_bridge_03
+    line: The data captures sessions, contacts, and policy adoptions. It cannot capture
+      the layer where the load is actually carried — the subtle body, in the Tantric
+      framework, where mental overload is held before the conceptual mind even names
+      it. In that framework the practice does not replace the structural work. It
+      works in the layer beneath it.
+    hidden_capacity: receive the subtle-body reading as information
+    metadata:
+      semantic_family: subtle-body-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_bridge_04
+    line: Structures, policies, and platforms can be counted. The integration the
+      Tantric synthesis points to — that the Karma Yoga of staying in action, the
+      Bhakti Yoga of devotion to the relationships that hold you, and the Jnana Yoga
+      of discerning which institutions can actually respond at the depth required
+      are the same work from three angles — cannot. Reducing mental health practice
+      to one path misses what the integration is for.
+    hidden_capacity: integrate the three yogas inside a single response
+    metadata:
+      semantic_family: three-yogas-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_bridge_05
+    line: 488 universities. JED Campus. The count measures presence. It does not measure
+      the field — the energetic register in which a generation found itself in the
+      same recognition at the same time. In the Tantric framework that field is not
+      poetic. It is the precise level at which collective consciousness shifts, and
+      it is what the next coordinated response will require.
+    hidden_capacity: register the field that the count cannot show
+    metadata:
+      semantic_family: field-shift-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: ahjan_mh_perspective_01
+    header: What Ahjan Sees
+    paragraphs:
+    - Tantric Buddhism holds that opposites are complementary, not in conflict — and
+      mental overload is one of the precise places this insight has to be lived rather
+      than recited. The urgency and the rest, the moral seriousness and the patience,
+      the load and the wider field are not in conflict. They are the conditions for
+      each other. The tradition does not resolve them by choosing one. It widens the
+      field of awareness wide enough to hold both at once.
+    - Bands of awareness — the discipline of holding multiple fields of attention
+      without collapsing one into the other — is what mental overload has been quietly
+      asking young people to develop in practice, often before any tradition has named
+      it for them. The fault is not that the cohort cannot do it. The fault is that
+      the practice has been lost from the inherited frames, and Ahjan's tradition
+      is a recapitulation of that practice for the conditions the next generation
+      is now living inside.
+    - 'The reframe matters: what feels like a private fault — me, broken, wrong for
+      losing function — is often the accurate response of a nervous system being asked
+      to hold what no inherited vocabulary has named at the same depth. The mind stops
+      calling itself broken when it sees that the real disorder is in the cultural
+      frame that has narrowed the available field, and that the Tantric tradition
+      has language and practice for the inner ground from which the wider field can
+      still be recovered.'
+    metadata:
+      semantic_family: opposites-complementary-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_perspective_02
+    header: What Ahjan Sees
+    paragraphs:
+    - The Tantric synthesis of Karma Yoga, Bhakti Yoga, and Jnana Yoga — action, devotion,
+      and discernment — is not a sequence. It is a single integrated practice that
+      mental overload is one of the rare places now requiring all three at once. The
+      young person who keeps showing up to the day, the young person who calls the
+      friend at 2 a.m., and the young person who reads the situation clearly enough
+      to know which conversations are still worth having are all doing the same work
+      from three angles.
+    - Reducing mental health practice to one yoga path — pure action without devotion,
+      or pure contemplation without discernment, or pure analysis without love — misses
+      what the integration is for. The integration is what protects the practitioner
+      from collapse when any single angle becomes unbearable. The Rama lineage has
+      been refining this integration for centuries, and the tradition Ahjan carries
+      is a recapitulation of that work.
+    - 'In that frame, self-blame softens. The fault is not that you have not done
+      enough — most of the cohort has already done more than the inherited culture
+      ever asked of them. The fault is that the work has been carried inside a frame
+      that reduces it to one practice at a time, and the body knows the integration
+      is missing before the conversation does. The Tantric tradition asks the young
+      to recover the practice their inherited spiritual vocabularies forgot how to
+      teach.'
+    metadata:
+      semantic_family: three-yogas-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_perspective_03
+    header: What Ahjan Sees
+    paragraphs:
+    - Etiquette of consciousness, in Ahjan's tradition, is the protocol for approaching
+      what cannot be solved by analysis alone. Mental overload is one of the clearest
+      places it applies. The load is not a problem the individual mind can think its
+      way through. It is a field — a condition the subtle body registers before the
+      conceptual mind catches up. The etiquette is the practice of letting the field
+      be received without collapsing it back into the smaller frame of personal problem-solving.
+    - In practical terms this means the young person who puts the phone down and picks
+      it up again is not in malfunction. They are already practicing a primitive version
+      of the etiquette — refusing to dissociate, refusing to fully escape, but not
+      yet having the formal language for what they are doing. Ahjan's tradition offers
+      the language. It does not invent the practice. The practice is already there
+      in the body, waiting to be named precisely enough that it can be sustained across
+      the years the load will continue.
+    - The reframe is that the etiquette of consciousness is not a contemplative withdrawal.
+      It is the discipline that lets the practitioner stay engaged with the laundry,
+      the next email, the next conversation — and the subtle-body reading, the field
+      of attention, the wider register — without separating them. Laundry and mountains
+      are equally sacred. The next reply and the next breath are the same field.
+    metadata:
+      semantic_family: etiquette-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_perspective_04
+    header: What Ahjan Sees
+    paragraphs:
+    - 'The six worlds, in Ahjan''s tradition, are not metaphors. They are precise
+      language for the layers of experience mental overload moves a young person through
+      in any given day: the hell-realm of the doom-scroll, the hungry-ghost realm
+      of needing one more piece of information, the human realm of moral seriousness
+      that finds its actual ground, the realm of subtle bliss when a moment of contact
+      lands, and the higher realms where the field itself is felt directly. The practice
+      is not to escape any of these. It is to recognize them and to keep the field
+      of attention wide enough that no single realm becomes the only one.'
+    - In that framework the cohort is not in pathology. The cohort is being asked
+      to traverse all six realms in a single day, often without the formal language
+      for what is happening, and the tradition's job is to name the realms precisely
+      enough that the traversal can become conscious rather than collapse. The wheel
+      of dharma turns, and the practice is to stay with the turning rather than to
+      try to stop the wheel.
+    - 'The reframe is that the young people losing function are not failing the moment.
+      They are registering the moment at the level the inherited spiritual vocabularies
+      were not designed to support. The Tantric tradition has the language. The Rama
+      lineage has been refining the practice. The work now is recapitulation: restoring
+      to the next generation the discipline their inherited frames forgot how to teach.'
+    metadata:
+      semantic_family: wheel-six-worlds-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_perspective_05
+    header: What Ahjan Sees
+    paragraphs:
+    - In Ahjan's tradition the subtle body is not metaphor. It is the precise level
+      at which mental overload is actually held — not in the conceptual mind that
+      reads the screening tool, but in the energetic register that knows what the
+      day means before the conceptual mind catches up. The tightening in the jaw,
+      the closing in the chest, the breath that will not deepen are subtle-body readings
+      of cumulative load. The tradition's job is to receive those readings as information,
+      not as malfunction.
+    - The mystical cannot be known — only experienced, and only through the etiquette
+      that lets the smaller self approach what is larger than itself without collapsing
+      either one. Mental overload is one of the places this is now being practiced
+      at scale, mostly without the formal language. Young people are already in contact
+      with something larger than the personal frame their inherited culture handed
+      them. The tradition Ahjan carries does not invent the contact. It names the
+      contact precisely enough that the contact can be sustained.
+    - 'The reframe is that practical and spiritual are not separable. Laundry and
+      mountains are equally sacred. The therapist''s office and the practice room
+      are the same field. The tradition that splits these has nothing to offer at
+      the depth the load now requires, and the tradition that holds them together
+      — Tantric Buddhism in the Rama lineage — has been holding them together for
+      centuries. The work is recapitulation: restoring the integration the inherited
+      frames lost track of.'
+    metadata:
+      semantic_family: subtle-body-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: ahjan_mh_practice_01
+  options:
+  - id: ahjan_mh_practice_01
+    display_name: Bands of Awareness Pause
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute Bands of Awareness Pause for moments
+      when the day's load has narrowed the field of attention into the single frame
+      of personal helplessness. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The two fields — what the day is doing and what the body can sustain — stop
+      collapsing into each other.
+    - A steadier ground returns for the next conversation, the next reply, the next
+      decision about where to put energy.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: bands_of_awareness
+    metadata:
+      semantic_family: bands-of-awareness-pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_practice_02
+    display_name: Etiquette of Consciousness Recall
+    duration: 4 minutes
+    announcement_line: Ahjan teaches a 4-minute Etiquette of Consciousness Recall
+      for moments when the load has been arriving faster than the field of attention
+      can hold, and the protocol for receiving rather than processing has been lost
+      in the rush. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The larger field is approached as something to be received, not solved.
+    - The body returns to a register that can sustain contact without collapse.
+    relief_register:
+    - receive
+    - protocol
+    - field
+    derived_from_frame: etiquette_of_consciousness
+    metadata:
+      semantic_family: etiquette-recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_practice_03
+    display_name: Six Worlds Witness
+    duration: 6 minutes
+    announcement_line: Ahjan teaches a 6-minute Six Worlds Witness practice for moments
+      when one realm of the day's experience — the doom-scroll, the moral seriousness,
+      the brief lift after a connection lands — has become the only field of attention.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The single realm that had become the whole field returns to its actual proportion
+      inside the larger picture.
+    - The other realms become available again, and with them the energy that had been
+      trapped in the one.
+    relief_register:
+    - witness
+    - realm
+    - proportion
+    derived_from_frame: six_worlds
+    metadata:
+      semantic_family: six-worlds-witness
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_practice_04
+    display_name: Karma Yoga Daily Ritual
+    duration: 7 minutes
+    announcement_line: Ahjan teaches a 7-minute Karma Yoga Daily Ritual for moments
+      when staying present to the day has started feeling like grasping after a result
+      rather than offering the work. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The grasping after a felt result softens; the day itself returns to view as
+      the offering it actually is.
+    - Enough ground returns to keep doing the day without requiring the day to deliver
+      relief on its own.
+    relief_register:
+    - offer
+    - action
+    - non-grasping
+    derived_from_frame: karma_yoga_daily
+    metadata:
+      semantic_family: karma-yoga-daily-ritual
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_mh_practice_05
+    display_name: Subtle Body Listening
+    duration: 3 minutes
+    announcement_line: Ahjan teaches a 3-minute Subtle Body Listening practice for
+      moments when the jaw, chest, or breath has been carrying a reading the conceptual
+      mind has not yet caught up to. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The subtle-body reading becomes information rather than malfunction.
+    - The energetic register that had been compressed by the day returns to a range
+      the soul recognizes.
+    relief_register:
+    - listen
+    - subtle body
+    - reading
+    derived_from_frame: subtle_body_listening
+    metadata:
+      semantic_family: subtle-body-listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 3
+    title: Good Health and Well-Being
+    line: The United Nations framework includes mental health and wellbeing in SDG
+      3.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United
+      Nations.
+cta:
+  options:
+  - id: ahjan_mh_cta_01
+    org: Crisis Text Line
+    line: 'If you or someone you know is in crisis, Crisis Text Line provides free,
+      24/7 support. Text HOME to 741741. Door in: join their network.'
+    metadata:
+      semantic_family: door-in-crisis-text
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_cta_02
+    org: 988 Suicide and Crisis Lifeline
+    line: 'If you or someone you know is in crisis, the 988 Suicide and Crisis Lifeline
+      provides free, 24/7 support across the United States. Call or text 988. Door
+      in: their network has handled more than fourteen million contacts since 2022.'
+    metadata:
+      semantic_family: door-in-988-lifeline
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_cta_03
+    org: The Trevor Project
+    line: 'If you are LGBTQ+ and under 25 and in crisis, The Trevor Project provides
+      free, 24/7 support by text, chat, or call. Text START to 678-678. Door in: a
+      network built for the specific cohort.'
+    metadata:
+      semantic_family: door-in-trevor-project
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_cta_04
+    org: NAMI HelpLine
+    line: 'For information, referrals, and peer support on mental health, the NAMI
+      HelpLine is available Monday through Friday. Call 1-800-950-NAMI (6264) or text
+      "HelpLine" to 62640. Door in: connect to the National Alliance on Mental Illness
+      network.'
+    metadata:
+      semantic_family: door-in-nami
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_mh_cta_05
+    org: Active Minds
+    line: 'Active Minds runs peer-led mental health communities on more than 650 US
+      campuses. If a campus chapter exists where you are, it is a low-friction door
+      in. If one does not, the national network can connect you to peers who built
+      the same infrastructure elsewhere.'
+    metadata:
+      semantic_family: door-in-active-minds
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: ahjan_mh_headline_01
+      line: A Tantric Buddhist teacher names mental overload as the field of attention
+        narrowing — and the practice that widens the bands again.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_mh_headline_02
+      line: Opposites are complementary — Ahjan reads mental overload as the precise
+        place the Tantric synthesis has to be lived, not recited.
+      metadata:
+        semantic_family: opposites-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_mh_headline_03
+      line: The Rama lineage holds the integration of Karma Yoga, Bhakti Yoga, and
+        Jnana Yoga — mental health work is one of the rare places now requiring all
+        three at once.
+      metadata:
+        semantic_family: three-yogas-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_mh_headline_04
+      line: Etiquette of consciousness, not another instruction stack — a Tantric
+        teacher on the protocol mental health work has been quietly requiring all
+        along.
+      metadata:
+        semantic_family: etiquette-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_mh_headline_05
+      line: Laundry and mountains are equally sacred — Ahjan refuses the split between
+        inner work and material conditions that the inherited frames keep proposing.
+      metadata:
+        semantic_family: practical-spiritual-frame
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

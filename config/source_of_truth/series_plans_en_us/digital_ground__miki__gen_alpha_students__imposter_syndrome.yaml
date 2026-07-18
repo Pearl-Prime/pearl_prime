@@ -1,0 +1,70 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: digital_ground__miki__gen_alpha_students__imposter_syndrome
+brand: digital_ground
+teacher: miki
+persona: gen_alpha_students
+topic: imposter_syndrome
+byline_author: mira_nolan
+arc:
+  installment_1:
+    book_id: digital_ground__miki__gen_alpha_students__imposter_syndrome__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__imposter_syndrome__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: digital_ground__miki__gen_alpha_students__imposter_syndrome__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__imposter_syndrome__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You are not a fraud who got lucky. You are a real person who
+  learned to hide. This series won't coach you into confidence or optimize your mindset
+  — it sits with you in the exact moment the feeling hits, names what's happening
+  in your body and your feed, and stays until you're no longer alone with it.
+bestseller_hook_family: ''
+emotional_engine: imposter_syndrome_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — somatic, in-the-body language for
+  distress instead of think-your-way-out advice
+- Unfu*k Yourself (Gary John Bishop) — plainspoken, no-fluff register that talks to
+  you like a real person, not a patient
+- How to Do Nothing (Jenny Odell) — refuses the optimize-yourself frame and takes
+  attention and the online self seriously
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 16-19, high school junior through first year of college; grew up with a phone
+    in hand and a public profile before they had a private self
+  where_they_are: It's 11:40pm, the assignment is submitted, and you're still lying
+    in bed scrolling — rereading the group chat where everyone sounded smarter than
+    you, refreshing a classmate's story where she got into the program you were too
+    scared to apply for, screenshotting your own work to check if it's actually good
+    or if you just think it's good. The phone glows. Your chest is tight. Tomorrow
+    you'll smile and say you're fine.
+  what_they_need: Plain, screen-literate language for the gap between how competent
+    they look and how fraudulent they feel — a way to stay in their own body when
+    the alarm goes off, and permission to stop performing a self they don't recognize.
+  what_they_avoid: Boomer self-help, 'just delete the app' platitudes, grindset and
+    hustle culture, toxic positivity, gratitude-journal homework, and anyone who treats
+    them like a personal brand to optimize or a problem to fix.
+series_voice_markers:
+  register: Gen-Z native, screen-literate, plainspoken and warm; ironic without being
+    cynical — a smart slightly-older friend who actually gets the internet, sitting
+    cross-legged on your floor at midnight, never a clinician and never a coach
+  sentence_rhythm: Short declaratives that land like texts, broken by one long honest
+    sentence that says the thing out loud; second person throughout; lowercase intimacy
+    in the felt moments, never shouty, never bullet-pointed advice
+  metaphor_family: the present moment, the body in the room, the phone face-down,
+    ground under bare feet, the breath between notifications, signal cutting through
+    noise — never productivity, machinery, military, or self-optimization
+_needs_authoring: false

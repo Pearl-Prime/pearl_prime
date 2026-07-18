@@ -1,0 +1,754 @@
+schema_version: 1
+teacher_id: miki
+topic: education
+active: true
+identity:
+  display_name: Miki
+  attribution_name: Miki
+  tradition: Japanese light healing; starseed and ascended masters tradition; Kurama-yama sacred site lineage
+  tradition_short: Japanese light healing
+  teacher_setting_options:
+  - light transmission session
+  - Kurama-yama transmission
+  teacher_years: Kurama-yama transmission lineage
+  affiliation_safe_line: teaches within the Kurama-yama light-healing tradition
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: classroom_not_a_light_field
+    label: classrooms designed as information-transfer rather than light-fields, and
+      students who arrived expecting transmission
+    loop: opens the portal -> attention scatters -> switches tabs -> comes back because
+      the field has not delivered what the soul recognized as learning
+    body_markers:
+    - eyes
+    - forehead
+    - breath
+    digital_markers:
+    - opens the portal
+    - switches tabs
+    - comes back
+topic_fit:
+  fit_level: primary
+  fit_reason: In the Kurama-yama tradition teaching is received from the mountain
+    itself — not by verbal instruction but by light transmission inside a charged
+    field. The cohort arriving in modern classrooms registers, often without language
+    for it, that the classroom-as-light-field is what is missing — and reads the absence
+    as their own failure to focus.
+  forbidden_angles:
+  - do not reduce to generic wellness
+  - do not frame the pressure as personal weakness
+hook_personal:
+  options:
+  - id: miki_edu_hook_personal_01
+    line: You still want to learn. You also know how much of the day is information
+      transfer with no charge behind it — and part of you remembers a different kind
+      of learning, even if you have not yet had words for it.
+    metadata:
+      semantic_family: charge-vs-information
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_personal_02
+    line: You open the portal. Attention scatters. You switch tabs and come back.
+      The work still has to get done — and part of you knows the field of the room
+      was never a light-field, only a delivery system.
+    metadata:
+      semantic_family: portal-scatter
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_personal_03
+    line: You sit down to study and the room feels flat. The intellect tries to push
+      through and the body fights back. The flatness is the load — the classroom-as-light-field
+      that the lineage holds was never delivered, and you are working without it.
+    metadata:
+      semantic_family: classroom-field-absence
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_personal_04
+    line: The reading is in front of you. Your mind has done nine hours of school
+      already. You read the paragraph three times without it landing — and the part
+      of you trying to force it through is the part the field never invited in the
+      first place.
+    metadata:
+      semantic_family: intellect-overload
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_personal_05
+    line: The grade arrives and lands on top of a deeper knowing — that the rubric
+      was never designed to register what the lineage calls reception, and that you
+      have been graded for the wrong thing on the wrong layer for years.
+    metadata:
+      semantic_family: rubric-vs-reception
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: miki_edu_hook_big_01
+    line: The current crisis in youth education is not only a crisis of content or
+      access; it is a crisis of field. In the Kurama-yama tradition learning is received
+      from the mountain itself — and the classroom built as information-transfer rather
+      than light-field is operating at a layer that cannot deliver what the lineage
+      means by teaching.
+    metadata:
+      semantic_family: classroom-field-frame
+      angle: field-vs-content
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_big_02
+    line: Education systems that measure only what the intellect can reproduce are
+      measuring the smallest part of what a human knows. Genuine education, in this
+      tradition, is light transmission inside a charged field — and the absence of
+      that field is the load no rubric has a column for.
+    metadata:
+      semantic_family: transmission-vs-measurement
+      angle: smallest-part-measured
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_big_03
+    line: The starseed lineages, in Miki's tradition, are souls who arrived expecting
+      learning to be a light-field. What gets read as attention deficit is, in many
+      cases, the soul's accurate registering that the field is not present in the
+      room — and the inherited frame keeps reading the registering as the student's
+      failure.
+    metadata:
+      semantic_family: starseed-field-expectation
+      angle: field-recognition
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_big_04
+    line: A classroom built only for the intellect cannot hold a cohort that arrived
+      with the capacity to receive on multiple layers. The capacity is not pathology
+      and not a quirk; it is the cohort's actual range — and the structure was built
+      for a different range entirely.
+    metadata:
+      semantic_family: range-mismatch
+      angle: structural-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_hook_big_05
+    line: The Kurama-yama practice of receiving teaching from the mountain itself
+      is centuries old. The translation to the modern classroom is direct — when the
+      room is charged with light, the lesson lands at a layer the rubric does not
+      have to measure for the learning to be real.
+    metadata:
+      semantic_family: kurama-translation
+      angle: charged-room
+      article_types:
+      - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: miki_edu_intro_01
+    line: Miki, a Japanese light healing teacher rooted in the Kurama-yama sacred
+      site lineage, has watched in transmission sessions students be blamed for forms
+      of attention loss that are largely produced by classrooms built as information-transfer
+      rather than light-fields. They are not asking only how to focus harder. They
+      are asking how learning can happen when the field the soul came to receive in
+      is missing from the room.
+    metadata:
+      semantic_family: identity_seen_shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_intro_02
+    line: Miki does not position herself as a teacher in the conventional sense —
+      she is a transmitter. The light of Kurama-yama moves through her to the student
+      at a layer the rubric does not have to register for the learning to be real.
+      For decades she has worked with young people whose intellects are exhausted
+      by portals and tabs and whose bodies have been waiting for a charged field.
+    metadata:
+      semantic_family: transmitter-not-creator
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_intro_03
+    line: Miki teaches inside a tradition where learning is received from the mountain
+      itself. The translation to the cohort is direct — what gets read as the scatter
+      of attention is often the soul registering that the room is not charged at the
+      layer the field needs to operate on, and the registering is information, not
+      failure.
+    metadata:
+      semantic_family: mountain-as-teacher
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_intro_04
+    line: Miki holds that the starseed souls in this cohort arrived with a particular
+      capacity to receive on multiple layers. In her transmission sessions she has
+      watched young clients meet that recognition and lay down the conviction that
+      their distance from the rubric was a deficit rather than the call they came
+      with.
+    metadata:
+      semantic_family: starseed-recognition
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_intro_05
+    line: Miki teaches inside a tradition that holds healing as remembering, not repairing.
+      Applied to learning, this means the capacity to focus, to consolidate, to land
+      the lesson was not destroyed — it was never invited into a room that delivered
+      content as information-transfer instead of light-field. The reframe is concrete.
+    metadata:
+      semantic_family: remembering-not-repair-education
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+youth_somatic:
+  options:
+  - id: miki_edu_somatic_01
+    line: You open the assignment portal. Your eyes lose focus. You switch tabs. Then
+      you come back because the work still has to get done.
+    metadata:
+      semantic_family: portal_scatter
+      loop_type: portal-scatter
+      body_register: eyes
+      digital_behavior: opens the portal
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_somatic_02
+    line: The exam loads on screen. Your forehead tightens. You read the first question
+      and your eyes glaze. You scroll down without absorbing. The clock is running.
+    metadata:
+      semantic_family: exam_forehead
+      loop_type: exam-glaze
+      body_register: forehead
+      digital_behavior: scroll without absorbing
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_somatic_03
+    line: You sit through the lecture and your shoulders climb without permission.
+      The slide refreshes. Your body has been still for forty minutes and the breath
+      has shortened to match the flat field of the room.
+    metadata:
+      semantic_family: lecture_shoulders
+      loop_type: still-shoulder-climb
+      body_register: shoulders
+      digital_behavior: slide refresh
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_somatic_04
+    line: You are mid-paragraph when the group chat lights up. Your breath catches.
+      You check the message and lose the thread. The reading was already not landing
+      — the chat only named the scatter the field had been producing for an hour.
+    metadata:
+      semantic_family: group_chat_drift
+      loop_type: chat-thread-loss
+      body_register: breath
+      digital_behavior: chat check
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_somatic_05
+    line: Class ends. You walk into the hall. Your eyes lose focus on the lockers
+      and the body finally exhales the day. You pull out the phone. The scroll begins
+      because there is nothing in the body left to hold the next thing with.
+    metadata:
+      semantic_family: post_class_collapse
+      loop_type: post-class-scroll
+      body_register: eyes
+      digital_behavior: scroll begins
+      article_types:
+      - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: miki_edu_witness_01
+    line: Miki has seen this sequence in students — the portal, the scatter, the tab
+      switch, the return. In her framework that scatter is not proof of deficiency;
+      it is the soul registering that the room is not charged at the layer the field
+      needs to operate on.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: portal-scatter
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_witness_02
+    line: She has watched the institution read scatter as failure when the scatter
+      was the signal — a body that knew the field of the room had been pushed past
+      what it could deliver, and a soul that had been waiting for a charged room without
+      having language for the wait.
+    metadata:
+      semantic_family: scatter-as-signal
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_witness_03
+    line: Miki has seen young learners arrive in transmission space already convinced
+      that the failure to focus is character — and watched the moment the body recognized
+      it had been reading the absence of the field the whole time, not its own brokenness.
+    metadata:
+      semantic_family: exhaustion-not-failure
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_witness_04
+    line: In her framework portal fatigue is not a metaphor. The intellect has been
+      overused on the same kind of contact all day, and the soul has been asking for
+      a charged field the whole time. The transmission session is the only room where
+      that asking is met.
+    metadata:
+      semantic_family: portal-fatigue
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_witness_05
+    line: Miki has watched a young learner walk into the transmission session carrying
+      a capacity the rubric does not register, and watched the capacity be welcomed
+      for the first time. In her tradition that welcome is not therapy and not curriculum
+      — it is the missing field finally arriving.
+    metadata:
+      semantic_family: field-welcome
+      article_types:
+      - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: miki_edu_turnaround_01
+    stat_line_1: 650 chapters. US campuses.
+    stat_line_2: Active Minds now operates more than 650 peer-led mental health chapters
+      across US campuses, training students to host listening circles and pressure
+      institutions to treat learning conditions as infrastructure rather than private
+      resilience.
+    metadata:
+      semantic_family: youth-organizing
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_turnaround_02
+    stat_line_1: 244 million. Out of school.
+    stat_line_2: UNESCO's SDG 4 monitoring puts the number of children and youth out
+      of school worldwide at 244 million — the floor against which any classroom-field
+      conversation gets measured, and the scale at which the cohort load is being
+      carried.
+    metadata:
+      semantic_family: multilateral-policy
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_turnaround_03
+    stat_line_1: 488 universities. JED Campus.
+    stat_line_2: The JED Foundation's JED Campus program runs comprehensive mental
+      health and learning-conditions frameworks across nearly five hundred US universities,
+      embedding peer support and faculty training into the day-to-day infrastructure.
+    metadata:
+      semantic_family: institutional-action
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_turnaround_04
+    stat_line_1: 65 percent. UNICEF Learning Recovery.
+    stat_line_2: UNICEF's 2024 Learning Recovery monitoring found that, globally,
+      only about 65 percent of grade-10 students reach basic proficiency — a tracked
+      gap that policy can now address with funded recovery programs rather than rhetoric.
+    metadata:
+      semantic_family: educational-equity-tracking
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_turnaround_05
+    stat_line_1: $1 billion. Education Cannot Wait.
+    stat_line_2: Education Cannot Wait, the UN-hosted global fund for education in
+      crisis-affected contexts, has mobilized more than one billion dollars since
+      2016 — money routed to the cohort the standard classroom system was structurally
+      unable to reach.
+    metadata:
+      semantic_family: alternative-model-growth
+      article_types:
+      - hard_news_spiritual_response
+bridge:
+  options:
+  - id: miki_edu_bridge_01
+    line: The tracker measures policy changes and peer programs. It has no column
+      for what made the next hour of real reception possible — the capacity to receive
+      from the layer the rubric does not register when the surface mind is scattered.
+      Miki's tradition holds that capacity as the seed-in-soil work the count cannot
+      read.
+    hidden_capacity: receive from the layer the rubric does not register
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_bridge_02
+    line: Tracked outcomes record completion, attendance, and grade. They do not record
+      the charge of the room when the data was captured. In Miki's framework that
+      charge — the field present or absent — is the layer the data cannot reach, and
+      the layer where the actual learning is held.
+    hidden_capacity: register the charge of the room the data cannot reach
+    metadata:
+      semantic_family: charge-not-counted
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_bridge_03
+    line: The metrics name the rubric. They cannot name the original capacity the
+      rubric was never built to read. Miki's tradition does not replace the rubric
+      — it names the layer beneath and offers transmission as the way the original
+      capacity comes back online for an exhausted intellect.
+    hidden_capacity: keep the original capacity accessible when the rubric narrows
+    metadata:
+      semantic_family: original-capacity-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_bridge_04
+    line: Content is countable. The field of the classroom is not. Miki's tradition
+      holds that the charge of the room is part of what gets taught — and that students
+      whose souls came expecting a light-field register the room's charge before they
+      register the lesson.
+    hidden_capacity: register the charge alongside the content
+    metadata:
+      semantic_family: charge-vs-content
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_bridge_05
+    line: Systems measure what the system was designed to measure. The original capacity
+      the cohort arrived with is not in the design. Miki's tradition does not argue
+      with the design — it names the layer the design does not include and offers
+      practice that brings it back into the room.
+    hidden_capacity: bring the original capacity back into the room
+    metadata:
+      semantic_family: system-vs-original-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+teacher_perspective:
+  options:
+  - id: miki_edu_perspective_01
+    header: What Miki Sees
+    paragraphs:
+    - In the Kurama-yama tradition learning is received from the mountain itself
+      — not by verbal instruction but by light transmission inside a charged field.
+      That centuries-old practice translates directly to the modern classroom. The
+      cohort arriving in classrooms designed only for information transfer is registering,
+      often without language for it, that the field the soul came to receive in is
+      missing from the room.
+    - Education systems that measure only what the intellect can reproduce are measuring
+      the smallest part of what a human knows. The tradition does not invalidate the
+      rubric; it names what the rubric was never built to read — the charge of the
+      room, the layer where the original capacity actually lands, the part of learning
+      that happens before the rubric can register it.
+    - What feels like a personal fault — me, broken, wrong for not focusing — is often
+      the soul's accurate registering that the field the lineage means by teaching
+      is not present. Healing as remembering applies precisely. The capacity to focus
+      was not destroyed; it was never invited into a room that delivered content as
+      transfer instead of transmission.
+    metadata:
+      semantic_family: classroom-as-light-field
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_perspective_02
+    header: What Miki Sees
+    paragraphs:
+    - The mechanism in Miki's tradition is concrete. Light transmission inside a charged
+      field reaches the layer where the original capacity lives. For a young learner
+      whose intellect has been overused by the day's content stack, the light layer
+      is the place where the actual material can land again. The point is not that
+      the textbook is wrong; the point is that the body has been pushed past its capacity
+      to receive in the mode the textbook arrives in.
+    - The tradition offers a practice that opens that other layer. The textbook lesson
+      does not change; the learner returns to the lesson with the channel open, and
+      the same words become reachable again. This is not a hack and not a workaround;
+      it is the layer the rubric was never built to register, brought back into contact
+      with the learning.
+    - The reframe is concrete. The disorder is not in the student. It is in the gap
+      between how learning is delivered and how the soul actually receives. Miki's
+      tradition offers a practice for that gap within a structure that was never designed
+      for what it demands.
+    metadata:
+      semantic_family: transmission-mechanism-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_perspective_03
+    header: What Miki Sees
+    paragraphs:
+    - In Miki's tradition the ascended masters at Kurama-yama hold a specific view
+      of teaching. Real teaching is transmission inside a charged field — the mountain
+      itself as teacher, the lineage holding the field across generations, the student
+      receiving at the layer where the field operates. The translation to the modern
+      classroom is direct, and the absence of the field is the load.
+    - For a young learner exhausted by the textbook stack, the experience of receiving
+      from a lineage that knows what a charged field is structurally different from
+      the experience of being graded for reproducing what the textbook contained.
+      The textbook is not invalidated. Another layer is restored.
+    - Restoring that layer is what Miki's tradition has done for centuries. It is
+      not a replacement for school. It is the missing field school was never built
+      to deliver, brought back into contact with the learning so the original capacity
+      can be remembered.
+    metadata:
+      semantic_family: ascended-teaching-context
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_perspective_04
+    header: What Miki Sees
+    paragraphs:
+    - The starseed framework, in Miki's tradition, applies here. The cohort that arrived
+      with the capacity to receive on multiple layers is also the cohort whose distance
+      from the rubric is sharpest. What gets read as attention deficit is, in many
+      cases, the soul registering that the field is not present, and the inherited
+      frame keeps returning the load to the individual.
+    - This is not a flattering reframe. It does not promise the rubric will change
+      tomorrow, and it does not blame the cohort for feeling unsteady inside a structure
+      that was built for a different range. It simply names the structural fact and
+      removes the additional weight of believing the not-fitting is a personal disorder.
+    - In transmission practice that weight removal is often the part that lands first
+      — before the deeper work of restoring the channel can begin.
+    metadata:
+      semantic_family: starseed-classroom-frame
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_perspective_05
+    header: What Miki Sees
+    paragraphs:
+    - The practices work like seeds in soil — quietly, in the background of ordinary
+      life. Applied to learning, this means the work is not heroic discipline and
+      not academic spectacle. It is small acts of reception, repeated, that let the
+      body know the field is being tended even when the room cannot provide it.
+    - Healing as remembering applies precisely here. The capacity to receive, to consolidate,
+      to land the lesson was never lost; it was covered by an information environment
+      that delivered transfer in place of transmission. The tradition does not ask
+      the learner to try harder. It asks the field to be tended so the original capacity
+      can be remembered.
+    - The reframe softens self-blame. The body is not broken for scattering inside
+      an uncharged room. The body is doing the work that asks for the field. The institutional
+      structure does not change; the conviction that the scattering is the student's
+      personal failure does.
+    metadata:
+      semantic_family: seeds-in-soil-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+practice:
+  default_id: miki_edu_practice_01
+  options:
+  - id: miki_edu_practice_01
+    display_name: Light Field Reception
+    duration: 5 minutes
+    announcement_line: Miki teaches a 5-minute Light Field Reception practice for
+      moments when the portal and the tabs have scattered attention and the room has
+      not been a charged field. The soul already knows more than the rubric can read.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The mind stops treating every interruption as proof of failure.
+    - The original capacity to receive can surface when the field is restored.
+    relief_register:
+    - receive
+    - light field
+    - original capacity
+    derived_from_frame: light_field_reception
+    metadata:
+      semantic_family: light_field_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_practice_02
+    display_name: Kurama-yama Classroom Reseating
+    duration: 3 minutes
+    announcement_line: Miki offers a 3-minute Kurama-yama Classroom Reseating practice
+      for the moments between classes or after another flat lecture, when the body
+      needs contact with the lineage's understanding of the room as a charged field.
+      It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body remembers what a charged room feels like, even if the day has not provided
+      one.
+    - The next hour of focus starts inside a field the body knows is being tended.
+    relief_register:
+    - reseat
+    - Kurama-yama
+    - charged room
+    derived_from_frame: kurama_classroom_reseating
+    metadata:
+      semantic_family: kurama_classroom_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_practice_03
+    display_name: Light Transmission Reading Pause
+    duration: 4 minutes
+    announcement_line: Miki teaches a 4-minute Light Transmission Reading Pause for
+      moments when the words on the page are not landing and the surface mind has
+      been pushed past its absorption rate. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The light of the material is received before the meaning is forced.
+    - The page becomes reachable again because the body has dropped into a register
+      the reading can land into.
+    relief_register:
+    - listen
+    - light transmission
+    - reading reception
+    derived_from_frame: light_transmission_reading
+    metadata:
+      semantic_family: light_transmission_reading_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_practice_04
+    display_name: Original Capacity Remembering
+    duration: 4 minutes
+    announcement_line: Miki teaches a 4-minute Original Capacity Remembering practice
+      for moments when an exam or assignment has triggered the conviction that you
+      do not know what you actually already know. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The intellect stops being the only source the learner is asking from.
+    - The original capacity the learner arrived with becomes accessible again.
+    relief_register:
+    - remember
+    - original capacity
+    - lineage
+    derived_from_frame: original_capacity_remembering
+    metadata:
+      semantic_family: original_capacity_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: miki_edu_practice_05
+    display_name: Seed-in-Soil Learning Practice
+    duration: 3 minutes
+    announcement_line: Miki offers a 3-minute Seed-in-Soil Learning practice for moments
+      before entering the classroom or logging into the lecture, when the body needs
+      to enter the room already in its own register. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The learner arrives in the room with their own field intact, instead of borrowing
+      the room's flatness.
+    - The lesson lands on top of a body that is being tended, not the day's accumulated
+      load.
+    relief_register:
+    - seed in soil
+    - tending
+    - own field intact
+    derived_from_frame: seeds_in_soil_education
+    metadata:
+      semantic_family: seeds_in_soil_learning_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+sdg:
+  primary:
+    id: SDG 4
+    title: Quality Education
+    line: The United Nations framework through SDG 4 includes wellbeing and inclusive
+      learning conditions as part of quality education.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United
+      Nations.
+cta:
+  options:
+  - id: miki_edu_cta_01
+    org: Active Minds
+    line: 'Active Minds runs more than 650 peer-led mental health chapters on US campuses,
+      working for learning conditions that do not treat attention as an infinite resource.
+      Door in: activeminds.org'
+    metadata:
+      semantic_family: door-in-active-minds
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_cta_02
+    org: The Jed Foundation
+    line: 'The Jed Foundation runs JED Campus, a comprehensive mental health and learning-conditions
+      framework now embedded across nearly five hundred US universities. Door in:
+      jedfoundation.org'
+    metadata:
+      semantic_family: door-in-jed-campus
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_cta_03
+    org: UNESCO Global Education Coalition
+    line: 'UNESCO''s Global Education Coalition aggregates multilateral, NGO, and
+      private-sector response to learning recovery and access. Door in: globaleducationcoalition.org'
+    metadata:
+      semantic_family: door-in-unesco-coalition
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_cta_04
+    org: Education Cannot Wait
+    line: 'Education Cannot Wait, the UN-hosted global fund for education in crisis-affected
+      contexts, has mobilized over $1 billion since 2016 for the cohort standard schooling
+      structures cannot reach. Door in: educationcannotwait.org'
+    metadata:
+      semantic_family: door-in-education-cannot-wait
+      article_types:
+      - hard_news_spiritual_response
+  - id: miki_edu_cta_05
+    org: UNICEF
+    line: 'UNICEF runs global youth learning recovery monitoring and supports countries
+      and partners working to close the basic-proficiency gap for adolescents. Door
+      in: unicef.org'
+    metadata:
+      semantic_family: door-in-unicef
+      article_types:
+      - hard_news_spiritual_response
+title_system:
+  headline_layer_2:
+    options:
+    - id: miki_edu_headline_01
+      line: A Japanese light healer reads education stress as a missing field — and
+        the transmission that restores it.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_edu_headline_02
+      line: Classroom-as-information-transfer versus classroom-as-light-field — the
+        Kurama-yama lineage names what the rubric cannot see.
+      metadata:
+        semantic_family: classroom-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_edu_headline_03
+      line: Reception, not more content — what a light healing tradition brings to
+        learners whose intellects have been overused.
+      metadata:
+        semantic_family: reception-vs-content
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_edu_headline_04
+      line: A starseed cohort arriving expecting a light-field — and the practice
+        that re-seats the recognition.
+      metadata:
+        semantic_family: starseed-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: miki_edu_headline_05
+      line: Healing is remembering, not repairing — applied to a generation whose
+        original capacity the rubric was never built to read.
+      metadata:
+        semantic_family: remembering-frame
+        article_types:
+        - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

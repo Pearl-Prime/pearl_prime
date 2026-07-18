@@ -1,0 +1,55 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "ahjan",
+  "quality_profile": "draft",
+  "gates_run": true,
+  "gates_hard": false,
+  "gate_failures": [],
+  "overall_status": "PASS",
+  "book_pass_gate": "SKIPPED_SPINE_MODE",
+  "pre_depth_total_words": 2530,
+  "post_depth_total_words": 4500,
+  "frame": "somatic_first",
+  "exercise_slots_dropped": [
+    {
+      "chapter": 5,
+      "chapter_index": 4,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 1
+    },
+    {
+      "chapter": 7,
+      "chapter_index": 6,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 1
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 1
+    }
+  ],
+  "chapter_contract_warnings": [
+    "chapter 6: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak",
+    "chapter 7: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak",
+    "chapter 8: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak",
+    "chapter 9: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak",
+    "chapter 10: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak",
+    "chapter 11: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak",
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": []
+}

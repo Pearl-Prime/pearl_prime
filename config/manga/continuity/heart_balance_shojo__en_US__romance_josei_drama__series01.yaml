@@ -1,0 +1,51 @@
+schema_version: "1.0.0"
+artifact_type: series_continuity_state
+series_id: heart_balance_shojo__en_US__romance_josei_drama__series01
+last_episode_id: ep_001
+
+volume_arc_position:
+  volume: 1
+  chapter_in_volume: 1
+  volume_title: "Eight Bars, Unfinished"
+
+settled_state: >-
+  Mio believes she can carry the tune in the open — she sat on the window seat
+  and hummed aloud. The almost with Ren holds; neither has named the margin duet.
+
+rival_state: []
+
+motif_state:
+  condition: shared_song_whole
+  lettering_state: pencil_answered_ink — both halves played once; margin duet begun
+  vessel_state: the_shared_song — migration from dark shop to lit window complete for V1
+
+active_pressures:
+  - premiere_clock
+  - pencil_vs_ink
+  - window_seat_custom
+
+set_pieces_fired:
+  - margin_duet
+  - drawer_almost_touch
+  - doorway_eye_lock
+  - bench_proximity
+  - window_seat_claim
+
+unresolved_hooks:
+  - Ren almost said it; the ALMOST holds
+  - Premiere in three weeks; co-credit undecided
+  - Courier misread the drawer exchange as romance — press risk seeded
+  - Next Thursday — Mio's move
+
+next_episode_mandate:
+  episode_id: ep_002
+  must_rebreak: >-
+    The shared song must fail in a NEW context — premiere pressure or public
+    scrutiny — not a clean cure of the almost. Mio's open hum must cost her
+    something visible (reputation, job, Ren's commission).
+  must_plant:
+    - rival_arranger pressure — someone plays Ren's phrase perfectly without margin history
+    - premiere_clock tightens — date moves or rehearsal demand arrives
+  forbidden:
+    - wound→turn→renewal therapeutic cadence to a named resolution
+    - Ren confesses cleanly or Mio is told she is worthy in caption

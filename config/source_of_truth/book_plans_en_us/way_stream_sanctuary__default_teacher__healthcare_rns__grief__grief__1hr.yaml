@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__grief__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__grief__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__through_loss__1hr
+  name: Through the Low Places — for Nurses (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Grief: After the Loss (3)'
+subtitle: A Field Guide for Healthcare Rns Navigating Grief
+cover_tagline: You held the family while they fell apart. Nobody held you. This hour
+  does.
+description:
+  short_blurb: For the nurse carrying a patient's death with nowhere to put it. This
+    one hour names the weight as grief, walks you down into it instead of asking you
+    to move on, and lets you set part of it down — no stages, no closure, no return-to-baseline.
+  long_description: 'There was a patient you couldn''t save. Maybe just one. Maybe
+    one whose face has come to stand in for all the others. You did everything right
+    and it didn''t matter, and then you cleaned up the room, charted the time of death,
+    and walked into the next bay because that is the job and there was no one to cover
+    you. You went home at the end of it. You said you were fine when they asked. And
+    the weight of that loss has been sitting on your chest ever since, lodged in the
+    exact spot where grief lives when it has nowhere else to go.
+
+
+    This hour is for the nurse grieving people the world never gave you permission
+    to grieve. The one who held a stranger''s hand while their monitor went flat,
+    who broke the news to a family in a corridor and then had to be the steady one
+    while they came apart, who carries first names and room numbers no one at home
+    would ever recognize. Who has been told, in a hundred quiet and not-so-quiet ways,
+    that this is simply part of the work and you should be used to it by now. You
+    are not used to it. You were never supposed to be used to it. Getting used to
+    it was never the job.
+
+
+    Waystream calls this the grief engine, and it moves in three plain steps inside
+    a single sitting. Recognition: it names what you are carrying as real grief, with
+    its full weight and its full right to exist — not an occupational hazard to shake
+    off between admissions, not a sign you''ve grown too attached. Descent: rather
+    than handing you a cleaner way to compartmentalize, it walks you down into the
+    loss itself, gently and deliberately, because the grief you keep carefully stepping
+    over is exactly the grief that keeps stepping on you. Integration: you come back
+    up able to hold the people you cared for without that weight crushing the breath
+    out of you — carrying them differently, on purpose, instead of carrying them alone
+    and in silence.
+
+
+    This will not give you closure or move you neatly through five tidy stages. It
+    will not tell you the death had a hidden reason, or that everything happens for
+    one. No worksheets, no morning routine, no forced gratitude for the lesson buried
+    in someone''s worst day. Your grief is not a problem to be optimized away, and
+    being a nurse has never once meant it isn''t supposed to hurt.
+
+
+    You are allowed to grieve the patient you lost. You were the one who was there,
+    all the way to the end, and you can finally set down what you''ve been carrying
+    alone.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  secondary:
+  - nurses
+  - grief for nurses
+  - one hour
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — grief honored as it is, without stages
+  or a fix
+- The Year of Magical Thinking (Joan Didion) — the unfiltered, secular interior of
+  loss
+- When Breath Becomes Air (Paul Kalanithi) — mortality witnessed from inside clinical
+  work
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -1,0 +1,98 @@
+# Canonical topics — single source of truth for asset planning.
+# Must stay in sync with config/topic_engine_bindings.yaml (validated by validate_canonical_sources.py).
+# Authority: V4 Freebies + Immersion Ecosystem plan §2.1.
+# Unified 12 (unified_personas.md Part 2) + legacy (anxiety, courage, financial_stress) retained in bindings.
+#
+# 2026-04-24 — Pearl Prime Phase A unblock:
+# Expanded from 17 → 57 topics. Added 40 teacher-signature topics that were referenced
+# by config/catalog_planning/audiobook_video_catalog.yaml teacher_brand_channel_map
+# but not canonical. Needed so Pearl Prime series plans can use the REAL bestseller-hook
+# vocabulary per teacher (impermanence for ahjan, qi_cultivation for master_feung, etc.)
+# instead of nearest-canonical approximations that lose market differentiation.
+
+topics:
+  # ── Core wellness topics (universal, cross-teacher) ────────────────────────
+  - anxiety
+  - boundaries
+  - burnout
+  - compassion_fatigue
+  - courage
+  - depression
+  - financial_anxiety
+  - financial_stress
+  - grief
+  - imposter_syndrome
+  - overthinking
+  - self_worth
+  - sleep_anxiety
+  - social_anxiety
+  - somatic_healing
+  # Added in Big View Phase 2 — reconciled from atoms/ and catalog_generation_config.yaml
+  - adhd_focus   # Attention, focus, executive function, ADHD management
+  - mindfulness  # Present-moment awareness, meditation, mindful living
+
+  # ── Teacher-signature topics (from teacher_brand_channel_map, added 2026-04-24) ──
+
+  # ahjan / stillness_press — iyashikei-native, contemplative-ink-wash
+  - impermanence       # Buddhist impermanence framing; ahjan's cornerstone
+  - alarm_systems      # anxiety-mechanism-specific vocabulary
+  - pausing            # the essential gap-practice
+  - forest_refuge      # nature-as-settling scene motif
+  - simplicity         # less-is-more teaching register
+  - renunciation       # letting-go practice
+
+  # pamela_fellows / somatic_wisdom — soft-clinical josei register
+  - perfectionism              # clinical pressure pattern
+  - performance_pressure       # distinct from perfectionism — external source
+  - embodiment                 # somatic-awareness core practice
+
+  # master_feung / qi_foundation — traditional Chinese brushwork
+  - qi_cultivation     # core qigong framing
+  - stability          # rooted practice vocabulary
+  - foundation         # ground-building register
+  - chronic_stress     # TCM-adjacent framing distinct from acute anxiety
+
+  # kenjin / cognitive_clarity — stark zen ink
+  - zen                # zen tradition positioning
+  - direct_pointing    # zen-specific teaching method
+  - sitting            # shikantaza / just-sitting practice
+  - koans              # zen paradox as cognitive disruption
+
+  # miki / digital_ground — digital minimalism iyashikei
+  - gen_z_grounding    # generational framing specific to miki
+  - digital_presence   # screen-time boundary adjacent
+  - identity           # self-definition anxiety
+
+  # miyuki / relational_calm — wabi-sabi simplicity (JP-primary) — per OPD-111
+  - relational_harmony # relationship anxiety reframe
+  - shame              # distinct topic, not just an engine
+  - inner_security     # attachment-adjacent
+
+  # maat / heart_balance — geometric Egyptian mysticism
+  - justice            # shadow-work framing
+  - balance            # homeostasis register
+  - heart_weighing     # Egyptian-mythic self-assessment
+
+  # master_wu / warrior_calm — martial ink
+  - panic_response     # acute anxiety mechanism
+  - composure          # martial stillness
+  - warrior_calm       # brand namesake — distinct practice
+
+  # master_sha / sleep_restoration — luminous night iyashikei
+  - sleep_repair       # distinct from sleep_anxiety — restoration not prevention
+  - energy_medicine    # TCM/ancient framing
+  - restoration        # broader recovery beyond sleep
+
+  # omote / body_memory — textured grief aesthetic
+  - body_memory        # brand namesake — somatic-memory practice
+  - seasonal_healing   # grief-through-time register
+  - somatic            # short-form alias for somatic_healing
+
+  # ra / solar_return — ember abstraction
+  - solar_return       # brand namesake — cyclical-return practice
+  - fire_renewal       # phoenix-adjacent rebirth register
+
+  # sai_ma / devotion_path — flowing warmth
+  - compassion         # distinct from compassion_fatigue — the capacity itself
+  - devotion           # bhakti-adjacent register
+  - surrender          # release-into-receiving practice

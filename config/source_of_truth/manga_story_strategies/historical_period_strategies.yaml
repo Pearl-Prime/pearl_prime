@@ -1,0 +1,454 @@
+schema_version: 1.0.0
+genre: historical_period
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  duty: strategy_01
+  legacy: strategy_02
+  regret: strategy_03
+  honor: strategy_04
+  belonging: strategy_05
+character_pool:
+  protagonist:
+  - Eun-ju, a magistrate's overlooked second daughter
+  - Tomas, a stonemason bound to the cathedral works
+  - Lady Mireille, widow of a disgraced house
+  - Hideo, a retainer between two masters
+  - Wei, a scribe who copies edicts he does not believe
+  companion:
+  - an old gatekeeper who has watched three generations pass
+  - a blind ferryman who never asks where you are going
+  - the master craftsman, half-deaf, who teaches with his hands
+  - a former soldier turned monastery cook
+  - an elder midwife who remembers everyone's first cry and most of their last
+  setting:
+  - a walled provincial capital under a failing dynasty
+  - a coastal trading port where the old laws are loosening
+  - a snowbound mountain garrison at the empire's edge
+  - a temple town along a pilgrim road
+  - a harvest estate the season after a hard war
+strategies:
+  strategy_01:
+    name: The Lamp Left Burning
+    archetype_template: the_post_one_must_keep
+    description: 'DUTY vs SELF, externalized as a hereditary watch: a lamp at a wall, a gate, a tower
+      that someone must keep lit through the night while the rest of the house sleeps. The protagonist
+      did not choose the post; it was inherited, and it is eating the life it was meant to protect. The
+      arc never argues that duty is noble or a trap — it lets the lamp do the arguing. The turn is the
+      moment duty stops being a chain and becomes, by one small free act, a thing the protagonist would
+      have chosen anyway. No speech explains it; it is in whether the hand lifts the lamp or sets it down.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, the dead middle of the night. {protagonist} climbs the cold stair to the watch-lamp
+          for the four-hundredth time, counting the steps the way you count so you don''t have to feel
+          them. Below, the whole house sleeps under the light they keep.'
+        camera_hint: wide_establishing_cold
+        mood_hint: depletion
+        is_carrier: true
+      - beat: 2
+        text: The oil is low again. {protagonist} pours from the last jar with a steadiness that has cost
+          something to learn — the hand does not shake, and that is the problem. They have become very
+          good at a thing that is hollowing them out.
+        camera_hint: close_up_hands_pouring
+        mood_hint: weariness
+        is_carrier: true
+      - beat: 3
+        text: A letter from the capital sits unopened in their sleeve — an offer, a road out, a life with
+          their own name on it. They do not open it. The lamp must be tended first. The lamp is always
+          first.
+        camera_hint: medium_letter_in_sleeve
+        mood_hint: longing
+        is_carrier: true
+      - beat: 4
+        text: '{companion} comes up with a second blanket, uninvited, and sits without a word against
+          the far wall. They have kept this watch in another year, for another keeper. They do not say
+          so. They simply stay.'
+        camera_hint: two_shot_seated_wall
+        mood_hint: company
+        is_carrier: false
+      - beat: 5
+        text: 'Toward dawn {protagonist} finally says it, low, to the flame and not to {companion}: ''I
+          do not know if I am keeping the light, or it is keeping me.'' {companion} watches the same flame.
+          ''The lamp does not care which. Only you do.'''
+        camera_hint: close_up_firelit_faces
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} lifts the unopened letter toward the flame — to burn it, to choose the post
+          forever. Their hand stops a breath away from the fire. They hold it there.'
+        camera_hint: extreme_close_letter_near_flame
+        mood_hint: suspended
+        is_carrier: true
+      - beat: 7
+        text: They do not burn it, and they do not leave. One slow breath. They set the letter down, unburned,
+          and trim the wick — the first time the choosing has felt like theirs and not the dead hands
+          that handed it down.
+        camera_hint: close_up_still_hands
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 8
+        text: First grey light. {protagonist} comes down the stair no longer counting the steps. The watch
+          is the same watch. Something in how they carry it is not the same.
+        camera_hint: wide_descending_stair_dawn
+        mood_hint: lightness
+        is_carrier: true
+      - beat: 9
+        text: The house wakes to a lamp still burning above them, the way it has every morning of their
+          lives — and for the first time the keeper, washing at the well, is not counting the cost. {companion}
+          passes, and almost smiles.
+        camera_hint: wide_courtyard_morning
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the lamp still burning, the letter unburned beside it
+        ch2: a keeper coming down a stair without counting the steps
+        ch3: the offer from the capital left open in the sleeve, neither taken nor refused
+  strategy_02:
+    name: What the Hands Leave
+    archetype_template: the_work_that_outlives_the_maker
+    description: 'LEGACY as what-you-leave-behind, externalized as a craft handed across generations:
+      a half-carved keystone, a master''s worn tools, an orchard planted by someone now in the ground.
+      The protagonist is gripping the work as if it were a monument to themselves and cannot let an apprentice''s
+      hand near it. The arc never lectures that legacy is selfless; it lets the unfinished work and the
+      old tools speak. The turn is the moment the protagonist''s hand opens and gives the chisel away
+      — legacy reframed from what I am remembered for to what continues after me, expressed in a handed-over
+      tool, not a word.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} stands before the great unfinished work — a keystone, a gate,
+          a ledger of a life''s craft — and runs a thumb along an edge only they have ever cut. The light
+          is failing and the work is not done and they are no longer young.'
+        camera_hint: wide_establishing_dusk
+        mood_hint: urgency
+        is_carrier: true
+      - beat: 2
+        text: The apprentice's chisel marks sit beside the master's — clumsy, honest, alive. {protagonist}
+          smooths them away in the night when no one watches, so the work will carry only their hand.
+          They tell themselves it is for the work.
+        camera_hint: close_up_two_chisel_marks
+        mood_hint: possessiveness
+        is_carrier: true
+      - beat: 3
+        text: They take up the master's own tools — inherited, the grip worn to another man's fingers,
+          not theirs. The handle still fits a hand that is gone. {protagonist} holds it and feels how
+          briefly any hand owns anything.
+        camera_hint: close_up_inherited_tool
+        mood_hint: mortality
+        is_carrier: true
+      - beat: 4
+        text: '{companion}, who buried the last master and will likely bury this one, brings tea to the
+          workshop and looks a long time at the smoothed-away marks. They say only, ''He used to do that
+          too. To mine.'''
+        camera_hint: two_shot_workshop_tea
+        mood_hint: recognition
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} works late at a join that will not come true under their stiffening hands.
+          They stop. They look at the place the apprentice''s mark had been, and at the empty doorway
+          where the apprentice sleeps. No one speaks. The chisel rests on the wood.'
+        camera_hint: still_life_chisel_on_wood
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: In the morning {protagonist} does not erase the new marks. They set the master's worn tools
+          — and their own — on the bench where the apprentice will find them, handles turned outward,
+          ready for a smaller hand.
+        camera_hint: close_up_tools_offered
+        mood_hint: release
+        is_carrier: true
+      - beat: 7
+        text: The apprentice lifts the chisel, uncertain, glancing up. {protagonist} only nods at the
+          stone. The first cut is theirs now. {protagonist} watches a line of the work pass out of their
+          hands into the next hands, and lets it.
+        camera_hint: medium_handover_at_stone
+        mood_hint: passing
+        is_carrier: true
+      - beat: 8
+        text: 'Seasons turn in one panel: the keystone is set, the gate stands, the orchard fruits. {protagonist}''s
+          mark is in it and so is the apprentice''s, and no visitor will ever know where one hand ended
+          and the other began. That is the point.'
+        camera_hint: wide_finished_work_seasons
+        mood_hint: continuity
+        is_carrier: true
+      - beat: 9
+        text: '{protagonist} sits in the shade of a thing that will outlast their name, {companion} beside
+          them, and does not mind that no one will know which stones were theirs. The work goes on. They
+          are part of how, not whether.'
+        camera_hint: wide_two_figures_under_work
+        mood_hint: peace
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: the master's worn tools set out, handles turned toward a smaller hand
+        ch2: a new chisel mark left uncorrected beside an old one
+        ch3: a finished work where no one can tell which hand cut which stone
+  strategy_03:
+    name: The Road Not Taken
+    archetype_template: the_crossroads_revisited
+    description: 'REGRET as the-road-not-taken, externalized literally: a fork in an old road, a gate
+      one did not walk through, a letter sealed and never sent that the protagonist still carries. They
+      live bent toward a turning years gone, re-walking it in the mind. The arc never says ''let go of
+      regret''; it stands the protagonist at the actual crossroads again and lets the two roads do the
+      work. The turn is the moment they stop staring down the road they didn''t take and take a step down
+      the one they are on — regret reframed not as erased but as carried lightly, shown in which direction
+      the feet finally go.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, the old road at evening. {protagonist} comes to the fork they have not stood
+          at in twenty years — one way to the life they chose, one way into the green dark of the life
+          they didn''t. They stop where the roads divide, as if the choosing were still open.'
+        camera_hint: wide_establishing_crossroads
+        mood_hint: haunted
+        is_carrier: true
+      - beat: 2
+        text: From a fold of cloth they take a letter, sealed, the wax gone brittle — written once to
+          someone down the road untaken, never sent. The ink of the name has not faded. They have made
+          sure of that, year after year.
+        camera_hint: close_up_unsent_letter
+        mood_hint: yearning
+        is_carrier: true
+      - beat: 3
+        text: They walk a few steps down the untaken road, as they have walked it a thousand times behind
+          their eyes. The grass is high. No one has waited here. The road goes on being only a road, indifferent
+          to the weight they have hung on it.
+        camera_hint: medium_figure_on_overgrown_road
+        mood_hint: ache
+        is_carrier: true
+      - beat: 4
+        text: '{companion}, met by chance at the fork — a ferryman, a traveller who never asks your business
+          — sees the brittle letter and asks nothing. They say, watching both roads, ''A road remembers
+          no one''s feet. Only we do.'''
+        camera_hint: two_shot_at_fork
+        mood_hint: gentleness
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} stands between the two roads with the letter in their open hand. Wind moves
+          the high grass down the road untaken. They do not follow it and they do not speak. They simply
+          look, for as long as it takes, at where it goes.'
+        camera_hint: wide_still_figure_between_roads
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: They do not send the letter — there is no one now to send it to — and they do not tear it.
+          They press it once to their chest, then tuck it away, gentler than before, the way you keep
+          a thing rather than bleed from it.
+        camera_hint: close_up_letter_to_chest
+        mood_hint: acceptance
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} turns to the road they actually took — the one that leads home, to the chosen
+          life — and takes the first step down it without looking back over their shoulder at the other.
+          The feet decide what the mind argued for years.'
+        camera_hint: medium_step_onto_taken_road
+        mood_hint: release
+        is_carrier: true
+      - beat: 8
+        text: The fork falls behind. The road untaken stays exactly where it was, holding nothing it didn't
+          always hold — empty grass and evening. {protagonist} carries the letter still, and it is lighter,
+          because it is only a letter now.
+        camera_hint: wide_road_behind_walking_away
+        mood_hint: lightness
+        is_carrier: true
+      - beat: 9
+        text: Home, the lamp lit, the chosen life going on around them — children, or work, or the plain
+          warmth of a kept hearth. {protagonist} sets the old letter in a drawer, not thrown away, not
+          taken out. The road not taken is a road, not a wound.
+        camera_hint: interior_lamplit_drawer
+        mood_hint: peace
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: an unsent letter pressed once to the chest, then put away gentler
+        ch2: a figure stepping onto the taken road without looking back
+        ch3: the old crossroads empty behind, holding nothing it didn't always hold
+  strategy_04:
+    name: The Price of a Clean Blade
+    archetype_template: the_oath_that_costs_everything
+    description: 'HONOR as the-cost-of-being-good, externalized as a code or oath kept at ruinous price:
+      a blade never drawn for gain, a debt repaid that beggars the house, a name kept clean while everything
+      else is lost. The protagonist is being asked, in the period''s hard currency, to trade their honor
+      for survival — and the world will reward the trade. The arc never argues honor is worth it or foolish;
+      it makes the cost real and visible and lets the kept oath stand in the cold. The turn is paid in
+      an action, not a creed: the blade stays sheathed, the debt is paid, expressed in a clean edge and
+      an emptied coffer, never a noble speech.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting} after a hard war. {protagonist} kneels and wipes the family blade though it has
+          cut nothing — the keeping of it clean is the keeping of an oath older than they are. Outside,
+          the house is cold; there is little left to burn.'
+        camera_hint: close_up_cleaning_blade
+        mood_hint: austerity
+        is_carrier: true
+      - beat: 2
+        text: 'A man of means makes the offer at the door: one dishonest word, one seal pressed where
+          it should not be, and the house is warm again, the winter survived. Everyone does it now. The
+          roads are full of warm, comfortable men who once said no.'
+        camera_hint: medium_offer_at_door
+        mood_hint: temptation
+        is_carrier: true
+      - beat: 3
+        text: '{protagonist} reads the debt-ledger by failing light — what is owed, what keeping faith
+          will cost, what breaking it would save. The numbers are not abstract. They are the firewood,
+          the grain, the children''s spring. Honor has a price and here it is, in figures.'
+        camera_hint: close_up_debt_ledger
+        mood_hint: weight
+        is_carrier: true
+      - beat: 4
+        text: '{companion}, an old soldier who took the comfortable road once and did not survive it whole,
+          says little. ''I kept warm that winter. I have not been warm since, where it counts.'' They
+          warm their hands at the small fire and say no more.'
+        camera_hint: two_shot_small_fire
+        mood_hint: caution
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} sits alone with the offer on one side and the blade on the other, both within
+          reach. The fire gutters. They do not pace, do not pray aloud. They look from the warm easy thing
+          to the clean cold one, and the house holds its breath with them.'
+        camera_hint: wide_still_figure_fire_low
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: They reach — and it is the blade they take up, to sheath it, not the seal to press it. The
+          edge goes home clean. The offer they fold once and set outside the door, in the snow, for the
+          man to take back.
+        camera_hint: close_up_blade_sheathed
+        mood_hint: resolve
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} pays the debt in full from the near-empty coffer — beggaring the house to
+          keep the word. The coins go out; the cold comes in. They close the lid on an empty box with
+          hands that are steady, and steady is its own answer.'
+        camera_hint: close_up_empty_coffer
+        mood_hint: cost
+        is_carrier: true
+      - beat: 8
+        text: Deep winter. The house is poorer than its warm neighbours and the blade above the hearth
+          is spotless. {protagonist} eats thin soup with a clean name, and does not envy the smoke rising
+          warm from the comfortable houses down the lane.
+        camera_hint: wide_cold_house_clean_blade
+        mood_hint: integrity
+        is_carrier: true
+      - beat: 9
+        text: Spring, late and hard-won. {companion} shares the first warmth at {protagonist}'s door —
+          not because the world rewarded the clean blade, but because some things are kept for no reward
+          and outlast the winters anyway. The edge stays bright above them.
+        camera_hint: wide_doorway_first_spring
+        mood_hint: quiet
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a blade sheathed clean, the dishonest offer left folded in the snow
+        ch2: an empty coffer closed by steady hands
+        ch3: a cold poor house with the brightest edge on the lane above its hearth
+  strategy_05:
+    name: The Name at the Gate
+    archetype_template: the_outsider_at_the_threshold
+    description: 'BELONGING, externalized as a threshold and a roll of names: a clan register, a guild
+      book, a town gate, an empty seat at a table that has a place for everyone but you. The protagonist
+      stands always just outside — petitioning to be written in, performing the forms of belonging without
+      the substance. The arc never states ''you already belong'' as comfort; it works through the gate,
+      the roll, the empty chair. The turn is the moment belonging stops being something granted at a threshold
+      from outside and becomes something carried in — shown when the protagonist is finally seated, or
+      writes their own name, or simply stops waiting at the gate and walks in. Carried by the threshold
+      crossed, never declared.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. {protagonist} waits at the gate where the roll of names is kept — clan, guild,
+          town, the book that says who is inside and who is not. Their name is not in it. They have come,
+          season after season, to ask that it be written.'
+        camera_hint: wide_establishing_gate
+        mood_hint: exclusion
+        is_carrier: true
+      - beat: 2
+        text: Inside, a table is laid with a place for everyone who belongs. There is an empty chair near
+          the end. {protagonist} has learned its exact distance from the door — close enough to see, far
+          enough to know it is not theirs.
+        camera_hint: medium_empty_chair_at_table
+        mood_hint: longing
+        is_carrier: true
+      - beat: 3
+        text: They perform the forms flawlessly — the right words at the gate, the correct bow, the dues
+          paid — and are thanked, and not written in. {protagonist} has become expert at the outside of
+          a thing they are never let into.
+        camera_hint: medium_bowing_at_gate
+        mood_hint: ache
+        is_carrier: true
+      - beat: 4
+        text: '{companion}, the old gatekeeper who has written and unwritten names for forty years, watches
+          {protagonist} turn to leave again. They say, quietly, ''I have let in many who never came inside,
+          and locked out some who never left. The gate is wood. The belonging is not in the gate.'''
+        camera_hint: two_shot_at_the_gate
+        mood_hint: kindness
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} stands at the open gate, neither in nor out, the roll-book in reach and the
+          empty chair in view past the threshold. They do not knock again and they do not walk away. They
+          look at the chair, and at the door, and are very still.'
+        camera_hint: wide_still_figure_in_gateway
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: They do not wait for the name to be written for them. {protagonist} steps over the threshold
+          they have stood outside for years — not asking entry now, simply entering — and the gate does
+          not stop them, because it never could.
+        camera_hint: medium_step_over_threshold
+        mood_hint: claiming
+        is_carrier: true
+      - beat: 7
+        text: '{protagonist} crosses to the empty chair and sits — and the table makes room the way a
+          table always would have, if anyone had simply come in. No one challenges it. The place was a
+          place; it only needed someone to take it.'
+        camera_hint: medium_sitting_at_table
+        mood_hint: arrival
+        is_carrier: true
+      - beat: 8
+        text: Later, the gatekeeper slides the roll across, and {protagonist} writes their own name in
+          — not granted, taken up. The ink is the same ink as every other name. Inside and outside were
+          never the line they thought.
+        camera_hint: close_up_writing_own_name
+        mood_hint: belonging
+        is_carrier: true
+      - beat: 9
+        text: The hall, ordinary and warm, going on around a chair that is no longer empty. {protagonist}
+          passes the bread to the next hand without thinking about it — the surest sign of belonging,
+          that you have stopped noticing you do. {companion} bolts the gate for the night, both of them
+          inside.
+        camera_hint: wide_warm_hall_evening
+        mood_hint: home
+        is_carrier: true
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: a figure stepping over a threshold they waited outside for years
+        ch2: an empty chair at a long table that is suddenly no longer empty
+        ch3: a name written in one's own hand, the same ink as all the others
+anti_pattern_rules:
+- forbidden_combination:
+  - historical_period
+  - anachronism_modern_therapy_speech
+  reason: The genre's authority is its period surface. A character naming their feeling in modern psychological
+    language ('I was burned out', 'I need boundaries') collapses the externalization the whole bank depends
+    on. The inner state must be carried by period-true objects, ritual, and silence, never stated. Reselect
+    the dialogue register.
+- forbidden_combination:
+  - historical_period
+  - moral_explained_in_speech_at_turn
+  reason: The carrier turn is a SHIFT expressed through the genre's device (a lamp re-lit, a tool set
+    down, a name finally written) — never a speech that explains the lesson. A monologue that states the
+    moral ('I have learned that honor costs everything') violates the show-don't-tell contract shared
+    with the seinen/dark-fantasy register. The turn lives in the hands, the threshold, the weather.

@@ -1,0 +1,203 @@
+# Manga smoke: replay on ubuntu-latest; ComfyUI/RunComfy on pearl-star-gpu (wait + self-hosted).
+# No type:choice inputs (repo governance #482) — validate values in shell if needed.
+name: Manga Smoke Test (QA)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/manga-smoke-test.yml'
+      - 'scripts/run_manga_pipeline.py'
+      - 'scripts/manga/smoke_post_publish.py'
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand ID (e.g. stillness_press)'
+        required: true
+        default: 'stillness_press'
+      topic:
+        description: 'Topic (e.g. burnout)'
+        required: true
+        default: 'burnout'
+      genre:
+        description: 'shonen | shojo | seinen'
+        required: true
+        default: 'shonen'
+      persona:
+        description: 'Persona slug'
+        required: false
+        default: 'gen_z_professionals'
+      chapter_count:
+        description: 'Chapters (sequential smoke dirs)'
+        required: false
+        default: '1'
+      backend:
+        description: 'replay | comfyui | runcomfy'
+        required: false
+        default: 'replay'
+      upload_to_r2:
+        description: 'true | false — upload exports after generate'
+        required: false
+        default: 'false'
+      send_digest:
+        description: 'true | false — email WEEKLY_ROLLOUT_OPERATOR_EMAIL with links'
+        required: false
+        default: 'false'
+
+jobs:
+  yaml_ok:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pyyaml && python3 -c "import yaml; yaml.safe_load(open('.github/workflows/manga-smoke-test.yml'))"
+
+  wait_runner:
+    if: github.event_name != 'pull_request' && inputs.backend != 'replay'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait up to 30m for pearl-star-gpu
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          MAX_WAIT_S: '1800'
+          INTERVAL_S: '30'
+        run: python3 scripts/ci/wait_for_self_hosted_runner.py
+
+  generate_replay:
+    if: github.event_name != 'pull_request' && inputs.backend == 'replay'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-test.txt
+      - name: Generate manga (replay)
+        env:
+          PYTHONPATH: .
+        run: |
+          set -euo pipefail
+          python3 scripts/run_manga_pipeline.py \
+            --brand "${{ inputs.brand }}" \
+            --topic "${{ inputs.topic }}" \
+            --genre "${{ inputs.genre }}" \
+            --persona "${{ inputs.persona }}" \
+            --chapter-count "${{ inputs.chapter_count }}" \
+            --render-book \
+            --output-dir artifacts/manga_smoke/ \
+            --backend replay \
+            --skip-pearl-star-check
+      - name: Post-publish (R2 + digest)
+        if: ${{ inputs.upload_to_r2 == 'true' || inputs.send_digest == 'true' }}
+        env:
+          PYTHONPATH: .
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          WEEKLY_ROLLOUT_OPERATOR_EMAIL: ${{ vars.WEEKLY_ROLLOUT_OPERATOR_EMAIL }}
+        run: |
+          set -euo pipefail
+          FLAGS="--brand ${{ inputs.brand }} --topic ${{ inputs.topic }} --genre ${{ inputs.genre }} --smoke-out-root artifacts/manga_smoke"
+          if [ "${{ inputs.upload_to_r2 }}" = "true" ]; then FLAGS="$FLAGS --upload-to-r2"; fi
+          if [ "${{ inputs.send_digest }}" = "true" ]; then FLAGS="$FLAGS --send-digest"; fi
+          python3 scripts/manga/smoke_post_publish.py $FLAGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: manga-smoke-${{ inputs.brand }}-${{ inputs.topic }}-${{ github.run_id }}
+          path: artifacts/manga_smoke/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: QA summary
+        if: always()
+        run: |
+          echo "## Manga smoke (replay)" >> "$GITHUB_STEP_SUMMARY"
+          cat artifacts/manga_smoke/QA_REPORT.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+  generate_gpu:
+    if: github.event_name != 'pull_request' && inputs.backend != 'replay'
+    needs: [wait_runner]
+    runs-on: [self-hosted, pearl-star-gpu]
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-test.txt
+      - name: Mask secrets
+        env:
+          RUNCOMFY_API_KEY: ${{ secrets.RUNCOMFY_API_KEY }}
+          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+        run: |
+          for x in "$RUNCOMFY_API_KEY" "$RUNCOMFY_TOKEN" "$CF_R2_ACCESS_KEY" "$CF_R2_SECRET_KEY"; do
+            if [ -n "$x" ]; then echo "::add-mask::$x"; fi
+          done
+      - name: Generate manga (GPU backend)
+        env:
+          PYTHONPATH: .
+          COMFYUI_URL: ${{ secrets.COMFYUI_URL }}
+          PEARL_STAR_IP: ${{ secrets.PEARL_STAR_IP }}
+          RUNCOMFY_API_KEY: ${{ secrets.RUNCOMFY_API_KEY }}
+          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${RUNCOMFY_API_KEY:-}" ] && [ -n "${RUNCOMFY_TOKEN:-}" ]; then export RUNCOMFY_API_KEY="$RUNCOMFY_TOKEN"; fi
+          python3 scripts/run_manga_pipeline.py \
+            --brand "${{ inputs.brand }}" \
+            --topic "${{ inputs.topic }}" \
+            --genre "${{ inputs.genre }}" \
+            --persona "${{ inputs.persona }}" \
+            --chapter-count "${{ inputs.chapter_count }}" \
+            --render-book \
+            --output-dir artifacts/manga_smoke/ \
+            --backend "${{ inputs.backend }}" \
+            2>&1 | tee manga_smoke.log
+      - name: Post-publish (R2 + digest)
+        if: ${{ inputs.upload_to_r2 == 'true' || inputs.send_digest == 'true' }}
+        env:
+          PYTHONPATH: .
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          WEEKLY_ROLLOUT_OPERATOR_EMAIL: ${{ vars.WEEKLY_ROLLOUT_OPERATOR_EMAIL }}
+        run: |
+          set -euo pipefail
+          FLAGS="--brand ${{ inputs.brand }} --topic ${{ inputs.topic }} --genre ${{ inputs.genre }} --smoke-out-root artifacts/manga_smoke"
+          if [ "${{ inputs.upload_to_r2 }}" = "true" ]; then FLAGS="$FLAGS --upload-to-r2"; fi
+          if [ "${{ inputs.send_digest }}" = "true" ]; then FLAGS="$FLAGS --send-digest"; fi
+          python3 scripts/manga/smoke_post_publish.py $FLAGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: manga-smoke-gpu-${{ inputs.brand }}-${{ inputs.topic }}-${{ github.run_id }}
+          path: |
+            artifacts/manga_smoke/
+            manga_smoke.log
+          retention-days: 30
+          if-no-files-found: warn
+      - name: QA summary
+        if: always()
+        run: |
+          echo "## Manga smoke (${{ inputs.backend }})" >> "$GITHUB_STEP_SUMMARY"
+          cat artifacts/manga_smoke/QA_REPORT.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          tail -40 manga_smoke.log >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true

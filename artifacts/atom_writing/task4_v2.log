@@ -1,0 +1,142 @@
+2026-04-05 12:15:50,466 writing_campaign INFO ============================================================
+2026-04-05 12:15:50,466 writing_campaign INFO STARTING TASK: exercise_compression_gap
+2026-04-05 12:15:50,466 writing_campaign INFO   Fill EXERCISE and COMPRESSION gaps for specific personas
+2026-04-05 12:15:50,466 writing_campaign INFO ============================================================
+2026-04-05 12:15:50,533 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/anxiety/EXERCISE (13 variants)
+2026-04-05 12:15:51,248 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-05 12:15:51,249 anthropic._base_client INFO Retrying request to /v1/messages in 11.000000 seconds
+2026-04-05 12:16:20,722 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:16:20,748 atom_writer INFO Response received in 30.2s (3128 chars, stop=end_turn)
+2026-04-05 12:16:20,751 atom_writer INFO Wrote atoms/corporate_managers/anxiety/EXERCISE/CANONICAL.txt (3128 bytes)
+2026-04-05 12:16:20,757 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/boundaries/EXERCISE (13 variants)
+2026-04-05 12:16:38,493 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:16:38,497 atom_writer INFO Response received in 17.7s (2729 chars, stop=end_turn)
+2026-04-05 12:16:38,500 atom_writer INFO Wrote atoms/corporate_managers/boundaries/EXERCISE/CANONICAL.txt (2729 bytes)
+2026-04-05 12:16:38,507 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/burnout/EXERCISE (13 variants)
+2026-04-05 12:16:53,828 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:16:53,829 atom_writer INFO Response received in 15.3s (2452 chars, stop=end_turn)
+2026-04-05 12:16:53,831 atom_writer INFO Wrote atoms/corporate_managers/burnout/EXERCISE/CANONICAL.txt (2452 bytes)
+2026-04-05 12:16:53,839 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/compassion_fatigue/EXERCISE (13 variants)
+2026-04-05 12:17:08,838 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:17:08,840 atom_writer INFO Response received in 15.0s (2495 chars, stop=end_turn)
+2026-04-05 12:17:08,843 atom_writer INFO Wrote atoms/corporate_managers/compassion_fatigue/EXERCISE/CANONICAL.txt (2495 bytes)
+2026-04-05 12:17:08,850 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/courage/EXERCISE (13 variants)
+2026-04-05 12:17:23,364 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:17:23,367 atom_writer INFO Response received in 14.5s (2254 chars, stop=end_turn)
+2026-04-05 12:17:23,369 atom_writer INFO Wrote atoms/corporate_managers/courage/EXERCISE/CANONICAL.txt (2254 bytes)
+2026-04-05 12:17:23,377 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/depression/EXERCISE (13 variants)
+2026-04-05 12:17:38,782 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:17:38,787 atom_writer INFO Response received in 15.4s (2509 chars, stop=end_turn)
+2026-04-05 12:17:38,789 atom_writer INFO Wrote atoms/corporate_managers/depression/EXERCISE/CANONICAL.txt (2509 bytes)
+2026-04-05 12:17:38,802 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/financial_anxiety/EXERCISE (13 variants)
+2026-04-05 12:18:02,823 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:18:02,824 atom_writer INFO Response received in 24.0s (3382 chars, stop=end_turn)
+2026-04-05 12:18:02,825 atom_writer INFO Wrote atoms/corporate_managers/financial_anxiety/EXERCISE/CANONICAL.txt (3382 bytes)
+2026-04-05 12:18:02,832 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/financial_stress/EXERCISE (13 variants)
+2026-04-05 12:18:21,241 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:18:21,243 atom_writer INFO Response received in 18.4s (3010 chars, stop=end_turn)
+2026-04-05 12:18:21,245 atom_writer INFO Wrote atoms/corporate_managers/financial_stress/EXERCISE/CANONICAL.txt (3010 bytes)
+2026-04-05 12:18:21,252 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/grief/EXERCISE (13 variants)
+2026-04-05 12:18:42,446 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:18:42,450 atom_writer INFO Response received in 21.2s (3086 chars, stop=end_turn)
+2026-04-05 12:18:42,452 atom_writer INFO Wrote atoms/corporate_managers/grief/EXERCISE/CANONICAL.txt (3086 bytes)
+2026-04-05 12:18:42,459 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/imposter_syndrome/EXERCISE (13 variants)
+2026-04-05 12:19:01,319 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:19:01,320 atom_writer INFO Response received in 18.9s (3020 chars, stop=end_turn)
+2026-04-05 12:19:01,321 atom_writer INFO Wrote atoms/corporate_managers/imposter_syndrome/EXERCISE/CANONICAL.txt (3020 bytes)
+2026-04-05 12:19:01,329 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/overthinking/EXERCISE (13 variants)
+2026-04-05 12:19:20,007 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:19:20,011 atom_writer INFO Response received in 18.7s (2740 chars, stop=end_turn)
+2026-04-05 12:19:20,013 atom_writer INFO Wrote atoms/corporate_managers/overthinking/EXERCISE/CANONICAL.txt (2740 bytes)
+2026-04-05 12:19:20,022 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/self_worth/EXERCISE (13 variants)
+2026-04-05 12:19:38,651 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:19:38,653 atom_writer INFO Response received in 18.6s (2764 chars, stop=end_turn)
+2026-04-05 12:19:38,655 atom_writer INFO Wrote atoms/corporate_managers/self_worth/EXERCISE/CANONICAL.txt (2764 bytes)
+2026-04-05 12:19:38,664 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/sleep_anxiety/EXERCISE (13 variants)
+2026-04-05 12:19:54,152 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:19:54,158 atom_writer INFO Response received in 15.5s (2441 chars, stop=end_turn)
+2026-04-05 12:19:54,161 atom_writer INFO Wrote atoms/corporate_managers/sleep_anxiety/EXERCISE/CANONICAL.txt (2441 bytes)
+2026-04-05 12:19:54,171 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/social_anxiety/EXERCISE (13 variants)
+2026-04-05 12:20:15,639 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:20:15,642 atom_writer INFO Response received in 21.5s (2861 chars, stop=end_turn)
+2026-04-05 12:20:15,644 atom_writer INFO Wrote atoms/corporate_managers/social_anxiety/EXERCISE/CANONICAL.txt (2861 bytes)
+2026-04-05 12:20:15,652 atom_writer INFO Calling claude-sonnet-4-6 for corporate_managers/somatic_healing/EXERCISE (13 variants)
+2026-04-05 12:20:33,908 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:20:33,913 atom_writer INFO Response received in 18.3s (3009 chars, stop=end_turn)
+2026-04-05 12:20:33,916 atom_writer INFO Wrote atoms/corporate_managers/somatic_healing/EXERCISE/CANONICAL.txt (3009 bytes)
+2026-04-05 12:20:33,924 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/anxiety/COMPRESSION (13 variants)
+2026-04-05 12:21:17,939 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:21:17,944 atom_writer INFO Response received in 44.0s (6886 chars, stop=end_turn)
+2026-04-05 12:21:17,951 atom_writer INFO Wrote atoms/first_responders/anxiety/COMPRESSION/CANONICAL.txt (6886 bytes)
+2026-04-05 12:21:17,960 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/boundaries/COMPRESSION (13 variants)
+2026-04-05 12:21:56,685 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:21:56,690 atom_writer INFO Response received in 38.7s (5763 chars, stop=end_turn)
+2026-04-05 12:21:56,695 atom_writer INFO Wrote atoms/first_responders/boundaries/COMPRESSION/CANONICAL.txt (5763 bytes)
+2026-04-05 12:21:56,704 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/burnout/COMPRESSION (13 variants)
+2026-04-05 12:22:38,463 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:22:38,465 atom_writer INFO Response received in 41.8s (6538 chars, stop=end_turn)
+2026-04-05 12:22:38,468 atom_writer INFO Wrote atoms/first_responders/burnout/COMPRESSION/CANONICAL.txt (6538 bytes)
+2026-04-05 12:22:38,476 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/compassion_fatigue/COMPRESSION (13 variants)
+2026-04-05 12:22:46,531 anthropic._base_client INFO Retrying request to /v1/messages in 0.483559 seconds
+2026-04-05 12:22:52,827 anthropic._base_client INFO Retrying request to /v1/messages in 0.880788 seconds
+2026-04-05 12:23:02,117 writing_campaign ERROR [ERROR] first_responders/compassion_fatigue/COMPRESSION_gap: Request timed out or interrupted. This could be due to a network timeout, dropped connection, or request cancellation. See https://docs.anthropic.com/en/api/errors#long-requests for more details.
+2026-04-05 12:23:02,125 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/courage/COMPRESSION (13 variants)
+2026-04-05 12:23:45,988 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:23:46,005 atom_writer INFO Response received in 43.9s (6696 chars, stop=end_turn)
+2026-04-05 12:23:46,009 atom_writer INFO Wrote atoms/first_responders/courage/COMPRESSION/CANONICAL.txt (6696 bytes)
+2026-04-05 12:23:46,018 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/depression/COMPRESSION (13 variants)
+2026-04-05 12:24:33,048 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:24:33,081 atom_writer INFO Response received in 47.1s (7033 chars, stop=end_turn)
+2026-04-05 12:24:33,085 atom_writer INFO Wrote atoms/first_responders/depression/COMPRESSION/CANONICAL.txt (7033 bytes)
+2026-04-05 12:24:33,093 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/financial_anxiety/COMPRESSION (13 variants)
+2026-04-05 12:25:29,747 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:25:29,758 atom_writer INFO Response received in 56.7s (8600 chars, stop=end_turn)
+2026-04-05 12:25:29,762 atom_writer INFO Wrote atoms/first_responders/financial_anxiety/COMPRESSION/CANONICAL.txt (8600 bytes)
+2026-04-05 12:25:29,770 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/financial_stress/COMPRESSION (13 variants)
+2026-04-05 12:26:07,201 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:26:07,203 atom_writer INFO Response received in 37.4s (5778 chars, stop=end_turn)
+2026-04-05 12:26:07,207 atom_writer INFO Wrote atoms/first_responders/financial_stress/COMPRESSION/CANONICAL.txt (5778 bytes)
+2026-04-05 12:26:07,214 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/grief/COMPRESSION (13 variants)
+2026-04-05 12:26:51,096 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:26:51,101 atom_writer INFO Response received in 43.9s (7001 chars, stop=end_turn)
+2026-04-05 12:26:51,105 atom_writer INFO Wrote atoms/first_responders/grief/COMPRESSION/CANONICAL.txt (7001 bytes)
+2026-04-05 12:26:51,114 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/imposter_syndrome/COMPRESSION (13 variants)
+2026-04-05 12:27:20,060 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:27:20,062 atom_writer INFO Response received in 28.9s (4608 chars, stop=end_turn)
+2026-04-05 12:27:20,065 atom_writer INFO Wrote atoms/first_responders/imposter_syndrome/COMPRESSION/CANONICAL.txt (4608 bytes)
+2026-04-05 12:27:20,072 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/overthinking/COMPRESSION (13 variants)
+2026-04-05 12:28:13,504 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:28:13,509 atom_writer INFO Response received in 53.4s (8345 chars, stop=end_turn)
+2026-04-05 12:28:13,513 atom_writer INFO Wrote atoms/first_responders/overthinking/COMPRESSION/CANONICAL.txt (8345 bytes)
+2026-04-05 12:28:13,522 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/self_worth/COMPRESSION (13 variants)
+2026-04-05 12:28:58,328 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:28:58,332 atom_writer INFO Response received in 44.8s (7489 chars, stop=end_turn)
+2026-04-05 12:28:58,335 atom_writer INFO Wrote atoms/first_responders/self_worth/COMPRESSION/CANONICAL.txt (7489 bytes)
+2026-04-05 12:28:58,341 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/sleep_anxiety/COMPRESSION (13 variants)
+2026-04-05 12:29:51,381 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:29:51,394 atom_writer INFO Response received in 53.1s (8024 chars, stop=end_turn)
+2026-04-05 12:29:51,398 atom_writer INFO Wrote atoms/first_responders/sleep_anxiety/COMPRESSION/CANONICAL.txt (8024 bytes)
+2026-04-05 12:29:51,404 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/social_anxiety/COMPRESSION (13 variants)
+2026-04-05 12:30:28,964 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:30:28,971 atom_writer INFO Response received in 37.6s (5691 chars, stop=end_turn)
+2026-04-05 12:30:28,976 atom_writer INFO Wrote atoms/first_responders/social_anxiety/COMPRESSION/CANONICAL.txt (5691 bytes)
+2026-04-05 12:30:28,984 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/somatic_healing/COMPRESSION (13 variants)
+2026-04-05 12:31:02,184 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:31:02,186 atom_writer INFO Response received in 33.2s (4979 chars, stop=end_turn)
+2026-04-05 12:31:02,189 atom_writer INFO Wrote atoms/first_responders/somatic_healing/COMPRESSION/CANONICAL.txt (4979 bytes)
+2026-04-05 12:31:02,190 writing_campaign INFO Task 'exercise_compression_gap' completed in 911.7s: {'completed': 29, 'error': 1}
+
+=== CAMPAIGN SUMMARY ===
+{
+  "elapsed_seconds": 911.7,
+  "tasks_run": 1,
+  "task_summaries": {
+    "exercise_compression_gap": {
+      "statuses": {
+        "completed": 29,
+        "error": 1
+      },
+      "total_variants": 377
+    }
+  }
+}

@@ -1,0 +1,80 @@
+# Quote bank — courage / en_US — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: courage
+locale_cluster: en_US
+wave: 2
+quote_count: 5
+quotes:
+- quote_id: quote_w2_courage_en_us_paine_crisis_v01
+  text: These are the times that try men's souls.
+  text_en: These are the times that try men's souls.
+  author: Thomas Paine
+  primary_source: The American Crisis, No. 1 (1776)
+  verified_via: Paine 1776
+  public_domain: y
+  topic_keys:
+  - courage
+  - grief
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_en_us_paine_rights_v01_courage
+  text: The harder the conflict, the more glorious the triumph.
+  text_en: The harder the conflict, the more glorious the triumph.
+  author: Thomas Paine
+  primary_source: The American Crisis, No. 1 (1776)
+  verified_via: Paine 1776
+  public_domain: y
+  topic_keys:
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_anxiety_en_us_dickinson_poem_510_v01_courage
+  text: Hope is the thing with feathers / That perches in the soul.
+  text_en: Hope is the thing with feathers / That perches in the soul.
+  author: Emily Dickinson
+  primary_source: Poem 254 ('Hope is the thing with feathers'), Franklin variorum
+  verified_via: Dickinson poem 254; PD
+  public_domain: y
+  topic_keys:
+  - courage
+  - depression
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_en_us_paine_common_sense_v01_courage
+  text: These are the times that try men's souls.
+  text_en: These are the times that try men's souls.
+  author: Thomas Paine
+  primary_source: The American Crisis, No. 1 (1776)
+  verified_via: Paine 1776; PD
+  public_domain: y
+  topic_keys:
+  - courage
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_en_us_paine_common_sense_v01_financial_stress
+  text: These are the times that try men's souls.
+  text_en: These are the times that try men's souls.
+  author: Thomas Paine
+  primary_source: The American Crisis, No. 1 (1776)
+  verified_via: Paine 1776; PD
+  public_domain: y
+  topic_keys:
+  - financial_stress
+  - courage
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener

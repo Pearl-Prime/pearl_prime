@@ -1,0 +1,13 @@
+# DISABLED: Full QA chain requires pearl-news-plan.yml and pearl-news-post.yml
+# (not yet in repo). Re-enable when those reusable workflows exist.
+name: Pearl News Full QA (disabled)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  disabled_stub:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Pearl News Full QA disabled until plan/post reusable workflows land."

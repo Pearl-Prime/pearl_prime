@@ -1,0 +1,64 @@
+series_plan_schema: 1.0.0
+created_at: '2026-06-20'
+locale: en_US
+book_id_prefix: way_stream_sanctuary__default_teacher__healthcare_rns__compassion_fatigue
+brand: way_stream_sanctuary
+teacher: default_teacher
+persona: healthcare_rns
+topic: compassion_fatigue
+teacher_topic_score: null
+teacher_persona_score: null
+composite_fit: 0.7
+arc:
+  installment_1:
+    book_id: way_stream_sanctuary__default_teacher__healthcare_rns__compassion_fatigue__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: way_stream_sanctuary__default_teacher__healthcare_rns__compassion_fatigue__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: way_stream_sanctuary__default_teacher__healthcare_rns__compassion_fatigue__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 3 books across the engines of compassion fatigue for Nurses,
+  in a grounded secular voice.
+bestseller_hook_family: recognition_descent
+emotional_engine: compassion_fatigue_recognition
+comp_series:
+- Trauma Stewardship (van Dernoot Lipsky)
+- Burnout (Nagoski)
+- The Compassion Fatigue Workbook (Mathieu)
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 26–55
+  where_they_are: a nurse at the end of a twelve-hour shift
+  what_they_need: Language for what compassion fatigue is doing in the body, without
+    being pathologized.
+  what_they_avoid: Toxic positivity and one-size-fits-all routines.
+series_voice_markers:
+  register: grounded, secular, somatic — plain and warm
+  sentence_rhythm: calm, unhurried
+  metaphor_family: body, breath, weather, ground
+  second_person_default: true
+main_character_name: null
+main_character_role: null
+main_character_image_path: null
+main_character_lora_id: null
+main_character_trigger_word: null
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

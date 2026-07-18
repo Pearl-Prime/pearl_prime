@@ -1,0 +1,494 @@
+---
+# global_scene_anchor_bank.yaml
+# Authority: docs/CONTENT_FRAGMENT_VARIATION_WRITER_SPEC.md §7
+# Slot type: SCENE_ANCHOR
+# Count: 20 variants
+# Sensory family limits enforced: light ≤2, sound ≤2, temperature ≤2, texture ≤2, proprioception ≤2
+
+selector_note: >
+  Use this bank to open or ground any chapter with a brief, concrete scene fragment.
+  The renderer may draw at most one variant per chapter from this bank. No single
+  variant_id may appear more than once in the same book. Select by hashing chapter
+  metadata (topic, chapter_index, book_id) to produce a stable, repeatable pick.
+  Do not draw from this bank more than once per chapter. All variants are globally
+  eligible (any topic, any persona, any secular or contemplative frame). If a
+  variant's sensory family has already been used in a prior chapter of the same
+  book, skip it and select the next eligible variant.
+
+variants:
+
+  # ── PROPRIOCEPTION (max 2) ─────────────────────────────────────────────────
+
+  - variant_id: gsa_001
+    slot_type: SCENE_ANCHOR
+    body: A bag strap slides lower on one shoulder without the wearer adjusting it.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.8
+      somatic_precision: 0.7
+      engagement: 0.6
+    collision_family: body_weight_proprioception
+    sensory_family: proprioception
+    signature_phrases: ["bag strap slides lower"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Proprioceptive anchor. Works in transit, office, or any mobile setting."
+
+  - variant_id: gsa_007
+    slot_type: SCENE_ANCHOR
+    body: Both hands rest on the keyboard without pressing anything.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.9
+      somatic_precision: 0.8
+      engagement: 0.6
+    collision_family: body_weight_proprioception
+    sensory_family: proprioception
+    signature_phrases: ["hands rest on the keyboard without pressing"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Somatic pause anchor. Strong freeze or stall moment. Works in workplace and home frames."
+
+  # ── SOUND (max 2) ──────────────────────────────────────────────────────────
+
+  - variant_id: gsa_003
+    slot_type: SCENE_ANCHOR
+    body: A chair scrapes the floor and no one looks up.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      somatic_precision: 0.5
+      engagement: 0.7
+    collision_family: ambient_sound_room
+    sensory_family: sound
+    signature_phrases: ["chair scrapes the floor"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Auditory anchor in a shared space. Signals ordinary continuation."
+
+  - variant_id: gsa_006
+    slot_type: SCENE_ANCHOR
+    body: Someone in the hallway passes without stopping, and the sound recedes.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.6
+      somatic_precision: 0.5
+    collision_family: ambient_sound_room
+    sensory_family: sound
+    signature_phrases: ["hallway passes without stopping", "sound recedes"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Auditory fade anchor. External passing sound — distinct from chair scrape."
+
+  # ── TEMPERATURE (max 2) ────────────────────────────────────────────────────
+
+  - variant_id: gsa_005
+    slot_type: SCENE_ANCHOR
+    body: A drink has gone cold on the edge of the desk, untouched.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      somatic_precision: 0.6
+      engagement: 0.6
+    collision_family: thermal_object
+    sensory_family: temperature
+    signature_phrases: ["drink has gone cold", "untouched"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Temperature anchor. Signals absorbed focus or avoidance. Works in home or office."
+
+  - variant_id: gsa_019
+    slot_type: SCENE_ANCHOR
+    body: The air in the room has not moved in a while and the body has adjusted without noticing.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.8
+      somatic_precision: 0.7
+      engagement: 0.5
+    collision_family: thermal_object
+    sensory_family: temperature
+    signature_phrases: ["air in the room has not moved", "body has adjusted without noticing"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Ambient temperature anchor — air stillness, not object. Second thermal variant."
+
+  # ── TEXTURE (max 2) ────────────────────────────────────────────────────────
+
+  - variant_id: gsa_012
+    slot_type: SCENE_ANCHOR
+    body: The floor beneath the chair is slightly uneven, and one leg rocks without anyone noticing.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      somatic_precision: 0.6
+      engagement: 0.5
+    collision_family: physical_environment_texture
+    sensory_family: texture
+    signature_phrases: ["floor beneath the chair is slightly uneven"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Tactile-proprioceptive anchor. Distinct texture direction — not sound, not body hold."
+
+  - variant_id: gsa_017
+    slot_type: SCENE_ANCHOR
+    body: A door somewhere in the building closes and the vibration barely reaches this room.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      somatic_precision: 0.6
+      engagement: 0.5
+    collision_family: physical_environment_texture
+    sensory_family: texture
+    signature_phrases: ["door somewhere in the building closes", "vibration barely reaches"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Vibration-texture anchor. Second physical environment texture — door-close vs. uneven floor."
+
+  # ── LIGHT (max 2) ──────────────────────────────────────────────────────────
+
+  - variant_id: gsa_016
+    slot_type: SCENE_ANCHOR
+    body: Outside, rain is falling and no one in the room has mentioned it.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.6
+      somatic_precision: 0.5
+    collision_family: weather_peripheral
+    sensory_family: light
+    signature_phrases: ["rain is falling and no one has mentioned it"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window", "along the sill", "daylight"]
+    notes_for_selector: "Weather anchor without the sill. First light-family variant."
+
+  - variant_id: gsa_021
+    slot_type: SCENE_ANCHOR
+    body: The screen in front of the window makes it impossible to see what kind of afternoon it is outside.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.6
+      specificity: 0.7
+    collision_family: weather_peripheral
+    sensory_family: light
+    signature_phrases: ["impossible to see what kind of afternoon it is outside"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Second light-family variant — screen-blocked window. Distinct from rain observation."
+
+  # ── DIGITAL / SCREEN (non-sensory-family — all distinct) ──────────────────
+
+  - variant_id: gsa_002
+    slot_type: SCENE_ANCHOR
+    body: The cursor sits in an empty text field, blinking without an answer.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.7
+      specificity: 0.8
+    collision_family: screen_wait
+    sensory_family: digital
+    signature_phrases: ["cursor sits in an empty text field"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Digital-work anchor. Strong for workplace and productivity frames."
+
+  - variant_id: gsa_004
+    slot_type: SCENE_ANCHOR
+    body: A phone notification arrives and fades before anyone reaches for it.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: screen_wait
+    sensory_family: digital
+    signature_phrases: ["phone notification arrives and fades"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Digital-interruption anchor. Use in chapters about attention or reactivity."
+
+  - variant_id: gsa_011
+    slot_type: SCENE_ANCHOR
+    body: The inbox count ticks up by one while the previous message is still open.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.9
+      embodiment: 0.4
+    collision_family: screen_wait
+    sensory_family: digital
+    signature_phrases: ["inbox count ticks up by one"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Digital accumulation anchor. Distinct — count-based not notification-fade."
+
+  - variant_id: gsa_015
+    slot_type: SCENE_ANCHOR
+    body: The tab has been open since morning and the page has not changed.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.3
+    collision_family: screen_wait
+    sensory_family: digital
+    signature_phrases: ["tab has been open since morning"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window", "has been open", "you have been looking at it for forty minutes"]
+    notes_for_selector: "Tab-wait anchor. Time-elapsed not count-based. Distinct from forty-minutes collision family."
+
+  - variant_id: gsa_018
+    slot_type: SCENE_ANCHOR
+    body: The meeting invitation sits unanswered in the calendar view.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.3
+    collision_family: screen_wait
+    sensory_family: digital
+    signature_phrases: ["meeting invitation sits unanswered"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Calendar-screen anchor. Fifth digital variant — calendar not inbox/tab/cursor/notification."
+
+  # ── OBJECT / TRANSITIONAL (non-sensory-family) ────────────────────────────
+
+  - variant_id: gsa_010
+    slot_type: SCENE_ANCHOR
+    body: A jacket hangs over the back of the chair, not yet put on.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.5
+      specificity: 0.7
+    collision_family: object_boundary
+    sensory_family: object
+    signature_phrases: ["jacket hangs over the back of the chair"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Transitional object anchor. Suggests threshold between states."
+
+  - variant_id: gsa_013
+    slot_type: SCENE_ANCHOR
+    body: A pen sits uncapped on a pad of paper with nothing written on it yet.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.6
+      specificity: 0.7
+    collision_family: object_boundary
+    sensory_family: object
+    signature_phrases: ["pen sits uncapped", "nothing written on it yet"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Analog object anchor. Works well before chapters about starting or beginning."
+
+  # ── COGNITIVE / BEHAVIORAL (non-sensory, non-body) ────────────────────────
+
+  - variant_id: gsa_022
+    slot_type: SCENE_ANCHOR
+    body: The decision was made an hour ago and it already feels like it needs to be revisited.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.3
+    collision_family: decision_reconsideration
+    sensory_family: cognitive
+    signature_phrases: ["decision was made an hour ago", "already feels like it needs to be revisited"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Cognitive anchor — decision loop. No sensory family overlap."
+
+  - variant_id: gsa_023
+    slot_type: SCENE_ANCHOR
+    body: A task moved from today's list to tomorrow's for the third time this week.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.9
+      embodiment: 0.3
+    collision_family: task_deferral
+    sensory_family: cognitive
+    signature_phrases: ["moved from today's list to tomorrow's for the third time this week"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Cognitive-behavioral anchor — deferral pattern. Strong for productivity/anxiety."
+
+  - variant_id: gsa_024
+    slot_type: SCENE_ANCHOR
+    body: No one in the meeting challenged the assumption and now it is in the notes as a fact.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.2
+    collision_family: group_assumption
+    sensory_family: cognitive
+    signature_phrases: ["no one in the meeting challenged the assumption", "now it is in the notes as a fact"]
+    forbidden_terms: ["daylight along the sill", "gray light through the window"]
+    notes_for_selector: "Workplace/social cognitive anchor. Group assumption solidification."

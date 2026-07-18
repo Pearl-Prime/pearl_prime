@@ -1,0 +1,81 @@
+/Users/ahjan/phoenix_omega/.claude/worktrees/brave-ritchie/artifacts/production_run/adi_da_self_worth_full/podcast/podcast/_work/podcast_episode/assembly_unknown_anxiety_social_anxiety_arc_en-US_2026-W15_podcast_episode.json
+{
+  "episode_id": "unknown_anxiety_social_anxiety_arc_en-US_2026-W15_podcast_episode",
+  "segments": [
+    {
+      "segment_id": "cold_open",
+      "duration_s": 71.8
+    },
+    {
+      "segment_id": "theme_intro",
+      "duration_s": 35.9
+    },
+    {
+      "segment_id": "scene_setting",
+      "duration_s": 143.5
+    },
+    {
+      "segment_id": "teaching",
+      "duration_s": 382.7
+    },
+    {
+      "segment_id": "story",
+      "duration_s": 382.7
+    },
+    {
+      "segment_id": "integration",
+      "duration_s": 143.5
+    },
+    {
+      "segment_id": "outro",
+      "duration_s": 39.9
+    }
+  ],
+  "errors": [],
+  "output_mp3": "/Users/ahjan/phoenix_omega/.claude/worktrees/brave-ritchie/artifacts/production_run/adi_da_self_worth_full/podcast/podcast/unknown_anxiety_social_anxiety_arc_en-US_2026-W15_podcast_episode.mp3",
+  "duration_s": 1200.0,
+  "file_size_bytes": 19221563,
+  "loudness": {
+    "input_i": "-12.27",
+    "input_tp": "-1.18",
+    "input_lra": "10.60",
+    "input_thresh": "-22.32",
+    "output_i": "-24.27",
+    "output_tp": "-2.93",
+    "output_lra": "6.20",
+    "output_thresh": "-34.29",
+    "normalization_type": "dynamic",
+    "target_offset": "0.27"
+  }
+}
+/Users/ahjan/phoenix_omega/.claude/worktrees/brave-ritchie/artifacts/production_run/adi_da_self_worth_full/podcast/podcast/feed.xml
+{
+  "brand_id": "heart_balance",
+  "locale": "en-US",
+  "week": "2026-W15",
+  "formats": [
+    "podcast_episode"
+  ],
+  "assemblies": [
+    "/Users/ahjan/phoenix_omega/.claude/worktrees/brave-ritchie/artifacts/production_run/adi_da_self_worth_full/podcast/podcast/_work/podcast_episode/assembly_unknown_anxiety_social_anxiety_arc_en-US_2026-W15_podcast_episode.json"
+  ],
+  "episodes": [
+    {
+      "episode_id": "unknown_anxiety_social_anxiety_arc_en-US_2026-W15_podcast_episode",
+      "guid": "d7141006-446d-56ad-8261-32e1beb37b87",
+      "locale": "en-US",
+      "title": "The Room Full of People \u2014 Anxiety",
+      "description": "The Room Full of People",
+      "pub_date_rfc2822": "Fri, 10 Apr 2026 03:38:17 GMT",
+      "enclosure_url": "https://cdn.example.com/podcast/heart_balance/social_anxiety_arc/unknown_anxiety_social_anxiety_arc_en-US_2026-W15_podcast_episode.mp3",
+      "enclosure_length_bytes": 19221563,
+      "duration_s": 1200.0,
+      "episode_number": 1,
+      "season_number": 1,
+      "explicit": "no",
+      "format": "podcast_episode"
+    }
+  ],
+  "podcast_dir": "/Users/ahjan/phoenix_omega/.claude/worktrees/brave-ritchie/artifacts/production_run/adi_da_self_worth_full/podcast/podcast",
+  "upload": "skipped"
+}

@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__working_parents__depression__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__working_parents__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__working_parents__through_loss__1hr
+  name: Through the Low Places — for Working Parents (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: The Weight You Carry (1)'
+subtitle: A Field Guide for Working Parents Navigating Depression
+cover_tagline: You're not burned out. You're carrying something you never got to put
+  down.
+description:
+  short_blurb: Some mornings the weight is already there before your feet hit the
+    floor, and you still have to make the lunches. This one-hour reset is for the
+    working parent carrying a grief that never got a funeral. It won't fix you. It
+    will finally let you call the thing by its name.
+  long_description: 'You wake up tired in a way sleep doesn''t touch. The kids need
+    breakfast, the inbox is already full, and underneath all of it sits a heaviness
+    you can''t point to. Nothing is technically wrong. You have the job, the family,
+    the life you were supposed to want. So why does getting through an ordinary Tuesday
+    feel like wading through wet sand?
+
+
+    Here''s a possibility no one offers you: what they keep calling depression might
+    be grief that never got a name. Grief for a version of yourself who went missing
+    somewhere between the second kid and the third promotion. For the friend you stopped
+    calling, the marriage that quietly changed shape, the parent who''s slipping,
+    the person you used to be before you got this competent and this tired. Loss that
+    nobody marked, so you never mourned it, so it just sat down inside you and stayed.
+
+
+    So this hour doesn''t try to lift your mood. It does something stranger and more
+    useful. It hands you plain words for the weight, so you can stop privately filing
+    yourself under lazy or broken. Then — and this is the part the advice industry
+    skips entirely — it walks you down into the heaviness instead of around it, the
+    way you''d lower yourself onto the floor next to a grieving friend instead of
+    telling them to cheer up. And then it brings you back: still a parent, still employed,
+    still able to make the lunches, but no longer spending energy pretending the weight
+    isn''t there.
+
+
+    No part of this is going to optimize you. There''s no morning routine, no gratitude
+    worksheet, no plan to become a brighter, more efficient parent by Friday. It won''t
+    swear the heaviness lifts and never comes back, because that''s a lie and you
+    have been handed enough of those. The offer is smaller and more honest than that:
+    the plain relief of quitting the fight against your own sadness, and a few sentences
+    you can reach for the next time it shows up at 6 a.m. with a lunchbox in your
+    hand.
+
+
+    Nobody told you that you have to understand a feeling before you''re allowed to
+    have it. You don''t have to earn rest by being grateful first. You can be a genuinely
+    good parent and a steady, reliable worker and still be carrying a loss that no
+    one ever helped you put in the ground. Read this on a lunch break, in a parked
+    car, after the house finally goes quiet. One hour — long enough to set the thing
+    down for a minute and find out what it actually weighs.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - working parents
+  - depression for working parents
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: hannah_stern
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — permission to grieve without being rushed
+  toward a tidy recovery
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the exhaustion of carrying a load
+  no one acknowledges
+- How to Keep House While Drowning (KC Davis) — compassionate, no-shame help for functioning
+  while depleted
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

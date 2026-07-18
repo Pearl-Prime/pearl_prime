@@ -1,0 +1,104 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__depression__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__depression.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__through_loss
+  name: Through the Low Places — for the Sandwich Generation
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Overcoming Depression: After the Loss'
+subtitle: A Real Talk Guide to Depression for Gen X Sandwich
+cover_tagline: Some of what you call depression is grief you never got time to feel.
+description:
+  short_blurb: You're holding a family together while something inside you has gone
+    quiet and gray. This is a book for the Sandwich Generation about the heaviness
+    no one diagnosed correctly — the kind that turns out to be grief, not a defect.
+    It won't try to lift you out of it. It will help you finally name what you've
+    been carrying.
+  long_description: 'It''s 9 p.m. You just got your mother off the phone, signed a
+    permission slip, answered one more work email, and now you''re standing in the
+    kitchen and you can''t feel your own life. Not sad, exactly. Just heavy. Flat.
+    Like someone turned the color down. You''ve been calling it depression because
+    that''s the word you have — but underneath it is something you never had a single
+    uninterrupted hour to feel: loss. The parent you''re losing slowly. The version
+    of yourself who had room to breathe. The future you quietly let go of.
+
+
+    This book is for you — Gen X, in your forties or fifties, with a parent who needs
+    you and a kid who needs you and almost nothing left over. You don''t get to fall
+    apart; somebody has to drive to the pharmacy in the morning. So the grief went
+    underground, the way it does when there''s no room for it, and came back up wearing
+    the gray clothes of depression.
+
+
+    First you''ll recognize it: that the flat heaviness isn''t a flaw in you or a
+    chemical you failed to manage, it''s grief with nowhere to go. Then you''ll go
+    down into it instead of managing around it — naming exactly what you''ve lost,
+    in plain words, one loss at a time, without rushing to the part where you feel
+    better. Then you come back up changed. Not fixed. Lighter, because something finally
+    got named and felt instead of swallowed for one more year.
+
+
+    This is real talk, not a recovery program. There are no worksheets. No morning
+    routine to optimize your mood. No one telling you to be grateful for what you
+    still have. Sam Meridian, who spent years sitting with people at the end of their
+    lives, writes the way you''d want a steady friend to talk to you at the kitchen
+    table — direct, secular, unsentimental, never pretending this is simple.
+
+
+    What this book will not do: it will not promise to make the heaviness disappear,
+    because some of it is the honest weight of loving people you''re slowly losing.
+    It won''t hand you a productivity hack for your own sorrow. What it will do is
+    give you language for what''s actually happening in your body, so the next time
+    the gray descends at 9 p.m. in the kitchen, you can name it instead of bracing
+    against it.
+
+
+    You''re allowed to grieve while you keep showing up. You''re allowed to put it
+    down for one honest hour. Start here.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - the sandwich generation
+  - depression for the sandwich generation
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: sam_meridian
+comp_titles:
+- It's OK That You're Not OK (Megan Devine) — names grief as something to be carried,
+  not cured
+- Burnout (Emily & Amelia Nagoski) — explains the unfinished stress cycle living in
+  the exhausted body
+- The Body Keeps the Score (Bessel van der Kolk) — shows how unfelt loss lodges in
+  the body until it's named
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

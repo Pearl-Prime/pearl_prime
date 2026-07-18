@@ -1,0 +1,28 @@
+version: 2
+
+pending_assignments:
+  - brand_id: sleep_repair_tw
+    locale: zh-TW
+    field: voice_identity.cosyvoice2_voice_id
+    assigned: zh_tw_female_warm
+    status: resolved
+    primary_provider: cosyvoice2
+    fallback_provider: edge_tts
+    fallback_voice_id: zh-TW-HsiaoChenNeural
+    notes: >
+      Resolved 2026-04-08. CosyVoice2 is now primary for zh-TW.
+      Assigned zh_tw_female_warm archetype (warm Taiwanese Mandarin female).
+      Edge-TTS fallback replaces Google Wavenet.
+
+  - brand_id: stabilizer_hu
+    locale: hu-HU
+    field: voice_identity.elevenlabs_voice_id
+    assigned: pMsXgVXv3BLzUgSXRplE  # Serena voice — soft, warm female
+    status: resolved
+    primary_provider: elevenlabs
+    fallback_provider: edge_tts
+    fallback_voice_id: hu-HU-NoemiNeural
+    notes: >
+      Resolved 2026-04-08. ElevenLabs mandatory for hu-HU (no Google Neural2).
+      Assigned Serena voice (soft, compassionate — matches stabilizer positioning).
+      Edge-TTS fallback added.

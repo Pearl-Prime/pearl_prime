@@ -1,0 +1,57 @@
+# Freebie policy gates — single capture, workbook buyer-only, PDF ratio.
+name: Freebie policy
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'config/freebies/**'
+      - 'phoenix_v4/planning/freebie_*.py'
+      - 'scripts/freebies/**'
+      - 'tests/test_freebie_planner_workbook.py'
+      - 'brand-wizard-app/public/free/**'
+      - 'public/free/**'
+      - 'public/breathwork/**'
+      - 'somatic_exercise_freebee_apps/**'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'config/freebies/**'
+      - 'phoenix_v4/planning/freebie_*.py'
+      - 'scripts/freebies/**'
+      - 'tests/test_freebie_planner_workbook.py'
+      - 'brand-wizard-app/public/free/**'
+      - 'public/free/**'
+      - 'public/breathwork/**'
+      - 'somatic_exercise_freebee_apps/**'
+
+jobs:
+  freebie-policy:
+    name: Freebie policy gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install test dependencies
+        run: pip install -r requirements-test.txt
+
+      - name: Workbook buyer-only planner tests
+        run: PYTHONPATH=. python -m pytest tests/test_freebie_planner_workbook.py -q
+
+      - name: Pre-purchase PDF slot ratio
+        run: python3 scripts/freebies/validate_nurture_pdf_ratio.py
+
+      - name: Freebie capture smoke
+        run: python3 scripts/freebies/smoke_freebie_capture.py
+
+      - name: CID bypass wiring
+        run: python3 scripts/freebies/verify_cid_bypass.py
+
+      - name: GHL webhook live push (skip if env unset)
+        run: python3 scripts/freebies/verify_ghl_webhook_push.py
+        env:
+          PHOENIX_GHL_FUNNEL_WEBHOOK: ${{ secrets.PHOENIX_GHL_FUNNEL_WEBHOOK }}

@@ -1,0 +1,147 @@
+# Music Brand Registry — SSOT index for music-mode brands (38+)
+#
+# Authority chain:
+#   - Cap entry (governing):       MUSIC-MODE-BRAND-INTEGRATION-V1-01 in docs/PEARL_ARCHITECT_STATE.md
+#     - Ratified:                  PR #973 commit 465b772186 (cap + spec + coordination)
+#     - AMENDMENT:                  PR #975 commit 38c6596f95 (Q1-Q4 defaults ratified;
+#                                   cap proposed -> active; 6 ws runnable)
+#   - Spec (governing):            docs/specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md (esp. §5)
+#   - Cross-ref (rendering):        MUSIC-MODE-V1-01 (overlay / musician_banks / survey template)
+#   - Path X (read-only boundary):  config/manga/canonical_brand_list.yaml (37 manga brands;
+#                                   DO NOT add music-only rows there — anti-drift)
+#   - Survey template (schema):     artifacts/musician_survey/SURVEY_TEMPLATE.yaml
+#   - Active-brand SSOT alignment:  WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 (Q4 — wizard
+#                                   YAML presence is the activeness criterion)
+#
+# Operator decisions locked via MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT (2026-05-09):
+#   Q1 — UX flow placement:        mode selector at wizard step 1 (default)
+#   Q2 — brand_id slug rule:       <musician_handle>_music (default)
+#   Q3 — catalog volume tier:      800 baseline (default)
+#   Q4 — inactive brand path:      same brand_wizard YAML SSOT (default)
+#
+# Schema (per spec §5):
+#   schema_version:  integer (1 for V1)
+#   registry_id:     stable identifier for this registry file
+#   owner:           pearl_brand
+#   archetype:       music_mode  (first-class brand archetype, NOT a flag on teacher brands)
+#   id_space_start:  38  (Path X reserves 1..37; music-mode brands start at 38)
+#   path_x_boundary: cross-reference + read-only declaration for canonical_brand_list.yaml
+#   music_brands:    list of brand entries (initially empty / template-only — populated by
+#                    wizard + survey-save flow under separate ws rows)
+#
+# Per-brand entry schema (each item under music_brands):
+#   brand_id:               slug per Q2 default <musician_handle>_music
+#   musician_handle:        canonical handle for the musician (lowercase, snake_case)
+#   archetype:              free-form archetype string (e.g. "ambient_healer",
+#                           "indie_lyricist", "jazz_seeker"); NOT one of the manga
+#                           demographic taxonomy values — those are Path X-only
+#   mode:                   "music"  (enum lock; this registry holds music-mode only)
+#   status:                 "active" | "inactive"
+#                             active   = wizard YAML present (Q4 alignment)
+#                             inactive = wizard YAML present but flagged off
+#                                        (default — do NOT silently delete)
+#   survey_yaml_pointer:    relative repo path to the brand wizard YAML / persisted
+#                           survey output for this brand (the SSOT join key)
+#   created:                ISO 8601 date (YYYY-MM-DD) when brand was first registered
+#   notes:                  optional one-line human-readable summary
+#
+# Anti-drift invariants (do NOT violate):
+#   1. NO music-only brands appended to config/manga/canonical_brand_list.yaml.
+#      Path X is frozen at 37 entries. Music-mode brands live HERE.
+#   2. NO brand entry without a survey_yaml_pointer that resolves to a real wizard
+#      YAML on disk (silent-mint forbidden — see spec §5).
+#   3. NO duplication across registries: a brand_id present here MUST NOT also appear
+#      as a key in canonical_brand_list.yaml.brands (cross-walk only via this file).
+#   4. NO file:// hosted survey artifacts; live HTTP route inside wizard app only
+#      (spec §2 anti-drift; routing-level concern, but enforced via this registry's
+#      survey_yaml_pointer convention — server-relative paths only).
+#   5. status field is bounded to {"active","inactive"}. Inactive brands stay
+#      represented (do not delete rows; flip status). Q4 default.
+#
+# Anti-drift rationale (why a separate file from canonical_brand_list.yaml):
+#   - Path X 37 is the manga-pipeline canon governed by GENRE_PORTFOLIO_PLAN.md +
+#     MANGA_CATALOG_RECONCILIATION_SPEC.md. It uses a manga demographic taxonomy
+#     (josei/seinen/shonen/shojo/manhwa) that does not apply to music-mode brands.
+#   - Music-mode brands derive their identity from the musician_reflections_survey
+#     (see SURVEY_TEMPLATE.yaml: identity / themes / voice_craft / healing_intent),
+#     which yields different fields than the manga tier/demographic/topic schema.
+#   - Co-mingling would force one schema to subsume the other; the cap explicitly
+#     forbids that contamination.
+#
+# Volume target (Q3 default, spec §4):
+#   First music-mode catalog slice baseline = 800 books per active brand (catalog
+#   generator wired under ws_music_brand_catalog_generator_100pct_music_mode_20260509;
+#   100% music-mode rows — no composite teacher+music hybrids).
+
+schema_version: 1
+registry_id: music_brand_registry
+owner: pearl_brand
+archetype: music_mode
+id_space_start: 38
+last_updated: 2026-06-12
+
+path_x_boundary:
+  description: |
+    Path X 37 (config/manga/canonical_brand_list.yaml) is read-only relative to this
+    registry. Music-mode brands MUST NOT be appended there, and brand_id values
+    registered here MUST NOT collide with canonical_brand_list.yaml.brands keys.
+  canonical_brand_list_path: config/manga/canonical_brand_list.yaml
+  canonical_brand_list_total: 37
+  canonical_brand_list_status: read_only
+  cross_reference_only: true
+  enforcement: |
+    A loader MAY load both files, but it MUST treat canonical_brand_list.yaml as
+    read-only when servicing music-mode lookups, and MUST NOT write any row into
+    canonical_brand_list.yaml from a music-mode flow. Validators SHOULD assert
+    disjoint key sets across the two registries.
+
+# Music-mode brand entries (38+).
+#
+# Initial state:
+#   - One inactive template entry below so downstream consumers have a non-empty
+#     file to pattern-match (loader smoke-tests, schema validators, CI yaml-lint).
+#   - Real musician brands are populated via the brand wizard + survey-save flow
+#     under separate workstreams:
+#       - ws_music_brand_wizard_step1_step4_survey_pane_20260509  (wizard UX)
+#       - ws_music_brand_survey_save_post_yaml_advance_20260509   (POST + persist)
+#       - ws_music_brand_wizard_live_embed_routing_20260509       (live HTTP route)
+#     Once the wizard persists a brand_wizard YAML for a musician, a real entry is
+#     appended HERE under that ws's PR — NOT manually seeded ahead of time.
+
+music_brands:
+
+  # Template entry — inactive placeholder, NOT a real musician brand.
+  # DO NOT remove without an AMENDMENT; downstream loaders depend on a non-empty
+  # music_brands list for smoke-tests and schema validation.
+  - brand_id: _template_music
+    musician_handle: _template
+    archetype: placeholder
+    mode: music
+    status: inactive
+    survey_yaml_pointer: artifacts/musician_survey/SURVEY_TEMPLATE.yaml
+    created: 2026-05-09
+    notes: |
+      Schema-only template entry (inactive). Replaced/joined by real musician
+      brands once the wizard + survey-save flow lands under the separate ws rows
+      noted in this file's header. DO NOT use as a canonical brand binding.
+
+  # Ahjan — ZEROTH / REFERENCE music-mode kit (first real entry).
+  #   Cap:   MUSIC-ONBOARDING-SONG-KIT-V1-01 (docs/PEARL_ARCHITECT_STATE.md)
+  #   Spec:  docs/specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md §4 (Ahjan first/reference kit)
+  #   Bank:  SOURCE_OF_TRUTH/musician_banks/ahjan/ (profile/themes/voice_profile + 6 slot pools)
+  #   Seed:  SOURCE_OF_TRUTH/teacher_banks/ahjan/ corpus (reuse-not-greenfield; spec §4.2)
+  # brand_id slug per Q2 (<musician_handle>_music). status=active per Q4 (survey YAML present
+  # on disk — survey_yaml_pointer resolves; NO silent-mint, anti-drift invariant #2). This is the
+  # internal gold reference; it does NOT collapse V2's open Q-MM-V2-FIRST-REAL-MUSICIAN-01
+  # (operator-only Q-MSK-AHJAN-VS-V2-FIRST-01; spec §4.3).
+  - brand_id: ahjan_music
+    musician_handle: ahjan
+    archetype: meditative_ambient_healer
+    mode: music
+    status: active
+    survey_yaml_pointer: artifacts/musician_survey/ahjan_survey.yaml
+    created: 2026-06-12
+    notes: |
+      Zeroth/reference song-kit seeded from the operator's own teaching corpus
+      (teacher_banks/ahjan/). Gold exemplar of the survey -> 6-pool flow. Reference
+      kit only; distinct from V2's open first-real-external-musician question.

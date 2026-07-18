@@ -1,0 +1,107 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__depression__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__depression__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__through_loss__1hr
+  name: Through the Low Places — for Nurses (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Overcoming Depression: When Everything Is Too Much (1)'
+subtitle: Practical Tools to Regain Control When Life Feels Unmanageable — Depression
+  for Healthcare Rns (The Overwhelm Response)
+cover_tagline: The moment your brain goes white at the nurses' station — that's not
+  failure, that's a shutdown.
+description:
+  short_blurb: For the nurse who hit the wall mid-shift and went numb. This one hour
+    names the shutdown point for what it is, takes you down into it instead of forcing
+    you back online, and brings you out the other side without a single productivity
+    tip.
+  long_description: 'Six patients, two of them circling the drain, three call lights
+    going off at once, a doctor wants a callback, pharmacy has you on hold, and somewhere
+    in the middle of all of it your brain just goes white. Not panic. The opposite
+    of panic. A flat, far-away calm where the noise keeps coming but you''ve stopped
+    fully reaching it, like the volume on your own life got turned down. You move
+    through the rest of the shift like you''re underwater, doing the tasks with your
+    hands while the rest of you is somewhere behind glass. Later you call it depression,
+    because how else do you explain feeling nothing while everything around you is
+    on fire.
+
+
+    This hour is for the nurse who has too much landing at once, every single shift,
+    and finally hit the point where the system tripped. The one who has learned to
+    look composed and competent while the inside has quietly gone offline. Who gets
+    home and can''t decide between eating and sleeping, so does neither, and ends
+    up staring at the wall with the lights off. If the overwhelm stopped feeling like
+    stress and started feeling like a shutdown — like a breaker thrown somewhere you
+    can''t reach — this one is yours.
+
+
+    Waystream calls this the overwhelm engine. Recognition: it names the white-out
+    as a nervous system that took on more than any human being can hold and pulled
+    the breaker to keep you upright. It is not laziness, and it is not you being soft
+    or dramatic or bad at the job. It is a body doing exactly what bodies do when
+    the load crosses a line. Descent: rather than dragging you back to functional
+    with breathing hacks and a brave face, it has you go down into the shutdown on
+    purpose, feel the actual size of what you''ve been carrying, and stop fighting
+    the part of you that went still to survive it. Integration: you come back up able
+    to meet a heavy assignment without the whole panel flooding and dropping you offline,
+    knowing in your body the difference between a hard shift you can ride and a shutdown
+    that needs tending before it stacks again.
+
+
+    This will not teach you to do more with less. It will not hand you a prioritization
+    framework or tell you to delegate better on a unit that has no one left to delegate
+    to. No worksheets, no five-a.m. routine, no toxic reframe about how you''ve totally
+    got this. The problem was never your time management. The problem is that the
+    load is genuinely too much, often enough, for long enough, that your body finally
+    started shutting the doors on its own.
+
+
+    You are allowed to have hit your limit. The shutdown was your system keeping you
+    alive, and you can learn to come back from it instead of just bracing for the
+    next one.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  secondary:
+  - nurses
+  - depression for nurses
+  - one hour
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- Burnout (Emily and Amelia Nagoski) — the science of overload and completing the
+  stress response
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — what chronic stress actually does
+  to the body
+- Do Nothing (Celeste Headlee) — permission to stop measuring your worth by throughput
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

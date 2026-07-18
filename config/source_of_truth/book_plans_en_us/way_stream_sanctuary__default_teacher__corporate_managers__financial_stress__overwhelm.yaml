@@ -1,0 +1,108 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__financial_stress__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__money_fears
+  name: Money Without Panic — for Managers
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Paycheck Pressure: The Shutdown Point'
+subtitle: A Field Guide for Corporate Managers Navigating Financial Stress
+cover_tagline: Payroll, runway, your own rent — and the stack lands on you all at
+  once.
+description:
+  short_blurb: 'Financial stress for a manager isn''t one bill, it''s the whole weight
+    at once: the team''s numbers, the company''s numbers, and yours, with no gap between
+    them. This book is about what to do when too much money pressure arrives faster
+    than you can sort it. No master spreadsheet, no quarterly reset ritual, no grind-harder
+    pep talk.'
+  long_description: 'The forecast came in soft. Someone on your team just asked about
+    headcount for next year. Your variable comp turned into a question mark sometime
+    this quarter, and your own fixed costs don''t flex an inch no matter what the
+    company decides to do. It all arrives inside the same hour, and your body answers
+    the way it would to something physical in the room: braced, buzzing, breath riding
+    high in your chest. Nothing has actually fallen over. There''s simply too much
+    of it, and every piece is aimed at you.
+
+
+    This book is for the manager who absorbs financial pressure from above and below
+    at the same time and has nowhere to set the overflow down. You''re the buffer
+    in the middle. The company''s anxiety routes down through you to the team, the
+    team''s worry routes back up through you to the company, and somewhere in that
+    channel sits your own rent, your own family, your own number, getting no exemption
+    from either direction. When it stacks, it doesn''t read as a problem to solve.
+    It reads as a weight to outlast.
+
+
+    Waystream doesn''t open with a plan, because the planning is part of what''s grinding
+    you down. It opens by naming the state: overwhelm, the point where incoming pressure
+    outruns your ability to triage and the sorting function simply stops. The first
+    skill is catching that flood before it swallows the night and takes your sleep
+    with it. Then you do the thing that feels wrong while you''re buried, which is
+    to stop trying to climb on top of the pile. Getting on top of an unsortable load
+    is itself half the exhaustion. You let the weight be weight, you quit grading
+    each piece against the others, and you set your attention on the one obligation
+    that''s genuinely in front of you tonight. From there you can carry the real next
+    thing instead of all the things simultaneously.
+
+
+    This book will not optimize your money and it will not sell you a system that
+    swears the pressure lifts if you''d only track it correctly. It won''t tell you
+    to reset every Sunday and picture the win. It will not recast your overwhelm as
+    a willpower gap you can grind past. The load is real. You''re not failing to manage
+    it; you are carrying more of it than the math allows.
+
+
+    What it offers is a name for what happens when the stack tips, and a way to stand
+    inside it without going under. Plain, secular, no gloss. Written for someone holding
+    more than one person should and tired of being told to hold it more efficiently.
+
+
+    You can put the entire weight down for one night and pick up exactly one piece
+    of it. That isn''t avoidance. That''s the mechanics of staying upright.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - managers
+  - financial stress for managers
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: theo_castellan
+comp_titles:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — the
+  body-level stress overload of carrying pressure for others'
+- Four Thousand Weeks (Oliver Burkeman) — releasing the fantasy of getting on top
+  of an impossible pile
+- It Didn't Start with You (Mark Wolynn) — secular look at inherited financial pressure
+  and how it lives in the body
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

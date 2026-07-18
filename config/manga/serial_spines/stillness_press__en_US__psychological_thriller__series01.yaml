@@ -1,0 +1,121 @@
+schema_version: "1.0.0"
+artifact_type: serial_spine
+series_id: stillness_press__en_US__psychological_thriller__series01
+catalog_title: "The Room Reads You Back"
+genre: psychological_thriller
+mode: teacher
+pilot_ref: artifacts/manga/pilots/wave1/the_room_reads_you_back__ep_001.chapter_script.yaml
+spine_source: artifacts/manga/pilots/SERIAL_ENGINE_SPINES_5VOL.md
+
+serial_engine: body_confesses_before_mouth
+long_arc_spine: >-
+  Can Mara read the witness instead of the lawyer when every case attacks her method at
+  a new failure point — and when the Ledger's replicable model and the Mirror's weaponized
+  tells aim the instrument back at the people who taught it?
+renewable_unit: >-
+  One case per volume with a new tell channel — muted footage, phone breathing,
+  deposition typos — where the body confesses to its truth, not her theory.
+escalation_axis: >-
+  Adversary competence and method inversion — each case jams the instrument at a new
+  failure point, ending with the method aimed at Voss and Mara herself.
+shell_law: >-
+  Thrillers escalate by adversary competence and method inversion — each case attacks
+  the method at a new failure point. The body confesses before the mouth; logic alone
+  loses.
+binge_mechanism: >-
+  Case cliffs + method-vs-model war + drip-fed origin; each volume's case closes but
+  its implication opens the next.
+
+volume_arcs:
+  - volume: 1
+    title: "The Tell"
+    logline: >-
+      Hadley conviction wobbles — tell real but pointed at a different crime; the Ledger
+      behavioral-analytics unit arrives as replicable rival instrument.
+    status: authored
+  - volume: 2
+    title: "The Still Man"
+    logline: >-
+      Null case — suspect with no tells; stillness is the tell; Mara beats the Ledger
+      by one beat but cannot show her work.
+    status: planned
+  - volume: 3
+    title: "The Mirror"
+    logline: >-
+      Adversary reads bodies too and feeds false alarms until Mara's instrument jams;
+      Voss benched by software rollout.
+    status: planned
+  - volume: 4
+    title: "The Instrument Breaks"
+    logline: >-
+      Case adjacent to Mara's own history — why she scans exits; Ledger flags her blind
+      spot; data and body become complementary instruments.
+    status: planned
+  - volume: 5
+    title: "The Witness Who Taught Me"
+    logline: >-
+      Voss's cold case — his tell on the page since ep_001; Mara reads the one body she
+      never watched; new case file and her throat moves at the photo.
+    status: planned
+
+named_pressures:
+  - id: voss
+    kind: relationship
+    label: Detective Voss — doctrine as person, unread body, coffee never finished
+    introduced_volume: 1
+    arc_note: ep_001 observation only; V5 cold-case payoff.
+  - id: hadley_aftermath
+    kind: mystery
+    label: Hadley conviction aftermath — tell real, crime misidentified
+    introduced_volume: 1
+    arc_note: ep_002 conviction wobble plant.
+  - id: new_case_file
+    kind: system
+    label: Case-per-volume rhythm — fresh witness each arc
+    introduced_volume: 1
+  - id: the_ledger
+    kind: system
+    label: Bureau behavioral-analytics unit — replicable, admissible rival instrument
+    introduced_volume: 1
+    arc_note: ep_002 named and briefed; method-vs-model war.
+  - id: the_mirror
+    kind: rival
+    label: Adversary who weaponizes Mara's own tells back at her
+    introduced_volume: 3
+
+rivals:
+  - id: hadley
+    name: Hadley
+    pressure_id: hadley_aftermath
+    rival_arc: smooth_liar → throat_tell → confession_to_different_crime
+  - id: the_ledger
+    name: The Ledger
+    pressure_id: the_ledger
+    rival_arc: model_confidence → institutional_bruise → complementary_instrument
+  - id: the_mirror
+    name: The Mirror
+    pressure_id: the_mirror
+    rival_arc: read_bodies → feed_false_alarms → jam_instrument
+
+set_piece_registry:
+  - id: precinct_night_establishing
+    label: Rain-streaked precinct — sodium glare, slatted-blind shadow
+    renewal_rule: New case geography each volume; same watchful grammar.
+  - id: white_room_logic_push
+    label: Interrogation white room — logic vs composed liar
+    renewal_rule: New suspect; same override-fails pattern until body read.
+  - id: muted_footage_reading
+    label: Muted video — watch the witness, not the lawyer
+    renewal_rule: New channel each case (video, call, deposition typos).
+  - id: throat_tell_reveal
+    label: Body flinches before mouth speaks
+    renewal_rule: New tell location each case; collectible notebook sketch.
+  - id: amber_lamp_body_read
+    label: Warm desk-lamp amber — where truth is actually read
+    renewal_rule: Amber vs white room contrast; Mara's own body in V4.
+  - id: interrogation_stillness_duel
+    label: Stillness duel in the white room
+    renewal_rule: New adversary competence each volume.
+  - id: notebook_tell_sketch
+    label: Tell drawn in notebook like evidence
+    renewal_rule: One new tell sketched per case close.

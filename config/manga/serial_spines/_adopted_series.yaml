@@ -1,0 +1,25 @@
+# Series with machine-readable serial spines adopted for planning/runtime.
+# CI gate check_manga_serial_spine.py requires spine + continuity for every id here.
+schema_version: "1.0.0"
+adopted_series:
+  - series_id: heart_balance_shojo__en_US__romance_josei_drama__series01
+    genre: romance_josei_drama
+    pilot: artifacts/manga/pilots/wave2/worthy_of_the_window_seat__ep_001.chapter_script.yaml
+  - series_id: legacy_builder_memoir__en_US__historical_period__series01
+    genre: historical_period
+    pilot: artifacts/manga/pilots/wave2/the_last_letter_home__ep_001.chapter_script.yaml
+  - series_id: devotion_path_shonen__en_US__cultivation_martial__series01
+    genre: cultivation_martial
+    pilot: artifacts/manga/pilots/wave2/the_mountain_does_not_move__ep_001.chapter_script.yaml
+  - series_id: stillness_press__en_US__dark_fantasy__series02
+    genre: dark_fantasy
+    pilot: artifacts/manga/pilots/the_forest_beneath_the_skin__ep_001.chapter_script.yaml
+    spine_source: artifacts/manga/pilots/SERIAL_ENGINE_SPINES_5VOL.md
+  - series_id: stillness_press__en_US__action_battle__series01
+    genre: action_battle
+    pilot: artifacts/manga/pilots/wave1/the_blade_that_stopped_trying__ep_001.chapter_script.yaml
+    spine_source: artifacts/manga/pilots/SERIAL_ENGINE_SPINES_5VOL.md
+  - series_id: stillness_press__en_US__psychological_thriller__series01
+    genre: psychological_thriller
+    pilot: artifacts/manga/pilots/wave1/the_room_reads_you_back__ep_001.chapter_script.yaml
+    spine_source: artifacts/manga/pilots/SERIAL_ENGINE_SPINES_5VOL.md

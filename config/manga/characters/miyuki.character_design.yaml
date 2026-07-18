@@ -1,0 +1,211 @@
+character_design:
+  series_id: relational_calm_iyashikei            # brand-genre lane (Miyuki is the recurring mentor across all 8 relational_calm series, not a single-series protagonist)
+  brand_id: relational_calm
+  locale: ja_JP                                    # OPERATOR-CONFIRM: Miyuki anchor locale — Kyoto-coded teacher; relational_calm series ship ja_JP/en_US/+9 (series_01 target_locales). ja_JP set as her native register; en_US render uses same design.
+  market_demo: josei                              # OPERATOR-CONFIRM: brand-genre lane + most series are josei, but Miyuki ALSO mentors seinen (series_02/05), shojo (series_03/07), shonen (series_06). Anchored josei per relational_calm_iyashikei.yaml + gold-template parity; confirm if her design should be demo-neutral.
+  genre_family: healing
+  subgenre: relational_shame_recovery             # per config/source_of_truth/manga_profiles/brands/relational_calm_iyashikei.yaml
+  character_id: miyuki
+  character_role: mentor                           # recurring teacher/guide figure (therapist, former teacher, nurse, bookstore owner, cafe owner, nutritionist, art therapist, retired gardener across series_01-08) — NOT protagonist
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml character_loras.miyuki.notes: 'Japanese female, late 40s, Kyoto-coded, wabi-sabi simplicity, quiet steady presence, kitchen-table teacher register' (trigger_word miyuki_rc; inherits former junko wabi-sabi visual register per OPD-111; ip_adapter_weight 0.82)"
+    - "brand_style_loras.relational_calm.notes: 'Wabi-sabi minimalism, maximum negative space'"
+    - "PEARL_ARCHITECT_STATE.md JUNKO-CHANNELING-MIYUKI-CONTEMPLATIVE-01: 'NEW teacher miyuki (display: Miyuki): Japanese contemplative (lay-secular, wabi-sabi, ganbaru, mono no aware). Honorific = null. Geographic anchor = Kyoto. Female, late 40s.' Voice ja_f_mature_warm_01."
+    - "SOURCE_OF_TRUTH/teacher_banks/miyuki/doctrine/doctrine.yaml: 'My name is Miyuki. I am from Kyoto. I am not a roshi.'; body_first_recognition ('trembling hands, held shoulders, tightened jaw'); kitchen_table_dawn (tea before dawn); 'steady hands and no cruelty'; lay (zaike), no ordination"
+    - "relational_calm/series_01 series_description: 'Miyuki, a seasoned therapist, guides her through small, daily exercises in boundary-setting' — establishes recurring mentor role"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Differentiation from Mira Aoki (soft_round): Miyuki is oval — a longer, more
+    # composed adult contour read appropriate to a late-40s Kyoto woman with quiet
+    # gravity. Soft_round carries a gentle-young iyashikei signal; oval (Adachi-school
+    # mature-neutral) reads as settled adult composure without the gekiga angularity.
+    face_shape:
+      value: oval                                  # OPERATOR-CONFIRM: brand_lora gives age/ethnicity only; oval inferred from "late 40s / quiet steady presence" (vs Mira soft_round).
+      lockout: yes
+      mangaka_tradition: "Adachi-style oval (mature-neutral josei adult — composed, low-drama)"
+
+    # AXIS 2 — eye_geometry
+    # SINGLE-LID is the hard differentiator from Mira's double-lid. Medium almond,
+    # standard spacing, minimal lashes = Asano-adjacent mature-restrained register.
+    # A late-40s Kyoto woman who "reads the body calmly" (doctrine body_first_recognition)
+    # carries a steady, low-aperture gaze, not a wide modern josei eye.
+    # Forbidden-combo safe: NOT extra_large + heavy_decorative (shojo-in-josei rule).
+    eye_geometry:
+      size: medium
+      shape: almond
+      spacing: standard
+      lid_fold: single                             # OPERATOR-CONFIRM: single-lid (vs Mira double) chosen as the high-leverage age/ethnicity differentiator; confirm desired lid morphology.
+      eyelash_density: minimal
+      lockout: yes
+      note: "single_lid + warm_light skin (axis 10) signals mature East-Asian Kyoto-coded ethnicity consistent with the doctrine 'I am from Kyoto'; minimal lashes hold the wabi-sabi restraint. Hard contrast with Mira's double_lid + minimal."
+
+    # AXIS 3 — nose_construction
+    # Slightly more rendered than Mira's iyashikei 'short/implied' to read mature,
+    # but nostril stays 'implied' to keep the soft josei register (not seinen 'drawn').
+    nose_construction:
+      bridge_angle: straight
+      bridge_length: medium                        # OPERATOR-CONFIRM: medium (vs Mira short) for adult maturity; guessed beyond brand_lora.
+      tip_shape: rounded
+      nostril_visibility: implied
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # resting 'neutral_firm' (vs Mira's neutral_soft) carries Miyuki's plain-spoken
+    # steadiness — "delivers hard truths the way a good friend does, with steady hands
+    # and no cruelty" (doctrine). Canonical josei lip; bow_mouth forbidden (avoided).
+    mouth_jaw:
+      resting_expression: neutral_firm             # OPERATOR-CONFIRM: neutral_firm (vs Mira neutral_soft) inferred from doctrine "clarity is its own form of kindness / plain-spoken".
+      jaw_width: medium                            # OPERATOR-CONFIRM: medium (vs Mira narrow) for mature adult; guessed.
+      chin_shape: rounded                          # OPERATOR-CONFIRM: rounded (vs Mira soft_pointed); guessed.
+      lip_shape: thin_upper_full_lower
+      lockout: yes
+
+    # AXIS 5 — hair
+    # HIGHEST-LEVERAGE silhouette differentiator from Mira (long_to_waist / side_left /
+    # side_swept / slight_wave / brown). Miyuki diverges on ALL FIVE sub-attributes:
+    # SHOULDER length, CENTER-gathered low bun, NO fringe, STRAIGHT, GREY_AT_TEMPLES.
+    # A late-40s Kyoto woman in a low loose bun with temple-grey is an instantly
+    # distinct silhouette — and the grey is a true late-40s age cue Mira cannot share.
+    hair:
+      length: shoulder                             # OPERATOR-CONFIRM: shoulder-length low bun inferred from "late 40s / quiet steady / Kyoto" (vs Mira long_to_waist).
+      parting: center
+      fringe_style: no_fringe                      # OPERATOR-CONFIRM: clean centre, no fringe — guessed for mature austerity.
+      texture: straight
+      color_signal: grey_at_temples                # OPERATOR-CONFIRM: grey_at_temples is a deliberate late-40s age signal (vs Mira brown); confirm grey vs dark_brown.
+      signature_shape_note: "dark hair gathered low at the nape in a plain loose bun, a few silver strands at the temples; when she leans toward the kitchen table at dawn a strand slips free and she tucks it back with steady fingers (body-first / steady-hands motif). The low-bun-plus-temple-grey silhouette is her instant ID and never resembles Mira's loose waist-length side-swept wave."
+      lockout: yes
+
+    # AXIS 6 — build
+    # Per template default — silhouette less individuating than face; solver leaves free.
+    build:
+      height_implied: average
+      frame_density: small
+      shoulder_ratio: narrow
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # Kyoto lay-secular wabi-sabi everyday register: indigo-dyed noragi/samue-style
+    # natural-fibre workwear + a linen apron in kitchen-table scenes. formality 'casual'
+    # (vs Mira's business_casual) encodes the kitchen-table-teacher, not the office worker.
+    # "Practice is washing dishes at eleven at night... the kitchen table before dawn" (doctrine).
+    wardrobe_register:
+      era_signal: contemporary_2020s
+      personality_encoding:                        # OPERATOR-CONFIRM: specific garments inferred from Kyoto/wabi-sabi/kitchen-table register; brand_lora names none.
+        - indigo_aizome_noragi_jacket              # indigo-dyed Japanese workwear jacket — the wabi-sabi signature garment
+        - natural_linen_wide_trousers
+        - kitchen_apron_undyed_linen               # worn in kitchen-table-dawn scenes
+        - flat_woven_house_sandals
+      formality: casual
+      lockout: yes
+
+    # AXIS 8 — posture_default
+    # Grounded, steady, symmetric — "steady hands and no cruelty". Hands often folded
+    # or resting on the table. Not contained-anxious (Mira) — settled-calm.
+    posture_default:
+      energy: contained
+      symmetry: symmetric                          # OPERATOR-CONFIRM: symmetric settled stance (vs Mira slight_left_lean); guessed.
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # late_40s per PEARL_ARCHITECT_STATE + brand_lora — the single cleanest separator
+    # from Mira (early_30s). Visible mature cues Mira cannot carry: soft smile lines,
+    # temple grey, gentle nasolabial. Reads warmth-with-years, never frailty.
+    age_signaling:
+      apparent_age_decade: 40s                     # 'late 40s' per OPD-111 / brand_lora; allowed-value bucket is '40s'
+      visible_age_cues:                            # OPERATOR-CONFIRM: specific cues inferred for late-40s warmth; brand_lora states decade only.
+        - smile_lines_visible
+        - grey_at_temples
+        - soft_nasolabial_fold
+        - clear_eyes_steady_gaze
+      lockout: yes
+
+    # AXIS 10 — skin_treatment
+    # Clean with the faint weathering of a settled adult; warm_light tone consistent
+    # with the eye_geometry note. Solver leaves free per template.
+    skin_treatment:
+      texture: clean                               # OPERATOR-CONFIRM: clean-with-faint-maturity; guessed.
+      tone: warm_light
+      lockout: no
+
+    # AXIS 11 — accessories
+    # UNIQUE high-leverage signature item — deliberately NOT Mira's jade pendant.
+    # Miyuki's grounding object is a worn INDIGO-DYED (aizome) TENUGUI hand-cloth she
+    # keeps at the kitchen table and folds between steady hands while she listens — a
+    # direct embodiment of body_first_recognition + kitchen_table_dawn. Paired with a
+    # plain unglazed ceramic teacup (the dawn tea). No glasses; jewellery minimal.
+    accessories:
+      glasses: none
+      jewelry: minimal
+      signature_item: "worn indigo aizome tenugui (hand-dyed cotton hand-cloth) — she keeps it folded at the kitchen table and turns it slowly between steady hands while she listens; the deep indigo is her recurring visual through-line and her body-first grounding object (the manga analogue of her doctrine: notice the hands before the story). Distinct from Mira's jade pendant in both object and gesture."  # OPERATOR-CONFIRM: signature object invented to satisfy unique-signature contract; confirm the aizome tenugui (vs e.g. a teacup-primary or indigo furoshiki).
+      secondary_signature_item: "plain unglazed ceramic teacup (kitchen_table_dawn tea) — the wabi-sabi paired prop"
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Indigo (aizome) primary + ochre accent + slate secondary = Kyoto wabi-sabi
+    # earth-and-indigo palette. Deliberately disjoint from Mira's warm_cream + jade_green.
+    # In B&W, Miyuki anchors as a DEEP-VALUE figure (the indigo reads dark), the inverse
+    # of Mira's pale-grey anchoring — a clean B&W register separation too.
+    color_signal:
+      palette_primary: indigo
+      palette_accent: ochre
+      palette_secondary: slate
+      bw_register_note: "Miyuki renders deeper-value-anchored: her indigo workwear reads as a dark mid-to-low grey, so in any shared panel she is the darker, settled mass against a lighter protagonist (the inverse of Mira's pale mid-grey anchoring). The folded indigo tenugui is her single near-black accent the eye returns to."
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # face_shape, eye_geometry, nose_construction, mouth_jaw, hair,
+    # wardrobe_register, age_signaling, accessories, color_signal
+    # (build, posture_default, skin_treatment intentionally lockout: no per template defaults)
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: relational_calm
+      cross_brand_scope: all_catalog
+      collisions_detected: []
+      notes: "Miyuki is the sole relational_calm teacher-character, so same-brand 5-axis collision risk is structurally nil. Binding check is cross-brand 7-locked-axis vs Mira Aoki (stillness_press): diverges on face_shape (oval vs soft_round), eye_geometry.lid_fold (single vs double), hair (shoulder/center/no_fringe/straight/grey vs long/side/side-swept/wave/brown), age_signaling (40s vs early_30s), accessories.signature_item (aizome tenugui vs jade pendant), color_signal (indigo/ochre/slate vs warm_cream/jade_green) — 6+ high-leverage locked axes differ, well under the 7-match reject threshold."
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    # 3-model routing per archetype (engine_router.py dispatches per archetype).
+    # Authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    # NOTE: that spec path is referenced-but-pending in-repo (cited by the gold
+    # template stillness_en_01.yaml and MANGA_LAYER_RENDER_CONTRACT_SPEC.md, file
+    # not yet materialized) — OPERATOR-CONFIRM the authority path on materialization.
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    engines_in_play:
+      - flux_schnell        # simple objects, backgrounds, decompression archetypes
+      - flux_dev            # mid-shots, hands (the steady-hands motif), character-in-scene
+      - qwen_image_pulid    # face close-ups (identity-critical)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "Per brand_lora_plans.yaml character_loras.miyuki the LoRA assets are deferred — Miyuki is a named recurring teacher-character held on PuLID-FLUX-FaceNet identity-lock (ip_adapter_weight 0.82), with character-LoRA training a Pearl Star ComfyUI commission not yet run (reference_images_needed: front/three_quarter/profile/expression_sheet still to be generated). PuLID-FLUX-FaceNet from the canonical reference sheet suffices until that commission lands."
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - wardrobe_register
+        - age_signaling
+        - accessories
+        - color_signal
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    reference_image_seed: teacher_pics/miyuki.png   # real-photo teacher reference exists (LFS asset); seed for PuLID reference-sheet generation
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
+    # Phase C reference-sheet generation (Qwen + PuLID), suggested path:
+    # artifacts/manga/character_references/relational_calm/miyuki/{front,three_quarter,profile,expression_sheet}.png

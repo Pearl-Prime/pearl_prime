@@ -1,0 +1,58 @@
+name: Podcast weekly production
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  produce-podcasts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Run podcast pipeline for all 37 canonical brands
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          COSYVOICE_URL: ${{ secrets.COSYVOICE_URL }}
+          PODCAST_PUBLIC_BASE_URL: ${{ vars.PODCAST_PUBLIC_BASE_URL }}
+        run: |
+          WEEK=$(date +%G-W%V)
+          # Resolve the 37 brand ids from the canonical brand registry (single
+          # source of truth) so this loop auto-tracks the registry with no
+          # hardcoded brand list to drift. See config/manga/canonical_brand_list.yaml.
+          BRAND_IDS=$(python -c "import yaml,sys; print('\n'.join(yaml.safe_load(open('config/manga/canonical_brand_list.yaml'))['brands'].keys()))")
+          echo "Resolved $(echo "${BRAND_IDS}" | grep -c .) brand ids from canonical_brand_list.yaml"
+          for BRAND_ID in ${BRAND_IDS}; do
+            echo "::group::podcast :: ${BRAND_ID}"
+            OUT="artifacts/weekly_packages/${BRAND_ID}/${WEEK}"
+            python scripts/podcast/run_podcast_pipeline.py \
+              --brand-id "${BRAND_ID}" \
+              --locale es-US \
+              --week "${WEEK}" \
+              --book-dir artifacts/pipeline_examples/ahjan \
+              --output-dir "${OUT}" \
+              --formats podcast_episode,podcast_short \
+              --skip-upload
+            echo "::endgroup::"
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: podcast-${{ github.run_id }}
+          path: artifacts/weekly_packages/*/podcast/

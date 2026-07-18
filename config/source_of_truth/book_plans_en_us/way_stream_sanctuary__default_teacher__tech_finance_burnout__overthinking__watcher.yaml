@@ -1,0 +1,106 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__overthinking__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__overthinking.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__restless_mind
+  name: Quiet the Restless Mind — for Tech & Finance Professionals
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Stop Overthinking: The Observer''s Mind (1)'
+subtitle: The Space Between You and Your Anxiety — Overthinking for Tech Finance Burnout
+  (The Observer's Mind)
+cover_tagline: You're not your thoughts. You're the one exhausted from watching them
+  all day.
+description:
+  short_blurb: 'There''s a part of you that never clocks out — scanning every message
+    for subtext, every meeting for the thing you missed, every decision for the mistake
+    you haven''t found yet. This is a grounded look at the watcher: the hypervigilant
+    mind that mistakes constant monitoring for safety. Not a way to silence it. A
+    way to find the space between you and the running commentary, and to stand down.'
+  long_description: 'You know the feeling of being slightly outside yourself, watching.
+    Mid-conversation, half of you is talking and the other half is auditing — did
+    that land, was that too much, what did the silence mean. You leave the standup
+    and immediately replay your own three sentences. You proofread your own face.
+    The monitoring never stops, because somewhere along the way your mind decided
+    that if it just watches closely enough, nothing bad can get past it.
+
+
+    This book is for the high-performers in tech and finance who live behind the glass
+    — the ones whose vigilance got them here and is now quietly running them into
+    the ground. In your world, the people who catch what others miss get promoted.
+    So you trained the watcher, fed it, made it the best in the building. And now
+    it won''t power down. It scans your sleep. It scans your weekends. It treats your
+    own inner life as one more system to be monitored for faults.
+
+
+    The move here isn''t to kill the watcher — you can''t, and you wouldn''t want
+    to lose the part of you that actually catches things. It''s to notice that there''s
+    a difference between the watcher and you. Recognition: you start to feel the gap
+    between the running commentary and the one who''s aware of it. Descent: instead
+    of fixing the hypervigilance or trying to force the mind quiet, you go toward
+    it, you let yourself feel how tired the watching makes you, how much it''s been
+    carrying. And integration: you come back with the watcher still online, but no
+    longer mistaken for the whole of you. There''s space now. Room between you and
+    the monitoring where you can actually stand.
+
+
+    This is not a book about clearing your mind or reaching some still, empty calm.
+    It will not promise to switch off your vigilance, and it won''t sell you a technique
+    to observe your thoughts your way to peace. There''s no optimization here, no
+    turning your watchfulness into a cleaner, more efficient tool. The watcher is
+    going to keep watching. You''re just going to stop being the same thing as it.
+
+
+    Written plainly, for people who have never once been off-duty inside their own
+    heads — and didn''t know that was a thing you were allowed to set down.
+
+
+    The watching doesn''t have to stop for you to rest. You can let it run in the
+    next room and close the door.'
+keywords:
+  primary:
+  - stop overthinking
+  - overthinking help
+  - rumination
+  - racing thoughts
+  - quiet the mind
+  - analysis paralysis
+  secondary:
+  - tech & finance professionals
+  - overthinking for tech & finance professionals
+bisac_codes:
+- SEL036000
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: daniel_cho
+comp_titles:
+- The Untethered Soul (Michael A. Singer) — secular framing of the constant inner
+  narrator and the awareness behind it
+- Chatter (Ethan Kross) — why the self-monitoring inner voice runs hot and what actually
+  quiets it
+- Hyperfocus (Chris Bailey) — the cost of a mind that never stops scanning and the
+  case for letting attention rest
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

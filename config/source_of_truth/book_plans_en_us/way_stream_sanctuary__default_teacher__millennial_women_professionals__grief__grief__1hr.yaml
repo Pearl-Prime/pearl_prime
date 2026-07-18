@@ -1,0 +1,102 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__grief__grief__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__grief__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__through_loss__1hr
+  name: Through the Low Places — for Professional Women (One-Hour)
+installment_number: 1
+engine: grief
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'Grief: Living with What You''ve Lost (3)'
+subtitle: A Field Guide for Millennial Women Professionals Navigating Grief
+cover_tagline: Everyone expected you back to normal by now. Grief didn't get the memo.
+description:
+  short_blurb: Loss doesn't keep office hours. This one-hour reset is for the professional
+    woman grieving something real while still expected to perform. It won't tell you
+    to move on. It'll give you room to be where you actually are.
+  long_description: 'The casseroles stopped weeks ago. The condolence texts trailed
+    off. Everyone in your orbit has quietly returned to normal, and you''re back at
+    your desk performing a woman for whom the floor didn''t fall out of her life.
+    But it did. Someone or something is gone, the world has rearranged itself around
+    the shape of that absence, and you are expected to lead the ten o''clock as though
+    you''re still the person who used to lead it. You''re not that person right now.
+    And there is nowhere at work, or honestly anywhere, to set that down.
+
+
+    This hour is for the woman in the middle of real grief who is still required to
+    be reliable. Who wept in the third-floor bathroom and then fixed her face for
+    a client call eight minutes later. Who has come to dread the question "how are
+    you doing, really?" because there is no version of the true answer that fits politely
+    between two meetings. Who has started to suspect something is wrong with her for
+    still not being over it — when the honest truth is that she is exactly on schedule,
+    and grief simply takes far longer than anyone is willing to admit out loud.
+
+
+    The first thing we do is refuse to shrink it. Not "a hard season," not "a lot
+    going on right now" — grief, named fully, at its real size, because the size of
+    what you lost is the entire reason for the size of the weight. Then, for the length
+    of this hour only, you stop scheduling your grief around your calendar and let
+    yourself go down into it. You don''t fix it. You don''t hunt for the silver lining
+    or the thing it''s supposedly here to teach you. You let loss be loss. And then
+    you come back up to your life still carrying it — because you will carry it, that
+    was never in question — but more honestly now, no longer burning half your fuel
+    on the performance of being fine.
+
+
+    There is no part of this hour that marches you through five tidy stages, hands
+    you a timeline you''re failing to hit, or reframes your loss as a hidden gift.
+    It will not tell you they''re in a better place, or that this was meant to be,
+    or that everything happens for a reason. Grief is not a problem to be solved or
+    a project to be optimized. It is, as plainly as it can be put, love with nowhere
+    left to go.
+
+
+    You''ll leave with language for the wave when it breaks over you in the middle
+    of a workday — and with permission to let it come, without apologizing to anyone
+    for still being inside it.
+
+
+    You are not behind. You are grieving, which is a different thing entirely. Take
+    the hour the world keeps refusing to give you.'
+keywords:
+  primary:
+  - grief
+  - grief and loss
+  - coping with loss
+  - bereavement
+  - mourning
+  secondary:
+  - professional women
+  - grief for professional women
+  - one hour
+bisac_codes:
+- SEL010000
+- FAM014000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: grace_adeyemi
+comp_titles:
+- It's OK That You're Not OK (Megan Devine)
+- The Year of Magical Thinking (Joan Didion)
+- Bittersweet (Susan Cain)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

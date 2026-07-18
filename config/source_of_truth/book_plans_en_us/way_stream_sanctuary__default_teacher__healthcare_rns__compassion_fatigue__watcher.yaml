@@ -1,0 +1,103 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__healthcare_rns__compassion_fatigue__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__healthcare_rns__compassion_fatigue.yaml
+store_series:
+  id: way_stream_sanctuary__healthcare_rns__depletion
+  name: Refill the Empty Well — for Nurses
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'Compassion Fatigue: The Observer''s Mind'
+subtitle: How Healthcare Rns Are Rewriting the Rules of Compassion Fatigue
+cover_tagline: You carry every patient home in your head. This is how to put the watching
+  mind down without dropping the care.
+description:
+  short_blurb: Caring this much trained your mind to never stop scanning — replaying
+    conversations, bracing for the worst, carrying patients home long after the shift
+    ends. This is a grounded, secular book about the hypervigilant, never-off mind
+    that compassion fatigue leaves running, and how to watch your thoughts without
+    going under.
+  long_description: 'You''re at dinner with people you love and you''re not really
+    there. Your mind is still in room six, replaying what the patient said, wondering
+    if you missed how bad it actually was, bracing for a phone call. You carry them
+    home — all of them — and the watcher in your head keeps a running tally of everyone
+    who might be suffering while you''re not there to catch it. The shift ends. The
+    watching never does. That, too, is compassion fatigue.
+
+
+    This book is for the nurse whose caring has turned into surveillance. The one
+    who can''t put a patient down at the end of the day, who lies awake running through
+    who''s deteriorating and what they should have done, who feels responsible for
+    outcomes that stopped being theirs the moment they handed off. The vigilance came
+    from love — you watch this closely because you care this much. But a mind that
+    never stands down is its own slow drowning.
+
+
+    What''s actually happening: the part of you that tracks who needs help learned
+    that paying attention saves people, so it refuses to stop paying attention — even
+    when you''re home, even when you''re asleep, even when there''s nothing you can
+    do. It can''t tell caring from controlling, so it treats every patient''s fate
+    as yours to monitor around the clock. We''re going to name the watcher: what it
+    tracks, when it spikes, what it''s terrified will happen if it blinks. Then, instead
+    of trying to silence it or reason it into stopping, we turn toward it. We sit
+    with the watching mind and let it run without letting it pull you under. You stop
+    drowning in the replay and you stop white-knuckling against it. You come back
+    able to care for your patients without surveilling them in your sleep.
+
+
+    This book will not tell you to clear your head, detach with love, or stop caring
+    so hard. It will not promise the worry quits by next week. No thought-stopping
+    scripts, no affirmations papered over the scanning, no pretending the people you
+    care for don''t matter.
+
+
+    What it offers is the difference between watching your thoughts and being dragged
+    under by them — a way to let the caring mind keep watch without you having to
+    live in the watchtower it built. You learned to pay this much attention because
+    people''s lives moved through your hands. You''re allowed to let the watcher rest
+    now without it meaning you stopped caring.'
+keywords:
+  primary:
+  - compassion fatigue
+  - caregiver burnout
+  - caring too much
+  - empathy fatigue
+  - helper burnout
+  - caregiver stress
+  secondary:
+  - nurses
+  - compassion fatigue for nurses
+bisac_codes:
+- SEL027000
+- SOC026000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: oscar_bello
+comp_titles:
+- Unwinding Anxiety (Brewer) — the secular brain science of a mind stuck in worry
+  loops
+- The Compassion Fatigue Workbook (Mathieu) — concrete, non-spiritual framing of the
+  over-attached carer
+- Trauma Stewardship (van Dernoot Lipsky) — how chronic vigilance accrues in people
+  who care professionally
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

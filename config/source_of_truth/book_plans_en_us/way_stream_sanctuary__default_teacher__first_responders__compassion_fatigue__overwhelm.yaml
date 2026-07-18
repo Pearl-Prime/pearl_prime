@@ -1,0 +1,101 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__compassion_fatigue__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__compassion_fatigue.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__depletion
+  name: Refill the Empty Well — for First Responders
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Cost of Caring: The Shutdown Point'
+subtitle: A Field Guide for First Responders Navigating Compassion Fatigue
+cover_tagline: Everyone needs you at once. There was never a line for you to stand
+  in.
+description:
+  short_blurb: Too many people in crisis, too little of you to go around, and the
+    demand never drops below maximum. This is a book for first responders drowning
+    in everyone else's emergencies. It won't ask you to give one ounce more.
+  long_description: 'It''s the back-to-back-to-back days that get you. The family
+    screaming in the doorway, the partner who needs you sharp, the dispatcher''s voice
+    already handing you the next one before you''ve cleared this one. Every single
+    person wants the most caring, most competent version of you, and they want it
+    right now, and there is exactly one of you to go around. The demand for your compassion
+    runs flat-out at maximum and never dips below it, and somewhere in there the caring
+    stops feeling like caring and starts feeling like being eaten alive a little at
+    a time.
+
+
+    This is for the paramedic, the ER nurse, the firefighter, the crisis worker, the
+    911 dispatcher who is everyone''s lifeline and nobody''s priority, least of all
+    their own. Compassion fatigue here isn''t the slow, quiet erosion some people
+    describe. It''s overwhelm, plain and loud, too many people''s worst moments arriving
+    faster than any human being can metabolize them, with no queue, no triage for
+    your own bandwidth, no moment where the world stops needing you long enough for
+    you to need something back. You''re not failing to cope. You''re being asked to
+    do something that is arithmetically impossible, and then being graded on it.
+
+
+    This book starts by naming the real shape of the problem: not that you''ve run
+    out of compassion, but that the demand for it has no ceiling and no off switch
+    and never will on its own. Then we go down into the pileup, the way every fresh
+    crisis lands square on top of the last one you never got to set down, the resentment
+    that flares up and scares you, the guilt that comes chasing the resentment a second
+    later. We stop pretending the answer is to simply care more efficiently. We let
+    the overwhelm be the honest signal it is, that you are one person being asked,
+    day after day, to be many.
+
+
+    This will not promise to slow the calls or shrink the need. It won''t hand you
+    a tidy boundary-setting routine that makes a bottomless demand suddenly manageable
+    before your shift starts. There is no life hack for a flood. What''s here is a
+    way to stand in the middle of more-than-you-can-hold and not be swept off your
+    feet, to find your own ground when every hand in the room is reaching for you.
+
+
+    You were never meant to absorb all of it. Putting some of it down isn''t quitting
+    on people. It''s the only way you get to stay in it at all.'
+keywords:
+  primary:
+  - compassion fatigue
+  - caregiver burnout
+  - caring too much
+  - empathy fatigue
+  - helper burnout
+  - caregiver stress
+  secondary:
+  - first responders
+  - compassion fatigue for first responders
+bisac_codes:
+- SEL027000
+- SOC026000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: null
+  brand: way_stream_sanctuary
+  byline_author: marcus_reed
+comp_titles:
+- Burnout (Emily Nagoski & Amelia Nagoski) - surviving when the demands on a caregiver
+  simply never stop coming
+- Trauma Stewardship (Laura van Dernoot Lipsky) - staying upright in work that floods
+  you with other people's suffering
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) - protecting yourself when everyone
+  needs you and no one is protecting you
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

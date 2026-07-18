@@ -1,0 +1,99 @@
+# Doctrine rotation — per-chapter REFLECTION variant assignment (one per chapter).
+# Authority: docs/doctrine_distribution_plan.md
+# Consumer: phoenix_v4/planning/doctrine_rotation.py → enrichment_select._try_composite_content
+#
+# BOUNDED REUSE: a sequence may reuse variants when the lesson library is smaller than
+# the chapter count. The picker enforces a spacing window of min(pool_size, chapter_count)
+# chapters and never repeats in two adjacent chapters; when the library grows past the
+# chapter count the window widens back toward strict no-repeat with no config change.
+
+version: 2
+status: wired
+
+brand_dosage_profiles:
+  somatic_heavy:
+    description: Somatic/composite brands — doctrine on every chapter in the sequence.
+    book_frames: [somatic_first, somatic, trauma_informed]
+    reflection_chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  commercial_light:
+    description: Commercial/mainstream brands — lighter doctrine dosage.
+    book_frames: [commercial, mainstream, productivity_first]
+    reflection_chapters: [1, 4, 7, 10, 12]
+
+topic_sequences:
+  anxiety:
+    # Bounded-reuse cycle over the 5 authored REFLECTION variants (v01–v05 in
+    # SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION/CANONICAL.txt). The curated
+    # foundational→integrative order (v03,v01,v05,v04,v02) repeats every 5 chapters, so
+    # each variant recurs exactly 5 chapters apart (window = min(5,12) = 5) and never
+    # in adjacent chapters. Previously this listed v06–v15, which do NOT exist in the
+    # pool, so chapters 6–12 were silently dropped. Grow the library later to widen the
+    # spacing back toward strict no-repeat — no code change needed.
+    default_12:
+      - chapter: 1
+        doctrine_id: "COMPOSITE_DOCTRINE v03"
+        doctrine_target: sensation_vs_story
+      - chapter: 2
+        doctrine_id: "COMPOSITE_DOCTRINE v01"
+      - chapter: 3
+        doctrine_id: "COMPOSITE_DOCTRINE v05"
+      - chapter: 4
+        doctrine_id: "COMPOSITE_DOCTRINE v04"
+      - chapter: 5
+        doctrine_id: "COMPOSITE_DOCTRINE v02"
+      - chapter: 6
+        doctrine_id: "COMPOSITE_DOCTRINE v03"
+      - chapter: 7
+        doctrine_id: "COMPOSITE_DOCTRINE v01"
+      - chapter: 8
+        doctrine_id: "COMPOSITE_DOCTRINE v05"
+      - chapter: 9
+        doctrine_id: "COMPOSITE_DOCTRINE v04"
+      - chapter: 10
+        doctrine_id: "COMPOSITE_DOCTRINE v02"
+      - chapter: 11
+        doctrine_id: "COMPOSITE_DOCTRINE v03"
+      - chapter: 12
+        doctrine_id: "COMPOSITE_DOCTRINE v01"
+    # 12 distinct lessons — use after v06–v15 land in REFLECTION bank (flagship ch12 final batch).
+    distinct_12:
+      - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v03"}
+      - {chapter: 2, doctrine_id: "COMPOSITE_DOCTRINE v01"}
+      - {chapter: 3, doctrine_id: "COMPOSITE_DOCTRINE v05"}
+      - {chapter: 4, doctrine_id: "COMPOSITE_DOCTRINE v04"}
+      - {chapter: 5, doctrine_id: "COMPOSITE_DOCTRINE v02"}
+      - {chapter: 6, doctrine_id: "COMPOSITE_DOCTRINE v06"}
+      - {chapter: 7, doctrine_id: "COMPOSITE_DOCTRINE v07"}
+      - {chapter: 8, doctrine_id: "COMPOSITE_DOCTRINE v08"}
+      - {chapter: 9, doctrine_id: "COMPOSITE_DOCTRINE v09"}
+      - {chapter: 10, doctrine_id: "COMPOSITE_DOCTRINE v10"}
+      - {chapter: 11, doctrine_id: "COMPOSITE_DOCTRINE v11"}
+      - {chapter: 12, doctrine_id: "COMPOSITE_DOCTRINE v15"}
+  burnout:
+    default_12:
+      - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v01"}
+      - {chapter: 2, doctrine_id: "COMPOSITE_DOCTRINE v02"}
+      - {chapter: 3, doctrine_id: "COMPOSITE_DOCTRINE v03"}
+      - {chapter: 4, doctrine_id: "COMPOSITE_DOCTRINE v04"}
+      - {chapter: 5, doctrine_id: "COMPOSITE_DOCTRINE v05"}
+      - {chapter: 6, doctrine_id: "COMPOSITE_DOCTRINE v06"}
+      - {chapter: 7, doctrine_id: "COMPOSITE_DOCTRINE v07"}
+      - {chapter: 8, doctrine_id: "COMPOSITE_DOCTRINE v08"}
+      - {chapter: 9, doctrine_id: "COMPOSITE_DOCTRINE v09"}
+      - {chapter: 10, doctrine_id: "COMPOSITE_DOCTRINE v10"}
+      - {chapter: 11, doctrine_id: "COMPOSITE_DOCTRINE v11"}
+      - {chapter: 12, doctrine_id: "COMPOSITE_DOCTRINE v12"}
+  grief:
+    default_12:
+      - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v01"}
+      - {chapter: 2, doctrine_id: "COMPOSITE_DOCTRINE v02"}
+      - {chapter: 3, doctrine_id: "COMPOSITE_DOCTRINE v03"}
+      - {chapter: 4, doctrine_id: "COMPOSITE_DOCTRINE v04"}
+      - {chapter: 5, doctrine_id: "COMPOSITE_DOCTRINE v05"}
+      - {chapter: 6, doctrine_id: "COMPOSITE_DOCTRINE v06"}
+      - {chapter: 7, doctrine_id: "COMPOSITE_DOCTRINE v07"}
+      - {chapter: 8, doctrine_id: "COMPOSITE_DOCTRINE v08"}
+      - {chapter: 9, doctrine_id: "COMPOSITE_DOCTRINE v09"}
+      - {chapter: 10, doctrine_id: "COMPOSITE_DOCTRINE v10"}
+      - {chapter: 11, doctrine_id: "COMPOSITE_DOCTRINE v11"}
+      - {chapter: 12, doctrine_id: "COMPOSITE_DOCTRINE v12"}

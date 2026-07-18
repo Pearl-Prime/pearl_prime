@@ -1,0 +1,41 @@
+# Cloudflare Pages deployment config — brand-admin-onboarding
+#
+# Project name realigned phoenix-command -> brand-admin-onboarding to match the
+# actual deploy target. The CI deploy is authoritative and passes the project
+# name on the CLI, so this `name` field is informational only:
+#   .github/workflows/brand-admin-onboarding-pages.yml
+#     -> cloudflare/wrangler-action@v3, command: pages deploy dist
+#        --project-name=brand-admin-onboarding
+#
+# Deploy path: PR -> merge to main -> the workflow above auto-fires on
+# brand-wizard-app/** changes and deploys via repo secrets CLOUDFLARE_API_TOKEN +
+# CLOUDFLARE_ACCOUNT_ID (account b80152c319f941e6e92f928e2617a3d5). DO NOT run
+# `npx wrangler pages deploy dist/` from a laptop: the operator's Cloudflare login
+# cannot reach the b80152c3 account, and a no-flag local deploy targets the legacy
+# `phoenix-command` project. See skills/pearl-int/references/cloudflare_pages_deploy.md
+# (Traps 1-4) and docs/BRAND_ADMIN_ONBOARDING_CLOUDFLARE_DEPLOYMENT.md.
+#
+# Live hostname: https://brand-admin-onboarding-bu2.pages.dev (confirm under
+# Cloudflare Pages -> brand-admin-onboarding -> Domains). The legacy
+# `phoenix-command.pages.dev` (and any custom domain still pointed at it) is NOT
+# updated by this workflow and is pending operator/account-scoped cleanup.
+
+name = "brand-admin-onboarding"
+compatibility_date = "2026-04-05"
+pages_build_output_dir = "dist"
+
+# Waystream download proxy reads R2 via S3 API secrets (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID,
+# R2_SECRET_ACCESS_KEY, optional R2_ENDPOINT) synced in brand-admin-onboarding-pages.yml.
+# Do NOT add [[r2_buckets]] here — phoenix-omega-artifacts is on the operator R2 account,
+# not the b80152c3 Pages deploy account; wrangler deploy fails if the bucket is missing.
+#
+# Onboarding signup proxy (functions/api/onboarding/submit.js) forwards the wizard signup
+# POST to the FastAPI backend at POST /api/v1/onboarding/submit. The backend base URL is a
+# DEPLOY-TIME binding, NOT hardcoded — set it in Cloudflare Pages -> brand-admin-onboarding
+# -> Settings -> Environment variables (or via `wrangler pages secret put`):
+#   ONBOARDING_API_BASE   e.g. "https://api.pearlprime.internal"  (scheme+host, no path)
+#   ONBOARDING_API_TOKEN  optional — sent as `Authorization: Bearer <token>` if set.
+# Until ONBOARDING_API_BASE is set, the Function returns 503 "unconfigured" and the wizard
+# retains the signup client-side (localStorage) — no crash, no silent data loss.
+[vars]
+R2_BUCKET = "phoenix-omega-artifacts"

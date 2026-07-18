@@ -1,0 +1,80 @@
+# Generate missing band×depth STORY atoms via LLM, then translate to CJK6.
+# Two-phase pipeline: generate (Qwen) → translate (Qwen + judge loop).
+#
+# Fills sparse band×depth combinations so late-arc chapters get deep atoms.
+#
+# DISABLED 2026-07-10 (follow-up to PR #5498, artifacts/qa/CI_WORKFLOW_BANNED_KEY_FIX_2026-07-10.md):
+# both phases of this workflow injected DASHSCOPE_API_KEY/BASE_URL/MODEL from repo
+# secrets into scripts/generate_band_depth_atoms.py and
+# scripts/localization/run_translation_loop.py, running on GitHub-hosted
+# ubuntu-latest -- which cannot reach Pearl Star's Tailscale-only Ollama
+# endpoint, the compliant Tier-2 path. Whether this workflow has ever made a
+# real (banned) DashScope-cloud call depends on what the QWEN_BASE_URL secret
+# is actually configured to, which is not knowable from the repo alone; either
+# way, an ubuntu-latest runner injecting these keys cannot be verified
+# compliant. See artifacts/qa/CI_DASHSCOPE_WORKFLOW_AUDIT_2026-07-10.md for the
+# full 8-workflow audit this fix is part of.
+#
+# The underlying scripts are already Ollama-capable (generate_band_depth_atoms.py
+# via the shared scripts/localization/llm_client.py; run_translation_loop.py as
+# of PR #5498) -- what's missing is a runner that can reach Pearl Star. Until a
+# self-hosted runner registered on that Tailscale network exists (an operator
+# infra decision, not made here), use the interactive path instead: run
+# `scripts/generate_band_depth_atoms.py` / `scripts/localization/run_translation_loop.py`
+# locally/on Pearl Star with OLLAMA_HOST set, as proven in
+# artifacts/qa/JA_JP_TRANSLATION_CLOSEOUT_2026-07-10.md.
+
+name: Generate + translate STORY atoms
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: true
+        type: string
+        default: 'all'
+      target_bands:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: false
+        type: string
+        default: '4,5'
+      target_depths:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: false
+        type: string
+        default: '2,3,4'
+      atoms_per_combo:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: false
+        type: number
+        default: 2
+      translate:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: false
+        type: boolean
+        default: true
+      dry_run:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: false
+        type: boolean
+        default: false
+      limit:
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
+        required: false
+        type: number
+        default: 0
+
+permissions:
+  contents: read
+
+jobs:
+  blocked:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain why this workflow is disabled
+        run: |
+          echo "::error::This workflow is disabled — it injected DASHSCOPE_API_KEY/BASE_URL/MODEL from repo secrets while running on GitHub-hosted ubuntu-latest, which cannot reach Pearl Star's Tailscale-only Ollama endpoint (the compliant Tier-2 path under CLAUDE.md's LLM Tier Policy)."
+          echo "::error::Use the interactive path instead: python3 scripts/generate_band_depth_atoms.py / python3 scripts/localization/run_translation_loop.py with OLLAMA_HOST set, run from an operator/Claude Code session with Tailscale access to Pearl Star."
+          echo "::error::See artifacts/qa/CI_DASHSCOPE_WORKFLOW_AUDIT_2026-07-10.md for full context."
+          exit 1

@@ -1,0 +1,113 @@
+# VCE §9 — Voice providers, subtitles, cultural flags, locale instruments (no API keys).
+
+supported_languages:
+  - en
+  - zh-CN
+  - zh-TW
+  - zh-HK
+  - ja
+  - ko
+  - es
+  - fr
+  - de
+  - hu
+  - pt-BR
+  - id
+
+voice_provider_default: elevenlabs
+voice_model_default: eleven_turbo_v2_5
+
+# Fallback chain: locale-specific primary → fallback → voice_provider_default
+voice_fallback_chain:
+  cosyvoice: [edge_tts, elevenlabs]
+  edge_tts: [elevenlabs]
+  elevenlabs: []
+
+# Per-locale voice synthesis hints (actual voice_id still comes from channel_registry + clone mapping)
+locale_voice_hints:
+  en:
+    provider: elevenlabs
+  zh-CN:
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "zh"
+    edge_tts_voice: "zh-CN-XiaoxiaoNeural"
+    priority_platforms: [bilibili, douyin]
+  zh-TW:
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "zh"
+    edge_tts_voice: "zh-TW-HsiaoChenNeural"
+  zh-HK:
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "zh"
+    edge_tts_voice: "zh-HK-HiuGaaiNeural"
+  ja:
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "ja"
+    edge_tts_voice: "ja-JP-NanamiNeural"
+  ko:
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "ko"
+    edge_tts_voice: "ko-KR-SunHiNeural"
+  es:
+    provider: elevenlabs
+  fr:
+    provider: elevenlabs
+  de:
+    provider: elevenlabs
+  hu:
+    provider: elevenlabs
+  pt-BR:
+    provider: elevenlabs
+  id:
+    provider: elevenlabs
+
+subtitle_types_by_platform:
+  youtube: [srt]
+  youtube_shorts: [burnt_in]
+  tiktok: [burnt_in, srt_optional]
+  instagram_reels: [burnt_in]
+  bilibili: [srt, ass]
+  douyin: [burnt_in]
+  webtoon: [in_panel]
+
+font_by_script:
+  cjk: NotoSansCJK-Regular
+  latin: Inter-Regular
+  arabic: NotoSansArabic-Regular
+
+# §9.3 Cultural metaphor adaptation flags (see also visual_metaphor_library when present)
+cultural_metaphor_flags:
+  zh-CN:
+    adapt_western_nature_to_east_asian: true
+  zh-TW:
+    adapt_western_nature_to_east_asian: true
+  ja:
+    seasonal_refs_iyashikei: true
+  ko:
+    korean_aesthetics: true
+  es:
+    latam_tropical_nature: true
+  pt-BR:
+    latam_tropical_nature: true
+  id:
+    sea_tropical_nature: true
+
+# §9.4 Locale instrument additions (Suno / library hints)
+locale_instruments:
+  en: [piano, acoustic_guitar, ambient_synth]
+  zh-CN: [guzheng, erhu, dizi, pipa]
+  zh-TW: [guzheng, erhu, dizi, pipa]
+  zh-HK: [guzheng, erhu]
+  ja: [koto, shakuhachi, shamisen]
+  ko: [gayageum, daegeum]
+  es: [nylon_guitar, pan_flute, cajon]
+  fr: [piano, accordion_soft]
+  de: [piano, strings_soft]
+  hu: [strings_soft]
+  pt-BR: [nylon_guitar, pan_flute, cajon]
+  id: [gamelan_soft, angklung]

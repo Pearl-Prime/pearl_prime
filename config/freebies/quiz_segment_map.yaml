@@ -1,0 +1,62 @@
+# Quiz answer → GHL tag / custom field mapping.
+# Authority: freebie build plan — single capture at interactive TOF.
+
+schema_version: 1
+
+ghl_custom_fields:
+  feed_url: feed_url
+  funnel_variant: funnel_variant
+  persona: persona
+  sent_freebie_ids: sent_freebie_ids
+  quiz_id: quiz_id
+  score_band: score_band
+  primary_concern: primary_concern
+  preferred_format: preferred_format
+  readiness: readiness
+
+score_bands:
+  low:
+    tag: severity_low
+    max_normalized: 0.33
+  medium:
+    tag: severity_medium
+    max_normalized: 0.66
+  high:
+    tag: severity_high
+    max_normalized: 1.0
+
+preferred_format_tags:
+  somatic: pref_somatic
+  audio: pref_audio
+  worksheet: pref_worksheet
+
+readiness_tags:
+  learn: ready_learn
+  act: ready_act
+  buy: ready_buy
+
+# Default GHL tags per topic (all 15 funnel landings). score/score_band optional when not scored.
+topic_default_tags:
+  anxiety: [source_freebie_quiz, quiz_anxiety, freebie_captured]
+  compassion_fatigue: [source_freebie_quiz, quiz_compassion_fatigue, freebie_captured]
+  overthinking: [source_freebie_quiz, quiz_overthinking, freebie_captured]
+  financial_anxiety: [source_freebie_quiz, quiz_financial_anxiety, freebie_captured]
+  courage: [source_freebie_quiz, quiz_courage, freebie_captured]
+  burnout: [source_freebie_quiz, quiz_burnout, freebie_captured]
+  self_worth: [source_freebie_quiz, quiz_self_worth, freebie_captured]
+  imposter_syndrome: [source_freebie_quiz, quiz_imposter_syndrome, freebie_captured]
+  boundaries: [source_freebie_quiz, quiz_boundaries, freebie_captured]
+  depression: [source_freebie_quiz, quiz_depression, freebie_captured]
+  social_anxiety: [source_freebie_quiz, quiz_social_anxiety, freebie_captured]
+  financial_stress: [source_freebie_quiz, quiz_financial_stress, freebie_captured]
+  sleep_anxiety: [source_freebie_quiz, quiz_sleep_anxiety, freebie_captured]
+  somatic_healing: [source_freebie_quiz, quiz_somatic_healing, freebie_captured]
+  grief: [source_freebie_quiz, quiz_grief, freebie_captured]
+
+webhook:
+  # Set PHOENIX_GHL_FUNNEL_WEBHOOK at deploy; pages use data-ghl-webhook on body.
+  # See config/freebies/ghl_funnel_capture.yaml and scripts/freebies/inject_ghl_webhook.py
+  env_var: PHOENIX_GHL_FUNNEL_WEBHOOK
+  payload_fields: [email, first_name, quiz_id, topic, score, score_band, answers_json, funnel_slug]
+  merge_tags:
+    second_tool_link: "{base_url}/somatic_exercise_freebee_apps/{e2_somatic_app}?unlock=1&cid={contact_id}"
