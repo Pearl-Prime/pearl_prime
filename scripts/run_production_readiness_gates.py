@@ -787,8 +787,59 @@ def main() -> int:
         if not gate(title, ok, detail):
             failed += 1
 
+    # --- 38–40. Pearl Prime perfect-books Wave-2 deferred gates (G-F1H / G-ORIENT / G-ACCENT) ---
+    # Additive only — do not modify the 35-37 block above or register_gate.py's
+    # F16/DEF4 detectors. Both G-ORIENT and G-ACCENT default to non-blocking
+    # (WARN / report-only) integrity mode here; G-F1H is a genuine BLOCK-integrity
+    # check (mirrors gate 37's shape) since a HARD_FAIL detector import failure is
+    # itself a wiring regression.
+    for gate_id, script_name, title, extra_env in (
+        (
+            "38",
+            "check_f1h_templated_cluster_hard.py",
+            "38. G-F1H templated-cluster HARD_FAIL escalation (integrity)",
+            {"PYTHONPATH": str(REPO_ROOT)},
+        ),
+        (
+            "39",
+            "check_orient_ch1_scene_anchor.py",
+            "39. G-ORIENT Ch1 body/scene anchor lexicon (integrity; WARN-class)",
+            {"PYTHONPATH": str(REPO_ROOT)},
+        ),
+        (
+            "40",
+            "check_accent_supply_preflight.py",
+            "40. G-ACCENT weekly accent-fill preflight matrix (report-only here)",
+            {"PYTHONPATH": str(REPO_ROOT)},
+        ),
+    ):
+        script = REPO_ROOT / "scripts" / "ci" / script_name
+        if not script.exists():
+            gate(title, True, "gate script not present; skip", skip=True)
+            continue
+        try:
+            env = os.environ.copy()
+            env.update(extra_env)
+            r = subprocess.run(
+                [sys.executable, str(script)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            ok = r.returncode == 0
+            detail = (
+                (r.stdout or r.stderr or script_name).strip().splitlines() or [script_name]
+            )[0][:240]
+        except Exception as e:
+            ok = False
+            detail = str(e)
+        if not gate(title, ok, detail):
+            failed += 1
+
     # --- Report ---
-    print("V4.5 Production Readiness — Pearl Prime Wave-1 gates included\n")
+    print("V4.5 Production Readiness — Pearl Prime Wave-1 + Wave-2 CI gates included\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")
