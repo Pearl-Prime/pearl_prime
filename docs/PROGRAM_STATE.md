@@ -261,3 +261,43 @@ Q2 is gated behind Q1 (adjacency penalty needs the varied thesis pools) and behi
 ---
 *Supersedes all previous status reports and planning baselines (incl. the May 2026 worldwide plan). Latest session
 detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md`.*
+
+---
+
+## 2026-07-19 Brand wizard onboarding — verification + 3 fixes — offline
+
+**NOT a main merge.** GitHub remains 403-blocked (re-confirmed live at synthesis:
+`git fetch origin` / `gh api user` both 403 account-suspended). All fixes below are
+**LANDED-OFFLINE** on `pearlstar_offline/brand-wizard-verify-20260719`, not on
+`origin/main`. Full synthesis: `artifacts/qa/brand_wizard_verification_synthesis_2026-07-19.md`.
+
+| Behavior | Layer | Note |
+|---|---|---|
+| Wizard → YAML → brand assignment | EXECUTED-REAL | already correct, no fix needed |
+| Market capture — en_US / ja_JP / zh_TW | EXECUTED-REAL PASS | already correct |
+| Market capture — zh_CN / zh_SG | **FIXED** (was FAIL, collapsed to en_US) | `BrandWizard-zh.jsx` `resolveOnboardingMarket()` added; `d796e3fac58e962fb2b0a039922201cbac1cdcda` |
+| Teacher one-per-market exclusivity | EXECUTED-REAL (sim) | second claim → HTTP 409 `teacher_claimed` |
+| Doctrine fallback — onboarding route (409 → generalized) | **ABSENT** | follow-on: wire 409 response to offer generalized-doctrine brand |
+| Doctrine fallback — pipeline mechanism | **FIXED** + mini EXECUTED-REAL proof (name A=2, B=0, doctrine markers both) | `--teacher-attribution named\|generalized`; `9f8a857e6dcdc5fb15e98eab8df4856cf6a5d391` |
+| Full 2-book spine-chord production A/B proof | **BLOCKED** | G-DEF4 persona/topic + thin atom coverage (12 of wanted 20/slot) for `master_feung` |
+| Director page brand-scoped routing | EXECUTED-REAL | zero-asset + asset-bearing brand both proven |
+| Phantom (planned, not-created) books shown as available | **FIXED** | `_is_catalog_bearing` fail-closed + ops deep-link retargeted off `brand_admin.html`; `9756ebbc8890f7e9fb656ee54d1fee7238d5c454` |
+
+**Operator-belief corrections (false premises, corrected here + at
+`docs/agent_prompt_packs/20260719_brand_wizard_verify/INDEX.md`):**
+- **"No TW wizard"** — false; `wizard-tw.html` exists and works. Likely confused with the
+  adjacent, real bug in the *Simplified-Chinese* wizard (`wizard-zh.html`), which silently
+  dropped both zh_CN and zh_SG submissions to en_US before today's fix.
+- **"Market code is missing"** — false; the registry/lane-mapping mechanism already existed
+  for 3 of 4 wizards. The gap was narrower: one wizard file never called its own
+  market-resolution function. Now fixed.
+
+**Follow-ons named (not started):** (1) wire onboarding 409 `teacher_claimed` → generalized-doctrine
+offer; (2) full spine-chord A/B proof after persona/coverage alignment; (3) sibling-surface
+phantom-book audit (`brand_admin.html` direct, storefront, GHL feed, exec dashboard).
+
+Proof root: `artifacts/qa/brand_wizard_yaml_market_verify_20260719/`,
+`artifacts/qa/brand_wizard_teacher_doctrine_verify_20260719/`,
+`artifacts/qa/brand_wizard_director_page_verify_20260719/`. Replay runbook:
+`docs/runbooks/BRAND_WIZARD_GITHUB_RETURN_REPLAY_2026-07-19.md`. Wake replay on
+`github-suspension-lifted`.
