@@ -8,10 +8,10 @@
 ## Signal
 
 ```
-teacher-portal-v2=<FULL_SHA_AFTER_LAND>
+teacher-portal-v2=0cfc14c197bd1743cad62cea1a24a1eeb0618a96
 ```
 
-(Replace with landed commit SHA from CLOSEOUT; also mirrored below after land.)
+LANDED=offline/teacher-portal-v2-20260718@0cfc14c197bd1743cad62cea1a24a1eeb0618a96
 
 ## What landed
 
