@@ -1,0 +1,20 @@
+item_id	path_or_system	exists	current_owner	overlap_type	reconcile_action	stale_or_wrong_claim	required_patch	notes
+SPEC-1	scripts/inventory/atom_coverage_audit.py	yes	Atom inventory	extension	Extend existing audit with surface/depth manifest	Approximate 27 surface taxonomy is stale	Patch spec to include current depth/reader/source fields	No atom edits
+SPEC-2	phoenix_v4/quality/register_gate.py	yes	Quality gates	duplicate-risk	Merge proposed validators into existing gate map	Claims several drift classes have no coverage	Patch spec as merge note	F2.B F2.D and F13 already present
+SPEC-3	docs/specs/CONDUCTOR_V3_DISPATCH_BRIDGE_V1_SPEC.md	yes	Dispatcher/Conductor	extension	Extend Conductor/PearlStar queue substrate	Wrong "spec #8 PS_QUEUE_DSN creds" dependency	Patch dependency and no-GitHub/no-publish constraints	Artifact SPEC-8 is not creds
+SPEC-4	operator-rated quality corpus	partial	Operator/Architecture	prerequisite	Use advisory calibration only	Automated judge could be misread as release authority	Patch acceptance labels and rubric	No hard ship gate
+SPEC-5	phoenix_v4/naming/generator.py	yes	Naming	additive	Extend naming generator and metadata	Minor W0-only framing	Add current-status metadata	Keep
+SPEC-6	scripts/marketing/build_marketing_feed.py	yes	Marketing/feed	extension	Extend feed schema and release flags	No current GHL/social/image/video boundary	Patch with no-live-publish and visual-license gates	No Metricool writes
+SPEC-7	phoenix_v4/manga/serial/spine_loader.py	yes	Manga serial	parallel-risk	Merge into serial spine loader/configs	Proposed new series spine paths are stale	Patch as merge note	Use existing configs
+SPEC-8	docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md	yes	DevOps/storage	extension	Extend offload policy with retention manifests	Understates no-history-rewrite and owner approval	Patch retention policy	Archive left intact
+SPEC-9	config/planning/chapter_thesis_bank.yaml	yes	Planning	extension	Consume existing topic-aware resolver	Claims thesis re-key prerequisite remains	Patch dependency and contract fields	RN-2 retired
+RN-1	phoenix_v4/gates/check_tuple_viability.py	yes	Gates	narrow-fix	Refresh brief to exact current path and repro-first gate	Original scripts/** path imprecise	Update index classification	Still likely actionable
+RN-2	config/planning/chapter_thesis_bank.yaml	yes	Planning	already-built	Retire	Old brief says re-key not done	Update index classification	Resolver tests exist
+RN-3	phoenix_v4/quality/register_gate.py	yes	Quality gates	already-built	Retire	Old brief says F2.B false positive persists	Update index classification	Tests cover stranded/preposition cases
+RN-4	register_gate wrapper placeholder detection	yes	Quality gates	already-built	Retire or reference as existing F2.D	Old brief asks for F9 duplicate	Update index classification	Behavior covered under different label
+RN-5	scripts/ci/check_bisac_topic_map.py	no	Catalog metadata	missing-validator	Merge validator-only work into catalog gate	Map fix part is stale; validator missing	Update index as merge with existing	Existing maps use SEL036000
+RN-6	phoenix_v4/rendering/book_renderer.py	yes	Renderer	repro-needed	Refresh with current reproduction	Old 25020 to 21634 claim not current proof	Update index classification	Boundary-aware clamp still plausible
+RN-7	.gitattributes and LFS-to-R2 policy	yes	DevOps/storage	merge	Merge into SPEC-8	Standalone gate duplicates retention policy	Update index classification	No separate gate spec
+RN-8	scripts/publish/*cover*	yes	Publishing/visuals	merge	Merge into cover/visual authority cleanup	"9 impl" count may be stale	Update index classification	Coordinate with image/social systems
+RN-9	docs/DOCS_INDEX.md	yes	Docs governance	repro-needed	Refresh with current completeness sweep	62 percent missing claim stale	Update index classification	Current dirty doc state pre-existed
+RN-10	register_gate F13 dwell detector	yes	Quality gates	already-built	Retire	Old brief says dwell module unbuilt	Update index classification	Future tuning belongs to roadmap
