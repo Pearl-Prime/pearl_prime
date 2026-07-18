@@ -1,0 +1,21 @@
+{
+  "hard_fails": [
+    "fake_video_claim",
+    "production_ready_label",
+    "unreadable_text",
+    "text_over_focal_subject",
+    "repeated_background_spam",
+    "license_missing",
+    "live_publish_or_schedule_attempt"
+  ],
+  "pass_min_score": 85,
+  "scores": {
+    "caption_visual_pairing": 10,
+    "design_family_distinctiveness": 15,
+    "image_aware_layout": 15,
+    "platform_native_fit": 15,
+    "provenance_and_gate_honesty": 10,
+    "readability": 15,
+    "scroll_stop": 20
+  }
+}
