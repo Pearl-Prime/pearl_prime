@@ -93,4 +93,4 @@ performed this turn").
 
 ## SIGNAL
 
-`bw-verify-closeout=<see CLOSEOUT_RECEIPT for this turn's exact landing SHA>`
+`bw-verify-closeout=764fbaa0acddc023b1615f0655d8e084345210cd`

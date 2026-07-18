@@ -104,9 +104,9 @@ Do not report "verified" without an executed artifact.
   - `bw-director-page-and-books-fixed=9756ebbc8890f7e9fb656ee54d1fee7238d5c454` — fail-closed catalog bearing + ops_url→real-asset handoff
 - Offline tip: `9f8a857e6dcdc5fb15e98eab8df4856cf6a5d391`
 - Wave 4 (06 synthesis): **LANDED-OFFLINE**
-  - `bw-verify-closeout=<see artifacts/coordination/handoffs/brand_wizard_06_synthesis_2026-07-19.md and CLOSEOUT_RECEIPT for the exact landing SHA>`
+  - `bw-verify-closeout=764fbaa0acddc023b1615f0655d8e084345210cd`
   - Synthesis doc: `artifacts/qa/brand_wizard_verification_synthesis_2026-07-19.md` (behavior→verdict→evidence table; operator-belief reconciliation; follow-ons)
   - SSOT synced: `docs/PROGRAM_STATE.md` §"2026-07-19 Brand wizard onboarding" (no `origin/main` SHA bump — nothing merged); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (+7 rows: 3 lanes + lane06 + 3 follow-ons); `artifacts/coordination/operator_decisions_log.tsv` (+3 rows: `OPD-BW-01`/`02`/`03`); `artifacts/coordination/pearlstar_offline/LEDGER.tsv` (brand-wizard rows `replay_status=pending`)
   - Replay+deploy runbook: `docs/runbooks/BRAND_WIZARD_GITHUB_RETURN_REPLAY_2026-07-19.md`
   - GitHub re-checked live at synthesis: still 403 account-suspended — no push/PR/deploy attempted
-- **Final offline tip:** `<see bw-verify-closeout signal above>`
+- **Final offline tip:** `764fbaa0acddc023b1615f0655d8e084345210cd`
