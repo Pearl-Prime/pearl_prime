@@ -154,3 +154,51 @@ to either (a) wait for a C4 fix lane, or (b) explicitly render with
 `--pipeline-mode registry` disabled / accept the current registry-drop behavior is
 non-blocking in a non-production quality-profile for line-edit sampling purposes only
 (operator call, not this lane's to make).
+
+## CLOSEOUT_RECEIPT
+
+```
+CLOSEOUT_RECEIPT
+AGENT=Pearl_Editor_lane02
+CELLS_FILLED=3 (corporate_managers×burnout×overwhelm [C048, dispatcher default];
+  tech_finance_burnout×burnout×overwhelm; healthcare_rns×burnout×overwhelm — all C1–C3
+  filled/verified; C4 root-caused not fixed, catalog-wide, deferred)
+C1_STORY=3/3 already tuple-viable, verified fresh, no fill needed
+C2_EXERCISE=3/3 already well-stocked (225-317 lines/persona), no fill needed
+C3_ACCENT=WISDOM_ESSENCE/burnout (+8, was no_supply_pool),
+  AUTHOR_COMMENTARY/burnout/ravi_chandra (+8, live default author),
+  AUTHOR_COMMENTARY/burnout/lena_thorne (+8, forward-compat);
+  EXTERNAL_STORY+CITED_EVIDENCE/burnout already stocked, no fill needed
+C4_DEF4=0/3 cleared — catalog-wide single-persona-per-topic registry blocker
+  (14/16 topics 100% Gen-Z-labeled, incl. burnout); root-caused with live render
+  evidence, NOT fixed (fix requires destructive reassignment or composer/wiring
+  code change, both out of scope for fill-banks-only lane); drops=106 both
+  rendered cells, not 0
+RENDER_PROOF=corporate_managers: SystemExit(1), 106 foreign-persona drops —
+  artifacts/qa/perfect_books_wave2_20260718/lane02/renders/corporate_managers__burnout__overwhelm_run.log;
+  tech_finance_burnout: SystemExit(1), 106 foreign-persona drops —
+  artifacts/qa/perfect_books_wave2_20260718/lane02/renders/tech_finance_burnout__burnout__overwhelm_run.log;
+  healthcare_rns: not independently re-rendered (deferred, root cause identical);
+  tuple viability PASS all 3 — artifacts/qa/perfect_books_wave2_20260718/lane02/tuple_viability_3cells.txt
+FLAGSHIP_PARITY=no (FAILED in ambient tree, root-caused to pre-existing unrelated
+  anxiety-topic dirty-tree drift from other concurrent lanes, not this lane's
+  burnout-topic edits — see lane02/FLAGSHIP_PARITY_NOTE.md; offline commit stages
+  only this lane's explicit paths so the drift is not carried into the landed SHA)
+ACCEPTANCE_LAYER=authored candidate (banks filled; NOT system working — that's Lane 03)
+DEFERRED=healthcare_rns×burnout×overwhelm full render (tuple-viable, DEF4 block
+  inferred from identical confirmed root cause); C4 fix itself (dedicated future
+  lane, likely Pearl_Dev+Pearl_Editor co-owned); ship-matrix SCALE beyond the 3
+  PILOT cells (not started, C4 discovery consumed remaining budget); other 13
+  Gen-Z-locked topic registries confirmed same pattern but not individually
+  render-tested — see DEFERRED section above for full list
+LANDED=offline/perfect-books-wave2-bankfill-20260718@5e3af4c9f0d84248894708f84cfb5d10d9b8936a
+  (pearlstar_offline remote, base=agent/pearl-prime-perfect-books-wave1@9056df3354df6a84755fb47a38da2793f141efa9)
+CLEANUP_COMPLETE=yes (GIT_INDEX_FILE unset, temp index dir was in system tmp — no
+  workspace scratch files; local dirty tree left untouched, not landed)
+HANDOFF=artifacts/coordination/handoffs/perfect_books_wave2_bankfill_2026-07-18.md
+SIGNAL=perfect-books-wave2-bankfill=5e3af4c9f0d84248894708f84cfb5d10d9b8936a
+NEXT_ACTION=Lane 03 line-edit may launch on the 3 filled cells, but should be told
+  none can reach a clean Layer-1 chord render yet (C4 catalog-wide block) — needs an
+  operator call on whether to wait for a C4 fix lane or sample under a relaxed
+  render mode
+```
