@@ -52,7 +52,7 @@ Deepened / seeded banks only:
 - Offline ref: `offline/atom-source-authority-repair-20260718`
 - Signal (greppable):
 
-atom-source-authority-repair=<PENDING_SHA>
+atom-source-authority-repair=020abba38a00d44f9d60e6d1d6e812fae032878d
 
 ## Cleanup ledger
 
@@ -65,4 +65,4 @@ atom-source-authority-repair=<PENDING_SHA>
 
 Translation propagation + catalog pilot unblock ONLY for SOURCED-and-deepened types; MOTIF routes to operator for source acquisition.
 
-LANDED=offline/atom-source-authority-repair-20260718@<PENDING_SHA>
+LANDED=offline/atom-source-authority-repair-20260718@020abba38a00d44f9d60e6d1d6e812fae032878d
