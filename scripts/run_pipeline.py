@@ -1227,6 +1227,9 @@ def _run_spine_pipeline_mode(
                 "book_idea": str(book_spec_for_compiler.get("book_idea") or "").strip(),
                 "book_motif": str(book_spec_for_compiler.get("book_motif") or "").strip(),
                 "enrichment_contract_v1": _enrichment_contract_v1,
+                "teacher_attribution_mode": str(
+                    book_spec_for_compiler.get("teacher_attribution_mode") or "auto"
+                ).strip().lower(),
             },
             locale=_enrich_locale,
             publishable_book=_publishable_book,
@@ -2896,6 +2899,15 @@ def main() -> int:
         ),
     )
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
+    ap.add_argument(
+        "--teacher-attribution",
+        choices=["auto", "named", "generalized"],
+        default="auto",
+        help=(
+            "Teacher wrapper attribution (bw-teacher-exclusivity-doctrine-verified). "
+            "'generalized': second-claimant doctrine path — same --teacher bank, no name."
+        ),
+    )
     ap.add_argument("--author", default=None, help="Author id (pen-name; resolved from author_registry, sets author_positioning_profile)")
     ap.add_argument("--narrator", default=None, help="Narrator id (resolved from brand_narrator_assignments when not supplied; Writer Spec §23.5)")
     ap.add_argument("--out", default=None, help="Write CompiledBook JSON here")
@@ -3261,6 +3273,7 @@ def main() -> int:
         "canonical_persona_id": canonical_persona,
         "topic_id": canonical_topic,
         "persona_id": canonical_persona,
+        "teacher_attribution_mode": str(getattr(args, "teacher_attribution", None) or "auto"),
     }
     # F-COHERENCE: surface the arc's bound engine so the spine path can route atoms by
     # (topic, engine). Explicit so it holds regardless of BookSpec.to_dict() contents.
@@ -4263,7 +4276,13 @@ def main() -> int:
             except Exception:
                 pass
     # ── Teacher Mode Pre-Intro Chapter + Closing (TEACHER_MODE_STRUCTURAL_SPEC §1, §4) ──
-    if teacher_id and teacher_id != "default_teacher":
+    # Skip NAMED pre-intro when --teacher-attribution=generalized (second-claimant path).
+    if (
+        teacher_id
+        and teacher_id != "default_teacher"
+        and str(book_spec_for_compiler.get("teacher_attribution_mode") or "auto").strip().lower()
+        != "generalized"
+    ):
         _teacher_display = ""
         _teacher_tradition = ""
         _doctrine_for_preintro: dict = {}

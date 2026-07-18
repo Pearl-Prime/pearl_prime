@@ -413,11 +413,13 @@ def compose_section_packet(
         from phoenix_v4.rendering.teacher_wrapper import join_wrapped, resolve_wrapper
 
         _wrap_seed = _packet_injection_seed(spine_context, chapter_index, section_index)
+        _attr_mode = str((spine_context or {}).get("teacher_attribution_mode") or "").strip().lower() or None
         _prefix, _suffix = resolve_wrapper(
             teacher_id=str(_teacher_id),
             section_type=section_type,
             seed=_wrap_seed,
             spine_context=spine_context,
+            attribution_mode=_attr_mode,
         )
         _tw_content = str(teacher_atom_content).strip()
         if _prefix or _suffix:

@@ -162,12 +162,14 @@ teacher_wrapper_slots:
   pamela_fellows:
     TRADITION: "somatic and contemplative practice"
     TRADITION_SHORT: "somatic"
+  # 2026-07-19 (bw-teacher-exclusivity-doctrine-verified): master_wu/master_feung
+  # TRADITION slots were swapped; corrected (feung=Taoist, wu=warrior).
   master_wu:
-    TRADITION: "Taoist qi cultivation"
-    TRADITION_SHORT: "Taoist"
-  master_feung:
     TRADITION: "warrior composure training"
     TRADITION_SHORT: "warrior"
+  master_feung:
+    TRADITION: "Taoist qi cultivation"
+    TRADITION_SHORT: "Taoist"
   master_sha:
     TRADITION: "energy medicine and restoration"
     TRADITION_SHORT: "restoration"
