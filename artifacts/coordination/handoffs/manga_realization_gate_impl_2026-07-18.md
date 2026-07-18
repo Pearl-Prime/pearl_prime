@@ -6,7 +6,7 @@ Acceptance layer: CODE-WIRED (EXECUTED-REAL for fixture/audit runs). Not PROVEN-
 
 ## Signal
 
-manga-realization-gate-impl=9cfa76f8af8df41ca90385217bd5425ee79ec061
+manga-realization-gate-impl=b77303cbb2e468ef2fff2a269257248f37c18932
 
 ## What changed
 
@@ -61,7 +61,7 @@ Proof root: `artifacts/qa/oldchats7_finish_20260718/lane02/`
 
 ## Landed
 
-`offline/manga-realization-gate-20260718@PENDING_LAND_SHA`
+`offline/manga-realization-gate-20260718@b77303cbb2e468ef2fff2a269257248f37c18932`
 Base: `9e9b9e606791590337cd7d0f2fb425def2e6f760`
 Substrate: pearlstar_offline
 
@@ -74,7 +74,7 @@ Substrate: pearlstar_offline
 ## Exact next command
 
 ```bash
-grep -E "manga-realization-gate-impl=9cfa76f8af8df41ca90385217bd5425ee79ec061
+grep -E "manga-realization-gate-impl=b77303cbb2e468ef2fff2a269257248f37c18932
   artifacts/coordination/handoffs/manga_realization_gate_impl_2026-07-18.md
 # then dispatch lane 03: docs/agent_prompt_packs/20260718_old_chats_341_347_finish_work/03_Pearl_PM_manga_all_genres_story_qa_run.md
 ```
