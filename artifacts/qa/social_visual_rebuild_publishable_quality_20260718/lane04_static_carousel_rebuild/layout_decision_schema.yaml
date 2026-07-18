@@ -1,0 +1,24 @@
+{
+  "layout_decision": {
+    "hard_fail_flags": [
+      "unreadable_text",
+      "text_over_focal_subject",
+      "repeated_background_spam",
+      "fake_video_claim",
+      "license_missing",
+      "production_ready_label"
+    ],
+    "production_ready_allowed": false,
+    "required": [
+      "asset_id",
+      "platform",
+      "surface",
+      "design_family",
+      "negative_space_region",
+      "busy_score",
+      "text_placement",
+      "production_ready",
+      "operator_visual_qa_required"
+    ]
+  }
+}
