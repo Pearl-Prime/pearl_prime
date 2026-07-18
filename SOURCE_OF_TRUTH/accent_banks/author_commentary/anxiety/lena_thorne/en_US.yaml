@@ -1,8 +1,3 @@
-# Author commentary bank — anxiety / lena_thorne / en_US — pilot
-# status: unwired | KNOWN_UNWIRED: accent_banks/author_commentary/
-# Voice: Lena Thorne — fifteen years an ICU nurse before panic attacks ended it;
-# writes nervous-system recognition for people who help others for a living.
-# Positioning: somatic_companion / warm_regulating. Register: witness.
 status: unwired
 accent_class: AUTHOR_COMMENTARY
 topic: anxiety
@@ -14,181 +9,294 @@ bio_license_version: draft_pending_operator_approval_2026-07-14
 commentaries:
 - commentary_id: ac_lena_anxiety_observed_charting_v01
   commentary_type: observed_pattern
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - fifteen_years_icu_nurse
   - watched_caregivers_run_on_alarm
-  topic_keys: [anxiety, overthinking]
-  object_keys: [pre_presentation_activation]
-  allowed_positions: [after_REFLECTION]
+  topic_keys:
+  - anxiety
+  - overthinking
+  object_keys:
+  - pre_presentation_activation
+  allowed_positions:
+  - after_REFLECTION
   register: witness
   position_variants:
     after_REFLECTION:
-      body: |
-        On the unit I watched nurses chart with steady hands while their own alarms ran at a pitch no monitor would ever record.
-        We were trained to read everyone's numbers but our own, and to call that professionalism.
-        The ones who lasted were not the calmest — they were the ones who learned to read their own chest the way they read a patient's, as data instead of a verdict.
+      body: 'On the unit I watched nurses chart with steady hands while their own alarms ran at a pitch
+        no monitor would ever record.
+
+        We were trained to read everyone''s numbers but our own, and to call that professionalism.
+
+        The ones who lasted were not the calmest — they were the ones who learned to read their own chest
+        the way they read a patient''s, as data instead of a verdict.
+
         Bring that same clinical kindness to whatever you notice in yourself next.
 
+        '
+  depth_pattern: AUTHOR_SOURCE_RESTRICTED_4
+  deepened_by: lane07_source_authority_repair_20260718
+  source_authority: SOURCE_OF_TRUTH/accent_banks/author_commentary/anxiety/lena_thorne/en_US.yaml
+  disclosure_feature: AUTHOR_COMMENTARY_as_AUTHOR_DISCLOSURE
 - commentary_id: ac_lena_anxiety_observed_small_practice_v01
   commentary_type: observed_pattern
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - treats_people_who_help_for_a_living
-  topic_keys: [anxiety]
-  exercise_keys: [med_007]
-  allowed_positions: [after_EXERCISE]
+  topic_keys:
+  - anxiety
+  exercise_keys:
+  - med_007
+  allowed_positions:
+  - after_EXERCISE
   register: witness
   position_variants:
     after_EXERCISE:
-      body: |
-        I have handed caregivers a practice this small and watched them wait for it to feel like enough.
-        It rarely does on the first pass, because we are trained to measure everything by whether the patient improved.
-        The ones who stayed with it did not feel cured — they felt a half-second earlier to their own alarm than they had been the week before.
+      body: 'I have handed caregivers a practice this small and watched them wait for it to feel like
+        enough.
+
+        It rarely does on the first pass, because we are trained to measure everything by whether the
+        patient improved.
+
+        The ones who stayed with it did not feel cured — they felt a half-second earlier to their own
+        alarm than they had been the week before.
+
         Notice whether that earliness is already showing up for you.
 
+        '
+  depth_pattern: AUTHOR_SOURCE_RESTRICTED_4
+  deepened_by: lane07_source_authority_repair_20260718
+  source_authority: SOURCE_OF_TRUTH/accent_banks/author_commentary/anxiety/lena_thorne/en_US.yaml
+  disclosure_feature: AUTHOR_COMMENTARY_as_AUTHOR_DISCLOSURE
 - commentary_id: ac_lena_anxiety_admission_panic_ended_it_v01
   commentary_type: personal_admission
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - panic_attacks_ended_icu_career
   - performed_steady_while_alarm_ran
-  topic_keys: [anxiety]
-  allowed_positions: [after_PIVOT]
+  topic_keys:
+  - anxiety
+  allowed_positions:
+  - after_PIVOT
   register: witness
   position_variants:
     after_PIVOT:
-      body: |
-        For years I could run a code and keep my voice level, and I mistook that control for being fine.
-        The panic attacks did not arrive because I was weak; they arrived because I had spent fifteen years overriding every signal my body sent.
-        What finally helped was not a stronger override — it was letting the alarm mean something before I had a plan for it.
+      body: 'For years I could run a code and keep my voice level, and I mistook that control for being
+        fine.
+
+        The panic attacks did not arrive because I was weak; they arrived because I had spent fifteen
+        years overriding every signal my body sent.
+
+        What finally helped was not a stronger override — it was letting the alarm mean something before
+        I had a plan for it.
+
         See if the next practice lands differently when you stop asking your body to wait its turn.
 
+        '
 - commentary_id: ac_lena_anxiety_endorsement_helpers_v01
   commentary_type: gentle_endorsement
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - treats_people_who_help_for_a_living
   - harder_to_override_own_body
-  topic_keys: [anxiety]
-  exercise_keys: [med_016]
-  allowed_positions: [after_EXERCISE]
+  topic_keys:
+  - anxiety
+  exercise_keys:
+  - med_016
+  allowed_positions:
+  - after_EXERCISE
   register: witness
   position_variants:
     after_EXERCISE:
-      body: |
-        The caregivers I have watched keep this up did not come back serene, and I would not trust it if they had.
-        They came back a little harder to talk out of their own exhaustion — which, for people who give all day, is the whole game.
-        Maybe it will do the same for you; maybe it will only help you feel the alarm without adding a shift's worth of shame to it.
+      body: 'The caregivers I have watched keep this up did not come back serene, and I would not trust
+        it if they had.
+
+        They came back a little harder to talk out of their own exhaustion — which, for people who give
+        all day, is the whole game.
+
+        Maybe it will do the same for you; maybe it will only help you feel the alarm without adding a
+        shift''s worth of shame to it.
+
         Either of those is worth the two minutes it costs.
 
+        '
 - commentary_id: ac_lena_anxiety_skeptic_monitor_v01
   commentary_type: skeptics_companion
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - clinical_skeptic_of_soft_language
   - panic_attacks_ended_icu_career
-  topic_keys: [anxiety, social_anxiety]
-  allowed_positions: [after_EXERCISE]
+  topic_keys:
+  - anxiety
+  - social_anxiety
+  allowed_positions:
+  - after_EXERCISE
   register: witness
   position_variants:
     after_EXERCISE:
-      body: |
-        I did not trust anything that sounded like a feelings exercise — I trusted monitors and lab values.
-        For a long time "notice your body" sounded like something said by people who had never held pressure on a bleed.
-        What changed my mind was smaller than belief: the alarm often spiked before any thought arrived, and noticing bought me one honest second the thinking never did.
+      body: 'I did not trust anything that sounded like a feelings exercise — I trusted monitors and lab
+        values.
+
+        For a long time "notice your body" sounded like something said by people who had never held pressure
+        on a bleed.
+
+        What changed my mind was smaller than belief: the alarm often spiked before any thought arrived,
+        and noticing bought me one honest second the thinking never did.
+
         You do not have to trust the next step yet — just watch whether it gives you that second.
 
+        '
 - commentary_id: ac_lena_anxiety_disclosure_ahjan_v01
   commentary_type: source_disclosure
-  mode_allow: [teacher_mode]
+  mode_allow:
+  - teacher_mode
   composite_safe: false
   bio_license_refs:
   - ahjan_framework_observer
-  topic_keys: [anxiety]
-  doctrine_keys: [COMPOSITE_DOCTRINE v03]
-  allowed_positions: [after_REFLECTION]
+  topic_keys:
+  - anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v03
+  allowed_positions:
+  - after_REFLECTION
   register: witness
   position_variants:
     after_REFLECTION:
-      body: |
-        I found Ahjan's teaching on the alarm within after every stress-management handout I had ever given a patient had failed me personally.
-        He does not ask you to become calm on command — he asks you to stop treating the alarm as evidence that something is wrong with you.
-        As someone who spent years reading the body for a living, I found that reframing usable at the bedside and at three in the morning.
+      body: 'I found Ahjan''s teaching on the alarm within after every stress-management handout I had
+        ever given a patient had failed me personally.
+
+        He does not ask you to become calm on command — he asks you to stop treating the alarm as evidence
+        that something is wrong with you.
+
+        As someone who spent years reading the body for a living, I found that reframing usable at the
+        bedside and at three in the morning.
+
         Maybe it will help you name what your nervous system has been reporting all along.
 
+        '
 - commentary_id: ac_lena_anxiety_observed_freeze_v01
   commentary_type: observed_pattern
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - watched_caregivers_run_on_alarm
   - fifteen_years_icu_nurse
-  topic_keys: [anxiety, overthinking]
-  object_keys: [after_send_reply_anxiety]
-  allowed_positions: [after_INTEGRATION]
+  topic_keys:
+  - anxiety
+  - overthinking
+  object_keys:
+  - after_send_reply_anxiety
+  allowed_positions:
+  - after_INTEGRATION
   register: witness
   position_variants:
     after_INTEGRATION:
-      body: |
-        I have watched capable people freeze at a task and privately file it under lazy, while their body ran a full threat assessment on a blank chart.
-        On the unit we would never call a racing heart laziness — but off the clock we do it to ourselves without thinking.
-        The ones who named it freeze instead of failure stopped stacking shame on top of the alarm, and the task was easier to face in the morning.
+      body: 'I have watched capable people freeze at a task and privately file it under lazy, while their
+        body ran a full threat assessment on a blank chart.
+
+        On the unit we would never call a racing heart laziness — but off the clock we do it to ourselves
+        without thinking.
+
+        The ones who named it freeze instead of failure stopped stacking shame on top of the alarm, and
+        the task was easier to face in the morning.
+
         Take that naming into whatever you let settle tonight.
 
+        '
 - commentary_id: ac_lena_anxiety_admission_perform_steady_v01
   commentary_type: personal_admission
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - performed_steady_while_alarm_ran
-  topic_keys: [anxiety]
-  allowed_positions: [before_THREAD]
+  topic_keys:
+  - anxiety
+  allowed_positions:
+  - before_THREAD
   register: witness
   position_variants:
     before_THREAD:
-      body: |
-        I was very good at looking steady while my chest kept its own frantic count under the scrubs.
+      body: 'I was very good at looking steady while my chest kept its own frantic count under the scrubs.
+
         That steadiness was not a lie — it was what the work required, and it kept people alive.
-        What I was missing was not a better performance; it was one honest signal I could trust before the steady face went on.
+
+        What I was missing was not a better performance; it was one honest signal I could trust before
+        the steady face went on.
+
         Carry this into the next chapter: what is your body reporting before you answer that you are fine.
 
+        '
 - commentary_id: ac_lena_anxiety_endorsement_small_v01
   commentary_type: gentle_endorsement
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - treats_people_who_help_for_a_living
-  topic_keys: [anxiety]
-  allowed_positions: [before_THREAD]
+  topic_keys:
+  - anxiety
+  allowed_positions:
+  - before_THREAD
   register: witness
   position_variants:
     before_THREAD:
-      body: |
-        I have watched people try a practice this quiet and dismiss it because nothing dramatic happened.
-        The ones who stayed with it did not report a transformation — they reported fewer ambushes from their own nervous system across a long shift.
-        That is a modest result, and modest results are the ones that survive a week where everyone needs something from you.
+      body: 'I have watched people try a practice this quiet and dismiss it because nothing dramatic happened.
+
+        The ones who stayed with it did not report a transformation — they reported fewer ambushes from
+        their own nervous system across a long shift.
+
+        That is a modest result, and modest results are the ones that survive a week where everyone needs
+        something from you.
+
         Let that be permission enough for what comes next.
 
+        '
 - commentary_id: ac_lena_anxiety_skeptic_hand_on_chest_v01
   commentary_type: skeptics_companion
-  mode_allow: [composite, teacher_mode]
+  mode_allow:
+  - composite
+  - teacher_mode
   composite_safe: true
   bio_license_refs:
   - clinical_skeptic_of_soft_language
   - hand_on_sternum_practice
-  topic_keys: [anxiety]
-  allowed_positions: [after_PIVOT]
+  topic_keys:
+  - anxiety
+  allowed_positions:
+  - after_PIVOT
   register: witness
   position_variants:
     after_PIVOT:
-      body: |
-        The first dozen times I put a hand on my own sternum between rooms, it felt absurd for someone who had run resuscitations.
+      body: 'The first dozen times I put a hand on my own sternum between rooms, it felt absurd for someone
+        who had run resuscitations.
+
         Absurd is a fair first reaction, and I would not argue you out of it.
-        What I could not dismiss was that the alarm sometimes peaked before the thought formed, and the hand gave me a second of contact that the thinking never offered.
+
+        What I could not dismiss was that the alarm sometimes peaked before the thought formed, and the
+        hand gave me a second of contact that the thinking never offered.
+
         You do not have to believe in it — only notice whether the next beat arrives differently.
+
+        '
+accent_class_note: AUTHOR_DISCLOSURE inventory type maps to AUTHOR_COMMENTARY bank; manga-author EI disclosure
+  remains a FEATURE (Manga Author System).
