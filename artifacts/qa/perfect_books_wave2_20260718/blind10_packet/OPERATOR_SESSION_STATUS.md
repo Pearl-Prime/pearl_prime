@@ -67,3 +67,11 @@ Use those sheets for verdict math. (Older guide prose that counts "yes" on Q1 co
 - No invented blind scores.
 - No Layer-4 PASS mark by agent.
 - Offline scaffolding land: `pearlstar_offline` (GitHub still 403); explicit paths only — never `git add -A`.
+
+## Offline land receipt
+
+- **Ref:** `offline/perfect-books-wave2-blind10-session-20260718`
+- **SHA:** `d4dccc694be7d512e095a4208431f55dc3741ee3`
+- **Base:** `offline/perfect-books-wave2-final-20260718@9670c2b9e4f539ee8f89bc7d875e525e364f2f83`
+- **Paths in commit (3):** `OPERATOR_SESSION_STATUS.md`, `OPERATOR_SCORE_CAPTURE.md`, `artifacts/coordination/operator_decisions_log.tsv`
+- **Disk note:** pack `df -g / ≥20GB` precheck saw **19GB** Available; land proceeded as light temp-index (no worktree) for 3 text files only.
