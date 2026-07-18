@@ -1,10 +1,40 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
-import { appendBrandAssignmentToYAML, brandAssignmentPayload, matchBrand } from "./brandMatch.js";
+import { appendBrandAssignmentToYAML, brandAssignmentPayload, loadBrandIndexWithLiveAssignments, matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
 import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
+
+/** zh (Simplified Chinese) wizard serves BOTH zh_CN and zh_SG — the hub hands in
+ * ?market=cn or ?market=sg (brand-wizard-app/public/pearl_prime_entry.html LANE_WIZARD /
+ * LANE_MARKET both route zh_CN and zh_SG through wizard-zh.html). Without this resolver
+ * (present in the sibling ja/tw wizards but missing here) the wizard silently kept
+ * onboardingMarket at its hardcoded "us" default for every submission regardless of the
+ * intended market, so brandMatch.js's LANE_FROM_MARKET collapsed every zh_CN AND zh_SG
+ * signup onto an _en_us brand — confirmed market mis-capture, fixed by this resolver. */
+function resolveOnboardingMarket() {
+  const norm = (s) => String(s || "").toLowerCase().replace(/[\s-]+/g, "_");
+  try {
+    const url = new URLSearchParams(window.location.search).get("market");
+    if (url) {
+      const k = norm(url);
+      if (k === "cn" || k === "china" || k === "zh_cn") return "china";
+      if (k === "sg" || k === "singapore" || k === "zh_sg") return "singapore";
+      return k;
+    }
+  } catch (_) {}
+  try {
+    const stored = localStorage.getItem("phoenix_onboarding_market");
+    if (stored) {
+      const k = norm(stored);
+      if (k === "cn" || k === "china" || k === "zh_cn") return "china";
+      if (k === "sg" || k === "singapore" || k === "zh_sg") return "singapore";
+      return k;
+    }
+  } catch (_) {}
+  return "china";
+}
 
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
@@ -2835,8 +2865,7 @@ function Step11Launch({ state, update, i18n = {} }) {
     setSubmitted(true);
     let m = null;
     try {
-      const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
-      const brands = r.ok ? await r.json() : {};
+      const brands = await loadBrandIndexWithLiveAssignments();
       m = matchBrand(state, brands, readTeacherMode());
       if (m) {
         wizardYaml = appendBrandAssignmentToYAML(wizardYaml, m, state.contact || {});
@@ -3306,7 +3335,7 @@ function generateYAML(state) {
   Object.entries(state.voiceSettings || {}).forEach(([k, v]) => { y += `    ${k}: ${v}\n`; });
   y += `\n  visual_style: "${state.visualStyle}"\n  tradition: "${state.tradition}"\n  emotional_outcomes: [${(state.emotions || []).map((e) => `"${e}"`).join(", ")}]\n\n`;
   y += `  content_angles: [${(state.angles || []).map((a) => `"${a}"`).join(", ")}]\n  topic_tags: [${(state.topicTags || []).map((t) => `"${t}"`).join(", ")}]\n\n`;
-  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "us"}"\n`;
+  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "china"}"\n`;
   y += `  format_focus: "${state.formatFocus || "book"}"\n  channels: [${(state.channels || []).map((c) => `"${c}"`).join(", ")}]\n\n`;
   y += `  revenue_blend:\n    user_topics_weight: 0.30\n    proven_topics_weight: 0.70\n    note: "System blends brand identity with persona-based demand and proven search terms"\n\n`;
 
@@ -3634,7 +3663,7 @@ export default function BrandWizard() {
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
     formatFocus: null, channels: [],
-    onboardingLane: "self_help", onboardingMarket: "us",
+    onboardingLane: "self_help", onboardingMarket: "china",
     contact: { firstName: "", lastName: "", email: "", phoneCode: "+1", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
   });
 
@@ -3655,6 +3684,14 @@ export default function BrandWizard() {
     const urlMode = params.get("mode");
     if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
+
+  // Market from onboarding.html/hub handoff (?market=cn|sg / phoenix_onboarding_market) or
+  // CN default. Fixes the confirmed market mis-capture: this wizard serves both zh_CN and
+  // zh_SG, and previously had no mechanism to read the hub's market token at all.
+  useEffect(() => {
+    const market = resolveOnboardingMarket();
+    if (market) update({ onboardingMarket: market });
+  }, [update]);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)
   if (phase === "intro") {

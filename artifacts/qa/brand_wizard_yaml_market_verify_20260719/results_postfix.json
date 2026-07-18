@@ -1,0 +1,105 @@
+[
+  {
+    "label": "smoke_en_US",
+    "wizard": "wizard.html",
+    "hubMarketToken": null,
+    "resolvedMarket": "us",
+    "intendedLane": "en_US",
+    "matched_brand_id": "night_reset_en_us",
+    "captured_lane_field": "en_US",
+    "captured_lane_suffix": "en_us",
+    "http_status": 409,
+    "server_response": {
+      "detail": {
+        "error": "brand_claimed",
+        "brand_id": "night_reset_en_us",
+        "assigned_to": "Synthetic Tester426068",
+        "source": "local_roster_assignments"
+      }
+    },
+    "email": "bw01.1784413402038.767045@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_ja_JP",
+    "wizard": "wizard-ja.html",
+    "hubMarketToken": "jp",
+    "resolvedMarket": "japan",
+    "intendedLane": "ja_JP",
+    "matched_brand_id": "stabilizer_ja_jp",
+    "captured_lane_field": "ja_JP",
+    "captured_lane_suffix": "ja_jp",
+    "http_status": 409,
+    "server_response": {
+      "detail": {
+        "error": "brand_claimed",
+        "brand_id": "stabilizer_ja_jp",
+        "assigned_to": "Synthetic Tester590775",
+        "source": "local_roster_assignments"
+      }
+    },
+    "email": "bw01.1784413407219.441261@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_zh_TW",
+    "wizard": "wizard-tw.html",
+    "hubMarketToken": "tw",
+    "resolvedMarket": "taiwan",
+    "intendedLane": "zh_TW",
+    "matched_brand_id": "stabilizer_zh_tw",
+    "captured_lane_field": "zh_TW",
+    "captured_lane_suffix": "zh_tw",
+    "http_status": 409,
+    "server_response": {
+      "detail": {
+        "error": "brand_claimed",
+        "brand_id": "stabilizer_zh_tw",
+        "assigned_to": "Synthetic Tester573483",
+        "source": "local_roster_assignments"
+      }
+    },
+    "email": "bw01.1784413410789.833827@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_zh_CN",
+    "wizard": "wizard-zh.html",
+    "hubMarketToken": "cn",
+    "resolvedMarket": "china",
+    "intendedLane": "zh_CN",
+    "matched_brand_id": "stabilizer_zh_cn",
+    "captured_lane_field": "zh_CN",
+    "captured_lane_suffix": "zh_cn",
+    "http_status": 200,
+    "server_response": {
+      "status": "submitted",
+      "brand_id": "stabilizer_zh_cn",
+      "assigned": true,
+      "submission_path": "artifacts/onboarding/submissions/2026-07-18/stabilizer_zh_cn__bw01_1784413411963_474971_example_com.yaml",
+      "next": "brand_admin.html?phase=3&brand=stabilizer_zh_cn"
+    },
+    "email": "bw01.1784413411963.474971@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_zh_SG",
+    "wizard": "wizard-zh.html",
+    "hubMarketToken": "sg",
+    "resolvedMarket": "singapore",
+    "intendedLane": "zh_SG",
+    "matched_brand_id": "stabilizer_zh_sg",
+    "captured_lane_field": "zh_SG",
+    "captured_lane_suffix": "zh_sg",
+    "http_status": 200,
+    "server_response": {
+      "status": "submitted",
+      "brand_id": "stabilizer_zh_sg",
+      "assigned": true,
+      "submission_path": "artifacts/onboarding/submissions/2026-07-18/stabilizer_zh_sg__bw01_1784413413577_22671_example_com.yaml",
+      "next": "brand_admin.html?phase=3&brand=stabilizer_zh_sg"
+    },
+    "email": "bw01.1784413413577.22671@example.com",
+    "verdict": "PASS"
+  }
+]
