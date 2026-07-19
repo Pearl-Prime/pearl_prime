@@ -1,7 +1,7 @@
 # Handoff — Social Media Voice Matrix (Wave 1 → operator → Wave 2)
 
 **From:** Pearl_Research · **To:** Operator (Layer-4 listen) → Pearl_Int Lane 2  
-**Date:** 2026-07-19 · **Signal:** `social-media-voice-matrix-READ-PENDING`
+**Date:** 2026-07-19 · **Signal:** `social-media-voice-matrix-ratified` (OPD-SMV-01)
 
 ## What landed
 
@@ -36,3 +36,14 @@ Verifiable `social-media-voice-matrix-ratified=<sha>` on a durable surface (comm
 ## RAP note for Lane 2
 
 `pscli enqueue` has no CosyVoice TTS task yet. Prefer registering `tts_cosyvoice2` **or** document on-box synth after a working `gpu-acquire`. Do not silent-bypass via laptop `curl $COSYVOICE_URL`.
+
+
+## Ratification (OPD-SMV-01)
+
+Operator listen 2026-07-19:
+- BEST: `corp_mgr_anxiety_english_female_ALT`, `corp_mgr_anxiety_english_male`
+- GOOD: `rn_compassion_fatigue_english_female`, `smoke_corporate_anxiety_english_male`, `genz_anxiety_english_female`
+- BAD: `corp_mgr_burnout_english_male`, `genz_courage_english_female`, `rn_anxiety_english_female`
+
+Frozen: CosyVoice; corp=`english_female` (alt `english_male`); gen_z/RN=`english_female`; CF-biased RN base; softened burnout/courage; CTSS waiver for pilot.
+Lane 2 unblocked.
