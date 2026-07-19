@@ -83,6 +83,15 @@ namespaces:
     consumed_by: ["any"]
     lifecycle: "expire 1d"
 
+  social_media_voice_bank:
+    prefix: "social_media/voice_bank/"
+    pattern: "social_media/voice_bank/{run_id}/mp3/{locale}/{persona}/{topic}/{atom_id}.mp3"
+    examples:
+      - "social_media/voice_bank/20260719/mp3/en-US/corporate_managers/anxiety/EVG-ENUS-ANXI-CORP-SS-01.mp3"
+    produced_by: ["pearl-star"]
+    consumed_by: ["tiktok_reel_assembly", "pearl_marketing"]
+    notes: "Evergreen social atom CosyVoice MP3 bank; selection via config/tts/social_media_voice_matrix.yaml"
+
 # ── Authentication mode ────────────────────────────────────────────────────
 # R2 supports two auth modes:
 #   1. Cloudflare API token (account-level) — used by wrangler CLI

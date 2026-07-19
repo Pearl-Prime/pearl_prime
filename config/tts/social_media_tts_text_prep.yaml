@@ -1,0 +1,129 @@
+# Social Media TTS — plain-text prep (NO SSML)
+# Authority: artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms (Q-SMV-G03).
+# Date: 2026-07-19 · Ratified: OPD-SMV-03 (aggressive short sentences)
+schema_version: 2
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden   # synth-input only
+
+punctuation_pacing:
+  aggressiveness: aggressive   # Q-SMV-G02
+  rules:
+    - id: colon_to_period
+      description: "Setup colon → full stop."
+      pattern: ':\s+'
+      replace: '. '
+      enabled: true
+    - id: semicolon_to_period
+      pattern: ';\s+'
+      replace: '. '
+      enabled: true
+    - id: emdash_to_period
+      pattern: '\s*[—–]\s*'
+      replace: '. '
+      enabled: true
+    - id: comma_and_to_period
+      description: "Aggressive: split ', and ' into a new sentence."
+      pattern: ',\s+and\s+'
+      replace: '. And '
+      enabled: true
+    - id: comma_but_to_period
+      pattern: ',\s+but\s+'
+      replace: '. But '
+      enabled: true
+    - id: comma_so_to_period
+      pattern: ',\s+so\s+'
+      replace: '. So '
+      enabled: true
+    - id: comma_or_to_period
+      pattern: ',\s+or\s+'
+      replace: '. Or '
+      enabled: true
+    - id: strip_parentheses
+      description: "Drop parenthetical asides (TTS reads them awkwardly)."
+      pattern: '\s*\([^)]*\)'
+      replace: ''
+      enabled: true
+    - id: strip_decorative_quotes
+      pattern: '[“”"]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_space
+      pattern: '\.\s*\.'
+      replace: '.'
+      enabled: true
+  guidance_not_automated:
+    - "Target under ~12–16 words per sentence when hand-editing."
+    - "Avoid parentheses, bullets, ALL CAPS emphasis, stacked exclamation marks."
+
+homograph_and_trap_rewrites:
+  - id: a_live_session
+    pattern: '\ba live\b'
+    replace: 'a real-time'
+    enabled: true
+  - id: read_it_out
+    pattern: '\bread it out\b'
+    replace: 'say it out'
+    enabled: true
+  - id: read_it_aloud
+    pattern: '\bread it aloud\b'
+    replace: 'speak it aloud'
+    enabled: true
+  - id: read_this
+    pattern: '\bread this\b'
+    replace: 'look at this'
+    enabled: true
+  - id: project_confidence
+    pattern: '\bproject confidence\b'
+    replace: 'show confidence'
+    enabled: true
+  - id: separate_it_from
+    pattern: '\bseparate it from\b'
+    replace: 'set it apart from'
+    enabled: true
+  - id: close_friend
+    pattern: '\ba close friend\b'
+    replace: 'a trusted friend'
+    enabled: true
+  - id: perfect_the
+    pattern: '\bperfect the\b'
+    replace: 'refine the'
+    enabled: true
+
+speakable_expansions:
+  - id: healthcare_rns_label
+    pattern: '\bhealthcare RNs\b'
+    replace: 'healthcare nurses'
+    enabled: true
+  - id: gen_z_token
+    pattern: '\bGen Z\b'
+    replace: 'Gen Zee'
+    enabled: true
+  - id: rn_token
+    pattern: '\bRNs\b'
+    replace: 'nurses'
+    enabled: true
+  - id: rn_singular
+    pattern: '\bRN\b'
+    replace: 'nurse'
+    enabled: true
+
+do_not_blind_replace:
+  - use
+  - does
+  - reset
+  - progress
+  - number
+  - refill
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing

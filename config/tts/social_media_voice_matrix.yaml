@@ -1,173 +1,55 @@
-# Social Media Voice Selection Matrix — short-form CosyVoice (TikTok / Reels / Shorts)
-# NEW-ARTIFACT-JUSTIFIED: voice_diversity_matrix.yaml is a diversity CHECK, not a selection map.
-# Lane 2 (MP3 bank) reads this file as the frozen (persona, topic, locale) → voice+params contract.
-# Authority research: docs/VOICE_PERSONA_TOPIC_RESEARCH.md §7 (Short-Form Social / Reels)
-# Diversity check: config/tts/voice_diversity_matrix.yaml
-# Status: RATIFIED 2026-07-19 (operator Layer-4 listen) — golden for Lane 2
-# Date: 2026-07-19
-schema_version: 1
+# Social Media Voice Selection Matrix — gender-only CosyVoice (TikTok / Reels)
+# RATIFIED OPD-SMV-03 (2026-07-19): G01 keep gender map; G02 aggressive short sentences;
+# G03 synth-input-only text prep (SSOT untouched). NO SSML. NO engine params.
+# Text prep: config/tts/social_media_tts_text_prep.yaml
+# Research: artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+schema_version: 2
 locale_default: en-US
 engine_default: cosyvoice2
-resolution: persona_base_plus_topic_modulation  # Lane 2 merges persona_voices[p] + topic_modulation[t]
+resolution: gender_only_stock_voice
+text_prep: config/tts/social_media_tts_text_prep.yaml
+r2_run_id: "20260719b"
+
 ratification:
   status: RATIFIED
   signal_token: social-media-voice-matrix-ratified
-  ratified_at_utc: "2026-07-19T05:04:00Z"
-  opd: OPD-SMV-01
-  audition_dir: artifacts/research/social_media_voice_matrix_2026-07-19/auditions
-  report: artifacts/research/social_media_voice_matrix_2026-07-19/REPORT.md
-  operator_listen:
-    best:
-      - corp_mgr_anxiety_english_female_ALT.mp3
-      - corp_mgr_anxiety_english_male.mp3
-    good:
-      - rn_compassion_fatigue_english_female.mp3
-      - smoke_corporate_anxiety_english_male.mp3
-      - genz_anxiety_english_female.mp3
-    bad:
-      - corp_mgr_burnout_english_male.mp3
-      - genz_courage_english_female.mp3
-      - rn_anxiety_english_female.mp3
+  opd: OPD-SMV-03
+  ratified_at_utc: "2026-07-19T05:32:00Z"
+  decisions:
+    Q-SMV-G01: keep   # corp=male, gen_z=female, RN=female
+    Q-SMV-G02: aggressive_short_sentences
+    Q-SMV-G03: synth_input_only_simple
+  void_prior_bank: "social_media/voice_bank/20260719/ (modulated run)"
 
-# ─── Q-SMV decisions (operator listen 2026-07-19) ───────────────────────────
 operator_defaults:
   Q-SMV-01_engine: cosyvoice2
   Q-SMV-02_first_bank: evergreen_en_us
-  Q-SMV-03_granularity: one_voice_per_persona_plus_topic_params
-  Q-SMV-04_ratify: RATIFIED
-  Q-SMV-04_notes: >
-    Corporate: both english_female (ALT) and english_male anxiety rated BEST —
-    primary = english_female (listed first); english_male = approved alternate.
-    Gen Z anxiety female = GOOD → keep english_female.
-    RN compassion_fatigue female = GOOD; RN anxiety female = BAD → keep english_female
-    but bias RN base + anxiety toward compassion_fatigue register.
-    Bad topic clips (burnout male, courage female) → soften those topic rows; voice IDs stay.
-    CTSS 2-builtin interim WAIVED for evergreen pilot scale (clone still planned).
+  Q-SMV-03_granularity: gender_only
+  ssml: forbidden
+  engine_params: forbidden
 
-# ─── Persona → voice identity (one per persona) ─────────────────────────────
 persona_voices:
   corporate_managers:
     engine: cosyvoice2
-    voice_id: english_female
-    voice_id_alternate: english_male   # also BEST on anxiety listen
-    clone_ref: null
-    archetype: authoritative_clear
-    gender: female
-    base:
-      pace_bpm: 152
-      pause_ms: 260
-      warmth: 0.55
-      pitch_shift: 0.00
-      stability: 0.68
-    notes: "Operator BEST on anxiety (female ALT). Male alternate also BEST."
-
+    voice_id: english_male
+    voice_id_alternate: english_female
+    gender: male
   gen_z_professionals:
     engine: cosyvoice2
     voice_id: english_female
-    clone_ref: null
-    archetype: bright_peer
     gender: female
-    base:
-      pace_bpm: 156
-      pause_ms: 250
-      warmth: 0.48
-      pitch_shift: 0.01
-      stability: 0.60
-    notes: "Operator GOOD on anxiety. Courage clip BAD → courage topic softened below."
-
   healthcare_rns:
     engine: cosyvoice2
     voice_id: english_female
-    clone_ref: en_f_warm_caregiver_01
-    clone_status: PENDING_CLONE_NON_BLOCKING  # waived for evergreen pilot
-    archetype: warm_caregiver
     gender: female
-    base:
-      pace_bpm: 146
-      pause_ms: 300
-      warmth: 0.78
-      pitch_shift: -0.02
-      stability: 0.70
-    notes: >
-      Operator GOOD on compassion_fatigue; BAD on anxiety with same voice.
-      Base locked to CF register; anxiety topic for RNs uses CF-like params.
 
-# ─── Topic modulation (post-listen adjustments on BAD topics) ───────────────
-topic_modulation:
-  addiction:           {pace_bpm: 153, pause_ms: 260, pitch_shift: 0.00, warmth: 0.55, stability: 0.62}
-  adhd:                {pace_bpm: 158, pause_ms: 250, pitch_shift: 0.02, warmth: 0.50, stability: 0.58}
-  anxiety:             {pace_bpm: 150, pause_ms: 270, pitch_shift: 0.00, warmth: 0.65, stability: 0.66}
-  body_image:          {pace_bpm: 150, pause_ms: 270, pitch_shift: 0.00, warmth: 0.68, stability: 0.62}
-  boundaries:          {pace_bpm: 154, pause_ms: 260, pitch_shift: 0.01, warmth: 0.50, stability: 0.66}
-  # BAD listen (corp male burnout) → slower/warmer
-  burnout:             {pace_bpm: 144, pause_ms: 300, pitch_shift: -0.03, warmth: 0.74, stability: 0.70}
-  compassion_fatigue:  {pace_bpm: 146, pause_ms: 300, pitch_shift: -0.02, warmth: 0.78, stability: 0.72}
-  # BAD listen (genz courage) → less bright / less urgent
-  courage:             {pace_bpm: 148, pause_ms: 280, pitch_shift: 0.00, warmth: 0.58, stability: 0.66}
-  depression:          {pace_bpm: 146, pause_ms: 300, pitch_shift: -0.03, warmth: 0.72, stability: 0.70}
-  divorce:             {pace_bpm: 147, pause_ms: 290, pitch_shift: -0.01, warmth: 0.72, stability: 0.68}
-  financial_anxiety:   {pace_bpm: 154, pause_ms: 260, pitch_shift: 0.00, warmth: 0.52, stability: 0.66}
-  grief:               {pace_bpm: 142, pause_ms: 340, pitch_shift: -0.05, warmth: 0.82, stability: 0.75}
-  imposter_syndrome:   {pace_bpm: 152, pause_ms: 260, pitch_shift: 0.01, warmth: 0.58, stability: 0.62}
-  money:               {pace_bpm: 155, pause_ms: 260, pitch_shift: 0.00, warmth: 0.50, stability: 0.66}
-  overthinking:        {pace_bpm: 154, pause_ms: 260, pitch_shift: 0.00, warmth: 0.52, stability: 0.60}
-  relationship_anxiety:{pace_bpm: 151, pause_ms: 270, pitch_shift: 0.00, warmth: 0.68, stability: 0.64}
-  self_worth:          {pace_bpm: 150, pause_ms: 280, pitch_shift: 0.00, warmth: 0.68, stability: 0.65}
-  shame:               {pace_bpm: 147, pause_ms: 290, pitch_shift: -0.02, warmth: 0.75, stability: 0.70}
-  sleep_anxiety:       {pace_bpm: 140, pause_ms: 350, pitch_shift: -0.04, warmth: 0.78, stability: 0.72}
-  social_anxiety:      {pace_bpm: 149, pause_ms: 280, pitch_shift: -0.01, warmth: 0.68, stability: 0.66}
-
-# Persona-specific topic overrides (RN anxiety BAD → CF register)
-persona_topic_overrides:
-  healthcare_rns:
-    anxiety:
-      pace_bpm: 146
-      pause_ms: 300
-      pitch_shift: -0.02
-      warmth: 0.78
-      stability: 0.72
+topic_modulation: {}
+persona_topic_overrides: {}
 
 example_rows:
-  - persona: corporate_managers
-    topic: anxiety
-    locale: en-US
-    engine: cosyvoice2
-    voice_id: english_female
-    clone_ref: null
-    pace_bpm: 150
-    pause_ms: 270
-    warmth: 0.65
-    pitch_shift: 0.00
-    stability: 0.66
-  - persona: gen_z_professionals
-    topic: anxiety
-    locale: en-US
-    engine: cosyvoice2
-    voice_id: english_female
-    clone_ref: null
-    pace_bpm: 150
-    pause_ms: 270
-    warmth: 0.65
-    pitch_shift: 0.00
-    stability: 0.66
-  - persona: healthcare_rns
-    topic: compassion_fatigue
-    locale: en-US
-    engine: cosyvoice2
-    voice_id: english_female
-    clone_ref: en_f_warm_caregiver_01
-    pace_bpm: 146
-    pause_ms: 300
-    warmth: 0.78
-    pitch_shift: -0.02
-    stability: 0.72
-
-diversity_flags:
-  distinct_archetypes_declared: 3
-  distinct_builtin_voices_in_use: 1  # english_female primary for all 3; male = corporate alternate
-  ctss_risk: "operator waived 2-builtin CTSS for evergreen pilot; clone en_f_warm_caregiver_01 still planned"
-  block_full_bank_scale_until: null  # waived OPD-SMV-01
-  operator_waiver: OPD-SMV-01
+  - {persona: corporate_managers, topic: anxiety, locale: en-US, engine: cosyvoice2, voice_id: english_male}
+  - {persona: gen_z_professionals, topic: anxiety, locale: en-US, engine: cosyvoice2, voice_id: english_female}
+  - {persona: healthcare_rns, topic: compassion_fatigue, locale: en-US, engine: cosyvoice2, voice_id: english_female}
 
 post_synth_targets:
   loudness_lufs: -14

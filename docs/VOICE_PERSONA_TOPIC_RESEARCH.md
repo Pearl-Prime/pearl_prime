@@ -134,8 +134,24 @@ Voice parameters directly affect listener trust and engagement in therapeutic au
 `tiktok_reels_shorts` in `platform_fit`). Long-form §§1–6 remain authoritative for
 audiobooks / guided audio. This section **extends** — it does not replace — those rows.
 
-**Machine contract:** `config/tts/social_media_voice_matrix.yaml`
-**Research packet:** `artifacts/research/social_media_voice_matrix_2026-07-19/REPORT.md`
+**Machine contract:** `config/tts/social_media_voice_matrix.yaml` (v2 — **gender-only stock voices**)  
+**Text prep (NO SSML):** `config/tts/social_media_tts_text_prep.yaml`  
+**Research packets:**  
+- `artifacts/research/social_media_voice_matrix_2026-07-19/REPORT.md` (Wave 1 auditions)  
+- `artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md` (**plan pivot** — read this)
+
+### 7.0 Plan pivot (2026-07-19, OPD-SMV-02) — READ FIRST
+
+Operator listen: CosyVoice **persona/topic engine-param modulation sounded weird** and worse than
+the stock voice. **Do not** drive short-form CosyVoice with pace/pause/warmth/pitch/stability knobs.
+
+**Production levers for the social MP3 bank:**
+
+1. **Gender only** — `english_male` or `english_female` stock (see matrix v2).
+2. **Plain-text prep** — punctuation pacing + homograph/trap rewrites; **SSML forbidden** for this bank
+   (onboarding ElevenLabs+SSML lane stays separate: `specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md`).
+
+Long-form §§1–3 acoustic tables remain for audiobook/ElevenLabs therapeutic work — not for this CosyVoice reel bank.
 
 ### 7.1 Register delta vs long-form
 
