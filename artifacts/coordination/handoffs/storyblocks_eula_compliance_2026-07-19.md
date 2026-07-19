@@ -50,7 +50,7 @@ This push remains **SPECCED** only → signal stays **BLOCKED** on backend acces
 |-------|--------|
 | Backend Django checkout | Still **absent** (no manage.py / storyblocks services) |
 | GitHub Ahjan108 | Still **suspended** (403) |
-| pearlstar tip (pre-this-commit) | `da45dd06e00d336807c8440c11f02511221277f1` |
+| pearlstar tip | `a3516cadf6003a141154c2abc17756f4ffaaf97d` (bank+metadata contract) |
 
 ### New design artifact
 | Path | Role |
