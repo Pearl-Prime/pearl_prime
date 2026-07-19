@@ -201,6 +201,24 @@ def schedule_post(
     return {}
 
 
+def list_scheduler_posts(
+    user_id: str,
+    blog_id: str,
+    api_key: str,
+    base_url: str = DEFAULT_BASE_URL,
+) -> dict[str, Any] | list[Any]:
+    """GET ``scheduler/posts`` — auth proof and postId poll (no publish)."""
+    return call_metricool_api(
+        endpoint="scheduler/posts",
+        method="GET",
+        payload=None,
+        user_id=user_id,
+        blog_id=blog_id,
+        api_key=api_key,
+        base_url=base_url,
+    )
+
+
 def get_connected_platforms(
     blog_id: str,
     user_id: str,

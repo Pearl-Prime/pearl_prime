@@ -18,9 +18,11 @@ from client import (  # noqa: E402
     MetricoolAPIError,
     MetricoolConfigError,
     call_metricool_api,
+    list_scheduler_posts,
     schedule_post,
 )
 import post as metricool_post  # noqa: E402
+import pilot_preflight  # noqa: E402
 
 FIXTURE = REPO / "tests" / "fixtures" / "metricool" / "sample_asset.json"
 
@@ -300,3 +302,75 @@ def test_placeholder_blocks_nondry_run(tmp_path: Path, capsys):
     )
     assert rc == 2
     assert "Q-METRIC-02" in capsys.readouterr().err
+
+
+def test_list_scheduler_posts_get():
+    captured = {}
+
+    def fake_get(url, headers=None, timeout=None):
+        captured["url"] = url
+        captured["headers"] = headers
+        return _ok_response({"data": [{"id": 1}]})
+
+    with patch("client.requests.get", side_effect=fake_get):
+        with patch("client.time.sleep"):
+            out = list_scheduler_posts(
+                user_id="3564167",
+                blog_id="12345",
+                api_key="test-key",
+            )
+    assert out == {"data": [{"id": 1}]}
+    assert captured["url"].startswith("https://app.metricool.com/api/v2/scheduler/posts")
+    assert "blogId=12345" in captured["url"]
+    assert "userId=3564167" in captured["url"]
+    assert captured["headers"]["X-Mc-Auth"] == "test-key"
+
+
+def test_pilot_preflight_blocked_placeholder(tmp_path: Path, monkeypatch, capsys):
+    brands_map = {
+        "account": "waystream",
+        "user_id_env": "METRICOOL_USER_ID",
+        "brands": {
+            "waystream_sanctuary": {
+                "blog_id": "WAYSTREAM_BLOG_ID_PENDING",
+                "status": "wired",
+                "timezone": "America/New_York",
+            },
+        },
+    }
+    map_path = tmp_path / "metricool_brands.yaml"
+    map_path.write_text(yaml.safe_dump(brands_map), encoding="utf-8")
+    monkeypatch.delenv("METRICOOL_API_KEY", raising=False)
+    monkeypatch.delenv("METRICOOL_USER_ID", raising=False)
+    rc = pilot_preflight.main(["--brand", "waystream_sanctuary", "--brands-map", str(map_path)])
+    assert rc == 2
+    err_out = capsys.readouterr().out
+    assert "PRIMARY_BLOCKER=Q-METRIC-CREDS" in err_out
+    assert "Q-METRIC-02" in err_out
+
+
+def test_pilot_preflight_ready(tmp_path: Path, monkeypatch, capsys):
+    brands_map = {
+        "account": "waystream",
+        "user_id_env": "METRICOOL_USER_ID",
+        "brands": {
+            "waystream_sanctuary": {
+                "blog_id": "99999",
+                "status": "wired",
+                "timezone": "America/New_York",
+            },
+        },
+    }
+    map_path = tmp_path / "metricool_brands.yaml"
+    map_path.write_text(yaml.safe_dump(brands_map), encoding="utf-8")
+    monkeypatch.setenv("METRICOOL_API_KEY", "test-key")
+    monkeypatch.setenv("METRICOOL_USER_ID", "3564167")
+    rc = pilot_preflight.main(
+        ["--brand", "waystream_sanctuary", "--brands-map", str(map_path), "--json"]
+    )
+    assert rc == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["ready_for_draft_pilot"] is True
+    assert payload["primary_blocker"] is None
+    assert payload["checks"]["METRICOOL_API_KEY"] == "set"
+    assert payload["checks"]["METRICOOL_USER_ID"] == "3564167"

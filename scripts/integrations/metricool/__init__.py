@@ -9,6 +9,7 @@ from .client import (
     MetricoolConfigError,
     call_metricool_api,
     get_connected_platforms,
+    list_scheduler_posts,
     load_credentials,
     schedule_post,
 )
@@ -18,6 +19,7 @@ __all__ = [
     "MetricoolConfigError",
     "call_metricool_api",
     "get_connected_platforms",
+    "list_scheduler_posts",
     "load_credentials",
     "schedule_post",
 ]
