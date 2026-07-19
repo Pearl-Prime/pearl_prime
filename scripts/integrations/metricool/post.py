@@ -4,12 +4,19 @@
 Reuses ``build_metricool_payload`` for asset→payload construction. Routes brands
 via ``config/integrations/metricool_brands.yaml``. Unwired / null / placeholder
 blog_ids are refused for real HTTP calls. ``--dry-run`` builds and prints only.
+
+SAFE defaults:
+- Draft-only unless ``--live`` + ``--i-understand-live`` + Q-METRIC-01 approval
+- Network kill-switch: HTTP refused unless ``--dry-run`` OR ``--network`` OR
+  ``METRICOOL_ALLOW_NETWORK=1``
+- Media: require ≥1 media URL unless ``--allow-text-only`` (API may 500 on empty)
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -31,6 +38,7 @@ from client import (  # noqa: E402
 
 BRANDS_MAP_PATH = REPO_ROOT / "config" / "integrations" / "metricool_brands.yaml"
 PLACEHOLDER_MARKERS = ("PENDING", "TODO", "REPLACE", "CHANGEME", "YOUR_")
+NETWORK_ALLOW_VALUES = frozenset({"1", "true", "yes", "on"})
 
 # Map phoenix platform_specs surface platforms → Metricool provider network names.
 NETWORK_ALIASES = {
@@ -84,6 +92,39 @@ def is_placeholder_blog_id(blog_id: str) -> bool:
         return True
     upper = blog_id.upper()
     return any(marker in upper for marker in PLACEHOLDER_MARKERS)
+
+
+def network_calls_allowed(*, dry_run: bool, network_flag: bool) -> bool:
+    """Fail-closed: real HTTP only when explicitly enabled."""
+    if dry_run:
+        return False
+    if network_flag:
+        return True
+    env = (os.environ.get("METRICOOL_ALLOW_NETWORK") or "").strip().lower()
+    return env in NETWORK_ALLOW_VALUES
+
+
+def assert_media_ready(
+    api_payload: dict[str, Any],
+    *,
+    allow_text_only: bool,
+) -> None:
+    """Refuse empty media unless operator documents text-only intent.
+
+    Metricool API reference: empty media array may cause HTTP 500.
+    """
+    media = api_payload.get("media")
+    if not isinstance(media, list):
+        raise MetricoolConfigError("api_payload.media must be a list")
+    usable = [m for m in media if m is not None and str(m).strip()]
+    if usable:
+        return
+    if allow_text_only:
+        return
+    raise MetricoolConfigError(
+        "media requires ≥1 URL before schedule_post (Metricool may 500 on empty). "
+        "Pass --allow-text-only only for documented text-only posts."
+    )
 
 
 def assert_brand_postable(resolved: dict[str, Any], *, allow_placeholder_for_dry_run: bool) -> None:
@@ -232,6 +273,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Build + validate payload only; no HTTP.",
     )
     p.add_argument(
+        "--network",
+        action="store_true",
+        help="Allow real HTTP (also accepted via METRICOOL_ALLOW_NETWORK=1). Off by default.",
+    )
+    p.add_argument(
+        "--allow-text-only",
+        action="store_true",
+        help="Allow empty media (documented text-only). Default requires ≥1 media URL.",
+    )
+    p.add_argument(
         "--i-understand-live",
         action="store_true",
         help="Acknowledge live auto-publish risk (still requires Q-METRIC-01 approval).",
@@ -287,6 +338,7 @@ def main(argv: list[str] | None = None) -> int:
             when=args.when,
             timezone=resolved["timezone"],
         )
+        assert_media_ready(api_payload, allow_text_only=bool(args.allow_text_only))
 
         if args.dry_run:
             out = {
@@ -300,6 +352,15 @@ def main(argv: list[str] | None = None) -> int:
             }
             print(json.dumps(out, indent=2, ensure_ascii=False))
             return 0
+
+        if not network_calls_allowed(dry_run=False, network_flag=bool(args.network)):
+            print(
+                "ERROR: Network kill-switch is OFF. Refusing HTTP. "
+                "Pass --network or set METRICOOL_ALLOW_NETWORK=1 "
+                "(or use --dry-run). Default stays safe for CI/local accidents.",
+                file=sys.stderr,
+            )
+            return 2
 
         creds = load_credentials()
         if not creds["api_key"] or not creds["user_id"]:

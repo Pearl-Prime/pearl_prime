@@ -235,15 +235,16 @@ than copy-pasting, so a future endpoint rotation is picked up automatically.
 | Field | Value |
 |-------|-------|
 | **Env vars** | `METRICOOL_API_KEY`, `METRICOOL_USER_ID`, `METRICOOL_BASE_URL` |
-| **Consumed by** | `scripts/integrations/metricool/client.py`, `scripts/integrations/metricool/post.py` |
+| **Consumed by** | `scripts/integrations/metricool/{client,post,status,validate_config,pilot_preflight}.py` |
 | **Brand map** | `config/integrations/metricool_brands.yaml` (wired: `waystream_sanctuary` only) |
 | **Payload builder** | `phoenix_v4.social.deterministic_social.build_metricool_payload` (reuse; dry-run builder) |
 | **How to obtain** | [app.metricool.com](https://app.metricool.com) → Settings → API → copy API key. User id for the Waystream account: `3564167`. |
 | **Keychain** | Service `phoenix-omega`, accounts `METRICOOL_API_KEY`, `METRICOOL_USER_ID`, optional `METRICOOL_BASE_URL` (default `https://app.metricool.com/api/v2/`) |
 | **Required vs optional** | Optional at repo level (`Required=False`). Required only when running non-`--dry-run` posts. |
-| **Status** | Transport wired LANDED-OFFLINE 2026-07-19; pilot blocked on real `blog_id` (Q-METRIC-02). Default publish mode = draft-only (Q-METRIC-01). |
+| **Status** | Managed system LANDED-OFFLINE 2026-07-19 (SAFE/SUPPORTED/MANAGED). Pilot blocked on Keychain creds + real `blog_id` (Q-METRIC-02). Default = draft-only (Q-METRIC-01). Network kill-switch OFF unless `--network` / `METRICOOL_ALLOW_NETWORK=1`. |
 | **Security** | Never commit keys. Staging file `docs/metricool_api.txt` is gitignored. Load: `eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"`. Store key: `security add-generic-password -U -s phoenix-omega -a METRICOOL_API_KEY -w '<paste>'` (and same for `METRICOOL_USER_ID=3564167`). |
-| **CLI** | `python3 scripts/integrations/metricool/post.py --brand waystream_sanctuary --asset <json> --draft --dry-run` |
+| **CLI** | Smoke: `post.py --brand waystream_sanctuary --asset <json> --draft --dry-run`. Status: `status.py`. Validate: `validate_config.py`. Pilot needs `--network` after preflight READY. |
+| **Runbook** | [docs/runbooks/METRICOOL_POSTING_RUNBOOK.md](./runbooks/METRICOOL_POSTING_RUNBOOK.md) |
 | **API reference** | [docs/METRICOOL_API_REFERENCE.md](./METRICOOL_API_REFERENCE.md) |
 
 ### 8. GoHighLevel (GHL) — Funnel CRM

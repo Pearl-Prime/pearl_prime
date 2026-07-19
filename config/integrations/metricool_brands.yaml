@@ -7,10 +7,12 @@ account: waystream
 user_id_env: METRICOOL_USER_ID
 derived_from:
 - config/brand_registry.yaml
+- config/catalog_planning/brand_archetype_registry.yaml
 - config/brand_management/global_brand_registry_unified.yaml
 notes: One Metricool account (waystream). Only waystream_sanctuary is wired; all other
   brand keys are addressable but refuse posting until blog_id is set. Registry archetype
-  way_stream_sanctuary maps to CLI key waystream_sanctuary.
+  way_stream_sanctuary maps to CLI key waystream_sanctuary. Sync via
+  scripts/integrations/metricool/sync_brands_from_registry.py.
 brands:
   adhd_forge:
     blog_id: null
