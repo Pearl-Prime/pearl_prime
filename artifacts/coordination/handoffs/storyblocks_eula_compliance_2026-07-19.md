@@ -4,7 +4,7 @@
 **Owner:** Pearl_Int  
 **Branch:** `agent/storyblocks-eula-compliance-20260719`  
 **Base:** `origin/main` @ `9e9b9e606791590337cd7d0f2fb425def2e6f760`  
-**Design tip (durable):** `3701e0524d2d39d62250fcafb1b65e5e00b8c684`  
+**Design tip (durable):** `a3516cadf6003a141154c2abc17756f4ffaaf97d`  
 **Prior tip:** `54c25e605413ef2a39b72751a62a5cbdd1b465ec`  
 **Durable remote:** `pearlstar_offline` → `pearl_star:~/git/phoenix_omega_offline.git`  
 **GitHub PR (phoenix_omega):** blocked — Ahjan108 suspended (re-verified 2026-07-19T10:08Z)
@@ -20,7 +20,7 @@
 |-------|--------|
 | Backend Django checkout | Still **absent** (no manage.py / storyblocks services) |
 | GitHub Ahjan108 | Still **suspended** (403) |
-| pearlstar tip (pre-this-commit) | `da45dd06e00d336807c8440c11f02511221277f1` |
+| pearlstar tip | `a3516cadf6003a141154c2abc17756f4ffaaf97d` (bank+metadata contract) |
 
 ### New design artifact
 | Path | Role |
