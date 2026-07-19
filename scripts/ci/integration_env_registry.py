@@ -140,6 +140,10 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     # IMG-RENDER-DUAL-PATH-V1-01 (decommissioned) and docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md.
     # fal.ai serverless GPU inference (Milestone H §7.1 smoke test target — Qwen-Image-Layered hosted endpoint)
     ("fal.ai", "FAL_KEY", False, "fal.ai serverless GPU inference key (canonical env var name per fal-client SDK). Used for Milestone H §7.1 Qwen-Image-Layered smoke test. Apache-2.0 model, commercial-clean ToS. Pricing: $0.06/image stage 2 + $0.02/MP stage 1. Get: https://fal.ai/dashboard/keys (see docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md)"),
+    # --- Metricool (social scheduling — Waystream live account; draft-default) ---
+    ("Metricool", "METRICOOL_API_KEY", False, "Metricool API key (X-Mc-Auth). Get: app.metricool.com → Settings → API. Store in Keychain service phoenix-omega; never commit. Staging file docs/metricool_api.txt is gitignored."),
+    ("Metricool", "METRICOOL_USER_ID", False, "Metricool user id (canonical Waystream account: 3564167). Pair with METRICOOL_API_KEY."),
+    ("Metricool", "METRICOOL_BASE_URL", False, "Metricool API v2 base URL. Default: https://app.metricool.com/api/v2/"),
 ]
 
 ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})
