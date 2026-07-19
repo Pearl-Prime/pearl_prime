@@ -1,0 +1,58 @@
+{
+  "pack_id": "sleep_anxiety__healthcare_rns",
+  "topic": "sleep_anxiety",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "sleep_anxiety"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/sleep_anxiety__healthcare_rns_short_9x16.mp4",
+  "duration_s": 52.992,
+  "bytes": 4070003,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-SLEE-HEAL-HC-02",
+      "speakable_text": "If a racing mind at lights-out is familiar, this sleep anxiety pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.341,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-SLEE-HEAL-PA-02",
+      "speakable_text": "Trying to outrun sleep anxiety usually makes the loop more expensive. More clock-watching, more caffeine to cope with the last bad night. And less actual sleep pressure by bedtime.",
+      "start": 6.341,
+      "end": 18.341,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-SLEE-HEAL-ME-02",
+      "speakable_text": "Sleep anxiety often persists because trying hard to sleep activates the exact alertness that sleep requires you to release. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 18.341,
+      "end": 30.341,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-SLEE-HEAL-TS-01",
+      "speakable_text": "Try this. Get out of bed, write tomorrow's worry down on paper. And return to bed only when your eyes feel heavy. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 30.341,
+      "end": 42.341,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-SLEE-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. Sleep responds to safety and routine, not to effort or willpower.",
+      "start": 42.341,
+      "end": 52.992,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

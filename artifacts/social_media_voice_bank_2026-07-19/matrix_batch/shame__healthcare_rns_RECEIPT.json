@@ -1,0 +1,58 @@
+{
+  "pack_id": "shame__healthcare_rns",
+  "topic": "shame",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "shame"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/shame__healthcare_rns_short_9x16.mp4",
+  "duration_s": 53.289,
+  "bytes": 4068656,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-SHAM-HEAL-HC-02",
+      "speakable_text": "If a hot face is familiar, this shame pattern needs a better reset.",
+      "start": 0.0,
+      "end": 5.792,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-SHAM-HEAL-PA-02",
+      "speakable_text": "Trying to outrun shame usually makes the loop more expensive. More hiding, more over-explaining. And less chance anyone can actually help.",
+      "start": 5.792,
+      "end": 17.462,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-SHAM-HEAL-ME-02",
+      "speakable_text": "Shame often persists because the nervous system treats being seen clearly as a threat to belonging. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 17.462,
+      "end": 29.462,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-SHAM-HEAL-TS-01",
+      "speakable_text": "Try this. Name the actual event out loud in one sentence, set it apart from your worth in a second sentence. And choose one honest next step. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 29.462,
+      "end": 41.462,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-SHAM-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. The mistake is information about a moment, not a verdict on who you are.",
+      "start": 41.462,
+      "end": 53.289,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

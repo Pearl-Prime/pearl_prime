@@ -1,0 +1,58 @@
+{
+  "pack_id": "anxiety__healthcare_rns",
+  "topic": "anxiety",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "anxiety"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/anxiety__healthcare_rns_short_9x16.mp4",
+  "duration_s": 48.457,
+  "bytes": 3251857,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-ANXI-HEAL-HC-02",
+      "speakable_text": "If tight chest is familiar, this anxiety pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.472,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-ANXI-HEAL-PA-02",
+      "speakable_text": "Trying to outrun anxiety usually makes the loop more expensive. More checking, more explaining, less actual recovery.",
+      "start": 6.472,
+      "end": 15.791,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-ANXI-HEAL-ME-02",
+      "speakable_text": "Anxiety often persists because the body often receives safety before the mind can believe it. More pressure can register as more threat, even when the intention is improvement.",
+      "start": 15.791,
+      "end": 27.791,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-ANXI-HEAL-TS-01",
+      "speakable_text": "Try this. Press both feet into the floor, widen your gaze. And name five ordinary objects out loud. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 27.791,
+      "end": 39.791,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-ANXI-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. Physical orientation gives the mind a safer place to stand.",
+      "start": 39.791,
+      "end": 48.457,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

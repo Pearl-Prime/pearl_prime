@@ -27,39 +27,101 @@ ROLE_FAMILY = {
     "payoff": "SAVEABLE_PAYOFF",
 }
 
-# Preferred atom picks (topic, persona, family, variant_index)
-DEFAULT_PICKS = {
-    "anxiety": {
-        "persona": "healthcare_rns",
-        "variants": {
-            "HOOK_COVER": 2,
-            "PROBLEM_AGITATION": 2,
-            "MECHANISM_EXPLAINER": 2,
-            "TOOL_STEP": 1,
-            "SAVEABLE_PAYOFF": 2,
-        },
-    },
-    "burnout": {
-        "persona": "corporate_managers",
-        "variants": {
-            "HOOK_COVER": 2,
-            "PROBLEM_AGITATION": 2,
-            "MECHANISM_EXPLAINER": 2,
-            "TOOL_STEP": 1,
-            "SAVEABLE_PAYOFF": 2,
-        },
-    },
-    "overthinking": {
-        "persona": "gen_z_professionals",
-        "variants": {
-            "HOOK_COVER": 3,
-            "PROBLEM_AGITATION": 2,
-            "MECHANISM_EXPLAINER": 1,
-            "TOOL_STEP": 1,
-            "SAVEABLE_PAYOFF": 2,
-        },
+PERSONAS = (
+    "corporate_managers",
+    "gen_z_professionals",
+    "healthcare_rns",
+)
+
+TOPICS = (
+    "addiction",
+    "adhd",
+    "anxiety",
+    "body_image",
+    "boundaries",
+    "burnout",
+    "compassion_fatigue",
+    "courage",
+    "depression",
+    "divorce",
+    "financial_anxiety",
+    "grief",
+    "imposter_syndrome",
+    "money",
+    "overthinking",
+    "relationship_anxiety",
+    "self_worth",
+    "shame",
+    "sleep_anxiety",
+    "social_anxiety",
+)
+
+# Default variant indices (HC/PA/ME/TS/SP ≈ 2/2/2/1/2)
+DEFAULT_VARIANTS = {
+    "HOOK_COVER": 2,
+    "PROBLEM_AGITATION": 2,
+    "MECHANISM_EXPLAINER": 2,
+    "TOOL_STEP": 1,
+    "SAVEABLE_PAYOFF": 2,
+}
+
+# Calendar-primary persona per topic (backward-compat for build_pack(topic) alone)
+PRIMARY_PERSONA = {
+    "anxiety": "corporate_managers",
+    "burnout": "corporate_managers",
+    "overthinking": "gen_z_professionals",
+    "compassion_fatigue": "healthcare_rns",
+    "addiction": "healthcare_rns",
+    "adhd": "gen_z_professionals",
+    "body_image": "gen_z_professionals",
+    "boundaries": "corporate_managers",
+    "courage": "gen_z_professionals",
+    "depression": "healthcare_rns",
+    "divorce": "corporate_managers",
+    "financial_anxiety": "corporate_managers",
+    "grief": "healthcare_rns",
+    "imposter_syndrome": "corporate_managers",
+    "money": "corporate_managers",
+    "relationship_anxiety": "gen_z_professionals",
+    "self_worth": "gen_z_professionals",
+    "shame": "healthcare_rns",
+    "sleep_anxiety": "gen_z_professionals",
+    "social_anxiety": "gen_z_professionals",
+}
+
+# (topic, persona) → variant overrides
+VARIANT_OVERRIDES = {
+    ("overthinking", "gen_z_professionals"): {
+        "HOOK_COVER": 3,
+        "PROBLEM_AGITATION": 2,
+        "MECHANISM_EXPLAINER": 1,
+        "TOOL_STEP": 1,
+        "SAVEABLE_PAYOFF": 2,
     },
 }
+
+# Backward-compat: topic → {persona, variants} for the 3 pilot topics
+DEFAULT_PICKS = {
+    topic: {
+        "persona": PRIMARY_PERSONA[topic],
+        "variants": dict(
+            VARIANT_OVERRIDES.get((topic, PRIMARY_PERSONA[topic]), DEFAULT_VARIANTS)
+        ),
+    }
+    for topic in ("anxiety", "burnout", "overthinking")
+}
+# Extend DEFAULT_PICKS for all topics (primary persona)
+for _t in TOPICS:
+    if _t not in DEFAULT_PICKS:
+        DEFAULT_PICKS[_t] = {
+            "persona": PRIMARY_PERSONA.get(_t, "corporate_managers"),
+            "variants": dict(
+                VARIANT_OVERRIDES.get(
+                    (_t, PRIMARY_PERSONA.get(_t, "corporate_managers")),
+                    DEFAULT_VARIANTS,
+                )
+            ),
+        }
 
 # Kinetic needs shorter lines — punch cuts faithful to evergreen atoms
 KINETIC_SHORT = {
@@ -91,6 +153,10 @@ def load_evergreen() -> list[dict]:
     return [json.loads(l) for l in EVERGREEN.read_text().splitlines() if l.strip()]
 
 
+def variants_for(topic: str, persona: str) -> dict[str, int]:
+    return dict(VARIANT_OVERRIDES.get((topic, persona), DEFAULT_VARIANTS))
+
+
 def pick_atom(rows: list[dict], topic: str, persona: str, family: str, variant: int) -> dict:
     for r in rows:
         if (
@@ -113,8 +179,7 @@ def pick_atom(rows: list[dict], topic: str, persona: str, family: str, variant: 
 
 def reading_duration_s(text: str, *, wpm: float = 150.0, min_s: float = 3.0, max_s: float = 10.0) -> float:
     words = max(1, len(text.split()))
-    # slightly slower than speech for reading on phone
-    secs = (words / wpm) * 60.0 + 0.8  # breathe after
+    secs = (words / wpm) * 60.0 + 0.8
     return round(min(max_s, max(min_s, secs)), 2)
 
 
@@ -138,11 +203,16 @@ def build_pack(
     topic: str = "anxiety",
     *,
     style: str = "broll",
+    persona: str | None = None,
     voice_bank: Path | None = DEFAULT_VOICE_BANK,
 ) -> dict:
     rows = load_evergreen()
-    cfg = DEFAULT_PICKS[topic]
-    persona = cfg["persona"]
+    if topic not in TOPICS and topic not in DEFAULT_PICKS:
+        raise KeyError(f"unknown topic {topic!r}; known={list(TOPICS)}")
+    resolved_persona = persona or DEFAULT_PICKS.get(topic, {}).get(
+        "persona"
+    ) or PRIMARY_PERSONA.get(topic, "corporate_managers")
+    variants = variants_for(topic, resolved_persona)
     bank_index = None
     if voice_bank is not None and Path(voice_bank).is_file():
         from scripts.social_media.voice_bank_lookup import load_index
@@ -153,20 +223,17 @@ def build_pack(
     roles = ["hook", "recognition", "mechanism", "practice", "payoff"]
     for role in roles:
         fam = ROLE_FAMILY[role]
-        atom = pick_atom(rows, topic, persona, fam, cfg["variants"][fam])
+        atom = pick_atom(rows, topic, resolved_persona, fam, variants[fam])
         raw = atom["text"].strip()
         full, src = _speakable_for_atom(atom["atom_id"], raw, bank_index)
         if style == "kinetic" and topic in KINETIC_SHORT and src.startswith("ssot"):
-            # Kinetic punch lines only when bank speakable unavailable
             on_screen = KINETIC_SHORT[topic][role]
-            # kinetic: still paced for reading short lines, with hold
             dur = reading_duration_s(on_screen, wpm=120.0, min_s=3.5, max_s=7.5)
             if role == "hook":
                 dur = max(dur, 4.0)
             if role == "payoff":
                 dur = max(dur, 4.5)
         elif style == "kinetic" and topic in KINETIC_SHORT and src == "voice_bank_speakable":
-            # Prefer speakable (matches audio); wrap for kinetic line length
             on_screen = wrap_onscreen(full, width=28, max_lines=3)
             dur = reading_duration_s(full, wpm=120.0, min_s=3.5, max_s=7.5)
             if role == "hook":
@@ -175,7 +242,6 @@ def build_pack(
                 dur = max(dur, 4.5)
         else:
             on_screen = wrap_onscreen(full, width=26 if style == "broll" else 28, max_lines=4)
-            # broll/metaphor: reading pace; hook a bit punchier min
             mins = {"hook": 3.5, "recognition": 4.5, "mechanism": 6.0, "practice": 6.5, "payoff": 4.5}
             maxs = {"hook": 6.0, "recognition": 8.0, "mechanism": 10.0, "practice": 10.0, "payoff": 7.0}
             dur = reading_duration_s(
@@ -186,7 +252,7 @@ def build_pack(
                 "role": role,
                 "family": fam,
                 "atom_id": atom["atom_id"],
-                "persona": persona,
+                "persona": resolved_persona,
                 "full_text": full,
                 "ssot_text": raw,
                 "caption_source": src,
@@ -200,12 +266,22 @@ def build_pack(
         t += dur
     return {
         "topic": topic,
+        "persona": resolved_persona,
         "style": style,
         "source": "SOURCE_OF_TRUTH/social_media_atoms/evergreen_en_us_atoms.jsonl",
         "voice_bank_manifest": str(voice_bank) if voice_bank else None,
         "total_duration_s": round(t, 2),
         "beats": beats,
     }
+
+
+def iter_matrix_cells(
+    topics: tuple[str, ...] | list[str] | None = None,
+    personas: tuple[str, ...] | list[str] | None = None,
+) -> list[tuple[str, str]]:
+    ts = list(topics) if topics else list(TOPICS)
+    ps = list(personas) if personas else list(PERSONAS)
+    return [(t, p) for t in ts for p in ps]
 
 
 if __name__ == "__main__":
@@ -218,6 +294,6 @@ if __name__ == "__main__":
         )
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(pack, indent=2), encoding="utf-8")
-        print(style, "total", pack["total_duration_s"], "s")
+        print(style, "total", pack["total_duration_s"], "s", "persona", pack["persona"])
         for b in pack["beats"]:
             print(f"  {b['role']:12} {b['duration_s']:5}s  {b['on_screen'][:60]!r}  ← {b['atom_id']}")

@@ -1,0 +1,58 @@
+{
+  "pack_id": "addiction__healthcare_rns",
+  "topic": "addiction",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "addiction"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/addiction__healthcare_rns_short_9x16.mp4",
+  "duration_s": 52.897,
+  "bytes": 3524504,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-ADDI-HEAL-HC-02",
+      "speakable_text": "If a craving before the reason is familiar, this craving pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.707,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-ADDI-HEAL-PA-02",
+      "speakable_text": "Trying to outrun addiction usually makes the loop more expensive. More secrecy, more bargaining with yourself. And less distance from the next craving.",
+      "start": 6.707,
+      "end": 17.802,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-ADDI-HEAL-ME-02",
+      "speakable_text": "The craving cycle often persists because the brain has learned a fast, reliable way to change how a hard moment feels. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 17.802,
+      "end": 29.802,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-ADDI-HEAL-TS-01",
+      "speakable_text": "Try this. Name the craving out loud, set a ten-minute delay. And do one different action in that window. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 29.802,
+      "end": 41.802,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-ADDI-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. A craving is a wave with a shape and a ceiling, not a command.",
+      "start": 41.802,
+      "end": 52.897,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

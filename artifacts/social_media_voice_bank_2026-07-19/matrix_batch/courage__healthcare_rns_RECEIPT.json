@@ -1,0 +1,58 @@
+{
+  "pack_id": "courage__healthcare_rns",
+  "topic": "courage",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "courage"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/courage__healthcare_rns_short_9x16.mp4",
+  "duration_s": 54.69,
+  "bytes": 3933894,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-COUR-HEAL-HC-02",
+      "speakable_text": "If a stalled hand over send is familiar, this hesitation pattern needs a better reset.",
+      "start": 0.0,
+      "end": 7.647,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-COUR-HEAL-PA-02",
+      "speakable_text": "Trying to outrun hesitation usually makes the loop more expensive. More rehearsing, more waiting for certainty. And less practice with the discomfort itself.",
+      "start": 7.647,
+      "end": 19.647,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-COUR-HEAL-ME-02",
+      "speakable_text": "Hesitation often persists because the brain treats the discomfort of trying as more dangerous than the cost of staying still. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 19.647,
+      "end": 31.647,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-COUR-HEAL-TS-01",
+      "speakable_text": "Try this. Name the smallest true next step, set a two-minute timer. And start before the fear finishes its case. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 31.647,
+      "end": 43.647,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-COUR-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. You do not need to feel ready to be capable of the next step.",
+      "start": 43.647,
+      "end": 54.69,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

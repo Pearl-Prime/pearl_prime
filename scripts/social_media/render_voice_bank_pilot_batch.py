@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Pilot batch: evergreen 5-beat packs × voice-bank VO → PRIMARY broll craft MP4s.
 
+Joins via assemble_reel_from_voice_bank (same contract as render_pilot_variant_fixes).
 Reuses smoke_voice_bank_reel craft (broll montage + kinetic ASS + bank MP3s).
-Default: anxiety × corporate_managers (5 roles / 5 bank atoms).
 """
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -17,11 +18,16 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
 from scripts.social.evergreen_shortform_caption_pack import (  # noqa: E402
-    ROLE_FAMILY,
-    load_evergreen,
-    pick_atom,
+    DEFAULT_VOICE_BANK,
+    TOPICS,
+    build_pack,
 )
-from scripts.social_media.voice_bank_lookup import load_index, resolve_atom  # noqa: E402
+from scripts.social_media.assemble_reel_from_voice_bank import (  # noqa: E402
+    ReelAssembleError,
+    assemble_reel_package,
+)
+from scripts.social_media.stock_plates_for_topic import plates_for_topic  # noqa: E402
+from scripts.social_media.voice_bank_lookup import load_index  # noqa: E402
 from scripts.social_media import smoke_voice_bank_reel as craft  # noqa: E402
 
 DEFAULT_OUT = (
@@ -30,39 +36,37 @@ DEFAULT_OUT = (
     / "pilot_batch"
 )
 
-# Anxiety corporate picks (variant_index aligned with DEFAULT_PICKS spirit)
-CORP_ANXIETY_VARIANTS = {
-    "HOOK_COVER": 2,
-    "PROBLEM_AGITATION": 2,
-    "MECHANISM_EXPLAINER": 2,
-    "TOOL_STEP": 1,
-    "SAVEABLE_PAYOFF": 2,
+PACK_ALIASES = {
+    "anxiety_corporate": "anxiety",
+    "anxiety": "anxiety",
+    "burnout": "burnout",
+    "burnout_corporate": "burnout",
+    "overthinking": "overthinking",
+    "overthinking_genz": "overthinking",
 }
+# Every evergreen topic is a valid pack alias (primary persona)
+for _t in TOPICS:
+    PACK_ALIASES.setdefault(_t, _t)
 
 
-def build_corp_anxiety_beats(bank) -> list[dict]:
-    rows = load_evergreen()
-    persona = "corporate_managers"
-    topic = "anxiety"
-    beats = []
-    for role in craft.ROLES:
-        fam = ROLE_FAMILY[role]
-        atom = pick_atom(rows, topic, persona, fam, CORP_ANXIETY_VARIANTS[fam])
-        hit = bank.resolve(atom["atom_id"], require_audio=True)
-        beats.append(
-            {
-                "role": role,
-                "family": fam,
-                "atom_id": atom["atom_id"],
-                "speakable_text": hit.speakable_text,
-                "mp3": hit.local_mp3,
-                "voice_id": hit.voice_id,
-            }
-        )
-    return beats
+def beats_from_reel_package(package: dict) -> list[dict]:
+    """Map reel_package beats → craft render_pack shape."""
+    return [
+        {
+            "role": b["role"],
+            "family": b.get("family"),
+            "atom_id": b["atom_id"],
+            "speakable_text": b["speakable_text"],
+            "mp3": Path(b["mp3_path"]),
+            "voice_id": b["voice_id"],
+        }
+        for b in package["beats"]
+    ]
 
 
-def render_pack(beats: list[dict], out_dir: Path, pack_id: str) -> Path:
+def render_pack(
+    beats: list[dict], out_dir: Path, pack_id: str, *, topic: str = "anxiety"
+) -> Path:
     """One MP4: 5 bank VO segments timed to probed durations + craft visuals."""
     work = out_dir / "_work" / pack_id
     if work.exists():
@@ -82,9 +86,7 @@ def render_pack(beats: list[dict], out_dir: Path, pack_id: str) -> Path:
         t += d
     total = round(t, 3)
 
-    plates = [p for p in craft.PLATES if p.is_file()]
-    if len(plates) < len(beats):
-        raise FileNotFoundError("need 5 anxiety plates for broll montage")
+    plates = plates_for_topic(topic, n=len(beats))
 
     clip_paths = []
     for i, b in enumerate(beats):
@@ -95,8 +97,35 @@ def render_pack(beats: list[dict], out_dir: Path, pack_id: str) -> Path:
         )
         clip_paths.append(clip)
 
+    silent_raw = work / "montage_silent_raw.mp4"
+    craft.concat_clips(clip_paths, silent_raw)
+    # FAST_MOTION (and some concat-copy paths) leave huge I-frame loops;
+    # compact before ASS burn so libx264 doesn't encode a 200MB+ source.
     silent = work / "montage_silent.mp4"
-    craft.concat_clips(clip_paths, silent)
+    compact = subprocess.run(
+        [
+            craft.FFMPEG,
+            "-y",
+            "-i",
+            str(silent_raw),
+            "-an",
+            "-c:v",
+            "libx264",
+            "-preset",
+            os.environ.get("VOICE_BANK_FFMPEG_PRESET", "veryfast"),
+            "-crf",
+            os.environ.get("VOICE_BANK_FFMPEG_CRF", "18"),
+            "-pix_fmt",
+            "yuv420p",
+            "-movflags",
+            "+faststart",
+            str(silent),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if compact.returncode != 0:
+        raise RuntimeError(compact.stderr[-3000:])
 
     ass_beats = [
         {
@@ -178,7 +207,7 @@ def render_pack(beats: list[dict], out_dir: Path, pack_id: str) -> Path:
             "captions": "kinetic_type ASS",
             "audio": "per-beat social_voice_bank MP3s",
         },
-        "mp4": str(mp4.relative_to(REPO)),
+        "mp4": str(mp4.resolve().relative_to(REPO.resolve())),
         "duration_s": total,
         "bytes": mp4.stat().st_size,
         "beats": [
@@ -202,25 +231,47 @@ def render_pack(beats: list[dict], out_dir: Path, pack_id: str) -> Path:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
-    ap.add_argument("--manifest", type=Path, default=None)
+    ap.add_argument("--manifest", type=Path, default=DEFAULT_VOICE_BANK)
+    ap.add_argument("--allow-r2", action="store_true")
+    ap.add_argument(
+        "--favor-gender",
+        default=None,
+        choices=("male", "female"),
+    )
     ap.add_argument(
         "--packs",
-        default="anxiety_corporate",
-        help="comma list; currently: anxiety_corporate",
+        default="anxiety,burnout,overthinking",
+        help="comma list: anxiety|burnout|overthinking (aliases *_corporate/*_genz ok)",
     )
     args = ap.parse_args()
-    bank = load_index(args.manifest, allow_r2_download=False)
+    bank = load_index(args.manifest, allow_r2_download=args.allow_r2)
     packs = [p.strip() for p in args.packs.split(",") if p.strip()]
     receipts = []
-    for pack in packs:
-        if pack != "anxiety_corporate":
-            print(f"skip unknown pack {pack}", file=sys.stderr)
+    for pack_name in packs:
+        topic = PACK_ALIASES.get(pack_name)
+        if not topic:
+            print(f"skip unknown pack {pack_name}", file=sys.stderr)
             continue
-        print(f"== {pack} ==")
-        beats = build_corp_anxiety_beats(bank)
+        print(f"== {pack_name} (topic={topic}) ==")
+        base = build_pack(topic, style="broll", voice_bank=args.manifest)
+        try:
+            package = assemble_reel_package(
+                base, bank=bank, favor_gender=args.favor_gender
+            )
+        except ReelAssembleError as e:
+            print(f"BLOCKED: {e}", file=sys.stderr)
+            return 2
+        beats = beats_from_reel_package(package)
         for b in beats:
-            print(f"  {b['role']:12} {b['atom_id']}  {b['speakable_text'][:50]}…")
-        mp4 = render_pack(beats, args.out_dir, pack)
+            print(
+                f"  {b['role']:12} {b['atom_id']}  {b['voice_id']:14}  "
+                f"{b['speakable_text'][:50]}…"
+            )
+        pack_id = f"{topic}_{package.get('persona') or 'voice'}"
+        mp4 = render_pack(beats, args.out_dir, pack_id, topic=topic)
+        (args.out_dir / f"{pack_id}_reel_package.json").write_text(
+            json.dumps(package, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
         print(f"OK → {mp4}")
         receipts.append(mp4)
     print(f"DONE {len(receipts)} pilot MP4(s)")

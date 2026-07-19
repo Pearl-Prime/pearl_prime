@@ -74,6 +74,14 @@ def _ffprobe() -> str:
 
 
 def probe_duration(path: Path) -> float:
+    try:
+        from mutagen.mp3 import MP3
+
+        length = float(MP3(path).info.length)
+        if length > 0:
+            return length
+    except Exception:
+        pass
     r = subprocess.run(
         [
             _ffprobe(),
@@ -88,6 +96,7 @@ def probe_duration(path: Path) -> float:
         capture_output=True,
         text=True,
         check=True,
+        timeout=20,
     )
     return float(r.stdout.strip())
 
@@ -228,6 +237,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
 def burn_ass(silent: Path, ass_path: Path, out_path: Path) -> None:
     # Escape for ffmpeg filter path
+    import os
+
+    preset = os.environ.get("VOICE_BANK_FFMPEG_PRESET") or os.environ.get(
+        "MEDIA_BANK_FFMPEG_PRESET", "medium"
+    )
+    crf = os.environ.get("VOICE_BANK_FFMPEG_CRF", "16")
     ass_esc = str(ass_path).replace("\\", "/").replace(":", "\\:")
     cmd = [
         FFMPEG,
@@ -242,9 +257,9 @@ def burn_ass(silent: Path, ass_path: Path, out_path: Path) -> None:
         "-c:v",
         "libx264",
         "-preset",
-        "medium",
+        preset,
         "-crf",
-        "16",
+        crf,
         str(out_path),
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True)

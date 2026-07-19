@@ -1,0 +1,76 @@
+# Publish safety report — voice-bank matrix Metricool dry-runs
+
+## Locked flags (all payloads)
+- `draft: true`
+- `autoPublish: false`
+- `dryRun: true`
+- `manualReviewRequired: true`
+- media: `UPLOAD_REQUIRED` (no live upload)
+
+## Payloads (60)
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/addiction__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/addiction__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/addiction__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/adhd__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/adhd__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/adhd__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/anxiety__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/anxiety__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/anxiety__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/body_image__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/body_image__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/body_image__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/boundaries__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/boundaries__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/boundaries__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/burnout__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/burnout__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/burnout__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/compassion_fatigue__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/compassion_fatigue__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/compassion_fatigue__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/courage__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/courage__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/courage__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/depression__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/depression__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/depression__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/divorce__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/divorce__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/divorce__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/financial_anxiety__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/financial_anxiety__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/financial_anxiety__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/grief__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/grief__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/grief__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/imposter_syndrome__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/imposter_syndrome__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/imposter_syndrome__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/money__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/money__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/money__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/overthinking__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/overthinking__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/overthinking__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/relationship_anxiety__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/relationship_anxiety__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/relationship_anxiety__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/self_worth__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/self_worth__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/self_worth__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/shame__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/shame__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/shame__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/sleep_anxiety__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/sleep_anxiety__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/sleep_anxiety__healthcare_rns__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/social_anxiety__corporate_managers__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/social_anxiety__gen_z_professionals__tiktok_dry_run.json`
+- `artifacts/social_media_voice_bank_2026-07-19/matrix_batch/metricool_dry_run/social_anxiety__healthcare_rns__tiktok_dry_run.json`
+
+## Not authorized
+- `autoPublish: true`
+- live Metricool API post
+
+Signal: `voice-bank-matrix-metricool-dry-run=PASS`
