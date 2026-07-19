@@ -131,7 +131,7 @@ def main() -> int:
 
     header = (
         "atom_id\tpersona\ttopic\tlocale\tvoice_id\tparams_hash\tchar_count\t"
-        "r2_key\tbytes\tsha256\tstatus\tspeakable_preview\n"
+        "r2_key\tbytes\tsha256\tstatus\tspeakable_preview\tspeakable_text\n"
     )
     ok = skip = fail = 0
     client = bucket = None
@@ -183,7 +183,8 @@ def main() -> int:
                 "bytes": str(nbytes),
                 "sha256": sha,
                 "status": "ok",
-                "speakable_preview": speakable[:80].replace("\t", " "),
+                "speakable_preview": speakable[:80].replace("\t", " ").replace("\n", " "),
+                "speakable_text": speakable.replace("\t", " ").replace("\n", " "),
             }
             ok += 1
             print(f"[{i}/{len(atoms)}] ok {aid} voice={voice_id} bytes={nbytes}")
@@ -201,7 +202,8 @@ def main() -> int:
                 "bytes": "0",
                 "sha256": "",
                 "status": f"fail:{e}",
-                "speakable_preview": speakable[:80].replace("\t", " "),
+                "speakable_preview": speakable[:80].replace("\t", " ").replace("\n", " "),
+                "speakable_text": speakable.replace("\t", " ").replace("\n", " "),
             }
             print(f"[{i}/{len(atoms)}] FAIL {aid}: {e}", file=sys.stderr)
         if i % 10 == 0 or i == len(atoms):
@@ -225,6 +227,7 @@ def main() -> int:
                                 r.get("sha256", ""),
                                 r.get("status", ""),
                                 r.get("speakable_preview", ""),
+                                r.get("speakable_text", ""),
                             ]
                         )
                         + "\n"

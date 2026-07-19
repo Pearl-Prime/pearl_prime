@@ -136,6 +136,7 @@ audiobooks / guided audio. This section **extends** — it does not replace — 
 
 **Machine contract:** `config/tts/social_media_voice_matrix.yaml` (v2 — **gender-only stock voices**)  
 **Text prep (NO SSML):** `config/tts/social_media_tts_text_prep.yaml`  
+**Video join (MP3 bank → reels):** `scripts/social_media/voice_bank_lookup.py` — `atom_id` → local/R2 MP3 + full `speakable_text`. VCE: `run_pipeline.py --format short --voice-bank`. Social: evergreen caption pack + faceless `--voice-bank`. Captions must use speakable (never raw SSOT alone when bank is on).  
 **Research packets:**  
 - `artifacts/research/social_media_voice_matrix_2026-07-19/REPORT.md` (Wave 1 auditions)  
 - `artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md` (**plan pivot** — read this)

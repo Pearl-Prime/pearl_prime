@@ -1,0 +1,54 @@
+{
+  "pack_id": "anxiety_corporate",
+  "acceptance_layer": "system working — pilot batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage (PRIMARY)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/pilot_batch/anxiety_corporate_short_9x16.mp4",
+  "duration_s": 48.265,
+  "bytes": 15461133,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-ANXI-CORP-HC-02",
+      "speakable_text": "If tight chest is familiar, this anxiety pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.419,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-ANXI-CORP-PA-02",
+      "speakable_text": "Trying to outrun anxiety usually makes the loop more expensive. More checking, more explaining, less actual recovery.",
+      "start": 6.419,
+      "end": 15.669,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-ANXI-CORP-ME-02",
+      "speakable_text": "Anxiety often persists because the body often receives safety before the mind can believe it. More pressure can register as more threat, even when the intention is improvement.",
+      "start": 15.669,
+      "end": 27.669,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-ANXI-CORP-TS-01",
+      "speakable_text": "Try this. Press both feet into the floor, widen your gaze. And name five ordinary objects out loud. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 27.669,
+      "end": 39.669,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-ANXI-CORP-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. Physical orientation gives the mind a safer place to stand.",
+      "start": 39.669,
+      "end": 48.265,
+      "voice_id": "english_male"
+    }
+  ]
+}
