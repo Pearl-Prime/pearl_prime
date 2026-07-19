@@ -2529,6 +2529,15 @@ def _run_spine_pipeline_mode(
                 json.dumps(_spa_payload, indent=2, default=str, ensure_ascii=False),
                 encoding="utf-8",
             )
+        # Human atom trace (post-render QA): beat → source(file:line) → atom → text.
+        # Always attempt after SPA + book.txt exist; WARN on error — never fail the render.
+        try:
+            from scripts.qa.render_atom_trace import write_atom_trace
+
+            _hat_path = write_atom_trace(render_dir, repo_root=repo_root)
+            print(f"Human atom trace: {_hat_path}")
+        except Exception as _hat_err:
+            print(f"Human atom trace: WARN — {_hat_err}", file=sys.stderr)
         # Durable rendered-accent audit: merge composer-rendered rows with planner
         # assignments so every planned accent is visible even if a chapter path
         # skipped syn_meta persistence.
