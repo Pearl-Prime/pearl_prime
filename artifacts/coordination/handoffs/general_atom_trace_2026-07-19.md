@@ -3,37 +3,39 @@
 ```
 CLOSEOUT_RECEIPT
 AGENT=Pearl_Dev_general_atom_trace
-TOOL=scripts/qa/render_atom_trace.py
+TOOL=scripts/qa/render_atom_trace.py + scripts/qa/run_random_2h_book_with_trace.py
 FORMAT_MATCHES_CH1_HARNESS=yes — spot-checked HOOK / ANGLE_DEFINITION / STORY on flagship
-RUNS_ON=artifacts/qa/proprime_accent_flagship_proof_2026-07-11 (gen_z×anxiety, 120/121 resolved) + artifacts/qa/pearl_prime_next_micro_wave_20260716/corporate_managers__boundaries__false_alarm__F006 (110/122 resolved) — zero hardcoding
-WIRED_INTO_PIPELINE=yes: --render-book auto-emits human_atom_trace.txt (WARN-on-error, does not fail render)
-TESTS=4 (tests/test_render_atom_trace.py)
-USAGE=PYTHONPATH=. python3 scripts/qa/render_atom_trace.py <render_dir>
-ACCEPTANCE_LAYER=system working (proven on real render dirs)
-LANDED=offline/general-atom-trace-20260719@734a72d41263c06b22e2f68529728edf8358d71e
+RUNS_ON=flagship + second cell + random 2h smoke seed=7 (gen_z×anxiety) — zero hardcoding
+WIRED_INTO_PIPELINE=yes: --render-book auto-emits human_atom_trace.txt (WARN-on-error)
+RANDOM_2H=yes: PYTHONPATH=. python3 scripts/qa/run_random_2h_book_with_trace.py
+TESTS=14 (test_render_atom_trace.py + test_run_random_2h_book_with_trace.py)
+USAGE_TRACE=PYTHONPATH=. python3 scripts/qa/render_atom_trace.py <render_dir>
+USAGE_RANDOM=PYTHONPATH=. python3 scripts/qa/run_random_2h_book_with_trace.py [--seed N]
+ACCEPTANCE_LAYER=system working (proven on real render dirs + live random 2h)
+LANDED=offline/general-atom-trace-20260719@<sha>
 CLEANUP_COMPLETE=yes
 HANDOFF=artifacts/coordination/handoffs/general_atom_trace_2026-07-19.md
-SIGNAL=general-atom-trace=734a72d41263c06b22e2f68529728edf8358d71e
-NEXT_ACTION=operator runs it on any book's render dir to QA atoms (name→source→text); replay on github-suspension-lifted
+SIGNAL=general-atom-trace=<full-sha>
+NEXT_ACTION=operator runs random 2h wrapper for persona×topic QA; replay on github-suspension-lifted
 ```
 
 ## What shipped
 
-- `scripts/qa/render_atom_trace.py` — post-render tool; reads `section_packet_audit.json` + `book.txt` (+ `plan.json` for persona/topic); writes `human_atom_trace.txt`.
-- Format reuses Ch1/Ch2 human atom trace field labels (What this surface does / Source / Atom / Status / First rendered sentence / Previous beat / Cohesion/read note). Unresolvable sources emit `<unresolved:…>` — never fabricated.
-- Optional pipeline wire in `scripts/run_pipeline.py` immediately after SPA write (always attempt, WARN on error).
-- Proof: `artifacts/qa/general_atom_trace_20260719/`.
-- Pytest: `tests/test_render_atom_trace.py`.
+- `scripts/qa/render_atom_trace.py` — post-render tool; reads `section_packet_audit.json` + `book.txt` (+ `plan.json`); writes `human_atom_trace.txt`.
+- `scripts/qa/run_random_2h_book_with_trace.py` — picks random viable persona×topic, renders `extended_book_2h` with production chord, ensures trace.
+- Pipeline wire in `scripts/run_pipeline.py` after SPA write (WARN on error).
+- Proof: `artifacts/qa/general_atom_trace_20260719/` (+ `RANDOM_2H_USAGE.md`).
+- Pytest: `tests/test_render_atom_trace.py`, `tests/test_run_random_2h_book_with_trace.py`.
 
 ## CLEANUP LEDGER
 
 | Item | Status |
 |------|--------|
 | Temp GIT_INDEX_FILE `/tmp/gat_idx*` | removed after land |
-| `/tmp/po_clean` scratch (sparse origin/main extracts) | removed after land |
+| `/tmp/po_clean` / `/tmp/po_r2h` scratch | removed / pruned |
+| `/tmp/story_planner.dirty.py` smoke override | restored to dirty worktree after smoke |
 | No `git add -A` | honored — explicit paths only |
-| Working-tree dirty codex branch | untouched as build base; land is off `origin/main` |
-| Generated traces under existing render dirs | left local; proof copies under `artifacts/qa/general_atom_trace_20260719/` |
+| Full random book manuscript | left local under `artifacts/qa/random_2h_books/` (not required on offline tip) |
 
 ## GitHub
 
