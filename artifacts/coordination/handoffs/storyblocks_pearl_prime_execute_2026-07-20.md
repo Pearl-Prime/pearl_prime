@@ -1,10 +1,10 @@
 # Handoff — Storyblocks Pearl Prime EXECUTE (2026-07-20)
 
-**Signal:** `storyblocks-pearl-prime=<pending-SHA>`  
+**Signal:** `storyblocks-pearl-prime=6a1120982d601ac19f2286a323557bb6dae5439a`  
 **Layer:** CODE-WIRED + unit tests (**system working**); live EXECUTED-REAL **not** claimed (no keys)  
 **Branch:** `agent/storyblocks-pearl-prime-20260720`  
 **Base:** `agent/storyblocks-pearl-prime-rescope-20260719` @ `05c69d740a`  
-**Durable remote:** `pearlstar_offline` (origin GitHub may 403)
+**Durable remote:** `pearlstar_offline` @ `6a1120982d` (origin GitHub 403 suspended — PR/merge BLOCKED)
 
 ---
 
