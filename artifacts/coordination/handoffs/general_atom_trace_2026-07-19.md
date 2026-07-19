@@ -10,10 +10,10 @@ WIRED_INTO_PIPELINE=yes: --render-book auto-emits human_atom_trace.txt (WARN-on-
 TESTS=4 (tests/test_render_atom_trace.py)
 USAGE=PYTHONPATH=. python3 scripts/qa/render_atom_trace.py <render_dir>
 ACCEPTANCE_LAYER=system working (proven on real render dirs)
-LANDED=offline/general-atom-trace-20260719@6ce6002405cb63fcac2861df7cef39eb90c9973e
+LANDED=offline/general-atom-trace-20260719@00c0fec0141ca3d61bd42fd2bdc65375e5face00
 CLEANUP_COMPLETE=yes
 HANDOFF=artifacts/coordination/handoffs/general_atom_trace_2026-07-19.md
-SIGNAL=general-atom-trace=6ce6002405cb63fcac2861df7cef39eb90c9973e
+SIGNAL=general-atom-trace=00c0fec0141ca3d61bd42fd2bdc65375e5face00
 NEXT_ACTION=operator runs it on any book's render dir to QA atoms (name→source→text); replay on github-suspension-lifted
 ```
 
