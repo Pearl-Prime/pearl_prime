@@ -4,7 +4,8 @@
 **Owner:** Pearl_Int  
 **Branch:** `agent/storyblocks-eula-compliance-20260719`  
 **Base:** `origin/main` @ `9e9b9e606791590337cd7d0f2fb425def2e6f760`  
-**Design tip (durable):** `54c25e605413ef2a39b72751a62a5cbdd1b465ec`  
+**Design tip (durable):** `3701e0524d2d39d62250fcafb1b65e5e00b8c684`  
+**Prior tip:** `54c25e605413ef2a39b72751a62a5cbdd1b465ec`  
 **Durable remote:** `pearlstar_offline` → `pearl_star:~/git/phoenix_omega_offline.git`  
 **GitHub PR (phoenix_omega):** blocked — Ahjan108 suspended (re-verified 2026-07-19T10:08Z)
 ---
@@ -15,7 +16,7 @@
 |-------|---------------------|
 | `gh auth status` / `gh api user` | **Still suspended** — keyring token invalid; HTTP 403 “Sorry. Your account was suspended” |
 | `git ls-remote origin` / SSH github.com | **403 suspended** (cannot open phoenix_omega PR) |
-| `pearlstar_offline` branch tip | **Confirmed** `54c25e605413ef2a39b72751a62a5cbdd1b465ec` (matches local) |
+| `pearlstar_offline` branch tip | **Confirmed** then advanced to `3701e0524d2d39d62250fcafb1b65e5e00b8c684` (this CONTINUE harden) |
 | Design files on tip | Present: `docs/STORYBLOCKS_EULA_COMPLIANCE.md`, reconciled `docs/storyblocks-integration.md`, signed PDF, this handoff |
 | Local siblings / Spotlight | No `manage.py`, no `*/brands/services/storyblocks`, no `*48social*` product checkout (only briefing audio filenames) |
 | Pearl Star `~/git` | Still **only** `phoenix_omega_offline.git` — no 48social clone |
@@ -89,7 +90,7 @@ gh pr create --base main --head agent/storyblocks-eula-compliance-20260719 \
 ```bash
 git fetch pearlstar_offline agent/storyblocks-eula-compliance-20260719
 git log -1 --oneline pearlstar_offline/agent/storyblocks-eula-compliance-20260719
-# expect: 54c25e605413ef2a39b72751a62a5cbdd1b465ec
+# expect: 3701e0524d2d39d62250fcafb1b65e5e00b8c684 (or newer tip on same branch)
 ```
 
 ### C. Resume EXECUTE once backend URL is known (paste into new Pearl_Int turn)
@@ -142,7 +143,7 @@ None on product backend (repo still absent). Design packet only.
 |------|--------|
 | Full worktree checkout attempt | Aborted earlier; branch via temp-index |
 | `/tmp/48repos.json` `/tmp/48ev.json` | Ephemeral CONTINUE probes — safe to delete |
-| Branch `agent/storyblocks-eula-compliance-20260719` | **HOLD** on `pearlstar_offline` @ `54c25e6054…` |
+| Branch `agent/storyblocks-eula-compliance-20260719` | **HOLD** on `pearlstar_offline` @ `3701e0524d…` |
 | Inventing Django Storyblocks code in phoenix_omega | **Forbidden** — not done |
 
 ---
