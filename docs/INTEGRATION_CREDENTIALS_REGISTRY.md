@@ -308,6 +308,18 @@ YAML sub-account sync ([research](../artifacts/research/ghl_api_current_docs_202
 | **Status** | Builder + weekly workflow in repo; R2 bucket + CDN URL pending operator |
 | **Detailed docs** | [docs/GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md), [docs/ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md) |
 
+### 8d. Storyblocks — Pearl Prime stock (social b-roll)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `STORYBLOCKS_PUBLIC_KEY`, `STORYBLOCKS_PRIVATE_KEY` (optional path overrides: `STORYBLOCKS_MAU_LEDGER_PATH`, `STORYBLOCKS_LICENSED_BANK_ROOT`, `STORYBLOCKS_LICENSE_INDEX_PATH`) |
+| **Consumed by** | `scripts/storyblocks/` (API client, confirm_download, MAU ledger, license store); social b-roll guard in `scripts/social/build_video_snippet_bank.py` |
+| **How to load** | `eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"` after staging keys in Keychain service `phoenix-omega` |
+| **GitHub secrets** | Optional for CI live probes — **not required** for unit tests (HTTP mocked) |
+| **EULA** | License-on-download; MAU hard-cap 104 distinct download identities / UTC month; no shared HD pool; no AI training on stock |
+| **Status** | **CODE-WIRED + unit-tested** in phoenix_omega; live EXECUTED-REAL download **blocked** until keys staged + operator legal confirm (Q-SB-PP-03) |
+| **Detailed docs** | [STORYBLOCKS_PEARL_PRIME_RESCOPE.md](STORYBLOCKS_PEARL_PRIME_RESCOPE.md), [STORYBLOCKS_EULA_COMPLIANCE.md](STORYBLOCKS_EULA_COMPLIANCE.md) |
+
 ### 9. Plaid — Payouts banking
 
 | Field | Value |
