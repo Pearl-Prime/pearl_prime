@@ -7,8 +7,10 @@ NOT=PROVEN-AT-BAR (no live post; pilot BLOCKED)
 GITHUB_WRITES=none (403 account-suspended)
 BRANCH=offline/metricool-integration-20260719
 FEATURE_SHA=d2709ebe97584eb7a997c46da28309b7d2f7a64e
+MANAGED_SYSTEM_SHA=ec64d7adc4075d1a41b15aae2c9d2e56a8dde420
 PRIOR_TIP=79f5deb10db9fbc37b9b1ad935cf35d9494b3ec8
-# Branch tip = HEAD after managed-system hardening commit (see CLOSEOUT_RECEIPT)
+BRANCH_TIP=ec64d7adc4075d1a41b15aae2c9d2e56a8dde420
+# Branch tip = HEAD after managed-system hardening (pin commit may sit atop)
 
 ## What landed (transport + managed system)
 
