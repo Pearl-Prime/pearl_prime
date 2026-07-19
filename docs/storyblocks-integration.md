@@ -399,9 +399,13 @@ def search_and_store(...) -> list[dict]:
 
 ## Storage Strategy
 
+> **EULA bank contract (authoritative for license + metadata bind):**  
+> `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` — confirm-only HD path, per-campaign bank, `CampaignAssetDownload` as license proof, full field map. Do **not** build a shared HD pool.
+
 ### GCS Path Structure
 
-**IMPORTANT**: Use `campaign_id`, not `project_id` (codebase uses Campaign model).
+**IMPORTANT**: Use `campaign_id`, not `project_id` (codebase uses Campaign model).  
+This prefix **is** the per-campaign licensed bank (not a cross-campaign stockpile).
 
 ```
 gs://{bucket}/campaigns/{campaign_id}/broll/{asset_uuid}.{ext}

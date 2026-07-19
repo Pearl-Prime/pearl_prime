@@ -6,13 +6,16 @@
 **Effective:** 2026-02-24 → 2027-02-23  
 **Licensee:** 48 Social  
 **Design spec (reconciled):** `docs/storyblocks-integration.md`  
+**Download→bank→metadata contract (100% path):** `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md`  
 **Handoff:** `artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md`
 
 ---
 
 ## Acceptance language
 
-This packet is **system-working design** (Layer: SPECCED / mechanism-ready). It is **not** EXECUTED-REAL on the product backend until the Django repo implements and merges the guards below. Do not claim “done / shippable / bestseller.”
+This packet is **SPECCED / mechanism-ready**. It is **not** EXECUTED-REAL on the product backend until the Django repo implements and merges the guards below. Do not claim “done / shippable / bestseller.”
+
+**“100%” for this mission** = every checklist row in `STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` §C is **EXECUTED-REAL** + §C.3 tests green on the 48social backend + merged SHA. Docs alone are never 100%.
 
 ---
 
@@ -194,8 +197,10 @@ Implement in the **48 Social Django product backend** (paths from design spec):
 ## Resume command (when backend access exists)
 
 ```bash
+# Full paste-ready sequence: docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md §D
 # 1. Clone 48social Django backend; branch from its default main
-# 2. Apply guards per this doc + reconciled docs/storyblocks-integration.md §EULA
-# 3. Run the test list above
+# 2. Implement §C checklist in STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md
+#    (bank bind + R1–R3 + extras) using this doc + storyblocks-integration.md
+# 3. Run §C.3 test matrix
 # 4. Open PR, merge, emit: storyblocks-eula-compliance=<full-SHA>
 ```

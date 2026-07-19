@@ -10,6 +10,36 @@
 **GitHub PR (phoenix_omega):** blocked — Ahjan108 suspended (re-verified 2026-07-19T10:08Z)
 ---
 
+## BANK+METADATA 100% PATH (2026-07-19 ~21:16 UTC+8)
+
+**Operator ask:** robust download → bank → metadata bind → 100% EULA compliance.  
+**Interpretation:** Storyblocks **per-campaign licensed HD bank** (48social Django) — **not** manga `assemble_from_bank`. Shared HD pool **forbidden** (§B).
+
+### Re-check this turn
+| Probe | Result |
+|-------|--------|
+| Backend Django checkout | Still **absent** (no manage.py / storyblocks services) |
+| GitHub Ahjan108 | Still **suspended** (403) |
+| pearlstar tip (pre-this-commit) | `da45dd06e00d336807c8440c11f02511221277f1` |
+
+### New design artifact
+| Path | Role |
+|------|------|
+| `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` | **A** sole confirm HD path + GCS bank lifecycle; **B** full metadata field map + CAD license proof; **C** 100% checklist→Django touch points + test matrix; **D** paste-ready clone commands |
+| `docs/STORYBLOCKS_EULA_COMPLIANCE.md` | Links contract; defines “100%” = EXECUTED-REAL on backend |
+
+### What “100%” means
+**PROVEN path for this mission:** all §C checklist items EXECUTED-REAL + tests green on 48social backend + `storyblocks-eula-compliance=<full-SHA>`.  
+This push remains **SPECCED** only → signal stays **BLOCKED** on backend access.
+
+### NEXT_ACTION
+1. Operator: private backend clone URL + write creds (ACCESS_REQUIRED).  
+2. Implementer: follow `STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` §C–§D.  
+3. Emit merge SHA; do not claim 100% on docs alone.
+
+
+---
+
 ## CONTINUE re-verify (2026-07-19 ~18:08 UTC+8) — NEW evidence
 
 | Probe | Result (this turn) |
