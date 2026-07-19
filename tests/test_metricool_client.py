@@ -546,7 +546,14 @@ def test_validate_config_unwired_must_be_null():
     assert any("unwired" in e and "null" in e for e in report["errors"])
 
 
-def test_sync_merge_preserves_blog_id():
+def test_sync_merge_preserves_blog_id(tmp_path: Path):
+    # Point pin at a matching blog_id so durable re-apply does not overwrite the fixture.
+    pin = tmp_path / "metricool_waystream_pin.yaml"
+    pin.write_text(
+        "brand_key: waystream_sanctuary\nblog_id: '12345'\nstatus: wired\n",
+        encoding="utf-8",
+    )
+    sync_brands.PIN_PATH = pin
     existing = {
         "account": "waystream",
         "user_id_env": "METRICOOL_USER_ID",
@@ -629,3 +636,54 @@ def test_canonical_keys_cover_current_map():
     map_keys = set((data.get("brands") or {}).keys())
     assert map_keys <= canon
     assert "waystream_sanctuary" in map_keys
+
+
+def test_install_keychain_extracts_token_not_markdown():
+    import install_keychain_creds as install
+
+    raw = "** note of stuff\n\nMETRICOOL_API_KEY:\n\nOBNK" + ("A" * 60) + "\n\nUSER_ID:\n\n3564167\n"
+    key = install.extract_api_key(raw)
+    assert len(key) == 64
+    assert key.startswith("OBNK")
+    assert install.extract_user_id(raw) == "3564167"
+
+
+def test_sync_reapplies_waystream_pin(tmp_path: Path):
+    pin = tmp_path / "metricool_waystream_pin.yaml"
+    pin.write_text(
+        "brand_key: waystream_sanctuary\nblog_id: '6582629'\nstatus: wired\ntimezone: America/New_York\n",
+        encoding="utf-8",
+    )
+    # Monkeypatch pin path used by sync module
+    sync_brands.PIN_PATH = pin
+    existing = {
+        "account": "waystream",
+        "brands": {
+            "waystream_sanctuary": {
+                "blog_id": "WAYSTREAM_BLOG_ID_PENDING",
+                "status": "wired",
+            },
+            "stillness_press": {"blog_id": None, "status": "unwired"},
+        },
+    }
+    merged, stats = sync_brands.merge_brand_map(
+        existing, {"waystream_sanctuary", "stillness_press"}
+    )
+    assert merged["brands"]["waystream_sanctuary"]["blog_id"] == "6582629"
+    assert stats.get("pin_applied") is True
+
+
+def test_check_metricool_managed_pin_and_registry():
+    import sys
+    ci = str(REPO / "scripts" / "ci")
+    if ci not in sys.path:
+        sys.path.insert(0, ci)
+    import check_metricool_managed as gate
+
+    brands = yaml.safe_load(BRANDS_YAML.read_text(encoding="utf-8"))
+    pin = yaml.safe_load((REPO / "config" / "integrations" / "metricool_waystream_pin.yaml").read_text(encoding="utf-8"))
+    assert gate.check_pin(brands, pin) == []
+    assert gate.check_registry() == []
+    assert gate.check_gitignore() == []
+
+

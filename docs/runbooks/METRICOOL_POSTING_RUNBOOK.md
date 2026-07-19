@@ -1,8 +1,9 @@
-# Metricool Posting Runbook (SAFE / SUPPORTED / MANAGED)
+# Metricool Posting Runbook (SAFE / SUPPORTED / MANAGED / DURABLE)
 
 **Owner:** Pearl_Int  
 **Subsystem:** integrations / Metricool  
-**Acceptance layer for this runbook:** `system-working` (managed safe layer) — not PROVEN-AT-BAR  
+**Acceptance layer:** `PROVEN-AT-BAR` for **draft** transport (`postId=351226639`,
+`blog_id=6582629`) — **not** live-social (Q-METRIC-01 still open)  
 **Authority:** `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` §7b, `docs/METRICOOL_API_REFERENCE.md`
 
 ---
@@ -14,10 +15,32 @@ A fail-closed Metricool scheduling lane for Phoenix Omega:
 | Pillar | Guarantee |
 |--------|-----------|
 | **SAFE** | Draft-default; live autoPublish gated (Q-METRIC-01); placeholder/null blog_ids refused; network kill-switch OFF by default; no secrets in git |
-| **SUPPORTED** | This runbook + `status.py` + `pilot_preflight.py` |
+| **SUPPORTED** | This runbook + `status.py` + `pilot_preflight.py` + `doctor.py` |
 | **MANAGED** | Brand map SSOT + `validate_config.py` + `sync_brands_from_registry.py` + offline tests |
+| **DURABLE** | Frozen pin `metricool_waystream_pin.yaml`; CI `check_metricool_managed.py` (Drift detectors + production readiness #34); Keychain installer; sync re-applies pin |
 
 Transport lives only in `scripts/integrations/metricool/` — do **not** fork a second client. Payload construction reuses `phoenix_v4.social.deterministic_social.build_metricool_payload`.
+
+---
+
+## Durability surface (do this first after clone)
+
+```bash
+# 1) Creds → Keychain (safe parser; ignores markdown lines in docs/metricool_api.txt)
+python3 scripts/integrations/metricool/install_keychain_creds.py
+export METRICOOL_API_KEY="$(security find-generic-password -s phoenix-omega -a METRICOOL_API_KEY -w)"
+export METRICOOL_USER_ID="$(security find-generic-password -s phoenix-omega -a METRICOOL_USER_ID -w)"
+
+# 2) Offline durability doctor (CI gate + pin + config)
+python3 scripts/integrations/metricool/doctor.py
+PYTHONPATH=scripts/ci:scripts/integrations/metricool:. python3 scripts/ci/check_metricool_managed.py
+
+# 3) Optional auth probe (no publish)
+python3 scripts/integrations/metricool/doctor.py --network
+```
+
+Pin file (do not invent blog_ids): `config/integrations/metricool_waystream_pin.yaml`  
+(`waystream_sanctuary` → `6582629`, proven draft `351226639`).
 
 ---
 
@@ -29,20 +52,22 @@ Canonical env vars (optional at repo level; required for non-dry-run posts):
 - `METRICOOL_USER_ID` — Waystream account default **`3564167`**
 - `METRICOOL_BASE_URL` — optional; default `https://app.metricool.com/api/v2/`
 
-Store in macOS Keychain (service `phoenix-omega`):
+Preferred installer (avoids storing markdown header lines as the key):
+
+```bash
+python3 scripts/integrations/metricool/install_keychain_creds.py
+```
+
+Manual fallback:
 
 ```bash
 security add-generic-password -U -s phoenix-omega -a METRICOOL_API_KEY -w '<paste from app.metricool.com → Settings → API>'
 security add-generic-password -U -s phoenix-omega -a METRICOOL_USER_ID -w '3564167'
-eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
-python3 scripts/integrations/metricool/status.py
-python3 scripts/integrations/metricool/pilot_preflight.py
 ```
 
 **Never** commit keys. Staging file `docs/metricool_api.txt` is gitignored — if you used it once, move the value to Keychain and delete the file locally.
 
 Presence-only checks never print the API key value.
-
 ---
 
 ## Brand map SSOT
