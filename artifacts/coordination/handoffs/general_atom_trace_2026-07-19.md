@@ -12,10 +12,10 @@ TESTS=14 (test_render_atom_trace.py + test_run_random_2h_book_with_trace.py)
 USAGE_TRACE=PYTHONPATH=. python3 scripts/qa/render_atom_trace.py <render_dir>
 USAGE_RANDOM=PYTHONPATH=. python3 scripts/qa/run_random_2h_book_with_trace.py [--seed N]
 ACCEPTANCE_LAYER=system working (proven on real render dirs + live random 2h)
-LANDED=offline/general-atom-trace-20260719@a8e8ce541fc4b1d522e4f425625def71bb1256c3
+LANDED=offline/general-atom-trace-20260719@b3901bcad5d3b89daf4c9fe6bc04409c9012ddd1
 CLEANUP_COMPLETE=yes
 HANDOFF=artifacts/coordination/handoffs/general_atom_trace_2026-07-19.md
-SIGNAL=general-atom-trace=a8e8ce541fc4b1d522e4f425625def71bb1256c3
+SIGNAL=general-atom-trace=b3901bcad5d3b89daf4c9fe6bc04409c9012ddd1
 NEXT_ACTION=operator runs random 2h wrapper for persona×topic QA; replay on github-suspension-lifted
 ```
 
