@@ -2,7 +2,7 @@
 
 **Status:** SPECCED (re-scope) — **not** EXECUTED-REAL  
 **Date:** 2026-07-19  
-**Signal:** `storyblocks-pearl-prime-rescope=<pending-SHA>`  
+**Signal:** `storyblocks-pearl-prime-rescope=a24f05890fb7a3c3541182fe5a4017fa3610c210` (branch tip `45d1b6e0d88f6ff107661dfc6ebf7269f789ce91` on pearlstar_offline)  
 **Supersedes substrate assumption in:** `docs/STORYBLOCKS_EULA_COMPLIANCE.md`, `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md`, `artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md`  
 **Does not void:** signed EULA clauses (license-on-download, MAU 104, no stockpiling, no AI training on stock)  
 **Governing contract PDF:** `docs/Storyblocks API Agreement - 48 Social.pdf` (Licensee: **48 Social**, Doc Ref EUYIG-SF8TR-9LD23-TJ3AK)
