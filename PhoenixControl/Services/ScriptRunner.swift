@@ -36,6 +36,19 @@ final class ScriptRunner: ObservableObject {
         "scripts/catalog/revenue_projector.py",
         "scripts/catalog/marketing_feedback_adjuster.py",
         "scripts/catalog/dump_manga_series_plan_json.py",
+        // Operator cockpit — Preflight & Drift Runner (Phase 1)
+        "scripts/git/push_guard.py",
+        "scripts/ci/preflight_push.sh",
+        "scripts/git/health_check.sh",
+        "scripts/ci/check_rap_compliance.py",
+        "scripts/ci/pr_governance_review.py",
+        "scripts/git/disk_guard.py",
+        "scripts/ci/check_render_progress_bytes.py",
+        "scripts/ci/check_manga_story_authored.py",
+        "scripts/ci/check_manga_wiring.py",
+        "scripts/ci/check_canonical_pipeline_path.py",
+        "scripts/ci/check_native_check.py",
+        "scripts/ci/check_acceptance_claim_language.py",
     ]
 
     /// Allowed executable for running Python scripts.
@@ -81,8 +94,14 @@ final class ScriptRunner: ObservableObject {
             guard FileManager.default.fileExists(atPath: scriptURL.path) else {
                 throw RunError.scriptNotFound(scriptURL.path)
             }
-            executable = Self.pythonPath
-            processArgs = [scriptURL.path] + arguments
+            // Shell scripts: exec /bin/bash <path>; Python: python3 <path>
+            if scriptPath.hasSuffix(".sh") || relative.hasSuffix(".sh") {
+                executable = "/bin/bash"
+                processArgs = [scriptURL.path] + arguments
+            } else {
+                executable = Self.pythonPath
+                processArgs = [scriptURL.path] + arguments
+            }
         }
 
         return try await withCheckedThrowingContinuation { continuation in

@@ -20,12 +20,13 @@ enum TabTag: String, CaseIterable, Identifiable {
     case pearlPrimeWeb
     case projections
     case mangaStrategy
+    case preflightGates
 
     var id: String { rawValue }
 
     static let sidebarSections: [(String, [TabTag])] = [
         ("Core", [.dashboard, .pipeline, .contentInventory, .simulation]),
-        ("Quality", [.tests, .gates, .observability, .teacher]),
+        ("Quality", [.tests, .gates, .preflightGates, .observability, .teacher]),
         ("Content", [.pearlNews, .manualReview]),
         ("Strategy", [.projections, .mangaStrategy]),
         ("Operations", [.ci, .credentials, .video, .localeParity, .mlLoop, .docs]),
@@ -53,6 +54,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .pearlPrimeWeb: return "Pearl Prime Web"
         case .projections: return "Projections"
         case .mangaStrategy: return "Manga Strategy"
+        case .preflightGates: return "Preflight & Gates"
         }
     }
 
@@ -77,6 +79,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .pearlPrimeWeb: return "globe.americas"
         case .projections: return "chart.line.uptrend.xyaxis"
         case .mangaStrategy: return "books.vertical.fill"
+        case .preflightGates: return "checkmark.shield"
         }
     }
 
@@ -85,6 +88,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         switch self {
         case .dashboard: return "System health at a glance. Check observability, evidence, branch protection, CI, and credentials status."
         case .pipeline: return "Run the book production pipeline. Select persona, topic, engine, format, then execute."
+        case .contentInventory: return "Content inventory and coverage. Browse authored atoms, stories, and exercises across personas and topics."
         case .simulation: return "Simulate 10K-book catalog runs. Validates configs, pricing, and atom coverage before production."
         case .tests: return "Run and review test suites. Push-guard, preflight, and unit tests."
         case .observability: return "Live metrics and alert history. Watch for drift, failures, and performance regressions."
@@ -101,6 +105,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .pearlPrimeWeb: return "Open the deployed Pearl Prime web portal. Share with brand operators and investors."
         case .projections: return "12-month revenue projections. Run planner + forecast from annual targets. Ties to investor DD numbers."
         case .mangaStrategy: return "Manga series strategies for all 13 global brands — genre, cadence, topic allocation, platform cadence."
+        case .preflightGates: return "Mandatory preflight + drift detectors with PASS/WARN/BLOCK verdicts. Run before any offline land."
         }
     }
 }
@@ -218,6 +223,8 @@ struct ContentView: View {
                 ObservabilityView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
             case .gates:
                 GatesReleaseView(state: state, scriptRunner: scriptRunner)
+            case .preflightGates:
+                PreflightGatesView(state: state, scriptRunner: scriptRunner)
             case .pearlNews:
                 PearlNewsView(state: state, scriptRunner: scriptRunner)
             case .manualReview:
