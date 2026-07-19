@@ -6,8 +6,9 @@ ACCEPTANCE_LAYER=system-working (transport wired + offline unit tests + pilot pr
 NOT=PROVEN-AT-BAR (no live post; pilot BLOCKED)
 GITHUB_WRITES=none (403 account-suspended)
 BRANCH=offline/metricool-integration-20260719
-COMMIT_SHA=PENDING_FOLLOWUP
+FEATURE_SHA=d2709ebe97584eb7a997c46da28309b7d2f7a64e
 PRIOR_SHA=32fcb02fa17bb94439972bfe4eb206d8b48f0d58
+# Branch tip = HEAD of offline/metricool-integration-20260719 (docs pin may sit atop FEATURE_SHA)
 
 ## What landed (prior + follow-up)
 - Live HTTP client: `scripts/integrations/metricool/client.py` (port of docs/metricool_utils.py minus Django)
