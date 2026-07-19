@@ -1,8 +1,8 @@
 # Handoff — Storyblocks EULA Compliance (2026-07-19)
 
-**Signal:** `BLOCKED:no writable access to 48social Django backend (+ Ahjan108 GitHub suspended)`  
+**Signal:** `SUPERSEDED-AS-SUBSTRATE:see storyblocks_pearl_prime_rescope_2026-07-19`  
 **Owner:** Pearl_Int  
-**Branch:** `agent/storyblocks-eula-compliance-20260719`  
+**Branch:** `agent/storyblocks-eula-compliance-20260719` (design history)  
 **Base:** `origin/main` @ `9e9b9e606791590337cd7d0f2fb425def2e6f760`  
 **Design tip (durable):** `a3516cadf6003a141154c2abc17756f4ffaaf97d`  
 **Prior tip:** `54c25e605413ef2a39b72751a62a5cbdd1b465ec`  
@@ -37,6 +37,11 @@ This push remains **SPECCED** only → signal stays **BLOCKED** on backend acces
 2. Implementer: follow `STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` §C–§D.  
 3. Emit merge SHA; do not claim 100% on docs alone.
 
+
+> **RE-SCOPE (2026-07-19):** Operator clarified goal = Storyblocks in **Pearl Prime** (phoenix_omega), not the 48social Django backend.  
+> Authoritative handoff: `artifacts/coordination/handoffs/storyblocks_pearl_prime_rescope_2026-07-19.md`  
+> Authority doc: `docs/STORYBLOCKS_PEARL_PRIME_RESCOPE.md`  
+> Do **not** require a 48social clone for Pearl Prime EXECUTE. This file remains historical for the 48social design packet / EULA clause map.
 
 ---
 

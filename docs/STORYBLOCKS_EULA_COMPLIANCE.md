@@ -1,21 +1,26 @@
 # Storyblocks EULA Compliance — Mechanism Map
 
-**Status:** DESIGN LANDED (phoenix_omega) — **backend implementation BLOCKED** (no access to 48social Django repo)  
+**Status:** SPECCED (clause→guard map) — **Pearl Prime substrate:** see `docs/STORYBLOCKS_PEARL_PRIME_RESCOPE.md`  
+**Prior (superseded) substrate assumption:** 48social Django backend — implementation there is optional / separate  
 **Governing contract:** `docs/Storyblocks API Agreement - 48 Social.pdf`  
 **Doc Ref:** EUYIG-SF8TR-9LD23-TJ3AK  
 **Effective:** 2026-02-24 → 2027-02-23  
 **Licensee:** 48 Social  
-**Design spec (reconciled):** `docs/storyblocks-integration.md`  
-**Download→bank→metadata contract (100% path):** `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md`  
-**Handoff:** `artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md`
+**Design spec (48social historical):** `docs/storyblocks-integration.md`  
+**Download→bank→metadata contract (pattern):** `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md`  
+**Pearl Prime re-scope handoff:** `artifacts/coordination/handoffs/storyblocks_pearl_prime_rescope_2026-07-19.md`  
+**Prior 48social handoff (historical):** `artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md`
 
 ---
 
 ## Acceptance language
 
-This packet is **SPECCED / mechanism-ready**. It is **not** EXECUTED-REAL on the product backend until the Django repo implements and merges the guards below. Do not claim “done / shippable / bestseller.”
+This packet is **SPECCED / mechanism-ready** for EULA clauses. Call-site column below originally targeted 48social Django; **Pearl Prime EXECUTE** retargets those guards to phoenix_omega scripts per the re-scope doc.
 
-**“100%” for this mission** = every checklist row in `STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` §C is **EXECUTED-REAL** + §C.3 tests green on the 48social backend + merged SHA. Docs alone are never 100%.
+It is **not** EXECUTED-REAL anywhere until code+tests land on the chosen substrate. Do not claim “done / shippable / bestseller.”
+
+**“100%” for Pearl Prime** = re-scope §4.2 (EXECUTED-REAL on operator-chosen surface + CI guards).  
+**“100%” for legacy 48social Django path** (only if that product is still in scope) = `STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` §C on that backend. Docs alone are never 100%.
 
 ---
 
