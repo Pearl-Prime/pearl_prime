@@ -61,3 +61,7 @@ PYTHONPATH=. python3 -m pytest tests/test_metricool_client.py -q
 3. When ready for live social: ratify Q-METRIC-01 → flip
    `LIVE_PUBLISH_OPERATOR_APPROVED` + `--live --i-understand-live --network`.
 4. Unsuspend GitHub → push `offline/metricool-integration-20260719` → PR.
+
+## Branch tip
+
+BRANCH_TIP=99565398ebf7053f72912acdc9ef627acafc27c8
