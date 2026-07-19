@@ -1,10 +1,11 @@
 # Handoff — Storyblocks-for-Pearl-Prime Re-Scope (2026-07-19)
 
-**Signal:** `storyblocks-pearl-prime-rescope=SPECCED` (SHA pending push)  
+**Signal:** `storyblocks-pearl-prime-rescope=a24f05890fb7a3c3541182fe5a4017fa3610c210`  
+**Layer:** SPECCED (not EXECUTED-REAL)  
 **Owner:** Pearl_Int / Pearl_Architect  
 **Branch:** `agent/storyblocks-pearl-prime-rescope-20260719`  
 **Base tip:** `agent/storyblocks-eula-compliance-20260719` @ `7fb88a449b9049a99b690f96e11cf4c68d812b23`  
-**Durable remote:** `pearlstar_offline` (origin GitHub still 403 suspended for Ahjan108)  
+**Durable remote:** `pearlstar_offline` @ `a24f05890fb7a3c3541182fe5a4017fa3610c210` (origin GitHub 403 for Ahjan108)  
 **Authority doc:** `docs/STORYBLOCKS_PEARL_PRIME_RESCOPE.md`
 
 ---
