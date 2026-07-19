@@ -74,3 +74,10 @@ python3 scripts/social_media/smoke_voice_bank_reel.py --atom-id EVG-ENUS-ANXI-CO
 - Safety: `draft/autoPublish=false/dryRun=true`, media `UPLOAD_REQUIRED`
 - Report: `.../metricool_dry_run/publish_safety_report.md`
 - Live Metricool API post: **not authorized**
+- Offline commit: `94f5860986` on `agent/social-media-voice-bank-video-wire-20260719`
+
+## CosyVoice residual (blocked)
+
+- Bank frozen at **1501 ok / 119 fail** — CosyVoice on Pearl Star flaps (health 200 then dies; startup `NOTIMPLEMENTED` / SIGKILL under load).
+- Residual fails remain **fail-closed / excluded from video**.
+- Re-open bank finish only when CosyVoice holds health 200 for ≥5 minutes without restart thrash.
