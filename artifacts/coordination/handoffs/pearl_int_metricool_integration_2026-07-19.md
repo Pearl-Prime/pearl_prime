@@ -1,65 +1,63 @@
 # Pearl_Int — Metricool integration handoff (2026-07-19)
 
 STATUS=LANDED-OFFLINE
-SIGNAL=metricool-managed-system-landed
-ACCEPTANCE_LAYER=system-working (managed safe layer + offline tests)
-NOT=PROVEN-AT-BAR (no live post; pilot BLOCKED)
+SIGNAL=metricool-draft-pilot-proven
+ACCEPTANCE_LAYER=PROVEN-AT-BAR (draft pilot) — NOT live-social
+NOT=live autoPublish (Q-METRIC-01 still OPEN)
 GITHUB_WRITES=none (403 account-suspended)
 BRANCH=offline/metricool-integration-20260719
-FEATURE_SHA=d2709ebe97584eb7a997c46da28309b7d2f7a64e
-MANAGED_SYSTEM_SHA=ec64d7adc4075d1a41b15aae2c9d2e56a8dde420
-PRIOR_TIP=79f5deb10db9fbc37b9b1ad935cf35d9494b3ec8
-BRANCH_TIP=ec64d7adc4075d1a41b15aae2c9d2e56a8dde420
-# Branch tip = HEAD after managed-system hardening (pin commit may sit atop)
 
-## What landed (transport + managed system)
+## What changed (draft-pilot 100%)
 
-### Transport (prior)
-- Live HTTP client: `scripts/integrations/metricool/client.py`
-- Publish CLI: `scripts/integrations/metricool/post.py` (draft default; --live gated Q-METRIC-01)
-- GET list helper: `list_scheduler_posts`
-- Pilot preflight: `scripts/integrations/metricool/pilot_preflight.py` (presence-only)
-- Brand map: `config/integrations/metricool_brands.yaml` (65 keys; wired=`waystream_sanctuary` placeholder)
-- Creds: `METRICOOL_*` in `integration_env_registry.py`
-- Leak remediation: `docs/metricool_api.txt` gitignored
+1. **Keychain creds** — imported `METRICOOL_API_KEY` (64-char token from local gitignored
+   `docs/metricool_api.txt`) + `METRICOOL_USER_ID=3564167` into service `phoenix-omega`.
+   First import attempt wrongly stored a markdown line; corrected before any successful API use.
+2. **Q-METRIC-02 resolved** — live brand list had **no** Waystream-labeled profile among 17
+   brands. Created Metricool brand **Waystream Sanctuary** via `GET /admin/add-profile` +
+   `PATCH settings/brands/:id` → `blog_id=6582629`. Wired in
+   `config/integrations/metricool_brands.yaml`.
+3. **Draft pilot proven** — `post.py --draft --network` → `postId=351226639` with
+   `draft:true`, `autoPublish:false`. Verified via
+   `list_scheduler_posts(post_id=...)` and date-window GET
+   (`start=2026-07-20` / `end=2026-07-25`).
+4. **Client fix** — `list_scheduler_posts` accepts `start`/`end`/`timezone`/`post_id`
+   (bare GET without a window returns empty `data: []`).
 
-### Managed system (this land)
-| Pillar | Surface |
-|--------|---------|
-| SAFE | Network kill-switch (`METRICOOL_ALLOW_NETWORK` / `--network`); media ≥1 unless `--allow-text-only`; draft-default + live gate + placeholder refusal retained |
-| SUPPORTED | `docs/runbooks/METRICOOL_POSTING_RUNBOOK.md`; `scripts/integrations/metricool/status.py` |
-| MANAGED | `validate_config.py`; `sync_brands_from_registry.py` + `brand_keys.py`; offline tests expanded |
+## Proof roots (no secrets)
+
+- `artifacts/coordination/metricool_brand_discovery_20260719.json`
+- `artifacts/coordination/metricool_waystream_brand_create_20260719.json`
+- `artifacts/coordination/metricool_pilot_get_posts_20260719.json`
+- `artifacts/coordination/metricool_pilot_post_response_20260719.jsonl`
+- `artifacts/coordination/metricool_pilot_verify_20260719.json`
 
 ## Managed commands
+
 ```bash
-python3 scripts/integrations/metricool/validate_config.py
+export METRICOOL_API_KEY="$(security find-generic-password -s phoenix-omega -a METRICOOL_API_KEY -w)"
+export METRICOOL_USER_ID="$(security find-generic-password -s phoenix-omega -a METRICOOL_USER_ID -w)"
+python3 scripts/integrations/metricool/validate_config.py --strict-blog-ids
 python3 scripts/integrations/metricool/status.py
-python3 scripts/integrations/metricool/sync_brands_from_registry.py --dry-run
 python3 scripts/integrations/metricool/pilot_preflight.py
 python3 scripts/integrations/metricool/post.py --brand waystream_sanctuary \
-  --asset tests/fixtures/metricool/sample_asset.json --draft --dry-run
+  --asset tests/fixtures/metricool/pilot_draft_asset.json --draft --dry-run
 PYTHONPATH=. python3 -m pytest tests/test_metricool_client.py -q
 ```
 
-## PRIMARY_BLOCKER
-Q-METRIC-CREDS — METRICOOL_API_KEY and METRICOOL_USER_ID missing from env/Keychain.
-ADDITIONAL: Q-METRIC-02 blog_id pending; Q-METRIC-01 live gate OPEN; GitHub 403 (no push/PR).
+## Gates
 
-## Operator actions required for pilot
-1. Confirm brand key `waystream_sanctuary`.
-2. Supply real Metricool `blog_id` → replace `WAYSTREAM_BLOG_ID_PENDING` (Q-METRIC-02).
-3. Store creds in Keychain (see runbook) → `status.py` / `pilot_preflight.py` → READY.
-4. Draft pilot with explicit network enable:
-   ```bash
-   python3 scripts/integrations/metricool/post.py --brand waystream_sanctuary \
-     --asset tests/fixtures/metricool/sample_asset.json --draft --network
-   ```
-5. Go-live (Q-METRIC-01): only after explicit operator approval.
-6. Unsuspend GitHub → push branch → open PR.
-
-## Decisions logged
-- OPD-METRIC-01 / 02 / 03 (prior)
-- OPD-METRIC-04 — managed-system hardening (SAFE/SUPPORTED/MANAGED); Q-METRIC-01/02 still open
+| Gate | Status |
+|------|--------|
+| Q-METRIC-CREDS | RESOLVED (Keychain) |
+| Q-METRIC-02 blog_id | RESOLVED (`6582629`) |
+| Q-METRIC-03 leak | RESOLVED (gitignored; untracked) |
+| Q-METRIC-01 go-live | OPEN — draft-only until operator approves |
 
 ## NEXT_ACTION
-Operator stores Keychain creds + supplies blog_id → preflight READY → draft pilot with `--network` → ratify Q-METRIC-01 before any `--live`. Unsuspend GitHub for push/PR.
+
+1. Operator: confirm new Metricool brand `Waystream Sanctuary` (`6582629`) is the intended
+   posting brand (or supply a different existing blog_id to swap in yaml).
+2. Optional: connect Instagram/etc. OAuth on that brand via Metricool UI (`whiteLabelLink`).
+3. When ready for live social: ratify Q-METRIC-01 → flip
+   `LIVE_PUBLISH_OPERATOR_APPROVED` + `--live --i-understand-live --network`.
+4. Unsuspend GitHub → push `offline/metricool-integration-20260719` → PR.

@@ -207,7 +207,10 @@ brands:
     blog_id: null
     status: unwired
   waystream_sanctuary:
-    blog_id: WAYSTREAM_BLOG_ID_PENDING
+    blog_id: "6582629"
     status: wired
     timezone: America/New_York
-    notes: Single live Metricool account path. blog_id placeholder until Q-METRIC-02.
+    notes: >-
+      Live Metricool brand created 2026-07-19 (label Waystream Sanctuary) under
+      userId 3564167. Discovery found no prior Waystream-labeled brand among 17
+      profiles; blog_id from admin/add-profile + PATCH label. Q-METRIC-02 resolved.

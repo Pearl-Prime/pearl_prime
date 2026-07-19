@@ -99,18 +99,30 @@ Expect: config OK (warnings OK for pending blog_id), tests green, dry-run JSON w
 
 ### PILOT (network, draft only)
 
-**Blocked until:** Keychain has `METRICOOL_API_KEY` + `METRICOOL_USER_ID` **and** a real `blog_id` (not `WAYSTREAM_BLOG_ID_PENDING`).
+**Ready when:** Keychain has `METRICOOL_API_KEY` + `METRICOOL_USER_ID` **and**
+`waystream_sanctuary.blog_id` is a real Metricool id (currently **`6582629`**, label
+Waystream Sanctuary — created 2026-07-19 under userId `3564167`).
 
 ```bash
-eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
+export METRICOOL_API_KEY="$(security find-generic-password -s phoenix-omega -a METRICOOL_API_KEY -w)"
+export METRICOOL_USER_ID="$(security find-generic-password -s phoenix-omega -a METRICOOL_USER_ID -w)"
+# Prefer targeted Keychain reads if the full registry loader is slow.
 python3 scripts/integrations/metricool/pilot_preflight.py
-# When READY:
 export METRICOOL_ALLOW_NETWORK=1   # or pass --network
 python3 scripts/integrations/metricool/post.py \
   --brand waystream_sanctuary \
-  --asset <asset.json> \
-  --draft --network
+  --asset tests/fixtures/metricool/pilot_draft_asset.json \
+  --draft --network --when 2026-07-22T15:00:00
 ```
+
+**Verify postId** (Metricool list is empty without a date window):
+
+```python
+# list_scheduler_posts(..., post_id="<id>")  OR
+# list_scheduler_posts(..., start="...", end="...", timezone="America/New_York")
+```
+
+Proven draft pilot (2026-07-19): `postId=351226639`, `draft=true`, `autoPublish=false`.
 
 Do **not** pass `--live`.
 

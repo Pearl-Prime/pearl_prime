@@ -335,12 +335,36 @@ def test_list_scheduler_posts_get():
                 user_id="3564167",
                 blog_id="12345",
                 api_key="test-key",
+                start="2026-07-20T00:00:00",
+                end="2026-07-25T00:00:00",
+                timezone="America/New_York",
             )
     assert out == {"data": [{"id": 1}]}
     assert captured["url"].startswith("https://app.metricool.com/api/v2/scheduler/posts")
     assert "blogId=12345" in captured["url"]
     assert "userId=3564167" in captured["url"]
+    assert "start=2026-07-20T00:00:00" in captured["url"]
+    assert "end=2026-07-25T00:00:00" in captured["url"]
     assert captured["headers"]["X-Mc-Auth"] == "test-key"
+
+
+def test_list_scheduler_posts_by_id():
+    captured = {}
+
+    def fake_get(url, headers=None, timeout=None):
+        captured["url"] = url
+        return _ok_response({"data": {"id": 99, "draft": True}})
+
+    with patch("client.requests.get", side_effect=fake_get):
+        with patch("client.time.sleep"):
+            out = list_scheduler_posts(
+                user_id="3564167",
+                blog_id="12345",
+                api_key="test-key",
+                post_id="99",
+            )
+    assert out["data"]["id"] == 99
+    assert "scheduler/posts/99?" in captured["url"]
 
 
 def test_pilot_preflight_blocked_placeholder(tmp_path: Path, monkeypatch, capsys):
@@ -481,7 +505,10 @@ def test_validate_config_canonical_map_ok():
     report = validate_config.load_and_validate(BRANDS_YAML)
     assert report["ok"] is True
     assert report["wired_count"] >= 1
-    assert "waystream_sanctuary" in (report.get("pending_placeholders") or [])
+    # Q-METRIC-02 resolved: live Waystream Sanctuary blog_id is wired (not placeholder).
+    assert "waystream_sanctuary" not in (report.get("pending_placeholders") or [])
+    strict = validate_config.load_and_validate(BRANDS_YAML, strict_blog_ids=True)
+    assert strict["ok"] is True
 
 
 def test_validate_config_orphan_fails(tmp_path: Path):
