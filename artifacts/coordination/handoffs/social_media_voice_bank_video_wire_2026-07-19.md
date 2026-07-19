@@ -66,3 +66,11 @@ python3 scripts/social_media/smoke_voice_bank_reel.py --atom-id EVG-ENUS-ANXI-CO
 - Atoms: HC-02, PA-02, ME-02, TS-01, SP-02
 - Craft: PRIMARY broll_montage + kinetic ASS + per-beat bank VO
 - Acceptance: `system working` (pilot), not full catalog
+
+
+## Metricool dry-run (approved pilot)
+
+- Payload: `artifacts/social_media_voice_bank_2026-07-19/pilot_batch/metricool_dry_run/anxiety_corporate__tiktok_dry_run.json`
+- Safety: `draft/autoPublish=false/dryRun=true`, media `UPLOAD_REQUIRED`
+- Report: `.../metricool_dry_run/publish_safety_report.md`
+- Live Metricool API post: **not authorized**
