@@ -1,102 +1,138 @@
 # Handoff — Storyblocks EULA Compliance (2026-07-19)
 
-**Signal:** `BLOCKED:no access to 48social Django backend repo + GitHub Ahjan108 suspended`  
+**Signal:** `BLOCKED:no writable access to 48social Django backend (+ Ahjan108 GitHub suspended)`  
 **Owner:** Pearl_Int  
 **Branch:** `agent/storyblocks-eula-compliance-20260719`  
-**Base:** `origin/main` @ `9e9b9e606791590337cd7d0f2fb425def2e6f760`
+**Base:** `origin/main` @ `9e9b9e606791590337cd7d0f2fb425def2e6f760`  
+**Design tip (durable):** `54c25e605413ef2a39b72751a62a5cbdd1b465ec`  
+**Durable remote:** `pearlstar_offline` → `pearl_star:~/git/phoenix_omega_offline.git`  
+**GitHub PR (phoenix_omega):** blocked — Ahjan108 suspended (re-verified 2026-07-19T10:08Z)
+---
+
+## CONTINUE re-verify (2026-07-19 ~18:08 UTC+8) — NEW evidence
+
+| Probe | Result (this turn) |
+|-------|---------------------|
+| `gh auth status` / `gh api user` | **Still suspended** — keyring token invalid; HTTP 403 “Sorry. Your account was suspended” |
+| `git ls-remote origin` / SSH github.com | **403 suspended** (cannot open phoenix_omega PR) |
+| `pearlstar_offline` branch tip | **Confirmed** `54c25e605413ef2a39b72751a62a5cbdd1b465ec` (matches local) |
+| Design files on tip | Present: `docs/STORYBLOCKS_EULA_COMPLIANCE.md`, reconciled `docs/storyblocks-integration.md`, signed PDF, this handoff |
+| Local siblings / Spotlight | No `manage.py`, no `*/brands/services/storyblocks`, no `*48social*` product checkout (only briefing audio filenames) |
+| Pearl Star `~/git` | Still **only** `phoenix_omega_offline.git` — no 48social clone |
+| `~/.zsh_history` | Only `git clone …/phoenix_omega_v4.8.git` — **never** a 48social backend clone on this machine |
+| `PROGRAM_STATE` / `INTEGRATION_CREDENTIALS_REGISTRY` / `integration_env_registry.py` | **No** STORYBLOCKS_* vars; **no** backend clone URL |
+| Public GitHub user [`48social`](https://github.com/48social) | **EXISTS** (id `219904317`) but **0 public repos**, 0 public events, 0 orgs |
+| Name guesses `48social/{backend,api,app,…}` | All **404** without auth (private or different host) |
+| Web search for public 48social Django + Storyblocks | No official product backend found |
+
+**Concrete blocker (single line):** Operator must provide a **writable clone of the private 48 Social Django backend** (and restore GitHub push for merge/PR); environment has design-only access via pearlstar_offline.
 
 ---
 
-## DISCOVERY REPORT
+## DISCOVERY REPORT (unchanged conclusions)
 
-### 1. Backend repo locate
+### Backend target (when access lands)
 
-| Probe | Result |
-|-------|--------|
-| Sibling checkouts under `/Users/ahjan` | No `*48social*` / `*/brands/services/storyblocks` checkout |
-| Spotlight / `manage.py` near social | None matching 48social |
-| Pearl Star (`pearl_star:~/git`, home tree) | Only `phoenix_omega_offline.git` + phoenix_omega; **no** 48social Django |
-| GitHub via `gh` / HTTPS / SSH as `Ahjan108` | **Account suspended** (HTTP 403); token in keyring invalid; cannot search or clone |
-| phoenix_omega references | Spec paths only (`docs/storyblocks-integration.md`); Metricool prompt confirms separate 48social Django repo exists but gives no clone URL |
-
-**Required access (operator):** clone URL + push credentials for the **48 Social Django product backend** that contains:
+Paths from design spec (implement **there**, not in phoenix_omega):
 
 - `backend/apps/brands/services/storyblocks/`
-- `backend/apps/brands/views.py`
-- `backend/apps/campaigns/` (`CampaignAssetDownload`)
-- `backend/apps/pipelines/services/`
+- `backend/apps/brands/views.py` (StockSearchView — fix per-brand `user_id`)
+- `backend/apps/brands/services/asset_selection_service.py`
+- `backend/apps/campaigns/` (`CampaignAssetDownload` + new MAU ledger)
+- `backend/apps/pipelines/services/` (R1 render guard)
 
-**Do not invent** that implementation inside phoenix_omega.
+### Spec packet already on branch
 
-### 2. Spec vs contract reconciliation
+- `docs/STORYBLOCKS_EULA_COMPLIANCE.md` — R1/R2/R3 + rate limit + AI wall + attribution
+- `docs/storyblocks-integration.md` — EULA-reconciled
+- `docs/Storyblocks API Agreement - 48 Social.pdf` — Doc Ref EUYIG-SF8TR-9LD23-TJ3AK
+- Decisions: `OPD-SB-01`…`OPD-SB-04` (hard block 105th; per-brand id; UTC month; STOCK_PROVIDER exclusive)
 
-Landed in this packet:
+### MAU month basis
 
-- `docs/STORYBLOCKS_EULA_COMPLIANCE.md` — clause→guard map + implementation sketches
-- `docs/storyblocks-integration.md` — EULA-reconciled (user_id per brand, MAU meter, render guard, rate limits, AI wall, release marks, Q-SB-04 N/A)
-- `docs/Storyblocks API Agreement - 48 Social.pdf` — signed SSOT (was untracked; now committed)
-
-Key disagreements fixed in the design surface (were in the pre-reconcile spec):
-
-1. views.py `request.user.id` vs AssetSelectionService `brand_id`
-2. No MAU meter / no download-vs-search distinction
-3. No proactive rate limiter
-4. No license-on-download render guard
-5. “Watermarked preview” wording vs agreement’s watermark-free previews (still unlicensed)
-
-### 3. Inventory (live vs spec-only)
-
-| Component | Status in this environment |
-|-----------|----------------------------|
-| `StoryblocksAPIService` / `AssetSelectionService` / `CampaignAssetDownload` | **Spec-only** here — code not present in phoenix_omega; cannot verify live vs stub without backend repo |
-| Confirm-first / per-campaign GCS / delete-on-campaign-delete | Preserved in design (inventory=EXTENDS; do not drop) |
-| Render guard / MAU ledger / rate limiter / views.py brand id | **Design only** until backend PR |
-
-### 4. MAU calendar basis
-
-**UTC calendar month** (`YYYY-MM`). Rationale: §4.3(a) says “calendar month”; monthly invoices → UTC is the unambiguous default (Q-SB-03). Flag if Storyblocks billing uses another anchor.
+**UTC calendar month** (`YYYY-MM`) — Q-SB-03 default.
 
 ---
 
-## What changed (this branch)
+## ACCESS_REQUIRED (operator checklist)
+
+Paste answers into chat or a local path; agent cannot discover these.
+
+1. **Backend clone URL** (likely private under `https://github.com/48social/<repo>` or another host):  
+   `______________________________`
+2. **Auth that can clone + push that repo** (PAT / SSH key / Codespace with access):  
+   `______________________________`
+3. **Default branch name** (usually `main`):  
+   `______________________________`
+4. **GitHub for phoenix_omega design PR** (optional once backend merges): unsuspend `Ahjan108` **or** `gh auth login` with a write-capable identity.
+
+---
+
+## Exact NEXT commands (operator → agent)
+
+### A. Unblock GitHub on this Mac (phoenix_omega PR)
+
+```bash
+gh auth logout -h github.com -u Ahjan108
+gh auth login -h github.com   # identity with push on Ahjan108/phoenix_omega_v4.8
+cd /Users/ahjan/phoenix_omega
+git fetch origin
+# publish design branch from pearlstar if origin lacks it:
+git push -u origin agent/storyblocks-eula-compliance-20260719
+gh pr create --base main --head agent/storyblocks-eula-compliance-20260719 \
+  --title "docs(storyblocks): EULA compliance design + reconciled integration spec" \
+  --body "Design-only. Backend implementation follows in 48social Django repo. See docs/STORYBLOCKS_EULA_COMPLIANCE.md + handoff artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md"
+```
+
+### B. Fetch design tip from Pearl Star (any machine with `pearl_star` SSH)
+
+```bash
+git fetch pearlstar_offline agent/storyblocks-eula-compliance-20260719
+git log -1 --oneline pearlstar_offline/agent/storyblocks-eula-compliance-20260719
+# expect: 54c25e605413ef2a39b72751a62a5cbdd1b465ec
+```
+
+### C. Resume EXECUTE once backend URL is known (paste into new Pearl_Int turn)
+
+```bash
+# REPLACE URL — do not invent
+export SB_BACKEND_URL='git@github.com:48social/<PRIVATE_REPO>.git'   # or https://...
+export SB_BACKEND_DIR="$HOME/48social_backend"
+git clone "$SB_BACKEND_URL" "$SB_BACKEND_DIR"
+cd "$SB_BACKEND_DIR"
+git fetch origin && git checkout -b agent/storyblocks-eula-compliance-20260719 origin/main
+
+# Then implement per phoenix_omega docs (copy from pearlstar tip or local):
+#   docs/STORYBLOCKS_EULA_COMPLIANCE.md  (R1 render guard, R2 per-brand user_id,
+#   R3 MAU meter hard 104, rate limiter 600/120, AI wall, attribution, release marks)
+# Required tests: MAU 104/105 boundary, search excluded, brand id stability,
+#   render-guard, rate-limiter. Preserve confirm-first / no HD pre-cache.
+# Merge PR → emit: storyblocks-eula-compliance=<full-SHA>
+```
+
+### D. Verify still blocked (smoke)
+
+```bash
+gh api user -q .login                                 # must NOT be 403
+test -d "$HOME/48social_backend/backend/apps/brands/services/storyblocks" && echo BACKEND_OK
+```
+
+---
+
+## What changed (design branch — already pushed)
 
 | Path | Change |
 |------|--------|
-| `docs/STORYBLOCKS_EULA_COMPLIANCE.md` | **Added** — mechanism map R1–R3 + extras |
-| `docs/storyblocks-integration.md` | **Added + reconciled** to signed agreement |
-| `docs/Storyblocks API Agreement - 48 Social.pdf` | **Added** (855314 bytes < 1MB blob gate) |
-| `artifacts/coordination/operator_decisions_log.tsv` | **OPD-SB-01..04** defaults |
-| `artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md` | This handoff |
-
----
-
-## Verified
-
-- PDF Doc Ref **EUYIG-SF8TR-9LD23-TJ3AK**, effective **2026-02-24 → 2027-02-23**, Payment Schedule free tier **104 MAUs**, fee **$4.40/MAU**, MAU = Download query user_ids, rate limits 600/120.
-- No Django Storyblocks implementation reachable to unit-test.
-- GitHub PR/merge to `Ahjan108/phoenix_omega_v4.8` **blocked** by account suspension.
-- Durable push target attempted: `pearlstar_offline` (`pearl_star:~/git/phoenix_omega_offline.git`).
-
+| `docs/STORYBLOCKS_EULA_COMPLIANCE.md` | Clause→guard map R1–R3 + extras |
+| `docs/storyblocks-integration.md` | EULA-reconciled |
+| `docs/Storyblocks API Agreement - 48 Social.pdf` | Signed SSOT (<1MB) |
+| `artifacts/coordination/operator_decisions_log.tsv` | OPD-SB-01..04 |
+| `artifacts/coordination/handoffs/storyblocks_eula_compliance_2026-07-19.md` | This handoff (+ CONTINUE re-verify) |
 ---
 
 ## Tests run
 
-None on product backend (repo absent). Design-only packet — no phoenix_omega runtime Storyblocks code to test.
-
----
-
-## Blockers
-
-1. **Primary:** No access to 48social Django backend repo (path/URL unknown; not checked out; not on Pearl Star).
-2. **Secondary:** GitHub identity `Ahjan108` suspended — cannot open/merge GitHub PR for phoenix_omega either until re-auth / unsuspend.
-
----
-
-## NEXT_ACTION
-
-1. Operator: restore GitHub access for `Ahjan108` **or** provide alternate push remote with PR capability.
-2. Operator: provide 48social backend clone URL + credentials (or local path).
-3. Pearl_Int resume: implement R1–R3 + extras per `docs/STORYBLOCKS_EULA_COMPLIANCE.md` on that repo; merge; emit `storyblocks-eula-compliance=<full-SHA>`.
+None on product backend (repo still absent). Design packet only.
 
 ---
 
@@ -104,7 +140,15 @@ None on product backend (repo absent). Design-only packet — no phoenix_omega r
 
 | Item | Status |
 |------|--------|
-| Worktree `/Users/ahjan/phoenix_omega_wt_storyblocks_eula_20260719` | Aborted/removed (full checkout too slow); branch built via temp-index commit |
-| Scratch `/tmp/sb_eula.txt` | Ephemeral pdftotext — OK to leave or delete |
-| Debug instrumentation | None |
-| Branch `agent/storyblocks-eula-compliance-20260719` | HOLD until GitHub unsuspend or operator merges from pearlstar_offline |
+| Full worktree checkout attempt | Aborted earlier; branch via temp-index |
+| `/tmp/48repos.json` `/tmp/48ev.json` | Ephemeral CONTINUE probes — safe to delete |
+| Branch `agent/storyblocks-eula-compliance-20260719` | **HOLD** on `pearlstar_offline` @ `54c25e6054…` |
+| Inventing Django Storyblocks code in phoenix_omega | **Forbidden** — not done |
+
+---
+
+## NEXT_ACTION
+
+1. Operator fills **ACCESS_REQUIRED** #1–#2 (backend URL + credentials).  
+2. Optionally run **A** to unsuspend/login and open phoenix_omega design PR.  
+3. Pearl_Int runs **C** → MERGED → `storyblocks-eula-compliance=<full-SHA>`.

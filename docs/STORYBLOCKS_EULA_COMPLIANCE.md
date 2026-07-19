@@ -185,7 +185,9 @@ Implement in the **48 Social Django product backend** (paths from design spec):
 - `backend/apps/campaigns/` (`CampaignAssetDownload` + MAU ledger)
 - `backend/apps/pipelines/services/` (render/publish guard)
 
-**Not found** in this environment (no sibling checkout; Pearl Star has no 48social clone; GitHub `Ahjan108` account suspended so org/repo search/clone failed). Operator must provide clone URL + push credentials.
+**Not found** in this environment (no sibling checkout; Pearl Star has no 48social clone; GitHub `Ahjan108` account suspended so authenticated search/clone failed).
+
+**CONTINUE 2026-07-19 re-verify:** public GitHub user [`48social`](https://github.com/48social) (id 219904317) exists but lists **0 public repos**; common name guesses (`backend`, `api`, …) return 404 without auth. Operator must provide the **private** clone URL + push credentials. See handoff resume commands.
 
 ---
 
