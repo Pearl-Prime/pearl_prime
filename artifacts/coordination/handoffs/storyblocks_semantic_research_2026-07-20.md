@@ -8,7 +8,7 @@
 ## SIGNAL
 
 ```
-storyblocks-taxonomy-recommended=PENDING_SHA
+storyblocks-taxonomy-recommended=ba3497fccfc97e24fa73caa182922fc9cf97d865
 ```
 
 *(Replaced with full SHA at land time in same file / follow-up stamp commit.)*
