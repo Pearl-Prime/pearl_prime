@@ -35,6 +35,10 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("DeepSeek", "DEEPSEEK_MODEL", False, "DeepSeek model override (default: deepseek-chat)"),
     ("Google AI Studio", "GOOGLE_AI_API_KEY", False, "ja-JP translation — Gemini 2.0 Flash, 1M tokens/day free. Get: aistudio.google.com/apikey"),
     ("Google AI Studio", "GEMINI_MODEL", False, "Gemini model override (default: gemini-2.0-flash)"),
+    # --- Translation QA external signals (calibration/high-risk only, NOT wired into default path — see docs/decisions/TRANSLATION_QA_MT_EXTERNAL_SIGNALS_2026-07-21.md) ---
+    ("Google Cloud Translation", "GOOGLE_TRANSLATE_API_KEY", False, "Cloud Translation API (translate.googleapis.com) key — MT disagreement candidate for zh-TW QA calibration. 500K chars/mo free. Get: console.cloud.google.com > APIs & Services > Credentials"),
+    ("Azure AI Translator", "AZURE_TRANSLATOR_KEY", False, "Azure Translator (Cognitive Services) key — MT disagreement candidate for zh-TW QA calibration. F0 tier: 2M chars/mo free, standing. Get: portal.azure.com"),
+    ("Azure AI Translator", "AZURE_TRANSLATOR_REGION", False, "Azure resource region, required alongside AZURE_TRANSLATOR_KEY (e.g. eastus)"),
     # --- Free-tier LLM providers (EN / non-CJK article expansion) ---
     ("Groq", "GROQ_API_KEY", False, "Free EN default: llama-3.3-70b-versatile. Get: console.groq.com/keys"),
     ("xAI / Grok", "XAI_API_KEY", False, "Free EN fallback 1: grok-3-mini. $25/mo free credits. Get: console.x.ai"),
@@ -144,6 +148,13 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Metricool", "METRICOOL_API_KEY", False, "Metricool API key (X-Mc-Auth). Get: app.metricool.com → Settings → API. Store in Keychain service phoenix-omega; never commit. Staging file docs/metricool_api.txt is gitignored."),
     ("Metricool", "METRICOOL_USER_ID", False, "Metricool user id (canonical Waystream account: 3564167). Pair with METRICOOL_API_KEY."),
     ("Metricool", "METRICOOL_BASE_URL", False, "Metricool API v2 base URL. Default: https://app.metricool.com/api/v2/"),
+    # --- Storyblocks (Pearl Prime social b-roll / media bank; EULA confirm-first) ---
+    # Spec: docs/STORYBLOCKS_PEARL_PRIME_RESCOPE.md + docs/STORYBLOCKS_SOCIAL_BANK.md
+    ("Storyblocks", "STORYBLOCKS_PUBLIC_KEY", False, "Storyblocks API public key (APIKEY). Store in Keychain service phoenix-omega. Required for live search/download; unit tests mock HTTP. Staging: docs/storyblocks_api_key.txt / docs/storyblocks_keys.env (gitignored)."),
+    ("Storyblocks", "STORYBLOCKS_PRIVATE_KEY", False, "Storyblocks API private key (HMAC). Keychain only — never commit. Pairs with STORYBLOCKS_PUBLIC_KEY."),
+    ("Storyblocks", "STORYBLOCKS_MAU_LEDGER_PATH", False, "Optional override for MAU JSONL ledger (default artifacts/storyblocks/mau_ledger.jsonl)."),
+    ("Storyblocks", "STORYBLOCKS_LICENSED_BANK_ROOT", False, "Optional override for per-work-unit licensed HD bank (default artifacts/storyblocks_licensed/)."),
+    ("Storyblocks", "STORYBLOCKS_LICENSE_INDEX_PATH", False, "Optional override for license index JSONL (default artifacts/storyblocks/license_index.jsonl)."),
 ]
 
 ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})
