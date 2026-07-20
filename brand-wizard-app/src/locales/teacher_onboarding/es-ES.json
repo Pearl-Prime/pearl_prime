@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Elija su idioma",
+    "subheading": "Seleccione la bandera de un mercado para abrir el formulario de incorporación de maestros en ese idioma. Podrá definir por separado, dentro del formulario, el idioma en el que enseña."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Incorporación de maestros",
+    "brand_blurb": "Envíe el material que Pearl_Int necesita para convertir a un maestro real en una fuente de modo maestro revisada.",
+    "functional_label": "Banco funcional de maestros",
+    "scale_label": "Profundidad a escala de 1000 libros",
+    "activation_truth_kicker": "La verdad sobre la activación",
+    "activation_truth_body": "Activar envía la solicitud de admisión. El estatus oficial de maestro todavía requiere normalización de fuentes, extracción de átomos, revisión humana y los controles de producción de maestros.",
+    "draft_kicker": "Portal de borradores",
+    "draft_blurb": "Guarde en cualquier momento. Recibirá un enlace privado para volver y añadir más material, sin necesidad de iniciar sesión.",
+    "save_draft": "Guardar borrador",
+    "rotate_token": "Renovar token",
+    "delete_draft": "Eliminar borrador",
+    "operator_queue": "Cola de operadores →",
+    "change_language": "Cambiar idioma de visualización",
+    "nav_aria": "Secciones de incorporación de maestros",
+    "nav_identity": "Identidad",
+    "nav_rights": "Derechos",
+    "nav_teachings": "Doctrina",
+    "nav_stories": "Historias",
+    "nav_practices": "Prácticas",
+    "nav_voice": "Idioma",
+    "nav_activate": "Activar",
+    "minimum_suffix": "mínimo",
+    "preferred_suffix": "recomendado",
+    "recommended": "recomendado"
+  },
+  "header": {
+    "kicker": "Admisión en modo maestro",
+    "title": "Elabore el paquete de fuentes antes de que el sistema escriba con la voz de un maestro.",
+    "teacher_id_label": "ID del maestro:"
+  },
+  "identity": {
+    "kicker": "1 / Identidad",
+    "heading": "¿Quién es el maestro?",
+    "teacher_name": "Nombre del maestro",
+    "teacher_id": "ID / identificador del maestro",
+    "tradition": "Tradición, linaje o ámbito",
+    "language_label": "Idioma en el que enseña o escribe",
+    "language_hint": "Idioma de origen de este maestro (puede diferir del idioma de visualización de la página). 14 idiomas del repositorio.",
+    "contact_name": "Nombre de contacto",
+    "contact_email": "Correo electrónico de contacto",
+    "website": "Sitio web o perfil público",
+    "bio_label": "Biografía del maestro",
+    "bio_hint": "Pegue texto, enlace una URL o suba un archivo de biografía; cualquier combinación es válida.",
+    "bio_placeholder": "¿Qué debería saber Pearl_Int sobre el trabajo, la trayectoria, el público y la voz de este maestro?",
+    "name_placeholder": "Maestro Wu",
+    "id_placeholder": "maestro_wu",
+    "tradition_placeholder": "Chan, psicología contemplativa, coaching somático...",
+    "contact_name_placeholder": "Operador o representante del maestro",
+    "contact_email_placeholder": "maestro@ejemplo.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Derechos",
+    "heading": "¿Qué nos está permitido procesar?",
+    "owns_material": "Soy propietario o cuento con permiso para enviar estas enseñanzas, grabaciones, archivos y enlaces para su procesamiento.",
+    "processing_consent": "Doy mi consentimiento para que Pearl_Int extraiga átomos de maestro candidatos para revisión humana antes de su uso en producción.",
+    "no_unauthorized": "No estoy enviando material protegido sin autorización, y todo extracto público cuenta con notas de derechos y procedencia.",
+    "final_consent": "Confirmo que esta solicitud de admisión puede enviarse para revisión del operador y para futuros trabajos de activación de la fuente del maestro.",
+    "public_boundaries": "Límites públicos",
+    "private_boundaries": "Límites privados",
+    "public_placeholder": "¿Qué se puede citar, parafrasear o usar públicamente?",
+    "private_placeholder": "¿Qué no debe usarse, nombrarse, extraerse ni mostrarse nunca?"
+  },
+  "teachings": {
+    "kicker": "3 / Enseñanzas",
+    "heading": "Facilítenos la doctrina y el material de enseñanza del maestro.",
+    "blurb": "Añada tantos bloques de enseñanza como necesite. Dentro de cada bloque puede pegar varias enseñanzas (sepárelas con líneas en blanco), adjuntar una URL o subir archivos.",
+    "add_label": "Añadir bloque de enseñanza",
+    "placeholder": "Enseñanza 1…\n\nEnseñanza 2…\n\nEnseñanza 3…",
+    "hint": "Consejo: lo mejor es un párrafo o un bloque separado por líneas en blanco por cada enseñanza."
+  },
+  "stories": {
+    "kicker": "4 / Historias",
+    "heading": "Aporte material de historias reales, no ejemplos mínimos.",
+    "blurb": "Elija un tipo de historia y después pegue texto, enlace una URL de origen o suba un archivo. Empiece con tres filas; puede añadir más en cualquier momento.",
+    "add_label": "Añadir fila de historia",
+    "type_label": "Tipo de historia",
+    "placeholder": "¿Qué ocurre? Escena, presión, fricción, elección, consecuencia, función didáctica…"
+  },
+  "practices": {
+    "kicker": "5 / Prácticas",
+    "heading": "Añada ejercicios y herramientas con contexto suficiente para convertirse en átomos de cinco capas.",
+    "blurb": "Mismo patrón: tipo · texto · URL · archivo. Tres filas para empezar.",
+    "add_label": "Añadir fila de práctica",
+    "type_label": "Tipo de práctica",
+    "placeholder": "Pasos, tiempos, señales corporales, momento de comprensión, integración, contraindicaciones, notas de seguridad…"
+  },
+  "voice": {
+    "kicker": "6 / Idioma",
+    "heading": "Citas, frases, metáforas y límites del lenguaje.",
+    "blurb": "Cada fila es una categoría de idioma. Use texto, URL o archivo; añada más filas según lo necesite.",
+    "add_label": "Añadir fila de idioma",
+    "entry_type": "Tipo de entrada",
+    "source_note": "Nota de fuente / permiso (opcional)",
+    "source_placeholder": "De dónde procede / permiso de uso",
+    "content_placeholder": "Pegue el contenido de esta entrada de idioma…"
+  },
+  "activate": {
+    "kicker": "7 / Activar",
+    "heading": "Envíe el paquete de admisión del maestro.",
+    "ready_title": "¿Listo para activar?",
+    "ready_body": "Guardaremos su borrador, enviaremos la solicitud de admisión para revisión y le daremos una URL privada para que pueda volver y añadir más material en cualquier momento.",
+    "teacher_name": "Nombre del maestro:",
+    "contact_email": "Correo electrónico de contacto:",
+    "processing_permission": "Permiso de procesamiento:",
+    "final_consent": "Consentimiento final:",
+    "source_material": "Material de origen:",
+    "missing": "falta",
+    "missing_or_invalid": "falta o no es válido",
+    "ready": "listo",
+    "present": "presente",
+    "depth_kicker": "Orientación de profundidad",
+    "depth_blurb": "Puede activar con menos de las cifras recomendadas; esto es orientativo, no un bloqueo estricto.",
+    "submit": "Activar admisión del maestro",
+    "submit_failed": "La activación ha fallado. Inténtelo de nuevo o guarde primero un borrador."
+  },
+  "success": {
+    "kicker": "Admisión del maestro",
+    "heading": "Enhorabuena",
+    "body_prefix": "Su solicitud de admisión del maestro",
+    "body_suffix": "se ha enviado. El estatus oficial de maestro aún necesita la revisión de Pearl_Int; puede seguir añadiendo material en cualquier momento con su enlace privado.",
+    "return_url_kicker": "Su URL privada de regreso",
+    "copy_link": "Copiar enlace",
+    "copied": "Copiado",
+    "no_url": "Guarde un borrador la próxima vez para que podamos emitirle un enlace privado de regreso. Su solicitud ha quedado registrada de todos modos.",
+    "continue_editing": "Continuar editando",
+    "start_another": "Empezar con otro maestro"
+  },
+  "draft": {
+    "resuming": "Reanudando borrador…",
+    "saving": "Guardando borrador…",
+    "saved": "Borrador guardado. Conserve su enlace privado de reanudación.",
+    "deleting": "Eliminando borrador…",
+    "deleted": "Borrador eliminado.",
+    "delete_confirm": "¿Eliminar este borrador? Las solicitudes enviadas nunca se eliminan con esta acción.",
+    "delete_failed": "No se pudo eliminar"
+  },
+  "validation": {
+    "teacher_name_required": "El nombre del maestro es obligatorio.",
+    "contact_email_required": "El correo electrónico de contacto es obligatorio.",
+    "contact_email_invalid": "El correo electrónico de contacto debe ser válido.",
+    "owns_required": "Es obligatoria la declaración de autoría o de permiso.",
+    "processing_required": "Es obligatorio el permiso para procesar el material en átomos candidatos.",
+    "consent_required": "Es obligatoria la casilla de consentimiento final.",
+    "material_required": "Añada al menos una enseñanza, historia, práctica, fila de idioma o biografía (texto, URL o archivo)."
+  },
+  "common": {
+    "upload": "Subir archivo",
+    "url_placeholder": "https://… (URL opcional)",
+    "paste_placeholder": "Pegue o escriba el contenido…",
+    "add_row": "Añadir fila"
+  }
+}

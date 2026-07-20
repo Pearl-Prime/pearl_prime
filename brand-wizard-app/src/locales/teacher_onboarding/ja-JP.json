@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "言語を選択してください",
+    "subheading": "市場の国旗を選ぶと、その言語で先生登録フォームが開きます。実際に教えている言語は、フォーム内で別途設定できます。"
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "先生登録",
+    "brand_blurb": "Pearl_Intが本物の先生をレビュー済みの先生モード・ソースへと変えるために必要な資料をご提出ください。",
+    "functional_label": "稼働中の先生バンク",
+    "scale_label": "1000冊規模の深度",
+    "activation_truth_kicker": "有効化について",
+    "activation_truth_body": "「有効化」を押すと登録情報が送信されます。正式な先生ステータスの認定には、ソースの正規化、アトム抽出、人による審査、先生プロダクションのゲート通過が別途必要です。",
+    "draft_kicker": "下書きポータル",
+    "draft_blurb": "いつでも保存できます。続きから資料を追加できる非公開リンクをお渡しします — ログインは不要です。",
+    "save_draft": "下書きを保存",
+    "rotate_token": "トークンを再発行",
+    "delete_draft": "下書きを削除",
+    "operator_queue": "オペレーターキューへ →",
+    "change_language": "表示言語を変更",
+    "nav_aria": "先生登録の各セクション",
+    "nav_identity": "基本情報",
+    "nav_rights": "権利",
+    "nav_teachings": "教え",
+    "nav_stories": "ストーリー",
+    "nav_practices": "実践法",
+    "nav_voice": "言語",
+    "nav_activate": "有効化",
+    "minimum_suffix": "最低",
+    "preferred_suffix": "推奨",
+    "recommended": "推奨"
+  },
+  "header": {
+    "kicker": "先生モード登録",
+    "title": "システムが先生の声で執筆できるようになる前に、ソースパケットを作成しましょう。",
+    "teacher_id_label": "先生ID:"
+  },
+  "identity": {
+    "kicker": "1 / 基本情報",
+    "heading": "どのような先生ですか?",
+    "teacher_name": "先生の名前",
+    "teacher_id": "先生ID / スラッグ",
+    "tradition": "伝統、系譜、専門分野",
+    "language_label": "教える/執筆する言語",
+    "language_hint": "この先生のソース言語です(ページの表示言語と異なっていて構いません)。リポジトリ対応の14言語からお選びください。",
+    "contact_name": "連絡先氏名",
+    "contact_email": "連絡先メールアドレス",
+    "website": "ウェブサイトまたは公開プロフィール",
+    "bio_label": "先生のプロフィール",
+    "bio_hint": "テキストの貼り付け、URLのリンク、プロフィールファイルのアップロードのいずれか、または組み合わせでご提出いただけます。",
+    "bio_placeholder": "この先生の活動、経歴、対象者、語り口について、Pearl_Intが知っておくべきことは何ですか?",
+    "name_placeholder": "Master Wu",
+    "id_placeholder": "master_wu",
+    "tradition_placeholder": "禅、瞑想心理学、ソマティックコーチングなど…",
+    "contact_name_placeholder": "オペレーターまたは先生の代理人",
+    "contact_email_placeholder": "teacher@example.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / 権利",
+    "heading": "処理を許可いただける範囲を教えてください",
+    "owns_material": "私はこれらの教え、録音、ファイル、リンクを処理のために提出する権利、または許可を有しています。",
+    "processing_consent": "私は、本番利用前の人によるレビューを目的として、Pearl_Intが候補となる先生アトムを抽出することに同意します。",
+    "no_unauthorized": "私は許可のない著作権保護素材を提出しておらず、公開する抜粋にはすべて権利・出典の注記があります。",
+    "final_consent": "私は、この登録内容がオペレーターによる審査と、今後の先生ソース有効化作業のために提出されることを確認します。",
+    "public_boundaries": "公開してよい範囲",
+    "private_boundaries": "非公開とすべき範囲",
+    "public_placeholder": "引用、言い換え、公開利用してよいのはどの内容ですか?",
+    "private_placeholder": "使用、名指し、抽出、公開してはならないのはどの内容ですか?"
+  },
+  "teachings": {
+    "kicker": "3 / 教え",
+    "heading": "先生の教義と教えの資料をご提出ください。",
+    "blurb": "必要なだけ教えのブロックを追加してください。各ブロック内には複数の教えを貼り付け(空白行で区切り)、URLを添付、またはファイルをアップロードできます。",
+    "add_label": "教えのブロックを追加",
+    "placeholder": "教え1…\n\n教え2…\n\n教え3…",
+    "hint": "ヒント: 教えごとに1段落、または空白行で区切ったブロックにするのが最適です。"
+  },
+  "stories": {
+    "kicker": "4 / ストーリー",
+    "heading": "簡単な例ではなく、実際のストーリー素材をご提供ください。",
+    "blurb": "ストーリーの種類を選び、テキストを貼り付けるか、ソースURLをリンクするか、ファイルをアップロードしてください。まずは3行から始め、必要に応じて追加できます。",
+    "add_label": "ストーリー行を追加",
+    "type_label": "ストーリーの種類",
+    "placeholder": "何が起こりますか? 場面、プレッシャー、摩擦、選択、結果、教えとしての役割…"
+  },
+  "practices": {
+    "kicker": "5 / 実践法",
+    "heading": "五層アトムとして成立するのに十分な文脈とともに、エクササイズやツールを追加してください。",
+    "blurb": "同じパターンです: 種類・テキスト・URL・アップロード。まずは3行から始めてください。",
+    "add_label": "実践法の行を追加",
+    "type_label": "実践法の種類",
+    "placeholder": "手順、タイミング、身体の感覚、気づき、統合、禁忌、安全上の注意…"
+  },
+  "voice": {
+    "kicker": "6 / 言語",
+    "heading": "引用、言い回し、比喩、そして言語表現の境界線について。",
+    "blurb": "各行は1つの言語カテゴリーです。テキスト、URL、アップロードのいずれか、または組み合わせでご入力ください — 必要に応じて行を追加できます。",
+    "add_label": "言語の行を追加",
+    "entry_type": "項目の種類",
+    "source_note": "出典 / 使用許可に関する注記(任意)",
+    "source_placeholder": "この内容の出典 / 使用許可について",
+    "content_placeholder": "この言語項目の内容を貼り付けてください…"
+  },
+  "activate": {
+    "kicker": "7 / 有効化",
+    "heading": "先生登録パケットを送信してください。",
+    "ready_title": "有効化の準備はできましたか?",
+    "ready_body": "下書きを保存し、審査のために登録内容を送信したうえで、いつでも戻って資料を追加できる非公開URLをお渡しします。",
+    "teacher_name": "先生の名前:",
+    "contact_email": "連絡先メールアドレス:",
+    "processing_permission": "処理への許可:",
+    "final_consent": "最終同意:",
+    "source_material": "ソース素材:",
+    "missing": "未入力",
+    "missing_or_invalid": "未入力または無効",
+    "ready": "準備完了",
+    "present": "入力済み",
+    "depth_kicker": "深度に関する目安",
+    "depth_blurb": "推奨件数に満たなくても有効化できます — これは目安であり、必須条件ではありません。",
+    "submit": "先生登録を有効化する",
+    "submit_failed": "有効化に失敗しました。もう一度お試しいただくか、先に下書きを保存してください。"
+  },
+  "success": {
+    "kicker": "先生登録",
+    "heading": "おめでとうございます",
+    "body_prefix": "",
+    "body_suffix": "の先生登録が送信されました。正式な先生ステータスの認定にはPearl_Intによるレビューが必要ですが、非公開リンクからいつでも資料を追加いただけます。",
+    "return_url_kicker": "あなた専用の非公開URL",
+    "copy_link": "リンクをコピー",
+    "copied": "コピーしました",
+    "no_url": "次回は下書きを保存すると、非公開の再開用リンクをお渡しできます。今回の登録内容も記録済みです。",
+    "continue_editing": "編集を続ける",
+    "start_another": "別の先生登録を始める"
+  },
+  "draft": {
+    "resuming": "下書きを再開しています…",
+    "saving": "下書きを保存しています…",
+    "saved": "下書きを保存しました。非公開の再開用リンクを保管しておいてください。",
+    "deleting": "下書きを削除しています…",
+    "deleted": "下書きを削除しました。",
+    "delete_confirm": "この下書きを削除しますか? この操作では、すでに送信済みの登録内容は削除されません。",
+    "delete_failed": "削除に失敗しました"
+  },
+  "validation": {
+    "teacher_name_required": "先生の名前は必須です。",
+    "contact_email_required": "連絡先メールアドレスは必須です。",
+    "contact_email_invalid": "連絡先メールアドレスの形式が正しくありません。",
+    "owns_required": "本人の資料であること、または使用許可の表明が必要です。",
+    "processing_required": "資料を候補アトムへと処理することへの許可が必要です。",
+    "consent_required": "最終同意のチェックが必要です。",
+    "material_required": "教え、ストーリー、実践法、言語の行、またはプロフィール(テキスト、URL、アップロードのいずれか)を少なくとも1件追加してください。"
+  },
+  "common": {
+    "upload": "アップロード",
+    "url_placeholder": "https://…(任意のURL)",
+    "paste_placeholder": "内容を貼り付けるか入力してください…",
+    "add_row": "行を追加"
+  }
+}

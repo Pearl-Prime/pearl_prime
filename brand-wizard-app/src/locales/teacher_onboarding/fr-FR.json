@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Choisissez votre langue",
+    "subheading": "Sélectionnez le drapeau d'un marché pour ouvrir l'accueil enseignant dans cette langue. Vous pourrez toujours définir séparément, dans le formulaire, la langue dans laquelle vous enseignez."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Accueil enseignant",
+    "brand_blurb": "Soumettez le matériel dont Pearl_Int a besoin pour transformer un enseignant réel en source de mode enseignant validée.",
+    "functional_label": "Banque d'enseignants fonctionnelle",
+    "scale_label": "Profondeur à l'échelle de 1000 livres",
+    "activation_truth_kicker": "Vérité sur l'activation",
+    "activation_truth_body": "L'activation soumet votre dossier. Le statut d'enseignant officiel nécessite encore la normalisation des sources, l'extraction d'atomes, une relecture humaine et le passage des filtres de production enseignant.",
+    "draft_kicker": "Portail brouillon",
+    "draft_blurb": "Enregistrez à tout moment. Vous recevez un lien privé pour revenir et ajouter du matériel plus tard — aucune connexion requise.",
+    "save_draft": "Enregistrer le brouillon",
+    "rotate_token": "Régénérer le jeton",
+    "delete_draft": "Supprimer le brouillon",
+    "operator_queue": "File d'attente opérateur →",
+    "change_language": "Changer la langue d'affichage",
+    "nav_aria": "Sections de l'accueil enseignant",
+    "nav_identity": "Identité",
+    "nav_rights": "Droits",
+    "nav_teachings": "Doctrine",
+    "nav_stories": "Histoires",
+    "nav_practices": "Pratiques",
+    "nav_voice": "Langage",
+    "nav_activate": "Activer",
+    "minimum_suffix": "minimum",
+    "preferred_suffix": "recommandé",
+    "recommended": "recommandé"
+  },
+  "header": {
+    "kicker": "Dossier d'entrée en mode enseignant",
+    "title": "Constituez le dossier source avant que le système n'écrive dans la voix d'un enseignant.",
+    "teacher_id_label": "Identifiant enseignant :"
+  },
+  "identity": {
+    "kicker": "1 / Identité",
+    "heading": "Qui est l'enseignant ?",
+    "teacher_name": "Nom de l'enseignant",
+    "teacher_id": "Identifiant enseignant / slug",
+    "tradition": "Tradition, lignée ou domaine",
+    "language_label": "Langue dans laquelle vous enseignez / écrivez",
+    "language_hint": "Langue source pour cet enseignant (peut différer de la langue d'affichage de la page). 14 langues du dépôt.",
+    "contact_name": "Nom du contact",
+    "contact_email": "E-mail du contact",
+    "website": "Site web ou profil public",
+    "bio_label": "Biographie de l'enseignant",
+    "bio_hint": "Collez du texte, indiquez une URL et/ou téléversez un fichier de biographie — toute combinaison fonctionne.",
+    "bio_placeholder": "Que devrait savoir Pearl_Int sur le travail, le parcours, le public et la voix de cet enseignant ?",
+    "name_placeholder": "Maître Wu",
+    "id_placeholder": "maitre_wu",
+    "tradition_placeholder": "Chan, psychologie contemplative, coaching somatique...",
+    "contact_name_placeholder": "Opérateur ou représentant de l'enseignant",
+    "contact_email_placeholder": "enseignant@exemple.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Droits",
+    "heading": "Que sommes-nous autorisés à traiter ?",
+    "owns_material": "Je détiens ces enseignements, enregistrements, fichiers et liens, ou j'ai la permission de les soumettre pour traitement.",
+    "processing_consent": "Je consens à ce que Pearl_Int extraie des atomes enseignants candidats en vue d'une relecture humaine avant toute utilisation en production.",
+    "no_unauthorized": "Je ne soumets aucun matériel protégé par le droit d'auteur sans autorisation, et tout extrait public est accompagné de notes de droits/provenance.",
+    "final_consent": "Je confirme que ce dossier peut être soumis pour relecture opérateur et pour de futurs travaux d'activation de source enseignant.",
+    "public_boundaries": "Limites publiques",
+    "private_boundaries": "Limites privées",
+    "public_placeholder": "Qu'est-ce qui peut être cité, reformulé ou utilisé publiquement ?",
+    "private_placeholder": "Qu'est-ce qui ne doit jamais être utilisé, nommé, exploité ou rendu visible ?"
+  },
+  "teachings": {
+    "kicker": "3 / Enseignements",
+    "heading": "Fournissez-nous la doctrine et le matériel d'enseignement de l'enseignant.",
+    "blurb": "Ajoutez autant de blocs d'enseignement que nécessaire. Dans chaque bloc, vous pouvez coller plusieurs enseignements (séparés par des lignes vides), joindre une URL et/ou téléverser des fichiers.",
+    "add_label": "Ajouter un bloc d'enseignement",
+    "placeholder": "Enseignement 1…\n\nEnseignement 2…\n\nEnseignement 3…",
+    "hint": "Astuce : un paragraphe ou un bloc séparé par une ligne vide par enseignement fonctionne le mieux."
+  },
+  "stories": {
+    "kicker": "4 / Histoires",
+    "heading": "Fournissez du matériel narratif réel, pas de simples exemples succincts.",
+    "blurb": "Choisissez un type d'histoire, puis collez du texte, indiquez une URL source et/ou téléversez un fichier. Commencez avec trois lignes — ajoutez-en autant que nécessaire.",
+    "add_label": "Ajouter une ligne d'histoire",
+    "type_label": "Type d'histoire",
+    "placeholder": "Que se passe-t-il ? Scène, tension, friction, choix, conséquence, fonction pédagogique…"
+  },
+  "practices": {
+    "kicker": "5 / Pratiques",
+    "heading": "Ajoutez des exercices et des outils avec suffisamment de contexte pour devenir des atomes à cinq couches.",
+    "blurb": "Même schéma : type · texte · URL · téléversement. Trois lignes pour commencer.",
+    "add_label": "Ajouter une ligne de pratique",
+    "type_label": "Type de pratique",
+    "placeholder": "Étapes, minutage, repères corporels, déclic, intégration, contre-indications, notes de sécurité…"
+  },
+  "voice": {
+    "kicker": "6 / Langage",
+    "heading": "Citations, expressions, métaphores et limites de langage.",
+    "blurb": "Chaque ligne correspond à une catégorie de langage. Utilisez du texte, une URL et/ou un téléversement — ajoutez d'autres lignes si besoin.",
+    "add_label": "Ajouter une ligne de langage",
+    "entry_type": "Type d'entrée",
+    "source_note": "Note de source / permission (facultatif)",
+    "source_placeholder": "Provenance / permission d'utilisation",
+    "content_placeholder": "Collez le contenu pour cette entrée de langage…"
+  },
+  "activate": {
+    "kicker": "7 / Activer",
+    "heading": "Soumettez le dossier d'entrée enseignant.",
+    "ready_title": "Prêt à activer ?",
+    "ready_body": "Nous enregistrerons votre brouillon, soumettrons le dossier pour relecture, et vous fournirons une URL privée pour revenir ajouter du matériel à tout moment.",
+    "teacher_name": "Nom de l'enseignant :",
+    "contact_email": "E-mail du contact :",
+    "processing_permission": "Permission de traitement :",
+    "final_consent": "Consentement final :",
+    "source_material": "Matériel source :",
+    "missing": "manquant",
+    "missing_or_invalid": "manquant ou invalide",
+    "ready": "prêt",
+    "present": "présent",
+    "depth_kicker": "Recommandation de profondeur",
+    "depth_blurb": "Vous pouvez activer avec moins que les quantités recommandées — il s'agit d'une recommandation, pas d'un blocage strict.",
+    "submit": "Activer le dossier enseignant",
+    "submit_failed": "L'activation a échoué. Réessayez ou enregistrez d'abord un brouillon."
+  },
+  "success": {
+    "kicker": "Dossier enseignant",
+    "heading": "Félicitations",
+    "body_prefix": "Le dossier d'entrée enseignant pour",
+    "body_suffix": "a été soumis. Le statut d'enseignant officiel nécessite encore une relecture par Pearl_Int — vous pouvez continuer à ajouter du matériel à tout moment avec votre lien privé.",
+    "return_url_kicker": "Votre URL de retour privée",
+    "copy_link": "Copier le lien",
+    "copied": "Copié",
+    "no_url": "Enregistrez un brouillon la prochaine fois afin que nous puissions vous fournir un lien de retour privé. Votre dossier a tout de même été enregistré.",
+    "continue_editing": "Continuer la modification",
+    "start_another": "Commencer un autre dossier enseignant"
+  },
+  "draft": {
+    "resuming": "Reprise du brouillon…",
+    "saving": "Enregistrement du brouillon…",
+    "saved": "Brouillon enregistré. Conservez votre lien de reprise privé.",
+    "deleting": "Suppression du brouillon…",
+    "deleted": "Brouillon supprimé.",
+    "delete_confirm": "Supprimer ce brouillon ? Les dossiers soumis ne sont jamais supprimés par cette action.",
+    "delete_failed": "Échec de la suppression"
+  },
+  "validation": {
+    "teacher_name_required": "Le nom de l'enseignant est requis.",
+    "contact_email_required": "L'e-mail du contact est requis.",
+    "contact_email_invalid": "L'e-mail du contact doit être valide.",
+    "owns_required": "Une attestation de propriété ou de permission est requise.",
+    "processing_required": "La permission de traiter le matériel en atomes candidats est requise.",
+    "consent_required": "La case de consentement final est requise.",
+    "material_required": "Ajoutez au moins un enseignement, une histoire, une pratique, une ligne de langage ou une biographie (texte, URL ou téléversement)."
+  },
+  "common": {
+    "upload": "Téléverser",
+    "url_placeholder": "https://… (URL facultative)",
+    "paste_placeholder": "Collez ou saisissez du contenu…",
+    "add_row": "Ajouter une ligne"
+  }
+}

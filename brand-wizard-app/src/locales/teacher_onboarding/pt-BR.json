@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Escolha seu idioma",
+    "subheading": "Selecione a bandeira de um mercado para abrir o cadastro de mestres nesse idioma. Você ainda pode definir separadamente, dentro do formulário, o idioma em que ensina."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Cadastro de Mestres",
+    "brand_blurb": "Envie o material que o Pearl_Int precisa para transformar um mestre real em uma fonte de modo-mestre revisada.",
+    "functional_label": "Banco funcional de mestres",
+    "scale_label": "Profundidade em escala de 1.000 livros",
+    "activation_truth_kicker": "A verdade sobre a ativação",
+    "activation_truth_body": "Ativar envia sua inscrição. O status oficial de mestre ainda exige normalização da fonte, mineração de átomos, revisão humana e as etapas de produção de mestres.",
+    "draft_kicker": "Portal de rascunho",
+    "draft_blurb": "Salve a qualquer momento. Você recebe um link privado para voltar e adicionar mais material — sem login.",
+    "save_draft": "Salvar rascunho",
+    "rotate_token": "Renovar token",
+    "delete_draft": "Excluir rascunho",
+    "operator_queue": "Fila do operador →",
+    "change_language": "Alterar idioma de exibição",
+    "nav_aria": "Seções do cadastro de mestres",
+    "nav_identity": "Identidade",
+    "nav_rights": "Direitos",
+    "nav_teachings": "Ensinamentos",
+    "nav_stories": "Histórias",
+    "nav_practices": "Práticas",
+    "nav_voice": "Idioma",
+    "nav_activate": "Ativar",
+    "minimum_suffix": "mínimo",
+    "preferred_suffix": "recomendado",
+    "recommended": "recomendado"
+  },
+  "header": {
+    "kicker": "Inscrição em modo-mestre",
+    "title": "Monte o pacote de fontes antes de o sistema escrever na voz de um mestre.",
+    "teacher_id_label": "ID do mestre:"
+  },
+  "identity": {
+    "kicker": "1 / Identidade",
+    "heading": "Quem é o mestre?",
+    "teacher_name": "Nome do mestre",
+    "teacher_id": "ID do mestre / slug",
+    "tradition": "Tradição, linhagem ou área de atuação",
+    "language_label": "Idioma em que você ensina / escreve",
+    "language_hint": "Idioma de origem deste mestre (pode ser diferente do idioma de exibição da página). 14 idiomas do repositório.",
+    "contact_name": "Nome do contato",
+    "contact_email": "E-mail de contato",
+    "website": "Site ou perfil público",
+    "bio_label": "Biografia do mestre",
+    "bio_hint": "Cole o texto, vincule uma URL e/ou envie um arquivo de biografia — qualquer combinação funciona.",
+    "bio_placeholder": "O que o Pearl_Int precisa saber sobre o trabalho, a trajetória, o público e a voz deste mestre?",
+    "name_placeholder": "Mestre Wu",
+    "id_placeholder": "mestre_wu",
+    "tradition_placeholder": "Chan, psicologia contemplativa, coaching somático...",
+    "contact_name_placeholder": "Operador ou representante do mestre",
+    "contact_email_placeholder": "mestre@exemplo.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Direitos",
+    "heading": "O que estamos autorizados a processar?",
+    "owns_material": "Sou o autor ou tenho permissão para enviar estes ensinamentos, gravações, arquivos e links para processamento.",
+    "processing_consent": "Consinto que o Pearl_Int extraia átomos candidatos de mestre para revisão humana antes do uso em produção.",
+    "no_unauthorized": "Não estou enviando material protegido por direitos autorais sem autorização, e todos os trechos públicos têm notas de direitos/procedência.",
+    "final_consent": "Confirmo que esta inscrição pode ser enviada para revisão do operador e para futuros trabalhos de ativação da fonte de mestre.",
+    "public_boundaries": "Limites públicos",
+    "private_boundaries": "Limites privados",
+    "public_placeholder": "O que pode ser citado, parafraseado ou usado publicamente?",
+    "private_placeholder": "O que nunca deve ser usado, nomeado, minerado ou exibido?"
+  },
+  "teachings": {
+    "kicker": "3 / Ensinamentos",
+    "heading": "Traga a doutrina e o material de ensino deste mestre.",
+    "blurb": "Adicione quantos blocos de ensinamentos precisar. Dentro de cada bloco você pode colar vários ensinamentos (separados por linhas em branco), anexar uma URL e/ou enviar arquivos.",
+    "add_label": "Adicionar bloco de ensinamento",
+    "placeholder": "Ensinamento 1…\n\nEnsinamento 2…\n\nEnsinamento 3…",
+    "hint": "Dica: funciona melhor um parágrafo ou bloco separado por linha em branco para cada ensinamento."
+  },
+  "stories": {
+    "kicker": "4 / Histórias",
+    "heading": "Forneça material real de histórias, não exemplos pequenos.",
+    "blurb": "Escolha um tipo de história e depois cole o texto, vincule uma URL de origem e/ou envie um arquivo. Comece com três linhas — adicione mais a qualquer momento.",
+    "add_label": "Adicionar linha de história",
+    "type_label": "Tipo de história",
+    "placeholder": "O que acontece? Cena, pressão, atrito, escolha, consequência, função de ensino…"
+  },
+  "practices": {
+    "kicker": "5 / Práticas",
+    "heading": "Adicione exercícios e ferramentas com contexto suficiente para se tornarem átomos de cinco camadas.",
+    "blurb": "Mesmo padrão: tipo · texto · URL · envio de arquivo. Três linhas para começar.",
+    "add_label": "Adicionar linha de prática",
+    "type_label": "Tipo de prática",
+    "placeholder": "Passos, tempo, sinais corporais, insight, integração, contraindicações, notas de segurança…"
+  },
+  "voice": {
+    "kicker": "6 / Idioma",
+    "heading": "Citações, expressões, metáforas e limites de linguagem.",
+    "blurb": "Cada linha é uma categoria de idioma. Use texto, URL e/ou envio de arquivo — adicione mais linhas conforme necessário.",
+    "add_label": "Adicionar linha de idioma",
+    "entry_type": "Tipo de entrada",
+    "source_note": "Nota de fonte / permissão (opcional)",
+    "source_placeholder": "De onde isso veio / permissão de uso",
+    "content_placeholder": "Cole o conteúdo desta entrada de idioma…"
+  },
+  "activate": {
+    "kicker": "7 / Ativar",
+    "heading": "Envie o pacote de inscrição do mestre.",
+    "ready_title": "Pronto para ativar?",
+    "ready_body": "Vamos salvar seu rascunho, enviar a inscrição para revisão e fornecer uma URL privada para você voltar e adicionar mais material quando quiser.",
+    "teacher_name": "Nome do mestre:",
+    "contact_email": "E-mail de contato:",
+    "processing_permission": "Permissão de processamento:",
+    "final_consent": "Consentimento final:",
+    "source_material": "Material de origem:",
+    "missing": "ausente",
+    "missing_or_invalid": "ausente ou inválido",
+    "ready": "pronto",
+    "present": "presente",
+    "depth_kicker": "Orientação de profundidade",
+    "depth_blurb": "Você pode ativar com menos que as quantidades recomendadas — isto é uma orientação, não um bloqueio obrigatório.",
+    "submit": "Ativar inscrição do mestre",
+    "submit_failed": "A ativação falhou. Tente novamente ou salve um rascunho primeiro."
+  },
+  "success": {
+    "kicker": "Inscrição de mestre",
+    "heading": "Parabéns",
+    "body_prefix": "Sua inscrição de mestre para",
+    "body_suffix": "foi enviada. O status oficial de mestre ainda depende da revisão do Pearl_Int — você pode continuar adicionando material a qualquer momento com seu link privado.",
+    "return_url_kicker": "Sua URL privada de retorno",
+    "copy_link": "Copiar link",
+    "copied": "Copiado",
+    "no_url": "Salve um rascunho da próxima vez para que possamos gerar um link privado de retorno. Sua inscrição foi registrada mesmo assim.",
+    "continue_editing": "Continuar editando",
+    "start_another": "Cadastrar outro mestre"
+  },
+  "draft": {
+    "resuming": "Retomando rascunho…",
+    "saving": "Salvando rascunho…",
+    "saved": "Rascunho salvo. Guarde seu link privado de retomada.",
+    "deleting": "Excluindo rascunho…",
+    "deleted": "Rascunho excluído.",
+    "delete_confirm": "Excluir este rascunho? Envios já enviados nunca são excluídos por esta ação.",
+    "delete_failed": "Falha ao excluir"
+  },
+  "validation": {
+    "teacher_name_required": "O nome do mestre é obrigatório.",
+    "contact_email_required": "O e-mail de contato é obrigatório.",
+    "contact_email_invalid": "O e-mail de contato deve ser válido.",
+    "owns_required": "É necessária a declaração de autoria ou permissão.",
+    "processing_required": "É necessária a permissão para processar o material em átomos candidatos.",
+    "consent_required": "É necessário marcar a caixa de consentimento final.",
+    "material_required": "Adicione pelo menos um ensinamento, história, prática, linha de idioma ou biografia (texto, URL ou arquivo)."
+  },
+  "common": {
+    "upload": "Enviar arquivo",
+    "url_placeholder": "https://… (URL opcional)",
+    "paste_placeholder": "Cole ou digite o conteúdo…",
+    "add_row": "Adicionar linha"
+  }
+}
