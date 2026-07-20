@@ -456,7 +456,7 @@ def generate_teacher_owned_brand(
         "duration_strategy": rng.choice(_DURATION_STRATEGIES),
         "cover_art_identity": {
             "treatment": rng.choice(_COVER_TREATMENTS),
-            "mark_ Motif": themes[0] if themes else "circle",
+            "mark_motif": themes[0] if themes else "circle",
             "note": "Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art); no new cover pipeline.",
         },
         "pricing_posture": rng.choice(_PRICING),
@@ -470,8 +470,6 @@ def generate_teacher_owned_brand(
             "themes": themes,
         },
     }
-    # Fix typo key
-    brand["cover_art_identity"]["mark_motif"] = brand["cover_art_identity"].pop("mark_ Motif")
     if register:
         register_brand(brand)
     return brand
@@ -548,8 +546,9 @@ def generate_hybrid_brand(
         "hybrid_of_archetype": archetype_id,
         "buildable": True,
         "teacher_mode": True,
-        "tradition": arch.get("tradition") or f"Hybrid · {teacher_id} × {archetype_id}",
-        "brand_focus": f"{arch.get('brand_focus') or arch_name} via generalized teacher doctrine",
+        # Reader-facing copy must stay nameless (generalized attribution).
+        "tradition": arch.get("tradition") or f"Hybrid · generalized doctrine × {archetype_id}",
+        "brand_focus": f"{arch.get('brand_focus') or arch_name} via generalized doctrine",
         "primary_topics": list(arch.get("primary_topics") or ["anxiety"])[:6],
         "primary_personas": list(arch.get("primary_personas") or [])[:4],
         "gtm_identity": gtm,
@@ -562,7 +561,7 @@ def generate_hybrid_brand(
         },
         "pricing_posture": rng.choice(_PRICING),
         "mission": (
-            f"Offer {teacher_id.replace('_', ' ')} doctrine in generalized attribution, "
+            f"Offer grounded doctrine in generalized attribution, "
             f"angled through the {archetype_id.replace('_', ' ')} archetype."
         ),
         "generation": {

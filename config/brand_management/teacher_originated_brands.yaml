@@ -5,7 +5,7 @@ description: 'Additive registry for teacher-owned (named) and hybrid (generalize
   (40×14). Q-BRAND-GEN-01 default.
 
   '
-total_brands: 3
+total_brands: 5
 brands:
   to_master_feung_en_us:
     brand_id: to_master_feung_en_us
@@ -297,3 +297,211 @@ brands:
       - quiet
       - people
       - awareness
+  to_master_wu_en_us:
+    brand_id: to_master_wu_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: The Aligned Studio
+    publication_corp: The Aligned Studio
+    source: teacher_originated
+    origin_teacher_id: master_wu
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · master_wu
+    brand_focus: Doctrine-led catalog for master wu
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'When through tightens, remember: The land is not passive. This
+        is the first thing that must be understood before any
+
+        geomantic assessment is meaningful.
+
+
+        Dragon Veins — Long Mai — are living energy currents that m'
+      functional_job: 'A somatic companion path: The geomancer reads the land the
+        way a physician reads a patient — not as a collection
+
+        of individual features, but as a system whose parts are in dynamic relati'
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: somatic_companion
+      authority_type: lived_experience
+      trust_anchor_style: companion
+      teacher_doctrine_lead: 'The land is not passive. This is the first thing that
+        must be understood before any
+
+        geomantic assessment is meaningful.
+
+
+        Dragon Veins — Long Mai — are living energy currents that m'
+      teacher_doctrine_secondary: 'The geomancer reads the land the way a physician
+        reads a patient — not as a collection
+
+        of individual features, but as a system whose parts are in dynamic relati'
+    emotional_vocabulary:
+      core:
+      - through
+      - across
+      - civilizational
+      - dragon
+      bridge_phrases:
+      - my family treats me like i still live at home
+      - catastrophizing about not sleeping
+      - how did i become this cynical about work
+      doctrine_markers:
+      - through
+      - across
+      - civilizational
+      - dragon
+      - thing
+      - aligned
+      doctrine_fingerprint:
+      - 'The land is not passive. This is the first thing that must be understood
+        before any
+
+        geomantic assessment is meaningful.
+
+        '
+      - 'The geomancer reads the land the way a physician reads a patient — not as
+        a collection
+
+        of individual features, but as a '
+      - 'One of the diagnostic signals I track across regions is the vitality distribution
+        of
+
+        young populations. This may seem li'
+      allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+      forbidden_language:
+      - academic_citation
+      - diagnostic_labels
+      - command_language
+    duration_strategy: deep_companion_volumes
+    cover_art_identity:
+      treatment: abstract_ink_wash
+      mark_motif: through
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+    pricing_posture: accessible
+    mission: Carry master wu's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: valid_ids_c
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - through
+      - across
+      - civilizational
+      - dragon
+      - thing
+      - aligned
+      - centuries
+      - assessment
+  to_miki_en_us:
+    brand_id: to_miki_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: Miki's Built Press
+    publication_corp: Miki's Built Press
+    source: teacher_originated
+    origin_teacher_id: miki
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · miki
+    brand_focus: Doctrine-led catalog for miki
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'Let light replace the false urgency: You are not broken. I want
+        you to hold that sentence very gently, the way
+
+        you might hold water in your palms — not gripping, just receiving.
+
+
+        What I have found, in this work that p'
+      functional_job: Practice sequences built on light, receive, kurama
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: elder_stabilizer
+      authority_type: seasoned_practitioner
+      trust_anchor_style: elder
+      teacher_doctrine_lead: 'You are not broken. I want you to hold that sentence
+        very gently, the way
+
+        you might hold water in your palms — not gripping, just receiving.
+
+
+        What I have found, in this work that p'
+      teacher_doctrine_secondary: 'I did not choose Kurama-yama. Kurama-yama chose
+        the lineage that I
+
+        received, long before I was born. When I first climbed that mountain as a
+
+        young woman, I did '
+    emotional_vocabulary:
+      core:
+      - light
+      - receive
+      - kurama
+      - already
+      bridge_phrases:
+      - this anxious feeling won't go away
+      - tension is what my anxiety looks like
+      - my mind won't shut up
+      doctrine_markers:
+      - light
+      - receive
+      - kurama
+      - already
+      - broken
+      - deepest
+      doctrine_fingerprint:
+      - 'You are not broken. I want you to hold that sentence very gently, the way
+
+        you might hold water in your palms — not gripp'
+      - 'I did not choose Kurama-yama. Kurama-yama chose the lineage that I
+
+        received, long before I was born. When I first climbe'
+      - 'Many traditions teach that practice requires effort — a sustained exertion
+
+        of will, a climbing. I understand why. It fee'
+      allowed_language:
+      - calm_certainty
+      - perspective_framing
+      forbidden_language:
+      - slang
+      - self_doubt_language
+    duration_strategy: short_form_daily_practice
+    cover_art_identity:
+      treatment: abstract_ink_wash
+      mark_motif: light
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+    pricing_posture: mid_tier
+    mission: Carry miki's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: skip_ledger_c
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - light
+      - receive
+      - kurama
+      - already
+      - broken
+      - deepest
+      - built
+      - forgotten

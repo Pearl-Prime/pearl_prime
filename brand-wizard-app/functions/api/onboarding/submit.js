@@ -24,6 +24,7 @@ const DEFAULT_BUCKET = "phoenix-omega-artifacts";
 const CLAIM_PREFIX = "onboarding/claimed/";
 const SUBMISSION_PREFIX = "onboarding/submissions/";
 const ASSIGNMENT_PREFIX = "onboarding/assignments/";
+const HYBRID_PREFIX = "onboarding/hybrids/";
 
 function r2ObjectUrl(env, key) {
   const bucket = (env.R2_BUCKET || DEFAULT_BUCKET).trim();
@@ -173,7 +174,45 @@ export async function onRequestPost(context) {
           const prior = await existing.json();
           if (prior && prior.brand_id) existingBrand = prior.brand_id;
         } catch (_) {}
-        return json({ error: "teacher_claimed", brand_id: existingBrand }, 409);
+        // Second claimant gets a generalized-hybrid offer (doctrine without naming).
+        let available = [];
+        try {
+          const origin = new URL(request.url).origin;
+          const archResp = await fetch(`${origin}/brand_archetype_ids.json`, { cf: { cacheTtl: 300 } });
+          if (archResp.ok) {
+            const body = await archResp.json();
+            if (Array.isArray(body?.archetypes)) available = body.archetypes.slice();
+          }
+        } catch (_) {}
+        try {
+          const ledgerKey = `${HYBRID_PREFIX}${safeKeyPart(lane)}__${safeKeyPart(tid)}.json`;
+          const ledger = await fetch(await aws.sign(r2ObjectUrl(env, ledgerKey)));
+          if (ledger.ok) {
+            const prior = await ledger.json();
+            const used = new Set(
+              (Array.isArray(prior?.hybrids) ? prior.hybrids : [])
+                .map((h) => h?.hybrid_of_archetype)
+                .filter(Boolean)
+            );
+            available = available.filter((a) => !used.has(a));
+          }
+        } catch (_) {}
+        return json(
+          {
+            error: "teacher_claimed",
+            brand_id: existingBrand,
+            teacher_id: tid,
+            lane,
+            offer: {
+              teacher_id: tid,
+              available_archetypes: available.slice(0, 40),
+              attribution_mode: "generalized",
+            },
+            message:
+              "Teacher already claimed in this lane. Accept a generalized hybrid brand (doctrine, no teacher name) via /api/onboarding/accept-hybrid.",
+          },
+          409
+        );
       }
       if (existing.status === 404 || existing.status === 403) {
         // Not claimed yet (404 = missing; 403 = some R2 configs return this for absent keys).

@@ -38,7 +38,11 @@ for (const loc of REQUIRED) {
     continue;
   }
   const flat = flatten(data);
-  const missing = enKeys.filter((k) => flat[k] == null || flat[k] === "");
+  // success.body_prefix may be "" in CJK locales (name inserted mid-sentence).
+  const ALLOW_EMPTY = new Set(["success.body_prefix"]);
+  const missing = enKeys.filter(
+    (k) => !(k in flat) || (flat[k] === "" && !ALLOW_EMPTY.has(k)) || flat[k] == null
+  );
   if (missing.length) {
     console.error(`FAIL ${loc}: ${missing.length} blank/missing keys e.g. ${missing.slice(0, 5).join(", ")}`);
     failed += 1;

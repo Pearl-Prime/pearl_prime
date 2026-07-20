@@ -1,32 +1,23 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
 import { appendBrandAssignmentToYAML, brandAssignmentPayload, matchBrand } from "./brandMatch.js";
+import { classifyOnboardingSubmitFailure, parseHybridOfferMessage } from "./hybridOffer.js";
+import { resolveSeededMarket } from "./markets.js";
+import { HybridOfferPanel } from "./onboarding/HybridOfferPanel.jsx";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
 import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
 
-/** zh-TW wizard default market; ?market= / phoenix_onboarding_market override onboarding.html handoff. */
+/** zh-TW wizard default market; ?market= / phoenix_onboarding_market / ?lang= override. */
 function resolveOnboardingMarket() {
-  const norm = (s) => String(s || "").toLowerCase().replace(/[\s-]+/g, "_");
-  try {
-    const url = new URLSearchParams(window.location.search).get("market");
-    if (url) {
-      const k = norm(url);
-      if (k === "tw" || k === "taiwan" || k === "zh_tw") return "taiwan";
-      return k;
-    }
-  } catch (_) {}
-  try {
-    const stored = localStorage.getItem("phoenix_onboarding_market");
-    if (stored) {
-      const k = norm(stored);
-      if (k === "tw" || k === "taiwan" || k === "zh_tw") return "taiwan";
-      return k;
-    }
-  } catch (_) {}
+  const { market } = resolveSeededMarket();
+  if (market === "tw" || market === "taiwan" || market === "zh_tw") return "taiwan";
+  if (market === "hk" || market === "hong_kong" || market === "zh_hk") return "hong_kong";
+  if (market && market !== "us") return market;
   return "taiwan";
 }
+
 
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
@@ -2891,11 +2882,22 @@ function Step11Launch({ state, update, i18n = {} }) {
           }),
         });
         if (!response.ok) {
-          setSubmissionError("Live assignment did not persist. Keep this screen open and contact ops before treating this brand as active.");
+          let detail = {};
+          try { detail = await response.json(); } catch (_) {}
+          const classified = classifyOnboardingSubmitFailure(response.status, detail, {
+            onboardingMarket: state.onboardingMarket || "taiwan",
+          });
+          if (classified.kind === "brand_claimed" || classified.kind === "teacher_claimed_offer") {
+            setMatched(null);
+            try { localStorage.removeItem("phoenix_pending_brand"); } catch (_) {}
+          }
+          setSubmissionError(classified.message);
         }
       } catch (_) {
         setSubmissionError("Live assignment did not persist. Keep this screen open and contact ops before treating this brand as active.");
       }
+    } else {
+      setSubmissionError("No available unassigned brand matched these choices. Keep this screen open and contact ops for a manual assignment.");
     }
   };
 
@@ -2939,14 +2941,22 @@ function Step11Launch({ state, update, i18n = {} }) {
               {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
             </div>
             <button
-              onClick={() => { window.location.href = "/brand_admin_weekly_os?brand=" + encodeURIComponent(matched.brand_id); }}
+              onClick={() => { window.location.href = "/brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
             >
               {t("ui", "Open Brand Director")} <ArrowRight size={16} />
             </button>
           </div>
         )}
-        {submissionError && (
+        <HybridOfferPanel
+          submissionError={submissionError}
+          onboardingMarket={state.onboardingMarket}
+          contact={state.contact}
+          wizardYaml={yamlOutput}
+          onAccepted={(match) => { setMatched(match); setSubmissionError(""); }}
+          onError={setSubmissionError}
+        />
+        {submissionError && !parseHybridOfferMessage(submissionError) && (
           <div className="mb-6 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm font-semibold text-amber-900">
             {submissionError}
           </div>
