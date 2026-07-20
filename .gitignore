@@ -18,6 +18,11 @@ docs/all_credentials.txt
 docs/metricool_api.txt
 docs/*_api.txt
 **/metricool_api.txt
+docs/storyblocks_keys.env
+docs/storyblocks_api_key.txt
+docs/stock_image_provider_keys.env
+# Storyblocks HD licensed downloads (local bank; never commit binaries)
+artifacts/storyblocks_licensed/
 
 # Video platform credential setup (never commit)
 .credentials.env
@@ -34,6 +39,9 @@ artifacts/onboarding/setup_helper_brand_links.tsv
 docs/qwen_api_base_url.txt
 docs/qwen_api_key.txt
 docs/qwen_model.txt
+# Model Studio workspace API key exports (never commit)
+docs/*apiKey*.csv
+docs/Default Workspace-apiKey-.csv
 # ElevenLabs / local key files (never commit)
 docs/11.txt
 11.txt

@@ -113,6 +113,13 @@ None needed — new content, not a restoration.
 - One stray git index.lock encountered mid-session (likely a concurrent process on the
   shared tree) — resolved by waiting, not by force-removing the lock.
 
+## Follow-up pass (same day, Cursor dual-burn session)
+
+- Re-verified all 14 locales: key parity 131/131, `_meta` stripped, leftover-English audit clean after fixing `ja-JP`/`ko-KR` `success.body_prefix` (must be `""` for natural CJK word order with name insertion).
+- **Storyblocks social bank fill (EXECUTED-REAL licensed HD):** work_unit `social_media_bank_storyblocks_20260720` — 3 videos + 3 images under `artifacts/storyblocks_licensed/social_media_bank_storyblocks_20260720/` (gitignored binaries). Receipt: `artifacts/storyblocks/social_bank_fill_20260720.json`. Note: image `351250623` is a person-in-frame still — treat as look_gate PENDING / face-risk for faceless social families.
+- Storyblocks client needs Keychain keys exported into the shell (`STORYBLOCKS_PUBLIC_KEY` / `STORYBLOCKS_PRIVATE_KEY`); full `load_integration_env_from_keychain.py` can hang — prefer `security find-generic-password` for this lane.
+- GitHub still **403 suspended** at follow-up time — push/PR remain BLOCKED.
+
 ## Next exact command if not fully landed
 
 ```
