@@ -11,7 +11,8 @@
 storyblocks-taxonomy-recommended=ba3497fccfc97e24fa73caa182922fc9cf97d865
 ```
 
-*(Replaced with full SHA at land time in same file / follow-up stamp commit.)*
+Branch tip (includes SIGNAL stamp): `0f37ac11af53503c2c4b6fa562d21be5162a16fd`  
+pearlstar_offline: `0f37ac11af53503c2c4b6fa562d21be5162a16fd` (updated by this commit if tip moves)
 
 ## RECOMMENDED_TAXONOMY summary (Lane 02 can start)
 
@@ -41,12 +42,22 @@ Map atom fields `{topic, persona, hook_family, tone}` + `beat_role` → Storyblo
 |------|-------|
 | BRANCH | `agent/storyblocks-semantic-research-20260720` |
 | Base | `origin/main` `9e9b9e606791590337cd7d0f2fb425def2e6f760` |
+| Research commit | `ba3497fccfc97e24fa73caa182922fc9cf97d865` |
 | Land remote | `pearlstar_offline` (not origin) |
 | PR | Deferred until GitHub account unsuspended |
 
 ## Locked decisions (do not re-ask)
 
 OPD-SB-PP-01b / 02b / 03b — surface, identity, legal locked.
+
+## CLEANUP LEDGER
+
+- worktree: none retained (`/tmp/sb_lane01_wt` removed; used GIT_INDEX_FILE plumbing instead)
+- local branch: `agent/storyblocks-semantic-research-20260720` (keep until PR)
+- remote branch: `pearlstar_offline/agent/storyblocks-semantic-research-20260720`
+- scratch files: removed `/tmp/sb_lane01.index`, `/tmp/sb_lane01.index2`
+- background jobs: none
+- held artifacts: research + handoff on branch tip only
 
 ## NEXT_ACTION
 
