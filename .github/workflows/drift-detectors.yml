@@ -58,6 +58,15 @@ jobs:
       - name: Catalog ship G-WRAP + G-DEF4 detectors (BLOCK integrity)
         run: PYTHONPATH=. python3 scripts/ci/check_catalog_ship_wrap_defect4.py
 
+      - name: Templated cluster G-F1H detector (BLOCK integrity)
+        run: PYTHONPATH=. python3 scripts/ci/check_f1h_templated_cluster_hard.py
+
+      - name: Ch1 Orient body/scene anchor G-ORIENT (WARN integrity)
+        run: PYTHONPATH=. python3 scripts/ci/check_orient_ch1_scene_anchor.py
+
+      - name: Accent-fill preflight G-ACCENT (report-only; weekly job fails closed)
+        run: PYTHONPATH=. python3 scripts/ci/check_accent_supply_preflight.py
+
       - name: Duplicate modules (warn)
         run: |
           BASE="${{ steps.diff_base.outputs.base }}"
