@@ -16,6 +16,8 @@ call on every pool, hanging ~120s per call when Pearl Star is unreachable.
 """
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from phoenix_v4.musician.lyric_mood_engine import (
@@ -28,9 +30,11 @@ from phoenix_v4.musician.lyric_mood_engine import (
     EngineContext,
     Tier,
     TierRouter,
+    TierRoutedEngine,
     build_mood_instruction_prompt,
     build_prompt,
     generate_kit,
+    make_operator_authored_pearl_writer_fn,
 )
 
 # Mirrors the on-main test_artist_alpha derived context (profile/themes/voice).
@@ -301,3 +305,162 @@ def test_atom_helpers():
     assert atom.meets_spec_739 is False
     atom.variants.append({"body": "c"})
     assert atom.meets_spec_739 is True
+
+
+# ---------------------------------------------------------------------------
+# Real Tier-1 callable (music_mode_real_lyric_mood_engine_20260721)
+#
+# "Operator-authored" fixtures below: deterministic, offline, authored by the
+# Claude subagent running this lane — not a live LLM/network call. Two distinct
+# synthetic musicians, each grounded in their own themes/genre/voice, prove the
+# concrete answer to "do we get unique content per music brand" (sub-task 3 of the
+# lane prompt) without any paid API or CI network dependency.
+# ---------------------------------------------------------------------------
+# NOTE: kept to single physical lines (no embedded "\n") — _parse_llm_variants
+# (this module) splits raw Tier-1 text one-line-per-variant, so a real-engine
+# authored body is one line even though the deterministic-fallback templates
+# above (which bypass parsing) use poetic multi-line bodies. Not re-architected
+# here; this fixture matches the parser as it exists.
+WREN_LYRIC_OPENING_BODIES = [
+    "The kettle clicks off before {{musician_name}} does — {{theme}} moves at "
+    "kitchen speed today, not the speed of the news.",
+    "{{musician_name}} keeps the porch light on for a {{persona_anchor}} who isn't "
+    "coming back tonight; that's the whole {{genre}} song.",
+    "Some days {{topic_anchor}} looks like folding the same towel twice — "
+    "{{musician_name}} is learning to let {{theme}} count.",
+]
+
+DAX_LYRIC_OPENING_BODIES = [
+    "You said yes to the meeting before {{persona_anchor}} finished saying no — "
+    "{{musician_name}} builds {{genre}} space around the pause you skipped.",
+    "{{theme}} sounds like static at first; give it four bars and {{musician_name}} "
+    "turns it into room to breathe.",
+    "Somewhere between the inbox and the exit sign, {{musician_name}} hands "
+    "{{persona_anchor}} the {{topic_anchor}} tempo back.",
+]
+
+
+def test_make_operator_authored_pearl_writer_fn_returns_authored_bodies():
+    fn = make_operator_authored_pearl_writer_fn({"LYRIC_OPENING": WREN_LYRIC_OPENING_BODIES})
+    prompt = build_prompt(_ctx(musician_id="wren_calloway"), "LYRIC_OPENING", 3)
+    out = fn(prompt, "system text")
+    assert out == "\n".join(WREN_LYRIC_OPENING_BODIES)
+
+
+def test_make_operator_authored_pearl_writer_fn_raises_for_unknown_pool():
+    fn = make_operator_authored_pearl_writer_fn({"LYRIC_OPENING": WREN_LYRIC_OPENING_BODIES})
+    prompt = build_prompt(_ctx(), "LYRIC_CLOSING", 3)
+    with pytest.raises(KeyError):
+        fn(prompt, None)
+
+
+def test_operator_authored_fn_wired_through_generate_kit_uses_real_content():
+    fn = make_operator_authored_pearl_writer_fn({"LYRIC_OPENING": WREN_LYRIC_OPENING_BODIES})
+    router = TierRouter(pearl_writer_fn=fn, allow_tier2_router=False)
+    kit = generate_kit(
+        _ctx(musician_id="wren_calloway"), fork="with-lyrics", router=router,
+        operator_present=True,
+    )
+    atom = kit.atoms["LYRIC_OPENING"]
+    assert atom.tier_used == Tier.T1_PEARL_WRITER.value
+    bodies = [v["body"] for v in atom.variants]
+    assert bodies == WREN_LYRIC_OPENING_BODIES
+    # Pools with no authored content for this musician degrade honestly to the
+    # deterministic template — never crash, never fabricate.
+    assert kit.atoms["LYRIC_CLOSING"].tier_used == Tier.TEMPLATE_FALLBACK.value
+
+
+def test_tier_routed_engine_generates_from_real_generation_request():
+    from phoenix_v4.musician.song_kit_generator import GenerationRequest
+
+    fn = make_operator_authored_pearl_writer_fn({"LYRIC_OPENING": DAX_LYRIC_OPENING_BODIES})
+    engine = TierRoutedEngine(
+        router=TierRouter(pearl_writer_fn=fn, allow_tier2_router=False),
+        operator_present=True,
+    )
+    seen = []
+    for i in range(3):
+        request = GenerationRequest(
+            musician_id="dax_okafor",
+            slot_pool="LYRIC_OPENING",
+            position="opening",
+            family_id="recovery_and_repair",
+            kind="lyric",
+            variant_index=i,
+            profile={"primary_genre": "electronic ambient"},
+            themes={},
+            voice_profile={"voice_person": "second_person", "register": "wry_warm"},
+            family={"lyric_register_hint": "Wry, warm, unhurried."},
+            topic_anchor="burnout",
+            theme="boundaries",
+        )
+        seen.append(engine.generate(request))
+    assert seen == DAX_LYRIC_OPENING_BODIES
+    # Second musician / same pool re-drafts independently (no cross-contamination).
+    other_request = GenerationRequest(
+        musician_id="wren_calloway", slot_pool="LYRIC_OPENING", position="opening",
+        family_id="recovery_and_repair", kind="lyric", variant_index=0,
+        profile={}, themes={}, voice_profile={}, family={}, topic_anchor="", theme="",
+    )
+    fn2 = make_operator_authored_pearl_writer_fn({"LYRIC_OPENING": WREN_LYRIC_OPENING_BODIES})
+    engine2 = TierRoutedEngine(router=TierRouter(pearl_writer_fn=fn2, allow_tier2_router=False))
+    assert engine2.generate(other_request) == WREN_LYRIC_OPENING_BODIES[0]
+
+
+def test_tier_routed_engine_falls_back_to_template_without_a_callable():
+    from phoenix_v4.musician.song_kit_generator import GenerationRequest
+
+    engine = TierRoutedEngine(router=TierRouter(allow_tier2_router=False))
+    request = GenerationRequest(
+        musician_id="m", slot_pool="LYRIC_OPENING", position="opening",
+        family_id="x", kind="lyric", variant_index=0,
+        profile={}, themes={}, voice_profile={}, family={}, topic_anchor="", theme="",
+    )
+    body = engine.generate(request)
+    assert isinstance(body, str) and body.strip()
+
+
+def _content_tokens(body: str) -> list[str]:
+    import re as _re
+
+    stripped = _re.sub(r"\{\{.*?\}\}", " ", body)
+    stopwords = {
+        "the", "and", "a", "an", "of", "to", "in", "on", "as", "is", "it", "for",
+        "with", "without", "after", "before", "into", "out", "that", "this", "not",
+        "be", "are", "or", "but", "you", "your", "not", "just", "like", "one",
+        "isn", "doesn", "yet", "back", "still", "let", "than",
+    }
+    toks = _re.findall(r"[a-z']+", stripped.lower())
+    return [t for t in toks if t not in stopwords and len(t) > 2]
+
+
+def _max_shared_ngram(a: str, b: str, n: int = 8) -> int:
+    ta, tb = _content_tokens(a), _content_tokens(b)
+    grams_a = {tuple(ta[i : i + n]) for i in range(max(0, len(ta) - n + 1))}
+    grams_b = {tuple(tb[i : i + n]) for i in range(max(0, len(tb) - n + 1))}
+    return len(grams_a & grams_b)
+
+
+def test_uniqueness_two_musicians_no_shared_8gram_and_distinct_from_ahjan():
+    """The concrete, testable answer to 'do we get unique content per music brand':
+    two synthetic musicians with different themes/voice/genre produce LYRIC_OPENING
+    bodies that share no 8-gram content span with each other, nor with the existing
+    hand-authored ``SOURCE_OF_TRUTH/musician_banks/ahjan`` reference atoms."""
+    import yaml as _yaml
+
+    repo_root = Path(__file__).resolve().parents[1]
+    ahjan_dir = repo_root / "SOURCE_OF_TRUTH/musician_banks/ahjan/approved_atoms/LYRIC_OPENING"
+    ahjan_bodies = []
+    for f in sorted(ahjan_dir.glob("*.yaml")):
+        data = _yaml.safe_load(f.read_text(encoding="utf-8"))
+        ahjan_bodies.extend(v["body"] for v in data["variants"])
+    assert ahjan_bodies, "ahjan reference bank must be present for this comparison"
+
+    for a in WREN_LYRIC_OPENING_BODIES:
+        for b in DAX_LYRIC_OPENING_BODIES:
+            assert _max_shared_ngram(a, b) == 0, (a, b)
+        for ref in ahjan_bodies:
+            assert _max_shared_ngram(a, ref) == 0, (a, ref)
+    for d in DAX_LYRIC_OPENING_BODIES:
+        for ref in ahjan_bodies:
+            assert _max_shared_ngram(d, ref) == 0, (d, ref)
