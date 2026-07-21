@@ -22,6 +22,11 @@ def test_build_feed_has_required_fields():
     assert e1["archetype_id"]
     assert e1["funnel_variant"] in ("tight", "welcome_depth")
     assert "cta_url" in e1
+    assert e1["access"] == "free"
+    assert e1["ladder_tier"] == "lead_magnet"
+    assert e1["asset_family"] == "practice_tool"
+    assert e1["manual_review_required"] is True
+    assert e1["no_live_publish"] is True
 
 
 def test_compassion_fatigue_welcome_depth_and_bonus():
@@ -54,6 +59,9 @@ def test_e4_paid_when_book_present():
     e4 = [i for i in feed["items"] if i["email_slot"] == "e4"]
     assert len(e4) == 1
     assert e4[0]["pricing"] == "paid"
+    assert e4[0]["access"] == "paid"
+    assert e4[0]["ladder_tier"] == "paid"
+    assert e4[0]["release_authorization_status"] == "dry_run_only_operator_required"
     assert "pearlprime.shop" in e4[0]["cta_url"]
     assert "anxiety_corporate_managers_ahjan" in e4[0]["cta_url"]
     assert feed.get("persona_id") == "corporate_managers"

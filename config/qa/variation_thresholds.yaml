@@ -1,0 +1,28 @@
+schema_version: "1.0.0"
+status: warn_only
+source_spec: docs/specs/session_mining_batch_20260718/ATOM_SURFACE_TAXONOMY_AND_VARIATION_MANIFEST_V1_SPEC.md
+default_min_variants_per_cell: 3
+min_body_words: 3
+warn_only: true
+min_variants_by_surface:
+  HOOK: 5
+  SCENE: 5
+  STORY: 5
+  EXERCISE: 5
+  REFLECTION: 5
+  INTEGRATION: 5
+  TAKEAWAY: 5
+  PIVOT: 5
+  COMPRESSION: 5
+  TEACHER_DOCTRINE: 3
+  QUOTE: 3
+story_required_signals:
+  - event
+  - stake
+  - turn
+  - cost
+  - residue
+exercise_required_signals:
+  - body_step
+  - aha
+  - integration

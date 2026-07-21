@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-18T01:43:35.223510Z",
+  "source_spec": "docs/specs/session_mining_batch_20260718/PROSE_INTEGRITY_VALIDATOR_SET_V1_SPEC.md",
+  "new_parallel_module_created": false,
+  "hard_ship_gate_created": false,
+  "rows": [
+    {
+      "id": "PI-1",
+      "name": "no-story-adjacency",
+      "decision": "merged_gap_warn",
+      "existing_authority": [
+        "phoenix_v4/quality/register_gate.py",
+        "story/literary repair acceptance artifacts",
+        "scripts/inventory/surface_inventory.py story signal warnings"
+      ],
+      "patch_applied": "surface manifest warns on story event/stake/turn/cost/residue gaps",
+      "hard_gate": false
+    },
+    {
+      "id": "PI-2",
+      "name": "quote-bridge",
+      "decision": "mapped_to_existing_plus_warn",
+      "existing_authority": [
+        "source/evidence truth gates",
+        "config/atoms/surface_taxonomy.yaml source_provenance_required",
+        "scripts/inventory/surface_inventory.py SOURCE_PROVENANCE_MISSING"
+      ],
+      "patch_applied": "warn-only source provenance measurement for QUOTE surfaces",
+      "hard_gate": false
+    },
+    {
+      "id": "PI-3",
+      "name": "composite-teaching-band",
+      "decision": "mapped_to_atom_depth",
+      "existing_authority": [
+        "reader-layer standards",
+        "deep atom taxonomy",
+        "register F13 dwell/integration starvation"
+      ],
+      "patch_applied": "surface/depth manifest records reader entry/exit and depth contracts",
+      "hard_gate": false
+    },
+    {
+      "id": "PI-4",
+      "name": "tool-vs-exercise",
+      "decision": "mapped_to_exercise_policy",
+      "existing_authority": [
+        "deep five-layer exercise spec",
+        "config/atoms/surface_taxonomy.yaml exercise_policy",
+        "scripts/inventory/surface_inventory.py EXERCISE_* warnings"
+      ],
+      "patch_applied": "exercise/tool/reflection policy is measured per surface",
+      "hard_gate": false
+    },
+    {
+      "id": "PI-5",
+      "name": "fallback-sweep",
+      "decision": "mapped_to_selection_provenance",
+      "existing_authority": [
+        "phoenix_v4/planning/enrichment_select.py provenance/waterfall",
+        "tuple viability story fallback fix",
+        "atom coverage and surface manifest"
+      ],
+      "patch_applied": "report-only; no new monolithic validator",
+      "hard_gate": false
+    }
+  ],
+  "stats": {
+    "gaps_mapped": 5,
+    "patches_applied": 5,
+    "hard_gates": 0
+  }
+}

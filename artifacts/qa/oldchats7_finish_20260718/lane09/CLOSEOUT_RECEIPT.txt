@@ -1,0 +1,12 @@
+CLOSEOUT_RECEIPT
+AGENT=Pearl_PM_lane09
+PATH=B-offline-preserve
+DECISION_RECORD=artifacts/operator_read_packets/session_mining_specs_operator_review_20260718/DECISION_RECORD.md
+DECISION=APPROVE (Q-OC7-01)
+REF_VERIFIED=refs/heads/offline/session-mining-specs-do-all-implementation-20260718@15849b09c7d6d53d0c327bceeda5b216d855bd98
+LANE08_RECONCILIATION=merged (at-ref MERGED; chat343 blocked claim SUPERSEDED)
+REPLAY_RESULT=artifacts/operator_read_packets/session_mining_specs_operator_review_20260718/REPLAY_READY.md
+CLEANUP_COMPLETE=yes (343-era worktree HOLD — value-containing @15849b09)
+HANDOFF=artifacts/coordination/handoffs/session_mining_replay_2026-07-18.md
+SIGNAL=session-mining-preserved=refs/heads/offline/session-mining-specs-do-all-implementation-20260718@15849b09c7d6d53d0c327bceeda5b216d855bd98
+NEXT_ACTION=run REPLAY_READY.md on GitHub restoration

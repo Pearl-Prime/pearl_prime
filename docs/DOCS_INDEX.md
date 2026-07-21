@@ -2,6 +2,8 @@
 
 **START HERE:** [docs/PROGRAM_STATE.md](./PROGRAM_STATE.md) — current verified state (SSOT).
 
+**Required agent bootstrap:** [docs/agent_brief.txt](./agent_brief.txt); [docs/PROGRAM_STATE.md](./PROGRAM_STATE.md); [docs/SESSION_UNITY_PROTOCOL.md](./SESSION_UNITY_PROTOCOL.md); [docs/PEARL_ARCHITECT_STATE.md](./PEARL_ARCHITECT_STATE.md); [artifacts/coordination/ACTIVE_PROJECTS.tsv](../artifacts/coordination/ACTIVE_PROJECTS.tsv); [artifacts/coordination/ACTIVE_WORKSTREAMS.tsv](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv); [artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv](../artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv).
+
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
 **Last updated:** 2026-06-17
