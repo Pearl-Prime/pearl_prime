@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "lean_best_book_golden",
+  "scope": "lean_best_book_scale_bar",
+  "status": "not_ratified",
+  "ratified_at": null,
+  "content_sha256": null,
+  "notes": "Dormant stub — script scripts/ci/check_lean_best_book_parity.py was landed by PR #29 (perfect-books Wave-1) without this metadata file, causing the Drift-detectors CI step to hard-crash (metadata missing) instead of reporting the intended not-ratified dormant state. This file restores that dormant state per the script's own check_golden_integrity() contract. Operator has not yet read/ratified a lean-best-book golden snapshot.",
+  "restoration_protocol": {
+    "summary": "Lean best-book golden activates only after operator reads and ratifies a candidate. Until then this metadata stays status=not_ratified and the CI gate no-ops.",
+    "ratify_snapshot_change": "PR body must include GOLDEN-UPDATE-RATIFIED: <OPD ref>"
+  }
+}
