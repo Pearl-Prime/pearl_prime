@@ -1,0 +1,20 @@
+{
+  "cutoff": "2026-06-22",
+  "total_sessions": 569,
+  "months": {
+    "2026-02": 31,
+    "2026-03": 216,
+    "2026-04": 152,
+    "2026-05": 167,
+    "2026-06": 3
+  },
+  "disposition_counts": {
+    "DEEP": 135,
+    "ALREADY_MINED": 8,
+    "SKIM": 332,
+    "SKIP": 94
+  },
+  "deep_demoted_to_skim": 283,
+  "catalog": "artifacts/qa/archived_session_audit_gt30d_20260722/SESSION_CATALOG.tsv",
+  "deep_candidates": "artifacts/qa/archived_session_audit_gt30d_20260722/DEEP_CANDIDATES.json"
+}

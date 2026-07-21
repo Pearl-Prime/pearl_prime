@@ -1,0 +1,40 @@
+dedup_id	source_ref	topic	disposition	note
+session_mining_SPEC-1	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-1	REFRESH	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-2	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-2	MERGE_WITH_EXISTING	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-3	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-3	REFRESH	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-4	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-4	REFRESH	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-5	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-5	KEEP	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-6	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-6	REFRESH	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-7	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-7	MERGE_WITH_EXISTING	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-8	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-8	REFRESH	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+session_mining_SPEC-9	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	SPEC-9	REFRESH	from SPEC_INDEX classification; do not re-open retired/merged as new systems
+pack:20260715_old_chat_closure_audit	docs/agent_prompt_packs/20260715_old_chat_closure_audit	old chats 315-339 closure audit	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260715_old_chat_unblock_wave	docs/agent_prompt_packs/20260715_old_chat_unblock_wave	old chat unblock wave	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260718_old_chats_341_347_finish_work	docs/agent_prompt_packs/20260718_old_chats_341_347_finish_work	old chats 341-347 finish	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260718_old_chats_348_350_finish_work	docs/agent_prompt_packs/20260718_old_chats_348_350_finish_work	old chats 348-350 finish	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260718_session_mining_specs_do_all_execution	docs/agent_prompt_packs/20260718_session_mining_specs_do_all_execution	session mining do-all	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260718_session_mining_specs_relevance_refresh	docs/agent_prompt_packs/20260718_session_mining_specs_relevance_refresh	session mining relevance refresh	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260718_session_mining_specs_operator_review	docs/agent_prompt_packs/20260718_session_mining_specs_operator_review	session mining operator review	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260721_archived_session_followup	docs/agent_prompt_packs/20260721_archived_session_followup	last-30d archived session followup	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+pack:20260721_oldchat_375_406_finish	docs/agent_prompt_packs/20260721_oldchat_375_406_finish	oldchat 375-406 finish	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+spec:SPEC_INDEX.md	docs/specs/session_mining_batch_20260718/SPEC_INDEX.md	session mining 9 specs + RN briefs	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+artifact:session_mining_specs_relevance_refresh_20260718	artifacts/qa/session_mining_specs_relevance_refresh_20260718	relevance matrices	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+artifact:oldchats7_finish_20260718	artifacts/qa/oldchats7_finish_20260718	oldchats7 finish queue	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+export:Untitled 386.txt	old_chat_specs/Untitled 386.txt	last-30d audit narrative	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+export:CHAT_EXPORT_MAIN_ALIGNMENT.md	old_chat_specs/CHAT_EXPORT_MAIN_ALIGNMENT.md	early export PR alignment	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+export:RESOLVED_20260718_BATCH_341_347.md	old_chat_specs/RESOLVED_20260718_BATCH_341_347.md	resolved batch 341-347	PRIOR_COVERAGE	Already mined or dispatched; check before promoting gt30d ideas
+session:d0844771	d0844771-e5e7-4495-9fc1-4a496cc873fe	@docs/ @specs/ @/Users/ahjan/Downloads/cursor_document_references_for_analysis.md @/Users/ahjan/Downloads/cursor_author_	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:f34d77af	f34d77af-a7e9-43c5-9b16-8a9b61909a53	@/Users/ahjan/Downloads/cursor_upgrade_pip_for_repository.md @/Users/ahjan/Downloads/cursor_content_availability_for_act	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:f98f5f0c	f98f5f0c-74da-4775-afdd-db2fff868144	@docs/SYSTEMS_V4.md @talp/analyze_intake/PHOENIX_V4_5_DEV_SPEC.docx @old_chat_specs/author influence in audiobooks.rtf @	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:59782818	59782818-eb7c-49ba-b724-c5d4c6eff428	@docs/ @specs/ @old_chat_specs/chat_claude_content.rtf confirm that there is content for all active personas for book wr	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:5e31e415	5e31e415-ee47-46e1-864b-c3d1dff856c6	desc how authors relate to brands and books and pre intro author chapter. look in @docs/DOCS_INDEX.md @/Users/ahjan/.cur	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:8aefd52f	8aefd52f-ecaa-4fa9-a952-bb7f2a958387	lool in @old_chat_specs/ analyze deeply for missing systems stuff plan that misses nothing. @docs/DOCS_INDEX.md build on	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:98950de8	98950de8-0623-4b5a-b36c-c50b9abf5660	analyze @old_chats/ @old_chat_specs/ all files outside of there wiht "chat_" in name look at @docs/V4_FEATURES_SCALE_AND	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+session:b05b974e	b05b974e-d014-446d-983e-fac3078e8c58	document all from this : @old_chat_specs/chat_codex_3a.txt update @docs/DOCS_INDEX.md	ALREADY_MINED	catalog heuristic matched old-chat/session-mining language
+idea:I008	f067a5d7-eaf3-47bd-aaed-a13e5f68d4b4	DOCS_INDEX completeness / V4 wiring gate	DUPLICATE_OF_PRIOR_MINING	session_mining RN-9
+idea:I011	cf278b1b-d51a-4e52-8a6f-342747984e9d	AI-assisted therapeutic book assembly beyond metadata	DUPLICATE_OF_PRIOR_MINING	SPEC-4 merge
+idea:I016	eef58738-b67e-4f9b-8728-d4ede03a9024	Marketing system wiring for monetization completeness	DUPLICATE_OF_PRIOR_MINING	SPEC-6
+idea:I024	2fe91134-052f-4c0e-9685-2396753e59fe	Iterative catalog quality refinement loop	DUPLICATE_OF_PRIOR_MINING	SPEC-4 merge
+idea:I039	export_303	Metricool X/Twitter channel decision ($5 add-on)	OPERATOR_GATE	OPERATOR_GATE
+idea:I040	export_351	Catalog PLAN-completeness audit 14×39	DUPLICATE_OF_PRIOR_MINING	Last-30d PLAN green offline
+idea:I044	export_361	Cloud/Codespaces substrate fanout for manga	OPERATOR_GATE	OPERATOR_GATE

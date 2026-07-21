@@ -1,0 +1,5 @@
+component	status	evidence	acceptance_layer
+reading_graph	CONFIG-EXISTS	scripts/manga;phoenix_v4/manga	not EXECUTED-REAL
+spread_layout	CONFIG-EXISTS	scripts/manga;phoenix_v4/manga	not EXECUTED-REAL
+jlreq_sfx_lettering	CONFIG-EXISTS	phoenix_v4/manga/lettering_from_script.py;scripts/manga	not EXECUTED-REAL
+bar_checklist	CODE-WIRED	artifacts/qa/archived_session_audit_gt30d_20260722/manga_passb_bar_checklist.tsv	CODE-WIRED
