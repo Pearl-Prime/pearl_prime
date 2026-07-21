@@ -41,10 +41,12 @@ duplicating (sibling-session collision protocol).
 
 ## Scope
 
+<!-- CI-ALLOWLIST: legacy-registry-ok — prose reference to the canonical CLI's scope, not an executed production build invocation -->
 Files under: `scripts/run_pipeline.py, scripts/run_manga_pipeline.py, phoenix_v4/ops/, scripts/pilot/`
 
 ## Lane-specific caution
 
+<!-- CI-ALLOWLIST: legacy-registry-ok — prose reference explaining the chord doctrine, not an executed production build invocation -->
 scripts/run_pipeline.py is the CANONICAL bestseller CLI (CANONICAL_ARTIFACTS_REGISTRY.tsv row pearl_prime_bestseller_cli) governed by the four-piece-chord doctrine in CLAUDE.md — it is a KEEP by construction, not a candidate for deletion or forking. Your job here is to find OTHER scripts in this lane's scope that look like a second/parallel entrypoint to the same job (a red flag per CLAUDE.md 'Composer is NOT the flagship-register lever' and the reinvention guard) and flag those, not the canonical CLI itself.
 
 ## Mission
