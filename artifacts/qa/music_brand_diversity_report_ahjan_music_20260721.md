@@ -12,12 +12,12 @@ overall=PASS
 
 - **G1** (HARD_FAIL) — status=pass
   - note: per-slot-pool variant reuse against the source atom bank (Phase-A anti-copy-paste check)
-  - LYRIC_BESTSELLER_BEAT: n=9 limit=5 max_reuse=1 violation=False
-  - LYRIC_CLOSING: n=9 limit=5 max_reuse=1 violation=False
-  - LYRIC_OPENING: n=9 limit=5 max_reuse=1 violation=False
-  - MUSIC_REFLECTION_BESTSELLER_BEAT: n=9 limit=5 max_reuse=1 violation=False
-  - MUSIC_REFLECTION_CLOSING: n=9 limit=5 max_reuse=1 violation=False
-  - MUSIC_REFLECTION_OPENING: n=9 limit=5 max_reuse=1 violation=False
+  - LYRIC_BESTSELLER_BEAT: n=12 limit=5 max_reuse=1 violation=False
+  - LYRIC_CLOSING: n=12 limit=5 max_reuse=1 violation=False
+  - LYRIC_OPENING: n=12 limit=5 max_reuse=1 violation=False
+  - MUSIC_REFLECTION_BESTSELLER_BEAT: n=12 limit=5 max_reuse=1 violation=False
+  - MUSIC_REFLECTION_CLOSING: n=12 limit=5 max_reuse=1 violation=False
+  - MUSIC_REFLECTION_OPENING: n=12 limit=5 max_reuse=1 violation=False
 - **G2** (HARD_FAIL) — status=skipped
   - note: insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode — G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data
 - **G3** (HARD_FAIL) — status=skipped
