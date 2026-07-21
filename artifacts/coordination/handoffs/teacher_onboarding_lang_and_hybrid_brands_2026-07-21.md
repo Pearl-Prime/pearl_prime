@@ -1,9 +1,9 @@
 # Teacher onboarding — lang switcher + hybrid brands — 2026-07-21
 
-updated=2026-07-21T15:00:00Z
+updated=2026-07-21T15:27:20Z
 branch=`agent/teacher-onboarding-lang-and-hybrid-brands-20260721`
 worktree=`/Users/ahjan/phoenix_omega/.worktrees/teacher-ob-20260721`
-github=`AUTH RESTORED (Pearl-Prime) — local commits only; do not push until operator asks`
+github=`PUSHED — PR https://github.com/Pearl-Prime/pearl_prime/pull/18 (Pearl-Prime)`
 
 ## Applied operator defaults (loud)
 
@@ -49,14 +49,23 @@ predecessor A/B pattern (named imprint carries teacher name; hybrid imprint carr
 
 CLOSEOUT: `artifacts/coordination/handoffs/teacher_onboarding_lang_and_hybrid_brands_2026-07-21_CLOSEOUT.md`
 
-## Next (landing session)
 
-```bash
-cd /Users/ahjan/phoenix_omega/.worktrees/teacher-ob-20260721
-git fetch origin && gh api user
-# then BRAND_WIZARD_GITHUB_RETURN_REPLAY for predecessor pack if still needed, then:
-git push -u origin agent/teacher-onboarding-lang-and-hybrid-brands-20260721
-# then push-guard + preflight + pr_governance_review.py + open PR
-```
+## Landing outcome (Pearl_GitHub 2026-07-21T15:27:20Z)
 
-Do **not** stage `.github/workflows/brand-admin-onboarding-pages.yml` or bestseller-lane dirty files from the main checkout.
+| Item | Result |
+|------|--------|
+| GitHub access | **OK** as `Pearl-Prime` (REST + git push). GraphQL `gh pr view --json` returns Forbidden; use REST. |
+| Account | Active keyring account `Pearl-Prime`. Inactive/invalid: `Ahjan108`. |
+| Remote | `origin` → `https://github.com/Pearl-Prime/pearl_prime.git` |
+| Push | **OK** `agent/teacher-onboarding-lang-and-hybrid-brands-20260721` @ tip `fd670aee8e34d47b53b97a1137be1a1d1bbb5dcd` |
+| PR | https://github.com/Pearl-Prime/pearl_prime/pull/18 |
+| Push-guard / preflight / RAP | OK / OK / OK |
+| Mass deletion | **PASS** — 0 deleted paths; 35 files, +2426/−84 |
+| Governance | Evidence via REST+worktree `origin/main...HEAD` (mass deletion/size PASS). `pr_governance_review.py` invoked from main-tree script path reviews main checkout — do not trust that run for this lane. |
+| Mergeable | **dirty** (`mergeable=false`) — branch ~17 behind `origin/main`; merge-tree reports conflicts ("changed in both"). **Do not merge until rebase/conflict resolve.** |
+| Offline ledger | Not used (GitHub push succeeded). |
+
+### Next human action
+1. Rebase/reconcile `agent/teacher-onboarding-lang-and-hybrid-brands-20260721` onto current `origin/main` in the worktree (resolve conflicts).
+2. Re-push and re-check PR #18 `mergeable_state`.
+3. Owner merge when clean (Pearl_GitHub will not merge dirty PR).
