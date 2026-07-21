@@ -3,7 +3,7 @@
 STARTUP_RECEIPT:
 - AGENT=Pearl_Writer+Pearl_Editor (running as Claude Sonnet 5 in this session)
 - LANE=atom-authoring-queue
-- STATUS=IN PROGRESS — authoring done, verification/landing intentionally HELD
+- STATUS=LANDED-OFFLINE→MERGED-PENDING-CI (pushed + PR opened; see CLOSEOUT below)
 
 ## What this covers
 
@@ -54,48 +54,89 @@ stakeholder) each plant the physical alarm at `recognition`, deepen its cost
 at `mechanism_proof`, model the integrated state at `embodiment`, and name
 the mechanism explicitly at `turning_point`.
 
-## What was NOT done (by design, per operator sequencing)
+## What happened after Cursor's Lane 01/03/04 diffs landed in the working tree
 
-- **No render was run.** `research_fit_bound` has NOT been confirmed to flip
-  true for this cell — that requires Lane 01's `check_book_story_authored.py`
-  to exist first (it doesn't on this branch yet).
-- **`mechanism_called` has NOT been checked.** No proof yet that the rendered
-  book actually invokes the new atoms rather than falling back.
-- **`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` row 79
-  (`ws_story_cell_authoring_20260425`) was NOT updated yet** — deferring until
-  the smoke test gives a real coverage delta to report, not a files-exist claim.
-- **Not committed to git.** These are new untracked files on
-  `agent/teacher-onboarding-lang-and-hybrid-brands-20260720`; they will land
-  together with the Lane 01/03/04 review once Cursor's diffs arrive, per
-  `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md` (do not claim MERGED without a SHA).
+Reviewed each of Cursor's three lanes against its own prompt file's
+TESTS/PROOFS section (not taken on faith):
+- Lane 01 (`check_research_fit_honesty.py`, `check_book_story_authored.py`,
+  gates 34-35, drift-detectors steps): advisory-only as required, correct.
+- Lane 03 (`run_random_2h_book_x100.py`): plain `subprocess.Popen` +
+  `terminate()/kill()`, no process-group kill; `--n 3` smoke run correctly
+  SKIP-UNAUTHORED + logged backlog.
+- Lane 04 (`phoenix_v4/quality/acceptance_layer.py` wired into
+  `run_pipeline.py`): numeric floors cited verbatim from the scorecard, never
+  auto-assigns Layer 3/4.
 
-## Acceptance layer
+Two unrelated, uncommitted sibling-session changes were found co-mingled in
+the same shared working tree (a separate evergreen social-atom-bank gate/
+config set, and an unrelated music-mode auto-detect hunk in
+`run_pipeline.py`) — both were surgically excluded from this lane's commit
+via git-plumbing (temp index off `origin/main^{tree}`) and left untouched in
+the working tree for their own owning sessions to land.
 
-Per `docs/PEARL_PRIME_BESTSELLER_ACCEPTANCE_SCORECARD.md`: this bank is
-authored prose only. Until a real `run_pipeline.py --pipeline-mode spine
---quality-profile production --exercise-journeys` render confirms
-`research_fit_bound: true` and `mechanism_called > 0`, it is **not** even
-`authored candidate` in the acceptance taxonomy — it is unverified authored
-content. Do not report it as bestseller, shippable, or even Layer-1
-structurally-clear until the smoke test runs.
+**Real smoke test run** (not hand-waved): `run_pipeline.py --pipeline-mode
+spine --quality-profile production --exercise-journeys --seed 43001` for
+`millennial_women_professionals × courage` (arc
+`config/source_of_truth/master_arcs/millennial_women_professionals__courage__false_alarm__F006.yaml`).
+Result: `book_acceptance_stamp.json` → `acceptance_layer: path_works`
+(Layer 1 not clean — `register_gate` HARD_FAIL on an unrelated F2
+dangling-preposition finding in chapter 5, plus `bestseller_craft` 0.5247 <
+0.55 floor). Proof root:
+`artifacts/qa/bestseller_atom_flow_20260721/millennial_women_professionals__courage__false_alarm_seed43001/`.
+
+**`research_fit_bound` did NOT flip to true — and cannot yet**, for a reason
+outside this lane's or Lane 01's scope: `enrichment_audit.json`'s
+`research_fit` key came back `null`, not even `{}`. `build_story_schedule()`
+(`phoenix_v4/planning/story_planner.py`) is not wired into
+`scripts/run_pipeline.py`'s spine render path on this branch at all — the
+book fell through to the legacy engine-keyed `atoms/<persona>/<topic>/...
+CANONICAL.txt` path instead of ever looking at `story_atoms/anchored/`. This
+matches Lane 01's own handoff discovery note verbatim ("research_fit
+stamping is not yet wired into scripts/run_pipeline.py"). The Lane 03 driver
+does correctly detect the new bank on disk (`_has_story_atoms(...) → True`),
+confirming the bank itself is directory-correct; the render-path wiring gap
+is a separate, deeper fix not in scope for any of the 4 lanes in this pack.
+
+`mechanism_called` is also confirmed NOT wired anywhere in the repo
+(verified by Lane 04's own module docstring + grep) — so it cannot be
+checked yet either, independent of the research_fit gap.
+
+## Acceptance layer (honest, per scorecard)
+
+This bank + the render/gate infrastructure is **infrastructure +
+unverified-in-production authored prose**. NOT `authored_candidate` (needs
+`research_fit_bound: true` AND `mechanism_called > 0`, neither available
+yet). NOT bestseller. The gap is a follow-on lane: wire
+`build_story_schedule()` into `run_pipeline.py --pipeline-mode spine`, then
+re-run this exact smoke test.
+
+## Landed
+
+- Branch: `agent/bestseller-atom-flow-20260721`
+- PR: https://github.com/Pearl-Prime/pearl_prime/pull/9
+- 56 files changed (all Lanes 01-04 + this bank + proof root), 0 files
+  deleted, well under push-guard/governance caps
+- Local full `run_production_readiness_gates.py` (35 gates) confirmed
+  gates 34/35 correctly WARN (not counted toward `failed`); only 2
+  pre-existing, unrelated failures (gate 21 manga render-progress bytes,
+  gate 27 data dictionary) — both present before this lane touched anything
+- CI checks running on the PR at handoff time; merge pending governance green
 
 ## Next action
 
-1. Wait for Cursor's Lane 01 (`check_research_fit_honesty.py` wiring +
-   `check_book_story_authored.py`) to land as MERGED or LANDED-OFFLINE.
-2. Run the smoke test this bank still owes:
-   `run_pipeline.py --pipeline-mode spine --quality-profile production
-   --exercise-journeys` for `millennial_women_professionals × courage`, then
-   `python3 scripts/ci/check_book_story_authored.py --book-dir <new_render>`
-   confirming `research_fit_bound: true`, and read the rendered `book.txt` to
-   confirm "the exile reflex" is actually called (`mechanism_called > 0`).
-3. Update `ACTIVE_WORKSTREAMS.tsv` row 79 with the real coverage delta.
-4. Remaining priority backlog (frequency ranking not yet re-derived from trace
-   logs — pending Lane 01/03 landing per INDEX.md Wave 2 gating):
-   `first_responders × boundaries`, `healthcare_rns × boundaries` (named next
-   in the pack; confirm from trace whether these already had banks before
-   authoring — do not duplicate existing coverage).
+1. Watch PR #9 CI + governance review; squash-merge once green (operator
+   auth already covers this per standing PR-governance rule).
+2. Open the real follow-on: wire `build_story_schedule()` into
+   `scripts/run_pipeline.py`'s spine path so `research_fit_bound` can
+   actually flip for any authored `story_atoms/anchored/` cell, this one
+   included. Re-run this exact smoke test once that lands.
+3. Remaining priority backlog (frequency ranking not yet re-derived from
+   trace logs): `first_responders × boundaries`, `healthcare_rns ×
+   boundaries` — confirm from trace whether these already had banks before
+   authoring.
 
-CLEANUP: no worktree used (main checkout); no branch created yet (pending
-combined land with Lanes 01/03/04); no background jobs; no scratch files
-outside this handoff.
+CLEANUP: no worktree used; git-plumbing temp index (`/tmp/idx_bestseller_atom_flow`)
+removed after commit; no local branch checkout disturbed (current checkout's
+sibling-session uncommitted files untouched); no background jobs held; smoke
+render at `/tmp/courage_smoke_43001` was copied into the repo proof root and
+is otherwise scratch (removable).
