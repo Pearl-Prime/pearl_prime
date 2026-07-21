@@ -1,0 +1,12 @@
+atom_type	verdict	source_paths	missing	unblock_need
+AUTHOR_DISCLOSURE	PARTIAL	accent_banks/author_commentary (AUTHOR_COMMENTARY); Manga Author System disclosure FEATURE	No AUTHOR_DISCLOSURE-keyed bank; bio_license draft_pending	Operator bio-license approval; optional planner alias
+CASE_STUDY	PARTIAL	accent_banks/external_stories/*_entries.yaml with citation+rights_class	No type:case_study; no client-case material (Rule 0)	Optional case_study tag on verified external entries
+ENCOURAGEMENT	PARTIAL	atoms/*/PERMISSION|PERMISSION_GRANT; ACCENT_BEATS maps ENCOURAGEMENT<-PERMISSION	No accent_banks/encouragement before this lane	Planner re-key after_EXERCISE
+EXERCISE_SETUP	PARTIAL	exercises_v4/introduction_templates.yaml + intro_templates.yaml + approved/	No accent_banks/exercise_setup before this lane	Optional planner exercise_setup class
+HOOK_STORY	PARTIAL	atoms/gen_z_professionals/anxiety/STORY/CANONICAL.txt; architecture HOOK (frozen)	No accent_banks/hook_story before this lane	Seed bank + optional planner class
+METAPHOR	PARTIAL	ANGLE_ANALOGY in architecture; ANALOGY inventory row already DEEPENED	No accent_banks/metaphor prose bank before this lane	Seed from existing analogy images; never edit PRESERVE_VERBATIM
+MOTIF	NO-SOURCE	motif_keys metadata tags only on some accent entries	No motif prose bank / authored MOTIF bodies	Author motif bank with recurring image/object/phrase + source_refs
+PARABLE	PARTIAL	external_stories type:mythic with PD citation (e.g. Icarus)	No type:parable tag; thin mythic set	Tag mythic as parable; expand from PD sources only
+REFLECTION_QUESTION	SOURCED	accent_banks/reflection_questions/anxiety/entries.yaml (authored_bank, wired)	None for authority; rows were question-only vs REFLECTION_INTEGRATION_4	n/a
+TROUBLESHOOTING	SOURCED	accent_banks/troubleshooting/anxiety/entries.yaml (authored_bank, wired)	None for authority; rows short vs TROUBLE_PERMISSION_4	n/a
+WISDOM_ESSENCE	SOURCED	accent_banks/wisdom_essence + WISDOM_ESSENCE_ESSENCE_MAP_2026-07-07.md	Inventory path miss; anxiety secular bodies were 4 paragraphs	n/a
