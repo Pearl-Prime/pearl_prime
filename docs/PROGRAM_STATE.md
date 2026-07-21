@@ -301,3 +301,37 @@ Proof root: `artifacts/qa/brand_wizard_yaml_market_verify_20260719/`,
 `artifacts/qa/brand_wizard_director_page_verify_20260719/`. Replay runbook:
 `docs/runbooks/BRAND_WIZARD_GITHUB_RETURN_REPLAY_2026-07-19.md`. Wake replay on
 `github-suspension-lifted`.
+
+---
+
+## 2026-07-18 Perfect Books Wave-2 offline wave (pending GitHub replay)
+
+**NOT a main merge.** GitHub remains 403-blocked. Wave-2 of the Pearl Prime
+Perfect Books program (bank fill + flagship line-edit + deferred CI gates +
+blind-10 prep) is **LANDED-OFFLINE** on `pearlstar_offline` — offline-substrate
+≠ on `origin/main`. Do **not** treat any lane SHA as DONE/merged. Spec:
+`artifacts/qa/pearl_prime_100book_analysis_20260718/PEARL_PRIME_PERFECT_BOOKS_SPEC.md`.
+
+| Lane | Ref | SHA |
+|------|-----|-----|
+| 00 Wave-1 preserved | `offline/pearl-prime-perfect-books-wave1-20260718` | `9056df3354df6a84755fb47a38da2793f141efa9` |
+| 01 substrate lock | `offline/perfect-books-wave2-substrate-20260718` | `5e648abae1f0841821186bb085a54c7882a21ae7` |
+| 02 bank fill (C1–C4) | `offline/perfect-books-wave2-bankfill-20260718` | `d48fbdacacabc21641709f9411af90dd46c3ed27` |
+| 03 flagship line-edit (L1–L4) | `offline/perfect-books-wave2-lineedit-20260718` | `4356fb0dea205510e7c82a5afad0a629c9117d25` |
+| 04 deferred CI gates | `offline/perfect-books-wave2-cigates-20260718` | `b2d6761d9d641e53af8f27b91974adaebddef24b` |
+| 05 blind-10 prep | `offline/perfect-books-wave2-blind10-prep-20260718` | `2a7332763db2105a7ff24e7c521699b2fa0dbdc0` |
+| 06 final audit | `offline/perfect-books-wave2-final-20260718` | see `FINAL_AUDIT.md` handoff |
+
+**Honest layer — do not round up:** `SYSTEM_WORKING_CELLS = 0` (Lane 03 read
+all 3 designated cells fresh; all 3 `ONTGP_VERDICT.md` are real, evidenced
+**FAIL** — `healthcare_rns × burnout × overwhelm` closest, one documented
+renderer fix away). SYSTEM stays **`authored candidate`** overall. **NO
+bestseller-register claim.** G-F1H/G-ORIENT/G-ACCENT CI gates shipped +
+mutation-verified (Lane 04). Bank fill landed for 3 burnout cells; the C4
+persona-registry routing defect is catalog-wide (14/16 topic registries
+single-persona-authored) and was root-caused, **not fixed**. Blind-10 packet
+(10 real Layer-1-ceiling `way_stream_sanctuary` EPUBs) is assembled and
+**unread** — Layer-4 PENDING operator read.
+
+Proof root: `artifacts/qa/perfect_books_wave2_20260718/`. Replay queue +
+residual blockers in `FINAL_AUDIT.md` §8/§7. Wake replay on `github-suspension-lifted`.
