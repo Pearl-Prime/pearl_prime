@@ -1,0 +1,89 @@
+{
+  "brand_id": "to_master_feung_en_us",
+  "lane_id": "en_US",
+  "locale": "en-US",
+  "display_name": "Master Feung's Contribution Institute",
+  "publication_corp": "Master Feung's Contribution Institute",
+  "source": "teacher_originated",
+  "origin_teacher_id": "master_feung",
+  "attribution_mode": "named",
+  "hybrid_of_archetype": null,
+  "buildable": true,
+  "teacher_mode": true,
+  "tradition": "Teacher-originated · master_feung",
+  "brand_focus": "Doctrine-led catalog for master feung",
+  "primary_topics": [
+    "anxiety",
+    "burnout",
+    "self_worth"
+  ],
+  "gtm_identity": {
+    "emotional_job": "When painting tightens, remember: When I teach calligraphy, I ask my students to look at the full scroll before they\nlook at any single character. The eye wants to go immediately to the detail — to judge\nthis strok",
+    "functional_job": "Practice sequences built on painting, stroke, brushstroke",
+    "discovery_hook": "The alarm is lying — your body can learn a quieter signal.",
+    "positioning_profile": "elder_stabilizer",
+    "authority_type": "seasoned_practitioner",
+    "trust_anchor_style": "elder",
+    "teacher_doctrine_lead": "When I teach calligraphy, I ask my students to look at the full scroll before they\nlook at any single character. The eye wants to go immediately to the detail — to judge\nthis strok",
+    "teacher_doctrine_secondary": "My students in Xi'an sometimes ask me why their best characters emerge after long\nperiods of frustration. They practice for weeks without progress, and then one"
+  },
+  "emotional_vocabulary": {
+    "core": [
+      "painting",
+      "stroke",
+      "brushstroke",
+      "brush"
+    ],
+    "bridge_phrases": [
+      "giving to others is literally draining my life",
+      "my body holds all my stress and i can feel it",
+      "faking it till i make it but i'm still faking"
+    ],
+    "doctrine_markers": [
+      "painting",
+      "stroke",
+      "brushstroke",
+      "brush",
+      "contribution",
+      "center"
+    ],
+    "doctrine_fingerprint": [
+      "When I teach calligraphy, I ask my students to look at the full scroll before they\nlook at any single character. The eye",
+      "My students in Xi'an sometimes ask me why their best characters emerge after long\nperiods of frustration. They practice ",
+      "There is a teaching I have carried from the lineage of Hua Shan, from the calligraphers\nwho preceded me, and it is this:"
+    ],
+    "allowed_language": [
+      "calm_certainty",
+      "perspective_framing"
+    ],
+    "forbidden_language": [
+      "slang",
+      "self_doubt_language"
+    ]
+  },
+  "duration_strategy": "seasonal_arc_series",
+  "cover_art_identity": {
+    "treatment": "warm_paper_grain",
+    "mark_motif": "painting",
+    "note": "Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art); no new cover pipeline."
+  },
+  "pricing_posture": "accessible",
+  "mission": "Carry master feung's doctrine into a named brand readers can trust.",
+  "generation": {
+    "engine": "phoenix_v4.brand_generation.teacher_brand_generator",
+    "seed": "smoke_ab",
+    "deterministic": true,
+    "llm": false,
+    "doctrine_snippet_count": 24,
+    "themes": [
+      "painting",
+      "stroke",
+      "brushstroke",
+      "brush",
+      "contribution",
+      "center",
+      "yourself",
+      "holds"
+    ]
+  }
+}

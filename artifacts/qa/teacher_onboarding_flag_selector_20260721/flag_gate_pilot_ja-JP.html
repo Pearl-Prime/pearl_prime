@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Teacher onboarding flag-gate smoke+pilot proof 20260721</title>
+<style>
+  body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; background: #0e0a06; color: #faf6f0; }
+  h1 { font-weight: 400; text-align: center; margin: 24px 0 8px; }
+  .sub { text-align: center; color: #a8a29e; font-size: 14px; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; max-width: 900px; margin: 0 auto 40px; padding: 0 16px; }
+  button { background: #1c1009; border: 1px solid rgba(180,83,9,.35); color: #faf6f0; border-radius: 4px; padding: 18px 8px; cursor: pointer; }
+  button[data-pilot="true"] { outline: 2px solid #d97706; }
+  .emoji { font-size: 28px; display: block; }
+  .meta { font-family: ui-monospace, monospace; font-size: 10px; color: #a8a29e; margin-top: 6px; }
+  #status { text-align: center; color: #d97706; min-height: 24px; }
+</style>
+</head>
+<body>
+  <h1>Choose your language</h1>
+  <p class="sub">Smoke=en-US · Pilot=ja-JP + zh-TW · localStorage key phoenix_teacher_onboarding_locale</p>
+  <div id="status">No locale selected (gate active)</div>
+  <div class="grid" id="grid" role="listbox" aria-label="Choose your language"></div>
+  <script>
+    const LOCALES = [
+      { code: "en-US", flag: "🇺🇸", name: "United States", lang: "English", pilot: "smoke" },
+      { code: "ja-JP", flag: "🇯🇵", name: "Japan", lang: "日本語", pilot: "pilot" },
+      { code: "ko-KR", flag: "🇰🇷", name: "Korea", lang: "한국어" },
+      { code: "zh-TW", flag: "🇹🇼", name: "Taiwan", lang: "繁體中文", pilot: "pilot" },
+      { code: "zh-CN", flag: "🇨🇳", name: "China", lang: "简体中文" },
+      { code: "zh-HK", flag: "🇭🇰", name: "Hong Kong", lang: "粵語" },
+      { code: "zh-SG", flag: "🇸🇬", name: "Singapore", lang: "中文/EN" },
+      { code: "es-US", flag: "🇺🇸", name: "US Hispanic", lang: "Español" },
+      { code: "es-ES", flag: "🇪🇸", name: "Spain", lang: "Español" },
+      { code: "fr-FR", flag: "🇫🇷", name: "France", lang: "Français" },
+      { code: "de-DE", flag: "🇩🇪", name: "Germany", lang: "Deutsch" },
+      { code: "it-IT", flag: "🇮🇹", name: "Italy", lang: "Italiano" },
+      { code: "hu-HU", flag: "🇭🇺", name: "Hungary", lang: "Magyar" },
+      { code: "pt-BR", flag: "🇧🇷", name: "Brazil", lang: "Português" },
+    ];
+    const KEY = "phoenix_teacher_onboarding_locale";
+    const g = document.getElementById("grid");
+    const status = document.getElementById("status");
+    LOCALES.forEach((l) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.locale = l.code;
+      b.dataset.testid = "flag-" + l.code;
+      if (l.pilot) b.dataset.pilot = "true";
+      b.innerHTML = `<span class="emoji">${l.flag}</span><div class="meta">${l.name}</div><div class="meta">${l.code}${l.pilot ? " · " + l.pilot : ""}</div>`;
+      b.onclick = () => {
+        localStorage.setItem(KEY, l.code);
+        status.textContent = "Selected " + l.code + " → stored in " + KEY;
+      if (l.code === "ja-JP") { status.textContent = "PROOF pilot: ja-JP selected"; b.style.outline = "3px solid #22c55e"; }
+      };
+      g.appendChild(b);
+      if (l.code === 'ja-JP') setTimeout(() => b.click(), 50);
+    });
+  </script>
+</body>
+</html>
