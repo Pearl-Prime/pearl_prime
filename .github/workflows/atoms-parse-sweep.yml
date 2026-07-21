@@ -1,5 +1,7 @@
 # Atoms parse-sweep guard — fails a PR the instant a clean atoms/**/CANONICAL.txt is
-# mangled into the #1590 metadata-less "## <LABEL> vNN" over-match (-> NO_STORY_POOL).
+# mangled into the #1590 metadata-less "## <LABEL> vNN" over-match (-> NO_STORY_POOL), or
+# regresses check (D): a block's prose body is a bare, unauthored next-header label (the
+# un-promoted sibling of the #1590 defect — see check_canonical_atom_parse_sweep.py docstring).
 #
 # REQUIRED CHECK (Protect main ruleset). The pull_request trigger is intentionally NOT
 # path-filtered: a required status check must report on EVERY PR to main, or GitHub blocks
@@ -17,6 +19,7 @@ on:
       - 'atoms/**'
       - 'scripts/ci/check_canonical_atom_parse_sweep.py'
       - 'scripts/ci/check_canonical_atom_parse_sweep_baseline.txt'
+      - 'scripts/ci/check_canonical_atom_parse_sweep_stub_baseline.txt'
       - 'phoenix_v4/planning/assembly_compiler.py'
 jobs:
   parse-sweep:
@@ -29,5 +32,5 @@ jobs:
           python-version: '3.11'
       - name: Install deps
         run: pip install -q pyyaml
-      - name: Run CANONICAL.txt parse-sweep guard (checks A/B/C)
+      - name: Run CANONICAL.txt parse-sweep guard (checks A/B/C/D)
         run: PYTHONPATH=. python3 scripts/ci/check_canonical_atom_parse_sweep.py

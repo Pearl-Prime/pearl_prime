@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Scelga la lingua",
+    "subheading": "Selezioni una bandiera per aprire l'iscrizione degli insegnanti in quella lingua. Può comunque impostare separatamente, all'interno del modulo, la lingua in cui insegna."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Iscrizione insegnanti",
+    "brand_blurb": "Invii il materiale di cui Pearl_Int ha bisogno per trasformare un insegnante reale in una fonte in modalità insegnante, verificata.",
+    "functional_label": "Banca insegnanti funzionale",
+    "scale_label": "Profondità in scala per 1000 libri",
+    "activation_truth_kicker": "Verità sull'attivazione",
+    "activation_truth_body": "Attivare invia la raccolta dati. Lo status ufficiale di insegnante richiede comunque normalizzazione della fonte, estrazione degli atomi, revisione umana e i controlli di produzione per gli insegnanti.",
+    "draft_kicker": "Portale bozze",
+    "draft_blurb": "Salvi in qualsiasi momento. Riceverà un link privato per tornare e aggiungere altro materiale, senza bisogno di accesso.",
+    "save_draft": "Salva bozza",
+    "rotate_token": "Rigenera token",
+    "delete_draft": "Elimina bozza",
+    "operator_queue": "Coda operatore →",
+    "change_language": "Cambia lingua di visualizzazione",
+    "nav_aria": "Sezioni dell'iscrizione insegnanti",
+    "nav_identity": "Identità",
+    "nav_rights": "Diritti",
+    "nav_teachings": "Insegnamenti",
+    "nav_stories": "Storie",
+    "nav_practices": "Pratiche",
+    "nav_voice": "Lingua",
+    "nav_activate": "Attiva",
+    "minimum_suffix": "minimo",
+    "preferred_suffix": "preferito",
+    "recommended": "consigliato"
+  },
+  "header": {
+    "kicker": "Raccolta dati modalità insegnante",
+    "title": "Costruisca il pacchetto di fonti prima che il sistema scriva con la voce di un insegnante.",
+    "teacher_id_label": "ID insegnante:"
+  },
+  "identity": {
+    "kicker": "1 / Identità",
+    "heading": "Chi è l'insegnante?",
+    "teacher_name": "Nome dell'insegnante",
+    "teacher_id": "ID insegnante / slug",
+    "tradition": "Tradizione, lignaggio o ambito",
+    "language_label": "Lingua in cui insegna / scrive",
+    "language_hint": "Lingua di origine per questo insegnante (può differire dalla lingua di visualizzazione della pagina). 14 lingue disponibili nel repository.",
+    "contact_name": "Nome del referente",
+    "contact_email": "Email di contatto",
+    "website": "Sito web o profilo pubblico",
+    "bio_label": "Biografia dell'insegnante",
+    "bio_hint": "Incolli del testo, colleghi un URL e/o carichi un file biografico: qualsiasi combinazione va bene.",
+    "bio_placeholder": "Cosa dovrebbe sapere Pearl_Int sul lavoro, il percorso, il pubblico e la voce di questo insegnante?",
+    "name_placeholder": "Master Wu",
+    "id_placeholder": "master_wu",
+    "tradition_placeholder": "Chan, psicologia contemplativa, coaching somatico...",
+    "contact_name_placeholder": "Operatore o rappresentante dell'insegnante",
+    "contact_email_placeholder": "teacher@example.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Diritti",
+    "heading": "Cosa siamo autorizzati a trattare?",
+    "owns_material": "Sono proprietario/a di questi insegnamenti, registrazioni, file e link, oppure ho l'autorizzazione a presentarli per il trattamento.",
+    "processing_consent": "Acconsento a che Pearl_Int estragga atomi candidati dell'insegnante per la revisione umana prima dell'uso in produzione.",
+    "no_unauthorized": "Non sto presentando materiale coperto da copyright senza autorizzazione, ed eventuali estratti pubblici sono corredati da note su diritti/provenienza.",
+    "final_consent": "Confermo che questa raccolta dati può essere inviata per la revisione dell'operatore e per il futuro lavoro di attivazione della fonte insegnante.",
+    "public_boundaries": "Limiti pubblici",
+    "private_boundaries": "Limiti privati",
+    "public_placeholder": "Cosa può essere citato, parafrasato o usato pubblicamente?",
+    "private_placeholder": "Cosa non deve mai essere usato, nominato, estratto o reso visibile?"
+  },
+  "teachings": {
+    "kicker": "3 / Insegnamenti",
+    "heading": "Ci fornisca la dottrina e il materiale didattico dell'insegnante.",
+    "blurb": "Aggiunga tutti i blocchi di insegnamenti che le servono. All'interno di ogni blocco può incollare più insegnamenti (separati da righe vuote), allegare un URL e/o caricare file.",
+    "add_label": "Aggiungi blocco di insegnamenti",
+    "placeholder": "Insegnamento 1…\n\nInsegnamento 2…\n\nInsegnamento 3…",
+    "hint": "Suggerimento: funziona meglio un paragrafo, o un blocco separato da riga vuota, per ogni insegnamento."
+  },
+  "stories": {
+    "kicker": "4 / Storie",
+    "heading": "Fornisca materiale narrativo reale, non piccoli esempi.",
+    "blurb": "Scelga un tipo di storia, poi incolli il testo, colleghi un URL di origine e/o carichi un file. Inizi con tre righe: può aggiungerne altre in qualsiasi momento.",
+    "add_label": "Aggiungi riga storia",
+    "type_label": "Tipo di storia",
+    "placeholder": "Cosa succede? Scena, pressione, attrito, scelta, conseguenza, funzione didattica…"
+  },
+  "practices": {
+    "kicker": "5 / Pratiche",
+    "heading": "Aggiunga esercizi e strumenti con contesto sufficiente a diventare atomi a cinque livelli.",
+    "blurb": "Stesso schema: tipo · testo · URL · caricamento. Tre righe per iniziare.",
+    "add_label": "Aggiungi riga pratica",
+    "type_label": "Tipo di pratica",
+    "placeholder": "Passaggi, tempistiche, segnali corporei, intuizione chiave, integrazione, controindicazioni, note di sicurezza…"
+  },
+  "voice": {
+    "kicker": "6 / Lingua",
+    "heading": "Citazioni, espressioni, metafore e limiti linguistici.",
+    "blurb": "Ogni riga corrisponde a una categoria linguistica. Usi testo, URL e/o caricamento: aggiunga altre righe secondo necessità.",
+    "add_label": "Aggiungi riga lingua",
+    "entry_type": "Tipo di voce",
+    "source_note": "Fonte / nota sull'autorizzazione (facoltativo)",
+    "source_placeholder": "Da dove proviene / autorizzazione all'uso",
+    "content_placeholder": "Incolli il contenuto per questa voce linguistica…"
+  },
+  "activate": {
+    "kicker": "7 / Attiva",
+    "heading": "Invii il pacchetto di iscrizione dell'insegnante.",
+    "ready_title": "Tutto pronto per l'attivazione?",
+    "ready_body": "Salveremo la sua bozza, invieremo la raccolta dati per la revisione e le forniremo un URL privato per tornare e aggiungere altro materiale in qualsiasi momento.",
+    "teacher_name": "Nome dell'insegnante:",
+    "contact_email": "Email di contatto:",
+    "processing_permission": "Autorizzazione al trattamento:",
+    "final_consent": "Consenso finale:",
+    "source_material": "Materiale di origine:",
+    "missing": "mancante",
+    "missing_or_invalid": "mancante o non valido",
+    "ready": "pronto",
+    "present": "presente",
+    "depth_kicker": "Indicazioni sulla profondità",
+    "depth_blurb": "Può attivare anche con numeri inferiori a quelli preferiti: si tratta di un'indicazione, non di un blocco rigido.",
+    "submit": "Attiva la raccolta dati insegnante",
+    "submit_failed": "Attivazione non riuscita. Riprovi oppure salvi prima una bozza."
+  },
+  "success": {
+    "kicker": "Raccolta dati insegnante",
+    "heading": "Congratulazioni",
+    "body_prefix": "La raccolta dati per l'insegnante",
+    "body_suffix": "è stata inviata. Lo status ufficiale di insegnante richiede ancora la revisione di Pearl_Int: può continuare ad aggiungere materiale in qualsiasi momento tramite il suo link privato.",
+    "return_url_kicker": "Il suo URL privato di ritorno",
+    "copy_link": "Copia link",
+    "copied": "Copiato",
+    "no_url": "La prossima volta salvi una bozza, così potremo fornirle un link privato di ritorno. La sua raccolta dati è stata comunque registrata.",
+    "continue_editing": "Continua a modificare",
+    "start_another": "Inizia un altro insegnante"
+  },
+  "draft": {
+    "resuming": "Ripresa della bozza…",
+    "saving": "Salvataggio della bozza…",
+    "saved": "Bozza salvata. Conservi il suo link privato di ripresa.",
+    "deleting": "Eliminazione della bozza…",
+    "deleted": "Bozza eliminata.",
+    "delete_confirm": "Eliminare questa bozza? Gli invii già effettuati non vengono mai eliminati con questa azione.",
+    "delete_failed": "Eliminazione non riuscita"
+  },
+  "validation": {
+    "teacher_name_required": "Il nome dell'insegnante è obbligatorio.",
+    "contact_email_required": "L'email di contatto è obbligatoria.",
+    "contact_email_invalid": "L'email di contatto deve essere valida.",
+    "owns_required": "È necessaria l'attestazione di proprietà o di autorizzazione.",
+    "processing_required": "È necessaria l'autorizzazione a trattare il materiale in atomi candidati.",
+    "consent_required": "È necessario spuntare la casella del consenso finale.",
+    "material_required": "Aggiunga almeno un insegnamento, una storia, una pratica, una riga linguistica o una biografia (testo, URL o caricamento)."
+  },
+  "common": {
+    "upload": "Carica",
+    "url_placeholder": "https://… (URL facoltativo)",
+    "paste_placeholder": "Incolli o digiti il contenuto…",
+    "add_row": "Aggiungi riga"
+  }
+}

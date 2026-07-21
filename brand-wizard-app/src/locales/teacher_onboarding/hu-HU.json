@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Válassza ki a nyelvét",
+    "subheading": "Válasszon egy piaci zászlót a tanítói regisztráció adott nyelven történő megnyitásához. Azt a nyelvet, amelyen tanít, később, az űrlapon belül is beállíthatja."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Tanítói regisztráció",
+    "brand_blurb": "Küldje el azt az anyagot, amelyre a Pearl_Int-nek szüksége van ahhoz, hogy egy valódi tanítóból ellenőrzött, tanítói módú forrás legyen.",
+    "functional_label": "Működő tanítói adatbázis",
+    "scale_label": "1000 könyvnyi mélység",
+    "activation_truth_kicker": "Az aktiválás valósága",
+    "activation_truth_body": "Az aktiválás elküldi a jelentkezést. A hivatalos tanítói státuszhoz még forrás-normalizálás, atomkinyerés, emberi ellenőrzés és tanítói gyártási kapuk szükségesek.",
+    "draft_kicker": "Vázlat portál",
+    "draft_blurb": "Bármikor menthet. Kap egy privát linket, amellyel bármikor visszatérhet, és további anyagot adhat hozzá — bejelentkezés nélkül.",
+    "save_draft": "Vázlat mentése",
+    "rotate_token": "Token cseréje",
+    "delete_draft": "Vázlat törlése",
+    "operator_queue": "Operátori sor →",
+    "change_language": "Megjelenítési nyelv módosítása",
+    "nav_aria": "Tanítói regisztráció szakaszai",
+    "nav_identity": "Személyazonosság",
+    "nav_rights": "Jogok",
+    "nav_teachings": "Tanítás",
+    "nav_stories": "Történetek",
+    "nav_practices": "Gyakorlatok",
+    "nav_voice": "Nyelv",
+    "nav_activate": "Aktiválás",
+    "minimum_suffix": "minimum",
+    "preferred_suffix": "ajánlott",
+    "recommended": "javasolt"
+  },
+  "header": {
+    "kicker": "Tanítói módú jelentkezés",
+    "title": "Állítsa össze a forráscsomagot, mielőtt a rendszer a tanító hangján kezd írni.",
+    "teacher_id_label": "Tanítói azonosító:"
+  },
+  "identity": {
+    "kicker": "1 / Személyazonosság",
+    "heading": "Ki a tanító?",
+    "teacher_name": "Tanító neve",
+    "teacher_id": "Tanítói azonosító / slug",
+    "tradition": "Hagyomány, tradíció vagy szakterület",
+    "language_label": "A nyelv, amelyen tanít / ír",
+    "language_hint": "E tanító forrásnyelve (eltérhet az oldal megjelenítési nyelvétől). 14 repóbeli nyelvi lokál érhető el.",
+    "contact_name": "Kapcsolattartó neve",
+    "contact_email": "Kapcsolattartó e-mail-címe",
+    "website": "Weboldal vagy nyilvános profil",
+    "bio_label": "Tanítói bemutatkozás",
+    "bio_hint": "Illesszen be szöveget, adjon meg egy URL-t, és/vagy töltsön fel egy bemutatkozó fájlt — bármilyen kombináció megfelel.",
+    "bio_placeholder": "Mit kell tudnia a Pearl_Int-nek e tanító munkájáról, hátteréről, közönségéről és hangjáról?",
+    "name_placeholder": "Master Wu",
+    "id_placeholder": "master_wu",
+    "tradition_placeholder": "Csan, kontemplatív pszichológia, szomatikus coaching...",
+    "contact_name_placeholder": "Operátor vagy a tanító képviselője",
+    "contact_email_placeholder": "teacher@example.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Jogok",
+    "heading": "Mit dolgozhatunk fel?",
+    "owns_material": "Enyém a jog, vagy engedélyem van arra, hogy ezeket a tanításokat, felvételeket, fájlokat és linkeket feldolgozásra benyújtsam.",
+    "processing_consent": "Hozzájárulok, hogy a Pearl_Int jelölt tanítói atomokat vonjon ki emberi ellenőrzés céljából, a gyártási felhasználás előtt.",
+    "no_unauthorized": "Nem küldök be jogosulatlan, szerzői jogvédett anyagot, és minden nyilvános részlethez jog- és eredetmegjelölés tartozik.",
+    "final_consent": "Megerősítem, hogy ez a jelentkezés benyújtható operátori ellenőrzésre, valamint a jövőbeni tanítói forrás-aktiválási munkára.",
+    "public_boundaries": "Nyilvános határok",
+    "private_boundaries": "Bizalmas határok",
+    "public_placeholder": "Mi idézhető, parafrazálható vagy használható nyilvánosan?",
+    "private_placeholder": "Mi az, amit soha nem szabad felhasználni, megnevezni, kibányászni vagy nyilvánosságra hozni?"
+  },
+  "teachings": {
+    "kicker": "3 / Tanítások",
+    "heading": "Adja meg a tanító tanítását és tanítási anyagait.",
+    "blurb": "Adjon hozzá annyi tanítási blokkot, amennyire szüksége van. Minden blokkon belül több tanítást is beilleszthet (üres sorral elválasztva), csatolhat egy URL-t, és/vagy tölthet fel fájlokat.",
+    "add_label": "Tanítási blokk hozzáadása",
+    "placeholder": "1. tanítás…\n\n2. tanítás…\n\n3. tanítás…",
+    "hint": "Tipp: legjobban egy bekezdés vagy üres sorral elválasztott blokk működik tanításonként."
+  },
+  "stories": {
+    "kicker": "4 / Történetek",
+    "heading": "Adjon meg valódi történeti anyagot, ne apró példákat.",
+    "blurb": "Válasszon egy történettípust, majd illesszen be szöveget, adjon meg forrás URL-t, és/vagy töltsön fel fájlt. Kezdje három sorral — bármikor hozzáadhat többet.",
+    "add_label": "Történetsor hozzáadása",
+    "type_label": "Történet típusa",
+    "placeholder": "Mi történik? Jelenet, nyomás, súrlódás, döntés, következmény, tanítói funkció…"
+  },
+  "practices": {
+    "kicker": "5 / Gyakorlatok",
+    "heading": "Adjon hozzá gyakorlatokat és eszközöket, elég kontextussal ahhoz, hogy ötrétegű atomokká válhassanak.",
+    "blurb": "Ugyanaz a minta: típus · szöveg · URL · feltöltés. Kezdéshez három sor.",
+    "add_label": "Gyakorlatsor hozzáadása",
+    "type_label": "Gyakorlat típusa",
+    "placeholder": "Lépések, időzítés, testi jelzések, felismerés (aha-élmény), integráció, ellenjavallatok, biztonsági megjegyzések…"
+  },
+  "voice": {
+    "kicker": "6 / Nyelv",
+    "heading": "Idézetek, kifejezések, metaforák és nyelvi határok.",
+    "blurb": "Minden sor egy nyelvi kategória. Használjon szöveget, URL-t, és/vagy feltöltést — szükség szerint adjon hozzá további sorokat.",
+    "add_label": "Nyelvi sor hozzáadása",
+    "entry_type": "Bejegyzés típusa",
+    "source_note": "Forrás / engedély megjegyzés (opcionális)",
+    "source_placeholder": "Honnan származik / felhasználási engedély",
+    "content_placeholder": "Illessze be ehhez a nyelvi bejegyzéshez tartozó tartalmat…"
+  },
+  "activate": {
+    "kicker": "7 / Aktiválás",
+    "heading": "Küldje el a tanítói jelentkezési csomagot.",
+    "ready_title": "Készen áll az aktiválásra?",
+    "ready_body": "Elmentjük a vázlatát, benyújtjuk a jelentkezést ellenőrzésre, és adunk egy privát URL-t, amellyel bármikor visszatérhet, és további anyagot adhat hozzá.",
+    "teacher_name": "Tanító neve:",
+    "contact_email": "Kapcsolattartó e-mail-címe:",
+    "processing_permission": "Feldolgozási engedély:",
+    "final_consent": "Végső hozzájárulás:",
+    "source_material": "Forrásanyag:",
+    "missing": "hiányzik",
+    "missing_or_invalid": "hiányzik vagy érvénytelen",
+    "ready": "kész",
+    "present": "megvan",
+    "depth_kicker": "Mélységi útmutatás",
+    "depth_blurb": "Az ajánlott mennyiségeknél kevesebbel is aktiválhat — ez útmutatás, nem szigorú korlát.",
+    "submit": "Tanítói jelentkezés aktiválása",
+    "submit_failed": "Az aktiválás sikertelen. Próbálja újra, vagy mentse el előbb vázlatként."
+  },
+  "success": {
+    "kicker": "Tanítói jelentkezés",
+    "heading": "Gratulálunk",
+    "body_prefix": "A tanítói jelentkezését",
+    "body_suffix": "számára elküldtük. A hivatalos tanítói státuszhoz még szükség van a Pearl_Int ellenőrzésére — a privát linkje segítségével bármikor tovább bővítheti az anyagot.",
+    "return_url_kicker": "Privát visszatérési URL-je",
+    "copy_link": "Link másolása",
+    "copied": "Másolva",
+    "no_url": "Legközelebb mentsen egy vázlatot, hogy privát visszatérési linket tudjunk kiadni. A jelentkezését így is rögzítettük.",
+    "continue_editing": "Szerkesztés folytatása",
+    "start_another": "Új tanító hozzáadása"
+  },
+  "draft": {
+    "resuming": "Vázlat folytatása…",
+    "saving": "Vázlat mentése…",
+    "saved": "A vázlat elmentve. Őrizze meg a privát folytatási linkjét.",
+    "deleting": "Vázlat törlése…",
+    "deleted": "A vázlat törölve.",
+    "delete_confirm": "Törli ezt a vázlatot? A beküldött jelentkezéseket ez a művelet soha nem törli.",
+    "delete_failed": "A törlés sikertelen"
+  },
+  "validation": {
+    "teacher_name_required": "A tanító nevének megadása kötelező.",
+    "contact_email_required": "A kapcsolattartó e-mail-címének megadása kötelező.",
+    "contact_email_invalid": "A kapcsolattartó e-mail-címének érvényesnek kell lennie.",
+    "owns_required": "Kötelező nyilatkozni a saját hangú anyagról vagy a felhasználási engedélyről.",
+    "processing_required": "Kötelező az engedély ahhoz, hogy az anyagból jelölt atomokat dolgozzunk fel.",
+    "consent_required": "A végső hozzájárulási jelölőnégyzet kitöltése kötelező.",
+    "material_required": "Adjon meg legalább egy tanítást, történetet, gyakorlatot, nyelvi sort vagy bemutatkozást (szöveg, URL vagy feltöltés)."
+  },
+  "common": {
+    "upload": "Feltöltés",
+    "url_placeholder": "https://… (opcionális URL)",
+    "paste_placeholder": "Illessze be vagy írja be a tartalmat…",
+    "add_row": "Sor hozzáadása"
+  }
+}

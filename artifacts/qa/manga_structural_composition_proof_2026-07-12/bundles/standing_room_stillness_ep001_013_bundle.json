@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "bundle_id": "stillness_ep001_013_standing_room",
+  "panel_id": "ep001_013",
+  "panel_type_id": "establish_standing_room",
+  "structural_template_id": "standing_room_scene",
+  "source_note": "stillness honest packet ep001_013 \u2014 full-figure kitchen standing L2 over kitchen L0 (PACKET.md room-capable binding L2_full_figure_kitchen_standing_v1_alpha).",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "asset_refs": {
+    "assembled_panel": "artifacts/qa/manga_reading_packets_2026-07-11/stillness_ep001_postmerge_honest/panels/ep001_013.png",
+    "declared_l2": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_full_figure_kitchen_standing_v1_alpha.png",
+    "l2_note": "source L2 path declared in panel_manifest; sparse worktree lacks artifacts/manga \u2014 proof uses assembled panel bytes"
+  },
+  "nodes": [
+    {
+      "node_id": "kitchen_floor",
+      "category": "support_surface",
+      "role": "floor",
+      "support_polygon_pct": [
+        [
+          8.0,
+          72.0
+        ],
+        [
+          92.0,
+          72.0
+        ],
+        [
+          95.0,
+          98.0
+        ],
+        [
+          5.0,
+          98.0
+        ]
+      ]
+    },
+    {
+      "node_id": "char_standing",
+      "category": "character",
+      "role": "primary_subject",
+      "contact_point_pct": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e_standing",
+      "relation": "standing_on",
+      "from_node": "char_standing",
+      "to_node": "kitchen_floor"
+    }
+  ],
+  "placements": [
+    {
+      "node_id": "char_standing",
+      "transform": {
+        "tx_pct": 50.0,
+        "ty_pct": 82.0,
+        "uniform_scale": 1.0,
+        "rotation_deg": 0.0
+      }
+    }
+  ]
+}

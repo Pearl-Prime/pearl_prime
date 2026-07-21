@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Wählen Sie Ihre Sprache",
+    "subheading": "Wählen Sie eine Länderflagge, um das Lehrer-Onboarding in dieser Sprache zu öffnen. Die Sprache, in der Sie unterrichten, können Sie im Formular separat festlegen."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Lehrer-Onboarding",
+    "brand_blurb": "Reichen Sie das Material ein, das Pearl_Int braucht, um aus einem echten Lehrer eine geprüfte Teacher-Mode-Quelle zu machen.",
+    "functional_label": "Funktionale Lehrerbank",
+    "scale_label": "Tiefe im 1000-Bücher-Maßstab",
+    "activation_truth_kicker": "Wahrheit zur Aktivierung",
+    "activation_truth_body": "„Aktivieren“ übermittelt die Aufnahme. Der offizielle Lehrerstatus erfordert weiterhin Quellennormalisierung, Atom-Extraktion, menschliche Prüfung und die Produktionsfreigaben für Lehrer.",
+    "draft_kicker": "Entwurfsportal",
+    "draft_blurb": "Speichern Sie jederzeit. Sie erhalten einen privaten Link, um zurückzukehren und weiteres Material hinzuzufügen — kein Login nötig.",
+    "save_draft": "Entwurf speichern",
+    "rotate_token": "Token erneuern",
+    "delete_draft": "Entwurf löschen",
+    "operator_queue": "Operator-Warteschlange →",
+    "change_language": "Anzeigesprache ändern",
+    "nav_aria": "Abschnitte des Lehrer-Onboardings",
+    "nav_identity": "Identität",
+    "nav_rights": "Rechte",
+    "nav_teachings": "Lehre",
+    "nav_stories": "Geschichten",
+    "nav_practices": "Praktiken",
+    "nav_voice": "Sprache",
+    "nav_activate": "Aktivieren",
+    "minimum_suffix": "Minimum",
+    "preferred_suffix": "bevorzugt",
+    "recommended": "empfohlen"
+  },
+  "header": {
+    "kicker": "Teacher-Mode-Aufnahme",
+    "title": "Stellen Sie das Quellenpaket zusammen, bevor das System in der Stimme eines Lehrers schreibt.",
+    "teacher_id_label": "Lehrer-ID:"
+  },
+  "identity": {
+    "kicker": "1 / Identität",
+    "heading": "Wer ist der Lehrer?",
+    "teacher_name": "Name des Lehrers",
+    "teacher_id": "Lehrer-ID / Kurzname",
+    "tradition": "Tradition, Linie oder Fachgebiet",
+    "language_label": "Sprache, in der Sie unterrichten / schreiben",
+    "language_hint": "Quellsprache dieses Lehrers (kann von der Anzeigesprache der Seite abweichen). 14 Repo-Sprachen.",
+    "contact_name": "Name der Kontaktperson",
+    "contact_email": "Kontakt-E-Mail",
+    "website": "Website oder öffentliches Profil",
+    "bio_label": "Biografie des Lehrers",
+    "bio_hint": "Text einfügen, eine URL verlinken und/oder eine Bio-Datei hochladen — jede Kombination funktioniert.",
+    "bio_placeholder": "Was sollte Pearl_Int über die Arbeit, den Hintergrund, das Publikum und die Stimme dieses Lehrers wissen?",
+    "name_placeholder": "Master Wu",
+    "id_placeholder": "master_wu",
+    "tradition_placeholder": "Chan, kontemplative Psychologie, somatisches Coaching...",
+    "contact_name_placeholder": "Operator oder Vertretung des Lehrers",
+    "contact_email_placeholder": "teacher@example.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Rechte",
+    "heading": "Was dürfen wir verarbeiten?",
+    "owns_material": "Ich besitze diese Lehren, Aufnahmen, Dateien und Links oder bin berechtigt, sie zur Verarbeitung einzureichen.",
+    "processing_consent": "Ich stimme zu, dass Pearl_Int Kandidaten-Lehreratome extrahiert, die vor dem produktiven Einsatz von Menschen geprüft werden.",
+    "no_unauthorized": "Ich reiche kein unautorisiertes urheberrechtlich geschütztes Material ein, und alle öffentlichen Auszüge enthalten Hinweise zu Rechten und Herkunft.",
+    "final_consent": "Ich bestätige, dass diese Aufnahme zur Prüfung durch den Operator und für die künftige Aktivierung als Lehrerquelle eingereicht werden kann.",
+    "public_boundaries": "Öffentliche Grenzen",
+    "private_boundaries": "Private Grenzen",
+    "public_placeholder": "Was darf zitiert, paraphrasiert oder öffentlich verwendet werden?",
+    "private_placeholder": "Was darf niemals verwendet, genannt, ausgewertet oder veröffentlicht werden?"
+  },
+  "teachings": {
+    "kicker": "3 / Lehre",
+    "heading": "Geben Sie uns die Lehre und das Lehrmaterial des Lehrers.",
+    "blurb": "Fügen Sie so viele Lehrblöcke hinzu, wie Sie brauchen. In jedem Block können Sie mehrere Lehren einfügen (durch Leerzeilen getrennt), eine URL anhängen und/oder Dateien hochladen.",
+    "add_label": "Lehrblock hinzufügen",
+    "placeholder": "Lehre 1…\n\nLehre 2…\n\nLehre 3…",
+    "hint": "Tipp: Ein Absatz oder ein durch Leerzeilen getrennter Block pro Lehre funktioniert am besten."
+  },
+  "stories": {
+    "kicker": "4 / Geschichten",
+    "heading": "Liefern Sie echtes Geschichtenmaterial, keine winzigen Beispiele.",
+    "blurb": "Wählen Sie einen Geschichtentyp, fügen Sie dann Text ein, verlinken Sie eine Quell-URL und/oder laden Sie eine Datei hoch. Beginnen Sie mit drei Zeilen — Sie können jederzeit weitere hinzufügen.",
+    "add_label": "Geschichtenzeile hinzufügen",
+    "type_label": "Geschichtentyp",
+    "placeholder": "Was passiert? Szene, Druck, Reibung, Entscheidung, Konsequenz, Lehrfunktion…"
+  },
+  "practices": {
+    "kicker": "5 / Praktiken",
+    "heading": "Fügen Sie Übungen und Werkzeuge mit genug Kontext hinzu, damit daraus fünfschichtige Atome werden können.",
+    "blurb": "Gleiches Muster: Typ · Text · URL · Upload. Beginnen Sie mit drei Zeilen.",
+    "add_label": "Praxiszeile hinzufügen",
+    "type_label": "Praxistyp",
+    "placeholder": "Schritte, Timing, Körperhinweise, Aha-Moment, Integration, Kontraindikationen, Sicherheitshinweise…"
+  },
+  "voice": {
+    "kicker": "6 / Sprache",
+    "heading": "Zitate, Redewendungen, Metaphern und sprachliche Grenzen.",
+    "blurb": "Jede Zeile ist eine Sprachkategorie. Nutzen Sie Text, URL und/oder Upload — fügen Sie bei Bedarf weitere Zeilen hinzu.",
+    "add_label": "Sprachzeile hinzufügen",
+    "entry_type": "Eintragstyp",
+    "source_note": "Quelle / Erlaubnisvermerk (optional)",
+    "source_placeholder": "Woher das stammt / Nutzungserlaubnis",
+    "content_placeholder": "Inhalt für diesen Spracheintrag einfügen…"
+  },
+  "activate": {
+    "kicker": "7 / Aktivieren",
+    "heading": "Senden Sie das Lehrer-Aufnahmepaket ab.",
+    "ready_title": "Bereit zur Aktivierung?",
+    "ready_body": "Wir speichern Ihren Entwurf, reichen die Aufnahme zur Prüfung ein und geben Ihnen eine private URL, mit der Sie jederzeit zurückkehren und weiteres Material hinzufügen können.",
+    "teacher_name": "Name des Lehrers:",
+    "contact_email": "Kontakt-E-Mail:",
+    "processing_permission": "Verarbeitungserlaubnis:",
+    "final_consent": "Endgültige Zustimmung:",
+    "source_material": "Quellmaterial:",
+    "missing": "fehlt",
+    "missing_or_invalid": "fehlt oder ungültig",
+    "ready": "bereit",
+    "present": "vorhanden",
+    "depth_kicker": "Hinweis zur Tiefe",
+    "depth_blurb": "Sie können auch mit weniger als den empfohlenen Werten aktivieren — dies ist eine Empfehlung, keine harte Sperre.",
+    "submit": "Lehrer-Aufnahme aktivieren",
+    "submit_failed": "Aktivierung fehlgeschlagen. Versuchen Sie es erneut oder speichern Sie zunächst einen Entwurf."
+  },
+  "success": {
+    "kicker": "Lehrer-Aufnahme",
+    "heading": "Herzlichen Glückwunsch",
+    "body_prefix": "Ihre Lehrer-Aufnahme für",
+    "body_suffix": "wurde übermittelt. Der offizielle Lehrerstatus erfordert weiterhin die Prüfung durch Pearl_Int — Sie können mit Ihrem privaten Link jederzeit weiteres Material hinzufügen.",
+    "return_url_kicker": "Ihre private Rückkehr-URL",
+    "copy_link": "Link kopieren",
+    "copied": "Kopiert",
+    "no_url": "Speichern Sie das nächste Mal einen Entwurf, damit wir einen privaten Rückkehrlink ausstellen können. Ihre Aufnahme wurde trotzdem erfasst.",
+    "continue_editing": "Weiter bearbeiten",
+    "start_another": "Weiteren Lehrer anlegen"
+  },
+  "draft": {
+    "resuming": "Entwurf wird geladen…",
+    "saving": "Entwurf wird gespeichert…",
+    "saved": "Entwurf gespeichert. Bewahren Sie Ihren privaten Fortsetzungslink auf.",
+    "deleting": "Entwurf wird gelöscht…",
+    "deleted": "Entwurf gelöscht.",
+    "delete_confirm": "Diesen Entwurf löschen? Eingereichte Aufnahmen werden durch diese Aktion nie gelöscht.",
+    "delete_failed": "Löschen fehlgeschlagen"
+  },
+  "validation": {
+    "teacher_name_required": "Der Name des Lehrers ist erforderlich.",
+    "contact_email_required": "Die Kontakt-E-Mail ist erforderlich.",
+    "contact_email_invalid": "Die Kontakt-E-Mail muss gültig sein.",
+    "owns_required": "Eine Bestätigung der eigenen Stimme oder Erlaubnis ist erforderlich.",
+    "processing_required": "Die Erlaubnis, das Material zu Kandidaten-Atomen zu verarbeiten, ist erforderlich.",
+    "consent_required": "Das Kontrollkästchen zur endgültigen Zustimmung ist erforderlich.",
+    "material_required": "Fügen Sie mindestens eine Lehre, Geschichte, Praxis, Sprachzeile oder eine Biografie hinzu (Text, URL oder Upload)."
+  },
+  "common": {
+    "upload": "Hochladen",
+    "url_placeholder": "https://… (optionale URL)",
+    "paste_placeholder": "Inhalt einfügen oder eingeben…",
+    "add_row": "Zeile hinzufügen"
+  }
+}

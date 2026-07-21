@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/ahjan/phoenix_omega_worktrees/book-system-truth-matrix-20260711
+configfile: pytest.ini
+plugins: anyio-4.12.1
+collected 1 item
+
+tests/ci/test_accent_flagship_truth_gate.py F                            [100%]
+
+=================================== FAILURES ===================================
+____________ test_accent_flagship_truth_gate_artifacts_when_present ____________
+tests/ci/test_accent_flagship_truth_gate.py:22: in test_accent_flagship_truth_gate_artifacts_when_present
+    assert not errors, summary
+E   AssertionError: {'accent_budget': {'AUTHOR_COMMENTARY': 1, 'CITED_EVIDENCE': 1, 'ENCOURAGEMENT': 2, 'EXTERNAL_STORY': 2, ...}, 'assign..._REFLECTION', 'rendered_accent_audit.json has no accents rows', 'rendered_accent_audit count 0 < assignments 11'], ...}
+E   assert not ['plan.json missing', 'rendered_accent_audit.json missing', 'section_packet_audit.json missing', 'allowed_positions vi... after_REFLECTION', 'rendered_accent_audit.json has no accents rows', 'rendered_accent_audit count 0 < assignments 11']
+----------------------------- Captured stderr call -----------------------------
+FAIL: plan.json missing
+FAIL: rendered_accent_audit.json missing
+FAIL: section_packet_audit.json missing
+FAIL: allowed_positions violated for ac_ravi_anxiety_skeptic_standup_v01: got after_REFLECTION
+FAIL: rendered_accent_audit.json has no accents rows
+FAIL: rendered_accent_audit count 0 < assignments 11
+=========================== short test summary info ============================
+FAILED tests/ci/test_accent_flagship_truth_gate.py::test_accent_flagship_truth_gate_artifacts_when_present
+============================== 1 failed in 0.17s ===============================

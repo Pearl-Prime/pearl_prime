@@ -52,6 +52,8 @@ from typing import Optional
 
 import yaml
 
+from phoenix_v4.text.wordcount import CJK_SENTENCE_TERMINALS, count_words
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Data classes
@@ -424,13 +426,17 @@ def _detect_f2_broken_fragments(chapters: list[tuple[int, str]]) -> list[Registe
                     evidence={"rule": "F2.C_lowercase_noun_start", "sentence": sent[:120]},
                 ))
         # F2.D — sub-4-word standalone paragraph (excluding chapter headers, list items)
+        # Word units are CJK-honest (phoenix_v4.text.wordcount.count_words): a full Han
+        # paragraph must not be scored as a 1-word whitespace fragment.
         _f2d_paras = _split_paragraphs(ch_text)
         for _pi, para in enumerate(_f2d_paras):
-            wc = len(para.split())
+            wc = count_words(para)
             if 0 < wc < 4 and not para.startswith("#") and not para[0].isdigit():
                 # Filter out genuine 1-line caption strips that ARE meant to be short.
                 # Heuristic: a true 3-word slot artifact like "Ahjan's the practice" has no clear sentence shape.
-                if not para.endswith((".", "?", "!")):
+                # Terminal punctuation includes CJK 。？！ so localized sentences are not
+                # treated as unterminated fragments solely for lacking ASCII .?!.
+                if not para.endswith(CJK_SENTENCE_TERMINALS):
                     # DEFERRED-LANE register_verdict (2026-06-15): the FIRST paragraph of a
                     # chapter body is the chapter's working title (the renderer emits
                     # "Chapter N\n\n<Working Title>\n\n…"; _split_chapters has already stripped
@@ -462,7 +468,7 @@ def _detect_f2_broken_fragments(chapters: list[tuple[int, str]]) -> list[Registe
                 # Real content follows: a list item, or a line with >=3 words. Either means the
                 # post-colon slot was filled (just as its own paragraph) → not an F2.E artifact.
                 _is_list_item = bool(re.match(r"^(\d+[.)]|[-*•])\s+\S", _first_line))
-                if _is_list_item or len(_first_line.split()) >= 3:
+                if _is_list_item or count_words(_first_line) >= 3:
                     continue
             findings.append(RegisterFinding(
                 failure_id="F2",
@@ -663,7 +669,7 @@ def _detect_f6_cadence_repetition(chapters: list[tuple[int, str]]) -> list[Regis
     cadence_4grams: list[tuple[int, tuple[int, ...]]] = []
     for ch_num, ch_text in chapters:
         sents = _split_sentences(ch_text)
-        lens = [len(s.split()) for s in sents]
+        lens = [count_words(s) for s in sents]
         for i in range(len(lens) - 3):
             cadence_4grams.append((ch_num, tuple(lens[i:i + 4])))
 
@@ -1307,7 +1313,7 @@ def _f13_is_dwell_beat(sentence: str) -> bool:
     single concrete consequence — AND it is ≤~40 words ("a held breath, not a
     passage", §7.3). A long sentence, even if sensory, is not a dwell beat.
     """
-    if len(sentence.split()) > F13_DWELL_MAX_WORDS:
+    if count_words(sentence) > F13_DWELL_MAX_WORDS:
         return False
     return bool(
         F13_DWELL_BODY_RE.search(sentence)
@@ -1483,7 +1489,7 @@ def _detect_f14_beat_line_share(
                 continue
             total_body += 1
             sentences = _split_sentences(para)
-            word_count = len(para.split())
+            word_count = count_words(para)
             if (
                 len(sentences) <= 1
                 and word_count <= F14_BEAT_MAX_WORDS
@@ -1635,7 +1641,7 @@ def evaluate_register(
 
     book_metrics: dict = {
         "chapter_count": len(chapters),
-        "word_count": len(book_text.split()),
+        "word_count": count_words(book_text),
         "teacher_id": teacher_id,
         "persona_id": persona_id,
         "topic_id": topic_id,

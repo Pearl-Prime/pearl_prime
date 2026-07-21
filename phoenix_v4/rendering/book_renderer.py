@@ -28,6 +28,7 @@ from phoenix_v4.quality.chapter_flow_gate import (
     evaluate_chapter_flow,
     flow_profile_for_runtime_format,
 )
+from phoenix_v4.text.wordcount import count_words
 
 # ---------------------------------------------------------------------------
 # Delivery contract: forbidden patterns that must never reach output
@@ -36,6 +37,7 @@ from phoenix_v4.quality.chapter_flow_gate import (
 # Location variable config loaded lazily from config/content_banks/loc_var_render.yaml.
 # The YAML is the authoritative source; the dicts below are empty-by-default in-memory caches.
 _LOC_VAR_FALLBACKS: dict[str, str] = {}
+_LOC_VAR_FALLBACKS_BY_LOCALE: dict[str, dict[str, str]] = {}
 _LOC_VAR_ROTATIONS: dict[str, list[str]] = {}
 _LOC_VAR_LOADED: bool = False
 
@@ -46,7 +48,7 @@ _LOC_VAR_YAML = (
 
 
 def _load_loc_var_config() -> None:
-    global _LOC_VAR_FALLBACKS, _LOC_VAR_ROTATIONS, _LOC_VAR_LOADED
+    global _LOC_VAR_FALLBACKS, _LOC_VAR_FALLBACKS_BY_LOCALE, _LOC_VAR_ROTATIONS, _LOC_VAR_LOADED
     if _LOC_VAR_LOADED:
         return
     _LOC_VAR_LOADED = True
@@ -55,14 +57,33 @@ def _load_loc_var_config() -> None:
         with open(_LOC_VAR_YAML, encoding="utf-8") as fh:
             data = _yaml.safe_load(fh) or {}
         _LOC_VAR_FALLBACKS = dict(data.get("fallbacks") or {})
+        _LOC_VAR_FALLBACKS_BY_LOCALE = {
+            str(loc): {str(k): str(v) for k, v in (mapping or {}).items()}
+            for loc, mapping in (data.get("fallbacks_by_locale") or {}).items()
+            if isinstance(mapping, dict)
+        }
         _LOC_VAR_ROTATIONS = {k: list(v) for k, v in (data.get("rotations") or {}).items()}
     except Exception as exc:
         logger.warning("loc_var_render.yaml load failed (%s); using empty tables", exc)
 
 
-def _get_loc_var(var_name: str, chapter_index: int = 0) -> str:
-    """Get a location variable value, rotating per chapter for diversity."""
+def _plan_locale(plan: Optional[dict[str, Any]]) -> str:
+    plan = plan or {}
+    loc = plan.get("locale") or (plan.get("book_spec") or {}).get("locale") or "en-US"
+    return str(loc).strip() or "en-US"
+
+
+def _get_loc_var(var_name: str, chapter_index: int = 0, locale: str = "en-US") -> str:
+    """Get a location variable value, rotating per chapter for diversity.
+
+    Non-en locales with a ``fallbacks_by_locale`` bank use that bank exclusively
+    (no silent English fill). Rotation tables are English-only today.
+    """
     _load_loc_var_config()
+    if locale and locale != "en-US":
+        loc_bank = _LOC_VAR_FALLBACKS_BY_LOCALE.get(locale) or {}
+        if loc_bank:
+            return loc_bank.get(var_name, var_name)
     variants = _LOC_VAR_ROTATIONS.get(var_name)
     if variants:
         return variants[chapter_index % len(variants)]
@@ -281,6 +302,7 @@ def _resolve_loc_var_fallbacks(text: str, plan: Optional[dict[str, Any]] = None)
     """
     location_id = _infer_location_id(plan)
     profile = _load_location_profiles().get(location_id, {}) if location_id else {}
+    locale = _plan_locale(plan)
 
     # Split into chapters for per-chapter variant rotation
     import re as _re
@@ -293,15 +315,19 @@ def _resolve_loc_var_fallbacks(text: str, plan: Optional[dict[str, Any]] = None)
             resolved_parts.append(part)
             chapter_idx += 1
             continue
-        # Resolve location vars — use profile first, then rotating fallbacks
+        # Resolve location vars — use profile first, then rotating/locale fallbacks.
+        # When a locale bank exists, iterate its keys (not English-only) so zh-TW
+        # SCENE tokens are filled from zh-TW, not silently left for English pass.
         _load_loc_var_config()
-        for var_name in _LOC_VAR_FALLBACKS:
+        loc_bank = _LOC_VAR_FALLBACKS_BY_LOCALE.get(locale) if locale != "en-US" else None
+        var_names = list(loc_bank.keys()) if loc_bank else list(_LOC_VAR_FALLBACKS.keys())
+        for var_name in var_names:
             placeholder = "{" + var_name + "}"
             if placeholder in part:
-                if var_name in profile:
+                if var_name in profile and locale == "en-US":
                     part = part.replace(placeholder, profile[var_name])
                 else:
-                    part = part.replace(placeholder, _get_loc_var(var_name, chapter_idx))
+                    part = part.replace(placeholder, _get_loc_var(var_name, chapter_idx, locale=locale))
         resolved_parts.append(part)
     return "".join(resolved_parts)
 
@@ -406,7 +432,7 @@ def _dedup_repeated_blocks(
 
     _CHAPTER_HEADING_RE = re.compile(r"^Chapter\s+\d+", re.IGNORECASE)
 
-    pre_wc = len(text.split())
+    pre_wc = count_words(text)
     parts = re.split(r"\n{2,}", text)
     # Sprint-1 fix: reset seen-set at each chapter boundary so depth paragraphs
     # shared across chapters are not removed.  Within a single chapter the same
@@ -423,7 +449,7 @@ def _dedup_repeated_blocks(
             seen = set()
             kept.append(para)
             continue
-        wc = len(para.split())
+        wc = count_words(para)
         if wc < min_words:
             kept.append(para)
             continue
@@ -435,7 +461,7 @@ def _dedup_repeated_blocks(
         kept.append(para)
 
     deduped = "\n\n".join(kept)
-    post_wc = len(deduped.split())
+    post_wc = count_words(deduped)
     unique_ratio = (post_wc / pre_wc) if pre_wc else 1.0
     if word_floor > 0 and post_wc < word_floor:
         logger.warning(
@@ -507,7 +533,7 @@ def _keep_cap_for_paragraph(paragraph: str, *, base_keep: int) -> int:
       (defaults to 2; env override `PHOENIX_ATOM_PARAGRAPH_KEEP`).
     - Paragraphs longer than 200 words → `base_keep` (defaults to 1).
     """
-    wc = len(paragraph.split())
+    wc = count_words(paragraph)
     if _ATOM_PARA_MIN_WORDS <= wc <= _ATOM_PARA_MAX_WORDS:
         return max(base_keep, _atom_paragraph_keep_default())
     return base_keep
@@ -644,7 +670,7 @@ def _dedup_paragraphs_book_wide(
         if _is_practice_library_layer_paragraph(stripped):
             kept.append(stripped)
             continue
-        wc = len(stripped.split())
+        wc = count_words(stripped)
         cc = len(stripped)
         # F1-signature class: short, dense, multi-sentence re-stamp (HOOK/EXERCISE/
         # doctrine) that escapes the word floor below but fires a large F1 cluster.
@@ -1234,7 +1260,7 @@ def word_count_gate(text: str, runtime_format_id: str, source_hint: str = "outpu
 
     Raises WordCountGateError with a clear deficit message on failure.
     """
-    word_count = len(text.split())
+    word_count = count_words(text)
     word_range = _runtime_word_range(runtime_format_id)
 
     metrics = {
@@ -1732,7 +1758,7 @@ def _merge_tiny_bridge_paragraphs(chapter_body: str) -> str:
         # Only merge a SHORT line that is not itself a heading marker, and only when there is a
         # preceding body paragraph to attach to (never merge into the heading at index 0 alone).
         if (
-            len(stripped.split()) <= _CHOPPY_MERGE_MAX_WORDS
+            count_words(stripped) <= _CHOPPY_MERGE_MAX_WORDS
             and not stripped.startswith("#")
             and len(out) >= 1
         ):
@@ -1749,6 +1775,7 @@ def chapter_flow_gate_report(
     ei_v2_config: Optional[dict[str, Any]] = None,
     *,
     runtime_format_id: Optional[str] = None,
+    locale: Optional[str] = None,
 ) -> dict[str, Any]:
     """
     Evaluate each rendered chapter with chapter_flow_gate and return summary report.
@@ -1769,6 +1796,7 @@ def chapter_flow_gate_report(
     dg_cfg = (cfg_full or {}).get("dimension_gates") or {}
     dg_enabled = dg_cfg.get("enabled", True)
     flow_profile = _resolve_chapter_flow_profile(plan, runtime_format_id=runtime_format_id)
+    eval_locale = locale or (plan or {}).get("locale")
 
     chapter_slot_sequence = (plan or {}).get("chapter_slot_sequence") or []
     atom_ids = (plan or {}).get("atom_ids") or []
@@ -1825,7 +1853,7 @@ def chapter_flow_gate_report(
             slot_names, segment_proses = slot_meta[ch]
             composed = composed_chapters[ch]
             other_composed = [composed_chapters[j] for j in range(len(composed_chapters)) if j != ch]
-            text_result = evaluate_chapter_flow(composed, flow_profile=flow_profile)
+            text_result = evaluate_chapter_flow(composed, flow_profile=flow_profile, locale=eval_locale)
             errors = list(text_result.errors)
             for i, slot_name in enumerate(slot_names):
                 if slot_name == "TAKEAWAY":
@@ -1893,7 +1921,7 @@ def chapter_flow_gate_report(
     chapter_reports = []
     failed = 0
     for chapter_number, chapter_text in chapters:
-        res = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile)
+        res = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile, locale=eval_locale)
         if res.status != "PASS":
             failed += 1
         entry: dict[str, Any] = {
@@ -1956,7 +1984,7 @@ def _build_deficit_report(
                 break
             aid = atom_ids[idx]
             prose = prose_map.get(aid, "")
-            wc = len(prose.split()) if prose else 0
+            wc = count_words(prose) if prose else 0
             ch_data["slots"].append({"slot": slot_type, "atom_id": aid, "word_count": wc})
             ch_data["chapter_word_count"] += wc
             slot_totals[slot_type] = slot_totals.get(slot_type, 0) + wc

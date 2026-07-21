@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega/schemas/manga/structural_plan.schema.json",
+  "title": "Resolved structural panel layout plan envelope",
+  "description": "Verified plan envelope. plan_hash covers plan_body only (not self-referential).",
+  "type": "object",
+  "required": ["schema_version", "envelope_id", "plan_body", "plan_hash", "transform_model"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "envelope_id": { "type": "string" },
+    "plan_hash": { "type": "string", "minLength": 16 },
+    "transform_model": { "type": "string", "const": "structural_mvp_v1" },
+    "structural_template_id": { "type": "string" },
+    "panel_type_id": { "type": "string" },
+    "plan_body": {
+      "type": "object",
+      "required": ["panel_id", "canvas", "resolved_placements", "support_graph"],
+      "properties": {
+        "panel_id": { "type": "string" },
+        "canvas": { "type": "object" },
+        "resolved_placements": { "type": "array" },
+        "support_graph": { "type": "object" },
+        "required_support_proof": { "type": "array" },
+        "allowed_relations": { "type": "array" }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "status": { "enum": ["pending", "pass", "fail"] },
+        "failures": { "type": "array" }
+      }
+    }
+  }
+}

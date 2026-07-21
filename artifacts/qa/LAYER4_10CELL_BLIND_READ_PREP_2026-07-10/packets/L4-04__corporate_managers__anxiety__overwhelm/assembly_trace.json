@@ -1,0 +1,141 @@
+{
+  "trace_kind": "epub_derived_assembly_trace",
+  "honesty_note": "Full spine render-dir assembly_trace was not retained beside these EPUBs; this trace is reconstructed from the landed EPUB bytes + wave10 matrix/closeout provenance. Sufficient for blind-read prep; not a substitute for a live render-dir.",
+  "cell": {
+    "persona": "corporate_managers",
+    "topic": "anxiety",
+    "engine": "overwhelm",
+    "brand": "way_stream_sanctuary",
+    "runtime": "standard_book"
+  },
+  "queue_evidence": {
+    "wave10_matrix_row": {
+      "book_id": "way_stream_sanctuary__corporate_managers__anxiety__overwhelm",
+      "persona": "corporate_managers",
+      "topic": "anxiety",
+      "engine": "overwhelm",
+      "runtime": "standard_book",
+      "render_status": "PASS",
+      "register_outcome": "register_PASS",
+      "epub_outcome": "epub_ok",
+      "epub_path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__corporate_managers__anxiety__overwhelm.epub",
+      "epub_bytes": "47887",
+      "failing_gate": "none",
+      "notes": "spine+production; coverless; landed via #4486 merge"
+    },
+    "wave10_matrix_path": "artifacts/qa/WAYSTREAM_EPUB_WAVE10_MATRIX_2026-07-10.tsv",
+    "wave10_closeout_path": "artifacts/qa/WAYSTREAM_EPUB_WAVE10_CLOSEOUT_2026-07-10.md",
+    "land_commit": "321379f8f8efa5359b1a2af1ff6919cfc48011d4",
+    "land_pr": "#4486 / closeout #5510"
+  },
+  "epub": {
+    "path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__corporate_managers__anxiety__overwhelm.epub",
+    "bytes": 47887,
+    "sha256": "6223a43e74fa852eb564694aa53b00547d6b260e47b986be5c1751a7831f71c7"
+  },
+  "extracted_book": {
+    "path": "book.txt",
+    "bytes": 93232,
+    "sha256": "fd9921e51330d39917e20b702f12dabc991d85dbf3f3619f34678e576d283b84",
+    "word_count": 15748,
+    "chapter_count": 12
+  },
+  "chapters": [
+    {
+      "index": 1,
+      "source_file": "EPUB/chapter_01.xhtml",
+      "title": "Chapter 1",
+      "chars": 11253,
+      "words": 2032
+    },
+    {
+      "index": 2,
+      "source_file": "EPUB/chapter_02.xhtml",
+      "title": "Chapter 2",
+      "chars": 9112,
+      "words": 1588
+    },
+    {
+      "index": 3,
+      "source_file": "EPUB/chapter_03.xhtml",
+      "title": "Chapter 3",
+      "chars": 7489,
+      "words": 1317
+    },
+    {
+      "index": 4,
+      "source_file": "EPUB/chapter_04.xhtml",
+      "title": "Chapter 4",
+      "chars": 7781,
+      "words": 1265
+    },
+    {
+      "index": 5,
+      "source_file": "EPUB/chapter_05.xhtml",
+      "title": "Chapter 5",
+      "chars": 7695,
+      "words": 1257
+    },
+    {
+      "index": 6,
+      "source_file": "EPUB/chapter_06.xhtml",
+      "title": "Chapter 6",
+      "chars": 9352,
+      "words": 1529
+    },
+    {
+      "index": 7,
+      "source_file": "EPUB/chapter_07.xhtml",
+      "title": "Chapter 7",
+      "chars": 8393,
+      "words": 1391
+    },
+    {
+      "index": 8,
+      "source_file": "EPUB/chapter_08.xhtml",
+      "title": "Chapter 8",
+      "chars": 5238,
+      "words": 893
+    },
+    {
+      "index": 9,
+      "source_file": "EPUB/chapter_09.xhtml",
+      "title": "Chapter 9",
+      "chars": 4897,
+      "words": 824
+    },
+    {
+      "index": 10,
+      "source_file": "EPUB/chapter_10.xhtml",
+      "title": "Chapter 10",
+      "chars": 8188,
+      "words": 1367
+    },
+    {
+      "index": 11,
+      "source_file": "EPUB/chapter_11.xhtml",
+      "title": "Chapter 11",
+      "chars": 6636,
+      "words": 1112
+    },
+    {
+      "index": 12,
+      "source_file": "EPUB/chapter_12.xhtml",
+      "title": "Chapter 12",
+      "chars": 6629,
+      "words": 1101
+    }
+  ],
+  "opf_meta": {
+    "dc_title": "Anxiety Relief: When Everything Is Too Much: Drowning in Demands",
+    "dc_creator": "Mara Okonkwo",
+    "dc_identifier": "phoenix-omega-e8c06613ad8def34"
+  },
+  "pipeline_claim_from_matrix": {
+    "render_status": "PASS",
+    "register_outcome": "register_PASS",
+    "epub_outcome": "epub_ok",
+    "notes": "spine+production; coverless; landed via #4486 merge"
+  },
+  "generated_at": "2026-07-10T10:30:41Z"
+}

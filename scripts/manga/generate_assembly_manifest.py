@@ -42,31 +42,30 @@ sys.path.insert(0, str(REPO / "scripts" / "manga"))
 
 import assemble_from_bank as afb  # noqa: E402
 from composition_grammar import load_composition_meta  # noqa: E402
+from panel_planning_rules import shot_type_for_archetype  # noqa: E402
 from render_v4_episode import build_render_manifest, load_configs, load_panel_states  # noqa: E402
+from validate_chapter_composition_grammar import validate_chapter_composition_grammar  # noqa: E402
 
-# MANGA_COMPOSITION_GRAMMAR_SPEC.md §6.3 archetype → shot_type lookup
-ARCHETYPE_SHOT_TYPE: dict[str, str] = {
-    "sparse_establishing_wide": "establishing",
-    "morning_routine_sequence": "re_establish",
-    "walking_in_thought_medium": "re_establish",
-    "character_quiet_face": "reaction_emotion",
-    "character_face_micro_tension": "reaction_emotion",
-    "chest_breath_micro": "dialogue_bust",
-    "tea_beat_close_up": "insert_object",
-    "hand_table_micro": "insert_object",
-    "dappled_light_hand": "insert_object",
-    "phone_notification_macro": "insert_object",
-    "food_preparation_overhead": "insert_object",
-    "kettle_steam_macro": "insert_object",
-    "seasonal_anchor_object": "insert_object",
-    "window_light_threshold": "diegetic_cu",
-    "pet_companion_micro": "insert_object",
-    "long_drop_decompression": "establishing",
-    "miyazaki_ma_pause": "pillow_ma",
-    "character_at_table_medium": "establishing",
-    "shared_scene_medium": "establishing",
-    "pendulation_pair_visual_rhyme": "closure_breath",
+# Gap-render L2 assets (Pearl Star stillness lane 2026-07-09)
+NAMED_GAP_L2 = {
+    "hands_wrapping_cup": "L2_hands_wrapping_cup_clean_v2",
+    "seated_kitchen_knees_up": "L2_seated_kitchen_knees_up_v1",
+    "full_figure_kitchen_standing": "L2_full_figure_kitchen_standing_v1",
+    "clean_bust_calm": "L2_clean_bust_calm_v2",
 }
+KITCHEN_L0_STEM = "L0_2b9283d4c387"
+INSERT_OBJECT_ARCHETYPES = frozenset({
+    "tea_beat_close_up",
+    "hand_table_micro",
+    "dappled_light_hand",
+    "phone_notification_macro",
+    "food_preparation_overhead",
+    "kettle_steam_macro",
+    "seasonal_anchor_object",
+    "pet_companion_micro",
+})
+RE_ESTABLISH_ARCHETYPE = "shared_meal_table_medium"
+ROOM_ESTABLISH_ARCHETYPE = "character_at_table_medium"
 
 PANEL_ID_RE = re.compile(r"^ep\d{3}_\d{3}$")
 MIN_REAL_BYTES = 50_000  # matches check_render_progress_bytes.py stub-as-done floor
@@ -90,13 +89,13 @@ def _archetype_bbox(configs: dict[str, Any], archetype: str | None) -> list[floa
 
 
 def _shot_type(archetype: str | None) -> str | None:
-    if not archetype:
-        return None
-    return ARCHETYPE_SHOT_TYPE.get(archetype)
+    return shot_type_for_archetype(archetype)
 
 
 def _l0_derivation(shot: str | None, *, l0_meta: dict | None = None,
                    l2_meta: dict | None = None) -> dict[str, Any] | None:
+    if shot == "insert_object":
+        return {"type": "tone_gradient"}
     if shot in ("dialogue_bust", "reaction_emotion"):
         return {"type": "defocus"}
     if shot == "pillow_ma":
@@ -135,6 +134,131 @@ def _rel(path: Path) -> str:
         return str(path)
 
 
+def _resolve_named_l2(cache_dir: Path, stem: str) -> Path | None:
+    """Resolve gap-render L2 assets named L2_<id>_alpha.png on disk."""
+    layer_id = stem if stem.startswith("L2_") else f"L2_{stem}"
+    return _resolve_cache_asset(cache_dir, "L2", layer_id)
+
+
+def _select_insert_object_l2(cache_dir: Path, archetype: str | None) -> Path | None:
+    if archetype in INSERT_OBJECT_ARCHETYPES:
+        return _resolve_named_l2(cache_dir, NAMED_GAP_L2["hands_wrapping_cup"])
+    return None
+
+
+def _select_abstract_stage_l2(cache_dir: Path, shot: str | None) -> Path | None:
+    if shot in ("reaction_emotion", "dialogue_bust"):
+        return _resolve_named_l2(cache_dir, NAMED_GAP_L2["clean_bust_calm"])
+    return None
+
+
+def _maybe_override_room_l2(
+    *,
+    shot: str | None,
+    l0_path: Path | None,
+    l2_path: Path | None,
+    cache_dir: Path,
+) -> Path | None:
+    """Route room-capable gap L2 onto establishing / re_establish kitchen plates."""
+    if shot not in ("establishing", "re_establish") or not l0_path:
+        return l2_path
+    if KITCHEN_L0_STEM not in l0_path.name:
+        return l2_path
+    if shot == "re_establish":
+        return _resolve_named_l2(cache_dir, NAMED_GAP_L2["seated_kitchen_knees_up"]) or l2_path
+    if shot == "establishing":
+        return _resolve_named_l2(cache_dir, NAMED_GAP_L2["full_figure_kitchen_standing"]) or l2_path
+    return l2_path
+
+
+def _kitchen_l0_path(cache_dir: Path) -> Path | None:
+    p = cache_dir / "L0" / f"{KITCHEN_L0_STEM}.png"
+    return p if p.is_file() and p.stat().st_size >= MIN_REAL_BYTES else None
+
+
+def _build_re_establish_panel(
+    *,
+    panel: dict[str, Any],
+    cache_dir: Path,
+    configs: dict[str, Any],
+) -> None:
+    """Rewrite a panel as HR-U16 re_establish on kitchen full_render + room L2."""
+    kitchen_l0 = _kitchen_l0_path(cache_dir)
+    seated_l2 = _resolve_named_l2(cache_dir, NAMED_GAP_L2["seated_kitchen_knees_up"])
+    if not kitchen_l0 or not seated_l2:
+        return
+    bbox = _archetype_bbox(configs, RE_ESTABLISH_ARCHETYPE) or [25, 28, 56, 66]
+    panel["shot_type"] = "re_establish"
+    panel["archetype"] = RE_ESTABLISH_ARCHETYPE
+    panel["layers"] = [
+        {
+            "layer_class": "L0",
+            "asset": _rel(kitchen_l0),
+            "provenance": "REAL",
+        },
+        {
+            "layer_class": "L2",
+            "asset": _rel(seated_l2),
+            "provenance": "REAL",
+            "anchor_slot": "seat_at_table",
+            "grounding": {"contact_shadow": True, "occluder": True},
+            "bbox_pct": bbox,
+        },
+    ]
+
+
+def _maybe_add_room_l2_on_establishing(
+    *,
+    entry: dict[str, Any],
+    shot: str | None,
+    l0_path: Path | None,
+    cache_dir: Path,
+    configs: dict[str, Any],
+) -> None:
+    """Add room-capable full-figure L2 to kitchen establishing panels that are L0-only."""
+    if shot != "establishing" or not l0_path or KITCHEN_L0_STEM not in l0_path.name:
+        return
+    if any(lyr.get("layer_class") == "L2" for lyr in entry.get("layers") or []):
+        return
+    full_l2 = _resolve_named_l2(cache_dir, NAMED_GAP_L2["full_figure_kitchen_standing"])
+    if not full_l2:
+        return
+    bbox = _archetype_bbox(configs, ROOM_ESTABLISH_ARCHETYPE) or [22, 18, 60, 78]
+    entry["layers"].append({
+        "layer_class": "L2",
+        "asset": _rel(full_l2),
+        "provenance": "REAL",
+        "anchor_slot": "seat_at_table",
+        "grounding": {"contact_shadow": True, "occluder": True},
+        "bbox_pct": bbox,
+    })
+    entry["archetype"] = entry.get("archetype") or ROOM_ESTABLISH_ARCHETYPE
+
+
+def _enforce_hr_u16_re_establish(
+    *,
+    panels: list[dict[str, Any]],
+    cache_dir: Path,
+    configs: dict[str, Any],
+    series_id: str,
+    manifest_dir: Path,
+) -> None:
+    """Patch first HR-U16 failure panel per abstract run into re_establish."""
+    for _ in range(8):
+        manifest_stub = {"series_id": series_id, "panels": panels}
+        fails = [
+            f for f in validate_chapter_composition_grammar(manifest_stub, manifest_dir)
+            if f.rule_id == "HR-U16" and f.severity == "FAIL"
+        ]
+        if not fails:
+            return
+        target_pid = fails[0].panel_id
+        for panel in panels:
+            if panel.get("panel_id") == target_pid:
+                _build_re_establish_panel(panel=panel, cache_dir=cache_dir, configs=configs)
+                break
+
+
 def generate(
     *,
     series_id: str,
@@ -169,6 +293,16 @@ def generate(
         l2_id = mapping.get("L2")
         l0_path = _resolve_cache_asset(cache_dir, "L0", l0_id) if l0_id else None
         l2_path = _resolve_cache_asset(cache_dir, "L2", l2_id) if l2_id else None
+        if shot == "insert_object" and archetype in INSERT_OBJECT_ARCHETYPES:
+            gap_l2 = _select_insert_object_l2(cache_dir, archetype)
+            if gap_l2:
+                l2_path = gap_l2
+        abstract_l2 = _select_abstract_stage_l2(cache_dir, shot)
+        if abstract_l2:
+            l2_path = abstract_l2
+        l2_path = _maybe_override_room_l2(
+            shot=shot, l0_path=l0_path, l2_path=l2_path, cache_dir=cache_dir,
+        )
         l0_meta = load_composition_meta(l0_path) if l0_path else None
         l2_meta = load_composition_meta(l2_path) if l2_path else None
 
@@ -197,7 +331,7 @@ def generate(
                         "provenance_note": f"bank gap — enqueue L0 render for {l0_id}",
                     })
 
-        if l2_id:
+        if l2_id or l2_path:
             prov, note = _provenance_for(l2_path)
             if prov == "REAL":
                 stats["layers_real"] += 1
@@ -212,12 +346,10 @@ def generate(
                 if shot in ("establishing", "re_establish") and l0_meta and not l0_has_deriv:
                     l2_layer["anchor_slot"] = "seat_at_table"
                     l2_layer["grounding"] = {"contact_shadow": True, "occluder": True}
-                # dialogue_bust/reaction_emotion: omit anchor_slot — assembler resolves
-                # via panel shot_type → DEFAULT_ABSTRACT_STAGE_SLOT (§6.4 wiring)
                 if bbox:
                     l2_layer["bbox_pct"] = bbox
                 layers.append(l2_layer)
-            else:
+            elif l2_id:
                 stats["layers_missing"] += 1
                 panel_gaps.append(f"L2:{l2_id}")
                 if include_gaps and bbox:
@@ -245,9 +377,25 @@ def generate(
             entry["shot_type"] = shot
         if panel.get("beat_type"):
             entry["beat_type"] = panel["beat_type"]
+        _maybe_add_room_l2_on_establishing(
+            entry=entry,
+            shot=shot,
+            l0_path=l0_path,
+            cache_dir=cache_dir,
+            configs=configs,
+        )
         panels_out.append(entry)
         if not panel_gaps:
             stats["panels_complete"] += 1
+
+    manifest_dir = REPO / "artifacts" / "manga" / series_id / "assembly_manifests"
+    _enforce_hr_u16_re_establish(
+        panels=panels_out,
+        cache_dir=cache_dir,
+        configs=configs,
+        series_id=series_id,
+        manifest_dir=manifest_dir,
+    )
 
     manifest = {
         "schema_version": "1.0.0",

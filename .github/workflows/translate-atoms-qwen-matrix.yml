@@ -1,96 +1,55 @@
 # Translation: run full comparator loop for all personas × all CJK6 locales.
 # translate -> judge -> patch -> retry (max 3) -> pass or manual_review.
-# Scheduled weekly Sunday 2 AM; can also be triggered manually.
+#
+# DISABLED 2026-07-10 (follow-up to PR #5498, artifacts/qa/CI_WORKFLOW_BANNED_KEY_FIX_2026-07-10.md):
+# this workflow injected DASHSCOPE_API_KEY/BASE_URL/MODEL from repo secrets into
+# scripts/localization/run_translation_loop.py, running on GitHub-hosted
+# ubuntu-latest -- which cannot reach Pearl Star's Tailscale-only Ollama
+# endpoint, the compliant Tier-2 path. It also ran on an UNATTENDED WEEKLY
+# SCHEDULE (Sundays 2 AM) -- the highest-risk shape in this audit, since any
+# violation here would have been automatic and silent rather than requiring a
+# manual dispatch. Whether it ever made a real (banned) DashScope-cloud call
+# depends on what the QWEN_BASE_URL secret is actually configured to, which is
+# not knowable from the repo alone; either way, an ubuntu-latest runner
+# injecting these keys on an automatic schedule cannot be verified compliant.
+# See artifacts/qa/CI_DASHSCOPE_WORKFLOW_AUDIT_2026-07-10.md for the full
+# 8-workflow audit this fix is part of.
+#
+# The `schedule:` trigger is removed entirely (an always-failing job on an
+# unattended cron is pure noise, not a safeguard). workflow_dispatch is kept
+# for shape only. run_translation_loop.py is already Ollama-capable (PR
+# #5498) -- what's missing is a runner that can reach Pearl Star. Until a
+# self-hosted runner registered on that Tailscale network exists (an operator
+# infra decision, not made here), use the interactive path instead: run
+# `scripts/localization/run_translation_loop.py` locally/on Pearl Star with
+# OLLAMA_HOST set, as proven in artifacts/qa/JA_JP_TRANSLATION_CLOSEOUT_2026-07-10.md.
 
 name: Translate atoms (Qwen matrix)
-
-concurrency:
-  group: translate-matrix
-  cancel-in-progress: false
 
 on:
   workflow_dispatch:
     inputs:
       persona:
-        description: 'Persona filter (blank = all)'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: string
         default: ''
       locale:
-        description: 'Locale filter (blank = all CJK6)'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: string
         default: ''
-  schedule:
-    - cron: '0 2 * * 0'
+
+permissions:
+  contents: read
 
 jobs:
-  translate:
+  blocked:
     runs-on: ubuntu-latest
-    timeout-minutes: 360
-    env:
-      DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY || secrets.QWEN_API_KEY }}
-      DASHSCOPE_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
-      DASHSCOPE_MODEL: ${{ secrets.QWEN_MODEL }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: pip install --quiet openai pyyaml
-
-      - name: Run translation loop
+      - name: Explain why this workflow is disabled
         run: |
-          CMD="PYTHONPATH=. python3 scripts/localization/run_translation_loop.py"
-
-          PERSONA="${{ github.event.inputs.persona }}"
-          LOCALE="${{ github.event.inputs.locale }}"
-
-          if [ -n "$PERSONA" ]; then
-            CMD="$CMD --persona $PERSONA"
-          fi
-
-          if [ -n "$LOCALE" ]; then
-            CMD="$CMD --locale $LOCALE"
-          else
-            CMD="$CMD --all-locales"
-          fi
-
-          CMD="$CMD --resume --max-parallel 5"
-          eval $CMD
-
-      - name: Report coverage
-        run: PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
-
-      - name: Structural gate
-        run: PYTHONPATH=. python3 scripts/localization/locale_structural_gate.py --all-locales || true
-
-      - name: Create PR with translations
-        if: success()
-        run: |
-          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard atoms/)" ]; then
-            echo "No new translations."
-            exit 0
-          fi
-
-          BRANCH="agent/translate-matrix-$(date +%Y%m%d-%H%M%S)"
-          git checkout -b "$BRANCH"
-          git add atoms/*/*/locales/ atoms/*/*/*/locales/
-          git add artifacts/localization/ || true
-          git commit -m "feat(localization): weekly translation matrix run
-
-          Automated CJK6 translation via comparator loop.
-
-          Co-Authored-By: Qwen (Dashscope) <noreply@alibaba.com>"
-          git push -u origin "$BRANCH"
-          gh pr create \
-            --title "feat(localization): weekly translation matrix $(date +%Y-%m-%d)" \
-            --body "Automated weekly translation via full comparator loop (translate → judge → patch → retry max 3). Review sample translations before merging."
-        env:
-          GH_TOKEN: ${{ github.token }}
+          echo "::error::This workflow is disabled — it injected DASHSCOPE_API_KEY/BASE_URL/MODEL from repo secrets on an UNATTENDED WEEKLY SCHEDULE, while running on GitHub-hosted ubuntu-latest, which cannot reach Pearl Star's Tailscale-only Ollama endpoint (the compliant Tier-2 path under CLAUDE.md's LLM Tier Policy). The weekly cron trigger has been removed."
+          echo "::error::Use the interactive path instead: python3 scripts/localization/run_translation_loop.py with OLLAMA_HOST set, run from an operator/Claude Code session with Tailscale access to Pearl Star."
+          echo "::error::See artifacts/qa/CI_DASHSCOPE_WORKFLOW_AUDIT_2026-07-10.md for full context."
+          exit 1

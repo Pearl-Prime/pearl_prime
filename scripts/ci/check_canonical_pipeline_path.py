@@ -51,6 +51,8 @@ DEV_PATH_PREFIXES = (
     "scripts/systems_test/",
     "scripts/canary/",
     "scripts/pilot/",
+    "scripts/debug/",
+    "scripts/experimental/",
     "tests/",
 )
 PRODUCTION_MARKERS = ("--render-book", "--quality-profile", "--render-dir")

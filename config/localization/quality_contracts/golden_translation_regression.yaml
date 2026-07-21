@@ -1,8 +1,16 @@
 # Golden segments for translation regression tests.
-# Anchored to atoms/tech_finance_burnout/anxiety/{PIVOT,TAKEAWAY,THREAD}/CANONICAL.txt
+# Anchored to atoms/tech_finance_burnout/anxiety/{PIVOT,TAKEAWAY,THREAD,PERMISSION}/CANONICAL.txt
 # so substring checks resolve against the live corpus.
+#
+# PERMISSION added 2026-07-09 (translation source-pack lane): this slot type has been
+# named as translation-required since 2026-03-06 (see README.md "When enabling locales")
+# and scripts/validate_translations.py / scripts/check_golden_translation.py already
+# accept atom_type=PERMISSION, but no golden segment existed for it until now. The two
+# segments below are anchored to real, already-translated corpus lines (not new
+# translations authored for this PR) — see
+# atoms/tech_finance_burnout/anxiety/PERMISSION/CANONICAL.txt and its locales/ subtree.
 
-schema_version: "1.1"
+schema_version: "1.2"
 
 segments:
   - id: pivot_01
@@ -70,3 +78,25 @@ segments:
       zh-TW: "你已辨識出焦慮的模式"
       zh-HK: ""
       zh-SG: ""
+
+  - id: permission_01
+    source_en: "You are allowed to feel the alarm without threat without fixing it before the next sprint. Feeling it is not failing at it."
+    atom_type: PERMISSION
+    expected:
+      ja-JP: "脅威を感じず、次のスプリントが始まる前にそれを解消しようとしなくてもいいのです。感じているだけで、すでに失敗しているわけではありません。"
+      ko-KR: "당신은 다음 스프린트 전에 해결하려 하지 않아도 되는 경고 신호를 느낄 수 있습니다. 그걸 느끼는 것 자체가 실패가 아닙니다."
+      zh-CN: "你完全可以感受到警觉，却不必觉得有威胁，也无需在下一次冲刺开始前就急着解决它。感受它，并不等于搞砸了。"
+      zh-TW: "你可以感受到警訊，卻不需視其為威脅，也不必在下一次衝刺前急著解決它。感受它，並非等於搞砸了它。"
+      zh-HK: "你可以感受到警訊，卻毋須視之為威脅，亦毋須在下一個衝刺階段開始前急於解決它。單是感受到它，並非代表你失敗了。"
+      zh-SG: "你可以感受到警觉，却不必视之为威胁，也不必在下一次冲刺前急着解决它。感受它，并不等于搞砸了。"
+
+  - id: permission_02
+    source_en: "You are allowed to struggle with anxiety even when everyone at the optimization seems fine."
+    atom_type: PERMISSION
+    expected:
+      ja-JP: "周囲のみんなが最適化のなかで平然としているときでも、不安と格闘していいのです。"
+      ko-KR: "당신은 주변 모두가 최적화 과정에서 아무렇지 않은 듯 보일 때조차 불안을 겪으며 힘들어할 수 있습니다."
+      zh-CN: "你完全可以为焦虑而挣扎，哪怕身边所有人在“优化”中看起来都游刃有余。"
+      zh-TW: "即使周遭所有人看起來都適應良好，你依然可以正與焦慮苦苦掙扎。"
+      zh-HK: "即使身邊所有人看似在優化過程中安然無恙，你依然可以正與焦慮苦苦掙扎。"
+      zh-SG: "即使身边所有人看起来都游刃有余，你依然可以被焦虑困扰。"

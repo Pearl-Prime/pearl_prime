@@ -83,6 +83,7 @@ sys.path.insert(0, str(REPO / "scripts" / "manga"))
 # V4 helpers reused UNCHANGED per V5 spec §9
 import contract_to_prompt_compiler as ctpc  # noqa: E402
 import render_v4_episode as v4  # noqa: E402  (loaders, _build_l0/l2_contract_inputs)
+import structural_composition as sc  # noqa: E402
 import validate_layer as vl  # noqa: E402
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -114,6 +115,7 @@ FRAMING_FOR_SUBJECT = {
     "character_full_figure": "MS",
     "character_full_figure_walking": "MS",
     "character_full_figure_x2": "MS",
+    "character_ELS_in_L0": "LS",
     "character_hand_only": "ECU",
     "character_hands_and_arms": "ECU",
     "character_hands_only": "ECU",
@@ -414,12 +416,43 @@ def compute_panel_seed(
     return seed_base + (panel_index * 1009)
 
 
+def _effective_character_subject_type(panel: dict, arch_ctx: dict) -> Optional[str]:
+    """Resolve the effective character subject type for a panel.
+
+    Some archetypes are environment-first (`subject_type: null`) but declare an
+    additive promotion surface for authored on-frame characters. Those should
+    compile through the character contract when operator state explicitly puts a
+    character in frame, while remaining L0 scene-only otherwise.
+    """
+    subject_type = arch_ctx.get("subject_type")
+    if subject_type and "character_" in str(subject_type):
+        return str(subject_type)
+
+    promoted = arch_ctx.get("on_frame_character_subject_type")
+    if not promoted or "character_" not in str(promoted):
+        return None
+
+    chars = panel.get("character_state") or {}
+    if not chars:
+        return None
+
+    rel_field = panel.get("relational_field") or {}
+    active = rel_field.get("active_entities") or []
+    for cid in chars:
+        on_frame = next(
+            (e.get("on_frame", True) for e in active if e.get("id") == cid), True
+        )
+        if on_frame:
+            return str(promoted)
+    return None
+
+
 def _resolve_archetype_subject_state(
     panel: dict, arch_ctx: dict
 ) -> tuple[Optional[str], Optional[dict]]:
     """Pick the on-frame character_state entry for this panel (V4 §15.B.1 single-char)."""
-    subject_type = arch_ctx.get("subject_type")
-    if not subject_type or "character_" not in str(subject_type):
+    subject_type = _effective_character_subject_type(panel, arch_ctx)
+    if not subject_type:
         return None, None
 
     chars = panel.get("character_state") or {}
@@ -454,17 +487,20 @@ def _build_v5_l0_contract_for_panel(panel: dict, configs: dict) -> dict:
 
 def _build_v5_l2_contract_for_panel(
     panel: dict, configs: dict, character_id: str, cstate: dict, arch_ctx: dict
-) -> tuple[dict, dict]:
+) -> tuple[dict, dict, str]:
     """Adapt V4's _build_l2_contract_inputs to a panel-level call.
 
     V4 derived its L2 meta from the manifest dedup pass; V5 builds it inline per panel
     (no manifest). Returns (contract_inputs, safe_zone_row).
     """
+    subject_type = _effective_character_subject_type(panel, arch_ctx) or str(
+        arch_ctx.get("subject_type") or ""
+    )
     ss = panel.get("scene_state") or {}
     l2_meta = {
         "character_id": character_id,
         "archetype": panel.get("archetype"),
-        "subject_type": arch_ctx.get("subject_type"),
+        "subject_type": subject_type,
         "pose_id": cstate.get("pose_id"),
         "emotional": cstate.get("emotional"),
         "expression_dial": float(cstate.get("expression_dial", 0.2) or 0.2),
@@ -475,8 +511,184 @@ def _build_v5_l2_contract_for_panel(
         "temporal": ss.get("temporal"),
         "light_rig_id": ss.get("light_rig_id"),
     }
-    contract_inputs, safe_zone_row, _arch_ctx = v4._build_l2_contract_inputs(l2_meta, configs)
-    return contract_inputs, safe_zone_row
+    contract_inputs, safe_zone_row, _arch_ctx = v4._build_l2_contract_inputs(
+        l2_meta,
+        configs,
+        subject_type_override=subject_type,
+    )
+    return contract_inputs, safe_zone_row, subject_type
+
+
+def _rekey_prompt_bundle(
+    bundle: ctpc.PromptBundle,
+    *,
+    positive: str,
+    provenance_updates: Optional[dict[str, Any]] = None,
+) -> ctpc.PromptBundle:
+    payload = json.dumps(
+        {
+            "layer_type": bundle.provenance.get("layer_type", "L2"),
+            "positive": positive,
+            "negative": bundle.negative,
+            "parameters": bundle.parameters,
+        },
+        sort_keys=True,
+    )
+    provenance = dict(bundle.provenance)
+    if provenance_updates:
+        provenance.update(provenance_updates)
+    return ctpc.PromptBundle(
+        positive=positive,
+        negative=bundle.negative,
+        parameters=bundle.parameters,
+        cache_key=hashlib.sha256(payload.encode("utf-8")).hexdigest(),
+        provenance=provenance,
+        warnings=list(bundle.warnings),
+    )
+
+
+def _els_support_clause(archetype: str) -> str:
+    """Return the structural grounding rule for wide character establishes."""
+    try:
+        panel_type_id = sc.bridge_hint_from_archetype(archetype)
+        if not panel_type_id:
+            raise KeyError("no bridge hint")
+        bridge_row = sc.bridge_for_panel_type(panel_type_id)
+        template_id = bridge_row.get("structural_template_id")
+        templates = (sc.load_templates().get("templates") or {})
+        description = ((templates.get(template_id) or {}).get("description") or "").strip()
+        if description:
+            return description
+    except Exception:
+        pass
+    return "Full standing figure with feet visibly contacting the readable room floor; no floating torso or prop."
+
+
+def _character_els_placement_clause(
+    *,
+    archetype: str,
+    arch_meta: dict,
+) -> Optional[str]:
+    bbox = arch_meta.get("character_placement_bbox")
+    if not (isinstance(bbox, list) and len(bbox) == 4):
+        return None
+    x0, y0, x1, y1 = bbox
+    width = round(float(x1) - float(x0), 1)
+    height = round(float(y1) - float(y0), 1)
+    support_clause = _els_support_clause(archetype)
+    return (
+        "keep the environment primary. Place the full-body figure inside the archetype "
+        f"placement box x {x0}-{x1}% / y {y0}-{y1}% (about {width}% of frame width and "
+        f"{height}% of frame height), biased to the lower-left region of the frame. "
+        "Preserve the upper and right field as breathable negative space. "
+        f"Structural grounding: {support_clause}"
+    )
+
+
+def _compile_character_els_bundle(
+    panel: dict,
+    configs: dict,
+    l2_contract_inputs: dict,
+    *,
+    archetype: str,
+    arch_meta: dict,
+) -> ctpc.PromptBundle:
+    """Compile a promoted wide-character panel with environment-first ordering.
+
+    The stock L2 template is character-first and tends to zoom the figure too
+    large for `character_ELS_in_L0`. For these promoted environment-first
+    archetypes, compose the prompt from the real L0 scene template plus the L2
+    character state and structural placement clause.
+    """
+    env_contract_inputs = _build_v5_l0_contract_for_panel(panel, configs)
+    env_bundle = ctpc.compile_prompt("L0", env_contract_inputs)
+    l2_bundle = ctpc.compile_prompt("L2", l2_contract_inputs)
+    placement_clause = _character_els_placement_clause(
+        archetype=archetype,
+        arch_meta=arch_meta,
+    )
+    if not placement_clause:
+        return l2_bundle
+
+    env_positive = env_bundle.positive.replace(
+        "No people in scene.\n",
+        "A single small character may be present near the window.\n",
+    )
+    continuity = l2_contract_inputs["continuity"]
+    character = l2_contract_inputs["character"]
+    expr_line = (
+        f"EXPRESSION: {continuity['emotional_clause']} at intensity "
+        f"{continuity['expression_dial']}."
+    )
+    if continuity.get("breath_phase_clause"):
+        expr_line = f"{expr_line} {continuity['breath_phase_clause']}"
+    character_block = (
+        f"CHARACTER: {character['render_prompt_base']}.\n\n"
+        f"POSE: {continuity['pose_clause']}.\n"
+        f"GAZE: {continuity['gaze_clause']}.\n"
+        f"HAND STATE: {continuity['hand_state_clause']}.\n"
+        f"{expr_line}\n\n"
+        f"CHARACTER PLACEMENT: {placement_clause}"
+    )
+    if "\n\nLIGHTING:" in env_positive:
+        positive = env_positive.replace(
+            "\n\nLIGHTING:",
+            f"\n\n{character_block}\n\nLIGHTING:",
+            1,
+        )
+    else:
+        positive = f"{env_positive}\n\n{character_block}"
+    return _rekey_prompt_bundle(
+        l2_bundle,
+        positive=positive.strip(),
+        provenance_updates={"prompt_augmentation": "character_els_env_first_v2"},
+    )
+
+
+def _augment_prompt_for_character_els(
+    bundle: ctpc.PromptBundle,
+    *,
+    archetype: str,
+    arch_meta: dict,
+) -> ctpc.PromptBundle:
+    placement_clause = _character_els_placement_clause(
+        archetype=archetype,
+        arch_meta=arch_meta,
+    )
+    if not placement_clause:
+        return bundle
+    composition_clause = f"COMPOSITION: {placement_clause}"
+    positive = bundle.positive.replace(
+        "\n\nPortrait orientation",
+        f"\n\n{composition_clause}\n\nPortrait orientation",
+    )
+    return _rekey_prompt_bundle(
+        bundle,
+        positive=positive,
+        provenance_updates={"prompt_augmentation": "character_els_structural_composition_v1"},
+    )
+
+
+def _augment_prompt_for_mecha_clean_layer_decompose(
+    bundle: ctpc.PromptBundle,
+) -> ctpc.PromptBundle:
+    """Make Qwen layered output honor clean mecha L0/L2/L3 roles."""
+    if "mecha" not in bundle.positive.lower():
+        return bundle
+    clause = (
+        "V5 MECHA LAYER SEPARATION REQUIREMENT: layer_01 must be an empty "
+        "environment/support plate with no pilot, person, foreground subject, or hero "
+        "mecha subject. layer_02 must be exactly one alpha-separable pilot OR mecha "
+        "subject with no cockpit, hangar, console, background, or environment. Any "
+        "layer_03 must be one isolated telemetry/object prop only. Do not bake the "
+        "final composite into the individual layers."
+    )
+    positive = f"{bundle.positive.strip()}\n\n{clause}"
+    return _rekey_prompt_bundle(
+        bundle,
+        positive=positive,
+        provenance_updates={"mecha_layer_contract": "mecha_clean_structural_layer_v1"},
+    )
 
 
 def compile_v5_full_panel_prompt(
@@ -490,7 +702,9 @@ def compile_v5_full_panel_prompt(
     (which encodes subject + scene_context + light + style + genre — exactly what V5
     needs for a unified full-panel render).
 
-    For environmental archetypes (subject_type=None), falls back to L0 template.
+    For environmental archetypes (subject_type=None), falls back to L0 template
+    unless operator-authored on-frame state promotes them through
+    on_frame_character_subject_type.
     """
     archetype = panel.get("archetype")
     if not archetype:
@@ -501,20 +715,33 @@ def compile_v5_full_panel_prompt(
         raise ValueError(
             f"archetype {archetype!r} not declared in iyashikei.scene_context.yaml"
         )
+    arch_meta = (
+        (configs.get("panel_templates", {}).get("archetypes", {}) or {}).get(archetype, {})
+        or {}
+    )
 
     character_id, cstate = _resolve_archetype_subject_state(panel, arch_ctx)
 
     if character_id and cstate:
-        contract_inputs, safe_zone_row = _build_v5_l2_contract_for_panel(
+        contract_inputs, safe_zone_row, subject_type = _build_v5_l2_contract_for_panel(
             panel, configs, character_id, cstate, arch_ctx
         )
-        bundle = ctpc.compile_prompt("L2", contract_inputs)
-        return bundle, "L2", safe_zone_row, arch_ctx
+        if subject_type == "character_ELS_in_L0":
+            bundle = _compile_character_els_bundle(
+                panel,
+                configs,
+                contract_inputs,
+                archetype=archetype,
+                arch_meta=arch_meta,
+            )
+        else:
+            bundle = ctpc.compile_prompt("L2", contract_inputs)
+        return _augment_prompt_for_mecha_clean_layer_decompose(bundle), "L2", safe_zone_row, arch_ctx
 
     # Environmental / off-frame: render scene only via L0 template.
     contract_inputs = _build_v5_l0_contract_for_panel(panel, configs)
     bundle = ctpc.compile_prompt("L0", contract_inputs)
-    return bundle, "L0", None, arch_ctx
+    return _augment_prompt_for_mecha_clean_layer_decompose(bundle), "L0", None, arch_ctx
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -880,6 +1107,11 @@ def process_panel(
         "gpu_before": dispatch_telem.get("gpu_before"),
         "gpu_after": dispatch_telem.get("gpu_after"),
         "layer_paths": [str(p.relative_to(REPO)) for p in layer_paths],
+        "layer_roles": {
+            "layer_00.png": "model_composite",
+            "layer_01.png": "background",
+            "layer_02.png": "foreground_component",
+        },
         "composite_path": str(composite_path.relative_to(REPO)),
         "validation_passed": summary["validation_passed"],
         "compiled_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),

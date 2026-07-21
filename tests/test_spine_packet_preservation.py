@@ -9,6 +9,7 @@ from phoenix_v4.planning.enrichment_select import (
 from phoenix_v4.rendering.chapter_composer import (
     compose_additive_chapter_prose,
     compose_chapter_prose,
+    compose_ordered_chapter_prose,
     _requires_additive_compose,
 )
 from phoenix_v4.rendering.golden_chapter_synthesis import build_ordered_slot_streams
@@ -87,6 +88,97 @@ def test_compose_additive_chapter_prose_no_word_loss() -> None:
     assert blocks[1] in out
     assert out.count("Block one") == 1
     assert out.count("Block two") == 1
+
+
+def test_compose_additive_chapter_prose_defers_scene_adjacent_and_back_to_back_stories() -> None:
+    scene = (
+        "Priya's bedroom is dark except for the laptop screen. The send button waits in the corner."
+    )
+    story_open = (
+        "Priya submits the project update at 11:47pm. The message leaves her hands before her chest agrees."
+    )
+    story_mid = (
+        "Priya wakes to the calendar already running in her body. The first meeting is still an hour away."
+    )
+    story_close = (
+        "Priya leaves a fifteen-minute block empty and discovers the day does not collapse around it."
+    )
+    pivot = "The first useful distinction is between the alarm and the story the alarm writes."
+    reflection = "Your body is rehearsing a future that has not happened yet."
+    takeaway = "The weather of the body is not the climate of the self."
+    types = [
+        "HOOK",
+        "SCENE",
+        "STORY",
+        "PIVOT",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "STORY",
+        "TAKEAWAY",
+        "THREAD",
+    ]
+    proses = [
+        "You sent it and your chest never got the receipt.",
+        scene,
+        story_open,
+        pivot,
+        reflection,
+        "Take one slow exhale before you check the phone again.",
+        story_mid,
+        story_close,
+        takeaway,
+        "The next chapter begins where the body keeps score.",
+    ]
+
+    out = compose_chapter_prose(types, proses, chapter_index=1, total_chapters=12)
+
+    for block in (scene, story_open, story_mid, story_close, pivot, reflection, takeaway):
+        assert block in out
+    assert out.index(scene) < out.index(pivot) < out.index(story_open)
+    assert out.index(reflection) < out.index(story_mid) < out.index(takeaway) < out.index(story_close)
+
+
+def test_compose_ordered_chapter_prose_preserves_strict_slot_order() -> None:
+    """Flagship ordered path must stay 1:1 — deferral would break beat fingerprints."""
+    scene = "Priya waits in the blue light of the laptop, still not pressing send."
+    story_open = "Priya submits the update at 11:47pm and checks Slack again before the room changes."
+    pivot = "The first distinction is between the alarm and the story it writes."
+    story_mid = "Priya wakes to the calendar already running in her body before she stands up."
+    story_close = "Priya leaves a fifteen-minute block empty and learns the day can stay standing."
+    takeaway = "The weather of the body is not the climate of the self."
+
+    out = compose_ordered_chapter_prose(
+        [
+            "HOOK",
+            "ANGLE_DEFINITION",
+            "SCENE",
+            "STORY",
+            "PIVOT",
+            "REFLECTION",
+            "EXERCISE",
+            "STORY",
+            "STORY",
+            "TAKEAWAY",
+            "THREAD",
+        ],
+        [
+            "You sent it and your chest never got the receipt.",
+            "Anxiety is a protective alarm, not a character flaw.",
+            scene,
+            story_open,
+            pivot,
+            "Your body is rehearsing a future that has not happened yet.",
+            "Take one slow exhale before you check the phone again.",
+            story_mid,
+            story_close,
+            takeaway,
+            "The next chapter begins where the body keeps score.",
+        ],
+    )
+
+    assert out.index(scene) < out.index(story_open) < out.index(pivot)
+    assert out.index(story_mid) < out.index(story_close) < out.index(takeaway)
 
 
 def test_chapter_duplicate_doctrine_source_violations_detects_slot_pair() -> None:

@@ -1,0 +1,48 @@
+{
+  "brand_id": "way_stream_sanctuary",
+  "campaign_model": "evergreen_form_submit",
+  "checked_at": "2026-07-14T08:12:47.888690+00:00",
+  "embedded_campaign_plan_mismatches": [],
+  "expected_page_count": 15,
+  "extra_pages": [],
+  "invalid_plans": [],
+  "invalid_urls": [],
+  "missing_campaign_plans": [],
+  "missing_pages": [],
+  "ok": true,
+  "page_context_mismatches": [],
+  "pages_covered": [
+    "anxiety-nervous-system-reset",
+    "boundaries-script-kit",
+    "burnout-energy-audit",
+    "compassion-fatigue-audit",
+    "courage-decision-map",
+    "depression-momentum-kit",
+    "financial-anxiety-check-in",
+    "financial-stress-audit",
+    "grief-letter-template",
+    "imposter-evidence-log",
+    "overthinking-thought-sorter",
+    "self-worth-inventory",
+    "sleep-anxiety-wind-down",
+    "social-anxiety-toolkit",
+    "somatic-body-scan"
+  ],
+  "pages_total": 15,
+  "pages_without_embedded_campaign_plan": [],
+  "plan_file": "config/freebies/waystream_evergreen_campaign_plan.yaml",
+  "plans_total": 15,
+  "secret_scan": {
+    "full_webhook_url_files": [],
+    "roots": [
+      "brand-wizard-app/public/free/way_stream_sanctuary",
+      "docs/ghl",
+      "docs/freebies",
+      "docs/integrations",
+      "docs/runbooks",
+      "artifacts/coordination/handoffs",
+      "artifacts/qa/freebie_post_experience_capture_20260714",
+      "tests"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "p02_clean_pilot_threshold_floor_l3_l2_clean_pilot",
+  "layer_class": "L2",
+  "genre": "mecha",
+  "style_register": "mecha_pilot",
+  "crop_class": "full_figure",
+  "room_capable": true,
+  "abstract_stage_eligible": false,
+  "scene_contamination": false,
+  "light": {
+    "azimuth": "ambient"
+  },
+  "implied_camera": {
+    "angle_bucket": "eye_level"
+  },
+  "anchor": {
+    "point": "feet",
+    "y_px": 851
+  },
+  "eye_y_px": 255.0,
+  "figure_height_m": 1.62,
+  "pose_context": "standing",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "clean",
+    "role": "single_subject_cutout",
+    "subject": "pilot",
+    "contains_background": false,
+    "contains_environment": false,
+    "contains": [
+      "pilot"
+    ],
+    "background_context": []
+  }
+}

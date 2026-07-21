@@ -1,13 +1,13 @@
 # Legacy Template Ingest Audit
 
-**Project:** `proj_state_convergence_20260328`  
-**Subsystem:** `core_pipeline`  
-**Date:** 2026-04-11  
-**Auditor:** Pearl_Dev + Pearl_Architect  
+**Project:** `proj_state_convergence_20260328`
+**Subsystem:** `core_pipeline`
+**Date:** 2026-04-11
+**Auditor:** Pearl_Dev + Pearl_Architect
 
 ## Scope
 
-This audit covers **all tracked files under `template_expand/`** and **two historical chat-spec files under `old_chat_specs/`** referenced for legacy audiobook scaffolding. It records what exists on disk, what is missing, and how each source maps to Phoenix pipeline concepts.
+This audit covers **all tracked files under `template_expand/`** and **three historical chat-spec files under `old_chat_specs/`** referenced for legacy audiobook scaffolding. It records what exists on disk, what is missing, and how each source maps to Phoenix pipeline concepts.
 
 ## Critical finding: V2/V4 template libraries are ZIP-only
 
@@ -48,6 +48,7 @@ Word counts use `wc -w` on text sources. **Zip files are binary; word counts fro
 |------|------|-------------------|-----------------|-------|
 | `old_chat_specs/old_chat_pose_book_template.txt` | prompt_lineage | Partial (chat transcript + pasted specs) | ~21,609 | Therapeutic preprompt, 10-section template references, TTS constraints — **historical lineage**, not runtime atoms |
 | `old_chat_specs/old_claude_template_persona_stuff.txt` | prompt_lineage | Partial (chat + narrative craft notes) | ~18,266 | Persona/story mechanism discussion — **historical**, not ingested prose |
+| `old_chat_specs/question_book_template_2025-01-13.txt` | prompt_lineage | Partial (usage transcript + production-system handoff) | ~7,724 | 12-chapter therapeutic audiobook generation system handoff, writer-brief decision tree, and scale assumptions — **historical lineage**, not runtime atoms |
 
 ## Pipeline concept mapping
 
@@ -74,7 +75,7 @@ Word counts use `wc -w` on text sources. **Zip files are binary; word counts fro
 
 ### What not to use directly as production prose
 
-- **`old_chat_specs/*.txt`** — prompt lineage and chat history; valuable for **schema and safety intent**, not for direct ingestion as book atoms.
+- **`old_chat_specs/*.txt`** — prompt lineage and chat history; valuable for **schema, safety intent, and historical production handoffs**, not for direct ingestion as book atoms.
 - **Python template modules (`01_hooks.py`–`05_teacherdoctrine.py`)** — treat as **code-embedded libraries** until converted or wrapped; the loader returns structured warnings instead of crashing when YAML paths are absent.
 
 ### Honest gaps

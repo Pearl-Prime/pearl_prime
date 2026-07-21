@@ -17,14 +17,45 @@ def registry():
     return load_exercise_registry()
 
 
-def test_resolve_combined_outcome_single_tag(registry):
+def test_resolve_combined_outcome_uses_explicit_scores(registry):
+    # extended_exhale_v2 carries explicit outcome_scores (reg 0.90, aw 0.15),
+    # which supersede the legacy equal-weight tag split.
     out = resolve_combined_outcome(["extended_exhale_v2"], registry)
-    assert out["regulation"] == pytest.approx(1.0)
-    assert out["awareness"] == pytest.approx(0.0)
+    assert out["regulation"] == pytest.approx(0.90)
+    assert out["awareness"] == pytest.approx(0.15)
 
 
-def test_resolve_combined_outcome_multi_tag_splits_weight(registry):
+def test_resolve_combined_outcome_single_awareness_exercise(registry):
+    # body_scan_v1 delivers strong awareness (0.92) instead of the old 0.5 cap.
     out = resolve_combined_outcome(["body_scan_v1"], registry)
+    assert out["awareness"] == pytest.approx(0.92)
+    assert out["regulation"] == pytest.approx(0.55)
+
+
+def test_resolve_combined_outcome_probabilistic_or_combine(registry):
+    # Two exercises reinforce a dimension via 1 - prod(1 - s), never exceeding 1.0.
+    out = resolve_combined_outcome(["body_scan_v1", "extended_exhale_v2"], registry)
+    # awareness: 1 - (1-0.92)(1-0.15) = 0.932
+    assert out["awareness"] == pytest.approx(0.932)
+    # regulation: 1 - (1-0.55)(1-0.90) = 0.955
+    assert out["regulation"] == pytest.approx(0.955)
+    assert 0.0 <= out["integration"] <= 1.0
+
+
+def test_resolve_combined_outcome_falls_back_to_equal_split(registry):
+    # An exercise WITHOUT explicit outcome_scores still uses the legacy split.
+    legacy = ExerciseDefinition(
+        exercise_id="legacy_two_tag",
+        type="somatic",
+        phase_fit=[],
+        section_fit=[],
+        effects=[],
+        intensity="low",
+        prerequisites=[],
+        compatible_with=[],
+        outcome_tags=["awareness", "regulation"],
+    )
+    out = resolve_combined_outcome(["legacy_two_tag"], {"legacy_two_tag": legacy})
     assert out["awareness"] == pytest.approx(0.5)
     assert out["regulation"] == pytest.approx(0.5)
 

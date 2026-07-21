@@ -1,0 +1,50 @@
+{
+  "teacher_id": "kenjin",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "format_id": "MOD_pocket_guide",
+  "arc_id": "gen_z_professionals_anxiety_overwhelm_F006_gen",
+  "required_by_slot": {
+    "HOOK": 20,
+    "SCENE": 20,
+    "REFLECTION": 20,
+    "EXERCISE": 20,
+    "TAKEAWAY": 20,
+    "INTEGRATION": 20,
+    "THREAD": 20
+  },
+  "required_story_by_band": {},
+  "available_by_slot": {
+    "TEACHER_DOCTRINE": 5,
+    "EXERCISE": 12,
+    "PERMISSION": 3,
+    "STORY": 4
+  },
+  "story_band_inventory": {
+    "2": 4
+  },
+  "gaps": {
+    "EXERCISE": {
+      "total_missing": 8
+    },
+    "HOOK": {
+      "total_missing": 20
+    },
+    "INTEGRATION": {
+      "total_missing": 20
+    },
+    "REFLECTION": {
+      "total_missing": 20
+    },
+    "SCENE": {
+      "total_missing": 20
+    },
+    "TAKEAWAY": {
+      "total_missing": 20
+    },
+    "THREAD": {
+      "total_missing": 20
+    }
+  },
+  "fallback_required": false
+}

@@ -282,6 +282,7 @@ Single index: every doc, script, config, and artifact for simulation, 10k/100k k
 | **Rigorous test & production 100%** | [docs/RIGOROUS_SYSTEM_TEST.md](./RIGOROUS_SYSTEM_TEST.md) — Sim as readiness; four production requirements |
 | **Pearl Prime release contract** | [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Main pipeline release contract and evidence bundle |
 | **Pearl Prime Cloudflare deployment** | [docs/PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md](./PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md) — Repo-owned Cloudflare worker contract for the `pearl-prime` service |
+| **Pearl Prime Cloudflare Git integration runbook** | [docs/runbooks/PEARL_PRIME_CLOUDFLARE_GIT_INTEGRATION_RUNBOOK.md](./runbooks/PEARL_PRIME_CLOUDFLARE_GIT_INTEGRATION_RUNBOOK.md) — Operator steps to disconnect or rebind the noisy `Workers Builds: pearl-prime` surface |
 | **Pearl Prime workflow hardening** | [docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) — Whole-pipeline hardening contract |
 | **Pearl Prime bestseller overlay** | [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — Writer craft overlay |
 | **Pearl Prime salvage audit** | [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — Salvage vs `main` and recovery sequencing |
@@ -1105,7 +1106,9 @@ Layered selection with override logic. V1 picks the winner; V2 scores the same c
 - [docs/UNIFIED_PERSONAS_BOOK_READINESS_ANALYSIS.md](./UNIFIED_PERSONAS_BOOK_READINESS_ANALYSIS.md) — Unified personas book readiness analysis
 - [docs/BESTSELLER_STRUCTURES.md](./BESTSELLER_STRUCTURES.md) — 12 bestseller narrative structures: beat orders, slot mappings, phase assignments, THREAD/PERMISSION guidance; dev uses for structure assignment in planner; writers use for chapter shape
 - [docs/CHAPTER_THESIS_BANK.md](./CHAPTER_THESIS_BANK.md) — Canonical thesis sentences for all 20 chapter intents × 7 engine types; first-half 9 intents + 11 new second-half deepening intents; THREAD sentences per intent; quick-reference engine × intent tables
-- [specs/ACCENT_BEATS_SYSTEM_SPEC.md](../specs/ACCENT_BEATS_SYSTEM_SPEC.md) — **SPECCED (parked).** Planner-placed sparse accents (quote, encouragement, reflection question, affirmation, troubleshooting, cited evidence, **author commentary**); framing-inside-atom; witness-register AUTHOR_COMMENTARY §12; PERMISSION/mantra reuse; QUOTE + CITED_EVIDENCE bank programs; GATE: `flagship-read-approved`
+- [docs/ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md](./ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md) — **Authority for the 4-layer enhancement model.** Splits `chapter_engine` (troubleshooting, mechanism, propulsion — not accents) / `proof_and_embodiment` (external story, author disclosure, cited evidence — not accents) / `optional_accents` (quote, encouragement, reflection question, author commentary, wisdom essence — the only sparse layer) / `cohesion_and_craft` (callback, analogy, metaphor). Research-informed working priors, not empirically ratified counts. Anxiety flagship preset §7.
+- [specs/ACCENT_BEATS_SYSTEM_SPEC.md](../specs/ACCENT_BEATS_SYSTEM_SPEC.md) — **CODE-WIRED (partial live); v1.2 amended to the 4-layer model, see §0.1.** Planner-placed elements across `chapter_engine` (troubleshooting), `proof_and_embodiment` (external story w/ function tags + provenance, author disclosure, cited evidence), `optional_accents` (quote, encouragement, reflection question, author commentary, wisdom essence — sparse), `cohesion_and_craft` (callback plant/return, analogy, metaphor; parable as a sparse story register, not its own class). **AFFIRMATION is NOT LIVE** (TODO mantras only; excluded from all layers). Framing-inside-atom; PERMISSION reuse; anxiety-book authoring doctrine §14; GATE: `check_accent_flagship_truth.py` + `flagship-read-approved`
+- [docs/authoring/ANXIETY_FLAGSHIP_ENHANCEMENT_PILOT_PACKET_2026-07-13.md](./authoring/ANXIETY_FLAGSHIP_ENHANCEMENT_PILOT_PACKET_2026-07-13.md) — Chapter-by-chapter pilot authoring packet for the `anxiety_flagship_hybrid` profile: dominant job, proof/embodiment placement, accent placement, callback plant/return map, analogy/metaphor placement, checked against the profile's minimums/maxima. Illustrative reference shape, not a template to copy verbatim.
 
 ---
 
@@ -1649,7 +1652,7 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 |------|----------|
 | **Translate/prompt via Qwen pipeline CLI** | [docs/TRANSLATE_QWEN_PIPELINE_CLI.md](./TRANSLATE_QWEN_PIPELINE_CLI.md) — All system languages; translate/prompt via Qwen GitHub pipeline CLI; EU catalogue (incl. it-IT) |
 | **Locale personas** | [docs/LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) — 40 persona definitions across 11 non-en-US locales (anxious_insomniac_tw, burned_out_professional_tw, etc.) |
-| **All-locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
+| **All-locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for 13 locales (incl. it-IT EU catalogue); **does not yet cover pt-BR**, ratified as the 14th canonical locale (Q-MANGA-01) after this plan was written — Pearl_Marketing follow-up, not fixed in this pass |
 | **zh-CN distribution plan** | [docs/ZH_CN_DISTRIBUTION_PLAN.md](./ZH_CN_DISTRIBUTION_PLAN.md) — Local platform pipeline (Ximalaya, NetEase, WeChat Read, Dedao); Phase 5 prerequisite checklist |
 | **Locale strategy (rollout phases)** | `del_location_plan/locale_strategy.md` ⚠️ *file removed in PR #706 (2026-04-26 D1 cluster delete); content was: One brand = one locale; Phase 1–5 rollout; distribution routing; CI gate #49 — recover from git history if needed* |
 | **Locale prose & prompting** | `docs/LOCALE_PROSE_AND_PROMPTING.md` ⚠️ *file not present* |
@@ -1672,11 +1675,13 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 
 | Item | Location |
 |------|----------|
-| **Content roots by locale** | [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml) — Maps all 13 locales to atoms_root, translation paths, TTS constraints, rollout phase, and distribution blockers (incl. it-IT). |
-| **Locale registry** | [config/localization/locale_registry.yaml](../config/localization/locale_registry.yaml) — All 13 locale definitions: language, script, TTS provider, storefront IDs, distribution rules; EU group includes it-IT. |
+| **Content roots by locale** | [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml) — Maps all 14 locales to atoms_root, translation paths, TTS constraints, rollout phase, and distribution blockers (incl. it-IT, pt-BR). |
+| **Locale registry** | [config/localization/locale_registry.yaml](../config/localization/locale_registry.yaml) — All 14 locale definitions: language, script, TTS provider, storefront IDs, distribution rules; EU group includes it-IT; pt-BR is the 14th locale (Q-MANGA-01, 2026-07-04). |
 | **Brand locale extension** | [config/localization/brand_registry_locale_extension.yaml](../config/localization/brand_registry_locale_extension.yaml) — Per-brand locale and territory. One brand = one locale. |
 
 **Quality contracts** — [config/localization/quality_contracts/](../config/localization/quality_contracts/) (README.md, glossary.yaml, release_thresholds.yaml, golden_translation_regression.yaml; stubs for locale gate).
+
+**Market voice brief** — [config/localization/quality_contracts/MARKET_VOICE_BRIEF.md](../config/localization/quality_contracts/MARKET_VOICE_BRIEF.md) — per-locale (all 14) register, preferred/disallowed framing, title/subtitle constraints, translation dangers, mental-health wording cautions, storefront gotchas, and good-vs-bad example pairs for titles/subtitles/descriptions/CTA copy. Reference layer on top of the quality contracts above — does not change glossary terms, thresholds, or locale membership.
 
 ### CI / workflow
 
@@ -1732,7 +1737,7 @@ All root-level `scripts/*.py` files confirmed present on disk.
 | [scripts/build_proof_chapter.py](../scripts/build_proof_chapter.py) | Build a single proof chapter from atoms + plan |
 | [scripts/check_spec_version_bump.py](../scripts/check_spec_version_bump.py) | Verify spec version is bumped on breaking changes |
 | [scripts/clean_atom_prose.py](../scripts/clean_atom_prose.py) | Batch clean atom prose files (strip metadata artifacts) |
-| [scripts/compose_cohesive_chapter_from_plan.py](../scripts/compose_cohesive_chapter_from_plan.py) | Compose a cohesive chapter from a compiled plan JSON |
+| [scripts/experimental/compose_cohesive_chapter_from_plan.py](../scripts/experimental/compose_cohesive_chapter_from_plan.py) | EXPERIMENTAL: compose a cohesive chapter from a compiled plan JSON (not production) |
 | [scripts/create_freebie_assets.py](../scripts/create_freebie_assets.py) | Generate freebie assets (PDFs, landing copy) from plan |
 | [scripts/fill_non_story_coverage_gaps.py](../scripts/fill_non_story_coverage_gaps.py) | Fill missing HOOK/SCENE/REFLECTION/INTEGRATION/EXERCISE CANONICAL.txt files |
 | [scripts/generate_arcs_from_backlog.py](../scripts/generate_arcs_from_backlog.py) | Batch-generate arc YAMLs from arc backlog config |
@@ -2015,7 +2020,7 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | [SCHEMA_CHANGELOG.md](./SCHEMA_CHANGELOG.md) | Schema & audit | ✓ |
 | [AUDIT_OLD_CHAT_SPECS_VS_V4.md](./AUDIT_OLD_CHAT_SPECS_VS_V4.md) | Schema & audit | ✓ |
 | [LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) | Locale personas | ✓ — 40 persona definitions across non-en-US locales (zh-TW, zh-HK, zh-CN, zh-SG, ja-JP, ko-KR, es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU) |
-| [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) | All-locale marketing plan | ✓ — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
+| [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) | All-locale marketing plan | ✓ — Per-locale positioning, go-live checklists, readiness tracker for 13 locales (incl. it-IT EU catalogue); pt-BR (14th canonical locale, Q-MANGA-01) not yet covered |
 | [TRANSLATE_QWEN_PIPELINE_CLI.md](./TRANSLATE_QWEN_PIPELINE_CLI.md) | Translate/prompt via Qwen pipeline CLI | ✓ — All system languages; Qwen GitHub pipeline CLI; EU catalogue (it-IT) |
 | [AUDIOBOOK_PIPELINE_SPEC.md](./AUDIOBOOK_PIPELINE_SPEC.md) | Qwen-Only Audiobook Pipeline | ✓ — Full spec: flow, gates, patch injection, parallel architecture, artifact contract, manual review, gap tracker |
 | [GO_LIVE_FINAL_CHECKLIST.md](./GO_LIVE_FINAL_CHECKLIST.md) | Audiobook pipeline go-live | ✓ — 10-item sign-off gate; per-gate operator runbook; locked design decisions |
@@ -2219,6 +2224,7 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [config/localization/quality_contracts/glossary.yaml](../config/localization/quality_contracts/glossary.yaml) | Translation | ✓ — Canonical terms and preferred translations per locale (stub) |
 | [config/localization/quality_contracts/release_thresholds.yaml](../config/localization/quality_contracts/release_thresholds.yaml) | Translation | ✓ — Release thresholds for locale gate (stub) |
 | [config/localization/quality_contracts/golden_translation_regression.yaml](../config/localization/quality_contracts/golden_translation_regression.yaml) | Translation | ✓ — Golden segments for regression tests (stub) |
+| [config/localization/quality_contracts/MARKET_VOICE_BRIEF.md](../config/localization/quality_contracts/MARKET_VOICE_BRIEF.md) | Translation | ✓ — 14-locale market voice brief: register, framing, title/subtitle constraints, translation dangers, mental-health wording cautions, storefront gotchas, good-vs-bad examples |
 | [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml) | Translation | ✓ — all 12 locales mapped with atoms_root, TTS constraints, rollout phase, distribution blockers |
 | [.github/workflows/translate-atoms-qwen-matrix.yml](../.github/workflows/translate-atoms-qwen-matrix.yml) | Translation | ✓ — Stub: placeholder for translation matrix; weekly/manual |
 | [.github/workflows/locale-gate.yml](../.github/workflows/locale-gate.yml) | Translation | ✓ — Stub: placeholder for locale gate on config/localization and atoms |

@@ -1,0 +1,213 @@
+# Metricool brand → blog_id routing SSOT (Pearl_Int).
+# Derived live from brand registries. Do not hand-invent brand keys.
+# Only waystream_sanctuary is wired; others status:unwired until an account is connected.
+# Q-METRIC-02: replace WAYSTREAM_BLOG_ID_PENDING with the real Metricool blog_id.
+schema_version: 1
+account: waystream
+user_id_env: METRICOOL_USER_ID
+derived_from:
+- config/brand_registry.yaml
+- config/catalog_planning/brand_archetype_registry.yaml
+- config/brand_management/global_brand_registry_unified.yaml
+notes: One Metricool account (waystream). Only waystream_sanctuary is wired; all other
+  brand keys are addressable but refuse posting until blog_id is set. Registry archetype
+  way_stream_sanctuary maps to CLI key waystream_sanctuary. Sync via
+  scripts/integrations/metricool/sync_brands_from_registry.py.
+brands:
+  adhd_forge:
+    blog_id: null
+    status: unwired
+  awakening_press:
+    blog_id: null
+    status: unwired
+  bio_flow:
+    blog_id: null
+    status: unwired
+  body_memory:
+    blog_id: null
+    status: unwired
+  calm_student:
+    blog_id: null
+    status: unwired
+  career_lift:
+    blog_id: null
+    status: unwired
+  cognitive_clarity:
+    blog_id: null
+    status: unwired
+  confidence_core:
+    blog_id: null
+    status: unwired
+  creative_unfold:
+    blog_id: null
+    status: unwired
+  devotion_path:
+    blog_id: null
+    status: unwired
+  digital_ground:
+    blog_id: null
+    status: unwired
+  executive_calm:
+    blog_id: null
+    status: unwired
+  focus_sprint:
+    blog_id: null
+    status: unwired
+  gen_z_grounding_cn:
+    blog_id: null
+    status: unwired
+  gen_z_grounding_hk:
+    blog_id: null
+    status: unwired
+  gen_z_grounding_sg:
+    blog_id: null
+    status: unwired
+  gen_z_grounding_tw:
+    blog_id: null
+    status: unwired
+  gentle_growth:
+    blog_id: null
+    status: unwired
+  grief_companion_cn:
+    blog_id: null
+    status: unwired
+  grief_companion_hk:
+    blog_id: null
+    status: unwired
+  grief_companion_sg:
+    blog_id: null
+    status: unwired
+  grief_companion_tw:
+    blog_id: null
+    status: unwired
+  healing_ground:
+    blog_id: null
+    status: unwired
+  heart_balance:
+    blog_id: null
+    status: unwired
+  heart_transmission:
+    blog_id: null
+    status: unwired
+  high_performer:
+    blog_id: null
+    status: unwired
+  hormone_reset:
+    blog_id: null
+    status: unwired
+  inner_security_cn:
+    blog_id: null
+    status: unwired
+  inner_security_hk:
+    blog_id: null
+    status: unwired
+  inner_security_sg:
+    blog_id: null
+    status: unwired
+  inner_security_tw:
+    blog_id: null
+    status: unwired
+  legacy_builder:
+    blog_id: null
+    status: unwired
+  longevity_lab:
+    blog_id: null
+    status: unwired
+  minimal_mind:
+    blog_id: null
+    status: unwired
+  morning_momentum:
+    blog_id: null
+    status: unwired
+  night_reset:
+    blog_id: null
+    status: unwired
+  optimizer:
+    blog_id: null
+    status: unwired
+  panic_first_aid_cn:
+    blog_id: null
+    status: unwired
+  panic_first_aid_hk:
+    blog_id: null
+    status: unwired
+  panic_first_aid_sg:
+    blog_id: null
+    status: unwired
+  panic_first_aid_tw:
+    blog_id: null
+    status: unwired
+  qi_foundation:
+    blog_id: null
+    status: unwired
+  relational_calm:
+    blog_id: null
+    status: unwired
+  relationship_clarity:
+    blog_id: null
+    status: unwired
+  resilient_parent:
+    blog_id: null
+    status: unwired
+  sleep_repair_cn:
+    blog_id: null
+    status: unwired
+  sleep_repair_hk:
+    blog_id: null
+    status: unwired
+  sleep_repair_sg:
+    blog_id: null
+    status: unwired
+  sleep_repair_tw:
+    blog_id: null
+    status: unwired
+  sleep_restoration:
+    blog_id: null
+    status: unwired
+  solar_return:
+    blog_id: null
+    status: unwired
+  somatic_wisdom:
+    blog_id: null
+    status: unwired
+  spiritual_ground:
+    blog_id: null
+    status: unwired
+  stabilizer:
+    blog_id: null
+    status: unwired
+  stabilizer_cn:
+    blog_id: null
+    status: unwired
+  stabilizer_hk:
+    blog_id: null
+    status: unwired
+  stabilizer_sg:
+    blog_id: null
+    status: unwired
+  stabilizer_tw:
+    blog_id: null
+    status: unwired
+  still_forest:
+    blog_id: null
+    status: unwired
+  stillness_press:
+    blog_id: null
+    status: unwired
+  stoic_edge:
+    blog_id: null
+    status: unwired
+  trauma_path:
+    blog_id: null
+    status: unwired
+  warrior_calm:
+    blog_id: null
+    status: unwired
+  way_stream_sanctuary:
+    blog_id: null
+    status: unwired
+  waystream_sanctuary:
+    blog_id: WAYSTREAM_BLOG_ID_PENDING
+    status: wired
+    timezone: America/New_York
+    notes: Single live Metricool account path. blog_id placeholder until Q-METRIC-02.

@@ -94,6 +94,9 @@ PEARL_NEWS_TOPICS = [
 ]
 
 # All non-en-US target locales in the system.
+# Canonical 14-locale set per config/localization/locale_registry.yaml locale_groups.all_locales
+# (en-US is baseline; 13 non-en-US target locales here). pt-PT / ru-RU are not in the canon —
+# no locale_registry.yaml entry — do not re-add without registering the locale there first.
 TARGET_LOCALES = [
     # CJK (Route 1: Claude meta-prompt → Qwen executor)
     "ja-JP",
@@ -111,9 +114,6 @@ TARGET_LOCALES = [
     "hu-HU",
     # Portuguese markets
     "pt-BR",
-    "pt-PT",
-    # Russian
-    "ru-RU",
 ]
 
 # Locale-specific translation context for the LLM
@@ -174,6 +174,14 @@ LOCALE_TRANSLATION_CONTEXT = {
                      "Reference Latino/a cultural values where natural (familia, comunidad).",
         "avoid": "Avoid vosotros (use ustedes). Avoid Spain-specific vocabulary.",
     },
+    "es-ES": {
+        "language": "Spanish (Castilian, Spain)",
+        "register": "Warm but more formal than Latin American Spanish. Castilian pronunciation "
+                     "and vocabulary (vosotros/vosotras for informal plural, distinción c/z). "
+                     "Separate market and storefront from es-US — do not reuse es-US phrasing.",
+        "avoid": "Avoid Latin American vocabulary/slang (ustedes-only, voseo). "
+                 "Do not merge with es-US register — Spain readers notice.",
+    },
     "fr-FR": {
         "language": "French (France)",
         "register": "Warm, philosophical framing accepted. Existentialist angle works. "
@@ -212,28 +220,9 @@ LOCALE_TRANSLATION_CONTEXT = {
                  "clipped vowels, vós/vosso forms). "
                  "Avoid excessive anglicisms.",
     },
-    "pt-PT": {
-        "language": "European Portuguese (Português Europeu)",
-        "register": "Measured, precise, slightly more formal than Brazilian Portuguese. "
-                     "Clitic pronouns placed after verbs (clítico enclítico). "
-                     "Tu is informal; você is formal. "
-                     "European literary tradition respected.",
-        "avoid": "Do not use Brazilian Portuguese constructions (proclitic pronouns, "
-                 "você as informal, open vowel patterns). "
-                 "Avoid Brazilianisms — EU Portuguese readers find them jarring.",
-    },
-    "ru-RU": {
-        "language": "Russian",
-        "register": "Warm but substantive. Russian self-help readers expect intellectual depth — "
-                     "not motivational fluff. "
-                     "Collective framing natural; reference shared experience before individual. "
-                     "Gentle encouragement without Western-style positivity overload. "
-                     "Reference Russian cultural/literary tradition where natural "
-                     "(душа/dusha — soul, терпение/terpenie — patience, стойкость/stoikost — resilience).",
-        "avoid": "Do not use overly casual or slang register. "
-                 "Avoid direct translation of Western therapeutic buzzwords — find Russian equivalents. "
-                 "Avoid politically sensitive framing.",
-    },
+    # pt-PT and ru-RU register context intentionally removed 2026-07-09: neither locale has a
+    # config/localization/locale_registry.yaml entry — they are not in the 14-locale canon.
+    # Re-add here only after registering the locale there first.
 }
 
 ATOMS_PER_TEACHER = 10

@@ -24,8 +24,16 @@ ATOMS_ROOT = REPO_ROOT / "atoms"
 CONFIG_ROOT = REPO_ROOT / "config"
 TEACHER_BANKS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
 
-# Frozen story roles (Canonical §5.3). Parser accepts only these.
+# Frozen story roles (Canonical §5.3). Parser accepts only these for story-engine banks.
 FROZEN_STORY_ROLES = frozenset({"RECOGNITION", "MECHANISM_PROOF", "TURNING_POINT", "EMBODIMENT"})
+# Beatmap slot-type banks (HOOK/PIVOT/STORY/…). Headers use the slot name, not story roles.
+# Keep in sync with phoenix_v4.planning.registry_resolver._KNOWN_SLOT_DIRS.
+FROZEN_SLOT_ROLES = frozenset({
+    "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
+    "TEACHER_DOCTRINE", "COMPRESSION", "PERMISSION", "PIVOT",
+    "TAKEAWAY", "THREAD", "TRANSITION", "DWELL",
+    "ANGLE_DEFINITION", "ANGLE_CALLBACK",
+})
 LEGACY_VER_TO_ROLE = {
     1: "RECOGNITION",
     2: "MECHANISM_PROOF",
@@ -38,6 +46,46 @@ LEGACY_STAGE_TO_ROLE = {
     "experimentation": "TURNING_POINT",
     "self_claim": "EMBODIMENT",
 }
+
+
+def _atom_bank_dir_name(path: Path) -> str:
+    """Return the slot/engine directory name for an atoms/**/CANONICAL.txt path.
+
+    Handles both English banks and locale overlays:
+      atoms/<persona>/<topic>/<bank>/CANONICAL.txt
+      atoms/<persona>/<topic>/<bank>/locales/<locale>/CANONICAL.txt
+    """
+    parts = Path(path).resolve().parts
+    try:
+        idx = parts.index("atoms")
+    except ValueError:
+        return path.parent.name
+    rest = parts[idx + 1 :]
+    if len(rest) >= 4 and rest[3] == "locales":
+        return rest[2]
+    if len(rest) >= 3:
+        return rest[2]
+    return path.parent.name
+
+
+def _is_slot_atom_bank(path: Path) -> bool:
+    """True when path is under a beatmap slot-type bank (not a story-engine bank)."""
+    return _atom_bank_dir_name(path).upper() in FROZEN_SLOT_ROLES
+
+
+def _canonical_path_context(path: Path) -> tuple[str, str, str]:
+    """Return (persona_dir, topic_dir, bank_dir) for atoms/**/CANONICAL.txt."""
+    parts = Path(path).resolve().parts
+    try:
+        idx = parts.index("atoms")
+    except ValueError:
+        return path.parent.parent.parent.name, path.parent.parent.name, path.parent.name
+    rest = parts[idx + 1 :]
+    if len(rest) >= 4 and rest[3] == "locales":
+        return rest[0], rest[1], rest[2]
+    if len(rest) >= 3:
+        return rest[0], rest[1], rest[2]
+    return path.parent.parent.parent.name, path.parent.parent.name, path.parent.name
 
 
 def _compute_exercise_chapters(chapter_slot_sequence: list[list[str]]) -> list[int]:
@@ -135,23 +183,30 @@ def _load_yaml(p: Path) -> dict:
 
 
 def validate_canonical_atom_file(path: Path) -> list[str]:
-    """Validate CANONICAL.txt schema. Returns list of errors; empty if valid. Canonical §5.3."""
+    """Validate CANONICAL.txt schema. Returns list of errors; empty if valid. Canonical §5.3.
+
+    Slot-type banks (HOOK/PIVOT/STORY/…) accept ``FROZEN_SLOT_ROLES`` headers and do not
+    require ``path:`` metadata. Story-engine banks keep the strict frozen story-role +
+    path contract.
+    """
     errors: list[str] = []
     if not path.exists():
         return [f"File not found: {path}"]
     text = path.read_text()
+    slot_bank = _is_slot_atom_bank(path)
     block = re.compile(
         r"^##\s+([A-Z_]+)\s+v(\d+)\s*\n---\s*\n([\s\S]*?)\n---",
         re.MULTILINE,
     )
     for m in block.finditer(text):
         role, ver, meta = m.group(1), m.group(2), m.group(3)
-        mapped_role = _resolve_story_role(role, ver, meta)
+        mapped_role = _resolve_atom_role(role, ver, meta, slot_bank=slot_bank)
         if mapped_role is None:
-            errors.append(f"Unknown role: {role} (frozen set: {sorted(FROZEN_STORY_ROLES)})")
+            allowed = sorted(FROZEN_SLOT_ROLES if slot_bank else FROZEN_STORY_ROLES)
+            errors.append(f"Unknown role: {role} (frozen set: {allowed})")
         if not ver.isdigit():
             errors.append(f"Malformed version: {ver}")
-        if "path:" not in meta:
+        if not slot_bank and "path:" not in meta:
             errors.append(f"Block {mapped_role or role} v{ver}: missing path line in metadata")
     return errors
 
@@ -243,12 +298,30 @@ def _parse_narrative_metadata(metadata: str, path: Path, role: str, ver: str) ->
 
 def _resolve_story_role(raw_role: str, ver: str, metadata: str) -> Optional[str]:
     """
-    Resolve role from canonical/legacy headers.
+    Resolve role from canonical/legacy headers for story-engine banks.
     Canonical: role is explicit (RECOGNITION/MECHANISM_PROOF/TURNING_POINT/EMBODIMENT).
     Legacy compatibility: character-name headers (e.g. DAVID v01) map by IDENTITY_STAGE,
     then by version index (v01..v04).
     """
+    return _resolve_atom_role(raw_role, ver, metadata, slot_bank=False)
+
+
+def _resolve_atom_role(
+    raw_role: str,
+    ver: str,
+    metadata: str,
+    *,
+    slot_bank: bool = False,
+) -> Optional[str]:
+    """Resolve block role for story-engine or slot-type banks.
+
+    Slot banks (mindfulness/adhd_focus PIVOT/STORY/…): accept FROZEN_SLOT_ROLES as-is.
+    Do not apply legacy v01→RECOGNITION mapping — that mis-labels slot headers.
+    """
     role = (raw_role or "").strip().upper()
+    if slot_bank:
+        return role if role in FROZEN_SLOT_ROLES else None
+
     if role in FROZEN_STORY_ROLES:
         return role
 
@@ -267,7 +340,7 @@ def _resolve_story_role(raw_role: str, ver: str, metadata: str) -> Optional[str]
     return LEGACY_VER_TO_ROLE.get(vnum)
 
 
-def _parse_canonical_txt(path: Path) -> list[dict[str, Any]]:
+def _parse_canonical_txt(path: Path, *, require_unique_ids: bool = False) -> list[dict[str, Any]]:
     """Parse CANONICAL.txt into list of {role, atom_id, path_line, band}. Canonical §5.3. BAND default 3 only when key missing."""
     if not path.exists():
         return []
@@ -276,16 +349,16 @@ def _parse_canonical_txt(path: Path) -> list[dict[str, Any]]:
         raise ValueError(f"Invalid CANONICAL.txt {path}: " + "; ".join(errs))
     text = path.read_text()
     atoms: list[dict[str, Any]] = []
+    seen_atom_ids: dict[str, int] = {}
     block = re.compile(
         r"^##\s+([A-Z_]+)\s+v(\d+)\s*\n---\s*\n([\s\S]*?)\n---",
         re.MULTILINE,
     )
-    persona_dir = path.parent.parent.parent.name
-    topic_dir = path.parent.parent.name
-    engine = path.parent.name
+    persona_dir, topic_dir, engine = _canonical_path_context(path)
+    slot_bank = engine.upper() in FROZEN_SLOT_ROLES
     for m in block.finditer(text):
         raw_role, ver, metadata = m.group(1), m.group(2), m.group(3)
-        role = _resolve_story_role(raw_role, ver, metadata)
+        role = _resolve_atom_role(raw_role, ver, metadata, slot_bank=slot_bank)
         if role is None:
             raise ValueError(f"Invalid CANONICAL.txt {path}: unknown role {raw_role!r} in v{ver}")
         path_line = ""
@@ -301,6 +374,12 @@ def _parse_canonical_txt(path: Path) -> list[dict[str, Any]]:
         else:
             raw_slug = re.sub(r"[^A-Za-z0-9]+", "_", raw_role).strip("_").upper() or "LEGACY"
             atom_id = f"{persona_dir}_{topic_dir}_{engine}_{role}_{raw_slug}_v{ver}"
+        if require_unique_ids and atom_id in seen_atom_ids:
+            raise ValueError(
+                f"Invalid CANONICAL.txt {path}: duplicate atom ID {atom_id!r} "
+                f"in blocks {seen_atom_ids[atom_id]} and {len(atoms) + 1}"
+            )
+        seen_atom_ids[atom_id] = len(atoms) + 1
         a = {"role": role, "atom_id": atom_id, "path_line": path_line, "band": band}
         if semantic_family:
             a["semantic_family"] = semantic_family

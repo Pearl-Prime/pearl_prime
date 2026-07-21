@@ -72,6 +72,20 @@ PROSE_SYSTEM_PROMPTS = {
         "emotional tone, body-awareness language, and second-person address. Do NOT add headers, "
         "metadata, --- delimiters, or commentary. Output ONLY the translated prose."
     ),
+    "zh-HK": (
+        "You are a professional translator. Translate the following English therapeutic/self-help "
+        "PROSE ONLY into Traditional Chinese (繁體中文) suitable for Hong Kong audiences, using "
+        "Cantonese-influenced vocabulary and phrasing where natural (not Taiwan Mandarin register). "
+        "Maintain emotional tone, body-awareness language, and second-person address. Do NOT add "
+        "headers, metadata, --- delimiters, or commentary. Output ONLY the translated prose."
+    ),
+    "zh-SG": (
+        "You are a professional translator. Translate the following English therapeutic/self-help "
+        "PROSE ONLY into Simplified Chinese (简体中文) suitable for Singapore audiences (Singaporean "
+        "multicultural context, not Mainland China register). Maintain emotional tone, body-awareness "
+        "language, and second-person address. Do NOT add headers, metadata, --- delimiters, or "
+        "commentary. Output ONLY the translated prose."
+    ),
 }
 
 # Legacy whole-block prompts for non-CANONICAL bodies (teacher banks without ## headers).
@@ -80,6 +94,8 @@ LEGACY_SYSTEM_PROMPTS = {
     "zh-CN": "You are a professional translator. Translate the following English therapeutic/self-help text into Simplified Chinese (简体中文). Output ONLY the translation.",
     "ja-JP": "You are a professional translator. Translate the following English therapeutic/self-help text into Japanese (日本語). Output ONLY the translation.",
     "ko-KR": "You are a professional translator. Translate the following English therapeutic/self-help text into Korean (한국어). Output ONLY the translation.",
+    "zh-HK": "You are a professional translator. Translate the following English therapeutic/self-help text into Traditional Chinese (繁體中文) suitable for Hong Kong audiences, using Cantonese-influenced vocabulary where natural. Output ONLY the translation.",
+    "zh-SG": "You are a professional translator. Translate the following English therapeutic/self-help text into Simplified Chinese (简体中文) suitable for Singapore audiences. Output ONLY the translation.",
 }
 
 
@@ -111,30 +127,55 @@ def _count_variant_headers(text: str) -> int:
     return sum(1 for line in text.splitlines() if line.lstrip().startswith("## "))
 
 
-def _ollama_generate(prompt: str, ollama_url: str, model: str, num_predict: int) -> str | None:
-    """Single Ollama /api/generate call. Returns cleaned reply or None."""
+def _ollama_generate(
+    prompt: str,
+    ollama_url: str,
+    model: str,
+    num_predict: int,
+    *,
+    max_retries: int = 3,
+) -> str | None:
+    """Ollama /api/generate with retry on empty/short completions.
+
+    Empty replies are a known intermittent Ollama flake; retry before failing
+    the atom so a single blank completion does not drop a whole file.
+    """
     payload = json.dumps({
         "model": model,
         "prompt": prompt,
         "stream": False,
         "options": {"temperature": 0.25, "num_predict": num_predict},
     }).encode("utf-8")
+    attempts = max(1, int(max_retries))
 
-    try:
-        req = urllib.request.Request(
-            f"{ollama_url}/api/generate",
-            data=payload,
-            headers={"Content-Type": "application/json"},
-        )
-        with urllib.request.urlopen(req, timeout=300) as resp:
-            result = json.loads(resp.read())
-        reply = result.get("response", "").strip()
-        # Strip any stray thinking blocks
-        reply = re.sub(r"<think>.*?</think>", "", reply, flags=re.DOTALL).strip()
-        return reply if len(reply) > 10 else None
-    except Exception as e:
-        print(f"    ERROR: {e}")
-        return None
+    for attempt in range(1, attempts + 1):
+        try:
+            req = urllib.request.Request(
+                f"{ollama_url}/api/generate",
+                data=payload,
+                headers={"Content-Type": "application/json"},
+            )
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                result = json.loads(resp.read())
+            reply = result.get("response", "").strip()
+            # Strip any stray thinking blocks
+            reply = re.sub(r"<think>.*?</think>", "", reply, flags=re.DOTALL).strip()
+            if len(reply) > 10:
+                return reply
+            if attempt < attempts:
+                print(
+                    f"    WARN: empty Ollama completion "
+                    f"(attempt {attempt}/{attempts}); retrying"
+                )
+        except Exception as e:
+            if attempt < attempts:
+                print(
+                    f"    WARN: Ollama error on attempt {attempt}/{attempts}: {e}; retrying"
+                )
+            else:
+                print(f"    ERROR: {e}")
+                return None
+    return None
 
 
 def _translate_prose(prose: str, locale: str, ollama_url: str, model: str) -> str | None:

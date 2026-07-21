@@ -24,9 +24,20 @@ AUTHORITY_DOCS:     <semicolon-separated list of governing docs read>
 READ_PATH_COMPLETE: <yes/no — have all authority docs been read?>
 WRITE_SCOPE:        <paths this session will modify>
 OUT_OF_SCOPE:       <paths this session must NOT touch>
+PROVENANCE:         <the §18 chain for any capability this session creates/alters:
+                     research:  <research artifacts/claims — or "NONE" → STOP, route a Pearl_Research lane first>
+                     documents: <the governing spec/authority docs>
+                     builds_on: <canonical components EXTENDED (registry concept_keys)>
+                     inventory: <existing functions affected: EXTENDS | UNCHANGED — never REDUCED without ratification>>
 BLOCKERS:           <known blockers, or "none">
 READY_STATUS:       <ready / blocked / needs-clarification>
 ```
+
+The `PROVENANCE:` field is `docs/agent_brief.txt` §18 made routine: no capability is built on
+an unresearched premise, and no existing function is silently dropped. It is enforced at PR time
+by `check_provenance()` and `check_capability_regression.py` (see
+`docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` §10). A pure bugfix/maintenance session that
+creates no new capability may write `PROVENANCE: none (bugfix-class)`.
 
 ---
 
@@ -86,6 +97,8 @@ TASK:           <original task>
 COMMIT_SHA:     <last commit SHA, or "no commits">
 FILES_WRITTEN:  <list of files created or modified>
 FILES_READ:     <key authority docs consulted>
+PROVENANCE:     <same four lines as the STARTUP_RECEIPT, updated to what actually landed
+                 (research / documents / builds_on / inventory)>
 STATUS:         <completed / partial / blocked>
 HANDOFF_TO:     <next agent, or "none">
 NEXT_ACTION:    <what the next agent should do>
@@ -93,7 +106,14 @@ NEXT_ACTION:    <what the next agent should do>
 
 2. If status is "partial" or "blocked", the NEXT_ACTION must be specific enough for the next agent to resume without re-reading the full context.
 
-3. Update ACTIVE_WORKSTREAMS.tsv if workstream status changed.
+3. Update `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` — the lane's row (status, and its
+   PROVENANCE/`builds_on` if changed). This closes the §18 loop: PM owns the workstream registry.
+
+4. On a **milestone merge** (a capability shipped, a program phase advanced), update
+   `docs/PROGRAM_STATE.md` so the SSOT reflects the new verified state. A feature that does not
+   connect back to the whole system was not finished (`docs/agent_brief.txt` §17–§18). Keep to
+   ONE serial actor on these hot coordination files (`PROGRAM_STATE.md`, `ACTIVE_WORKSTREAMS.tsv`,
+   `PEARL_ARCHITECT_STATE.md`).
 
 ---
 
@@ -129,4 +149,4 @@ Use this in chats whose job is to **build the next agent's startup prompt** rath
 
 **Canonical full text:** [./agent_brief.txt](./agent_brief.txt) — paste-ready, single source of truth. Do not duplicate the template here; edit `agent_brief.txt` and let this section continue to point at it to prevent drift.
 
-Operating reflexes (deconfliction, default-decision posture, worktree discipline, batching) are encoded as "Router Operating Principles v2" below the bootstrap in that same file; a compliant router reads the whole file.
+Operating reflexes (deconfliction, reconciliation, turn contracts, signal tokens, poison protocol, enforcement promotion, batching) are encoded as "Router Operating Principles v3" below the bootstrap in that same file; a compliant router reads the whole file.

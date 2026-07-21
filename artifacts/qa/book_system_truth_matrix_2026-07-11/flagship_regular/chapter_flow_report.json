@@ -1,0 +1,1538 @@
+{
+  "chapter_count": 12,
+  "failed_chapters": 0,
+  "status": "PASS",
+  "chapters": [
+    {
+      "chapter": 1,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 25,
+        "sentences": 151,
+        "transition_hits": 5,
+        "thesis_hits": 3,
+        "avg_adjacent_overlap": 0.1,
+        "sentence_len_std": 5.4,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 0,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "WARN",
+            "score": 0.379,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "paragraph breaks too sparse or too choppy for breath pacing",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences",
+              "insufficient_paragraph_breaks",
+              "tts_problematic_patterns: 1 found"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "WARN",
+        "fail_count": 0,
+        "warn_count": 1,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 2,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 28,
+        "sentences": 155,
+        "transition_hits": 4,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.108,
+        "sentence_len_std": 7.56,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 1,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.527,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "paragraph breaks too sparse or too choppy for breath pacing",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences",
+              "insufficient_paragraph_breaks"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 3,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 40,
+        "sentences": 200,
+        "transition_hits": 3,
+        "thesis_hits": 2,
+        "avg_adjacent_overlap": 0.089,
+        "sentence_len_std": 7.69,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 2,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "WARN",
+            "score": 0.364,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "paragraph breaks too sparse or too choppy for breath pacing",
+              "TTS-hostile patterns detected",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences",
+              "insufficient_paragraph_breaks",
+              "tts_problematic_patterns: 3 found"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "WARN",
+        "fail_count": 0,
+        "warn_count": 1,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 4,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 27,
+        "sentences": 158,
+        "transition_hits": 5,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.11,
+        "sentence_len_std": 6.7,
+        "aha_hits": 1,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 3,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.46,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "paragraph breaks too sparse or too choppy for breath pacing",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences",
+              "insufficient_paragraph_breaks"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 5,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 27,
+        "sentences": 155,
+        "transition_hits": 3,
+        "thesis_hits": 2,
+        "avg_adjacent_overlap": 0.098,
+        "sentence_len_std": 8.84,
+        "aha_hits": 2,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 4,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.565,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 6,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 27,
+        "sentences": 146,
+        "transition_hits": 3,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.095,
+        "sentence_len_std": 8.88,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 5,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.616,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 7,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 27,
+        "sentences": 141,
+        "transition_hits": 4,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.084,
+        "sentence_len_std": 8.63,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 6,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.726,
+            "issues": [
+              "monotone_pacing: consecutive similar-length sentences",
+              "tts_problematic_patterns: 1 found"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 8,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 31,
+        "sentences": 155,
+        "transition_hits": 3,
+        "thesis_hits": 2,
+        "avg_adjacent_overlap": 0.082,
+        "sentence_len_std": 9.2,
+        "aha_hits": 4,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 7,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.779,
+            "issues": [
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 9,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 26,
+        "sentences": 136,
+        "transition_hits": 3,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.092,
+        "sentence_len_std": 9.44,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 8,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.825,
+            "issues": [
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 10,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 26,
+        "sentences": 135,
+        "transition_hits": 3,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.082,
+        "sentence_len_std": 9.88,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 9,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.698,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "phrase repetition within short listening distance",
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 11,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 25,
+        "sentences": 148,
+        "transition_hits": 3,
+        "thesis_hits": 1,
+        "avg_adjacent_overlap": 0.092,
+        "sentence_len_std": 8.84,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 10,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 0.5,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.916,
+            "issues": [
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    },
+    {
+      "chapter": 12,
+      "status": "PASS",
+      "score": 100,
+      "errors": [],
+      "warnings": [],
+      "metrics": {
+        "paragraphs": 26,
+        "sentences": 137,
+        "transition_hits": 5,
+        "thesis_hits": 2,
+        "avg_adjacent_overlap": 0.098,
+        "sentence_len_std": 8.87,
+        "aha_hits": 3,
+        "scaffold_hits": {},
+        "flow_profile": "standard"
+      },
+      "dimension_gates": {
+        "chapter_index": 11,
+        "gates": [
+          {
+            "dimension": "uniqueness",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "engagement",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "somatic_precision",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "cohesion",
+            "status": "PASS",
+            "score": 1.0,
+            "issues": [],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          },
+          {
+            "dimension": "listen_experience",
+            "status": "PASS",
+            "score": 0.705,
+            "issues": [
+              "low sentence rhythm variance for listening",
+              "monotone_pacing: consecutive similar-length sentences"
+            ],
+            "remediation": [],
+            "dimension_gate_phase": 3,
+            "contributes_to_delivery_block": false
+          }
+        ],
+        "overall_status": "PASS",
+        "fail_count": 0,
+        "warn_count": 0,
+        "blocks_delivery": false,
+        "dimension_gate_phase": 3,
+        "fail_mode": "block",
+        "blocked_dimensions": [
+          "engagement",
+          "somatic_precision",
+          "uniqueness",
+          "cohesion",
+          "listen_experience"
+        ]
+      }
+    }
+  ],
+  "dimension_gates_status": "PASS",
+  "dimension_gates_blocks_delivery": false,
+  "bestseller_craft": {
+    "overall_score": 0.6376,
+    "per_chapter": [
+      {
+        "chapter": 1,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 1.0,
+          "name": 0.67,
+          "turn": 0.79,
+          "give": 0.65,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1245,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 411,
+            "turn_words": 449,
+            "give_words": 648,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 1.0,
+            "name": 0.67,
+            "turn": 0.79,
+            "give": 0.65,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 1.0,
+            "name": 0.67,
+            "turn": 0.79,
+            "give": 0.65,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 2,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.6737,
+          "name": 0.45,
+          "turn": 0.79,
+          "give": 0.65,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1626,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 536,
+            "turn_words": 586,
+            "give_words": 846,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.6737,
+            "name": 0.45,
+            "turn": 0.79,
+            "give": 0.65,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.6737,
+            "name": 0.45,
+            "turn": 0.79,
+            "give": 0.65,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 3,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.6737,
+          "name": 0.89,
+          "turn": 1.0,
+          "give": 0.5542,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 2093,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 690,
+            "turn_words": 753,
+            "give_words": 1089,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.6737,
+            "name": 0.89,
+            "turn": 1.0,
+            "give": 0.5542,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.6737,
+            "name": 0.89,
+            "turn": 1.0,
+            "give": 0.5542,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 4,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.955,
+          "name": 0.45,
+          "turn": 0.67,
+          "give": 1.0,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1583,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 523,
+            "turn_words": 570,
+            "give_words": 824,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.955,
+            "name": 0.45,
+            "turn": 0.67,
+            "give": 1.0,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.955,
+            "name": 0.45,
+            "turn": 0.67,
+            "give": 1.0,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 5,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.637,
+          "name": 0.45,
+          "turn": 1.0,
+          "give": 0.4125,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1932,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 638,
+            "turn_words": 695,
+            "give_words": 1005,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.637,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.4125,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.637,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.4125,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 6,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.803,
+          "name": 0.67,
+          "turn": 0.99,
+          "give": 0.5875,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1828,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 603,
+            "turn_words": 658,
+            "give_words": 951,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.803,
+            "name": 0.67,
+            "turn": 0.99,
+            "give": 0.5875,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.803,
+            "name": 0.67,
+            "turn": 0.99,
+            "give": 0.5875,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 7,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.5217,
+          "name": 0.45,
+          "turn": 1.0,
+          "give": 0.5875,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1858,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 614,
+            "turn_words": 669,
+            "give_words": 967,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.5217,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.5875,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.5217,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.5875,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 8,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.848,
+          "name": 0.89,
+          "turn": 1.0,
+          "give": 0.5125,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 2055,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 678,
+            "turn_words": 739,
+            "give_words": 1069,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.848,
+            "name": 0.89,
+            "turn": 1.0,
+            "give": 0.5125,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.848,
+            "name": 0.89,
+            "turn": 1.0,
+            "give": 0.5125,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 9,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.561,
+          "name": 0.89,
+          "turn": 1.0,
+          "give": 0.375,
+          "pull": 0.45
+        },
+        "issues": [
+          "move_warn:give"
+        ],
+        "remediation": [],
+        "metrics": {
+          "word_count": 1893,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 624,
+            "turn_words": 681,
+            "give_words": 985,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.561,
+            "name": 0.89,
+            "turn": 1.0,
+            "give": 0.375,
+            "pull": 0.45
+          },
+          "final_move_scores": {
+            "orient": 0.561,
+            "name": 0.89,
+            "turn": 1.0,
+            "give": 0.375,
+            "pull": 0.45
+          }
+        }
+      },
+      {
+        "chapter": 10,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.5527,
+          "name": 0.45,
+          "turn": 1.0,
+          "give": 0.55,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1868,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 616,
+            "turn_words": 673,
+            "give_words": 972,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.5527,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.55,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.5527,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.55,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 11,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.848,
+          "name": 0.45,
+          "turn": 0.67,
+          "give": 1.0,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1916,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 633,
+            "turn_words": 690,
+            "give_words": 997,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.848,
+            "name": 0.45,
+            "turn": 0.67,
+            "give": 1.0,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.848,
+            "name": 0.45,
+            "turn": 0.67,
+            "give": 1.0,
+            "pull": 0.32
+          }
+        }
+      },
+      {
+        "chapter": 12,
+        "status": "WARN",
+        "move_scores": {
+          "orient": 0.848,
+          "name": 0.45,
+          "turn": 1.0,
+          "give": 0.4125,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_warn:pull",
+          "no_named_tension_or_question_in_closer"
+        ],
+        "remediation": [
+          "End with a named tension or sharp question \u2014 not a teaser slogan (overlay \u00a77)."
+        ],
+        "metrics": {
+          "word_count": 1871,
+          "zones": {
+            "orient_words": 150,
+            "name_words": 617,
+            "turn_words": 674,
+            "give_words": 973,
+            "pull_words": 100
+          },
+          "heuristic_scores": {
+            "orient": 0.848,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.4125,
+            "pull": 0.32
+          },
+          "final_move_scores": {
+            "orient": 0.848,
+            "name": 0.45,
+            "turn": 1.0,
+            "give": 0.4125,
+            "pull": 0.32
+          }
+        }
+      }
+    ]
+  }
+}

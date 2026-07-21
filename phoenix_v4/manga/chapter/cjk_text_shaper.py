@@ -223,8 +223,10 @@ def render_text_to_pil(
     # decide kerning + adjust x as we step through clusters.
     font_path = getattr(font, "path", None)
     font_size = getattr(font, "size", 14)
-    if font_path:
-        shaped = shape_text_harfbuzz(text, font_path=Path(font_path), font_size_px=font_size)
+    if isinstance(font_path, (str, os.PathLike)):
+        shaped = shape_text_harfbuzz(
+            text, font_path=Path(font_path), font_size_px=font_size
+        )
         if shaped:
             cur_x = float(x)
             cur_y = float(y)

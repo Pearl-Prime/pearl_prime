@@ -2,7 +2,7 @@
 # Companion: docs/AGENT_SYSTEM_AUDIT_2026_04.md, docs/AGENT_SYSTEM_IMPROVEMENT_SPEC.md
 # subsystem_id values reference artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv
 schema_version: "1.0"
-last_updated: "2026-04-09"
+last_updated: "2026-07-09"
 
 agents:
   pearl_github:
@@ -167,14 +167,21 @@ agents:
 
   pearl_localization:
     display_name: "Pearl_Localization"
-    skill_path: null
+    skill_path: skills/pearl-localization/SKILL.md
     state_docs: []
     subsystems:
       - translation
     authority_docs:
       - config/localization/quality_contracts/README.md
       - config/localization/locale_registry.yaml
-    status: mentioned
+    status: formalized
+    notes: >
+      Formalized 2026-07-09 (PEARL-TRANSLATOR-FORMALIZE-01): "translation" was already an
+      owned, active subsystem (SUBSYSTEM_AUTHORITY_MAP.tsv; ws_cjk_atom_translation_qwen25_20260420
+      in flight) with no non-overlapping role for a separate "Pearl_Translator" agent to fill —
+      per AGENT_SYSTEM_IMPROVEMENT_SPEC.md §2.2 "unless a workstream spikes demand" clause, the
+      live CJK translation workstream is exactly that demand signal. Promoted mentioned->formalized
+      instead of forking a duplicate identity.
 
   pearl_marketing:
     display_name: "Pearl_Marketing"

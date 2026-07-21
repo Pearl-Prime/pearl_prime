@@ -15,6 +15,18 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 ARCS_DIR = REPO_ROOT / "config" / "source_of_truth" / "master_arcs"
+CANARY_REQUIRED_ATOM_SLOTS = (
+    "HOOK",
+    "STORY",
+    "SCENE",
+    "PIVOT",
+    "REFLECTION",
+    "THREAD",
+    "TAKEAWAY",
+    "INTEGRATION",
+    "PERMISSION",
+    "COMPRESSION",
+)
 
 
 def _parse_arc_filename(name: str) -> tuple[str, str, str, str] | None:
@@ -30,6 +42,36 @@ def _load_analysis(path: Path) -> dict:
     if not path.exists():
         raise FileNotFoundError(path)
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _load_allowed_engines() -> dict[str, set[str]]:
+    bindings_path = REPO_ROOT / "config" / "topic_engine_bindings.yaml"
+    if not bindings_path.exists():
+        return {}
+    try:
+        import yaml
+    except ImportError:
+        return {}
+    data = yaml.safe_load(bindings_path.read_text(encoding="utf-8")) or {}
+    out: dict[str, set[str]] = {}
+    for topic, config in data.items():
+        out[topic] = set((config or {}).get("allowed_engines") or [])
+    return out
+
+
+def _topic_binding_key(topic: str) -> str:
+    return "grief" if topic == "grief_topic" else topic
+
+
+def _is_canary_ready_arc(persona: str, topic: str, engine: str, allowed_engines: dict[str, set[str]]) -> bool:
+    allowed = allowed_engines.get(_topic_binding_key(topic)) or set()
+    if engine not in allowed:
+        return False
+
+    atoms_base = REPO_ROOT / "atoms" / persona / topic
+    if not (atoms_base / engine / "CANONICAL.txt").exists():
+        return False
+    return all((atoms_base / slot / "CANONICAL.txt").exists() for slot in CANARY_REQUIRED_ATOM_SLOTS)
 
 
 def _selected_formats_from_analysis(
@@ -59,17 +101,21 @@ def _sample_arcs(
     seed: int = 42,
     allowed_formats: list[str] | None = None,
 ) -> list[tuple[Path, str, str, str]]:
-    """Sample n arcs with diverse persona/topic coverage."""
+    """Sample n pipeline-ready arcs with diverse persona/topic coverage."""
     if not ARCS_DIR.exists():
         return []
     arc_files = sorted(ARCS_DIR.glob("*.yaml"))
+    allowed_engines = _load_allowed_engines()
     parsed: list[tuple[Path, str, str, str]] = []
     for ap in arc_files:
         p = _parse_arc_filename(ap.name)
         if p:
+            persona, topic, engine, format_id = p
             if allowed_formats and p[3] not in allowed_formats:
                 continue
-            parsed.append((ap, p[0], p[1], p[3]))
+            if not _is_canary_ready_arc(persona, topic, engine, allowed_engines):
+                continue
+            parsed.append((ap, persona, topic, format_id))
     if not parsed:
         return []
     # Deterministic sample
@@ -127,6 +173,13 @@ def main() -> int:
                 return 1
 
     samples = _sample_arcs(args.n, args.seed, selected_formats or None)
+    if not samples and selected_formats:
+        print(
+            "No arcs matched analyzer-selected format IDs "
+            f"{selected_formats}; falling back to unfiltered arc sample.",
+            file=sys.stderr,
+        )
+        samples = _sample_arcs(args.n, args.seed, None)
     if not samples:
         print("No arcs found", file=sys.stderr)
         return 1
@@ -145,6 +198,8 @@ def main() -> int:
             "--persona", persona,
             "--arc", str(arc_path),
             "--out", str(plan_path),
+            "--quality-profile", "draft",
+            "--no-job-check",
             "--no-generate-freebies",
             "--no-update-freebie-index",
         ]

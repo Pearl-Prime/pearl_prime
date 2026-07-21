@@ -19,8 +19,15 @@ Objects written:
 
 - `onboarding/submissions/<email>__<brand_id>__<ts>.json` — full wizard payload
 - `onboarding/claimed/<lane>__<tid>.json` — teacher exclusivity marker (when applicable)
+- `onboarding/assignments/<brand_id>.json` — public-safe Brand Director assignment overlay
 
-If R2 creds are missing, the Function returns **503 `unconfigured`**; the wizard still shows success (localStorage match) and degrades gracefully.
+The assignment overlay contains only deploy-safe fields such as `brand_id`,
+`display_brand`, `brand_director_name`, and `brand_director_id`. It deliberately
+excludes email, phone, raw wizard YAML, credentials, and contact PII. The ops dashboard
+reads it through `GET /api/onboarding/assignment?brand=<brand_id>` so a completed
+Brand Wizard user is visible by name immediately, before the next repo promotion.
+
+If R2 creds are missing, the Function returns **503 `unconfigured`**; the wizard still shows the matched brand (localStorage fallback) but displays a live-assignment warning instead of silently treating the activation as complete.
 
 ## Local verification
 

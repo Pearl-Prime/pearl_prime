@@ -2,25 +2,24 @@
 """
 Shared LLM client for localization scripts.
 
-Provider chain (first match wins):
+Provider chain (safe-by-default — CLAUDE.md Tier 2):
 
-  0. DEEPSEEK (preferred for zh-CN/zh-TW): Set DEEPSEEK_API_KEY.
-  1. TOGETHER AI:                          Set TOGETHER_API_KEY.
-  2. GEMINI FLASH (free — ja-JP):          Set GOOGLE_AI_API_KEY.
-  3. DASHSCOPE (cloud):                    Set DASHSCOPE_API_KEY.
-  4. OLLAMA (Pearl Star):                  Set OLLAMA_HOST or QWEN_BASE_URL containing :11434.
-  5. LOCAL (LM Studio):                    Fallback to http://127.0.0.1:1234.
+  0. OLLAMA (Pearl Star / local):          Set OLLAMA_HOST or QWEN_BASE_URL with :11434.
+  1. LOCAL (LM Studio):                    Fallback to http://127.0.0.1:1234.
+  2. Nonlocal/cloud providers:             ONLY when PHOENIX_TRANSLATION_ALLOW_CLOUD=1
+     (DeepSeek → Together → Gemini → Cloudflare → DashScope).
+
+Paid/banned cloud keys in a Keychain-loaded env must NEVER silently win over Ollama.
 
 Environment variables:
-  DEEPSEEK_API_KEY    — DeepSeek API key (preferred for zh-CN/zh-TW — deepseek-chat V3)
-  DEEPSEEK_MODEL      — Override DeepSeek model (default: deepseek-chat = DeepSeek V3)
-  TOGETHER_API_KEY    — Together AI key (enables Together mode)
-  GOOGLE_AI_API_KEY   — Google AI Studio key (Gemini 2.0 Flash — free 1M tokens/day, use for ja-JP)
-  GEMINI_MODEL        — Override Gemini model (default: gemini-2.0-flash)
-  DASHSCOPE_API_KEY   — Dashscope API key (enables cloud mode)
-  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true: skip DeepSeek+Together+Gemini, use DashScope
-  OLLAMA_HOST         — Ollama endpoint (enables Ollama mode)
+  OLLAMA_HOST         — Ollama endpoint (preferred Tier-2 path)
   QWEN_BASE_URL       — If contains :11434, treated as Ollama endpoint
+  OLLAMA_MODEL        — Override Ollama model (default: qwen2.5:14b)
+  PHOENIX_TRANSLATION_ALLOW_CLOUD — if 1/true/yes: allow nonlocal provider keys
+  DEEPSEEK_API_KEY / TOGETHER_API_KEY / GOOGLE_AI_API_KEY / DASHSCOPE_API_KEY /
+  CLOUDFLARE_AI_*     — only consulted when ALLOW_CLOUD is set
+  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true with ALLOW_CLOUD: skip
+      DeepSeek+Together+Gemini+Cloudflare, use DashScope
 
 Usage:
   from scripts.localization.llm_client import call_llm, get_client_config
@@ -39,11 +38,11 @@ logger = logging.getLogger("llm_client")
 
 # ─── CLOUD CONSTANTS ──────────────────────────────────────────────────────────
 
-# DeepSeek (preferred for CJK — Chinese lab, first-class zh-CN/zh-TW/ja-JP quality).
+# DeepSeek (opt-in only — Chinese lab, first-class zh-CN/zh-TW/ja-JP quality).
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
 DEEPSEEK_DEFAULT_MODEL = "deepseek-chat"  # DeepSeek V3 — best cost/quality for CJK translation
 
-# Together AI (fallback — US-based, no Chinese identity verification).
+# Together AI (opt-in only — US-based, no Chinese identity verification).
 TOGETHER_BASE_URL = "https://api.together.xyz/v1"
 # Model mapping: Together AI model IDs for Qwen equivalents
 TOGETHER_MODELS = {
@@ -51,19 +50,18 @@ TOGETHER_MODELS = {
     "judge": "Qwen/Qwen3-235B-A22B-Instruct-2507-tput",  # best quality — equivalent to qwen-max
 }
 
-# Google AI Studio — Gemini 2.0 Flash (free 1M tokens/day; preferred for ja-JP).
+# Google AI Studio — Gemini 2.0 Flash (opt-in only).
 # OpenAI-compatible endpoint — works with the openai Python SDK directly.
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
 GEMINI_DEFAULT_MODEL = "gemini-2.0-flash"  # free tier: 15 RPM, 1M TPM, 1500 RPD
 GEMINI_MAX_TOKENS_CAP = 8192  # Gemini 2.0 Flash max output tokens
 
-# Cloudflare Workers AI — Gemma 3 12B (unlimited free tier; ultimate fallback).
+# Cloudflare Workers AI — Gemma 3 12B (opt-in only).
 # Base URL comes from CLOUDFLARE_AI_BASE_URL env var (accounts/<ID>/ai/v1).
-# Implemented in pearl_news via PR #507; wired here for localization fallback.
 CLOUDFLARE_AI_DEFAULT_MODEL = "@cf/google/gemma-3-12b-it"
 CLOUDFLARE_AI_MAX_TOKENS_CAP = 8192
 
-# DashScope (fallback — Alibaba Cloud, requires active billing).
+# DashScope (opt-in only — Alibaba Cloud, requires active billing; banned by default policy).
 DASHSCOPE_BASE_URL = os.environ.get(
     "DASHSCOPE_BASE_URL",
     "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
@@ -75,6 +73,11 @@ DASHSCOPE_BASE_URL = os.environ.get(
 #   qwen-turbo  → fastest/cheapest (use for dry-runs / structural validation)
 DASHSCOPE_DEFAULT_MODEL = "qwen-plus"
 
+# Modes that route off-box / paid-or-banned cloud surfaces.
+NONLOCAL_PROVIDER_MODES = frozenset({
+    "deepseek", "together", "gemini", "cloudflare", "cloud",
+})
+
 
 def _is_ollama_endpoint() -> bool:
     """Detect if environment points to an Ollama server."""
@@ -84,11 +87,71 @@ def _is_ollama_endpoint() -> bool:
     return bool(qwen_base and ":11434" in qwen_base)
 
 
+def _cloud_providers_allowed() -> bool:
+    """Explicit opt-in required before any nonlocal/paid provider is selected."""
+    return os.environ.get("PHOENIX_TRANSLATION_ALLOW_CLOUD", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    )
+
+
+def _ollama_config(model_cfg: dict[str, Any]) -> dict[str, Any]:
+    """Build Ollama (Pearl Star Tier-2) client params."""
+    ollama_host = os.environ.get("OLLAMA_HOST", "").strip()
+    qwen_base = os.environ.get("QWEN_BASE_URL", "").strip()
+    base_url = ollama_host.rstrip("/") + "/v1" if ollama_host else qwen_base
+    if not base_url.endswith("/v1"):
+        base_url = base_url.rstrip("/") + "/v1"
+
+    ollama_model = (
+        os.environ.get("OLLAMA_MODEL", "").strip()
+        or model_cfg.get("ollama_model_id", "").strip()
+        or "qwen2.5:14b"  # Pearl Star only has qwen2.5:14b
+    )
+
+    resolved = {
+        "base_url": base_url,
+        "api_key": "ollama",
+        "model_id": ollama_model,
+        "temperature": float(model_cfg.get("temperature", 0.6)),
+        "max_tokens": int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000))),
+        "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+        "mode": "ollama",
+        "enable_thinking": False,
+    }
+    logger.debug("LLM client: Ollama mode, base_url=%s, model=%s", base_url, ollama_model)
+    return resolved
+
+
+def _local_config(model_cfg: dict[str, Any]) -> dict[str, Any]:
+    """Build LM Studio / local OpenAI-compatible client params."""
+    resolved = {
+        "base_url": model_cfg.get("base_url", "http://127.0.0.1:1234/v1"),
+        "api_key": model_cfg.get("api_key", "lm-studio"),
+        "model_id": model_cfg.get("model_id", model_cfg.get("model", "local-model")),
+        "temperature": float(model_cfg.get("temperature", 0.6)),
+        "max_tokens": int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000))),
+        "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+        "mode": "local",
+        "enable_thinking": False,
+    }
+    logger.debug(
+        "LLM client: local mode, base_url=%s, model=%s",
+        resolved["base_url"],
+        resolved["model_id"],
+    )
+    return resolved
+
+
 # ─── CONFIG RESOLVER ─────────────────────────────────────────────────────────
 
 def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any]:
     """
     Resolve LLM client parameters from config dict + environment.
+
+    Default: Ollama-first (or local LM Studio). Nonlocal/paid providers require
+    ``PHOENIX_TRANSLATION_ALLOW_CLOUD=1`` — Keychain-loaded cloud keys alone never win.
 
     Args:
         cfg:  Loaded YAML config (llm_expansion.yaml or comparator_config.yaml).
@@ -103,6 +166,11 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
     else:
         model_cfg = cfg.get("draft_model", cfg)
 
+    # ── Tier-2 default: Ollama / local — never silently skip to paid cloud ──
+    if _is_ollama_endpoint():
+        return _ollama_config(model_cfg)
+
+    allow_cloud = _cloud_providers_allowed()
     deepseek_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
     together_key = os.environ.get("TOGETHER_API_KEY", "").strip()
     google_ai_key = os.environ.get("GOOGLE_AI_API_KEY", "").strip()
@@ -115,13 +183,11 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
         "yes",
     )
 
-    if deepseek_key and not dashscope_only:
-        # ── DEEPSEEK MODE (preferred for CJK) ────────────────────────────────
+    if allow_cloud and deepseek_key and not dashscope_only:
         deepseek_model = (
             os.environ.get("DEEPSEEK_MODEL", "").strip()
             or DEEPSEEK_DEFAULT_MODEL
         )
-        # DeepSeek V3 hard cap: max_tokens must not exceed 8192
         raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
         resolved = {
             "base_url": DEEPSEEK_BASE_URL,
@@ -134,16 +200,15 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: DeepSeek mode, model=%s, max_tokens=%d", deepseek_model, resolved["max_tokens"])
+        return resolved
 
-    elif together_key and not dashscope_only:
-        # ── TOGETHER AI MODE ──────────────────────────────────────────────────
+    if allow_cloud and together_key and not dashscope_only:
         together_model = (
             os.environ.get("TOGETHER_MODEL", "").strip()
             or TOGETHER_MODELS.get(role, TOGETHER_MODELS["draft"])
         )
-        # Together AI models have strict context limits; cap max_tokens to avoid 422
         raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
-        max_tokens = min(raw_max, 16000)  # safe cap for 32K context models
+        max_tokens = min(raw_max, 16000)
 
         resolved = {
             "base_url": TOGETHER_BASE_URL,
@@ -156,9 +221,9 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: Together AI mode, model=%s", together_model)
+        return resolved
 
-    elif google_ai_key and not dashscope_only:
-        # ── GEMINI FLASH MODE (free 1M tokens/day — preferred for ja-JP) ────────
+    if allow_cloud and google_ai_key and not dashscope_only:
         gemini_model = (
             os.environ.get("GEMINI_MODEL", "").strip()
             or GEMINI_DEFAULT_MODEL
@@ -175,15 +240,14 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: Gemini Flash mode, model=%s, max_tokens=%d", gemini_model, resolved["max_tokens"])
+        return resolved
 
-    elif cf_ai_base and cf_ai_token and not dashscope_only:
-        # ── CLOUDFLARE WORKERS AI MODE (unlimited free — Gemma 3 12B) ───────────
+    if allow_cloud and cf_ai_base and cf_ai_token and not dashscope_only:
         cf_model = (
             os.environ.get("CLOUDFLARE_AI_MODEL", "").strip()
             or CLOUDFLARE_AI_DEFAULT_MODEL
         )
         raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
-        # Ensure base URL ends with /v1 for OpenAI compat
         base_url = cf_ai_base.rstrip("/")
         if not base_url.endswith("/v1"):
             base_url = base_url + "/v1"
@@ -198,9 +262,9 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: Cloudflare Workers AI mode, model=%s", cf_model)
+        return resolved
 
-    elif dashscope_key:
-        # ── DASHSCOPE MODE (fallback) ────────────────────────────────────────
+    if allow_cloud and dashscope_key:
         if role == "judge":
             cloud_model = (
                 os.environ.get("DASHSCOPE_JUDGE_MODEL", "").strip()
@@ -227,50 +291,18 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: DashScope mode, model=%s", cloud_model)
+        return resolved
 
-    elif _is_ollama_endpoint():
-        # ── OLLAMA MODE (Pearl Star local server) ────────────────────────────
-        ollama_host = os.environ.get("OLLAMA_HOST", "").strip()
-        qwen_base = os.environ.get("QWEN_BASE_URL", "").strip()
-        base_url = ollama_host.rstrip("/") + "/v1" if ollama_host else qwen_base
-        if not base_url.endswith("/v1"):
-            base_url = base_url.rstrip("/") + "/v1"
-
-        ollama_model = (
-            os.environ.get("OLLAMA_MODEL", "").strip()
-            or model_cfg.get("ollama_model_id", "").strip()
-            or "qwen2.5:14b"  # Pearl Star only has qwen2.5:14b
+    if not allow_cloud and (
+        deepseek_key or together_key or google_ai_key or dashscope_key or (cf_ai_base and cf_ai_token)
+    ):
+        logger.warning(
+            "LLM client: nonlocal API keys present but ignored "
+            "(set PHOENIX_TRANSLATION_ALLOW_CLOUD=1 to opt in); using local fallback"
         )
 
-        resolved = {
-            "base_url": base_url,
-            "api_key": "ollama",
-            "model_id": ollama_model,
-            "temperature": float(model_cfg.get("temperature", 0.6)),
-            "max_tokens": int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000))),
-            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
-            "mode": "ollama",
-            "enable_thinking": False,
-        }
-        logger.debug("LLM client: Ollama mode, base_url=%s, model=%s", base_url, ollama_model)
+    return _local_config(model_cfg)
 
-    else:
-        # ── LOCAL MODE (LM Studio) ────────────────────────────────────────────
-        resolved = {
-            "base_url": model_cfg.get("base_url", "http://127.0.0.1:1234/v1"),
-            "api_key": model_cfg.get("api_key", "lm-studio"),
-            "model_id": model_cfg.get("model_id", model_cfg.get("model", "local-model")),
-            "temperature": float(model_cfg.get("temperature", 0.6)),
-            "max_tokens": int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000))),
-            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
-            "mode": "local",
-            # LM Studio / local Qwen: disable thinking mode for speed
-            "enable_thinking": False,
-        }
-        logger.debug("LLM client: local mode, base_url=%s, model=%s",
-                     resolved["base_url"], resolved["model_id"])
-
-    return resolved
 
 
 # ─── CALL FUNCTION ────────────────────────────────────────────────────────────

@@ -123,6 +123,57 @@ def test_anchored_story_path_requires_name(tmp_path):
     assert escalated.status == "FAIL"
 
 
+def test_localized_anchored_story_accepts_named_source_sibling(tmp_path):
+    from phoenix_v4.quality.story_atom_lint import check_anchored_story_naming
+
+    source = (
+        tmp_path / "story_atoms" / "gen_z_professionals" / "anchored"
+        / "anxiety" / "overwhelm" / "recognition" / "micro" / "v03.txt"
+    )
+    source.parent.mkdir(parents=True)
+    source.write_text(
+        "Priya submits the update and feels the panic before anyone replies.",
+        encoding="utf-8",
+    )
+    localized = (
+        tmp_path / "story_atoms" / "gen_z_professionals" / "anchored"
+        / "anxiety" / "overwhelm" / "recognition" / "locales" / "zh-TW" / "micro" / "v03.txt"
+    )
+    localized.parent.mkdir(parents=True)
+    localized.write_text(
+        "Priya在送出更新後，胸口還是先緊了起來。",
+        encoding="utf-8",
+    )
+    assert check_anchored_story_naming(localized.read_text(encoding="utf-8"), localized) is None
+
+
+def test_localized_anchored_story_still_fails_when_source_is_unnamed(tmp_path):
+    from phoenix_v4.quality.story_atom_lint import check_anchored_story_naming
+
+    source = (
+        tmp_path / "story_atoms" / "gen_z_professionals" / "anchored"
+        / "anxiety" / "overwhelm" / "recognition" / "micro" / "v04.txt"
+    )
+    source.parent.mkdir(parents=True)
+    source.write_text(
+        "She sends the update and feels the panic before anyone replies.",
+        encoding="utf-8",
+    )
+    localized = (
+        tmp_path / "story_atoms" / "gen_z_professionals" / "anchored"
+        / "anxiety" / "overwhelm" / "recognition" / "locales" / "zh-TW" / "micro" / "v04.txt"
+    )
+    localized.parent.mkdir(parents=True)
+    localized.write_text(
+        "她送出更新後，胸口還是先緊了起來。",
+        encoding="utf-8",
+    )
+    assert (
+        check_anchored_story_naming(localized.read_text(encoding="utf-8"), localized)
+        == "CHARACTER_STUDY_UNNAMED"
+    )
+
+
 # ── §9 variety ────────────────────────────────────────────────────────────
 def test_variety_flags_single_type():
     assert story_type_variety_flag(["character_study", "character_study"]) == "LOW_STORY_TYPE_VARIETY"

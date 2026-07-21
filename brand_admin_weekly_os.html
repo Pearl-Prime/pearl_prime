@@ -130,7 +130,8 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .brand-card:hover{border-color:var(--acc);background:rgba(180,83,9,.06);transform:translateY(-2px)}
 .brand-card h3{font-size:.82rem;font-weight:500;color:#f5d0a9;margin-bottom:3px}
 .brand-card .focus{font-size:.62rem;color:var(--dim);line-height:1.4}
-.brand-card .teacher-tag{font-family:var(--mono);font-size:.4rem;color:var(--acc2);border:1px solid var(--acc);padding:1px 6px;border-radius:3px;margin-top:5px;display:inline-block}
+.brand-card .teacher-tag,.brand-card .director-tag{font-family:var(--mono);font-size:.4rem;color:var(--acc2);border:1px solid var(--acc);padding:1px 6px;border-radius:3px;margin-top:5px;display:inline-block}
+.brand-card .director-tag{color:var(--green);border-color:rgba(74,222,128,.45);margin-left:4px}
 
 /* -- Celebration Overlay -- */
 #celebration{display:none;position:fixed;inset:0;z-index:200;background:rgba(14,10,6,.85);align-items:center;justify-content:center;flex-direction:column;gap:16px}
@@ -208,6 +209,9 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <script>
 const JSON_BASE='brand-wizard-app/public/';
 let B={}, OS_DATA=null, PACKET_BRIDGE=null, MARKET_ID='en_us', MARKET=null;
+// The selected brand's real delivery feed (brand_deliveries/<base>.json), when it has one.
+let DELIVERY=null;
+const PRODUCTION_PENDING_REASON='Catalog ready, production files pending.';
 let SETUP=[], UPLOADS=[], UPLOADS_PLANNED=[], WEEK=[], QUICK_LINKS=[];
 
 const KW={anxiety:"anxiety relief, calm, stress management",burnout:"burnout recovery, rest, energy restoration",depression:"emotional healing, hope, mental wellness",self_worth:"self-worth, confidence, self-esteem",somatic_healing:"somatic healing, body awareness, nervous system",mindfulness:"mindfulness, meditation, present moment",courage:"courage, bravery, resilience, inner strength",boundaries:"healthy boundaries, self-protection, assertiveness",grief:"grief support, loss, healing after loss",compassion_fatigue:"compassion fatigue, caregiver support",overthinking:"overthinking, mental clarity, calm mind",sleep_anxiety:"sleep anxiety, insomnia help, restful sleep",social_anxiety:"social anxiety, social confidence",imposter_syndrome:"imposter syndrome, self-doubt, confidence",financial_stress:"financial stress, money anxiety, abundance",financial_anxiety:"financial anxiety, career confidence",adhd_focus:"ADHD focus, neurodivergent support, attention"};
@@ -234,12 +238,31 @@ async function loadBridges(){
   if(pk&&typeof pk==='object')PACKET_BRIDGE=pk;
 }
 
+// All 14 registry lanes — a lane missing here never loads brand_deliveries/<base>.json and so
+// would silently skip the production_files_ready guard in packetStatus().
+function deliveryBase(bid){
+  return String(bid||'').replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr|de_de|fr_fr|it_it|hu_hu)$/,'');
+}
+async function loadDelivery(bid){
+  DELIVERY=null;
+  try{
+    const r=await fetch(JSON_BASE+'brand_deliveries/'+deliveryBase(bid)+'.json',{cache:'no-store'});
+    if(r.ok){const j=await r.json(); if(j&&j.weeks)DELIVERY=j;}
+  }catch(e){}
+}
+
+// TRUTH-LABELING INVARIANT (harbor-line-production-truth-labeling):
+// production_files_ready === false is AUTHORITATIVE. A packet-bridge "buildable" verdict must
+// never let catalog metadata be offered as a shippable production packet. The bridge only ever
+// adds detail to a pending reason — it can never clear one.
 function packetStatus(bid){
+  const pendingProduction=!!(DELIVERY&&DELIVERY.production_files_ready===false);
+  const blocked=PACKET_BRIDGE&&PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[bid];
+  if(blocked)return{state:'blocked',reason:blocked.reason||PRODUCTION_PENDING_REASON};
+  if(pendingProduction)return{state:'blocked',reason:PRODUCTION_PENDING_REASON};
   if(!PACKET_BRIDGE)return{state:'unknown'};
   const ok=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[bid];
   if(ok&&ok.buildable)return{state:'ready',info:ok};
-  const blocked=PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[bid];
-  if(blocked)return{state:'blocked',reason:blocked.reason||'No shippable weekly packet yet.'};
   return{state:'missing'};
 }
 
@@ -423,7 +446,7 @@ function renderPhase2(){
   if(pkt.state==='ready'){
     h+=`<a class="action-btn big" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">Download Week 1 Package</a>`;
   }else{
-    h+=`<div class="warn"><strong>No shippable download.</strong> ${pkt.reason||'This brand has no buildable weekly packet on disk yet.'} Use the <a href="brand-wizard-app/public/brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}" style="color:var(--acc2)">Weekly packet dashboard</a> for metadata-only CSV exports.</div>`;
+    h+=`<div class="warn"><strong>Catalog ready, production files pending.</strong> ${pkt.reason||'This brand has no shippable weekly packet on disk yet.'} Use the <a href="brand-wizard-app/public/brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}" style="color:var(--acc2)">ops metadata dashboard</a> to view the live catalog and download metadata CSVs.</div>`;
   }
   h+=`<div id="coord-build-badge" class="coord-build-badge loading">Packet bridge: checking…</div>
     <div style="margin-top:10px;font-family:var(--mono);font-size:.5rem;color:var(--dim)">${folders}</div>
@@ -510,7 +533,7 @@ function refreshCoordinationBuildBadge(){
 function downloadAdminPacket(ev){
   if(!brandId){alert('Select a brand first.');return;}
   const pkt=packetStatus(brandId);
-  if(pkt.state!=='ready'){alert(pkt.reason||'No shippable package for this brand/week.');return;}
+  if(pkt.state!=='ready'){alert(pkt.reason||'Rendered production package pending. Open the ops dashboard for catalog metadata.');return;}
   var week=(pkt.info&&pkt.info.week)||currentIsoWeek();
   var btn=ev&&ev.target?ev.target:document.getElementById('admin-packet-dl-btn');
   var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
@@ -636,6 +659,7 @@ function renderPicker(){
       <h3>${b.d}</h3>
       <div class="focus">${b.f}</div>
       ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}
+      ${b.brand_director_name?`<span class="director-tag">Director: ${b.brand_director_name}</span>`:''}
     </div>`;
   }
   if(!entries.length){ h+=`<div class="brand-card" style="opacity:.6">No brands in this lane yet.</div>`; }
@@ -644,7 +668,7 @@ function renderPicker(){
 }
 function selectBrand(bid){
   history.replaceState(null,'','?brand='+bid);
-  initBrand(bid);
+  return initBrand(bid);
 }
 function resetBrand(){
   history.replaceState(null,'','?');
@@ -653,15 +677,18 @@ function resetBrand(){
 }
 
 // ── Init ──
-function initBrand(bid){
+async function initBrand(bid){
   if(!B[bid]){ renderPicker(); return; }
   brandId=bid; brand=B[bid];
+  // Must resolve BEFORE renderPhase2(): packetStatus() treats production_files_ready=false as
+  // authoritative, so rendering ahead of this would offer a packet the brand cannot ship.
+  await loadDelivery(bid);
   applyMarketProfile(resolveMarket(bid));
   load();
   document.getElementById('picker').classList.remove('show');
   document.getElementById('picker').style.display='none';
   document.getElementById('main-wrap').style.display='block';
-  document.getElementById('brand-pill').textContent=brand.d;
+  document.getElementById('brand-pill').textContent=brand.brand_director_name?`${brand.d} · Director: ${brand.brand_director_name}`:brand.d;
   updateHandoffCta();
   renderQuickLinks();
   renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
@@ -682,7 +709,7 @@ async function init(){
     LANE_FILTER=laneRaw;
     applyMarketProfile(OS_DATA.lane_to_market[laneRaw]);
   }
-  if(bid && B[bid]) initBrand(bid);
+  if(bid && B[bid]) await initBrand(bid);
   else renderPicker();
 }
 init();

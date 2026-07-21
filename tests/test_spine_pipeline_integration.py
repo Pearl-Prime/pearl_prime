@@ -63,12 +63,28 @@ def test_run_pipeline_help_lists_pipeline_mode() -> None:
     assert "spine" in r.stdout
 
 
-def test_registry_mode_default() -> None:
-    """Default pipeline mode is registry (backward compatible)."""
+def test_spine_mode_default() -> None:
+    """Default pipeline mode is spine (COHESIVE-FLOW-PATH-DEFAULT-SPINE-01)."""
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pipeline-mode", choices=["registry", "spine"], default="registry")
+    ap.add_argument("--pipeline-mode", choices=["registry", "spine"], default="spine")
     ns = ap.parse_args([])
-    assert ns.pipeline_mode == "registry"
+    assert ns.pipeline_mode == "spine"
+
+
+def test_registry_mode_blocked_for_production_render() -> None:
+    """Registry + render-book + production exits unless allow-legacy-registry."""
+    import scripts.run_pipeline as rp
+
+    args = argparse.Namespace(
+        pipeline_mode="registry",
+        quality_profile="production",
+        render_book=True,
+        allow_legacy_registry=False,
+    )
+    assert rp._guard_legacy_registry_mode(args) == 1
+
+    args.allow_legacy_registry = True
+    assert rp._guard_legacy_registry_mode(args) is None
 
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
@@ -107,7 +123,7 @@ def test_spine_mode_budget_word_count_matches_book(tmp_path: Path) -> None:
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
 def test_registry_mode_still_runs_for_anxiety(tmp_path: Path) -> None:
-    """Default registry path still renders when topic has a section registry."""
+    """Legacy registry path still renders when explicitly requested (draft QA only)."""
     out_dir = tmp_path / "reg_out"
     plan_path = tmp_path / "reg_plan.json"
     cmd = [
@@ -119,6 +135,8 @@ def test_registry_mode_still_runs_for_anxiety(tmp_path: Path) -> None:
         "gen_z_professionals",
         "--arc",
         str(ANXIETY_ARC),
+        "--pipeline-mode",
+        "registry",
         "--render-book",
         "--render-dir",
         str(out_dir),
@@ -200,13 +218,34 @@ def test_spine_gates_advisory_by_default(tmp_path: Path) -> None:
 @pytest.mark.slow
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
 def test_spine_gates_hard_records_production_policy(tmp_path: Path) -> None:
-    # Marked slow (excluded from Core tests CI) because the production profile
-    # correctly blocks this fixture on scene_anchor_density cap. Since PR #575
-    # (55f7546f3, HOOK scene_recognition bank routing), the recognition bank
-    # injects shared phrases across chapters — production profile catches this
-    # (correct behavior), so the fixture no longer produces a clean production
-    # run. Keep the test for manual/integration runs; full fix needs either
-    # bank-variety expansion or a cleaner fixture arc.
+    # Marked slow (excluded from Core tests CI). RE-VERIFIED 2026-07-09: the
+    # scene_anchor_density / shared-HOOK-phrase theory below this comment (PR
+    # #575) is STALE — those now register as WARN-severity F1 findings, not
+    # the blocker. Two genuine gate false-positives previously masked behind it
+    # were identified (not atom-edited — those cells are shared with the
+    # extended_book_2h flagship golden ch5/ch10 PROTECTIVE_ALARM callbacks and
+    # atom tweaks perturb full-book parity): F2.B on a grammatically valid
+    # contact-clause sentence (PROTECTIVE_ALARM level_4), and a WEAK_TRANSITIONS
+    # lexicon gap in chapter 10 (PROTECTIVE_ALARM level_9). Both need gate-
+    # level fixes, not content edits. The remaining, real blocker is F7
+    # (over-prescribed-practice-
+    # density): register_gate.py's default fail_at=4/warn_at=3 was calibrated
+    # on third-person deep_book prose, but this catalog's standard_book
+    # content is second-person/experiential throughout and measures 3-9
+    # prescribed-action paragraphs/chapter as NORMAL density — confirmed via
+    # an independent historical standard_book render
+    # (artifacts/pearl_prime/standard_book/ahjan_gen_z_professionals_anxiety_en_US_20260518T011019Z/book.txt),
+    # which fails the same way across all 12 chapters. This is the same
+    # third-person-vs-second-person mismatch that extended_book_2h got a
+    # calibrated F7_FORMAT_THRESHOLDS exception for (2026-07-07, calibrated
+    # against the Layer-4-approved flagship build) — standard_book never got
+    # the same treatment. Do NOT invent a standard_book threshold here: no
+    # human-approved standard_book reference exists to calibrate against, and
+    # guessing one would be exactly the gate-tuned-to-composer-output drift
+    # CLAUDE.md's Bestseller Anti-Drift Doctrine forbids. Un-slowing this test
+    # needs a real F7 standard_book calibration workstream (measure against an
+    # editorially-approved standard_book reference once one exists) or a
+    # genuine density-reduction authoring pass — not a fixture tweak.
     out_dir = tmp_path / "spine_hard"
     plan_path = tmp_path / "spine_hard_plan.json"
     r = _run_spine(out_dir, plan_path, quality_profile="production")
@@ -241,6 +280,38 @@ def test_block_on_fail_helper_routes_per_profile() -> None:
         for gate in ("chapter_flow", "book_quality_gate", "scene_anti_genericity",
                      "ei_v2", "editorial"):
             assert _block_on_fail(profile, gate) is False, f"{profile}/{gate}"
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_registry_blocked_under_production_profile(tmp_path: Path) -> None:
+    """Legacy registry mode must not run under production quality profile."""
+    out_dir = tmp_path / "reg_prod_block"
+    plan_path = tmp_path / "reg_prod_plan.json"
+    cmd = [
+        sys.executable,
+        str(RUN_PIPELINE),
+        "--topic",
+        "anxiety",
+        "--persona",
+        "gen_z_professionals",
+        "--arc",
+        str(ANXIETY_ARC),
+        "--pipeline-mode",
+        "registry",
+        "--quality-profile",
+        "production",
+        "--render-book",
+        "--render-dir",
+        str(out_dir),
+        "--out",
+        str(plan_path),
+        "--no-job-check",
+        "--no-generate-freebies",
+    ]
+    r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=60)
+    assert r.returncode != 0
+    combined = r.stderr + r.stdout
+    assert "registry mode cannot render production books" in combined or "registry is legacy and blocked" in combined
 
 
 @pytest.mark.skip(reason="PR #612: additive stacking surfaces legitimate content-cohesion "

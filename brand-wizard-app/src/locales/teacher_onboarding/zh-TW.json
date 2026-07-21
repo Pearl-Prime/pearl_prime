@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "選擇你的語言",
+    "subheading": "選取一面市場旗幟，以該語言開啟老師入駐表單。你仍然可以在表單內另外設定你教學所使用的語言。"
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "老師入駐",
+    "brand_blurb": "提交 Pearl_Int 所需的資料，讓一位真實的老師成為經過審核的老師模式來源。",
+    "functional_label": "可運作的老師資料庫",
+    "scale_label": "千書規模深度",
+    "activation_truth_kicker": "啟用須知",
+    "activation_truth_body": "「啟用」會送出你的資料。正式老師身分仍需經過來源正規化、原子萃取、人工審核與老師產製關卡。",
+    "draft_kicker": "草稿入口",
+    "draft_blurb": "隨時可以儲存。你會得到一個私人連結，之後可以回來繼續補充資料——不需要登入。",
+    "save_draft": "儲存草稿",
+    "rotate_token": "更換權杖",
+    "delete_draft": "刪除草稿",
+    "operator_queue": "操作員佇列 →",
+    "change_language": "變更顯示語言",
+    "nav_aria": "老師入駐各區段",
+    "nav_identity": "身分",
+    "nav_rights": "權利",
+    "nav_teachings": "教義",
+    "nav_stories": "故事",
+    "nav_practices": "練習",
+    "nav_voice": "語言",
+    "nav_activate": "啟用",
+    "minimum_suffix": "最低",
+    "preferred_suffix": "建議",
+    "recommended": "推薦"
+  },
+  "header": {
+    "kicker": "老師模式資料收集",
+    "title": "在系統以老師的聲音書寫之前，先建立來源資料包。",
+    "teacher_id_label": "老師編號："
+  },
+  "identity": {
+    "kicker": "1／身分",
+    "heading": "這位老師是誰？",
+    "teacher_name": "老師姓名",
+    "teacher_id": "老師編號／代稱",
+    "tradition": "傳承、法脈或專長領域",
+    "language_label": "你教學／書寫所使用的語言",
+    "language_hint": "這位老師的來源語言（可能與本頁顯示語言不同）。共 14 種語系。",
+    "contact_name": "聯絡人姓名",
+    "contact_email": "聯絡電子郵件",
+    "website": "網站或公開檔案",
+    "bio_label": "老師簡介",
+    "bio_hint": "可以貼上文字、附上連結，和／或上傳簡介檔案——任意組合皆可。",
+    "bio_placeholder": "關於這位老師的工作、背景、受眾與聲音，Pearl_Int 應該知道些什麼？",
+    "name_placeholder": "Master Wu",
+    "id_placeholder": "master_wu",
+    "tradition_placeholder": "禪宗、觀照心理學、身體覺察引導……",
+    "contact_name_placeholder": "操作員或老師代表",
+    "contact_email_placeholder": "teacher@example.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2／權利",
+    "heading": "我們被允許處理哪些內容？",
+    "owns_material": "我擁有或已獲授權，可提交這些教誨、錄音、檔案與連結供系統處理。",
+    "processing_consent": "我同意 Pearl_Int 萃取候選老師原子，並於正式使用前交由人工審核。",
+    "no_unauthorized": "我提交的內容不含未經授權的著作權材料，任何公開摘錄均已附上權利／來源說明。",
+    "final_consent": "我確認此份資料可提交供操作員審核，並用於未來的老師來源啟用作業。",
+    "public_boundaries": "公開範圍",
+    "private_boundaries": "私密範圍",
+    "public_placeholder": "哪些內容可以被引用、改寫或公開使用？",
+    "private_placeholder": "哪些內容絕對不能被使用、指名、萃取或公開？"
+  },
+  "teachings": {
+    "kicker": "3／教義",
+    "heading": "請提供這位老師的教義與教學內容。",
+    "blurb": "可依需要新增多個教誨區塊。每個區塊內都能貼上多則教誨（以空行分隔），並附上連結和／或上傳檔案。",
+    "add_label": "新增教誨區塊",
+    "placeholder": "教誨一……\n\n教誨二……\n\n教誨三……",
+    "hint": "小提醒：每則教誨以一個段落，或以空行分隔的區塊呈現效果最佳。"
+  },
+  "stories": {
+    "kicker": "4／故事",
+    "heading": "請提供真實的故事素材，而非簡短的小例子。",
+    "blurb": "選擇故事類型，然後貼上文字、附上來源連結，和／或上傳檔案。先從三列開始——之後可隨時新增。",
+    "add_label": "新增故事列",
+    "type_label": "故事類型",
+    "placeholder": "發生了什麼事？場景、壓力、摩擦、抉擇、後果、教學作用……"
+  },
+  "practices": {
+    "kicker": "5／練習",
+    "heading": "新增練習與工具，並附上足夠的脈絡以構成五層原子。",
+    "blurb": "同樣的模式：類型・文字・連結・上傳。先從三列開始。",
+    "add_label": "新增練習列",
+    "type_label": "練習類型",
+    "placeholder": "步驟、時間掌控、身體訊號、頓悟時刻、整合方式、禁忌事項、安全提醒……"
+  },
+  "voice": {
+    "kicker": "6／語言",
+    "heading": "語錄、慣用語、隱喻與語言界限。",
+    "blurb": "每一列代表一種語言類別。可使用文字、連結，和／或上傳——依需要新增更多列。",
+    "add_label": "新增語言列",
+    "entry_type": "項目類型",
+    "source_note": "來源／授權說明（選填）",
+    "source_placeholder": "此內容出處／使用授權",
+    "content_placeholder": "貼上此語言項目的內容……"
+  },
+  "activate": {
+    "kicker": "7／啟用",
+    "heading": "提交老師入駐資料包。",
+    "ready_title": "準備好啟用了嗎？",
+    "ready_body": "我們會儲存你的草稿、提交資料供審核，並提供一個私人連結，讓你之後可以隨時回來補充資料。",
+    "teacher_name": "老師姓名：",
+    "contact_email": "聯絡電子郵件：",
+    "processing_permission": "處理授權：",
+    "final_consent": "最終同意：",
+    "source_material": "來源素材：",
+    "missing": "缺少",
+    "missing_or_invalid": "缺少或無效",
+    "ready": "已就緒",
+    "present": "已提供",
+    "depth_kicker": "深度指引",
+    "depth_blurb": "即使未達建議數量，你也可以啟用——這僅是建議，並非硬性限制。",
+    "submit": "啟用老師入駐",
+    "submit_failed": "啟用失敗。請重試，或先儲存草稿。"
+  },
+  "success": {
+    "kicker": "老師入駐",
+    "heading": "恭喜",
+    "body_prefix": "你為",
+    "body_suffix": "提交的老師入駐資料已送出。正式老師身分仍需經過 Pearl_Int 審核——你可以隨時使用私人連結繼續補充資料。",
+    "return_url_kicker": "你的私人返回連結",
+    "copy_link": "複製連結",
+    "copied": "已複製",
+    "no_url": "下次請先儲存草稿，我們才能提供私人返回連結。你的資料仍已成功記錄。",
+    "continue_editing": "繼續編輯",
+    "start_another": "新增另一位老師"
+  },
+  "draft": {
+    "resuming": "正在載入草稿……",
+    "saving": "正在儲存草稿……",
+    "saved": "草稿已儲存。請保留你的私人返回連結。",
+    "deleting": "正在刪除草稿……",
+    "deleted": "草稿已刪除。",
+    "delete_confirm": "確定要刪除這份草稿嗎？此操作不會刪除已提交的資料。",
+    "delete_failed": "刪除失敗"
+  },
+  "validation": {
+    "teacher_name_required": "請填寫老師姓名。",
+    "contact_email_required": "請填寫聯絡電子郵件。",
+    "contact_email_invalid": "聯絡電子郵件格式須為有效格式。",
+    "owns_required": "請確認擁有本人聲音或已獲授權的聲明。",
+    "processing_required": "請授權系統將資料處理為候選原子。",
+    "consent_required": "請勾選最終同意欄位。",
+    "material_required": "請至少新增一則教誨、故事、練習、語言項目，或簡介（文字、連結或上傳檔案）。"
+  },
+  "common": {
+    "upload": "上傳",
+    "url_placeholder": "https://…（選填連結）",
+    "paste_placeholder": "貼上或輸入內容……",
+    "add_row": "新增列"
+  }
+}

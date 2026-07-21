@@ -275,3 +275,40 @@ def test_placeholder_stub_is_suppressed_as_chapter_opening() -> None:
     assert stub not in prose, (
         "placeholder HOOK stub leaked into composed chapter prose"
     )
+
+
+def test_placeholder_line_is_stripped_from_multiline_hook_body() -> None:
+    # Real corpus shape: a placeholder-only HOOK atom can be stacked with real prose.
+    # The whole body is not a placeholder, but the whole-line stub must not render.
+    stub = "[Persona-specific hook for corporate_managers × burnout]"
+    real_line = "You open the laptop before dawn and feel the old weight arrive first."
+    prose = cc.compose_chapter_prose(
+        slot_types=["HOOK", "REFLECTION"],
+        slot_proses=[
+            f"{stub}\n\n{real_line}",
+            "The point is not that you are weak. The point is that depletion has a signature.",
+        ],
+        chapter_index=0,
+        total_chapters=12,
+        topic_id="burnout",
+        persona_id="corporate_managers",
+        emotional_role="recognition",
+        arc_thesis="depletion has a signature",
+    )
+    assert stub not in prose
+    assert real_line in prose
+
+
+def test_placeholder_line_is_stripped_from_ordered_accent_path() -> None:
+    stub = "[Persona-specific hook for corporate_managers × burnout]"
+    real_line = "The morning starts before you are ready for it."
+    prose = cc.compose_ordered_chapter_prose(
+        ["HOOK", "CITED_EVIDENCE", "STORY"],
+        [
+            f"{stub}\n\n{real_line}",
+            "A documented finding worth naming before we go further.",
+            "You notice the body bracing before the meeting begins.",
+        ],
+    )
+    assert stub not in prose
+    assert real_line in prose

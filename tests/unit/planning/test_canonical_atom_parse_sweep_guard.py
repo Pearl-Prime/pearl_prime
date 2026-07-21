@@ -33,7 +33,7 @@ GUARD = _load_guard()
 
 
 def test_parse_sweep_is_green_tree_wide() -> None:
-    """No NEW parse failures and no NEW over-match signatures outside the baseline."""
+    """No NEW parse failures, over-match signatures, or stub-content signatures outside baseline."""
     report = GUARD.sweep()
     assert report["new_parse_failures"] == [], (
         "NEW strict-parse failures (PR #1590-class over-match regression): "
@@ -42,6 +42,10 @@ def test_parse_sweep_is_green_tree_wide() -> None:
     assert report["new_overmatch_signatures"] == [], (
         "NEW metadata-less '## <LABEL> vNN' over-match headers: "
         + ", ".join(report["new_overmatch_signatures"][:20])
+    )
+    assert report["new_stub_failures"] == [], (
+        "NEW bare-header-text stub prose (check D): "
+        + ", ".join(report["new_stub_failures"][:20])
     )
     assert report["ok"] is True
 
@@ -124,6 +128,76 @@ def test_no_english_story_pool_carries_overmatch() -> None:
         "English STORY pool(s) carry an over-match signature (NO_STORY_POOL) and must be "
         "RESTORED, never baselined: " + ", ".join(report["story_pool_overmatch"][:20])
     )
+
+
+def test_stub_signature_detects_unpromoted_defect7_shape() -> None:
+    """Check (D): the un-repaired sibling of the #1590 defect — a body that is the bare
+    next-header label, but NEVER got promoted to a phantom ``##`` header, so it parses
+    cleanly and would otherwise ship as one-line "prose" in a real book."""
+    stubbed = (
+        "## RECOGNITION v01\n"
+        "---\n"
+        "path: the number that won't move\n"
+        "BAND: 2\n"
+        "---\n"
+        "RECOGNITION v02\n"  # <-- un-authored: the bare label, never promoted to a header
+        "---\n"
+        "\n"
+        "## RECOGNITION v03\n"
+        "---\n"
+        "path: the email about stock options\n"
+        "---\n"
+        "Marco reads the email a fourth time, hunting for a tone problem that isn't there.\n"
+        "---\n"
+    )
+    assert GUARD.stub_prose_signature_hits(stubbed) == 1
+
+
+def test_stub_signature_silent_on_wellformed() -> None:
+    """A block with real authored prose is clean, even if it happens to reference a role name."""
+    good = (
+        "## RECOGNITION v01\n"
+        "---\n"
+        "path: x\n"
+        "BAND: 2\n"
+        "---\n"
+        "She thought about RECOGNITION v02 of the pattern and moved on with her day.\n"
+        "---\n"
+    )
+    assert GUARD.stub_prose_signature_hits(good) == 0
+
+
+def test_stub_signature_silent_on_legit_terse_bandfill() -> None:
+    """Deliberately terse but REAL 'band-fill' prose (a full sentence, not a bare label)
+    must never false-positive — the signature requires an EXACT bare-token match."""
+    bandfill = (
+        "## RECOGNITION v06\n"
+        "---\n"
+        "path: x\n"
+        "BAND: 5\n"
+        "---\n"
+        "Crisis. Breakthrough. The moment of maximum intensity.\n"
+        "---\n"
+    )
+    assert GUARD.stub_prose_signature_hits(bandfill) == 0
+
+
+def test_stub_signature_distinct_from_overmatch_signature() -> None:
+    """(D) and (B) target complementary, non-overlapping shapes: an unpromoted stub body
+    (D) is not also flagged as an over-matched phantom header (B), and vice versa."""
+    stubbed = (
+        "## RECOGNITION v01\n---\npath: x\nBAND: 2\n---\nRECOGNITION v02\n---\n"
+    )
+    assert GUARD.stub_prose_signature_hits(stubbed) == 1
+    assert GUARD.overmatch_signature_hits(stubbed) == 0
+
+    overmatched = (
+        "## RECOGNITION v01\n---\npath: x\nBAND: 2\n---\n"
+        "## RECOGNITION v02\n---\n\n"  # promoted phantom header -> next block's metadata
+        "## RECOGNITION v03\n---\npath: y\n---\nReal prose.\n---\n"
+    )
+    assert GUARD.overmatch_signature_hits(overmatched) >= 1
+    assert GUARD.stub_prose_signature_hits(overmatched) == 0
 
 
 def test_is_english_story_pool_classification() -> None:

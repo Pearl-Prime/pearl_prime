@@ -1,17 +1,32 @@
-# Accent Beats System Spec — Planner-Placed Optional Chapter Elements
+# Accent Beats System Spec — Planner-Placed Chapter Elements
 
-**Version:** 1.1.0  
-**Date:** 2026-07-07  
-**Authority:** Pearl_Research + Pearl_Architect  
-**Status:** SPECCED (inventory + design only — no pipeline, composer, bank authoring, or flagship changes in this PR)  
-**GATE:** `flagship-read-approved` (golden-#2 freeze merged) before any build lane opens  
-**Implements:** Operator mission — optional, planner-placed chapter elements (quotes, encouragement, reflection questions, affirmations, troubleshooting, cited evidence) that appear **sparsely and intelligently** across books, increasing catalog variation without reintroducing template glue.
+**Version:** 1.2.0 (V2.1 layer amendment)
+**Date:** 2026-07-13 (amended; originally 2026-07-07)
+**Authority:** Pearl_Research + Pearl_Architect; layer model superseded by [ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md](../docs/ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md) — **read that doc first**
+**Status:** SPECCED (inventory + design only — no pipeline, composer, bank authoring, or flagship changes in this PR)
+**GATE:** `flagship-read-approved` (golden-#2 freeze merged) before any build lane opens
+**Implements:** Operator mission — planner-placed chapter elements (quotes, encouragement, reflection questions, evidence, external stories, callbacks, analogy/metaphor) that appear **sparsely and intelligently** where sparse is correct, and **reliably** where they are not optional, increasing catalog variation without reintroducing template glue.
 
-**Build order after flagship read:** cast_structure + renditions wired → accent layer planned + banks seeded → composer consumer + gates → book-#2/#3 pilot read against no-accent sibling.
+**Build order after flagship read:** cast_structure + renditions wired → four-layer contract planned + banks seeded → composer consumer + gates → book-#2/#3 pilot read against no-accent sibling.
 
-**Doctrine (non-negotiable):** Accent beats are **planner-assigned, never composer-improvised**. Framing lives **inside the atom** — entry and exit authored per position variant. Composer-injected wrappers are **banned** (same scar as `COMPOSER_DEINJECTION_AND_TISSUE_SPEC_2026-07-05.md`).
+**Doctrine (non-negotiable):** Every element in this spec is **planner-assigned, never composer-improvised**, regardless of which of the four layers it belongs to. Framing lives **inside the atom** — entry and exit authored per position variant. Composer-injected wrappers are **banned** (same scar as `COMPOSER_DEINJECTION_AND_TISSUE_SPEC_2026-07-05.md`).
 
-**Personality layer (four sources):** quotes (others' words) · cited evidence (science) · wisdom essence (traditions' distilled voice — `WISDOM_ESSENCE`, parallel lane) · **author commentary** (author's witness voice — `AUTHOR_COMMENTARY`, parallel lane). All planner-placed, dosage-governed; composite mode uses secular register for essence and bans teacher names in commentary.
+## §0.1 — V2.1 correction: this is not one flat "accent" bucket
+
+**Read this before authoring anything from this spec.** The original v1.0/v1.1 version of this document (and the phrase "accent beats" in its title) treated all eight classes below as one undifferentiated, sparsity-governed "accent" bucket. That was wrong, and it produced writer guidance that implied evidence, troubleshooting, and external stories were decorative extras subject to the same "keep it sparse" instinct as a quote or a wisdom line. They are not.
+
+Phoenix authoring now separates **four layers**. Only one of them is optional and sparse.
+
+| Layer | What it is | Sparse? | Classes covered by this spec |
+|-------|------------|---------|-------------------------------|
+| **`chapter_engine`** | Elements that make a chapter work at all | **No** — expected in most/every chapter | `TROUBLESHOOTING` (this spec); `VALIDATION_NORMALIZATION`, `MECHANISM_EXPLANATION`, `PRACTICE_APPLICATION`, `TRANSITION_GLUE`, `CLOSING_TAKEAWAY`, `PROPULSION` (core spine, out of this spec's scope) |
+| **`proof_and_embodiment`** | Elements that make the teaching credible or lived | **No** — required per profile minimums | `EXTERNAL_STORY`, `AUTHOR_DISCLOSURE`, `CITED_EVIDENCE` (this spec); `HOOK_STORY`, `CASE_STUDY` (core spine) |
+| **`optional_accents`** | Sparse rhetorical flourishes | **Yes** — this is where the sparsity doctrine lives | `QUOTE`, `ENCOURAGEMENT`, `REFLECTION_QUESTION`, `AUTHOR_COMMENTARY`, `WISDOM_ESSENCE` |
+| **`cohesion_and_craft`** | Devices that make the book feel threaded | **No** — tracked, not budgeted like an accent | `CALLBACK_PLANT`, `CALLBACK_RETURN`, `ANALOGY`, `METAPHOR`, `MOTIF` |
+
+**If you take one thing from this correction:** the "sparse, intentional" doctrine in §0 below is real and stays real — but it applies to `optional_accents` only. `TROUBLESHOOTING`, `CITED_EVIDENCE`, `EXTERNAL_STORY`, and `AUTHOR_DISCLOSURE` are load-bearing chapter content with their own minimums, not accents you are being asked to ration.
+
+`AFFIRMATION` remains not-live (TODO mantras only) and is excluded from all four layers until Pearl_Editor commissions real content — see §1.
 
 ---
 
@@ -51,7 +66,7 @@ Six-layer taxonomy: `ABSENT → RESEARCHED → SPECCED → CONFIG-EXISTS → COD
 | 8 | **Summaries / takeaways** | TAKEAWAY slot; COMPRESSION slot in composer order (`chapter_composer.py` :6–7) | `COMPRESSION` stays **spine-optional**, not accent | **CODE-WIRED** (composer reads slot) / **CONFIG-EXISTS** (1,272 persona COMPRESSION dirs) | COMPRESSION is format-driven, not planner-sparse; do not fold into accent budget |
 | 9 | **Reflection questions** | Doctrine closers ("What is your climate today?" in `COMPOSITE_DOCTRINE v*`), CJK TAKEAWAY/SCENE `**Reflection Question:**` blocks | **`REFLECTION_QUESTION`** (new accent) | **EXECUTED-REAL** (embedded) → **SPECCED** (placeable) | Extract / author as accent atoms; plan assigns chapters |
 | 10 | **Encouragement / permission** | `PERMISSION` (245 teacher-bank YAMLs + 64 persona dirs), `PERMISSION_GRANT` (64 persona `CANONICAL.txt` trees), Writer Spec §4.8, `BESTSELLER_STRUCTURES.md` PERMISSION column, composer `:3282–3285` | **`ENCOURAGEMENT`** ← reuse PERMISSION/PERMISSION_GRANT with accent semantics | **EXECUTED-REAL** (content) / **CODE-WIRED** (structure-default render) | Re-key from structure-default to **planner-sparse**; distinguish permission (chapter-cost) vs encouragement (post-exercise) |
-| 11 | **Mantras / affirmations** | `config/angles/angle_registry.yaml` → `journey.core_mantras` (15 angles × TODO stubs) | **`AFFIRMATION`** ← reuse mantra content shape | **CONFIG-EXISTS** (schema) / **ABSENT** (authored mantras) | Surface reader-facing beat; Pearl_Editor commissions mantras per angle |
+| 11 | **Mantras / affirmations** | `config/angles/angle_registry.yaml` → `journey.core_mantras` (15 angles × TODO stubs) | **`AFFIRMATION`** ← reuse mantra content shape | **CONFIG-EXISTS** (schema) / **ABSENT** (authored mantras) / **NOT LIVE** in runtime | Do **not** claim AFFIRMATION is shipping; keep budget at 0 until Pearl_Editor commissions real mantras |
 | 12 | **Quotes** | ~22 orphan `atoms/<persona>/<topic>/QUOTE/CANONICAL.txt` (retired per `QUOTE-ATOM-ROUTING-01`); **no verified bank** | **`QUOTE`** (new accent + new bank) | **ABSENT** (verified) / **RESEARCHED** (orphan content) | Pearl_Research bank program; **not** 11th grid slot — accent overlay only |
 | 13 | **Case studies / cited evidence** | Fictional vignettes in STORY; Gladwell Spiral structure cites stats in `BESTSELLER_STRUCTURES.md` examples only | **`CITED_EVIDENCE`** (new accent + new bank) | **SPECCED** (structure examples) / **ABSENT** (bank + gate) | Pearl_Research claims ledger; distinct from fictional STORY |
 | 14 | **Obstacles / troubleshooting** | INTEGRATION prose ("chest will object", "forget for three rooms/meetings") — e.g. `atoms/gen_z_professionals/anxiety/INTEGRATION/CANONICAL.txt` | **`TROUBLESHOOTING`** (new accent) | **EXECUTED-REAL** (embedded) → **SPECCED** (placeable) | Extract standalone beats keyed to `exercise_id` / `object` |
@@ -61,7 +76,7 @@ Six-layer taxonomy: `ABSENT → RESEARCHED → SPECCED → CONFIG-EXISTS → COD
 
 | Category | Share | Classes |
 |----------|-------|---------|
-| **Dormant asset wiring** | ~70% | ENCOURAGEMENT, AFFIRMATION, REFLECTION_QUESTION, TROUBLESHOOTING (content partially exists) |
+| **Dormant asset wiring** | ~70% | ENCOURAGEMENT, REFLECTION_QUESTION, TROUBLESHOOTING (content partially exists). **AFFIRMATION remains deferred** (TODO mantras only). |
 | **Genuinely new** | ~30% | QUOTE, CITED_EVIDENCE (banks + verification + gates) |
 
 **Verified:** Only QUOTE and CITED_EVIDENCE require new bank programs from zero. All other accent classes reuse or refactor existing prose/assets.
@@ -78,9 +93,9 @@ Orphan `QUOTE/CANONICAL.txt` files are **candidate content** for Pearl_Editor re
 
 ---
 
-## §2 — Accent atom classes
+## §2 — Element classes across the four layers
 
-Eight accent classes (six original + **WISDOM_ESSENCE** + **AUTHOR_COMMENTARY** v1.1). Each is a **complete authored paragraph unit** with position variants — never a bare quote line plus composer wrapper.
+Ten classes tracked by this spec (eight original + **WISDOM_ESSENCE** + **AUTHOR_COMMENTARY** v1.1, plus **EXTERNAL_STORY** and **AUTHOR_DISCLOSURE** added in the V2.1 amendment). Each is a **complete authored paragraph unit** with position variants — never a bare quote line plus composer wrapper. Per §0.1, only five of these ten are `optional_accents`; the rest are `chapter_engine` or `proof_and_embodiment` and are not subject to the sparsity budget.
 
 ### 2.1 Shared schema (`accent_atom.yaml`)
 
@@ -140,16 +155,38 @@ claim_ledger:
 
 ### 2.2 Class definitions
 
-| Class | Reuse source | Purpose | Default allowed positions | Must key to |
-|-------|--------------|---------|---------------------------|-------------|
-| **QUOTE** | New bank | Credibility + tonal entry/exit; doctrine echo | `before_HOOK`, `after_INTEGRATION` (closer) | `doctrine_id` or chapter `angle_id` |
-| **ENCOURAGEMENT** | `PERMISSION` / `PERMISSION_GRANT` atoms | Post-effort recognition — "You just sat with that for two minutes" | `after_EXERCISE`, `after_turning_point` | `exercise_id` or story `turning_point` pick |
-| **REFLECTION_QUESTION** | Doctrine closers, CJK reflection blocks | Reader pause before thread | `after_REFLECTION`, `before_THREAD` | `doctrine_id` or `object` |
-| **AFFIRMATION** | `angle_registry.yaml` `core_mantras` | Short repeatable phrase; angle journey surface | `after_PIVOT`, `before_INTEGRATION` | `angle_id` |
-| **TROUBLESHOOTING** | INTEGRATION obstacle paragraphs | "When you forget for three days…" | `after_INTEGRATION` | `exercise_id` + `object` |
-| **CITED_EVIDENCE** | New bank | Named study/stat moment (not fiction) | `after_HOOK`, `before_STORY` (Gladwell Spiral alignment) | `doctrine_id` + claim ledger |
-| **WISDOM_ESSENCE** | New bank (`accent_banks/wisdom_essence/`) | Traditions' distilled voice — corpus-convergent themes, not teacher doctrine | `after_REFLECTION`, `before_THREAD` | `topic_keys` + `doctrine_keys` + `theme`; `source_teachers` audit only |
-| **AUTHOR_COMMENTARY** | New bank (`accent_banks/author_commentary/`) | Author's witness voice — observational, not expert | `after_REFLECTION`, `after_EXERCISE`, `after_PIVOT`, `before_THREAD` | `author_id` + `topic_keys`; bio-licensed |
+Layer column added in the V2.1 amendment — use it to decide whether an element is subject to the sparsity budget (§4.3) or not.
+
+| Class | Layer | Reuse source | Purpose | Default allowed positions | Must key to |
+|-------|-------|--------------|---------|---------------------------|-------------|
+| **QUOTE** | `optional_accents` | New bank | Credibility + tonal entry/exit; doctrine echo | `before_HOOK`, `after_INTEGRATION` (closer) | `doctrine_id` or chapter `angle_id` |
+| **ENCOURAGEMENT** | `optional_accents` | `PERMISSION` / `PERMISSION_GRANT` atoms | Post-effort recognition — "You just sat with that for two minutes" | `after_EXERCISE`, `after_turning_point` | `exercise_id` or story `turning_point` pick |
+| **REFLECTION_QUESTION** | `optional_accents` | Doctrine closers, CJK reflection blocks | Reader pause before thread | `after_REFLECTION`, `before_THREAD` | `doctrine_id` or `object` |
+| **AFFIRMATION** | *(excluded — not live)* | `angle_registry.yaml` `core_mantras` | Short repeatable phrase; angle journey surface (**NOT LIVE** — TODO stubs only; excluded from `ALL_ACCENT_CLASSES` and from every layer until commissioned) | `after_PIVOT`, `before_INTEGRATION` | `angle_id` |
+| **TROUBLESHOOTING** | `chapter_engine` — **not an accent, not sparsity-budgeted** | INTEGRATION obstacle paragraphs | "When you forget for three days…" — reader support after a hard ask, not a flourish | `after_INTEGRATION` | `exercise_id` + `object` |
+| **CITED_EVIDENCE** | `proof_and_embodiment` — **not an accent, not sparsity-budgeted** | New bank | Named study/stat moment (not fiction); credibility, not decoration | `after_HOOK`, `before_STORY` (Gladwell Spiral alignment) | `doctrine_id` + claim ledger |
+| **EXTERNAL_STORY** | `proof_and_embodiment` — **not an accent, not sparsity-budgeted** | New bank (`accent_banks/external_story/`) | Real or disclosed-composite case that proves the mechanism outside the book's own cast; alternates `recognition` and `mechanism_proof` function across a book | `after_HOOK` (story-led open) or middle-body | `story_function` (§2.2a) + `story_metadata` (§10 of the V2.1 doc) |
+| **AUTHOR_DISCLOSURE** | `proof_and_embodiment` — **not an accent, not sparsity-budgeted** | New bank (`accent_banks/author_disclosure/`); distinct from `AUTHOR_COMMENTARY` | Author reveals something experienced, feared, misunderstood, attempted, or learned — first-person lived proof, not interpretation | `after_REFLECTION`, `after_PIVOT` | `author_id` + `disclosure_function` (§2.2b) + bio license |
+| **WISDOM_ESSENCE** | `optional_accents` | New bank (`accent_banks/wisdom_essence/`) | Traditions' distilled voice — corpus-convergent themes, not teacher doctrine | `after_REFLECTION`, `before_THREAD` | `topic_keys` + `doctrine_keys` + `theme`; `source_teachers` audit only |
+| **AUTHOR_COMMENTARY** | `optional_accents`; distinct from `AUTHOR_DISCLOSURE` | New bank (`accent_banks/author_commentary/`) | Author *interprets* what the reader just encountered — orientation, permission, emphasis, boundary, transition. Not the author's own experience (that is `AUTHOR_DISCLOSURE`) | `after_REFLECTION`, `after_EXERCISE`, `after_PIVOT`, `before_THREAD` | `author_id` + `topic_keys`; bio-licensed |
+
+### 2.2a EXTERNAL_STORY function tags (required)
+
+Every `EXTERNAL_STORY` atom must carry exactly one `story_function`:
+
+| Function | Use it when the story… |
+|----------|--------------------------|
+| `recognition` | Makes the reader feel seen — "someone else lives this too" |
+| `mechanism_proof` | Demonstrates the chapter's mechanism working (or failing) in a real case |
+| `turn` | Shows the moment a person's trajectory changed |
+| `possibility` | Shows an outcome the reader can imagine for themselves |
+| `cautionary` | Shows the cost of not acting, or acting wrong |
+
+For anxiety-profile books, alternate `recognition` and `mechanism_proof` across the book rather than clustering one function early and abandoning it — see §14.2.
+
+### 2.2b AUTHOR_DISCLOSURE functions (required)
+
+Every `AUTHOR_DISCLOSURE` atom must carry exactly one `disclosure_function`: `credibility`, `vulnerability`, `companionship`, `failure_model`, `turning_point`, or `limits_of_authority`. Before shipping a disclosure, apply the test from the V2.1 doc §11.1: *"Does this disclosure help the reader understand themselves, or does it merely make the author more visible?"* If it's the latter, cut it or convert it to `AUTHOR_COMMENTARY`.
 
 ### 2.3 WISDOM_ESSENCE schema extensions
 
@@ -195,6 +232,47 @@ register_variants:
 3. **Exit handoff** — last sentence points to the **next spine beat** by name ("Carry that question into the scene that follows." / "Now notice what your chest does when you try this tonight.")
 
 Gate `check_accent_framing_in_atom.py` (proposed): FAIL if rendered accent text is concatenated with any string from `config/rendering/*_families.yaml` or if atom body lacks exit-handoff pattern for assigned position.
+
+### 2.5 Truth and provenance for EXTERNAL_STORY and CITED_EVIDENCE (required)
+
+Function tagging (§2.2a) is necessary but not sufficient. Every `EXTERNAL_STORY` atom also carries `story_metadata`:
+
+```yaml
+story_metadata:
+  function: recognition | mechanism_proof | turn | possibility | cautionary
+  source_type: documented_public_case | author_provided_story | interviewed_subject |
+               anonymized_real_story | disclosed_composite | explicitly_hypothetical_example
+  source_reference: "..."          # citation, interview record, or composite-disclosure note
+  identity_handling: anonymized | named_with_consent | public_figure | not_applicable
+  factuality_status: verified | unverified_reported | explicitly_hypothetical
+```
+
+**Hard rule: never invent a person and imply they are a real case.** If a story is invented for illustration, it must be tagged `source_type: explicitly_hypothetical_example` and written so the reader is not misled into thinking it is a documented case. `disclosed_composite` (a plausible blend of real patterns, disclosed as such) is allowed; a composite presented as one real, unnamed individual is not.
+
+`CITED_EVIDENCE` atoms carry the matching `evidence_metadata` block (source tier, evidence strength, `limitations_acknowledged: true`). A chapter needing evidence should reach for **two accurately-framed, limitation-aware citations** over five thin ones — precision beats volume.
+
+### 2.6 CALLBACK, ANALOGY, METAPHOR — cohesion and craft (tracked, not accent-budgeted)
+
+These are `cohesion_and_craft`, the fourth layer (§0.1). They are planned like everything else in this spec, but they are never counted against the `optional_accents` sparsity budget in §4.3, and they are not optional in the sense of "the book is fine without them" — a book with zero callbacks reads as episodic.
+
+**CALLBACK_PLANT / CALLBACK_RETURN.** A callback is a two-sided contract: something planted early, returned later, changed by the return. Every `CALLBACK_RETURN` requires:
+
+```yaml
+callback:
+  plant_id: "caged-bird-image"
+  planted_in_chapter: 1
+  returned_in_chapter: 7
+  return_function: remind | deepen | reinterpret | invert | transfer | resolve | close
+  semantic_development: "from trapped nervous system to protective adaptation"
+```
+
+A return that merely repeats the planted phrase without `semantic_development` is not a callback — it is a tic. If you cannot articulate what changed between the plant and the return, don't write the return yet.
+
+**ANALOGY and METAPHOR must explain, compress, or thread — never decorate.** Before writing one, ask: *does this make the mechanism easier to hold in the reader's head, or is it just a pretty sentence?* A recurring metaphor that is planted once and returned to later (functioning as a callback) is stronger than a fresh metaphor in every chapter. Count only `major_explanatory_analogy` and `developed_or_recurring_metaphor` units — not every figurative sentence.
+
+### 2.6a PARABLE — sparse story register, not a generic accent
+
+`PARABLE` is not its own accent class and does not get its own budget line. It is a **story register** that can appear inside `HOOK_STORY` or `EXTERNAL_STORY` when the profile calls for it (`timeless_wisdom` profiles use it most; `practical_credible` and the anxiety flagship hybrid use `parable_uses: 0` or `0-1`). If you are tempted to reach for a parable in a mechanism-forward, practical-credible chapter, don't — reach for `EXTERNAL_STORY` with `mechanism_proof` function instead.
 
 ---
 
@@ -246,23 +324,39 @@ bridge → EXERCISE → [ENCOURAGEMENT] → COMPRESSION? → INTEGRATION →
 
 ## §4 — Plan schema extension
 
-### 4.1 Book-level `accent_budget`
+### 4.1 Book-level `accent_budget` — optional_accents only
+
+**V2.1 correction:** `accent_budget` governs the `optional_accents` layer only. `TROUBLESHOOTING`, `CITED_EVIDENCE`, `EXTERNAL_STORY`, and `AUTHOR_DISCLOSURE` are planned through `chapter_engine_expectations` / `proof_and_embodiment` minimums instead (§4.1a) — do not zero them out to "be sparse."
 
 ```yaml
 # book_structure_plan / twelve_shape plan header
-accent_budget:
+accent_budget:              # optional_accents layer only
   QUOTE: 3
   ENCOURAGEMENT: 2
   REFLECTION_QUESTION: 3
-  AFFIRMATION: 0
-  TROUBLESHOOTING: 1
-  CITED_EVIDENCE: 0
+  AFFIRMATION: 0             # not live — keep at 0 until commissioned
   WISDOM_ESSENCE: 0
   AUTHOR_COMMENTARY: 0
 accent_distribution_profile: somatic_reflective  # see §4.3
 ```
 
-**Default for 12-chapter book:** all zeros (no accents). Pilot (§7) is an explicit exception.
+**Default for 12-chapter book:** all zeros in `optional_accents` (no accents) unless the profile calls for them. Pilot (§7) and the anxiety flagship hybrid (§14) are explicit exceptions.
+
+### 4.1a Book-level `proof_and_embodiment` and `cohesion_and_craft` — tracked minimums, not sparsity budgets
+
+```yaml
+proof_and_embodiment:
+  CITED_EVIDENCE: { minimum: 1, target: 2 }
+  EXTERNAL_STORY: { minimum: 2, target: 3 }
+  AUTHOR_DISCLOSURE: { minimum: 1, target: 1 }
+chapter_engine_expectations:
+  TROUBLESHOOTING: { minimum: 1, target: 2 }
+cohesion_and_craft:
+  callback_or_motif_returns: 5-8   # tracked count, no per-chapter cap
+  analogy_or_metaphor_uses: 6-10   # tracked count, no per-chapter cap
+```
+
+These fields have **minimums**, not sparsity ceilings — a profile that assigns `EXTERNAL_STORY: { minimum: 0 }` is telling you the book genuinely doesn't need external proof (rare), not that you should ration it down like a quote.
 
 ### 4.2 Per-chapter `accent_beats`
 
@@ -292,7 +386,23 @@ chapters:
           object: chronic_somatic_tension
 ```
 
-### 4.3 Dosage + distribution governance
+### 4.2a Global optional-accent slot budget (V2.1, applies across all `accent_distribution_profile` values)
+
+Per the authority doc, class-level maxima in §4.1 are ceilings, not per-chapter quotas, and they must fit inside one coherent book-level slot budget for a standard 12-chapter book:
+
+```yaml
+optional_accent_budget:
+  target_accent_chapters: 5-7
+  hard_max_accent_chapters: 8
+  target_total_accents: 7-9
+  hard_max_total_accents: 10
+  max_accents_per_chapter: 2
+  accent_free_chapters_minimum: 4
+```
+
+At least 4 of 12 chapters carry **no** `optional_accent` beat. Do not stack `QUOTE + WISDOM_ESSENCE + AUTHOR_COMMENTARY` in one chapter. This budget applies **only** to `optional_accents` — it does not throttle `TROUBLESHOOTING`, `CITED_EVIDENCE`, `EXTERNAL_STORY`, or `AUTHOR_DISCLOSURE`.
+
+### 4.3 Dosage + distribution governance (optional_accents only)
 
 Joins the **experience / anti-spam tuple** ([EXPERIENCE_LAYER_ANTI_SPAM_SPEC.md](./EXPERIENCE_LAYER_ANTI_SPAM_SPEC.md)) as an **8th planning field**:
 
@@ -315,7 +425,7 @@ wave_max_identical_accent_signature: 2   # stricter than experience_tuple (3)
 max_chapters_with_any_accent_share: 0.35 # no book >35% accent-bearing chapters without review
 ```
 
-**Sparsity gate:** FAIL if `count(chapters with accent_beats) / total_chapters > brand_profile.max_accent_chapter_share` (default **0.25** — at most 3 of 12 chapters carry any accent in somatic profile).
+**Sparsity gate:** FAIL if `count(chapters with optional_accent beats) / total_chapters > brand_profile.max_accent_chapter_share` (default **0.25** — at most 3 of 12 chapters carry any `optional_accent` in somatic profile). This gate counts `optional_accents` only — `TROUBLESHOOTING`, `CITED_EVIDENCE`, `EXTERNAL_STORY`, and `AUTHOR_DISCLOSURE` beats do not count toward accent-chapter share.
 
 ---
 
@@ -396,7 +506,9 @@ Register in `scripts/run_production_readiness_gates.py` as gates **#24–#33** (
 
 ---
 
-## §7 — Pilot plan
+## §7 — Pilot plan (original v1.1; superseded for anxiety by §14)
+
+**Historical note (V2.1 amendment):** this pilot table predates the four-layer split and still labels `TROUBLESHOOTING` and `CITED_EVIDENCE` as "accent budget" line items. Per §0.1 they are `chapter_engine` / `proof_and_embodiment`, not sparsity-governed accents — read the counts below as chapter-content minimums, not accent moments to ration. For the current anxiety-flagship authoring plan, use §14 and the pilot authoring packet it links to.
 
 **GATE:** `flagship-read-approved` + cast_structure specced (optional composition test).
 
@@ -715,3 +827,33 @@ Joins experience / anti-spam tuple: extend `accent_signature` hash to include `A
 6. Dosage + placement — §13.5.
 7. Pilot bank path + unwired status — §13.6.
 8. Operator questions with defaults — §13.8.
+
+---
+
+## §14 — Anxiety-book authoring guidance (V2.1 amendment)
+
+This section is the writer-facing operating doctrine for anxiety-profile books. It replaces any earlier guidance that treated anxiety books as "practical_credible with more accents." The anxiety flagship preset is `practical_credible` **base** with `intimate_voice` **modifiers** (V2.1 doc §7.1) — mechanism-clear and actionable, but validation-forward. That means the accents stay roughly sparse (§4.2a still applies), while `proof_and_embodiment` and `chapter_engine` content — which are *not* accents — run denser than a pure `practical_credible` book.
+
+### 14.1 What should be dense (not sparse) in anxiety books
+
+- **Early validation.** `VALIDATION_NORMALIZATION` should be dense in the first third of the book — the reader needs to feel recognized before mechanism or instruction lands. This is `chapter_engine`, not `optional_accents`; do not ration it.
+- **Recurring mechanism explanation.** `MECHANISM_EXPLANATION` should recur across the body of the book, not front-load into chapter 1 and disappear. Anxiety readers re-encounter the same nervous-system mechanism in different situations; re-explain it in context each time, don't assume chapter-1 retention.
+- **Support after hard practices.** `TROUBLESHOOTING` shows up after the reader is asked to do something hard, not before understanding exists. `ENCOURAGEMENT` (the one true optional accent in this list) should land in the same neighborhood — after an exercise, after a difficult realization, or after a turning point — because that is where reader support is actually needed, not scattered decoratively.
+
+### 14.2 EXTERNAL_STORY: alternate recognition and mechanism_proof
+
+Anxiety-book external stories should **alternate** between `recognition` (the reader feels seen) and `mechanism_proof` (a real case shows the mechanism working) rather than clustering all-recognition early and going silent, or leading with proof before the reader feels safe. See the pilot packet (§14.4) for a worked chapter-by-chapter example.
+
+### 14.3 CALLBACK_RETURN as a first-order cohesion tool
+
+For this profile, `cohesion_and_craft` is not a nice-to-have. Anxiety books are read episodically (a reader picks it up mid-crisis, puts it down, comes back) — a well-planted image or phrase that returns changed in a later chapter is what makes the book feel like *one* book rather than twelve standalone essays. Plant early (chapters 1–3), return late-middle to close (chapters 7–11), and make sure the return has a real `semantic_development` (§2.6) — not a repeated phrase.
+
+### 14.4 Author voice and evidence framing
+
+- `AUTHOR_COMMENTARY` should feel human, not preachy — interpretation and permission, never a lecture. Keep it distinct from `AUTHOR_DISCLOSURE` (§2.2b): disclosure is the author's own experience; commentary is the author's read on the reader's experience.
+- `WISDOM_ESSENCE` should be used carefully, not as filler. The anxiety flagship hybrid caps it at `hard_max: 1` per book — if you're reaching for a second one, that's the tell that it's becoming decorative.
+- `CITED_EVIDENCE` should never cold-open a high-validation chapter ahead of emotional safety. Evidence lands early-to-middle in a chapter, after the reader has been met, not as the chapter's first move.
+
+### 14.5 Chapter-by-chapter authoring packet
+
+A compact, chapter-by-chapter pilot authoring packet for the anxiety flagship profile — dominant job per chapter, proof/embodiment placement, accent placement, callback plant/return map, and analogy/metaphor placement — lives at [docs/authoring/ANXIETY_FLAGSHIP_ENHANCEMENT_PILOT_PACKET_2026-07-13.md](../docs/authoring/ANXIETY_FLAGSHIP_ENHANCEMENT_PILOT_PACKET_2026-07-13.md). Use it as the reference shape when planning a new anxiety-profile book; it is illustrative, not a template to copy verbatim into every book.

@@ -18,9 +18,10 @@ books. For a RELEASE-grade build, every quality gate must pass:
     --no-job-check --render-book \
     --render-dir <out_dir>
 
-Profile semantics (argparse defaults below): --pipeline-mode default is `registry`
-(fast section-registry path); Pearl Prime bestseller builds MUST pass
-`--pipeline-mode spine`. --quality-profile default is `production` (all gates run; any
+Profile semantics (argparse defaults below): --pipeline-mode default is `spine`
+(canonical Pearl Prime path). Legacy `--pipeline-mode registry` is blocked under
+`--quality-profile production|flagship` with `--render-book` (see `--allow-legacy-registry`).
+--quality-profile default is `production` (all gates run; any
 failure exits 1). Use `flagship` to verify only the three load-bearing structural
 gates (chapter_flow, book_quality_gate, scene_anti_genericity); `draft`/`debug` for
 iteration only. `--exercise-journeys` attaches the multi-part EXERCISE journeys and is
@@ -43,12 +44,16 @@ the release path). See docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.
 """
 from __future__ import annotations
 
+from phoenix_v4.text.wordcount import count_words
+
 import argparse
+import hashlib
 import json
 import os
 import re
 import sys
 from pathlib import Path
+from typing import Any, Mapping
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -353,6 +358,7 @@ def _apply_book_quality_gate(
     render_dir: Path,
     prose: str,
     runtime_format_id: str,
+    locale: str | None = None,
     gates_hard: bool,
     governance_report: dict | None = None,
     slot_sequences: list | None = None,
@@ -391,6 +397,7 @@ def _apply_book_quality_gate(
     rep = evaluate_book_quality(
         prose,
         runtime_format_id=runtime_format_id or "",
+        locale=locale,
         governance_report=governance_report,
         slot_sequences=slot_sequences,
         frame=frame,
@@ -413,6 +420,65 @@ def _apply_book_quality_gate(
     if gates_hard and str(rep.release_band) == "Reject":
         failures.append("book_quality_gate")
     return failures, fragment
+
+
+def _register_gate_blocks_delivery(verdict: str, findings: list[Any]) -> bool:
+    """Return True when register findings should block production delivery.
+
+    F13 is explicitly advisory-only in ``register_gate.py`` because the old dwell
+    injector caused choppy one-line filler. Keep reporting F13, but do not turn an
+    F13-only WARN verdict into a delivery block.
+    """
+    v = (verdict or "").strip().upper()
+    if v in ("PASS", "ADVISORY"):
+        return False
+    if any(str(getattr(f, "severity", "")).upper() in ("FAIL", "HARD_FAIL") for f in findings):
+        return True
+    warn_ids = [
+        str(getattr(f, "failure_id", "")).upper()
+        for f in findings
+        if str(getattr(f, "severity", "")).upper() == "WARN"
+    ]
+    if warn_ids and all(fid == "F13" for fid in warn_ids):
+        return False
+    return True
+
+
+def _enforce_pipeline_mode_policy(args: argparse.Namespace, quality_profile: str) -> int | None:
+    """Warn on legacy registry mode; hard-block registry renders under production profile."""
+    mode = getattr(args, "pipeline_mode", "spine")
+    if mode != "registry":
+        return None
+    render_book = bool(getattr(args, "render_book", False))
+    production_like = quality_profile in ("production", "flagship")
+    if (
+        render_book
+        and production_like
+        and not getattr(args, "allow_legacy_registry", False)
+    ):
+        print(
+            "Error: --pipeline-mode registry is legacy and blocked under "
+            "--quality-profile production|flagship with --render-book. Book production "
+            "MUST use --pipeline-mode spine (the default). See "
+            "docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md.",
+            file=sys.stderr,
+        )
+        return 1
+    if render_book or quality_profile == "flagship":
+        print(
+            "Warning: --pipeline-mode registry is legacy. For rendered books use "
+            "--pipeline-mode spine (the default). Registry mode is retained only "
+            "for plan-only QA of section-registry content.",
+            file=sys.stderr,
+        )
+    else:
+        print(
+            "Warning: --pipeline-mode registry is LEGACY (section-registry fast-path). "
+            "Pearl Prime production books MUST use spine (the default). "
+            "See docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md.",
+            file=sys.stderr,
+        )
+    return None
 
 
 def _extract_registry_chapters(prose: str) -> list[str]:
@@ -854,6 +920,109 @@ def _resolved_runtime_format_id(args: argparse.Namespace, format_plan_dict: dict
     )
 
 
+def _resolve_book_idea_and_motif(*, book_spec: Mapping[str, Any], arc: Any) -> tuple[str, str]:
+    """Resolve contract book frame for enrichment strategy scoring."""
+    explicit_idea = str(book_spec.get("book_idea") or "").strip()
+    explicit_motif = str(book_spec.get("book_motif") or "").strip()
+    if explicit_idea and explicit_motif:
+        return explicit_idea, explicit_motif
+
+    persona_id = str(book_spec.get("persona_id") or "")
+    topic_id = str(book_spec.get("topic_id") or "")
+    if persona_id == "gen_z_professionals" and topic_id == "anxiety":
+        return "prediction-as-evidence swap", "The Alarm (chest and phone)"
+
+    motif = getattr(arc, "motif", None) or {}
+    if isinstance(motif, dict):
+        symbol = str(motif.get("primary_symbol") or "").strip()
+        image = str(motif.get("recurring_image") or "").strip()
+        if symbol and image:
+            readable_symbol = symbol.replace("_", " ").title()
+            readable_image = image.replace("_", " and ")
+            return (
+                explicit_idea or "recognition_before_action",
+                explicit_motif or f"The {readable_symbol} ({readable_image})",
+            )
+    return explicit_idea or "recognition_before_action", explicit_motif or "quiet_capacity"
+
+
+def _enhancement_contract_v1_enabled(
+    *,
+    book_spec: Mapping[str, Any],
+    runtime_format: str,
+    render_dir: Path,
+) -> bool:
+    _ = runtime_format
+    if bool(book_spec.get("enrichment_contract_v1")):
+        return True
+    render_name = str(render_dir.name or "").strip().lower()
+    return "enhancement_contract" in render_name or render_name.endswith("cli_demo_trace_run_composite_contract_v1")
+
+
+def _resolve_enhancement_contract_id(
+    *,
+    book_spec: Mapping[str, Any],
+    render_dir: Path,
+) -> str:
+    explicit = str(book_spec.get("enhancement_contract_id") or "").strip()
+    if explicit:
+        return explicit
+    render_name = str(render_dir.name or "").strip().lower()
+    if render_name.endswith("cli_demo_trace_run_composite_contract_v1"):
+        return "cli_demo_trace_run_composite_contract_v1"
+    if "enhancement_contract" in render_name:
+        return "enhancement_contract_v21"
+    return "enhancement_contract_v1"
+
+
+def _write_enhancement_contract_reports(
+    *,
+    enriched: Any,
+    render_dir: Path,
+    contract_id: str,
+    topic_id: str,
+    persona_id: str,
+    runtime_format: str,
+    manuscript_text: str,
+    accent_render_audit: list[dict[str, Any]],
+) -> None:
+    audit = enriched.enrichment_audit or {}
+    strategy = dict(audit.get("enrichment_strategy_report") or {})
+    alignment = dict(audit.get("bestseller_alignment_report") or {})
+    strategy["contract_id"] = contract_id
+    alignment["contract_id"] = contract_id
+    (render_dir / "enrichment_strategy_report.json").write_text(
+        json.dumps(strategy, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    (render_dir / "bestseller_alignment_report.json").write_text(
+        json.dumps(alignment, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    from phoenix_v4.qa.assembly_trace import write_assembly_trace
+
+    write_assembly_trace(
+        enriched=enriched,
+        render_dir=render_dir,
+        contract_id=contract_id,
+        topic_id=topic_id,
+        persona_id=persona_id,
+        runtime_format=runtime_format,
+    )
+    from phoenix_v4.qa.enhancement_contract import write_enhancement_contract
+
+    write_enhancement_contract(
+        enriched=enriched,
+        manuscript_text=manuscript_text,
+        render_dir=render_dir,
+        contract_id=contract_id,
+        topic_id=topic_id,
+        persona_id=persona_id,
+        runtime_format=runtime_format,
+        accent_render_audit=accent_render_audit,
+    )
+
+
 def _run_spine_pipeline_mode(
     *,
     args: argparse.Namespace,
@@ -878,6 +1047,7 @@ def _run_spine_pipeline_mode(
     from phoenix_v4.planning.book_structure_plan import load_book_structure_plan
     from phoenix_v4.planning.chapter_plan import render_atom_slot_spec
     from phoenix_v4.planning.chapter_planner import derive_chapter_selector_targets
+    from phoenix_v4.planning.catalog_planner import load_render_location_profiles
     from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
     from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
     from phoenix_v4.rendering.book_renderer import (
@@ -1025,6 +1195,11 @@ def _run_spine_pipeline_mode(
         or getattr(args, "locale", None)
         or None
     )
+    _enrichment_contract_v1 = _enhancement_contract_v1_enabled(
+        book_spec=book_spec_for_compiler,
+        runtime_format=runtime_fmt,
+        render_dir=render_dir,
+    )
     enriched = select_enrichment(
         EnrichmentRequest(
             beatmap=beatmap,
@@ -1049,6 +1224,9 @@ def _run_spine_pipeline_mode(
                     or getattr(args, "chapter_architecture_version", None)
                     or 1
                 ),
+                "book_idea": str(book_spec_for_compiler.get("book_idea") or "").strip(),
+                "book_motif": str(book_spec_for_compiler.get("book_motif") or "").strip(),
+                "enrichment_contract_v1": _enrichment_contract_v1,
             },
             locale=_enrich_locale,
             publishable_book=_publishable_book,
@@ -1074,6 +1252,42 @@ def _run_spine_pipeline_mode(
 
         # EXERCISE-BANK-RESOLUTION-01 strict-canonical gate (production only).
         _check_exercise_strict_canonical_gate(quality_profile, enriched.enrichment_audit)
+
+    # LOCALE-FALLBACK HONESTY GATE (zh-TW resolver lane, 2026-07-14):
+    # When a non-English locale is requested, some atom classes localize while
+    # others silently fall back to the English source (their resolver path does not
+    # thread `locale`). Emit a locale_fallback_report.json into the render dir so the
+    # fallback is explicit, and in production FAIL loudly rather than ship an English
+    # book under a localized SKU. Citations / proper nouns / source titles are
+    # classified allowed-English and never trip this. Detection is script-based
+    # (decisive only for non-Latin/CJK locales); see
+    # phoenix_v4/rendering/locale_fallback_report.py for the documented rule.
+    if _enrich_locale and str(_enrich_locale).strip().lower() not in ("", "en-us"):
+        from phoenix_v4.rendering.locale_fallback_report import (
+            LocaleFallbackError,
+            production_blockers,
+            write_locale_fallback_report,
+        )
+        _lfr, _lfr_path = write_locale_fallback_report(
+            enriched, _enrich_locale, quality_profile, render_dir,
+        )
+        _lfr_fallbacks = _lfr.get("english_fallbacks") or []
+        if _lfr.get("applicable") and _lfr_fallbacks:
+            if quality_profile == "production":
+                _lfr_blockers = production_blockers(_lfr)
+                raise LocaleFallbackError(
+                    f"[LOCALE GATE] {len(_lfr_fallbacks)} required localized body-prose "
+                    f"atom(s) fell back to English under --locale {_enrich_locale} "
+                    f"(quality-profile=production). Report: {_lfr_path}\n"
+                    + "\n".join(f"  - {b}" for b in _lfr_blockers[:20])
+                )
+            print(
+                f"[LOCALE FALLBACK] {len(_lfr_fallbacks)} body-prose slot(s) rendered "
+                f"English under --locale {_enrich_locale} (draft — labelled, not "
+                f"blocked). Report: {_lfr_path}",
+                file=sys.stderr,
+            )
+
     pre_depth_words = enriched.total_words
     depth_map_path = repo_root / "config" / "depth" / "depth_module_map.yaml"
     if depth_map_path.exists() and yaml:
@@ -1126,6 +1340,30 @@ def _run_spine_pipeline_mode(
         teacher_mode=bool(book_spec_for_compiler.get("teacher_mode")),
         repo_root=repo_root,
     )
+    _accent_audit = enriched.enrichment_audit or {}
+    _strategy_report = _accent_audit.get("enrichment_strategy_report") or {}
+    _alignment_report = _accent_audit.get("bestseller_alignment_report") or {}
+    # Early, precise missing-supply signal: a required accent floor whose supply
+    # pool is empty for this locale is surfaced here at preflight (which accent,
+    # how many short, why) instead of only as a confusing late underfill stop.
+    # Advisory, not fatal — an absent bank degrades gracefully; a *present but
+    # unfilled* pool is what the supported-underfill production gate below blocks.
+    _supply_preflight = _strategy_report.get("accent_supply_preflight_blockers") or []
+    if _supply_preflight:
+        print(
+            "[ACCENT PREFLIGHT] Missing accent supply for required floors:\n"
+            + "\n".join(f"  - {b}" for b in _supply_preflight),
+            file=sys.stderr,
+        )
+    _supported_underfill = _alignment_report.get("supported_underfilled_budget_by_class") or {}
+    if _supported_underfill:
+        _underfill_msg = (
+            "[PRODUCTION GATE] Supported accent underfill detected:\n"
+            + "\n".join(f"  - {cls}: {count}" for cls, count in _supported_underfill.items())
+        )
+        print(_underfill_msg, file=sys.stderr)
+        if quality_profile == "production":
+            raise SystemExit(_underfill_msg)
     _accent_plan_errors = validate_accent_plan(enriched)
     if _accent_plan_errors and quality_profile == "production":
         raise SystemExit(
@@ -1421,7 +1659,7 @@ def _run_spine_pipeline_mode(
         )
         _word_bounds = _book_word_range(runtime_fmt)
         if _word_bounds:
-            _under = len(prose.split()) < _word_bounds[0]
+            _under = count_words(prose) < _word_bounds[0]
             if _spine_floor_pad_enabled:
                 prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
             elif _under:
@@ -1429,7 +1667,7 @@ def _run_spine_pipeline_mode(
                 _governance_report.setdefault("spine_word_floor_signals", []).append(
                     {
                         "stage": "post_flow_pre_gate",
-                        "word_count": len(prose.split()),
+                        "word_count": count_words(prose),
                         "floor": _word_bounds[0],
                         "action": "not_padded",
                         "reason": (
@@ -1453,7 +1691,7 @@ def _run_spine_pipeline_mode(
         # F7 cap can drop one_hour_book below word_range floor. G1: on spine, do NOT re-pad
         # (see the disabled first call site above) — surface the under-length as a thin-pool
         # signal. Only re-pad when the PHOENIX_SPINE_WORD_FLOOR_PAD kill-switch is set.
-        if _word_bounds and len(prose.split()) < _word_bounds[0]:
+        if _word_bounds and count_words(prose) < _word_bounds[0]:
             if _spine_floor_pad_enabled:
                 prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
                 prose = ensure_chapter_flow_cues(
@@ -1465,7 +1703,7 @@ def _run_spine_pipeline_mode(
                 _governance_report.setdefault("spine_word_floor_signals", []).append(
                     {
                         "stage": "post_f7_pre_gate",
-                        "word_count": len(prose.split()),
+                        "word_count": count_words(prose),
                         "floor": _word_bounds[0],
                         "action": "not_padded",
                         "reason": "spine word-floor padder disabled (G1/#4566); thin-pool signal",
@@ -1529,7 +1767,7 @@ def _run_spine_pipeline_mode(
                 + "; ".join(_f7_preservation_violations),
                 file=sys.stderr,
             )
-    word_count = len(prose.split())
+    word_count = count_words(prose)
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"
     _chapter_flow_report_name = "chapter_flow_report.json"
@@ -1559,7 +1797,7 @@ def _run_spine_pipeline_mode(
 
         try:
             _flow_report = chapter_flow_gate_report(
-                prose, runtime_format_id=runtime_fmt
+                prose, runtime_format_id=runtime_fmt, locale=_enrich_locale
             )
             _flow_report_path = render_dir / "chapter_flow_report.json"
             _flow_report_path.write_text(json.dumps(_flow_report, indent=2), encoding="utf-8")
@@ -1623,7 +1861,7 @@ def _run_spine_pipeline_mode(
                 f"Report: {_register_path}",
                 file=sys.stderr,
             )
-            if gates_hard and _register_verdict not in ("PASS", "ADVISORY"):
+            if gates_hard and _register_gate_blocks_delivery(_register_verdict, list(_reg_result.findings)):
                 _quality_gate_failures.append("register_gate")
         except Exception as _e:
             _register_status = "SKIPPED"
@@ -2088,11 +2326,24 @@ def _run_spine_pipeline_mode(
         _write_gate_report("transformation_heatmap.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
         _write_gate_report("book_pass_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
 
-    if args.out:
+    plan_out: dict[str, Any] | None = None
+    if args.out or _enrichment_contract_v1:
+        _spine_ctx_out = enriched.spine_context or {}
+        _accent_beats_by_chapter = {
+            int(ch.number): [b.to_plan_dict() if hasattr(b, "to_plan_dict") else dict(b)
+                             for b in (getattr(ch, "accent_beats", None) or [])]
+            for ch in enriched.chapters
+            if getattr(ch, "accent_beats", None)
+        }
         plan_out = {
             "source": "spine_pipeline",
+            "requested_topic_id": book_spec_for_compiler.get("requested_topic_id") or topic_id,
+            "requested_persona_id": book_spec_for_compiler.get("requested_persona_id") or persona_id,
+            "canonical_topic_id": book_spec_for_compiler.get("canonical_topic_id") or topic_id,
+            "canonical_persona_id": book_spec_for_compiler.get("canonical_persona_id") or persona_id,
             "topic_id": topic_id,
             "persona_id": persona_id,
+            "atoms_model": book_spec_for_compiler.get("atoms_model"),
             "teacher_id": teacher_for_enrich or "",
             "runtime_format": runtime_fmt,
             "output_format_id": _cli_output_format or None,
@@ -2106,13 +2357,38 @@ def _run_spine_pipeline_mode(
             "chapter_architecture_version": _arch_v,
             "angle_id": _spine_angle_id,
             "chapter_planner_warnings": list(
-                (enriched.spine_context or {}).get("chapter_planner_warnings") or []
+                _spine_ctx_out.get("chapter_planner_warnings") or []
             ),
+            "accent_budget": dict(_spine_ctx_out.get("accent_budget") or {}),
+            "accent_signature": _spine_ctx_out.get("accent_signature"),
+            "story_mix_profile": _spine_ctx_out.get("story_mix_profile"),
+            "accent_assignments": list(_spine_ctx_out.get("accent_assignments") or []),
+            "enhancement_contract_v21": dict(
+                _spine_ctx_out.get("enhancement_contract_v21") or {}
+            ),
+            "accent_beats_by_chapter": _accent_beats_by_chapter,
         }
+        if book_spec_for_compiler.get("requested_location_id"):
+            plan_out["requested_location_id"] = book_spec_for_compiler["requested_location_id"]
+        if book_spec_for_compiler.get("resolved_location_id"):
+            plan_out["resolved_location_id"] = book_spec_for_compiler["resolved_location_id"]
+            plan_out["location_id"] = book_spec_for_compiler["resolved_location_id"]
+            _location_profiles = load_render_location_profiles()
+            _location_profile = _location_profiles.get(book_spec_for_compiler["resolved_location_id"]) or {}
+            _city_name = _location_profile.get("city_name")
+            if _city_name:
+                plan_out["city_name"] = _city_name
+    if args.out and plan_out is not None:
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(json.dumps(plan_out, indent=2, ensure_ascii=False))
         print(f"Wrote {args.out}")
+    if _enrichment_contract_v1 and plan_out is not None:
+        _contract_plan_path = render_dir / "plan.json"
+        _contract_plan_path.write_text(
+            json.dumps(plan_out, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
 
     _music_audit_spine: dict | None = None
     if args.render_book:
@@ -2202,7 +2478,7 @@ def _run_spine_pipeline_mode(
         # budget.json honest about the artifact on disk (test_spine_pipeline_integration
         # ::test_spine_mode_budget_word_count_matches_book) and also corrects the
         # pre-existing music/locale-overlay drift.
-        budget_obj["word_count"] = len(_prose_out.split())
+        budget_obj["word_count"] = count_words(_prose_out)
         budget_obj["body_word_count"] = word_count
         budget_obj["pre_depth_total_words"] = pre_depth_words
         budget_obj["post_depth_total_words"] = post_depth_words
@@ -2214,21 +2490,157 @@ def _run_spine_pipeline_mode(
             json.dumps(enriched.enrichment_audit, indent=2, default=str, ensure_ascii=False),
             encoding="utf-8",
         )
+        # Operator-facing chapter outline (all spine renders, not contract-only).
+        # Built from landed enrichment surfaces; does not change assembly.
+        try:
+            from phoenix_v4.qa.book_outline import write_book_outline
+
+            _outline_paths = write_book_outline(
+                enriched=enriched,
+                render_dir=render_dir,
+                topic_id=topic_id,
+                persona_id=persona_id,
+                locale=str(_enrich_locale or getattr(args, "locale", None) or "") or "en-US",
+                runtime_format=runtime_fmt,
+                accent_render_audit=list(
+                    (_governance_report or {}).get("accent_render_audit") or []
+                ),
+            )
+            print(f"Book outline: {_outline_paths.get('markdown')}")
+        except Exception as _outline_err:
+            print(f"Book outline: WARN — {_outline_err}", file=sys.stderr)
         _spa = enriched.enrichment_audit.get("section_packet_audit")
-        _spa_dict: dict = {}
+        _spa_payload: dict | list | None = None
         if isinstance(_spa, dict):
-            _spa_dict = dict(_spa)
-        if _music_audit_spine is not None:
-            _spa_dict["musician_overlay"] = _music_audit_spine
-        if _spa_dict:
+            _spa_payload = dict(_spa)
+            if _music_audit_spine is not None:
+                _spa_payload["musician_overlay"] = _music_audit_spine
+        elif isinstance(_spa, list):
+            _spa_payload = {
+                "slots": list(_spa),
+                "slot_count": len(_spa),
+            }
+            if _music_audit_spine is not None:
+                _spa_payload["musician_overlay"] = _music_audit_spine
+        elif _music_audit_spine is not None:
+            _spa_payload = {"musician_overlay": _music_audit_spine}
+        if _spa_payload:
             (render_dir / "section_packet_audit.json").write_text(
-                json.dumps(_spa_dict, indent=2, default=str, ensure_ascii=False),
+                json.dumps(_spa_payload, indent=2, default=str, ensure_ascii=False),
                 encoding="utf-8",
+            )
+        # Durable rendered-accent audit: merge composer-rendered rows with planner
+        # assignments so every planned accent is visible even if a chapter path
+        # skipped syn_meta persistence.
+        _composer_rows = list((_governance_report or {}).get("accent_render_audit") or [])
+        _composer_by_id = {
+            str(r.get("accent_id") or ""): r
+            for r in _composer_rows
+            if r.get("accent_id")
+        }
+        _bodies_by_id = {}
+        for _ch in enriched.chapters:
+            for _aid, _body in dict(getattr(_ch, "accent_bodies", None) or {}).items():
+                if _aid and _body:
+                    _bodies_by_id[str(_aid)] = str(_body)
+        _accent_render_rows = []
+        _seen_ids = set()
+        for _row in list((enriched.spine_context or {}).get("accent_assignments") or []):
+            _aid = str(_row.get("accent_id") or "")
+            _comp = _composer_by_id.get(_aid) or {}
+            _body = _bodies_by_id.get(_aid) or ""
+            _excerpt = str(
+                _comp.get("rendered_excerpt")
+                or _comp.get("body")
+                or (_body[:220].replace("\n", " ").strip() if _body else "")
+            )
+            if not _excerpt and _body:
+                _excerpt = _body[:220].replace("\n", " ").strip()
+            _present = bool(_excerpt) and (
+                _excerpt[:40] in prose
+                or (_body[:40] in prose if _body else False)
+                or any(
+                    frag and frag in prose
+                    for frag in (" ".join(_excerpt.split()[:6]),)
+                )
+            )
+            _accent_render_rows.append(
+                {
+                    "chapter": _row.get("chapter") or _comp.get("chapter"),
+                    "class": _row.get("class") or _comp.get("class"),
+                    "accent_id": _aid,
+                    "position": _row.get("position") or _comp.get("position"),
+                    "renderer_stream_index": _comp.get("renderer_stream_index")
+                    or _comp.get("chapter_insert_index"),
+                    "chapter_insert_index": _comp.get("chapter_insert_index")
+                    or _comp.get("renderer_stream_index"),
+                    "body_hash": _comp.get("body_hash")
+                    or (hashlib.sha256(_body.encode("utf-8")).hexdigest() if _body else ""),
+                    "provenance": (_row.get("keys") or {}).get("supply_provenance")
+                    or _row.get("supply_source")
+                    or _comp.get("provenance"),
+                    "rendered_excerpt": _excerpt,
+                    "present_in_manuscript": _present or bool(_comp.get("present_in_manuscript")),
+                }
+            )
+            if _aid:
+                _seen_ids.add(_aid)
+        for _aid, _comp in _composer_by_id.items():
+            if _aid in _seen_ids:
+                continue
+            _accent_render_rows.append(dict(_comp))
+        (render_dir / "rendered_accent_audit.json").write_text(
+            json.dumps(
+                {
+                    "contract_id": _resolve_enhancement_contract_id(
+                        book_spec=book_spec_for_compiler,
+                        render_dir=render_dir,
+                    ),
+                    "topic_id": topic_id,
+                    "persona_id": persona_id,
+                    "accent_budget": dict((enriched.spine_context or {}).get("accent_budget") or {}),
+                    "accent_signature": (enriched.spine_context or {}).get("accent_signature"),
+                    "story_mix_profile": (enriched.spine_context or {}).get("story_mix_profile"),
+                    "accents": _accent_render_rows,
+                    "count": len(_accent_render_rows),
+                },
+                indent=2,
+                default=str,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+        # Contract reports (assembly_trace.md, enhancement_contract.md/json — all spine
+        # renders, not contract-only). Previously gated on `_enrichment_contract_v1`
+        # (opt-in book_spec flag OR render_dir name containing "enhancement_contract"),
+        # which meant a normal production book render silently never got these two
+        # artifacts. Mirrors the book_outline pattern just above: always attempt, WARN
+        # (do not fail the render) if the reporting layer itself errors.
+        _contract_id = _resolve_enhancement_contract_id(
+            book_spec=book_spec_for_compiler,
+            render_dir=render_dir,
+        )
+        try:
+            _write_enhancement_contract_reports(
+                enriched=enriched,
+                render_dir=render_dir,
+                contract_id=_contract_id,
+                topic_id=topic_id,
+                persona_id=persona_id,
+                runtime_format=runtime_fmt,
+                manuscript_text=_prose_out,
+                accent_render_audit=_accent_render_rows,
+            )
+        except Exception as _contract_report_err:
+            print(
+                f"Enhancement contract reports: WARN — {_contract_report_err}",
+                file=sys.stderr,
             )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
             render_dir=render_dir,
             prose=prose,
             runtime_format_id=runtime_fmt,
+            locale=_enrich_locale,
             gates_hard=_block_on_fail(quality_profile, "book_quality_gate"),
             governance_report=_governance_report,
             slot_sequences=None,
@@ -2372,6 +2784,29 @@ def _run_spine_pipeline_mode(
     return 0
 
 
+def _guard_legacy_registry_mode(args: argparse.Namespace) -> int | None:
+    """Block registry fast-path for production-like book builds (COHESIVE-FLOW-PATH-DEFAULT-SPINE-01)."""
+    if getattr(args, "pipeline_mode", "spine") != "registry":
+        return None
+    print(
+        "WARNING: --pipeline-mode registry is LEGACY (section-registry fast-path). "
+        "Pearl Prime production books MUST use spine (the default). "
+        "See docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md.",
+        file=sys.stderr,
+    )
+    production_like = args.quality_profile in ("production", "flagship")
+    blocked = bool(getattr(args, "render_book", False)) and production_like
+    if blocked and not getattr(args, "allow_legacy_registry", False):
+        print(
+            "Error: registry mode cannot render production books (--render-book with "
+            "--quality-profile production|flagship). Use the default spine path or pass "
+            "--allow-legacy-registry only for explicit legacy QA.",
+            file=sys.stderr,
+        )
+        return 1
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="BookSpec -> FormatPlan -> CompiledBook")
     ap.add_argument("--topic", default=None, help="Topic ID (e.g. relationship_anxiety)")
@@ -2429,10 +2864,19 @@ def main() -> int:
     ap.add_argument(
         "--pipeline-mode",
         choices=["registry", "spine"],
-        default="registry",
+        default="spine",
         help=(
-            "Pipeline mode: 'registry' (section-registry fast-path, default) or "
-            "'spine' (spine→knob→beatmap→enrichment+depth→compose; bypasses registry path)."
+            "Pipeline mode: 'spine' (default; canonical Pearl Prime path: "
+            "spine→knob→beatmap→enrichment+depth→compose) or 'registry' "
+            "(LEGACY section-registry fast-path — not for production book renders)."
+        ),
+    )
+    ap.add_argument(
+        "--allow-legacy-registry",
+        action="store_true",
+        help=(
+            "Allow --pipeline-mode registry with --render-book under production/flagship "
+            "quality profiles. For explicit legacy QA only; not for catalog output."
         ),
     )
     ap.add_argument(
@@ -2550,6 +2994,10 @@ def main() -> int:
     )
     args = ap.parse_args()
 
+    _registry_guard = _guard_legacy_registry_mode(args)
+    if _registry_guard is not None:
+        return _registry_guard
+
     if getattr(args, "music_mode", "none") != "none":
         if not (getattr(args, "musician_id", None) or "").strip():
             print("--musician-id is required when --music-mode is not none", file=sys.stderr)
@@ -2586,7 +3034,10 @@ def main() -> int:
     )
     freeze_settings = load_freeze_settings()
     freeze_enabled = bool(freeze_settings.enabled)  # V4 freeze is permanent — no bypass
-    _pipeline_mode = getattr(args, "pipeline_mode", "registry")
+    _pipeline_mode = getattr(args, "pipeline_mode", "spine")
+    _mode_policy_rc = _enforce_pipeline_mode_policy(args, quality_profile)
+    if _mode_policy_rc is not None:
+        return _mode_policy_rc
 
     if freeze_enabled and args.structural_format:
         print(
@@ -2782,7 +3233,7 @@ def main() -> int:
     constraints = {}
     # Spine mode applies --runtime-format only in knob/beatmap (not Stage 2), so forcing
     # it here breaks FormatSelector validation against the arc's structural format.
-    if args.runtime_format and getattr(args, "pipeline_mode", "registry") != "spine":
+    if args.runtime_format and getattr(args, "pipeline_mode", "spine") != "spine":
         constraints["force_runtime_format"] = args.runtime_format
     if args.structural_format:
         constraints["force_structural_format"] = args.structural_format
@@ -2802,10 +3253,21 @@ def main() -> int:
         repo_root=REPO_ROOT,
         arc_topic=getattr(arc, "topic", None),
     )
-    book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
+    book_spec_for_compiler = {
+        **book_spec.to_dict(),
+        "requested_topic_id": topic_id,
+        "requested_persona_id": persona_id,
+        "canonical_topic_id": canonical_topic,
+        "canonical_persona_id": canonical_persona,
+        "topic_id": canonical_topic,
+        "persona_id": canonical_persona,
+    }
     # F-COHERENCE: surface the arc's bound engine so the spine path can route atoms by
     # (topic, engine). Explicit so it holds regardless of BookSpec.to_dict() contents.
     book_spec_for_compiler["engine"] = getattr(arc, "engine", "") or book_spec_for_compiler.get("engine", "")
+    _book_idea, _book_motif = _resolve_book_idea_and_motif(book_spec=book_spec_for_compiler, arc=arc)
+    book_spec_for_compiler["book_idea"] = _book_idea
+    book_spec_for_compiler["book_motif"] = _book_motif
     if getattr(args, "chapter_architecture_version", None) is not None:
         book_spec_for_compiler["chapter_architecture_version"] = int(args.chapter_architecture_version)
 
@@ -3107,15 +3569,14 @@ def main() -> int:
             (artifacts_dir / "teacher_coverage_report.json").write_text(
                 _json_cov.dumps(gap_report, indent=2), encoding="utf-8"
             )
-            if skip_gates:
-                print("Teacher coverage gate WARN (skipped via --skip-quality-gates). See artifacts/teacher_coverage_report.json", file=sys.stderr)
-            else:
-                print("Teacher coverage gate failed. See artifacts/teacher_coverage_report.json", file=sys.stderr)
-                raise TeacherCoverageError(
-                    "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
-                )
+            # Pre-compile coverage is structural (TEACHER_MODE_INVARIANTS §9), not a
+            # post-render quality gate. --skip-quality-gates must NOT bypass it.
+            print("Teacher coverage gate failed. See artifacts/teacher_coverage_report.json", file=sys.stderr)
+            raise TeacherCoverageError(
+                "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
+            )
 
-    # ── SECTION REGISTRY PATH (canonical content mode) ─────────────
+    # ── SECTION REGISTRY PATH (legacy fast-path; not production) ───
     # If a section registry exists for this topic, use it instead of atom assembly.
     # The registry provides 12 chapters × 10 sections × 5 variants of pre-authored prose.
     # Teacher atoms overlay TEACHER_DOCTRINE sections when teacher_id is set.
@@ -3131,7 +3592,7 @@ def main() -> int:
         registry_path = str(REGISTRY_ROOT / f"{topic_id}.yaml")
         use_registry = True
 
-    if getattr(args, "pipeline_mode", "registry") == "spine":
+    if getattr(args, "pipeline_mode", "spine") == "spine":
         return _run_spine_pipeline_mode(
             args=args,
             book_spec_for_compiler=book_spec_for_compiler,
@@ -3219,7 +3680,7 @@ def main() -> int:
             print(f"Rendered book (txt): {book_path}")
 
             # Budget report (word_count matches delivered prose; enables word_count_gate)
-            _wc_prose = len(_prose_reg_out.split())
+            _wc_prose = count_words(_prose_reg_out)
             budget_path = render_dir / "budget.json"
             budget_payload: dict = {
                 "word_count": _wc_prose,

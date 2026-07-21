@@ -56,7 +56,7 @@ ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spir
 # All translatable atom types: slot types + engine directories
 ALL_ATOM_TYPES = SLOT_TYPES + ENGINE_DIRS
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
-EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU")
+EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU", "pt-BR")
 ALL_LOCALES = CJK6_LOCALES + EUROPEAN_LOCALES
 
 LOCALE_NAMES: dict[str, str] = {
@@ -693,7 +693,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Translation Loop — single-pass (default) or comparator loop mode")
     ap.add_argument("--locale", help="Target locale (e.g. ja-JP)")
     ap.add_argument("--all-locales", action="store_true", help="All 6 CJK locales")
-    ap.add_argument("--european-locales", action="store_true", help="All 6 European locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU)")
+    ap.add_argument("--european-locales", action="store_true", help="All 7 non-CJK locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU, pt-BR)")
     ap.add_argument("--persona", help="Filter to one persona")
     ap.add_argument("--topic", help="Filter to one topic")
     ap.add_argument("--slot", help="Slot type filter")
@@ -731,9 +731,35 @@ def main() -> int:
         print("Specify --locale, --all-locales, or --european-locales", file=sys.stderr)
         return 2
 
-    if not args.dry_run and not (os.environ.get("TOGETHER_API_KEY", "").strip() or os.environ.get("DASHSCOPE_API_KEY", "").strip()):
-        print("TOGETHER_API_KEY or DASHSCOPE_API_KEY required (set env var or use --dry-run)", file=sys.stderr)
-        return 2
+    # Safe-by-default: require Ollama/local Tier-2 path. Nonlocal/paid providers
+    # need explicit PHOENIX_TRANSLATION_ALLOW_CLOUD=1 (llm_client ignores bare keys).
+    from scripts.localization.llm_client import (
+        NONLOCAL_PROVIDER_MODES,
+        _cloud_providers_allowed,
+        _is_ollama_endpoint,
+        get_client_config,
+    )
+    if not args.dry_run:
+        if _is_ollama_endpoint():
+            pass  # Tier-2 Ollama — always allowed
+        elif _cloud_providers_allowed():
+            mode = get_client_config(cfg).get("mode", "")
+            if mode not in NONLOCAL_PROVIDER_MODES and mode not in ("local", "ollama"):
+                print(
+                    f"PHOENIX_TRANSLATION_ALLOW_CLOUD set but no usable provider "
+                    f"(resolved mode={mode!r})",
+                    file=sys.stderr,
+                )
+                return 2
+        else:
+            # No Ollama endpoint and no cloud opt-in — refuse rather than route to paid keys.
+            print(
+                "Ollama endpoint required (OLLAMA_HOST or QWEN_BASE_URL with :11434), "
+                "or set PHOENIX_TRANSLATION_ALLOW_CLOUD=1 to opt into nonlocal providers "
+                "(or use --dry-run)",
+                file=sys.stderr,
+            )
+            return 2
 
     atoms_root = REPO_ROOT / "atoms"
     manifest = discover_atoms(atoms_root, persona=args.persona, topic=args.topic, slot=args.slot)

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "threshold_stand",
+  "layer_class": "L2",
+  "style_register": "mecha_hangar",
+  "crop_class": "full_figure",
+  "pose_id": "threshold_stand",
+  "pose_context": "threshold",
+  "implied_camera": {
+    "angle_bucket": "eye_level",
+    "el_crossing": "chest"
+  },
+  "figure_height_m": 1.62,
+  "anchor": {
+    "point": "feet",
+    "y_px": 1920
+  },
+  "eye_y_px": 420,
+  "room_capable": true,
+  "abstract_stage_eligible": false,
+  "scene_contamination": true,
+  "requires_occluder": false,
+  "genre": "mecha",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "blocked",
+    "role": "single_subject_cutout",
+    "subject": "pilot",
+    "contains_background": true,
+    "contains_environment": true,
+    "contains": ["blob", "environment"],
+    "background_context": ["environment"],
+    "blocker": "legacy L2 is not a clean single-subject alpha cutout"
+  }
+}

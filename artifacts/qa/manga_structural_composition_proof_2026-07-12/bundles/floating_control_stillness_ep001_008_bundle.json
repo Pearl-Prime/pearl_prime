@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "bundle_id": "stillness_ep001_008_floating_control",
+  "panel_id": "ep001_008",
+  "panel_type_id": "re_establish_seated_table",
+  "structural_template_id": "seated_table_scene",
+  "source_note": "CONTROL: checklist FAIL case (knees-up figure floats). Seat polygon = wooden chair; contact at floating mid-air pelvis \u2192 expected CONTACT_FAIL (point-in-polygon).",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "asset_refs": {
+    "assembled_panel": "artifacts/qa/manga_reading_packets_2026-07-11/stillness_ep001_postmerge_honest/panels/ep001_008.png"
+  },
+  "nodes": [
+    {
+      "node_id": "kitchen_chair",
+      "category": "support_surface",
+      "role": "seat_or_table",
+      "support_polygon_pct": [
+        [
+          28.0,
+          68.0
+        ],
+        [
+          42.0,
+          68.0
+        ],
+        [
+          43.0,
+          78.0
+        ],
+        [
+          27.0,
+          78.0
+        ]
+      ]
+    },
+    {
+      "node_id": "char_floating",
+      "category": "character",
+      "role": "primary_subject",
+      "contact_point_pct": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e_should_seat",
+      "relation": "seated_on",
+      "from_node": "char_floating",
+      "to_node": "kitchen_chair"
+    }
+  ],
+  "placements": [
+    {
+      "node_id": "char_floating",
+      "transform": {
+        "tx_pct": 52.0,
+        "ty_pct": 48.0,
+        "uniform_scale": 1.0,
+        "rotation_deg": 0.0
+      }
+    }
+  ]
+}

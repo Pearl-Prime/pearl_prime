@@ -30,7 +30,10 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.localization.llm_client import call_llm_with_meta  # noqa: E402
+from scripts.localization.llm_client import (  # noqa: E402
+    _is_ollama_endpoint,
+    call_llm_with_meta,
+)
 
 logger = logging.getLogger("translate_atoms_cloud")
 
@@ -39,6 +42,10 @@ ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spir
 ALL_ATOM_TYPES = SLOT_TYPES + ENGINE_DIRS
 
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
+# Non-CJK locale bucket — mirrors scripts/localization/run_translation_loop.py's
+# EUROPEAN_LOCALES tuple (pt-BR added 2026-07-11, cap amendment Q-MANGA-01 /
+# OPD-20260704-005, ratified in config/localization/locale_registry.yaml).
+EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU", "pt-BR")
 
 LOCALE_NAMES: dict[str, str] = {
     "ja-JP": "Japanese (日本語)",
@@ -505,6 +512,11 @@ def main() -> int:
         action="store_true",
         help="All 6 CJK locales",
     )
+    ap.add_argument(
+        "--european-locales",
+        action="store_true",
+        help="All 7 non-CJK locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU, pt-BR)",
+    )
     ap.add_argument("--persona", help="Filter to one persona")
     ap.add_argument("--topic", help="Filter to one topic")
     ap.add_argument(
@@ -577,13 +589,21 @@ def main() -> int:
 
     locales: list[str] = []
     if args.all_locales:
-        locales = list(CJK6_LOCALES)
-    elif args.locales:
-        locales = list(args.locales)
-    elif args.locale:
-        locales = [args.locale]
-    else:
-        print("Specify --locale, --locales, or --all-locales", file=sys.stderr)
+        locales.extend(CJK6_LOCALES)
+    if args.european_locales:
+        locales.extend(EUROPEAN_LOCALES)
+    if args.locales:
+        locales.extend(args.locales)
+    if args.locale:
+        locales.append(args.locale)
+    # Deduplicate while preserving order (mirrors run_translation_loop.py)
+    seen: set[str] = set()
+    locales = [loc for loc in locales if not (loc in seen or seen.add(loc))]
+    if not locales:
+        print(
+            "Specify --locale, --locales, --all-locales, or --european-locales",
+            file=sys.stderr,
+        )
         return 2
 
     for loc in locales:
@@ -591,12 +611,17 @@ def main() -> int:
             logger.warning("Unknown locale %r — proceeding (prompt uses raw code)", loc)
 
     # Accept any of the supported providers; DeepSeek is now the preferred CJK provider.
+    # Ollama (Pearl Star, free/local — CLAUDE.md Tier 2) is also accepted: it needs no
+    # API key, only OLLAMA_HOST/QWEN_BASE_URL, which this check previously ignored,
+    # forcing callers toward the banned-by-default paid cloud keys even when a free
+    # local Qwen endpoint was already configured and reachable.
     _has_llm_key = (
         os.environ.get("DEEPSEEK_API_KEY", "").strip()
         or os.environ.get("DASHSCOPE_API_KEY", "").strip()
         or os.environ.get("TOGETHER_API_KEY", "").strip()
         or os.environ.get("GOOGLE_AI_API_KEY", "").strip()
         or os.environ.get("CLOUDFLARE_AI_API_TOKEN", "").strip()
+        or _is_ollama_endpoint()
     )
     if not args.dry_run and not _has_llm_key:
         print(

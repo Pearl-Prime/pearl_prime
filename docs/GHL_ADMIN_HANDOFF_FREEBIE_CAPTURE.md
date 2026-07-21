@@ -12,7 +12,7 @@
 
 Hi — we need a simple **Inbound Webhook** workflow in GoHighLevel for our **15 free interactive funnel pages**. When someone completes a tool (quiz, breath timer, audit, script kit, etc.) and enters their email, our site sends a JSON payload to your webhook. You create the workflow, map the fields, and send us back the webhook URL.
 
-**What we need back from you:** the full Inbound Webhook URL (starts with `https://services.leadconnectorhq.com/hooks/...`).
+**What we need back from you:** the full Inbound Webhook URL (starts with `<REDACTED_GHL_WEBHOOK_URL>).
 
 **Full instructions:** see the checklist below (or attach this file).
 
@@ -43,7 +43,7 @@ Thanks!
 4. Name it something like: `Interactive Funnel — Inbound Capture`.
 5. **Trigger:** choose **Inbound Webhook**.
 6. **Copy the webhook URL** GHL shows you — this is what you send back to us.  
-   Example shape: `https://services.leadconnectorhq.com/hooks/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`
+   Example shape: `<REDACTED_GHL_WEBHOOK_URL>
 7. Leave the workflow open — you will map fields next.
 
 ### B. Map incoming JSON → contact
@@ -164,7 +164,7 @@ After contact is created, you may attach your existing **email/SMS automations**
 | Somatic healing | `somatic_healing` | `somatic-body-scan` | `body_scan_timer` | somatic |
 | Grief | `grief` | `grief-letter-template` | `grief_letter_template` | template |
 
-Site paths live under `/free/<funnel-slug>/` on our Cloudflare Pages domain (brand wizard app). Authority: `config/freebies/ghl_funnel_capture.yaml`.
+Site paths live under `/free/<funnel-slug>/` on our Cloudflare Pages domain (brand wizard app). The repo source for those branded landing pages lives under `brand-wizard-app/public/free/...`, including pilot-brand paths such as `brand-wizard-app/public/free/devotion_path/<funnel-slug>/index.html` and `brand-wizard-app/public/free/way_stream_sanctuary/<funnel-slug>/index.html` plus shared/generic pages under `brand-wizard-app/public/free/<funnel-slug>/index.html`. Authority: `config/freebies/ghl_funnel_capture.yaml`.
 
 ---
 
@@ -173,7 +173,7 @@ Site paths live under `/free/<funnel-slug>/` on our Cloudflare Pages domain (bra
 Send **only** this (in email or Slack):
 
 ```
-PHOENIX_GHL_FUNNEL_WEBHOOK=https://services.leadconnectorhq.com/hooks/YOUR-HOOK-ID-HERE
+PHOENIX_GHL_FUNNEL_WEBHOOK=<REDACTED_GHL_WEBHOOK_URL>
 ```
 
 Optional: confirm workflow name, location/sub-account name, and that a test contact was created.
@@ -187,7 +187,7 @@ Optional: confirm workflow name, location/sub-account name, and that a test cont
 (You do not do this — for transparency only.)
 
 1. Store the URL in secure credential storage (Keychain + GitHub secret).
-2. Inject the URL into all **15 funnel HTML pages** (`data-ghl-webhook` on `<body>`).
+2. Inject the URL into all **15 funnel HTML pages** (`data-ghl-webhook` on `<body>`), including the branded `brand-wizard-app/public/free/devotion_path/...` and `brand-wizard-app/public/free/way_stream_sanctuary/...` page variants where present.
 3. Run automated smoke tests.
 4. Deploy static pages via GitHub → Cloudflare Pages.
 

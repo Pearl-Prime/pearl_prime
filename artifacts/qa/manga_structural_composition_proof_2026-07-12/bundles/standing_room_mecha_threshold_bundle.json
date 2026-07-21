@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "bundle_id": "mecha_ep001_008_threshold_stand",
+  "panel_id": "mecha_ep001_008",
+  "panel_type_id": "action_standing_room",
+  "structural_template_id": "standing_room_scene",
+  "source_note": "mecha_layered_packet_v1 bank REAL layers: L0_hangar_pre_dawn + L2_threshold_stand (panel ep001_008 multi-layer standing threshold).",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "asset_refs": {
+    "L0": "artifacts/qa/manga_reading_packets_2026-07-10/mecha_layered_packet_v1/bank/L0_hangar_pre_dawn.png",
+    "L2": "artifacts/qa/manga_reading_packets_2026-07-10/mecha_layered_packet_v1/bank/L2_threshold_stand.png"
+  },
+  "nodes": [
+    {
+      "node_id": "hangar_floor",
+      "category": "support_surface",
+      "role": "floor",
+      "support_polygon_pct": [
+        [
+          5.0,
+          78.0
+        ],
+        [
+          95.0,
+          78.0
+        ],
+        [
+          98.0,
+          98.0
+        ],
+        [
+          2.0,
+          98.0
+        ]
+      ]
+    },
+    {
+      "node_id": "pilot_standing",
+      "category": "character",
+      "role": "primary_subject",
+      "contact_point_pct": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e_standing_threshold",
+      "relation": "standing_on",
+      "from_node": "pilot_standing",
+      "to_node": "hangar_floor"
+    }
+  ],
+  "placements": [
+    {
+      "node_id": "pilot_standing",
+      "transform": {
+        "tx_pct": 50.0,
+        "ty_pct": 88.0,
+        "uniform_scale": 1.0,
+        "rotation_deg": 0.0
+      }
+    }
+  ]
+}

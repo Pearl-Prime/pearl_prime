@@ -907,19 +907,22 @@ def remove_sub_four_word_orphan_paragraphs(prose: str) -> str:
         for p_idx, p in enumerate(paras):
             s = p.strip()
             # Mirror register_gate F2.D EXACTLY so the strip removes precisely what the gate
-            # flags. Count words with .split() (whitespace) — NOT re.findall(r"[A-Za-z]+"),
+            # flags. Count words with CJK-honest count_words — NOT re.findall(r"[A-Za-z]+"),
             # which over-counts contractions/possessives ("let's" -> let + s) and let the real
             # artifact "Now, let's acknowledge" (3 whitespace-words, 4 alpha-tokens) survive as a
             # 4-token paragraph -> F2.D HARD_FAIL on compact_book_5ch_15min/burnout. F2.D only
             # flags a sub-4-word paragraph that does NOT end in terminal punctuation and does not
             # start with '#'/digit; a Title-Case working title at index 0 is legitimate.
-            wc = len(s.split())
+            # CJK: full Han paragraphs must not be treated as 1-word orphans.
+            from phoenix_v4.text.wordcount import CJK_SENTENCE_TERMINALS, count_words
+
+            wc = count_words(s)
             if (
                 0 < wc < 4
                 and not s.startswith("#")
                 and s
                 and not s[0].isdigit()
-                and not s.endswith((".", "?", "!"))
+                and not s.endswith(CJK_SENTENCE_TERMINALS)
             ):
                 if p_idx == 0 and _is_titlecase_heading(s):
                     kept.append(p)

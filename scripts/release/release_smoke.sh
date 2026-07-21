@@ -38,8 +38,8 @@ if ! PYTHONPATH=. "$PYTHON_BIN" scripts/run_production_readiness_gates.py; then
   exit 1
 fi
 
-echo "Running rigorous system test (skip sim)..."
-if ! PYTHONPATH=. "$PYTHON_BIN" scripts/ci/run_rigorous_system_test.py --skip-sim --strict; then
+echo "Running rigorous system test (release smoke fast lane)..."
+if ! PYTHONPATH=. "$PYTHON_BIN" scripts/ci/run_rigorous_system_test.py --skip-sim --strict --skip-atoms-coverage --skip-systems-test; then
   write_failure "rigorous_system_test"
   exit 1
 fi

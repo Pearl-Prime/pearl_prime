@@ -1,0 +1,511 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "panel_prompts",
+  "panels": [
+    {
+      "panel_id": "p_1_0",
+      "prompt": "[mode:music vessel:the wind-chime that keeps the season / opening] the chime enters the ordinary day \u2014 apparatus: one small melody threaded through the daily world, returning each chapter. Teacher/musician is NEVER named; the vessel carries the mode diegetically., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=[mode:music vessel:the wind-chime that keeps the season / opening] the chime enters the ordinary day \u2014 apparatus: one small melody threaded through the daily world, returning each chapter. Teacher/musician is NEVER named; the vessel carries the mode diegetically., medium shot"
+      },
+      "prompt_token_count": 89,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:false_alarm",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "false_alarm",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_1",
+      "prompt": "Open on the weather. a canal town at the turning of the season under a turning sky \u2014 first cold of the season, or the cicadas gone quiet, or rain that arrives earlier than expected and without apology. No people yet. Just the world, breathing., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=Open on the weather. a canal town at the turning of the season under a turning sky \u2014 first cold of the season, or the cicadas gone quiet, or rain that arrives earlier than expected and without apology. No people yet. Just the world, breathing., medium shot"
+      },
+      "prompt_token_count": 92,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_2",
+      "prompt": "Asa appears inside the weather, mid-habit \u2014 setting out two cups, opening the shutters, sweeping the step. The body moves before the mind wakes. We learn who they are by what their hands do., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=Asa appears inside the weather, mid-habit \u2014 setting out two cups, opening the shutters, sweeping the step. The body moves before the mind wakes. We learn who they are by what their hands do., medium shot"
+      },
+      "prompt_token_count": 81,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_3",
+      "prompt": "A small wrongness. Asa sets out the second cup, then remembers, and puts one back. The absence has a shape. We never name it. The empty place at the table says everything the caption won't., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=A small wrongness. Asa sets out the second cup, then remembers, and puts one back. The absence has a shape. We never name it. The empty place at the table says everything the caption won't., medium shot"
+      },
+      "prompt_token_count": 82,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_4",
+      "prompt": "The disruption arrives the way weather arrives. the child enters \u2014 a stranger at the door, a letter on the step, a light that won't leave a window. They bring no threat. They bring a question Asa has been not-asking., over-the-shoulder shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, over-the-shoulder shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=The disruption arrives the way weather arrives. the child enters \u2014 a stranger at the door, a letter on the step, a light that won't leave a window. They bring no threat. They bring a question Asa has been not-asking., over-the-shoulder shot"
+      },
+      "prompt_token_count": 87,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_5",
+      "prompt": "Asa's first instinct is to tidy the feeling away \u2014 to offer tea, to change the subject, to be useful. The old armor of usefulness. the child lets the silence sit instead., wide shot, full scene, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, wide shot, full scene, ordinary safe space with subtle tension, normal room with one wrong detail, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=Asa's first instinct is to tidy the feeling away \u2014 to offer tea, to change the subject, to be useful. The old armor of usefulness. the child lets the silence sit instead., wide shot, full scene"
+      },
+      "prompt_token_count": 87,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:false_alarm",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "false_alarm",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_6",
+      "prompt": "They do something ordinary together \u2014 boil chestnuts, mend a net, walk to where the water is. The task is not the point. The being- beside is the point. The grief loosens its grip a quarter-turn., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, cluttered environment, too many objects, sensory overload, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=They do something ordinary together \u2014 boil chestnuts, mend a net, walk to where the water is. The task is not the point. The being- beside is the point. The grief loosens its grip a quarter-turn., medium shot"
+      },
+      "prompt_token_count": 82,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:overwhelm",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "overwhelm",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_7",
+      "prompt": "A wordless stretch. Wind in the eaves. Steam off the cups. A leaf deciding. Asa stops performing okayness and simply is, for three panels, beside another person and the weather., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=A wordless stretch. Wind in the eaves. Steam off the cups. A leaf deciding. Asa stops performing okayness and simply is, for three panels, beside another person and the weather., medium shot"
+      },
+      "prompt_token_count": 77,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_8",
+      "prompt": "Asa says one true thing \u2014 small, halting, unforced. Not a confession of the whole grief. Just the size of it that fits in a single breath. \"I keep setting out the second cup.\" the child does not fix it. They nod., medium shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, medium shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=Asa says one true thing \u2014 small, halting, unforced. Not a confession of the whole grief. Just the size of it that fits in a single breath. \"I keep setting out the second cup.\" the child does not fix it. They nod., medium shot"
+      },
+      "prompt_token_count": 89,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_9",
+      "prompt": "the child leaves the way weather leaves \u2014 without ceremony. Asa stands in the doorway. The light has changed. Nothing is resolved. Something has settled., over-the-shoulder shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, over-the-shoulder shot, open empty landscape, muted tones, vast sky, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=the child leaves the way weather leaves \u2014 without ceremony. Asa stands in the doorway. The light has changed. Nothing is resolved. Something has settled., over-the-shoulder shot"
+      },
+      "prompt_token_count": 71,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:grief",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "grief",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    },
+    {
+      "panel_id": "p_1_10",
+      "prompt": "Return to baseline, one degree deeper. Asa sets out one cup now \u2014 on purpose, not from forgetting. They sit on the porch and watch the water change its mind about which stones to cover. The season turns. The reader exhales., over-the-shoulder shot, young woman, dark hair, contemplative expression, simple dark clothing, manga, black and white, high contrast, heavy ink, dark shadows, psychological, sparse background, screen tones, halftone, over-the-shoulder shot, confined interior space, dim lighting, shadows on walls, visible tension, guarded body language, uncertain expression, masterpiece, best quality ITE: implicit pacing \u2014 vary panel scale and gutters; prefer organic backgrounds; natural branching detail; avoid grid, glitch, or tiled mechanical patterns. fractal-friendly categories: arboreal, aquatic, atmospheric, geological.",
+      "negative_prompt": "extra limbs, deformed hands, bad anatomy, watermark, text, logo, colorful, cute, chibi, pastel, bright, happy, geometric grid, digital noise, repeating tile",
+      "composition_notes": {
+        "summary": "multi-panel sequence, escalation to turning point; scene_lead=Return to baseline, one degree deeper. Asa sets out one cup now \u2014 on purpose, not from forgetting. They sit on the porch and watch the water change its mind about which stones to cover. The season turns. The reader exhales., over-the-shoulder shot"
+      },
+      "prompt_token_count": 88,
+      "negative_token_count": 15,
+      "continuity_tags": [
+        "teacher:ahjan",
+        "style:dark_psychological",
+        "engine:shame",
+        "identity_stage:early"
+      ],
+      "silence_compliance": false,
+      "atom_type": "STORY",
+      "engine_type": "shame",
+      "style_id": "dark_psychological",
+      "teacher_id": "ahjan",
+      "panel_function": "narrative_sequence",
+      "render_routing": {
+        "engine": "animagine_xl_4_0",
+        "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+        "sampler": {
+          "steps": 28,
+          "cfg": 6.0,
+          "sampler": "euler",
+          "scheduler": "normal",
+          "width": 1024,
+          "height": 1280
+        },
+        "reference_enabled": false,
+        "individuation_engaged": false,
+        "genre_tradition_engaged": false
+      },
+      "sdf_conditioning": {
+        "layer": "sdf_geometric_prior",
+        "map_kind": "disabled",
+        "pose_mod": "neutral",
+        "controlnet_strength": 0.6,
+        "spec_ref": "specs/MANGA_MODE_SYSTEM_SPEC.md \u00a76.7"
+      }
+    }
+  ],
+  "series_id": "stillness_press_anxiety_iyashikei",
+  "chapter_id": "ch_smoke",
+  "config_hash": "5fda8606f3fb743f",
+  "render_routing": {
+    "engine": "animagine_xl_4_0",
+    "workflow_path": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/scripts/image_generation/comfyui_workflows/animagine_xl_txt2img_manga.json",
+    "sampler": {
+      "steps": 28,
+      "cfg": 6.0,
+      "sampler": "euler",
+      "scheduler": "normal",
+      "width": 1024,
+      "height": 1280
+    },
+    "reference_enabled": false,
+    "reasoning": "genre=iyashikei \u2192 Animagine 4.0 (attractor matches register)",
+    "fallback_used": false,
+    "fallback_reason": "",
+    "individuation_engaged": false,
+    "genre_tradition_engaged": false
+  }
+}

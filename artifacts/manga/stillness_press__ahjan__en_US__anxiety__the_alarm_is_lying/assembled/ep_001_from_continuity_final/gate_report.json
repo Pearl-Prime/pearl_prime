@@ -1,0 +1,849 @@
+{
+  "manifest": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assembly_manifests/ep_001_from_continuity.yaml",
+  "panels": [
+    {
+      "panel_id": "ep001_002",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_003",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_004",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_005",
+      "shot_type": "dialogue_bust",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_006",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_007",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_008",
+      "shot_type": "re_establish",
+      "passed": true,
+      "ops_applied": [
+        "G3_horizon_scale",
+        "G6_defringe",
+        "G4_contact_shadow_under_L2",
+        "G5_occluder_BOOK"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "diegetic pair \u2014 legality auto-pass"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "angle_bucket match (eye_level)"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (camera_left/camera_left)"
+        },
+        {
+          "gate": "G3",
+          "severity": "PASS",
+          "message": "horizon-ratio scale within tolerance"
+        },
+        {
+          "gate": "G4",
+          "severity": "PASS",
+          "message": "contact shadow rendered"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_009",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_010",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_011",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_012",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_013",
+      "shot_type": "establishing",
+      "passed": true,
+      "ops_applied": [
+        "G3_horizon_scale",
+        "G6_defringe",
+        "G4_contact_shadow_under_L2",
+        "G5_occluder_BOOK"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "full_figure \u00d7 full_render \u2192 LEGAL+ops"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "angle_bucket match (eye_level)"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (camera_left/camera_left)"
+        },
+        {
+          "gate": "G3",
+          "severity": "PASS",
+          "message": "horizon-ratio scale within tolerance"
+        },
+        {
+          "gate": "G4",
+          "severity": "PASS",
+          "message": "contact shadow rendered"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_014",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_015",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_017",
+      "shot_type": "dialogue_bust",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_018",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_019",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_020",
+      "shot_type": "dialogue_bust",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_021",
+      "shot_type": "dialogue_bust",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_023",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_025",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_026",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_027",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_028",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_030",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep001_031",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "abstract_stage_paste",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+schema_version: '1.0'
+brief_id: research-brief-1735036e46
+title: Japan LINE and Rakuten funnel prompt repair
+created_at_utc: '2026-07-14T07:36:25Z'
+input_summary: Pearl_Research needs a stronger Japan-native prompt before deciding how Phoenix Omega should update the Japan LINE freebie funnel, Rakuten Kobo positioning, and audiobook metadata assumptions.
+issue_description: 'Pearl_Research needs a stronger Japan-native prompt before deciding how Phoenix Omega should update the Japan LINE freebie funnel, Rakuten Kobo positioning, and audiobook metadata assumptions.
+
+  '
+what_is_broken:
+- no Japanese-language source requirement
+- no LINE Official Account / LIFF / rich menu evidence
+- no Rakuten Kobo vs Amazon JP vs Audible Japan comparison
+- no language/register guidance for self-help funnel copy
+decision_to_make:
+- Should the Japan lane use Rakuten Chat AI / Japan-native deep research before Phoenix changes config/funnel/line_jp/oa_brand_registry.yaml and downstream metadata rules?
+unknowns:
+- Which claims are true, current, market-specific, and supported by reliable sources.
+missing_evidence:
+- current LINE OA read/click behavior
+- Japanese self-help/audiobook discovery terms
+- platform policy constraints and metadata norms
+- what not to import from US email funnels
+exact_questions:
+- Should the Japan lane use Rakuten Chat AI / Japan-native deep research before Phoenix changes config/funnel/line_jp/oa_brand_registry.yaml and downstream metadata rules?
+hypotheses_to_test:
+- 'The current failure may be caused by: no Japanese-language source requirement'
+- 'The current failure may be caused by: no LINE Official Account / LIFF / rich menu evidence'
+- 'The current failure may be caused by: no Rakuten Kobo vs Amazon JP vs Audible Japan comparison'
+- Provider-native prompts may produce stronger evidence than a single generic prompt.
+- The right answer may require preserving existing Phoenix Omega behavior while upgrading prompt quality before execution.
+- Japanese-language sources may materially change the Japan recommendation.
+constraints:
+- platform policy constraints and metadata norms
+- Do not include generic global advice. Surface contradictions and open risks.
+markets_locales_platforms:
+  markets:
+  - Japan
+  locales:
+  - ja-JP
+  platforms:
+  - LINE
+  - Rakuten Kobo
+  - Audible Japan
+  - Amazon JP
+routing_controls:
+  explicit_markets:
+  - Japan
+  explicit_locales:
+  - ja-JP
+  explicit_platforms:
+  - LINE
+  - Rakuten Kobo
+  - Audible Japan
+  - Amazon JP
+  hint_precedence: Explicit market, locale, and platform hints override transcript-only regional mentions during provider selection.
+good_output_should_include:
+- executive summary
+- direct answer to the operator's real question
+- evidence-backed findings
+- contradictions and ambiguities
+- recommended action
+- implementation implications for Phoenix Omega
+- open risks
+- provenance and sources
+source_rules:
+  preferred_sources:
+  - Japanese-language platform docs
+  - Japanese market reports and trade press
+  - official platform documentation and policy pages
+  - primary market data, filings, or regulator publications
+  - credible industry reports and trade press
+  - academic or practitioner research with transparent methods
+  acceptable_sources:
+  - credible news analysis with named sources
+  - platform-native examples when clearly labeled as examples
+  - expert commentary only when triangulated against stronger sources
+  weak_sources:
+  - unsourced trend roundups
+  - affiliate SEO posts
+  - single-anecdote social media claims
+  - AI-generated summaries without source URLs
+  source_languages:
+  - Japanese-language primary sources
+  - Japanese market terminology, platform docs, trade press, and local consumer research
+  - English-language sources only for external triangulation
+explicit_exclusions:
+- generic global funnel advice
+- US-only email marketing benchmarks
+- Do not include generic global advice. Surface contradictions and open risks.
+phoenix_omega_context:
+  affected_subsystems:
+  - platform
+  - Pearl_Research
+  - research prompts
+  - provider routing
+  relevant_files: []
+  implementation_constraints:
+  - Extend existing Pearl_Research flow rather than creating a disconnected toy flow.
+  - Keep routing explicit and inspectable.
+  - Do not perform downstream research in the prompt-generation stage.
+  - platform policy constraints and metadata norms
+  - Do not include generic global advice. Surface contradictions and open risks.
+routing_preview:
+  likely_provider: Rakuten Chat AI / Japan-native Deep Research
+  routing_signals:
+  - locales:ja-JP
+  - markets:Japan
+  - platforms:LINE
+  - platforms:Rakuten
+  - platforms:Rakuten Kobo
+  - platforms:Audible Japan
+  - platforms:Amazon JP
+raw_context_excerpt: 'Pearl_Research needs a stronger Japan-native prompt before deciding how Phoenix Omega should update the Japan LINE freebie funnel, Rakuten Kobo positioning, and audiobook metadata assumptions.
+
+
+
+  Session notes:
+
+  The previous output was plausible but thin. It mixed US email funnel logic
+
+  into Japan, assumed generic "mobile-first" behavior, and did not prove
+
+  the LINE cadence or Rakuten/Amazon JP split with Japanese sources.
+
+
+  Failing output:
+
+  - no Japanese-language source requirement
+
+  - no LINE Official Account / LIFF / rich menu evidence
+
+  - no Rakuten Kobo vs Amazon JP vs Audible Japan comparison
+
+  - no language/register guidance for self-help funnel copy
+
+
+  Decision:
+
+  Should the Japan lane use Rakuten Chat AI / Japan-native deep research
+
+  before Phoenix changes config/funnel/line_jp/oa_brand_registry.yaml and
+
+  downstream metadata rules?
+
+
+  Missing evidence:
+
+  - current LINE OA read/click behavior
+
+  - Japanese self-help/audiobook discovery terms
+
+  - platform policy constraints and metadata norms
+
+  - what not to import from US email funnels
+
+
+  Do not include generic global advice. Surface contradictions and open risks.
+
+
+
+  Evaluation case for Pearl_Research prompt-generation layer.
+
+
+  Japan ja-JP LINE Rakuten Kobo Audible Japan Amazon JP'

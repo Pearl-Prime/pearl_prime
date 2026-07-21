@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "telemetry_panel",
+  "layer_class": "L3",
+  "style_register": "mecha_cockpit",
+  "crop_class": "object_macro",
+  "genre": "mecha",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "blocked",
+    "role": "isolated_object",
+    "subject": "telemetry",
+    "contains": ["background", "mecha", "cockpit"],
+    "blocker": "legacy L3 contains scene context; clean mecha L3 must be one isolated prop/telemetry object"
+  }
+}

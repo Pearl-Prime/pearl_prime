@@ -104,3 +104,16 @@ brand-wizard-app/public/deliveries/** -filter -diff -merge -text
 
 # Dashboard cover thumbs: small JPEGs for CF Pages (full covers stay gitignored).
 brand-wizard-app/public/assets/cover_thumbs/** -filter -diff -merge -text
+
+# LFS→R2 offload V1 pilot — regenerable composed_v4_qwen render tree (forward-only).
+# Authority: docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md
+# Manifest: artifacts/manifests/lfs_offload/stillness_press_alarm_composed_v4_ep_001.tsv
+artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/composed_v4_qwen/** -filter -diff -merge -text
+
+# CI regression fixtures must be real bytes (not LFS pointers)
+tests/fixtures/manga/blob_gate/*.png -filter -diff -merge -text
+
+# Mecha structural QA proof PNGs are tiny generated fixtures; keep them as
+# real bytes so PR proof packets remain usable while LFS budget is exhausted.
+artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/*.png -filter -diff -merge -text
+artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/**/*.png -filter -diff -merge -text

@@ -261,7 +261,7 @@ def patch_atom_loaders(monkeypatch):
             real = real_load_persona(pid, topic, locale=locale, engine=engine) or {}
             return _wrap_persona_bank_with_exercise_override(real, persona_exercise)
 
-        def fake_practice_library(chapter_index, topic_id, persona_id, seed):  # noqa: ARG001
+        def fake_practice_library(chapter_index, topic_id, persona_id, seed, locale=None):  # noqa: ARG001
             return (practice_library_text, "practice_library")
 
         monkeypatch.setattr(es, "_load_teacher_atoms", fake_load_teacher)

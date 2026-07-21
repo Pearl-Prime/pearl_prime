@@ -93,6 +93,9 @@ jobs:
       - name: Brand admin Weekly OS public sync (BLOCK)
         run: python3 scripts/ci/check_brand_admin_weekly_os_public_sync.py
 
+      - name: Harbor production truth labeling (catalog-as-production — BLOCK)
+        run: python3 scripts/ci/check_harbor_production_truth_labeling.py
+
       - name: 12-shape chapter object continuity (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_chapter_object_continuity.py
 
@@ -121,9 +124,36 @@ jobs:
           # Every ch2-12 EXERCISE renders its full 5 layers (bridge/intro/description/aha/integration).
           PYTHONPATH=. python3 scripts/ci/check_flagship_exercise_five_layer.py --book /tmp/flagship_golden/book.txt
 
+      - name: Upload flagship golden book (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagship-golden-book
+          path: /tmp/flagship_golden/book.txt
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Flagship CH1 executable contract (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_flagship_contract.py
 
       - name: Data dictionary enforced (undocumented / orphan / unwired-knob — BLOCK)
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_data_dictionary.py
+
+      - name: Composite doctrine secular + shape (WISDOM_ESSENCE ruling — BLOCK on diff)
+        run: |
+          python3 -m pip install --quiet pyyaml
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/quality/check_composite_doctrine_secular.py "${EXTRA[@]}"
+
+      - name: No-lost-functions — capability regression vs base (§18 — BLOCK)
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          REF="${BASE:-origin/main}"
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_capability_regression.py --baseline-ref "$REF"

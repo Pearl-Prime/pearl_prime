@@ -1,6 +1,9 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
-import { matchBrand } from "./brandMatch.js";
+import { appendBrandAssignmentToYAML, brandAssignmentPayload, matchBrand } from "./brandMatch.js";
+import { classifyOnboardingSubmitFailure, parseHybridOfferMessage } from "./hybridOffer.js";
+import { resolveSeededMarket } from "./markets.js";
+import { HybridOfferPanel } from "./onboarding/HybridOfferPanel.jsx";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
@@ -2832,6 +2835,7 @@ function Step11Launch({ state, update, i18n = {} }) {
   const [showYaml, setShowYaml] = useState(false);
   const [yamlCopied, setYamlCopied] = useState(false);
   const [matched, setMatched] = useState(null);
+  const [submissionError, setSubmissionError] = useState("");
 
   // Read the teacher/composite selection (teacher_showcase sets phoenix_book_mode;
   // ?teacher / ?mode=composite are URL fallbacks). Same contract as generateYAML.
@@ -2845,31 +2849,36 @@ function Step11Launch({ state, update, i18n = {} }) {
   };
 
   const handleLaunch = async () => {
-    const wizardYaml = generateYAML(state);
+    let wizardYaml = generateYAML(state);
     setYamlOutput(wizardYaml);
+    setSubmissionError("");
     setSubmitted(true);
     let m = null;
     try {
       const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
       const brands = r.ok ? await r.json() : {};
       m = matchBrand(state, brands, readTeacherMode());
+      if (m) {
+        wizardYaml = appendBrandAssignmentToYAML(wizardYaml, m, state.contact || {});
+        setYamlOutput(wizardYaml);
+      }
       // localStorage stays as a client-side convenience (Brand Director reads it).
       if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
     } catch (_) {}
-    // Durable server-side record: POST the signup to the Cloudflare Pages Function,
-    // which proxies to FastAPI POST /api/v1/onboarding/submit (logs + roster assignment).
-    // Best-effort: a failure here must NOT break the success screen (localStorage already
-    // holds the match); the Function degrades gracefully when no backend is configured.
+    // Durable server-side record: POST the signup to the Cloudflare Pages Function.
+    // If the public assignment cannot persist, make that visible on the success screen.
     if (m) {
       const c = state.contact || {};
+      const assignment = brandAssignmentPayload(m, c);
       try {
-        await fetch("api/onboarding/submit", {
+        const response = await fetch("api/onboarding/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             brand_id: m.brand_id,
             lane: m.lane,
             publication_corp: m.publication_corp,
+            ...(assignment || {}),
             brand_email: (c.email || "").trim() || null,
             contact: {
               first_name: c.firstName || "",
@@ -2881,7 +2890,23 @@ function Step11Launch({ state, update, i18n = {} }) {
             match_basis: m.basis || null,
           }),
         });
-      } catch (_) {}
+        if (!response.ok) {
+          let detail = {};
+          try { detail = await response.json(); } catch (_) {}
+          const classified = classifyOnboardingSubmitFailure(response.status, detail, {
+            onboardingMarket: state.onboardingMarket || "us",
+          });
+          if (classified.kind === "brand_claimed" || classified.kind === "teacher_claimed_offer") {
+            setMatched(null);
+            try { localStorage.removeItem("phoenix_pending_brand"); } catch (_) {}
+          }
+          setSubmissionError(classified.message);
+        }
+      } catch (_) {
+        setSubmissionError("Live assignment did not persist. Keep this screen open and contact ops before treating this brand as active.");
+      }
+    } else {
+      setSubmissionError("No available unassigned brand matched these choices. Keep this screen open and contact ops for a manual assignment.");
     }
   };
 
@@ -2925,11 +2950,24 @@ function Step11Launch({ state, update, i18n = {} }) {
               {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
             </div>
             <button
-              onClick={() => { window.location.href = "brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
+              onClick={() => { window.location.href = "/brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
             >
               {t("ui", "Open Brand Director")} <ArrowRight size={16} />
             </button>
+          </div>
+        )}
+        <HybridOfferPanel
+          submissionError={submissionError}
+          onboardingMarket={state.onboardingMarket}
+          contact={state.contact}
+          wizardYaml={yamlOutput}
+          onAccepted={(match) => { setMatched(match); setSubmissionError(""); }}
+          onError={setSubmissionError}
+        />
+        {submissionError && !parseHybridOfferMessage(submissionError) && (
+          <div className="mb-6 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm font-semibold text-amber-900">
+            {submissionError}
           </div>
         )}
         {/* Celebration Header */}
@@ -3675,14 +3713,11 @@ export default function BrandWizard() {
     const params = new URLSearchParams(window.location.search);
     const urlTeacher = params.get("teacher");
     const urlMode = params.get("mode");
-    // Seed the onboarding market from the entry-screen hand-in (?market=hungary) or a
-    // persisted lane, so a localized wizard lands the signup in the correct catalog
-    // lane instead of defaulting to US. brandMatch.LANE_FROM_MARKET accepts these tokens.
-    let seededMarket = params.get("market");
-    if (!seededMarket) { try { seededMarket = localStorage.getItem("phoenix_onboarding_market") || localStorage.getItem("phoenix_lane"); } catch (_) {} }
+    // Seed market from ?market= / localStorage / ?lang=→default (never collapse bare ?lang=fr to US).
+    const { market: seededMarket } = resolveSeededMarket({ searchParams: params });
     if (seededMarket) {
-      const norm = String(seededMarket).toLowerCase().replace(/[\s-]+/g, "_");
-      update({ onboardingMarket: norm });
+      update({ onboardingMarket: seededMarket });
+      try { localStorage.setItem("phoenix_onboarding_market", seededMarket); } catch (_) {}
     }
     if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);

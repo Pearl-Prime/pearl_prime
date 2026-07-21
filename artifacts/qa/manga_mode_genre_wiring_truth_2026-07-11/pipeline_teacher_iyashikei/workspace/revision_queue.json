@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "revision_queue",
+  "chapter_clearance": "hold",
+  "issues": [
+    {
+      "issue_code": "PANEL_NOT_OK",
+      "gate_id": "MANGA_GATE_IMAGES_ALL_OK",
+      "severity": "BLOCKER",
+      "stage_owner": "chapter_image_gen",
+      "description": "panel 'p_1_0' status 'pending'"
+    },
+    {
+      "issue_code": "MISSING_PAGE_PNG",
+      "gate_id": "MANGA_GATE_LAYOUT_PAGES",
+      "severity": "BLOCKER",
+      "stage_owner": "chapter_layout",
+      "description": "/Users/ahjan/phoenix_omega_worktrees/manga-mode-genre-wiring-20260711/artifacts/qa/manga_mode_genre_wiring_truth_2026-07-11/pipeline_teacher_iyashikei/workspace/final_page_composite/page_001.png"
+    }
+  ]
+}

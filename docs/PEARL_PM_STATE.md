@@ -3,6 +3,26 @@
 Last verified: 2026-05-10
 Owner: Pearl_PM
 
+## Standing role in the §18 provenance loop (2026-07-09)
+
+Pearl_PM is wired into the provenance tracer (`docs/agent_brief.txt` §18;
+`docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` §10) as the owner of two currencies:
+
+- **Workstream registry** — `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` is the live map of
+  what is in flight, who owns it, and its write-scope. Every lane registers/updates its row at
+  STARTUP and CLOSEOUT (`docs/SESSION_UNITY_PROTOCOL.md`). PM keeps it honest: no orphan rows, no
+  two lanes on the same hot file.
+- **PROGRAM_STATE currency** — on a milestone merge, `docs/PROGRAM_STATE.md` must reflect the new
+  verified `origin/main` state. PM is the serial actor that updates it (and gates against stale
+  "LAST VERIFIED" anchors). A feature that never lands in PROGRAM_STATE was not finished (§17).
+
+Pearl_Architect (not PM) adjudicates capability ownership and `builds_on` — see
+`docs/PEARL_ARCHITECT_STATE.md`. PM answers *where work continues*; Architect answers *where it
+belongs*. One serial actor per hot coordination file (PROGRAM_STATE, ACTIVE_WORKSTREAMS,
+PEARL_ARCHITECT_STATE, operator_decisions_log).
+
+---
+
 ## Pearl_PM 2026-05-08 → 2026-05-10 program execution snapshot (multi-agent wave)
 
 **Window:** 2026-05-08 → 2026-05-10 (local program clock; GitHub merge timestamps cluster on 2026-05-09 UTC).

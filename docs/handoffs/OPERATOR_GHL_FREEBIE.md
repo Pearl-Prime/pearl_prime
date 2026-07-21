@@ -39,7 +39,7 @@ Optional reference for them: [FUNNEL_EMAIL_AUTOMATION_MAP.md](../FUNNEL_EMAIL_AU
 ## What you wait for back
 
 ```
-PHOENIX_GHL_FUNNEL_WEBHOOK=https://services.leadconnectorhq.com/hooks/...
+PHOENIX_GHL_FUNNEL_WEBHOOK=<REDACTED_GHL_WEBHOOK_URL>
 Feed URL confirmed: https://.../marketing_feed.json
 Sub-account: ...
 Workflows published: yes

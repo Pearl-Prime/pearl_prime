@@ -1,0 +1,51 @@
+Empirical diagnosis of `phoenix_v4.planning.registry_resolver._parse_canonical_txt`
+block-shape sensitivity (2026-07-11, Pearl_Writer)
+
+Synthetic fixture A (single-delimiter shape, matches existing
+atoms/educators/imposter_syndrome/REFLECTION/CANONICAL.txt v01-v05):
+
+  ## REFLECTION v01
+  ---
+  family: F1
+  voice_mode: teacher
+
+  Body paragraph one here. Body paragraph two here.
+  ---
+
+Result: _parse_canonical_txt(..., slot_type='REFLECTION') -> 0 atoms parsed.
+
+Synthetic fixture B (two-delimiter shape):
+
+  ## REFLECTION v01
+  ---
+  family: F1
+  voice_mode: teacher
+  ---
+
+  Body paragraph one here. Body paragraph two here.
+  ---
+
+Result: -> 1 atom parsed, metadata populated, full body content preserved.
+
+Real-file cross-check:
+- atoms/educators/imposter_syndrome/REFLECTION/CANONICAL.txt (pre-repair, 5 headers,
+  fixture-A shape): _parse_canonical_txt(...) -> 0 atoms.
+- atoms/educators/anxiety/REFLECTION/CANONICAL.txt (40 headers, mixed shapes):
+  _parse_canonical_txt(...) -> 10 atoms (only the fixture-B-shaped blocks, v16-v25
+  range; the fixture-A-shaped blocks, the majority, parse to 0 silently).
+- atoms/nyc_executives/anxiety/REFLECTION/CANONICAL.txt (proven-working per July 10
+  reconcile doc's render proof): _parse_canonical_txt(...) -> 10 atoms (same pattern).
+
+Conclusion: the "thin pool" framing (5 vs 20-40 header count) undercounts the real
+problem. Header count is not a reliable proxy for usable-atom count in this file
+family. The correct diagnostic is a direct call to the real production parser, not a
+grep for "## REFLECTION v" headers. This lane's 15 new atoms were authored in the
+verified two-delimiter shape and confirmed to parse 15/15 via the same direct call
+before the full spine-render proof was run.
+
+Root cause is a pre-existing quirk in _parse_canonical_txt's delimiter-count state
+machine, not something introduced by this lane. Not fixed here (out of WRITE_SCOPE —
+code changes are excluded; this lane authors canonical atom content only). Flagged
+as a residual, out-of-scope finding worth a dedicated lane: potentially many
+"authored" REFLECTION atoms across other personas/topics may be silently inert at
+the real parser despite passing a header-count-based audit.

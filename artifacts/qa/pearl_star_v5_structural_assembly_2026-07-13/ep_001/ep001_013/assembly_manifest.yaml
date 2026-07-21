@@ -1,0 +1,28 @@
+schema_version: 1.0.0
+series_id: pearl_star_v5_structural_assembly
+episode_id: ep_001
+manifest_id: ep001_013_v5_structural_assembly
+notes: Generated from Pearl Star V5 layered output. layer_00/model composite is intentionally
+  not referenced; final placement is structural.
+canvas:
+  width: 1024
+  height: 1024
+  background_hex: '#FFFFFF'
+panels:
+- panel_id: ep001_013
+  archetype: sparse_establishing_wide
+  shot_type: establishing
+  structural_plan_path: structural_plan.json
+  layers:
+  - layer_class: L0
+    asset: layer_01.png
+    provenance: REAL
+    provenance_note: Pearl Star V5 layer_01 background.
+  - layer_class: L2
+    asset: layer_02.png
+    provenance: REAL
+    provenance_note: Pearl Star V5 layer_02 character/component.
+    structural_node_id: char_standing
+    grounding:
+      contact_shadow: true
+      occluder: false

@@ -8,6 +8,28 @@ description: >
 rubric_version: "2.0.0"
 last_updated: "2026-03-06"
 
+# Top-level index used by schema/config CI. The category sections below remain
+# the canonical rule bodies consumed by the comparison checklist.
+rules:
+  - {rule_id: tts_c1, category: tts_cadence}
+  - {rule_id: tts_c2, category: tts_cadence}
+  - {rule_id: tts_c3, category: tts_cadence}
+  - {rule_id: tts_c4, category: tts_cadence}
+  - {rule_id: tts_c5, category: tts_cadence}
+  - {rule_id: psy_p1, category: psychological_impact}
+  - {rule_id: psy_p2, category: psychological_impact}
+  - {rule_id: psy_p3, category: psychological_impact}
+  - {rule_id: psy_p4, category: psychological_impact}
+  - {rule_id: psy_p5, category: psychological_impact}
+  - {rule_id: flow_f1, category: narrative_flow}
+  - {rule_id: flow_f2, category: narrative_flow}
+  - {rule_id: flow_f3, category: narrative_flow}
+  - {rule_id: flow_f4, category: narrative_flow}
+  - {rule_id: reg_r1, category: regional_fit}
+  - {rule_id: reg_r2, category: regional_fit}
+  - {rule_id: comp_c1, category: compliance}
+  - {rule_id: comp_c2, category: compliance}
+
 tts_cadence:
   - rule_id: tts_c1
     name: sentence_length_cap

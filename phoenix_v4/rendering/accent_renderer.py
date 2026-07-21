@@ -1,6 +1,8 @@
 """Materialize planner-assigned accent beats into chapter slot streams."""
 from __future__ import annotations
 
+import hashlib
+
 from typing import Any, Dict, List, Mapping, Sequence, Tuple
 
 ACCENT_SLOT_PREFIX = "_ACCENT:"
@@ -47,13 +49,30 @@ def insert_accent_beats_into_streams(
     types_out = list(slot_types)
     proses_out = list(slot_proses)
     rendered: List[Dict[str, Any]] = []
-    ordered = sorted(
-        accent_beats,
-        key=lambda b: (
-            _index_for_position(str(b.get("position") or ""), types_out),
-            str(b.get("class") or ""),
-        ),
+    contract_mode = any(
+        isinstance(beat.get("keys"), dict) and beat.get("keys", {}).get("surface_bucket")
+        for beat in accent_beats
     )
+    base_indices = {
+        id(beat): _index_for_position(str(beat.get("position") or ""), slot_types)
+        for beat in accent_beats
+    }
+    if contract_mode:
+        ordered = sorted(
+            accent_beats,
+            key=lambda b: (
+                base_indices.get(id(b), len(slot_types)),
+                str(b.get("class") or ""),
+            ),
+        )
+    else:
+        ordered = sorted(
+            accent_beats,
+            key=lambda b: (
+                _index_for_position(str(b.get("position") or ""), types_out),
+                str(b.get("class") or ""),
+            ),
+        )
     offset = 0
     for beat in ordered:
         accent_id = str(beat.get("accent_id") or "")
@@ -61,9 +80,13 @@ def insert_accent_beats_into_streams(
         if not body:
             continue
         position = str(beat.get("position") or "")
-        insert_at = _index_for_position(position, types_out) + offset
+        if contract_mode:
+            insert_at = base_indices.get(id(beat), _index_for_position(position, slot_types)) + offset
+        else:
+            insert_at = _index_for_position(position, types_out) + offset
         insert_at = max(0, min(insert_at, len(types_out)))
         cls = str(beat.get("class") or "ACCENT")
+        keys = dict(beat.get("keys") or {}) if isinstance(beat.get("keys"), dict) else {}
         types_out.insert(insert_at, f"{ACCENT_SLOT_PREFIX}{cls}")
         proses_out.insert(insert_at, body)
         rendered.append(
@@ -71,7 +94,14 @@ def insert_accent_beats_into_streams(
                 "accent_id": accent_id,
                 "class": cls,
                 "position": position,
+                "keys": keys,
+                "surface_bucket": keys.get("surface_bucket"),
+                "count_unit": keys.get("count_unit"),
                 "chapter_insert_index": insert_at,
+                "body": body,
+                "body_hash": hashlib.sha256(body.encode("utf-8")).hexdigest(),
+                "rendered_excerpt": body[:220].replace("\n", " ").strip(),
+                "provenance": keys.get("supply_provenance") or beat.get("supply_provenance"),
             }
         )
         offset += 1

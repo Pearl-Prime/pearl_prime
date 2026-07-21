@@ -1,0 +1,69 @@
+schema_version: 1.0.0
+series_id: pearl_star_mecha_clean_structural_proof
+episode_id: ep_001
+manifest_id: pearl_star_mecha_clean_structural_proof_2026_07_13
+canvas:
+  width: 1024
+  height: 1024
+  background_hex: '#FFFFFF'
+panels:
+- panel_id: p01_clean_mecha_hangar_floor
+  shot_type: establishing
+  structural_plan_path: p01_clean_mecha_hangar_floor/structural_plan.json
+  layers:
+  - layer_class: L0
+    asset: p01_clean_mecha_hangar_floor/source_v5_panel/layer_01.png
+    provenance: REAL
+    provenance_note: Deterministic clean mecha support plate.
+  - layer_class: L2
+    asset: p01_clean_mecha_hangar_floor/source_v5_panel/layer_02.png
+    provenance: REAL
+    provenance_note: 'Clean single-subject mecha L2: mecha.'
+    structural_node_id: char
+    grounding:
+      contact_shadow: true
+      occluder: false
+      support_mode: standing_floor
+- panel_id: p02_clean_pilot_threshold_floor_l3
+  shot_type: medium
+  structural_plan_path: p02_clean_pilot_threshold_floor_l3/structural_plan.json
+  layers:
+  - layer_class: L0
+    asset: p02_clean_pilot_threshold_floor_l3/source_v5_panel/layer_01.png
+    provenance: REAL
+    provenance_note: Deterministic clean mecha support plate.
+  - layer_class: L2
+    asset: p02_clean_pilot_threshold_floor_l3/source_v5_panel/layer_02.png
+    provenance: REAL
+    provenance_note: 'Clean single-subject mecha L2: pilot.'
+    structural_node_id: char
+    grounding:
+      contact_shadow: true
+      occluder: false
+      support_mode: standing_floor
+  - layer_class: L3
+    asset: p02_clean_pilot_threshold_floor_l3/source_v5_panel/layer_03.png
+    bbox_pct:
+    - 70
+    - 16
+    - 18
+    - 12
+    provenance: INTERIM
+    provenance_note: Clean isolated telemetry prop proving L3 purity gate.
+- panel_id: p03_clean_seated_pilot_cockpit_seat
+  shot_type: medium
+  structural_plan_path: p03_clean_seated_pilot_cockpit_seat/structural_plan.json
+  layers:
+  - layer_class: L0
+    asset: p03_clean_seated_pilot_cockpit_seat/source_v5_panel/layer_01.png
+    provenance: REAL
+    provenance_note: Deterministic clean mecha support plate.
+  - layer_class: L2
+    asset: p03_clean_seated_pilot_cockpit_seat/source_v5_panel/layer_02.png
+    provenance: REAL
+    provenance_note: 'Clean single-subject mecha L2: pilot.'
+    structural_node_id: char
+    grounding:
+      contact_shadow: true
+      occluder: false
+      support_mode: intentional_seat_table

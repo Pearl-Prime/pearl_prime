@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "structural_support_overlay",
+  "panel_id": "ep001_016",
+  "plan_hash": "fff0f89e2a329b0ac9c4a09b4fa8481c470e6c06a724d56ac22016fa6b098ce6",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "transform_model": "structural_mvp_v1",
+  "regions": [
+    {
+      "edge_id": "e_seated",
+      "relation": "seated_on",
+      "support_polygon_pct": [
+        [
+          44.0,
+          44.0
+        ],
+        [
+          56.0,
+          44.0
+        ],
+        [
+          57.5,
+          52.5
+        ],
+        [
+          42.5,
+          52.5
+        ]
+      ],
+      "contact_point_pct": [
+        50.0,
+        48.0
+      ],
+      "transform_model": "structural_mvp_v1",
+      "transform_source": "envelope.plan_body.resolved_placements"
+    }
+  ],
+  "same_resolved_transform_path": true
+}

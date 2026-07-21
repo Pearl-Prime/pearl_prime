@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "structural_support_overlay",
+  "panel_id": "mecha_ep001_008",
+  "plan_hash": "374ba886a77ba2cc0e843172c37494f4e1e0e3e64910a64b15f3ec4dc4843f5d",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "transform_model": "structural_mvp_v1",
+  "regions": [
+    {
+      "edge_id": "e_standing_threshold",
+      "relation": "standing_on",
+      "support_polygon_pct": [
+        [
+          5.0,
+          78.0
+        ],
+        [
+          95.0,
+          78.0
+        ],
+        [
+          98.0,
+          98.0
+        ],
+        [
+          2.0,
+          98.0
+        ]
+      ],
+      "contact_point_pct": [
+        50.0,
+        88.0
+      ],
+      "transform_model": "structural_mvp_v1",
+      "transform_source": "envelope.plan_body.resolved_placements"
+    }
+  ],
+  "same_resolved_transform_path": true
+}

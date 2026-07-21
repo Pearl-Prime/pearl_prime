@@ -41,11 +41,13 @@ def _split_manuscript_chapters(prose: str) -> tuple[str, list[tuple[int, str]]]:
     return preamble, chapters
 
 
-def _format_music_block(title: str, body: str) -> str:
+def _format_music_block(title: str, body: str, *, labeled: bool = False) -> str:
     body = body.strip()
     if not body:
         return ""
-    return f"\n\n--- {title} ---\n\n{body}".strip()
+    if labeled:
+        return f"\n\n--- {title} ---\n\n{body}".strip()
+    return body
 
 
 def _blocks_for_chapter(
@@ -107,6 +109,20 @@ def _insert_mid_into_body(body: str, mid_block: str) -> str:
     return "\n\n".join(before) + "\n\n" + mid_block.strip() + "\n\n" + "\n\n".join(after)
 
 
+def _insert_opening_after_native_start(body: str, opening_block: str) -> str:
+    """Let the chapter establish its native voice before adding music prose."""
+    body = body.strip()
+    if not opening_block or not body:
+        return body
+    paras = [p.strip() for p in re.split(r"\n\s*\n", body) if p.strip()]
+    if len(paras) <= 1:
+        return body + "\n\n" + opening_block.strip()
+    insert_after = min(1, len(paras) - 1)
+    before = paras[: insert_after + 1]
+    after = paras[insert_after + 1 :]
+    return "\n\n".join(before) + "\n\n" + opening_block.strip() + "\n\n" + "\n\n".join(after)
+
+
 def _patch_chapter_text(ch_text: str, blocks: dict[str, str]) -> str:
     lines = ch_text.splitlines()
     if not lines:
@@ -114,9 +130,9 @@ def _patch_chapter_text(ch_text: str, blocks: dict[str, str]) -> str:
     heading = lines[0]
     body = "\n".join(lines[1:]).strip()
     parts: list[str] = [heading]
-    if blocks.get("opening"):
-        parts.append(blocks["opening"].strip())
     if body:
+        if blocks.get("opening"):
+            body = _insert_opening_after_native_start(body, blocks["opening"])
         body_m = _insert_mid_into_body(body, blocks.get("mid", "")) if blocks.get("mid") else body
         parts.append(body_m)
     if blocks.get("closing"):

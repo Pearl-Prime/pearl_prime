@@ -78,6 +78,42 @@ def test_bytes_gate_lfs_pointer_counts_real_size(tmp_path):
     assert bytes_gate.main(["--paths", str(p), "--require-images"]) == 0
 
 
+def test_bytes_gate_offload_manifest_passes_without_image(tmp_path):
+    """Offloaded panels pass --require-images via manifest-verify (Q-LFS-03)."""
+    from scripts.artifacts.lfs_offload_manifest import OffloadEntry, write_manifest_tsv
+
+    d = tmp_path / "artifacts/manifests/lfs_offload"
+    d.mkdir(parents=True)
+    tsv_dir = tmp_path / "ep_001"
+    tsv_dir.mkdir()
+    p = tsv_dir / "RENDER_PROGRESS.tsv"
+    p.write_text("panel_id\tstatus\tbytes\tseconds\nep001_001\tok\t1882246\t0.0\n")
+    repo_path = "ep_001/ep001_001.png"
+    write_manifest_tsv(
+        d / "pilot.tsv",
+        slug="pilot",
+        namespace="manga_rendered_books",
+        bucket="phoenix-omega-artifacts",
+        entries=[OffloadEntry(repo_path, "manga/rendered_books/x/ep001_001.png", 1882246, "a" * 64)],
+    )
+    rel = str(p.relative_to(tmp_path))
+    # Rewrite manifest with full repo_path matching gate lookup
+    write_manifest_tsv(
+        d / "pilot.tsv",
+        slug="pilot",
+        namespace="manga_rendered_books",
+        bucket="phoenix-omega-artifacts",
+        entries=[OffloadEntry(rel.replace("RENDER_PROGRESS.tsv", "ep001_001.png").replace("\\", "/"),
+                           "manga/x.png", 1882246, "a" * 64)],
+    )
+    assert bytes_gate.main([
+        "--repo-root", str(tmp_path),
+        "--paths", rel,
+        "--require-images",
+        "--offload-manifest-dir", "artifacts/manifests/lfs_offload",
+    ]) == 0
+
+
 def test_bytes_gate_real_tree_passes():
     # the two committed TSVs on main are all >= 50KB; the gate must land green
     assert bytes_gate.main([]) == 0

@@ -1,0 +1,72 @@
+# Additive bridge: PANEL_TYPE_SYSTEM_V1 → STRUCTURAL_COMPOSITION_MVP
+# Does NOT rewrite panel-type doctrine into structural rules.
+schema_version: "1.1.0"
+bridge_id: panel_type_to_structural_mvp_v2
+layers:
+  panel_type_system: PANEL_TYPE_SYSTEM_V1
+  structural_system: STRUCTURAL_COMPOSITION_MVP
+  doctrine_singleton: artifacts/qa/MANGA_CANON_SCENE_ASSEMBLY_CHECKLIST.md
+
+mappings:
+  establish_standing_room:
+    panel_type_id: establish_standing_room
+    structural_template_id: standing_room_scene
+    allowed_relations: [standing_on, resting_on, occluded_by]
+    required_support_proof: [standing_on]
+  re_establish_seated_table:
+    panel_type_id: re_establish_seated_table
+    structural_template_id: seated_table_scene
+    allowed_relations: [seated_on, resting_on, held_by, occluded_by]
+    required_support_proof: [seated_on]
+  action_standing_room:
+    panel_type_id: action_standing_room
+    structural_template_id: standing_room_scene
+    allowed_relations: [standing_on, resting_on, held_by, occluded_by]
+    required_support_proof: [standing_on]
+  dialogue_seated_table:
+    panel_type_id: dialogue_seated_table
+    structural_template_id: seated_table_scene
+    allowed_relations: [seated_on, resting_on, held_by, occluded_by]
+    required_support_proof: [seated_on]
+  closeup_subject:
+    panel_type_id: closeup_subject
+    structural_template_id: closeup_subject_scene
+    allowed_relations: [held_by, occluded_by]
+    required_support_proof: [held_by]
+  prop_insert:
+    panel_type_id: prop_insert
+    structural_template_id: prop_insert_scene
+    allowed_relations: [resting_on, held_by, occluded_by]
+    required_support_proof: [resting_on]
+  two_character_dialogue:
+    panel_type_id: two_character_dialogue
+    structural_template_id: two_character_dialogue_scene
+    allowed_relations: [standing_on, seated_on, resting_on, held_by, occluded_by]
+    required_support_proof: [standing_on]
+  action_impact:
+    panel_type_id: action_impact
+    structural_template_id: action_impact_scene
+    allowed_relations: [standing_on, resting_on, held_by, occluded_by]
+    required_support_proof: [standing_on]
+  symbolic_metaphor:
+    panel_type_id: symbolic_metaphor
+    structural_template_id: symbolic_metaphor_scene
+    allowed_relations: [held_by, resting_on, occluded_by]
+    required_support_proof: [held_by]
+  establishing_environment:
+    panel_type_id: establishing_environment
+    structural_template_id: establishing_environment_scene
+    allowed_relations: [resting_on, occluded_by]
+    required_support_proof: [resting_on]
+
+archetype_hints:
+  shared_meal_table_medium: re_establish_seated_table
+  character_at_table_medium: dialogue_seated_table
+  sparse_establishing_wide: establish_standing_room
+  walking_in_thought_medium: action_standing_room
+  closeup_reaction: closeup_subject
+  object_macro: prop_insert
+  two_shot_dialogue: two_character_dialogue
+  action_impact_wide: action_impact
+  symbolic_insert: symbolic_metaphor
+  environment_establishing_wide: establishing_environment

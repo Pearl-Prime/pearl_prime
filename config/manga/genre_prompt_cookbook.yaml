@@ -1,0 +1,563 @@
+schema_version: '1.0'
+authority: MANGA_GENRE_PROMPTING_SYSTEM_RESEARCH_2026-07-10
+research_sha: 12799deabe294baf1d9da00305c2a3d43620d946
+generated_at: '2026-07-10T00:20:59Z'
+default_panel_model: qwen_image
+prompt_scaffold_slots:
+- REGISTER
+- SUBJECT
+- COMPOSITION
+- RENDERING
+- LOCALE
+models:
+  qwen_image:
+    role: primary_character_panel_engine
+    prompt_grammar: natural_language_prose
+    workflow: scripts/image_generation/comfyui_workflows/qwen_image_txt2img_manga.json
+    when_to_use:
+    - L2 character cutouts
+    - cockpit interiors
+    - faces
+    - CJK locales
+    - all panel tasks default
+    when_not_to_use:
+    - B&W crosshatch without smoke-test PASS
+    failure_risks:
+    - stipple blob without register anchors
+    - prompt_extend dilution
+    source_refs:
+    - S1
+    - S2
+    - S3
+    - S4
+  qwen_image_layered:
+    role: layer_decomposition
+    prompt_grammar: edit_mode_prose_per_layer
+    workflow: scripts/image_generation/comfyui_workflows/qwen_image_layered_decompose.json
+    when_to_use:
+    - L0/L2/L3 bank generation
+    - layer isolation edits
+    when_not_to_use:
+    - final proof without per-layer visual QA
+    failure_risks:
+    - layer bleed
+    - INTERIM presented as REAL
+    source_refs:
+    - S4
+  flux_schnell:
+    role: color_background_fallback_only
+    prompt_grammar: short_front_loaded_clauses
+    when_to_use:
+    - color webtoon env plates
+    - food color glam with smoke-test
+    when_not_to_use:
+    - B&W manga panels
+    - mecha L2
+    - character faces
+    - monochrome seinen
+    engine_config:
+      steps: 4
+      cfg: 1.0
+      sampler: euler
+      scheduler: simple
+    failure_risks:
+    - stipple noise at wrong steps/cfg
+    - register ablation
+    - typography hallucination
+    source_refs:
+    - S11
+  animagine_xl_4_0:
+    role: bw_register_fallback
+    prompt_grammar: booru_tags_hybrid
+    when_to_use:
+    - Qwen smoke FAIL on crosshatch/mecha/screentone
+    - tag-native B&W genres
+    when_not_to_use:
+    - primary path without smoke-test
+    - natural-language-only prompts
+    failure_risks:
+    - shojo average-face attractor
+    - needs anti-shojo negative stack
+    source_refs:
+    - S13
+    - S17
+forbidden_patterns:
+  global:
+  - manga catalog cover quality
+  - inline no text in positive prompt
+  - American setting for en_US locale
+  - concept art
+  - key visual
+  - flux_schnell steps>4 for panels
+  - style_id without genre_tradition tokens
+  - byte-only PASS without visual inspect
+  genre_specific:
+    mecha:
+    - soft iyashikei atmosphere in positive
+    - watercolor wash
+    - gradient sky
+    - photorealistic mech
+    healing:
+    - speed lines
+    - impact frame
+    - chiaroscuro
+    dark_fantasy:
+    - full color in positive
+    - oil painting
+    - western comic
+    psychological_horror:
+    - iyashikei
+    - pastel
+    - sparkle
+locale_overlays:
+  en_US:
+    register_add: manga panel, sequential art register, English-language edition
+    avoid:
+    - American setting
+    - manga-illustrated portrait
+    - manga catalog cover quality
+    note: weak manga prior — front-load panel grammar
+  ja_JP:
+    register_add: 日本の漫画パネル、スクリーントーン、モノクロインク
+    avoid:
+    - long ethnicity paragraphs
+    note: strong manga prior on Qwen
+  zh_TW:
+    register_add: 台灣漫畫分格，黑白墨水，網點
+    avoid:
+    - simplified-only cues
+    note: Qwen CJK strength
+  zh_CN:
+    register_add: 中国漫画分镜，黑白线稿，网点纸
+    avoid:
+    - traditional-only glyphs when row is zh_CN
+    note: Qwen simplified rendering
+  ko_KR:
+    register_add: 한국 웹툰 또는 만화 패널 — format selects webtoon color vs manga B&W
+    avoid:
+    - vertical scroll cues in panel grid manga
+    note: webtoon lanes use color FLUX; manga lanes Qwen
+genres:
+  battle:
+    visual_register: Kinetic shonen/seinen action, controlled speed lines, impact frames rare
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, action battle manga panel, dynamic pose,
+      speed lines sparingly, impact frame only at intensity 5
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, static portrait, cover art, iyashikei calm
+    composition_rules: action_intensity 0-5 scale; max 3 consecutive intensity>=4 panels
+    color_policy: monochrome_shonen
+    anti_blob_rules:
+    - speed lines in positive only when action_intensity>=3
+    source_refs:
+    - S16:action_battle.md
+    - S16:shonen_encouragement.md
+  battle_internal:
+    visual_register: Philosophical seinen, sparse kinetic, internal conflict
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, internal battle philosophical manga panel,
+      sparse action, introspective tension, seinen register
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, explosive shonen action, mecha, horror gore
+    composition_rules: symbolic substitution over spectacle
+    color_policy: monochrome_sparse
+    anti_blob_rules:
+    - action_intensity default <=2
+    source_refs:
+    - S13:battle_internal
+    - S16:seinen_psychological.md
+  comedy:
+    visual_register: Expressive faces, clean line, moderate ink density, Higashimura-adjacent
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, comedy manga panel, expressive face, clean
+      linework, comedic timing beat
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, horror crosshatch, gekiga dread, photorealistic
+    composition_rules: reaction close-ups permitted; chibi only when subgenre specifies
+    color_policy: monochrome_or_flat_color
+    anti_blob_rules:
+    - keep line art sharp under expression distortion
+    source_refs:
+    - S13:comedy
+  cultivation:
+    visual_register: Progression fantasy manga/manhwa, martial arts or qi visual grammar
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, cultivation martial arts manga panel, progression
+      fantasy register, training or breakthrough beat
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, western D&D cover, photorealistic, office drama
+    composition_rules: training montage panels; energy effects stylized not CGI
+    color_policy: monochrome_or_manhwa_color
+    anti_blob_rules:
+    - forbid western fantasy armor default attractor
+    source_refs:
+    - S13:cultivation
+  dark_fantasy:
+    visual_register: B&W seinen crosshatch, Berserk/Miura ink weight, dense atmospheric shadows
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, monochrome seinen manga, dense crosshatching,
+      heavy black fill, armored figure, dramatic chiaroscuro ink, no screentone wash
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, full color, oil painting, western comic, fantasy book cover, soft lighting, gradient
+      background
+    composition_rules: medium close-up or upper body; negative space load-bearing; no color register
+    color_policy: monochrome_ink_crosshatch_only
+    anti_blob_rules:
+    - require visible line art edges
+    - switch to Animagine if Qwen produces grey stipple
+    - no watercolor in positive
+    source_refs:
+    - S13:dark_fantasy
+    - S16:dark_fantasy.md
+    - S12:autopsy_1
+  essay:
+    visual_register: Reflective josei memoir caption density, sparse action
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, reflective essay manga panel, introspective
+      mood, sparse action, symbolic object optional
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, action battle, mecha, shoujo sparkle
+    composition_rules: caption-forward layouts; symbolic still life permitted
+    color_policy: monochrome_memoir
+    anti_blob_rules:
+    - object still-life must still have ink line definition
+    source_refs:
+    - S16:josei_adult_memoir.md
+    - S16:graphic_novel_us_literary.md
+  family:
+    visual_register: Domestic warmth, multi-generational cues, kodomomuke-adjacent only when brand demands
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, family manga panel, domestic warmth, intergenerational
+      scene, gentle expression
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, horror, office noir, mecha
+    composition_rules: group mid-shots; safe warm resolution per chapter for kodomomuke sublane
+    color_policy: monochrome_or_soft_color
+    anti_blob_rules:
+    - age-appropriate proportions per sublane
+    source_refs:
+    - S16:kodomomuke_educational.md
+  fantasy_adventure:
+    visual_register: Adventure manga B&W or muted color, NOT children's book illustration
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, fantasy adventure manga panel, clean ink
+      line, adventurer in environment, seinen or shonen register as specified
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, children's book illustration, kawaii, pixie, western fantasy cover, dragon rider splash
+      art unless subgenre demands
+    composition_rules: environment + figure balanced; subgenre overlay must not conflict with character role nouns
+    color_policy: monochrome_default; color for webtoon/manhwa lanes
+    anti_blob_rules:
+    - 'split subgenre overlays per drift autopsy #2'
+    - en_US must not use American setting token
+    source_refs:
+    - S12:autopsy_8
+    - S16:isekai.md
+  food:
+    visual_register: Food still-life warmth, color-forward when lane is color
+    preferred_model: qwen_image
+    fallback_model: flux_schnell
+    prompt_mode: natural_language
+    positive_scaffold: manga panel featuring detailed food still life, warm lighting, appetizing composition, clean line art
+      on dishes
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, horror, dread shadows
+    composition_rules: insert or still-life framing; hands optional
+    color_policy: color_warm_food_glam; FLUX fallback for color env only
+    anti_blob_rules:
+    - FLUX only for color plates not character cutouts
+    source_refs:
+    - S13:food
+  graphic_medicine:
+    visual_register: Therapeutic essay visual, moderate clean line, body-awareness
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, graphic medicine manga panel, therapeutic
+      tone, body-awareness metaphor, clean moderate line
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, horror gore, shoujo sparkle, mecha
+    composition_rules: metaphor panels alternate with grounded realism
+    color_policy: monochrome_therapeutic
+    anti_blob_rules:
+    - metaphors must remain line-readable
+    source_refs:
+    - S13:graphic_medicine
+  healing:
+    visual_register: Iyashikei sparse ink, 40-60% white space, soft earth palette, Ashinano/Amano register
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, serene iyashikei manga page, sparse pen-and-ink,
+      soft pastel wash, calm everyday scene, gentle expression, ample white space
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, speed lines, motion blur, impact frame, chiaroscuro, screaming, dramatic lighting
+    composition_rules: 60% medium shot, 25% wide establishing, 15% close-up; regular 4-6 panel grid; forbidden speed lines
+    color_policy: warm_earth_plus_cool_dawn, saturation 30-50%, gansai watercolor layered
+    anti_blob_rules:
+    - reject if black-fill > 15%
+    - forbid action lines in healing stillness beats
+    - no gradient sky wash without line anchors
+    source_refs:
+    - S13:healing
+    - S16:iyashikei_minimalism.md
+  historical:
+    visual_register: Period ink, Vagabond/Vinland/Bride's Story gravitas
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, historical period manga panel, period-accurate
+      costume, Vagabond ink weight, grounded environment
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, modern office, sci-fi neon, mecha
+    composition_rules: period props verified; wide establishing for era
+    color_policy: monochrome_historical
+    anti_blob_rules:
+    - crosshatch for fabric not stipple noise
+    source_refs:
+    - S16:historical_period.md
+  horror:
+    visual_register: Horror manga register distinct from iyashikei; dread not healing
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, horror manga panel, unsettling atmosphere,
+      dense ink, no healing resolution
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, iyashikei, soft pastel, warm healing light
+    composition_rules: withhold resolution; negative space as threat
+    color_policy: monochrome_horror
+    anti_blob_rules:
+    - alias psychological_horror pole when intensity high
+    source_refs:
+    - S13:horror
+    - S16:psychological_horror.md
+  mecha:
+    visual_register: Monochrome mechanical line, cockpit scale contrast, Evangelion/Gundam/Patlabor register
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, seinen mecha manga panel, monochrome ink
+      and screentone, pilot in cockpit or threshold, dense mechanical line on armor plates, low angle for scale, panel border
+      visible
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, soft iyashikei atmosphere, watercolor wash, gradient sky, western concept art, painterly,
+      key visual, photorealistic mech render
+    composition_rules: scale_marker required; cockpit interior >=25% of battle sequence; tiny human vs large mecha for scale
+      panels; bold mechanical line on mech, lighter on face
+    color_policy: monochrome_screentone; minimal color except HUD inserts
+    anti_blob_rules:
+    - MANDATORY ink line art + screentone in register block
+    - reject stipple-noise humanoid blobs
+    - silhouette distant mecha when blending iyashikei
+    - never FLUX-schnell for L2 character cutouts
+    source_refs:
+    - S13:mecha
+    - S16:mecha.md
+    - S14:mecha_plus_iyashikei
+    - blob_failure_anchor
+  memoir:
+    visual_register: Diaristic josei, caption-forward, Nagata Kabi-adjacent
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, memoir manga panel, diaristic introspection,
+      adult protagonist, sparse background, emotional honesty
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, shoujo sparkle, action battle, mecha
+    composition_rules: caption boxes post-composite; confessional close-ups
+    color_policy: monochrome_memoir
+    anti_blob_rules:
+    - face readability over stylistic noise
+    source_refs:
+    - S16:josei_adult_memoir.md
+  mystery:
+    visual_register: Noir ink, shadow pools, restrained expression, Monster/Death Note adjacency
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, mystery thriller manga panel, noir ink shadows,
+      investigative beat, restrained face
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, iyashikei soft light, comedy exaggeration, mecha
+    composition_rules: shadow-forward framing; information layered in environment
+    color_policy: monochrome_noir
+    anti_blob_rules:
+    - maintain readable facial features under shadow
+    source_refs:
+    - S16:psychological_thriller.md
+    - S16:supernatural_mystery.md
+  procedural:
+    visual_register: Documentary institutional line, case-file readability
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, procedural manga panel, institutional setting,
+      documentary line weight, evidence or case beat
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, fantasy magic, mecha, horror excess
+    composition_rules: insert objects for evidence; square narration boxes post-composite
+    color_policy: monochrome_procedural
+    anti_blob_rules:
+    - readable props and documents via composition not in-image text
+    source_refs:
+    - S13:procedural
+  psychological_horror:
+    visual_register: Gekiga dense ink, Junji Ito/Maruo poles, high contrast dread
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, monochrome horror manga panel, dense crosshatch,
+      screentone dread, escalating linework, high contrast black ink
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, iyashikei, soft pastel, sparkle, bloom, healing, shoujo, sunny, low contrast
+    composition_rules: extreme close-up permitted; aspect-to-aspect for dread; no healing white space
+    color_policy: monochrome_gekiga
+    anti_blob_rules:
+    - explicit NOT iyashikei in negative
+    - forbid soft lighting tokens
+    - reject pastel wash blobs
+    source_refs:
+    - S13:psychological_horror
+    - S16:psychological_horror.md
+  romance:
+    visual_register: Josei realistic proportions, relationship proximity, NOT shojo sparkle
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, josei manga panel, adult realistic proportions,
+      restrained emotional expression, urban or domestic setting, clean linework
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, shoujo, sparkle, glitter, big eyes, star eyes, blush stickers, flower background,
+      frilly, kawaii, pastel pink
+    composition_rules: mid-shot proximity framing; delay-engine beat spacing; ornamental mood optional not moe
+    color_policy: monochrome_or_muted_josei; webtoon color only when format=webtoon
+    anti_blob_rules:
+    - stack anti-shojo negatives
+    - Okazaki/Asano prose anchors for Qwen
+    source_refs:
+    - S13:romance
+    - S16:shojo_romance.md
+  school:
+    visual_register: Youth realism, uniform specificity, coming-of-age register
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, school youth manga panel, uniform details,
+      classroom or campus setting, coming-of-age beat
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, office worker adult, mecha, horror
+    composition_rules: ensemble mid-shots; club activity props
+    color_policy: monochrome_school
+    anti_blob_rules:
+    - age-appropriate faces mandatory
+    source_refs:
+    - S16:school_coming_of_age.md
+  sci_fi_cyberpunk:
+    visual_register: Akira/GiTS mechanical ink, system-noir not mecha-pilot focus
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, sci-fi cyberpunk manga panel, dense urban
+      mechanical detail, neon optional, ink-defined tech
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, pastoral iyashikei, medieval fantasy, giant mecha cockpit focus
+    composition_rules: information density in environment; body-machine boundary theme
+    color_policy: monochrome_with_select_neon
+    anti_blob_rules:
+    - mechanical edges must be line-defined not airbrush blobs
+    source_refs:
+    - S16:sci_fi_cyberpunk.md
+  slice_of_life:
+    visual_register: Domestic mid-shot, clean line, daily-life register, Azuma/Yotsuba-adjacent
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, slice of life manga panel, gentle line art,
+      domestic scene, natural proportions, calm composition
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, moe, big eyes, fanservice, action lines, dramatic shading
+    composition_rules: mid-shot default; low action intensity; everyday objects grounded
+    color_policy: monochrome_or_soft_color
+    anti_blob_rules:
+    - forbid moe attractor tokens
+    - natural proportions mandatory
+    source_refs:
+    - S13:slice_of_life
+    - S16:BL_slice_of_life.md
+  social_issue:
+    visual_register: Grounded josei realism, social topic gravity
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, social issue josei manga panel, grounded
+      realism, contemporary setting, emotional truth
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, fantasy magic, mecha, comedy exaggeration
+    composition_rules: documentary framing; avoid sensationalism
+    color_policy: monochrome_realist
+    anti_blob_rules:
+    - no fantasy register attractors
+    source_refs:
+    - S13:social_issue
+  sports:
+    visual_register: Slam Dunk/Haikyuu kinetic realism, sweat and motion
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: hybrid
+    positive_scaffold: manga panel, sequential art register, clear ink line art, sports manga panel, athletic action, dynamic
+      foreshortening, gym or field setting
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, static portrait, fantasy, mecha
+    composition_rules: motion lines allowed; SFX composited post-render
+    color_policy: monochrome_sports
+    anti_blob_rules:
+    - anatomical clarity required in limbs
+    source_refs:
+    - S16:sports_competition.md
+  supernatural_everyday:
+    visual_register: Mushishi quiet supernatural, sparse atmosphere
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, supernatural everyday manga panel, quiet
+      atmosphere, subtle spirit presence, Mushishi register, sparse ink
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, battle action, mecha, horror gore excess
+    composition_rules: aspect-to-aspect transitions; wonder without threat spike
+    color_policy: monochrome_atmospheric
+    anti_blob_rules:
+    - maintain large quiet negative space
+    source_refs:
+    - S16:supernatural_mystery.md
+  workplace:
+    visual_register: Office realism, Aggretsuko/Wotakoi grounded register
+    preferred_model: qwen_image
+    fallback_model: animagine_xl_4_0
+    prompt_mode: natural_language
+    positive_scaffold: manga panel, sequential art register, clear ink line art, workplace manga panel, office or professional
+      setting, grounded realism, restrained expression
+    negative_scaffold: photorealistic, 3d render, cgi, concept art, key visual, stipple noise, grey wash blob, blurry, watermark,
+      text, typography, speech bubbles, fantasy glow, mecha, horror dread
+    composition_rules: medium shot in institutional space; props grounded
+    color_policy: monochrome_josei_seinen
+    anti_blob_rules:
+    - no fantasy register bleed
+    source_refs:
+    - S16:workplace_drama.md

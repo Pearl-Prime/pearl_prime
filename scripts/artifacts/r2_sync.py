@@ -17,6 +17,16 @@ Usage:
     # Pull artifacts referenced by a manifest into local cache
     r2_sync.py pull --manifest artifacts/manifests/manga_rendered_books/series_xyz/ep_001.yaml
 
+    # LFS offload: upload + TSV manifest (forward-only binary exit from git)
+    r2_sync.py push-offload \\
+        --slug stillness_press_alarm_composed_v4_ep_001 \\
+        --namespace manga_rendered_books \\
+        --src artifacts/manga/.../composed_v4_qwen/ep_001/ \\
+        --repo-path-prefix artifacts/manga/.../composed_v4_qwen/ep_001
+
+    # Restore offloaded binaries to original repo paths (pull-on-demand)
+    r2_sync.py pull-on-demand --slug stillness_press_alarm_composed_v4_ep_001
+
     # Verify a manifest matches what's actually in R2
     r2_sync.py verify --manifest artifacts/manifests/.../ep_001.yaml
 
@@ -48,6 +58,7 @@ REPO = Path(__file__).resolve().parents[2]
 CONFIG = REPO / "config" / "artifacts" / "r2_buckets.yaml"
 SCHEMA = REPO / "schemas" / "artifacts" / "manifest.schema.json"
 LOCAL_CACHE_DIR = REPO / "artifacts" / "r2_cache"
+OFFLOAD_MANIFEST_DIR = REPO / "artifacts" / "manifests" / "lfs_offload"
 
 
 # ─── Errors ─────────────────────────────────────────────────────────────────
@@ -347,6 +358,158 @@ def cmd_verify(args: argparse.Namespace) -> int:
     return 0
 
 
+def _produced_by_label() -> str:
+    raw = os.environ.get("PHOENIX_OMEGA_REMOTE", "unknown")
+    if raw in ("pearl-star", "codespaces", "github-actions", "cloudflare", "operator"):
+        return raw
+    if raw in ("local-override", "unknown"):
+        return "operator"
+    return "operator"
+
+
+def cmd_push_offload(args: argparse.Namespace) -> int:
+    """Upload a src tree and write a TSV offload manifest (LFS_TO_R2_OFFLOAD_V1_SPEC)."""
+    from scripts.artifacts.lfs_offload_manifest import (  # noqa: WPS433
+        OffloadEntry,
+        write_manifest_tsv,
+    )
+
+    cfg = _load_config()
+    ns_cfg = _resolve_namespace(cfg, args.namespace)
+    bucket = _bucket_name(cfg)
+    prefix = ns_cfg["prefix"].rstrip("/")
+
+    src = Path(args.src).resolve()
+    if not src.exists() or not src.is_dir():
+        raise R2SyncError(f"--src must be an existing directory: {src}")
+
+    repo_prefix = Path(args.repo_path_prefix).as_posix().rstrip("/")
+    key_parts = [prefix]
+    for opt in (args.series_id, args.book_id):
+        if opt:
+            key_parts.append(opt)
+    key_prefix = "/".join(key_parts) + "/"
+
+    include_exts = {e.strip().lower() for e in (args.include_exts or ".png,.jpg,.jpeg,.webp").split(",")}
+
+    files = sorted(
+        p for p in src.rglob("*")
+        if p.is_file() and p.suffix.lower() in include_exts
+    )
+    if not files:
+        raise R2SyncError(f"no files found under {src}")
+
+    client = _r2_client()
+    entries: list[OffloadEntry] = []
+    yaml_artifacts: list[dict[str, Any]] = []
+    total_bytes = 0
+
+    for f in files:
+        rel = f.relative_to(src)
+        rel_posix = str(rel).replace(os.sep, "/")
+        repo_path = f"{repo_prefix}/{rel_posix}"
+        key = key_prefix + rel_posix
+        sha = _sha256_file(f)
+        size = f.stat().st_size
+        ctype = _content_type(f)
+
+        if args.dry_run:
+            print(f"would upload {repo_path}  →  s3://{bucket}/{key}  ({size:,} B)")
+        else:
+            print(f"upload {rel_posix}  ({size:,} B)")
+            with f.open("rb") as fh:
+                client.put_object(
+                    Bucket=bucket,
+                    Key=key,
+                    Body=fh,
+                    ContentType=ctype,
+                    Metadata={"sha256": sha},
+                )
+
+        entries.append(OffloadEntry(repo_path, key, size, sha))
+        yaml_artifacts.append({"key": key, "sha256": sha, "bytes": size, "content_type": ctype})
+        total_bytes += size
+
+    tsv_path = OFFLOAD_MANIFEST_DIR / f"{args.slug}.tsv"
+    if not args.dry_run:
+        write_manifest_tsv(
+            tsv_path,
+            slug=args.slug,
+            namespace=args.namespace,
+            bucket=bucket,
+            entries=entries,
+        )
+
+    if args.write_yaml:
+        manifest_id = key_prefix.rstrip("/")
+        yaml_manifest = {
+            "manifest_schema": "1.0.0",
+            "manifest_id": manifest_id,
+            "namespace": args.namespace,
+            "bucket": bucket,
+            "produced_by": _produced_by_label(),
+            "produced_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "artifacts": yaml_artifacts,
+            "total_bytes": total_bytes,
+            "total_artifacts": len(yaml_artifacts),
+        }
+        if args.series_id:
+            yaml_manifest["series_id"] = args.series_id
+        if args.book_id:
+            yaml_manifest["book_id"] = args.book_id
+        yaml_path = REPO / "artifacts" / "manifests" / args.namespace / f"{args.slug}.yaml"
+        if not args.dry_run:
+            _write_manifest(yaml_path, yaml_manifest)
+
+    print(f"\n✓ push-offload {len(entries)} artifacts ({total_bytes:,} B)")
+    if not args.dry_run:
+        print(f"✓ TSV manifest: {tsv_path.relative_to(REPO)}")
+    return 0
+
+
+def cmd_pull_on_demand(args: argparse.Namespace) -> int:
+    """Restore offloaded binaries to original repo_path locations."""
+    from scripts.artifacts.lfs_offload_manifest import load_manifest_tsv  # noqa: WPS433
+
+    if args.manifest:
+        mf_path = Path(args.manifest).resolve()
+    elif args.slug:
+        mf_path = OFFLOAD_MANIFEST_DIR / f"{args.slug}.tsv"
+    else:
+        raise R2SyncError("provide --slug or --manifest")
+
+    if not mf_path.exists():
+        raise R2SyncError(f"offload manifest not found: {mf_path}")
+
+    manifest = load_manifest_tsv(mf_path)
+    bucket = manifest.bucket or _bucket_name(_load_config())
+    client = _r2_client()
+    pulled = skipped = 0
+
+    for entry in manifest.entries:
+        dest = REPO / entry.repo_path
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if dest.exists() and _sha256_file(dest) == entry.sha256:
+            skipped += 1
+            continue
+        if args.dry_run:
+            print(f"would download s3://{bucket}/{entry.r2_key}  →  {entry.repo_path}")
+            pulled += 1
+            continue
+        print(f"download {entry.r2_key}  →  {entry.repo_path}")
+        client.download_file(bucket, entry.r2_key, str(dest))
+        actual = _sha256_file(dest)
+        if actual != entry.sha256:
+            dest.unlink(missing_ok=True)
+            raise R2SyncError(
+                f"sha256 mismatch on {entry.repo_path}: expected {entry.sha256}, got {actual}"
+            )
+        pulled += 1
+
+    print(f"\n✓ pull-on-demand {pulled} restored, {skipped} already present")
+    return 0
+
+
 def cmd_ls(args: argparse.Namespace) -> int:
     cfg = _load_config()
     ns_cfg = _resolve_namespace(cfg, args.namespace)
@@ -407,6 +570,26 @@ def _main() -> int:
     sp.add_argument("--manifest", required=True)
     sp.add_argument("--dry-run", action="store_true")
     sp.set_defaults(fn=cmd_pull)
+
+    sp = sub.add_parser("push-offload", help="upload tree + write TSV offload manifest")
+    sp.add_argument("--slug", required=True, help="stable manifest slug")
+    sp.add_argument("--namespace", required=True)
+    sp.add_argument("--src", required=True)
+    sp.add_argument("--repo-path-prefix", required=True,
+                    help="repo-relative prefix for manifest repo_path column")
+    sp.add_argument("--series-id")
+    sp.add_argument("--book-id")
+    sp.add_argument("--include-exts", default=".png,.jpg,.jpeg,.webp",
+                    help="comma-separated extensions to upload (default: images only)")
+    sp.add_argument("--write-yaml", action="store_true", help="also write YAML manifest")
+    sp.add_argument("--dry-run", action="store_true")
+    sp.set_defaults(fn=cmd_push_offload)
+
+    sp = sub.add_parser("pull-on-demand", help="restore offloaded files to repo paths")
+    sp.add_argument("--slug", help="offload manifest slug")
+    sp.add_argument("--manifest", help="explicit TSV manifest path")
+    sp.add_argument("--dry-run", action="store_true")
+    sp.set_defaults(fn=cmd_pull_on_demand)
 
     sp = sub.add_parser("verify", help="check manifest against actual R2 state")
     sp.add_argument("--manifest", required=True)

@@ -3,7 +3,7 @@
 Per-locale (persona, topic, engine) coverage.
 Authority: PEARL_PRIME_100_PERCENT_DEV_PLAN §5.
 
-Also reports atom coverage for CJK6: English sources under
+Also reports atom coverage for CJK6 and the European/pt-BR bucket: English sources under
 atoms/{persona}/{topic}/{SLOT_OR_ENGINE}/CANONICAL.txt
 (slots: PIVOT, TAKEAWAY, THREAD, PERMISSION, STORY;
  engines: comparison, false_alarm, grief, overwhelm, shame, spiral, watcher)
@@ -18,7 +18,19 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+
+def _native_check_summary(repo_root: Path) -> dict:
+    from scripts.ci.check_native_check import coverage_payload, scan_native_check
+
+    audit = scan_native_check(repo_root, bootstrap_mode=True, production_only=False)
+    return coverage_payload(audit, bootstrap_mode=True, production_only=False)
+
+
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
+# Non-CJK locale bucket — mirrors scripts/localization/run_translation_loop.py's
+# EUROPEAN_LOCALES tuple (pt-BR added 2026-07-11, cap amendment Q-MANGA-01 /
+# OPD-20260704-005, ratified in config/localization/locale_registry.yaml).
+EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU", "pt-BR")
 BESTSELLER_SLOTS = ("PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "STORY")
 ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spiral", "watcher")
 ALL_ATOM_TYPES = BESTSELLER_SLOTS + ENGINE_DIRS
@@ -43,14 +55,10 @@ def _bestseller_english_sources(atoms_root: Path) -> list[Path]:
     return sorted(out)
 
 
-def _bestseller_translated_count(
-    sources: list[Path], atoms_root: Path, locale: str
-) -> int:
+def _bestseller_translated_count(sources: list[Path], locale: str) -> int:
     n = 0
     for src in sources:
-        rel = src.relative_to(atoms_root)
-        persona, topic, slot = rel.parts[0], rel.parts[1], rel.parts[2]
-        tpath = atoms_root / persona / topic / slot / "locales" / locale / "CANONICAL.txt"
+        tpath = src.parent / "locales" / locale / "CANONICAL.txt"
         if tpath.is_file():
             n += 1
     return n
@@ -77,18 +85,33 @@ def main() -> int:
     locales = (args.locales or "en-US").split(",")
     report: dict = {"locales": locales, "by_locale": {}}
 
+    try:
+        report["native_check"] = _native_check_summary(REPO_ROOT)
+    except Exception as exc:
+        report["native_check"] = {"error": str(exc)}
+
     atoms_en = REPO_ROOT / "atoms"
     bestseller_sources = _bestseller_english_sources(atoms_en)
     report["bestseller"] = {
         "slots": list(BESTSELLER_SLOTS),
         "cjk_locales": list(CJK6_LOCALES),
+        "european_locales": list(EUROPEAN_LOCALES),
         "english_source_files": len(bestseller_sources),
         "by_cjk_locale": {},
+        "by_european_locale": {},
     }
     for loc in CJK6_LOCALES:
-        present = _bestseller_translated_count(bestseller_sources, atoms_en, loc)
+        present = _bestseller_translated_count(bestseller_sources, loc)
         expected = len(bestseller_sources)
         report["bestseller"]["by_cjk_locale"][loc] = {
+            "translated_files": present,
+            "expected_files": expected,
+            "coverage_ratio": (present / expected) if expected else 0.0,
+        }
+    for loc in EUROPEAN_LOCALES:
+        present = _bestseller_translated_count(bestseller_sources, loc)
+        expected = len(bestseller_sources)
+        report["bestseller"]["by_european_locale"][loc] = {
             "translated_files": present,
             "expected_files": expected,
             "coverage_ratio": (present / expected) if expected else 0.0,
@@ -118,19 +141,38 @@ def main() -> int:
 
     for loc, data in report["by_locale"].items():
         print(f"  {loc}: {data['persona_topic_count']} CANONICAL.txt")
+    nc = report.get("native_check") or {}
+    if nc and "error" not in nc:
+        print(
+            f"\nNative check: y={nc.get('native_y', 0)} n={nc.get('native_n', 0)} "
+            f"missing={nc.get('missing', 0)} "
+            f"annotated={nc.get('annotated_ratio', 0):.1%} "
+            f"production_y={nc.get('native_y_ratio', 0):.1%}"
+        )
     bs = report["bestseller"]
     print(
-        f"\nAll atoms ({len(ALL_ATOM_TYPES)} types, CJK6): {bs['english_source_files']} English source files"
+        f"\nAll atoms ({len(ALL_ATOM_TYPES)} types, CJK6 + European/pt-BR): "
+        f"{bs['english_source_files']} English source files"
     )
     filter_locs: set[str] | None = None
     if args.locales:
         filter_locs = {x.strip() for x in args.locales.split(",") if x.strip()}
+    print("  CJK6:")
     for loc, row in bs["by_cjk_locale"].items():
         if filter_locs is not None and loc not in filter_locs:
             continue
         rem = int(row["expected_files"]) - int(row["translated_files"])
         print(
-            f"  {loc}: {row['translated_files']}/{row['expected_files']} "
+            f"    {loc}: {row['translated_files']}/{row['expected_files']} "
+            f"({row['coverage_ratio']:.1%})  remaining={rem}"
+        )
+    print("  European/pt-BR:")
+    for loc, row in bs["by_european_locale"].items():
+        if filter_locs is not None and loc not in filter_locs:
+            continue
+        rem = int(row["expected_files"]) - int(row["translated_files"])
+        print(
+            f"    {loc}: {row['translated_files']}/{row['expected_files']} "
             f"({row['coverage_ratio']:.1%})  remaining={rem}"
         )
     return 0

@@ -198,11 +198,11 @@ arcs:
     jobs:
       - chapter_index: 0
         emotional_job: recognition
-        reader_promise: "Name the pain with care; no exercises yet."
+        reader_promise: "Name the pain with care; allow one brief embodied anchor after recognition lands."
         forbidden_repeats: []
-        required_escalation: "Trust and orientation."
-        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
-        max_exercises: 0
+        required_escalation: "Trust and orientation first; one short practice may follow the reflection seam."
+        allowed_slot_types: ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE"]
+        max_exercises: 1
       - chapter_index: 1
         emotional_job: mechanism
         reader_promise: "Explain the loop with concrete markers."

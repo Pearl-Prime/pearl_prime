@@ -1,6 +1,7 @@
 # Cloudflare Pages — Canonical Deploy Path (READ BEFORE attempting local deploy)
 
 **Last verified:** 2026-06-03
+**Account authority note refreshed:** 2026-07-13
 **Owner:** Pearl_Int + Pearl_GitHub
 **Authority:** `.github/workflows/brand-admin-onboarding-pages.yml` + PR #1412 forensic
 
@@ -13,6 +14,12 @@ deploys via **GitHub Actions**, not via local `wrangler pages deploy`. Any
 local deploy attempt will fail with one of three confusing errors depending
 on which account/token combo you try. **The canonical path is: PR → merge to
 main → workflow auto-fires → fix live in ~2-3 min on CDN.**
+
+For account authority, use the Cloudflare account that matches the repo's
+current `CLOUDFLARE_ACCOUNT_ID` secret. For the current Pages lane that is
+`b80152c319f941e6e92f928e2617a3d5`, not the operator OAuth account
+`626d6eb8162a8121f74e59235d82a4f5`, and not the older fallback
+`0fe2f0679b00fb8a5c3ce830f4144c98`.
 
 ---
 
@@ -49,6 +56,7 @@ There are four traps that have wasted hours of agent time. All four hit in succe
 - Your `ahjansamvara@gmail.com` Cloudflare login → account ID `626d6eb8162a8121f74e59235d82a4f5`. **This account has zero Pages projects.** Confirmed via `wrangler pages project list` returning empty.
 - Phoenix Omega's Pages projects (`brand-admin-onboarding`, `phoenix-command`, etc.) live in account ID `b80152c319f941e6e92f928e2617a3d5`. **This account is NOT in your OAuth scope from `ahjansamvara@gmail.com`.** Likely owned by a different email or pre-migration login.
 - The GitHub repo secret `CLOUDFLARE_API_TOKEN` is scoped to the `b80152c3...` account — that token is what makes the workflow work. There is no copy of that token in your local Keychain.
+- Older worker/dashboard evidence may cite `0fe2f0679b00fb8a5c3ce830f4144c98`. Treat that as historical or lane-specific fallback evidence unless a currently active workflow proves otherwise.
 
 ### Trap 4 — Cloudflare API token prefixes are misleading
 
@@ -137,4 +145,5 @@ Track via a Pearl_Dev ws: `ws_wrangler_toml_project_name_realign_<date>`.
 - `docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md` — Workers AI token (different scope: AI, not Pages)
 - `.github/workflows/brand-admin-onboarding-pages.yml` — the canonical deploy workflow
 - `scripts/ci/integration_env_registry.py` lines 45-50 — registry rows for Cloudflare vars (some outdated re cfut_ prefix; see Trap 4)
+- `skills/pearl-int/references/cloudflare_surface_map.md` — account-authority and keep/retire map
 - Memory anchor in `~/.claude/projects/-Users-ahjan-phoenix-omega/memory/project_known_good_anchors.md`: "Cloudflare Pages deploy = CI-only path"

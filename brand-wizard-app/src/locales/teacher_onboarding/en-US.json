@@ -1,0 +1,161 @@
+{
+  "gate": {
+    "eyebrow": "Pearl Prime",
+    "heading": "Choose your language",
+    "subheading": "Select a market flag to open teacher onboarding in that language. You can still set the language you teach in separately inside the form."
+  },
+  "chrome": {
+    "brand_kicker": "Pearl Prime",
+    "brand_title": "Teacher Onboarding",
+    "brand_blurb": "Submit the material Pearl_Int needs to turn a real teacher into a reviewed teacher-mode source.",
+    "functional_label": "Functional teacher bank",
+    "scale_label": "1000-book scale depth",
+    "activation_truth_kicker": "Activation truth",
+    "activation_truth_body": "Activate submits intake. Official teacher status still requires source normalization, atom mining, human review, and teacher production gates.",
+    "draft_kicker": "Draft portal",
+    "draft_blurb": "Save anytime. You get a private link to come back and add more material — no login.",
+    "save_draft": "Save draft",
+    "rotate_token": "Rotate token",
+    "delete_draft": "Delete draft",
+    "operator_queue": "Operator queue →",
+    "change_language": "Change display language",
+    "nav_aria": "Teacher onboarding sections",
+    "nav_identity": "Identity",
+    "nav_rights": "Rights",
+    "nav_teachings": "Doctrine",
+    "nav_stories": "Stories",
+    "nav_practices": "Practices",
+    "nav_voice": "Language",
+    "nav_activate": "Activate",
+    "minimum_suffix": "minimum",
+    "preferred_suffix": "preferred",
+    "recommended": "recommended"
+  },
+  "header": {
+    "kicker": "Teacher mode intake",
+    "title": "Build the source packet before the system writes in a teacher's voice.",
+    "teacher_id_label": "Teacher ID:"
+  },
+  "identity": {
+    "kicker": "1 / Identity",
+    "heading": "Who is the teacher?",
+    "teacher_name": "Teacher name",
+    "teacher_id": "Teacher ID / slug",
+    "tradition": "Tradition, lineage, or domain",
+    "language_label": "Language you teach / write in",
+    "language_hint": "Source language for this teacher (may differ from the page display language). 14 repo locales.",
+    "contact_name": "Contact name",
+    "contact_email": "Contact email",
+    "website": "Website or public profile",
+    "bio_label": "Teacher bio",
+    "bio_hint": "Paste text, link a URL, and/or upload a bio file — any combination works.",
+    "bio_placeholder": "What should Pearl_Int know about this teacher's work, background, audience, and voice?",
+    "name_placeholder": "Master Wu",
+    "id_placeholder": "master_wu",
+    "tradition_placeholder": "Chan, contemplative psychology, somatic coaching...",
+    "contact_name_placeholder": "Operator or teacher representative",
+    "contact_email_placeholder": "teacher@example.com",
+    "website_placeholder": "https://..."
+  },
+  "rights": {
+    "kicker": "2 / Rights",
+    "heading": "What are we allowed to process?",
+    "owns_material": "I own or have permission to submit these teachings, recordings, files, and links for processing.",
+    "processing_consent": "I consent to Pearl_Int extracting candidate teacher atoms for human review before production use.",
+    "no_unauthorized": "I am not submitting unauthorized copyrighted material, and any public excerpts have rights/provenance notes.",
+    "final_consent": "I confirm this intake can be submitted for operator review and future teacher-source activation work.",
+    "public_boundaries": "Public boundaries",
+    "private_boundaries": "Private boundaries",
+    "public_placeholder": "What can be quoted, paraphrased, or used publicly?",
+    "private_placeholder": "What should never be used, named, mined, or surfaced?"
+  },
+  "teachings": {
+    "kicker": "3 / Teachings",
+    "heading": "Give us the teacher's doctrine and teaching material.",
+    "blurb": "Add as many teaching blocks as you need. Inside each block you can paste many teachings (separate with blank lines), attach a URL, and/or upload files.",
+    "add_label": "Add teaching block",
+    "placeholder": "Teaching 1…\n\nTeaching 2…\n\nTeaching 3…",
+    "hint": "Tip: one paragraph or blank-line-separated block per teaching works best."
+  },
+  "stories": {
+    "kicker": "4 / Stories",
+    "heading": "Supply real story material, not tiny examples.",
+    "blurb": "Pick a story type, then paste text, link a source URL, and/or upload. Start with three rows — add more anytime.",
+    "add_label": "Add story row",
+    "type_label": "Story type",
+    "placeholder": "What happens? Scene, pressure, friction, choice, consequence, teaching function…"
+  },
+  "practices": {
+    "kicker": "5 / Practices",
+    "heading": "Add exercises and tools with enough context to become five-layer atoms.",
+    "blurb": "Same pattern: type · text · URL · upload. Three rows to start.",
+    "add_label": "Add practice row",
+    "type_label": "Practice type",
+    "placeholder": "Steps, timing, body cues, aha, integration, contraindications, safety notes…"
+  },
+  "voice": {
+    "kicker": "6 / Language",
+    "heading": "Quotes, phrases, metaphors, and language boundaries.",
+    "blurb": "Each row is one language category. Use text, URL, and/or upload — add more rows as needed.",
+    "add_label": "Add language row",
+    "entry_type": "Entry type",
+    "source_note": "Source / permission note (optional)",
+    "source_placeholder": "Where this came from / usage permission",
+    "content_placeholder": "Paste content for this language entry…"
+  },
+  "activate": {
+    "kicker": "7 / Activate",
+    "heading": "Submit the teacher intake packet.",
+    "ready_title": "Ready to activate?",
+    "ready_body": "We'll save your draft, submit intake for review, and give you a private URL so you can come back and add more anytime.",
+    "teacher_name": "Teacher name:",
+    "contact_email": "Contact email:",
+    "processing_permission": "Processing permission:",
+    "final_consent": "Final consent:",
+    "source_material": "Source material:",
+    "missing": "missing",
+    "missing_or_invalid": "missing or invalid",
+    "ready": "ready",
+    "present": "present",
+    "depth_kicker": "Depth guidance",
+    "depth_blurb": "You can activate with less than the preferred counts — this is guidance, not a hard block.",
+    "submit": "Activate teacher intake",
+    "submit_failed": "Activation failed. Try again or save a draft first."
+  },
+  "success": {
+    "kicker": "Teacher intake",
+    "heading": "Congratulations",
+    "body_prefix": "Your teacher intake for",
+    "body_suffix": "was submitted. Official teacher status still needs Pearl_Int review — you can keep adding material anytime with your private link.",
+    "return_url_kicker": "Your private return URL",
+    "copy_link": "Copy link",
+    "copied": "Copied",
+    "no_url": "Save a draft next time so we can issue a private return link. Your intake was still recorded.",
+    "continue_editing": "Continue editing",
+    "start_another": "Start another teacher"
+  },
+  "draft": {
+    "resuming": "Resuming draft…",
+    "saving": "Saving draft…",
+    "saved": "Draft saved. Keep your private resume link.",
+    "deleting": "Deleting draft…",
+    "deleted": "Draft deleted.",
+    "delete_confirm": "Delete this draft? Submissions are never deleted from this action.",
+    "delete_failed": "Delete failed"
+  },
+  "validation": {
+    "teacher_name_required": "Teacher name is required.",
+    "contact_email_required": "Contact email is required.",
+    "contact_email_invalid": "Contact email must be valid.",
+    "owns_required": "Own-voice or permission attestation is required.",
+    "processing_required": "Permission to process material into candidate atoms is required.",
+    "consent_required": "Final consent checkbox is required.",
+    "material_required": "Add at least one teaching, story, practice, language row, or bio (text, URL, or upload)."
+  },
+  "common": {
+    "upload": "Upload",
+    "url_placeholder": "https://… (optional URL)",
+    "paste_placeholder": "Paste or type content…",
+    "add_row": "Add row"
+  }
+}

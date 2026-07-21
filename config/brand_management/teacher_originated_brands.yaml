@@ -1,0 +1,507 @@
+schema_version: '1.0'
+source: teacher_originated
+description: 'Additive registry for teacher-owned (named) and hybrid (generalized)
+  brands. Never mutates config/brand_management/global_brand_registry_unified.yaml
+  (40×14). Q-BRAND-GEN-01 default.
+
+  '
+total_brands: 5
+brands:
+  to_master_feung_en_us:
+    brand_id: to_master_feung_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: Master Feung's Brushstroke Library
+    publication_corp: Master Feung's Brushstroke Library
+    source: teacher_originated
+    origin_teacher_id: master_feung
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · master_feung
+    brand_focus: Doctrine-led catalog for master feung
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'When painting tightens, remember: When I teach calligraphy,
+        I ask my students to look at the full scroll before they
+
+        look at any single character. The eye wants to go immediately to the detail
+        — to judge
+
+        this strok'
+      functional_job: Daily stroke drills drawn from master feung's teaching voice
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: elder_stabilizer
+      authority_type: seasoned_practitioner
+      trust_anchor_style: elder
+      teacher_doctrine_lead: 'When I teach calligraphy, I ask my students to look
+        at the full scroll before they
+
+        look at any single character. The eye wants to go immediately to the detail
+        — to judge
+
+        this strok'
+      teacher_doctrine_secondary: 'My students in Xi''an sometimes ask me why their
+        best characters emerge after long
+
+        periods of frustration. They practice for weeks without progress, and then
+        one'
+    emotional_vocabulary:
+      core:
+      - painting
+      - stroke
+      - brushstroke
+      - brush
+      bridge_phrases:
+      - money conversations make me want to vomit
+      - my body holds all my stress and i can feel it
+      - even my accomplishments feel like luck
+      doctrine_markers:
+      - painting
+      - stroke
+      - brushstroke
+      - brush
+      - grand
+      - character
+      doctrine_fingerprint:
+      - 'When I teach calligraphy, I ask my students to look at the full scroll before
+        they
+
+        look at any single character. The eye'
+      - 'My students in Xi''an sometimes ask me why their best characters emerge after
+        long
+
+        periods of frustration. They practice '
+      - 'There is a teaching I have carried from the lineage of Hua Shan, from the
+        calligraphers
+
+        who preceded me, and it is this:'
+      allowed_language:
+      - calm_certainty
+      - perspective_framing
+      forbidden_language:
+      - slang
+      - self_doubt_language
+    duration_strategy: short_form_daily_practice
+    cover_art_identity:
+      treatment: abstract_ink_wash
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+      mark_motif: painting
+    pricing_posture: mid_tier
+    mission: Carry master feung's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: pilot_20260720
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - painting
+      - stroke
+      - brushstroke
+      - brush
+      - grand
+      - character
+      - cannot
+      - become
+  to_adi_da_en_us:
+    brand_id: to_adi_da_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: Adi Da's Contraction House
+    publication_corp: Adi Da's Contraction House
+    source: teacher_originated
+    origin_teacher_id: adi_da
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · adi_da
+    brand_focus: Doctrine-led catalog for adi da
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'Let contraction replace the false urgency: The first thing Adi
+        Da points to is the one thing almost no one looks at,
+
+        because it is too close. He calls it the Bright. Not a state you enter. Not
+
+        a level you climb to. Not a re'
+      functional_job: Daily already drills drawn from adi da's teaching voice
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: somatic_companion
+      authority_type: lived_experience
+      trust_anchor_style: companion
+      teacher_doctrine_lead: 'The first thing Adi Da points to is the one thing almost
+        no one looks at,
+
+        because it is too close. He calls it the Bright. Not a state you enter. Not
+
+        a level you climb to. Not a re'
+      teacher_doctrine_secondary: 'When Adi Da names the fundamental problem, he does
+        not name a flaw in you. He
+
+        names an activity. He calls it the self-contraction. And the word activity
+
+        matters'
+    emotional_vocabulary:
+      core:
+      - contraction
+      - already
+      - itself
+      - before
+      bridge_phrases:
+      - my thoughts are a broken record i can't stop
+      - scared they're going to realize i'm not actually qualified
+      - my face gets hot and i can't hide it
+      doctrine_markers:
+      - contraction
+      - already
+      - itself
+      - before
+      - because
+      - breath
+      doctrine_fingerprint:
+      - 'The first thing Adi Da points to is the one thing almost no one looks at,
+
+        because it is too close. He calls it the Brigh'
+      - 'When Adi Da names the fundamental problem, he does not name a flaw in you.
+        He
+
+        names an activity. He calls it the self-co'
+      - 'Adi Da draws a hard line between two motions that look similar from the
+
+        outside and are opposite at the root. Seeking an'
+      allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+      forbidden_language:
+      - academic_citation
+      - diagnostic_labels
+      - command_language
+    duration_strategy: deep_companion_volumes
+    cover_art_identity:
+      treatment: warm_paper_grain
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+      mark_motif: contraction
+    pricing_posture: premium_companion
+    mission: Carry adi da's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: pilot_20260720
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - contraction
+      - already
+      - itself
+      - before
+      - because
+      - breath
+      - never
+      - calls
+  to_ahjan_en_us:
+    brand_id: to_ahjan_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: The Ahjan Library
+    publication_corp: The Ahjan Library
+    source: teacher_originated
+    origin_teacher_id: ahjan
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · ahjan
+    brand_focus: Doctrine-led catalog for ahjan
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'Let ahjan replace the false urgency: A poignant Buddhist quote
+        aligns perfectly with this theme: Hatred does not cease by hatred, but only
+        by love; this is the eternal rule. This statement from the Dhammapada undersco'
+      functional_job: Daily teaches drills drawn from ahjan's teaching voice
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: somatic_companion
+      authority_type: lived_experience
+      trust_anchor_style: companion
+      teacher_doctrine_lead: 'A poignant Buddhist quote aligns perfectly with this
+        theme: Hatred does not cease by hatred, but only by love; this is the eternal
+        rule. This statement from the Dhammapada undersco'
+      teacher_doctrine_secondary: 'In the end, only three things matter: how much
+        you loved, how gently you lived, and how gracefully you let go of things not
+        meant for you'
+    emotional_vocabulary:
+      core:
+      - ahjan
+      - teaches
+      - because
+      - breath
+      bridge_phrases:
+      - boundary breaking feels like betrayal to me
+      - coworkers dump everything on me and i let them
+      - their voice in my head and they're not here
+      doctrine_markers:
+      - ahjan
+      - teaches
+      - because
+      - breath
+      - chest
+      - quiet
+      doctrine_fingerprint:
+      - 'A poignant Buddhist quote aligns perfectly with this theme: Hatred does not
+        cease by hatred, but only by love; this is t'
+      - 'In the end, only three things matter: how much you loved, how gently you
+        lived, and how gracefully you let go of things '
+      - I want happiness, but I cannot find it anywhere.
+      allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+      forbidden_language:
+      - academic_citation
+      - diagnostic_labels
+      - command_language
+    duration_strategy: seasonal_arc_series
+    cover_art_identity:
+      treatment: minimal_geometry
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+      mark_motif: ahjan
+    pricing_posture: premium_companion
+    mission: Carry ahjan's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: pilot_20260720
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - ahjan
+      - teaches
+      - because
+      - breath
+      - chest
+      - quiet
+      - people
+      - awareness
+  to_master_wu_en_us:
+    brand_id: to_master_wu_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: The Aligned Studio
+    publication_corp: The Aligned Studio
+    source: teacher_originated
+    origin_teacher_id: master_wu
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · master_wu
+    brand_focus: Doctrine-led catalog for master wu
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'When through tightens, remember: The land is not passive. This
+        is the first thing that must be understood before any
+
+        geomantic assessment is meaningful.
+
+
+        Dragon Veins — Long Mai — are living energy currents that m'
+      functional_job: 'A somatic companion path: The geomancer reads the land the
+        way a physician reads a patient — not as a collection
+
+        of individual features, but as a system whose parts are in dynamic relati'
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: somatic_companion
+      authority_type: lived_experience
+      trust_anchor_style: companion
+      teacher_doctrine_lead: 'The land is not passive. This is the first thing that
+        must be understood before any
+
+        geomantic assessment is meaningful.
+
+
+        Dragon Veins — Long Mai — are living energy currents that m'
+      teacher_doctrine_secondary: 'The geomancer reads the land the way a physician
+        reads a patient — not as a collection
+
+        of individual features, but as a system whose parts are in dynamic relati'
+    emotional_vocabulary:
+      core:
+      - through
+      - across
+      - civilizational
+      - dragon
+      bridge_phrases:
+      - my family treats me like i still live at home
+      - catastrophizing about not sleeping
+      - how did i become this cynical about work
+      doctrine_markers:
+      - through
+      - across
+      - civilizational
+      - dragon
+      - thing
+      - aligned
+      doctrine_fingerprint:
+      - 'The land is not passive. This is the first thing that must be understood
+        before any
+
+        geomantic assessment is meaningful.
+
+        '
+      - 'The geomancer reads the land the way a physician reads a patient — not as
+        a collection
+
+        of individual features, but as a '
+      - 'One of the diagnostic signals I track across regions is the vitality distribution
+        of
+
+        young populations. This may seem li'
+      allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+      forbidden_language:
+      - academic_citation
+      - diagnostic_labels
+      - command_language
+    duration_strategy: deep_companion_volumes
+    cover_art_identity:
+      treatment: abstract_ink_wash
+      mark_motif: through
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+    pricing_posture: accessible
+    mission: Carry master wu's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: valid_ids_c
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - through
+      - across
+      - civilizational
+      - dragon
+      - thing
+      - aligned
+      - centuries
+      - assessment
+  to_miki_en_us:
+    brand_id: to_miki_en_us
+    lane_id: en_US
+    locale: en-US
+    display_name: Miki's Built Press
+    publication_corp: Miki's Built Press
+    source: teacher_originated
+    origin_teacher_id: miki
+    attribution_mode: named
+    hybrid_of_archetype: null
+    buildable: true
+    teacher_mode: true
+    tradition: Teacher-originated · miki
+    brand_focus: Doctrine-led catalog for miki
+    primary_topics:
+    - anxiety
+    - burnout
+    - self_worth
+    gtm_identity:
+      emotional_job: 'Let light replace the false urgency: You are not broken. I want
+        you to hold that sentence very gently, the way
+
+        you might hold water in your palms — not gripping, just receiving.
+
+
+        What I have found, in this work that p'
+      functional_job: Practice sequences built on light, receive, kurama
+      discovery_hook: The alarm is lying — your body can learn a quieter signal.
+      positioning_profile: elder_stabilizer
+      authority_type: seasoned_practitioner
+      trust_anchor_style: elder
+      teacher_doctrine_lead: 'You are not broken. I want you to hold that sentence
+        very gently, the way
+
+        you might hold water in your palms — not gripping, just receiving.
+
+
+        What I have found, in this work that p'
+      teacher_doctrine_secondary: 'I did not choose Kurama-yama. Kurama-yama chose
+        the lineage that I
+
+        received, long before I was born. When I first climbed that mountain as a
+
+        young woman, I did '
+    emotional_vocabulary:
+      core:
+      - light
+      - receive
+      - kurama
+      - already
+      bridge_phrases:
+      - this anxious feeling won't go away
+      - tension is what my anxiety looks like
+      - my mind won't shut up
+      doctrine_markers:
+      - light
+      - receive
+      - kurama
+      - already
+      - broken
+      - deepest
+      doctrine_fingerprint:
+      - 'You are not broken. I want you to hold that sentence very gently, the way
+
+        you might hold water in your palms — not gripp'
+      - 'I did not choose Kurama-yama. Kurama-yama chose the lineage that I
+
+        received, long before I was born. When I first climbe'
+      - 'Many traditions teach that practice requires effort — a sustained exertion
+
+        of will, a climbing. I understand why. It fee'
+      allowed_language:
+      - calm_certainty
+      - perspective_framing
+      forbidden_language:
+      - slang
+      - self_doubt_language
+    duration_strategy: short_form_daily_practice
+    cover_art_identity:
+      treatment: abstract_ink_wash
+      mark_motif: light
+      note: Reuses brand-driven cover system (render_kdp_cover / abstract_cover_art);
+        no new cover pipeline.
+    pricing_posture: mid_tier
+    mission: Carry miki's doctrine into a named brand readers can trust.
+    generation:
+      engine: phoenix_v4.brand_generation.teacher_brand_generator
+      seed: skip_ledger_c
+      deterministic: true
+      llm: false
+      doctrine_snippet_count: 24
+      themes:
+      - light
+      - receive
+      - kurama
+      - already
+      - broken
+      - deepest
+      - built
+      - forgotten

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Run the maximum viable CLI catalog for teacher-mode and/or regular mode, with:
-- real run_pipeline CLI compilation
-- Stage 6 prose render
-- EI V2 comparison artifacts per book
-- editorial scoring + rewrite recommendations after the batch
+QA batch WRAPPER — runs catalog jobs through the canonical spine production path.
 
-This is a QA-oriented runner, not a release-wave publisher.
+Each book invokes scripts/run_pipeline.py with:
+  --pipeline-mode spine --quality-profile production --exercise-journeys --render-book
+
+NOT a release-wave publisher and NOT an alternate book engine.
+Includes Stage 6 prose render, EI V2 comparison artifacts, and editorial scoring.
 """
 from __future__ import annotations
 

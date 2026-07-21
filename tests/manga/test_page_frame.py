@@ -162,6 +162,26 @@ def test_healing_render_uses_contain_keeps_whitespace():
     assert white_frac(healing) > white_frac(shonen)
 
 
+def test_double_spread_keeps_center_gutter_white():
+    right_first = _solid(900, 1200, (255, 0, 0))
+    left_second = _solid(900, 1200, (0, 0, 255))
+    page = render_framed_page(
+        [right_first, left_second],
+        page_type="double_spread",
+        genre="shonen",
+        reading_direction="rtl",
+    )
+    px = page.convert("RGB").load()
+    center_x = page.width // 2
+    white_hits = 0
+    samples = 0
+    for y in range(page.height // 4, (page.height * 3) // 4, 11):
+        samples += 1
+        if px[center_x, y] == (255, 255, 255):
+            white_hits += 1
+    assert white_hits == samples
+
+
 # ─── manifest-driven composition ───────────────────────────────────────────
 
 

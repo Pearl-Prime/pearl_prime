@@ -1,0 +1,23 @@
+runtime_format	chapter_count_default	fill_regime	duration_rule	proof_surface	tests_or_gate	content_ready	translation_ready	production_ready	gap	next_action
+micro_book_15	5	midpoint	round(midpoint/150 WPM)	none known on main	check_format_duration_contracts.py	partial (atoms)	no	no	no proof render	one-cell pilot render
+micro_book_20	6	midpoint	derived 28 min audiobook	none	check_format_duration_contracts.py	partial	no	no	no proof render	pilot after flagship path stable
+short_book_30	8	midpoint	derived 40 min	none	check_format_duration_contracts.py	partial	no	no	no proof render	pilot
+one_hour_book	8	midpoint	derived 60 min	none	check_format_duration_contracts.py	partial	no	no	no proof render	OPD-20260613-001 tier
+standard_book_60min	10	midpoint	derived 70 min	Waystream generalization cells (register-PASS)	check_format_duration_contracts.py + register_gate	yes en-US partial	no	system working (subset)	scale EPUB loop	replicate #1923
+standard_book	10	cap	derived 147 min @ 22k cap	Waystream first EPUB + 4 cells	check_format_duration_contracts.py + production gates	yes en-US partial	no	system working (5 cells)	catalog EPUB wave	5722 plans reference this id
+extended_book_2h	14	midpoint	derived 140 min	Flagship PROVEN-AT-BAR + preview pack	check_flagship_book_parity.py + duration CI	yes flagship	no	PROVEN-AT-BAR (flagship only)	catalog cells unproven at L4	hold golden; expand L4 pilot
+deep_book_4h	16	midpoint	derived 200 min	none on catalog scale	check_format_duration_contracts.py	partial	no	no	no proof	after standard wave
+deep_book_6h	20	floor	derived 347 min @ 52k floor	xfail scoped gen_z×anxiety×6h only	check_format_duration_contracts.py	partial	no	no (catalog)	retired for flagship cell	content program if commissioned
+compact_book_5ch_15min	5	midpoint	derived 25 min	none	check_format_duration_contracts.py	partial	no	no	no proof	pilot
+compact_book_5ch_20min	5	midpoint	derived 32 min	none	check_format_duration_contracts.py	partial	no	no	no proof	pilot
+compact_book_8ch_30min	8	midpoint	derived 43 min	none	check_format_duration_contracts.py	partial	no	no	no proof	pilot
+five_min_practice	5	midpoint	derived 3 min	none	check_format_duration_contracts.py + ATOM_NATIVE stub	no	no	no	no consumer proof	author atom-native content
+pocket_guide	6	midpoint	derived 34 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+ten_things_to_do	8	midpoint	derived 13 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+symptom_to_action_atlas	8	midpoint	derived 50 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+daily_text_audio_companion	10	midpoint	derived 15 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+crisis_cards	6	midpoint	derived 6 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+weekly_challenge_pack	8	midpoint	derived 15 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+faq_audiobook	8	midpoint	derived 27 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+myth_vs_mechanism	8	midpoint	derived 36 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content
+protocol_library	10	midpoint	derived 13 min	none	check_format_duration_contracts.py	no	no	no	no consumer proof	author atom-native content

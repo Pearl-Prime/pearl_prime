@@ -15,37 +15,25 @@ code requires an explicit ADR that updates this doc.
 All book generation MUST flow through:
 
 ```
-scripts/run_pipeline.py --pipeline-mode spine ...
+scripts/run_pipeline.py --pipeline-mode spine ... <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference -->
 ```
 
 Anything else (registry mode, template_expand legacy, pilot pipelines) is
 legacy and scheduled for deletion in the phased cleanup tracked by
 `artifacts/cleanup/pearl_prime_deletion_manifest_2026-04-24.md`.
 
-Pilot script `scripts/pilot/run_spine_pipeline.py` is a standalone minimal
+Pilot script `scripts/debug/run_spine_pipeline.py` is a standalone minimal
 harness and is KEPT as a reference implementation for debugging spine
 enrichment in isolation. It may NOT be used for production output.
 
-### 1.1 — Code default drift (KNOWN; pending flip)
+### 1.1 — Code default (resolved 2026-07-10)
 
-As of 2026-05-18, the `--pipeline-mode` argparse default in
-`scripts/run_pipeline.py:1604` is `"registry"`, NOT `"spine"`. This is
-the most consequential spec↔code drift in Pearl Prime today: the spec
-above says spine is mandatory; the code default is registry. Agents
-that omit `--pipeline-mode` are silently routed to the legacy path.
+`--pipeline-mode` argparse default in `scripts/run_pipeline.py` is **`spine`** <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference -->
+(COHESIVE-FLOW-PATH-DEFAULT-SPINE-01). Omitted flag → canonical path.
 
-**Until the code default flips, every Pearl_Prime CLI invocation
-MUST pass `--pipeline-mode spine` explicitly.** Confirm the flag is in
-the invocation BEFORE running. Sample audit:
-```bash
-grep -- "--pipeline-mode spine" "$YOUR_RUN_SCRIPT"
-```
-
-Routed for fix as `ws_pipeline_mode_default_flip_to_spine_20260518`
-(Pearl_Dev; small one-line change at `scripts/run_pipeline.py:1604`
-+ `:1763` + `:1951` + `:2295`; plus a regression test that asserts
-the default at module import). Scheduled before any catalog-scale
-production run.
+Legacy `--pipeline-mode registry` remains for explicit legacy QA only and is
+**blocked** for `--render-book` under `--quality-profile production|flagship`
+unless `--allow-legacy-registry` is passed.
 
 ## 2. Structural format
 
@@ -75,7 +63,20 @@ A book has four narrative phases, each covering three chapters:
 | HOPE     | 10–12            | recognition → mechanism_proof → **embodiment** (phase-final chapter) |
 
 `build_story_schedule()` selects N_PER_PHASE character journeys per phase,
-each covering all four arc positions across the SCENE slots of one chapter.
+using the SCENE/STORY anchors at sec 2 / 5 / 9 as **early / middle / late**
+story beats inside a chapter.
+
+Reader-facing assembly rule:
+- these anchors are planner positions, not permission to dump same-character
+  cold opens back-to-back
+- the assembler must preserve intervening non-story material so a chapter reads
+  as one narrative unit, not a stack of disconnected Priya-style vignettes
+
+This matches the longer-running operator doctrine in
+`artifacts/coordination/operator_decisions_log.tsv`:
+- `OPD-128` — preserve real SCENE space; do not let story routing erase it
+- `OPD-129` — chapters must be narrative units, not slot-collections; story
+  beats must not read like stitched fragments
 
 ## 4. Atom stacking
 
@@ -139,7 +140,7 @@ introduces (or amended if the shape differs).
 - Transformation arc
 - Memorable lines
 
-All seven run in `scripts/run_pipeline.py` under `--pipeline-mode spine`.
+All seven run in `scripts/run_pipeline.py` under `--pipeline-mode spine`. <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference -->
 
 ## 8. CLI contract
 
@@ -154,6 +155,7 @@ PYTHONPATH=. python3 scripts/run_pipeline.py \
   --render-book --render-dir <out_dir> \
   --out <out_dir>/plan.json \
   --quality-profile production \
+  --exercise-journeys \
   --seed <seed>
 ```
 
@@ -180,8 +182,9 @@ without a superseding ADR:
 - `phoenix_v4/planning/output_contract.py`
 - `phoenix_v4/rendering/book_renderer.py`
 - `phoenix_v4/rendering/chapter_composer.py`
-- `scripts/run_pipeline.py` (spine branch only — registry branch slated for Phase E deletion)
-- `scripts/pilot/run_spine_pipeline.py`
+- `scripts/run_pipeline.py` (spine branch — canonical; registry branch legacy) <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference -->
+- `scripts/debug/run_spine_pipeline.py` (debug harness only)
+- `scripts/publish/build_epub.py` (operator packaging entry; wraps release backend)
 - `config/format_selection/format_registry.yaml`
 - `config/source_of_truth/master_arcs/**`
 
@@ -190,12 +193,47 @@ without a superseding ADR:
 | Legacy                                     | Replacement                                        |
 |--------------------------------------------|----------------------------------------------------|
 | `template_expand/`, `template_expand2/`    | `phoenix_v4/planning/*` + `config/content_banks/`  |
-| `pipeline-mode=registry` fast path         | `pipeline-mode=spine` (will become default)        |
-| `scripts/pilot/run_legacy_template_packet_pilot.py` | `scripts/pilot/run_spine_pipeline.py`    |
+| `pipeline-mode=registry` fast path         | `pipeline-mode=spine` (default since 2026-07-10)   |
+| `scripts/pilot/run_legacy_template_packet_pilot.py` | `scripts/run_pipeline.py --pipeline-mode spine`  <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference --> |
+| `scripts/pilot/run_spine_pipeline.py`      | `scripts/debug/run_spine_pipeline.py` (debug only) |
 | `phoenix_v4/planning/legacy_template_loader.py` | (removed in Phase C or D)                      |
 | Ad-hoc freeze_settings.yaml (never landed) | `config/format_selection/format_registry.yaml`     |
 
-## 11. Cleanup status
+## 11. Script roles (operator-facing)
+
+| Path | Role |
+|------|------|
+| `scripts/run_pipeline.py --pipeline-mode spine` | **Production book build** (default mode)  <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference --> |
+| `scripts/publish/build_epub.py` | **Production packaging** (EPUB from rendered `.txt`) |
+| `scripts/release/build_epub.py` | Packaging backend (called by publish wrapper) |
+| `scripts/render_plan_to_txt.py` | QA-only plan→txt render |
+| `scripts/generate_full_catalog.py` | Catalog wrapper (routes to spine) |
+| `scripts/run_max_quality_catalog.py` | QA batch wrapper (routes to spine+production chord) |
+| `scripts/debug/run_spine_pipeline.py` | Debug spine harness (NOT production) |
+| `scripts/experimental/compose_cohesive_chapter_from_plan.py` | Experimental chapter composer (NOT production) |
+| `--pipeline-mode registry` | Legacy fast-path (blocked for production renders) |
+
+## 12. Operator quick reference (2026-07-10)
+
+Build a real book:
+
+```bash
+PYTHONPATH=. python3 scripts/run_pipeline.py \
+  --topic <topic> --persona <persona> --arc <arc.yaml> \
+  --pipeline-mode spine \
+  --quality-profile production --exercise-journeys \
+  --render-book --render-dir <out_dir> --out <out_dir>/plan.json
+```
+
+(`--pipeline-mode spine` is the default; keep it explicit in production docs so the chord gate stays green.)
+
+Package it:
+
+```bash
+python3 scripts/publish/build_epub.py --input <book.txt> ... --output <book.epub>
+```
+
+## 13. Cleanup status
 
 | Phase | Scope                                         | Status         | Merge SHA |
 |-------|-----------------------------------------------|----------------|-----------|
@@ -203,7 +241,7 @@ without a superseding ADR:
 | B     | Unreferenced legacy scripts                   | pending review | —         |
 | C     | Legacy loader + pilot packet script           | pending review | —         |
 | D     | `template_expand/`, `template_expand2/`       | pending review | —         |
-| E     | `pipeline-mode=registry` branch of run_pipeline.py | pending review | —    |
+| E     | `pipeline-mode=registry` branch of run_pipeline.py | pending review | —     <!-- CI-ALLOWLIST: legacy-registry-ok — prose-only non-executed reference --> |
 | F     | Final consolidation + shim removal            | pending review | —         |
 
 This table is updated after each phase merges. Only when every row is filled

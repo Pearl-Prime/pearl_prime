@@ -5,7 +5,7 @@ from phoenix_v4.rendering.music_manuscript_overlay import apply_music_overlay_to
 REPO = Path(__file__).resolve().parents[1]
 
 
-def test_overlay_inserts_music_markers():
+def test_overlay_integrates_music_without_visible_markers():
     base = (
         "Preface line\n\n"
         "Chapter 1\n\n"
@@ -23,6 +23,9 @@ def test_overlay_inserts_music_markers():
         book_seed="overlay-test",
     )
     assert audit.get("applied") is True
-    assert "--- Music" in out
-    assert "A note from your reader" in out
-    assert "Closing note" in out
+    assert "--- Music" not in out
+    assert "Music --" not in out
+    assert "A note from your reader" not in out
+    assert "Closing note" not in out
+    assert "Chapter 1\n\nFirst paragraph of chapter one." in out
+    assert audit.get("injection_summary")

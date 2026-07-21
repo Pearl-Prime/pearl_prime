@@ -1,0 +1,142 @@
+{
+  "lane": "waystream_epub_wave1_20260714",
+  "date": "2026-07-14",
+  "base_origin_main": "5576257ebe33bbfa8180b858fcd4633e2562dda4",
+  "prerequisite_signal": "thin-persona-four-cell-proof=5576257ebe33bbfa8180b858fcd4633e2562dda4",
+  "batch_size_attempted": 3,
+  "batch_size_shipped": 2,
+  "render_timeout_policy_sec": 300,
+  "existing_shipped_epub_count_before_wave": 87,
+  "existing_public_delivery_count_before_wave": 26,
+  "output_contract": [
+    {
+      "persona": "nyc_executives",
+      "topic": "anxiety",
+      "engine": "false_alarm",
+      "title": "Anxiety Relief: The False Alarm Response",
+      "subtitle": "A Waystream guide for executives when the body calls ambiguity danger",
+      "book_id": "way_stream_sanctuary__nyc_executives__anxiety__false_alarm",
+      "epub_path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__nyc_executives__anxiety__false_alarm.epub",
+      "epub_bytes": 45319,
+      "epub_sha256": "77456805e8d3e5c95f7337f50843cb7127b2b44395bf39774807c71fc403025e",
+      "render_text_path_uncommitted": "artifacts/qa/waystream_epub_wave1_20260714/rendered/way_stream_sanctuary__nyc_executives__anxiety__false_alarm/book.txt",
+      "render_text_bytes": 85285,
+      "render_word_count": 22000,
+      "quality_summary_path_uncommitted": "artifacts/qa/waystream_epub_wave1_20260714/rendered/way_stream_sanctuary__nyc_executives__anxiety__false_alarm/quality_summary.json",
+      "pipeline_log": "artifacts/qa/waystream_epub_wave1_20260714/logs/way_stream_sanctuary__nyc_executives__anxiety__false_alarm.pipeline.log",
+      "epub_log": "artifacts/qa/waystream_epub_wave1_20260714/logs/way_stream_sanctuary__nyc_executives__anxiety__false_alarm.epub.log",
+      "validate_epub_json": "artifacts/qa/waystream_epub_wave1_20260714/validation/way_stream_sanctuary__nyc_executives__anxiety__false_alarm.validate_epub.json",
+      "validate_epub_errors": [
+        {
+          "section": "COVER",
+          "severity": "ERROR",
+          "code": "missing_cover",
+          "message": "EPUB has no cover image",
+          "detail": {}
+        }
+      ],
+      "epub_metadata": {
+        "opf_path": "EPUB/content.opf",
+        "manifest_items": 16,
+        "spine_items": 14,
+        "dc_title": "Anxiety Relief: The False Alarm Response: A Waystream guide for executives when the body calls ambiguity danger",
+        "dc_language": "en",
+        "dc_creator": [
+          "Mara Okonkwo"
+        ]
+      },
+      "no_bracket_stub_scan": {
+        "status": "PASS",
+        "matches": []
+      },
+      "quality_gates": {
+        "chapter_flow": "PASS",
+        "register_gate": "WARN",
+        "register_gate_failures": {
+          "F13": 4
+        },
+        "bestseller_craft": "PASS",
+        "bestseller_ontgp": 0.5888,
+        "ei_v2": "PASS",
+        "ei_v2_composite": 0.6715,
+        "book_pass": "PASS",
+        "book_quality_release_band": "Pass",
+        "overall_status": "WARN"
+      }
+    },
+    {
+      "persona": "nyc_executives",
+      "topic": "anxiety",
+      "engine": "watcher",
+      "title": "Anxiety Relief: When the Watcher Takes Over",
+      "subtitle": "A Waystream guide for executives living under the inner observer",
+      "book_id": "way_stream_sanctuary__nyc_executives__anxiety__watcher",
+      "epub_path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__nyc_executives__anxiety__watcher.epub",
+      "epub_bytes": 47187,
+      "epub_sha256": "cdaa1e96540d3c17e52abcb404e567c3d7ececdca2c710d63d56d3cd5e4e0465",
+      "render_text_path_uncommitted": "artifacts/qa/waystream_epub_wave1_20260714/rendered/way_stream_sanctuary__nyc_executives__anxiety__watcher/book.txt",
+      "render_text_bytes": 91457,
+      "render_word_count": 21915,
+      "quality_summary_path_uncommitted": "artifacts/qa/waystream_epub_wave1_20260714/rendered/way_stream_sanctuary__nyc_executives__anxiety__watcher/quality_summary.json",
+      "pipeline_log": "artifacts/qa/waystream_epub_wave1_20260714/logs/way_stream_sanctuary__nyc_executives__anxiety__watcher.pipeline.log",
+      "epub_log": "artifacts/qa/waystream_epub_wave1_20260714/logs/way_stream_sanctuary__nyc_executives__anxiety__watcher.epub.log",
+      "validate_epub_json": "artifacts/qa/waystream_epub_wave1_20260714/validation/way_stream_sanctuary__nyc_executives__anxiety__watcher.validate_epub.json",
+      "validate_epub_errors": [
+        {
+          "section": "COVER",
+          "severity": "ERROR",
+          "code": "missing_cover",
+          "message": "EPUB has no cover image",
+          "detail": {}
+        }
+      ],
+      "epub_metadata": {
+        "opf_path": "EPUB/content.opf",
+        "manifest_items": 16,
+        "spine_items": 14,
+        "dc_title": "Anxiety Relief: When the Watcher Takes Over: A Waystream guide for executives living under the inner observer",
+        "dc_language": "en",
+        "dc_creator": [
+          "Mara Okonkwo"
+        ]
+      },
+      "no_bracket_stub_scan": {
+        "status": "PASS",
+        "matches": []
+      },
+      "quality_gates": {
+        "chapter_flow": "PASS",
+        "register_gate": "WARN",
+        "register_gate_failures": {
+          "F13": 4
+        },
+        "bestseller_craft": "PASS",
+        "bestseller_ontgp": 0.5826,
+        "ei_v2": "PASS",
+        "ei_v2_composite": 0.6741,
+        "book_pass": "PASS",
+        "book_quality_release_band": "Pass",
+        "overall_status": "WARN"
+      }
+    }
+  ],
+  "failed_candidates": [
+    {
+      "persona": "educators",
+      "topic": "imposter_syndrome",
+      "engine": "false_alarm",
+      "status": "production_gate_fail",
+      "failed_gates": [
+        "chapter_flow",
+        "book_pass",
+        "book_quality_gate"
+      ],
+      "pipeline_log": "artifacts/qa/waystream_epub_wave1_20260714/logs/way_stream_sanctuary__educators__imposter_syndrome__false_alarm.pipeline.log"
+    }
+  ],
+  "non_claims": [
+    "This lane proves a two-EPUB micro-wave only, not catalog-scale readiness.",
+    "The EPUBs follow the existing coverless Waystream durable artifact convention; validate_epub reports missing_cover consistently with prior shipped EPUBs.",
+    "No LLM prose generation was invoked at build time."
+  ]
+}

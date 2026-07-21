@@ -34,6 +34,14 @@
           "archetype": { "type": "string" },
           "beat_type": { "type": "string" },
           "shot_type": { "type": "string" },
+          "structural_plan_path": {
+            "type": "string",
+            "description": "Optional path to a verified structural plan envelope consumed by the assembler for structural-first L2 placement."
+          },
+          "structural_plan": {
+            "type": "object",
+            "description": "Optional inline verified structural plan envelope consumed by the assembler for structural-first L2 placement."
+          },
           "layers": {
             "type": "array",
             "minItems": 1,
@@ -110,6 +118,10 @@
         "anchor_slot": {
           "type": "string",
           "description": "L2 only: slot_id referencing L0 composition_meta.anchor_slots for grammar placement"
+        },
+        "structural_node_id": {
+          "type": "string",
+          "description": "Optional L2 node_id inside panel structural_plan used to bind the asset to a verified structural character placement."
         },
         "grounding": {
           "type": "object",

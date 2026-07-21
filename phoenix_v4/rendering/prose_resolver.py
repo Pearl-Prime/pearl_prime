@@ -14,6 +14,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
+from phoenix_v4.planning.canonical_atom_blocks import (
+    EmptyCanonicalAtomError,
+    parse_canonical_blocks,
+)
+
 try:
     import yaml
 except ImportError:
@@ -291,6 +296,7 @@ def _parse_canonical_with_prose(path: Path, persona: str, topic: str, engine: st
     return out
 
 
+
 def _parse_block_file_with_prose(
     path: Path,
     persona: str,
@@ -299,77 +305,22 @@ def _parse_block_file_with_prose(
     *,
     required: bool = False,
 ) -> dict[str, str]:
-    """Parse non-STORY CANONICAL.txt. Format: ## TYPE vNN --- prose --- (or ## TYPE vNN --- metadata --- prose ---). Return atom_id -> prose.
-
-    Unfilled stub variants (see _is_stub_body) are excluded from the returned
-    pool. When ``required`` is True and the file parses to ONE-OR-MORE blocks but
-    every block is a stub (so zero real variants survive), an
-    InsufficientVariantsError is raised — the required slot has no shippable
-    prose and the build must fail loudly so atoms are authored upstream rather
-    than shipping a stub. (A non-existent file returns {} and is the caller's
-    "missing" concern, not a stub concern.)
-    """
-    if not path.exists():
-        return {}
-    text = path.read_text(encoding="utf-8")
-    _saw_any_block = bool(re.search(r"##\s+\S+\s+v\d+", text))
-    parts = re.split(r"\n---\s*\n", text)
-    out: dict[str, str] = {}
-    for i, part in enumerate(parts):
-        m = re.search(r"##\s+(\S+)\s+v(\d+)", part)
-        if not m:
-            continue
-        _label, ver = m.group(1), m.group(2)
-        atom_id = f"{persona}_{topic}_{slot_type}_v{ver}"
-        for line in part.splitlines():
-            if line.strip().lower().startswith("id:"):
-                atom_id = line.split(":", 1)[1].strip()
-                break
-        # Prose: next part. (Non-STORY often has --- prose --- only; STORY has --- metadata --- prose --- so prose at i+2.)
-        if i + 1 < len(parts):
-            candidate = parts[i + 1].strip()
-            if candidate.startswith("##"):
-                continue  # no prose between this header and next
-
-            # Detect metadata blocks broadly (not just STORY keys). Many non-STORY atoms
-            # use keys like mode:, reframe_type:, weight:, carry_line: before prose.
-            meta_lines = [ln.strip() for ln in candidate.splitlines() if ln.strip()]
-            keylike_lines = [
-                ln for ln in meta_lines
-                if re.match(r"^[A-Za-z_][A-Za-z0-9_ ]{0,40}\s*:\s*.+$", ln)
-            ]
-            looks_like_metadata = (
-                bool(meta_lines)
-                and len(keylike_lines) >= 2
-                and (len(keylike_lines) / len(meta_lines)) >= 0.6
-            )
-
-            if looks_like_metadata and i + 2 < len(parts):
-                candidate = parts[i + 2].strip()
-            # Strip leftover ``---`` fence lines (empty-metadata block artifact)
-            # before stub-detection and storage — fixes a latent fence leak and
-            # lets the stub detector see the true body.
-            candidate = _strip_fence_lines(candidate)
-            # THE GATE: never admit an unfilled stub variant to the selectable
-            # pool. A partially-authored cell (real v01 + stub v02..vNN) now
-            # surfaces ONLY its real variants; a cell with only stubs surfaces
-            # nothing here, and resolve_prose_for_plan raises
-            # InsufficientVariantsError so the build fails loudly (author atoms —
-            # never ship the stub).
-            if _is_stub_body(candidate):
-                logger.info(
-                    "prose_resolver: dropping stub variant %s (%s) — unfilled atom; "
-                    "not selectable.", atom_id, _label,
-                )
-                continue
-            out[atom_id] = candidate
-    if required and _saw_any_block and not out:
-        raise InsufficientVariantsError(
-            f"{persona}/{topic}/{slot_type}: required slot has only unfilled stub "
-            f"variants in {path} — zero shippable prose. Author atoms upstream; "
-            "never ship the stub (THE GATE)."
+    # Resolve non-STORY prose through the shared canonical parser.
+    try:
+        blocks = parse_canonical_blocks(
+            path,
+            persona=persona,
+            topic=topic,
+            slot_type=slot_type,
+            include_placeholders=False,
+            require_unique_ids=False,
+            require_usable_if_headers=required,
         )
-    return out
+    except EmptyCanonicalAtomError as exc:
+        if required:
+            raise InsufficientVariantsError(str(exc)) from exc
+        return {}
+    return {block.atom_id: block.prose for block in blocks}
 
 
 def _load_compression_prose(persona: str, topic: str) -> dict[str, str]:

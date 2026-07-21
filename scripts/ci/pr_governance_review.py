@@ -19,6 +19,11 @@ Runs on every PR to main. Validates:
     `GOLDEN-UPDATE-RATIFIED: <OPD ref>` in PR body / commit messages
 11. FLAGSHIP PIPELINE: WARNs when phoenix_v4/{planning,rendering,exercises}/ or
     scripts/run_pipeline.py changes without a test change in the same PR
+12. PROVENANCE: a capability-class PR (new code/config/spec in a governed subsystem)
+    must carry a §18 PROVENANCE block (research/documents/builds_on/inventory).
+    Missing block → WARN (report phase) → BLOCK (strict phase). `research: NONE` on a
+    capability-class PR → BLOCK ("route a Pearl_Research lane first"). Bugfix-class
+    PRs are exempt. Authority: docs/agent_brief.txt §18.
 
 Exit 0 = approved. Exit 1 = blocked (with reasons).
 
@@ -32,6 +37,8 @@ Usage:
     python3 scripts/ci/pr_governance_review.py --pr 253
     # Review a specific PR by number (requires gh CLI)
 """
+
+from __future__ import annotations
 
 import subprocess
 import sys
@@ -103,8 +110,10 @@ def load_canonical_registry():
     a convenience that may or may not be present on a given branch/checkout, per
     CANONICAL_ARTIFACTS_REGISTRY_SPEC.md §1.1).
 
-    Schema (9 cols, see spec §2): concept_key, canonical_path, sha_or_pr,
-    owner_agent, subsystem, edit_not_recreate, last_verified, supersedes, notes.
+    Schema (11 cols, see spec §2): concept_key, canonical_path, sha_or_pr,
+    owner_agent, subsystem, edit_not_recreate, last_verified, supersedes, notes,
+    research_refs, doc_refs. The last two are the §18 provenance columns; they may
+    be absent on refs predating the provenance-tracer PR (DictReader yields "").
     Rows with an empty canonical_path are skipped (cannot anchor a match).
 
     A `canonical_path` cell MAY carry multiple ';'-joined mirror paths (the seed
@@ -138,6 +147,9 @@ def load_canonical_registry():
                     "last_verified": (row.get("last_verified") or "").strip(),
                     "supersedes": (row.get("supersedes") or "").strip(),
                     "notes": (row.get("notes") or "").strip(),
+                    # §18 provenance columns (may be absent on older refs → "").
+                    "research_refs": (row.get("research_refs") or "").strip(),
+                    "doc_refs": (row.get("doc_refs") or "").strip(),
                 })
     return rows
 
@@ -864,6 +876,240 @@ def check_reinvention(files, registry, allowlist=None, override_text=""):
     }
 
 
+# ---------------------------------------------------------------------------
+# §18 provenance chain — research → documents → code, built ON TOP
+# ---------------------------------------------------------------------------
+
+# Report→strict ladder (docs/agent_brief.txt §18). A *missing* PROVENANCE block on a
+# capability-class PR is a WARN for the first sprint, then flips to BLOCK. Change this
+# ONE constant to "BLOCK" (and record the OPD) once the sprint elapses — do not add a
+# parallel gate. A block that is explicitly declared `research: NONE` BLOCKs regardless
+# of this phase (that is an admission, not an omission).
+PROVENANCE_MISSING_SEVERITY = "WARN"  # WARN (report phase) → BLOCK (strict phase)
+
+# Conventional-commit types that mark a PR as bugfix/maintenance-class, i.e. NOT a new
+# capability. Conservative by design (task DO-NOT: never block bugfix-class on research):
+# only an explicit non-feat prefix exempts; ambiguous/no-prefix + new substantive file
+# is still treated as capability-class.
+_BUGFIX_COMMIT_TYPES = (
+    "fix", "chore", "docs", "test", "tests", "refactor", "revert",
+    "style", "ci", "build", "perf",
+)
+
+# Extensions that make an ADDED file "substantive" (a capability surface, not data/asset).
+_CAPABILITY_EXTS = (".py", ".yaml", ".yml", ".php", ".js", ".ts", ".sh")
+
+
+def _is_test_path(path: str) -> bool:
+    low = path.lower()
+    return (
+        low.startswith("tests/")
+        or "/tests/" in low
+        or low.rsplit("/", 1)[-1].startswith("test_")
+        or low.endswith("_test.py")
+    )
+
+
+def _is_capability_file(path: str) -> bool:
+    """A NEW file that represents a capability surface (code/config/spec), not a
+    test, a plain doc, a data catalog row, or an artifact. Conservative: a new spec
+    under docs/specs/ or specs/ counts (a spec is a capability contract); a new
+    non-spec .md does not; new code/config by extension counts."""
+    low = path.lower()
+    if _is_test_path(low):
+        return False
+    if low.startswith("artifacts/") or low.startswith(".github/") or low.startswith(".claude/"):
+        return False
+    if low.endswith(".md"):
+        return low.startswith("docs/specs/") or low.startswith("specs/")
+    return low.endswith(_CAPABILITY_EXTS)
+
+
+def _pr_is_bugfix_class(pr_title: str, override_text: str) -> bool:
+    """True when the PR's conventional-commit type marks it bugfix/maintenance-class.
+
+    Checks the PR title first, then the first commit subject line in override_text
+    (commit bodies are unioned into override_text). Match is `type(scope):` /
+    `type:` / `type!:` at the start of the subject, case-insensitive.
+    """
+    subjects = []
+    if pr_title:
+        subjects.append(pr_title)
+    for line in (override_text or "").splitlines():
+        s = line.strip()
+        if s:
+            subjects.append(s)
+            break
+    pat = re.compile(rf"^({'|'.join(_BUGFIX_COMMIT_TYPES)})(\([^)]*\))?!?:", re.I)
+    return any(pat.match(s.strip()) for s in subjects)
+
+
+def _governed_subsystem_for(path: str, subsystem_map) -> str | None:
+    """Return the subsystem_id whose config_path prefix owns `path`, or None.
+
+    Reuses the same prefix-match shape as check_subsystem_scope / check_authority_docs.
+    """
+    for prefix, info in (subsystem_map or {}).items():
+        base = prefix.rstrip("*").rstrip("/")
+        if base and path.startswith(base):
+            return info.get("subsystem_id")
+    return None
+
+
+def _parse_provenance_block(text: str) -> dict | None:
+    """Parse a PROVENANCE: block out of the PR body / commit body.
+
+    Recognizes (case-insensitive keys, tolerant of leading whitespace / list bullets):
+
+        PROVENANCE:
+          research:   <...>
+          documents:  <...>
+          builds_on:  <...>
+          inventory:  <...>
+
+    Returns a dict {research, documents, builds_on, inventory} with the raw values
+    (missing keys omitted), or None if no `PROVENANCE:` marker is present. Only the
+    keys found within ~12 lines after the marker are captured (a bounded window so a
+    later stray `research:` elsewhere in the body is not mis-attributed).
+    """
+    if not text:
+        return None
+    lines = text.splitlines()
+    marker_idx = None
+    for i, line in enumerate(lines):
+        if re.match(r"^\s*[-*]?\s*PROVENANCE\s*:\s*$", line, re.I) or \
+           re.match(r"^\s*[-*]?\s*PROVENANCE\s*:", line, re.I):
+            marker_idx = i
+            break
+    if marker_idx is None:
+        return None
+    fields = {}
+    key_pat = re.compile(r"^\s*[-*]?\s*(research|documents|docs|builds_on|builds-on|inventory)\s*:\s*(.*)$", re.I)
+    for line in lines[marker_idx + 1: marker_idx + 1 + 14]:
+        m = key_pat.match(line)
+        if not m:
+            # stop at a clearly-unindented new section header (blank lines tolerated)
+            if line.strip() and not line[:1].isspace() and ":" in line and \
+               not line.lstrip().lower().startswith(("research", "documents", "docs",
+                                                       "builds", "inventory")):
+                break
+            continue
+        key = m.group(1).lower().replace("-", "_")
+        if key == "docs":
+            key = "documents"
+        fields[key] = m.group(2).strip()
+    return fields or {"_marker_only": True}
+
+
+def check_provenance(files, subsystem_map, pr_title="", override_text=""):
+    """§18 provenance-chain guard — every new capability traces research→docs→code.
+
+    Authority: docs/agent_brief.txt §18 "The provenance chain". A PR that CREATES new
+    capability files (new code/config/spec, status 'A') in a GOVERNED subsystem must
+    carry a PROVENANCE block (research / documents / builds_on / inventory) in its body
+    or a commit body.
+
+    TWO rules, distinct severities:
+      1. Missing PROVENANCE block on a capability-class PR → PROVENANCE_MISSING_SEVERITY
+         (WARN in the report phase, BLOCK in the strict phase — the report→strict ladder).
+      2. PROVENANCE block PRESENT but `research: NONE` on a capability-class PR → BLOCK
+         with "route a Pearl_Research lane first." (An explicit admission of no research;
+         blocks regardless of ladder phase. §18: research=NONE → STOP.)
+
+    CAPABILITY vs BUGFIX (conservative — task DO-NOT: never block bugfix-class on
+    research): capability-class ⇔ the PR ADDS ≥1 substantive new file
+    (_is_capability_file) in a governed subsystem AND its commit type is not one of
+    fix/chore/docs/test/refactor/revert/style/ci/build/perf. A PR that only modifies
+    existing files, or is typed as a bugfix, is exempt entirely (PASS).
+
+    FAIL-OPEN: no capability files → PASS; absent subsystem map → the governed-subsystem
+    filter yields nothing → PASS. Returns the standard {check,status,message,details} dict.
+    """
+    added = [f for f in files if f.get("status") == "A"]
+    capability_files = []
+    for f in added:
+        p = f["path"]
+        if not _is_capability_file(p):
+            continue
+        sid = _governed_subsystem_for(p, subsystem_map)
+        if sid:
+            capability_files.append({"path": p, "subsystem": sid})
+
+    if not capability_files:
+        return {
+            "check": "provenance",
+            "status": "PASS",
+            "message": "No new capability files in a governed subsystem — provenance guard is a no-op.",
+            "details": {"capability_files": 0},
+        }
+
+    if _pr_is_bugfix_class(pr_title, override_text):
+        return {
+            "check": "provenance",
+            "status": "PASS",
+            "message": (
+                f"{len(capability_files)} new file(s) added, but PR is bugfix/maintenance-class "
+                f"(conventional-commit type) — exempt from the §18 provenance requirement."
+            ),
+            "details": {"capability_files": capability_files, "class": "bugfix"},
+        }
+
+    block = _parse_provenance_block(override_text)
+    paths = ", ".join(c["path"] for c in capability_files[:5])
+
+    # Rule 2 — explicit research: NONE → hard BLOCK (any phase).
+    if block and str(block.get("research", "")).strip().upper() in ("NONE", "N/A", "-"):
+        return {
+            "check": "provenance",
+            "status": "BLOCKED",
+            "message": (
+                f"§18 provenance: capability-class PR declares 'research: NONE' while adding "
+                f"new capability file(s) ({paths}). route a Pearl_Research lane first — "
+                f"nothing is built on an unresearched premise (research→document→code flows downhill)."
+            ),
+            "details": {"capability_files": capability_files, "provenance": block},
+        }
+
+    # Rule 1 — missing block (no PROVENANCE: marker, or marker without the four fields).
+    have_all = bool(block) and all(k in block for k in ("research", "documents", "builds_on", "inventory"))
+    if not have_all:
+        missing = [] if not block else [k for k in ("research", "documents", "builds_on", "inventory") if k not in block]
+        detail = "no PROVENANCE: block found" if not block else f"PROVENANCE block missing field(s): {', '.join(missing)}"
+        return {
+            "check": "provenance",
+            "status": PROVENANCE_MISSING_SEVERITY,
+            "message": (
+                f"§18 provenance: capability-class PR adds new file(s) ({paths}) without a complete "
+                f"PROVENANCE block — {detail}. Add to the PR body / a commit body:\n"
+                f"  PROVENANCE:\n    research: <artifacts/claims or NONE>\n    documents: <governing spec/authority docs>\n"
+                f"    builds_on: <canonical components EXTENDED (registry concept keys)>\n"
+                f"    inventory: <existing functions affected: EXTENDS | UNCHANGED — never REDUCED>"
+                + ("  [report phase — WARN now, BLOCK next sprint]" if PROVENANCE_MISSING_SEVERITY == "WARN" else "")
+            ),
+            "details": {"capability_files": capability_files, "provenance": block, "missing_fields": missing},
+        }
+
+    # Complete block, research present and not NONE → PASS (and surface inventory=REDUCED note).
+    inv = str(block.get("inventory", ""))
+    # A declared REDUCED, but NOT a negated mention ("no function REDUCED", "never
+    # REDUCED" — the §18 template itself says "never REDUCED"). Strip negated phrases
+    # first, then look for a surviving standalone REDUCED token.
+    inv_clean = re.sub(r"\b(?:no|not|never|without)\b[^.;]*?\breduced\b", "", inv, flags=re.I)
+    note = ""
+    if re.search(r"\breduced\b", inv_clean, re.I):
+        note = (" NOTE: inventory declares REDUCED — the no-lost-functions gate "
+                "(check_capability_regression.py) will require CAPABILITY-RETIREMENT-RATIFIED.")
+    return {
+        "check": "provenance",
+        "status": "PASS",
+        "message": (
+            f"§18 provenance block present and complete for {len(capability_files)} new capability file(s); "
+            f"research not NONE." + note
+        ),
+        "details": {"capability_files": capability_files, "provenance": block},
+    }
+
+
 def check_duration_derivation(files, override_text=""):
     """Duration co-change guard (DURATION-DERIVATION-01).
 
@@ -1125,6 +1371,7 @@ def main():
         check_drift_patterns(files),
         check_workstream_conflict(files, workstreams),
         check_reinvention(files, registry, allowlist, override_text),
+        check_provenance(files, subsystem_map, pr_title, override_text),
         check_duration_derivation(files, override_text),
         check_skeleton_freeze(files, skeleton_freeze, pr_title, pr_number),
         check_flagship_golden_ratification(files, override_text),

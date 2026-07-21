@@ -110,13 +110,57 @@ def _load_yaml(path: Path) -> dict:
     return data if isinstance(data, dict) else {}
 
 
+
+class DuplicateSelectedAtomError(ValueError):
+    # A non-reusable authored atom/body would repeat within one book.
+    pass
+
+
+def _normalized_body_hash(content: str) -> str:
+    normalized = " ".join(str(content or "").split()).casefold()
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
 def _deterministic_index(seed: str, pool_size: int) -> int:
-    """SHA256-based deterministic selection — same seed always picks same index."""
+    # SHA256-based deterministic selection.
     if pool_size <= 0:
         return 0
     digest = hashlib.sha256(seed.encode("utf-8")).digest()
     return int.from_bytes(digest[:8], "big") % pool_size
 
+
+def _select_unique_story_overlay(
+    atom_pool: list[dict],
+    *,
+    seed_key: str,
+    used_ids: set[str],
+    used_body_hashes: set[str],
+) -> dict:
+    candidates = [
+        atom
+        for atom in atom_pool
+        if str(atom.get("atom_id") or "") not in used_ids
+        and _normalized_body_hash(str(atom.get("content") or ""))
+        not in used_body_hashes
+    ]
+    if not candidates:
+        raise DuplicateSelectedAtomError(
+            "STORY overlay pool exhausted before book completion: no unused "
+            "atom ID/body remains. Author more STORY supply; do not repeat."
+        )
+    candidates = sorted(
+        candidates,
+        key=lambda atom: (
+            str(atom.get("atom_id") or ""),
+            _normalized_body_hash(str(atom.get("content") or "")),
+        ),
+    )
+    chosen = candidates[_deterministic_index(seed_key, len(candidates))]
+    used_ids.add(str(chosen.get("atom_id") or ""))
+    used_body_hashes.add(
+        _normalized_body_hash(str(chosen.get("content") or ""))
+    )
+    return chosen
 
 # ---------------------------------------------------------------------------
 # Registry loading
@@ -247,16 +291,53 @@ def _is_bare_block_header(stripped: str, next_nonempty: str) -> bool:
     return m.group(1) in _BARE_BLOCK_HEADER_TOKENS
 
 
-def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list[dict]:
+class CanonicalParseError(ValueError):
+    """Header-present CANONICAL.txt block produced no usable prose atom."""
+
+
+# Lines that look like atom metadata (`key: value`), not prose paragraphs.
+_META_LINE_RE = _re.compile(r"^[\w.-]+\s*:\s*.*$")
+
+
+def _looks_like_metadata_only(lines: list[str]) -> bool:
+    """True when every non-empty line is a short YAML-ish ``key: value`` row."""
+    nonempty = [ln.strip() for ln in lines if ln.strip()]
+    if not nonempty:
+        return True
+    return all(
+        _META_LINE_RE.match(ln) or ln.startswith("#")
+        for ln in nonempty
+    )
+
+
+def _parse_canonical_txt(
+    path: Path,
+    *,
+    slot_type: Optional[str] = None,
+    text: Optional[str] = None,
+) -> list[dict]:
     """Parse atoms/persona/topic/TYPE/CANONICAL.txt into list of atom dicts.
 
-    Format:
+    Supported delimiter shapes (explicit):
+
+    **Two-delimiter (canonical):**
         ## TYPE vNN
         ---
         optional metadata
         ---
         prose body
         ---
+
+    **Single-delimiter / single-section legacy:**
+        ## TYPE vNN
+        ---
+        prose body
+        ---          # optional closing delimiter
+
+    In the legacy shape, text after the first ``---`` is prose (not metadata).
+    A header is never evidence of usable depth: header-present blocks with no
+    prose raise ``CanonicalParseError`` instead of being silently dropped
+    (educators×imposter_syndrome REFLECTION failure mode / #5530).
 
     Also tolerant of MALFORMED banks where the "## " prefix is missing from a
     block header (DEFECT 7 data corruption): a standalone ``TYPE vNN`` line whose
@@ -266,9 +347,10 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     """
     from phoenix_v4.planning.scene_atom_header_parser import attach_scene_metadata
 
-    if not path.exists():
-        return []
-    text = path.read_text(encoding="utf-8")
+    if text is None:
+        if not path.exists():
+            return []
+        text = path.read_text(encoding="utf-8")
     raw_lines = text.splitlines()
     blocks: list[dict] = []
     current_id = ""
@@ -276,25 +358,112 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     in_body = False
     body_lines: list[str] = []
     meta_lines: list[str] = []
+    pre_delimiter_lines: list[str] = []
     delimiter_count = 0
+    header_count = 0
+    malformed: list[str] = []
     st_upper = (slot_type or "").strip().upper()
 
-    def _flush_block() -> None:
-        nonlocal current_id, body_lines, meta_lines
-        if not current_id or not body_lines:
+    def _flush_block(*, next_header: bool = False) -> None:
+        nonlocal current_id, body_lines, meta_lines, pre_delimiter_lines, delimiter_count
+        if not current_id:
             return
-        content = "\n".join(body_lines).strip()
-        if not content:
-            return
+
+        body_text = "\n".join(body_lines).strip()
+        meta_text = "\n".join(meta_lines).strip()
+        pre_text = "\n".join(pre_delimiter_lines).strip()
+        content = ""
         meta: dict = {}
-        if meta_lines and yaml is not None:
-            try:
-                parsed = yaml.safe_load("\n".join(meta_lines))
-                if isinstance(parsed, dict):
-                    meta = parsed
-            except Exception:
-                meta = {}
-        atom = {"atom_id": current_id, "content": content, "metadata": meta}
+        shape = ""
+
+        metadata_prefix: list[str] = []
+        pre_prose_lines: list[str] = []
+        if pre_delimiter_lines:
+            saw_prose = False
+            for raw in pre_delimiter_lines:
+                stripped = raw.strip()
+                if not stripped:
+                    if saw_prose:
+                        pre_prose_lines.append(raw)
+                    continue
+                if not saw_prose and _META_LINE_RE.match(stripped):
+                    metadata_prefix.append(raw)
+                    continue
+                saw_prose = True
+                pre_prose_lines.append(raw)
+
+        if delimiter_count >= 2 and body_text:
+            # Canonical two-delimiter: metadata then prose.
+            shape = "two-delimiter"
+            content = body_text
+            if meta_lines and yaml is not None:
+                try:
+                    parsed = yaml.safe_load("\n".join(meta_lines))
+                    if isinstance(parsed, dict):
+                        meta = parsed
+                except Exception:
+                    meta = {}
+        elif delimiter_count >= 1 and pre_prose_lines:
+            # Legacy authored shape: metadata/prose appear directly after the
+            # header, followed only by closing delimiters.
+            shape = "pre-delimiter-legacy"
+            content = "\n".join(pre_prose_lines).strip()
+            if metadata_prefix and yaml is not None:
+                try:
+                    parsed = yaml.safe_load("\n".join(metadata_prefix))
+                    if isinstance(parsed, dict):
+                        meta = parsed
+                except Exception:
+                    meta = {}
+        elif delimiter_count == 1 and meta_text:
+            # Explicit single-delimiter legacy: sole section after --- is prose.
+            shape = "single-delimiter"
+            content = meta_text
+        elif delimiter_count >= 1 and not body_text and not meta_text:
+            # Some legacy banks interleave real atoms with empty placeholder
+            # headers (`## TYPE vNN` + `---`) for unused even-numbered slots.
+            # Skip those placeholders locally, but still fail loud at EOF if
+            # the file resolves to zero usable atoms overall.
+            return
+        elif delimiter_count >= 2 and not body_text and meta_text:
+            if _looks_like_metadata_only(meta_lines):
+                if next_header:
+                    # Another legacy placeholder shape stores only metadata for
+                    # an unused slot, then immediately starts the next header.
+                    # Skip those interleaved placeholders, but still fail loud
+                    # if the file ends on metadata-without-prose.
+                    return
+                malformed.append(
+                    f"{current_id!r}: two-delimiter block has metadata but empty "
+                    "prose (header count is not usable depth)"
+                )
+                return
+            # Legacy single-section written as `--- / prose / ---` (prose sat in
+            # the first segment; second delimiter opened an empty body).
+            shape = "single-section-legacy"
+            content = meta_text
+        elif delimiter_count == 0 and (body_text or meta_text):
+            shape = "no-delimiter"
+            content = (body_text or meta_text)
+        else:
+            malformed.append(
+                f"{current_id!r}: header present but no usable prose "
+                f"(delimiters={delimiter_count}, shape unresolved)"
+            )
+            return
+
+        if not content:
+            malformed.append(
+                f"{current_id!r}: header present but empty prose after {shape or 'parse'}"
+            )
+            return
+
+        atom = {
+            "atom_id": current_id,
+            "content": content,
+            "metadata": meta,
+            "delimiter_shape": shape,
+        }
         if st_upper == "SCENE" or current_id.upper().startswith("SCENE "):
             atom = attach_scene_metadata(atom, f"## {current_id}")
         blocks.append(atom)
@@ -308,51 +477,78 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     for i, line in enumerate(raw_lines):
         stripped = line.strip()
         if stripped.startswith("## "):
-            _flush_block()
+            _flush_block(next_header=True)
             current_header = stripped
             current_id = stripped.replace("## ", "").strip()
+            header_count += 1
             body_lines = []
             meta_lines = []
+            pre_delimiter_lines = []
             in_body = False
             delimiter_count = 0
         elif _is_bare_block_header(stripped, _next_nonempty(i)):
             # Malformed bank: header line lost its "## " prefix. Treat exactly
             # like a "## " header so the raw atom-id label cannot be absorbed
             # into the prior block body.
-            _flush_block()
+            _flush_block(next_header=True)
             current_header = stripped
             current_id = stripped
+            header_count += 1
             body_lines = []
             meta_lines = []
+            pre_delimiter_lines = []
             in_body = False
             delimiter_count = 0
         elif stripped == "---":
             delimiter_count += 1
             if delimiter_count >= 2:
                 in_body = True
+        elif delimiter_count == 0 and current_id:
+            pre_delimiter_lines.append(line)
         elif delimiter_count == 1 and not in_body:
             meta_lines.append(line)
         elif in_body:
             body_lines.append(line)
 
     _flush_block()
+    if malformed:
+        raise CanonicalParseError(
+            f"Malformed CANONICAL.txt at {path}: "
+            + "; ".join(malformed)
+            + ". Use HEADER + --- + prose (single-delimiter legacy) or "
+            "HEADER + --- + metadata + --- + prose (two-delimiter)."
+        )
+    if header_count and not blocks:
+        raise CanonicalParseError(
+            f"Malformed CANONICAL.txt at {path}: found {header_count} header(s) "
+            "but parsed zero usable atoms (header count ≠ usable depth)."
+        )
     return blocks
 
 
 def _load_composite_doctrine_atoms(
     topic_id: str,
     repo_root: Optional[Path] = None,
+    locale: Optional[str] = None,
 ) -> dict[str, list[dict]]:
-    """Load topic-scoped composite teacher doctrine/reflection from CANONICAL.txt."""
+    """Load topic-scoped composite teacher doctrine/reflection from CANONICAL.txt.
+
+    Locale-aware: when ``locale`` is set and not 'en-US', reads the localized
+    ``{dir}/locales/{locale}/CANONICAL.txt`` when present, otherwise falls back
+    to the base English ``CANONICAL.txt`` (mirrors persona-atom locale threading
+    via ``_locale_canonical_path``). en-US behaviour is unchanged.
+    """
     topic = (topic_id or "").strip()
     if not topic:
         return {}
     root = (repo_root or REPO_ROOT) / "SOURCE_OF_TRUTH" / "composite_doctrine" / topic
     atoms: dict[str, list[dict]] = {}
-    doctrine_blocks = _parse_canonical_txt(root / "CANONICAL.txt")
+    doctrine_blocks = _parse_canonical_txt(_locale_canonical_path(root, locale))
     if doctrine_blocks:
         atoms["COMPOSITE_TEACHER_DOCTRINE"] = doctrine_blocks
-    reflection_blocks = _parse_canonical_txt(root / "REFLECTION" / "CANONICAL.txt")
+    reflection_blocks = _parse_canonical_txt(
+        _locale_canonical_path(root / "REFLECTION", locale)
+    )
     if reflection_blocks:
         atoms["COMPOSITE_TEACHER_REFLECTION"] = reflection_blocks
     if atoms:
@@ -529,17 +725,33 @@ class ResolvedChapter:
         return sum(len(s.content.split()) for s in self.sections)
 
 
-class ResolvedBook:
-    """Complete resolved book from section registry."""
-    __slots__ = ("chapters", "topic", "seed", "registry_path", "teacher_id")
 
-    def __init__(self, chapters: list[ResolvedChapter], topic: str, seed: str,
-                 registry_path: str = "", teacher_id: str = ""):
+class ResolvedBook:
+    # Complete resolved book from section registry.
+    __slots__ = (
+        "chapters",
+        "topic",
+        "seed",
+        "registry_path",
+        "teacher_id",
+        "selection_audit",
+    )
+
+    def __init__(
+        self,
+        chapters: list[ResolvedChapter],
+        topic: str,
+        seed: str,
+        registry_path: str = "",
+        teacher_id: str = "",
+        selection_audit: Optional[dict[str, Any]] = None,
+    ):
         self.chapters = chapters
         self.topic = topic
         self.seed = seed
         self.registry_path = registry_path
         self.teacher_id = teacher_id
+        self.selection_audit = selection_audit or {}
 
     @property
     def word_count(self) -> int:
@@ -550,7 +762,6 @@ class ResolvedBook:
         return len(self.chapters)
 
     def to_prose(self) -> str:
-        """Render to plain text (chapter headings + section content)."""
         parts: list[str] = []
         for ch in self.chapters:
             parts.append(f"Chapter {ch.chapter_index + 1}")
@@ -561,7 +772,6 @@ class ResolvedBook:
                     parts.append(content)
                     parts.append("")
         return "\n".join(parts).strip()
-
 
 def resolve_book(
     registry: dict,
@@ -613,6 +823,9 @@ def resolve_book(
     )
 
     chapters: list[ResolvedChapter] = []
+    used_story_atom_ids: set[str] = set()
+    used_story_body_hashes: set[str] = set()
+    story_selection_rows: list[dict[str, Any]] = []
 
     for ch_key in sorted(sections_data.keys()):
         ch_data = sections_data[ch_key]
@@ -680,12 +893,36 @@ def resolve_book(
             if not overlay_content and persona_atoms and sec_type in _PERSONA_OVERLAY_TYPES:
                 atom_pool = persona_atoms.get(sec_type, [])
                 if atom_pool:
-                    p_idx = _deterministic_index(
-                        f"{seed}:{ch_key}:{sec_key}:{purpose}:persona",
-                        len(atom_pool),
+                    selector_key = (
+                        f"{seed}:{ch_key}:{sec_key}:{purpose}:persona"
                     )
-                    overlay_content = atom_pool[p_idx]["content"]
-                    overlay_id = atom_pool[p_idx]["atom_id"]
+                    if sec_type == "STORY":
+                        selected_atom = _select_unique_story_overlay(
+                            atom_pool,
+                            seed_key=selector_key,
+                            used_ids=used_story_atom_ids,
+                            used_body_hashes=used_story_body_hashes,
+                        )
+                        overlay_content = selected_atom["content"]
+                        overlay_id = selected_atom["atom_id"]
+                        story_selection_rows.append(
+                            {
+                                "chapter_key": ch_key,
+                                "section_key": sec_key,
+                                "section_id": sec_id,
+                                "atom_id": overlay_id,
+                                "body_sha256": _normalized_body_hash(
+                                    overlay_content
+                                ),
+                            }
+                        )
+                    else:
+                        p_idx = _deterministic_index(
+                            selector_key,
+                            len(atom_pool),
+                        )
+                        overlay_content = atom_pool[p_idx]["content"]
+                        overlay_id = atom_pool[p_idx]["atom_id"]
 
             # Practice library fallback for EXERCISE slots
             if not overlay_content and sec_type == "EXERCISE":
@@ -735,12 +972,42 @@ def resolve_book(
     topic = registry.get("topic", "unknown")
     reg_path = registry.get("_source_path", "")
 
+    body_counts: dict[str, int] = {}
+    id_counts: dict[str, int] = {}
+    for row in story_selection_rows:
+        body_hash = row["body_sha256"]
+        atom_id = row["atom_id"]
+        body_counts[body_hash] = body_counts.get(body_hash, 0) + 1
+        id_counts[atom_id] = id_counts.get(atom_id, 0) + 1
+    duplicate_ids = sorted(
+        atom_id for atom_id, count in id_counts.items() if count > 1
+    )
+    duplicate_body_hashes = sorted(
+        body_hash for body_hash, count in body_counts.items() if count > 1
+    )
+    if duplicate_ids or duplicate_body_hashes:
+        raise DuplicateSelectedAtomError(
+            "duplicate STORY selection escaped unique selector: "
+            f"ids={duplicate_ids} body_hashes={duplicate_body_hashes}"
+        )
+    selection_audit = {
+        "story_selection_count": len(story_selection_rows),
+        "selected_story_atom_ids": [
+            row["atom_id"] for row in story_selection_rows
+        ],
+        "duplicate_story_atom_ids": duplicate_ids,
+        "duplicate_story_body_hashes": duplicate_body_hashes,
+        "rows": story_selection_rows,
+        "status": "PASS",
+    }
+
     book = ResolvedBook(
         chapters=chapters,
         topic=topic,
         seed=seed,
         registry_path=str(reg_path),
         teacher_id=teacher_id or "",
+        selection_audit=selection_audit,
     )
 
     logger.info(

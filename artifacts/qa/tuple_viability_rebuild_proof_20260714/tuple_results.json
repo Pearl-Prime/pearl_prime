@@ -1,0 +1,67 @@
+{
+  "lane": "tuple_viability_rebuild_proof_20260714",
+  "date": "2026-07-14",
+  "base_origin_main": "8560a873fdacbe6bef70626e37d876fcd5fc7bda",
+  "prerequisite_signal": "thin-persona-story-seed-a=8560a873fdacbe6bef70626e37d876fcd5fc7bda",
+  "acceptance_layer": "structurally clear preflight proof",
+  "tuples": [
+    {
+      "persona": "educators",
+      "topic": "imposter_syndrome",
+      "engine": "false_alarm",
+      "format": "F006",
+      "command": "PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona educators --topic imposter_syndrome --engine false_alarm --format F006 --repo . --json",
+      "exit_code": 0,
+      "result": "TUPLE_VIABLE",
+      "story_count_from_slate": 16,
+      "required_bands": [1, 2, 3, 4, 5],
+      "present_bands": [1, 2, 3, 4, 5],
+      "production_render_evidence": "artifacts/qa/thin_persona_buildability_2026-07-11/SUMMARY.md"
+    },
+    {
+      "persona": "educators",
+      "topic": "imposter_syndrome",
+      "engine": "shame",
+      "format": "F006",
+      "command": "PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona educators --topic imposter_syndrome --engine shame --format F006 --repo . --json",
+      "exit_code": 0,
+      "result": "TUPLE_VIABLE",
+      "story_count_from_slate": 33,
+      "required_bands": [1, 2, 3, 4, 5],
+      "present_bands": [1, 2, 3, 4, 5],
+      "production_render_evidence": null
+    },
+    {
+      "persona": "nyc_executives",
+      "topic": "anxiety",
+      "engine": "false_alarm",
+      "format": "F006",
+      "command": "PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona nyc_executives --topic anxiety --engine false_alarm --format F006 --repo . --json",
+      "exit_code": 0,
+      "result": "TUPLE_VIABLE",
+      "story_count_from_slate": 29,
+      "required_bands": [1, 2, 3, 4, 5],
+      "present_bands": [1, 2, 3, 4, 5],
+      "production_render_evidence": null
+    },
+    {
+      "persona": "nyc_executives",
+      "topic": "anxiety",
+      "engine": "watcher",
+      "format": "F006",
+      "command": "PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona nyc_executives --topic anxiety --engine watcher --format F006 --repo . --json",
+      "exit_code": 0,
+      "result": "TUPLE_VIABLE",
+      "story_count_from_slate": 32,
+      "required_bands": [1, 2, 3, 4, 5],
+      "present_bands": [1, 2, 3, 4, 5],
+      "production_render_evidence": null
+    }
+  ],
+  "non_claims": [
+    "No new atoms were authored.",
+    "No runtime code was changed.",
+    "No sellable EPUB readiness is claimed from tuple preflight alone.",
+    "The next lane must build real EPUB artifacts before GHL attach."
+  ]
+}

@@ -1,0 +1,121 @@
+diff --git a/phoenix_v4/planning/pool_index.py b/phoenix_v4/planning/pool_index.py
+index 69567014f..000000000 100644
+--- a/phoenix_v4/planning/pool_index.py
++++ b/phoenix_v4/planning/pool_index.py
+@@ -86,14 +86,17 @@ def _parse_block_file_canonical(
+     topic: str,
+     slot_type: str,
+ ) -> list[AtomEntry]:
+-    # Parse non-STORY banks through the shared fail-closed block parser.
++    # Runtime pool resolution must remain compatible with legacy banks that
++    # contain duplicate derived IDs. Strict duplicate detection remains the
++    # parser default and is exercised by tests/auditors; runtime does not turn
++    # historical catalog debt into a hard production crash.
+     blocks = parse_canonical_blocks(
+         path,
+         persona=persona,
+         topic=topic,
+         slot_type=slot_type,
+         include_placeholders=False,
+-        require_unique_ids=True,
++        require_unique_ids=False,
+         require_usable_if_headers=False,
+     )
+     return [
+diff --git a/phoenix_v4/rendering/prose_resolver.py b/phoenix_v4/rendering/prose_resolver.py
+index 396862539..000000000 100644
+--- a/phoenix_v4/rendering/prose_resolver.py
++++ b/phoenix_v4/rendering/prose_resolver.py
+@@ -305,7 +305,10 @@ def _parse_block_file_with_prose(
+     *,
+     required: bool = False,
+ ) -> dict[str, str]:
+-    # Resolve non-STORY prose through the shared canonical parser.
++    # Normal rendering preserves legacy last-definition-wins behavior for
++    # duplicate derived IDs. The shared parser remains strict by default, so
++    # tests and the atom-bank health/auditor lane still expose duplicate debt
++    # without making every legacy runtime read fail.
+     try:
+         blocks = parse_canonical_blocks(
+             path,
+@@ -313,7 +316,7 @@ def _parse_block_file_with_prose(
+             topic=topic,
+             slot_type=slot_type,
+             include_placeholders=False,
+-            require_unique_ids=True,
++            require_unique_ids=False,
+             require_usable_if_headers=required,
+         )
+     except EmptyCanonicalAtomError as exc:
+diff --git a/tests/planning/test_integration_canonical_parser.py b/tests/planning/test_integration_canonical_parser.py
+index 568823901..000000000 100644
+--- a/tests/planning/test_integration_canonical_parser.py
++++ b/tests/planning/test_integration_canonical_parser.py
+@@ -10,6 +10,8 @@ from phoenix_v4.planning.canonical_atom_blocks import (
+     DuplicateAtomIdError,
+     parse_canonical_blocks,
+ )
++from phoenix_v4.planning.pool_index import _parse_block_file_canonical
++from phoenix_v4.rendering.prose_resolver import _parse_block_file_with_prose
+
+
+ def test_integration_is_first_class_and_real_body_is_not_empty(tmp_path: Path):
+@@ -107,3 +109,55 @@ def test_legacy_single_delimiter_metadata_plus_prose_parses(tmp_path: Path):
+     )
+     assert blocks[0].metadata["mode"] == "BODY_LANDED"
+     assert blocks[0].prose.startswith("The body reports")
++
++
++def _write_legacy_duplicate_bank(tmp_path: Path) -> Path:
++    path = tmp_path / "atoms/p/t/INTEGRATION/CANONICAL.txt"
++    path.parent.mkdir(parents=True)
++    path.write_text(
++        """## INTEGRATION v18
++---
++mode: BODY_LANDED
++---
++First legacy body.
++---
++## INTEGRATION v18
++---
++mode: QUESTION_OPEN
++---
++Second legacy body retained by the historical runtime policy.
++---
++""",
++        encoding="utf-8",
++    )
++    return path
++
++
++def test_runtime_pool_reader_tolerates_legacy_duplicate_ids(tmp_path: Path):
++    path = _write_legacy_duplicate_bank(tmp_path)
++
++    entries = _parse_block_file_canonical(
++        path,
++        persona="p",
++        topic="t",
++        slot_type="INTEGRATION",
++    )
++
++    assert [entry.atom_id for entry in entries] == [
++        "p_t_INTEGRATION_v18",
++        "p_t_INTEGRATION_v18",
++    ]
++
++
++def test_runtime_prose_reader_tolerates_legacy_duplicate_ids(tmp_path: Path):
++    path = _write_legacy_duplicate_bank(tmp_path)
++
++    prose = _parse_block_file_with_prose(
++        path,
++        persona="p",
++        topic="t",
++        slot_type="INTEGRATION",
++        required=True,
++    )
++
++    assert prose == {
++        "p_t_INTEGRATION_v18":
++            "Second legacy body retained by the historical runtime policy."
++    }

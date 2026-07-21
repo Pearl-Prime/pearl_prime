@@ -1,0 +1,1033 @@
+{
+  "schema_version": "1.1.0",
+  "artifact_id": "manga_human_readability_rules_2026-07-09",
+  "generated_at": "2026-07-09",
+  "acceptance_layer": "authored_candidate",
+  "authority": [
+    "artifacts/qa/MANGA_HUMAN_READABILITY_ASSEMBLY_RULES_2026-07-09.md",
+    "docs/specs/MANGA_COMPOSITION_GRAMMAR_SPEC.md"
+  ],
+  "source_registry": {
+    "SRC-COHN-2013": {
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00186/full"
+    },
+    "SRC-COHN-VLL": {
+      "url": "https://visuallanguagelab.com/P/2017.JGNC.NCJAMDRYKP.pdf"
+    },
+    "SRC-MCCLOUD": {
+      "url": "https://benargon.com/comic-panel-tools-techniques/"
+    },
+    "SRC-NATSUME": {
+      "url": "https://www.japanesestudies.org.uk/ejcjs/vol21/iss2/holt_fukuda.html"
+    },
+    "SRC-KLEIN-BALLOON": {
+      "url": "https://kleinletters.com/BalloonPlacement.html"
+    },
+    "SRC-BLAMBOT": {
+      "url": "https://blambot.com/pages/comic-book-grammar-tradition"
+    },
+    "SRC-SHOOTER": {
+      "url": "https://storytelling.jimshooter.com/lettering/"
+    },
+    "SRC-COMICORY": {
+      "url": "https://www.comicory.com/blog/comic-book-lettering"
+    },
+    "SRC-VN-SPRITES": {
+      "url": "https://vnpaths.com/how-to-create-visual-novel-sprites/"
+    },
+    "SRC-CSP-COMPOSITION": {
+      "url": "https://tips.clip-studio.com/en-us/articles/8486"
+    },
+    "SRC-INGTHING": {
+      "url": "https://ingthing.dev/sprites-camera-action-osas/"
+    },
+    "SRC-MATTGODDEN": {
+      "url": "http://www.mattgodden.com/2015/09/02/manga-panel-design-theory/"
+    },
+    "SRC-INTERNAL-COMP-GRAMMAR": {
+      "url": "docs/specs/MANGA_COMPOSITION_GRAMMAR_SPEC.md"
+    },
+    "SRC-INTERNAL-WEBTOON": {
+      "url": "artifacts/research/webtoon_compositing_lettering_2026-04-25.md"
+    },
+    "SRC-INTERNAL-HALFPERSON": {
+      "url": "artifacts/qa/MANGA_HALFPERSON_RULE_CLOSEOUT_2026-07-09.md"
+    }
+  },
+  "rules": [
+    {
+      "rule_id": "HR-U01",
+      "title": "Establish before abstract",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "First panel at new location must be establishing on full_render.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-NATSUME",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U02",
+      "title": "Horizon-ratio G3 scale",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.g3_horizon_scale_check",
+      "determinism": "fail_closed",
+      "rule_text": "Room-scale figures paste via G3 horizon math.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U03",
+      "title": "Contact shadow G4",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.render_contact_shadow_layer",
+      "determinism": "fail_closed",
+      "rule_text": "Contact shadow under floor/seat/table contact.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U04",
+      "title": "Occluder BOOK G5",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.paste_occluder_from_slot",
+      "determinism": "warn_only",
+      "rule_text": "Occluder when lower body hidden on room.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U05",
+      "title": "Angle-bucket match G2",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.g2_angle_bucket",
+      "determinism": "fail_closed",
+      "rule_text": "L0/L2 angle_bucket match on readable BG.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U06",
+      "title": "Light azimuth G8",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.g8_light_azimuth",
+      "determinism": "fail_closed",
+      "rule_text": "Compatible light azimuth L0/L2.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U07",
+      "title": "Defringe G6",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.defringe_cutout",
+      "determinism": "warn_only",
+      "rule_text": "Alpha shrink on L2 paste.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U08",
+      "title": "Look space / lead room",
+      "severity": "minor",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "heuristic",
+      "rule_text": ">=15% look-side lead room for off-frame gaze.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules"
+      ],
+      "source_refs": [
+        "SRC-CSP-COMPOSITION"
+      ]
+    },
+    {
+      "rule_id": "HR-U09",
+      "title": "180-degree speaker side",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Speaker side consistent across dialogue run.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-KLEIN-BALLOON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U10",
+      "title": "Shot variety rhythm",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "warn_only",
+      "rule_text": "Max 3 consecutive same crop band.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-U11",
+      "title": "Abstract close-stage bottom anchor",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.dialogue_bust_paste",
+      "determinism": "fail_closed",
+      "rule_text": "Bust/waist bottom-anchored on abstract stage.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-VN-SPRITES",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U12",
+      "title": "Spatial retention on dialogue",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "generate_assembly_manifest._l0_derivation",
+      "determinism": "fail_closed",
+      "rule_text": "Defocus derives same room plate.",
+      "exceptions": [],
+      "repo_targets": [
+        "generate_assembly_manifest"
+      ],
+      "source_refs": [
+        "SRC-INGTHING",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U13",
+      "title": "Scale-anchor sanity G9",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "composition_grammar.g9_scale_anchor",
+      "determinism": "warn_only",
+      "rule_text": "Prop scale anchors agree at depth.",
+      "exceptions": [],
+      "repo_targets": [
+        "composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U14",
+      "title": "Provenance honesty",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "assemble_from_bank.validate_manifest",
+      "determinism": "fail_closed",
+      "rule_text": "REAL|INTERIM on all layers.",
+      "exceptions": [],
+      "repo_targets": [
+        "assemble_from_bank"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U15",
+      "title": "Panel eye entry",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "warn_only",
+      "rule_text": "Focal subject upper third for scroll entry.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules"
+      ],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-U16",
+      "title": "Re-establish triggers",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Re-establish after location jump or >6 abstract panels.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U17",
+      "title": "Long-shot per screen-run",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "warn_only",
+      "rule_text": "At least one long-shot per scroll run.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-U18",
+      "title": "Closure between units",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "layout",
+      "enforcement_target": "page_compose.py",
+      "determinism": "warn_only",
+      "rule_text": "Smooth panel assemblage paths.",
+      "exceptions": [],
+      "repo_targets": [
+        "page_compose"
+      ],
+      "source_refs": [
+        "SRC-COHN-2013"
+      ]
+    },
+    {
+      "rule_id": "HR-U19",
+      "title": "Motion direction consistency",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Maintain screen direction unless cutaway.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-COHN-2013"
+      ]
+    },
+    {
+      "rule_id": "HR-U20",
+      "title": "Insert objects narrative weight",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "fail_closed",
+      "rule_text": "Hands ECU use tone not full room.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-U21",
+      "title": "Balloon reading order",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "lettering",
+      "enforcement_target": "bubble_render._default_zone_sequence",
+      "determinism": "fail_closed",
+      "rule_text": "Locale-correct balloon order.",
+      "exceptions": [],
+      "repo_targets": [
+        "bubble_render"
+      ],
+      "source_refs": [
+        "SRC-KLEIN-BALLOON",
+        "SRC-BLAMBOT"
+      ]
+    },
+    {
+      "rule_id": "HR-U22",
+      "title": "Tail to mouth",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "lettering",
+      "enforcement_target": "bubble_render._draw_tail_pointer",
+      "determinism": "fail_closed",
+      "rule_text": "Tail 50-60% to mouth.",
+      "exceptions": [],
+      "repo_targets": [
+        "bubble_render"
+      ],
+      "source_refs": [
+        "SRC-BLAMBOT",
+        "SRC-SHOOTER"
+      ]
+    },
+    {
+      "rule_id": "HR-U23",
+      "title": "No face occlusion",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "bubble_composition_validator.py",
+      "determinism": "fail_closed",
+      "rule_text": "Balloons must not cover eyes/mouth.",
+      "exceptions": [],
+      "repo_targets": [
+        "bubble_composition_validator"
+      ],
+      "source_refs": [
+        "SRC-KLEIN-BALLOON",
+        "SRC-COMICORY"
+      ]
+    },
+    {
+      "rule_id": "HR-U24",
+      "title": "Coverage ceiling",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "lettering",
+      "enforcement_target": "bubble_render._coverage_ratio",
+      "determinism": "warn_only",
+      "rule_text": "Balloon area <=30% panel.",
+      "exceptions": [],
+      "repo_targets": [
+        "bubble_render"
+      ],
+      "source_refs": [
+        "SRC-BLAMBOT"
+      ]
+    },
+    {
+      "rule_id": "HR-U25",
+      "title": "Silence is readable",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "pillow_ma panels zero dialogue balloons.",
+      "exceptions": [],
+      "repo_targets": [
+        "validate_chapter_composition_grammar"
+      ],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-U26",
+      "title": "SFX off-center",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "lettering",
+      "enforcement_target": "bubble_render",
+      "determinism": "warn_only",
+      "rule_text": "SFX must not compete with face zones.",
+      "exceptions": [],
+      "repo_targets": [
+        "bubble_render"
+      ],
+      "source_refs": [
+        "SRC-BLAMBOT"
+      ]
+    },
+    {
+      "rule_id": "HR-F01",
+      "title": "Floating half-person in room",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Bust/waist center-pasted on full_render without occluder.",
+      "exceptions": [
+        "diegetic_pair",
+        "diegetic_cu",
+        "grounding.occluder=true"
+      ],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F02",
+      "title": "Top-floating torso",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Torso bbox y < 22% on room plate.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F03",
+      "title": "Abstract BG before establishing",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Abstract bg_class before establishing in new scene.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F04",
+      "title": "Scene-contaminated bust",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Prop geometry baked into L2 alpha on abstract stage.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F05",
+      "title": "Post-hoc defocus salvage",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Blur salvage without manifest derivation at plan time.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F06",
+      "title": "Angle-bucket mismatch paste",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Angle-bucket mismatch between L0 and L2.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F07",
+      "title": "Missing contact shadow",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Missing contact shadow on grounded figure.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F08",
+      "title": "Crossed balloon tails",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Crossed balloon tails create ambiguous order.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F09",
+      "title": "Balloon covers face",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Balloon occludes primary facial expression.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F10",
+      "title": "Balloon coverage exceeds limit",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "warn_only",
+      "rule_text": "Balloon coverage exceeds configured ceiling.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F11",
+      "title": "Character in pillow_ma",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Figure present in pillow_ma silence panel.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F12",
+      "title": "Cross-genre asset salvage",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules.validate_composition_panel_planning",
+      "determinism": "fail_closed",
+      "rule_text": "Cross-genre L2 pasted into foreign L0.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F13",
+      "title": "Four-way panel intersection",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "warn_only",
+      "rule_text": "Four-way panel join without T-cut offset.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F14",
+      "title": "Speedline wall",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "warn_only",
+      "rule_text": "Dense speedlines on every action panel.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-F15",
+      "title": "Crop at joint",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "asset_bank",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Crop boundary bisects knee/elbow/neck joint.",
+      "exceptions": [],
+      "repo_targets": [
+        "panel_planning_rules.py",
+        "bubble_render.py"
+      ],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON",
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-S01",
+      "title": "Ma panel figure-free",
+      "severity": "major",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "warn_only",
+      "rule_text": "Figure-free panel after tension block.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-S02",
+      "title": "Iyashikei silence ratio",
+      "severity": "major",
+      "scope": "genre:iyashikei",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "warn_only",
+      "rule_text": ">=50% non-dialogue panels.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-IY01",
+      "title": "Iyashikei low density",
+      "severity": "minor",
+      "scope": "genre:iyashikei",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "heuristic",
+      "rule_text": "3-5 tiers generous white.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-IY02",
+      "title": "Iyashikei no speedlines",
+      "severity": "critical",
+      "scope": "genre:iyashikei",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "No action manpu on healing register.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-MC01",
+      "title": "Mecha native bank",
+      "severity": "critical",
+      "scope": "genre:mecha",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "fail_closed",
+      "rule_text": "No cross-genre bust in mecha hangar.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-MC02",
+      "title": "Cockpit occluder",
+      "severity": "critical",
+      "scope": "genre:mecha",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "fail_closed",
+      "rule_text": "Cockpit dialogue requires console occluder.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-TH01",
+      "title": "Thriller wide-tight rhythm",
+      "severity": "minor",
+      "scope": "genre:thriller",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "heuristic",
+      "rule_text": "Wide atmospheric then tight approach.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-AC01",
+      "title": "Action oblique panels",
+      "severity": "major",
+      "scope": "genre:action",
+      "layer": "layout",
+      "enforcement_target": "page_compose.py",
+      "determinism": "warn_only",
+      "rule_text": "Naname cuts for motion.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-MATTGODDEN"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-WP01",
+      "title": "Workplace desk occluder",
+      "severity": "minor",
+      "scope": "genre:workplace",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "heuristic",
+      "rule_text": "Desk occluder for seated dialogue.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-GEN-MY01",
+      "title": "Mystery reveal sequence",
+      "severity": "minor",
+      "scope": "genre:mystery",
+      "layer": "planner",
+      "enforcement_target": "panel_planning_rules",
+      "determinism": "heuristic",
+      "rule_text": "Setup-tension-reveal-reaction.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-NATSUME"
+      ]
+    },
+    {
+      "rule_id": "HR-WIRE-001",
+      "title": "Manifest gen unwired",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "planner",
+      "enforcement_target": "generate_assembly_manifest.py",
+      "determinism": "fail_closed",
+      "rule_text": "Must call validate_composition_panel_planning.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON"
+      ]
+    },
+    {
+      "rule_id": "HR-WIRE-002",
+      "title": "Assembler load unwired",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "assembler",
+      "enforcement_target": "assemble_from_bank.load_manifest",
+      "determinism": "fail_closed",
+      "rule_text": "Must fail-closed planning validation.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-HALFPERSON"
+      ]
+    },
+    {
+      "rule_id": "HR-WIRE-003",
+      "title": "Chapter validator absent",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "validate_chapter_composition_grammar.py",
+      "determinism": "fail_closed",
+      "rule_text": "Implement spec SS6.2.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-COMP-GRAMMAR"
+      ]
+    },
+    {
+      "rule_id": "HR-WIRE-004",
+      "title": "Bubble face check absent",
+      "severity": "critical",
+      "scope": "universal",
+      "layer": "validator",
+      "enforcement_target": "bubble_composition_validator.py",
+      "determinism": "fail_closed",
+      "rule_text": "Face occlusion validator missing.",
+      "exceptions": [],
+      "repo_targets": [],
+      "source_refs": [
+        "SRC-INTERNAL-WEBTOON"
+      ]
+    }
+  ],
+  "crop_room_matrix_ref": "scripts/manga/composition_grammar.py:G1_MATRIX",
+  "repo_drift": {
+    "governed": [
+      "composition_grammar.py",
+      "panel_planning_rules.py",
+      "audit_assembly_manifest_planning.py",
+      "annotate_l2_composition_legal.py",
+      "assemble_from_bank._grammar_l2_composite",
+      "bubble_render.coverage_limit"
+    ],
+    "weak": [
+      "generate_assembly_manifest.py",
+      "assemble_from_bank.load_manifest",
+      "validate_chapter_composition_grammar.py",
+      "bubble_render.face_occlusion",
+      "composition_meta.schema.json"
+    ],
+    "duplicate": [
+      "ARCHETYPE_SHOT_TYPE in generate_assembly_manifest.py vs panel_planning_rules.py"
+    ],
+    "delete_or_rewire": [
+      "queue_panel_renders.py",
+      "bbox_legacy default path",
+      "invalid_proof outside quarantine"
+    ]
+  }
+}

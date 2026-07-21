@@ -150,10 +150,11 @@ def test_chapter_runner_two_phase_resume(tmp_path: Path) -> None:
     assert not stage_is_passed(ws, sid.CHAPTER_IMAGE_GEN)
 
     # MANGA.BESTSELLER.GENRE_ENGINE reads declared genre from the chapter script.
+    # Runtime must stamp it; do not mutate the script here.
     script_path = ws / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
     script = json.loads(script_path.read_text(encoding="utf-8"))
-    script["genre_id"] = genre_id
-    script_path.write_text(json.dumps(script, indent=2) + "\n", encoding="utf-8")
+    declared = str(script.get("genre") or script.get("genre_id") or "").strip()
+    assert declared == genre_id, f"emitted chapter script missing genre_id={genre_id!r}, got {declared!r}"
 
     # Build replay map dynamically from generated panel_prompts
     pp = json.loads((ws / "panel_prompts.json").read_text(encoding="utf-8"))

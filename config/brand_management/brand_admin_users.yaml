@@ -1,12 +1,12 @@
-# Brand Admin Users — 1 admin per brand (39×14 unified), keyed by canonical <archetype>_<lane>.
+# Brand Admin Users — 1 admin per brand (40×14 unified), keyed by canonical <archetype>_<lane>.
 # GENERATED from config/brand_management/global_brand_registry_unified.yaml — do not hand-edit keys.
 # Live assignments are written by the wizard submit endpoint to the gitignored overlay
 # artifacts/onboarding/roster_assignments.yaml (status + admin name/email); this file is the
-# unassigned canonical template. Auth: magic link via email. status: unassigned|assigned.
+# unassigned canonical template plus committed operator assignments. Auth: magic link via email. status: unassigned|assigned.
 
 schema_version: "2.0"
 generated_from: config/brand_management/global_brand_registry_unified.yaml
-total_admins: 546
+total_admins: 560
 
 admins:
   adhd_forge_de_de:
@@ -3717,10 +3717,11 @@ admins:
     brand_archetype_id: stabilizer
     lane_id: en_US
     publication_corp: "Harbor Line Books"
-    admin_name: ""
+    admin_name: "Kamiko Parker"
+    brand_director_id: "kamiko_parker"
     admin_email: ""
     notification_channel: email
-    status: unassigned
+    status: assigned
   stabilizer_es_es:
     brand_archetype_id: stabilizer
     lane_id: es_ES
@@ -4373,6 +4374,118 @@ admins:
     brand_archetype_id: warrior_calm
     lane_id: zh_TW
     publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_de_de:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: de_DE
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_en_us:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: en_US
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_es_es:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: es_ES
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_es_us:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: es_US
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_fr_fr:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: fr_FR
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_hu_hu:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: hu_HU
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_it_it:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: it_IT
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_ja_jp:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: ja_JP
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_ko_kr:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: ko_KR
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_pt_br:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: pt_BR
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_zh_cn:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: zh_CN
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_zh_hk:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: zh_HK
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_zh_sg:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: zh_SG
+    publication_corp: "Waystream Sanctuary Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  way_stream_sanctuary_zh_tw:
+    brand_archetype_id: way_stream_sanctuary
+    lane_id: zh_TW
+    publication_corp: "Waystream Sanctuary Books"
     admin_name: ""
     admin_email: ""
     notification_channel: email

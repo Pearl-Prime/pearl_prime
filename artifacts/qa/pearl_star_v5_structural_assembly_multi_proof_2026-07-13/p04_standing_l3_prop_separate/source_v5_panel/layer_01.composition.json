@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "p04_standing_l3_prop_separate_l0_support_plate",
+  "layer_class": "L0",
+  "bg_class": "full_render",
+  "light": {
+    "azimuth": "ambient"
+  },
+  "camera": {
+    "angle_bucket": "eye_level",
+    "eye_level_y_pct": 42,
+    "camera_height": "standing"
+  },
+  "anchor_slots": [],
+  "support_zones": [
+    {
+      "zone_id": "clear_floor",
+      "kind": "floor",
+      "polygon_pct": [
+        [
+          0,
+          65
+        ],
+        [
+          100,
+          65
+        ],
+        [
+          100,
+          100
+        ],
+        [
+          0,
+          100
+        ]
+      ],
+      "occupancy": "clear",
+      "allows_character_support": true,
+      "allowed_structural_templates": [
+        "standing_room_scene"
+      ],
+      "priority": 0
+    }
+  ]
+}

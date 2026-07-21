@@ -13,6 +13,17 @@ contracts:
       subject_must_not_touch_edge_axes.bottom: false
     notes: "default for full-body shots; archetypes may override to framing.LS for wider"
 
+  character_ELS_in_L0:
+    inherits_from: framing.LS
+    overrides:
+      subject_zone_pct: [22, 20]
+      margin.top: 10
+      margin.bottom: 10
+      margin.left: 10
+      margin.right: 10
+      subject_must_not_touch_edge_axes.bottom: false
+    notes: "small full-body figure embedded in a wide establish; exact off-center placement comes from archetype composition, not centered safe-zone math"
+
   character_face_only:
     inherits_from: framing.CU
     overrides:

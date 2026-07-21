@@ -36,6 +36,117 @@ function norm(s) {
   return String(s == null ? "" : s).toLowerCase().replace(/[\s-]+/g, "_");
 }
 
+function cleanNamePart(s) {
+  return String(s || "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/[<>"'`]/g, "")
+    .trim();
+}
+
+function directorNameFromContact(contact) {
+  const c = contact || {};
+  return [cleanNamePart(c.firstName), cleanNamePart(c.lastName)]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+}
+
+function directorIdFromName(name) {
+  return (
+    String(name || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 80) || "brand_director"
+  );
+}
+
+function baseBrandFromId(brandId) {
+  return String(brandId || "").replace(/_(en_us|es_us|es_es|fr_fr|de_de|it_it|hu_hu|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");
+}
+
+function isAssignedBrand(entry) {
+  if (!entry || typeof entry !== "object") return false;
+  const status = norm(entry.brand_director_status || entry.status || "");
+  return (
+    status === "assigned" ||
+    status === "claimed" ||
+    !!String(entry.brand_director_name || "").trim() ||
+    !!String(entry.brand_director_id || "").trim()
+  );
+}
+
+function yamlSafe(s) {
+  return String(s == null ? "" : s).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+export function brandAssignmentPayload(match, contact) {
+  if (!match || !match.brand_id) return null;
+  const name = directorNameFromContact(contact);
+  if (!name) return null;
+  return {
+    brand_id: match.brand_id,
+    base_brand: baseBrandFromId(match.brand_id),
+    display_brand: match.publication_corp || match.brand_id,
+    brand_director_name: name,
+    brand_director_id: directorIdFromName(name),
+    brand_director_status: "assigned",
+  };
+}
+
+export function appendBrandAssignmentToYAML(yamlText, match, contact) {
+  const a = brandAssignmentPayload(match, contact);
+  if (!a) return yamlText;
+  return (
+    String(yamlText || "").replace(/\s*$/, "\n\n") +
+    "matched_brand:\n" +
+    `  brand_id: "${yamlSafe(a.brand_id)}"\n` +
+    `  base_brand: "${yamlSafe(a.base_brand)}"\n` +
+    `  display_brand: "${yamlSafe(a.display_brand)}"\n` +
+    `  brand_director_name: "${yamlSafe(a.brand_director_name)}"\n` +
+    `  brand_director_id: "${yamlSafe(a.brand_director_id)}"\n` +
+    `  brand_director_status: "${yamlSafe(a.brand_director_status)}"\n`
+  );
+}
+
+export async function loadBrandIndexWithLiveAssignments() {
+  const response = await fetch("brand_admin_brands.json", { cache: "no-store" });
+  const brands = response.ok ? await response.json() : {};
+  // Teacher-originated + hybrid brands (additive registry; never mutates the 40×14 index file).
+  try {
+    const toResp = await fetch("teacher_originated_brands.json", { cache: "no-store" });
+    if (toResp.ok) {
+      const extra = await toResp.json();
+      if (extra && typeof extra === "object") {
+        for (const [bid, row] of Object.entries(extra)) {
+          if (row && typeof row === "object" && !brands[bid]) brands[bid] = row;
+        }
+      }
+    }
+  } catch (_) {
+    /* optional overlay */
+  }
+  try {
+    const liveResponse = await fetch("/api/onboarding/assignments", { cache: "no-store" });
+    if (!liveResponse.ok) return brands;
+    const live = await liveResponse.json();
+    if (!Array.isArray(live.brands)) return brands;
+    for (const row of live.brands) {
+      if (!row?.brand_id || !brands[row.brand_id] || !String(row.brand_director_name || "").trim()) continue;
+      brands[row.brand_id] = {
+        ...brands[row.brand_id],
+        brand_director_name: row.brand_director_name,
+        brand_director_id: row.brand_director_id || "",
+        brand_director_status: row.brand_director_status || "assigned",
+        assigned_at: row.assigned_at || "",
+      };
+    }
+  } catch (_) {
+    // Static index fallback keeps the wizard usable during local dev or API downtime.
+  }
+  return brands;
+}
+
 // state: wizard selections {onboardingMarket, archetype, persona, emotions[], topicTags[], angles[], tradition}
 // brands: brand_admin_brands.json (keyed by brand_id)
 // teacherMode: {mode:"teacher"|"composite", teacher:string|null}  (from phoenix_book_mode / ?teacher / ?mode)
@@ -45,9 +156,11 @@ export function matchBrand(state, brands, teacherMode) {
   const market = norm(state.onboardingMarket || "us");
   const laneSuffix = "_" + (LANE_FROM_MARKET[market] || "en_us");
 
-  // Candidates: this market's lane, and buildable (never strand an admin on a 0-ship brand).
+  // Candidates: this market's lane, buildable, and not already assigned. The
+  // server still enforces this, but the wizard should not preview an occupied
+  // brand as available.
   const inLane = Object.entries(brands).filter(
-    ([bid, b]) => bid.endsWith(laneSuffix) && b && b.buildable !== false
+    ([bid, b]) => bid.endsWith(laneSuffix) && b && b.buildable !== false && !isAssignedBrand(b)
   );
   if (!inLane.length) return null;
 

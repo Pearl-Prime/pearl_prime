@@ -61,3 +61,51 @@ def test_write_series_artifacts_roundtrip(tmp_path: Path) -> None:
     )
     write_series_artifacts(tmp_path, b)
     assert (tmp_path / manga_paths.STORY_ARCHITECTURE_HANDOFF).is_file()
+
+
+def test_emit_series_setup_propagates_mode_and_genre(tmp_path: Path) -> None:
+    """Real operator path: mode + genre_id land on architecture and chapter script."""
+    from phoenix_v4.manga.chapter.writer_stub import build_chapter_script_pair_from_handoff
+
+    for mode in ("teacher", "music"):
+        ws = tmp_path / mode
+        bundle = emit_series_setup(
+            ws,
+            series_id="mode_series",
+            arc_id="mode_arc",
+            genre_id="iyashikei",
+            topic="anxiety",
+            mode=mode,
+        )
+        internal = bundle["story_architecture_internal"]
+        handoff = bundle["story_architecture_handoff"]
+        assert internal.get("genre_id") == "iyashikei"
+        assert handoff.get("genre_id") == "iyashikei"
+        assert internal.get("mode") == mode
+        assert handoff.get("mode") == mode
+        assert isinstance(internal.get("mode_vessel"), dict)
+        assert isinstance(handoff.get("mode_vessel"), dict)
+        assert internal["mode_vessel"].get("mode") == mode
+
+        writer, _ir = build_chapter_script_pair_from_handoff(
+            handoff,
+            chapter_number=1,
+            series_id="mode_series",
+            chapter_id="ch1",
+        )
+        declared = str(writer.get("genre") or writer.get("genre_id") or "")
+        assert declared == "iyashikei"
+        assert writer.get("mode") == mode
+
+
+def test_emit_without_mode_still_declares_genre(tmp_path: Path) -> None:
+    b = emit_series_setup(
+        tmp_path,
+        series_id="nog_mode",
+        arc_id="a",
+        genre_id="ci_smoke_genre",
+    )
+    assert b["story_architecture_internal"].get("genre_id") == "ci_smoke_genre"
+    assert b["story_architecture_handoff"].get("genre_id") == "ci_smoke_genre"
+    assert "mode" not in b["story_architecture_internal"]
+    assert "mode_vessel" not in b["story_architecture_internal"]

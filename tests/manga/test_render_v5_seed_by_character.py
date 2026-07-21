@@ -17,9 +17,11 @@ import pytest
 # collection doesn't hard-error. The seed logic itself needs no numpy.
 pytest.importorskip("numpy")  # skip entire module if numpy not in test env
 
+from scripts.manga import render_v5_episode as v5
 from scripts.manga.render_v5_episode import (
     DEFAULT_SEED_BASE,
     _resolve_archetype_subject_state,
+    compile_v5_full_panel_prompt,
     compute_panel_seed,
 )
 from scripts.manga.character_individuation.reference_sheet_generator import (
@@ -48,6 +50,10 @@ def _character_panel(character_id: str = "mira_aoki", on_frame: bool = True) -> 
 
 CHAR_ARCH_CTX = {"subject_type": "character_single"}
 ENV_ARCH_CTX = {"subject_type": None}
+PROMOTED_ENV_ARCH_CTX = {
+    "subject_type": None,
+    "on_frame_character_subject_type": "character_ELS_in_L0",
+}
 
 
 # ── audit assertion: the panel payload carries a per-panel character_id ───────
@@ -123,6 +129,17 @@ def test_environmental_panel_falls_back_to_index_jitter():
     assert seed == DEFAULT_SEED_BASE + 3 * 1009
 
 
+def test_promoted_environmental_panel_uses_on_frame_character():
+    """An env-first archetype with explicit on-frame promotion resolves the character."""
+    cid, cstate = _resolve_archetype_subject_state(
+        _character_panel(), PROMOTED_ENV_ARCH_CTX
+    )
+    assert cid == "mira_aoki"
+    assert cstate is not None
+    seed = compute_panel_seed(DEFAULT_SEED_BASE, 3, cid, True)
+    assert seed == DEFAULT_SEED_BASE + sum(ord(c) for c in cid)
+
+
 def test_off_frame_character_falls_back_to_index_jitter():
     """An off-frame character isn't rendered → no per-character seed → jitter."""
     cid, _ = _resolve_archetype_subject_state(
@@ -136,3 +153,43 @@ def test_off_frame_character_falls_back_to_index_jitter():
 def test_none_character_with_flag_off_is_still_index_jitter():
     """Defensive: flag off + no character == plain jitter (no crash on None)."""
     assert compute_panel_seed(42, 2, None, False) == 42 + 2 * 1009
+
+
+def test_sparse_establishing_with_authored_character_promotes_to_l2():
+    """Wide establish with authored on-frame state must not silently fall back to L0."""
+    configs = v5.v4.load_configs("stillness_en_01")
+    panels = {
+        p["panel_id"]: p
+        for p in v5.v4.load_panel_states(
+            "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+            "ep_001",
+        )
+        if "panel_id" in p
+    }
+    bundle, layer_type, safe_zone_row, _arch_ctx = compile_v5_full_panel_prompt(
+        panels["ep001_013"], configs
+    )
+    assert layer_type == "L2"
+    assert safe_zone_row is not None
+    assert safe_zone_row["subject_zone_pct"] == [22, 20]
+    assert "x 3-25% / y 65-85%" in bundle.positive
+    assert "feet-on-floor contact" in bundle.positive
+
+
+def test_sparse_establishing_without_character_stays_l0():
+    """Scene-only establish with no authored character state remains environmental."""
+    configs = v5.v4.load_configs("stillness_en_01")
+    panels = {
+        p["panel_id"]: p
+        for p in v5.v4.load_panel_states(
+            "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+            "ep_001",
+        )
+        if "panel_id" in p
+    }
+    bundle, layer_type, safe_zone_row, _arch_ctx = compile_v5_full_panel_prompt(
+        panels["ep001_001"], configs
+    )
+    assert layer_type == "L0"
+    assert safe_zone_row is None
+    assert "Wide establishing shot" in bundle.positive

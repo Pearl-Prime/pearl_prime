@@ -4,6 +4,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from phoenix_v4.quality.composite_doctrine_secular_lint import (
+    REQUIRED_TEACHING_PARAGRAPHS,
+    lint_canonical_file,
     lint_composite_doctrine_tree,
     lint_file,
 )
@@ -62,3 +64,49 @@ def test_lint_tree_finds_nested_canonical(tmp_path: Path) -> None:
     hits = lint_composite_doctrine_tree(root=tmp_path / "composite_doctrine")
     assert len(hits) == 1
     assert hits[0].matched_tell == "krishna"
+
+
+def _three_para_secular_block() -> str:
+    return (
+      "## COMPOSITE_DOCTRINE v01\n"
+      "---\n"
+      "---\n"
+      "First teaching paragraph with enough secular prose.\n\n"
+      "Second teaching paragraph stays in ordinary language.\n\n"
+      "Third teaching paragraph closes without religious framing.\n"
+      "---\n"
+  )
+
+
+def _two_para_block() -> str:
+    return (
+        "## COMPOSITE_DOCTRINE v01\n"
+        "---\n"
+        "---\n"
+        "Only one teaching paragraph here.\n\n"
+        "And a second — still one short of the ruling.\n"
+        "---\n"
+    )
+
+
+def test_shape_two_paragraph_fixture_rejected(tmp_path: Path) -> None:
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(_two_para_block(), encoding="utf-8")
+    hits = lint_canonical_file(path)
+    shape_hits = [v for v in hits if v.matched_tell.startswith("shape:")]
+    assert len(shape_hits) == 1
+    assert shape_hits[0].atom_id == "COMPOSITE_DOCTRINE v01"
+    assert f"expected {REQUIRED_TEACHING_PARAGRAPHS}" in shape_hits[0].matched_tell
+
+
+def test_shape_three_paragraph_secular_fixture_passes(tmp_path: Path) -> None:
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(_three_para_secular_block(), encoding="utf-8")
+    assert lint_canonical_file(path) == []
+
+
+def test_lint_file_secular_only_skips_shape(tmp_path: Path) -> None:
+    """lint_file() remains secular-only for backward-compatible call sites."""
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(_two_para_block(), encoding="utf-8")
+    assert lint_file(path) == []

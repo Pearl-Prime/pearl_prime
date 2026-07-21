@@ -25,11 +25,15 @@ recognition is Priya, but v03 of mechanism_proof may be Nadia.  The planner:
 Story spread
 ------------
 Each full story is assigned to ONE chapter in the phase.  Within that chapter,
-arc positions are spread across the three SCENE section slots:
-  SCENE slot 0 (e.g., sec2)  → recognition
-  SCENE slot 1 (e.g., sec5)  → mechanism_proof
-  SCENE slot 2 (e.g., sec9)  → turning_point  (sec9 in ch1/ch2)
-                              → embodiment     (sec9 in the last chapter of phase)
+arc positions are planned against three story anchors:
+  SCENE slot 0 (e.g., sec2)  → recognition      (early beat)
+  SCENE slot 1 (e.g., sec5)  → mechanism_proof  (middle beat)
+  SCENE slot 2 (e.g., sec9)  → turning_point    (late beat, ch1/ch2)
+                              → embodiment       (late beat, last chapter of phase)
+
+These are planner anchors, not a license for raw back-to-back vignette dumps.
+The rendering layer is expected to keep intervening non-story material so the
+chapter reads as one narrative unit rather than stacked same-character cold opens.
 
 The planner returns a StorySchedule that maps (chapter_index, scene_slot_index)
 → StoryAtomSlot so the injection resolver can look up the exact atom to inject.
@@ -200,6 +204,7 @@ def _extract_character(text: str) -> Optional[str]:
 def _load_atoms_for_engine(
     base: Path,
     engine: str,
+    locale: Optional[str] = None,
 ) -> List[AtomFile]:
     atoms: List[AtomFile] = []
     engine_dir = base / engine
@@ -213,6 +218,18 @@ def _load_atoms_for_engine(
             text = f.read_text(encoding="utf-8").strip()
             if not text:
                 continue
+            # character / variant / word_count derive from the English source so
+            # story selection stays deterministic and locale-independent. Only the
+            # RENDERED text is swapped to the localized sibling when one exists at
+            # {arc_pos}/locales/{locale}/micro/{stem}.txt; otherwise English is kept
+            # (honest fallback, flagged by the locale-fallback gate). en-US: byte-identical.
+            render_text = text
+            if locale and locale != "en-US":
+                loc_f = engine_dir / arc_pos / "locales" / locale / "micro" / f.name
+                if loc_f.is_file():
+                    loc_text = loc_f.read_text(encoding="utf-8").strip()
+                    if loc_text:
+                        render_text = loc_text
             atoms.append(
                 AtomFile(
                     path=f,
@@ -221,7 +238,7 @@ def _load_atoms_for_engine(
                     variant=f.stem,
                     character=_extract_character(text) or "unknown",
                     word_count=len(text.split()),
-                    text=text,
+                    text=render_text,
                 )
             )
     return atoms
@@ -232,13 +249,14 @@ def _load_all_atoms(
     topic: str,
     repo_root: Path,
     engines: Optional[List[str]] = None,
+    locale: Optional[str] = None,
 ) -> List[AtomFile]:
     base = repo_root / "story_atoms" / persona_id / "anchored" / topic
     if not base.is_dir():
         return []
     all_atoms: List[AtomFile] = []
     for engine in (engines or _DEFAULT_ENGINES):
-        all_atoms.extend(_load_atoms_for_engine(base, engine))
+        all_atoms.extend(_load_atoms_for_engine(base, engine, locale=locale))
     return all_atoms
 
 
@@ -654,6 +672,7 @@ def build_story_schedule(
     runtime_format: str = "",
     planner_warnings: Optional[List[str]] = None,
     continuity_plan: Optional[List[dict]] = None,
+    locale: Optional[str] = None,
 ) -> StorySchedule:
     """Build a full-book story schedule: 3-6 full-arch stories per phase.
 
@@ -669,7 +688,7 @@ def build_story_schedule(
         n_per_phase: number of full stories per book phase (3-6)
         phase_chapters: override the default HARDSHIP/HELP/HEALING/HOPE chapter ranges
     """
-    all_atoms = _load_all_atoms(persona_id, topic, repo_root)
+    all_atoms = _load_all_atoms(persona_id, topic, repo_root, locale=locale)
     if not all_atoms:
         return StorySchedule()
 

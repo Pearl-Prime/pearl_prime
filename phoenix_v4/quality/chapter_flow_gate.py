@@ -114,6 +114,17 @@ _TRANSITION_CUES = (
     "step into",          # bridge family seeing-has-a-downstairs
     "the seeing",         # 'The seeing has a downstairs'
     "in another",         # 'in another room'
+    # Mixed-language zh-TW renders can retain authored English craft bridges.
+    # These are connective shapes, not gate bypasses: each marks a real relation
+    # between claims, examples, or chapter callbacks.
+    "earlier i said",
+    "here is what was hidden",
+    "when the loop",
+    "if the loop",
+    "both truths",
+    "look at",
+    "what survives",
+    "if a practice",
 )
 
 _THESIS_CUES = (
@@ -136,6 +147,15 @@ _THESIS_CUES = (
     "what follows",         # 'What follows is not a test, it is an invitation'
     "what remains",         # 'What remains is the moment after'
     "the truth",            # 'the body often tells the truth in extremities'
+    # Anxiety flagship / zh-TW mixed-language forms: real thesis shapes that
+    # express the clear point without the older "the point is" wording.
+    "the alarm is not broken",
+    "that mismatch is the whole problem",
+    "it is not you",
+    "both truths can stay true",
+    "is not the enemy",
+    "the problem was never",
+    "that is the whole point",
 )
 
 _AHA_CUES = (
@@ -149,9 +169,81 @@ _AHA_CUES = (
     "but the",
 )
 
+_ZH_TRANSITION_CUES = (
+    "這就是為什麼",
+    "這也就是為什麼",
+    "換句話說",
+    "在實際操作中",
+    "舉例來說",
+    "例如",
+    "因此",
+    "所以當",
+    "因為",
+    "這很重要，因為",
+    "你可以看見",
+    "請記住",
+    "接下來",
+    "從這裡開始",
+    "同時",
+    "接著",
+)
+
+_ZH_THESIS_CUES = (
+    "重點是",
+    "意思是",
+    "這意味著",
+    "這並不是",
+    "這不是",
+    "問題不在於",
+    "真正的問題是",
+    "真相是",
+    "接下來要記住的是",
+    "問題在於",
+    "不是問題所在",
+    "這兩者有差別",
+    "差別在於",
+    "關鍵是",
+)
+
+_ZH_ACTION_CUES = (
+    "呼吸",
+    "停一下",
+    "暫停",
+    "吐氣",
+    "吸氣",
+    "寫下",
+    "命名",
+    "注意",
+    "選擇",
+    "練習",
+)
+
+_ZH_AHA_CUES = (
+    "代價",
+    "成本",
+    "你的身體",
+    "不是問題",
+    "並不是問題",
+    "反而",
+    "但",
+)
+
+
+def _locale_family(locale: str | None) -> str:
+    loc = (locale or "").strip().lower().replace("_", "-")
+    if loc.startswith("zh-"):
+        return "zh"
+    return ""
+
+
+def _localized_cues(locale: str | None) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...], tuple[str, ...]]:
+    if _locale_family(locale) == "zh":
+        return _ZH_TRANSITION_CUES, _ZH_THESIS_CUES, _ZH_ACTION_CUES, _ZH_AHA_CUES
+    return (), (), (), ()
+
 
 def _sentences(text: str) -> list[str]:
-    parts = re.split(r"(?<=[.!?])\s+", text.strip())
+    parts = re.split(r"(?<=[.!?。！？])\s*", text.strip())
     return [p.strip() for p in parts if p.strip()]
 
 
@@ -235,6 +327,7 @@ def evaluate_chapter_flow(
     chapter_text: str,
     *,
     flow_profile: str = "standard",
+    locale: str | None = None,
 ) -> ChapterFlowResult:
     errors: list[str] = []
     warnings: list[str] = []
@@ -288,7 +381,11 @@ def evaluate_chapter_flow(
     if "in the next chapter" in lower or "there is more to explore" in lower:
         errors.append("ANNOUNCED_THREAD")
 
-    transition_hits = sum(1 for cue in _TRANSITION_CUES if cue in lower)
+    locale_transition_cues, locale_thesis_cues, locale_action_cues, locale_aha_cues = _localized_cues(locale)
+
+    transition_hits = sum(1 for cue in _TRANSITION_CUES if cue in lower) + sum(
+        1 for cue in locale_transition_cues if cue in text
+    )
     if is_short_form:
         min_transitions = 2
     elif is_deep_form:
@@ -303,7 +400,9 @@ def evaluate_chapter_flow(
         else:
             errors.append("WEAK_TRANSITIONS")
 
-    thesis_hits = sum(1 for cue in _THESIS_CUES if cue in lower)
+    thesis_hits = sum(1 for cue in _THESIS_CUES if cue in lower) + sum(
+        1 for cue in locale_thesis_cues if cue in text
+    )
     if thesis_hits < 1:
         # Deep-form somatic / grief chapters use experiential language rather
         # than explicit thesis statements.  Downgrade to warning.
@@ -340,10 +439,13 @@ def evaluate_chapter_flow(
     if std_len < 4.0:
         warnings.append("LOW_RHYTHM_VARIATION")
 
-    if not re.search(r"\b(breathe|pause|exhale|inhale|write|name|notice|choose|practice)\b", lower):
+    action_hits = sum(1 for cue in locale_action_cues if cue in text)
+    if not re.search(r"\b(breathe|pause|exhale|inhale|write|name|notice|choose|practice)\b", lower) and action_hits < 1:
         errors.append("NO_ACTIONABLE_STEP")
 
-    aha_hits = sum(1 for cue in _AHA_CUES if cue in lower)
+    aha_hits = sum(1 for cue in _AHA_CUES if cue in lower) + sum(
+        1 for cue in locale_aha_cues if cue in text
+    )
     if aha_hits < 1:
         warnings.append("LOW_AHA_SIGNAL")
 
@@ -358,8 +460,10 @@ def evaluate_chapter_flow(
         "avg_adjacent_overlap": round(avg_overlap, 3),
         "sentence_len_std": round(std_len, 2),
         "aha_hits": aha_hits,
+        "action_hits": action_hits,
         "scaffold_hits": scaffold_hits,
         "flow_profile": profile,
+        "locale_family": _locale_family(locale),
     }
     return ChapterFlowResult(status, score, errors, warnings, metrics)
 
@@ -370,6 +474,7 @@ def evaluate_chapter_flow_with_slots(
     *,
     flow_profile: str = "standard",
     runtime_format_id: str = "",
+    locale: str | None = None,
 ) -> ChapterFlowResult:
     """
     Same heuristics as evaluate_chapter_flow on concatenated text, plus:
@@ -384,7 +489,7 @@ def evaluate_chapter_flow_with_slots(
             {},
         )
     chapter_text = "\n\n".join(p.strip() for p in segment_proses if p and p.strip())
-    result = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile)
+    result = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile, locale=locale)
     warnings = list(result.warnings)
     errors = list(result.errors)
     seq_warnings = evaluate_canonical_sequence_compliance(

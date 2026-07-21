@@ -35,6 +35,10 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("DeepSeek", "DEEPSEEK_MODEL", False, "DeepSeek model override (default: deepseek-chat)"),
     ("Google AI Studio", "GOOGLE_AI_API_KEY", False, "ja-JP translation — Gemini 2.0 Flash, 1M tokens/day free. Get: aistudio.google.com/apikey"),
     ("Google AI Studio", "GEMINI_MODEL", False, "Gemini model override (default: gemini-2.0-flash)"),
+    # --- Translation QA external signals (calibration/high-risk only, NOT wired into default path — see docs/decisions/TRANSLATION_QA_MT_EXTERNAL_SIGNALS_2026-07-21.md) ---
+    ("Google Cloud Translation", "GOOGLE_TRANSLATE_API_KEY", False, "Cloud Translation API (translate.googleapis.com) key — MT disagreement candidate for zh-TW QA calibration. 500K chars/mo free. Get: console.cloud.google.com > APIs & Services > Credentials"),
+    ("Azure AI Translator", "AZURE_TRANSLATOR_KEY", False, "Azure Translator (Cognitive Services) key — MT disagreement candidate for zh-TW QA calibration. F0 tier: 2M chars/mo free, standing. Get: portal.azure.com"),
+    ("Azure AI Translator", "AZURE_TRANSLATOR_REGION", False, "Azure resource region, required alongside AZURE_TRANSLATOR_KEY (e.g. eastus)"),
     # --- Free-tier LLM providers (EN / non-CJK article expansion) ---
     ("Groq", "GROQ_API_KEY", False, "Free EN default: llama-3.3-70b-versatile. Get: console.groq.com/keys"),
     ("xAI / Grok", "XAI_API_KEY", False, "Free EN fallback 1: grok-3-mini. $25/mo free credits. Get: console.x.ai"),
@@ -80,6 +84,10 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK_STILLNESS", False, "Stillness Press funnel capture webhook"),
     ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION", False, "Devotion Path (Open Vessel Press) funnel capture webhook"),
     ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM", False, "Waystream Sanctuary funnel capture webhook"),
+    # --- GHL V2 sub-account sync (YAML desired-state). NOT the legacy V1 funnel vars above. ---
+    ("GoHighLevel", "GHL_PRIVATE_INTEGRATION_TOKEN", False, "GHL V2 Private Integration Token (Bearer). Read-only scopes ONLY: locations.readonly, locations/customValues.readonly, locations/customFields.readonly. Distinct from legacy GHL_API_KEY (V1, end-of-support 2025-12-31 — not accepted for sub-account sync). Static token: no auto-refresh, rotate every 90 days per HighLevel. Get: app.gohighlevel.com > Settings > Private Integrations > Create new Integration. See artifacts/coordination/handoffs/ghl_credential_sandbox_probe_2026-07-15.md §4."),
+    ("GoHighLevel", "GHL_SANDBOX_LOCATION_ID", False, "Operator-selected sandbox/test GHL location id for read-only probes. NEVER a production location. Get: sandbox sub-account > Settings > Business Profile."),
+    ("GoHighLevel", "GHL_API_VERSION", False, "GHL API `Version` request header value, e.g. 2021-07-28 per the Private Integration Token docs. Explicit desired-state metadata — docs are versioned, so never leave this implicit."),
     ("SMTP", "SMTP_HOST", False, "Funnel email host"),
     ("SMTP", "SMTP_PORT", False, "Funnel email port"),
     ("SMTP", "SMTP_USER", False, "Funnel email user"),
@@ -136,6 +144,17 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     # IMG-RENDER-DUAL-PATH-V1-01 (decommissioned) and docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md.
     # fal.ai serverless GPU inference (Milestone H §7.1 smoke test target — Qwen-Image-Layered hosted endpoint)
     ("fal.ai", "FAL_KEY", False, "fal.ai serverless GPU inference key (canonical env var name per fal-client SDK). Used for Milestone H §7.1 Qwen-Image-Layered smoke test. Apache-2.0 model, commercial-clean ToS. Pricing: $0.06/image stage 2 + $0.02/MP stage 1. Get: https://fal.ai/dashboard/keys (see docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md)"),
+    # --- Metricool (social scheduling — Waystream live account; draft-default) ---
+    ("Metricool", "METRICOOL_API_KEY", False, "Metricool API key (X-Mc-Auth). Get: app.metricool.com → Settings → API. Store in Keychain service phoenix-omega; never commit. Staging file docs/metricool_api.txt is gitignored."),
+    ("Metricool", "METRICOOL_USER_ID", False, "Metricool user id (canonical Waystream account: 3564167). Pair with METRICOOL_API_KEY."),
+    ("Metricool", "METRICOOL_BASE_URL", False, "Metricool API v2 base URL. Default: https://app.metricool.com/api/v2/"),
+    # --- Storyblocks (Pearl Prime social b-roll / media bank; EULA confirm-first) ---
+    # Spec: docs/STORYBLOCKS_PEARL_PRIME_RESCOPE.md + docs/STORYBLOCKS_SOCIAL_BANK.md
+    ("Storyblocks", "STORYBLOCKS_PUBLIC_KEY", False, "Storyblocks API public key (APIKEY). Store in Keychain service phoenix-omega. Required for live search/download; unit tests mock HTTP. Staging: docs/storyblocks_api_key.txt / docs/storyblocks_keys.env (gitignored)."),
+    ("Storyblocks", "STORYBLOCKS_PRIVATE_KEY", False, "Storyblocks API private key (HMAC). Keychain only — never commit. Pairs with STORYBLOCKS_PUBLIC_KEY."),
+    ("Storyblocks", "STORYBLOCKS_MAU_LEDGER_PATH", False, "Optional override for MAU JSONL ledger (default artifacts/storyblocks/mau_ledger.jsonl)."),
+    ("Storyblocks", "STORYBLOCKS_LICENSED_BANK_ROOT", False, "Optional override for per-work-unit licensed HD bank (default artifacts/storyblocks_licensed/)."),
+    ("Storyblocks", "STORYBLOCKS_LICENSE_INDEX_PATH", False, "Optional override for license index JSONL (default artifacts/storyblocks/license_index.jsonl)."),
 ]
 
 ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})

@@ -19,7 +19,7 @@ Usage:
   # Run specific locale
   python scripts/audiobook_script/run_regression.py --locale zh-TW
 
-  # Dry run (validate setup, no API calls)
+  # Dry run (validate static setup, no API calls or LM Studio requirement)
   python scripts/audiobook_script/run_regression.py --dry-run
 
   # Verbose output
@@ -28,7 +28,7 @@ Usage:
 Exit codes:
   0 = All regressions pass
   1 = One or more regressions failed
-  2 = Setup/config error (missing files, LM Studio unreachable)
+  2 = Setup/config error (missing files; LM Studio unreachable for non-dry-run)
 
 Config: config/audiobook_script/comparator_config.yaml
 Golden set: config/audiobook_script/golden_regression_set/
@@ -102,17 +102,27 @@ def _load_golden_index(golden_dir: Path) -> list[dict]:
     return json.loads(idx_path.read_text(encoding="utf-8")).get("samples", [])
 
 
-def _validate_setup(repo: Path, cfg: dict, golden_dir: Path, verbose: bool = False) -> list[str]:
+def _validate_setup(
+    repo: Path,
+    cfg: dict,
+    golden_dir: Path,
+    verbose: bool = False,
+    require_lm_studio: bool = True,
+) -> list[str]:
     """Check all prerequisites. Returns list of errors (empty = OK)."""
     errors = []
 
     # Check LM Studio
     base_url = cfg.get("draft_model", {}).get("base_url", "http://127.0.0.1:1234/v1")
-    reachable, msg = _check_lm_studio(base_url)
-    if reachable:
-        if verbose: print(f"  ✓ {msg}")
+    if require_lm_studio:
+        reachable, msg = _check_lm_studio(base_url)
+        if reachable:
+            if verbose: print(f"  ✓ {msg}")
+        else:
+            errors.append(msg)
     else:
-        errors.append(msg)
+        if verbose:
+            print(f"  ✓ LM Studio reachability skipped for dry-run: {base_url}")
 
     # Check prompts
     routing = cfg.get("draft_model", {}).get("prompt_routing", {})
@@ -236,7 +246,7 @@ async def _run_regression(
 
     # Setup validation
     print("Checking setup...")
-    errors = _validate_setup(repo, cfg, golden_dir, verbose=verbose)
+    errors = _validate_setup(repo, cfg, golden_dir, verbose=verbose, require_lm_studio=not dry_run)
     if errors:
         print("\n❌ SETUP ERRORS — cannot proceed:")
         for e in errors:

@@ -59,6 +59,11 @@ def story_architecture_internal_to_handoff(internal: Mapping[str, Any]) -> dict[
     ]
     if internal.get("serial_context") is not None:
         out["serial_context"] = deepcopy(internal["serial_context"])
+    # Declared genre + mode vessel — required by chapter writer prompt assembly
+    # and MANGA.BESTSELLER.GENRE_ENGINE (must not rely on CI post-patches).
+    for genre_key in ("genre_id", "genre", "story_engine_genre"):
+        if internal.get(genre_key) is not None:
+            out[genre_key] = deepcopy(internal[genre_key])
     if internal.get("mode") is not None:
         out["mode"] = internal["mode"]
     if internal.get("mode_vessel") is not None:

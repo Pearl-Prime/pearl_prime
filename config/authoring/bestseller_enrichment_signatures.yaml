@@ -1,0 +1,83 @@
+# Bestseller enrichment signature exemplars — used by accent_planner alignment report.
+# Without this file, alignment status must WARN (budget-fill only, not exemplar match).
+#
+# NOTE (V2.1 writer doctrine, docs/ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md):
+# `accent_counts` below is a flat legacy key retained for accent_planner.py compatibility.
+# For authoring purposes, only QUOTE / ENCOURAGEMENT / REFLECTION_QUESTION / AUTHOR_COMMENTARY /
+# WISDOM_ESSENCE are `optional_accents` (sparse). TROUBLESHOOTING, CITED_EVIDENCE, and
+# EXTERNAL_STORY are `chapter_engine` / `proof_and_embodiment` — not sparsity-governed, do not
+# treat their counts here as accent budget. See specs/ACCENT_BEATS_SYSTEM_SPEC.md §0.1.
+schema_version: "1.0.0"
+
+profiles:
+  intimate_voice:
+    exemplars:
+      - exemplar_id: badass_habits_anxiety_flagship_v1
+        label: "Intimate-voice anxiety flagship (research signature)"
+        book_idea: recognition_before_action
+        book_motif: quiet_capacity
+        max_accent_chapter_share: 0.85
+        accent_counts:
+          QUOTE: 3
+          ENCOURAGEMENT: 2
+          REFLECTION_QUESTION: 3
+          TROUBLESHOOTING: 1
+          CITED_EVIDENCE: 1
+          EXTERNAL_STORY: 2
+          WISDOM_ESSENCE: 1
+          AUTHOR_COMMENTARY: 1
+        preferred_external_story_types:
+          - true_life_broadcast
+          - film
+          - pop_culture
+        enhancement_contract_v21:
+          evidence_status: working_prior_not_empirical_count
+          optional_accent_budget:
+            target_accent_chapters: {min: 5, max: 7}
+            hard_max_accent_chapters: 8
+            target_total_accents: {min: 7, max: 9}
+            hard_max_total_accents: 10
+            max_accents_per_chapter: 2
+          external_story_functions:
+            - recognition
+            - mechanism_proof
+            - turn
+            - possibility
+            - cautionary
+          first_class_cohesion:
+            - CALLBACK_PLANT
+            - CALLBACK_RETURN
+            - ANALOGY
+            - METAPHOR
+
+  practical_credible:
+    exemplars:
+      - exemplar_id: atomic_habits_burnout_flagship_v1
+        label: "Practical-credible burnout flagship"
+        book_idea: recognition_before_action
+        book_motif: quiet_capacity
+        max_accent_chapter_share: 0.35
+        accent_counts:
+          ENCOURAGEMENT: 1
+          CITED_EVIDENCE: 2
+          EXTERNAL_STORY: 2
+        preferred_external_story_types:
+          - historical
+          - business
+          - sports
+
+  timeless_wisdom:
+    exemplars:
+      - exemplar_id: power_of_now_reflective_v1
+        label: "Timeless-wisdom reflective signature"
+        book_idea: recognition_before_action
+        book_motif: quiet_capacity
+        max_accent_chapter_share: 0.35
+        accent_counts:
+          WISDOM_ESSENCE: 2
+          EXTERNAL_STORY: 2
+          QUOTE: 2
+        preferred_external_story_types:
+          - mythic
+          - historical
+          - book

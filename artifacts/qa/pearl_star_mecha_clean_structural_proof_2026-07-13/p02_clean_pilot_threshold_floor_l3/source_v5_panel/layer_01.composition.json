@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "p02_clean_pilot_threshold_floor_l3_l0_empty_hangar_support",
+  "layer_class": "L0",
+  "genre": "mecha",
+  "style_register": "mecha_hangar",
+  "bg_class": "full_render",
+  "light": {
+    "azimuth": "ambient"
+  },
+  "camera": {
+    "angle_bucket": "eye_level",
+    "eye_level_y_pct": 42,
+    "camera_height": "standing"
+  },
+  "anchor_slots": [],
+  "support_zones": [
+    {
+      "zone_id": "clear_hangar_floor",
+      "kind": "floor",
+      "polygon_pct": [
+        [
+          0,
+          62
+        ],
+        [
+          100,
+          56
+        ],
+        [
+          100,
+          100
+        ],
+        [
+          0,
+          100
+        ]
+      ],
+      "occupancy": "clear",
+      "allows_character_support": true,
+      "allowed_structural_templates": [
+        "standing_room_scene"
+      ],
+      "priority": 0
+    }
+  ],
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "clean",
+    "role": "environment_support",
+    "subject": "environment",
+    "contains_primary_subject": false,
+    "contains_foreground_subject": false,
+    "contains_pilot": false,
+    "contains": []
+  }
+}

@@ -1,13 +1,18 @@
-"""Secular-lint for SOURCE_OF_TRUTH/composite_doctrine/ atoms (OPD-115 Phase B)."""
+"""Secular-lint + WISDOM_ESSENCE shape gate for composite_doctrine atoms (OPD-115 Phase B).
+
+Every composite teaching atom (``COMPOSITE_DOCTRINE vNN`` block) must be exactly
+three paragraphs and pass the secular register scan on its prose body.
+"""
 from __future__ import annotations
 
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, List, Optional, Sequence
+from typing import List, Optional, Sequence
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_ALLOWLIST_PATH = REPO_ROOT / "config" / "quality" / "composite_doctrine_allowlist.yaml"
+REQUIRED_TEACHING_PARAGRAPHS = 3
 
 _DEITY_TERMS = (
     "buddha", "krishna", "christ", "mary", "mahāvairocana", "dainichi",
@@ -38,6 +43,45 @@ class SecularLintViolation:
     line: int
     matched_tell: str
     excerpt: str = ""
+    atom_id: str = ""
+
+
+def _split_paragraphs(text: str) -> list[str]:
+    return [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+
+
+def _parse_composite_atoms(path: Path) -> list[dict]:
+    from phoenix_v4.planning.registry_resolver import _parse_canonical_txt
+
+    return _parse_canonical_txt(path, slot_type="COMPOSITE_DOCTRINE")
+
+
+def lint_atom_shape(path: Path, atoms: Sequence[dict]) -> List[SecularLintViolation]:
+    """Hard shape rule: each composite teaching atom = exactly 3 paragraphs."""
+    violations: List[SecularLintViolation] = []
+    for atom in atoms:
+        if not isinstance(atom, dict):
+            continue
+        atom_id = str(atom.get("atom_id") or "").strip()
+        content = str(atom.get("content") or "").strip()
+        if not atom_id or not content:
+            continue
+        para_count = len(_split_paragraphs(content))
+        if para_count == REQUIRED_TEACHING_PARAGRAPHS:
+            continue
+        violations.append(
+            SecularLintViolation(
+                path=str(path),
+                line=0,
+                matched_tell=(
+                    f"shape:paragraph_count:{para_count} "
+                    f"(expected {REQUIRED_TEACHING_PARAGRAPHS})"
+                ),
+                excerpt=content[:120],
+                atom_id=atom_id,
+            )
+        )
+    return violations
 
 
 def _load_allowlist(path: Optional[Path] = None) -> set[str]:
@@ -97,7 +141,7 @@ def _scan_line(
     return violations
 
 
-def lint_file(
+def lint_file_secular(
     path: Path,
     *,
     allowlist: Optional[set[str]] = None,
@@ -114,6 +158,27 @@ def lint_file(
     return out
 
 
+def lint_file(
+    path: Path,
+    *,
+    allowlist: Optional[set[str]] = None,
+) -> List[SecularLintViolation]:
+    """Secular register scan only (backward-compatible entry for existing tests)."""
+    return lint_file_secular(path, allowlist=allowlist)
+
+
+def lint_canonical_file(
+    path: Path,
+    *,
+    allowlist: Optional[set[str]] = None,
+) -> List[SecularLintViolation]:
+    """Full composite-doctrine lint: secular register + exactly-3-paragraph shape."""
+    violations = lint_file_secular(path, allowlist=allowlist)
+    if path.exists() and path.is_file():
+        violations.extend(lint_atom_shape(path, _parse_composite_atoms(path)))
+    return violations
+
+
 def lint_composite_doctrine_tree(
     root: Optional[Path] = None,
     *,
@@ -125,7 +190,7 @@ def lint_composite_doctrine_tree(
     allow = _load_allowlist(allowlist_path)
     violations: List[SecularLintViolation] = []
     for path in sorted(base.rglob("CANONICAL.txt")):
-        violations.extend(lint_file(path, allowlist=allow))
+        violations.extend(lint_canonical_file(path, allowlist=allow))
     return violations
 
 
@@ -135,7 +200,7 @@ def lint_paths(paths: Sequence[Path], *, allowlist_path: Optional[Path] = None) 
     for p in paths:
         if p.is_dir():
             for f in sorted(p.rglob("CANONICAL.txt")):
-                out.extend(lint_file(f, allowlist=allow))
+                out.extend(lint_canonical_file(f, allowlist=allow))
         else:
-            out.extend(lint_file(p, allowlist=allow))
+            out.extend(lint_canonical_file(p, allowlist=allow))
     return out

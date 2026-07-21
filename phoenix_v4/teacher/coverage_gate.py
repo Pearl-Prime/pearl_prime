@@ -214,10 +214,19 @@ def run_coverage_gate(
     # Slots that can fall through to persona atoms — teacher doesn't need full coverage.
     # Teacher provides: COMPRESSION, REFLECTION (doctrine voice), EXERCISE (if available).
     # Persona provides: HOOK, SCENE, STORY, INTEGRATION, PIVOT, PERMISSION, TAKEAWAY, THREAD.
-    # ALL slots can fall back to persona atoms. The teacher provides what it has;
-    # persona atoms fill the rest. The gate only warns, never blocks.
-    # Teacher voice quality comes from HAVING atoms, not from REQUIRING them.
-    _PERSONA_FALLBACK_SLOTS = frozenset(slot_types_in_format)  # skip ALL — no blocking
+    # TEACHER_MODE_INVARIANTS §9: insufficient teacher inventory for required
+    # teacher-voice slots must fail pre-compile (no silent degrade to quality gates).
+    # Do NOT set this to all slot types — that neuters the gate.
+    _PERSONA_FALLBACK_SLOTS = frozenset({
+        "HOOK",
+        "SCENE",
+        "STORY",
+        "INTEGRATION",
+        "PIVOT",
+        "PERMISSION",
+        "TAKEAWAY",
+        "THREAD",
+    })
 
     for slot_type in slot_types_in_format:
         need = required_by_slot.get(slot_type, 0)

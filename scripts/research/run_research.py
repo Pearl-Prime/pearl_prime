@@ -5,8 +5,8 @@ Pass 1: reasoning (Qwen enable_thinking=True or Ollama /think).
 Pass 2: structured YAML (enable_thinking=False or Ollama /no_think).
 
 Usage:
-  python scripts/research/run_research.py --prompt-id psychology [--paste path/to/raw.txt]
-  python scripts/research/run_research.py --prompt-id psychology --output-stem 2026-03-31
+  python scripts/research/run_research.py --prompt-id psychology --prepare-deep-research-prompt --paste path/to/session.txt
+  python scripts/research/run_research.py --prompt-id psychology --paste path/to/raw_feed.txt --allow-legacy-direct-run
 
 Config (OpenAI-compatible Qwen / DashScope — repo standard):
   QWEN_BASE_URL → else docs/qwen_api_base_url.txt
@@ -27,6 +27,12 @@ import urllib.parse
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+
+from research_prompt_builder import (
+    ResearchPromptInputs,
+    build_prompt_package,
+    write_prompt_package,
+)
 
 # Repo root (script lives in scripts/research/)
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -96,6 +102,7 @@ LAYER_CONFIG: dict[str, dict[str, Any]] = {
 
 PROMPT_IDS = list(LAYER_CONFIG.keys())
 OLLAMA_DEFAULT_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:14b")
+LEGACY_DIRECT_RUN_ENV = "PEARL_RESEARCH_ALLOW_LEGACY_DIRECT_RUN"
 
 
 def _read_repo_text(relative: str) -> str:
@@ -179,6 +186,37 @@ def ollama_host_from_base_url(base_url: str) -> str:
 def load_text(path: Path) -> str:
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         return f.read().strip()
+
+
+def load_path_or_literal(value: str) -> str:
+    path = Path(value)
+    try:
+        if path.exists() and path.is_file():
+            return load_text(path)
+    except OSError:
+        return value
+    return value
+
+
+def legacy_direct_run_allowed(flag_value: bool) -> bool:
+    env_value = os.environ.get(LEGACY_DIRECT_RUN_ENV, "").strip().lower()
+    return flag_value or env_value in {"1", "true", "yes", "on"}
+
+
+def require_prompt_package_or_legacy_ack(
+    *,
+    prepare_deep_research_prompt: bool,
+    allow_legacy_direct_run: bool,
+) -> None:
+    """Guard Pearl_Research from raw-context-to-generic-prompt execution."""
+    if prepare_deep_research_prompt or legacy_direct_run_allowed(allow_legacy_direct_run):
+        return
+    raise RuntimeError(
+        "direct Pearl_Research execution is blocked by default. Generate a prompt package first "
+        "with --prepare-deep-research-prompt for messy, implementation-adjacent, regional, or "
+        "decision-oriented research. For the legacy Pearl News feed-extraction lane only, rerun "
+        "with --allow-legacy-direct-run or set PEARL_RESEARCH_ALLOW_LEGACY_DIRECT_RUN=1."
+    )
 
 
 def _prompt_path(rel: str) -> Path:
@@ -537,6 +575,51 @@ def main() -> None:
         help="Fixed filenames: <STEM>_reasoning.md and <STEM>.yaml (e.g. 2026-03-31). "
         "Default: UTC timestamp.",
     )
+    parser.add_argument(
+        "--prepare-deep-research-prompt",
+        action="store_true",
+        help="Build the pre-research brief and provider-specific deep research prompts, then exit without research execution.",
+    )
+    parser.add_argument(
+        "--allow-legacy-direct-run",
+        action="store_true",
+        help="Explicitly allow the legacy direct Qwen/Ollama feed-extraction lane without prompt package generation.",
+    )
+    parser.add_argument("--brief-issue", default="", help="Issue/decision description for the research brief.")
+    parser.add_argument(
+        "--brief-failing-output",
+        action="append",
+        default=[],
+        help="Failing output text or path. Repeatable.",
+    )
+    parser.add_argument(
+        "--brief-relevant-file",
+        action="append",
+        default=[],
+        help="Relevant repo file to excerpt into the research brief. Repeatable.",
+    )
+    parser.add_argument("--brief-context", default="", help="Additional repo or operator context for the brief.")
+    parser.add_argument("--brief-title", default="", help="Override prompt package title.")
+    parser.add_argument("--brief-market", action="append", default=[], help="Market hint, e.g. China or Japan.")
+    parser.add_argument("--brief-locale", action="append", default=[], help="Locale hint, e.g. zh-CN or ja-JP.")
+    parser.add_argument("--brief-platform", action="append", default=[], help="Platform hint. Repeatable.")
+    parser.add_argument(
+        "--brief-source-preference",
+        action="append",
+        default=[],
+        help="Preferred source class, report, or domain. Repeatable.",
+    )
+    parser.add_argument(
+        "--brief-exclude",
+        action="append",
+        default=[],
+        help="Advice, source type, or scope to exclude. Repeatable.",
+    )
+    parser.add_argument(
+        "--brief-out-dir",
+        default=None,
+        help="Output directory for prompt package. Default: artifacts/research/prompt_packages/.",
+    )
     args = parser.parse_args()
 
     prompt_id = args.prompt_id
@@ -547,6 +630,57 @@ def main() -> None:
     if args.dry_run:
         run_dry_run(prompt_id, cfg, out_dir)
         return
+
+    raw_data = ""
+    if args.paste:
+        if args.paste == "-":
+            raw_data = sys.stdin.read()
+        else:
+            raw_data = load_text(Path(args.paste))
+
+    if args.prepare_deep_research_prompt:
+        relevant_files: dict[str, str] = {}
+        for file_value in args.brief_relevant_file:
+            path = Path(file_value)
+            if not path.exists():
+                raise FileNotFoundError(f"--brief-relevant-file does not exist: {file_value}")
+            relevant_files[str(path)] = load_text(path)
+        prompt_package = build_prompt_package(
+            ResearchPromptInputs(
+                transcript=raw_data,
+                issue_description=args.brief_issue,
+                failing_outputs=[load_path_or_literal(item) for item in args.brief_failing_output],
+                relevant_files=relevant_files,
+                repo_context=args.brief_context,
+                prompt_id=prompt_id,
+                title=args.brief_title,
+                markets=args.brief_market,
+                locales=args.brief_locale,
+                platforms=args.brief_platform,
+                source_preferences=args.brief_source_preference,
+                exclusions=args.brief_exclude,
+            )
+        )
+        package_dir = (
+            Path(args.brief_out_dir)
+            if args.brief_out_dir
+            else ARTIFACTS_ROOT / "prompt_packages"
+        )
+        paths = write_prompt_package(prompt_package, package_dir, args.output_stem)
+        print("Prepared Pearl_Research prompt package.", file=sys.stderr)
+        print(f"Recommended provider: {prompt_package['routing']['provider_display_name']}", file=sys.stderr)
+        print(f"Recommended prompt key: {prompt_package['recommended_prompt_key']}", file=sys.stderr)
+        for label, path in paths.items():
+            print(f"{label}: {path}", file=sys.stderr)
+        return
+
+    try:
+        require_prompt_package_or_legacy_ack(
+            prepare_deep_research_prompt=args.prepare_deep_research_prompt,
+            allow_legacy_direct_run=args.allow_legacy_direct_run,
+        )
+    except RuntimeError as exc:
+        parser.error(str(exc))
 
     base_url, api_key, model_hint = resolve_qwen_config()
     use_ollama = bool(base_url and is_ollama_endpoint(base_url))
@@ -572,13 +706,6 @@ def main() -> None:
             )
             sys.exit(1)
         resolved_model = args.model or model_hint or "qwen-plus"
-
-    raw_data = ""
-    if args.paste:
-        if args.paste == "-":
-            raw_data = sys.stdin.read()
-        else:
-            raw_data = load_text(Path(args.paste))
 
     system, task, yaml_instruction_template = load_layer_bundle(prompt_id, raw_data)
 

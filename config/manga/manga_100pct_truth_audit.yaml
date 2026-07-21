@@ -1,0 +1,116 @@
+schema_version: "1.0.0"
+repository: Ahjan108/phoenix_omega_v4.8
+foundation_pr_number: 5597
+require_github_verification: true
+program_id: manga_100pct_truth_audit_20260714
+foundation_receipt: artifacts/qa/manga_100pct_foundation_pr_5597_receipt_2026-07-14.json
+merge_registry: artifacts/qa/manga_100pct_merge_registry_2026-07-14.json
+claim_files:
+  - artifacts/analysis/MANGA_100PCT_FINAL_VERDICT_2026-07-14.md
+  - artifacts/analysis/MANGA_100PCT_FINAL_VERDICT_GENERATED_2026-07-14.md
+forbidden_json_values:
+  - /Users/
+json_scan_roots:
+  - artifacts
+required_agents:
+  - Pearl_ArtPipeline
+  - Pearl_Story
+  - Pearl_Mode
+  - Pearl_LetteringLayout
+  - Pearl_ProofOps
+  - Pearl_Catalog
+  - Pearl_QA
+requirements:
+  real_pearlstar_layered_proof:
+    path: artifacts/qa/manga_live_layered_proof_2026-07-14/manifest.json
+    json_assertions:
+      status: green
+      production_path: pearl_star_v5
+      real_outputs: true
+      genres.iyashikei: present
+      genres.mecha: present
+      layer_roles.L0: proven
+      layer_roles.L2: proven
+      layer_roles.L3: proven
+      final_differs_from_preview: true
+    required_globs:
+      - "*.png"
+    min_glob_matches: 2
+  story_doctrine_production_wiring:
+    path: artifacts/qa/manga_story_doctrine_proof_2026-07-14/manifest.json
+    json_assertions:
+      status: green
+      production_call_path: proven
+      genre_story: green
+      subtle_embed: green
+      metaphor_analogy_parable: green
+      fail_closed_tests: passed
+  teacher_music_default_path:
+    path: artifacts/qa/manga_mode_proof_2026-07-14/manifest.json
+    json_assertions:
+      status: green
+      default_path: proven
+      teacher_output_changes: true
+      music_output_changes: true
+      omission_test: passed
+  jlreq_layout_reading:
+    path: artifacts/qa/manga_lettering_layout_proof_2026-07-14/manifest.json
+    json_assertions:
+      status: green
+      vertical_text: green
+      furigana: green
+      sfx: green
+      bubble_readability: green
+      passb_reading_graph: green
+      spread_layout: green
+      approved_font: present
+    required_globs:
+      - "*.png"
+    min_glob_matches: 1
+  full_episode_proof_packet:
+    path: artifacts/qa/manga_100pct_proof_packet_2026-07-14/manifest.json
+    json_assertions:
+      status: green
+      production_run: real
+      full_episode: true
+      proof_roots_verified: true
+  plan_to_output_traceability:
+    path: artifacts/qa/manga_100pct_contract_traceability_2026-07-14.tsv
+    min_data_rows: 1
+    forbidden_tokens:
+      - TODO
+      - TEMPLATE
+      - placeholder
+  queue_repeatability:
+    path: artifacts/qa/manga_queue_repeatability_2026-07-14/receipt.json
+    json_assertions:
+      status: green
+      enqueue: passed
+      worker_pickup: passed
+      retry: passed
+      timeout_handling: passed
+      zombie_handling: passed
+      artifact_storage: passed
+  catalog_brand_14_market:
+    path: artifacts/qa/manga_catalog_global_market_2026-07-14/manifest.json
+    json_assertions:
+      status: green
+      global_market_count: 14
+      catalog_coverage: green
+      brand_plan_coverage: green
+      claims_reconciled: true
+  blind_read_scorecards:
+    path: artifacts/qa/manga_blind_read_bar_2026-07-14/judge_scorecards.json
+    json_assertions:
+      status: green
+      all_passed: true
+    min_list_items:
+      judges: 1
+    forbidden_filename_tokens:
+      - TEMPLATE
+  operator_approval:
+    path: artifacts/qa/manga_blind_read_bar_2026-07-14/operator_approval.json
+    json_assertions:
+      status: approved
+      human_operator: present
+      approved_at: present

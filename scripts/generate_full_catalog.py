@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
-Full catalog orchestrator for legacy teacher-matrix runs and bulk brand-target planning.
+Catalog orchestration WRAPPER — routes per-book compile through canonical spine path.
+
+NOT an alternate book engine. Each book invokes:
+  scripts/run_pipeline.py --pipeline-mode spine ...
 
 Sequence:
   1. Brand/teacher portfolio allocation (teacher_portfolio_planner)
   2. BookSpec planning per allocation (catalog_planner)
-  3. Per-book compile Stage 1→2→3 (run_pipeline)
+  3. Per-book compile Stage 1→2→3 (run_pipeline --pipeline-mode spine)
   4. Wave selection from compiled candidates (wave_orchestrator)
 
 Use --brand and --max-books for "First 10 Books" evaluation (one brand, 10 books, no wave selection).
@@ -614,6 +617,7 @@ def main() -> int:
             "--topic", spec.topic_id,
             "--persona", spec.persona_id,
             "--arc", str(arc_path),
+            "--pipeline-mode", "spine",
             "--teacher", teacher_id,
             "--seed", spec.seed,
             "--out", str(out_path),

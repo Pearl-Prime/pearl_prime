@@ -1,0 +1,70 @@
+schema_version: "1.0.0"
+program_id: manga_100pct_20260714
+base_required_commits:
+  - b507f3029e2aa7e5d9adfdb258b16d17910dc4fe
+  - 0406c643224ad29b7c103665cf09e0060734d669
+truth_tags:
+  raw-v5-layer-roles: not-green
+  selected-component-structural-assembly: green-for-proof
+  overall-manga-green: NOT_PROVEN
+lanes:
+  A:
+    name: layered_default_integration
+    branch: agent/manga-layered-default-integration-20260714
+    closeout: artifacts/analysis/MANGA_LAYERED_DEFAULT_INTEGRATION_CLOSEOUT_2026-07-14.md
+    validation:
+      - "PYTHONPATH=. python3 -m pytest tests/manga/test_manga_100pct_lanes_core.py -q"
+  B:
+    name: pearlstar_raw_layer_hardening
+    branch: agent/manga-raw-layer-hardening-20260714
+    closeout: artifacts/analysis/MANGA_PEARLSTAR_RAW_LAYER_HARDENING_CLOSEOUT_2026-07-14.md
+  C:
+    name: story_doctrine
+    branch: agent/manga-story-doctrine-20260714
+    closeout: artifacts/analysis/MANGA_STORY_DOCTRINE_CLOSEOUT_2026-07-14.md
+  D:
+    name: mode_plumbing
+    branch: agent/manga-mode-plumbing-proof-20260714
+    closeout: artifacts/analysis/MANGA_MODE_PLUMBING_CLOSEOUT_2026-07-14.md
+  E:
+    name: structural_template_expansion
+    branch: agent/manga-structural-template-expansion-20260714
+    closeout: artifacts/analysis/MANGA_GENRE_STRUCTURAL_TEMPLATE_CLOSEOUT_2026-07-14.md
+  F:
+    name: jlreq_vertical_furigana
+    branch: agent/manga-jlreq-vertical-furigana-20260714
+    closeout: artifacts/analysis/MANGA_JLREQ_VERTICAL_FURIGANA_CLOSEOUT_2026-07-14.md
+  G:
+    name: proof_packets_goldens
+    branch: agent/manga-proof-packet-goldens-20260714
+    closeout: artifacts/analysis/MANGA_100PCT_PROOF_PACKET_CLOSEOUT_2026-07-14.md
+  H:
+    name: batch_episode_lane
+    branch: agent/manga-batch-episode-20260714
+    closeout: artifacts/analysis/MANGA_BATCH_EPISODE_LANE_CLOSEOUT_2026-07-14.md
+  I:
+    name: blind_read_bar
+    branch: agent/manga-blind-read-bar-20260714
+    closeout: artifacts/analysis/MANGA_BLIND_READ_BAR_CLOSEOUT_2026-07-14.md
+    depends_on: [G, H]
+  J:
+    name: contract_enforcement
+    branch: agent/manga-contract-enforcement-20260714
+    closeout: artifacts/analysis/MANGA_CONTRACT_ENFORCEMENT_CLOSEOUT_2026-07-14.md
+  K:
+    name: production_line_agents
+    branch: agent/manga-production-line-agents-20260714
+    closeout: artifacts/analysis/MANGA_PRODUCTION_LINE_AGENTS_CLOSEOUT_2026-07-14.md
+  L:
+    name: catalog_global_market
+    branch: agent/manga-catalog-global-market-20260714
+    closeout: artifacts/analysis/MANGA_CATALOG_GLOBAL_MARKET_COVERAGE_2026-07-14.md
+  M:
+    name: release_ops_readiness
+    branch: agent/manga-release-readiness-20260714
+    closeout: artifacts/analysis/MANGA_RELEASE_READINESS_CHECKLIST_2026-07-14.md
+    depends_on: [A, B, C, D, E, F, G, H, I, J, K, L]
+final_integrator:
+  branch: agent/manga-100pct-final-integrator-20260714
+  closeout: artifacts/analysis/MANGA_100PCT_FINAL_VERDICT_2026-07-14.md
+  depends_on: [A, B, C, D, E, F, G, H, I, J, K, L, M]

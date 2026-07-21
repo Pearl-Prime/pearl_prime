@@ -117,6 +117,11 @@ def _load_compiled() -> dict:
             [50, 90],
         ),
         (
+            "subject=character_ELS_in_L0|framing=LS|genre=healing",
+            {"top": 10, "bottom": 10, "left": 10, "right": 10},
+            [22, 20],
+        ),
+        (
             "subject=character_full_figure|framing=MS|genre=fantasy_adventure",
             {"top": 5, "bottom": 5, "left": 25, "right": 25},
             [55, 90],  # fantasy_adventure widens MS zone

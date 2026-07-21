@@ -169,11 +169,21 @@ def check_character_study_naming(story_type: "str | None", prose: str) -> "str |
     return None
 
 
-def check_anchored_story_naming(prose: str) -> "str | None":
+def check_anchored_story_naming(prose: str, path: "Path | None" = None) -> "str | None":
     """Anchored story_atoms are character-arc prose — always require a NAMED protagonist."""
-    if not _has_named_person(normalize_text(prose)):
-        return "CHARACTER_STUDY_UNNAMED"
-    return None
+    text = normalize_text(prose)
+    if _has_named_person(text):
+        return None
+    if path is not None:
+        source_path = source_story_atom_path_for_localized(path)
+        if source_path and source_path.exists():
+            try:
+                source_text = source_path.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                source_text = ""
+            if source_text and _has_named_person(normalize_text(source_text)):
+                return None
+    return "CHARACTER_STUDY_UNNAMED"
 
 
 def story_type_variety_flag(story_types: List[str]) -> "str | None":
@@ -196,6 +206,18 @@ def is_anchored_story_atom_path(path: Path) -> bool:
     except ValueError:
         return False
     return len(parts) > i + 2 and parts[i + 2] == "anchored"
+
+
+def source_story_atom_path_for_localized(path: Path) -> "Path | None":
+    """Map a localized anchored story path back to its source sibling."""
+    parts = list(path.parts)
+    try:
+        i = parts.index("locales")
+    except ValueError:
+        return None
+    if i + 2 >= len(parts):
+        return None
+    return Path(*parts[:i], *parts[i + 2 :])
 
 
 def load_principle_teachers(registry_path: "Path | None" = None) -> "set[str]":
@@ -549,7 +571,7 @@ def main() -> int:
                 text = f.read_text(encoding="utf-8", errors="replace")
                 base = lint_story(text, f)
                 if is_anchored_story_atom_path(f):
-                    naming = check_anchored_story_naming(text)
+                    naming = check_anchored_story_naming(text, f)
                     if naming:
                         base = _escalate(base, [naming], _HARD_GATE_FAIL_CODES)
                 results.append(base)

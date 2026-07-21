@@ -65,6 +65,20 @@ jobs:
         run: python3 scripts/ci/validate_onboarding_registry.py
         working-directory: ${{ github.workspace }}
 
+      - name: Validate Brand Director live readiness
+        run: python3 scripts/ci/validate_brand_director_live_readiness.py
+        working-directory: ${{ github.workspace }}
+
+      - name: Install freebie deploy helpers
+        run: python3 -m pip install PyYAML
+        working-directory: ${{ github.workspace }}
+
+      - name: Inject Waystream GHL webhook
+        env:
+          PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM: ${{ secrets.PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM }}
+        run: python3 scripts/freebies/inject_ghl_webhook.py --brand-id way_stream_sanctuary --require-env
+        working-directory: ${{ github.workspace }}
+
       - name: Install and build
         run: |
           npm ci
@@ -148,5 +162,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES || secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=brand-admin-onboarding --commit-dirty=true
+          command: pages deploy dist --project-name=brand-admin-onboarding --branch=${{ github.ref_name }} --commit-dirty=true
           workingDirectory: brand-wizard-app

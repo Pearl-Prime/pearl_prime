@@ -1,0 +1,66 @@
+{
+  "manifest": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/assembly_manifest.yaml",
+  "panel": {
+    "panel_id": "p03_clean_seated_pilot_cockpit_seat",
+    "shot_type": "medium",
+    "passed": true,
+    "ops_applied": [
+      "STRUCT_support_plan",
+      "G3_horizon_scale",
+      "G6_defringe",
+      "G4_contact_shadow_under_L2"
+    ],
+    "gates": [
+      {
+        "gate": "L0_STRUCTURAL_PURITY",
+        "severity": "PASS",
+        "message": "contract=mecha_clean_structural_layer_v1 role=environment_support subject=environment"
+      },
+      {
+        "gate": "L2_STRUCTURAL_PURITY",
+        "severity": "PASS",
+        "message": "contract=mecha_clean_structural_layer_v1 role=single_subject_cutout subject=pilot"
+      },
+      {
+        "gate": "G1",
+        "severity": "PASS",
+        "message": "full_figure \u00d7 full_render \u2192 LEGAL+ops"
+      },
+      {
+        "gate": "G2",
+        "severity": "PASS",
+        "message": "angle_bucket match (eye_level)"
+      },
+      {
+        "gate": "G8",
+        "severity": "PASS",
+        "message": "light azimuth compatible (ambient/ambient)"
+      },
+      {
+        "gate": "L2_QUALITY",
+        "severity": "PASS",
+        "message": "single clean subject main_component_ratio=1.0 significant_components=1"
+      },
+      {
+        "gate": "L0_SUPPORT_ZONE",
+        "severity": "PASS",
+        "message": "zone=cockpit_seat_support kind=seat_table mode=intentional_seat_table"
+      },
+      {
+        "gate": "placement",
+        "severity": "PASS",
+        "message": "structural_plan_hash=f6bef5730e7643e171469fea24e49428d1bf3bf49c435742db308d48658c4874"
+      },
+      {
+        "gate": "G3",
+        "severity": "PASS",
+        "message": "horizon-ratio scale within tolerance"
+      },
+      {
+        "gate": "G4",
+        "severity": "PASS",
+        "message": "contact shadow rendered"
+      }
+    ]
+  }
+}
