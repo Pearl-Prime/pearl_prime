@@ -50,6 +50,22 @@ def main() -> int:
     ap.add_argument("--description", default="A short on noticing anxiety without fighting it.", help="Description")
     ap.add_argument("--tags", default="anxiety,mindfulness,therapeutic", help="Comma-separated tags")
     ap.add_argument("--voice", action="store_true", help="Generate voice narration via free/local TTS (CosyVoice2 CJK / Edge-TTS EN; never ElevenLabs)")
+    _default_voice_bank = REPO_ROOT / "artifacts" / "social_media_voice_bank_2026-07-19" / "MANIFEST.tsv"
+    ap.add_argument(
+        "--voice-bank",
+        nargs="?",
+        const=str(_default_voice_bank),
+        default=None,
+        help=(
+            "Prefer CosyVoice social MP3 bank for narration + speakable captions "
+            f"(default MANIFEST: {_default_voice_bank}). Use with --format short for reels."
+        ),
+    )
+    ap.add_argument(
+        "--allow-r2-download",
+        action="store_true",
+        help="With --voice-bank, download missing local MP3s from R2",
+    )
     ap.add_argument("--music", action="store_true", help="Also run voice synthesis (music bed itself comes from --music-bank, the free bank)")
     ap.add_argument("--music-bank", action="store_true", help="Select music from free music bank (recommended)")
     ap.add_argument("--auto-generate", action="store_true", help="Auto-generate missing image assets via RunComfy")
@@ -100,6 +116,10 @@ def main() -> int:
     else:
         aspect_arg = "16:9"
 
+    voice_bank_flag: list[str] = []
+    if args.voice_bank:
+        voice_bank_flag = ["--voice-bank", str(args.voice_bank)]
+
     steps = [
         ([py, str(scripts / "prepare_script_segments.py"), str(manifest_path), "-o", str(out_root / "script_segments.json")] + force_flag, "Script Preparer"),
         ([py, str(scripts / "run_shot_planner.py"), str(out_root / "script_segments.json"), "-o", str(out_root / "shot_plan.json")] + force_flag, "Shot Planner"),
@@ -109,7 +129,7 @@ def main() -> int:
         ([py, str(scripts / "run_timeline_builder.py"), str(out_root / "shot_plan.json"), str(out_root / "resolved_assets.json"),
           "-o", str(out_root / "timeline.json"), "--aspect", aspect_arg] + force_flag, "Timeline Builder"),
         ([py, str(scripts / "run_caption_adapter.py"), str(out_root / "timeline.json"), str(out_root / "script_segments.json"),
-          "-o", str(out_root / "captions.json")] + force_flag, "Caption Adapter"),
+          "-o", str(out_root / "captions.json")] + voice_bank_flag + force_flag, "Caption Adapter"),
         ([py, str(scripts / "run_layer_compositor.py"), str(out_root / "resolved_assets.json"), str(out_root / "shot_plan.json"),
           "-o", str(out_root / "composited_layers.json"), "--format", args.format] + force_flag, "Layer Compositor"),
         ([py, str(scripts / "run_animation_engine.py"), str(out_root / "composited_layers.json"), str(out_root / "shot_plan.json"),
@@ -149,8 +169,8 @@ def main() -> int:
         except Exception as e:
             print(f"Warning: music bank failed ({e})", file=sys.stderr)
 
-    # ── Voice synthesis (free/local TTS: CosyVoice2 CJK / Edge-TTS EN) — opt-in via --voice ──
-    if args.voice or args.music:
+    # ── Voice: social CosyVoice bank (--voice-bank) and/or live free TTS (--voice) ──
+    if args.voice or args.music or args.voice_bank:
         # Derive a routing locale from the first --languages entry (bare "en" -> "en-US").
         first_lang = (args.languages.split(",")[0] or "en").strip()
         voice_locale = "en-US" if first_lang.lower() in ("en", "en-us") else first_lang
@@ -160,6 +180,12 @@ def main() -> int:
             "-o", str(out_root / "audio"),
             "--locale", voice_locale,
         ]
+        if args.voice_bank:
+            voice_cmd.extend(["--voice-bank", str(args.voice_bank)])
+            if args.voice or args.music:
+                voice_cmd.append("--allow-live-fallback")
+            if args.allow_r2_download:
+                voice_cmd.append("--allow-r2-download")
         if args.music:
             voice_cmd.append("--music")
         if args.force:
@@ -172,6 +198,37 @@ def main() -> int:
         audio_plan = out_root / "audio" / "soundtrack_plan_with_audio.json"
         if audio_plan.exists():
             soundtrack_audio_path = audio_plan
+            # Align captions to bank speakable after voice stage (audio is SSOT for words).
+            if args.voice_bank:
+                try:
+                    audio_doc = json.loads(audio_plan.read_text(encoding="utf-8"))
+                    ss_path = out_root / "script_segments.json"
+                    ss = json.loads(ss_path.read_text(encoding="utf-8"))
+                    by_seg = {
+                        s.get("segment_id"): s
+                        for s in (audio_doc.get("narration_segments") or [])
+                    }
+                    for seg in ss.get("segments") or []:
+                        hit = by_seg.get(seg.get("segment_id")) or {}
+                        if hit.get("speakable_text"):
+                            seg["speakable_text"] = hit["speakable_text"]
+                            seg["text"] = hit["speakable_text"]
+                    ss_path.write_text(json.dumps(ss, indent=2), encoding="utf-8")
+                    cap_cmd = [
+                        py,
+                        str(scripts / "run_caption_adapter.py"),
+                        str(out_root / "timeline.json"),
+                        str(ss_path),
+                        "-o",
+                        str(out_root / "captions.json"),
+                        "--force",
+                    ] + voice_bank_flag + job_flag
+                    if not run(cap_cmd, REPO_ROOT):
+                        print("Failed: Caption Adapter (voice-bank realign)", file=sys.stderr)
+                        return 1
+                    print("OK: Caption Adapter (voice-bank speakable realign)")
+                except Exception as e:
+                    print(f"Warning: voice-bank caption realign failed ({e})", file=sys.stderr)
 
     timeline = json.loads((out_root / "timeline.json").read_text(encoding="utf-8"))
     duration_s = timeline.get("duration_s", 0)

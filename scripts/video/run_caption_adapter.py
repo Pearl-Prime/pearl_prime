@@ -43,7 +43,14 @@ def adapt_caption(text: str, max_chars_per_line: int, max_lines: int, strategy: 
     return text[:max_total], len(text) > max_total
 
 
-def run_caption_adapter(timeline: dict, script_segments: dict, fmt: str, lang: str) -> dict:
+def run_caption_adapter(
+    timeline: dict,
+    script_segments: dict,
+    fmt: str,
+    lang: str,
+    *,
+    voice_bank: Path | None = None,
+) -> dict:
     policies = load_yaml("config/video/caption_policies.yaml")
     default = policies.get("default") or {}
     by_lang = (policies.get("by_language") or {}).get(lang) or default
@@ -51,18 +58,51 @@ def run_caption_adapter(timeline: dict, script_segments: dict, fmt: str, lang: s
     max_lines = by_lang.get("max_lines", default.get("max_lines", 2))
     strategy = default.get("strategy", "reflow")
     flag_pct = default.get("truncation_flag_threshold_pct", 50)
-    segment_text = {s["segment_id"]: s["text"] for s in script_segments.get("segments", [])}
+
+    bank_index = None
+    if voice_bank is not None:
+        from scripts.social_media.voice_bank_lookup import load_index
+
+        bank_index = load_index(voice_bank, allow_r2_download=False)
+
+    segment_text = {}
+    caption_source = {}
+    for s in script_segments.get("segments", []):
+        seg_id = s["segment_id"]
+        text = (s.get("speakable_text") or s.get("text") or "").strip()
+        src = "speakable_text" if s.get("speakable_text") else "script"
+        atom_id = (s.get("primary_atom_id") or "").strip()
+        if bank_index is not None and atom_id and not atom_id.startswith("html-"):
+            try:
+                hit = bank_index.resolve(atom_id, require_audio=False)
+                text = hit.speakable_text
+                src = "voice_bank_speakable"
+                s["speakable_text"] = hit.speakable_text
+            except Exception as e:
+                print(
+                    f"WARNING: caption voice-bank miss for {atom_id}: {e} "
+                    f"(keeping {src} text; do not assume audio match)",
+                    file=sys.stderr,
+                )
+        segment_text[seg_id] = text
+        caption_source[seg_id] = src
+
     captions = {}
     for clip in timeline.get("clips", []):
         seg_id = clip.get("caption_ref", "")
         text = segment_text.get(seg_id, "")
         adapted, flag = adapt_caption(text, max_chars, max_lines, strategy, flag_pct)
-        captions[seg_id] = {"text": adapted, "truncation_flagged": flag}
+        captions[seg_id] = {
+            "text": adapted,
+            "truncation_flagged": flag,
+            "source": caption_source.get(seg_id, "script"),
+        }
     return {
         "plan_id": timeline.get("plan_id", ""),
         "config_hash": config_snapshot_hash(),
         "format": fmt,
         "language": lang,
+        "voice_bank_manifest": str(voice_bank) if voice_bank else None,
         "captions": captions,
     }
 
@@ -77,6 +117,14 @@ def main() -> int:
     ap.add_argument("--force", action="store_true", help="Overwrite output even if it already exists")
     ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: parent of --out)")
     ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
+    _default_bank = REPO_ROOT / "artifacts" / "social_media_voice_bank_2026-07-19" / "MANIFEST.tsv"
+    ap.add_argument(
+        "--voice-bank",
+        nargs="?",
+        const=str(_default_bank),
+        default=None,
+        help="Caption from voice-bank speakable_text (join on primary_atom_id)",
+    )
     args = ap.parse_args()
     if args.no_job_check:
         print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
@@ -104,7 +152,10 @@ def main() -> int:
         if not args.no_job_check:
             mark_complete(ws, "caption", output=out_path.name)
         return 0
-    result = run_caption_adapter(timeline, script_segments, args.format, args.lang)
+    vb = Path(args.voice_bank) if args.voice_bank else None
+    result = run_caption_adapter(
+        timeline, script_segments, args.format, args.lang, voice_bank=vb
+    )
     write_atomically(out_path, result)
     print(f"Wrote captions for {len(result['captions'])} segments to {out_path}")
     if not args.no_job_check:

@@ -1,0 +1,58 @@
+{
+  "pack_id": "social_anxiety__healthcare_rns",
+  "topic": "social_anxiety",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "social_anxiety"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/social_anxiety__healthcare_rns_short_9x16.mp4",
+  "duration_s": 53.864,
+  "bytes": 3529837,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-SOCA-HEAL-HC-02",
+      "speakable_text": "If a post-event replay is familiar, this social anxiety pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.968,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-SOCA-HEAL-PA-02",
+      "speakable_text": "Trying to outrun social anxiety usually makes the loop more expensive. More scripting, more avoiding. And less practice at the thing that would actually help.",
+      "start": 6.968,
+      "end": 18.899,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-SOCA-HEAL-ME-02",
+      "speakable_text": "Social anxiety often persists because the mind overestimates how closely other people are watching and judging. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 18.899,
+      "end": 30.899,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-SOCA-HEAL-TS-01",
+      "speakable_text": "Try this. Pick one true, simple thing to say, say it first. And let the room fill in the rest. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 30.899,
+      "end": 42.899,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-SOCA-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. People remember how a conversation felt far less precisely than you think they do.",
+      "start": 42.899,
+      "end": 53.864,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

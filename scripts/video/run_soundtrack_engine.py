@@ -161,6 +161,8 @@ def run_soundtrack(timeline: dict, shot_plan: dict, script_segments: dict, chann
             "start_time_s": t0,
             "end_time_s": seg.get("end_time_s"),
             "text": seg.get("text", ""),
+            "primary_atom_id": seg.get("primary_atom_id") or "",
+            "speakable_text": seg.get("speakable_text") or "",
             "arc": arc,
         })
 

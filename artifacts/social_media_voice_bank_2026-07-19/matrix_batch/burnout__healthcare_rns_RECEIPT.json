@@ -1,0 +1,58 @@
+{
+  "pack_id": "burnout__healthcare_rns",
+  "topic": "burnout",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "burnout"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/burnout__healthcare_rns_short_9x16.mp4",
+  "duration_s": 48.613,
+  "bytes": 3416223,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-BURN-HEAL-HC-02",
+      "speakable_text": "If raised shoulders is familiar, this burnout pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.341,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-BURN-HEAL-PA-02",
+      "speakable_text": "Trying to outrun burnout usually makes the loop more expensive. More checking, more explaining, less actual recovery.",
+      "start": 6.341,
+      "end": 13.91,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-BURN-HEAL-ME-02",
+      "speakable_text": "Burnout often persists because a tired nervous system stops responding to pressure like a performance tool. More pressure can register as more threat, even when the intention is improvement.",
+      "start": 13.91,
+      "end": 25.91,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-BURN-HEAL-TS-01",
+      "speakable_text": "Try this. Close the loop, lower your jaw. And take three slow double-inhale sighs before choosing the next task. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 25.91,
+      "end": 37.91,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-BURN-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. Rest is a recovery input, not a reward for perfect output.",
+      "start": 37.91,
+      "end": 48.613,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

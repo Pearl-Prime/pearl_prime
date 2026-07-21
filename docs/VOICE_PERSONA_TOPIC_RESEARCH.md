@@ -1,8 +1,9 @@
 # Voice-Persona-Topic Research
 
 **Owner:** Pearl_Research + Pearl_Architect
-**Last updated:** 2026-04-08
+**Last updated:** 2026-07-19
 **Authority:** Subordinate to PHOENIX_ARC_FIRST_CANONICAL_SPEC.md
+**Alias:** `docs/VOICE_MEDIUM_PERSONA_TOPIC_RESEARCH.md` redirects here (stale-name reconcile 2026-07-19).
 
 ## 1. Voice Psychology Foundations
 
@@ -125,3 +126,107 @@ Voice parameters directly affect listener trust and engagement in therapeutic au
 - **Built-in voices cover 7** → need ~18 CosyVoice2 cloned archetypes
 - **Cross-locale sharing OK** (same voice in different language sounds different)
 - **Within-locale uniqueness enforced** by brand_narrator_voice_map.yaml
+
+## 7. Short-Form Social / Reels (TikTok · Reels · Shorts)
+
+**Scope:** Voice design for `SOURCE_OF_TRUTH/social_media_atoms/` (en-US evergreen bank:
+3 personas × 20 topics; every atom carries `short_video_script` in `surface_fit` and
+`tiktok_reels_shorts` in `platform_fit`). Long-form §§1–6 remain authoritative for
+audiobooks / guided audio. This section **extends** — it does not replace — those rows.
+
+**Machine contract:** `config/tts/social_media_voice_matrix.yaml` (v2 — **gender-only stock voices**)  
+**Text prep (NO SSML):** `config/tts/social_media_tts_text_prep.yaml`  
+**Video join (MP3 bank → reels):** `scripts/social_media/voice_bank_lookup.py` — `atom_id` → local/R2 MP3 + full `speakable_text`. VCE: `run_pipeline.py --format short --voice-bank`. Social: evergreen caption pack + faceless `--voice-bank`. Captions must use speakable (never raw SSOT alone when bank is on).  
+**Research packets:**  
+- `artifacts/research/social_media_voice_matrix_2026-07-19/REPORT.md` (Wave 1 auditions)  
+- `artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md` (**plan pivot** — read this)
+
+### 7.0 Plan pivot (2026-07-19, OPD-SMV-02) — READ FIRST
+
+Operator listen: CosyVoice **persona/topic engine-param modulation sounded weird** and worse than
+the stock voice. **Do not** drive short-form CosyVoice with pace/pause/warmth/pitch/stability knobs.
+
+**Production levers for the social MP3 bank:**
+
+1. **Gender only** — `english_male` or `english_female` stock (see matrix v2).
+2. **Plain-text prep** — punctuation pacing + homograph/trap rewrites; **SSML forbidden** for this bank
+   (onboarding ElevenLabs+SSML lane stays separate: `specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md`).
+
+Long-form §§1–3 acoustic tables remain for audiobook/ElevenLabs therapeutic work — not for this CosyVoice reel bank.
+
+### 7.1 Register delta vs long-form
+
+| Axis | Long-form (therapeutic) | Short-form (reels) |
+|------|-------------------------|--------------------|
+| Duration | 5–60+ min | 15–60 s (TikTok completion often peaks ~11–18 s; story beats can run 30–60 s) |
+| Opening | Settling / co-regulation OK | Hook in **first 1–3 s**; fail the swipe otherwise |
+| Energy | Calm, co-regulating | Feed-native: ~+15–25% pace vs conversation; opening line ~20% louder/brighter |
+| Pauses | 300–500 ms inter-sentence | Cap most pauses ≤250–320 ms; dead air >0.5 s invites swipe |
+| Loudness | Contemplative headroom | Target ~−14 LUFS integrated, −1 to −2 dBTP; mono-compatible phone speaker |
+| Arc | Chapter / journey | Hook → felt sense → one reframe/tool → payoff/CTA |
+| Brand voice | May vary by brand/narrator | **One voice identity per persona** + topic param modulation (default Q-SMV-03) |
+
+**Provenance (external claims used above):**
+- First-3-seconds retention / hook window: go-viral.app “The First 3 Seconds…”; AI Tools Guidebook short-video script notes (2026 retention targets).
+- ~25% faster speaking + cut pauses >0.5 s: Pavone “Hook Viewers in 3 Seconds” Reels speaking tips.
+- AI voice short-form norms (energy, minimal dead air, stick to 1–2 voices): AiVoicePedia “AI Voice for TikTok, Reels and Shorts”.
+- Platform loudness norm (~−14 LUFS / true-peak ceiling): industry short-form mix practice (applied as a post-synth target for Lane 2, not a CosyVoice API param).
+
+Tier-1 synthesis (operator-present): short-form wellness reels still need **trust**, not cheerleading —
+raise energy and tighten pauses without abandoning the somatic/therapeutic register of §§1–3.
+
+### 7.2 Short-form topic modulation (reuse §3, energy-shifted)
+
+Apply §3 topic rows, then shift for reels:
+
+| Transform | Rule |
+|-----------|------|
+| `pace_bpm` | `min(long_form_mid + 18, 168)` — keep grief/sleep_anxiety on the slow end of the short-form band |
+| `pause_ms` | `max(220, long_form_mid − 100)` — never above 320 ms except grief / sleep_anxiety (cap 360) |
+| `warmth` | `max(0.35, long_form − 0.08)` — slightly less “pillow” so hooks cut through music beds |
+| `pitch_shift` | unchanged from §3 (identity + topic color) |
+| `stability` | 0.55–0.70 for most reels (punch + slight variance); 0.70–0.80 for grief / compassion_fatigue |
+
+Topics present in the evergreen social bank but **not** in §3 get these short-form defaults
+(derived from nearest §3 neighbor):
+
+| Topic | BPM | Pause (ms) | Pitch | Warmth | Neighbor |
+|-------|-----|------------|-------|--------|----------|
+| addiction | 148–158 | 240–280 | 0.00 | 0.55 | financial_anxiety / courage |
+| adhd | 155–165 | 220–260 | +0.02 | 0.50 | overthinking (brisker) |
+| body_image | 145–155 | 250–290 | 0.00 | 0.68 | self_worth |
+| divorce | 142–152 | 260–300 | −0.01 | 0.72 | grief / depression |
+| money | 150–160 | 240–280 | 0.00 | 0.52 | financial_stress |
+| relationship_anxiety | 146–156 | 250–290 | 0.00 | 0.68 | social_anxiety |
+| shame | 142–152 | 260–300 | −0.02 | 0.75 | self_worth / depression |
+
+### 7.3 Persona reel voicing (en-US evergreen)
+
+Default granularity (**Q-SMV-03**): **one CosyVoice voice identity per persona**, modulate params per topic.
+
+| Persona | Archetype | CosyVoice voice | Base reel params | Notes |
+|---------|-----------|-----------------|------------------|-------|
+| `corporate_managers` | authoritative_clear | `english_male` | BPM 150–160, pause 240–280, warmth 0.45–0.55, pitch 0.00, stability 0.65–0.75 | Calm professional; LinkedIn-adjacent authority that still works on TikTok |
+| `gen_z_professionals` | bright_peer | `english_female` | BPM 155–165, pause 220–260, warmth 0.40–0.50, pitch +0.02, stability 0.55–0.65 | Faster, brighter; peer not professor |
+| `healthcare_rns` | warm_caregiver | `english_female` **INTERIM** → planned zero-shot `en_f_warm_caregiver_01` | BPM 148–158, pause 250–300, warmth 0.65–0.78, pitch −0.01, stability 0.60–0.70 | Same built-in as Gen Z for Wave-1 auditions only; **fails CTSS ≥3 distinct archetypes** until a warm-caregiver clone is ratified |
+
+Diversity obligation (`voice_diversity_matrix.yaml`): ≥3 distinct archetypes, CTSS cosine ≤0.90.
+Wave-1 ships **2** EN built-ins + 1 flagged INTERIM. Do **not** scale the full 1,620 bank on two
+speaker identities without either (a) a third clone ref or (b) explicit operator waiver on Q-SMV-04.
+
+### 7.4 Engine decision for EN reels (Q-SMV-01) — recommendation only
+
+| Option | Pros | Cons |
+|--------|------|------|
+| **CosyVoice2 (recommended default)** | Zero per-char cost at 1,620+ atoms; on-box; zero-shot clones; RAP path on Pearl Star | EN library thinner than ElevenLabs; quality is Layer-4 operator taste |
+| ElevenLabs (keep where CosyVoice fails read) | Mature EN voices (Rachel baseline already researched) | Paid at bank scale; dual-engine ops |
+| Mixed | Escape hatch per persona | More pipeline complexity |
+
+**Recommended default:** CosyVoice2 for all three personas **if** the operator ratifies the
+audition set in `artifacts/research/social_media_voice_matrix_2026-07-19/auditions/`.
+Keep ElevenLabs only for a persona that fails the listen. Do not self-certify “best.”
+
+### 7.5 First-bank scope (Q-SMV-02)
+
+**Default:** en-US evergreen only (`evergreen_en_us_atoms.jsonl`, 1,620 atoms).
+APAC / platform-surface / weekly-delta banks after the pilot MP3 pipeline proves out (Lane 2).

@@ -1,0 +1,58 @@
+{
+  "pack_id": "compassion_fatigue__healthcare_rns",
+  "topic": "compassion_fatigue",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "compassion_fatigue"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/compassion_fatigue__healthcare_rns_short_9x16.mp4",
+  "duration_s": 55.369,
+  "bytes": 3832371,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-COMP-HEAL-HC-02",
+      "speakable_text": "If a flat voice by shift's end is familiar, this compassion fatigue pattern needs a better reset.",
+      "start": 0.0,
+      "end": 9.058,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-COMP-HEAL-PA-02",
+      "speakable_text": "Trying to outrun compassion fatigue usually makes the loop more expensive. More pushing through, more guilt for feeling depleted. And less capacity for the people who need you.",
+      "start": 9.058,
+      "end": 21.058,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-COMP-HEAL-ME-02",
+      "speakable_text": "Compassion fatigue often persists because the body has been running its stress response for someone else for so long it forgets to run one for you. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 21.058,
+      "end": 33.058,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-COMP-HEAL-TS-01",
+      "speakable_text": "Try this. Name what you have left to give today, offer exactly that amount. And let that be enough. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 33.058,
+      "end": 45.058,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-COMP-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. You cannot pour from a tank you are not allowed to refill.",
+      "start": 45.058,
+      "end": 55.369,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

@@ -1,0 +1,58 @@
+{
+  "pack_id": "body_image__corporate_managers",
+  "topic": "body_image",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "body_image"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/body_image__corporate_managers_short_9x16.mp4",
+  "duration_s": 53.802,
+  "bytes": 3862566,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-BODY-CORP-HC-02",
+      "speakable_text": "If a mirror check that doesn't land is familiar, this body image pattern needs a better reset.",
+      "start": 0.0,
+      "end": 5.871,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-BODY-CORP-PA-02",
+      "speakable_text": "Trying to outrun body image usually makes the loop more expensive. More checking, more comparing. And less time in the life you're trying to live.",
+      "start": 5.871,
+      "end": 17.871,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-BODY-CORP-ME-02",
+      "speakable_text": "Body image stress often persists because the mind treats appearance as a proxy for safety and worth instead of just appearance. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 17.871,
+      "end": 29.871,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-BODY-CORP-TS-01",
+      "speakable_text": "Try this. Turn away from the mirror, name one thing your body let you do today. And get dressed for that. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 29.871,
+      "end": 41.871,
+      "voice_id": "english_male"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-BODY-CORP-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. A body is something you live in, not a project that is always overdue.",
+      "start": 41.871,
+      "end": 53.802,
+      "voice_id": "english_male"
+    }
+  ],
+  "persona": "corporate_managers"
+}

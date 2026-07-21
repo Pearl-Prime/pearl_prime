@@ -1,0 +1,58 @@
+{
+  "pack_id": "self_worth__healthcare_rns",
+  "topic": "self_worth",
+  "status": "ok",
+  "acceptance_layer": "system working — matrix batch (broll + kinetic ASS + voice bank)",
+  "style_stack": {
+    "visual": "broll_montage PRIMARY (matrix=static plates+hard cuts; smoke keeps Ken Burns)",
+    "captions": "kinetic_type ASS",
+    "audio": "per-beat social_voice_bank MP3s",
+    "plates_topic": "self_worth"
+  },
+  "mp4": "artifacts/social_media_voice_bank_2026-07-19/matrix_batch/self_worth__healthcare_rns_short_9x16.mp4",
+  "duration_s": 52.845,
+  "bytes": 3973118,
+  "beats": [
+    {
+      "role": "hook",
+      "atom_id": "EVG-ENUS-SELF-HEAL-HC-02",
+      "speakable_text": "If a mental scoreboard is familiar, this self-worth pattern needs a better reset.",
+      "start": 0.0,
+      "end": 6.602,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "recognition",
+      "atom_id": "EVG-ENUS-SELF-HEAL-PA-02",
+      "speakable_text": "Trying to outrun self-worth usually makes the loop more expensive. More proving, more comparison. And less time spent just being.",
+      "start": 6.602,
+      "end": 17.75,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "mechanism",
+      "atom_id": "EVG-ENUS-SELF-HEAL-ME-02",
+      "speakable_text": "The self-worth dip often persists because self-worth gets tied to output instead of staying a stable baseline. Pushing harder can look like progress while the underlying pattern stays the same.",
+      "start": 17.75,
+      "end": 29.75,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "practice",
+      "atom_id": "EVG-ENUS-SELF-HEAL-TS-01",
+      "speakable_text": "Try this. Name one thing you did today without judging it, say that counts out loud. And let the scoreboard rest for the day. Keep it small enough to finish before your brain starts negotiating.",
+      "start": 29.75,
+      "end": 41.75,
+      "voice_id": "english_female"
+    },
+    {
+      "role": "payoff",
+      "atom_id": "EVG-ENUS-SELF-HEAL-SP-02",
+      "speakable_text": "Bookmark the pattern. Signal, reset, next action. Worth was never up for a vote, even when it feels like one.",
+      "start": 41.75,
+      "end": 52.845,
+      "voice_id": "english_female"
+    }
+  ],
+  "persona": "healthcare_rns"
+}

@@ -1,0 +1,57 @@
+# Social Media Voice Selection Matrix — gender-only CosyVoice (TikTok / Reels)
+# RATIFIED OPD-SMV-03 (2026-07-19): G01 keep gender map; G02 aggressive short sentences;
+# G03 synth-input-only text prep (SSOT untouched). NO SSML. NO engine params.
+# Text prep: config/tts/social_media_tts_text_prep.yaml
+# Research: artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+schema_version: 2
+locale_default: en-US
+engine_default: cosyvoice2
+resolution: gender_only_stock_voice
+text_prep: config/tts/social_media_tts_text_prep.yaml
+r2_run_id: "20260719b"
+
+ratification:
+  status: RATIFIED
+  signal_token: social-media-voice-matrix-ratified
+  opd: OPD-SMV-03
+  ratified_at_utc: "2026-07-19T05:32:00Z"
+  decisions:
+    Q-SMV-G01: keep   # corp=male, gen_z=female, RN=female
+    Q-SMV-G02: aggressive_short_sentences
+    Q-SMV-G03: synth_input_only_simple
+  void_prior_bank: "social_media/voice_bank/20260719/ (modulated run)"
+
+operator_defaults:
+  Q-SMV-01_engine: cosyvoice2
+  Q-SMV-02_first_bank: evergreen_en_us
+  Q-SMV-03_granularity: gender_only
+  ssml: forbidden
+  engine_params: forbidden
+
+persona_voices:
+  corporate_managers:
+    engine: cosyvoice2
+    voice_id: english_male
+    voice_id_alternate: english_female
+    gender: male
+  gen_z_professionals:
+    engine: cosyvoice2
+    voice_id: english_female
+    gender: female
+  healthcare_rns:
+    engine: cosyvoice2
+    voice_id: english_female
+    gender: female
+
+topic_modulation: {}
+persona_topic_overrides: {}
+
+example_rows:
+  - {persona: corporate_managers, topic: anxiety, locale: en-US, engine: cosyvoice2, voice_id: english_male}
+  - {persona: gen_z_professionals, topic: anxiety, locale: en-US, engine: cosyvoice2, voice_id: english_female}
+  - {persona: healthcare_rns, topic: compassion_fatigue, locale: en-US, engine: cosyvoice2, voice_id: english_female}
+
+post_synth_targets:
+  loudness_lufs: -14
+  true_peak_dbtp: -1.5
+  mono_compatible: true
