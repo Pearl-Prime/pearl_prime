@@ -20,10 +20,40 @@ sys.path.insert(0, str(REPO_ROOT))
 RESULTS = []
 
 
-def gate(name: str, passed: bool, detail: str = "", skip: bool = False):
-    status = "SKIP" if skip else ("PASS" if passed else "FAIL")
+def gate(name: str, passed: bool, detail: str = "", skip: bool = False, advisory: bool = False):
+    """advisory=True: a failing check is reported as WARN, not FAIL, and the
+    caller should NOT add it to `failed` — used for gates that surface a
+    real signal without blocking (e.g. research_fit binding, Lane 01 —
+    docs/agent_prompt_packs/20260721_bestseller_atom_flow/01_ci_gate_research_fit_and_story_authored.md)."""
+    if skip:
+        status = "SKIP"
+    elif not passed and advisory:
+        status = "WARN"
+    else:
+        status = "PASS" if passed else "FAIL"
     RESULTS.append((name, status, detail))
     return passed
+
+
+def _discover_recent_artifact_files(repo_root: Path, filename: str, limit: int = 8) -> list[Path]:
+    """Find the most-recently-modified `filename` files under known QA/book
+    proof-root directories, for gates that sample real (untracked, local-only)
+    book renders. An empty result just means "no local render available" —
+    the caller must treat that as SKIP, not FAIL."""
+    roots = (
+        repo_root / "artifacts" / "qa",
+        repo_root / "artifacts" / "wave_proof",
+    )
+    found: list[Path] = []
+    for root in roots:
+        if not root.is_dir():
+            continue
+        try:
+            found.extend(root.glob(f"**/{filename}"))
+        except OSError:
+            continue
+    found = sorted(set(found), key=lambda p: p.stat().st_mtime, reverse=True)
+    return found[:limit]
 
 
 def _summarize_story_band_gaps(persona_id: str, topic_id: str, arc_path: Path) -> str:
@@ -707,10 +737,87 @@ def main() -> int:
             skip=True,
         )
 
+    # --- 34-35. Bestseller atom-flow lane 01 rails (research_fit binding
+    #            visibility) — ADVISORY ONLY. See
+    #            docs/agent_prompt_packs/20260721_bestseller_atom_flow/01_ci_gate_research_fit_and_story_authored.md.
+    #            Both gates WARN, never FAIL, and are excluded from `failed`
+    #            below: research_fit stamping (build_story_schedule) is not
+    #            yet wired into scripts/run_pipeline.py on this branch, so
+    #            check_research_fit_honesty.py's real "empty rf + no
+    #            skip_reason" check currently fires on EVERY real book proof
+    #            root in this repo (verified 2026-07-21) — wiring it as a
+    #            BLOCKing gate today would redden CI for a pre-existing,
+    #            unrelated gap, not a regression this lane introduced. Making
+    #            either gate hard-block is an operator-tier threshold
+    #            decision (see prompt pack Evidence Requirements); NOT made
+    #            here.
+
+    # --- 34. Research-fit honesty (no dishonest empty/claims-mismatch research_fit) ---
+    rfh_gate = REPO_ROOT / "scripts" / "ci" / "check_research_fit_honesty.py"
+    if rfh_gate.exists():
+        audit_targets = _discover_recent_artifact_files(REPO_ROOT, "enrichment_audit.json")
+        if audit_targets:
+            try:
+                env = os.environ.copy()
+                env["PYTHONPATH"] = str(REPO_ROOT)
+                r = subprocess.run(
+                    [sys.executable, str(rfh_gate), *[str(p) for p in audit_targets]],
+                    cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, timeout=120,
+                )
+                rfh_ok = r.returncode == 0
+                out = (r.stderr or r.stdout or "").strip()
+                rfh_detail = out.splitlines()[-1] if out else "check_research_fit_honesty"
+            except Exception as e:
+                rfh_ok = False
+                rfh_detail = str(e)
+            gate(
+                "34. Research-fit honesty (no dishonest research_fit claims — ADVISORY)",
+                rfh_ok, rfh_detail, advisory=True,
+            )
+        else:
+            gate("34. Research-fit honesty", True,
+                 "no enrichment_audit.json under known proof roots; skip", skip=True)
+    else:
+        gate("34. Research-fit honesty", True, "gate script not present; skip", skip=True)
+
+    # --- 35. Book-level "listing-as-story" (research_fit binding cap) ---
+    bsa_gate = REPO_ROOT / "scripts" / "ci" / "check_book_story_authored.py"
+    if bsa_gate.exists():
+        book_targets = _discover_recent_artifact_files(REPO_ROOT, "enrichment_audit.json")
+        if book_targets:
+            try:
+                env = os.environ.copy()
+                env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+                r = subprocess.run(
+                    [sys.executable, str(bsa_gate),
+                     "--audit", *[str(p) for p in book_targets]],
+                    cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, timeout=120,
+                )
+                out = (r.stderr or r.stdout or "").strip()
+                bsa_detail = out.splitlines()[-1] if out else "check_book_story_authored"
+                # Advisory script exits 0 even when unbound books are found
+                # (WARN in its own output). Surface that as readiness WARN.
+                unbound_found = " unbound" in out and "0 unbound" not in out
+                bsa_ok = r.returncode == 0 and not unbound_found
+            except Exception as e:
+                bsa_ok = False
+                bsa_detail = str(e)
+            gate(
+                "35. Book story-authored / research_fit binding cap (no listing-as-story — ADVISORY)",
+                bsa_ok, bsa_detail, advisory=True,
+            )
+        else:
+            gate("35. Book story-authored / research_fit binding cap", True,
+                 "no enrichment_audit.json under known proof roots; skip", skip=True)
+    else:
+        gate("35. Book story-authored / research_fit binding cap", True,
+             "gate script not present; skip", skip=True)
+
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
-        sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
+        sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else ("!" if status == "WARN" else "✗"))
         print(f"  {sym} {status:4}  {name}")
         if detail:
             print(f"      {detail}")

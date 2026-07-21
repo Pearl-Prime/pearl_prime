@@ -1,0 +1,13 @@
+{
+  "acceptance_layer": "structurally_clear_only",
+  "layer1_pass": false,
+  "layer2_pass": false,
+  "layer3_pass": null,
+  "layer4_pass": null,
+  "reasons": [
+    "Layer 1 gate(s) not PASS: book_quality_gate, register_gate",
+    "bestseller_craft overall_score 0.5247 < floor 0.55 (scorecard line 50, Layer 1 hard gate)"
+  ],
+  "research_fit_bound": false,
+  "research_fit_unbound_reason": "research_fit is empty ({}) with no mode/skip_reason set \u2014 legacy_planner path, equivalent to no_story_atoms: book rendered with no character through-line bound to a story_atoms bank"
+}

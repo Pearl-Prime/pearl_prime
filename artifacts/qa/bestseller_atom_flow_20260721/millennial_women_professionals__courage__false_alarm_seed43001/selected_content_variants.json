@@ -1,0 +1,1866 @@
+{
+  "schema_version": 1,
+  "stage": "selected_content_variants",
+  "topic": "courage",
+  "persona_id": "millennial_women_professionals",
+  "teacher_id": "",
+  "runtime_format": "standard_book",
+  "chapters": [
+    {
+      "number": 1,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v04",
+          "source": "persona_atom",
+          "source_id": "HOOK v04+stack3",
+          "target_words": 127,
+          "actual_words": 94,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_DEFINITION",
+          "variant_id": "",
+          "atom_id": "angle_def_tpl:INVISIBLE_THRESHOLD",
+          "source": "angle_template",
+          "source_id": "angle_def_tpl:INVISIBLE_THRESHOLD",
+          "target_words": 1125,
+          "actual_words": 51,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_0:recognition:false_alarm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_0:recognition:false_alarm:v03",
+          "target_words": 175,
+          "actual_words": 139,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v11",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v11",
+          "target_words": 135,
+          "actual_words": 264,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v19",
+          "source": "persona_atom",
+          "source_id": "STORY v19+stack3",
+          "target_words": 188,
+          "actual_words": 218,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v06",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v06",
+          "target_words": 169,
+          "actual_words": 371,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v03",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v03",
+          "target_words": 158,
+          "actual_words": 256,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v07",
+          "source": "persona_atom",
+          "source_id": "STORY v07",
+          "target_words": 135,
+          "actual_words": 51,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v17",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v17+stack2",
+          "target_words": 205,
+          "actual_words": 221,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_1_p1r0",
+          "target_words": 400,
+          "actual_words": 153,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:story_scene:persona_atom",
+          "source_id": "depth_story_scene_1_p1r0",
+          "target_words": 305,
+          "actual_words": 188,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_PERSONA_SPECIFICITY",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:persona_specificity:persona_atom",
+          "source_id": "depth_persona_specificity_1_p1r0",
+          "target_words": 117,
+          "actual_words": 117,
+          "enrichment_applied": [
+            "persona_specificity"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_1_p2r0",
+          "target_words": 400,
+          "actual_words": 176,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:story_scene:persona_atom",
+          "source_id": "depth_story_scene_1_p2r0",
+          "target_words": 500,
+          "actual_words": 205,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_PERSONA_SPECIFICITY",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:persona_specificity:persona_atom",
+          "source_id": "depth_persona_specificity_1_p2r0",
+          "target_words": 300,
+          "actual_words": 195,
+          "enrichment_applied": [
+            "persona_specificity"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v03",
+          "source": "persona_atom",
+          "source_id": "HOOK v03",
+          "target_words": 109,
+          "actual_words": 28,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L1",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L1",
+          "target_words": 280,
+          "actual_words": 35,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 1
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_1:recognition:false_alarm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:recognition:false_alarm:v04",
+          "target_words": 158,
+          "actual_words": 140,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v08",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v08",
+          "target_words": 117,
+          "actual_words": 263,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04",
+          "target_words": 152,
+          "actual_words": 137,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v32",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v32",
+          "target_words": 141,
+          "actual_words": 454,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v06",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v06",
+          "target_words": 117,
+          "actual_words": 260,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v03",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v03",
+          "target_words": 187,
+          "actual_words": 119,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v13",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v13",
+          "target_words": 141,
+          "actual_words": 67,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v23",
+          "source": "persona_atom",
+          "source_id": "HOOK v23",
+          "target_words": 109,
+          "actual_words": 26,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+          "target_words": 280,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_2:recognition:false_alarm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:recognition:false_alarm:v01",
+          "target_words": 158,
+          "actual_words": 143,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v10",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v10",
+          "target_words": 117,
+          "actual_words": 266,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HARDSHIP:story_2:mechanism_proof:false_alarm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:mechanism_proof:false_alarm:v02",
+          "target_words": 152,
+          "actual_words": 145,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v28",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v28",
+          "target_words": 141,
+          "actual_words": 435,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v02",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v02",
+          "target_words": 117,
+          "actual_words": 242,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v06",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v06+stack3",
+          "target_words": 187,
+          "actual_words": 276,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v16",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v16",
+          "target_words": 141,
+          "actual_words": 61,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v16",
+          "source": "persona_atom",
+          "source_id": "HOOK v16",
+          "target_words": 109,
+          "actual_words": 24,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+          "target_words": 280,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_0:recognition:false_alarm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:recognition:false_alarm:v02",
+          "target_words": 158,
+          "actual_words": 138,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v04",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v04",
+          "target_words": 117,
+          "actual_words": 244,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_0:mechanism_proof:false_alarm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:mechanism_proof:false_alarm:v01",
+          "target_words": 152,
+          "actual_words": 157,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v30",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v30",
+          "target_words": 141,
+          "actual_words": 444,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v12",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v12",
+          "target_words": 117,
+          "actual_words": 280,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v18",
+          "source": "persona_atom",
+          "source_id": "STORY v18+stack2",
+          "target_words": 187,
+          "actual_words": 210,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v09",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v09",
+          "target_words": 141,
+          "actual_words": 70,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v05",
+          "source": "persona_atom",
+          "source_id": "HOOK v05",
+          "target_words": 100,
+          "actual_words": 28,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+          "target_words": 280,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_1:recognition:false_alarm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:recognition:false_alarm:v02",
+          "target_words": 148,
+          "actual_words": 138,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v09",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v09",
+          "target_words": 108,
+          "actual_words": 268,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 160,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_1:mechanism_proof:false_alarm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:mechanism_proof:false_alarm:v03",
+          "target_words": 142,
+          "actual_words": 149,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v05",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v05",
+          "target_words": 131,
+          "actual_words": 381,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v07",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v07",
+          "target_words": 108,
+          "actual_words": 271,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 173,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_1:turning_point:false_alarm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:turning_point:false_alarm:v02",
+          "target_words": 131,
+          "actual_words": 166,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v08",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v08",
+          "target_words": 91,
+          "actual_words": 62,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v10",
+          "source": "persona_atom",
+          "source_id": "HOOK v10",
+          "target_words": 109,
+          "actual_words": 22,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+          "target_words": 280,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 3
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_2:recognition:false_alarm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:recognition:false_alarm:v03",
+          "target_words": 158,
+          "actual_words": 139,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v01",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v01",
+          "target_words": 117,
+          "actual_words": 246,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04",
+          "target_words": 152,
+          "actual_words": 137,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v02",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v02",
+          "target_words": 141,
+          "actual_words": 381,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v05",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v05",
+          "target_words": 117,
+          "actual_words": 269,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v04",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v04",
+          "target_words": 187,
+          "actual_words": 102,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v25",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v25",
+          "target_words": 141,
+          "actual_words": 74,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:persona_atom",
+          "source_id": "depth_mechanism_depth_6_p1r0",
+          "target_words": 114,
+          "actual_words": 114,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:persona_atom",
+          "source_id": "depth_mechanism_depth_6_p2r0",
+          "target_words": 114,
+          "actual_words": 114,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v19",
+          "source": "persona_atom",
+          "source_id": "HOOK v19",
+          "target_words": 109,
+          "actual_words": 19,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+          "target_words": 280,
+          "actual_words": 41,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 3
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_0:recognition:false_alarm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:recognition:false_alarm:v01",
+          "target_words": 158,
+          "actual_words": 143,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v17",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v17",
+          "target_words": 117,
+          "actual_words": 206,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02",
+          "target_words": 152,
+          "actual_words": 145,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v13",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v13",
+          "target_words": 141,
+          "actual_words": 392,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v03",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v03",
+          "target_words": 117,
+          "actual_words": 296,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v11",
+          "source": "persona_atom",
+          "source_id": "STORY v11+stack2",
+          "target_words": 187,
+          "actual_words": 209,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v24",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v24",
+          "target_words": 141,
+          "actual_words": 74,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v27",
+          "source": "persona_atom",
+          "source_id": "HOOK v27",
+          "target_words": 109,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+          "target_words": 280,
+          "actual_words": 45,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_1:recognition:false_alarm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:recognition:false_alarm:v04",
+          "target_words": 158,
+          "actual_words": 140,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v22",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v22",
+          "target_words": 117,
+          "actual_words": 249,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01",
+          "target_words": 152,
+          "actual_words": 157,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v08",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v08",
+          "target_words": 141,
+          "actual_words": 367,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v13",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v13",
+          "target_words": 117,
+          "actual_words": 223,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v05",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v05",
+          "target_words": 187,
+          "actual_words": 101,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v07",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v07",
+          "target_words": 141,
+          "actual_words": 72,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:persona_atom",
+          "source_id": "depth_mechanism_depth_8_p1r0",
+          "target_words": 146,
+          "actual_words": 117,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:persona_atom",
+          "source_id": "depth_mechanism_depth_8_p2r0",
+          "target_words": 175,
+          "actual_words": 123,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v01",
+          "source": "persona_atom",
+          "source_id": "HOOK v01",
+          "target_words": 100,
+          "actual_words": 25,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+          "target_words": 280,
+          "actual_words": 45,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_2:recognition:false_alarm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:recognition:false_alarm:v03",
+          "target_words": 148,
+          "actual_words": 139,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v08",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v08",
+          "target_words": 108,
+          "actual_words": 246,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 160,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04",
+          "target_words": 142,
+          "actual_words": 137,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v10",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v10",
+          "target_words": 131,
+          "actual_words": 387,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v02",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v02",
+          "target_words": 108,
+          "actual_words": 281,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 173,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HEALING:story_2:embodiment:false_alarm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:embodiment:false_alarm:v03",
+          "target_words": 131,
+          "actual_words": 154,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v11",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v11",
+          "target_words": 91,
+          "actual_words": 72,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v24",
+          "source": "persona_atom",
+          "source_id": "HOOK v24",
+          "target_words": 109,
+          "actual_words": 26,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+          "target_words": 280,
+          "actual_words": 45,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_0:recognition:false_alarm:v04",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:recognition:false_alarm:v04",
+          "target_words": 158,
+          "actual_words": 140,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v15",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v15",
+          "target_words": 117,
+          "actual_words": 297,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01",
+          "target_words": 152,
+          "actual_words": 157,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v09",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v09",
+          "target_words": 141,
+          "actual_words": 373,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v26",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v26",
+          "target_words": 117,
+          "actual_words": 244,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v02",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v02",
+          "target_words": 187,
+          "actual_words": 116,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v23",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v23",
+          "target_words": 141,
+          "actual_words": 65,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v20",
+          "source": "persona_atom",
+          "source_id": "HOOK v20",
+          "target_words": 109,
+          "actual_words": 20,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+          "target_words": 280,
+          "actual_words": 45,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 5
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_1:recognition:false_alarm:v02",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:recognition:false_alarm:v02",
+          "target_words": 158,
+          "actual_words": 138,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v27",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v27",
+          "target_words": 117,
+          "actual_words": 203,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "EXERCISE v07",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07",
+          "target_words": 170,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03",
+          "target_words": 152,
+          "actual_words": 149,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v01",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v01",
+          "target_words": 141,
+          "actual_words": 388,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v04",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v04",
+          "target_words": 117,
+          "actual_words": 206,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v12",
+          "source": "persona_atom",
+          "source_id": "STORY v12+stack2",
+          "target_words": 187,
+          "actual_words": 285,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v20",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v20",
+          "target_words": 141,
+          "actual_words": 67,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "",
+          "atom_id": "HOOK v12",
+          "source": "persona_atom",
+          "source_id": "HOOK v12+stack3",
+          "target_words": 127,
+          "actual_words": 88,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+          "target_words": 280,
+          "actual_words": 45,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 5
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "story_plan:HOPE:story_2:recognition:false_alarm:v01",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_2:recognition:false_alarm:v01",
+          "target_words": 175,
+          "actual_words": 143,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v14",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v14",
+          "target_words": 135,
+          "actual_words": 260,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "TURNING_POINT v01",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v01",
+          "target_words": 188,
+          "actual_words": 133,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "COMPOSITE_DOCTRINE v11",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v11",
+          "target_words": 169,
+          "actual_words": 395,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v09",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v09",
+          "target_words": 158,
+          "actual_words": 253,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "MECHANISM_PROOF v05",
+          "source": "persona_atom",
+          "source_id": "MECHANISM_PROOF v05",
+          "target_words": 135,
+          "actual_words": 122,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "",
+          "atom_id": "INTEGRATION v06",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v06+stack2",
+          "target_words": 205,
+          "actual_words": 236,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    }
+  ]
+}
