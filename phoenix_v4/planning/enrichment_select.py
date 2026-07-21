@@ -65,6 +65,38 @@ logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
+# G-DEF4 session buffer: foreign-persona registry drops during select/depth.
+# Cleared at select_enrichment start; snapshotted into enrichment_audit.
+_DEFECT4_SESSION: List[Dict[str, Any]] = []
+
+
+def defect4_session_begin() -> None:
+    """Reset DEFECT4 drop tracking for a new enrichment run."""
+    _DEFECT4_SESSION.clear()
+
+
+def defect4_session_record(
+    *,
+    section_key: str,
+    section_persona: Any,
+    spine_persona_id: str,
+    site: str,
+) -> None:
+    """Record one DEFECT4 foreign-persona registry drop (detector stays loud)."""
+    _DEFECT4_SESSION.append(
+        {
+            "section_key": section_key,
+            "section_persona": section_persona,
+            "spine_persona_id": spine_persona_id,
+            "site": site,
+        }
+    )
+
+
+def defect4_session_snapshot() -> List[Dict[str, Any]]:
+    """Return a copy of DEFECT4 drops recorded in the current session."""
+    return list(_DEFECT4_SESSION)
+
 # OPD-115 Phase B: composite teacher doctrine/reflection (regular mode only).
 _COMPOSITE_DOCTRINE_SLOT_TYPES = frozenset({
     "TEACHER_DOCTRINE", "COMPRESSION", "COMPOSITE_TEACHER_DOCTRINE",
@@ -890,10 +922,17 @@ def _registry_type_lists(
         if spine_tok and not _registry_persona_matches(
             _registry_section_persona(sec_data), persona_id
         ):
+            _sec_persona = _registry_section_persona(sec_data)
             logger.warning(
                 "DEFECT4: dropping registry section %s (persona=%r) — foreign to "
                 "spine persona_id=%r; falling through to persona_atom/teacher.",
-                sec_key, _registry_section_persona(sec_data), persona_id,
+                sec_key, _sec_persona, persona_id,
+            )
+            defect4_session_record(
+                section_key=str(sec_key),
+                section_persona=_sec_persona,
+                spine_persona_id=str(persona_id),
+                site="registry_type_lists",
             )
             continue
         st = str(sec_data.get("type") or "REFLECTION").strip().upper()
@@ -1536,6 +1575,20 @@ def _load_angle_journey_fallback() -> dict[str, Any]:
     return _ANGLE_FALLBACK_CACHE
 
 
+def _angle_layer_label(value: Any, default: str) -> str:
+    """Return a reader-safe label from angle journey metadata."""
+    if isinstance(value, dict):
+        for key in ("title", "name", "phase", "layer", "id"):
+            text = str(value.get(key) or "").strip()
+            if text:
+                return text.replace("_", " ")
+        return default
+    text = str(value or "").strip()
+    if not text or (text.startswith("{") and text.endswith("}")):
+        return default
+    return text.replace("_", " ")
+
+
 def _angle_entry_meta(angle_id: str) -> dict[str, Any]:
     from phoenix_v4.planning.angle_journey import merge_angle_journey
     from phoenix_v4.planning.angle_resolver import get_angle_context, load_angle_registry
@@ -1557,17 +1610,6 @@ def _read_text_atom(path: Path) -> str:
     return path.read_text(encoding="utf-8").strip()
 
 
-def _locale_file_path(base_dir: Path, filename: str, locale: Optional[str]) -> Path:
-    """Prefer base_dir/locales/{locale}/{filename} when it exists and
-    locale != 'en-US'; otherwise the base English file. Generic over filename
-    (CANONICAL.txt for ANGLE_DEFINITION, level_N.yaml for ANGLE_CALLBACK)."""
-    if locale and locale != "en-US":
-        lp = base_dir / "locales" / locale / filename
-        if lp.exists():
-            return lp
-    return base_dir / filename
-
-
 def _try_angle_definition(
     *,
     persona_id: str,
@@ -1575,13 +1617,12 @@ def _try_angle_definition(
     angle_id: str,
     repo_root: Path,
     fallback_warnings: List[str],
-    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str, str]]:
     aid = (angle_id or "").strip()
     if not aid or not persona_id or not topic_id:
         return None
-    base_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid
-    body = _read_text_atom(_locale_file_path(base_dir, "CANONICAL.txt", locale))
+    base = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid / "CANONICAL.txt"
+    body = _read_text_atom(base)
     if body:
         return body, "angle_atom", f"angle_def:{aid}"
     meta = _angle_entry_meta(aid)
@@ -1590,8 +1631,8 @@ def _try_angle_definition(
 
     fam = family_default_angle_id(lens) if lens else None
     if fam and fam != aid:
-        fam_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam
-        body = _read_text_atom(_locale_file_path(fam_dir, "CANONICAL.txt", locale))
+        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam / "CANONICAL.txt"
+        body = _read_text_atom(fam_path)
         if body:
             fallback_warnings.append(
                 f"ANGLE_DEFINITION: family default {fam!r} for {aid!r}"
@@ -1617,13 +1658,11 @@ def _try_angle_callback(
     layer: int,
     repo_root: Path,
     fallback_warnings: List[str],
-    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str, str]]:
     aid = (angle_id or "").strip()
     if not aid or not persona_id or not topic_id or layer < 1:
         return None
-    _cb_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid
-    path = _locale_file_path(_cb_dir, f"level_{layer}.yaml", locale)
+    path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid / f"level_{layer}.yaml"
     if path.exists():
         data = _load_yaml(path)
         if isinstance(data, dict):
@@ -1636,8 +1675,7 @@ def _try_angle_callback(
 
     fam = family_default_angle_id(lens) if lens else None
     if fam and fam != aid:
-        _fam_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam
-        fam_path = _locale_file_path(_fam_dir, f"level_{layer}.yaml", locale)
+        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam / f"level_{layer}.yaml"
         if fam_path.exists():
             data = _load_yaml(fam_path)
             if isinstance(data, dict):
@@ -1662,15 +1700,14 @@ def _try_angle_callback(
     for candidate in chain:
         if candidate == aid:
             continue
-        parent_path = _locale_file_path(
+        parent_path = (
             repo_root
             / "atoms"
             / persona_id
             / topic_id
             / "ANGLE_CALLBACK"
-            / candidate,
-            f"level_{layer}.yaml",
-            locale,
+            / candidate
+            / f"level_{layer}.yaml"
         )
         if not parent_path.exists():
             continue
@@ -1684,8 +1721,14 @@ def _try_angle_callback(
                 return body, "angle_atom_parent", f"angle_cb_parent:{candidate}:L{layer}"
     fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_callback") or ""
     layers = list(meta.get("layer_progression") or [])
-    phase = layers[layer - 1] if 0 < layer <= len(layers) else f"layer_{layer}"
-    prior = layers[layer - 2] if layer >= 2 and layer - 2 < len(layers) else "the opening angle"
+    phase = _angle_layer_label(
+        layers[layer - 1] if 0 < layer <= len(layers) else None,
+        f"layer {layer}",
+    )
+    prior = _angle_layer_label(
+        layers[layer - 2] if layer >= 2 and layer - 2 < len(layers) else None,
+        "the opening angle",
+    )
     tpl = str(fb).format(
         layer=layer,
         phase=phase,
@@ -1718,7 +1761,6 @@ def _try_practice_library_by_id(
     seed: str,
     *,
     content_only: bool = False,
-    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str]]:
     """Compose a specific practice_library exercise (full or content-only assembly)."""
     try:
@@ -1728,7 +1770,7 @@ def _try_practice_library_by_id(
             load_practice_library,
         )
 
-        library = load_practice_library(locale=locale)
+        library = load_practice_library()
         all_exercises: List[dict] = []
         for exercises in library.values():
             if isinstance(exercises, list):
@@ -1741,9 +1783,8 @@ def _try_practice_library_by_id(
             exercise,
             chapter_index,
             seed,
-            load_component_templates(locale=locale),
+            load_component_templates(),
             content_only=content_only,
-            locale=locale,
         )
         if composed and composed.strip():
             return composed.strip(), exercise_id
@@ -1757,7 +1798,6 @@ def _try_practice_library(
     topic_id: str,
     persona_id: str,
     seed: str,
-    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str]]:
     try:
         from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
@@ -1767,7 +1807,6 @@ def _try_practice_library(
             topic_id=topic_id,
             persona_id=persona_id or "",
             seed=seed,
-            locale=locale,
         )
         if composed and composed.strip():
             return composed.strip(), "practice_library"
@@ -2359,7 +2398,7 @@ def peek_registry_content_for_beatmap_slot(
                 content = p_hit[0]
 
         if not content and stype == "EXERCISE":
-            pl = _try_practice_library(chapter_index0, topic, persona_id, seed, locale=request.locale)
+            pl = _try_practice_library(chapter_index0, topic, persona_id, seed)
             if pl:
                 content = pl[0]
 
@@ -2379,6 +2418,7 @@ def select_enrichment(
     repo_root: Optional[Path] = None,
 ) -> EnrichedBook:
     root = repo_root or REPO_ROOT
+    defect4_session_begin()
     topic = request.topic_id
     bm = request.beatmap
     seed = request.seed
@@ -2389,9 +2429,7 @@ def select_enrichment(
     sections_root = reg.get("sections") or {}
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
     composite_atoms: Dict[str, List[dict]] = (
-        _load_composite_doctrine_atoms(topic, repo_root=root, locale=request.locale)
-        if not tid
-        else {}
+        _load_composite_doctrine_atoms(topic, repo_root=root) if not tid else {}
     )
     pid = (persona_id or "").strip()
     locale = request.locale
@@ -2534,7 +2572,6 @@ def select_enrichment(
         continuity_plan=plan_context.get("chapter_continuity_plan")
         if is_twelve_shape_continuity_active(plan_context)
         else None,
-        locale=locale,
     )
 
     from phoenix_v4.planning.adjacency_selector import is_adjacency_selector_active
@@ -2610,7 +2647,6 @@ def select_enrichment(
                         angle_id=_angle_for_slot,
                         repo_root=root,
                         fallback_warnings=_angle_fallback_warnings,
-                        locale=locale,
                     )
                 else:
                     _ad = None
@@ -2627,7 +2663,6 @@ def select_enrichment(
                         layer=int(_layer),
                         repo_root=root,
                         fallback_warnings=_angle_fallback_warnings,
-                        locale=locale,
                     )
                     if _ac:
                         content, source, source_id = _ac[0], _ac[1], _ac[2]
@@ -2694,7 +2729,6 @@ def select_enrichment(
                             chapter_index0,
                             seed,
                             content_only=(chapter_index0 == 0),
-                            locale=request.locale,
                         )
                         if _pl_by_id:
                             _add_pieces.append(_pl_by_id[0])
@@ -2800,7 +2834,7 @@ def select_enrichment(
                                 _note_primary_body(_book_seen_bodies, _ap_content)
                     if not _add_pieces:
                         # Final EXERCISE fallback: practice_library (unchanged path).
-                        _apl = _try_practice_library(chapter_index0, topic, persona_id, seed, locale=request.locale)
+                        _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
                         if _apl:
                             _add_pieces.append(_apl[0])
                             _add_sources.append("practice_library")
@@ -3333,6 +3367,26 @@ def select_enrichment(
                     "composite_sentence_overlap_violations": sentence_overlap,
                 }
             )
+    # Book Engine Policy V1 — attach build-time policy context (metadata only;
+    # does not alter atom picks). See docs/specs/BOOK_ENGINE_POLICY_V1_SPEC.md.
+    _book_engine_policy_ctx: Dict[str, Any] = {}
+    try:
+        from phoenix_v4.planning.book_engine_policy import (
+            build_selector_policy_context,
+            load_book_engine_policy,
+        )
+
+        _bep = load_book_engine_policy(repo_root=root)
+        _book_engine_policy_ctx = build_selector_policy_context(
+            _bep,
+            persona_id=pid,
+            topic_id=topic,
+            chapter_numbers=[ch.number for ch in enriched_chapters],
+        )
+    except Exception as _bep_err:  # noqa: BLE001 — policy is additive; never block select
+        logger.warning("book_engine_policy attach skipped: %s", _bep_err)
+        _book_engine_policy_ctx = {"applies": False, "error": str(_bep_err)}
+
     enrichment_audit: Dict[str, Any] = {
         **audit_counts,
         "total_words": total_words,
@@ -3359,12 +3413,17 @@ def select_enrichment(
         "angle_journey_fallback_warnings": _angle_fallback_warnings,
         "angle_id": _angle_id_enrich,
         "angle_layer_by_chapter": _angle_layer_by_ch,
+        "book_engine_policy": _book_engine_policy_ctx,
+        # G-DEF4: foreign-persona registry drops (count > 0 blocks production ship).
+        "defect4_drops": defect4_session_snapshot(),
     }
 
     _out_spine = dict(plan_context)
     if _planner_warnings_mut:
         _existing_warns = list(_out_spine.get("chapter_planner_warnings") or [])
         _out_spine["chapter_planner_warnings"] = _existing_warns + _planner_warnings_mut
+    if _book_engine_policy_ctx:
+        _out_spine["book_engine_policy"] = _book_engine_policy_ctx
 
     return EnrichedBook(
         schema_version=1,
@@ -4098,10 +4157,17 @@ def _load_depth_content(
             if persona_id and not _registry_persona_matches(
                 _registry_section_persona(sec_data), persona_id
             ):
+                _sec_persona = _registry_section_persona(sec_data)
                 logger.warning(
                     "DEFECT4: skipping depth registry section %s (persona=%r) — "
                     "foreign to spine persona_id=%r.",
-                    _sec_key, _registry_section_persona(sec_data), persona_id,
+                    _sec_key, _sec_persona, persona_id,
+                )
+                defect4_session_record(
+                    section_key=str(_sec_key),
+                    section_persona=_sec_persona,
+                    spine_persona_id=str(persona_id),
+                    site="depth_registry_variant",
                 )
                 continue
             variants = sec_data.get("variants", [])

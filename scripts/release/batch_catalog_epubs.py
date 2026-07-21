@@ -40,10 +40,66 @@ PIPELINE_TIMEOUT_SEC = int(os.environ.get("CATALOG_ASSEMBLY_PIPELINE_TIMEOUT_SEC
 
 _RUNTIME_ALIASES = {"standard_book_60min": "standard_book"}
 
+# G-LAYER / D3 — catalog ship acceptance contract
+SHIP_QUALITY_PROFILES = frozenset({"production", "flagship"})
+ALLOWED_ACCEPTANCE_LAYERS = frozenset(
+    {
+        "path_works",
+        "path_works_prose_only",
+        "structurally_clear",
+        "authored_candidate",
+        "authored_candidate_l3proxy",
+        "system_working",
+        "bestseller_register",
+    }
+)
+LAYER3_REQUIRED = frozenset({"system_working", "bestseller_register"})
+
+
+def _normalize_acceptance_layer(raw: object) -> str:
+    return str(raw or "").strip().lower().replace(" ", "_").replace("-", "_")
+
 
 def _load_yaml(p: Path) -> dict:
     return yaml.safe_load(p.read_text(encoding="utf-8")) or {}
 
+
+def _resolve_acceptance_layer(
+    plan: dict,
+    *,
+    gate_verdict: str,
+    status: str,
+) -> tuple[str, str | None]:
+    """Return (acceptance_layer, layer3_artifact_or_none).
+
+    Defaults to path_works. Never invents system_working / bestseller_register
+    without an explicit Layer-3 / Layer-4 artifact path on the plan.
+    """
+    explicit = _normalize_acceptance_layer(plan.get("acceptance_layer"))
+    artifact = (
+        plan.get("layer3_artifact")
+        or plan.get("layer3_artifact_path")
+        or plan.get("ontgp_verdict_path")
+        or None
+    )
+    if artifact is not None:
+        artifact = str(artifact).strip() or None
+
+    if explicit in LAYER3_REQUIRED:
+        if not artifact:
+            raise SystemExit(
+                f"G-LAYER: plan {plan.get('book_id')!r} claims acceptance_layer="
+                f"{explicit} without layer3_artifact / ontgp_verdict_path"
+            )
+        return explicit, artifact
+
+    if explicit in ALLOWED_ACCEPTANCE_LAYERS:
+        return explicit, artifact
+
+    # Infer a conservative floor from this assembly run only.
+    if status in ("ok", "skip_r2", "skip_local") and gate_verdict == "pass":
+        return "structurally_clear", artifact
+    return "path_works", artifact
 
 def _resolve_runtime(plan: dict) -> str:
     raw = (plan.get("runtime_format_id") or plan.get("duration") or "standard_book").strip()
@@ -256,16 +312,33 @@ def run_one(
         try:
             client = _r2_client()
             if _r2_exists(client, r2_key):
+                layer, layer3 = _resolve_acceptance_layer(
+                    plan, gate_verdict="skip_r2", status="skip_r2"
+                )
                 return {
                     "book_id": bid,
                     "status": "skip_r2",
                     "r2_key": r2_key,
+                    "acceptance_layer": layer,
+                    "layer3_artifact": layer3,
+                    "quality_profile": quality_profile,
                 }
         except SystemExit:
             pass
 
     if out_epub.is_file() and not force and not dry_run:
-        return {"book_id": bid, "status": "skip_local", "path": str(out_epub), "r2_key": r2_key}
+        layer, layer3 = _resolve_acceptance_layer(
+            plan, gate_verdict="skip_local", status="skip_local"
+        )
+        return {
+            "book_id": bid,
+            "status": "skip_local",
+            "path": str(out_epub),
+            "r2_key": r2_key,
+            "acceptance_layer": layer,
+            "layer3_artifact": layer3,
+            "quality_profile": quality_profile,
+        }
 
     parts = bid.split("__")
     persona = parts[2]
@@ -277,12 +350,17 @@ def run_one(
     plan_json = render_dir / "plan.json"
 
     if dry_run:
+        layer, layer3 = _resolve_acceptance_layer(
+            plan, gate_verdict="dry_run", status="dry_run"
+        )
         return {
             "book_id": bid,
             "status": "dry_run",
             "arc": str(arc.relative_to(REPO)),
             "r2_key": r2_key,
             "quality_profile": quality_profile,
+            "acceptance_layer": layer,
+            "layer3_artifact": layer3,
         }
 
     render_dir.mkdir(parents=True, exist_ok=True)
@@ -388,7 +466,10 @@ def run_one(
         )
         uploaded = True
 
-    return {
+    layer, layer3 = _resolve_acceptance_layer(
+        plan, gate_verdict=gate_verdict, status="ok"
+    )
+    row = {
         "book_id": bid,
         "status": "ok",
         "path": str(out_epub.relative_to(REPO)),
@@ -401,8 +482,11 @@ def run_one(
         "validation_exit_code": validation.get("exit_code"),
         "uploaded": uploaded,
         "quality_profile": quality_profile,
+        "acceptance_layer": layer,
+        "layer3_artifact": layer3,
         "assembled_at": datetime.now(timezone.utc).isoformat(),
     }
+    return row
 
 
 def _load_manifest(path: Path) -> dict:
@@ -418,14 +502,35 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--brand", required=True)
     ap.add_argument("--locale", default="en_US")
-    ap.add_argument("--quality-profile", default="flagship", choices=["flagship", "production", "draft", "debug"])
+    ap.add_argument(
+        "--quality-profile",
+        default="flagship",
+        choices=["flagship", "production", "draft", "debug"],
+    )
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--offset", type=int, default=0)
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--resume", action="store_true", help="skip books already in manifest with status ok/skip_r2")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--skip-r2", action="store_true", help="local/CI smoke without R2 credentials")
+    ap.add_argument(
+        "--allow-non-ship-profile",
+        action="store_true",
+        help="Permit draft/debug profiles (D3 bypass; never for catalog R2 ship)",
+    )
     args = ap.parse_args()
+
+    # D3: draft/debug cannot enter catalog ship manifests / R2 paths.
+    if (
+        args.quality_profile not in SHIP_QUALITY_PROFILES
+        and not args.dry_run
+        and not args.allow_non_ship_profile
+    ):
+        raise SystemExit(
+            f"D3: --quality-profile {args.quality_profile!r} cannot enter catalog "
+            f"ship paths (allowed: {sorted(SHIP_QUALITY_PROFILES)}). "
+            f"Use --dry-run or --allow-non-ship-profile for experiments."
+        )
 
     manifest_path = MANIFEST_DIR / f"{args.brand}_{args.locale}.json"
     prev = _load_manifest(manifest_path)

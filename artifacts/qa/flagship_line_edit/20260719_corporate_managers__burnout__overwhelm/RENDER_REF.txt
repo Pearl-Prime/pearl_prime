@@ -1,0 +1,13 @@
+RENDER_REF (fresh L1 chord render hard-stops on G-DEF4; using prior manuscript per dispatcher ruling)
+
+Prior manuscript (real four-piece-chord production output, book_quality PASS):
+  artifacts/qa/pearl_prime_dev_finish_20260716/ten_wave2/corporate_managers__burnout__overwhelm__F006/book.txt
+
+Fresh L1 attempt evidence (this wave, same registry, deterministic hard-stop — not
+re-run identically by lane03; reusing lane02's same-day fresh evidence per dispatcher
+instruction to avoid redundant compute on a proven-identical blocker):
+  artifacts/qa/perfect_books_wave2_20260718/lane02/renders/corporate_managers__burnout__overwhelm_run.log
+  -> SystemExit(1), 106 foreign-persona registry drops, persona_id='corporate_managers'
+
+Root cause (not fixed, catalog-wide, out of this lane's scope):
+  artifacts/qa/perfect_books_wave2_20260718/lane02/DEF4_SYSTEMWIDE_FINDING.md
