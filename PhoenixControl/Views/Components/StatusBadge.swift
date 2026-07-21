@@ -5,20 +5,22 @@ struct StatusBadge: View {
 
     var color: Color {
         switch status.lowercased() {
-        case "pass": return .green
-        case "fail": return .red
+        case "pass", "clear to land": return .green
+        case "fail", "block", "blocked": return .red
+        case "warn", "warning": return PhoenixColors.phoenixAmber
         case "skip", "passive": return .gray
-        case "pending": return .orange
+        case "pending", "running": return .orange
         default: return .orange
         }
     }
 
     var icon: String {
         switch status.lowercased() {
-        case "pass": return "checkmark.circle.fill"
-        case "fail": return "xmark.circle.fill"
+        case "pass", "clear to land": return "checkmark.circle.fill"
+        case "fail", "block", "blocked": return "xmark.circle.fill"
+        case "warn", "warning": return "exclamationmark.triangle.fill"
         case "skip", "passive": return "minus.circle.fill"
-        case "pending": return "clock.circle.fill"
+        case "pending", "running": return "clock.circle.fill"
         default: return "questionmark.circle.fill"
         }
     }
