@@ -208,6 +208,15 @@ jobs:
           fi
           PYTHONPATH=scripts/ci:. python3 scripts/quality/check_composite_doctrine_secular.py "${EXTRA[@]}"
 
+      - name: zh-TW Simplified contamination (simplified-as-traditional — BLOCK on new debt)
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_zh_tw_simplified_contamination.py "${EXTRA[@]}"
+
       - name: No-lost-functions — capability regression vs base (§18 — BLOCK)
         env:
           PR_BODY: ${{ github.event.pull_request.body }}

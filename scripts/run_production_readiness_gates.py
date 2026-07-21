@@ -983,6 +983,43 @@ def main() -> int:
         if not gate(title, ok, detail):
             failed += 1
 
+    # --- 44. zh-TW Simplified contamination ratchet ---
+    # Delta/ratchet gate: the landed corpus carries 869 known-debt files
+    # (scripts/ci/zh_tw_simplified_baseline.tsv, audited 2026-07-15). This asserts
+    # the corpus never exceeds that baseline. The allowlist may only SHRINK.
+    zhtw_gate = REPO_ROOT / "scripts" / "ci" / "check_zh_tw_simplified_contamination.py"
+    if zhtw_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}:{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(zhtw_gate), "--audit-corpus"],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=300,
+            )
+            zh_ok = r.returncode == 0
+            out = (r.stdout or r.stderr or "").strip()
+            zh_detail = out.splitlines()[0] if out else "check_zh_tw_simplified_contamination"
+        except Exception as e:
+            zh_ok = False
+            zh_detail = str(e)
+        if not gate(
+            "44. zh-TW Simplified contamination ratchet (no new Simplified in zh-TW atoms)",
+            zh_ok,
+            zh_detail,
+        ):
+            failed += 1
+    else:
+        gate(
+            "44. zh-TW Simplified contamination ratchet",
+            True,
+            "gate script not present; skip",
+            skip=True,
+        )
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
