@@ -34,6 +34,7 @@ from brand_keys import (  # noqa: E402
 from client import MetricoolConfigError  # noqa: E402
 
 BRANDS_MAP_PATH = REPO_ROOT / "config" / "integrations" / "metricool_brands.yaml"
+PIN_PATH = REPO_ROOT / "config" / "integrations" / "metricool_waystream_pin.yaml"
 
 DEFAULT_HEADER = {
     "schema_version": 1,
@@ -99,24 +100,26 @@ def merge_brand_map(
 
     for req in REQUIRED_CLI_KEYS:
         if req not in new_brands:
-            # Prefer cloning way_stream_sanctuary wiring if present, else unwired stub
+            # Prefer cloning way_stream_sanctuary wiring if present, else pin / placeholder
             donor = new_brands.get("way_stream_sanctuary")
             if isinstance(donor, dict) and donor.get("status") == "wired":
                 new_brands[req] = dict(donor)
                 new_brands[req].setdefault(
                     "notes",
-                    "CLI alias of way_stream_sanctuary. blog_id placeholder until Q-METRIC-02.",
+                    "CLI alias of way_stream_sanctuary.",
                 )
             else:
                 new_brands[req] = {
                     "blog_id": "WAYSTREAM_BLOG_ID_PENDING",
                     "status": "wired",
                     "timezone": "America/New_York",
-                    "notes": "Single live Metricool account path. blog_id placeholder until Q-METRIC-02.",
+                    "notes": "Single live Metricool account path.",
                 }
             if req not in added and req not in preserved:
                 added.append(req)
 
+    # DURABLE: re-apply Waystream pin so sync cannot wipe the proven blog_id.
+    pin_applied = apply_waystream_pin(new_brands, PIN_PATH)
     base["brands"] = dict(sorted(new_brands.items()))
     stats = {
         "added": sorted(added),
@@ -124,8 +127,33 @@ def merge_brand_map(
         "orphans": orphans,
         "pruned": pruned,
         "brand_count": len(base["brands"]),
+        "pin_applied": pin_applied,
     }
     return base, stats
+
+
+def apply_waystream_pin(brands: dict[str, Any], pin_path: Path) -> bool:
+    """Force pin brand_key row to match metricool_waystream_pin.yaml when present."""
+    if not pin_path.is_file():
+        return False
+    pin = yaml.safe_load(pin_path.read_text(encoding="utf-8"))
+    if not isinstance(pin, dict):
+        return False
+    key = str(pin.get("brand_key") or "waystream_sanctuary")
+    blog_id = pin.get("blog_id")
+    if blog_id is None or str(blog_id).strip() == "":
+        return False
+    row = dict(brands.get(key) or {})
+    row["blog_id"] = str(blog_id).strip()
+    row["status"] = str(pin.get("status") or "wired")
+    if pin.get("timezone"):
+        row["timezone"] = pin["timezone"]
+    row["notes"] = (
+        row.get("notes")
+        or f"Pinned from {pin_path.name} (durable Waystream routing)."
+    )
+    brands[key] = row
+    return True
 
 
 def load_existing(path: Path) -> dict[str, Any] | None:

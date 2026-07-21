@@ -1,65 +1,47 @@
 # Pearl_Int — Metricool integration handoff (2026-07-19)
 
 STATUS=LANDED-OFFLINE
-SIGNAL=metricool-managed-system-landed
-ACCEPTANCE_LAYER=system-working (managed safe layer + offline tests)
-NOT=PROVEN-AT-BAR (no live post; pilot BLOCKED)
+SIGNAL=metricool-durable
+ACCEPTANCE_LAYER=PROVEN-AT-BAR (draft) + DURABLE (CI pin/gate) — NOT live-social
 GITHUB_WRITES=none (403 account-suspended)
 BRANCH=offline/metricool-integration-20260719
-FEATURE_SHA=d2709ebe97584eb7a997c46da28309b7d2f7a64e
-MANAGED_SYSTEM_SHA=ec64d7adc4075d1a41b15aae2c9d2e56a8dde420
-PRIOR_TIP=79f5deb10db9fbc37b9b1ad935cf35d9494b3ec8
-BRANCH_TIP=ec64d7adc4075d1a41b15aae2c9d2e56a8dde420
-# Branch tip = HEAD after managed-system hardening (pin commit may sit atop)
 
-## What landed (transport + managed system)
+## Durability layer
 
-### Transport (prior)
-- Live HTTP client: `scripts/integrations/metricool/client.py`
-- Publish CLI: `scripts/integrations/metricool/post.py` (draft default; --live gated Q-METRIC-01)
-- GET list helper: `list_scheduler_posts`
-- Pilot preflight: `scripts/integrations/metricool/pilot_preflight.py` (presence-only)
-- Brand map: `config/integrations/metricool_brands.yaml` (65 keys; wired=`waystream_sanctuary` placeholder)
-- Creds: `METRICOOL_*` in `integration_env_registry.py`
-- Leak remediation: `docs/metricool_api.txt` gitignored
+| Surface | Path |
+|---------|------|
+| Pin SSOT | `config/integrations/metricool_waystream_pin.yaml` (blog_id=6582629) |
+| CI gate | `scripts/ci/check_metricool_managed.py` (Drift detectors + readiness #34) |
+| Doctor | `scripts/integrations/metricool/doctor.py` |
+| Keychain install | `scripts/integrations/metricool/install_keychain_creds.py` |
+| Sync pin re-apply | `sync_brands_from_registry.py::apply_waystream_pin` |
 
-### Managed system (this land)
-| Pillar | Surface |
-|--------|---------|
-| SAFE | Network kill-switch (`METRICOOL_ALLOW_NETWORK` / `--network`); media ≥1 unless `--allow-text-only`; draft-default + live gate + placeholder refusal retained |
-| SUPPORTED | `docs/runbooks/METRICOOL_POSTING_RUNBOOK.md`; `scripts/integrations/metricool/status.py` |
-| MANAGED | `validate_config.py`; `sync_brands_from_registry.py` + `brand_keys.py`; offline tests expanded |
+## Proven draft pilot
 
-## Managed commands
+- blog_id=`6582629` (Waystream Sanctuary)
+- postId=`351226639` (`draft:true`, `autoPublish:false`)
+
+## Commands
+
 ```bash
-python3 scripts/integrations/metricool/validate_config.py
-python3 scripts/integrations/metricool/status.py
-python3 scripts/integrations/metricool/sync_brands_from_registry.py --dry-run
-python3 scripts/integrations/metricool/pilot_preflight.py
-python3 scripts/integrations/metricool/post.py --brand waystream_sanctuary \
-  --asset tests/fixtures/metricool/sample_asset.json --draft --dry-run
+python3 scripts/integrations/metricool/install_keychain_creds.py
+export METRICOOL_API_KEY="$(security find-generic-password -s phoenix-omega -a METRICOOL_API_KEY -w)"
+export METRICOOL_USER_ID="$(security find-generic-password -s phoenix-omega -a METRICOOL_USER_ID -w)"
+python3 scripts/integrations/metricool/doctor.py
+PYTHONPATH=scripts/ci:scripts/integrations/metricool:. python3 scripts/ci/check_metricool_managed.py
 PYTHONPATH=. python3 -m pytest tests/test_metricool_client.py -q
 ```
 
-## PRIMARY_BLOCKER
-Q-METRIC-CREDS — METRICOOL_API_KEY and METRICOOL_USER_ID missing from env/Keychain.
-ADDITIONAL: Q-METRIC-02 blog_id pending; Q-METRIC-01 live gate OPEN; GitHub 403 (no push/PR).
+## Gates
 
-## Operator actions required for pilot
-1. Confirm brand key `waystream_sanctuary`.
-2. Supply real Metricool `blog_id` → replace `WAYSTREAM_BLOG_ID_PENDING` (Q-METRIC-02).
-3. Store creds in Keychain (see runbook) → `status.py` / `pilot_preflight.py` → READY.
-4. Draft pilot with explicit network enable:
-   ```bash
-   python3 scripts/integrations/metricool/post.py --brand waystream_sanctuary \
-     --asset tests/fixtures/metricool/sample_asset.json --draft --network
-   ```
-5. Go-live (Q-METRIC-01): only after explicit operator approval.
-6. Unsuspend GitHub → push branch → open PR.
-
-## Decisions logged
-- OPD-METRIC-01 / 02 / 03 (prior)
-- OPD-METRIC-04 — managed-system hardening (SAFE/SUPPORTED/MANAGED); Q-METRIC-01/02 still open
+| Gate | Status |
+|------|--------|
+| Q-METRIC-CREDS | RESOLVED |
+| Q-METRIC-02 | RESOLVED (6582629) |
+| Q-METRIC-03 | RESOLVED |
+| Q-METRIC-01 | OPEN |
+| DURABLE CI | wired |
 
 ## NEXT_ACTION
-Operator stores Keychain creds + supplies blog_id → preflight READY → draft pilot with `--network` → ratify Q-METRIC-01 before any `--live`. Unsuspend GitHub for push/PR.
+
+Unsuspend GitHub → push branch → PR. Ratify Q-METRIC-01 only when ready for live autoPublish.
