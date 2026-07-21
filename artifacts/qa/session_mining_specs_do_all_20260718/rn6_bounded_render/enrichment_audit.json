@@ -1,0 +1,1397 @@
+{
+  "total_slots": 120,
+  "slots_from_teacher": 0,
+  "slots_from_persona": 77,
+  "slots_from_registry": 0,
+  "slots_from_practice_library": 0,
+  "slots_from_twelve_shape_plan_exercise": 0,
+  "practice_library_warnings": 0,
+  "slots_empty": 0,
+  "slots_format_scaled": 4,
+  "format_word_cap_max": 22000,
+  "slots_from_content_bank": 0,
+  "slots_from_composite": 31,
+  "total_words": 20403,
+  "total_target_words": 19709,
+  "gap_details": [],
+  "persona_id": "corporate_managers",
+  "teacher_id": "",
+  "section_packet_audit": [
+    {
+      "chapter": 1,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v02",
+      "variant_id": "",
+      "words": 33
+    },
+    {
+      "chapter": 1,
+      "slot_index": 1,
+      "slot_type": "ANGLE_DEFINITION",
+      "source": "angle_template",
+      "source_id": "angle_def_tpl:INVISIBLE_COST",
+      "variant_id": "",
+      "words": 51
+    },
+    {
+      "chapter": 1,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v08",
+      "variant_id": "",
+      "words": 126
+    },
+    {
+      "chapter": 1,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v01",
+      "variant_id": "",
+      "words": 260
+    },
+    {
+      "chapter": 1,
+      "slot_index": 4,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECKONING v02",
+      "variant_id": "",
+      "words": 215
+    },
+    {
+      "chapter": 1,
+      "slot_index": 5,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v31",
+      "variant_id": "",
+      "words": 457
+    },
+    {
+      "chapter": 1,
+      "slot_index": 6,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v07",
+      "variant_id": "",
+      "words": 278
+    },
+    {
+      "chapter": 1,
+      "slot_index": 7,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v01",
+      "variant_id": "",
+      "words": 133
+    },
+    {
+      "chapter": 1,
+      "slot_index": 8,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v11",
+      "variant_id": "",
+      "words": 108
+    },
+    {
+      "chapter": 2,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v06",
+      "variant_id": "",
+      "words": 123
+    },
+    {
+      "chapter": 2,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L1",
+      "variant_id": "",
+      "words": 35
+    },
+    {
+      "chapter": 2,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v23",
+      "variant_id": "",
+      "words": 305
+    },
+    {
+      "chapter": 2,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v02",
+      "variant_id": "",
+      "words": 280
+    },
+    {
+      "chapter": 2,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v01",
+      "variant_id": "",
+      "words": 28
+    },
+    {
+      "chapter": 2,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v15",
+      "variant_id": "",
+      "words": 135
+    },
+    {
+      "chapter": 2,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v07",
+      "variant_id": "",
+      "words": 369
+    },
+    {
+      "chapter": 2,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v09",
+      "variant_id": "",
+      "words": 264
+    },
+    {
+      "chapter": 2,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v14",
+      "variant_id": "",
+      "words": 109
+    },
+    {
+      "chapter": 2,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v07",
+      "variant_id": "",
+      "words": 123
+    },
+    {
+      "chapter": 3,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v19",
+      "variant_id": "",
+      "words": 99
+    },
+    {
+      "chapter": 3,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L2",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 3,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v18",
+      "variant_id": "",
+      "words": 134
+    },
+    {
+      "chapter": 3,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v03",
+      "variant_id": "",
+      "words": 270
+    },
+    {
+      "chapter": 3,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v04",
+      "variant_id": "",
+      "words": 27
+    },
+    {
+      "chapter": 3,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v06",
+      "variant_id": "",
+      "words": 99
+    },
+    {
+      "chapter": 3,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v29",
+      "variant_id": "",
+      "words": 405
+    },
+    {
+      "chapter": 3,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v12",
+      "variant_id": "",
+      "words": 283
+    },
+    {
+      "chapter": 3,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v07",
+      "variant_id": "",
+      "words": 126
+    },
+    {
+      "chapter": 3,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v31",
+      "variant_id": "",
+      "words": 66
+    },
+    {
+      "chapter": 4,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v17",
+      "variant_id": "",
+      "words": 109
+    },
+    {
+      "chapter": 4,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L2",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 4,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v10",
+      "variant_id": "",
+      "words": 143
+    },
+    {
+      "chapter": 4,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v04",
+      "variant_id": "",
+      "words": 274
+    },
+    {
+      "chapter": 4,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v12",
+      "variant_id": "",
+      "words": 27
+    },
+    {
+      "chapter": 4,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v11",
+      "variant_id": "",
+      "words": 133
+    },
+    {
+      "chapter": 4,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v05",
+      "variant_id": "",
+      "words": 351
+    },
+    {
+      "chapter": 4,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v06",
+      "variant_id": "",
+      "words": 289
+    },
+    {
+      "chapter": 4,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v03",
+      "variant_id": "",
+      "words": 150
+    },
+    {
+      "chapter": 4,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v12",
+      "variant_id": "",
+      "words": 114
+    },
+    {
+      "chapter": 5,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v15",
+      "variant_id": "",
+      "words": 105
+    },
+    {
+      "chapter": 5,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L2",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 5,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECKONING v04",
+      "variant_id": "",
+      "words": 198
+    },
+    {
+      "chapter": 5,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v05",
+      "variant_id": "",
+      "words": 293
+    },
+    {
+      "chapter": 5,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v03",
+      "variant_id": "",
+      "words": 29
+    },
+    {
+      "chapter": 5,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v13",
+      "variant_id": "",
+      "words": 125
+    },
+    {
+      "chapter": 5,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v14",
+      "variant_id": "",
+      "words": 344
+    },
+    {
+      "chapter": 5,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v11",
+      "variant_id": "",
+      "words": 287
+    },
+    {
+      "chapter": 5,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v09",
+      "variant_id": "",
+      "words": 31
+    },
+    {
+      "chapter": 5,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v02",
+      "variant_id": "",
+      "words": 62
+    },
+    {
+      "chapter": 5,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v08",
+      "variant_id": "",
+      "words": 119
+    },
+    {
+      "chapter": 6,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v07",
+      "variant_id": "",
+      "words": 102
+    },
+    {
+      "chapter": 6,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L3",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 6,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v07",
+      "variant_id": "",
+      "words": 159
+    },
+    {
+      "chapter": 6,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v06",
+      "variant_id": "",
+      "words": 285
+    },
+    {
+      "chapter": 6,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v12",
+      "variant_id": "",
+      "words": 27
+    },
+    {
+      "chapter": 6,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v08",
+      "variant_id": "",
+      "words": 159
+    },
+    {
+      "chapter": 6,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v10",
+      "variant_id": "",
+      "words": 372
+    },
+    {
+      "chapter": 6,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v08",
+      "variant_id": "",
+      "words": 253
+    },
+    {
+      "chapter": 6,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v07",
+      "variant_id": "",
+      "words": 80
+    },
+    {
+      "chapter": 6,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v05",
+      "variant_id": "",
+      "words": 125
+    },
+    {
+      "chapter": 7,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v26",
+      "variant_id": "",
+      "words": 113
+    },
+    {
+      "chapter": 7,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L3",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 7,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v06",
+      "variant_id": "",
+      "words": 152
+    },
+    {
+      "chapter": 7,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v07",
+      "variant_id": "",
+      "words": 283
+    },
+    {
+      "chapter": 7,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v01",
+      "variant_id": "",
+      "words": 28
+    },
+    {
+      "chapter": 7,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECKONING v05",
+      "variant_id": "",
+      "words": 220
+    },
+    {
+      "chapter": 7,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v02",
+      "variant_id": "",
+      "words": 355
+    },
+    {
+      "chapter": 7,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v10",
+      "variant_id": "",
+      "words": 256
+    },
+    {
+      "chapter": 7,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v04",
+      "variant_id": "",
+      "words": 138
+    },
+    {
+      "chapter": 7,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v14",
+      "variant_id": "",
+      "words": 111
+    },
+    {
+      "chapter": 8,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v27",
+      "variant_id": "",
+      "words": 104
+    },
+    {
+      "chapter": 8,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L4",
+      "variant_id": "",
+      "words": 45
+    },
+    {
+      "chapter": 8,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v16",
+      "variant_id": "",
+      "words": 129
+    },
+    {
+      "chapter": 8,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v08",
+      "variant_id": "",
+      "words": 255
+    },
+    {
+      "chapter": 8,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v03",
+      "variant_id": "",
+      "words": 29
+    },
+    {
+      "chapter": 8,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v02",
+      "variant_id": "",
+      "words": 150
+    },
+    {
+      "chapter": 8,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v15",
+      "variant_id": "",
+      "words": 347
+    },
+    {
+      "chapter": 8,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v19",
+      "variant_id": "",
+      "words": 28
+    },
+    {
+      "chapter": 8,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "COST_REVEAL v05",
+      "variant_id": "",
+      "words": 186
+    },
+    {
+      "chapter": 8,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v10",
+      "variant_id": "",
+      "words": 104
+    },
+    {
+      "chapter": 9,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v20",
+      "variant_id": "",
+      "words": 110
+    },
+    {
+      "chapter": 9,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L4",
+      "variant_id": "",
+      "words": 45
+    },
+    {
+      "chapter": 9,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "COST_REVEAL v01",
+      "variant_id": "",
+      "words": 241
+    },
+    {
+      "chapter": 9,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v09",
+      "variant_id": "",
+      "words": 262
+    },
+    {
+      "chapter": 9,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v04",
+      "variant_id": "",
+      "words": 27
+    },
+    {
+      "chapter": 9,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v05",
+      "variant_id": "",
+      "words": 136
+    },
+    {
+      "chapter": 9,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v28",
+      "variant_id": "",
+      "words": 426
+    },
+    {
+      "chapter": 9,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v06",
+      "variant_id": "",
+      "words": 63
+    },
+    {
+      "chapter": 9,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v09",
+      "variant_id": "",
+      "words": 31
+    },
+    {
+      "chapter": 9,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v09",
+      "variant_id": "",
+      "words": 166
+    },
+    {
+      "chapter": 9,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v24",
+      "variant_id": "",
+      "words": 61
+    },
+    {
+      "chapter": 10,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v11",
+      "variant_id": "",
+      "words": 96
+    },
+    {
+      "chapter": 10,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L4",
+      "variant_id": "",
+      "words": 45
+    },
+    {
+      "chapter": 10,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v06",
+      "variant_id": "",
+      "words": 152
+    },
+    {
+      "chapter": 10,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v10",
+      "variant_id": "",
+      "words": 260
+    },
+    {
+      "chapter": 10,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v01",
+      "variant_id": "",
+      "words": 28
+    },
+    {
+      "chapter": 10,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v06",
+      "variant_id": "",
+      "words": 134
+    },
+    {
+      "chapter": 10,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v17",
+      "variant_id": "",
+      "words": 359
+    },
+    {
+      "chapter": 10,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v27",
+      "variant_id": "",
+      "words": 27
+    },
+    {
+      "chapter": 10,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v05",
+      "variant_id": "",
+      "words": 138
+    },
+    {
+      "chapter": 10,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v21",
+      "variant_id": "",
+      "words": 60
+    },
+    {
+      "chapter": 11,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v08",
+      "variant_id": "",
+      "words": 116
+    },
+    {
+      "chapter": 11,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L5",
+      "variant_id": "",
+      "words": 45
+    },
+    {
+      "chapter": 11,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v05",
+      "variant_id": "",
+      "words": 134
+    },
+    {
+      "chapter": 11,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v11",
+      "variant_id": "",
+      "words": 286
+    },
+    {
+      "chapter": 11,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v03",
+      "variant_id": "",
+      "words": 29
+    },
+    {
+      "chapter": 11,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECKONING v03",
+      "variant_id": "",
+      "words": 223
+    },
+    {
+      "chapter": 11,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v12",
+      "variant_id": "",
+      "words": 357
+    },
+    {
+      "chapter": 11,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v10",
+      "variant_id": "",
+      "words": 51
+    },
+    {
+      "chapter": 11,
+      "slot_index": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v12",
+      "variant_id": "",
+      "words": 133
+    },
+    {
+      "chapter": 11,
+      "slot_index": 9,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v19",
+      "variant_id": "",
+      "words": 101
+    },
+    {
+      "chapter": 12,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom",
+      "source_id": "HOOK v22",
+      "variant_id": "",
+      "words": 99
+    },
+    {
+      "chapter": 12,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_COST:L5",
+      "variant_id": "",
+      "words": 45
+    },
+    {
+      "chapter": 12,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v03",
+      "variant_id": "",
+      "words": 66
+    },
+    {
+      "chapter": 12,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v12",
+      "variant_id": "",
+      "words": 285
+    },
+    {
+      "chapter": 12,
+      "slot_index": 4,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v04",
+      "variant_id": "",
+      "words": 69
+    },
+    {
+      "chapter": 12,
+      "slot_index": 5,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "composite_doctrine",
+      "source_id": "COMPOSITE_DOCTRINE v11",
+      "variant_id": "",
+      "words": 355
+    },
+    {
+      "chapter": 12,
+      "slot_index": 6,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v14",
+      "variant_id": "",
+      "words": 40
+    },
+    {
+      "chapter": 12,
+      "slot_index": 7,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v22",
+      "variant_id": "",
+      "words": 336
+    },
+    {
+      "chapter": 12,
+      "slot_index": 8,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom",
+      "source_id": "INTEGRATION v09",
+      "variant_id": "",
+      "words": 112
+    }
+  ],
+  "book_slot_tracker_used_ids": [],
+  "story_schedule": [],
+  "chapter_packet_guard": [],
+  "angle_journey_fallback_warnings": [
+    "angle_journey: ch2 layer 1 assertion TODO; callback slot still injected",
+    "angle_journey: ch3 layer 2 assertion TODO; callback slot still injected",
+    "angle_journey: ch4 layer 2 assertion TODO; callback slot still injected",
+    "angle_journey: ch5 layer 2 assertion TODO; callback slot still injected",
+    "angle_journey: ch6 layer 3 assertion TODO; callback slot still injected",
+    "angle_journey: ch7 layer 3 assertion TODO; callback slot still injected",
+    "angle_journey: ch8 layer 4 assertion TODO; callback slot still injected",
+    "angle_journey: ch9 layer 4 assertion TODO; callback slot still injected",
+    "angle_journey: ch10 layer 4 assertion TODO; callback slot still injected",
+    "angle_journey: ch11 layer 5 assertion TODO; callback slot still injected",
+    "angle_journey: ch12 layer 5 assertion TODO; callback slot still injected",
+    "ANGLE_DEFINITION: planner-template fallback for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L1 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L2 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L2 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L2 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L3 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L3 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L4 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L4 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L4 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L5 for 'INVISIBLE_COST'",
+    "ANGLE_CALLBACK: planner-template fallback L5 for 'INVISIBLE_COST'"
+  ],
+  "angle_id": "INVISIBLE_COST",
+  "angle_layer_by_chapter": {
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 3,
+    "7": 3,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 5,
+    "12": 5
+  },
+  "depth_modules_added": [
+    {
+      "chapter": 1,
+      "module": "recognition_depth",
+      "source_type": "persona_atom",
+      "words_added": 151,
+      "remaining_deficit": 307,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 8,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 195,
+      "remaining_deficit": 0,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 10,
+      "module": "practice_scaffold",
+      "source_type": "phoenix_standard",
+      "words_added": 71,
+      "remaining_deficit": 202,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 10,
+      "module": "practice_scaffold",
+      "source_type": "phoenix_standard",
+      "words_added": 49,
+      "remaining_deficit": 153,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 10,
+      "module": "integration_landing",
+      "source_type": "phoenix_standard",
+      "words_added": 54,
+      "remaining_deficit": 99,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 10,
+      "module": "practice_scaffold",
+      "source_type": "phoenix_standard",
+      "words_added": 48,
+      "remaining_deficit": 676,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 10,
+      "module": "practice_scaffold",
+      "source_type": "phoenix_standard",
+      "words_added": 50,
+      "remaining_deficit": 626,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 10,
+      "module": "integration_landing",
+      "source_type": "phoenix_standard",
+      "words_added": 53,
+      "remaining_deficit": 573,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 10,
+      "module": "persona_specificity",
+      "source_type": "persona_atom",
+      "words_added": 168,
+      "remaining_deficit": 405,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 8,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 35,
+      "remaining_deficit": 160,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 8,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 160,
+      "remaining_deficit": 0,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 1,
+      "module": "recognition_depth",
+      "source_type": "persona_atom",
+      "words_added": 167,
+      "remaining_deficit": 749,
+      "depth_round": 0,
+      "pass": "p2r0"
+    }
+  ],
+  "depth_budget_policy": {
+    "mode": "per_chapter_reservation",
+    "book_wmax": 22000,
+    "reserved_min_per_chapter": 458,
+    "target_per_chapter": 916,
+    "max_per_chapter": 1833
+  },
+  "depth_budget_by_chapter": [
+    {
+      "chapter": 1,
+      "pre_depth_words": 1661,
+      "depth_words_added": 318,
+      "post_depth_words": 1979,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 2,
+      "pre_depth_words": 1771,
+      "depth_words_added": 0,
+      "post_depth_words": 1771,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 3,
+      "pre_depth_words": 1550,
+      "depth_words_added": 0,
+      "post_depth_words": 1550,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 4,
+      "pre_depth_words": 1631,
+      "depth_words_added": 0,
+      "post_depth_words": 1631,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 5,
+      "pre_depth_words": 1634,
+      "depth_words_added": 0,
+      "post_depth_words": 1634,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 6,
+      "pre_depth_words": 1786,
+      "depth_words_added": 0,
+      "post_depth_words": 1786,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 7,
+      "pre_depth_words": 1697,
+      "depth_words_added": 0,
+      "post_depth_words": 1697,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 8,
+      "pre_depth_words": 1377,
+      "depth_words_added": 390,
+      "post_depth_words": 1767,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 9,
+      "pre_depth_words": 1568,
+      "depth_words_added": 0,
+      "post_depth_words": 1568,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 10,
+      "pre_depth_words": 1299,
+      "depth_words_added": 493,
+      "post_depth_words": 1792,
+      "reserved_min_met": true
+    },
+    {
+      "chapter": 11,
+      "pre_depth_words": 1475,
+      "depth_words_added": 0,
+      "post_depth_words": 1475,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 12,
+      "pre_depth_words": 1753,
+      "depth_words_added": 0,
+      "post_depth_words": 1753,
+      "reserved_min_met": false
+    }
+  ],
+  "depth_budget_starvation": [],
+  "accent_planner": {
+    "accent_budget": {
+      "ENCOURAGEMENT": 1,
+      "CITED_EVIDENCE": 2,
+      "EXTERNAL_STORY": 2,
+      "AUTHOR_COMMENTARY": 0,
+      "WISDOM_ESSENCE": 0
+    },
+    "accent_signature": "daba91e10255436d",
+    "story_mix_profile": "practical_credible",
+    "assignment_count": 3,
+    "enhancement_contract_v21": {}
+  },
+  "enrichment_strategy_report": {
+    "enrichment_strategy_profile": "practical_credible",
+    "brand_accent_profile": "commercial_action",
+    "book_idea": "recognition_before_action",
+    "book_motif": "The Threshold (doorway)",
+    "supported_underfilled_budget_by_class": {},
+    "capability_gaps": {},
+    "supply_provenance_by_class": {},
+    "assignment_diagnostics_by_class": {},
+    "legacy_planner": true,
+    "accent_budget": {
+      "ENCOURAGEMENT": 1,
+      "CITED_EVIDENCE": 2,
+      "EXTERNAL_STORY": 2,
+      "AUTHOR_COMMENTARY": 0,
+      "WISDOM_ESSENCE": 0
+    },
+    "assignment_counts": {
+      "QUOTE": 0,
+      "CITED_EVIDENCE": 1,
+      "AUTHOR_DISCLOSURE": 0,
+      "ENCOURAGEMENT": 1,
+      "EXTERNAL_STORY": 1,
+      "AUTHOR_COMMENTARY": 0,
+      "WISDOM_ESSENCE": 0,
+      "REFLECTION_QUESTION": 0,
+      "TROUBLESHOOTING": 0
+    }
+  },
+  "bestseller_alignment_report": {
+    "status": "PASS",
+    "story_mix_profile": "practical_credible",
+    "book_idea": "recognition_before_action",
+    "book_motif": "The Threshold (doorway)",
+    "supported_underfilled_budget_by_class": {},
+    "legacy_planner": true
+  }
+}

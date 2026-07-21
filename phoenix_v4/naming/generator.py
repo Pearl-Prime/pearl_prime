@@ -23,6 +23,126 @@ from ._config import (
     load_subtitle_patterns,
 )
 
+_GENERIC_SERIES_TITLES = {
+    "anxiety series",
+    "burnout series",
+    "self help series",
+    "healing series",
+    "wellness series",
+    "mindfulness series",
+    "personal growth series",
+    "mental health series",
+}
+
+_TOPIC_SERIES_LEXICON: dict[str, dict[str, str]] = {
+    "anxiety": {"signal": "Alarm", "release": "Calm", "outcome": "Steady Breath"},
+    "burnout": {"signal": "Ember", "release": "Rest", "outcome": "Unforced Energy"},
+    "overthinking": {"signal": "Loop", "release": "Quiet", "outcome": "Clear Thought"},
+    "sleep_anxiety": {"signal": "Night Signal", "release": "Rest", "outcome": "Soft Landing"},
+    "self_worth": {"signal": "Worth", "release": "Proof", "outcome": "Unborrowed Ground"},
+    "boundaries": {"signal": "Edge", "release": "Yes", "outcome": "Clean No"},
+    "financial_anxiety": {"signal": "Ledger", "release": "Safety", "outcome": "Enoughness"},
+    "financial_stress": {"signal": "Ledger", "release": "Pressure", "outcome": "Room to Choose"},
+    "imposter_syndrome": {"signal": "Mirror", "release": "Proof", "outcome": "Claimed Place"},
+    "somatic_healing": {"signal": "Body", "release": "Holding", "outcome": "Felt Safety"},
+    "compassion_fatigue": {"signal": "Caretaker", "release": "Overgiving", "outcome": "Returned Care"},
+    "grief": {"signal": "Afterlight", "release": "Absence", "outcome": "Carried Love"},
+    "courage": {"signal": "Threshold", "release": "Freeze", "outcome": "Forward Step"},
+    "depression": {"signal": "Dim Room", "release": "Weight", "outcome": "Small Light"},
+    "social_anxiety": {"signal": "Room", "release": "Watching", "outcome": "Unhidden Voice"},
+}
+
+
+def _display_slug(slug: str) -> str:
+    return " ".join(part for part in (slug or "").replace("-", "_").split("_") if part).title()
+
+
+def is_generic_store_series_name(title: str, topic_id: str = "") -> bool:
+    """Return True for store names too generic for series use."""
+    import re
+
+    normalized = re.sub(r"[^a-z0-9 ]+", "", (title or "").lower()).strip()
+    normalized = re.sub(r"\s+", " ", normalized)
+    topic_phrase = (topic_id or "").replace("_", " ").lower().strip()
+    if normalized in _GENERIC_SERIES_TITLES:
+        return True
+    if topic_phrase and normalized in {f"{topic_phrase} series", f"{topic_phrase} guide"}:
+        return True
+    tokens = [t for t in normalized.split() if t not in {"the", "a", "an", "for", "of"}]
+    return bool(tokens) and set(tokens) <= {"series", "guide", "book", "books", "healing", "wellness"}
+
+
+def generate_store_series_candidates(
+    *,
+    brand_id: str,
+    topic_id: str,
+    persona_id: str = "general_readers",
+    seed: str = "",
+    count: int = 6,
+) -> list[dict[str, Any]]:
+    """Generate deterministic store-series name candidates.
+
+    This is an additive series-naming mode on the existing naming generator.
+    It is dry-run safe: every candidate requires operator review before any
+    storefront or catalog use.
+    """
+    seed_text = f"store_series|{brand_id}|{topic_id}|{persona_id}|{seed}"
+    seed_int = int.from_bytes(hashlib.sha256(seed_text.encode()).digest()[:4], "big")
+    rng = random.Random(seed_int)
+    topic_words = _display_slug(topic_id)
+    persona_words = _display_slug(persona_id)
+    brand_words = _display_slug(brand_id)
+    brand_anchor = brand_words.split()[0] if brand_words else "Pearl"
+    lex = _TOPIC_SERIES_LEXICON.get(topic_id) or {
+        "signal": topic_words.split()[0] if topic_words else "Pattern",
+        "release": "Pressure",
+        "outcome": "Steadier Ground",
+    }
+    patterns = [
+        "The {signal} Map",
+        "{release} Into {outcome}",
+        "The {brand_anchor} Field",
+        "{signal} Without the Old Script",
+        "The {outcome} Practice",
+        "{brand_anchor} Notes for {signal}",
+        "Where {release} Lets Go",
+        "The {signal} Turn",
+    ]
+    rng.shuffle(patterns)
+
+    candidates: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for idx, pattern in enumerate(patterns):
+        title = pattern.format(brand_anchor=brand_anchor, **lex)
+        if title in seen or is_generic_store_series_name(title, topic_id):
+            continue
+        seen.add(title)
+        subtitle = (
+            f"A {brand_words} series for {persona_words} working with "
+            f"{topic_words.lower()} through {lex['outcome'].lower()}."
+        )
+        candidates.append(
+            {
+                "candidate_id": f"series_cand_{len(candidates) + 1:02d}",
+                "brand_id": brand_id,
+                "topic_id": topic_id,
+                "persona_id": persona_id,
+                "series_title": title,
+                "series_subtitle": subtitle,
+                "operator_review_status": "required_before_storefront",
+                "production_public_release_authorized": False,
+                "provenance": {
+                    "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+                    "seed": seed_text,
+                    "pattern": pattern,
+                    "lexicon_status": "curated" if topic_id in _TOPIC_SERIES_LEXICON else "provisional",
+                },
+            }
+        )
+        if len(candidates) >= count:
+            break
+    return candidates
+
 
 def book_id_from_spec(
     series_id: str,

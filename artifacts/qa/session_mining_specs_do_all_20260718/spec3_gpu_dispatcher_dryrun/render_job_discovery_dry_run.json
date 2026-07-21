@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-18T01:50:25.065257Z",
+  "source_spec": "docs/specs/session_mining_batch_20260718/CATALOG_GPU_DISPATCHER_V1_SPEC.md",
+  "dry_run": true,
+  "github_substrate": "blocked",
+  "queue_credentials": "not_configured",
+  "live_queue_writes": "none",
+  "public_publishing": "none",
+  "jobs": [
+    {
+      "job_id": "dryrun_f28ea031710d4c",
+      "family": "manga_serial_panel",
+      "source_path": "config/catalog_planning/brand_series_plans.yaml",
+      "job_class": "t2i",
+      "task": "t2i_qwen_image",
+      "priority": 6,
+      "payload": {
+        "brand_id": "adhd_forge",
+        "series_key": "series_a",
+        "topic": "overthinking",
+        "prompt": "Dry-run manga panel discovery for adhd_forge / Livewire"
+      },
+      "output_path": "artifacts/manga/dry_run/adhd_forge/series_a/dryrun_f28ea031710d4c.png",
+      "dry_run": true,
+      "live_queue_write": false
+    },
+    {
+      "job_id": "dryrun_904c8b6b1b5932",
+      "family": "manga_serial_panel",
+      "source_path": "config/catalog_planning/brand_series_plans.yaml",
+      "job_class": "t2i",
+      "task": "t2i_qwen_image",
+      "priority": 6,
+      "payload": {
+        "brand_id": "adhd_forge",
+        "series_key": "series_b",
+        "topic": "anxiety",
+        "prompt": "Dry-run manga panel discovery for adhd_forge / Spark and Ground"
+      },
+      "output_path": "artifacts/manga/dry_run/adhd_forge/series_b/dryrun_904c8b6b1b5932.png",
+      "dry_run": true,
+      "live_queue_write": false
+    },
+    {
+      "job_id": "dryrun_645ab8382f8ebe",
+      "family": "manga_serial_panel",
+      "source_path": "config/catalog_planning/brand_series_plans.yaml",
+      "job_class": "t2i",
+      "task": "t2i_qwen_image",
+      "priority": 6,
+      "payload": {
+        "brand_id": "bio_flow",
+        "series_key": "series_a",
+        "topic": "somatic_healing",
+        "prompt": "Dry-run manga panel discovery for bio_flow / Signal Path"
+      },
+      "output_path": "artifacts/manga/dry_run/bio_flow/series_a/dryrun_645ab8382f8ebe.png",
+      "dry_run": true,
+      "live_queue_write": false
+    },
+    {
+      "job_id": "dryrun_31b855f0a01e09",
+      "family": "marketing_visual",
+      "source_path": "config/funnel/freebie_to_book_map.yaml",
+      "job_class": "t2i",
+      "task": "t2i_flux_dev_h1a",
+      "priority": 4,
+      "payload": {
+        "topic": "anxiety",
+        "prompt": "Dry-run marketing visual discovery for anxiety"
+      },
+      "output_path": "artifacts/marketing_visuals/dry_run/anxiety/dryrun_31b855f0a01e09.png",
+      "dry_run": true,
+      "live_queue_write": false
+    },
+    {
+      "job_id": "dryrun_ec4c979a74daa2",
+      "family": "marketing_visual",
+      "source_path": "config/funnel/freebie_to_book_map.yaml",
+      "job_class": "t2i",
+      "task": "t2i_flux_dev_h1a",
+      "priority": 4,
+      "payload": {
+        "topic": "boundaries",
+        "prompt": "Dry-run marketing visual discovery for boundaries"
+      },
+      "output_path": "artifacts/marketing_visuals/dry_run/boundaries/dryrun_ec4c979a74daa2.png",
+      "dry_run": true,
+      "live_queue_write": false
+    },
+    {
+      "job_id": "dryrun_a9e67140204575",
+      "family": "marketing_visual",
+      "source_path": "config/funnel/freebie_to_book_map.yaml",
+      "job_class": "t2i",
+      "task": "t2i_flux_dev_h1a",
+      "priority": 4,
+      "payload": {
+        "topic": "burnout",
+        "prompt": "Dry-run marketing visual discovery for burnout"
+      },
+      "output_path": "artifacts/marketing_visuals/dry_run/burnout/dryrun_a9e67140204575.png",
+      "dry_run": true,
+      "live_queue_write": false
+    }
+  ],
+  "validation_errors": [],
+  "stats": {
+    "families_discovered": 2,
+    "dry_run_jobs": 6
+  }
+}

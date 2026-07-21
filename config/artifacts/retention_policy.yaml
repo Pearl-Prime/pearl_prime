@@ -1,0 +1,52 @@
+schema_version: "1.0.0"
+status: dry_run_only_owner_approval_required
+source_spec: docs/specs/session_mining_batch_20260718/ARTIFACTS_RETENTION_POLICY_V1_SPEC.md
+extends:
+  - docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md
+  - .gitattributes
+rules:
+  - artifact_class: SOURCE_TRUTH
+    owner: Pearl_Architect
+    patterns: ["SOURCE_OF_TRUTH/**", "atoms/**", "config/source_of_truth/**"]
+    keep_duration: indefinite
+    durable_archive_required: true
+    r2_pointer_required: false
+    local_prune_eligible: false
+    operator_approval_required_for_deletion: true
+    restore_procedure: restore from git/PearlStar offline ref
+  - artifact_class: DURABLE_QA_PROOF
+    owner: Pearl_PM
+    patterns: ["artifacts/qa/**", "artifacts/coordination/**"]
+    keep_duration: indefinite
+    durable_archive_required: true
+    r2_pointer_required: false
+    local_prune_eligible: false
+    operator_approval_required_for_deletion: true
+    restore_procedure: restore from git/PearlStar offline ref
+  - artifact_class: REGENERABLE_RENDER
+    owner: Pearl_DevOps
+    patterns: ["artifacts/manga/**", "assets/manga_catalog/**", "artifacts/video/**"]
+    keep_duration: until_manifest_verified
+    durable_archive_required: true
+    r2_pointer_required: true
+    local_prune_eligible: true
+    operator_approval_required_for_deletion: true
+    restore_procedure: scripts/artifacts/r2_sync.py pull-on-demand --slug <slug>
+  - artifact_class: DURABLE_MARKETING_FEED
+    owner: Pearl_Marketing
+    patterns: ["artifacts/marketing_feed/**", "config/funnel/**", "config/marketing/**"]
+    keep_duration: indefinite
+    durable_archive_required: true
+    r2_pointer_required: false
+    local_prune_eligible: false
+    operator_approval_required_for_deletion: true
+    restore_procedure: restore from git/PearlStar offline ref
+  - artifact_class: EPHEMERAL_SCRATCH
+    owner: Pearl_DevOps
+    patterns: ["artifacts/tmp/**", "tmp/**", ".cache/**"]
+    keep_duration: 7d
+    durable_archive_required: false
+    r2_pointer_required: false
+    local_prune_eligible: true
+    operator_approval_required_for_deletion: true
+    restore_procedure: regenerate from source inputs

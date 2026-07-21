@@ -1,0 +1,1500 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-18T01:46:18.589229Z",
+  "source_plan": "config/catalog_planning/brand_series_plans.yaml",
+  "catalog_files_written": false,
+  "production_public_release_authorized": false,
+  "operator_review_required": true,
+  "rows": [
+    {
+      "brand_id": "adhd_forge",
+      "topic_id": "overthinking",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "adhd_forge",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "Quiet Into Clear Thought",
+          "series_subtitle": "A Adhd Forge series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|adhd_forge|overthinking|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "adhd_forge",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "The Adhd Field",
+          "series_subtitle": "A Adhd Forge series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|adhd_forge|overthinking|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "adhd_forge",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "Adhd Notes for Loop",
+          "series_subtitle": "A Adhd Forge series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|adhd_forge|overthinking|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "bio_flow",
+      "topic_id": "somatic_healing",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "bio_flow",
+          "topic_id": "somatic_healing",
+          "persona_id": "general_readers",
+          "series_title": "Where Holding Lets Go",
+          "series_subtitle": "A Bio Flow series for General Readers working with somatic healing through felt safety.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|bio_flow|somatic_healing|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "bio_flow",
+          "topic_id": "somatic_healing",
+          "persona_id": "general_readers",
+          "series_title": "Bio Notes for Body",
+          "series_subtitle": "A Bio Flow series for General Readers working with somatic healing through felt safety.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|bio_flow|somatic_healing|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "bio_flow",
+          "topic_id": "somatic_healing",
+          "persona_id": "general_readers",
+          "series_title": "Holding Into Felt Safety",
+          "series_subtitle": "A Bio Flow series for General Readers working with somatic healing through felt safety.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|bio_flow|somatic_healing|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "body_memory",
+      "topic_id": "grief",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "body_memory",
+          "topic_id": "grief",
+          "persona_id": "general_readers",
+          "series_title": "The Afterlight Map",
+          "series_subtitle": "A Body Memory series for General Readers working with grief through carried love.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|body_memory|grief|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "body_memory",
+          "topic_id": "grief",
+          "persona_id": "general_readers",
+          "series_title": "Body Notes for Afterlight",
+          "series_subtitle": "A Body Memory series for General Readers working with grief through carried love.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|body_memory|grief|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "body_memory",
+          "topic_id": "grief",
+          "persona_id": "general_readers",
+          "series_title": "Where Absence Lets Go",
+          "series_subtitle": "A Body Memory series for General Readers working with grief through carried love.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|body_memory|grief|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "calm_student",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "calm_student",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Steady Breath Practice",
+          "series_subtitle": "A Calm Student series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|calm_student|anxiety|general_readers|20260718",
+            "pattern": "The {outcome} Practice",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "calm_student",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Alarm Map",
+          "series_subtitle": "A Calm Student series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|calm_student|anxiety|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "calm_student",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Calm Into Steady Breath",
+          "series_subtitle": "A Calm Student series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|calm_student|anxiety|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "career_lift",
+      "topic_id": "imposter_syndrome",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "career_lift",
+          "topic_id": "imposter_syndrome",
+          "persona_id": "general_readers",
+          "series_title": "Career Notes for Mirror",
+          "series_subtitle": "A Career Lift series for General Readers working with imposter syndrome through claimed place.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|career_lift|imposter_syndrome|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "career_lift",
+          "topic_id": "imposter_syndrome",
+          "persona_id": "general_readers",
+          "series_title": "Mirror Without the Old Script",
+          "series_subtitle": "A Career Lift series for General Readers working with imposter syndrome through claimed place.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|career_lift|imposter_syndrome|general_readers|20260718",
+            "pattern": "{signal} Without the Old Script",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "career_lift",
+          "topic_id": "imposter_syndrome",
+          "persona_id": "general_readers",
+          "series_title": "The Career Field",
+          "series_subtitle": "A Career Lift series for General Readers working with imposter syndrome through claimed place.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|career_lift|imposter_syndrome|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "cognitive_clarity",
+      "topic_id": "overthinking",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "cognitive_clarity",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "The Loop Turn",
+          "series_subtitle": "A Cognitive Clarity series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|cognitive_clarity|overthinking|general_readers|20260718",
+            "pattern": "The {signal} Turn",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "cognitive_clarity",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "The Cognitive Field",
+          "series_subtitle": "A Cognitive Clarity series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|cognitive_clarity|overthinking|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "cognitive_clarity",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "Cognitive Notes for Loop",
+          "series_subtitle": "A Cognitive Clarity series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|cognitive_clarity|overthinking|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "confidence_core",
+      "topic_id": "self_worth",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "confidence_core",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "Worth Without the Old Script",
+          "series_subtitle": "A Confidence Core series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|confidence_core|self_worth|general_readers|20260718",
+            "pattern": "{signal} Without the Old Script",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "confidence_core",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "The Worth Turn",
+          "series_subtitle": "A Confidence Core series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|confidence_core|self_worth|general_readers|20260718",
+            "pattern": "The {signal} Turn",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "confidence_core",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "The Unborrowed Ground Practice",
+          "series_subtitle": "A Confidence Core series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|confidence_core|self_worth|general_readers|20260718",
+            "pattern": "The {outcome} Practice",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "creative_unfold",
+      "topic_id": "self_worth",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "creative_unfold",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "Creative Notes for Worth",
+          "series_subtitle": "A Creative Unfold series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|creative_unfold|self_worth|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Worth Without the Old Script",
+          "reason": "collision"
+        },
+        {
+          "title": "The Worth Turn",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "devotion_path",
+      "topic_id": "self_worth",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "devotion_path",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "Proof Into Unborrowed Ground",
+          "series_subtitle": "A Devotion Path series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|devotion_path|self_worth|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "devotion_path",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "The Devotion Field",
+          "series_subtitle": "A Devotion Path series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|devotion_path|self_worth|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "devotion_path",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "The Worth Map",
+          "series_subtitle": "A Devotion Path series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|devotion_path|self_worth|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "digital_ground",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "digital_ground",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Where Calm Lets Go",
+          "series_subtitle": "A Digital Ground series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|digital_ground|anxiety|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "digital_ground",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Alarm Without the Old Script",
+          "series_subtitle": "A Digital Ground series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|digital_ground|anxiety|general_readers|20260718",
+            "pattern": "{signal} Without the Old Script",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Steady Breath Practice",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "executive_calm",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "executive_calm",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Alarm Turn",
+          "series_subtitle": "A Executive Calm series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|executive_calm|anxiety|general_readers|20260718",
+            "pattern": "The {signal} Turn",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "executive_calm",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Executive Field",
+          "series_subtitle": "A Executive Calm series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|executive_calm|anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Calm Into Steady Breath",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "focus_sprint",
+      "topic_id": "burnout",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "focus_sprint",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "Where Rest Lets Go",
+          "series_subtitle": "A Focus Sprint series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|focus_sprint|burnout|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "focus_sprint",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "Rest Into Unforced Energy",
+          "series_subtitle": "A Focus Sprint series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|focus_sprint|burnout|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "focus_sprint",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "The Ember Turn",
+          "series_subtitle": "A Focus Sprint series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|focus_sprint|burnout|general_readers|20260718",
+            "pattern": "The {signal} Turn",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "gentle_growth",
+      "topic_id": "self_worth",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "gentle_growth",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "The Gentle Field",
+          "series_subtitle": "A Gentle Growth series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|gentle_growth|self_worth|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Unborrowed Ground Practice",
+          "reason": "collision"
+        },
+        {
+          "title": "The Worth Map",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "healing_ground",
+      "topic_id": "burnout",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "healing_ground",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "The Healing Field",
+          "series_subtitle": "A Healing Ground series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|healing_ground|burnout|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "healing_ground",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "The Ember Map",
+          "series_subtitle": "A Healing Ground series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|healing_ground|burnout|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "heart_balance",
+      "topic_id": "self_worth",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "heart_balance",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "The Heart Field",
+          "series_subtitle": "A Heart Balance series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|heart_balance|self_worth|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "heart_balance",
+          "topic_id": "self_worth",
+          "persona_id": "general_readers",
+          "series_title": "Where Proof Lets Go",
+          "series_subtitle": "A Heart Balance series for General Readers working with self worth through unborrowed ground.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|heart_balance|self_worth|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Worth Without the Old Script",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "high_performer",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "high_performer",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "High Notes for Alarm",
+          "series_subtitle": "A High Performer series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|high_performer|anxiety|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Alarm Map",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Calm Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "hormone_reset",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "hormone_reset",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Hormone Notes for Alarm",
+          "series_subtitle": "A Hormone Reset series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|hormone_reset|anxiety|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "hormone_reset",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Hormone Field",
+          "series_subtitle": "A Hormone Reset series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|hormone_reset|anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Where Calm Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "legacy_builder",
+      "topic_id": "burnout",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "legacy_builder",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "The Unforced Energy Practice",
+          "series_subtitle": "A Legacy Builder series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|legacy_builder|burnout|general_readers|20260718",
+            "pattern": "The {outcome} Practice",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Ember Map",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "longevity_lab",
+      "topic_id": "somatic_healing",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "longevity_lab",
+          "topic_id": "somatic_healing",
+          "persona_id": "general_readers",
+          "series_title": "The Longevity Field",
+          "series_subtitle": "A Longevity Lab series for General Readers working with somatic healing through felt safety.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|longevity_lab|somatic_healing|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "longevity_lab",
+          "topic_id": "somatic_healing",
+          "persona_id": "general_readers",
+          "series_title": "The Body Map",
+          "series_subtitle": "A Longevity Lab series for General Readers working with somatic healing through felt safety.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|longevity_lab|somatic_healing|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Where Holding Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "minimal_mind",
+      "topic_id": "overthinking",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "minimal_mind",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "Loop Without the Old Script",
+          "series_subtitle": "A Minimal Mind series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|minimal_mind|overthinking|general_readers|20260718",
+            "pattern": "{signal} Without the Old Script",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "minimal_mind",
+          "topic_id": "overthinking",
+          "persona_id": "general_readers",
+          "series_title": "The Clear Thought Practice",
+          "series_subtitle": "A Minimal Mind series for General Readers working with overthinking through clear thought.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|minimal_mind|overthinking|general_readers|20260718",
+            "pattern": "The {outcome} Practice",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Loop Turn",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "morning_momentum",
+      "topic_id": "burnout",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "morning_momentum",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "Ember Without the Old Script",
+          "series_subtitle": "A Morning Momentum series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|morning_momentum|burnout|general_readers|20260718",
+            "pattern": "{signal} Without the Old Script",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Unforced Energy Practice",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "night_reset",
+      "topic_id": "sleep_anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "night_reset",
+          "topic_id": "sleep_anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Rest Into Soft Landing",
+          "series_subtitle": "A Night Reset series for General Readers working with sleep anxiety through soft landing.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|night_reset|sleep_anxiety|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "night_reset",
+          "topic_id": "sleep_anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Night Field",
+          "series_subtitle": "A Night Reset series for General Readers working with sleep anxiety through soft landing.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|night_reset|sleep_anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "night_reset",
+          "topic_id": "sleep_anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Night Signal Turn",
+          "series_subtitle": "A Night Reset series for General Readers working with sleep anxiety through soft landing.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|night_reset|sleep_anxiety|general_readers|20260718",
+            "pattern": "The {signal} Turn",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "optimizer",
+      "topic_id": "burnout",
+      "accepted_candidates": [],
+      "rejected_candidates": [
+        {
+          "title": "The Unforced Energy Practice",
+          "reason": "collision"
+        },
+        {
+          "title": "Ember Without the Old Script",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "qi_foundation",
+      "topic_id": "burnout",
+      "accepted_candidates": [],
+      "rejected_candidates": [
+        {
+          "title": "The Ember Map",
+          "reason": "collision"
+        },
+        {
+          "title": "Ember Without the Old Script",
+          "reason": "collision"
+        },
+        {
+          "title": "The Unforced Energy Practice",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "relational_calm",
+      "topic_id": "boundaries",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "relational_calm",
+          "topic_id": "boundaries",
+          "persona_id": "general_readers",
+          "series_title": "Where Yes Lets Go",
+          "series_subtitle": "A Relational Calm series for General Readers working with boundaries through clean no.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|relational_calm|boundaries|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "relational_calm",
+          "topic_id": "boundaries",
+          "persona_id": "general_readers",
+          "series_title": "Yes Into Clean No",
+          "series_subtitle": "A Relational Calm series for General Readers working with boundaries through clean no.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|relational_calm|boundaries|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "relational_calm",
+          "topic_id": "boundaries",
+          "persona_id": "general_readers",
+          "series_title": "The Edge Map",
+          "series_subtitle": "A Relational Calm series for General Readers working with boundaries through clean no.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|relational_calm|boundaries|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "relationship_clarity",
+      "topic_id": "boundaries",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "relationship_clarity",
+          "topic_id": "boundaries",
+          "persona_id": "general_readers",
+          "series_title": "The Relationship Field",
+          "series_subtitle": "A Relationship Clarity series for General Readers working with boundaries through clean no.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|relationship_clarity|boundaries|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "relationship_clarity",
+          "topic_id": "boundaries",
+          "persona_id": "general_readers",
+          "series_title": "Relationship Notes for Edge",
+          "series_subtitle": "A Relationship Clarity series for General Readers working with boundaries through clean no.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|relationship_clarity|boundaries|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Yes Into Clean No",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "resilient_parent",
+      "topic_id": "compassion_fatigue",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "resilient_parent",
+          "topic_id": "compassion_fatigue",
+          "persona_id": "general_readers",
+          "series_title": "Overgiving Into Returned Care",
+          "series_subtitle": "A Resilient Parent series for General Readers working with compassion fatigue through returned care.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|resilient_parent|compassion_fatigue|general_readers|20260718",
+            "pattern": "{release} Into {outcome}",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "resilient_parent",
+          "topic_id": "compassion_fatigue",
+          "persona_id": "general_readers",
+          "series_title": "Where Overgiving Lets Go",
+          "series_subtitle": "A Resilient Parent series for General Readers working with compassion fatigue through returned care.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|resilient_parent|compassion_fatigue|general_readers|20260718",
+            "pattern": "Where {release} Lets Go",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "resilient_parent",
+          "topic_id": "compassion_fatigue",
+          "persona_id": "general_readers",
+          "series_title": "The Caretaker Turn",
+          "series_subtitle": "A Resilient Parent series for General Readers working with compassion fatigue through returned care.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|resilient_parent|compassion_fatigue|general_readers|20260718",
+            "pattern": "The {signal} Turn",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": []
+    },
+    {
+      "brand_id": "sleep_restoration",
+      "topic_id": "sleep_anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "sleep_restoration",
+          "topic_id": "sleep_anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Night Signal Without the Old Script",
+          "series_subtitle": "A Sleep Restoration series for General Readers working with sleep anxiety through soft landing.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|sleep_restoration|sleep_anxiety|general_readers|20260718",
+            "pattern": "{signal} Without the Old Script",
+            "lexicon_status": "curated"
+          }
+        },
+        {
+          "candidate_id": "series_cand_03",
+          "brand_id": "sleep_restoration",
+          "topic_id": "sleep_anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Night Signal Map",
+          "series_subtitle": "A Sleep Restoration series for General Readers working with sleep anxiety through soft landing.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|sleep_restoration|sleep_anxiety|general_readers|20260718",
+            "pattern": "The {signal} Map",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "solar_return",
+      "topic_id": "burnout",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "solar_return",
+          "topic_id": "burnout",
+          "persona_id": "general_readers",
+          "series_title": "The Solar Field",
+          "series_subtitle": "A Solar Return series for General Readers working with burnout through unforced energy.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|solar_return|burnout|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Ember Without the Old Script",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "somatic_wisdom",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "somatic_wisdom",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Somatic Field",
+          "series_subtitle": "A Somatic Wisdom series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|somatic_wisdom|anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Alarm Turn",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Calm Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "spiritual_ground",
+      "topic_id": "self_worth",
+      "accepted_candidates": [],
+      "rejected_candidates": [
+        {
+          "title": "Where Proof Lets Go",
+          "reason": "collision"
+        },
+        {
+          "title": "The Unborrowed Ground Practice",
+          "reason": "collision"
+        },
+        {
+          "title": "The Worth Turn",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "stabilizer",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "stabilizer",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Stabilizer Field",
+          "series_subtitle": "A Stabilizer series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|stabilizer|anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Calm Into Steady Breath",
+          "reason": "collision"
+        },
+        {
+          "title": "The Steady Breath Practice",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "stillness_press",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_02",
+          "brand_id": "stillness_press",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "Stillness Notes for Alarm",
+          "series_subtitle": "A Stillness Press series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|stillness_press|anxiety|general_readers|20260718",
+            "pattern": "{brand_anchor} Notes for {signal}",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Steady Breath Practice",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Calm Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "stoic_edge",
+      "topic_id": "burnout",
+      "accepted_candidates": [],
+      "rejected_candidates": [
+        {
+          "title": "The Unforced Energy Practice",
+          "reason": "collision"
+        },
+        {
+          "title": "The Ember Turn",
+          "reason": "collision"
+        },
+        {
+          "title": "Where Rest Lets Go",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "trauma_path",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "trauma_path",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Trauma Field",
+          "series_subtitle": "A Trauma Path series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|trauma_path|anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "The Alarm Map",
+          "reason": "collision"
+        },
+        {
+          "title": "The Alarm Turn",
+          "reason": "collision"
+        }
+      ]
+    },
+    {
+      "brand_id": "warrior_calm",
+      "topic_id": "anxiety",
+      "accepted_candidates": [
+        {
+          "candidate_id": "series_cand_01",
+          "brand_id": "warrior_calm",
+          "topic_id": "anxiety",
+          "persona_id": "general_readers",
+          "series_title": "The Warrior Field",
+          "series_subtitle": "A Warrior Calm series for General Readers working with anxiety through steady breath.",
+          "operator_review_status": "required_before_storefront",
+          "production_public_release_authorized": false,
+          "provenance": {
+            "generator": "phoenix_v4.naming.generator.generate_store_series_candidates",
+            "seed": "store_series|warrior_calm|anxiety|general_readers|20260718",
+            "pattern": "The {brand_anchor} Field",
+            "lexicon_status": "curated"
+          }
+        }
+      ],
+      "rejected_candidates": [
+        {
+          "title": "Calm Into Steady Breath",
+          "reason": "collision"
+        },
+        {
+          "title": "Alarm Without the Old Script",
+          "reason": "collision"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "brands": 36,
+    "series_names_generated": 65,
+    "generic_rejects": 0,
+    "collision_rejects": 43
+  }
+}

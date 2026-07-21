@@ -1,0 +1,124 @@
+schema_version: "1.0.0"
+status: warn_only_measurement
+source_spec: docs/specs/session_mining_batch_20260718/ATOM_SURFACE_TAXONOMY_AND_VARIATION_MANIFEST_V1_SPEC.md
+surface_types:
+  HOOK:
+    role: reader_entry
+    allowed_slots: [HOOK]
+    min_variants_per_cell: 5
+    depth_contract: [intro, felt_concrete_experience, insight_aha, handoff]
+    reader_state_entry: unrecognized_pattern
+    reader_state_exit: named_pattern
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: non_story
+  SCENE:
+    role: concrete_recognition
+    allowed_slots: [SCENE]
+    min_variants_per_cell: 5
+    depth_contract: [intro, felt_concrete_experience, insight_aha, handoff]
+    reader_state_entry: abstract_problem
+    reader_state_exit: embodied_recognition
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: composite
+  STORY:
+    role: same_person_progression
+    allowed_slots: [STORY]
+    min_variants_per_cell: 5
+    depth_contract: [intro, felt_concrete_experience, insight_aha, integration, handoff]
+    reader_state_entry: isolated_observation
+    reader_state_exit: cost_and_residue_seen
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: same_person_story
+  EXERCISE:
+    role: guided_practice
+    allowed_slots: [EXERCISE]
+    min_variants_per_cell: 5
+    depth_contract: [intro, felt_concrete_experience, insight_aha, integration, handoff]
+    reader_state_entry: dysregulated_or_stuck
+    reader_state_exit: practiced_shift
+    source_provenance_required: false
+    exercise_policy: canonical_exercise
+    story_policy: non_story
+  REFLECTION:
+    role: reader_meaning_making
+    allowed_slots: [REFLECTION]
+    min_variants_per_cell: 5
+    depth_contract: [intro, insight_aha, integration, handoff]
+    reader_state_entry: recognized_pattern
+    reader_state_exit: personal_application
+    source_provenance_required: false
+    exercise_policy: reflection
+    story_policy: non_story
+  INTEGRATION:
+    role: chapter_landing
+    allowed_slots: [INTEGRATION]
+    min_variants_per_cell: 5
+    depth_contract: [integration, handoff]
+    reader_state_entry: insight_named
+    reader_state_exit: next_step_available
+    source_provenance_required: false
+    exercise_policy: tool
+    story_policy: non_story
+  TAKEAWAY:
+    role: close_and_carry
+    allowed_slots: [TAKEAWAY]
+    min_variants_per_cell: 5
+    depth_contract: [integration, handoff]
+    reader_state_entry: chapter_complete
+    reader_state_exit: remembered_change
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: non_story
+  PIVOT:
+    role: reframe_turn
+    allowed_slots: [PIVOT]
+    min_variants_per_cell: 5
+    depth_contract: [insight_aha, integration, handoff]
+    reader_state_entry: old_frame_active
+    reader_state_exit: new_frame_possible
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: non_story
+  COMPRESSION:
+    role: distilled_mechanism
+    allowed_slots: [COMPRESSION, TEACHER_DOCTRINE]
+    min_variants_per_cell: 5
+    depth_contract: [insight_aha, handoff]
+    reader_state_entry: complex_pattern
+    reader_state_exit: compressed_understanding
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: non_story
+  TEACHER_DOCTRINE:
+    role: teaching_doctrine
+    allowed_slots: [TEACHER_DOCTRINE, COMPRESSION]
+    min_variants_per_cell: 3
+    depth_contract: [intro, insight_aha, integration, handoff]
+    reader_state_entry: question_open
+    reader_state_exit: teaching_internalized
+    source_provenance_required: false
+    exercise_policy: non_exercise
+    story_policy: non_story
+  QUOTE:
+    role: sourced_evidence
+    allowed_slots: [QUOTE]
+    min_variants_per_cell: 3
+    depth_contract: [intro, insight_aha, handoff]
+    reader_state_entry: claim_without_bridge
+    reader_state_exit: source_bridge_understood
+    source_provenance_required: true
+    exercise_policy: non_exercise
+    story_policy: external_story
+default:
+  role: provisional_unmapped
+  allowed_slots: []
+  min_variants_per_cell: 3
+  depth_contract: [intro, handoff]
+  reader_state_entry: unknown
+  reader_state_exit: unknown
+  source_provenance_required: false
+  exercise_policy: non_exercise
+  story_policy: non_story

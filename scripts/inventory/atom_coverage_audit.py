@@ -146,6 +146,11 @@ def main():
     parser.add_argument("--topic", help="Filter to specific topic (substring match)")
     parser.add_argument("--persona", help="Filter to specific persona (substring match)")
     parser.add_argument("--output-dir", default=str(OUTPUT_DIR), help="Output directory for JSON and markdown")
+    parser.add_argument(
+        "--surface-manifest",
+        action="store_true",
+        help="Also emit the measurement-only atom surface/depth manifest.",
+    )
     args = parser.parse_args()
 
     topics = get_canonical_topics()
@@ -290,6 +295,22 @@ def main():
         print(f"Missing: {stats['missing']} combos need atoms")
     if stats["partial"] > 0:
         print(f"Partial: {stats['partial']} combos have content dirs but no CANONICAL.txt")
+
+    if args.surface_manifest:
+        if str(REPO_ROOT) not in sys.path:
+            sys.path.insert(0, str(REPO_ROOT))
+        from scripts.inventory.surface_inventory import (  # noqa: WPS433
+            build_surface_inventory,
+            write_surface_inventory,
+        )
+
+        surface = build_surface_inventory(
+            repo_root=REPO_ROOT,
+            personas=personas,
+            topics=topics,
+        )
+        paths = write_surface_inventory(surface, out_dir)
+        print(f"Surface manifest written: {paths['json']}")
 
     return 0
 

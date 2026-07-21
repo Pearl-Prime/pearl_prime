@@ -90,6 +90,53 @@ def _resolve_e4_url(
     return shop_base.rstrip("/")
 
 
+def _ladder_tier(slot: str, pricing: str) -> str:
+    if pricing == "paid":
+        return "paid"
+    if slot == "e1":
+        return "lead_magnet"
+    if slot == "post_e5":
+        return "post_purchase"
+    return "nurture"
+
+
+def _asset_family(content_type: str) -> str:
+    if content_type in {"book_offer", "series_offer"}:
+        return "paid_book"
+    if "audio" in content_type:
+        return "audio"
+    if "exercise" in content_type or "tool" in content_type:
+        return "practice_tool"
+    if "story" in content_type:
+        return "story"
+    return "email_asset"
+
+
+def apply_ladder_contract(row: dict[str, Any]) -> dict[str, Any]:
+    """Attach free-to-paid ladder metadata to one existing feed row."""
+    pricing = str(row.get("pricing") or "free")
+    slot = str(row.get("email_slot") or "")
+    content_type = str(row.get("content_type") or "")
+    tier = _ladder_tier(slot, pricing)
+    row["access"] = "paid" if pricing == "paid" else "free"
+    row["ladder_tier"] = tier
+    row["asset_family"] = _asset_family(content_type)
+    row["manual_review_required"] = True
+    row["release_authorization_status"] = "dry_run_only_operator_required"
+    row["no_live_publish"] = True
+    row["allowed_channels"] = ["ghl_email_feed_dry_run"]
+    row["source_artifact"] = f"config/funnel/freebie_to_book_map.yaml:{row.get('topic')}"
+    row["reader_state_promise"] = f"{row.get('topic')} reader receives the {tier} next step"
+    row["next_action"] = "operator_review_before_publish"
+    row["visual_dependency_status"] = (
+        "license_required_before_publish"
+        if content_type in {"image", "video", "series_offer", "book_offer"}
+        else "not_required_for_dry_run"
+    )
+    row.setdefault("proof_path", "")
+    return row
+
+
 def _tier_bonus_types(tier: str = DEFAULT_TIER, *, slot: str | None = None) -> list[str]:
     bundles = _load_yaml(CONFIG_FREEBIES / "tier_bundles.yaml")
     if slot == "bonus_pre_story":
@@ -283,6 +330,7 @@ def build_topic_items(
             str(row["pricing"]),
             str(row.get("email_slot") or ""),
         )
+        apply_ladder_contract(row)
     return items
 
 

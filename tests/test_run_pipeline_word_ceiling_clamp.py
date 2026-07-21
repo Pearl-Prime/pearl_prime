@@ -122,3 +122,18 @@ def test_clamp_trim_is_spread_not_all_on_first_chapter() -> None:
     body_lens = [len("\n".join(c.splitlines()[1:]).split()) for c in chs]
     # No chapter trimmed to near-empty while the book is ~22k across 10 chapters.
     assert min(body_lens) > 500, f"a chapter was over-trimmed: {body_lens}"
+
+
+def test_clamp_slice_uses_sentence_boundary_even_for_short_first_sentence() -> None:
+    book = (
+        "Chapter 1\n\n"
+        "Safe. Second sentence carries trace span [atom trace starts here and "
+        "keeps going until its ending period."
+    )
+
+    clamped, _pre, post = _clamp_book_to_word_ceiling(book, 8)
+
+    assert post <= 8
+    assert clamped.rstrip().endswith(".")
+    assert "[atom" not in clamped
+    assert "Second sentence" not in clamped

@@ -57,8 +57,9 @@ def _bindings_topic_key(topic_slug: str) -> str:
     return topic_slug
 
 
-def _get_gate_config() -> dict[str, Any]:
-    path = CONFIG_ROOT / "gates.yaml"
+def _get_gate_config(repo_root: Optional[Path] = None) -> dict[str, Any]:
+    config_root = (repo_root or REPO_ROOT) / "config"
+    path = config_root / "gates.yaml"
     data = _load_yaml(path)
     tvc = data.get("tuple_viability") or {}
     return {
@@ -91,15 +92,49 @@ def _load_story_atoms_for_engine(
     topic: str,
     engine: str,
 ) -> list[dict[str, Any]]:
-    """Load STORY atoms from atoms/<persona>/<topic>/<engine>/CANONICAL.txt. Returns [] if missing/invalid."""
+    """Load the STORY pool using production resolver fallback semantics.
+
+    The registry resolver routes STORY to the requested engine when present, then
+    falls back to generic ``STORY`` and all available engine banks when the exact
+    engine directory is absent. Tuple viability must mirror that rule so it does
+    not false-block a cell as ``NO_STORY_POOL`` when production can still resolve
+    usable story supply.
+    """
     from phoenix_v4.planning.assembly_compiler import _parse_canonical_txt
-    path = atoms_root / persona / topic / engine / "CANONICAL.txt"
-    if not path.exists():
-        return []
+
     try:
-        return _parse_canonical_txt(path)
-    except (ValueError, OSError):
-        return []
+        from phoenix_v4.planning.registry_resolver import _KNOWN_SLOT_DIRS
+    except Exception:
+        _KNOWN_SLOT_DIRS = frozenset({
+            "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
+            "TEACHER_DOCTRINE", "COMPRESSION", "PERMISSION", "PIVOT",
+            "TAKEAWAY", "THREAD", "TRANSITION", "DWELL",
+            "ANGLE_DEFINITION", "ANGLE_CALLBACK",
+        })
+
+    def _load(path: Path) -> list[dict[str, Any]]:
+        if not path.exists():
+            return []
+        try:
+            return _parse_canonical_txt(path)
+        except (ValueError, OSError):
+            return []
+
+    topic_root = atoms_root / persona / topic
+    exact_engine = _load(topic_root / engine / "CANONICAL.txt")
+    generic_story = _load(topic_root / "STORY" / "CANONICAL.txt")
+    if exact_engine:
+        return exact_engine + generic_story
+
+    fallback_engine_atoms: list[dict[str, Any]] = []
+    if topic_root.is_dir():
+        for sub in sorted(topic_root.iterdir()):
+            if not sub.is_dir() or sub.name == "locales":
+                continue
+            if sub.name.upper() in _KNOWN_SLOT_DIRS:
+                continue
+            fallback_engine_atoms.extend(_load(sub / "CANONICAL.txt"))
+    return fallback_engine_atoms + generic_story
 
 
 def _required_bands_from_arc(arc: Any) -> list[int]:
@@ -176,7 +211,7 @@ def check_tuple_viability(
     if not story_atoms:
         errors.append("NO_STORY_POOL")
     else:
-        cfg = _get_gate_config()
+        cfg = _get_gate_config(root)
         min_depth = cfg["min_story_pool_size"]
         if len(story_atoms) < min_depth:
             errors.append(f"POOL_TOO_SHALLOW: {len(story_atoms)} < {min_depth}")
@@ -188,7 +223,7 @@ def check_tuple_viability(
 
     # 6) Teacher Mode: exercise pool depth
     if teacher_mode and teacher_id:
-        cfg = _get_gate_config()
+        cfg = _get_gate_config(root)
         min_ex = cfg["min_teacher_exercise_pool"]
         count = _count_teacher_exercises(teacher_id)
         if count < min_ex:

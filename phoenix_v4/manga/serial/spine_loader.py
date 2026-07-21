@@ -97,6 +97,34 @@ def validate_serial_spine(spine: Mapping[str, Any]) -> list[str]:
     return errors
 
 
+def validate_multivolume_spine_contract(spine: Mapping[str, Any]) -> list[str]:
+    """Validate refreshed multivolume fields using the existing serial spine."""
+    errors = validate_serial_spine(spine)
+    arcs = spine.get("volume_arcs") or []
+    if isinstance(arcs, list):
+        seen: set[int] = set()
+        for idx, arc in enumerate(arcs):
+            if not isinstance(arc, Mapping):
+                errors.append(f"volume_arcs[{idx}] must be a mapping")
+                continue
+            volume = int(arc.get("volume") or 0)
+            if volume in seen:
+                errors.append(f"duplicate volume arc: {volume}")
+            seen.add(volume)
+            for field in ("title", "logline", "status"):
+                if not arc.get(field):
+                    errors.append(f"volume_arcs[{idx}] missing {field}")
+    pressures = spine.get("named_pressures") or []
+    if not isinstance(pressures, list) or len(pressures) < 3:
+        errors.append("named_pressures must include at least 3 recurring pressures")
+    set_pieces = spine.get("set_piece_registry") or []
+    if not isinstance(set_pieces, list) or len(set_pieces) < 3:
+        errors.append("set_piece_registry must include at least 3 renewable set pieces")
+    if not spine.get("catalog_title"):
+        errors.append("catalog_title required for store-series naming compatibility")
+    return errors
+
+
 def validate_continuity_state(state: Mapping[str, Any]) -> list[str]:
     errors: list[str] = []
     if state.get("artifact_type") != "series_continuity_state":
@@ -182,6 +210,66 @@ def build_episode_architect_input(
             "unresolved_hooks": ctx.get("unresolved_hooks"),
         },
         "episode_mandate": ctx.get("episode_mandate") or {},
+    }
+
+
+def build_multivolume_dry_run_plan(
+    series_id: str,
+    *,
+    episodes_per_volume: int = 1,
+    repo_root: Path | None = None,
+) -> dict[str, Any]:
+    """Build a no-render 5-volume serial plan from existing spine machinery."""
+    root = repo_root or default_repo_root()
+    spine = load_serial_spine(series_id, repo_root=root)
+    if spine is None:
+        raise ValueError(f"No serial spine for series_id={series_id!r}")
+    errors = validate_multivolume_spine_contract(spine)
+    continuity = load_continuity_state(series_id, repo_root=root) or {}
+    volume_plans: list[dict[str, Any]] = []
+    for arc in spine.get("volume_arcs") or []:
+        volume = int(arc.get("volume") or 0)
+        volume_plans.append(
+            {
+                "volume": volume,
+                "title": arc.get("title"),
+                "logline": arc.get("logline"),
+                "status": arc.get("status"),
+                "episode_ids": [
+                    f"v{volume:02d}_ep_{idx:03d}"
+                    for idx in range(1, max(1, int(episodes_per_volume)) + 1)
+                ],
+                "recurrence": {
+                    "renewable_unit": spine.get("renewable_unit"),
+                    "named_pressures": [
+                        p.get("id") if isinstance(p, Mapping) else p
+                        for p in spine.get("named_pressures") or []
+                    ],
+                    "set_pieces": [
+                        p.get("id") if isinstance(p, Mapping) else p
+                        for p in spine.get("set_piece_registry") or []
+                    ],
+                },
+                "production_constraints": {
+                    "panel_renders": 0,
+                    "dry_run_only": True,
+                    "visual_license_required_before_release": True,
+                },
+            }
+        )
+    return {
+        "schema_version": "1.0.0",
+        "artifact_type": "manga_multivolume_serial_spine_dry_run",
+        "series_id": series_id,
+        "catalog_title": spine.get("catalog_title"),
+        "genre": spine.get("genre"),
+        "mode": spine.get("mode"),
+        "parallel_spine_created": False,
+        "panel_renders": 0,
+        "store_series_naming_compatible": bool(spine.get("catalog_title")),
+        "continuity_state_present": bool(continuity),
+        "validation_errors": errors,
+        "volume_plans": volume_plans,
     }
 
 
