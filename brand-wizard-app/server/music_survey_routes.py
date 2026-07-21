@@ -26,7 +26,10 @@ if str(_server_dir) not in sys.path:
     sys.path.insert(0, str(_server_dir))
 
 from music_survey_save_handler import (  # noqa: E402
+    MusicBrandRegistryCollisionError,
     MusicSurveySaveError,
+    default_canonical_brand_list_path,
+    default_music_registry_path,
     save_survey_to_brand_yaml,
 )
 
@@ -57,6 +60,18 @@ _DEGRADED_SURVEY_HTML = """<!DOCTYPE html>
 def _brands_directory() -> Path:
     """``brand-wizard-app/brands`` (parent of ``server/``)."""
     return Path(__file__).resolve().parent.parent / "brands"
+
+
+def _music_registry_path() -> Path:
+    """``config/music/music_brand_registry.yaml`` (repo root). Overridable via
+    monkeypatch in tests so no test run ever writes the real registry file."""
+    return default_music_registry_path()
+
+
+def _canonical_brand_list_path() -> Path:
+    """``config/manga/canonical_brand_list.yaml`` (Path X — read-only boundary).
+    Overridable via monkeypatch in tests."""
+    return default_canonical_brand_list_path()
 
 
 def _brand_wizard_app_home() -> Path:
@@ -179,7 +194,14 @@ def create_music_survey_app() -> FastAPI:
                 brands_dir=_brands_directory(),
                 wizard_session_id=body.wizard_session_id,
                 survey_responses=body.survey_responses,
+                music_registry_path=_music_registry_path(),
+                canonical_brand_list_path=_canonical_brand_list_path(),
             )
+        except MusicBrandRegistryCollisionError as e:
+            # Path X (37) anti-drift hard reject — distinct from ordinary 422 validation
+            # failures so callers can tell "your input was malformed" apart from "this
+            # brand_id would contaminate the frozen manga canon."
+            raise HTTPException(status_code=400, detail=str(e)) from e
         except MusicSurveySaveError as e:
             raise HTTPException(status_code=422, detail=str(e)) from e
 
