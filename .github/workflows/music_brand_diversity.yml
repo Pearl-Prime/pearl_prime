@@ -1,0 +1,54 @@
+name: Music brand diversity gate
+
+on:
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "SOURCE_OF_TRUTH/musician_banks/**"
+      - "config/music/music_brand_registry.yaml"
+      - "phoenix_v4/musician/**"
+      - "scripts/qa/music_brand_diversity_lib.py"
+      - "scripts/ci/check_music_brand_diversity.py"
+      - "tests/test_music_brand_diversity.py"
+  schedule:
+    # Nightly on main (per lane 04 MISSION — required PR check + nightly check).
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  music-brand-diversity:
+    name: Music brand diversity gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: python3 -m pip install --quiet pyyaml pytest
+
+      - name: Unit tests — G1-G8 metric library (BLOCK)
+        run: PYTHONPATH=. python3 -m pytest tests/test_music_brand_diversity.py -q
+
+      - name: G1-G8 gate — every active registered music brand (BLOCK)
+        run: |
+          set -euo pipefail
+          BRANDS=$(python3 -c "import yaml; d = yaml.safe_load(open('config/music/music_brand_registry.yaml')); print(chr(10).join(r['brand_id'] for r in d.get('music_brands', []) if r.get('status') == 'active'))")
+          for brand in $BRANDS; do
+            echo "== $brand =="
+            PYTHONPATH=. python3 scripts/ci/check_music_brand_diversity.py \
+              --brand-id "$brand" --quality-profile production
+          done
+
+      - name: Upload diversity reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: music-brand-diversity-reports
+          path: artifacts/qa/music_brand_diversity_report_*.md
+          if-no-files-found: ignore
+          retention-days: 14

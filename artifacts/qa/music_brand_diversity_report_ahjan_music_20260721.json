@@ -1,0 +1,95 @@
+{
+  "brand_id": "ahjan_music",
+  "gates": {
+    "G1": {
+      "note": "per-slot-pool variant reuse against the source atom bank (Phase-A anti-copy-paste check)",
+      "pools": {
+        "LYRIC_BESTSELLER_BEAT": {
+          "limit": 5,
+          "max_reuse": 1,
+          "n": 9,
+          "reused": {},
+          "top": "here is the hinge \u2014 {{musician_name}} leans in: what is the body doing right now, while {{topic_anchor}} talks over {{persona_anchor}} chest?",
+          "violation": false
+        },
+        "LYRIC_CLOSING": {
+          "limit": 5,
+          "max_reuse": 1,
+          "n": 9,
+          "reused": {},
+          "top": "the watch can end for one breath \u2014 {{musician_name}} leaves {{theme}} on the sill, not solved, just seen, for {{persona_anchor}} shoulders.",
+          "violation": false
+        },
+        "LYRIC_OPENING": {
+          "limit": 5,
+          "max_reuse": 1,
+          "n": 9,
+          "reused": {},
+          "top": "before the thought arrives, the chest already knows \u2014 {{musician_name}} names {{topic_anchor}} where it sits, not where it explains itself.",
+          "violation": false
+        },
+        "MUSIC_REFLECTION_BESTSELLER_BEAT": {
+          "limit": 5,
+          "max_reuse": 1,
+          "n": 9,
+          "reused": {},
+          "top": "bestseller beat: {{musician_name}} steadies {{theme}} while {{topic_anchor}} tries to speed-read {{persona_anchor}} nervous system. stay with the question the forest tradition keeps returning to \u2014 what is the body doing right now \u2014 and let the answer be plain.",
+          "violation": false
+        },
+        "MUSIC_REFLECTION_CLOSING": {
+          "limit": 5,
+          "max_reuse": 1,
+          "n": 9,
+          "reused": {},
+          "top": "{{musician_name}} closes the chapter without a verdict. {{theme}} stays available, not urgent, for {{persona_anchor}} readers. you did not have to solve {{topic_anchor}}; you noticed it once, and the noticing was the practice.",
+          "violation": false
+        },
+        "MUSIC_REFLECTION_OPENING": {
+          "limit": 5,
+          "max_reuse": 1,
+          "n": 9,
+          "reused": {},
+          "top": "{{musician_name}} opens {{topic_anchor}} the way the forest tradition does: not with calm, with noticing. before the chapter runs, ask one plain question \u2014 what is the body doing right now. where is the tightness. where is the breath sitting. {{theme}} is not a problem to solve here; it is information to receive.",
+          "violation": false
+        }
+      },
+      "status": "pass"
+    },
+    "G2": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    },
+    "G3": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    },
+    "G4": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    },
+    "G5": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    },
+    "G6": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    },
+    "G7": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    },
+    "G8": {
+      "note": "insufficient N (0 catalog book-plan rows < 50); Phase-A degraded mode \u2014 G1 (per-slot-pool / per-chapter reuse) is the only gate meaningful at this scale; catalog-scale gates skipped rather than false-passed on tiny data",
+      "status": "skipped"
+    }
+  },
+  "hard_failures": [],
+  "musician_id": "ahjan",
+  "n_books": 0,
+  "overall": "PASS",
+  "phase": "phase_a_degraded",
+  "platform": "kdp_us",
+  "quality_profile": "production",
+  "warnings": []
+}
