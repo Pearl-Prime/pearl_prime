@@ -20,8 +20,11 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
+from scripts.release.build_epub import (  # noqa: E402
+    ReleaseCandidateGateError,
+    build_epub,
+)
 from phoenix_v4.rendering.book_renderer import DeliveryContractError  # noqa: E402
-from scripts.release.build_epub import build_epub  # noqa: E402
 
 
 _STUB_BOOK = """CHAPTER 1
@@ -36,6 +39,11 @@ _CLEAN_BOOK = """CHAPTER 1
 You're at the kitchen table in scrubs still damp from shift, the pay stub and the rent bill spread out in front of you.
 
 The anxiety is the body telling the truth about an accounting nobody has been keeping.
+"""
+
+_SCAFFOLD_LEAK_BOOK = """CHAPTER 1
+
+This book follows the progressive_compression lens: named object for this topic once commissioned.
 """
 
 
@@ -54,6 +62,65 @@ def test_build_epub_blocks_injected_stub(tmp_path: Path) -> None:
             topic="financial_anxiety",
         )
     # Hard-fail BEFORE emission — no EPUB on disk.
+    assert not out.exists()
+
+
+def test_build_epub_blocks_planning_language_leak(tmp_path: Path) -> None:
+    src = tmp_path / "leaky_book.txt"
+    src.write_text(_SCAFFOLD_LEAK_BOOK, encoding="utf-8")
+    out = tmp_path / "leaky.epub"
+    with pytest.raises(DeliveryContractError):
+        build_epub(
+            input_path=src,
+            title="T",
+            subtitle="S",
+            author="A",
+            publisher="P",
+            output_path=out,
+            topic="financial_anxiety",
+        )
+    assert not out.exists()
+
+
+def test_build_epub_blocks_failing_enhancement_contract_report(tmp_path: Path) -> None:
+    src = tmp_path / "book.txt"
+    src.write_text(_CLEAN_BOOK, encoding="utf-8")
+    (tmp_path / "enhancement_contract.json").write_text(
+        '{"status":"FAIL","validation":{"errors":["core_surface_failures:1:STORY"]}}',
+        encoding="utf-8",
+    )
+    out = tmp_path / "blocked.epub"
+    with pytest.raises(ReleaseCandidateGateError):
+        build_epub(
+            input_path=src,
+            title="T",
+            subtitle="S",
+            author="A",
+            publisher="P",
+            output_path=out,
+            topic="financial_anxiety",
+        )
+    assert not out.exists()
+
+
+def test_build_epub_blocks_needs_revision_editorial_report(tmp_path: Path) -> None:
+    src = tmp_path / "book.txt"
+    src.write_text(_CLEAN_BOOK, encoding="utf-8")
+    (tmp_path / "editorial_report.json").write_text(
+        '{"status":"WARN","grade":"NEEDS_REVISION"}',
+        encoding="utf-8",
+    )
+    out = tmp_path / "blocked.epub"
+    with pytest.raises(ReleaseCandidateGateError):
+        build_epub(
+            input_path=src,
+            title="T",
+            subtitle="S",
+            author="A",
+            publisher="P",
+            output_path=out,
+            topic="financial_anxiety",
+        )
     assert not out.exists()
 
 

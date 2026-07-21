@@ -507,11 +507,27 @@ def build_enhancement_contract_v21_summary(
         chapter_count=chapter_count,
         max_accents_per_chapter=int(max_accents_per_chapter),
     )
+    requested_optional_total = sum(int(v) for v in optional_requested.values())
+    assigned_optional_total = sum(optional_counts.values())
+    zero_optional_authorized = requested_optional_total == 0 and assigned_optional_total == 0
     optional_budget.update(
         {
             "class_hard_maxima": optional_requested,
+            "zero_optional_accent_policy": {
+                "authorized": zero_optional_authorized,
+                "policy": (
+                    "authorized_exception"
+                    if zero_optional_authorized
+                    else "not_authorized_when_optional_budget_requests_accents"
+                ),
+                "reason": (
+                    "No optional accent classes were requested by the active brand/profile budget."
+                    if zero_optional_authorized
+                    else "The active budget requested optional accents; underfill is release-blocking."
+                ),
+            },
             "actual": {
-                "assigned_total_optional_accents": sum(optional_counts.values()),
+                "assigned_total_optional_accents": assigned_optional_total,
                 "optional_assignment_counts": optional_counts,
                 "chapters_with_optional_accents": optional_chapters,
                 "optional_accent_chapter_count": len(optional_chapters),

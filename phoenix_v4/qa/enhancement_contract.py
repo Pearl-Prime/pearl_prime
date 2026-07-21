@@ -39,7 +39,7 @@ SUPPORTED_ACCENT_POSITIONS = frozenset(
 
 PROOF_SLOT_TYPES = frozenset({"STORY", "EXERCISE", "ANGLE_DEFINITION", "ANGLE_CALLBACK"})
 
-_CHAPTER_RE = re.compile(r"(?m)^Chapter\s+(\d+)\s*$")
+_CHAPTER_RE = re.compile(r"(?mi)^Chapter\s+(\d+)(?:\b.*)?$")
 _PARAGRAPH_RE = re.compile(r"\S(?:.*?\S)?(?=\n\s*\n|\Z)", re.S)
 _CALLBACK_LAYER_SUFFIX_RE = re.compile(r":L\d+$")
 _UNRESOLVED_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
@@ -707,6 +707,10 @@ def build_enhancement_contract_payload(
             or spine.get("story_mix_profile")
             or ""
         ).strip(),
+        "optional_accent_zero_policy": dict(
+            _as_mapping(v21_summary.get("optional_accent_budget")).get("zero_optional_accent_policy")
+            or {}
+        ),
         "supported_underfilled_budget_by_class": dict(
             alignment.get("supported_underfilled_budget_by_class") or {}
         ),

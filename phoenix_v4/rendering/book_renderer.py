@@ -158,6 +158,28 @@ _BRACKET_PIPELINE_STUB_RE = re.compile(
     re.IGNORECASE,
 )
 _BARE_BRACKET_ELLIPSIS_STUB_RE = re.compile(r"^\[\s*(?:\.\.\.|…)\s*\]\s*$")
+_PLANNING_LANGUAGE_LEAK_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    (
+        "progressive_compression_lens",
+        re.compile(r"\bprogressive[_\s-]+compression\s+lens\b", re.IGNORECASE),
+    ),
+    (
+        "named_object_uncommissioned",
+        re.compile(r"\bnamed\s+object\b.*\bonce\s+commissioned\b", re.IGNORECASE),
+    ),
+    (
+        "uncommissioned_language",
+        re.compile(r"\bonce\s+commissioned\b", re.IGNORECASE),
+    ),
+    (
+        "angle_phase_scaffold",
+        re.compile(r"\bPhase:\s*.+\bPrior\s+layer:\b", re.IGNORECASE),
+    ),
+    (
+        "generic_teaching_tradition_scaffold",
+        re.compile(r"\bI\s+came\s+across\s+this\s+teaching\s+tradition\b", re.IGNORECASE),
+    ),
+)
 # Legitimate bracketed prose — must not false-fail (citations, editorial notes).
 _LEGIT_BRACKET_TOKEN_RE = re.compile(
     r"^(?:"
@@ -953,6 +975,11 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
             violations.append(
                 f"  line {lineno}: intro-dict literal leaked {stripped[:50]!r}"
             )
+        for code, pattern in _PLANNING_LANGUAGE_LEAK_PATTERNS:
+            if pattern.search(line):
+                violations.append(
+                    f"  line {lineno}: planning/scaffold language leaked ({code}) {stripped[:70]!r}"
+                )
         if re.search(r"#{1,3}\s+(?:HOOK|SCENE|STORY)\s+v\d+", stripped, re.IGNORECASE):
             violations.append(
                 f"  line {lineno}: concatenated assembly slot marker leaked {stripped[:50]!r}"

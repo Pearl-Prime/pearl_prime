@@ -140,6 +140,10 @@ class TeacherBylineError(RuntimeError):
     """
 
 
+class ReleaseCandidateGateError(RuntimeError):
+    """Raised when sibling render QA reports make an EPUB non-release-candidate."""
+
+
 _YAML_CACHE: dict[str, dict[str, Any]] = {}
 
 
@@ -540,6 +544,80 @@ def text_to_html(text: str) -> str:
     return "\n".join(html_parts)
 
 
+def _load_json_if_present(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ReleaseCandidateGateError(f"{path.name} is invalid JSON: {exc}") from exc
+    if not isinstance(data, dict):
+        raise ReleaseCandidateGateError(f"{path.name} must be a JSON object")
+    return data
+
+
+def _run_release_candidate_report_gate(input_path: Path) -> None:
+    """Fail closed when render-directory reports prove this is not an RC.
+
+    The packager also supports ad-hoc standalone text files, so absent sibling
+    reports do not block. Once a render directory contains report artifacts,
+    their hard failures must stop EPUB emission before the file is written.
+    """
+    render_dir = input_path.parent
+    blockers: list[str] = []
+
+    contract = _load_json_if_present(render_dir / "enhancement_contract.json")
+    if contract is not None and str(contract.get("status") or "").upper() != "PASS":
+        blockers.append("enhancement_contract_status_not_pass")
+
+    editorial = _load_json_if_present(render_dir / "editorial_report.json")
+    if editorial is not None:
+        grade = str(editorial.get("grade") or "").upper()
+        status = str(editorial.get("status") or "").upper()
+        if grade in {"NEEDS_REVISION", "FAIL"} or status == "FAIL":
+            blockers.append(f"editorial_report_not_releasable:{grade or status}")
+
+    quality = _load_json_if_present(render_dir / "quality_summary.json")
+    if quality is not None and str(quality.get("overall_status") or "").upper() == "FAIL":
+        blockers.append("quality_summary_overall_fail")
+
+    if contract is not None:
+        validation = contract.get("validation") if isinstance(contract.get("validation"), dict) else {}
+        errors = validation.get("errors") if isinstance(validation.get("errors"), list) else []
+        core_failures = (
+            validation.get("core_surface_failures")
+            if isinstance(validation.get("core_surface_failures"), list)
+            else []
+        )
+        if errors:
+            blockers.append("enhancement_contract_validation_errors")
+        if core_failures:
+            blockers.append("core_surface_trace_failures")
+
+        optional_policy = contract.get("optional_accent_zero_policy")
+        if not isinstance(optional_policy, dict):
+            v21 = contract.get("enhancement_contract_v21")
+            if isinstance(v21, dict):
+                opt = v21.get("optional_accent_budget")
+                if isinstance(opt, dict):
+                    optional_policy = opt.get("zero_optional_accent_policy")
+        v21 = contract.get("enhancement_contract_v21") if isinstance(contract.get("enhancement_contract_v21"), dict) else {}
+        opt = v21.get("optional_accent_budget") if isinstance(v21.get("optional_accent_budget"), dict) else {}
+        actual = opt.get("actual") if isinstance(opt.get("actual"), dict) else {}
+        target = opt.get("target_total_accents") if isinstance(opt.get("target_total_accents"), dict) else {}
+        assigned = int(actual.get("assigned_total_optional_accents") or 0)
+        target_min = int(target.get("min") or 0)
+        zero_authorized = isinstance(optional_policy, dict) and bool(optional_policy.get("authorized"))
+        if assigned < target_min and not zero_authorized:
+            blockers.append("optional_accent_target_underfill")
+
+    if blockers:
+        raise ReleaseCandidateGateError(
+            "EPUB release-candidate gate failed for "
+            f"{input_path}: {', '.join(sorted(set(blockers)))}"
+        )
+
+
 def build_epub(
     *,
     input_path: Path,
@@ -567,6 +645,7 @@ def build_epub(
 
     # THE GATE: hard-fail before EPUB emission on any unfilled atom stub.
     _run_stub_delivery_gate(text, source_hint=str(input_path))
+    _run_release_candidate_report_gate(input_path)
 
     chapters = parse_book_text(text)
 
