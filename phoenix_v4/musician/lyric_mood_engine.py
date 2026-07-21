@@ -561,6 +561,137 @@ def generate_kit(
     return result
 
 
+# ---------------------------------------------------------------------------
+# Real Tier-1 callable + song_kit_generator wiring (music_mode_real_lyric_mood_
+# engine_20260721 — this lane's deliverable).
+#
+# Gap closed: on main, this module and ``phoenix_v4.musician.song_kit_generator``
+# do not import each other at all (verified 2026-07-21) — the orchestrator that
+# actually ships to the pipeline/lane 05 (``SongKitGenerator``) had no path to this
+# module's Tier routing. The two pieces below close that gap without re-architecting
+# either file: ``make_operator_authored_pearl_writer_fn`` is a real (non-fake)
+# ``PearlWriterFn``; ``TierRoutedEngine`` adapts this module's ``TierRouter`` to
+# ``song_kit_generator.LyricMoodEngine``'s ``.generate(request) -> str`` Protocol so
+# ``SongKitGenerator(engine=TierRoutedEngine(...))`` can run on real content.
+#
+# TIER-1 INVOCATION CONTRACT (read this before wiring a new caller)
+# -------------------------------------------------------------------------
+# Tier-1 English generation for an operator-present session IS a Claude subagent
+# (Pearl_Writer) composing prose *in that session* — never a programmatic call to an
+# LLM endpoint (that would be a paid API call, banned by
+# ``scripts/ci/audit_llm_callers.py``). Concretely, an operator-present Pearl_Editor /
+# Pearl_Writer session:
+#
+#   1. Calls ``build_prompt`` (this module) per targeted pool to see exactly what a
+#      musician's ``EngineContext`` calls for (their own themes/voice/genre/family
+#      hint — not a template fill).
+#   2. Authors the variant bodies itself, inline, in that session, one variant per
+#      line (matching ``_parse_llm_variants``'s expected shape).
+#   3. Passes the authored ``{slot_pool: [body, ...]}`` mapping into
+#      ``make_operator_authored_pearl_writer_fn`` to get a ``PearlWriterFn``, wraps it
+#      in a ``TierRouter(pearl_writer_fn=...)``, and wraps THAT in a
+#      ``TierRoutedEngine`` to hand to ``SongKitGenerator``.
+#
+# Both new pieces below perform zero generation and zero network/LLM I/O of their
+# own — they are deterministic lookups over already-authored text, so they stay
+# ``audit_llm_callers.py``-clean and fully offline for CI. ``DeterministicStubEngine``
+# (song_kit_generator) and the template fallback above remain the untouched,
+# implicit defaults; the Tier-1 path is always an explicit, injected opt-in.
+def make_operator_authored_pearl_writer_fn(
+    bodies_by_pool: Mapping[str, Sequence[str]],
+) -> PearlWriterFn:
+    """Build a real ``PearlWriterFn`` from prose already authored this session.
+
+    ``bodies_by_pool`` maps a slot pool (``LYRIC_OPENING``, ``MUSIC_REFLECTION_
+    CLOSING``, ...) to the operator-authored variant bodies for that pool, each
+    grounded in the specific musician's survey context (see the invocation contract
+    above). The returned callable matches ``PearlWriterFn`` exactly (``(prompt,
+    system) -> str``): it recovers the target pool from ``build_prompt``'s own
+    ``"'<POOL>' slot pool"`` phrasing and returns the authored bodies, one per line,
+    for ``TierRouter``/``_parse_llm_variants`` to consume.
+
+    Raises ``KeyError`` (caught by ``TierRouter.draft``, which degrades any callable
+    exception to the deterministic-template fallback) when a prompt asks for a pool
+    with no authored bodies supplied — this never crashes a kit build; it just falls
+    back honestly instead of fabricating content.
+    """
+    bodies = {str(k): list(v) for k, v in bodies_by_pool.items()}
+
+    def _pearl_writer_fn(prompt: str, system: Optional[str] = None) -> str:
+        match = re.search(r"'([A-Z_]+)' slot pool", prompt)
+        pool = match.group(1) if match else ""
+        pool_bodies = bodies.get(pool)
+        if not pool_bodies:
+            raise KeyError(f"No operator-authored bodies supplied for pool {pool!r}")
+        return "\n".join(pool_bodies)
+
+    return _pearl_writer_fn
+
+
+@dataclass
+class TierRoutedEngine:
+    """Adapts this module's Tier routing to ``song_kit_generator.LyricMoodEngine``.
+
+    ``SongKitGenerator`` calls ``engine.generate(request)`` once per variant index,
+    expecting ONE body string back per call. This module's ``TierRouter``/
+    ``build_prompt`` draft ``floor`` variants for a pool in a single round trip
+    (matching how Pearl_Writer actually drafts a pool — all variants together, for
+    voice consistency). ``TierRoutedEngine`` bridges the two calling conventions: the
+    first call for a given ``(musician_id, slot_pool)`` triggers one
+    ``TierRouter.draft`` batch call and caches the results; subsequent calls for the
+    same pool return the cached variant by index. Neither side is re-architected.
+    """
+
+    router: TierRouter
+    floor: int = SPEC_739_FLOOR
+    operator_present: bool = True
+    fork_language: str = "en"
+    name: str = "tier_routed"
+    _cache: dict[tuple[str, str], list[str]] = field(default_factory=dict, repr=False)
+
+    def generate(self, request: Any) -> str:
+        musician_id = str(getattr(request, "musician_id", ""))
+        slot_pool = str(getattr(request, "slot_pool", ""))
+        variant_index = int(getattr(request, "variant_index", 0) or 0)
+        cache_key = (musician_id, slot_pool)
+        if cache_key not in self._cache:
+            ctx = self._context_from_request(request)
+            tier = _resolve_tier(self.fork_language, self.operator_present, self.router)
+            bodies, _tier_used = _draft_pool_bodies(
+                ctx, slot_pool, self.router, tier, self.floor
+            )
+            self._cache[cache_key] = bodies
+        bodies = self._cache[cache_key]
+        if not bodies:
+            raise RuntimeError(f"No bodies drafted for musician={musician_id!r} pool={slot_pool!r}")
+        return bodies[variant_index % len(bodies)]
+
+    @staticmethod
+    def _context_from_request(request: Any) -> "EngineContext":
+        """Build an ``EngineContext`` from a ``song_kit_generator.GenerationRequest``
+        (duck-typed via ``getattr`` so this module imports no symbol from
+        ``song_kit_generator`` — keeping both files' import graph one-directional)."""
+        profile = dict(getattr(request, "profile", None) or {})
+        voice_profile = dict(getattr(request, "voice_profile", None) or {})
+        family = dict(getattr(request, "family", None) or {})
+        return EngineContext(
+            musician_id=str(getattr(request, "musician_id", "") or ""),
+            profile=profile,
+            theme=str(getattr(request, "theme", "") or ""),
+            family_id=str(getattr(request, "family_id", "") or ""),
+            topic_anchor=str(getattr(request, "topic_anchor", "") or ""),
+            genre=str(profile.get("primary_genre") or ""),
+            voice_profile=voice_profile,
+            lyric_register_hint=str(family.get("lyric_register_hint") or ""),
+            instrumental_mood_hint=str(family.get("instrumental_mood_hint") or ""),
+            lyric_form=str(getattr(request, "lyric_form", None) or "free_verse"),
+            reflection_form=str(getattr(request, "reflection_form", None) or "mixed"),
+            reflection_perspective=str(
+                getattr(request, "reflection_perspective", None) or "musician"
+            ),
+        )
+
+
 __all__ = [
     "Tier",
     "TierRouter",
@@ -577,4 +708,6 @@ __all__ = [
     "build_prompt",
     "build_mood_instruction_prompt",
     "generate_kit",
+    "make_operator_authored_pearl_writer_fn",
+    "TierRoutedEngine",
 ]

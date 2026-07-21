@@ -119,13 +119,24 @@ constants.
 
 ## Remaining work (next increments — out of scope for this ws)
 
-1. **Real lyric/mood engine** — `ws_pearl_dev_lyric_mood_instruction_engine_20260612` implements the
-   two Tier-1 generation paths behind `LyricMoodEngine`.
-2. **Bank writer** — serialize `KitResult` → `SOURCE_OF_TRUTH/musician_banks/<id>/approved_atoms/
-   <SLOT_POOL>/<atom_id>.yaml`. A `DraftAtom.to_atom_yaml_obj()` producing the canonical 2-key shape
-   is provided; the on-disk write + `survey_responses/` persistence is the Ahjan-first-kit ws's step.
+1. ~~**Real lyric/mood engine**~~ — DONE (`music_mode_real_lyric_mood_engine_20260721`).
+   `phoenix_v4/musician/lyric_mood_engine.py` now ships `make_operator_authored_pearl_writer_fn`
+   (a real, offline `PearlWriterFn` backed by Tier-1-authored prose) and `TierRoutedEngine`, which
+   adapts this module's `TierRouter` to `song_kit_generator.LyricMoodEngine`'s
+   `.generate(request) -> str` Protocol — the two modules were previously unwired (verified: neither
+   imported the other on main). `SongKitGenerator(engine=TierRoutedEngine(...))` now runs on real
+   content end-to-end (proven via a full 6-pool pilot kit, scratch bank deleted before commit per
+   this lane's contract). `DeterministicStubEngine` remains the untouched offline/CI default.
+2. ~~**Bank writer**~~ — DONE. `phoenix_v4/musician/bank_writer.py` (`write_kit_to_bank`) serializes
+   every `DraftAtom` in a `KitResult` to `SOURCE_OF_TRUTH/musician_banks/<id>/approved_atoms/
+   <SLOT_POOL>/<atom_id>.yaml` via `DraftAtom.to_atom_yaml_obj()`, plus `profile.yaml` /
+   `themes.yaml` / `voice_profile.yaml` (via `survey_derivation`) and `survey_responses/<date>.yaml`
+   when a source survey is passed. Matches the on-disk convention verified against `ahjan` /
+   `test_artist_alpha` exactly: no `draft_atoms/` split, no `status` field on disk (neither reference
+   bank has either) — `DraftAtom.status` stays in-memory-only bookkeeping.
 3. **G1–G8 wiring** — once `scripts/ci/check_music_brand_diversity.py` lands, confirm the adapter's
    probed entry-point name matches the gate's final signature (the adapter already tries
-   `evaluate_kit` / `check_kit` / `evaluate_atoms` / `run_gate` / `evaluate`).
-4. **Ahjan reference kit** — `ws_pearl_editor_pearl_writer_ahjan_first_reference_kit_20260612` runs
-   this orchestrator against an Ahjan survey, seeded from `teacher_banks/ahjan/`.
+   `evaluate_kit` / `check_kit` / `evaluate_atoms` / `run_gate` / `evaluate`). Lane
+   `music_mode_diversity_ci_guard_20260721`'s job.
+4. **Ahjan reference kit** — already done on main (`SOURCE_OF_TRUTH/musician_banks/ahjan/`); not
+   re-touched by this lane.

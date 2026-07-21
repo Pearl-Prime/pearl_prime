@@ -11,6 +11,12 @@ from pathlib import Path
 
 import pytest
 
+from phoenix_v4.musician.bank_writer import write_kit_to_bank
+from phoenix_v4.musician.lyric_mood_engine import (
+    TierRoutedEngine,
+    TierRouter,
+    make_operator_authored_pearl_writer_fn,
+)
 from phoenix_v4.musician.song_kit_generator import (
     ALL_POOLS,
     LYRIC_POOLS,
@@ -363,3 +369,114 @@ def test_unmatched_family_flags_degraded_note():
     assert any("No topic family matched" in n for n in kit.notes)
     # still produces a kit skeleton (neutral fallback), just review-flagged
     assert set(kit.pools) == set(REFLECTION_POOLS)
+
+
+# ---------------------------------------------------------------------------
+# TierRoutedEngine wiring (music_mode_real_lyric_mood_engine_20260721):
+# proves SongKitGenerator — the orchestrator that ships to the pipeline/lane 05 —
+# can run end-to-end on real, operator-authored Tier-1 content, not only the
+# DeterministicStubEngine. Operator-authored fixture below (no network/LLM call).
+# ---------------------------------------------------------------------------
+STILL_WATER_REFLECTION_BODIES = {
+    "MUSIC_REFLECTION_OPENING": [
+        "Still Water opens with presence, not performance — let the room quiet "
+        "before the first exhale.",
+        "Returning to the body starts here: notice the feet, then the breath, "
+        "then the rest.",
+        "No music yet, just permission to arrive exactly as tired as you are.",
+    ],
+    "MUSIC_REFLECTION_BESTSELLER_BEAT": [
+        "Here is the turn: presence is not the absence of noise, it is choosing "
+        "which sound gets your attention.",
+        "The body already knows the chapter's answer; this passage just slows "
+        "down long enough to hear it.",
+        "Returning to the body again, mid-chapter, because the mind wandered off "
+        "to fix something that isn't broken.",
+    ],
+    "MUSIC_REFLECTION_CLOSING": [
+        "Let the stillness close the chapter softly, no need to summarize what "
+        "the body already understood.",
+        "Presence doesn't expire when the track ends; carry the quieter "
+        "shoulders into whatever is next.",
+        "Return to the body once more before you go — that's the whole "
+        "practice, repeated.",
+    ],
+}
+
+
+def test_song_kit_generator_runs_end_to_end_on_tier_routed_engine():
+    fn = make_operator_authored_pearl_writer_fn(STILL_WATER_REFLECTION_BODIES)
+    engine = TierRoutedEngine(
+        router=TierRouter(pearl_writer_fn=fn, allow_tier2_router=False),
+        operator_present=True,
+    )
+    gen = SongKitGenerator(engine=engine, families=_families())
+    kit = gen.build_kit(_survey_no_lyrics(), "still_water")
+    assert kit.complete is True
+    for pool, expected in STILL_WATER_REFLECTION_BODIES.items():
+        bodies = [v["body"] for atom in kit.pools[pool] for v in atom.variants]
+        assert bodies == expected
+
+
+# ---------------------------------------------------------------------------
+# Bank writer (music_mode_real_lyric_mood_engine_20260721, README "Remaining
+# work" item #2): serializes a KitResult to SOURCE_OF_TRUTH/musician_banks/.
+# ---------------------------------------------------------------------------
+def test_write_kit_to_bank_writes_canonical_atom_shape(tmp_path):
+    kit = build_kit_skeleton(_survey_with_lyrics(), "river_vale", families=_families())
+    written = write_kit_to_bank(kit, "river_vale", tmp_path)
+    assert written, "must write at least one file"
+
+    opening_path = (
+        tmp_path / "SOURCE_OF_TRUTH/musician_banks/river_vale/approved_atoms"
+        "/LYRIC_OPENING/river_vale_LYRIC_OPENING_01.yaml"
+    )
+    assert opening_path in written
+    assert opening_path.is_file()
+
+    import yaml
+
+    data = yaml.safe_load(opening_path.read_text(encoding="utf-8"))
+    # Canonical on-main 2-key shape, matching to_atom_yaml_obj() exactly — no
+    # "status" field, no draft/approved split invented (matches ahjan/
+    # test_artist_alpha on-disk convention verified at discovery time).
+    assert set(data.keys()) == {"atom_id", "variants"}
+    assert data["atom_id"] == "river_vale_LYRIC_OPENING_01"
+    assert all(set(v.keys()) == {"body"} for v in data["variants"])
+
+    # No draft_atoms/ directory is ever created — approved_atoms/ only.
+    bank_dir = tmp_path / "SOURCE_OF_TRUTH/musician_banks/river_vale"
+    assert not (bank_dir / "draft_atoms").exists()
+    assert (bank_dir / "approved_atoms").is_dir()
+
+
+def test_write_kit_to_bank_persists_survey_and_derived_yaml(tmp_path):
+    survey = _survey_with_lyrics()
+    kit = build_kit_skeleton(survey, "river_vale", families=_families())
+    written = write_kit_to_bank(
+        kit, "river_vale", tmp_path, survey=survey, survey_date="2026-07-21",
+    )
+    bank_dir = tmp_path / "SOURCE_OF_TRUTH/musician_banks/river_vale"
+    for name in ("profile.yaml", "themes.yaml", "voice_profile.yaml"):
+        assert (bank_dir / name).is_file()
+        assert (bank_dir / name) in written
+    resp = bank_dir / "survey_responses/2026-07-21.yaml"
+    assert resp.is_file()
+    assert resp in written
+
+    import yaml
+
+    profile = yaml.safe_load((bank_dir / "profile.yaml").read_text(encoding="utf-8"))
+    assert profile["display_name"] == "River Vale"
+    persisted_survey = yaml.safe_load(resp.read_text(encoding="utf-8"))
+    assert persisted_survey == survey
+
+
+def test_write_kit_to_bank_writes_every_pool_covering_all_atoms(tmp_path):
+    kit = build_kit_skeleton(_survey_with_lyrics(), "river_vale", families=_families())
+    write_kit_to_bank(kit, "river_vale", tmp_path)
+    atoms_dir = tmp_path / "SOURCE_OF_TRUTH/musician_banks/river_vale/approved_atoms"
+    for pool, atoms in kit.pools.items():
+        for atom in atoms:
+            path = atoms_dir / pool / f"{atom.atom_id}.yaml"
+            assert path.is_file(), path
