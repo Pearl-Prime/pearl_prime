@@ -775,6 +775,44 @@ class EnrichedBook:
 _GENERALIZED_WRAPPER_SENTINEL = "__generalized__"
 
 
+def _teacher_attribution_mode(plan_context):
+    """Second-claimant fallback (bw-teacher-exclusivity-doctrine-verified, 2026-07-19)."""
+    mode = str((plan_context or {}).get("teacher_attribution_mode") or "").strip().lower()
+    return mode or None
+
+
+def _suppress_named_teacher_in_body(body, teacher_id, plan_context):
+    """Strip display/formal name from teacher-bank prose when attribution is generalized."""
+    import re as _re
+    if _teacher_attribution_mode(plan_context) != "generalized":
+        return body
+    text = body or ""
+    if not text:
+        return text
+    names = []
+    tid = (teacher_id or "").strip()
+    try:
+        from phoenix_v4.rendering.teacher_wrapper import _load_registry
+        entry = ((_load_registry().get("teachers") or {}).get(tid) or {}) if tid else {}
+        for k in ("display_name", "formal_name"):
+            v = str(entry.get(k) or "").strip()
+            if v and v not in names:
+                names.append(v)
+    except Exception:
+        pass
+    if tid:
+        title = tid.replace("_", " ").title()
+        if title not in names:
+            names.append(title)
+    names.sort(key=len, reverse=True)
+    for name in names:
+        if not name:
+            continue
+        text = _re.sub(_re.escape(name) + r"'s\b", "this tradition's", text, flags=_re.IGNORECASE)
+        text = _re.sub(r"\b" + _re.escape(name) + r"\b", "this tradition", text, flags=_re.IGNORECASE)
+    return text
+
+
 def _norm_teacher_id(teacher_id: Optional[str]) -> Optional[str]:
     if not teacher_id:
         return None
@@ -2736,10 +2774,14 @@ def select_enrichment(
                         )
                     if _at_hit_ex:
                         from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
+                        _ex_body = _suppress_named_teacher_in_body(
+                            _at_hit_ex[0], tid, plan_context
+                        )
                         _at_content_ex = _aw(
-                            _at_hit_ex[0], teacher_id=tid, section_type=stype,
+                            _ex_body, teacher_id=tid, section_type=stype,
                             seed=seed_key, spine_context=plan_context,
                             usage_memory=_book_wrapper_memory,
+                            attribution_mode=_teacher_attribution_mode(plan_context),
                         )
                         _add_pieces.append(_at_content_ex)
                         _add_sources.append("teacher_atom")
@@ -3080,11 +3122,14 @@ def select_enrichment(
                         )
                         if _at_hit:
                             from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
-                            _at_raw = _at_hit[0]
+                            _at_raw = _suppress_named_teacher_in_body(
+                                _at_hit[0], tid, plan_context
+                            )
                             _at_content = _aw(
                                 _at_raw, teacher_id=tid, section_type=stype,
                                 seed=seed_key, spine_context=plan_context,
                                 usage_memory=_book_wrapper_memory,
+                                attribution_mode=_teacher_attribution_mode(plan_context),
                             )
                             _add_pieces.append(_at_content)
                             _add_sources.append("teacher_atom")
@@ -4349,7 +4394,14 @@ def _fill_chapter_depth(
             if source.get("type") == "teacher_atom" and tid:
                 from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
                 _depth_seed = f"depth:{topic}:{chapter.number}:{module_name}"
-                trimmed = _aw(trimmed, teacher_id=tid, section_type=module_name, seed=_depth_seed, spine_context=enriched_book.spine_context)
+                trimmed = _suppress_named_teacher_in_body(
+                    trimmed, tid, enriched_book.spine_context
+                )
+                trimmed = _aw(
+                    trimmed, teacher_id=tid, section_type=module_name, seed=_depth_seed,
+                    spine_context=enriched_book.spine_context,
+                    attribution_mode=_teacher_attribution_mode(enriched_book.spine_context),
+                )
 
             slot_type_out = (
                 "EXERCISE"

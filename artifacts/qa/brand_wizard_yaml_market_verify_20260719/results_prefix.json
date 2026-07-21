@@ -1,0 +1,104 @@
+[
+  {
+    "label": "smoke_en_US",
+    "wizard": "wizard.html",
+    "hubMarketToken": null,
+    "resolvedMarket": "us",
+    "intendedLane": "en_US",
+    "matched_brand_id": "night_reset_en_us",
+    "captured_lane_field": "en_US",
+    "captured_lane_suffix": "en_us",
+    "http_status": 200,
+    "server_response": {
+      "status": "submitted",
+      "brand_id": "night_reset_en_us",
+      "assigned": true,
+      "submission_path": "artifacts/onboarding/submissions/2026-07-18/night_reset_en_us__bw01_1784413270099_641349_example_com.yaml",
+      "next": "brand_admin.html?phase=3&brand=night_reset_en_us"
+    },
+    "email": "bw01.1784413270099.641349@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_ja_JP",
+    "wizard": "wizard-ja.html",
+    "hubMarketToken": "jp",
+    "resolvedMarket": "japan",
+    "intendedLane": "ja_JP",
+    "matched_brand_id": "stabilizer_ja_jp",
+    "captured_lane_field": "ja_JP",
+    "captured_lane_suffix": "ja_jp",
+    "http_status": 200,
+    "server_response": {
+      "status": "submitted",
+      "brand_id": "stabilizer_ja_jp",
+      "assigned": true,
+      "submission_path": "artifacts/onboarding/submissions/2026-07-18/stabilizer_ja_jp__bw01_1784413278534_70912_example_com.yaml",
+      "next": "brand_admin.html?phase=3&brand=stabilizer_ja_jp"
+    },
+    "email": "bw01.1784413278534.70912@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_zh_TW",
+    "wizard": "wizard-tw.html",
+    "hubMarketToken": "tw",
+    "resolvedMarket": "taiwan",
+    "intendedLane": "zh_TW",
+    "matched_brand_id": "stabilizer_zh_tw",
+    "captured_lane_field": "zh_TW",
+    "captured_lane_suffix": "zh_tw",
+    "http_status": 200,
+    "server_response": {
+      "status": "submitted",
+      "brand_id": "stabilizer_zh_tw",
+      "assigned": true,
+      "submission_path": "artifacts/onboarding/submissions/2026-07-18/stabilizer_zh_tw__bw01_1784413285552_372605_example_com.yaml",
+      "next": "brand_admin.html?phase=3&brand=stabilizer_zh_tw"
+    },
+    "email": "bw01.1784413285552.372605@example.com",
+    "verdict": "PASS"
+  },
+  {
+    "label": "pilot_zh_CN",
+    "wizard": "wizard-zh.html",
+    "hubMarketToken": "cn",
+    "resolvedMarket": "us",
+    "intendedLane": "zh_CN",
+    "matched_brand_id": "night_reset_en_us",
+    "captured_lane_field": "en_US",
+    "captured_lane_suffix": "en_us",
+    "http_status": 409,
+    "server_response": {
+      "detail": {
+        "error": "brand_claimed",
+        "brand_id": "night_reset_en_us",
+        "assigned_to": "Synthetic Tester426068",
+        "source": "local_roster_assignments"
+      }
+    },
+    "email": "bw01.1784413292129.842979@example.com",
+    "verdict": "FAIL"
+  },
+  {
+    "label": "pilot_zh_SG",
+    "wizard": "wizard-zh.html",
+    "hubMarketToken": "sg",
+    "resolvedMarket": "us",
+    "intendedLane": "zh_SG",
+    "matched_brand_id": "night_reset_en_us",
+    "captured_lane_field": "en_US",
+    "captured_lane_suffix": "en_us",
+    "http_status": 409,
+    "server_response": {
+      "detail": {
+        "error": "brand_claimed",
+        "brand_id": "night_reset_en_us",
+        "assigned_to": "Synthetic Tester426068",
+        "source": "local_roster_assignments"
+      }
+    },
+    "email": "bw01.1784413295169.193338@example.com",
+    "verdict": "FAIL"
+  }
+]
