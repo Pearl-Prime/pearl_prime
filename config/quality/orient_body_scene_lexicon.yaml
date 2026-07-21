@@ -1,0 +1,88 @@
+# Orient body/scene anchor lexicon (G-ORIENT SSOT)
+#
+# Authority: artifacts/qa/pearl_prime_100book_analysis_20260718/PEARL_PRIME_PERFECT_BOOKS_SPEC.md
+#            §3.B G-ORIENT row — "Ch1 first 120 words must contain >=1 body/scene
+#            anchor from approved lexicon OR SCENE atom provenance."
+#
+# No approved lexicon SSOT existed prior to this file (Wave-2 lane 04 discovery).
+# Seeded minimally from two sources so the gate does not invent new vocabulary:
+#   1. The frozen flagship Ch1 Orient exemplar
+#      (artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt, gen_z_professionals x
+#      anxiety, PROVEN-AT-BAR) — words it actually uses in its opening scene
+#      (hand, phone, chest, body, screen, ...).
+#   2. The existing HOOK-SCENE-FIRST-01 / F11 scene-first regex vocabulary already
+#      "approved" in phoenix_v4/quality/register_gate.py
+#      (F11_BODY_POSTURE_RE / F11_SETTING_NOUN_RE / F11_PRESENT_CONTINUOUS_RE) —
+#      reused as citations, not re-authored, to avoid drift between two "approved"
+#      word lists for the same concept.
+#
+# This is a MINIMAL v1 lexicon. Extending it is additive (append words); do not
+# remove entries without a Layer-3 review (removing anchors only makes G-ORIENT
+# stricter, which is safe, but should still be a deliberate decision, not drift).
+schema_version: "1.0.0"
+authority: "PEARL_PRIME_PERFECT_BOOKS_SPEC.md #3.B G-ORIENT"
+seeded_from:
+  - "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt"
+  - "phoenix_v4/quality/register_gate.py (F11_BODY_POSTURE_RE / F11_SETTING_NOUN_RE / F11_PRESENT_CONTINUOUS_RE)"
+
+body_anchors:
+  - hand
+  - hands
+  - fingers
+  - chest
+  - throat
+  - jaw
+  - shoulders
+  - shoulder
+  - stomach
+  - gut
+  - heart
+  - ribs
+  - eyes
+  - mouth
+  - nose
+  - sweat
+  - sweating
+  - trembling
+  - shaking
+  - frozen
+  - slumped
+  - hunched
+  - curled
+  - gripping
+  - leaning
+  - breath
+  - breathing
+  - tightens
+  - clenched
+  - body
+  - pulse
+
+scene_anchors:
+  - phone
+  - laptop
+  - screen
+  - bed
+  - bedroom
+  - kitchen
+  - office
+  - car
+  - desk
+  - hallway
+  - room
+  - meeting
+  - apartment
+  - bathroom
+  - elevator
+  - highway
+  - hospital
+  - classroom
+  - restaurant
+  - building
+  - table
+  - chair
+  - email
+  - invoice
+  - trackpad
+  - cursor
+  - slack

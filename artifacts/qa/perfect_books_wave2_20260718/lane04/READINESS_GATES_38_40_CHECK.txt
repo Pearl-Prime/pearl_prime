@@ -1,0 +1,14 @@
+gate 38: 38. G-F1H templated-cluster HARD_FAIL escalation (integrity)
+  rc=0
+  G-F1H: PASS (integrity) — detector importable; chapter limit=6; no --book/--render-dir provided
+
+gate 39: 39. G-ORIENT Ch1 body/scene anchor lexicon (integrity; WARN-class)
+  rc=0
+  G-ORIENT: PASS (integrity) — lexicon loaded (58 anchor words) from /Users/ahjan/phoenix_omega/config/quality/orient_body_scene_lexicon.yaml; no --book provided
+
+gate 40: 40. G-ACCENT weekly accent-fill preflight matrix (report-only here)
+  rc=0
+  G-ACCENT: cells_checked=20 cells_with_gap=14 fill_rate=0.3 -> /Users/ahjan/phoenix_omega/artifacts/qa/accent_supply_preflight/ACCENT_SUPPLY_PREFLIGHT.json
+    - GAP first_respondersxburnout (profile=somatic_reflective): {'AUTHOR_COMMENTARY': 'no_supply_pool'}
+    - GAP healthcare_rnsxburnout (profile=somatic_reflective): {'AUTHOR_COMMENTARY': 'no_supply_pool'}
+

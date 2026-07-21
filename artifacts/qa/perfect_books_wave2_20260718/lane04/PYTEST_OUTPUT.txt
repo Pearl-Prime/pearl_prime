@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0 -- /Applications/Xcode.app/Contents/Developer/usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/ahjan/phoenix_omega
+configfile: pytest.ini
+plugins: anyio-4.12.1
+collecting ... collected 15 items
+
+tests/test_check_f1h_templated_cluster_hard.py::test_cluster_below_limit_is_not_hard_fail PASSED [  6%]
+tests/test_check_f1h_templated_cluster_hard.py::test_cluster_at_limit_is_hard_fail PASSED [ 13%]
+tests/test_check_f1h_templated_cluster_hard.py::test_cluster_above_limit_is_hard_fail PASSED [ 20%]
+tests/test_check_f1h_templated_cluster_hard.py::test_no_repetition_no_hard_fail PASSED [ 26%]
+tests/test_check_orient_ch1_scene_anchor.py::test_lexicon_loads_and_is_nonempty PASSED [ 33%]
+tests/test_check_orient_ch1_scene_anchor.py::test_abstract_opening_has_no_anchor_hit PASSED [ 40%]
+tests/test_check_orient_ch1_scene_anchor.py::test_scene_first_opening_has_anchor_hit PASSED [ 46%]
+tests/test_check_orient_ch1_scene_anchor.py::test_scene_atom_provenance_true_when_ch1_has_scene_slot PASSED [ 53%]
+tests/test_check_orient_ch1_scene_anchor.py::test_scene_atom_provenance_false_when_ch1_lacks_scene_slot PASSED [ 60%]
+tests/test_check_orient_ch1_scene_anchor.py::test_scene_atom_provenance_false_when_outline_missing PASSED [ 66%]
+tests/test_check_accent_supply_preflight.py::test_load_top_cells_dedupes_and_ranks PASSED [ 73%]
+tests/test_check_accent_supply_preflight.py::test_load_top_cells_respects_top_n PASSED [ 80%]
+tests/test_check_accent_supply_preflight.py::test_known_clean_pilot_cell_has_no_gap PASSED [ 86%]
+tests/test_check_accent_supply_preflight.py::test_known_underfilled_cell_has_gap PASSED [ 93%]
+tests/test_check_accent_supply_preflight.py::test_build_report_aggregates_fill_rate PASSED [100%]
+
+============================== 15 passed in 2.34s ==============================
