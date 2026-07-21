@@ -3,7 +3,7 @@
 STARTUP_RECEIPT:
 - AGENT=Pearl_Writer+Pearl_Editor (running as Claude Sonnet 5 in this session)
 - LANE=atom-authoring-queue
-- STATUS=LANDED-OFFLINE→MERGED-PENDING-CI (pushed + PR opened; see CLOSEOUT below)
+- STATUS=MERGED
 
 ## What this covers
 
@@ -110,17 +110,37 @@ yet). NOT bestseller. The gap is a follow-on lane: wire
 `build_story_schedule()` into `run_pipeline.py --pipeline-mode spine`, then
 re-run this exact smoke test.
 
-## Landed
+## Landed — MERGED
 
-- Branch: `agent/bestseller-atom-flow-20260721`
+- Branch: `agent/bestseller-atom-flow-20260721` (deleted post-merge)
 - PR: https://github.com/Pearl-Prime/pearl_prime/pull/9
-- 56 files changed (all Lanes 01-04 + this bank + proof root), 0 files
-  deleted, well under push-guard/governance caps
+- MERGE_SHA: `280597dacf72ea1784389413fdd45aacc5449ea9` (squash-merge, 2026-07-21T07:10:28Z)
+- 58 files changed total across 3 commits (56 in the initial commit + 1
+  handoff update + 1 `docs/DATA_DICTIONARY.tsv` regen), 0 files deleted,
+  well under push-guard/governance caps
 - Local full `run_production_readiness_gates.py` (35 gates) confirmed
   gates 34/35 correctly WARN (not counted toward `failed`); only 2
-  pre-existing, unrelated failures (gate 21 manga render-progress bytes,
-  gate 27 data dictionary) — both present before this lane touched anything
-- CI checks running on the PR at handoff time; merge pending governance green
+  pre-existing, unrelated failures locally (gate 21 manga render-progress
+  bytes — passed in CI's environment; gate 27 data dictionary — see below)
+- CI: all checks PASS except `Core tests`, which fails on `main` itself
+  (`ModuleNotFoundError: scripts.storyblocks.api_client`, from an unrelated
+  storyblocks commit already merged to main before this PR) — verified via
+  `gh run list --branch main --workflow "Core tests"` showing failure on
+  every recent main commit, not introduced by this PR. Not fixed here
+  (out of scope; belongs to the storyblocks/social-atom-bank workstream).
+- CI initially also failed gate 27 (Enforced data dictionary): my two new
+  `scripts/ci/check_*.py` gates weren't yet rows in
+  `docs/DATA_DICTIONARY.tsv`. Fixed with a follow-up commit: extracted a
+  clean `git archive` of exactly the builder's scan roots (`scripts/`,
+  `phoenix_v4/`, `SOURCE_OF_TRUTH/composite_doctrine`,
+  `SOURCE_OF_TRUTH/exercises_v4/approved`, `.github/workflows`,
+  `config/source_of_truth/doctrine_rotation.yaml`) to avoid contaminating
+  the dictionary with sibling-session uncommitted files sitting in the
+  shared local working tree, ran `scripts/governance/build_data_dictionary.py`
+  against that clean tree, confirmed the diff was exactly the two new WIRED
+  rows, committed.
+- Pre-merge safety check (`scripts/git/pre_merge_check.sh 9`): PASS
+  (57→58 files, 0 deletions, well under caps).
 
 ## Next action
 
