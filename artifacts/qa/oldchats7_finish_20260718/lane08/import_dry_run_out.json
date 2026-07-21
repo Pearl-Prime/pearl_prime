@@ -1,0 +1,29 @@
+{
+  "schema_version": "teacher_bank_import_scaffold_v1",
+  "source_submission_key": "artifacts/qa/oldchats7_finish_20260718/lane08/fixtures/sample_submission.json",
+  "teacher_id": "lane08_fixture_teacher",
+  "teacher_name": "Lane08 Fixture Teacher",
+  "lifecycle_status": "imported",
+  "production_atoms_created": false,
+  "operator_review_required": true,
+  "candidate_paths": {
+    "doctrine": "SOURCE_OF_TRUTH/teacher_banks/candidates/lane08_fixture_teacher/doctrine/",
+    "stories": "SOURCE_OF_TRUTH/teacher_banks/candidates/lane08_fixture_teacher/stories/",
+    "practices": "SOURCE_OF_TRUTH/teacher_banks/candidates/lane08_fixture_teacher/practices/",
+    "quotes": "SOURCE_OF_TRUTH/teacher_banks/candidates/lane08_fixture_teacher/quotes/",
+    "reflections": "SOURCE_OF_TRUTH/teacher_banks/candidates/lane08_fixture_teacher/reflections/",
+    "manifest": "SOURCE_OF_TRUTH/teacher_banks/candidates/lane08_fixture_teacher/IMPORT_MANIFEST.json"
+  },
+  "counts_from_submission": {
+    "teachings": 2,
+    "stories": 1,
+    "practices": 1,
+    "quotes": 1,
+    "reflections": 1,
+    "raw_sources": 2
+  },
+  "notes": [
+    "dry-run only; no files written to SOURCE_OF_TRUTH unless --write-scaffold",
+    "production_atoms_created remains false until operator approval + production gates"
+  ]
+}
