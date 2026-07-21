@@ -279,6 +279,8 @@ def main(argv: list[str] | None = None) -> int:
         "--quality-profile",
         default="draft",
         choices=["draft", "production"],
+        # CI-ALLOWLIST: legacy-registry-ok — prose docstring, not an invocation; this
+        # script never dispatches a pipeline run, it only computes G1-G8 metrics.
         help="mirrors run_pipeline.py's --quality-profile convention",
     )
     parser.add_argument("--platform", default="kdp_us", help="G5 per-platform locale threshold key")
