@@ -71,9 +71,9 @@ partial findings pushed.
 
 ## Owners and subsystem authority (from `SUBSYSTEM_AUTHORITY_MAP.tsv`)
 
-<!-- CI-ALLOWLIST: legacy-registry-ok — prose reference to the canonical CLI's scope, not an executed production build invocation -->
 | Lane | Scope | Owner agent | Subsystem |
 |---|---|---|---|
+<!-- CI-ALLOWLIST: legacy-registry-ok — prose reference to the canonical CLI's scope, not an executed production build invocation -->
 | 01 | Core spine/orchestration (`scripts/run_pipeline.py`, `scripts/run_manga_pipeline.py`, `phoenix_v4/ops/`, `scripts/pilot/`) | Pearl_Prime | core_pipeline |
 | 02 | Manga (`scripts/manga/`) | Pearl_Dev | manga_pipeline |
 | 03 | Video (`scripts/video/`) | Pearl_Video | video_pipeline |
