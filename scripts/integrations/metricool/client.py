@@ -206,17 +206,77 @@ def list_scheduler_posts(
     blog_id: str,
     api_key: str,
     base_url: str = DEFAULT_BASE_URL,
+    *,
+    start: str | None = None,
+    end: str | None = None,
+    timezone: str | None = None,
+    post_id: str | None = None,
 ) -> dict[str, Any] | list[Any]:
-    """GET ``scheduler/posts`` — auth proof and postId poll (no publish)."""
-    return call_metricool_api(
-        endpoint="scheduler/posts",
-        method="GET",
-        payload=None,
-        user_id=user_id,
-        blog_id=blog_id,
-        api_key=api_key,
-        base_url=base_url,
-    )
+    """GET ``scheduler/posts`` — auth proof and postId poll (no publish).
+
+    Metricool returns an empty list unless a date window is supplied for range
+    queries. Pass ``start``/``end`` (ISO local datetimes) or ``post_id`` for a
+    single-post fetch (``scheduler/posts/{post_id}``).
+    """
+    if not user_id or not blog_id or not api_key:
+        raise MetricoolConfigError("Missing required parameters: user_id, blog_id, or api_key")
+
+    if base_url and not base_url.endswith("/"):
+        base_url = base_url + "/"
+
+    if post_id:
+        endpoint = f"scheduler/posts/{post_id}"
+        return call_metricool_api(
+            endpoint=endpoint,
+            method="GET",
+            payload=None,
+            user_id=user_id,
+            blog_id=blog_id,
+            api_key=api_key,
+            base_url=base_url,
+        )
+
+    # Range GET needs extra query params beyond userId/blogId — build URL manually
+    # but reuse the same auth/retry policy as call_metricool_api for 5xx.
+    blog_param_name = "blogId"
+    query = [f"userId={user_id}", f"{blog_param_name}={blog_id}"]
+    if start:
+        query.append(f"start={start}")
+    if end:
+        query.append(f"end={end}")
+    if timezone:
+        query.append(f"timezone={timezone}")
+    full_url = f"{base_url}scheduler/posts?" + "&".join(query)
+
+    last_error: Exception | None = None
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            headers = {"X-Mc-Auth": api_key, "Content-Type": "application/json"}
+            response = requests.get(full_url, headers=headers, timeout=30)
+            status_code = response.status_code
+            if 200 <= status_code < 300:
+                try:
+                    return response.json()
+                except ValueError as parse_error:
+                    raise MetricoolAPIError(
+                        f"Failed to parse JSON response: {parse_error}. "
+                        f"Response: {response.text[:200]}"
+                    ) from parse_error
+            if 400 <= status_code < 500:
+                raise MetricoolAPIError(
+                    f"Metricool API error {status_code}: {response.text[:500]}"
+                )
+            last_error = MetricoolAPIError(f"Metricool API server error {status_code}")
+            if attempt < MAX_ATTEMPTS:
+                time.sleep(RETRY_DELAYS_S[attempt - 1])
+                continue
+        except (Timeout, ConnectionError) as network_error:
+            last_error = network_error
+            if attempt < MAX_ATTEMPTS:
+                time.sleep(RETRY_DELAYS_S[attempt - 1])
+                continue
+            break
+    raise MetricoolAPIError(f"list_scheduler_posts failed after retries: {last_error}")
 
 
 def get_connected_platforms(
