@@ -307,6 +307,7 @@ def resolve_wrapper(
     seed: str,
     spine_context: Optional[Dict[str, Any]] = None,
     usage_memory: Optional[WrapperUsageMemory] = None,
+    attribution_mode: Optional[str] = None,
 ) -> Tuple[str, str]:
     """
     Return (prefix, suffix) strings to wrap teacher_atom_content.
@@ -317,6 +318,11 @@ def resolve_wrapper(
       - no variant fully resolves under the available slots
 
     Invariant: returned strings never contain unresolved "{TOKEN}" placeholders.
+
+    ``attribution_mode`` (bw-teacher-exclusivity-doctrine-verified, 2026-07-19):
+    second-claimant / one-teacher-per-market fallback. Pass ``"generalized"`` to
+    suppress TEACHER_NAME while still sourcing that teacher's atom bank via
+    ``teacher_id``. ``None``/``"auto"`` preserves prior auto-detect behavior.
     """
     if not teacher_id:
         return ("", "")
@@ -334,10 +340,16 @@ def resolve_wrapper(
     }
     slots = _teacher_slot_values(tid, spine_context, slot_defaults)
 
-    # Choose mode: named when we have a real TEACHER_NAME, else generalized.
-    teacher_name = slots.get("TEACHER_NAME")
-    mode_order = (["named", "generalized", "composite"]
-                  if teacher_name else ["generalized", "composite"])
+    forced_mode = str(attribution_mode or "").strip().lower()
+    if forced_mode == "generalized":
+        slots.pop("TEACHER_NAME", None)
+        mode_order = ["generalized", "composite"]
+    elif forced_mode == "named":
+        mode_order = ["named", "generalized", "composite"]
+    else:
+        teacher_name = slots.get("TEACHER_NAME")
+        mode_order = (["named", "generalized", "composite"]
+                      if teacher_name else ["generalized", "composite"])
 
     wrapper_key = _section_wrapper_key(section_type)
 
@@ -399,9 +411,12 @@ def apply_wrapper(
     seed: str,
     spine_context: Optional[Dict[str, Any]] = None,
     usage_memory: Optional[WrapperUsageMemory] = None,
+    attribution_mode: Optional[str] = None,
 ) -> str:
     """
     Convenience: resolve + apply. Returns content unchanged if no wrapper applies.
+
+    See ``resolve_wrapper`` for ``attribution_mode`` (named/generalized/auto).
     """
     body = (content or "").strip()
     if not body:
@@ -412,6 +427,7 @@ def apply_wrapper(
         seed=seed,
         spine_context=spine_context,
         usage_memory=usage_memory,
+        attribution_mode=attribution_mode,
     )
     if not prefix and not suffix:
         return body
