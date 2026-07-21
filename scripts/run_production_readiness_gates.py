@@ -814,6 +814,44 @@ def main() -> int:
              "gate script not present; skip", skip=True)
 
 
+    # --- 34. Metricool managed durability (pin + brand map + registry) ---
+    metricool_gate = REPO_ROOT / "scripts" / "ci" / "check_metricool_managed.py"
+    if metricool_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = (
+                f"{REPO_ROOT / 'scripts' / 'ci'}:"
+                f"{REPO_ROOT / 'scripts' / 'integrations' / 'metricool'}:"
+                f"{REPO_ROOT}"
+            )
+            r = subprocess.run(
+                [sys.executable, str(metricool_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=180,
+            )
+            mc_ok = r.returncode == 0
+            out = (r.stdout or r.stderr or "").strip()
+            mc_detail = out.splitlines()[-1] if out else "check_metricool_managed"
+        except Exception as e:
+            mc_ok = False
+            mc_detail = str(e)
+        if not gate(
+            "36. Metricool managed durability (pin + brand map + registry)",
+            mc_ok,
+            mc_detail,
+        ):
+            failed += 1
+    else:
+        gate(
+            "36. Metricool managed durability",
+            True,
+            "gate script not present; skip",
+            skip=True,
+        )
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:

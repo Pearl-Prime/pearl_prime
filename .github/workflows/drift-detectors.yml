@@ -167,6 +167,11 @@ jobs:
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_data_dictionary.py
 
+      - name: Metricool managed durability (pin + brand map + registry — BLOCK)
+        run: |
+          python3 -m pip install --quiet pyyaml
+          PYTHONPATH=scripts/ci:scripts/integrations/metricool:. python3 scripts/ci/check_metricool_managed.py
+
       - name: Composite doctrine secular + shape (WISDOM_ESSENCE ruling — BLOCK on diff)
         run: |
           python3 -m pip install --quiet pyyaml

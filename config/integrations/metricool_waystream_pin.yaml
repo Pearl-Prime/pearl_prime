@@ -1,0 +1,15 @@
+# Frozen Waystream Metricool routing pin (DURABLE SSOT companion to metricool_brands.yaml).
+# CI (check_metricool_managed.py) fails if brands.yaml drifts from this pin.
+# Edit deliberately when rotating the Metricool brand; do not invent blog_ids.
+account: waystream
+user_id: "3564167"
+brand_key: waystream_sanctuary
+blog_id: "6582629"
+label: Waystream Sanctuary
+status: wired
+timezone: America/New_York
+proven_draft_post_id: "351226639"
+proven_at_utc: "2026-07-19T15:50:00Z"
+notes: >-
+  Created 2026-07-19 via admin/add-profile after live brand list had no Waystream
+  label. Draft pilot postId=351226639 (draft=true, autoPublish=false).
