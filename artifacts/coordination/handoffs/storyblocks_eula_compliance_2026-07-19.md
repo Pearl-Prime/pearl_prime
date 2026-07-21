@@ -1,13 +1,48 @@
 # Handoff — Storyblocks EULA Compliance (2026-07-19)
 
-**Signal:** `BLOCKED:no writable access to 48social Django backend (+ Ahjan108 GitHub suspended)`  
+**Signal:** `SUPERSEDED-AS-SUBSTRATE:see storyblocks_pearl_prime_rescope_2026-07-19`  
 **Owner:** Pearl_Int  
-**Branch:** `agent/storyblocks-eula-compliance-20260719`  
+**Branch:** `agent/storyblocks-eula-compliance-20260719` (design history)  
 **Base:** `origin/main` @ `9e9b9e606791590337cd7d0f2fb425def2e6f760`  
 **Design tip (durable):** `a3516cadf6003a141154c2abc17756f4ffaaf97d`  
 **Prior tip:** `54c25e605413ef2a39b72751a62a5cbdd1b465ec`  
 **Durable remote:** `pearlstar_offline` → `pearl_star:~/git/phoenix_omega_offline.git`  
 **GitHub PR (phoenix_omega):** blocked — Ahjan108 suspended (re-verified 2026-07-19T10:08Z)
+---
+
+## BANK+METADATA 100% PATH (2026-07-19 ~21:16 UTC+8)
+
+**Operator ask:** robust download → bank → metadata bind → 100% EULA compliance.  
+**Interpretation:** Storyblocks **per-campaign licensed HD bank** (48social Django) — **not** manga `assemble_from_bank`. Shared HD pool **forbidden** (§B).
+
+### Re-check this turn
+| Probe | Result |
+|-------|--------|
+| Backend Django checkout | Still **absent** (no manage.py / storyblocks services) |
+| GitHub Ahjan108 | Still **suspended** (403) |
+| pearlstar tip | `a3516cadf6003a141154c2abc17756f4ffaaf97d` (bank+metadata contract) |
+
+### New design artifact
+| Path | Role |
+|------|------|
+| `docs/STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` | **A** sole confirm HD path + GCS bank lifecycle; **B** full metadata field map + CAD license proof; **C** 100% checklist→Django touch points + test matrix; **D** paste-ready clone commands |
+| `docs/STORYBLOCKS_EULA_COMPLIANCE.md` | Links contract; defines “100%” = EXECUTED-REAL on backend |
+
+### What “100%” means
+**PROVEN path for this mission:** all §C checklist items EXECUTED-REAL + tests green on 48social backend + `storyblocks-eula-compliance=<full-SHA>`.  
+This push remains **SPECCED** only → signal stays **BLOCKED** on backend access.
+
+### NEXT_ACTION
+1. Operator: private backend clone URL + write creds (ACCESS_REQUIRED).  
+2. Implementer: follow `STORYBLOCKS_DOWNLOAD_BANK_METADATA_CONTRACT.md` §C–§D.  
+3. Emit merge SHA; do not claim 100% on docs alone.
+
+
+> **RE-SCOPE (2026-07-19):** Operator clarified goal = Storyblocks in **Pearl Prime** (phoenix_omega), not the 48social Django backend.  
+> Authoritative handoff: `artifacts/coordination/handoffs/storyblocks_pearl_prime_rescope_2026-07-19.md`  
+> Authority doc: `docs/STORYBLOCKS_PEARL_PRIME_RESCOPE.md`  
+> Do **not** require a 48social clone for Pearl Prime EXECUTE. This file remains historical for the 48social design packet / EULA clause map.
+
 ---
 
 ## BANK+METADATA 100% PATH (2026-07-19 ~21:16 UTC+8)
