@@ -1,0 +1,55 @@
+{
+  "schema_version": "teacher_onboarding_intake_v1",
+  "teacher_id": "lane08_fixture_teacher",
+  "teacher_name": "Lane08 Fixture Teacher",
+  "identity": {
+    "public_teacher_name": "Lane08 Fixture Teacher",
+    "teacher_id": "lane08_fixture_teacher",
+    "contact_email": "fixture@example.com"
+  },
+  "rights": {
+    "own_voice_or_original_material": true,
+    "permission_to_process_into_atoms": true,
+    "no_unauthorized_copyrighted_material": true,
+    "final_consent_to_submit_intake": true
+  },
+  "materials": {
+    "teachings": {
+      "doctrine_text": "Presence is the first medicine.\n\nThe body knows before the story arrives."
+    },
+    "stories": [
+      {
+        "title": "The waiting room",
+        "context": "Clinic hallway",
+        "point": "Breath before diagnosis",
+        "source": "owned"
+      }
+    ],
+    "practices": [
+      {
+        "name": "Two-breath reset",
+        "guidance": "Inhale for four, exhale for six.",
+        "helpsWith": "spike anxiety"
+      }
+    ],
+    "quotes": [{ "text": "Stay with what is true now.", "source": "talk" }],
+    "reflections_integrations_text": "Where did your shoulders drop today?",
+    "links": ["https://example.com/talk"],
+    "files": [{ "name": "notes.md", "size": 120, "type": "text/markdown" }]
+  },
+  "server_readiness": {
+    "server_score": 42,
+    "server_counts": {
+      "teachings": 2,
+      "stories": 1,
+      "practices": 1,
+      "quotes": 1,
+      "reflections": 1,
+      "raw_sources": 2
+    }
+  },
+  "server_policy": {
+    "production_atoms_created": false,
+    "operator_review_required": true
+  }
+}
