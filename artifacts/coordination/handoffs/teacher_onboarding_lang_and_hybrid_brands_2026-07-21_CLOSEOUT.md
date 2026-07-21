@@ -8,7 +8,7 @@ COMMIT_SHA:     A=b9db18709508e72965b2a0ba9dfc5aa76fa6076d
                 B=55923199611675e4121f8952dd80bdfce634dd86
                 C=c825129940a4fae1a970b5acd5e8541aa37187b0
                 handoff-pin=00cf971a93c28e80a0afe4b3db5453415f279981
-                proof-fix=<this commit>
+                proof-fix=5313fca2f2670294da3eee8b111020d0de49f44d
 BRANCH:         agent/teacher-onboarding-lang-and-hybrid-brands-20260721
 WORKTREE:       /Users/ahjan/phoenix_omega/.worktrees/teacher-ob-20260721
 FILES_WRITTEN:  (phases A–C already on branch; this closeout adds corrected Phase C A/B proof + handoff/CLOSEOUT)
