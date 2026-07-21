@@ -1,0 +1,2763 @@
+{
+  "schema_version": 1,
+  "stage": "enhancement_contract",
+  "contract_id": "enhancement_contract_v1",
+  "status": "FAIL",
+  "topic_id": "courage",
+  "persona_id": "millennial_women_professionals",
+  "runtime_format": "standard_book",
+  "book_idea": "recognition_before_action",
+  "book_motif": "The Edge (cliff and and and step)",
+  "accent_budget": {
+    "ENCOURAGEMENT": 0,
+    "CITED_EVIDENCE": 0,
+    "EXTERNAL_STORY": 0,
+    "WISDOM_ESSENCE": 0,
+    "AUTHOR_COMMENTARY": 0
+  },
+  "accent_signature": "6414f1bfffbb2218",
+  "story_mix_profile": "practical_credible",
+  "supported_underfilled_budget_by_class": {},
+  "enhancement_contract_v21": {
+    "schema_version": "2.1.0",
+    "truth_label": "research_informed_working_priors",
+    "surface_taxonomy": {
+      "chapter_engine": [
+        "VALIDATION_NORMALIZATION",
+        "MECHANISM_EXPLANATION",
+        "PRACTICE_APPLICATION",
+        "TROUBLESHOOTING",
+        "TRANSITION_GLUE",
+        "CLOSING_TAKEAWAY",
+        "PROPULSION"
+      ],
+      "proof_and_embodiment": [
+        "HOOK_STORY",
+        "EXTERNAL_STORY",
+        "AUTHOR_DISCLOSURE",
+        "CASE_STUDY",
+        "CITED_EVIDENCE"
+      ],
+      "optional_accents": [
+        "QUOTE",
+        "ENCOURAGEMENT",
+        "REFLECTION_QUESTION",
+        "AUTHOR_COMMENTARY",
+        "WISDOM_ESSENCE"
+      ],
+      "cohesion_and_craft": [
+        "CALLBACK_PLANT",
+        "CALLBACK_RETURN",
+        "MOTIF",
+        "ANALOGY",
+        "METAPHOR",
+        "BRIDGE",
+        "TRANSITION"
+      ]
+    },
+    "count_units": {
+      "QUOTE": "borrowed_authority_block",
+      "ENCOURAGEMENT": "substantial_encouragement_block",
+      "REFLECTION_QUESTION": "standalone_reflection_prompt",
+      "AUTHOR_COMMENTARY": "substantial_interpretive_commentary_block",
+      "WISDOM_ESSENCE": "distilled_wisdom_block",
+      "CITED_EVIDENCE": "evidence_block",
+      "EXTERNAL_STORY": "substantial_vignette",
+      "AUTHOR_DISCLOSURE": "substantial_first_person_disclosure",
+      "ANALOGY": "major_explanatory_analogy",
+      "METAPHOR": "developed_or_recurring_metaphor",
+      "CALLBACK_RETURN": "meaningful_motif_return"
+    },
+    "tracked_surfaces": [
+      {
+        "surface": "QUOTE",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "borrowed_authority_block",
+        "preferred_positions": [
+          "before_HOOK",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "ENCOURAGEMENT",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_encouragement_block",
+        "preferred_positions": [
+          "after_EXERCISE",
+          "after_turning_point"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "REFLECTION_QUESTION",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "standalone_reflection_prompt",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "AUTHOR_COMMENTARY",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_interpretive_commentary_block",
+        "preferred_positions": [
+          "after_PIVOT",
+          "after_EXERCISE",
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "WISDOM_ESSENCE",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "distilled_wisdom_block",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "TROUBLESHOOTING",
+        "bucket": "chapter_engine",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "tracked_surface",
+        "preferred_positions": [
+          "after_INTEGRATION"
+        ],
+        "disallowed_positions": [
+          "before_HOOK",
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "planner_tracking_mode": "tracked_surface_only"
+      },
+      {
+        "surface": "CITED_EVIDENCE",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "evidence_block",
+        "preferred_positions": [
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "EXTERNAL_STORY",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_vignette",
+        "preferred_positions": [
+          "after_HOOK",
+          "after_REFLECTION",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "AUTHOR_DISCLOSURE",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_first_person_disclosure",
+        "preferred_positions": [
+          "after_PIVOT",
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "tracked_surface_only"
+      },
+      {
+        "surface": "ANALOGY",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "major_explanatory_analogy",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      },
+      {
+        "surface": "METAPHOR",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "developed_or_recurring_metaphor",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      },
+      {
+        "surface": "CALLBACK_RETURN",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "meaningful_motif_return",
+        "preferred_positions": [
+          "after_PIVOT",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      }
+    ],
+    "optional_accent_budget": {
+      "prior_source": "ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13",
+      "memo_trade_book_chapters": 12,
+      "memo_target_accent_chapters": {
+        "min": 5,
+        "max": 7
+      },
+      "memo_hard_max_accent_chapters": 8,
+      "memo_target_total_accents": {
+        "min": 7,
+        "max": 9
+      },
+      "memo_hard_max_total_accents": 10,
+      "memo_max_accents_per_chapter": 2,
+      "memo_accent_free_chapters_minimum": 4,
+      "target_accent_chapters": {
+        "min": 5,
+        "max": 7
+      },
+      "hard_max_accent_chapters": 8,
+      "target_total_accents": {
+        "min": 7,
+        "max": 9
+      },
+      "hard_max_total_accents": 10,
+      "max_accents_per_chapter": 2,
+      "accent_free_chapters_minimum": 4,
+      "chapter_share_rounding": "ceil",
+      "ceiling_interpretation": "Class-level maxima are ceilings, not instructions to maximize every optional accent class simultaneously.",
+      "class_hard_maxima": {},
+      "actual": {
+        "assigned_total_optional_accents": 0,
+        "optional_assignment_counts": {},
+        "chapters_with_optional_accents": [],
+        "optional_accent_chapter_count": 0,
+        "accent_free_chapter_count": 12,
+        "per_chapter_optional_counts": {}
+      }
+    },
+    "optional_accent_integrity": {
+      "status": "PASS",
+      "hard_failures": [],
+      "warnings": [
+        {
+          "code": "supported_budget_underfill",
+          "detail": "assigned optional accents are below target range"
+        },
+        {
+          "code": "optional_accent_chapter_under_target",
+          "detail": "optional-accent chapters are below target range"
+        }
+      ]
+    },
+    "phase_strategy": {
+      "story_mix_profile": "practical_credible",
+      "chapter_phase_order": [
+        "problem",
+        "history",
+        "knowledge",
+        "action",
+        "maintenance"
+      ],
+      "phase_weights_by_class": {
+        "REFLECTION_QUESTION": {
+          "early": 6,
+          "mid": 10,
+          "late": 14
+        },
+        "TROUBLESHOOTING": {
+          "early": 4,
+          "mid": 8,
+          "late": 12
+        },
+        "QUOTE": {
+          "early": 14,
+          "mid": 8,
+          "late": 12
+        },
+        "ENCOURAGEMENT": {
+          "early": 6,
+          "mid": 10,
+          "late": 8
+        },
+        "CITED_EVIDENCE": {
+          "early": 12,
+          "mid": 10,
+          "late": 6
+        },
+        "EXTERNAL_STORY": {
+          "early": 8,
+          "mid": 10,
+          "late": 10
+        },
+        "WISDOM_ESSENCE": {
+          "early": 6,
+          "mid": 10,
+          "late": 12
+        },
+        "AUTHOR_COMMENTARY": {
+          "early": 6,
+          "mid": 10,
+          "late": 10
+        },
+        "AUTHOR_DISCLOSURE": {
+          "early": 10,
+          "mid": 8,
+          "late": 6
+        }
+      },
+      "role_weights_by_class": {
+        "REFLECTION_QUESTION": {
+          "recognition": 4,
+          "reframe": 2,
+          "integration": 2
+        },
+        "TROUBLESHOOTING": {
+          "practice": 3,
+          "integration": 4,
+          "application": 3
+        },
+        "CITED_EVIDENCE": {
+          "recognition": 3,
+          "reframe": 3,
+          "understand": 2
+        },
+        "EXTERNAL_STORY": {
+          "recognition": 3,
+          "reframe": 3,
+          "turn": 2
+        },
+        "ENCOURAGEMENT": {
+          "practice": 3,
+          "integration": 3,
+          "repair": 2
+        }
+      },
+      "anxiety_flagship_mode": "profile_default"
+    },
+    "tracking_notes": [
+      "TROUBLESHOOTING, CITED_EVIDENCE, and EXTERNAL_STORY are tracked outside the optional-accent bucket.",
+      "AUTHOR_DISCLOSURE is distinct from AUTHOR_COMMENTARY even when no authored disclosure bank is present.",
+      "ANALOGY, METAPHOR, and callback return surfaces are counted downstream from slots/hooks and audits, not from optional accent budgets."
+    ]
+  },
+  "surface_notes": [
+    {
+      "surface": "accent_selected_body",
+      "status": "partial",
+      "detail": "No dedicated selected-accent artifact exists; selected bodies are proven from EnrichedChapter.accent_bodies."
+    },
+    {
+      "surface": "accent_render_audit",
+      "status": "partial",
+      "detail": "Composer render audit was absent; renderer stream indices were reconstructed from planner beats."
+    }
+  ],
+  "manuscript": {
+    "sha256": "e177614dddc69a9e672892760e43d98e019ba1d38f2f28cdea5e999ea0194202",
+    "word_count": 16171,
+    "char_count": 93324
+  },
+  "validation": {
+    "missing_planned": [],
+    "missing_selected_body": [],
+    "orphan_selected": [],
+    "orphan_rendered": [],
+    "unsupported_positions": [],
+    "malformed_bodies": [],
+    "missing_story_function": [],
+    "missing_truth_metadata": [],
+    "unresolved_markers": [],
+    "core_surface_failures": [
+      {
+        "chapter": 1,
+        "slot_type": "ANGLE_DEFINITION",
+        "source_id": "angle_def_tpl:INVISIBLE_THRESHOLD"
+      },
+      {
+        "chapter": 1,
+        "slot_type": "STORY",
+        "source_id": "STORY v19+stack3"
+      },
+      {
+        "chapter": 1,
+        "slot_type": "STORY",
+        "source_id": "STORY v07"
+      },
+      {
+        "chapter": 2,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L1"
+      },
+      {
+        "chapter": 2,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04"
+      },
+      {
+        "chapter": 2,
+        "slot_type": "STORY",
+        "source_id": "EMBODIMENT v03"
+      },
+      {
+        "chapter": 3,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+      },
+      {
+        "chapter": 3,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 3,
+        "slot_type": "STORY",
+        "source_id": "RECOGNITION v06+stack3"
+      },
+      {
+        "chapter": 4,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+      },
+      {
+        "chapter": 4,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HELP:story_0:recognition:false_alarm:v02"
+      },
+      {
+        "chapter": 4,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 4,
+        "slot_type": "STORY",
+        "source_id": "STORY v18+stack2"
+      },
+      {
+        "chapter": 5,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+      },
+      {
+        "chapter": 5,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HELP:story_1:recognition:false_alarm:v02"
+      },
+      {
+        "chapter": 5,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 5,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 5,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HELP:story_1:turning_point:false_alarm:v02"
+      },
+      {
+        "chapter": 6,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3"
+      },
+      {
+        "chapter": 6,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HELP:story_2:recognition:false_alarm:v03"
+      },
+      {
+        "chapter": 6,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 6,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04"
+      },
+      {
+        "chapter": 6,
+        "slot_type": "STORY",
+        "source_id": "EMBODIMENT v04"
+      },
+      {
+        "chapter": 7,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3"
+      },
+      {
+        "chapter": 7,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_0:recognition:false_alarm:v01"
+      },
+      {
+        "chapter": 7,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 7,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02"
+      },
+      {
+        "chapter": 7,
+        "slot_type": "STORY",
+        "source_id": "STORY v11+stack2"
+      },
+      {
+        "chapter": 8,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+      },
+      {
+        "chapter": 8,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_1:recognition:false_alarm:v04"
+      },
+      {
+        "chapter": 8,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 8,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01"
+      },
+      {
+        "chapter": 8,
+        "slot_type": "STORY",
+        "source_id": "RECOGNITION v05"
+      },
+      {
+        "chapter": 9,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+      },
+      {
+        "chapter": 9,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_2:recognition:false_alarm:v03"
+      },
+      {
+        "chapter": 9,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 9,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04"
+      },
+      {
+        "chapter": 9,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 9,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HEALING:story_2:embodiment:false_alarm:v03"
+      },
+      {
+        "chapter": 10,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+      },
+      {
+        "chapter": 10,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HOPE:story_0:recognition:false_alarm:v04"
+      },
+      {
+        "chapter": 10,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 10,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01"
+      },
+      {
+        "chapter": 10,
+        "slot_type": "STORY",
+        "source_id": "EMBODIMENT v02"
+      },
+      {
+        "chapter": 11,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5"
+      },
+      {
+        "chapter": 11,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HOPE:story_1:recognition:false_alarm:v02"
+      },
+      {
+        "chapter": 11,
+        "slot_type": "EXERCISE",
+        "source_id": "EXERCISE v07"
+      },
+      {
+        "chapter": 11,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03"
+      },
+      {
+        "chapter": 11,
+        "slot_type": "STORY",
+        "source_id": "STORY v12+stack2"
+      },
+      {
+        "chapter": 12,
+        "slot_type": "ANGLE_CALLBACK",
+        "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5"
+      },
+      {
+        "chapter": 12,
+        "slot_type": "STORY",
+        "source_id": "story_plan:HOPE:story_2:recognition:false_alarm:v01"
+      },
+      {
+        "chapter": 12,
+        "slot_type": "STORY",
+        "source_id": "MECHANISM_PROOF v05"
+      }
+    ],
+    "v21_integrity": {
+      "status": "PASS",
+      "optional_budget": {
+        "status": "PASS",
+        "hard_failures": [],
+        "warnings": [
+          {
+            "code": "supported_budget_underfill",
+            "detail": "assigned optional accents are below target range"
+          },
+          {
+            "code": "optional_accent_chapter_under_target",
+            "detail": "optional-accent chapters are below target range"
+          }
+        ]
+      },
+      "row_integrity": {
+        "status": "PASS",
+        "hard_failures": [],
+        "warnings": []
+      },
+      "hard_failures": [],
+      "warnings": [
+        {
+          "code": "supported_budget_underfill",
+          "detail": "assigned optional accents are below target range"
+        },
+        {
+          "code": "optional_accent_chapter_under_target",
+          "detail": "optional-accent chapters are below target range"
+        }
+      ]
+    },
+    "errors": [
+      "core_surface_failures:1:ANGLE_DEFINITION",
+      "core_surface_failures:1:STORY",
+      "core_surface_failures:1:STORY",
+      "core_surface_failures:2:ANGLE_CALLBACK",
+      "core_surface_failures:2:STORY",
+      "core_surface_failures:2:STORY",
+      "core_surface_failures:3:ANGLE_CALLBACK",
+      "core_surface_failures:3:EXERCISE",
+      "core_surface_failures:3:STORY",
+      "core_surface_failures:4:ANGLE_CALLBACK",
+      "core_surface_failures:4:STORY",
+      "core_surface_failures:4:EXERCISE",
+      "core_surface_failures:4:STORY",
+      "core_surface_failures:5:ANGLE_CALLBACK",
+      "core_surface_failures:5:STORY",
+      "core_surface_failures:5:EXERCISE",
+      "core_surface_failures:5:EXERCISE",
+      "core_surface_failures:5:STORY",
+      "core_surface_failures:6:ANGLE_CALLBACK",
+      "core_surface_failures:6:STORY",
+      "core_surface_failures:6:EXERCISE",
+      "core_surface_failures:6:STORY",
+      "core_surface_failures:6:STORY",
+      "core_surface_failures:7:ANGLE_CALLBACK",
+      "core_surface_failures:7:STORY",
+      "core_surface_failures:7:EXERCISE",
+      "core_surface_failures:7:STORY",
+      "core_surface_failures:7:STORY",
+      "core_surface_failures:8:ANGLE_CALLBACK",
+      "core_surface_failures:8:STORY",
+      "core_surface_failures:8:EXERCISE",
+      "core_surface_failures:8:STORY",
+      "core_surface_failures:8:STORY",
+      "core_surface_failures:9:ANGLE_CALLBACK",
+      "core_surface_failures:9:STORY",
+      "core_surface_failures:9:EXERCISE",
+      "core_surface_failures:9:STORY",
+      "core_surface_failures:9:EXERCISE",
+      "core_surface_failures:9:STORY",
+      "core_surface_failures:10:ANGLE_CALLBACK",
+      "core_surface_failures:10:STORY",
+      "core_surface_failures:10:EXERCISE",
+      "core_surface_failures:10:STORY",
+      "core_surface_failures:10:STORY",
+      "core_surface_failures:11:ANGLE_CALLBACK",
+      "core_surface_failures:11:STORY",
+      "core_surface_failures:11:EXERCISE",
+      "core_surface_failures:11:STORY",
+      "core_surface_failures:11:STORY",
+      "core_surface_failures:12:ANGLE_CALLBACK",
+      "core_surface_failures:12:STORY",
+      "core_surface_failures:12:STORY"
+    ]
+  },
+  "accent_rows": [],
+  "core_surface_rows": [
+    {
+      "chapter": 1,
+      "slot_type": "ANGLE_DEFINITION",
+      "source": "angle_template",
+      "source_id": "angle_def_tpl:INVISIBLE_THRESHOLD",
+      "variant_id": "",
+      "atom_id": "angle_def_tpl:INVISIBLE_THRESHOLD",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "bf16dad99e4be3179a05923933fb42ee213213b89ffcfa3364dcd67046676415",
+      "selected_body_excerpt": "[Angle journey — definition placeholder for The Invisible Threshold.] This book follows the doorway lens: Every symptom is",
+      "final_excerpt": "[Angle journey — definition placeholder for The Invisible Threshold.] This book follows the doorway lens: Every symptom is",
+      "callback_role": "plant",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "",
+      "semantic_development": "initial_angle_plant"
+    },
+    {
+      "chapter": 1,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HARDSHIP:story_0:recognition:false_alarm:v03",
+      "variant_id": "",
+      "atom_id": "story_plan:HARDSHIP:story_0:recognition:false_alarm:v03",
+      "renderer_stream_index": 2,
+      "final_char_start": 5198,
+      "final_char_end": 5984,
+      "final_paragraph_index": 31,
+      "final_order_index": 1,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "2bae98d913ee451f7a1228595df9a1c0c88ab7d56d2ba19219776f6c07db6be6",
+      "selected_body_excerpt": "Renata sees the launch date slipping the moment she opens the sprint board. Two weeks, minimum, maybe three.",
+      "final_excerpt": "Renata sees the launch date slipping the moment she opens the sprint board. Two weeks, minimum, maybe three. Someone has to tell the client before Friday's check-in, and she is the one who knows the number is real. She d",
+      "callback_role": "",
+      "plant_id": "HARDSHIP:story_0:recognition:false_alarm:v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 1,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v19+stack3",
+      "variant_id": "",
+      "atom_id": "STORY v19",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "2b435bfa3cf5940212681b8a2067cd2610d889a0885b0479c74648f3d0dbb59f",
+      "selected_body_excerpt": "She'd read the having it all about courage — the articles, the frameworks, the advice from the imposter",
+      "final_excerpt": "She'd read the having it all about courage — the articles, the frameworks, the advice from the imposter",
+      "callback_role": "",
+      "plant_id": "STORY v19+stack3",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 1,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v07",
+      "variant_id": "",
+      "atom_id": "STORY v07",
+      "renderer_stream_index": 7,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "a583f3ae110fa9c2e81b0f30a86a3117975d96e28bdd383b60c07a82bee3fb5f",
+      "selected_body_excerpt": "She opened the having it all and felt the brave isn't fearless before the words registered. Her body",
+      "final_excerpt": "She opened the having it all and felt the brave isn't fearless before the words registered. Her body",
+      "callback_role": "",
+      "plant_id": "STORY v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 2,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L1",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L1",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "113d101252d2d8a04f609d33360938c8ad35ca28347df3496534f9d64504e6ef",
+      "selected_body_excerpt": "[Angle journey — layer 1 callback placeholder.] Phase: {'layer': 1, 'phase': 'definition', 'chapter_range': [1, 2], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 1 callback placeholder.] Phase: {'layer': 1, 'phase': 'definition', 'chapter_range': [1, 2], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 2,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HARDSHIP:story_1:recognition:false_alarm:v04",
+      "variant_id": "",
+      "atom_id": "story_plan:HARDSHIP:story_1:recognition:false_alarm:v04",
+      "renderer_stream_index": 2,
+      "final_char_start": 11617,
+      "final_char_end": 12397,
+      "final_paragraph_index": 15,
+      "final_order_index": 1,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "675a60d1de47773c7184f3d2255afde5f9453721fdb5164a2a12a78aae41ff0f",
+      "selected_body_excerpt": "Devi is in the architecture review when the senior director walks through a migration plan that skips the",
+      "final_excerpt": "Devi is in the architecture review when the senior director walks through a migration plan that skips the rollback step. She has run this exact migration twice before. She knows what happens without the rollback step. He",
+      "callback_role": "",
+      "plant_id": "HARDSHIP:story_1:recognition:false_alarm:v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 2,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": 16960,
+      "final_char_end": 17209,
+      "final_paragraph_index": 26,
+      "final_order_index": 2,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever this is. Put your hand on your heart. Feel your heartbeat. Your heart is strong. Your body is ready. Now go do the th",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 2,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04",
+      "variant_id": "",
+      "atom_id": "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "512f0a7d6a65f46fa08289d80e494ac43a4a96c4234dded94adda79e70231d1f",
+      "selected_body_excerpt": "The migration runs three weeks later exactly the way Devi expected, without the rollback step, and it fails",
+      "final_excerpt": "The migration runs three weeks later exactly the way Devi expected, without the rollback step, and it fails",
+      "callback_role": "",
+      "plant_id": "HARDSHIP:story_1:mechanism_proof:false_alarm:v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v03",
+      "variant_id": "",
+      "atom_id": "EMBODIMENT v03",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "842f56dd7ef993204f0afb9213b829177daa75e186536fc2f4def5e4ff1f03ee",
+      "selected_body_excerpt": "Elena tells her team that she's implementing core hours—8 am to 3 pm, all hands on deck. Outside",
+      "final_excerpt": "Elena tells her team that she's implementing core hours—8 am to 3 pm, all hands on deck. Outside",
+      "callback_role": "",
+      "plant_id": "EMBODIMENT v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 3,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "3b33d29bc55bbaf3a73a5501ddd878eb2f45beb5dca65b6fcb7f069f6e9205ac",
+      "selected_body_excerpt": "[Angle journey — layer 2 callback placeholder.] Phase: {'layer': 2, 'phase': 'pattern_recognition', 'chapter_range': [3, 5], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 2 callback placeholder.] Phase: {'layer': 2, 'phase': 'pattern_recognition', 'chapter_range': [3, 5], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 3,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HARDSHIP:story_2:recognition:false_alarm:v01",
+      "variant_id": "",
+      "atom_id": "story_plan:HARDSHIP:story_2:recognition:false_alarm:v01",
+      "renderer_stream_index": 2,
+      "final_char_start": 20195,
+      "final_char_end": 20948,
+      "final_paragraph_index": 17,
+      "final_order_index": 1,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "b2fe59531f364b34478acad9f684eae42956948e1f2c447510f9c423fc638105",
+      "selected_body_excerpt": "Alina is on the client call when the finance lead pushes back on the proposal fee. She has",
+      "final_excerpt": "Alina is on the client call when the finance lead pushes back on the proposal fee. She has the counter-argument ready — she wrote it herself, she knows the math cold. Her hands go cold under the desk. Her chest tightens.",
+      "callback_role": "",
+      "plant_id": "HARDSHIP:story_2:recognition:false_alarm:v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 3,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 3,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HARDSHIP:story_2:mechanism_proof:false_alarm:v02",
+      "variant_id": "",
+      "atom_id": "story_plan:HARDSHIP:story_2:mechanism_proof:false_alarm:v02",
+      "renderer_stream_index": 5,
+      "final_char_start": 20950,
+      "final_char_end": 21735,
+      "final_paragraph_index": 18,
+      "final_order_index": 2,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "b40f527cf158500d9590fd7c7a2b60ac9783adc67f5f71e8131a49e6b942b73a",
+      "selected_body_excerpt": "The panel roster goes out Friday afternoon. Priya's name isn't on it. Someone two years behind her in",
+      "final_excerpt": "The panel roster goes out Friday afternoon. Priya's name isn't on it. Someone two years behind her in tenure is, someone whose project she reviewed last quarter. She reads the bios twice. Her chest tightens. She scrolls",
+      "callback_role": "",
+      "plant_id": "HARDSHIP:story_2:mechanism_proof:false_alarm:v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 3,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v06+stack3",
+      "variant_id": "",
+      "atom_id": "RECOGNITION v06",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "8d7cf6728e8ab1ea64acb63aef35f8d5228d2fd32dfdcbaeaf140df586d190a4",
+      "selected_body_excerpt": "Crisis. Breakthrough. The moment of maximum intensity. Mia's calendar is color-coded. Blue for products. Green for meetings about",
+      "final_excerpt": "Crisis. Breakthrough. The moment of maximum intensity. Mia's calendar is color-coded. Blue for products. Green for meetings about",
+      "callback_role": "",
+      "plant_id": "RECOGNITION v06+stack3",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 4,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "3b33d29bc55bbaf3a73a5501ddd878eb2f45beb5dca65b6fcb7f069f6e9205ac",
+      "selected_body_excerpt": "[Angle journey — layer 2 callback placeholder.] Phase: {'layer': 2, 'phase': 'pattern_recognition', 'chapter_range': [3, 5], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 2 callback placeholder.] Phase: {'layer': 2, 'phase': 'pattern_recognition', 'chapter_range': [3, 5], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 4,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_0:recognition:false_alarm:v02",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_0:recognition:false_alarm:v02",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "b9c89c8393c1b72563cea06d34acd8446412db6d90e102899766f1ba502ad905",
+      "selected_body_excerpt": "Priya sees the internal call for panelists for the leadership offsite land in her inbox. The ask is",
+      "final_excerpt": "Priya sees the internal call for panelists for the leadership offsite land in her inbox. The ask is",
+      "callback_role": "",
+      "plant_id": "HELP:story_0:recognition:false_alarm:v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 4,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_0:mechanism_proof:false_alarm:v01",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_0:mechanism_proof:false_alarm:v01",
+      "renderer_stream_index": 5,
+      "final_char_start": 28976,
+      "final_char_end": 29819,
+      "final_paragraph_index": 16,
+      "final_order_index": 2,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "bedc04765d4217df04611eefa065a9e7d575869c3264c50eafd33f5108eeb790",
+      "selected_body_excerpt": "Three weeks later Alina is in the renewal call and the same finance lead cuts the scope in",
+      "final_excerpt": "Three weeks later Alina is in the renewal call and the same finance lead cuts the scope in half without cutting the fee. This is the exact moment her memo warned about. Her hands are cold. Her chest is tight. She has the",
+      "callback_role": "",
+      "plant_id": "HELP:story_0:mechanism_proof:false_alarm:v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 4,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v18+stack2",
+      "variant_id": "",
+      "atom_id": "STORY v18",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "82ab5f517940ff33b6ca4ddb15b5683df4fd36a63e7937af29277ac585c6df61",
+      "selected_body_excerpt": "He sat in the parking lot of the glass ceiling for eleven minutes before walking in. Not because",
+      "final_excerpt": "He sat in the parking lot of the glass ceiling for eleven minutes before walking in. Not because",
+      "callback_role": "",
+      "plant_id": "STORY v18+stack2",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 5,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "3b33d29bc55bbaf3a73a5501ddd878eb2f45beb5dca65b6fcb7f069f6e9205ac",
+      "selected_body_excerpt": "[Angle journey — layer 2 callback placeholder.] Phase: {'layer': 2, 'phase': 'pattern_recognition', 'chapter_range': [3, 5], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 2 callback placeholder.] Phase: {'layer': 2, 'phase': 'pattern_recognition', 'chapter_range': [3, 5], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 5,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_1:recognition:false_alarm:v02",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_1:recognition:false_alarm:v02",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "b9c89c8393c1b72563cea06d34acd8446412db6d90e102899766f1ba502ad905",
+      "selected_body_excerpt": "Priya sees the internal call for panelists for the leadership offsite land in her inbox. The ask is",
+      "final_excerpt": "Priya sees the internal call for panelists for the leadership offsite land in her inbox. The ask is",
+      "callback_role": "",
+      "plant_id": "HELP:story_1:recognition:false_alarm:v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 5,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 5,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_1:mechanism_proof:false_alarm:v03",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_1:mechanism_proof:false_alarm:v03",
+      "renderer_stream_index": 5,
+      "final_char_start": 36468,
+      "final_char_end": 37315,
+      "final_paragraph_index": 15,
+      "final_order_index": 1,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "eab84060162b47320976b4b67830dd0bdd47f019149c4b4b153a5a56b3bcc977",
+      "selected_body_excerpt": "Friday's check-in arrives and Renata still hasn't sent the email. The client asks, live, on camera, whether they're",
+      "final_excerpt": "Friday's check-in arrives and Renata still hasn't sent the email. The client asks, live, on camera, whether they're still on track for the original date. Her chest tightens. Her account director, who does not have the re",
+      "callback_role": "",
+      "plant_id": "HELP:story_1:mechanism_proof:false_alarm:v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 5,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 5,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_1:turning_point:false_alarm:v02",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_1:turning_point:false_alarm:v02",
+      "renderer_stream_index": 9,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "832ae1c887fa3938e7a4c8cfa26a20615c71c86d00e778fffc51eeab688f1ce2",
+      "selected_body_excerpt": "Priya opens the draft with the unfinished sentence still sitting in it: I led the—. She sets a",
+      "final_excerpt": "Priya opens the draft with the unfinished sentence still sitting in it: I led the—. She sets a",
+      "callback_role": "",
+      "plant_id": "HELP:story_1:turning_point:false_alarm:v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 6,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "cc64df366f2a1a8124d63ce51ca34cb0ae4b94c05a9df666416faa6a413e5a04",
+      "selected_body_excerpt": "[Angle journey — layer 3 callback placeholder.] Phase: {'layer': 3, 'phase': 'identity_implications', 'chapter_range': [6, 7], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 3 callback placeholder.] Phase: {'layer': 3, 'phase': 'identity_implications', 'chapter_range': [6, 7], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 6,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_2:recognition:false_alarm:v03",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_2:recognition:false_alarm:v03",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "2bae98d913ee451f7a1228595df9a1c0c88ab7d56d2ba19219776f6c07db6be6",
+      "selected_body_excerpt": "Renata sees the launch date slipping the moment she opens the sprint board. Two weeks, minimum, maybe three.",
+      "final_excerpt": "Renata sees the launch date slipping the moment she opens the sprint board. Two weeks, minimum, maybe three.",
+      "callback_role": "",
+      "plant_id": "HELP:story_2:recognition:false_alarm:v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 6,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 6,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04",
+      "variant_id": "",
+      "atom_id": "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "512f0a7d6a65f46fa08289d80e494ac43a4a96c4234dded94adda79e70231d1f",
+      "selected_body_excerpt": "The migration runs three weeks later exactly the way Devi expected, without the rollback step, and it fails",
+      "final_excerpt": "The migration runs three weeks later exactly the way Devi expected, without the rollback step, and it fails",
+      "callback_role": "",
+      "plant_id": "HELP:story_2:mechanism_proof:false_alarm:v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 6,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v04",
+      "variant_id": "",
+      "atom_id": "EMBODIMENT v04",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "d64b756d7f1f14c0c4a562850c274a7afd6a09e9ee7970bbec6abdac606ab4e9",
+      "selected_body_excerpt": "Rachel stops narrating her accomplishments as 'learning opportunities.' In the partnership meeting, she says: 'I've brought in 1.2",
+      "final_excerpt": "Rachel stops narrating her accomplishments as 'learning opportunities.' In the partnership meeting, she says: 'I've brought in 1.2",
+      "callback_role": "",
+      "plant_id": "EMBODIMENT v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 7,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "cc64df366f2a1a8124d63ce51ca34cb0ae4b94c05a9df666416faa6a413e5a04",
+      "selected_body_excerpt": "[Angle journey — layer 3 callback placeholder.] Phase: {'layer': 3, 'phase': 'identity_implications', 'chapter_range': [6, 7], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 3 callback placeholder.] Phase: {'layer': 3, 'phase': 'identity_implications', 'chapter_range': [6, 7], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 7,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_0:recognition:false_alarm:v01",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_0:recognition:false_alarm:v01",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "b2fe59531f364b34478acad9f684eae42956948e1f2c447510f9c423fc638105",
+      "selected_body_excerpt": "Alina is on the client call when the finance lead pushes back on the proposal fee. She has",
+      "final_excerpt": "Alina is on the client call when the finance lead pushes back on the proposal fee. She has",
+      "callback_role": "",
+      "plant_id": "HEALING:story_0:recognition:false_alarm:v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 7,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 7,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "b40f527cf158500d9590fd7c7a2b60ac9783adc67f5f71e8131a49e6b942b73a",
+      "selected_body_excerpt": "The panel roster goes out Friday afternoon. Priya's name isn't on it. Someone two years behind her in",
+      "final_excerpt": "The panel roster goes out Friday afternoon. Priya's name isn't on it. Someone two years behind her in",
+      "callback_role": "",
+      "plant_id": "HEALING:story_0:mechanism_proof:false_alarm:v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 7,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v11+stack2",
+      "variant_id": "",
+      "atom_id": "STORY v11",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "ca732b435226ad3d1d6a610de97f876935a5b94236e1fa8fc3c4f437c7596651",
+      "selected_body_excerpt": "The performance review ended and she exhaled for what felt like the first time in hours. Nine seconds",
+      "final_excerpt": "The performance review ended and she exhaled for what felt like the first time in hours. Nine seconds",
+      "callback_role": "",
+      "plant_id": "STORY v11+stack2",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 8,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "d3b20258f1ff3cae8cef327215cde9589784783fa7ec415213c6b6f5127113a2",
+      "selected_body_excerpt": "[Angle journey — layer 4 callback placeholder.] Phase: {'layer': 4, 'phase': 'civilizational_spiritual', 'chapter_range': [8, 10], 'assertion': 'TODO', 'optional_for_topics':",
+      "final_excerpt": "[Angle journey — layer 4 callback placeholder.] Phase: {'layer': 4, 'phase': 'civilizational_spiritual', 'chapter_range': [8, 10], 'assertion': 'TODO', 'optional_for_topics':",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 8,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_1:recognition:false_alarm:v04",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_1:recognition:false_alarm:v04",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "675a60d1de47773c7184f3d2255afde5f9453721fdb5164a2a12a78aae41ff0f",
+      "selected_body_excerpt": "Devi is in the architecture review when the senior director walks through a migration plan that skips the",
+      "final_excerpt": "Devi is in the architecture review when the senior director walks through a migration plan that skips the",
+      "callback_role": "",
+      "plant_id": "HEALING:story_1:recognition:false_alarm:v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 8,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "bedc04765d4217df04611eefa065a9e7d575869c3264c50eafd33f5108eeb790",
+      "selected_body_excerpt": "Three weeks later Alina is in the renewal call and the same finance lead cuts the scope in",
+      "final_excerpt": "Three weeks later Alina is in the renewal call and the same finance lead cuts the scope in",
+      "callback_role": "",
+      "plant_id": "HEALING:story_1:mechanism_proof:false_alarm:v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 8,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v05",
+      "variant_id": "",
+      "atom_id": "RECOGNITION v05",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "bcdbc590c4b74a275591c15102fb25151acdde4c8029125dfcc3f9e1883e95ff",
+      "selected_body_excerpt": "Diane shuts the laptop. Another full day gone. She billed 8.5 hours but worked 11. The difference is",
+      "final_excerpt": "Diane shuts the laptop. Another full day gone. She billed 8.5 hours but worked 11. The difference is",
+      "callback_role": "",
+      "plant_id": "RECOGNITION v05",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 9,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "d3b20258f1ff3cae8cef327215cde9589784783fa7ec415213c6b6f5127113a2",
+      "selected_body_excerpt": "[Angle journey — layer 4 callback placeholder.] Phase: {'layer': 4, 'phase': 'civilizational_spiritual', 'chapter_range': [8, 10], 'assertion': 'TODO', 'optional_for_topics':",
+      "final_excerpt": "[Angle journey — layer 4 callback placeholder.] Phase: {'layer': 4, 'phase': 'civilizational_spiritual', 'chapter_range': [8, 10], 'assertion': 'TODO', 'optional_for_topics':",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 9,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_2:recognition:false_alarm:v03",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_2:recognition:false_alarm:v03",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "2bae98d913ee451f7a1228595df9a1c0c88ab7d56d2ba19219776f6c07db6be6",
+      "selected_body_excerpt": "Renata sees the launch date slipping the moment she opens the sprint board. Two weeks, minimum, maybe three.",
+      "final_excerpt": "Renata sees the launch date slipping the moment she opens the sprint board. Two weeks, minimum, maybe three.",
+      "callback_role": "",
+      "plant_id": "HEALING:story_2:recognition:false_alarm:v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 9,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 9,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "512f0a7d6a65f46fa08289d80e494ac43a4a96c4234dded94adda79e70231d1f",
+      "selected_body_excerpt": "The migration runs three weeks later exactly the way Devi expected, without the rollback step, and it fails",
+      "final_excerpt": "The migration runs three weeks later exactly the way Devi expected, without the rollback step, and it fails",
+      "callback_role": "",
+      "plant_id": "HEALING:story_2:mechanism_proof:false_alarm:v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 9,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 9,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HEALING:story_2:embodiment:false_alarm:v03",
+      "variant_id": "",
+      "atom_id": "story_plan:HEALING:story_2:embodiment:false_alarm:v03",
+      "renderer_stream_index": 9,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "6cf20af2b647ca11d2dd68c66adcf7dd104c0092426619fdecfbe87963ba528a",
+      "selected_body_excerpt": "Renata is in the next status call when the same kind of slip shows up two sprints early,",
+      "final_excerpt": "Renata is in the next status call when the same kind of slip shows up two sprints early,",
+      "callback_role": "",
+      "plant_id": "HEALING:story_2:embodiment:false_alarm:v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 10,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "d3b20258f1ff3cae8cef327215cde9589784783fa7ec415213c6b6f5127113a2",
+      "selected_body_excerpt": "[Angle journey — layer 4 callback placeholder.] Phase: {'layer': 4, 'phase': 'civilizational_spiritual', 'chapter_range': [8, 10], 'assertion': 'TODO', 'optional_for_topics':",
+      "final_excerpt": "[Angle journey — layer 4 callback placeholder.] Phase: {'layer': 4, 'phase': 'civilizational_spiritual', 'chapter_range': [8, 10], 'assertion': 'TODO', 'optional_for_topics':",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 10,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HOPE:story_0:recognition:false_alarm:v04",
+      "variant_id": "",
+      "atom_id": "story_plan:HOPE:story_0:recognition:false_alarm:v04",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "675a60d1de47773c7184f3d2255afde5f9453721fdb5164a2a12a78aae41ff0f",
+      "selected_body_excerpt": "Devi is in the architecture review when the senior director walks through a migration plan that skips the",
+      "final_excerpt": "Devi is in the architecture review when the senior director walks through a migration plan that skips the",
+      "callback_role": "",
+      "plant_id": "HOPE:story_0:recognition:false_alarm:v04",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 10,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 10,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01",
+      "variant_id": "",
+      "atom_id": "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "bedc04765d4217df04611eefa065a9e7d575869c3264c50eafd33f5108eeb790",
+      "selected_body_excerpt": "Three weeks later Alina is in the renewal call and the same finance lead cuts the scope in",
+      "final_excerpt": "Three weeks later Alina is in the renewal call and the same finance lead cuts the scope in",
+      "callback_role": "",
+      "plant_id": "HOPE:story_0:mechanism_proof:false_alarm:v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 10,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v02",
+      "variant_id": "",
+      "atom_id": "EMBODIMENT v02",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "52023a6351ee34f6ec56a26293f46584f5acf0e11c963dd59408e6290b4fa525",
+      "selected_body_excerpt": "Sarah says 'no' to the coffee meeting that isn't actually a meeting—it's a conversation with someone who wants",
+      "final_excerpt": "Sarah says 'no' to the coffee meeting that isn't actually a meeting—it's a conversation with someone who wants",
+      "callback_role": "",
+      "plant_id": "EMBODIMENT v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 11,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "833fe51c147b4fba80262185059bf6499fd859a326fe876d7272e122f14f1068",
+      "selected_body_excerpt": "[Angle journey — layer 5 callback placeholder.] Phase: {'layer': 5, 'phase': 'transcendence_reintegration', 'chapter_range': [11, 12], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 5 callback placeholder.] Phase: {'layer': 5, 'phase': 'transcendence_reintegration', 'chapter_range': [11, 12], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 11,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HOPE:story_1:recognition:false_alarm:v02",
+      "variant_id": "",
+      "atom_id": "story_plan:HOPE:story_1:recognition:false_alarm:v02",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "b9c89c8393c1b72563cea06d34acd8446412db6d90e102899766f1ba502ad905",
+      "selected_body_excerpt": "Priya sees the internal call for panelists for the leadership offsite land in her inbox. The ask is",
+      "final_excerpt": "Priya sees the internal call for panelists for the leadership offsite land in her inbox. The ask is",
+      "callback_role": "",
+      "plant_id": "HOPE:story_1:recognition:false_alarm:v02",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 11,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "atom_id": "EXERCISE v07",
+      "renderer_stream_index": 4,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "f5c376f10a07c71c25cd75532204de7a8998250067ea864b3f6e5a82965ddea5",
+      "selected_body_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "final_excerpt": "Stand in your car. Feel your feet on the floor. You're here. You're solid. You're doing this. Whatever",
+      "callback_role": "",
+      "plant_id": "EXERCISE v07",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 11,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03",
+      "variant_id": "",
+      "atom_id": "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03",
+      "renderer_stream_index": 5,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "eab84060162b47320976b4b67830dd0bdd47f019149c4b4b153a5a56b3bcc977",
+      "selected_body_excerpt": "Friday's check-in arrives and Renata still hasn't sent the email. The client asks, live, on camera, whether they're",
+      "final_excerpt": "Friday's check-in arrives and Renata still hasn't sent the email. The client asks, live, on camera, whether they're",
+      "callback_role": "",
+      "plant_id": "HOPE:story_1:mechanism_proof:false_alarm:v03",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 11,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v12+stack2",
+      "variant_id": "",
+      "atom_id": "STORY v12",
+      "renderer_stream_index": 8,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "6f34eab181162b65972042c040b0f46e3b12e4d84fba928c020a36385cee1197",
+      "selected_body_excerpt": "There was a version of him that existed before the the leap took up permanent residence. He could",
+      "final_excerpt": "There was a version of him that existed before the the leap took up permanent residence. He could",
+      "callback_role": "",
+      "plant_id": "STORY v12+stack2",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 12,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+      "variant_id": "",
+      "atom_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+      "renderer_stream_index": 1,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "833fe51c147b4fba80262185059bf6499fd859a326fe876d7272e122f14f1068",
+      "selected_body_excerpt": "[Angle journey — layer 5 callback placeholder.] Phase: {'layer': 5, 'phase': 'transcendence_reintegration', 'chapter_range': [11, 12], 'assertion': 'TODO'}. Prior",
+      "final_excerpt": "[Angle journey — layer 5 callback placeholder.] Phase: {'layer': 5, 'phase': 'transcendence_reintegration', 'chapter_range': [11, 12], 'assertion': 'TODO'}. Prior",
+      "callback_role": "return",
+      "plant_id": "INVISIBLE_THRESHOLD",
+      "return_function": "angle_callback",
+      "semantic_development": "later_chapter_reactivation"
+    },
+    {
+      "chapter": 12,
+      "slot_type": "STORY",
+      "source": "story_plan",
+      "source_id": "story_plan:HOPE:story_2:recognition:false_alarm:v01",
+      "variant_id": "",
+      "atom_id": "story_plan:HOPE:story_2:recognition:false_alarm:v01",
+      "renderer_stream_index": 2,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "b2fe59531f364b34478acad9f684eae42956948e1f2c447510f9c423fc638105",
+      "selected_body_excerpt": "Alina is on the client call when the finance lead pushes back on the proposal fee. She has",
+      "final_excerpt": "Alina is on the client call when the finance lead pushes back on the proposal fee. She has",
+      "callback_role": "",
+      "plant_id": "HOPE:story_2:recognition:false_alarm:v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 12,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v01",
+      "variant_id": "",
+      "atom_id": "TURNING_POINT v01",
+      "renderer_stream_index": 4,
+      "final_char_start": 87872,
+      "final_char_end": 88655,
+      "final_paragraph_index": 5,
+      "final_order_index": 2,
+      "present_in_manuscript": true,
+      "match_mode": "exact",
+      "body_hash": "f72495cae38882e6a6dd7d6170e0b953cd3f681cee00d806a2d432c847c2b56d",
+      "selected_body_excerpt": "Rachel does something different in the Thursday meeting. When her name doesn't get mentioned for the work she",
+      "final_excerpt": "Rachel does something different in the Thursday meeting. When her name doesn't get mentioned for the work she did, she says it. Three sentences. 'I developed the argument. I reviewed the discovery. I briefed the client.'",
+      "callback_role": "",
+      "plant_id": "TURNING_POINT v01",
+      "return_function": "",
+      "semantic_development": ""
+    },
+    {
+      "chapter": 12,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v05",
+      "variant_id": "",
+      "atom_id": "MECHANISM_PROOF v05",
+      "renderer_stream_index": 7,
+      "final_char_start": null,
+      "final_char_end": null,
+      "final_paragraph_index": null,
+      "final_order_index": null,
+      "present_in_manuscript": false,
+      "match_mode": "missing",
+      "body_hash": "74f6f44fec1f0d60936905f4a71b95a8422b80a7280148ea0c7795ca352d6d1c",
+      "selected_body_excerpt": "Elena's son comes home from school. He tells her about the presentation he's doing. She listens. She nods.",
+      "final_excerpt": "Elena's son comes home from school. He tells her about the presentation he's doing. She listens. She nods.",
+      "callback_role": "",
+      "plant_id": "MECHANISM_PROOF v05",
+      "return_function": "",
+      "semantic_development": ""
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "working_title": "The Thing You're Not Doing",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_DEFINITION",
+        "STORY",
+        "REFLECTION",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION",
+        "DEPTH_RECOGNITION_DEPTH",
+        "DEPTH_STORY_SCENE",
+        "DEPTH_PERSONA_SPECIFICITY",
+        "DEPTH_RECOGNITION_DEPTH",
+        "DEPTH_STORY_SCENE",
+        "DEPTH_PERSONA_SPECIFICITY"
+      ],
+      "source_ids": [
+        "HOOK v04+stack3",
+        "angle_def_tpl:INVISIBLE_THRESHOLD",
+        "story_plan:HARDSHIP:story_0:recognition:false_alarm:v03",
+        "COMPOSITE_DOCTRINE v11",
+        "STORY v19+stack3",
+        "COMPOSITE_DOCTRINE v06",
+        "COMPOSITE_DOCTRINE v03",
+        "STORY v07",
+        "INTEGRATION v17+stack2",
+        "depth_recognition_depth_1_p1r0",
+        "depth_story_scene_1_p1r0",
+        "depth_persona_specificity_1_p1r0",
+        "depth_recognition_depth_1_p2r0",
+        "depth_story_scene_1_p2r0",
+        "depth_persona_specificity_1_p2r0"
+      ],
+      "enhancement_hooks": [
+        "teacher_voice",
+        "recognition_depth",
+        "story_scene",
+        "persona_specificity"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_PLANT"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_DEFINITION",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "",
+          "semantic_development": "initial_angle_plant"
+        }
+      ],
+      "confirmed_required_slots": [
+        "STORY"
+      ]
+    },
+    {
+      "chapter": 2,
+      "working_title": "Your Body Is Treating Your Goal Like a Threat",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v03",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L1",
+        "story_plan:HARDSHIP:story_1:recognition:false_alarm:v04",
+        "COMPOSITE_DOCTRINE v08",
+        "EXERCISE v07",
+        "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04",
+        "COMPOSITE_DOCTRINE v32",
+        "COMPOSITE_DOCTRINE v06",
+        "EMBODIMENT v03",
+        "INTEGRATION v13"
+      ],
+      "enhancement_hooks": [
+        "persona_alarm_behavior",
+        "story_vividness",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": [
+        "STORY",
+        "EXERCISE"
+      ]
+    },
+    {
+      "chapter": 3,
+      "working_title": "The Alarm Was Wrong About the Cost",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v23",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+        "story_plan:HARDSHIP:story_2:recognition:false_alarm:v01",
+        "COMPOSITE_DOCTRINE v10",
+        "EXERCISE v07",
+        "story_plan:HARDSHIP:story_2:mechanism_proof:false_alarm:v02",
+        "COMPOSITE_DOCTRINE v28",
+        "COMPOSITE_DOCTRINE v02",
+        "RECOGNITION v06+stack3",
+        "INTEGRATION v16"
+      ],
+      "enhancement_hooks": [
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": [
+        "STORY",
+        "STORY"
+      ]
+    },
+    {
+      "chapter": 4,
+      "working_title": "Waiting for the Fear to Pass Is the Wrong Strategy",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v16",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+        "story_plan:HELP:story_0:recognition:false_alarm:v02",
+        "COMPOSITE_DOCTRINE v04",
+        "EXERCISE v07",
+        "story_plan:HELP:story_0:mechanism_proof:false_alarm:v01",
+        "COMPOSITE_DOCTRINE v30",
+        "COMPOSITE_DOCTRINE v12",
+        "STORY v18+stack2",
+        "INTEGRATION v09"
+      ],
+      "enhancement_hooks": [
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": [
+        "STORY"
+      ]
+    },
+    {
+      "chapter": 5,
+      "working_title": "The Smallest Possible Version",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v05",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L2",
+        "story_plan:HELP:story_1:recognition:false_alarm:v02",
+        "COMPOSITE_DOCTRINE v09",
+        "EXERCISE v07",
+        "story_plan:HELP:story_1:mechanism_proof:false_alarm:v03",
+        "COMPOSITE_DOCTRINE v05",
+        "COMPOSITE_DOCTRINE v07",
+        "EXERCISE v07",
+        "story_plan:HELP:story_1:turning_point:false_alarm:v02",
+        "INTEGRATION v08"
+      ],
+      "enhancement_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": [
+        "STORY"
+      ]
+    },
+    {
+      "chapter": 6,
+      "working_title": "The Accumulation of Not-Doing",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION",
+        "DEPTH_MECHANISM_DEPTH",
+        "DEPTH_MECHANISM_DEPTH"
+      ],
+      "source_ids": [
+        "HOOK v10",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+        "story_plan:HELP:story_2:recognition:false_alarm:v03",
+        "COMPOSITE_DOCTRINE v01",
+        "EXERCISE v07",
+        "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04",
+        "COMPOSITE_DOCTRINE v02",
+        "COMPOSITE_DOCTRINE v05",
+        "EMBODIMENT v04",
+        "INTEGRATION v25",
+        "depth_mechanism_depth_6_p1r0",
+        "depth_mechanism_depth_6_p2r0"
+      ],
+      "enhancement_hooks": [
+        "somatic_exercise",
+        "teacher_voice",
+        "mechanism_depth"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": []
+    },
+    {
+      "chapter": 7,
+      "working_title": "Readiness Is a Feeling I'll Have When I'm Ready",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v19",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L3",
+        "story_plan:HEALING:story_0:recognition:false_alarm:v01",
+        "REFLECTION v17",
+        "EXERCISE v07",
+        "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02",
+        "COMPOSITE_DOCTRINE v13",
+        "REFLECTION v03",
+        "STORY v11+stack2",
+        "INTEGRATION v24"
+      ],
+      "enhancement_hooks": [
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": []
+    },
+    {
+      "chapter": 8,
+      "working_title": "What Not-Doing Has Done to Your Relationships",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION",
+        "DEPTH_MECHANISM_DEPTH",
+        "DEPTH_MECHANISM_DEPTH"
+      ],
+      "source_ids": [
+        "HOOK v27",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+        "story_plan:HEALING:story_1:recognition:false_alarm:v04",
+        "REFLECTION v22",
+        "EXERCISE v07",
+        "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01",
+        "COMPOSITE_DOCTRINE v08",
+        "REFLECTION v13",
+        "RECOGNITION v05",
+        "INTEGRATION v07",
+        "depth_mechanism_depth_8_p1r0",
+        "depth_mechanism_depth_8_p2r0"
+      ],
+      "enhancement_hooks": [
+        "somatic_exercise",
+        "teacher_voice",
+        "mechanism_depth"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": []
+    },
+    {
+      "chapter": 9,
+      "working_title": "The Most Personal Version",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v01",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+        "story_plan:HEALING:story_2:recognition:false_alarm:v03",
+        "REFLECTION v08",
+        "EXERCISE v07",
+        "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04",
+        "COMPOSITE_DOCTRINE v10",
+        "REFLECTION v02",
+        "EXERCISE v07",
+        "story_plan:HEALING:story_2:embodiment:false_alarm:v03",
+        "INTEGRATION v11"
+      ],
+      "enhancement_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": []
+    },
+    {
+      "chapter": 10,
+      "working_title": "The Alarm Was Wrong About the Cost",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v24",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L4",
+        "story_plan:HOPE:story_0:recognition:false_alarm:v04",
+        "REFLECTION v15",
+        "EXERCISE v07",
+        "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01",
+        "COMPOSITE_DOCTRINE v09",
+        "REFLECTION v26",
+        "EMBODIMENT v02",
+        "INTEGRATION v23"
+      ],
+      "enhancement_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": []
+    },
+    {
+      "chapter": 11,
+      "working_title": "From Waiting to Acting",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v20",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+        "story_plan:HOPE:story_1:recognition:false_alarm:v02",
+        "REFLECTION v27",
+        "EXERCISE v07",
+        "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03",
+        "COMPOSITE_DOCTRINE v01",
+        "REFLECTION v04",
+        "STORY v12+stack2",
+        "INTEGRATION v20"
+      ],
+      "enhancement_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": []
+    },
+    {
+      "chapter": 12,
+      "working_title": "Acting Before Certainty: What This Makes Possible",
+      "slot_flow": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "source_ids": [
+        "HOOK v12+stack3",
+        "angle_cb_tpl:INVISIBLE_THRESHOLD:L5",
+        "story_plan:HOPE:story_2:recognition:false_alarm:v01",
+        "REFLECTION v14",
+        "TURNING_POINT v01",
+        "COMPOSITE_DOCTRINE v11",
+        "REFLECTION v09",
+        "MECHANISM_PROOF v05",
+        "INTEGRATION v06+stack2"
+      ],
+      "enhancement_hooks": [
+        "teacher_voice"
+      ],
+      "accent_ids": [],
+      "v21_surface_groups": {
+        "chapter_engine": [],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "confirmed_required_slots": [
+        "STORY"
+      ]
+    }
+  ]
+}

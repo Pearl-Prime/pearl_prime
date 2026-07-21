@@ -1,0 +1,120 @@
+{
+  "verdict": "HARD_FAIL",
+  "findings": [
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 5,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 5644,
+        "snippet": "r internal state. The body has it built in.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "WARN",
+      "chapter": 2,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "So when you deliberately widen yours, you tell your system that this is not that kind of emergency.",
+          "After you do the hard thing, notice that you are still here.",
+          "This is not about ignoring real mistakes."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "WARN",
+      "chapter": 5,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "Your worth is not riding on how the brave thing turns out.",
+          "It is the ground you stand on, present before the attempt and unchanged by how it turns out.",
+          "The risk shrinks to its true size when you see that your worth was never the thing being staked."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "WARN",
+      "chapter": 7,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "You live in a system that has taught you specific lessons about the cost of visibility.",
+          "The protective mechanism taught you to calculate the cost of visibility.",
+          "The mechanism taught you that the cost is real."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "WARN",
+      "chapter": 10,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "The cost of the suppressed courage is that you pay for the action you never take.",
+          "The cost is that you remain haunted by the words you never spoke.",
+          "The cost is that you wonder forever what would have happened if you had been brave."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "WARN",
+      "chapter": 12,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "The mechanism is complete: fragmentation becomes the baseline.",
+          "Here is the edge.",
+          "Here is the place where staying small and growing larger diverge."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    }
+  ],
+  "book_metrics": {
+    "chapter_count": 12,
+    "word_count": 16171,
+    "teacher_id": "",
+    "persona_id": "millennial_women_professionals",
+    "topic_id": "courage",
+    "quality_profile": "production",
+    "spec_version": "1.0.0",
+    "f8_deferred": "anchor_corpus_required"
+  },
+  "suggested_lanes": [
+    "Pearl_Dev (renderer slot-fill validation; HARD-FAIL renderer artifact)",
+    "Pearl_Editor + Pearl_Writer (re-pace per \u00a77.3 dwell contract \u2014 insert a dwell beat after each named insight; \u00a713 criterion #13)"
+  ],
+  "status": "FAIL",
+  "failure_counts_by_id": {
+    "F2": 1,
+    "F13": 5
+  }
+}

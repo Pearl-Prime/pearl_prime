@@ -78,6 +78,33 @@ jobs:
           fi
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_story_authored.py "${EXTRA[@]}"
 
+      # Lane 01 (2026-07-21 bestseller atom flow): book-level mirrors of the
+      # manga listing-as-story / research_fit honesty rails. ADVISORY ONLY —
+      # continue-on-error so the required Drift detectors check stays green
+      # while surfacing the binding failure. Hard-block (--strict / drop
+      # --advisory) is an operator-tier threshold decision; do not flip
+      # without sign-off. See docs/agent_prompt_packs/20260721_bestseller_atom_flow/.
+      - name: Research-fit honesty (empty/skip mismatch — ADVISORY)
+        continue-on-error: true
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_research_fit_honesty.py --advisory "${EXTRA[@]}"
+
+      - name: Book story-authored / research_fit binding (listing-as-story — ADVISORY)
+        continue-on-error: true
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          # Default is advisory (exit 0 + WARN); --strict would hard-block.
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_book_story_authored.py --no-stamp "${EXTRA[@]}"
+
       - name: Manga config wiring (unwired-config-as-working — BLOCK)
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_wiring.py

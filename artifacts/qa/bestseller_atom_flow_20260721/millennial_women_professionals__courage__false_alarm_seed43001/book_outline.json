@@ -1,0 +1,2176 @@
+{
+  "schema_version": 1,
+  "stage": "book_outline",
+  "topic": "courage",
+  "persona_id": "millennial_women_professionals",
+  "locale": "en-US",
+  "runtime_format": "standard_book",
+  "book_idea": "recognition_before_action",
+  "book_motif": "The Edge (cliff and and and step)",
+  "enrichment_strategy_profile": "practical_credible",
+  "brand_accent_profile": "minimal_accent",
+  "enhancement_contract_v21": {
+    "schema_version": "2.1.0",
+    "truth_label": "research_informed_working_priors",
+    "surface_taxonomy": {
+      "chapter_engine": [
+        "VALIDATION_NORMALIZATION",
+        "MECHANISM_EXPLANATION",
+        "PRACTICE_APPLICATION",
+        "TROUBLESHOOTING",
+        "TRANSITION_GLUE",
+        "CLOSING_TAKEAWAY",
+        "PROPULSION"
+      ],
+      "proof_and_embodiment": [
+        "HOOK_STORY",
+        "EXTERNAL_STORY",
+        "AUTHOR_DISCLOSURE",
+        "CASE_STUDY",
+        "CITED_EVIDENCE"
+      ],
+      "optional_accents": [
+        "QUOTE",
+        "ENCOURAGEMENT",
+        "REFLECTION_QUESTION",
+        "AUTHOR_COMMENTARY",
+        "WISDOM_ESSENCE"
+      ],
+      "cohesion_and_craft": [
+        "CALLBACK_PLANT",
+        "CALLBACK_RETURN",
+        "MOTIF",
+        "ANALOGY",
+        "METAPHOR",
+        "BRIDGE",
+        "TRANSITION"
+      ]
+    },
+    "count_units": {
+      "QUOTE": "borrowed_authority_block",
+      "ENCOURAGEMENT": "substantial_encouragement_block",
+      "REFLECTION_QUESTION": "standalone_reflection_prompt",
+      "AUTHOR_COMMENTARY": "substantial_interpretive_commentary_block",
+      "WISDOM_ESSENCE": "distilled_wisdom_block",
+      "CITED_EVIDENCE": "evidence_block",
+      "EXTERNAL_STORY": "substantial_vignette",
+      "AUTHOR_DISCLOSURE": "substantial_first_person_disclosure",
+      "ANALOGY": "major_explanatory_analogy",
+      "METAPHOR": "developed_or_recurring_metaphor",
+      "CALLBACK_RETURN": "meaningful_motif_return"
+    },
+    "tracked_surfaces": [
+      {
+        "surface": "QUOTE",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "borrowed_authority_block",
+        "preferred_positions": [
+          "before_HOOK",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "ENCOURAGEMENT",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_encouragement_block",
+        "preferred_positions": [
+          "after_EXERCISE",
+          "after_turning_point"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "REFLECTION_QUESTION",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "standalone_reflection_prompt",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "AUTHOR_COMMENTARY",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_interpretive_commentary_block",
+        "preferred_positions": [
+          "after_PIVOT",
+          "after_EXERCISE",
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "WISDOM_ESSENCE",
+        "bucket": "optional_accents",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "distilled_wisdom_block",
+        "preferred_positions": [
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "TROUBLESHOOTING",
+        "bucket": "chapter_engine",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "tracked_surface",
+        "preferred_positions": [
+          "after_INTEGRATION"
+        ],
+        "disallowed_positions": [
+          "before_HOOK",
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "planner_tracking_mode": "tracked_surface_only"
+      },
+      {
+        "surface": "CITED_EVIDENCE",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "evidence_block",
+        "preferred_positions": [
+          "after_HOOK",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "EXTERNAL_STORY",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_vignette",
+        "preferred_positions": [
+          "after_HOOK",
+          "after_REFLECTION",
+          "before_STORY"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "planner_counted"
+      },
+      {
+        "surface": "AUTHOR_DISCLOSURE",
+        "bucket": "proof_and_embodiment",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "substantial_first_person_disclosure",
+        "preferred_positions": [
+          "after_PIVOT",
+          "after_REFLECTION",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "tracked_surface_only"
+      },
+      {
+        "surface": "ANALOGY",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "major_explanatory_analogy",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      },
+      {
+        "surface": "METAPHOR",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "developed_or_recurring_metaphor",
+        "preferred_positions": [],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      },
+      {
+        "surface": "CALLBACK_RETURN",
+        "bucket": "cohesion_and_craft",
+        "requested": 0,
+        "assigned": 0,
+        "count_unit": "meaningful_motif_return",
+        "preferred_positions": [
+          "after_PIVOT",
+          "before_THREAD"
+        ],
+        "disallowed_positions": [],
+        "planner_tracking_mode": "downstream_audit_only"
+      }
+    ],
+    "optional_accent_budget": {
+      "prior_source": "ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13",
+      "memo_trade_book_chapters": 12,
+      "memo_target_accent_chapters": {
+        "min": 5,
+        "max": 7
+      },
+      "memo_hard_max_accent_chapters": 8,
+      "memo_target_total_accents": {
+        "min": 7,
+        "max": 9
+      },
+      "memo_hard_max_total_accents": 10,
+      "memo_max_accents_per_chapter": 2,
+      "memo_accent_free_chapters_minimum": 4,
+      "target_accent_chapters": {
+        "min": 5,
+        "max": 7
+      },
+      "hard_max_accent_chapters": 8,
+      "target_total_accents": {
+        "min": 7,
+        "max": 9
+      },
+      "hard_max_total_accents": 10,
+      "max_accents_per_chapter": 2,
+      "accent_free_chapters_minimum": 4,
+      "chapter_share_rounding": "ceil",
+      "ceiling_interpretation": "Class-level maxima are ceilings, not instructions to maximize every optional accent class simultaneously.",
+      "class_hard_maxima": {},
+      "actual": {
+        "assigned_total_optional_accents": 0,
+        "optional_assignment_counts": {},
+        "chapters_with_optional_accents": [],
+        "optional_accent_chapter_count": 0,
+        "accent_free_chapter_count": 12,
+        "per_chapter_optional_counts": {}
+      }
+    },
+    "optional_accent_integrity": {
+      "status": "PASS",
+      "hard_failures": [],
+      "warnings": [
+        {
+          "code": "supported_budget_underfill",
+          "detail": "assigned optional accents are below target range"
+        },
+        {
+          "code": "optional_accent_chapter_under_target",
+          "detail": "optional-accent chapters are below target range"
+        }
+      ]
+    },
+    "phase_strategy": {
+      "story_mix_profile": "practical_credible",
+      "chapter_phase_order": [
+        "problem",
+        "history",
+        "knowledge",
+        "action",
+        "maintenance"
+      ],
+      "phase_weights_by_class": {
+        "REFLECTION_QUESTION": {
+          "early": 6,
+          "mid": 10,
+          "late": 14
+        },
+        "TROUBLESHOOTING": {
+          "early": 4,
+          "mid": 8,
+          "late": 12
+        },
+        "QUOTE": {
+          "early": 14,
+          "mid": 8,
+          "late": 12
+        },
+        "ENCOURAGEMENT": {
+          "early": 6,
+          "mid": 10,
+          "late": 8
+        },
+        "CITED_EVIDENCE": {
+          "early": 12,
+          "mid": 10,
+          "late": 6
+        },
+        "EXTERNAL_STORY": {
+          "early": 8,
+          "mid": 10,
+          "late": 10
+        },
+        "WISDOM_ESSENCE": {
+          "early": 6,
+          "mid": 10,
+          "late": 12
+        },
+        "AUTHOR_COMMENTARY": {
+          "early": 6,
+          "mid": 10,
+          "late": 10
+        },
+        "AUTHOR_DISCLOSURE": {
+          "early": 10,
+          "mid": 8,
+          "late": 6
+        }
+      },
+      "role_weights_by_class": {
+        "REFLECTION_QUESTION": {
+          "recognition": 4,
+          "reframe": 2,
+          "integration": 2
+        },
+        "TROUBLESHOOTING": {
+          "practice": 3,
+          "integration": 4,
+          "application": 3
+        },
+        "CITED_EVIDENCE": {
+          "recognition": 3,
+          "reframe": 3,
+          "understand": 2
+        },
+        "EXTERNAL_STORY": {
+          "recognition": 3,
+          "reframe": 3,
+          "turn": 2
+        },
+        "ENCOURAGEMENT": {
+          "practice": 3,
+          "integration": 3,
+          "repair": 2
+        }
+      },
+      "anxiety_flagship_mode": "profile_default"
+    },
+    "tracking_notes": [
+      "TROUBLESHOOTING, CITED_EVIDENCE, and EXTERNAL_STORY are tracked outside the optional-accent bucket.",
+      "AUTHOR_DISCLOSURE is distinct from AUTHOR_COMMENTARY even when no authored disclosure bank is present.",
+      "ANALOGY, METAPHOR, and callback return surfaces are counted downstream from slots/hooks and audits, not from optional accent budgets."
+    ]
+  },
+  "chapter_count": 12,
+  "chapters": [
+    {
+      "number": 1,
+      "role": "recognition",
+      "working_title": "The Thing You're Not Doing",
+      "thesis": "You know what it is. You have known for a while. There is a specific thing — a project, a conversation, a risk, a version of your life — that you are not doing, and you know you are not doing it. This chapter names that specific structure: not the general category of avoidance, but the precise form it takes when you know exactly what you want and cannot make yourself go toward it.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": false,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_DEFINITION",
+        "STORY",
+        "REFLECTION",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION",
+        "DEPTH_RECOGNITION_DEPTH",
+        "DEPTH_STORY_SCENE",
+        "DEPTH_PERSONA_SPECIFICITY",
+        "DEPTH_RECOGNITION_DEPTH",
+        "DEPTH_STORY_SCENE",
+        "DEPTH_PERSONA_SPECIFICITY"
+      ],
+      "angle": {
+        "definition_ids": [
+          "angle_def_tpl:INVISIBLE_THRESHOLD"
+        ],
+        "callback_ids": [],
+        "has_definition": true,
+        "has_callback": false,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_DEFINITION",
+            "plant_id": "INVISIBLE_THRESHOLD",
+            "return_function": "",
+            "semantic_development": "initial_angle_plant"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_DEFINITION",
+          "plant_id": "INVISIBLE_THRESHOLD",
+          "return_function": "",
+          "semantic_development": "initial_angle_plant"
+        }
+      ],
+      "enrichment_hooks": [
+        "teacher_voice",
+        "recognition_depth",
+        "story_scene",
+        "persona_specificity"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": false,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": false
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_PLANT"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": false,
+        "slot_count": 0,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine",
+        "depth_module:recognition_depth:persona_atom",
+        "depth_module:story_scene:persona_atom",
+        "depth_module:persona_specificity:persona_atom"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v04"
+        },
+        {
+          "slot_type": "ANGLE_DEFINITION",
+          "source": "angle_template",
+          "source_id": "angle_def_tpl:INVISIBLE_THRESHOLD"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_0:recognition:false_alarm:v03"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v11"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "STORY v19"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v06"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v03"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "STORY v07"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v17"
+        }
+      ],
+      "total_words": 2699
+    },
+    {
+      "number": 2,
+      "role": "somatic_legitimacy",
+      "working_title": "Your Body Is Treating Your Goal Like a Threat",
+      "thesis": "The alarm that fires when you move toward the thing you want is real. It is not weakness, not cowardice, not evidence that you don't really want it. Your body has a mechanism for detecting novelty, visibility, and reversibility-if-wrong — and it treats those features as threat signals. Your goal has all three features. The alarm is not broken. It is working exactly as it was designed to work. The problem is that it cannot distinguish between a predator and a first draft.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L1"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L1",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L1",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "persona_alarm_behavior",
+        "story_vividness",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v03"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L1"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:recognition:false_alarm:v04"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v08"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_1:mechanism_proof:false_alarm:v04"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v32"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v06"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v03"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v13"
+        }
+      ],
+      "total_words": 1550
+    },
+    {
+      "number": 3,
+      "role": "mechanism",
+      "working_title": "The Alarm Was Wrong About the Cost",
+      "thesis": "The false alarm on action does not just produce fear — it produces a chain of prediction. If I do this, then X happens, then Y happens from X, then the whole thing collapses. Each link in the chain feels logical. The chain itself is the mechanism, not the prediction. The spiral is the body's way of making the alarm feel rational. The disaster at the end of the chain is real in the body. It has not happened.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L2",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L2",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v23"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:recognition:false_alarm:v01"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v10"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HARDSHIP:story_2:mechanism_proof:false_alarm:v02"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v28"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v02"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v06"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v16"
+        }
+      ],
+      "total_words": 1682
+    },
+    {
+      "number": 4,
+      "role": "destabilization",
+      "working_title": "Waiting for the Fear to Pass Is the Wrong Strategy",
+      "thesis": "The fear will not pass before you act. Not because you are particularly anxious or underprepared, but because the alarm on novel, visible action does not resolve through preparation or time. It resolves through experience. And the experience requires the action. The strategy of waiting for the fear to pass is structurally designed to never complete.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L2",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L2",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v16"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:recognition:false_alarm:v02"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v04"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_0:mechanism_proof:false_alarm:v01"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v30"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v12"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "STORY v18"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v09"
+        }
+      ],
+      "total_words": 1655
+    },
+    {
+      "number": 5,
+      "role": "practical_interruption",
+      "working_title": "The Smallest Possible Version",
+      "thesis": "You do not start with the full version of the thing. You start with the smallest version that is genuinely the thing — not a simulation, not a preparation, but the real thing at its smallest possible scale. The alarm will fire. You act anyway. The alarm running while you act is not a sign you did it wrong. It is the definition of what you are doing.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L2",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L2",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 2,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v05"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L2"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:recognition:false_alarm:v02"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v09"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:mechanism_proof:false_alarm:v03"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v05"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v07"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_1:turning_point:false_alarm:v02"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v08"
+        }
+      ],
+      "total_words": 1598
+    },
+    {
+      "number": 6,
+      "role": "cost_exposure",
+      "working_title": "The Accumulation of Not-Doing",
+      "thesis": "Not acting has had costs. Not the dramatic costs of missed opportunities — those are visible. The more significant cost is the accumulated weight of being in the preparation loop: the low-level expenditure of managing the gap between what you are doing and what you want to be doing, the effect of that gap on how you see yourself, the relationships and opportunities that have quietly closed while you were getting ready.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION",
+        "DEPTH_MECHANISM_DEPTH",
+        "DEPTH_MECHANISM_DEPTH"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L3"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L3",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L3",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "somatic_exercise",
+        "teacher_voice",
+        "mechanism_depth"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine",
+        "depth_module:mechanism_depth:persona_atom"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v10"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:recognition:false_alarm:v03"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v01"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HELP:story_2:mechanism_proof:false_alarm:v04"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v02"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v05"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v04"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v25"
+        }
+      ],
+      "total_words": 1686
+    },
+    {
+      "number": 7,
+      "role": "hidden_belief",
+      "working_title": "Readiness Is a Feeling I'll Have When I'm Ready",
+      "thesis": "Underneath the preparation loop is a belief about the nature of readiness: that it is a feeling you will have once you have done enough preparation, and that the feeling, when it arrives, will make action natural and unscary. This belief is not malicious. It is also structurally false — because readiness in this context is not a feeling that precedes action but an experience that follows it.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L3"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L3",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L3",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v19"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L3"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:recognition:false_alarm:v01"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v17"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_0:mechanism_proof:false_alarm:v02"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v13"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v03"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "STORY v11"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v24"
+        }
+      ],
+      "total_words": 1572
+    },
+    {
+      "number": 8,
+      "role": "relational_consequence",
+      "working_title": "What Not-Doing Has Done to Your Relationships",
+      "thesis": "The thing you're not doing has not stayed inside you. It affects how you show up in relationships — the low-level expenditure of managing the gap, the way it makes certain conversations difficult, the identity you have been presenting to the people who know you are working toward something. And it affects your relationship with yourself — the specific quality of being someone who has promised themselves something for a long time.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION",
+        "DEPTH_MECHANISM_DEPTH",
+        "DEPTH_MECHANISM_DEPTH"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L4",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L4",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "somatic_exercise",
+        "teacher_voice",
+        "mechanism_depth"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine",
+        "depth_module:mechanism_depth:persona_atom"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v27"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:recognition:false_alarm:v04"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v22"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_1:mechanism_proof:false_alarm:v01"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v08"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v13"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v05"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v07"
+        }
+      ],
+      "total_words": 1666
+    },
+    {
+      "number": 9,
+      "role": "practice_under_pressure",
+      "working_title": "The Most Personal Version",
+      "thesis": "There is a version of the action that scares you most. Not the version that requires the most skill — the version that is most personally exposed. Where your specific anxiety is greatest, where visibility shame is loudest, where the spiral's catastrophe is most precisely targeted at something you actually care about. This chapter goes there — not because suffering is the goal, but because avoiding the most personal version is exactly how the preparation loop re-establishes itself after the initial action.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L4",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L4",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 2,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v01"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:recognition:false_alarm:v03"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v08"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:mechanism_proof:false_alarm:v04"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v10"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v02"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HEALING:story_2:embodiment:false_alarm:v03"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v11"
+        }
+      ],
+      "total_words": 1580
+    },
+    {
+      "number": 10,
+      "role": "reframe",
+      "working_title": "The Alarm Was Wrong About the Cost",
+      "thesis": "The alarm predicted a specific disaster. The disaster was the logic of the spiral — the chain of bad outcomes that felt inevitable from inside the alarm. Now you have done the thing. The disaster did not happen, or it happened differently than predicted, or the version of it that happened was survivable in a way the alarm did not communicate. The alarm was wrong about the cost. That is information about the alarm's reliability as a forecasting mechanism.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L4",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L4",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v24"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L4"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:recognition:false_alarm:v04"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v15"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_0:mechanism_proof:false_alarm:v01"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v09"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v26"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v02"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v23"
+        }
+      ],
+      "total_words": 1510
+    },
+    {
+      "number": 11,
+      "role": "self_relation_shift",
+      "working_title": "From Waiting to Acting",
+      "thesis": "There is a specific difference in how you relate to yourself before and after you have done the thing with the alarm running. Not a permanent character shift — a specific change in the record. You are now someone who has acted before the all-clear arrived. That is a different record than you had before. The difference is not about what you feel but about what you have done.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": true,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "EXERCISE",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L5"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L5",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L5",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "persona_alarm_behavior",
+        "somatic_exercise",
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": true,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [
+          "PRACTICE_APPLICATION"
+        ],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": true,
+        "slot_count": 1,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v20"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:recognition:false_alarm:v02"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v27"
+        },
+        {
+          "slot_type": "EXERCISE",
+          "source": "persona_atom",
+          "source_id": "EXERCISE v07"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_1:mechanism_proof:false_alarm:v03"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v01"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v04"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "STORY v12"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v20"
+        }
+      ],
+      "total_words": 1548
+    },
+    {
+      "number": 12,
+      "role": "integration",
+      "working_title": "Acting Before Certainty: What This Makes Possible",
+      "thesis": "The thing you were not doing is no longer the only version of the future available to you. You have acted before the all-clear arrived. You have survived the alarm. You have a record that includes both the alarm and the action. The practice of acting before certainty is not a single event — it is a capacity you have begun to develop, and it will be called on again. This chapter names what it makes possible.",
+      "core_slots": {
+        "HOOK": true,
+        "SCENE": false,
+        "STORY": true,
+        "PIVOT": false,
+        "REFLECTION": true,
+        "EXERCISE": false,
+        "TAKEAWAY": false,
+        "INTEGRATION": true,
+        "THREAD": false
+      },
+      "slot_types_landed": [
+        "HOOK",
+        "ANGLE_CALLBACK",
+        "STORY",
+        "REFLECTION",
+        "STORY",
+        "TEACHER_DOCTRINE",
+        "REFLECTION",
+        "STORY",
+        "INTEGRATION"
+      ],
+      "angle": {
+        "definition_ids": [],
+        "callback_ids": [
+          "angle_cb_tpl:INVISIBLE_THRESHOLD:L5"
+        ],
+        "has_definition": false,
+        "has_callback": true,
+        "callback_semantics": [
+          {
+            "slot_type": "ANGLE_CALLBACK",
+            "plant_id": "INVISIBLE_THRESHOLD:L5",
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation"
+          }
+        ]
+      },
+      "callback_semantics": [
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "plant_id": "INVISIBLE_THRESHOLD:L5",
+          "return_function": "angle_callback",
+          "semantic_development": "later_chapter_reactivation"
+        }
+      ],
+      "enrichment_hooks": [
+        "teacher_voice"
+      ],
+      "enrichment_families": {
+        "metaphor": false,
+        "analogy": false,
+        "parable_or_external_story": false,
+        "exercise": false,
+        "encouragement": false,
+        "wisdom": false,
+        "callback": true
+      },
+      "v21_surface_groups": {
+        "chapter_engine": [],
+        "proof_and_embodiment": [
+          "HOOK_STORY"
+        ],
+        "optional_accents": [],
+        "cohesion_and_craft": [
+          "CALLBACK_RETURN"
+        ]
+      },
+      "accents": [],
+      "exercise": {
+        "present": false,
+        "slot_count": 0,
+        "journey_exercise_ids": []
+      },
+      "story": {
+        "story_slot": true,
+        "story_slot_count": 3,
+        "external_story_accents": [],
+        "present": true
+      },
+      "source_provenance": [
+        "persona_atom",
+        "angle_template",
+        "story_plan",
+        "composite_doctrine"
+      ],
+      "section_packet_rows": [
+        {
+          "slot_type": "HOOK",
+          "source": "persona_atom",
+          "source_id": "HOOK v12"
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:INVISIBLE_THRESHOLD:L5"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "story_plan",
+          "source_id": "story_plan:HOPE:story_2:recognition:false_alarm:v01"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v14"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v01"
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "source": "composite_doctrine",
+          "source_id": "COMPOSITE_DOCTRINE v11"
+        },
+        {
+          "slot_type": "REFLECTION",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v09"
+        },
+        {
+          "slot_type": "STORY",
+          "source": "persona_atom",
+          "source_id": "MECHANISM_PROOF v05"
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "source": "persona_atom",
+          "source_id": "INTEGRATION v06"
+        }
+      ],
+      "total_words": 1675
+    }
+  ]
+}

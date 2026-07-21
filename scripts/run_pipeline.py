@@ -2665,6 +2665,76 @@ def _run_spine_pipeline_mode(
             )
             else "PASS"
         )
+
+        # --- Lane 04 (book-acceptance-stamp, 2026-07-21 bestseller-atom-flow
+        # pack): compute the deterministic acceptance_layer for this render.
+        # Extends Lane 01's book_acceptance_stamp.json additively (never
+        # overwrites its research_fit_bound finding) and stamps the same
+        # verdict into quality_summary.json below. See
+        # phoenix_v4/quality/acceptance_layer.py for the scorecard-floor
+        # citations and the never-auto-assign contract for Layer 3/4 —
+        # system_working / bestseller_register are NEVER set here; they can
+        # only be surfaced when an already-logged human review / blind-10
+        # record is explicitly passed in, which this render-time call site
+        # never has, by construction.
+        try:
+            from scripts.ci.check_book_story_authored import classify_research_fit
+            from phoenix_v4.quality.acceptance_layer import compute_acceptance_layer
+
+            _rf_bound, _rf_unbound_reason = classify_research_fit(enriched.enrichment_audit or {})
+            _rf_payload_raw = (enriched.enrichment_audit or {}).get("research_fit")
+            _rf_payload = _rf_payload_raw if isinstance(_rf_payload_raw, dict) else {}
+            _book_idea_or_motif_present = bool(
+                _rf_payload.get("motif_ledger")
+                or _rf_payload.get("book_phases")
+                or _rf_payload.get("spine_pins")
+            )
+            _acceptance_result = compute_acceptance_layer(
+                book_txt_exists=book_path.is_file(),
+                layer1_gate_statuses={
+                    "chapter_flow": _chapter_flow_status,
+                    "register_gate": _register_status,
+                    "book_pass": _book_pass_status,
+                    "ei_v2": _ei_status,
+                    "transformation_arc": _transform_status,
+                    "book_quality_gate": str((_bq_frag or {}).get("status") or "SKIPPED"),
+                },
+                bestseller_craft_score=_craft_overall,
+                research_fit_bound=_rf_bound,
+                research_fit_unbound_reason=_rf_unbound_reason,
+                book_idea_or_motif_present=_book_idea_or_motif_present,
+                # mechanism_called: no such field is wired into
+                # enrichment_audit.json/quality_summary.json anywhere in this
+                # repo today (grep-verified 2026-07-21). None correctly caps
+                # the result at structurally_clear rather than inventing a
+                # count — see phoenix_v4/quality/acceptance_layer.py docstring.
+                mechanism_called=None,
+            )
+            _acceptance_payload = _acceptance_result.to_dict()
+        except Exception as _acc_err:
+            print(f"Acceptance-layer stamp: WARN — {_acc_err}", file=sys.stderr)
+            _acceptance_payload = {
+                "acceptance_layer": None,
+                "reasons": [f"acceptance-layer computation errored: {_acc_err}"],
+                "error": True,
+            }
+
+        _stamp_path = render_dir / "book_acceptance_stamp.json"
+        _stamp_payload: dict[str, Any] = {}
+        if _stamp_path.is_file():
+            try:
+                _existing_stamp = json.loads(_stamp_path.read_text(encoding="utf-8"))
+                if isinstance(_existing_stamp, dict):
+                    _stamp_payload = _existing_stamp
+            except (json.JSONDecodeError, OSError):
+                _stamp_payload = {}
+        _stamp_payload.update(_acceptance_payload)
+        _stamp_path.write_text(
+            json.dumps(_stamp_payload, indent=2, sort_keys=True, default=str) + "\n",
+            encoding="utf-8",
+        )
+        print(f"Book acceptance stamp: {_stamp_path} -> {_acceptance_payload.get('acceptance_layer')}")
+
         _qs_path = render_dir / "quality_summary.json"
         _qs_payload = {
             "source": "spine_pipeline",
@@ -2717,6 +2787,7 @@ def _run_spine_pipeline_mode(
             },
             "quality_gate_failures": sorted(_quality_fail_set),
             "overall_status": _overall_status,
+            "acceptance_layer": _acceptance_payload,
             "book_quality_gate": _bq_frag,
             "pre_depth_total_words": pre_depth_words,
             "post_depth_total_words": post_depth_words,

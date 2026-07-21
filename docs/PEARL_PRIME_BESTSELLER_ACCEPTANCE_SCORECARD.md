@@ -55,6 +55,8 @@ These are the structural floor. Failing any one of these means the render did no
 **If Layer 1 passes:** the book is `structurally clear`. Proceed to Layer 2.
 **If Layer 1 fails:** the verdict is `path works` (if `book.txt` exists) OR `path broken` (if pipeline halted earlier). Route the failure to the specific gate's lane (atom authoring / gate tuning / renderer fix).
 
+**Research-fit binding cap (2026-07-21):** a book whose `enrichment_audit.json` has unbound `research_fit` — empty `{}`, or `mode: skipped` with `skip_reason` containing `no_story_atoms` — is capped at Layer 1 (`structurally clear` / `acceptance_layer: structurally_clear_only`) regardless of other Layer 1 gates passing. Detected by `scripts/ci/check_book_story_authored.py` (advisory; mirrors manga `check_manga_story_authored.py`). It is not a Layer 2/3/4 signal and must not be reported as `authored candidate`, `system working`, or `bestseller register` until a real story_atoms bank binds. Hard-blocking render on unbound research_fit is an operator-tier threshold (`--strict`); default remains advisory.
+
 ### Layer 2 — Advisory craft review (machine-assisted)
 
 Run after Layer 1 passes. These produce signals, not blockers — but ≥2 WARNs across this layer should escalate to Layer 3 with explicit operator decision.

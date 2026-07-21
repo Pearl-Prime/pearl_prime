@@ -1,0 +1,129 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "courage",
+  "persona_id": "millennial_women_professionals",
+  "teacher_id": "",
+  "runtime_format": "standard_book",
+  "book_plan_id": "generated_courage_millennial_women_professionals_standard_book",
+  "quality_profile": "production",
+  "gates_run": true,
+  "gates_hard": true,
+  "gates": {
+    "chapter_flow": {
+      "status": "PASS",
+      "report": "chapter_flow_report.json"
+    },
+    "register_gate": {
+      "status": "FAIL",
+      "verdict": "HARD_FAIL",
+      "failure_counts_by_id": {
+        "F2": 1,
+        "F13": 5
+      },
+      "report": "register_gate_report.json"
+    },
+    "bestseller_craft": {
+      "status": "PASS",
+      "overall_score": 0.5247
+    },
+    "ei_v2": {
+      "status": "PASS",
+      "composite": 0.6952,
+      "report": "ei_v2_report.json"
+    },
+    "editorial": {
+      "status": "WARN",
+      "report": "editorial_report.json"
+    },
+    "memorable_lines": {
+      "status": "WARN",
+      "chapters_with_two_or_more_quotable_lines": 7,
+      "chapter_count": 12,
+      "report": "memorable_line_report.json"
+    },
+    "transformation_arc": {
+      "status": "PASS",
+      "report": "transformation_heatmap.json"
+    },
+    "book_pass": {
+      "status": "PASS",
+      "report": "book_pass_report.json"
+    }
+  },
+  "quality_gate_failures": [
+    "register_gate"
+  ],
+  "overall_status": "FAIL",
+  "acceptance_layer": {
+    "acceptance_layer": "path_works",
+    "reasons": [
+      "Layer 1 gate(s) not PASS: book_quality_gate, register_gate",
+      "bestseller_craft overall_score 0.5247 < floor 0.55 (scorecard line 50, Layer 1 hard gate)"
+    ],
+    "layer1_pass": false,
+    "layer2_pass": false,
+    "layer3_pass": null,
+    "layer4_pass": null,
+    "research_fit_bound": false
+  },
+  "book_quality_gate": {
+    "release_band": "Pass",
+    "report_path": "/tmp/courage_smoke_43001/book_quality_report.json",
+    "fail_reasons": [],
+    "hold_reasons": []
+  },
+  "pre_depth_total_words": 18919,
+  "post_depth_total_words": 20421,
+  "frame": "somatic_first",
+  "governance_report": {
+    "exercise_slots_dropped": [],
+    "exercise_slot_contract_violations": [],
+    "chapter_contract_warnings": [
+      "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+    ],
+    "frame_governance_chapters": [],
+    "frame_softened_sentences": [],
+    "frame_stripped_sentences": [],
+    "frame_hard_fail_reasons": [],
+    "recurrence_report": [
+      "reduced 8-gram (count 4\u21923): What the voice is not protecting is your"
+    ],
+    "whole_book_dedupe_notes": [
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_f1_signature_dedupe: removed re-stamp \"Speaking up means you're not the easy one anymore. Your shoulders already know p\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 4) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Standing up means potentially standing alone. Your feet hesitate. The fear of is'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 5) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 6) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 7) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Renata sees the launch date slipping the moment she opens the sprint board. Two '",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'The migration runs three weeks later exactly the way Devi expected, without the '",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 8) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Devi is in the architecture review when the senior director walks through a migr'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Three weeks later Alina is in the renewal call and the same finance lead cuts th'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 9) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Priya sees the internal call for panelists for the leadership offsite land in he'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 10) \"Stand in your car. Feel your feet on the floor. You're here. You're solid. You'r\"",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Your boundary is reasonable. Your hands still shake when you enforce it. The fea'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'You asked for what you needed. Your jaw tightened immediately after. The guilt o'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Alina is on the client call when the finance lead pushes back on the proposal fe'"
+    ],
+    "spine_deprescribe_signals": [
+      {
+        "action": "injector_disabled",
+        "reason": "G1-residual: deprescribe one-line filler disabled on spine; surplus prescribed-action paragraphs dropped, not replaced. PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable."
+      }
+    ]
+  },
+  "exercise_slots_dropped": [],
+  "chapter_contract_warnings": [
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": [
+    "reduced 8-gram (count 4\u21923): What the voice is not protecting is your"
+  ]
+}
