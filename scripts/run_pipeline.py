@@ -3130,6 +3130,19 @@ def main() -> int:
         _home_brand = resolve_brand_for_teacher(requested_teacher)
         if _home_brand:
             brand_id = _home_brand
+
+    # Music-mode auto-detect (MUSIC-MODE-BRAND-INTEGRATION-V1-01 §4): a brand_id that is
+    # registered + active in config/music/music_brand_registry.yaml auto-resolves
+    # music_mode/musician_id from the registry so an operator never has to pass
+    # --music-mode/--musician-id by hand for a music-mode brand. Explicit CLI flags always
+    # win (never overridden); a non-music (e.g. Path X) brand_id is a pure no-op.
+    from scripts.catalog.music_mode_branch import apply_auto_detected_music_args
+    args.music_mode, args.musician_id = apply_auto_detected_music_args(
+        brand_id,
+        explicit_music_mode=getattr(args, "music_mode", None),
+        explicit_musician_id=getattr(args, "musician_id", None),
+        repo_root=REPO_ROOT,
+    )
     if teacher_id and teacher_id != "default_teacher":
         from phoenix_v4.planning.teacher_matrix import load_teacher_matrix, validate_teacher_assignment
         matrix = load_teacher_matrix()
