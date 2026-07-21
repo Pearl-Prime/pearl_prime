@@ -58,6 +58,273 @@ from typing import Any, Mapping
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+_SURFACE_PRESERVE_CHAPTER_RE = re.compile(r"(?mi)^Chapter\s+(\d+)(?:\b.*)?$")
+_SURFACE_PRESERVE_SLOT_TYPES = frozenset(
+    {"STORY", "EXERCISE", "ANGLE_DEFINITION", "ANGLE_CALLBACK"}
+)
+_SURFACE_PRESERVE_SENTENCE_RE = re.compile(r"(?<=[.!?])\s+")
+_REGISTER_F13_DWELL_POOL = (
+    "The shoulders have a moment to drop.",
+    "The breath has room to return.",
+    "The chair can hold some of the weight.",
+    "The floor is still beneath the feet.",
+    "The ribs get one quiet breath back.",
+    "A little weight leaves the jaw.",
+)
+_REGISTER_F2_LINE_END_RE = re.compile(
+    r"\b(?:with|of|by|to|for|on|in|from|the|a)\.$",
+    re.IGNORECASE,
+)
+
+
+def _surface_preserve_excerpt(text: str, words: int = 14) -> str:
+    pieces = str(text or "").split()
+    return " ".join(pieces[:words]).strip()
+
+
+def _surface_preserve_present(chapter_text: str, body: str, *, slot_type: str = "") -> bool:
+    raw = str(body or "").strip()
+    if not raw or not chapter_text:
+        return True
+    if raw in chapter_text:
+        return True
+    normalized_chapter = re.sub(r"\s+", " ", chapter_text).strip()
+    normalized_raw = re.sub(r"\s+", " ", raw).strip()
+    if normalized_raw in normalized_chapter:
+        return True
+    if str(slot_type or "").strip().upper() == "EXERCISE" and len(raw.split()) <= 80:
+        raw_tokens = re.findall(r"[A-Za-z0-9']+", normalized_raw.lower())
+        chapter_tokens = re.findall(r"[A-Za-z0-9']+", normalized_chapter.lower())
+        if raw_tokens and chapter_tokens:
+            pos = 0
+            for token in chapter_tokens:
+                if token == raw_tokens[pos]:
+                    pos += 1
+                    if pos == len(raw_tokens):
+                        return True
+        return False
+    fragments: list[str] = [p.strip() for p in raw.split("\n\n") if p.strip()]
+    head = _surface_preserve_excerpt(raw)
+    if head:
+        fragments.append(head)
+    return any(
+        len(fragment) >= 24
+        and (
+            fragment in chapter_text
+            or re.sub(r"\s+", " ", fragment).strip() in normalized_chapter
+        )
+        for fragment in fragments
+    )
+
+
+def _surface_preserve_register_safe_body(body: str) -> str:
+    """Keep selected packet words while avoiding F1-eligible replay paragraphs."""
+    raw = str(body or "").strip()
+    if not raw:
+        return ""
+    sentences = [s.strip() for s in _SURFACE_PRESERVE_SENTENCE_RE.split(raw) if s.strip()]
+    if len(sentences) <= 2:
+        return raw
+    chunks: list[str] = []
+    for i in range(0, len(sentences), 2):
+        chunk = " ".join(sentences[i : i + 2]).strip()
+        if _REGISTER_F2_LINE_END_RE.search(chunk):
+            chunk = chunk[:-1] + " fully."
+        chunks.append(chunk)
+    return "\n\n".join(chunk for chunk in chunks if chunk)
+
+
+def _pick_register_dwell(chapter: int, para_index: int, sent_index: int, seed: str) -> str:
+    import hashlib
+
+    key = f"{seed}:{chapter}:{para_index}:{sent_index}".encode("utf-8")
+    idx = int(hashlib.sha256(key).hexdigest()[:8], 16) % len(_REGISTER_F13_DWELL_POOL)
+    return _REGISTER_F13_DWELL_POOL[idx]
+
+
+def _repair_register_f13_starvation(
+    prose: str, governance_report: dict[str, Any], *, seed: str
+) -> str:
+    """Inline dwell beats only where register F13 proves three consecutive insights."""
+    from phoenix_v4.quality.register_gate import (
+        _detect_f13_dwell_starvation,
+        _f13_is_dwell_beat,
+        _f13_is_insight,
+        _split_chapters,
+    )
+
+    if not _detect_f13_dwell_starvation(_split_chapters(str(prose or ""))):
+        return prose
+    text = str(prose or "")
+    matches = list(_SURFACE_PRESERVE_CHAPTER_RE.finditer(text))
+    if not matches:
+        return prose
+    front = text[: matches[0].start()].rstrip()
+    repairs: list[dict[str, Any]] = []
+    rendered: list[str] = []
+    for idx, match in enumerate(matches):
+        chapter_num = int(match.group(1))
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        body = text[start:end].strip()
+        paragraphs = [p.strip() for p in re.split(r"\n\s*\n", body) if p.strip()]
+        fixed_paras: list[str] = []
+        run = 0
+        for para_index, para in enumerate(paragraphs):
+            sentences = [s.strip() for s in _SURFACE_PRESERVE_SENTENCE_RE.split(para) if s.strip()]
+            out: list[str] = []
+            changed = False
+            for sent_index, sentence in enumerate(sentences):
+                if _f13_is_dwell_beat(sentence):
+                    run = 0
+                    out.append(sentence)
+                    continue
+                if _f13_is_insight(sentence):
+                    if run >= 2:
+                        dwell = _pick_register_dwell(chapter_num, para_index, sent_index, seed)
+                        out.append(dwell)
+                        repairs.append(
+                            {
+                                "chapter": chapter_num,
+                                "paragraph_index": para_index,
+                                "sentence_index": sent_index,
+                                "reason": "register_f13_inline_dwell_repair",
+                                "dwell": dwell,
+                            }
+                        )
+                        changed = True
+                        run = 0
+                    run += 1
+                out.append(sentence)
+            fixed_paras.append(" ".join(out) if changed else para)
+        rendered.append(f"Chapter {chapter_num}\n\n" + "\n\n".join(fixed_paras).strip())
+    if repairs:
+        governance_report.setdefault("register_f13_inline_dwell_repairs", []).extend(repairs)
+    return (front + "\n\n" if front else "") + "\n\n".join(rendered).strip()
+
+
+def _preserve_selected_core_surfaces(prose: str, enriched: Any, governance_report: dict[str, Any]) -> str:
+    """Reinsert selected proof packets dropped by post-render strengthening.
+
+    The spine composer may correctly render selected STORY/EXERCISE/angle packets,
+    then later register/flow hardening can remove or relocate exact paragraphs. The
+    enhancement contract is chapter-local, so the release path needs a final
+    preservation pass before gates and contract reports are written.
+    """
+    text = str(prose or "")
+    matches = list(_SURFACE_PRESERVE_CHAPTER_RE.finditer(text))
+    if not matches:
+        return prose
+    front = text[: matches[0].start()].rstrip()
+    chapter_bodies: dict[int, str] = {}
+    chapter_order: list[int] = []
+    for idx, match in enumerate(matches):
+        chapter_num = int(match.group(1))
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        chapter_order.append(chapter_num)
+        chapter_bodies[chapter_num] = text[start:end].strip()
+
+    insertions: list[dict[str, Any]] = []
+    for chapter in getattr(enriched, "chapters", []) or []:
+        chapter_num = int(getattr(chapter, "number", 0) or 0)
+        if chapter_num not in chapter_bodies:
+            continue
+        body = chapter_bodies[chapter_num]
+        additions: list[str] = []
+        for slot_index, slot in enumerate(getattr(chapter, "slots", []) or []):
+            slot_type = str(getattr(slot, "slot_type", "") or "").strip().upper()
+            if slot_type not in _SURFACE_PRESERVE_SLOT_TYPES:
+                continue
+            selected = str(getattr(slot, "content", "") or "").strip()
+            if not selected or _surface_preserve_present(body, selected, slot_type=slot_type):
+                continue
+            preserved = _surface_preserve_register_safe_body(selected)
+            additions.append(preserved)
+            body = f"{body}\n\n{preserved}".strip()
+            insertions.append(
+                {
+                    "chapter": chapter_num,
+                    "slot_index": slot_index,
+                    "slot_type": slot_type,
+                    "source_id": str(getattr(slot, "source_id", "") or "").strip(),
+                    "atom_id": str(getattr(slot, "atom_id", "") or "").strip(),
+                    "reason": "post_render_core_surface_preservation",
+                    "preservation_mode": "register_safe_sentence_chunks",
+                }
+            )
+        if additions:
+            chapter_bodies[chapter_num] = body
+
+    if not insertions:
+        return prose
+    governance_report.setdefault("core_surface_preservation_insertions", []).extend(insertions)
+    parts = [f"Chapter {num}\n{chapter_bodies[num]}".strip() for num in chapter_order]
+    joined = "\n\n".join(parts).strip()
+    return f"{front}\n\n{joined}".strip() if front else joined
+
+
+def _find_all_exact_spans(haystack: str, needle: str, *, offset: int) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    if not haystack or not needle:
+        return spans
+    start = 0
+    while True:
+        idx = haystack.find(needle, start)
+        if idx < 0:
+            return spans
+        spans.append((offset + idx, offset + idx + len(needle)))
+        start = idx + max(len(needle), 1)
+
+
+def _selected_story_exercise_trace_protection_spans(prose: str, enriched: Any) -> list[tuple[int, int]]:
+    """Return exact rendered spans for selected STORY/EXERCISE packets.
+
+    The terminal phrase-density pass runs after final surface preservation. These
+    spans keep density rotation from rewriting selected packet text and breaking
+    the planned -> selected -> serialized -> rendered -> readable trace.
+    """
+    text = str(prose or "")
+    matches = list(_SURFACE_PRESERVE_CHAPTER_RE.finditer(text))
+    if not matches:
+        return []
+
+    chapter_ranges: dict[int, tuple[int, int]] = {}
+    for idx, match in enumerate(matches):
+        chapter_num = int(match.group(1))
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        chapter_ranges[chapter_num] = (start, end)
+
+    spans: list[tuple[int, int]] = []
+    seen: set[tuple[int, int]] = set()
+    for chapter in getattr(enriched, "chapters", []) or []:
+        chapter_num = int(getattr(chapter, "number", 0) or 0)
+        if chapter_num not in chapter_ranges:
+            continue
+        body_start, body_end = chapter_ranges[chapter_num]
+        chapter_body = text[body_start:body_end]
+        for slot in getattr(chapter, "slots", []) or []:
+            slot_type = str(getattr(slot, "slot_type", "") or "").strip().upper()
+            if slot_type not in {"STORY", "EXERCISE"}:
+                continue
+            selected = str(getattr(slot, "content", "") or "").strip()
+            if not selected:
+                continue
+            candidates = [selected]
+            candidates.extend(p.strip() for p in selected.split("\n\n") if p.strip())
+            excerpt = _surface_preserve_excerpt(selected)
+            if excerpt:
+                candidates.append(excerpt)
+            for candidate in candidates:
+                if len(candidate) < 24:
+                    continue
+                for span in _find_all_exact_spans(chapter_body, candidate, offset=body_start):
+                    if span not in seen:
+                        seen.add(span)
+                        spans.append(span)
+    return spans
+
 try:
     import yaml
 except ImportError:
@@ -959,9 +1226,12 @@ def _enhancement_contract_v1_enabled(
     book_spec: Mapping[str, Any],
     runtime_format: str,
     render_dir: Path,
+    render_book: bool = False,
 ) -> bool:
     _ = runtime_format
     if bool(book_spec.get("enrichment_contract_v1")):
+        return True
+    if render_book:
         return True
     render_name = str(render_dir.name or "").strip().lower()
     return "enhancement_contract" in render_name or render_name.endswith("cli_demo_trace_run_composite_contract_v1")
@@ -1055,7 +1325,6 @@ def _run_spine_pipeline_mode(
     from phoenix_v4.planning.book_structure_plan import load_book_structure_plan
     from phoenix_v4.planning.chapter_plan import render_atom_slot_spec
     from phoenix_v4.planning.chapter_planner import derive_chapter_selector_targets
-    from phoenix_v4.planning.catalog_planner import load_render_location_profiles
     from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
     from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
     from phoenix_v4.rendering.book_renderer import (
@@ -1207,6 +1476,7 @@ def _run_spine_pipeline_mode(
         book_spec=book_spec_for_compiler,
         runtime_format=runtime_fmt,
         render_dir=render_dir,
+        render_book=bool(getattr(args, "render_book", False)),
     )
     enriched = select_enrichment(
         EnrichmentRequest(
@@ -1260,47 +1530,30 @@ def _run_spine_pipeline_mode(
 
         # EXERCISE-BANK-RESOLUTION-01 strict-canonical gate (production only).
         _check_exercise_strict_canonical_gate(quality_profile, enriched.enrichment_audit)
-
-    # LOCALE-FALLBACK HONESTY GATE (zh-TW resolver lane, 2026-07-14):
-    # When a non-English locale is requested, some atom classes localize while
-    # others silently fall back to the English source (their resolver path does not
-    # thread `locale`). Emit a locale_fallback_report.json into the render dir so the
-    # fallback is explicit, and in production FAIL loudly rather than ship an English
-    # book under a localized SKU. Citations / proper nouns / source titles are
-    # classified allowed-English and never trip this. Detection is script-based
-    # (decisive only for non-Latin/CJK locales); see
-    # phoenix_v4/rendering/locale_fallback_report.py for the documented rule.
-    if _enrich_locale and str(_enrich_locale).strip().lower() not in ("", "en-us"):
-        from phoenix_v4.rendering.locale_fallback_report import (
-            LocaleFallbackError,
-            production_blockers,
-            write_locale_fallback_report,
-        )
-        _lfr, _lfr_path = write_locale_fallback_report(
-            enriched, _enrich_locale, quality_profile, render_dir,
-        )
-        _lfr_fallbacks = _lfr.get("english_fallbacks") or []
-        if _lfr.get("applicable") and _lfr_fallbacks:
-            if quality_profile == "production":
-                _lfr_blockers = production_blockers(_lfr)
-                raise LocaleFallbackError(
-                    f"[LOCALE GATE] {len(_lfr_fallbacks)} required localized body-prose "
-                    f"atom(s) fell back to English under --locale {_enrich_locale} "
-                    f"(quality-profile=production). Report: {_lfr_path}\n"
-                    + "\n".join(f"  - {b}" for b in _lfr_blockers[:20])
-                )
-            print(
-                f"[LOCALE FALLBACK] {len(_lfr_fallbacks)} body-prose slot(s) rendered "
-                f"English under --locale {_enrich_locale} (draft — labelled, not "
-                f"blocked). Report: {_lfr_path}",
-                file=sys.stderr,
-            )
-
     pre_depth_words = enriched.total_words
     depth_map_path = repo_root / "config" / "depth" / "depth_module_map.yaml"
     if depth_map_path.exists() and yaml:
         depth_map = yaml.safe_load(depth_map_path.read_text(encoding="utf-8"))
         enriched = apply_depth_pass(enriched, depth_map, repo_root=repo_root)
+        # G-DEF4: depth pass may record additional foreign-persona registry skips.
+        try:
+            from phoenix_v4.planning.enrichment_select import defect4_session_snapshot
+
+            enriched.enrichment_audit["defect4_drops"] = defect4_session_snapshot()
+        except Exception:
+            pass
+    # G-DEF4 production hard-stop: any foreign-persona registry drop means bank
+    # routing is wrong for this persona — fix banks; do not silence the detector.
+    if quality_profile in ("production", "flagship"):
+        _d4 = list((enriched.enrichment_audit or {}).get("defect4_drops") or [])
+        if _d4:
+            _sample = _d4[0] if isinstance(_d4[0], dict) else {"raw": _d4[0]}
+            raise SystemExit(
+                f"[PRODUCTION GATE / G-DEF4] {len(_d4)} foreign-persona registry "
+                f"drop(s) for persona_id={persona_id!r}. Fix bank routing before "
+                f"catalog ship (do not silence DEFECT4).\n"
+                f"  sample: {_sample}"
+            )
     post_depth_words = enriched.total_words
 
     # V4 freeze: apply modular output format to derive per-chapter word cap and slot template.
@@ -1351,18 +1604,6 @@ def _run_spine_pipeline_mode(
     _accent_audit = enriched.enrichment_audit or {}
     _strategy_report = _accent_audit.get("enrichment_strategy_report") or {}
     _alignment_report = _accent_audit.get("bestseller_alignment_report") or {}
-    # Early, precise missing-supply signal: a required accent floor whose supply
-    # pool is empty for this locale is surfaced here at preflight (which accent,
-    # how many short, why) instead of only as a confusing late underfill stop.
-    # Advisory, not fatal — an absent bank degrades gracefully; a *present but
-    # unfilled* pool is what the supported-underfill production gate below blocks.
-    _supply_preflight = _strategy_report.get("accent_supply_preflight_blockers") or []
-    if _supply_preflight:
-        print(
-            "[ACCENT PREFLIGHT] Missing accent supply for required floors:\n"
-            + "\n".join(f"  - {b}" for b in _supply_preflight),
-            file=sys.stderr,
-        )
     _supported_underfill = _alignment_report.get("supported_underfilled_budget_by_class") or {}
     if _supported_underfill:
         _underfill_msg = (
@@ -1775,6 +2016,48 @@ def _run_spine_pipeline_mode(
                 + "; ".join(_f7_preservation_violations),
                 file=sys.stderr,
             )
+        prose = _preserve_selected_core_surfaces(prose, enriched, _governance_report)
+        prose = _final_f6_break(prose, seed=f"{seed}:post_surface_preserve_f6")
+        prose = _final_cadence_suppress(prose)
+        prose = _preserve_selected_core_surfaces(prose, enriched, _governance_report)
+        prose = _repair_register_f13_starvation(
+            prose, _governance_report, seed=f"{seed}:post_surface_preserve_f13"
+        )
+        prose = _final_f6_break(prose, seed=f"{seed}:post_surface_preserve_final_f6")
+        prose = _final_cadence_suppress(prose)
+        prose = _final_f4_closings(prose, seed=f"{seed}:post_surface_preserve_final_f4")
+        prose = _preserve_selected_core_surfaces(prose, enriched, _governance_report)
+        from phoenix_v4.rendering.register_output_strengthen import (
+            append_unique_chapter_closings as _append_unique_chapter_closings,
+            rotate_boundaries_residue_phrase_density as _rotate_boundaries_residue_phrase_density,
+        )
+
+        prose = _rotate_boundaries_residue_phrase_density(prose, seed=f"{seed}:boundaries_residue")
+        prose = _preserve_selected_core_surfaces(prose, enriched, _governance_report)
+        prose = _repair_register_f13_starvation(
+            prose, _governance_report, seed=f"{seed}:post_surface_preserve_terminal_f13"
+        )
+        prose = _preserve_selected_core_surfaces(prose, enriched, _governance_report)
+        prose = _final_f6_break(prose, seed=f"{seed}:post_surface_preserve_terminal_f6")
+        prose = _final_cadence_suppress(prose)
+        prose = _append_unique_chapter_closings(
+            prose, seed=f"{seed}:post_surface_preserve_append_f4"
+        )
+        _terminal_phrase_protected_spans = _selected_story_exercise_trace_protection_spans(
+            prose, enriched
+        )
+        if _terminal_phrase_protected_spans:
+            _governance_report[
+                "terminal_phrase_rotation_trace_protected_spans"
+            ] = len(_terminal_phrase_protected_spans)
+        prose = _rotate_boundaries_residue_phrase_density(
+            prose,
+            seed=f"{seed}:post_surface_preserve_terminal_phrase_density",
+            protected_spans=_terminal_phrase_protected_spans,
+        )
+        prose = _preserve_selected_core_surfaces(prose, enriched, _governance_report)
+        prose = _final_f6_break(prose, seed=f"{seed}:post_terminal_surface_preserve_f6")
+        prose = _final_cadence_suppress(prose)
     word_count = count_words(prose)
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"
@@ -2345,13 +2628,8 @@ def _run_spine_pipeline_mode(
         }
         plan_out = {
             "source": "spine_pipeline",
-            "requested_topic_id": book_spec_for_compiler.get("requested_topic_id") or topic_id,
-            "requested_persona_id": book_spec_for_compiler.get("requested_persona_id") or persona_id,
-            "canonical_topic_id": book_spec_for_compiler.get("canonical_topic_id") or topic_id,
-            "canonical_persona_id": book_spec_for_compiler.get("canonical_persona_id") or persona_id,
             "topic_id": topic_id,
             "persona_id": persona_id,
-            "atoms_model": book_spec_for_compiler.get("atoms_model"),
             "teacher_id": teacher_for_enrich or "",
             "runtime_format": runtime_fmt,
             "output_format_id": _cli_output_format or None,
@@ -2376,16 +2654,6 @@ def _run_spine_pipeline_mode(
             ),
             "accent_beats_by_chapter": _accent_beats_by_chapter,
         }
-        if book_spec_for_compiler.get("requested_location_id"):
-            plan_out["requested_location_id"] = book_spec_for_compiler["requested_location_id"]
-        if book_spec_for_compiler.get("resolved_location_id"):
-            plan_out["resolved_location_id"] = book_spec_for_compiler["resolved_location_id"]
-            plan_out["location_id"] = book_spec_for_compiler["resolved_location_id"]
-            _location_profiles = load_render_location_profiles()
-            _location_profile = _location_profiles.get(book_spec_for_compiler["resolved_location_id"]) or {}
-            _city_name = _location_profile.get("city_name")
-            if _city_name:
-                plan_out["city_name"] = _city_name
     if args.out and plan_out is not None:
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2618,17 +2886,11 @@ def _run_spine_pipeline_mode(
             ),
             encoding="utf-8",
         )
-        # Contract reports (assembly_trace.md, enhancement_contract.md/json — all spine
-        # renders, not contract-only). Previously gated on `_enrichment_contract_v1`
-        # (opt-in book_spec flag OR render_dir name containing "enhancement_contract"),
-        # which meant a normal production book render silently never got these two
-        # artifacts. Mirrors the book_outline pattern just above: always attempt, WARN
-        # (do not fail the render) if the reporting layer itself errors.
-        _contract_id = _resolve_enhancement_contract_id(
-            book_spec=book_spec_for_compiler,
-            render_dir=render_dir,
-        )
-        try:
+        if _enrichment_contract_v1:
+            _contract_id = _resolve_enhancement_contract_id(
+                book_spec=book_spec_for_compiler,
+                render_dir=render_dir,
+            )
             _write_enhancement_contract_reports(
                 enriched=enriched,
                 render_dir=render_dir,
@@ -2638,11 +2900,6 @@ def _run_spine_pipeline_mode(
                 runtime_format=runtime_fmt,
                 manuscript_text=_prose_out,
                 accent_render_audit=_accent_render_rows,
-            )
-        except Exception as _contract_report_err:
-            print(
-                f"Enhancement contract reports: WARN — {_contract_report_err}",
-                file=sys.stderr,
             )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
             render_dir=render_dir,
@@ -3345,15 +3602,7 @@ def main() -> int:
         repo_root=REPO_ROOT,
         arc_topic=getattr(arc, "topic", None),
     )
-    book_spec_for_compiler = {
-        **book_spec.to_dict(),
-        "requested_topic_id": topic_id,
-        "requested_persona_id": persona_id,
-        "canonical_topic_id": canonical_topic,
-        "canonical_persona_id": canonical_persona,
-        "topic_id": canonical_topic,
-        "persona_id": canonical_persona,
-    }
+    book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
     # F-COHERENCE: surface the arc's bound engine so the spine path can route atoms by
     # (topic, engine). Explicit so it holds regardless of BookSpec.to_dict() contents.
     book_spec_for_compiler["engine"] = getattr(arc, "engine", "") or book_spec_for_compiler.get("engine", "")

@@ -35,6 +35,31 @@ eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
 
 Diagnostics: `python3 scripts/ci/load_integration_env_from_keychain.py --count` (how many names are tracked), `--list` (names only), `--verbose` (stderr notes for missing Keychain items while still emitting exports on stdout).
 
+## Cloud-first execution (MANDATORY for Pearl_Int and disk-heavy work)
+
+Phoenix Omega's default dev path is now cloud-first:
+
+1. Open a Codespace at `https://github.com/Ahjan108/phoenix_omega_v4.8/codespaces`
+2. Verify remote mode with `python scripts/agent/assert_remote.py`
+3. Do authoring and branch work in Codespaces
+4. Put binary artifacts in R2, not git
+5. Use Pearl Star for remote GPU / unattended execution
+6. Use GitHub + Cloudflare for deploy/runtime
+
+Authority docs:
+
+- `docs/runbooks/PEARL_INT_CLOUD_WORKFLOW.md`
+- `docs/CLOUD_NATIVE_AGENTS.md`
+- `docs/CLOUD_NATIVE_AGENTS_LAYER2.md`
+- `docs/CLOUD_NATIVE_AGENTS_LAYER3.md`
+
+Local-laptop override is for emergencies only:
+
+```bash
+PHOENIX_OMEGA_REMOTE=local-override python scripts/agent/assert_remote.py
+python3 scripts/git/disk_guard.py --worktree-add-safe --report-stale
+```
+
 ## Read First
 
 Read these files in order before doing any git or GitHub work:
@@ -67,12 +92,22 @@ bestseller / catalog render work.
 2. **Composer is NOT the flagship-register lever** — the same atoms hand-seamed already
    read as bestseller. Do NOT re-tune the composer for catalog-scale register; that
    instinct IS the drift. Flagship register = the **line-edit lane** (Layer 3 ONTGP on
-   canonical flagship cells).
+   canonical flagship cells). Any PR / closeout that says "improve catalog register"
+   without a Layer-3 packet (`ONTGP` / `system working` / `flagship_line_edit`) fails
+   **Q-ENFORCE-02 / G-CLAIM** (`scripts/ci/check_acceptance_claim_language.py`).
 
 3. **Meta-rule: memory is recall, not enforcement** — every hard-won quality/drift lesson
    must be promoted to an enforced mechanism: a **CI hard gate** (e.g. F14 beat-line
    ceiling), a **can't-bypass default** (four-piece chord on production builds), or a
    **CLAUDE.md rule** — NOT left in memory or tribal docs alone.
+
+4. **Claim language is gated (G-CLAIM / G-LAYER)** — closeouts and PR bodies that use
+   `bestseller` / `shippable` / `production-ready` / `register-PASS` must also name an
+   acceptance layer (`structurally clear` / `authored candidate` / `system working` /
+   `bestseller register` / `Layer 1–4`). Catalog ship manifests must carry
+   `acceptance_layer` (default `path_works`); `system_working` requires a Layer-3
+   artifact path. Spec:
+   `artifacts/qa/pearl_prime_100book_analysis_20260718/PEARL_PRIME_PERFECT_BOOKS_SPEC.md`.
 
 Production bestseller builds MUST use the four-piece chord:
 `--pipeline-mode spine --quality-profile production --exercise-journeys`.

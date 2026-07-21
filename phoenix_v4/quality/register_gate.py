@@ -33,13 +33,21 @@ F14: beat-line-share ceiling → HARD_FAIL when the share of short standalone in
      render (35.0% beat-lines → FAIL) and its hand-seam-written FINAL (2.8% → PASS); cutoff 0.25.
      Kill-switch: REGISTER_GATE_F14_BEATLINE=0 (or quality_profile="draft") disables it.
      Per docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.md.
+F15: Book Engine Policy V1 visible-repetition gate (policy-applicable cells only). Cleared
+     exercise-wrapper phrases FAIL on production when hard_gate_cleared_scaffolds; high-level
+     scaffold reuse WARNs unless hard_gate_repetition is enabled.
+F16: Exercise-wrapper spam across chapters (G-WRAP). HARD_FAIL on production/flagship when
+     the same cleared wrapper stem (e.g. "now we are going to shift") appears in ≥
+     F16_WRAPPER_CHAPTER_LIMIT distinct chapters. Catalog-ship visible-machinery detector;
+     always-on for production-like profiles (not limited to book_engine_policy smoke cells).
 
 Verdicts:
   PASS         — 0 FAIL, 0 WARN
   ADVISORY     — 0 FAIL, ≤ 2 WARN
   WARN         — 0 FAIL, ≥ 3 WARN
   FAIL         — ≥ 1 FAIL
-  HARD_FAIL    — any F2 violation (renderer artifact; never ship) OR F14 beat-line ceiling breach
+  HARD_FAIL    — any F2 violation (renderer artifact; never ship) OR F14 beat-line ceiling
+                 breach OR F16 wrapper-spam (≥N chapters)
 """
 from __future__ import annotations
 
@@ -1558,6 +1566,159 @@ def _aggregate_verdict(findings: list[RegisterFinding]) -> str:
     return "WARN"
 
 
+def _detect_f15_book_engine_repetition(
+    book_text: str,
+    *,
+    persona_id: str = "",
+    topic_id: str = "",
+    quality_profile: str = "production",
+) -> list[RegisterFinding]:
+    """F15: Book Engine Policy V1 visible-repetition + cleared-scaffold gate.
+
+    Uses config/publishing/book_engine_policy_v1.yaml thresholds and
+    scripts/qa/check_book_engine_repetition.py phrase list. Cleared exercise
+    wrappers hard-fail on production when policy.hard_gate_cleared_scaffolds.
+    High-level scaffold reuse is WARN unless hard_gate_repetition is true.
+    """
+    try:
+        from phoenix_v4.planning.book_engine_policy import (
+            CLEARED_EXERCISE_WRAPPER_PHRASES,
+            VISIBLE_SCAFFOLD_PHRASES,
+            load_book_engine_policy,
+            policy_applies_to,
+            repetition_thresholds,
+            validator_profile,
+        )
+    except Exception:  # noqa: BLE001
+        return []
+
+    try:
+        policy = load_book_engine_policy()
+    except Exception:  # noqa: BLE001
+        return []
+
+    if not policy_applies_to(policy, persona_id=persona_id, topic_id=topic_id):
+        return []
+
+    profile = validator_profile(policy)
+    enabled = {str(g) for g in (profile.get("enabled_gates") or [])}
+    if "visible_repetition" not in enabled and "cleared_exercise_wrappers" not in enabled:
+        return []
+
+    thresholds = repetition_thresholds(policy)
+    phrase_limit = int(thresholds.get("scaffold_phrase") or thresholds.get("exact_phrase") or 3)
+    hard_rep = bool(profile.get("hard_gate_repetition")) and quality_profile == "production"
+    hard_cleared = bool(profile.get("hard_gate_cleared_scaffolds")) and quality_profile == "production"
+    lowered = (book_text or "").lower()
+    findings: list[RegisterFinding] = []
+
+    if "cleared_exercise_wrappers" in enabled:
+        for phrase in CLEARED_EXERCISE_WRAPPER_PHRASES:
+            count = lowered.count(phrase)
+            if count <= 0:
+                continue
+            severity = "FAIL" if hard_cleared else "WARN"
+            findings.append(
+                RegisterFinding(
+                    failure_id="F15",
+                    severity=severity,
+                    chapter=None,
+                    summary=(
+                        f"cleared exercise-wrapper scaffold returned: "
+                        f"'{phrase}' count={count} (limit 0)"
+                    ),
+                    evidence={"phrase": phrase, "count": count, "limit": 0, "class": "cleared_wrapper"},
+                )
+            )
+
+    if "visible_repetition" in enabled:
+        for phrase in VISIBLE_SCAFFOLD_PHRASES:
+            count = lowered.count(phrase)
+            if count <= phrase_limit:
+                continue
+            severity = "FAIL" if hard_rep else "WARN"
+            findings.append(
+                RegisterFinding(
+                    failure_id="F15",
+                    severity=severity,
+                    chapter=None,
+                    summary=(
+                        f"book-engine scaffold phrase reuse: '{phrase}' "
+                        f"count={count} > limit={phrase_limit}"
+                    ),
+                    evidence={
+                        "phrase": phrase,
+                        "count": count,
+                        "limit": phrase_limit,
+                        "class": "visible_scaffold",
+                    },
+                )
+            )
+    return findings
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# F16 — Exercise-wrapper spam across chapters (G-WRAP)
+# ─────────────────────────────────────────────────────────────────────────────
+
+F16_WRAPPER_CHAPTER_LIMIT = 4  # same stem in ≥N chapters → HARD_FAIL on production
+
+
+def _detect_f16_exercise_wrapper_spam(
+    chapters: list[tuple[int, str]],
+    *,
+    quality_profile: str = "production",
+) -> list[RegisterFinding]:
+    """G-WRAP: HARD_FAIL when a cleared wrapper stem lands in ≥4 chapters.
+
+    Always-on for production/flagship. Draft/debug stay advisory WARN so local
+    experiments are not blocked. Kill-switch: REGISTER_GATE_F16_WRAP=0.
+    """
+    import os
+
+    flag = (os.environ.get("REGISTER_GATE_F16_WRAP") or "").strip().lower()
+    if flag in ("0", "false", "off", "no"):
+        return []
+
+    try:
+        from phoenix_v4.planning.book_engine_policy import CLEARED_EXERCISE_WRAPPER_PHRASES
+    except Exception:  # noqa: BLE001
+        return []
+
+    production_like = quality_profile in ("production", "flagship")
+    findings: list[RegisterFinding] = []
+    for phrase in CLEARED_EXERCISE_WRAPPER_PHRASES:
+        stem = (phrase or "").strip().lower()
+        if not stem:
+            continue
+        hit_chapters: list[int] = []
+        for ch_num, ch_text in chapters:
+            if stem in (ch_text or "").lower():
+                hit_chapters.append(ch_num)
+        if len(hit_chapters) < F16_WRAPPER_CHAPTER_LIMIT:
+            continue
+        severity = "HARD_FAIL" if production_like else "WARN"
+        findings.append(
+            RegisterFinding(
+                failure_id="F16",
+                severity=severity,
+                chapter=None,
+                summary=(
+                    f"exercise-wrapper stem '{stem}' appears in "
+                    f"{len(hit_chapters)} chapters {hit_chapters} "
+                    f"(G-WRAP limit {F16_WRAPPER_CHAPTER_LIMIT})"
+                ),
+                evidence={
+                    "phrase": stem,
+                    "chapters": hit_chapters,
+                    "limit": F16_WRAPPER_CHAPTER_LIMIT,
+                    "class": "wrapper_spam",
+                },
+            )
+        )
+    return findings
+
+
 def _route_suggested_lanes(findings: list[RegisterFinding]) -> list[str]:
     by_failure: dict[str, set[str]] = {}
     routing = {
@@ -1572,6 +1733,8 @@ def _route_suggested_lanes(findings: list[RegisterFinding]) -> list[str]:
         "F12": "Pearl_Dev (route teacher/science register through teacher_wrapper / science_wrapper per BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01) + Pearl_Editor (re-attribute the raw shift; shares D12 VoiceOutOfZoneError vocab)",
         "F13": "Pearl_Editor + Pearl_Writer (re-pace per §7.3 dwell contract — insert a dwell beat after each named insight; §13 criterion #13)",
         "F14": "Pearl_Dev (composer scaffolding — stop emitting standalone one-line beats between atoms; fold them into neighbor paragraphs or disable the injector on the spine path per #4566/G1)",
+        "F15": "Pearl_Prime / Pearl_Editor (Book Engine Policy V1 — vary chapter scaffold phrases; keep cleared exercise wrappers at zero)",
+        "F16": "Pearl_Editor (vary exercise wrapper stems per chapter; G-WRAP — never reuse the same cleared stem across ≥4 chapters)",
     }
     seen: set[str] = set()
     lanes: list[str] = []
@@ -1630,6 +1793,16 @@ def evaluate_register(
     findings += _detect_f13_dwell_starvation(chapters)
     if _f14_enabled(quality_profile):
         findings += _detect_f14_beat_line_share(chapters)
+    findings += _detect_f15_book_engine_repetition(
+        book_text,
+        persona_id=persona_id,
+        topic_id=topic_id,
+        quality_profile=quality_profile,
+    )
+    findings += _detect_f16_exercise_wrapper_spam(
+        chapters,
+        quality_profile=quality_profile,
+    )
     if hook_atoms:
         if f11_all_variations:
             findings += _detect_f11_hook_abstract_opening_all_variations(hook_atoms)
@@ -1648,6 +1821,7 @@ def evaluate_register(
         "quality_profile": quality_profile,
         "spec_version": "1.0.0",
         "f8_deferred": "anchor_corpus_required",
+        "f15_book_engine_policy": True,
     }
     if hook_atoms is not None:
         book_metrics["f11_hook_atoms_checked"] = len(hook_atoms)
