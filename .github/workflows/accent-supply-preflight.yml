@@ -1,0 +1,49 @@
+# G-ACCENT — weekly accent-fill preflight matrix (ops-cadence, fail-closed).
+#
+# Per PEARL_PRIME_PERFECT_BOOKS_SPEC.md #3.B G-ACCENT row: "Production already
+# blocks; add preflight matrix job that fails weekly if top-N catalog cells have
+# no_supply_pool for budgeted accents." Catalog planning signal, NOT a per-PR
+# blocker — drift-detectors.yml runs this same script in report-only mode on
+# every PR; this workflow is the fail-closed weekly cadence job.
+name: Accent supply preflight (G-ACCENT weekly)
+
+on:
+  workflow_dispatch:
+    inputs:
+      top_n:
+        description: "Top-N catalog cells (by MATRIX.tsv index) to check"
+        required: true
+        default: "20"
+      brand_id:
+        description: "Brand id to resolve accent budgets against"
+        required: true
+        default: "stillness_press"
+  schedule:
+    # Every Monday at 07:00 UTC
+    - cron: "0 7 * * 1"
+
+jobs:
+  accent-supply-preflight:
+    name: Accent supply preflight matrix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run G-ACCENT preflight matrix (fail-closed)
+        run: |
+          PYTHONPATH=. python3 scripts/ci/check_accent_supply_preflight.py \
+            --top-n "${{ inputs.top_n || '20' }}" \
+            --brand-id "${{ inputs.brand_id || 'stillness_press' }}" \
+            --fail-closed
+
+      - name: Upload preflight report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accent-supply-preflight-report
+          path: artifacts/qa/accent_supply_preflight/ACCENT_SUPPLY_PREFLIGHT.json
+          if-no-files-found: ignore
