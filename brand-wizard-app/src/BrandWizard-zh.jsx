@@ -1,6 +1,12 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
-import { appendBrandAssignmentToYAML, brandAssignmentPayload, matchBrand } from "./brandMatch.js";
+import {
+  appendBrandAssignmentToYAML,
+  brandAssignmentPayload,
+  matchBrand,
+  musicBrandIdFromState,
+  buildMusicianReflectionsYAML,
+} from "./brandMatch.js";
 import { classifyOnboardingSubmitFailure, parseHybridOfferMessage } from "./hybridOffer.js";
 import { resolveSeededMarket } from "./markets.js";
 import { HybridOfferPanel } from "./onboarding/HybridOfferPanel.jsx";
@@ -3309,11 +3315,27 @@ function Step11Launch({ state, update, i18n = {} }) {
 // YAML GENERATOR
 // ═══════════════════════════════════════════════════════════
 
-function generateYAML(state) {
+export function generateYAML(state) {
   const san = (s) => (s || "").replace(/<[^>]*>/g, "").replace(/https?:\/\/\S+/g, "").replace(/[<>"'`]/g, "").substring(0, 500).trim();
+  const ts = new Date().toISOString().split("T")[0];
+
+  // MUSIC-MODE-BRAND-INTEGRATION-V1-01 §2/§AMENDMENT-2026-05-09 Q2: mirrors the same
+  // branch in BrandWizard.jsx for parity across locales. This locale has no music-mode
+  // UX wiring yet (no isMusicMode / step-4 survey pane / state.mode default), so
+  // state.mode is never actually "music" today — dead but forward-safe, and keeps the
+  // non-music path below byte-identical (early-return only fires for mode === "music").
+  if (state.mode === "music") {
+    const c = state.contact || {};
+    const brandId = musicBrandIdFromState(state);
+    let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration — Music Mode\n\n`;
+    y += `mode: music\nbrand_id: "${san(brandId)}"\n\n`;
+    y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
+    y += buildMusicianReflectionsYAML(state.musicianSurvey, san);
+    return y;
+  }
+
   const proven = PROVEN[state.archetype] || PROVEN.nervous_system;
   const c = state.contact || {};
-  const ts = new Date().toISOString().split("T")[0];
 
   // Read teacher selection set by teacher_select.html before wizard launch
   let teacherMode = null;

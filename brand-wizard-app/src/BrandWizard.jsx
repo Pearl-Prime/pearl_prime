@@ -1,6 +1,12 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
-import { appendBrandAssignmentToYAML, brandAssignmentPayload, matchBrand } from "./brandMatch.js";
+import {
+  appendBrandAssignmentToYAML,
+  brandAssignmentPayload,
+  matchBrand,
+  musicBrandIdFromState,
+  buildMusicianReflectionsYAML,
+} from "./brandMatch.js";
 import { classifyOnboardingSubmitFailure, parseHybridOfferMessage } from "./hybridOffer.js";
 import { resolveSeededMarket } from "./markets.js";
 import { HybridOfferPanel } from "./onboarding/HybridOfferPanel.jsx";
@@ -3319,11 +3325,25 @@ function Step11Launch({ state, update, i18n = {} }) {
 // YAML GENERATOR
 // ═══════════════════════════════════════════════════════════
 
-function generateYAML(state) {
+export function generateYAML(state) {
   const san = (s) => (s || "").replace(/<[^>]*>/g, "").replace(/https?:\/\/\S+/g, "").replace(/[<>"'`]/g, "").substring(0, 500).trim();
+  const ts = new Date().toISOString().split("T")[0];
+
+  // MUSIC-MODE-BRAND-INTEGRATION-V1-01 §2/§AMENDMENT-2026-05-09 Q2: a music-mode signup
+  // emits its own YAML shape (mode/brand_id/musician_reflections) instead of the
+  // book/teacher shape below. Early-return keeps the non-music path below byte-identical.
+  if (state.mode === "music") {
+    const c = state.contact || {};
+    const brandId = musicBrandIdFromState(state);
+    let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration — Music Mode\n\n`;
+    y += `mode: music\nbrand_id: "${san(brandId)}"\n\n`;
+    y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
+    y += buildMusicianReflectionsYAML(state.musicianSurvey, san);
+    return y;
+  }
+
   const proven = PROVEN[state.archetype] || PROVEN.nervous_system;
   const c = state.contact || {};
-  const ts = new Date().toISOString().split("T")[0];
 
   // Read teacher selection set by teacher_select.html before wizard launch
   let teacherMode = null;
@@ -3718,6 +3738,22 @@ export default function BrandWizard() {
     if (seededMarket) {
       update({ onboardingMarket: seededMarket });
       try { localStorage.setItem("phoenix_onboarding_market", seededMarket); } catch (_) {}
+    }
+    if (urlMode === "music") {
+      // musician_reflections_survey.html persists completed answers to localStorage
+      // (phoenix_musician_reflections) then redirects here with ?mode=music — pick them
+      // up into state so generateYAML/matchBrand see real survey data, not {}. Without
+      // this, state.mode never actually becomes "music" and the isMusicMode branches
+      // above (step-4 pane swap, canNext gating) are permanently unreachable.
+      let musicianSurvey = {};
+      try {
+        const raw = localStorage.getItem("phoenix_musician_reflections");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object" && parsed.reflections) musicianSurvey = parsed.reflections;
+        }
+      } catch (_) {}
+      update({ mode: "music", musicianSurvey });
     }
     if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);

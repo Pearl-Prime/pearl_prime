@@ -80,6 +80,120 @@ function yamlSafe(s) {
   return String(s == null ? "" : s).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
 
+// ═══════════════════════════════════════════════════════════
+// MUSIC-MODE-BRAND-INTEGRATION-V1-01 §2 (Q2 brand_id slug rule: <musician_handle>_music)
+//
+// Single source of truth for the musician_handle -> brand_id derivation so matchBrand
+// (client-side preview, below) and generateYAML (wizard YAML emission, duplicated per
+// locale in BrandWizard*.jsx) never disagree about a signup's brand_id.
+// ═══════════════════════════════════════════════════════════
+
+export function slugifyMusicianHandle(value) {
+  return (
+    String(value || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 80) || "musician"
+  );
+}
+
+// state.musicianSurvey is the flat musician_reflections_survey capture (display_name,
+// primary_genre, ...). Falls back to the contact name only if the survey hasn't been
+// filled in yet (defensive — the wizard should not reach step 9 without it).
+export function musicianHandleFromState(state) {
+  state = state || {};
+  const survey = state.musicianSurvey || {};
+  const fromSurvey = String(survey.display_name || survey.musician_handle || "").trim();
+  if (fromSurvey) return slugifyMusicianHandle(fromSurvey);
+  return slugifyMusicianHandle(directorNameFromContact(state.contact));
+}
+
+export function musicBrandIdFromState(state) {
+  return `${musicianHandleFromState(state)}_music`;
+}
+
+// Schema mirrors artifacts/musician_survey/SURVEY_TEMPLATE.yaml verbatim (8 top-level
+// blocks; Q-MSK-FORK-REUSE-01 — no invented fields). Field values are pulled from the
+// flat musician_reflections_survey capture by exact key name; anything the survey didn't
+// collect is emitted as null/[] rather than fabricated.
+const MUSICIAN_REFLECTIONS_SCHEMA = {
+  identity: {
+    display_name: "scalar",
+    years_active: "scalar",
+    primary_genre: "scalar",
+    secondary_genres: "list",
+    primary_instruments: "list",
+    creative_phases: "list",
+  },
+  themes: {
+    primary_themes: "list",
+    avoided_themes: "list",
+    listener_hope_one: "scalar",
+  },
+  voice_craft: {
+    voice_person: "scalar",
+    register: "scalar",
+    pacing: "scalar",
+    signature_devices: "list",
+  },
+  material_for_reflection: {
+    touchstone_tracks: "list",
+    key_collaborators: "scalar",
+    citations_links: "list",
+  },
+  healing_intent: {
+    what_helps_heal: "scalar",
+    listener_responses_to_amplify: "scalar",
+    wellness_framing_rejects: "scalar",
+  },
+  output_preferences_with_lyrics: {
+    lyric_form: "scalar",
+    lyric_length_note: "scalar",
+    explicit_content_ok: "bool",
+    companion_ai_song_consent: "bool",
+  },
+  output_preferences_no_lyrics: {
+    reflection_form: "scalar",
+    reflection_perspective: "scalar",
+  },
+  consent_licensing: {
+    ai_reflections_consent: "bool",
+    usage_restrictions: "scalar",
+    followup_email: "scalar",
+    submitted_date: "scalar",
+    signature: "scalar",
+  },
+};
+
+// Emits the `musician_reflections:` YAML block (2-space indent under `brand_admin:`,
+// matching generateYAML's existing hand-rolled emitter style). `survey` is the flat
+// state.musicianSurvey object; `sanitize` is generateYAML's own `san()` string cleaner
+// so music-mode output goes through the same XSS/PII guard as every other field.
+export function buildMusicianReflectionsYAML(survey, sanitize) {
+  const s = survey || {};
+  const clean = typeof sanitize === "function" ? sanitize : (v) => String(v == null ? "" : v);
+  const scalar = (v) => {
+    if (v === undefined || v === null || v === "") return "null";
+    return `"${yamlSafe(clean(String(v)))}"`;
+  };
+  const bool = (v) => (v === undefined || v === null || v === "" ? "null" : v ? "true" : "false");
+  const list = (v) => {
+    const arr = Array.isArray(v) ? v : v ? [v] : [];
+    return arr.length ? "[" + arr.map((x) => `"${yamlSafe(clean(String(x)))}"`).join(", ") + "]" : "[]";
+  };
+  let out = "  musician_reflections:\n";
+  for (const [block, fields] of Object.entries(MUSICIAN_REFLECTIONS_SCHEMA)) {
+    out += `    ${block}:\n`;
+    for (const [field, kind] of Object.entries(fields)) {
+      const v = s[field];
+      const rendered = kind === "list" ? list(v) : kind === "bool" ? bool(v) : scalar(v);
+      out += `      ${field}: ${rendered}\n`;
+    }
+  }
+  return out;
+}
+
 export function brandAssignmentPayload(match, contact) {
   if (!match || !match.brand_id) return null;
   const name = directorNameFromContact(contact);
@@ -153,6 +267,29 @@ export async function loadBrandIndexWithLiveAssignments() {
 export function matchBrand(state, brands, teacherMode) {
   state = state || {};
   brands = brands || {};
+
+  // MUSIC-MODE-BRAND-INTEGRATION-V1-01 §2 (Q2 brand_id slug rule): a music-mode signup
+  // is NEVER scored against brand_admin_brands.json (the frozen 37/composite imprints)
+  // — it mints a brand_id of its own in the 38+ space. Skip ALL teacher/composite
+  // scoring below entirely for mode === "music"; non-music behavior below this branch
+  // is untouched (byte-identical).
+  if (state.mode === "music") {
+    const handle = musicianHandleFromState(state);
+    const brandId = `${handle}_music`;
+    const musicMarket = norm(state.onboardingMarket || "us");
+    return {
+      brand_id: brandId,
+      publication_corp: brandId,
+      teacher: "",
+      is_teacher: false,
+      lane: LANE_FROM_MARKET[musicMarket] || "en_us",
+      score: 100,
+      basis: `music:new_brand:${handle}`,
+      musician_handle: handle,
+      mode: "music",
+    };
+  }
+
   const market = norm(state.onboardingMarket || "us");
   const laneSuffix = "_" + (LANE_FROM_MARKET[market] || "en_us");
 
