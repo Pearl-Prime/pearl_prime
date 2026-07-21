@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Lane 03 AFTER proof — Brand Director ops routing</title>
+<style>body{font-family:system-ui;background:#0e0a06;color:#faf6f0;padding:24px} pre{background:#1a1410;padding:12px;overflow:auto} .ok{color:#22c55e}</style>
+</head><body>
+<h1 class="ok">AFTER — phantom-books path fixed</h1>
+<p>Scoped brand_id: <strong>optimizer_en_us</strong> (zero real delivery assets)</p>
+<p>Ops URL now: <code>/brand_handoff_dashboard.html?brand=optimizer_en_us</code> (was brand_admin.html with phantom titles:6)</p>
+<h2>ops_url_fix_proof</h2><pre>{
+  "brand_id": "optimizer_en_us",
+  "ops_url": "/brand_handoff_dashboard.html?brand=optimizer_en_us",
+  "roster_row": {
+    "brand_id": "optimizer_en_us",
+    "base_brand": "optimizer",
+    "display_brand": "Daybreak Editions",
+    "lane": "en_US",
+    "teacher": "",
+    "is_teacher": false,
+    "lifecycle": "active",
+    "active": true,
+    "buildable": true,
+    "brand_director_name": "",
+    "brand_director_id": "",
+    "brand_director_status": "unassigned",
+    "assignment_source": "none",
+    "wizard_url": "/wizard.html?brand=optimizer_en_us",
+    "ops_url": "/brand_handoff_dashboard.html?brand=optimizer_en_us",
+    "wizard_access": "available",
+    "ops_access": "available"
+  },
+  "stabilizer_ops_url": "/brand_handoff_dashboard.html?brand=stabilizer_en_us",
+  "note": "AFTER: Ops deep-link targets brand_handoff_dashboard.html (real-asset gated), not brand_admin.html"
+}</pre>
+<h2>empty_state / delivery gate</h2><pre>{
+  "brand_id": "optimizer_en_us",
+  "url": "http://127.0.0.1:4319/brand_handoff_dashboard.html?brand=optimizer_en_us",
+  "http_status": 200,
+  "page_title_marker": true,
+  "has_production_pending_gate": true,
+  "has_real_files_empty_path": true,
+  "optimizer_delivery_exists": false,
+  "stabilizer_delivery_exists": true,
+  "stabilizer_delivery_keys": [
+    "brand",
+    "brand_id",
+    "base_brand",
+    "display_brand",
+    "brand_director_name",
+    "brand_director_id",
+    "brand_director_status",
+    "latest_week",
+    "delivery_status",
+    "production_files_ready",
+    "source",
+    "catalog"
+  ],
+  "ops_url_after": "/brand_handoff_dashboard.html?brand=optimizer_en_us",
+  "note": "AFTER: zero-asset brand routes to handoff which gates on production_files_ready / REAL_DELIVERY; optimizer has no delivery file \u2192 empty real-files / production-pending, never brand_admin phantom titles:6"
+}</pre>
+<h2>_is_catalog_bearing fail-closed</h2><pre>{
+  "unknown_fail_closed": true,
+  "empty_index_fail_closed": true,
+  "non_buildable_hidden": true,
+  "buildable_shown": true
+}</pre>
+</body></html>

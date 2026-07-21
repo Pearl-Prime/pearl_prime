@@ -3,6 +3,7 @@ import { useTranslation } from "./useTranslation.jsx";
 import {
   appendBrandAssignmentToYAML,
   brandAssignmentPayload,
+  loadBrandIndexWithLiveAssignments,
   matchBrand,
   musicBrandIdFromState,
   buildMusicianReflectionsYAML,
@@ -2854,8 +2855,7 @@ function Step11Launch({ state, update, i18n = {} }) {
     setSubmitted(true);
     let m = null;
     try {
-      const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
-      const brands = r.ok ? await r.json() : {};
+      const brands = await loadBrandIndexWithLiveAssignments();
       m = matchBrand(state, brands, readTeacherMode());
       if (m) {
         wizardYaml = appendBrandAssignmentToYAML(wizardYaml, m, state.contact || {});

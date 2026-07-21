@@ -1,0 +1,26 @@
+{
+  "claim_a": {
+    "status": "submitted",
+    "brand_id": "qi_foundation_en_us",
+    "teacher_claim_key": "en_US__master_feung",
+    "mode": "named"
+  },
+  "claim_b": {
+    "status": "raised",
+    "status_code": 409,
+    "detail": {
+      "error": "teacher_claimed",
+      "brand_id": "qi_foundation_en_us"
+    },
+    "note": "Second named claim REJECTED (409). Generalized doctrine path is pipeline --teacher-attribution=generalized (not onboarding assign)."
+  },
+  "code_path": "server/routes/brand_onboarding.py:348-368 raise HTTPException 409 teacher_claimed",
+  "ledger_key": "en_US__master_feung",
+  "ledger_after_a": {
+    "en_US__master_feung": {
+      "brand_id": "qi_foundation_en_us",
+      "email": "synthetic.claimant.a@example-test.invalid",
+      "ts": "2026-07-19T00:00:00+00:00"
+    }
+  }
+}
