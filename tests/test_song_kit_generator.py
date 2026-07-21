@@ -269,22 +269,27 @@ def test_floor_must_be_positive():
 
 
 # --- diversity gate adapter (reuse, never reimplement) ----------------------------
-def test_diversity_gate_skips_gracefully_when_absent():
+def test_diversity_gate_runs_now_that_the_canonical_gate_landed():
+    # music_mode_diversity_ci_guard_20260721 landed scripts/ci/check_music_brand_
+    # diversity.py with an evaluate_kit entry point — the adapter now finds and
+    # calls it (previously asserted "skipped" when the gate didn't exist yet).
     gen = SongKitGenerator(families=_families())
     kit = gen.build_kit(_survey_with_lyrics(), "river_vale")
-    # The canonical scripts/ci/check_music_brand_diversity.py is not on main yet, so the
-    # adapter must report SKIPPED — and must NOT have invented a parallel gate.
-    assert kit.diversity["status"] == "skipped"
+    assert kit.diversity["status"] == "ran"
+    assert kit.diversity["entry_point"] == "evaluate_kit"
     assert "check_music_brand_diversity" in kit.diversity["gate"]
+    assert "verdict" in kit.diversity
+    assert "G1" in kit.diversity["verdict"]["gates"]
 
 
-def test_run_diversity_gate_direct_skip():
+def test_run_diversity_gate_direct_runs_and_returns_g1_verdict():
     gen = SongKitGenerator(families=_families())
     kit = gen.build_kit(_survey_no_lyrics(), "still_water", run_gate=False)
     assert kit.diversity["status"] == "not_requested"
     verdict = run_diversity_gate(kit, quality_profile="production")
-    assert verdict["status"] == "skipped"
+    assert verdict["status"] == "ran"
     assert verdict["quality_profile"] == "production"
+    assert verdict["verdict"]["gates"]["G1"]["status"] == "pass"
 
 
 # --- pluggable engine -------------------------------------------------------------
