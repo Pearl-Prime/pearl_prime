@@ -154,10 +154,14 @@ Within one quarter of landing G-/D-/C- items:
 - [x] Q-ENFORCE-02 (G-CLAIM) merged and required — Wave-1 2026-07-18 (`check_acceptance_claim_language.py` + Drift detectors)  
 - [x] Ship manifests carry `acceptance_layer` (G-LAYER) — Wave-1 (`batch_catalog_epubs.py` + `check_catalog_manifest_acceptance_layer.py`)  
 - [x] G-WRAP + G-DEF4 blocking on production ship path — Wave-1 (register F16 + enrichment `defect4_drops` + production SystemExit)  
-- [ ] ≥3 flagship cells have Layer-3 `ONTGP_VERDICT.md` = PASS (`system working`)  
-- [ ] One operator blind-10 PASS recorded under `artifacts/qa/`  
+- [ ] ≥3 flagship cells have Layer-3 `ONTGP_VERDICT.md` = PASS (`system working`) — Wave-2 attempted 3/3, all real evidenced **FAIL** (`SYSTEM_WORKING_CELLS=0`); stays unticked, not rounded up  
+- [ ] One operator blind-10 PASS recorded under `artifacts/qa/` — Wave-2 Lane 05 **prepared** the packet (`artifacts/qa/perfect_books_wave2_20260718/blind10_packet/`, 10/10 real Layer-1-ceiling books, operator-unread); Layer-4 PENDING; stays unticked (operator-only box)  
+- [x] G-F1H templated-cluster HARD_FAIL escalation — Wave-2 2026-07-18 (`scripts/ci/check_f1h_templated_cluster_hard.py`, 4/4 unit tests, mutation-checked, wired gate 38)  
+- [x] G-ORIENT Ch1 body/scene anchor check — Wave-2 2026-07-18 (`scripts/ci/check_orient_ch1_scene_anchor.py` + `config/quality/orient_body_scene_lexicon.yaml` v1, 6/6 unit tests, mutation-checked, wired gate 39; lexicon is v1/58-words/English-only, recommend widening)  
+- [x] G-ACCENT weekly accent-fill preflight matrix — Wave-2 2026-07-18 (`scripts/ci/check_accent_supply_preflight.py` + `.github/workflows/accent-supply-preflight.yml`, 5/5 unit tests, mutation-checked, wired gate 40; live run found 14/20 top cells with a real `no_supply_pool` gap — bank-fill signal, not a Lane-04 defect)  
 - [x] CLAUDE.md still states gate-PASS ≠ bestseller; composer ≠ flagship lever — reinforced with G-CLAIM / G-LAYER pointers  
 
 **Wave-1 implementation closeout:** `IMPLEMENTATION_CLOSEOUT.md` (`SIGNAL=pearl-prime-perfect-spec-impl=PARTIAL`).
+**Wave-2 final audit closeout (offline, pending GitHub replay):** `artifacts/qa/perfect_books_wave2_20260718/FINAL_AUDIT.md` (`SIGNAL=perfect-books-wave2-final=PARTIAL`). Landed offline on `pearlstar_offline`, NOT yet on `origin/main` (GitHub still 403-suspended at time of this wave).
 
 Until Layer-3/4 boxes above are checked, the honest catalog claim is at most **authored candidate** for machine-clean cells — never **bestseller register**.
