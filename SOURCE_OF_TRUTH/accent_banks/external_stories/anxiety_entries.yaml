@@ -1,3 +1,5 @@
+# External stories — anxiety — Wave 1
+# status: unwired | KNOWN_UNWIRED: accent_banks/external_stories/
 status: unwired
 topic: anxiety
 wave: 1
@@ -16,11 +18,7 @@ clusters:
 
       Anxiety is not proof you cannot do the work. Sometimes it is proof your nervous system is loud while
       your mind is still accurate. Darwin''s palpitations did not invalidate his eye for finches. They
-      named the cost of seeing clearly in a world that punishes new answers.
-
-
-      Return to your chapter problem with the boundary intact: this story widens the pattern; it does
-      not replace your scene or invent a private case history.'
+      named the cost of seeing clearly in a world that punishes new answers.'
     source: Charles Darwin — documented health and anxiety
     citation: Darwin, C. Autobiography; Colp, R. Darwin's Illness (2008); Darwin Correspondence Project.
     rights_class: verified_facts_only
@@ -31,12 +29,6 @@ clusters:
     secular_safe: true
     position_fit: supports REFLECTION
     sensitivity_notes: ''
-    atom_type_alias: CASE_STUDY
-    depth_pattern: EXTERNAL_STORY_RETURN_5
-    deepened_by: lane07_source_authority_repair_20260718
-    source_authority: SOURCE_OF_TRUTH/accent_banks/external_stories/anxiety_entries.yaml
-    tags:
-    - case_study
   - story_id: ext_anx_sports_simone_biles_tokyo_v01
     type: sports
     emotional_shape: breakthrough
@@ -94,10 +86,7 @@ clusters:
 
       The myth is usually taught as hubris. It is also an anxiety map: the terror of moderation when ecstasy
       is available. Many anxious people do not fear falling. They fear the moment after success — when
-      the body asks whether you can hold altitude without burning the very structure that lifted you.
-
-
-      Return to your chapter problem with the boundary intact: this parable is a lens, not a private history.'
+      the body asks whether you can hold altitude without burning the very structure that lifted you.'
     source: Greek myth — Icarus and Daedalus
     citation: Ovid, Metamorphoses VIII.183–235; Apollodorus, Bibliotheca III.15.9.
     rights_class: public_domain_retelling
@@ -108,12 +97,6 @@ clusters:
     secular_safe: true
     position_fit: supports REFLECTION
     sensitivity_notes: ''
-    atom_type_alias: PARABLE
-    depth_pattern: EXTERNAL_STORY_RETURN_5
-    deepened_by: lane07_source_authority_repair_20260718
-    source_authority: SOURCE_OF_TRUTH/accent_banks/external_stories/anxiety_entries.yaml
-    tags:
-    - parable
   - story_id: ext_anx_film_inside_out_v01
     type: film
     emotional_shape: breakthrough
@@ -565,6 +548,16 @@ clusters:
     secular_safe: true
     position_fit: supports TAKEAWAY
     sensitivity_notes: ''
+  # LOCALIZATION-ADDED (zh-TW, flagship_phase2_layer6): native zh-TW (Traditional
+  # Chinese, Taiwan register) renderings of two universal-cluster stories that
+  # were rendering in English for this locale (ext_anx_historical_ada_lovelace_v01,
+  # ext_anx_ted_mcgonigal_stress_v01). Same story_id as their universal-cluster
+  # counterpart so downstream tracing still resolves; loader already merges
+  # universal + locale_cluster rows, so these are additional candidates in the
+  # zh_TW pool. Note for Pearl_Dev: the picker does not currently prefer a
+  # locale-native row over a universal (English) row with a different id for the
+  # same beat, so English selection can still happen by chance — worth a filter
+  # that prefers locale_cluster rows when one exists for the chosen slot.
   - story_id: ext_anx_historical_ada_lovelace_v01
     type: historical
     emotional_shape: contrast
@@ -575,10 +568,8 @@ clusters:
     source: 艾達·勒芙蕾絲——「分析機」筆記
     citation: Lovelace, A. Notes on L. F. Menabrea (1843); Fuegi, J. Lovelace & Babbage (2003) IEEE Annals.
     rights_class: verified_facts_only
-    topic_keys:
-    - anxiety
-    doctrine_keys:
-    - COMPOSITE_DOCTRINE v03
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
     secular_safe: true
     position_fit: supports REFLECTION
     sensitivity_notes: ''
@@ -590,13 +581,10 @@ clusters:
 
       對於開會前總是胸口發緊的人來說，這個對比帶來一種解放感：傷害的一部分，或許正是疊加在心跳之上的那個故事。把壓力重新命名為「臨場前的準備狀態」，並不會讓恐懼消失，但它能縮小那份羞恥感——那種假裝人類身體本來就不該有任何激動反應的羞恥感。'
     source: 凱莉·麥高尼格——關於壓力心態的 TED 演講
-    citation: McGonigal, K. TED Global 2013 'How to Make Stress Your Friend'; Jamieson et al. stress reappraisal
-      studies.
+    citation: McGonigal, K. TED Global 2013 'How to Make Stress Your Friend'; Jamieson et al. stress reappraisal studies.
     rights_class: paraphrase_attributed
-    topic_keys:
-    - anxiety
-    doctrine_keys:
-    - COMPOSITE_DOCTRINE v03
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
     secular_safe: true
     position_fit: supports TAKEAWAY
     sensitivity_notes: ''
