@@ -75,7 +75,7 @@ def confirm_selection(
         work_unit_id=work_unit_id,
     )
     hd_url, ext = pick_hd_url(payload, media_type)
-    dest = store.hd_path(work_unit_id, stock_id, ext)
+    dest = store.hd_path(work_unit_id, stock_id, ext, media_type=media_type)
     dest.parent.mkdir(parents=True, exist_ok=True)
 
     getter = http_get or requests.get
