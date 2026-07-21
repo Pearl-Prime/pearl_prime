@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/manga/story_excellence_realization_report.schema.json",
+  "title": "manga_story_excellence_realization_report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "status",
+    "production_blocking",
+    "score",
+    "threshold",
+    "gates"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "artifact_type": { "const": "manga_story_excellence_realization_report" },
+    "status": { "enum": ["PASS", "WARN", "BLOCKED"] },
+    "production_blocking": { "type": "boolean" },
+    "series_id": { "type": "string" },
+    "chapter_id": { "type": "string" },
+    "chapter_number": { "type": "integer" },
+    "genre_id": { "type": "string" },
+    "strategy_genre": { "type": "string" },
+    "relevance_genre": { "type": "string" },
+    "target_market": { "type": "string" },
+    "target_audience": { "type": "string" },
+    "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "threshold": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gate_id", "status", "blocking", "issues", "evidence"],
+        "properties": {
+          "gate_id": { "type": "string" },
+          "status": { "enum": ["PASS", "WARN", "BLOCKED"] },
+          "score": { "type": "integer" },
+          "threshold": { "type": "integer" },
+          "blocking": { "type": "boolean" },
+          "issues": { "type": "array" },
+          "evidence": { "type": "array" }
+        }
+      }
+    },
+    "repair_packet": {
+      "type": ["object", "null"]
+    }
+  },
+  "additionalProperties": true
+}

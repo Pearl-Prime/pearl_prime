@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "manga_story_excellence_realization_report",
+  "status": "PASS",
+  "production_blocking": false,
+  "series_id": "cyber_pass",
+  "chapter_id": "ch01",
+  "chapter_number": 1,
+  "genre_id": "sci_fi_cyberpunk",
+  "strategy_genre": "sci_fi_cyberpunk",
+  "relevance_genre": "sci_fi_cyberpunk",
+  "target_market": "zh_CN",
+  "target_audience": "gen_z",
+  "score": 100,
+  "threshold": 85,
+  "gates": [
+    {
+      "gate_id": "MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "config/manga/canonical_genre_list.yaml",
+          "text": "sci_fi_cyberpunk",
+          "reason": "canonical genre"
+        },
+        {
+          "path": "config/source_of_truth/manga_story_strategies/sci_fi_cyberpunk_strategies.yaml",
+          "text": "sci_fi_cyberpunk_strategies.yaml",
+          "reason": "strategy bank"
+        },
+        {
+          "path": "config/manga/main_character_interaction_grammar.yaml",
+          "text": "sci_fi_cyberpunk",
+          "reason": "interaction grammar"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.ARCHITECT_CONTEXT",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "story_architecture_handoff.modern_reader_context",
+          "text": "present",
+          "reason": "architect context"
+        },
+        {
+          "path": "phoenix_v4/manga/prompts/chapter_writer_prompt.txt",
+          "text": "modern_reader_context",
+          "reason": "prompt doctrine"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.ALIAS_COHERENCE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "config/manga/story_genre_alias_coherence.yaml",
+          "text": "sci_fi_cyberpunk",
+          "reason": "alias coherence"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.MODERN_READER_REALIZATION",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Subway; recommendation feed interface; game avatar, terms screen, subway gate, id scan.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (avatar)"
+        },
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Subway; recommendation feed interface; game avatar, terms screen, subway gate, id scan.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (screen)"
+        },
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Subway; recommendation feed interface; game avatar, terms screen, subway gate, id scan.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (gate)"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "cost, burns, burn, choice, refuse",
+          "reason": "object creates conflict-change pressure"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "want",
+          "reason": "protagonist desire visible"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "cost",
+          "reason": "cost by page two"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.GENRE_CORE_PLEASURE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "interface",
+          "reason": "genre-core class interface_identity"
+        },
+        {
+          "path": "pages[*]",
+          "text": "privacy",
+          "reason": "genre-core class privacy_power"
+        },
+        {
+          "path": "pages[*]",
+          "text": "body",
+          "reason": "genre-core class body_threat"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.INTERACTION_REALIZATION",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "dyad,family,machine,self",
+          "reason": "interaction targets"
+        },
+        {
+          "path": "pages[1].panels[0]",
+          "text": "system,protagonist",
+          "reason": "multi-character interaction scene declared"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.PAGE_ONE_HOOK",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[0]",
+          "text": "Subway; recommendation feed interface; game avatar, terms screen, subway gate, id scan. Algorithm overlay pins a social threat rating on the interface. The feed scored my face before I woke. The feed ",
+          "reason": "page-one concrete hook"
+        },
+        {
+          "path": "pages[1]",
+          "text": "Interface forces a choice. Accept the community score, or your login burns. Accept the community score, or your login burns. Body/social threat within guardrails. If I refuse, my sister loses access. ",
+          "reason": "page-two turn reason"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.MARKET_NATIVE_SURFACE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "recommendation feed",
+          "reason": "zh_CN market surface"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.BLAND_FALLBACK_LINT",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "specificity ok",
+          "reason": "anti-blandness"
+        }
+      ]
+    }
+  ],
+  "repair_packet": null
+}

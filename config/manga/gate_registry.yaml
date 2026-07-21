@@ -211,3 +211,56 @@ gates:
     stage_owner: chapter_qc
     severity: MAJOR
     description: Longing/romance chapters defer resolution — resolution language stays at or below 15% of panels (no premature confession, kiss, or closure), sustaining yearning. Promoted to BLOCKER by the bestseller gate in production.
+
+  # ── Story excellence realization gates (post-writer, pre-visual) ──
+  # Authority: docs/specs/MANGA_STORY_EXCELLENCE_REALIZATION_GATE_SPEC.md
+  # Emitter: phoenix_v4/manga/story_quality/excellence_gate.py
+  - gate_id: MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE
+    stage_owner: story_architect
+    severity: BLOCKER
+    description: Canonical genre resolves; modern-reader doctrine validates; market/audience resolve; strategy bank + interaction grammar exist for the genre.
+
+  - gate_id: MANGA.STORY.ARCHITECT_CONTEXT
+    stage_owner: story_architect
+    severity: BLOCKER
+    description: modern_reader_context survives story_architecture_internal → handoff → chapter story_craft; chapter_writer_prompt retains doctrine language.
+
+  - gate_id: MANGA.STORY.ALIAS_COHERENCE
+    stage_owner: story_architect
+    severity: BLOCKER
+    description: (canonical_genre, strategy_genre, relevance_genre) and optional vessel_genre appear on the alias-coherence allowlist.
+
+  - gate_id: MANGA.STORY.MODERN_READER_REALIZATION
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: Selected catalyst ordinary-world object appears in page-one/two action and changes conflict (pressure/choice/cost/rule); not metadata-only name-drop.
+
+  - gate_id: MANGA.STORY.GENRE_CORE_PLEASURE
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: At least two genre-core evidence classes are present; forbidden replacements and catalyst avoid items are absent.
+
+  - gate_id: MANGA.STORY.INTERACTION_REALIZATION
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: Main character has genre-native interaction target/pressure; solo-only narration blocked unless genre grammar allows compensating artifact/system/self interaction.
+
+  - gate_id: MANGA.STORY.PAGE_ONE_HOOK
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: Page one has concrete image/pressure/question/action; page two supplies turn reason (reversal/discovery/promise/threat/misread/challenge). Extends MANGA.CHAPTER.HOOK to opening pages.
+
+  - gate_id: MANGA.STORY.MARKET_NATIVE_SURFACE
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: Target market surface appears as concrete setting/object/social pressure; market guardrails respected (no tourist-Japan, flat U.S. school import, unsafe zh_CN allegory).
+
+  - gate_id: MANGA.STORY.BLAND_FALLBACK_LINT
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: Blocks canned stub markers and generic fallback phrases when surrounding panels lack concrete object/choice/consequence/relationship movement.
+
+  - gate_id: MANGA.STORY.REPAIR_PACKET
+    stage_owner: chapter_qc
+    severity: MAJOR
+    description: Every BLOCKED excellence report emits an executable repair packet (scope + failed gates + panel paths + rewrite instruction). Not a hard blocker itself — evidence of repair routing.

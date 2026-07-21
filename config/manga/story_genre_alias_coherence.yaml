@@ -1,0 +1,158 @@
+# Alias coherence allowlist for story excellence realization gate.
+# Authority: docs/specs/MANGA_STORY_EXCELLENCE_REALIZATION_GATE_SPEC.md
+# Canonical genres: config/manga/canonical_genre_list.yaml
+
+schema_version: "1.0.0"
+
+# Each row: (canonical_genre, strategy_genre, relevance_genre) must match.
+# vessel_genre is optional; checked only when mode vessels are present.
+aliases:
+  - canonical_genre: battle
+    allowed_strategy_genres: [battle, action_battle]
+    allowed_relevance_genres: [battle]
+    allowed_vessel_genres: [battle, action_battle]
+    rationale: "Battle maps to action_battle strategy bank."
+
+  - canonical_genre: romance
+    allowed_strategy_genres: [romance, romance_josei_drama, shojo]
+    allowed_relevance_genres: [romance]
+    allowed_vessel_genres: [romance, shojo]
+    rationale: "Romance may route through josei/shojo story banks."
+
+  - canonical_genre: workplace
+    allowed_strategy_genres: [workplace, workplace_drama]
+    allowed_relevance_genres: [workplace]
+    allowed_vessel_genres: [workplace]
+    rationale: "Workplace drama bank alias."
+
+  - canonical_genre: healing
+    allowed_strategy_genres: [healing, iyashikei, slice_of_life]
+    allowed_relevance_genres: [healing]
+    allowed_vessel_genres: [healing, iyashikei]
+    rationale: "Healing uses iyashikei craft bank."
+
+  - canonical_genre: mystery
+    allowed_strategy_genres: [supernatural_mystery, mystery]
+    allowed_relevance_genres: [mystery]
+    allowed_vessel_genres: [supernatural_mystery]
+    rationale: "Mystery currently uses supernatural-mystery story bank while retaining mystery-specific modern evidence logic."
+
+  - canonical_genre: horror
+    allowed_strategy_genres: [horror, psychological_horror]
+    allowed_relevance_genres: [horror]
+    allowed_vessel_genres: [horror, psychological_horror]
+    rationale: "Horror maps to psychological_horror bank."
+
+  - canonical_genre: sports
+    allowed_strategy_genres: [sports, sports_competition]
+    allowed_relevance_genres: [sports]
+    allowed_vessel_genres: [sports]
+    rationale: "Sports competition bank alias."
+
+  - canonical_genre: essay
+    allowed_strategy_genres: [essay, josei_adult_memoir, memoir]
+    allowed_relevance_genres: [essay]
+    allowed_vessel_genres: [essay, memoir]
+    rationale: "Essay/memoir craft overlap."
+
+  - canonical_genre: slice_of_life
+    allowed_strategy_genres: [slice_of_life, iyashikei, healing]
+    allowed_relevance_genres: [slice_of_life]
+    allowed_vessel_genres: [slice_of_life, iyashikei]
+    rationale: "Slice-of-life shares iyashikei craft."
+
+  - canonical_genre: fantasy_adventure
+    allowed_strategy_genres: [fantasy_adventure, isekai]
+    allowed_relevance_genres: [fantasy_adventure]
+    allowed_vessel_genres: [fantasy_adventure, isekai]
+    rationale: "Fantasy adventure may use isekai threshold banks."
+
+  - canonical_genre: food
+    allowed_strategy_genres: [food]
+    allowed_relevance_genres: [food]
+    allowed_vessel_genres: [food]
+    rationale: "Food bank direct."
+
+  - canonical_genre: family
+    allowed_strategy_genres: [family]
+    allowed_relevance_genres: [family]
+    allowed_vessel_genres: [family]
+    rationale: "Family bank direct."
+
+  - canonical_genre: procedural
+    allowed_strategy_genres: [procedural]
+    allowed_relevance_genres: [procedural]
+    allowed_vessel_genres: [procedural]
+    rationale: "Procedural bank direct."
+
+  - canonical_genre: historical
+    allowed_strategy_genres: [historical, historical_period]
+    allowed_relevance_genres: [historical]
+    allowed_vessel_genres: [historical]
+    rationale: "Historical period bank alias."
+
+  - canonical_genre: comedy
+    allowed_strategy_genres: [comedy, comedy_gag]
+    allowed_relevance_genres: [comedy]
+    allowed_vessel_genres: [comedy]
+    rationale: "Comedy gag bank alias."
+
+  - canonical_genre: cultivation
+    allowed_strategy_genres: [cultivation, cultivation_martial]
+    allowed_relevance_genres: [cultivation]
+    allowed_vessel_genres: [cultivation]
+    rationale: "Cultivation martial bank alias."
+
+  - canonical_genre: mecha
+    allowed_strategy_genres: [mecha]
+    allowed_relevance_genres: [mecha]
+    allowed_vessel_genres: [mecha]
+    rationale: "Mecha bank direct."
+
+  - canonical_genre: dark_fantasy
+    allowed_strategy_genres: [dark_fantasy]
+    allowed_relevance_genres: [dark_fantasy]
+    allowed_vessel_genres: [dark_fantasy]
+    rationale: "Dark fantasy bank direct."
+
+  - canonical_genre: sci_fi_cyberpunk
+    allowed_strategy_genres: [sci_fi_cyberpunk]
+    allowed_relevance_genres: [sci_fi_cyberpunk]
+    allowed_vessel_genres: [sci_fi_cyberpunk]
+    rationale: "Cyberpunk bank direct."
+
+  - canonical_genre: supernatural_everyday
+    allowed_strategy_genres: [supernatural_everyday, supernatural_mystery]
+    allowed_relevance_genres: [supernatural_everyday]
+    allowed_vessel_genres: [supernatural_everyday, supernatural_mystery]
+    rationale: "Everyday supernatural may share mystery craft bank."
+
+  - canonical_genre: school
+    allowed_strategy_genres: [school, school_coming_of_age]
+    allowed_relevance_genres: [school]
+    allowed_vessel_genres: [school]
+    rationale: "School coming-of-age bank alias."
+
+  - canonical_genre: memoir
+    allowed_strategy_genres: [memoir, josei_adult_memoir, essay]
+    allowed_relevance_genres: [memoir]
+    allowed_vessel_genres: [memoir, essay]
+    rationale: "Memoir/essay craft overlap."
+
+  - canonical_genre: social_issue
+    allowed_strategy_genres: [social_issue, seinen]
+    allowed_relevance_genres: [social_issue]
+    allowed_vessel_genres: [social_issue, seinen]
+    rationale: "Social issue may use seinen craft shell."
+
+  - canonical_genre: graphic_medicine
+    allowed_strategy_genres: [graphic_medicine]
+    allowed_relevance_genres: [graphic_medicine]
+    allowed_vessel_genres: [graphic_medicine]
+    rationale: "Graphic medicine bank direct."
+
+  - canonical_genre: battle_internal
+    allowed_strategy_genres: [battle_internal]
+    allowed_relevance_genres: [battle_internal]
+    allowed_vessel_genres: [battle_internal]
+    rationale: "Battle-internal bank direct."

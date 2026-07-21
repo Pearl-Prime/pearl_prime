@@ -1,0 +1,174 @@
+{
+  "artifact_type": "chapter_script_writer_handoff",
+  "schema_version": "1.0.0",
+  "series_id": "bat_pass",
+  "chapter_id": "ch01",
+  "chapter_number": 1,
+  "genre_id": "battle",
+  "story_strategy_genre": "battle",
+  "reader_market": "en_US",
+  "reader_audience": "gen_alpha",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "en_US",
+    "target_audience": "gen_alpha",
+    "genre_id": "battle",
+    "strategy_genre": "battle",
+    "relevance_genre": "battle",
+    "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+    "market_touchpoints": [
+      "group_chat",
+      "discord_server",
+      "short_video_clip",
+      "school_bus_or_subway",
+      "comic_shop",
+      "mall_food_court",
+      "campus_library",
+      "delivery_app",
+      "controller",
+      "streaming_queue"
+    ],
+    "market_guardrails": [
+      "avoid_fake_japanese_surface_for_us_scene",
+      "make_city_transport_specific_if_used",
+      "do_not_overexplain_anime_fandom"
+    ],
+    "audience_story_rule": "Treat games, school platforms, algorithmic recommendation, friendship chat, family device boundaries, and identity formation as ordinary life texture.",
+    "audience_touchpoints": [
+      "game_lobby",
+      "class_app",
+      "tablet_or_phone",
+      "avatar_identity",
+      "friend_group_chat",
+      "parent_or_teacher_device_boundary"
+    ],
+    "genre_relevance_rule": "Modern public ranking or clip culture becomes the battle pressure, but victory still comes from trained body, rival, mentor, and cost.",
+    "catalyst": {
+      "id": "ranked_clip_challenge",
+      "logline": "A clipped school or arcade match falsely crowns the protagonist as a fraud, and the rival forces a real-world rematch where the body cannot edit the replay.",
+      "ordinary_world_objects": [
+        "short_video_clip",
+        "controller",
+        "rooftop_court",
+        "train_home"
+      ],
+      "genre_transmutation": "Online status becomes public duel pressure.",
+      "avoid": [
+        "influencer_parody_only",
+        "instant_power_up",
+        "generic_training_montage"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_alpha. Use catalyst 'ranked_clip_challenge': A clipped school or arcade match falsely crowns the protagonist as a fraud, and the rival forces a real-world rematch where the body cannot edit the replay. Transmutation: Online status becomes public duel pressure. Market surface: Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms. Audience rule: Treat games, school platforms, algorithmic recommendation, friendship chat, family device boundaries, and identity formation as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "scene": "Gym; clip ranking; short video clip, controller, rooftop court, train home.",
+          "action": "Rival tosses him wraps; crowd watches.",
+          "dialogue": [
+            {
+              "speaker": "A",
+              "text": "You're ninth. Public. Everyone saw the clip."
+            }
+          ],
+          "dialogue_lines": [
+            {
+              "speaker": "A",
+              "text": "You're ninth. Public. Everyone saw the clip."
+            }
+          ],
+          "characters": [
+            "protagonist",
+            "rival"
+          ]
+        },
+        {
+          "scene": "Trained body pressure.",
+          "dialogue": [
+            {
+              "speaker": "A",
+              "text": "I want the duel. My lungs already hurt."
+            }
+          ],
+          "dialogue_lines": [
+            {
+              "speaker": "A",
+              "text": "I want the duel. My lungs already hurt."
+            }
+          ],
+          "characters": [
+            "protagonist"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "scene": "Public duel with body cost.",
+          "action": "Fist connects; blood on the mat. Ranking updates live.",
+          "dialogue": [
+            {
+              "speaker": "A",
+              "text": "Cost is my body. Still standing."
+            }
+          ],
+          "dialogue_lines": [
+            {
+              "speaker": "A",
+              "text": "Cost is my body. Still standing."
+            }
+          ],
+          "characters": [
+            "protagonist",
+            "rival"
+          ]
+        },
+        {
+          "scene": "Mentor voice.",
+          "dialogue": [
+            {
+              "speaker": "A",
+              "text": "Breath. Again. Team's watching."
+            }
+          ],
+          "dialogue_lines": [
+            {
+              "speaker": "A",
+              "text": "Breath. Again. Team's watching."
+            }
+          ],
+          "characters": [
+            "mentor",
+            "protagonist"
+          ]
+        }
+      ]
+    }
+  ]
+}

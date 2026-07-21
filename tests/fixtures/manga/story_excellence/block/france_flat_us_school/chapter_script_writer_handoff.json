@@ -1,0 +1,134 @@
+{
+  "artifact_type": "chapter_script_writer_handoff",
+  "schema_version": "1.0.0",
+  "series_id": "fr_block",
+  "chapter_id": "ch01",
+  "chapter_number": 1,
+  "genre_id": "school",
+  "story_strategy_genre": "school",
+  "reader_market": "fr_FR",
+  "reader_audience": "gen_alpha",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "fr_FR",
+    "target_audience": "gen_alpha",
+    "genre_id": "school",
+    "strategy_genre": "school",
+    "relevance_genre": "school",
+    "market_surface_rule": "Use manga-literate reader culture, tram/metro commute, bookshop shelves, school/campus life, gaming/anime fandom, and localized emotional restraint.",
+    "market_touchpoints": [
+      "metro_or_tram",
+      "manga_shelf",
+      "fnac_or_bookshop",
+      "lycee_courtyard",
+      "campus_cafe",
+      "group_chat",
+      "gaming_console",
+      "anime_convention_queue",
+      "library_card",
+      "bakery_counter"
+    ],
+    "market_guardrails": [
+      "avoid_flat_us_high_school_import",
+      "respect_bd_manga_literacy",
+      "localize everyday objects_without_overexplaining"
+    ],
+    "audience_story_rule": "Treat games, school platforms, algorithmic recommendation, friendship chat, family device boundaries, and identity formation as ordinary life texture.",
+    "audience_touchpoints": [
+      "game_lobby",
+      "class_app",
+      "tablet_or_phone",
+      "avatar_identity",
+      "friend_group_chat",
+      "parent_or_teacher_device_boundary"
+    ],
+    "genre_relevance_rule": "Modern school stories need social weather: group chats, seating maps, clubs, transit, class apps, lunches, phones, and private/public self.",
+    "catalyst": {
+      "id": "group_chat_seating_map",
+      "logline": "A class group chat turns the seating chart into a popularity map, and the protagonist's one honest reply changes who moves their chair.",
+      "ordinary_world_objects": [
+        "group_chat",
+        "seating_chart",
+        "desk",
+        "lunch_table"
+      ],
+      "genre_transmutation": "Chat status becomes belonging pressure.",
+      "avoid": [
+        "adult_voice",
+        "popularity_cliche"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=fr_FR; audience=gen_alpha. Use catalyst 'group_chat_seating_map': A class group chat turns the seating chart into a popularity map, and the protagonist's one honest reply changes who moves their chair. Transmutation: Chat status becomes belonging pressure. Market surface: Use manga-literate reader culture, tram/metro commute, bookshop shelves, school/campus life, gaming/anime fandom, and localized emotional restraint. Audience rule: Treat games, school platforms, algorithmic recommendation, friendship chat, family device boundaries, and identity formation as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "scene": "Pep rally. Prom king vote.",
+          "dialogue": [
+            {
+              "speaker": "A",
+              "text": "Varsity jacket looks good. Homecoming tonight!"
+            }
+          ],
+          "dialogue_lines": [
+            {
+              "speaker": "A",
+              "text": "Varsity jacket looks good. Homecoming tonight!"
+            }
+          ],
+          "characters": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "scene": "Locker pep.",
+          "dialogue": [
+            {
+              "speaker": "A",
+              "text": "Go team!"
+            }
+          ],
+          "dialogue_lines": [
+            {
+              "speaker": "A",
+              "text": "Go team!"
+            }
+          ],
+          "characters": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    }
+  ]
+}
