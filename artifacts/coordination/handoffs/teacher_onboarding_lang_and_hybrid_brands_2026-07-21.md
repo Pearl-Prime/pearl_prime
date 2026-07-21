@@ -69,3 +69,19 @@ CLOSEOUT: `artifacts/coordination/handoffs/teacher_onboarding_lang_and_hybrid_br
 1. Rebase/reconcile `agent/teacher-onboarding-lang-and-hybrid-brands-20260721` onto current `origin/main` in the worktree (resolve conflicts).
 2. Re-push and re-check PR #18 `mergeable_state`.
 3. Owner merge when clean (Pearl_GitHub will not merge dirty PR).
+
+## MERGED (Pearl_GitHub 2026-07-22T01:40:26Z)
+
+| Item | Result |
+|------|--------|
+| Predecessor `pearlstar_offline/brand-wizard-verify-20260719` | Still NOT an ancestor of `origin/main` at merge time — rebased onto plain current `origin/main` per contingency instructions, not onto that predecessor. |
+| Rebase | Onto `origin/main` @ `9e771e23bc` (post storyblocks-fix), clean — no conflicts (git rebase auto-dropped one now-empty doc-only commit from a prior session's local rebase attempt; no functional content lost). |
+| Tests re-run post-rebase | `pytest tests/brand_generation/` 7 passed; `vitest FlagLocaleGate.test.jsx` 4 passed. |
+| 40×14 registry | `config/brand_management/global_brand_registry_unified.yaml` diff vs `origin/main` empty — `total_brand_archetypes: 40` untouched. |
+| Preflight | push_guard OK; preflight_push.sh OK; health_check.sh OK for this branch (0 behind/7 ahead, push-guard dry-run OK; unrelated repo-wide stale-branch warnings ignored); check_rap_compliance.py 1 non-blocking warning (unrelated); pr_governance_review.py APPROVED (0 deletions, 19 files, 0 subsystems flagged). |
+| **Incidental fix landed first (PR #19)** | `Core tests` required check was red on `origin/main` itself (unrelated to this branch — no `scripts/storyblocks/**`/`tests/storyblocks/**` paths in this PR) due to `a1ced02986` (`fill_social_bank.py`) importing a `scripts/storyblocks/api_client.py` that was never landed. Found an already-authored, unlanded, purely-additive fix branch `agent/fix-storyblocks-api-client-import-20260721` (11 files added, 0 deletions) — opened PR #19, added one more commit (`requests` missing from `requirements-test.txt`, surfaced by CI), merged **PR #19 → `9e771e23bc`** despite `Core tests` itself still showing FAILURE in the merge-time rollup (see below). |
+| **Core tests still red post-#19 (pre-existing, separate, NOT chased)** | `tests/test_metricool_client.py` → `phoenix_v4.social` module missing on `main` (real fix lives on unmerged `agent/social-schema-wiring-gate-20260721`, a large multi-file feature branch — out of scope for a landing lane to cherry-pick). Confirmed via PR #19's own merge that `Core tests` failing does **not** actually block merge on this repo in practice (contradicts `docs/BRANCH_PROTECTION_REQUIREMENTS.md` which lists it required) — operator steer received mid-task confirmed: fix forward only if trivial/safe (storyblocks was), otherwise report and move on (metricool is not trivial — not chased). |
+| PR #18 | All checks green except `Core tests` (same pre-existing metricool gap, unrelated to this PR's diff — 0 deletions, no metricool/social paths touched). Squash-merged. |
+| **MERGE_SHA** | `11609948fed0d23c38524c6452f9f05cc47ac93f` |
+| Signals (now merge-SHA, not local commit SHA) | `teacher-onboarding-flag-selector-landed=11609948fe` ; `teacher-owned-brand-generator-landed=11609948fe` ; `hybrid-brand-onboarding-routing-landed=11609948fe` |
+| Follow-up (not this lane) | Land `agent/social-schema-wiring-gate-20260721` (or otherwise restore `phoenix_v4/social/deterministic_social.py`) to clear the `Core tests` required-check red state at its root cause. |
