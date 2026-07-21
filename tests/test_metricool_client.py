@@ -335,12 +335,36 @@ def test_list_scheduler_posts_get():
                 user_id="3564167",
                 blog_id="12345",
                 api_key="test-key",
+                start="2026-07-20T00:00:00",
+                end="2026-07-25T00:00:00",
+                timezone="America/New_York",
             )
     assert out == {"data": [{"id": 1}]}
     assert captured["url"].startswith("https://app.metricool.com/api/v2/scheduler/posts")
     assert "blogId=12345" in captured["url"]
     assert "userId=3564167" in captured["url"]
+    assert "start=2026-07-20T00:00:00" in captured["url"]
+    assert "end=2026-07-25T00:00:00" in captured["url"]
     assert captured["headers"]["X-Mc-Auth"] == "test-key"
+
+
+def test_list_scheduler_posts_by_id():
+    captured = {}
+
+    def fake_get(url, headers=None, timeout=None):
+        captured["url"] = url
+        return _ok_response({"data": {"id": 99, "draft": True}})
+
+    with patch("client.requests.get", side_effect=fake_get):
+        with patch("client.time.sleep"):
+            out = list_scheduler_posts(
+                user_id="3564167",
+                blog_id="12345",
+                api_key="test-key",
+                post_id="99",
+            )
+    assert out["data"]["id"] == 99
+    assert "scheduler/posts/99?" in captured["url"]
 
 
 def test_pilot_preflight_blocked_placeholder(tmp_path: Path, monkeypatch, capsys):
@@ -481,7 +505,10 @@ def test_validate_config_canonical_map_ok():
     report = validate_config.load_and_validate(BRANDS_YAML)
     assert report["ok"] is True
     assert report["wired_count"] >= 1
-    assert "waystream_sanctuary" in (report.get("pending_placeholders") or [])
+    # Q-METRIC-02 resolved: live Waystream Sanctuary blog_id is wired (not placeholder).
+    assert "waystream_sanctuary" not in (report.get("pending_placeholders") or [])
+    strict = validate_config.load_and_validate(BRANDS_YAML, strict_blog_ids=True)
+    assert strict["ok"] is True
 
 
 def test_validate_config_orphan_fails(tmp_path: Path):
@@ -519,7 +546,14 @@ def test_validate_config_unwired_must_be_null():
     assert any("unwired" in e and "null" in e for e in report["errors"])
 
 
-def test_sync_merge_preserves_blog_id():
+def test_sync_merge_preserves_blog_id(tmp_path: Path):
+    # Point pin at a matching blog_id so durable re-apply does not overwrite the fixture.
+    pin = tmp_path / "metricool_waystream_pin.yaml"
+    pin.write_text(
+        "brand_key: waystream_sanctuary\nblog_id: '12345'\nstatus: wired\n",
+        encoding="utf-8",
+    )
+    sync_brands.PIN_PATH = pin
     existing = {
         "account": "waystream",
         "user_id_env": "METRICOOL_USER_ID",
@@ -602,3 +636,54 @@ def test_canonical_keys_cover_current_map():
     map_keys = set((data.get("brands") or {}).keys())
     assert map_keys <= canon
     assert "waystream_sanctuary" in map_keys
+
+
+def test_install_keychain_extracts_token_not_markdown():
+    import install_keychain_creds as install
+
+    raw = "** note of stuff\n\nMETRICOOL_API_KEY:\n\nOBNK" + ("A" * 60) + "\n\nUSER_ID:\n\n3564167\n"
+    key = install.extract_api_key(raw)
+    assert len(key) == 64
+    assert key.startswith("OBNK")
+    assert install.extract_user_id(raw) == "3564167"
+
+
+def test_sync_reapplies_waystream_pin(tmp_path: Path):
+    pin = tmp_path / "metricool_waystream_pin.yaml"
+    pin.write_text(
+        "brand_key: waystream_sanctuary\nblog_id: '6582629'\nstatus: wired\ntimezone: America/New_York\n",
+        encoding="utf-8",
+    )
+    # Monkeypatch pin path used by sync module
+    sync_brands.PIN_PATH = pin
+    existing = {
+        "account": "waystream",
+        "brands": {
+            "waystream_sanctuary": {
+                "blog_id": "WAYSTREAM_BLOG_ID_PENDING",
+                "status": "wired",
+            },
+            "stillness_press": {"blog_id": None, "status": "unwired"},
+        },
+    }
+    merged, stats = sync_brands.merge_brand_map(
+        existing, {"waystream_sanctuary", "stillness_press"}
+    )
+    assert merged["brands"]["waystream_sanctuary"]["blog_id"] == "6582629"
+    assert stats.get("pin_applied") is True
+
+
+def test_check_metricool_managed_pin_and_registry():
+    import sys
+    ci = str(REPO / "scripts" / "ci")
+    if ci not in sys.path:
+        sys.path.insert(0, ci)
+    import check_metricool_managed as gate
+
+    brands = yaml.safe_load(BRANDS_YAML.read_text(encoding="utf-8"))
+    pin = yaml.safe_load((REPO / "config" / "integrations" / "metricool_waystream_pin.yaml").read_text(encoding="utf-8"))
+    assert gate.check_pin(brands, pin) == []
+    assert gate.check_registry() == []
+    assert gate.check_gitignore() == []
+
+
