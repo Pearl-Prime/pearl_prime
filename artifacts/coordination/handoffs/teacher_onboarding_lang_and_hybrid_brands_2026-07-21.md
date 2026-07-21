@@ -1,8 +1,8 @@
 # Teacher onboarding — lang switcher + hybrid brands — 2026-07-21
 
-updated=2026-07-21T07:20:00Z
+updated=2026-07-21T15:40:00Z
 branch=`agent/teacher-onboarding-lang-and-hybrid-brands-20260721`
-github=`BLOCKED — gh api user → 401 Requires authentication (offline landing)`
+github=`AUTH RESTORED (Pearl-Prime) — local commits only this session; do not push until operator asks`
 
 ## Applied operator defaults (loud)
 
@@ -19,7 +19,7 @@ github=`BLOCKED — gh api user → 401 Requires authentication (offline landing
 |--------|-----|
 | `teacher-onboarding-flag-selector-landed` | `b9db18709508e72965b2a0ba9dfc5aa76fa6076d` |
 | `teacher-owned-brand-generator-landed` | `55923199611675e4121f8952dd80bdfce634dd86` |
-| `hybrid-brand-onboarding-routing-landed` | (Phase C commit — see CLOSEOUT) |
+| `hybrid-brand-onboarding-routing-landed` | `c825129940a4fae1a970b5acd5e8541aa37187b0` |
 
 Ancestral Phase A engine (flag gate + 14 locales) also at `f0faac8d2ed1ea511107dbcf07d39735b92d47ba`.
 
