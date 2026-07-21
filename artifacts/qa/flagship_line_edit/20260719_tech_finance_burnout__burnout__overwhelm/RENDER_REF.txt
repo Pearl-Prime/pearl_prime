@@ -1,0 +1,23 @@
+RENDER_REF (fresh L1 chord render hard-stops on G-DEF4; using best-available prior manuscript per dispatcher ruling)
+
+Fresh L1 attempt (this lane, live, this run):
+  Command: PYTHONPATH=. python3 scripts/run_pipeline.py --pipeline-mode spine \
+    --quality-profile production --exercise-journeys --persona tech_finance_burnout \
+    --topic burnout --arc config/source_of_truth/master_arcs/tech_finance_burnout__burnout__overwhelm__F006.yaml \
+    --locale en-US --render-book --render-dir artifacts/qa/perfect_books_wave2_20260718/lane03/renders/tech_finance_burnout__burnout__overwhelm
+  Log: artifacts/qa/perfect_books_wave2_20260718/lane03/renders/tech_finance_burnout__burnout__overwhelm_run.log
+  Result: SystemExit(1), 106 foreign-persona registry drops, persona_id='tech_finance_burnout'
+  No book.txt written (hard-stop precedes compose).
+
+Best available prior manuscript used for the ONTGP read (searched MATRIX.tsv + full
+repo grep for tech_finance_burnout x burnout book.txt; no closer engine=overwhelm match
+exists):
+  artifacts/pilots/frame_v2_specimen_somatic_burnout/book.txt
+  (MATRIX row C009__tech_finance_burnout__burnout__na; no book_quality_report.json /
+  book_pass_report.json present — NOT confirmed Layer-1 PASS; this is a draft/pilot
+  specimen, not a proven production-chord output. Honesty note carried into
+  ONTGP_VERDICT.md.)
+
+Other candidates considered and rejected (wrong topic):
+  artifacts/qa/pearl_prime_100book_analysis_20260718/renders/B026__tech_finance_burnout__financial_stress__spiral/book.txt (topic=financial_stress, not burnout)
+  artifacts/pilots/frame_v2_specimen_grief_emotional/book.txt (topic=grief, not burnout)
