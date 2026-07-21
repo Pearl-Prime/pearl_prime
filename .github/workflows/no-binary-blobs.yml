@@ -71,7 +71,15 @@ jobs:
 
             # Heuristic binary detection: NUL byte in first 8 KB, or known
             # binary extension. Text files >1 MB still allowed.
-            if head -c 8192 "$f" | LC_ALL=C grep -q $'\\0' \
+            # NUL check uses `od` (not `grep $'\0'`, which is unreliable across
+            # shell/grep implementations — bash ANSI-C quoting can't embed a
+            # literal NUL, and grep's own NUL-matching extensions vary by
+            # platform) — see docs/CLOUD_NATIVE_AGENTS_LAYER2.md.
+            has_nul=0
+            if od -An -tx1 -N 8192 "$f" | tr -s ' \n' '\n' | grep -qx '00'; then
+              has_nul=1
+            fi
+            if [ "$has_nul" -eq 1 ] \
                || [[ "$f" =~ \\.(png|jpg|jpeg|webp|pdf|epub|mp3|m4a|wav|mp4|mov|psd|zip|tar|gz|bz2|xz|woff|woff2|ttf|otf)$ ]]; then
               violations+=("${f} (${size} bytes)")
             fi
