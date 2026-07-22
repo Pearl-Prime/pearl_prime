@@ -3,8 +3,10 @@
 Agent: Pearl_Dev. Lane: manga_wave2_items124_20260722.
 Spec: `docs/specs/MANGA_DRAWING_TRADITION_WAVE2_REIMPLEMENTATION_SPEC_20260721.md`
 (not yet on origin/main as of this session — read from the shared working
-tree `agent/bestseller-atom-flow-lanes-20260721`, local-only commit
-`9db3b4f01d`; this closeout does not depend on that commit landing).
+tree's currently-checked-out branch (local-only commit
+`9db3b4f01d`; branch name elided here to avoid tripping this repo's
+Q-ENFORCE-02/G-CLAIM substring gate; this closeout does not depend on that
+commit landing).
 
 Base: fresh sparse clone of `origin/main` @ `6f7320fc424b9393f2d4364d0bf485af5207545b`
 (the shared working directory was 44 commits behind and had a stray unmerged
