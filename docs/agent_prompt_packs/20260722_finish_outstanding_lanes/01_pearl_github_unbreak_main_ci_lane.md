@@ -25,6 +25,34 @@ If any of these claims don't hold anymore (e.g. someone already merged #55, or #
 been rescoped), STOP re-deriving strategy from stale memory — work from what you
 actually observe and adapt the plan below accordingly.
 
+**Step 0 — check for a THIRD, conflicting fix before doing anything else.** A local
+branch `codex/ci-metricool-and-manga-imports` (commit `d298739814`, based on merged
+`#54`) fixes the same `ModuleNotFoundError` with the OPPOSITE strategy: instead of
+adding `phoenix_v4/social/` (what #55 and #53 do), it patches
+`scripts/integrations/metricool/post.py` + `__init__.py` to drop Metricool's
+dependency on `phoenix_v4.social` entirely. It also independently touches
+`config/manga/main_character_interaction_grammar.yaml`,
+`config/manga/story_excellence_gates.yaml`, and
+`phoenix_v4/manga/prompts/chapter_writer_prompt.txt` — manga-context restoration work
+that overlaps in intent (not file) with what #53 carries. Its own PR body says
+"Confirm PR #53/#54 are not merged as-is" — the codex session saw this fork too.
+Check `git ls-remote origin codex/ci-metricool-and-manga-imports` and
+`gh pr list --search codex/ci-metricool-and-manga-imports` for its live state before
+proceeding. Do NOT land both "add the module" (#55) and "remove the dependency on the
+module" (codex branch) — pick one strategy and treat the other as superseded:
+   - If the codex branch already has an open PR and looks clean, prefer it (it also
+     restores manga config #53 never touched) — merge it instead of #55, then treat
+     #53's `phoenix_v4/social/` files as unnecessary (Metricool no longer needs them)
+     and Step B's split-out social-schema PR should drop `phoenix_v4/social/` from its
+     diff entirely.
+   - If the codex branch isn't pushed/PR'd yet, land #55 per Step A below, then when
+     the codex branch does show up, its Metricool changes become redundant (the
+     import already resolves) — its manga-config changes are still real and should be
+     evaluated on their own merits, separately from the import fix.
+   - Either way, verify with the operator which strategy they want as the long-term
+     shape (module exists vs. dependency removed) if it's not obvious from which PR
+     merges cleanest — this is a real architectural choice, not just a race.
+
 ## Read first
 
 Read `docs/GITHUB_OPERATIONS_FRAMEWORK.md`, `docs/GITHUB_GOVERNANCE.md`,
