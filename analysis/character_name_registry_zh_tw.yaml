@@ -1,0 +1,2206 @@
+schema_version: 1
+locale: zh-TW
+status: DRAFT_2026-07-22_pending_operator_confirmation
+purpose: Canonical name-locking registry for zh-TW corpus-wide Chinese-character-name house style. Supersedes
+  the earlier 5-name draft on agent/zh-tw-glossary-build-20260722 (never reviewed/pushed). This registry
+  does NOT itself convert any atom content -- corpus conversion is a separate, later lane.
+method: 'Sampled all English-source CANONICAL.txt files under atoms/**  (not locale subdirs), 5,328 files
+  total across all engine types (HOOK/STORY/SCENE/PIVOT/TAKEAWAY/REFLECTION/EXERCISE/INTEGRATION/COMPRESSION/THREAD/PERMISSION/etc).
+  Extracted capitalized word tokens, cross-referenced against /usr/share/dict/words and /usr/share/dict/propernames
+  to suppress common-noun/verb/gerund false positives, then manually reviewed the ranked list by human
+  judgment (this pass is NOT a fully automated grep -- abstract nouns like ''Recognition'', ''Embodiment'',
+  ''Grief'', ''Crisis'' etc. were dropped by hand). Threshold: name-candidate token recurring in >=5 distinct
+  English-source files. This is a high-coverage but not exhaustive sample -- lower-frequency names (appearing
+  in <5 files) exist in the corpus and are NOT captured here; a follow-up wave should re-run this scan
+  with a lower threshold before the corpus-conversion lane begins.'
+names:
+- source_name: Priya
+  zh_tw_form: 普麗雅
+  rationale: 're-verified from dropped draft: natural Taiwan phonetic rendering for South-Asian-heritage
+    female name; kept'
+  occurrence_count_sampled: 3345
+  file_count_sampled: 497
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/false_alarm/CANONICAL.txt
+- source_name: Marcus
+  zh_tw_form: 馬可仕
+  rationale: 're-verified from dropped draft: standard Taiwan transliteration (cf. 馬可仕 as common Western-name
+    convention); kept'
+  occurrence_count_sampled: 2867
+  file_count_sampled: 488
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+- source_name: Sarah
+  zh_tw_form: 莎拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 2432
+  file_count_sampled: 350
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/shame/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/comparison/CANONICAL.txt
+- source_name: Maya
+  zh_tw_form: 瑪雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 2420
+  file_count_sampled: 265
+  first_seen_files:
+  - atoms/nyc_executives/boundaries/shame/CANONICAL.txt
+  - atoms/corporate_managers/adhd_focus/shame/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/overwhelm/CANONICAL.txt
+- source_name: Omar
+  zh_tw_form: 奧瑪
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 1128
+  file_count_sampled: 262
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Leo
+  zh_tw_form: 里歐
+  rationale: Taiwan phonetic transliteration
+  occurrence_count_sampled: 1267
+  file_count_sampled: 261
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Diane
+  zh_tw_form: 黛安
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 914
+  file_count_sampled: 258
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/shame/CANONICAL.txt
+  - atoms/nyc_executives/overthinking/shame/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/spiral/CANONICAL.txt
+- source_name: Don
+  zh_tw_form: 唐
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 463
+  file_count_sampled: 254
+  first_seen_files:
+  - atoms/healthcare_rns/boundaries/EXERCISE/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/EXERCISE/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/EXERCISE/CANONICAL.txt
+- source_name: Kai
+  zh_tw_form: 凱
+  rationale: single-syllable Taiwan transliteration, common for short Western/Polynesian-origin names
+  occurrence_count_sampled: 2308
+  file_count_sampled: 248
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Elena
+  zh_tw_form: 伊蓮娜
+  rationale: 're-verified from dropped draft: natural Taiwan rendering; kept'
+  occurrence_count_sampled: 1597
+  file_count_sampled: 241
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+- source_name: Alex
+  zh_tw_form: 艾力克斯
+  rationale: standard Taiwan phonetic transliteration for Alex/Alexander short form
+  occurrence_count_sampled: 2453
+  file_count_sampled: 230
+  first_seen_files:
+  - atoms/gen_z_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Tara
+  zh_tw_form: 塔拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 2406
+  file_count_sampled: 228
+  first_seen_files:
+  - atoms/millennial_women_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/comparison/CANONICAL.txt
+- source_name: Rachel
+  zh_tw_form: 瑞秋
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1905
+  file_count_sampled: 218
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/shame/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/comparison/CANONICAL.txt
+- source_name: James
+  zh_tw_form: 詹姆士
+  rationale: 're-verified from dropped draft: standard Taiwan transliteration; kept'
+  occurrence_count_sampled: 1991
+  file_count_sampled: 215
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Nora
+  zh_tw_form: 諾拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1217
+  file_count_sampled: 206
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/spiral/CANONICAL.txt
+- source_name: David
+  zh_tw_form: 大衛
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1888
+  file_count_sampled: 204
+  first_seen_files:
+  - atoms/healthcare_rns/somatic_healing/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/grief/CANONICAL.txt
+- source_name: Mika
+  zh_tw_form: 美嘉
+  rationale: 'AMBIGUOUS-FLAG: could be Japanese-heritage (美嘉/美香) or Western phonetic (米卡); flagged for
+    context check'
+  occurrence_count_sampled: 885
+  file_count_sampled: 199
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Zara
+  zh_tw_form: 扎拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1140
+  file_count_sampled: 187
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Suki
+  zh_tw_form: 蘇琪
+  rationale: 'AMBIGUOUS-FLAG: default phonetic rendering assigned (蘇琪); could alternatively be Japanese
+    紗希/沙紀 depending on character heritage -- needs context check before final lock'
+  occurrence_count_sampled: 1074
+  file_count_sampled: 187
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Theo
+  zh_tw_form: 希歐
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 770
+  file_count_sampled: 183
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Ren
+  zh_tw_form: 蓮
+  rationale: 'AMBIGUOUS-FLAG: East-Asian short name, could be male (漣/仁) or female (蓮); needs context
+    check'
+  occurrence_count_sampled: 861
+  file_count_sampled: 181
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Sam
+  zh_tw_form: 山姆
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1681
+  file_count_sampled: 180
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Ava
+  zh_tw_form: 艾娃
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 755
+  file_count_sampled: 172
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Nina
+  zh_tw_form: 妮娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 614
+  file_count_sampled: 168
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+- source_name: Devon
+  zh_tw_form: 戴文
+  rationale: 're-verified from dropped draft: standard Taiwan transliteration; kept'
+  occurrence_count_sampled: 618
+  file_count_sampled: 165
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Jess
+  zh_tw_form: 潔絲
+  rationale: standard Taiwan transliteration (short for Jessica)
+  occurrence_count_sampled: 438
+  file_count_sampled: 163
+  first_seen_files:
+  - atoms/millennial_women_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Keiko
+  zh_tw_form: 惠子
+  rationale: Japanese given name, kept in standard kanji rendering (used as-is in Traditional Chinese
+    text, common convention for Japanese names)
+  occurrence_count_sampled: 1348
+  file_count_sampled: 162
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/watcher/CANONICAL.txt
+- source_name: Tanya
+  zh_tw_form: 譚雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 476
+  file_count_sampled: 156
+  first_seen_files:
+  - atoms/healthcare_rns/somatic_healing/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/false_alarm/CANONICAL.txt
+- source_name: Greg
+  zh_tw_form: 葛瑞格
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 690
+  file_count_sampled: 155
+  first_seen_files:
+  - atoms/corporate_managers/adhd_focus/STORY/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/grief/CANONICAL.txt
+- source_name: Dan
+  zh_tw_form: 丹
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 692
+  file_count_sampled: 154
+  first_seen_files:
+  - atoms/gen_x_sandwich/somatic_healing/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/overthinking/watcher/CANONICAL.txt
+- source_name: Mia
+  zh_tw_form: 米亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 752
+  file_count_sampled: 153
+  first_seen_files:
+  - atoms/millennial_women_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Kira
+  zh_tw_form: 琪拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 663
+  file_count_sampled: 153
+  first_seen_files:
+  - atoms/gen_alpha_students/courage/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/shame/CANONICAL.txt
+- source_name: Anthony
+  zh_tw_form: 安東尼
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 452
+  file_count_sampled: 152
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Carmen
+  zh_tw_form: 卡門
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 888
+  file_count_sampled: 148
+  first_seen_files:
+  - atoms/millennial_women_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Carlos
+  zh_tw_form: 卡洛斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 606
+  file_count_sampled: 148
+  first_seen_files:
+  - atoms/corporate_managers/adhd_focus/STORY/CANONICAL.txt
+  - atoms/entrepreneurs/boundaries/watcher/CANONICAL.txt
+  - atoms/entrepreneurs/overthinking/overwhelm/CANONICAL.txt
+- source_name: Kevin
+  zh_tw_form: 凱文
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 660
+  file_count_sampled: 147
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/false_alarm/CANONICAL.txt
+  - atoms/corporate_managers/compassion_fatigue/shame/CANONICAL.txt
+  - atoms/corporate_managers/compassion_fatigue/comparison/CANONICAL.txt
+- source_name: Jen
+  zh_tw_form: 珍
+  rationale: standard Taiwan transliteration (short for Jennifer)
+  occurrence_count_sampled: 599
+  file_count_sampled: 147
+  first_seen_files:
+  - atoms/entrepreneurs/boundaries/watcher/CANONICAL.txt
+  - atoms/entrepreneurs/overthinking/overwhelm/CANONICAL.txt
+  - atoms/entrepreneurs/overthinking/grief/CANONICAL.txt
+- source_name: Vera
+  zh_tw_form: 薇拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 616
+  file_count_sampled: 143
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Nolan
+  zh_tw_form: 諾蘭
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 606
+  file_count_sampled: 134
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Sofia
+  zh_tw_form: 蘇菲亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 852
+  file_count_sampled: 132
+  first_seen_files:
+  - atoms/gen_z_professionals/mindfulness/THREAD/CANONICAL.txt
+  - atoms/millennial_women_professionals/mindfulness/THREAD/CANONICAL.txt
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+- source_name: Nia
+  zh_tw_form: 妮亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 768
+  file_count_sampled: 129
+  first_seen_files:
+  - atoms/gen_z_professionals/self_worth/overwhelm/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Lina
+  zh_tw_form: 莉娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 540
+  file_count_sampled: 127
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Naomi
+  zh_tw_form: 娜歐蜜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 548
+  file_count_sampled: 125
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Jordan
+  zh_tw_form: 喬丹
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1832
+  file_count_sampled: 122
+  first_seen_files:
+  - atoms/gen_z_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Juno
+  zh_tw_form: 朱諾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 690
+  file_count_sampled: 121
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Rita
+  zh_tw_form: 麗塔
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 649
+  file_count_sampled: 121
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Wes
+  zh_tw_form: 衛斯
+  rationale: standard Taiwan transliteration (short for Wesley)
+  occurrence_count_sampled: 527
+  file_count_sampled: 119
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Amira
+  zh_tw_form: 艾米拉
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 533
+  file_count_sampled: 114
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Derek
+  zh_tw_form: 戴瑞克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 933
+  file_count_sampled: 113
+  first_seen_files:
+  - atoms/healthcare_rns/anxiety/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/spiral/CANONICAL.txt
+- source_name: Elias
+  zh_tw_form: 以利亞斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 567
+  file_count_sampled: 113
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Ivy
+  zh_tw_form: 艾薇
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 549
+  file_count_sampled: 113
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Cole
+  zh_tw_form: 柯爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 506
+  file_count_sampled: 113
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Iris
+  zh_tw_form: 艾莉絲
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 523
+  file_count_sampled: 112
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Jonas
+  zh_tw_form: 喬納斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 513
+  file_count_sampled: 111
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Hugo
+  zh_tw_form: 雨果
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 507
+  file_count_sampled: 111
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Clara
+  zh_tw_form: 克拉拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 505
+  file_count_sampled: 111
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Pia
+  zh_tw_form: 琵雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 469
+  file_count_sampled: 110
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Javier
+  zh_tw_form: 哈維爾
+  rationale: standard Taiwan transliteration for Spanish-origin name
+  occurrence_count_sampled: 852
+  file_count_sampled: 106
+  first_seen_files:
+  - atoms/working_parents/burnout/watcher/CANONICAL.txt
+  - atoms/working_parents/burnout/overwhelm/CANONICAL.txt
+  - atoms/working_parents/burnout/spiral/CANONICAL.txt
+- source_name: Talia
+  zh_tw_form: 塔莉雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 462
+  file_count_sampled: 105
+  first_seen_files:
+  - atoms/healthcare_rns/anchored/INTEGRATION/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
+- source_name: Aisha
+  zh_tw_form: 艾夏
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 677
+  file_count_sampled: 100
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/shame/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
+- source_name: Claire
+  zh_tw_form: 克萊兒
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 695
+  file_count_sampled: 92
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/shame/CANONICAL.txt
+- source_name: Tom
+  zh_tw_form: 湯姆
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 571
+  file_count_sampled: 91
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/STORY/CANONICAL.txt
+- source_name: Dante
+  zh_tw_form: 但丁
+  rationale: standard Taiwan transliteration (established literary convention)
+  occurrence_count_sampled: 493
+  file_count_sampled: 91
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+- source_name: Zoe
+  zh_tw_form: 柔伊
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 289
+  file_count_sampled: 91
+  first_seen_files:
+  - atoms/gen_z_professionals/mindfulness/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/financial_stress/comparison/CANONICAL.txt
+- source_name: Dev
+  zh_tw_form: 戴弗
+  rationale: 'AMBIGUOUS-FLAG: short form of Devendra/Devon-type names; rendered distinct from Dave (戴夫)
+    to avoid a same-character collision between two different source names -- confirm this isn''t actually
+    a truncated ''Devon'' before locking'
+  occurrence_count_sampled: 1201
+  file_count_sampled: 89
+  first_seen_files:
+  - atoms/gen_z_professionals/self_worth/overwhelm/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/grief/CANONICAL.txt
+- source_name: Chen
+  zh_tw_form: 陳
+  rationale: 'AMBIGUOUS-FLAG: this is a Chinese surname already in the source (e.g. "Marcus Chen") --
+    keep as 陳, do not re-transliterate phonetically; confirm pairing with the locked given-name rendering'
+  occurrence_count_sampled: 222
+  file_count_sampled: 82
+  first_seen_files:
+  - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/boundaries/false_alarm/CANONICAL.txt
+- source_name: Camille
+  zh_tw_form: 卡蜜兒
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 159
+  file_count_sampled: 81
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Quin
+  zh_tw_form: 昆恩
+  rationale: 'AMBIGUOUS-FLAG: variant spelling of Quinn -- confirm same character before merging renderings'
+  occurrence_count_sampled: 449
+  file_count_sampled: 79
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Eden
+  zh_tw_form: 伊登
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 446
+  file_count_sampled: 79
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Mara
+  zh_tw_form: 瑪拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 431
+  file_count_sampled: 79
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Noor
+  zh_tw_form: 努爾
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 429
+  file_count_sampled: 78
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Hana
+  zh_tw_form: 哈娜
+  rationale: 'AMBIGUOUS-FLAG: could be Arabic/Western 哈娜 or Japanese 花 -- needs context check'
+  occurrence_count_sampled: 422
+  file_count_sampled: 78
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Beck
+  zh_tw_form: 貝克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 422
+  file_count_sampled: 77
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Jake
+  zh_tw_form: 傑克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 176
+  file_count_sampled: 77
+  first_seen_files:
+  - atoms/gen_x_sandwich/anxiety/comparison/CANONICAL.txt
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+  - atoms/first_responders/financial_stress/overwhelm/CANONICAL.txt
+- source_name: Brianna
+  zh_tw_form: 布莉安娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 167
+  file_count_sampled: 76
+  first_seen_files:
+  - atoms/healthcare_rns/somatic_healing/grief/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/overwhelm/CANONICAL.txt
+- source_name: Luca
+  zh_tw_form: 盧卡
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 401
+  file_count_sampled: 74
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+- source_name: Yuki
+  zh_tw_form: 由紀
+  rationale: Japanese given name, kept in standard kanji rendering
+  occurrence_count_sampled: 144
+  file_count_sampled: 73
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/STORY/CANONICAL.txt
+- source_name: Brien
+  zh_tw_form: 布萊恩
+  rationale: 'AMBIGUOUS-FLAG: likely a corpus artifact of "O''Brien" surname split by the scan regex on
+    the apostrophe -- verify source text before locking; do not treat as a first name'
+  occurrence_count_sampled: 158
+  file_count_sampled: 72
+  first_seen_files:
+  - atoms/first_responders/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/first_responders/financial_stress/grief/CANONICAL.txt
+  - atoms/first_responders/financial_stress/false_alarm/CANONICAL.txt
+- source_name: Rivera
+  zh_tw_form: 里維拉
+  rationale: surname, standard Taiwan transliteration for Spanish-origin surname
+  occurrence_count_sampled: 139
+  file_count_sampled: 71
+  first_seen_files:
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+  - atoms/first_responders/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/first_responders/financial_stress/grief/CANONICAL.txt
+- source_name: Michael
+  zh_tw_form: 麥可
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 1077
+  file_count_sampled: 70
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/shame/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/comparison/CANONICAL.txt
+- source_name: Heather
+  zh_tw_form: 希瑟
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 145
+  file_count_sampled: 69
+  first_seen_files:
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+  - atoms/first_responders/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/first_responders/financial_stress/spiral/CANONICAL.txt
+- source_name: Carol
+  zh_tw_form: 卡蘿
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 411
+  file_count_sampled: 68
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/spiral/CANONICAL.txt
+- source_name: Janet
+  zh_tw_form: 珍妮特
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 394
+  file_count_sampled: 68
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/spiral/CANONICAL.txt
+- source_name: Kim
+  zh_tw_form: 金
+  rationale: 'AMBIGUOUS-FLAG: could be Western given name (金) or Korean surname (金) depending on character
+    heritage -- needs context check'
+  occurrence_count_sampled: 161
+  file_count_sampled: 66
+  first_seen_files:
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+  - atoms/first_responders/financial_stress/spiral/CANONICAL.txt
+  - atoms/first_responders/financial_stress/grief/CANONICAL.txt
+- source_name: Dana
+  zh_tw_form: 達娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 170
+  file_count_sampled: 65
+  first_seen_files:
+  - atoms/corporate_managers/adhd_focus/overwhelm/CANONICAL.txt
+  - atoms/corporate_managers/adhd_focus/HOOK/CANONICAL.txt
+  - atoms/corporate_managers/adhd_focus/STORY/CANONICAL.txt
+- source_name: Marco
+  zh_tw_form: 馬可
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 505
+  file_count_sampled: 62
+  first_seen_files:
+  - atoms/gen_z_professionals/self_worth/overwhelm/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/grief/CANONICAL.txt
+  - atoms/gen_z_professionals/self_worth/false_alarm/CANONICAL.txt
+- source_name: Asha
+  zh_tw_form: 艾莎
+  rationale: standard Taiwan transliteration for South-Asian/African-origin name
+  occurrence_count_sampled: 147
+  file_count_sampled: 60
+  first_seen_files:
+  - atoms/gen_alpha_students/burnout/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/financial_stress/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/false_alarm/CANONICAL.txt
+- source_name: Eli
+  zh_tw_form: 以萊
+  rationale: standard Taiwan transliteration (short for Elijah/Elias)
+  occurrence_count_sampled: 73
+  file_count_sampled: 60
+  first_seen_files:
+  - atoms/gen_alpha_students/burnout/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/financial_stress/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/false_alarm/CANONICAL.txt
+- source_name: Ravi
+  zh_tw_form: 拉維
+  rationale: standard Taiwan transliteration for South-Asian-origin name
+  occurrence_count_sampled: 471
+  file_count_sampled: 59
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+- source_name: Renata
+  zh_tw_form: 蕾娜塔
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 74
+  file_count_sampled: 58
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+- source_name: Lila
+  zh_tw_form: 莉拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 250
+  file_count_sampled: 57
+  first_seen_files:
+  - atoms/nyc_executives/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/financial_stress/comparison/CANONICAL.txt
+- source_name: Gutierrez
+  zh_tw_form: 古提雷茲
+  rationale: surname, standard Taiwan transliteration for Spanish-origin surname
+  occurrence_count_sampled: 102
+  file_count_sampled: 56
+  first_seen_files:
+  - atoms/first_responders/financial_stress/spiral/CANONICAL.txt
+  - atoms/first_responders/financial_stress/false_alarm/CANONICAL.txt
+  - atoms/first_responders/financial_stress/shame/CANONICAL.txt
+- source_name: Sasha
+  zh_tw_form: 莎夏
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 170
+  file_count_sampled: 55
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/watcher/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/overwhelm/CANONICAL.txt
+- source_name: Morales
+  zh_tw_form: 莫拉萊斯
+  rationale: surname, standard Taiwan transliteration for Spanish-origin surname
+  occurrence_count_sampled: 105
+  file_count_sampled: 54
+  first_seen_files:
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+  - atoms/first_responders/financial_stress/false_alarm/CANONICAL.txt
+  - atoms/first_responders/financial_stress/shame/CANONICAL.txt
+- source_name: Wei
+  zh_tw_form: 偉
+  rationale: 'AMBIGUOUS-FLAG: this is a Chinese given name already written in Han characters in source
+    (romanized as ''Wei'') -- likely denotes a Chinese-heritage character; confirm intended characters
+    (偉/薇/緯) from context rather than re-transliterating as if Western'
+  occurrence_count_sampled: 145
+  file_count_sampled: 51
+  first_seen_files:
+  - atoms/tech_finance_burnout/courage/shame/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/spiral/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/false_alarm/CANONICAL.txt
+- source_name: Simone
+  zh_tw_form: 西夢
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 136
+  file_count_sampled: 51
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Nadia
+  zh_tw_form: 娜迪雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 111
+  file_count_sampled: 50
+  first_seen_files:
+  - atoms/corporate_managers/adhd_focus/overwhelm/CANONICAL.txt
+  - atoms/corporate_managers/adhd_focus/STORY/CANONICAL.txt
+  - atoms/gen_z_professionals/mindfulness/THREAD/CANONICAL.txt
+- source_name: Grace
+  zh_tw_form: 葛瑞絲
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 386
+  file_count_sampled: 49
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+- source_name: Layla
+  zh_tw_form: 蕾拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 188
+  file_count_sampled: 45
+  first_seen_files:
+  - atoms/gen_z_professionals/mindfulness/STORY/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/spiral/CANONICAL.txt
+  - atoms/millennial_women_professionals/self_worth/grief/CANONICAL.txt
+- source_name: Maria
+  zh_tw_form: 瑪莉亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 327
+  file_count_sampled: 44
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Rosa
+  zh_tw_form: 蘿莎
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 162
+  file_count_sampled: 38
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Dani
+  zh_tw_form: 丹妮
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 139
+  file_count_sampled: 38
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Felix
+  zh_tw_form: 菲力克斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 187
+  file_count_sampled: 33
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Sana
+  zh_tw_form: 莎娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 63
+  file_count_sampled: 32
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+- source_name: Owen
+  zh_tw_form: 歐文
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 62
+  file_count_sampled: 32
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Anika
+  zh_tw_form: 安妮卡
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 463
+  file_count_sampled: 31
+  first_seen_files:
+  - atoms/educators/burnout/spiral/CANONICAL.txt
+  - atoms/educators/courage/spiral/CANONICAL.txt
+  - atoms/educators/courage/false_alarm/CANONICAL.txt
+- source_name: Julian
+  zh_tw_form: 朱利安
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 34
+  file_count_sampled: 31
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+- source_name: Ezra
+  zh_tw_form: 以斯拉
+  rationale: standard Taiwan transliteration (biblical convention)
+  occurrence_count_sampled: 142
+  file_count_sampled: 29
+  first_seen_files:
+  - atoms/gen_alpha_students/burnout/watcher/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/spiral/CANONICAL.txt
+- source_name: Andre
+  zh_tw_form: 安德烈
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 31
+  file_count_sampled: 29
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+- source_name: Tyler
+  zh_tw_form: 泰勒
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 183
+  file_count_sampled: 28
+  first_seen_files:
+  - atoms/healthcare_rns/compassion_fatigue/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/shame/CANONICAL.txt
+- source_name: Dex
+  zh_tw_form: 德克斯
+  rationale: standard Taiwan transliteration (short for Dexter)
+  occurrence_count_sampled: 214
+  file_count_sampled: 27
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/watcher/CANONICAL.txt
+- source_name: Renee
+  zh_tw_form: 芮妮
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 63
+  file_count_sampled: 27
+  first_seen_files:
+  - atoms/gen_z_professionals/mindfulness/THREAD/CANONICAL.txt
+  - atoms/gen_alpha_students/mindfulness/THREAD/CANONICAL.txt
+  - atoms/gen_alpha_students/mindfulness/HOOK/CANONICAL.txt
+- source_name: Yolanda
+  zh_tw_form: 尤蘭達
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 45
+  file_count_sampled: 27
+  first_seen_files:
+  - atoms/healthcare_rns/mindfulness/THREAD/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/HOOK/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/STORY/CANONICAL.txt
+- source_name: Corinne
+  zh_tw_form: 柯琳
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 27
+  file_count_sampled: 27
+  first_seen_files:
+  - atoms/healthcare_rns/mindfulness/THREAD/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/HOOK/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/STORY/CANONICAL.txt
+- source_name: Marisol
+  zh_tw_form: 瑪麗索
+  rationale: standard Taiwan transliteration for Spanish-origin name
+  occurrence_count_sampled: 37
+  file_count_sampled: 26
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Luz
+  zh_tw_form: 露茲
+  rationale: standard Taiwan transliteration for Spanish-origin name
+  occurrence_count_sampled: 70
+  file_count_sampled: 24
+  first_seen_files:
+  - atoms/healthcare_rns/somatic_healing/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/grief/CANONICAL.txt
+- source_name: Lisa
+  zh_tw_form: 麗莎
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 279
+  file_count_sampled: 23
+  first_seen_files:
+  - atoms/corporate_managers/anxiety/false_alarm/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/shame/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/comparison/CANONICAL.txt
+- source_name: Denise
+  zh_tw_form: 丹妮絲
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 72
+  file_count_sampled: 23
+  first_seen_files:
+  - atoms/healthcare_rns/adhd_focus/THREAD/CANONICAL.txt
+  - atoms/healthcare_rns/adhd_focus/HOOK/CANONICAL.txt
+  - atoms/healthcare_rns/adhd_focus/STORY/CANONICAL.txt
+- source_name: Ben
+  zh_tw_form: 班
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 34
+  file_count_sampled: 23
+  first_seen_files:
+  - atoms/nyc_executives/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
+  - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
+- source_name: Amy
+  zh_tw_form: 艾咪
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 112
+  file_count_sampled: 22
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/grief/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Dominique
+  zh_tw_form: 多明妮克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 96
+  file_count_sampled: 22
+  first_seen_files:
+  - atoms/healthcare_rns/compassion_fatigue/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
+- source_name: Mei
+  zh_tw_form: 美
+  rationale: 'AMBIGUOUS-FLAG: this is a Chinese given name already in the source -- confirm intended character
+    (美/梅) from context rather than treating as Western name'
+  occurrence_count_sampled: 69
+  file_count_sampled: 21
+  first_seen_files:
+  - atoms/healthcare_rns/somatic_healing/false_alarm/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/grief/CANONICAL.txt
+- source_name: Gia
+  zh_tw_form: 吉雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 63
+  file_count_sampled: 21
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Deshawn
+  zh_tw_form: 德尚
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 43
+  file_count_sampled: 21
+  first_seen_files:
+  - atoms/gen_alpha_students/burnout/watcher/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/spiral/CANONICAL.txt
+- source_name: Keisha
+  zh_tw_form: 姬夏
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 113
+  file_count_sampled: 20
+  first_seen_files:
+  - atoms/healthcare_rns/compassion_fatigue/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
+- source_name: Alicia
+  zh_tw_form: 艾莉西亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 97
+  file_count_sampled: 20
+  first_seen_files:
+  - atoms/healthcare_rns/compassion_fatigue/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
+- source_name: Raj
+  zh_tw_form: 拉吉
+  rationale: standard Taiwan transliteration for South-Asian-origin name
+  occurrence_count_sampled: 85
+  file_count_sampled: 20
+  first_seen_files:
+  - atoms/healthcare_rns/anxiety/comparison/CANONICAL.txt
+  - atoms/healthcare_rns/boundaries/comparison/CANONICAL.txt
+  - atoms/healthcare_rns/grief/watcher/CANONICAL.txt
+- source_name: Nova
+  zh_tw_form: 諾娃
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 75
+  file_count_sampled: 19
+  first_seen_files:
+  - atoms/gen_alpha_students/financial_stress/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/STORY/CANONICAL.txt
+- source_name: Mira
+  zh_tw_form: 米拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 73
+  file_count_sampled: 19
+  first_seen_files:
+  - atoms/gen_alpha_students/burnout/spiral/CANONICAL.txt
+  - atoms/gen_z_professionals/anxiety/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/false_alarm/CANONICAL.txt
+- source_name: Diallo
+  zh_tw_form: 迪亞洛
+  rationale: surname, standard Taiwan transliteration for West African-origin surname
+  occurrence_count_sampled: 33
+  file_count_sampled: 19
+  first_seen_files:
+  - atoms/gen_alpha_students/mindfulness/THREAD/CANONICAL.txt
+  - atoms/gen_alpha_students/mindfulness/HOOK/CANONICAL.txt
+  - atoms/gen_alpha_students/mindfulness/STORY/CANONICAL.txt
+- source_name: Priyanka
+  zh_tw_form: 普麗揚卡
+  rationale: standard Taiwan transliteration, consistent with locked Priya rendering
+  occurrence_count_sampled: 19
+  file_count_sampled: 19
+  first_seen_files:
+  - atoms/gen_z_professionals/mindfulness/THREAD/CANONICAL.txt
+  - atoms/gen_z_professionals/anxiety/STORY/CANONICAL.txt
+  - atoms/millennial_women_professionals/mindfulness/THREAD/CANONICAL.txt
+- source_name: Karen
+  zh_tw_form: 凱倫
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 195
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/gen_x_sandwich/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/spiral/CANONICAL.txt
+- source_name: Reid
+  zh_tw_form: 里德
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 54
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/financial_anxiety/comparison/CANONICAL.txt
+- source_name: Selin
+  zh_tw_form: 賽琳
+  rationale: standard Taiwan transliteration for Turkish-origin name
+  occurrence_count_sampled: 34
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/gen_z_student/imposter_syndrome/comparison/CANONICAL.txt
+  - atoms/gen_z_student/self_worth/watcher/CANONICAL.txt
+  - atoms/gen_z_student/self_worth/shame/CANONICAL.txt
+- source_name: Arjun
+  zh_tw_form: 阿爾君
+  rationale: standard Taiwan transliteration for South-Asian-origin name
+  occurrence_count_sampled: 33
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/gen_z_student/courage/spiral/CANONICAL.txt
+  - atoms/gen_z_student/imposter_syndrome/comparison/CANONICAL.txt
+  - atoms/gen_z_student/self_worth/watcher/CANONICAL.txt
+- source_name: Whitfield
+  zh_tw_form: 惠特菲爾德
+  rationale: surname, standard Taiwan transliteration
+  occurrence_count_sampled: 30
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/gen_alpha_students/mindfulness/THREAD/CANONICAL.txt
+  - atoms/gen_alpha_students/mindfulness/HOOK/CANONICAL.txt
+  - atoms/gen_alpha_students/mindfulness/STORY/CANONICAL.txt
+- source_name: Kofi
+  zh_tw_form: 科菲
+  rationale: standard Taiwan transliteration for West African-origin name
+  occurrence_count_sampled: 28
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/gen_z_student/grief/grief/CANONICAL.txt
+  - atoms/gen_z_student/courage/shame/CANONICAL.txt
+  - atoms/gen_z_student/self_worth/watcher/CANONICAL.txt
+- source_name: Luna
+  zh_tw_form: 露娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 52
+  file_count_sampled: 18
+  first_seen_files:
+  - atoms/gen_alpha_students/financial_stress/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/STORY/CANONICAL.txt
+- source_name: Ryan
+  zh_tw_form: 萊恩
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 71
+  file_count_sampled: 17
+  first_seen_files:
+  - atoms/tech_finance_burnout/courage/shame/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/spiral/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/false_alarm/CANONICAL.txt
+- source_name: Natasha
+  zh_tw_form: 娜塔莎
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 70
+  file_count_sampled: 17
+  first_seen_files:
+  - atoms/tech_finance_burnout/courage/shame/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/spiral/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/false_alarm/CANONICAL.txt
+- source_name: Zadie
+  zh_tw_form: 莎蒂
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 40
+  file_count_sampled: 17
+  first_seen_files:
+  - atoms/gen_alpha_students/burnout/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/grief/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/shame/CANONICAL.txt
+- source_name: Dominic
+  zh_tw_form: 多明尼克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 17
+  file_count_sampled: 17
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Isaiah
+  zh_tw_form: 以賽亞
+  rationale: standard Taiwan transliteration (biblical convention)
+  occurrence_count_sampled: 17
+  file_count_sampled: 17
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Bianca
+  zh_tw_form: 碧安卡
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 17
+  file_count_sampled: 17
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Malachi
+  zh_tw_form: 瑪拉基
+  rationale: standard Taiwan transliteration (biblical convention)
+  occurrence_count_sampled: 32
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Terrence
+  zh_tw_form: 泰倫斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 32
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Harriet
+  zh_tw_form: 哈莉葉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Consuela
+  zh_tw_form: 康絮拉
+  rationale: standard Taiwan transliteration for Spanish-origin name
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Douglas
+  zh_tw_form: 道格拉斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Meilin
+  zh_tw_form: 美琳
+  rationale: 'AMBIGUOUS-FLAG: this is a Chinese given name already in the source -- confirm intended characters
+    (美琳/美玲) from context rather than treating as a Western name to re-transliterate'
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Rashid
+  zh_tw_form: 拉希德
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Odessa
+  zh_tw_form: 奧黛莎
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Trent
+  zh_tw_form: 特倫特
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Bartholomew
+  zh_tw_form: 巴瑟羅繆
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Nadine
+  zh_tw_form: 娜汀
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Farrah
+  zh_tw_form: 法拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Desmond
+  zh_tw_form: 戴斯蒙
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Patrick
+  zh_tw_form: 派翠克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Wanda
+  zh_tw_form: 汪達
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Nathaniel
+  zh_tw_form: 納撒尼爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Louisa
+  zh_tw_form: 露薏莎
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Josephine
+  zh_tw_form: 約瑟芬
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Julio
+  zh_tw_form: 胡立歐
+  rationale: standard Taiwan transliteration for Spanish-origin name
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
+- source_name: Willow
+  zh_tw_form: 薇洛
+  rationale: standard Taiwan transliteration (nature-word given name)
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/gen_alpha_students/financial_stress/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/STORY/CANONICAL.txt
+- source_name: Aria
+  zh_tw_form: 艾莉亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 16
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/gen_alpha_students/financial_stress/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/STORY/CANONICAL.txt
+- source_name: Harper
+  zh_tw_form: 哈波
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 32
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/gen_alpha_students/financial_stress/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/burnout/STORY/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/STORY/CANONICAL.txt
+- source_name: Reggie
+  zh_tw_form: 瑞吉
+  rationale: standard Taiwan transliteration (short for Reginald)
+  occurrence_count_sampled: 17
+  file_count_sampled: 16
+  first_seen_files:
+  - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/financial_anxiety/STORY/CANONICAL.txt
+- source_name: Elliott
+  zh_tw_form: 艾略特
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 63
+  file_count_sampled: 15
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/shame/CANONICAL.txt
+  - atoms/nyc_executives/overthinking/watcher/CANONICAL.txt
+  - atoms/nyc_executives/boundaries/false_alarm/CANONICAL.txt
+- source_name: Shane
+  zh_tw_form: 尚恩
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 45
+  file_count_sampled: 15
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+  - atoms/educators/somatic_healing/comparison/CANONICAL.txt
+  - atoms/educators/somatic_healing/false_alarm/CANONICAL.txt
+- source_name: Remy
+  zh_tw_form: 雷米
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 22
+  file_count_sampled: 15
+  first_seen_files:
+  - atoms/gen_z_student/courage/spiral/CANONICAL.txt
+  - atoms/gen_z_student/self_worth/comparison/CANONICAL.txt
+  - atoms/gen_z_student/grief/grief/CANONICAL.txt
+- source_name: Angela
+  zh_tw_form: 安潔拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 20
+  file_count_sampled: 15
+  first_seen_files:
+  - atoms/healthcare_rns/mindfulness/THREAD/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/HOOK/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/STORY/CANONICAL.txt
+- source_name: Mark
+  zh_tw_form: 馬克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 115
+  file_count_sampled: 14
+  first_seen_files:
+  - atoms/gen_z_professionals/overthinking/INTEGRATION/CANONICAL.txt
+  - atoms/millennial_women_professionals/compassion_fatigue/EXERCISE/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/false_alarm/CANONICAL.txt
+- source_name: Yara
+  zh_tw_form: 雅拉
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 42
+  file_count_sampled: 14
+  first_seen_files:
+  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
+  - atoms/educators/somatic_healing/comparison/CANONICAL.txt
+  - atoms/educators/somatic_healing/false_alarm/CANONICAL.txt
+- source_name: Tomas
+  zh_tw_form: 托馬斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 41
+  file_count_sampled: 14
+  first_seen_files:
+  - atoms/healthcare_rns/compassion_fatigue/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
+- source_name: Phil
+  zh_tw_form: 菲爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 208
+  file_count_sampled: 13
+  first_seen_files:
+  - atoms/gen_x_sandwich/somatic_healing/shame/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/overwhelm/CANONICAL.txt
+- source_name: Dean
+  zh_tw_form: 迪恩
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 170
+  file_count_sampled: 13
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/false_alarm/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/false_alarm/CANONICAL.txt
+- source_name: Daniel
+  zh_tw_form: 丹尼爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 45
+  file_count_sampled: 13
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/comparison/CANONICAL.txt
+  - atoms/nyc_executives/overthinking/watcher/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/spiral/CANONICAL.txt
+- source_name: Kiran
+  zh_tw_form: 基蘭
+  rationale: standard Taiwan transliteration for South-Asian-origin name
+  occurrence_count_sampled: 43
+  file_count_sampled: 13
+  first_seen_files:
+  - atoms/tech_finance_burnout/burnout/false_alarm/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/comparison/CANONICAL.txt
+  - atoms/tech_finance_burnout/boundaries/watcher/CANONICAL.txt
+- source_name: Brian
+  zh_tw_form: 布萊恩
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 185
+  file_count_sampled: 12
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/false_alarm/CANONICAL.txt
+  - atoms/gen_x_sandwich/overthinking/overwhelm/CANONICAL.txt
+- source_name: Hank
+  zh_tw_form: 漢克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 164
+  file_count_sampled: 12
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/watcher/CANONICAL.txt
+- source_name: Dave
+  zh_tw_form: 戴夫
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 117
+  file_count_sampled: 12
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/shame/CANONICAL.txt
+- source_name: Catherine
+  zh_tw_form: 凱瑟琳
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 63
+  file_count_sampled: 12
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/HOOK/CANONICAL.txt
+  - atoms/nyc_executives/overthinking/spiral/CANONICAL.txt
+  - atoms/nyc_executives/somatic_healing/HOOK/CANONICAL.txt
+- source_name: Vivian
+  zh_tw_form: 薇薇安
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 40
+  file_count_sampled: 12
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/boundaries/comparison/CANONICAL.txt
+- source_name: Kyle
+  zh_tw_form: 凱爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 30
+  file_count_sampled: 12
+  first_seen_files:
+  - atoms/first_responders/financial_stress/watcher/CANONICAL.txt
+  - atoms/first_responders/overthinking/comparison/CANONICAL.txt
+  - atoms/first_responders/sleep_anxiety/shame/CANONICAL.txt
+- source_name: Roy
+  zh_tw_form: 羅伊
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 158
+  file_count_sampled: 11
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/comparison/CANONICAL.txt
+- source_name: Carl
+  zh_tw_form: 卡爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 147
+  file_count_sampled: 11
+  first_seen_files:
+  - atoms/corporate_managers/anxiety/false_alarm/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/comparison/CANONICAL.txt
+  - atoms/corporate_managers/anchored/anxiety_false_alarm/CANONICAL.txt
+- source_name: Beth
+  zh_tw_form: 貝絲
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 140
+  file_count_sampled: 11
+  first_seen_files:
+  - atoms/gen_x_sandwich/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/compassion_fatigue/overwhelm/CANONICAL.txt
+- source_name: Barb
+  zh_tw_form: 芭布
+  rationale: standard Taiwan transliteration (short for Barbara)
+  occurrence_count_sampled: 105
+  file_count_sampled: 11
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/overthinking/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/spiral/CANONICAL.txt
+- source_name: Aiden
+  zh_tw_form: 艾登
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 33
+  file_count_sampled: 11
+  first_seen_files:
+  - atoms/tech_finance_burnout/burnout/overwhelm/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/grief/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/shame/CANONICAL.txt
+- source_name: Helena
+  zh_tw_form: 海倫娜
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 35
+  file_count_sampled: 11
+  first_seen_files:
+  - atoms/nyc_executives/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/shame/CANONICAL.txt
+  - atoms/nyc_executives/boundaries/false_alarm/CANONICAL.txt
+- source_name: Gail
+  zh_tw_form: 蓋兒
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 151
+  file_count_sampled: 10
+  first_seen_files:
+  - atoms/gen_x_sandwich/somatic_healing/shame/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/grief/CANONICAL.txt
+- source_name: Laura
+  zh_tw_form: 蘿拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 142
+  file_count_sampled: 10
+  first_seen_files:
+  - atoms/gen_x_sandwich/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/false_alarm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/shame/CANONICAL.txt
+- source_name: Chris
+  zh_tw_form: 克里斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 78
+  file_count_sampled: 10
+  first_seen_files:
+  - atoms/healthcare_rns/boundaries/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/boundaries/grief/CANONICAL.txt
+  - atoms/healthcare_rns/courage/overwhelm/CANONICAL.txt
+- source_name: Blake
+  zh_tw_form: 布萊克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 38
+  file_count_sampled: 10
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/comparison/CANONICAL.txt
+  - atoms/nyc_executives/compassion_fatigue/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/compassion_fatigue/grief/CANONICAL.txt
+- source_name: Paula
+  zh_tw_form: 寶拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 140
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/gen_x_sandwich/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/false_alarm/CANONICAL.txt
+- source_name: Keith
+  zh_tw_form: 基斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 123
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/compassion_fatigue/watcher/CANONICAL.txt
+- source_name: Wendy
+  zh_tw_form: 溫蒂
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 120
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/spiral/CANONICAL.txt
+- source_name: Miles
+  zh_tw_form: 邁爾斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 57
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/watcher/CANONICAL.txt
+  - atoms/gen_alpha_students/depression/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/comparison/CANONICAL.txt
+- source_name: Kenji
+  zh_tw_form: 健二
+  rationale: Japanese given name, kept in standard kanji rendering
+  occurrence_count_sampled: 39
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/healthcare_rns/burnout/STORY/CANONICAL.txt
+  - atoms/gen_z_professionals/anxiety/STORY/CANONICAL.txt
+  - atoms/corporate_managers/burnout/STORY/CANONICAL.txt
+- source_name: Anton
+  zh_tw_form: 安東
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 37
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/shame/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/nyc_executives/boundaries/comparison/CANONICAL.txt
+- source_name: Sandra
+  zh_tw_form: 珊卓拉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 31
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/corporate_managers/courage/spiral/CANONICAL.txt
+  - atoms/corporate_managers/courage/false_alarm/CANONICAL.txt
+  - atoms/corporate_managers/courage/shame/CANONICAL.txt
+- source_name: Kimberly
+  zh_tw_form: 金柏莉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 12
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/healthcare_rns/mindfulness/THREAD/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/HOOK/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/STORY/CANONICAL.txt
+- source_name: Fatima
+  zh_tw_form: 法蒂瑪
+  rationale: standard Taiwan transliteration for Arabic-origin name
+  occurrence_count_sampled: 33
+  file_count_sampled: 9
+  first_seen_files:
+  - atoms/healthcare_rns/boundaries/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/watcher/CANONICAL.txt
+  - atoms/healthcare_rns/sleep_anxiety/false_alarm/CANONICAL.txt
+- source_name: Bodhi
+  zh_tw_form: 菩提
+  rationale: Sanskrit-origin name, kept in established Buddhist-term transliteration
+  occurrence_count_sampled: 129
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/watcher/CANONICAL.txt
+  - atoms/gen_alpha_students/courage/grief/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/shame/CANONICAL.txt
+- source_name: Arlo
+  zh_tw_form: 阿羅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 120
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_alpha_students/courage/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/comparison/CANONICAL.txt
+- source_name: Elke
+  zh_tw_form: 艾爾克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 116
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/courage/grief/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/grief/CANONICAL.txt
+- source_name: Walt
+  zh_tw_form: 華特
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 115
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/shame/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/comparison/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/overwhelm/CANONICAL.txt
+- source_name: Rob
+  zh_tw_form: 羅伯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 114
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/anxiety/overwhelm/CANONICAL.txt
+- source_name: Sharon
+  zh_tw_form: 雪倫
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 114
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_x_sandwich/anxiety/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/depression/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/courage/grief/CANONICAL.txt
+- source_name: Neil
+  zh_tw_form: 尼爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 104
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/false_alarm/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/comparison/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/comparison/CANONICAL.txt
+- source_name: Yuna
+  zh_tw_form: 由奈
+  rationale: 'AMBIGUOUS-FLAG: could render as Japanese-style 由奈/優奈 or Western phonetic 尤娜 depending on
+    character heritage -- needs context check'
+  occurrence_count_sampled: 30
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/comparison/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/spiral/CANONICAL.txt
+- source_name: Victor
+  zh_tw_form: 維克多
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 30
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/nyc_executives/anxiety/false_alarm/CANONICAL.txt
+  - atoms/nyc_executives/financial_stress/shame/CANONICAL.txt
+  - atoms/nyc_executives/boundaries/false_alarm/CANONICAL.txt
+- source_name: Elijah
+  zh_tw_form: 以利亞
+  rationale: standard Taiwan transliteration (biblical convention)
+  occurrence_count_sampled: 26
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/healthcare_rns/somatic_healing/overwhelm/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/spiral/CANONICAL.txt
+  - atoms/healthcare_rns/somatic_healing/grief/CANONICAL.txt
+- source_name: Linda
+  zh_tw_form: 琳達
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 23
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/HOOK/CANONICAL.txt
+  - atoms/gen_x_sandwich/compassion_fatigue/HOOK/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_anxiety/HOOK/CANONICAL.txt
+- source_name: Patricia
+  zh_tw_form: 派翠西亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 19
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/HOOK/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/HOOK/CANONICAL.txt
+  - atoms/gen_x_sandwich/boundaries/HOOK/CANONICAL.txt
+- source_name: Soren
+  zh_tw_form: 索倫
+  rationale: standard Taiwan transliteration for Scandinavian-origin name
+  occurrence_count_sampled: 35
+  file_count_sampled: 8
+  first_seen_files:
+  - atoms/tech_finance_burnout/burnout/spiral/CANONICAL.txt
+  - atoms/tech_finance_burnout/burnout/false_alarm/CANONICAL.txt
+  - atoms/tech_finance_burnout/anxiety/watcher/CANONICAL.txt
+- source_name: Atlas
+  zh_tw_form: 亞特拉斯
+  rationale: standard Taiwan transliteration (mythological name used as given name)
+  occurrence_count_sampled: 102
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/gen_alpha_students/courage/false_alarm/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/false_alarm/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/spiral/CANONICAL.txt
+- source_name: Cai
+  zh_tw_form: 蔡
+  rationale: 'AMBIGUOUS-FLAG: default assumes Chinese-surname reading (蔡) to avoid a same-character collision
+    with Kai (凱); if source context shows this is actually a Western given-name spelling variant of Kai,
+    it needs its OWN distinct rendering, not 凱 -- needs context check before locking'
+  occurrence_count_sampled: 100
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/false_alarm/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/shame/CANONICAL.txt
+  - atoms/gen_alpha_students/somatic_healing/grief/CANONICAL.txt
+- source_name: Ellen
+  zh_tw_form: 艾倫
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 100
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/gen_x_sandwich/somatic_healing/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/sleep_anxiety/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/burnout/watcher/CANONICAL.txt
+- source_name: Noa
+  zh_tw_form: 諾亞
+  rationale: 'AMBIGUOUS-FLAG: near-homophone of Noah -- verify not a mis-scan/typo of Noah before locking
+    a distinct rendering'
+  occurrence_count_sampled: 97
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/shame/CANONICAL.txt
+  - atoms/gen_alpha_students/overthinking/false_alarm/CANONICAL.txt
+- source_name: Vince
+  zh_tw_form: 文斯
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 97
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/gen_x_sandwich/somatic_healing/comparison/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/compassion_fatigue/overwhelm/CANONICAL.txt
+- source_name: Bill
+  zh_tw_form: 比爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 47
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/shame/CANONICAL.txt
+- source_name: Rajan
+  zh_tw_form: 拉詹
+  rationale: standard Taiwan transliteration for South-Asian-origin name
+  occurrence_count_sampled: 24
+  file_count_sampled: 7
+  first_seen_files:
+  - atoms/nyc_executives/financial_stress/shame/CANONICAL.txt
+  - atoms/nyc_executives/anxiety/spiral/CANONICAL.txt
+  - atoms/nyc_executives/courage/spiral/CANONICAL.txt
+- source_name: Damon
+  zh_tw_form: 戴蒙
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 136
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/educators/financial_stress/overwhelm/CANONICAL.txt
+  - atoms/educators/financial_stress/spiral/CANONICAL.txt
+  - atoms/gen_z_student/mindfulness/overwhelm/CANONICAL.txt
+- source_name: Quinn
+  zh_tw_form: 昆恩
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 99
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/gen_alpha_students/self_worth/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/watcher/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/overwhelm/CANONICAL.txt
+- source_name: Scott
+  zh_tw_form: 史考特
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 91
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/sleep_anxiety/comparison/CANONICAL.txt
+  - atoms/gen_x_sandwich/courage/comparison/CANONICAL.txt
+- source_name: Vega
+  zh_tw_form: 維嘉
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 87
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/grief/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/comparison/CANONICAL.txt
+  - atoms/gen_alpha_students/grief/watcher/CANONICAL.txt
+- source_name: Sol
+  zh_tw_form: 索爾
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 83
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/courage/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/imposter_syndrome/watcher/CANONICAL.txt
+- source_name: Gloria
+  zh_tw_form: 葛洛莉亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 79
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/gen_x_sandwich/mindfulness/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_anxiety/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_anxiety/false_alarm/CANONICAL.txt
+- source_name: Thea
+  zh_tw_form: 希雅
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 70
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/gen_alpha_students/depression/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/grief/CANONICAL.txt
+  - atoms/gen_alpha_students/self_worth/false_alarm/CANONICAL.txt
+- source_name: Michelle
+  zh_tw_form: 蜜雪兒
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 42
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/corporate_managers/anxiety/false_alarm/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/shame/CANONICAL.txt
+  - atoms/corporate_managers/anxiety/comparison/CANONICAL.txt
+- source_name: Frank
+  zh_tw_form: 法蘭克
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 6
+  file_count_sampled: 6
+  first_seen_files:
+  - atoms/healthcare_rns/mindfulness/THREAD/CANONICAL.txt
+  - atoms/healthcare_rns/mindfulness/STORY/CANONICAL.txt
+  - atoms/first_responders/mindfulness/THREAD/CANONICAL.txt
+- source_name: Joss
+  zh_tw_form: 喬絲
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 72
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_alpha_students/social_anxiety/spiral/CANONICAL.txt
+  - atoms/gen_alpha_students/somatic_healing/shame/CANONICAL.txt
+  - atoms/gen_alpha_students/grief/false_alarm/CANONICAL.txt
+- source_name: Pam
+  zh_tw_form: 潘
+  rationale: standard Taiwan transliteration (short for Pamela)
+  occurrence_count_sampled: 71
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/false_alarm/CANONICAL.txt
+  - atoms/gen_x_sandwich/somatic_healing/false_alarm/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_stress/watcher/CANONICAL.txt
+- source_name: Cleo
+  zh_tw_form: 克麗歐
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 66
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_alpha_students/courage/false_alarm/CANONICAL.txt
+  - atoms/gen_alpha_students/social_anxiety/overwhelm/CANONICAL.txt
+  - atoms/gen_alpha_students/imposter_syndrome/overwhelm/CANONICAL.txt
+- source_name: Andrea
+  zh_tw_form: 安卓亞
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 66
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_x_sandwich/social_anxiety/shame/CANONICAL.txt
+  - atoms/gen_x_sandwich/social_anxiety/grief/CANONICAL.txt
+  - atoms/gen_x_sandwich/compassion_fatigue/watcher/CANONICAL.txt
+- source_name: Meg
+  zh_tw_form: 梅格
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 64
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_x_sandwich/financial_stress/spiral/CANONICAL.txt
+  - atoms/gen_x_sandwich/financial_anxiety/shame/CANONICAL.txt
+  - atoms/gen_x_sandwich/self_worth/watcher/CANONICAL.txt
+- source_name: Nancy
+  zh_tw_form: 南西
+  rationale: standard Taiwan transliteration
+  occurrence_count_sampled: 64
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_x_sandwich/boundaries/watcher/CANONICAL.txt
+  - atoms/gen_x_sandwich/depression/overwhelm/CANONICAL.txt
+  - atoms/gen_x_sandwich/burnout/overwhelm/CANONICAL.txt
+- source_name: Patterson
+  zh_tw_form: 派特森
+  rationale: surname, standard Taiwan transliteration
+  occurrence_count_sampled: 26
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/nyc_executives/overthinking/shame/CANONICAL.txt
+  - atoms/nyc_executives/self_worth/shame/CANONICAL.txt
+  - atoms/educators/anxiety/shame/CANONICAL.txt
+- source_name: Jae
+  zh_tw_form: 載
+  rationale: 'AMBIGUOUS-FLAG: likely a Korean given-name element (in source text possibly short for Jae-won/Jae-min
+    etc.), not a complete name on its own -- needs context check before locking a single-character rendering'
+  occurrence_count_sampled: 10
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_z_professionals/mindfulness/THREAD/CANONICAL.txt
+  - atoms/millennial_women_professionals/mindfulness/THREAD/CANONICAL.txt
+  - atoms/gen_z_student/mindfulness/STORY/CANONICAL.txt
+- source_name: Farah
+  zh_tw_form: 法拉赫
+  rationale: 'AMBIGUOUS-FLAG: near-homophone of Farrah -- verify these are two distinct characters/spellings
+    before locking two separate renderings'
+  occurrence_count_sampled: 9
+  file_count_sampled: 5
+  first_seen_files:
+  - atoms/gen_z_professionals/adhd_focus/HOOK/CANONICAL.txt
+  - atoms/gen_z_professionals/adhd_focus/STORY/CANONICAL.txt
+  - atoms/midlife_women/mindfulness/THREAD/CANONICAL.txt
