@@ -1,0 +1,95 @@
+# regional_usage_watchlist.yaml — zh-CN
+#
+# Mainland-editor mirror of the zh-TW program's Taiwan/HK-contamination
+# watchlist (artifacts/qa/zh_tw_translation_gap_audit_2026-07-15.md §6),
+# reversed: here we are hunting for Traditional-script leakage and
+# Taiwan/HK vocabulary inside zh-CN files.
+
+schema_version: 1
+locale: zh-CN
+
+script_contamination_detection:
+  method: >
+    Mirror the zh-TW program's calibrated detector, reversed: flag a
+    character only when BOTH (a) a t2s (Traditional→Simplified) pass
+    would rewrite it AND (b) the character is genuinely Traditional-only
+    (not one of the shared/unified forms). Do not use a naive blanket
+    Traditional-character blacklist — some characters are shared between
+    scripts and a naive flag will over-trigger, exactly as the zh-TW
+    program found in the other direction for 台/吃/游/群/床.
+  known_shared_forms_do_not_flag_alone: ["台", "吃", "游", "群", "床"]
+    # these are valid in BOTH scripts; only flag if clearly Traditional
+    # orthography surrounds them (e.g. 臺/喫/遊/羣/牀 forms actually present)
+  clear_traditional_only_examples_to_flag:
+    - "臺" # vs correct Simplified 台
+    - "喫" # vs correct Simplified 吃 (rare, but a real Traditional variant)
+    - "麼" # vs correct Simplified 么/什么
+    - "們" # vs correct Simplified 们
+    - "個" # vs correct Simplified 个
+    - "這" # vs correct Simplified 这
+    - "說" # vs correct Simplified 说
+    - "來" # vs correct Simplified 来
+    - "後" # vs correct Simplified 后
+    - "為" # vs correct Simplified 为
+
+forbidden_taiwan_vocabulary:
+  # Taiwan-register word choices to never use in zh-CN, with the Mainland
+  # replacement.
+  - taiwan: 甚麼
+    mainland: 什么
+  - taiwan: 妳
+    mainland: 你
+    notes: Mainland does not use the female-specific 妳 in this register;
+      use 你 for all readers regardless of gender.
+  - taiwan: 部落格
+    mainland: 博客
+  - taiwan: 軟體
+    mainland: 软件
+  - taiwan: 硬體
+    mainland: 硬件
+  - taiwan: 網路
+    mainland: 网络
+  - taiwan: 資訊
+    mainland: 信息
+  - taiwan: 影片
+    mainland: 视频
+  - taiwan: 早安
+    mainland: 早上好
+    notes: 早安 reads as Taiwan-register even though technically understood
+      Mainland-wide; prefer 早上好 in narrator/coaching voice.
+  - taiwan: 謝謝妳/謝謝你
+    mainland: 谢谢你
+
+forbidden_hongkong_vocabulary:
+  - hongkong: 巴士
+    mainland: 公交车 / 大巴 (context-dependent)
+  - hongkong: 的士
+    mainland: 出租车
+  - hongkong: 士多
+    mainland: 小卖部 / 便利店
+  - hongkong: 冷氣
+    mainland: 空调
+
+machine_translation_tells_to_reject:
+  - Over-literal English sentence structure preserved in Chinese word
+    order (subject-heavy, under-using topic-comment restructuring a
+    native Mainland writer would use).
+  - Unnatural or missing measure words (量词) before nouns.
+  - Direct calque of English idioms instead of a natural Mainland
+    equivalent.
+  - Repeating the same connective (然后/所以/但是) mechanically where a
+    native writer would vary or drop it.
+  - Translating English computing/business jargon literally when the
+    natural Mainland register would keep it as an English loanword (e.g.
+    KPI) or use an established Mainland business term instead of a fresh
+    literal coinage.
+
+verification_note: >
+  This watchlist is a starting set derived from the zh-TW program's
+  already-calibrated inverse case, not yet run against the live zh-CN
+  population. Phase 3/4 (blocked on this checkpoint) should recalibrate
+  the script-contamination detector against a sample of already-landed
+  zh-CN files (see artifacts/qa/ZH_CN_STAGE1_TRANSLATION_CLOSEOUT_2026-07-10.md
+  and artifacts/qa/zh_cn_sg_100pct_20260713/) before treating it as
+  production-ready, mirroring how the zh-TW detector was calibrated
+  against known-good/known-contaminated files before use.

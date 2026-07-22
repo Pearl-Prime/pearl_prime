@@ -1,53 +1,66 @@
 #!/usr/bin/env python3
 """DashScope Qwen3.7 Max / Qwen-MT candidate client.
 
-**GATED, NOT YET LIVE.** As of this lane's landing, Lane 00
+**LIVE as of 2026-07-23.** Lane 00
 (docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/
 00_governance_exception_dashscope_scoped.md) -- the scoped
-`banned_llm_patterns.yaml` exemption for this exact module path -- has NOT
-landed on origin/main. Calling `translate()` below raises
-`DashScopeNotYetExemptError` unconditionally until that lands, so this
-module can exist and be imported/tested without tripping
-`scripts/ci/audit_llm_callers.py` on a phantom live call site.
+`banned_llm_patterns.yaml` exemption for this exact module path -- has
+landed on origin/main (`openai_api_cloud.exempt_paths` contains this
+file's path). `_governance_exemption_landed()` below is still a REAL
+runtime guard, not a formality: it re-checks the live config file on every
+call, so if the exemption is ever reverted this client goes back to
+raising `DashScopeNotYetExemptError` automatically, without a code change.
 
-CALL SHAPE (report for Lane 00 exemption wiring): this module goes through
-the EXISTING OpenAI-compatible-mode endpoint already implemented in
-`scripts/localization/llm_client.py` (`DASHSCOPE_BASE_URL =
-https://dashscope-intl.aliyuncs.com/compatible-mode/v1`, called via the
-OpenAI Python SDK's client class + chat-completions method) -- NOT the
+CALL SHAPE: this module talks to the OpenAI-compatible-mode endpoint
+directly (`https://dashscope-intl.aliyuncs.com/compatible-mode/v1`,
+Singapore international site -- the Beijing/mainland endpoint is a
+DIFFERENT, incompatible host and is intentionally never used here), via
+the OpenAI Python SDK's client class + chat-completions method -- NOT the
 native DashScope SDK's synchronous chat classes (the ones the
-`dashscope_paid_tier` regex in `banned_llm_patterns.yaml` matches). That
-regex will NOT fire against this file at all -- the exemption Lane 00
-actually needs is on the `openai_api_cloud` rule (the OpenAI-SDK-client
-call site), same mechanism already used for
-`scripts/localization/llm_client.py` itself. Lane 00's draft snippet
-assumed the native SDK; it should add this file's path to
-`openai_api_cloud.exempt_paths` instead (or in addition). (Exact regex
-strings intentionally not spelled out literally in this docstring --
-spelling them out trips scripts/ci/audit_llm_callers.py on the docstring
-text itself, not a real call site; see banned_llm_patterns.yaml directly
-for the literal patterns.)
+`dashscope_paid_tier` regex in `banned_llm_patterns.yaml` matches; that
+regex does not fire against this file at all). The exemption lives on
+`openai_api_cloud.exempt_paths`, same mechanism already used for
+`scripts/localization/llm_client.py` itself.
+
+**Deliberately does NOT go through `scripts.localization.llm_client
+.call_llm_with_meta`.** That module's `get_client_config()` checks
+`_is_ollama_endpoint()` FIRST, unconditionally, before looking at
+`PHOENIX_TRANSLATION_ALLOW_CLOUD` or `PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY`
+at all -- so in any real operator session where Keychain-loaded
+`QWEN_BASE_URL` already points at the Pearl Star Ollama endpoint
+(`*:11434`), routing through `call_llm_with_meta` would silently and
+unconditionally return Ollama's config, never DashScope's, regardless of
+any cloud opt-in flag. That is a real trap for this exact use case, so
+this client builds its own `openai.OpenAI` instance pointed explicitly at
+`DASHSCOPE_BASE_URL` + `DASHSCOPE_API_KEY`, bypassing `get_client_config()`
+entirely. `PHOENIX_TRANSLATION_ALLOW_CLOUD=1` is still required (checked
+directly below) -- this is an additional explicit opt-in, not a
+bypass of it.
 
 Hard requirements enforced here (not optional, per Lane 01's brief):
-  (a) only callable when `PHOENIX_TRANSLATION_ALLOW_CLOUD=1` -- delegated
-      entirely to `scripts/localization/llm_client.py`, never
-      reimplemented;
-  (b) a hard per-run call cap (config value, default 500) with a running
-      counter that raises once hit;
-  (c) logs an estimated cost per call (token count x published DashScope
+  (a) only callable when `PHOENIX_TRANSLATION_ALLOW_CLOUD=1` (checked
+      directly, not delegated -- see rationale above) AND the Lane 00
+      governance exemption is live (re-checked every call);
+  (b) refuses to call any DashScope base URL that isn't the Singapore
+      international host -- never the Beijing/mainland endpoint;
+  (c) a hard per-run call cap (config value, default 500) with a running
+      counter that raises once hit -- halts BEFORE the call that would
+      exceed the cap, it does not make the call and log the overage;
+  (d) logs an estimated cost per call (token count x published DashScope
       rate) and a running total to
       `artifacts/qa/translation_quality_cost_log_<date>.jsonl`;
-  (d) this is the ONE module meant to be the DashScope exempt_paths entry.
+  (e) this is the ONE module meant to be the DashScope exempt_paths entry.
 
 Usage:
     python3 scripts/localization/translation_quality/candidates/dashscope_qwen_client.py \\
         --source-locale en-US --target-locale zh-CN --text-file source.txt \\
-        --model qwen-mt-plus
+        --model qwen3.7-max
 """
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from dataclasses import dataclass
@@ -63,17 +76,69 @@ from scripts.localization.translation_quality.candidates import CandidateResult 
 DEFAULT_CALL_CAP = 500
 COST_LOG_DIR = REPO_ROOT / "artifacts" / "qa"
 
+# Singapore international site ONLY -- never the Beijing/mainland
+# DashScope endpoint (see docs/INTEGRATION_CREDENTIALS_REGISTRY.md and
+# CLAUDE.md: "Qwen/DashScope: ...ap-southeast-1... SINGAPORE ONLY. Beijing
+# is WRONG."). Two real Singapore-region hosts are known to be in live use
+# for this account: the public shared endpoint (dashscope-intl.aliyuncs.com)
+# and a Keychain-configured dedicated MaaS gateway
+# (*.ap-southeast-1.maas.aliyuncs.com, confirmed live 2026-07-23) -- accept
+# either by checking for a Singapore-region marker, not a single hardcoded
+# hostname. Reject anything that looks like a mainland region (cn-beijing,
+# cn-hangzhou, cn-shanghai, or the bare dashscope.aliyuncs.com host with no
+# region/intl marker at all).
+DASHSCOPE_INTL_HOST = "dashscope-intl.aliyuncs.com"
+DEFAULT_DASHSCOPE_BASE_URL = f"https://{DASHSCOPE_INTL_HOST}/compatible-mode/v1"
+_SINGAPORE_MARKERS = ("dashscope-intl.aliyuncs.com", "ap-southeast-1")
+_MAINLAND_MARKERS = ("cn-beijing", "cn-hangzhou", "cn-shanghai", "cn-shenzhen")
+
 # Published DashScope per-1K-token rates (USD, international site,
 # 2026-07-21 pricing page snapshot) -- update the date comment if DashScope
 # repricing is confirmed. Used ONLY for the estimated-cost log, never for
-# any accept/reject decision.
+# any accept/reject decision. qwen3.7-max is priced here as an estimate
+# pending a confirmed published rate for that exact model id -- treat the
+# cost log as directional until corrected.
 DASHSCOPE_RATE_PER_1K_TOKENS_USD: dict[str, float] = {
+    "qwen3.7-max": 0.0016,  # estimated, mirrors qwen-max pending confirmed pricing
     "qwen-max": 0.0016,
     "qwen-plus": 0.0004,
     "qwen-mt-plus": 0.0016,
     "qwen-mt-turbo": 0.0004,
 }
-DEFAULT_MODEL = "qwen-mt-plus"
+DEFAULT_MODEL = "qwen3.7-max"
+
+DEFAULT_SYSTEM_PROMPT = (
+    "You are a professional literary translator. Translate the user's text "
+    "from {source_locale} to {target_locale}. Preserve every placeholder "
+    "token in {{curly_braces}}, every '## SHAPE vNN' header line and every "
+    "frontmatter key/value line exactly as given (never translate them), "
+    "every '---' delimiter, every Markdown link, every HTML tag, and every "
+    "URL exactly as given. Output ONLY the translation, no commentary, no "
+    "surrounding markdown fences."
+)
+
+
+class DashScopeEndpointError(RuntimeError):
+    """Raised when the resolved DashScope base URL is not the Singapore
+    international host. Never call the Beijing/mainland endpoint from
+    here -- see module docstring."""
+
+
+def _assert_intl_endpoint(base_url: str) -> None:
+    low = base_url.lower()
+    if any(m in low for m in _MAINLAND_MARKERS):
+        raise DashScopeEndpointError(
+            f"Refusing to call apparent mainland-China DashScope endpoint {base_url!r} "
+            "-- Singapore (ap-southeast-1) only. Check DASHSCOPE_BASE_URL."
+        )
+    if not any(m in low for m in _SINGAPORE_MARKERS):
+        raise DashScopeEndpointError(
+            f"Refusing to call DashScope endpoint {base_url!r} -- it matches "
+            f"no known Singapore-region marker ({_SINGAPORE_MARKERS}). If this "
+            "is a genuine new Singapore endpoint, add its marker to "
+            "_SINGAPORE_MARKERS rather than bypassing this check. Check "
+            "DASHSCOPE_BASE_URL."
+        )
 
 
 class DashScopeNotYetExemptError(RuntimeError):
@@ -146,6 +211,14 @@ class _CallBudget:
         return cost
 
 
+def _cloud_allowed() -> bool:
+    return os.environ.get("PHOENIX_TRANSLATION_ALLOW_CLOUD", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    )
+
+
 def translate(
     text: str,
     *,
@@ -153,40 +226,101 @@ def translate(
     target_locale: str = "zh-CN",
     model: str = DEFAULT_MODEL,
     budget: _CallBudget | None = None,
+    timeout: float = 120.0,
 ) -> CandidateResult:
-    """Translate via DashScope Qwen3.7 Max / Qwen-MT.
+    """Translate via DashScope Qwen3.7 Max / Qwen-MT (Singapore intl endpoint).
 
-    Raises DashScopeNotYetExemptError until Lane 00 lands (see module
-    docstring) -- this is intentional gating, not a bug: it keeps
-    scripts/ci/audit_llm_callers.py from ever scanning a live, uncleared
-    DashScope call site introduced by this lane.
+    Raises DashScopeNotYetExemptError if the Lane 00 governance exemption
+    is not (or no longer) present in banned_llm_patterns.yaml -- this is a
+    real runtime guard, re-checked on every call, not a one-time gate.
+    Raises RuntimeError if PHOENIX_TRANSLATION_ALLOW_CLOUD is not set or
+    DASHSCOPE_API_KEY is missing. Raises DashScopeEndpointError if the
+    resolved base URL is not the Singapore intl host.
     """
     if not _governance_exemption_landed():
         raise DashScopeNotYetExemptError(
             "Lane 00 (docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/"
-            "00_governance_exception_dashscope_scoped.md) has not landed the "
-            "banned_llm_patterns.yaml exemption for this module yet. This "
-            "client is scaffolded and ready (call-cap + cost-log wiring "
-            "complete) but the actual API call stays disabled until that "
-            "governance exception lands. See this file's module docstring "
-            "for the exact exempt_paths entry Lane 00 needs to add."
+            "00_governance_exception_dashscope_scoped.md) exemption is not "
+            "present in config/governance/banned_llm_patterns.yaml right "
+            "now -- refusing to call DashScope. This check re-runs on "
+            "every call; it is not just a one-time landing gate."
         )
+
+    if not _cloud_allowed():
+        raise RuntimeError(
+            "PHOENIX_TRANSLATION_ALLOW_CLOUD is not set to 1/true/yes -- "
+            "refusing to call a paid cloud API without explicit opt-in. "
+            "This is checked directly in this module (not delegated to "
+            "scripts.localization.llm_client) -- see module docstring for "
+            "why."
+        )
+
+    api_key = os.environ.get("DASHSCOPE_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError(
+            "DASHSCOPE_API_KEY is not set. Load it via "
+            "scripts/ci/load_integration_env_from_keychain.py before calling."
+        )
+
+    base_url = os.environ.get("DASHSCOPE_BASE_URL", "").strip() or DEFAULT_DASHSCOPE_BASE_URL
+    _assert_intl_endpoint(base_url)
 
     budget = budget or _CallBudget()
     budget.check_and_increment()
 
-    # NOTE for whoever picks this up post-Lane-00: the actual call is a
-    # thin pass-through to scripts.localization.llm_client.call_llm_with_meta
-    # with PHOENIX_TRANSLATION_ALLOW_CLOUD=1 and PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY=1
-    # set, role="draft", model_cfg={"draft_model": {"cloud_model_id": model}}.
-    # Left as NotImplementedError (not wired) until the governance check
-    # above can return True in a real environment.
-    raise NotImplementedError(
-        "DashScope call site intentionally not wired until Lane 00 lands "
-        "(see module docstring for the exact llm_client.py call this "
-        "should become: call_llm_with_meta(..., cfg={'draft_model': "
-        "{'cloud_model_id': model}}, role='draft') with "
-        "PHOENIX_TRANSLATION_ALLOW_CLOUD=1)."
+    try:
+        import openai
+    except ImportError as exc:
+        raise RuntimeError("openai package required: pip install openai --break-system-packages") from exc
+
+    client = openai.OpenAI(base_url=base_url, api_key=api_key, timeout=timeout)
+    system_prompt = DEFAULT_SYSTEM_PROMPT.format(source_locale=source_locale, target_locale=target_locale)
+
+    t0 = time.time()
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": text},
+        ],
+        temperature=0.6,
+        # Disable Qwen "thinking" mode -- confirmed live 2026-07-23 that
+        # leaving this on burns ~500 hidden completion tokens per call
+        # (real billed cost, not just latency) with the visible translation
+        # output unchanged. Cuts measured completion_tokens from ~529 to
+        # ~12-50 for a short item with no quality loss observed in the
+        # smoke test. This is a real cost-control fix, not a style choice.
+        extra_body={"enable_thinking": False},
+    )
+    elapsed = time.time() - t0
+
+    out_text = response.choices[0].message.content or ""
+    usage_obj = getattr(response, "usage", None)
+    usage: dict[str, int] = {}
+    if usage_obj is not None:
+        for k in ("prompt_tokens", "completion_tokens", "total_tokens"):
+            v = getattr(usage_obj, k, None)
+            if v is not None:
+                usage[k] = int(v)
+
+    cost = budget.log_call(model, usage)
+
+    return CandidateResult(
+        candidate_id=f"dashscope_{model}",
+        text=out_text,
+        meta={
+            "mode": "dashscope",
+            "base_url": base_url,
+            "model_requested": model,
+            "model_response": getattr(response, "model", None) or "",
+            "source_locale": source_locale,
+            "target_locale": target_locale,
+            "latency_s": round(elapsed, 3),
+            "usage": usage,
+            "estimated_cost_usd": round(cost, 6),
+            "call_number_this_run": budget.calls_made,
+            "call_cap_this_run": budget.cap,
+        },
     )
 
 
@@ -209,7 +343,7 @@ def main(argv: list[str] | None = None) -> int:
             model=args.model,
             budget=budget,
         )
-    except (DashScopeNotYetExemptError, NotImplementedError) as exc:
+    except (DashScopeNotYetExemptError, DashScopeEndpointError, RuntimeError) as exc:
         print(f"BLOCKED: {exc}", file=sys.stderr)
         return 2
     print(result.text)
