@@ -31,7 +31,7 @@ either one is sufficient without comparing. This chunk continues using its own
 `validate_fixed.py` for the remainder of its slice per coordinator instruction, since both are
 expected to converge on equivalent-enough logic for this chunk's own re-verification purposes.
 
-## Status: 16 translated + 4 blocked / 132 total in slice
+## Status: 34 translated (2 partial) + 4 blocked / 132 total in slice
 
 ### Done (real hand-composed zh-TW translation, header/block parity verified, fixed-validator PASS)
 
@@ -51,6 +51,26 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [x] `atoms/first_responders/somatic_healing/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/first_responders/financial_stress/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/first_responders/social_anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/grief/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/imposter_syndrome/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/self_worth/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/courage/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/depression/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/burnout/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt`
+  - PARTIAL: only v01-v05 (5/30) have real EN content, hand-translated. v06-v30 (25/30) are literal unauthored placeholder stubs in the EN source itself ("[Persona-specific hook for first_responders x financial_anxiety]") -- preserved verbatim, not invented.
+- [x] `atoms/first_responders/burnout/HOOK/locales/zh-TW/CANONICAL.txt`
+  - PARTIAL: only v01-v05 and v31-v33 (8/33) have real EN content, hand-translated. v06-v30 (25/33) are literal unauthored placeholder stubs in the EN source itself ("[Persona-specific hook for first_responders x burnout]") -- preserved verbatim, not invented.
+- [x] `atoms/first_responders/overthinking/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/overthinking/INTEGRATION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/sleep_anxiety/INTEGRATION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/imposter_syndrome/REFLECTION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/midlife_women/self_worth/REFLECTION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/midlife_women/financial_stress/REFLECTION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/midlife_women/depression/REFLECTION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anchored/financial_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anchored/anxiety/watcher/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anchored/anxiety/overwhelm/locales/zh-TW/CANONICAL.txt`
 
 ### Blocked (EN source itself is malformed — empty body, nothing to translate)
 
@@ -65,21 +85,6 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 
 ### Remaining (not yet started)
 
-- [ ] `atoms/first_responders/financial_anxiety/HOOK/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/sleep_anxiety/INTEGRATION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/overthinking/INTEGRATION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/overthinking/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/grief/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/imposter_syndrome/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/imposter_syndrome/REFLECTION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/self_worth/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/courage/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/depression/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/burnout/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/burnout/HOOK/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/midlife_women/financial_stress/REFLECTION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/midlife_women/self_worth/REFLECTION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/midlife_women/depression/REFLECTION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/financial_anxiety/watcher/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/financial_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/financial_anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
@@ -93,13 +98,10 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [ ] `atoms/entrepreneurs/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anxiety/comparison/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/financial_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/financial_anxiety/comparison/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/compassion_fatigue/spiral/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/compassion_fatigue/shame/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/compassion_fatigue/comparison/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/anxiety/watcher/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/anxiety/overwhelm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/anxiety/spiral/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/anxiety/grief/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
@@ -178,41 +180,52 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [ ] `atoms/entrepreneurs/courage/overwhelm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/courage/spiral/locales/zh-TW/CANONICAL.txt`
 
-Remaining count: 112
+Remaining count: 94
 
+## Session close note (2026-07-23, session 2)
 
-## Session close note (2026-07-23)
-
-This session ended after 16 real translations + 4 blocked (20/132 accounted).
-The remaining 112 files are genuine, substantial hand-translation work (most
-are 13-31 blocks of narrative story-atom prose or grounding-exercise prose,
-same register/quality bar as the files above) — not yet started, not
-mechanically stubbed. A follow-up session/agent should:
+This session ended after 34 real translations (2 partial,
+see notes above) + 4 blocked (38/132 accounted).
+The remaining files are genuine, substantial hand-translation work (most are
+13-31 blocks of narrative story-atom prose, grounding-exercise prose, or
+first-person reflective essay prose, same register/quality bar as the files
+above) — not yet started, not mechanically stubbed. A follow-up session/agent
+should:
 1. Re-run `triage.py` against current `origin/main` before resuming (other
-   chunk agents may have advanced independently; this file's own earlier
-   re-triage confirmed all 132 rows still needed work as of session start).
-2. Continue in `my_slice.tsv` order (or any order) through the remaining list
-   above, using `emit_lib.py` (Pattern A/C body-isolation) +
-   `validate_fixed.py` (NOT the original `validate.py`, which has the
-   metadata-isolation bug documented above).
-3. Commit via the same private-GIT_INDEX_FILE plumbing pattern (see
-   `scripts/qa/zhtw_clean_retranslate/README.md` "Collision safety" +
-   this chunk's session for a worked example), batching every 1-3 files given
-   most remaining files are large (13-31 blocks).
-4. Watch for two known non-defect validator flags that are fine to accept:
+   chunk agents may have advanced independently).
+2. Continue through the remaining list above, using `emit_lib.py` (Pattern
+   A/C body-isolation) + `validate_fixed.py` (NOT the original `validate.py`,
+   which has the metadata-isolation bug documented above — see also the
+   RECONCILIATION FLAG above re: chunk1's independent fix).
+3. Commit via the same private-GIT_INDEX_FILE plumbing pattern, batching
+   every 1-3 files given most remaining files are large (13-31 blocks).
+4. Watch for known non-defect validator flags that are fine to accept after
+   eyeballing the flagged block:
    (a) `LOW_CJK_RATIO` on blocks with heavy machine-readable metadata
        (mode:/carry_line:/family:/BAND:/MECHANISM_DEPTH:/etc.) relative to a
-       short-but-correct translated body — inherent to any block-parity
-       validator that can't perfectly separate metadata from body without
-       full body-isolation (validate_fixed.py already applies body-isolation,
-       so a LOW_CJK_RATIO flag under it usually means the metadata block
-       itself is unusually large relative to body, not a translation defect —
-       eyeball the flagged block to confirm).
+       short-but-correct translated body.
    (b) CALLBACK_ID/CALLBACK_PHASE-only blocks with zero narrative body in the
        EN source (seen in `courage/spiral`, `courage/shame`,
-       `depression/watcher`) — preserve verbatim untranslated, do not invent
-       narrative content for them.
+       `depression/watcher`) — preserve verbatim untranslated.
+   (c) Literal `[Persona-specific hook for <persona> x <topic>]` placeholder
+       stub text repeated across many HOOK-file block variants (seen in
+       `first_responders/financial_anxiety/HOOK` 25/30 blocks,
+       `first_responders/burnout/HOOK` 25/33 blocks) — this is a genuine
+       EN-source authoring gap, not corruption. Translate only the blocks with
+       real content, preserve the bracket placeholder verbatim for the rest,
+       and flag the file as PARTIAL (see examples above) rather than skipping
+       it entirely or inventing narrative content for the stub slots. Check
+       every HOOK-shaped file in the remaining list for this pattern before
+       assuming all its blocks need full narrative translation.
 5. The 4 blocked files (`educators/{grief,self_worth,courage,depression}/
    COMPRESSION`) need EN-source authoring (all COMPRESSION blocks are empty
    in the EN CANONICAL.txt itself), not translation — flag to the atom-
    authoring backlog, do not attempt to translate placeholder/empty content.
+6. `entrepreneurs/anchored/*` files are NOT uniformly template-generated —
+   some (e.g. `financial_anxiety/false_alarm`) use a highly schematic
+   5-character skeleton ("<Name> experiences the core recognition of
+   <mechanism> in the context of <topic>..."); others (e.g. `anxiety/watcher`,
+   `anxiety/overwhelm`) have full specific narrative content per character
+   just like the non-anchored entrepreneurs files. Read each file before
+   assuming a fast template-swap shortcut applies.
+
