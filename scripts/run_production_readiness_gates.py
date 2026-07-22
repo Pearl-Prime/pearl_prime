@@ -983,6 +983,87 @@ def main() -> int:
         if not gate(title, ok, detail):
             failed += 1
 
+    # --- 41. Social post variation / anti-spam gate (check_social_post_variation.py) ---
+    # Docs (docs/PROGRAM_STATE.md, docs/specs/SOCIAL_MEDIA_100PCT_PRODUCTION_PLAN_2026-07-22.md)
+    # refer to this as "gate 36" from when it was drafted (2026-07-21/22, PR #75, not yet
+    # merged at the time) — that display number is already in continuous use above for
+    # "36. Metricool managed durability" and gates 1-43 above are NOT renumbered per this
+    # lane's mandate, so this lands at the next open slot (44) instead. Confirmed via grep
+    # (Lane D, 2026-07-23): this gate script existed but was called from no CI workflow and
+    # no gate script before this wiring — CODE-WIRED as of this commit, not previously.
+    social_variation_gate = REPO_ROOT / "scripts" / "ci" / "check_social_post_variation.py"
+    if social_variation_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(social_variation_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            sv_ok = r.returncode == 0
+            sv_detail = (
+                (r.stdout or r.stderr or "check_social_post_variation").strip().splitlines()
+                or ["check_social_post_variation"]
+            )[0][:240]
+        except Exception as e:
+            sv_ok = False
+            sv_detail = str(e)
+        if not gate(
+            "44. Social post variation / anti-spam (SOCIAL-ATOM-BANK-VIBE-01, formerly cited as gate 36)",
+            sv_ok,
+            sv_detail,
+        ):
+            failed += 1
+    else:
+        gate(
+            "44. Social post variation / anti-spam",
+            True,
+            "gate script not present; skip",
+            skip=True,
+        )
+
+    # --- 44. Title/subtitle language conformance (bootstrap; ship requires 0 non-conformant) ---
+    # Bootstrap on readiness until the pt_BR/zh_CN/zh_HK/zh_SG/zh_TW rollout lands
+    # (see project_title_metadata_english_copy_through memory: ~141k files, ~784 PRs
+    # at the governance ≤180-files/PR cap -- a multi-session program, not a one-shot fix).
+    # ja_JP/ko_KR/de_DE/es_ES/es_US/fr_FR/hu_HU/it_IT are already 0 non-conformant.
+    title_lang_gate = REPO_ROOT / "scripts" / "ci" / "check_title_language_conformance.py"
+    if title_lang_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(title_lang_gate), "--bootstrap-mode"],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=300,
+            )
+            tl_ok = r.returncode == 0
+            out = (r.stdout or r.stderr or "").strip()
+            tl_detail = out.splitlines()[-1] if out else "check_title_language_conformance"
+        except Exception as e:
+            tl_ok = False
+            tl_detail = str(e)
+        if not gate(
+            "44. Title/subtitle language conformance (bootstrap; ship requires 0 non-conformant)",
+            tl_ok,
+            tl_detail,
+        ):
+            failed += 1
+    else:
+        gate(
+            "44. Title/subtitle language conformance",
+            True,
+            "gate script not present; skip",
+            skip=True,
+        )
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
