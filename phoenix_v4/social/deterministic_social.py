@@ -13,6 +13,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 import shutil
 import textwrap
 from datetime import date, datetime, timezone
@@ -145,6 +146,31 @@ def write_tsv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str] | No
 def stable_hash(*parts: Any, length: int = 12) -> str:
     raw = "::".join(str(p) for p in parts)
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:length]
+
+
+# Some SOURCE_OF_TRUTH/social_media_atoms rows author their own colon-terminated
+# lead-in as part of the atom's own copy (e.g. TOOL_STEP atoms opening with
+# "Try this: ..." or "Run the ninety-second reset: ..."). The caption templates
+# below independently prepend their own lead-in label ("Try this: {practice}")
+# when composing the final caption, so folding such atom text straight into a
+# template slot doubles the label ("Try this: Try this: ..." /
+# "Try this: Run the ninety-second reset: ..."). Traced 2026-07-23 from the
+# live 20-post pilot (artifacts/qa/social_atom_composition_pilot_20260721/posts.jsonl,
+# post_index=2 cell) — see docs finding note for the exact atom_id list flagged
+# to Lane C. Strip any embedded lead-in at the point atom text is folded into
+# a template slot so only the assembler's own label survives.
+_EMBEDDED_LEAD_IN_RE = re.compile(r"^[A-Z][A-Za-z0-9 ,'\-]{2,48}:\s+")
+
+
+def _strip_embedded_lead_in(text: str) -> str:
+    stripped = (text or "").strip()
+    match = _EMBEDDED_LEAD_IN_RE.match(stripped)
+    if not match:
+        return stripped
+    remainder = stripped[match.end():].strip()
+    if remainder:
+        return remainder[0].upper() + remainder[1:]
+    return stripped
 
 
 def font(path: str, size: int) -> ImageFont.FreeTypeFont:
@@ -399,6 +425,28 @@ def select_atoms_with_cooldown(
     return selected
 
 
+# A brand voice profile supplies exactly ONE fixed cta_phrase — correct for
+# identity, but it means every post from that brand/platform/topic slice
+# repeats the identical CTA string verbatim once a voice is applied. Confirmed
+# 2026-07-23: 20-post pilot batch had only 2 distinct CTA strings total, one
+# per brand, each repeated 10/10 times. These wrappers keep the brand's own
+# phrase intact (voice/identity unchanged) while varying the surrounding
+# sentence so the literal CTA string diverges across a rotated batch.
+_CTA_ROTATION_WRAPPERS = (
+    "{phrase}",
+    "{phrase} Save it before the week gets loud again.",
+    "Bookmark this: {phrase}",
+    "{phrase} Worth a second look next time this pattern shows up.",
+)
+
+
+def _rotate_cta_phrase(phrase: str, post_index: int) -> str:
+    if not post_index or not phrase:
+        return phrase
+    wrapper = _CTA_ROTATION_WRAPPERS[post_index % len(_CTA_ROTATION_WRAPPERS)]
+    return wrapper.format(phrase=phrase)
+
+
 def apply_voice_to_copy(copy: dict[str, Any], voice: dict[str, Any]) -> dict[str, Any]:
     """Mutate CTA/sign-off from a non-universal voice. No-op when phrases are null."""
     out = dict(copy)
@@ -406,6 +454,7 @@ def apply_voice_to_copy(copy: dict[str, Any], voice: dict[str, Any]) -> dict[str
     old_cta = cta.get("text") or ""
     new_cta = voice.get("cta_phrase")
     if new_cta:
+        new_cta = _rotate_cta_phrase(new_cta, int(copy.get("post_index") or 0))
         cta["text"] = new_cta
         out["cta"] = cta
         if old_cta and old_cta in (out.get("caption") or ""):
@@ -477,16 +526,44 @@ def cta_for_topic(topic: str, surface: str = "carousel") -> dict[str, str]:
     }
 
 
-def hashtags_for(topic: str, platform: str, max_count: int, min_count: int = 0) -> list[str]:
-    tags = list(topic_profile(topic).get("hashtags", []))
-    extras = ["selfhelp", "workwellbeing", "gentlepractice", "mindfulwork", "bookstagram"]
-    for tag in extras:
-        if tag not in tags:
-            tags.append(tag)
-    count = max(min_count, min(max_count, len(tags)))
+_HASHTAG_EXTRAS_POOL = (
+    "selfhelp", "workwellbeing", "gentlepractice", "mindfulwork", "bookstagram",
+    "mentalhealthawareness", "dailyreset", "smallsteps", "mindsetshift", "worklifebalance",
+    "selfcare", "innerwork", "stressrelief", "calmmind", "dailyhabits", "growthmindset",
+)
+
+
+def hashtags_for(topic: str, platform: str, max_count: int, min_count: int = 0, post_index: int = 0) -> list[str]:
     if platform == "youtube":
         return []
-    return tags[:count]
+    topic_tags = list(topic_profile(topic).get("hashtags", []))
+    merged = list(topic_tags)
+    for tag in _HASHTAG_EXTRAS_POOL:
+        if tag not in merged:
+            merged.append(tag)
+    count = max(min_count, min(max_count, len(merged)))
+    if count <= 0:
+        return []
+    if not post_index:
+        # Baseline/no-vibe path stays byte-identical to the pre-existing behavior.
+        return merged[:count]
+    # Rotation path (post_index > 0): keep the primary topic tag for discoverability,
+    # then rotate the rest of the topic tags + extras pool so the hashtag SET (not
+    # just its order) diverges across a batch. Gap confirmed 2026-07-23: on a
+    # full-pool platform (e.g. instagram_feed_portrait, hashtags_max=15) the merged
+    # pool was exactly 10 tags, so count == len(merged) and every post in a
+    # brand/surface slice emitted the identical verbatim hashtag set (10/10 in the
+    # pilot batch) — nothing was ever left over to rotate through.
+    anchor = topic_tags[:1]
+    remaining = count - len(anchor)
+    if remaining <= 0:
+        return anchor[:count]
+    pool = [t for t in merged if t not in anchor]
+    if not pool:
+        return anchor[:count]
+    offset = post_index % len(pool)
+    rotated = pool[offset:] + pool[:offset]
+    return anchor + rotated[:remaining]
 
 
 def caption_with_tags(caption: str, tags: list[str], inline: bool = False) -> str:
@@ -527,7 +604,9 @@ def generate_copy_package(
             hook_family = hook_keys[int(stable_hash(persona, topic, surface_id), 16) % len(hook_keys)]
     cta = cta_for_topic(topic, "carousel" if format_family == "carousel" else "quote_card")
     caption_cfg = surface["caption"]
-    tags = hashtags_for(topic, platform, caption_cfg.get("hashtags_max", 0), caption_cfg.get("hashtags_min", 0))
+    tags = hashtags_for(
+        topic, platform, caption_cfg.get("hashtags_max", 0), caption_cfg.get("hashtags_min", 0), post_index
+    )
     label = persona_row["label"]
     behavior = persona_row["private_behavior"]
     hook = topic_row["safe_hook"]
@@ -556,9 +635,12 @@ def generate_copy_package(
             if family == "HOOK_COVER":
                 hook = text
             elif family == "TOOL_STEP":
-                practice = text
+                # Atom copy may embed its own lead-in ("Try this: ..."); the
+                # professional-mode template adds its own "Try this:" label,
+                # so strip the atom's embedded one to avoid doubling it.
+                practice = _strip_embedded_lead_in(text)
             elif family == "MECHANISM_EXPLAINER":
-                mechanism = text
+                mechanism = _strip_embedded_lead_in(text)
             elif family == "REFRAME":
                 insight = text
         # Deterministic frame rotation (seeded by post_index — never random).
@@ -587,7 +669,13 @@ def generate_copy_package(
             ]
             rotate_practice = [
                 topic_row["practice"],
-                topic_row["mechanism"],
+                # NOTE: previously duplicated topic_row["mechanism"] here, which is
+                # also rotate_insights[1] — at idx%8==1 that made insight and
+                # practice render as the exact same sentence back to back in the
+                # caption body (traced 2026-07-23 pilot, post_index=2 cell). Use a
+                # distinct, practice-flavored line instead so the two rotation
+                # banks never collide index-for-index.
+                "Name the leak, then take one visible next action smaller than your normal ask.",
                 "Write the demand in one line, then cut it by half before you act.",
                 "Stand, exhale longer than you inhale, and choose one inbox item to defer.",
                 "Set a 10-minute recovery block on the calendar before the next meeting.",
@@ -606,13 +694,23 @@ def generate_copy_package(
             insight = rotate_insights[idx % len(rotate_insights)]
             practice = rotate_practice[idx % len(rotate_practice)]
             if atom_tool:
-                practice = f"{practice} {atom_tool.strip()}"
+                # Strip any lead-in the atom already embeds ("Try this: ...",
+                # "Run the ninety-second reset: ...") before folding it in — the
+                # professional-mode template adds its own "Try this:" label and
+                # would otherwise double it (traced 2026-07-23 pilot).
+                practice = f"{practice} {_strip_embedded_lead_in(atom_tool)}"
             mechanism = rotate_insights[(idx + 3) % len(rotate_insights)]
 
     mode = surface.get("native_copy_mode", "")
     if "professional" in mode:
+        # Direct address, not third-person persona narration: earlier drafts
+        # opened this clause with "For {label}, ..." (e.g. "For corporate
+        # managers, ..."), which reads as talking about the reader instead of
+        # to them. Traced 2026-07-23 pilot; confirmed assembler-injected (this
+        # literal template), not atom content — the phrase does not occur
+        # anywhere in SOURCE_OF_TRUTH/social_media_atoms/*.jsonl.
         caption = (
-            f"{hook}\n\nFor {label}, the hidden cost often shows up as {behavior}.\n\n"
+            f"{hook}\n\nThe hidden cost often shows up as {behavior}.\n\n"
             f"Mechanism: {mechanism}\n\nTry this: {practice}\n\n"
             f"{cta['text']}"
         )
@@ -632,7 +730,8 @@ def generate_copy_package(
         caption = f"{hook} {practice}"
         first_comment = None
     elif "conversational" in mode or "thoughtful" in mode:
-        caption = f"{hook} For {label}, the loop often looks like {behavior}. One small reset: {practice}"
+        # Same direct-address fix as the professional-mode branch above.
+        caption = f"{hook} The loop often looks like {behavior}. One small reset: {practice}"
         first_comment = None
     elif "local" in mode:
         caption = f"{topic_row['book_title']}: a practical reflection for {label}. {practice} {cta['text']}"
