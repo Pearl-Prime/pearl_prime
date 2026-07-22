@@ -1,0 +1,58 @@
+# protected_terms.yaml
+# Terms, markup, and structural tokens that must NEVER be translated / must pass through
+# byte-exact. Extends .claude/glossaries/zh-TW.json's do_not_translate list with corpus-
+# derived findings from Phase 1 reading.
+
+locale: zh-TW
+status: DRAFT_PENDING_OPERATOR_SIGNOFF
+
+brand_and_product_names:
+  # mirrors .claude/glossaries/zh-TW.json -- keep in sync, do not fork
+  - Phoenix Omega
+  - Pearl Prime
+  - Waystream Sanctuary
+
+structural_markup:
+  - pattern: "## <SLOT> v<NN> headers"
+    rule: "Never translate or reword. Byte-exact per translation-qa/SKILL.md rule 2."
+  - pattern: "--- variant: v<NN> headers (anchored/ story family)"
+    rule: "Same as above -- alternate header style, same rule."
+  - pattern: "Metadata blocks between --- delimiters (MECHANISM_DEPTH, IDENTITY_STAGE, COST_TYPE, COST_INTENSITY, STORY_TYPE, STORY_TYPE_SOURCE, boundary:, path:, BAND:, etc.)"
+    rule: "Never translate keys or enum-like values. These are machine-read by registry_resolver / enrichment_select. Only the prose body (final block) is translated."
+  - pattern: "Markdown links, HTML tags, template tokens ({{...}}, [placeholder])"
+    rule: "Preserve exactly per translation-qa/SKILL.md rule 7. None observed in the sampled corpus, but scan for them at translation time -- do not assume absence."
+
+named_characters_pending_operator_ruling:
+  # see glossary_project.yaml named_recurring_characters for the open question
+  - Marcus
+  - Elena
+  - James
+  - Priya
+  - Devon
+  note: >
+    OPEN QUESTION (Phase 2 checkpoint item): keep as Latin-script proper nouns, or
+    transliterate. Treat as protected/do-not-translate (keep Latin script) as the DEFAULT
+    until the operator rules otherwise, since accidentally inventing inconsistent Chinese
+    names per-batch is worse than temporarily over-protecting them.
+
+workplace_jargon_loanwords:
+  # Sampled heavily in corporate_managers/tech_finance_burnout -- these tools/acronyms
+  # recur constantly and Taiwan tech/corporate readers expect them in English.
+  keep_as_english_loanword:
+    - Slack
+    - Jira
+    - VP
+    - KPI
+    - QBR
+    - PIP
+    - "1:1 / one-on-one (render as 一對一 in body prose, but keep '1:1' if it appears as a literal calendar-invite string)"
+  translate_normally:
+    - {source: "performance review", preferred: 績效考核}
+    - {source: "headcount", preferred: 人力編制 / 人數}
+    - {source: "reorg / restructuring", preferred: 組織重整}
+    - {source: "skip-level", preferred: "越級會議 (context-dependent -- verify against corporate_managers voice sample before locking)"}
+
+do_not_soften:
+  # SKILL.md rule 8 -- clinical/safety meaning must survive translation exactly.
+  - "Explicit permission-granting language in PERMISSION and EXERCISE slots (e.g. 'You are allowed to do nothing tonight') -- must remain an explicit granted permission in Chinese, not a softened suggestion."
+  - "Any crisis/safety-adjacent language, if encountered in future sampling (none observed directly in Phase 1 sample scope, but EXERCISE/PERMISSION slots are the highest-probability location -- treat as protected by default)."

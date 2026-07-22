@@ -1,0 +1,36 @@
+# regional_usage_watchlist.yaml
+# zh-TW regional-usage risk list -- Mainland/HK vocabulary and phrasing to watch for
+# during translation and QA, beyond the character-level Simplified/Traditional check
+# already covered in style_guide_zh_tw.yaml.
+
+locale: zh-TW
+status: DRAFT_PENDING_OPERATOR_SIGNOFF
+source_authority: "artifacts/qa/zh_tw_translation_gap_audit_2026-07-15.md + artifacts/qa/zhtw_simplified_sweep_20260715/summary.json, cross-checked against Phase 1 corpus sample"
+
+lexical_watchlist:
+  # Mainland-flavored word choices to avoid even when Traditional-encoded (these are
+  # register/vocabulary risks, not character-encoding risks -- s2t/Big5 checks won't catch them).
+  - {avoid_mainland: 视频, prefer_taiwan: 影片, notes: "if any video/media content terms appear in future waves"}
+  - {avoid_mainland: 软件, prefer_taiwan: 軟體, notes: "software -- watch EXERCISE slot tech references"}
+  - {avoid_mainland: 信息, prefer_taiwan: 資訊, notes: "information -- high-frequency word, easy to default to Mainland form"}
+  - {avoid_mainland: 质量, prefer_taiwan: 品質, notes: "quality -- 质量 in Mainland usage vs 品質 in Taiwan (質量 in Taiwan physics context only means 'mass')"}
+  - {avoid_mainland: 网络, prefer_taiwan: 網路, notes: "network/internet"}
+  - {avoid_mainland: 优化, prefer_taiwan: 優化, notes: "same characters different script only -- Traditional form is 優化, watch for 优 Simplified glyph specifically given 'optimization' recurs constantly in tech_finance_burnout content"}
+  - {avoid_mainland: 团队, prefer_taiwan: 團隊, notes: "team -- extremely high-frequency word across corporate_managers content, high defect-surface-area if missed"}
+  - {avoid_mainland: 沟通, prefer_taiwan: 溝通, notes: "communication"}
+
+phrasing_register_watchlist:
+  - pattern: "加油 used as generic encouragement closer"
+    guidance: "Fine for Taiwan register, but check it isn't papering over an unresolved therapeutic point -- the English corpus's TAKEAWAY lines are precise and specific, not generic cheerleading; a generic 加油 closer would flatten the register."
+  - pattern: "废话文学 / internet-meme Chinese"
+    guidance: "Avoid entirely -- corpus register is warm-plain, not meme-inflected."
+  - pattern: "过度使用敬语 (excessive honorific register)"
+    guidance: "Reject -- see style_guide_zh_tw.yaml reader_address, default is 你 not 您 throughout body prose."
+
+big5_encoding_ambiguous_pairs_reference:
+  see_also: "style_guide_zh_tw.yaml simplified_traditional_boundary_calibration -- full detail lives there, this is a pointer to avoid duplicating the calibration table."
+
+known_pre_existing_contamination:
+  source: "zh_tw_translation_gap_audit_2026-07-15.md §3"
+  finding: "Conservative Simplified-only-character scan over 600 landed zh-TW files found 23 (3.8%) already contaminated (extrapolating ~195 of 5,078 landed files repo-wide as of 2026-07-15)."
+  action: "Out of scope for THIS lane (glossary authoring) -- reported to the #5682 owner per the prior audit. This glossary's regional_usage rules should be applied going FORWARD to new translation/repair work, and can also be used by a future repair lane cross-referencing artifacts/qa/zh_tw_rewrite_list_* once that sibling lane (agent/zh-tw-audit-reconcile-glossary-rewrite-20260722) lands its file-level list on origin/main."

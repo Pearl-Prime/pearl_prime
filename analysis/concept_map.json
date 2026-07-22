@@ -1,0 +1,64 @@
+{
+  "locale": "zh-TW",
+  "status": "DRAFT_PENDING_OPERATOR_SIGNOFF",
+  "generated_from": "Phase 1-2 corpus analysis, 2026-07-22, agent/zh-tw-glossary-build-20260722",
+  "notes": "Maps recurring English therapeutic/mechanism CONCEPTS (not just words) to a stable zh-TW rendering and short definition, so the same underlying idea reads consistently even when the English surface phrasing varies across personas/topics. Cross-reference glossary_core.yaml / glossary_project.yaml for the locked lexical forms.",
+  "concepts": [
+    {
+      "concept_id": "threat_detection_mechanism",
+      "english_definition": "The nervous system firing a stress/threat response to a modern, non-life-threatening stimulus (a Slack message, a performance review) because it cannot distinguish social/professional threat from physical danger.",
+      "zh_tw_rendering": "神經系統對非致命的現代情境(如訊息通知、績效考核)產生威脅反應,因為身體無法區分社交/職場威脅與真實生理危險",
+      "recurs_in": ["anxiety", "burnout", "overwhelm engine", "social_anxiety", "sleep_anxiety"],
+      "risk_tier": "critical_recurring"
+    },
+    {
+      "concept_id": "performance_of_fine",
+      "english_definition": "Maintaining a competent/calm external presentation while internally depleted, numb, or in crisis -- the gap between the performance and the felt state IS the cost being named.",
+      "zh_tw_rendering": "表面維持稱職與冷靜的表現,內在卻早已耗竭、麻木或陷入危機——這個表現與真實內在狀態之間的落差,正是文本要指出的代價",
+      "recurs_in": ["burnout", "depression", "compassion_fatigue", "corporate_managers all topics"],
+      "risk_tier": "critical_recurring"
+    },
+    {
+      "concept_id": "structural_not_personal_framing",
+      "english_definition": "Reframe device: 'this is not a personal/character flaw, it is a structural/systemic condition' -- the PIVOT slot's core rhetorical move across nearly every topic.",
+      "zh_tw_rendering": "重新框架的核心修辭:『這不是你個人的缺陷,而是結構性/系統性的狀態』",
+      "recurs_in": ["PIVOT slot, nearly universal"],
+      "risk_tier": "critical_recurring"
+    },
+    {
+      "concept_id": "asymmetric_giving",
+      "english_definition": "You give emotional/practical labor to others (team, family, patients) without equivalent return -- the 'invoice' and 'compound interest' financial metaphors both express this concept.",
+      "zh_tw_rendering": "你付出情緒或實質勞動給他人(團隊、家人、病患),卻沒有得到對等的回報——文本中『帳單』與『複利』的財務隱喻都在表達這個概念",
+      "recurs_in": ["compassion_fatigue", "burnout", "boundaries", "corporate_managers/tech_finance_burnout"],
+      "risk_tier": "high"
+    },
+    {
+      "concept_id": "body_as_earlier_knower",
+      "english_definition": "The body registers/reacts to stress or truth before the conscious mind processes it -- 'your body decided the outcome before you walked in.'",
+      "zh_tw_rendering": "身體比意識更早察覺壓力或真相——『你的身體在你走進去之前,就已經決定了結果』",
+      "recurs_in": ["anxiety PIVOT template family (critical_recurring)", "somatic_healing"],
+      "risk_tier": "critical_recurring"
+    },
+    {
+      "concept_id": "disenfranchised_grief",
+      "english_definition": "Grief that is not socially recognized/permitted (a failed startup, a restructured team, a career identity) -- distinct from grief over death, but structurally identical in the corpus's treatment.",
+      "zh_tw_rendering": "不被社會認可或允許公開哀悼的失落(如新創公司倒閉、團隊被重組、職涯身分消失)——雖非死亡,但文本以相同的哀傷結構處理它",
+      "recurs_in": ["entrepreneurs/grief", "corporate_managers/grief", "educators/grief"],
+      "risk_tier": "high"
+    },
+    {
+      "concept_id": "vigilance_as_self_sustaining_loop",
+      "english_definition": "A protective checking/monitoring behavior (checking revenue, checking Slack, checking the email you sent) that no longer responds to reassuring data because the behavior itself has become the coping mechanism, independent of the original threat.",
+      "zh_tw_rendering": "一種保護性的檢查/監控行為(查看營收、查看訊息、反覆檢查寄出的信),即使已有令人安心的數據也無法停止——因為這個行為本身已成為因應機制,與最初的威脅脫鉤",
+      "recurs_in": ["entrepreneurs/anxiety REFLECTION", "overthinking", "financial_anxiety"],
+      "risk_tier": "high"
+    },
+    {
+      "concept_id": "identity_fusion_with_role",
+      "english_definition": "Self-worth/identity is fused with a role/output (manager title, promotion timeline, revenue number) such that a professional setback registers as an identity-level threat.",
+      "zh_tw_rendering": "自我價值／身分認同與角色或產出(職稱、升遷時程、營收數字)融合為一體,使得職場上的挫敗被身體解讀為身分層級的威脅",
+      "recurs_in": ["self_worth", "imposter_syndrome", "depression"],
+      "risk_tier": "critical_recurring"
+    }
+  ]
+}

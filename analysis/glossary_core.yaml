@@ -1,0 +1,151 @@
+# glossary_core.yaml
+# zh-TW (Taiwan Traditional Chinese) core therapeutic/psychological vocabulary.
+# Derived from real reading of atoms/ corpus (5,213 CANONICAL.txt files, 72,962 variants)
+# across 14 personas / ~230 topics, weighted toward tech_finance_burnout, working_parents,
+# corporate_managers (defect-concentrated pools per 2026-07 contamination audit).
+#
+# Shape: source (English concept as it recurs in this corpus) -> preferred (locked Taiwan
+# rendering) -> avoid (Mainland/HK forms or literal-translationese to reject) -> notes.
+# This is NOT a flat find/replace dictionary -- apply preferred only when the surrounding
+# register matches; see style_guide_zh_tw.yaml for contextual judgment rules.
+
+locale: zh-TW
+status: DRAFT_PENDING_OPERATOR_SIGNOFF
+generated_from: "Phase 1-2 corpus analysis, 2026-07-22, agent/zh-tw-glossary-build-20260722"
+
+topic_and_engine_terms:
+  - source: burnout
+    preferred: 職業倦怠
+    avoid: ["精疲力竭 (too literal/generic)", "过劳 (Simplified/Mainland-flavored, 过 not Big5)"]
+    notes: "職業倦怠 is the standard clinical/media term in Taiwan (WHO burnout coverage uses this). Use 倦怠 alone in short/aphoristic slots (TAKEAWAY, PIVOT) where 職業 reads too formal."
+
+  - source: anxiety
+    preferred: 焦慮
+    avoid: ["紧张 (wrong register -- means nervousness, not clinical anxiety)"]
+    notes: "Standard. No contamination risk observed."
+
+  - source: overwhelm (engine/topic)
+    preferred: 不堪負荷
+    avoid: ["崩溃 (too strong -- means collapse/breakdown, overshoots overwhelm)"]
+    notes: "不堪負荷 preserves the 'more than capacity' meaning without escalating to crisis language."
+
+  - source: shame (engine/topic)
+    preferred: 羞愧
+    avoid: ["羞耻 (羞恥 is the Taiwan Traditional form; 羞耻 with 耻 is a Simplified-only glyph -- if it appears, it is a SCRIPT_MISMATCH defect, not a style choice)"]
+    notes: "羞愧 (guilt-adjacent shame) reads more natural in Taiwan therapeutic prose than the more clinical 羞恥; use 羞恥 only in TEACHER_DOCTRINE/formal register."
+
+  - source: grief (engine/topic)
+    preferred: 悲傷
+    avoid: ["悲哀 (reads more literary/archaic, wrong register for second-person direct address)"]
+    notes: "悲傷 is warm and direct; matches corpus's plain, humane register."
+
+  - source: spiral (engine/topic, "the spiral")
+    preferred: 情緒螺旋 / 螺旋式思考
+    avoid: []
+    notes: "Context-sensitive: 情緒螺旋 (emotional spiral) when the source frames it as feeling-state; 螺旋式思考 (spiral of thinking) when framed as cognitive/rumination. See concept_map.json for per-item disambiguation guidance."
+
+  - source: watcher (engine/topic, "the watcher")
+    preferred: 警戒者 / 監視者
+    avoid: []
+    notes: "Context-sensitive: 警戒者 when framed as a protective/vigilant internal part (self-compassion framing); 監視者 when framed as an external surveillance feeling (workplace observation anxiety). Check surrounding sentence before locking."
+
+  - source: false alarm (engine/topic)
+    preferred: 假警報
+    avoid: []
+    notes: "Direct, standard, no ambiguity found in sample."
+
+  - source: comparison (engine/topic)
+    preferred: 比較
+    avoid: []
+    notes: "Standard; watch for over-formal 比較心理 in short PIVOT/TAKEAWAY lines -- prefer bare 比較."
+
+  - source: imposter syndrome
+    preferred: 冒牌者症候群
+    avoid: ["骗子综合症 (Simplified, uses 骗/综 non-Big5 glyphs)"]
+    notes: "冒牌者症候群 is the established Taiwan media/psych term."
+
+  - source: self-worth / self_worth
+    preferred: 自我價值
+    avoid: []
+    notes: "Standard."
+
+  - source: overthinking
+    preferred: 過度思考
+    avoid: ["想太多 acceptable in colloquial/dialogue register only, not in TAKEAWAY/thesis lines"]
+    notes: "Use 過度思考 for the clinical/topic name; 想太多 is fine inside character dialogue or HOOK cold-opens for naturalness."
+
+  - source: mindfulness
+    preferred: 正念
+    avoid: []
+    notes: "Standard Taiwan Buddhist-influenced secular term, matches ja-JP locale's secular-framing precedent (locale_registry.yaml ja-JP notes)."
+
+  - source: somatic healing / somatic_healing
+    preferred: 身體療癒
+    avoid: ["躯体化 (Simplified/clinical-cold, wrong register)"]
+    notes: "身體療癒 keeps the warm, humane register the corpus's second-person voice requires."
+
+  - source: compassion fatigue
+    preferred: 同理心疲乏
+    avoid: ["慈悲疲勞 (too Buddhist/formal for corporate_managers register; reserve for teacher-voice content only)"]
+    notes: "Context-sensitive by persona: 同理心疲乏 for corporate/professional personas, 慈悲疲勞 acceptable for healthcare_rns (clinical caregiving) or teacher-voice content."
+
+  - source: social anxiety / social_anxiety
+    preferred: 社交焦慮
+    avoid: []
+    notes: "Standard."
+
+  - source: sleep anxiety / sleep_anxiety
+    preferred: 睡眠焦慮
+    avoid: []
+    notes: "Standard."
+
+  - source: financial anxiety / financial_stress
+    preferred: 財務焦慮 / 財務壓力
+    avoid: []
+    notes: "財務焦慮 for the fear/hypervigilance framing; 財務壓力 for the burden/load framing -- both appear as distinct topic dirs in this corpus, keep them distinct in translation, do not collapse to one term."
+
+  - source: depression
+    preferred: 憂鬱症
+    avoid: ["抑郁症 (Simplified, 抑郁 non-Big5)"]
+    notes: "憂鬱症 standard clinical Taiwan term; 憂鬱 alone (no 症) in short aphoristic lines describing a feeling-state rather than diagnosing."
+
+  - source: courage
+    preferred: 勇氣
+    avoid: []
+    notes: "Standard."
+
+  - source: boundaries
+    preferred: 界線
+    avoid: ["界限 (also valid but 界線 is the more common Taiwan therapeutic-context spelling)"]
+    notes: "Lock 界線 for consistency across all occurrences (glossary_project.yaml critical_recurring)."
+
+  - source: adhd / adhd_focus
+    preferred: ADHD / 注意力不足過動症
+    avoid: []
+    notes: "Keep 'ADHD' as the loanword in body prose (matches how the English corpus itself uses the acronym conversationally); use the full clinical term 注意力不足過動症 only in EXERCISE/clinical-safety instructional contexts."
+
+nervous_system_and_body_vocabulary:
+  - source: "nervous system"
+    preferred: 神經系統
+    avoid: []
+    notes: "Extremely high recurrence (100+ hits in sampled reading) -- lock this rendering everywhere."
+
+  - source: "threat assessment / threat detection"
+    preferred: 威脅評估
+    avoid: []
+    notes: "Core recurring mechanism-language across the shared PIVOT template family (duplicate_clusters.json). Lock exactly."
+
+  - source: "the body keeps the score / your body remembers"
+    preferred: 身體會記住
+    avoid: ["身體保持分數 (nonsense literal mistranslation -- 'score' here means 'tally/record', not a game score)"]
+    notes: "This phrase recurs across somatic_healing content in multiple personas. 身體會記住 is the natural, idiomatic Taiwan rendering of this concept (parallels how this concept is commonly rendered in Taiwan wellness/therapy writing). Flag any literal '分數' rendering as a translation defect."
+
+  - source: "circuit breaker (metaphor for emotional shutdown/numbness)"
+    preferred: 斷路器 (as metaphor, keep in context: 像斷路器跳脫)
+    avoid: []
+    notes: "Recurs in compassion_fatigue and burnout content ('the numbness is a circuit breaker, not a character flaw'). Preserve as an explicit mechanical metaphor, do not soften to an abstract '保護機制' unless the sentence structure requires it."
+
+  - source: "held space / holding space"
+    preferred: 承接 / 陪伴的空間
+    avoid: ["持有空间 (literal Mainland-style calque, unnatural)"]
+    notes: "Therapeutic-register English idiom with no single fixed Chinese equivalent -- translate contextually: 承接(對方的情緒) when used as a verb phrase, 陪伴的空間 when used as a noun."

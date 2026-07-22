@@ -1,0 +1,101 @@
+# style_guide_zh_tw.yaml
+# zh-TW (Taiwan Traditional Chinese) translation style guide for Phoenix Omega atom corpus.
+# Status: DRAFT_PENDING_OPERATOR_SIGNOFF -- report full content to operator before Phase 3.
+
+locale: zh-TW
+status: DRAFT_PENDING_OPERATOR_SIGNOFF
+generated_from: "Phase 1-2 corpus analysis, 2026-07-22, agent/zh-tw-glossary-build-20260722"
+
+reader_address:
+  default: 你
+  rationale: >
+    Sampled ~660 variants across PIVOT/TAKEAWAY/HOOK/PERMISSION in tech_finance_burnout,
+    corporate_managers, working_parents, educators, entrepreneurs. The English source voice
+    is near-universally direct second person ("you") -- confirmed, not assumed, per Phase 2
+    instruction to check rather than assume. 你 (not the more formal/distant 您) matches the
+    corpus's intimate, humane register -- these are permission-giving, body-based, emotionally
+    literate texts addressed reader-to-reader, not a formal institutional voice.
+  exception: >
+    TEACHER_DOCTRINE slot content is voiced AS the named teacher persona speaking, not the
+    generic book-narrator. If a specific teacher's established voice profile calls for 您
+    (formality) or a different address convention, that persona's existing voice profile wins
+    over this default -- check author_positioning_profiles.yaml / teacher persona docs before
+    translating TEACHER_DOCTRINE.
+
+tone_and_formality:
+  register: "warm, direct, plainspoken -- NOT clinical-cold, NOT self-help-breezy, NOT literary-ornate"
+  formality_level: "informal-intimate (你, contractions-equivalent looseness in Chinese phrasing), never 您/敬語-heavy"
+  avoid:
+    - "over-formal clinical vocabulary in PIVOT/TAKEAWAY/PERMISSION (reserve clinical terms for EXERCISE safety instructions where precision matters more than warmth)"
+    - "flowery/purple literary Chinese (四字成語 chains) that would sound performative against the plain, punchy English rhythm"
+    - "internet-slang-heavy Chinese that would date the text or feel too casual for the therapeutic content"
+  voice_anchor_examples:
+    - english: "Rest doesn't fix structural depletion. It pauses it."
+      zh_tw_direction: "短句對仗,保留原文的斷句節奏,不要合併成一個長句。"
+    - english: "You didn't stop caring. Your system stopped letting you."
+      zh_tw_direction: "保留主詞轉換的節奏(你 -> 你的系統),這個轉折是原文的修辭核心。"
+
+sentence_length_guidance:
+  short_slots: "PIVOT, TAKEAWAY, COMPRESSION (avg 22-32 English words) -- match with short, aphoristic Chinese sentences. Do NOT pad to hit an arbitrary word-count floor (see CLAUDE.md register-gate-failure-layers precedent: word floor is a WARNING signal, not licence to add filler)."
+  long_slots: "REFLECTION, INTEGRATION, TEACHER_DOCTRINE (avg 95-237 English words) -- multi-paragraph, first-person essayistic. Preserve paragraph breaks exactly; each paragraph is typically one complete argumentative move."
+  narrative_slots: "STORY, SCENE, HOOK -- preserve concrete sensory detail and named-character specificity; do not abstract "Elena at her kitchen table at 11:20 PM" into a generic "某人在深夜".
+
+punctuation_rules:
+  - rule: "Use full-width Chinese punctuation (，。「」？！) throughout body prose."
+  - rule: "Em-dash constructions in English HOOK cold-opens (e.g. 'shoulders slumped over a cold dinner — she closed the deck and felt nothing') should render with the Chinese em-dash（—）or a comma-based restructuring if the dash reads awkwardly in Chinese; do not default to a period-break that kills the sentence's forward momentum."
+  - rule: "Preserve ellipsis (…) for trailing/unfinished thoughts; do not convert to a period."
+  - rule: "Quotation marks: use 「」for dialogue/direct quotes, 『』for quotes-within-quotes or emphasis, never Western double-quotes in final zh-TW body text."
+
+quotations_titles_exercises_dialogue:
+  quotes_slot: "QUOTE atoms (attributed) -- translate the quote content, keep attribution name per protected_terms.yaml naming rule; verify against glossary_project.yaml if the quote recurs elsewhere."
+  chapter_titles_and_headers: "Header IDs (## PIVOT v01 etc.) are NOT translated -- pass through byte-exact per translation-qa/SKILL.md rule 2. Only the prose body is translated."
+  exercise_instructions: "EXERCISE slot: preserve imperative mood and step order exactly. These carry clinical/safety meaning (SKILL.md rule 8) -- do not soften 'You are allowed to do nothing tonight' into a weaker suggestion."
+  dialogue_in_story: "STORY-slot embedded dialogue (rare in sample, mostly interior narration) -- render as natural spoken Taiwan Mandarin if literal dialogue appears, not textbook-formal phrasing."
+
+simplified_traditional_boundary_calibration:
+  source_authority: "artifacts/qa/zh_tw_translation_gap_audit_2026-07-15.md §6 (cross-checked per Phase 2 instruction)"
+  method: >
+    Naive OpenCC s2t over-flags. The gap-audit's calibrated gate flags a character as
+    Simplified-contamination ONLY when BOTH hold: (a) s2t would rewrite it, AND (b) the
+    character cannot be encoded in Big5 (Taiwan's charset). This catches genuine Mainland/HK
+    substitutions while NOT false-flagging legitimate Taiwan Traditional variant forms.
+  known_ambiguous_pairs_do_not_flag_as_contamination:
+    - {char: 台, note: "encodes in Big5, correct ubiquitous Taiwan usage (台灣, 平台) -- do NOT force to 臺"}
+    - {char: 吃, note: "encodes in Big5, correct colloquial Taiwan usage -- do NOT force to 喫"}
+    - {char: 游, note: "encodes in Big5, correct in many contexts -- do NOT force to 遊 universally, check word (游泳 vs 遊戲)"}
+    - {char: 群, note: "encodes in Big5, correct -- do NOT force to 羣"}
+    - {char: 床, note: "encodes in Big5, correct -- do NOT force to 牀"}
+    - {char: 里, note: "encodes in Big5; 裡 also valid -- per zhtw_simplified_sweep_20260715 this is the #1 most-flagged 'ambiguous' pair (1,242 occurrences) -- treat as ambiguous, not auto-contamination, unless clearly used as the '裡/inside' meaning where 裡 is preferred in body prose"}
+  known_real_simplified_contamination_do_flag:
+    source: "artifacts/qa/zhtw_simplified_sweep_20260715/summary.json top_core_pairs (non-ambiguous)"
+    pairs:
+      - {from: 托, to: 託, ambiguous: false, count_in_prior_sweep: 455}
+      - {from: 这, to: 這, ambiguous: false, count_in_prior_sweep: 429}
+      - {from: 个, to: 個, ambiguous: false, count_in_prior_sweep: 359}
+      - {from: 为, to: 為, ambiguous: false, count_in_prior_sweep: 222}
+      - {from: 无, to: 無, ambiguous: false}
+      - {from: 发, to: 發, ambiguous: false}
+      - {from: 经, to: 經, ambiguous: false}
+      - {from: 过, to: 過, ambiguous: false}
+    rule: "If any of the LEFT-hand (Simplified) forms above appear in a landed zh-TW file, it is a real defect, not a style variant -- reject/repair, do not wave through."
+  live_reproduction_note: >
+    zh_tw_translation_gap_audit_2026-07-15 §3 reproduced Qwen (qwen2.5:14b) emitting
+    Simplified characters into a zh-TW target twice out of two probes (e.g. 失败/压力/积累
+    Simplified mixed with 系統/失敗 Traditional in the SAME clause, plus untranslated English
+    'burnout'). This is why this program routes zh-TW through Tier-1 Claude, not Qwen, until
+    Lane 00/01 land the DashScope exception AND the arrearage clears (see INDEX.md wave order).
+
+template_artifact_handling:
+  rule: >
+    Some source English cells are templated (see duplicate_clusters.json) and occasionally
+    contain broken/ungrammatical placeholder fills that read as unfinished template variables
+    rather than intentional metaphors (e.g. "the loss didn't ask permission", "the mourning has
+    no schedule" in educators/grief and entrepreneurs/grief cells). When encountered: translate
+    for the INTENDED therapeutic meaning naturally in Chinese (do not force a literal, awkward
+    rendering to preserve English syntax that was itself a source defect), AND flag the specific
+    item_id back to the atom-cohesion lane (PROGRAM_STATE.md "Q1 Thesis de-templating") rather
+    than silently absorbing the defect into the translation with no trace.
+
+protected_content:
+  see_also: protected_terms.yaml
+  summary: "Brand/product names, variables, markdown links, HTML tags, template tokens (per translation-qa/SKILL.md rule 7) -- never translate; pass through exactly."

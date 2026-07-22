@@ -1,0 +1,108 @@
+# glossary_project.yaml
+# zh-TW project-specific coined metaphors and recurring phrases -- critical_recurring tier.
+# Shape per the prompt pack: source / preferred_by_context / avoid (NOT a flat replacement dict).
+# These are canonical once locked -- reuse the SAME rendering every time the phrase recurs
+# (verify by grep after translation, per Phase 4 consistency-pass requirement).
+#
+# Status: DRAFT_PENDING_OPERATOR_SIGNOFF -- do not treat as locked until the operator confirms.
+
+locale: zh-TW
+status: DRAFT_PENDING_OPERATOR_SIGNOFF
+
+coined_metaphors:
+  - source: "depletion dressed as dedication"
+    preferred_by_context:
+      default: "披著奉獻外衣的耗竭"
+    avoid: ["literal word-order calque that loses the 'X dressed as Y' figure"]
+    recurrence: "tech_finance_burnout/burnout PIVOT family + reused verbatim in corporate_managers/anxiety PIVOT via the shared template skeleton (see duplicate_clusters.json pivot_threat_assessment) -- when this EXACT English phrase recurs, use this EXACT Chinese phrase every time."
+    risk_tier: critical_recurring
+
+  - source: "running on fumes"
+    preferred_by_context:
+      default: "靠殘存的油耗撐著 / 燃料見底仍在硬撐"
+      short_aphoristic: "油箱早就空了"
+    avoid: ["直译'跑在烟雾上' (nonsensical literal calque of 'fumes')"]
+    recurrence: "burnout PIVOT/STORY family, multiple personas via shared template."
+    risk_tier: critical_recurring
+
+  - source: "golden handcuffs"
+    preferred_by_context:
+      default: "金手銬"
+    avoid: []
+    recurrence: "tech_finance_burnout anxiety/burnout PIVOT+TAKEAWAY family."
+    risk_tier: critical_recurring
+    notes: "金手銬 is an already-established Chinese business idiom (loan-calque) for compensation that traps an employee -- safe to use directly, do not re-coin."
+
+  - source: "the empty tank"
+    preferred_by_context:
+      default: "空油箱"
+    avoid: []
+    recurrence: "corporate_managers/adhd_focus, burnout family."
+    risk_tier: high
+
+  - source: "the invoice / the invoice is real even when the spreadsheet doesn't track it"
+    preferred_by_context:
+      default: "帳單是真的,即使試算表沒有記上一筆"
+    avoid: []
+    recurrence: "tech_finance_burnout engine-dir TAKEAWAY family (comparison/false_alarm/grief/overwhelm all share this exact closing formula per corpus sampling)."
+    risk_tier: critical_recurring
+    notes: "This exact TAKEAWAY closing sentence recurs near-verbatim across at least 4 engine dirs within tech_finance_burnout/anxiety. Lock one rendering and reuse."
+
+  - source: "compound return on years of high-performance without a maintenance window"
+    preferred_by_context:
+      default: "多年高效運轉、卻從未安排保養時間所累積的複利代價"
+    avoid: []
+    recurrence: "tech_finance_burnout/anxiety/{comparison,false_alarm,grief,overwhelm} PIVOT -- near-identical template sentence."
+    risk_tier: critical_recurring
+
+  - source: "the body keeping a tab / the body keeps a tab"
+    preferred_by_context:
+      default: "身體默默記著這筆帳"
+    avoid: []
+    recurrence: "corporate_managers/burnout PIVOT family (variant of 'body keeps the score', see glossary_core.yaml)."
+    risk_tier: high
+
+  - source: "high-functioning depression looks like consistency. It feels like glass"
+    preferred_by_context:
+      default: "高功能憂鬱看起來是穩定如常,實際感覺卻像身處玻璃之中"
+    avoid: []
+    recurrence: "corporate_managers/depression TAKEAWAY."
+    risk_tier: high
+
+  - source: "capable and enough run on different circuits"
+    preferred_by_context:
+      default: "『有能力』和『足夠好』是兩條不同的線路"
+    avoid: []
+    recurrence: "corporate_managers/self_worth PIVOT+TAKEAWAY."
+    risk_tier: high
+
+  - source: "the third time that week, and for the third time the X arrived before she/he did"
+    preferred_by_context:
+      default: "preserve the counting structure literally: 這是這週第三次,而這也是第三次,X 在她／他抵達之前就先到了"
+    avoid: []
+    recurrence: "STORY slot template shared across 170+ items (duplicate_clusters.json story_third_time_that_week) -- this is a STRUCTURAL template, not a one-off metaphor. Translate the SKELETON consistently; the bracketed X fill varies per topic/persona."
+    risk_tier: critical_recurring
+    notes: "IMPORTANT translation-quality flag: some English fills for this template are broken/ungrammatical placeholder phrases in the source itself (e.g. 'the loss didn't ask permission', 'the mourning has no schedule' in educators/entrepreneurs grief cells) rather than genuine coined metaphors. Do NOT translate these literally as if they were intentional idioms -- translate for the INTENDED therapeutic meaning (grief arrives uninvited / grief has no timetable) and flag the source cell for the atom-cohesion lane (PROGRAM_STATE Q1) rather than inventing a polished metaphor that isn't in the source."
+
+named_recurring_characters:
+  - source: Marcus
+    preferred_by_context:
+      default: "Marcus (transliterate as 馬可斯 only if the render pipeline requires full localization of character names; DEFAULT is keep in Latin script -- confirm with operator, see protected_terms.yaml)"
+    risk_tier: critical_recurring
+  - source: Elena
+    preferred_by_context:
+      default: "Elena (same rule as Marcus)"
+    risk_tier: critical_recurring
+  - source: James
+    preferred_by_context:
+      default: "James (same rule as Marcus)"
+    risk_tier: critical_recurring
+  - source: Priya
+    preferred_by_context:
+      default: "Priya (same rule as Marcus)"
+    risk_tier: critical_recurring
+  - source: Devon
+    preferred_by_context:
+      default: "Devon (same rule as Marcus)"
+    risk_tier: critical_recurring
+  - notes: "OPEN QUESTION for operator sign-off: this corpus reuses first names (Marcus, Elena, James, Priya, Devon...) as example characters across HOOK/STORY cold-opens for MANY different personas and topics. Phase 2 checkpoint needs an explicit operator ruling: keep Latin-script names throughout (common in Taiwan translated nonfiction), or transliterate to Chinese phonetic names for immersion. This is a book-wide consistency decision, not a per-file one -- do not let individual translate-zh-tw batches decide independently."
