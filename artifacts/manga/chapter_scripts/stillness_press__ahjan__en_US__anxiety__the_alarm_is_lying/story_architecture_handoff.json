@@ -1,0 +1,798 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+  "genre_id": "healing",
+  "story_strategy_genre": "healing",
+  "story_strategy_id": "healing__default",
+  "reader_market": "en_US",
+  "reader_audience": "gen_z",
+  "notes": "Series-level handoff backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md — ep_001-010 were authored (M3 Wave 1) before this artifact type and the storyboard-first process existed. All 10 chapters (ep_001-010) now have arc_storyboard.yaml + modern_reader_context, each independently verified against check_manga_arc_storyboard.py, check_manga_story_authored.py, and validate_story_excellence.py --production. acceptance_layer: authored_candidate, not proven_at_bar — gate PASS is not a bestseller or blind-read claim.",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "en_US",
+    "target_audience": "gen_z",
+    "genre_id": "healing",
+    "strategy_genre": "healing",
+    "relevance_genre": "healing",
+    "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+    "market_touchpoints": [
+      "group_chat",
+      "discord_server",
+      "short_video_clip",
+      "school_bus_or_subway",
+      "comic_shop",
+      "mall_food_court",
+      "campus_library",
+      "delivery_app",
+      "controller",
+      "streaming_queue"
+    ],
+    "market_guardrails": [
+      "avoid_fake_japanese_surface_for_us_scene",
+      "make_city_transport_specific_if_used",
+      "do_not_overexplain_anime_fandom"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+    "catalyst": {
+      "id": "work_notification_before_the_body_wakes",
+      "logline": "A work-review notification lights the phone before Mira has chosen to look, and the ceiling smoke detector becomes proof that an alarm system can fire on steam as readily as smoke.",
+      "ordinary_world_objects": [
+        "phone",
+        "notification",
+        "calendar",
+        "smoke_detector"
+      ],
+      "genre_transmutation": "A work notification becomes the anxiety trigger; the smoke detector becomes the externalized image of an alarm system that cannot tell real threat from harmless heat.",
+      "avoid": [
+        "instant_cure",
+        "influencer_wellness_lecture"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'work_notification_before_the_body_wakes'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ep_001",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_001.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "work_notification_before_the_body_wakes",
+            "logline": "A work-review notification lights the phone before Mira has chosen to look, and the ceiling smoke detector becomes proof that an alarm system can fire on steam as readily as smoke.",
+            "ordinary_world_objects": [
+              "phone",
+              "notification",
+              "calendar",
+              "smoke_detector"
+            ],
+            "genre_transmutation": "A work notification becomes the anxiety trigger; the smoke detector becomes the externalized image of an alarm system that cannot tell real threat from harmless heat.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "chapter_number": 2,
+      "chapter_id": "ep_002",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_002.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "counting_down_to_the_review_meeting",
+            "logline": "The Q3 review meeting Mira has been dreading all episode arrives on schedule, and the ceiling smoke detector's image returns inside the meeting room itself to test whether yesterday's reframe holds under real professional stakes, not only at her own kitchen table.",
+            "ordinary_world_objects": [
+              "elevator",
+              "meeting_room",
+              "smoke_detector",
+              "jade_pendant"
+            ],
+            "genre_transmutation": "The scheduled work review becomes the live-fire test of the alarm-system reframe; the smoke detector image returning on the meeting-room ceiling proves the same false alarm fires under real stakes, and can still be witnessed rather than obeyed, even imperfectly.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'counting_down_to_the_review_meeting'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 3,
+      "chapter_id": "ep_003",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_003.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "mothers_five_minute_text_before_the_visit",
+            "logline": "A text from Mira's visiting mother lights the phone on a quiet Saturday morning, and the coffee-shop conversation that follows turns an ordinary family visit into proof the same alarm reflex that fires on work notifications also fires for people she loves, not only for deadlines.",
+            "ordinary_world_objects": [
+              "phone",
+              "notification",
+              "coffee_shop",
+              "father"
+            ],
+            "genre_transmutation": "A text notification built around work interruptions instead announces a mother's arrival, and the same over-active alarm reflex fires for a family visit and a grief-loaded conversation about the father, proving the noticing generalizes past the office.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'mothers_five_minute_text_before_the_visit'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 4,
+      "chapter_id": "ep_004",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_004.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "insomnia_alarm_with_no_external_trigger",
+            "logline": "The bedside clock and lamp are the only witnesses when Mira's alarm fires with no notification, meeting, or person to blame, and she has to prove the breath practice holds even when there is nothing outside her to point at.",
+            "ordinary_world_objects": [
+              "lamp",
+              "clock",
+              "pendant",
+              "kettle"
+            ],
+            "genre_transmutation": "The nightly clock-watching hour becomes the anxiety trigger; the bedside lamp becomes the externalized image of a steady anchor that stays lit even when nothing outside is actually wrong.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "chapter_number": 5,
+      "chapter_id": "ep_005",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_005.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "lunch_invite_makes_the_practice_visible",
+            "logline": "A coworker's lunch text turns an ordinary Friday notification into the moment Mira's private regulation practice becomes visible to another person for the first time.",
+            "ordinary_world_objects": [
+              "phone",
+              "notification",
+              "succulent",
+              "jade_pendant"
+            ],
+            "genre_transmutation": "A friendly lunch invitation becomes the activation trigger; the succulent Mira brought from home and the jade pendant she reaches for become the externalized proof that the practice has migrated from private ritual into a shared, ordinary workspace.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'lunch_invite_makes_the_practice_visible'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 6,
+      "chapter_id": "ep_006",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_006.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "sunday_call_reopens_family_worry",
+            "logline": "A Sunday-afternoon phone call from Mom interrupts Mira's quiet reading time on the couch and reopens the family's oldest anxious pattern, a parent's chronic worry meeting a grown daughter's habit of defending or performing fine, tested now against the jade pendant she has learned to hold instead of armor.",
+            "ordinary_world_objects": [
+              "phone",
+              "couch",
+              "jade_pendant",
+              "paperback"
+            ],
+            "genre_transmutation": "A routine Sunday phone call from a parent becomes the anxiety trigger; the jade pendant becomes the externalized anchor Mira touches to answer honestly instead of running the old defend-or-deflect script.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "chapter_number": 7,
+      "chapter_id": "ep_007",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_007.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently — notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "the_unanswered_friday_email",
+            "logline": "An unanswered Friday-night work email and a kitchen clock reading eight-fourteen combine to launch Mira's Monday commute into a catastrophizing spiral about her manager's reaction, and the crowded subway car becomes proof that the practice does not switch the alarm off — it only teaches her to return to it.",
+            "ordinary_world_objects": [
+              "clock",
+              "email",
+              "travel_mug",
+              "subway"
+            ],
+            "genre_transmutation": "A late morning and an unanswered work email become the anxiety trigger; the crowded subway car becomes the externalized image of an ordinary world where every rider is quietly carrying their own small interior weather, and the practice is shown as an imperfect returning rather than a cure.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "chapter_number": 8,
+      "chapter_id": "ep_008",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_008.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "first_date_disclosure_choice",
+            "logline": "An ordinary how-was-your-week question from a first date, Kenji, forces Mira to choose between the easy small-talk answer and the true one, with only her jade pendant and a wine bar's borrowed calm to ground the choice.",
+            "ordinary_world_objects": [
+              "wine_bar",
+              "jade_pendant",
+              "candle",
+              "kettle"
+            ],
+            "genre_transmutation": "A first date with a near-stranger becomes the next-level test of the practice: not soothing anxiety alone at home, but choosing to be seen by someone with no prior history of her, in a public room, without over-explaining herself first.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'first_date_disclosure_choice'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 9,
+      "chapter_id": "ep_009",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_009.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "project_deadline_thought_at_the_sink",
+            "logline": "A background thought about a work project deadline surfaces while Mira rinses a cup at the sink and passes through her body in a single flicker, proving the alarm system itself has quieted enough that it no longer needs managing.",
+            "ordinary_world_objects": [
+              "cup",
+              "sink",
+              "deadline",
+              "drawer"
+            ],
+            "genre_transmutation": "A workday deadline thought becomes the day's only test of the practice; instead of triggering a spiral it passes through the body unmanaged, showing regulation has become the invisible default rather than an effortful technique.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'project_deadline_thought_at_the_sink'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 10,
+      "chapter_id": "ep_010",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_010.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "healing",
+          "strategy_genre": "healing",
+          "relevance_genre": "healing",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather.",
+          "catalyst": {
+            "id": "same_notification_six_weeks_later",
+            "logline": "The identical Q-review work notification that opened the series fires again on the same bedside phone six weeks later, but this time it lands inside a nervous system that has already practiced coming back.",
+            "ordinary_world_objects": [
+              "phone",
+              "notification",
+              "succulent",
+              "smoke_detector",
+              "kettle"
+            ],
+            "genre_transmutation": "The catalyst object stays the same work notification as episode one, but its genre function transmutes from a threat trigger into a measuring instrument — the speed and size of Mira's settle response becomes the visible proof of six weeks of practice rather than a new crisis.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'same_notification_six_weeks_later'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    }
+  ]
+}

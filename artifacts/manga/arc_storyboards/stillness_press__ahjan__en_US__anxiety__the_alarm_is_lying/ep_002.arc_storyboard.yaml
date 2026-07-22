@@ -1,0 +1,465 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_002
+genre_id: iyashikei
+title: "The Alarm Is Lying — Episode 2: The Same Tuesday, 9:48 AM"
+logline: The Q3 review meeting Mira has been dreading all episode arrives on schedule and forces
+  her to test yesterday's alarm-system reframe under real professional stakes, not only alone at
+  her own kitchen table.
+stakes_now: Mira has one lived instance of noticing a false alarm from yesterday morning, but the
+  actual review meeting that started the whole cycle is now twelve minutes away and about to test
+  whether the reframe holds under real pressure with a real audience.
+stakes_end: The reframe held once under real stakes, imperfectly, with a mid-meeting wobble she had
+  to recover from in front of Dr. Morimoto — not a cure, one more lived instance of noticing the
+  alarm without being fully run by it.
+genre_cadence:
+- tea_beat_callback_return
+- countdown_activation_onset
+- continuity_anchor_accent
+- scene_transition_departure
+- somatic_re_registration
+- body_register_recognition
+- new_anchor_object_discovery
+- anchor_object_grounding
+- activation_trigger_compounding
+- awe_pullback
+- breath_ground_pendant
+- teaching_vessel_callback_climax
+- mid_meeting_wobble_recovery
+- long_drop_decompression
+- closing_ritual_bookend
+page_turn_promises:
+- page_id: ep_002_p01
+  promise: Will the small, steadier activation Mira notices on her walk to the office hold, or
+    will it grow the way yesterday's spiral did once she reaches the building?
+- page_id: ep_002_p02
+  promise: Will Mira's applied reframe survive contact with the actual review meeting and Dr.
+    Morimoto, or does the old alarm run the room once the stakes are real?
+notes: Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence,
+  same pattern as ep_001 (PR#135) — ep_002 was authored (M3 Wave 1) before the storyboard-first
+  process existed. This plan describes the story_move already present in the shipped script; it
+  does not add new panels or change panel order. ep_002.yaml originally shipped with a single
+  pages[] entry containing all 32 panels; it has been split here into two pages[] entries (panels
+  1-10 / 11-32, split point after the lobby-plant anchor discovery completes) to satisfy the
+  MANGA.STORY.PAGE_ONE_HOOK page-two-exists requirement — panel content, order, and text were not
+  changed, only which page_id groups which panels. No config/manga/genre_scene_templates/iyashikei.yaml
+  exists yet (only mecha.yaml is populated), same gap ep_001's plan flagged — genre_cadence above is
+  derived from the episode's own already-demonstrated genre-native structural beats (TEA BEAT,
+  ANCHOR PANEL, BREATH BRACKET, AWE-PULLBACK, LONG DROP) rather than a formal scene-template file.
+panels:
+- panel_id: ep002_001
+  page_id: ep_002_p01
+  story_function: tea_beat_callback_return
+  story_move: Episode opens on the same teacup from ep_001's closing bookend, now empty, proving
+    real time has passed between episodes rather than restarting the clock.
+  visual_proof: Close on an empty teacup, one drop of liquid glinting, same composition as ep_001
+    panel 30 but now empty.
+  information_delta: Reader learns this episode continues directly from ep_001's morning rather
+    than starting a new day.
+  beat_role: continuity_anchor
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_002
+  page_id: ep_002_p01
+  story_function: countdown_activation_onset
+  story_move: A hard deadline enters the scene — twelve minutes to a named meeting — converting
+    Mira's quiet morning work into a countdown before any body-level activation appears.
+  visual_proof: Wider shot, Mira finishing a folder of notes at the table, laptop closed, fuller
+    mid-morning sunlight through the kitchen window.
+  information_delta: Reader learns the exact time pressure driving the rest of the episode (9:48
+    AM, twelve minutes to go).
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_003
+  page_id: ep_002_p01
+  story_function: continuity_anchor_accent
+  story_move: Mira physically puts on the jade pendant, converting a passive object from ep_001
+    into an active ritual choice she is making before she leaves.
+  visual_proof: Close on Mira's hand fastening the jade pendant chain around her neck, soft motion
+    blur on the chain.
+  information_delta: Reader learns the pendant is now a deliberately worn anchor, not incidental
+    jewelry.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_004
+  page_id: ep_002_p01
+  story_function: scene_transition_departure
+  story_move: Mira leaves the safe kitchen space and enters the outside world, moving the episode's
+    setting from home to the commute for the first time.
+  visual_proof: Wide sidewalk shot, Mira stepping out of her building among commuters, a delivery
+    e-bike, and an open coffee shop door.
+  information_delta: Reader sees the ordinary-world commute environment the meeting-day activation
+    will play out inside.
+  beat_role: setting_transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_005
+  page_id: ep_002_p01
+  story_function: somatic_re_registration
+  story_move: Mira's hand goes to the pendant mid-walk without being asked to, showing the ritual
+    from panel 3 is already being used as a live coping reflex, not just morning dressing.
+  visual_proof: Mid-shot of Mira walking, her right hand briefly touching the jade pendant at her
+    neckline, eyes forward.
+  information_delta: Reader sees the anchor object is already in active use before any new
+    activation has been named.
+  beat_role: ritual_anchor
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_006
+  page_id: ep_002_p01
+  story_function: body_register_recognition
+  story_move: The same somatic activation from ep_001 returns in Mira's chest, proving the alarm
+    system fires again on a new trigger rather than having been permanently switched off.
+  visual_proof: Tight shot on Mira's chest through the open jacket, tension lines in the sweater,
+    soft motion-blur suggesting a quickening pulse.
+  information_delta: Reader learns the activation recurs — yesterday's teaching did not delete the
+    alarm, only changed what happens next.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_007
+  page_id: ep_002_p01
+  story_function: body_register_recognition
+  story_move: Mira names the activation to herself in real time instead of being swept into it,
+    a direct, faster application of yesterday's insight compared to ep_001's slower recognition.
+  visual_proof: Mira's face while walking, a flicker of recognition, small visible exhale, internal
+    dialogue bubble.
+  information_delta: Reader sees the reframe being used consciously for the first time this episode
+    ("There it is").
+  beat_role: recognition
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_008
+  page_id: ep_002_p01
+  story_function: new_anchor_object_discovery
+  story_move: Mira enters a new location — the office lobby — and a new potential anchor object
+    (a jade-green monstera plant) enters the frame for the first time this series.
+  visual_proof: Wide lobby shot, cool concrete and glass, reception desk, a tall potted monstera
+    plant catching slanted window light.
+  information_delta: Reader is introduced to a second anchor object distinct from ep_001's finch,
+    visually rhymed to the pendant's jade tone.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_009
+  page_id: ep_002_p01
+  story_function: new_anchor_object_discovery
+  story_move: The new anchor object is given close, specific attention, establishing it as a real
+    detail Mira could return to, not a generic office plant.
+  visual_proof: Close on the monstera leaf, veins visible, the exact jade green matched to Mira's
+    pendant.
+  information_delta: Reader is handed a second concrete sensory anchor (this leaf, this exact
+    green) the episode can pay off later.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_010
+  page_id: ep_002_p01
+  story_function: anchor_object_grounding
+  story_move: Mira's body visibly responds to the new anchor — shoulders soften — completing the
+    first full activation-to-ground cycle of the episode before she has even reached the meeting.
+  visual_proof: Mira's face glancing at the plant while walking past, shoulders softened half a
+    degree.
+  information_delta: Reader sees the first reversal signal of the episode land, paired with a
+    caption naming it directly.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_011
+  page_id: ep_002_p02
+  story_function: activation_trigger_compounding
+  story_move: The elevator ride compounds the activation by removing Mira's ability to keep moving
+    or looking away — a confined, waiting state the walk did not have.
+  visual_proof: Tight elevator interior, Mira and one faceless extra, numbers ticking up, Mira's
+    jaw tightening fractionally.
+  information_delta: Reader learns the activation intensifies specifically when Mira is forced to
+    wait rather than act.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_012
+  page_id: ep_002_p02
+  story_function: activation_trigger_compounding
+  story_move: Mira reaches a closed meeting-room door and has to sit and wait outside it, converting
+    the abstract countdown from panel 2 into a concrete physical holding pattern.
+  visual_proof: Mid-distance shot, Mira on a bench outside a shut meeting room, hands clasped,
+    knuckles slightly pale.
+  information_delta: Reader sees the specific waiting-room setting the meeting will start from.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_013
+  page_id: ep_002_p02
+  story_function: body_register_recognition
+  story_move: Mira's hands physically tremble while she tries to hold a composed expression, showing
+    the gap between her outward effort and her actual nervous-system state right before the meeting.
+  visual_proof: Close on Mira's interlocked fingers with a tiny tremble, camera tilting up to a
+    half-smile that is mostly stoic effort.
+  information_delta: Reader sees the somatic cost is still present even while Mira is actively
+    trying to regulate.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_014
+  page_id: ep_002_p02
+  story_function: awe_pullback
+  story_move: The frame pulls back to reveal the vast office window wall and city skyline behind
+    Mira, resizing her single waiting body against a much larger, steadying space.
+  visual_proof: Wide pullback panel, sky and city skyline through the office floor's window wall,
+    the bench a small element in a vast lit space.
+  information_delta: Reader is given a scale-shift beat that makes Mira's problem feel held rather
+    than only threatening.
+  beat_role: awe_pullback
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_015
+  page_id: ep_002_p02
+  story_function: breath_ground_pendant
+  story_move: Mira deliberately returns to the pendant and takes a visible slow inhale, converting
+    the awe-pullback's calm into an intentional physical grounding action right before the meeting.
+  visual_proof: Medium shot, two of Mira's fingers on the jade pendant at her throat, a slow inhale
+    visible.
+  information_delta: Reader sees Mira actively choose to ground herself rather than simply waiting
+    for the feeling to pass.
+  beat_role: breath_bracket
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_016
+  page_id: ep_002_p02
+  story_function: teaching_vessel_callback_climax
+  story_move: The meeting begins — Mira and Dr. Morimoto sit down opposite each other, moving the
+    episode's central conflict from anticipation into an actual, present-tense professional review.
+  visual_proof: Interior meeting room, Mira and Dr. Morimoto at a small round table, laptop between
+    them, cool meeting-palette light.
+  information_delta: Reader sees the review start for real, and sees Dr. Morimoto rendered as
+    neutral rather than menacing.
+  beat_role: climax_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_017
+  page_id: ep_002_p02
+  story_function: teaching_vessel_callback_climax
+  story_move: Dr. Morimoto asks a direct, specific question about the onboarding-flow research,
+    putting a concrete professional demand on Mira that the rest of the meeting must answer.
+  visual_proof: Close on Dr. Morimoto speaking, calm and professional, neither warm nor cold.
+  information_delta: Reader learns the exact subject of the review Mira must now perform under.
+  beat_role: pressure_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_018
+  page_id: ep_002_p02
+  story_function: teaching_vessel_callback_climax
+  story_move: The ceiling smoke detector from ep_001 reappears inside the meeting room itself,
+    carrying yesterday's teaching directly into today's highest-stakes moment.
+  visual_proof: Mira's POV over the laptop trackpad to a wall-mounted smoke detector with a steady
+    green LED, same image as ep_001 panel 22.
+  information_delta: Reader recognizes the teaching's vessel object returning at the exact moment
+    it is needed, not as random set dressing.
+  beat_role: teaching_vessel_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_019
+  page_id: ep_002_p02
+  story_function: teaching_vessel_callback_climax
+  story_move: Mira applies the reframe live — she looks from the vessel object back to Dr. Morimoto
+    and begins answering instead of freezing, the episode's first real-stakes proof the teaching
+    works outside the kitchen.
+  visual_proof: Mira's face shifting from the smoke detector back to Dr. Morimoto, then opening her
+    mouth to speak.
+  information_delta: Reader sees the applied teaching produce a concrete behavior change (she
+    speaks) rather than only an internal feeling.
+  beat_role: applied_recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_020
+  page_id: ep_002_p02
+  story_function: mid_meeting_wobble_recovery
+  story_move: Mid-explanation, Mira's composure visibly slips and she has to interrupt her own
+    sentence — the episode refuses a clean, unbroken success and shows the application faltering
+    in real time.
+  visual_proof: Same meeting room, cooler palette shift, Mira mid-explanation with a slight glaze
+    in her eyes, hands still moving.
+  information_delta: Reader learns the reframe is not a permanent fix — the body's alarm can still
+    interrupt her mid-task.
+  beat_role: wobble
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_021
+  page_id: ep_002_p02
+  story_function: mid_meeting_wobble_recovery
+  story_move: Mira deliberately reaches for water and pauses mid-meeting instead of pushing through,
+    a visible, costly choice to interrupt the professional performance in order to regulate.
+  visual_proof: Mira's hand reaching for a water glass, slow deliberate motion, sip, eyes briefly
+    closed.
+  information_delta: Reader sees Mira choose to pause in front of her boss rather than mask the
+    activation, a real social risk.
+  beat_role: pause_choice
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_022
+  page_id: ep_002_p02
+  story_function: mid_meeting_wobble_recovery
+  story_move: Dr. Morimoto responds to the pause with patience rather than pressure, removing the
+    catastrophic social consequence Mira's alarm system was bracing for.
+  visual_proof: Dr. Morimoto across the table, not impatient, soft beige jacket, glasses catching
+    window light.
+  information_delta: Reader learns the feared social cost does not materialize — the room can hold
+    the pause.
+  beat_role: pressure_release
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_023
+  page_id: ep_002_p02
+  story_function: mid_meeting_wobble_recovery
+  story_move: Mira's eyes open again, steadier, marking the moment the pause has done its work and
+    she is ready to continue rather than still bracing.
+  visual_proof: Close on Mira's open eyes, soft, no longer squeezed shut.
+  information_delta: Reader sees the somatic state has shifted from panel 21's closed-eyed pause
+    to readiness.
+  beat_role: recovery
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_024
+  page_id: ep_002_p02
+  story_function: mid_meeting_wobble_recovery
+  story_move: The episode restates its central line at the exact moment of real-world use — not as
+    a memory this time, but as the thought Mira is actively using to keep talking.
+  visual_proof: Near-black panel with a thin frame of light at the edges, caption strip across the
+    middle.
+  information_delta: Reader is given the reframe's exact wording applied live, mid-meeting, for the
+    first time.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_025
+  page_id: ep_002_p02
+  story_function: mid_meeting_wobble_recovery
+  story_move: Mira finishes her answer with a clearer voice, completing the review point she had
+    stalled on and proving the pause changed the outcome rather than derailing it.
+  visual_proof: Mira's face, steadier, speaking the completed third point of her review findings.
+  information_delta: Reader learns the specific finding Mira was building toward (an unexpected
+    drop-off at step five).
+  beat_role: applied_completion
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_026
+  page_id: ep_002_p02
+  story_function: closing_ritual_bookend
+  story_move: The meeting ends and Mira leaves the room still visibly activated, showing the body
+    does not reset the instant the external pressure is removed.
+  visual_proof: Wider corridor shot, Mira walking with the laptop loose under her arm, shoulders
+    not yet relaxed.
+  information_delta: Reader learns finishing the meeting is not the same as the activation ending.
+  beat_role: pendulation_return
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_027
+  page_id: ep_002_p02
+  story_function: closing_ritual_bookend
+  story_move: Mira actively chooses the stairwell over the elevator, a small self-directed decision
+    to get more sensory regulation time instead of taking the fastest route.
+  visual_proof: Mira pushing into a stairwell, choosing the stairs, squinting under harsh
+    fluorescent light, heading up.
+  information_delta: Reader sees Mira make an active regulation choice rather than only reacting.
+  beat_role: regulation_choice
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_028
+  page_id: ep_002_p02
+  story_function: closing_ritual_bookend
+  story_move: A door opens onto the rooftop, moving the episode into an entirely new, wide-open
+    setting distinct from every enclosed space the meeting-day sequence has used so far.
+  visual_proof: Door pushing open onto late-afternoon golden light, wind in Mira's hair, the city
+    sprawl and HVAC units below.
+  information_delta: Reader is given the rooftop as the episode's decompression setting before the
+    Long Drop panel.
+  beat_role: setting_transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_029
+  page_id: ep_002_p02
+  story_function: long_drop_decompression
+  story_move: The episode's single silent decompression beat — nothing changes on purpose, holding
+    Mira at the rooftop railing while the city continues below her.
+  visual_proof: Wide silent panel, Mira at the railing in back-three-quarter view, hazy gold-lit
+    city, deliberate empty sky above, no text or caption.
+  information_delta: Reader is given a held wordless pause with no new information — the pause
+    itself is the content.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_030
+  page_id: ep_002_p02
+  story_function: closing_ritual_bookend
+  story_move: The scene cuts to evening at home, and Mira lights a candle, converting the day's
+    activation into a small deliberate closing ritual rather than simply ending the episode.
+  visual_proof: Evening kitchen, dusk light through the same window as ep_001, Mira lighting a
+    small candle on the table.
+  information_delta: Reader sees the episode return to the safe kitchen space it opened in, now at
+    day's end.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_031
+  page_id: ep_002_p02
+  story_function: closing_ritual_bookend
+  story_move: The kettle begins to steam again, the same object from ep_001, deliberately closing
+    the visual circuit the episode opened on in panel 1.
+  visual_proof: Close on the kettle beginning to steam on the stove, same kettle as ep_001.
+  information_delta: Reader recognizes the visual rhyme closing this episode's ritual loop.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_032
+  page_id: ep_002_p02
+  story_function: closing_ritual_bookend
+  story_move: The episode ends on Mira restating the day's actual takeaway as a repeatable, modest
+    action rather than a completed transformation, refusing a cure ending for a second episode
+    running.
+  visual_proof: Mira's face at the table with a fresh cup of tea, soft tired smile, caption strip
+    below.
+  information_delta: Reader receives the episode's practical takeaway — noticing once, today, is
+    enough — as distinct from ep_001's version of the same honesty beat.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_002.yaml
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped script''s already-demonstrated
+  story_move per panel; does not claim system_working or proven_at_bar.'
