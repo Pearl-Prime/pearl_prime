@@ -4,7 +4,7 @@
 # derived findings from Phase 1 reading.
 
 locale: zh-TW
-status: DRAFT_PENDING_OPERATOR_SIGNOFF
+status: LOCKED_2026-07-22
 
 brand_and_product_names:
   # mirrors .claude/glossaries/zh-TW.json -- keep in sync, do not fork
@@ -22,18 +22,17 @@ structural_markup:
   - pattern: "Markdown links, HTML tags, template tokens ({{...}}, [placeholder])"
     rule: "Preserve exactly per translation-qa/SKILL.md rule 7. None observed in the sampled corpus, but scan for them at translation time -- do not assume absence."
 
-named_characters_pending_operator_ruling:
-  # see glossary_project.yaml named_recurring_characters for the open question
+named_characters_resolved:
+  # RESOLVED 2026-07-22 -- superseded named_characters_pending_operator_ruling. Operator ruled
+  # transliterate to Chinese phonetic names. These are NOT protected/do-not-translate terms
+  # anymore -- see glossary_project.yaml named_recurring_characters for the locked renderings
+  # (Marcus->馬可仕, Elena->伊蓮娜, James->詹姆士, Priya->普麗雅, Devon->戴文). Do not pass
+  # these names through in Latin script; substitute the locked Chinese rendering every time.
   - Marcus
   - Elena
   - James
   - Priya
   - Devon
-  note: >
-    OPEN QUESTION (Phase 2 checkpoint item): keep as Latin-script proper nouns, or
-    transliterate. Treat as protected/do-not-translate (keep Latin script) as the DEFAULT
-    until the operator rules otherwise, since accidentally inventing inconsistent Chinese
-    names per-batch is worse than temporarily over-protecting them.
 
 workplace_jargon_loanwords:
   # Sampled heavily in corporate_managers/tech_finance_burnout -- these tools/acronyms

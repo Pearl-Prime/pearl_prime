@@ -4,10 +4,10 @@
 # These are canonical once locked -- reuse the SAME rendering every time the phrase recurs
 # (verify by grep after translation, per Phase 4 consistency-pass requirement).
 #
-# Status: DRAFT_PENDING_OPERATOR_SIGNOFF -- do not treat as locked until the operator confirms.
+# Status: LOCKED_2026-07-22 -- operator confirmed both Phase 2 checkpoint open questions.
 
 locale: zh-TW
-status: DRAFT_PENDING_OPERATOR_SIGNOFF
+status: LOCKED_2026-07-22
 
 coined_metaphors:
   - source: "depletion dressed as dedication"
@@ -85,24 +85,33 @@ coined_metaphors:
     notes: "IMPORTANT translation-quality flag: some English fills for this template are broken/ungrammatical placeholder phrases in the source itself (e.g. 'the loss didn't ask permission', 'the mourning has no schedule' in educators/entrepreneurs grief cells) rather than genuine coined metaphors. Do NOT translate these literally as if they were intentional idioms -- translate for the INTENDED therapeutic meaning (grief arrives uninvited / grief has no timetable) and flag the source cell for the atom-cohesion lane (PROGRAM_STATE Q1) rather than inventing a polished metaphor that isn't in the source."
 
 named_recurring_characters:
+  # RULING (operator, 2026-07-22): transliterate to Chinese phonetic names, not Latin script.
+  # Apply consistently across every HOOK/STORY cold-open where the name recurs -- do not let
+  # individual translate-zh-tw batches invent their own rendering; grep for the source name
+  # in the English cell and substitute the locked Chinese name below every time.
   - source: Marcus
     preferred_by_context:
-      default: "Marcus (transliterate as 馬可斯 only if the render pipeline requires full localization of character names; DEFAULT is keep in Latin script -- confirm with operator, see protected_terms.yaml)"
+      default: "馬可仕"
+    avoid: ["inventing an alternate transliteration per-batch (e.g. 馬可斯) -- 馬可仕 is the ONE locked rendering"]
     risk_tier: critical_recurring
   - source: Elena
     preferred_by_context:
-      default: "Elena (same rule as Marcus)"
+      default: "伊蓮娜"
+    avoid: ["alternate transliterations -- 伊蓮娜 is the ONE locked rendering"]
     risk_tier: critical_recurring
   - source: James
     preferred_by_context:
-      default: "James (same rule as Marcus)"
+      default: "詹姆士"
+    avoid: ["alternate transliterations -- 詹姆士 is the ONE locked rendering"]
     risk_tier: critical_recurring
   - source: Priya
     preferred_by_context:
-      default: "Priya (same rule as Marcus)"
+      default: "普麗雅"
+    avoid: ["alternate transliterations -- 普麗雅 is the ONE locked rendering", "flattening into a generic Han-Chinese name that erases the character's South Asian identity signal"]
     risk_tier: critical_recurring
   - source: Devon
     preferred_by_context:
-      default: "Devon (same rule as Marcus)"
+      default: "戴文"
+    avoid: ["alternate transliterations -- 戴文 is the ONE locked rendering"]
     risk_tier: critical_recurring
-  - notes: "OPEN QUESTION for operator sign-off: this corpus reuses first names (Marcus, Elena, James, Priya, Devon...) as example characters across HOOK/STORY cold-opens for MANY different personas and topics. Phase 2 checkpoint needs an explicit operator ruling: keep Latin-script names throughout (common in Taiwan translated nonfiction), or transliterate to Chinese phonetic names for immersion. This is a book-wide consistency decision, not a per-file one -- do not let individual translate-zh-tw batches decide independently."
+  - notes: "RESOLVED 2026-07-22: operator ruled transliterate-to-Chinese-phonetic-names over keep-Latin-script. protected_terms.yaml's named_characters_pending_operator_ruling section is superseded by this table and should be removed/updated accordingly."

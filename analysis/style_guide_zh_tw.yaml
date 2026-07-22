@@ -1,9 +1,9 @@
 # style_guide_zh_tw.yaml
 # zh-TW (Taiwan Traditional Chinese) translation style guide for Phoenix Omega atom corpus.
-# Status: DRAFT_PENDING_OPERATOR_SIGNOFF -- report full content to operator before Phase 3.
+# Status: LOCKED_2026-07-22 -- operator confirmed both Phase 2 checkpoint open questions.
 
 locale: zh-TW
-status: DRAFT_PENDING_OPERATOR_SIGNOFF
+status: LOCKED_2026-07-22
 generated_from: "Phase 1-2 corpus analysis, 2026-07-22, agent/zh-tw-glossary-build-20260722"
 
 reader_address:
@@ -86,6 +86,7 @@ simplified_traditional_boundary_calibration:
     Lane 00/01 land the DashScope exception AND the arrearage clears (see INDEX.md wave order).
 
 template_artifact_handling:
+  status: "CONFIRMED by operator 2026-07-22 -- policy below is locked, apply as-is."
   rule: >
     Some source English cells are templated (see duplicate_clusters.json) and occasionally
     contain broken/ungrammatical placeholder fills that read as unfinished template variables
