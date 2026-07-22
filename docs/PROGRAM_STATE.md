@@ -176,8 +176,14 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`; July 15 old-chat unblock wave reduced stale PR requeue risk**
 - **Details:**
   - **LFS→R2 offload V1 spec + `composed_v4_qwen` pilot — MERGED** (#5306, `5b3f64e29954e252dc5b2dbc6a688dd2711612d8`).
-    V1 pilot only; full `assets/manga_catalog` Wave-2 offload remains a follow-on lane. Parent ws `ws_lfs_setup_20260410`
-    stays **active** (Phase B history rewrite still owner-gated).
+    Live reconciliation at `7095e9e44445b1cd2944307629e019c343f71999` corrected the Wave-2 premise:
+    `assets/manga_catalog` has **0 tracked files** and belongs to laptop backup/cleanup, not git surgery.
+    Waves 3–4 remain blocked pending access to the operator laptop's R2 credentials and verified round trips
+    (267 tracked manga render files; 79 tracked cover files). Parent ws `ws_lfs_setup_20260410` stays **active**;
+    Phase B history rewrite remains separately owner-gated.
+  - **What-runs-where policy + advisory RAP artifact-write detector — INTEGRATION CANDIDATE.** Laptop is edit-only;
+    Pearl Star runs GPU/LLM work via `pscli`; GitHub Actions orchestrates; R2 holds binaries. The detector is
+    WARN-only for its first landing and has a mutation test proving an unmediated local binary write is surfaced.
   - **Spine-gates test-fixture false-positive repair — MERGED** (#5341, `0403332493e2e9dafe51a5798d02a1b105e37926`).
     Two genuine fixture blockers re-verified without flagship drift.
   - **GHA catalog-fanout queue-pressure guard — MERGED** (#5471, tip of `main` after wave). Fail-closed throttle on

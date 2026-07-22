@@ -42,6 +42,22 @@ _QUEUE_FIRST_SCRIPTS = (
 # helper can't silently regress into a direct-ComfyUI bypass.
 _DISPATCH_HELPER = REPO_ROOT / "scripts" / "pearl_star" / "dispatch.py"
 
+_ARTIFACT_ROOT_RE = re.compile(
+    r"(?:artifacts|assets|brand-wizard-app/public)/(?:[^\n'\"\s]+)"
+)
+_BINARY_WRITE_RE = re.compile(
+    r"(?:\.save\s*\(|write_(?:bytes|audio|video)\s*\(|open\s*\([^\n]*['\"](?:wb|ab)['\"]|"
+    r"(?:ffmpeg|convert|magick)\b|\.(?:png|jpe?g|webp|gif|mp3|wav|m4a|mp4|mov|webm)\b)",
+    re.IGNORECASE,
+)
+_CANONICAL_PERSISTENCE_MARKERS = (
+    "scripts/artifacts/r2_sync.py",
+    "r2_sync.py",
+    "scripts/pearl_star/bin/pscli",
+    "pscli enqueue",
+)
+_ARTIFACT_WRITE_SCAN_ROOTS = (REPO_ROOT / "scripts", REPO_ROOT / "phoenix_v4")
+
 
 def _warn(msg: str) -> None:
     print(f"{_GH_WARN_PREFIX}{msg}", file=sys.stderr)
@@ -140,6 +156,31 @@ def _scan_dispatch_helper() -> list[str]:
     return violations
 
 
+def _scan_local_artifact_writes() -> list[str]:
+    """Warn on scripts that appear to persist binary outputs to local repo trees.
+
+    This is intentionally advisory. It identifies candidate bypasses for human
+    review; it does not claim that every match executes in production.
+    """
+    violations: list[str] = []
+    for root in _ARTIFACT_WRITE_SCAN_ROOTS:
+        if not root.is_dir():
+            continue
+        for path in sorted(root.rglob("*")):
+            if path.suffix not in {".py", ".sh"} or not path.is_file():
+                continue
+            text = path.read_text(encoding="utf-8", errors="replace")
+            if not _ARTIFACT_ROOT_RE.search(text) or not _BINARY_WRITE_RE.search(text):
+                continue
+            if any(marker in text for marker in _CANONICAL_PERSISTENCE_MARKERS):
+                continue
+            violations.append(
+                f"{path.relative_to(REPO_ROOT)} may write artifact binaries locally "
+                "without r2_sync.py or pscli"
+            )
+    return violations
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="RAP compliance warnings for Pearl Star dispatch")
     ap.add_argument("--strict", action="store_true", help="Exit 1 when violations found")
@@ -150,6 +191,7 @@ def main() -> int:
     violations.extend(_check_pscli_status())
     violations.extend(_scan_queue_first_script_help())
     violations.extend(_scan_dispatch_helper())
+    violations.extend(_scan_local_artifact_writes())
     if not args.skip_process_scan:
         violations.extend(_scan_process_table())
 
