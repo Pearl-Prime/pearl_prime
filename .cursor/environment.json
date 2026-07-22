@@ -1,0 +1,30 @@
+{
+  "name": "pearl-prime-dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "install": "python3 -m venv .venv && . .venv/bin/activate && python -m pip install -U pip && pip install -r requirements.txt -r requirements-server.txt -r requirements-test.txt && (cd brand-wizard-app && npm ci) && (cd storefront && npm ci) && npm ci --ignore-scripts",
+  "terminals": [
+    {
+      "name": "api",
+      "command": ". .venv/bin/activate && PYTHONPATH=. python scripts/run_server.py --reload --host 0.0.0.0 --port 8000",
+      "description": "Phoenix FastAPI (health at /health, docs at /docs)"
+    },
+    {
+      "name": "brand-wizard",
+      "command": "cd brand-wizard-app && npm run dev -- --host 0.0.0.0 --port 5173",
+      "description": "Brand Wizard Vite app (wizard.html, onboarding.html)"
+    },
+    {
+      "name": "storefront",
+      "command": "cd storefront && python3 -m http.server 4321 --directory public --bind 0.0.0.0",
+      "description": "Pearl Prime storefront static UI (sample catalog fallback)"
+    }
+  ],
+  "ports": [
+    { "name": "api", "port": 8000 },
+    { "name": "brand-wizard", "port": 5173 },
+    { "name": "storefront", "port": 4321 }
+  ]
+}
