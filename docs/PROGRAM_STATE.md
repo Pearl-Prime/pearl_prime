@@ -225,6 +225,41 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
 
 ---
 
+### Social Media Atom Bank
+- **Status:** **ACTIVE project since 2026-07-21 — previously had NO row in this SSOT at all**, despite
+  being an active project; that omission is itself one of the gaps closed by
+  `docs/specs/SOCIAL_MEDIA_100PCT_PRODUCTION_PLAN_2026-07-22.md` (full layer-honest plan + Q-gates there).
+  **No component of this subsystem has reached PROVEN-AT-BAR.**
+- **Details:**
+  - **Atom bank:** `SOURCE_OF_TRUTH/social_media_atoms/` — ~1,952 total rows: 1,642 EN evergreen
+    (`evergreen_en_us_atoms.jsonl`), 250 platform/surface (`platform_surface_atoms.jsonl`), 60 APAC
+    localization (`apac_localization_atoms.jsonl`: ja-JP/zh-TW/ko-KR/zh-CN/zh-HK/en-SG). Registry row
+    `evergreen_social_atom_bank` in `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` (currently
+    still `pending-PR` on disk pending PR #75 merge). **EXECUTED-REAL**, not PROVEN-AT-BAR: 98.7% of rows
+    share undifferentiated boilerplate `SRC_*` citations (only 1.3% are falsifiable quote+path citations,
+    per `artifacts/qa/social_research_currency_audit_20260722/RESEARCH_CURRENCY_AUDIT.md`).
+  - **Brand/author vibe schema** (`SOCIAL-ATOM-BANK-VIBE-01`, `docs/PEARL_ARCHITECT_STATE.md`) +
+    **anti-spam variation gate** (`scripts/ci/check_social_post_variation.py`, gate 36): mutation-tested
+    locally, **code-wired but pending PR #75** (`fix(ci): land orphan config files breaking main Core
+    tests + complete phoenix_v4.social`) — OPEN/MERGEABLE, not yet merged as of 2026-07-23. `social_media`
+    has no row yet in `SUBSYSTEM_AUTHORITY_MAP.tsv` on `origin/main` until that PR lands.
+  - **Visual-license operator gate:** `artifacts/qa/deterministic_social_visual_gate_20260718/` — 3 source
+    visuals license-verified, but **0 of 405 render rows production-ready**, `LIVE_PUBLISHING_AUTHORIZED=no`
+    pending operator look-packet approval (`artifacts/operator_read_packets/deterministic_social_visual_gate_20260718/operator_look_packet.md`).
+    Single largest concrete blocker between "atoms exist" and "a real post could ship with real visuals."
+  - **Storyblocks visual b-roll bank:** 16 licensed assets across 8 of a planned 12 topics
+    (`social_media_bank_storyblocks_20260720`); full 12-topic fill explicitly not yet claimed done.
+  - **Weekly research-refresh cadence:** ran once (2026-07-18, digest + delta-atom promotion, both
+    completed same-day) — **zero recurring mechanism** (no cron/workflow/scheduled-task) found anywhere
+    in the repo; "weekly" is not yet mechanically enforced.
+  - **APAC review-gate compliance:** 60/60 rows at `review_status=reviewed_candidate` (correctly not
+    `draft`, but also not `production_ready`) — review evidence is one operator chat-level assertion
+    (`OPD-OC7-02`), not a durable per-row native-reviewer sign-off artifact.
+  - **Live scheduling:** correctly `NOT_AUTHORIZED` — a ratified spec non-goal (§Non-Goals), not a defect.
+  - **Full plan, sequenced gap list, and Q-SOCIAL-* open questions:**
+    `docs/specs/SOCIAL_MEDIA_100PCT_PRODUCTION_PLAN_2026-07-22.md`.
+
+
 ## Jul 1 Execution Runbook (plan-of-record)
 
 **Ratified:** 2026-06-30 (OPD-20260630-001/002/003) · **Evidence:** `artifacts/audit/drift_audit_20260630/DRIFT_MATRIX.md`  
