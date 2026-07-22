@@ -87,7 +87,7 @@ either one is sufficient without comparing. This chunk continues using its own
 `validate_fixed.py` for the remainder of its slice per coordinator instruction, since both are
 expected to converge on equivalent-enough logic for this chunk's own re-verification purposes.
 
-## Status: 42 translated (2 partial) + 4 blocked / 132 total in slice
+## Status: 50 translated (2 partial) + 4 blocked / 132 total in slice
 
 ### Done (real hand-composed zh-TW translation, header/block parity verified, fixed-validator PASS)
 
@@ -136,6 +136,22 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [x] `atoms/entrepreneurs/compassion_fatigue/comparison/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/entrepreneurs/compassion_fatigue/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 
+- [x] `atoms/entrepreneurs/anxiety/grief/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anxiety/comparison/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anchored/anxiety/spiral/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/anchored/anxiety/grief/locales/zh-TW/CANONICAL.txt`
+  - grief body reuses the already hand-composed translation of the byte-identical
+    prose shared with entrepreneurs/anxiety/grief's first 20 blocks (verified via
+    git diff against origin/main; only BAND/MECHANISM_DEPTH metadata differs).
+- [x] `atoms/entrepreneurs/anchored/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
+  - reuses the first 20 blocks of entrepreneurs/anxiety/false_alarm's translation
+    (verified byte-identical EN prose via git diff).
+- [x] `atoms/entrepreneurs/anchored/anxiety/comparison/locales/zh-TW/CANONICAL.txt`
+  - reuses the first 20 blocks of entrepreneurs/anxiety/comparison's translation
+    (verified byte-identical EN prose via git diff).
+
 ### Blocked (EN source itself is malformed — empty body, nothing to translate)
 
 - [BLOCKED] `atoms/educators/grief/COMPRESSION/locales/zh-TW/CANONICAL.txt`
@@ -150,18 +166,10 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 ### Remaining (not yet started)
 
 - [ ] `atoms/entrepreneurs/anxiety/watcher/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anxiety/grief/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anxiety/comparison/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/financial_anxiety/comparison/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/compassion_fatigue/spiral/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/compassion_fatigue/shame/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/compassion_fatigue/comparison/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/anxiety/spiral/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/anxiety/grief/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/anchored/anxiety/comparison/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/sleep_anxiety/watcher/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/sleep_anxiety/shame/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anchored/sleep_anxiety/comparison/locales/zh-TW/CANONICAL.txt`
@@ -236,7 +244,7 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [ ] `atoms/entrepreneurs/courage/overwhelm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/courage/spiral/locales/zh-TW/CANONICAL.txt`
 
-Remaining count: 86
+Remaining count: 78
 
 ## Session close note (2026-07-23, session 2)
 
@@ -299,3 +307,38 @@ should:
    block before assuming a shortcut applies; do not extrapolate from one
    sample file to an entire directory without spot-checking.
 
+
+## Session close note (2026-07-23, session 3 — post-regression-fix continuation)
+
+URGENT re-verification (per coordinator instruction) is complete and
+reported above under "URGENT re-verification vs TRUE-fixed validator".
+Result: 1 genuine bug found and fixed for real
+(`first_responders/courage/COMPRESSION` v13, commit `358373baa3`); all
+other flags confirmed benign against EN source directly.
+
+Also discovered a useful pattern this session: `entrepreneurs/anchored/
+{topic}/{mechanism}` files in the `anxiety` topic are frequently
+byte-identical (prose-wise, verified via `git diff` against `origin/main`)
+to the first 20 blocks of the sibling non-anchored `entrepreneurs/{topic}/
+{mechanism}` file (RECOGNITION/MECHANISM_PROOF/TURNING_POINT/EMBODIMENT
+v01-05), just without the v06/v07 mechanism-extension blocks. Confirmed
+for `grief`, `false_alarm`, `comparison` this session — reused the
+already hand-composed translations rather than re-authoring. **Verify
+this per-file via `git diff` before reusing** — do not assume it holds
+for every anchored/topic/mechanism pair without checking (per the
+existing per-file-verification discipline in this tracker).
+
+8 new files translated + 1 file fixed this session:
+`entrepreneurs/anxiety/{comparison,COMPRESSION,false_alarm}`,
+`entrepreneurs/anchored/anxiety/{spiral,grief,false_alarm,comparison}`,
+plus the `first_responders/courage/COMPRESSION` v13 fix.
+(`entrepreneurs/anxiety/false_alarm` turned out to already be committed
+from before the context-compaction boundary — this tracker had not been
+updated to reflect it; confirmed via `git log` on the file and folded
+into Done above, no duplicate work.)
+
+Status: 50 translated (2 partial) + 4 blocked / 132 total in slice.
+78 files remain, starting with `entrepreneurs/anchored/financial_anxiety/
+comparison` and the rest of `entrepreneurs/anchored/*` per the schematic-
+template list above (financial_anxiety and compassion_fatigue topics use
+the schematic template — verify per file before reuse).
