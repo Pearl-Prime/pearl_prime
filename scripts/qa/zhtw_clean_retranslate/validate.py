@@ -45,6 +45,19 @@ def strip_meta(header, body):
     lines = ["## " + header] + body.split("\n")
     dash_idx = [i for i, l in enumerate(lines) if l.strip() == "---"]
     if len(lines) > 1 and lines[1].strip() == "---":
+        if len(dash_idx) == 3:
+            # 3-fence layout: header / --- / metaA (e.g. BAND/path) / --- /
+            # metaB (e.g. MECHANISM_DEPTH/etc) / --- / BODY, with no closing
+            # fence (seen in financial_stress/{overwhelm,spiral} and likely
+            # other "band_fill"-style engine dirs). emit.py's 2-fence
+            # replace_body() mishandles this shape by writing the translated
+            # body into the metaB slot and leaving metaB's own body_start/
+            # body_end math pointed at the wrong segment; a hand-fixed emit
+            # path was used for those two files instead (see chunk2 commit
+            # history). Mirror that same 3-fence body isolation here so
+            # validate.py checks the segment that was actually translated.
+            body_start = dash_idx[2] + 1
+            return "\n".join(lines[body_start:])
         if len(dash_idx) < 2:
             return body
         body_start = dash_idx[-2] + 1
