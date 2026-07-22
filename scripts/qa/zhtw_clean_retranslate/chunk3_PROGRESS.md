@@ -18,7 +18,7 @@ commit, so this chunk built its own corrected validator
 already committed in this chunk against it — all passed (see below). All files from this point
 forward in this chunk are validated with the corrected logic.
 
-## Status: 15 translated + 4 blocked / 132 total in slice
+## Status: 16 translated + 4 blocked / 132 total in slice
 
 ### Done (real hand-composed zh-TW translation, header/block parity verified, fixed-validator PASS)
 
@@ -37,6 +37,7 @@ forward in this chunk are validated with the corrected logic.
 - [x] `atoms/first_responders/boundaries/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/first_responders/somatic_healing/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/first_responders/financial_stress/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/first_responders/social_anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 
 ### Blocked (EN source itself is malformed — empty body, nothing to translate)
 
@@ -55,7 +56,6 @@ forward in this chunk are validated with the corrected logic.
 - [ ] `atoms/first_responders/sleep_anxiety/INTEGRATION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/first_responders/overthinking/INTEGRATION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/first_responders/overthinking/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/first_responders/social_anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/first_responders/grief/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/first_responders/imposter_syndrome/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/first_responders/imposter_syndrome/REFLECTION/locales/zh-TW/CANONICAL.txt`
@@ -165,5 +165,41 @@ forward in this chunk are validated with the corrected logic.
 - [ ] `atoms/entrepreneurs/courage/overwhelm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/courage/spiral/locales/zh-TW/CANONICAL.txt`
 
-Remaining count: 113
+Remaining count: 112
 
+
+## Session close note (2026-07-23)
+
+This session ended after 16 real translations + 4 blocked (20/132 accounted).
+The remaining 112 files are genuine, substantial hand-translation work (most
+are 13-31 blocks of narrative story-atom prose or grounding-exercise prose,
+same register/quality bar as the files above) — not yet started, not
+mechanically stubbed. A follow-up session/agent should:
+1. Re-run `triage.py` against current `origin/main` before resuming (other
+   chunk agents may have advanced independently; this file's own earlier
+   re-triage confirmed all 132 rows still needed work as of session start).
+2. Continue in `my_slice.tsv` order (or any order) through the remaining list
+   above, using `emit_lib.py` (Pattern A/C body-isolation) +
+   `validate_fixed.py` (NOT the original `validate.py`, which has the
+   metadata-isolation bug documented above).
+3. Commit via the same private-GIT_INDEX_FILE plumbing pattern (see
+   `scripts/qa/zhtw_clean_retranslate/README.md` "Collision safety" +
+   this chunk's session for a worked example), batching every 1-3 files given
+   most remaining files are large (13-31 blocks).
+4. Watch for two known non-defect validator flags that are fine to accept:
+   (a) `LOW_CJK_RATIO` on blocks with heavy machine-readable metadata
+       (mode:/carry_line:/family:/BAND:/MECHANISM_DEPTH:/etc.) relative to a
+       short-but-correct translated body — inherent to any block-parity
+       validator that can't perfectly separate metadata from body without
+       full body-isolation (validate_fixed.py already applies body-isolation,
+       so a LOW_CJK_RATIO flag under it usually means the metadata block
+       itself is unusually large relative to body, not a translation defect —
+       eyeball the flagged block to confirm).
+   (b) CALLBACK_ID/CALLBACK_PHASE-only blocks with zero narrative body in the
+       EN source (seen in `courage/spiral`, `courage/shame`,
+       `depression/watcher`) — preserve verbatim untranslated, do not invent
+       narrative content for them.
+5. The 4 blocked files (`educators/{grief,self_worth,courage,depression}/
+   COMPRESSION`) need EN-source authoring (all COMPRESSION blocks are empty
+   in the EN CANONICAL.txt itself), not translation — flag to the atom-
+   authoring backlog, do not attempt to translate placeholder/empty content.
