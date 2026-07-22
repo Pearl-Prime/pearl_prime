@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """KDP cover renderer — TEMPLATE-BASED (R5 rewrite).
 
-This module is the second stage of a two-stage cover pipeline:
+This module is the deterministic CPU composition stage of the cover pipeline:
 
-    Stage 1: ``scripts/publish/render_imagery_for_template.py`` calls FLUX
-             at the genre's imagery_zone aspect ratio. Output is saved as
-             ``cover_<book_id>_v3_imagery.png``.
+    Stage 1: ``scripts/publish/bank_image_picker.py`` chooses a licensed,
+             topic-verified Storyblocks still and fails closed when none exists.
     Stage 2: this module composites the template's flat-color background,
              the imagery patch (if any), and the title/subtitle/author
              type into 1600x2560 pixel zones — all of which the
@@ -17,12 +16,12 @@ Architecture changes from R3:
 * **Strict zone non-overlap.** Title, subtitle, imagery, and author each
   occupy non-overlapping pixel rectangles per R4's template. The
   renderer NEVER paints text on top of imagery.
-* **Type-dominant genres bypass FLUX entirely.** For boundaries,
+* **Type-dominant genres require no stock image.** For boundaries,
   self_worth, and imposter_syndrome, ``imagery_zone == null`` and the
   background is painted with ``palette.primary.hex``. Any
   ``illustration_path`` argument is ignored (and warned about).
-* **Image-bearing genres composite at the imagery_zone bbox.** The FLUX
-  render must already be at the zone's aspect ratio (Stage 1's job).
+* **Image-bearing genres composite at the imagery_zone bbox.** The licensed
+  Storyblocks still is fitted deterministically by this CPU/Pillow stage.
   Rest of canvas filled with ``palette.primary.hex``. Title-zone
   background is therefore always a known flat color, which makes
   auto-color contrast deterministic.
@@ -1061,7 +1060,7 @@ def render_kdp_cover(
     Parameters
     ----------
     illustration_path : Path | None
-        Path to the FLUX render at the imagery_zone aspect ratio. May be
+        Path to a licensed Storyblocks still. May be
         None for type-dominant genres (boundaries/self_worth/imposter_syndrome).
     title : str
         Required.
