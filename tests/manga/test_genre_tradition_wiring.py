@@ -13,7 +13,10 @@ from __future__ import annotations
 from phoenix_v4.manga.chapter.visual_from_script import (
     compile_panel_prompts_from_chapter_script,
 )
-from phoenix_v4.manga.genre_tradition import genre_tradition_tokens
+from phoenix_v4.manga.genre_tradition import (
+    genre_tradition_tokens,
+    resolve_tradition_genre,
+)
 
 
 def _chapter_script():
@@ -57,15 +60,56 @@ def test_healing_and_horror_tokens_differ():
 
 
 def test_deferred_phase2_genre_yields_nothing():
-    # "battle" is a deferred_phase2 stub → fail-open empty.
-    pos, neg = genre_tradition_tokens("battle", base_model="flux_schnell")
+    # "essay" is still a deferred_phase2 stub (wave-2 2026-07-22 upgraded
+    # battle/sports/mystery/workplace/sci_fi_cyberpunk/supernatural_everyday
+    # to wave_2_deep — see config/manga/drawing_tradition_per_genre.yaml) →
+    # fail-open empty for a genre still deferred.
+    pos, neg = genre_tradition_tokens("essay", base_model="flux_schnell")
     assert pos == [] and neg == []
+
+
+def test_wave_2_deep_genre_resolves_tokens():
+    # Wave-2 backfill (2026-07-22): these 6 genres moved from deferred_phase2
+    # to a full A-H deep block (status: wave_2_deep). genre_tradition_tokens
+    # treats any status != "deferred_phase2" as active, so they now resolve
+    # non-empty tokens same as a top_8_deep genre.
+    for genre_id in (
+        "battle",
+        "sports",
+        "mystery",
+        "workplace",
+        "sci_fi_cyberpunk",
+        "supernatural_everyday",
+    ):
+        pos, neg = genre_tradition_tokens(genre_id, base_model="qwen_image")
+        assert pos, f"{genre_id} should resolve non-empty positive tokens"
+        assert neg, f"{genre_id} should resolve non-empty negative tokens"
 
 
 def test_unknown_genre_and_empty_are_fail_open():
     assert genre_tradition_tokens(None) == ([], [])
     assert genre_tradition_tokens("") == ([], [])
     assert genre_tradition_tokens("no_such_genre_xyz") == ([], [])
+
+
+def test_psychological_horror_stays_distinct_from_deferred_horror():
+    # Wave-2 constraint (spec item 1 point 4): psychological_horror must stay
+    # on its own top_8_deep block and must NOT collapse into the deferred
+    # `horror` genre.
+    assert resolve_tradition_genre("psychological_horror") == "psychological_horror"
+    # `horror` remains deferred_phase2 (out of scope for this wave) — it
+    # fails open (canonical resolution only, no deep tradition block).
+    horror_pos, horror_neg = genre_tradition_tokens("horror", base_model="flux_schnell")
+    assert horror_pos == [] and horror_neg == []
+    ph_pos, _ = genre_tradition_tokens("psychological_horror", base_model="flux_schnell")
+    assert ph_pos  # psychological_horror still resolves its own tokens
+
+
+def test_mystery_resolves_a_positive_and_negative_token_via_resolver():
+    canonical = resolve_tradition_genre("mystery")
+    assert canonical == "mystery"
+    pos, neg = genre_tradition_tokens(canonical, base_model="qwen_image")
+    assert pos and neg
 
 
 # ── Integration: production compiler folds tradition into every panel ──────────
