@@ -1026,6 +1026,44 @@ def main() -> int:
             skip=True,
         )
 
+    # --- 44. Title/subtitle language conformance (bootstrap; ship requires 0 non-conformant) ---
+    # Bootstrap on readiness until the pt_BR/zh_CN/zh_HK/zh_SG/zh_TW rollout lands
+    # (see project_title_metadata_english_copy_through memory: ~141k files, ~784 PRs
+    # at the governance ≤180-files/PR cap -- a multi-session program, not a one-shot fix).
+    # ja_JP/ko_KR/de_DE/es_ES/es_US/fr_FR/hu_HU/it_IT are already 0 non-conformant.
+    title_lang_gate = REPO_ROOT / "scripts" / "ci" / "check_title_language_conformance.py"
+    if title_lang_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(title_lang_gate), "--bootstrap-mode"],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=300,
+            )
+            tl_ok = r.returncode == 0
+            out = (r.stdout or r.stderr or "").strip()
+            tl_detail = out.splitlines()[-1] if out else "check_title_language_conformance"
+        except Exception as e:
+            tl_ok = False
+            tl_detail = str(e)
+        if not gate(
+            "44. Title/subtitle language conformance (bootstrap; ship requires 0 non-conformant)",
+            tl_ok,
+            tl_detail,
+        ):
+            failed += 1
+    else:
+        gate(
+            "44. Title/subtitle language conformance",
+            True,
+            "gate script not present; skip",
+            skip=True,
+        )
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
