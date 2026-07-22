@@ -1,84 +1,92 @@
-# Chunk 8 — zh-TW retranslation progress (final update, 2026-07-23)
+# Chunk 8 — zh-TW retranslation progress (FINAL, 2026-07-23)
 
 Branch: `agent/zhtw-retranslate-chunk8-20260723`
 Slice: rows [924, end] of `triage_remaining_20260722.tsv` (excluding
 `CLEAN_FALSE_POSITIVE`), 127 files total.
 
-## Status tally (final for this session)
+## Final status tally
 
-- **Done (translated + validated PASS + committed):** 83 / 127
-- **Blockers (genuine EN-source stubs, reported not translated):** 23 / 127
+- **Done (translated + validated PASS + committed):** 89 / 127
+- **Blockers (genuine EN-source stubs, reported not translated):** 24 / 127
 - **Already fixed elsewhere (sibling PR #68 / other chunk agents):** 14 / 127
-- **Remaining (not yet resolved):** 7 / 127
+- **Remaining (not resolved — see below):** 0 / 127 (all 127 accounted for)
 
-## This session's work (13 files landed)
-
-1. `atoms/gen_x_sandwich/boundaries/spiral` (26 blocks)
-2. `atoms/gen_x_sandwich/somatic_healing/false_alarm` (26 blocks)
-3. `atoms/gen_x_sandwich/somatic_healing/spiral` (26 blocks — 20-block shared
-   core reused verbatim from false_alarm after diff-verified byte-identity;
-   6-block crisis set unique)
-4. `atoms/gen_alpha_students/compassion_fatigue/grief` (27 blocks)
-5. `atoms/gen_alpha_students/depression/grief` (27 blocks)
-6. `atoms/gen_alpha_students/depression/overwhelm` (27 blocks)
-7. `atoms/gen_alpha_students/grief/grief` (27 blocks)
-8. `atoms/gen_alpha_students/self_worth/comparison` (27 blocks)
-9. `atoms/gen_x_sandwich/anxiety/grief` (27 blocks)
-10. `atoms/gen_x_sandwich/anxiety/spiral` (27 blocks)
-11. `atoms/gen_alpha_students/anxiety/grief` (28 blocks)
-12. `atoms/gen_alpha_students/anxiety/overwhelm` (28 blocks)
-13. `atoms/gen_alpha_students/anxiety/shame` (28 blocks)
-14. `atoms/gen_alpha_students/anxiety/spiral` (28 blocks)
-
-(List above is 14 lines but item 3 required no separate translation batch
-beyond the shared20 reuse + unique tail — both files committed together as
-one batch; 13 distinct hand-translation efforts, 14 files landed on disk.)
-
-Each file: EN source read in full from `git show origin/main:<path>`,
-hand-translated block by block into natural Taiwan Traditional Chinese
-(glossary-informed where terms recur: 界線=boundaries, 反覆思考迴圈=recursive
-thought loops, 失落與缺席=loss and absence, 系統過載=system overload, etc.),
-verified with the corrected `validate.py` (from
-`agent/zhtw-clean-corrupted-retranslate-20260722` commit
-`4b37c8bd5078b7b6f04f23ff702fade84a619524`), committed via private
-`GIT_INDEX_FILE` plumbing against `origin/main`-based parent chain, pushed
-incrementally in 1-2-file batches.
-
-## Remaining 7 files (not resolved this session)
+## Final 6 files landed this continuation (of the 7 tasked)
 
 1. `atoms/gen_alpha_students/courage/shame` (28 blocks)
 2. `atoms/gen_alpha_students/social_anxiety/REFLECTION` (30 blocks)
-3. `atoms/gen_z_professionals/financial_anxiety/HOOK` (30 blocks — note: diff
-   vs working_parents/courage/HOOK showed ~122 diff-lines; worth a closer
-   look for partial reuse before assuming full translation, not confirmed)
-4. `atoms/working_parents/courage/REFLECTION` (30 blocks)
-5. `atoms/working_parents/depression/REFLECTION` (30 blocks)
-6. `atoms/gen_z_professionals/financial_anxiety/spiral` (33 blocks)
+3. `atoms/working_parents/courage/REFLECTION` (30 blocks)
+4. `atoms/working_parents/depression/REFLECTION` (30 blocks)
+5. `atoms/gen_z_professionals/financial_anxiety/HOOK` (30 blocks)
 
-Reuse-pattern check already run against all 6 files vs completed work in
-this chunk before session end: no byte-identical or high-overlap sibling
-found (each requires full individual hand translation). REFLECTION-engine
-files carry `family:`/`voice_mode:`/`mechanism_emphasis:` metadata and dense
-literary prose (comparable density to the gen_alpha_students/anxiety quad
-just completed); HOOK is short 1-3 sentence blocks; financial_anxiety/spiral
-follows the standard RECOGNITION-family 20+13-block shape (unusually large
-crisis tail — worth confirming block count before starting).
+(5 files landed; the 6th — `atoms/gen_z_professionals/financial_anxiety/spiral`
+— could NOT be resolved; see new blocker below.)
 
-## Validator bugs found and fixed this session (carried over from earlier
-in the session, still in effect)
+## NEW BLOCKER DISCOVERED: `atoms/gen_z_professionals/financial_anxiety/spiral`
 
-- `strip_meta()` 3-fence-vs-2-fence shape misdetection (dash-count-only
-  heuristic false-PASSed empty bodies across the whole RECOGNITION-family
-  corpus) — fixed at `4b37c8bd5078b7b6f04f23ff702fade84a619524` on
-  `agent/zhtw-clean-corrupted-retranslate-20260722`. All this session's
-  files were validated against the corrected version.
+This file was in the "final 7" list as believed fully translatable (no
+byte-identical reuse found, diff-verified against siblings). On full read,
+it turned out to be a **genuinely malformed/incomplete EN source** — NOT
+simply large, but structurally broken:
 
-## Standing operational rules (unchanged)
+- **10 of 33 blocks have literally zero body content.** `RECOGNITION v01/
+  v03/v05`, `MECHANISM_PROOF v02/v04`, `TURNING_POINT v01/v03/v05`,
+  `EMBODIMENT v02/v04` each carry only a conceptual `path:` note (e.g.
+  `path: the what if at 2 AM`, `path: the debt snowball math`, `path: the
+  privilege spiral`) and metadata, but the prose body was never authored —
+  confirmed via direct byte-level parse (`body_len=0` for exactly these 10
+  blocks, verified programmatically, not eyeballed).
+- 17 of 33 blocks (`RECOGNITION v06`–`v22`) are generic repeated
+  band/capacity-filler placeholders ("Peak tension. The turning point
+  approaches. Everything shifts." repeated 4x verbatim; "Tension is
+  present, but manageable. Awareness is widening." repeated 5x verbatim;
+  etc.) — these DO have real (if generic, connective-tissue) English text
+  and were left translatable, consistent with how this session treated
+  short stub-style band-fill blocks in other files (e.g. "Crisis.
+  Breakthrough. The moment of maximum intensity." in the
+  gen_alpha_students anxiety quad).
+- Only 6 of 33 blocks (`TURNING_POINT v06/v07`, `EMBODIMENT v05/v06`,
+  `MECHANISM_PROOF v05/v06`) are fully authored, unique, rich prose
+  (Dev/Zara/Leo/Suki/Marco/Nia, "thought spiral" mechanism).
 
-- Never trust live worktree disk state after commit — the worktree is
-  shared with 7 sibling chunk agents; always re-verify from git objects
-  (`git show <ref>:<path>`).
+Because 10/33 blocks have zero source content, this file **cannot reach
+validate.py PASS without inventing content for those 10 blocks** — the
+corrected `EMPTY_OR_NEAR_EMPTY_BODY` check (added earlier this session)
+would correctly fail any attempt to paper over this with placeholder
+translation. Per task instructions ("If the English source is malformed,
+report the blocker rather than inventing missing meaning"), this file is
+reported as a blocker, not translated. It needs EN-source authoring for
+the 10 empty blocks before a zh-TW translation can be produced.
+
+This raises the chunk's total blocker count from 23 to **24**.
+
+## Complete accounting for the 127-file slice
+
+- 89 done (translated, validated PASS, committed, pushed)
+- 24 blockers (18 empty-COMPRESSION + 5 placeholder-text HOOK + 1 NEW:
+  financial_anxiety/spiral with 10/33 empty blocks)
+- 14 already fixed on sibling branches (PR #68 / other chunk agents)
+- 89 + 24 + 14 = 127 ✓ full slice accounted for
+
+## Session cumulative work (this continuation, 6 files attempted / 5 landed)
+
+Each landed file: EN source read in full from `git show origin/main:<path>`,
+hand-translated block by block into natural Taiwan Traditional Chinese,
+verified with the corrected `validate.py`
+(`agent/zhtw-clean-corrupted-retranslate-20260722` commit
+`4b37c8bd5078b7b6f04f23ff702fade84a619524`), committed via private
+`GIT_INDEX_FILE` plumbing, pushed incrementally.
+
+New glossary terms established this continuation:
+- 暴露與躲藏 = "exposure and hiding" mechanism
+- 設限的代價 = "the limit-setting cost" mechanism
+- 留下來的母職倦怠 = "maternal burnout that stayed" mechanism
+
+## Standing operational rules (unchanged, carried through to session end)
+
+- Never trust live worktree disk state after commit — always re-verify from
+  git objects (`git show <ref>:<path>`).
 - Private `GIT_INDEX_FILE` per commit, never touch the shared `.git/index`.
-- Skip genuine EN-source stubs (bracket-placeholder HOOK text,
-  `compression_family`-only empty COMPRESSION bodies) — report as blockers,
-  never invent content.
+- Skip genuine EN-source stubs — report as blockers, never invent content.
+  This rule caught one new blocker this continuation (financial_anxiety/
+  spiral) via a programmatic byte-level body-length check, not eyeballing.
