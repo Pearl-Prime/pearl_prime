@@ -30,6 +30,35 @@ def cjk_ratio(s):
     cjk = sum(1 for ch in s2 if '一' <= ch <= '鿿')
     return cjk / len(s2)
 
+def strip_meta(header, body):
+    # Isolate translatable prose from surrounding "---" fences / metadata
+    # lines (path:/BAND:/etc) that emit.py deliberately leaves untouched
+    # from the EN source. Mirrors emit.py's replace_body body-isolation
+    # logic exactly (block_text = "## " + header + body), rather than a
+    # regex, so validate.py checks precisely what emit.py wrote as "body".
+    # Fixed 2026-07-23: an earlier regex-based version silently discarded
+    # real content for blocks with no metadata section (single dash-pair),
+    # returning "" — which then false-passed cjk_ratio's empty-string
+    # short-circuit (cr==1.0). Also fixed to not misfire on Pattern C
+    # (COMPRESSION-style, no leading "---") by checking the same
+    # lines[1]==\"---\" branch condition emit.py uses.
+    lines = ["## " + header] + body.split("\n")
+    dash_idx = [i for i, l in enumerate(lines) if l.strip() == "---"]
+    if len(lines) > 1 and lines[1].strip() == "---":
+        if len(dash_idx) < 2:
+            return body
+        body_start = dash_idx[-2] + 1
+        body_end = dash_idx[-1]
+        return "\n".join(lines[body_start:body_end])
+    else:
+        if not dash_idx:
+            return "\n".join(lines[1:])
+        fd = dash_idx[0]
+        body_start_line = 1
+        if len(lines) > 1 and re.match(r"^[a-zA-Z_]+:\s", lines[1]):
+            body_start_line = 2
+        return "\n".join(lines[body_start_line:fd])
+
 def parse_blocks(text):
     lines = text.split("\n")
     blocks = []
@@ -58,6 +87,7 @@ def validate_file(en_path, zh_path):
     if en_headers != zh_headers:
         problems.append(f"HEADER_MISMATCH en={en_headers} zh={zh_headers}")
     for h, body in zh_blocks:
+        body = strip_meta(h, body)
         bl = body.lower()
         if any(p in bl for p in META_PHRASES):
             problems.append(f"{h}: META_PHRASE_FOUND")
