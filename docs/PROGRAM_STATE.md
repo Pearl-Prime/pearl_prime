@@ -234,15 +234,15 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
   - **Atom bank:** `SOURCE_OF_TRUTH/social_media_atoms/` — ~1,952 total rows: 1,642 EN evergreen
     (`evergreen_en_us_atoms.jsonl`), 250 platform/surface (`platform_surface_atoms.jsonl`), 60 APAC
     localization (`apac_localization_atoms.jsonl`: ja-JP/zh-TW/ko-KR/zh-CN/zh-HK/en-SG). Registry row
-    `evergreen_social_atom_bank` in `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` (currently
-    still `pending-PR` on disk pending PR #75 merge). **EXECUTED-REAL**, not PROVEN-AT-BAR: 98.7% of rows
+    `evergreen_social_atom_bank` is durable in `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv`.
+    **EXECUTED-REAL**, not PROVEN-AT-BAR: 98.7% of rows
     share undifferentiated boilerplate `SRC_*` citations (only 1.3% are falsifiable quote+path citations,
     per `artifacts/qa/social_research_currency_audit_20260722/RESEARCH_CURRENCY_AUDIT.md`).
-  - **Brand/author vibe schema** (`SOCIAL-ATOM-BANK-VIBE-01`, `docs/PEARL_ARCHITECT_STATE.md`) +
-    **anti-spam variation gate** (`scripts/ci/check_social_post_variation.py`, gate 36): mutation-tested
-    locally, **code-wired but pending PR #75** (`fix(ci): land orphan config files breaking main Core
-    tests + complete phoenix_v4.social`) — OPEN/MERGEABLE, not yet merged as of 2026-07-23. `social_media`
-    has no row yet in `SUBSYSTEM_AUTHORITY_MAP.tsv` on `origin/main` until that PR lands.
+  - **Brand/author vibe schema** (`SOCIAL-ATOM-BANK-VIBE-01`, `docs/PEARL_ARCHITECT_STATE.md`) is durable
+    on `origin/main`: the voice-profile catalog and deterministic assembler wiring both exist.
+    **Anti-spam variation gate** (`scripts/ci/check_social_post_variation.py`) was wired into production
+    readiness by PR #123; its corrected unique display number is gate 45 (formerly cited as gate 36).
+    PR #75 is merged, and `social_media` is registered in `SUBSYSTEM_AUTHORITY_MAP.tsv`.
   - **Visual-license operator gate:** `artifacts/qa/deterministic_social_visual_gate_20260718/` — 3 source
     visuals license-verified, but **0 of 405 render rows production-ready**, `LIVE_PUBLISHING_AUTHORIZED=no`
     pending operator look-packet approval (`artifacts/operator_read_packets/deterministic_social_visual_gate_20260718/operator_look_packet.md`).
