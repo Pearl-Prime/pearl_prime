@@ -342,3 +342,61 @@ Status: 50 translated (2 partial) + 4 blocked / 132 total in slice.
 comparison` and the rest of `entrepreneurs/anchored/*` per the schematic-
 template list above (financial_anxiety and compassion_fatigue topics use
 the schematic template — verify per file before reuse).
+
+## Scope narrowed to rows 1-39 (2026-07-23, coordinator: chunk3b launched for rows 40-78)
+
+Coordinator split the remaining 78-file list: this agent (chunk3) now owns rows
+1-39 only; a new sibling `chunk3b` (branch `agent/zhtw-retranslate-chunk3b-20260723`)
+owns rows 40-78 concurrently. This agent completed rows 1-39 (see below) and
+stopped -- did NOT touch rows 40+ from this point forward.
+
+**Rows 1-39 status: ALL DONE.** Full re-verification sweep (header parity +
+CJK ratio + empty-body + Simplified-char checks against origin/main EN source)
+run against the final branch tip -- 39/39 PASS, zero failures.
+
+Completed this stretch: `entrepreneurs/anxiety/watcher` (unique narrative, 27
+blocks), `entrepreneurs/boundaries/spiral` (unique narrative, 26 blocks),
+`entrepreneurs/anchored/boundaries/spiral` (reused from the above, 20 blocks),
+25 `entrepreneurs/anchored/*` schematic-template files, 6
+`entrepreneurs/{topic}/watcher` files (topic-specific TURNING_POINT v06/v07 +
+reusable-by-name-swap EMBODIMENT/MECHANISM_PROOF v06/v07), 4
+`entrepreneurs/{topic}/COMPRESSION` files in-scope, plus one genuine bug fix
+(`first_responders/courage/COMPRESSION` v13, malformed EN closing-fence) and one
+leftover-stale-translation fix (`entrepreneurs/anchored/compassion_fatigue/spiral`
+-- found truncated + using a different, lower-quality transliteration set from
+the original bulk recovery commit; this agent had skipped it by oversight in
+an earlier batch, caught by a final validator sweep and fixed).
+
+### IMPORTANT bug found and flagged for chunk3b / consolidation (NOT fixed here -- out of scope)
+
+While building the `entrepreneurs/anxiety/watcher` reuse, found that the
+reusable mechanism-extension JSON templates this agent built for `grief`,
+`comparison`, `false_alarm`, and `spiral` (used by `schema_gen2.py`'s
+`gen_full()` for every topic-level file with v06/v07 extension blocks) still
+had the SOURCE topic's name hardcoded in the prose (e.g. "焦慮"/"同理心疲乏"
+literally baked in from the `entrepreneurs/anxiety/*` / `entrepreneurs/
+compassion_fatigue/spiral` extraction) instead of being substituted per
+target topic. `overwhelm` and `shame` extensions are unaffected (confirmed
+topic-word-free). Root-caused and fixed for this agent's own in-scope files
+(commit history on this branch), by adding a `《TOPIC》` placeholder to the
+ext_data JSON files and a substitution step in `gen_full()`.
+
+**Files outside this agent's scope (rows 40-78, chunk3b's territory) that
+were generated via the SAME buggy path before the bug was found, and likely
+still have the wrong topic word baked into their v06/v07 extension blocks:**
+`somatic_healing/{spiral,grief,false_alarm,comparison}`,
+`financial_stress/{grief,false_alarm,comparison}`,
+`social_anxiety/{spiral,grief}`, `grief/{false_alarm,comparison}`,
+`imposter_syndrome/{spiral,grief,false_alarm}`,
+`self_worth/{spiral,grief,false_alarm}`, `courage/spiral`. Grep each file's
+zh-TW CANONICAL.txt for the string "焦慮" (should not appear unless the
+topic genuinely is anxiety) or "同理心疲乏" (should not appear unless the
+topic genuinely is compassion_fatigue) to confirm/locate. The corrected,
+topic-invariant ext_data/*.json (with the `《TOPIC》` placeholder) and the
+fixed `schema_gen2.py` are NOT yet on any branch -- they exist only in this
+agent's session scratchpad
+(`/private/tmp/claude-501/-Users-ahjan-phoenix-omega/e0cff7f3-d906-4d4f-bf69-9f0633e16ef7/scratchpad/ext_data/{grief_ext,comparison_ext,false_alarm_ext,spiral_ext}.json`
+and `schema_gen2.py`) and should be handed to chunk3b or a consolidation pass
+rather than re-derived from scratch.
+
+Signal: `ZHTW_RETRANSLATE_CHUNK3_ROWS1-39_DONE`
