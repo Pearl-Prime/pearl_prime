@@ -1,0 +1,130 @@
+# Social brand/author voice profiles — assembler lookup for deterministic_social.py
+# Authority: docs/PEARL_SOCIAL_MEDIA_WRITER_AGENT_SPEC_2026-07-18.md § Brand/Author Vibe Extension
+# Cap: SOCIAL-ATOM-BANK-VIBE-01
+# Brand keys seeded from config/integrations/metricool_brands.yaml +
+# config/brand_management/global_brand_registry_unified.yaml (real names only).
+# Shape mirrors config/authoring/author_positioning_profiles.yaml (vulnerability_band /
+# allowed_language / forbidden_language) plus social-specific display/CTA/sign-off fields.
+#
+# `universal` MUST reproduce pre-2026-07-21 assembler output when brand_id/author_id are unset.
+
+schema_version: 1
+
+profiles:
+  universal:
+    brand_id: null
+    author_id: null
+    display_name: "Waystream Sanctuary"
+    vulnerability_band: moderate
+    allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+    forbidden_language:
+      - diagnostic_labels
+      - medical_cure_claims
+      - command_language
+    # Empty cta_phrase / sign_off = leave generate_copy_package CTA path untouched
+    cta_phrase: null
+    sign_off: null
+    tone_note: house_voice_pre_vibe_extension
+
+  waystream_sanctuary:
+    brand_id: waystream_sanctuary
+    author_id: null
+    display_name: "Waystream Sanctuary"
+    vulnerability_band: moderate
+    allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+    forbidden_language:
+      - diagnostic_labels
+      - medical_cure_claims
+      - command_language
+    cta_phrase: null
+    sign_off: null
+    tone_note: brand_default_matches_universal_watermark
+
+  stillness_press:
+    brand_id: stillness_press
+    author_id: null
+    display_name: "Stillness Press"
+    vulnerability_band: low
+    allowed_language:
+      - calm_certainty
+      - perspective_framing
+      - embodied_language
+    forbidden_language:
+      - slang
+      - self_doubt_language
+      - medical_cure_claims
+    cta_phrase: "Save this stillness practice for the next loud hour."
+    sign_off: "— Stillness Press"
+    tone_note: quiet_elder_stabilizer
+
+  cognitive_clarity:
+    brand_id: cognitive_clarity
+    author_id: null
+    display_name: "Clear Seeing Books"
+    vulnerability_band: low
+    allowed_language:
+      - explanatory_clarity
+      - grounded_psychology
+    forbidden_language:
+      - emotional_confession
+      - mystical_claims
+      - medical_cure_claims
+    cta_phrase: "Bookmark this framework and test one step this week."
+    sign_off: "— Clear Seeing Books"
+    tone_note: research_guide_analyst
+
+  executive_calm:
+    brand_id: executive_calm
+    author_id: null
+    display_name: "Granite Ridge Publishing"
+    vulnerability_band: low
+    allowed_language:
+      - calm_certainty
+      - explanatory_clarity
+      - professional_specificity
+    forbidden_language:
+      - slang
+      - mystical_claims
+      - medical_cure_claims
+    cta_phrase: "Share with one teammate who carries the same load."
+    sign_off: "— Granite Ridge Publishing"
+    tone_note: executive_professional
+
+# Optional author overlays (keys match author_positioning_profiles.yaml profile names)
+authors:
+  somatic_companion:
+    author_id: somatic_companion
+    vulnerability_band: moderate
+    allowed_language:
+      - first_person_reflection
+      - embodied_language
+      - gentle_uncertainty
+    forbidden_language:
+      - academic_citation
+      - diagnostic_labels
+      - command_language
+    cta_phrase: "Try the body cue once, then notice what softens."
+    sign_off: "with care"
+
+  research_guide:
+    author_id: research_guide
+    vulnerability_band: low
+    allowed_language:
+      - explanatory_clarity
+      - grounded_psychology
+    forbidden_language:
+      - emotional_confession
+      - mystical_claims
+    cta_phrase: "Note the mechanism, then run one controlled experiment."
+    sign_off: "— research note"
+
+defaults:
+  brand_id: null
+  author_id: null
+  profile_key: universal

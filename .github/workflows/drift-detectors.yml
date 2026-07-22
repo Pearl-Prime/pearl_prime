@@ -197,7 +197,7 @@ jobs:
 
       - name: Metricool managed durability (pin + brand map + registry — BLOCK)
         run: |
-          python3 -m pip install --quiet pyyaml
+          python3 -m pip install --quiet pyyaml requests Pillow
           PYTHONPATH=scripts/ci:scripts/integrations/metricool:. python3 scripts/ci/check_metricool_managed.py
 
       - name: Composite doctrine secular + shape (WISDOM_ESSENCE ruling — BLOCK on diff)
