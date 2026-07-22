@@ -18,6 +18,19 @@ commit, so this chunk built its own corrected validator
 already committed in this chunk against it — all passed (see below). All files from this point
 forward in this chunk are validated with the corrected logic.
 
+**RECONCILIATION FLAG (coordinator, 2026-07-23):** chunk1 independently found the same
+`validate.py` bug and pushed a canonical fix to `agent/zhtw-clean-corrupted-retranslate-20260722`
+(commits `87d66cbb58` "repair validate.py strip_meta false-pass/false-fail bug" and `45350ec8c7`
+"validate.py strip_meta() doesn't handle 3-fence block shape"). This chunk's
+`scripts/qa/zhtw_clean_retranslate/validate_fixed.py` was built independently and is NOT
+confirmed byte-identical to chunk1's fix — both target the same emit.py-mirroring issue but
+may differ in edge-case handling (e.g. this chunk's version has an explicit CALLBACK_ID-only
+allowlist carve-out; unclear if chunk1's does too). **A future consolidation pass must diff
+the two and reconcile to one canonical validator** — do not assume they are identical or that
+either one is sufficient without comparing. This chunk continues using its own
+`validate_fixed.py` for the remainder of its slice per coordinator instruction, since both are
+expected to converge on equivalent-enough logic for this chunk's own re-verification purposes.
+
 ## Status: 16 translated + 4 blocked / 132 total in slice
 
 ### Done (real hand-composed zh-TW translation, header/block parity verified, fixed-validator PASS)
