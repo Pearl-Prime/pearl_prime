@@ -1,0 +1,76 @@
+# zh_cn_default.yaml — bundled fallback watchlist for the zh-CN
+# script-contamination detector.
+#
+# This is a packaged DEFAULT, consumed only when the live, corpus-derived
+# `analysis/zh_cn/regional_usage_watchlist.yaml` (built by Lane 02 of
+# docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/) is
+# not present in the checkout. Do not treat this bundled copy as more
+# current than the live analysis/ file — script_contamination.py always
+# prefers analysis/zh_cn/regional_usage_watchlist.yaml when it exists.
+#
+# Content mirrors the schema and seed content the live file uses (same
+# clear_traditional_only_examples_to_flag / known_shared_forms_do_not_flag_alone
+# set from the calibrated zh-TW-program inverse case, plus a starter
+# forbidden-vocabulary list). See .claude/agents/translate-zh-cn.md for the
+# native-agent rule this mirrors, and
+# docs/agent_prompt_packs/20260720_cjk_translation_native_audit/03_translate_zh_cn_audit.md
+# for the audit rubric this detector supports (does not reimplement).
+
+schema_version: 1
+locale: zh-CN
+
+script_contamination_detection:
+  method: >
+    Flag a character only when BOTH (a) a t2s (Traditional->Simplified)
+    pass would rewrite it AND (b) the character is genuinely
+    Traditional-only (not one of the shared/unified forms). A naive
+    blanket Traditional-character blacklist over-triggers on characters
+    valid in both scripts.
+  known_shared_forms_do_not_flag_alone: ["台", "吃", "游", "群", "床"]
+  clear_traditional_only_examples_to_flag:
+    - "臺"
+    - "喫"
+    - "麼"
+    - "們"
+    - "個"
+    - "這"
+    - "說"
+    - "來"
+    - "後"
+    - "為"
+
+forbidden_taiwan_vocabulary:
+  - taiwan: 甚麼
+    mainland: 什么
+  - taiwan: 妳
+    mainland: 你
+  - taiwan: 部落格
+    mainland: 博客
+  - taiwan: 軟體
+    mainland: 软件
+  - taiwan: 硬體
+    mainland: 硬件
+  - taiwan: 網路
+    mainland: 网络
+  - taiwan: 資訊
+    mainland: 信息
+  - taiwan: 影片
+    mainland: 视频
+  - taiwan: 早安
+    mainland: 早上好
+
+forbidden_hongkong_vocabulary:
+  - hongkong: 巴士
+    mainland: 公交车 / 大巴 (context-dependent)
+  - hongkong: 的士
+    mainland: 出租车
+  - hongkong: 士多
+    mainland: 小卖部 / 便利店
+  - hongkong: 冷氣
+    mainland: 空调
+
+machine_translation_tells_to_reject:
+  - Over-literal English sentence structure preserved in Chinese word order.
+  - Unnatural or missing measure words (量词) before nouns.
+  - Direct calque of English idioms instead of a natural Mainland equivalent.
+  - Repeating the same connective (然后/所以/但是) mechanically.

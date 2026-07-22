@@ -1,0 +1,74 @@
+# zh_tw_default.yaml — bundled fallback watchlist for the zh-TW
+# script-contamination detector.
+#
+# Mirror of zh_cn_default.yaml, reversed: hunts for Simplified-character
+# leakage and Mainland-register vocabulary inside zh-TW (Traditional,
+# Taiwan) target text. Consumed only when a live, corpus-derived
+# analysis/zh_tw/regional_usage_watchlist.yaml is not present in the
+# checkout — script_contamination.py always prefers that live file when
+# it exists. See artifacts/qa/zh_tw_translation_gap_audit_2026-07-15.md §6
+# for the calibrated shared-form exceptions this mirrors.
+
+schema_version: 1
+locale: zh-TW
+
+script_contamination_detection:
+  method: >
+    Flag a character only when BOTH (a) an s2t (Simplified->Traditional)
+    pass would rewrite it AND (b) the character is genuinely
+    Simplified-only (not one of the shared/unified forms). A naive
+    blanket Simplified-character blacklist over-triggers on characters
+    valid in both scripts (calibrated cases: 台/吃/游/群/床).
+  known_shared_forms_do_not_flag_alone: ["台", "吃", "游", "群", "床"]
+  clear_simplified_only_examples_to_flag:
+    - "台"   # context-dependent -- see known_shared_forms; only flagged
+             # in combination with other Simplified-only characters nearby
+    - "么"
+    - "们"
+    - "个"
+    - "这"
+    - "说"
+    - "来"
+    - "后"
+    - "为"
+    - "网络"
+
+forbidden_mainland_vocabulary:
+  - mainland: 什么
+    taiwan: 甚麼
+  - mainland: 你（女性对象泛指场景，未区分妳）
+    taiwan: 妳
+  - mainland: 博客
+    taiwan: 部落格
+  - mainland: 软件
+    taiwan: 軟體
+  - mainland: 硬件
+    taiwan: 硬體
+  - mainland: 网络
+    taiwan: 網路
+  - mainland: 信息
+    taiwan: 資訊
+  - mainland: 视频
+    taiwan: 影片
+  - mainland: 早上好
+    taiwan: 早安
+
+forbidden_hongkong_vocabulary:
+  - hongkong: 巴士
+    taiwan: 公車 / 客運 (context-dependent)
+  - hongkong: 的士
+    taiwan: 計程車
+  - hongkong: 冷氣
+    taiwan: 冷氣（差異較小，主要作提示）
+
+machine_translation_tells_to_reject:
+  - Over-literal English sentence structure preserved in Chinese word order.
+  - Unnatural or missing measure words (量詞) before nouns.
+  - Direct calque of English idioms instead of a natural Taiwan equivalent.
+  - Repeating the same connective (然後/所以/但是) mechanically.
+
+verification_note: >
+  Starter set only, seeded from the zh-CN program's inverse case and the
+  2026-07-15 zh-TW audit precedent — not yet recalibrated against a fresh
+  zh-TW sample by this lane. Treat as a compatible starting point for
+  Lane 02 / a future zh-TW corpus-analysis pass, not as a locked glossary.
