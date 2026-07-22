@@ -148,10 +148,21 @@ def stable_hash(*parts: Any, length: int = 12) -> str:
 
 
 def font(path: str, size: int) -> ImageFont.FreeTypeFont:
-    try:
-        return ImageFont.truetype(path, size)
-    except Exception:
-        return ImageFont.truetype(FONT_FALLBACK, size)
+    # FONT_SANS/FONT_FALLBACK are macOS system paths; CI runners (Linux) don't
+    # have them. Try common Linux truetype locations before degrading to
+    # Pillow's bundled bitmap font so rendering never crashes off macOS.
+    candidates = (
+        path,
+        FONT_FALLBACK,
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+    )
+    for candidate in candidates:
+        try:
+            return ImageFont.truetype(candidate, size)
+        except Exception:
+            continue
+    return ImageFont.load_default()
 
 
 def measure(draw: ImageDraw.ImageDraw, text: str, fnt: ImageFont.FreeTypeFont) -> tuple[int, int]:
