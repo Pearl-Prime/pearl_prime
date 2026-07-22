@@ -37,6 +37,9 @@ official_refresh:
     google_business_photos:
       url: "https://support.google.com/business/answer/6103862?co=GENIE.Platform%3DDesktop&hl=en"
       claim: "JPG/PNG photo guidelines, 720x720 recommended resolution, 5 MB cap."
+    instagram_hashtag_cap_20260723:
+      url: "https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/"
+      claim: "Instagram capped hashtags at 5 per post platform-wide, announced 2025-12-19; corrects instagram_feed_portrait/instagram_carousel caption.hashtags_max from stale 15 to 5 (hashtags_min from 5 to 0, since 5 is now a ceiling not a floor). See artifacts/social_media_atoms/pearl_social_media_writer_20260723/deep_research_digest_20260723.md §1.1/R2 (Lane A, 2026-07-23)."
 surfaces:
   instagram_feed_portrait:
     platform: instagram
@@ -50,7 +53,7 @@ surfaces:
     carousel_items: {min: 2, max: 10}
     safe_zone_pct: {left: 0.07, right: 0.07, top: 0.07, bottom: 0.15}
     text_envelope: {headline_words: 12, body_words: 38, overlay_words: 55}
-    caption: {max_chars: 2200, hashtags_min: 5, hashtags_max: 15, first_comment_allowed: true}
+    caption: {max_chars: 2200, hashtags_min: 0, hashtags_max: 5, first_comment_allowed: true}
     alt_text_required: true
     native_copy_mode: emotional_saveable
     kpi_priority: [saves, shares, carousel_completion, profile_visits]
@@ -66,7 +69,7 @@ surfaces:
     carousel_items: {min: 2, max: 10}
     safe_zone_pct: {left: 0.07, right: 0.07, top: 0.07, bottom: 0.13}
     text_envelope: {headline_words: 12, body_words: 34, overlay_words: 45}
-    caption: {max_chars: 2200, hashtags_min: 5, hashtags_max: 15, first_comment_allowed: true}
+    caption: {max_chars: 2200, hashtags_min: 0, hashtags_max: 5, first_comment_allowed: true}
     alt_text_required: true
     native_copy_mode: emotional_saveable
     kpi_priority: [saves, shares, completion, follows]
