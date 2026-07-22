@@ -17,6 +17,15 @@ operations agent.
 - `ANTHROPIC_API_KEY` / `CLAUDE_API_KEY` reads in repo code
 - OpenAI cloud, Google AI, DashScope cloud, Together, Replicate, Perplexity, Cohere, Mistral paid
 - Violations block PRs. Run `python3 scripts/ci/audit_llm_callers.py` before pushing.
+- **Scoped exception (2026-07-21):** DashScope Qwen3.7 Max / Qwen-MT for the
+  CJK translation-quality program — immediate driving use case is Mainland
+  zh-CN translation (Qwen3.7 Max as primary literary translator), not
+  zh-TW-only — ONLY through
+  `scripts/localization/translation_quality/dashscope_qwen_client.py` (see
+  `config/governance/banned_llm_patterns.yaml` → `dashscope_paid_tier.exempt_paths`),
+  cost-capped, calibration-set + explicitly high-risk content only,
+  `PHOENIX_TRANSLATION_ALLOW_CLOUD=1` required. No other DashScope call site
+  is exempt. See `docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/`.
 
 ## API Keys & Credentials — READ THIS FIRST
 

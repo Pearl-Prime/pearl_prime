@@ -44,9 +44,25 @@ banned_patterns:
     reason: "Google AI API is paid."
     exempt_paths: []
   dashscope_paid_tier:
+    # SCOPED EXCEPTION (operator-approved 2026-07-21): the CJK translation
+    # quality program
+    # (docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/)
+    # uses DashScope Qwen3.7 Max + Qwen-MT as literary-translation
+    # candidates, calibration/high-risk-content scope only, cost-capped in
+    # the exempted client module. The immediate driving use case is
+    # Mainland zh-CN translation (Qwen3.7 Max as primary literary
+    # translator) — NOT zh-TW-only, despite the pack's directory name; the
+    # exemption is scoped to one client module (not to any single locale)
+    # and covers the same client used across this program's CJK locales.
+    # This exemption is ONE file — every other DashScope call site in the
+    # repo is still banned. A static-analysis exemption here does not
+    # enable anything at runtime by itself: PHOENIX_TRANSLATION_ALLOW_CLOUD=1
+    # is still required (scripts/localization/llm_client.py), off by
+    # default.
     regex: 'dashscope\.(Generation|MultiModalConversation)'
     reason: "DashScope cloud SDK is paid."
-    exempt_paths: []
+    exempt_paths:
+      - "scripts/localization/translation_quality/dashscope_qwen_client.py"
   together_replicate_perplexity:
     regex: '(together|replicate|perplexity)\.(chat|completions|run|complete)'
     reason: "Third-party paid inference banned."
