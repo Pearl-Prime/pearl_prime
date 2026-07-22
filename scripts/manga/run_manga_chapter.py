@@ -22,10 +22,12 @@ from phoenix_v4.manga.image_backend import (
 )
 from phoenix_v4.manga.models.workspace_layout import resolve_chapter_workspace
 from phoenix_v4.manga.runner.chapter_runner import (
+    _resolve_chapter_genre,
     run_chapter_dag,
     run_chapter_dag_with_auto_revision,
 )
 from phoenix_v4.manga.runner.dag_order import RUN_ORDER
+from phoenix_v4.manga.style_resolution import resolve_style_id
 from scripts.manga._config import config_snapshot_hash
 
 
@@ -90,7 +92,13 @@ def main() -> int:
         action="store_true",
         help="Omit sdf_conditioning placeholders on panel_prompts",
     )
-    ap.add_argument("--style-id", default="dark_psychological")
+    ap.add_argument(
+        "--style-id",
+        default=None,
+        help="Explicit style archetype id. Omit to resolve via the authority "
+        "chain in phoenix_v4.manga.style_resolution (genre/teacher/format "
+        "signal, falling back to grounded_realism).",
+    )
     ap.add_argument("--teacher-id", default="ahjan")
     ap.add_argument("--export-pdf", action="store_true", help="Assemble page PNGs into a manga PDF after DAG completes")
     args = ap.parse_args()
@@ -125,6 +133,14 @@ def main() -> int:
 
     snap = config_snapshot_hash()
     sdf_stub = not args.no_sdf_stub
+
+    resolved_style_id, style_source = resolve_style_id(
+        explicit_override=args.style_id,
+        teacher_id=args.teacher_id,
+        genre_id=_resolve_chapter_genre(ws),
+    )
+    print(f"style_id={resolved_style_id} (source={style_source})", file=sys.stderr)
+
     try:
         if args.auto_revision:
             ran, rounds = run_chapter_dag_with_auto_revision(
@@ -135,7 +151,7 @@ def main() -> int:
                 to_stage=args.to_stage,
                 chapter_number=args.chapter_number,
                 config_hash=snap,
-                style_id=args.style_id,
+                style_id=resolved_style_id,
                 teacher_id=args.teacher_id,
                 sdf_stub=sdf_stub,
             )
@@ -148,7 +164,7 @@ def main() -> int:
                 to_stage=args.to_stage,
                 chapter_number=args.chapter_number,
                 config_hash=snap,
-                style_id=args.style_id,
+                style_id=resolved_style_id,
                 teacher_id=args.teacher_id,
                 sdf_stub=sdf_stub,
             )
