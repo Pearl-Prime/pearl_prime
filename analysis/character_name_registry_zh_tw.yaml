@@ -1,6 +1,9 @@
 schema_version: 1
 locale: zh-TW
-status: DRAFT_2026-07-22_pending_operator_confirmation
+status: 'RESOLVED_2026-07-22_ambiguities_locked_by_operator: see agent/zhtw-name-registry-resolutions-20260722
+  for the resolution pass on top of PR #61 -- Dev/Dave kept distinct, Cai locked to 凱伊, Quin merged into
+  Quinn, Brien folded into Brian, Suki/Mika/Ren/Hana/Yuna/Noa given override notes, Wei/Mei/Meilin/Chen/Jae
+  marked do_not_convert, Farah merged into Farrah'
 purpose: Canonical name-locking registry for zh-TW corpus-wide Chinese-character-name house style. Supersedes
   the earlier 5-name draft on agent/zh-tw-glossary-build-20260722 (never reviewed/pushed). This registry
   does NOT itself convert any atom content -- corpus conversion is a separate, later lane.
@@ -162,8 +165,11 @@ names:
   - atoms/healthcare_rns/sleep_anxiety/grief/CANONICAL.txt
 - source_name: Mika
   zh_tw_form: 美嘉
-  rationale: 'AMBIGUOUS-FLAG: could be Japanese-heritage (美嘉/美香) or Western phonetic (米卡); flagged for
-    context check'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): default to the existing Western-phonetic-leaning
+    registry rendering 美嘉. OVERRIDE NOTE: ambiguous between East-Asian-heritage and Western-phonetic
+    reading -- verify character context before converting in files outside the ones already sampled; if
+    heritage is Asian, this may already be an appropriate Chinese/Japanese/Korean name in the English
+    source and should NOT be phonetically re-transliterated.'
   occurrence_count_sampled: 885
   file_count_sampled: 199
   first_seen_files:
@@ -181,8 +187,10 @@ names:
   - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
 - source_name: Suki
   zh_tw_form: 蘇琪
-  rationale: 'AMBIGUOUS-FLAG: default phonetic rendering assigned (蘇琪); could alternatively be Japanese
-    紗希/沙紀 depending on character heritage -- needs context check before final lock'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): default to Western-phonetic 蘇琪, the majority pattern
+    observed in the sampled corpus. OVERRIDE NOTE: if a specific story''s context signals Japanese heritage
+    for this character, use 紗希 or 沙紀 instead -- check surrounding context before blind-converting Suki
+    in unfamiliar files; do not assume 蘇琪 applies universally.'
   occurrence_count_sampled: 1074
   file_count_sampled: 187
   first_seen_files:
@@ -200,8 +208,11 @@ names:
   - atoms/healthcare_rns/anchored/HOOK/CANONICAL.txt
 - source_name: Ren
   zh_tw_form: 蓮
-  rationale: 'AMBIGUOUS-FLAG: East-Asian short name, could be male (漣/仁) or female (蓮); needs context
-    check'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): default to the existing registry rendering 蓮.
+    OVERRIDE NOTE: ambiguous between East-Asian-heritage and Western-phonetic reading -- verify character
+    context before converting in files outside the ones already sampled; if heritage is Asian, this may
+    already be an appropriate Chinese/Japanese/Korean name in the English source and should NOT be
+    phonetically re-transliterated.'
   occurrence_count_sampled: 861
   file_count_sampled: 181
   first_seen_files:
@@ -598,9 +609,11 @@ names:
   - atoms/gen_alpha_students/financial_stress/comparison/CANONICAL.txt
 - source_name: Dev
   zh_tw_form: 戴弗
-  rationale: 'AMBIGUOUS-FLAG: short form of Devendra/Devon-type names; rendered distinct from Dave (戴夫)
-    to avoid a same-character collision between two different source names -- confirm this isn''t actually
-    a truncated ''Devon'' before locking'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): kept as a distinct entry from Dave (戴夫) -- no evidence
+    in the corpus that "Dev" is a truncated "Devon"; treat Dev and Dave as two separate source names, each
+    locked to its own zh_tw_form. If any file uses "Dev" adjacent to Devon-specific context, flag that
+    file for manual re-check rather than assuming truncation -- do not silently fold Dev into a Devon
+    rendering.'
   occurrence_count_sampled: 1201
   file_count_sampled: 89
   first_seen_files:
@@ -609,8 +622,11 @@ names:
   - atoms/gen_z_professionals/self_worth/grief/CANONICAL.txt
 - source_name: Chen
   zh_tw_form: 陳
-  rationale: 'AMBIGUOUS-FLAG: this is a Chinese surname already in the source (e.g. "Marcus Chen") --
-    keep as 陳, do not re-transliterate phonetically; confirm pairing with the locked given-name rendering'
+  do_not_convert: true
+  rationale: 'RESOLVED 2026-07-22 (operator-approved) DO-NOT-CONVERT: this is a Chinese surname already
+    in the source (e.g. "Marcus Chen") -- it is not a Western name needing phonetic transliteration.
+    zh_tw_form (陳) is recorded for reference/documentation only; Stage B''s conversion pass must skip
+    this entry entirely rather than performing a find/replace on it.'
   occurrence_count_sampled: 222
   file_count_sampled: 82
   first_seen_files:
@@ -626,15 +642,6 @@ names:
   - atoms/healthcare_rns/financial_anxiety/STORY/CANONICAL.txt
   - atoms/healthcare_rns/compassion_fatigue/STORY/CANONICAL.txt
   - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
-- source_name: Quin
-  zh_tw_form: 昆恩
-  rationale: 'AMBIGUOUS-FLAG: variant spelling of Quinn -- confirm same character before merging renderings'
-  occurrence_count_sampled: 449
-  file_count_sampled: 79
-  first_seen_files:
-  - atoms/nyc_executives/sleep_anxiety/grief/CANONICAL.txt
-  - atoms/nyc_executives/sleep_anxiety/false_alarm/CANONICAL.txt
-  - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
 - source_name: Eden
   zh_tw_form: 伊登
   rationale: standard Taiwan transliteration
@@ -664,7 +671,11 @@ names:
   - atoms/nyc_executives/sleep_anxiety/comparison/CANONICAL.txt
 - source_name: Hana
   zh_tw_form: 哈娜
-  rationale: 'AMBIGUOUS-FLAG: could be Arabic/Western 哈娜 or Japanese 花 -- needs context check'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): default to the existing registry rendering 哈娜.
+    OVERRIDE NOTE: ambiguous between East-Asian-heritage and Western-phonetic reading -- verify character
+    context before converting in files outside the ones already sampled; if heritage is Asian, this may
+    already be an appropriate Chinese/Japanese/Korean name in the English source and should NOT be
+    phonetically re-transliterated.'
   occurrence_count_sampled: 422
   file_count_sampled: 78
   first_seen_files:
@@ -716,16 +727,6 @@ names:
   - atoms/nyc_executives/mindfulness/shame/CANONICAL.txt
   - atoms/nyc_executives/mindfulness/comparison/CANONICAL.txt
   - atoms/nyc_executives/mindfulness/STORY/CANONICAL.txt
-- source_name: Brien
-  zh_tw_form: 布萊恩
-  rationale: 'AMBIGUOUS-FLAG: likely a corpus artifact of "O''Brien" surname split by the scan regex on
-    the apostrophe -- verify source text before locking; do not treat as a first name'
-  occurrence_count_sampled: 158
-  file_count_sampled: 72
-  first_seen_files:
-  - atoms/first_responders/financial_stress/overwhelm/CANONICAL.txt
-  - atoms/first_responders/financial_stress/grief/CANONICAL.txt
-  - atoms/first_responders/financial_stress/false_alarm/CANONICAL.txt
 - source_name: Rivera
   zh_tw_form: 里維拉
   rationale: surname, standard Taiwan transliteration for Spanish-origin surname
@@ -873,9 +874,12 @@ names:
   - atoms/first_responders/financial_stress/shame/CANONICAL.txt
 - source_name: Wei
   zh_tw_form: 偉
-  rationale: 'AMBIGUOUS-FLAG: this is a Chinese given name already written in Han characters in source
-    (romanized as ''Wei'') -- likely denotes a Chinese-heritage character; confirm intended characters
-    (偉/薇/緯) from context rather than re-transliterating as if Western'
+  do_not_convert: true
+  rationale: 'RESOLVED 2026-07-22 (operator-approved) DO-NOT-CONVERT: this is a Chinese given name already
+    written in Han characters in the romanized English source (''Wei'') -- it is not a Western name
+    needing phonetic transliteration. zh_tw_form (偉) is recorded for reference/documentation only; the
+    true intended character (偉/薇/緯) is context-dependent and Stage B''s conversion pass must skip this
+    entry entirely rather than performing a blind find/replace.'
   occurrence_count_sampled: 145
   file_count_sampled: 51
   first_seen_files:
@@ -1118,8 +1122,12 @@ names:
   - atoms/healthcare_rns/compassion_fatigue/grief/CANONICAL.txt
 - source_name: Mei
   zh_tw_form: 美
-  rationale: 'AMBIGUOUS-FLAG: this is a Chinese given name already in the source -- confirm intended character
-    (美/梅) from context rather than treating as Western name'
+  do_not_convert: true
+  rationale: 'RESOLVED 2026-07-22 (operator-approved) DO-NOT-CONVERT: this is a Chinese given name already
+    in the English source -- it is not a Western name needing phonetic transliteration. zh_tw_form (美) is
+    recorded for reference/documentation only; the true intended character (美/梅) is context-dependent
+    and Stage B''s conversion pass must skip this entry entirely rather than performing a blind
+    find/replace.'
   occurrence_count_sampled: 69
   file_count_sampled: 21
   first_seen_files:
@@ -1371,8 +1379,12 @@ names:
   - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
 - source_name: Meilin
   zh_tw_form: 美琳
-  rationale: 'AMBIGUOUS-FLAG: this is a Chinese given name already in the source -- confirm intended characters
-    (美琳/美玲) from context rather than treating as a Western name to re-transliterate'
+  do_not_convert: true
+  rationale: 'RESOLVED 2026-07-22 (operator-approved) DO-NOT-CONVERT: this is a Chinese given name already
+    in the English source -- it is not a Western name needing phonetic transliteration. zh_tw_form (美琳)
+    is recorded for reference/documentation only; the true intended characters (美琳/美玲) are
+    context-dependent and Stage B''s conversion pass must skip this entry entirely rather than performing
+    a blind find/replace.'
   occurrence_count_sampled: 16
   file_count_sampled: 16
   first_seen_files:
@@ -1426,9 +1438,14 @@ names:
   - atoms/healthcare_rns/anxiety/STORY/CANONICAL.txt
 - source_name: Farrah
   zh_tw_form: 法拉
-  rationale: standard Taiwan transliteration
-  occurrence_count_sampled: 16
-  file_count_sampled: 16
+  spelling_variants:
+  - Farah
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): merged with the former separate "Farah" entry --
+    one character, spelling variants, single zh_tw_form (法拉). The duplicate "Farah" row (9 occurrences
+    / 5 files, previously flagged AMBIGUOUS as a near-homophone) has been removed; its counts are folded
+    in below.'
+  occurrence_count_sampled: 25
+  file_count_sampled: 21
   first_seen_files:
   - atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt
   - atoms/corporate_managers/anxiety/STORY/CANONICAL.txt
@@ -1633,9 +1650,16 @@ names:
   - atoms/tech_finance_burnout/boundaries/watcher/CANONICAL.txt
 - source_name: Brian
   zh_tw_form: 布萊恩
-  rationale: standard Taiwan transliteration
-  occurrence_count_sampled: 185
-  file_count_sampled: 12
+  spelling_variants:
+  - Brien
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): "Brien" is not a separate character -- it is an
+    apostrophe-split scan artifact of the surname "O''Brien" (the scan regex split on the apostrophe and
+    captured the tail as if it were a standalone given name). Folded the former separate "Brien" row (158
+    occurrences / 72 files, previously flagged AMBIGUOUS) into this Brian entry with the same zh_tw_form;
+    counts below include the folded total. Do not re-introduce a standalone "Brien" row; "O''Brien" as a
+    surname is out of scope for this given-name registry.'
+  occurrence_count_sampled: 343
+  file_count_sampled: 84
   first_seen_files:
   - atoms/gen_x_sandwich/social_anxiety/spiral/CANONICAL.txt
   - atoms/gen_x_sandwich/somatic_healing/false_alarm/CANONICAL.txt
@@ -1921,8 +1945,11 @@ names:
   - atoms/gen_x_sandwich/somatic_healing/comparison/CANONICAL.txt
 - source_name: Yuna
   zh_tw_form: 由奈
-  rationale: 'AMBIGUOUS-FLAG: could render as Japanese-style 由奈/優奈 or Western phonetic 尤娜 depending on
-    character heritage -- needs context check'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): default to the existing registry rendering 由奈.
+    OVERRIDE NOTE: ambiguous between East-Asian-heritage and Western-phonetic reading -- verify character
+    context before converting in files outside the ones already sampled; if heritage is Asian, this may
+    already be an appropriate Chinese/Japanese/Korean name in the English source and should NOT be
+    phonetically re-transliterated.'
   occurrence_count_sampled: 30
   file_count_sampled: 8
   first_seen_files:
@@ -1984,10 +2011,11 @@ names:
   - atoms/gen_alpha_students/self_worth/false_alarm/CANONICAL.txt
   - atoms/gen_alpha_students/social_anxiety/spiral/CANONICAL.txt
 - source_name: Cai
-  zh_tw_form: 蔡
-  rationale: 'AMBIGUOUS-FLAG: default assumes Chinese-surname reading (蔡) to avoid a same-character collision
-    with Kai (凱); if source context shows this is actually a Western given-name spelling variant of Kai,
-    it needs its OWN distinct rendering, not 凱 -- needs context check before locking'
+  zh_tw_form: 凱伊
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): treat as a Western-name spelling variant, not the
+    Chinese surname 蔡. Rendered as 凱伊 -- kept visually and phonetically distinct from Kai''s locked
+    rendering (凱) so the two source names never collide on the same characters, while still sharing the
+    same phonetic root since "Cai" reads as a spelling variant of "Kai" in the sampled corpus contexts.'
   occurrence_count_sampled: 100
   file_count_sampled: 7
   first_seen_files:
@@ -2005,8 +2033,13 @@ names:
   - atoms/gen_x_sandwich/burnout/watcher/CANONICAL.txt
 - source_name: Noa
   zh_tw_form: 諾亞
-  rationale: 'AMBIGUOUS-FLAG: near-homophone of Noah -- verify not a mis-scan/typo of Noah before locking
-    a distinct rendering'
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): default to the existing registry rendering 諾亞
+    (also retains the prior near-homophone-of-Noah caution -- if a file''s "Noa" looks like a mis-scan/typo
+    of "Noah" rather than a deliberate distinct name, flag it rather than converting). OVERRIDE NOTE:
+    ambiguous between East-Asian-heritage and Western-phonetic reading -- verify character context before
+    converting in files outside the ones already sampled; if heritage is Asian, this may already be an
+    appropriate Chinese/Japanese/Korean name in the English source and should NOT be phonetically
+    re-transliterated.'
   occurrence_count_sampled: 97
   file_count_sampled: 7
   first_seen_files:
@@ -2051,9 +2084,14 @@ names:
   - atoms/gen_z_student/mindfulness/overwhelm/CANONICAL.txt
 - source_name: Quinn
   zh_tw_form: 昆恩
-  rationale: standard Taiwan transliteration
-  occurrence_count_sampled: 99
-  file_count_sampled: 6
+  spelling_variants:
+  - Quin
+  rationale: 'RESOLVED 2026-07-22 (operator-approved): merged with the former separate "Quin" entry into
+    this single canonical row -- both spellings are the same character and both convert to 昆恩. The
+    duplicate "Quin" row (449 occurrences / 79 files, previously flagged AMBIGUOUS) has been removed;
+    its counts are folded in below.'
+  occurrence_count_sampled: 548
+  file_count_sampled: 85
   first_seen_files:
   - atoms/gen_alpha_students/self_worth/overwhelm/CANONICAL.txt
   - atoms/gen_alpha_students/social_anxiety/watcher/CANONICAL.txt
@@ -2186,21 +2224,15 @@ names:
   - atoms/educators/anxiety/shame/CANONICAL.txt
 - source_name: Jae
   zh_tw_form: 載
-  rationale: 'AMBIGUOUS-FLAG: likely a Korean given-name element (in source text possibly short for Jae-won/Jae-min
-    etc.), not a complete name on its own -- needs context check before locking a single-character rendering'
+  do_not_convert: true
+  rationale: 'RESOLVED 2026-07-22 (operator-approved) DO-NOT-CONVERT: this is already a Korean given-name
+    element in the English source (possibly a short form of Jae-won/Jae-min etc.), not a Western name
+    needing phonetic transliteration and not a complete standalone name. zh_tw_form (載) is recorded for
+    reference/documentation only; Stage B''s conversion pass must skip this entry entirely rather than
+    performing a blind find/replace.'
   occurrence_count_sampled: 10
   file_count_sampled: 5
   first_seen_files:
   - atoms/gen_z_professionals/mindfulness/THREAD/CANONICAL.txt
   - atoms/millennial_women_professionals/mindfulness/THREAD/CANONICAL.txt
   - atoms/gen_z_student/mindfulness/STORY/CANONICAL.txt
-- source_name: Farah
-  zh_tw_form: 法拉赫
-  rationale: 'AMBIGUOUS-FLAG: near-homophone of Farrah -- verify these are two distinct characters/spellings
-    before locking two separate renderings'
-  occurrence_count_sampled: 9
-  file_count_sampled: 5
-  first_seen_files:
-  - atoms/gen_z_professionals/adhd_focus/HOOK/CANONICAL.txt
-  - atoms/gen_z_professionals/adhd_focus/STORY/CANONICAL.txt
-  - atoms/midlife_women/mindfulness/THREAD/CANONICAL.txt
