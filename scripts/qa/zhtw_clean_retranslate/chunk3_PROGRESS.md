@@ -31,7 +31,7 @@ either one is sufficient without comparing. This chunk continues using its own
 `validate_fixed.py` for the remainder of its slice per coordinator instruction, since both are
 expected to converge on equivalent-enough logic for this chunk's own re-verification purposes.
 
-## Status: 34 translated (2 partial) + 4 blocked / 132 total in slice
+## Status: 42 translated (2 partial) + 4 blocked / 132 total in slice
 
 ### Done (real hand-composed zh-TW translation, header/block parity verified, fixed-validator PASS)
 
@@ -71,6 +71,14 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [x] `atoms/entrepreneurs/anchored/financial_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/entrepreneurs/anchored/anxiety/watcher/locales/zh-TW/CANONICAL.txt`
 - [x] `atoms/entrepreneurs/anchored/anxiety/overwhelm/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/financial_anxiety/watcher/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/financial_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/financial_anxiety/comparison/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/financial_anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/compassion_fatigue/spiral/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/compassion_fatigue/false_alarm/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/compassion_fatigue/comparison/locales/zh-TW/CANONICAL.txt`
+- [x] `atoms/entrepreneurs/compassion_fatigue/COMPRESSION/locales/zh-TW/CANONICAL.txt`
 
 ### Blocked (EN source itself is malformed — empty body, nothing to translate)
 
@@ -85,14 +93,6 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 
 ### Remaining (not yet started)
 
-- [ ] `atoms/entrepreneurs/financial_anxiety/watcher/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/financial_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/financial_anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/financial_anxiety/comparison/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/compassion_fatigue/spiral/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/compassion_fatigue/false_alarm/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/compassion_fatigue/COMPRESSION/locales/zh-TW/CANONICAL.txt`
-- [ ] `atoms/entrepreneurs/compassion_fatigue/comparison/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anxiety/watcher/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anxiety/grief/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/anxiety/false_alarm/locales/zh-TW/CANONICAL.txt`
@@ -180,12 +180,12 @@ expected to converge on equivalent-enough logic for this chunk's own re-verifica
 - [ ] `atoms/entrepreneurs/courage/overwhelm/locales/zh-TW/CANONICAL.txt`
 - [ ] `atoms/entrepreneurs/courage/spiral/locales/zh-TW/CANONICAL.txt`
 
-Remaining count: 94
+Remaining count: 86
 
 ## Session close note (2026-07-23, session 2)
 
-This session ended after 34 real translations (2 partial,
-see notes above) + 4 blocked (38/132 accounted).
+This session ended after 42 real translations (2 partial,
+see notes above) + 4 blocked (46/132 accounted).
 The remaining files are genuine, substantial hand-translation work (most are
 13-31 blocks of narrative story-atom prose, grounding-exercise prose, or
 first-person reflective essay prose, same register/quality bar as the files
@@ -221,11 +221,25 @@ should:
    COMPRESSION`) need EN-source authoring (all COMPRESSION blocks are empty
    in the EN CANONICAL.txt itself), not translation — flag to the atom-
    authoring backlog, do not attempt to translate placeholder/empty content.
-6. `entrepreneurs/anchored/*` files are NOT uniformly template-generated —
-   some (e.g. `financial_anxiety/false_alarm`) use a highly schematic
-   5-character skeleton ("<Name> experiences the core recognition of
-   <mechanism> in the context of <topic>..."); others (e.g. `anxiety/watcher`,
-   `anxiety/overwhelm`) have full specific narrative content per character
-   just like the non-anchored entrepreneurs files. Read each file before
-   assuming a fast template-swap shortcut applies.
+6. `entrepreneurs/{topic}/{mechanism}` and `entrepreneurs/anchored/{topic}/
+   {mechanism}` files are NOT uniformly template-generated — some topics use a
+   highly schematic 5-character skeleton ("<Name> experiences the core
+   recognition of <mechanism> in the context of <topic>...", identical body
+   text across ALL mechanisms within that topic, verified via `diff`); others
+   have full specific narrative content unique per character/mechanism, just
+   like the non-anchored files. CONFIRMED this session: `financial_anxiety` and
+   `compassion_fatigue` topics use the schematic template (verified across
+   watcher/false_alarm/comparison/spiral mechanisms — RECOGNITION through
+   EMBODIMENT v01-05, 20 blocks, are byte-identical apart from the mechanism/
+   topic name substitution). `anxiety` topic (non-anchored) does NOT — each
+   mechanism (watcher, overwhelm, grief, false_alarm, comparison) has unique
+   narrative. Files with 26 blocks in a schematic-topic dir also carry 6
+   mechanism-specific TURNING_POINT/EMBODIMENT/MECHANISM_PROOF v06/v07
+   extension blocks that are NOT part of the reusable template — these recur
+   verbatim (name-swapped) across the SAME mechanism in different topics
+   though (e.g. the "watcher" v06/v07 extension text is identical whether the
+   topic is financial_anxiety, depression, courage, self_worth, etc. — only
+   the character name and topic noun change). Still: read each file's first
+   block before assuming a shortcut applies; do not extrapolate from one
+   sample file to an entire directory without spot-checking.
 
