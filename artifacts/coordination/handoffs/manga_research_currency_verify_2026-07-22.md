@@ -43,6 +43,28 @@ line 71 says `genre_prompt_cookbook.yaml` "does not exist on origin/main" — it
 exists today (dated one day before that research doc). One-line doc
 correction, no render-path impact.
 
+## Merge status (BLOCKED — not this PR's fault)
+
+PR #76 (https://github.com/Pearl-Prime/pearl_prime/pull/76) is open with a clean,
+3-file diff (2 new docs + 1 header comment) and all required checks green
+**except "Core tests"**, which fails on a `FileNotFoundError` for
+`config/manga/main_character_interaction_grammar.yaml` inside
+`test_story_excellence_gate.py::test_pass_fixtures[battle_en_us_genalpha]`. This
+file does not exist on `origin/main` at all (confirmed:
+`git cat-file -e origin/main:config/manga/main_character_interaction_grammar.yaml`
+→ missing) — it is a **pre-existing, repo-wide breakage**, not something this
+PR's diff touches or introduces.
+
+Confirmed repo-wide by checking sibling open PRs' Core-tests status at the same
+moment: #72 fail, #73 fail, #75 fail (same job) — and #75's own title is
+*"fix(ci): land orphan config files breaking main Core tests"*, i.e. a fix for
+this exact breakage is already in flight from another lane.
+
+**Action for whoever merges this PR:** once PR #75 (or an equivalent fix) lands
+on `main`, rebase/re-run checks on #76 — it should go green with no changes
+needed to this PR's content. Do not add `main_character_interaction_grammar.yaml`
+from within this QA lane; that is #75's scope, not this audit's.
+
 ## Cleanup ledger
 
 - Read-only trace lane; no destructive changes made.
