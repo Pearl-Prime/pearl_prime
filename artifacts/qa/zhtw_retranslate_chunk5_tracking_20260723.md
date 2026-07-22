@@ -143,3 +143,23 @@ agent/zhtw-retranslate-chunk5-20260723
 - atoms/tech_finance_burnout/financial_stress/COMPRESSION/locales/zh-TW/CANONICAL.txt
 - atoms/tech_finance_burnout/grief/COMPRESSION/locales/zh-TW/CANONICAL.txt
 
+
+## Re-verification against validator regression fix 4b37c8bd5078b7b6f04f23ff702fade84a619524
+
+Coordinator flagged: intermediate fix (45350ec8c7) used dash_idx==3 as an
+unconditional signal for the rare 3-fence-no-closing shape, but the STANDARD
+2-fence-pair shape (RECOGNITION/MECHANISM_PROOF/TURNING_POINT/EMBODIMENT engine
+files) also has exactly 3 dashes, causing a false-PASS on empty bodies for that
+shape. Fixed for real in 4b37c8bd (content-based shape detection + explicit
+EMPTY_OR_NEAR_EMPTY_BODY check).
+
+Re-ran the corrected validator against all 108 committed files, extracting EN
+from origin/main and ZH from this branch's git objects directly (commit
+9d5f5a2c42013d5e2f902f6d09ee2d236028ae36), not from any shared worktree disk
+state. Result: 108/108 PASS, 0 FAIL, 0 EMPTY_OR_NEAR_EMPTY_BODY.
+
+Spot-checked the exact affected shape directly: boundaries/spiral and
+boundaries/grief (both RECOGNITION/MECHANISM_PROOF/TURNING_POINT/EMBODIMENT
+engine-root files, 26 blocks each, all standard 2-fence-pair shape) -- every
+block's strip_meta() output under the corrected logic is full real Chinese
+prose (100-150+ chars), not an empty string. No re-translation needed.
