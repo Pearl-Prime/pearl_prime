@@ -13,7 +13,7 @@ name in a shared scratchpad — sibling chunk agents were observed colliding on
 generic scratchpad filenames in this program. Regenerate deterministically from
 the tsv + the exact filter/slice above if you need to re-derive it.
 
-## Status as of this commit: 53/132 translated, 13/132 reported as blockers, 66/132 remaining
+## Status as of this commit: 111/132 translated, 13/132 reported as blockers, 8/132 remaining
 
 ### Landed batches (commits on this branch, chronological)
 1. batch1: `atoms/tech_finance_burnout/financial_anxiety/*` (19 files)
@@ -22,6 +22,15 @@ the tsv + the exact filter/slice above if you need to re-derive it.
 4. batch4: `atoms/tech_finance_burnout/compassion_fatigue/REFLECTION/CANONICAL.txt` (1 file, 30 blocks)
 5. batch5: `atoms/entrepreneurs/courage/{grief,false_alarm,comparison,COMPRESSION}` (4 files)
 6. batch6: `atoms/entrepreneurs/depression/{spiral,comparison,COMPRESSION}` + `atoms/entrepreneurs/burnout/{spiral,false_alarm,comparison,COMPRESSION}` (7 files)
+7. batch7: `atoms/tech_finance_burnout/anxiety/*` short family (23 files: PIVOT/PERMISSION/THREAD/TAKEAWAY/EXERCISE across watcher, overwhelm, spiral, grief, false_alarm, shame, comparison)
+8. batch8: `atoms/tech_finance_burnout/sleep_anxiety/*` short family + `boundaries/watcher/{PIVOT,PERMISSION}` (16 files)
+9. batch9: `atoms/tech_finance_burnout/overthinking/*` short family (15 files: overwhelm, grief, shame, comparison)
+10. batch10: `sleep_anxiety/COMPRESSION`, `overthinking/COMPRESSION`, `anxiety/SCENE` (3 files)
+11. batch11: `atoms/tech_finance_burnout/anxiety/HOOK` (1 file, 30 blocks)
+
+All 111 files re-verified with `strict_verify.py` (mirrors `emit.py`'s own
+body-isolation logic exactly) after a sibling chunk (chunk1) flagged a
+`validate.py` `strip_meta()` correctness risk — 0 problems across all batches.
 
 ### Blockers (do NOT translate -- EN source is malformed, not a translation defect)
 - `atoms/tech_finance_burnout/compassion_fatigue/COMPRESSION/CANONICAL.txt` -- all 30
@@ -80,17 +89,31 @@ twice each) -- one translation, reused for both, per the batch6 commit.
   far have zero empty/truncated/leftover-English bodies -- independent of
   `validate.py`'s correctness.
 
-### Remaining (66 files, not yet started)
-- `atoms/tech_finance_burnout/anxiety/**` (30 files: engine-root x4 already covered
-  in a separate list below is wrong -- anxiety/watcher, anxiety/spiral,
-  anxiety/grief, anxiety/shame engine-root (4, ~27 blocks each) + PIVOT/PERMISSION/
-  THREAD/TAKEAWAY/EXERCISE short family (~22 files) + SCENE/HOOK (2) + COMPRESSION (1))
-- `atoms/tech_finance_burnout/boundaries/watcher/{PIVOT,PERMISSION}` (2 files)
-- `atoms/tech_finance_burnout/overthinking/**` (13 real files, after excluding the
-  4 stub-blocker engine-root files listed above)
-- `atoms/tech_finance_burnout/sleep_anxiety/**` (13 real files, after excluding the
-  4 stub-blocker engine-root files listed above)
+### Remaining (8 files, not yet started -- exact list, all content-heavy, no shortcuts found)
+- `atoms/tech_finance_burnout/anxiety/watcher/CANONICAL.txt` (27 blocks) -- engine-root,
+  self-observation/split-attention theme, characters Ryan/Ava/Marcus/Wei/Natasha
+  (v01-05) + Priya/Yuki/Raj/Soren/Ezra (v06/v07). NOT a reusable template across
+  topics like the entrepreneurs-persona files were -- verified unique content
+  per mechanism (watcher = self-observation; spiral = catastrophic thought-chain
+  about mistakes; grief/shame not yet read in full). Each of these 4 files needs
+  genuine individual hand-translation, ~27 blocks each.
+- `atoms/tech_finance_burnout/anxiety/spiral/CANONICAL.txt` (27 blocks) -- engine-root,
+  catastrophic-thought-chain theme, same character set.
+- `atoms/tech_finance_burnout/anxiety/grief/CANONICAL.txt` (27 blocks) -- engine-root,
+  not yet read.
+- `atoms/tech_finance_burnout/anxiety/shame/CANONICAL.txt` (27 blocks) -- engine-root,
+  not yet read.
+- `atoms/tech_finance_burnout/anxiety/COMPRESSION/CANONICAL.txt` (30 blocks) -- not yet
+  read; check for the empty/duplicate-header patterns seen elsewhere before
+  translating (some COMPRESSION files in this corpus turned out to be blockers or
+  byte-identical to a sibling topic's file -- check for a reuse opportunity first).
+- `atoms/tech_finance_burnout/sleep_anxiety/SCENE/CANONICAL.txt` (30 blocks, likely
+  {street_name}/{weather_detail} placeholders per the pattern seen in other SCENE
+  files this chunk -- fix casing per-block after translating, see batch1's SCENE
+  placeholder-fix approach in this file's git history for the method).
+- `atoms/tech_finance_burnout/sleep_anxiety/HOOK/CANONICAL.txt` (30 blocks).
+- `atoms/tech_finance_burnout/overthinking/SCENE/CANONICAL.txt` (30 blocks).
 
-Re-derive the exact remaining file list by re-running `triage.py` against current
-`origin/main` (the ledger goes stale as other chunks land work) and diffing against
-this chunk's 132-row slice minus the 53 done + 13 blocker paths above.
+Re-verify this list is still current by re-running `triage.py` against current
+`origin/main` before resuming (the ledger goes stale as other chunks land work) --
+diff against this chunk's 132-row slice minus the 111 done + 13 blocker paths above.
