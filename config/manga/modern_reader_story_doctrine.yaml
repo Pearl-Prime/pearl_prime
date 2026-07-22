@@ -1,0 +1,447 @@
+schema_version: "1.0.0"
+last_updated: "2026-07-18"
+status: CONFIG_AUTHORITY
+canonical_genre_source: config/manga/canonical_genre_list.yaml
+purpose: "Make manga stories feel genre-native and contemporary for Gen Z and Gen Alpha readers across priority markets."
+
+market_evidence:
+  en_US:
+    - source: "https://www.grandviewresearch.com/industry-analysis/us-manga-market-report"
+      note: "U.S. market growth is driven by digital manga, social media discovery, anime adaptations, and teenager audience growth."
+    - source: "https://www.publishersweekly.com/pw/by-topic/industry-news/comics/article/98824-in-a-new-world-comics-are-making-a-comeback.html"
+      note: "Comics stores reported 2025 growth and a new post-pandemic reader cohort seeking community and inexpensive quality formats."
+  ja_JP:
+    - source: "https://news.animenomics.com/p/japan-manga-market-shrinks-as-digital-sales-stall"
+      note: "Japan remains digitally dominant, with digital manga over three-quarters of manga sales in 2025 despite market contraction."
+    - source: "https://thenewpublishingstandard.com/2026/02/28/japan-manga-market-decline-2025/"
+      note: "Convenience stores reducing periodical shelf space reinforces the shift from print habit to digital-first reading."
+  zh_CN:
+    - source: "https://www.thereportcubes.com/report-store/china-digital-comics-market"
+      note: "China digital comics are mobile-first, youth-heavy, platform-recommended, and tightly connected to animation, games, and IP ecosystems."
+  fr_FR:
+    - source: "https://www.sphericalinsights.com/reports/france-manga-market"
+      note: "France manga growth is tied to digital access, localization, fan communities, retail availability, merchandise, anime, and video games."
+    - source: "https://www.ypulse.com/newsfeed/2023/01/04/french-readers-are-now-the-second-biggest-consumer-of-manga-only-behind-japan/"
+      note: "France is a deeply manga-literate market where manga represented a large share of comics sales in recent reporting."
+
+reader_markets:
+  en_US:
+    label: "United States"
+    surface_rule: "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms."
+    ordinary_touchpoints: [group_chat, discord_server, short_video_clip, school_bus_or_subway, comic_shop, mall_food_court, campus_library, delivery_app, controller, streaming_queue]
+    localization_guardrails: [avoid_fake_japanese_surface_for_us_scene, make_city_transport_specific_if_used, do_not_overexplain_anime_fandom]
+  ja_JP:
+    label: "Japan"
+    surface_rule: "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette."
+    ordinary_touchpoints: [train_platform, commuter_car, conbini_receipt, bento_shelf, club_room, shoe_locker, cram_school, line_chat, vending_machine, manga_app]
+    localization_guardrails: [avoid_tourist_japan, avoid_samurai_default_for_modern_scenes, preserve_public_private_register_gap]
+  zh_CN:
+    label: "Mainland China"
+    surface_rule: "Use mobile-first platforms, metro, campus/work pressure, super-app payments, livestream/gaming, recommendations, and IP culture while avoiding direct system-critique framing."
+    ordinary_touchpoints: [metro_gate, phone_payment_qr, recommendation_feed, campus_gate, gaming_cafe, livestream_room, delivery_locker, group_chat, webtoon_app, night_market]
+    localization_guardrails: [frame_as_resilience_or_memory_not_system_attack, avoid_sensitive_political_metaphor, make_platform_dynamics_story_specific]
+  fr_FR:
+    label: "France"
+    surface_rule: "Use manga-literate reader culture, tram/metro commute, bookshop shelves, school/campus life, gaming/anime fandom, and localized emotional restraint."
+    ordinary_touchpoints: [metro_or_tram, manga_shelf, fnac_or_bookshop, lycee_courtyard, campus_cafe, group_chat, gaming_console, anime_convention_queue, library_card, bakery_counter]
+    localization_guardrails: [avoid_flat_us_high_school_import, respect_bd_manga_literacy, localize everyday objects_without_overexplaining]
+
+audiences:
+  gen_z:
+    label: "Gen Z"
+    story_rule: "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture."
+    touchpoints: [phone_as_social_pressure, group_chat_status, creator_or_streaming_identity, gig_or_work_pressure, transit_between_roles, online_offline_self_gap]
+  gen_alpha:
+    label: "Gen Alpha"
+    story_rule: "Treat games, school platforms, algorithmic recommendation, friendship chat, family device boundaries, and identity formation as ordinary life texture."
+    touchpoints: [game_lobby, class_app, tablet_or_phone, avatar_identity, friend_group_chat, parent_or_teacher_device_boundary]
+
+quality_rubric:
+  great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+  flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+
+aliases:
+  action_battle: battle
+  shonen: battle
+  romance_josei_drama: romance
+  shojo: romance
+  workplace_drama: workplace
+  iyashikei: healing
+  supernatural_mystery: supernatural_everyday
+  psychological_thriller: mystery
+  psychological_horror: horror
+  sports_competition: sports
+  josei_adult_memoir: memoir
+  isekai: fantasy_adventure
+  historical_period: historical
+  comedy_gag: comedy
+  cultivation_martial: cultivation
+  school_coming_of_age: school
+  sci_fi: sci_fi_cyberpunk
+  seinen: social_issue
+
+genres:
+  battle:
+    relevance_rule: "Modern public ranking or clip culture becomes the battle pressure, but victory still comes from trained body, rival, mentor, and cost."
+    catalysts:
+      - id: ranked_clip_challenge
+        logline: "A clipped school or arcade match falsely crowns the protagonist as a fraud, and the rival forces a real-world rematch where the body cannot edit the replay."
+        ordinary_world_objects: [short_video_clip, controller, rooftop_court, train_home]
+        genre_transmutation: "Online status becomes public duel pressure."
+        avoid: [influencer_parody_only, instant_power_up, generic_training_montage]
+      - id: group_chat_tournament_seed
+        logline: "A group chat leaks the tournament bracket before school, turning every hallway glance into a pre-fight stare-down."
+        ordinary_world_objects: [group_chat, school_hallway, gym_floor, taped_knuckles]
+        genre_transmutation: "Social visibility becomes arena pressure."
+        avoid: [chat_screenshot_as_whole_scene, no_physical_cost]
+
+  romance:
+    relevance_rule: "Modern romance must use mediated intimacy: unread messages, shared playlists, transit timing, boundaries, and public/private self-management."
+    catalysts:
+      - id: unread_message_train_gap
+        logline: "The protagonist and love interest ride the same train every morning after one unread message changes what the distance between them means."
+        ordinary_world_objects: [train_car, unread_message, earbuds, station_platform]
+        genre_transmutation: "Read receipts become proximity meter."
+        avoid: [instant_confession, cute_app_gimmick_without_boundary]
+      - id: shared_playlist_mistake
+        logline: "A playlist meant for nobody syncs to the wrong phone, exposing a tenderness the protagonist has not said out loud."
+        ordinary_world_objects: [phone, earbuds, cafe_counter, shared_playlist]
+        genre_transmutation: "Accidental sync becomes almost-confession."
+        avoid: [music_video_flatness, perfect_couple_pose]
+
+  workplace:
+    relevance_rule: "Modern labor pressure must be visible through dashboards, remote work, calendar load, chat status, commuting, and after-hours phone glow."
+    catalysts:
+      - id: status_light_never_green
+        logline: "The protagonist's work status light turns green automatically while their body is clearly failing, and one coworker notices the lie."
+        ordinary_world_objects: [laptop, chat_status, calendar, convenience_store_dinner]
+        genre_transmutation: "Productivity interface becomes antagonist surface."
+        avoid: [boss_villain_only, generic_burnout_speech]
+      - id: night_train_escalation
+        logline: "A late-night train delay traps a team after a failed launch, forcing the public version of competence to collapse one stop at a time."
+        ordinary_world_objects: [train_platform, phone_battery, launch_dashboard, vending_machine]
+        genre_transmutation: "Commute becomes decompression chamber."
+        avoid: [meeting_room_only, no_private_register]
+
+  healing:
+    relevance_rule: "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather."
+    catalysts:
+      - id: phone_off_by_the_vending_machine
+        logline: "After a notification spiral, the protagonist's phone dies beside a vending machine, and the quiet ordinary world keeps going without asking them to improve."
+        ordinary_world_objects: [dead_phone, vending_machine, rain_shelter, warm_can]
+        genre_transmutation: "Device failure becomes permission to notice."
+        avoid: [digital_detox_lecture, miracle_calm]
+      - id: last_conbini_receipt
+        logline: "A saved receipt from an ordinary snack leads the protagonist back to one small routine they thought grief had erased."
+        ordinary_world_objects: [conbini_receipt, snack_wrapper, evening_walk, kettle]
+        genre_transmutation: "Receipt becomes memory vessel."
+        avoid: [nostalgia_without_scene, overexplained_grief]
+
+  mystery:
+    relevance_rule: "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer."
+    catalysts:
+      - id: deleted_platform_stop
+        logline: "A train app shows a station that no longer exists, but one passenger's screenshot proves the protagonist was not the only person who saw it."
+        ordinary_world_objects: [train_app, screenshot, platform_sign, timetable]
+        genre_transmutation: "Transit glitch becomes clue."
+        avoid: [magic_app_explains_everything, clue_without_witness]
+      - id: livestream_missing_minute
+        logline: "A livestream archive skips exactly one minute, and every person in the chat remembers a different thing happening there."
+        ordinary_world_objects: [livestream_archive, chat_log, desk_lamp, timestamp]
+        genre_transmutation: "Viewer memory becomes suspect map."
+        avoid: [random_hacker_solution, exposition_dump]
+
+  horror:
+    relevance_rule: "Modern horror should make familiar interfaces wrong: a phone, classroom app, livestream, station display, or game lobby behaves almost normally."
+    catalysts:
+      - id: app_that_opens_on_its_own
+        logline: "An app the protagonist never installed opens only in reflection, showing a room one second behind the real one."
+        ordinary_world_objects: [phone_app, bathroom_mirror, school_sink, battery_icon]
+        genre_transmutation: "Interface becomes wrong presence."
+        avoid: [jump_scare_only, lore_dump]
+      - id: empty_train_after_sleep
+        logline: "The protagonist wakes from a train nap after their stop, and every ad screen in the empty car is showing their home hallway."
+        ordinary_world_objects: [commuter_train, ad_screen, school_bag, station_map]
+        genre_transmutation: "Commute becomes liminal trap."
+        avoid: [monster_reveal_without_dread, cozy_resolution]
+
+  sports:
+    relevance_rule: "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body."
+    catalysts:
+      - id: clip_review_wrong_body
+        logline: "A viral clip says the protagonist choked, but the coach notices the real story in one frame of footwork nobody else watched."
+        ordinary_world_objects: [phone_clip, gym_floor, team_chat, taped_ankle]
+        genre_transmutation: "Clip judgment becomes form correction."
+        avoid: [numbers_only, miracle_win]
+      - id: game_day_battery_one_percent
+        logline: "The team schedule app dies at one percent battery, forcing the protagonist to rely on teammates instead of obsessively checking stats."
+        ordinary_world_objects: [phone_battery, locker_room, scoreboard, water_bottle]
+        genre_transmutation: "Data dependence becomes trust trial."
+        avoid: [phone_gag_only, no_team_axis]
+
+  essay:
+    relevance_rule: "Modern essay stories should use artifacts the reader recognizes: search history, receipts, drafts, photos, voice memos, transit cards, and saved chats."
+    catalysts:
+      - id: search_history_after_midnight
+        logline: "The protagonist reads last night's search history like a stranger's diary and realizes the sequence tells the truth more clearly than any confession."
+        ordinary_world_objects: [search_history, dark_room, phone_glow, water_glass]
+        genre_transmutation: "Browser history becomes reflective artifact."
+        avoid: [advice_blog_voice, no_visual_anchor]
+      - id: voice_memo_not_sent
+        logline: "A voice memo meant for a friend remains unsent, turning into a private essay the protagonist is not ready to call honest."
+        ordinary_world_objects: [voice_memo, earbuds, bus_stop, notes_app]
+        genre_transmutation: "Unsent media becomes narration structure."
+        avoid: [confession_without_revision, generic_memoir]
+
+  slice_of_life:
+    relevance_rule: "Modern slice-of-life should make tiny routine changes vivid: convenience stops, transit timing, shared chargers, lunch choices, group chat pauses, and neighborhood errands."
+    catalysts:
+      - id: shared_charger_routine
+        logline: "Two classmates begin sharing the same worn charger after school, and the quiet timing of who plugs in first becomes the relationship."
+        ordinary_world_objects: [charger, classroom_outlet, snack_bag, group_chat]
+        genre_transmutation: "Device routine becomes social ritual."
+        avoid: [nothing_happens_flatness, generic_cute_scene]
+      - id: wrong_snack_right_person
+        logline: "The protagonist buys the wrong snack at the convenience store and learns someone remembered their actual favorite."
+        ordinary_world_objects: [convenience_store, snack_shelf, receipt, rainy_walk]
+        genre_transmutation: "Small errand becomes care evidence."
+        avoid: [food_without_relationship, overlarge_stakes]
+
+  fantasy_adventure:
+    relevance_rule: "Portal or rule fantasy should begin from a recognizable modern interface or transit threshold, then fully commit to the fantasy rule system."
+    catalysts:
+      - id: invite_only_app_portal
+        logline: "A rumor in a game server points to an invite-only app; when the protagonist opens it at a train platform, the platform announcement calls their fantasy-world name."
+        ordinary_world_objects: [game_server, invite_code, phone_app, train_platform]
+        genre_transmutation: "Invite link becomes summoning circle."
+        avoid: [phone_remains_as_easy_solution, generic_chosen_one]
+      - id: delivery_locker_gate
+        logline: "A delivery locker opens onto a road under the wrong sky, and the package label names a quest the protagonist never ordered."
+        ordinary_world_objects: [delivery_locker, qr_code, package_label, station_exit]
+        genre_transmutation: "Everyday logistics become quest contract."
+        avoid: [random_portal, no_rule_pressure]
+
+  food:
+    relevance_rule: "Modern food stories should use convenience food, delivery culture, school/work lunches, streaming recipes, and memory taste while keeping cooking and eating physical."
+    catalysts:
+      - id: delivery_order_that_tastes_like_home
+        logline: "A misdelivered meal tastes exactly like something the protagonist thought only one absent person knew how to make."
+        ordinary_world_objects: [delivery_bag, receipt, apartment_door, chopsticks]
+        genre_transmutation: "Wrong order becomes memory clue."
+        avoid: [food_review_voice, no_maker_eater_axis]
+      - id: conbini_upgrade
+        logline: "A cheap convenience-store dinner becomes a contest of care when a classmate quietly teaches the protagonist one small upgrade."
+        ordinary_world_objects: [conbini_bento, microwave, scallions, table]
+        genre_transmutation: "Low-cost food becomes intimacy/craft."
+        avoid: [snobbery_about_food, perfect_meal]
+
+  family:
+    relevance_rule: "Modern family stories should include device boundaries, shared chores, delivery meals, school platforms, family chats, and quiet economic pressure."
+    catalysts:
+      - id: family_chat_left_on_read
+        logline: "A family group chat goes silent after one practical message, and the protagonist starts doing the chore the message was really asking for."
+        ordinary_world_objects: [family_chat, laundry_basket, rice_cooker, kitchen_light]
+        genre_transmutation: "Unread message becomes household subtext."
+        avoid: [lecture_reconciliation, posed_family_portrait]
+      - id: tablet_homework_kitchen_table
+        logline: "A younger sibling's class app locks them out, turning homework help into the first honest family conversation in weeks."
+        ordinary_world_objects: [tablet, kitchen_table, homework_app, pencil_case]
+        genre_transmutation: "Tech problem becomes care role test."
+        avoid: [adult_saves_child_speech, no_task]
+
+  procedural:
+    relevance_rule: "Modern procedural stories should use logs, transit data, timestamps, lab tools, dashboards, and platform traces as evidence with human cost."
+    catalysts:
+      - id: qr_receipt_case
+        logline: "A receipt QR code points to a purchase that should be impossible, and the protagonist's method exposes why someone needed the lie."
+        ordinary_world_objects: [qr_receipt, evidence_bag, phone_scan, counter_camera]
+        genre_transmutation: "Commerce trace becomes case spine."
+        avoid: [magic_database_answer, generic_detective_room]
+      - id: timetable_body_clock
+        logline: "A train timetable contradicts a witness statement by ninety seconds, but the protagonist realizes the body remembers what the clock hides."
+        ordinary_world_objects: [train_timetable, station_clock, notebook, commuter_card]
+        genre_transmutation: "Transit precision becomes human testimony."
+        avoid: [puzzle_without_cost, no_partner_workflow]
+
+  historical:
+    relevance_rule: "Historical stories may frame through a modern artifact, but the main plot must honor period constraints, duty, and material culture."
+    catalysts:
+      - id: thrifted_letter_time_bridge
+        logline: "A student buys an old letter from a used-book stall, and each crease opens into the period choice that made the modern family possible."
+        ordinary_world_objects: [used_book_stall, old_letter, train_ticket, phone_photo]
+        genre_transmutation: "Modern artifact opens period duty."
+        avoid: [modern_values_speech, costume_only_history]
+      - id: museum_app_wrong_caption
+        logline: "A museum app caption changes only for the protagonist, replacing a famous victory with the name of the person erased from it."
+        ordinary_world_objects: [museum_app, exhibit_case, school_trip, old_tool]
+        genre_transmutation: "Digital caption becomes historical recovery."
+        avoid: [lecture_mode, no_period_scene]
+
+  comedy:
+    relevance_rule: "Modern comedy should use group chats, delivery mistakes, game lobbies, filters, QR codes, and school/work status as setup objects, not explanation."
+    catalysts:
+      - id: auto_caption_disaster
+        logline: "An auto-caption turns one harmless sentence into a social disaster, and the straight person is the only one trying to correct the wrong crisis."
+        ordinary_world_objects: [video_call, auto_caption, group_chat, classroom_screen]
+        genre_transmutation: "Tech mistranslation becomes status flip."
+        avoid: [explained_joke, random_face_only]
+      - id: delivery_locker_swap
+        logline: "A delivery locker swap gives the protagonist a package meant for their rival, whose emergency is somehow stupider than the mistake."
+        ordinary_world_objects: [delivery_locker, qr_code, mystery_box, apartment_hall]
+        genre_transmutation: "Logistics error becomes chaos engine."
+        avoid: [prop_without_reaction, no_straight_person]
+
+  cultivation:
+    relevance_rule: "Modern cultivation can enter through games, fitness data, or public ranking, but the breakthrough must become body-first discipline and hierarchy."
+    catalysts:
+      - id: fitness_ring_qi_failure
+        logline: "A fitness ring keeps congratulating the protagonist while their cultivation teacher sees the opposite: every metric is hiding a forced meridian."
+        ordinary_world_objects: [fitness_ring, training_mat, phone_metric, wrapped_wrist]
+        genre_transmutation: "Wellness metric becomes false progress."
+        avoid: [tech_power_meter_only, instant_breakthrough]
+      - id: game_rank_sect_trial
+        logline: "A mobile game's rank ladder mirrors the sect trial too closely, and the protagonist learns the real gate cannot be brute-forced like a daily quest."
+        ordinary_world_objects: [mobile_game, rank_screen, sect_platform, training_token]
+        genre_transmutation: "Game ladder becomes hierarchy mirror."
+        avoid: [litRPG_numbers_only, no_teacher]
+
+  mecha:
+    relevance_rule: "Modern mecha should connect pilot-machine identity to devices, feeds, remote command, AI copilots, and public crisis without losing cockpit physicality."
+    catalysts:
+      - id: school_alert_to_cockpit_sync
+        logline: "An emergency alert everyone dismisses as a drill routes only the protagonist to a locked transit bay, where the machine recognizes their phone before their face."
+        ordinary_world_objects: [emergency_alert, transit_gate, phone_nfc, cockpit_harness]
+        genre_transmutation: "Public alert becomes pilot selection."
+        avoid: [machine_only_spectacle, no_cockpit_contact]
+      - id: livestreamed_launch_failure
+        logline: "A launch failure is livestreamed before command can bury it, forcing the pilot to hear public panic through comms while strapped into the machine."
+        ordinary_world_objects: [livestream, command_feed, cockpit_console, helmet_mic]
+        genre_transmutation: "Public feed becomes cockpit pressure."
+        avoid: [livestream_gimmick, no_human_cost]
+
+  dark_fantasy:
+    relevance_rule: "Modern dark fantasy can begin with an app, train, game, or artifact, but it must become cost, grief, land, oath, wound, and survival."
+    catalysts:
+      - id: cursed_app_at_last_train
+        logline: "A hidden app opens after the last train misses its stop, and the platform map redraws into a grave-road where every notification is a name owed to the dead."
+        ordinary_world_objects: [hidden_app, last_train, platform_map, dead_battery]
+        genre_transmutation: "App interface becomes oath ledger."
+        avoid: [phone_as_spell_wand, colorful_portal]
+      - id: game_save_with_blood_debt
+        logline: "An old game save bought with a secondhand console loads a village that remembers the protagonist as the coward who left it burning."
+        ordinary_world_objects: [secondhand_console, save_file, bedroom_tv, cracked_controller]
+        genre_transmutation: "Save file becomes living accusation."
+        avoid: [game_world_power_fantasy, clean_hero_pose]
+
+  sci_fi_cyberpunk:
+    relevance_rule: "Cyberpunk should make today's interface life slightly more literal: recommendation feeds, biometric locks, avatars, backups, payment systems, and surveillance."
+    catalysts:
+      - id: recommendation_feed_predicts_pain
+        logline: "The protagonist's feed starts recommending injuries before they happen, and every accepted suggestion makes the body less private."
+        ordinary_world_objects: [recommendation_feed, biometric_lock, street_screen, wrist_sensor]
+        genre_transmutation: "Algorithm becomes body oracle."
+        avoid: [neon_wallpaper_only, vague_system]
+      - id: avatar_fork_legal_person
+        logline: "A game avatar signs a contract while the protagonist sleeps, and the city recognizes the avatar as the more valid citizen."
+        ordinary_world_objects: [game_avatar, terms_screen, subway_gate, id_scan]
+        genre_transmutation: "Avatar identity becomes legal threat."
+        avoid: [generic_hacker_plot, no_body_cost]
+
+  supernatural_everyday:
+    relevance_rule: "Modern supernatural everyday should let ordinary places hold a presence: station lost-and-found, phone photos, vending machines, classrooms, shrines, or old chats."
+    catalysts:
+      - id: lost_and_found_spirit
+        logline: "A station lost-and-found locker keeps returning one object to the protagonist, each time with a different year written on the tag."
+        ordinary_world_objects: [lost_and_found_locker, station_tag, umbrella, phone_photo]
+        genre_transmutation: "Lost property becomes spirit etiquette."
+        avoid: [exorcism_battle, overexplained_lore]
+      - id: photo_person_not_there
+        logline: "A group photo includes one student nobody remembers, and the protagonist starts leaving a seat open without knowing why."
+        ordinary_world_objects: [phone_photo, classroom, empty_seat, lunch_tray]
+        genre_transmutation: "Image glitch becomes gentle haunting."
+        avoid: [jump_scare, invisible_no_cue]
+
+  school:
+    relevance_rule: "Modern school stories need social weather: group chats, seating maps, clubs, transit, class apps, lunches, phones, and private/public self."
+    catalysts:
+      - id: group_chat_seating_map
+        logline: "A class group chat turns the seating chart into a popularity map, and the protagonist's one honest reply changes who moves their chair."
+        ordinary_world_objects: [group_chat, seating_chart, desk, lunch_table]
+        genre_transmutation: "Chat status becomes belonging pressure."
+        avoid: [adult_voice, popularity_cliche]
+      - id: train_delay_friend_bid
+        logline: "A train delay makes the protagonist late with the one classmate they have avoided, forcing an unfinished question to survive outside rehearsal."
+        ordinary_world_objects: [train_delay, station_platform, school_bag, phone_clock]
+        genre_transmutation: "Transit interruption becomes social courage test."
+        avoid: [random_meet_cute, no_peer_pressure]
+
+  memoir:
+    relevance_rule: "Modern memoir should use present-day artifacts as memory pressure: drafts, photos, search histories, receipts, voice notes, health portals, and chats."
+    catalysts:
+      - id: drafts_folder_autobiography
+        logline: "A drafts folder full of unsent messages becomes the protagonist's accidental autobiography."
+        ordinary_world_objects: [drafts_folder, phone, bed, cracked_mug]
+        genre_transmutation: "Unsent texts become memory spine."
+        avoid: [clean_lesson, inspirational_pose]
+      - id: transit_card_history
+        logline: "The protagonist's transit history maps a year they keep claiming was fine, and the stations tell another story."
+        ordinary_world_objects: [transit_card, station_history, room_floor, notebook]
+        genre_transmutation: "Travel log becomes emotional evidence."
+        avoid: [generic_diary, no_present_body]
+
+  social_issue:
+    relevance_rule: "Modern social issue stories need concrete systems: forms, apps, access gates, family/work pressure, care networks, housing, school, platform labor, or clinic routes."
+    catalysts:
+      - id: form_that_erases_role
+        logline: "An online form cannot describe the protagonist's real family/work/care role, and every workaround reveals who has been invisible."
+        ordinary_world_objects: [online_form, phone, waiting_room, plastic_chair]
+        genre_transmutation: "Form field becomes power relation."
+        avoid: [issue_poster, debate_scene]
+      - id: delivery_shift_school_gate
+        logline: "A delivery shift and a school appointment collide at the same gate, exposing the cost everyone has politely not named."
+        ordinary_world_objects: [delivery_app, school_gate, bike_lock, message_thread]
+        genre_transmutation: "Schedule conflict becomes social pressure."
+        avoid: [poverty_aesthetic, no_named_relationship]
+
+  graphic_medicine:
+    relevance_rule: "Modern graphic medicine should use body data, portals, appointments, charts, wearable metrics, pharmacy counters, and consent context."
+    catalysts:
+      - id: wearable_says_fine
+        logline: "A wearable congratulates the protagonist on a normal day while their body knows the opposite, and a clinician asks what the chart cannot."
+        ordinary_world_objects: [wearable_metric, clinic_room, chart, pharmacy_bag]
+        genre_transmutation: "Metric conflict becomes body agency."
+        avoid: [miracle_cure, body_as_diagram_only]
+      - id: patient_portal_message
+        logline: "A patient-portal message arrives in language so clean it erases the messy thing the protagonist needs help saying."
+        ordinary_world_objects: [patient_portal, waiting_room, phone, paper_form]
+        genre_transmutation: "Portal language becomes lived-margin contrast."
+        avoid: [generic_hospital_scene, no_consent_axis]
+
+  battle_internal:
+    relevance_rule: "Modern internal battle should externalize split attention, feeds, mirrors, avatars, metrics, and self-surveillance as body decisions."
+    catalysts:
+      - id: focus_app_duel_with_self
+        logline: "A focus app keeps resetting the protagonist's streak, and each reset begins to look like a duel with the part of them that refuses to brace."
+        ordinary_world_objects: [focus_app, desk_timer, mirror, clenched_hand]
+        genre_transmutation: "Productivity streak becomes self-shadow duel."
+        avoid: [productivity_advice, external_enemy_substitute]
+      - id: avatar_that_does_not_flinch
+        logline: "The protagonist's game avatar can make every hard choice instantly; outside the screen, one lowered hand becomes the real victory."
+        ordinary_world_objects: [game_avatar, controller, dark_screen, doorway]
+        genre_transmutation: "Avatar competence becomes moral mirror."
+        avoid: [game_power_fantasy, motivational_poster]
