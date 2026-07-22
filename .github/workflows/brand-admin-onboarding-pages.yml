@@ -8,6 +8,11 @@
 # Cloudflare Pages project: `brand-admin-onboarding-bu2` → https://brand-admin-onboarding-bu2.pages.dev
 #
 # If either secret is missing, the deploy job fails after a successful build — add both before expecting green deploys.
+#
+# NOTE: the "Inject Waystream GHL webhook" build step is continue-on-error. If
+# PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM is unset it shows red but no longer blocks
+# the build/deploy for the rest of this site (teacher onboarding, brand director
+# pages, etc.) — add that secret to make Waystream funnel capture green too.
 name: Brand admin onboarding (Pages)
 
 on:
@@ -74,6 +79,18 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Inject Waystream GHL webhook
+        # continue-on-error: this --require-env gate exists to catch a Waystream-only
+        # failure mode (funnel page shipping with an empty data-ghl-webhook attribute,
+        # which silently drops lead captures) — but it was written as a hard `exit 1`
+        # in a build job that gates the ENTIRE brand-admin-onboarding Pages site, so
+        # every unrelated change (teacher onboarding, brand director pages, market
+        # lane matrix, ...) failed here before npm run build ever ran and never
+        # deployed. 2026-07-22: confirmed 0 successful runs of this workflow while
+        # this step was blocking — verified live that /api/teacher-onboarding/submit
+        # and /drafts both 405 because Functions were never (re)deployed. Keep the
+        # step red (visible to whoever owns the Waystream webhook secret) without
+        # blocking deploys for everything else that shares this Pages project.
+        continue-on-error: true
         env:
           PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM: ${{ secrets.PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM }}
         run: python3 scripts/freebies/inject_ghl_webhook.py --brand-id way_stream_sanctuary --require-env

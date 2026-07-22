@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "locale": "zh-CN",
+  "notes": "Clusters of atoms that share a recurring motif/phrase and therefore must translate that shared element identically. Derived from real corpus reading, not filename pattern-matching alone.",
+  "clusters": [
+    {
+      "cluster_id": "overthinking_loop_computing_metaphor",
+      "shared_motif": "the_loop",
+      "member_shape": "SCENE",
+      "member_path_pattern": "atoms/tech_finance_burnout/overthinking/SCENE/CANONICAL.txt",
+      "member_count": 30,
+      "note": "All 30 SCENE variants (v01-v30) run the same sustained computing metaphor for rumination (CPU, threads, background process, the loop, full core). Confirmed by direct read 2026-07-22. Every variant must render 'the loop' as 循环/思维循环 consistently; see concept_map.json."
+    },
+    {
+      "cluster_id": "compassion_fatigue_character_study_arc",
+      "shared_motif": "compassion_fatigue + empathy_tank_empty + caring_past_capacity + giving_without_refill",
+      "member_shape": "STORY",
+      "member_path_pattern": "atoms/corporate_managers/compassion_fatigue/STORY/CANONICAL.txt",
+      "member_count": 20,
+      "note": "All 20 STORY variants (v01-v20) are character studies tracking an IDENTITY_STAGE progression (pre_awareness -> destabilization -> experimentation -> self_claim) through 4 recurring motif phrases plus recurring workplace-noun scene furniture (quarterly review, KPI, stakeholders, direct reports, deliverable, slide deck, inbox, calendar). All 4 motifs must resolve to their single locked zh-CN rendering across every variant regardless of IDENTITY_STAGE."
+    },
+    {
+      "cluster_id": "people_pleasing_exercise_self_statements",
+      "shared_motif": "people_pleasing quoted self-statement convention",
+      "member_shape": "EXERCISE",
+      "member_path_pattern": "atoms/corporate_managers/people_pleasing/EXERCISE/CANONICAL.txt",
+      "member_count": 6,
+      "note": "All 6 EXERCISE variants (v01-v06) instruct the reader to say a specific line aloud ('I agreed because I feared the cost.', 'This is a people-pleasing choice.', 'I edited myself.'). Each must be rendered as a natural sayable Mandarin sentence, tested by reading aloud, per style_guide_zh_cn.yaml."
+    },
+    {
+      "cluster_id": "working_parents_pivot_logistics_reframe",
+      "shared_motif": "logistics_load / mental-load reframe",
+      "member_shape": "PIVOT",
+      "member_path_pattern": "atoms/working_parents/mindfulness/PIVOT/CANONICAL.txt",
+      "member_count": 4,
+      "note": "All 4 sampled PIVOT variants use the 'Notice X, then Y' imperative reframe structure with an invisible-logistics-load motif. Keep the imperative economy (see style_guide_zh_cn.yaml PIVOT opener rule)."
+    },
+    {
+      "cluster_id": "financial_anxiety_watcher_recognition",
+      "shared_motif": "money_watcher hypervigilance",
+      "member_shape": "watcher (RECOGNITION)",
+      "member_path_pattern": "atoms/first_responders/financial_anxiety/watcher/CANONICAL.txt",
+      "member_count": 3,
+      "note": "Confirmed by full-file read 2026-07-22: roughly half the variant slots (RECOGNITION v02/v04, MECHANISM_PROOF v01/v03/v05, TURNING_POINT v02/v04, EMBODIMENT v01/v03/v05) appear only as a bare inline text label immediately after the previous variant's body — no '## ' header, no frontmatter, no delimited body of their own. These are stub markers, not real content. Flag this file for a structural-integrity fix before translation; do not translate around the gap or invent body text for the missing slots during translation."
+    }
+  ],
+  "known_gaps": [
+    "This is a 5-cluster first pass from the same targeted sample used for concept_map.json, not a full-corpus duplicate-detection sweep. A programmatic near-duplicate detector (e.g. shingled n-gram overlap across all 5328 English source files) should run in a later pass to find clusters outside the 5 personas sampled here."
+  ]
+}

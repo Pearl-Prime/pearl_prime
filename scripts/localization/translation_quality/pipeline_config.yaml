@@ -1,0 +1,214 @@
+# pipeline_config.yaml -- schema registry for the translation-quality
+# pipeline (Lane 01 of
+# docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/).
+#
+# This file exists so Lane 02's Claude Code prompt and this lane's code
+# agree on every shared shape WITHOUT needing to read each other's source.
+# If you change a shape here, update the corresponding module's dataclass
+# / consumer in the same PR.
+
+schema_version: 1
+
+schemas:
+
+  # ─── Lane 02 inputs (analysis/<locale_dir>/*) ──────────────────────────
+  # locale_dir = locale.replace("-", "_").lower(), e.g. zh-CN -> zh_cn
+
+  glossary_core_yaml:
+    path_pattern: "analysis/<locale_dir>/glossary_core.yaml"
+    produced_by: "Lane 02 Phase 1-2"
+    consumed_by:
+      - scripts/localization/translation_quality/structural_validator.py
+      - scripts/localization/translation_quality/consistency/terminology_concordance.py
+    shape: |
+      schema_version: 1
+      locale: <locale>
+      terms:
+        - source: <english source term>
+          preferred: <preferred target-locale rendering>
+          avoid: [<forbidden renderings>]           # optional
+          context_alt: [<acceptable alternates>]     # optional, context-sensitive
+          notes: <free text>                         # optional
+
+  glossary_project_yaml:
+    path_pattern: "analysis/<locale_dir>/glossary_project.yaml"
+    produced_by: "Lane 02 Phase 1-2"
+    consumed_by:
+      - scripts/localization/translation_quality/structural_validator.py
+      - scripts/localization/translation_quality/consistency/terminology_concordance.py
+    shape: |
+      schema_version: 1
+      locale: <locale>
+      terms:
+        - source: "<english source phrase>"
+          preferred_by_context:
+            <context_name>: <rendering>   # NOT a flat dictionary -- context-sensitive,
+                                           # e.g. title_or_header / narrative_body / metaphor_body
+          avoid: [<forbidden renderings>]  # optional
+          notes: <free text>               # optional
+
+  protected_terms_yaml:
+    path_pattern: "analysis/<locale_dir>/protected_terms.yaml"
+    produced_by: "Lane 02 Phase 1-2"
+    consumed_by:
+      - scripts/localization/translation_quality/structural_validator.py
+    shape: |
+      schema_version: 1
+      locale: <locale>
+      header_lines: {pattern, examples, rule}
+      frontmatter_keys_and_values: {keys: [...], value_examples: [...], rule}
+      placeholder_tokens: {pattern: "{snake_case_name}", examples: [...], rule}
+      delimiters: {pattern: "---", rule}
+      markup: {rule}
+      brand_and_product_names: {rule}
+      urls: {rule}
+      quoted_self_statements: {rule}   # optional, locale-specific
+
+  regional_usage_watchlist_yaml:
+    path_pattern: "analysis/<locale_dir>/regional_usage_watchlist.yaml"
+    produced_by: "Lane 02 (corpus-calibrated) or this package's bundled fallback in script_watchlists/"
+    consumed_by:
+      - scripts/localization/translation_quality/script_contamination.py
+    shape: |
+      schema_version: 1
+      locale: <locale>
+      script_contamination_detection:
+        method: <free text>
+        known_shared_forms_do_not_flag_alone: [<chars valid in both scripts>]
+        clear_traditional_only_examples_to_flag: [...]   # zh-CN target
+        clear_simplified_only_examples_to_flag: [...]    # zh-TW target
+      forbidden_taiwan_vocabulary:      # zh-CN target
+        - {taiwan: <term>, mainland: <replacement>, notes: <optional>}
+      forbidden_mainland_vocabulary:    # zh-TW target
+        - {mainland: <term>, taiwan: <replacement>, notes: <optional>}
+      forbidden_hongkong_vocabulary:
+        - {hongkong: <term>, mainland_or_taiwan: <replacement>}
+      machine_translation_tells_to_reject: [<free text bullets>]
+
+  risk_map_jsonl:
+    path_pattern: "analysis/<locale_dir>/risk_map.jsonl"
+    produced_by: "Lane 02 Phase 1"
+    consumed_by:
+      - scripts/localization/translation_quality/calibration_harness.py
+    shape: |
+      one JSON object per line:
+      {"item_id": <str, stable hash>, "source_path": <repo-relative path>,
+       "risk_tier": "low"|"medium"|"high"|"critical_recurring",
+       "reason": <free text>}
+
+  calibration_set_jsonl:
+    path_pattern: "analysis/<locale_dir>/calibration_set.jsonl"
+    produced_by: "Lane 02 Phase 1 (150-300 items sampled from risk_map.jsonl)"
+    consumed_by:
+      - scripts/localization/translation_quality/calibration_harness.py
+    shape: |
+      one JSON object per line, superset of risk_map_jsonl fields:
+      {"item_id": <str>, "source_path": <path>, "risk_tier": <tier>,
+       "persona": <str>, "topic": <str>, "atom_shape": <str>}
+
+  # ─── This lane's own consumer-facing schemas ───────────────────────────
+
+  candidate_result:
+    produced_by: scripts/localization/translation_quality/candidates/__init__.py
+    shape: |
+      {"candidate_id": <str, e.g. "ollama_qwen2.5:14b">, "text": <str>,
+       "meta": {...free-form per-client metadata...}}
+
+  structural_validation_result:
+    produced_by: scripts/localization/translation_quality/structural_validator.py
+    shape: |
+      {"ok": <bool>, "reasons": [<str>...],
+       "details": {"source_header_ids": [...], "candidate_header_ids": [...],
+                    "per_block_failures": {"<header_id>": [<str>...]},
+                    "script_contamination_findings": {"<header_id>": [<str>...]}}}
+
+  evaluation_json:
+    produced_by: "Claude Code, Lane 02 Phase 3+ (per calibration item per candidate)"
+    consumed_by:
+      - scripts/localization/translation_quality/acceptance_gate.py
+    shape: |
+      {"semantic_fidelity": <int 0-100>,
+       "omissions": [<str>...],
+       "additions": [<str>...],
+       "emotional_fidelity": <int 0-100>,
+       "natural_taiwan_mandarin": <int 0-100>,   # or natural_mainland_mandarin / naturalness for other locales
+       "voice_match": <int 0-100>,
+       "terminology_compliance": <int 0-100>,
+       "translationese": <int 0-100>,
+       "structural_fidelity": <int 0-100>,
+       "critical_semantic_errors": <int or list>,
+       "major_semantic_errors": <int or list>,
+       "glossary_errors": <int>,
+       "negation_reversal": <bool>,
+       "added_promise_or_claim": <bool>,
+       "removed_qualification": <bool>,
+       "changed_agency": <bool>,
+       "changed_number_or_name": <bool>,
+       "altered_protected_concept": <bool>,
+       "publishable": <bool>}
+
+  gate_verdict:
+    produced_by: scripts/localization/translation_quality/acceptance_gate.py
+    shape: |
+      {"accepted": <bool>, "reasons": [<str>...], "auto_fail_triggered": [<str>...]}
+
+  comet_score_result:
+    produced_by: scripts/localization/translation_quality/comet_scorer.py
+    shape: |
+      {"model": "xcomet-xl"|"wmt22-cometkiwi-da", "hf_model_id": <str>,
+       "score": <float 0.0-1.0>, "flagged_spans": [...],
+       "license_note": "cc-by-nc-sa-4.0, non-commercial -- internal signal only, not a ship gate",
+       "is_ship_gate": false}
+
+  repair_state_file:
+    produced_by: scripts/localization/translation_quality/repair_state.py
+    shape: |
+      {"items": {"<item_id>": {"item_id": <str>, "current_stage":
+        "initial_candidate"|"targeted_repair_1"|"targeted_repair_2"|
+        "fresh_regeneration"|"quarantine",
+        "attempts": [{"stage": <str>, "defects": [<str>...], "recorded_at": <iso8601>}],
+        "accepted": <bool>, "quarantined": <bool>}}}
+
+  cost_log_jsonl:
+    path_pattern: "artifacts/qa/translation_quality_cost_log_<YYYY-MM-DD>.jsonl"
+    produced_by: scripts/localization/translation_quality/candidates/dashscope_qwen_client.py
+    shape: |
+      one JSON object per DashScope call:
+      {"ts": <float epoch>, "model": <str>, "total_tokens": <int>,
+       "estimated_cost_usd": <float>, "running_total_estimated_cost_usd": <float>,
+       "call_number_this_run": <int>, "call_cap_this_run": <int>}
+
+acceptance_thresholds:
+  # Config values Lane 02 (or a future calibration round) may revise --
+  # never silently hardcode a different number elsewhere. See
+  # acceptance_gate.py Thresholds dataclass.
+  meaning_fidelity_min: 96
+  emotional_fidelity_min: 93
+  naturalness_min: 92
+  voice_match_min: 92
+  auto_fail_flags:
+    - negation_reversal
+    - added_promise_or_claim
+    - removed_qualification
+    - changed_agency
+    - changed_number_or_name
+    - altered_protected_concept
+
+dashscope_governance_status:
+  lane_00_landed: false   # re-check config/governance/banned_llm_patterns.yaml at use time
+  call_shape: openai_compatible   # via scripts/localization/llm_client.py DASHSCOPE_BASE_URL,
+                                  # NOT the native DashScope SDK's synchronous chat classes
+  exempt_path_needed: "scripts/localization/translation_quality/candidates/dashscope_qwen_client.py"
+  exempt_rule_needed: "openai_api_cloud (not dashscope_paid_tier -- see module docstring)"
+  call_cap_default: 500
+  cost_log_path_pattern: "artifacts/qa/translation_quality_cost_log_<date>.jsonl"
+
+repair_stage_order:
+  - initial_candidate
+  - targeted_repair_1
+  - targeted_repair_2
+  - fresh_regeneration
+  - quarantine
+
+pscli_task_names:
+  comet_scoring: translation_quality_comet_score

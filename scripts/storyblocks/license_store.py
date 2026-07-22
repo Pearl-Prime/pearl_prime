@@ -61,19 +61,57 @@ class LicenseStore:
         safe = work_unit_id.replace("/", "_").replace("..", "_")
         return self.bank_root / safe
 
-    def hd_path(self, work_unit_id: str, stock_id: str, ext: str) -> Path:
-        safe_stock = stock_id.replace("/", "_")
-        return self.work_unit_dir(work_unit_id) / f"{safe_stock}.{ext.lstrip('.')}"
+    def _media_subdir(self, media_type: str | None) -> str | None:
+        """Nest audio under {work_unit}/audio/ (Lane 04). Video/image stay flat until Lane 03 lands nesting."""
+        if media_type == "audio":
+            return "audio"
+        return None
 
-    def sidecar_path(self, work_unit_id: str, stock_id: str) -> Path:
+    def hd_path(
+        self,
+        work_unit_id: str,
+        stock_id: str,
+        ext: str,
+        *,
+        media_type: str | None = None,
+    ) -> Path:
         safe_stock = stock_id.replace("/", "_")
-        return self.work_unit_dir(work_unit_id) / f"{safe_stock}.license.json"
+        name = f"{safe_stock}.{ext.lstrip('.')}"
+        wu = self.work_unit_dir(work_unit_id)
+        sub = self._media_subdir(media_type)
+        if sub:
+            return wu / sub / name
+        return wu / name
+
+    def sidecar_path(
+        self,
+        work_unit_id: str,
+        stock_id: str,
+        *,
+        media_type: str | None = None,
+    ) -> Path:
+        safe_stock = stock_id.replace("/", "_")
+        name = f"{safe_stock}.license.json"
+        wu = self.work_unit_dir(work_unit_id)
+        sub = self._media_subdir(media_type)
+        if sub:
+            return wu / sub / name
+        return wu / name
+
+    def _sidecar_candidates(self, work_unit_id: str, stock_id: str) -> list[Path]:
+        """Prefer nested media dirs (audio/video/image) then flat legacy layout."""
+        out: list[Path] = []
+        for mt in ("audio", "video", "image", None):
+            p = self.sidecar_path(work_unit_id, stock_id, media_type=mt)
+            if p not in out:
+                out.append(p)
+        return out
 
     def get(self, work_unit_id: str, stock_id: str) -> LicenseRecord | None:
-        side = self.sidecar_path(work_unit_id, stock_id)
-        if side.exists():
-            data = json.loads(side.read_text(encoding="utf-8"))
-            return LicenseRecord(**{k: data[k] for k in LicenseRecord.__dataclass_fields__ if k in data})
+        for side in self._sidecar_candidates(work_unit_id, stock_id):
+            if side.exists():
+                data = json.loads(side.read_text(encoding="utf-8"))
+                return LicenseRecord(**{k: data[k] for k in LicenseRecord.__dataclass_fields__ if k in data})
         if not self.index_path.exists():
             return None
         target = f"{work_unit_id}::{stock_id}"
@@ -100,7 +138,12 @@ class LicenseStore:
         self.index_path.parent.mkdir(parents=True, exist_ok=True)
         payload = asdict(record)
         payload["ai_training_excluded"] = AI_TRAINING_EXCLUDED
-        side = self.sidecar_path(record.work_unit_id, record.storyblocks_stock_id)
+        side = self.sidecar_path(
+            record.work_unit_id,
+            record.storyblocks_stock_id,
+            media_type=record.media_type,
+        )
+        side.parent.mkdir(parents=True, exist_ok=True)
         side.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         with self.index_path.open("a", encoding="utf-8") as fh:
             fh.write(json.dumps(payload, sort_keys=True) + "\n")

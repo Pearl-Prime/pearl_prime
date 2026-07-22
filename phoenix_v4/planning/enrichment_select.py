@@ -1283,6 +1283,8 @@ def _try_teacher_content(
     topic_id: str = "",
     persona_id: str = "",
     book_frame: str = "somatic_first",
+    rotation_state: Optional[PersonaPoolRotationState] = None,
+    seen_bodies: Any = None,
 ) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     pool = _pick_teacher_pool(teacher_atoms, slot_type)
     pool = [
@@ -1297,13 +1299,21 @@ def _try_teacher_content(
     ]
     if not pool:
         return None
-    idx = _deterministic_index(f"{seed_key}:teacher", len(pool))
+    if rotation_state is not None:
+        idx = _pick_primary_index_unseen(
+            rotation_state, pool, f"{seed_key}:teacher", "teacher", seen_bodies
+        )
+    else:
+        idx = _deterministic_index(f"{seed_key}:teacher", len(pool))
     atom = pool[idx]
     content = str(atom.get("content") or "").strip()
     if not content:
         return None
     aid = str(atom.get("atom_id") or f"auto_{idx}")
     meta = dict(atom.get("metadata") or {})
+    if rotation_state is not None:
+        rotation_state.register(aid)
+        _note_primary_body(seen_bodies, content)
     return content, aid, idx, meta
 
 
@@ -1315,6 +1325,8 @@ def _try_persona_content(
     topic_id: str = "",
     persona_id: str = "",
     book_frame: str = "somatic_first",
+    rotation_state: Optional[PersonaPoolRotationState] = None,
+    seen_bodies: Any = None,
 ) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     st = slot_type.strip().upper()
     if st not in _PERSONA_OVERLAY_TYPES:
@@ -1331,13 +1343,22 @@ def _try_persona_content(
     ]
     if not pool:
         return None
-    idx = _deterministic_index(f"{seed_key}:persona", len(pool))
+    if rotation_state is not None:
+        idx = _pick_primary_index_unseen(
+            rotation_state, pool, f"{seed_key}:persona", "persona", seen_bodies
+        )
+    else:
+        idx = _deterministic_index(f"{seed_key}:persona", len(pool))
     atom = pool[idx]
     content = str(atom.get("content") or "").strip()
     if not content:
         return None
     meta = dict(atom.get("metadata") or {})
-    return content, str(atom.get("atom_id") or f"persona_{idx}"), idx, meta
+    aid = str(atom.get("atom_id") or f"persona_{idx}")
+    if rotation_state is not None:
+        rotation_state.register(aid)
+        _note_primary_body(seen_bodies, content)
+    return content, aid, idx, meta
 
 
 # ---------------------------------------------------------------------------
@@ -2301,6 +2322,7 @@ def _try_registry_variant(
     slot_type: str,
     reg_counters: Dict[str, int],
     seed_key: str,
+    seen_bodies: Any = None,
 ) -> Optional[Tuple[str, str, Dict[str, Any], int]]:
     st = slot_type.strip().upper()
     lst = reg_lists.get(st, [])
@@ -2322,6 +2344,24 @@ def _try_registry_variant(
     # text never renders. Fall through to persona_atom/teacher instead.
     if _REGISTRY_PLACEHOLDER_RE.match(content):
         return None
+    # Registry sections can carry a unique lead followed by a shared, copied
+    # reflection paragraph. Keep the authored lead while removing exact
+    # paragraph re-stamps already used elsewhere in this book. This acts at the
+    # source boundary instead of relying on the delivery deduper's keep=2 cap.
+    if seen_bodies is not None:
+        unique_paragraphs: List[str] = []
+        for paragraph in re.split(r"\n{2,}", content):
+            paragraph = paragraph.strip()
+            if not paragraph:
+                continue
+            normalized = _norm_ws(paragraph)
+            if normalized in seen_bodies:
+                continue
+            unique_paragraphs.append(paragraph)
+            _note_primary_body(seen_bodies, paragraph)
+        content = "\n\n".join(unique_paragraphs).strip()
+        if not content:
+            return None
     return content, vid, sec_data, v_idx
 
 
@@ -2805,6 +2845,8 @@ def select_enrichment(
                             topic_id=topic,
                             persona_id=persona_id,
                             book_frame=_frame,
+                            rotation_state=_persona_rotation,
+                            seen_bodies=_book_seen_bodies,
                         )
                     if _at_hit_ex:
                         from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
@@ -3127,7 +3169,10 @@ def select_enrichment(
                         )
                     )
                     if not _skip_registry_stack and not _continuity_gap_filled:
-                        _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
+                        _ar_hit = _try_registry_variant(
+                            reg_lists, stype, reg_counters, seed_key,
+                            seen_bodies=_book_seen_bodies,
+                        )
                         if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
                             _add_pieces.append(_ar_hit[0])
                             _add_sources.append("registry")
@@ -3153,6 +3198,8 @@ def select_enrichment(
                             topic_id=topic,
                             persona_id=persona_id,
                             book_frame=_frame,
+                            rotation_state=_persona_rotation,
+                            seen_bodies=_book_seen_bodies,
                         )
                         if _at_hit:
                             from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
