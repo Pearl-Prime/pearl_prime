@@ -55,6 +55,33 @@ export async function onRequestGet(context) {
     return json({ status: "error", detail: "invalid brand" }, 400);
   }
 
+  // The committed brand index is authoritative once a director is assigned.
+  // Live R2 assignments only fill brands that have not reached that canonical state.
+  try {
+    const canonicalUrl = new URL("/brand_admin_brands.json", request.url).toString();
+    const canonicalResponse = await fetch(canonicalUrl);
+    if (canonicalResponse.ok) {
+      const canonicalIndex = await canonicalResponse.json();
+      const canonical = canonicalIndex?.[brand];
+      if (canonical?.brand_director_name) {
+        return json(
+          {
+            brand_id: brand,
+            base_brand: canonical.arch,
+            display_brand: canonical.d,
+            brand_director_name: canonical.brand_director_name,
+            brand_director_id: canonical.brand_director_id,
+            brand_director_status: canonical.brand_director_status || "assigned",
+            source: "brand_admin_brands",
+          },
+          200,
+        );
+      }
+    }
+  } catch (err) {
+    console.error("canonical assignment lookup error:", err);
+  }
+
   const accessKeyId = String(env.R2_ACCESS_KEY_ID || "").trim();
   const secretAccessKey = String(env.R2_SECRET_ACCESS_KEY || "").trim();
   const accountId = String(env.R2_ACCOUNT_ID || "").trim();

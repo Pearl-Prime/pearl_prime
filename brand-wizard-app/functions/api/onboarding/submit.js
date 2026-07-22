@@ -84,10 +84,14 @@ function publicAssignment(payload, brandId, index, ts) {
   };
 }
 
-async function putJson(aws, env, key, value) {
+async function putJson(aws, env, key, value, { conditionalCreate = false } = {}) {
+  const headers = { "Content-Type": "application/json" };
+  // Conditional create: only write when the object does not already exist (S3/R2 If-None-Match: *).
+  // Prevents two concurrent wizard submits from silently overwriting the first claim.
+  if (conditionalCreate) headers["If-None-Match"] = "*";
   const putReq = await aws.sign(r2ObjectUrl(env, key), {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify(value),
   });
   return fetch(putReq);
@@ -242,11 +246,72 @@ export async function onRequestPost(context) {
     }
   }
 
+  const assignment = publicAssignment(payload, brandId, index, ts);
+
+  // --- Publish the live public-safe assignment overlay FIRST (conditional claim) -----
+  // Claim must beat the race before we persist the full submission. If-None-Match: *
+  // means a concurrent wizard submit that lost returns 409 with the winner's name.
+  // The static ops dashboard reads this by brand_id, so wizard completion becomes live
+  // immediately even before an operator promotes the YAML into the repo. No email/phone
+  // or raw wizard YAML is written to this public-safe object.
+  if (assignment) {
+    const assignmentKey = `${ASSIGNMENT_PREFIX}${safeKeyPart(brandId)}.json`;
+    try {
+      // Optimistic existence check (also matches Pages/test harness GET-before-PUT sequencing).
+      const existingAssignment = await fetch(await aws.sign(r2ObjectUrl(env, assignmentKey)));
+      if (existingAssignment.status === 200) {
+        let assignedTo = "";
+        try {
+          const prior = await existingAssignment.json();
+          assignedTo = String(prior?.brand_director_name || "").trim();
+        } catch (_) {}
+        return json(
+          {
+            error: "brand_claimed",
+            brand_id: brandId,
+            assigned_to: assignedTo || "another brand director",
+            message: "This brand was just claimed by another Brand Director. Pick a different brand.",
+          },
+          409,
+        );
+      }
+      const put = await putJson(aws, env, assignmentKey, assignment, { conditionalCreate: true });
+      if (put.status === 412) {
+        // Another submit won the race — surface the prior public-safe assignment.
+        let assignedTo = "";
+        try {
+          const got = await fetch(await aws.sign(r2ObjectUrl(env, assignmentKey)));
+          if (got.ok) {
+            const prior = await got.json();
+            assignedTo = String(prior?.brand_director_name || "").trim();
+          }
+        } catch (err) {
+          console.error("assignment race re-fetch error:", err);
+        }
+        return json(
+          {
+            error: "brand_claimed",
+            brand_id: brandId,
+            assigned_to: assignedTo || "another brand director",
+            message: "This brand was just claimed by another Brand Director. Pick a different brand.",
+          },
+          409,
+        );
+      }
+      if (!put.ok) {
+        console.error(`assignment PUT failed (${put.status}) for ${assignmentKey}`);
+        return json({ status: "error", detail: "assignment not persisted", claim }, 502);
+      }
+    } catch (err) {
+      console.error("assignment PUT error:", err);
+      return json({ status: "error", detail: "assignment not persisted", claim }, 502);
+    }
+  }
+
   // --- Persist the full submission ------------------------------------------------------
   const emailPart = safeKeyPart(email || "anon");
   const subKey = `${SUBMISSION_PREFIX}${emailPart}__${safeKeyPart(brandId)}__${safeKeyPart(ts)}.json`;
   const subUrl = r2ObjectUrl(env, subKey);
-  const assignment = publicAssignment(payload, brandId, index, ts);
   const record = {
     ...payload,
     brand_id: brandId,
@@ -264,31 +329,13 @@ export async function onRequestPost(context) {
     const put = await fetch(putReq);
     if (!put.ok) {
       console.error(`submission PUT failed (${put.status}) for ${subKey}`);
-      // Submission storage failed, but a recorded teacher claim still stands. Surface a
-      // soft error; the client's catch ignores it and the success screen is unaffected.
+      // Submission storage failed, but a recorded teacher/assignment claim still stands.
+      // Surface a soft error; the client's catch ignores it and the success screen is unaffected.
       return json({ status: "error", detail: "submission not persisted", claim }, 502);
     }
   } catch (err) {
     console.error("submission PUT error:", err);
     return json({ status: "error", detail: "submission not persisted", claim }, 502);
-  }
-
-  // --- Publish the live public-safe assignment overlay -------------------------------
-  // The static ops dashboard reads this by brand_id, so wizard completion becomes live
-  // immediately even before an operator promotes the YAML into the repo. No email/phone
-  // or raw wizard YAML is written to this public-safe object.
-  if (assignment) {
-    const assignmentKey = `${ASSIGNMENT_PREFIX}${safeKeyPart(brandId)}.json`;
-    try {
-      const put = await putJson(aws, env, assignmentKey, assignment);
-      if (!put.ok) {
-        console.error(`assignment PUT failed (${put.status}) for ${assignmentKey}`);
-        return json({ status: "error", detail: "assignment not persisted", key: subKey, claim }, 502);
-      }
-    } catch (err) {
-      console.error("assignment PUT error:", err);
-      return json({ status: "error", detail: "assignment not persisted", key: subKey, claim }, 502);
-    }
   }
 
   return json({ ok: true, key: subKey, claim, assignment }, 200);

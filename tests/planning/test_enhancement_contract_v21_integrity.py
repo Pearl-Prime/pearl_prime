@@ -50,6 +50,9 @@ def test_optional_budget_hard_fails_ceiling_violations() -> None:
 
 
 def test_supported_underfill_is_advisory_not_hard_fail() -> None:
+    # Partial underfill without an authorized zero-budget exception is a hard fail
+    # (budget requested accents but did not meet target). Authorized zero-budget
+    # is the advisory path — see test_zero_optional_accent_budget_is_explicit_authorized_exception.
     budget = _budget_with_actual(
         assigned=6,
         chapters=[1, 3, 5, 7, 9],
@@ -58,8 +61,16 @@ def test_supported_underfill_is_advisory_not_hard_fail() -> None:
 
     result = validate_optional_accent_budget(budget, chapter_count=12)
 
-    assert result["status"] == "PASS"
-    assert {row["code"] for row in result["warnings"]} == {"supported_budget_underfill"}
+    assert result["status"] == "FAIL"
+    assert "supported_budget_underfill" in {row["code"] for row in result["hard_failures"]}
+
+    budget["zero_optional_accent_policy"] = {
+        "authorized": True,
+        "reason": "explicit zero-budget exception for integrity unit test",
+    }
+    authorized = validate_optional_accent_budget(budget, chapter_count=12)
+    assert authorized["status"] == "PASS"
+    assert "zero_optional_accent_exception" in {row["code"] for row in authorized["warnings"]}
 
 
 def test_external_story_requires_function_source_citation_and_truth_metadata() -> None:
