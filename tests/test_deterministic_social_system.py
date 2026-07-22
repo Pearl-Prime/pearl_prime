@@ -5,10 +5,17 @@ from pathlib import Path
 
 from phoenix_v4.social.deterministic_social import (
     DEFAULT_BRAND_DISPLAY_NAME,
+    VIDEO_BEAT_ROLE_ORDER,
+    assemble_social_post,
+    build_atom_carousel_package,
+    build_atom_thread_package,
+    build_atom_video_beat_script,
     build_metricool_payload,
     generate_copy_package,
+    generate_story_led_copy_package,
     hashtags_for,
     load_platform_specs,
+    load_social_atoms,
     load_voice_profiles,
     render_static_asset,
     resolve_brand_display_name,
@@ -16,6 +23,7 @@ from phoenix_v4.social.deterministic_social import (
     select_visual,
     validate_asset,
     validate_copy_package,
+    _walk_self_chain,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -297,3 +305,204 @@ def test_social_post_variation_gate_mutation_cta_and_hashtag_checks():
     )
     assert hashtag_mutation.returncode == 1
     assert "hashtag_set_repeat_over_threshold" in hashtag_mutation.stderr
+
+
+# --- Lane E (2026-07-23): wiring the 5 new atom families ------------------------------
+#
+# MICRO_STORY, CASE_PROOF, CAROUSEL_SLIDE, THREAD_UNIT, VIDEO_BEAT were authored by Lane C
+# (SOURCE_OF_TRUTH/social_media_atoms/evergreen_en_us_atoms.jsonl) but confirmed
+# unreachable from generate_copy_package by Lane D's inspection. These tests exercise the
+# real promoted rows for the two fully-covered pilot cells (burnout x corporate_managers,
+# anxiety x gen_z_professionals) plus one deliberately-uncovered cell (healthcare_rns x
+# burnout) to prove both the happy path and the honest-gap fallback.
+
+FULL_STORY_CELL = ("corporate_managers", "burnout")
+FULL_THREAD_CELL = ("gen_z_professionals", "anxiety")
+GAP_CELL = ("healthcare_rns", "burnout")
+
+
+def _atom_ids_for(topic: str, persona: str, family: str) -> set[str]:
+    return {
+        a["atom_id"]
+        for a in load_social_atoms()
+        if a.get("atom_family") == family and a.get("topic") == topic and a.get("persona") == persona
+    }
+
+
+def test_walk_self_chain_orders_by_any_start_then_atom_id():
+    """Unit test of the generic chain-walker in isolation, with synthetic atoms so the
+    test does not depend on the live bank's current row count.
+    """
+    fabricated = [
+        {"atom_id": "Z-03", "atom_family": "X", "compatible_previous": "X", "compatible_next": "CTA_ANCHOR"},
+        {"atom_id": "Z-01", "atom_family": "X", "compatible_previous": "ANY_START", "compatible_next": "X"},
+        {"atom_id": "Z-02", "atom_family": "X", "compatible_previous": "X", "compatible_next": "X"},
+    ]
+    ordered = _walk_self_chain(fabricated, "X")
+    assert [a["atom_id"] for a in ordered] == ["Z-01", "Z-02", "Z-03"]
+
+
+def test_walk_self_chain_returns_empty_when_no_any_start_row():
+    fabricated = [{"atom_id": "Z-02", "atom_family": "X", "compatible_previous": "X", "compatible_next": "X"}]
+    assert _walk_self_chain(fabricated, "X") == []
+
+
+def test_story_led_chain_assembles_micro_story_case_proof_tool_step_cta():
+    persona, topic = FULL_STORY_CELL
+    pkg = generate_story_led_copy_package(persona, topic, "instagram_feed_portrait")
+    assert pkg["story_led_chain_complete"] is True
+    assert pkg["format_family"] == "story_led"
+    assert pkg["chain_families"] == ["MICRO_STORY", "CASE_PROOF", "TOOL_STEP", "CTA_ANCHOR"]
+    assert pkg["chain_compatibility_verified"] is True
+    micro_story_ids = _atom_ids_for(topic, persona, "MICRO_STORY")
+    case_proof_ids = _atom_ids_for(topic, persona, "CASE_PROOF")
+    assert set(pkg["selected_atom_ids"][:1]).issubset(micro_story_ids)
+    assert set(pkg["selected_atom_ids"][1:2]).issubset(case_proof_ids)
+    ok, failures = validate_copy_package(pkg)
+    assert ok, failures
+
+
+def test_story_led_falls_back_honestly_when_chain_incomplete():
+    """Bank-depth gap, not a wiring bug: healthcare_rns has no MICRO_STORY/CASE_PROOF rows
+    for burnout yet. The wiring must not fabricate a chain — it must fall back to the
+    standard static copy package and say so.
+    """
+    persona, topic = GAP_CELL
+    assert not _atom_ids_for(topic, persona, "MICRO_STORY"), "test fixture assumption changed — pick a new gap cell"
+    pkg = generate_story_led_copy_package(persona, topic, "instagram_feed_portrait")
+    assert pkg["story_led_chain_complete"] is False
+    assert pkg["story_led_gap_reason"] == "incomplete_chain_families_for_cell"
+    assert pkg["format_family"] == "static"
+    ok, failures = validate_copy_package(pkg)
+    assert ok, failures
+
+
+def test_story_led_rotation_diverges_across_post_index():
+    persona, topic = FULL_STORY_CELL
+    pairs = set()
+    for idx in range(5):
+        pkg = generate_story_led_copy_package(persona, topic, "instagram_feed_portrait", post_index=idx)
+        paras = [p.strip() for p in pkg["caption"].split("\n\n") if p.strip()]
+        pairs.add((paras[2], paras[3]))
+    assert len(pairs) > 1, "TOOL_STEP/CTA_ANCHOR pick did not rotate across post_index"
+
+
+def test_atom_carousel_package_assembles_ordered_slide_list():
+    persona, topic = FULL_STORY_CELL
+    pkg = build_atom_carousel_package(persona, topic, "instagram_carousel")
+    assert pkg["chain_complete"] is True
+    assert pkg["format_family"] == "carousel_atoms"
+    assert pkg["slide_count"] == len(pkg["slides"]) >= 2
+    assert pkg["slides"][0]["is_cover"] is True
+    assert pkg["slides"][-1]["is_close"] is True
+    # multi-slide structure, not a single caption
+    assert isinstance(pkg["slides"], list)
+    ids = [s["atom_id"] for s in pkg["slides"]]
+    assert ids == sorted(ids), "slide order should match the authored CS-NN suffix order"
+    assert len(ids) == len(set(ids))
+
+
+def test_atom_carousel_package_gap_cell_reports_honestly():
+    persona, topic = GAP_CELL
+    pkg = build_atom_carousel_package(persona, topic, "instagram_carousel")
+    assert pkg["chain_complete"] is False
+    assert pkg["slides"] == []
+    assert pkg["gap_reason"] == "no_carousel_slide_atoms_for_cell"
+
+
+def test_atom_thread_package_assembles_ordered_post_list():
+    persona, topic = FULL_THREAD_CELL
+    pkg = build_atom_thread_package(persona, topic, "x_image")
+    assert pkg["chain_complete"] is True
+    assert pkg["format_family"] == "thread_atoms"
+    assert pkg["post_count"] == len(pkg["posts"]) >= 2
+    assert pkg["posts"][0]["is_hook"] is True
+    assert pkg["posts"][-1]["is_invitation"] is True
+    assert isinstance(pkg["posts"], list)
+    for post in pkg["posts"]:
+        assert post["char_count"] <= 280, "thread posts must fit an X/Threads single-post limit"
+
+
+def test_atom_video_beat_script_covers_five_canonical_roles_in_order():
+    persona, topic = FULL_STORY_CELL
+    pkg = build_atom_video_beat_script(persona, topic, "tiktok_reels_shorts_vertical")
+    assert pkg["chain_complete"] is True
+    assert pkg["format_family"] == "video_beat_atoms"
+    assert [b["beat_role"] for b in pkg["beats"]] == list(VIDEO_BEAT_ROLE_ORDER)
+    # beat-timed script structure, not a caption
+    assert pkg["beats"][0]["start_s"] == 0.0
+    for i in range(len(pkg["beats"]) - 1):
+        assert pkg["beats"][i]["end_s"] == pkg["beats"][i + 1]["start_s"]
+
+
+def test_atom_video_beat_script_gap_cell_names_missing_roles():
+    persona, topic = GAP_CELL
+    pkg = build_atom_video_beat_script(persona, topic, "tiktok_reels_shorts_vertical")
+    assert pkg["chain_complete"] is False
+    assert pkg["beats"] == []
+    assert "missing_beat_roles" in pkg["gap_reason"]
+
+
+def test_new_format_brand_voice_overlay_appends_cta_without_mutating_other_slides():
+    persona, topic = FULL_STORY_CELL
+    house = build_atom_carousel_package(persona, topic, "instagram_carousel")
+    branded = build_atom_carousel_package(persona, topic, "instagram_carousel", brand_id="stillness_press")
+    assert branded["brand_id"] == "stillness_press"
+    assert branded["brand_display_name"] == "Stillness Press"
+    # every slide except the last is untouched by the brand overlay
+    assert branded["slides"][:-1] == house["slides"][:-1]
+    assert branded["slides"][-1]["text"] != house["slides"][-1]["text"]
+    assert house["slides"][-1]["text"] in branded["slides"][-1]["text"]
+
+
+def test_assemble_social_post_dispatches_all_new_format_families():
+    persona, topic = FULL_STORY_CELL
+    story = assemble_social_post(persona, topic, "instagram_feed_portrait", "story_led")
+    carousel = assemble_social_post(persona, topic, "instagram_carousel", "carousel_atoms")
+    video = assemble_social_post(persona, topic, "tiktok_reels_shorts_vertical", "video_beat_atoms")
+    thread_persona, thread_topic = FULL_THREAD_CELL
+    thread = assemble_social_post(thread_persona, thread_topic, "x_image", "thread_atoms")
+    assert story["format_family"] == "story_led"
+    assert carousel["format_family"] == "carousel_atoms"
+    assert video["format_family"] == "video_beat_atoms"
+    assert thread["format_family"] == "thread_atoms"
+
+
+def test_assemble_social_post_passthrough_unaffected_for_existing_formats():
+    """Existing format_family values ("static"/"carousel"/"video_storyboard") must dispatch
+    to the unchanged generate_copy_package path byte-identically to calling it directly.
+    """
+    persona, topic = FULL_STORY_CELL
+    direct = generate_copy_package(persona, topic, "linkedin_feed_portrait")
+    via_dispatch = assemble_social_post(persona, topic, "linkedin_feed_portrait")
+    assert json.dumps(direct, sort_keys=True) == json.dumps(via_dispatch, sort_keys=True)
+
+
+def test_new_format_variation_gate_check_new_formats_flag_passes_and_catches_duplicates(monkeypatch):
+    """Mutation-tests the additive --check-new-formats gate extension: the real bank must
+    pass, and a forced duplicate-atom_id chain (simulating a broken chain-walk) must fail
+    the check-6 detector, proving it is a real, wired check rather than decorative.
+    """
+    import scripts.ci.check_social_post_variation as gate
+
+    baseline = subprocess.run(
+        [sys.executable, str(VARIATION_GATE), "--check-new-formats"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert baseline.returncode == 0, baseline.stderr
+
+    persona, topic = FULL_STORY_CELL
+    real = gate.build_atom_carousel_package(persona, topic, "instagram_carousel")
+    broken = dict(real)
+    # Simulate a broken chain-walk: same slide duplicated (same atom_id and text twice).
+    broken["slides"] = [real["slides"][0], real["slides"][0]]
+
+    def fake_build_atom_carousel_package(*args, **kwargs):
+        return broken
+
+    monkeypatch.setattr(gate, "build_atom_carousel_package", fake_build_atom_carousel_package)
+    failures = gate.evaluate_new_formats()
+    assert any("carousel_atoms_duplicate_atom_id" in f for f in failures)
+    assert any("carousel_atoms_duplicate_slide_text" in f for f in failures)
