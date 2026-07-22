@@ -12,7 +12,7 @@ this program. Regenerate deterministically from the tsv + the exact filter/slice
 above if you need to re-derive it. This file (checked into the repo, not
 scratchpad) is the durable record.
 
-## Status as of this commit: 37/127 translated + verified, 18/127 EN-source blockers, 14/127 already fixed by sibling PR #68, 58/127 remaining
+## Status as of this commit: 57/127 translated + verified, 18/127 EN-source blockers, 14/127 already fixed by sibling PR #68, 38/127 remaining
 
 ### Pre-work triage (both checks required — origin/main alone is not enough)
 
@@ -35,8 +35,7 @@ not just eyeballing -- the "body" that `emit.py` would replace is the
 The zh-TW sibling for each of these is byte-identical to the EN source (never
 translated because there was nothing to translate). Translating these would mean
 inventing content from the slug names alone, which is explicitly out of scope --
-report as a blocker instead. Matches the reference "EN-source-corrupted atoms"
-authoring backlog documented elsewhere in this program.
+report as a blocker instead.
 
 Files:
 - `atoms/working_parents/courage/COMPRESSION/CANONICAL.txt`
@@ -93,72 +92,70 @@ to `origin/main`:
    `social_anxiety` 6-block COMPRESSION.
 5. batch5 (2 files): `gen_alpha_students/overthinking` PERMISSION (20-block) +
    `gen_alpha_students/compassion_fatigue` INTEGRATION (25-block, YAML-style
-   `mode:`/`reframe_type:`/`weight:`/`carry_line:`/`note:` metadata preserved
-   verbatim, manually verified intact post-`emit.py`).
+   metadata preserved verbatim, manually verified intact post-`emit.py`).
 6. batch6 (2 files): `gen_alpha_students/self_worth` INTEGRATION (25-block) +
-   `working_parents/depression` INTEGRATION (25-block, first-person prose v01-07
-   + templated body-landed/cost-visible/question-open/someone-else/still-here
-   v08-25).
-7. batch7 (1 file): `gen_z_professionals/grief` REFLECTION (25-block, single-fence
-   F1-F5 family/voice_mode/mechanism_emphasis metadata for v01-v29 odd-numbered +
-   templated "mechanism I want to name" pattern for v16-v25; duplicate header
-   numbers -- v17/19/21/23/25 appear twice -- preserved exactly as authored in the
-   EN source, not "fixed").
-8. batch8 (1 file): `gen_x_sandwich/courage` COMPRESSION (30-block, boundaries-
-   themed compressions with recurring "courage isn't the absence of the cost
-   calculation" boilerplate closer).
+   `working_parents/depression` INTEGRATION (25-block).
+7. batch7 (1 file): `gen_z_professionals/grief` REFLECTION (25-block, duplicate
+   header numbers v17/19/21/23/25 preserved exactly as authored in EN source).
+8. batch8 (1 file): `gen_x_sandwich/courage` COMPRESSION (30-block).
+9. batch9 (1 file): `gen_x_sandwich/boundaries/overwhelm` (26-block
+   RECOGNITION/MECHANISM_PROOF/TURNING_POINT/EMBODIMENT engine-root file,
+   Carol/Tom/Diane/Mike/Janet v01-05 + Beth/Roy/Susan v06-07).
+10. batch10 (7 files): **`working_parents/courage` full RECOGNITION-family
+    cluster** — comparison, grief, overwhelm, watcher, false_alarm, shame,
+    spiral. Discovered and exploited a cross-engine template-reuse pattern:
+    verified byte-identical shared 20-block RECOGNITION/MECHANISM_PROOF/
+    TURNING_POINT/EMBODIMENT v01-05 set (Tara/Greg/Nina/Dan/Kira) across every
+    engine file for this (persona, topic), only the trailing 6 v06/v07 blocks
+    (Javier/Keiko character set, per-engine mechanism name) differ. Translated
+    the shared 20 once, reused verbatim across all 7 files, translated only the
+    unique 6-7 blocks per file.
+11. batch11 (4 files): `gen_x_sandwich/courage` cluster — comparison, grief,
+    overwhelm, watcher (same reuse pattern, Carol/Tom/Diane/Mike/Janet shared
+    20 + Scott/Paula/Greg or equivalent unique 6). `shame` in this cluster
+    excluded — see "Known blocker: 3-fence emit.py bug" below.
+12. batch12 (4 files): `gen_x_sandwich/burnout` cluster — comparison,
+    false_alarm, shame, spiral (same reuse pattern).
+13. batch13 (4 files): `gen_x_sandwich/compassion_fatigue` cluster —
+    comparison, false_alarm, shame, spiral (same reuse pattern).
 
-### validate.py bug + re-verification (2026-07-23, post-closeout correction)
+### validate.py bug + re-verification (2026-07-23, mid-session correction)
 
 Sibling chunk1 agent found and fixed a real bug in `validate.py`'s `strip_meta()`
-(commit `87d66cbb58` on `agent/zhtw-clean-corrupted-retranslate-20260722`): the old
-regex assumed every block has a `---`-fenced metadata section, which (a) left
-untranslated EN metadata lines inside the CJK-ratio window on metadata-heavy blocks
-(false-FAIL on good translations), and (b) silently discarded the actual translated
-body to `""` on blocks with no metadata section -- which then false-**PASSED** via
-`cjk_ratio`'s empty-string short-circuit (`cr == 1.0` when trimmed string is empty).
-That second direction is the dangerous one: a validator saying PASS on a blank body.
+(commit `87d66cbb58`, later refined by `45350ec8c7` for a 3-fence block shape, both
+on `agent/zhtw-clean-corrupted-retranslate-20260722`): the old regex assumed every
+block has a `---`-fenced metadata section, which (a) left untranslated EN metadata
+lines inside the CJK-ratio window on metadata-heavy blocks (false-FAIL on good
+translations), and (b) silently discarded the actual translated body to `""` on
+blocks with no metadata section -- which then false-**PASSED** via `cjk_ratio`'s
+empty-string short-circuit.
 
-Re-verified all 37 already-committed files on this branch against the fixed
-validator (`validate.py` @ `87d66cbb58`):
-- **37/37 PASS** under the fixed validator.
-- Explicitly checked all 279 individual blocks across the 37 files for empty/
-  near-empty translated bodies (the specific "false-PASS via empty string" risk) --
-  **zero** found. No file on this branch was silently false-passed by the old bug.
-- The 2 cases previously documented in the session closeout as validator false
-  positives under the *old* buggy validator both **now PASS cleanly** under the
-  fixed one, confirming the original manual reasoning was correct and no content
-  fix was needed:
-  - `atoms/gen_alpha_students/compassion_fatigue/INTEGRATION/locales/zh-TW/CANONICAL.txt`
-  - `atoms/gen_z_professionals/grief/REFLECTION/locales/zh-TW/CANONICAL.txt`
+Re-verified all 37 files committed before the fix landed, against the fixed
+validator: **37/37 PASS**, all 279 individual blocks checked explicitly for empty/
+near-empty translated bodies -- zero found. All files translated in batches 9-13
+(after the fix landed) were validated directly against the fixed validator as they
+were produced.
 
-### Remaining (58 files, not done this session)
+### Known blocker: 3-fence emit.py/validate.py shape (1 file, not yet resolved)
 
-All in the heaviest tier (26-33 blocks/file, long narrative SCENE/RECOGNITION-style
-prose or long COMPRESSION sets):
+`atoms/gen_x_sandwich/courage/shame/CANONICAL.txt` uses the 3-fence-no-closing-
+fence block layout (header / --- / metaA / --- / metaB / --- / BODY, no trailing
+fence) that both `emit.py` and the pre-fix `validate.py` mishandle (per
+`45350ec8c7`'s commit message, matching the documented `financial_stress/
+{overwhelm,spiral}` case from a sibling chunk2 track). `emit.py` itself has not
+been patched for this shape yet. This file needs a hand-fixed emit path (write the
+translated body directly into the correct segment) rather than the standard
+`emit_batch.py` flow -- confirmed via direct byte-level scan
+(`scan_3fence_v2.py` in session scratch), not yet executed this session.
 
-- `atoms/gen_x_sandwich/boundaries/overwhelm/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/boundaries/overwhelm/CANONICAL.txt blocks)
+### Remaining (38 files, not done this session)
+
+
 - `atoms/gen_x_sandwich/boundaries/spiral/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/boundaries/spiral/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/burnout/comparison/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/burnout/comparison/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/burnout/false_alarm/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/burnout/false_alarm/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/burnout/shame/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/burnout/shame/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/burnout/spiral/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/burnout/spiral/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/compassion_fatigue/comparison/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/compassion_fatigue/comparison/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/compassion_fatigue/false_alarm/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/compassion_fatigue/false_alarm/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/compassion_fatigue/shame/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/compassion_fatigue/shame/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/compassion_fatigue/spiral/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/compassion_fatigue/spiral/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/courage/comparison/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/courage/comparison/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/courage/grief/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/courage/grief/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/courage/overwhelm/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/courage/overwhelm/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/courage/watcher/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/courage/watcher/CANONICAL.txt blocks)
 - `atoms/gen_x_sandwich/somatic_healing/false_alarm/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/somatic_healing/false_alarm/CANONICAL.txt blocks)
 - `atoms/gen_x_sandwich/somatic_healing/spiral/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/somatic_healing/spiral/CANONICAL.txt blocks)
 - `atoms/working_parents/burnout/comparison/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/burnout/comparison/CANONICAL.txt blocks)
 - `atoms/working_parents/burnout/spiral/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/burnout/spiral/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/comparison/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/comparison/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/grief/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/grief/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/overwhelm/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/overwhelm/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/watcher/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/watcher/CANONICAL.txt blocks)
 - `atoms/working_parents/depression/comparison/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/depression/comparison/CANONICAL.txt blocks)
 - `atoms/working_parents/depression/false_alarm/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/depression/false_alarm/CANONICAL.txt blocks)
 - `atoms/gen_alpha_students/compassion_fatigue/grief/locales/zh-TW/CANONICAL.txt` (atoms/gen_alpha_students/compassion_fatigue/grief/CANONICAL.txt blocks)
@@ -169,10 +166,7 @@ prose or long COMPRESSION sets):
 - `atoms/gen_x_sandwich/anxiety/comparison/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/anxiety/comparison/CANONICAL.txt blocks)
 - `atoms/gen_x_sandwich/anxiety/grief/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/anxiety/grief/CANONICAL.txt blocks)
 - `atoms/gen_x_sandwich/anxiety/spiral/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/anxiety/spiral/CANONICAL.txt blocks)
-- `atoms/gen_x_sandwich/courage/shame/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/courage/shame/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/false_alarm/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/false_alarm/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/shame/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/shame/CANONICAL.txt blocks)
-- `atoms/working_parents/courage/spiral/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/courage/spiral/CANONICAL.txt blocks)
+- `atoms/gen_x_sandwich/courage/shame/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/courage/shame/CANONICAL.txt blocks) -- 3-fence blocker, see above
 - `atoms/gen_alpha_students/anxiety/grief/locales/zh-TW/CANONICAL.txt` (atoms/gen_alpha_students/anxiety/grief/CANONICAL.txt blocks)
 - `atoms/gen_alpha_students/anxiety/overwhelm/locales/zh-TW/CANONICAL.txt` (atoms/gen_alpha_students/anxiety/overwhelm/CANONICAL.txt blocks)
 - `atoms/gen_alpha_students/anxiety/shame/locales/zh-TW/CANONICAL.txt` (atoms/gen_alpha_students/anxiety/shame/CANONICAL.txt blocks)
@@ -195,4 +189,20 @@ prose or long COMPRESSION sets):
 - `atoms/gen_x_sandwich/burnout/HOOK/locales/zh-TW/CANONICAL.txt` (atoms/gen_x_sandwich/burnout/HOOK/CANONICAL.txt blocks)
 - `atoms/gen_z_professionals/financial_anxiety/spiral/locales/zh-TW/CANONICAL.txt` (atoms/gen_z_professionals/financial_anxiety/spiral/CANONICAL.txt blocks)
 - `atoms/working_parents/burnout/HOOK/locales/zh-TW/CANONICAL.txt` (atoms/working_parents/burnout/HOOK/CANONICAL.txt blocks)
+
+
+### Reuse-pattern hint for whoever continues this file
+
+Before hand-translating any remaining `RECOGNITION`/`MECHANISM_PROOF`/
+`TURNING_POINT`/`EMBODIMENT` engine-root file (`comparison`, `grief`, `overwhelm`,
+`watcher`, `false_alarm`, `shame`, `spiral`, `anxiety` engines), first `diff` it
+against any sibling engine file already done for the same (persona, topic) pair --
+`atoms/gen_x_sandwich/boundaries/spiral` vs `.../boundaries/overwhelm` (already
+translated) is the next candidate to check, though a first diff showed higher
+divergence (206 lines) than the courage/burnout/compassion_fatigue clusters, so
+verify before assuming full 20-block reuse. `atoms/gen_x_sandwich/somatic_healing/
+{false_alarm,spiral}` and `atoms/working_parents/{burnout,depression}` pairs are
+untested for this pattern but worth checking first (small file counts, cheap to
+verify via `diff <(git show origin/main:A) <(git show origin/main:B) | grep -c
+'^[<>]'` -- a low diff-line count relative to total file size indicates high reuse).
 
