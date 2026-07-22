@@ -1,0 +1,120 @@
+# style_guide_zh_cn.yaml — Mainland-editor rubric for zh-CN translation
+#
+# Mirror of the zh-TW program's style guide, reversed for Mainland
+# preference. This IS the Mainland-editor-equivalent rubric that
+# .claude/agents/translate-zh-cn.md's voice section already gestures at —
+# this file makes it explicit and checkable.
+
+schema_version: 1
+locale: zh-CN
+
+script:
+  requirement: Simplified Chinese (简体中文) only.
+  forbidden: >
+    Any Traditional Chinese character, even when the same character exists
+    in both scripts unified (a naive OpenCC t2s pass will under-flag —
+    verify with a Big5-encodability check, mirroring the zh-TW program's
+    inverse gate documented in artifacts/qa/zh_tw_translation_gap_audit_2026-07-15.md
+    §6). See regional_usage_watchlist.yaml for the specific character list.
+
+reader_address:
+  default: 你
+  notes: >
+    Corpus voice check (sampled tech_finance_burnout/overthinking,
+    working_parents/mindfulness, corporate_managers/people_pleasing,
+    2026-07-22): English source is consistently second-person, direct,
+    unadorned ("You've been here since 7am...", "Sit upright in your
+    chair."). 你 (not 您) throughout — the register is intimate/coaching,
+    not formal-respectful. Do not switch to 您 even in EXERCISE
+    instructional imperatives.
+
+tone_and_formality:
+  register: >
+    Plain, direct, emotionally grounded coaching voice. Not clinical-cold,
+    not saccharine-therapeutic. Matches the English source's short
+    declarative sentences and concrete physical/sensory detail (chest
+    tightening, jaw clenching, heartbeat counts).
+  avoid:
+    - Over-formal Mainland self-help-book cliché phrasing (成功学式鸡汤).
+    - Taiwan/HK therapeutic-register softness (see regional_usage_watchlist.yaml).
+    - Flattening second-person imperatives into hedged suggestions.
+
+sentence_length:
+  guidance: >
+    Mirror the English source's sentence rhythm — many short, declarative
+    sentences, some fragments used deliberately for pacing (e.g. "Not as a
+    thought — as a sensation."). Do not merge short sentences into longer
+    compound Chinese sentences for "flow"; the fragmentation is a
+    deliberate voice choice in the source and should read the same way in
+    zh-CN.
+
+punctuation:
+  quotation_marks: 「」or full-width “” — use full-width “” (Mainland
+    convention) not 「」 (Taiwan/HK convention).
+  ellipsis: 使用中文省略号 …… (six dots / two characters), not English "..."
+  em_dash: 使用中文破折号 ——，不要用英文 "—" 或连字符 "-"
+  full_vs_half_width: >
+    Use full-width Chinese punctuation (，。！？：；) throughout body text.
+    Half-width punctuation is reserved for embedded code/variable tokens
+    only (see protected_terms.yaml).
+
+numbers_and_units:
+  guidance: >
+    Arabic numerals for counts/times as in the source (e.g. "11pm" → 晚上
+    11点 or 深夜11点, "47 follow-up thoughts" → 47个后续想法). Do not
+    convert to written-out Chinese numerals in body prose.
+
+metaphor_handling:
+  guidance: >
+    The corpus runs sustained extended metaphors within single atom
+    families (e.g. tech_finance_burnout/overthinking uses a computing
+    metaphor — "CPU", "threads", "background process", "the loop", "full
+    core"). Preserve the metaphor's throughline (the reader should still
+    recognize it as one extended image), but do not force every individual
+    jargon term into a literal Chinese technical equivalent if that reads
+    as mechanical translationese — soften peripheral jargon while keeping
+    the anchor term (循环 for "the loop") locked per glossary_project.yaml.
+    See concept_map.json for the full motif inventory.
+
+dialogue_and_quoted_self_statements:
+  guidance: >
+    EXERCISE atoms frequently instruct the reader to say a line aloud.
+    Render these as natural, sayable spoken Mandarin — read every
+    candidate translation aloud before accepting it (this is also the
+    Phase 3 evaluation instruction).
+
+exercise_instruction_voice:
+  guidance: >
+    Preserve the terse imperative cadence ("Sit upright. Both feet flat on
+    the floor. Notice the pressure in your heels.") — short imperative
+    clauses, not softened into a flowing narrative paragraph.
+
+protected_content:
+  see: protected_terms.yaml
+  summary: >
+    Canonical headers (## SHAPE vNN), frontmatter keys/values
+    (MECHANISM_DEPTH, IDENTITY_STAGE, COST_TYPE, COST_INTENSITY,
+    STORY_TYPE, STORY_TYPE_SOURCE, BAND, path:), {placeholder} tokens
+    ({weather_detail}, {street_name}, {transit_line}), markdown/HTML
+    markup, and brand/product names are never translated — preserved
+    byte-for-byte per translation-qa SKILL.md Required Check #2/#7.
+
+clinical_and_safety_language:
+  guidance: >
+    Preserve clinical/safety meaning exactly per translation-qa SKILL.md
+    Required Check #8 — never soften warnings, disclaimers,
+    contraindications, or crisis language. No Mainland-specific rewording
+    liberties on this category.
+
+names:
+  guidance: >
+    Character first names in STORY atoms (Renata, Marcus, Farrah, Owen,
+    Bianca, Desmond, Yolanda, Patrick, Simone, Julian, Corinne, Reggie,
+    Wanda, Nathaniel, Andre, Terrence, Louisa — sampled corporate_managers/
+    compassion_fatigue/STORY) are Western names representing the English-
+    source persona pool's assumed cultural context, not protected terms.
+    Transliterate phonetically (音译) rather than substituting Chinese
+    names — the corpus consistently keeps Western character names across
+    other landed CJK locales (verify against any already-landed zh-CN
+    sibling file in the same topic before choosing a transliteration, to
+    stay consistent within a persona's file set).

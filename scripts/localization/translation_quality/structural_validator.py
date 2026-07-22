@@ -52,6 +52,14 @@ from scripts.localization.translation_quality.script_contamination import (  # n
 )
 
 HEADER_BLOCK_RE = re.compile(r"^##\s+([A-Za-z0-9_]+)\s+v(\d+)\s*$", re.MULTILINE)
+# Alternate atom-header convention found in some files (e.g.
+# atoms/entrepreneurs/financial_anxiety/PERMISSION/CANONICAL.txt): no "## SHAPE"
+# line at all, just "--- variant: vNN" repeated. Discovered 2026-07-23 while
+# running a real calibration pilot -- files using this convention previously
+# parsed to zero header blocks under HEADER_BLOCK_RE alone and so received NO
+# structural validation whatsoever (src_ids == cand_ids == [] trivially
+# "matched"). See parse_blocks() below for the fallback.
+ALT_HEADER_RE = re.compile(r"^---\s*variant:\s*v(\d+)\s*$", re.MULTILINE)
 DELIM_RE = re.compile(r"^---\s*$", re.MULTILINE)
 PLACEHOLDER_RE = re.compile(r"\{[a-zA-Z][a-zA-Z0-9_]*\}")
 MD_LINK_RE = re.compile(r"\[[^\]]*\]\([^)]*\)")
@@ -113,6 +121,29 @@ def parse_blocks(text: str) -> list[HeaderBlock]:
             HeaderBlock(
                 header_id=f"{shape}_v{ver}",
                 shape=shape,
+                version=ver,
+                start=start,
+                end=end,
+                body=body,
+                delimiter_count=len(DELIM_RE.findall(body)),
+            )
+        )
+    if blocks:
+        return blocks
+
+    # Fallback: alternate "--- variant: vNN" convention (no "## SHAPE" line
+    # at all). Only tried when the primary convention finds zero blocks, so
+    # it never changes behavior for files that use "## SHAPE vNN" headers.
+    alt_matches = list(ALT_HEADER_RE.finditer(text))
+    for i, m in enumerate(alt_matches):
+        ver = m.group(1)
+        start = m.end()
+        end = alt_matches[i + 1].start() if i + 1 < len(alt_matches) else len(text)
+        body = text[start:end]
+        blocks.append(
+            HeaderBlock(
+                header_id=f"VARIANT_v{ver}",
+                shape="VARIANT",
                 version=ver,
                 start=start,
                 end=end,
