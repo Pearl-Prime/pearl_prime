@@ -120,6 +120,45 @@ Before dispatching any writer lane:
 4. `gh pr list --search "manga" --state open` and the sibling-PR search
    (docs/agent_brief.txt SS1) before opening any new PR — another session may
    already be mid-flight on an overlapping brand or locale.
+5. **Check PR #94 and PR #102 merge state before the storyboard/validate
+   steps** (verified OPEN, not merged, as of 2026-07-23 — re-check live):
+   PR #94 lands the `cultivation_martial` craft bible (a dependency for any
+   `cultivation_martial`-genre cell). PR #102 fixes two real bugs in the
+   pipeline this pack's writer lanes depend on: (a)
+   `phoenix_v4/manga/prompts/chapter_writer_prompt.txt` was missing the
+   instruction to preserve `modern_reader_context` — now fixed; (b)
+   `config/manga/story_excellence_gates.yaml`'s `strategy_bank_by_genre` had
+   10 keys (`essay`, `food`, `family`, `procedural`, `comedy`, `school`,
+   `memoir`, `social_issue`, `graphic_medicine`, `battle_internal`) pointing
+   at strategy-bank files that don't exist — remapped to real files
+   (`iyashikei_strategies.yaml`, `shojo_strategies.yaml`,
+   `psychological_thriller_strategies.yaml`, `historical_period_strategies.yaml`,
+   `shonen_strategies.yaml`, `seinen_strategies.yaml`,
+   `workplace_drama_strategies.yaml`). If PR #102 has not merged when a writer
+   lane runs `validate_story_excellence.py`, that gate may fail for reasons
+   that have nothing to do with the episode's writing quality — do not
+   mis-diagnose a PR-#102-shaped failure as a craft problem in the story.
+6. **Genre-vocabulary mismatch — resolve before trusting a direct key lookup.**
+   `story_excellence_gates.yaml`'s `strategy_bank_by_genre` keys use the
+   OLDER `config/manga/manga_taxonomy.yaml` genre-family vocabulary (`battle`,
+   `romance`, `workplace`, `healing`, `mystery`, `horror`, `sports`, `school`,
+   `cultivation`, etc.) — NOT the `genre_id` vocabulary
+   `ASSIGNMENT_MATRIX.tsv` uses (sourced from `locale_genre_allocations.yaml` /
+   the 14x37 DNA file: `workplace_drama`, `iyashikei`, `cultivation_martial`,
+   `school_coming_of_age`, `psychological_horror`, `action_battle`, etc.).
+   These are DIFFERENT strings that appear to correspond semantically
+   (`workplace`~`workplace_drama`, `cultivation`~`cultivation_martial`,
+   `school`~`school_coming_of_age`) but a same-string key lookup will NOT
+   resolve. Do not assume the mapping — before running
+   `validate_story_excellence.py` / `plan_genre_scene_coverage.py` for a
+   cell, find and use whatever resolution function the actual code path
+   calls (grep `strategy_bank_by_genre` usage in `phoenix_v4/manga/` and
+   check `config/manga/canonical_genre_list.yaml`'s `alias_of` field first —
+   it is the closest existing reconciliation artifact, though its stated
+   scope is taxonomy-vs-pacing reconciliation, not this locale-allocation
+   vocabulary specifically). If no resolver exists for a given genre_id,
+   that is a real gap — file it as a blocker for that cell rather than
+   guessing a key.
 
 ## Cross-plan reconciliation (read before dispatching any writer lane)
 
