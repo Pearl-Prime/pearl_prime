@@ -1,308 +1,1031 @@
 # anxiety_corporate_managers_scene_recognition_bank.yaml — corporate_managers × anxiety scene recognition bank
+# Authority: docs/CONTENT_FRAGMENT_VARIATION_WRITER_SPEC.md §7 (schema parity with anxiety_genz_scene_recognition_bank.yaml)
 # 40 variants — collision_family distribution: undecidable_decision (7), struggling_team_member (6), dreaded_one_on_one (6), restructuring_signal (6), holding_it_together (7), performance_underneath (8)
+# Slot type: SCENE_RECOGNITION. All records: band 1-2, intensity 1-3, mechanism_depth 0, ontgp_move: orient.
 bank_type: recognition
 persona: corporate_managers
 topic: anxiety
 
 variants:
   - variant_id: acmr_001
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       The decision has to be made by Friday.
       You have the information you are going to get.
       You have read it three times and the answer has changed each time.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: undecidable_decision
+    signature_phrases: ["you have read it three times and the answer has changed each time"]
+    forbidden_terms: []
+    notes_for_selector: "Desk setting. Decision-fatigue loop — the document itself has not changed, only the reading of it."
 
   - variant_id: acmr_002
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       You have made harder calls than this.
       You know what you would advise someone else to do.
       You are sitting at your desk at 6:45 pm and both options are still open.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.7
+      specificity: 0.8
+    collision_family: undecidable_decision
+    signature_phrases: ["sitting at your desk at 6:45 pm and both options are still open"]
+    forbidden_terms: []
+    notes_for_selector: "After-hours office setting. Advice-to-self gap — knows the answer in the abstract, not in the specific."
 
   - variant_id: acmr_003
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       Either choice is defensible.
       You have written the brief that defends each one.
       You are the person who has to choose, and the briefs are not helping.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: undecidable_decision
+    signature_phrases: ["the briefs are not helping"]
+    forbidden_terms: []
+    notes_for_selector: "Analytical paralysis — both sides of the argument are self-authored, which is what makes them useless."
 
   - variant_id: acmr_004
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       You asked two people you trust.
       They gave you different answers.
       Both answers made sense.
       You are the tiebreaker and neither of their logics fully fits the thing in front of you.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: undecidable_decision
+    signature_phrases: ["you are the tiebreaker"]
+    forbidden_terms: []
+    notes_for_selector: "Sought outside input, got conflicting answers. Isolation of the final call lands on the manager alone."
 
   - variant_id: acmr_005
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       You know the decision you are leaning toward.
       You are delaying because making it official means owning what happens next.
       You are aware that you are delaying.
       That awareness is not closing the gap.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.5
+    collision_family: undecidable_decision
+    signature_phrases: ["that awareness is not closing the gap"]
+    forbidden_terms: []
+    notes_for_selector: "Procrastination-with-insight loop. Naming the avoidance does not resolve it — a common false-relief trap."
 
   - variant_id: acmr_006
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       The right call might become clear with more time.
       More time is not available.
       You are practicing making the call in your head,
       hearing the version where someone asks why you chose it.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.8
+      specificity: 0.8
+    collision_family: undecidable_decision
+    signature_phrases: ["hearing the version where someone asks why you chose it"]
+    forbidden_terms: []
+    notes_for_selector: "Anticipatory rehearsal of being questioned — the call is being made and defended before it exists."
 
   - variant_id: acmr_007
-    collision_family: undecidable_decision
+    slot_type: SCENE_RECOGNITION
     body: |
       You have made the decision and walked it back twice.
       Each time you found something that seemed to undercut it.
       You are going to have to make it again in twenty minutes and this time it has to stay made.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.8
+      embodiment: 0.5
+    collision_family: undecidable_decision
+    signature_phrases: ["this time it has to stay made"]
+    forbidden_terms: []
+    notes_for_selector: "Reversal loop under a hard deadline. The clock forces closure the decision itself hasn't reached."
 
   - variant_id: acmr_008
-    collision_family: struggling_team_member
+    slot_type: SCENE_RECOGNITION
     body: |
       You can see that something is off.
       You have not found the way to name it that would let them receive it.
       The work is fine enough that you cannot point to it.
       The person is not fine.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: struggling_team_member
+    signature_phrases: ["the person is not fine"]
+    forbidden_terms: []
+    notes_for_selector: "Manager perceives distress in a report with no metric to point to. The gap between visible output and invisible cost."
 
   - variant_id: acmr_009
-    collision_family: struggling_team_member
+    slot_type: SCENE_RECOGNITION
     body: |
       They are delivering.
       The numbers are there.
       Something in the meetings, in how they answer, tells you the delivery is costing them more than it should.
       You do not know what to do with what you can see.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: struggling_team_member
+    signature_phrases: ["the delivery is costing them more than it should"]
+    forbidden_terms: []
+    notes_for_selector: "Output masks cost. Manager reads tone/behavior signal the metrics don't capture, and has no action for it yet."
 
   - variant_id: acmr_010
-    collision_family: struggling_team_member
+    slot_type: SCENE_RECOGNITION
     body: |
       You asked how they were doing.
       They said fine.
       You do not think they are fine and you said okay anyway
       because you were not sure you were the right person to push further.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: struggling_team_member
+    signature_phrases: ["you said okay anyway"]
+    forbidden_terms: []
+    notes_for_selector: "Deferred check-in. Self-doubt about standing/role stops the manager from pushing past the scripted answer."
 
   - variant_id: acmr_011
-    collision_family: struggling_team_member
+    slot_type: SCENE_RECOGNITION
     body: |
       You have been watching someone on your team pull back incrementally over the last two months.
       You have documented it in your head but not in writing.
       You are not sure if writing it would help them or hurt them.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: struggling_team_member
+    signature_phrases: ["documented it in your head but not in writing"]
+    forbidden_terms: []
+    notes_for_selector: "Slow-motion decline noticed over months. The informal record (memory) vs. formal record (writing) dilemma."
 
   - variant_id: acmr_012
-    collision_family: struggling_team_member
+    slot_type: SCENE_RECOGNITION
     body: |
       You want to support them.
       You also have targets and the targets do not have a column for this.
       You are trying to hold both and neither one is winning.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.5
+    collision_family: struggling_team_member
+    signature_phrases: ["neither one is winning"]
+    forbidden_terms: []
+    notes_for_selector: "Care vs. targets, a structural double bind with no built-in resolution. Two legitimate demands, one person."
 
   - variant_id: acmr_013
-    collision_family: struggling_team_member
+    slot_type: SCENE_RECOGNITION
     body: |
       The conversation would be easier if the performance were worse.
       Worse would have a language.
       This is harder to name, which is why you are still holding it two weeks later.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: struggling_team_member
+    signature_phrases: ["still holding it two weeks later"]
+    forbidden_terms: []
+    notes_for_selector: "Ambiguous underperformance is harder to raise than clear failure — there's no vocabulary for 'subtly off.'"
 
   - variant_id: acmr_014
-    collision_family: dreaded_one_on_one
+    slot_type: SCENE_RECOGNITION
     body: |
       You have been carrying the thing you need to say into this one-on-one for three weeks.
       You have found a reason not to say it each time.
       Today's meeting is in forty minutes.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.7
+      specificity: 0.8
+    collision_family: dreaded_one_on_one
+    signature_phrases: ["carrying the thing you need to say into this one-on-one for three weeks"]
+    forbidden_terms: []
+    notes_for_selector: "Countdown framing — a fixed clock (forty minutes) against a three-week-old avoided conversation."
 
   - variant_id: acmr_015
-    collision_family: dreaded_one_on_one
+    slot_type: SCENE_RECOGNITION
     body: |
       It will be fine.
       It has been fine in similar conversations.
       You are sitting in your car in the parking structure at 8:52 am
       running through the opening line again.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.8
+      specificity: 0.9
+      somatic_precision: 0.7
+    collision_family: dreaded_one_on_one
+    signature_phrases: ["sitting in your car in the parking structure at 8:52 am"]
+    forbidden_terms: []
+    notes_for_selector: "Pre-meeting staging area (car, parking structure, exact minute). Self-reassurance running on a loop that hasn't landed."
 
   - variant_id: acmr_016
-    collision_family: dreaded_one_on_one
+    slot_type: SCENE_RECOGNITION
     body: |
       You have an agenda for the meeting.
       The thing that actually needs to be said is not on the agenda.
       You are deciding while you walk to the conference room whether today is the day.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      engagement: 0.8
+      specificity: 0.8
+    collision_family: dreaded_one_on_one
+    signature_phrases: ["whether today is the day"]
+    forbidden_terms: []
+    notes_for_selector: "In-transit decision point (walking to the room). Formal agenda vs. the unlisted real agenda."
 
   - variant_id: acmr_017
-    collision_family: dreaded_one_on_one
+    slot_type: SCENE_RECOGNITION
     body: |
       You manage ten people.
       Nine of the one-on-ones feel functional.
       The tenth one, the one in two hours, is where you go quiet inside your own management.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: dreaded_one_on_one
+    signature_phrases: ["where you go quiet inside your own management"]
+    forbidden_terms: []
+    notes_for_selector: "Nine-of-ten-fine framing isolates the one relationship that costs disproportionate internal effort."
 
   - variant_id: acmr_018
-    collision_family: dreaded_one_on_one
+    slot_type: SCENE_RECOGNITION
     body: |
       You are not sure if the feedback you need to give will help or land wrong.
       You have thought about the framing enough that the framing has become its own problem.
       The meeting is tomorrow morning and you are doing it again tonight.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: dreaded_one_on_one
+    signature_phrases: ["you are doing it again tonight"]
+    forbidden_terms: []
+    notes_for_selector: "Recursive over-preparation — rehearsing the framing has itself become the anxiety object, at night before the meeting."
 
   - variant_id: acmr_019
-    collision_family: dreaded_one_on_one
+    slot_type: SCENE_RECOGNITION
     body: |
       The one-on-one ended fine.
       You covered the agenda.
       The thing you needed to say is still unsaid and you are at your desk trying to decide
       if there is a different conversation or if this was the window.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: dreaded_one_on_one
+    signature_phrases: ["if this was the window"]
+    forbidden_terms: []
+    notes_for_selector: "Post-meeting scene. The meeting succeeded on paper; the real item is still unaddressed and the opportunity may have closed."
 
   - variant_id: acmr_020
-    collision_family: restructuring_signal
+    slot_type: SCENE_RECOGNITION
     body: |
       The email did not say much.
       Emails like that never say much.
       You have been reading it for context, for between-the-lines, for anything
       that would tell you how much to tell your team.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: restructuring_signal
+    signature_phrases: ["reading it for context, for between-the-lines"]
+    forbidden_terms: []
+    notes_for_selector: "Ambiguous corporate communication over-read for hidden signal. Inbox setting, low overt distress, high vigilance."
 
   - variant_id: acmr_021
-    collision_family: restructuring_signal
+    slot_type: SCENE_RECOGNITION
     body: |
       You were in the meeting where the language shifted.
       You are not sure yet what the shift means.
       Your team is going to ask you what it means and you need an answer by tomorrow morning.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: restructuring_signal
+    signature_phrases: ["you need an answer by tomorrow morning"]
+    forbidden_terms: []
+    notes_for_selector: "Manager as relay layer — must produce certainty for the team before having reached it themselves."
 
   - variant_id: acmr_022
-    collision_family: restructuring_signal
+    slot_type: SCENE_RECOGNITION
     body: |
       Someone above you knows more than they have shared.
       You can tell by how they answered the question.
       You are the layer between that information and your team,
       and right now the information is not flowing down.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: restructuring_signal
+    signature_phrases: ["the layer between that information and your team"]
+    forbidden_terms: []
+    notes_for_selector: "Middle-management bottleneck — sensed withheld information above, no information to distribute below."
 
   - variant_id: acmr_023
-    collision_family: restructuring_signal
+    slot_type: SCENE_RECOGNITION
     body: |
       Nothing has been announced.
       The thing that has not been announced is loud in the room anyway.
       You are in the all-hands nodding at the right moments
       and trying to look like you have more certainty than you do.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: restructuring_signal
+    signature_phrases: ["trying to look like you have more certainty than you do"]
+    forbidden_terms: []
+    notes_for_selector: "All-hands setting. Performing certainty for the room while privately holding the same unresolved unknown."
 
   - variant_id: acmr_024
-    collision_family: restructuring_signal
+    slot_type: SCENE_RECOGNITION
     body: |
       The org chart changed once in the last year.
       The way people talk about the next quarter suggests it may change again.
       You are managing people who are waiting for you to know things you do not know yet.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: restructuring_signal
+    signature_phrases: ["waiting for you to know things you do not know yet"]
+    forbidden_terms: []
+    notes_for_selector: "Precedent (last year's change) makes a repeat feel probable. Team's expectation of manager omniscience is unmet."
 
   - variant_id: acmr_025
-    collision_family: restructuring_signal
+    slot_type: SCENE_RECOGNITION
     body: |
       Your skip-level asked you to set time aside later this week for a conversation.
       No agenda.
       You have been treating that calendar invite like a code you need to break.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 1
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.8
+      embodiment: 0.4
+    collision_family: restructuring_signal
+    signature_phrases: ["like a code you need to break"]
+    forbidden_terms: []
+    notes_for_selector: "No-agenda calendar invite from above as ambiguous stimulus, decoded obsessively for hidden meaning."
 
   - variant_id: acmr_026
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       The project is behind.
       The team knows it is behind.
       You are in the meeting being the person who makes behind feel like still-manageable
       because one of you has to.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.5
+    collision_family: holding_it_together
+    signature_phrases: ["makes behind feel like still-manageable"]
+    forbidden_terms: []
+    notes_for_selector: "In-meeting composure work — manufacturing calm as a deliberate function of the role, not a natural state."
 
   - variant_id: acmr_027
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       You are the one who does not visibly panic.
       That is part of the job.
       You do not know yet if it is something you chose or something that happened gradually.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.7
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: holding_it_together
+    signature_phrases: ["something you chose or something that happened gradually"]
+    forbidden_terms: []
+    notes_for_selector: "Identity question underneath the role — uncertainty about whether the calm persona was chosen or just accreted."
 
   - variant_id: acmr_028
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       Someone on your team got rattled in the meeting and you steadied them.
       You were rattled too.
       You will process that part later, in the car, or not at all.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: holding_it_together
+    signature_phrases: ["you will process that part later, in the car, or not at all"]
+    forbidden_terms: []
+    notes_for_selector: "Deferred processing, possibly indefinitely deferred. The manager steadies another while unsteady themselves."
 
   - variant_id: acmr_029
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       You smiled through the announcement.
       You asked clarifying questions.
       You walked out of the room and stood in the stairwell for a minute
       before going back to your team.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 3
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.9
+      specificity: 0.9
+      somatic_precision: 0.7
+    collision_family: holding_it_together
+    signature_phrases: ["stood in the stairwell for a minute"]
+    forbidden_terms: []
+    notes_for_selector: "Highest-embodiment variant in this family — a physical, private reset (stairwell) bracketed by two performed-composure scenes."
 
   - variant_id: acmr_030
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       Your direct report is frustrated.
       Their frustration is valid.
       You are absorbing it and giving back something steadier.
       You will need somewhere to put what you absorbed and you do not know where yet.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: holding_it_together
+    signature_phrases: ["somewhere to put what you absorbed"]
+    forbidden_terms: []
+    notes_for_selector: "Emotional-labor transfer — absorbing a report's valid frustration and returning composure, with no outlet yet identified."
 
   - variant_id: acmr_031
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       You are the person people come to when things feel uncertain.
       Today things feel uncertain to you.
       You are telling no one.
       You are not sure who you would tell.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.5
+    collision_family: holding_it_together
+    signature_phrases: ["you are not sure who you would tell"]
+    forbidden_terms: []
+    notes_for_selector: "Role reversal — the designated steadying figure has no designated person of their own to go to."
 
   - variant_id: acmr_032
-    collision_family: holding_it_together
+    slot_type: SCENE_RECOGNITION
     body: |
       You kept everyone calm.
       You said the right things.
       By the end of the day you were running on the version of yourself that knows how to do that,
       with nothing underneath it.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 3
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.8
+      engagement: 0.9
+      specificity: 0.8
+    collision_family: holding_it_together
+    signature_phrases: ["with nothing underneath it"]
+    forbidden_terms: []
+    notes_for_selector: "End-of-day depletion — the composed persona is running as a rote script with the felt reserve behind it gone."
 
   - variant_id: acmr_033
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       You are good at this job.
       The evidence is in the results.
       At 11 pm you are at your laptop running through the week looking for the place
       you are about to get it wrong.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      specificity: 0.9
+      somatic_precision: 0.6
+    collision_family: performance_underneath
+    signature_phrases: ["at 11 pm you are at your laptop"]
+    forbidden_terms: []
+    notes_for_selector: "Late-night audit loop. Evidenced competence coexists with a hunt for the mistake that hasn't happened yet."
 
   - variant_id: acmr_034
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       During the day you move through decisions quickly.
       You have to — the pace requires it.
       At night the decisions come back and they are slower, heavier, more uncertain than they seemed at the time.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.8
+      specificity: 0.8
+    collision_family: performance_underneath
+    signature_phrases: ["slower, heavier, more uncertain than they seemed at the time"]
+    forbidden_terms: []
+    notes_for_selector: "Day/night contrast — the same decisions re-weighed after hours feel categorically different from how they felt live."
 
   - variant_id: acmr_035
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       The version of you that runs meetings is confident.
       That version does not need reassurance.
       The version sitting in your kitchen at the end of the day is a different person
       and that person is reviewing the day line by line.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.7
+      engagement: 0.8
+      specificity: 0.8
+    collision_family: performance_underneath
+    signature_phrases: ["reviewing the day line by line"]
+    forbidden_terms: []
+    notes_for_selector: "Split-self framing (meeting-room version vs. kitchen version). Domestic setting as the site of the unarmored review."
 
   - variant_id: acmr_036
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       You have the title.
       You have the results.
       You are still doing the calculation in the back of your head
       that asks whether someone with more experience would have gotten here by a better route.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 1
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.4
+    collision_family: performance_underneath
+    signature_phrases: ["a better route"]
+    forbidden_terms: []
+    notes_for_selector: "Credentialed but privately auditing legitimacy — title and results coexist with a background comparison-to-others calculation."
 
   - variant_id: acmr_037
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       In the meeting you are authoritative.
       Between the meetings, in the transition, in the hallway,
       you are running the version of the meeting that could go wrong next time.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.5
+      engagement: 0.8
+      specificity: 0.7
+    collision_family: performance_underneath
+    signature_phrases: ["the version of the meeting that could go wrong next time"]
+    forbidden_terms: []
+    notes_for_selector: "In-between spaces (hallway, transition) as where the anticipatory anxiety runs, contrasted with in-room authority."
 
   - variant_id: acmr_038
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       You made the call.
       It was the right call, or the best available call, which is what right usually means here.
       You are lying in bed and the call is still open on some background process
       that did not get the memo that the day ended.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 3
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.9
+      specificity: 0.9
+      somatic_precision: 0.7
+    collision_family: performance_underneath
+    signature_phrases: ["some background process that did not get the memo that the day ended"]
+    forbidden_terms: []
+    notes_for_selector: "Lying-in-bed setting, the most acute variant in this family. A closed decision that has not registered as closed internally."
 
   - variant_id: acmr_039
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       You are performing competence in an environment that punishes visible uncertainty.
       You are also genuinely competent.
       The performance and the reality are close enough that you are not sure anymore
       which one is running at any given moment.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      engagement: 0.8
+      specificity: 0.7
+      embodiment: 0.5
+    collision_family: performance_underneath
+    signature_phrases: ["which one is running at any given moment"]
+    forbidden_terms: []
+    notes_for_selector: "Performance/competence blur — the two have converged enough that the manager can no longer distinguish them from inside."
 
   - variant_id: acmr_040
-    collision_family: performance_underneath
+    slot_type: SCENE_RECOGNITION
     body: |
       No one on your team knows you stayed awake past midnight thinking about the project.
       They do not need to know.
       You just need somewhere to put the gap between how it looks from the outside
       and how it feels from the inside.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["corporate_managers"]
+    frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+    frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 0
+    ontgp_move: orient
+    ei_v2_targets:
+      embodiment: 0.6
+      engagement: 0.8
+      specificity: 0.8
+      somatic_precision: 0.6
+    collision_family: performance_underneath
+    signature_phrases: ["the gap between how it looks from the outside and how it feels from the inside"]
+    forbidden_terms: []
+    notes_for_selector: "Closing variant — names the outside/inside gap directly. Past-midnight rumination kept invisible from the team by design."
