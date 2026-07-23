@@ -1,0 +1,405 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record",
+  "genre_id": "mystery",
+  "story_strategy_genre": "mystery",
+  "story_strategy_id": "psychological_thriller__strategy_01_overthinking",
+  "reader_market": "zh_TW",
+  "reader_audience": "gen_z",
+  "notes": "Original zh_TW authoring for the cognitive_clarity flagship brand, arc 1 of 4 ('obsession seed' phase per ASSIGNMENT_MATRIX.tsv) — 12-episode arc adapting config/source_of_truth/manga_story_strategies/psychological_thriller_strategies.yaml strategy_01 ('The Case File That Keeps Revising Itself') paced across a full episode arc rather than a single episode. Protagonist Su Yaqing (Taiwan-localized variant of character_pool.protagonist 'Iris Halloran'), MRT Operations Control Center analyst. Each chapter independently verified against check_manga_arc_storyboard.py, check_manga_story_authored.py, and validate_story_excellence.py --production. acceptance_layer: authored_candidate — gate PASS is not a bestseller or blind-read claim.",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "zh_TW",
+    "target_audience": "gen_z",
+    "genre_id": "mystery",
+    "strategy_genre": "mystery",
+    "relevance_genre": "mystery",
+    "market_surface_rule": "Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over clinical self-help framing.",
+    "market_touchpoints": [
+      "mrt_fare_gate",
+      "easycard_tap",
+      "scooter_commute",
+      "night_market_stall",
+      "bubble_tea_app",
+      "buxiban_classroom",
+      "line_chat_group",
+      "ibon_kiosk",
+      "city_cafe_counter",
+      "webtoon_reading_app"
+    ],
+    "market_guardrails": [
+      "avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead",
+      "prefer_atmospheric_literary_register_over_clinical_cbt_framing",
+      "distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+    "catalyst": {
+      "id": "gate_c_ecard_no_entry_tap",
+      "logline": "西門站C出口的一筆悠遊卡刷卡出站紀錄,找不到對應的進站紀錄；監視器裡的身影模糊卻精確地避開每一個能辨識臉孔的角度,而值班換班的倒數時鐘,把控制室的日常變成她必須先解決才能離開的謎題。",
+      "ordinary_world_objects": [
+        "easycard_tap_log",
+        "fare_gate_camera",
+        "shift_handover_clock",
+        "incident_report_form"
+      ],
+      "genre_transmutation": "一筆平凡的悠遊卡刷卡異常,被雅晴的職業精確度重新讀成謎案的第一條證據；換班倒數計時,把值班室的日常壓力變成她必須先解決才能離開的謎題。",
+      "avoid": [
+        "instant_cure",
+        "therapy_lecture"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z. Use catalyst 'gate_c_ecard_no_entry_tap'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ep_001",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_001.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "zh_TW",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over clinical self-help framing.",
+          "market_touchpoints": [
+            "mrt_fare_gate",
+            "easycard_tap",
+            "scooter_commute",
+            "night_market_stall",
+            "bubble_tea_app",
+            "buxiban_classroom",
+            "line_chat_group",
+            "ibon_kiosk",
+            "city_cafe_counter",
+            "webtoon_reading_app"
+          ],
+          "market_guardrails": [
+            "avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead",
+            "prefer_atmospheric_literary_register_over_clinical_cbt_framing",
+            "distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "gate_c_ecard_no_entry_tap",
+            "logline": "西門站C出口的一筆悠遊卡刷卡出站紀錄,找不到對應的進站紀錄；監視器裡的身影模糊卻精確地避開每一個能辨識臉孔的角度,而值班換班的倒數時鐘,把控制室的日常變成她必須先解決才能離開的謎題。",
+            "ordinary_world_objects": [
+              "easycard_tap_log",
+              "fare_gate_camera",
+              "shift_handover_clock",
+              "incident_report_form"
+            ],
+            "genre_transmutation": "一筆平凡的悠遊卡刷卡異常,被雅晴的職業精確度重新讀成謎案的第一條證據；換班倒數計時,把值班室的日常壓力變成她必須先解決才能離開的謎題。",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z. Use catalyst 'gate_c_ecard_no_entry_tap'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 2,
+      "chapter_id": "ep_002",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_002.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "zh_TW",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over clinical self-help framing.",
+          "market_touchpoints": [
+            "mrt_fare_gate",
+            "easycard_tap",
+            "scooter_commute",
+            "night_market_stall",
+            "bubble_tea_app",
+            "buxiban_classroom",
+            "line_chat_group",
+            "ibon_kiosk",
+            "city_cafe_counter",
+            "webtoon_reading_app"
+          ],
+          "market_guardrails": [
+            "avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead",
+            "prefer_atmospheric_literary_register_over_clinical_cbt_framing",
+            "distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "second_station_same_umbrella",
+            "logline": "雅晴調閱台北車站當晚的封存畫面,發現同一把傘、同一種步態的身影,出現在一個以正常通勤時間根本無法抵達的時間點；周德昌隨口一句公車誤點的抱怨,被她整個吃進時間軸的推算裡。",
+            "ordinary_world_objects": [
+              "line_chat_group",
+              "footage_request_form",
+              "night_market_stall",
+              "printed_timestamp_stills"
+            ],
+            "genre_transmutation": "一句關於公車誤點的日常抱怨,被她的分析習慣重新讀成時間軸上的變數；一張需要跨部門簽核的調閱申請單,讓她的執念第一次留下看得見的行政足跡。",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z. Use catalyst 'second_station_same_umbrella'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 3,
+      "chapter_id": "ep_003",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_003.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "zh_TW",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over clinical self-help framing.",
+          "market_touchpoints": [
+            "mrt_fare_gate",
+            "easycard_tap",
+            "scooter_commute",
+            "night_market_stall",
+            "bubble_tea_app",
+            "buxiban_classroom",
+            "line_chat_group",
+            "ibon_kiosk",
+            "city_cafe_counter",
+            "webtoon_reading_app"
+          ],
+          "market_guardrails": [
+            "avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead",
+            "prefer_atmospheric_literary_register_over_clinical_cbt_framing",
+            "distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "ibon_printout_timeline_wall",
+            "logline": "雅晴用住處附近7-11的iBon列印出三個異常事件的時間軸,貼上租屋處的牆；手搖飲app在她沒注意的情況下自動幫她點了連續第七天一樣的「去冰半糖」,而值班主管開始要求她在稽核前提出結論。",
+            "ordinary_world_objects": [
+              "ibon_kiosk",
+              "bubble_tea_app",
+              "city_cafe_counter",
+              "personal_notebook"
+            ],
+            "genre_transmutation": "iBon列印出的時間軸,把她私人的執念第一次變成貼在牆上、看得見的物證；手搖飲app的自動下單,暴露出她連續多日沒有真正做過一個清醒的選擇。",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z. Use catalyst 'ibon_printout_timeline_wall'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 4,
+      "chapter_id": "ep_004",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_004.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "zh_TW",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over clinical self-help framing.",
+          "market_touchpoints": [
+            "mrt_fare_gate",
+            "easycard_tap",
+            "scooter_commute",
+            "night_market_stall",
+            "bubble_tea_app",
+            "buxiban_classroom",
+            "line_chat_group",
+            "ibon_kiosk",
+            "city_cafe_counter",
+            "webtoon_reading_app"
+          ],
+          "market_guardrails": [
+            "avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead",
+            "prefer_atmospheric_literary_register_over_clinical_cbt_framing",
+            "distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "line_chat_shift_swap_misread_as_clue",
+            "logline": "值班群組裡一則普通的換班訊息,被雅晴的辦案邏輯讀成第三個時間點的線索；而月底稽核的結案期限,把她的私人執念第一次寫進正式的加班紀錄裡。",
+            "ordinary_world_objects": [
+              "line_chat_group",
+              "overtime_log",
+              "incident_report_form",
+              "audit_deadline_notice"
+            ],
+            "genre_transmutation": "一則同事聊換班的LINE群組訊息,被她的邏輯重新讀成證據；一張加班紀錄表,讓她的執念第一次變成看得見的、可被稽核的數字。",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z. Use catalyst 'line_chat_shift_swap_misread_as_clue'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends."
+        }
+      }
+    }
+  ]
+}
