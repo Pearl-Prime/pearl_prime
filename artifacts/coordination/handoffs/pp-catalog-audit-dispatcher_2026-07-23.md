@@ -149,3 +149,5 @@ HANDOFF_TO:     operator
 NEXT_ACTION:    Ratify Q-CATALOG-AUDIT-01 through -04 (see above); then prioritize corporate_managers story_atoms authoring. Separately: repo-health fix for Core tests / parse-sweep (pre-existing, unrelated to this pack, blocking clean signal on every future PR).
 SIGNALS:        lane-a-plan-inventory-merged=46d971d642cc4076d065a2466be9e55fb3f940cb; lane-b-editor-sequencing-merged=cfa68a3454aecd2722dfb365d1bb8c4af194cd16; lane-c-assembly-readiness-merged=a7933a689421cdc507ed32cff1443e9e0ad23839; lane-d-marketing-mix-merged=5a23ce384039e59f031bcb775a5a1269587ff848; lane-e-ei-v2-gap-merged=848c726c66a6cf82696d6810acd6ce91605a0488; lane-f-synthesis-merged=7f4dc39efdda9ce8e2d85c2ae23be79d45123361
 ```
+
+<!-- CI resync: force a synchronize event after the initial push registered zero check-suites -->
