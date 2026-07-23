@@ -53,11 +53,17 @@ relevant to Lane C (spine-buildability), see §5.
 **Authority doc:** `SUBSYSTEM_AUTHORITY_MAP.tsv` routes `pearl_prime` to
 `docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md` and `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`
 (owner: Pearl_Prime, status: active). Neither doc names the CSV→YAML catalog-scaleup mechanism explicitly — it is
-documented only in project memory and in the scripts' own docstrings, not in a subsystem spec. **Note:**
-`artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md`, cited in this lane's own PROVENANCE header as
-prior research, **does not exist on `origin/main`** (confirmed: no match anywhere in the repo outside
-untracked/local worktree scaffolding created by sibling lane sessions this hour). That citation could not be
-verified or built on; flagging for Lane F.
+documented only in project memory and in the scripts' own docstrings, not in a subsystem spec.
+
+> **Dispatcher correction (Pearl_PM, 2026-07-23):** this lane's original text asserted
+> `artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md` "does not exist on `origin/main`." That is
+> incorrect — re-verified directly via `git cat-file -e origin/main:artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md`
+> at both the Wave-0 tip (`633273c97f5…`) and the current tip (`b7e4e64c0fb…`); the file resolves and is readable
+> both times. The file is simply absent from this lane's local worktree/clone (it is present on `origin/main`, not
+> necessarily checked out in every fresh worktree) — a local-verification artifact, not a real gap in the baseline
+> audit. **Lane C and Lane F should treat `pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md` as present and
+> citable on `origin/main`**, superseding every "does not exist" claim elsewhere in this report (§7, CLOSEOUT_RECEIPT
+> PROVENANCE line).
 
 ---
 
@@ -275,9 +281,9 @@ Per the mission's requirement, this is explicit about what was **counted** (chea
 ## 7. What this lane did NOT verify (explicit handoff boundary)
 
 - Whether the render-time `chapter_thesis_bank.yaml` (`intent→engine`) mechanism cited in the mission prompt as
-  the render-time thesis source actually exists and is wired the way described — not independently checked here
-  (the audit report it's attributed to, `pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md`, does not exist on
-  `origin/main`; see §1).
+  the render-time thesis source actually exists and is wired the way described — not independently checked here.
+  (Correction, see §1: `pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md` DOES exist on `origin/main` and covers
+  this in its own §2.2; this lane simply did not independently re-verify the thesis-bank wiring itself.)
 - Whether the 30,166 "plannable" (arc-exists) books would actually pass a **batch** tuple-viability sweep — only
   4 individual cells were spot-checked (§5). Lane C should run a real batch.
 - Whether the 665 series with a populated `reader_promise_family` actually get that value **consumed** anywhere
@@ -308,8 +314,9 @@ FILES_READ:     docs/PROGRAM_STATE.md; docs/PEARL_ARCHITECT_STATE.md (CATALOG-80
                 phoenix_v4/gates/check_tuple_viability.py;
                 4 representative plan YAMLs in full (2 book-plan, 1 series-plan, see evidence/sample_plan_yamls/);
                 full-corpus structural scan (not full-text read) of all 32,401 book_plans_en_us + 4,830 series_plans_en_us files
-PROVENANCE:     research: pearl_prime_pipeline_audit_20260722 (CITED BUT NOT FOUND ON DISK — could not verify or build on;
-                flagged in §1/§7) | documents: CATALOG-800-PER-BRAND-01 (found STALE — live per-brand volume now
+PROVENANCE:     research: pearl_prime_pipeline_audit_20260722 (present on origin/main; corrected per dispatcher
+                note §1 — this lane's original "not found on disk" claim was a local-worktree verification
+                artifact, not a real gap) | documents: CATALOG-800-PER-BRAND-01 (found STALE — live per-brand volume now
                 contradicts its ratified premise, see §0), PEARL-EDITOR-UPSTREAM-01 (read, not directly load-bearing
                 for this lane's findings), TEMPLATE-UNIVERSAL-01 (not located under that name; not load-bearing) |
                 builds_on: gen_brand_catalog_plan_csv.py + catalog_plan_csv_to_plan_yaml.py (verified canonical, current) |
