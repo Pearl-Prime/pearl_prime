@@ -121,6 +121,11 @@ artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assem
 artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/** -filter -diff -merge -text
 artifacts/manga/warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening/assembled/** -filter -diff -merge -text
 
+# LFS→R2 offload Wave 4 — brand-wizard-app book cover renders (forward-only).
+# Authority: docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md
+# Manifest: artifacts/manifests/lfs_offload/brand_wizard_app_covers_wave4.tsv
+brand-wizard-app/public/assets/covers/** -filter -diff -merge -text
+
 # CI regression fixtures must be real bytes (not LFS pointers)
 tests/fixtures/manga/blob_gate/*.png -filter -diff -merge -text
 
