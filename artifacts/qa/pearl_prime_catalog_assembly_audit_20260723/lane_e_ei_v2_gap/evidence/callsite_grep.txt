@@ -1,0 +1,173 @@
+Lane E evidence — raw grep transcripts backing REPORT.md (ei_v2_gap_audit.md) §1.
+Commands run from repo root /Users/ahjan/phoenix_omega on 2026-07-23.
+
+=== 1. Every non-ei_v2-internal .py file importing phoenix_v4.quality.ei_v2* ===
+$ grep -rn "from phoenix_v4.quality.ei_v2\|from phoenix_v4\.quality import ei_v2\|import phoenix_v4.quality.ei_v2\|phoenix_v4\.quality\.ei_v2" --include="*.py" -l | grep -v "^phoenix_v4/quality/ei_v2/"
+
+pearl_news/pipeline/ei_article_scorer.py
+phoenix_v4/manga/ite_pipeline.py
+phoenix_v4/planning/assembly_compiler.py
+phoenix_v4/qa/bestseller_editor.py
+phoenix_v4/quality/bestseller_craft_gate.py
+phoenix_v4/quality/ei_parallel_adapter.py
+phoenix_v4/rendering/book_renderer.py
+phoenix_v4/rendering/chapter_composer.py
+scripts/canary/run_bestseller_canary.py
+scripts/ci/log_editorial_feedback.py
+scripts/ci/run_ei_v2_rigorous_eval.py
+scripts/ci/run_ema_learner.py
+scripts/ml_editorial/run_variant_ranking.py
+scripts/qa/semantic_dedup_proof_20260708.py
+scripts/run_pipeline.py
+tests/test_bestseller_editor_wiring.py
+tests/test_book_renderer.py
+tests/test_canary_integration.py
+tests/test_dimension_gates_enforcement.py
+tests/test_dimension_gates_integration.py
+tests/test_ei_v2.py
+tests/test_ei_v2_duration_fit.py
+tests/test_ei_v2_hybrid.py
+tests/test_ei_v2_marketing_lexicons.py
+tests/test_ei_v2_visual_therapeutic.py
+tests/test_ema_learner_integration.py
+tests/test_exercise_governance.py
+tests/test_learner_calibration.py
+tests/test_llm_callback.py
+tests/test_manga_bubble_e2e.py
+tests/test_manga_dialogue_gates.py
+tests/test_manuscript_recurrence.py
+tests/test_p0_9_hybrid_select_wiring.py
+tests/test_semantic_dedup_within_book.py
+tests/test_tts_prose_law.py
+tests/unit/rendering/test_opd135_exercise_governance_cap.py
+
+=== 2. Real call sites for hybrid_select / dimension gates / emotion arc / run_ei_v2_analysis ===
+$ grep -rn "hybrid_select(\|run_chapter_dimension_gates(\|validate_emotion_arc(\|run_ei_v2_analysis\|_select_v2_best" --include="*.py" | grep -v "/tests/\|test_"
+
+phoenix_v4/qa/bestseller_editor.py:283:    return hybrid_select(
+phoenix_v4/quality/ei_parallel_adapter.py:124:    v2_report: EIV2AnalysisReport = run_ei_v2_analysis(
+phoenix_v4/quality/ei_parallel_adapter.py:28:    run_ei_v2_analysis,
+phoenix_v4/rendering/book_renderer.py:1334:    return run_chapter_dimension_gates(
+scripts/ci/run_ei_v2_rigorous_eval.py:176:    arc_result = validate_emotion_arc(chapter_text, arc_intent)
+
+=== 3. enforce_dimension_gates — every occurrence outside tests ===
+$ grep -rn "enforce_dimension_gates" --include="*.py" phoenix_v4 scripts | grep -v "/tests/"
+
+phoenix_v4/rendering/book_renderer.py:2589:    enforce_dimension_gates: bool = False,
+phoenix_v4/rendering/book_renderer.py:2619:    enforce_dimension_gates=False (default):
+phoenix_v4/rendering/book_renderer.py:2736:        if enforce_dimension_gates and flow_report.get("dimension_gates_blocks_delivery"):
+
+Only the definition/docstring/check exist — no call site in phoenix_v4/ or scripts/
+(including scripts/run_pipeline.py) ever passes enforce_dimension_gates=True.
+
+=== 4. hybrid_select_slot_production — every occurrence in the repo ===
+$ grep -rn "hybrid_select_slot_production" --include="*.py" . | grep -v "/tests/\|/.claude/worktrees/\|/.worktrees/"
+
+phoenix_v4/qa/bestseller_editor.py:257:def hybrid_select_slot_production(
+
+Only its own definition. Zero callers anywhere in production code or scripts.
+
+=== 5. apply_bestseller_beat_order_gate — call graph ===
+$ grep -n "def apply_bestseller_beat_order_gate\|apply_bestseller_beat_order_gate(" -r phoenix_v4 --include="*.py" | grep -v "/tests/"
+
+phoenix_v4/planning/assembly_compiler.py:1084:        apply_bestseller_beat_order_gate(
+phoenix_v4/planning/bestseller_structure_map.py:271:def apply_bestseller_beat_order_gate(
+
+Line 1084 is inside phoenix_v4/planning/assembly_compiler.py's compile_plan() function
+(def compile_plan at line 765 — confirmed via a scan of all `def ` lines <= 1084).
+compile_plan is imported directly by scripts/run_pipeline.py:4205
+  ("from phoenix_v4.planning.assembly_compiler import compile_plan"),
+i.e. it is the real production planning entry point.
+
+apply_bestseller_beat_order_gate() itself (bestseller_structure_map.py:271-292):
+  raises ValueError(text) when enforce=True and violations exist;
+  otherwise logs WARNING per violation.
+  `enforce` is threaded from:
+    _ei_cfg = load_ei_v2_config()
+    _enforce_beats = bool((_ei_cfg.get("book_structure") or {}).get(
+        "enforce_bestseller_beat_order", False))
+  and config/quality/ei_v2_config.yaml (committed production config) sets:
+    book_structure:
+      thesis_from_arc: true
+      enforce_bestseller_beat_order: true
+  => this gate is LIVE (raises) in production planning today, whenever
+     chapter_bestseller_structures is present on the plan.
+
+=== 6. bestseller_editor.py callers (is it in the production render path?) ===
+$ grep -rn "bestseller_editor\|from phoenix_v4.qa.bestseller_editor" --include="*.py" scripts phoenix_v4 | grep -v "/tests/\|bestseller_editor.py:"
+
+scripts/ci/analyze_bestseller_quality.py:142:        if tf.name.startswith("bestseller_editor") or tf.name == "budget.txt":
+scripts/ci/analyze_bestseller_quality.py:212:        from phoenix_v4.qa.bestseller_editor import build_bestseller_editor_report
+scripts/ci/analyze_bestseller_quality.py:214:        editorial = build_bestseller_editor_report(plan, render_dir)
+scripts/git/harvest_to_main.py:177:                "phoenix_v4/qa/bestseller_editor.py",  (just a path-pattern reference, not a call)
+
+build_bestseller_editor_report (which internally calls hybrid_select at
+bestseller_editor.py:283) is called ONLY from scripts/ci/analyze_bestseller_quality.py
+— a standalone post-hoc QA/analysis script, never from scripts/run_pipeline.py.
+
+=== 7. ei_parallel_adapter.py — is it wired into run_pipeline.py? ===
+$ grep -n "ei_parallel_adapter" scripts/run_pipeline.py
+
+scripts/run_pipeline.py:3996:                    from phoenix_v4.quality.ei_parallel_adapter import (
+scripts/run_pipeline.py:5004:                from phoenix_v4.quality.ei_parallel_adapter import (
+
+Both import sites are inside the --ei-v2-compare opt-in code path (module docstring:
+"Wire into the pipeline with --ei-v2-compare to produce comparison artifacts without
+changing production behavior (V1 always wins; V2 is advisory)."). This is the most
+directly-wired call site to run_pipeline.py and it is explicitly advisory-only by design.
+
+=== 8. learner.py / EMA feedback loop — schedule and data presence ===
+$ ls -la artifacts/ei_v2/
+
+catalog_calibration.json, ei_v1_v2_comparison.json (250KB), ei_v1_v2_summary.txt,
+eval_rigorous_report.json (6.1MB), eval_rigorous_summary.txt, learned_params.json (292B),
+learned_params_seed.json (290B), learner_feedback.jsonl (22.7KB),
+marketing_integration.log, pr_ri_kb_activation_evidence.txt, promotion_gate_result.json,
+promotion_history.jsonl, registry_failures.jsonl, seed_feedback.jsonl
+=> real, non-empty artifacts exist (learner has been run manually at least once).
+
+$ grep -rln "log_editorial_feedback" --include="*.py" scripts phoenix_v4 .github | grep -v "/tests/"
+scripts/ci/log_editorial_feedback.py   (only its own definition file)
+
+$ grep -rln "run_ema_learner" --include="*.py" --include="*.yml" .github scripts
+scripts/ci/run_ema_learner.py   (only its own definition file)
+
+Neither script is imported by scripts/run_pipeline.py, invoked from any
+.github/workflows/*.yml, or referenced by any scheduler config found in this repo.
+=> offline, manually-triggered calibration tool; no live/scheduled feedback loop.
+
+=== 9. bestseller_craft_gate.py — depth of ei_v2 usage ===
+$ grep -n "ei_v2" phoenix_v4/quality/bestseller_craft_gate.py
+phoenix_v4/quality/bestseller_craft_gate.py:15:from phoenix_v4.quality.ei_v2.dimension_gates import BODY_WORDS
+
+Single constant import (a body-word list), not a functional EI v2 integration.
+
+=== 10. Existing EI v2 specs / research docs discovered ===
+docs/EI_V2_REGISTRY_LEARNING_SPEC.md               (102 lines — real, registry-failure learning loop spec)
+docs/EI_V2_MARKETING_INTEGRATION_SPEC.md           (429 lines — real, marketing-lexicon integration spec)
+docs/ENLIGHTENED_INTELLIGENCE_PROD_CHECKLIST.md    (77 lines — real, prod checklist)
+docs/specs/EI_V2_STRENGTHENED_ARCHITECTURE_SPEC.md (259 lines — real, DESIGN status, unratified,
+                                                      Pearl_Architect, 2026-06-11: a genetic-algorithm
+                                                      + Bayesian-optimization + closed-feedback-loop
+                                                      architecture proposal — see REPORT §0.3, §3, §4)
+artifacts/research/ei_v2_strengthening_20260611/EI_V2_CURRENT_STATE_AUDIT.md   (142 lines — the
+                                                      original source of the "scorer vs engine" framing;
+                                                      §0 explicitly frames this as the honest baseline)
+artifacts/research/ei_v2_strengthening_20260611/EI_V2_SOTA_RESEARCH_NOTES.md
+artifacts/research/ei_v2_strengthening_20260611/EI_V2_ENHANCEMENT_ROADMAP.md
+
+No cap entry for "EI-v2-strengthened" found in docs/PEARL_ARCHITECT_STATE.md
+(grepped for "EI-v2-strengthened", "EI_V2_STRENGTHENED", "ei_v2_fitness" — no match
+except one unrelated line about DeepEval/agentevals citing ei_v2 as a domain companion
+for RAGAS faithfulness checks, PEARL_ARCHITECT_STATE.md:3157).
+No config/quality/ei_v2_fitness.yaml exists. No artifacts/.../composite_essence/ dir
+exists. => confirms the spec's own "Status: DESIGN... deliberately NOT done" framing is
+still accurate; nothing from it has been implemented as of 2026-07-23.
+
+=== SUBSYSTEM_AUTHORITY_MAP.tsv check ===
+Per STARTUP_RECEIPT, authority_doc for ei_v2 in
+artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv is listed as the code dir itself
+(phoenix_v4/quality/ei_v2/), which the lane prompt correctly flagged as unusual. Finding:
+real spec docs DO exist outside the code dir (see item 10 above) but the authority-map
+row does not point to them — a governance-hygiene gap worth flagging to Lane F / the
+authority-map owner, separate from the wiring question this lane was scoped to answer.
