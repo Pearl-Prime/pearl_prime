@@ -1,0 +1,314 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_009
+genre_id: psychological_thriller
+title: The Voicemail on the Last Train — Episode 9 (English gloss)
+logline: On the last train home, Ren is too deep inside his sprawling case notes to answer a call from
+  Shizuku, letting it ring out into an unheard voicemail until he is already home and standing in front
+  of a wall now fully covered in threads and margins.
+stakes_now: Shizuku has been trying to reach Ren repeatedly since the postponed visit in episode six, and
+  this is the first time the reader sees Ren actively choose the case over her call in real time rather
+  than after the fact.
+stakes_end: The voicemail is heard too late to matter tonight, tomorrow's callback is promised and not
+  kept on-page, and the apartment wall now holds the case fully externalized — the clearest sign yet that
+  the pattern has become closer to Ren than any person in his life.
+genre_cadence:
+- last_train_motif_returns
+- notebook_opened_immediately
+- convergence_of_all_threads_visualized
+- window_reflection_doubles_ren
+- anchor_call_interrupts
+- call_deliberately_silenced
+- missed_call_registers_as_cost
+- voicemail_notification_deferred
+- phone_set_face_down
+- reflection_seems_to_watch_back
+- announcement_loop_marks_time_passing
+- own_stop_nearly_missed
+- voicemail_finally_played
+- anchor_voice_names_unfinished_conversation
+- tomorrow_promised_not_kept_onpage
+- hand_already_reaching_for_notes
+- physical_corkboard_wall_reached
+- mirror_motif_integrated_into_wall
+- absorption_not_fear_on_his_face
+- loop_sound_fades_into_silence
+- episode_card
+page_turn_promises:
+- page_id: ep_009_p01
+  promise: Will Ren answer Shizuku's call before the last train reaches its next stop, or does the
+    convergence of threads on the page win out over his sister's voice?
+- page_id: ep_009_p02
+  promise: Now that the voicemail is finally played, does hearing Shizuku's worry change what Ren does
+    tonight, or does his hand already know it is reaching for the notes instead?
+panels:
+- panel_id: ep009_001
+  page_id: ep_009_p01
+  story_function: last_train_motif_returns
+  story_move: Returns to the transit station setting from episode four, reestablishing the looping
+    announcement as a recurring structural motif rather than a one-time device.
+  visual_proof: Wide shot of the nearly empty last-train platform at night, the same looping announcement
+    from episode four audible again.
+  information_delta: Reader recognizes the returning motif and anticipates its thematic weight from
+    episode four's precedent.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_002
+  page_id: ep_009_p01
+  story_function: notebook_opened_immediately
+  story_move: Ren opens his notebook the instant he sits down, showing the case has become his default
+    state rather than an occasional activity.
+  visual_proof: Medium shot of Ren seated on the train, notebook already open, pages visibly dense with
+    prior annotations.
+  information_delta: Reader sees how automatic and immediate the reading habit has become by this point
+    in the arc.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_003
+  page_id: ep_009_p01
+  story_function: convergence_of_all_threads_visualized
+  story_move: A close view of the notebook shows threads from every prior episode visually converging on
+    a single page, realizing the strategy bank's convergence beat directly.
+  visual_proof: Macro insert on a notebook spread where annotation lines from multiple episodes visibly
+    intersect at one point.
+  information_delta: Reader sees the cumulative scope of the obsession made visible in a single image for
+    the first time.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_004
+  page_id: ep_009_p01
+  story_function: window_reflection_doubles_ren
+  story_move: The dark train window reflects Ren's own image doubled, introducing a new form of the
+    series' recurring mirror motif inside a moving, public space.
+  visual_proof: Close insert on the train window showing Ren's reflection layered over the dark scenery
+    outside.
+  information_delta: Reader receives the mirror motif's newest variation, extending it beyond the
+    apartment hallway for the first time.
+  beat_role: recognition
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_005
+  page_id: ep_009_p01
+  story_function: anchor_call_interrupts
+  story_move: Shizuku's incoming call interrupts Ren's reading, offering a real, immediate choice between
+    the case and his sister.
+  visual_proof: Close insert on Ren's phone screen lighting up with Shizuku's name during an incoming
+    call.
+  information_delta: Reader sees the anchor relationship actively competing with the compulsion in real
+    time.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_006
+  page_id: ep_009_p01
+  story_function: call_deliberately_silenced
+  story_move: Ren glances at the call but keeps his hand on the notebook, actively choosing not to
+    interrupt his current thread even for his sister.
+  visual_proof: Close on Ren's eyes flicking to the ringing phone while his hand stays fixed on the
+    notebook page.
+  information_delta: Reader witnesses a deliberate, real-time choice of the case over a person, not an
+    excuse offered after the fact.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_007
+  page_id: ep_009_p01
+  story_function: missed_call_registers_as_cost
+  story_move: The call ends unanswered, leaving a visible missed-call notification as the concrete
+    result of Ren's choice.
+  visual_proof: Close insert on the phone screen now showing a missed call notification.
+  information_delta: Reader receives unambiguous confirmation of the cost of panel six's choice.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_008
+  page_id: ep_009_p01
+  story_function: voicemail_notification_deferred
+  story_move: A voicemail notification appears and is also deferred, compounding the delay rather than
+    resolving it.
+  visual_proof: Insert on a voicemail notification icon appearing on the lock screen, untouched.
+  information_delta: Reader sees the cost stacking rather than being addressed immediately.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_009
+  page_id: ep_009_p01
+  story_function: phone_set_face_down
+  story_move: Ren deliberately turns the phone face down, a small physical gesture confirming the choice
+    to keep reading rather than reconsider.
+  visual_proof: Close insert on Ren's hand placing the phone face down on his knee.
+  information_delta: Reader sees the choice reinforced physically, not just mentally.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_010
+  page_id: ep_009_p01
+  story_function: reflection_seems_to_watch_back
+  story_move: The train window's reflection appears to watch Ren rather than merely mirror him,
+    deepening the arc's watcher/watched foreshadowing.
+  visual_proof: Close insert on the window reflection where Ren's reflected eyes appear to track him
+    independently.
+  information_delta: Reader receives another concrete seed of the ep_011-012 reversal, rendered as pure
+    image.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_011
+  page_id: ep_009_p01
+  story_function: announcement_loop_marks_time_passing
+  story_move: The looping announcement plays again as the train continues, closing page one on time
+    passing rather than any resolution.
+  visual_proof: Wide shot of the train interior as it continues, the announcement repeating over the
+    scene.
+  information_delta: Reader feels time passing uninterrupted by the missed call's emotional weight.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_012
+  page_id: ep_009_p02
+  story_function: own_stop_nearly_missed
+  story_move: Ren nearly misses his own stop, a direct inversion of episode four's stranger-focused
+    missed train, now turned onto himself.
+  visual_proof: Medium shot of Ren hurrying off the train at the last second as the doors begin to close.
+  information_delta: Reader recognizes the deliberate structural rhyme with episode four's cost beat,
+    now internalized.
+  beat_role: honest_landing
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_013
+  page_id: ep_009_p02
+  story_function: voicemail_finally_played
+  story_move: Ren finally plays Shizuku's voicemail while walking, a delayed but real acknowledgment of
+    the missed call.
+  visual_proof: Close on Ren walking with his phone held to his ear, voicemail playback visibly active.
+  information_delta: Reader learns Ren has not entirely ignored the call, only deferred it.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_014
+  page_id: ep_009_p02
+  story_function: anchor_voice_names_unfinished_conversation
+  story_move: Shizuku's voicemail names the unfinished conversation from episode six directly, showing
+    the relational debt has continued accumulating off-page between episodes.
+  visual_proof: Panel rendering Shizuku's voice as dialogue text over an image of the phone held to Ren's
+    ear, no figure of her shown.
+  information_delta: Reader learns episode six's postponed plan was never actually resolved, only
+    deferred further.
+  beat_role: teaching_recall
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_015
+  page_id: ep_009_p02
+  story_function: tomorrow_promised_not_kept_onpage
+  story_move: Ren promises himself he will call back tomorrow, a promise the episode deliberately does
+    not show him keeping, honoring the craft bible's no-clean-resolution rule.
+  visual_proof: Close on Ren's face speaking the promise quietly to himself while still walking.
+  information_delta: Reader recognizes this promise pattern from earlier episodes and understands it as
+    provisional, not resolved.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_016
+  page_id: ep_009_p02
+  story_function: hand_already_reaching_for_notes
+  story_move: Ren's other hand reaches for his notebook even while he is still holding the phone,
+    visualizing the compulsion's priority over the promise he just made.
+  visual_proof: Close insert on Ren's two hands — one holding the phone, the other already opening the
+    notebook while walking.
+  information_delta: Reader sees the true priority stated through simultaneous action rather than words.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_017
+  page_id: ep_009_p02
+  story_function: physical_corkboard_wall_reached
+  story_move: Ren arrives home and, for the first time, spreads his notes physically across an entire
+    apartment wall, externalizing the strategy bank's corkboard grammar into a real image.
+  visual_proof: Wide shot of Ren's apartment wall now covered edge to edge with notes, photos, and
+    connecting threads.
+  information_delta: Reader receives the arc's clearest single image of how far the obsession has grown
+    since episode one.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_018
+  page_id: ep_009_p02
+  story_function: mirror_motif_integrated_into_wall
+  story_move: The hallway mirror is shown reflecting Ren's image directly into the wall of notes,
+    physically merging the series' two recurring motifs into one composition.
+  visual_proof: Wide shot composed so the hallway mirror's reflection of Ren appears layered against the
+    note-covered wall.
+  information_delta: Reader sees the mirror motif and the case-file motif visually fuse for the first
+    time.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_019
+  page_id: ep_009_p02
+  story_function: absorption_not_fear_on_his_face
+  story_move: Ren's expression stepping back from the wall shows absorption bordering on pleasure rather
+    than alarm, an honest and unsettling character beat.
+  visual_proof: Close on Ren's face viewing the full wall, an expression closer to fascination than fear.
+  information_delta: Reader understands the compulsion currently rewards Ren more than it frightens him,
+    raising the stakes for the arc's coming reversal.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_020
+  page_id: ep_009_p02
+  story_function: loop_sound_fades_into_silence
+  story_move: The distant sound of the last train fades outside the window, closing the episode on the
+    quiet aftermath of the announcement motif that opened it.
+  visual_proof: Quiet insert on the apartment window at night, the last train's sound fading into
+    silence.
+  information_delta: Reader receives a wordless closing beat that bookends the episode's opening motif.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_021
+  page_id: ep_009_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_009.yaml
+notes: 'Episode 9 of 12 in arc 1 (''obsession seed''). Realizes strategy_05''s beat 5 (the deepest
+  entry — closer to the pattern than to any person, every obligation deprioritized one quiet sacrifice
+  at a time) through a deliberately, actively silenced call rather than a passive missed one. Setting:
+  the transit station from the strategy bank''s setting_pool, reused from episode 4, with the missed-train
+  cost beat now inverted onto Ren himself. This is the arc''s deepest point before the reckoning begins
+  in ep_010-012 — the physical corkboard wall is the clearest single image of scale in the series so
+  far.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'
