@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pearl Prime</title>
+<title>Pearl Prime — Teacher Onboarding</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -44,65 +44,39 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <script src="assets/i18n.js"></script>
 <!-- /Universal Nav -->
 
-<!-- ═══ ENTRY SCREEN ═══ -->
+<!-- ═══ ENTRY SCREEN — Teacher Onboarding flag gate ═══ -->
 <div id="entry">
   <h1>Pearl Prime</h1>
   <div class="sub">Ancient Wisdom · Enlightened Intelligence · Next Generation</div>
-  <div class="choose">Choose Your Market</div>
+  <div class="choose">Teacher Onboarding — Choose Your Language</div>
   <div class="flags">
-    <a class="flag-card" onclick="enterWizard('en_US')"><span class="emoji">🇺🇸</span><span class="name">United States</span><span class="lang">English</span></a>
-    <a class="flag-card" onclick="enterWizard('ja_JP')"><span class="emoji">🇯🇵</span><span class="name">Japan</span><span class="lang">日本語</span></a>
-    <a class="flag-card" onclick="enterWizard('ko_KR')"><span class="emoji">🇰🇷</span><span class="name">Korea</span><span class="lang">한국어</span></a>
-    <a class="flag-card" onclick="enterWizard('zh_TW')"><span class="emoji">🇹🇼</span><span class="name">Taiwan</span><span class="lang">繁體中文</span></a>
-    <a class="flag-card" onclick="enterWizard('zh_CN')"><span class="emoji">🇨🇳</span><span class="name">China</span><span class="lang">简体中文</span></a>
-    <a class="flag-card" onclick="enterWizard('zh_HK')"><span class="emoji">🇭🇰</span><span class="name">Hong Kong</span><span class="lang">粵語</span></a>
-    <a class="flag-card" onclick="enterWizard('zh_SG')"><span class="emoji">🇸🇬</span><span class="name">Singapore</span><span class="lang">中文/EN</span></a>
-    <a class="flag-card" onclick="enterWizard('es_US')"><span class="emoji">🇺🇸</span><span class="name">US Hispanic</span><span class="lang">Español</span></a>
-    <a class="flag-card" onclick="enterWizard('es_ES')"><span class="emoji">🇪🇸</span><span class="name">Spain</span><span class="lang">Español</span></a>
-    <a class="flag-card" onclick="enterWizard('fr_FR')"><span class="emoji">🇫🇷</span><span class="name">France</span><span class="lang">Français</span></a>
-    <a class="flag-card" onclick="enterWizard('de_DE')"><span class="emoji">🇩🇪</span><span class="name">Germany</span><span class="lang">Deutsch</span></a>
-    <a class="flag-card" onclick="enterWizard('it_IT')"><span class="emoji">🇮🇹</span><span class="name">Italy</span><span class="lang">Italiano</span></a>
-    <a class="flag-card" onclick="enterWizard('hu_HU')"><span class="emoji">🇭🇺</span><span class="name">Hungary</span><span class="lang">Magyar</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('en-US')"><span class="emoji">🇺🇸</span><span class="name">United States</span><span class="lang">English</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('ja-JP')"><span class="emoji">🇯🇵</span><span class="name">Japan</span><span class="lang">日本語</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('ko-KR')"><span class="emoji">🇰🇷</span><span class="name">Korea</span><span class="lang">한국어</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-TW')"><span class="emoji">🇹🇼</span><span class="name">Taiwan</span><span class="lang">繁體中文</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-CN')"><span class="emoji">🇨🇳</span><span class="name">China</span><span class="lang">简体中文</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-HK')"><span class="emoji">🇭🇰</span><span class="name">Hong Kong</span><span class="lang">粵語</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-SG')"><span class="emoji">🇸🇬</span><span class="name">Singapore</span><span class="lang">中文/EN</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('es-US')"><span class="emoji">🇺🇸</span><span class="name">US Hispanic</span><span class="lang">Español</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('es-ES')"><span class="emoji">🇪🇸</span><span class="name">Spain</span><span class="lang">Español</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('fr-FR')"><span class="emoji">🇫🇷</span><span class="name">France</span><span class="lang">Français</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('de-DE')"><span class="emoji">🇩🇪</span><span class="name">Germany</span><span class="lang">Deutsch</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('it-IT')"><span class="emoji">🇮🇹</span><span class="name">Italy</span><span class="lang">Italiano</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('hu-HU')"><span class="emoji">🇭🇺</span><span class="name">Hungary</span><span class="lang">Magyar</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('pt-BR')"><span class="emoji">🇧🇷</span><span class="name">Brazil</span><span class="lang">Português</span></a>
   </div>
 </div>
 
 <script>
-/* Lane → localized Brand Wizard URL. jp/tw/cn keep dedicated forked builds;
-   every other lane rides the generic wizard with an explicit ?lang= so nothing
-   lands on US-English copy. zh_HK → Traditional (tw), zh_SG → Simplified (zh). */
-var LANE_WIZARD = {
-  en_US:"wizard.html",
-  ja_JP:"wizard-ja.html",
-  zh_TW:"wizard-tw.html",
-  zh_CN:"wizard-zh.html",
-  zh_HK:"wizard-tw.html",
-  zh_SG:"wizard-zh.html",
-  ko_KR:"wizard.html?lang=ko",
-  es_US:"wizard.html?lang=es",
-  es_ES:"wizard.html?lang=es_es",
-  fr_FR:"wizard.html?lang=fr",
-  de_DE:"wizard.html?lang=de",
-  it_IT:"wizard.html?lang=it",
-  hu_HU:"wizard.html?lang=hu"
-};
-/* Lane → market token that brandMatch.js maps to the SAME lane (routes the signup
-   into the correct catalog lane, never en_us by accident). */
-var LANE_MARKET = {
-  en_US:"us",ja_JP:"jp",ko_KR:"kr",zh_TW:"tw",zh_CN:"cn",zh_HK:"hk",zh_SG:"sg",
-  es_US:"es_us",es_ES:"spain",fr_FR:"france",de_DE:"germany",it_IT:"italy",
-  hu_HU:"hungary"
-};
-
-/* Flag click → straight into the localized Brand Wizard's first page. */
-function enterWizard(laneId) {
-  localStorage.setItem('pearl_prime_lane', laneId);
-  localStorage.setItem('phoenix_lane', laneId);
-  var base = LANE_WIZARD[laneId] || "wizard.html";
-  var market = LANE_MARKET[laneId] || "us";
-  var sep = base.indexOf('?') >= 0 ? '&' : '?';
-  window.location.href = base + sep + 'mode=composite&market=' + encodeURIComponent(market);
+/* Flag click → straight into the Teacher Onboarding form, pre-set to that
+   locale. Uses the SAME localStorage key TeacherOnboardingI18nProvider reads
+   on mount (src/i18n-teacher-onboarding.jsx: phoenix_teacher_onboarding_locale,
+   BCP-47 codes), so /teacher_onboarding.html skips its own FlagLocaleGate and
+   renders the form directly — no double flag-picker. */
+function enterTeacherOnboarding(localeCode) {
+  localStorage.setItem('phoenix_teacher_onboarding_locale', localeCode);
+  window.location.href = 'teacher_onboarding.html';
 }
-
 </script>
 </body>
 </html>
