@@ -205,3 +205,5 @@ HANDOFF_TO:     Lane F (synthesis)
 NEXT_ACTION:    Operator ratification needed on cap-entry-candidate PEARL-EDITOR-PLAN-TIME-GATE-01 (Section 5) before any implementation lane.
 SIGNAL:         lane-b-editor-sequencing-merged=<sha>
 ```
+
+<!-- PR body synced 2026-07-23: acceptance-layer term restated for Q-ENFORCE-02/G-CLAIM. -->
