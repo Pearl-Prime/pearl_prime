@@ -1,0 +1,240 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_002
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 2: The Prank Theory That Doesn''t Hold'
+logline: Cross-referencing a second station's archived footage, Yaqing proposes a coordinated-prank theory
+  that starts collapsing the same night, as Zhou's offhand complaint gets folded into her file.
+stakes_now: Yaqing's second confident theory is the only thing keeping the case from feeling truly wrong.
+stakes_end: The prank theory has quietly failed, a formal footage request has entered the institutional
+  record, and the case has followed Yaqing home into her own unpaid time.
+genre_cadence:
+- continued_cross_reference
+- split_screen_comparison
+- revised_prank_theory
+- anchor_ordinary_complaint
+- misfiled_as_clue
+- margin_annotations_crowd
+- shift_overrun_visible
+- anchor_names_overrun
+- small_deflection_response
+- footage_request_filed
+- institutional_friction
+- private_time_invaded
+- group_chat_ignored
+- prank_theory_collapses
+- night_market_texture
+- continuity_timestamp_echo
+- held_silence_unmade_call
+- closing_self_soothe_hold
+page_turn_promises:
+- page_id: ep_002_p01
+  promise: Will Yaqing's 'coordinated prank' theory survive Zhou's offhand comment being read as a clue?
+- page_id: ep_002_p02
+  promise: Will the institutional request for older footage stop her, or just push the investigation into
+    her own time?
+panels:
+- panel_id: ep002_001
+  page_id: ep_002_p01
+  story_function: continued_cross_reference
+  story_move: Yaqing, still on shift past dawn, replays both flagged clips instead of clocking out.
+  visual_proof: Wide control-room shot at first light, Yaqing at her console, visible fatigue.
+  information_delta: Reader learns Yaqing has stayed well past her shift to keep working the case.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_002
+  page_id: ep_002_p01
+  story_function: split_screen_comparison
+  story_move: Yaqing splits her monitor to compare the two station clips side by side with timestamps.
+  visual_proof: Close insert on a split monitor, two station feeds and timestamps aligned.
+  information_delta: Reader sees Yaqing formally cross-referencing two separate stations for the first
+    time.
+  beat_role: evidence_detail
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_003
+  page_id: ep_002_p01
+  story_function: revised_prank_theory
+  story_move: 'Yaqing proposes a new, plausible-sounding theory: a coordinated prank timed across two
+    gates.'
+  visual_proof: Medium shot, Yaqing's tired but sharp expression as she states the new read.
+  information_delta: Reader hears Yaqing's second confident verdict, different from episode one's.
+  beat_role: revision
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_004
+  page_id: ep_002_p01
+  story_function: anchor_ordinary_complaint
+  story_move: Zhou makes an offhand, unrelated complaint about a late bus, addressed to no one in particular.
+  visual_proof: Two-shot, Zhou passing by, gesturing about the bus, not looking at Yaqing's screen.
+  information_delta: Reader hears an ordinary complaint that has nothing to do with the case.
+  beat_role: deflection
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_005
+  page_id: ep_002_p01
+  story_function: misfiled_as_clue
+  story_move: Yaqing seizes on the word 'late' and folds it into her own timeline calculation.
+  visual_proof: Close insert on Yaqing's face snapping up, sudden focus replacing fatigue.
+  information_delta: Reader recognizes Zhou's ordinary remark being misread as evidence — the reader sees
+    it was nothing.
+  beat_role: deflection
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_006
+  page_id: ep_002_p01
+  story_function: margin_annotations_crowd
+  story_move: Yaqing's private notebook fills with branching marginal annotations, handwriting shrinking.
+  visual_proof: Close insert on a notebook page, dense branching notes crowding every margin.
+  information_delta: Reader sees the spiral escalating visually through the density of her own notes.
+  beat_role: vertigo
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_007
+  page_id: ep_002_p01
+  story_function: shift_overrun_visible
+  story_move: Daylight arrives outside the control room, marking how far past her shift she has stayed.
+  visual_proof: Wide shot of the control room windows now lit by morning light, her name still on the
+    active roster.
+  information_delta: Reader gets concrete visual proof of how long Yaqing has overrun her shift.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_008
+  page_id: ep_002_p01
+  story_function: anchor_names_overrun
+  story_move: Zhou directly asks why she is still at her desk after shift end.
+  visual_proof: Medium two-shot, Zhou's posture shifting from casual to genuinely asking.
+  information_delta: Reader sees the anchor beginning to register concern, not just routine banter.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_009
+  page_id: ep_002_p01
+  story_function: small_deflection_response
+  story_move: Yaqing deflects with a minimizing answer, still not looking away from the screen.
+  visual_proof: Close insert on Yaqing's face, eyes locked on monitor, mouth answering automatically.
+  information_delta: Reader sees the deflection pattern repeating and slightly worsening from episode
+    one.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_010
+  page_id: ep_002_p02
+  story_function: footage_request_filed
+  story_move: Yaqing files a formal cross-department request for footage older than the routine window.
+  visual_proof: Insert on a request form on screen, fields filled for footage beyond 24 hours.
+  information_delta: Reader sees Yaqing escalate from casual review to a formal institutional request.
+  beat_role: scope_creep
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_011
+  page_id: ep_002_p02
+  story_function: institutional_friction
+  story_move: The request stalls, requiring manager sign-off before the shift changes over.
+  visual_proof: Close insert on a 'pending approval' status message on her request screen.
+  information_delta: Reader learns the case now requires institutional approval Yaqing does not yet have.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_012
+  page_id: ep_002_p02
+  story_function: private_time_invaded
+  story_move: The case follows Yaqing home; her apartment curtains stay drawn against the waking night
+    market.
+  visual_proof: Spatial shot of her apartment, curtains drawn, laptop open to the same footage, night
+    market glow outside.
+  information_delta: Reader sees the case has crossed from work time into Yaqing's own private hours.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_013
+  page_id: ep_002_p02
+  story_function: group_chat_ignored
+  story_move: Yaqing scrolls past her coworkers' LINE group chat about next week's shift swap without
+    replying.
+  visual_proof: Insert on a phone screen, LINE chat messages stacking unread, Yaqing's thumb scrolling
+    past.
+  information_delta: Reader sees Yaqing withdrawing from ordinary colleague contact in favor of the case.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_014
+  page_id: ep_002_p02
+  story_function: prank_theory_collapses
+  story_move: Yaqing's own reasoning quietly abandons the prank theory without replacing it with anything
+    solid.
+  visual_proof: Close insert on Yaqing's face, uncertainty breaking through the earlier confidence.
+  information_delta: Reader sees the second verdict already failing, one episode after it was proposed.
+  beat_role: revision
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_015
+  page_id: ep_002_p02
+  story_function: night_market_texture
+  story_move: Night-market light bleeds through the curtain gap, Yaqing's tired reflection layered over
+    her screen.
+  visual_proof: Spatial insert, night market glow through curtain gap, her reflection overlaid on the
+    laptop screen.
+  information_delta: Reader gets a concrete Taiwan-grounded image of how late and how alone this has become.
+  beat_role: strain
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_016
+  page_id: ep_002_p02
+  story_function: continuity_timestamp_echo
+  story_move: Yaqing circles a timestamp on a printout without noticing it is the exact one from episode
+    one.
+  visual_proof: Extreme close insert on a circled timestamp, visually echoing episode one's underlined
+    printout.
+  information_delta: Reader recognizes a continuity loop the character herself does not consciously register.
+  beat_role: unreliable_flag
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_017
+  page_id: ep_002_p02
+  story_function: held_silence_unmade_call
+  story_move: Yaqing's hand hovers over her phone as if to call someone, then withdraws without dialing.
+  visual_proof: Close insert on her hand over the phone screen, contact list open, thumb not pressing.
+  information_delta: Reader sees Yaqing choosing isolation over reaching out, a small but real cost.
+  beat_role: threatening_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_018
+  page_id: ep_002_p02
+  story_function: closing_self_soothe_hold
+  story_move: Yaqing falls asleep at her desk, laptop still open, promising herself one more check will
+    be enough.
+  visual_proof: Wide pull-back of Yaqing asleep at her desk, laptop glow, curtain light shifting toward
+    morning.
+  information_delta: Reader closes the episode on an unresolved case and a self-soothing promise already
+    familiar as false.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_002.yaml
+notes: Arc 1 (obsession seed), episode 2 of 12. English craft-planning metadata only; authoritative story
+  is zh_TW in ep_002.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate.'
