@@ -171,3 +171,10 @@ artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv is listed as the code dir its
 real spec docs DO exist outside the code dir (see item 10 above) but the authority-map
 row does not point to them — a governance-hygiene gap worth flagging to Lane F / the
 authority-map owner, separate from the wiring question this lane was scoped to answer.
+
+=== CI note ===
+PR body initially used unqualified "bestseller" language and tripped the G-CLAIM /
+Q-ENFORCE-02 acceptance-claim-language drift-detector gate (this PR makes no book
+quality/acceptance-layer claim; it is a code-wiring/call-graph audit). PR body edited
+to add an explicit N/A-acceptance-layer disclaimer; this commit triggers a fresh
+Drift-detectors run so it reads the corrected body.
