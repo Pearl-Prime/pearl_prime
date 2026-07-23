@@ -62,21 +62,42 @@ def _mode_vessel_prompt_block(
     )
     if not genre:
         return ""
-    from phoenix_v4.manga.mode.vessels import VesselError, load_vessel
+    from phoenix_v4.manga.mode.validator import assert_mode_xor
+    from phoenix_v4.manga.mode.vessels import load_vessel
     from phoenix_v4.manga.series.story_architect import resolve_vessel_genre
 
-    try:
-        vessel = load_vessel(resolve_vessel_genre(str(genre)), mode_norm)
-    except (VesselError, Exception):
-        return ""
+    assert_mode_xor({
+        "series_id": story_handoff.get("series_id"),
+        "mode": mode_norm,
+        "teacher_id": story_handoff.get("teacher_id"),
+        "musician_id": story_handoff.get("musician_id"),
+    })
+    vessel = load_vessel(resolve_vessel_genre(str(genre)), mode_norm)
     beats = vessel.get("beats") or {}
     beat_lines = "\n".join(f"  - {k}: {v}" for k, v in beats.items() if v)
+    packet = (story_handoff.get("mode_vessel") or {}).get("source_packet") or {}
+    if mode_norm == "teacher":
+        source_lines = packet.get("doctrine_excerpts") or []
+        source_block = "\n".join(f"  - {line}" for line in source_lines)
+        identity_rule = (
+            "Transform these source teachings into conflict, action, consequence, "
+            "brief mentor dialogue, and changed behavior. Never paste a lecture."
+        )
+    else:
+        motifs = packet.get("motif_atoms") or {}
+        source_block = "\n".join(f"  - {k}: {v}" for k, v in motifs.items())
+        identity_rule = (
+            "Transform these source motifs through opening, pressured recurrence, "
+            "and resolution. Never explain the lesson."
+        )
     return (
         "\n\nMode vessel (M4 — diegetic apparatus; NEVER name the teacher/musician):\n"
         f"- mode: {mode_norm}\n"
         f"- vessel: {vessel.get('vessel')}\n"
         f"- vessel_desc: {vessel.get('vessel_desc')}\n"
         f"- beat skeleton:\n{beat_lines}\n"
+        f"- identity source (internal; do not name or quote as attribution):\n{source_block}\n"
+        f"{identity_rule} "
         "Weave the vessel into panels as a genre-native presence. "
         "Teacher-mode: doctrine earned (wound→turn→renewal). "
         "Music-mode: motif felt (opening→mid→closing). "

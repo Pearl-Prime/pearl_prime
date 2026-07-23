@@ -62,6 +62,7 @@ def test_architect_includes_serial_context_for_romance():
         genre_id="romance_josei_drama",
         topic="self_worth",
         mode="music",
+        musician_id="ahjan",
         chapter_number=2,
         repo_root=REPO_ROOT,
     )
@@ -95,6 +96,7 @@ def test_writer_prompt_includes_serial_mandate():
         arc_id="arc_v1",
         genre_id="dark_fantasy",
         mode="teacher",
+        teacher_id="ahjan",
         chapter_number=2,
         repo_root=REPO_ROOT,
     )

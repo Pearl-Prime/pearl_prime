@@ -176,7 +176,8 @@ def emit_series_plan_yaml(
         "chapters_target": 14,
         "ai_disclosure_required": True,
     }
-    return plan
+    from phoenix_v4.manga.mode.catalog import apply_brand_mode
+    return apply_brand_mode(plan)
 
 
 def load_canonical_brand_ids() -> list[str]:

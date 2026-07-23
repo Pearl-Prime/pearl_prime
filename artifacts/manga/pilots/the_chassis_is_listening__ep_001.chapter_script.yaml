@@ -1,0 +1,45 @@
+schema_version: "1.0"
+series_id: the_chassis_is_listening
+chapter_id: ep_001
+title: The Chassis Is Listening
+genre: mecha
+mode: teacher
+teacher_id: ahjan
+musician_id: null
+mode_vessel: the mechanic who co-regulates the pilot
+source_contract: dramatize_doctrine_never_lecture
+pages:
+  - page_id: ep001_p01
+    panels:
+      - panel_id: ep001_001
+        beat_type: wound
+        scene: Ren forces the neural-sync limiter higher while his hand trembles around the control stick.
+        dialogue: "REN: Raise it again."
+      - panel_id: ep001_002
+        beat_type: consequence
+        scene: The mecha mirrors his braced body; its knee buckles and warning lights flood the cockpit.
+        sfx: KRRRNNK
+  - page_id: ep001_p02
+    panels:
+      - panel_id: ep001_003
+        beat_type: turn
+        scene: In the maintenance bay, the mechanic places one hand on the scorched chassis and watches Ren's held breath.
+        dialogue: "MECHANIC: It knew before you did."
+      - panel_id: ep001_004
+        beat_type: embodied_practice
+        scene: Ren stops issuing commands, feels the tremor, and lets one unforced breath complete. The sync graph steadies.
+        dialogue: "MECHANIC: Settling is how you hear what carries you."
+  - page_id: ep001_p03
+    panels:
+      - panel_id: ep001_005
+        beat_type: renewal
+        scene: On the next launch Ren waits for his body and the chassis to find the same rhythm before touching the controls.
+        sfx: HMMMM
+      - panel_id: ep001_006
+        beat_type: close
+        scene: The machine rises smoothly. Ren's hand is open on the control stick rather than clenched.
+        dialogue: "REN: We're moving together."
+wrapper_note: >-
+  Ahjan is metadata, never a named fictional character. Approved Ahjan doctrine
+  supplies the truth; the mechanic, failure, practice, and changed launch behavior
+  dramatize it inside the mecha world.

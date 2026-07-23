@@ -1,0 +1,45 @@
+schema_version: "1.0"
+series_id: the_lullaby_beneath_the_house
+chapter_id: ep_001
+title: The Lullaby Beneath the House
+genre: psychological_horror
+mode: music
+teacher_id: null
+musician_id: ahjan
+mode_vessel: the corrupted lullaby
+source_contract: transform_motif_never_explain
+pages:
+  - page_id: ep001_p01
+    panels:
+      - panel_id: ep001_001
+        beat_type: opening_motif
+        scene: At 3:13 a locked nursery plays three clean notes and a fourth that bends impossibly downward.
+        sfx: "♪ LA — MI — RE — rrraaah"
+      - panel_id: ep001_002
+        beat_type: dread
+        scene: Black handprints appear across the wall in the rhythm of the broken fourth note.
+        dialogue: "MINA: That isn't how she sang it."
+  - page_id: ep001_p02
+    panels:
+      - panel_id: ep001_003
+        beat_type: mid_recurrence
+        scene: Mina finds an old recording. The same phrase rises cleanly on its fourth note.
+        sfx: "♪ LA — MI — RE — SOL"
+      - panel_id: ep001_004
+        beat_type: confrontation
+        scene: She plays the recording in the nursery; the falling and rising notes push against each other as the walls breathe.
+        dialogue: null
+  - page_id: ep001_p03
+    panels:
+      - panel_id: ep001_005
+        beat_type: closing_resolution
+        scene: When the recording fails, Mina supplies the clean final note with her own voice. The handprints loosen.
+        sfx: "♪ SOL——"
+      - panel_id: ep001_006
+        beat_type: close
+        scene: Morning reaches the empty cradle. The music box is silent, and Mina's breathing keeps the last rhythm.
+        dialogue: null
+wrapper_note: >-
+  No character explains a lesson. Ahjan's music bank supplies sound identity,
+  themes, and the three-position motif; horror transforms them into corruption,
+  recurrence, and resolution.

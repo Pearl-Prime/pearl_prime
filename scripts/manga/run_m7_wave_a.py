@@ -119,6 +119,7 @@ def emit_series_plan_yaml(
     *,
     brand_id: str,
     teacher_id: str | None,
+    musician_id: str | None,
     locale: str,
     genre: str,
     series_slug: str,
@@ -143,11 +144,12 @@ def emit_series_plan_yaml(
     pending_partners = routing.get("pending_partner_targets_by_locale", {}).get(locale, [])
 
     series_id = f"{brand_id}__{locale}__{genre}__{series_slug}"
-    return {
+    plan = {
         "series_plan_schema": "2.4.0",
         "series_id": series_id,
         "brand_id": brand_id,
         "teacher_id": teacher_id,
+        "musician_id": musician_id,
         "locale": locale,
         "default_locale": locale,
         "format": master_format,
@@ -168,6 +170,8 @@ def emit_series_plan_yaml(
         "chapters_target": 14,
         "ai_disclosure_required": True,
     }
+    from phoenix_v4.manga.mode.catalog import apply_brand_mode
+    return apply_brand_mode(plan)
 
 
 def write_plan(out_root: Path, plan: dict[str, Any]) -> Path:
@@ -194,6 +198,11 @@ def main(argv: list[str] | None = None) -> int:
         required=True,
         choices=WAVE_A_ZERO_PLAN_LOCALES,
         help="Target zero-plan locale for Wave A emission.",
+    )
+    parser.add_argument(
+        "--exclude-music-brands",
+        action="store_true",
+        help="Do not append active music-registry brands (included by default).",
     )
     parser.add_argument(
         "--out-root",
@@ -287,6 +296,7 @@ def main(argv: list[str] | None = None) -> int:
                 plan = emit_series_plan_yaml(
                     brand_id=brand.brand_id,
                     teacher_id=teacher_id,
+                    musician_id=None,
                     locale=locale,
                     genre=genre,
                     series_slug=series_slug,
@@ -306,6 +316,36 @@ def main(argv: list[str] | None = None) -> int:
                 break
         if args.max_files and emitted >= args.max_files:
             break
+
+    # Music brands are a separate identity registry and intentionally are not
+    # added to the frozen 37-brand teacher/consumer catalog. They still receive
+    # a real manga catalog: one series per genre per locale, each music-mode.
+    if not args.exclude_music_brands and not (args.max_files and emitted >= args.max_files):
+        from phoenix_v4.manga.mode.catalog import active_music_brands
+        for brand_id, musician_id in sorted(active_music_brands().items()):
+            for genre in catalog_mod.VALID_GENRES:
+                if args.max_files and emitted >= args.max_files:
+                    break
+                plan = emit_series_plan_yaml(
+                    brand_id=brand_id,
+                    teacher_id=None,
+                    musician_id=musician_id,
+                    locale=locale,
+                    genre=genre,
+                    series_slug="series01",
+                    routing=routing,
+                )
+                errors = validate_plan(plan, schema)
+                if errors:
+                    failed.append((plan["series_id"], errors))
+                    continue
+                if args.dry_run:
+                    print(f"[dry-run] {plan['series_id']} ({plan['master_format']}, music)")
+                else:
+                    write_plan(args.out_root, plan)
+                emitted += 1
+                total += 1
+                genre_totals[genre] = genre_totals.get(genre, 0) + 1
 
     print()
     print(f"M7 Wave A — {locale}")
