@@ -1,0 +1,433 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__han_yushen__zh_TW__overthinking__the_missing_hour
+chapter_id: ep_001
+genre_id: psychological_thriller
+title: "不在場證明——第一話：那張發票（English gloss: Alibi — Episode 1: The Receipt）"
+logline: A risk-control analyst who audits other people's anomalies for a living finds an ibon receipt in her
+  own bag for an hour she is certain she did not live, and turns her own night into a case file until a
+  colleague who reads bodies instead of reports teaches her, wordlessly, that some files can stay open.
+stakes_now: Zhiwei's whole professional identity rests on trusting her own read of a timeline; a receipt that
+  contradicts her own memory is the one anomaly her method cannot safely flag and close.
+stakes_end: The missing hour is still unexplained and Zhiwei has not solved it — she has only proven, once,
+  that she can let a file stay open overnight without it costing her the version of herself she is trying to
+  protect.
+genre_cadence:
+- establishing_analyst_world
+- precision_as_armor
+- baseline_competence_and_unopened_promotion_letter
+- anomaly_object_discovery
+- first_reading_confident_and_fast
+- second_data_layer_transit_log
+- third_data_layer_reading_app
+- fourth_data_layer_line_message
+- spiral_timeline_assembly
+- somatic_cost_registers
+- self_applied_fraud_method
+- pressure_peak_convergence
+- page_turn_held_stillness
+- vessel_entry_silent_witness
+- vessel_gesture_teaching
+- body_settles_before_mind
+- vessel_ordinary_question
+- near_miss_case_file_answer
+- vessel_sets_evidence_face_down
+- recognition_turn_unrevised_page
+- silence_the_file_stays_open
+- vessel_exit_echo_gesture
+- world_grants_permission
+- update_attempt_receipt_folded_unread
+- boundary_action_message_rescheduled
+- closing_return_no_mastery
+- episode_card
+page_turn_promises:
+- page_id: ep_001_p01
+  promise: Will Zhiwei's own investigative method survive being turned on her own unaccounted hour, or does
+    the case file consume the night before anyone reaches her?
+- page_id: ep_001_p02
+  promise: Will the receipt get solved, or does Zhiwei prove she can set an open file down without either
+    finishing it or feeding it to her manager as one more overtime deliverable?
+panels:
+- panel_id: ep001_001
+  page_id: ep_001_p01
+  story_function: establishing_analyst_world
+  story_move: Establishes Zhiwei's world and competence before any personal threat exists — the office and
+    the anomaly dashboard are her territory.
+  visual_proof: Wide shot of a near-empty open-plan office on a high floor, Taipei's wet night skyline through
+    the glass, one monitor still lit — a rider-anomaly dashboard, rows of flagged EasyCard-tap and GPS
+    mismatches.
+  information_delta: Reader learns Zhiwei's role (delivery-platform risk-control analyst) and environment
+    before anything personal goes wrong.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_002
+  page_id: ep_001_p01
+  story_function: precision_as_armor
+  story_move: A close study of Zhiwei's tools of precision frames method as her defense before it is turned
+    on herself.
+  visual_proof: Macro insert on color-coded flag tabs, a printed anomaly report annotated in tight handwriting,
+    a company-issue EasyCard reader test unit on the corner of her desk.
+  information_delta: Reader sees precision functions as Zhiwei's armor, established before the personal
+    anomaly appears.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_003
+  page_id: ep_001_p01
+  story_function: baseline_competence_and_unopened_promotion_letter
+  story_move: Zhiwei closes a real fraud case cleanly, competent and sure — and a drawer holds an unopened
+    promotion memo, planting the imposter-syndrome texture as an object, not a stated feeling.
+  visual_proof: Medium shot — Zhiwei stamps a case CLOSED, satisfied; her desk drawer is half open, a company
+    envelope with her new title still sealed inside it.
+  information_delta: Reader learns Zhiwei is genuinely good at this job, and that something about the promotion
+    itself is unresolved for her — shown as an object, not explained.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_004
+  page_id: ep_001_p01
+  story_function: anomaly_object_discovery
+  story_move: The inciting anomaly enters — reaching for her keys, Zhiwei pulls out an ibon receipt she does
+    not recognize, planting the episode's central evidence.
+  visual_proof: Close insert on a thermal-paper ibon receipt half-crumpled in her bag — 7-ELEVEN header, a
+    store code near Ningxia Night Market, timestamp 23:47 the night before.
+  information_delta: Reader learns the specific anomaly driving the episode — a receipt that places Zhiwei
+    somewhere she is certain she was not.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_005
+  page_id: ep_001_p01
+  story_function: first_reading_confident_and_fast
+  story_move: Zhiwei's analyst reflex fires instantly and confidently — a fast, wrong-fast explanation offered
+    before any real check.
+  visual_proof: Zhiwei's face, already reasoning, mouth half-forming a dismissal; the receipt held loosely,
+    not yet treated as evidence.
+  information_delta: Reader sees Zhiwei's first instinct is speed, not accuracy — the same instinct she
+    flags in careless riders every day.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_006
+  page_id: ep_001_p01
+  story_function: second_data_layer_transit_log
+  story_move: The first real check contradicts the fast explanation — her own transit history should have
+    stopped this, but does not.
+  visual_proof: Phone screen insert — her EasyCard transit app shows an MRT exit tap near Ningxia Night
+    Market at 23:31, one stop past the station she has always sworn she took home.
+  information_delta: Reader learns a second, independent data source corroborates the receipt — this is no
+    longer a single anomaly.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_007
+  page_id: ep_001_p01
+  story_function: third_data_layer_reading_app
+  story_move: A third layer stacks on — her nightly wind-down webtoon app shows active reading at 23:52,
+    proof her hands and eyes were awake and occupied, somewhere.
+  visual_proof: Phone screen insert — a webtoon reading app's history log, a chapter marked "已讀" at 23:52,
+    scroll position mid-page.
+  information_delta: Reader learns Zhiwei was demonstrably conscious and active during the missing window,
+    ruling out the easiest explanation (she was simply asleep).
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_008
+  page_id: ep_001_p01
+  story_function: fourth_data_layer_line_message
+  story_move: A fourth layer — a LINE message sent from her own account at 23:15, in her own phrasing but
+    with one detail wrong, agreeing to an extra 6 a.m. review she never chose to take on.
+  visual_proof: Phone screen insert — a LINE chat with her manager, her own name as sender, a sent bubble
+    reading "好，我早上六點前給你" (Sure, I'll have it to you before six), timestamp 23:15, one exclamation
+    mark she never uses.
+  information_delta: Reader gets the boundaries-topic texture as evidence, not lecture — an agreement made
+    in her own voice that she has no memory of making.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_009
+  page_id: ep_001_p01
+  story_function: spiral_timeline_assembly
+  story_move: The four data points get stacked into a single timeline on her notes app, annotations crowding
+    the margins, the file starting to revise itself in real time.
+  visual_proof: Distortion-CU — the panel fishbowls slightly around Zhiwei's eyes as she builds a timeline
+    grid, sticky-note-style annotations multiplying faster than she can read them.
+  information_delta: Reader watches the case-file method that solves other people's anomalies start to
+    consume the analyst instead.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_010
+  page_id: ep_001_p01
+  story_function: somatic_cost_registers
+  story_move: The cost lands physically — jaw, cramped hand, the promotion envelope still unopened in the
+    drawer behind her.
+  visual_proof: Insert on a tightened jaw and a hand cramped from gripping the phone too long, the drawer
+    with the sealed envelope visible at the panel's edge.
+  information_delta: Reader sees the spiral is not free — burnout and the unresolved promotion sit directly
+    behind the anomaly, without either being named in caption.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_011
+  page_id: ep_001_p01
+  story_function: self_applied_fraud_method
+  story_move: Zhiwei runs her own rider-fraud checklist on herself — same rigor, same distrust, now aimed
+    inward.
+  visual_proof: Split-composition panel — half her usual anomaly-review checklist on the monitor, half her
+    own handwritten timeline, the two formats visually rhyming.
+  information_delta: Reader understands explicitly that her professional method and her private panic run
+    on the identical machinery — the craft's central image.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_012
+  page_id: ep_001_p01
+  story_function: pressure_peak_convergence
+  story_move: External pressure crests in one compressed wide beat — the manager's 6 a.m. reminder pings,
+    the regular caseload counter ticks up, the office AC hums on.
+  visual_proof: Wide shot combining a LINE reminder notification, the still-climbing flag counter on her main
+    monitor, and the room's fluorescent hum rendered as visual static at the panel edges.
+  information_delta: Reader feels Zhiwei's full professional pressure crest at once, just before the page
+    turn.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_013
+  page_id: ep_001_p01
+  story_function: page_turn_held_stillness
+  story_move: Zhiwei freezes, the receipt still in hand, unable to move to the next data point — the file
+    has no verdict left standing.
+  visual_proof: Close on Zhiwei sitting rigid at her desk, the receipt held flat, her other hand hovering
+    over the keyboard without typing.
+  information_delta: Reader is left on the exact edge of the spiral, no resolution offered before the page
+    turn.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_014
+  page_id: ep_001_p01
+  story_function: page_turn_held_stillness
+  story_move: A held beat extending panel 13 — the office clock ticks past midnight, nothing moves.
+  visual_proof: Wide, mostly dark panel — the office clock reading past midnight, Zhiwei a small still shape
+    at her lit desk, the rest of the floor unlit.
+  information_delta: Reader registers real time passing with the case still fully open — the page-turn
+    promise's tension held to its edge.
+  beat_role: spiral_peak
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_015
+  page_id: ep_001_p02
+  story_function: vessel_entry_silent_witness
+  story_move: The vessel enters — a senior QA auditor near retirement who reads Zhiwei's stillness instead
+    of her screen, introducing the episode's only outside witness.
+  visual_proof: Jiang Zhongping crossing the office on his way out, stopping mid-step, his attention visibly
+    fixed on Zhiwei's posture rather than her monitor.
+  information_delta: Reader learns someone in the room is reading Zhiwei's body, not her work — the first
+    crack in her isolation.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_016
+  page_id: ep_001_p02
+  story_function: vessel_gesture_teaching
+  story_move: The vessel performs a small, wordless genre-native gesture — tapping his own EasyCard once
+    against the desk's reader-test unit and not checking the balance — modeling regulation without any
+    spoken lesson.
+  visual_proof: Close on Jiang's EasyCard tapping the test reader once, a soft confirmation beep, his hand
+    already withdrawing before the balance display finishes loading.
+  information_delta: Reader sees the vessel's method is entirely physical and habitual, never delivered as
+    a lecture — one check, not re-checked.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_017
+  page_id: ep_001_p02
+  story_function: body_settles_before_mind
+  story_move: Zhiwei's shoulders drop half a second before her conscious mind registers his presence, proving
+    the spiral was already losing its grip.
+  visual_proof: Zhiwei watching Jiang; her shoulders and breath ease a half-beat before any recognition
+    reaches her face.
+  information_delta: Reader gets the episode's thesis in image form — the body notices first, before the
+    mind or the screen catch up.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_018
+  page_id: ep_001_p02
+  story_function: vessel_ordinary_question
+  story_move: The vessel asks one plain, mundane question unrelated to the mystery, cutting through the
+    spiral sideways instead of engaging it directly.
+  visual_proof: Jiang pulling out the empty chair across from her desk, sitting, asking without ceremony.
+  information_delta: Reader hears the vessel deliberately not investigating the case — a practical, ordinary
+    counter-move.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_019
+  page_id: ep_001_p02
+  story_function: near_miss_case_file_answer
+  story_move: Zhiwei almost answers with timestamps and evidence instead of the truth, catching herself
+    mid-reflex.
+  visual_proof: Close on Zhiwei's mouth half-open on a fact ("23:47—"), then stopping herself before finishing
+    the sentence.
+  information_delta: Reader sees how deep the case-file reflex runs — even a kind question nearly gets
+    answered like a deposition.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_020
+  page_id: ep_001_p02
+  story_function: vessel_sets_evidence_face_down
+  story_move: Jiang notices the receipt still gripped in her hand, takes it once, reads it, and sets it
+    face-down on the desk — an action, not an explanation.
+  visual_proof: Jiang's hand turning the ibon receipt face-down on the desk, deliberate and unhurried, no
+    verdict offered about what it means.
+  information_delta: Reader watches the vessel model the turn physically — evidence set down, not resolved.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_021
+  page_id: ep_001_p02
+  story_function: recognition_turn_unrevised_page
+  story_move: Zhiwei looks at the face-down receipt and, for the first time all night, does not reach to
+    flip it back over.
+  visual_proof: Close on Zhiwei's hand hovering above the face-down receipt, then withdrawing without turning
+    it over.
+  information_delta: Reader witnesses the episode's actual turn — not a solved mystery, a refused compulsion.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_022
+  page_id: ep_001_p02
+  story_function: silence_the_file_stays_open
+  story_move: The case-file timeline stays open and unedited on her monitor for the first time all night —
+    the margin annotations stop multiplying.
+  visual_proof: Wide shot of Zhiwei's monitor, the timeline notes app visible but untouched, cursor blinking
+    on an unfinished line.
+  information_delta: Reader sees the spiral has stopped, without being told it has stopped.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_023
+  page_id: ep_001_p02
+  story_function: vessel_exit_echo_gesture
+  story_move: Jiang stands to leave, tapping the office door's card reader once on his way out without
+    looking back to confirm it registered — the same single-tap gesture from panel 16, echoed.
+  visual_proof: Jiang's EasyCard tapping the door reader once, his back already turned, walking away before
+    the light finishes blinking green.
+  information_delta: Reader sees the match-cut motif (one tap, no re-check) repeated as the vessel's exit
+    signature.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_024
+  page_id: ep_001_p02
+  story_function: world_grants_permission
+  story_move: The external world responds slightly — the flag counter does not need to reach zero tonight;
+    Zhiwei moves the remaining cases to tomorrow's queue instead of finishing them.
+  visual_proof: Zhiwei's hand clicking "移至明日待辦" (move to tomorrow's queue) on the dashboard, the flag
+    counter still showing a nonzero number, unresolved and permitted to stay that way.
+  information_delta: Reader learns the world's response is proportionate — permission, not a clean finish.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_025
+  page_id: ep_001_p02
+  story_function: update_attempt_receipt_folded_unread
+  story_move: Zhiwei folds the still-face-down receipt once and tucks it into her notebook without transcribing
+    it into the case file — a small deliberate act of leaving one thing unrevised.
+  visual_proof: Close on Zhiwei's hands folding the ibon receipt in half, sliding it into her notebook's
+    inside pocket, not into the annotated timeline.
+  information_delta: Reader sees the first concrete update attempt — not solving the anomaly, just refusing
+    to feed it.
+  beat_role: pendulation_return
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_026
+  page_id: ep_001_p02
+  story_function: boundary_action_message_rescheduled
+  story_move: Zhiwei sends one message back to her manager — not agreeing to more, a boundary shown as an
+    action, pushing the 6 a.m. review to 9 a.m.
+  visual_proof: Phone screen insert — Zhiwei typing and sending "早上九點給你，不是六點" (I'll have it to you at
+    nine, not six) into the same LINE thread from panel 8.
+  information_delta: Reader gets the boundaries-topic payoff as a concrete, small, contestable action, not
+    a stated lesson.
+  beat_role: pendulation_return
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_027
+  page_id: ep_001_p02
+  story_function: closing_return_no_mastery
+  story_move: The episode closes on Zhiwei walking to the MRT platform alone at true late night, the missing
+    hour still unexplained, choosing not to reopen the case tonight.
+  visual_proof: Wide shot — Zhiwei at an empty MRT platform, EasyCard already in hand for the tap, the folded
+    receipt a small shape inside her bag, unlooked-at.
+  information_delta: Reader is shown directly that this is not a fix — the anomaly remains open, and the
+    only resolution is one night not spent inside the file.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_028
+  page_id: ep_001_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's anomaly.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__han_yushen__zh_TW__overthinking__the_missing_hour/ep_001.yaml
+notes: 'zh_TW smoke cell of docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/ (04_WRITER_LANE_ZH_TW_PROMPT.md).
+  Genre resolves psychological_thriller -> mystery per config/manga/modern_reader_story_doctrine.yaml aliases
+  and config/manga/canonical_genre_list.yaml. Catalyst used: doctrine genres.mystery.catalysts[2]
+  (id: ibon_ticket_stub_alibi), adapted with original zh_TW characters/setting (Ningxia Night Market, a
+  fictional delivery-platform employer "騎跡"), not a translation of the ja_JP or en_US cognitive_clarity
+  pilots. Strategy bank reference: config/source_of_truth/manga_story_strategies/psychological_thriller_strategies.yaml
+  strategy_01 ("The Case File That Keeps Revising Itself", topic=overthinking) informed the beat shape;
+  panel content below is original, not copied from that strategy''s template beats. Vessel per
+  config/manga/main_character_interaction_grammar.yaml (mystery: witness_suspect_or_authority_pressure) and
+  config/manga/manga_mode_vessels.yaml psychological_thriller.teacher (vessel: "the detective who reads
+  bodies" -> zh_TW "讀懂身體、而非話語的稽核員"). KNOWN GAP (confirmed live in this repo, not guessed): neither
+  scripts/ci/check_manga_arc_storyboard.py nor schemas/manga/arc_storyboard_plan.schema.json nor
+  docs/agent_prompt_packs/manga_arc_storyboard_planner.md exist in this checkout, despite being cited as
+  mandatory authorities by both the master dispatch prompt and this ja_JP-precedent file''s own back-fill
+  notes -- confirmed via repo-wide search before writing this file. This storyboard mirrors the shape and
+  field set of the existing, merged ja_JP precedent
+  (artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_001.arc_storyboard.yaml)
+  as the closest live convention, but could not be run through the cited gate script because it is absent
+  from the repo; flagged as a blocker in this cell''s CLOSEOUT rather than silently invented or skipped.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped zh_TW script''s story_move
+  per panel; does not claim system_working or proven_at_bar.'

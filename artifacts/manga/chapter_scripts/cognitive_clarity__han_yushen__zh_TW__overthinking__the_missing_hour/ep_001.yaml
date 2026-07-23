@@ -1,0 +1,333 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__han_yushen__zh_TW__overthinking__the_missing_hour
+chapter_id: ep_001
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__han_yushen__zh_TW__overthinking__the_missing_hour/ep_001.arc_storyboard.yaml
+title: "不在場證明——第一話：那張發票"
+title_en_gloss: "Alibi — Episode 1: The Receipt"
+manga_author: 韓聿深
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- ja_JP
+- en_US
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and
+    City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over
+    clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance
+    boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: ibon_ticket_stub_alibi
+    logline: An ibon receipt proves risk-control analyst Shen Zhiwei was somewhere she swore she wasn't, and
+      the only witnesses are her own EasyCard transit log and a webtoon-app reading history timestamping a
+      chapter she has no memory of finishing.
+    ordinary_world_objects:
+    - ibon_ticket_stub
+    - webtoon_reading_log
+    - receipt_timestamp
+    - easycard_tap
+    genre_transmutation: A convenience-store printed receipt becomes the mystery-thriller's central evidence;
+      a colleague who reads posture instead of case files becomes the story's only witness, proving Zhiwei's
+      body already trusted the night before her method would let her.
+    avoid:
+    - magic_database_answer
+    - generic_detective_room
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary zh_TW reader-world entrypoint. Market=zh_TW;
+    audience=gen_z (best fit of the doctrine's two audiences for a 33-year-old analyst protagonist — gen_alpha's
+    school/game touchpoints do not fit; gen_z's gig-economy/economic-pressure/burnout/self-performance texture
+    does, matching the same reasoning used for the ja_JP pilot's 38-year-old analyst). Use catalyst
+    'ibon_ticket_stub_alibi' verbatim from config/manga/modern_reader_story_doctrine.yaml genres.mystery,
+    adapted with an original zh_TW protagonist, employer, and Taipei setting (Ningxia Night Market) — not a
+    translation of the ja_JP or en_US cognitive_clarity pilots. Register is atmospheric, literary TW voice per
+    docs/CJK_CATALOG_PLAN.md §2 and the doctrine's zh_TW localization_guardrails — explicitly not a zh_CN
+    super-app-metro voice and not a ja_JP conbini/train-only voice; EasyCard/MRT/scooter mobility, 7-Eleven
+    ibon + City Cafe, and Ningxia Night Market carry the market-localized touchpoint requirement.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體、而非話語的稽核員
+main_characters:
+- id: zhiwei
+  name: 沈知微
+  name_romaji: Shen Zhiwei
+  age: 33
+  role: 主人公・外送平台風控分析師（把自己不記得的一夜，活成一份待審核的異常案件）
+  visual_anchor: 及肩短髮夾在耳後、深灰襯衫袖口捲起、腕上一支從不離身的舊電子錶
+- id: jiangzhongping
+  name: 江仲平
+  name_romaji: Jiang Zhongping
+  age: 58
+  role: 器的角色・即將退休的資深品保稽核員，讀身體，不讀報表；品牌教師之名從不出現，僅為metadata（teacher_id）
+  visual_anchor: 灰白平頭、洗到發白的格紋襯衫、悠遊卡永遠別在皮夾外側同一個位置
+scene_palette:
+  primary: 深夜辦公室的冷白日光燈與螢幕藍光，落地窗外是濕漉漉的台北夜色
+  secondary: 江仲平在場時，畫面局部滲入City Café的暖黃色調——更新拍點的溫暖點綴
+  accent: 那張ibon感熱紙發票在燈光下的反光——貫穿全篇反覆出現的單一視覺線索
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: 高樓層的開放式辦公室，接近全空。落地窗外是台北濕漉漉的夜色與霓虹倒影。只剩一台螢幕還亮著——外送騎士的異常派單儀表板，一列列悠遊卡刷卡紀錄與GPS路徑不吻合的紅色標記。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 建立分析師的世界與能力
+  - panel_id: ep001_002
+    scene: 特寫她桌上的工具：分色標籤的案件夾、一份用工整字跡註記過的異常報表、桌角一台公司配發的悠遊卡感應測試機。精確，是她的鎧甲。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 心之前，先看見工具
+  - panel_id: ep001_003
+    scene: 沈知微俐落地把一件真實的詐欺案標上「結案」，神情篤定。鏡頭帶到她半開的抽屜——一封公司信封還沒拆，上頭印著她的新職稱。
+    beat_type: micro
+    intent: 能力真實存在；升遷這件事被留在物件裡，不被說出口
+  - panel_id: ep001_004
+    scene: 她伸手到包包裡找鑰匙，掏出一張自己不認得的感熱紙收據——7-ELEVEN的ibon列印小票，店號顯示在寧夏夜市附近，時間戳記是昨晚23:47。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 行事曆很乾淨。她記得昨晚每一分鐘。
+      en_US: The calendar is clean. She remembers every minute of last night — until an ibon kiosk receipt
+        turns into evidence she cannot explain.
+  - panel_id: ep001_005
+    scene: 沈知微的臉，反應快得驚人——嘴角已經開始說出一個解釋，收據還鬆鬆地捏在指間，還沒被當成證據看待。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhiwei_internal
+      text_by_locale:
+        zh_TW: 一定是同事的收據，掉進我包包了。
+        en_US: Must be a coworker's receipt. It fell into my bag.
+      intensity: whisper
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_left
+  - panel_id: ep001_006
+    scene: 手機畫面特寫——她自己的悠遊卡通行紀錄App顯示，昨晚23:31，捷運出站閘門在寧夏夜市附近那一站，比她一向堅稱回家的那站多過了一站。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 悠遊卡不會說謊。她一向這樣告訴自己底下的每個外送員。
+      en_US: An EasyCard tap log doesn't lie. That's the evidence she recites to every rider under her
+        review — and now it is a clue pointing straight back at her.
+  - panel_id: ep001_007
+    scene: 手機畫面特寫——她每晚睡前追的漫畫App閱讀紀錄，同一夜23:52標著「已讀」，捲動位置停在章節中段，證明那時她清醒、手上有手機、人在某處。
+    beat_type: micro
+    intent: 排除「她只是睡著了」這個最容易的解釋
+  - panel_id: ep001_008
+    scene: 手機畫面特寫——與主管的LINE對話串，寄件人是她自己的帳號，23:15送出一句「好，我早上六點前給你！」，用字是她的口氣，卻多了一個她從不使用的驚嘆號。
+    beat_type: micro
+    intent: 界線議題以證據、而非說教的方式進場
+  - panel_id: ep001_009
+    scene: 扭曲特寫——畫面在沈知微眼周微微魚眼變形。她把四筆資料釘進同一份時間軸，備註筆記像案卷一樣自己不斷改寫、增生。
+    beat_type: micro
+    intent: 案卷正在自我改寫
+  - panel_id: ep001_010
+    scene: 特寫緊咬的下顎、因久握手機而發僵的手，畫面邊緣可見那封還沒拆封的升遷信封。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 代價落在身體上——過勞與未拆封的升遷，兩者都沒被說出口
+  - panel_id: ep001_011
+    scene: 分割構圖——螢幕上是她平常審查外送員異常時用的檢核清單，桌面上是她親手畫的個人時間軸，兩種格式在畫面裡彼此押韻。
+    beat_type: micro
+    intent: 職業方法與私人恐慌，共用同一套機器
+  - panel_id: ep001_012
+    scene: 寬鏡頭——LINE提醒再度跳出、儀表板上待審異常件數持續上升、辦公室空調運轉的嗡嗡聲以視覺雜訊的形式滲進畫面邊緣，三股壓力同時到頂。
+    beat_type: micro
+    intent: 外部壓力在翻頁前一次到頂
+  - panel_id: ep001_013
+    scene: 沈知微僵在座位上，收據仍平攤在手裡，另一隻手懸在鍵盤上方，打不下下一個字。案卷已經沒有任何一個結論站得住。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 每一次重讀，都比上一次更黑。
+      en_US: Every re-reading comes back darker than the last.
+  - panel_id: ep001_014
+    scene: 大半黑暗的辦公室寬鏡頭，牆上的鐘剛過午夜，沈知微只是燈下一個靜止的小小人影，樓層其他地方全都熄了燈。
+    beat_type: micro
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      zh_TW: 案子還開著。今晚，沒有人來結案。
+      en_US: The file is still open. Tonight, no one is coming to close it.
+- page_id: ep_001_p02
+  panels:
+  - panel_id: ep001_015
+    scene: 江仲平經過她的座位準備下班，腳步在半途停下——他的注意力落在沈知微僵住的姿勢上，不是她的螢幕。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 器——教師之名從不出現，只有存在
+  - panel_id: ep001_016
+    scene: 特寫江仲平把自己的悠遊卡在桌角的測試感應機上輕輕一嗶，指尖已經收回，餘額顯示都還沒跑出來就轉身。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 一次確認，不重複確認
+  - panel_id: ep001_017
+    scene: 沈知微看著他，肩膀在意識反應過來的半秒之前，先自己鬆了下來。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 先知道的是肩膀，不是腦袋。
+      en_US: The shoulders knew first, not the mind.
+  - panel_id: ep001_018
+    scene: 江仲平拉開她桌前那張空椅子坐下，開口問得極其平常，跟案子毫無關係。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: jiangzhongping
+      text_by_locale:
+        zh_TW: 吃飯了沒？
+        en_US: Have you eaten?
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: left
+  - panel_id: ep001_019
+    scene: 沈知微下意識地想用時間戳記回答——嘴巴已經開始說「二十三點四十七——」——話說到一半，自己停住了。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhiwei
+      text_by_locale:
+        zh_TW: 二十三點四十七——沒有，我還沒吃。
+        en_US: Twenty-three forty-seven — no. I haven't eaten yet.
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_020
+    scene: 江仲平注意到她手裡還捏著那張收據，伸手拿過去看了一眼，接著把它翻面朝下放在桌上，動作平常，沒有給出任何結論。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: jiangzhongping
+      text_by_locale:
+        zh_TW: 有些事，不用今晚查完。
+        en_US: Some things don't need to be solved tonight.
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: left
+  - panel_id: ep001_021
+    scene: 特寫沈知微的手懸在那張朝下的收據上方，猶豫了一下，最後收了回來，沒有把它翻回正面。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 真正的轉折——不是案子被解開，是強迫性動作被拒絕了一次
+  - panel_id: ep001_022
+    scene: 螢幕寬鏡頭，時間軸筆記App還開著，但整晚第一次沒有再增加任何一行註記，游標停在一句沒寫完的句子後面閃爍。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 螺旋停下來了，畫面沒有明說
+  - panel_id: ep001_023
+    scene: 江仲平起身準備離開，走到門口，悠遊卡在門禁感應器上輕輕一嗶，沒有回頭確認燈號有沒有變綠就走遠了——與第16格同一個「嗶一次、不回頭」的動作呼應。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 動作母題的重複，而非解釋
+  - panel_id: ep001_024
+    scene: 沈知微的手點下儀表板上的「移至明日待辦」，異常件數字仍然不是零，但被允許留到明天。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 不是結案。只是被允許留到明天。
+      en_US: Not closed. Only permitted to wait until tomorrow.
+  - panel_id: ep001_025
+    scene: 特寫她的手把那張仍舊朝下的收據對折一次，收進筆記本內側的口袋，而不是抄進時間軸案卷裡。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 更新的第一次嘗試——不是解開，只是不再餵養
+  - panel_id: ep001_026
+    scene: 手機畫面特寫——她在同一則LINE對話串裡打字送出：「早上九點給你，不是六點。」
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhiwei
+      text_by_locale:
+        zh_TW: 早上九點給你，不是六點。
+        en_US: I'll have it to you at nine, not six.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep001_027
+    scene: 寬鏡頭收尾——沈知微獨自站在深夜近乎空無一人的捷運月台，悠遊卡已經拿在手上準備刷卡，那張對折的收據是包包裡一個沒有再被看一眼的小小形狀。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 那一小時還是空的。但今晚，我沒有把它填滿。
+      en_US: That hour is still empty. But tonight, I didn't fill it in.
+  - panel_id: ep001_028
+    scene: 安靜色面上的排版式結尾卡。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 第一話・完——不在場證明
+      en_US: End of Episode 1 — Alibi
+notes:
+  pacing: 二十八格，兩頁。沉默承載轉折，台詞只在拍點上出現。表面是完整的心理驚悚案件；話題（過度思考、冒牌者症候群、過勞、界線）只作為身體的天氣存在，從不被講成道理。
+  bubble_style_register: 主人公台詞：round_normal，內心獨白用cloud_thought/whisper。江仲平台詞：round_normal，平常、實際，從不說教。
+  sfx_policy: 最小限度。悠遊卡感應「嗶」聲僅在第16、23格以動作描述帶出，不另立SFX面板。
+  language: zh_TW為權威語言，原創寫作，非英文草稿的翻譯。en_US為操作端對照用途。
+  translation_pipeline_handoff: en_US對照文字供審閱使用；ja_JP／zh_CN為未來獨立在地化工作，此檔案不預先填入。
+  authoring_provenance: zh_TW smoke cell — brand-new NEW_SERIES cell per ASSIGNMENT_MATRIX.tsv (zh_TW /
+    cognitive_clarity 一列，先前無任何已存在的episode檔案)。人物、設定（外送平台風控分析師、寧夏夜市、ibon收據）皆為原創，非
+    ja_JP或en_US版本的翻譯或改寫。
+craft_notes: 'VESSEL: 讀懂身體、而非話語的稽核員 — 身體先於嘴巴招供。config/manga/manga_mode_vessels.yaml
+  psychological_thriller.teacher: vessel="the detective who reads bodies"。品牌教師之名從不在故事中出現
+  （teacher_id=''brand_teacher_unresolved'' 僅為metadata）。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md — 案卷不斷自我改寫的核心意象、代價須在第三卷前顯現的規則、絕不將威脅超自然化的鐵律，皆已對照遵守。
+
+  GENRE-FIRST (zh_TW): 表面是完整的心理驚悚案件（一張對不上的收據、一段消失的一小時）。話題（overthinking／imposter_syndrome／burnout／boundaries）只以物件與姿勢作為身體的天氣呈現，從未被講成一句「我發現自己在鑽牛角尖」式的自助語言（見
+  config/source_of_truth/manga_story_strategies/psychological_thriller_strategies.yaml anti_pattern_rules）。
+
+  MARKET REGISTER: zh_TW atmospheric/literary register per docs/CJK_CATALOG_PLAN.md §2 與
+  config/manga/modern_reader_story_doctrine.yaml zh_TW localization_guardrails — 刻意避開ja_JP的超商／電車預設，改用悠遊卡／捷運／機車、7-ELEVEN
+  ibon與City Café、寧夏夜市；亦避開zh_CN的地鐵／超級App敘事框架。
+
+  ARC: 傷（把自己的一夜活成待審案件、用職業方法審問自己）→轉機（器以「吃飯了沒」與一次翻面收據的動作，示範不必今晚查完）→更新（收據對折收好、案子留到明天、界線訊息傳出）。
+
+  NATIVE: 原創zh_TW寫作，非英文草稿的翻譯，亦非ja_JP或en_US版本的改寫。
+
+  ACCEPTANCE: native-authored + gate-floor (check_manga_story_authored.py) — NOT claimed bestseller, NOT
+  claimed proven_at_bar (M6 blind-judge bar unmet).'

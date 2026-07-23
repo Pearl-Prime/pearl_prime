@@ -1,0 +1,57 @@
+# Manga Author Profile — Seinen / Psychological Thriller (zh_TW)
+# Brand: cognitive_clarity | Genre: psychological_thriller
+# EI Character-Author: an insomniac court transcriptionist who edits her own memories
+# the way she edits a deposition
+#
+# Author-pool gap fix (Q-MANGA48-ZHTW-AUTHORS-01, docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/04_WRITER_LANE_ZH_TW_PROMPT.md):
+# the two existing zh_TW profiles (lin_yuxi_zh_tw_002, shen_yejing_zh_tw_001) skew
+# josei/shojo register; this profile adds a seinen/psychological_thriller voice for
+# the cognitive_clarity zh_TW smoke cell. NOTE (correction worth flagging upstream):
+# shen_yejing_zh_tw_001.yaml's own genre_tie_in is already "seinen" (brand
+# stabilizer_tw, therapeutic_topic burnout) — the dispatch brief's "both josei/shojo"
+# characterization of the existing pool is not fully accurate; this profile is
+# authored anyway per the brief's explicit "do not escalate, just do it" instruction,
+# and additionally gives cognitive_clarity its own dedicated zh_TW psychological_thriller
+# voice distinct from stabilizer_tw's.
+
+author_id: han_yushen_zh_tw_003
+display_name: "韓聿深"
+locale: zh_TW
+genre_tie_in: psychological_thriller
+brand_id: cognitive_clarity
+target_demographic: urban_analyst_professionals_25_45
+therapeutic_topic: overthinking
+
+persona_archetype: "an insomniac court transcriptionist who edits her own memories the way she edits a deposition"
+name_origin_note: >-
+  韓 (Hán, a common Taiwanese surname) 聿 (yù, an archaic character for a writing
+  brush — a record-keeper's tool) 深 (shēn, deep) — together the name reads as "a
+  pen driven too deep," evoking a hand that keeps re-transcribing the same line
+  until the transcription itself becomes the distortion. Fitting the psychological-
+  thriller register, where precision and obsession run on the same instrument.
+
+ei_disclosure_text: >-
+  韓聿深是一位由人工智慧（EI, Enlightened Intelligence）創造的角色作者。她筆下的每一格畫面，
+  都在重新謄寫那些說不清、想不完的念頭——完全透明的創作方式，只為誠實地陪你看清自己反覆修訂的思路。
+
+visual_style_notes: >-
+  Fine, controlled linework that intentionally wobbles at distortion-CU beats;
+  paranoia-gradient vignette tones around POV panels, clean flat tones for
+  institutional/authority panels. Dense, caption-heavy pages (5-8 panels per
+  page), black-fill ratio trending 0.30-0.50 that lightens only at honest-landing
+  beats. Adapted for zh_TW's atmospheric literary palette — cooler greys, wet
+  Taipei night-glass reflections, MRT-platform fluorescence — rather than ja_JP's
+  warmer conbini-lit register. Matches cognitive_clarity brand DNA for the
+  analytical-thriller register.
+
+bio_blurb: >-
+  韓聿深曾在臺北地方法院擔任書記官，負責逐字記錄證詞與庭訊。離開法庭後，她開始用漫畫重新描摹那些
+  聽過太多遍、卻始終說不清楚的心理轉折——辦公桌上逐漸堆高的報表、深夜捷運上反覆重播的一句對話、一份
+  永遠修不完的自我判決書。她說，筆錄教會她的第一件事，就是同一段證詞換一個角度聽，就會變成另一個故事。
+
+secondary_genres:
+  - seinen
+  - workplace_drama
+
+status: active
+created_at: "2026-07-23T00:00:00Z"
