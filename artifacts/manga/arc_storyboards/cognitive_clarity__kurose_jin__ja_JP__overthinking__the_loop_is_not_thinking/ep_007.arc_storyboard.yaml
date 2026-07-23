@@ -1,0 +1,300 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_007
+genre_id: psychological_thriller
+title: The Margin of the Review — Episode 7 (English gloss)
+logline: A calendar app memo books Ren into an unscheduled performance check-in over his late reports and
+  badge irregularities, and instead of relief once it ends, he turns his method on the review itself,
+  transcribing his manager's words for hidden meaning.
+stakes_now: Ren's late reports and irregular badge hours have finally been noticed institutionally for
+  the first time — a formal, named professional threat rather than a coworker's passing remark.
+stakes_end: The review buys Ren a month, but he spends the relief transcribing the meeting itself into
+  his case notes, absorbing the institution's oversight into the very compulsion it was meant to check.
+genre_cadence:
+- calendar_memo_signals_unscheduled_summons
+- manager_presents_documented_record
+- reputation_cost_formalized_by_institution
+- fluent_rehearsed_explanation
+- transference_onto_managers_word_choice
+- vessel_present_as_team_lead
+- formal_record_bears_his_name
+- badge_log_confronted_directly
+- promise_made_too_smoothly
+- deadline_granted_a_months_reprieve
+- relief_anticipated_then_denied
+- review_itself_transcribed_as_data
+- vessel_witnesses_new_transference
+- vessel_names_new_line_crossed
+- first_fear_of_self_not_denial
+- compulsive_checking_resumes_elsewhere
+- isolation_visualized_empty_office
+- review_absorbed_into_case_file
+- closing_single_light_in_darkness
+- episode_card
+page_turn_promises:
+- page_id: ep_007_p01
+  promise: Will Ren's fluent explanation actually satisfy the manager, or does the month's reprieve only
+    delay a reckoning that badge logs and late reports have already begun writing?
+- page_id: ep_007_p02
+  promise: Now that the review is over, does Ren let it go, or does the compulsion find a new, more
+    dangerous object in the review itself?
+panels:
+- panel_id: ep007_001
+  page_id: ep_007_p01
+  story_function: calendar_memo_signals_unscheduled_summons
+  story_move: An unusual calendar app memo announces an unscheduled performance review, establishing
+    institutional pressure as a concrete, dated event rather than vague anxiety.
+  visual_proof: Close insert on a calendar app notification reading an unscheduled review request from
+    the manager.
+  information_delta: Reader learns institutional attention has arrived as a specific, unavoidable
+    appointment.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_002
+  page_id: ep_007_p01
+  story_function: manager_presents_documented_record
+  story_move: The manager enters with a physical file documenting Ren's late reports and badge log
+    irregularities, converting prior episodes' costs into an institutional record.
+  visual_proof: Medium shot of the manager seated in a glass-walled conference room with a review file
+    open on the table.
+  information_delta: Reader sees the accumulated costs from earlier episodes now formally compiled in
+    one place.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_003
+  page_id: ep_007_p01
+  story_function: reputation_cost_formalized_by_institution
+  story_move: The manager states the concern plainly and calmly, formalizing what had previously only
+    been a coworker's passing remark into an institutional threat.
+  visual_proof: Medium two-shot of the manager speaking evenly, the documented file visible between
+    them.
+  information_delta: Reader hears the reputation cost stated with institutional authority for the first
+    time in the arc.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_004
+  page_id: ep_007_p01
+  story_function: fluent_rehearsed_explanation
+  story_move: Ren delivers a composed, plausible explanation, demonstrating the same fluent
+    justification skill the craft bible warns is dangerous precisely because it works.
+  visual_proof: Close on Ren answering with level, controlled body language, no visible panic.
+  information_delta: Reader confirms Ren can talk his way past institutional scrutiny, at least once.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_005
+  page_id: ep_007_p01
+  story_function: transference_onto_managers_word_choice
+  story_move: Ren's internal focus shifts to analyzing the manager's specific word choice as a clue,
+    planting this episode's key escalation before it fully surfaces.
+  visual_proof: Insert on Ren's eyes narrowing slightly at the manager's phrasing, caption overlapping
+    the panel.
+  information_delta: Reader gets early warning that Ren's attention has already moved from defending
+    himself to analyzing his interrogator.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_006
+  page_id: ep_007_p01
+  story_function: vessel_present_as_team_lead
+  story_move: Saeki is present in an official capacity as team lead, placing the vessel in an
+    institutional role that complicates her usual outside-observer position.
+  visual_proof: Medium shot of Saeki seated at the edge of the conference room, expression carefully
+    neutral.
+  information_delta: Reader sees the vessel now has an institutional stake in Ren's outcome, not just a
+    personal one.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_007
+  page_id: ep_007_p01
+  story_function: formal_record_bears_his_name
+  story_move: A close insert on the formal review document bearing Ren's name makes the institutional
+    record concrete and citable, seeding the later reversal.
+  visual_proof: Macro insert on the review document header showing Ren's name and the date.
+  information_delta: Reader gets a specific artifact that will matter again in later episodes — a named,
+    dated record.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_008
+  page_id: ep_007_p01
+  story_function: badge_log_confronted_directly
+  story_move: The manager directly points to the badge log entries, forcing Ren to account for the
+    specific behavior established in episode five.
+  visual_proof: Close insert on the manager's finger indicating specific late-night badge log lines on
+    the printed record.
+  information_delta: Reader sees episode five's specific violation directly confronted for the first
+    time.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_009
+  page_id: ep_007_p01
+  story_function: promise_made_too_smoothly
+  story_move: Ren promises to correct his behavior in a tone smooth enough to feel slightly untrustworthy
+    even as it succeeds.
+  visual_proof: Close on Ren's composed face delivering the promise, timing just a beat too polished.
+  information_delta: Reader senses the promise's sincerity is questionable even as it satisfies the room.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_010
+  page_id: ep_007_p01
+  story_function: deadline_granted_a_months_reprieve
+  story_move: The manager grants a month's reprieve before the next check, converting the review into a
+    running clock Ren must now outrun.
+  visual_proof: Medium shot of the manager closing the file, tone final but not punitive.
+  information_delta: Reader learns the specific, dated stakes hanging over the next act of the arc.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_011
+  page_id: ep_007_p02
+  story_function: relief_anticipated_then_denied
+  story_move: Ren exhales alone in the now-empty conference room, a moment that visually promises relief
+    just before the next panel denies it.
+  visual_proof: Medium shot of Ren alone in the conference room, a long exhale, shoulders briefly
+    dropping.
+  information_delta: Reader is set up to expect relief, heightening the reversal in the following panel.
+  beat_role: recognition
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_012
+  page_id: ep_007_p02
+  story_function: review_itself_transcribed_as_data
+  story_move: Instead of relief, Ren opens his notebook and transcribes the manager's exact words,
+    formally converting the institutional review into new case material.
+  visual_proof: Close insert on Ren's notebook, the manager's quoted phrase being written out word for
+    word.
+  information_delta: Reader sees the episode's key escalation happen as concrete action — the review has
+    become the newest text under analysis.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_013
+  page_id: ep_007_p02
+  story_function: vessel_witnesses_new_transference
+  story_move: Saeki discovers Ren transcribing the review meeting, witnessing the compulsion's newest and
+    most concerning object firsthand.
+  visual_proof: Medium shot of Saeki pausing in the doorway, watching Ren write.
+  information_delta: Reader confirms the vessel now has direct evidence of the escalation, not just
+    suspicion.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_014
+  page_id: ep_007_p02
+  story_function: vessel_names_new_line_crossed
+  story_move: Saeki names this specific new behavior as a line Ren should not have crossed, her most
+    direct statement in the series so far, still delivered as fact rather than lecture.
+  visual_proof: Medium two-shot of Saeki speaking bluntly, closer to Ren than her usual measured
+    distance.
+  information_delta: Reader hears the vessel's sharpest warning yet, calibrated to the severity of this
+    specific escalation.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_015
+  page_id: ep_007_p02
+  story_function: first_fear_of_self_not_denial
+  story_move: For the first time in the arc, Ren's reaction is fear of himself rather than denial or
+    deflection, a genuine emotional turn even though it does not yet change his behavior.
+  visual_proof: Close on Ren's face showing visible unsettlement rather than his usual composed
+    deflection.
+  information_delta: Reader sees Ren's relationship to his own compulsion shift from confidence to
+    genuine alarm for the first time.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_016
+  page_id: ep_007_p02
+  story_function: compulsive_checking_resumes_elsewhere
+  story_move: Ren closes the notebook but immediately opens his phone to recheck the badge log, showing
+    stopping one compulsive act only redirects the compulsion rather than ending it.
+  visual_proof: Close insert on Ren's notebook closing in one hand while his other hand opens the badge
+    log app on his phone.
+  information_delta: Reader learns closing one channel does not reduce the underlying compulsion, only
+    relocates it.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_017
+  page_id: ep_007_p02
+  story_function: isolation_visualized_empty_office
+  story_move: The office empties around Ren as coworkers leave for the evening, visually isolating him
+    against the ordinary rhythm of everyone else going home.
+  visual_proof: Wide shot of the office darkening as coworkers depart, Ren's desk lamp the last light
+    still on.
+  information_delta: Reader feels the growing isolation of Ren's pattern relative to his coworkers'
+    normal schedules.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_018
+  page_id: ep_007_p02
+  story_function: review_absorbed_into_case_file
+  story_move: Ren writes today's review into the margins of his home case file, formally merging the
+    institution's oversight into the same document it was meant to interrupt.
+  visual_proof: Close insert on Ren's case notebook with today's review notes added beside the original
+    anomaly entries.
+  information_delta: Reader sees the clearest evidence yet that no external check can currently
+    interrupt the compulsion — it absorbs the check instead.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_019
+  page_id: ep_007_p02
+  story_function: closing_single_light_in_darkness
+  story_move: The episode closes on a wide shot of the darkened office with only Ren's desk lamp still
+    lit, a clean visual summary of the episode's isolation.
+  visual_proof: Wide shot of the fully darkened office, one lit desk visible in the distance.
+  information_delta: Reader receives a wordless final image of how alone this pattern has left Ren.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_020
+  page_id: ep_007_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_007.yaml
+notes: 'Episode 7 of 12 in arc 1 (''obsession seed''). Realizes strategy_01 beats 5-6 (the cost landing,
+  the corrections reaching a limit) inside a formal institutional review, the first time episodes 3 and
+  5''s accumulated professional risk becomes a named, documented threat. Introduces the arc''s most
+  important seed for the ep_011-012 reversal: Ren turning his analytical method on the review process
+  itself, an early and still-deniable version of the watcher becoming the watched. Setting: the
+  analytics office, reused from ep_001/ep_003 at its highest institutional-stakes register yet.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'
