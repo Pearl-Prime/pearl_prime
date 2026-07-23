@@ -1,0 +1,566 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_012
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_012.arc_storyboard.yaml
+title: "静寂のフリースロー　第12話「二つの刻限」"
+title_en_gloss: "Nine Sounds, One Ball — Episode 12: Two Deadlines"
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: 力を抜かせるコーチ
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+    - train_platform
+    - commuter_car
+    - conbini_receipt
+    - bento_shelf
+    - club_room
+    - shoe_locker
+    - line_chat
+    - vending_machine
+    - manga_app
+  market_guardrails:
+    - avoid_tourist_japan
+    - avoid_samurai_default_for_modern_scenes
+    - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+    - phone_as_social_pressure
+    - group_chat_status
+    - creator_or_streaming_identity
+    - gig_or_work_pressure
+    - transit_between_roles
+    - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.
+  catalyst:
+    id: the_bracket_board_reveal_and_the_probation_email
+    logline: The tournament bracket board is updated to reveal Shinonome's next opponent -- the undefeated defending champions, a team even Endou goes quiet looking at -- on the same evening a calendar notification confirms Hayato's probation review date at work, and both boards are now counting down at once.
+    ordinary_world_objects:
+      - tournament_bracket_board
+      - calendar_notification
+      - single_basketball
+      - empty_gym
+    genre_transmutation: A tournament bracket board and a work calendar become twin countdowns colliding in one evening; the empty gym where Hayato bounces one ball alone becomes the image the arc ends on -- not a resolution, but a chosen stillness before the harder season ahead.
+    avoid:
+      - instant_cure
+      - influencer_wellness_lecture
+      - buzzer_beater_as_the_turn
+      - win_equals_healed
+      - trophy_as_proof_of_growth
+  quality_rubric:
+    great_story_requires:
+      - high_concept_collision
+      - concrete_reader_world_anchor
+      - genre_engine_not_replaced_by_trend
+      - protagonist_desire_visible_in_scene
+      - social_or_system_pressure
+      - reversal_or_discovery_by_page_two
+      - market_localized_touchpoint
+      - no_generic_therapy_summary
+    flat_story_failure_modes:
+      - classic_genre_without_modern_entrypoint
+      - modern_object_as_name_drop_only
+      - protagonist_waits_for_lesson
+      - no_personal_stakes_before_lore
+      - no_social_cost
+      - no_specific_place_or_object
+      - genre_strategy_hidden_in_metadata_only
+  craft_directive: "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_bracket_board_reveal_and_the_probation_email'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+
+main_characters:
+  - id: hayato
+    name: 神崎隼人
+    name_romaji: Kanzaki Hayato
+    age: 23
+    role: 主人公。東雲商事バスケットボール部・新入社員
+    visual_anchor: 半分だけ出た仕事用シャツの裾、詰まった時に指の関節をペンで叩く癖、机の引き出しの「念のため」の古いスニーカー
+  - id: kuroda
+    name: 黒田
+    age: 60代
+    role: 器の存在――会社の設備管理員。ブランド教師の名は決して使わない
+    visual_anchor: 無言でボールラックを並べ直す所作。台詞は常に三語以内
+  - id: aya
+    name: 美濃部彩
+    name_romaji: Minobe Aya
+    age: 25
+    role: 隼人の職場の先輩であり、チームの事実上のキャプテン兼マネージャー
+    visual_anchor: 動揺すると事務作業に逃げる仕草、クリップボードを常に持つ
+  - id: endou
+    name: 遠藤岳
+    name_romaji: Endou Gaku
+    age: 30代
+    role: チームのエース。「あと一年」を口にするベテラン
+    visual_anchor: 首にかけたタオル、いつもの軽口が今日だけ止まる
+
+scene_palette:
+  primary: バスケットボール・オレンジ + 体育館の汗ばんだ橙色照明
+  secondary: 通勤電車とコンビニの青白い夜光
+  accent: 掲示板に貼られた対戦表の黒い活字 + スマホ画面の淡い通知光
+
+pages:
+  - page_id: ep_012_p01
+    panels:
+      - panel_id: ep012_001
+        scene: |
+          電光掲示板のクローズアップ。「61 – 59」。ブザーの赤いランプがまだ灯っている。
+          歓声はすでに引き、体育館に残るのは選手たちの荒い息づかいだけだ。
+        beat_type: standard
+        silence_confirmed: true
+        intent: "postgame_understated_opening — narrow score shown plainly, no triumph staging"
+        narrator_caption_by_locale:
+          ja_JP: "最終スコア、61対59。汗の重さでしか語れない僅差だった。"
+          en_US: "Final score, 61 to 59 — the cost of the match measured only in sweat, not applause."
+          zh_TW: '[zh_TW] Final score, 61 to 59 — the cost of the match measured only in sweat, not applause.'
+          zh_CN: '[zh_CN] Final score, 61 to 59 — the cost of the match measured only in sweat, not applause.'
+
+      - panel_id: ep012_002
+        scene: |
+          神崎隼人。膝に手をつき、肩で息をしている。汗が顎先から滴り、床に小さな染みをつくる。
+          ユニフォームの背中は貼りつくほど濡れている。
+        beat_type: micro
+        sfx_by_locale:
+          ja_JP: ["ハァ……ハァ……"]
+          en_US: ["haah... haah..."]
+        narrator_caption_by_locale:
+          ja_JP: "肺はまだ悲鳴を上げている。脚は電光掲示板よりも長く、第四クォーターを覚えている。"
+          en_US: "His lungs are still screaming; his legs remember the fourth quarter longer than the scoreboard does."
+          zh_TW: '[zh_TW] His lungs are still screaming; his legs remember the fourth quarter longer than the scoreboard does.'
+          zh_CN: '[zh_CN] His lungs are still screaming; his legs remember the fourth quarter longer than the scoreboard does.'
+
+      - panel_id: ep012_003
+        scene: |
+          美濃部彩、タオルを差し出しながら小さくうなずく。派手な祝福ではない。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: "ナイス、隼人。"
+              en_US: "Nice, Hayato."
+              zh_TW: '[zh_TW] Nice, Hayato.'
+              zh_CN: '[zh_CN] Nice, Hayato.'
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep012_004
+        scene: |
+          遠藤岳、タオルで顔を拭いながら電光掲示板を見上げている。いつもの軽口はない。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: endou
+            text_by_locale:
+              ja_JP: "紙一重だったな。"
+              en_US: "That was razor-thin."
+              zh_TW: '[zh_TW] That was razor-thin.'
+              zh_CN: '[zh_CN] That was razor-thin.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep012_005
+        scene: |
+          ロッカールーム前の廊下。選手たちが荷物をまとめている。隼人は古いスニーカーをバッグの底にしまい直す
+          ――「念のため」に持ってきた、いつもの一足。
+        beat_type: standard
+        intent: "visual_anchor_callback — old sneakers 'just in case', body-cost texture of the locker corridor"
+        narrator_caption_by_locale:
+          ja_JP: "チームがベンチから散っていく。コートには、まだ一晩分の疲れが残っている。勝ち上がり続けるには、次も、その次も、勝たなければならない。"
+          en_US: "The team's bench empties out onto the court, one long night settling into their shoulders. To stay in this tournament they need to win the next one too, and the one after that."
+          zh_TW: '[zh_TW] The team''s bench empties out onto the court, one long night settling into their shoulders. To stay in this tournament they need to win the next one too, and the one after that.'
+          zh_CN: '[zh_CN] The team''s bench empties out onto the court, one long night settling into their shoulders. To stay in this tournament they need to win the next one too, and the one after that.'
+
+      - panel_id: ep012_006
+        scene: |
+          廊下の奥、大会運営スタッフが一枚の紙を掲示板に貼り替えている。ピンで留める乾いた音。
+          選手たちの視線がそちらへ流れる。
+        beat_type: spatial
+        intent: "scene_transition — bracket update in progress, pulling attention toward the reveal"
+        sfx_by_locale:
+          ja_JP: ["カチッ"]
+          en_US: ["click"]
+
+      - panel_id: ep012_007
+        scene: |
+          チームがぞろぞろと掲示板の前に集まっていく。誰かが小声で言う。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: teammate_unnamed
+            text_by_locale:
+              ja_JP: "次、どこが勝ち上がってきたんだ?"
+              en_US: "Who came up on the other side, anyway?"
+              zh_TW: '[zh_TW] Who came up on the other side, anyway?'
+              zh_CN: '[zh_CN] Who came up on the other side, anyway?'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+  - page_id: ep_012_p02
+    panels:
+      - panel_id: ep012_008
+        scene: |
+          掲示板のアップ。トーナメント表の次の対戦枠に、印刷されたチーム名が貼られている。
+          「桐生製薬　――　開幕から無敗・前季優勝」。文字は事務的で、飾り気がない分だけ重い。
+        beat_type: standard
+        silence_confirmed: true
+        intent: "bracket_board_reveal — undefeated defending champion named plainly, weight in the plainness"
+        narrator_caption_by_locale:
+          ja_JP: "掲示板は次の相手をただ名指しするだけだ。宣告でも脅しでもなく、事務的に。"
+          en_US: "The board simply names their next rival — not a threat, not yet, just a fact posted in ink."
+          zh_TW: '[zh_TW] The board simply names their next rival — not a threat, not yet, just a fact posted in ink.'
+          zh_CN: '[zh_CN] The board simply names their next rival — not a threat, not yet, just a fact posted in ink.'
+
+      - panel_id: ep012_009
+        scene: |
+          彩がその文字を読み上げる。声のトーンはいつもより低い。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: "……桐生製薬。"
+              en_US: "...Kiryuu Pharma."
+              zh_TW: '[zh_TW] ...Kiryuu Pharma.'
+              zh_CN: '[zh_CN] ...Kiryuu Pharma.'
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep012_010
+        scene: |
+          遠藤の顔。タオルを首にかけたまま、動きが止まっている。いつもなら軽口の一つも叩くところで、
+          何も言わない。
+        beat_type: micro
+        silence_confirmed: true
+        intent: "endou_goes_quiet — the series' loudest teammate visibly silent, externalized through stillness not narration"
+
+      - panel_id: ep012_011
+        scene: |
+          彩、クリップボードの日程表を指でなぞる。仕事の顔に切り替える。
+        beat_type: micro
+        intent: "aya_seed — retreats into task-mode under pressure, imposter-syndrome thread seeded only, not resolved"
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: "……日程、確認しておくね。"
+              en_US: "...I'll go check the schedule."
+              zh_TW: '[zh_TW] ...I''ll go check the schedule.'
+              zh_CN: '[zh_CN] ...I''ll go check the schedule.'
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      - panel_id: ep012_012
+        scene: |
+          隼人だけが、掲示板を見ていない。小脇に抱えたままのボールに目を落とし、親指で縫い目をなぞっている。
+        beat_type: micro
+        intent: "object_over_narration — reaction externalized to the ball, not narrated as psychology (anti-pattern rule #1 compliance)"
+        dialogue_lines:
+          - speaker: hayato_internal
+            text_by_locale:
+              ja_JP: "縫い目が、ざらつく。"
+              en_US: "The seam is rough under his thumb."
+              zh_TW: '[zh_TW] The seam is rough under his thumb.'
+              zh_CN: '[zh_CN] The seam is rough under his thumb.'
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: bottom_right
+            font_override_by_locale:
+              en_US: italic_internal
+
+      - panel_id: ep012_013
+        scene: |
+          掲示板の隅、対戦日程を記した小さな紙片。次の一戦の日付が黒々と刷られている。
+        beat_type: micro
+        intent: "twin_countdown_seed — the tournament's own concrete countdown object, printed and dated"
+
+      - panel_id: ep012_014
+        scene: |
+          チームが掲示板の前から散っていく。誰かが冗談を言うが、誰も笑わない。足音だけが廊下に響く。
+        beat_type: standard
+        silence_confirmed: true
+        intent: "closing_wide_page2 — the weight of the reveal shown through absence of laughter, not stated"
+
+  - page_id: ep_012_p03
+    panels:
+      - panel_id: ep012_015
+        scene: |
+          更衣室。隼人が練習着から仕事用のシャツに着替える。裾は今日もきちんと入れられない
+          ――半分だけ出たまま。
+        beat_type: standard
+        intent: "visual_anchor — half-untucked dress shirt, shoe locker touchpoint, transition between identities"
+        narrator_caption_by_locale:
+          ja_JP: "靴ロッカー、崩れた裾――身体はもう一つの仕事に戻っていく。"
+          en_US: "Shoe locker, half-untucked shirt — the body clocks back into its other job."
+          zh_TW: '[zh_TW] Shoe locker, half-untucked shirt — the body clocks back into its other job.'
+          zh_CN: '[zh_CN] Shoe locker, half-untucked shirt — the body clocks back into its other job.'
+
+      - panel_id: ep012_016
+        scene: |
+          建物の外、自動販売機の前。隼人が缶コーヒーを買う。ガコン、と落ちる音。
+        beat_type: micro
+        sfx_by_locale:
+          ja_JP: ["ガコン"]
+          en_US: ["clunk"]
+        narrator_caption_by_locale:
+          ja_JP: "自動販売機、終電前の温かい一缶――いつもと同じ火曜日のはずだった。"
+          en_US: "A vending machine, a warm can before the last train — ordinary as any other Tuesday."
+          zh_TW: '[zh_TW] A vending machine, a warm can before the last train — ordinary as any other Tuesday.'
+          zh_CN: '[zh_CN] A vending machine, a warm can before the last train — ordinary as any other Tuesday.'
+
+      - panel_id: ep012_017
+        scene: |
+          終電間際の車内。隼人はスマホを片手に、半分眠りながらチームのグループチャットをスクロールしている。
+        beat_type: standard
+        intent: "market_touchpoint — commuter_car + line_chat, ordinary team texture after the reveal"
+        narrator_caption_by_locale:
+          ja_JP: "終電間際の車内。半分眠りながら、チームのグループチャットを流し読みする。"
+          en_US: "The commuter car, half-asleep, scrolling through the team's line chat."
+          zh_TW: '[zh_TW] The commuter car, half-asleep, scrolling through the team''s line chat.'
+          zh_CN: '[zh_CN] The commuter car, half-asleep, scrolling through the team''s line chat.'
+        dialogue_lines:
+          - speaker: line_chat_gaku
+            text_by_locale:
+              ja_JP: "岳: 紙一重すぎるだろ"
+              en_US: "Gaku: way too close for comfort"
+              zh_TW: '[zh_TW] Gaku: way too close for comfort'
+              zh_CN: '[zh_CN] Gaku: way too close for comfort'
+            intensity: normal
+            bubble_style: square_flat
+            tail_style: none
+            position_hint: top_left
+          - speaker: line_chat_aya
+            text_by_locale:
+              ja_JP: "彩: お疲れさま、みんな"
+              en_US: "Aya: good work today, everyone"
+              zh_TW: '[zh_TW] Aya: good work today, everyone'
+              zh_CN: '[zh_CN] Aya: good work today, everyone'
+            intensity: normal
+            bubble_style: square_flat
+            tail_style: none
+            position_hint: top_right
+
+      - panel_id: ep012_018
+        scene: |
+          同じ画面の上に、別の通知が滑り込んでくる。「試用期間評価面談　確定：7月31日（金）14:00　―　人事部」。
+        beat_type: micro
+        intent: "workplace_notification_collision — the second countdown, concrete and dated"
+
+      - panel_id: ep012_019
+        scene: |
+          隼人の顔。驚きというより、静かに受け止める表情。小さく息を吐く。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: hayato_internal
+            text_by_locale:
+              ja_JP: "……あと、一週間か。"
+              en_US: "...One week, then."
+              zh_TW: '[zh_TW] ...One week, then.'
+              zh_CN: '[zh_CN] ...One week, then.'
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+            font_override_by_locale:
+              en_US: italic_internal
+
+      - panel_id: ep012_020
+        scene: |
+          手元のアップ。片方の手はスマホの画面――淡い青光。もう片方の手には、まだ体育館のチョークの粉が
+          うっすらと残っている。
+        beat_type: micro
+        intent: "twin_countdown_object_contrast — the calendar screen and the chalk-dusted hand in one frame, the two worlds colliding without narration"
+        narrator_caption_by_locale:
+          ja_JP: "画面の青い光と、まだ消えないチョークの粉――同じ手の中で、二つの世界がぶつかる。"
+          en_US: "The phone's pale blue glow and the chalk dust that won't quite wash off — two worlds colliding in the same pair of hands."
+          zh_TW: '[zh_TW] The phone''s pale blue glow and the chalk dust that won''t quite wash off — two worlds colliding in the same pair of hands.'
+          zh_CN: '[zh_CN] The phone''s pale blue glow and the chalk dust that won''t quite wash off — two worlds colliding in the same pair of hands.'
+
+      - panel_id: ep012_021
+        scene: |
+          駅を出てすぐのコンビニ。隼人が缶コーヒーとおにぎりを買う。レシートの印字時刻は「23:47」。
+        beat_type: micro
+        intent: "conbini_receipt_callback — echoes ep_010's device, marks the lateness of the hour rather than delivering a lesson"
+        narrator_caption_by_locale:
+          ja_JP: "コンビニのレシート、印字は23:47――誰かに聞かれたら、これが夜がどれだけ遅いかの証拠になる。"
+          en_US: "A conbini receipt, timestamped 23:47 — proof, if anyone asked, of exactly how late the night had gotten."
+          zh_TW: '[zh_TW] A conbini receipt, timestamped 23:47 — proof, if anyone asked, of exactly how late the night had gotten.'
+          zh_CN: '[zh_CN] A conbini receipt, timestamped 23:47 — proof, if anyone asked, of exactly how late the night had gotten.'
+
+  - page_id: ep_012_p04
+    panels:
+      - panel_id: ep012_022
+        scene: |
+          会社の裏口。隼人は帰路を折れ、名札をリーダーにかざして側面口から入る。真っ直ぐ家には帰らなかった。
+        beat_type: standard
+        intent: "return_to_the_gym — the ID badge object bridges work-identity back into the gym, echoing the ep_001 rooftop catalyst"
+
+      - panel_id: ep012_023
+        scene: |
+          体育館。照明は半分しか点いていない。黒田が一人、ボールラックを黙々と並べ直している。
+        beat_type: standard
+        intent: "kuroda_signature_gesture — the wordless ball-rack reset, unprompted"
+
+      - panel_id: ep012_024
+        scene: |
+          黒田が入口の隼人に気づく。驚きも咎めもしない。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kuroda
+            text_by_locale:
+              ja_JP: "残業か。"
+              en_US: "Working late?"
+              zh_TW: '[zh_TW] Working late?'
+              zh_CN: '[zh_CN] Working late?'
+            intensity: dry
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep012_025
+        scene: |
+          隼人、ラックからボールを一つ取りながら、小さく笑う。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: hayato
+            text_by_locale:
+              ja_JP: "……かもな。"
+              en_US: "...Maybe."
+              zh_TW: '[zh_TW] ...Maybe.'
+              zh_CN: '[zh_CN] ...Maybe.'
+            intensity: tired_warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      - panel_id: ep012_026
+        scene: |
+          黒田は残りの照明を落とし、それ以上は何も言わずに出て行く。フリースローライン付近だけが
+          窓明かりに照らされている。
+        beat_type: standard
+        silence_confirmed: true
+        intent: "mentor_wordless_departure — no lesson, no send-off speech, just leaving"
+
+      - panel_id: ep012_027
+        scene: |
+          隼人一人、フリースローラインに立つ。両手でボールを持ち直し、ゆっくりと一度だけ回す。
+          縫い目が掌の下を滑っていく。シュートは打たない。
+        beat_type: micro
+        silence_confirmed: true
+        intent: "chosen_stillness_turn — the carrier beat: stillness chosen, not a shot, not a victory; the ball alone carries the meaning per anti-pattern rule #2"
+
+      - panel_id: ep012_028
+        scene: |
+          引きの一枚。暗い体育館の中、隼人は小さく見える。窓の外、遠くにトーナメント表の紙片と、
+          街の灯りがぼんやりと滲んでいる。ボールは手の中で静止したままだ。
+        beat_type: spatial
+        intent: "closing_wide — both countdowns implied through background objects, never named aloud; unresolved, not triumphant"
+
+      - panel_id: ep012_029
+        scene: |
+          静かな色面の上のタイポグラフィックなエンドカード。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: "第12話・了――第一部、了"
+          en_US: "End of Episode 12 — End of Part One"
+          zh_TW: '[zh_TW] End of Episode 12 — End of Part One'
+          zh_CN: '[zh_CN] End of Episode 12 — End of Part One'
+        dialogue_lines: []
+
+notes:
+  arc_position: |
+    Episode 12 of 12 — arc 1's close (the "recruit" phase per ASSIGNMENT_MATRIX.tsv
+    arc_shape_hint: recruit -> losing streak -> breakthrough -> championship). Per
+    the bible's explicit instruction, this is a TURN into arc 2, not a resolution:
+    Shinonome advances by the narrowest possible margin off-panel (61-59, shown only
+    as an aftermath scoreboard), the tournament bracket immediately names an
+    undefeated defending champion (Kiryuu Pharma, reusing ep_008's established
+    rival rather than introducing a generic new opponent) as the next match, and a
+    calendar notification confirms Hayato's probation review exactly one week out.
+    Both countdowns are live and unresolved when the episode ends. acceptance_layer
+    is authored_candidate only; nothing here claims a cure, a win-as-healed beat, or
+    a trophy proving growth.
+  pacing_vs_prior: |
+    29 panels across four pages — denser than a single escalation page because two
+    separate collisions (tournament bracket + workplace calendar) each need their
+    own concrete object and room to land in the same evening without either being
+    compressed into an aside. The actual decisive shot from ep_011 is deliberately
+    NOT restaged or replayed here; the episode opens already past the buzzer, on
+    the scoreboard and the breathing, per the strategy bank's rule that the
+    buzzer-beater must never be the carrier beat.
+  continuity_callbacks: |
+    - Old sneakers "just in case" (ep_001 visual anchor) — referenced again in the
+      locker corridor (panel 005) and the shoe locker beat (panel 015).
+    - Kuroda's silent ball-rack reset (established ep_003) — returns at panels 023
+      and 026, still wordless, still no lecture.
+    - The conbini receipt device (ep_010's vessel for Kuroda's wisdom) returns at
+      panel 021, but this time it only marks how late the hour is — it is not
+      reused as a teaching object, so the device does not repeat its function.
+    - The company ID badge / rooftop-adjacent building object (seeded in ep_001's
+      catalyst) returns at panel 022 as the concrete reason Hayato is able to walk
+      back into the gym after hours instead of going straight home.
+    - The free-throw line and the single basketball (the strategy bank's signature
+      device, fully executed in ep_011) return at panel 027, but Hayato does not
+      shoot. He turns the ball over once and stops. This is a deliberate departure
+      from beat 9 of strategy_01's plot skeleton (which has the protagonist
+      shooting again at the empty gym) — repeating the shot here would read as a
+      second "technique lands" triumph beat stacked on top of the game's own win,
+      violating the anti-pattern rule against letting the arc resolve on the
+      object performing correctly. Stillness without the shot is the chosen
+      substitute beat for this closing episode specifically.
+  vessel_handling: |
+    Kuroda speaks exactly two total words of dialogue this episode ("残業か。" —
+    three morae, effectively one dry question) and never comments on the bracket,
+    never comments on Hayato's face, never explains why staying might help. His
+    only actions are the wordless rack-reset and killing the lights on his way
+    out. No coach-explains-the-lesson violation; the vessel doctrine ("the coach
+    of the unclenched") is carried entirely by what he does NOT say.
+  translation_handoff: |
+    text_by_locale populated for ja_JP (authoritative, natively authored — not a
+    translation of an English draft) and en_US (real operator-facing translation,
+    not a gloss placeholder). zh_TW and zh_CN carry bracket placeholders
+    ('[zh_TW] <en_US line>' / '[zh_CN] <en_US line>') pending a dedicated
+    localization pass, matching the convention established in
+    heart_balance_shojo__tsukimura_yui__ja_JP__social_anxiety__two_cups_on_the_counter/ep_001.yaml.
+  genre_taxonomy_normalization: |
+    The modern_reader_context object above is copied verbatim from
+    story_architecture_handoff.json's chapters[11].story_craft entry for this
+    chapter (same catalyst id, logline, ordinary_world_objects,
+    genre_transmutation, avoid list, market/audience blocks, quality rubric, and
+    craft_directive — nothing in the catalyst itself was changed), with one
+    deliberate, documented exception matching the fix already applied by the
+    parallel agents on this same series' ep_001 (and siblings): the source
+    JSON's genre_id and relevance_genre fields both read "sports_competition",
+    which is not itself a row in config/manga/canonical_genre_list.yaml or
+    config/manga/modern_reader_story_doctrine.yaml (only "sports" is;
+    "sports_competition" is listed only as an inbound ALIAS of "sports", and
+    separately as an allowed strategy_genre under the canonical "sports" row in
+    config/manga/story_genre_alias_coherence.yaml). Using the literal source
+    value verbatim makes scripts/manga/validate_story_excellence.py hard-fail on
+    both MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE (relevance_genre not in the
+    canonical 25) and MANGA.STORY.ALIAS_COHERENCE (no alias row matches). This
+    episode therefore sets genre_id: sports and relevance_genre: sports (both
+    canonical) while keeping strategy_genre: sports_competition unchanged (an
+    explicitly allowed strategy_genre for the "sports" canonical row) — a
+    taxonomy-identifier fix, not a catalyst change.
