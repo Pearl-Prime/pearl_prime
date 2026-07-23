@@ -301,6 +301,45 @@ Q2 is gated behind Q1 (adjacency penalty needs the varied thesis pools) and behi
 - `scripts/inventory/atom_coverage_audit.py`: **100%** CANONICAL presence on 13 personas × **15 core production topics**; **29.8%** on the script's full 57-topic list (221/741).
 - `story_atoms/…/anchored/`: **6 personas / 9 persona×topic cells** (courage only for millennial_women_professionals×false_alarm). Authority: `artifacts/qa/pearl_prime_pipeline_audit_20260722/AUDIT_REPORT.md`.
 
+### Catalog plan + assembly readiness audit (2026-07-23)
+Six-lane audit (A-F, `artifacts/qa/pearl_prime_catalog_assembly_audit_20260723/`) answering the operator's
+questions on US catalog planning, Pearl_Editor sequencing, plan/assembly readiness at scale, revenue/access mix,
+and EI v2 wiring. **All five sub-lanes + this synthesis are read-only; zero atoms/config/pipeline code changed.**
+
+- **Volume correction (supersedes the "en_US Listings" section above — that section's numbers are stale by
+  ~15x; do not edit that section's rows, this entry is the current truth pending a dedicated reconciliation
+  PR):** live en_US catalog is **32,401 book-plan files across 40 brand archetypes** (not 1,519 listings /
+  26 brands / 2,187 files). **37 of 40 brands genuinely carry ~800-845 books each** — the per-brand-800 framing
+  is now closer to true than the ratified `CATALOG-800-PER-BRAND-01` cap (2026-05-06) states; see
+  Q-CATALOG-AUDIT-04. 3 brands (`qi_foundation`/`body_memory`/`still_forest`) have a broken series-plan-import
+  (~92% arc-orphaned) — a pipeline-completion bug, not a smaller deliberate target.
+- **Assembly-readiness ceiling, full 657-cell / 32,401-book census (not a sample):** only **1.4%** (465 books)
+  predicts to `authored candidate`-eligible (Layer 2 precondition: research_fit BOUND + tuple-viability PASS);
+  **70.6%** (22,885) is capped at `structurally clear only` (Layer 1, no character bank); **27.9%** (9,027)
+  predicts to fail the render preflight outright (`path broken`, not merely unbound). BOUND is a precondition,
+  not a guarantee — one BOUND cell (`healthcare_rns × burnout × overwhelm`) was live-rescored by the 07-22
+  audit and still failed `chapter_flow`/`book_quality_gate`.
+- **Root cause (cross-lane):** catalog admission and per-slot atom selection gate on **build-order/backfill
+  timing only** — never on content-authority (story_atoms coverage), craft/EI-v2 signal, or revenue potential.
+  Pearl_Editor content-authority enters only at render time as a soft-skip lookup (no catalog-admission check);
+  the resulting 98.5%-uncapped catalog and the observed persona/revenue-mix skew (first_responders at ~5% of
+  core-persona density despite being marketing-plan-ranked opportunity #4) are two faces of the same absence,
+  not independent defects.
+- **EI v2:** has one live production hard-gate (`enforce_bestseller_beat_order`, plan-time) and one fully-built
+  but disarmed hard-gate (`enforce_dimension_gates`, render-time, flag never flipped `True`). The function
+  purpose-built to feed EI v2 signal into plan-time atom selection (`hybrid_select_slot_production()`) has zero
+  production callers — dead code by call-graph. A real architecture spec for wiring this
+  (`docs/specs/EI_V2_STRENGTHENED_ARCHITECTURE_SPEC.md`) has sat unratified for 6 weeks.
+- **Four cap-entry candidates surfaced for Pearl_Architect ratification** (not self-ratified):
+  `Q-CATALOG-AUDIT-01` (plan-time content-authority flag), `Q-CATALOG-AUDIT-02` (revenue-signal wiring +
+  access-floor quota), `Q-CATALOG-AUDIT-03` (ratify/reject EI v2 strengthened-architecture spec direction),
+  `Q-CATALOG-AUDIT-04` (re-ratify `CATALOG-800-PER-BRAND-01` against current reality).
+- **Full report:** `artifacts/qa/pearl_prime_catalog_assembly_audit_20260723/lane_f_synthesis/REPORT.md` (answers
+  every operator question directly, cites all five lane reports + evidence). Standalone operator handoff:
+  `artifacts/coordination/handoffs/pp-catalog-audit-lane_f_2026-07-23.md`.
+- **Not covered by this pack:** locales beyond en_US; any live render/parity verification (everything above is
+  static-analysis prediction except the 07-22 audit's 3 cited live samples); manga/audiobook/music catalog axes.
+
 ---
 *Supersedes all previous status reports and planning baselines (incl. the May 2026 worldwide plan). Latest session
 detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md`.*
