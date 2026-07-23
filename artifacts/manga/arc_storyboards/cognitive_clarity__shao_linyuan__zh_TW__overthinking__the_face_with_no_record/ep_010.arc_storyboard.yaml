@@ -1,0 +1,310 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_010
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 10: What Was I Even Looking For'
+logline: Overriding an authorization warning for the first time on purpose, Yaqing stakes out station
+  five off-duty and publicly confronts the wrong stranger, the moment recorded by bystanders.
+stakes_now: Yaqing's certainty about the pattern is about to meet a real stranger who has no part in it.
+stakes_end: A public mistake, a recorded clip, and an unresolved authorization warning leave Yaqing looking
+  at her own evidence wall with real doubt for the first time this arc.
+genre_cadence:
+- unauthorized_query_login
+- authorization_warning_shown
+- warning_overridden
+- anomalous_data_self_defined
+- off_duty_stakeout_position
+- matching_figure_emerges
+- yaqing_intercepts
+- yaqing_demands_answers
+- wrong_person_revealed
+- stranger_confused_and_wary
+- bystanders_film_the_scene
+- held_wide_public_exposure
+- panicked_apology_given
+- stranger_leaves_offended
+- video_clip_already_public
+- alone_shaking_from_shame
+- vessel_message_arrives
+- vessel_asks_where_she_is
+- yaqing_unable_to_answer
+- apartment_wall_reframed
+- hand_hesitates_on_red_string
+- authorization_warning_still_open
+- held_silence_no_new_notes
+- closing_real_question_asked
+page_turn_promises:
+- page_id: ep_010_p01
+  promise: Having crossed an authorization line on purpose, will Yaqing's off-duty stakeout finally confirm
+    her theory — or expose how far she's drifted from it?
+- page_id: ep_010_p02
+  promise: After a public mistake and a recorded clip, can Yaqing look at her own wall of evidence and
+    actually see it for the first time?
+panels:
+- panel_id: ep010_001
+  page_id: ep_010_p01
+  story_function: unauthorized_query_login
+  story_move: Off live-monitoring duty, Yaqing logs into the system using her personal EasyCard-history
+    access instead.
+  visual_proof: Wide shot of Yaqing at her apartment desk, laptop open to a restricted-looking login screen.
+  information_delta: Reader learns Yaqing is now working entirely outside her sanctioned access.
+  beat_role: scope_creep
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_002
+  page_id: ep_010_p01
+  story_function: authorization_warning_shown
+  story_move: A system warning states the query exceeds her current authorization, asking whether to proceed.
+  visual_proof: Close insert on a warning dialog box on screen, Yaqing's finger hovering over 'continue.'
+  information_delta: Reader sees the exact institutional line Yaqing is about to cross, made explicit.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_003
+  page_id: ep_010_p01
+  story_function: warning_overridden
+  story_move: Yaqing deliberately clicks through the warning, crossing a clear line for the first time
+    on purpose.
+  visual_proof: Close insert on Yaqing's finger pressing 'continue,' expression resolute rather than distracted.
+  information_delta: Reader sees this transgression is chosen, not accidental drift like earlier episodes.
+  beat_role: scope_creep
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_004
+  page_id: ep_010_p01
+  story_function: anomalous_data_self_defined
+  story_move: The pulled records show a slightly unusual group at station five, the anomaly now entirely
+    self-defined.
+  visual_proof: Insert on a data table with several highlighted entries, no system flag, only Yaqing's
+    own marks.
+  information_delta: Reader sees Yaqing generating her own evidence criteria without institutional confirmation.
+  beat_role: unreliable_flag
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_005
+  page_id: ep_010_p01
+  story_function: off_duty_stakeout_position
+  story_move: That evening, in plain clothes and off official duty, Yaqing stakes out station five's exit.
+  visual_proof: Wide shot of Yaqing in casual clothes standing near a station exit gate, clearly not on
+    shift.
+  information_delta: Reader sees Yaqing has moved from data analysis to direct, unauthorized field surveillance.
+  beat_role: scope_creep
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_006
+  page_id: ep_010_p01
+  story_function: matching_figure_emerges
+  story_move: A figure carrying a black umbrella exits the gate, build and gait matching Yaqing's memory
+    of the pattern.
+  visual_proof: Medium shot of a figure with an umbrella emerging from the crowd at the gate.
+  information_delta: Reader sees the moment Yaqing believes her pursuit has finally paid off.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_007
+  page_id: ep_010_p01
+  story_function: yaqing_intercepts
+  story_move: Yaqing moves quickly through the crowd and reaches out to stop the figure directly.
+  visual_proof: Medium shot, Yaqing's arm extending to intercept the umbrella-carrying figure.
+  information_delta: Reader sees Yaqing take direct physical action for the first time this arc.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_008
+  page_id: ep_010_p01
+  story_function: yaqing_demands_answers
+  story_move: Yaqing, voice tense and too loud, demands the stranger answer a few questions.
+  visual_proof: Close insert on Yaqing's tense face, mouth open mid-sentence, hand still extended.
+  information_delta: Reader hears Yaqing confronting a stranger with the full weight of her private case.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_009
+  page_id: ep_010_p01
+  story_function: wrong_person_revealed
+  story_move: 'The figure turns around: a startled, entirely unfamiliar middle-aged man, unconnected to
+    her theory.'
+  visual_proof: Close insert on a stranger's confused face under the umbrella, nothing matching Yaqing's
+    memory.
+  information_delta: Reader sees the obsession's theory concretely fail in the worst possible public setting.
+  beat_role: revelation_reframe
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_010
+  page_id: ep_010_p01
+  story_function: stranger_confused_and_wary
+  story_move: The stranger asks, confused and wary, whether he knows Yaqing at all.
+  visual_proof: Medium shot, the stranger stepping back slightly, guarded expression forming.
+  information_delta: Reader hears the stranger's confusion confirm the mistaken identity plainly.
+  beat_role: revelation_reframe
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_011
+  page_id: ep_010_p01
+  story_function: bystanders_film_the_scene
+  story_move: Nearby passengers notice the commotion; someone raises a phone to film Yaqing directly.
+  visual_proof: Wide shot of several bystanders, one phone camera clearly aimed at Yaqing.
+  information_delta: Reader sees the public, recorded cost about to attach itself to the private obsession.
+  beat_role: anchor_cost
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_012
+  page_id: ep_010_p01
+  story_function: held_wide_public_exposure
+  story_move: Yaqing stands frozen mid-crowd, hand still half-raised, the stranger already backing away
+    warily.
+  visual_proof: Wide shot of Yaqing isolated in the center of a gathering crowd, hand suspended in the
+    air.
+  information_delta: Reader closes the page on the full, undeniable public exposure of the obsession.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_013
+  page_id: ep_010_p02
+  story_function: panicked_apology_given
+  story_move: Yaqing apologizes in a panicked, shaking voice, only now registering what she has done.
+  visual_proof: Close insert on Yaqing's shaking hands and rushed, apologetic expression.
+  information_delta: Reader sees Yaqing's self-awareness arrive only after the damage is already done.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_014
+  page_id: ep_010_p02
+  story_function: stranger_leaves_offended
+  story_move: The stranger shakes his head and leaves quickly, visibly offended by the encounter.
+  visual_proof: Medium shot of the stranger walking briskly away, not looking back.
+  information_delta: Reader sees a real, un-repairable social cost land on someone outside the story's
+    core cast.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_015
+  page_id: ep_010_p02
+  story_function: video_clip_already_public
+  story_move: A bystander's phone already holds a captioned clip of the confrontation, ready to spread.
+  visual_proof: Insert on a phone screen with a video clip and a mocking caption about the incident.
+  information_delta: Reader learns the encounter is now a permanent, public record beyond Yaqing's control.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_016
+  page_id: ep_010_p02
+  story_function: alone_shaking_from_shame
+  story_move: Yaqing stands alone as the crowd disperses, hands still shaking now from shame, not adrenaline.
+  visual_proof: Wide shot of Yaqing alone at the gate, crowd thinning around her, hands trembling at her
+    sides.
+  information_delta: Reader distinguishes this trembling from episode nine's — this time the cause is
+    shame.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_017
+  page_id: ep_010_p02
+  story_function: vessel_message_arrives
+  story_move: Yaqing's phone buzzes — Zhou, having somehow already heard what happened.
+  visual_proof: Insert on a phone notification from Zhou lighting up in Yaqing's hand.
+  information_delta: Reader learns word of the incident has already reached Zhou.
+  beat_role: anchor_cost
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_018
+  page_id: ep_010_p02
+  story_function: vessel_asks_where_she_is
+  story_move: 'Zhou''s message is short: he heard, and asks only where she is right now.'
+  visual_proof: Close insert on the phone screen, Zhou's brief message visible.
+  information_delta: 'Reader sees the vessel''s characteristic restraint: no lecture, just presence offered.'
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_019
+  page_id: ep_010_p02
+  story_function: yaqing_unable_to_answer
+  story_move: Yaqing stares at the message, unsure whether to answer where she is or what she's become.
+  visual_proof: Close insert on Yaqing's face over the phone screen, thumb hovering without typing.
+  information_delta: Reader sees Yaqing's uncertainty extend beyond location into self-recognition.
+  beat_role: anchor_cost
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_020
+  page_id: ep_010_p02
+  story_function: apartment_wall_reframed
+  story_move: Late at night in her apartment, Yaqing looks at her own corkboard wall as if seeing it for
+    the first time.
+  visual_proof: Wide shot of the corkboard wall from a slight new angle, framed like a stranger's room.
+  information_delta: Reader sees the season's central obsession object reframed through outsider eyes
+    at last.
+  beat_role: revelation_reframe
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_021
+  page_id: ep_010_p02
+  story_function: hand_hesitates_on_red_string
+  story_move: Yaqing's hand traces the red string on her wall with hesitation instead of focus.
+  visual_proof: Close insert on Yaqing's fingers pausing over the red string, touch tentative.
+  information_delta: Reader sees the first physical sign of doubt directed at the evidence wall itself.
+  beat_role: unreliable_flag
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_022
+  page_id: ep_010_p02
+  story_function: authorization_warning_still_open
+  story_move: The unauthorized-query warning from earlier still sits open on her phone screen, unresolved.
+  visual_proof: Insert on the earlier authorization warning dialog, still open and unanswered on her phone.
+  information_delta: Reader is reminded the institutional line she crossed remains an open, unresolved
+    fact.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_023
+  page_id: ep_010_p02
+  story_function: held_silence_no_new_notes
+  story_move: Yaqing sits before the wall without removing a single note or adding a new connection.
+  visual_proof: Wide shot of Yaqing seated motionless before the wall, hands still, nothing added or removed.
+  information_delta: Reader sees a genuine pause distinct from episode seven's false relief — this one
+    carries doubt.
+  beat_role: threatening_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_024
+  page_id: ep_010_p02
+  story_function: closing_real_question_asked
+  story_move: Yaqing asks herself, for the first time as a real question, what she has actually been looking
+    for.
+  visual_proof: Wide pull-back of Yaqing alone before the wall, night-market light bleeding through the
+    window.
+  information_delta: Reader closes the episode on the arc's first genuinely open, unresolved self-directed
+    question.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_010.yaml
+notes: Arc 1 (obsession seed), episode 10 of 12. English craft-planning metadata only; authoritative story
+  is zh_TW in ep_010.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate.'
