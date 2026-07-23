@@ -1,0 +1,254 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_002
+genre_id: psychological_thriller
+title: Echo of a Name — Episode 2 (English gloss)
+logline: A flagged data point's name echoes Ren's estranged sister's, and he carries the case file home
+  onto a personal laptop where no workplace rule or audit trail can stop him from reading it all night.
+stakes_now: Ren has never broken this particular rule before — the file has never left the office, and
+  the moment he opens it at his kitchen table he has already crossed a line he cannot uncross.
+stakes_end: The anomaly is not resolved and Ren has not admitted anything is wrong — he has only lost a
+  night's sleep and nudged the hallway mirror a half-inch toward himself, the first small sign that the
+  watcher and the watched are starting to blur.
+genre_cadence:
+- home_established_mirror_motif
+- personal_rule_broken_quietly
+- personal_echo_in_the_case_file
+- baseline_composure_cracking
+- vessel_remote_contact_practical
+- message_reread_for_hidden_meaning
+- evidence_cross_referenced_against_photos
+- pressure_peak_late_night
+- reply_drafted_and_deleted
+- reply_sent_not_quite_true
+- somatic_cost_registers_sleep
+- mirror_motif_shifts_toward_self
+- override_continues_unacknowledged
+- half_second_pause_at_the_door
+- habit_carried_outside_the_home
+- episode_card
+page_turn_promises:
+- page_id: ep_002_p01
+  promise: Will Ren close the laptop before the night is over, or does the personal echo in the file
+    pull him past the point of sleep?
+- page_id: ep_002_p02
+  promise: Does the one broken night stay contained to home, or does the reading habit now follow him
+    out the door and into tomorrow?
+panels:
+- panel_id: ep002_001
+  page_id: ep_002_p01
+  story_function: home_established_mirror_motif
+  story_move: Establishes Ren's apartment as a new territory for the pattern-reading habit and plants
+    the recurring mirror motif before any threat enters the home.
+  visual_proof: Wide shot of the rain-streaked apartment, laptop glowing on the kitchen table, hallway
+    mirror visibly angled toward the front door.
+  information_delta: Reader learns the story now has a second, private location beyond the office, and
+    notes the mirror's habitual angle before it changes later.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_002
+  page_id: ep_002_p01
+  story_function: personal_rule_broken_quietly
+  story_move: Ren breaks a real workplace rule by opening the flagged file on his personal laptop,
+    removing the safety of institutional oversight from his reading.
+  visual_proof: Close insert on the personal laptop screen displaying the office file, visibly out of
+    its authorized context.
+  information_delta: Reader learns Ren has crossed a boundary he has never crossed before, raising the
+    stakes of tonight's reading above yesterday's office overtime.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_003
+  page_id: ep_002_p01
+  story_function: personal_echo_in_the_case_file
+  story_move: The anomaly gains a personal dimension when Ren connects the flagged name to his estranged
+    sister's name, pulling the case out of pure work territory.
+  visual_proof: Macro insert on the anomalous name beside Ren's handwritten note comparing it to his
+    sister's name.
+  information_delta: Reader learns the specific personal stake driving this episode — a name too close
+    to be professional.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_004
+  page_id: ep_002_p01
+  story_function: baseline_composure_cracking
+  story_move: Ren's professional and personal identities visibly overlap for a moment, showing the
+    boundary between analyst and brother is already thinning.
+  visual_proof: Medium shot on Ren's face where the analyst's guarded expression and an ordinary
+    brother's worry appear to occupy the same features.
+  information_delta: Reader sees Ren's composure is not as clean as episode one's baseline — the crack
+    is personal, not just professional.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_005
+  page_id: ep_002_p01
+  story_function: vessel_remote_contact_practical
+  story_move: The vessel Saeki makes contact remotely with a plain, practical message, re-establishing
+    her presence in the story without being physically in the room.
+  visual_proof: Close on Ren's phone screen showing a timestamped LINE chat notification from Saeki
+    about tomorrow's deadline.
+  information_delta: Reader learns the vessel's method extends to ordinary text messages, and gets a
+    precise timestamp proving how late Ren still is at this file.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_006
+  page_id: ep_002_p01
+  story_function: message_reread_for_hidden_meaning
+  story_move: Ren rereads Saeki's ordinary message searching for a verdict it does not contain, showing
+    the reading compulsion has started to consume plain communication.
+  visual_proof: Insert on Ren's eyes tracking the same phone screen a third time, no new information
+    visible on it.
+  information_delta: Reader learns the compulsion is no longer limited to the case file — it is now
+    applied to an innocent coworker text.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_007
+  page_id: ep_002_p01
+  story_function: evidence_cross_referenced_against_photos
+  story_move: Ren actively escalates his own investigation by pulling old family photos to cross-check
+    dates against the file, a deliberate choice to keep digging.
+  visual_proof: Insert on an open photo folder beside the laptop, Ren's finger comparing a date stamp
+    to the file's timestamp.
+  information_delta: Reader sees Ren's chosen method for tonight — corroboration, not rest — and that
+    the dates genuinely do not agree.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_008
+  page_id: ep_002_p01
+  story_function: pressure_peak_late_night
+  story_move: The night's pressure peaks in one wide beat combining the clock, the cold tea, and the
+    worsening rain, with no dialogue to soften it.
+  visual_proof: Wide shot combining a clock reading past 3 a.m., an untouched cold teacup, and rain
+    intensifying against the window, laptop the only light source.
+  information_delta: Reader feels the full weight of how far into the night Ren has gone, just before
+    the page turn.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_009
+  page_id: ep_002_p02
+  story_function: reply_drafted_and_deleted
+  story_move: Ren drafts and deletes a reply to Saeki multiple times, showing the gap between what he
+    wants to say and what he is willing to admit.
+  visual_proof: Sequential insert on Ren's phone screen showing a typed message being deleted and
+    retyped.
+  information_delta: Reader learns Ren is actively managing what Saeki is allowed to see of tonight,
+    not just what he tells himself.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_010
+  page_id: ep_002_p02
+  story_function: reply_sent_not_quite_true
+  story_move: Ren sends a reply that understates the truth, choosing performance over honesty with the
+    one person checking on him.
+  visual_proof: Close on Ren's tired hand pressing send on a message that contradicts the room around
+    him.
+  information_delta: Reader hears Ren's chosen cover story stated once, in his own words, and can
+    measure it against what the reader has already seen.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_011
+  page_id: ep_002_p02
+  story_function: somatic_cost_registers_sleep
+  story_move: The night's cost lands physically as the earliest concrete cost of the arc — a genuinely
+    lost night of sleep, visible on Ren's face.
+  visual_proof: Cut to an early alarm and Ren's face showing heavy shadows under his eyes, evidence of a
+    night with no real rest.
+  information_delta: Reader receives the episode's first hard, unambiguous cost — not implied fatigue,
+    a specific lost night.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_012
+  page_id: ep_002_p02
+  story_function: mirror_motif_shifts_toward_self
+  story_move: The hallway mirror is shown subtly re-angled toward Ren himself instead of the door,
+    planting the arc's first visual seed of the watcher-becomes-watched reversal.
+  visual_proof: Close on the hallway mirror at a visibly different angle than panel one, no one shown
+    moving it.
+  information_delta: Reader notices a concrete environmental change that Ren has not consciously
+    registered, a clue the reader holds ahead of the protagonist.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_013
+  page_id: ep_002_p02
+  story_function: override_continues_unacknowledged
+  story_move: Ren reopens the file and adds another annotation instead of stopping, showing the override
+    from panel two has not eased despite the cost already paid.
+  visual_proof: Insert on the laptop screen with a new margin note added beneath the previous night's
+    annotations.
+  information_delta: Reader confirms the habit is continuing to compound rather than resolving after
+    one night.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_014
+  page_id: ep_002_p02
+  story_function: half_second_pause_at_the_door
+  story_move: Ren pauses at his own reflection a half-second longer than necessary while leaving,
+    foreshadowing the watcher-watched theme without naming it.
+  visual_proof: Medium shot of Ren in his coat at the door, eyes caught for a beat too long on his own
+    reflection in the re-angled mirror.
+  information_delta: Reader sees Ren's body registering something his mind has not yet named, echoing
+    episode one's thesis in a new, personal register.
+  beat_role: recognition
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_015
+  page_id: ep_002_p02
+  story_function: habit_carried_outside_the_home
+  story_move: Ren leaves the apartment already rereading his phone thread with Saeki mid-walk, showing
+    the reading habit has left the house with him.
+  visual_proof: Wide shot of Ren locking his door, phone already in hand and open to the message thread
+    as he walks away.
+  information_delta: Reader learns the containment Ren claimed in his reply text was already false
+    before the door finished closing.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_016
+  page_id: ep_002_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_002.yaml
+notes: 'Episode 2 of 12 in arc 1 (''obsession seed''). Extends strategy_01 (config/source_of_truth/manga_story_strategies/psychological_thriller_strategies.yaml,
+  topic=overthinking) beats 2-3 — the second, darker reading overwriting the first, and the vessel''s
+  practical remote contact — paced out as this episode''s specific escalation: the compulsion crossing
+  from office data into a personal, familial echo at home for the first time. Setting drawn from the
+  strategy bank''s setting_pool: ''a rain-streaked apartment with one mirror angled toward the door.'''
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'
