@@ -160,6 +160,246 @@
           "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z (best fit of the doctrine's two audiences — gen_alpha's school/game touchpoints do not fit a 38-year-old analyst protagonist; gen_z's economic-pressure/burnout/self-performance texture does). Use catalyst 'flagged_anomaly_in_the_pattern_file'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. The ja_JP reader-facing script is native-authored and unchanged; the en_US fields in this chapter_script are operator glosses only (see notes.language below) and were extended minimally in panels ep001_005/011/012 to surface the catalyst object words (pen/screen/app) and gate-lexicon coverage (witness) without altering a single ja_JP character."
         }
       }
+    },
+    {
+      "chapter_number": 2,
+      "chapter_id": "ep_002",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_002.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "cram_school",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "sister_name_echo_in_the_case_file",
+            "logline": "The anomalous name from Ren's flagged file sounds too close to his estranged younger sister's name, and he carries the case file home onto a personal laptop where no audit trail protects him from himself.",
+            "ordinary_world_objects": [
+              "mirror",
+              "phone",
+              "message",
+              "photo"
+            ],
+            "genre_transmutation": "A workplace rule broken quietly at a kitchen table becomes the mystery's first private evidence room; a late-night LINE chat message from a coworker becomes a text the protagonist reads five times for a hidden verdict it does not contain.",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'sister_name_echo_in_the_case_file'. The pattern-reading compulsion crosses from the office into Ren's home for the first time this episode. The ja_JP reader-facing script is native-authored and unchanged; en_US fields on select panels are operator glosses only, extended minimally to surface the catalyst object words (mirror/phone/message/photo) and gate-lexicon coverage (deadline/clue/witness/rule) without altering a single ja_JP character."
+        }
+      }
+    },
+    {
+      "chapter_number": 3,
+      "chapter_id": "ep_003",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_003.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "cram_school",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "after_hours_query_flagged_by_the_system",
+            "logline": "Ren arrives before his team to keep searching company records for the name that echoes his sister's, and his own badge log has quietly begun recording a pattern of after-hours access no one has flagged to him yet.",
+            "ordinary_world_objects": [
+              "terminal",
+              "badge",
+              "coffee",
+              "clock"
+            ],
+            "genre_transmutation": "A badge-access log meant to protect the building becomes evidence of the protagonist's own compulsion; a calendar app reminder for lunch becomes the first ordinary obligation the pattern-reading habit quietly overrides.",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'after_hours_query_flagged_by_the_system'. The compulsion now returns to the office carrying the personal thread from ep_002, and the vessel Saeki witnesses it in person for the first time since ep_001. en_US fields on select panels are operator glosses only, extended minimally for gate-lexicon coverage (clue/witness/deadline/app) without altering ja_JP text."
+        }
+      }
+    },
+    {
+      "chapter_number": 4,
+      "chapter_id": "ep_004",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_004.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "mystery",
+          "strategy_genre": "mystery",
+          "relevance_genre": "mystery",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "cram_school",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern mystery must turn screenshots, transit records, edits, logs, or platform behavior into evidence without becoming a tech explainer.",
+          "catalyst": {
+            "id": "platform_ad_board_matches_the_anomaly",
+            "logline": "A departure board's scrolling ad copy echoes the anomalous name from Ren's file, and he builds a private timetable hypothesis around a stranger on the platform whose face he has decided matches a pattern that was never about her at all.",
+            "ordinary_world_objects": [
+              "platform",
+              "phone",
+              "timetable",
+              "train"
+            ],
+            "genre_transmutation": "A looping station announcement becomes the sound of Ren's own spiraling annotations; a transit app's timetable becomes a private hypothesis machine that costs him his own train home.",
+            "avoid": [
+              "instant_cure",
+              "therapy_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'platform_ad_board_matches_the_anomaly'. The pattern-reading compulsion spreads for the first time onto a stranger, not a coworker or family member — the arc's clearest sign that the reading habit is generalizing beyond its original object. en_US fields on select panels are operator glosses only, extended minimally for gate-lexicon coverage (before/clue/witness/train) without altering ja_JP text."
+        }
+      }
     }
   ]
 }
