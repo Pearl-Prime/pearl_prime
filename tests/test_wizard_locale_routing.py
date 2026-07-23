@@ -50,6 +50,13 @@ def test_entry_screen_routes_every_lane_to_a_localized_wizard():
         assert val != "wizard.html", f"{code} routes to US-English wizard.html"
 
 
+def test_entry_screen_preserves_weekly_operations_link():
+    html = _read("public/index.html")
+    assert 'href="brand_admin_weekly_os.html"' in html, (
+        "split entry must preserve access to weekly brand operations"
+    )
+
+
 def test_brandmatch_maps_every_lane_to_itself():
     js = _read("src/brandMatch.js")
     block = re.search(r"LANE_FROM_MARKET = \{(.+?)\};", js, re.S).group(1)
