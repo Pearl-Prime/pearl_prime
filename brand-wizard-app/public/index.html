@@ -63,6 +63,7 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     <a class="flag-card" onclick="enterWizard('de_DE')"><span class="emoji">🇩🇪</span><span class="name">Germany</span><span class="lang">Deutsch</span></a>
     <a class="flag-card" onclick="enterWizard('it_IT')"><span class="emoji">🇮🇹</span><span class="name">Italy</span><span class="lang">Italiano</span></a>
     <a class="flag-card" onclick="enterWizard('hu_HU')"><span class="emoji">🇭🇺</span><span class="name">Hungary</span><span class="lang">Magyar</span></a>
+    <a class="flag-card" onclick="enterWizard('pt_BR')"><span class="emoji">🇧🇷</span><span class="name">Brazil</span><span class="lang">Português</span></a>
   </div>
 </div>
 
@@ -83,14 +84,15 @@ var LANE_WIZARD = {
   fr_FR:"wizard.html?lang=fr",
   de_DE:"wizard.html?lang=de",
   it_IT:"wizard.html?lang=it",
-  hu_HU:"wizard.html?lang=hu"
+  hu_HU:"wizard.html?lang=hu",
+  pt_BR:"wizard.html?lang=pt"
 };
 /* Lane → market token that brandMatch.js maps to the SAME lane (routes the signup
    into the correct catalog lane, never en_us by accident). */
 var LANE_MARKET = {
   en_US:"us",ja_JP:"jp",ko_KR:"kr",zh_TW:"tw",zh_CN:"cn",zh_HK:"hk",zh_SG:"sg",
   es_US:"es_us",es_ES:"spain",fr_FR:"france",de_DE:"germany",it_IT:"italy",
-  hu_HU:"hungary"
+  hu_HU:"hungary",pt_BR:"brazil"
 };
 
 /* Flag click → straight into the localized Brand Wizard's first page. */
