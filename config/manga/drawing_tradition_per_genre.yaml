@@ -39,12 +39,17 @@ cross_references:
     pr: 803
 
 schema_version: "1.0"
-last_updated: "2026-05-02"
-genres_total: 26   # 26 drawing-tradition blocks (top_8 8 + deferred 18) — splits horror into
-                   # psychological_horror + horror, vs the 25 catalog genres in
+last_updated: "2026-07-22"
+genres_total: 26   # 26 drawing-tradition blocks (top_8 8 + wave_2_deep 6 + deferred 12) — splits
+                   # horror into psychological_horror + horror, vs the 25 catalog genres in
                    # config/manga/canonical_genre_list.yaml (that file is the genre-COUNT SSOT).
 top_8_priority: [healing, dark_fantasy, psychological_horror, mecha, romance, slice_of_life, fantasy_adventure, comedy]
-deferred_phase_2: [battle, sports, mystery, horror, workplace, essay, food, family, procedural, historical, cultivation, sci_fi_cyberpunk, supernatural_everyday, school, memoir, social_issue, graphic_medicine, battle_internal]
+# Wave-2 backfill (2026-07-22): 6 genres upgraded from deferred_phase2 to a full
+# A-H deep block (status: wave_2_deep). resolve_tradition_genre() in
+# phoenix_v4/manga/genre_tradition.py treats any status != "deferred_phase2" as
+# active, so wave_2_deep genres resolve tradition tokens the same as top_8_deep.
+wave_2_deep: [battle, sports, mystery, workplace, sci_fi_cyberpunk, supernatural_everyday]
+deferred_phase_2: [horror, essay, food, family, procedural, historical, cultivation, school, memoir, social_issue, graphic_medicine, battle_internal]
 
 # ════════════════════════════════════════════════════════════════════════════
 # TOP-8 PRIORITY GENRES (full A–H spec, 5–8 mangaka per genre)
@@ -1004,63 +1009,257 @@ genres:
 
   # ── 9. BATTLE ──────────────────────────────────────────────────────────────
   battle:
-    status: deferred_phase2
-    scope_note: "Shonen-action register; sharp-square-line + speed-line + impact-frame canon (Toriyama→Oda→Arakawa→Kishimoto→Murata lineage). Full A–H spec deferred to cookbook follow-up PR."
-    A_line_tradition: { status: deferred_phase2, anchor_attribute: "sharp square lines for impact frames (Toriyama)" }
-    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "15–35% black fill — battle pages need legibility at speed" }
-    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "high expression cap, reaction-shot grammar" }
-    D_panel_framing: { status: deferred_phase2, anchor_attribute: "rapid-alternation camera distance + impact-frame full-bleed" }
-    E_color_treatment: { status: deferred_phase2, anchor_attribute: "saturated primary palette" }
+    status: wave_2_deep
+    label: "Battle / Shōnen Action"
+    scope_note: "Shonen-action register; sharp-square-line + speed-line + impact-frame canon (Toriyama→Oda→Arakawa→Kishimoto→Murata lineage)."
+
+    A_line_tradition:
+      line_weight_profile: sharp_square_impact
+      stroke_economy: low
+      construction_lines: hidden_under_ink
+      inking_pressure: heavy_on_impact_frames
+      exemplar_attributes:
+        - "sharp square lines built for impact frames (Toriyama)"
+        - "clean high-contrast line weight that survives speed-line overlay (Oda)"
+        - "anatomical realism under exaggerated motion (Murata)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "15–35%"
+      black_fill_floor_rule: "battle pages need legibility at speed — never drop below ~15% or impact frames read flat"
+      screentone_strategy: speed_line_and_impact_burst
+      halftone_to_solid_black_ratio: "1:1"
+      hatching_style: radial_speed_lines
+      white_space_treatment: "impact frames may go full-bleed black/white contrast; quiet beats revert to 30–40% white"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_dynamic
+      expression_frequency_cap: high
+      expression_vocabulary: [gritted_teeth, battle_scream, focused_glare, triumphant_grin, exhausted_slump]
+      pose_vocabulary: [mid_strike, launch, landing, guard_stance, follow_through]
+      hand_drawing: anatomical_with_motion_blur_on_strikes
+
+    D_panel_framing:
+      camera_distance_distribution: "40% close/impact / 35% medium action / 25% wide establishing-of-scale"
+      page_rhythm: rapid_alternation_with_full_bleed_impact
+      background_detail_density:
+        landscape: environment_as_scale_reference
+        interior: minimal_destroyed_or_dust
+      speed_lines_impact_frames: required_on_impact
+
+    E_color_treatment:
+      palette: saturated_primary
+      saturation_range: "60–90%"
+      color_anchor_mangaka: akira_toriyama
+      register: flat_cel_high_contrast
+
     F_forbidden_drift_patterns:
       - "static superhero-comic splash with rendered musculature (Marvel/DC)"
       - "Pony-XL painterly-render look — manga battle reads as ink-on-paper not airbrush"
+      - "iyashikei soft lighting, pastel palette"
+      - "chibi deformation outside of comedic beat panels"
+
     G_mangaka_exemplars:
-      - { name: "Akira Toriyama", works: ["Dragon Ball"], url: "https://en.wikipedia.org/wiki/Akira_Toriyama" }
-      - { name: "Yusuke Murata", works: ["One-Punch Man"], url: "https://en.wikipedia.org/wiki/Yusuke_Murata" }
-      - { name: "Tetsuo Hara", works: ["Hokuto no Ken"], url: "https://en.wikipedia.org/wiki/Tetsuo_Hara" }
-      - { name: "Tatsuki Fujimoto", works: ["Chainsaw Man"], url: "https://en.wikipedia.org/wiki/Chainsaw_Man" }
+      - name: Akira Toriyama
+        works: ["Dragon Ball (1984–1995)"]
+        url: "https://en.wikipedia.org/wiki/Akira_Toriyama"
+        note: "sharp square-line impact frames; the genre's foundational anchor"
+      - name: Yusuke Murata
+        works: ["One-Punch Man (2012–)"]
+        url: "https://en.wikipedia.org/wiki/Yusuke_Murata"
+        note: "anatomically hyper-precise motion under exaggerated force"
+      - name: Tetsuo Hara
+        works: ["Hokuto no Ken (1983–1988)"]
+        url: "https://en.wikipedia.org/wiki/Tetsuo_Hara"
+        note: "muscular-realist impact grammar, high black-fill ratio"
+      - name: Tatsuki Fujimoto
+        works: ["Chainsaw Man (2018–)"]
+        url: "https://en.wikipedia.org/wiki/Chainsaw_Man"
+        note: "modern shōnen battle register with cinematic panel breaks"
+      - name: Eiichiro Oda
+        works: ["One Piece (1997–)"]
+        url: "https://en.wikipedia.org/wiki/One_Piece"
+        note: "clean high-contrast line that survives dense speed-line overlay"
+
     H_token_mapping:
-      animagine_starter: "(dynamic ink lines:1.2), heavy speedlines, screentone shading, manga panel, monochrome — Animagine handles shōnen battle natively"
-      empirical_status: deferred_validation
+      animagine_xl_4_0:
+        positive: "(dynamic ink lines:1.2), heavy speedlines, impact frame, screentone shading, manga panel, monochrome, shonen battle"
+        negative: "lowres, worst quality, soft lighting, pastel, chibi, static pose"
+        empirical_status: deferred_validation
+      qwen_image:
+        positive: "manga battle panel, sharp square line art, heavy speed lines, impact frame full bleed, high contrast ink, dynamic pose"
+        negative: "soft watercolor, pastel, static composition, flat affect"
+        empirical_status: deferred_validation
+      flux_schnell:
+        positive: "shonen manga battle page, sharp ink lines, radial speed lines, impact frame, saturated primary colors, dynamic motion"
+        negative: "painterly render, soft shading, muted palette, calm scene"
+        empirical_gap: "FLUX-schnell at 4 steps may under-render dense speed-line hatching; 8-step smoke test recommended"
 
   # ── 10. SPORTS ─────────────────────────────────────────────────────────────
   sports:
-    status: deferred_phase2
+    status: wave_2_deep
+    label: "Sports"
     scope_note: "Body-in-motion is the whole genre; anatomically accurate but exaggerated for kinetic clarity. Empirically top-7 globally per Q4 — operator portfolio underweighted (4 rows vs 51 mystery)."
-    A_line_tradition: { status: deferred_phase2, anchor_attribute: "anatomically careful + exaggerated for impact (Inoue Slam Dunk lineage)" }
-    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "court/field collapse to speed-line voids during peak action" }
-    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "sweat-bead as primary ink texture; reaction-grammar inherits from battle" }
-    D_panel_framing: { status: deferred_phase2, anchor_attribute: "training-payoff page rhythm" }
-    E_color_treatment: { status: deferred_phase2, anchor_attribute: "uniform+sky palette, saturated team colors" }
+
+    A_line_tradition:
+      line_weight_profile: anatomically_careful_exaggerated
+      stroke_economy: medium
+      construction_lines: visible_on_motion_studies
+      inking_pressure: firm_on_action_peaks
+      exemplar_attributes:
+        - "anatomically careful + exaggerated for impact (Inoue Slam Dunk lineage)"
+        - "kinetic silhouette clarity over surface detail during peak action (Furudate)"
+        - "consistent proportion discipline across full-body athletic poses (Takahashi)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "10–25%"
+      black_fill_floor_rule: "court/field collapses to speed-line voids during peak action; quieter training beats run lighter"
+      screentone_strategy: motion_streak_and_crowd_gradient
+      halftone_to_solid_black_ratio: "2:1 toward halftone"
+      hatching_style: directional_motion_streaks
+      white_space_treatment: "peak-action panels favor negative space around the athlete to isolate motion line"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_athletic
+      expression_frequency_cap: medium_high
+      expression_vocabulary: [gritted_focus, triumphant_shout, exhausted_gasp, sweat_beaded_determination, team_camaraderie]
+      pose_vocabulary: [wind_up, mid_action, follow_through, bench_rest, victory_pose]
+      hand_drawing: anatomical_grip_detail
+
+    D_panel_framing:
+      camera_distance_distribution: "35% wide court/field / 40% mid-action / 25% reaction close-up"
+      page_rhythm: training_payoff_rhythm
+      background_detail_density:
+        landscape: stadium_or_court_context
+        interior: locker_room_light_detail
+      speed_lines_impact_frames: required_on_peak_action
+
+    E_color_treatment:
+      palette: uniform_and_sky
+      saturation_range: "50–70%"
+      color_anchor_mangaka: takehiko_inoue
+      register: saturated_team_colors_flat_cel
+
     F_forbidden_drift_patterns:
       - "chibi 4-panel format kills tension"
       - "static fashion-pose illustration kills motion"
       - "moe-glossy lighting"
+      - "battle-genre impact-frame gore or destruction"
+
     G_mangaka_exemplars:
-      - { name: "Takehiko Inoue", works: ["Slam Dunk (1990–96)"], url: "https://en.wikipedia.org/wiki/Slam_Dunk_(manga)" }
-      - { name: "Haruichi Furudate", works: ["Haikyū!! (2012–2020)"], url: "https://en.wikipedia.org/wiki/Haikyu!!" }
-      - { name: "Yoichi Takahashi", works: ["Captain Tsubasa (1981–)"], url: "https://en.wikipedia.org/wiki/Captain_Tsubasa" }
+      - name: Takehiko Inoue
+        works: ["Slam Dunk (1990–1996)"]
+        url: "https://en.wikipedia.org/wiki/Slam_Dunk_(manga)"
+        note: "sweat-bead ink texture; the genre's foundational anchor"
+      - name: Haruichi Furudate
+        works: ["Haikyū!! (2012–2020)"]
+        url: "https://en.wikipedia.org/wiki/Haikyu!!"
+        note: "kinetic silhouette clarity during peak-action panels"
+      - name: Yoichi Takahashi
+        works: ["Captain Tsubasa (1981–)"]
+        url: "https://en.wikipedia.org/wiki/Captain_Tsubasa"
+        note: "consistent full-body athletic proportion discipline"
+      - name: Yuji Terajima
+        works: ["Ace of Diamond (2006–)"]
+        url: "https://en.wikipedia.org/wiki/Diamond_no_Ace"
+        note: "training-payoff page rhythm; baseball-specific motion grammar"
+
     H_token_mapping:
-      animagine_starter: "(athletic figure in motion:1.3), sweat, dynamic angle, ink shading, sportswear, manga panel"
+      animagine_xl_4_0:
+        positive: "(athletic figure in motion:1.3), sweat, dynamic angle, ink shading, sportswear, manga panel, motion streaks"
+        negative: "lowres, worst quality, static pose, chibi, fashion illustration"
+        empirical_status: deferred_validation
+      qwen_image:
+        positive: "manga sports panel, athlete mid-action, motion streak ink lines, stadium background, saturated team colors"
+        negative: "static illustration, glossy fashion pose, muted colors"
+        empirical_status: deferred_validation
+      flux_schnell:
+        positive: "shonen sports manga page, kinetic pose, directional motion lines, saturated uniform colors, court or field background"
+        negative: "still pose, painterly render, desaturated palette"
+        empirical_gap: "FLUX-schnell at 4 steps may soften motion-streak directionality; 8-step smoke test recommended"
 
   # ── 11. MYSTERY ────────────────────────────────────────────────────────────
   mystery:
-    status: deferred_phase2
+    status: wave_2_deep
+    label: "Mystery / Detective Procedural"
     scope_note: "Procedural-clean line for clue legibility; tight close-ups on hands/eyes/watches; thin precise inks not expressive brush noise."
-    A_line_tradition: { status: deferred_phase2, anchor_attribute: "thin precise lines for clue legibility, no expressive brush noise" }
-    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "low ink density to preserve clarity" }
-    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "flat affect with peak revelation panel" }
-    D_panel_framing: { status: deferred_phase2, anchor_attribute: "panels read like evidence-board cuts" }
-    E_color_treatment: { status: deferred_phase2 }
+
+    A_line_tradition:
+      line_weight_profile: thin_precise_uniform
+      stroke_economy: high
+      construction_lines: hidden
+      inking_pressure: low_and_even
+      exemplar_attributes:
+        - "thin precise lines for clue legibility, no expressive brush noise (Aoyama)"
+        - "clean diagrammatic line that reads like an evidence board (Matsui)"
+        - "restrained realism that keeps faces legible under tension (Urasawa)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "8–18%"
+      black_fill_floor_rule: "low ink density preserves clarity — clue panels must never lose legibility to shadow"
+      screentone_strategy: minimal_flat_gradient
+      halftone_to_solid_black_ratio: "4:1 toward halftone"
+      hatching_style: sparse_procedural
+      white_space_treatment: "generous white space around evidence close-ups; revelation panels may spike to high contrast"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_neutral
+      expression_frequency_cap: low_with_revelation_spike
+      expression_vocabulary: [flat_affect, narrowed_eyes, sudden_realization, controlled_tension, quiet_triumph]
+      pose_vocabulary: [seated_interrogation, examining_evidence, walking_the_scene, pointing_accusation]
+      hand_drawing: anatomical_precise_gesture
+
+    D_panel_framing:
+      camera_distance_distribution: "45% close-up on clue objects / 35% medium dialogue / 20% wide scene-establishing"
+      page_rhythm: evidence_board_cut_rhythm
+      background_detail_density:
+        landscape: research_accurate_setting
+        interior: cluttered_with_meaningful_props
+      speed_lines_impact_frames: forbidden_except_revelation_flash
+
+    E_color_treatment:
+      palette: muted_neutral
+      saturation_range: "20–40%"
+      color_anchor_mangaka: naoki_urasawa
+      register: flat_restrained_monochrome_leaning
+
     F_forbidden_drift_patterns:
       - "horror-genre ink density (kills procedural cleanness)"
       - "comedy-style deformation (destroys reader trust in clues)"
+      - "shōnen speed lines outside a revelation-flash panel"
+      - "iyashikei soft pastel wash"
+
     G_mangaka_exemplars:
-      - { name: "Gosho Aoyama", works: ["Detective Conan (1994–)"], url: "https://en.wikipedia.org/wiki/Case_Closed" }
-      - { name: "Yusei Matsui", works: ["Neuro / Assassination Classroom"], url: "https://en.wikipedia.org/wiki/Yusei_Matsui" }
-      - { name: "Naoki Urasawa", works: ["Monster (1994–2001)"], url: "https://en.wikipedia.org/wiki/Monster_(manga)" }
+      - name: Gosho Aoyama
+        works: ["Detective Conan (1994–)"]
+        url: "https://en.wikipedia.org/wiki/Case_Closed"
+        note: "thin precise clue-legibility line; the genre's foundational anchor"
+      - name: Yusei Matsui
+        works: ["Neuro: Supernatural Detective (2005–2009)", "Assassination Classroom (2012–2016)"]
+        url: "https://en.wikipedia.org/wiki/Yusei_Matsui"
+        note: "diagrammatic clean line reading like an evidence board"
+      - name: Naoki Urasawa
+        works: ["Monster (1994–2001)", "20th Century Boys (1999–2006)"]
+        url: "https://en.wikipedia.org/wiki/Monster_(manga)"
+        note: "restrained realism; tension carried in flat-affect faces"
+      - name: Motoro Mase
+        works: ["Ikigami (2005–2012)"]
+        url: "https://en.wikipedia.org/wiki/Ikigami"
+        note: "procedural-clean panel grammar under moral tension"
+
     H_token_mapping:
-      qwen_starter: "manga panel, detective interrogation, clean line art, evidence on table, monochrome — Qwen excels at text/diagram rendering"
+      animagine_xl_4_0:
+        positive: "manga panel, detective interrogation, clean thin line art, evidence on table, neutral expression, monochrome"
+        negative: "lowres, worst quality, dense crosshatching, exaggerated expression, chibi"
+        empirical_status: deferred_validation
+      qwen_image:
+        positive: "manga panel, detective interrogation, clean line art, evidence on table, monochrome, diagrammatic clarity"
+        negative: "horror shading, comedic deformation, dense hatching"
+        empirical_status: validated_by_research
+        citation: "https://github.com/QwenLM/Qwen-Image"
+      flux_schnell:
+        positive: "procedural manga page, thin precise ink lines, clue close-up, muted neutral palette, evidence-board panel rhythm"
+        negative: "heavy shadow, exaggerated expression, saturated colors"
+        empirical_gap: "FLUX-schnell at 4 steps tends to thicken thin-line legibility; smoke-test at 4 vs 8 steps recommended"
 
   # ── 12. HORROR (general — distinct from psychological_horror) ──────────────
   horror:
@@ -1083,22 +1282,87 @@ genres:
 
   # ── 13. WORKPLACE ──────────────────────────────────────────────────────────
   workplace:
-    status: deferred_phase2
+    status: wave_2_deep
+    label: "Workplace"
     scope_note: "Mid-range body shots, suit/uniform fidelity; expression carried in eyes and small mouth-shifts."
-    A_line_tradition: { status: deferred_phase2, anchor_attribute: "expression in eyes/mouth-shift not full-body action" }
-    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "ambient screentone for fluorescent office light" }
-    C_body_language_expression: { status: deferred_phase2 }
-    D_panel_framing: { status: deferred_phase2 }
-    E_color_treatment: { status: deferred_phase2 }
+
+    A_line_tradition:
+      line_weight_profile: medium_uniform_professional
+      stroke_economy: medium
+      construction_lines: hidden
+      inking_pressure: even
+      exemplar_attributes:
+        - "expression carried in eyes/mouth-shift not full-body action (Okazaki)"
+        - "clean professional-attire fidelity without fantasy embellishment (Higashimura)"
+        - "clear panel-to-panel continuity for dialogue-heavy office scenes (Inagaki/Shirai adjacent register)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "10–20%"
+      black_fill_floor_rule: "ambient screentone stands in for fluorescent office light; avoid pure white flat interiors"
+      screentone_strategy: ambient_gradient_fluorescent
+      halftone_to_solid_black_ratio: "3:1 toward halftone"
+      hatching_style: minimal_office_texture
+      white_space_treatment: "30–45% white; desk/monitor clutter carries visual interest instead of empty space"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_professional
+      expression_frequency_cap: medium
+      expression_vocabulary: [professional_neutral, suppressed_frustration, polite_smile, quiet_determination, exhausted_relief]
+      pose_vocabulary: [seated_at_desk, standing_presentation, walking_hallway, phone_call, meeting_table]
+      hand_drawing: anatomical_gesture_with_office_props
+
+    D_panel_framing:
+      camera_distance_distribution: "55% medium conversational / 30% close reaction / 15% wide office establishing"
+      page_rhythm: regular_grid_dialogue_paced
+      background_detail_density:
+        landscape: skyline_establishing_light
+        interior: office_detail_moderate
+      speed_lines_impact_frames: forbidden
+
+    E_color_treatment:
+      palette: neutral_corporate
+      saturation_range: "25–45%"
+      color_anchor_mangaka: mari_okazaki
+      register: flat_muted_professional
+
     F_forbidden_drift_patterns:
       - "shōnen speedlines in meeting scenes"
       - "workplace clothing drawn as fantasy costume"
+      - "iyashikei watercolor wash on office interiors"
+      - "battle-frame impact composition"
+
     G_mangaka_exemplars:
-      - { name: "Akiko Higashimura", works: ["Princess Jellyfish"], cross_genre_link: romance }
-      - { name: "Kaiu Shirai / Riichirō Inagaki", works: ["Dr. Stone"], url: "https://en.wikipedia.org/wiki/Dr._Stone" }
-      - { name: "Mari Okazaki", works: ["Suppli (2004–13)"], url: "https://en.wikipedia.org/wiki/Suppli" }
+      - name: Mari Okazaki
+        works: ["Suppli (2004–2013)"]
+        url: "https://en.wikipedia.org/wiki/Suppli"
+        note: "expression-in-eyes register; the genre's foundational anchor"
+      - name: Akiko Higashimura
+        works: ["Princess Jellyfish (2008–2017)"]
+        url: "https://en.wikipedia.org/wiki/Princess_Jellyfish"
+        note: "clean professional fidelity crossing into romance/workplace hybrid"
+      - name: Kaiu Shirai
+        works: ["Dr. Stone (2017–2022, story)"]
+        url: "https://en.wikipedia.org/wiki/Dr._Stone"
+        note: "dialogue-dense panel clarity adjacent register"
+      - name: Moyoco Anno
+        works: ["Working!! adjacent — Sakuran (2001–2003)"]
+        url: "https://en.wikipedia.org/wiki/Moyoco_Anno"
+        note: "professional-register body language restraint"
+
     H_token_mapping:
-      qwen_starter: "business attire, office setting, manga panel, conversational scene, neutral monochrome, soft screentone"
+      animagine_xl_4_0:
+        positive: "business attire, office setting, manga panel, conversational scene, neutral monochrome, soft screentone, fluorescent light"
+        negative: "lowres, worst quality, fantasy costume, speedlines, chibi"
+        empirical_status: deferred_validation
+      qwen_image:
+        positive: "business attire, office setting, manga panel, conversational scene, neutral monochrome, soft screentone"
+        negative: "fantasy costume, dramatic action, saturated colors"
+        empirical_status: validated_by_research
+        citation: "https://github.com/QwenLM/Qwen-Image"
+      flux_schnell:
+        positive: "workplace manga page, professional attire, muted corporate palette, ambient fluorescent screentone, dialogue scene"
+        negative: "fantasy setting, dramatic lighting, action pose"
+        empirical_gap: "FLUX-schnell at 4 steps may under-render ambient fluorescent gradient; 8-step smoke test recommended"
 
   # ── 14. ESSAY ──────────────────────────────────────────────────────────────
   essay:
@@ -1214,41 +1478,170 @@ genres:
 
   # ── 20. SCI_FI_CYBERPUNK ───────────────────────────────────────────────────
   sci_fi_cyberpunk:
-    status: deferred_phase2
+    status: wave_2_deep
+    label: "Sci-Fi / Cyberpunk"
     scope_note: "Architectural ink density — Nihei-grade megastructures; technical-pen precision on machinery; characters small relative to environment."
-    A_line_tradition: { status: deferred_phase2, anchor_attribute: "technical-pen precision" }
-    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "architectural ink density Nihei-grade" }
-    C_body_language_expression: { status: deferred_phase2 }
-    D_panel_framing: { status: deferred_phase2, anchor_attribute: "characters small relative to environment" }
-    E_color_treatment: { status: deferred_phase2 }
+
+    A_line_tradition:
+      line_weight_profile: technical_pen_precision
+      stroke_economy: low
+      construction_lines: visible_on_machinery
+      inking_pressure: fine_and_dense
+      exemplar_attributes:
+        - "technical-pen precision on machinery and megastructure (Nihei)"
+        - "hard-surface mecha/tech line discipline (Shirow)"
+        - "atmospheric density scaling character to environment (Otomo)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "30–50%"
+      black_fill_floor_rule: "architectural ink density is Nihei-grade — megastructure backgrounds carry near-solid black at depth"
+      screentone_strategy: dense_mechanical_gradient
+      halftone_to_solid_black_ratio: "1:2 toward solid"
+      hatching_style: technical_crosshatch_on_structure
+      white_space_treatment: "white reserved for light-source glow (screens, vents, distant sky slivers)"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_stoic
+      expression_frequency_cap: low
+      expression_vocabulary: [stoic_focus, quiet_dread, technical_concentration, restrained_alarm]
+      pose_vocabulary: [dwarfed_by_structure, operating_console, traversing_corridor, observing_skyline]
+      hand_drawing: anatomical_technical_interface
+
+    D_panel_framing:
+      camera_distance_distribution: "50% wide architectural / 30% medium / 20% close technical detail"
+      page_rhythm: environment_led_slow_reveal
+      background_detail_density:
+        landscape: megastructure_maximal
+        interior: dense_machinery_detail
+      speed_lines_impact_frames: rare_reserved_for_action_beats
+
+    E_color_treatment:
+      palette: cool_desaturated_neon_accent
+      saturation_range: "15–35% base, neon accents to 80%"
+      color_anchor_mangaka: tsutomu_nihei
+      register: monochrome_with_neon_glow_accent
+
     F_forbidden_drift_patterns:
       - "shōnen action close-up framing"
       - "skip the architectural background (the city IS the genre)"
+      - "warm iyashikei palette"
+      - "chibi deformation"
+
     G_mangaka_exemplars:
-      - { name: "Masamune Shirow", cross_genre_link: mecha }
-      - { name: "Tsutomu Nihei", works: ["BLAME!", "Knights of Sidonia (1997–)"], url: "https://en.wikipedia.org/wiki/Tsutomu_Nihei" }
-      - { name: "Katsuhiro Otomo", cross_genre_link: mecha }
+      - name: Tsutomu Nihei
+        works: ["BLAME! (1997–2003)", "Knights of Sidonia (2009–2015)"]
+        url: "https://en.wikipedia.org/wiki/Tsutomu_Nihei"
+        note: "architectural ink density; the genre's foundational anchor"
+      - name: Masamune Shirow
+        works: ["Ghost in the Shell (1989–1990)"]
+        url: "https://en.wikipedia.org/wiki/Masamune_Shirow"
+        note: "hard-surface technical-pen precision on machinery"
+      - name: Katsuhiro Otomo
+        works: ["Akira (1982–1990)"]
+        url: "https://en.wikipedia.org/wiki/Akira_(manga)"
+        note: "atmospheric density that dwarfs characters against megastructure"
+      - name: Yukito Kishiro
+        works: ["Battle Angel Alita / Gunnm (1990–1995)"]
+        url: "https://en.wikipedia.org/wiki/Battle_Angel_Alita"
+        note: "cyberpunk body-modification detail with technical precision"
+
     H_token_mapping:
-      flux_schnell_starter: "cyberpunk megastructure, technical line art, dense urban background, character small in frame, monochrome ink — FLUX strong on architectural detail"
+      animagine_xl_4_0:
+        positive: "cyberpunk megastructure, technical line art, dense urban background, character small in frame, monochrome ink, neon accent"
+        negative: "lowres, worst quality, warm pastel, chibi, close-up action framing"
+        empirical_status: deferred_validation
+      qwen_image:
+        positive: "cyberpunk manga panel, megastructure architecture, technical precision line art, dense machinery detail, neon glow accents, character dwarfed by environment"
+        negative: "pastel palette, chibi deformation, shonen close-up"
+        empirical_status: deferred_validation
+      flux_schnell:
+        positive: "cyberpunk megastructure, technical line art, dense urban background, character small in frame, monochrome ink"
+        negative: "warm palette, soft lighting, cute chibi style"
+        empirical_gap: "FLUX-schnell at 4 steps may under-render fine technical crosshatch; 8-step smoke test recommended — FLUX otherwise strong on architectural detail"
 
   # ── 21. SUPERNATURAL_EVERYDAY ──────────────────────────────────────────────
   supernatural_everyday:
-    status: deferred_phase2
+    status: wave_2_deep
+    label: "Supernatural Everyday"
     scope_note: "Mushishi register — real-world textures + delicate line-disturbance for supernatural element (wisps/blurs/tone-gradient)."
-    A_line_tradition: { status: deferred_phase2, anchor_attribute: "real-world textures rendered at high background fidelity" }
-    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "supernatural rendered as delicate line-disturbance, not speedline-shouty" }
-    C_body_language_expression: { status: deferred_phase2 }
-    D_panel_framing: { status: deferred_phase2 }
-    E_color_treatment: { status: deferred_phase2 }
+
+    A_line_tradition:
+      line_weight_profile: real_world_textured_delicate
+      stroke_economy: medium
+      construction_lines: hidden
+      inking_pressure: light_with_selective_disturbance
+      exemplar_attributes:
+        - "real-world textures rendered at high background fidelity (Urushibara)"
+        - "quiet naturalistic line broken only where the supernatural intrudes (Asano-adjacent register)"
+        - "ordinary-world grounding that makes the uncanny element legible by contrast"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "10–20%"
+      black_fill_floor_rule: "the supernatural renders as delicate line-disturbance, not speedline-shouty — reserve density for the mundane world"
+      screentone_strategy: gradient_wisp_overlay
+      halftone_to_solid_black_ratio: "3:1 toward halftone"
+      hatching_style: naturalistic_with_ethereal_gradient
+      white_space_treatment: "mundane backgrounds carry moderate detail; supernatural elements introduced via tone-gradient bloom, not white-space removal"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_soft
+      expression_frequency_cap: low
+      expression_vocabulary: [quiet_wonder, gentle_unease, contemplative_stillness, soft_recognition]
+      pose_vocabulary: [observing, walking_rural_path, kneeling_by_phenomenon, listening]
+      hand_drawing: anatomical_individual_finger_separation
+
+    D_panel_framing:
+      camera_distance_distribution: "50% wide naturalistic / 30% medium / 20% close on the supernatural detail"
+      page_rhythm: slow_reveal_regular_grid
+      background_detail_density:
+        landscape: high_naturalistic_fidelity
+        interior: lived_in_rural_or_domestic
+      speed_lines_impact_frames: forbidden
+
+    E_color_treatment:
+      palette: earth_tone_with_ethereal_bloom
+      saturation_range: "25–45%"
+      color_anchor_mangaka: yuki_urushibara
+      register: naturalistic_wash_with_gradient_glow
+
     F_forbidden_drift_patterns:
       - "spirit drawn as shōnen monster"
       - "skip the mundane background"
+      - "horror-genre dense crosshatch"
+      - "battle-frame speed lines"
+
     G_mangaka_exemplars:
-      - { name: "Yuki Urushibara", works: ["Mushishi (1999–2008)"], url: "https://en.wikipedia.org/wiki/Mushishi" }
-      - { name: "Inio Asano", cross_genre_link: romance }
-      - { name: "Akihito Tsukushi", cross_genre_link: fantasy_adventure }
+      - name: Yuki Urushibara
+        works: ["Mushishi (1999–2008)"]
+        url: "https://en.wikipedia.org/wiki/Mushishi"
+        note: "real-world texture + delicate line-disturbance; the genre's foundational anchor"
+      - name: Inio Asano
+        works: ["Goodnight Punpun (2007–2013)"]
+        url: "https://en.wikipedia.org/wiki/Inio_Asano"
+        note: "naturalistic grounding with occasional surreal intrusion (cross-register with romance)"
+      - name: Akihito Tsukushi
+        works: ["Made in Abyss (2012–)"]
+        url: "https://en.wikipedia.org/wiki/Made_in_Abyss"
+        note: "ordinary-detail fidelity that makes the uncanny legible by contrast"
+      - name: Daisuke Igarashi
+        works: ["Children of the Sea (2006–2011)"]
+        url: "https://en.wikipedia.org/wiki/Children_of_the_Sea"
+        note: "naturalistic-fidelity backgrounds with ethereal-gradient supernatural elements"
+
     H_token_mapping:
-      qwen_starter: "Mushishi style, mundane setting with subtle ethereal element, soft line art, gradient screentone, quiet composition"
+      animagine_xl_4_0:
+        positive: "Mushishi style, mundane setting with subtle ethereal element, soft line art, gradient screentone, quiet composition"
+        negative: "lowres, worst quality, shonen monster design, dense crosshatch, speedlines"
+        empirical_status: deferred_validation
+      qwen_image:
+        positive: "Mushishi style, mundane setting with subtle ethereal element, soft line art, gradient screentone, quiet composition"
+        negative: "shonen monster design, dense crosshatch, speedlines"
+        empirical_status: validated_by_research
+        citation: "https://github.com/QwenLM/Qwen-Image"
+      flux_schnell:
+        positive: "supernatural-everyday manga page, naturalistic rural background, delicate ethereal line-disturbance, earth-tone palette, quiet composition"
+        negative: "shonen monster, dense hatching, action speed lines"
+        empirical_gap: "FLUX-schnell at 4 steps may over-simplify the ethereal gradient bloom; 8-step smoke test recommended"
 
   # ── 22. SCHOOL ─────────────────────────────────────────────────────────────
   school:

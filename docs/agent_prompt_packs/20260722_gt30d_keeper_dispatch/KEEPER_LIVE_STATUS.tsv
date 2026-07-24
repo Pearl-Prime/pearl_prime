@@ -1,0 +1,15 @@
+idea_id	title	audit_status	live_status	evidence_paths	notes	recommended_lane
+I042	Manga structural-composition MVP	TRULY_MISSING	TRULY_MISSING	old_chat_specs/Untitled 357.txt	fetch=ok; main=bebc88fb705f	C01
+I043	Manga PassB bar packet	TRULY_MISSING	TRULY_MISSING	old_chat_specs/Untitled 362.txt	fetch=ok; main=bebc88fb705f	C02
+I029	Manga V2 lettering/bubble	PARTIAL	PARTIAL	scripts/manga/	fetch=ok; main=bebc88fb705f	C02/D07
+I034	Storefront buy platform	TRULY_MISSING	TRULY_MISSING	(none)	fetch=ok; main=bebc88fb705f	C03
+I025	Atom gap / bridges / bestseller	PARTIAL	PARTIAL	docs/specs/session_mining_batch_20260718/ATOM_SURFACE_TAXONOMY_AND_VARIATION_MANIFEST_V1_SPEC.md;docs/BESTSELLER_DRIFT_ROOT_CAUSE_2026-07-02.md	fetch=ok; main=bebc88fb705f	C04
+I048	Atom cohesion chunked plan	PARTIAL	PARTIAL	docs/specs/session_mining_batch_20260718/ATOM_SURFACE_TAXONOMY_AND_VARIATION_MANIFEST_V1_SPEC.md	fetch=ok; main=bebc88fb705f	C04
+I026	Music-mode freebie funnel	TRULY_MISSING	PARTIAL	docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md;docs/agent_prompt_packs/20260721_music_mode_wizard_to_pipeline_wiring;docs/agent_prompt_packs/20260721_music_mode_wizard_to_pipeline_wiring	fetch=ok; main=bebc88fb705f	C05/D08
+I005	Cover signature/blueprint	PARTIAL	PARTIAL	docs/specs/COVER_FIVE_LAYER_UNIQUENESS_V1_SPEC.md;docs/NAMING_COVER_SYSTEM_37x14.md	fetch=ok; main=bebc88fb705f	C06
+I049	Brand registry 37x14 unify	PARTIAL	PARTIAL	docs/NAMING_COVER_SYSTEM_37x14.md;docs/specs/COVER_FIVE_LAYER_UNIQUENESS_V1_SPEC.md	fetch=ok; main=bebc88fb705f	C06
+I006	family_id enum drift gate	TRULY_MISSING	TRULY_MISSING	phoenix_v4/gates	fetch=ok; main=bebc88fb705f	D01
+I032	angle_id registry join	TRULY_MISSING	TRULY_MISSING	config/;scripts/	fetch=ok; main=bebc88fb705f	D02
+I045	Books-first STORY seeding	TRULY_MISSING	TRULY_MISSING	old_chat_specs/Untitled 366.txt	fetch=ok; main=bebc88fb705f	D03
+I007	Catalog knob usage analyzer	PARTIAL	PARTIAL	scripts/audit/build_pipeline_matrix.py	fetch=ok; main=bebc88fb705f	D04
+I001	Author resolution wiring	PARTIAL	PARTIAL	docs/;phoenix_v4/	fetch=ok; main=bebc88fb705f	D05
