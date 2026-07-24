@@ -228,6 +228,20 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
     Waves 2–4 are now **closed**; the sole remaining open item is the **Phase B history rewrite**, which stays
     owner-gated (scheduled maintenance window) — see Lane C. Parent ws `ws_lfs_setup_20260410` stays **active**
     only because Phase B is still open.
+  - **R2 durability verifier — CODE-WIRED, BLOCKED on secrets (2026-07-24).** `.github/workflows/
+    r2-offload-deep-verify.yml` now schedules `scripts/ci/deep_verify_r2_offload.py` weekly (Wed 05:00 UTC)
+    + `workflow_dispatch`, full sha256 mode against all 6 landed manifests under `artifacts/manifests/
+    lfs_offload/` (locally re-run head-only against live R2 this session: `PASS (6 manifest(s))`, non-vacuous —
+    the offloaded Wave 3/4 blobs are retrievable). The scheduled/dispatched GHA run itself cannot go green yet:
+    `gh secret list` on `Pearl-Prime/pearl_prime` returns **zero** repo Actions secrets — `CLOUDFLARE_ACCOUNT_ID`,
+    `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_ENDPOINT` (the exact names `scripts/artifacts/r2_sync.py`
+    reads) are not provisioned, and the acting agent's token lacked `secrets:write` to add them. Env-name
+    mismatch risk (podcast-weekly.yml uses `R2_ACCOUNT_ID`, not `CLOUDFLARE_ACCOUNT_ID`) is pre-resolved by
+    naming the new workflow's secrets to match the code exactly — once an operator with repo-admin runs
+    `gh secret set {CLOUDFLARE_ACCOUNT_ID,R2_ACCESS_KEY_ID,R2_SECRET_ACCESS_KEY,R2_ENDPOINT}` (values already in
+    macOS Keychain per `docs/INTEGRATION_CREDENTIALS_REGISTRY.md`) and triggers `workflow_dispatch`, this should
+    go green with no further code change. Acceptance layer: **CODE-WIRED**, not system-working — no scheduled
+    run has executed green yet.
   - **What-runs-where policy + advisory RAP artifact-write detector — INTEGRATION CANDIDATE.** Laptop is edit-only;
     Pearl Star runs GPU/LLM work via `pscli`; GitHub Actions orchestrates; R2 holds binaries. The detector is
     WARN-only for its first landing and has a mutation test proving an unmediated local binary write is surfaced.
