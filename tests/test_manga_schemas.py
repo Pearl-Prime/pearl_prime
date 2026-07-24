@@ -422,6 +422,30 @@ def _minimal_payload(stem: str) -> dict:
             "threshold": 100,
             "gates": [],
         },
+        "arc_storyboard_plan": {
+            **common,
+            "artifact_type": "arc_storyboard_plan",
+            "series_id": "s",
+            "chapter_id": "ep_001",
+            "genre_id": "shonen",
+            "logline": "A rival's public challenge forces the sealed gate open tonight.",
+            "stakes_now": "The gate closes at dawn and the challenge expires.",
+            "stakes_end": "The gate stands open; the rival owes a public debt.",
+            "genre_cadence": ["launch_sequence"],
+            "page_turn_promises": [
+                {"page_id": "pg1", "promise": "Will the gate hold against the strike?"},
+            ],
+            "panels": [
+                {
+                    "panel_id": f"p{i}",
+                    "story_move": f"Strike {i} cracks the gate seam wider.",
+                    "visual_proof": "Stone shards spray from the widening seam.",
+                    "information_delta": "The gate can be broken.",
+                }
+                for i in range(1, 7)
+            ],
+            "acceptance_layer": "authored_candidate",
+        },
     }
     if stem not in builders:
         raise KeyError(stem)
