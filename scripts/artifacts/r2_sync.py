@@ -50,6 +50,7 @@ import hashlib
 import json
 import os
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -226,10 +227,8 @@ def cmd_push(args: argparse.Namespace) -> int:
     key_prefix = "/".join(key_path_parts) + "/"
 
     client = _r2_client()
-    artifacts = []
-    total_bytes = 0
 
-    for f in files:
+    def _upload_one(f: Path) -> dict[str, Any]:
         rel = f.relative_to(src)
         key = key_prefix + str(rel).replace(os.sep, "/")
         sha = _sha256_file(f)
@@ -239,7 +238,6 @@ def cmd_push(args: argparse.Namespace) -> int:
         if args.dry_run:
             print(f"would upload {f}  →  s3://{bucket}/{key}  ({size:,} B, {sha[:12]})")
         else:
-            print(f"upload {rel}  ({size:,} B)")
             with f.open("rb") as fh:
                 client.put_object(
                     Bucket=bucket,
@@ -248,16 +246,30 @@ def cmd_push(args: argparse.Namespace) -> int:
                     ContentType=ctype,
                     Metadata={"sha256": sha},
                 )
+            print(f"upload {rel}  ({size:,} B)")
 
-        artifacts.append(
-            {
-                "key": key,
-                "sha256": sha,
-                "bytes": size,
-                "content_type": ctype,
-            }
-        )
-        total_bytes += size
+        return {"key": key, "sha256": sha, "bytes": size, "content_type": ctype}
+
+    # Small artifact trees (QA snapshots, manga catalog cache, etc.) can be
+    # tens of thousands of files; serial put_object calls are network-latency
+    # bound (~1 file/s observed). Concurrency is safe here: each upload is an
+    # independent PUT keyed by its own path, and manifest assembly happens
+    # after every future resolves (no shared mutable state during upload).
+    # Cap kept modest (16, not e.g. 64): a two-process burst at 64 workers
+    # each (128 concurrent connections) tripped R2's anti-abuse rate limiting
+    # for several minutes on 2026-07-23 — R2's own status page showed
+    # "operational" throughout, so the block was client-burst-triggered, not
+    # a real outage. Do not raise this without also serializing concurrent
+    # r2_sync.py invocations (never run two large push/verify calls at once).
+    max_workers = min(16, max(4, len(files) // 50)) if not args.dry_run else 1
+    results: list[dict[str, Any] | None] = [None] * len(files)
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        future_to_idx = {pool.submit(_upload_one, f): i for i, f in enumerate(files)}
+        for fut in as_completed(future_to_idx):
+            results[future_to_idx[fut]] = fut.result()
+
+    artifacts = results
+    total_bytes = sum(a["bytes"] for a in artifacts)
 
     manifest_id = key_prefix.rstrip("/")
     manifest = {
@@ -265,7 +277,7 @@ def cmd_push(args: argparse.Namespace) -> int:
         "manifest_id": manifest_id,
         "namespace": args.namespace,
         "bucket": bucket,
-        "produced_by": os.environ.get("PHOENIX_OMEGA_REMOTE", "unknown"),
+        "produced_by": _produced_by_label(),
         "produced_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "artifacts": artifacts,
         "total_bytes": total_bytes,
@@ -336,18 +348,27 @@ def cmd_verify(args: argparse.Namespace) -> int:
 
     client = _r2_client()
     bucket = manifest["bucket"]
-    bad = []
-    for art in manifest["artifacts"]:
+
+    def _check_one(art: dict[str, Any]) -> str | None:
         key = art["key"]
         try:
             head = client.head_object(Bucket=bucket, Key=key)
         except Exception as e:
-            bad.append(f"{key}: missing in R2 ({e.__class__.__name__})")
-            continue
+            return f"{key}: missing in R2 ({e.__class__.__name__})"
         if head["ContentLength"] != art["bytes"]:
-            bad.append(
-                f"{key}: bytes mismatch (manifest={art['bytes']}, r2={head['ContentLength']})"
-            )
+            return f"{key}: bytes mismatch (manifest={art['bytes']}, r2={head['ContentLength']})"
+        return None
+
+    # See cmd_push: head_object is network-latency bound, not CPU bound —
+    # serial verification of large manifests (10k+ artifacts) is impractically
+    # slow. Same concurrency rationale applies (independent per-key checks).
+    # Cap kept modest — see cmd_push's comment on the 2026-07-23 rate-limit incident.
+    max_workers = min(16, max(4, len(manifest["artifacts"]) // 50))
+    bad = []
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        for result in pool.map(_check_one, manifest["artifacts"]):
+            if result:
+                bad.append(result)
 
     if bad:
         print(f"❌ {len(bad)} mismatches")

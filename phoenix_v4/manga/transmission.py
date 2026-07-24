@@ -68,4 +68,7 @@ def story_architecture_internal_to_handoff(internal: Mapping[str, Any]) -> dict[
         out["mode"] = internal["mode"]
     if internal.get("mode_vessel") is not None:
         out["mode_vessel"] = deepcopy(internal["mode_vessel"])
+    for identity_key in ("teacher_id", "musician_id"):
+        if identity_key in internal:
+            out[identity_key] = deepcopy(internal[identity_key])
     return out
