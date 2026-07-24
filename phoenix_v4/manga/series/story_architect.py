@@ -464,6 +464,7 @@ def apply_mode_vessel(
     *,
     genre_id: str,
     mode: str,
+    source_packet: Optional[Mapping[str, Any]] = None,
     repo_root: Optional[Any] = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Weave the genre-native mode vessel into chapter beats (M4).
@@ -487,6 +488,18 @@ def apply_mode_vessel(
     vessel_name = str(vessel.get("vessel") or "")
     vessel_desc = str(vessel.get("vessel_desc") or "")
 
+    source_lines: list[str] = []
+    packet = dict(source_packet or {})
+    if mode_norm == "teacher":
+        source_lines = [str(x) for x in packet.get("doctrine_excerpts") or []]
+    elif mode_norm == "music":
+        motifs = packet.get("motif_atoms") or {}
+        source_lines = [
+            str(motifs.get("lyric_opening") or ""),
+            str(motifs.get("lyric_bestseller_beat") or ""),
+            str(motifs.get("lyric_closing") or ""),
+        ]
+
     out: list[dict[str, Any]] = []
     for idx, ch in enumerate(chapters):
         ch2 = dict(ch)
@@ -494,10 +507,15 @@ def apply_mode_vessel(
         key = keys[min(idx, len(keys) - 1)]
         skeleton = str(beats_map.get(key) or "").strip()
         if skeleton:
+            source = source_lines[min(idx, len(source_lines) - 1)] if source_lines else ""
+            source_clause = (
+                f" Transform this identity-source into fictional action/sound: {source[:300]}"
+                if source else ""
+            )
             beat_text = (
                 f"[mode:{mode_norm} vessel:{vessel_name} / {key}] {skeleton} "
                 f"— apparatus: {vessel_desc}. Teacher/musician is NEVER named; "
-                f"the vessel carries the mode diegetically."
+                f"the vessel carries the mode diegetically.{source_clause}"
             )
             injected = {
                 "beat_index": 0,
@@ -524,6 +542,8 @@ def apply_mode_vessel(
         "vessel_desc": vessel_desc,
         "beats": {k: beats_map.get(k) for k in keys},
     }
+    if packet:
+        meta["source_packet"] = packet
     return out, meta
 
 
@@ -579,6 +599,9 @@ def build_story_architecture_internal(
     genre_id: str = "shonen",
     topic: str = "",
     mode: Optional[str] = None,
+    teacher_id: Optional[str] = None,
+    musician_id: Optional[str] = None,
+    brand_id: str = "",
     chapter_number: int = 1,
     repo_root: Optional[Any] = None,
 ) -> dict[str, Any]:
@@ -627,11 +650,27 @@ def build_story_architecture_internal(
     if is_engine_governed(genre_id):
         validate_architect_chapters(chapters, genre_id)
 
+    from phoenix_v4.manga.mode.catalog import apply_brand_mode, build_mode_source_packet
+
+    declared_plan = apply_brand_mode({
+        "series_id": series_id,
+        "brand_id": brand_id,
+        "mode": mode,
+        "teacher_id": teacher_id,
+        "musician_id": musician_id,
+    }, repo_root=Path(repo_root) if repo_root is not None else None)
     vessel_meta: dict[str, Any] | None = None
-    mode_norm = (str(mode).strip().lower() if mode else "") or None
+    mode_norm = declared_plan.get("mode")
     if mode_norm:
+        source_packet = build_mode_source_packet(
+            declared_plan,
+            topic=topic,
+            seed=f"{series_id}|{arc_id}",
+            repo_root=Path(repo_root) if repo_root is not None else None,
+        )
         chapters, vessel_meta = apply_mode_vessel(
-            chapters, genre_id=genre_id, mode=mode_norm, repo_root=repo_root,
+            chapters, genre_id=genre_id, mode=mode_norm,
+            source_packet=source_packet, repo_root=repo_root,
         )
         note = f"{note}+mode_vessel"
 
@@ -665,6 +704,8 @@ def build_story_architecture_internal(
     if vessel_meta is not None:
         out["mode"] = vessel_meta["mode"]
         out["mode_vessel"] = vessel_meta
+        out["teacher_id"] = declared_plan.get("teacher_id")
+        out["musician_id"] = declared_plan.get("musician_id")
     elif mode_norm:
         # Mode requested but vessel injection produced no meta (should not
         # happen for teacher/music); still preserve the declared mode.

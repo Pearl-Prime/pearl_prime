@@ -5,14 +5,20 @@ A manga series is the work of ONE archetype — a teacher (doctrine) or a musici
 (config/manga/manga_mode_vessels.yaml) at a 3-beat skeleton. See
 artifacts/manga/pilots/MANGA_MODE_WRAPPER_DESIGN.md.
 
-This package is standalone and side-effect-free: importing or calling it changes
-NO existing pipeline behavior. Integration into story_architect / chapter_writer
-is a separate, opt-in step (only active when a series sets `mode`).
+Importing remains side-effect-free. Catalog and production integration is active
+when a series resolves to a teacher or active music brand; legacy rows with no
+identity remain unchanged.
 """
 from __future__ import annotations
 
 from .validator import MODES, ModeError, assert_mode_xor, resolve_mode
 from .vessels import VesselError, load_all_vessels, load_vessel
+from .catalog import (
+    ModeSourceError,
+    active_music_brands,
+    apply_brand_mode,
+    build_mode_source_packet,
+)
 
 __all__ = [
     "MODES",
@@ -22,4 +28,8 @@ __all__ = [
     "VesselError",
     "load_all_vessels",
     "load_vessel",
+    "ModeSourceError",
+    "active_music_brands",
+    "apply_brand_mode",
+    "build_mode_source_packet",
 ]
