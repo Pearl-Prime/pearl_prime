@@ -43,13 +43,23 @@ from scripts.localization.translation_quality.candidates.google_translate_client
     translate as google_translate,
     GoogleTranslateAuthError,
 )
+from scripts.localization.translation_quality.candidates.dashscope_qwen_client import (  # noqa: E402
+    translate as dashscope_translate,
+    DashScopeNotYetExemptError,
+    DashScopeEndpointError,
+)
 
 ENGINE_REGISTRY: dict[str, Callable[..., CandidateResult]] = {
     "ollama": ollama_translate,
     "google": google_translate,
-    # "dashscope" intentionally omitted from the default registry until
-    # Lane 00 lands -- see candidates/dashscope_qwen_client.py. Callers may
-    # still pass a custom engines dict with it wired in once it's live.
+    # "dashscope" now real (Lane 00 exemption landed 2026-07-22, client
+    # wired 2026-07-23 -- see candidates/dashscope_qwen_client.py). Still
+    # gated at call time by PHOENIX_TRANSLATION_ALLOW_CLOUD, DASHSCOPE_API_KEY,
+    # and a hard per-run call cap inside the client itself -- registering it
+    # here does not bypass any of those; a caller that hasn't opted in gets
+    # a caught, logged error per item (see generate_blinded_candidates)
+    # rather than a silent skip or a runaway spend.
+    "dashscope": dashscope_translate,
 }
 
 RISK_TIERS = ("low", "medium", "high", "critical_recurring")

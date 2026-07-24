@@ -60,6 +60,7 @@ schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
 
 series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
 chapter_id: ep_009
+arc_storyboard_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_009.arc_storyboard.yaml
 title: "The Alarm Is Lying — Episode 9: Saturday, 2:38 PM"
 manga_author: Hana Tidecalm
 teacher_id: ahjan
@@ -67,6 +68,84 @@ brand_id: stillness_press
 engine: false_alarm
 locale: en_US
 default_locale: en_US
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: healing
+  strategy_genre: healing
+  relevance_genre: healing
+  market_surface_rule: Use social discovery, school/work pressure, gaming, creator
+    culture, comic shop/community, and phone-native life without sounding like an
+    ad for platforms.
+  market_touchpoints:
+  - group_chat
+  - discord_server
+  - short_video_clip
+  - school_bus_or_subway
+  - comic_shop
+  - mall_food_court
+  - campus_library
+  - delivery_app
+  - controller
+  - streaming_queue
+  market_guardrails:
+  - avoid_fake_japanese_surface_for_us_scene
+  - make_city_transport_specific_if_used
+  - do_not_overexplain_anime_fandom
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: 'Modern healing must receive everyday overstimulation gently:
+    notifications, transit noise, school/work fatigue, convenience rituals, and
+    weather.'
+  catalyst:
+    id: project_deadline_thought_at_the_sink
+    logline: A background thought about a work project deadline surfaces while Mira
+      rinses a cup at the sink and passes through her body in a single flicker,
+      proving the alarm system itself has quieted enough that it no longer needs
+      managing.
+    ordinary_world_objects:
+    - cup
+    - sink
+    - deadline
+    - drawer
+    genre_transmutation: A workday deadline thought becomes the day's only test
+      of the practice; instead of triggering a spiral it passes through the body
+      unmanaged, showing regulation has become the invisible default rather than
+      an effortful technique.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint.
+    Market=en_US; audience=gen_z. Use catalyst 'project_deadline_thought_at_the_sink'.
+    Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US.
+    Use concrete objects and social pressure on page one; do not name-drop trends.
 available_locales: [en_US]
 
 main_characters:
@@ -158,6 +237,9 @@ pages:
         beat_type: spatial
         intent: "GROUND — the looking itself"
         silence_confirmed: true
+
+  - page_id: ep_009_p02
+    panels:
 
       # ── DECISION — walk to the store ────────────────────────────────────
       - panel_id: ep009_009

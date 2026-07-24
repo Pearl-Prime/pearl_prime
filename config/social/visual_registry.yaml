@@ -1,0 +1,41 @@
+schema_version: 1
+registry_type: deterministic_social_visual_registry
+source_manifest: "artifacts/curation/waystream_image_winners_20260715/curated_winners_draft.json"
+production_ready_count_expected: 0
+usage_classes:
+  ideation_only:
+    production_allowed: false
+  social_candidate:
+    production_allowed: false
+    preview_allowed: true
+    requirement: "License/source-page verification and operator look gate still required."
+  cover_candidate:
+    production_allowed: false
+  approved_curated_image:
+    production_allowed: true
+    requirement: "Verified license, safety scan, crop pass, and operator look approval."
+  approved_cover_source:
+    production_allowed: true
+    requirement: "Approved cover source or approved cover-derived crop."
+  generated_prompt_reference:
+    production_allowed: false
+    preview_allowed: true
+selector_weights:
+  topic_fit: 0.35
+  persona_fit: 0.15
+  social_score: 0.20
+  crop_fit: 0.12
+  negative_space_fit: 0.08
+  safety_bonus: 0.05
+  recency_fatigue_penalty: -0.05
+safety_fields:
+  face: required
+  logo: required
+  readable_text: required
+  sensitive_topic: required
+  distress_imagery: required
+approval_policy:
+  raw_folders_allowed_for_selection: false
+  selected_candidates_must_reference_registry: true
+  pending_license_output_class: "operator_preview_only"
+  production_requires_license_verified: true

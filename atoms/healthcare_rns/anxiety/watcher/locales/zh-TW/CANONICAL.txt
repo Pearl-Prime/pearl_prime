@@ -1,3 +1,5 @@
+
+
 ## RECOGNITION v01
 ---
 path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v01.txt
@@ -7,7 +9,7 @@ COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
-諾拉為一位脫水的病人建立靜脈輸液通道。她的手一次就找到了血管。技術熟練，穿刺乾淨，敷料固定妥當。但還有另一個諾拉懸在半空，審視著一切：穿刺的角度、膠帶的位置、止血帶綁了多久。即使程序已經結束且成功，這股審視仍在繼續。針頭已插入，液體正在流動，但審視仍在為這個已完成的動作打分。她帶著完美的靜脈輸液成果走向下一位病人，但對剛才那次的審視卻仍未停止。
+諾拉為一位脫水的病人扎點滴。她的手一次就找到血管，技巧俐落、進針乾淨、固定妥當。但有另一個諾拉懸在第一個諾拉頭頂，正在評分：進針角度、膠帶貼法、止血帶綁了多久。這場評分在流程已經順利完成之後才開始運轉。點滴已經打上了，點滴液正在滴著。評分卻還在為一個早已完成的流程打分數。她走向下一位病人，身後留下一次完美的點滴，還有一場仍在運轉的評分。
 ---
 
 ## RECOGNITION v02
@@ -19,7 +21,7 @@ COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
-湯瑪斯在單位會議上進行簡報。臨床數據、病人預後、協議更新。他口齒清晰，對內容瞭若指掌。但在演講背後，有一台攝影機正在運作：護理長反應如何？主治醫師是不是剛看了一下手機？那個問題是挑戰還是真誠的詢問？當他的嘴正在 delivering 簡報時，那台攝影機捕捉了房間裡的每一個微表情。簡報充滿自信，攝影機卻充滿焦慮。兩者使用同一個電源供應。簡報在點頭認可中結束。攝影機則倒帶重播，確認那些點頭是否出於真心。
+托馬斯在病房會議上做簡報。臨床數據、病人結果、流程更新。他講得很清楚，也很熟悉這些內容。但在說話的背後，有一台攝影機正在運轉：值班護理長現在的反應如何，主治醫師剛剛是不是在滑手機，那個問題是質疑還是單純的詢問。這台攝影機捕捉著房間裡每一個微表情，而他的嘴巴同時進行著簡報。簡報，是自信的；攝影機，是焦慮的。兩者共用同一組電力供應。簡報在一片點頭讚許中結束。攝影機卻開始倒帶，檢查那些點頭究竟是不是真心的。
 ---
 
 ## RECOGNITION v03
@@ -29,4 +31,311 @@ BAND: 2
 MECHANISM_DEPTH: 1
 COST_TYPE: internal
 COST_INTENSITY: 2
-IDENT
+IDENTITY_STAGE: pre_awareness
+---
+艾夏正在安慰一位孩子的父母。她握著那位母親的手，說著恰當的話，聲音穩定而溫暖。而觀察者卻在評論：這些話夠恰當嗎，牽手的時間會不會太長，是不是該先遞杯水給她。這個觀察者，把一個真誠關懷的時刻，變成了一場績效考核。那位母親感受到了安慰，艾夏卻感受到被監視。這種監視是內在的——凌晨三點，沒有任何人在評鑑她的護理態度。觀察者不需要觀眾，因為觀察者同時身兼觀眾、評論家與表演者。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+克萊兒正在處理一場困難的生產。聲音沉穩、雙手穩定、指令清晰。觀察者記錄下每一件事：每一個決定、每一秒的反應時間、對母親說的每一個字。生產順利結束，母嬰均安。克萊兒記錄病歷時，觀察者卻在重播整場生產過程，搜尋著她差點做錯的那一刻。她其實什麼也沒差點做錯。觀察者依然搜尋著。它需要找到一個瑕疵，才能為自己的存在辯護。當它找不到時，就把這場生產歸類為「運氣好」，而不是「做得好」。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/recognition/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+德瑞克下班後躺在床上，卻毫無睡意。觀察者重播著：下午兩點做的評估、下午四點給的藥、晚上六點半接的呼叫器。每一個畫面都被逐格檢視。評估夠不夠周全？給藥的時機對不對？回應呼叫器的速度夠快嗎？這一班其實平淡無奇——所有病人都穩定，所有任務都完成了。但觀察者用審視重大事件的同等嚴格程度，來檢視這種平淡無奇的班。缺乏戲劇性，並不會讓審查放鬆，反而讓觀察者更努力地去找出哪裡出了錯。它總是能找到些什麼。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+諾拉發現了觀察者在護理工作裡的特殊之處：風險，讓它的存在顯得正當。在大多數行業裡，過度的自我監控是多餘的。但在護理工作中，一個細節的疏漏可能意味著一條人命。觀察者利用這個事實，來維持它永久的權威——你必須看著，否則就是失職。這個邏輯本身是合理的，但它的應用方式卻是病態的。她不需要在點滴打好之後還評估一次，她不需要在正確給藥之後再重新檢查一次。觀察者把合理的警覺，轉化成了永無止境的自我監視。而風險，讓這種監視感覺起來像是義務。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+托馬斯算出了觀察者所耗費的頻寬成本。在任何一次互動中，他大約有百分之三十的注意力，被觀察者拿走——用來監控自己的表現、觀眾的反應、專業形象的呈現。也就是說，百分之三十的認知能量，被從真正的任務上分流走了。在一個十二小時、持續與病人互動的班次裡，觀察者大約消耗掉三個半小時，本可以用於臨床推理、病人評估，或單純的在場。觀察者並不會讓他的護理能力變好，它只是在課稅。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+艾夏注意到，觀察者在情感時刻裡最為強烈。日常任務——量生命徵象、給藥、寫病歷——觀察者只用低音量運轉。但當一位家長哭泣，或一個孩子害怕，或一段對話需要真誠的情感時，觀察者就會放大到最大音量。而這些情感時刻，正是她最需要全然在場的時候。觀察者卻在這些時刻最為活躍。這個機制，從最需要在場的時刻裡，偷走了在場。她在監視之下表演著同理心。表演很有說服力，同理心卻被監控稀釋了。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+克萊兒發現，觀察者一直在改寫那些好的結果。生產順利：「運氣好。」急救成功：「是整個團隊撐起來的。」病人康復：「反正本來就會好轉。」觀察者無法把正面結果，處理成能力的證據——因為能力若被承認，就會降低「需要被觀察」的必要性。觀察者需要讓自己顯得不可或缺。所以它把每一次成功都重新框架成運氣、團隊努力，或本該如此——唯獨不是克萊兒的技術。這種重新框架，讓觀察者得以繼續「有工作」。它在犧牲克萊兒的自信，來保護自己的存在。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+德瑞克意識到，觀察者並不會在醫院門口就停下腳步。在家裡，觀察者依然在審核：他今晚是個好伴侶嗎？晚餐時聽得夠專心嗎？女兒說故事的時候，他臉上有沒有表現出足夠的興趣？那個原本被訓練來監控臨床表現的觀察者，現在用同樣的嚴格標準，監控著他的個人生活。他的家庭生活，變成了另一個需要被審查的班次，另一組需要被打分數的互動。他正被一個只懂得「高風險評估」這一種語境的系統，評判著。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+---
+諾拉打好點滴。觀察者開始評分。她抓住了這一刻：「點滴打上了，正在滴著，評分已經結束。」她直接在內心跟觀察者對話。觀察者抗議：可是那個角度——她走向下一位病人。觀察者跟了上來，仍在重播那卷錄影帶。但這次「走開」是新的。她沒有留在床邊，重新檢視一個已經成功的流程。走開，就是練習：完成一項任務、承認它已完成、然後往前走——即使觀察者還在爭辯，說還要再檢查一次。而這「再檢查一次」，在她八年的職涯裡，從來沒有在一次成功的置入之後，找到過任何問題。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 3
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+托馬斯對一位同事說：「我跟病人互動的時候，有一半的腦子都在看著自己。」那位有十五年資歷的老手，看了他很久，說：「我以為那種感覺會隨著經驗消失，結果並沒有。」這份坦白，既是一種寬慰，也是一種失望。觀察者不是一個會隨著熟練而脫落的輔助輪，它是一個永久存在的功能，可以被管理，卻無法被移除。管理，就是這份工作的一部分。那位同事分享了一個方法：「我給觀察者一分鐘，每次互動結束後。時間一到，就結束。」這「一分鐘界線」，是托馬斯得到的第一個工具。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+CALLBACK_ID: bedside_presence
+CALLBACK_PHASE: setup
+---
+艾夏在一次處置中握著一個孩子的手。觀察者開始運轉：評估這個握手動作，評估情緒反應。她把注意力重新導向那隻手——小小的、溫暖的、緊緊握著。手，是事實；評估，是評論。她留在手上。觀察者在背景裡繼續評論，手在前景裡。孩子看著她，她也看著孩子。有六秒鐘，觀察者的聲音變弱了，這份連結沒有被監控。六秒鐘，護理師與病人之間直接的接觸，沒有監視這一層。這六秒鐘，是她好幾個月以來，臨床上最全然在場的時刻。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: experimentation
+---
+克萊兒經歷了一次順利的生產。觀察者說：運氣好。她停下來，問自己：我在那次生產中做了什麼？她列出來：辨識出胎位問題、調整了母親的角度、處理了肩難產、全程維持冷靜的溝通。這份清單，是一整套被正確運用的技能。觀察者說：換作誰都會這麼做。她反問：在那個階段，換作誰都能認出胎位問題嗎？根據十年的經驗，答案是：不，不是誰都能。觀察者對具體的證據無話可說，它只擅長講些籠統的話。而具體的事實，會削弱它的權威。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+---
+德瑞克在家裡，對觀察者設下了一條界線。跨過家門之後：不再檢討班次。觀察者抗議：可是下午兩點的評估——他摘下了識別證。摘下識別證，就是那個訊號：工作上的評鑑，留在工作裡。觀察者並不尊重這條界線——前二十分鐘，它硬是要闖過來。他讓它闖。他一邊煮晚餐，觀察者一邊在背景裡檢討這一班。等義大利麵煮好時，觀察者已經失去了急迫感。這條界線並沒有讓觀察者噤聲，但它給了觀察者一個時限，一個它無法無限延長的時限。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: self_claim
+---
+諾拉打好點滴，一針見血。觀察者開始運轉。她走了，沒有留下來。觀察者一邊評分，一邊跟著她走——她能感覺到它在她走向四號房的路上分析著那卷錄影帶。走到四號房時，這份評估已經漸漸失去細節。她用比留在原地聽觀察者評分時更清新的專注力，評估她的新病人。走路，創造了一個過渡。這個過渡，給了觀察者一個自然的終點。它不總是接受這個終點，但比起以前，它接受的次數變多了。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: self_claim
+---
+托馬斯給了觀察者屬於它的那一分鐘。病人互動結束，他讓觀察者評論：語氣、內容、反應。一分鐘。手錶上的計時器。一分鐘一到，他就轉向下一項任務。觀察者還想要更多時間，他沒有給。下一項任務得到了他百分之七十的專注——沒錯，剩下的百分之三十，仍流向觀察者殘留的重播。但百分之七十，已經比他一開始的百分之五十要多了。這「一分鐘界線」並不完美，但一個不完美的界線，勝過沒有界線。他的下一位病人，得到了一位比前一位病人時更加在場的護理師。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: self_claim
+CALLBACK_ID: bedside_presence
+CALLBACK_PHASE: return
+---
+艾夏又一次握著孩子的手。不同的孩子，同一個病房。觀察者啟動了。她重新導向那隻手，手是溫暖的。觀察者在背景裡運轉。她正在練習這個重新導向的動作——手、溫度、當下這一刻。背景監控仍在繼續，但音量降低了。孩子說：「妳人很好。」這兩個字，在觀察者來得及評分之前，就已經抵達了。這句話，直接觸及了艾夏。這份直接的接觸，產生了一種感覺——不是被監控的感覺，是真實的感覺。胸口的一股暖意，觀察者沒有製造它，也無法用評分把它抹去。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: self_claim
+---
+克萊兒又處理了一次生產。觀察者提出它一貫的評語：「運氣好。」她拿出具體的清單：辨識胎位、調整角度、處理難產、溝通。這份清單是真實的，運氣，只是觀察者的版本。她讓兩者並存。這份清單不需要觀察者的許可，才能成立。清單記錄在病歷裡，病歷記錄的是技術，觀察者記錄的是焦慮。她同時讀著病歷與觀察者。病歷，是更準確的紀錄。她開始更信任病歷。觀察者提出異議，但病歷不會因為異議而改變它的內容。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: self_claim
+---
+德瑞克回到家，摘下識別證。觀察者硬是要闖過那二十分鐘。他開始煮飯，觀察者在他切菜時檢討這一班。等晚餐擺盤完成時，觀察者已經淡成一陣低語。他和家人坐下來，吃飯，聽女兒說學校裡的故事。觀察者查核著：你表現得夠有興趣嗎？他確實有興趣——不是因為觀察者的提示，而是因為女兒真的很有趣，故事也很精彩。這份興趣是真的。觀察者試圖把功勞攬到自己身上，但這份興趣，在觀察者的評分開始之前，早就已經存在了。評分，來得太晚，趕不上這頓早已溫熱的晚餐。
+---
+
+## RECOGNITION v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety_watcher/recognition/band_fill/v06.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+一個平靜的片刻。強度降低了，空間打開了。
+---
+
+## RECOGNITION v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety_watcher/recognition/band_fill/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+危機。突破。強度達到頂點的那一刻。
+---
+
+## TURNING_POINT v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+托馬斯查看病人看板，數著還沒完成的評估。觀察者從遠處監視，只記錄失誤，卻從不真正參與。托馬斯的下顎繃緊。這個模式此刻要求被關注——灼熱、堅持、不肯等待。托馬斯看著它提出要求。這一次，他沒有順從，而是去追蹤這個要求究竟從哪裡開始。它從掌心升起，蔓延到思緒，思緒編織出一個故事。故事說：現在不行動，就會失去一切。托馬斯檢視這個故事，發現它沒有任何證據。下顎裡的，是真實的感覺；故事裡的，是捏造出來的急迫感。托馬斯把感覺留住，卻不再跟著故事走。感覺留下來了，故事卻失去了聽眾。框架就此轉變：這個模式很大聲，但大聲不等於真實。
+---
+
+## TURNING_POINT v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/turning_point/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+艾夏站在病房門外，手放在門把上，這是今天第三次推不開這扇門。觀察者衝到最高音量。艾夏的呼吸變淺，肩膀聳起。一切都收縮成這一刻——崩潰，或是突破，沒有中間地帶。艾夏站在浪頭的正中央。那個模式說：這就是你。艾夏聽見了。這是第一次，她把這句話聽成一個句子，而不是一個事實。句子可能是錯的。艾夏的身體因為這股強度而顫抖，顫抖是真的，那句話卻只是一種詮釋。艾夏把顫抖和那句話分開來看。身體仍在發抖，但那個身分認同的宣稱瓦解了。觀察者的計分卡，原來只是靠選擇性記憶拼湊出來的虛構。框架，就此裂開一道縫。
+---
+
+## EMBODIMENT v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: self_claim
+---
+克萊兒走進病房，查看看板，開始這一班——焦慮還在，但不再主導一切。觀察者啟動了。克萊兒的肩膀聳起，熱度升起。她認出了這股熱度，沒有轉身逃開。克萊兒一邊行動，一邊讓觀察者看著，拒絕為它的評論而停下腳步。舊的模式仍然啟動了，但克萊兒依然依照新的理解去行動。她的胸口發緊，雙手卻沒有停下。身分不是那個模式，身分是克萊兒在模式運作的同時所做出的行動。克萊兒在模式於背景中尖叫的同時，做著眼前該做的下一件正確的事。尖叫漸漸淡成嗡鳴，嗡鳴又漸漸淡成一個事實：這個模式存在，克萊兒也存在。它們不是同一件事。
+---
+
+## EMBODIMENT v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/embodiment/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: self_claim
+---
+馬可仕在焦慮於背景中尖叫的同時，處理著一場心跳停止的急救。雙手動作、藥物推入、心律恢復。強度來到頂點。馬可仕的掌心冒汗，呼吸變淺。觀察者以最高音量咆哮。每一條神經都在說：放棄吧。馬可仕沒有放棄。他站在風暴的正中央，從新的身分出發行動——不是對抗這個模式，而是穿越它。模式是噪音，行動才是訊號。馬可仕的身體同時承載著這兩者。危機並不能定義馬可仕，他的回應才定義了他。馬可仕帶著這一刻沉甸甸的全部重量，繼續往前走。重量是真的，崩潰卻不是。馬可仕穿越了浪頭的頂點，走到了另一端，依然站立著，依然在選擇。
+---
+
+## MECHANISM_PROOF v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+艾琳娜描繪出這一班焦慮的迴路：抵達、掃視看板、預想最棘手的病人、身體開始戒備。艾琳娜的胸口發緊，熱度升起。觀察者從遠處監視，只記錄失誤，卻從不真正參與。這一次，艾琳娜追蹤了整個順序：觸發、身體反應、思緒連鎖、行為拉力。觸發來自外部，身體反應是自動的，思緒連鎖是一種只打分數、卻不參與其中的自我監視，而行為拉力則是真正付出代價的那一環。艾琳娜現在看得很清楚，代價是什麼。她的下顎繃緊，模式跑完了它的迴路。這個模式之所以持續，是因為這份監視感覺起來像是一種保護——只要艾琳娜盯著失敗，失敗或許就能被阻止——但這份盯著，本身就是代價。這種持續並不神秘，它是機械性的。看見這台機器，不會讓機器停下來；但看見這台機器，會讓人明白——這台機器不是艾琳娜本人。
+---
+
+## MECHANISM_PROOF v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/watcher/mechanism_proof/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+拉維接到了緊急應變的呼叫，對象正是他最擔心的那位病人。焦慮的模式衝到了最高點，強度來到頂點。拉維的呼吸變淺，肩膀聳起。觀察者全力運轉，拉維看著它運轉。即使在最高音量下，這個機制依然遵循同樣的順序：採取行動、監視啟動、表現打分、找出缺陷、行為抑制、退縮。第五級的順序和第二級一模一樣，改變的只有音量大小。這個模式在強度升高時並不會變得更聰明，它只是變得更大聲。拉維的身體吸收了這股音量，他的心智描繪出這個迴路的圖形。這個迴路沒有內建的出口——它只會不斷循環。它之所以持續，是因為它以自己的輸出為食。拉維看見了這個餵養的過程。看見它，並不會讓迴路停下來；但看見它，會讓人明白這個迴路是有結構的。而結構，是可以被打斷的。
+---

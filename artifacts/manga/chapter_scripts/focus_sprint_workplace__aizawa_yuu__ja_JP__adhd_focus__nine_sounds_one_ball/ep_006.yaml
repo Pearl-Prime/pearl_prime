@@ -1,0 +1,627 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_006
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_006.arc_storyboard.yaml
+title: '静寂のフリースロー——第六話:締め切りは待たない'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 6: The Deadline Won''t Wait'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: 力を抜かせるコーチ
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings,
+    team chats, finance/time pressure, and physical cost without letting analytics
+    replace the body.
+  catalyst:
+    id: the_tournament_entry_form_deadline
+    logline: The team's tournament entry form is due by 5pm Friday with a
+      minimum-roster requirement Shinonome barely meets, and the same
+      trading-company bureaucracy Hayato fights all day at his desk turns out to
+      be the thing that could end the team before their season even starts.
+    ordinary_world_objects:
+    - entry_form
+    - company_seal_stamp
+    - roster_sheet
+    - fax_machine
+    genre_transmutation: Corporate paperwork becomes the tournament's actual
+      gatekeeper; a fax machine becomes the unglamorous object the whole season's
+      stakes ride on.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world
+    entrypoint. Market=ja_JP; audience=gen_z. Use catalyst
+    'the_tournament_entry_form_deadline'. Market surface rule per
+    config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects
+    and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公。東雲商事の営業事務の新入社員。元高校バスケ部ポイントガード。
+  visual_anchor: 常に少し崩れたワイシャツの裾、詰まると拳にペンを打つ癖、机の引き出しの古いスニーカー。
+- id: aya
+  name: 美濃部 彩
+  name_romaji: Minobe Aya
+  age: 25
+  role: 隼人の職場の先輩兼チームメイト。事実上のキャプテン兼マネージャー。
+  visual_anchor: 実務的な立ち姿、書類を持つ手、感情を出さない目元。
+- id: endou
+  name: 遠藤 岳
+  name_romaji: Endou Gaku
+  age: 34
+  role: チームのエース。もう一年、と言い続けるベテラン。粗野だがチームを守る。
+  visual_anchor: 腕組み、日焼けした前腕、常に少し不機嫌な眉。
+- id: kuroda
+  name: 黒田
+  name_romaji: Kuroda
+  age: 63
+  role: 元セミプロ選手。今はビル設備の管理人。夜の体育館を静かに開ける。
+  visual_anchor: 灰色の作業服、ボールラックを整える手、言葉少な。
+
+scene_palette:
+  primary: オフィスの冷たい蛍光灯ブルー + 体育館の温かい木目オレンジ
+  secondary: 屋上の曇天グレー、廊下の非常灯グリーン
+  accent: 提出確認票の朱色スタンプ(継続する視覚モチーフ)
+
+pages:
+- page_id: ep_006_p01
+  panels:
+  - panel_id: ep006_001
+    scene: |
+      ワイド。営業事務フロアの隼人の机。申請書の山に埋もれている。冷めたマグカップ、
+      少し崩れたワイシャツの裾。壁の時計は12時58分を指している。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: '机の上、埋もれている。'
+      en_US: 'Buried at his desk.'
+      zh_TW: '[zh_TW] Buried at his desk.'
+      zh_CN: '[zh_CN] Buried at his desk.'
+    silence_confirmed: true
+
+  - panel_id: ep006_002
+    scene: |
+      インサート。書類の束のクローズアップ。朱色の承認印が半分だけ押された申請書、
+      判子のケース、締め切りを示す卓上カレンダー。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: '承認印、申請書、締め切りは終業まで。'
+      en_US: 'Approval stamps, request forms — deadline: end of day.'
+      zh_TW: '[zh_TW] Approval stamps, request forms — deadline: end of day.'
+      zh_CN: '[zh_CN] Approval stamps, request forms — deadline: end of day.'
+
+  - panel_id: ep006_003
+    scene: |
+      スマホ画面のクローズアップ。LINEの通知バナーが上から降りてくる。差出人は
+      「美濃部 彩(先輩)」。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: '隼人、昼休み屋上来れる? ちょっとまずいことになった。'
+        en_US: 'Hayato, can you come up to the roof at lunch? Something''s gone
+          wrong.'
+        zh_TW: '[zh_TW] Hayato, can you come up to the roof at lunch? Something''s
+          gone wrong.'
+        zh_CN: '[zh_CN] Hayato, can you come up to the roof at lunch? Something''s
+          gone wrong.'
+      intensity: normal
+      bubble_style: line_chat_bubble
+      tail_style: dotless
+      position_hint: top_right
+
+  - panel_id: ep006_004
+    scene: |
+      ワイド。屋上の休憩スペース(第一話でボールが転がってきた場所)。彩がすでに
+      待っている。手にはプリントアウトした用紙。いつもより硬い横顔。
+    beat_type: standard
+
+  - panel_id: ep006_005
+    scene: |
+      二人の対話。手すり際。彩が用紙を差し出し、隼人が肩越しにのぞき込む。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: '東京実業団リーグ予選のエントリー用紙。締め切りは金曜の十七時、FAXのみ。
+          登録選手が最低八人いないと、そもそも出場できない。'
+        en_US: 'The Tokyo Corporate League qualifier entry form. League rule:
+          deadline is Friday at five, fax machine only, no exceptions. If we
+          don''t have at least eight registered players on the roster sheet, we
+          can''t even enter.'
+        zh_TW: '[zh_TW] The Tokyo Corporate League qualifier entry form. League
+          rule: deadline is Friday at five, fax machine only, no exceptions. If
+          we don''t have at least eight registered players on the roster sheet,
+          we can''t even enter.'
+        zh_CN: '[zh_CN] The Tokyo Corporate League qualifier entry form. League
+          rule: deadline is Friday at five, fax machine only, no exceptions. If
+          we don''t have at least eight registered players on the roster sheet,
+          we can''t even enter.'
+      intensity: tense
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+
+  - panel_id: ep006_006
+    scene: |
+      インサート。エントリー用紙そのもののクローズアップ。リーグの正式書式、
+      枠で囲われた条件欄。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: '受理:FAXのみ(平日9-17時)。必要:登録選手名簿(8名以上)、統轄部門承認印。'
+      en_US: 'Accepted by fax machine only, weekdays nine to five. Required:
+        roster sheet with a minimum of eight players, and a department approval
+        stamp.'
+      zh_TW: '[zh_TW] Accepted by fax machine only, weekdays nine to five.
+        Required: roster sheet with a minimum of eight players, and a department
+        approval stamp.'
+      zh_CN: '[zh_CN] Accepted by fax machine only, weekdays nine to five.
+        Required: roster sheet with a minimum of eight players, and a department
+        approval stamp.'
+
+  - panel_id: ep006_007
+    scene: |
+      インセットのグリッド。彩、遠藤、隼人自身を含むチームの顔が並ぶ小さなコマ。
+      一枠だけ、名前も顔もなく空白のまま残る。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: '七人。八人には、一人足りない。'
+      en_US: 'Seven. One short of eight.'
+      zh_TW: '[zh_TW] Seven. One short of eight.'
+      zh_CN: '[zh_CN] Seven. One short of eight.'
+
+  - panel_id: ep006_008
+    scene: |
+      屋上のドアから遠藤が現れる。腕を組み、顎を引き締めて。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: '佐藤が異動になった。先週決まったばかりだ。だから今、七人しかいない。'
+        en_US: 'Sato got transferred. It was only decided last week. That''s why
+          we''re down to seven.'
+        zh_TW: '[zh_TW] Sato got transferred. It was only decided last week.
+          That''s why we''re down to seven.'
+        zh_CN: '[zh_CN] Sato got transferred. It was only decided last week.
+          That''s why we''re down to seven.'
+      intensity: blunt
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+
+- page_id: ep_006_p02
+  panels:
+  - panel_id: ep006_009
+    scene: |
+      屋上を歩き回る遠藤。ポケットに手を突っ込み、二人のどちらとも目を合わせない。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: '頭数合わせのために誰でも引っ張ってくるのは、違うだろ。'
+        en_US: 'Dragging in some random name just to make the number — that''s
+          not right.'
+        zh_TW: '[zh_TW] Dragging in some random name just to make the number —
+          that''s not right.'
+        zh_CN: '[zh_CN] Dragging in some random name just to make the number —
+          that''s not right.'
+      intensity: firm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+
+  - panel_id: ep006_010
+    scene: |
+      彩が名簿の空白の欄を隼人に差し出す。用紙ではなく、隼人の目を見て。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: '隼人。今度は「見に来るだけ」じゃ足りない。名前を書いて、正式に入って。'
+        en_US: 'Hayato. This time, ''just coming to look'' isn''t enough. Put
+          your name on the roster sheet. Officially join.'
+        zh_TW: '[zh_TW] Hayato. This time, ''just coming to look'' isn''t enough.
+          Put your name on the roster sheet. Officially join.'
+        zh_CN: '[zh_CN] Hayato. This time, ''just coming to look'' isn''t
+          enough. Put your name on the roster sheet. Officially join.'
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+
+  - panel_id: ep006_011
+    scene: |
+      極端なクローズアップ。罫線の入った用紙、空白の枠、ペン先が触れずに浮いている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: '書いたら、もう後戻りできない。'
+        en_US: 'Once I sign it, there''s no going back.'
+        zh_TW: '[zh_TW] Once I sign it, there''s no going back.'
+        zh_CN: '[zh_CN] Once I sign it, there''s no going back.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        en_US: italic_internal
+    silence_confirmed: true
+
+  - panel_id: ep006_012
+    scene: |
+      クローズアップ。ペン先が用紙に触れ、インクが「神崎隼人」の字を埋めていく。
+      いつも拳を打つのと同じペン。
+    beat_type: micro
+
+  - panel_id: ep006_013
+    scene: |
+      ミディアム二人ショット。遠藤の小さな頷き、彩の短い息の抜け。演説はない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: '……上等だ。'
+        en_US: '...Good enough.'
+        zh_TW: '[zh_TW] ...Good enough.'
+        zh_CN: '[zh_CN] ...Good enough.'
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+
+  - panel_id: ep006_014
+    scene: |
+      遠藤が完成した名簿を見つめ、指で一度だけ人数を数える。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: 'ちょうど八人。一人も欠けられない。'
+        en_US: 'Exactly eight. Only eight. We can''t lose a single one.'
+        zh_TW: '[zh_TW] Exactly eight. Only eight. We can''t lose a single one.'
+        zh_CN: '[zh_CN] Exactly eight. Only eight. We can''t lose a single one.'
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+
+- page_id: ep_006_p03
+  panels:
+  - panel_id: ep006_015
+    scene: |
+      階段の踊り場。彩が電話口で聞きながら、表情が沈んでいく。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: '社印がいる。総務の中村課長の承認印。だけど中村さん、出張で金曜の午後まで
+          戻らない。'
+        en_US: 'We need the company seal — Section Chief Nakamura''s approval
+          stamp from General Affairs. But Nakamura''s on a business trip. He''s
+          not back until Friday afternoon.'
+        zh_TW: '[zh_TW] We need the company seal — Section Chief Nakamura''s
+          approval stamp from General Affairs. But Nakamura''s on a business
+          trip. He''s not back until Friday afternoon.'
+        zh_CN: '[zh_CN] We need the company seal — Section Chief Nakamura''s
+          approval stamp from General Affairs. But Nakamura''s on a business
+          trip. He''s not back until Friday afternoon.'
+      intensity: worried
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+
+  - panel_id: ep006_016
+    scene: |
+      自分のモニター前の隼人。部署の共有グループウェアをスクロールする。胸には
+      営業事務の名札がまだ付いたまま。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: '……うちの部のグループウェアなら、中村課長が乗る新幹線の到着時刻まで分かる。'
+        en_US: '...If I check our department''s groupware calendar, I can even
+          find out which shinkansen Nakamura''s coming back on.'
+        zh_TW: '[zh_TW] ...If I check our department''s groupware calendar, I
+          can even find out which shinkansen Nakamura''s coming back on.'
+        zh_CN: '[zh_CN] ...If I check our department''s groupware calendar, I
+          can even find out which shinkansen Nakamura''s coming back on.'
+      intensity: focused
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+
+  - panel_id: ep006_017
+    scene: |
+      ワイド廊下。隼人がデスクの間、コピー機の順番待ちを縫って歩く。名札が揺れ、
+      ワイシャツの裾はさらに崩れている。フォルダを胸に抱えて。
+    beat_type: standard
+
+  - panel_id: ep006_018
+    scene: |
+      体育館フロア。同じ日の夜の練習。パスが逸れて床を滑る。汗、荒い息。遠藤が
+      声を張り上げる。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: '夜の練習。頭の半分はまだFAXの上にある。'
+      en_US: 'Evening practice. Half the team''s mind is still on the fax
+        machine.'
+      zh_TW: '[zh_TW] Evening practice. Half the team''s mind is still on the
+        fax machine.'
+      zh_CN: '[zh_CN] Evening practice. Half the team''s mind is still on the
+        fax machine.'
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: 'パス見ろ! 頭を書類から戻せ!'
+        en_US: 'Watch the pass! Get your head back from the paperwork!'
+        zh_TW: '[zh_TW] Watch the pass! Get your head back from the paperwork!'
+        zh_CN: '[zh_CN] Watch the pass! Get your head back from the paperwork!'
+      intensity: sharp
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+
+  - panel_id: ep006_019
+    scene: |
+      ワイド。同じ体育館の隅。高窓から夕方の光。黒田が声も出さず、静かにボール
+      ラックを整えている。中央の口論には目もくれない。
+    beat_type: standard
+    silence_confirmed: true
+
+- page_id: ep_006_p04
+  panels:
+  - panel_id: ep006_020
+    scene: |
+      練習後、息を切らせて駆け戻ってきた隼人。判子の押された用紙を彩に差し出す。
+      走ってきた汗がまだ引いていない。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: '間に合った……多分な。'
+        en_US: 'Made it. ...Probably.'
+        zh_TW: '[zh_TW] Made it. ...Probably.'
+        zh_CN: '[zh_CN] Made it. ...Probably.'
+      intensity: winded
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    - speaker: aya
+      text_by_locale:
+        ja_JP: '上等すぎる。'
+        en_US: 'More than good enough.'
+        zh_TW: '[zh_TW] More than good enough.'
+        zh_CN: '[zh_CN] More than good enough.'
+      intensity: relieved
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+
+  - panel_id: ep006_021
+    scene: |
+      狭い部室。古いFAX機が金属棚の上に据えられている。チーム全員がその小さな
+      表示ランプの光に照らされて集まっている。
+    beat_type: standard
+
+  - panel_id: ep006_022
+    scene: |
+      クローズアップ。送信途中の用紙が斜めに詰まる。赤いエラーランプが点滅。
+      壁の時計は16:56。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: 'ガガガッ'
+      en_US: 'ka-chunk-CHUNK'
+      zh_TW: '[zh_TW] ka-chunk-CHUNK'
+      zh_CN: '[zh_CN] ka-chunk-CHUNK'
+
+  - panel_id: ep006_023
+    scene: |
+      タイトな二人ショット。彩と隼人、四本の手が紙詰まりを直す。指先がわずかに
+      震えている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: '紙、まっすぐ入れて……落ち着いて、息して。'
+        en_US: 'Feed it straight — stay calm. Breathe.'
+        zh_TW: '[zh_TW] Feed it straight — stay calm. Breathe.'
+        zh_CN: '[zh_CN] Feed it straight — stay calm. Breathe.'
+      intensity: tense
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+
+  - panel_id: ep006_024
+    scene: |
+      クローズアップ。機械から確認票が滑り出てくる。タイムスタンプがはっきり
+      読み取れる。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: '受信完了。16:58。'
+      en_US: 'Transmission complete. 16:58.'
+      zh_TW: '[zh_TW] Transmission complete. 16:58.'
+      zh_CN: '[zh_CN] Transmission complete. 16:58.'
+
+- page_id: ep_006_p05
+  panels:
+  - panel_id: ep006_025
+    scene: |
+      ワイド部室。壁にもたれてくずおれる身体たち。誰かが廊下の自動販売機に向かう。
+      歓声はない。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: '誰かが廊下の自動販売機に向かう。歓声はない。'
+      en_US: 'Someone finally breaks for the vending machine down the hall. No
+        one cheers.'
+      zh_TW: '[zh_TW] Someone finally breaks for the vending machine down the
+        hall. No one cheers.'
+      zh_CN: '[zh_CN] Someone finally breaks for the vending machine down the
+        hall. No one cheers.'
+
+  - panel_id: ep006_026
+    scene: |
+      遠藤だけが少し離れて立ち、確認票を見つめている。チームの誰も見ていない。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: 'これで出場できる。それだけだ。強くなったわけじゃない。ここまでで、もう
+          危うくシーズンを棒に振るところだった。'
+        en_US: 'Now we can enter. That''s all this is. It doesn''t mean we''re
+          any stronger. We almost cost ourselves the season getting here.'
+        zh_TW: '[zh_TW] Now we can enter. That''s all this is. It doesn''t mean
+          we''re any stronger. We almost cost ourselves the season getting here.'
+        zh_CN: '[zh_CN] Now we can enter. That''s all this is. It doesn''t mean
+          we''re any stronger. We almost cost ourselves the season getting
+          here.'
+      intensity: sober
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+
+  - panel_id: ep006_027
+    scene: |
+      クローズアップ。隼人の顔。疲れて、笑わない。名簿と確認票を片手に重ねて
+      持ったまま、じっと見下ろしている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: '俺の名前が、そこにある。'
+        en_US: 'My name is on it.'
+        zh_TW: '[zh_TW] My name is on it.'
+        zh_CN: '[zh_CN] My name is on it.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        en_US: italic_internal
+
+  - panel_id: ep006_028
+    scene: |
+      ワイド。人のいなくなっていく部室。夕方の光が窓から差し込む。FAX機の台に
+      立てかけられた一つのボール。ドアは半分開いたまま。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: '紙の上の戦いは終わった。次は、コートの上だ。'
+      en_US: 'The battle on paper was over. Next comes the one on the court.'
+      zh_TW: '[zh_TW] The battle on paper was over. Next comes the one on the
+        court.'
+      zh_CN: '[zh_CN] The battle on paper was over. Next comes the one on the
+        court.'
+    dialogue_lines: []
+
+notes:
+  arc_position: |
+    Episode 6 of 12 — the tournament-arc opening beat per the series bible's
+    per-episode assignment. Episodes 1-5 established the recruitment, first
+    practice, Kuroda's wordless first lesson, the first small win, and the
+    workplace/basketball identity collision. This episode raises stakes from
+    Hayato's individual struggle to the whole team's survival, via a
+    bureaucratic deadline rather than a game. It does not touch the "One Ball
+    at the Line" strategy's carrier beats directly (those are paced across
+    ep_003 / ep_010 / ep_011 per the throughline); this episode's job is pure
+    plot escalation plus Hayato's first formal, binding commitment to the team.
+  pacing_vs_prior: |
+    28 panels across five page groups — denser than the series' quieter
+    character episodes, matching the genre bible's higher panel count for a
+    tension/deadline chapter. Splits attention between two locations
+    (workplace floors and gym) more aggressively than any prior episode,
+    mirroring the episode's own theme of divided attention under pressure.
+  continuity_callbacks: |
+    - The rooftop (panels 4-8) returns from ep_001, now carrying dread instead
+      of invitation — the same space repurposed by escalated stakes.
+    - Hayato's knuckle-tapping pen (established in the cast bible) is the same
+      pen he uses to sign the roster in panel 12 — the overload tic
+      repurposed as the commitment gesture.
+    - Kuroda appears wordlessly in the practice intercut (panel 19), unbroken
+      from his established pattern of silent presence rather than commentary,
+      continuing without advancing the mentor thread this episode.
+    - The ep_005 workplace/basketball collision is escalated from an
+      interruption (a notification mid-drill) into active cooperation — this
+      is the first episode where Hayato's day-job competence directly rescues
+      the team, not just distracts him from it.
+  doctrinal_anchor_vessel_handling: |
+    Kuroda (vessel: "the coach of the unclenched") is kept strictly wordless
+    this episode, per the arc-1 assignment — his only appearance is the
+    silent ball-rack reset in panel 19, continuing the established pattern
+    without adding dialogue or advancing the focus-strategy carrier beat,
+    which belongs to later episodes. No character explains the ADHD engine
+    aloud; the team's own scattered practice under paperwork pressure
+    (panel 18) is used only as a light structural echo, not a lecture, and is
+    corrected by Endou's ordinary coaching bark, not by any stated insight
+    about focus. No trophy, scoreboard, or game result appears in this
+    episode; the "win" (a form filed on time) is explicitly undercut by
+    Endou's flat warning in panel 26, keeping the arc's no-triumph doctrine
+    intact even at a minor procedural victory.
+  translation_handoff: |
+    text_by_locale dicts populated for ja_JP (authoritative, native-authored)
+    and en_US (real operator-review gloss, not a literal back-translation).
+    zh_TW and zh_CN carry bracket-placeholder stand-ins matching the en_US
+    line, per the heart_balance_shojo ep_001 bilingual-field convention,
+    pending the separate CJK translation-quality lane.

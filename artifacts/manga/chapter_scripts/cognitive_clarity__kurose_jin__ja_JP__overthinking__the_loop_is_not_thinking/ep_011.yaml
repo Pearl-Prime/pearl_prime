@@ -1,0 +1,339 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_011
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_011.arc_storyboard.yaml
+title: 分析される側——第十一話
+title_en_gloss: The One Now Being Analyzed — Episode 11
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: security_review_flags_ren_as_the_anomaly
+    logline: An automated security system has quietly compiled Ren's own badge and terminal logs into a
+      formal irregular-access report — the same kind of pattern-reading Ren has done to a stranger, a
+      folder, and his own sister, now turned onto him.
+    ordinary_world_objects:
+    - badge
+    - log
+    - terminal
+    - chair
+    genre_transmutation: A security compliance report becomes the mystery's clearest formal proof that
+      the watcher has become the watched; a badge, once the instrument of every unauthorized access,
+      becomes the evidence that ends the chapter.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'security_review_flags_ren_as_the_anomaly'. This episode pays off the
+    badge-log seed planted in ep_003/ep_005/ep_007 — Ren is now formally the subject of the exact kind of
+    analysis he has been performing on others. Saeki reveals she has been quietly shielding him. en_US
+    fields on select panels are operator glosses only, extended minimally for gate-lexicon coverage
+    (evidence/witness/before/badge) without altering ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: security_officer
+  name: セキュリティ担当者（名は明かされない）
+  age: 不詳
+  role: 制度的な反転を運ぶ脇役——蓮自身の方法論を蓮に向ける
+  visual_anchor: 印刷されたレポート、抑えた声、事務的な正確さ
+- id: saeki
+  name: 佐伯
+  age: 不詳
+  role: 器の存在（同僚）——今話で初めて自身の立場の代償を明かす
+  visual_anchor: 姿勢を読む目、静かな手、実務的な口調
+scene_palette:
+  primary: セキュリティ面談室、蛍光灯の白
+  secondary: 誰もいなくなった夜のオフィス
+  accent: バッジ（今話で意味が反転するオブジェクト）
+pages:
+- page_id: ep_011_p01
+  panels:
+  - panel_id: ep011_001
+    scene: 数日後。第十話の断絶以来、蓮は職場でも一層無口になっている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 時間経過——関係断絶後の孤立
+  - panel_id: ep011_002
+    scene: 今度はカレンダーではなく、正式な招集——セキュリティ・コンプライアンス部門からの面談通知。
+    beat_type: micro
+    intent: 制度的圧力の深化——第七話とは異なる、より重い召喚
+  - panel_id: ep011_003
+    scene: 面談室。セキュリティ担当者が、印刷されたレポートを机に置く。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_004
+    scene: レポートのクローズアップ——「不規則なアクセスパターンを検出」。蓮自身のバッジとログイン記録が、グラフと注釈で分析されている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: これは……自分がいつもやっていることだ。
+        en_US: 'This is his own method — the evidence, the annotations, the pattern he always builds, now built about him.'
+        zh_TW: '[zh_TW] This is his own method.'
+        zh_CN: '[zh_CN] This is his own method.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 反転の認識——自分の方法論が自分に向けられる
+  - panel_id: ep011_005
+    scene: セキュリティ担当者、事務的に。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: security_officer
+      text_by_locale:
+        ja_JP: 保管庫への深夜アクセス、データベースへの規定外の検索。何か、理由があるはずです。
+        en_US: 'Late-night vault access. Off-scope database searches. Something doesn''t add up — a witness statement built entirely from logs.'
+        zh_TW: '[zh_TW] Late-night vault access.'
+        zh_CN: '[zh_CN] Late-night vault access.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 第五話・第三話の帰結——正式な記録としての回収
+  - panel_id: ep011_006
+    scene: 蓮の内心——担当者の言葉選びが、自分がずっと使ってきた分析の語彙と同じだと気づく。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 「何か、理由があるはず」——その言い方を、自分も何度も使った。
+      en_US: 'Something doesn''t add up — the same clue-hunting phrase he has used a hundred times, spoken back at him.'
+      zh_TW: '[zh_TW] Something doesn''t add up.'
+      zh_CN: '[zh_CN] Something doesn''t add up.'
+    intent: 語彙の反響——見る側の言語が見られる側に向けられる
+  - panel_id: ep011_007
+    scene: 佐伯が同席している——今回もチームリードとして。表情はこれまでで最も硬い。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_008
+    scene: セキュリティ担当者、佐伯に向けて。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: security_officer
+      text_by_locale:
+        ja_JP: チームリードとして、最近の彼の様子に、何か気づいていましたか。
+        en_US: 'As team lead, had you noticed anything about his recent behavior — before this report existed?'
+        zh_TW: '[zh_TW] As team lead, had you noticed anything?'
+        zh_CN: '[zh_CN] As team lead, had you noticed anything?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 器が制度的な証言者の立場に置かれる
+  - panel_id: ep011_009
+    scene: 佐伯、言葉を選びながら、慎重に答える。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: ……はい。何度か、気づいていました。
+        en_US: '...Yes. I noticed, more than once — a fact she can no longer keep off the record.'
+        zh_TW: '[zh_TW] ...Yes. I noticed.'
+        zh_CN: '[zh_CN] ...Yes. I noticed.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep011_010
+    scene: 蓮、佐伯の証言が、これから正式な記録の一部になることを悟る。
+    beat_type: micro
+    intent: 圧力の頂点——器の証言が制度に組み込まれる
+  - panel_id: ep011_011
+    scene: セキュリティ担当者、資料を閉じながら。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: security_officer
+      text_by_locale:
+        ja_JP: この件は、正式な懲戒審査に進みます。日程は追って連絡します。
+        en_US: 'This will move to a formal disciplinary review. A date will follow — before he has any real say in it.'
+        zh_TW: '[zh_TW] This will move to a formal disciplinary review.'
+        zh_CN: '[zh_CN] This will move to a formal disciplinary review.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: ページ1の転——第十二話への正式な締め切り
+  - panel_id: ep011_012
+    scene: ワイド：面談室を出る蓮の背中。廊下の蛍光灯が、やけに白く感じられる。
+    beat_type: standard
+    intent: 圧力の環境化——制度に取り込まれた実感
+- page_id: ep_011_p02
+  panels:
+  - panel_id: ep011_013
+    scene: 廊下で、佐伯が蓮に追いつく。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_014
+    scene: 佐伯、これまでになく静かに。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 実は、何度か報告を止めてた。今回は、もう無理だった。
+        en_US: 'I''d held reports back before, more than once. This time I couldn''t — a confession, not a lecture.'
+        zh_TW: '[zh_TW] I''d held reports back before.'
+        zh_CN: '[zh_CN] I''d held reports back before.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 器の告白——初めて自分自身の代償を明かす
+  - panel_id: ep011_015
+    scene: 蓮、驚きに顔を上げる——佐伯が自分を守ろうとしていたことを、初めて知る。
+    beat_type: micro
+    intent: 認識の深化——器の献身に初めて気づく
+  - panel_id: ep011_016
+    scene: 佐伯、短く、これまでで最も重い一言。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: あなたが見てたものが、今度はあなたを見てる。
+        en_US: 'What you''ve been reading has started reading you back — the clearest reversal yet, the watching now runs both ways.'
+        zh_TW: '[zh_TW] What you''ve been reading has started reading you back.'
+        zh_CN: '[zh_CN] What you''ve been reading has started reading you back.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: アーク2への布石——見る側と見られる側の反転の明言
+  - panel_id: ep011_017
+    scene: 夜。誰もいなくなったオフィス。蓮は自分の机で、バッジを手のひらに乗せている。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_018
+    scene: バッジを、初めて見るもののように見つめる蓮——かつて開けるための道具だったものが、今は証拠になっている。
+    beat_type: micro
+    intent: モチーフの反転——鏡の代わりにバッジが認識の対象になる
+  - panel_id: ep011_019
+    scene: 携帯を開き、雫の連絡先を表示するが、指は発信ボタンの上で止まる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: まだ、かけられない。
+        en_US: 'Not yet. The call app stays open, unused — the rupture from ep_010 still unrepaired.'
+        zh_TW: '[zh_TW] Not yet.'
+        zh_CN: '[zh_CN] Not yet.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 未解決の断絶——性急な修復の拒否
+  - panel_id: ep011_020
+    scene: 端末の画面には、まだあの最初のケースファイルが開いたままだ。手が、無意識にそちらへ伸びかける。
+    beat_type: micro
+    intent: 習慣の引力——依然として強い衝動
+  - panel_id: ep011_021
+    scene: だが今回、蓮はノートパソコンを閉じる。椅子を机から少し引く——何話ぶりかの、意図的な停止。
+    beat_type: micro
+    intent: 小さな静止——回復ではなく、一度の選択
+  - panel_id: ep011_022
+    scene: 蓮はバッジを机の上に置き、自分の身体から離す——所持することと、それに読まれることの間に、わずかな距離を作る。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 持っているだけでは、済まなくなった。
+      en_US: 'Just carrying it isn''t enough anymore — a small, honest distance, not a solution.'
+      zh_TW: '[zh_TW] Just carrying it isn''t enough anymore.'
+      zh_CN: '[zh_CN] Just carrying it isn''t enough anymore.'
+    intent: 距離の所作——治癒ではなく一つの選択
+  - panel_id: ep011_023
+    scene: ワイド：暗いオフィスに一人座る蓮。バッジだけが、机の上で明かりを反射している。
+    beat_type: standard
+    intent: 閉じ——静かな孤立と、小さな距離
+  - panel_id: ep011_024
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第十一話・了——分析される側
+      en_US: 'End of Episode 11 — The One Now Being Analyzed'
+      zh_TW: '[zh_TW] End of Episode 11 — The One Now Being Analyzed'
+      zh_CN: '[zh_CN] End of Episode 11 — The One Now Being Analyzed'
+notes:
+  pacing: 二十四コマ。第三話・第五話・第七話で蓄積したバッジ記録の伏線が、今話で正式な制度的反転として回収される。佐伯が初めて自分自身の代償（報告を止めていたこと）を明かす。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper。セキュリティ担当者の台詞：normal、事務的で中立。佐伯の台詞：soft/normal、これまでで最も個人的。
+  sfx_policy: 最小限。囁きレジスタのみ。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第11話。設定はオフィス（第一・三・七話と同じ）。第十二話（アーク1の最終話）への正式な締め切り（懲戒審査）を設定し、strategy_02（Someone Has Been Reading Over My Shoulder）のテーマを直接的に導入する——ただし蓮自身のアーク1はここでは完結せず、反転の「認識」のみで終わる。
+craft_notes: 'VESSEL: 身体を読む探偵（佐伯）——今話で初めて自分自身の代償（報告を止めていたこと）を明かす、シリーズで最も個人的な瞬間。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_01の帰結点（訂正の限界）と、strategy_02（見る側と見られる側の反転）の導入を組み合わせた、アーク1からアーク2への明確な橋渡し。
+
+  ARC: 制度的反転の正式化（セキュリティレポート）→器の告白（佐伯の代償）→小さな静止（バッジを机に置く、治癒ではない）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

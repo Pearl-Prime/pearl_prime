@@ -52,6 +52,14 @@ from scripts.localization.translation_quality.script_contamination import (  # n
 )
 
 HEADER_BLOCK_RE = re.compile(r"^##\s+([A-Za-z0-9_]+)\s+v(\d+)\s*$", re.MULTILINE)
+# Alternate atom-header convention found in some files (e.g.
+# atoms/entrepreneurs/financial_anxiety/PERMISSION/CANONICAL.txt): no "## SHAPE"
+# line at all, just "--- variant: vNN" repeated. Discovered 2026-07-23 while
+# running a real calibration pilot -- files using this convention previously
+# parsed to zero header blocks under HEADER_BLOCK_RE alone and so received NO
+# structural validation whatsoever (src_ids == cand_ids == [] trivially
+# "matched"). See parse_blocks() below for the fallback.
+ALT_HEADER_RE = re.compile(r"^---\s*variant:\s*v(\d+)\s*$", re.MULTILINE)
 DELIM_RE = re.compile(r"^---\s*$", re.MULTILINE)
 PLACEHOLDER_RE = re.compile(r"\{[a-zA-Z][a-zA-Z0-9_]*\}")
 MD_LINK_RE = re.compile(r"\[[^\]]*\]\([^)]*\)")
@@ -120,6 +128,29 @@ def parse_blocks(text: str) -> list[HeaderBlock]:
                 delimiter_count=len(DELIM_RE.findall(body)),
             )
         )
+    if blocks:
+        return blocks
+
+    # Fallback: alternate "--- variant: vNN" convention (no "## SHAPE" line
+    # at all). Only tried when the primary convention finds zero blocks, so
+    # it never changes behavior for files that use "## SHAPE vNN" headers.
+    alt_matches = list(ALT_HEADER_RE.finditer(text))
+    for i, m in enumerate(alt_matches):
+        ver = m.group(1)
+        start = m.end()
+        end = alt_matches[i + 1].start() if i + 1 < len(alt_matches) else len(text)
+        body = text[start:end]
+        blocks.append(
+            HeaderBlock(
+                header_id=f"VARIANT_v{ver}",
+                shape="VARIANT",
+                version=ver,
+                start=start,
+                end=end,
+                body=body,
+                delimiter_count=len(DELIM_RE.findall(body)),
+            )
+        )
     return blocks
 
 
@@ -150,6 +181,36 @@ def _glossary_avoid_terms(locale: str) -> list[tuple[str, str]]:
                 avoid_clean = str(avoid).strip()
                 if avoid_clean:
                     out.append((avoid_clean, source))
+    return out
+
+
+def _glossary_preferred_terms(locale: str) -> list[tuple[str, list[str]]]:
+    """[(source_phrase, [locked preferred renderings, ...]), ...].
+
+    Distinct from _glossary_avoid_terms(): an `avoid` list only blocks
+    specific *known* bad renderings. It cannot catch a translator drifting to
+    an undocumented synonym that was never anticipated (e.g. DashScope
+    rendering "compassion fatigue" as the plausible-sounding 同情疲勞 --
+    that string was never in anyone's avoid list, so the avoid check passed
+    silently on 2026-07-23 wave1/shard04 output). This check inverts the
+    logic: when the English source phrase for a locked term is present, at
+    least one of that term's `preferred_by_context` renderings MUST appear
+    in the candidate -- whatever else does or doesn't appear.
+    """
+    out: list[tuple[str, list[str]]] = []
+    adir = _analysis_dir(locale)
+    if not adir:
+        return out
+    for fname in ("glossary_core.yaml", "glossary_project.yaml"):
+        data = _load_yaml(adir / fname)
+        for term in data.get("terms") or []:
+            source = str(term.get("source", "")).strip()
+            if not source:
+                continue
+            preferred = term.get("preferred_by_context") or {}
+            values = sorted({str(v).strip() for v in preferred.values() if str(v).strip()})
+            if values:
+                out.append((source, values))
     return out
 
 
@@ -278,6 +339,19 @@ def validate(
             for avoid_term, source_term in _glossary_avoid_terms(locale):
                 if avoid_term and avoid_term in cb.body:
                     this_block_reasons.append(f"glossary_violation:{avoid_term}")
+
+        # 14. locked preferred-term drift: when the English source phrase for
+        # a locked glossary concept appears in this block's source text, the
+        # candidate must use one of the locked preferred renderings -- not a
+        # plausible-but-undocumented synonym (see _glossary_preferred_terms).
+        if check_glossary:
+            src_body_lower = sb.body.lower()
+            for source_phrase, preferred_values in _glossary_preferred_terms(locale):
+                if source_phrase.lower() in src_body_lower:
+                    if not any(pv in cb.body for pv in preferred_values):
+                        this_block_reasons.append(
+                            f"glossary_preferred_term_missing:{source_phrase}"
+                        )
 
         if this_block_reasons:
             block_reasons[sb.header_id] = this_block_reasons
