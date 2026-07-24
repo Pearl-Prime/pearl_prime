@@ -416,3 +416,23 @@ detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_ma
   fix (Pearl_Dev/Pearl_Prime scope, out of this lane's translation-only mandate). Full diagnosis + 4 build logs:
   `artifacts/qa/zhtw_first_book_20260723/TRACE_SUMMARY.md`. **Acceptance layer: structurally clear (Layer 1) on
   cell selection only — zero zh-TW EPUBs shipped.**
+- **Roadmap doc drift corrected 2026-07-23 (live-verified, do not re-derive without re-checking):** the
+  2026-07-03 roadmap doc (`docs/specs/MANGA_100PCT_PRODUCTION_ROADMAP_2026-07-03.md`) undersells current state —
+  M1 (`check_render_progress_bytes.py` / `check_manga_story_authored.py` / `check_manga_wiring.py`), M2
+  (`config/manga/locale_genre_allocations.yaml` + registry C-1/C-2 closed 2026-07-04), and M4 (`manga_mode_vessels.yaml`
+  wired into `phoenix_v4/manga/series/story_architect.py::apply_mode_vessel`, `MANGA_MODE_WRAPPER_DESIGN.md` /
+  `MUSIC_MODE_MANGA_V1_SPEC.md` / `teacher_apparatus_per_genre.md` all landed) are all CODE-WIRED/EXECUTED-REAL and
+  gate-green on `origin/main` as of this verification — none of this was reflected in the roadmap doc's milestone
+  table. All 562 `tests/manga/` pass. The real remaining long pole is M3 (stories at scale), now tracked by the
+  same-day program `docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/` (PR #103, merged; ws
+  `ws_manga_48ep_3catalog_writing_20260723`): 1 series x 48 episodes (4 arcs x 12) per brand per catalog,
+  en_US/ja_JP/zh_TW x 37 brands = 109 cells. Live count this session: **en_US 37/37 cells have a gate-passing
+  ep_001** (`check_manga_story_authored.py`; some series deeper into arc 1 already — 55 episode files total);
+  **ja_JP 17/37 cells have a gate-passing ep_001** (16 episode files; 20 cells still NEW_SERIES, unauthored);
+  **zh_TW 0/37 — no episode files exist**, though its research blocker (lane 01, the modern-reader-context
+  doctrine gap) is already resolved (`config/manga/modern_reader_story_doctrine.yaml` carries a real, substantive
+  `zh_TW:` market profile, not a stub) — the zh_TW writer lane (`04_WRITER_LANE_ZH_TW_PROMPT.md`) was simply never
+  dispatched. A zh_TW smoke-cell dispatch (`cognitive_clarity`, flagship) was launched 2026-07-23 to close this;
+  check for its PR before re-dispatching the same cell. Acceptance layer for every gate-passing ep_001: CODE-WIRED/
+  EXECUTED-REAL — none of this is PROVEN-AT-BAR (that needs an operator blind-read per the pack's Router SS16, and
+  ultimately the M6 blind-judge protocol) and none of it is "bestseller" or "shippable" on gate-PASS alone.
