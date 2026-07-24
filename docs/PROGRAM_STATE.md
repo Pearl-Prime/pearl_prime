@@ -134,18 +134,28 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
   at catalog scale:** Phase B–D locale waves, localized EPUB assembly, storefront Phase A smoke with real downloads.
 
 ### Manga (all locales)
-- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 10 mecha native bank + honest proof lane MERGED on `main`**
-- **Details:** R1–R8 conformance: R1 30% / R2 45% / R3 25% / R4 8% / R5 34% / R6 40% / R7 5% / R8 35%
-  (six-layer taxonomy, adversarially refuted; authority: `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-03.md`
-  + `artifacts/qa/manga_vision_conformance_20260703.tsv`). Grid: 1,345 series plans across 5 locales
-  (1,344 titled — title-blank prior REFUTED), 8 registry locales at zero; 16 authored scripts; render-real on main =
-  the April "alarm is lying" tree only (386 files, 212.8MB; sleep/somatic TSVs reference box-side files absent from
-  main). Deterministic bank-assembly lane LANDED (`scripts/manga/assemble_from_bank.py` + manifest schema + 6-panel
-  demo strip from real L0/L2 bank + INTERIM sprites, provenance-labeled). Roadmap to 100%:
-  `docs/specs/MANGA_100PCT_PRODUCTION_ROADMAP_2026-07-03.md` (M1 enforcement rails → M2 locale allocations →
-  M3 stories-first waves → M4 vessel wiring → M5 banks/GPU → M6 blind-10 pro-bar → M7 locale rollout).
-  Supersedes `docs/MANGA_RECOVERY_AUDIT.md` as current state. Pearl Star unreachable during cert (box-side
-  UNVERIFIED); GPU stays CJK-priority (OPD-20260629-003).
+- **Status:** **VISION RE-AUDITED 2026-07-22 — R1 allocation-chain gap closed (fr_FR real plans); R3 vessel-wiring gap re-confirmed unchanged; R7 blind-10 scaffold real but zero judged scorecards; genre-aware bubble wiring real+tested but stranded off `origin/main` (no open PR)**
+- **Details:** R1–R8 conformance (07-22 vs 07-03): R1 46%↑ / R2 47%↑(light signal) / R3 25%(unchanged, re-confirmed) / R4 8%(carried, not re-verified) / R5 37%↑(mixed) / R6 42%↑(light signal) / R7 9%↑(scaffold only) / R8 39%↑
+  (six-layer taxonomy; authority: `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-22.md`
+  + `artifacts/qa/manga_vision_conformance_20260722.tsv`). **Methodology note:** this is a single-session
+  git-plumbing verification pass (not the 07-03 baseline's 41-agent adversarial fan-out) — narrower scope,
+  every number either cites a file/byte-count/test result or is marked carried-forward-unverified.
+  Grid: fr_FR added to the executed-real locale set (390 real series-plan yamls + SSOT rollup CSV, was 0 at
+  07-03) — locales with real plans now 6/13; 7/13 still zero. `config/manga/locale_genre_allocations.yaml`
+  (833 lines) now CODE-WIRED with 3 confirmed consumers, closing the 07-03 baseline's single named R1
+  blocking gap. `phoenix_v4/manga/story_architect.py` re-confirmed to still not consume
+  `manga_mode_vessels.yaml` (R3 unchanged). Blind-10 protocol scaffold (protocol/rubric/comparator
+  registry/judge outreach) is real and CODE-WIRED but `scorecards/` is empty (`.gitkeep` only) — zero
+  PROVEN-AT-BAR anywhere. **Genre-aware bubble-render wiring into `assemble_from_bank.py`
+  (commit `aad5cf2152`) is real and tested (33 passed/2 skipped, reproduced) but is NOT on `origin/main`**
+  — it lives only on `agent/bestseller-atom-flow-lanes-20260721` with no open PR; `origin/main`'s
+  bank-assembly lane still calls the legacy (non-genre-aware) bubble renderer.
+  `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-03.md` is superseded-provenance (cited, not
+  re-derived, for every axis this session did not independently re-verify — R2/R4/R6 craft-quality
+  claims especially). Roadmap to 100%: `docs/specs/MANGA_100PCT_PRODUCTION_ROADMAP_2026-07-03.md`
+  (M1 enforcement rails → M2 locale allocations [now CODE-WIRED] → M3 stories-first waves → M4 vessel
+  wiring [still open] → M5 banks/GPU → M6 blind-10 pro-bar [scaffold only] → M7 locale rollout [6/13]).
+  Pearl Star reachability not re-verified this session; GPU stays CJK-priority (OPD-20260629-003).
 - **July 9 merge wave (production truth on `main` only — do not conflate with local-only renders):**
   - **Stillness ep_001 HR-U16 continuity + room-capable L2 wiring — MERGED** (#5428, `c6a0622c64ea52e4111fbb78d4484fd6b9761368`).
     Room-capable L2 manifest wiring for `ep001_008` / `ep001_013` is on `main`. Authority:
