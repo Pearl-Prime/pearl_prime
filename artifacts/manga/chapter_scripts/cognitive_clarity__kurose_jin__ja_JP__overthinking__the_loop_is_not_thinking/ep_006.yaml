@@ -1,0 +1,299 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_006
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_006.arc_storyboard.yaml
+title: 画面越しの妹——第六話
+title_en_gloss: My Sister, Through a Screen — Episode 6
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: sister_video_call_cancelled_plan
+    logline: Ren's sister Shizuku video-calls to confirm their weekend plans, and while she talks he
+      keeps a second screen open beneath the frame, scrolling case notes with the hand she cannot see.
+    ordinary_world_objects:
+    - phone
+    - screen
+    - tea
+    - door
+    genre_transmutation: A video-call app becomes the instrument that measures how divided Ren's
+      attention has become; a postponed weekend plan becomes the arc's first relationship cost paid in
+      full, not just implied.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'sister_video_call_cancelled_plan'. Shizuku appears directly for the
+    first time in the series (previously only referenced in ep_002). The anchor-cost beat lands here in
+    full — a plan cancelled, a closeness rationed — matching the strategy bank's beat 5. en_US fields on
+    select panels are operator glosses only, extended minimally for gate-lexicon coverage (before/witness/cost/screen)
+    without altering ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: shizuku
+  name: 雫
+  age: 不詳（蓮より若い）
+  role: 蓮の妹（アンカー）——距離を置いた関係が、今話で初めて画面越しに直接描かれる
+  visual_anchor: 画面越しの顔、少し早口な話し方、心配を隠しきれない目
+scene_palette:
+  primary: 週末の午前、蓮のアパート、カーテン越しの柔らかい光
+  secondary: 携帯の画面の青白い光、冷めていく湯気
+  accent: 玄関のドア（今話は閉じたまま、動かない）
+pages:
+- page_id: ep_006_p01
+  panels:
+  - panel_id: ep006_001
+    scene: 週末の朝。蓮のアパート。玄関の鏡は第二話からそのままの角度で残っている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 家庭の再登場——モチーフの継続
+  - panel_id: ep006_002
+    scene: 携帯が振動する。ビデオ通話の着信——雫、と表示されている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 通話アプリの着信音。
+      en_US: 'The video-call app rings — an ordinary interruption, this weekend.'
+      zh_TW: '[zh_TW] The video-call app rings.'
+      zh_CN: '[zh_CN] The video-call app rings.'
+    intent: アンカーの初直接登場——着信という形での接触
+  - panel_id: ep006_003
+    scene: 蓮の指が、応答ボタンの上で半秒だけ止まる。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 半秒の逡巡——歓迎されない中断としての家族
+  - panel_id: ep006_004
+    scene: 蓮は応答し、努めて普段通りの声を作る。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 雫。おはよう。
+        en_US: 'Shizuku. Morning — a voice built to sound fine before he checks if it is.'
+        zh_TW: '[zh_TW] Shizuku. Morning.'
+        zh_CN: '[zh_CN] Shizuku. Morning.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep006_005
+    scene: 画面の中の雫。明るい声で、今週末に約束していた予定——母の墓参りの日取り——を確認する。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 今週末、大丈夫だよね？　お母さんのところ。
+        en_US: 'This weekend still works, right? Before we lose the good weather — a plan they made together.'
+        zh_TW: '[zh_TW] This weekend still works, right?'
+        zh_CN: '[zh_CN] This weekend still works, right?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep006_006
+    scene: 画面の枠の外——雫には見えない位置で、蓮のもう一方の手がタブレットの上でケースファイルをスクロールしている。
+    beat_type: micro
+    intent: 分割された注意の可視化——画面が捉えない領域
+  - panel_id: ep006_007
+    scene: 雫の顔がわずかに曇る。返事の間が、いつもより長い。
+    beat_type: micro
+    intent: アンカーの気づき——遅延という手がかり
+  - panel_id: ep006_008
+    scene: 雫、直接に。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 蓮、ちゃんと聞いてる？　大丈夫？
+        en_US: 'Ren, are you even listening? Are you okay — the question underneath the question.'
+        zh_TW: '[zh_TW] Ren, are you even listening?'
+        zh_CN: '[zh_CN] Ren, are you even listening?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep006_009
+    scene: 蓮、視線をタブレットから画面へ戻しながら。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 聞いてる。ただ、仕事が立て込んでて。
+        en_US: 'I''m listening. Just buried in work — the cover story he cannot refuse to keep telling.'
+        zh_TW: '[zh_TW] I''m listening. Just buried in work.'
+        zh_CN: '[zh_CN] I''m listening. Just buried in work.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep006_010
+    scene: 雫、少し間を置いてから、試すように。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: だったら、今週末は、また今度にする？
+        en_US: 'Then instead — should we push it to another time? A test, not just a question.'
+        zh_TW: '[zh_TW] Then instead — should we push it?'
+        zh_CN: '[zh_CN] Then instead — should we push it?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: ページ1の転——延期という試し
+- page_id: ep_006_p02
+  panels:
+  - panel_id: ep006_011
+    scene: 蓮、間を置かずに答える——その速さが、答えそのものより雄弁だ。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: そうしてもらえると、助かる。
+        en_US: 'That would help — said too fast, relief where there should have been loss.'
+        zh_TW: '[zh_TW] That would help.'
+        zh_CN: '[zh_CN] That would help.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: 代償が着地する——即答という正直さ
+  - panel_id: ep006_012
+    scene: 画面の中、雫の顔に一瞬だけ傷ついた表情がよぎり、すぐに隠される。
+    beat_type: micro
+    intent: 隠された痛み——アンカーの代償
+  - panel_id: ep006_013
+    scene: 雫、短く、いつもより硬い声で。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: うん。分かった。無理しないで。
+        en_US: 'Okay. Understood. Don''t push yourself — it could be care, or it could be the last patience she has left.'
+        zh_TW: '[zh_TW] Okay. Understood. Don''t push yourself.'
+        zh_CN: '[zh_CN] Okay. Understood. Don''t push yourself.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep006_014
+    scene: 通話が切れる。画面が暗くなる。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep006_015
+    scene: 蓮は、雫の顔があった場所——今は何も映さない黒い画面——をしばらく見つめる。
+    beat_type: micro
+    intent: 空白の直視——代償の実感
+  - panel_id: ep006_016
+    scene: だが、その手はすでにタブレットへ戻っている。一呼吸の間もない。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 悲しむ前に、手が動いていた。
+      en_US: 'His hand moved before the grief could catch him — the cost noted, not felt, not yet.'
+      zh_TW: '[zh_TW] His hand moved before the grief could catch him.'
+      zh_CN: '[zh_CN] His hand moved before the grief could catch him.'
+    intent: 継続の即時性——悲しみより先に習慣が動く
+  - panel_id: ep006_017
+    scene: 台所のテーブルに、冷めた茶。第二話と同じ構図——湯気は、もう立っていない。
+    beat_type: micro
+    intent: モチーフの反復——身体の代償の継続
+  - panel_id: ep006_018
+    scene: ワイド：夕方。玄関のドアは、朝からずっと動いていない。誰も来なかった一日の証拠として。
+    beat_type: standard
+    intent: 閉じ——動かなかったドアという静かな代償
+  - panel_id: ep006_019
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第六話・了——画面越しの妹
+      en_US: 'End of Episode 6 — My Sister, Through a Screen'
+      zh_TW: '[zh_TW] End of Episode 6 — My Sister, Through a Screen'
+      zh_CN: '[zh_CN] End of Episode 6 — My Sister, Through a Screen'
+notes:
+  pacing: 十九コマ。今話で初めて、アンカー（雫）が直接登場し、代償が具体的な形——延期された予定、隠された痛み——として着地する。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper/soft。雫の台詞：normal、感情を隠しきれない直接さ。
+  sfx_policy: 最小限。囁きレジスタのみ。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第6話。設定はアパート（第二話と同じ）へ回帰。第二話で気配のみだった妹・雫が初めて直接登場し、strategy_01第5ビート（代償が着地する、アンカーの短く直接的な一言）を実現する。
+craft_notes: 'VESSEL: 今話は佐伯が不在——アンカーである雫の代償に焦点を当てる回。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_01第5ビート（代償が着地する／アンカーの短く直接的な一言）をビデオ通話という現代的な形で実現した。
+
+  ARC: アンカーの直接登場→代償の即答という正直さ→悲しみより先に動く手（習慣の即時性）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

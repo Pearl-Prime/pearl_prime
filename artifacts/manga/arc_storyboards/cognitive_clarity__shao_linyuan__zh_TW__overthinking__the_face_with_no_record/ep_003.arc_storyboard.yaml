@@ -1,0 +1,259 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_003
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 3: Almost There'
+logline: A third station's timeline goes up on Yaqing's wall as a deliberate-evasion theory forms; her
+  sister and her supervisor both name a cost the case is charging in the same day.
+stakes_now: Yaqing's case has spread from work hours into her apartment, her drink orders, and her family
+  time.
+stakes_end: Yaqing has a hard institutional deadline for proof, an openly named cost to her sister, and
+  a companion who now reads her body's strain even when she says nothing.
+genre_cadence:
+- corkboard_third_timeline
+- ibon_ordinary_errand
+- pattern_interval_forming
+- autopilot_depletion_tell
+- deliberate_theory_forms
+- cafe_meeting_distracted
+- sister_names_absence
+- distracted_apology
+- sister_hurt_unspoken
+- sister_leaves_early
+- supervisor_summons
+- supervisor_states_deadline
+- yaqing_pushes_back
+- supervisor_holds_line
+- keyboard_choice_tension
+- distortion_cu_room
+- vessel_reads_the_jaw
+- vessel_names_the_tell
+- held_silence_no_answer
+- closing_almost_there_hold
+page_turn_promises:
+- page_id: ep_003_p01
+  promise: Will Yaqing notice her own autopilot exhaustion before it costs her the one relationship still
+    asking for her attention?
+- page_id: ep_003_p02
+  promise: Will Yaqing meet the manager's deadline for proof, or let the case's grip tighten past what
+    Zhou can silently read off her?
+panels:
+- panel_id: ep003_001
+  page_id: ep_003_p01
+  story_function: corkboard_third_timeline
+  story_move: A third printed timeline goes up on Yaqing's apartment wall, forming a crude connection
+    map.
+  visual_proof: Wide shot of an apartment wall with red string and printouts forming a triangle of stations.
+  information_delta: Reader sees the case has physically colonized Yaqing's living space.
+  beat_role: vertigo
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_002
+  page_id: ep_003_p01
+  story_function: ibon_ordinary_errand
+  story_move: An ordinary iBon kiosk print job at the corner 7-Eleven produces the timeline printout.
+  visual_proof: Spatial insert of a 7-Eleven iBon kiosk printing a receipt-style report.
+  information_delta: Reader sees the concrete Taiwan-grounded object that turned her private notes physical.
+  beat_role: evidence_detail
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_003
+  page_id: ep_003_p01
+  story_function: pattern_interval_forming
+  story_move: Yaqing pins the third printout, revealing a near-perfect timing interval across three stations.
+  visual_proof: Close insert on three pinned printouts with intervals marked between them.
+  information_delta: Reader learns the pattern now spans three stations with a suspiciously regular interval.
+  beat_role: evidence_detail
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_004
+  page_id: ep_003_p01
+  story_function: autopilot_depletion_tell
+  story_move: A bubble-tea app notification reveals Yaqing has ordered the same drink on autopilot for
+    a week.
+  visual_proof: Insert on a phone notification confirming a drink order she does not remember placing.
+  information_delta: Reader gets concrete evidence of depletion — days of decisions made without awareness.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_005
+  page_id: ep_003_p01
+  story_function: deliberate_theory_forms
+  story_move: 'Yaqing forms a darker theory: the pattern is deliberate, engineered to evade detection.'
+  visual_proof: Close insert on Yaqing's face, focus tightening to the edge of tunnel vision.
+  information_delta: Reader hears the third and darkest theory yet, now naming intent rather than accident.
+  beat_role: revision
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_006
+  page_id: ep_003_p01
+  story_function: cafe_meeting_distracted
+  story_move: Yaqing meets her sister at a City Cafe counter but keeps her laptop open on the same timeline.
+  visual_proof: Wide shot of a City Cafe seating area, laptop open on the table between the two sisters.
+  information_delta: Reader sees the case has entered a family meeting meant to be separate from work.
+  beat_role: anchor_cost
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_007
+  page_id: ep_003_p01
+  story_function: sister_names_absence
+  story_move: Yaqing's sister directly calls out that she is not present in the conversation.
+  visual_proof: Medium two-shot, the sister's expression somewhere between annoyed and concerned.
+  information_delta: Reader hears the first named social cost from someone outside the OCC.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_008
+  page_id: ep_003_p01
+  story_function: distracted_apology
+  story_move: Yaqing apologizes automatically while her eyes drift straight back to her phone notes.
+  visual_proof: Close insert on Yaqing glancing at her phone mid-apology, sister visible out of focus.
+  information_delta: Reader sees the apology is reflexive, not a real return of attention.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_009
+  page_id: ep_003_p01
+  story_function: sister_hurt_unspoken
+  story_move: The sister's hurt registers silently; she chooses not to press the point further.
+  visual_proof: Close insert on the sister's face, disappointment folding away unspoken.
+  information_delta: Reader sees a cost being absorbed quietly rather than confronted.
+  beat_role: anchor_cost
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_010
+  page_id: ep_003_p01
+  story_function: sister_leaves_early
+  story_move: The sister leaves early, and Yaqing is left alone with her half-finished coffee and open
+    laptop.
+  visual_proof: Wide shot of the empty seat across from Yaqing, coffee cup and laptop the only company
+    left.
+  information_delta: 'Reader sees the concrete social cost land: a canceled connection, not a hypothetical
+    one.'
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_011
+  page_id: ep_003_p02
+  story_function: supervisor_summons
+  story_move: Team Lead Lin calls Yaqing over to a meeting corner at the OCC that night, folder in hand.
+  visual_proof: Wide shot of Lin gesturing Yaqing toward a side table, report folder visible under her
+    arm.
+  information_delta: Reader learns formal supervisory attention has now turned toward the case.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_012
+  page_id: ep_003_p02
+  story_function: supervisor_states_deadline
+  story_move: Lin states plainly that both incidents must be closed before the month-end audit.
+  visual_proof: Medium shot, Lin's businesslike but not unkind expression as she states the requirement.
+  information_delta: Reader learns the external institutional deadline that now overlays Yaqing's private
+    one.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_013
+  page_id: ep_003_p02
+  story_function: yaqing_pushes_back
+  story_move: Yaqing pushes back with controlled professionalism, refusing to sign off on a mismatched
+    record.
+  visual_proof: Close insert on Yaqing's composed but firm expression as she states her objection.
+  information_delta: Reader sees Yaqing choosing the case over easy institutional compliance.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_014
+  page_id: ep_003_p02
+  story_function: supervisor_holds_line
+  story_move: Lin holds her position, demanding conclusive proof rather than a hunch within a set window.
+  visual_proof: Medium shot, Lin closing her folder, tone unchanged but the demand now explicit.
+  information_delta: 'Reader learns the exact stakes: proof or closure, no third option offered.'
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_015
+  page_id: ep_003_p02
+  story_function: keyboard_choice_tension
+  story_move: Yaqing's hand hovers between the close-case key and leaving the file open.
+  visual_proof: Close insert on Yaqing's hand suspended over two labeled options on her keyboard interface.
+  information_delta: Reader sees the choice made concrete and visible, not just implied.
+  beat_role: pressure
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_016
+  page_id: ep_003_p02
+  story_function: distortion_cu_room
+  story_move: The monitor wall's grid lines fisheye slightly around Yaqing's focal point, the room seeming
+    to close in.
+  visual_proof: 'Distortion close-up: the control room''s straight lines visibly warping toward Yaqing''s
+    fixed point.'
+  information_delta: Reader receives the episode's genre-standard unreliable-perception image.
+  beat_role: vertigo
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_017
+  page_id: ep_003_p02
+  story_function: vessel_reads_the_jaw
+  story_move: Zhou, from a distance, notices Yaqing's jaw tightening before she says a word.
+  visual_proof: Medium shot of Zhou watching Yaqing's face from across the room, reading her body, not
+    her screen.
+  information_delta: 'Reader sees the vessel''s core method demonstrated: reading the body before the
+    mouth confesses.'
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_018
+  page_id: ep_003_p02
+  story_function: vessel_names_the_tell
+  story_move: Zhou names the physical tell directly and briefly, without lecturing or explaining it.
+  visual_proof: Close two-shot, Zhou's short, plain line delivered without a teaching posture.
+  information_delta: Reader hears the vessel's practical, non-doctrinal observation stated once.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_019
+  page_id: ep_003_p02
+  story_function: held_silence_no_answer
+  story_move: Yaqing does not answer Zhou, her eyes returning to the screen instead.
+  visual_proof: Close insert on Yaqing's face turning back to the monitor, Zhou's comment left unanswered.
+  information_delta: Reader sees the anchor's small opening go unmet, a cost accruing in real time.
+  beat_role: threatening_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_020
+  page_id: ep_003_p02
+  story_function: closing_almost_there_hold
+  story_move: A new blank space, already taped, waits on the apartment wall for a fourth timeline.
+  visual_proof: Wide pull-back of the corkboard wall, an empty taped slot conspicuously prepared for more.
+  information_delta: Reader closes on proof the obsession is already planning its next expansion.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_003.yaml
+notes: Arc 1 (obsession seed), episode 3 of 12. English craft-planning metadata only; authoritative story
+  is zh_TW in ep_003.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate.'
