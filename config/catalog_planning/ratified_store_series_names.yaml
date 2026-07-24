@@ -1,0 +1,72 @@
+# Ratified store-series names for the 37-brand catalog (Waystream excluded — it has
+# its own store_series system directly on book plans, see
+# docs/specs/session_mining_batch_20260718/STORE_SERIES_NAMING_ENGINE_V1_SPEC.md).
+#
+# Source: scripts/catalog/dry_run_store_series_names.py candidates, generated from
+# phoenix_v4/naming/generator.py:generate_store_series_candidates() against
+# config/catalog_planning/brand_series_plans.yaml (seed "20260718", pilot brand
+# cognitive_clarity — handoff artifacts/coordination/handoffs/spec5_store_series_naming_engine_2026-07-18.md).
+# Full dry-run report: artifacts/qa/session_mining_specs_do_all_20260718/spec5_series_naming/store_series_naming_dry_run.json
+#
+# Ratification: operator approved 2026-07-23 (OPD-20260723-001). This file records
+# ONLY the series_title per brand — the FIRST accepted candidate for each, picked
+# deterministically. It does NOT ratify the dry-run's series_subtitle field: that
+# field is a crude illustrative template (hardcoded persona_id="general_readers",
+# grammar defect on consonant/vowel article agreement e.g. "A Adhd Forge series"),
+# not real per-brand subtitle copy. Real book subtitles for these brands continue
+# to come from the existing per-book naming engine
+# (phoenix_v4/naming/keyword_bank.py + config/catalog_planning/series_templates.yaml),
+# which already does proper subtitle generation.
+#
+# This is a NAME ratification only — it does not write store_series onto any
+# individual book plan. These 37 brands have no per-book store_series wiring yet
+# (unlike Waystream); applying a ratified name to real per-book catalog metadata
+# is a separate, not-yet-scoped implementation task.
+schema_version: 1
+ratified_at: "2026-07-23"
+ratified_by: operator
+opd_ref: OPD-20260723-001
+not_ratified: subtitle field (see note above)
+
+brands:
+  adhd_forge: {topic: overthinking, series_title: "Quiet Into Clear Thought"}
+  bio_flow: {topic: somatic_healing, series_title: "Where Holding Lets Go"}
+  body_memory: {topic: grief, series_title: "The Afterlight Map"}
+  calm_student: {topic: anxiety, series_title: "The Steady Breath Practice"}
+  career_lift: {topic: imposter_syndrome, series_title: "Career Notes for Mirror"}
+  cognitive_clarity: {topic: overthinking, series_title: "The Loop Turn"}
+  confidence_core: {topic: self_worth, series_title: "Worth Without the Old Script"}
+  creative_unfold: {topic: self_worth, series_title: "Creative Notes for Worth"}
+  devotion_path: {topic: self_worth, series_title: "Proof Into Unborrowed Ground"}
+  digital_ground: {topic: anxiety, series_title: "Where Calm Lets Go"}
+  executive_calm: {topic: anxiety, series_title: "The Alarm Turn"}
+  focus_sprint: {topic: burnout, series_title: "Where Rest Lets Go"}
+  gentle_growth: {topic: self_worth, series_title: "The Gentle Field"}
+  healing_ground: {topic: burnout, series_title: "The Healing Field"}
+  heart_balance: {topic: self_worth, series_title: "The Heart Field"}
+  high_performer: {topic: anxiety, series_title: "High Notes for Alarm"}
+  hormone_reset: {topic: anxiety, series_title: "Hormone Notes for Alarm"}
+  legacy_builder: {topic: burnout, series_title: "The Unforced Energy Practice"}
+  longevity_lab: {topic: somatic_healing, series_title: "The Longevity Field"}
+  minimal_mind: {topic: overthinking, series_title: "Loop Without the Old Script"}
+  morning_momentum: {topic: burnout, series_title: "Ember Without the Old Script"}
+  night_reset: {topic: sleep_anxiety, series_title: "Rest Into Soft Landing"}
+  relational_calm: {topic: boundaries, series_title: "Where Yes Lets Go"}
+  relationship_clarity: {topic: boundaries, series_title: "The Relationship Field"}
+  resilient_parent: {topic: compassion_fatigue, series_title: "Overgiving Into Returned Care"}
+  sleep_restoration: {topic: sleep_anxiety, series_title: "Night Signal Without the Old Script"}
+  solar_return: {topic: burnout, series_title: "The Solar Field"}
+  somatic_wisdom: {topic: anxiety, series_title: "The Somatic Field"}
+  stabilizer: {topic: anxiety, series_title: "The Stabilizer Field"}
+  stillness_press: {topic: anxiety, series_title: "Stillness Notes for Alarm"}
+  trauma_path: {topic: anxiety, series_title: "The Trauma Field"}
+  warrior_calm: {topic: anxiety, series_title: "The Warrior Field"}
+
+# Not ratified — all 3 dry-run candidates for these brands were rejected as
+# generic or cross-brand collisions; they need a fresh generation pass (different
+# seed or a curated topic lexicon entry) before another ratification round.
+unresolved_brands:
+  - optimizer
+  - qi_foundation
+  - spiritual_ground
+  - stoic_edge
