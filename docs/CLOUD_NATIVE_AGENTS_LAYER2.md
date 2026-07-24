@@ -127,6 +127,30 @@ python scripts/artifacts/r2_sync.py push \
 writes a manifest YAML conforming to `manifest.schema.json`. The manifest
 is what you commit to the repo.
 
+### Large manifests
+
+Do not commit a 10,000-file artifact inventory as a 40,000-line YAML diff.
+For large sets, keep the generated inline manifest in local staging and
+publish a checksum-pinned index:
+
+```bash
+python scripts/artifacts/r2_sync.py publish-index \
+  --source-manifest /tmp/qa_runs__large_batch.yaml \
+  --manifest artifacts/manifests/pearl_prime_qa_runs/qa_runs__large_batch.yaml \
+  --part-size 2000
+```
+
+This uploads deterministic JSONL manifest parts below
+`manifest_shards/v1/<manifest_id>/` and writes only the small index YAML to the
+repository. Each index entry pins the part's key, SHA-256, byte length,
+artifact count, and aggregate artifact bytes. `pull` and `verify` support both
+legacy inline manifests (`1.0.0`) and indexed manifests (`1.1.0`) and refuse a
+part whose checksum, count, or byte totals drift.
+
+The source inline manifest is staging input, not a repository artifact. Keep
+it until `verify` passes on the committed index, then remove it from local
+staging.
+
 ### Pulling for downstream work (e.g. uploader, dashboard render)
 
 ```bash
