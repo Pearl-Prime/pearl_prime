@@ -1,7 +1,7 @@
 # External Stories Bank — Spec (Pearl_Research)
 
 **Authority:** Pearl_Research  
-**Status:** Wave 1 seeded — `unwired` / `KNOWN_UNWIRED`  
+**Status:** Wave 1 seeded and planner-loaded; Wave 2 scale/wiring expansion SPECCED
 **Extends:** Accent family (quotes · evidence · wisdom essence · author commentary · **external stories**)  
 **Created:** 2026-07-07  
 **Bank path:** `SOURCE_OF_TRUTH/accent_banks/external_stories/`
@@ -47,6 +47,7 @@ rights_class: public_domain_retelling | verified_facts_only | nominative_referen
 topic_keys: [anxiety, ...]
 doctrine_keys: ["COMPOSITE_DOCTRINE v01", ...]
 locale_fit: [universal] | [en_US] | [zh_CN] | ...
+audience_lane: universal | home | cross_culture
 secular_safe: true | false
 persona_fit: [...]                         # optional planner hint
 position_fit: supports REFLECTION | supports PIVOT | supports TAKEAWAY | supports HOOK
@@ -80,10 +81,18 @@ Every story must reveal the wound, expose the pattern, or demonstrate the transf
 
 ---
 
-## 3. Locale-Fit Clusters (11 — quote-bank pattern)
+## 3. Locale-Fit Clusters and Audience Lanes
 
 Wave 1: `universal`, `en_US`, `zh_CN`, `zh_TW`, `ja_JP`.  
 zh_CN exclusions mirror quote bank (Western political icons, Dalai Lama, devotional religious one-liners in secular brands).
+
+`locale_fit` answers where a story is culturally and legally suitable. `audience_lane` answers why it is selected for a particular reader:
+
+- `universal` — culturally shared awareness across all 14 markets.
+- `home` — the reader's own language/culture cluster. Initial priority: `en_US`, `zh_CN`, `zh_TW`, `zh_HK`, `zh_SG`, `ja_JP`, and `ko_KR`, followed by existing non-CJK locales as authored.
+- `cross_culture` — an intentionally other-culture story that remains globally legible and adds curiosity rather than exoticism. A Japanese story may therefore be `locale_fit: [ja_JP, universal]` and selected in the `cross_culture` lane for an `en_US` reader.
+
+Catalog composition target is **50% universal / 40% home / 10% cross-culture**. This ratio never overrides Rule 0, rights, topic fit, secular safety, or sensitivity review.
 
 ---
 
@@ -91,7 +100,9 @@ zh_CN exclusions mirror quote bank (Western political icons, Dalai Lama, devotio
 
 See `config/authoring/story_mix_profiles.yaml`. Profiles: `practical_credible` (Atomic-Habits-like), `intimate_voice` (Badass-like), `timeless_wisdom` (Power-of-Now-like).
 
-Dosage: 2–4 typical per book, max 6, reuse cap ≤3 per brand per quarter, shingle-gate scope.
+Wave-1 runtime defaults remain 2–4 typical per book, max 6. Wave 2 changes the production target to **one EXTERNAL story per chapter**. For a 12-chapter book, prefer **6 universal / 5 home / 1 cross-culture** when eligible pools allow. Never repeat a story within a book. If a lane lacks eligible inventory, fall back to universal first and log the deviation; never relax integrity gates to hit a ratio.
+
+EXTERNAL supplements the protagonist arc. It never replaces arc-owned spine beats, becomes a second protagonist, or displaces EXERCISE/TOOL responsibilities.
 
 ---
 
@@ -111,7 +122,7 @@ Dosage: 2–4 typical per book, max 6, reuse cap ≤3 per brand per quarter, shi
 
 ## 6. Wiring Status
 
-**`status: unwired`** — `KNOWN_UNWIRED: accent_banks/external_stories/`. Zero pipeline wiring in Wave 1.
+`phoenix_v4/planning/accent_planner.py` already loads EXTERNAL banks and applies `config/authoring/story_mix_profiles.yaml`; the former `unwired` statement was stale. Wave 2 still requires a code lane to raise dosage to one per chapter and add audience-lane-aware 50/40/10 selection. Until that lands, the new dosage is **SPECCED**, not runtime-complete.
 
 ---
 
@@ -120,5 +131,6 @@ Dosage: 2–4 typical per book, max 6, reuse cap ≤3 per brand per quarter, shi
 | Wave | Topics | Clusters | Target |
 |------|--------|----------|--------|
 | 1 | anxiety, burnout, overthinking, imposter_syndrome, financial_anxiety | universal, en_US, zh_CN, zh_TW, ja_JP | 15–20/topic |
-| 2 | boundaries, social_anxiety, self_worth, sleep_anxiety, grief, depression | + EU | 12–15/topic |
-| 3 | remaining canonical 15 | all 11 | fill |
+| 2A | Core 15, priority anxiety/burnout/boundaries/overthinking | universal + home + cross-culture | **1,000 unique initial milestone** |
+| 2B | Core 15 completion | all 14 markets | **1,200 unique production floor**, 50/40/10 composition |
+| 3 | remaining canonical topics | all supported markets | fill by measured demand |
