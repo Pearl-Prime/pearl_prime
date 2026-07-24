@@ -73,6 +73,22 @@ genre_pacing:
       - "Ao Haru Ride"
       - "Kimi ni Todoke"
       - "Strobe Edge"
+    arc_cadence:
+      episodes_per_arc_range: [4, 20]
+      episodes_per_arc_median: 9
+      arc_pattern: fixed
+      season_unit: 4  # chapters per volume (monthly shojo magazine convention)
+      first_major_shift_by: 50
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Kimi ni Todoke — Wikipedia chapter/volume list (en.wikipedia.org/wiki/Kimi_ni_Todoke, accessed 2026-07-24)"
+        - "Fruits Basket — Wikipedia, 136 ch / 23 vols (en.wikipedia.org/wiki/Fruits_Basket, accessed 2026-07-24)"
+        - "Ao Haru Ride — Wikipedia, 49 ch / 13 vols (en.wikipedia.org/wiki/Ao_Haru_Ride, accessed 2026-07-24)"
+      notes: >-
+        Ladder-rung arcs (school event / rival / confession attempt) stay roughly constant in size
+        while stakes escalate; arcs are written to close at tankobon boundaries (~4 monthly
+        chapters). Relationship-status shift (couple formed) by ch ~48-50 in long-runners (Kimi ni
+        Todoke ch 48-49), ch ~25 in mid-length titles.
 
   workplace:
     label: "Josei workplace"
@@ -94,6 +110,22 @@ genre_pacing:
       - "Princess Jellyfish"
       - "Honey and Clover"
       - "What Did You Eat Yesterday"
+    arc_cadence:
+      episodes_per_arc_range: [1, 15]
+      episodes_per_arc_median: 8
+      arc_pattern: fixed
+      season_unit: 5  # chapters per volume (monthly josei magazine convention)
+      first_major_shift_by: 30
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "What Did You Eat Yesterday? — Wikipedia, episodic 1-ch units (en.wikipedia.org/wiki/What_Did_You_Eat_Yesterday%3F, accessed 2026-07-24)"
+        - "Princess Jellyfish — Wikipedia, 17 vols (en.wikipedia.org/wiki/Princess_Jellyfish, accessed 2026-07-24)"
+        - "Honey and Clover — Wikipedia, 10 vols / 64 ch (en.wikipedia.org/wiki/Honey_and_Clover, accessed 2026-07-24)"
+      notes: >-
+        Episodic baseline (chapter = one meal / one client / one deadline) with serial threads of
+        8-15 ch surfacing periodically (Princess Jellyfish redevelopment threat, Honey and Clover
+        life-stage turns). Purely episodic titles (WDYEY) defer status-quo shifts far beyond ch
+        100.
 
   healing:
     label: "Iyashikei / healing"
@@ -116,6 +148,22 @@ genre_pacing:
       - "Flying Witch"
       - "Non Non Biyori"
       - "Laid-Back Camp"
+    arc_cadence:
+      episodes_per_arc_range: [1, 5]
+      episodes_per_arc_median: 2
+      arc_pattern: seasonal_cycle
+      season_unit: 8  # chapters per volume (monthly seinen/shonen SoL convention)
+      first_major_shift_by: null  # no status-quo-shift convention in this family (see notes)
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Yotsuba&! — Wikipedia, standalone monthly chapters (en.wikipedia.org/wiki/Yotsuba%26!, accessed 2026-07-24)"
+        - "Laid-Back Camp — Wikipedia, trip units 2-5 ch (en.wikipedia.org/wiki/Laid-Back_Camp, accessed 2026-07-24)"
+        - "Barakamon — Wikipedia, 18 vols episodic + competition threads (en.wikipedia.org/wiki/Barakamon, accessed 2026-07-24)"
+      notes: >-
+        No status-quo-shift convention: the loop is the product. Units are vignettes (1-2 ch) and
+        trips/festivals (2-5 ch) hung on a seasonal calendar that resets yearly. Plan first-100 as
+        ~3-4 season wheels with demographic (not plot) drift; craft-bible seasonal-cycle claim
+        confirmed.
 
   mystery:
     label: "Seinen psychological / mystery"
