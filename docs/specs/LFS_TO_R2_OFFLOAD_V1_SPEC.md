@@ -1,6 +1,6 @@
 # LFS → R2 Offload V1 Spec
 
-**Status:** ACTIVE (pilot landed 2026-07-09)  
+**Status:** ACTIVE — pilot landed 2026-07-09 (#5306); Waves 3 & 4 landed on `main` 2026-07-23 (PR #151 `b702de43f9`, PR #161 `bccb188535`, owner-approved >50 deletions); Wave 2 = N/A (0 git-tracked files); only Phase B history rewrite (owner-gated) remains open  
 **Owner:** Pearl_DevOps (infra) · Pearl_Int (R2 credentials lane)  
 **Subsystem:** `pearl_devops` + `integrations`  
 **Authority:** extends `scripts/artifacts/r2_sync.py`, `config/artifacts/r2_buckets.yaml`, `.gitattributes`  
@@ -132,12 +132,12 @@ Offloaded binaries are removed from git index; manifest + optional `.r2-offload-
 
 ## 7. Wave plan (post-pilot — CLOSEOUT, not this PR)
 
-| Wave | Family | Est. GB | Priority |
-|------|--------|--------:|----------|
-| 2 | `assets/manga_catalog/**` | 6.0 | Highest smudge/$ leverage |
-| 3 | Remaining `artifacts/manga/**/assembled/`, `v4_render_cache/` | ~1.5 | Manga render trees |
-| 4 | `brand-wizard-app/public/assets/covers/` (regenerable) | ~2.0 | After manga catalog |
-| — | `SOURCE_OF_TRUTH/`, `atoms/`, `deliveries/**` | — | **NEVER** |
+| Wave | Family | Est. GB | Priority | Status |
+|------|--------|--------:|----------|--------|
+| 2 | `assets/manga_catalog/**` | 6.0 | Highest smudge/$ leverage | **N/A** — target has 0 git-tracked files as of 2026-07-24 (`.gitignore:127`); handled by Lane 01 R2 backup, not git surgery |
+| 3 | Remaining `artifacts/manga/**/assembled/`, `v4_render_cache/` | ~1.5 | Manga render trees | **DONE** — PR #151 `b702de43f9c93f36963794dd2513d45ae56b4c3d` (267 tracked files, owner-approved >50 deletions, 2026-07-23) |
+| 4 | `brand-wizard-app/public/assets/covers/` (regenerable) | ~2.0 | After manga catalog | **DONE** — PR #161 `bccb1885352de1135c99e70cb1ac02075c302c91` (79 tracked files, owner-approved >50 deletions, 2026-07-23) |
+| — | `SOURCE_OF_TRUTH/`, `atoms/`, `deliveries/**` | — | **NEVER** | — |
 
 ---
 
