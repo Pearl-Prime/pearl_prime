@@ -28,7 +28,8 @@ Offloaded assets (LFS_TO_R2_OFFLOAD_V1_SPEC): when the sibling PNG is absent
 on disk, --require-images falls back to artifacts/manifests/lfs_offload/*.tsv
 entries keyed by repo_path. A manifest row with bytes >= floor and a valid
 sha256 passes manifest-verify. Weekly deep-verify fetches from R2 via
-scripts/ci/deep_verify_r2_offload.py — this gate does NOT weaken the floor.
+scripts/ci/deep_verify_r2_offload.py, scheduled by
+.github/workflows/r2-offload-deep-verify.yml — this gate does NOT weaken the floor.
 
 Run:
     PYTHONPATH=scripts/ci:. python3 scripts/ci/check_render_progress_bytes.py \\

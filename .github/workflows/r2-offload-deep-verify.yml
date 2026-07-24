@@ -1,0 +1,40 @@
+name: R2 offload deep-verify
+
+# Weekly durability check for LFS→R2 offloaded assets (LFS_TO_R2_OFFLOAD_V1_SPEC
+# §4.3). scripts/ci/deep_verify_r2_offload.py fetches every manifest entry from
+# R2 and confirms ContentLength + sha256 still match what was offloaded — the
+# only way to know an offloaded blob is actually retrievable, not just that the
+# upload once succeeded. check_render_progress_bytes.py's manifest-verify fallback
+# trusts the manifest at merge time; this job is the ongoing proof that trust
+# still holds. Wednesday 05:00 UTC — a slot distinct from the other weekly
+# crons (podcast-weekly Mon 09:00, ml-editorial-weekly Mon 09:00,
+# weekly-manga-rollout Mon 14:00, weekly-pipeline Mon 08:00) so a stuck run
+# here doesn't compete with the Monday cluster.
+on:
+  schedule:
+    - cron: '0 5 * * 3'
+  workflow_dispatch: {}
+
+jobs:
+  deep-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install boto3 PyYAML
+
+      - name: Deep-verify R2 offload manifests (full sha256, not head-only)
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          PYTHONPATH=. python3 scripts/ci/deep_verify_r2_offload.py \
+            --manifest-dir artifacts/manifests/lfs_offload
