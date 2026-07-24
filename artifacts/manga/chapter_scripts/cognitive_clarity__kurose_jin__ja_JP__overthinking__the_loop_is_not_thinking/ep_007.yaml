@@ -1,0 +1,314 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_007
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_007.arc_storyboard.yaml
+title: 面談記録の余白——第七話
+title_en_gloss: The Margin of the Review — Episode 7
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: performance_review_flags_the_pattern
+    logline: A calendar app memo books Ren into an unscheduled performance check-in, and the manager's
+      questions about late reports and badge irregularities give Ren a new, more dangerous object to
+      apply his method to — the review itself.
+    ordinary_world_objects:
+    - report
+    - calendar
+    - badge
+    - memo
+    genre_transmutation: A routine performance-review memo becomes the mystery's first formal, named
+      professional threat; the review meeting's own language becomes the newest text Ren cannot stop
+      re-reading for hidden meaning, turning the institution's oversight into more raw material for the
+      compulsion.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'performance_review_flags_the_pattern'. This is the arc's first
+    concrete professional consequence (ep_003's late report and ep_005's badge trail have finally been
+    noticed institutionally) and the first moment Ren turns the compulsion on the review process itself
+    — an early, deniable seed of the watcher/watched reversal that pays off in ep_011-012. en_US fields
+    on select panels are operator glosses only, extended minimally for gate-lexicon coverage
+    (before/clue/witness/threat) without altering ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: manager
+  name: 課長（名は明かされない）
+  age: 不詳
+  role: 蓮の上司——制度的な圧力を運ぶ脇役
+  visual_anchor: 面談資料のファイル、抑えた事務的な声
+- id: saeki
+  name: 佐伯
+  age: 不詳
+  role: 器の存在（同僚）——口より先に身体が告白する；ブランド教師の名は決して使わない
+  visual_anchor: 姿勢を読む目、静かな手、実務的な口調
+scene_palette:
+  primary: 会議室のガラス壁、面談資料の白
+  secondary: 誰もいなくなったオフィス、蓮の机の明かりだけ
+  accent: カレンダーアプリの通知（今話の伏線オブジェクト）
+pages:
+- page_id: ep_007_p01
+  panels:
+  - panel_id: ep007_001
+    scene: 午前、蓮のカレンダーアプリに、通常とは違う通知が入る——「面談：課長より」。予定にはなかった招集。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: こんな通知、前は来なかった。
+        en_US: 'This memo never used to arrive — a clue in the calendar app itself, before he even sits down.'
+        zh_TW: '[zh_TW] This memo never used to arrive.'
+        zh_CN: '[zh_CN] This memo never used to arrive.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 制度的圧力の初導入——カレンダー通知という形
+  - panel_id: ep007_002
+    scene: 会議室。課長が面談資料——週報の遅延記録、バッジの入退室ログ——を開いて座っている。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 具体的な代償の提示——記録という証拠
+  - panel_id: ep007_003
+    scene: 課長、抑えた事務的な声で。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: manager
+      text_by_locale:
+        ja_JP: 週報の遅れと、深夜の入退室が続いている。何か、あったのか。
+        en_US: 'Late reports. Late-night badge entries, more than once. Something is off — a threat stated plainly, without raising its voice.'
+        zh_TW: '[zh_TW] Late reports. Late-night badge entries.'
+        zh_CN: '[zh_CN] Late reports. Late-night badge entries.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 評判の代償が公式化する——第三話・第五話の帰結
+  - panel_id: ep007_004
+    scene: 蓮、落ち着いた声で、練習された説明をする。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 個人的な調べものが立て込んでいました。業務には支障を出していません。
+        en_US: 'Some personal research, that''s all. It hasn''t cost the work — a cover story, fluent as always.'
+        zh_TW: '[zh_TW] Some personal research, that''s all.'
+        zh_CN: '[zh_CN] Some personal research, that''s all.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep007_005
+    scene: だが蓮の内心は別の場所にある——課長の言葉選びを、すでに分析し始めている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 「何か、あったのか」——その一言の選び方に、何かが隠れている。
+      en_US: 'Something is off, he said — one clue hiding inside the manager''s own choice of words.'
+      zh_TW: '[zh_TW] Something is off, he said.'
+      zh_CN: '[zh_CN] Something is off, he said.'
+    intent: 新しい対象への転移——面談そのものがデータになる
+  - panel_id: ep007_006
+    scene: 会議室の隅に、佐伯も同席している——チームリードとして。中立を保とうとする顔に、わずかな緊張がある。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 器の再登場——支援と懸念の間
+  - panel_id: ep007_007
+    scene: 面談資料のクローズアップ——蓮の名前が記された正式な記録。
+    beat_type: micro
+    intent: 記録の公式化——第十一話への布石
+  - panel_id: ep007_008
+    scene: 課長がバッジのログを直接指し示す。説明を求める視線。
+    beat_type: standard
+    intent: 圧力の頂点——記録が本人に突きつけられる
+  - panel_id: ep007_009
+    scene: 蓮、なめらかに、しかし少し速すぎる口調で応じる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 気をつけます。もう、繰り返しません。
+        en_US: 'I''ll be careful. It won''t happen again — a promise made too smoothly to fully trust.'
+        zh_TW: '[zh_TW] I''ll be careful.'
+        zh_CN: '[zh_CN] I''ll be careful.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep007_010
+    scene: 課長、資料を閉じながら。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: manager
+      text_by_locale:
+        ja_JP: 来月、また様子を見せてもらう。
+        en_US: 'We''ll revisit this before next month is over — a deadline he now has to outrun.'
+        zh_TW: '[zh_TW] We''ll revisit this next month.'
+        zh_CN: '[zh_CN] We''ll revisit this next month.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: ページ1の転——猶予という新たな時計
+- page_id: ep_007_p02
+  panels:
+  - panel_id: ep007_011
+    scene: 面談後、誰もいなくなった会議室に一人残る蓮。長く息を吐く。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 安堵の予感——だがすぐに裏切られる
+  - panel_id: ep007_012
+    scene: だが安堵の代わりに、蓮はノートを開き、課長の発言を一語一語書き起こし始める。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 「何か、あったのか」……もう一度、正確に。
+        en_US: 'Something is off — he transcribes it again, word for word, a new file opened on a person, not a case.'
+        zh_TW: '[zh_TW] Something is off — transcribed again.'
+        zh_CN: '[zh_CN] Something is off — transcribed again.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: 危険な転移——制度そのものがデータになる
+  - panel_id: ep007_013
+    scene: 佐伯が戸口から、その様子を見つけてしまう。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep007_014
+    scene: 佐伯、今までで最も直接的に。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 面談まで分析するの？　それは、さすがに違う。
+        en_US: 'You''re analyzing the review meeting now, too? That''s a line even you shouldn''t cross — a witness naming a new threat.'
+        zh_TW: '[zh_TW] You''re analyzing the review meeting now, too?'
+        zh_CN: '[zh_CN] You''re analyzing the review meeting now, too?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep007_015
+    scene: 蓮の手が止まる。今回は、恐れのようなものが初めて顔をよぎる——自分自身への恐れ。
+    beat_type: micro
+    intent: 初めての自己への恐怖——否認ではなく動揺
+  - panel_id: ep007_016
+    scene: ノートを閉じる。だがその直後、携帯を開き、バッジのログをもう一度確認してしまう。
+    beat_type: micro
+    intent: 強迫的な反復——一つをやめても、別の確認が始まる
+  - panel_id: ep007_017
+    scene: ワイド：オフィスが暮れていく。同僚たちが次々に帰っていく中、蓮の机の明かりだけが残る。
+    beat_type: standard
+    intent: 孤立の可視化
+  - panel_id: ep007_018
+    scene: 蓮は自分宛てのメモを書く——今日の面談の記録を、家の case file の余白に書き加える。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: これも、ファイルに入れておく。
+      en_US: 'This too, filed — the review has become part of the case it was meant to interrupt.'
+      zh_TW: '[zh_TW] This too, filed.'
+      zh_CN: '[zh_CN] This too, filed.'
+    intent: 制度の吸収——面談すら物語の一部になる
+  - panel_id: ep007_019
+    scene: ワイド：暗くなったオフィスに、蓮の机の明かりだけが灯っている。
+    beat_type: standard
+    intent: 閉じ——孤立した一つの光
+  - panel_id: ep007_020
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第七話・了——面談記録の余白
+      en_US: 'End of Episode 7 — The Margin of the Review'
+      zh_TW: '[zh_TW] End of Episode 7 — The Margin of the Review'
+      zh_CN: '[zh_CN] End of Episode 7 — The Margin of the Review'
+notes:
+  pacing: 二十コマ。今話で初めて評判の代償が制度的に公式化し、さらに危険な転移——面談そのものを分析対象にする——が起こる。蓮が自分自身の反応に初めて動揺する回でもある。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper。課長の台詞：normal、事務的で抑えた圧力。佐伯の台詞：normal、今までで最も直接的。
+  sfx_policy: 最小限。囁きレジスタのみ。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第7話。設定はオフィス（第一話・第三話と同じ）へ回帰。第三話・第五話で蓄積した代償が、初めて制度的な記録として公式化する。面談そのものへの分析的転移は、第十一話・第十二話の「見る側が見られる側になる」反転の重要な布石。
+craft_notes: 'VESSEL: 身体を読む探偵（佐伯）——今話で最も直接的な警告を発するが、依然として講義ではなく短い事実の指摘に留める。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_01第5-6ビート（代償の着地／訂正の限界）を、面談という制度的な場で再現し、初めて「制度そのものへの転移」という新しい危険性を導入した。
+
+  ARC: 評判の代償の公式化→面談への危険な転移→初めての自己への恐怖（だが行動は変わらない）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

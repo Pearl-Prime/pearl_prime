@@ -1,0 +1,258 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_004
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_004.arc_storyboard.yaml
+title: 月台不記得的臉——第4話
+title_en_gloss: 'The Platform Has No Record of This Face — Episode 4: Two Countdowns'
+manga_author: 邵臨淵
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- en_US
+- ja_JP
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk
+    and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register
+    over clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: line_chat_shift_swap_misread_as_clue
+    logline: 值班群組裡一則普通的換班訊息,被雅晴的辦案邏輯讀成第三個時間點的線索；而月底稽核的結案期限,把她的私人執念第一次寫進正式的加班紀錄裡。
+    ordinary_world_objects:
+    - line_chat_group
+    - overtime_log
+    - incident_report_form
+    - audit_deadline_notice
+    genre_transmutation: 一則同事聊換班的LINE群組訊息,被她的邏輯重新讀成證據；一張加班紀錄表,讓她的執念第一次變成看得見的、可被稽核的數字。
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z.
+    Use catalyst 'line_chat_shift_swap_misread_as_clue'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體的偵探
+main_characters:
+- id: su
+  name: 蘇雅晴
+  name_romaji: Su Yaqing (Iris)
+  age: 31
+  role: 主人公——台北捷運行控中心異常事件分析員
+  visual_anchor: 直短髮別在耳後、深藍色行控值班制服、右手習慣性轉動一枝原子筆
+- id: zhou
+  name: 周德昌
+  name_romaji: Zhou Dechang
+  age: 58
+  role: 資深值班控制員，即將退休——器（讀懂身體的偵探）
+  visual_anchor: 灰白平頭、袖口捲起、桌上一個用了二十年的舊保溫瓶
+- id: lin
+  name: 林組長
+  name_romaji: Team Lead Lin
+  age: 45
+  role: 值班主管——制度壓力來源
+  visual_anchor: 俐落套裝、手上永遠夾著一份待簽的報表夾
+scene_palette:
+  primary: 行控中心的冷白螢幕光 + 深夜捷運藍
+  secondary: 月台霓虹的濕冷灰藍（雨夜反光）
+  accent: 一枝始終未關的琥珀色警示燈——全劇唯一反覆出現的暖色
+pages:
+- page_id: ep_004_p01
+  panels:
+  - panel_id: ep004_001
+    scene: 清晨。雅晴騎機車下班回家,安全帽下的臉又累又恍神,街道還籠罩在薄霧裡。
+    beat_type: standard
+    intent: 台灣場景質地——機車通勤
+  - panel_id: ep004_002
+    scene: 插入畫面——她的手機在包包裡震動,值班群組的LINE訊息一則接一則跳出,是同事在討論下週的換班。
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: The LINE chat group won't stop buzzing about next week's swap.
+  - panel_id: ep004_003
+    scene: 紅燈停等時,她隨手滑開訊息,半睡半醒地看——直到一句提到「那天我在板橋站」的話,讓她整個人清醒過來。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 板橋站。那個時間點。
+      en_US: Banqiao station. That timestamp. It's evidence — isn't it? A witness who doesn't even know
+        she's one.
+  - panel_id: ep004_004
+    scene: 到家後,她沒有睡,直接把同事那句閒聊截圖,貼進自己的時間軸筆記裡。
+    beat_type: micro
+    intent: 日常訊息被誤讀為線索——讀者知道那只是同事的私事
+  - panel_id: ep004_005
+    scene: 插入畫面——她的私人筆記,真正的監視器截圖與同事的閒聊截圖並排放在一起,兩種完全不同性質的資料開始混在一起。
+    beat_type: micro
+    intent: 證據與雜訊界線模糊
+  - panel_id: ep004_006
+    scene: 沉默格——她盯著螢幕,眼皮撐不住,卻還是沒有闔上筆電。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep004_007
+    scene: 場景轉換——傍晚,行控中心。林組長把雅晴叫到辦公室角落,手上是一份文件。
+    beat_type: standard
+  - panel_id: ep004_008
+    scene: 林組長把文件放在桌上,語氣正式。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: lin
+      text_by_locale:
+        zh_TW: 這兩件,月底稽核前必須有結論。妳有兩週。
+        en_US: You have two weeks — the manager needs a conclusive answer before the audit, not a hunch.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep004_009
+    scene: 雅晴,看著文件上的期限,語氣壓得很平靜。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 我不能就這樣結案。
+        en_US: I can't just close this — not while the records disagree.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep004_010
+    scene: 林組長收起文件,語氣不算兇,但立場很清楚。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: lin
+      text_by_locale:
+        zh_TW: 那就拿出結論。不是妳一個人的班。
+        en_US: Then bring me a conclusion — this isn't only your shift to carry.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+- page_id: ep_004_p02
+  panels:
+  - panel_id: ep004_011
+    scene: 雅晴獨自坐在自己的座位上,盯著那張稽核期限通知,外部的倒數第一次疊上她自己的倒數。
+    beat_type: micro
+  - panel_id: ep004_012
+    scene: 插入畫面——系統裡的加班紀錄表,她這個月的時數遠遠超過排班,數字第一次把她的執念變成看得見的紀錄。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 加班時數,已經超過上限。
+      en_US: The overtime log already shows more hours than the shift roster allows — a cost with her
+        name on it.
+  - panel_id: ep004_013
+    scene: 周德昌看見那張加班表,沒有說話,只是眼神多停留了幾秒。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep004_014
+    scene: 場景轉換——休息室,周德昌端著他那個舊保溫瓶走近,在她對面坐下,比控制室裡更放鬆的空間。
+    beat_type: standard
+  - panel_id: ep004_015
+    scene: 周德昌,語氣很日常,只是聊聊這週的天氣。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 氣象說這週雨會下得特別密集。
+        en_US: Forecast says the rain's going to be unusually heavy this week.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep004_016
+    scene: 雅晴立刻抬頭——「雨特別密集」被她的邏輯讀成:天候是不是也跟異常事件的時間點有關聯?她已經在腦中畫表格。
+    beat_type: micro
+    intent: 又一次日常閒聊被誤讀為線索——讀者知道那只是天氣預報
+  - panel_id: ep004_017
+    scene: 周德昌看著她瞬間切換成分析模式的表情,有點無奈又有點擔心,但沒有制止她。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep004_018
+    scene: 插入畫面——她的筆記本,頁緣的分岔註記已經密到快要蓋過原本的文字,螺旋持續加劇。
+    beat_type: micro
+    intent: 螺旋視覺化——註記密度
+  - panel_id: ep004_019
+    scene: 沉默格——周德昌的手在保溫瓶上停了一下,像是想說什麼,最後只是幫她把杯子續滿。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep004_020
+    scene: 大遠景拉開——雅晴回到座位,稽核期限通知釘在螢幕邊,她又開始新一夜的排查。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      zh_TW: 兩週。夠了。
+      en_US: Two weeks. But her own deadline was always shorter than the manager's — and it keeps arriving
+        early.
+notes:
+  arc_position: 第四話——制度壓力正式化（稽核期限、加班紀錄）；日常閒聊第二次被誤讀為線索（策略第三拍的完整重現）。
+  pacing_vs_prior: 二十格，兩頁。首次把『加班時數』量化成看得見的制度紀錄，讓執念的代價從情緒轉為可稽核的數字。
+  continuity_callbacks: 機車通勤（新場景質地）、保溫瓶（周德昌角色設定）、頁緣分岔註記（延續自ep_002）。
+  language: zh_TW為權威語言，en_US僅為操作用註解，非翻譯。
+  translation_pipeline_handoff: en_US為審閱用註解草稿；其餘CJK語系另案處理。
+craft_notes: 'VESSEL: 讀懂身體的偵探。本話周德昌選擇不制止，只是續杯——器的節制展現於『不說教』。GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+
+  GENRE-FIRST（zh_TW）: 制度壓力（稽核期限）作為類型引擎的外部時鐘，而非說教工具。
+
+
+  ARC: 制度時限正式化→誤讀模式重複出現，證明尚未鬆動→頁末代價持續累積。
+
+
+  NATIVE: 台灣繁體中文原創。
+
+
+  ACCEPTANCE: authored_candidate。'
