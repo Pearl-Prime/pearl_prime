@@ -145,6 +145,17 @@ than copy-pasting, so a future endpoint rotation is picked up automatically.
 | **Status** | DEMOTED to fallback (2026-04-08). Wired in CI and local scripts. |
 | **Detailed docs** | [docs/AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md) |
 
+### 1e. Qwen / DashScope — free-quota one-time content-bank build (SEPARATE from 1d)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `DASHSCOPE_FREE_QUOTA_API_KEY`, `PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW=1` |
+| **Consumed by** | `scripts/social/dashscope_free_media.py`, `scripts/social/run_dashscope_free_media_burn.py` — nothing else. Never wire into a workflow. |
+| **Account** | `ahjansamvara@gmail.com` — Model Studio Singapore (`ap-southeast-1`), confirmed live free quota 2026-07-24. **NOT** the same account as row 1d's fallback key, and **NOT** `gmalone@oneteamtech.com` (paid/blocked account these scripts were originally drafted against). |
+| **How to obtain** | https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key (Singapore only — Beijing is wrong region) on the `ahjansamvara@gmail.com` login |
+| **Required vs optional** | Optional — only for the one-time free-quota content-bank build |
+| **Status** | Scoped exception, CLAUDE.md LLM Tier Policy, 2026-07-24. **Sunset 2026-10-18** (free-quota expiry) — re-review or remove after that date. Operator-present only; `PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW=1` must be set by hand, never in CI/cron. |
+
 ### 2. Anthropic — LLM
 
 | Field | Value |
