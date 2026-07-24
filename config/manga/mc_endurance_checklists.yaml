@@ -1,0 +1,69 @@
+# mc_endurance_checklists.yaml — machine-usable MC endurance checklists per canonical genre.
+#
+# status: unwired
+#   (Lane 07 of the 2026-07-24 manga process uplift pack wires this into
+#   config/manga/story_excellence_gates.yaml + excellence_gate.py and flips this
+#   marker. Until then check_manga_wiring.py treats this file as declared-unwired.)
+#
+# SOURCE OF TRUTH: artifacts/research/manga_mc_endurance_study_2026-07-24.md
+#   Every item carries a `source:` anchor of the form
+#   "mc_endurance_study#<family>/<section>" pointing at that study's family section
+#   (sections: exemplars, traits(=1), endurance(=2), bond(=3), anti(=4), wellness(=5)).
+#
+# SCHEMA (stable keys — Lane 07 consumes these; do not rename):
+#   schema_version: "1.0"
+#   families:
+#     <canonical_genre_id>:            # exactly the 25 ids of canonical_genre_list.yaml,
+#                                      # matching story_excellence_gates.yaml::genre_core_evidence
+#       must_have:                     # list of {item, source} — MC fails the genre without these
+#       should_have:                   # list of {item, source} — strong-default expectations
+#       anti_patterns:                 # list of {item, source} — presence = defect
+#       endurance_mechanics:           # list of {item, source} — what carries 100+ episodes
+#   Each `item` is ONE testable sentence (a reviewer or gate can answer yes/no
+#   against a series plan / chapter script).
+#
+# Consumers (target): phoenix_v4/manga/story_quality/excellence_gate.py (Lane 07),
+#   Pearl_Editor QA pass (Lane 07 §Editor pass), series planners (advisory).
+
+schema_version: "1.0"
+status: unwired
+last_updated: "2026-07-24"
+source_study: artifacts/research/manga_mc_endurance_study_2026-07-24.md
+
+families:
+
+  battle:
+    must_have:
+      - item: "The MC states a concrete external goal that is unreachable within any single arc."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "The MC has one moral competence already maxed at series start while physical competence is visibly inadequate."
+        source: "mc_endurance_study#battle/traits"
+      - item: "Every power gain is paid for with a visible, persistent cost on the MC's body or bonds."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "The MC loses the first meaningful fight of the arc before winning the last one."
+        source: "mc_endurance_study#battle/bond"
+    should_have:
+      - item: "The MC carries a merchandisable visual token and a repeatable verbal signature."
+        source: "mc_endurance_study#battle/bond"
+      - item: "Each arc adds one bonded ally whose own wound can host a future arc."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Witness characters (rival/team) carry the emotional read of the MC's fights instead of MC interior monologue."
+        source: "mc_endurance_study#battle/bond"
+    anti_patterns:
+      - item: "Power escalation continues past the established conceptual ceiling."
+        source: "mc_endurance_study#battle/anti"
+      - item: "A villain is defeated by persuasion speech alone more than once in the series."
+        source: "mc_endurance_study#battle/anti"
+      - item: "The meet-lose-train-win formula repeats a fourth time with no structural variation."
+        source: "mc_endurance_study#battle/anti"
+      - item: "A second mentor dies primarily to escalate the MC's emotion."
+        source: "mc_endurance_study#battle/anti"
+    endurance_mechanics:
+      - item: "Renewable goal ladder: each arc mints a reachable sub-goal under the unreachable series goal."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Relationship engine: team accretion supplies future arc hosts."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Cost-accounted capability ladder keeps stakes meaningful at any power level."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Serial arcs deliver at least one complete fight beat per volume."
+        source: "mc_endurance_study#battle/endurance"
