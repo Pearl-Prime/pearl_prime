@@ -1,0 +1,281 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_014
+arc_storyboard_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_014.arc_storyboard.yaml
+title: 'The Alarm Is Lying — Episode 14: Standing'
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales:
+- en_US
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: healing
+  strategy_genre: healing
+  relevance_genre: healing
+  market_surface_rule: Use social discovery, school/work pressure, gaming, creator culture, comic
+    shop/community, and phone-native life without sounding like an ad for platforms.
+  market_touchpoints:
+  - group_chat
+  - discord_server
+  - short_video_clip
+  - school_bus_or_subway
+  - comic_shop
+  - mall_food_court
+  - campus_library
+  - delivery_app
+  - controller
+  - streaming_queue
+  market_guardrails:
+  - avoid_fake_japanese_surface_for_us_scene
+  - make_city_transport_specific_if_used
+  - do_not_overexplain_anime_fandom
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: 'Modern healing must receive everyday overstimulation gently: notifications,
+    transit noise, school/work fatigue, convenience rituals, and weather.'
+  catalyst:
+    id: standing_friday_without_the_word
+    logline: A third Friday happens with no scheduling text because Mira needs to keep the kettle
+      minute; Devon watches a pendant touch without asking; a gentler Sunday call with Mira's mother
+      lands as weather.
+    ordinary_world_objects:
+    - breakroom
+    - kettle
+    - two_mugs
+    - pendant
+    - phone
+    - succulent
+    - paper_cup
+    genre_transmutation: Habit replaces invitation language; proximity learning begins in gesture;
+      family contact softens as seasonal weather rather than a problem to solve.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+    - naming_standing_out_loud
+    - emotion_label_captions
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US;
+    audience=gen_z. Use catalyst 'standing_friday_without_the_word'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    en_US. Use concrete objects and social pressure on page one; do not name-drop trends.
+main_characters:
+- id: mira
+  name: Mira Aoki
+  age: 33
+  role: protagonist (UX researcher; mid-career; quietly anxious)
+  visual_anchor: long brown hair, cream sweater, jade pendant visible at neckline
+- id: devon
+  name: Devon Reyes
+  age: 26
+  role: junior colleague; Friday coffee becoming standing without being named
+  visual_anchor: short dark curls, wire-frame glasses, pen-cap-clicking habit — quieter on Fridays
+    now
+- id: mira_mother
+  name: Mira's mother
+  age: null
+  role: off-panel voice / Sunday call — gentler weather than early-arc calls
+  visual_anchor: presence via phone UI and Mira's listening face only
+scene_palette:
+  primary: warm office breakroom amber + autumn-rain gray window light
+  secondary: muted sage (apartment evening bookend)
+  accent: jade green (pendant continuity) + steam-white (two-cup kettle)
+pages:
+- page_id: ep_014_p01
+  panels:
+  - panel_id: ep014_001
+    beat_type: spatial
+    scene: |-
+      Corridor. Mira walking at the usual Friday minute because she needs to keep the standing kettle time. No phone in hand. Autumn light. A private deadline only her body is holding.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: 'Desire visible: need to keep the Friday ritual; body holds the deadline'
+  - panel_id: ep014_002
+    beat_type: spatial
+    scene: |-
+      Breakroom already occupied: Devon at the counter, kettle working, two mugs waiting — the shared ritual holding without a text. Public-adjacent quiet.
+    intent: Standing confirmed visually
+  - panel_id: ep014_003
+    beat_type: micro
+    scene: A half-smile exchange. No 'same time?' spoken.
+    dialogue_lines:
+    - speaker: devon
+      text_by_locale:
+        en_US: Hey.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    - speaker: mira
+      text_by_locale:
+        en_US: Hey. I wanted the ritual already going.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep014_004
+    beat_type: micro
+    scene: While pouring, Mira's fingers briefly touch the jade pendant — small, unforced — then return
+      to the kettle.
+    intent: Private technique appears in public without lecture
+  - panel_id: ep014_005
+    beat_type: micro
+    scene: |-
+      Devon watches the touch. Pen-cap idle for once. He does not ask — a witness who protects privacy with silence.
+    intent: Learning by looking
+  - panel_id: ep014_006
+    beat_type: micro
+    scene: Later, Devon rests two fingers near his own collar — tentative echo, unexplained.
+    intent: Imperfect reception — not triumphant adoption
+  - panel_id: ep014_007
+    beat_type: spatial
+    scene: Office succulent macro — a new tiny leaf. Sill dust. Quiet growth.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Accumulation, not plot escalation
+  - panel_id: ep014_008
+    beat_type: long_drop
+    scene: Wide — rain has stopped. Wet pavement light comes up from the alley. Two figures quiet
+      at the counter.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Weather shift as the episode's only change-event
+  - panel_id: ep014_009
+    beat_type: micro
+    scene: Devon half-laughs at a boring ticket title on his phone.
+    dialogue_lines:
+    - speaker: devon
+      text_by_locale:
+        en_US: This ticket is called 'button feels weird.'
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep014_010
+    beat_type: micro
+    scene: Mira, eyes on steam, one practical sentence — not mentorship performance.
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: Check the hit-box padding before the icon.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: Domain competence exercised calmly
+  - panel_id: ep014_011
+    beat_type: spatial
+    scene: Macro — two mugs again, steam matched, autumn light a degree warmer than last week.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Return-with-difference vs ep_013
+  - panel_id: ep014_012
+    beat_type: micro
+    scene: |-
+      At the sink, Mira rinses both mugs without sorting whose is whose. Automatic hands that want to keep next Friday easy.
+    intent: Habit landing in the host's body
+- page_id: ep_014_p02
+  panels:
+  - panel_id: ep014_013
+    beat_type: spatial
+    scene: 'Cut — Sunday evening. Phone screen: Mom. Mira on the kitchen stool. Warm lamp. One evening
+      cup nearby.'
+    intent: Family thread as weather, not confrontation
+  - panel_id: ep014_014
+    beat_type: micro
+    scene: Mira listening. Shoulders lower than early-arc Sunday calls. No diagnosis talk on her face.
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: Hi, Mom.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep014_015
+    beat_type: micro
+    scene: Mira talking ordinary topics — rain, work tickets. Pendant untouched.
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: It rained most of Friday. Work was mostly buttons.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep014_016
+    beat_type: long_drop
+    scene: After the call — wide kitchen stillness. Kettle. Evening. No caption naming a feeling.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Somatic landing; anti emotion-label
+  - panel_id: ep014_017
+    beat_type: micro
+    scene: On the sill beside the succulent, an empty paper cup waits — quiet future object.
+    intent: Foreshadow wheel_02 cutting propagation without spoiler narration
+  - panel_id: ep014_018
+    beat_type: micro
+    scene: Close — collar, jade pendant, cup rim. Pendant rests quiet.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Close on ritual objects, not a lesson
+  - panel_id: ep014_019
+    beat_type: spatial
+    scene: Final wide — kitchen held in evening light. Nothing cured. Friday has a shape now.
+    silence_confirmed: true
+    dialogue_lines: []
+    narrator_caption_by_locale:
+      en_US: We never said standing. The mugs did.
+  - panel_id: ep014_020
+    beat_type: standard
+    scene: Typographic cream card.
+    narrator_caption_by_locale:
+      en_US: End of Episode 14 — Standing
+    dialogue_lines: []
+notes:
+  arc_position: Episode 14 — second detailed episode of cycle_04. Standing Friday proven by absence
+    of scheduling language; proximity learning begins; mother call softens; paper cup foreshadows
+    cycle_06 cutting.
+  iteration_trace: |-
+    Lane 11 pilot — REVISE round 1 after Stage A BLOCKED (protagonist_desire_missing). Opening now carries need/keep/want/ritual/deadline/witness signals. Process evidence.
+  continuity_callbacks: '- Two-cup rhyme with ep_013
+
+    - Pendant touch witnessed (Devon)
+
+    - Succulent new leaf
+
+    - Mother Sunday call gentler vs early arc
+
+    - Paper cup foreshadow'
+  doctrinal_anchor_ahjan: Teacher never named. Learning-by-proximity shown, not lectured. Family softness
+    as weather. Caption observational ('the mugs did'), not emotion-label.

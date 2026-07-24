@@ -1,0 +1,195 @@
+schema_version: 1.0.0
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+episode_id: ep_013
+manifest_id: ep_013_pilot_two_cups_6p
+genre: iyashikei
+notes: "Lane 11 pilot assembly \u2014 6 panels from ep_013. ALL layers INTERIM (LFS unsmodged locally).\
+  \ Composition grammar shot_types set; bubble_render_v2 on. NOT final art."
+canvas:
+  width: 1080
+  height: 1920
+  background_hex: '#FFFFFF'
+panels:
+- panel_id: ep013_005
+  shot_type: establishing
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png
+    provenance: INTERIM
+    bg_class: full_render
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L2_mira_seated_calm_INTERIM.png
+    bbox_pct:
+    - 18
+    - 30
+    - 40
+    - 58
+    anchor_slot: seat_at_table
+    provenance: INTERIM
+    grounding:
+      contact_shadow: true
+      occluder: true
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_kettle_INTERIM.png
+    bbox_pct:
+    - 58
+    - 42
+    - 28
+    - 22
+    provenance: INTERIM
+  - layer_class: L4
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png
+    bbox_pct:
+    - 60
+    - 30
+    - 22
+    - 18
+    provenance: INTERIM
+- panel_id: ep013_001
+  shot_type: insert_object
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png
+    provenance: INTERIM
+    bg_class: full_render
+  dialogue_lines:
+  - speaker: devon
+    text: same time? no pressure if not.
+    bubble_style: round_normal
+    tail_style: pointer
+    position_hint: top_right
+- panel_id: ep013_007
+  shot_type: insert_object
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png
+    provenance: INTERIM
+    bg_class: full_render
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_kettle_INTERIM.png
+    bbox_pct:
+    - 30
+    - 42
+    - 44
+    - 40
+    z_order: above_L2
+    provenance: INTERIM
+  - layer_class: L4
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png
+    bbox_pct:
+    - 36
+    - 28
+    - 30
+    - 24
+    provenance: INTERIM
+- panel_id: ep013_010
+  shot_type: establishing
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png
+    provenance: INTERIM
+    bg_class: full_render
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L2_mira_seated_calm_INTERIM.png
+    bbox_pct:
+    - 10
+    - 28
+    - 38
+    - 62
+    anchor_slot: seat_at_table
+    provenance: INTERIM
+    grounding:
+      contact_shadow: true
+      occluder: true
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L2_devon_standing_INTERIM.png
+    bbox_pct:
+    - 52
+    - 28
+    - 36
+    - 62
+    anchor_slot: seat_at_table
+    provenance: INTERIM
+    provenance_note: Devon L2 bank GAP
+    grounding:
+      contact_shadow: true
+      occluder: true
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png
+    bbox_pct:
+    - 22
+    - 70
+    - 12
+    - 10
+    provenance: INTERIM
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png
+    bbox_pct:
+    - 66
+    - 70
+    - 12
+    - 10
+    provenance: INTERIM
+- panel_id: ep013_014
+  shot_type: insert_object
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png
+    provenance: INTERIM
+    bg_class: full_render
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png
+    bbox_pct:
+    - 28
+    - 48
+    - 18
+    - 16
+    provenance: INTERIM
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png
+    bbox_pct:
+    - 54
+    - 48
+    - 18
+    - 16
+    provenance: INTERIM
+  - layer_class: L4
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png
+    bbox_pct:
+    - 30
+    - 36
+    - 16
+    - 14
+    provenance: INTERIM
+  - layer_class: L4
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png
+    bbox_pct:
+    - 56
+    - 36
+    - 16
+    - 14
+    provenance: INTERIM
+- panel_id: ep013_020
+  shot_type: re_establish
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png
+    provenance: INTERIM
+    bg_class: full_render
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png
+    bbox_pct:
+    - 40
+    - 62
+    - 10
+    - 8
+    provenance: INTERIM
+  - layer_class: L3
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png
+    bbox_pct:
+    - 52
+    - 62
+    - 10
+    - 8
+    provenance: INTERIM
+  narrator_caption: I didn't make a plan. The second cup just showed up.

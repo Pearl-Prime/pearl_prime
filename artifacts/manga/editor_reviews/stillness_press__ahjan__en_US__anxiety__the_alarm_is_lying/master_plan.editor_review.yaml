@@ -1,0 +1,32 @@
+artifact_type: manga_series_master_plan_editor_review
+schema_version: '1.0'
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+genre: healing
+checklist_source: config/manga/genre_craft_checklists.yaml
+mc_endurance_source: config/manga/mc_endurance_checklists.yaml
+master_plan_ref: artifacts/manga/series_master_plans/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying.master_plan.yaml
+verdicts:
+- checklist: genre_contract
+  item: healing/iyashikei seasonal return-with-difference + ritual object
+  verdict: PASS
+  note: Wheel_02 drift intact; kettle/two-cup motif continues.
+- checklist: cadence_conformance
+  item: healing family; first_major_shift null; cyclical segmentation
+  verdict: PASS
+  note: No forced status-quo shift introduced in cycle_04 rows.
+- checklist: mc_endurance
+  item: bond/endurance horizon across standing Friday
+  verdict: PASS
+  note: from_state/to_state vectors coherent for cycle_04.
+- checklist: mode_arc_coherence
+  item: mode:none
+  verdict: PASS
+  note: No vessel drift.
+- checklist: episode_plan_rows
+  item: eps 13-14 detailed; 15-16 outline
+  verdict: PASS
+  note: EXTEND only — golden eps 1-12 untouched.
+overall: APPROVE
+editor: Pearl_Editor (MPU Lane 11)
+reviewed_at: '2026-07-24T16:40:00Z'
+notes: First editor pass APPROVE after confirming EXTEND-not-reauthor on Lane 06 golden.

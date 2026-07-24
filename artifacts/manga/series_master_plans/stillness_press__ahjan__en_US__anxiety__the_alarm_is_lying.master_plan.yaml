@@ -1,13 +1,4 @@
-# Series Master Plan — golden example (manga process uplift Lane 06, 2026-07-24)
-# Contract: docs/specs/MANGA_SERIES_MASTER_PLAN_CONTRACT.md
-# Migration sources (Q-MPU-02 REWORK ruling — source-credited, #295 never merged):
-#   - eps 1-12: authored arc storyboards + chapter scripts on origin/main
-#     (artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/)
-#   - eps 13-48: PR #295 branch claude/manga-12ep-arc-authoring-egnwqf,
-#     arc_plans/en_US_iyashikei_batch_a.md §stillness_press Blocks 2-4 (absorbed verbatim
-#     at block grain; preserved copy: artifacts/manga/series_master_plans/rework_inputs_pr295/)
-#   - eps 49-100: outline-level continuation per Q-MPU-01 (flagship-first ruling)
-schema_version: "1.0.0"
+schema_version: 1.0.0
 artifact_type: series_master_plan
 schema_authority: schemas/manga/series_master_plan.schema.json
 series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
@@ -16,845 +7,751 @@ locale: en_US
 genre_id: iyashikei
 pacing_family: healing
 cadence_source: pacing_yaml
-cadence_ref: "config/manga/manga_pacing_by_genre.yaml#genre_pacing.healing.arc_cadence"
+cadence_ref: config/manga/manga_pacing_by_genre.yaml#genre_pacing.healing.arc_cadence
 episode_unit: monthly_chapter
-episode_unit_mapping_note: >-
-  1 episode = 1 monthly slice-of-life chapter (healing family convention,
-  season_unit 8 chapters/volume). All arc_cadence counts are in this unit;
-  not 1:1 comparable with weekly-action units at equal story mass.
+episode_unit_mapping_note: 1 episode = 1 monthly slice-of-life chapter (healing family convention,
+  season_unit 8 chapters/volume). All arc_cadence counts are in this unit; not 1:1 comparable with
+  weekly-action units at equal story mass.
 episode_horizon: 100
 plan_frame: serialized_episode
 mode: none
 teacher_id: ahjan
 musician_id: null
 self_help_topic_set:
-  - anxiety
-  - somatic_healing
-  - sleep
-  - grief
-  - trauma_recovery
-# healing family: first_major_shift_by is null — no status-quo-shift convention;
-# the loop is the product. Cyclical segmentation; no forced shift anywhere below.
+- anxiety
+- somatic_healing
+- sleep
+- grief
+- trauma_recovery
 first_major_shift: null
 season_wheels:
-  - wheel_id: wheel_01_the_private_practice
-    episode_start: 1
-    episode_end: 12
-    drift: >-
-      A six-week late-summer micro-wheel. The regulation practice moves from
-      solitary (kitchen table) to witnessed (Yara, the mother, Kenji) to, in
-      the final beat, asked about by a junior colleague for the first time.
-  - wheel_id: wheel_02_the_year_of_two_cups
-    episode_start: 13
-    episode_end: 48
-    drift: >-
-      Autumn through the following summer, one full calendar year. The kettle
-      that bookends Mira's evenings starts making two cups, then four; a
-      succulent cutting roots on her own sill; Kenji stops needing an
-      introduction. Nothing escalates; things accumulate.
-  - wheel_id: wheel_03_the_table_that_fills
-    episode_start: 49
-    episode_end: 76
-    drift: >-
-      Year two, autumn into spring. Demographic drift, not plot: the small
-      table gains and loses regulars with the seasons, Devon starts giving
-      away what he was given, and Mira's practice recedes toward invisibility.
-  - wheel_id: wheel_04_the_kettle_passes
-    episode_start: 77
-    episode_end: 100
-    drift: >-
-      Year two's summer into year three. The ritual increasingly belongs to
-      whoever is holding the kettle that day; recovery from ordinary alarms is
-      near-invisible on the page; hosting is simply a thing that happens.
+- wheel_id: wheel_01_the_private_practice
+  episode_start: 1
+  episode_end: 12
+  drift: A six-week late-summer micro-wheel. The regulation practice moves from solitary (kitchen
+    table) to witnessed (Yara, the mother, Kenji) to, in the final beat, asked about by a junior colleague
+    for the first time.
+- wheel_id: wheel_02_the_year_of_two_cups
+  episode_start: 13
+  episode_end: 48
+  drift: Autumn through the following summer, one full calendar year. The kettle that bookends Mira's
+    evenings starts making two cups, then four; a succulent cutting roots on her own sill; Kenji stops
+    needing an introduction. Nothing escalates; things accumulate.
+- wheel_id: wheel_03_the_table_that_fills
+  episode_start: 49
+  episode_end: 76
+  drift: 'Year two, autumn into spring. Demographic drift, not plot: the small table gains and loses
+    regulars with the seasons, Devon starts giving away what he was given, and Mira''s practice recedes
+    toward invisibility.'
+- wheel_id: wheel_04_the_kettle_passes
+  episode_start: 77
+  episode_end: 100
+  drift: Year two's summer into year three. The ritual increasingly belongs to whoever is holding
+    the kettle that day; recovery from ordinary alarms is near-invisible on the page; hosting is simply
+    a thing that happens.
 migration:
   migrated_from_48ep: true
   detailed_window_end: 48
-  source: >-
-    48-ep program (docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/,
-    ASSIGNMENT_MATRIX row stillness_press/en_US) + PR #295 branch
-    claude/manga-12ep-arc-authoring-egnwqf arc_plans/en_US_iyashikei_batch_a.md
-    (rework input per Q-MPU-02).
-
+  source: '48-ep program (docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/, ASSIGNMENT_MATRIX
+    row stillness_press/en_US) + PR #295 branch claude/manga-12ep-arc-authoring-egnwqf arc_plans/en_US_iyashikei_batch_a.md
+    (rework input per Q-MPU-02).'
 arcs:
-  # ── wheel 01 — authored window (eps 1-12): full episode-plan pass ──────
-  - arc_id: cycle_01_the_alarm_in_four_rooms
-    episode_start: 1
-    episode_end: 4
-    detail_level: detailed
-    season_wheel: wheel_01_the_private_practice
-    source_arc_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_001.arc_storyboard.yaml
-    arc_premise: >-
-      The same body alarm fires in four different rooms — kitchen, review
-      meeting, coffee shop, bedroom at midnight — and each room asks whether
-      it can be witnessed without being obeyed.
-    arc_promise: >-
-      The reader learns the shape of the practice by watching it meet work,
-      family, grief, and the dark, one ordinary room at a time.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira obeys every alarm her body fires and calls that being responsible.
-      to_state: Mira can watch an alarm arrive, name it, and let the room stay ordinary around it.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-        - "mc_endurance_study#healing/wellness"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-    episodes:
-      - episode: 1
-        logline: >-
-          A Tuesday-morning work notification fires Mira's body into a
-          catastrophizing spiral before she has even finished her tea, and the
-          episode has to prove the alarm can be witnessed without being obeyed.
-        genre_pleasure_beat: >-
-          The kettle, the jade pendant, dawn light on an ordinary kitchen —
-          calm rendered in objects before any word is spoken.
-        self_help_topic_beat: >-
-          The false-alarm reframe arrives as a body observation (the spiral is
-          loud, the kitchen is quiet), never as a caption lesson.
-        hook:
-          position: closing_panel
-          promise: >-
-            Will the spiral run unchecked, or does something in the ordinary
-            world interrupt it before the meeting?
-        checklist_refs:
-          - "mc_endurance_study#healing/traits"
-      - episode: 2
-        logline: >-
-          The Q3 review meeting Mira has been dreading arrives on schedule and
-          forces her to test yesterday's alarm-system reframe under real
-          professional stakes, not only alone at her own kitchen table.
-        genre_pleasure_beat: >-
-          Office texture held at iyashikei tempo — the meeting room is allowed
-          to be a room, not an arena.
-        self_help_topic_beat: >-
-          The practice survives contact with authority by staying physical: a
-          hand below the table, one slow exhale between agenda items.
-        hook:
-          position: closing_panel
-          promise: >-
-            Does the reframe survive the actual review room, or does the old
-            alarm run it once the stakes are real?
-        checklist_refs:
-          - "mc_endurance_study#healing/endurance"
-      - episode: 3
-        logline: >-
-          A visiting mother's Saturday text and a coffee-shop question about
-          Mira's late father reactivate the same alarm reflex the workplace
-          triggered, and the episode must prove the noticing generalizes
-          beyond the office.
-        genre_pleasure_beat: >-
-          Weekend light, cafe steam, a conversation that is allowed to pause —
-          grief handled at the pace of a refill.
-        self_help_topic_beat: >-
-          Grief and anxiety share one nervous system; the same noticing that
-          held at work holds, barely, under a harder feeling.
-        hook:
-          position: closing_panel
-          promise: >-
-            Does the conversation about her father overwhelm Mira, or does the
-            noticing hold under grief too?
-        checklist_refs:
-          - "mc_endurance_study#healing/bond"
-      - episode: 4
-        logline: >-
-          A body alarm fires at 11:42 PM with no notification, meeting, or
-          person to blame, and Mira has to find out whether the practice she
-          trusts by day still holds when there is nothing outside her to point at.
-        genre_pleasure_beat: >-
-          Night-apartment quiet — streetlight through blinds, a kettle heated
-          at midnight, the specific loneliness of 11:42 PM made habitable.
-        self_help_topic_beat: >-
-          An alarm with no external cause is the purest false alarm; the
-          episode lets the body settle before the mind agrees.
-        hook:
-          position: closing_panel
-          promise: >-
-            After the first ground attempt fails, does the night resolve into
-            rest, or does the alarm win until morning?
-        checklist_refs:
-          - "mc_endurance_study#healing/wellness"
-
-  - arc_id: cycle_02_the_practice_witnessed
-    episode_start: 5
-    episode_end: 8
-    detail_level: detailed
-    season_wheel: wheel_01_the_private_practice
-    source_arc_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_005.arc_storyboard.yaml
-    arc_premise: >-
-      Other people enter the frame — a coworker at lunch, a mother on the
-      Sunday phone, a Monday subway crowd, a first date — and the private
-      practice has to survive being seen without turning into a lecture.
-    arc_promise: >-
-      Each witness gets a different answer to the same question: can the
-      practice stay a practice when someone else is watching?
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The practice only works when nobody can see Mira doing it.
-      to_state: The practice can be witnessed, imperfectly, without becoming a performance or a lesson.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-    episodes:
-      - episode: 5
-        logline: >-
-          A lunch invitation from a coworker, Yara, pulls Mira's private
-          regulation practice into view for the first time, testing whether it
-          can be witnessed by another person without turning into an explanation.
-        genre_pleasure_beat: >-
-          Lunch-counter warmth, two trays, the small comedy of eating with a
-          colleague you only know vertically.
-        self_help_topic_beat: >-
-          Being seen mid-practice and not explaining it — the topic advances by
-          what Mira does not say.
-        hook:
-          position: closing_panel
-          promise: >-
-            Can the practice be witnessed without becoming a lesson — and will
-            Yara's own hidden struggle surface too?
-        checklist_refs:
-          - "mc_endurance_study#healing/bond"
-      - episode: 6
-        logline: >-
-          A Sunday phone call from Mira's mother reopens the oldest anxious
-          pattern in the family — years of quiet parental worry meeting Mira's
-          old reflex to defend or perform fine — and asks whether the practice
-          can hold under it.
-        genre_pleasure_beat: >-
-          A whole episode inside one phone call and one apartment; tea going
-          cold and being remade as the conversation turns.
-        self_help_topic_beat: >-
-          Family systems fire the oldest alarms; honesty lands as a smaller,
-          truer sentence than reassurance.
-        hook:
-          position: closing_panel
-          promise: >-
-            With the old worry spoken aloud, does this call end in the usual
-            script or in something more honest than either of them expected?
-        checklist_refs:
-          - "mc_endurance_study#healing/anti"
-      - episode: 7
-        logline: >-
-          A four-minutes-late morning and an unanswered Friday-night work email
-          launch Mira's subway commute into a catastrophizing spiral that the
-          practice only partly catches, proving the alarm is a returning, not a cure.
-        genre_pleasure_beat: >-
-          Rush-hour choreography rendered gently — straps, shoulders, tunnel
-          light — a crowded train made almost companionable.
-        self_help_topic_beat: >-
-          Partial success is the honest arc of practice; the episode refuses
-          the cure narrative on the page.
-        hook:
-          position: closing_panel
-          promise: >-
-            Does the practice actually hold this time, or does Monday prove
-            the alarm just keeps firing regardless?
-        checklist_refs:
-          - "mc_endurance_study#healing/anti"
-      - episode: 8
-        logline: >-
-          A first date with a near-stranger forces Mira to choose between
-          performing ease and letting Kenji see one honest, unpolished thing
-          about her week.
-        genre_pleasure_beat: >-
-          Wine-bar half-light and first-date awkwardness allowed to be sweet
-          instead of mortifying.
-        self_help_topic_beat: >-
-          Choosing the true version of her week over the safe one is the
-          practice applied to intimacy.
-        hook:
-          position: closing_panel
-          promise: >-
-            Does Kenji's ordinary question pull the safe version of her week
-            or the true one — and can a near-stranger hold it?
-        checklist_refs:
-          - "mc_endurance_study#healing/bond"
-
-  - arc_id: cycle_03_the_practice_goes_quiet
-    episode_start: 9
-    episode_end: 12
-    detail_level: detailed
-    season_wheel: wheel_01_the_private_practice
-    source_arc_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_009.arc_storyboard.yaml
-    arc_premise: >-
-      The practice starts disappearing into ordinary life — a deadline thought
-      passes through a Saturday unmanaged, the episode-one notification
-      returns to the same bedside phone, a tripled presentation room and a
-      Friday coffee ask what six weeks have actually built.
-    arc_promise: >-
-      The wheel closes where it opened — same phone, same kitchen — and the
-      difference is measured in panels, not proclamations; then the practice
-      is offered outward for the first time.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The practice is a deliberate act Mira must remember to perform.
-      to_state: The practice runs quietly beneath ordinary days and can be put into her own words for someone else.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-    episodes:
-      - episode: 9
-        logline: >-
-          A stray thought about a work deadline surfaces during ordinary
-          Saturday chores and passes through Mira's body without needing to be
-          managed, proving the practice has become invisible even to her.
-        genre_pleasure_beat: >-
-          Laundry steam, market errands, the deep iyashikei pleasure of a day
-          in which nothing is wrong.
-        self_help_topic_beat: >-
-          Recovery measured by what does not happen — a spiral that simply
-          fails to start.
-        hook:
-          position: none
-          promise: >-
-            The quiet-close convention: an ordinary walk, and whatever the old
-            alarm would have caught, uncaught.
-        checklist_refs:
-          - "mc_endurance_study#healing/wellness"
-      - episode: 10
-        logline: >-
-          A recurring Q-review work notification returns on the exact bedside
-          phone from episode one, testing six weeks of practice against the
-          same trigger that once hijacked Mira's whole morning.
-        genre_pleasure_beat: >-
-          A shot-for-shot rhyme with episode one — same dawn, same kettle —
-          where the reader sees the difference before Mira names it.
-        self_help_topic_beat: >-
-          Same trigger, changed nervous system: the comparison is the teaching
-          and it stays wordless.
-        hook:
-          position: closing_panel
-          promise: >-
-            Settled fast inside, will Mira take the practice out into the
-            world today, or stay safely at the kitchen table?
-        checklist_refs:
-          - "mc_endurance_study#healing/endurance"
-      - episode: 11
-        logline: >-
-          A calendar notification silently triples the size of Mira's Thursday
-          presentation, forcing her to test six episodes of private practice
-          in front of a room she never agreed to prepare for.
-        genre_pleasure_beat: >-
-          The big room rendered survivable — carpet seams, water glasses, a
-          slide clicker's small weight — scale without spectacle.
-        self_help_topic_beat: >-
-          Public stakes meet the private floor the practice built; the body
-          goes first and the voice follows.
-        hook:
-          position: closing_panel
-          promise: >-
-            Can the private practice hold up inside a room this size, in front
-            of people who are actually watching?
-        checklist_refs:
-          - "mc_endurance_study#healing/endurance"
-      - episode: 12
-        logline: >-
-          A Friday text from Devon asking to still meet for coffee forces Mira
-          to put six episodes of private practice into her own words for
-          another person for the first time, closing the wheel on a shared
-          rather than solitary ritual.
-        genre_pleasure_beat: >-
-          Breakroom coffee as ceremony — two cups, one question asked
-          honestly, and the season's first cool air through a propped door.
-        self_help_topic_beat: >-
-          Passing the practice along without turning teacher: an answer
-          offered as a story about her own week, not instructions.
-        hook:
-          position: closing_panel
-          promise: >-
-            What does the practice look like when it is offered to someone
-            else instead of only practiced alone?
-        checklist_refs:
-          - "mc_endurance_study#healing/bond"
-
-  # ── wheel 02 — absorbed #295 window (eps 13-48): block-grain outline ───
-  # Premises below are verbatim-derived from PR #295 arc_plans/
-  # en_US_iyashikei_batch_a.md §stillness_press Blocks 2-4 (source-credited;
-  # per-episode plans are the authoring wave's job, not invented here).
-  - arc_id: cycle_04_the_standing_friday
-    episode_start: 13
-    episode_end: 16
+- arc_id: cycle_01_the_alarm_in_four_rooms
+  episode_start: 1
+  episode_end: 4
+  detail_level: detailed
+  season_wheel: wheel_01_the_private_practice
+  source_arc_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_001.arc_storyboard.yaml
+  arc_premise: The same body alarm fires in four different rooms — kitchen, review meeting, coffee
+    shop, bedroom at midnight — and each room asks whether it can be witnessed without being obeyed.
+  arc_promise: The reader learns the shape of the practice by watching it meet work, family, grief,
+    and the dark, one ordinary room at a time.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira obeys every alarm her body fires and calls that being responsible.
+    to_state: Mira can watch an alarm arrive, name it, and let the room stay ordinary around it.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+    - mc_endurance_study#healing/wellness
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+  episodes:
+  - episode: 1
+    logline: A Tuesday-morning work notification fires Mira's body into a catastrophizing spiral before
+      she has even finished her tea, and the episode has to prove the alarm can be witnessed without
+      being obeyed.
+    genre_pleasure_beat: The kettle, the jade pendant, dawn light on an ordinary kitchen — calm rendered
+      in objects before any word is spoken.
+    self_help_topic_beat: The false-alarm reframe arrives as a body observation (the spiral is loud,
+      the kitchen is quiet), never as a caption lesson.
+    hook:
+      position: closing_panel
+      promise: Will the spiral run unchecked, or does something in the ordinary world interrupt it
+        before the meeting?
+    checklist_refs:
+    - mc_endurance_study#healing/traits
+  - episode: 2
+    logline: The Q3 review meeting Mira has been dreading arrives on schedule and forces her to test
+      yesterday's alarm-system reframe under real professional stakes, not only alone at her own kitchen
+      table.
+    genre_pleasure_beat: Office texture held at iyashikei tempo — the meeting room is allowed to be
+      a room, not an arena.
+    self_help_topic_beat: 'The practice survives contact with authority by staying physical: a hand
+      below the table, one slow exhale between agenda items.'
+    hook:
+      position: closing_panel
+      promise: Does the reframe survive the actual review room, or does the old alarm run it once
+        the stakes are real?
+    checklist_refs:
+    - mc_endurance_study#healing/endurance
+  - episode: 3
+    logline: A visiting mother's Saturday text and a coffee-shop question about Mira's late father
+      reactivate the same alarm reflex the workplace triggered, and the episode must prove the noticing
+      generalizes beyond the office.
+    genre_pleasure_beat: Weekend light, cafe steam, a conversation that is allowed to pause — grief
+      handled at the pace of a refill.
+    self_help_topic_beat: Grief and anxiety share one nervous system; the same noticing that held
+      at work holds, barely, under a harder feeling.
+    hook:
+      position: closing_panel
+      promise: Does the conversation about her father overwhelm Mira, or does the noticing hold under
+        grief too?
+    checklist_refs:
+    - mc_endurance_study#healing/bond
+  - episode: 4
+    logline: A body alarm fires at 11:42 PM with no notification, meeting, or person to blame, and
+      Mira has to find out whether the practice she trusts by day still holds when there is nothing
+      outside her to point at.
+    genre_pleasure_beat: Night-apartment quiet — streetlight through blinds, a kettle heated at midnight,
+      the specific loneliness of 11:42 PM made habitable.
+    self_help_topic_beat: An alarm with no external cause is the purest false alarm; the episode lets
+      the body settle before the mind agrees.
+    hook:
+      position: closing_panel
+      promise: After the first ground attempt fails, does the night resolve into rest, or does the
+        alarm win until morning?
+    checklist_refs:
+    - mc_endurance_study#healing/wellness
+- arc_id: cycle_02_the_practice_witnessed
+  episode_start: 5
+  episode_end: 8
+  detail_level: detailed
+  season_wheel: wheel_01_the_private_practice
+  source_arc_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_005.arc_storyboard.yaml
+  arc_premise: Other people enter the frame — a coworker at lunch, a mother on the Sunday phone, a
+    Monday subway crowd, a first date — and the private practice has to survive being seen without
+    turning into a lecture.
+  arc_promise: 'Each witness gets a different answer to the same question: can the practice stay a
+    practice when someone else is watching?'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The practice only works when nobody can see Mira doing it.
+    to_state: The practice can be witnessed, imperfectly, without becoming a performance or a lesson.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+  episodes:
+  - episode: 5
+    logline: A lunch invitation from a coworker, Yara, pulls Mira's private regulation practice into
+      view for the first time, testing whether it can be witnessed by another person without turning
+      into an explanation.
+    genre_pleasure_beat: Lunch-counter warmth, two trays, the small comedy of eating with a colleague
+      you only know vertically.
+    self_help_topic_beat: Being seen mid-practice and not explaining it — the topic advances by what
+      Mira does not say.
+    hook:
+      position: closing_panel
+      promise: Can the practice be witnessed without becoming a lesson — and will Yara's own hidden
+        struggle surface too?
+    checklist_refs:
+    - mc_endurance_study#healing/bond
+  - episode: 6
+    logline: A Sunday phone call from Mira's mother reopens the oldest anxious pattern in the family
+      — years of quiet parental worry meeting Mira's old reflex to defend or perform fine — and asks
+      whether the practice can hold under it.
+    genre_pleasure_beat: A whole episode inside one phone call and one apartment; tea going cold and
+      being remade as the conversation turns.
+    self_help_topic_beat: Family systems fire the oldest alarms; honesty lands as a smaller, truer
+      sentence than reassurance.
+    hook:
+      position: closing_panel
+      promise: With the old worry spoken aloud, does this call end in the usual script or in something
+        more honest than either of them expected?
+    checklist_refs:
+    - mc_endurance_study#healing/anti
+  - episode: 7
+    logline: A four-minutes-late morning and an unanswered Friday-night work email launch Mira's subway
+      commute into a catastrophizing spiral that the practice only partly catches, proving the alarm
+      is a returning, not a cure.
+    genre_pleasure_beat: Rush-hour choreography rendered gently — straps, shoulders, tunnel light
+      — a crowded train made almost companionable.
+    self_help_topic_beat: Partial success is the honest arc of practice; the episode refuses the cure
+      narrative on the page.
+    hook:
+      position: closing_panel
+      promise: Does the practice actually hold this time, or does Monday prove the alarm just keeps
+        firing regardless?
+    checklist_refs:
+    - mc_endurance_study#healing/anti
+  - episode: 8
+    logline: A first date with a near-stranger forces Mira to choose between performing ease and letting
+      Kenji see one honest, unpolished thing about her week.
+    genre_pleasure_beat: Wine-bar half-light and first-date awkwardness allowed to be sweet instead
+      of mortifying.
+    self_help_topic_beat: Choosing the true version of her week over the safe one is the practice
+      applied to intimacy.
+    hook:
+      position: closing_panel
+      promise: Does Kenji's ordinary question pull the safe version of her week or the true one —
+        and can a near-stranger hold it?
+    checklist_refs:
+    - mc_endurance_study#healing/bond
+- arc_id: cycle_03_the_practice_goes_quiet
+  episode_start: 9
+  episode_end: 12
+  detail_level: detailed
+  season_wheel: wheel_01_the_private_practice
+  source_arc_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_009.arc_storyboard.yaml
+  arc_premise: The practice starts disappearing into ordinary life — a deadline thought passes through
+    a Saturday unmanaged, the episode-one notification returns to the same bedside phone, a tripled
+    presentation room and a Friday coffee ask what six weeks have actually built.
+  arc_promise: The wheel closes where it opened — same phone, same kitchen — and the difference is
+    measured in panels, not proclamations; then the practice is offered outward for the first time.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The practice is a deliberate act Mira must remember to perform.
+    to_state: The practice runs quietly beneath ordinary days and can be put into her own words for
+      someone else.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+  episodes:
+  - episode: 9
+    logline: A stray thought about a work deadline surfaces during ordinary Saturday chores and passes
+      through Mira's body without needing to be managed, proving the practice has become invisible
+      even to her.
+    genre_pleasure_beat: Laundry steam, market errands, the deep iyashikei pleasure of a day in which
+      nothing is wrong.
+    self_help_topic_beat: Recovery measured by what does not happen — a spiral that simply fails to
+      start.
+    hook:
+      position: none
+      promise: 'The quiet-close convention: an ordinary walk, and whatever the old alarm would have
+        caught, uncaught.'
+    checklist_refs:
+    - mc_endurance_study#healing/wellness
+  - episode: 10
+    logline: A recurring Q-review work notification returns on the exact bedside phone from episode
+      one, testing six weeks of practice against the same trigger that once hijacked Mira's whole
+      morning.
+    genre_pleasure_beat: A shot-for-shot rhyme with episode one — same dawn, same kettle — where the
+      reader sees the difference before Mira names it.
+    self_help_topic_beat: 'Same trigger, changed nervous system: the comparison is the teaching and
+      it stays wordless.'
+    hook:
+      position: closing_panel
+      promise: Settled fast inside, will Mira take the practice out into the world today, or stay
+        safely at the kitchen table?
+    checklist_refs:
+    - mc_endurance_study#healing/endurance
+  - episode: 11
+    logline: A calendar notification silently triples the size of Mira's Thursday presentation, forcing
+      her to test six episodes of private practice in front of a room she never agreed to prepare
+      for.
+    genre_pleasure_beat: The big room rendered survivable — carpet seams, water glasses, a slide clicker's
+      small weight — scale without spectacle.
+    self_help_topic_beat: Public stakes meet the private floor the practice built; the body goes first
+      and the voice follows.
+    hook:
+      position: closing_panel
+      promise: Can the private practice hold up inside a room this size, in front of people who are
+        actually watching?
+    checklist_refs:
+    - mc_endurance_study#healing/endurance
+  - episode: 12
+    logline: A Friday text from Devon asking to still meet for coffee forces Mira to put six episodes
+      of private practice into her own words for another person for the first time, closing the wheel
+      on a shared rather than solitary ritual.
+    genre_pleasure_beat: Breakroom coffee as ceremony — two cups, one question asked honestly, and
+      the season's first cool air through a propped door.
+    self_help_topic_beat: 'Passing the practice along without turning teacher: an answer offered as
+      a story about her own week, not instructions.'
+    hook:
+      position: closing_panel
+      promise: What does the practice look like when it is offered to someone else instead of only
+        practiced alone?
+    checklist_refs:
+    - mc_endurance_study#healing/bond
+- arc_id: cycle_04_the_standing_friday
+  episode_start: 13
+  episode_end: 16
+  detail_level: detailed
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-2
+  arc_premise: Autumn opens with the Friday coffee becoming a standing, unglamorous ritual in the
+    breakroom — the same kettle that bookends Mira's own evenings now makes two cups instead of one.
+  arc_promise: Devon learns the way you learn a recipe by being in the kitchen enough times; nothing
+    is narrated outright.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The practice has been spoken about exactly once, on request.
+    to_state: The practice has a standing time and a second cup without ever having been taught.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+  episodes:
+  - episode: 13
+    logline: The Friday after the first shared coffee, Devon shows up again without restating the
+      invitation, and the breakroom kettle makes two cups before anyone decides it should.
+    genre_pleasure_beat: Autumn rain on the breakroom window; steam from two mugs in the same shaft
+      of late-afternoon light — calm rendered as weather and habit.
+    self_help_topic_beat: A practice becomes standing by being repeated, not by being taught again;
+      Mira does not re-explain the pendant.
+    hook:
+      position: closing_panel
+      promise: Will next Friday arrive as appointment or as weather — something that simply happens?
+    checklist_refs:
+    - mc_endurance_study#healing/bond
+    - genre_craft_checklists#healing/story_elements_must
+  - episode: 14
+    logline: A third Friday makes the coffee standing without anyone saying the word; Devon watches
+      a small pendant touch without asking, and Mira's mother's Sunday call lands gentler in the evening.
+    genre_pleasure_beat: Two rinsed mugs drying side by side; a windowsill succulent catching the
+      last autumn light — objects carrying the week's accumulation.
+    self_help_topic_beat: 'Learning-by-proximity begins: the technique is witnessed, not narrated;
+      family contact softens as weather, not plot.'
+    hook:
+      position: closing_panel
+      promise: What else will start arriving without being invited, now that Friday has a shape?
+    checklist_refs:
+    - mc_endurance_study#healing/bond
+    - genre_craft_checklists#healing/story_elements_must
+  - episode: 15
+    logline: 'OUTLINE — mid-arc Friday: Devon brings a second mug from home without announcing it;
+      the kettle''s two-cup habit starts looking like furniture.'
+    genre_pleasure_beat: OUTLINE — domestic object migrating into the office ritual.
+    self_help_topic_beat: OUTLINE — ownership of the ritual begins to blur.
+    hook:
+      position: closing_panel
+      promise: OUTLINE
+    checklist_refs:
+    - mc_endurance_study#healing/bond
     detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-2
-    arc_premise: >-
-      Autumn opens with the Friday coffee becoming a standing, unglamorous
-      ritual in the breakroom — the same kettle that bookends Mira's own
-      evenings now makes two cups instead of one.
-    arc_promise: >-
-      Devon learns the way you learn a recipe by being in the kitchen enough
-      times; nothing is narrated outright.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The practice has been spoken about exactly once, on request.
-      to_state: The practice has a standing time and a second cup without ever having been taught.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_05_watching_hands
-    episode_start: 17
-    episode_end: 20
+  - episode: 16
+    logline: 'OUTLINE — cycle close: a rainy Friday where neither of them mentions anxiety and the
+      coffee still happens; autumn fully arrived.'
+    genre_pleasure_beat: OUTLINE — weather as the only conflict.
+    self_help_topic_beat: OUTLINE — standing ritual proven by silence.
+    hook:
+      position: closing_panel
+      promise: OUTLINE
+    checklist_refs:
+    - mc_endurance_study#healing/bond
     detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-2
-    arc_premise: >-
-      Deep autumn. Devon picks up pieces of the pendant technique by watching,
-      never by being told; Mira's mother's Sunday calls continue, gentler now.
-    arc_promise: >-
-      Learning-by-proximity is shown panel by panel while the family thread
-      softens in the background.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira still half-expects to be asked to explain the technique.
-      to_state: Mira trusts watching to do the teaching and lets the Sunday calls be gentle.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: somatic_healing
-    mode_arc:
-      mode: none
-  - arc_id: cycle_06_the_cutting_goes_home
-    episode_start: 21
-    episode_end: 24
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-2
-    arc_premise: >-
-      Winter arrives; a cutting from the office succulent goes home in a paper
-      cup to root on Mira's own sill — the practice quietly propagating rather
-      than being taught.
-    arc_promise: >-
-      The season's smallest object — a rooting cutting — carries the year's
-      whole argument about how change spreads.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Home and office hold two separate versions of the same ritual.
-      to_state: One continuous practice lives in both rooms, propagated by cuttings, not curricula.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: somatic_healing
-    mode_arc:
-      mode: none
-  - arc_id: cycle_07_devons_wrist
-    episode_start: 25
-    episode_end: 28
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-3
-    arc_premise: >-
-      Late winter. Devon starts touching his own wrist before a hard meeting,
-      unprompted, and Mira notices without commenting — the same discretion
-      she was once given.
-    arc_promise: >-
-      The practice's first true handover happens entirely in gesture; the
-      reader catches it before either character acknowledges it.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira is the only person in the office with a settling gesture.
-      to_state: Mira can watch someone else's practice begin and protect it with silence.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_08_the_four_cup_table
-    episode_start: 29
-    episode_end: 32
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-3
-    arc_premise: >-
-      A building-wide desk move puts three more people at Mira's small table,
-      and the two-cup habit becomes a four-cup habit without anyone deciding
-      it should.
-    arc_promise: >-
-      Community accretes by furniture and habit, not by invitation; the
-      breakroom table becomes the series' quiet center of gravity.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The ritual belongs to two people and one standing appointment.
-      to_state: The ritual scales to whoever sits down, and Mira lets it stop being hers.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_09_kenji_without_introduction
-    episode_start: 33
-    episode_end: 36
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-3
-    arc_premise: >-
-      Spring. Kenji, from the wine bar, becomes a settled-enough presence that
-      his name stops needing a full introduction in scenes; nothing dramatic
-      happens between them, only accumulation.
-    arc_promise: >-
-      Intimacy is measured in dropped exposition — the series trusts the
-      reader to have kept up with Mira's life.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Kenji is an event in Mira's week that requires framing.
-      to_state: Kenji is part of the week's furniture, present without ceremony.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: trauma_recovery
-    mode_arc:
-      mode: none
-  - arc_id: cycle_10_the_single_panel_recovery
-    episode_start: 37
-    episode_end: 40
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-4
-    arc_premise: >-
-      Early summer. The alarm still fires — a notification, a scope-creep
-      meeting — but the recovery is now fast enough to be almost invisible on
-      the page, shown in a single panel rather than a sequence.
-    arc_promise: >-
-      The craft itself carries the healing claim: what took four pages in
-      episode one now takes one panel, and the reader feels the difference.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Recovery is a visible on-page sequence with steps.
-      to_state: Recovery compresses to a beat; the alarm has become weather, not plot.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/wellness"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_11_the_counter_holds_more_cups
-    episode_start: 41
-    episode_end: 44
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-4
-    arc_premise: >-
-      Mira hosts a small gathering in her apartment for the first time in the
-      series; the counter holds more cups than anyone is counting.
-    arc_promise: >-
-      The apartment that once held one person's midnight alarm now holds a
-      roomful of ordinary noise, and the kettle keeps up.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Home is where Mira manages herself in private.
-      to_state: Home is a place other people can be, without a plan for their comfort.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: trauma_recovery
-    mode_arc:
-      mode: none
-  - arc_id: cycle_12_mid_ordinary_tuesday
-    episode_start: 45
-    episode_end: 48
-    detail_level: outline
-    season_wheel: wheel_02_the_year_of_two_cups
-    source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-4
-    arc_premise: >-
-      The season turns once more and the reader leaves Mira mid-ordinary-
-      Tuesday, pendant untouched because it is not needed in that moment —
-      ease, not a cure, and the kettle still going for whoever shows up next.
-    arc_promise: >-
-      The year closes without a finale: the loop is the product, and the
-      final panel is simply the practice, ambient.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Ease is an achievement Mira notices and tallies.
-      to_state: Ease is the default she forgets to notice, which is the point.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/wellness"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-
-  # ── wheels 03-04 — outline continuation (eps 49-100, Q-MPU-01) ─────────
-  - arc_id: cycle_13_new_autumn_new_kettle
-    episode_start: 49
-    episode_end: 52
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      Year two opens with the office kettle failing and being replaced; the
-      new one takes longer to boil and the ritual absorbs the extra minute
-      without complaint.
-    arc_promise: >-
-      Continuity survives its objects: the ritual is carried by people now,
-      not equipment.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The ritual is anchored to the original kettle and its sounds.
-      to_state: The ritual survives a changed object because it lives in the people around it.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_14_yaras_turn
-    episode_start: 53
-    episode_end: 56
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      Yara's own hidden struggle, first glimpsed at lunch in the first wheel,
-      surfaces properly across four quiet episodes at the four-cup table.
-    arc_promise: >-
-      A witness from wheel one becomes the witnessed; the table does for Yara
-      what the breakroom did for Devon.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira receives care at the table she started.
-      to_state: Mira can hold space for a colleague without managing her toward a fix.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: grief
-    mode_arc:
-      mode: none
-  - arc_id: cycle_15_the_winter_visit
-    episode_start: 57
-    episode_end: 60
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      Mira's mother visits for a winter week; the apartment's rhythms and the
-      Sunday-call gentleness are tested by actual cohabitation.
-    arc_promise: >-
-      The family thread pays off in person: two nervous systems that trained
-      each other learn to share a kitchen.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Gentleness with her mother lives safely inside a weekly phone call.
-      to_state: Gentleness holds across seven consecutive mornings in one small kitchen.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: grief
-    mode_arc:
-      mode: none
-  - arc_id: cycle_16_devon_passes_it_on
-    episode_start: 61
-    episode_end: 64
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      A new hire shadows Devon; without naming anything, he starts giving away
-      what he was given — the propped door, the second cup, the unremarked
-      wrist touch.
-    arc_promise: >-
-      The lineage becomes visible at one remove from Mira, proving the
-      practice no longer needs its origin.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira is the quiet source every handover traces back to.
-      to_state: The practice propagates without reference to her at all.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_17_the_sleep_thread
-    episode_start: 65
-    episode_end: 68
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      A stretch of broken sleep returns Mira to the 11:42 PM territory of the
-      first wheel; the night practice has to be rebuilt one lamp and one walk
-      at a time.
-    arc_promise: >-
-      Regression is treated as a season, not a failure; the night episodes
-      rhyme with episode four without repeating it.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Night setbacks read to Mira as evidence the year was undone.
-      to_state: Night setbacks read as weather to be dressed for, with tools she already owns.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/anti"
-    self_help_topic: sleep
-    mode_arc:
-      mode: none
-  - arc_id: cycle_18_spring_at_one_remove
-    episode_start: 69
-    episode_end: 72
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      Spring returns; the succulent cuttings have cuttings now, on sills Mira
-      has never seen, and a thank-you note arrives from someone she has never
-      met.
-    arc_promise: >-
-      The propagation motif completes a generation: the practice has
-      neighbors, plural, and none of them need Mira.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira tends what she planted and knows every sill it sits on.
-      to_state: Mira lets the practice have a life she will never fully see.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: somatic_healing
-    mode_arc:
-      mode: none
-  - arc_id: cycle_19_the_quiet_promotion
-    episode_start: 73
-    episode_end: 76
-    detail_level: outline
-    season_wheel: wheel_03_the_table_that_fills
-    arc_premise: >-
-      A role change lands on Mira's desk with more meetings and a bigger room;
-      the series lets the stakes stay logistical while the body stays level.
-    arc_promise: >-
-      Wheel one's presentation-room test returns at career scale and is
-      absorbed in a single settled sequence.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Bigger rooms still carry a residue of the old bracing.
-      to_state: Room size has stopped being a variable the body tracks.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_20_summer_of_hosting
-    episode_start: 77
-    episode_end: 80
-    detail_level: outline
-    season_wheel: wheel_04_the_kettle_passes
-    arc_premise: >-
-      The apartment gathering from wheel two becomes a loose recurring thing;
-      different mixes of the cast pass through, and hosting stops being an
-      event Mira recovers from.
-    arc_promise: >-
-      The counter full of cups becomes the series' establishing shot instead
-      of its milestone.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Hosting costs Mira a day of preparation and a day of recovery.
-      to_state: Hosting is an open door and whatever is already in the cupboard.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/wellness"
-    self_help_topic: trauma_recovery
-    mode_arc:
-      mode: none
-  - arc_id: cycle_21_kenjis_hard_season
-    episode_start: 81
-    episode_end: 84
-    detail_level: outline
-    season_wheel: wheel_04_the_kettle_passes
-    arc_premise: >-
-      Kenji's work turns hard for a season and Mira learns the other side of
-      the witnessing she once feared — being steady near someone else's alarm
-      without fixing it.
-    arc_promise: >-
-      The relationship thread matures by role reversal, held at iyashikei
-      tempo with no crisis mechanics.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira's steadiness has only ever had to cover her own weather.
-      to_state: Mira can be the quiet room for someone she loves without absorbing his storm.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: trauma_recovery
-    mode_arc:
-      mode: none
-  - arc_id: cycle_22_the_autumn_return
-    episode_start: 85
-    episode_end: 88
-    detail_level: outline
-    season_wheel: wheel_04_the_kettle_passes
-    arc_premise: >-
-      A third autumn opens on the anniversary of the first episode's Tuesday;
-      the same notification chime sounds on someone else's phone at the next
-      desk, and Mira watches a stranger's spiral begin.
-    arc_promise: >-
-      The series-opening image returns with Mira on the far side of it,
-      offering nothing but a propped door and a spare cup.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Other people's alarms activate Mira's rescue reflex.
-      to_state: Mira offers presence and lets the stranger keep their own pace.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/bond"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_23_the_logbook_of_small_things
-    episode_start: 89
-    episode_end: 92
-    detail_level: outline
-    season_wheel: wheel_04_the_kettle_passes
-    arc_premise: >-
-      Winter again; Mira finds the notes she kept in the first year and reads
-      them at the kitchen table, measuring the distance by how foreign the
-      urgency in her own handwriting feels.
-    arc_promise: >-
-      The series audits itself through its protagonist, gently, without a
-      montage or a verdict.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The first year's urgency still reads as reasonable to Mira.
-      to_state: The old urgency reads like another person's weather report, kept with fondness.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/wellness"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_24_the_table_without_mira
-    episode_start: 93
-    episode_end: 96
-    detail_level: outline
-    season_wheel: wheel_04_the_kettle_passes
-    arc_premise: >-
-      A two-week trip takes Mira away; the episodes stay home with the table,
-      the kettle, Devon, Yara, and the new hires, running the ritual in her
-      absence.
-    arc_promise: >-
-      The series proves its own thesis by letting its protagonist leave the
-      frame and losing nothing.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: Mira half-believes the table needs her to keep its shape.
-      to_state: Mira returns to find the ritual whole and lets that be a relief instead of a loss.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/endurance"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-  - arc_id: cycle_25_the_kettle_still_going
-    episode_start: 97
-    episode_end: 100
-    detail_level: outline
-    season_wheel: wheel_04_the_kettle_passes
-    arc_premise: >-
-      The horizon closes on a mid-ordinary morning three autumns in: the
-      alarm fires somewhere in the building, a door is propped, water is
-      already heating, and the reader leaves before anyone needs to be shown
-      settling.
-    arc_promise: >-
-      No finale, by design — the hundredth episode is another turn of the
-      wheel, and the kettle is still going for whoever shows up next.
-    status_quo_shift: null
-    mc_change_vector:
-      from_state: The practice is a story the series has been telling about Mira.
-      to_state: The practice is the ambient condition of the world the series built.
-      endurance_checklist_refs:
-        - "mc_endurance_study#healing/wellness"
-    self_help_topic: anxiety
-    mode_arc:
-      mode: none
-
+- arc_id: cycle_05_watching_hands
+  episode_start: 17
+  episode_end: 20
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-2
+  arc_premise: Deep autumn. Devon picks up pieces of the pendant technique by watching, never by being
+    told; Mira's mother's Sunday calls continue, gentler now.
+  arc_promise: Learning-by-proximity is shown panel by panel while the family thread softens in the
+    background.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira still half-expects to be asked to explain the technique.
+    to_state: Mira trusts watching to do the teaching and lets the Sunday calls be gentle.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: somatic_healing
+  mode_arc:
+    mode: none
+- arc_id: cycle_06_the_cutting_goes_home
+  episode_start: 21
+  episode_end: 24
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-2
+  arc_premise: Winter arrives; a cutting from the office succulent goes home in a paper cup to root
+    on Mira's own sill — the practice quietly propagating rather than being taught.
+  arc_promise: The season's smallest object — a rooting cutting — carries the year's whole argument
+    about how change spreads.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Home and office hold two separate versions of the same ritual.
+    to_state: One continuous practice lives in both rooms, propagated by cuttings, not curricula.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: somatic_healing
+  mode_arc:
+    mode: none
+- arc_id: cycle_07_devons_wrist
+  episode_start: 25
+  episode_end: 28
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-3
+  arc_premise: Late winter. Devon starts touching his own wrist before a hard meeting, unprompted,
+    and Mira notices without commenting — the same discretion she was once given.
+  arc_promise: The practice's first true handover happens entirely in gesture; the reader catches
+    it before either character acknowledges it.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira is the only person in the office with a settling gesture.
+    to_state: Mira can watch someone else's practice begin and protect it with silence.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_08_the_four_cup_table
+  episode_start: 29
+  episode_end: 32
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-3
+  arc_premise: A building-wide desk move puts three more people at Mira's small table, and the two-cup
+    habit becomes a four-cup habit without anyone deciding it should.
+  arc_promise: Community accretes by furniture and habit, not by invitation; the breakroom table becomes
+    the series' quiet center of gravity.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The ritual belongs to two people and one standing appointment.
+    to_state: The ritual scales to whoever sits down, and Mira lets it stop being hers.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_09_kenji_without_introduction
+  episode_start: 33
+  episode_end: 36
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-3
+  arc_premise: Spring. Kenji, from the wine bar, becomes a settled-enough presence that his name stops
+    needing a full introduction in scenes; nothing dramatic happens between them, only accumulation.
+  arc_promise: Intimacy is measured in dropped exposition — the series trusts the reader to have kept
+    up with Mira's life.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Kenji is an event in Mira's week that requires framing.
+    to_state: Kenji is part of the week's furniture, present without ceremony.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: trauma_recovery
+  mode_arc:
+    mode: none
+- arc_id: cycle_10_the_single_panel_recovery
+  episode_start: 37
+  episode_end: 40
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-4
+  arc_premise: Early summer. The alarm still fires — a notification, a scope-creep meeting — but the
+    recovery is now fast enough to be almost invisible on the page, shown in a single panel rather
+    than a sequence.
+  arc_promise: 'The craft itself carries the healing claim: what took four pages in episode one now
+    takes one panel, and the reader feels the difference.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Recovery is a visible on-page sequence with steps.
+    to_state: Recovery compresses to a beat; the alarm has become weather, not plot.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/wellness
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_11_the_counter_holds_more_cups
+  episode_start: 41
+  episode_end: 44
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-4
+  arc_premise: Mira hosts a small gathering in her apartment for the first time in the series; the
+    counter holds more cups than anyone is counting.
+  arc_promise: The apartment that once held one person's midnight alarm now holds a roomful of ordinary
+    noise, and the kettle keeps up.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Home is where Mira manages herself in private.
+    to_state: Home is a place other people can be, without a plan for their comfort.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: trauma_recovery
+  mode_arc:
+    mode: none
+- arc_id: cycle_12_mid_ordinary_tuesday
+  episode_start: 45
+  episode_end: 48
+  detail_level: outline
+  season_wheel: wheel_02_the_year_of_two_cups
+  source_arc_ref: rework_inputs_pr295/arc_plans/en_US_iyashikei_batch_a.md#stillness_press-block-4
+  arc_premise: The season turns once more and the reader leaves Mira mid-ordinary- Tuesday, pendant
+    untouched because it is not needed in that moment — ease, not a cure, and the kettle still going
+    for whoever shows up next.
+  arc_promise: 'The year closes without a finale: the loop is the product, and the final panel is
+    simply the practice, ambient.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Ease is an achievement Mira notices and tallies.
+    to_state: Ease is the default she forgets to notice, which is the point.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/wellness
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_13_new_autumn_new_kettle
+  episode_start: 49
+  episode_end: 52
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: Year two opens with the office kettle failing and being replaced; the new one takes
+    longer to boil and the ritual absorbs the extra minute without complaint.
+  arc_promise: 'Continuity survives its objects: the ritual is carried by people now, not equipment.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The ritual is anchored to the original kettle and its sounds.
+    to_state: The ritual survives a changed object because it lives in the people around it.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_14_yaras_turn
+  episode_start: 53
+  episode_end: 56
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: Yara's own hidden struggle, first glimpsed at lunch in the first wheel, surfaces properly
+    across four quiet episodes at the four-cup table.
+  arc_promise: A witness from wheel one becomes the witnessed; the table does for Yara what the breakroom
+    did for Devon.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira receives care at the table she started.
+    to_state: Mira can hold space for a colleague without managing her toward a fix.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: grief
+  mode_arc:
+    mode: none
+- arc_id: cycle_15_the_winter_visit
+  episode_start: 57
+  episode_end: 60
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: Mira's mother visits for a winter week; the apartment's rhythms and the Sunday-call
+    gentleness are tested by actual cohabitation.
+  arc_promise: 'The family thread pays off in person: two nervous systems that trained each other
+    learn to share a kitchen.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Gentleness with her mother lives safely inside a weekly phone call.
+    to_state: Gentleness holds across seven consecutive mornings in one small kitchen.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: grief
+  mode_arc:
+    mode: none
+- arc_id: cycle_16_devon_passes_it_on
+  episode_start: 61
+  episode_end: 64
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: A new hire shadows Devon; without naming anything, he starts giving away what he was
+    given — the propped door, the second cup, the unremarked wrist touch.
+  arc_promise: The lineage becomes visible at one remove from Mira, proving the practice no longer
+    needs its origin.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira is the quiet source every handover traces back to.
+    to_state: The practice propagates without reference to her at all.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_17_the_sleep_thread
+  episode_start: 65
+  episode_end: 68
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: A stretch of broken sleep returns Mira to the 11:42 PM territory of the first wheel;
+    the night practice has to be rebuilt one lamp and one walk at a time.
+  arc_promise: Regression is treated as a season, not a failure; the night episodes rhyme with episode
+    four without repeating it.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Night setbacks read to Mira as evidence the year was undone.
+    to_state: Night setbacks read as weather to be dressed for, with tools she already owns.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/anti
+  self_help_topic: sleep
+  mode_arc:
+    mode: none
+- arc_id: cycle_18_spring_at_one_remove
+  episode_start: 69
+  episode_end: 72
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: Spring returns; the succulent cuttings have cuttings now, on sills Mira has never seen,
+    and a thank-you note arrives from someone she has never met.
+  arc_promise: 'The propagation motif completes a generation: the practice has neighbors, plural,
+    and none of them need Mira.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira tends what she planted and knows every sill it sits on.
+    to_state: Mira lets the practice have a life she will never fully see.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: somatic_healing
+  mode_arc:
+    mode: none
+- arc_id: cycle_19_the_quiet_promotion
+  episode_start: 73
+  episode_end: 76
+  detail_level: outline
+  season_wheel: wheel_03_the_table_that_fills
+  arc_premise: A role change lands on Mira's desk with more meetings and a bigger room; the series
+    lets the stakes stay logistical while the body stays level.
+  arc_promise: Wheel one's presentation-room test returns at career scale and is absorbed in a single
+    settled sequence.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Bigger rooms still carry a residue of the old bracing.
+    to_state: Room size has stopped being a variable the body tracks.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_20_summer_of_hosting
+  episode_start: 77
+  episode_end: 80
+  detail_level: outline
+  season_wheel: wheel_04_the_kettle_passes
+  arc_premise: The apartment gathering from wheel two becomes a loose recurring thing; different mixes
+    of the cast pass through, and hosting stops being an event Mira recovers from.
+  arc_promise: The counter full of cups becomes the series' establishing shot instead of its milestone.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Hosting costs Mira a day of preparation and a day of recovery.
+    to_state: Hosting is an open door and whatever is already in the cupboard.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/wellness
+  self_help_topic: trauma_recovery
+  mode_arc:
+    mode: none
+- arc_id: cycle_21_kenjis_hard_season
+  episode_start: 81
+  episode_end: 84
+  detail_level: outline
+  season_wheel: wheel_04_the_kettle_passes
+  arc_premise: Kenji's work turns hard for a season and Mira learns the other side of the witnessing
+    she once feared — being steady near someone else's alarm without fixing it.
+  arc_promise: The relationship thread matures by role reversal, held at iyashikei tempo with no crisis
+    mechanics.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira's steadiness has only ever had to cover her own weather.
+    to_state: Mira can be the quiet room for someone she loves without absorbing his storm.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: trauma_recovery
+  mode_arc:
+    mode: none
+- arc_id: cycle_22_the_autumn_return
+  episode_start: 85
+  episode_end: 88
+  detail_level: outline
+  season_wheel: wheel_04_the_kettle_passes
+  arc_premise: A third autumn opens on the anniversary of the first episode's Tuesday; the same notification
+    chime sounds on someone else's phone at the next desk, and Mira watches a stranger's spiral begin.
+  arc_promise: The series-opening image returns with Mira on the far side of it, offering nothing
+    but a propped door and a spare cup.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Other people's alarms activate Mira's rescue reflex.
+    to_state: Mira offers presence and lets the stranger keep their own pace.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/bond
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_23_the_logbook_of_small_things
+  episode_start: 89
+  episode_end: 92
+  detail_level: outline
+  season_wheel: wheel_04_the_kettle_passes
+  arc_premise: Winter again; Mira finds the notes she kept in the first year and reads them at the
+    kitchen table, measuring the distance by how foreign the urgency in her own handwriting feels.
+  arc_promise: The series audits itself through its protagonist, gently, without a montage or a verdict.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The first year's urgency still reads as reasonable to Mira.
+    to_state: The old urgency reads like another person's weather report, kept with fondness.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/wellness
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_24_the_table_without_mira
+  episode_start: 93
+  episode_end: 96
+  detail_level: outline
+  season_wheel: wheel_04_the_kettle_passes
+  arc_premise: A two-week trip takes Mira away; the episodes stay home with the table, the kettle,
+    Devon, Yara, and the new hires, running the ritual in her absence.
+  arc_promise: The series proves its own thesis by letting its protagonist leave the frame and losing
+    nothing.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: Mira half-believes the table needs her to keep its shape.
+    to_state: Mira returns to find the ritual whole and lets that be a relief instead of a loss.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/endurance
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
+- arc_id: cycle_25_the_kettle_still_going
+  episode_start: 97
+  episode_end: 100
+  detail_level: outline
+  season_wheel: wheel_04_the_kettle_passes
+  arc_premise: 'The horizon closes on a mid-ordinary morning three autumns in: the alarm fires somewhere
+    in the building, a door is propped, water is already heating, and the reader leaves before anyone
+    needs to be shown settling.'
+  arc_promise: No finale, by design — the hundredth episode is another turn of the wheel, and the
+    kettle is still going for whoever shows up next.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The practice is a story the series has been telling about Mira.
+    to_state: The practice is the ambient condition of the world the series built.
+    endurance_checklist_refs:
+    - mc_endurance_study#healing/wellness
+  self_help_topic: anxiety
+  mode_arc:
+    mode: none
 conformance:
   genre_contract:
     checked: true
     craft_bible: docs/research/manga_craft/iyashikei_minimalism.md
-    notes: >-
-      Seasonal/atmospheric framing, no stakes-escalation, quiet-close episodes
-      permitted; no forced status-quo shifts anywhere in the plan.
+    notes: Seasonal/atmospheric framing, no stakes-escalation, quiet-close episodes permitted; no
+      forced status-quo shifts anywhere in the plan.
   cadence_conformance:
     checked: true
-    family_range: [1, 5]
+    family_range:
+    - 1
+    - 5
     arc_pattern: seasonal_cycle
     tolerance_pct: 25
   mc_endurance:
@@ -865,10 +762,19 @@ conformance:
     checked: true
     vessels_config: config/manga/manga_mode_vessels.yaml
 acceptance_layer: authored_candidate
-notes: >-
-  Golden example for the Series Master Plan contract (Lane 06, 2026-07-24).
-  Eps 1-12 are EXECUTED-REAL beneath this plan (storyboards + chapter scripts
-  + panel prompts on origin/main); eps 13-48 absorb PR #295's block plans
-  verbatim at outline grain; eps 49-100 are fresh outline-level continuation.
-  Craft grade: authored candidate at most — no bestseller claim from this
-  artifact or its validator PASS.
+notes: 'Golden example for the Series Master Plan contract (Lane 06, 2026-07-24). Eps 1-12 are EXECUTED-REAL
+  beneath this plan (storyboards + chapter scripts + panel prompts on origin/main); eps 13-48 absorb
+  PR #295''s block plans verbatim at outline grain; eps 49-100 are fresh outline-level continuation.
+  Craft grade: authored candidate at most — no bestseller claim from this artifact or its validator
+  PASS.'
+editor_pass:
+  status: APPROVE
+  reviewed_at: '2026-07-24T16:10:00Z'
+  reviewer: Pearl_Editor (MPU Lane 11)
+  checklist_flow:
+  - genre_contract:healing/iyashikei PASS — seasonal return-with-difference, ritual object continuity
+  - cadence_conformance PASS — healing family; first_major_shift null; cyclical segmentation intact
+  - mc_endurance PASS — bond/endurance refs present on cycle_04
+  - mode_arc_coherence PASS — mode:none throughout wheel_02
+  notes: 'EXTEND only: promote cycle_04 ep 13-14 to detailed episode-plan rows; do not re-author eps
+    1-12.'

@@ -1,0 +1,282 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_013
+arc_storyboard_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_013.arc_storyboard.yaml
+title: 'The Alarm Is Lying — Episode 13: Two Cups'
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales:
+- en_US
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: healing
+  strategy_genre: healing
+  relevance_genre: healing
+  market_surface_rule: Use social discovery, school/work pressure, gaming, creator culture, comic
+    shop/community, and phone-native life without sounding like an ad for platforms.
+  market_touchpoints:
+  - group_chat
+  - discord_server
+  - short_video_clip
+  - school_bus_or_subway
+  - comic_shop
+  - mall_food_court
+  - campus_library
+  - delivery_app
+  - controller
+  - streaming_queue
+  market_guardrails:
+  - avoid_fake_japanese_surface_for_us_scene
+  - make_city_transport_specific_if_used
+  - do_not_overexplain_anime_fandom
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: 'Modern healing must receive everyday overstimulation gently: notifications,
+    transit noise, school/work fatigue, convenience rituals, and weather.'
+  catalyst:
+    id: devons_same_time_friday_text
+    logline: A three-word Friday text ('same time? no pressure if not') turns last week's one-off
+      shared coffee into a second-cup ritual before anyone decides the invitation should become standing
+      — the pressure is social belonging, not dread.
+    ordinary_world_objects:
+    - phone
+    - text
+    - breakroom
+    - kettle
+    - rain
+    - two_mugs
+    genre_transmutation: A colleague's minimal check-in becomes the week's only social pressure; saying
+      yes is a choice that keeps the shared ritual alive; autumn rain is the only weather-conflict;
+      the second cup happens as habit, not as a lesson restated.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+    - reteaching_the_pendant
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US;
+    audience=gen_z. Use catalyst 'devons_same_time_friday_text'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    en_US. Use concrete objects and social pressure on page one; do not name-drop trends.
+main_characters:
+- id: mira
+  name: Mira Aoki
+  age: 33
+  role: protagonist (UX researcher; mid-career; quietly anxious)
+  visual_anchor: long brown hair, cream sweater, jade pendant visible at neckline
+- id: devon
+  name: Devon Reyes
+  age: 26
+  role: junior colleague; Friday coffee becoming standing without being named
+  visual_anchor: short dark curls, wire-frame glasses, pen-cap-clicking habit — quieter on Fridays
+    now
+scene_palette:
+  primary: warm office breakroom amber + autumn-rain gray window light
+  secondary: muted sage (apartment evening bookend)
+  accent: jade green (pendant continuity) + steam-white (two-cup kettle)
+pages:
+- page_id: ep_013_p01
+  panels:
+  - panel_id: ep013_001
+    beat_type: spatial
+    scene: |-
+      Close-up — Mira's phone on her desk, Friday afternoon. Notification: "Devon: same time? no pressure if not." The unread check-in is a small belonging-pressure, not a threat.
+    intent: 'Catalyst changes conflict: phone text creates social belonging-pressure and a keep/refuse
+      choice'
+  - panel_id: ep013_002
+    beat_type: micro
+    scene: Mira's face reading it. Mild readiness, not dread. Autumn window light on her cheek.
+    dialogue_lines:
+    - speaker: mira_internal
+      text_by_locale:
+        en_US: I want to keep this without making it a lesson.
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep013_003
+    beat_type: micro
+    scene: |-
+      Close on Mira's hand typing a single reply. Steady. No tremble. A choice made in public-adjacent silence.
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: yes — I'll stay for the kettle
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: Deliberate contrast to early-arc trembling-hand motif
+  - panel_id: ep013_004
+    beat_type: spatial
+    scene: Wide — office corridor window. Autumn rain writing thin lines down the glass. No one to
+      defeat.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Conflict as weather only
+  - panel_id: ep013_005
+    beat_type: spatial
+    scene: Breakroom doorway POV. The kettle is already steaming. Two mugs wait on the counter.
+    intent: Devon arrived early — standing claimed by action
+  - panel_id: ep013_006
+    beat_type: micro
+    scene: |-
+      Devon at the counter, glasses faintly fogged from steam, a half-shrug toward the two mugs — treating the ritual as obvious weather.
+    dialogue_lines:
+    - speaker: devon
+      text_by_locale:
+        en_US: Figured. No pressure either way.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep013_007
+    beat_type: micro
+    scene: Close on kettle spout filling the second mug. Steam rises in a clean column.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Two cups as action, not decision
+  - panel_id: ep013_008
+    beat_type: micro
+    scene: Devon's eyes flick once to Mira's collar — to the jade pendant — then away to his mug.
+    intent: Almost asks; chooses not to
+  - panel_id: ep013_009
+    beat_type: micro
+    scene: Mira's hands around her mug. Pendant visible at the neckline. Untouched. She drinks.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: No reteaching — presence is the practice today
+  - panel_id: ep013_010
+    beat_type: long_drop
+    scene: Wide held panel — Mira and Devon at the counter, rain window, steam from both mugs in the
+      same amber shaft.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: LONG DROP — shared quiet
+  - panel_id: ep013_011
+    beat_type: micro
+    scene: Somewhere down the hall a microwave beeps. Neither of them turns.
+    intent: Quiet holds against ordinary interruption
+  - panel_id: ep013_012
+    beat_type: micro
+    scene: Devon looking at the rain, not at Mira.
+    dialogue_lines:
+    - speaker: devon
+      text_by_locale:
+        en_US: It's really coming down.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+- page_id: ep_013_p02
+  panels:
+  - panel_id: ep013_013
+    beat_type: micro
+    scene: Mira's profile. Soft, unperformed. Eyes on the wet glass.
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: Good day for staying inside the kettle.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: Domain competence as ordinary weather talk
+  - panel_id: ep013_014
+    beat_type: spatial
+    scene: Macro — two mugs side by side, steam heights nearly matched, counter grain visible.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: 'Visual thesis of wheel_02: two cups'
+  - panel_id: ep013_015
+    beat_type: micro
+    scene: Devon's hand on his mug handle slows to match Mira's sip tempo — he doesn't notice.
+    intent: Learning-by-proximity before either names it
+  - panel_id: ep013_016
+    beat_type: spatial
+    scene: Office succulent on the sill, rain-light behind it. Quiet green.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Recurring ritual object re-anchored
+  - panel_id: ep013_017
+    beat_type: micro
+    scene: |-
+      Breakroom door opens at the edge of frame; a coworker enters, witnesses them for a beat, leaves again. Mira and Devon unmoved — the cost of being seen is small and survived.
+    intent: Standing Friday claims space without announcement
+  - panel_id: ep013_018
+    beat_type: micro
+    scene: Devon rinses his mug and sets it on a specific corner of the drying mat.
+    intent: Unspoken claim on next week
+  - panel_id: ep013_019
+    beat_type: micro
+    scene: Mira's eyes catch the placement, then look away. Small breath. No comment.
+    intent: Protects Devon's gesture with silence — same discretion she once received
+  - panel_id: ep013_020
+    beat_type: spatial
+    scene: Wide empty breakroom after they leave. Two rinsed mugs on the mat. Rain still writing.
+    silence_confirmed: true
+    dialogue_lines: []
+    intent: Leave mid-habit, not mid-lesson
+  - panel_id: ep013_021
+    beat_type: spatial
+    scene: Cut — evening. Mira's kitchen. Home kettle. One cup. Succulent on the sill.
+    intent: Private register still exists beside the shared Friday
+  - panel_id: ep013_022
+    beat_type: micro
+    scene: Close on Mira's hand around the home cup. Jade pendant still. Steady.
+    narrator_caption_by_locale:
+      en_US: I didn't make a plan. The second cup just showed up.
+    dialogue_lines: []
+  - panel_id: ep013_023
+    beat_type: standard
+    scene: Final small panel — typographic only, cream background.
+    narrator_caption_by_locale:
+      en_US: 'End of Episode 13 — Wheel Two opens: Two Cups'
+    dialogue_lines: []
+notes:
+  arc_position: Episode 13 — first detailed episode of wheel_02 / cycle_04_the_standing_friday. Follows
+    ep_012's articulated coffee. Proves the invitation survives a second week without reteaching.
+    Autumn rain is the only conflict.
+  iteration_trace: |-
+    Lane 11 pilot — REVISE round 1 after Stage A BLOCKED (modern_object_does_not_change_conflict). Added belonging-pressure / choice / keep-desire / ritual / witness-cost signals into opening action. Round 0 draft existed; this is the process payoff evidence.
+  continuity_callbacks: '- Kettle/tea through-line continues (breakroom + home bookend)
+
+    - Jade pendant visible but untouched (no reteaching)
+
+    - Succulent continuity (office sill)
+
+    - Devon thread from ep_011/012; mug placement foreshadows standing habit'
+  doctrinal_anchor_ahjan: Teacher never named. Practice generalizes across people by repetition and
+    silence, not by restating curriculum. Caption is observational, not emotion-label.
