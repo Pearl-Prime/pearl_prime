@@ -1,0 +1,110 @@
+# Social Media TTS — plain-text prep (NO SSML) — Mandarin, Singapore (zh-SG)
+# Authority: artifacts/research/social_media_tts_text_prep_cjk6_2026-07-24/REPORT.md
+#            Extends social_media_tts_text_prep_zh_CN.yaml directly — Singapore
+#            Mandarin uses the same Simplified script and shares Mainland
+#            Mandarin's polyphone (多音字) handling (per Lane 2 pack brief).
+#            This is genuinely the SMALLEST-delta locale of the six: unlike
+#            zh-TW (script + accent mismatch vs the generic "zh" model) or
+#            zh-HK (different language entirely), zh-SG's phonetic risk
+#            surface is close to zh-CN's out of the box. What differs is
+#            REGISTER, not pronunciation.
+# Engine target: CosyVoice2 (self-hosted), cosyvoice2_language: "zh"
+#   (config/tts/locale_voice_routing.yaml). Fallback: edge_tts
+#   zh-CN-XiaoxiaoNeural (there is no distinct zh-SG Edge-TTS voice —
+#   Singapore Mandarin routes through the Mainland fallback voice too).
+#
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms.
+# Date: 2026-07-24 · Lane 2 (Pearl_Research) · SOCIALTTS-L2
+# Acceptance layer: RESEARCHED + CONFIG-EXISTS — NOT proven until Lane 4 voices
+# real audio. Nothing in this file is EXECUTED-REAL.
+schema_version: 2
+locale: zh-SG
+cosyvoice2_language: zh
+script: simplified
+
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden
+  sentence_end_chars: ["。", "！", "？"]
+  sentence_boundary_requires_space: false
+  default_terminal_punct: "。"
+
+punctuation_pacing:
+  aggressiveness: mild
+  rules:
+    - id: colon_to_period
+      pattern: '(?<!\d)[：:](?!\d)\s*'
+      replace: '。'
+      enabled: true
+    - id: semicolon_to_period
+      pattern: '[；;]\s*'
+      replace: '。'
+      enabled: true
+    - id: emdash_to_period
+      pattern: '\s*[—–]\s*'
+      replace: '。'
+      enabled: true
+    - id: strip_parentheses
+      pattern: '\s*(\([^)]*\)|（[^）]*）)'
+      replace: ''
+      enabled: true
+    - id: strip_ascii_decorative_quotes
+      pattern: '["]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_run
+      pattern: '。{2,}'
+      replace: '。'
+      enabled: true
+  guidance_not_automated:
+    - "Register, not pronunciation, is what differs from zh-CN: neutral/pragmatic tone per config/tts/locale_voice_routing.yaml zh-SG notes. This is a voice-direction and word-choice matter for Lane 3, not a text-prep rule."
+    - "Singlish-influenced sentence particles (啊/嘛/啦/咯 etc.) are not expected in this formal wellness/social copy; if Lane 3 output surfaces them, they use the same characters and readings as standard Mandarin particles — no special handling needed."
+
+homograph_and_trap_rewrites:
+  # Identical risk profile to zh-CN — reuse both zh_CN.yaml fixes directly.
+  - id: kanhu_to_zhaohu
+    description: "Same rationale as zh-CN base: 看护 → 照护 sidesteps the kàn/kān polyphone."
+    pattern: '看护'
+    replace: '照护'
+    enabled: true
+  - id: er_ge_to_liang_ge
+    pattern: '二个'
+    replace: '两个'
+    enabled: true
+
+speakable_expansions:
+  - id: genz_zh
+    pattern: '\bGen Z\b'
+    replace: 'Z世代'
+    enabled: true
+  - id: burnout_zh
+    pattern: '\bburnout\b'
+    replace: '职业倦怠'
+    enabled: true
+  - id: rn_to_huli
+    pattern: '\bRN\b'
+    replace: '护士'
+    enabled: true
+
+do_not_blind_replace:
+  - "了"
+  - "的"
+  - "着"
+  - "还"
+  - "为"
+  - "种"
+  - "重"
+  - "长"
+  - "过"
+  - "上"
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing

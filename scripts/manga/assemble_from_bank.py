@@ -184,9 +184,27 @@ def validate_manifest(manifest: dict[str, Any]) -> list[str]:
     canvas = manifest["canvas"]
     if not (isinstance(canvas.get("width"), int) and isinstance(canvas.get("height"), int)):
         errors.append("canvas.width/height must be integers")
+    sb_ref = manifest.get("arc_storyboard_ref")
+    if sb_ref is not None and not isinstance(sb_ref, str):
+        errors.append("arc_storyboard_ref must be a string path")
     for i, panel in enumerate(manifest["panels"]):
         pid = panel.get("panel_id", f"<panels[{i}]>")
         layers = panel.get("layers") or []
+        # Storyboard-hint block (MANGA_ARC_STORYBOARD_CONTRACT.md §"Storyboard
+        # consumption"): optional, but when present it must carry the contract's
+        # hard-rule-1 minimum — non-empty story_move + visual_proof (≥8 chars).
+        storyboard = panel.get("storyboard")
+        if storyboard is not None:
+            if not isinstance(storyboard, dict):
+                errors.append(f"{pid}: storyboard must be a mapping when present")
+            else:
+                for req_key in ("story_move", "visual_proof"):
+                    val = storyboard.get(req_key)
+                    if not isinstance(val, str) or len(val.strip()) < 8:
+                        errors.append(
+                            f"{pid}: storyboard.{req_key} must be a non-empty "
+                            "string (≥8 chars) — arc storyboard hard rule 1"
+                        )
         has_structural_plan = bool(
             panel.get("structural_plan") is not None or panel.get("structural_plan_path")
         )
@@ -1116,7 +1134,7 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
         all_records.extend(records)
 
         if grammar_report is not None:
-            gate_reports.append({
+            report_row: dict[str, Any] = {
                 "panel_id": grammar_report.panel_id,
                 "shot_type": grammar_report.shot_type,
                 "passed": grammar_report.passed,
@@ -1125,7 +1143,12 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
                     {"gate": g.gate, "severity": g.severity.value, "message": g.message}
                     for g in grammar_report.gates
                 ],
-            })
+            }
+            # Storyboard-hint carry-through: the board's story_move/visual_proof
+            # travel with the gate report so audits can trace panel → plan.
+            if isinstance(panel.get("storyboard"), dict):
+                report_row["storyboard"] = panel["storyboard"]
+            gate_reports.append(report_row)
 
         final_path = out_path
         if bubbles and (panel.get("dialogue") or panel.get("narrator_caption") or panel.get("sfx")):
@@ -1157,6 +1180,11 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
     prov = {
         "manifest": str(manifest_path),
         "manifest_sha256": _sha256(manifest_path),
+        **(
+            {"arc_storyboard_ref": manifest["arc_storyboard_ref"]}
+            if manifest.get("arc_storyboard_ref")
+            else {}
+        ),
         "series_id": manifest["series_id"],
         "panels": len(manifest["panels"]),
         "layers_total": len(all_records),

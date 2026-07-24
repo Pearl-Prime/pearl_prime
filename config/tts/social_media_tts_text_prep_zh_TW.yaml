@@ -1,0 +1,180 @@
+# Social Media TTS — plain-text prep (NO SSML) — Mandarin, Taiwan (zh-TW)
+# Authority: artifacts/research/social_media_tts_text_prep_cjk6_2026-07-24/REPORT.md
+#            Extends social_media_tts_text_prep_zh_CN.yaml (base Mandarin
+#            punctuation/polyphone method) with Taiwan-specific pronunciation
+#            deltas. Translation itself (Traditional-script, Taiwan word
+#            choice) is Lane 3's job and Claude-only per CLAUDE.md — this file
+#            only specs pronunciation, not word choice.
+# Engine target: CosyVoice2 (self-hosted), cosyvoice2_language: "zh"
+#   (config/tts/locale_voice_routing.yaml). Fallback: edge_tts zh-TW-HsiaoChenNeural.
+#
+# *** STRUCTURAL RISK (read before Lane 4 ships zh-TW audio) ***
+# locale_voice_routing.yaml sets zh-TW's cosyvoice2_language to the SAME code
+# ("zh") as zh-CN and zh-SG. CosyVoice2 very likely has ONE generic Mandarin
+# phonetic model behind that code, with no guarantee it applies Taiwan-
+# specific lexicalized readings (e.g. 和="hàn" in Taiwan vs "hé" on the
+# mainland — Quora/mandarinhq.com sourced, see REPORT.md). Edge-TTS, by
+# contrast, ships a genuinely separate zh-TW-HsiaoChenNeural voice with
+# Taiwan readings baked in. RECOMMENDATION: Lane 4 A/B CosyVoice2("zh") vs
+# Edge-TTS(zh-TW-HsiaoChenNeural) specifically on the lexicalized-difference
+# words below before shipping zh-TW as CosyVoice2-primary; fall back to
+# Edge-TTS for zh-TW if CosyVoice2 defaults to Mainland readings on listen.
+# This mirrors why zh-HK hard-pins cosyvoice2_language to "yue" with an
+# Edge-TTS fallback noted for the same reason.
+#
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms.
+# Date: 2026-07-24 · Lane 2 (Pearl_Research) · SOCIALTTS-L2
+# Acceptance layer: RESEARCHED + CONFIG-EXISTS — NOT proven until Lane 4 voices
+# real audio. The A/B above is explicitly NOT run by this ruleset; that is
+# Lane 4's job, not text-prep's.
+schema_version: 2
+locale: zh-TW
+cosyvoice2_language: zh
+script: traditional
+# Traditional-only input is a hard precondition for this ruleset — reuse the
+# existing calibrated detector rather than re-deriving one:
+#   scripts/ci/zh_tw_simplified_charset.py (frozen s2t-changes AND
+#   non-Big5-encodable charset)
+#   scripts/ci/check_zh_tw_simplified_contamination.py (the CI gate)
+# Run that check on the translated atom BEFORE this text-prep layer runs;
+# this file does not re-implement Simplified-contamination detection.
+simplified_contamination_check: scripts/ci/check_zh_tw_simplified_contamination.py
+
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden
+  sentence_end_chars: ["。", "！", "？"]
+  sentence_boundary_requires_space: false
+  default_terminal_punct: "。"
+
+punctuation_pacing:
+  aggressiveness: mild
+  rules:
+    - id: colon_to_period
+      pattern: '(?<!\d)[：:](?!\d)\s*'
+      replace: '。'
+      enabled: true
+    - id: semicolon_to_period
+      pattern: '[；;]\s*'
+      replace: '。'
+      enabled: true
+    - id: emdash_to_period
+      pattern: '\s*[—–]\s*'
+      replace: '。'
+      enabled: true
+    - id: strip_parentheses
+      pattern: '\s*(\([^)]*\)|（[^）]*）)'
+      replace: ''
+      enabled: true
+    - id: strip_ascii_decorative_quotes
+      pattern: '["]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_run
+      pattern: '。{2,}'
+      replace: '。'
+      enabled: true
+  guidance_not_automated:
+    - "The Mainland neutral-tone (輕聲) that appears frequently in mainland speech is comparatively rare in careful Taiwan Mandarin; this is an acoustic-model concern for the TW voice/model choice, not fixable in text."
+    - "Taiwan Mandarin generally omits the mainland trailing 兒化 'r' coloring — irrelevant here since 儿化 already isn't written in formal translated copy (see zh_CN.yaml guidance)."
+
+homograph_and_trap_rewrites:
+  # Inherits the zh-CN base list's caution: single-character regex
+  # disambiguation is not reliable — see zh_CN.yaml header. The items below
+  # are ADDITIONAL to (not instead of) the zh_CN.yaml base list; Lane 4
+  # should apply zh_CN's kanhu_to_zhaohu / er_ge_to_liang_ge rules for zh-TW
+  # too (same characters, same risk), plus these TW-specific deltas.
+  - id: kanhu_to_zhaohu
+    description: "Same rationale as zh-CN base: 看护/看護 → 照护/照護 sidesteps the kàn/kān polyphone entirely. Traditional-script form."
+    pattern: '看護'
+    replace: '照護'
+    enabled: true
+  - id: er_ge_to_liang_ge
+    pattern: '二個'
+    replace: '兩個'
+    enabled: true
+  - id: he_conjunction_to_yu
+    description: >
+      TAIWAN-SPECIFIC (headline fix). 和 as the conjunction "and" is
+      lexically read hàn in Taiwan vs hé on the mainland (mandarinhq.com,
+      confirmed via Quora consensus — see REPORT.md sources). Since
+      cosyvoice2_language is the SAME generic "zh" code for zh-CN/zh-TW/
+      zh-SG, there is no engine-level guarantee it applies the Taiwan
+      reading. Rather than gamble on the model's TW-lexicon coverage,
+      REWRITE the conjunction to 與 (yǔ) — formal, unambiguous, single
+      reading, and standard/idiomatic in written Traditional Chinese. This
+      sidesteps the hé/hàn ambiguity entirely instead of trying to force a
+      pronunciation the text layer cannot control.
+      Guarded against firing inside common 和-compounds (peace/harmony/
+      reconciliation senses) where 和 is NOT the "and" conjunction and must
+      not be touched.
+    pattern: '(?<!溫)(?<!隨)(?<!附)和(?!平|諧|解|好|睦|氣|善|緩|風|尚)'
+    replace: '與'
+    enabled: true
+    _known_limitation: "regex-guarded, not a parser — spot-QA any 和-compound not on the guard list before shipping a new atom wave"
+  - id: laji_watchlist_flag
+    description: >
+      垃圾 (garbage/trash) — reported as lèsè in Taiwan vs lājī on the
+      mainland, though usage is reportedly shifting among younger Taiwan
+      speakers toward lājī too. LOWER CONFIDENCE than the 和 finding (could
+      not independently verify current prevalence in this research pass) —
+      flagged for Lane 4's A/B listen, no forced text substitution applied
+      since there is no synonym-swap that sidesteps it cleanly. Not enabled.
+    pattern: '垃圾'
+    replace: '垃圾'
+    enabled: false
+  - id: jing_neck_watchlist_flag
+    description: >
+      頸 (neck) — the prompt pack's own working hypothesis flagged this as a
+      possible jǐng/gěng reading difference. Could not independently confirm
+      a specific Taiwan-vs-Mainland reading split in this research pass;
+      treat as an UNVERIFIED watch-list item pending Lane 4 audio check, not
+      a confirmed finding. 脖子 is the more common colloquial word in both
+      registers and avoids the question if it fits the copy.
+    pattern: '頸'
+    replace: '頸'
+    enabled: false
+
+speakable_expansions:
+  - id: genz_zh
+    pattern: '\bGen Z\b'
+    replace: 'Z世代'
+    enabled: true
+  - id: burnout_zh
+    pattern: '\bburnout\b'
+    replace: '職業倦怠'
+    enabled: true
+  - id: rn_to_huli
+    pattern: '\bRN\b'
+    replace: '護理師'
+    enabled: true   # 護理師 is the Taiwan-standard professional title (vs mainland 护士)
+
+do_not_blind_replace:
+  - "了"
+  - "的"
+  - "著"
+  - "還"
+  - "為"
+  - "種"
+  - "重"
+  - "長"
+  - "過"
+  - "上"
+  - "溫和"   # gentle — 和-compound guard
+  - "和平"   # peace — 和-compound guard
+  - "和諧"   # harmony — 和-compound guard
+  - "和解"   # reconciliation — 和-compound guard
+  - "和好"   # make up/reconcile — 和-compound guard
+  - "隨和"   # easygoing — 和-compound guard
+  - "附和"   # echo/parrot — 和-compound guard
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing

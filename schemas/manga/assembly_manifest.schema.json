@@ -12,6 +12,10 @@
     "episode_id": { "type": "string" },
     "manifest_id": { "type": "string" },
     "notes": { "type": "string" },
+    "arc_storyboard_ref": {
+      "type": "string",
+      "description": "Optional repo-relative path to the arc_storyboard_plan that drove this manifest's page/panel decisions (MANGA_ARC_STORYBOARD_CONTRACT.md §Storyboard consumption). Carried into the assembler's provenance table."
+    },
     "canvas": {
       "type": "object",
       "required": ["width", "height"],
@@ -41,6 +45,20 @@
           "structural_plan": {
             "type": "object",
             "description": "Optional inline verified structural plan envelope consumed by the assembler for structural-first L2 placement."
+          },
+          "storyboard": {
+            "type": "object",
+            "required": ["story_move", "visual_proof"],
+            "additionalProperties": true,
+            "properties": {
+              "story_move": { "type": "string", "minLength": 8 },
+              "visual_proof": { "type": "string", "minLength": 8 },
+              "information_delta": { "type": "string" },
+              "story_function": { "type": "string" },
+              "beat_role": { "type": "string" },
+              "page_id": { "type": "string" }
+            },
+            "description": "Optional arc-storyboard hint block carried from the arc_storyboard_plan panel that planned this panel (story_move + visual_proof mandatory when present — arc storyboard hard rule 1). Metadata only: composition grammar gates G1–G6 still gate assembly."
           },
           "layers": {
             "type": "array",
