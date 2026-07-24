@@ -1,0 +1,761 @@
+# mc_endurance_checklists.yaml — machine-usable MC endurance checklists per canonical genre.
+#
+# status: unwired
+#   (Lane 07 of the 2026-07-24 manga process uplift pack wires this into
+#   config/manga/story_excellence_gates.yaml + excellence_gate.py and flips this
+#   marker. Until then check_manga_wiring.py treats this file as declared-unwired.)
+#
+# SOURCE OF TRUTH: artifacts/research/manga_mc_endurance_study_2026-07-24.md
+#   Every item carries a `source:` anchor of the form
+#   "mc_endurance_study#<family>/<section>" pointing at that study's family section
+#   (sections: exemplars, traits(=1), endurance(=2), bond(=3), anti(=4), wellness(=5)).
+#
+# SCHEMA (stable keys — Lane 07 consumes these; do not rename):
+#   schema_version: "1.0"
+#   families:
+#     <canonical_genre_id>:            # exactly the 25 ids of canonical_genre_list.yaml,
+#                                      # matching story_excellence_gates.yaml::genre_core_evidence
+#       must_have:                     # list of {item, source} — MC fails the genre without these
+#       should_have:                   # list of {item, source} — strong-default expectations
+#       anti_patterns:                 # list of {item, source} — presence = defect
+#       endurance_mechanics:           # list of {item, source} — what carries 100+ episodes
+#   Each `item` is ONE testable sentence (a reviewer or gate can answer yes/no
+#   against a series plan / chapter script).
+#
+# Consumers (target): phoenix_v4/manga/story_quality/excellence_gate.py (Lane 07),
+#   Pearl_Editor QA pass (Lane 07 §Editor pass), series planners (advisory).
+
+schema_version: "1.0"
+status: unwired
+last_updated: "2026-07-24"
+source_study: artifacts/research/manga_mc_endurance_study_2026-07-24.md
+
+families:
+
+  battle:
+    must_have:
+      - item: "The MC states a concrete external goal that is unreachable within any single arc."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "The MC has one moral competence already maxed at series start while physical competence is visibly inadequate."
+        source: "mc_endurance_study#battle/traits"
+      - item: "Every power gain is paid for with a visible, persistent cost on the MC's body or bonds."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "The MC loses the first meaningful fight of the arc before winning the last one."
+        source: "mc_endurance_study#battle/bond"
+    should_have:
+      - item: "The MC carries a merchandisable visual token and a repeatable verbal signature."
+        source: "mc_endurance_study#battle/bond"
+      - item: "Each arc adds one bonded ally whose own wound can host a future arc."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Witness characters (rival/team) carry the emotional read of the MC's fights instead of MC interior monologue."
+        source: "mc_endurance_study#battle/bond"
+    anti_patterns:
+      - item: "Power escalation continues past the established conceptual ceiling."
+        source: "mc_endurance_study#battle/anti"
+      - item: "A villain is defeated by persuasion speech alone more than once in the series."
+        source: "mc_endurance_study#battle/anti"
+      - item: "The meet-lose-train-win formula repeats a fourth time with no structural variation."
+        source: "mc_endurance_study#battle/anti"
+      - item: "A second mentor dies primarily to escalate the MC's emotion."
+        source: "mc_endurance_study#battle/anti"
+    endurance_mechanics:
+      - item: "Renewable goal ladder: each arc mints a reachable sub-goal under the unreachable series goal."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Relationship engine: team accretion supplies future arc hosts."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Cost-accounted capability ladder keeps stakes meaningful at any power level."
+        source: "mc_endurance_study#battle/endurance"
+      - item: "Serial arcs deliver at least one complete fight beat per volume."
+        source: "mc_endurance_study#battle/endurance"
+
+  romance:
+    must_have:
+      - item: "The MC has one quietly excellent domain competence outside the relationship that the love interest is first to see accurately."
+        source: "mc_endurance_study#romance/traits"
+      - item: "Every volume delivers a net proximity gain after its misunderstanding or setback."
+        source: "mc_endurance_study#romance/bond"
+      - item: "The series ending is planned to rhyme with the MC's self-authorship, not an institution beat."
+        source: "mc_endurance_study#romance/traits"
+      - item: "Long runs are chained as multiple relationship arcs or life-stages, never one stretched courtship."
+        source: "mc_endurance_study#romance/endurance"
+    should_have:
+      - item: "A vocation or domain-competence B-plot ladder renews independently of relationship states."
+        source: "mc_endurance_study#romance/endurance"
+      - item: "Rivals receive rehabilitation arcs and convert into ensemble members."
+        source: "mc_endurance_study#romance/endurance"
+      - item: "Comedic release beats appear every few pages against the earnest register."
+        source: "mc_endurance_study#romance/traits"
+    anti_patterns:
+      - item: "The central confession lands before the delay engine has banked at least one full arc."
+        source: "mc_endurance_study#romance/anti"
+      - item: "The love interest's interiority stays fully withheld past mid-run."
+        source: "mc_endurance_study#romance/anti"
+      - item: "Physical aggression is framed as romantic."
+        source: "mc_endurance_study#romance/anti"
+      - item: "The MC has no interests or life outside the romance."
+        source: "mc_endurance_study#romance/anti"
+    endurance_mechanics:
+      - item: "Delay engine converts relationship states in small irreversible increments."
+        source: "mc_endurance_study#romance/endurance"
+      - item: "Domain-competence ladder (vocation roles) supplies renewable rungs beyond scarce romance states."
+        source: "mc_endurance_study#romance/endurance"
+      - item: "Rival rotation converts threats into cast."
+        source: "mc_endurance_study#romance/endurance"
+
+  healing:
+    must_have:
+      - item: "Each chapter completes one small encounter or exchange even at minimal stakes."
+        source: "mc_endurance_study#healing/anti"
+      - item: "The MC's feelings stay un-named on the page; emotion lands belatedly or somatically."
+        source: "mc_endurance_study#healing/bond"
+      - item: "The MC holds one small, deep domain competence exercised calmly per episode."
+        source: "mc_endurance_study#healing/traits"
+      - item: "Conflict arrives as weather or time, never as a villain to defeat."
+        source: "mc_endurance_study#healing/traits"
+    should_have:
+      - item: "A recurring ritual object anchors calm compositions across episodes."
+        source: "mc_endurance_study#healing/bond"
+      - item: "The MC functions as a professional visitor to other people's stories, refreshing cast per chapter."
+        source: "mc_endurance_study#healing/endurance"
+      - item: "Volumes are structured as seasonal cycles with return-with-difference, not escalation."
+        source: "mc_endurance_study#healing/endurance"
+    anti_patterns:
+      - item: "Chapters pass with no completed exchange (contemplative pacing that stagnates)."
+        source: "mc_endurance_study#healing/anti"
+      - item: "Feelings are explicitly named or therapized on the page."
+        source: "mc_endurance_study#healing/anti"
+      - item: "Arc-scale stakes are imported to force escalation."
+        source: "mc_endurance_study#healing/anti"
+    endurance_mechanics:
+      - item: "Episodic world-supplied encounters renew indefinitely without goal pressure."
+        source: "mc_endurance_study#healing/endurance"
+      - item: "Slow serial sediment (grief/time understanding) accumulates beneath episodic surface."
+        source: "mc_endurance_study#healing/endurance"
+      - item: "Regret cadence: about one softly-landing missed-connection beat per episode."
+        source: "mc_endurance_study#healing/bond"
+
+  dark_fantasy:
+    must_have:
+      - item: "The MC's wound is the active story engine, not backstory decoration."
+        source: "mc_endurance_study#dark_fantasy/traits"
+      - item: "Each stage costs the MC something that is never returned."
+        source: "mc_endurance_study#dark_fantasy/endurance"
+      - item: "The antagonist has coherent reasons a reader could genuinely consider."
+        source: "mc_endurance_study#dark_fantasy/traits"
+      - item: "Warmth pockets (campfire beats) recur against the grave register."
+        source: "mc_endurance_study#dark_fantasy/traits"
+    should_have:
+      - item: "A carried object doubles as the wound made visible."
+        source: "mc_endurance_study#dark_fantasy/bond"
+      - item: "The MC carries or protects someone, generating chapters between battles."
+        source: "mc_endurance_study#dark_fantasy/endurance"
+      - item: "The MC's stated want is designed to expire and convert into a discovered need."
+        source: "mc_endurance_study#dark_fantasy/endurance"
+    anti_patterns:
+      - item: "Violence or misery appears without thematic consequence (grimdark for shock)."
+        source: "mc_endurance_study#dark_fantasy/anti"
+      - item: "Suffering is shown in extended detail for reader reaction rather than character consequence."
+        source: "mc_endurance_study#dark_fantasy/anti"
+      - item: "The MC cannot be genuinely diminished (protagonist immunity)."
+        source: "mc_endurance_study#dark_fantasy/anti"
+      - item: "A clean battle-genre victory erases previously paid costs."
+        source: "mc_endurance_study#dark_fantasy/anti"
+    endurance_mechanics:
+      - item: "Irreversibility ladder: reader investment compounds in accumulated scar tissue."
+        source: "mc_endurance_study#dark_fantasy/endurance"
+      - item: "Want-to-need conversion lets the MC survive the premise expiring."
+        source: "mc_endurance_study#dark_fantasy/endurance"
+      - item: "Small appetites keep escalation meaningful at any power level."
+        source: "mc_endurance_study#dark_fantasy/endurance"
+
+  sports:
+    must_have:
+      - item: "The MC is visibly worse than rivals at fundamentals early, with one freak asset."
+        source: "mc_endurance_study#sports/traits"
+      - item: "The MC loses meaningful matches on a recurring cadence, and at least one beloved arc ends in a loss."
+        source: "mc_endurance_study#sports/bond"
+      - item: "Every capability gain is earned inside drill, choke, or match — never granted."
+        source: "mc_endurance_study#sports/wellness"
+      - item: "Rivalry functions as love language with witness structure, not enmity."
+        source: "mc_endurance_study#sports/traits"
+    should_have:
+      - item: "Opponents borrow one arc of interiority each (losing-team POV)."
+        source: "mc_endurance_study#sports/endurance"
+      - item: "In-match time-dilated monologue is the interiority spike zone."
+        source: "mc_endurance_study#sports/bond"
+      - item: "Jersey number and named signature move anchor the MC visually and verbally."
+        source: "mc_endurance_study#sports/bond"
+    anti_patterns:
+      - item: "The MC never loses a meaningful match (undefeated syndrome)."
+        source: "mc_endurance_study#sports/anti"
+      - item: "Battle-genre superpowers dissolve the sport's physics."
+        source: "mc_endurance_study#sports/anti"
+      - item: "A timeskip advances the MC's career without paying development panels."
+        source: "mc_endurance_study#sports/anti"
+      - item: "The team exists only to serve the MC's growth."
+        source: "mc_endurance_study#sports/anti"
+    endurance_mechanics:
+      - item: "The bracket ladder (tournament to pro to world) renews opponents and stakes indefinitely."
+        source: "mc_endurance_study#sports/endurance"
+      - item: "Opponent-as-one-arc-protagonist refreshes emotional stakes without changing the MC."
+        source: "mc_endurance_study#sports/endurance"
+      - item: "Physical-ceiling realism (aging, injury) fuels late-run material."
+        source: "mc_endurance_study#sports/endurance"
+
+  workplace:
+    must_have:
+      - item: "The MC is genuinely competent at the depicted work, with professional detail that survives expert readers."
+        source: "mc_endurance_study#workplace/traits"
+      - item: "The gap between office-face language and interior caption is visible in every chapter."
+        source: "mc_endurance_study#workplace/bond"
+      - item: "The institution stays plausibly survivable, never a cartoon villain."
+        source: "mc_endurance_study#workplace/anti"
+    should_have:
+      - item: "A recurring after-hours honesty zone (izakaya, karaoke, night office) hosts the real conversations."
+        source: "mc_endurance_study#workplace/bond"
+      - item: "Promotion, transfer, or project rotation renews the social geometry per arc."
+        source: "mc_endurance_study#workplace/endurance"
+    anti_patterns:
+      - item: "The MC wins every meeting or is never overruled (fantasy-competence drift)."
+        source: "mc_endurance_study#workplace/anti"
+      - item: "Burnout is played only as gag with no accumulating cost ledger."
+        source: "mc_endurance_study#workplace/anti"
+      - item: "Doctrine arrives in HR-seminar voice instead of from a peer-rank body."
+        source: "mc_endurance_study#workplace/wellness"
+    endurance_mechanics:
+      - item: "The org chart is the ladder: rank and role changes renew the premise with the same MC."
+        source: "mc_endurance_study#workplace/endurance"
+      - item: "Colleague ensemble legitimately churns via transfers and hires."
+        source: "mc_endurance_study#workplace/endurance"
+      - item: "Each project or quarter is a complete arc slot."
+        source: "mc_endurance_study#workplace/endurance"
+
+  mystery:
+    must_have:
+      - item: "Every clue the solution needs is shown to the reader before the reveal (fair play)."
+        source: "mc_endurance_study#mystery/anti"
+      - item: "The MC's deductive competence is offset by a social or physical constraint that never fully lifts."
+        source: "mc_endurance_study#mystery/traits"
+      - item: "The frozen serial question advances only a few panels per volume."
+        source: "mc_endurance_study#mystery/endurance"
+    should_have:
+      - item: "The MC routinely fails at the personal frame even while solving every case."
+        source: "mc_endurance_study#mystery/bond"
+      - item: "A signature deduction pose or prop recurs as the visual token."
+        source: "mc_endurance_study#mystery/bond"
+      - item: "Case difficulty escalates in place of power escalation."
+        source: "mc_endurance_study#mystery/endurance"
+    anti_patterns:
+      - item: "The reveal depends on evidence the reader never saw."
+        source: "mc_endurance_study#mystery/anti"
+      - item: "The serial question is spent too fast, or stalls past reader patience with zero movement."
+        source: "mc_endurance_study#mystery/anti"
+      - item: "The detective is never socially or emotionally wrong (smug infallibility)."
+        source: "mc_endurance_study#mystery/anti"
+      - item: "A case is solved by unearned intuition instead of method."
+        source: "mc_endurance_study#mystery/wellness"
+    endurance_mechanics:
+      - item: "Case-of-the-week units renew indefinitely while MC identity stays deliberately stable."
+        source: "mc_endurance_study#mystery/endurance"
+      - item: "A rationed frozen spine serializes loyalty without spending the premise."
+        source: "mc_endurance_study#mystery/endurance"
+      - item: "If the serial question IS the whole engine, the series is planned to complete, not endure."
+        source: "mc_endurance_study#mystery/endurance"
+
+  horror:
+    must_have:
+      - item: "The dread-source keeps a fixed visual signature that is never fully explained."
+        source: "mc_endurance_study#horror/bond"
+      - item: "The MC survives rather than wins; encounters leave permanent marks."
+        source: "mc_endurance_study#horror/bond"
+      - item: "Domestic banality is staged around the wrongness so the wrongness stays legible."
+        source: "mc_endurance_study#horror/traits"
+    should_have:
+      - item: "The series keeps a recurring anchor (entity, town, bond) across rotating victims."
+        source: "mc_endurance_study#horror/endurance"
+      - item: "Somatic narration (breath, skin, freeze) carries the fear, not gore."
+        source: "mc_endurance_study#horror/bond"
+      - item: "If comedy is braided in, at least one thread withholds its release."
+        source: "mc_endurance_study#horror/anti"
+    anti_patterns:
+      - item: "The entity is fully explained or constantly visible (dread collapse)."
+        source: "mc_endurance_study#horror/anti"
+      - item: "Gore substitutes for spatial or social wrongness."
+        source: "mc_endurance_study#horror/anti"
+      - item: "Pure victim carousel with no recurring anchor."
+        source: "mc_endurance_study#horror/anti"
+      - item: "Exposure-therapy language names the turn-toward on the page."
+        source: "mc_endurance_study#horror/wellness"
+    endurance_mechanics:
+      - item: "Anthology-with-anchor: victims rotate, the dread-source is the serial asset."
+        source: "mc_endurance_study#horror/endurance"
+      - item: "Bonded-wrongness serial: the MC-entity relationship deepens instead of resolving."
+        source: "mc_endurance_study#horror/endurance"
+      - item: "Containment failure widens what the wrongness touches each arc."
+        source: "mc_endurance_study#horror/endurance"
+
+  essay:
+    must_have:
+      - item: "The MC is allowed to be wrong, petty, or complicit on the page."
+        source: "mc_endurance_study#essay/traits"
+      - item: "The work is planned as a bounded piece (2-13 volumes) that ends, under a persistent persona."
+        source: "mc_endurance_study#essay/endurance"
+      - item: "Interiority uses a symbol-substitution or avatar device that licenses honesty."
+        source: "mc_endurance_study#essay/bond"
+    should_have:
+      - item: "Micro-failure recurs constantly and lands as recognition, not spectacle."
+        source: "mc_endurance_study#essay/bond"
+      - item: "Misery is composed with visible craft, never raw wallowing."
+        source: "mc_endurance_study#essay/anti"
+    anti_patterns:
+      - item: "A tidy transformation or cure arc is imposed on the form."
+        source: "mc_endurance_study#essay/anti"
+      - item: "The persona is inconsistent across sequels."
+        source: "mc_endurance_study#essay/anti"
+      - item: "Reflection hardens into sermon."
+        source: "mc_endurance_study#essay/wellness"
+    endurance_mechanics:
+      - item: "Endurance lives at the persona level: readers follow the serialized self across bounded works."
+        source: "mc_endurance_study#essay/endurance"
+      - item: "Sequels are minted per life-event, not by extending one open serial."
+        source: "mc_endurance_study#essay/endurance"
+
+  slice_of_life:
+    must_have:
+      - item: "Each chapter completes a routine-with-variation loop around a concrete object or errand."
+        source: "mc_endurance_study#slice_of_life/endurance"
+      - item: "Nothing of real value is ever permanently lost (safety contract)."
+        source: "mc_endurance_study#slice_of_life/bond"
+      - item: "Hobby or domain detail is accurate enough for its expert audience."
+        source: "mc_endurance_study#slice_of_life/anti"
+    should_have:
+      - item: "The cast stays a small ensemble; new faces rotate through, not in."
+        source: "mc_endurance_study#slice_of_life/anti"
+      - item: "If the cast is frozen-time, it stays frozen; if aging, the calendar is honest."
+        source: "mc_endurance_study#slice_of_life/anti"
+    anti_patterns:
+      - item: "Imported drama introduces a real threat into the safe frame."
+        source: "mc_endurance_study#slice_of_life/anti"
+      - item: "Mindfulness vocabulary appears on the page."
+        source: "mc_endurance_study#slice_of_life/wellness"
+      - item: "Cast bloat dissolves the small-ensemble grammar."
+        source: "mc_endurance_study#slice_of_life/anti"
+    endurance_mechanics:
+      - item: "Frozen-time episodics reset the world each chapter (infinite present)."
+        source: "mc_endurance_study#slice_of_life/endurance"
+      - item: "Hobby rotation supplies destinations, gear, and seasons as episode seeds."
+        source: "mc_endurance_study#slice_of_life/endurance"
+
+  fantasy_adventure:
+    must_have:
+      - item: "World rules stay consistent once established (fair play for magic)."
+        source: "mc_endurance_study#fantasy_adventure/anti"
+      - item: "The MC's competence is earned or paid for, not only system-granted."
+        source: "mc_endurance_study#fantasy_adventure/traits"
+      - item: "The quest carries a belonging need underneath the stated goal."
+        source: "mc_endurance_study#fantasy_adventure/traits"
+      - item: "The MC can lose, and the world does not exist only to admire them."
+        source: "mc_endurance_study#fantasy_adventure/anti"
+    should_have:
+      - item: "Each new region functions as a complete arc with its own rule object or threshold."
+        source: "mc_endurance_study#fantasy_adventure/endurance"
+      - item: "Party members accrete with wounds that can host future arcs."
+        source: "mc_endurance_study#fantasy_adventure/endurance"
+      - item: "A class or artifact signature anchors the MC visually."
+        source: "mc_endurance_study#fantasy_adventure/bond"
+    anti_patterns:
+      - item: "Power-fantasy sameness: system-granted strength with no failure cadence."
+        source: "mc_endurance_study#fantasy_adventure/anti"
+      - item: "Party members function as inventory."
+        source: "mc_endurance_study#fantasy_adventure/anti"
+      - item: "The quest goal drifts without a deliberate want-to-need conversion."
+        source: "mc_endurance_study#fantasy_adventure/anti"
+      - item: "The new world explicitly diagnoses the MC."
+        source: "mc_endurance_study#fantasy_adventure/wellness"
+    endurance_mechanics:
+      - item: "The map is the ladder: world-building depth is the renewable resource."
+        source: "mc_endurance_study#fantasy_adventure/endurance"
+      - item: "Quantified system ladders give legible per-chapter deltas but need a planned ceiling."
+        source: "mc_endurance_study#fantasy_adventure/endurance"
+      - item: "Quest-expiry conversion re-walks the same map at emotional depth."
+        source: "mc_endurance_study#fantasy_adventure/endurance"
+
+  food:
+    must_have:
+      - item: "The dish sits between people: every chapter feeds a specific human gap."
+        source: "mc_endurance_study#food/traits"
+      - item: "Recipe and technique detail is accurate enough to cook from."
+        source: "mc_endurance_study#food/anti"
+      - item: "A taste-reaction interiority beat lands per chapter."
+        source: "mc_endurance_study#food/bond"
+    should_have:
+      - item: "A customer or companion slot refreshes the cast each chapter."
+        source: "mc_endurance_study#food/endurance"
+      - item: "Reaction intensity stays proportionate (not every dish is cosmic)."
+        source: "mc_endurance_study#food/anti"
+    anti_patterns:
+      - item: "Reaction inflation makes every dish a cosmic event."
+        source: "mc_endurance_study#food/anti"
+      - item: "Ingredient lectures displace the human story."
+        source: "mc_endurance_study#food/anti"
+      - item: "Nutrition-sermon voice addresses the reader."
+        source: "mc_endurance_study#food/wellness"
+    endurance_mechanics:
+      - item: "Dish-per-chapter is a pure renewable episodic; the menu is infinite."
+        source: "mc_endurance_study#food/endurance"
+      - item: "Competitive variants borrow sports brackets at faster exhaustion; plan bounded."
+        source: "mc_endurance_study#food/endurance"
+
+  family:
+    must_have:
+      - item: "The household, not one person, functions as the protagonist unit."
+        source: "mc_endurance_study#family/traits"
+      - item: "Domestic micro-events resolve within-chapter with zero permanent losses."
+        source: "mc_endurance_study#family/bond"
+      - item: "Sincerity spikes are present and rationed against the comic register."
+        source: "mc_endurance_study#family/anti"
+    should_have:
+      - item: "A child-figure supplies the unfiltered read on every situation."
+        source: "mc_endurance_study#family/bond"
+      - item: "The occasion calendar (school events, holidays, relatives) drives episodes."
+        source: "mc_endurance_study#family/endurance"
+    anti_patterns:
+      - item: "A frozen-age cast is aged up mid-run."
+        source: "mc_endurance_study#family/anti"
+      - item: "The central secret or tension is resolved (engine spent)."
+        source: "mc_endurance_study#family/anti"
+      - item: "Parenting-manual voice appears on the page."
+        source: "mc_endurance_study#family/wellness"
+    endurance_mechanics:
+      - item: "Frozen-age episodics renew domestic material forever."
+        source: "mc_endurance_study#family/endurance"
+      - item: "Secret-keeping engines generate per-chapter comedy while the real serial advances glacially."
+        source: "mc_endurance_study#family/endurance"
+
+  procedural:
+    must_have:
+      - item: "The MC is a fixed instrument: method and competence do not arc."
+        source: "mc_endurance_study#procedural/traits"
+      - item: "The client or case of the week carries the chapter's emotional variance."
+        source: "mc_endurance_study#procedural/endurance"
+      - item: "A professional code makes the MC's choices legible without conventional morality."
+        source: "mc_endurance_study#procedural/traits"
+    should_have:
+      - item: "The MC's interior stays withheld; readers bond with the guarantee."
+        source: "mc_endurance_study#procedural/bond"
+      - item: "Failures are near-absent and become legendary when they occur."
+        source: "mc_endurance_study#procedural/bond"
+      - item: "Comic procedurals absorb current-era topicality to stay fresh."
+        source: "mc_endurance_study#procedural/endurance"
+    anti_patterns:
+      - item: "The fixed instrument is given a backstory-resolution arc."
+        source: "mc_endurance_study#procedural/anti"
+      - item: "Cases vary without client variance (sameness despite new jobs)."
+        source: "mc_endurance_study#procedural/anti"
+      - item: "The instrument-MC self-discloses doctrine."
+        source: "mc_endurance_study#procedural/wellness"
+    endurance_mechanics:
+      - item: "Pure case engine at maximum MC stasis: the invariance is the product."
+        source: "mc_endurance_study#procedural/endurance"
+      - item: "Client-of-the-week interiority transfer refreshes emotion without touching the MC."
+        source: "mc_endurance_study#procedural/endurance"
+
+  historical:
+    must_have:
+      - item: "The MC carries an ethic the period does not supply, tested once per arc."
+        source: "mc_endurance_study#historical/traits"
+      - item: "Period objects and rank distances are accurate; no modern casual spacing or speech."
+        source: "mc_endurance_study#historical/anti"
+      - item: "Battle losses and political reversals are real; history protects no one."
+        source: "mc_endurance_study#historical/bond"
+    should_have:
+      - item: "Feeling is pushed into material detail rather than modern introspection."
+        source: "mc_endurance_study#historical/bond"
+      - item: "Named historical figures still meet their recorded fates."
+        source: "mc_endurance_study#historical/anti"
+    anti_patterns:
+      - item: "The vow or ethic never costs anything (decor vow)."
+        source: "mc_endurance_study#historical/anti"
+      - item: "Great-man drift gives the hero plot armor at the ensemble's expense."
+        source: "mc_endurance_study#historical/anti"
+      - item: "Anachronistic therapy vocabulary appears."
+        source: "mc_endurance_study#historical/wellness"
+    endurance_mechanics:
+      - item: "Recorded history supplies a pre-written arc ladder with built-in stakes."
+        source: "mc_endurance_study#historical/endurance"
+      - item: "Vow-arc spine retests the era-ahead ethic each arc."
+        source: "mc_endurance_study#historical/endurance"
+      - item: "Generational or household handoff renews cast within period."
+        source: "mc_endurance_study#historical/endurance"
+
+  comedy:
+    must_have:
+      - item: "The MC has one fixed comic engine that never resolves."
+        source: "mc_endurance_study#comedy/traits"
+      - item: "A straight-man axis exists for every chaos agent."
+        source: "mc_endurance_study#comedy/anti"
+      - item: "The MC loses every scheme without paying permanent cost."
+        source: "mc_endurance_study#comedy/bond"
+    should_have:
+      - item: "Formats rotate (parody, scheme, guest) while the engine stays fixed."
+        source: "mc_endurance_study#comedy/endurance"
+      - item: "Sincerity arcs are rare and rationed to re-charge the comedy."
+        source: "mc_endurance_study#comedy/endurance"
+      - item: "A fixed silhouette plus one absurd attribute anchors the MC."
+        source: "mc_endurance_study#comedy/bond"
+    anti_patterns:
+      - item: "The same formula repeats without format rotation or topicality refresh."
+        source: "mc_endurance_study#comedy/anti"
+      - item: "Sincerity flooding flips the contract."
+        source: "mc_endurance_study#comedy/anti"
+      - item: "Jokes punch down."
+        source: "mc_endurance_study#comedy/anti"
+      - item: "The joke stops for the lesson."
+        source: "mc_endurance_study#comedy/wellness"
+    endurance_mechanics:
+      - item: "Format rotation and era-topicality absorption sustain a fixed gag engine for decades."
+        source: "mc_endurance_study#comedy/endurance"
+      - item: "A deep straight-man bench keeps one joke fresh by rotating who suffers it."
+        source: "mc_endurance_study#comedy/endurance"
+
+  cultivation:
+    must_have:
+      - item: "Every tier change resets the social hierarchy and re-runs the underdog loop at new scale."
+        source: "mc_endurance_study#cultivation/endurance"
+      - item: "Face and reputation stakes drive conflict alongside raw power."
+        source: "mc_endurance_study#cultivation/traits"
+      - item: "The MC keeps a readable mortal self as power grows."
+        source: "mc_endurance_study#cultivation/anti"
+    should_have:
+      - item: "Strategic-ledger interiority (resources, risks, techniques) is the monologue register."
+        source: "mc_endurance_study#cultivation/bond"
+      - item: "Resource-acquisition arcs fill inter-breakthrough chapters without bloating."
+        source: "mc_endurance_study#cultivation/endurance"
+    anti_patterns:
+      - item: "Tier inflation proceeds without social re-anchoring."
+        source: "mc_endurance_study#cultivation/anti"
+      - item: "JP-style moral clarity is imported over face-culture logic."
+        source: "mc_endurance_study#cultivation/anti"
+      - item: "Doctrine disputes the ambition frame instead of grounding it."
+        source: "mc_endurance_study#cultivation/wellness"
+    endurance_mechanics:
+      - item: "Nested realm ladders make progression explicitly infinite."
+        source: "mc_endurance_study#cultivation/endurance"
+      - item: "Failure cadence intentionally decays over the run (early humiliations, late momentum)."
+        source: "mc_endurance_study#cultivation/bond"
+
+  mecha:
+    must_have:
+      - item: "The pilot's nervous-system state visibly affects machine performance."
+        source: "mc_endurance_study#mecha/traits"
+      - item: "The pilot physically pays for every sortie (body cost, not just hardware damage)."
+        source: "mc_endurance_study#mecha/anti"
+      - item: "The MC is permitted psychological fragility without narrative punishment."
+        source: "mc_endurance_study#mecha/traits"
+    should_have:
+      - item: "The pilot-machine bond deepens across the run like a relationship ladder."
+        source: "mc_endurance_study#mecha/endurance"
+      - item: "Cockpit monologue under pressure is the interiority spike zone."
+        source: "mc_endurance_study#mecha/bond"
+      - item: "Command structures are morally compromised but not cartoonish."
+        source: "mc_endurance_study#mecha/traits"
+    anti_patterns:
+      - item: "The unbothered ace: fragility is removed from the pilot."
+        source: "mc_endurance_study#mecha/anti"
+      - item: "Hardware spectacle carries chapters with no body cost."
+        source: "mc_endurance_study#mecha/anti"
+      - item: "The machine fixes the feeling before the body does."
+        source: "mc_endurance_study#mecha/wellness"
+    endurance_mechanics:
+      - item: "Endurance is franchise-generational: bounded pilot stories inside a persistent world and hardware lineage."
+        source: "mc_endurance_study#mecha/endurance"
+      - item: "Sortie/mission structure supplies chapter units; escalation is stakes and hardware, not power-ups."
+        source: "mc_endurance_study#mecha/endurance"
+
+  sci_fi_cyberpunk:
+    must_have:
+      - item: "System stakes exist beneath the aesthetic (no neon wallpaper)."
+        source: "mc_endurance_study#sci_fi_cyberpunk/anti"
+      - item: "The MC's identity question (am I still me?) recurs and stays unresolved through the run."
+        source: "mc_endurance_study#sci_fi_cyberpunk/bond"
+      - item: "Victories cost identity ground (pyrrhic cadence)."
+        source: "mc_endurance_study#sci_fi_cyberpunk/bond"
+    should_have:
+      - item: "The MC reads the world's code: system-literacy is the competence."
+        source: "mc_endurance_study#sci_fi_cyberpunk/traits"
+      - item: "Each invention or system-rung lands with a visible societal delta."
+        source: "mc_endurance_study#sci_fi_cyberpunk/endurance"
+    anti_patterns:
+      - item: "Techno-lecture exposition replaces story."
+        source: "mc_endurance_study#sci_fi_cyberpunk/anti"
+      - item: "The identity question is resolved early."
+        source: "mc_endurance_study#sci_fi_cyberpunk/anti"
+      - item: "Digital-detox sermon: doctrine leaves the body."
+        source: "mc_endurance_study#sci_fi_cyberpunk/wellness"
+    endurance_mechanics:
+      - item: "The family renews at franchise/iteration level; single runs are bounded works."
+        source: "mc_endurance_study#sci_fi_cyberpunk/endurance"
+      - item: "Science/tech ladders are the family's best pure-serial engine."
+        source: "mc_endurance_study#sci_fi_cyberpunk/endurance"
+
+  supernatural_everyday:
+    must_have:
+      - item: "Each chapter's spirit brings a complete human-shaped wound."
+        source: "mc_endurance_study#supernatural_everyday/endurance"
+      - item: "A debt or inventory spine (names, contracts, prices) meters the serial."
+        source: "mc_endurance_study#supernatural_everyday/endurance"
+      - item: "The MC's loneliness among humans persists; competence lives on the spirit side."
+        source: "mc_endurance_study#supernatural_everyday/traits"
+      - item: "Some spirits cannot be saved; bittersweet release replaces victory."
+        source: "mc_endurance_study#supernatural_everyday/bond"
+    should_have:
+      - item: "Festivals, seasons, and thresholds supply the occasion calendar."
+        source: "mc_endurance_study#supernatural_everyday/endurance"
+      - item: "The spirit's grief rhymes with the MC's own unspoken grief."
+        source: "mc_endurance_study#supernatural_everyday/bond"
+    anti_patterns:
+      - item: "Escalating exorcism combat converts the family into battle genre."
+        source: "mc_endurance_study#supernatural_everyday/anti"
+      - item: "The debt spine is spent too fast."
+        source: "mc_endurance_study#supernatural_everyday/anti"
+      - item: "The spirit is named as a psychological condition on the page."
+        source: "mc_endurance_study#supernatural_everyday/wellness"
+    endurance_mechanics:
+      - item: "Spirit-of-the-week plus rationed debt spine is the genre's proven 20-year engine."
+        source: "mc_endurance_study#supernatural_everyday/endurance"
+      - item: "Found-family accretion on the human side paces the belonging need glacially."
+        source: "mc_endurance_study#supernatural_everyday/endurance"
+
+  school:
+    must_have:
+      - item: "The MC holds one pocket of mastery invisible to the school's status system."
+        source: "mc_endurance_study#school/traits"
+      - item: "The school calendar (terms, festivals, exams) drives arc structure."
+        source: "mc_endurance_study#school/endurance"
+      - item: "The series is planned against the graduation ceiling (bounded, braided, or cohort-rotating)."
+        source: "mc_endurance_study#school/endurance"
+    should_have:
+      - item: "Adolescent over-reading of small social signals is the interiority surface."
+        source: "mc_endurance_study#school/bond"
+      - item: "One big rationed set-piece failure lands per term."
+        source: "mc_endurance_study#school/bond"
+      - item: "If a wellness condition is the premise, progress is on-page and incremental."
+        source: "mc_endurance_study#school/endurance"
+    anti_patterns:
+      - item: "Teenagers speak with adult-processed insight (register break)."
+        source: "mc_endurance_study#school/anti"
+      - item: "The cast refuses graduation past reader patience (frozen third year)."
+        source: "mc_endurance_study#school/anti"
+      - item: "Bullying is aestheticized without cost."
+        source: "mc_endurance_study#school/anti"
+      - item: "A counselor scene names the doctrine."
+        source: "mc_endurance_study#school/wellness"
+    endurance_mechanics:
+      - item: "The occasion ladder renews exactly as long as enrollment lasts; plan the ceiling."
+        source: "mc_endurance_study#school/endurance"
+      - item: "Braiding a second engine (sports bracket, romance ladder) extends runs past the calendar."
+        source: "mc_endurance_study#school/endurance"
+
+  memoir:
+    must_have:
+      - item: "Narrating-self and experiencing-self are kept visibly distinct."
+        source: "mc_endurance_study#memoir/traits"
+      - item: "The persona indicts itself before anyone else."
+        source: "mc_endurance_study#memoir/traits"
+      - item: "The work is planned as a bounded life-quarter, not an open serial."
+        source: "mc_endurance_study#memoir/endurance"
+    should_have:
+      - item: "A self-caricature avatar (style gap included) licenses the honesty."
+        source: "mc_endurance_study#memoir/bond"
+      - item: "Failure is continuous and survived into testimony."
+        source: "mc_endurance_study#memoir/bond"
+    anti_patterns:
+      - item: "A triumphant-recovery arc falsifies the form."
+        source: "mc_endurance_study#memoir/anti"
+      - item: "The memoir prosecutes others (score-settling breaks the confessional license)."
+        source: "mc_endurance_study#memoir/anti"
+      - item: "The narrating persona is conflated with the brand teacher."
+        source: "mc_endurance_study#memoir/wellness"
+    endurance_mechanics:
+      - item: "The trusted narrating voice, not the serial, is the endurance asset; sequels per life-event."
+        source: "mc_endurance_study#memoir/endurance"
+
+  social_issue:
+    must_have:
+      - item: "The MC (often a carrying dyad) seeks a concrete institutional outcome per arc."
+        source: "mc_endurance_study#social_issue/traits"
+      - item: "Institutional defeats are frequent and wins are partial (no fantasy fixes)."
+        source: "mc_endurance_study#social_issue/bond"
+      - item: "The affected person is a person, never a lesson-object."
+        source: "mc_endurance_study#social_issue/anti"
+    should_have:
+      - item: "Documents, forms, and thresholds anchor the visual grammar."
+        source: "mc_endurance_study#social_issue/bond"
+      - item: "A veteran navigator figure models the path without speeches."
+        source: "mc_endurance_study#social_issue/wellness"
+    anti_patterns:
+      - item: "The issue becomes a poster instead of a story."
+        source: "mc_endurance_study#social_issue/anti"
+      - item: "Inspiration-porn framing."
+        source: "mc_endurance_study#social_issue/anti"
+      - item: "A cure ending."
+        source: "mc_endurance_study#social_issue/anti"
+      - item: "The story becomes the brand's pamphlet."
+        source: "mc_endurance_study#social_issue/wellness"
+    endurance_mechanics:
+      - item: "The institution's life-stage ladder (diagnosis, school, employment, independence) supplies arcs."
+        source: "mc_endurance_study#social_issue/endurance"
+      - item: "Each volume completes one institutional encounter while the family arc advances."
+        source: "mc_endurance_study#social_issue/endurance"
+
+  graphic_medicine:
+    must_have:
+      - item: "Medical facts are accurate (hard contract; expert and affected readers)."
+        source: "mc_endurance_study#graphic_medicine/anti"
+      - item: "The body remains the protagonist's home, never the enemy."
+        source: "mc_endurance_study#graphic_medicine/anti"
+      - item: "Education rides character stakes, never lecture."
+        source: "mc_endurance_study#graphic_medicine/anti"
+    should_have:
+      - item: "Crises recur honestly, including losses the reader will feel."
+        source: "mc_endurance_study#graphic_medicine/bond"
+      - item: "Care artifacts (chart, IV, uniform) anchor the visual grammar with patient agency."
+        source: "mc_endurance_study#graphic_medicine/bond"
+    anti_patterns:
+      - item: "False-hope arcs."
+        source: "mc_endurance_study#graphic_medicine/anti"
+      - item: "Diagnosis language aimed at the reader."
+        source: "mc_endurance_study#graphic_medicine/wellness"
+    endurance_mechanics:
+      - item: "The body is an infinite case generator (pathogen/organ-system rotation; spinoffs per system)."
+        source: "mc_endurance_study#graphic_medicine/endurance"
+      - item: "Clinician-witness and patient-narrator lanes are bounded prestige forms; anthropomorphic ensemble is the scalable one."
+        source: "mc_endurance_study#graphic_medicine/endurance"
+
+  battle_internal:
+    must_have:
+      - item: "A visible gauge or token converts internal state into an escalation clock."
+        source: "mc_endurance_study#battle_internal/endurance"
+      - item: "Losing control never wins cost-free."
+        source: "mc_endurance_study#battle_internal/anti"
+      - item: "The arc moves suppression toward integration, never conquest of self."
+        source: "mc_endurance_study#battle_internal/traits"
+      - item: "Each arc's antagonist mirrors one mis-relation to the inner force."
+        source: "mc_endurance_study#battle_internal/endurance"
+    should_have:
+      - item: "The placid surface vs roaring interior gap is drawn, not narrated."
+        source: "mc_endurance_study#battle_internal/bond"
+      - item: "Internal losses (eruptions, harmful suppressions) land about once per arc and convert to integration progress."
+        source: "mc_endurance_study#battle_internal/bond"
+    anti_patterns:
+      - item: "Philosophy monologue replaces dramatized struggle."
+        source: "mc_endurance_study#battle_internal/anti"
+      - item: "The gauge resets arbitrarily (honesty break)."
+        source: "mc_endurance_study#battle_internal/anti"
+      - item: "Therapy vocabulary attaches to the gauge."
+        source: "mc_endurance_study#battle_internal/wellness"
+    endurance_mechanics:
+      - item: "The gauge charges and discharges differently per arc as the renewable clock."
+        source: "mc_endurance_study#battle_internal/endurance"
+      - item: "Integration completes the engine: plan mid-length, or braid a second engine for 100+ episodes."
+        source: "mc_endurance_study#battle_internal/endurance"

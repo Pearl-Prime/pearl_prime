@@ -34,6 +34,8 @@ Readers are adults (primarily 25–55, skewing female in recent years but histor
 - **Emotional arc per volume:** Baseline → gentle disruption (a letter, a stranger, a storm) → attunement → return to baseline *at a slightly deeper resonance*. This is the canonical iyashikei curve; a volume that does not return to baseline has failed the form.
 - **Cast density:** Solo lead with a small rotating supporting cast (3–6 recurring), plus per-chapter guests. True ensembles are rare.
 
+**2026-07-24 addendum (MC endurance study):** the register's current commercial proof — Frieren (*Frieren: Beyond Journey's End*, Oricon series #1 2026-H1, 35M+; grief-carrier with quest-expiry structure) and Maomao (*The Apothecary Diaries*, 45M; healing×mystery blend raising the register's ceiling). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §healing.
+
 ## 6. Failure modes
 1. Raising stakes — introducing a threat that requires resolution breaks the contract.
 2. Emotional labeling in caption ("She felt lonely") where a silent panel of the empty chair would do.
