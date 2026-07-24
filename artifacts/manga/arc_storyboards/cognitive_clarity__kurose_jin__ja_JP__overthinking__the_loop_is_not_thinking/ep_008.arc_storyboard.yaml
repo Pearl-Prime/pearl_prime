@@ -1,0 +1,300 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_008
+genre_id: psychological_thriller
+title: The Registry in the Fog Town — Episode 8 (English gloss)
+logline: Ren lies about being sick and takes the ferry to a fog-bound coastal town tied to the anomalous
+  name, where a registry clerk confirms one detail and flatly denies another, leaving him with a real
+  answer and a wrong one that look identical from the same page.
+stakes_now: Ren has just promised his manager a month of clean behavior, and this episode opens with him
+  breaking that promise immediately by lying about illness to leave the city entirely.
+stakes_end: The trip yields a genuine historical connection and a mistaken assumption in the same
+  breath, resolves nothing, and ends with Ren already planning a return — the case has gained a second
+  geography.
+genre_cadence:
+- ferry_established_new_setting
+- sick_day_lie_timestamped
+- town_structure_established_mutual_visibility
+- registry_office_request_made
+- clerk_confirms_and_denies_in_one_breath
+- mirrored_read_photograph_contradicts_expectation
+- town_watching_motif_introduced
+- ren_presses_for_more
+- clerk_names_a_reluctant_further_source
+- fog_pressure_environmental_close
+- watched_feeling_follows_through_town
+- call_to_vessel_withholds_location
+- vessel_catches_the_lie_unknowingly
+- second_lie_layered_on_first
+- photograph_reread_uncertain_confirmation
+- return_to_ferry_unresolved
+- future_return_already_planned
+- notes_updated_on_the_ferry
+- town_recedes_into_fog
+- episode_card
+page_turn_promises:
+- page_id: ep_008_p01
+  promise: Will the registry clerk's records settle the anomaly once and for all, or does her answer
+    confirm one thing while denying another in a way that leaves Ren more entangled than before?
+- page_id: ep_008_p02
+  promise: Does Ren's call to Saeki risk exposing the sick-day lie, and does leaving the fog town today
+    mean the case is closed here, or does he already know he is coming back?
+panels:
+- panel_id: ep008_001
+  page_id: ep_008_p01
+  story_function: ferry_established_new_setting
+  story_move: Establishes the fog-bound coastal town as a new setting where the town's structure itself —
+    every house visible to every other — makes surveillance and visibility a built-in environmental
+    condition.
+  visual_proof: Wide shot of a ferry approaching a small coastal town through fog, houses visibly
+    overlooking one another.
+  information_delta: Reader learns the story has left the city for the first time, and that this
+    location's architecture itself carries thematic weight.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_002
+  page_id: ep_008_p01
+  story_function: sick_day_lie_timestamped
+  story_move: A timestamped message shows Ren lied to his employer about being sick to make this trip,
+    directly defying the reprieve granted in episode seven.
+  visual_proof: Close insert on Ren's phone showing a sent message claiming illness, timestamped before
+    the ferry's departure.
+  information_delta: Reader learns Ren has escalated from irregular hours to an outright documented lie
+    to his employer.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_003
+  page_id: ep_008_p01
+  story_function: town_structure_established_mutual_visibility
+  story_move: Ren walks the quiet town, the visual grammar of interlocking windows and sightlines
+    establishing the setting's mutual-visibility structure before any character speaks.
+  visual_proof: Medium shot of Ren walking a narrow street, windows from multiple houses visibly angled
+    toward the same path.
+  information_delta: Reader absorbs the town's defining spatial trait before it becomes relevant to the
+    plot.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_004
+  page_id: ep_008_p01
+  story_function: registry_office_request_made
+  story_move: Ren makes a direct, specific request at the town registry office for records tied to the
+    anomalous name, escalating his investigation to an official local archive.
+  visual_proof: Medium shot of Ren speaking across a counter to the registry clerk, an old ledger between
+    them.
+  information_delta: Reader sees Ren's investigation reach a new institutional source outside his own
+    workplace.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_005
+  page_id: ep_008_p01
+  story_function: clerk_confirms_and_denies_in_one_breath
+  story_move: The clerk confirms the name's genuine historical presence in town while denying Ren's
+    assumption about its meaning, delivering a real hit and a wrong read from the identical source.
+  visual_proof: Medium shot of the clerk speaking carefully while turning pages in the old ledger.
+  information_delta: Reader receives the episode's central craft-bible-compliant beat — one truth and
+    one falsehood produced by the same evidence.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_006
+  page_id: ep_008_p01
+  story_function: mirrored_read_photograph_contradicts_expectation
+  story_move: The clerk produces an old photograph showing a person different from who Ren expected,
+    visually contradicting his working theory.
+  visual_proof: Close insert on an old photograph held by the clerk, a face visibly different from what
+    Ren anticipated.
+  information_delta: Reader sees concrete visual evidence that undercuts Ren's assumption without fully
+    disproving his larger theory.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_007
+  page_id: ep_008_p01
+  story_function: town_watching_motif_introduced
+  story_move: A neighboring curtain moves in the wind, introducing the sense of being watched inside the
+    town's mutual-visibility structure, foreshadowing the arc's later watcher/watched reversal.
+  visual_proof: Insert on a curtain shifting in a neighboring window, wind audible in the framing, no
+    figure confirmed behind it.
+  information_delta: Reader receives an early, ambiguous seed of the reversal that pays off in the
+    arc's final episodes.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_008
+  page_id: ep_008_p01
+  story_function: ren_presses_for_more
+  story_move: Ren refuses to accept the partial answer and presses the clerk for the full truth, showing
+    the compulsion's refusal to leave any thread hanging.
+  visual_proof: Close on Ren leaning forward across the counter, the photograph still in his hand.
+  information_delta: Reader sees Ren's investigation escalate past what the clerk originally offered to
+    share.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_009
+  page_id: ep_008_p01
+  story_function: clerk_names_a_reluctant_further_source
+  story_move: The clerk names one more person in town who could answer fully but warns she will be
+    unwilling, ending page one on a real, unresolved thread rather than a clean answer.
+  visual_proof: Medium shot of the clerk speaking carefully, her tone shifting toward caution.
+  information_delta: Reader gets a specific, named next step that the episode deliberately does not
+    resolve today.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_010
+  page_id: ep_008_p01
+  story_function: fog_pressure_environmental_close
+  story_move: Ren leaves the registry office into thickening fog, closing page one on an environmental
+    beat that visualizes the uncertainty of what he has just learned.
+  visual_proof: Wide shot of Ren exiting the registry office as fog visibly thickens over the town.
+  information_delta: Reader feels the episode's uncertainty rendered as weather rather than stated
+    outright.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep008_011
+  page_id: ep_008_p02
+  story_function: watched_feeling_follows_through_town
+  story_move: Ren feels observed as he walks through town, the mutual-visibility structure now
+    actively pressing on him rather than remaining background texture.
+  visual_proof: Medium shot of Ren walking past several windows, his posture visibly more guarded than
+    on arrival.
+  information_delta: Reader sees the watcher/watched seed continuing to develop across the episode.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_012
+  page_id: ep_008_p02
+  story_function: call_to_vessel_withholds_location
+  story_move: Ren calls Saeki for input but deliberately withholds his actual location, layering a
+    second deception on top of the sick-day lie.
+  visual_proof: Close on Ren speaking into his phone, his eyes on the fog rather than anything specific.
+  information_delta: Reader sees Ren actively managing what the vessel is allowed to know, escalating the
+    dishonesty pattern from episode two.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_013
+  page_id: ep_008_p02
+  story_function: vessel_catches_the_lie_unknowingly
+  story_move: Saeki's innocent question about Ren resting at home unknowingly exposes the gap in his
+    story, creating dramatic irony the reader catches before either character does.
+  visual_proof: Insert on Saeki's voice rendered in a phone-call dialogue bubble, her question plain and
+    caring.
+  information_delta: Reader recognizes the lie is closer to discovery than either character realizes.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_014
+  page_id: ep_008_p02
+  story_function: second_lie_layered_on_first
+  story_move: Ren answers Saeki with a second lie directly building on the first, compounding the
+    deception rather than correcting it.
+  visual_proof: Close on Ren's face delivering the reassurance, eyes still on the fog rather than
+    anything resembling home.
+  information_delta: Reader confirms the lie has now grown a second, self-reinforcing layer.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep008_015
+  page_id: ep_008_p02
+  story_function: photograph_reread_uncertain_confirmation
+  story_move: Ren rereads the photograph after the call, the same mirrored-misfire logic producing
+    another uncertain confirmation the reader is meant to hold with suspicion.
+  visual_proof: Close insert on Ren tilting the photograph at a different angle, his expression
+    suggesting a fresh but unverified conviction.
+  information_delta: Reader sees the instability of Ren's confidence rendered as a physical action, not
+    stated outright.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_016
+  page_id: ep_008_p02
+  story_function: return_to_ferry_unresolved
+  story_move: Ren returns to the ferry dock at evening with the central question still unresolved,
+    denying the episode any false sense of closure.
+  visual_proof: Wide shot of Ren walking back toward the ferry dock as fog deepens with evening.
+  information_delta: Reader confirms no resolution has been reached despite the day's real discoveries.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep008_017
+  page_id: ep_008_p02
+  story_function: future_return_already_planned
+  story_move: Ren mentally plans a return trip before he has even left, showing the case's geography has
+    now permanently expanded beyond the city.
+  visual_proof: Close on Ren boarding the ferry, his expression already calculating a future date.
+  information_delta: Reader learns this location is not a one-time detour but a new permanent site in
+    Ren's ongoing investigation.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep008_018
+  page_id: ep_008_p02
+  story_function: notes_updated_on_the_ferry
+  story_move: Ren adds today's registry visit to his notebook aboard the ferry, continuing the pattern of
+    filing every event, including today's lies, as case material.
+  visual_proof: Close insert on Ren's notebook open on the ferry railing, the clerk's words being added
+    to the margins.
+  information_delta: Reader sees the normalization pattern from earlier episodes continue unbroken.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep008_019
+  page_id: ep_008_p02
+  story_function: town_recedes_into_fog
+  story_move: The episode closes on the town disappearing into fog behind the departing ferry, a wordless
+    image of unresolved distance.
+  visual_proof: Wide shot from the ferry's stern showing the town fading into fog as the boat pulls away.
+  information_delta: Reader receives a clean visual close without narrative resolution.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep008_020
+  page_id: ep_008_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_008.yaml
+notes: 'Episode 8 of 12 in arc 1 (''obsession seed''). Realizes strategy_05 beats 2-3 (a genuine,
+  accurate read immediately shadowed by the same logic producing a wrong one) through the registry
+  clerk''s confirm-and-deny answer and the misread photograph. Setting: the fog-bound coastal town from
+  the strategy bank''s setting_pool, first and only use in this arc, chosen for its built-in
+  mutual-visibility structure that seeds the ep_011-012 watcher/watched reversal. This episode also
+  introduces the arc''s first outright institutional lie (a fabricated sick day) layered with a second,
+  interpersonal lie to Saeki, compounding the deception pattern established in ep_002.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'

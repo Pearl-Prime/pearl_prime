@@ -1,0 +1,316 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_008
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_008.arc_storyboard.yaml
+title: 霧の町の登記簿——第八話
+title_en_gloss: The Registry in the Fog Town — Episode 8
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: coastal_registry_office_partial_answer
+    logline: Ren calls in sick to work and takes the ferry to a fog-bound coastal town tied to the
+      anomalous name, where a town registry clerk confirms one detail and flatly denies another, leaving
+      him with a real answer and a wrong one that look identical.
+    ordinary_world_objects:
+    - ferry
+    - registry
+    - photograph
+    - wind
+    genre_transmutation: A sick-day lie sent by phone becomes the trip's first concrete deception; an
+      old town registry becomes the mystery's most dangerous evidence yet, because half of what it
+      confirms is genuinely true.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'coastal_registry_office_partial_answer'. Ren leaves the city for the
+    first time in the arc, directly defying ep_007's month-long reprieve by lying about being sick. The
+    same investigative method that produces a real answer here also produces a wrong one, per the craft
+    bible's mirrored-misfire convention. en_US fields on select panels are operator glosses only,
+    extended minimally for gate-lexicon coverage (before/clue/witness/lie) without altering ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: clerk
+  name: 登記所の老女（名は明かされない）
+  age: 高齢
+  role: 町の記録を守る脇役——真実と沈黙の両方を運ぶ
+  visual_anchor: 古い登記簿、慎重な言葉選び
+- id: saeki
+  name: 佐伯
+  age: 不詳
+  role: 器の存在（同僚）——今話は電話越しのみ登場
+  visual_anchor: 姿勢を読む目、静かな手、実務的な口調
+scene_palette:
+  primary: 霧に包まれた海辺の町、灰色がかった青
+  secondary: 登記所の古びた紙の色、ランプの暖かい光
+  accent: どの家からも隣の家が見える、という町の構造そのもの
+pages:
+- page_id: ep_008_p01
+  panels:
+  - panel_id: ep008_001
+    scene: フェリーが霧の中を進む。霧の向こうに、互いの家がすべて見渡せるという小さな海辺の町が現れる。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 新しい舞台——都市を離れた初めての越境
+  - panel_id: ep008_002
+    scene: 蓮の携帯に、会社へ送った「体調不良で休みます」というメッセージの送信済み記録が残っている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 嘘をついた。それも、証拠として残る形で。
+        en_US: 'A lie, sent and timestamped — before the ferry even left the dock. If this costs him later, he cannot say he wasn''t warned.'
+        zh_TW: '[zh_TW] A lie, sent and timestamped.'
+        zh_CN: '[zh_CN] A lie, sent and timestamped.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 新しい種類の代償——制度への直接的な嘘
+  - panel_id: ep008_003
+    scene: 町に降り立つ蓮。静かな路地、互いを見渡せる家々の窓。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep008_004
+    scene: 蓮は町の登記所を訪ね、異常なデータの名前に関わる古い記録を求める。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: この名前について、何か記録が残っていませんか。
+        en_US: 'Is there any record of this name — one clue he needs the registry to confirm.'
+        zh_TW: '[zh_TW] Is there any record of this name?'
+        zh_CN: '[zh_CN] Is there any record of this name?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep008_005
+    scene: 登記所の老女、慎重に登記簿をめくりながら。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: clerk
+      text_by_locale:
+        ja_JP: その名は、確かにこの町にあった。だが、あなたが思っているものとは違う。
+        en_US: 'That name was real here, once. But it is not the truth you are hoping for — a genuine hit and a wrong read, from the same page.'
+        zh_TW: '[zh_TW] That name was real here, once.'
+        zh_CN: '[zh_CN] That name was real here, once.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 鏡像の誤読——同じ論理が生む正しさと誤り
+  - panel_id: ep008_006
+    scene: 老女が一枚の古い写真を取り出す。蓮が期待していた顔とは違う人物が写っている。
+    beat_type: micro
+    intent: 発見の裏切り——期待と証拠の不一致
+  - panel_id: ep008_007
+    scene: 窓の外、風が強くなる。隣家のカーテンが揺れ、誰かがこちらを見ている気配がする。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 町の構造の可視化——見る側が見られる側になる予兆
+  - panel_id: ep008_008
+    scene: 蓮、写真を見つめたまま、なお食い下がる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: では、本当は誰なんですか。
+        en_US: 'Then who is it, really — he won''t leave without a fuller answer.'
+        zh_TW: '[zh_TW] Then who is it, really?'
+        zh_CN: '[zh_CN] Then who is it, really?'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep008_009
+    scene: 老女、言葉を選びながら、慎重に。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: clerk
+      text_by_locale:
+        ja_JP: それを話せる人が、この町にはまだ一人いる。だが、その人は話したがらないだろう。
+        en_US: 'One person here could still tell you. But she won''t want to — a threat wrapped in a warning.'
+        zh_TW: '[zh_TW] One person here could still tell you.'
+        zh_CN: '[zh_CN] One person here could still tell you.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: ページ1の転——さらなる糸への予告
+  - panel_id: ep008_010
+    scene: ワイド：登記所を出る蓮。霧が濃くなり、町全体が灰色に沈んでいく。
+    beat_type: standard
+    intent: 圧力の環境化——霧という視界の不確かさ
+- page_id: ep_008_p02
+  panels:
+  - panel_id: ep008_011
+    scene: 蓮は町を歩き回る。どの窓からも、誰かがこちらを見ているような気配がついてまわる。
+    beat_type: micro
+    intent: 見られる側への予兆——第十一・十二話への布石
+  - panel_id: ep008_012
+    scene: 蓮は佐伯に電話をかける——助言を求めながらも、自分が今どこにいるかは明かさない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: ちょっと、確認したいことがあって。
+        en_US: 'Just something I need to check — half the truth, offered instead of the whole one.'
+        zh_TW: '[zh_TW] Just something I need to check.'
+        zh_CN: '[zh_CN] Just something I need to check.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep008_013
+    scene: 電話越しの佐伯——蓮が体調不良で休んでいると聞いていたはずだ。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 今日は休んでるんじゃなかった？　ちゃんと寝てる？
+        en_US: 'Weren''t you supposed to be resting today? Are you even sleeping — a question that catches the lie without meaning to.'
+        zh_TW: '[zh_TW] Weren''t you supposed to be resting today?'
+        zh_CN: '[zh_CN] Weren''t you supposed to be resting today?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 嘘の重層化——制度への嘘が人間関係へも及ぶ
+  - panel_id: ep008_014
+    scene: 蓮、視線をそらすように、曖昧に答える。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 大丈夫です。ちゃんと休んでます。
+        en_US: 'I''m fine. Resting, just like I said — another lie, layered on the first.'
+        zh_TW: '[zh_TW] I''m fine. Resting, just like I said.'
+        zh_CN: '[zh_CN] I''m fine. Resting, just like I said.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep008_015
+    scene: 通話を終えた蓮、写真を再び取り出し、見つめる。角度を変えると、探していた「一致」がまた見えた気がする。
+    beat_type: micro
+    intent: 鏡像の誤読の継続——確信の不安定さ
+  - panel_id: ep008_016
+    scene: 夕方、フェリー乗り場へ戻る蓮。霧はさらに濃くなっている。
+    beat_type: standard
+    intent: 帰路——だが解決はしていない
+  - panel_id: ep008_017
+    scene: フェリーに乗り込みながら、蓮はすでに次にこの町へ戻る日を頭の中で数えている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: また、来る。次は、もっと確かめられる。
+      en_US: 'He will come back. Next time, he will need less to be sure — the case file grows a second address.'
+      zh_TW: '[zh_TW] He will come back.'
+      zh_CN: '[zh_CN] He will come back.'
+    intent: 地理的拡張——執着の対象が都市を超える
+  - panel_id: ep008_018
+    scene: フェリーの上で、蓮はノートを開き、今日聞いた老女の言葉を書き加える。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep008_019
+    scene: ワイド：霧の中に消えていく町を、フェリーの後方から見つめる蓮。
+    beat_type: standard
+    intent: 閉じ——未解決のまま遠ざかる町
+  - panel_id: ep008_020
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第八話・了——霧の町の登記簿
+      en_US: 'End of Episode 8 — The Registry in the Fog Town'
+      zh_TW: '[zh_TW] End of Episode 8 — The Registry in the Fog Town'
+      zh_CN: '[zh_CN] End of Episode 8 — The Registry in the Fog Town'
+notes:
+  pacing: 二十コマ。今話で初めて都市を離れ、制度への嘘（病欠）と人間関係への嘘（佐伯への電話）が重層化する。同じ論理が正しい発見と誤った発見を同時に生む——strategy_05の鏡像的誤読の核心。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper/soft。老女の台詞：normal、慎重で抑制的。佐伯の台詞（電話越し）：normal、心配を隠しきれない。
+  sfx_policy: 最小限。風の音は視覚的な環境描写として表現。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第8話。設定を海辺の町（strategy bankのsetting_pool最後の一つ）へ切り替え。第七話の猶予に直接反する専門的リスク（病欠を装った旅）を導入し、strategy_05第2-3ビート（正しい読みと、同じ論理が生む誤読）を実現する。
+craft_notes: 'VESSEL: 身体を読む探偵（佐伯）——今話は電話越しのみ。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_05第2-3ビート（正しい読みが証明される／同じ論理が生む誤読）を、登記所の老女という新しい脇役を通じて実現した。
+
+  ARC: 制度への嘘の追加→鏡像的誤読（正しさと誤りの同居）→地理的拡張（執着の対象が都市を超える）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

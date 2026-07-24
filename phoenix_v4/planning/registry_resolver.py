@@ -596,6 +596,107 @@ def _locale_canonical_path(slot_dir: Path, locale: Optional[str]) -> Path:
     return base
 
 
+def _stamp_locale_exercise_metadata(
+    locale_atoms: list[dict],
+    base_atoms: list[dict],
+) -> None:
+    """Give translated EXERCISE atoms the same practice/essay classification as
+    their English source counterpart (matched by ``atom_id``), in place.
+
+    Why this exists (zh-TW first-book gate failure, 2026-07-23 — see
+    ``artifacts/qa/zhtw_first_book_20260723/TRACE_SUMMARY.md``):
+    ``enrichment_select._is_practice_atom`` requires positive practice evidence
+    before treating an atom as practice-shaped — either explicit metadata
+    (``slot_type: exercise``) or an imperative/step-cue substring match against
+    a tuple of ~44 English markers (``"notice the "``, ``"step 1"``, ``"inhale"``,
+    ...). A faithfully translated EXERCISE atom (zh-TW, ja-JP, or any of the
+    other locales in ``config/localization/locale_registry.yaml``) is real,
+    correctly-shaped practice content but structurally can never contain an
+    English substring, so every translated EXERCISE atom was misclassified as
+    "not practice-shaped" and the production build fell through to the shared
+    English ``practice_library`` for every chapter — tripping the
+    ``EXERCISE-BANK-RESOLUTION-01`` gate for a reason unrelated to real coverage.
+
+    This is deliberately NOT "trust the directory" (blindly stamping every atom
+    under an ``EXERCISE/`` directory as practice-shaped): that would resurrect
+    the exact regression ``_is_practice_atom`` exists to catch — teaching-essay
+    content that was mistakenly filed under ``EXERCISE/`` (the
+    ``ahjan_EXERCISE_064_mined`` / "keen-sinoussi" incident, see
+    ``enrichment_select._is_practice_atom`` docstring) would then pass in every
+    locale, silently, forever.
+
+    Instead: translated EXERCISE banks are 1:1, atom_id-matched translations of
+    the English base bank (confirmed structurally — same ``## EXERCISE vNN``
+    headers, same order, same count, only the body prose differs). So a
+    translated atom is stamped ``metadata["slot_type"] = "exercise"`` **only**
+    when the English atom sharing its exact ``atom_id`` in the base
+    ``CANONICAL.txt`` already independently passes the same shape check
+    (numbered-step regex or English marker match) used for English content
+    today. An essay-shaped atom's English counterpart fails that check, so its
+    translation stays unstamped and correctly falls through to
+    ``practice_library`` in every locale, exactly as English essay atoms do
+    today. An atom with no English counterpart (translator added/renamed an
+    atom_id) is also left unstamped — fails safe.
+
+    The stamp is additive metadata only; it does not touch or re-validate the
+    translated atom's own content, so the residue filter
+    (``enrichment_select._has_residue_markers``, which runs first and reads the
+    atom's *own* content) still applies unchanged.
+    """
+    if not locale_atoms or not base_atoms:
+        return
+    # Lazy/function-local import: enrichment_select imports FROM this module at
+    # top level (registry_resolver -> enrichment_select would be circular if
+    # done at module scope). By the time this function actually runs, module
+    # init has completed, so this resolves cleanly either way.
+    from phoenix_v4.planning.enrichment_select import (
+        _NUMBERED_STEP_RE,
+        _PRACTICE_STEP_MARKERS,
+    )
+
+    base_by_id: dict[str, dict] = {}
+    for a in base_atoms:
+        if isinstance(a, dict):
+            aid = str(a.get("atom_id") or "").strip()
+            if aid:
+                base_by_id[aid] = a
+
+    for atom in locale_atoms:
+        if not isinstance(atom, dict):
+            continue
+        meta = atom.get("metadata")
+        if not isinstance(meta, dict):
+            meta = {}
+            atom["metadata"] = meta
+        if str(meta.get("slot_type") or "").strip().lower() in ("exercise", "practice"):
+            continue  # already explicitly declared by the translated atom itself
+
+        aid = str(atom.get("atom_id") or "").strip()
+        base_atom = base_by_id.get(aid)
+        if not base_atom:
+            continue
+        base_content = str(base_atom.get("content") or "").strip().lower()
+        if not base_content:
+            continue
+
+        base_meta = base_atom.get("metadata")
+        base_is_practice = False
+        if isinstance(base_meta, dict) and str(
+            base_meta.get("slot_type") or ""
+        ).strip().lower() in ("exercise", "practice"):
+            base_is_practice = True
+        elif _NUMBERED_STEP_RE.search(base_content):
+            base_is_practice = True
+        else:
+            for marker in _PRACTICE_STEP_MARKERS:
+                if marker in base_content:
+                    base_is_practice = True
+                    break
+
+        if base_is_practice:
+            meta["slot_type"] = "exercise"
+
+
 def _load_persona_atoms(
     persona_id: str,
     topic_id: str,
@@ -657,6 +758,19 @@ def _load_persona_atoms(
         parsed = _parse_canonical_txt(canonical, slot_type=slot_type_upper)
         if not parsed:
             continue
+        base_canonical = sub / "CANONICAL.txt"
+        if (
+            slot_type_upper == "EXERCISE"
+            and canonical != base_canonical
+            and base_canonical.exists()
+        ):
+            # Translated EXERCISE bank (locale != en-US and a locale variant
+            # exists): give each translated atom the same practice/essay
+            # classification as its atom_id-matched English source atom. See
+            # _stamp_locale_exercise_metadata docstring. English (canonical ==
+            # base_canonical) is never touched by this branch.
+            base_parsed = _parse_canonical_txt(base_canonical, slot_type=slot_type_upper)
+            _stamp_locale_exercise_metadata(parsed, base_parsed)
         if slot_type_upper in _KNOWN_SLOT_DIRS:
             atoms[slot_type_upper] = parsed
         else:
