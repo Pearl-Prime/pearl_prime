@@ -107,3 +107,295 @@ genres:
       - item: "Escalating exorcism combat converts the family into battle genre."
         source: "docs/research/manga_craft/supernatural_mystery.md#6"
         signal_any: ["exorcism combat", "spirit battle", "banish it with force", "fights the spirit", "final boss"]
+
+  # ── PILOT (Lane 07 stage 2) — the 6 existing-pass-fixture genres (calibration) ──
+  battle:
+    bible: docs/research/manga_craft/action_battle.md
+    story_elements_must:
+      - item: "The protagonist pursues a concrete external goal through trained, embodied effort — not a sudden power grant."
+        source: "docs/research/manga_craft/action_battle.md#3"
+        evidence_any: ["training", "train", "trained body", "body", "breath", "fist", "stance", "muscle", "spar", "sweat", "duel", "match"]
+      - item: "Every power/skill gain is paid for with a visible bodily or relational cost on the page."
+        source: "docs/research/manga_craft/action_battle.md#6"
+        evidence_any: ["blood", "bruise", "cost", "hurt", "injury", "collapse", "lungs", "price", "wound", "still standing"]
+      - item: "A rival, mentor, or team witnesses the fight and carries its emotional read — not MC interior monologue alone."
+        source: "docs/research/manga_craft/action_battle.md#5"
+        evidence_any: ["rival", "mentor", "team", "coach", "opponent", "crowd", "watches", "watching", "teammate"]
+      - item: "The stakes are made public (crowd / ranking / clip) so a loss costs standing."
+        source: "docs/research/manga_craft/action_battle.md#1"
+        evidence_any: ["crowd", "arena", "ranking", "clip", "stream", "public", "watch", "live"]
+    story_elements_should:
+      - item: "The series goal is unreachable in a single arc; each arc mints one reachable sub-goal beneath it."
+        source: "docs/research/manga_craft/action_battle.md#3"
+        evidence_any: ["goal", "next", "again", "one step", "arc", "someday"]
+    mc_items:
+      family: battle
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Fight dialogue is terse and tactical; ability mechanics are explained in training / pre-battle scenes, never monologued mid-fight."
+        source: "docs/research/manga_craft/action_battle.md#4"
+      - item: "The MC carries a repeatable verbal signature (a vow / catchphrase) that recurs across arcs."
+        source: "docs/research/manga_craft/action_battle.md#4"
+    panel_grammar_items:
+      - item: "Fight beats show kinetic action and impact, not consecutive talking-head reaction panels."
+        source: "docs/research/manga_craft/action_battle.md#2"
+        storyboard_signal_any: ["action", "impact", "kinetic", "motion", "strike", "movement", "clash"]
+      - item: "At least one complete fight / technique beat lands per chapter with a visible win or loss on the body."
+        source: "docs/research/manga_craft/action_battle.md#3"
+        storyboard_signal_any: ["fight", "technique", "hit", "blow", "clash", "match"]
+      - item: "Body-cost is visible in the art (sweat, blood, strain), not merely stated."
+        source: "docs/research/manga_craft/action_battle.md#2"
+        storyboard_signal_any: ["sweat", "blood", "strain", "bruise", "breath"]
+    failure_modes:
+      - item: "Power-creep escalation without a ceiling — endlessly raising power levels until stakes are meaningless."
+        source: "docs/research/manga_craft/action_battle.md#6"
+        signal_any: ["power level rises", "power-up again", "infinite power", "unlimited power", "over 9000", "endless power creep"]
+      - item: "Talk-no-jutsu — the villain is converted by a speech alone (stale on any repetition)."
+        source: "docs/research/manga_craft/action_battle.md#6"
+        signal_any: ["convinced the villain with words", "talked him into surrendering", "speech alone defeated", "redeemed by a monologue"]
+      - item: "Exposition dump mid-fight — a character monologues their own ability mechanics."
+        source: "docs/research/manga_craft/action_battle.md#6"
+        signal_any: ["let me explain my ability", "my power works like this", "as you can see my technique"]
+      - item: "Mentor death used as default emotional escalation more than once."
+        source: "docs/research/manga_craft/action_battle.md#6"
+        signal_any: ["another mentor dies", "mentor dies to make him stronger", "second mentor sacrifices himself"]
+
+  healing:
+    bible: docs/research/manga_craft/iyashikei_minimalism.md
+    story_elements_must:
+      - item: "Each chapter completes one small encounter or exchange at minimal stakes — no threat requiring resolution."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#6"
+        evidence_any: ["tea", "ritual", "bench", "walk", "vending", "sit", "stay", "quiet", "small", "receipt", "kettle"]
+      - item: "Conflict arrives as weather, time, or mood — never as a villain to defeat."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#3"
+        evidence_any: ["weather", "rain", "season", "quiet", "evening", "morning", "time", "warm", "cold", "walk"]
+      - item: "The MC's feelings stay un-named on the page; emotion lands somatically or belatedly."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#6"
+        evidence_any: ["breath", "slows", "quiet", "chest", "warm", "notice", "hands", "still", "costs him"]
+      - item: "A recurring ritual object or place anchors calm compositions across episodes."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#5"
+        evidence_any: ["ritual", "vending", "tea", "bench", "kettle", "phone", "receipt", "walk"]
+    story_elements_should:
+      - item: "Volumes are structured as seasonal cycles with return-with-difference, not escalation."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#3"
+        evidence_any: ["season", "cycle", "again", "return", "same bench", "routine"]
+    mc_items:
+      family: healing
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Dialogue is sparse; narration is an environmental correlative, never an emotion-label."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#4"
+      - item: "No more than three speech bubbles per panel — more is dialogue-drama grammar, not iyashikei."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#4"
+    panel_grammar_items:
+      - item: "Silent panels are 35-55%; the page breathes with irregular panel heights (never a six-equal-rectangle grid)."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#2"
+        storyboard_signal_any: ["silence", "silent", "wordless", "irregular", "breath"]
+      - item: "Environmental sfx are small (wind, water), never loud musical sfx."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#2"
+        storyboard_signal_any: ["wind", "water", "rustle", "soft", "ambient"]
+      - item: "A landscape / nature-bleed transition carries mood; a spread is for landscape, not conflict."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#2"
+        storyboard_signal_any: ["landscape", "nature", "bleed", "scenery", "sky"]
+    failure_modes:
+      - item: "Raising stakes — introducing a threat that requires resolution breaks the contract."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#6"
+        signal_any: ["must defeat", "a threat appears", "save everyone", "villain attacks", "danger looms", "high stakes battle"]
+      - item: "Emotional labeling in caption ('she felt lonely') where a silent panel would do."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#6"
+        signal_any: ["she felt lonely", "he felt sad", "felt so lonely", "he was afraid"]
+      - item: "Cliffhanger ending — even a soft one poisons the re-read value."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#6"
+        signal_any: ["to be continued", "who could it be", "cliffhanger", "but then everything changed"]
+      - item: "Loud musical / emphatic sfx (DOKUN, BAM) — iyashikei sfx are small and environmental."
+        source: "docs/research/manga_craft/iyashikei_minimalism.md#6"
+        signal_any: ["dokun", "kaboom", "explosion sfx", "bam!!"]
+
+  romance:
+    bible: docs/research/manga_craft/shojo_romance.md
+    story_elements_must:
+      - item: "Each volume delivers a net proximity gain after a misunderstanding or setback — small irreversible increments, never a stalled courtship."
+        source: "docs/research/manga_craft/shojo_romance.md#3"
+        evidence_any: ["almost", "unread", "delay", "near", "beside", "closer", "message", "proximity", "meant"]
+      - item: "The delay engine banks at least one full arc before the central confession."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        evidence_any: ["almost", "delay", "not yet", "unread", "later", "wait", "three dots", "misread"]
+      - item: "Boundaries and consent are honored; physical aggression is never framed as romantic."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        evidence_any: ["boundary", "don't", "stop", "space", "too close", "permission", "steps back", "choice"]
+      - item: "The MC has a life or interest outside the romance (a vocation or domain competence)."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        evidence_any: ["work", "exam", "club", "practice", "job", "study", "class", "vocation", "friends"]
+    story_elements_should:
+      - item: "Rivals receive rehabilitation arcs and convert into ensemble members."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        evidence_any: ["rival", "friend", "ensemble", "team", "class"]
+    mc_items:
+      family: romance
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "A comedic chibi / pressure-valve release appears every 3-5 pages against the earnest register."
+        source: "docs/research/manga_craft/shojo_romance.md#4"
+      - item: "Misunderstandings are eventually spoken by the protagonists, not resolved only by third-party intervention."
+        source: "docs/research/manga_craft/shojo_romance.md#4"
+    panel_grammar_items:
+      - item: "A flower-tone / emotional background layer is present; undesigned backgrounds read as shonen."
+        source: "docs/research/manga_craft/shojo_romance.md#2"
+        storyboard_signal_any: ["flower", "tone", "screentone", "background", "mood", "bloom"]
+      - item: "Proximity and near-touch are staged spatially (almost-touch, glance, gap)."
+        source: "docs/research/manga_craft/shojo_romance.md#2"
+        storyboard_signal_any: ["almost", "near", "close", "glance", "gap", "reach"]
+    failure_modes:
+      - item: "Confession too early — a volume-3 confession drains the delay engine."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        signal_any: ["confesses in chapter one", "immediate confession", "they kiss on page one", "instantly together"]
+      - item: "Physical assault played as romantic (reads as toxic to Gen-Z shojo readers)."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        signal_any: ["grabs her wrist hard", "forces a kiss", "pins her against", "wall slam romance"]
+      - item: "Ending on a wedding / pregnancy when the subject was becoming able to love — the ending should rhyme with self-authorship."
+        source: "docs/research/manga_craft/shojo_romance.md#6"
+        signal_any: ["ends on a wedding", "gets pregnant in the finale", "married and settled"]
+
+  dark_fantasy:
+    bible: docs/research/manga_craft/dark_fantasy.md
+    story_elements_must:
+      - item: "The protagonist carries a real wound / grief that the darkness weighs against — never nihilism without warmth."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        evidence_any: ["wound", "scar", "grief", "dead", "loss", "sibling", "mourn", "bleed"]
+      - item: "Hard-won meaning is paid for with a visible cost; no premature rescue before the cost lands."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        evidence_any: ["cost", "debt", "price", "burns", "return ticket", "cannot", "sacrifice", "paid"]
+      - item: "A survival choice is made under duress with an irreversible consequence."
+        source: "docs/research/manga_craft/dark_fantasy.md#3"
+        evidence_any: ["choose", "choice", "enter", "survive", "burn", "cannot return", "delete", "step through", "steps through"]
+      - item: "There is something to lose (a warmth / bond) that gives the darkness weight."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        evidence_any: ["sibling", "name", "bond", "warmth", "someone", "dead", "they called me"]
+    story_elements_should:
+      - item: "Even the darkness has a warmth beat (a campfire / bond scene) so loss has weight."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        evidence_any: ["warmth", "campfire", "bond", "together", "friend", "rest"]
+    mc_items:
+      family: dark_fantasy
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Characters wrestle with meaning through action, never lecture it as an essay."
+        source: "docs/research/manga_craft/dark_fantasy.md#4"
+      - item: "Interiority is earned in aftermath beats, not delivered as a philosophical monologue."
+        source: "docs/research/manga_craft/dark_fantasy.md#4"
+    panel_grammar_items:
+      - item: "Show aftermath, not extended suffering-as-action (consequence on the body / scene)."
+        source: "docs/research/manga_craft/dark_fantasy.md#2"
+        storyboard_signal_any: ["aftermath", "consequence", "scar", "ruin", "quiet after"]
+      - item: "Dense atmospheric rendering marks the world's weight without stagnating pace."
+        source: "docs/research/manga_craft/dark_fantasy.md#2"
+        storyboard_signal_any: ["atmospheric", "dense", "shadow", "dread", "weight"]
+    failure_modes:
+      - item: "Grimdark for shock — violence or misery without thematic purpose."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        signal_any: ["gore for shock", "torture porn", "misery for its own sake", "edgy violence"]
+      - item: "Philosophical monologue as essay — characters lecture instead of wrestle."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        signal_any: ["let me lecture you on nihilism", "long monologue about meaning", "essay on despair"]
+      - item: "Trauma as spectacle — suffering in extended detail for reader reaction, not character consequence."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        signal_any: ["extended torture scene", "lingers on the suffering", "suffering in graphic detail"]
+      - item: "Resolution before the cost is paid — hard-won meaning cheapened by a premature rescue."
+        source: "docs/research/manga_craft/dark_fantasy.md#6"
+        signal_any: ["rescued at the last second with no cost", "everything is fine now", "saved without sacrifice"]
+
+  school:
+    bible: docs/research/manga_craft/school_coming_of_age.md
+    story_elements_must:
+      - item: "Belonging arrives in millimeters — a saved seat, a nickname, an inside joke — never a single group-embrace scene."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        evidence_any: ["seat", "group chat", "belong", "invite", "nickname", "together", "left out", "class"]
+      - item: "Social order / peer status is the plot's weather (seating, chat, club), carried at small-stakes scale."
+        source: "docs/research/manga_craft/school_coming_of_age.md#3"
+        evidence_any: ["seat", "seating", "group chat", "club", "peer", "status", "rumor", "homeroom", "desk"]
+      - item: "The inner topic (anxiety / self-worth) is enacted through concrete social objects, never title-dropped."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        evidence_any: ["seat", "chat", "belong", "want", "need", "beg", "alone", "choice"]
+      - item: "The MC has a visible want with a small personal cost — not transplanted drama-genre stakes."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        evidence_any: ["want", "need", "cost", "won't", "choice", "stay", "beg"]
+    story_elements_should:
+      - item: "The class's social order shifts rather than dissolves; no finale where every clique merges into one friend group."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        evidence_any: ["class", "clique", "group", "seat", "shift", "order"]
+    mc_items:
+      family: school
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "The inner topic is never named in dialogue or caption; it is enacted through concrete social objects."
+        source: "docs/research/manga_craft/school_coming_of_age.md#4"
+      - item: "Adults may model but never diagnose the protagonist's inner state."
+        source: "docs/research/manga_craft/school_coming_of_age.md#4"
+    panel_grammar_items:
+      - item: "Reaction shots are a license, not a quota — one meaningful blush lands, not three identical per page."
+        source: "docs/research/manga_craft/school_coming_of_age.md#2"
+        storyboard_signal_any: ["reaction", "blush", "expression", "close-up", "face"]
+      - item: "Social weather is staged through institutional objects (seating chart, group-chat screen, club door)."
+        source: "docs/research/manga_craft/school_coming_of_age.md#8"
+        storyboard_signal_any: ["seat", "seating chart", "group chat", "club", "screen", "desk"]
+    failure_modes:
+      - item: "Adult therapist monologue in a school setting — an adult accurately diagnoses the protagonist's inner state."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        signal_any: ["the counselor explains her feelings", "adult diagnoses him", "therapist tells her what she feels"]
+      - item: "Topic title-dropped ('my anxiety', 'my self-worth') — vocabulary breaks the enactment contract."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        signal_any: ["my anxiety is", "my self-worth", "i have depression", "my mental health"]
+      - item: "Stakes inflation — drama-genre stakes (expulsion, death, criminal plots) transplanted to force tension."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        signal_any: ["expelled from school forever", "a murder at school", "criminal plot", "someone dies at school"]
+      - item: "Adult-lens nostalgia captions convert present-tense weather into memoir."
+        source: "docs/research/manga_craft/school_coming_of_age.md#6"
+        signal_any: ["i didn't know then how much", "years later i would realize", "looking back on that year"]
+
+  sci_fi_cyberpunk:
+    bible: docs/research/manga_craft/sci_fi_cyberpunk.md
+    story_elements_must:
+      - item: "The megastructure / system is a mirror of the protagonist's inner experience, not infrastructure detail for its own sake."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        evidence_any: ["interface", "feed", "algorithm", "system", "score", "mirror", "self", "identity"]
+      - item: "The system's power is felt as a threat to privacy / identity / body, not narrated as tech decoration."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        evidence_any: ["privacy", "algorithm", "recommend", "surveil", "score", "track", "feed", "body", "login"]
+      - item: "The protagonist is complicit in the system — not fighting a simple villain."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        evidence_any: ["accept", "login", "score", "community", "complicit", "choice", "use", "sign"]
+      - item: "Burnout / cognitive-degradation cost is visible in the body and the narration."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        evidence_any: ["body", "burnout", "tired", "cost", "degrade", "pain", "heat", "exhausted"]
+    story_elements_should:
+      - item: "Tech vocabulary earns meaning; nothing is deployed only to signal genre."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        evidence_any: ["interface", "feed", "score", "system", "meaning"]
+    mc_items:
+      family: sci_fi_cyberpunk
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Narration carries cognitive-load and interiority; the system is voiced as a mirror, not a monster."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#4"
+      - item: "Tech vocabulary earns its meaning; no jargon deployed only to signal genre."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#4"
+    panel_grammar_items:
+      - item: "The interface / feed is composited into the panel (overlay, HUD, score) and integrated with the body."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#2"
+        storyboard_signal_any: ["interface", "feed", "overlay", "hud", "screen", "score"]
+      - item: "Cognitive load is shown, not replaced by extended fight choreography."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#2"
+        storyboard_signal_any: ["thought", "narration", "cognitive", "load", "interior", "reflect"]
+    failure_modes:
+      - item: "World-building over character — infrastructure detail with no protagonist inner experience."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        signal_any: ["thirty pages of infrastructure", "pages of world lore", "endless megastructure description"]
+      - item: "Tech-jargon as prose decoration — vocabulary deployed to signal genre without earning meaning."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        signal_any: ["quantum flux capacitor", "technobabble", "buzzword salad"]
+      - item: "The AI / system as a simple villain — flattening it into a monster removes the complicity tension."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        signal_any: ["the evil ai attacks", "kill the rogue ai", "the ai is the monster", "destroy the mainframe"]
+      - item: "Action-sequence inflation — extended fight choreography without cognitive-load narration."
+        source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
+        signal_any: ["extended gunfight", "long chase sequence", "drawn-out shootout"]
