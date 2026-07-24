@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "manga_story_excellence_realization_report",
+  "status": "PASS",
+  "production_blocking": false,
+  "series_id": "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+  "chapter_id": "ep_014",
+  "chapter_number": 1,
+  "genre_id": "healing",
+  "strategy_genre": "healing",
+  "relevance_genre": "healing",
+  "target_market": "en_US",
+  "target_audience": "gen_z",
+  "score": 100,
+  "threshold": 85,
+  "gates": [
+    {
+      "gate_id": "MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "config/manga/canonical_genre_list.yaml",
+          "text": "healing",
+          "reason": "canonical genre"
+        },
+        {
+          "path": "config/source_of_truth/manga_story_strategies/iyashikei_strategies.yaml",
+          "text": "iyashikei_strategies.yaml",
+          "reason": "strategy bank"
+        },
+        {
+          "path": "config/manga/main_character_interaction_grammar.yaml",
+          "text": "healing",
+          "reason": "interaction grammar"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.ARCHITECT_CONTEXT",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "story_architecture_handoff.modern_reader_context",
+          "text": "present",
+          "reason": "architect context"
+        },
+        {
+          "path": "phoenix_v4/manga/prompts/chapter_writer_prompt.txt",
+          "text": "modern_reader_context",
+          "reason": "prompt doctrine"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.ALIAS_COHERENCE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "config/manga/story_genre_alias_coherence.yaml",
+          "text": "healing",
+          "reason": "alias coherence"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.MODERN_READER_REALIZATION",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[0].panels[1].scene",
+          "text": "Breakroom already occupied: Devon at the counter, kettle working, two mugs waiting \u2014 the shared ritual holding without a text. Public-adjacent quiet.",
+          "page_idx": 0,
+          "panel_idx": 1,
+          "reason": "selected catalyst object appears in page-one action (breakroom)"
+        },
+        {
+          "path": "pages[0].panels[0].scene",
+          "text": "Corridor. Mira walking at the usual Friday minute because she needs to keep the standing kettle time. No phone in hand. Autumn light. A private deadline only her body is holding.",
+          "page_idx": 0,
+          "panel_idx": 0,
+          "reason": "selected catalyst object appears in page-one action (kettle)"
+        },
+        {
+          "path": "pages[0].panels[1].scene",
+          "text": "Breakroom already occupied: Devon at the counter, kettle working, two mugs waiting \u2014 the shared ritual holding without a text. Public-adjacent quiet.",
+          "page_idx": 0,
+          "panel_idx": 1,
+          "reason": "selected catalyst object appears in page-one action (mugs)"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "ticket, public, body, privacy, ritual",
+          "reason": "object creates conflict-change pressure"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "want",
+          "reason": "protagonist desire visible"
+        },
+        {
+          "path": "pages[0:2]",
+          "text": "lose",
+          "reason": "cost by page two"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.GENRE_CORE_PLEASURE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "ritual",
+          "reason": "genre-core class concrete_ritual"
+        },
+        {
+          "path": "pages[*]",
+          "text": "warm",
+          "reason": "genre-core class low_arousal_change"
+        },
+        {
+          "path": "pages[*]",
+          "text": "beside",
+          "reason": "genre-core class side_by_side"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.INTERACTION_REALIZATION",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "dyad,group,machine",
+          "reason": "interaction targets"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.PAGE_ONE_HOOK",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[0]",
+          "text": "Corridor. Mira walking at the usual Friday minute because she needs to keep the standing kettle time. No phone in hand. Autumn light. A private deadline only her body is holding. Breakroom already occ",
+          "reason": "page-one concrete hook"
+        },
+        {
+          "path": "pages[1]",
+          "text": "Cut \u2014 Sunday evening. Phone screen: Mom. Mira on the kitchen stool. Warm lamp. One evening cup nearby. Mira listening. Shoulders lower than early-arc Sunday calls. No diagnosis talk on her face. Hi, M",
+          "reason": "page-two turn reason"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.MARKET_NATIVE_SURFACE",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "mall",
+          "reason": "en_US market surface"
+        }
+      ]
+    },
+    {
+      "gate_id": "MANGA.STORY.BLAND_FALLBACK_LINT",
+      "status": "PASS",
+      "score": 100,
+      "threshold": 100,
+      "blocking": true,
+      "issues": [],
+      "evidence": [
+        {
+          "path": "pages[*]",
+          "text": "specificity ok",
+          "reason": "anti-blandness"
+        }
+      ]
+    }
+  ],
+  "repair_packet": null
+}

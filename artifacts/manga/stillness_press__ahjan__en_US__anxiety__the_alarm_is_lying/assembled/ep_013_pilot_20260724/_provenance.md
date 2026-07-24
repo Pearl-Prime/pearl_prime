@@ -1,0 +1,23 @@
+| panel | layer | z | provenance | bytes | asset |
+|---|---|---|---|---|---|
+| ep013_005 | L0 | 0 | **INTERIM** | 14,730 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png |
+| ep013_005 | L2 | 20 | **INTERIM** | 5,515 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L2_mira_seated_calm_INTERIM.png |
+| ep013_005 | L3 | 30 | **INTERIM** | 2,694 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_kettle_INTERIM.png |
+| ep013_005 | L4 | 40 | **INTERIM** | 2,163 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png |
+| ep013_001 | L0 | 0 | **INTERIM** | 14,730 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png |
+| ep013_007 | L0 | 0 | **INTERIM** | 14,730 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png |
+| ep013_007 | L3 | 30 | **INTERIM** | 2,694 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_kettle_INTERIM.png |
+| ep013_007 | L4 | 40 | **INTERIM** | 2,163 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png |
+| ep013_010 | L0 | 0 | **INTERIM** | 14,730 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png |
+| ep013_010 | L2 | 20 | **INTERIM** | 5,515 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L2_mira_seated_calm_INTERIM.png |
+| ep013_010 | L2 | 20 | **INTERIM** | 6,606 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L2_devon_standing_INTERIM.png |
+| ep013_010 | L3 | 30 | **INTERIM** | 1,877 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png |
+| ep013_010 | L3 | 30 | **INTERIM** | 1,877 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png |
+| ep013_014 | L0 | 0 | **INTERIM** | 14,730 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png |
+| ep013_014 | L3 | 30 | **INTERIM** | 1,877 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png |
+| ep013_014 | L3 | 30 | **INTERIM** | 1,877 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png |
+| ep013_014 | L4 | 40 | **INTERIM** | 2,163 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png |
+| ep013_014 | L4 | 40 | **INTERIM** | 2,163 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L4_steam_INTERIM.png |
+| ep013_020 | L0 | 0 | **INTERIM** | 14,730 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L0_breakroom_autumn_rain_INTERIM.png |
+| ep013_020 | L3 | 30 | **INTERIM** | 1,877 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png |
+| ep013_020 | L3 | 30 | **INTERIM** | 1,877 | artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/pilot_ep013_INTERIM/L3_cup_full_INTERIM.png |

@@ -1,0 +1,41 @@
+{
+  "manifest": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assembly_manifests/ep_013_pilot_two_cups_6p.yaml",
+  "panels": [
+    {
+      "panel_id": "ep013_005",
+      "shot_type": "establishing",
+      "passed": true,
+      "ops_applied": [
+        "bbox_legacy_\u00a710"
+      ],
+      "gates": [
+        {
+          "gate": "placement",
+          "severity": "WARN",
+          "message": "bbox_legacy"
+        }
+      ]
+    },
+    {
+      "panel_id": "ep013_010",
+      "shot_type": "establishing",
+      "passed": true,
+      "ops_applied": [
+        "bbox_legacy_\u00a710",
+        "bbox_legacy_\u00a710"
+      ],
+      "gates": [
+        {
+          "gate": "placement",
+          "severity": "WARN",
+          "message": "bbox_legacy"
+        },
+        {
+          "gate": "placement",
+          "severity": "WARN",
+          "message": "bbox_legacy"
+        }
+      ]
+    }
+  ]
+}

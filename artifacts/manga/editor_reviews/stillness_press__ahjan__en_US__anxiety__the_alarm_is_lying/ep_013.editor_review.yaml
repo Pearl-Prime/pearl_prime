@@ -1,0 +1,149 @@
+artifact_type: manga_chapter_editor_review
+schema_version: '1.0'
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_013
+genre: healing
+checklist_source: config/manga/genre_craft_checklists.yaml
+mc_endurance_source: config/manga/mc_endurance_checklists.yaml
+gate_report: artifacts/qa/manga_process_uplift_pilot_2026-07-24/ep_013_excellence.json
+gate_status: PASS
+verdicts:
+- checklist: story_elements_must
+  item: Each chapter completes one small encounter or exchange at minimal stakes — no threat requiring
+    resolution.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#6
+  verdict: PASS
+  note: Episode completes a small Friday exchange; weather/mood conflict only; feelings un-named; kettle/mugs
+    ritual anchors.
+- checklist: story_elements_must
+  item: Conflict arrives as weather, time, or mood — never as a villain to defeat.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#3
+  verdict: PASS
+  note: Episode completes a small Friday exchange; weather/mood conflict only; feelings un-named; kettle/mugs
+    ritual anchors.
+- checklist: story_elements_must
+  item: The MC's feelings stay un-named on the page; emotion lands somatically or belatedly.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#6
+  verdict: PASS
+  note: Episode completes a small Friday exchange; weather/mood conflict only; feelings un-named; kettle/mugs
+    ritual anchors.
+- checklist: story_elements_must
+  item: A recurring ritual object or place anchors calm compositions across episodes.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#5
+  verdict: PASS
+  note: Episode completes a small Friday exchange; weather/mood conflict only; feelings un-named; kettle/mugs
+    ritual anchors.
+- checklist: story_elements_should
+  item: Volumes are structured as seasonal cycles with return-with-difference, not escalation.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#3
+  verdict: PASS
+  note: Wheel_02 seasonal return-with-difference vs arc-one kitchen register.
+- checklist: dialogue_rules
+  item: Dialogue is sparse; narration is an environmental correlative, never an emotion-label.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#4
+  verdict: PASS
+  note: Sparse dialogue; ≤3 bubbles/panel; narration observational.
+- checklist: dialogue_rules
+  item: No more than three speech bubbles per panel — more is dialogue-drama grammar, not iyashikei.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#4
+  verdict: PASS
+  note: Sparse dialogue; ≤3 bubbles/panel; narration observational.
+- checklist: panel_grammar_items
+  item: Silent panels are 35-55%; the page breathes with irregular panel heights (never a six-equal-rectangle
+    grid).
+  source: docs/research/manga_craft/iyashikei_minimalism.md#2
+  verdict: PASS
+  note: Silent panels dense; irregular heights; environmental rain sfx only; landscape/window mood bleed
+    present.
+- checklist: panel_grammar_items
+  item: Environmental sfx are small (wind, water), never loud musical sfx.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#2
+  verdict: PASS
+  note: Silent panels dense; irregular heights; environmental rain sfx only; landscape/window mood bleed
+    present.
+- checklist: panel_grammar_items
+  item: A landscape / nature-bleed transition carries mood; a spread is for landscape, not conflict.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#2
+  verdict: PASS
+  note: Silent panels dense; irregular heights; environmental rain sfx only; landscape/window mood bleed
+    present.
+- checklist: failure_modes
+  item: Raising stakes — introducing a threat that requires resolution breaks the contract.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#6
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: failure_modes
+  item: Emotional labeling in caption ('she felt lonely') where a silent panel would do.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#6
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: failure_modes
+  item: Cliffhanger ending — even a soft one poisons the re-read value.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#6
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: failure_modes
+  item: Loud musical / emphatic sfx (DOKUN, BAM) — iyashikei sfx are small and environmental.
+  source: docs/research/manga_craft/iyashikei_minimalism.md#6
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: mc_must_have
+  item: Each chapter completes one small encounter or exchange even at minimal stakes.
+  source: mc_endurance_checklists.yaml#healing/must_have
+  verdict: PASS
+  note: Completed exchange; somatic un-named feeling; calm domain competence; weather conflict.
+- checklist: mc_must_have
+  item: The MC's feelings stay un-named on the page; emotion lands belatedly or somatically.
+  source: mc_endurance_checklists.yaml#healing/must_have
+  verdict: PASS
+  note: Completed exchange; somatic un-named feeling; calm domain competence; weather conflict.
+- checklist: mc_must_have
+  item: The MC holds one small, deep domain competence exercised calmly per episode.
+  source: mc_endurance_checklists.yaml#healing/must_have
+  verdict: PASS
+  note: Completed exchange; somatic un-named feeling; calm domain competence; weather conflict.
+- checklist: mc_must_have
+  item: Conflict arrives as weather or time, never as a villain to defeat.
+  source: mc_endurance_checklists.yaml#healing/must_have
+  verdict: PASS
+  note: Completed exchange; somatic un-named feeling; calm domain competence; weather conflict.
+- checklist: mc_should_have
+  item: A recurring ritual object anchors calm compositions across episodes.
+  source: mc_endurance_checklists.yaml#healing/should_have
+  verdict: PASS
+  note: Ritual object + seasonal structure hold.
+- checklist: mc_should_have
+  item: The MC functions as a professional visitor to other people's stories, refreshing cast per chapter.
+  source: mc_endurance_checklists.yaml#healing/should_have
+  verdict: PASS
+  note: Ritual object + seasonal structure hold.
+- checklist: mc_should_have
+  item: Volumes are structured as seasonal cycles with return-with-difference, not escalation.
+  source: mc_endurance_checklists.yaml#healing/should_have
+  verdict: PASS
+  note: Ritual object + seasonal structure hold.
+- checklist: mc_anti_patterns
+  item: Chapters pass with no completed exchange (contemplative pacing that stagnates).
+  source: mc_endurance_checklists.yaml#healing/anti_patterns
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: mc_anti_patterns
+  item: Feelings are explicitly named or therapized on the page.
+  source: mc_endurance_checklists.yaml#healing/anti_patterns
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: mc_anti_patterns
+  item: Arc-scale stakes are imported to force escalation.
+  source: mc_endurance_checklists.yaml#healing/anti_patterns
+  verdict: PASS
+  note: Anti-pattern absent.
+- checklist: endurance_mechanics
+  item: series-plan only
+  source: mc_endurance_checklists.yaml#healing/endurance_mechanics
+  verdict: NA
+  note: Per-chapter NA for completion-first healing.
+overall: SHIP
+editor: Pearl_Editor (MPU Lane 11)
+reviewed_at: '2026-07-24T16:40:00Z'
+iteration_trace: REVISE round 1 cleared Stage A modern-reader conflict-change; Stage B SHIP.
+acceptance_layer: authored_candidate

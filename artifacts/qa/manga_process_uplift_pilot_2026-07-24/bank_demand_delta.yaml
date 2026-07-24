@@ -1,0 +1,47 @@
+artifact_type: manga_pilot_bank_demand_delta
+schema_version: '1.0'
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+pilot_episodes:
+- ep_013
+- ep_014
+base_rollup: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/bank_contracts/series_demand_rollup.yaml
+note: Lane 11 re-ran --series-rollup after extending master-plan ep 13-14 rows + landing storyboards.
+  Local shared checkout lacks LFS-smudged bank bytes (regen reported present=0); keeping origin/main rollup
+  bytes as SSOT coverage snapshot and recording pilot delta here honestly.
+new_demand_from_pilot:
+- layer: L2
+  asset: devon_reyes poses (breakroom standing / collar-touch echo)
+  status: GAP
+  episodes:
+  - ep_013
+  - ep_014
+- layer: L0
+  asset: breakroom autumn-rain window variant
+  status: GAP
+  episodes:
+  - ep_013
+  - ep_014
+- layer: L3
+  asset: paper_cup empty (cutting foreshadow)
+  status: GAP
+  episodes:
+  - ep_014
+- layer: L3
+  asset: two-cup paired placement (reuse cup_full x2)
+  status: REUSE
+  episodes:
+  - ep_013
+  - ep_014
+- layer: L3
+  asset: kettle_on_burner_boiling
+  status: REUSE
+  episodes:
+  - ep_013
+  - ep_014
+- layer: L2
+  asset: mira_aoki front_portrait_seated_calm/soft
+  status: REUSE
+  episodes:
+  - ep_013
+  - ep_014
+acceptance_layer: authored_candidate_demand_delta

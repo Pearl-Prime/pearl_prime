@@ -1,0 +1,237 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_014
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 14: Standing'
+logline: A third Friday makes the coffee standing without anyone saying the word; Devon watches a
+  small pendant touch without asking, and Mira's mother's Sunday call lands gentler in the evening.
+stakes_now: Two Fridays happened; the word 'standing' has not been said; family thread still carries
+  old weather.
+stakes_end: Friday is habit in the hands; proximity learning has begun; Sunday call softens; a paper
+  cup foreshadows later propagation.
+genre_cadence:
+- standing_friday_assumed
+- proximity_learning
+- family_weather_softens
+- objects_accumulate
+- shared_quiet
+- closing_habit_hands
+page_turn_promises:
+- page_id: ep_014_p01
+  promise: Has Friday become standing without the word being said?
+- page_id: ep_014_p02
+  promise: What else arrives without invitation once the week has a shape?
+panels:
+- panel_id: ep014_001
+  page_id: ep_014_p01
+  story_function: standing_friday_assumed
+  story_move: No text this time — Mira simply walks to the breakroom at the usual minute.
+  visual_proof: Corridor clock / Mira's walking feet, autumn light.
+  information_delta: Reader sees the appointment internalized as body-time.
+  beat_role: habit_onset
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_002
+  page_id: ep_014_p01
+  story_function: standing_friday_assumed
+  story_move: Devon is already there; kettle already working — standing confirmed visually.
+  visual_proof: 'Breakroom: Devon at counter, two mugs waiting, kettle steam.'
+  information_delta: Reader gets proof without dialogue that Friday is standing.
+  beat_role: habit_proof
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_003
+  page_id: ep_014_p01
+  story_function: standing_friday_assumed
+  story_move: A half-smile exchange replaces any scheduling talk.
+  visual_proof: Two faces, small recognition, no 'same time?' spoken.
+  information_delta: Reader hears the word 'standing' in the absence of scheduling language.
+  beat_role: small_exchange
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep014_004
+  page_id: ep_014_p01
+  story_function: proximity_learning
+  story_move: While pouring, Mira's hand briefly touches the jade pendant — unforced, small.
+  visual_proof: Close on pendant touch, steam soft behind.
+  information_delta: Reader sees the private technique appear in public without lecture.
+  beat_role: proximity_teach
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_005
+  page_id: ep_014_p01
+  story_function: proximity_learning
+  story_move: Devon watches the touch and does not ask — learning by looking.
+  visual_proof: Devon's eyes on the gesture, then back to his mug; pen-cap idle for once.
+  information_delta: Reader catches proximity learning mid-act.
+  beat_role: proximity_learn
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_006
+  page_id: ep_014_p01
+  story_function: proximity_learning
+  story_move: Devon later rests two fingers near his own collar — incomplete echo, not triumph.
+  visual_proof: Devon's hand near collar, tentative, unexplained by him.
+  information_delta: Reader receives imperfect reception, per iyashikei.
+  beat_role: proximity_learn
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_007
+  page_id: ep_014_p01
+  story_function: objects_accumulate
+  story_move: The office succulent has a new tiny leaf — accumulation, not plot.
+  visual_proof: Succulent macro, new growth, sill dust.
+  information_delta: Reader tracks seasonal object change as the year's argument.
+  beat_role: accumulate
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_008
+  page_id: ep_014_p01
+  story_function: shared_quiet
+  story_move: They drink. Rain has stopped; wet pavement light comes up from the alley.
+  visual_proof: Wide window, post-rain light, two figures quiet.
+  information_delta: Reader gets weather shift as the episode's only change-event.
+  beat_role: weather_beat
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_009
+  page_id: ep_014_p01
+  story_function: shared_quiet
+  story_move: Sparse talk about a dull ticket queue — work as texture, not stakes.
+  visual_proof: Devon half-laughing at a boring ticket title on his phone.
+  information_delta: Reader stays in ordinary workplace texture.
+  beat_role: small_exchange
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep014_010
+  page_id: ep_014_p01
+  story_function: shared_quiet
+  story_move: Mira answers with one practical sentence — competence, not advice.
+  visual_proof: Mira speaking briefly, eyes on steam, not performing mentorship.
+  information_delta: Reader sees domain competence exercised calmly.
+  beat_role: small_exchange
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep014_011
+  page_id: ep_014_p01
+  story_function: objects_accumulate
+  story_move: Two mugs again, steam matched — visual rhyme with ep_013.
+  visual_proof: Macro two mugs, autumn light warmer than last week.
+  information_delta: Reader feels return-with-difference across episodes.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_012
+  page_id: ep_014_p01
+  story_function: standing_friday_assumed
+  story_move: When they leave, Mira rinses both mugs without thinking whose is whose.
+  visual_proof: Hands rinsing two mugs in the sink, automatic.
+  information_delta: Reader sees habit landing in the body of the host.
+  beat_role: habit_hands
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_013
+  page_id: ep_014_p02
+  story_function: family_weather_softens
+  story_move: 'Cut — Sunday evening. Phone buzz: mother. Mira answers on the kitchen stool.'
+  visual_proof: Phone screen 'Mom', kitchen warm lamp, single evening cup nearby.
+  information_delta: Reader enters the family thread as weather, not confrontation.
+  beat_role: family_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_014
+  page_id: ep_014_p02
+  story_function: family_weather_softens
+  story_move: Mother's voice (suggested by Mira's face) is gentler — no diagnosis talk.
+  visual_proof: Mira listening, shoulders lower than early-arc Sunday calls.
+  information_delta: Reader measures the soft shift against earlier family pressure.
+  beat_role: family_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep014_015
+  page_id: ep_014_p02
+  story_function: family_weather_softens
+  story_move: Mira talks about rain and work tickets — not about anxiety.
+  visual_proof: Mira mid-sentence, ordinary topics, pendant untouched.
+  information_delta: Reader hears the soft family register without therapy framing.
+  beat_role: family_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep014_016
+  page_id: ep_014_p02
+  story_function: family_weather_softens
+  story_move: After the call, a silent panel — kettle, evening, no caption naming a feeling.
+  visual_proof: Wide kitchen, post-call stillness, steam optional.
+  information_delta: Reader gets somatic landing instead of emotion-label.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_017
+  page_id: ep_014_p02
+  story_function: objects_accumulate
+  story_move: On the sill, a paper cup waits empty — foreshadow of the cutting that will root later
+    in the wheel.
+  visual_proof: Empty paper cup on sill beside succulent — quiet future object.
+  information_delta: Reader glimpses wheel_02 propagation ahead without spoiler narration.
+  beat_role: accumulate
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep014_018
+  page_id: ep_014_p02
+  story_function: closing_habit_hands
+  story_move: Mira sets her evening cup down; the jade pendant rests quiet at the collar.
+  visual_proof: Close collar + pendant + cup rim.
+  information_delta: Reader closes on ritual objects, not a lesson.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_019
+  page_id: ep_014_p02
+  story_function: closing_habit_hands
+  story_move: 'Final wide: kitchen held. Nothing cured. Friday has a shape now.'
+  visual_proof: Wide kitchen evening, same composition family as series returns.
+  information_delta: Reader leaves mid-ordinary life.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep014_020
+  page_id: ep_014_p02
+  story_function: closing_habit_hands
+  story_move: Episode card.
+  visual_proof: Typographic cream card.
+  information_delta: Clean close.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_014.yaml
+notes: Cycle_04 continues. Bank gaps unchanged (Devon L2; family-call kitchen already have L0 candidates).
+  Paper-cup object not yet in inventory → gap for later cycle_06.
+bank_layer_notes: |
+  Layer picks from series bank contracts; gaps honest INTERIM.
+  - L0: breakroom amber / kitchen evening — REAL plates sparse; expect INTERIM for new autumn-rain window variant.
+  - L2: mira_aoki front_portrait_seated_calm/soft + devon pose gap (no Devon L2 in bank → gap row).
+  - L3: kettle_on_burner_boiling, cup_full, cup_half — present; second-cup pairing needs duplicate placement.
+  - L1/L4: wall_alarm idle unused this arc (practice is social, not alarm-led); steam_wisp for kettle beats.

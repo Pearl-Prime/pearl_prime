@@ -1,0 +1,267 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_013
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 13: Two Cups'
+logline: The Friday after the first shared coffee, Devon shows up again without restating the invitation,
+  and the breakroom kettle makes two cups before anyone decides it should.
+stakes_now: Arc one closed with one articulated coffee; nothing yet proves the invitation survives
+  a second week.
+stakes_end: 'Friday begins to look standing: two cups, no reteaching, an unspoken mug placement claiming
+  next week.'
+genre_cadence:
+- friday_return_without_restating
+- weather_as_only_conflict
+- two_cup_habit_begins
+- no_reteaching
+- shared_quiet
+- closing_unspoken_next
+page_turn_promises:
+- page_id: ep_013_p01
+  promise: Does Devon come back without being re-invited?
+- page_id: ep_013_p02
+  promise: Can two cups happen without another lesson?
+panels:
+- panel_id: ep013_001
+  page_id: ep_013_p01
+  story_function: friday_return_without_restating
+  story_move: 'A short Friday text arrives: only ''same time?'' — no explanation restated.'
+  visual_proof: Phone lockscreen, Devon's three-word text, autumn-gray status bar time.
+  information_delta: Reader learns the invitation has become a check, not a pitch.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_002
+  page_id: ep_013_p01
+  story_function: friday_return_without_restating
+  story_move: Mira's body registers mild readiness rather than dread — smaller than ep_012 even.
+  visual_proof: Mira's face at her desk, soft autumn window light, no spiral.
+  information_delta: Reader measures activation against prior Fridays and finds it quieter.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep013_003
+  page_id: ep_013_p01
+  story_function: friday_return_without_restating
+  story_move: She replies with a single word, thumb steady.
+  visual_proof: Close on hand typing 'yes' — no trembling motif.
+  information_delta: Reader sees the smaller stakes held in the hand.
+  beat_role: trigger_onset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep013_004
+  page_id: ep_013_p01
+  story_function: weather_as_only_conflict
+  story_move: Outside the office glass, autumn rain starts — conflict as weather only.
+  visual_proof: Wide corridor window, rain streaks, soft gray, no villain.
+  information_delta: Reader is told the episode's only pressure is weather and time.
+  beat_role: weather_beat
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_005
+  page_id: ep_013_p01
+  story_function: weather_as_only_conflict
+  story_move: The breakroom kettle is already on when Mira arrives — Devon came early.
+  visual_proof: 'Breakroom doorway POV: kettle steaming, two mugs on the counter already.'
+  information_delta: Reader learns Devon treated Friday as standing before anyone named it.
+  beat_role: habit_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_006
+  page_id: ep_013_p01
+  story_function: two_cup_habit_begins
+  story_move: Devon shrugs at the two mugs as if stating a weather report.
+  visual_proof: Devon at the counter, wire glasses fogged slightly from steam, half-shrug.
+  information_delta: Reader hears the ritual claimed as obvious, not negotiated.
+  beat_role: habit_onset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep013_007
+  page_id: ep_013_p01
+  story_function: two_cup_habit_begins
+  story_move: Mira pours the second cup without commentary.
+  visual_proof: Close on kettle spout into second mug, steam rising.
+  information_delta: Reader sees two cups become an action rather than a decision.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_008
+  page_id: ep_013_p01
+  story_function: no_reteaching
+  story_move: Devon almost asks about the pendant again, then doesn't — watches the steam instead.
+  visual_proof: Devon's eyes flick to Mira's collar then away to the mug.
+  information_delta: Reader feels the no-reteaching rule as a visible choice.
+  beat_role: restraint
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_009
+  page_id: ep_013_p01
+  story_function: no_reteaching
+  story_move: Mira does not offer the explanation she gave last week; she drinks.
+  visual_proof: Mira's hands around the mug, jade pendant visible but untouched.
+  information_delta: Reader confirms the practice today is presence, not curriculum.
+  beat_role: restraint
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_010
+  page_id: ep_013_p01
+  story_function: shared_quiet
+  story_move: They stand in shared quiet while rain writes on the glass.
+  visual_proof: 'Wide held shot: two figures, rain window, steam, afternoon amber.'
+  information_delta: Reader receives the episode's first long quiet.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_011
+  page_id: ep_013_p01
+  story_function: shared_quiet
+  story_move: A small workplace noise (microwave beep elsewhere) fails to break the quiet.
+  visual_proof: Off-panel microwave light blink; neither of them turns.
+  information_delta: Reader sees the quiet hold against ordinary interruption.
+  beat_role: decompression
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_012
+  page_id: ep_013_p01
+  story_function: shared_quiet
+  story_move: Devon mentions only the rain — not anxiety, not Thursday's meeting.
+  visual_proof: Devon mid-sentence, looking at the window, not at Mira.
+  information_delta: Reader gets sparse dialogue as environmental correlative.
+  beat_role: small_exchange
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep013_013
+  page_id: ep_013_p02
+  story_function: two_cup_habit_begins
+  story_move: Mira answers the rain, not the week — weather talk as competence.
+  visual_proof: Mira's profile, soft smile that doesn't perform wellness.
+  information_delta: Reader sees domain competence as ordinary conversation, not teaching.
+  beat_role: small_exchange
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep013_014
+  page_id: ep_013_p02
+  story_function: shared_quiet
+  story_move: A held panel of both mugs side by side — identical steam height.
+  visual_proof: 'Macro: two mugs, matched steam, counter grain.'
+  information_delta: 'Reader receives the visual thesis of wheel_02: two cups.'
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_015
+  page_id: ep_013_p02
+  story_function: no_reteaching
+  story_move: Devon copies Mira's slower sip without noticing he is copying.
+  visual_proof: 'Split attention: Devon''s hand slowing on the mug handle.'
+  information_delta: Reader catches learning-by-proximity before either character does.
+  beat_role: proximity_learn
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_016
+  page_id: ep_013_p02
+  story_function: shared_quiet
+  story_move: The office succulent on the sill gets a little rain-light — continuity object.
+  visual_proof: Succulent close-up, wet window behind, quiet green.
+  information_delta: Reader re-anchors the recurring ritual object across rooms.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_017
+  page_id: ep_013_p02
+  story_function: friday_return_without_restating
+  story_move: Someone else enters the breakroom and leaves again — the space stays theirs.
+  visual_proof: Door opens/closes at edge of frame; Mira and Devon unmoved.
+  information_delta: Reader sees the standing Friday claiming space without announcing it.
+  beat_role: habit_proof
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_018
+  page_id: ep_013_p02
+  story_function: shared_quiet
+  story_move: Devon rinses his mug and sets it back on the same spot on the drying mat.
+  visual_proof: Close on mug placed deliberately on a corner of the mat.
+  information_delta: Reader reads the placement as an unspoken claim on next week.
+  beat_role: closing_gesture
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_019
+  page_id: ep_013_p02
+  story_function: closing_unspoken_next
+  story_move: Mira notices the placement and does not comment — protects it with silence.
+  visual_proof: Mira's eyes on the mug, then away; small breath.
+  information_delta: Reader sees Mira give Devon the same discretion she once received.
+  beat_role: closing_gesture
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_020
+  page_id: ep_013_p02
+  story_function: closing_unspoken_next
+  story_move: Wide breakroom as they leave — two rinsed mugs left as furniture.
+  visual_proof: Empty breakroom, two mugs on the mat, rain still writing.
+  information_delta: Reader leaves the room mid-habit, not mid-lesson.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep013_021
+  page_id: ep_013_p02
+  story_function: closing_unspoken_next
+  story_move: 'Evening kitchen bookend: Mira''s home kettle, one cup — the private register still
+    exists.'
+  visual_proof: Home kitchen evening, single cup, succulent on sill.
+  information_delta: Reader sees private and shared practices coexisting, not replacing.
+  beat_role: bookend
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_022
+  page_id: ep_013_p02
+  story_function: closing_unspoken_next
+  story_move: Caption lands somatically, not as emotion-label.
+  visual_proof: Close on Mira's hand around the home cup, pendant still.
+  information_delta: Reader receives the week's claim without therapy language.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep013_023
+  page_id: ep_013_p02
+  story_function: closing_unspoken_next
+  story_move: Final small panel — episode card.
+  visual_proof: Typographic cream card.
+  information_delta: Clean structural close.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_013.yaml
+notes: 'Wheel 02 / cycle_04 open. Autumn weather is the only conflict. Bank gaps: Devon L2 missing;
+  autumn-rain breakroom L0 variant missing → INTERIM at assemble.'
+bank_layer_notes: |
+  Layer picks from series bank contracts; gaps honest INTERIM.
+  - L0: breakroom amber / kitchen evening — REAL plates sparse; expect INTERIM for new autumn-rain window variant.
+  - L2: mira_aoki front_portrait_seated_calm/soft + devon pose gap (no Devon L2 in bank → gap row).
+  - L3: kettle_on_burner_boiling, cup_full, cup_half — present; second-cup pairing needs duplicate placement.
+  - L1/L4: wall_alarm idle unused this arc (practice is social, not alarm-led); steam_wisp for kettle beats.
