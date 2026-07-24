@@ -1,0 +1,53 @@
+SOCIAL MEDIA TTS — PLAIN ENGLISH STATE (2026-07-24)
+
+=== ONE SENTENCE ===
+The English social bank is written and TTS-ready but was NEVER actually voiced
+at scale; the engines to voice it (and 6 CJK languages) are free and wired; the
+real work is a translation + per-language "gotcha" research pass, not the TTS.
+
+=== WHAT WE HAVE ===
+- 1,642 English social atoms, short-sentence TTS-shaped prose, in
+  SOURCE_OF_TRUTH/social_media_atoms/evergreen_en_us_atoms.jsonl.
+- Two ratified "cozy" voices: english_male (corporate), english_female (Gen Z +
+  healthcare) — CosyVoice2 stock voices, operator-approved OPD-SMV-03, no SSML.
+- The "gotcha" text-prep research + working code: config/tts/
+  social_media_tts_text_prep.yaml + scripts/social_media/tts_text_prep.py
+  (homograph rewrites like live/live, colon->period, RN->nurse, punctuation as
+  pauses). ENGLISH ONLY.
+- Free TTS engines wired per language in config/tts/locale_voice_routing.yaml.
+
+=== THREE HONEST CORRECTIONS ===
+1. English is NOT voiced yet. Only 8 audition clips exist on disk. No production
+   voice bank. "Finish English" = run it at scale for the FIRST time.
+2. There's a script bug: generate_voice_bank.py skips the gotcha text-prep.
+   The CORRECT script is generate_voice_bank_onbox.py (it applies apply_text_prep).
+3. Qwen-TTS CLOUD free quota can't cover a bank (10k-110k chars vs 249k chars
+   for English alone). Use self-hosted CosyVoice2 (unlimited free) instead. The
+   open-weights Qwen3-TTS (self-hostable) is a valid A/B challenger — not the
+   metered cloud one.
+
+=== HOW MANY LANGUAGES (engine coverage) ===
+- 7 premium-free (self-hosted CosyVoice2): en, ja, ko, zh-CN, zh-TW, zh-HK
+  (Cantonese!), zh-SG.
+- 6 good-free (Edge-TTS): de, fr, es-ES, es-US, it, pt-BR.
+- 1 paid-recommended (ElevenLabs): hu.
+This pack does EN (Phase 0) + the 6 CJK (Phase 1). EU + HU is a later pack.
+
+=== THE REAL BOTTLENECK ===
+Not TTS. It's (a) translation — bank is English-only, CJK has 10 pilot atoms
+each — and (b) per-language gotcha research — English text-prep rules don't
+transfer (Japanese pitch-accent, Mandarin tone-sandhi, Cantonese, etc.).
+
+=== WHAT THE PACK DOES ===
+Lane 1  Finish English: run all 1,642 via the CORRECT text-prep script on
+        CosyVoice2, land the real voice bank + reels captions. Doable now.
+Lane 2  CJK6 gotcha research (Pearl_Research): one text-prep ruleset per
+        language, same shape as the English one.
+Lane 3  CJK6 translate (Pearl_Localization): translate the bank per locale.
+        zh-TW = Claude only (Qwen emits Simplified). zh-HK = Cantonese.
+Lane 4  CJK6 voice + A/B: voice each locale on CosyVoice2; A/B CosyVoice2 vs
+        self-hosted Qwen3-TTS to pick the best CJK engine.
+
+Order: Lane 1 now. Lanes 2+3 in parallel. Lane 4 after 2+3 land.
+Operator reads: listen to the English bank (Lane 1) and one CJK sample per
+language (Lane 4) before scaling — TTS quality is a taste call only you make.
