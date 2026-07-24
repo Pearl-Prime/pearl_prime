@@ -79,6 +79,8 @@
 
 ---
 
+**2026-07-24 addendum (MC endurance study):** additional named exemplars — Denji (*Chainsaw Man*, 36M cumulative 2026; small-appetite escalation management) and Eren Yeager (*Attack on Titan*, 140M; the controlled-demolition endgame model). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §dark_fantasy.
+
 ## 6. Failure modes
 
 1. **Grimdark for shock.** Violence or misery without thematic purpose signals immaturity, not depth.

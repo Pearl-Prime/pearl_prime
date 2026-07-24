@@ -82,6 +82,8 @@ SFX typography: large, integrated into the panel environment (not bubble-contain
 - **The mecha as character:** Give the machine narrative personhood — a name used affectionately, a damage history, behaviors that exceed the pilot's commands. The relationship between pilot and mecha is a primary relationship of the series.
 - **Emotional arc per volume:** Reluctance → forced action → cost recognized → fractional integration.
 
+**2026-07-24 addendum (MC endurance study):** current-decade bond proof — Suletta Mercury (*The Witch from Mercury*: best-selling Gunpla generation of its era) alongside the franchise-generational endurance model (pilot-per-era). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §mecha.
+
 ## 6. Failure Modes
 
 1. **"Mech porn"** — mechanical detail without character interiority. The machine is the genre's body; it is not the genre's subject.

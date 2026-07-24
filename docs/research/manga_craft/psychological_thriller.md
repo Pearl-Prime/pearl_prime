@@ -57,6 +57,8 @@ Reference titles from `docs/CJK_CATALOG_PLAN.md` §5: `cogclar_jp_07` through `c
 
 **Antagonist grammar:** The threat is *diffuse and potentially internal*. In Death Note, Light's antagonist is ultimately his own capacity for self-deception. In Monster, Tenma's antagonist is a real person — but the deeper threat is Tenma's certainty that he understands Johan. The psychological-thriller antagonist is never simply wrong or simply right. When a human antagonist exists (the gaslighting company in `cogclar_jp_09`, the IFS inner part in `cogclar_jp_11`), they must have internal logic the reader can follow even while rejecting the conclusion.
 
+**2026-07-24 addendum (MC endurance study):** endurance counter-model — Conan Edogawa (*Detective Conan*, 100+ vols/270M: episodic case engine + rationed frozen spine) vs this lane's completion-model (cat-and-mouse premises like *Death Note* exhaust in ~12 vols and must END; plan accordingly). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §mystery.
+
 ## 6. Failure modes
 
 1. **Explaining the unreliable narrator to the reader.** If a caption box says "I realize now I was lying to myself," the unreliability is over — the protagonist has become reliable about their unreliability.

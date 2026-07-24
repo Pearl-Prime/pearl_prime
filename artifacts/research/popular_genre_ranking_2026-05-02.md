@@ -129,3 +129,55 @@ Full source list in the agent's returned report. Key citations:
 ---
 
 *End of popular_genre_ranking_2026-05-02.md.*
+
+---
+
+## 2026 refresh addendum (2026-07-24 — manga process uplift Lane 04; verify-not-redo)
+
+Newest public data as of 2026-07-24. The original 2024–2025 tables above are unchanged.
+
+**Oricon Japan 2026 first-half series ranking (2025-11-17 → 2026-05-17):**
+1. Frieren: Beyond Journey's End — 1,618,588
+2. One Piece — 1,598,476
+3. Jujutsu Kaisen — 1,433,563
+4. Blue Lock — 1,266,011
+5. Chainsaw Man — 1,147,619
+6. Jujutsu Kaisen Modulo (2026 sequel debut) — 1,137,742
+([Oricon 2026-H1 — ResetEra](https://www.resetera.com/threads/oricon-japan-manga-sales-2026-first-half-2025-nov-17-2026-may-17-frieren-1-chainsaw-man-and-jujutsu-kaisen-hang-around-after-their-end.1529503/))
+
+**ICv2 / Circana BookScan US, monthly top-20 Feb–Jun 2026:** Jujutsu Kaisen dominance
+continues (up to half the manga chart in Feb–Mar); Apothecary Diaries vol 1 and Chainsaw Man
+vol 1 recurring — composition still overwhelmingly shonen/seinen, consistent with FY2024–25.
+([Feb](https://icv2.com/articles/markets/view/61902/) · [Mar](https://icv2.com/articles/markets/view/62141/) ·
+[Apr](https://icv2.com/articles/markets/view/62437/) · [May](https://icv2.com/articles/markets/view/62648/) ·
+[Jun](https://icv2.com/articles/markets/view/62885/))
+
+**Market size (AJPEA via ANN, 2026-03):** Japan manga market 2025 = ¥692.5B, **−1.7% — first
+contraction since 2017**; digital ¥527.3B (+2.9%, now 76.1% of market); print compiled volumes
+¥126B (−14.4%). ([ANN](https://www.animenewsnetwork.com/news/2026-03-03/manga-market-in-japan-shrinks-for-1st-time-in-7-years-in-2025/.234838))
+
+**Webtoon (WBTN) FY2025:** revenue $1.4B (+2.5%, +3.9% cc); IP adaptations +31.8%; operating
+loss narrowed 36.9% to $63.5M. Romance ≈27.4% of global webtoon market 2025 (#1), fantasy
+≈21.6% (fastest-growing). ([WBTN IR](https://ir.webtoon.com/news-releases/news-release-details/webtoon-entertainment-inc-reports-fourth-quarter-and-full-year-0) ·
+[market.us](https://market.us/report/webtoons-market/))
+
+**Notable series movements vs the 2024–25 tables:** Frieren takes the series #1 print slot
+(healing×fantasy register now outselling every pure battle title in JP print); Kingdom reaches
+120M cumulative; Blue Lock holds top-5 a second consecutive year (sports thesis re-confirmed);
+romance risers in JP print (The Fragrant Flower Blooms with Dignity 10M+ worldwide; Blue Box
+steady); Kagurabachi at 4M+ becomes the new-generation shonen launch proof; JJK sustains via
+sequel economics (Modulo top-10 debut). ([CBR 2026 ranking](https://www.cbr.com/official-highest-selling-manga-of-2026-ranked/))
+
+**Ranking impact on the empirical top-10 above:** no order change survives scrutiny — the
+battle/dark-fantasy cluster still anchors #1 volume-wise; fantasy_adventure and romance keep
+#2–3; the only signal strong enough to note is **healing/iyashikei's blend-registers
+(healing×fantasy, healing×mystery) now holding the JP print #1 series slot two of three years**
+(Frieren 2024 #3 → 2026-H1 #1; Apothecary 45M) — supportive of Phoenix's healing-anchor
+portfolio bet, not corrective of it.
+
+**Verdict line (per-brand allocation):** NO structural change to
+`docs/GENRE_PORTFOLIO_PLAN.md` per-brand allocations is warranted by 2026 data. The two
+standing flags from the original doc (sports underweight; fantasy_adventure under-allocation)
+are **re-confirmed and slightly strengthened** (Blue Lock top-5 again; Frieren #1) but remain
+inside the bands already flagged — they are operator-tier decisions already on record, not new
+movements. No Q-MPU-05 escalation required.

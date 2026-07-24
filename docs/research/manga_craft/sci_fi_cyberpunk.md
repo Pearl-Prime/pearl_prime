@@ -41,6 +41,8 @@ Readers are adults 25–40, skewing male, skewing tech-industry adjacent: develo
 - **Supporting characters:** The AI or system that asks real questions (Puppet Master, HAL-adjacent but non-villainous); colleagues who have made the opposite choice (full integration vs. full rejection); a "civilian" character who has not been augmented and represents what was given up.
 - **Antagonist:** The faceless system or its human proxy — a manager who speaks in metrics, a corporation that owns the protagonist's modification patents. The antagonist has no face in volumes 1–4; face-reveal is a mid-series event.
 
+**2026-07-24 addendum (MC endurance study):** additional exemplar — Senku Ishigami (*Dr. Stone*, 26 vols/15M: the science-ladder as the family's best pure-serial engine, each invention a rung with visible societal delta). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §sci_fi_cyberpunk.
+
 ## 6. Failure modes
 
 1. **World-building over character** — thirty pages of infrastructure detail with no protagonist inner experience. The megastructure is only interesting as a mirror.
