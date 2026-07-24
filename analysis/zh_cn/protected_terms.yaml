@@ -1,0 +1,73 @@
+# protected_terms.yaml — zh-CN
+#
+# Never translate/alter these. Preserve byte-for-byte per translation-qa
+# SKILL.md Required Checks #2 and #7.
+
+schema_version: 1
+locale: zh-CN
+
+header_lines:
+  pattern: "## <SHAPE> v<NN>"
+  examples: ["## STORY v01", "## HOOK v03", "## EXERCISE v06"]
+  rule: Preserve exactly, including the shape name (English, uppercase)
+    and zero-padded version number. Never translate SHAPE names.
+
+frontmatter_keys_and_values:
+  keys:
+    - MECHANISM_DEPTH
+    - IDENTITY_STAGE
+    - COST_TYPE
+    - COST_INTENSITY
+    - STORY_TYPE
+    - STORY_TYPE_SOURCE
+    - BAND
+    - path
+  value_examples:
+    - pre_awareness
+    - destabilization
+    - experimentation
+    - self_claim
+    - social
+    - internal
+    - opportunity
+    - identity
+    - character_study
+    - atmospheric
+    - heuristic_v1
+  rule: Keys and enum-like values are English identifiers consumed by
+    scripts/localization/validate_cjk_atom.py and
+    phoenix_v4/planning/assembly_compiler.py — never translate, never
+    reformat, never reorder.
+
+placeholder_tokens:
+  pattern: "{snake_case_name}"
+  examples: ["{weather_detail}", "{street_name}", "{transit_line}"]
+  rule: Preserve the exact token text including braces; do not translate
+    the token name, do not expand it, do not move it out of its original
+    sentence position if avoidable.
+
+delimiters:
+  pattern: "---"
+  rule: Preserve every "---" delimiter line exactly, including blank
+    delimiter blocks (some atoms have an empty "---\n\n---" frontmatter
+    gap when there is no frontmatter — keep that structure).
+
+markup:
+  rule: Preserve markdown links, HTML tags, and any template syntax
+    exactly, translating only the human-readable link text/tag content if
+    the source itself localizes it (per translation-qa SKILL.md #7).
+
+brand_and_product_names:
+  rule: Preserve exactly as in source — no examples encountered in the
+    sampled body text (2026-07-22 sample); if encountered during
+    production, add here rather than translating ad hoc.
+
+urls:
+  rule: Never translate or alter URLs.
+
+quoted_self_statements:
+  rule: >
+    NOT protected in the sense of "untranslated" — these ARE translated,
+    but must be rendered as natural sayable Mandarin (see
+    style_guide_zh_cn.yaml §dialogue_and_quoted_self_statements), never
+    left in English and never machine-literal.

@@ -13,6 +13,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 import shutil
 import textwrap
 from datetime import date, datetime, timezone
@@ -147,11 +148,47 @@ def stable_hash(*parts: Any, length: int = 12) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:length]
 
 
+# Some SOURCE_OF_TRUTH/social_media_atoms rows author their own colon-terminated
+# lead-in as part of the atom's own copy (e.g. TOOL_STEP atoms opening with
+# "Try this: ..." or "Run the ninety-second reset: ..."). The caption templates
+# below independently prepend their own lead-in label ("Try this: {practice}")
+# when composing the final caption, so folding such atom text straight into a
+# template slot doubles the label ("Try this: Try this: ..." /
+# "Try this: Run the ninety-second reset: ..."). Traced 2026-07-23 from the
+# live 20-post pilot (artifacts/qa/social_atom_composition_pilot_20260721/posts.jsonl,
+# post_index=2 cell) — see docs finding note for the exact atom_id list flagged
+# to Lane C. Strip any embedded lead-in at the point atom text is folded into
+# a template slot so only the assembler's own label survives.
+_EMBEDDED_LEAD_IN_RE = re.compile(r"^[A-Z][A-Za-z0-9 ,'\-]{2,48}:\s+")
+
+
+def _strip_embedded_lead_in(text: str) -> str:
+    stripped = (text or "").strip()
+    match = _EMBEDDED_LEAD_IN_RE.match(stripped)
+    if not match:
+        return stripped
+    remainder = stripped[match.end():].strip()
+    if remainder:
+        return remainder[0].upper() + remainder[1:]
+    return stripped
+
+
 def font(path: str, size: int) -> ImageFont.FreeTypeFont:
-    try:
-        return ImageFont.truetype(path, size)
-    except Exception:
-        return ImageFont.truetype(FONT_FALLBACK, size)
+    # FONT_SANS/FONT_FALLBACK are macOS system paths; CI runners (Linux) don't
+    # have them. Try common Linux truetype locations before degrading to
+    # Pillow's bundled bitmap font so rendering never crashes off macOS.
+    candidates = (
+        path,
+        FONT_FALLBACK,
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+    )
+    for candidate in candidates:
+        try:
+            return ImageFont.truetype(candidate, size)
+        except Exception:
+            continue
+    return ImageFont.load_default()
 
 
 def measure(draw: ImageDraw.ImageDraw, text: str, fnt: ImageFont.FreeTypeFont) -> tuple[int, int]:
@@ -399,6 +436,28 @@ def select_atoms_with_cooldown(
     return selected
 
 
+# A brand voice profile supplies exactly ONE fixed cta_phrase — correct for
+# identity, but it means every post from that brand/platform/topic slice
+# repeats the identical CTA string verbatim once a voice is applied. Confirmed
+# 2026-07-23: 20-post pilot batch had only 2 distinct CTA strings total, one
+# per brand, each repeated 10/10 times. These wrappers keep the brand's own
+# phrase intact (voice/identity unchanged) while varying the surrounding
+# sentence so the literal CTA string diverges across a rotated batch.
+_CTA_ROTATION_WRAPPERS = (
+    "{phrase}",
+    "{phrase} Save it before the week gets loud again.",
+    "Bookmark this: {phrase}",
+    "{phrase} Worth a second look next time this pattern shows up.",
+)
+
+
+def _rotate_cta_phrase(phrase: str, post_index: int) -> str:
+    if not post_index or not phrase:
+        return phrase
+    wrapper = _CTA_ROTATION_WRAPPERS[post_index % len(_CTA_ROTATION_WRAPPERS)]
+    return wrapper.format(phrase=phrase)
+
+
 def apply_voice_to_copy(copy: dict[str, Any], voice: dict[str, Any]) -> dict[str, Any]:
     """Mutate CTA/sign-off from a non-universal voice. No-op when phrases are null."""
     out = dict(copy)
@@ -406,6 +465,7 @@ def apply_voice_to_copy(copy: dict[str, Any], voice: dict[str, Any]) -> dict[str
     old_cta = cta.get("text") or ""
     new_cta = voice.get("cta_phrase")
     if new_cta:
+        new_cta = _rotate_cta_phrase(new_cta, int(copy.get("post_index") or 0))
         cta["text"] = new_cta
         out["cta"] = cta
         if old_cta and old_cta in (out.get("caption") or ""):
@@ -477,16 +537,44 @@ def cta_for_topic(topic: str, surface: str = "carousel") -> dict[str, str]:
     }
 
 
-def hashtags_for(topic: str, platform: str, max_count: int, min_count: int = 0) -> list[str]:
-    tags = list(topic_profile(topic).get("hashtags", []))
-    extras = ["selfhelp", "workwellbeing", "gentlepractice", "mindfulwork", "bookstagram"]
-    for tag in extras:
-        if tag not in tags:
-            tags.append(tag)
-    count = max(min_count, min(max_count, len(tags)))
+_HASHTAG_EXTRAS_POOL = (
+    "selfhelp", "workwellbeing", "gentlepractice", "mindfulwork", "bookstagram",
+    "mentalhealthawareness", "dailyreset", "smallsteps", "mindsetshift", "worklifebalance",
+    "selfcare", "innerwork", "stressrelief", "calmmind", "dailyhabits", "growthmindset",
+)
+
+
+def hashtags_for(topic: str, platform: str, max_count: int, min_count: int = 0, post_index: int = 0) -> list[str]:
     if platform == "youtube":
         return []
-    return tags[:count]
+    topic_tags = list(topic_profile(topic).get("hashtags", []))
+    merged = list(topic_tags)
+    for tag in _HASHTAG_EXTRAS_POOL:
+        if tag not in merged:
+            merged.append(tag)
+    count = max(min_count, min(max_count, len(merged)))
+    if count <= 0:
+        return []
+    if not post_index:
+        # Baseline/no-vibe path stays byte-identical to the pre-existing behavior.
+        return merged[:count]
+    # Rotation path (post_index > 0): keep the primary topic tag for discoverability,
+    # then rotate the rest of the topic tags + extras pool so the hashtag SET (not
+    # just its order) diverges across a batch. Gap confirmed 2026-07-23: on a
+    # full-pool platform (e.g. instagram_feed_portrait, hashtags_max=15) the merged
+    # pool was exactly 10 tags, so count == len(merged) and every post in a
+    # brand/surface slice emitted the identical verbatim hashtag set (10/10 in the
+    # pilot batch) — nothing was ever left over to rotate through.
+    anchor = topic_tags[:1]
+    remaining = count - len(anchor)
+    if remaining <= 0:
+        return anchor[:count]
+    pool = [t for t in merged if t not in anchor]
+    if not pool:
+        return anchor[:count]
+    offset = post_index % len(pool)
+    rotated = pool[offset:] + pool[:offset]
+    return anchor + rotated[:remaining]
 
 
 def caption_with_tags(caption: str, tags: list[str], inline: bool = False) -> str:
@@ -527,7 +615,9 @@ def generate_copy_package(
             hook_family = hook_keys[int(stable_hash(persona, topic, surface_id), 16) % len(hook_keys)]
     cta = cta_for_topic(topic, "carousel" if format_family == "carousel" else "quote_card")
     caption_cfg = surface["caption"]
-    tags = hashtags_for(topic, platform, caption_cfg.get("hashtags_max", 0), caption_cfg.get("hashtags_min", 0))
+    tags = hashtags_for(
+        topic, platform, caption_cfg.get("hashtags_max", 0), caption_cfg.get("hashtags_min", 0), post_index
+    )
     label = persona_row["label"]
     behavior = persona_row["private_behavior"]
     hook = topic_row["safe_hook"]
@@ -556,9 +646,12 @@ def generate_copy_package(
             if family == "HOOK_COVER":
                 hook = text
             elif family == "TOOL_STEP":
-                practice = text
+                # Atom copy may embed its own lead-in ("Try this: ..."); the
+                # professional-mode template adds its own "Try this:" label,
+                # so strip the atom's embedded one to avoid doubling it.
+                practice = _strip_embedded_lead_in(text)
             elif family == "MECHANISM_EXPLAINER":
-                mechanism = text
+                mechanism = _strip_embedded_lead_in(text)
             elif family == "REFRAME":
                 insight = text
         # Deterministic frame rotation (seeded by post_index — never random).
@@ -587,7 +680,13 @@ def generate_copy_package(
             ]
             rotate_practice = [
                 topic_row["practice"],
-                topic_row["mechanism"],
+                # NOTE: previously duplicated topic_row["mechanism"] here, which is
+                # also rotate_insights[1] — at idx%8==1 that made insight and
+                # practice render as the exact same sentence back to back in the
+                # caption body (traced 2026-07-23 pilot, post_index=2 cell). Use a
+                # distinct, practice-flavored line instead so the two rotation
+                # banks never collide index-for-index.
+                "Name the leak, then take one visible next action smaller than your normal ask.",
                 "Write the demand in one line, then cut it by half before you act.",
                 "Stand, exhale longer than you inhale, and choose one inbox item to defer.",
                 "Set a 10-minute recovery block on the calendar before the next meeting.",
@@ -606,13 +705,23 @@ def generate_copy_package(
             insight = rotate_insights[idx % len(rotate_insights)]
             practice = rotate_practice[idx % len(rotate_practice)]
             if atom_tool:
-                practice = f"{practice} {atom_tool.strip()}"
+                # Strip any lead-in the atom already embeds ("Try this: ...",
+                # "Run the ninety-second reset: ...") before folding it in — the
+                # professional-mode template adds its own "Try this:" label and
+                # would otherwise double it (traced 2026-07-23 pilot).
+                practice = f"{practice} {_strip_embedded_lead_in(atom_tool)}"
             mechanism = rotate_insights[(idx + 3) % len(rotate_insights)]
 
     mode = surface.get("native_copy_mode", "")
     if "professional" in mode:
+        # Direct address, not third-person persona narration: earlier drafts
+        # opened this clause with "For {label}, ..." (e.g. "For corporate
+        # managers, ..."), which reads as talking about the reader instead of
+        # to them. Traced 2026-07-23 pilot; confirmed assembler-injected (this
+        # literal template), not atom content — the phrase does not occur
+        # anywhere in SOURCE_OF_TRUTH/social_media_atoms/*.jsonl.
         caption = (
-            f"{hook}\n\nFor {label}, the hidden cost often shows up as {behavior}.\n\n"
+            f"{hook}\n\nThe hidden cost often shows up as {behavior}.\n\n"
             f"Mechanism: {mechanism}\n\nTry this: {practice}\n\n"
             f"{cta['text']}"
         )
@@ -632,7 +741,8 @@ def generate_copy_package(
         caption = f"{hook} {practice}"
         first_comment = None
     elif "conversational" in mode or "thoughtful" in mode:
-        caption = f"{hook} For {label}, the loop often looks like {behavior}. One small reset: {practice}"
+        # Same direct-address fix as the professional-mode branch above.
+        caption = f"{hook} The loop often looks like {behavior}. One small reset: {practice}"
         first_comment = None
     elif "local" in mode:
         caption = f"{topic_row['book_title']}: a practical reflection for {label}. {practice} {cta['text']}"
@@ -685,6 +795,164 @@ def generate_copy_package(
         package["selected_atom_ids"] = [a.get("atom_id") for a in selected_atoms if a.get("atom_id")]
         package["post_index"] = post_index
     # Default args (brand_id/author_id unset) must stay byte-identical — skip voice overlay.
+    if brand_id or author_id:
+        voice = resolve_voice_profile(brand_id=brand_id, author_id=author_id)
+        package = apply_voice_to_copy(package, voice)
+    return package
+
+
+# --- Lane E (2026-07-23): wiring for the 5 atom families Lane C authored but Lane D's
+# inspection found unreachable from generate_copy_package (MICRO_STORY, CASE_PROOF,
+# CAROUSEL_SLIDE, THREAD_UNIT, VIDEO_BEAT — see docs/PEARL_SOCIAL_MEDIA_WRITER_AGENT_SPEC_2026-07-18.md
+# §Atom Families and artifacts/social_media_atoms/pearl_social_media_writer_20260723/
+# BEFORE_AFTER_COMPARISON_20260723.md §3). This closes the pack's original "posts have no
+# story or proof" diagnosis for the story-led caption path, and gives carousel/thread/
+# video-beat surfaces a real multi-part output instead of falling back to a single caption.
+
+# Cross-family chain for the story-led caption variant. All four families are already
+# populated + chained (compatible_previous/compatible_next) for the two pilot cells Lane C
+# authored (burnout x corporate_managers, anxiety x gen_z_professionals); other cells fall
+# back honestly (see generate_story_led_copy_package) rather than assembling a broken chain.
+STORY_LED_CHAIN_FAMILIES = ["MICRO_STORY", "CASE_PROOF", "TOOL_STEP", "CTA_ANCHOR"]
+
+
+def _chain_links_compatible(atoms: list[dict[str, Any]]) -> bool:
+    """True when each atom in ``atoms`` (in order) is a legal handoff to the next: the next
+    atom's family appears in the current atom's ``compatible_next`` list, OR the current
+    atom's family appears in the next atom's ``compatible_previous`` list (either direction
+    is authored evidence of a sanctioned link — Lane C atoms sometimes only annotate one
+    side of a pair). Both fields are semicolon-delimited strings.
+    """
+    for i in range(len(atoms) - 1):
+        cur, nxt = atoms[i], atoms[i + 1]
+        cur_next = set(str(cur.get("compatible_next") or "").split(";"))
+        nxt_prev = set(str(nxt.get("compatible_previous") or "").split(";"))
+        if nxt.get("atom_family") not in cur_next and cur.get("atom_family") not in nxt_prev:
+            return False
+    return True
+
+
+def generate_story_led_copy_package(
+    persona: str,
+    topic: str,
+    surface_id: str,
+    *,
+    brand_id: str | None = None,
+    author_id: str | None = None,
+    post_index: int = 0,
+    used_history: dict[str, date] | None = None,
+    as_of: date | None = None,
+) -> dict[str, Any]:
+    """Story-led post variant: MICRO_STORY -> CASE_PROOF -> TOOL_STEP -> CTA_ANCHOR, chained
+    via the ``compatible_previous``/``compatible_next`` fields Lane C populated on the atom
+    rows. This is the format that answers the pack's original "posts have no story or proof"
+    finding — the standard ``generate_copy_package`` static caption never selects MICRO_STORY
+    or CASE_PROOF rows at all.
+
+    Reuses ``select_atoms_with_cooldown`` (same brand/author scoping + reuse-cooldown
+    discipline as the rest of the assembler) rather than a bespoke picker, so this format
+    rotates/cools down consistently with every other atom-backed path.
+
+    Honest fallback: when a persona/topic cell does not yet have all four families
+    populated (only the two Lane C pilot cells do today), this returns the standard static
+    ``generate_copy_package`` result with ``story_led_chain_complete: False`` set on it —
+    it does NOT silently assemble a partial/broken chain. Callers must check
+    ``package["story_led_chain_complete"]`` before treating the caption as story-led.
+    """
+    specs = load_platform_specs()
+    surface = specs["surfaces"][surface_id]
+    platform = surface["platform"]
+    caption_cfg = surface["caption"]
+
+    chain_atoms = select_atoms_with_cooldown(
+        persona=persona,
+        topic=topic,
+        platform=platform,
+        brand_id=brand_id,
+        author_id=author_id,
+        post_index=post_index,
+        families=STORY_LED_CHAIN_FAMILIES,
+        used_history=used_history,
+        as_of=as_of,
+    )
+    by_family = {a.get("atom_family"): a for a in chain_atoms}
+    if not all(fam in by_family for fam in STORY_LED_CHAIN_FAMILIES):
+        fallback = generate_copy_package(
+            persona,
+            topic,
+            surface_id,
+            format_family="static",
+            brand_id=brand_id,
+            author_id=author_id,
+            post_index=post_index,
+            used_history=used_history,
+            as_of=as_of,
+        )
+        fallback["story_led_chain_complete"] = False
+        fallback["story_led_gap_reason"] = "incomplete_chain_families_for_cell"
+        return fallback
+
+    ordered = [by_family[fam] for fam in STORY_LED_CHAIN_FAMILIES]
+    chain_ok = _chain_links_compatible(ordered)
+    # Every atom in this chain already authors its own complete sentence/lead-in (Lane C
+    # traced this explicitly in BEFORE_AFTER_COMPARISON_20260723.md §3) — unlike the
+    # template-driven static caption modes, this format does NOT prepend a "Try this:"
+    # label of its own, so it cannot reproduce Lane D's doubled-label bug by construction.
+    # TOOL_STEP rows still carry their own embedded lead-in variants; keep them but do not
+    # add a second one.
+    body_paragraphs = [str(a.get("text") or "").strip() for a in ordered]
+    caption = "\n\n".join(p for p in body_paragraphs if p)
+    tags = hashtags_for(
+        topic, platform, caption_cfg.get("hashtags_max", 0), caption_cfg.get("hashtags_min", 0), post_index
+    )
+    inline = platform in {"x", "bluesky", "tiktok_reels_shorts", "pinterest"}
+    caption = caption_with_tags(caption, tags, inline=inline)
+    max_chars = caption_cfg.get("max_chars", 2200)
+    if len(caption) > max_chars:
+        base = caption.split("\n\n#")[0]
+        truncated = textwrap.shorten(base.replace("\n", " "), width=max_chars - 40, placeholder="...")
+        caption = caption_with_tags(truncated, tags[: max(0, caption_cfg.get("hashtags_max", 0))], inline=True)
+
+    label = persona_profile(persona)["label"]
+    overlay_text = [
+        textwrap.shorten(ordered[0]["text"], width=88, placeholder="..."),
+        "A pattern worth naming",
+        "Try this",
+    ]
+    alt = (
+        f"Story-led social post for {topic.replace('_', ' ')} and {label}. "
+        f"Visual text: {' / '.join(overlay_text)}."
+    )
+    cta_row = ordered[-1]
+    cta = {
+        "text": cta_row.get("text") or "",
+        "url": cta_for_topic(topic)["url"],
+        "freebie_name": cta_for_topic(topic)["freebie_name"],
+        "release_gate": "manual_review_required",
+    }
+    copy_id = f"copy_story_{stable_hash(persona, topic, surface_id, brand_id or '', author_id or '', post_index)}"
+    package: dict[str, Any] = {
+        "copy_id": copy_id,
+        "topic": topic,
+        "persona": persona,
+        "platform": platform,
+        "surface_id": surface_id,
+        "format_family": "story_led",
+        "hook_family": "story_scene",
+        "mode": surface.get("native_copy_mode", ""),
+        "overlay_text": overlay_text,
+        "caption": caption,
+        "first_comment": None,
+        "hashtags": tags,
+        "cta": cta,
+        "alt_text": alt,
+        "safety_disclaimer": load_words_bank().get("safety_rules", {}).get("disclaimer"),
+        "selected_atom_ids": [a.get("atom_id") for a in ordered if a.get("atom_id")],
+        "chain_families": list(STORY_LED_CHAIN_FAMILIES),
+        "chain_compatibility_verified": chain_ok,
+        "story_led_chain_complete": True,
+        "post_index": post_index,
+    }
     if brand_id or author_id:
         voice = resolve_voice_profile(brand_id=brand_id, author_id=author_id)
         package = apply_voice_to_copy(package, voice)
@@ -1264,6 +1532,221 @@ def build_carousel_package(
     return package
 
 
+# --- Lane E (2026-07-23): atom-backed multi-part formats ---------------------------------
+#
+# ``build_carousel_package`` above (CAROUSEL_ENGINES) fills each slide's text from the
+# topic/persona word-bank via ``carousel_slide_text`` — it never reads a CAROUSEL_SLIDE atom
+# row. The functions below are a separate, additive assembly path that reads the real
+# CAROUSEL_SLIDE / THREAD_UNIT / VIDEO_BEAT rows Lane C authored and chains them via
+# ``compatible_previous``/``compatible_next``. Output shape is a list of slide/post/beat
+# dicts, not a single caption string — the multi-part structure the spec's §Atom Families
+# calls for. Nothing above this section is changed or re-routed.
+
+
+def _walk_self_chain(pool: list[dict[str, Any]], family: str) -> list[dict[str, Any]]:
+    """Deterministically order same-family atom rows chained via ``compatible_previous``/
+    ``compatible_next``.
+
+    Lane C's authoring convention for these interior links names only the family itself
+    (e.g. every non-terminal CAROUSEL_SLIDE row's ``compatible_next`` is literally the
+    string ``"CAROUSEL_SLIDE"``), so there is no per-row field that distinguishes "the next
+    specific slide" from "any slide in this family". The only free-standing, deterministic
+    tie-break available is ``atom_id`` ascending — which is also the authored suffix order
+    (``...-CS-01`` .. ``...-CS-06``, ``...-TU-01`` .. ``...-TU-04``), so this is not an
+    arbitrary tie-break, it matches how the rows were actually numbered.
+
+    Starts from the row whose ``compatible_previous`` contains ``ANY_START``; stops once the
+    current row's ``compatible_next`` no longer names this family (i.e. it hands off to
+    BRIDGE/CTA_ANCHOR). Returns ``[]`` when no ``ANY_START`` row exists in ``pool`` — callers
+    must treat that as a real gap (no chain for this cell yet), not guess an order.
+    """
+    remaining = {a["atom_id"]: a for a in pool if a.get("atom_id")}
+    if not remaining:
+        return []
+    starts = [a for a in remaining.values() if "ANY_START" in str(a.get("compatible_previous") or "").split(";")]
+    if not starts:
+        return []
+    starts.sort(key=lambda a: str(a.get("atom_id") or ""))
+    current = starts[0]
+    chain = [current]
+    del remaining[current["atom_id"]]
+    while remaining:
+        next_tokens = set(str(current.get("compatible_next") or "").split(";"))
+        if family not in next_tokens:
+            break
+        candidates = sorted(remaining.values(), key=lambda a: str(a.get("atom_id") or ""))
+        current = candidates[0]
+        chain.append(current)
+        del remaining[current["atom_id"]]
+    return chain
+
+
+def _atom_pool_for_cell(
+    family: str, topic: str, persona: str, brand_id: str | None, author_id: str | None
+) -> list[dict[str, Any]]:
+    return [
+        a
+        for a in load_social_atoms()
+        if a.get("atom_family") == family
+        and a.get("topic") == topic
+        and a.get("persona") == persona
+        and atom_in_scope(a, brand_id, author_id)
+    ]
+
+
+def build_atom_carousel_package(
+    persona: str,
+    topic: str,
+    surface_id: str,
+    *,
+    brand_id: str | None = None,
+    author_id: str | None = None,
+) -> dict[str, Any]:
+    """Multi-slide carousel assembled from real CAROUSEL_SLIDE atom rows (Lane C), chained via
+    ``compatible_previous``/``compatible_next`` — see module-section note above for how this
+    differs from ``build_carousel_package``/``CAROUSEL_ENGINES``.
+
+    Returns a ``slides`` list (index/atom_id/text), not a single caption. When the cell has no
+    CAROUSEL_SLIDE rows yet (only the two Lane C pilot cells do today), returns an honest gap
+    (``chain_complete: False``, empty ``slides``) rather than fabricating slide text.
+    """
+    surface = load_platform_specs()["surfaces"][surface_id]
+    pool = _atom_pool_for_cell("CAROUSEL_SLIDE", topic, persona, brand_id, author_id)
+    ordered = _walk_self_chain(pool, "CAROUSEL_SLIDE")
+    label = persona_profile(persona)["label"]
+    if not ordered:
+        return {
+            "carousel_id": f"carousel_atoms_{stable_hash(topic, persona, surface_id)}",
+            "format_family": "carousel_atoms",
+            "topic": topic,
+            "persona": persona,
+            "surface_id": surface_id,
+            "platform": surface["platform"],
+            "slides": [],
+            "slide_count": 0,
+            "chain_complete": False,
+            "gap_reason": "no_carousel_slide_atoms_for_cell",
+        }
+    slides = []
+    for idx, atom in enumerate(ordered):
+        next_tokens = set(str(atom.get("compatible_next") or "").split(";"))
+        slides.append(
+            {
+                "index": idx + 1,
+                "atom_id": atom.get("atom_id"),
+                "text": atom.get("text") or "",
+                "word_count": len(str(atom.get("text") or "").split()),
+                "is_cover": idx == 0,
+                "is_close": "CTA_ANCHOR" in next_tokens or "BRIDGE" in next_tokens,
+            }
+        )
+    caption_cfg = surface["caption"]
+    tags = hashtags_for(topic, surface["platform"], caption_cfg.get("hashtags_max", 0), caption_cfg.get("hashtags_min", 0))
+    package: dict[str, Any] = {
+        "carousel_id": f"carousel_atoms_{stable_hash(topic, persona, surface_id)}",
+        "format_family": "carousel_atoms",
+        "topic": topic,
+        "persona": persona,
+        "surface_id": surface_id,
+        "platform": surface["platform"],
+        "slides": slides,
+        "slide_count": len(slides),
+        "selected_atom_ids": [s["atom_id"] for s in slides],
+        "chain_complete": True,
+        "hashtags": tags,
+        "alt_text": (
+            f"Carousel for {topic.replace('_', ' ')} and {label}. "
+            f"Slides: {' / '.join(s['text'][:48] for s in slides)}."
+        ),
+    }
+    if brand_id or author_id:
+        voice = resolve_voice_profile(brand_id=brand_id, author_id=author_id)
+        package["brand_id"] = voice.get("brand_id")
+        package["author_id"] = voice.get("author_id")
+        package["brand_display_name"] = voice.get("display_name") or DEFAULT_BRAND_DISPLAY_NAME
+        cta_phrase = voice.get("cta_phrase")
+        if cta_phrase and slides:
+            # Overlay the brand's own close-out phrase onto the final (CTA-adjacent) slide
+            # text only — every interior slide keeps its authored atom text untouched.
+            last = dict(slides[-1])
+            last["text"] = f"{last['text']} {cta_phrase}".strip()
+            package["slides"] = slides[:-1] + [last]
+    return package
+
+
+def build_atom_thread_package(
+    persona: str,
+    topic: str,
+    surface_id: str,
+    *,
+    brand_id: str | None = None,
+    author_id: str | None = None,
+) -> dict[str, Any]:
+    """Multi-post thread assembled from real THREAD_UNIT atom rows (Lane C), chained via
+    ``compatible_previous``/``compatible_next``. Returns a ``posts`` list (index/atom_id/
+    text/char_count), one entry per thread post, not a single caption — the X/Threads/
+    LinkedIn thread structure the spec's THREAD_UNIT family calls for.
+
+    Honest gap: returns ``chain_complete: False`` / empty ``posts`` when the cell has no
+    THREAD_UNIT rows yet, matching ``build_atom_carousel_package``'s gap behavior.
+    """
+    surface = load_platform_specs()["surfaces"][surface_id]
+    pool = _atom_pool_for_cell("THREAD_UNIT", topic, persona, brand_id, author_id)
+    ordered = _walk_self_chain(pool, "THREAD_UNIT")
+    label = persona_profile(persona)["label"]
+    if not ordered:
+        return {
+            "thread_id": f"thread_atoms_{stable_hash(topic, persona, surface_id)}",
+            "format_family": "thread_atoms",
+            "topic": topic,
+            "persona": persona,
+            "surface_id": surface_id,
+            "platform": surface["platform"],
+            "posts": [],
+            "post_count": 0,
+            "chain_complete": False,
+            "gap_reason": "no_thread_unit_atoms_for_cell",
+        }
+    posts = []
+    for idx, atom in enumerate(ordered):
+        text = str(atom.get("text") or "")
+        posts.append(
+            {
+                "index": idx + 1,
+                "atom_id": atom.get("atom_id"),
+                "text": text,
+                "char_count": len(text),
+                "is_hook": idx == 0,
+                "is_invitation": idx == len(ordered) - 1,
+            }
+        )
+    package: dict[str, Any] = {
+        "thread_id": f"thread_atoms_{stable_hash(topic, persona, surface_id)}",
+        "format_family": "thread_atoms",
+        "topic": topic,
+        "persona": persona,
+        "surface_id": surface_id,
+        "platform": surface["platform"],
+        "posts": posts,
+        "post_count": len(posts),
+        "selected_atom_ids": [p["atom_id"] for p in posts],
+        "chain_complete": True,
+        "alt_text": f"Thread for {topic.replace('_', ' ')} and {label}, {len(posts)} posts.",
+    }
+    if brand_id or author_id:
+        voice = resolve_voice_profile(brand_id=brand_id, author_id=author_id)
+        package["brand_id"] = voice.get("brand_id")
+        package["author_id"] = voice.get("author_id")
+        package["brand_display_name"] = voice.get("display_name") or DEFAULT_BRAND_DISPLAY_NAME
+        cta_phrase = voice.get("cta_phrase")
+        if cta_phrase and posts:
+            last = dict(posts[-1])
+            last["text"] = f"{last['text']} {cta_phrase}".strip()
+            last["char_count"] = len(last["text"])
+            package["posts"] = posts[:-1] + [last]
+    return package
+
+
 # Media-bank integration seam (Lane 06, phoenix_v4/social/media_selector.py).
 # Video families currently CODE-WIRED in the bank (config/social/media_bank_sizing_20260719.yaml
 # video_wired_families) — a beat's family is chosen by deterministic round-robin on beat index,
@@ -1488,6 +1971,142 @@ def build_video_storyboard(
             ),
         }
     return storyboard
+
+
+# Canonical 5-beat map per docs/PEARL_SOCIAL_MEDIA_WRITER_AGENT_SPEC_2026-07-18.md
+# §Atom Families: "0-3s hook, 3-8s agitation, 8-20s value, 20-25s proof, final CTA." Lane C
+# authored a ``beat_role`` field directly onto every VIDEO_BEAT row carrying exactly these
+# 5 values, so — unlike CAROUSEL_SLIDE/THREAD_UNIT above — ordering is a role lookup, not a
+# compatible_previous/compatible_next chain walk.
+VIDEO_BEAT_ROLE_ORDER = ["hook_0_3s", "agitation_3_8s", "value_8_20s", "proof_20_25s", "cta_final"]
+VIDEO_BEAT_ROLE_WINDOWS = {
+    "hook_0_3s": (0.0, 3.0),
+    "agitation_3_8s": (3.0, 8.0),
+    "value_8_20s": (8.0, 20.0),
+    "proof_20_25s": (20.0, 25.0),
+    "cta_final": (25.0, 30.0),
+}
+
+
+def build_atom_video_beat_script(
+    persona: str,
+    topic: str,
+    surface_id: str,
+    *,
+    brand_id: str | None = None,
+    author_id: str | None = None,
+) -> dict[str, Any]:
+    """Beat-timed short-video script assembled from real VIDEO_BEAT atom rows (Lane C),
+    ordered by the atom's own ``beat_role`` field against ``VIDEO_BEAT_ROLE_ORDER``. This is
+    a script structure (start_s/end_s/beat_role/text per beat), not a caption and not the
+    template-filled ``build_video_storyboard`` stills path — it is additive alongside it.
+
+    Honest gap: returns ``chain_complete: False`` / empty ``beats`` (with the specific
+    missing roles named) when the cell does not yet have all 5 canonical beat roles
+    populated, rather than skipping a beat silently.
+    """
+    surface = load_platform_specs()["surfaces"][surface_id]
+    pool = _atom_pool_for_cell("VIDEO_BEAT", topic, persona, brand_id, author_id)
+    by_role: dict[str, dict[str, Any]] = {}
+    for atom in pool:
+        role = atom.get("beat_role")
+        if role in VIDEO_BEAT_ROLE_WINDOWS and role not in by_role:
+            by_role[role] = atom
+    missing = [role for role in VIDEO_BEAT_ROLE_ORDER if role not in by_role]
+    if missing:
+        return {
+            "storyboard_id": f"video_beat_atoms_{stable_hash(topic, persona, surface_id)}",
+            "format_family": "video_beat_atoms",
+            "topic": topic,
+            "persona": persona,
+            "surface_id": surface_id,
+            "platform": surface["platform"],
+            "beats": [],
+            "beat_count": 0,
+            "chain_complete": False,
+            "gap_reason": f"missing_beat_roles:{','.join(missing)}",
+        }
+    beats = []
+    for role in VIDEO_BEAT_ROLE_ORDER:
+        atom = by_role[role]
+        start, end = VIDEO_BEAT_ROLE_WINDOWS[role]
+        beats.append(
+            {
+                "beat_role": role,
+                "start_s": start,
+                "end_s": end,
+                "atom_id": atom.get("atom_id"),
+                "text": atom.get("text") or "",
+            }
+        )
+    package: dict[str, Any] = {
+        "storyboard_id": f"video_beat_atoms_{stable_hash(topic, persona, surface_id)}",
+        "format_family": "video_beat_atoms",
+        "topic": topic,
+        "persona": persona,
+        "surface_id": surface_id,
+        "platform": surface["platform"],
+        "duration_s": VIDEO_BEAT_ROLE_WINDOWS["cta_final"][1],
+        "beats": beats,
+        "beat_count": len(beats),
+        "selected_atom_ids": [b["atom_id"] for b in beats],
+        "chain_complete": True,
+        "safety": {
+            "no_flashing": True,
+            "rapid_motion": "not_used",
+            "captions_in_safe_zone": True,
+        },
+    }
+    if brand_id or author_id:
+        voice = resolve_voice_profile(brand_id=brand_id, author_id=author_id)
+        package["brand_id"] = voice.get("brand_id")
+        package["author_id"] = voice.get("author_id")
+        package["brand_display_name"] = voice.get("display_name") or DEFAULT_BRAND_DISPLAY_NAME
+        cta_phrase = voice.get("cta_phrase")
+        if cta_phrase and beats:
+            last = dict(beats[-1])
+            last["text"] = f"{last['text']} {cta_phrase}".strip()
+            package["beats"] = beats[:-1] + [last]
+    return package
+
+
+ATOM_ASSEMBLY_FORMAT_FAMILIES = ("story_led", "carousel_atoms", "thread_atoms", "video_beat_atoms")
+
+
+def assemble_social_post(
+    persona: str,
+    topic: str,
+    surface_id: str,
+    format_family: str = "static",
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Single dispatch entrypoint across every post-format option, including the 4 atom
+    families wired by Lane E (2026-07-23) on top of the 9 families the deterministic
+    assembler already selected from. Existing callers of ``generate_copy_package`` /
+    ``build_carousel_package`` / ``build_video_storyboard`` are unaffected — this is a new,
+    additive convenience wrapper around them, not a replacement.
+
+    ``format_family``:
+      - ``"static"`` / ``"carousel"`` / ``"video_storyboard"`` (existing, unchanged) ->
+        ``generate_copy_package`` (single caption / carousel or storyboard copy package).
+      - ``"story_led"`` -> ``generate_story_led_copy_package`` (MICRO_STORY -> CASE_PROOF ->
+        TOOL_STEP -> CTA_ANCHOR, single caption assembled from a real story+proof chain).
+      - ``"carousel_atoms"`` -> ``build_atom_carousel_package`` (real CAROUSEL_SLIDE chain,
+        multi-slide list — distinct from the template-filled ``"carousel"`` path).
+      - ``"thread_atoms"`` -> ``build_atom_thread_package`` (real THREAD_UNIT chain,
+        multi-post list).
+      - ``"video_beat_atoms"`` -> ``build_atom_video_beat_script`` (real VIDEO_BEAT
+        beat-timed script — distinct from the template-filled ``"video_storyboard"`` path).
+    """
+    if format_family == "story_led":
+        return generate_story_led_copy_package(persona, topic, surface_id, **kwargs)
+    if format_family == "carousel_atoms":
+        return build_atom_carousel_package(persona, topic, surface_id, **kwargs)
+    if format_family == "thread_atoms":
+        return build_atom_thread_package(persona, topic, surface_id, **kwargs)
+    if format_family == "video_beat_atoms":
+        return build_atom_video_beat_script(persona, topic, surface_id, **kwargs)
+    return generate_copy_package(persona, topic, surface_id, format_family=format_family, **kwargs)
 
 
 def build_metricool_payload(asset: dict[str, Any], publication_date: str | None = None) -> dict[str, Any]:

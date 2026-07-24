@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -13,6 +14,7 @@ except ImportError:  # pragma: no cover
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 _CONTENT_BANKS_DIR = REPO_ROOT / "config" / "content_banks"
+LOGGER = logging.getLogger(__name__)
 
 REQUIRED_VARIANT_KEYS = frozenset(
     {
@@ -122,47 +124,51 @@ def _load_registry_from_dir(root: Path) -> ContentBankRegistry:
     yaml_files = sorted(root.glob("*.yaml"))
 
     for path in yaml_files:
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        stem = path.stem
-        if "quarantine_entries" in data:
-            qe = data.get("quarantine_entries") or []
-            sr = data.get("secular_replacements") or []
-            if not isinstance(qe, list) or not isinstance(sr, list):
-                raise ContentBankSchemaError(f"{path}: quarantine_entries/secular_replacements must be lists")
-            quarantine_entries.extend(qe)
-            secular_replacements.extend(sr)
-            continue
+        try:
+            data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            stem = path.stem
+            if "quarantine_entries" in data:
+                qe = data.get("quarantine_entries") or []
+                sr = data.get("secular_replacements") or []
+                if not isinstance(qe, list) or not isinstance(sr, list):
+                    raise ContentBankSchemaError(f"{path}: quarantine_entries/secular_replacements must be lists")
+                quarantine_entries.extend(qe)
+                secular_replacements.extend(sr)
+                continue
         # Skip non-bank config files that live in the same directory
         # (loc_var_render.yaml uses fallbacks/rotations; selected_mechanism_resolver.yaml
         # uses a top-level `resolver:` mapping — neither are variant banks).
-        if (
-            "fallbacks" in data
-            or "rotations" in data
-            or "mechanisms" in data
-            or "resolver" in data
-        ):
+            if (
+                "fallbacks" in data
+                or "rotations" in data
+                or "mechanisms" in data
+                or "resolver" in data
+            ):
+                continue
+            variants = data.get("variants")
+            if not isinstance(variants, list):
+                merged: List[dict[str, Any]] = []
+                for _k, v in data.items():
+                    if not isinstance(v, list) or not v:
+                        continue
+                    if not isinstance(v[0], dict):
+                        continue
+                    if "variant_id" not in v[0]:
+                        continue
+                    merged.extend(v)
+                variants = merged
+            if not isinstance(variants, list) or not variants:
+                raise ContentBankSchemaError(f"{path}: expected variants list or bank sections of variant records")
+            cleaned: List[dict[str, Any]] = []
+            for i, rec in enumerate(variants):
+                if not isinstance(rec, dict):
+                    raise ContentBankSchemaError(f"{path}: variants[{i}] must be a mapping")
+                _validate_variant(rec, source=str(path))
+                cleaned.append(rec)
+            banks[stem] = cleaned
+        except (ContentBankSchemaError, OSError, yaml.YAMLError) as exc:
+            LOGGER.warning("Skipping malformed content bank %s: %s", path, exc)
             continue
-        variants = data.get("variants")
-        if not isinstance(variants, list):
-            merged: List[dict[str, Any]] = []
-            for _k, v in data.items():
-                if not isinstance(v, list) or not v:
-                    continue
-                if not isinstance(v[0], dict):
-                    continue
-                if "variant_id" not in v[0]:
-                    continue
-                merged.extend(v)
-            variants = merged
-        if not isinstance(variants, list) or not variants:
-            raise ContentBankSchemaError(f"{path}: expected variants list or bank sections of variant records")
-        cleaned: List[dict[str, Any]] = []
-        for i, rec in enumerate(variants):
-            if not isinstance(rec, dict):
-                raise ContentBankSchemaError(f"{path}: variants[{i}] must be a mapping")
-            _validate_variant(rec, source=str(path))
-            cleaned.append(rec)
-        banks[stem] = cleaned
 
     return ContentBankRegistry(
         banks=banks,

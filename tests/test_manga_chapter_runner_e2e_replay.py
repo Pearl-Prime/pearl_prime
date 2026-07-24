@@ -133,6 +133,11 @@ def test_chapter_runner_two_phase_resume(tmp_path: Path) -> None:
         "chapter_id": "ch_e2e",
         "arc_id": "e2e_arc",
         "genre_id": genre_id,
+        # This E2E replay test uses NoopImageBackend/FixtureReplayImageBackend
+        # fixtures, not an operator-present Tier-1 Claude session, so it must
+        # opt into the deterministic writer_stub path per
+        # chapter_runner._resolve_writer_mode's fail-closed contract.
+        "writer_mode": "stub",
     }
     validate_instance(cr, "chapter_request")
     (ws / "chapter_request.json").write_text(

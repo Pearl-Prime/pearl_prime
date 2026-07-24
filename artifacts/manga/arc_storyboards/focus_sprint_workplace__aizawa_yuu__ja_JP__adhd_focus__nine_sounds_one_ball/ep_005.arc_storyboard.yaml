@@ -1,0 +1,436 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_005
+genre_id: sports_competition
+title: '静寂のフリースロー — 第5話: 鳴るのはボールだけじゃない'
+title_en_gloss: 'The Silence at the Line — Episode 5: It''s Not Just the Ball That Rings'
+logline: A section chief's overtime-request notification lights Hayato's forgotten
+  phone mid free-throw drill, and for the first time his two lives don't just
+  coexist after hours — they physically collide inside the same rep, in front of
+  the one teammate who already knows exactly what's lit up on that screen.
+stakes_now: Hayato has only ever had to hold his attention against gym noise —
+  the whistle, the play call, the group chat narrating a scrimmage. Tonight the
+  noise is his own probationary job, arriving uninvited inside the one place
+  that had started to feel separate from it.
+stakes_end: Nothing at work is resolved — the estimate is still unfinished, the
+  deadline still live, the overtime form still unsubmitted — but for one rep he
+  chose the ball over the phone. Aya's composed reply back to him carries the
+  first visible crack of a doubt entirely her own, about whether a team nobody
+  quite respects is real enough to matter.
+genre_cadence:
+- continuity_win_reprise
+- established_practice_calm
+- silent_activation_trigger
+- notification_object_intrudes
+- resisted_first_glance
+- workplace_stakes_named
+- identity_collision_fumble
+- teammate_witness_reaction
+- vessel_wordless_reframe
+- deliberate_choice_small_shot
+- explicit_verbal_collision_aya
+- closing_two_bags_unresolved
+page_turn_promises:
+- page_id: ep_005_p01
+  promise: Will the small, hard-won win from last episode survive now that
+    something else wants the same attention it took him nine episodes to
+    build?
+- page_id: ep_005_p02
+  promise: Which identity does he choose when both are asking for him inside
+    the same ten seconds — and who else in the room already knows exactly
+    what that costs?
+- page_id: ep_005_p03
+  promise: Even after the gym choice is made, does anything at the office
+    actually get easier — or does he just carry both bags out the door at
+    once?
+panels:
+- panel_id: ep005_001
+  page_id: ep_005_p01
+  story_function: continuity_win_reprise
+  story_move: The episode opens mid-drill with Hayato already set at the free-throw
+    line — last episode's small win now an ongoing, still-fragile daily
+    practice rather than a fluke.
+  visual_proof: Wide gym shot, evening light through high windows, Hayato at
+    the line, teammates running parallel drills, Kuroda near the ball rack in
+    the background.
+  information_delta: Reader confirms the ep_004 win has continued off-panel
+    as a repeated routine, not a one-time event.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_002
+  page_id: ep_005_p01
+  story_function: continuity_win_reprise
+  story_move: The counted-bounce anchor gesture repeats, visibly closer to
+    automatic than it was two episodes ago, though still requiring real
+    attention.
+  visual_proof: Close on hands and ball, one deliberate bounce, a controlled
+    exhale.
+  information_delta: Reader tracks the technique's growing but still-effortful
+    automaticity.
+  beat_role: ground_attempt
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_003
+  page_id: ep_005_p01
+  story_function: established_practice_calm
+  story_move: A clean make — unremarkable to the room, real to him. Aya
+    clocks it from the sideline with her clipboard and allows a small, plain
+    word of approval.
+  visual_proof: Ball dropping clean through the net; Aya's brief upward
+    glance from her stat sheet.
+  information_delta: Reader sees the team's ordinary rhythm has begun
+    quietly absorbing his improvement, no fanfare attached.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_004
+  page_id: ep_005_p01
+  story_function: established_practice_calm
+  story_move: Kuroda resets the ball rack and rolls the next ball forward
+    without looking up — the unbroken ritual, exactly as always, one beat
+    before it gets interrupted.
+  visual_proof: Kuroda's hands on the rack; a ball rolled across the floor.
+  information_delta: Reader re-anchors on Kuroda's unchanging ritual right
+    before the episode disrupts it.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_005
+  page_id: ep_005_p01
+  story_function: silent_activation_trigger
+  story_move: Cut to the gym bag on the bench — his phone, left unmuted by
+    mistake tonight, lights with a notification no one else has noticed yet.
+  visual_proof: Close on the phone screen glowing in the dim gym light, a
+    banner sliding into view.
+  information_delta: Reader learns the trigger object exists before Hayato
+    consciously registers it.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_006
+  page_id: ep_005_p01
+  story_function: resisted_first_glance
+  story_move: Mid-motion, Hayato's eyes catch the light at the edge of his
+    vision — a half-second too aware, the drill's rhythm already thinner
+    than it was two panels ago.
+  visual_proof: Tight on his face, eyes flicking off the rim for an instant.
+  information_delta: Reader tracks the exact moment his attention forks.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_007
+  page_id: ep_005_p01
+  story_function: resisted_first_glance
+  story_move: The notification's text is legible for one beat — an unresolved
+    overtime request, a deadline tonight, before he looks away.
+  visual_proof: Screen-detail insert, banner text and a red status icon.
+  information_delta: Reader now has the specific, concrete stakes, not
+    abstract dread.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_008
+  page_id: ep_005_p01
+  story_function: resisted_first_glance
+  story_move: Hayato forces his eyes back to the rim, reciting the bounce
+    count instead of reading further — the first attempt to hold the line
+    against a new kind of noise.
+  visual_proof: Close on his face, deliberately not looking toward the bench.
+  information_delta: Reader sees him trying to apply the established
+    technique to a noise it was never built for.
+  beat_role: ground_attempt
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_009
+  page_id: ep_005_p01
+  story_function: workplace_stakes_named
+  story_move: The shot goes in anyway — rushed. A crack has entered the
+    routine that wasn't there a minute ago, and he names it to himself in
+    the only place that will hear it.
+  visual_proof: Ball through net, his exhale a half-beat too fast.
+  information_delta: Reader receives the episode's protagonist-desire and
+    cost signal directly from Hayato's own interior, unnarrated by anyone
+    else.
+  beat_role: reaction_shot
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_010
+  page_id: ep_005_p02
+  story_function: workplace_stakes_named
+  story_move: Water break. Hayato drifts to the gym bag for water — and, the
+    reader sees before he'll admit it, for the phone.
+  visual_proof: Medium shot, him crouching at the bag, hand passing the
+    water bottle to reach the phone.
+  information_delta: Reader watches the decision happen in the body before
+    it's acknowledged.
+  beat_role: threshold_choice
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_011
+  page_id: ep_005_p02
+  story_function: workplace_stakes_named
+  story_move: The message resolves in full — his section chief, an estimate
+    moved up overnight, an overtime request form still unsubmitted, a hard
+    deadline tonight.
+  visual_proof: Screen close-up, full chat message and a separate flagged
+    system notice from the company's time-management app.
+  information_delta: Reader gets the concrete workplace stakes in full,
+    object by object, not summarized.
+  beat_role: trigger_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_012
+  page_id: ep_005_p02
+  story_function: identity_collision_fumble
+  story_move: His hand tightens on the phone's edge — the same white-knuckle
+    tell that shows up on a pen against his knuckles at his desk, now with
+    no pen anywhere near him.
+  visual_proof: Close on his hand, knuckles pale around the phone case.
+  information_delta: Reader connects an established cross-setting physical
+    tell inside a single unified scene for the first time.
+  beat_role: somatic_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_013
+  page_id: ep_005_p02
+  story_function: identity_collision_fumble
+  story_move: The fear under the deadline isn't only the client — it's being
+    found out as someone who still doesn't fully know what he's doing, at
+    either job.
+  visual_proof: Tight on his face, unreadable to the rest of the room.
+  information_delta: Reader receives the episode's imposter-syndrome seed
+    directly from his own body, never stated by any other character.
+  beat_role: interior_focus
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_014
+  page_id: ep_005_p02
+  story_function: identity_collision_fumble
+  story_move: He thumbs a one-handed reply while jogging back into the drill
+    line — phone in one hand, the return pass already coming at the other.
+  visual_proof: Medium shot, both objects literally occupying his hands at
+    once.
+  information_delta: Reader sees the two identities physically collide, not
+    merely coexist after hours as in prior episodes.
+  beat_role: threshold_choice
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_015
+  page_id: ep_005_p02
+  story_function: identity_collision_fumble
+  story_move: The rep breaks — a mistimed catch, a rushed release, the ball
+    clangs off the front iron, and the phone slips from his waistband and
+    clatters loud on the hardwood in the same instant.
+  visual_proof: Wide shot, both failures landing in the same beat, the whole
+    gym's attention snapping toward the sound.
+  information_delta: Reader sees the cost made public and audible, not
+    private the way it's been every other episode.
+  beat_role: public_test
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_016
+  page_id: ep_005_p02
+  story_function: teammate_witness_reaction
+  story_move: Endou's dry, half-amused jab lands before anyone else speaks —
+    pointed, not cruel, aimed squarely at the phone rather than at Hayato
+    himself.
+  visual_proof: Endou, arms crossed, looking down at the phone on the floor.
+  information_delta: Reader gets the team's surface-level reaction, distinct
+    from the deeper recognition on Aya's face a beat later.
+  beat_role: reaction_shot
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_017
+  page_id: ep_005_p02
+  story_function: teammate_witness_reaction
+  story_move: Aya's face carries a second, quieter recognition that Endou
+    doesn't have access to — she knows exactly whose name is on that
+    message. Her line is measured, not comforting.
+  visual_proof: Close on Aya, composed, saying something brief rather than
+    rushing to smooth it over.
+  information_delta: Reader learns Aya alone holds both contexts at once,
+    seeding her own restraint without any line stating it outright.
+  beat_role: mirror_introduced
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_018
+  page_id: ep_005_p02
+  story_function: teammate_witness_reaction
+  story_move: Kuroda crosses the floor without a word and picks the phone up
+    off the ground before anyone else moves toward it.
+  visual_proof: Kuroda's hand closing around the phone, expression
+    unreadable as always.
+  information_delta: Reader sees the vessel enter the collision directly for
+    the first time this arc, rather than staying in the background.
+  beat_role: mirror_introduced
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_019
+  page_id: ep_005_p03
+  story_function: vessel_wordless_reframe
+  story_move: Kuroda sets the phone face-down on the bench — in the exact
+    same row as the spare practice balls on the rack, not off to the side,
+    not hidden away.
+  visual_proof: Close on the bench — three practice balls and one phone,
+    laid in a single line.
+  information_delta: Reader receives the episode's whole doctrine in one
+    wordless image — the phone reframed as one more object to be dealt with
+    in its turn, not the loudest thing in the room.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_020
+  page_id: ep_005_p03
+  story_function: vessel_wordless_reframe
+  story_move: Kuroda's only line of the episode — three words or fewer,
+    entirely practical, no interpretation attached.
+  visual_proof: Kuroda already turning back toward the rack, not waiting to
+    see how it lands.
+  information_delta: Reader gets the minimum possible verbal footprint,
+    consistent with the vessel's established register across the arc.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_021
+  page_id: ep_005_p03
+  story_function: vessel_wordless_reframe
+  story_move: Hayato looks at the bench — ball, ball, ball, phone, all the
+    same light, all the same row — and doesn't move for a beat.
+  visual_proof: Close two-shot on the bench objects, Hayato just outside
+    frame.
+  information_delta: Reader holds in the exact silence the throughline calls
+    for before a choice is made.
+  beat_role: ground_attempt
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_022
+  page_id: ep_005_p03
+  story_function: deliberate_choice_small_shot
+  story_move: He picks up a ball, not the phone, for this one rep — small,
+    deliberate, entirely unannounced.
+  visual_proof: His hand choosing the ball off the bench, the phone left
+    face-down exactly where Kuroda set it.
+  information_delta: Reader sees the actual choice enacted in the body,
+    never spoken aloud by anyone.
+  beat_role: threshold_choice
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_023
+  page_id: ep_005_p03
+  story_function: deliberate_choice_small_shot
+  story_move: The shot itself is unglamorous — front rim, back rim, a
+    wobble, and in. Not a swish, not proof that anything is solved.
+  visual_proof: Ball rattling the rim twice before dropping.
+  information_delta: Reader is deliberately denied a clean triumphant image,
+    consistent with the throughline's win-does-not-equal-healed doctrine.
+  beat_role: reaction_shot
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_024
+  page_id: ep_005_p03
+  story_function: deliberate_choice_small_shot
+  story_move: Practice ends for the night. Hayato finally turns the phone
+    over — the message and the deadline both still exactly where he left
+    them.
+  visual_proof: Him crouched at the bench, phone lighting again in his hand,
+    the gym emptying around him.
+  information_delta: Reader confirms the gym choice solved nothing about
+    the actual workplace problem — it only protected the rep, not the
+    deadline.
+  beat_role: post_event_release
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_025
+  page_id: ep_005_p03
+  story_function: explicit_verbal_collision_aya
+  story_move: For the first time, Hayato says the collision out loud to Aya
+    instead of just living inside it silently — he has to go, tonight, to
+    the office.
+  visual_proof: Two-shot near the gym door, his bag already on one
+    shoulder.
+  information_delta: Reader gets the episode's first fully verbalized
+    acknowledgment between the two people who share both contexts.
+  beat_role: gesture_witnessed
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_026
+  page_id: ep_005_p03
+  story_function: explicit_verbal_collision_aya
+  story_move: Aya's reply is composed on the surface, but carries one small,
+    unresolved crack of her own — a captain of a team nobody quite respects,
+    saying it's fine, again.
+  visual_proof: Close on Aya's face, held a half-second longer than the line
+    needs.
+  information_delta: Reader receives the arc's seeded second thread — her
+    own imposter/social-anxiety register — without it being explained or
+    resolved this episode.
+  beat_role: mirror_introduced
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_027
+  page_id: ep_005_p03
+  story_function: closing_two_bags_unresolved
+  story_move: Hayato changes back into his half-tucked work shirt over his
+    practice clothes at the lockers, old sneakers going back into the drawer
+    of his gym bag instead of his desk drawer tonight, and the episode
+    closes on both bags slung on his shoulders as he walks out, neither one
+    fully closed.
+  visual_proof: Wide/medium shot, him exiting the gym into the night, one
+    strap of each bag visible, jacket half-on.
+  information_delta: Reader receives the closing image as the episode's
+    actual thesis, externalized entirely in objects, never spoken aloud by
+    any character or narrator.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_005.yaml
+notes: 'Episode 5 of 12, arc 1 (recruit phase). Assumes ep_004''s modest scrimmage
+  win as established continuity per the series bible even though ep_001-004 do
+  not yet exist on disk in this checkout (parallel-authored); nothing here
+  depends on their literal file content, only on the beat description given.
+  First episode where the workplace and basketball identities actively collide
+  rather than merely coexist after hours — the phone intrudes into gym space,
+  and Aya (who alone straddles both contexts as senpai + captain) is the one
+  who registers the full weight of it. Seeds two secondary threads per the
+  bible: Hayato''s imposter syndrome (panel 013, both jobs) and Aya''s own
+  unresolved doubt about the team''s legitimacy (panel 026) — both left
+  unresolved on purpose, not this arc''s job to close. No coach lecture, no
+  narrated psychology: Kuroda''s entire intervention is placing the phone in
+  the same physical row as the balls (panel 019) plus a three-word line
+  (panel 020). No scoreboard, no trophy, no buzzer-beater — this is a practice
+  rep, not a match, and the made shot in panel 023 is deliberately unglamorous
+  per the throughline''s anti-pattern rules. scripts/ci/check_manga_arc_storyboard.py
+  and its schema do not exist in this repo checkout and could not be run;
+  this file was still authored to the established ep_011 shape for continuity
+  with the storyboard-first sequence, per the assignment brief.'

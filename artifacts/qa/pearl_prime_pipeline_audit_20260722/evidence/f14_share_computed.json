@@ -1,0 +1,96 @@
+[
+  {
+    "name": "flagship_golden",
+    "words": 21729,
+    "chapters": 12,
+    "body_paras": 334,
+    "beat_lines": 30,
+    "f14_share": 0.0898,
+    "f14_share_pct": 8.98,
+    "f14_ceiling": 0.25,
+    "f14_pass": true,
+    "register_verdict": "FAIL",
+    "failure_counts": {
+      "F6": 1,
+      "F7": 9
+    },
+    "failure_severities": {
+      "F6": [
+        "WARN"
+      ],
+      "F7": [
+        "FAIL"
+      ]
+    },
+    "beat_examples": [
+      "The Alarm That Won't Stop Ringing",
+      "Notice the small space between the sensation and the story.",
+      "Set a single 11pm Slack-off alarm on your phone.",
+      "When The Alarm Made Sense",
+      "Try this with your breath before you move on."
+    ]
+  },
+  {
+    "name": "corp_anxiety_comparison",
+    "words": 19413,
+    "chapters": 12,
+    "body_paras": 616,
+    "beat_lines": 44,
+    "f14_share": 0.0714,
+    "f14_share_pct": 7.14,
+    "f14_ceiling": 0.25,
+    "f14_pass": true,
+    "register_verdict": "PASS",
+    "failure_counts": {},
+    "failure_severities": {},
+    "beat_examples": [
+      "contemplative practice holds that presence comes before strategy.",
+      "Notice the small space between the sensation and the story.",
+      "The alarm can inform you without driving you.",
+      "This is the part you actually are.",
+      "The alarm is lying."
+    ]
+  },
+  {
+    "name": "corp_burnout_overwhelm",
+    "words": 23337,
+    "chapters": 12,
+    "body_paras": 12,
+    "beat_lines": 0,
+    "f14_share": 0.0,
+    "f14_share_pct": 0.0,
+    "f14_ceiling": 0.25,
+    "f14_pass": true,
+    "register_verdict": "WARN",
+    "failure_counts": {
+      "F13": 8
+    },
+    "failure_severities": {
+      "F13": [
+        "WARN"
+      ]
+    },
+    "beat_examples": []
+  },
+  {
+    "name": "healthcare_burnout_43006",
+    "words": 23039,
+    "chapters": 12,
+    "body_paras": 12,
+    "beat_lines": 0,
+    "f14_share": 0.0,
+    "f14_share_pct": 0.0,
+    "f14_ceiling": 0.25,
+    "f14_pass": true,
+    "register_verdict": "WARN",
+    "failure_counts": {
+      "F13": 3
+    },
+    "failure_severities": {
+      "F13": [
+        "WARN"
+      ]
+    },
+    "beat_examples": []
+  }
+]
