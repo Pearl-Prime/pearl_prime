@@ -45,7 +45,10 @@ operations agent.
   `content_provenance: INTERIM` in code. **Sunset 2026-10-18** (free-quota
   expiry) — re-review or remove after that date. Manga/vision output from this
   lane stays INTERIM per the Manga Vision-Conformance Doctrine; it is never
-  final render-path art. No other DashScope media call site is exempt.
+  final render-path art. The same exception also covers the **manga video
+  pose-bank method pilot** (`docs/agent_prompt_packs/20260724_manga_video_pose_bank/`,
+  Lane 05) under identical constraints (operator-run, env gates, caps, sunset
+  2026-10-18, INTERIM provenance). No other DashScope media call site is exempt.
 
 ## API Keys & Credentials — READ THIS FIRST
 

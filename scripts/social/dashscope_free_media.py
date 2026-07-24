@@ -71,24 +71,32 @@ class TaskResult:
 
 
 def api_key() -> str:
-    # DASHSCOPE_FREE_QUOTA_API_KEY is deliberately checked first and is a
-    # distinct credential from the routine-fallback DASHSCOPE_API_KEY/
-    # QWEN_API_KEY (see CLAUDE.md scoped exception, 2026-07-24) so this
-    # one-time free-tier burn can never silently pick up a different account's
-    # key, paid or otherwise.
+    # When PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW=1 (operator-present burn), REQUIRE
+    # DASHSCOPE_FREE_QUOTA_API_KEY with NO fallback to the routine paid-risk keys
+    # (CLAUDE.md contract / OPD-20260724-VBANK-00). Preflight without ALLOW may
+    # still resolve FREE → DASHSCOPE_API_KEY → QWEN_API_KEY for dry tooling.
+    allow = (os.environ.get("PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW") or "").strip() == "1"
+    free = (os.environ.get("DASHSCOPE_FREE_QUOTA_API_KEY") or "").strip()
+    if allow:
+        if not free:
+            raise DashScopeFreeMediaError(
+                "BLOCKER: PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW=1 requires "
+                "DASHSCOPE_FREE_QUOTA_API_KEY (no fallback to DASHSCOPE_API_KEY/"
+                "QWEN_API_KEY). Load Keychain: eval \"$(python3 scripts/ci/"
+                "load_integration_env_from_keychain.py)\""
+            )
+        return free
     key = (
-        os.environ.get("DASHSCOPE_FREE_QUOTA_API_KEY")
-        or os.environ.get("DASHSCOPE_API_KEY")
-        or os.environ.get("QWEN_API_KEY")
-        or ""
-    ).strip()
+        free
+        or (os.environ.get("DASHSCOPE_API_KEY") or "").strip()
+        or (os.environ.get("QWEN_API_KEY") or "").strip()
+    )
     if not key:
         raise DashScopeFreeMediaError(
             "DASHSCOPE_FREE_QUOTA_API_KEY (or DASHSCOPE_API_KEY / QWEN_API_KEY) missing. "
             "Load Keychain: eval \"$(python3 scripts/ci/load_integration_env_from_keychain.py)\""
         )
     return key
-
 
 MULTIMODAL_PATH = "/services/aigc/multimodal-generation/generation"
 

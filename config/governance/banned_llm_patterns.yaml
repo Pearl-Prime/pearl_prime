@@ -87,7 +87,10 @@ banned_patterns:
     # exemption should be re-reviewed or removed after that date; it is not a
     # standing production pathway. Manga/vision outputs stay INTERIM per the
     # Manga Vision-Conformance Doctrine — never presented as final render-path
-    # art. No other DashScope media call site is exempt.
+    # art. Also covers the manga video pose-bank method pilot
+    # (docs/agent_prompt_packs/20260724_manga_video_pose_bank/, Lane 05) under
+    # the same constraints (OPD-20260724-VBANK-00). No other DashScope media
+    # call site is exempt.
     regex: 'X-DashScope-Async|/services/aigc/(text2image|video-generation|multimodal-generation)'
     reason: "DashScope native async media REST API is paid outside free quota."
     exempt_paths:

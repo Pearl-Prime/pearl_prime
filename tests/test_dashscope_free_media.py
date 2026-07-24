@@ -199,3 +199,20 @@ def test_cli_dry_run(capsys):
     )
     assert rc == 0
     assert "qwen-image-2.0" in capsys.readouterr().out
+
+def test_allow_requires_free_quota_key_no_paid_fallback(monkeypatch):
+    """ALLOW=1 must not silently pick DASHSCOPE_API_KEY / QWEN_API_KEY."""
+    monkeypatch.setenv("PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW", "1")
+    monkeypatch.delenv("DASHSCOPE_FREE_QUOTA_API_KEY", raising=False)
+    monkeypatch.setenv("DASHSCOPE_API_KEY", "paid-risk-key")
+    monkeypatch.setenv("QWEN_API_KEY", "qwen-risk-key")
+    with pytest.raises(dfm.DashScopeFreeMediaError, match="BLOCKER:.*DASHSCOPE_FREE_QUOTA_API_KEY"):
+        dfm.api_key()
+
+
+def test_allow_accepts_free_quota_key(monkeypatch):
+    monkeypatch.setenv("PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW", "1")
+    monkeypatch.setenv("DASHSCOPE_FREE_QUOTA_API_KEY", "free-only-key")
+    monkeypatch.setenv("DASHSCOPE_API_KEY", "paid-risk-key")
+    assert dfm.api_key() == "free-only-key"
+
