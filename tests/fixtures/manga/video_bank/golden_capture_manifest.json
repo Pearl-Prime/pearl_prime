@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "stillness_en_01__mira_aoki__cream_sweater__capture_v1",
+  "series_id": "stillness_en_01",
+  "character_id": "mira_aoki",
+  "identity_version": "pulid_sheet_v1",
+  "outfit_id": "cream_sweater",
+  "demand_source": {
+    "mode": "bank_contracts_fallback",
+    "bank_contracts_glob": "tests/fixtures/manga/video_bank/demand/character_pose_inventory.yaml",
+    "signal_note": "fixture fallback"
+  },
+  "anchor": {
+    "asset_path": "tests/fixtures/manga/video_bank/frames/anchor.png",
+    "source_class": "pulid_reference",
+    "outfit_id": "cream_sweater",
+    "identity_version": "pulid_sheet_v1",
+    "public_url": "https://example.invalid/anchor.png"
+  },
+  "capture_sets": [
+    {
+      "family": "seated",
+      "clip_id": "mira_cream_seated_cycle_01",
+      "a_namespace_id": "A0",
+      "prompt": "Single character full body seated at table, cream sweater, locked camera, flat neutral high-contrast backdrop, no props, staged anticipation then settle, comic-readable key poses, anime still-frame clarity",
+      "duration_s": 5,
+      "engine": "wan2.7-i2v",
+      "anchor_mode": "i2v",
+      "demanded_pose_ids": [
+        "front_portrait_seated_calm",
+        "medium_seated_three_quarter"
+      ],
+      "sampling_recipe": {
+        "candidate_keyed_samples": 10,
+        "bank_keep_target": 5
+      }
+    },
+    {
+      "family": "dialogue",
+      "clip_id": "mira_cream_dialogue_micro_01",
+      "a_namespace_id": "A1",
+      "prompt": "Single character MCU bust, cream sweater, locked camera, flat neutral high-contrast backdrop, subtle brow/jaw tension cycle anticipation to settle, no props, comic-readable keys",
+      "duration_s": 5,
+      "engine": "wan2.7-i2v",
+      "anchor_mode": "i2v",
+      "demanded_pose_ids": [
+        "front_portrait_seated_calm",
+        "front_portrait_seated_tense"
+      ],
+      "sampling_recipe": {
+        "candidate_keyed_samples": 10,
+        "bank_keep_target": 4
+      }
+    }
+  ],
+  "quota_budget": {
+    "engine_lane": "dashscope_free_i2v",
+    "planned_seconds": 10,
+    "reserve_seconds": 10,
+    "sunset_date": "2026-10-18",
+    "notes": "fixture"
+  },
+  "provenance_default": "INTERIM",
+  "notes": "Lane 04 golden fixture"
+}

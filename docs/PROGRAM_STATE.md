@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-22 @ `origin/main` `a08b8af17b4e7b37ac36be7d4c1c8f6049e5ee37` (Pearl Prime pipeline audit 2026-07-22; prior 07-15 tip `8a0b09f9b0…` superseded for Flagship / Books-first / Open-PR / atom-coverage rows below)
+**LAST VERIFIED:** 2026-07-24 @ `origin/main` (V-Bank 01-04+07 landed; 05-06 BLOCKED on ALLOW/pilot)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -181,6 +181,14 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
     completed). Implementation closeout remains local-only until its lane merges.
 - **Next manga blocker (post-wave):** stillness post-merge proof re-run (local-only artifacts must not be reported as
   landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — v3 pilot is the current honest layered proof surface.
+
+### Manga video pose-bank (V-Bank V1) — 2026-07-24
+- **Program:** `docs/agent_prompt_packs/20260724_manga_video_pose_bank/` (pack PR #335 → `b4c1a255dc3eccae5abff594c3064f57ddadd42b`).
+- **Signals:** `dashscope-free-media-landed=1a683254959710ec85033dce0a164ee18ace4cb2` (#310); `manga-video-capability-research-merged=763439e36e0ffa6bbeb2898fd1aa5a954c120018` (#341); `manga-video-pose-bank-spec-merged=4eca8bf19ca26a2234c4b7b2f1ca24d0f51917f9` (#345); tooling in this PR; **pilot BLOCKED** on ALLOW/Keychain; LoRA disposition deferred.
+- **OPD:** OPD-20260724-VBANK-00..04.
+- **Quota:** 0s spent this dispatch; sunset 2026-10-18; r2v not-available until proven.
+- **Acceptance:** RESEARCHED / SPECCED / CODE-WIRED; pilot not EXECUTED-REAL; nothing PROVEN-AT-BAR.
+- **Audit:** `artifacts/qa/manga_video_pose_bank_audit_2026-07-24/AUDIT.md`.
 
 ### Manga 48ep/3catalog dispatch (ja_JP/zh_TW/en_US genre-native self-help series)
 - **Authority:** `docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/00_MASTER_DISPATCH_PROMPT.md`
