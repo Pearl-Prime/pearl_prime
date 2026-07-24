@@ -136,6 +136,17 @@ If a workflow in this repo uses a Qwen-compatible endpoint on self-hosted infras
 
 ---
 
+## What runs where
+
+- **Operator laptop / Cursor:** code editing, review, and lightweight static checks only. Do not run pipeline, render, GPU/LLM, or QA-batch workloads locally.
+- **Pearl Star:** all GPU/LLM-heavy execution. Dispatch through `pscli enqueue` under the [Robust Agent Protocol](./ROBUST_AGENT_PROTOCOL.md); raw Bash, direct SSH, direct ComfyUI calls, and direct Ollama execution are not production dispatch surfaces.
+- **GitHub Actions:** orchestration and review. Pearl Star is registered as a self-hosted runner, so a commit, pull request, schedule, or manual dispatch can trigger heavy work without consuming laptop resources. `.github/workflows/manga-pipeline.yml` (`pearl-star-gpu`) and `.github/workflows/pearl-news-daily.yml` (`pearl-star`) are live examples.
+- **R2:** durable binary storage. [`scripts/artifacts/r2_sync.py`](../scripts/artifacts/r2_sync.py) is the canonical upload, verification, and pull-on-demand surface. Git retains keys, sizes, SHA-256 digests, and manifests; generated image, audio, video, render, and cache binaries belong in R2 rather than new repository trees.
+
+The July 2026 disk/offload execution pack recorded two environmental blockers before this policy change: the operator-laptop cleanup requires the original laptop data and Keychain credentials, while tracked Waves 3–4 require verified R2 round trips before 267 and 79 files respectively can be removed. See `artifacts/coordination/handoffs/local-disk-cleanup-r2-backup_2026-07-22.md` and `artifacts/coordination/handoffs/lfs-r2-offload-waves-2-4_2026-07-22.md`. These blockers do not weaken the policy: no binary is deleted until its R2 manifest verifies.
+
+---
+
 ## System functions (procedures)
 
 ### Standard PR flow
