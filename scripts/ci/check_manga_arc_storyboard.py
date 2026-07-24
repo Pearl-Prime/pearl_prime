@@ -39,8 +39,6 @@ ARC_DIR = "artifacts/manga/arc_storyboards"
 CHAPTER_DIR = "artifacts/manga/chapter_scripts"
 SCENE_TEMPLATES_DIR = REPO_ROOT / "config" / "manga" / "genre_scene_templates"
 SCHEMA_PATH = REPO_ROOT / "schemas" / "manga" / "arc_storyboard_plan.schema.json"
-CRAFT_CHECKLISTS = "config/manga/genre_craft_checklists.yaml"
-CANONICAL_GENRES = "config/manga/canonical_genre_list.yaml"
 
 _FACE_ONLY_RE = re.compile(
     r"\b(face[_\s-]?reaction[_\s-]?only|talking[_\s-]?head|same[_\s-]?face\s*cu|"
@@ -195,84 +193,6 @@ def assert_arc_plan(path: Path) -> None:
         raise ArcStoryboardError("; ".join(errs))
 
 
-def _canonical_genre(genre_id: str, repo_root: Path) -> str:
-    """Resolve a genre id/alias to its canonical id via canonical_genre_list.yaml."""
-    gid = (genre_id or "").strip().lower().replace("-", "_").replace(" ", "_")
-    if not gid or yaml is None:
-        return gid
-    path = repo_root / CANONICAL_GENRES
-    if not path.is_file():
-        return gid
-    try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    except Exception:
-        return gid
-    aliases = data.get("aliases") or {}
-    if gid in aliases:
-        return str(aliases[gid])
-    ids = {str(g.get("id")) for g in (data.get("genres") or []) if isinstance(g, dict)}
-    return gid if gid in ids else str(aliases.get(gid, gid))
-
-
-def advisory_panel_grammar(plan: Mapping[str, Any], *, repo_root: Path) -> list[str]:
-    """ADVISORY (non-blocking): flag panel_grammar_items with no conformance signal.
-
-    Lane 07 sub-check. For the plan's genre, load the compiled craft checklist's
-    panel_grammar_items and check whether each item's `storyboard_signal_any`
-    tokens appear anywhere in the arc plan's panel text (framing / story_move /
-    visual_proof / beat_role / story_function / notes). Missing signal => an
-    advisory note. NEVER contributes to failures or the exit code — the arc
-    contract stays the hard gate; this only surfaces craft-conformance hints for
-    the storyboarder. Returns [] when the checklist is absent or the genre has
-    no block (so this is safe to run everywhere).
-    """
-    if yaml is None:
-        return []
-    path = repo_root / CRAFT_CHECKLISTS
-    if not path.is_file():
-        return []
-    try:
-        cfg = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    except Exception:
-        return []
-    genre = _canonical_genre(str(plan.get("genre_id") or ""), repo_root)
-    block = (cfg.get("genres") or {}).get(genre)
-    if not isinstance(block, dict):
-        return []
-    items = block.get("panel_grammar_items") or []
-    if not items:
-        return []
-    # Serialize the plan's panel/craft text (lowercased) for signal presence.
-    text_parts: list[str] = []
-    for p in plan.get("panels") or []:
-        if not isinstance(p, dict):
-            continue
-        for k in ("framing", "story_move", "visual_proof", "beat_role", "story_function",
-                  "information_delta", "notes", "silence"):
-            v = p.get(k)
-            if v:
-                text_parts.append(str(v))
-        for fb in p.get("forbidden") or []:
-            text_parts.append(str(fb))
-    for k in ("genre_cadence", "page_turn_promises"):
-        for v in plan.get(k) or []:
-            text_parts.append(str(v))
-    blob = " ".join(text_parts).lower()
-    notes: list[str] = []
-    for it in items:
-        if not isinstance(it, dict):
-            continue
-        sig = [str(s).lower() for s in (it.get("storyboard_signal_any") or []) if s]
-        if not sig:
-            continue
-        if not any(s in blob for s in sig):
-            notes.append(
-                f"panel_grammar not evidenced [{genre}]: {it.get('item')} "
-                f"(expected storyboard signal like {sig[:3]})"
-            )
-    return notes
-
-
 def _arc_plan_for_series_chapter(series_id: str, chapter_id: str) -> Path | None:
     cand = REPO_ROOT / ARC_DIR / series_id / f"{chapter_id}.arc_storyboard.yaml"
     if cand.is_file():
@@ -373,12 +293,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.arc_plan:
         try:
-            plan = _load(args.arc_plan)
-            errs = validate_arc_plan(plan, path=args.arc_plan)
-            if errs:
-                raise ArcStoryboardError("; ".join(errs))
-            for note in advisory_panel_grammar(plan, repo_root=REPO_ROOT):
-                print(f"ADVISORY {args.arc_plan}: {note}", file=sys.stderr)
+            assert_arc_plan(args.arc_plan)
             print(f"PASS {args.arc_plan}")
             return 0
         except ArcStoryboardError as e:
@@ -433,10 +348,7 @@ def main(argv: list[str] | None = None) -> int:
                     failures.extend(check_chapter_has_arc(p))
 
     for p in paths:
-        plan = _load(p)
-        failures.extend(validate_arc_plan(plan, path=p))
-        for note in advisory_panel_grammar(plan, repo_root=REPO_ROOT):
-            print(f"ADVISORY {p}: {note}", file=sys.stderr)
+        failures.extend(validate_arc_plan(_load(p), path=p))
 
     if failures:
         for f in failures:

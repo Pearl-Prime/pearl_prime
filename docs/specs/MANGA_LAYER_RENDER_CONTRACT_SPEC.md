@@ -1,8 +1,11 @@
 # Manga Layer Render Contract Spec (v0.7 — V5 single-render decompose supersedes V4 L0+L2 split)
 
-**Status:** AUTHORITY (v0.7.1 — composition-grammar addendum marker 2026-07-07; cumulative with v0.7 V5 pivot + v0.6.3 Phase 1 ToonOut + v0.6.2 doc-split)
+**Status:** AUTHORITY (v0.7.3 — video pose-bank supply pointer 2026-07-24; cumulative with v0.7.1 composition-grammar + v0.7 V5 pivot + v0.6.3 Phase 1 ToonOut + v0.6.2 doc-split)
 **Author:** Pearl_Architect + Pearl_Int + Pearl_Research
-**Schema version:** 0.7.1 (composition-grammar addendum marker in §10; 0.7.0 was the major V5 architectural amendment: V5 Qwen-Image-Layered supersedes V4 L0+L2 split; V4 sections retained as the experiment-of-record)
+**Schema version:** 0.7.3 (video pose-bank supply cross-ref in §19 + §4.6 A-namespace claim; 0.7.1 was composition-grammar addendum marker in §10; 0.7.0 was the major V5 architectural amendment: V5 Qwen-Image-Layered supersedes V4 L0+L2 split; V4 sections retained as the experiment-of-record)
+**Changes since v0.7.1 (v0.7.3 — manga video pose-bank supply pointer, 2026-07-24):**
+- §4.6 EXTENDED — A0–A9 animation namespace purpose examples now include video-capture motion sources (clips, contact sheets) for the pose-bank supply lane.
+- §19 NEW — compact cross-reference to `docs/specs/MANGA_VIDEO_POSE_BANK_SUPPLY_SPEC.md` (demand→capture, frame gate chain, Q-VBANK-03 provenance, identity-ladder draft). Supply-lane authority lives there; this section only claims namespace + defers. No V5 architecture edit.
 **Changes since v0.7 (v0.7.1 — composition-grammar addendum):**
 - §10 EXTENDED — marker added: the composition-compatibility + grounding layer (asset `composition_meta` sidecars, crop×bg_class legality matrix, horizon-ratio grounding scale, contact-shadow/occluder ops, beat→shot→recipe panel grammar) is specified in the standalone sibling spec `docs/specs/MANGA_COMPOSITION_GRAMMAR_SPEC.md` v1.0.1 (SPECCED, pilot EXECUTED-REAL via PR #4689 — Pearl_Research 2026-07-07; research basis `artifacts/research/manga_composition_grammar_research_2026-07-07.md`). §10 math remains the fallback for assets without composition metadata. Honors the §15.C.6 doc-split trip-wire; partially realizes §15.D.3 (reusable cinematic grammar) and gives §14.B.2/§14.B.3 their constructive counterpart.
 **Changes since v0.6.3 (v0.7 — V5 architectural pivot):**
@@ -277,7 +280,7 @@ The five layer types above (L0–L4) are **render layers** — they are the diff
 | **S** | semantic_layer | machine-derived from L: depth_map, normal_map, segmentation_mask | S0–S9 |
 | **E** | export_layer | derived views for downstream use: line_art_only, color_only, FX_only, dialogue_safe_matte, screentone_overlay | E0–E9 |
 | **I** | ink_layer | manga-native sub-layers if we ever decompose L2/L3 into outline/fill/shading/tone | I0–I9 |
-| **A** | animation_layer | motion derivatives: parallax_BG, eye_blink, steam_motion, rack_focus_mask | A0–A9 |
+| **A** | animation_layer | motion derivatives: parallax_BG, eye_blink, steam_motion, rack_focus_mask; **video-capture motion sources** (clips, contact sheets) for the pose-bank supply lane — see §19 / `MANGA_VIDEO_POSE_BANK_SUPPLY_SPEC.md`. Extracted still pose layers remain ordinary L2/L3 | A0–A9 |
 
 **Why reserve now?** The L0/L2 split unlocks every one of these. Once layers are stable image-domain assets, depth maps fall out of monocular-depth models; line-art-only exports fall out of edge detection on L2/L3; eye-blink/breathing animations fall out of L2 with face-region masking. The architecture supports all of it. We are not building it today, but if we let "L5" mean different things in different scripts, we will regret it at 800-series scale.
 
@@ -1540,5 +1543,23 @@ This spec is referenced by (planned):
 **The strategic bridge:** once layers are stable image assets, motion manga, VN-style branching, reusable cinematic grammar, and persistent cinematographic world models all become feasible without architectural rework. Reserve namespace `A0–A9` for animation today (§4.6) so we don't repaint the bike-shed when the unlock arrives.
 
 **Recommended next action (v0.3, validator-first):** operator approves §5, sibling `MANGA_CONTINUITY_STATE_SPEC.md` (including §8 cardinality + §9 light rigs — formerly §6.8 + §6.9 of this spec), §8 of this spec, sibling `MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` (formerly §13 of this spec, reordered to validator-first), §14 → I build Phase B's three validators (`compile_safe_zones.py` → `validate_layer.py` → `validate_continuity_invariants.py`) → only after validators pass synthetic tests do I author Phase C inventories for `stillness_en_01` → re-prompt Mira on pure-white backdrop → second layer demo passes validators end-to-end → V4 dispatcher ships ep_001 layered.
+
+## 19. Video pose-bank supply lane (CROSS-REF; 2026-07-24) — NEW v0.7.3
+
+**Authority:** `docs/specs/MANGA_VIDEO_POSE_BANK_SUPPLY_SPEC.md` (SPECCED). This section is a pointer only — do not fork supply rules here.
+
+**What this unlocks without being an architecture variant:** a demand-derived video-capture → curated pose-bank supply path that feeds the existing deterministic assembler. Research feed: `docs/research/MANGA_VIDEO_POSE_BANK_CAPABILITY_RESEARCH_2026-07-24.md` (Lane 02). Schema: `schemas/manga/character_capture_manifest.schema.json`.
+
+**Namespace claim (§4.6):** motion-source artifacts (source clips, contact sheets) claim IDs in the reserved **A0–A9** animation namespace. Extracted still cutouts remain ordinary **L2/L3** assets and enter panels only via `assembly_manifest.schema.json` layer objects — the assembler is not modified.
+
+**Provenance (Q-VBANK-03 default):** DashScope free-quota–derived frames = **INTERIM** permanently (`_INTERIM` suffix + provenance_note; pattern `scripts/manga/make_object_sprite.py`). Self-hosted Apache-2.0 Wan/VACE output = **REAL-eligible** after the ordered frame gate chain in the supply spec (extract → dedup → pose-phase → cutout → §12.3 class-A → `bank_layer_blob_gate` → `qa_face_distance` ≤ 0.4 vs anchor → outfit-conformance → demand curation → sidecars → pose-inventory registration). A frame that fails any gate is REJECTED.
+
+**Identity-ladder draft (ratify Lane 06):** PuLID + capture-bank = primary; per-character LoRA = last-resort / not planned as default. Draft §15.A.1 wording change lives in the supply spec §7 — do not amend §15.A here in this pointer.
+
+**Anchor policy:** canonical anchors from existing PuLID / model_sheet / Pearl Star renders — cloud still-quota is not spent on anchors. Pilot engine = `wan2.7-i2v` + same anchor; scale = VACE-1.3B on Pearl Star (RAP queue-first).
+
+**Cardinality:** only DEMANDED `pose_id`s drive clips; continuity-state §8 / former §6.8 budget applies at curation — never keep all frames.
+
+---
 
 — end of spec v0.2 —

@@ -1,12 +1,9 @@
 # mc_endurance_checklists.yaml — machine-usable MC endurance checklists per canonical genre.
 #
-# status: wired  (Lane 07, manga process uplift 2026-07-24)
-#   Consumed by phoenix_v4/manga/story_quality/excellence_gate.py: GATE_CRAFT
-#   (_check_genre_craft) resolves these items BY KEY via the `mc_items` reference
-#   in config/manga/genre_craft_checklists.yaml (family + lists) and surfaces them
-#   for the Editor pass + gate report. Items are referenced, never restated.
-#   Per-family failure cadence stays a genre SIGNATURE (not a global gate) and
-#   endurance_mechanics are never hard-gated for completion-first genres.
+# status: unwired
+#   (Lane 07 of the 2026-07-24 manga process uplift pack wires this into
+#   config/manga/story_excellence_gates.yaml + excellence_gate.py and flips this
+#   marker. Until then check_manga_wiring.py treats this file as declared-unwired.)
 #
 # SOURCE OF TRUTH: artifacts/research/manga_mc_endurance_study_2026-07-24.md
 #   Every item carries a `source:` anchor of the form
@@ -29,7 +26,7 @@
 #   Pearl_Editor QA pass (Lane 07 §Editor pass), series planners (advisory).
 
 schema_version: "1.0"
-status: wired
+status: unwired
 last_updated: "2026-07-24"
 source_study: artifacts/research/manga_mc_endurance_study_2026-07-24.md
 
