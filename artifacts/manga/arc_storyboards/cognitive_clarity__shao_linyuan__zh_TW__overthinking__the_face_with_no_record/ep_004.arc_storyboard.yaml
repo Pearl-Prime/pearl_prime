@@ -1,0 +1,251 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_004
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 4: Two Countdowns'
+logline: A coworker's ordinary LINE chat remark gets filed as evidence while a supervisor's hard two-week
+  deadline turns Yaqing's overtime into an auditable institutional record.
+stakes_now: Yaqing has two weeks to produce conclusive proof, or the case closes without her agreement.
+stakes_end: The manager's countdown is now running alongside Yaqing's own, her overtime is on record,
+  and a second ordinary remark has just been misread as evidence in front of Zhou.
+genre_cadence:
+- scooter_commute_home
+- line_chat_notification
+- colleague_remark_misread
+- screenshot_filed_as_evidence
+- evidence_noise_boundary_blurs
+- held_silence_no_sleep
+- supervisor_formal_summons
+- deadline_stated
+- yaqing_refuses_closure
+- supervisor_holds_line_again
+- deadline_notice_internalized
+- overtime_log_quantified
+- vessel_notices_silently
+- breakroom_shift
+- anchor_ordinary_weather_remark
+- weather_misread_as_clue
+- vessel_withholds_correction
+- margin_density_escalates
+- vessel_refills_instead_of_speaking
+- closing_two_week_countdown_hold
+page_turn_promises:
+- page_id: ep_004_p01
+  promise: Will Yaqing's own deadline pressure make her treat a coworker's private life as case evidence?
+- page_id: ep_004_p02
+  promise: With overtime now on the record and the manager's clock running, will Zhou's silence hold,
+    or does the cost finally get named aloud?
+panels:
+- panel_id: ep004_001
+  page_id: ep_004_p01
+  story_function: scooter_commute_home
+  story_move: Yaqing rides her scooter home after shift, visibly exhausted, the morning still foggy.
+  visual_proof: Wide street shot of Yaqing on her scooter in early fog, helmet visor down.
+  information_delta: Reader sees the ordinary commute that will carry the episode's misread clue.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_002
+  page_id: ep_004_p01
+  story_function: line_chat_notification
+  story_move: A LINE group chat about next week's shift swap buzzes in her bag as she rides.
+  visual_proof: Insert on a phone screen inside a bag, LINE notifications stacking up.
+  information_delta: Reader sees the ordinary colleague chat that will soon be misread.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_003
+  page_id: ep_004_p01
+  story_function: colleague_remark_misread
+  story_move: At a red light, Yaqing reads a coworker's mention of Banqiao station and treats it as evidence.
+  visual_proof: Close insert on Yaqing's face snapping alert at a stoplight, phone screen visible.
+  information_delta: Reader recognizes an unrelated personal remark being folded into the case as a witness.
+  beat_role: deflection
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_004
+  page_id: ep_004_p01
+  story_function: screenshot_filed_as_evidence
+  story_move: Yaqing screenshots the coworker's remark and pastes it directly into her private timeline
+    notes.
+  visual_proof: Insert on Yaqing's notes app, a chat screenshot pasted beside real CCTV stills.
+  information_delta: Reader sees ordinary chat content formally entering her evidence file.
+  beat_role: scope_creep
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_005
+  page_id: ep_004_p01
+  story_function: evidence_noise_boundary_blurs
+  story_move: Real surveillance evidence and ordinary chat noise sit side by side, the categories blurring.
+  visual_proof: Close insert on her notes layout, two visually different source types placed as equals.
+  information_delta: Reader sees the boundary between real evidence and coincidence eroding.
+  beat_role: vertigo
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_006
+  page_id: ep_004_p01
+  story_function: held_silence_no_sleep
+  story_move: Yaqing's eyes fail to stay open, but she does not close the laptop.
+  visual_proof: Close insert on Yaqing's heavy eyelids against the glow of an open laptop screen.
+  information_delta: Reader sees the body's exhaustion losing to the compulsion to keep working.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_007
+  page_id: ep_004_p01
+  story_function: supervisor_formal_summons
+  story_move: Team Lead Lin calls Yaqing to a corner of the office that evening, document in hand.
+  visual_proof: Wide shot of Lin gesturing Yaqing over, a formal document visible under her arm.
+  information_delta: Reader learns institutional attention has escalated from a conversation to a document.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_008
+  page_id: ep_004_p01
+  story_function: deadline_stated
+  story_move: Lin states a hard two-week deadline for a conclusive answer, not a hunch.
+  visual_proof: Close insert on the document on the table, a circled deadline date visible.
+  information_delta: Reader learns the exact external clock now running against Yaqing's case.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_009
+  page_id: ep_004_p01
+  story_function: yaqing_pushes_back
+  story_move: Yaqing states plainly she cannot close a case whose records still disagree.
+  visual_proof: Medium shot, Yaqing's controlled, level expression as she states her objection.
+  information_delta: Reader sees Yaqing hold her position against direct institutional pressure.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_010
+  page_id: ep_004_p01
+  story_function: supervisor_holds_line_again
+  story_move: Lin holds firm, reminding Yaqing this affects more than her own shift alone.
+  visual_proof: Medium shot, Lin closing the document folder, tone level but final.
+  information_delta: Reader learns the case now has stakes beyond Yaqing personally.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_011
+  page_id: ep_004_p02
+  story_function: deadline_notice_internalized
+  story_move: Alone at her desk, Yaqing stares at the deadline notice as an external clock overlays her
+    own.
+  visual_proof: Close insert on Yaqing's face reflected faintly in her monitor beside the pinned notice.
+  information_delta: Reader sees the external deadline become a fixed, visible pressure at her station.
+  beat_role: pressure
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_012
+  page_id: ep_004_p02
+  story_function: overtime_log_quantified
+  story_move: Yaqing's overtime log shows hours far beyond her rostered shift, quantifying the obsession.
+  visual_proof: Insert on a system overtime log, her logged hours visibly exceeding the roster limit.
+  information_delta: Reader sees the case's cost converted into an auditable institutional number.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_013
+  page_id: ep_004_p02
+  story_function: vessel_notices_silently
+  story_move: Zhou sees the overtime log and says nothing, but his gaze lingers a beat too long.
+  visual_proof: Close insert on Zhou's face, eyes on the log a moment longer than a casual glance.
+  information_delta: Reader sees the vessel register the cost without commenting on it yet.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_014
+  page_id: ep_004_p02
+  story_function: breakroom_shift
+  story_move: The scene shifts to the breakroom, a looser space than the console, Zhou's thermos in hand.
+  visual_proof: Wide shot of the breakroom, Zhou sitting across from Yaqing with his old thermos.
+  information_delta: Reader gets a spatial shift signaling a more personal register for the scene.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_015
+  page_id: ep_004_p02
+  story_function: anchor_ordinary_weather_remark
+  story_move: Zhou makes a genuinely ordinary comment about the week's heavy rain forecast.
+  visual_proof: Medium two-shot, Zhou speaking casually, no hidden agenda in his posture.
+  information_delta: Reader hears an unremarkable weather comment with no connection to the case.
+  beat_role: deflection
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_016
+  page_id: ep_004_p02
+  story_function: weather_misread_as_clue
+  story_move: Yaqing instantly reframes the weather comment as a possible variable in her timing pattern.
+  visual_proof: Close insert on Yaqing's face snapping into analysis mode mid-sip.
+  information_delta: Reader recognizes the same misreading pattern from episode two recurring, now with
+    weather data.
+  beat_role: deflection
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_017
+  page_id: ep_004_p02
+  story_function: vessel_withholds_correction
+  story_move: Zhou watches her switch into analysis mode, visibly weary but chooses not to stop her.
+  visual_proof: Medium shot, Zhou's tired, faintly worried expression as he lets the moment pass.
+  information_delta: Reader sees the vessel deliberately withhold correction, not yet the moment to intervene.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_018
+  page_id: ep_004_p02
+  story_function: margin_density_escalates
+  story_move: Yaqing's notebook margins grow denser still, annotations nearly overtaking the original
+    text.
+  visual_proof: Close insert on a notebook page, marginal notes now covering most of the visible text.
+  information_delta: Reader sees the spiral's visual density increase again from episode two's baseline.
+  beat_role: vertigo
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_019
+  page_id: ep_004_p02
+  story_function: vessel_refills_instead_of_speaking
+  story_move: Zhou's hand pauses over the thermos as if to speak, then simply refills her cup instead.
+  visual_proof: Close insert on Zhou's hand pouring from the thermos, his mouth not opening to speak.
+  information_delta: Reader sees the vessel choose a wordless gesture over a lecture, per genre doctrine.
+  beat_role: anchor_cost
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_020
+  page_id: ep_004_p02
+  story_function: closing_two_week_countdown_hold
+  story_move: Yaqing returns to her station, the audit notice pinned beside her screen, starting a new
+    night's search.
+  visual_proof: Wide pull-back of Yaqing at her console, the deadline notice visible at the edge of her
+    monitor.
+  information_delta: Reader closes on two competing countdowns running at once, neither resolved.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_004.yaml
+notes: Arc 1 (obsession seed), episode 4 of 12 — closes batch 1. English craft-planning metadata only;
+  authoritative story is zh_TW in ep_004.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate.'

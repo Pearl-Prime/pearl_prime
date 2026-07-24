@@ -106,6 +106,9 @@ def main() -> int:
             "series_id": "ci_smoke_series",
             "chapter_id": "ci_smoke_chapter",
             "arc_id": "ci_smoke_arc",
+            # This synthetic CI fixture exercises deterministic DAG plumbing;
+            # production requests keep the fail-closed Claude default.
+            "writer_mode": "stub",
         }
         (ws / "chapter_request.json").write_text(
             json.dumps(cr, indent=2) + "\n", encoding="utf-8"

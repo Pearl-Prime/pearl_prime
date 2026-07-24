@@ -1,0 +1,1037 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball",
+  "genre_id": "sports_competition",
+  "story_strategy_genre": "sports_competition",
+  "story_strategy_id": "sports_competition__strategy_01_focus",
+  "reader_market": "ja_JP",
+  "reader_audience": "gen_z",
+  "notes": "Arc 1 of 4 (episodes 1-12, the 'recruit' phase per ASSIGNMENT_MATRIX.tsv arc_shape_hint for sports_competition: recruit -> losing streak -> breakthrough -> championship arc). Primary craft-bank throughline: config/source_of_truth/manga_story_strategies/sports_competition_strategies.yaml topic_strategy_map['focus'] = strategy_01 'The One Ball at the Line' (ADHD/focus told through the free-throw line), adapted and paced across 12 episodes rather than compressed into one chapter. Vessel per config/manga/manga_mode_vessels.yaml sports_competition.teacher: 'the coach of the unclenched' (Kuroda). Arc 1 escalates gradually and ends on a turn (bracket reveal + probation-review collision) that sets up arc 2's losing-streak phase; it does not resolve the season or claim a cure. acceptance_layer: authored_candidate, not proven_at_bar -- gate PASS is not a bestseller or blind-read claim. NOTE: scripts/ci/check_manga_arc_storyboard.py and schemas/manga/arc_storyboard_plan.schema.json, both referenced by the dispatch pack, do not exist in this repo checkout -- that gate could not be run; arc_storyboard.yaml files were still authored in the established pre-existing shape (see stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml) for continuity with the storyboard-first sequence.",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "ja_JP",
+    "target_audience": "gen_z",
+    "genre_id": "sports_competition",
+    "strategy_genre": "sports_competition",
+    "relevance_genre": "sports",
+    "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+    "market_touchpoints": [
+      "train_platform",
+      "commuter_car",
+      "conbini_receipt",
+      "bento_shelf",
+      "club_room",
+      "shoe_locker",
+      "line_chat",
+      "vending_machine",
+      "manga_app"
+    ],
+    "market_guardrails": [
+      "avoid_tourist_japan",
+      "avoid_samurai_default_for_modern_scenes",
+      "preserve_public_private_register_gap"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+    "catalyst": {
+      "id": "rooftop_ball_after_the_closing_meeting",
+      "logline": "A stray basketball rolls across the company rooftop break area after a suffocating strategy meeting, and Hayato's one instinctive, silent shot in front of a teammate he's never spoken to reopens a door he thought had closed in high school.",
+      "ordinary_world_objects": [
+        "rooftop_break_area",
+        "meeting_notebook",
+        "basketball",
+        "name_badge"
+      ],
+      "genre_transmutation": "A rooftop smoke-break space becomes an accidental tryout court; the abandoned company ball becomes the first object connecting his forgotten sport to his new job.",
+      "avoid": [
+        "instant_cure",
+        "influencer_wellness_lecture"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'rooftop_ball_after_the_closing_meeting'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ep_001",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_001.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "rooftop_ball_after_the_closing_meeting",
+            "logline": "A stray basketball rolls across the company rooftop break area after a suffocating strategy meeting, and Hayato's one instinctive, silent shot in front of a teammate he's never spoken to reopens a door he thought had closed in high school.",
+            "ordinary_world_objects": [
+              "rooftop_break_area",
+              "meeting_notebook",
+              "basketball",
+              "name_badge"
+            ],
+            "genre_transmutation": "A rooftop smoke-break space becomes an accidental tryout court; the abandoned company ball becomes the first object connecting his forgotten sport to his new job.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'rooftop_ball_after_the_closing_meeting'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 2,
+      "chapter_id": "ep_002",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_002.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_whistle_drowns_the_play_call",
+            "logline": "Hayato's first real practice with the Shinonome club team overwhelms him -- the whistle, the count-off, three overlapping drills -- and by the time the play call reaches him it is already too late to run it.",
+            "ordinary_world_objects": [
+              "gym_whistle",
+              "drill_cones",
+              "scoreboard_clock",
+              "team_roster_sheet"
+            ],
+            "genre_transmutation": "The gym's ordinary drill chaos becomes the flaw's first full-volume test; a missed play call becomes the concrete, humiliating cost of a mind that cannot choose which sound to follow.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_whistle_drowns_the_play_call'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 3,
+      "chapter_id": "ep_003",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_003.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_shoe_locker_left_open",
+            "logline": "Hayato returns to the company gym alone after hours to quietly retrieve forgotten shoes from the club room locker, and finds Kuroda already there, resetting the ball rack without being asked.",
+            "ordinary_world_objects": [
+              "shoe_locker",
+              "club_room",
+              "ball_rack",
+              "single_basketball"
+            ],
+            "genre_transmutation": "A forgotten pair of shoes becomes the excuse for the first private encounter; the ball rack's silent reset becomes the mentor's wordless opening lesson.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_shoe_locker_left_open'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 4,
+      "chapter_id": "ep_004",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_004.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_scrimmage_score_in_the_group_chat",
+            "logline": "Teammates track a Saturday scrimmage's score live in the team's LINE group chat, and Hayato has to hold one clean defensive possession while half the gym is visibly narrating his every mistake on their phones.",
+            "ordinary_world_objects": [
+              "line_group_chat",
+              "scrimmage_scoreboard",
+              "phone_in_pocket",
+              "gym_floor"
+            ],
+            "genre_transmutation": "A casual scrimmage becomes a digitally-witnessed trial; the group chat becomes the concrete shape of the social pressure Hayato's attention has to survive.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_scrimmage_score_in_the_group_chat'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 5,
+      "chapter_id": "ep_005",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_005.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_overtime_request_mid_drill",
+            "logline": "A department overtime-request notification lights Hayato's phone in the middle of a free-throw drill, and choosing whether to answer it now becomes the episode's real contest, not the drill itself.",
+            "ordinary_world_objects": [
+              "phone_notification",
+              "overtime_request_form",
+              "free_throw_line",
+              "gym_clock"
+            ],
+            "genre_transmutation": "A routine workplace notification becomes an in-gym intrusion; the free-throw line becomes the place where two identities -- new-hire and rookie athlete -- collide for the first time.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_overtime_request_mid_drill'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 6,
+      "chapter_id": "ep_006",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_006.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_tournament_entry_form_deadline",
+            "logline": "The team's tournament entry form is due by 5pm Friday with a minimum-roster requirement Shinonome barely meets, and the same trading-company bureaucracy Hayato fights all day at his desk turns out to be the thing that could end the team before their season even starts.",
+            "ordinary_world_objects": [
+              "entry_form",
+              "company_seal_stamp",
+              "roster_sheet",
+              "fax_machine"
+            ],
+            "genre_transmutation": "Corporate paperwork becomes the tournament's actual gatekeeper; a fax machine becomes the unglamorous object the whole season's stakes ride on.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_tournament_entry_form_deadline'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 7,
+      "chapter_id": "ep_007",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_007.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_scoreboard_glare_in_the_first_qualifier",
+            "logline": "In Shinonome's first qualifier match, the gymnasium scoreboard and a small but loud rival-company crowd overload Hayato's attention exactly when the game is tightest, and the team's first real loss lands on a mistake that is unmistakably his.",
+            "ordinary_world_objects": [
+              "scoreboard",
+              "opposing_company_banner",
+              "foul_line",
+              "whistle"
+            ],
+            "genre_transmutation": "The scoreboard's public tally becomes the externalized shape of Hayato's internal noise; a lost qualifier becomes concrete, shared, and no longer just his private failure.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_scoreboard_glare_in_the_first_qualifier'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 8,
+      "chapter_id": "ep_008",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_008.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_vending_machine_between_gyms",
+            "logline": "Scouting the loser's-bracket route at a shared tournament venue, Hayato and Aya stop at a vending machine between gyms and watch Kiryuu Pharma's captain run the exact same free-throw routine nine times in a row without once missing or reacting.",
+            "ordinary_world_objects": [
+              "vending_machine",
+              "tournament_bracket_board",
+              "warm_can_coffee",
+              "opposing_practice_court"
+            ],
+            "genre_transmutation": "A vending machine break becomes an unplanned scouting report; a rival's flawless, emotionless routine becomes a mirror for the control Hayato doesn't have.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_vending_machine_between_gyms'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 9,
+      "chapter_id": "ep_009",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_009.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_group_chat_gone_quiet",
+            "logline": "The morning after the loss, the team's LINE group chat -- usually cluttered with practice memes -- stays conspicuously silent, and the silence itself becomes louder proof of doubt than anything anyone actually types.",
+            "ordinary_world_objects": [
+              "line_group_chat",
+              "unread_message_count",
+              "practice_schedule_post",
+              "read_receipt"
+            ],
+            "genre_transmutation": "A quiet group chat becomes the visible shape of team doubt; an unanswered practice-schedule post becomes the question of whether Hayato still has a starting spot.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_group_chat_gone_quiet'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 10,
+      "chapter_id": "ep_010",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_010.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_conbini_receipt_after_practice",
+            "logline": "Kuroda and Hayato stop at a conbini after a late optional practice, and a receipt timestamped 22:14 becomes the small, concrete object Kuroda uses to finally put language -- three words at most -- to what he's been drilling into Hayato for nine episodes.",
+            "ordinary_world_objects": [
+              "conbini_receipt",
+              "warm_canned_drink",
+              "late_night_train_schedule",
+              "onigiri_wrapper"
+            ],
+            "genre_transmutation": "An ordinary convenience-store receipt becomes a timestamp for the exact moment the lesson lands; a canned drink shared in near-silence becomes the delivery vessel for wisdom that is never spoken as a lecture.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_conbini_receipt_after_practice'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 11,
+      "chapter_id": "ep_011",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_011.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_free_throw_with_the_building_watching",
+            "logline": "In the decisive loser's-bracket rematch, tied with seconds left, Hayato is fouled and sent to the line in front of the tournament's largest crowd yet, and the only sound he is allowed to choose to hear is the one already in his hands.",
+            "ordinary_world_objects": [
+              "free_throw_line",
+              "gymnasium_crowd_noise",
+              "scoreboard_clock",
+              "single_basketball"
+            ],
+            "genre_transmutation": "The free-throw line becomes the literal externalization of nine episodes of scattered attention narrowing to one object; the crowd's roar becomes weather, not the enemy.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture",
+              "buzzer_beater_as_the_turn",
+              "win_equals_healed"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_free_throw_with_the_building_watching'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    },
+    {
+      "chapter_number": 12,
+      "chapter_id": "ep_012",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_012.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "sports_competition",
+          "strategy_genre": "sports_competition",
+          "relevance_genre": "sports",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.",
+          "catalyst": {
+            "id": "the_bracket_board_reveal_and_the_probation_email",
+            "logline": "The tournament bracket board is updated to reveal Shinonome's next opponent -- the undefeated defending champions, a team even Endou goes quiet looking at -- on the same evening a calendar notification confirms Hayato's probation review date at work, and both boards are now counting down at once.",
+            "ordinary_world_objects": [
+              "tournament_bracket_board",
+              "calendar_notification",
+              "single_basketball",
+              "empty_gym"
+            ],
+            "genre_transmutation": "A tournament bracket board and a work calendar become twin countdowns colliding in one evening; the empty gym where Hayato bounces one ball alone becomes the image the arc ends on -- not a resolution, but a chosen stillness before the harder season ahead.",
+            "avoid": [
+              "instant_cure",
+              "influencer_wellness_lecture",
+              "buzzer_beater_as_the_turn",
+              "win_equals_healed",
+              "trophy_as_proof_of_growth"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_bracket_board_reveal_and_the_probation_email'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    }
+  ]
+}

@@ -7,6 +7,8 @@
  * as the available-books surface.
  */
 
+import { LANE_TO_MARKET, wizardHrefForMarket } from "./markets.js";
+
 export function isAssigned(row) {
   return Boolean(String(row?.brand_director_name || "").trim());
 }
@@ -20,8 +22,15 @@ export function brandOpsUrl(brandId) {
   return `/brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}`;
 }
 
-export function brandWizardUrl(brandId) {
-  return `/wizard.html?brand=${encodeURIComponent(brandId)}`;
+/** Wizard deep-link with lane→market + lang so matching does not collapse to US. */
+export function brandWizardUrl(brandId, lane) {
+  const id = String(brandId || "");
+  const laneFromId = (id.match(/_([a-z]{2}_[a-z]{2})$/i) || [])[1] || "";
+  const laneNorm = String(lane || laneFromId || "en_us").toLowerCase().replace(/-/g, "_");
+  const market = LANE_TO_MARKET[laneNorm] || "us";
+  const href = wizardHrefForMarket(market);
+  const sep = href.includes("?") ? "&" : "?";
+  return `${href}${sep}brand=${encodeURIComponent(id)}`;
 }
 
 export function staticRowsFromIndex(index) {
@@ -41,7 +50,7 @@ export function staticRowsFromIndex(index) {
       brand_director_id: record.brand_director_id || "",
       brand_director_status: record.brand_director_status || "unassigned",
       assignment_source: record.brand_director_name ? "brand_admin_brands" : "none",
-      wizard_url: brandWizardUrl(brandId),
+      wizard_url: brandWizardUrl(brandId, record.lane),
       ops_url: brandOpsUrl(brandId),
       wizard_access: record.buildable === false ? "blocked" : "available",
       ops_access: record.buildable === false ? "blocked" : "available",

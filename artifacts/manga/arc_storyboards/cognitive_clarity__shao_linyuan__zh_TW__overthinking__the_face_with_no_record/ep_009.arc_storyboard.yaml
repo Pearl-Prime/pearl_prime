@@ -1,0 +1,308 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_009
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 9: Six Seconds'
+logline: Absorbed in her private case diagram, Yaqing misses a real platform emergency for six seconds
+  until Zhou catches it, and the institutional fallout cuts off her main access to the case.
+stakes_now: A collapsed passenger's safety depends on Yaqing noticing the alarm before it's too late.
+stakes_end: The passenger is safe, but Yaqing is now formally reassigned off live-monitoring duty, and
+  even the clearest cost yet cannot make her fully close the notebook.
+genre_cadence:
+- split_attention_established
+- private_network_diagram_focus
+- live_alarm_begins_blinking
+- alarm_unnoticed_time_passes
+- vessel_notices_first
+- vessel_calls_out_sharply
+- yaqing_snaps_back
+- emergency_dispatched
+- staff_arrive_in_time
+- adrenaline_crash_shaking_hands
+- vessel_grave_not_angry
+- held_silence_alarm_cleared
+- supervisor_reviews_delay_report
+- supervisor_states_six_seconds
+- yaqing_honest_admission
+- supervisor_expression_hardens
+- reassignment_announced
+- yaqing_registers_the_real_cost
+- breakroom_no_thermos_this_time
+- vessel_names_the_real_threat
+- yaqing_silent_no_defense
+- notebook_meaning_inverts
+- cannot_fully_close_notebook
+- closing_room_runs_without_her
+page_turn_promises:
+- page_id: ep_009_p01
+  promise: Will the six-second delay cost a real passenger their safety before anyone notices?
+- page_id: ep_009_p02
+  promise: With her live-monitoring access now cut, can Yaqing actually stop — or does losing the access
+    just change how she keeps going?
+panels:
+- panel_id: ep009_001
+  page_id: ep_009_p01
+  story_function: split_attention_established
+  story_move: Yaqing's attention splits between her private case diagram and the live monitor wall at
+    the edge of view.
+  visual_proof: Wide control-room shot, Yaqing's secondary monitor showing her private diagram, primary
+    wall in soft focus behind.
+  information_delta: Reader sees the exact divided-attention setup that will cause the coming failure.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_002
+  page_id: ep_009_p01
+  story_function: private_network_diagram_focus
+  story_move: Yaqing's focus locks entirely onto her five-station diagram, fingers tracing the connections.
+  visual_proof: Close insert on the five-node diagram, Yaqing's finger moving along one connecting line.
+  information_delta: Reader confirms how completely her attention has left the live feeds.
+  beat_role: vertigo
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_003
+  page_id: ep_009_p01
+  story_function: live_alarm_begins_blinking
+  story_move: A real emergency alarm begins blinking at the edge of the primary monitor wall, unnoticed.
+  visual_proof: Insert on a blinking red alarm indicator at the edge of the monitor wall, Yaqing not looking
+    at it.
+  information_delta: Reader learns a real passenger emergency is now unfolding in real time.
+  beat_role: threatening_silence
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_004
+  page_id: ep_009_p01
+  story_function: alarm_unnoticed_time_passes
+  story_move: Seconds pass with the alarm still blinking, Yaqing's gaze never leaving her private file.
+  visual_proof: Close insert sequence implying elapsed seconds via the alarm's blink count, Yaqing unmoved.
+  information_delta: Reader feels the cost of the divided attention accumulate in real time.
+  beat_role: threatening_silence
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_005
+  page_id: ep_009_p01
+  story_function: vessel_notices_first
+  story_move: Zhou's eyes catch the alarm first, his body reacting before he speaks.
+  visual_proof: Close insert on Zhou's face snapping toward the alarm, body already turning.
+  information_delta: Reader sees the vessel's method save the moment, reading the room instead of a person
+    this time.
+  beat_role: teaching_recall
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_006
+  page_id: ep_009_p01
+  story_function: vessel_calls_out_sharply
+  story_move: Zhou shouts Yaqing's name and the alarm number, breaking the room's quiet with real urgency.
+  visual_proof: Medium shot, Zhou half out of his chair, voice sharp, pointing at the alarm.
+  information_delta: Reader hears the emergency named aloud for the first time.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_007
+  page_id: ep_009_p01
+  story_function: yaqing_snaps_back
+  story_move: Yaqing snaps back to the primary wall, color draining from her face at the six-second delay.
+  visual_proof: Close insert on Yaqing's face turning, visibly pale as she registers the elapsed time.
+  information_delta: Reader sees Yaqing register the real cost of her divided attention.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_008
+  page_id: ep_009_p01
+  story_function: emergency_dispatched
+  story_move: Yaqing dispatches station staff over the radio, professional despite her shaking hands.
+  visual_proof: Close insert on Yaqing's trembling hand gripping the radio, mouth set in professional
+    urgency.
+  information_delta: Reader sees Yaqing perform her actual job correctly once alerted, competence intact
+    under pressure.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_009
+  page_id: ep_009_p01
+  story_function: staff_arrive_in_time
+  story_move: Station staff and paramedics reach the platform in time; the passenger's condition does
+    not worsen.
+  visual_proof: Insert on platform CCTV showing staff arriving and the passenger regaining consciousness.
+  information_delta: 'Reader learns the immediate outcome: a real scare, not a tragedy — but a real scare.'
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_010
+  page_id: ep_009_p01
+  story_function: adrenaline_crash_shaking_hands
+  story_move: Yaqing sets down the radio, hands still shaking as the adrenaline drains away into dread.
+  visual_proof: Close insert on Yaqing's trembling hands releasing the radio, expression hollowed out.
+  information_delta: Reader sees the somatic aftermath of a near-miss she caused, not just a hard shift.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_011
+  page_id: ep_009_p01
+  story_function: vessel_grave_not_angry
+  story_move: Zhou watches her, his expression grave rather than angry, fully aware of how close it came.
+  visual_proof: Medium shot, Zhou's serious but non-accusing expression fixed on Yaqing.
+  information_delta: Reader sees the vessel's reaction is concern, not condemnation, even after a real
+    failure.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_012
+  page_id: ep_009_p01
+  story_function: held_silence_alarm_cleared
+  story_move: Neither speaks as the system's alarm-cleared tone fades, ending the page on unresolved tension.
+  visual_proof: Wide shot of the control room, alarm indicator now dark, both figures still and silent.
+  information_delta: Reader closes the page uncertain what consequence, if any, follows this near-miss.
+  beat_role: threatening_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_013
+  page_id: ep_009_p02
+  story_function: supervisor_reviews_delay_report
+  story_move: Team Lead Lin reviews a system-generated report flagging the exact six-second response delay.
+  visual_proof: 'Wide shot of Lin''s desk, an auto-generated incident report open, ''delay: 6s'' clearly
+    marked.'
+  information_delta: Reader learns the delay is now an official, quantified institutional record.
+  beat_role: pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_014
+  page_id: ep_009_p02
+  story_function: supervisor_states_six_seconds
+  story_move: Lin asks directly whether Yaqing understands what six seconds means for a collapsed passenger.
+  visual_proof: Close insert on Lin's sharp, serious expression, entirely different register from prior
+    episodes.
+  information_delta: Reader hears the stakes of the delay stated in the starkest terms yet this arc.
+  beat_role: pressure
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_015
+  page_id: ep_009_p02
+  story_function: yaqing_honest_admission
+  story_move: Yaqing admits plainly, without excuse, that she was looking at something else.
+  visual_proof: Close insert on Yaqing's face, no deflection this time, just a level, honest admission.
+  information_delta: Reader sees Yaqing take full, unminimized responsibility for the first time this
+    arc.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_016
+  page_id: ep_009_p02
+  story_function: supervisor_expression_hardens
+  story_move: Lin's expression hardens — this is now a real safety incident, not an overtime dispute.
+  visual_proof: Close insert on Lin's face settling into a decision, jaw set.
+  information_delta: Reader sees the register of institutional consequence shift decisively upward.
+  beat_role: pressure
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_017
+  page_id: ep_009_p02
+  story_function: reassignment_announced
+  story_move: Lin announces Yaqing's temporary reassignment off live-monitoring duty pending review.
+  visual_proof: Medium shot, Lin delivering the decision plainly, not unkindly, as a rule rather than
+    a punishment.
+  information_delta: 'Reader learns the concrete institutional consequence: reduced access, not dismissal.'
+  beat_role: pressure
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_018
+  page_id: ep_009_p02
+  story_function: yaqing_registers_the_real_cost
+  story_move: Yaqing freezes, realizing this cuts off her main channel for pursuing the case itself.
+  visual_proof: Close insert on Yaqing's stunned face, the consequence's second meaning landing visibly.
+  information_delta: Reader sees the institutional cost directly threaten the obsession's own access for
+    the first time.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_019
+  page_id: ep_009_p02
+  story_function: breakroom_no_thermos_this_time
+  story_move: Zhou sits across from Yaqing in the breakroom with no thermos, no small comfort offered
+    this time.
+  visual_proof: Wide breakroom shot, both seated, table empty of the usual thermos and cups.
+  information_delta: Reader recognizes the absence of the series' comfort gesture as a deliberate tonal
+    marker.
+  beat_role: anchor_cost
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_020
+  page_id: ep_009_p02
+  story_function: vessel_names_the_real_threat
+  story_move: Zhou states plainly that today the case almost cost a life, not just her sleep.
+  visual_proof: Close two-shot, Zhou's calm but heavy delivery, each word weighted deliberately.
+  information_delta: Reader hears the season's clearest statement yet of what is actually at stake.
+  beat_role: anchor_cost
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_021
+  page_id: ep_009_p02
+  story_function: yaqing_silent_no_defense
+  story_move: Yaqing sits with her head down, offering no defense and no argument this time.
+  visual_proof: Close insert on Yaqing's bowed head, hands still in her lap.
+  information_delta: Reader sees Yaqing fully absorb the criticism without deflecting it.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_022
+  page_id: ep_009_p02
+  story_function: notebook_meaning_inverts
+  story_move: Yaqing's notebook, open on the table, reads to her now as a wound rather than an insight.
+  visual_proof: Close insert on the open notebook's red-string diagram, framed to read as damage, not
+    discovery.
+  information_delta: Reader sees the season's central object's meaning invert for the protagonist herself.
+  beat_role: vertigo
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_023
+  page_id: ep_009_p02
+  story_function: cannot_fully_close_notebook
+  story_move: Yaqing's hand moves to close the notebook but stops halfway, unable to fully shut it.
+  visual_proof: Close insert on Yaqing's hand on the notebook cover, paused halfway through closing it.
+  information_delta: Reader sees the compulsion persist even with the clearest cost yet made visible.
+  beat_role: unreliable_flag
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_024
+  page_id: ep_009_p02
+  story_function: closing_room_runs_without_her
+  story_move: Yaqing leaves the OCC with her reassignment notice; the control room runs on without her
+    seat filled.
+  visual_proof: Wide pull-back of Yaqing walking out, the control room's monitors and staff continuing
+    unaffected behind her.
+  information_delta: Reader closes on the honest, deflating truth that the system does not need her to
+    function.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_009.yaml
+notes: Arc 1 (obsession seed), episode 9 of 12 — opens batch 3. English craft-planning metadata only;
+  authoritative story is zh_TW in ep_009.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate.'

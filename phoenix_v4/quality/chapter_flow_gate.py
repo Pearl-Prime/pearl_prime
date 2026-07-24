@@ -156,6 +156,10 @@ _THESIS_CUES = (
     "is not the enemy",
     "the problem was never",
     "that is the whole point",
+    # A governing thesis can be expressed as a concrete mechanism contrast;
+    # keep these narrow so generic mentions of metaphor/mobilization do not pass.
+    "none of this is metaphor",
+    "is mobilization, not malfunction",
 )
 
 _AHA_CUES = (
