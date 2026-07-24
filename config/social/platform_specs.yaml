@@ -1,0 +1,285 @@
+schema_version: 1
+registry_type: deterministic_social_platform_specs
+verified_as_of: "2026-07-18"
+publish_policy:
+  draft_only: true
+  manual_review_required: true
+  auto_publish_allowed: false
+  live_publishing_authorized: false
+official_refresh:
+  status: partial
+  note: "Official/primary surfaces refreshed where reachable; platform contracts remain dry-run and review-gated."
+  sources:
+    instagram_graph_api:
+      url: "https://developers.facebook.com/documentation/instagram-platform/instagram-graph-api/reference/ig-user/media"
+      claim: "Image aspect ratio range and image alt text support."
+    meta_carousel:
+      url: "https://www.facebook.com/business/help/1114358518575630"
+      claim: "Carousel card count and supported aspect ratios."
+    linkedin_document_ads:
+      url: "https://business.linkedin.com/advertise/ads/sponsored-content/document-ads/specs"
+      claim: "Document file types, size, page count, and layout guidance."
+    tiktok_in_feed:
+      url: "https://ads.tiktok.com/help/article/tiktok-auction-in-feed-ads?redirected=2"
+      claim: "9:16 recommended vertical video, duration, file size, and format constraints."
+    pinterest_specs:
+      url: "https://help.pinterest.com/en/business/article/pinterest-product-specs"
+      claim: "2:3 / 1000x1500 image recommendation and text limits."
+    youtube_shorts:
+      url: "https://support.google.com/youtube/answer/15424877?hl=en"
+      claim: "Square or vertical videos up to three minutes classify as Shorts."
+    x_media:
+      url: "https://docs.x.com/x-api/media/quickstart/best-practices"
+      claim: "Supported image types and image/GIF size caps."
+    bluesky_posts:
+      url: "https://docs.bsky.app/docs/advanced-guides/posts"
+      claim: "Up to four images per post, per-image alt text, and image blob size cap."
+    google_business_photos:
+      url: "https://support.google.com/business/answer/6103862?co=GENIE.Platform%3DDesktop&hl=en"
+      claim: "JPG/PNG photo guidelines, 720x720 recommended resolution, 5 MB cap."
+    instagram_hashtag_cap_20260723:
+      url: "https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/"
+      claim: "Instagram capped hashtags at 5 per post platform-wide, announced 2025-12-19; corrects instagram_feed_portrait/instagram_carousel caption.hashtags_max from stale 15 to 5 (hashtags_min from 5 to 0, since 5 is now a ceiling not a floor). See artifacts/social_media_atoms/pearl_social_media_writer_20260723/deep_research_digest_20260723.md §1.1/R2 (Lane A, 2026-07-23)."
+surfaces:
+  instagram_feed_portrait:
+    platform: instagram
+    surface: feed_portrait
+    media_kind: image
+    canvas: {width: 1080, height: 1350}
+    aspect_ratio: "4:5"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 8
+    max_media_items: 1
+    carousel_items: {min: 2, max: 10}
+    safe_zone_pct: {left: 0.07, right: 0.07, top: 0.07, bottom: 0.15}
+    text_envelope: {headline_words: 12, body_words: 38, overlay_words: 55}
+    caption: {max_chars: 2200, hashtags_min: 0, hashtags_max: 5, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: emotional_saveable
+    kpi_priority: [saves, shares, carousel_completion, profile_visits]
+  instagram_carousel:
+    platform: instagram
+    surface: carousel
+    media_kind: image_carousel
+    canvas: {width: 1080, height: 1350}
+    aspect_ratio: "4:5"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 8
+    max_media_items: 10
+    carousel_items: {min: 2, max: 10}
+    safe_zone_pct: {left: 0.07, right: 0.07, top: 0.07, bottom: 0.13}
+    text_envelope: {headline_words: 12, body_words: 34, overlay_words: 45}
+    caption: {max_chars: 2200, hashtags_min: 0, hashtags_max: 5, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: emotional_saveable
+    kpi_priority: [saves, shares, completion, follows]
+  facebook_feed:
+    platform: facebook
+    surface: feed_post
+    media_kind: image
+    canvas: {width: 1200, height: 1200}
+    aspect_ratio: "1:1"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 10
+    max_media_items: 10
+    carousel_items: {min: 2, max: 10}
+    safe_zone_pct: {left: 0.07, right: 0.07, top: 0.07, bottom: 0.12}
+    text_envelope: {headline_words: 12, body_words: 45, overlay_words: 60}
+    caption: {max_chars: 5000, hashtags_min: 1, hashtags_max: 3, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: community_discussion
+    kpi_priority: [comments, shares, link_clicks]
+  linkedin_document_slide:
+    platform: linkedin
+    surface: document_carousel_slide
+    media_kind: document_slide
+    canvas: {width: 1080, height: 1350}
+    aspect_ratio: "4:5"
+    formats: [jpg, jpeg, png, pdf]
+    max_file_mb: 100
+    max_media_items: 10
+    document: {max_pages: 300, recommended_pages_max: 10, supported_types: [pdf, doc, docx, ppt, pptx]}
+    safe_zone_pct: {left: 0.08, right: 0.08, top: 0.08, bottom: 0.10}
+    text_envelope: {headline_words: 11, body_words: 42, overlay_words: 56}
+    caption: {max_chars: 3000, hashtags_min: 3, hashtags_max: 5, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: professional_evidence
+    kpi_priority: [dwell_time, saves, comments, click_through]
+  linkedin_feed_portrait:
+    platform: linkedin
+    surface: feed_image
+    media_kind: image
+    canvas: {width: 1080, height: 1350}
+    aspect_ratio: "4:5"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 8
+    max_media_items: 1
+    safe_zone_pct: {left: 0.08, right: 0.08, top: 0.08, bottom: 0.10}
+    text_envelope: {headline_words: 12, body_words: 44, overlay_words: 58}
+    caption: {max_chars: 3000, hashtags_min: 3, hashtags_max: 5, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: professional_evidence
+    kpi_priority: [dwell_time, comments, click_through]
+  pinterest_pin:
+    platform: pinterest
+    surface: standard_pin
+    media_kind: image
+    canvas: {width: 1000, height: 1500}
+    aspect_ratio: "2:3"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 20
+    max_media_items: 1
+    safe_zone_pct: {left: 0.08, right: 0.08, top: 0.07, bottom: 0.12}
+    text_envelope: {headline_words: 11, body_words: 34, overlay_words: 44}
+    caption: {max_chars: 500, hashtags_min: 2, hashtags_max: 5, first_comment_allowed: false, title_max_chars: 100}
+    alt_text_required: true
+    native_copy_mode: searchable_saveable
+    kpi_priority: [saves, search_impressions, outbound_clicks]
+  tiktok_reels_shorts_vertical:
+    platform: tiktok_reels_shorts
+    surface: vertical_short
+    media_kind: video_or_storyboard
+    canvas: {width: 1080, height: 1920}
+    aspect_ratio: "9:16"
+    formats: [mp4, mov, jpg, png]
+    max_file_mb: 500
+    max_media_items: 1
+    duration_s: {min: 3, max: 180, l0_target_min: 15, l0_target_max: 45}
+    safe_zone_pct: {left: 0.09, right: 0.18, top: 0.12, bottom: 0.25}
+    text_envelope: {headline_words: 8, body_words: 18, overlay_words: 32}
+    caption: {max_chars: 2200, hashtags_min: 3, hashtags_max: 5, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: hook_first_retention
+    kpi_priority: [three_second_hold, completion, shares, comments]
+  youtube_shorts:
+    platform: youtube
+    surface: shorts
+    media_kind: video_or_storyboard
+    canvas: {width: 1080, height: 1920}
+    aspect_ratio: "9:16"
+    formats: [mp4, mov, jpg, png]
+    max_file_mb: 256000
+    max_media_items: 1
+    duration_s: {min: 1, max: 180, l0_target_min: 30, l0_target_max: 60}
+    safe_zone_pct: {left: 0.09, right: 0.16, top: 0.11, bottom: 0.22}
+    text_envelope: {headline_words: 8, body_words: 20, overlay_words: 34}
+    caption: {max_chars: 5000, hashtags_min: 0, hashtags_max: 0, first_comment_allowed: false}
+    alt_text_required: true
+    native_copy_mode: hook_teaching_subscribe
+    kpi_priority: [retention, completion, search, subscribers]
+  linkedin_short_video:
+    platform: linkedin
+    surface: short_native_video
+    media_kind: video_or_storyboard
+    canvas: {width: 1080, height: 1920}
+    aspect_ratio: "9:16"
+    formats: [mp4, mov, jpg, png]
+    max_file_mb: 200
+    max_media_items: 1
+    duration_s: {min: 3, max: 900, l0_target_min: 30, l0_target_max: 60}
+    safe_zone_pct: {left: 0.10, right: 0.10, top: 0.10, bottom: 0.14}
+    text_envelope: {headline_words: 9, body_words: 20, overlay_words: 34}
+    caption: {max_chars: 3000, hashtags_min: 3, hashtags_max: 5, first_comment_allowed: true}
+    alt_text_required: true
+    native_copy_mode: professional_video_teaching
+    kpi_priority: [dwell_time, comments, saves]
+  x_image:
+    platform: x
+    surface: image_post
+    media_kind: image
+    canvas: {width: 1024, height: 512}
+    aspect_ratio: "2:1"
+    formats: [jpg, jpeg, png, gif, webp]
+    max_file_mb: 5
+    max_media_items: 4
+    safe_zone_pct: {left: 0.07, right: 0.07, top: 0.10, bottom: 0.10}
+    text_envelope: {headline_words: 10, body_words: 16, overlay_words: 26}
+    caption: {max_chars: 280, hashtags_min: 1, hashtags_max: 2, first_comment_allowed: false}
+    alt_text_required: true
+    native_copy_mode: compressed_shareable
+    kpi_priority: [reposts, replies, profile_clicks]
+  threads_image:
+    platform: threads
+    surface: image_post
+    media_kind: image
+    canvas: {width: 1080, height: 1350}
+    aspect_ratio: "4:5"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 8
+    max_media_items: 10
+    safe_zone_pct: {left: 0.07, right: 0.07, top: 0.07, bottom: 0.12}
+    text_envelope: {headline_words: 10, body_words: 20, overlay_words: 32}
+    caption: {max_chars: 500, hashtags_min: 1, hashtags_max: 3, first_comment_allowed: false}
+    alt_text_required: true
+    native_copy_mode: conversational_reply
+    kpi_priority: [replies, shares, profile_clicks]
+  bluesky_image:
+    platform: bluesky
+    surface: image_post
+    media_kind: image
+    canvas: {width: 1200, height: 627}
+    aspect_ratio: "1.91:1"
+    formats: [jpg, jpeg, png, webp]
+    max_file_mb: 1
+    max_media_items: 4
+    safe_zone_pct: {left: 0.08, right: 0.08, top: 0.10, bottom: 0.10}
+    text_envelope: {headline_words: 10, body_words: 16, overlay_words: 26}
+    caption: {max_chars: 300, hashtags_min: 1, hashtags_max: 2, first_comment_allowed: false}
+    alt_text_required: true
+    native_copy_mode: thoughtful_direct
+    kpi_priority: [reposts, replies]
+  google_business_square:
+    platform: google_business
+    surface: business_post_photo
+    media_kind: image
+    canvas: {width: 720, height: 720}
+    aspect_ratio: "1:1"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 5
+    max_media_items: 1
+    safe_zone_pct: {left: 0.08, right: 0.08, top: 0.08, bottom: 0.12}
+    text_envelope: {headline_words: 9, body_words: 24, overlay_words: 32}
+    caption: {max_chars: 1500, hashtags_min: 0, hashtags_max: 2, first_comment_allowed: false}
+    alt_text_required: true
+    native_copy_mode: practical_local
+    kpi_priority: [calls, direction_clicks, website_clicks]
+  youtube_community_image:
+    platform: youtube
+    surface: community_image
+    media_kind: image
+    canvas: {width: 1200, height: 675}
+    aspect_ratio: "16:9"
+    formats: [jpg, jpeg, png]
+    max_file_mb: 8
+    max_media_items: 1
+    safe_zone_pct: {left: 0.07, right: 0.07, top: 0.08, bottom: 0.10}
+    text_envelope: {headline_words: 10, body_words: 20, overlay_words: 32}
+    caption: {max_chars: 5000, hashtags_min: 0, hashtags_max: 0, first_comment_allowed: false}
+    alt_text_required: true
+    native_copy_mode: subscriber_reengagement
+    kpi_priority: [poll_votes, comments, video_clicks]
+regional_lenses:
+  china:
+    core_archetype: emotional_self_regulation
+    platform_bias: [douyin, xiaohongshu, wechat]
+    copy_posture: "Practical regulation toolkit; avoid political/religious sensitivity and unsupported clinical claims."
+  hong_kong:
+    core_archetype: strategic_professional_boundaries
+    platform_bias: [instagram_reels, youtube_shorts, linkedin, xiaohongshu]
+    copy_posture: "Boundary-setting as professionalism; bilingual minimalism when localized."
+  singapore:
+    core_archetype: no_fluff_career_agility
+    platform_bias: [linkedin, instagram, youtube_shorts, tiktok]
+    copy_posture: "Concrete career utility, direct structure, low-fluff claims."
+  japan:
+    core_archetype: quiet_precision_and_x_youtube_line
+    platform_bias: [x, youtube, instagram, line]
+    copy_posture: "Concise, mobile-readable, calmer and less argumentative."
+  taiwan:
+    core_archetype: relational_facebook_line_xhs_ptt
+    platform_bias: [facebook, line, instagram, xiaohongshu, ptt]
+    copy_posture: "Traditional Chinese, slightly higher context, community discussion."
+  korea:
+    core_archetype: youtube_naver_kakao_ig_search
+    platform_bias: [youtube, naver, kakao, instagram]
+    copy_posture: "Search-aware, fast hook for video, native Korean review required before release."

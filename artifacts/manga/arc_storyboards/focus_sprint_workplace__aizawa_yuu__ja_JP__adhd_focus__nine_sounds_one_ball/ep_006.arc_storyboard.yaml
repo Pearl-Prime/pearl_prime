@@ -1,0 +1,456 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_006
+genre_id: sports_competition
+title: '静寂のフリースロー——第六話:締め切りは待たない'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 6: The Deadline Won''t Wait'
+logline: The Tokyo Corporate League qualifier entry form is due Friday at five with
+  a minimum-roster requirement Shinonome barely meets, and the same trading-company
+  bureaucracy Hayato fights all day at his desk turns out to be the thing that
+  could end the team before its first game.
+stakes_now: The team has quietly operated as a loose, half-practiced group of
+  seven since ep_005; nobody has formally registered for anything, and Hayato has
+  never signed his name to the club as more than a guest.
+stakes_end: The entry form is filed with minutes to spare at the exact legal
+  minimum of eight registered players — Hayato's name now permanently on the
+  roster — but Endou's flat warning makes clear that barely qualifying is not
+  the same as being ready, and the fragile margin (zero backups, one jammed fax
+  machine from disaster) is now the team's whole season resting on paper.
+genre_cadence:
+- established_workplace_grind_opening
+- urgent_summons_trigger
+- roster_shortfall_reveal
+- protective_teammate_friction
+- formal_commitment_signing
+- bureaucratic_obstacle_reveal
+- cross_world_competence_deployed
+- team_focus_fracture_intercut
+- kuroda_wordless_continuity
+- deadline_crunch_mechanical_failure
+- narrow_margin_success
+- flat_warning_not_triumph
+- quiet_ownership_closing
+page_turn_promises:
+- page_id: ep_006_p01
+  promise: What is actually wrong that Aya needs to pull Hayato onto the roof
+    mid-shift?
+- page_id: ep_006_p03
+  promise: Can Hayato's own desk-job instincts get the missing signature back
+    in time, or does the team's season die in someone else's inbox?
+- page_id: ep_006_p05
+  promise: The form is in — but is a team that only just scrapes to eight
+    players actually ready for a real opponent?
+panels:
+- panel_id: ep006_001
+  page_id: ep_006_p01
+  story_function: established_workplace_grind_opening
+  story_move: Cold open on Hayato's desk buried in requisition paperwork,
+    re-establishing the workplace half of his life before any basketball
+    stakes appear.
+  visual_proof: Wide desk shot — stacked request forms, a company-issue mug
+    gone cold, Hayato's half-untucked shirt, the pen tapping his knuckles.
+  information_delta: Reader re-anchors in the sales-support desk grind that
+    ep_005 established, before the tournament plot intrudes on it.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_002
+  page_id: ep_006_p01
+  story_function: established_workplace_grind_opening
+  story_move: Insert on the stack itself — approval stamps and request forms,
+    all due by end of day — planting the episode's bureaucratic vocabulary
+    (stamp, form, deadline) before it becomes basketball's problem too.
+  visual_proof: Close on a fan of paper, red hanko stamps half-applied, a
+    desk clock reading 12:58.
+  information_delta: Reader is shown the workplace object-language (stamps,
+    forms, deadlines) that will resurface identically in the gym plot.
+  beat_role: object_plant
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_003
+  page_id: ep_006_p01
+  story_function: urgent_summons_trigger
+  story_move: Hayato's phone lights up with a LINE message from Aya, breaking
+    the desk calm with a workplace-native interruption.
+  visual_proof: Phone screen close-up, LINE notification banner from 美濃部
+    彩.
+  information_delta: Reader learns something has gone wrong before knowing
+    what — Aya's urgency is legible before content is.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_004
+  page_id: ep_006_p01
+  story_function: urgent_summons_trigger
+  story_move: Cut to the rooftop break area (the same space that opened the
+    series in ep_001), now repurposed for bad news instead of a first
+    invitation.
+  visual_proof: Wide rooftop shot, Aya waiting with a printed form in hand,
+    her posture tighter than usual.
+  information_delta: Reader recognizes the rooftop as a returning location
+    now carrying different emotional weight than its first appearance.
+  beat_role: location_callback
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_005
+  page_id: ep_006_p01
+  story_function: roster_shortfall_reveal
+  story_move: Aya states the entry form's hard requirements plainly — Friday
+    five o'clock, fax only, minimum eight registered players — turning
+    league bureaucracy into an immediate, dated threat.
+  visual_proof: Two-shot at the rooftop railing, Aya holding the form out,
+    Hayato reading over her shoulder.
+  information_delta: Reader receives the episode's central constraint in
+    full, concrete and dated, not vague dread.
+  beat_role: stakes_reveal
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_006
+  page_id: ep_006_p01
+  story_function: roster_shortfall_reveal
+  story_move: Insert on the entry form itself — its actual printed
+    requirements — establishing the fax machine and roster sheet as
+    concrete objects before either becomes an obstacle later in the episode.
+  visual_proof: Document close-up, official league letterhead, a boxed
+    field reading minimum eight players and a fax-only submission line.
+  information_delta: Reader sees the literal bureaucratic object the whole
+    episode's tension will run through.
+  beat_role: object_plant
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_007
+  page_id: ep_006_p01
+  story_function: roster_shortfall_reveal
+  story_move: Hayato's mental count of the team lands on seven, not eight —
+    a quick, silent inventory rather than narrated math.
+  visual_proof: Small inset panel grid — five teammate faces plus Aya,
+    Endou, and Hayato himself, one face (unseen, unnamed) visibly missing
+    from the row.
+  information_delta: Reader does the arithmetic alongside Hayato instead of
+    being told the number.
+  beat_role: silent_calculation
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_008
+  page_id: ep_006_p01
+  story_function: roster_shortfall_reveal
+  story_move: Endou arrives on the rooftop and explains the shortfall
+    bluntly — a teammate, Sato, was transferred to another branch office
+    last week with no warning.
+  visual_proof: Endou stepping through the rooftop door, arms crossed, jaw
+    set.
+  information_delta: Reader learns the shortfall's cause is itself a
+    workplace mechanism (a corporate transfer), tying the two halves of the
+    story together structurally, not just thematically.
+  beat_role: cause_reveal
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_009
+  page_id: ep_006_p02
+  story_function: protective_teammate_friction
+  story_move: Endou rejects the idea of recruiting a stranger just to fill
+    the number, protective of the team's integrity even under deadline
+    pressure.
+  visual_proof: Endou pacing the rooftop, hands jammed in pockets, refusing
+    to look at either of them.
+  information_delta: Reader learns the easy fix (grab any warm body) is
+    off the table for reasons of team cohesion, not just plot convenience.
+  beat_role: value_stated
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_010
+  page_id: ep_006_p02
+  story_function: formal_commitment_signing
+  story_move: Aya turns the obvious solution toward Hayato directly — not
+    another practice visit, but an actual, permanent name on the roster
+    sheet.
+  visual_proof: Aya holding the blank roster line out to Hayato, meeting his
+    eyes instead of the form.
+  information_delta: Reader recognizes this as the direct payoff of
+    ep_001's unresolved invitation — the question finally being asked in
+    its real, binding form.
+  beat_role: threshold_offered
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_011
+  page_id: ep_006_p02
+  story_function: formal_commitment_signing
+  story_move: Close on the roster sheet's blank line under Hayato's name
+    field — a held beat of visible hesitation before any decision is shown.
+  visual_proof: Extreme close on ruled paper, an empty box, Hayato's pen
+    hovering without touching the line.
+  information_delta: Reader feels the weight of the decision as an object
+    (blank paper) rather than as narrated inner conflict.
+  beat_role: hesitation_held
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_012
+  page_id: ep_006_p02
+  story_function: formal_commitment_signing
+  story_move: Hayato signs — the same pen that taps his knuckles all day at
+    his desk now used to put his name on the team for the first time.
+  visual_proof: Close on the pen tip touching down, ink filling in his
+    name, 神崎隼人, in his own handwriting.
+  information_delta: Reader receives the episode's first real character
+    turn as a physical action on an object, not as a stated decision.
+  beat_role: threshold_choice
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_013
+  page_id: ep_006_p02
+  story_function: formal_commitment_signing
+  story_move: Endou and Aya react without ceremony — a short nod, a grunt —
+    refusing to turn the moment into a speech.
+  visual_proof: Medium two-shot, Endou's small nod, Aya's brief exhale.
+  information_delta: Reader sees the team's culture of understatement
+    modeled even at an emotionally loaded moment.
+  beat_role: understated_response
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_014
+  page_id: ep_006_p02
+  story_function: formal_commitment_signing
+  story_move: Endou states the new, thinner reality flatly — the roster
+    now sits at exactly the legal minimum, with no room for injury or
+    absence.
+  visual_proof: Endou looking at the completed roster sheet, counting the
+    names once with a finger.
+  information_delta: Reader understands the "win" of reaching eight is
+    also a new, fragile constraint going forward.
+  beat_role: margin_stated
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_015
+  page_id: ep_006_p03
+  story_function: bureaucratic_obstacle_reveal
+  story_move: A second, worse complication surfaces — the form also needs
+    an official company seal from General Affairs sponsoring off-hours
+    facility use, and the section chief who holds it is on a business trip
+    until Friday afternoon.
+  visual_proof: Aya on the phone in the stairwell, expression falling as she
+    listens to General Affairs explain the chief's schedule.
+  information_delta: Reader learns the roster problem was only half the
+    obstacle — an unrelated institutional one now threatens the same
+    deadline.
+  beat_role: obstacle_reveal
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_016
+  page_id: ep_006_p03
+  story_function: cross_world_competence_deployed
+  story_move: Hayato realizes the exact skill this problem needs is one he
+    already has — reading his own department's shared groupware calendar to
+    track exactly when a traveling manager will be reachable.
+  visual_proof: Hayato at his own monitor, scrolling a shared calendar
+    interface, sales-support badge still clipped to his shirt.
+  information_delta: Reader sees Hayato's workplace competence actively
+    solving the basketball problem for the first time — the two worlds
+    colliding productively rather than only in conflict.
+  beat_role: competence_pivot
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_017
+  page_id: ep_006_p03
+  story_function: cross_world_competence_deployed
+  story_move: Hayato moves through the office floors chasing the signature
+    down in person, badge swinging, shirt coming further untucked with
+    every stairwell.
+  visual_proof: Wide corridor shot, Hayato weaving between desks and a
+    photocopier queue, folder clutched to his chest.
+  information_delta: Reader tracks the obstacle being worked in real,
+    physical time rather than resolved off-panel.
+  beat_role: pursuit
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_018
+  page_id: ep_006_p03
+  story_function: team_focus_fracture_intercut
+  story_move: Cut to the same evening's practice — the team runs a drill
+    half-present, minds visibly still on the paperwork, and a routine pass
+    goes wide because nobody's attention is fully on the ball.
+  visual_proof: Gym floor, sweat, a missed pass skidding off court, Endou
+    barking a correction, the team's collective focus scattered exactly
+    the way Hayato's usually is.
+  information_delta: Reader sees the episode's stakes cost the team
+    something physical and immediate — a bad practice, real sweat — not
+    just an abstract deadline.
+  beat_role: training_cost
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_019
+  page_id: ep_006_p03
+  story_function: kuroda_wordless_continuity
+  story_move: Kuroda is glimpsed in the background of the same gym, quietly
+    resetting the ball rack as the drill breaks down around him — present,
+    unbothered, saying nothing about any of it.
+  visual_proof: Wide gym shot, evening light through high windows, Kuroda's
+    small figure racking balls at the edge of frame while the team argues
+    center-frame.
+  information_delta: Reader is reminded the mentor thread continues
+    unspoken beneath the episode's louder bureaucratic plot.
+  beat_role: mentor_wordless
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_020
+  page_id: ep_006_p04
+  story_function: deadline_crunch_mechanical_failure
+  story_move: Hayato returns with the signed and sealed form just after
+    practice ends, handing it to Aya with visible relief that is
+    immediately undercut by the next problem.
+  visual_proof: Hayato jogging up, holding out the stamped form, sweat and
+    exertion visible from the run across the building.
+  information_delta: Reader confirms the second obstacle is cleared, but
+    the episode withholds full relief by cutting straight to the next
+    threat.
+  beat_role: partial_relief
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_021
+  page_id: ep_006_p04
+  story_function: deadline_crunch_mechanical_failure
+  story_move: The team crowds into the club room around the building's old
+    fax machine, the last, unglamorous link between the signed paper and
+    the league actually receiving it.
+  visual_proof: Cramped club room, an aging fax machine on a metal shelf,
+    the team's faces lit by its small display.
+  information_delta: Reader meets the episode's final concrete object — a
+    machine that has to work, once, correctly, before five o'clock.
+  beat_role: object_plant
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_022
+  page_id: ep_006_p04
+  story_function: deadline_crunch_mechanical_failure
+  story_move: The fax machine jams mid-transmission with the clock reading
+    four fifty-six, turning the episode's last minutes into a mechanical
+    crisis instead of a bureaucratic one.
+  visual_proof: Close on the machine's paper feed grinding sideways, a red
+    error light blinking, the wall clock sharp in the same frame.
+  information_delta: Reader receives the episode's sharpest tension spike —
+    success reduced to a jammed feed tray with four minutes left.
+  beat_role: crisis_peak
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_023
+  page_id: ep_006_p04
+  story_function: deadline_crunch_mechanical_failure
+  story_move: Aya and Hayato work the jam free together, hands slightly
+    unsteady, breath held, neither one performing calm for the other.
+  visual_proof: Tight two-shot on four hands working the paper tray, a
+    faint tremor visible, both faces close and focused.
+  information_delta: Reader sees the physical cost of the deadline made
+    visible on the body — shaking hands, held breath — not just stated as
+    stress.
+  beat_role: shared_physical_cost
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_024
+  page_id: ep_006_p04
+  story_function: narrow_margin_success
+  story_move: The machine finally accepts the pages and prints a
+    confirmation slip timestamped two minutes before the deadline.
+  visual_proof: Close on the confirmation slip curling out of the machine,
+    a timestamp reading 16:58 clearly legible.
+  information_delta: Reader gets concrete, printed proof of the deadline
+    being met — narrow, not comfortable.
+  beat_role: narrow_success
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_025
+  page_id: ep_006_p05
+  story_function: flat_warning_not_triumph
+  story_move: The team sags onto the club room bench in quiet relief rather
+    than celebration, someone finally breaking for the vending machine down
+    the hall.
+  visual_proof: Wide club room shot, bodies loose against the wall, one
+    teammate already at the hallway vending machine, no one cheering.
+  information_delta: Reader is shown release without triumph, consistent
+    with the arc's no-trophy doctrine even at a minor procedural win.
+  beat_role: release_not_triumph
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_026
+  page_id: ep_006_p05
+  story_function: flat_warning_not_triumph
+  story_move: Endou refuses to let the relief read as readiness, stating
+    plainly that entering the tournament and being able to compete in it
+    are two different things.
+  visual_proof: Endou standing apart from the others, arms still crossed,
+    looking at the confirmation slip rather than the team.
+  information_delta: Reader receives the episode's explicit anti-triumph
+    check, spoken by a character rather than narrated.
+  beat_role: sober_warning
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_027
+  page_id: ep_006_p05
+  story_function: quiet_ownership_closing
+  story_move: Hayato, apart from the others, looks at his own name on the
+    roster sheet and the confirmation slip beside it — the episode's real,
+    quiet turn, privately felt rather than announced.
+  visual_proof: Close on Hayato's face, tired, unsmiling, looking down at
+    both papers held together in one hand.
+  information_delta: Reader receives the character beat the episode has
+    been building toward — ownership, not victory.
+  beat_role: quiet_ownership
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_028
+  page_id: ep_006_p05
+  story_function: quiet_ownership_closing
+  story_move: Closing wide on the emptying club room, a single ball left
+    on the floor, and the page-turn promise that the paperwork fight is
+    over and the real one starts next.
+  visual_proof: Wide shot, evening light through the club room window, a
+    basketball resting against the fax machine's stand, the door left
+    ajar.
+  information_delta: Reader is handed the explicit hinge into ep_007's
+    first qualifier match.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_006.yaml
+notes: Episode 6 of 12 — arc 1's tournament-entry beat per the series bible's
+  per-episode assignment. Escalates team-wide stakes for the first time via a
+  concrete, workplace-textured bureaucratic obstacle (roster minimum, company
+  seal, fax deadline) rather than narrative flavor, per the catalyst
+  'the_tournament_entry_form_deadline' in story_architecture_handoff.json. Does
+  not touch the 'One Ball at the Line' focus-strategy carrier beats directly
+  (those are seeded across ep_003/ep_010/ep_011); this episode's job is plot
+  escalation and Hayato's formal roster commitment, with the team's own
+  attention-scatter under pressure (panel 18) used as a light structural echo
+  of the ADHD engine rather than the carrier beat itself.
+  scripts/ci/check_manga_arc_storyboard.py does not exist in this repo
+  checkout — this file was authored to the established shape anyway per the
+  brief, and that gate was not run.

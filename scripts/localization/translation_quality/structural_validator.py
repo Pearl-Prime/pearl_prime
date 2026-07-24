@@ -184,6 +184,36 @@ def _glossary_avoid_terms(locale: str) -> list[tuple[str, str]]:
     return out
 
 
+def _glossary_preferred_terms(locale: str) -> list[tuple[str, list[str]]]:
+    """[(source_phrase, [locked preferred renderings, ...]), ...].
+
+    Distinct from _glossary_avoid_terms(): an `avoid` list only blocks
+    specific *known* bad renderings. It cannot catch a translator drifting to
+    an undocumented synonym that was never anticipated (e.g. DashScope
+    rendering "compassion fatigue" as the plausible-sounding 同情疲勞 --
+    that string was never in anyone's avoid list, so the avoid check passed
+    silently on 2026-07-23 wave1/shard04 output). This check inverts the
+    logic: when the English source phrase for a locked term is present, at
+    least one of that term's `preferred_by_context` renderings MUST appear
+    in the candidate -- whatever else does or doesn't appear.
+    """
+    out: list[tuple[str, list[str]]] = []
+    adir = _analysis_dir(locale)
+    if not adir:
+        return out
+    for fname in ("glossary_core.yaml", "glossary_project.yaml"):
+        data = _load_yaml(adir / fname)
+        for term in data.get("terms") or []:
+            source = str(term.get("source", "")).strip()
+            if not source:
+                continue
+            preferred = term.get("preferred_by_context") or {}
+            values = sorted({str(v).strip() for v in preferred.values() if str(v).strip()})
+            if values:
+                out.append((source, values))
+    return out
+
+
 def _protected_terms(locale: str) -> dict[str, Any]:
     adir = _analysis_dir(locale)
     if not adir:
@@ -309,6 +339,19 @@ def validate(
             for avoid_term, source_term in _glossary_avoid_terms(locale):
                 if avoid_term and avoid_term in cb.body:
                     this_block_reasons.append(f"glossary_violation:{avoid_term}")
+
+        # 14. locked preferred-term drift: when the English source phrase for
+        # a locked glossary concept appears in this block's source text, the
+        # candidate must use one of the locked preferred renderings -- not a
+        # plausible-but-undocumented synonym (see _glossary_preferred_terms).
+        if check_glossary:
+            src_body_lower = sb.body.lower()
+            for source_phrase, preferred_values in _glossary_preferred_terms(locale):
+                if source_phrase.lower() in src_body_lower:
+                    if not any(pv in cb.body for pv in preferred_values):
+                        this_block_reasons.append(
+                            f"glossary_preferred_term_missing:{source_phrase}"
+                        )
 
         if this_block_reasons:
             block_reasons[sb.header_id] = this_block_reasons

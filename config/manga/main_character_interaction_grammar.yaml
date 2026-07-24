@@ -1,0 +1,33 @@
+schema_version: "1.0"
+description: >-
+  Canonical interaction expectations consumed by the manga story-excellence
+  gate. Runtime detection and hard-fail rules live in
+  phoenix_v4/manga/story_quality/excellence_gate.py; this registry documents
+  the intended interaction axis for every modern-reader doctrine genre.
+
+genres:
+  battle: {quality_gate_checks: [rival_or_group_pressure]}
+  romance: {quality_gate_checks: [dyad_pressure]}
+  workplace: {quality_gate_checks: [authority_or_group_pressure]}
+  healing: {quality_gate_checks: [self_or_care_interaction]}
+  mystery: {quality_gate_checks: [witness_suspect_or_authority_pressure]}
+  horror: {quality_gate_checks: [threat_or_group_pressure]}
+  sports: {quality_gate_checks: [team_or_rival_pressure]}
+  essay: {quality_gate_checks: [self_or_artifact_interaction]}
+  slice_of_life: {quality_gate_checks: [relationship_or_self_interaction]}
+  fantasy_adventure: {quality_gate_checks: [companion_rival_or_authority_pressure]}
+  food: {quality_gate_checks: [family_customer_or_craft_interaction]}
+  family: {quality_gate_checks: [family_pressure]}
+  procedural: {quality_gate_checks: [authority_team_or_system_pressure]}
+  historical: {quality_gate_checks: [family_authority_or_group_pressure]}
+  comedy: {quality_gate_checks: [dyad_or_group_friction]}
+  cultivation: {quality_gate_checks: [rival_teacher_or_self_pressure]}
+  mecha: {quality_gate_checks: [machine_or_command_interaction]}
+  dark_fantasy: {quality_gate_checks: [threat_companion_or_self_pressure]}
+  sci_fi_cyberpunk: {quality_gate_checks: [machine_system_or_authority_pressure]}
+  supernatural_everyday: {quality_gate_checks: [relationship_or_system_pressure]}
+  school: {quality_gate_checks: [class_teacher_or_peer_pressure]}
+  memoir: {quality_gate_checks: [self_memory_or_relationship_interaction]}
+  social_issue: {quality_gate_checks: [family_care_or_authority_pressure]}
+  graphic_medicine: {quality_gate_checks: [patient_care_or_family_pressure]}
+  battle_internal: {quality_gate_checks: [self_or_memory_interaction]}

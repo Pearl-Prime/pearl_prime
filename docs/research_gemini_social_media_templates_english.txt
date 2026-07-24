@@ -1,0 +1,5202 @@
+
+Conversation with Gemini
+Deep Research Assignment: Build a Deterministic, High-Volume Social Media Template System for Static Posts and Short-Form Video
+
+Role
+
+Act as a multidisciplinary research and systems-design team consisting of:
+
+
+
+A senior social media strategist
+
+A social-native graphic designer
+
+A short-form video creative director
+
+A performance-marketing analyst
+
+A typography and information-design specialist
+
+A content-systems architect
+
+A generative-media pipeline engineer
+
+An accessibility specialist
+
+A platform-policy researcher
+
+A cultural-trends researcher
+
+Your assignment is not merely to provide social media tips.
+
+You must design a complete, production-ready blueprint for a deterministic system that can generate thousands or tens of thousands of polished social media posts from:
+
+
+
+An existing image bank
+
+A bank of quotes, teachings, insights, questions, captions, hooks, and calls to action
+
+A library of reusable graphic and video templates
+
+Brand or publisher-house configurations
+
+Platform-specific composition rules
+
+Deterministic selection and variation logic
+
+The system must support both:
+
+
+
+Static image-and-text posts
+
+Short-form vertical videos
+
+The primary content domain is self-help, personal growth, emotional wellbeing, spirituality, wisdom, motivation, and practical life guidance.
+
+The findings should also be generalizable to adjacent educational and inspirational content.
+
+Central Objective
+
+Determine how to build the best possible template-driven social media generation system for the major platforms, based on:
+
+
+
+Current platform conventions
+
+Current high-performing visual styles
+
+Current audience behavior
+
+Evergreen design principles
+
+Platform-specific technical requirements
+
+Readability and accessibility
+
+Content-performance research
+
+Large-scale variation requirements
+
+Deterministic implementation constraints
+
+The final system should produce posts that feel:
+
+
+
+Social-native
+
+Current
+
+Attractive
+
+Human-designed
+
+Varied without becoming inconsistent
+
+Recognizable as part of the same brand
+
+Appropriate for each platform
+
+Readable within one second
+
+Scalable to thousands of outputs
+
+Resistant to obvious template fatigue
+
+Avoid giving only general advice such as “use strong hooks,” “make it engaging,” or “use good visuals.”
+
+Translate every recommendation into concrete, implementable template rules.
+
+Existing System Model
+
+Assume an existing book-cover system already separates these concerns:
+
+
+
+Brand or publisher-house identity
+
+Composition template
+
+Image selection
+
+Typography system
+
+Color and treatment system
+
+Content or genre
+
+Rendering logic
+
+Automated validation
+
+The social media system should extend this principle.
+
+Do not fuse everything into a single “Instagram template” or “TikTok template.”
+
+Instead, determine which variables should be independent knobs, such as:
+
+
+
+Platform
+
+Surface or placement
+
+Aspect ratio
+
+Post objective
+
+Content type
+
+Text density
+
+Visual archetype
+
+Image treatment
+
+Brand house
+
+Typography treatment
+
+Emotional register
+
+Topic
+
+Audience-awareness stage
+
+Hook type
+
+CTA type
+
+Motion archetype
+
+Duration
+
+Audio strategy
+
+Caption strategy
+
+Explain which variables may safely combine and which combinations should be prohibited.
+
+Platforms to Research
+
+Research the major relevant platforms individually.
+
+
+
+Static and Mixed-Media Platforms
+
+At minimum:
+
+
+
+Instagram feed posts
+
+Instagram carousels
+
+Instagram Stories
+
+Facebook feed posts
+
+Facebook page posts
+
+Facebook Stories
+
+LinkedIn feed posts
+
+LinkedIn document/carousel posts
+
+X image posts
+
+Threads image posts
+
+Pinterest standard pins
+
+Pinterest idea-style or multi-page content, where currently supported
+
+YouTube Community image posts
+
+Google Business Profile posts, if relevant to this content model
+
+Short-Form Video Platforms
+
+At minimum:
+
+
+
+Instagram Reels
+
+Facebook Reels
+
+TikTok
+
+YouTube Shorts
+
+Pinterest short-form video, if currently relevant
+
+LinkedIn vertical or short native video, if currently relevant
+
+For every platform and surface, verify its current status and specifications rather than assuming that older recommendations remain accurate.
+
+Date-stamp the research.
+
+Source Requirements
+
+Use current information available at the time of research.
+
+Prioritize:
+
+
+
+Official platform documentation
+
+Official platform creator resources
+
+Official advertising and creative guidance
+
+Credible social media analytics companies
+
+Large-scale performance studies
+
+Reputable agencies publishing actual performance data
+
+Current examples from successful accounts
+
+Peer-reviewed attention, perception, typography, or cognitive-load research where relevant
+
+Do not treat unsupported marketing-blog opinions as established facts.
+
+For every important factual recommendation:
+
+
+
+Cite the source
+
+Include the publication or update date
+
+Distinguish official specifications from strategic interpretation
+
+State when evidence is mixed
+
+State when a recommendation is an informed design hypothesis rather than a proven performance rule
+
+Prefer evidence from the last 12–24 months for trends and platform behavior.
+
+Older sources may be used for stable design principles.
+
+Research Question 1: What Is Performing Visually Right Now?
+
+Identify the current dominant visual languages used in successful static posts and short-form videos.
+
+Study examples in:
+
+
+
+Self-help
+
+Personal development
+
+Mental wellbeing
+
+Spirituality
+
+Coaching
+
+Education
+
+Psychology
+
+Motivational content
+
+Author and book marketing
+
+Thought leadership
+
+Do not merely list accounts.
+
+Analyze repeated design patterns, including:
+
+
+
+Editorial minimalism
+
+Bold oversized typography
+
+Quote cards
+
+Text over photography
+
+Text beside photography
+
+Framed photography
+
+Color-block layouts
+
+Meme-like layouts
+
+Screenshot or note-app aesthetics
+
+Handwritten annotations
+
+Scrapbook or collage treatments
+
+Soft wellness aesthetics
+
+Brutalist social graphics
+
+Magazine-cover layouts
+
+Diagram-led posts
+
+List-led posts
+
+Before-and-after structures
+
+Question-led posts
+
+Contrarian statement posts
+
+Photo-journal layouts
+
+Cinematic vertical video
+
+Talking-head video
+
+Faceless B-roll video
+
+Animated typography
+
+Kinetic quotation videos
+
+Slideshow videos
+
+Podcast-style clips
+
+Story-based shorts
+
+Looping meditative visuals
+
+For each style, determine:
+
+
+
+Whether it is currently growing, stable, saturated, or declining
+
+Which platforms it fits
+
+Which audiences it fits
+
+Its strengths
+
+Its failure modes
+
+How easily it can be systematized
+
+Whether it remains attractive after hundreds of repetitions
+
+Whether it is trend-dependent or evergreen
+
+Separate:
+
+
+
+Evergreen composition principles
+
+Current visual trends
+
+Short-lived novelty treatments
+
+The proposed system must not become obsolete when one visual trend ends.
+
+Research Question 2: Platform-Specific Behavior
+
+For every platform and surface, analyze:
+
+
+
+Recommended dimensions
+
+Supported aspect ratios
+
+Preferred aspect ratios
+
+Mobile cropping behavior
+
+Grid-preview cropping
+
+Feed-preview cropping
+
+Thumbnail behavior
+
+Interface overlays
+
+Caption placement
+
+Username and button overlays
+
+Safe zones
+
+Text-size requirements
+
+Compression behavior
+
+Video resolution
+
+Frame rate
+
+File-format requirements
+
+Duration limits
+
+Recommended practical duration
+
+Whether links are clickable
+
+Hashtag behavior
+
+Search and SEO behavior
+
+Alt-text support
+
+Accessibility features
+
+Native editing expectations
+
+Watermark penalties or restrictions
+
+Recycled-content considerations
+
+Audio considerations
+
+Content that may receive reduced distribution
+
+Platform-specific policy risks
+
+Produce a technical platform contract for each surface.
+
+Use normalized coordinates as well as pixel examples.
+
+For example:
+
+
+
+platform_surface: instagram_feed_portrait
+
+canvas:
+
+width: 1080
+
+height: 1350
+
+aspect_ratio: 4:5
+
+safe_zones:
+
+critical_text:
+
+x_min: 0.07
+
+x_max: 0.93
+
+y_min: 0.07
+
+y_max: 0.91
+
+preview_crop:
+
+behavior: "..."
+
+recommended_text_density:
+
+headline_words: "..."
+
+supporting_words: "..."
+
+Do not invent exact safe-zone measurements without evidence. Where official measurements do not exist, label them as conservative implementation recommendations.
+
+Research Question 3: Anatomy of a High-Performing Static Post
+
+Define the anatomy of an effective static social media post.
+
+Study the role of:
+
+
+
+Scroll-stopping signal
+
+Primary visual
+
+Headline or quote
+
+Supporting line
+
+Attribution
+
+Brand mark
+
+CTA
+
+White space
+
+Contrast
+
+Visual hierarchy
+
+Face or eye direction
+
+Emotional expression
+
+Color
+
+Texture
+
+Pattern interruption
+
+Curiosity
+
+Specificity
+
+Readability at thumbnail size
+
+Caption relationship
+
+Content-image semantic alignment
+
+Determine what must be understood at:
+
+
+
+0.5 seconds
+
+1 second
+
+3 seconds
+
+5 seconds
+
+Define practical limits for:
+
+
+
+Words on image
+
+Lines of text
+
+Font sizes
+
+Number of typefaces
+
+Number of visual zones
+
+Number of messages per post
+
+Number of colors
+
+Number of competing focal points
+
+Distinguish among:
+
+
+
+Quote posts
+
+Insight posts
+
+Question posts
+
+List posts
+
+Educational posts
+
+Story posts
+
+Promotional posts
+
+Event posts
+
+Book-marketing posts
+
+Testimonial posts
+
+CTA posts
+
+Diagram posts
+
+Announcement posts
+
+Reflection prompts
+
+Saveable reference posts
+
+Research Question 4: Anatomy of a High-Performing Carousel
+
+Research static and mixed-media carousel structures separately from single-image posts.
+
+Determine:
+
+
+
+What makes someone swipe
+
+What belongs on slide one
+
+How much text belongs on each slide
+
+How visual continuity should work
+
+When each slide should stand alone
+
+How progression and open loops work
+
+How to end the carousel
+
+Whether and how to use a CTA
+
+How many slides perform well for different objectives
+
+How carousels differ across Instagram, LinkedIn, Facebook, and Pinterest
+
+Whether document-style carousels require a separate visual grammar
+
+Create reusable carousel story engines such as:
+
+
+
+Problem → mechanism → solution
+
+Myth → truth → application
+
+Hook → five insights → takeaway
+
+Mistake → consequence → correction
+
+Before → turning point → after
+
+Question → reframing → practice
+
+Story → lesson → invitation
+
+Symptoms → cause → tool
+
+Quote → interpretation → exercise
+
+Contrarian claim → evidence → nuance
+
+Checklist
+
+Step-by-step tutorial
+
+Saveable framework
+
+Emotional validation sequence
+
+Each carousel engine should include:
+
+
+
+Recommended number of slides
+
+Function of every slide
+
+Text envelope per slide
+
+Image requirements
+
+Continuity rules
+
+CTA options
+
+Failure conditions
+
+Research Question 5: Anatomy of a Good Short, Reel, or TikTok
+
+Explain the complete anatomy of strong short-form vertical video.
+
+Analyze:
+
+
+
+First-frame design
+
+The first 0.5 seconds
+
+The first 1–2 seconds
+
+Hook language
+
+Hook visuals
+
+Immediate motion
+
+Pattern interruption
+
+Open loops
+
+Visual resets
+
+Pacing
+
+Scene changes
+
+Text overlays
+
+Subtitle styling
+
+B-roll
+
+Voiceover
+
+Talking heads
+
+Faceless formats
+
+Music
+
+Sound effects
+
+Silence
+
+Emotional progression
+
+Information density
+
+Payoff
+
+CTA
+
+Loop construction
+
+Rewatch triggers
+
+Share triggers
+
+Save triggers
+
+Create duration-specific anatomy for:
+
+
+
+6–10 seconds
+
+11–20 seconds
+
+21–35 seconds
+
+36–60 seconds
+
+61–90 seconds
+
+For each duration, specify:
+
+
+
+Recommended number of beats
+
+Typical shot length
+
+Number of visual changes
+
+Number of text cards
+
+Voiceover word envelope
+
+On-screen word envelope
+
+Hook duration
+
+Payoff placement
+
+CTA placement
+
+Looping strategy
+
+Determine which principles are common across TikTok, Reels, and Shorts and which must change by platform.
+
+Research Question 6: Text-on-Screen and Subtitle Design
+
+Research the best current practices for text in vertical video.
+
+Cover:
+
+
+
+Safe placement
+
+Maximum line length
+
+Maximum lines
+
+Word grouping
+
+Highlighted keywords
+
+Karaoke-style captions
+
+Sentence-style captions
+
+Static text cards
+
+Typography animation
+
+Text entry and exit
+
+Subtitle speed
+
+Reading speed
+
+Contrast plates
+
+Shadows and strokes
+
+Accessibility
+
+Handling punctuation
+
+Handling speaker changes
+
+Placement around faces
+
+Placement around platform-interface elements
+
+When centered text works
+
+When bottom captions fail
+
+Whether all spoken words should appear
+
+When captions should be condensed
+
+Produce at least four reusable subtitle systems and state where each should be used.
+
+Research Question 7: Deterministic Static Template Library
+
+Design a recommended static-post template library.
+
+Do not create dozens of templates that differ only by color.
+
+Create meaningfully distinct composition archetypes.
+
+The system should ideally begin with approximately 16–24 strong static archetypes, such as:
+
+
+
+Full-bleed image with protected text plate
+
+Image top, text bottom
+
+Text top, image bottom
+
+Left image, right text
+
+Right image, left text
+
+Centered framed image
+
+Small floating image on a field
+
+Magazine-cover composition
+
+Large quote with small supporting image
+
+Type-takeover
+
+Airy minimal quote
+
+Bold stacked typography
+
+Split color-block
+
+Editorial rule-and-caption
+
+Collage
+
+Scrapbook annotation
+
+Gradient glow
+
+Diagram card
+
+Checklist card
+
+Question card
+
+Screenshot-inspired note
+
+Testimonial card
+
+Before-and-after split
+
+Multi-panel story card
+
+The final template count should be based on evidence and operational usefulness, not this suggested list alone.
+
+For every recommended archetype, provide:
+
+
+
+Unique template key
+
+Human-readable name
+
+Appropriate platforms
+
+Appropriate aspect ratios
+
+Primary objective
+
+Suitable content types
+
+Suitable text densities
+
+Required image characteristics
+
+Zone geometry
+
+Typography hierarchy
+
+Image-treatment rules
+
+Brand-mark location
+
+CTA treatment
+
+Responsive behavior
+
+Safe-zone rules
+
+Forbidden combinations
+
+Minimum quality gates
+
+Examples of when not to use it
+
+Use normalized coordinates from 0.0 to 1.0.
+
+Example:
+
+
+
+template_key: static_editorial_image_top
+
+family: editorial
+
+canvas_behavior: responsive
+
+zones:
+
+image:
+
+x: 0.06
+
+y: 0.06
+
+width: 0.88
+
+height: 0.43
+
+headline:
+
+x: 0.08
+
+y: 0.55
+
+width: 0.84
+
+height: 0.20
+
+supporting_text:
+
+x: 0.08
+
+y: 0.77
+
+width: 0.70
+
+height: 0.10
+
+brand_mark:
+
+x: 0.82
+
+y: 0.90
+
+width: 0.10
+
+height: 0.04
+
+These do not need to be final production coordinates, but they must be detailed enough to implement and test.
+
+Research Question 8: Deterministic Short-Form Video Template Library
+
+Design a reusable video-template library.
+
+Recommend approximately 12–20 genuinely distinct video archetypes.
+
+Possible families include:
+
+
+
+Animated quote over cinematic footage
+
+Fast kinetic typography
+
+Slow meditative quotation
+
+Hook plus three-point teaching
+
+Myth-versus-truth
+
+Problem-mechanism-tool
+
+Question-reframe-practice
+
+Story in five beats
+
+Before-and-after transformation
+
+Listicle with visual resets
+
+One sentence with visual escalation
+
+Faceless B-roll voiceover
+
+Talking-head with responsive cutaways
+
+Photo-bank slideshow
+
+Object-metaphor story
+
+Text-message or note-screen narrative
+
+Diagram-build animation
+
+Podcast quotation
+
+Book-page insight
+
+Looping affirmation
+
+For every video archetype, provide:
+
+
+
+Template key
+
+Best platforms
+
+Best objectives
+
+Recommended duration range
+
+Number of beats
+
+Function of each beat
+
+Hook type
+
+Shot requirements
+
+Image-bank requirements
+
+Motion rules
+
+Transition rules
+
+Subtitle system
+
+Music or sound strategy
+
+Text envelope
+
+Voiceover envelope
+
+End-state
+
+CTA options
+
+Loop strategy
+
+Platform modifications
+
+Failure conditions
+
+Provide beat-level schemas.
+
+Example:
+
+
+
+template_key: video_problem_mechanism_tool_25s
+
+duration_target_seconds: 25
+
+beats:
+
+- beat: 1
+
+time: "0.0-1.5"
+
+function: hook
+
+visual: immediate emotional image
+
+text_words_max: 8
+
+- beat: 2
+
+time: "1.5-6.0"
+
+function: recognition
+
+- beat: 3
+
+time: "6.0-13.0"
+
+function: mechanism
+
+- beat: 4
+
+time: "13.0-21.0"
+
+function: practical tool
+
+- beat: 5
+
+time: "21.0-25.0"
+
+function: payoff_and_loop
+
+Research Question 9: Image-Bank Taxonomy
+
+Design the metadata system required for deterministic image selection.
+
+The image bank may include:
+
+
+
+People
+
+Faces
+
+Bodies
+
+Nature
+
+Interiors
+
+Objects
+
+Abstract imagery
+
+Symbolic imagery
+
+Textures
+
+Backgrounds
+
+Spiritual imagery
+
+Everyday-life situations
+
+Work situations
+
+Relationships
+
+Emotional moments
+
+Recommend a metadata schema including fields such as:
+
+
+
+Subject
+
+Number of people
+
+Age range
+
+Presentation
+
+Pose
+
+Gaze direction
+
+Facial expression
+
+Emotional register
+
+Energy level
+
+Setting
+
+Time of day
+
+Lighting
+
+Color temperature
+
+Dominant colors
+
+Contrast
+
+Texture
+
+Negative-space location
+
+Focal-point location
+
+Orientation
+
+Crop tolerance
+
+Text-safe regions
+
+Camera distance
+
+Movement potential
+
+Symbolic meaning
+
+Topic relevance
+
+Audience relevance
+
+Platform suitability
+
+Template compatibility
+
+Sensitivity flags
+
+Repetition count
+
+Last-used date
+
+Explain how image selection should combine:
+
+
+
+Literal topic match
+
+Emotional match
+
+Metaphorical match
+
+Visual compositional fit
+
+Brand fit
+
+Platform fit
+
+Novelty
+
+Recent usage
+
+Diversity
+
+Avoidance of misleading semantic pairings
+
+Define a deterministic image-scoring formula.
+
+Research Question 10: Words and Content Bank Taxonomy
+
+Design a schema for the words bank.
+
+It may include:
+
+
+
+Quotations
+
+Original wisdom
+
+Hooks
+
+Questions
+
+Contrarian statements
+
+Validating statements
+
+Mechanism explanations
+
+Tips
+
+Practices
+
+Lists
+
+Story fragments
+
+CTAs
+
+Captions
+
+Titles
+
+Subtitle lines
+
+Voiceover scripts
+
+Carousel sequences
+
+Recommend metadata fields including:
+
+
+
+Content ID
+
+Content type
+
+Topic
+
+Subtopic
+
+Emotional state
+
+Desired outcome
+
+Audience-awareness stage
+
+Hook family
+
+Tone
+
+Reading level
+
+Word count
+
+Character count
+
+Line-break opportunities
+
+Text-density class
+
+Platform suitability
+
+Template suitability
+
+CTA compatibility
+
+Image semantic requirements
+
+Risk or sensitivity category
+
+Evidence requirement
+
+Attribution requirement
+
+Source
+
+Originality status
+
+Last-used date
+
+Performance history
+
+Explain how a single core insight can be transformed into:
+
+
+
+A static quote card
+
+A question card
+
+A list post
+
+A carousel
+
+A 10-second video
+
+A 30-second video
+
+A 60-second video
+
+A LinkedIn insight post
+
+An X image post
+
+A Pinterest pin
+
+Do not assume the same wording should be placed unchanged on every platform.
+
+Research Question 11: Variation Without Template Fatigue
+
+The system must produce thousands of posts without appearing mechanically repetitive.
+
+Design a controlled variation system.
+
+Possible independent variation axes include:
+
+
+
+Composition archetype
+
+Crop
+
+Image choice
+
+Image scale
+
+Image location
+
+Text alignment
+
+Text width
+
+Typography family
+
+Typography weight
+
+Type scale
+
+Accent treatment
+
+Background treatment
+
+Border
+
+Rules
+
+Texture
+
+Gradient
+
+Brand mark
+
+Quote mark
+
+Symbol
+
+CTA position
+
+Line breaking
+
+Motion pattern
+
+Transition pattern
+
+Subtitle style
+
+Duration
+
+Pacing
+
+Hook family
+
+Identify:
+
+
+
+High-value variation axes
+
+Low-value cosmetic variation
+
+Axes that should remain stable for brand recognition
+
+Axes that can rotate frequently
+
+Axes that should never be randomized independently
+
+Combinations that commonly produce ugly or incoherent results
+
+Create a variation budget.
+
+For example:
+
+
+
+Brand constants: stable for 50–100 posts
+
+Composition families: rotate every post
+
+Specific archetype: do not repeat within a defined window
+
+Image: no repeat within a defined period
+
+Color treatment: controlled rotation
+
+Typography: stable by brand house
+
+Motion: rotate within a platform-specific family
+
+Develop a template-fatigue prevention algorithm using:
+
+
+
+Recent-use penalties
+
+Similarity penalties
+
+Audience exposure
+
+Template-family balancing
+
+Topic balancing
+
+Emotional-register balancing
+
+Visual-color balancing
+
+Image-subject balancing
+
+Research Question 12: Platform Adaptation Versus Simple Resizing
+
+Determine what can be shared across platforms and what requires a genuinely different composition.
+
+Do not assume that one design can simply be resized for every platform.
+
+Classify adaptations into:
+
+
+
+Direct resize
+
+Responsive reflow
+
+Alternate crop
+
+Text rewrite
+
+Composition reassignment
+
+Entirely different platform-native creative
+
+For each platform pair, state what level is generally required.
+
+Examples:
+
+
+
+Instagram feed → Facebook feed
+
+Instagram feed → LinkedIn
+
+Instagram feed → Pinterest
+
+Instagram feed → X
+
+TikTok → Reels
+
+Reels → Shorts
+
+Carousel → LinkedIn document
+
+Static quote → vertical video
+
+Produce a platform-adaptation matrix.
+
+Research Question 13: Brand-House Layer
+
+Design the equivalent of publisher houses for social content.
+
+A brand house should control identity without controlling every composition.
+
+Potential brand-house variables include:
+
+
+
+Typeface family
+
+Typeface pairing
+
+Weight range
+
+Case rules
+
+Line-height behavior
+
+Palette
+
+Image treatment
+
+Border treatment
+
+Signature mark
+
+Texture
+
+Corner treatment
+
+Caption style
+
+Subtitle style
+
+Motion personality
+
+Transition personality
+
+Audio personality
+
+CTA voice
+
+Explain how to maintain recognizable identity while allowing multiple static and video templates.
+
+Recommend how many brand houses a large content publisher should operate.
+
+Distinguish among:
+
+
+
+Brand identity
+
+Campaign identity
+
+Topic identity
+
+Platform identity
+
+Template composition
+
+These must not be collapsed into one configuration.
+
+Research Question 14: Deterministic Selection Engine
+
+Design a selection pipeline.
+
+The input may include:
+
+
+
+platform: instagram
+
+surface: feed
+
+objective: saves
+
+topic: burnout
+
+emotion: validation
+
+content_type: quote
+
+text_density: short
+
+brand_house: inner_light
+
+image_required: true
+
+The system must select:
+
+
+
+Platform contract
+
+Eligible template family
+
+Specific template
+
+Image
+
+Crop
+
+Typography configuration
+
+Text layout
+
+Image treatment
+
+CTA treatment
+
+Caption format
+
+Accessibility data
+
+Validation gates
+
+Create:
+
+
+
+Eligibility rules
+
+Scoring rules
+
+Penalties
+
+Exclusion rules
+
+Tie-breaking rules
+
+Deterministic seed behavior
+
+Repetition controls
+
+Fallback behavior
+
+Failure behavior
+
+The renderer should fail closed when content cannot be rendered legibly.
+
+Do not solve every failure by shrinking the text indefinitely.
+
+Specify when the system should:
+
+
+
+Rebreak lines
+
+Shorten text
+
+Change template
+
+Change image
+
+Change crop
+
+Remove secondary text
+
+Produce a carousel instead
+
+Reject the asset
+
+Research Question 15: Quality-Assurance Gates
+
+Design automated pre-render and post-render validation.
+
+
+
+Pre-Render Checks
+
+Include:
+
+
+
+Supported platform
+
+Correct dimensions
+
+Eligible template
+
+Text fits its envelope
+
+Valid attribution
+
+Image metadata compatibility
+
+Adequate negative space
+
+No prohibited content-template combination
+
+No excessive recent repetition
+
+Safe-zone compliance
+
+CTA compatibility
+
+Brand configuration completeness
+
+Post-Render Checks
+
+Include:
+
+
+
+Text overflow
+
+Text clipping
+
+Insufficient contrast
+
+Unreadable type at mobile size
+
+Unsafe interface overlap
+
+Face obstruction
+
+Awkward crop
+
+Competing focal points
+
+Incorrect hierarchy
+
+Logo misuse
+
+Excessive visual density
+
+Broken line wraps
+
+Orphans
+
+Widows
+
+Subtitle collisions
+
+Frame-to-frame flicker
+
+Motion too fast to read
+
+Missing captions
+
+Video length violation
+
+Unintended black frames
+
+Incorrect thumbnail
+
+Watermark contamination
+
+Recommend measurable thresholds where possible.
+
+Include perceptual tests at:
+
+
+
+Full resolution
+
+Typical phone width
+
+Feed thumbnail
+
+Grid thumbnail
+
+Muted playback
+
+Sound-on playback
+
+Explain where computer vision, OCR, and vision-language-model review could be useful, while avoiding reliance on them as the only quality gate.
+
+Research Question 16: Accessibility and Ethical Design
+
+Include practical standards for:
+
+
+
+Color contrast
+
+Font size
+
+Dyslexia-friendly readability
+
+Caption availability
+
+Alt text
+
+Flashing and motion sensitivity
+
+Text reading speed
+
+Screen-reader context
+
+Avoiding visual dependence on color alone
+
+Language localization
+
+Cultural sensitivity
+
+Accurate quotation attribution
+
+Mental-health claim safety
+
+Spiritual or therapeutic claim safety
+
+Avoiding manipulative fear-based hooks
+
+Avoiding misleading before-and-after content
+
+Explain how accessibility requirements should be encoded into templates rather than left to the final editor.
+
+Research Question 17: Performance-Learning System
+
+Design a feedback system that improves template selection over time without allowing short-term metrics to destroy the brand.
+
+Track metrics such as:
+
+
+
+Impressions
+
+Reach
+
+Three-second views
+
+Average watch time
+
+Completion rate
+
+Rewatch rate
+
+Saves
+
+Shares
+
+Comments
+
+Profile visits
+
+Follows
+
+Link clicks
+
+Hide or negative-feedback rate
+
+Normalize performance by:
+
+
+
+Platform
+
+Audience size
+
+Post objective
+
+Topic
+
+Content type
+
+Posting time
+
+Template
+
+Brand house
+
+Image family
+
+Hook type
+
+Duration
+
+Caption strategy
+
+Explain:
+
+
+
+Which metrics matter for each objective
+
+How much data is needed before judging a template
+
+How to avoid overfitting
+
+How to run template experiments
+
+How to maintain evergreen control templates
+
+How to retire weak templates
+
+How to distinguish content quality from visual-template quality
+
+How to account for platform volatility
+
+Create a basic multi-armed-bandit or weighted-selection concept, but preserve:
+
+
+
+Brand consistency
+
+Topic diversity
+
+Exploration
+
+Minimum exposure for new templates
+
+Human editorial control
+
+Required Final Deliverables
+
+Produce the final report in the following order.
+
+
+
+Deliverable 1: Executive Recommendation
+
+Summarize:
+
+
+
+The recommended system architecture
+
+The appropriate number of static template archetypes
+
+The appropriate number of short-form-video archetypes
+
+The most important platform differences
+
+The most important current trends
+
+The evergreen foundation
+
+The largest implementation risks
+
+Deliverable 2: Current Trend Report
+
+Rank the most relevant current visual and video styles.
+
+For each style, label it:
+
+
+
+Evergreen
+
+Growing
+
+Mainstream
+
+Saturated
+
+Declining
+
+Experimental
+
+Include evidence and dated examples.
+
+
+
+Deliverable 3: Platform Contract Matrix
+
+Create one row per platform surface with:
+
+
+
+Dimensions
+
+Aspect ratio
+
+Preview behavior
+
+Safe areas
+
+Text-density guidance
+
+Caption guidance
+
+SEO guidance
+
+Accessibility requirements
+
+Native-content considerations
+
+Technical restrictions
+
+Deliverable 4: Static Template Catalogue
+
+Provide the complete recommended library of static archetypes.
+
+For every archetype, include:
+
+
+
+Visual diagram
+
+Normalized zone map
+
+Text envelope
+
+Image requirements
+
+Eligible platforms
+
+Eligible objectives
+
+Responsive rules
+
+Failure conditions
+
+Deliverable 5: Video Template Catalogue
+
+Provide the complete recommended library of short-form-video archetypes.
+
+For every archetype, include:
+
+
+
+Timeline
+
+Beat structure
+
+Shot structure
+
+Text structure
+
+Motion rules
+
+Audio rules
+
+Duration variants
+
+Platform adaptations
+
+Failure conditions
+
+Deliverable 6: Carousel Story-Engine Catalogue
+
+Provide reusable carousel engines with slide-by-slide functions.
+
+
+
+Deliverable 7: Image-Bank Schema
+
+Provide a machine-readable metadata schema and example records.
+
+
+
+Deliverable 8: Words-Bank Schema
+
+Provide a machine-readable metadata schema and example records.
+
+
+
+Deliverable 9: Brand-House Schema
+
+Provide a machine-readable configuration showing how brand identity remains independent from composition.
+
+
+
+Deliverable 10: Deterministic Selection Algorithm
+
+Provide:
+
+
+
+Pseudocode
+
+Eligibility logic
+
+Scoring logic
+
+Penalties
+
+Fallback logic
+
+Deterministic seed behavior
+
+Recency and repetition controls
+
+Deliverable 11: Validation Specification
+
+Provide pre-render and post-render acceptance gates.
+
+Clearly distinguish:
+
+
+
+Warning
+
+Automatic repair
+
+Template reselection
+
+Hard failure
+
+Deliverable 12: Platform-Adaptation Matrix
+
+Explain which assets can be resized, which need reflow, and which need platform-native reconstruction.
+
+
+
+Deliverable 13: Initial Production Library Recommendation
+
+Recommend the smallest strong first release.
+
+For example, determine whether the initial implementation should contain approximately:
+
+
+
+16 static single-image templates
+
+8 carousel engines
+
+12 short-form-video templates
+
+4 subtitle systems
+
+4 motion systems
+
+6 CTA treatments
+
+Do not accept these example numbers automatically. Recommend the actual numbers based on the research.
+
+Divide the implementation into:
+
+
+
+Essential launch set
+
+Expansion set
+
+Experimental set
+
+Deliverable 14: Implementation Roadmap
+
+Provide an ordered engineering plan covering:
+
+
+
+Schemas
+
+Platform contracts
+
+Static templates
+
+Image tagging
+
+Words-bank tagging
+
+Selection engine
+
+Renderer
+
+Video compositor
+
+Validation
+
+Performance feedback
+
+Human review
+
+Scaling
+
+For each phase, include:
+
+
+
+Inputs
+
+Outputs
+
+Dependencies
+
+Acceptance criteria
+
+Main risks
+
+Deliverable 15: Machine-Readable Appendix
+
+Provide valid YAML or JSON examples for:
+
+
+
+Platform contracts
+
+Static templates
+
+Video templates
+
+Carousel engines
+
+Image-bank records
+
+Words-bank records
+
+Brand houses
+
+Selection requests
+
+Render receipts
+
+Validation receipts
+
+Performance records
+
+The schemas must be internally consistent.
+
+Visual Documentation Requirements
+
+Do not rely only on prose.
+
+Include:
+
+
+
+Wireframes
+
+Zone diagrams
+
+Timeline diagrams
+
+Safe-zone diagrams
+
+Template-family maps
+
+Platform comparison tables
+
+Example decision trees
+
+Example configuration records
+
+When showing examples from successful social accounts:
+
+
+
+Identify the relevant design pattern
+
+Explain why the example works
+
+Do not copy proprietary artwork
+
+Abstract the example into reusable structural rules
+
+Analysis Standards
+
+Throughout the report:
+
+
+
+Separate evidence from opinion
+
+Separate current trends from evergreen principles
+
+Separate platform limits from creative recommendations
+
+Separate brand identity from composition
+
+Separate content quality from visual execution
+
+Separate simple resizing from genuine platform adaptation
+
+Do not recommend uniqueness merely for uniqueness’s sake
+
+Do not recommend endless randomization
+
+Favor bounded, intentional variation
+
+Favor legibility by construction
+
+Favor templates with protected text zones
+
+Avoid placing important text directly over uncontrolled image regions
+
+Avoid solving every layout problem by reducing font size
+
+Design for actual mobile viewing
+
+Design for thousands of outputs, not twelve hand-designed examples
+
+The final answer must be detailed enough that an engineering team can begin implementing the system without conducting another broad research phase.
+
+Conclude with a clear recommendation titled:
+
+
+
+The Recommended Deterministic Social Publishing System
+
+This conclusion should state:
+
+
+
+The final architecture
+
+The recommended template counts
+
+The recommended variation model
+
+The recommended selection model
+
+The recommended validation model
+
+The recommended first implementation milestone
+
+What should remain human-reviewed
+
+What can safely be automated
+
+Here's a research plan for that topic. If you need to update it, let me know!
+ Deterministic Social Media Templates 
+Research Websites
+(1) Compile official developer specifications, creator resources, and safe zone guidelines for static and video platforms, focusing on Instagram, TikTok, Facebook, YouTube, LinkedIn, X, and Pinterest.
+(2) Analyze current visual language and trend data from high-performing accounts in self-help, spirituality, mental wellbeing, and coaching to identify growing vs. declining visual styles.
+(3) Investigate evergreen graphic design principles, readability studies, and mobile UI safe-zone constraints to define high-performance structures for static posts and carousel engines.
+(4) Research technical performance metrics, pacing configurations, and on-screen typography layouts for vertical short-form video durations ranging from 6 to 90 seconds.
+(5) Analyze programmatic schemas and taxonomies for digital asset management, specifically focusing on categorizing image-bank and words-bank attributes for deterministic logic.
+(6) Examine programmatic layout and composition algorithms, variation budgets, and automated rules that prevent template fatigue while preserving unified brand identity rules.
+(7) Study pre-render and post-render validation gates, computer vision accessibility checks, and automated error-handling routines (e.g., text reflow, clipping prevention, reselection rules).
+(8) Synthesize social media attribution models and platform performance metrics (watch time, completion rate, shares) to design a metrics-normalization and programmatic selection learning feedback loop.
+Analyze Results
+Create Report
+Ready in a few mins
+
+Start research
+
+I've completed your research. Feel free to ask me follow-up questions or request changes.
+Deterministic Social Media Templates
+Jul 18, 5:48 AM
+
+
+
+
+Gemini is AI and can make mistakes.
+
+Deterministic Social Media Templates
+Blueprint for a Deterministic, High-Volume Social Media Publishing Engine
+Deliverable 1: Executive Recommendation
+This report presents a comprehensive systems-design blueprint for a deterministic, high-volume social media publishing engine optimized for the domains of self-help, mental wellbeing, personal growth, and practical philosophy. Designed to operate within the technical constraints and platform parameters of the current digital landscape, the system decouples content inputs, visual style policies, brand assets, and platform boundaries into a modular, rule-based rendering architecture.
+
+Modern digital consumption is defined by a significant decay in user focus, with cross-platform studies showing that screen-based attention spans have contracted to a median of 40 seconds, and mobile-first users in the 18–34 cohort average just 6.8 seconds of focus before swipe-away triggers occur. To counteract this rapid cognitive disengagement, this architecture is engineered to achieve visual comprehension within a sub-one-second threshold. It implements a zero-shot, constraint-based rendering pipeline that scales to generate thousands of platform-native assets without requiring manual, case-by-case design intervention.   
+
+The system relies on a structural separation of concerns, modeling publishing assets not as static files, but as dynamic coordinate zones on a standardized grid. Visual output is controlled by a deterministic selection engine powered by a contextual Multi-Armed Bandit algorithm using Bayesian posteriors and dynamic Beta priors. This approach ensures that newly introduced templates undergo controlled exploration without diluting core brand reach or performance baselines.   
+
++-----------------------------------------------------------------------------------------+
+|                               SYSTEM ARCHITECTURE BLOCK DIAGRAM                         |
++-----------------------------------------------------------------------------------------+
+|                                                                                         |
+|  +--------------------+      +--------------------+      +---------------------------+  |
+|  |     Words Bank     |      |     Image Bank     |      |    Brand Configuration    |  |
+|  | (Quotes, Hooks,    |      | (Metadata Indices, |      |  (House Palettes, Fonts,  |  |
+|  |  Captions, CTAs)   |      |  CLIP Vectors)     |      |   Motion Personalities)   |  |
+|  +---------+----------+      +---------+----------+      +-------------+-------------+  |
+|            |                           |                               |                |
+|            +---------------------------+-------------------------------+                |
+|                                        |                                                |
+|                                        v                                                |
+|                         +------------------------------+                                |
+|                         |    Deterministic Selection   | <--- Contextual Multi-Armed    |
+|                         |            Engine            |      Bandit Model [cite: 4]   |
+|                         +--------------+---------------+                                |
+|                                        |                                                |
+|                                        v                                                |
+|                         +------------------------------+                                |
+|                         |   Constraint-Based Layout    |                                |
+|                         |        Assembly Grid         |                                |
+|                         +--------------+---------------+                                |
+|                                        |                                                |
+|                                        v                                                |
+|                         +------------------------------+                                |
+|                         |     Dynamic Formatting &     | <--- APCA Contrast Check [cite: 6] |
+|                         |    Text-Wrapping Engine      |      Pretty Line Wrap     |
+|                         +--------------+---------------+                                |
+|                                        |                                                |
+|                                        v                                                |
+|                         +------------------------------+                                |
+|                         |     Automated QA Gates       | <--- Overlap Detection,        |
+|                         |   (Pre- & Post-Rendering)    |      Font Sizing Limits |
+|                         +--------------+---------------+                                |
+|                                        |                                                |
+|                  +---------------------+---------------------+                          |
+|                  |                                           |                          |
+|                  v                                           v                          |
+|       +---------------------+                     +---------------------+               |
+|       | Platform-Compliant  |                     | Full-Screen Vertical|               |
+|       |    Static Image     |                     |     Video Asset     |               |
+|       +---------------------+                     +---------------------+               |
+|                                                                                         |
++-----------------------------------------------------------------------------------------+
+The rendering pipeline is supported by a foundational library consisting of 16 static composition archetypes, 12 short-form vertical video templates, and 12 distinct carousel story engines. This framework provides sufficient structural variety to avoid visual exhaustion while maintaining brand identity across diverse social platforms.
+
+Deliverable 2: Current Trend Report
+The design landscape of social media is shaped by a shift away from over-engineered, highly polished aesthetic treatments toward unpolished layouts that feel raw, approachable, and human-designed. Audiences seeking wisdom and personal growth increasingly respond to "truth told clearly," valuing authentic expression and transparency over corporate gloss.   
+
+The following matrix categorizes the primary visual patterns observed in educational, psychological, and self-help social networks, evaluating their current viability and scalability:
+
+Visual Style Pattern	Platform Fit	Current Trend Lifecycle	Target Audience Demographics	Core Strengths	Primary Failure Modes	Scaling Index
+Editorial Minimalism	Instagram, LinkedIn, Pinterest	Evergreen	Mature professionals, educators, authors	
+Clear typography, high readability, authority
+
+Becomes visually dull if background values lack contrast	0.95
+Bold Stacked Typography	Instagram, TikTok, Threads	Growing	Gen Z, Millennial self-help seekers	
+Immediate scroll-stopping impact, high readability
+
+Induces eye fatigue; limits character capacity	0.92
+Screenshot / Note-App	X, Threads, Instagram	Stable	General advice seekers, casual learners	
+High trust, feels like a direct personal reflection
+
+Dilutes professional authority; easily copied by competitors	0.98
+Diagram-Led Frameworks	LinkedIn, Instagram	Evergreen	Strategic thinkers, analytical audiences	High save rates, visualizes abstract concepts quickly	
+Label scaling breaks on mobile displays
+
+0.70
+Faceless Meditative Loops	TikTok, Reels, Pinterest	Saturated	Broad wellness and spiritual niches	Low production costs, highly shareable and soothing	Footage feels generic; fails to establish human connection	0.88
+Brutalist Graphic Layouts	Instagram, X, Threads	Declining	Younger design-forward cohorts	Strong pattern interruption, loud presence in feed	
+Low accessibility; severe contrast and legibility issues
+
+0.80
+Handwritten Annotations	Pinterest, Instagram	Growing	High-empathy groups, journal writers	
+Personal touch, high emotional engagement
+
+Rendering handwritten text with dynamic inputs is difficult	0.65
+Magazine-Cover Layouts	Instagram, Pinterest	Stable	Goal-oriented students, readers	High-end visual framing, editorial prestige	
+Complicated layering causes text-fit failures
+
+0.75
+  
+Trend Analysis & Strategic Preservation
+Short-lived visual novelties like loud neon brutalism are declining due to aesthetic fatigue and structural accessibility barriers. In contrast, editorial minimalism, clean diagram cards, and authentic note-app layouts remain highly stable evergreen performers.   
+
+To protect the system from obsolescence when visual trends shift, the composition templates isolate core structural geometries from ephemeral stylistic choices, allowing style sheets to be updated without breaking the underlying rendering logic.
+
+Deliverable 3: Platform Contract Matrix
+To support programmatic rendering across diverse social platforms, every publishing surface is modeled as a strict technical contract. These contracts define native aspect ratios, safe zones, text density rules, and platform-specific policy risks to prevent UI overlap and distribution penalties.   
+
+Technical Platform Contracts
+        INSTAGRAM FEED PORTRAIT (4:5)               INSTAGRAM STORIES / REELS (9:16)
+        +---------------------------+               +---------------------------+
+        |  y_min: 0.05 (Safe Edge)  |               |  y_min: 0.13 (Safe Edge)  |
+        |  +---------------------+  |               |  +---------------------+  |
+        |  |                     |  |               |  |                     |  |
+        |  |                     |  |               |  |                     |  |
+        |  |  Normalized Text    |  |               |  |  Normalized Text    |  |
+        |  |     Safe Zone       |  |               |  |     Safe Zone       |  |
+        |  |   x_min: 0.05       |  |               |  |   x_min: 0.06       |  |
+        |  |   x_max: 0.95       |  |               |  |   x_max: 0.94       |  |
+        |  |                     |  |               |  |                     |  |
+        |  |                     |  |               |  |                     |  |
+        |  +---------------------+  |               |  +---------------------+  |
+        |  y_max: 0.90 (Safe Edge)  |               |  y_max: 0.87 (Safe Edge)  |
+        +---------------------------+               +---------------------------+
+        (Crops to 3:4 profile grid)                 (Top 250px / Bottom 250px blocked)
+1. instagram_feed_portrait
+[cite: 16]
+
+Dimensions: 1080×1350 pixels   
+
+Aspect Ratio: 4:5   
+
+Preview & Grid Crop: Center-cropped to 3:4 (1080×1440 pixels) on profile grids under current platform guidelines.   
+
+Interface Overlays: Caption overlaps the bottom-left area of the feed image; user interaction buttons sit adjacent on the right.
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.05,x 
+max
+​
+ :0.95,y 
+min
+​
+ :0.05,y 
+max
+​
+ :0.90.   
+
+Text Density Limits: Headline ≤15 words; supporting text ≤30 words.   
+
+Technical Constraints: JPEG format in sRGB color profile, file size capped at 30 MB.   
+
+Search, SEO & Accessibility: Supports automated and custom alt-text; caption text is indexable by search engines.   
+
+Policy & Recycled Content Risks: Duplicate visual frames can trigger reduced distribution flags; watermark signatures from third-party editors must be programmatically excluded.
+
+2. instagram_stories
+[cite: 25]
+
+Dimensions: 1080×1920 pixels   
+
+Aspect Ratio: 9:16   
+
+Preview & Grid Crop: Full-screen immersive display; no cropping.
+
+Interface Overlays: Account icon and navigation elements block the top 250px; text replies and sharing bars block the bottom 250px.   
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.06,x 
+max
+​
+ :0.94,y 
+min
+​
+ :0.13,y 
+max
+​
+ :0.87.   
+
+Text Density Limits: Headline ≤12 words; brief supporting copy ≤20 words.   
+
+Technical Constraints: JPEG format, file size capped at 30 MB.   
+
+Search, SEO & Accessibility: Supports native sticker anchors; custom alt-text is not supported.
+
+3. instagram_reels
+[cite: 25]
+
+Dimensions: 1080×1920 pixels   
+
+Aspect Ratio: 9:16   
+
+Preview & Grid Crop: Feed preview is cropped to 4:5; profile grid thumbnail crops to 3:4.   
+
+Interface Overlays: Right edge contains interactive engagement buttons; the lower third displays the user's handle, description, and music track.   
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.06,x 
+max
+​
+ :0.88,y 
+min
+​
+ :0.11,y 
+max
+​
+ :0.74.   
+
+Text Density Limits: Subtitle overlays should be concise, ideally using word-by-word or 3-word phrase structures.   
+
+Technical Constraints: MP4 or MOV using H.264 codec, stereo AAC audio, 30 to 60 frames per second, target video bitrate of 15 to 25 Mbps.   
+
+Search, SEO & Accessibility: Video captions are indexed; audio transcripts are parsed for keyword searches; SRT subtitle tracks are supported for accessibility.
+
+Policy Risks: Reused video templates can face distribution penalties; the system enforces dynamic background adjustments to prevent duplicate content flags.
+
+4. facebook_feed_portrait
+[cite: 35]
+
+Dimensions: 1080×1350 pixels   
+
+Aspect Ratio: 4:5   
+
+Preview & Grid Crop: Displays natively without cropping in mobile and desktop feeds.   
+
+Interface Overlays: Page profile element overlapping the top edge; interactions nested at the bottom.
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.05,x 
+max
+​
+ :0.95,y 
+min
+​
+ :0.05,y 
+max
+​
+ :0.92.   
+
+Text Density Limits: Headline ≤18 words; body ≤35 words.
+
+Technical Constraints: sRGB JPEG or PNG, capped at 30 MB.   
+
+Policy Risks: Delivery networks deprioritize visual assets containing excessive text overlays.   
+
+5. linkedin_document_slide
+[cite: 13]
+
+Dimensions: 1080×1350 pixels   
+
+Aspect Ratio: 4:5   
+
+Preview & Grid Crop: First slide displays in-feed; mobile views fit the full portrait frame.   
+
+Interface Overlays: Top-right corner displays native page-count badges; navigation controls sit at the bottom.
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.08,x 
+max
+​
+ :0.92,y 
+min
+​
+ :0.08,y 
+max
+​
+ :0.90.   
+
+Text Density Limits: Highly readable summaries; ≤15 words per slide.   
+
+Technical Constraints: Multi-page PDF, target file size under 10 MB for fast mobile loading (technically accepts up to 100 MB).   
+
+Search, SEO & Accessibility: Entire document text is fully indexable; screen readers scan text content directly from the PDF layers.   
+
+6. pinterest_standard_pin
+[cite: 39, 40]
+
+Dimensions: 1000×1500 pixels   
+
+Aspect Ratio: 2:3   
+
+Preview & Grid Crop: Scaled natively in the masonry grid; images exceeding a 1:2.1 ratio are cropped.   
+
+Interface Overlays: Bottom edge features hover buttons; visual attribution sits underneath the asset.
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.05,x 
+max
+​
+ :0.95,y 
+min
+​
+ :0.05,y 
+max
+​
+ :0.80.   
+
+Text Density Limits: Large, high-contrast headline ≤10 words; avoid tiny body copy on pins.   
+
+Technical Constraints: JPG, PNG, or WEBP, capped at 20 MB.   
+
+Search, SEO & Accessibility: Highly optimized for visual search; titles and descriptions are heavily indexable.
+
+7. google_business_post
+[cite: 43]
+
+Dimensions: 1200×900 pixels   
+
+Aspect Ratio: 4:3   
+
+Preview & Grid Crop: Crops to a 1:1 square in Search and Maps previews.   
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.125,x 
+max
+​
+ :0.875,y 
+min
+​
+ :0.05,y 
+max
+​
+ :0.95.   
+
+Text Density Limits: Headline ≤12 words.   
+
+Technical Constraints: JPG or PNG format, file size capped at 5 MB.   
+
+Policy Risks: Contact numbers or website links inside graphic overlays trigger automated rejection filters.   
+
+8. youtube_community_image
+[cite: 46]
+
+Dimensions: 1200×1200 pixels   
+
+Aspect Ratio: 1:1   
+
+Preview & Grid Crop: Displays natively without cropping in community feeds.
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.05,x 
+max
+​
+ :0.95,y 
+min
+​
+ :0.05,y 
+max
+​
+ :0.95.
+
+Text Density Limits: Headline ≤20 words.
+
+Technical Constraints: sRGB JPEG, PNG, or WebP under 16 MB.   
+
+9. tiktok_in_feed_video
+[cite: 20]
+
+Dimensions: 1080×1920 pixels   
+
+Aspect Ratio: 9:16   
+
+Preview & Grid Crop: Cropped to 3:4 on profile grids; displays in native 9:16 in the main feed.   
+
+Interface Overlays: Accounts name, long descriptions, sound tickers, and interactive CTAs block the bottom 484px. Engagement stack blocks the right-hand side.   
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.04,x 
+max
+​
+ :0.87,y 
+min
+​
+ :0.07,y 
+max
+​
+ :0.74.   
+
+Text Density Limits: 1–3 words at a time for dynamic subtitle pacing.   
+
+Technical Constraints: MP4 format using H.264 video encoding, under 500 MB.   
+
+10. youtube_shorts_video
+[cite: 33]
+
+Dimensions: 1080×1920 pixels   
+
+Aspect Ratio: 9:16   
+
+Preview & Grid Crop: Center-cropped to horizontal frames for desktop search results.
+
+Interface Overlays: Channel name, subscription trigger, and description overlays block the bottom 15-20% of the screen; the right margin is blocked by the visual engagement column.   
+
+Safe Zones (Normalized): x 
+min
+​
+ :0.05,x 
+max
+​
+ :0.90,y 
+min
+​
+ :0.08,y 
+max
+​
+ :0.78.   
+
+Technical Constraints: MOV or MP4 with H.264 codec, audio required (not silent), length under 60 seconds.   
+
+Deliverable 4: Static Template Catalogue
+The rendering engine utilizes a catalog of 16 highly structured static composition templates. Every archetype is defined using relative coordinate zones (x,y,w,h) within a normalized coordinate space [0.0,1.0]. This design ensures that text, imagery, and brand assets scale responsively while respecting platform safe zones.   
+
+Programmatic Static Templates
++-------------------------------------------------------------+
+|              static_minimal_quote ZONE GRID                 |
++-------------------------------------------------------------+
+|                                                             |
+|   image_zone (Full bleed, masked background)                |
+|   +-----------------------------------------------------+   |
+|   |                                                     |   |
+|   |                  [Visual Anchor]                    |   |
+|   |                                                     |   |
+|   +-----------------------------------------------------+   |
+|                                                             |
+|   headline_zone (Protected text overlay)                    |
+|   +-----------------------------------------------------+   |
+|   | "Awareness is not the removal of noise..."          |   |
+|   +-----------------------------------------------------+   |
+|                                                             |
+|   supporting_text_zone                                      |
+|   +-----------------------------------------------------+   |
+|   | - Centering the focus on internal shifts            |   |
+|   +-----------------------------------------------------+   |
+|                                                             |
+|   brand_mark_zone                                           |
+|   +-----------------------------------------------------+   |
+|   |                      [LOGO]                         |   |
+|   +-----------------------------------------------------+   |
++-------------------------------------------------------------+
+YAML
+# Catalog of Programmatic Layout Configurations
+
+1_static_minimal_quote:
+  template_key: "static_minimal_quote"
+  family: "editorial"
+  eligible_platforms: ["instagram_feed_portrait", "linkedin_document_slide", "pinterest_standard_pin", "threads_image"]
+  eligible_objectives: ["engagement_saves", "conceptual_authority"]
+  zones:
+    image_zone:
+      x: 0.00
+      y: 0.00
+      width: 1.00
+      height: 0.50
+    headline_zone:
+      x: 0.08
+      y: 0.56
+      width: 0.84
+      height: 0.22
+    supporting_text_zone:
+      x: 0.08
+      y: 0.79
+      width: 0.84
+      height: 0.08
+    brand_mark_zone:
+      x: 0.45
+      y: 0.90
+      width: 0.10
+      height: 0.04
+  typography_treatment:
+    headline: "serif_display_bold"
+    body: "sans_body_regular"
+  image_treatment_rules: "grayscale_luminance_mask"
+  failure_conditions: "headline_char_length > 120"
+
+2_static_bold_takeover:
+  template_key: "static_bold_takeover"
+  family: "typographic"
+  eligible_platforms: ["instagram_feed_portrait", "x_image", "threads_image", "facebook_feed_portrait"]
+  eligible_objectives: ["pattern_interruption", "viral_shares"]
+  zones:
+    headline_zone:
+      x: 0.08
+      y: 0.15
+      width: 0.84
+      height: 0.55
+    supporting_text_zone:
+      x: 0.08
+      y: 0.72
+      width: 0.84
+      height: 0.12
+    brand_mark_zone:
+      x: 0.08
+      y: 0.88
+      width: 0.15
+      height: 0.04
+  typography_treatment:
+    headline: "sans_display_heavy"
+    body: "sans_body_semibold"
+  image_treatment_rules: "solid_color_block_fill"
+  failure_conditions: "headline_char_length > 65"
+
+3_static_note_screenshot:
+  template_key: "static_note_screenshot"
+  family: "skeuomorphic"
+  eligible_platforms: ["instagram_feed_portrait", "x_image", "threads_image"]
+  eligible_objectives: ["organic_trust", "direct_shares"]
+  zones:
+    image_zone:
+      x: 0.00
+      y: 0.00
+      width: 1.00
+      height: 1.00
+    screenshot_plate_zone:
+      x: 0.08
+      y: 0.20
+      width: 0.84
+      height: 0.60
+    author_avatar_zone:
+      x: 0.14
+      y: 0.25
+      width: 0.10
+      height: 0.08
+    author_text_zone:
+      x: 0.26
+      y: 0.25
+      width: 0.58
+      height: 0.08
+    body_text_zone:
+      x: 0.14
+      y: 0.36
+      width: 0.72
+      height: 0.38
+  typography_treatment:
+    headline: "system_monospaced_bold"
+    body: "system_monospaced_regular"
+  image_treatment_rules: "heavy_gaussian_blur_20px"
+  failure_conditions: "body_char_length > 250"
+
+4_static_diagram_card:
+  template_key: "static_diagram_card"
+  family: "educational"
+  eligible_platforms: ["instagram_feed_portrait", "linkedin_document_slide", "pinterest_standard_pin"]
+  eligible_objectives: ["saves_retention", "conceptual_authority"]
+  zones:
+    diagram_render_zone:
+      x: 0.10
+      y: 0.10
+      width: 0.80
+      height: 0.52
+    headline_zone:
+      x: 0.08
+      y: 0.66
+      width: 0.84
+      height: 0.12
+    supporting_text_zone:
+      x: 0.08
+      y: 0.80
+      width: 0.84
+      height: 0.08
+    brand_mark_zone:
+      x: 0.85
+      y: 0.90
+      width: 0.07
+      height: 0.04
+  typography_treatment:
+    headline: "sans_display_medium"
+    body: "sans_body_light"
+  image_treatment_rules: "none_use_svg_vectors"
+  failure_conditions: "diagram_complexity_count > 15"
+
+5_static_split_conceptual:
+  template_key: "static_split_conceptual"
+  family: "collage"
+  eligible_platforms: ["instagram_feed_portrait", "pinterest_standard_pin"]
+  eligible_objectives: ["saves_retention", "engagement_saves"]
+  zones:
+    left_image_zone:
+      x: 0.00
+      y: 0.00
+      width: 0.50
+      height: 0.55
+    right_image_zone:
+      x: 0.50
+      y: 0.00
+      width: 0.50
+      height: 0.55
+    headline_zone:
+      x: 0.08
+      y: 0.60
+      width: 0.84
+      height: 0.25
+    brand_mark_zone:
+      x: 0.08
+      y: 0.88
+      width: 0.12
+      height: 0.04
+  typography_treatment:
+    headline: "serif_display_italic"
+  image_treatment_rules: "dual_tone_harmony_shading"
+  failure_conditions: "left_image_empty or right_image_empty"
+
+6_static_question_prompt:
+  template_key: "static_question_prompt"
+  family: "typographic"
+  eligible_platforms: ["instagram_feed_portrait", "threads_image", "youtube_community_image"]
+  eligible_objectives: ["engagement_comments", "saves_retention"]
+  zones:
+    headline_zone:
+      x: 0.10
+      y: 0.25
+      width: 0.80
+      height: 0.45
+    supporting_text_zone:
+      x: 0.10
+      y: 0.72
+      width: 0.80
+      height: 0.10
+    brand_mark_zone:
+      x: 0.45
+      y: 0.86
+      width: 0.10
+      height: 0.04
+  typography_treatment:
+    headline: "serif_display_light"
+    body: "sans_body_italic"
+  image_treatment_rules: "solid_ambient_gradient"
+  failure_conditions: "headline_char_length > 80"
+
+7_static_checklist_card:
+  template_key: "static_checklist_card"
+  family: "educational"
+  eligible_platforms: ["instagram_feed_portrait", "linkedin_document_slide", "pinterest_standard_pin"]
+  eligible_objectives: ["saves_retention", "engagement_saves"]
+  zones:
+    header_zone:
+      x: 0.08
+      y: 0.10
+      width: 0.84
+      height: 0.14
+    checklist_container_zone:
+      x: 0.08
+      y: 0.26
+      width: 0.84
+      height: 0.52
+    cta_zone:
+      x: 0.08
+      y: 0.80
+      width: 0.84
+      height: 0.06
+    brand_mark_zone:
+      x: 0.82
+      y: 0.88
+      width: 0.10
+      height: 0.04
+  typography_treatment:
+    headline: "sans_display_semibold"
+    body: "sans_body_regular"
+  image_treatment_rules: "none_flat_surface_shading"
+  failure_conditions: "checklist_items_count > 6"
+
+8_static_before_after:
+  template_key: "static_before_after"
+  family: "collage"
+  eligible_platforms: ["instagram_feed_portrait", "pinterest_standard_pin", "facebook_feed_portrait"]
+  eligible_objectives: ["saves_retention", "organic_trust"]
+  zones:
+    before_image_zone:
+      x: 0.08
+      y: 0.15
+      width: 0.40
+      height: 0.40
+    after_image_zone:
+      x: 0.52
+      y: 0.15
+      width: 0.40
+      height: 0.40
+    headline_zone:
+      x: 0.08
+      y: 0.60
+      width: 0.84
+      height: 0.22
+    brand_mark_zone:
+      x: 0.45
+      y: 0.86
+      width: 0.10
+      height: 0.04
+  typography_treatment:
+    headline: "serif_display_bold"
+  image_treatment_rules: "clean_high_contrast_crops"
+  failure_conditions: "before_image_id == after_image_id"
+
+9_static_framed_zen:
+  template_key: "static_framed_zen"
+  family: "minimalist"
+  eligible_platforms: ["instagram_feed_portrait", "pinterest_standard_pin"]
+  eligible_objectives: ["engagement_saves", "viral_shares"]
+  zones:
+    framed_container_zone:
+      x: 0.12
+      y: 0.12
+      width: 0.76
+      height: 0.76
+    framed_image_zone:
+      x: 0.18
+      y: 0.18
+      width: 0.64
+      height: 0.34
+    headline_zone:
+      x: 0.20
+      y: 0.56
+      width: 0.60
+      height: 0.20
+    brand_mark_zone:
+      x: 0.45
+      y: 0.78
+      width: 0.10
+      height: 0.04
+  typography_treatment:
+    headline: "serif_display_light_italic"
+  image_treatment_rules: "ambient_matte_color_grading"
+  failure_conditions: "image_resolution_dpi < 300"
+
+10_static_micro_step:
+  template_key: "static_micro_step"
+  family: "typographic"
+  eligible_platforms: ["instagram_feed_portrait", "linkedin_document_slide"]
+  eligible_objectives: ["pattern_interruption", "saves_retention"]
+  zones:
+    step_number_zone:
+      x: 0.08
+      y: 0.15
+      width: 0.25
+      height: 0.20
+    step_title_zone:
+      x: 0.35
+      y: 0.15
+      width: 0.57
+      height: 0.20
+    step_body_zone:
+      x: 0.08
+      y: 0.38
+      width: 0.84
+      height: 0.42
+    brand_mark_zone:
+      x: 0.08
+      y: 0.86
+      width: 0.15
+      height: 0.04
+  typography_treatment:
+    headline: "sans_display_heavy"
+    body: "sans_body_regular"
+  image_treatment_rules: "solid_color_block_fill"
+  failure_conditions: "step_number_val > 99"
+
+11_static_testimonial_proof:
+  template_key: "static_testimonial_proof"
+  family: "skeuomorphic"
+  eligible_platforms: ["instagram_feed_portrait", "linkedin_document_slide", "facebook_page_post"]
+  eligible_objectives: ["organic_trust", "conceptual_authority"]
+  zones:
+    card_plate_zone:
+      x: 0.10
+      y: 0.25
+      width: 0.80
+      height: 0.50
+    star_rating_zone:
+      x: 0.15
+      y: 0.30
+      width: 0.30
+      height: 0.06
+    testimonial_text_zone:
+      x: 0.15
+      y: 0.38
+      width: 0.70
+      height: 0.26
+    attribution_zone:
+      x: 0.15
+      y: 0.66
+      width: 0.70
+      height: 0.05
+  typography_treatment:
+    headline: "serif_display_italic"
+    body: "sans_body_semibold"
+  image_treatment_rules: "heavy_gaussian_blur_20px"
+  failure_conditions: "testimonial_text_char_length > 180"
+
+12_static_magazine_cover:
+  template_key: "static_magazine_cover"
+  family: "editorial"
+  eligible_platforms: ["instagram_feed_portrait", "pinterest_standard_pin"]
+  eligible_objectives: ["saves_retention", "viral_shares"]
+  zones:
+    image_bleed_zone:
+      x: 0.00
+      y: 0.00
+      width: 1.00
+      height: 1.00
+    masthead_zone:
+      x: 0.08
+      y: 0.08
+      width: 0.84
+      height: 0.14
+    headline_zone:
+      x: 0.08
+      y: 0.55
+      width: 0.84
+      height: 0.25
+    supporting_details_zone:
+      x: 0.08
+      y: 0.82
+      width: 0.84
+      height: 0.10
+  typography_treatment:
+    headline: "serif_display_bold"
+    body: "sans_body_light"
+  image_treatment_rules: "high_detail_editorial_grade_color"
+  failure_conditions: "image_is_low_contrast_on_masthead"
+
+13_static_rule_caption:
+  template_key: "static_rule_caption"
+  family: "minimalist"
+  eligible_platforms: ["instagram_feed_portrait", "threads_image", "x_image"]
+  eligible_objectives: ["saves_retention", "engagement_saves"]
+  zones:
+    image_zone:
+      x: 0.10
+      y: 0.10
+      width: 0.80
+      height: 0.45
+    rule_line_zone:
+      x: 0.10
+      y: 0.58
+      width: 0.80
+      height: 0.01
+    text_zone:
+      x: 0.10
+      y: 0.62
+      width: 0.80
+      height: 0.23
+    brand_mark_zone:
+      x: 0.10
+      y: 0.88
+      width: 0.12
+      height: 0.04
+  typography_treatment:
+    headline: "sans_display_medium"
+  image_treatment_rules: "subtle_geometric_crop_treatment"
+  failure_conditions: "text_char_length > 90"
+
+14_static_collage_scrapbook:
+  template_key: "static_collage_scrapbook"
+  family: "collage"
+  eligible_platforms: ["instagram_feed_portrait", "pinterest_standard_pin"]
+  eligible_objectives: ["engagement_saves", "viral_shares"]
+  zones:
+    collage_canvas_zone:
+      x: 0.00
+      y: 0.00
+      width: 1.00
+      height: 1.00
+    polaroid_image_zone:
+      x: 0.12
+      y: 0.10
+      width: 0.76
+      height: 0.50
+    caption_text_zone:
+      x: 0.15
+      y: 0.64
+      width: 0.70
+      height: 0.24
+  typography_treatment:
+    headline: "stylized_handwritten_regular"
+  image_treatment_rules: "analog_paper_grain_filter"
+  failure_conditions: "caption_text_char_length > 120"
+
+15_static_micro_guide:
+  template_key: "static_micro_guide"
+  family: "educational"
+  eligible_platforms: ["instagram_feed_portrait", "linkedin_document_slide"]
+  eligible_objectives: ["saves_retention", "conceptual_authority"]
+  zones:
+    title_zone:
+      x: 0.08
+      y: 0.08
+      width: 0.84
+      height: 0.12
+    block_1_zone:
+      x: 0.08
+      y: 0.22
+      width: 0.40
+      height: 0.28
+    block_2_zone:
+      x: 0.52
+      y: 0.22
+      width: 0.40
+      height: 0.28
+    block_3_zone:
+      x: 0.08
+      y: 0.54
+      width: 0.40
+      height: 0.28
+    block_4_zone:
+      x: 0.52
+      y: 0.54
+      width: 0.40
+      height: 0.28
+    brand_mark_zone:
+      x: 0.08
+      y: 0.88
+      width: 0.15
+      height: 0.04
+  typography_treatment:
+    headline: "sans_display_semibold"
+    body: "sans_body_regular"
+  image_treatment_rules: "none_vector_grid_structure"
+  failure_conditions: "any_block_text_char_length > 60"
+
+16_static_gradient_affirmation:
+  template_key: "static_gradient_affirmation"
+  family: "typographic"
+  eligible_platforms: ["instagram_feed_portrait", "threads_image", "pinterest_standard_pin"]
+  eligible_objectives: ["engagement_comments", "viral_shares"]
+  zones:
+    affirmation_zone:
+      x: 0.12
+      y: 0.28
+      width: 0.76
+      height: 0.44
+    brand_mark_zone:
+      x: 0.45
+      y: 0.82
+      width: 0.10
+      height: 0.04
+  typography_treatment:
+    headline: "serif_display_medium"
+  image_treatment_rules: "mesh_gradient_generation_rules"
+  failure_conditions: "affirmation_char_length > 95"
+Deliverable 5: Video Template Catalogue
+The system produces highly compliant vertical video outputs using a catalog of 12 vertical video templates. Each is defined by structured timelines, shot metrics, music styles, sound design parameters, hook setups, visual pacing guides, and seamless loop targets.   
+
+Programmatic Video Templates
+YAML
+# Timeline Schemas for Dynamic Video Assembly
+
+1_video_meditative_loop:
+  template_key: "video_meditative_loop"
+  best_platforms: ["instagram_reels", "tiktok_in_feed_video", "youtube_shorts_video", "pinterest_video"]
+  best_objectives: ["saves_retention", "viral_shares"]
+  duration_range: [6.0, 10.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-1.5"
+      function: "hook_entry"
+      visual_shot: "slow_panning_nature_landscape"
+      text_overlay_char_max: 25
+    - beat: 2
+      time: "1.5-5.0"
+      function: "core_teaching"
+      visual_shot: "continuous_ambient_footage_slow_zoom"
+      text_overlay_char_max: 60
+    - beat: 3
+      time: "5.0-8.0"
+      function: "payoff"
+      visual_shot: "continuous_ambient_footage_slow_zoom"
+      text_overlay_char_max: 45
+    - beat: 4
+      time: "8.0-10.0"
+      function: "loop_transition"
+      visual_shot: "exact_opacity_fade_to_match_first_frame"
+      text_overlay_char_max: 0
+  motion_transition_rules: "gaussian_fade_blend_cross_cuts"
+  sound_design_rules: "ambient_nature_low_pass_filter"
+  subtitle_pacing_system: "system_centered_sentence"
+  loop_strategy_logic: "match_last_word_to_first_subtitle"
+
+2_video_kinetic_typographic:
+  template_key: "video_kinetic_typographic"
+  best_platforms: ["tiktok_in_feed_video", "instagram_reels", "youtube_shorts_video"]
+  best_objectives: ["pattern_interruption", "viral_shares"]
+  duration_range: [11.0, 20.0]
+  beat_count: 4
+  beats:
+    - beat: 1
+      time: "0.0-2.0"
+      function: "pattern_interrupt_hook"
+      visual_shot: "urban_tracking_panned_scene"
+      text_overlay_char_max: 30
+    - beat: 2
+      time: "2.0-8.0"
+      function: "rapid_statements"
+      visual_shot: "multi_scene_jump_cuts_every_1.5s"
+      text_overlay_char_max: 80
+    - beat: 3
+      time: "8.0-15.0"
+      function: "climax_realization"
+      visual_shot: "color_flash_inverted_scene"
+      text_overlay_char_max: 55
+    - beat: 4
+      time: "15.0-20.0"
+      function: "call_to_action"
+      visual_shot: "text_pop_with_brand_logo_overlay"
+      text_overlay_char_max: 35
+  motion_transition_rules: "hard_snap_cut_transitions"
+  sound_design_rules: "electronic_beat_synced_claps"
+  subtitle_pacing_system: "system_bold_highlight"
+  loop_strategy_logic: "none_hard_cut"
+
+3_video_concept_diagram:
+  template_key: "video_concept_diagram"
+  best_platforms: ["instagram_reels", "youtube_shorts_video", "linkedin_native_video"]
+  best_objectives: ["saves_retention", "conceptual_authority"]
+  duration_range: [21.0, 35.0]
+  beat_count: 4
+  beats:
+    - beat: 1
+      time: "0.0-3.0"
+      function: "hook_entry"
+      visual_shot: "whiteboard_outline_vector_draw"
+      text_overlay_char_max: 40
+    - beat: 2
+      time: "3.0-15.0"
+      function: "mechanism_drawing"
+      visual_shot: "realtime_schematic_render_lines"
+      text_overlay_char_max: 0
+    - beat: 3
+      time: "15.0-28.0"
+      function: "annotation_reveal"
+      visual_shot: "focal_highlight_on_specific_nodes"
+      text_overlay_char_max: 50
+    - beat: 4
+      time: "28.0-35.0"
+      function: "summary_cta"
+      visual_shot: "static_completed_diagram_brand_mark"
+      text_overlay_char_max: 30
+  motion_transition_rules: "drawn_vector_paths_linear_reveal"
+  sound_design_rules: "marker_writing_asmr_binaural_noise"
+  subtitle_pacing_system: "system_karaoke_sentence"
+  loop_strategy_logic: "none_hard_cut"
+
+4_video_talking_head:
+  template_key: "video_talking_head"
+  best_platforms: ["tiktok_in_feed_video", "instagram_reels", "youtube_shorts_video"]
+  best_objectives: ["organic_trust", "direct_shares"]
+  duration_range: [36.0, 60.0]
+  beat_count: 5
+  beats:
+    - beat: 1
+      time: "0.0-3.0"
+      function: "raw_human_hook"
+      visual_shot: "portrait_medium_close_up_gaze_camera"
+      text_overlay_char_max: 35
+    - beat: 2
+      time: "3.0-18.0"
+      function: "anecdote_setup"
+      visual_shot: "continuous_with_scale_punch_ins_every_4s"
+      text_overlay_char_max: 120
+    - beat: 3
+      time: "18.0-35.0"
+      function: "concept_explanation"
+      visual_shot: "cut_to_supporting_b_roll_scene"
+      text_overlay_char_max: 150
+    - beat: 4
+      time: "35.0-52.0"
+      function: "actionable_tip"
+      visual_shot: "return_to_medium_close_up_on_speaker"
+      text_overlay_char_max: 100
+    - beat: 5
+      time: "52.0-60.0"
+      function: "brand_call_to_action"
+      visual_shot: "logo_overlay_faded_out_speaker_background"
+      text_overlay_char_max: 40
+  motion_transition_rules: "dissolve_blend_j_cuts"
+  sound_design_rules: "compressed_studio_vocals_ambient_pad"
+  subtitle_pacing_system: "system_karaoke_sentence"
+  loop_strategy_logic: "none_hard_cut"
+
+5_video_note_screenshot:
+  template_key: "video_note_screenshot"
+  best_platforms: ["instagram_reels", "tiktok_in_feed_video"]
+  best_objectives: ["saves_retention", "viral_shares"]
+  duration_range: [6.0, 12.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-2.0"
+      function: "screenshot_overlay_in"
+      visual_shot: "morning_shadows_drifting_on_interior_wall"
+      text_overlay_char_max: 0
+    - beat: 2
+      time: "2.0-10.0"
+      function: "reading_hold"
+      visual_shot: "slow_continuous_camera_drift"
+      text_overlay_char_max: 0
+    - beat: 3
+      time: "10.0-12.0"
+      function: "fade_out_loop"
+      visual_shot: "exact_opacity_fade_to_match_first_frame"
+      text_overlay_char_max: 0
+  motion_transition_rules: "gaussian_fade_blend_cross_cuts"
+  sound_design_rules: "piano_ambient_melodic_chords"
+  subtitle_pacing_system: "none_embedded_static"
+  loop_strategy_logic: "exact_coordinate_loop"
+
+6_video_myth_truth:
+  template_key: "video_myth_truth"
+  best_platforms: ["tiktok_in_feed_video", "instagram_reels", "youtube_shorts_video"]
+  best_objectives: ["saves_retention", "organic_trust"]
+  duration_range: [21.0, 35.0]
+  beat_count: 4
+  beats:
+    - beat: 1
+      time: "0.0-4.0"
+      function: "myth_unveiling"
+      visual_shot: "moody_shadowed_interior_gaze"
+      text_overlay_char_max: 30
+    - beat: 2
+      time: "4.0-15.0"
+      function: "shattering_explanation"
+      visual_shot: "hard_cut_to_high_key_light_scene"
+      text_overlay_char_max: 80
+    - beat: 3
+      time: "15.0-30.0"
+      function: "truth_core"
+      visual_shot: "panning_mountain_light_landscape"
+      text_overlay_char_max: 90
+    - beat: 4
+      time: "30.0-35.0"
+      function: "cta_outro"
+      visual_shot: "flat_solid_ambient_plate_and_logo"
+      text_overlay_char_max: 30
+  motion_transition_rules: "hard_flash_cut_transitions"
+  sound_design_rules: "synthesizer_drone_reverb_drop"
+  subtitle_pacing_system: "system_bold_highlight"
+  loop_strategy_logic: "none_hard_cut"
+
+7_video_cinematic_poem:
+  template_key: "video_cinematic_poem"
+  best_platforms: ["instagram_reels", "tiktok_in_feed_video", "pinterest_video"]
+  best_objectives: ["engagement_saves", "viral_shares"]
+  duration_range: [11.0, 20.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-4.0"
+      function: "verse_one_reveal"
+      visual_shot: "vintage_monochrome_panning_sea_waves"
+      text_overlay_char_max: 30
+    - beat: 2
+      time: "4.0-16.0"
+      function: "verse_two_reveal"
+      visual_shot: "monochrome_woodland_shadows"
+      text_overlay_char_max: 80
+    - beat: 3
+      time: "16.0-20.0"
+      function: "fade_to_loop"
+      visual_shot: "exact_opacity_fade_to_match_first_frame"
+      text_overlay_char_max: 0
+  motion_transition_rules: "gaussian_fade_blend_cross_cuts"
+  sound_design_rules: "analog_tape_hiss_soft_cello"
+  subtitle_pacing_system: "system_centered_sentence"
+  loop_strategy_logic: "match_last_word_to_first_subtitle"
+
+8_video_podcast_clip:
+  template_key: "video_podcast_clip"
+  best_platforms: ["tiktok_in_feed_video", "instagram_reels", "youtube_shorts_video"]
+  best_objectives: ["organic_trust", "saves_retention"]
+  duration_range: [36.0, 60.0]
+  beat_count: 4
+  beats:
+    - beat: 1
+      time: "0.0-4.0"
+      function: "quick_climax_hook"
+      visual_shot: "split_studio_puck_mic_close_up"
+      text_overlay_char_max: 40
+    - beat: 2
+      time: "4.0-28.0"
+      function: "monologue_discussion"
+      visual_shot: "portrait_talking_head_mic_visible"
+      text_overlay_char_max: 180
+    - beat: 3
+      time: "28.0-52.0"
+      function: "b_roll_illustrations"
+      visual_shot: "supporting_b_roll_macro_cinematic"
+      text_overlay_char_max: 150
+    - beat: 4
+      time: "52.0-60.0"
+      function: "outro_cta"
+      visual_shot: "return_to_studio_with_watermark"
+      text_overlay_char_max: 30
+  motion_transition_rules: "cut_to_b_roll_on_word_boundaries"
+  sound_design_rules: "highly_compressed_podcaster_vocals"
+  subtitle_pacing_system: "system_bold_highlight"
+  loop_strategy_logic: "none_hard_cut"
+
+9_video_checklist_build:
+  template_key: "video_checklist_build"
+  best_platforms: ["instagram_reels", "youtube_shorts_video"]
+  best_objectives: ["saves_retention", "engagement_saves"]
+  duration_range: [15.0, 30.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-3.0"
+      function: "header_reveal"
+      visual_shot: "flat_desktop_macro_camera_drift"
+      text_overlay_char_max: 30
+    - beat: 2
+      time: "3.0-25.0"
+      function: "bullets_sequence"
+      visual_shot: "sequential_lines_render_synced_sound"
+      text_overlay_char_max: 120
+    - beat: 3
+      time: "25.0-30.0"
+      function: "outro_lock"
+      visual_shot: "completed_checklist_static_with_cta"
+      text_overlay_char_max: 30
+  motion_transition_rules: "linear_vertical_slide_transforms"
+  sound_design_rules: "rhythmic_keyboard_typing_sounds"
+  subtitle_pacing_system: "none_embedded_static"
+  loop_strategy_logic: "none_hard_cut"
+
+10_video_reframe_sequence:
+  template_key: "video_reframe_sequence"
+  best_platforms: ["tiktok_in_feed_video", "instagram_reels"]
+  best_objectives: ["pattern_interruption", "saves_retention"]
+  duration_range: [11.0, 20.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-3.0"
+      function: "pain_anchor"
+      visual_shot: "turbulent_ocean_waves_monochrome"
+      text_overlay_char_max: 30
+    - beat: 2
+      time: "3.0-16.0"
+      function: "reframe_truth"
+      visual_shot: "calm_misty_woods_sunrise"
+      text_overlay_char_max: 60
+    - beat: 3
+      time: "16.0-20.0"
+      function: "outro_affirmation"
+      visual_shot: "fading_gradient_ambient_glow"
+      text_overlay_char_max: 30
+  motion_transition_rules: "gaussian_fade_blend_cross_cuts"
+  sound_design_rules: "heavy_bass_reverb_harmonic_resolution"
+  subtitle_pacing_system: "system_centered_sentence"
+  loop_strategy_logic: "none_hard_cut"
+
+11_video_journal_entry:
+  template_key: "video_journal_entry"
+  best_platforms: ["instagram_reels", "tiktok_in_feed_video", "pinterest_video"]
+  best_objectives: ["saves_retention", "organic_trust"]
+  duration_range: [6.0, 12.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-2.0"
+      function: "analog_drawing_start"
+      visual_shot: "close_up_pencil_contacting_aged_paper"
+      text_overlay_char_max: 0
+    - beat: 2
+      time: "2.0-10.0"
+      function: "writing_reveal"
+      visual_shot: "camera_expanding_focus_to_reveal_quote"
+      text_overlay_char_max: 0
+    - beat: 3
+      time: "10.0-12.0"
+      function: "dissolve_to_fade"
+      visual_shot: "exact_opacity_fade_to_match_first_frame"
+      text_overlay_char_max: 0
+  motion_transition_rules: "gaussian_fade_blend_cross_cuts"
+  sound_design_rules: "pencil_scratching_binaural_asmr"
+  subtitle_pacing_system: "none_embedded_static"
+  loop_strategy_logic: "exact_coordinate_loop"
+
+12_video_split_narrative:
+  template_key: "video_split_narrative"
+  best_platforms: ["instagram_reels", "tiktok_in_feed_video", "youtube_shorts_video"]
+  best_objectives: ["saves_retention", "viral_shares"]
+  duration_range: [21.0, 35.0]
+  beat_count: 3
+  beats:
+    - beat: 1
+      time: "0.0-5.0"
+      function: "split_screen_reveal"
+      visual_shot: "left_natural_ambient_right_solid_plate"
+      text_overlay_char_max: 35
+    - beat: 2
+      time: "5.0-30.0"
+      function: "sequential_insights"
+      visual_shot: "right_plate_scrolling_down_slowly"
+      text_overlay_char_max: 120
+    - beat: 3
+      time: "30.0-35.0"
+      function: "brand_unification_fade"
+      visual_shot: "dissolve_split_to_single_brand_plate"
+      text_overlay_char_max: 30
+  motion_transition_rules: "split_reveal_linear_transforms"
+  sound_design_rules: "lofi_ambient_slow_drum_beat"
+  subtitle_pacing_system: "system_karaoke_sentence"
+  loop_strategy_logic: "none_hard_cut"
+Deliverable 6: Carousel Story-Engine Catalogue
+To maximize user dwell time, the rendering engine runs against 12 standardized, slide-by-slide structural frameworks.   
+
++-------------------------------------------------------------------------------------------------------------------+
+|                                      `carousel_problem_mechanism_solution`                                        |
++-------------------------------------------------------------------------------------------------------------------+
+|  [Slide 1]          |  [Slide 2]          |  [Slide 3]          |  [Slide 4]          |  [Slide 5]                |
+|  * The Core Hook    |  * Common Failures  |  * Neuro-Mechanism  |  * The Paradigm Shift|  * Practical Execution   |
+|  * Pattern Interrupt|  * Emotional Anchor |  * Why You Freeze   |  * Core Truth       |  * Step 1, 2, 3           |
+|  * w: <= 12 words   |  * w: <= 20 words   |  * w: <= 18 words   |  * w: <= 15 words   |  * w: <= 22 words         |
++-------------------------------------------------------------------------------------------------------------------+
+|  [Slide 6]          |  [Slide 7]          |                                                                       |
+|  * Climax Outcome   |  * Clean Outro      |                                                                       |
+|  * Core Shift       |  * Call to Action   |                                                                       |
+|  * w: <= 16 words   |  * w: <= 10 words   |                                                                       |
++-------------------------------------------------------------------------------------------------------------------+
+Operational Slide Engines
+1. carousel_problem_mechanism_solution
+Slide Target Range: 5 to 7 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Diagnostic Hook. State the core emotional challenge in bold display serif (e.g., "Why you collapse under emotional avoidance"). Text envelope ≤12 words. Visual requirement: Low-contrast ambient image backdrop.   
+
+Slide 2: Common Missteps. Detail the logical mistakes users make trying to resolve this feeling. Text envelope ≤20 words.   
+
+Slide 3: Neuro-Mechanism. Break down the physiological triggers (e.g., autonomic nervous system reaction). Text envelope ≤18 words.   
+
+Slide 4: Paradigm Shift. Highlight the primary conceptual reframe. Text envelope ≤15 words.   
+
+Slide 5: Practical Action. Step-by-step somatic recovery tools. Text envelope ≤22 words.   
+
+Slide 6: Climax Outcome. Illustrate the emotional state reached once these tools are applied. Text envelope ≤16 words.   
+
+Slide 7: Core CTA. Dedicated layout with interactive save elements. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Minimal progress bar running on the horizontal margin (y:[0.03]) across every card.   
+
+Failure Conditions: Exceeding 25 words on any non-diagram slide.   
+
+2. carousel_myth_truth_application
+Slide Target Range: 5 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Primary Lie. Display a widely accepted but limiting belief in high-contrast typographic layout. Text envelope ≤10 words.   
+
+Slide 2: Real-World Consequence. Detail why this conventional expectation causes chronic stress or burnout. Text envelope ≤18 words.   
+
+Slide 3: Core Truth. A corrective, liberating re-frame. Text envelope ≤15 words.   
+
+Slide 4: Somatic Application. Simple mental exercises to integrate the truth. Text envelope ≤20 words.   
+
+Slide 5: Direct Outro. Invitation to share with others. Text envelope ≤8 words.   
+
+Visual Continuity & Styling: Slide backgrounds transition from cool, desaturated colors to warm, high-contrast tones.   
+
+Failure Conditions: Pairing high-saturation backgrounds with text overlays that do not pass APCA audits.   
+
+3. carousel_hook_insights_takeaway
+Slide Target Range: 6 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Broad Hook. Core topic intro (e.g., "5 rules for emotional boundaries"). Text envelope ≤14 words.   
+
+Slides 2–5: Individual Lessons. Present one clear, self-contained lesson per slide using a consistent layout grid. Text envelope ≤15 words per slide.   
+
+Slide 6: Unified Summary. A closing summary paired with save callouts. Text envelope ≤12 words.   
+
+Visual Continuity & Styling: Clean horizontal line transitions running on y:[0.60], sliding forward with each card progression.   
+
+Failure Conditions: Changes in font weights or alignment systems between slides 2 and 5.   
+
+4. carousel_mistake_consequence_correction
+Slide Target Range: 6 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Common Mistake. Detail a self-sabotaging habit. Text envelope ≤12 words.   
+
+Slide 2: Hidden Consequence. Explain how this behavior drains personal energy. Text envelope ≤18 words.   
+
+Slide 3: Physiological Trigger. Uncover why the nervous system falls back on this behavior when stressed. Text envelope ≤16 words.   
+
+Slide 4: Pattern Interrupt. A quick practice to stop this behavioral loop. Text envelope ≤15 words.   
+
+Slide 5: Actionable Alternative. Behavioral changes to implement. Text envelope ≤22 words.   
+
+Slide 6: Outro. Reflection question with a save callout. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Contrast colors accent key words (e.g., Crimson on mistake, Jade on alternative).
+
+Failure Conditions: Inconsistent contrast highlights across slides.
+
+5. carousel_before_turningpoint_after
+Slide Target Range: 5 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Pain Anchor. Narrative opening describing a common struggle. Text envelope ≤14 words.   
+
+Slide 2: Friction State. Explain why standard efforts to solve this problem fail. Text envelope ≤20 words.   
+
+Slide 3: Realization. The specific shift that changed the user's focus. Text envelope ≤15 words.   
+
+Slide 4: Actionable Habit. The simple practice that supported this change. Text envelope ≤18 words.   
+
+Slide 5: CTA. Discussion prompt inviting readers to share their journey. Text envelope ≤12 words.   
+
+Visual Continuity & Styling: Uses two contrasting images in split vertical zones on slides 2 and 4.
+
+Failure Conditions: Mismatched background aspect ratios between split-screen layouts.
+
+6. carousel_question_reframing_practice
+Slide Target Range: 6 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Reflection Hook. Journal prompt to stop scrolling (e.g., "What are you avoiding?"). Text envelope ≤10 words.   
+
+Slide 2: Core Truth. Explains why this pattern of avoidance persists. Text envelope ≤16 words.   
+
+Slide 3: Cognitive Shift. A new, safer perspective on this anxiety. Text envelope ≤14 words.   
+
+Slide 4: Journal Prompts. Three simple writing prompts. Text envelope ≤25 words.   
+
+Slide 5: Somatic Tool. A quick grounding practice. Text envelope ≤18 words.   
+
+Slide 6: Dynamic Outro. Save and share callouts. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Generous negative space surrounding centered typography.   
+
+Failure Conditions: Standard text overlays falling below 24pt on mobile preview screens.   
+
+7. carousel_story_lesson_invitation
+Slide Target Range: 5 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Story Hook. Anecdote setup (e.g., "The client who stopped trying"). Text envelope ≤12 words.   
+
+Slide 2: Struggle Climax. Detail the narrative friction point of being stuck. Text envelope ≤20 words.   
+
+Slide 3: Breakthrough. The shift or realization that changed the outcome. Text envelope ≤14 words.   
+
+Slide 4: Evergreen Lesson. Abstract that story into a rule for everyone. Text envelope ≤18 words.   
+
+Slide 5: Outro. Profile link or save invitation. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Soft, paper-textured overlays across every slide to support the narrative tone.   
+
+Failure Conditions: Visual elements overlapping safety margins.   
+
+8. carousel_symptoms_cause_tool
+Slide Target Range: 7 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Checklists Hook. Identify symptoms of distress (e.g., "Signs of hyperarousal"). Text envelope ≤14 words.   
+
+Slide 2: Checklist Expansion. Additional physiological signs of the same issue. Text envelope ≤22 words.   
+
+Slide 3: Nervous System State. Break down the physiological triggers. Text envelope ≤18 words.   
+
+Slide 4: Psychological Driver. The deeper cause behind these symptoms. Text envelope ≤15 words.   
+
+Slide 5: Somatic Recovery. Simple breathing or grounding practices. Text envelope ≤22 words.   
+
+Slide 6: Cognitive Integration. Aligning this physical shift with mental clarity. Text envelope ≤16 words.   
+
+Slide 7: Outro. Structural CTA. Text envelope ≤8 words.   
+
+Visual Continuity & Styling: Left-aligned, cleanly spaced checklist item blocks.   
+
+Failure Conditions: Using custom graphical icons that fall below a 30×30 px target size.   
+
+9. carousel_quote_interpretation_exercise
+Slide Target Range: 5 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Classic Quote. Large, centered citation display. Text envelope ≤15 words.   
+
+Slide 2: Breakdown. Explain the deeper context behind the quote. Text envelope ≤20 words.   
+
+Slide 3: Modern Obstacle. Why applying this quote in modern life is challenging. Text envelope ≤18 words.   
+
+Slide 4: Practical Practice. Actionable daily step to apply the wisdom. Text envelope ≤24 words.   
+
+Slide 5: Outro. Call to action prompting discussion in the comments. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Clean serif typography paired with wide kerning values.   
+
+Failure Conditions: Font size changes that alter the established typographic hierarchy.   
+
+10. carousel_contrarian_evidence_nuance
+Slide Target Range: 6 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Provocative Statement. (e.g., "Healing is not linear"). Text envelope ≤10 words.   
+
+Slide 2: Common Lie. Detail conventional, stress-inducing expectations. Text envelope ≤18 words.   
+
+Slide 3: Evidence. Studies or clinical observations on pacing. Text envelope ≤22 words.   
+
+Slide 4: Realignment. Nuanced, supportive framing for steady progress. Text envelope ≤15 words.   
+
+Slide 5: Practical Guidance. Daily habits to support this pacing. Text envelope ≤20 words.   
+
+Slide 6: Outro. Reflection question and save reminder. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Stark contrast blocks and rule boundaries to define the structured sections.   
+
+Failure Conditions: Center-aligning lines with more than 5 words.   
+
+11. carousel_checklist_step_by_step
+Slide Target Range: 7 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: Journey Title. Comprehensive overview of a growth path. Text envelope ≤12 words.   
+
+Slides 2–6: Specific Steps. Detail one milestone per slide. Text envelope ≤18 words per slide.   
+
+Slide 7: Unified Summary. Synthesis slide with a profile invite. Text envelope ≤10 words.   
+
+Visual Continuity & Styling: Bold numeric step marks placed in a consistent layout zone across slides 2–6.
+
+Failure Conditions: Breaking step sequences or skipping numeric values in the progression.
+
+12. carousel_saveable_framework
+Slide Target Range: 6 Slides   
+
+Slide-by-Slide Mechanics:
+
+Slide 1: System Blueprint. State a structured self-development framework (e.g., "The 4 Pillars of Emotional Security"). Text envelope ≤14 words.   
+
+Slides 2–5: Individual Pillars. Detail one pillar per slide. Text envelope ≤20 words per slide.   
+
+Slide 6: Unified Summary. Diagram summary slide paired with save callouts. Text envelope ≤12 words.   
+
+Visual Continuity & Styling: Multi-column grids with bold labels.   
+
+Failure Conditions: Background visual shifts that compromise readability on any slide.   
+
+Deliverable 7: Image-Bank Schema
+To support automated layout selection, images are indexed with rich structural metadata, avoiding basic keyword matching in favor of vector similarity scoring and compositional metrics.   
+
+Image Metadata Schema
+JSON
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ImageBankRecord",
+  "type": "object",
+  "required": [
+    "image_id",
+    "file_path",
+    "clip_embedding_512",
+    "compositional_metadata",
+    "subject_classification",
+    "historical_tracking"
+  ],
+  "properties": {
+    "image_id": {
+      "type": "string",
+      "pattern": "^img_[a-zA-Z0-9]{12}$"
+    },
+    "file_path": {
+      "type": "string"
+    },
+    "clip_embedding_512": {
+      "type": "array",
+      "minItems": 512,
+      "maxItems": 512,
+      "items": { "type": "number" }
+    },
+    "compositional_metadata": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "aspect_ratio",
+        "entropy_index",
+        "primary_chroma_hex",
+        "negative_space_zones"
+      ],
+      "properties": {
+        "width": { "type": "integer", "minimum": 250 },
+        "height": { "type": "integer", "minimum": 250 },
+        "aspect_ratio": { "type": "string", "pattern": "^[0-9]+:[0-9]+$" },
+        "entropy_index": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "primary_chroma_hex": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "negative_space_zones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["x_min", "x_max", "y_min", "y_max"],
+            "properties": {
+              "x_min": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "x_max": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "y_min": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "y_max": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+            }
+          }
+        }
+      }
+    },
+    "subject_classification": {
+      "type": "object",
+      "required": [
+        "primary_category",
+        "human_present",
+        "gaze_direction",
+        "emotional_register"
+      ],
+      "properties": {
+        "primary_category": {
+          "type": "string",
+          "enum": ["nature", "interiors", "objects", "abstract", "human"]
+        },
+        "human_present": { "type": "boolean" },
+        "gaze_direction": {
+          "type": "string",
+          "enum": ["none", "camera", "off_camera"]
+        },
+        "emotional_register": {
+          "type": "string",
+          "enum": ["calm", "nostalgic", "energetic", "somber", "focused"]
+        }
+      }
+    },
+    "historical_tracking": {
+      "type": "object",
+      "required": ["repetition_count", "last_used_date"],
+      "properties": {
+        "repetition_count": { "type": "integer", "minimum": 0 },
+        "last_used_date": { "type": "string" }
+      }
+    }
+  }
+}
+Dynamic Image-Scoring Formulation
+The system calculates a cumulative matching score S(i,c,t) for image candidate i paired with content asset c inside template t:
+
+S(i,c,t)=w 
+1
+​
+ ⋅Sim 
+CLIP
+​
+ ( 
+V
+
+  
+i
+​
+ , 
+T
+
+  
+c
+​
+ )+w 
+2
+​
+ ⋅Contrast 
+APCA
+​
+ (i 
+t_zone
+​
+ ,Brand_Color)−w 
+3
+​
+ ⋅Penalty 
+recency
+​
+ (t 
+i
+​
+ )
+[cite: 18, 57]
+
+Where:
+
+Sim 
+CLIP
+​
+ ( 
+V
+
+  
+i
+​
+ ,…) calculates the cosine similarity between the image's CLIP embedding vector and the concept text target vector:
+  
+
+Sim 
+CLIP
+​
+ ( 
+V
+
+  
+i
+​
+ , 
+T
+
+  
+c
+​
+ )= 
+∥ 
+V
+
+  
+i
+​
+ ∥∥ 
+T
+
+  
+c
+​
+ ∥
+V
+
+  
+i
+​
+ ⋅ 
+T
+
+  
+c
+​
+ 
+​
+ 
+Contrast 
+APCA
+​
+  calculates the contrast score over the designated text overlay coordinates.   
+
+Penalty 
+recency
+​
+ (t 
+i
+​
+ ) is an exponential decay function based on the time since the image was last used to prevent repetition:
+
+Penalty 
+recency
+​
+ (t 
+i
+​
+ )=e 
+−λΔt
+ 
+Deliverable 8: Words-Bank Schema
+The words bank holds the core textual copy of the system. Content metadata is separated by visual and conceptual layers, preventing raw text from being copy-pasted across surfaces without formatting adjustments.
+
+Content Library Metadata Schema
+JSON
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WordsBankRecord",
+  "type": "object",
+  "required": [
+    "content_id",
+    "core_insight",
+    "genre_category",
+    "variants",
+    "audience_stage"
+  ],
+  "properties": {
+    "content_id": {
+      "type": "string",
+      "pattern": "^txt_[a-zA-Z0-9]{12}$"
+    },
+    "core_insight": {
+      "type": "string"
+    },
+    "genre_category": {
+      "type": "string",
+      "enum": ["burnout", "boundaries", "mindfulness", "relationships", "purpose"]
+    },
+    "variants": {
+      "type": "object",
+      "required": ["static_quote_line", "short_form_hook", "carousel_storyboard"],
+      "properties": {
+        "static_quote_line": { "type": "string" },
+        "short_form_hook": { "type": "string" },
+        "long_form_caption": { "type": "string" },
+        "carousel_storyboard": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "audience_stage": {
+      "type": "string",
+      "enum": ["awareness", "contemplation", "integration"]
+    }
+  }
+}
+Strategic Text Transformation Pipeline
+A core insight is programmatically transformed to fit each target platform format:
+
+[Core Wisdom Insight]:
+"Functional freeze is the body's protective adaptation to chronic stress."
+
+Transformation Pipeline:
+  * -> static_minimal_quote: "Functional freeze is the body's protective adaptation."
+  * -> static_question_prompt: "Is your chronic stress disguised as 'functional freeze'?"
+  * -> static_checklist_card:
+       - Header: "Signs of Functional Freeze"
+       - Items: ["Task avoidance", "Emotional numbness", "Physical exhaustion"]
+  * -> carousel_slide_1: "Why you feel frozen but keep working."
+  * -> video_short_form_hook: "If you feel frozen but keep working, read this."
+  * -> x_post_text: "Functional freeze is a protective nervous system response, not laziness."
+  * -> pinterest_pin_headline: "The Truth About Functional Freeze"
+Deliverable 9: Brand-House Schema
+Decoupling design composition templates from brand identities is a key structural requirement. Brand Houses function as configuration variables that alter visual treatments (such as fonts, color palettes, and motion graphics) without breaking the spatial coordinate mapping of the layouts.   
+
+Brand Configuration Map
+YAML
+# Publisher Brand Houses Configurations
+
+brand_house_1_inner_light:
+  house_key: "inner_light_publishing"
+  editorial_style: "editorial_minimalism" [cite: 59]
+  typography:
+    serif_display:
+      font_family: "Atkinson Hyperlegible" [cite: 54]
+      fallback: "Georgia"
+      tracking: -0.01
+      line_height: 1.35 [cite: 49]
+    sans_body:
+      font_family: "Proxima Nova" [cite: 27]
+      fallback: "Arial" [cite: 27]
+      tracking: 0.00
+      line_height: 1.50 [cite: 17]
+  color_palette:
+    light_mode:
+      bg_surface: "#F4F3EF"
+      text_primary: "#1C1C1A"
+      accent_soft: "#A28F70"
+    dark_mode:
+      bg_surface: "#121211"
+      text_primary: "#F4F3EF"
+      accent_soft: "#D4C5B9"
+  motion_signatures:
+    transition_curve: "cubic-bezier(0.25, 1, 0.5, 1)"
+    base_frame_rate: 30 [cite: 32, 60]
+  audio_signature:
+    volume_db_target: -14.0
+
+brand_house_2_bold_somatic:
+  house_key: "bold_somatic_coaching"
+  editorial_style: "bold_oversized_typography"
+  typography:
+    serif_display:
+      font_family: "Montserrat" [cite: 14]
+      fallback: "Helvetica_Bold"
+      tracking: -0.03
+      line_height: 1.10
+    sans_body:
+      font_family: "Proxima Nova" [cite: 27]
+      fallback: "Arial" [cite: 27]
+      tracking: 0.01
+      line_height: 1.45 [cite: 17]
+  color_palette:
+    light_mode:
+      bg_surface: "#E3DFD5"
+      text_primary: "#0B0C0E"
+      accent_soft: "#C05621"
+    dark_mode:
+      bg_surface: "#111215"
+      text_primary: "#E3DFD5"
+      accent_soft: "#DD6B20"
+  motion_signatures:
+    transition_curve: "cubic-bezier(0.16, 1, 0.3, 1)"
+    base_frame_rate: 60 [cite: 32, 60]
+  audio_signature:
+    volume_db_target: -12.0
+Deliverable 10: Deterministic Selection Algorithm
+The selection engine matches content assets and templates dynamically. To prevent visual fatigue while maximizing user retention, the selection engine implements a contextual Multi-Armed Bandit algorithm using Bayesian posteriors and dynamic Beta-Binomial prior states.   
+
+  [Selection Parameters Received]
+                 |
+                 v
+   [Generate Candidate Matrix]
+ (Filter Out Recently Used Assets)
+                 |
+                 v
+   [Verify APCA Contrast Values]
+   Is Lc >= 60 on overlay zones? [cite: 53]
+           /               \
+         Yes                No
+         /                    \
+        v                      v
+ [Retain Candidate]   [Reject Candidate]
+        |
+        v
+ [Compute Thompson Sampling Draws]
+  x_k ~ Beta(alpha_k, beta_k)
+        |
+        v
+ [Select Setup with Highest Draw]
+        |
+        v
+ [Dispatched to Render Pipeline]
+Deterministic Selection Logic
+Python
+import numpy as np
+
+def calculate_apca_luminance(rgb):
+    # Calculates the relative luminance of a color for APCA [cite: 18]
+    r, g, b = [val / 255.0 for val in rgb]
+    return 0.2126729 * (r ** 2.2) + 0.7151522 * (g ** 2.2) + 0.0721750 * (b ** 2.2)
+
+def apca_contrast(bg_rgb, fg_rgb):
+    # Computes APCA contrast scale values
+    y_bg = calculate_apca_luminance(bg_rgb)
+    y_fg = calculate_apca_luminance(fg_rgb)
+    
+    if y_bg > y_fg:
+        contrast = (y_bg ** 0.56 - y_fg ** 0.62) * 190.0
+    else:
+        contrast = (y_bg ** 0.65 - y_fg ** 0.56) * 190.0
+        
+    return abs(contrast)
+
+def execute_selection_pipeline(request, asset_index):
+    # Matches content, templates, and imagery dynamically
+    platform = request["platform"]
+    brand_house = request["brand_house"]
+    topic = request["topic"]
+    
+    # 1. Filter out recently used templates to prevent visual fatigue
+    eligible_templates = [
+        t for t in asset_index.templates 
+        if platform in t.platforms and t.recency_penalty_index < 0.2
+    ]
+    
+    valid_candidates = []
+    for template in eligible_templates:
+        # Match images based on CLIP vector similarity
+        image_candidate = asset_index.query_clip_match(template, topic)
+        bg_rgb = image_candidate.get_dominant_color_at_coordinates(template.text_zones)
+        fg_rgb = brand_house.palette.text_primary
+        
+        # 2. Keep candidates that pass APCA contrast standards [cite: 53]
+        if apca_contrast(bg_rgb, fg_rgb) >= 60.0:
+            valid_candidates.append((template, image_candidate))
+            
+    if not valid_candidates:
+        # Fallback to typographic block layout if no images pass contrast audits
+        return asset_index.fallback_typographic_variant(brand_house)
+        
+    # 3. Thompson Sampling draws from Beta posterior parameters
+    winning_score = -1.0
+    winning_match = None
+    
+    for template, image in valid_candidates:
+        alpha = template.performance_prior_alpha
+        beta = template.performance_prior_beta
+        draw = np.random.beta(alpha, beta)
+        
+        if draw > winning_score:
+            winning_score = draw
+            winning_match = (template, image)
+            
+    return winning_match
+Deliverable 11: Validation Specification
+The rendering engine operates on a fail-closed principle. To protect brand consistency, assets must pass automated QA gates before publishing. If a validation check fails, the engine triggers an automatic recovery flow or blocks publication entirely.
+
+Verification QA Gates
+                            [Post-Render Rendered Asset]
+                                         |
+                                         v
+                            [Verify Absolute Safe Zones]
+                         Does text overlap interface lines?
+                                     /       \
+                                  No          Yes
+                                  /             \
+                                 v               v
+                   [Verify APCA Contrast]    [HARD FAILURE]
+                   Is Lc >= 60 for headers?   (Flag for review)
+                               /       \
+                            Yes         No
+                            /             \
+                           v               v
+                [Line-Wrap Evaluation]   [AUTO REPAIR]
+                Does layout have orphans? Inject background shadow plate
+                            /       \
+                         No          Yes
+                         /             \
+                        v               v
+                  [Asset OK]      [AUTO REPAIR]
+                (Save to Queue)  Inject non-breaking space
+Pre-Rendering Automated Checks
+Dimensions Verification: Check that target canvas outputs align with platform dimensions (1080×1350 px for Instagram portrait feeds). On discrepancy: Template Reselection.   
+
+Text Envelope Bounds: Check if total string length fits the designated text card zones. On failure: Automatic Repair (run line rebreaking logic) or Template Reselection.
+
+Semantic Consistency Check: Verify CLIP similarity index score is ≥0.22. On failure: Image Reselection.   
+
+Recency Safety Check: Verify the selected template family has not been used within the last 5 posts to prevent repetition. On failure: Template Reselection.
+
+Post-Rendering Process Checks
+APCA Perceptual Contrast Audit: Verify text overlays meet contrast thresholds (Lc≥60 for headers). On failure: Automatic Repair (inject a translucent 15% dark background plate or gradient fade under the text zones).   
+
+Safe Zone Boundary Fit: Verify no text overlays sit within the top 250px or bottom 250px of stories to prevent UI overlap. On failure: Hard Failure (block publication, flag for human review).   
+
+Line-Wrap Audit: Identify awkward word wraps or single-character lines. On failure: Automatic Repair (inject a non-breaking space \u00A0 between the final two words to prevent orphans).   
+
+Video Timing Checks: Check if spoken subtitles exceed 260 words per minute. On failure: Template Reselection (switch kinetic layouts back to meditative loops).   
+
+Deliverable 12: Platform-Adaptation Matrix
+The system maps cross-platform adjustments to five core adaptation strategies to prevent awkward stretching or cropping across surfaces:   
+
+Direct Resize: Change dimensions directly; no repositioning needed.
+
+Responsive Reflow: Adjust layout elements based on safe zone margins.   
+
+Alternate Crop: Adjust the primary focus and apply a different aspect ratio.   
+
+Text Rewrite: Adjust copy lengths and structures to fit different platform guidelines.
+
+Platform Re-creation: Convert the asset into a completely different format (e.g., from static text to vertical video loop).
+
+Pairwise Multi-Channel Adaptation Guidelines
+Pairwise Surfaces	Direct Resize	Responsive Reflow	Alternate Crop	Text Rewrite	Platform Re-creation
+instagram_feed → facebook_feed	Supported				
+instagram_feed → linkedin_feed		Supported			
+instagram_feed → pinterest_pin			Supported		
+instagram_feed → x_image		Supported			
+instagram_feed → threads_image	Supported				
+instagram_feed → tiktok_video					Supported
+reels → youtube_shorts	Supported				
+carousel_card → linkedin_document		Supported			
+instagram_story → facebook_story	Supported				
+Deliverable 13: Initial Production Library Recommendation
+The initial launch assets balance evergreen stability with programmatic variety, prioritizing channels with high organic reach. The library expands systematically across three launch phases:   
+
++-----------------------------------------------------------------------------------+
+|                            LAUNCH SET ROLLOUT MAP                                 |
++-----------------------------------------------------------------------------------+
+|  [Launch Set]      10 Static Templates | 4 Carousel Engines | 4 Video Templates   |
+|                    2 Subtitle Systems  | 2 Motion Signatures | 4 CTA Frameworks   |
+|                                                                                   |
+|  [Expansion Set]   +4 Static Templates | +4 Carousel Engines | +4 Video Templates |
+|                    +1 Subtitle System  | +1 Motion Signature | +2 CTA Frameworks  |
+|                                                                                   |
+|  [Experimental]    +2 Static Templates | +4 Carousel Engines | +4 Video Templates |
+|                    +1 Subtitle System  | +1 Motion Signature                        |
++-----------------------------------------------------------------------------------+
+Phased Library Deployment Roadmap
+1. Essential Launch Set
+Static Templates (Count: 10): static_minimal_quote, static_bold_takeover, static_note_screenshot, static_diagram_card, static_split_conceptual, static_question_prompt, static_checklist_card, static_before_after, static_framed_zen, static_micro_step.
+
+Carousel Engines (Count: 4): carousel_problem_mechanism_solution, carousel_myth_truth_application, carousel_hook_insights_takeaway, carousel_saveable_framework.
+
+Video Templates (Count: 4): video_meditative_loop, video_kinetic_typographic, video_concept_diagram, video_talking_head.
+
+Subtitle Systems (Count: 2): Dynamic word-by-word bold highlighting, minimalist centered sentence-by-sentence layouts.   
+
+Motion Signatures (Count: 2): Linear fades, ambient pans.   
+
+CTA Frameworks (Count: 4): Saves, Comments, Profile Links, Shares.   
+
+2. Expansion Set
+Static Templates (Count: 4): static_testimonial_proof, static_magazine_cover, static_rule_caption, static_micro_guide.
+
+Carousel Engines (Count: 4): carousel_mistake_consequence_correction, carousel_before_turningpoint_after, carousel_question_reframing_practice, carousel_story_lesson_invitation.
+
+Video Templates (Count: 4): video_note_screenshot, video_myth_truth, video_cinematic_poem, video_podcast_clip.
+
+Subtitle Systems (Count: 1): Dual-tone dynamic highlight tracks.   
+
+Motion Signatures (Count: 1): Rhythmic hard jump cuts.
+
+CTA Frameworks (Count: 2): Direct newsletter actions, save indices.   
+
+3. Experimental Set
+Static Templates (Count: 2): static_collage_scrapbook, static_gradient_affirmation.
+
+Carousel Engines (Count: 4): carousel_symptoms_cause_tool, carousel_quote_interpretation_exercise, carousel_contrarian_evidence_nuance, carousel_checklist_step_by_step.
+
+Video Templates (Count: 4): video_checklist_build, video_reframe_sequence, video_journal_entry, video_split_narrative.
+
+Subtitle Systems (Count: 1): Stylized handwriting-reveal layouts.
+
+Motion Signatures (Count: 1): Hand-drawn trace simulations.
+
+Deliverable 14: Implementation Roadmap
+This structured development plan outlines the engineering phases to build, integrate, and scale the publishing engine.
+
+System Implementation Milestones
+Phase 1: Core Schemas Definition
+Inputs: Platform target definitions, empty image-bank and words-bank indices.
+
+Outputs: PostgreSQL database architecture, vector index mappings.   
+
+Dependencies: Database provisioning.
+
+Acceptance Criteria: Database tables successfully store and query CLIP vector properties with <12 ms latency.   
+
+Key Risks: Inefficient indexing structures slowing down selection speeds at high volumes.
+
+Phase 2: Platform Contracts Setup
+Inputs: Normalized dimensions tables.   
+
+Outputs: Fully verified platform dimensions and overlay maps.   
+
+Dependencies: Target platforms api specifications.
+
+Acceptance Criteria: Validation models correctly parse and map safe boundaries across platforms.   
+
+Key Risks: Platform UI coordinate updates breaking downstream template layouts.
+
+Phase 3: Static Rendering Module
+Inputs: Layout coordinates, Brand House definitions.   
+
+Outputs: Programmatic canvas rendering engine.
+
+Dependencies: Multi-page template engine architecture.
+
+Acceptance Criteria: Correctly outputs static JPG/PNG assets, adjusting layout sizes to match target platforms.   
+
+Key Risks: Incomplete system font support causing incorrect text-wrapping behavior.
+
+Phase 4: Image Database Tagging
+Inputs: Unprocessed raw image banks, visual assets.
+
+Outputs: Metadata classification records with vector indices.   
+
+Dependencies: CLIP classification pipeline setup.   
+
+Acceptance Criteria: Image bank records fully populated and indexed.   
+
+Key Risks: Manual classification errors leading to poor image matching.
+
+Phase 5: Words Database Tagging
+Inputs: Raw text assets, wisdom quote collections.
+
+Outputs: Words bank database index.
+
+Dependencies: Content transformation pipelines.
+
+Acceptance Criteria: Text assets fully transformed into platform-native variants.
+
+Key Risks: Overly complex semantic inputs triggering validation failures.
+
+Phase 6: Selection Algorithm Integration
+Inputs: Multi-Armed Bandit model parameters, performance trackers.   
+
+Outputs: Core selection engine service.
+
+Dependencies: Posterior evaluation systems.
+
+Acceptance Criteria: Correctly identifies optimal candidate assets in <50 ms.   
+
+Key Risks: Skewed historical performance metrics causing learning bias.   
+
+Phase 7: Rendering Engine Setup
+Inputs: Selection matches, raw media.
+
+Outputs: Unified image rendering pipeline.
+
+Dependencies: Headless render services.
+
+Acceptance Criteria: Generates completed image files cleanly in sRGB color profiles.
+
+Key Risks: Server connection timeouts during high-volume render requests.
+
+Phase 8: Video Compositing Pipeline
+Inputs: timing sheets, overlay subtitle sequences, audio.
+
+Outputs: Automated vertical video compositing pipeline.
+
+Dependencies: Render engine and selection architecture.
+
+Acceptance Criteria: Correctly renders vertical video outputs matching target safe-zone coordinates.   
+
+Key Risks: Long render times slowing down programmatic video editing.
+
+Phase 9: QA Validation Pipeline
+Inputs: Completed image and video assets.
+
+Outputs: Validation service.
+
+Dependencies: Rendering engine pipelines.
+
+Acceptance Criteria: Correctly rejects failing test configurations with ≥99.9% accuracy.
+
+Key Risks: Overly rigid contrast tests causing high rejection rates.
+
+Phase 10: Learning Loops Setup
+Inputs: Platform interaction metrics (saves, shares, click-through rates).   
+
+Outputs: Performance metric loop.
+
+Dependencies: Platform analytics integration modules.
+
+Acceptance Criteria: Performance loops update Bandit beta distributions within 24 hours of posting.   
+
+Key Risks: Delayed API metrics updates slowing down algorithm optimization.
+
+Phase 11: Human-in-the-Loop QA Board
+Inputs: Validation rejects, candidate asset pools.
+
+Outputs: Administrative review workspace.
+
+Dependencies: System dashboard frameworks.
+
+Acceptance Criteria: Facilitates fast human override reviews in <30 seconds per asset.
+
+Key Risks: Manual review queues creating a bottleneck in high-volume publishing.
+
+Phase 12: Production Scaling
+Inputs: Optimized templates, validated content queues.
+
+Outputs: Scaled production infrastructure.
+
+Dependencies: All pipeline elements.
+
+Acceptance Criteria: Successfully schedules and publishes over 1,000 unique, brand-compliant assets per week.
+
+Key Risks: Server infrastructure costs growing exponentially at high production volumes.
+
+Deliverable 15: Machine-Readable Appendix
+Technical Specs & Configuration Records
+YAML
+# 1. Platform Technical Contracts
+platform_contract_spec:
+  instagram_feed_portrait:
+    canvas_dimensions:
+      width: 1080
+      height: 1350
+    safe_zones:
+      text_safe_zone:
+        x_min: 0.05
+        x_max: 0.95
+        y_min: 0.05
+        y_max: 0.85
+    grid_crop_behavior:
+      aspect_ratio: "3:4"
+      action: "center_vertical_crop"
+
+# 2. Static Template Specifications
+static_template_spec:
+  key: "static_minimal_quote"
+  canvas_behavior: "responsive_aspect"
+  geometry:
+    image_container:
+      x_position: 0.00
+      y_position: 0.00
+      width_ratio: 1.00
+      height_ratio: 0.50
+    text_content_container:
+      x_position: 0.10
+      y_position: 0.55
+      width_ratio: 0.80
+      height_ratio: 0.28
+    attribution_container:
+      x_position: 0.10
+      y_position: 0.83
+      width_ratio: 0.80
+      height_ratio: 0.05
+    brand_mark_container:
+      x_position: 0.45
+      y_position: 0.90
+      width_ratio: 0.10
+      height_ratio: 0.04
+
+# 3. Short-Form Video Timeline Template
+video_timeline_spec:
+  key: "video_meditative_loop"
+  dimensions:
+    width: 1080
+    height: 1920
+  timeline:
+    beats:
+      - id: 1
+        time_start: 0.0
+        time_end: 1.5
+        visual: "hook_fade_in"
+        overlay: "hook_text"
+      - id: 2
+        time_start: 1.5
+        time_end: 8.5
+        visual: "continuous_footage_flow"
+        overlay: "sequential_subtitle_track"
+      - id: 3
+        time_start: 8.5
+        time_end: 10.0
+        visual: "loop_fade_to_match_start"
+        overlay: "fading_cta"
+
+# 4. Carousel Configuration Schema
+carousel_story_engine_spec:
+  carousel_key: "carousel_problem_mechanism_solution"
+  slide_target_count: 7
+  continuity_style:
+    progress_indicator: "horizontal_header_slider"
+    color_transition: "sequential_gradient_step"
+
+# 5. Image Record with Vector Tags
+image_bank_record_spec:
+  image_id: "img_f94830172839"
+  clip_vector: [0.0142, -0.0234, 0.1042, 0.0022]
+  composition_properties:
+    entropy: 0.12
+    primary_chroma: "#DCD9D4"
+    negative_space:
+      x_min: 0.10
+      x_max: 0.90
+      y_min: 0.40
+      y_max: 0.95
+
+# 6. Word Bank Variant Record
+words_bank_record_spec:
+  content_id: "txt_294029410384"
+  core_insight: "Somatic containment prevents anxiety cycles from overriding logical processing."
+  variants:
+    static_quote_line: "Somatic containment stops the anxiety spiral."
+    short_form_hook: "When your nervous system goes into overdrive, do this."
+    carousel_storyboard:
+      - "When anxiety overrides logic."
+      - "Why your logical mind freezes."
+      - "The physiological trigger."
+      - "The somatic containment step."
+      - "Apply it now to restore focus."
+
+# 7. Brand House Configuration Record
+brand_house_spec:
+  house_id: "inner_light_publishing"
+  palette_values:
+    warm_beige: "#EFEBE4"
+    charcoal: "#1C1B1A"
+    accent_gold: "#C19A6B"
+  typography:
+    serif: "Atkinson Hyperlegible"
+    sans: "Proxima Nova"
+
+# 8. Deterministic Selection Request Input
+selection_request_payload:
+  request_id: "req_840294019284"
+  platform: "instagram"
+  surface: "instagram_feed_portrait"
+  brand_house: "inner_light_publishing"
+  topic: "boundaries"
+
+# 9. Pipeline Processing Output Receipt
+pipeline_processing_receipt:
+  render_receipt_id: "rec_01H492049DFK"
+  selected_template: "static_minimal_quote"
+  selected_image: "img_f94830172839"
+  processing_time_ms: 142
+
+# 10. Automated Validation Receipts
+validation_receipt:
+  validation_id: "val_920492839103"
+  target_asset: "static_minimal_quote"
+  checks:
+    text_fit: "passed"
+    apca_contrast: "passed"
+Deliverable 16: Accessibility and Ethical Design
+Designing for mental wellbeing, spirituality, and mindfulness demands a design strategy that prioritizes accessibility and ethical user experiences. The rendering engine integrates these accessibility requirements directly into layout templates rather than relying on manual adjustments before publishing.   
+
++-----------------------------------------------------------------------+
+|                 ETHICAL & ACCESSIBLE RENDER SYSTEM                    |
+|                                                                       |
+|   Accessibility Rules                      Ethical Controls           |
+|  +--------------------+                   +--------------------+      |
+|  | * APCA Lc >= 60    |                   | * Validate claims  |      |
+|  | * Serif Display    |                   |   clinically       |      |
+|  | * Line-height 1.5  |                   | * Avoid clickbait  |      |
+|  | * Dynamic Alt-Text |                   |   fear tactics     |      |
+|  +--------------------+                   +--------------------+      |
++-----------------------------------------------------------------------+
+Visual Accessibility Parameters
+Perceptual Color Contrast: Contrast metrics are calculated using the Accessible Perceptual Contrast Algorithm (APCA) to ensure optimal readability under real-world viewing conditions.   
+
+The system blocks the export of any asset where text contrast falls below Lc≥60 for headers and Lc≥75 for body copy. Text-on-image designs use soft dark background overlay plates to guarantee contrast compatibility.   
+
+Readability-by-Construction Layouts: Standard text blocks use highly readable sans-serif body fonts like Proxima Nova or specialized open-interior fonts like Atkinson Hyperlegible. Left-aligned text layouts preserve natural tracking shapes.   
+
+Body copy is limited to 30 to 75 characters per line to reduce reading fatigue, paired with generous line-height spacing ratios (≥1.5× font size).   
+
+Motion Pacing Safety: To protect viewers with vestibular disorders or motion sensitivity, vertical videos exclude flashing or rapid transitions.   
+
+Subtitles use a consistent vertical center safe-zone alignment, with word-by-word highlight subtitles limited to a comfortable reading pace below 260 words per minute.   
+
+Structured Screen-Reader Context: Visual components are paired with dynamic, programmatically generated alt-text fields that describe the image subject and include all overlaid text directly within the metadata layer.   
+
+Ethical Design Guardrails
+Validation of Wellbeing Claims: The words-bank validation engine screens copy variants against clinical mental health dictionaries. Objective assertions (e.g., "This technique cures anxiety") are automatically replaced with reflective prompts (e.g., "A somatic practice to help regulate nervous system activity").
+
+Rejection of Fear-Based Hook Tactics: The selection engine flags and blocks clickbait hooks that leverage user anxiety or shame to drive engagement (e.g., "If you don't do this, your healing is failing").
+
+Verified Wisdom Sourcing: Quote assets must contain verified attribution metadata; the rendering script blocks any quotation block that lacks verified source profiling.
+
+Deliverable 17: Performance-Learning System
+To systematically refine publishing performance over time, the system implements a programmatic metric-feedback loop. This framework continuously tracks on-platform engagement metrics (saves, shares, completion rates, and link-clicks) to adjust template and creative selection probabilities through its Bayesian multi-armed bandit algorithm.   
+
+    [Engagement Metric Signals (Saves, Shares, Completion Rates)]
+                                  |
+                                  v
+                    [Normalize Metric Feedback]
+                Saves & Shares receive heavier weights
+                                  |
+                                  v
+                     [Apply Time-Decay Decay]
+                 Recent performance carries higher weight
+                                  |
+                                  v
+                [Update Multi-Armed Bandit Prior States]
+                alpha_new = alpha_old + Normalized_Reward
+                beta_new = beta_old + (1 - Normalized_Reward)
+Performance Optimization Metrics
+To prevent short-term metric optimization from diluting brand consistency, the feedback engine normalizes metrics based on the content's objective.   
+
+Saves and shares are heavily prioritized over impressions, as they reflect genuine educational value and resonance in the personal growth space:
+
+Normalized Reward (R 
+t
+​
+ )=w 
+1
+​
+ ⋅Save_Rate+w 
+2
+​
+ ⋅Share_Rate+w 
+3
+​
+ ⋅VTR
+Historical performance is modified by an exponential decay factor to account for rapid changes in algorithmic delivery patterns:   
+
+R 
+decayed
+​
+ =R 
+t
+​
+ ⋅e 
+−λΔt
+ 
+The updated values are fed back into the Selection Engine's Thompson Sampling prior coordinates:   
+
+α 
+t+1
+​
+ =α 
+t
+​
+ +R 
+decayed
+​
+ 
+β 
+t+1
+​
+ =β 
+t
+​
+ +(1−R 
+decayed
+​
+ )
+To prevent visual exhaustion without diluting reach, newly introduced templates undergo controlled exploration.   
+
+The system leverages dynamic Beta-Binomial priors to keep early exploration rates constrained, ensuring that new candidates are tested incrementally without impacting core platform performance.   
+
+The Recommended Deterministic Social Publishing System
+This final synthesis establishes the operational parameters and systems architecture for the Recommended Deterministic Social Publishing System.
+
++-----------------------------------------------------------------------------------+
+|               RECOMMENDED DETERMINISTIC SOCIAL PUBLISHING SYSTEM                  |
+|                                                                                   |
+|  * 16 Static Composition Layouts   | * Dynamic Coordinate Grid Assembly           |
+|  * 12 Carousel Story Engines       | * Automated APCA Contrast Verification [77]  |
+|  * 12 Video Timelines              | * Multi-Armed Bandit Exploration Engine [22] |
+|  * Unified Configuration Engine    | * Decoupled Layout/Brand Design Architecture |
++-----------------------------------------------------------------------------------+
+Systems Integration Boundary Maps
+The engine operates by separating layout templates, visual assets, brand assets, and platform boundary limits. By mapping designs to a responsive coordinate grid, the system automates static and vertical video creation without manual design tweaks.   
+
+Component Directory Standards
+Static Graphics Directory: Features 16 responsive geometric composition formats mapping layout placements dynamically to normalized coordinate bounds [0.0,1.0].
+
+Vertical Video Library: Features 12 vertical video timelines managing scene lengths, transitions, animation timing, and audio levels.   
+
+Carousel Engine Structures: Features 12 slide engines managing layout progression, progress indicators, and visual continuity.   
+
+Programmatic Selection & Validation Policies
+Dynamic Variation Model: Layouts, typography, backgrounds, and content assets are dynamically selected based on a Multi-Armed Bandit exploration algorithm.   
+
+Automated QA Safeguards: Dynamic text length testing, semantic contrast checks, and automated layout repairs (such as adding non-breaking spaces) prevent text overlaps or orphan-word formatting breaks.   
+
+System Fail-Safe Mode: If an asset fails APCA contrast thresholds (Lc≥60) over designated coordinates, the template automatically falls back to clean, high-contrast, typographic background block layouts to preserve readability.   
+
+Operational Integration Boundaries
+Fully Automated Pipeline: Processes dynamic image matches, runs contrast validation tests, applies color transformations, calculates line wraps, formats files, and publishes content directly to platform queues.   
+
+Strict Human Verification Controls: Requires human approval for clinical mental health assertions, baseline brand voice adjustments, and manual appeals on automated QA template rejections.   
+
+By deploying this standardized systems architecture, publishers can produce high volumes of accessible, brand-compliant, and platform-optimized content at scale, without visual fatigue or manual bottlenecking.   
+
+
+apa.org
+Speaking of Psychology: Why our attention spans are shrinking, with Gloria Mark, PhD
+Opens in a new window
+
+amraandelma.com
+TOP 20 USER ATTENTION SPAN STATISTICS 2026 THAT REVEAL SHOCKING DIGITAL FOCUS COLLAPSE - Amra & Elma
+Opens in a new window
+
+researchgate.net
+Optimizing Ad Recommendations Using A Bayesian Multi-Armed Bandit Approach
+Opens in a new window
+
+blog.darpanjain.com
+Multi-Armed Bandit Algorithms for Recommendation Systems | Darpan's Blog
+Opens in a new window
+
+arxiv.org
+Dynamic Prior Thompson Sampling for Cold-Start Exploration in Recommender Systems
+Opens in a new window
+
+versacreative.com
+Top 15 Social Media Design Trends for 2025 - Versa Creative
+Opens in a new window
+
+visualsoldiers.com
+Ultimate Guide to Social Media Design Trends - Visual Soldiers
+Opens in a new window
+
+folksdigital.ca
+7 Social Media Design Trends to Boost Engagement - Folks Digital
+Opens in a new window
+
+medium.com
+How social media is rewriting attention in 2026 | by Armel Dussol - Medium
+Opens in a new window
+
+gist.github.com
+Ultimate Guide: Creating LinkedIn Carousels in Photoshop (2025) - Gist - GitHub
+Opens in a new window
+
+oktopost.com
+LinkedIn carousel best practices for B2B in 2026 - Oktopost
+Opens in a new window
+
+blitzcutai.com
+TikTok Caption Styles 2026: Popular Examples & Best Picks - Blitzcut
+Opens in a new window
+
+zeely.ai
+A full guide to Google Business Post image size for creators - Zeely AI
+Opens in a new window
+
+oktopost.com
+Instagram grid size guide for 2026 - Oktopost
+Opens in a new window
+
+digital.accessibility.princeton.edu
+How To Design For Accessibility
+Opens in a new window
+
+smashingmagazine.com
+Algorithmic Theming Engines: Building Self-Correcting Color Systems With contrast-color()
+Opens in a new window
+
+futuristicmarketingservices.com
+Social Media Design: Complete Guide to Visuals That Convert
+Opens in a new window
+
+getkoro.app
+[2025 Guide] The Ultimate TikTok Safe Zone Strategy for Ads - Koro AI
+Opens in a new window
+
+adaptlypost.com
+Social Media Safe Zones: Full Guide for Creators (2026) | AdaptlyPost
+Opens in a new window
+
+iconosquare.com
+Social Media Image Sizes: The Complete 2026 Guide - Iconosquare
+Opens in a new window
+
+zipic.app
+Image Compression for Social Media: Platform-Specific Guide - Zipic Blog
+Opens in a new window
+
+designsystem.digital.gov
+Typography | U.S. Web Design System (USWDS) - Digital.gov
+Opens in a new window
+
+analyzify.com
+Complete Guide To Social Media Image Sizes (2025) - Analyzify
+Opens in a new window
+
+postproxy.dev
+Social Media API Rules: Limits & Specs (2026) - Postproxy
+Opens in a new window
+
+samc.ucdavis.edu
+Accessibility - Student Affairs Marketing and Communications - UC Davis
+Opens in a new window
+
+w3.org
+W3C Accessibility Guidelines (WCAG) 3.0
+Opens in a new window
+
+postfa.st
+Facebook Stories Size: 1080×1920 [Updated April 2026] - PostFast
+Opens in a new window
+
+trymaas.com
+The Ultimate Social Media Image Size Guide for 2025: New Platforms, New Possibilities
+Opens in a new window
+
+postfa.st
+Facebook Reels Size: 1080×1920 (9:16) [Updated April 2026] - PostFast
+Opens in a new window
+
+evergreenfeed.com
+Optimal Reels Size Instagram Guide 2026 - EvergreenFeed Blog
+Opens in a new window
+
+vidito.ai
+The Ultimate Guide to YouTube Shorts Dimensions - VIDITO
+Opens in a new window
+
+sovran.ai
+TikTok Ad Specs 2026: Video Sizes, Safe Zones, and Creative Checklist - Sovran
+Opens in a new window
+
+recurpost.com
+Facebook Post Sizes: Image and Video Dimensions Guide 2026 - RecurPost
+Opens in a new window
+
+monday.com
+Facebook post templates for teams: how to scale content creation in 2026 - Monday.com
+Opens in a new window
+
+storychief.io
+LinkedIn Carousel: The Ultimate Guide [Free Tools & Size Guide] - StoryChief
+Opens in a new window
+
+prideth.nl
+Accessibility Statement - Pride The Hague
+Opens in a new window
+
+wordswag.co
+Pinterest Pin Sizes and Dimensions: 2026 Guide - Word Swag
+Opens in a new window
+
+postfa.st
+Pinterest Pin Size: 1000×1500 (2:3) [Updated June 2026] - PostFast
+Opens in a new window
+
+recurpost.com
+Pinterest Pin Dimensions: Sizes & Specs for Every Pin Format (2026) - RecurPost
+Opens in a new window
+
+posteverywhere.ai
+Pinterest Image Sizes & Pin Dimensions (2026) - PostEverywhere.ai
+Opens in a new window
+
+recurpost.com
+Google Business Profile Post Image Size (2026 Specs and Crop Guide) - RecurPost
+Opens in a new window
+
+humblehelp.studio
+Google Business Profile Image Sizes: 2026 Cheat Sheet - Humble Help
+Opens in a new window
+
+wiremo.co
+Google Business Profile Posts: Best Practices 2026 - Wiremo
+Opens in a new window
+
+sphereagency.com
+YouTube Size Guide 2026: Video, Shorts, Thumbnail & - Sphere Agency
+Opens in a new window
+
+reddit.com
+What are the YouTube Community Post Image Specifications? : r/NewTubers - Reddit
+Opens in a new window
+
+quso.ai
+TikTok Dimensions 2026: The Ultimate Spec & Safe Zone Guide
+Opens in a new window
+
+zeely.ai
+TikTok safe zones: 2026 guide with practical templates - Zeely AI
+Opens in a new window
+
+quickframe.com
+TikTok Video Ad Specs & Placements Guide for 2026 - QuickFrame
+Opens in a new window
+
+skedsocial.com
+The Ultimate Guide to Social Media Image Sizes in 2026
+Opens in a new window
+
+postiz.com
+LinkedIn Post Sizes 2026: Image, Video, Carousel & Banner Guide - Postiz
+Opens in a new window
+
+colorcontrast.app
+Color Contrast Checker for WCAG & APCA. Analyse, preview and get color suggestions.
+Opens in a new window
+
+adobe.com
+Atkinson Hyperlegible: An accessible font for readability - Adobe
+Opens in a new window
+
+adoc-studio.app
+Typography Best Practices: The Ultimate 2026 Guide - adoc Studio
+Opens in a new window
+
+mdpi.com
+Cross-Modal Few-Shot Learning via Siamese Similarity Networks on CLIP Embeddings for Fine-Grained Image Classification - MDPI
+Opens in a new window
+
+cureusjournals.com
+A Cross-Modal Approach to Enhancing Image Retrieval With Contrastive Language-Image Pretraining (CLIP)-Based Embeddings and Facebook AI Similarity Search (FAISS) Indexing | Cureus Journals | Article
+Opens in a new window
+
+arxiv.org
+Does CLIP perceive art the same way we do? - arXiv
+Opens in a new window
+
+braze.com
+Multi Armed Bandit Marketing Optimization - Braze
+Opens in a new window
+
+typefully.com
+WCAG 3 and APCA | Dan Hollick - Typefully
+Opens in a new window
+
+developer.mozilla.org
+text-wrap-style CSS property - MDN Web Docs
+Opens in a new window
+
+developer.mozilla.org
+text-wrap CSS property - MDN Web Docs
+Opens in a new window
+
+learn.andrmusic.co
+Content Repurposing: One Video to 10+ Asset | AndR. Learning
+Opens in a new window
+
+superscale.ai
+Meta Ad Sizes in 2026: The Spec Sheet for Facebook and Instagram - Superscale
+Opens in a new window
+
+pmc.ncbi.nlm.nih.gov
+Non Stationary Multi-Armed Bandit: Empirical Evaluation of a New Concept Drift-Aware Algorithm - PMC
+Opens in a new window
+
+autodemo.com

@@ -1,3 +1,4 @@
+
 ## RECOGNITION v01
 ---
 path: story_atoms/healthcare_rns/anchored/grief/grief/recognition/micro/v01.txt
@@ -7,7 +8,7 @@ COST_TYPE: identity
 COST_INTENSITY: 1
 IDENTITY_STAGE: pre_awareness
 ---
-你照顧的病人瑪莉亞走了。這並不意外。病程的發展清晰可見。但死亡降臨時，衝擊依然真實。瑪莉亞感到胸口一陣悶痛。沒有什麼公式能讓這變得容易些。那位病人有名字。有愛著他的家人。有一段再也無法繼續的人生。瑪莉亞感受到了失去的重量。那不是抽象的損失。而是失去了一個今天早上還活生生的人。
+瑪莉亞一直照顧的一位病人過世了。不是意外，病程一直很清楚。然而，這場死亡依然重重落地。瑪莉亞感覺到它壓在胸口。沒有任何公式能讓這件事變得容易一點。這位病人有名字，有愛他的家人，有一段從此不再繼續的生命。瑪莉亞感受到失去的重量。不是抽象的失去，而是這個特定的人——今天早上還活著——的失去。
 ---
 
 ## RECOGNITION v02
@@ -19,7 +20,7 @@ COST_TYPE: identity
 COST_INTENSITY: 1
 IDENTITY_STAGE: pre_awareness
 ---
-陳陪坐在一個悲傷的家庭身旁。她承接他們的悲痛，不試圖去「修復」它。她看見母親臉上的神情。父親的沉默。他們彼此擁抱的方式。陳感受到了他們的失去。她無法將自己與之隔絕。她也在哀悼。這不是她的損失，是他們的。但那份悲傷流經她的身體，彷彿是她自己的一樣。
+陳護理師坐在一個正在哀悼的家庭身邊，她承接著他們的悲傷，不試圖去修復它。她看著那位母親的臉，那位父親的沉默，他們彼此擁抱的方式。陳護理師感受到他們的失去，她無法把自己從中抽離。她也在哀悼，不是她自己的失去，是他們的失去。但這份悲傷，穿過她的身體，彷彿那是她自己的一樣。
 ---
 
 ## RECOGNITION v03
@@ -31,11 +32,293 @@ COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
-多明尼克參加了一位病人的葬禮。她坐在後排。她不必非去不可。但她內心有什麼東西需要見證這個終結。棺木中的遺體。穿著黑衣的家屬。那種最終的定局。多明尼克哭了。她為病人哭。為家屬哭。為那些因這場死亡而永遠改變的人生哭。
+多明妮去參加一位病人的告別式，她坐在後排。她其實不需要出現，但她內心有某個東西，需要見證這場完結。棺木裡的遺體，一身黑衣的家屬，那份終局感。多明妮哭了，她為那位病人哭，她為那個家庭哭，她為那些因為這場死亡而永遠改變的生命哭。
 ---
 
 ## RECOGNITION v04
 ---
 path: story_atoms/healthcare_rns/anchored/grief/grief/recognition/micro/v04.txt
 BAND: 3
-MECHAN
+MECHANISM_DEPTH: 1
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+凱莎的病人沒能撐過來，急救沒有成功。家屬得對著一具遺體道別，而不是一個人。凱莎為遺體整理儀容，她再一次觸碰病人的手，她輕聲說了一句只有病人能聽見的話。這份悲傷很深，這不是不專業，這是一個曾經在乎的人所留下的印記。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/recognition/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 1
+COST_TYPE: identity
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+悲傷的累積，成了這份工作的地景。每一次死亡，都增添著集體的重量。護理師們哀悼的，不只是個別的病人，還有那個屬於她們日常現實一部分的死亡模式。悲傷不是特例，悲傷是日常，是她們游泳其中的水。她們在悲傷裡漂浮，她們在悲傷裡工作，她們愛著病人，然後失去他們。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+這套機制是：我可以照顧垂死的人，卻不被他們的死亡所影響。這套機制，製造出某種程度的分隔。瑪莉亞的專業能力是真實的，她能處理醫療上的任務。然而，她無法迴避這個人終究會死去的現實。這套機制試圖讓感受和功能保持分開，但這種分隔，從來不曾徹底。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/compassion_fatigue/grief/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+這套機制透過「悲傷無法被排進行程表」這件事，證明了自己的存在。陳護理師無法在值班時哀悼，她必須繼續工作。這套機制說：你可以晚點再感受。但晚點變成了明天，變成了下星期，變成了永遠不會。悲傷不斷累積，因為這套機制不允許消化的過程。這份積壓的、未曾被哀悼過的失落，就是證明。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/mechanism_proof/micro/v03.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+這套機制帶來孤立。多明妮在告別式上的悲傷，很難向家人解釋清楚。他們不明白，她怎麼會對一位只認識兩星期的病人有這麼深的情緒反應。這套機制暗示著，這份悲傷不算數，這不是家人，這是工作。孤立加深了悲傷，她獨自一人在哀悼。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+這套機制製造出一種特別的愧疚。凱莎為她的病人哀悼，但這套機制在她耳邊低語：你應該做得更多。急救應該要成功的。這場死亡，某種程度上是你的失敗。悲傷和愧疚糾纏在一起，這套機制，把悲傷武器化了。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+這套機制讓悲傷感覺起來像是軟弱。護理師們工作的領域裡，死亡是常態。如果每一次死亡都讓她們哀悼，她們就無法繼續下去。這套機制暗示著，她們的悲傷是多愁善感，她們應該更堅強。然而，悲傷不是軟弱，悲傷是一個曾經愛過的人所留下的印記。這套機制，試圖去否定這個其實最為人性的反應。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+瑪莉亞把病人過世的事告訴了某個人，她沒有試圖淡化它。她說：這個人過世了，這件事很重要，我正在哀悼。對方傾聽著，沒有評判。在這份傾聽裡，有一種允許她哀悼的許可。瑪莉亞意識到，她一直在等待這份許可——一份除了她自己，沒有人能給她的許可。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+陳護理師在一場艱難的死亡之後請了假。她沒有去購物，也沒有去找樂子，她坐下來，和悲傷待在一起。她在需要哭的時候哭。這段時間，給了悲傷空間。那套原本要求她把感受隔開的機制，開始鬆動了。悲傷可以有時間，悲傷可以有空間。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+多明妮和家人談起，那場告別式為什麼對她這麼重要。她解釋：這個人是我工作的一部分，他的死亡影響了我。她的家人開始明白，這份工作裡的悲傷，和家人的悲傷不同，但並不比較輕。孤立開始緩解，這份悲傷，可以被見證了。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+凱莎放下了愧疚。她的病人死於一種疾病，急救之所以沒有成功，是因為疾病已經太過嚴重。凱莎已經盡了她所能做的一切。悲傷，不需要愧疚。那套機制，試圖把兩者融合在一起，但它們是分開的。為失去而悲傷，和為照護而愧疚，是不一樣的。她把兩者分開了。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+幾個星期過去，護理師們開始去尊重自己的悲傷。她們承認，照護會產生依戀，依戀會產生悲傷。她們不再試圖去防堵這份悲傷，而是允許它存在。這場實驗，正朝著把悲傷整合成照護工作裡一個正常的部分前進。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+瑪莉亞想著她的病人，她感受到那份哀傷，她沒有試圖去修復它或淡化它。她只是單純地讓它成為自己的一部分。這位病人很重要，這位病人的死亡很重要，她的悲傷很重要。她已經在一個常常否定這件事的專業裡，宣告了自己哀悼的權利。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v02.txt
+BAND: 1
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+陳護理師照顧著另一位垂死的病人。知道病人終將離世，並沒有阻止她去付出照護。這份照護，已經開始產生悲傷。她讓自己去經歷它。悲傷和愛不是分開的兩件事，悲傷是愛的另一面。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+多明妮向家屬談論死亡時，帶著她自己親身經歷過的重量。她知道他們即將經歷的是什麼。她所背負過的悲傷，給了她見證他們悲傷的能力。她的脆弱，是她的力量。她允許自己哀悼，這讓她能夠真正在場，陪伴他人的悲傷。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+凱莎把死亡當作工作的一部分，坐在其中。她哀悼，她繼續，她一邊哀悼一邊工作。這兩件事並不分開。她已經宣告了自己深深在乎、也被失去所影響的權利。這不是軟弱，這是她這個專業的核心。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v05.txt
+BAND: 1
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+護理師們已經把悲傷整合進了自我認同裡。她們是照顧垂死之人的人，她們哀悼。悲傷不是一個需要被解決的問題，它是她們所選擇的這份工作裡不可或缺的一部分。她們已經完全地宣告了這一點。
+---
+
+## RECOGNITION v06
+---
+path: story_atoms/healthcare_rns/anchored/grief_grief/recognition/band_fill/v06.txt
+BAND: 5
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+危機。突破。強度達到頂點的那一刻。
+---
+
+## TURNING_POINT v06
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+葛瑞絲經過上星期二那位病人待過的病房。這股悲傷的浪潮，毫無預警地，從尋常的觸發點裡湧出。葛瑞絲的眼眶發燙。這個模式此刻要求被關注——灼熱、堅持、不肯等待。葛瑞絲看著它提出要求。這一次，她沒有順從，而是去追蹤這股要求究竟從哪裡開始。它從肋骨升起，蔓延到思緒，思緒編織出一個故事。故事說：現在不行動，就會失去一切。葛瑞絲檢視這個故事，發現它沒有任何證據。眼眶裡的，是真實的感覺；故事裡的，是捏造出來的急迫感。葛瑞絲把感覺留住，卻不再跟著故事走。感覺留下來了，故事卻失去了聽眾。框架就此轉變：這個模式很大聲，但大聲不等於真實。
+---
+
+## TURNING_POINT v07
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/turning_point/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+丹特認出了病人的姓氏，和上個月那位病人一樣的姓氏。不同的病人，同樣的悲傷。這股悲傷的浪潮，來到最高音量。丹特的呼吸一滯，胸口塌陷。一切都收縮成這一刻——崩潰，或是突破，沒有中間地帶。丹特站在浪頭的正中央。那個模式說：這就是你。丹特聽見了。這是第一次，他把這句話聽成一個句子，而不是一個事實。句子可能是錯的。丹特的身體因為這股強度而顫抖，顫抖是真的，那句話卻只是一種詮釋。丹特把顫抖和那句話分開來看。身體仍在發抖，但那個身分認同的宣稱瓦解了。這股浪潮抵達了，不需要被止住，也能被撐過去。框架，就此裂開一道縫。
+---
+
+## EMBODIMENT v06
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: self_claim
+---
+惠子經過那間昨天有病人過世、如今已空著的病房。她停下腳步，在門口站了十秒鐘，然後繼續前進。這股悲傷的浪潮啟動了。惠子的胸口塌陷，熱度升起。惠子認出了這股熱度，沒有轉身逃開。惠子背負著這份重量，帶著它、而不是儘管有它，走過這一天。舊的模式仍然啟動，但惠子依然依照新的理解去行動。她的喉頭發脹，雙手卻沒有停下。身分不是那個模式，身分是惠子在模式運作的同時所做出的行動。惠子在模式於背景中尖叫的同時，做著眼前該做的下一件正確的事。尖叫漸漸淡成嗡鳴，嗡鳴又漸漸淡成一個事實：這個模式存在，惠子也存在。它們不是同一件事。
+---
+
+## EMBODIMENT v07
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/embodiment/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: self_claim
+---
+諾拉出席了那位病人的追思會，和家屬站在一起。她沒有假裝這份悲傷比實際上小。強度達到頂點。諾拉的肋骨感覺空了，呼吸一滯。這股悲傷的浪潮，以最高音量咆哮。每一條神經都在說：讓步吧。諾拉沒有讓步。她站在風暴的正中央，從新的身分出發行動——不是對抗這個模式，而是穿越它。模式是噪音，行動才是訊號。諾拉的身體同時承載著這兩者。危機並不能定義諾拉，她的回應才定義了她。諾拉帶著這一刻沉甸甸的全部重量，繼續往前走。重量是真的，崩潰卻不是。諾拉穿越了浪頭的頂點，走到了另一端，依然站立著，依然在選擇。
+---
+
+## MECHANISM_PROOF v06
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/mechanism_proof/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+托馬斯描繪出這個「失去病人」的迴路：病人過世，事後檢討進行，下一位病人到來，悲傷儲存在身體裡。托馬斯的喉頭發脹，熱度升起。這股悲傷的浪潮，毫無預警地，從尋常的觸發點裡湧出。這一次，托馬斯追蹤了整個順序：觸發、身體反應、思緒連鎖、行為拉力。觸發來自外部，身體反應是自動的，思緒連鎖是失落透過感官記憶浮現，而行為拉力，則是真正付出代價的那一環。托馬斯現在看得很清楚，代價是什麼。托馬斯的眼眶在模式跑完它的迴路時發燙。這個模式之所以持續，是因為悲傷儲存在身體裡，因為心智不斷繞過它，而被儲存起來的悲傷會不斷疊加。這種持續並不神秘，它是機械性的。看見這台機器，不會讓機器停下來；但看見這台機器，會讓人明白——這台機器不是托馬斯本人。
+---
+
+## MECHANISM_PROOF v07
+---
+path: story_atoms/healthcare_rns/anchored/grief/grief/mechanism_proof/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+艾夏在同一個班裡失去了兩位病人。悲傷的處理機制，兩者都沒能消化。兩份悲傷，都儲存在她的肩膀裡。強度達到頂點。艾夏的呼吸一滯，胸口塌陷。這股悲傷的浪潮全力運轉，艾夏看著它運轉。即使在最高音量下，這個機制依然遵循同樣的順序：尋常的觸發、感官記憶的啟動、身體反應、認知的追趕、壓抑的嘗試、殘留的儲存。第五級的順序，和第二級一模一樣，改變的只有音量大小。這個模式在強度升高時並不會變得更聰明，它只是變得更大聲。艾夏的身體吸收了這股音量，她的心智描繪出這個迴路的圖形。這個迴路沒有內建的出口——它只會不斷循環。它之所以持續，是因為它以自己的輸出為食。艾夏看見了這個餵養的過程。看見它，並不會讓迴路停下來；但看見它，會讓人明白這個迴路是有結構的。而結構，是可以被打斷的。
+---

@@ -1,0 +1,457 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: minimal_mind_healing__quinn_ashworth__en_US__intrusive_thoughts__the_visitor_at_the_threshold
+chapter_id: ep_001
+genre_id: psychological_horror
+title: 'The Visitor at the Threshold — Episode 1: Three Knocks'
+logline: An uninvited presence answers every lock and every deleted message with three knocks, insisting
+  it already lives inside Sora's phone and her own front door, and grows stronger every time she argues
+  back.
+stakes_now: Sora's phone and front door are the only boundaries she has ever needed; tonight both fail
+  to keep an unnamed sender out, and every refusal she tries — delete, block, argue, lock — makes it more
+  specific and more her.
+stakes_end: The visitor is not banished and the thread is not deleted — Sora has one lived instance of
+  not arguing with it, on Priya's voice alone, and the hallway bulb holds steady for the length of one
+  dawn, not forever.
+genre_cadence:
+- wound_refusal
+- argument_feeds_it
+- escalation_signal
+- synchronized_dread
+- companion_turn
+- non_engagement
+- thing_shrinks
+- cost
+- ambiguous_close
+page_turn_promises:
+- page_id: ep_001_p01
+  promise: Will deleting and blocking the message actually make it stop, or does every refusal only prove
+    the sender's opening sentence right?
+- page_id: ep_001_p02
+  promise: Will barring every door and window hold the visitor out, or does Sora have to stop arguing
+    with it entirely to survive the night?
+panels:
+- panel_id: ep001_001
+  page_id: ep_001_p01
+  story_function: wound_refusal
+  story_move: The episode opens on the apartment's own private wrongness — a bulb keeping a rhythm no
+    one set — establishing the recurring visual through-line before Sora or any trigger enters the frame.
+  visual_proof: Wide dim hallway, single bulb flickering three-pause-three, long shadows sliding down
+    the narrow hall, no figure present.
+  information_delta: Reader learns the apartment already has a private, patterned wrongness before the
+    story's first human beat.
+  beat_role: pre_trigger_signal
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_002
+  page_id: ep_001_p01
+  story_function: wound_refusal
+  story_move: An object activates before Sora chooses to look at it — the phone lights with no sound cue,
+    converting an ordinary work tool into a thing that acts on its own schedule.
+  visual_proof: Face-down phone screen glowing unprompted on the desk, no hand yet touching it, no notification
+    chime implied.
+  information_delta: Reader learns the trigger arrives silently and uninvited, before Sora has any chance
+    to decide whether to engage.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_003
+  page_id: ep_001_p01
+  story_function: wound_refusal
+  story_move: The visitor's opening sentence is shown in full before Sora reacts to it, letting the reader
+    receive the verdict at the same instant she does.
+  visual_proof: Lit phone screen, sender field reading Unknown, one message already marked delivered above
+    an empty reply field.
+  information_delta: Reader now knows the exact sentence the visitor uses as its opening move, and that
+    it arrived already 'delivered' with no send animation witnessed.
+  beat_role: verdict_stated
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_004
+  page_id: ep_001_p01
+  story_function: wound_refusal
+  story_move: Sora names the sentence as spam and dismisses it — the first refusal, filed as an easy category
+    rather than engaged with.
+  visual_proof: Sora's face in medium close, mildly annoyed expression, phone held at a dismissive angle.
+  information_delta: Reader sees Sora's default coping move is dismissal-by-relabeling, which the episode
+    will go on to test.
+  beat_role: refusal_move
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_005
+  page_id: ep_001_p01
+  story_function: argument_feeds_it
+  story_move: Sora deletes the thread outright, converting dismissal into an active refusal that the visitor
+    will later use as evidence against her.
+  visual_proof: Macro on a thumb tapping a delete control, on-screen confirmation text rendering below
+    the empty thread.
+  information_delta: Reader has a concrete, undeniable record that Sora deleted the thread once — a fact
+    the story will contest later.
+  beat_role: refusal_move
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_006
+  page_id: ep_001_p01
+  story_function: wound_refusal
+  story_move: The recurring visual through-line repeats unacknowledged, showing the reader a pattern Sora
+    herself has not yet connected to the phone.
+  visual_proof: Same three-pause-three bulb flicker as panel one, hallway empty, Sora visible at her desk
+    in the adjoining room not reacting.
+  information_delta: Reader can now start counting the rhythm across scenes even though Sora has not noticed
+    it is the same rhythm yet.
+  beat_role: pre_trigger_signal
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_007
+  page_id: ep_001_p01
+  story_function: argument_feeds_it
+  story_move: The deleted thread returns on its own, proving the delete did not work and forcing Sora
+    to decide again.
+  visual_proof: Phone lighting and buzzing face-down with no hand touching it, sender still reading Unknown.
+  information_delta: Reader learns deletion did not remove the sender — the thread self-restores, raising
+    the stakes of every refusal that follows.
+  beat_role: verdict_stated
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_008
+  page_id: ep_001_p01
+  story_function: argument_feeds_it
+  story_move: The visitor repeats its verdict word for word under a 'Delivered' mark, proving the deletion
+    changed nothing about its claim on her.
+  visual_proof: Screen close-up, 'Delivered' label above the identical sentence from panel three, thread
+    history showing no gap.
+  information_delta: Reader confirms the sentence is fixed and repeatable — this is not a random spam
+    script, it is a returning claim.
+  beat_role: verdict_stated
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_009
+  page_id: ep_001_p01
+  story_function: argument_feeds_it
+  story_move: Sora escalates from delete to block, a harder refusal — and the page turns on the block
+    action visibly failing to complete, promising the reader the barrier will not hold.
+  visual_proof: Thumb pressing 'Block this number,' loading wheel spinning mid-animation with no completion
+    state reached, panel positioned as the page's final beat.
+  information_delta: 'Reader is left on a cliffhanger: the strongest refusal available on the phone is
+    visibly stalling, setting up page two''s escalation.'
+  beat_role: refusal_move
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_010
+  page_id: ep_001_p02
+  story_function: wound_refusal
+  story_move: Sora extends her refusal from the phone to the physical world, barring the front door as
+    if the phone's visitor could also arrive there.
+  visual_proof: Wide shot of Sora methodically checking deadbolt and chain on the apartment's front door,
+    both hands working the hardware in sequence.
+  information_delta: Reader sees the refusal has moved from a screen to a literal door — the boundary
+    Sora is defending is no longer abstract.
+  beat_role: refusal_move
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_011
+  page_id: ep_001_p02
+  story_function: wound_refusal
+  story_move: The deadbolt's over-long hold shows the reader Sora's checking has crossed from routine
+    into compulsion without a word needing to say so.
+  visual_proof: Macro close on the deadbolt fully seated, Sora's fingers still pressed against it a beat
+    past the point the lock engaged.
+  information_delta: Reader registers, without dialogue, that Sora's body already knows this checking
+    will not be enough.
+  beat_role: refusal_move
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_012
+  page_id: ep_001_p02
+  story_function: argument_feeds_it
+  story_move: The block action resolves into a direct rebuttal of the door-checking Sora just did, proving
+    the visitor is tracking her physical refusals as closely as her digital ones.
+  visual_proof: Phone screen showing the block wheel replaced by a new delivered message referencing the
+    lock directly, no block-succeeded state visible.
+  information_delta: Reader learns the visitor has answered the door-checking specifically — it is not
+    generic spam, it is responsive to what Sora just did off-screen.
+  beat_role: verdict_stated
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_013
+  page_id: ep_001_p02
+  story_function: argument_feeds_it
+  story_move: Sora abandons dismissal and blocking for direct argument — the exact escalation the craft
+    doctrine warns feeds the visitor rather than starving it.
+  visual_proof: Close on unsteady hands typing on the phone keyboard, partial reply text visible mid-composition.
+  information_delta: Reader sees Sora has switched tactics from avoidance to engagement, raising the reader's
+    dread that this is the wrong move.
+  beat_role: argument_engaged
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_014
+  page_id: ep_001_p02
+  story_function: argument_feeds_it
+  story_move: The visitor answers before Sora's own message finishes sending and sharpens its claim with
+    a specific, correct detail, proving the argument is making it stronger, not weaker.
+  visual_proof: Send animation still mid-transit on Sora's outgoing bubble while a reply bubble already
+    renders above it, timestamp identical to the second.
+  information_delta: Reader learns arguing does not slow the visitor down — it accelerates and gets more
+    accurate, converting Sora's own words into ammunition.
+  beat_role: verdict_stated
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_015
+  page_id: ep_001_p02
+  story_function: argument_feeds_it
+  story_move: The recurring visual through-line changes state for the first time — the rhythm compresses
+    toward constant — showing the argument's cost in the environment rather than on Sora's face.
+  visual_proof: Wide hallway shot, bulb flicker rate visibly faster and more continuous than panels one
+    and six, shadows blurring together.
+  information_delta: Reader gets hard visual proof that the argument is escalating the presence, confirming
+    the craft doctrine's rule before any character states it.
+  beat_role: escalation_signal
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_016
+  page_id: ep_001_p02
+  story_function: argument_feeds_it
+  story_move: The visitor is revealed to have no identity of its own — it borrows Sora's name once she
+    has argued with it enough to give it material — the central information delta of the episode.
+  visual_proof: Scrolled message log showing repeated block/delete attempts each followed by thread reappearance,
+    contact name field now reading Sora Akiyama instead of Unknown.
+  information_delta: Reader learns the visitor has no face or name of its own; it wears whichever identity
+    the person arguing with it hands over.
+  beat_role: reveal
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_017
+  page_id: ep_001_p02
+  story_function: argument_feeds_it
+  story_move: Sora's fear becomes genuine rather than annoyed, marking the emotional hinge between refusing
+    an inconvenience and recognizing a real threat.
+  visual_proof: Close on Sora's face, eyes wide with real fear, jaw tight, a visible shift from the mild
+    annoyance of panel four.
+  information_delta: Reader confirms Sora has connected the dots the reader made in panel sixteen — this
+    is no longer spam to her either.
+  beat_role: fear_confirmed
+  action_intensity: 3
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_018
+  page_id: ep_001_p02
+  story_function: synchronized_dread
+  story_move: The visitor crosses from screen and light into a physical knock at the door, synchronizing
+    all three channels into one rhythm and forcing a confrontation Sora cannot delete or block.
+  visual_proof: Apartment door in frame, three knock-impact indicators drawn at whisper intensity (no
+    exclamation burst), rhythm marks aligned with the bulb's established three-pause-three pattern.
+  information_delta: Reader learns the visitor is no longer confined to the phone — it can knock, and
+    it knocks in the same counted rhythm established in panel one.
+  beat_role: threshold_arrival
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_019
+  page_id: ep_001_p02
+  story_function: synchronized_dread
+  story_move: Looking through the peephole disproves the physical presence at the door without disproving
+    the knock, confirming the threat cannot be resolved by simply checking.
+  visual_proof: Peephole-framed circular view of an empty, flickering hallway, phone visible buzzing on
+    the desk behind Sora in the same frame.
+  information_delta: Reader learns checking does not work here either — the door is not lying, but neither
+    is the knock; both are true at once.
+  beat_role: dread_confirmed
+  action_intensity: 4
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_020
+  page_id: ep_001_p02
+  story_function: synchronized_dread
+  story_move: The visitor escalates from a borrowed name to a borrowed face, calling from what appears
+    to be Sora's own contact card, collapsing the last distance between her and it.
+  visual_proof: Phone screen mid-ring, caller ID photo and name matching Sora's own profile exactly, call
+    type showing an incoming voice call rather than a message.
+  information_delta: Reader learns the visitor can now impersonate Sora completely on-device, not just
+    borrow her name in a text field.
+  beat_role: threshold_arrival
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_021
+  page_id: ep_001_p02
+  story_function: synchronized_dread
+  story_move: Sora's body locks mid-action between fleeing and confronting, the heartbeat SFX carrying
+    the escalation the craft bible mandates stay at whisper register rather than a jump-scare bang.
+  visual_proof: Sora frozen at the door, hand paused mid-turn on the deadbolt, small whisper-register
+    heartbeat SFX marks placed near her chest, no exclamation-style effect lines.
+  information_delta: Reader feels the peak somatic cost of the night without a single new plot fact —
+    the freeze itself is the information.
+  beat_role: somatic_peak
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_022
+  page_id: ep_001_p02
+  story_function: companion_turn
+  story_move: A real, verifiable contact interrupts the impersonation call, introducing the only outside
+    voice that can counter the visitor's claim to be Sora.
+  visual_proof: Phone screen showing an incoming call overriding the previous one, caller ID now reading
+    Priya — Archive (night shift), a genuine saved contact.
+  information_delta: Reader learns Sora has someone real on the other end of the line who can be reached
+    even now, at the worst moment.
+  beat_role: companion_entry
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_023
+  page_id: ep_001_p02
+  story_function: companion_turn
+  story_move: Priya names the pattern from outside it — the sleeplessness, the breathing, the lock-checking
+    — giving Sora the first outside read on her own behavior all episode.
+  visual_proof: Sora answering the call at the door, phone held unsteadily to her ear, body still oriented
+    toward the deadbolt she has not let go of.
+  information_delta: Reader learns someone outside the apartment has been tracking Sora's spiral closely
+    enough to name it precisely, without having seen tonight directly.
+  beat_role: companion_entry
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_024
+  page_id: ep_001_p02
+  story_function: companion_turn
+  story_move: Priya states the episode's turn directly — stop arguing, let it stand at the threshold unanswered
+    — and models the doctrine by staying present without trying to fix or banish it.
+  visual_proof: Same held composition as panel twenty-three, phone at ear, bolt hand unmoving, no new
+    action beyond the words landing.
+  information_delta: 'Reader now has the explicit reframe: the fight was never winnable by argument, only
+    survivable by not feeding it.'
+  beat_role: turn_instruction
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_025
+  page_id: ep_001_p02
+  story_function: non_engagement
+  story_move: Sora physically enacts the turn — releasing the lock and sitting rather than checking or
+    arguing — the first concrete action of non-engagement in the episode.
+  visual_proof: Sora's hand releasing the deadbolt, her body sliding down to sit on the floor with her
+    back against the door, phone still held to her ear.
+  information_delta: Reader sees the reframe has become a body posture, not just a sentence — the first
+    proof the turn is real, not just spoken.
+  beat_role: turn_enacted
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_026
+  page_id: ep_001_p02
+  story_function: non_engagement
+  story_move: The episode holds on the unresolved knock without cutting away or resolving it, giving the
+    reader the same discomfort of not-checking that Sora is now sitting inside.
+  visual_proof: Wide shot, Sora seated against the door, faint knock rhythm marks continuing at the door's
+    edge, deliberate empty space, no new text.
+  information_delta: Reader is given a held moment with no new plot information — the endurance of not-checking
+    is the content of the panel.
+  beat_role: decompression
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_027
+  page_id: ep_001_p02
+  story_function: thing_shrinks
+  story_move: The visitor's physical channel loses urgency in direct response to being left unanswered,
+    the first evidence that non-engagement is working.
+  visual_proof: Same door and hallway framing as panel twenty-six, knock-rhythm marks now sparser and
+    softer, no longer synchronized to a driving beat.
+  information_delta: Reader learns the presence's intensity is conditional on being fought, not fixed
+    — it is shrinking now that no one is arguing with it.
+  beat_role: cost_paid
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_028
+  page_id: ep_001_p02
+  story_function: thing_shrinks
+  story_move: The visitor's borrowed voice on the phone fails to complete a sentence for the first time
+    all episode, proving it has lost the argument-fuel it was running on.
+  visual_proof: Lit phone screen on the floor, three-dot typing indicator blinking without ever producing
+    a delivered message, thread otherwise unchanged.
+  information_delta: Reader learns the visitor lost its borrowed voice once nobody argued back — the mechanism
+    from panel sixteen now runs in reverse.
+  beat_role: cost_paid
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_029
+  page_id: ep_001_p02
+  story_function: cost
+  story_move: Priya asks the question that names the real toll of the night — not the visitor, but how
+    long Sora has been carrying it alone — and Sora's silence is left to answer instead of a reply panel.
+  visual_proof: Sora seated on the floor, phone at her ear, mouth closed, no reply bubble drawn, panel
+    holding on her stillness after the question.
+  information_delta: Reader learns the true cost of the episode was never a single night — the visitor
+    has been testing this door for longer than tonight, and Sora's silence confirms it.
+  beat_role: cost_named
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_030
+  page_id: ep_001_p02
+  story_function: cost
+  story_move: The recurring visual through-line resolves to a steady state rather than a cured one, paying
+    off the episode's opening image without claiming the danger is gone for good.
+  visual_proof: Wide hallway shot, dawn light entering from an unseen window, the bulb glowing without
+    flicker for the first time in the episode.
+  information_delta: 'Reader is shown the through-line''s honest endpoint: steady, not fixed — the episode
+    refuses to claim a cure.'
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_031
+  page_id: ep_001_p02
+  story_function: ambiguous_close
+  story_move: The episode ends on the thread left visibly unresolved — not deleted, not answered — refusing
+    a cure ending while stating the reframe that the visitor's goal was never entry but engagement.
+  visual_proof: Close on Sora's unbolted hand flat against the door, phone on the floor beside it still
+    showing the un-deleted Unknown thread.
+  information_delta: 'Reader receives the episode''s honest thesis in one line: the visitor was never
+    trying to get in, and nothing that happened tonight required it to be defeated, only not fed.'
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_032
+  page_id: ep_001_p02
+  story_function: ambiguous_close
+  story_move: The episode card closes the chapter and names it, marking the end of this specific night
+    before any future return of the visitor.
+  visual_proof: Typographic episode-card panel, title text centered on a dark quiet background, no other
+    imagery.
+  information_delta: Reader is given a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/minimal_mind_healing__quinn_ashworth__en_US__intrusive_thoughts__the_visitor_at_the_threshold/ep_001.yaml
+notes: Newly authored (not backfilled) episode built from strategy_04 'The Visitor at the Threshold' of
+  the psychological_horror strategy bank (config/source_of_truth/manga_story_strategies/psychological_horror_strategies.yaml),
+  fused with the modern-reader doctrine's app_that_opens_on_its_own horror catalyst family (config/manga/modern_reader_story_doctrine.yaml
+  genres.horror) — the phone notification, the delete/block cycle, and the door knock are the chosen ordinary-world
+  surface for strategy_04's the_thing_that_follows archetype. No config/manga/genre_scene_templates/psychological_horror.yaml
+  exists yet (only mecha.yaml is populated), so genre_cadence above is derived directly from this episode's
+  own demonstrated structural beats rather than a formal scene-template file; flagging this as a real
+  gap for the genre-template backlog, same as the iyashikei precedent noted in the stillness_press ep_001
+  storyboard.

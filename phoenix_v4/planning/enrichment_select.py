@@ -1669,6 +1669,17 @@ def _read_text_atom(path: Path) -> str:
     return path.read_text(encoding="utf-8").strip()
 
 
+def _locale_file_path(base_dir: Path, filename: str, locale: Optional[str]) -> Path:
+    """Prefer base_dir/locales/{locale}/{filename} when it exists and
+    locale != 'en-US'; otherwise the base English file. Generic over filename
+    (CANONICAL.txt for ANGLE_DEFINITION, level_N.yaml for ANGLE_CALLBACK)."""
+    if locale and locale != "en-US":
+        lp = base_dir / "locales" / locale / filename
+        if lp.exists():
+            return lp
+    return base_dir / filename
+
+
 def _try_angle_definition(
     *,
     persona_id: str,
@@ -1676,12 +1687,13 @@ def _try_angle_definition(
     angle_id: str,
     repo_root: Path,
     fallback_warnings: List[str],
+    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str, str]]:
     aid = (angle_id or "").strip()
     if not aid or not persona_id or not topic_id:
         return None
-    base = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid / "CANONICAL.txt"
-    body = _read_text_atom(base)
+    base_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid
+    body = _read_text_atom(_locale_file_path(base_dir, "CANONICAL.txt", locale))
     if body:
         return body, "angle_atom", f"angle_def:{aid}"
     meta = _angle_entry_meta(aid)
@@ -1690,8 +1702,8 @@ def _try_angle_definition(
 
     fam = family_default_angle_id(lens) if lens else None
     if fam and fam != aid:
-        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam / "CANONICAL.txt"
-        body = _read_text_atom(fam_path)
+        fam_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam
+        body = _read_text_atom(_locale_file_path(fam_dir, "CANONICAL.txt", locale))
         if body:
             fallback_warnings.append(
                 f"ANGLE_DEFINITION: family default {fam!r} for {aid!r}"
@@ -1717,11 +1729,13 @@ def _try_angle_callback(
     layer: int,
     repo_root: Path,
     fallback_warnings: List[str],
+    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str, str]]:
     aid = (angle_id or "").strip()
     if not aid or not persona_id or not topic_id or layer < 1:
         return None
-    path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid / f"level_{layer}.yaml"
+    cb_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid
+    path = _locale_file_path(cb_dir, f"level_{layer}.yaml", locale)
     if path.exists():
         data = _load_yaml(path)
         if isinstance(data, dict):
@@ -1734,7 +1748,8 @@ def _try_angle_callback(
 
     fam = family_default_angle_id(lens) if lens else None
     if fam and fam != aid:
-        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam / f"level_{layer}.yaml"
+        fam_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam
+        fam_path = _locale_file_path(fam_dir, f"level_{layer}.yaml", locale)
         if fam_path.exists():
             data = _load_yaml(fam_path)
             if isinstance(data, dict):
@@ -2725,6 +2740,7 @@ def select_enrichment(
                         angle_id=_angle_for_slot,
                         repo_root=root,
                         fallback_warnings=_angle_fallback_warnings,
+                        locale=locale,
                     )
                 else:
                     _ad = None
@@ -2741,6 +2757,7 @@ def select_enrichment(
                         layer=int(_layer),
                         repo_root=root,
                         fallback_warnings=_angle_fallback_warnings,
+                        locale=locale,
                     )
                     if _ac:
                         content, source, source_id = _ac[0], _ac[1], _ac[2]

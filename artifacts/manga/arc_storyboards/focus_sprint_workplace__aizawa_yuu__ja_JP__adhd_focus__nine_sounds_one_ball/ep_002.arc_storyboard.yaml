@@ -1,0 +1,473 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_002
+genre_id: sports_competition
+title: '「静寂のフリースロー」 第2話「聞こえない合図」'
+logline: Hayato shows up to his first real practice with the Shinonome club team
+  and drowns in it — three drills running at once, a play call he hears a beat
+  too late, and a turnover that is unmistakably his — leaving before he has
+  technically joined anything.
+stakes_now: Hayato has one instinctive rooftop shot and an invitation from Aya
+  to "just come look" — no team standing, no roster spot, no proof the sport
+  still lives in his body under real pressure.
+stakes_end: Hayato has a provisional pinny with no name on it, a turnover the
+  whole gym watched, and a phone screen showing an unanswered team group-chat
+  invite he cannot make himself accept or decline.
+genre_cadence:
+- proximity_to_game_opening
+- threshold_hesitation
+- welcome_and_uneasy_footing
+- ace_skepticism_established
+- warmup_drills_begin
+- overlapping_drill_escalation
+- attention_fragments
+- play_call_lost_in_the_noise
+- collision_and_turnover
+- public_humiliation_beat
+- roster_status_doubt
+- water_break_isolation
+- kuroda_silent_constant
+- practice_ends_without_him
+- threshold_departure
+- unresolved_doubt_closing
+page_turn_promises:
+- page_id: ep_002_p01
+  promise: Will the gym actually want him here, or just tolerate him showing up?
+- page_id: ep_002_p02
+  promise: Can his body keep up with a practice that never asks for only one
+    thing at a time?
+- page_id: ep_002_p03
+  promise: When the play call finally comes, will it reach him in time to matter?
+- page_id: ep_002_p04
+  promise: After the turnover, is there anywhere in this gym that still counts
+    him as part of it?
+- page_id: ep_002_p05
+  promise: Does he come back tomorrow, or does tonight quietly end it?
+panels:
+- panel_id: ep002_001
+  page_id: ep_002_p01
+  story_function: proximity_to_game_opening
+  story_move: Cold open on the body before the mind — Hayato's own sneakers,
+    kept in his work desk drawer "just in case," now actually on his feet.
+  visual_proof: Close insert on worn sneakers being double-knotted, dress socks
+    still visible above them, a loosened tie stuffed half into a gym bag beside
+    his feet.
+  information_delta: Reader confirms he has actually come, not just imagined
+    coming — the invitation from ep_001 has been accepted with his body before
+    any scene establishes where he is.
+  beat_role: threshold_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_002
+  page_id: ep_002_p01
+  story_function: threshold_hesitation
+  story_move: Wide on the company gym's side door at dusk — Hayato stopped
+    just outside it, hand on the handle, the dull thud of a ball already
+    audible through the gap.
+  visual_proof: Exterior wide shot, fluorescent light leaking under the door,
+    Hayato's silhouette not yet moving.
+  information_delta: Reader feels the last beat of hesitation before he commits
+    to actually walking in.
+  beat_role: threshold_hesitation
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_003
+  page_id: ep_002_p01
+  story_function: welcome_and_uneasy_footing
+  story_move: Interior reveal — an old, underfunded company gym, rust-spotted
+    rim, a faded club banner, five or six teammates already warming up, and
+    Kuroda sweeping the far baseline without looking up.
+  visual_proof: Wide establishing shot of the gym interior, dim overhead
+    fluorescents, Kuroda a small constant figure at the edge of frame.
+  information_delta: Reader gets the full space for the first time and clocks
+    Kuroda's presence as background texture, not yet a character with lines.
+  beat_role: space_reveal
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_004
+  page_id: ep_002_p01
+  story_function: welcome_and_uneasy_footing
+  story_move: Aya spots him first, crosses the gym at a jog, and hands him a
+    practice pinny that has no name written on it yet.
+  visual_proof: Medium two-shot, Aya mid-toss of a mesh pinny, Hayato catching
+    it awkwardly.
+  information_delta: Reader learns his roster status is literally unwritten —
+    a concrete object standing in for "not yet a real member."
+  beat_role: roster_object
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_005
+  page_id: ep_002_p01
+  story_function: ace_skepticism_established
+  story_move: Endou, across the court, stops mid-stretch to size Hayato up and
+    says his piece before returning to his own warmup.
+  visual_proof: Medium shot, Endou arms crossed, gaze flat, teammates
+    half-listening in the background.
+  information_delta: Reader learns Endou's skepticism up front, before any
+    drill has even started, setting the bar Hayato will fail to clear this
+    episode.
+  beat_role: ace_skepticism
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_006
+  page_id: ep_002_p02
+  story_function: warmup_drills_begin
+  story_move: Aya, acting as de facto captain, blows the practice whistle and
+    calls three warmup stations into motion at once.
+  visual_proof: Wide shot, Aya with a whistle at her lips, three separate
+    knots of players peeling off toward three different drills.
+  information_delta: Reader sees the structural cause of the coming overload
+    — three simultaneous drills, not one — before it becomes Hayato's problem.
+  beat_role: drill_call
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_007
+  page_id: ep_002_p02
+  story_function: overlapping_drill_escalation
+  story_move: The layup line, the defensive-slide count-off, and the agility
+    ladder all run in the same frame, sound-lines and shouted numbers
+    overlapping.
+  visual_proof: Wide gym shot layered with overlapping SFX and count-off
+    speech bubbles from three different drill clusters at once.
+  information_delta: Reader experiences the gym's actual sound-load as a
+    single crowded panel, not a list — the overload is shown, not told.
+  beat_role: overlap_call
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_008
+  page_id: ep_002_p02
+  story_function: overlapping_drill_escalation
+  story_move: Hayato, mid-slide-drill, tries to keep his own count while a
+    teammate two feet away counts a different drill's reps out loud.
+  visual_proof: Medium shot, Hayato's mouth moving on a count, a second
+    teammate's count-bubble crossing directly over his own.
+  information_delta: Reader sees the specific mechanism of the overload —
+    two count-offs occupying the same acoustic space.
+  beat_role: overlap_call
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_009
+  page_id: ep_002_p02
+  story_function: attention_fragments
+  story_move: Tight on Hayato's eyes darting — teammate's count, Aya's
+    clipboard, Endou's flat stare, the practice clock on the wall — none of
+    it settling.
+  visual_proof: Extreme close-up on Hayato's eyes, four small inset panels
+    of what each glance lands on (count, clipboard, Endou, clock).
+  information_delta: Reader gets the interior mechanism of the flaw rendered
+    visually — the eyes cannot choose one thing to hold.
+  beat_role: eyes_dart
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_010
+  page_id: ep_002_p02
+  story_function: attention_fragments
+  story_move: Hayato's feet cross wrong on the ladder drill, a full beat
+    behind the rest of the line, and he clips the teammate ahead of him.
+  visual_proof: Medium shot, feet tangled in the agility ladder rungs, a
+    stumble breaking the line's rhythm.
+  information_delta: Reader sees the first physical cost of the overload —
+    a small, ordinary stumble, not yet the episode's real humiliation.
+  beat_role: first_stumble
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_011
+  page_id: ep_002_p03
+  story_function: play_call_lost_in_the_noise
+  story_move: Warmup ends; a short scrimmage starts. Aya calls a set play by
+    name and number while the rotation whistle is still ringing in the air.
+  visual_proof: Medium shot, Aya shouting the call from the sideline, whistle
+    sound-line still visibly trailing across the panel.
+  information_delta: Reader hears the call land inside noise that has not yet
+    cleared — the exact collision the catalyst promised.
+  beat_role: play_call_transmit
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_012
+  page_id: ep_002_p03
+  story_function: play_call_lost_in_the_noise
+  story_move: Interior beat — Hayato processes the call a half-second too
+    late, three fragments (the whistle, the number, the count-off habit
+    still running in his head) all still competing for the same instant.
+  visual_proof: Tight interior panel, the call's speech bubble rendered
+    faded and delayed at the panel's edge, overlapping ghost-text of the
+    whistle and the earlier count.
+  information_delta: Reader sees the exact mechanism named in the catalyst —
+    the play call arriving, but arriving too late to be usable.
+  beat_role: play_call_lag
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_013
+  page_id: ep_002_p03
+  story_function: collision_and_turnover
+  story_move: Hayato cuts to the spot the old, half-second-later version of
+    the call would have meant, directly into a teammate already running the
+    real play.
+  visual_proof: Wide court shot, two players colliding at the elbow of the
+    key, the ball already loose between them.
+  information_delta: Reader sees the concrete, visible cost of the missed
+    call — not an abstract failure, an actual collision.
+  beat_role: wrong_cut
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_014
+  page_id: ep_002_p03
+  story_function: collision_and_turnover
+  story_move: The ball skids away across the hardwood into the wall padding,
+    loud in the sudden quiet after the collision.
+  visual_proof: Insert panel, the ball bouncing away, speed lines and impact
+    SFX, no characters in frame.
+  information_delta: Reader gets the object-level proof of the turnover —
+    the ball itself, alone, marking the failure.
+  beat_role: collision
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_015
+  page_id: ep_002_p03
+  story_function: public_humiliation_beat
+  story_move: A held, silent beat — the whole gym stopped, every player
+    turned to look at Hayato on the floor.
+  visual_proof: Wide court shot, all motion stopped, every visible face
+    turned toward Hayato.
+  information_delta: Reader feels the social weight of the mistake before
+    anyone speaks a word about it.
+  beat_role: freeze_silence
+  action_intensity: 3
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_016
+  page_id: ep_002_p03
+  story_function: public_humiliation_beat
+  story_move: Endou breaks the silence with a flat, short line, not shouted
+    — worse for being quiet — then turns back to his own position.
+  visual_proof: Medium shot, Endou already half-turned away as he speaks,
+    not even fully looking at Hayato.
+  information_delta: Reader confirms Endou's skepticism from panel 5 as
+    earned rather than reversed.
+  beat_role: ace_cutdown
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_017
+  page_id: ep_002_p03
+  story_function: public_humiliation_beat
+  story_move: Two teammates trade a low, embarrassed remark, not cruel, just
+    audible enough for Hayato to catch.
+  visual_proof: Background medium shot, two teammates half-turned, muttering
+    to each other.
+  information_delta: Reader sees the humiliation is social and ambient, not
+    only Endou's — the whole team register has shifted.
+  beat_role: teammate_reaction
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_018
+  page_id: ep_002_p03
+  story_function: roster_status_doubt
+  story_move: A teammate glances at the roster clipboard still resting on
+    the scorer's table, asking aloud whether Hayato is even properly on the
+    team yet.
+  visual_proof: Close on the clipboard, Hayato's name penciled in faint and
+    small at the very bottom of the sheet, a teammate's finger tapping near
+    it.
+  information_delta: Reader sees the concrete workplace-adjacent stakes
+    object — his provisional status made literal on paper.
+  beat_role: roster_doubt
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_019
+  page_id: ep_002_p03
+  story_function: roster_status_doubt
+  story_move: Aya, retrieving the loose ball, answers before anyone can push
+    the question further — brief, not fully settled.
+  visual_proof: Medium shot, Aya scooping up the ball, not quite meeting the
+    teammate's eyes as she answers.
+  information_delta: Reader sees Aya's authority quietly used to hold the
+    line for Hayato, without resolving the doubt she clearly also feels.
+  beat_role: roster_doubt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_020
+  page_id: ep_002_p04
+  story_function: water_break_isolation
+  story_move: Water break. Hayato alone at the drinking fountain, chest still
+    heaving, the rest of the team clustered several meters away.
+  visual_proof: Medium shot, Hayato bent over the fountain, team cluster
+    visible but distant in the same frame.
+  information_delta: Reader sees the physical cost of the practice made
+    visible — sweat, breath — alongside the social distance.
+  beat_role: water_break
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_021
+  page_id: ep_002_p04
+  story_function: water_break_isolation
+  story_move: Close on Hayato's hand gripping his own knuckles — the
+    established knuckle-tap tic, but stilled into a fist instead of its
+    usual rhythm.
+  visual_proof: Close insert on a clenched hand, knuckles pale.
+  information_delta: Reader connects the established visual anchor (the
+    knuckle tap) to a moment of genuine overload for the first time.
+  beat_role: body_cost
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_022
+  page_id: ep_002_p04
+  story_function: kuroda_silent_constant
+  story_move: Cut to Kuroda, still at the baseline, now racking loose balls
+    into the cart one at a time, exactly as unhurried as he was at the start
+    of practice.
+  visual_proof: Wide background shot, Kuroda's motion unchanged in rhythm and
+    posture from panel 3, no reaction to the collision or the silence after
+    it.
+  information_delta: Reader registers Kuroda as a fixed, wordless point of
+    contrast against the gym's chaos — seeded for ep_003, not yet activated.
+  beat_role: kuroda_constant
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_023
+  page_id: ep_002_p04
+  story_function: water_break_isolation
+  story_move: Practice resumes without him for a beat too long — Aya
+    regrouping the team for the next drill before remembering to wave him
+    back in.
+  visual_proof: Wide shot, the team huddle already formed, Hayato a visible
+    step outside its edge.
+  information_delta: Reader sees literal spatial exclusion, not just
+    emotional implication.
+  beat_role: exclusion_wide
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_024
+  page_id: ep_002_p04
+  story_function: water_break_isolation
+  story_move: Interior held beat — every remaining gym sound (whistle
+    echo, ball bounce, voices) blurred into one indistinct wash around
+    Hayato's face.
+  visual_proof: Tight shot on Hayato's face, background rendered as
+    unfocused overlapping tone rather than distinct sources.
+  information_delta: Reader feels the overload's cumulative weight in a
+    single sustained image rather than another itemized list of triggers.
+  beat_role: interior_overload
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_025
+  page_id: ep_002_p05
+  story_function: practice_ends_without_him
+  story_move: Practice winds down; teammates towel off and joke about
+    tomorrow, folding the still-blank pinny back onto the equipment rack.
+  visual_proof: Wide shot, teammates packing up in the background, Hayato
+    folding his pinny and setting it down rather than keeping it.
+  information_delta: Reader sees him decline to claim even the small
+    ownership of taking the pinny with him.
+  beat_role: pack_up
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_026
+  page_id: ep_002_p05
+  story_function: threshold_departure
+  story_move: Aya catches him at the gym door as he's leaving — a short,
+    open question, no reassurance attached to it.
+  visual_proof: Medium two-shot at the doorway, Aya half-turned back toward
+    the court, Hayato mid-step.
+  information_delta: Reader sees Aya's continued investment without it
+    resolving Hayato's doubt for him.
+  beat_role: aya_gesture
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_027
+  page_id: ep_002_p05
+  story_function: threshold_departure
+  story_move: Hayato answers with a non-answer — a small, noncommittal
+    sound — and keeps walking.
+  visual_proof: Medium shot, Hayato's back to camera, hand raised in a
+    half-wave that isn't quite a yes.
+  information_delta: Reader confirms the episode will not resolve into
+    either a clean commitment or a clean quit.
+  beat_role: threshold_departure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep002_028
+  page_id: ep_002_p05
+  story_function: unresolved_doubt_closing
+  story_move: Close insert, mirroring panel 1 — the same sneakers, now
+    scuffed and sweat-marked, laces coming loose, on a train-platform
+    bench instead of a gym floor.
+  visual_proof: Close insert on the sneakers, visual rhyme to the opening
+    panel, one lace untied.
+  information_delta: Reader receives the visual bookend confirming the
+    episode's arc — sneakers put on with intent, now abandoned half-untied.
+  beat_role: sneaker_callback
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep002_029
+  page_id: ep_002_p05
+  story_function: unresolved_doubt_closing
+  story_move: Wide on the platform — Hayato seated, phone in hand, the
+    team's LINE group invite still sitting unopened on the screen.
+  visual_proof: Wide shot, Hayato on a platform bench, phone screen visible
+    with an unread group-chat invite notification.
+  information_delta: Reader sees the concrete, modern object standing in
+    for the unmade decision — accept, decline, or simply not choose.
+  beat_role: phone_hover
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep002_030
+  page_id: ep_002_p05
+  story_function: unresolved_doubt_closing
+  story_move: Final held wide — the train arrives, doors open, and Hayato
+    has still not tapped anything on the screen.
+  visual_proof: Wide platform shot, train doors open, Hayato unmoved, phone
+    screen unchanged.
+  information_delta: Reader closes the episode inside the unresolved
+    moment itself — no decision has been made either way.
+  beat_role: closing_held
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_002.yaml
+notes: 'Episode 2 of 12, arc 1 ("recruit" phase). Follows ep_001''s rooftop
+  invitation with Hayato''s actual first practice. Per the sports_competition
+  craft bible and the anti-pattern rules in
+  config/source_of_truth/manga_story_strategies/sports_competition_strategies.yaml,
+  Kuroda stays silent and background-only this episode (his wordless lesson is
+  reserved for ep_003) and no character narrates or explains the overload as
+  psychology — it is rendered through overlapping drills, a mistimed play
+  call, a turnover, and a blank roster pinny. Ends on the beat the bible
+  specifies: Hayato nearly quitting before he has started, unresolved. NOTE:
+  scripts/ci/check_manga_arc_storyboard.py does not exist in this repo
+  checkout and could not be run against this file; it was authored to this
+  established shape anyway for continuity with the storyboard-first sequence
+  (see stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml).
+  ep_001 for this series has not yet landed on disk at authoring time (parallel
+  agent); this episode was written directly from the series bible''s beat
+  description per the assignment instructions.'

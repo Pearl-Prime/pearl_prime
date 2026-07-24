@@ -1,0 +1,290 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_005
+genre_id: psychological_thriller
+title: Outside the Clearance Line — Episode 5 (English gloss)
+logline: Ren's badge still opens the basement records vault long after hours, and he uses it to pull and
+  photograph an old personnel folder he was never cleared to copy, until Saeki finds him among the
+  stacks and names the pattern he has not stopped to name himself.
+stakes_now: Ren's access to the vault has never been questioned because he has never abused it before —
+  tonight is the first time he crosses from reading data to actively copying material outside his
+  clearance, a line that cannot be uncrossed once photographed.
+stakes_end: The folder goes back on the shelf, but the photograph does not — Saeki's clearest warning yet
+  changes nothing about what Ren keeps, only where he keeps it.
+genre_cadence:
+- vault_established_after_hours_badge
+- badge_clearance_unquestioned_yet
+- flashlight_search_through_stacks
+- target_folder_pulled
+- justification_loop_named_internally
+- personal_fragment_found_in_records
+- environmental_pressure_isolation
+- unauthorized_photograph_taken
+- half_second_hesitation_to_stop
+- footsteps_signal_a_witness
+- vessel_direct_confrontation_entrance
+- vessel_names_the_pattern_plainly
+- honest_silence_no_denial
+- honest_yes_no_behavior_change
+- vessel_wordless_correction_gesture
+- complicated_relief_and_resistance
+- silent_ascent_together
+- unresolved_cost_photo_kept
+- episode_card
+page_turn_promises:
+- page_id: ep_005_p01
+  promise: Will Ren stop at the half-second hesitation before the photograph is taken, or does the
+    footstep in the stacks arrive too late to change what he has already done?
+- page_id: ep_005_p02
+  promise: Now that Saeki has named the pattern plainly, does Ren's honest 'yes' actually change
+    anything, or does the photograph survive the walk back upstairs?
+panels:
+- panel_id: ep005_001
+  page_id: ep_005_p01
+  story_function: vault_established_after_hours_badge
+  story_move: Establishes the basement records vault as a new, higher-risk setting by showing Ren's
+    badge granting access somewhere he should not still be able to enter unquestioned this late.
+  visual_proof: Wide shot of the empty basement vault at night, Ren's badge scanner glowing green for
+    entry.
+  information_delta: Reader learns the story has escalated to a location where Ren's access itself is
+    already a quiet red flag.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_002
+  page_id: ep_005_p01
+  story_function: badge_clearance_unquestioned_yet
+  story_move: The badge panel's late timestamp makes explicit how far outside normal hours Ren's access
+    now falls, without anyone yet having flagged it.
+  visual_proof: Close insert on the badge authentication panel showing a timestamp well past midnight.
+  information_delta: Reader gets a precise, undeniable marker of how deep into the night this access
+    goes.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_003
+  page_id: ep_005_p01
+  story_function: flashlight_search_through_stacks
+  story_move: Ren searches the archive stacks by flashlight, establishing the vault's physical texture
+    as a new environment for the compulsion to operate in.
+  visual_proof: Wide shot of rows of stacked folders lit by a handheld flashlight beam catching dust in
+    the air.
+  information_delta: Reader gets the concrete sensory texture of the vault before any specific object is
+    found.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_004
+  page_id: ep_005_p01
+  story_function: target_folder_pulled
+  story_move: Ren finds and pulls the specific old personnel folder matching the anomaly's era, a
+    deliberate escalation of his own investigation into physical archive material.
+  visual_proof: Close insert on Ren's hand pulling a folder from the stack, dust falling from its edge.
+  information_delta: Reader learns Ren has succeeded in locating exactly what he came for.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_005
+  page_id: ep_005_p01
+  story_function: justification_loop_named_internally
+  story_move: Ren's internal justification is shown as a repeating loop rather than a fresh thought,
+    revealing this rationalization has happened before tonight.
+  visual_proof: Insert on Ren's face in profile, flashlight underlighting, caption box overlapping the
+    frame.
+  information_delta: Reader learns this is a recurring self-talk pattern, not a one-time excuse.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_006
+  page_id: ep_005_p01
+  story_function: personal_fragment_found_in_records
+  story_move: Ren finds a fragment of the folder's contents that is more personal than professional,
+    deepening the entanglement between the case and his private life.
+  visual_proof: Close insert on a page fragment in the folder that visibly overlaps with Ren's personal
+    history, not just the flagged anomaly.
+  information_delta: Reader sees the vault has yielded something more intimate than the case alone
+    justifies searching for.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_007
+  page_id: ep_005_p01
+  story_function: environmental_pressure_isolation
+  story_move: The vault's depth and constant mechanical hum isolate Ren visually and sonically,
+    reinforcing the episode's pressure without any character present.
+  visual_proof: Wide shot emphasizing the vault's depth, shadows, and dust in silence, no figures
+    speaking.
+  information_delta: Reader feels the isolation of the setting itself as part of the episode's pressure.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_008
+  page_id: ep_005_p01
+  story_function: unauthorized_photograph_taken
+  story_move: Ren photographs the folder's pages with his phone, a clear and deliberate act of
+    unauthorized copying that cannot be walked back once done.
+  visual_proof: Close insert on Ren's phone camera capturing an open folder page, screen flash visible
+    in the dim vault.
+  information_delta: Reader receives the episode's clearest concrete rule violation, stated as action
+    with no ambiguity.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_009
+  page_id: ep_005_p01
+  story_function: half_second_hesitation_to_stop
+  story_move: Ren's hand pauses for a half-second after the photograph, marking a real branch point
+    where stopping was still possible.
+  visual_proof: Close insert on Ren's hand frozen mid-motion above the phone, folder still open beneath
+    it.
+  information_delta: Reader sees the moment restraint was genuinely available before the footsteps
+    arrive.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_010
+  page_id: ep_005_p01
+  story_function: footsteps_signal_a_witness
+  story_move: Footsteps elsewhere in the vault reveal Ren is not alone, ending page one on the threat of
+    discovery rather than resolution.
+  visual_proof: Wide shot of the dark stacks with Ren's head turning toward the sound of footsteps in
+    another row.
+  information_delta: Reader learns someone else is present in the vault at this hour, raising the
+    stakes into the page turn.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_011
+  page_id: ep_005_p02
+  story_function: vessel_direct_confrontation_entrance
+  story_move: The vessel Saeki emerges from the stacks, revealed to have her own reason for being here,
+    re-entering the story in its highest-stakes setting yet.
+  visual_proof: Medium shot of Saeki stepping out from between the shelves, unsurprised, meeting Ren's
+    eyes directly.
+  information_delta: Reader learns the footsteps belong to Saeki, not an outside threat, but her
+    presence still carries real confrontation weight.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_012
+  page_id: ep_005_p02
+  story_function: vessel_names_the_pattern_plainly
+  story_move: Saeki names Ren's behavior pattern in plain, direct language for the first time in the
+    series, delivered as an outside observation rather than a lecture or a diagnosis Ren speaks himself.
+  visual_proof: Medium two-shot of Saeki speaking levelly and directly to Ren, her posture calm but
+    unflinching.
+  information_delta: Reader hears the clearest external naming of the compulsion so far, from a
+    character who is not the protagonist's own unreliable narration.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_013
+  page_id: ep_005_p02
+  story_function: honest_silence_no_denial
+  story_move: Ren does not deny what Saeki has said, his silence itself functioning as confirmation.
+  visual_proof: Close on Ren standing still with the folder in hand, unable to meet Saeki's eyes.
+  information_delta: Reader sees Ren cannot argue with the accusation, a genuine crack in his usual
+    fluent deflection.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_014
+  page_id: ep_005_p02
+  story_function: honest_yes_no_behavior_change
+  story_move: Ren answers honestly and briefly, acknowledging the truth of Saeki's words without
+    changing his behavior, directly matching the strategy bank's honesty-without-change beat.
+  visual_proof: Close on Ren's face delivering a short, honest answer, folder still held rather than set
+    down.
+  information_delta: Reader learns acknowledgment alone does not yet translate into a changed choice at
+    this point in the arc.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_015
+  page_id: ep_005_p02
+  story_function: vessel_wordless_correction_gesture
+  story_move: Saeki responds not with more words but with a physical correction — taking the folder
+    gently and returning it to its shelf herself, staying true to the vessel's action-over-lecture
+    grammar.
+  visual_proof: Close on Saeki's hands taking the folder from Ren and sliding it back into its correct
+    place on the shelf.
+  information_delta: Reader sees the vessel's method escalate from gesture to direct physical
+    correction, without ever becoming a speech.
+  beat_role: teaching_recall
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_016
+  page_id: ep_005_p02
+  story_function: complicated_relief_and_resistance
+  story_move: Ren's face shows relief and resistance simultaneously, refusing to simplify the moment
+    into either gratitude or defiance.
+  visual_proof: Close on Ren's face holding two visibly conflicting expressions at once.
+  information_delta: Reader understands the emotional cost is genuinely mixed, not a clean turning
+    point.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_017
+  page_id: ep_005_p02
+  story_function: silent_ascent_together
+  story_move: Ren and Saeki climb back upstairs together in silence, the vault's hum fading behind them
+    as the scene transitions toward the episode's close.
+  visual_proof: Wide shot of the two figures ascending a stairwell together, no dialogue, the vault's
+    ambient hum diminishing.
+  information_delta: Reader senses a temporary truce between the two without any words confirming it.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_018
+  page_id: ep_005_p02
+  story_function: unresolved_cost_photo_kept
+  story_move: The episode closes on the unresolved cost — the folder was returned, but the unauthorized
+    photograph remains on Ren's phone, a concrete refusal to fully undo tonight's violation.
+  visual_proof: Close insert on Ren's phone still holding the photographed page in its camera roll.
+  information_delta: Reader learns the correction was only partial — Saeki fixed the shelf, not the
+    phone.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_019
+  page_id: ep_005_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_005.yaml
+notes: 'Episode 5 of 12 in arc 1 (''obsession seed''). Realizes strategy_05''s beat 4 (the vessel names
+  what the pattern is doing to Ren; he answers honestly and threads the next connection anyway) inside
+  the basement records vault from the strategy bank''s setting_pool. This is the arc''s clearest
+  professional-risk escalation — an unauthorized photograph, not just an unauthorized search — and the
+  first time the vessel names the compulsion pattern in plain language, carefully kept as an outside
+  observation rather than the protagonist''s own self-diagnosis, per the craft bible''s unreliable-narrator
+  convention (failure mode 1).'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'

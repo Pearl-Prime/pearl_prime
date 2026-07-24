@@ -67,6 +67,36 @@ PYTHONPATH=. python3 scripts/localization/build_14_locale_worklist.py \
 
 Adjust based on live coverage, blockers, and merge pressure.
 
+## Title/Subtitle Catalog Surface (separate from atoms — do not conflate)
+
+`config/source_of_truth/book_plans_<locale>/*.yaml` title/subtitle fields are a
+SEPARATE localization surface from `atoms/**/locales/<locale>/CANONICAL.txt`.
+They are NOT in the per-locale dispatch agents' edit scope above and should not
+be added to it — this is a small closed-vocabulary (~40-170 distinct strings per
+locale) mechanical substitution problem, not free-form translation, and is
+already served by its own tooling:
+
+- Detector (read-only): `scripts/localization/check_title_language_conformance.py`
+  — also wired as CI gate 44 (`scripts/ci/check_title_language_conformance.py`,
+  bootstrap mode) in `scripts/run_production_readiness_gates.py`.
+- Dictionaries (per-locale, native-verified): `config/localization/title_subtitle_dictionaries/<locale>.yaml`.
+- Applier (mechanical, idempotent, line-level): `scripts/localization/apply_title_subtitle_dictionary.py`
+  — use `--brand-prefix` + `--limit` to stay under the governance ≤180-files/PR cap.
+
+As of 2026-07-23: `de_DE, es_ES, es_US, fr_FR, hu_HU, it_IT, ja_JP, ko_KR` are
+0 non-conformant. `pt_BR, zh_CN, zh_HK, zh_SG, zh_TW` still have real gaps
+(~141k files combined) — but check current tracked-vs-untracked state before
+touching any zh_* locale (`git ls-tree -r origin/main --name-only -- <path> | wc -l`
+vs on-disk count): most zh_* content on disk is local-only scratch from a bulk
+generation pass, not yet committed, and those locales frequently have their own
+active dedicated translation-lane sessions in flight (check open PRs/branches
+for `zhtw-*` / `zh-cn-*` before dispatching here to avoid duplicate work).
+
+`description.long_description` / `keywords.primary` / `keywords.secondary` are
+blank stubs in EVERY locale INCLUDING en_US — this is an unauthored-content gap,
+not a translation gap. Do not dispatch translation work against these fields
+until an English source exists to translate from.
+
 ## Quality Gate
 
 Use `.claude/skills/translation-qa/SKILL.md` for every batch.

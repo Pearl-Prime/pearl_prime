@@ -1,0 +1,568 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_011
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_011.arc_storyboard.yaml
+title: '静寂のフリースロー——第十一話「音の奥にあるもの」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 11: The Thing Beneath the Sound'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_TW
+- zh_CN
+genre: sports_competition
+mode: teacher
+vessel: 力を抜かせるコーチ
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings,
+    team chats, finance/time pressure, and physical cost without letting analytics
+    replace the body.
+  catalyst:
+    id: the_free_throw_with_the_building_watching
+    logline: In the decisive loser's-bracket rematch, tied with seconds left, Hayato
+      is fouled and sent to the line in front of the tournament's largest crowd
+      yet, and the only sound he is allowed to choose to hear is the one already
+      in his hands.
+    ordinary_world_objects:
+    - free_throw_line
+    - gymnasium_crowd_noise
+    - scoreboard_clock
+    - single_basketball
+    genre_transmutation: The free-throw line becomes the literal externalization
+      of nine episodes of scattered attention narrowing to one object; the crowd's
+      roar becomes weather, not the enemy.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+    - buzzer_beater_as_the_turn
+    - win_equals_healed
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint.
+    Market=ja_JP; audience=gen_z. Use catalyst 'the_free_throw_with_the_building_watching'.
+    Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP.
+    Use concrete objects and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公——東雲商事バスケットボール部、元高校ポイントガード
+  visual_anchor: 試合中は指がボールの縫い目を確かめる癖／リストバンドの内側に折り畳んだレシートを忍ばせている
+- id: aya
+  name: 美濃部 彩
+  name_romaji: Minobe Aya
+  age: 25
+  role: 事実上のキャプテン兼マネージャー、隼人の職場の先輩
+  visual_anchor: ベンチから声を飛ばす実務的な口調、感情より段取りを優先する立ち姿
+- id: endou
+  name: 遠藤 岳
+  name_romaji: Endou Gaku
+  age: 32
+  role: チームのエース、勝負どころで体を張るベテラン
+  visual_anchor: 汗だくのユニフォーム、四回戦を戦い抜いた脚の重さが姿勢に出ている
+- id: kuroda
+  name: 黒田
+  name_romaji: Kuroda
+  age: 60s
+  role: 会社の設備管理人、この試合には現れない——不在そのものが継続性の証
+  visual_anchor: この話には登場しない
+- id: kiryuu
+  name: 桐生 蓮
+  name_romaji: Kiryuu Ren
+  age: 24
+  role: 桐生製薬キャプテン、観客席から静かに次の対戦相手を見定めている
+  visual_anchor: 腕を組んで微動だにしない立ち姿、誰にも気づかれない位置取り
+- id: miura
+  name: 三浦
+  name_romaji: Miura
+  age: 20s
+  role: 大栄物産キャプテン——一回戦で東雲を敗退に追い込んだチームのエース
+  visual_anchor: 声を落として相手の心理を突く、余裕を崩さない立ち姿
+
+scene_palette:
+  primary: gymnasium hardwood amber under competition lighting + scoreboard red
+  secondary: crowd-blur screentone gray, opposing-team banner orange
+  accent: the folded receipt's pale paper against the dark wristband — the episode's
+    one recurring private object
+
+pages:
+- page_id: ep_011_p01
+  panels:
+  - panel_id: ep011_001
+    scene: |
+      区立総合体育館。東京実業団バスケットボールリーグ、敗者復活戦四回戦。
+      第四クォーター残り47秒、58対58。スタンドはこの大会いちばんの人数で
+      埋まっている——大栄物産側の応援団、通路にまであふれる立ち見客、そして
+      東雲商事の同僚たちが休憩時間に即席で作った手書きの横断幕。ワイドショット。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: この体育館が、これほど人で埋まったことはなかった。すべてが、公然と晒されている。
+      en_US: The gym has never held this many people. Everything here is public.
+      zh_TW: '[zh_TW] The gym has never held this many people. Everything here is public.'
+      zh_CN: '[zh_CN] The gym has never held this many people. Everything here is public.'
+    silence_confirmed: false
+  - panel_id: ep011_002
+    scene: |
+      隼人がドライブ、大栄物産のディフェンダーと接触。鋭い笛。シューティング
+      ファウルのハンドシグナル。ボールが彼の足元でひとり転がって止まる。
+    beat_type: spatial
+    sfx_by_locale:
+      ja_JP: ["ピーッ"]
+      en_US: ["shrrEEE"]
+    narrator_caption_by_locale:
+      ja_JP: 笛が鳴った瞬間、時計だけが止まる。ボールは彼の足元で、ひとり止まっていた。
+      en_US: The whistle cuts through. The clock stops — and so does everything except
+        the basketball, rolling to a stop at his feet.
+      zh_TW: '[zh_TW] The whistle cuts through. The clock stops — and so does everything
+        except the basketball, rolling to a stop at his feet.'
+      zh_CN: '[zh_CN] The whistle cuts through. The clock stops — and so does everything
+        except the basketball, rolling to a stop at his feet.'
+  - panel_id: ep011_003
+    scene: |
+      審判のシューティングファウルの合図。歓声が津波のように押し寄せる——
+      大栄側の抗議、東雲側の安堵、名前を呼ぶ声。全部が同時に来る。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 歓声が壁になって押し寄せる。ライン一本に、大会ぜんぶの重さが乗る。
+      en_US: The roar arrives like a wall of noise. The pressure of the whole tournament
+        lands on one line.
+      zh_TW: '[zh_TW] The roar arrives like a wall of noise. The pressure of the whole
+        tournament lands on one line.'
+      zh_CN: '[zh_CN] The roar arrives like a wall of noise. The pressure of the whole
+        tournament lands on one line.'
+  - panel_id: ep011_004
+    scene: |
+      フリースローラインへ歩く、その一歩の途中——一瞬、記憶の中の体育館の光が
+      ちらつく。高校時代、同じ角度から差し込んでいた光。ボールを奪われた、
+      あの日の光。すぐに消える。キャプションも台詞もなし、視覚だけの一コマ。
+    beat_type: micro
+    intent: unnarrated visual echo of the high-school turnover — flicker only, never
+      captioned or explained
+    silence_confirmed: true
+  - panel_id: ep011_005
+    scene: |
+      レーン際、大栄物産キャプテン・三浦が隣に並ぶ。声を落として。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: miura
+      text_by_locale:
+        ja_JP: 気にすんな。外せ、去年みたいに。
+        en_US: 'Relax. Miss it — like last year.'
+        zh_TW: '[zh_TW] Relax. Miss it — like last year.'
+        zh_CN: '[zh_CN] Relax. Miss it — like last year.'
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    narrator_caption_by_locale:
+      ja_JP: 去年のあのプレーを、相手のキャプテンも知っている。
+      en_US: His rival's captain knows exactly which play he means.
+      zh_TW: '[zh_TW] His rival''s captain knows exactly which play he means.'
+      zh_CN: '[zh_CN] His rival''s captain knows exactly which play he means.'
+  - panel_id: ep011_006
+    scene: |
+      隼人、ラインに立つ。目が泳ぐ——スコアボード、観客席の紙の横断幕、
+      審判が差し出すボール、また観客席。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: 全部が同じ大きさで鳴ってる。時計も、声も、去年の笛も。
+        en_US: Everything is ringing at the same volume — the clock, the crowd, last
+          year's whistle.
+        zh_TW: '[zh_TW] Everything is ringing at the same volume — the clock, the
+          crowd, last year''s whistle.'
+        zh_CN: '[zh_CN] Everything is ringing at the same volume — the clock, the
+          crowd, last year''s whistle.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep011_007
+    scene: |
+      ボールをつく。ワン、ツー——あれ、三回だったか。自動でできるはずの
+      ルーティンが、急に頼りなくなる。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["タン、タン"]
+      en_US: ["thmp, thmp"]
+    silence_confirmed: true
+
+- page_id: ep_011_p02
+  panels:
+  - panel_id: ep011_008
+    scene: |
+      急いだフォームでシュートが上がる。リングの手前に強く当たって跳ね返る。外れた。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["ガンッ"]
+      en_US: ["clang"]
+    narrator_caption_by_locale:
+      ja_JP: 急いだ角度、急いだリズム。今の一本は、騒音の勝ちだった。
+      en_US: Wrong angle, wrong rhythm. That shot belonged to the noise.
+      zh_TW: '[zh_TW] Wrong angle, wrong rhythm. That shot belonged to the noise.'
+      zh_CN: '[zh_CN] Wrong angle, wrong rhythm. That shot belonged to the noise.'
+  - panel_id: ep011_009
+    scene: |
+      遠藤が顔をしかめる。彩がベンチ際から声を飛ばす、実務的に、責めずに。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: まだ一本ある。落ち着いて、それだけ。
+        en_US: 'One more. We need to make this — that''s all.'
+        zh_TW: '[zh_TW] One more. We need to make this — that''s all.'
+        zh_CN: '[zh_CN] One more. We need to make this — that''s all.'
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep011_010
+    scene: |
+      隼人の手が、リストバンドの内側に触れる。折りたたまれた、コンビニの
+      レシート。誰も知らない、あの夜からの習慣。
+    beat_type: micro
+    intent: private continuity object established — the ep_010 conbini receipt, now
+      carried as a physical habit
+    narrator_caption_by_locale:
+      ja_JP: リストバンドの下、折られたレシートが指先に触れる。誰にも見られていない。
+      en_US: Under the wristband, folded small, the convenience-store receipt from
+        that night finds his fingers. No one in the gym can see it.
+      zh_TW: '[zh_TW] Under the wristband, folded small, the convenience-store receipt
+        from that night finds his fingers. No one in the gym can see it.'
+      zh_CN: '[zh_CN] Under the wristband, folded small, the convenience-store receipt
+        from that night finds his fingers. No one in the gym can see it.'
+  - panel_id: ep011_011
+    scene: |
+      二本目、ラインに戻る。隼人、顎に力を込める。歓声を意志の力で消そうとする。
+    beat_type: micro
+    intent: failed forcing attempt — willing the noise away instead of choosing what
+      to hear
+    narrator_caption_by_locale:
+      ja_JP: 力で黙らせようとするほど、音は近くなる。
+      en_US: He clamps down instead of breathing — willing the crowd to vanish. It
+        only gets louder.
+      zh_TW: '[zh_TW] He clamps down instead of breathing — willing the crowd to
+        vanish. It only gets louder.'
+      zh_CN: '[zh_CN] He clamps down instead of breathing — willing the crowd to
+        vanish. It only gets louder.'
+  - panel_id: ep011_012
+    scene: |
+      観客席がよりカオティックに描かれる——横断幕、スマホのフラッシュ、
+      重なり合う応援の声。隼人の耳の中でそれらが渦を巻く。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_013
+    scene: |
+      指先が、もう一度レシートの折り目をなぞる。今度は、意識してそこに触れる。
+      顎の力がわずかに緩む。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_014
+    scene: |
+      目を伏せる。リングでも観客席でもなく、両手の中のボール——革の縫い目、
+      指の跡。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: ボールだけ。
+        en_US: Just the ball.
+        zh_TW: '[zh_TW] Just the ball.'
+        zh_CN: '[zh_CN] Just the ball.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep011_015
+    scene: |
+      一度だけ、ボールをつく。床に当たる音だけが、はっきり聞こえる。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["タン"]
+      en_US: ["bok."]
+    silence_confirmed: true
+
+- page_id: ep_011_p03
+  panels:
+  - panel_id: ep011_016
+    scene: |
+      両手とボールだけのクローズアップ。時計も、観客も、スコアボードも、
+      コマの外にある。音のない一コマ。
+    beat_type: micro
+    intent: THE CARRIER BEAT — internal stillness, framed to exclude clock/crowd/
+      scoreboard entirely; the psychological turn lands here, before the shot and
+      independent of its outcome
+    silence_confirmed: true
+  - panel_id: ep011_017
+    scene: |
+      もう一コマ分、静止が続く。息が一度、ゆっくり吐かれる。歓声はまだ
+      そこにある——ただ、遠い。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_018
+    scene: |
+      手首だけのクローズアップ。力みのない、まっすぐな送り出し。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_019
+    scene: |
+      ボールが弧を描く。小さなコマ、一瞬だけ。長く見せない。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["シュン"]
+      en_US: ["fwip"]
+    silence_confirmed: true
+  - panel_id: ep011_020
+    scene: |
+      ネットが揺れる音。ボールが落ちきる前に、隼人はもう体の向きを
+      ディフェンスへ変え始めている。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["シュッ"]
+      en_US: ["shff"]
+    narrator_caption_by_locale:
+      ja_JP: 入ったかどうかを見届ける前に、体はもう次へ動いていた。
+      en_US: Before the ball even finished falling, his body had already turned
+        toward what came next.
+      zh_TW: '[zh_TW] Before the ball even finished falling, his body had already
+        turned toward what came next.'
+      zh_CN: '[zh_CN] Before the ball even finished falling, his body had already
+        turned toward what came next.'
+  - panel_id: ep011_021
+    scene: |
+      プレー再開。歓声は元の音量に戻る——だが今は、天気のようなものだ。
+      パス、スライド、スクリーン。一つずつ、順番に。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 音は元どおり大きい。ただ、彼はもう、それに追われていない。
+      en_US: The noise is back to full volume. He is not chasing it anymore — pass,
+        then slide, then screen, one thing at a time, team around him.
+      zh_TW: '[zh_TW] The noise is back to full volume. He is not chasing it anymore
+        — pass, then slide, then screen, one thing at a time, team around him.'
+      zh_CN: '[zh_CN] The noise is back to full volume. He is not chasing it anymore
+        — pass, then slide, then screen, one thing at a time, team around him.'
+  - panel_id: ep011_022
+    scene: |
+      残り12秒。大栄物産、三浦にボールを集める。東雲はゾーンを固める。
+      ボールは隼人の手から離れている——この十二秒を決めるのは、彼じゃない。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: この十二秒を決めるのは、隼人ではない。
+      en_US: These last twelve seconds do not belong to him.
+      zh_TW: '[zh_TW] These last twelve seconds do not belong to him.'
+      zh_CN: '[zh_CN] These last twelve seconds do not belong to him.'
+  - panel_id: ep011_023
+    scene: |
+      遠藤、第四クォーターで脚がほとんど売り切れている。それでも三浦の前に
+      体を入れる。汗が飛ぶ。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: こっちに来い。
+        en_US: Give it here.
+        zh_TW: '[zh_TW] Give it here.'
+        zh_CN: '[zh_CN] Give it here.'
+      intensity: gruff
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    narrator_caption_by_locale:
+      ja_JP: 脚はもう限界に近い。それでも一歩、体を入れる。
+      en_US: His legs are nearly done. He plants his body in front of the shot
+        anyway.
+      zh_TW: '[zh_TW] His legs are nearly done. He plants his body in front of the
+        shot anyway.'
+      zh_CN: '[zh_CN] His legs are nearly done. He plants his body in front of the
+        shot anyway.'
+
+- page_id: ep_011_p04
+  panels:
+  - panel_id: ep011_024
+    scene: |
+      三浦のシュート、遠藤の腕に強く当たって逸れる。ルーズボール。遠藤が
+      床に飛び込み、抱え込む。ブザーが鳴る。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: ["ブー"]
+      en_US: ["BRRAAP"]
+    narrator_caption_by_locale:
+      ja_JP: 決めたのはシュートじゃない。奪ったボールだった。
+      en_US: It wasn't a basket that decided it. It was the ball he refused to let
+        go.
+      zh_TW: '[zh_TW] It wasn''t a basket that decided it. It was the ball he refused
+        to let go.'
+      zh_CN: '[zh_CN] It wasn''t a basket that decided it. It was the ball he refused
+        to let go.'
+  - panel_id: ep011_025
+    scene: |
+      スコアボード：東雲商事59、大栄物産58。誰も飛び跳ねない。膝に手を
+      ついたまま動けない者、床にそのまま座り込む者。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 一点差。祝うには、まだ息が足りなかった。
+      en_US: One point. No one has enough breath left to celebrate yet.
+      zh_TW: '[zh_TW] One point. No one has enough breath left to celebrate yet.'
+      zh_CN: '[zh_CN] One point. No one has enough breath left to celebrate yet.'
+  - panel_id: ep011_026
+    scene: |
+      整列、握手。大栄物産の選手たちも、東雲の選手たちも、言葉少なに、
+      目だけで認め合う。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep011_027
+    scene: |
+      客席の奥、人がまばらになっていく中、桐生蓮が一人、腕を組んで
+      立っている。誰も気づいていない。隼人だけが、一瞬その視線に気づく。
+    beat_type: micro
+    intent: rival seed for ep_012 — background cameo only, unaddressed and
+      unresolved this episode
+    narrator_caption_by_locale:
+      ja_JP: 見ていた者が、ひとりいた。
+      en_US: Someone had been watching. Only one person noticed.
+      zh_TW: '[zh_TW] Someone had been watching. Only one person noticed.'
+      zh_CN: '[zh_CN] Someone had been watching. Only one person noticed.'
+  - panel_id: ep011_028
+    scene: |
+      ベンチ、靴紐をほどく隼人。誰も見ていない場所で、リストバンドから
+      レシートを少しだけ引き出し、確かめて、また戻す。
+    beat_type: micro
+    intent: private object closing beat — habit, not trophy; echoes panel 010
+    silence_confirmed: true
+  - panel_id: ep011_029
+    scene: |
+      体育館が空いていく。フロアに、置き忘れられたようにボールが一つ。
+      スコアボードにはまだ、59対58の数字が灯っている。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: スコアボードの数字は変わった。手の中のボールの重さは、変わらなかった。
+      en_US: The number on the scoreboard changed. The weight of the ball in his
+        hands did not.
+      zh_TW: '[zh_TW] The number on the scoreboard changed. The weight of the ball
+        in his hands did not.'
+      zh_CN: '[zh_CN] The number on the scoreboard changed. The weight of the ball
+        in his hands did not.'
+
+notes:
+  arc_position: |
+    Episode 11 of 12 — arc 1's decisive rematch, and the live-game payoff of the
+    "One Ball at the Line" throughline seeded in ep_003 (Kuroda's wordless one-bounce
+    lesson) and internalized in ep_010 (the conbini receipt). Shinonome faces the
+    exact team, Daiei Bussan, that ended their first qualifier in ep_007 — this is
+    the rematch the ep_009 group-chat doubt was about. Kuroda does not appear on the
+    page this episode; his absence is deliberate, since the technique now has to work
+    without him standing behind it.
+  pacing_vs_prior: |
+    29 panels across 4 pages — the arc's longest and most action-dense episode,
+    matching the sports_competition craft bible's climactic-match chapter allowance
+    (24-28pp equivalent density). The carrier beat (panels 016-017) is held on its
+    own silent macro framing before the shot is shown at all, and the shot's result
+    (panel 020) is deliberately undersold relative to the stillness that preceded it.
+  continuity_callbacks: |
+    - The one-bounce device (panel 015) is the same physical action Kuroda first
+      demonstrated wordlessly in ep_003, now self-administered without him present.
+    - The conbini receipt (panels 010, 013, 028) is the concrete object from ep_010's
+      wordless lesson, now carried as a private in-game habit — established, recalled
+      under pressure, and closed out at the end, never explained in dialogue.
+    - Daiei Bussan and their captain Miura are the direct antagonist callback to the
+      ep_007 loss; the taunt in panel 005 references that game specifically.
+    - Kiryuu Ren's background cameo (panel 027) is a silent seed for ep_012's bracket
+      reveal — unaddressed, unresolved, not commented on by any character.
+    - The high-school turnover flashback (panel 004) is visual-only, matching the
+      series' established convention (ep_001) of never narrating that memory.
+  doctrinal_anchor_vessel_handling: |
+    Per the strategy bank's anti_pattern_rules for sports_competition: (1) no coach
+    or mentor explains the lesson aloud this episode — Kuroda is absent entirely, and
+    Aya's and Endou's lines are practical/tactical, not interpretive; (2) the
+    scoreboard does not resolve the arc — the carrier beat (panels 016-017) is framed
+    to exclude the clock and scoreboard entirely, the shot's result is undersold
+    (panel 020), and the actual game-deciding action is reassigned to Endou's
+    defensive stop (panels 023-024), not to any shot Hayato takes. The final margin
+    is a single point (59-58), and the team's exhaustion (panel 025) rather than
+    celebration is what the aftermath dwells on. Nothing in the episode claims Hayato
+    is fixed, cured, or done growing — acceptance_layer stays authored_candidate.
+  translation_handoff: |
+    text_by_locale dicts populated for ja_JP (authoritative, native-authored) and
+    en_US (real operator-facing gloss, not a literal translation). zh_TW/zh_CN carry
+    bracket placeholders per the established convention, pending the dedicated
+    localization lane.
+
+craft_notes: 'VESSEL: 力を抜かせるコーチ（the coach of the unclenched）— config/manga/manga_mode_vessels.yaml
+  sports_competition.teacher より。教師は物語内で決して名指ししない（teacher_id=''brand_teacher_unresolved''
+  はメタデータのみ）。この話ではKurodaは画面に登場しない——教えが彼なしで機能するかを試す話だから。
+
+  GENRE BIBLE: docs/research/manga_craft/sports_competition.md
+
+  STRATEGY BANK: config/source_of_truth/manga_story_strategies/sports_competition_strategies.yaml
+  strategy_01「The One Ball at the Line」の9ビート構造をライブの試合として実演。carrier beatは
+  シュートの結果より先に、そして結果と無関係に置かれている（パネル016-017）。
+
+  ANTI-PATTERN COMPLIANCE: 勝敗はシュートではなく遠藤のディフェンスで決まる。最終スコアは1点差。
+  祝勝シーンなし。Kurodaの説教なし。「治った」と読める描写は意図的に排除。
+
+  ACCEPTANCE: authored_candidate — bestseller / proven_at_bar ではない（M6基準未達）。'

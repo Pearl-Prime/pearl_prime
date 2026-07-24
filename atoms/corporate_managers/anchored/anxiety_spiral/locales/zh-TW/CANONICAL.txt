@@ -1,15 +1,241 @@
-I have processed and stored the **Anxiety Spiral** narrative arc for corporate managers.
 
-This dataset maps the progression of high-performing executives (David, Sarah, Kevin, Anthony, Tanya) through four distinct stages of psychological response to professional setbacks:
 
-1.  **RECOGNITION (Pre-awareness):** The immediate, automatic cognitive distortion where a minor external trigger (a bug, a metric drop, feedback) is catastrophized into an identity threat (incompetence, impending firing).
-2.  **MECHANISM_PROOF (Destabilization):** The reinforcement phase where the individual isolates themselves, ignores reality, and actively seeks "evidence" from past events to confirm their negative self-narrative.
-3.  **TURNING_POINT (Experimentation):** The intervention phase where the spiral is interrupted by grounding techniques: naming the spiral, seeking actual data, or engaging in direct communication.
-4.  **EMBODIMENT (Self-claim):** The integrated state where the new behavior (fact-checking, separating identity from output) becomes the default nervous system response, reducing internal cost and intensity.
+## RECOGNITION v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+大衛的一位工程師犯了一個錯，這個小錯製造出一個小bug，這個小bug在系統裡蔓延開來。大衛的胃立刻墜入災難性思考。一個小錯誤，變成了他招募不當的證據；招募不當，變成了他缺乏判斷力的證據；缺乏判斷力，變成了他不該當副總裁的證據。這個螺旋不斷加速，得知這個bug才過兩分鐘，他已經在質疑自己最根本的能力了。他的胸口發緊，這個螺旋，比他查證事實的能力還要快。
+---
 
-**How would you like to proceed?**
+## RECOGNITION v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+莎拉的團隊這一季的投入度分數下降了，這個分數立刻觸發了一場螺旋。投入度降低，代表士氣降低；士氣降低，代表大家正在看外面的機會；看外面的機會，代表流動率會上升；流動率上升，代表莎拉沒能打造一個好的職場；沒能打造好職場，代表莎拉這個管理者失敗了。這個螺旋，幾分鐘內就完成了。她的雙手發冷。投入度在滿分一百分裡只掉了兩分，這個事實並沒有讓螺旋慢下來，這個螺旋有它自己的動能。
+---
 
-*   **Generate New Variants:** Create new scenarios for different roles (e.g., Individual Contributors, Founders, Creative Directors) or different triggers (e.g., public speaking errors, missed promotions).
-*   **Analyze Patterns:** Extract common cognitive distortions or somatic markers across the five characters.
-*   **Develop Intervention Strategies:** Expand on the "Turning Point" mechanics to create a toolkit for managers.
-*   **Format Conversion:** Convert these story atoms into a different format (JSON, CSV, or a structured training module).
+## RECOGNITION v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+凱文收到回饋，說他一位直屬部屬表現不佳。這則回饋，啟動了一連串的連鎖反應。表現不佳，代表凱文沒有設定清楚的期望；期望不清楚，代表凱文沒有提供良好的領導；領導不良，代表他整個團隊大概都在掙扎；團隊在掙扎，代表他的組織正在失敗；組織失敗，代表凱文正在失敗。等他這場螺旋跑完時，他已經確信整個營運都壞了，而這都是他的錯。他的胃感覺空洞，這場連鎖反應，發生在「聽到回饋」和「吸一口氣」之間的空隙裡。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v04.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+安東尼漏掉了一項預測數字，這個小小的疏漏，觸發了一場螺旋。如果他漏了這個，他可能也漏了別的；漏東西，代表這份預測不可靠；預測不可靠，代表董事會無法信任他；無法信任他，代表他的工作岌岌可危。到了下午結束時，安東尼已經從一次小小的預測調整，螺旋到了失業。他的下顎緊到咬不動東西。這個螺旋是自動的，它不需要證據，它只需要一個觸發點。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+譚雅推出的一場行銷活動表現不如預期。這個表現不佳，觸發了一場螺旋。表現不佳，代表策略是錯的；策略錯了，代表譚雅的策略思維有缺陷；思維有缺陷，代表她不該當副總裁；不該當副總裁，代表組織已經知道了，大概已經在規劃替換她了。到了這場螺旋結束時，她已經確信自己正在被取代，卻連分析活動為什麼表現不佳都還沒做完。她的肩膀緊繃，這場螺旋，有它自己的敘事動能。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+大衛沒有停下這場螺旋，他餵養了它。他開始重新檢視自己的其他招募人選，有些人現在看起來沒那麼出色了。他開始評估自己的招募標準，也許不夠嚴謹。他開始懷疑自己是不是該念別的學校，該去別家公司工作，該有完全不同的判斷力。這場螺旋已經吞噬了原本的那個bug——bug已經解決了，但螺旋仍在繼續，因為這場螺旋，根本無關那個bug，它關乎大衛心底那份「自己不夠格」的根本恐懼。那個bug，只是讓他終於承認這份恐懼的許可證。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+莎拉開始重新檢視自己的管理方式。投入度分數下降了，但莎拉開始透過「失敗」這個濾鏡，重新詮釋一切。她想起自己傳達壞消息的那些時刻，想起自己不得不推遲某人專案時程的那一次，想起自己沒能替一位應得的人爭取到加薪。這場螺旋，如今把她過去所有的決定，都當成她是個失敗管理者的證據。等她這場螺旋跑完時，那兩分的投入度下滑，已經變成了她能力不足的全面證據。她沒有跟團隊談這些分數，她獨自坐在這場螺旋裡。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+凱文沒有處理那位表現不佳的員工，而是坐進了這場螺旋裡。他重新檢視自己整套的領導方式，想起自己晉升過的人，想起自己申請過的預算，想起自己可能太寬容或太嚴厲的那些時刻。一個人的表現不佳，變成了對他整個領導力的一場公投。他透過生產證據來餵養這場螺旋，而且是獨自進行的。他沒有問團隊實際發生了什麼，他沒有問那位表現不佳的人正在經歷什麼，他只是螺旋著，收集著自己失敗的證據。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/mechanism_proof/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+安東尼沒有去查核「這個小疏漏代表系統性預測失敗」這個假設，他餵養了這場螺旋。他開始重新檢視自己對董事會說過的每一句話，開始尋找自己可能出錯的其他地方，開始假設董事會已經在評估他是否適任。他對這一切都沒有證據，他是透過螺旋自己生產出這些證據的。到下一次董事會會議來臨時，他已經說服了自己：他正在失敗。他的神經系統，把儲備的能量都燒在了一場與現實不符的螺旋上。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+譚雅沒有分析這場活動，她圍繞著這場活動螺旋思考。這次表現不佳，變成了她策略思維有缺陷、她的領導力受到質疑、她在這個職位上的任期岌岌可危的證據。她沒有去看活動的數據，她看的是這次表現不佳對她這個人代表著什麼。這場螺旋，把一個分析問題，變成了一個身分問題。等她終於強迫自己去看活動的實際指標時，她已經筋疲力盡了。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+大衛注意到自己在螺旋，於是打斷了它。「這是螺旋式思考，」他對自己說，「一個bug就是一個bug，它不能證明我的招募判斷力有問題。」他強迫自己去看實際的事實。他的團隊已經交出三年扎實的工作成果，在三年扎實成果的脈絡下，一個bug看起來就是它本來的樣子：一個bug。他的胸口稍稍鬆開了。命名這場螺旋，就打斷了它。他把這個bug當成一個技術問題來處理，而不是對他能力的公投。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+莎拉靠取得數據，停下了這場螺旋。她把投入度分數放進脈絡裡來看，那兩分的下滑，在正常的波動範圍內，有些團隊上升了，有些下降了，沒有任何跡象顯示系統性的失敗。當莎拉用事實打斷這場螺旋時，它就停止了。她跟團隊談了這些分數，團隊說他們感覺還好。這場螺旋瓦解了，因為它建立在假設上，而不是現實上。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+凱文找那位表現不佳的員工談了談。對方正在處理一件私人的事，是暫時的，他們並沒有變得不投入，他們只是在應付一件困難的事。當凱文取得資訊時，這場螺旋就停止了。表現不佳，不是系統性失敗的證據，那是一個人正在應付一種處境。凱文能真正提供幫助，而不是螺旋思考。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+安東尼靠檢視那個預測疏漏，停下了這場螺旋。那個疏漏，只是銷售預測裡的一個四捨五入的差異，不是系統性的問題，他的方法論是健全的，他的思維是扎實的。那兩分的落差，並不會改變策略。當安東尼打斷這場螺旋、真正去看數據，而不是從恐懼中推演時，它就停止了。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+譚雅分析了這場活動，表現不佳有明確的原因：時機不對、受眾定位轉移了、競爭態勢改變了，這些都與她有缺陷的策略思維無關。當譚雅把「活動分析」和「身分分析」分開時，這場螺旋就停止了。她是一個策略思考者，做了一個沒有奏效的活動選擇，那就只是管理工作，不是能力不足的證據。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+大衛現在會注意到螺旋開始的時刻，他及早抓住它，用事實打斷它。他的神經系統依然會啟動，但他有了一種能在螺旋吞噬他能力感之前打斷它的練習。他的胸口保持更開闊，因為他不再餵養那個災難敘事。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+莎拉在螺旋之前先取得數據。這種「先查核事實」的練習，讓螺旋在開始之前就停止了。她的胃更加平靜，因為她不再習慣把小小的數字變成對身分的威脅。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+凱文與人對話，而不是圍著他們螺旋思考。這些對話，在螺旋到達終點之前就打斷了它。他管理的是真實的處境，而不是災難的敘事。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+安東尼在感覺到螺旋開始時，就去檢視數據。這種「去看實際發生了什麼」的練習，能徹底攔住這場螺旋。他的神經系統啟動程度較低，因為這場螺旋，被早早地、時常地打斷了。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+譚雅把活動分析和身分分析分開來看。一次活動的失利，是資料，跟她本人無關。她分析數據，然後繼續前進。這場螺旋停止了，因為她拒絕把外部的問題，變成內在的身分威脅。
+---

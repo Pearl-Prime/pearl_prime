@@ -1,0 +1,12 @@
+# NAMED FOLLOW-UP SET — re-audit these AFTER PR #5682 merges.
+# Measured at PR #5682 head 5666b796938ba0f5d80e0287b01e7d9294244240.
+# #5682 owns 20 zh-TW paths and script-fixes 7 of them. These 6 are touched
+# by #5682 for PLACEHOLDER-class reasons and REMAIN Simplified after it merges.
+# They are OWNED_BY_5682_DO_NOT_TOUCH while #5682 is open.
+severity	distinct_simplified_chars	total_simplified_occurrences	simplified_chars_found	zh_tw_file
+PARTIAL	4	6	记录双变	atoms/gen_z_professionals/burnout/INTEGRATION/locales/zh-TW/CANONICAL.txt
+PARTIAL	3	3	个这双	atoms/gen_z_professionals/financial_anxiety/INTEGRATION/locales/zh-TW/CANONICAL.txt
+SPOT_LEAK	1	1	财	atoms/gen_x_sandwich/financial_anxiety/INTEGRATION/locales/zh-TW/CANONICAL.txt
+SPOT_LEAK	2	2	续来	atoms/healthcare_rns/burnout/INTEGRATION/locales/zh-TW/CANONICAL.txt
+SPOT_LEAK	2	2	这个	atoms/healthcare_rns/financial_anxiety/INTEGRATION/locales/zh-TW/CANONICAL.txt
+SPOT_LEAK	2	2	个双	atoms/working_parents/burnout/INTEGRATION/locales/zh-TW/CANONICAL.txt

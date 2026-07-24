@@ -1,0 +1,520 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_010
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_010.arc_storyboard.yaml
+title: '二十二時十四分——第十話'
+title_en_gloss: '22:14 — Episode 10'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: '力を抜かせるコーチ（the coach of the unclenched）'
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings,
+    team chats, finance/time pressure, and physical cost without letting analytics
+    replace the body.
+  catalyst:
+    id: the_conbini_receipt_after_practice
+    logline: Kuroda and Hayato stop at a conbini after a late optional practice,
+      and a receipt timestamped 22:14 becomes the small, concrete object Kuroda
+      uses to finally put language -- three words at most -- to what he's been
+      drilling into Hayato for nine episodes.
+    ordinary_world_objects:
+    - conbini_receipt
+    - warm_canned_drink
+    - late_night_train_schedule
+    - onigiri_wrapper
+    genre_transmutation: An ordinary convenience-store receipt becomes a timestamp
+      for the exact moment the lesson lands; a canned drink shared in near-silence
+      becomes the delivery vessel for wisdom that is never spoken as a lecture.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint.
+    Market=ja_JP; audience=gen_z. Use catalyst 'the_conbini_receipt_after_practice'.
+    Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP.
+    Use concrete objects and social pressure on page one; do not name-drop trends.
+
+main_characters:
+  - id: hayato
+    name: 神崎 隼人
+    name_romaji: Kanzaki Hayato
+    age: 23
+    role: 主人公。東雲商事の新入社員、元高校バスケ部ポイントガード
+    visual_anchor: 半分崩れたワイシャツの襟、こなれていないネクタイ、机の引き出しにしまった古いスニーカー
+  - id: kuroda
+    name: 黒田
+    name_romaji: Kuroda
+    age: 60代
+    role: 器（メンター）。会社の設備管理員、元セミプロ選手。三語以内でしか話さない
+    visual_anchor: 作業着の上に着た薄いジャンパー、いつも持っている箒、静かにボールラックを整える手
+  - id: aya
+    name: 美濃部 彩
+    name_romaji: Minobe Aya
+    age: 25
+    role: 隼人の職場の先輩、チームの実質的キャプテン
+    visual_anchor: 束ねた髪、練習用クリップボード
+  - id: endou
+    name: 遠藤 岳
+    name_romaji: Endou Gaku
+    age: 30代
+    role: チームのエース。ベテラン
+    visual_anchor: がっしりした体格、汗で色の変わったTシャツ
+
+scene_palette:
+  primary: 体育館の冷たい蛍光灯と、コンビニの明るい白色灯の対比
+  secondary: 夜の街灯のオレンジ、ホームの青白い光
+  accent: レシートの白と、22:14という数字だけに残る視線
+  after_practice_palette: 試合のない話数として、コート上の派手な陰影を避け、静かな夜のトーンで統一する
+
+pages:
+  - page_id: ep_010_p01
+    panels:
+      - panel_id: ep010_001
+        scene: |
+          クローズ・インサート。指に巻かれたテーピング。机の引き出しから出した、履き古したスニーカー。
+          体育館の窓の外はもう暗い。練習後、誰もいない更衣室の隅。
+        beat_type: micro
+        intent: "ボディ・ビフォア・マインドの開き——文脈より先に身体"
+        silence_confirmed: true
+
+      - panel_id: ep010_002
+        scene: |
+          体育館全体のワイド。自由参加の自主練習。残っているのは半分もいない。遠藤が一人、
+          コートの隅でシュートを打ち続けている。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: 自由参加の自主練習。半分も残っていない。
+          en_US: Optional practice. Less than half the team stayed.
+          zh_TW: '[zh_TW] Optional practice. Less than half the team stayed.'
+          zh_CN: '[zh_CN] Optional practice. Less than half the team stayed.'
+
+      - panel_id: ep010_003
+        scene: |
+          彩が、靴紐を結び直している隼人にふと目をやる。クリップボードを胸に抱えたまま。
+          大きな声かけではなく、確認するような一瞥。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 残るの？
+              en_US: 'Staying?'
+              zh_TW: '[zh_TW] Staying?'
+              zh_CN: '[zh_CN] Staying?'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+          - speaker: hayato
+            text_by_locale:
+              ja_JP: うん、少しだけ。
+              en_US: 'Yeah. Just a little.'
+              zh_TW: '[zh_TW] Yeah. Just a little.'
+              zh_CN: '[zh_CN] Yeah. Just a little.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      - panel_id: ep010_004
+        scene: |
+          フリースローライン、インサート。隼人の手の中のボール。一人になってからバウンドの数が
+          また崩れていく——二回だったか、三回だったか。
+        beat_type: micro
+        intent: "第3話の無言のレッスン（一度のバウンス）がまだ自動化されていないことを示す"
+        dialogue_lines:
+          - speaker: hayato_internal
+            text_by_locale:
+              ja_JP: 桐生は、九本続けて外さなかった。
+              en_US: "The rival's nine makes were still louder than the rim."
+              zh_TW: "[zh_TW] The rival's nine makes were still louder than the rim."
+              zh_CN: "[zh_CN] The rival's nine makes were still louder than the rim."
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+            font_override_by_locale:
+              ja_JP: italic_internal
+              en_US: italic_internal
+
+      - panel_id: ep010_005
+        scene: |
+          急いだフォームのシュートがリングの手前を叩いて弾かれる。隼人は前かがみになり、
+          膝に手をついて息を吐く。白い息が見える。
+        beat_type: micro
+        sfx_by_locale:
+          ja_JP: ["ガンッ"]
+          en_US: ["clank"]
+        narrator_caption_by_locale:
+          ja_JP: この体は、シュートよりも大会のタイムアップを覚えている。
+          en_US: His body remembered the tournament clock more than it remembered the shot.
+          zh_TW: '[zh_TW] His body remembered the tournament clock more than it remembered
+            the shot.'
+          zh_CN: '[zh_CN] His body remembered the tournament clock more than it remembered
+            the shot.'
+
+      - panel_id: ep010_006
+        scene: |
+          ワイド。黒田がいつもの場所にいる。ボールラックを整え、ベースライン付近を箒で掃く後ろ姿。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: 正式なコーチではない。ただ、いつまでも帰らないだけだ。
+          en_US: He wasn't the team's official coach. He just never left.
+          zh_TW: '[zh_TW] He wasn''t the team''s official coach. He just never left.'
+          zh_CN: '[zh_CN] He wasn''t the team''s official coach. He just never left.'
+        silence_confirmed: true
+
+      - panel_id: ep010_007
+        scene: |
+          最後のメンバーが体育館を出ていく。隼人は一人、バッグのファスナーを閉める。黒田は
+          箒を持ったまま、掃く手を止めている。
+        beat_type: micro
+        intent: "パターンの崩れを、台詞より先に静止で示す"
+
+      - panel_id: ep010_008
+        scene: |
+          出口のドア付近。黒田が箒を壁に立てかけ、顎で外を示す。バスケの指示ではない、
+          この作品で初めて黒田がコートの外での誘いを口にする瞬間。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kuroda
+            text_by_locale:
+              ja_JP: 腹、減ったろ。
+              en_US: "You're hungry."
+              zh_TW: "[zh_TW] You're hungry."
+              zh_CN: "[zh_CN] You're hungry."
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+  - page_id: ep_010_p02
+    panels:
+      - panel_id: ep010_009
+        scene: |
+          ワイド。東雲商事の社屋を背に、二人並んで夜の道を歩く。会話はない。街灯だけが
+          等間隔に並ぶ、人通りの少ない歩道。
+        beat_type: spatial
+        narrator_caption_by_locale:
+          ja_JP: 誰も話さなかった。悪い意味の沈黙ではなかった。
+          en_US: Nobody talked. The silence between them wasn't the bad kind.
+          zh_TW: "[zh_TW] Nobody talked. The silence between them wasn't the bad kind."
+          zh_CN: "[zh_CN] Nobody talked. The silence between them wasn't the bad kind."
+
+      - panel_id: ep010_010
+        scene: |
+          コンビニのガラス扉が開き、蛍光灯の白い光と入店音が漏れる。体育館の暗さ、
+          街の暗さのあとだと、やけに眩しい。
+        beat_type: spatial
+        sfx_by_locale:
+          ja_JP: ["ピンポーン"]
+          en_US: ["ding-dong"]
+        narrator_caption_by_locale:
+          ja_JP: コンビニのドアが鳴った。体育館の暗さの後だと、眩しすぎる。
+          en_US: The convenience store door chimed, too bright after the dark gym.
+          zh_TW: "[zh_TW] The convenience store door chimed, too bright after the dark gym."
+          zh_CN: "[zh_CN] The convenience store door chimed, too bright after the dark gym."
+
+      - panel_id: ep010_011
+        scene: |
+          クローズ。黒田の手が迷いなく一つの商品——温かい缶コーヒー——をつかむ。背景の棚には
+          他の選択肢がぼやけて並んでいる。
+        beat_type: micro
+        intent: "フリースローラインの装置——多数の中から一つを選ぶ——を、買い物という日常動作で
+          無言のまま反復する"
+        silence_confirmed: true
+
+      - panel_id: ep010_012
+        scene: |
+          ドリンクの冷蔵ケースの前で、隼人の手が迷って止まる。ほとんど同じに見える缶や
+          ペットボトルが十数種類、ずらりと並んでいる。
+        beat_type: micro
+        intent: "コートの外の些細な選択で、彼の散らばりをそのまま見せる"
+
+      - panel_id: ep010_013
+        scene: |
+          ワイド。黒田はすでにレジ前で待っている。急かしもせず、見張ってもいない。
+          手の中の一つの商品だけを持って、ただ立っている。
+        beat_type: standard
+        silence_confirmed: true
+
+      - panel_id: ep010_014
+        scene: |
+          クローズ。隼人がようやくおにぎりを一つつかみ、冷蔵ケースの扉を閉める。
+          手柄でも何でもない、小さな動作として。
+        beat_type: micro
+
+      - panel_id: ep010_015
+        scene: |
+          レジ。バーコードを読み取る電子音、レシートプリンターが紙を送り出す音。
+        beat_type: micro
+        sfx_by_locale:
+          ja_JP: ["ピッ", "ジジジ……"]
+          en_US: ["beep", "printer whirring"]
+
+      - panel_id: ep010_016
+        scene: |
+          レシートのインサート、極端なクローズアップ。品目、税額、合計、そして一番下に
+          印字された時刻——22:14。
+        beat_type: micro
+        intent: "本話の中心オブジェクトを、使われる前に読者にはっきり見せる"
+        narrator_caption_by_locale:
+          ja_JP: レシートには全部書いてあった。品目も、税額も、合計も。そして時刻も。
+          en_US: The receipt printed everything -- every item, the tax, the total.
+            And the time.
+          zh_TW: '[zh_TW] The receipt printed everything -- every item, the tax, the
+            total. And the time.'
+          zh_CN: '[zh_CN] The receipt printed everything -- every item, the tax, the
+            total. And the time.'
+
+      - panel_id: ep010_017
+        scene: |
+          店の外、ウインドウ脇の低いベンチ。夜気の中で息が白く見える。黒田が缶コーヒーを
+          開け、隼人はおにぎりの包装を剥がす。
+        beat_type: standard
+        sfx_by_locale:
+          ja_JP: ["パキッ", "パリッ"]
+          en_US: ["crack", "crinkle"]
+
+      - panel_id: ep010_018
+        scene: |
+          クローズの連続コマ。黒田が長いレシートを手に取り、何も言わずに蛇腹状に折り始める。
+          品目も税額も合計も、折り目の中に一枚ずつ消えていく。
+        beat_type: micro
+        intent: "戦略バンクの核心比喩——多数の音の中から一つだけを選ぶ——を、台詞なしで
+          物理的な行為として外部化する。本話の運び手となるビート"
+        silence_confirmed: true
+
+      - panel_id: ep010_019
+        scene: |
+          折り畳まれたレシートが、二人の間のベンチの上に置かれる。黒田の手が離れる。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kuroda
+            text_by_locale:
+              ja_JP: これだけ見ろ。
+              en_US: Just look at this.
+              zh_TW: "[zh_TW] Just look at this."
+              zh_CN: "[zh_CN] Just look at this."
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      - panel_id: ep010_020
+        scene: |
+          隼人の顔のクローズ。折り畳まれた紙の端に残るのは時刻だけ。他の全部——品目も
+          税額も合計も——は折り目の中に隠れている。彼はしばらく何も言わない。
+        beat_type: micro
+        intent: "気づきを、説明ではなく静止した表情だけで見せる"
+        silence_confirmed: true
+
+      - panel_id: ep010_021
+        scene: |
+          隼人が、レシートに目を落としたまま、抑えていた本音を口にする。黒田の三語制限に
+          縛られない、彼自身の率直な問い。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: hayato
+            text_by_locale:
+              ja_JP: ……試合、勝てるかな。俺で。
+              en_US: "...Can we even win. With me out there."
+              zh_TW: "[zh_TW] ...Can we even win. With me out there."
+              zh_CN: "[zh_CN] ...Can we even win. With me out there."
+            intensity: whisper
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      - panel_id: ep010_022
+        scene: |
+          黒田が折り畳まれたレシートを、指の関節で一度だけ、はっきりとタップする。
+          第3話のフリースローラインでの一度のバウンスと、まったく同じ間合いで。
+        beat_type: micro
+        intent: "第3話への直接的な継続——一度、という数がここでも反復される"
+        dialogue_lines:
+          - speaker: kuroda
+            text_by_locale:
+              ja_JP: 一つでいい。
+              en_US: One is enough.
+              zh_TW: "[zh_TW] One is enough."
+              zh_CN: "[zh_CN] One is enough."
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep010_023
+        scene: |
+          帰り際、黒田が飲み終えた二つの空き缶を、リサイクルボックスの投入口にきっちりと
+          並べて置く。ボールラックを整えるいつもの仕草が、コートの外でも反復されている。
+        beat_type: micro
+        intent: "キャラクターの一貫性を、汎用的なメンター描写ではなく具体的な癖で示す"
+        silence_confirmed: true
+
+  - page_id: ep_010_p03
+    panels:
+      - panel_id: ep010_024
+        scene: |
+          ワイド。駅へ向かう道。終電の時刻表が光っている。夜はさらに更けている。
+        beat_type: spatial
+        narrator_caption_by_locale:
+          ja_JP: 終電の時刻表が光っていた。
+          en_US: The last-train schedule board glowed above the station entrance.
+          zh_TW: '[zh_TW] The last-train schedule board glowed above the station entrance.'
+          zh_CN: '[zh_CN] The last-train schedule board glowed above the station entrance.'
+
+      - panel_id: ep010_025
+        scene: |
+          改札前。路線の違う二人はここで分かれる。黒田はもう半分体を向けている。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kuroda
+            text_by_locale:
+              ja_JP: またな。
+              en_US: 'See you.'
+              zh_TW: '[zh_TW] See you.'
+              zh_CN: '[zh_CN] See you.'
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep010_026
+        scene: |
+          一人になったホームで、隼人がスマホを開く。チームのグループチャットは、まだ静かな
+          ままだ。彼は何も打たずに、画面を閉じてポケットに戻す。
+        beat_type: micro
+        intent: "第9話のグループチャットの沈黙は解決されない——教義の反復"
+        narrator_caption_by_locale:
+          ja_JP: グループチャットは、まだ静かなままだった。
+          en_US: The group chat was still quiet.
+          zh_TW: '[zh_TW] The group chat was still quiet.'
+          zh_CN: '[zh_CN] The group chat was still quiet.'
+
+      - panel_id: ep010_027
+        scene: |
+          反対のポケットに触れた手が、折り畳まれたレシートを見つける。取り出して、
+          もう一度だけ22:14の数字を見る。
+        beat_type: micro
+
+      - panel_id: ep010_028
+        scene: |
+          クローズの連続コマ。隼人自身の手が、黒田とまったく同じように、レシートをもう一度
+          折り畳む。誰にも言われていないのに。
+        beat_type: micro
+        intent: "本話の実際の転回点——言葉ではなく所作が、初めて自分の手で反復される"
+        silence_confirmed: true
+
+      - panel_id: ep010_029
+        scene: |
+          ワイド。電車が到着し、扉が開く。隼人が乗り込む。折り畳まれたレシートは、
+          もうポケットの中にある。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: 二十二時十四分。レシートは、あのボールと同じ大きさで手のひらに収まった。
+          en_US: 'Twenty-two fourteen. The receipt fit in his palm the same way the
+            ball did.'
+          zh_TW: '[zh_TW] Twenty-two fourteen. The receipt fit in his palm the same
+            way the ball did.'
+          zh_CN: '[zh_CN] Twenty-two fourteen. The receipt fit in his palm the same
+            way the ball did.'
+
+notes:
+  arc_position: |
+    第10話。第3話でクロダが最初の無言のレッスン（フリースローラインでの一度の意図的な
+    バウンス）を与えて以来、9話にわたって積み重ねてきた「一つのものを選ぶ」という
+    身体的な感覚が、ここで初めて——依然として三語以内という制約の中で——クロダの
+    最も多い言葉数として現れる。第9話のグループチャットの沈黙、チームの疑念を
+    引き継ぎ、解決はしない。第11話の決勝戦での実践の伏線を張る。
+  pacing_vs_prior: |
+    29パネル、3ページ。試合のない話数として、コート上の派手な陰影を避け、静かな夜の
+    トーンで統一。スポーツ漫画の定石――試合外の章は、暗くなってからも続く自主練習か、
+    関係を一段階動かす短いやり取りで終わる――に従う。
+  continuity_callbacks: |
+    - 引き出しのスニーカー（第1話から確立された視覚アンカー）
+    - フリースローラインでの「一度のバウンス」（第3話の無言のレッスン）——本話の
+      「一つでいい」および一度のタップで直接呼応
+    - 桐生蓮の九本連続（第8話のスカウティング）——シリーズタイトル「九つの音、
+      一つのボール」と共鳴
+    - グループチャットの沈黙（第9話）——解決されないまま持ち越される
+    - 黒田のボールラック整頓というシグネチャー・ジェスチャー——空き缶を整然と並べる
+      動作として、コートの外でも反復される
+  doctrinal_anchor_vessel_handling: |
+    黒田は一度も「集中しろ」「気にするな」とは言わない。教えはレシートを折るという
+    身体的行為として外部化される――印字された品目・税額・合計をすべて畳んで隠し、
+    時刻表示（22:14）だけを残す。これは戦略バンクstrategy_01「The One Ball at the
+    Line」の核心比喩――叫ぶ観客・スコアボード・トラッシュトークを意識の外に置き、
+    ボールという一点だけを見る――の直接的な物理化である。台詞は依然として三語以内
+    （「これだけ見ろ」「一つでいい」「またな」）。試合の結果、トロフィー、
+    スコアボードによる解決は一切ない――勝敗そのものはまだ言及されるだけで起きていない。
+    隼人自身の疑念（「勝てるかな」）に対しても、黒田は慰めや保証を与えず、行為
+    （一度のタップ）と最小限の言葉だけを返す。ラストでは、その所作を隼人自身が
+    無言で反復する――言葉ではなく行為が受け継がれたことを示す、唯一の「解決」の形。
+    vessel: 力を抜かせるコーチ（the coach of the unclenched）。
+  translation_handoff: |
+    text_by_locale populated for ja_JP (authoritative, native-authored) and en_US
+    (operator gloss). zh_TW / zh_CN use the bracket-placeholder convention
+    '[zh_TW] <en_US line>' / '[zh_CN] <en_US line>' per the
+    heart_balance_shojo__tsukimura_yui ep_001 pattern -- translation lane handled
+    separately, not authored here.

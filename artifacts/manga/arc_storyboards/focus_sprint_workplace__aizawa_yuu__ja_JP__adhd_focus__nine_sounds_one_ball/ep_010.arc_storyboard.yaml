@@ -1,0 +1,445 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_010
+genre_id: sports_competition
+title: '22:14 — Episode 10'
+logline: After a practice thinned by lingering doubt, Kuroda breaks nine episodes
+  of gym-only silence to take Hayato to a conbini, where a receipt timestamped
+  22:14 becomes the object that finally carries the lesson he has never once
+  said aloud.
+stakes_now: Hayato's free-throw ritual is still unreliable under pressure, and
+  the team's post-loss doubt from ep_009 remains unresolved and unspoken
+  between him and Kuroda.
+stakes_end: Nothing about the team's doubt or the tournament gets resolved by
+  the conversation; Hayato leaves with only a folded receipt and, for the
+  first time, re-performs the gesture himself, unprompted.
+genre_cadence:
+- body_before_mind_open
+- team_state_after_the_loss
+- rival_echo_interior
+- missed_ritual_shown
+- coach_presence_confirmed
+- coach_first_invitation
+- transit_near_silence
+- conbini_single_choice_vs_scattered_choice
+- receipt_object_reveal
+- wordless_fold
+- minimal_instruction_and_doubt_voiced
+- one_is_enough
+- signature_habit_echo
+- closing_self_administered_ritual
+page_turn_promises:
+- page_id: ep_010_p01
+  promise: Kuroda has never once invited Hayato anywhere outside the gym — why
+    tonight?
+- page_id: ep_010_p02
+  promise: What does Kuroda actually do with the receipt, and will Hayato
+    understand it without being told?
+- page_id: ep_010_p03
+  promise: Does Hayato carry anything real out of tonight into the rematch
+    ahead, or does the doubt just ride the last train home with him?
+panels:
+- panel_id: ep010_001
+  page_id: ep_010_p01
+  story_function: body_before_mind_open
+  story_move: Cold open on Hayato's hands taping a finger and lacing the old
+    desk-drawer sneakers, gym mostly dark already — the sport's proximity-to-
+    game hook before any context is given.
+  visual_proof: Close insert, taped finger, worn sneakers, low evening light
+    through high gym windows.
+  information_delta: Reader re-anchors on the established sneaker/tape motif
+    before learning why practice is thinning out.
+  beat_role: training_cost
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_002
+  page_id: ep_010_p01
+  story_function: team_state_after_the_loss
+  story_move: Wide reveal of the gym floor — optional practice, and barely
+    half the roster stayed, visible proof that ep_009's doubt has not
+    dissolved on its own.
+  visual_proof: Wide gym shot, scattered players, empty half of the bleachers,
+    Endou shooting alone in one corner.
+  information_delta: Reader sees the team's post-loss state as attendance,
+    not exposition.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_003
+  page_id: ep_010_p01
+  story_function: team_state_after_the_loss
+  story_move: Aya notices Hayato staying, a small unforced check-in — the
+    ep_009 defense of him continued in miniature, not restated as a speech.
+  visual_proof: Medium two-shot, Aya with a clipboard, glancing over at
+    Hayato lacing up.
+  information_delta: Reader confirms Aya's support is ongoing, understated,
+    not a single resolved scene from last episode.
+  beat_role: reaction_shot
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_004
+  page_id: ep_010_p01
+  story_function: rival_echo_interior
+  story_move: Alone now at the line, Hayato's bounce count slips again —
+    the ep_003 ritual still isn't automatic — while his interior voice
+    measures himself against Kiryuu's nine flawless makes from ep_008.
+  visual_proof: Insert on the ball in his hands at the free-throw line,
+    interior caption overlay.
+  information_delta: Reader learns the ritual has regressed under the
+    weight of the rival comparison, raising stakes for tonight's beat.
+  beat_role: interior_focus
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_005
+  page_id: ep_010_p01
+  story_function: missed_ritual_shown
+  story_move: The rushed shot clangs off the rim; visible fatigue and cold-
+    gym breath make the body cost of a losing streak concrete, not stated.
+  visual_proof: Close on the miss, Hayato bent over, hands on knees, breath
+    visible.
+  information_delta: Reader sees the technique has not yet crystallized —
+    this episode is not the payoff, it is the runway to it.
+  beat_role: training_cost
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_006
+  page_id: ep_010_p01
+  story_function: coach_presence_confirmed
+  story_move: Kuroda in the background, exactly where he always is — racking
+    balls, sweeping the baseline — established series pattern, unremarked.
+  visual_proof: Wide shot, Kuroda's silhouette against the equipment rack,
+    broom in hand.
+  information_delta: Reader is reminded Kuroda has been present the whole
+    practice without needing new introduction.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_007
+  page_id: ep_010_p01
+  story_function: coach_presence_confirmed
+  story_move: Practice ends; the last of the team files out. Hayato zips his
+    bag alone, the usual closing beat of the series — except Kuroda doesn't
+    return to sweeping this time.
+  visual_proof: Medium, Hayato shouldering his bag, Kuroda's broom paused
+    mid-stroke in the background.
+  information_delta: Reader senses a pattern break before it is confirmed.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_008
+  page_id: ep_010_p01
+  story_function: coach_first_invitation
+  story_move: Kuroda breaks nine episodes of gym-only silence with the
+    series' first informal, off-court line — an observation, not an
+    instruction about basketball at all.
+  visual_proof: Close two-shot at the gym door, Kuroda nodding toward the
+    exit.
+  information_delta: Reader gets the page-turn hook — Kuroda has never once
+    initiated contact outside the gym before.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_009
+  page_id: ep_010_p02
+  story_function: transit_near_silence
+  story_move: The two of them walk the quiet street outside Shinonome
+    Trading's building at night, saying nothing — established as the
+    comfortable kind of quiet, not an awkward one.
+  visual_proof: Wide street shot, company signage receding behind them,
+    streetlights, near-empty sidewalk.
+  information_delta: Reader tracks the transit beat as a genuine tonal
+    register shift from the gym scenes.
+  beat_role: interior_focus
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_010
+  page_id: ep_010_p02
+  story_function: transit_near_silence
+  story_move: They reach the conbini; the door chime and fluorescent light
+    are almost too bright after the dark gym and dark street.
+  visual_proof: Wide establishing shot, glass door sliding open, bright
+    interior spilling onto the sidewalk.
+  information_delta: Reader gets the concrete market-native setting change
+    that carries the rest of the episode.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_011
+  page_id: ep_010_p02
+  story_function: conbini_single_choice_vs_scattered_choice
+  story_move: Kuroda reaches for exactly one item off the shelf without
+    hesitation — the episode's first wordless echo of the free-throw-line
+    device, told entirely through an ordinary shopping gesture.
+  visual_proof: Close on Kuroda's hand closing around a single hot canned
+    coffee, shelf full of other options blurred behind it.
+  information_delta: Reader receives the visual rhyme before any dialogue
+    names anything.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_012
+  page_id: ep_010_p02
+  story_function: conbini_single_choice_vs_scattered_choice
+  story_move: Hayato stalls at the drink cooler, a whole wall of options,
+    hand hovering — his scatter shown through a mundane choice instead of
+    a court situation.
+  visual_proof: Medium, Hayato's hand drifting across a lit cooler case of
+    a dozen near-identical drinks.
+  information_delta: Reader sees the same flaw the strategy bank names,
+    relocated to a low-stakes object.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_013
+  page_id: ep_010_p02
+  story_function: conbini_single_choice_vs_scattered_choice
+  story_move: Kuroda already waits at the register, not rushing him, not
+    watching him either — patience shown as posture, not as a line.
+  visual_proof: Wide, Kuroda standing at the counter with his one item,
+    Hayato still down the aisle.
+  information_delta: Reader registers the contrast without any dialogue
+    underlining it.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_014
+  page_id: ep_010_p02
+  story_function: conbini_single_choice_vs_scattered_choice
+  story_move: Hayato finally grabs one onigiri and shuts the cooler door —
+    small, unremarked, not framed as a triumph.
+  visual_proof: Close on the onigiri in his hand, cooler door swinging shut
+    behind him.
+  information_delta: Reader sees a small, humiliating-scale increment, per
+    genre convention — not a montage, not a victory.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_015
+  page_id: ep_010_p02
+  story_function: receipt_object_reveal
+  story_move: The register beeps through both items; the printer runs.
+  visual_proof: Close on the register screen and the printer head feeding
+    out paper.
+  information_delta: Reader is set up for the receipt as the coming
+    concrete object.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_016
+  page_id: ep_010_p02
+  story_function: receipt_object_reveal
+  story_move: Insert on the printed receipt itself — every line item, tax,
+    total, and the timestamp at the bottom reading 22:14.
+  visual_proof: Extreme close-up, full receipt strip, timestamp legible.
+  information_delta: Reader receives the episode's title object in full
+    detail before it is used.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_017
+  page_id: ep_010_p02
+  story_function: transit_near_silence
+  story_move: Outside on the curb bench, breath visible in the cold, Kuroda
+    cracks the canned coffee and Hayato unwraps the onigiri — body cost
+    still visible even in a quiet scene.
+  visual_proof: Wide, both seated on a low outdoor bench outside the
+    conbini window, breath fogging.
+  information_delta: Reader gets the physical grounding beat before the
+    pivotal gesture.
+  beat_role: training_cost
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_018
+  page_id: ep_010_p02
+  story_function: wordless_fold
+  story_move: Kuroda takes the long receipt and, without a word, folds it
+    accordion-style, collapsing every printed line down until only the
+    timestamp shows at the folded edge — the strategy bank's core device
+    made literally physical.
+  visual_proof: Close sequence on Kuroda's hands folding the paper strip
+    down panel by panel.
+  information_delta: Reader watches the turn happen as an action, not as
+    dialogue — this is the carrier beat of the episode.
+  beat_role: coach_cut
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_019
+  page_id: ep_010_p02
+  story_function: minimal_instruction_and_doubt_voiced
+  story_move: Kuroda sets the folded receipt down between them and gives
+    his instruction — three words, no interpretation attached.
+  visual_proof: Medium two-shot, folded receipt on the bench between them,
+    Kuroda's hand withdrawing.
+  information_delta: Reader receives Kuroda's line as pure instruction, not
+    explanation of the psychology.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_020
+  page_id: ep_010_p02
+  story_function: minimal_instruction_and_doubt_voiced
+  story_move: Hayato looks at the folded strip — just the timestamp, every
+    other line hidden — and says nothing for a beat.
+  visual_proof: Close on Hayato's face, eyes on the folded receipt.
+  information_delta: Reader sees the realization land on his face, never
+    narrated as insight.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_021
+  page_id: ep_010_p02
+  story_function: minimal_instruction_and_doubt_voiced
+  story_move: Hayato voices the real doubt out loud for the first time
+    directly to Kuroda — not bound by Kuroda's word limit, this is his own
+    unguarded question.
+  visual_proof: Medium, Hayato looking down at the receipt rather than at
+    Kuroda while he asks it.
+  information_delta: Reader hears the ep_009 doubt surface directly instead
+    of staying implied.
+  beat_role: interior_focus
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_022
+  page_id: ep_010_p02
+  story_function: one_is_enough
+  story_move: Kuroda taps the folded receipt once, a single deliberate tap
+    that echoes the ep_003 one-bounce lesson exactly, and gives his
+    shortest complete reply of the arc.
+  visual_proof: Close on one knuckle tapping the folded paper once, then
+    Kuroda's face, calm.
+  information_delta: Reader gets the direct continuity payoff to ep_003
+    and the strategy bank's central line, still under three words.
+  beat_role: coach_cut
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_023
+  page_id: ep_010_p02
+  story_function: signature_habit_echo
+  story_move: Before they leave, Kuroda lines up the two empty cans neatly
+    at the recycling slot — the ball-rack-resetting habit transplanted
+    into an ordinary setting, unremarked.
+  visual_proof: Close on Kuroda's hands squaring the cans against the bin
+    edge.
+  information_delta: Reader sees character consistency reinforced through
+    a specific personal habit, not generic mentor staging.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_024
+  page_id: ep_010_p03
+  story_function: transit_near_silence
+  story_move: Walking toward the station, a last-train schedule board
+    visible, cold breath, the night getting later.
+  visual_proof: Wide street shot toward the station entrance, schedule
+    board lit up in the background.
+  information_delta: Reader tracks the time pressure of the last train as
+    ordinary market texture, not manufactured urgency.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_025
+  page_id: ep_010_p03
+  story_function: signature_habit_echo
+  story_move: At the ticket gates they split for different lines home;
+    Kuroda's goodbye is as understated as everything else about him.
+  visual_proof: Medium two-shot at the gate, Kuroda already half-turned to
+    go.
+  information_delta: Reader gets a deliberately unmelodramatic send-off,
+    avoiding the genre's over-sentimentality failure mode.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_026
+  page_id: ep_010_p03
+  story_function: closing_self_administered_ritual
+  story_move: Alone on the platform, Hayato checks his phone — the team
+    group chat from ep_009 is still quiet — and pockets it without typing
+    anything.
+  visual_proof: Close on the phone screen, an unremarkable, unread group
+    chat thread, then his hand closing over it.
+  information_delta: Reader confirms the team doubt is not resolved by
+    tonight — the doctrine's no-clean-resolution rule holds.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_027
+  page_id: ep_010_p03
+  story_function: closing_self_administered_ritual
+  story_move: His other hand finds the folded receipt in his pocket
+    instead; he takes it out and looks at 22:14 once more.
+  visual_proof: Close on the folded receipt in his open palm under the
+    platform lights.
+  information_delta: Reader sees him choose the physical object over the
+    phone, unprompted.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_028
+  page_id: ep_010_p03
+  story_function: closing_self_administered_ritual
+  story_move: He folds it once more himself, repeating Kuroda's exact
+    gesture without being told to — the technique carried forward as
+    action, not as a remembered lecture.
+  visual_proof: Close sequence on Hayato's own hands re-folding the
+    receipt.
+  information_delta: 'Reader receives the episode''s actual turn — the ritual
+    is now self-administered for the first time.'
+  beat_role: interior_focus
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_029
+  page_id: ep_010_p03
+  story_function: closing_self_administered_ritual
+  story_move: The train arrives; Hayato boards with the receipt back in
+    his pocket — closing wide, no resolution claimed, no game referenced.
+  visual_proof: Wide platform shot, train doors open, Hayato stepping on,
+    receipt tucked away.
+  information_delta: Reader closes the chapter on an object carried
+    forward, setting up ep_011 without naming it.
+  beat_role: aftermath_silence
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_010.yaml
+notes: Freshly authored per the arc-1 beat assignment (ep_010 = Kuroda's fullest,
+  still <=3-words-per-line wisdom landing via the conbini receipt as concrete
+  object). Direct continuity payoff to ep_003's one-bounce wordless lesson and
+  ep_008's Kiryuu nine-makes scouting beat; carries forward ep_009's unresolved
+  team doubt without resolving it, per the anti-pattern rule against clean
+  resolution. Sets up ep_011's decisive rematch by giving Hayato a self-
+  administered physical ritual (the receipt fold) rather than a stated lesson.
+  scripts/ci/check_manga_arc_storyboard.py does not exist in this checkout and
+  could not be run; this file is authored to the pre-existing storyboard shape
+  (per stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml)
+  for continuity/future-proofing only.

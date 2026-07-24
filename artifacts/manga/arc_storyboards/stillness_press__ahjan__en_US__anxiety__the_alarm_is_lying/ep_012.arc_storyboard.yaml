@@ -1,0 +1,337 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_012
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 12: Passing It Along'
+logline: A Friday text from Devon asking to still meet for coffee forces Mira to
+  put six episodes of private practice into her own words for another person for
+  the first time, closing arc one on a shared rather than solitary ritual.
+stakes_now: The practice has been private for eleven episodes; Devon witnessed
+  the gesture in ep_011 but has not yet been given any explanation for it.
+stakes_end: Mira translates the teaching into her own language rather than
+  borrowing it, Devon receives it imperfectly and without full resolution, and
+  the series' central tea ritual becomes shared for the first time.
+genre_cadence:
+- small_articulation_pressure_trigger
+- resistance_to_borrowed_language
+- scene_transition_shared_ritual
+- teaching_offered_in_own_words
+- teaching_received_imperfectly
+- shared_long_drop
+- closing_return
+page_turn_promises:
+- page_id: ep_012_p01
+  promise: Can Mira find her own words for a practice she has only ever done
+    silently?
+- page_id: ep_012_p02
+  promise: What does it look like when the practice is offered to someone else
+    instead of only practiced alone?
+panels:
+- panel_id: ep012_001
+  page_id: ep_012_p01
+  story_function: small_articulation_pressure_trigger
+  story_move: A text from Devon converts an easily-forgotten offer into a real
+    appointment Mira now has to keep.
+  visual_proof: Phone close-up, Devon's text asking if coffee is still on, no
+    pressure if not.
+  information_delta: Reader learns the ep_011 offer is being followed up on,
+    not left to lapse.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_002
+  page_id: ep_012_p01
+  story_function: small_articulation_pressure_trigger
+  story_move: Mira's activation register is shown to be genuinely smaller than
+    prior episodes, a deliberate contrast rather than a repeated crisis beat.
+  visual_proof: Mira's face reading the text, mild specific nervousness instead
+    of dread.
+  information_delta: Reader measures this trigger against the series'
+    established larger-stakes triggers and finds it intentionally modest.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_003
+  page_id: ep_012_p01
+  story_function: small_articulation_pressure_trigger
+  story_move: Mira replies without any trembling, a deliberate visual contrast
+    to the series' recurring trembling-hand motif.
+  visual_proof: Close on a steady hand typing a confirming reply.
+  information_delta: Reader confirms the smaller stakes read as smaller in the
+    body, not just in narration.
+  beat_role: trigger_onset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_004
+  page_id: ep_012_p01
+  story_function: small_articulation_pressure_trigger
+  story_move: Mira sits with the coming conversation without urgency, the
+    succulent present as an anchor she does not need to actively use.
+  visual_proof: Wide desk shot, succulent beside the monitor, Mira pausing
+    before returning to work.
+  information_delta: Reader sees the anchor object present without being
+    reached for out of crisis.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_005
+  page_id: ep_012_p01
+  story_function: resistance_to_borrowed_language
+  story_move: A new, smaller activation surfaces around the pressure of
+    articulation itself, distinct from the series' usual dread triggers.
+  visual_proof: Mira pausing mid-task, hand still on the keyboard.
+  information_delta: Reader is introduced to a new activation category — not
+    fear, but the difficulty of putting something private into words.
+  beat_role: articulation_pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_006
+  page_id: ep_012_p01
+  story_function: resistance_to_borrowed_language
+  story_move: Mira resists the urge to borrow someone else's exact words for
+    the explanation, choosing to find her own instead.
+  visual_proof: Mira's face, hand nearly reaching for the phone then returning
+    to the keyboard.
+  information_delta: Reader sees the episode's actual doctrinal claim staged
+    in advance of it being spoken.
+  beat_role: articulation_pressure
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_007
+  page_id: ep_012_p01
+  story_function: scene_transition_shared_ritual
+  story_move: The breakroom setting is introduced with the kettle already in
+    frame before either character speaks, seeding the episode's central visual
+    rhyme early.
+  visual_proof: Wide breakroom shot, kettle plugged in, two mugs set out,
+    Devon waiting with a stilled pen cap.
+  information_delta: Reader sees Devon visibly calmer than in ep_011, a small
+    sign of his own arc.
+  beat_role: scene_transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_008
+  page_id: ep_012_p01
+  story_function: scene_transition_shared_ritual
+  story_move: Devon names his own research into the topic, raising the
+    pressure on Mira to answer without generic language.
+  visual_proof: Devon at the counter, listing that he found dozens of named
+    techniques online.
+  information_delta: Reader learns Devon actively sought language for what he
+    witnessed rather than waiting passively.
+  beat_role: scene_transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_009
+  page_id: ep_012_p02
+  story_function: teaching_offered_in_own_words
+  story_move: Mira reaches for the kettle instead of an immediate answer, the
+    series' central ritual gesture performed for two people for the first
+    time.
+  visual_proof: Mira reaching for the kettle, half-laughing, half-caught.
+  information_delta: Reader sees the ritual becoming social rather than
+    solitary.
+  beat_role: ritual_made_shared
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_010
+  page_id: ep_012_p02
+  story_function: teaching_offered_in_own_words
+  story_move: The kettle steam shot directly rhymes with the series' opening
+    image, closing the full-arc visual loop.
+  visual_proof: Close on the kettle, steam rising, composition matching ep_001
+    panel 2.
+  information_delta: Reader recognizes the deliberate full-series bookend.
+  beat_role: ritual_made_shared
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_011
+  page_id: ep_012_p02
+  story_function: teaching_offered_in_own_words
+  story_move: Mira states the practice in her own plain language rather than
+    a technique name, the episode's central teaching beat.
+  visual_proof: Mira pouring two cups, explaining it as noticing rather than a
+    named method.
+  information_delta: Reader hears the series' doctrine restated in Mira's own
+    words for the first time, addressed to another person.
+  beat_role: teaching_delivered
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_012
+  page_id: ep_012_p02
+  story_function: teaching_received_imperfectly
+  story_move: Devon's honest skepticism keeps the moment from becoming a clean
+    triumphant reveal.
+  visual_proof: Devon turning the phrase over, visibly unconvinced.
+  information_delta: Reader sees the teaching land without guaranteed
+    acceptance.
+  beat_role: teaching_received
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_013
+  page_id: ep_012_p02
+  story_function: teaching_received_imperfectly
+  story_move: Mira refuses to oversell the practice, naming its real
+    limitations directly.
+  visual_proof: Mira, honest rather than reassuring, naming the practice as
+    slow and not always right.
+  information_delta: Reader confirms the series' consistent anti-cure stance
+    extended into direct teaching.
+  beat_role: teaching_received
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_014
+  page_id: ep_012_p02
+  story_function: teaching_received_imperfectly
+  story_move: Devon tests the idea privately against himself rather than
+    responding immediately, the teaching entering an unresolved private
+    moment.
+  visual_proof: Devon looking down at his mug, steam rising in front of his
+    face.
+  information_delta: Reader sees reception without immediate resolution.
+  beat_role: teaching_received
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_015
+  page_id: ep_012_p02
+  story_function: teaching_received_imperfectly
+  story_move: Devon unconsciously echoes Mira's pendant gesture on his own
+    collar, the practice beginning to transmit imperfectly and without
+    instruction.
+  visual_proof: Close on Devon's hand touching his collar, an echo rather than
+    a copy of Mira's gesture.
+  information_delta: Reader sees the gesture spreading in adapted, not
+    identical, form.
+  beat_role: gesture_transmitted
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_016
+  page_id: ep_012_p02
+  story_function: teaching_received_imperfectly
+  story_move: Mira notices without commenting, letting the moment pass
+    unremarked rather than validated aloud.
+  visual_proof: Mira's face, a quiet unstated exchange with Devon.
+  information_delta: Reader sees restraint modeled again as its own form of
+    respect.
+  beat_role: gesture_transmitted
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_017
+  page_id: ep_012_p02
+  story_function: teaching_received_imperfectly
+  story_move: Devon closes the exchange with direct gratitude naming both this
+    conversation and the earlier presentation.
+  visual_proof: Devon, small and genuine, thanking Mira for Thursday as well.
+  information_delta: Reader sees the two episodes' events explicitly linked by
+    a character, not just by structure.
+  beat_role: gesture_transmitted
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_018
+  page_id: ep_012_p02
+  story_function: teaching_offered_in_own_words
+  story_move: Mira generalizes the series' opening private line into a shared,
+    spoken statement — the arc's thesis stated once out loud to another
+    person.
+  visual_proof: Mira with her mug in both hands, steam still rising.
+  information_delta: Reader receives the arc's thesis in its most explicit
+    form, deliberately only once.
+  beat_role: thesis_spoken
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_019
+  page_id: ep_012_p02
+  story_function: shared_long_drop
+  story_move: A held silent panel closes the scene on two people rather than
+    one, the arc's first shared decompression beat.
+  visual_proof: Wide held shot, both at the counter, steam from both mugs
+    mingling in the same light.
+  information_delta: Reader receives the arc's structural first — a shared
+    rather than solitary LONG DROP.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_020
+  page_id: ep_012_p02
+  story_function: closing_return
+  story_move: The kettle returns a third time in the episode, the series'
+    oldest visual motif closing on itself at home.
+  visual_proof: Evening kitchen shot, kettle again, succulent on the sill.
+  information_delta: Reader tracks the highest density of the ritual image in
+    any single episode, marking the arc's close.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_021
+  page_id: ep_012_p02
+  story_function: closing_return
+  story_move: The closing caption states the arc's actual claim plainly — not
+    a fix, a shared load.
+  visual_proof: Close on a hand around the cup, jade pendant visible, steady.
+  information_delta: Reader receives the arc's final thesis line.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_022
+  page_id: ep_012_p02
+  story_function: closing_return
+  story_move: Mira's face closes the arc on the same settled, uncured
+    expression the series opened on.
+  visual_proof: Mira's face, tired in the good way, unchanged in essential
+    shape from ep_001.
+  information_delta: Reader confirms twelve episodes of change without a claim
+    of transformation.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_023
+  page_id: ep_012_p02
+  story_function: closing_return
+  story_move: The wide closing shot deliberately mirrors ep_001's opening
+    composition, evening light replacing dawn.
+  visual_proof: Wide kitchen pull, same composition as the series' repeated
+    return shot.
+  information_delta: Reader sees the full-arc structural bookend completed.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_024
+  page_id: ep_012_p02
+  story_function: closing_return
+  story_move: The episode card marks the close of arc one explicitly.
+  visual_proof: Typographic arc-close card on cream background.
+  information_delta: Reader receives a clean structural close to arc one.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_012.yaml
+notes: Freshly authored (not backfilled) as arc 1's closing episode. Follows
+  directly from ep_011's Devon thread. Closes the pilot-wave smoke-cell arc
+  identified as incomplete after the ep_001-010 backfill (PRs 135 and 140).

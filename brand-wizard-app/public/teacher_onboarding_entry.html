@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Teacher Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0;overflow-x:hidden}
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace}
+
+/* ── Entry Screen ──────────────────────────────────── */
+#entry{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+#entry h1{font-family:var(--serif);font-size:4rem;font-weight:300;letter-spacing:.04em;background:linear-gradient(135deg,#f5d0a9 0%,#e8a87c 50%,#d97706 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+#entry .sub{font-family:var(--mono);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,246,240,.3);margin-bottom:60px}
+#entry .choose{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:rgba(250,246,240,.5);margin-bottom:40px;font-style:italic}
+
+/* Flag grid */
+.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:16px;max-width:900px;width:100%;margin-bottom:50px}
+.flag-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 10px;border:1px solid rgba(180,83,9,.15);border-radius:8px;cursor:pointer;transition:all .25s;text-decoration:none;color:inherit;background:rgba(255,255,255,.02)}
+.flag-card:hover{border-color:var(--acc);background:rgba(180,83,9,.08);transform:translateY(-3px)}
+.flag-card .emoji{font-size:2.4rem;line-height:1}
+.flag-card .name{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.4)}
+.flag-card .lang{font-size:.5rem;color:rgba(250,246,240,.2);font-family:var(--mono)}
+.flag-card:hover .name{color:var(--acc2)}
+</style>
+</head>
+<body>
+<!-- Phoenix Command Universal Nav -->
+<nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
+<a href="index.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>
+<span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
+<a href="index.html" class="unav" data-i18n="nav.markets">Markets</a>
+<a href="teacher_showcase.html" class="unav" data-i18n="nav.teachers">Teachers</a>
+<a href="presenter.html?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
+<a href="presenter.html?deck=marketing" class="unav" data-i18n="nav.marketing">Marketing</a>
+<a href="marketing_dashboard.html" class="unav" data-i18n="nav.dashboard">Dashboard</a>
+<a href="lane_examples_gallery.html" class="unav" data-i18n="nav.gallery">Gallery</a>
+<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto" data-i18n="nav.admin">Brand Admin</a>
+</nav>
+<style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
+<div style="height:36px"></div>
+<script src="assets/i18n.js"></script>
+<!-- /Universal Nav -->
+
+<!-- ═══ ENTRY SCREEN — Teacher Onboarding flag gate ═══ -->
+<div id="entry">
+  <h1>Pearl Prime</h1>
+  <div class="sub">Ancient Wisdom · Enlightened Intelligence · Next Generation</div>
+  <div class="choose">Teacher Onboarding — Choose Your Language</div>
+  <div class="flags">
+    <a class="flag-card" onclick="enterTeacherOnboarding('en-US')"><span class="emoji">🇺🇸</span><span class="name">United States</span><span class="lang">English</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('ja-JP')"><span class="emoji">🇯🇵</span><span class="name">Japan</span><span class="lang">日本語</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('ko-KR')"><span class="emoji">🇰🇷</span><span class="name">Korea</span><span class="lang">한국어</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-TW')"><span class="emoji">🇹🇼</span><span class="name">Taiwan</span><span class="lang">繁體中文</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-CN')"><span class="emoji">🇨🇳</span><span class="name">China</span><span class="lang">简体中文</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-HK')"><span class="emoji">🇭🇰</span><span class="name">Hong Kong</span><span class="lang">粵語</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('zh-SG')"><span class="emoji">🇸🇬</span><span class="name">Singapore</span><span class="lang">中文/EN</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('es-US')"><span class="emoji">🇺🇸</span><span class="name">US Hispanic</span><span class="lang">Español</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('es-ES')"><span class="emoji">🇪🇸</span><span class="name">Spain</span><span class="lang">Español</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('fr-FR')"><span class="emoji">🇫🇷</span><span class="name">France</span><span class="lang">Français</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('de-DE')"><span class="emoji">🇩🇪</span><span class="name">Germany</span><span class="lang">Deutsch</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('it-IT')"><span class="emoji">🇮🇹</span><span class="name">Italy</span><span class="lang">Italiano</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('hu-HU')"><span class="emoji">🇭🇺</span><span class="name">Hungary</span><span class="lang">Magyar</span></a>
+    <a class="flag-card" onclick="enterTeacherOnboarding('pt-BR')"><span class="emoji">🇧🇷</span><span class="name">Brazil</span><span class="lang">Português</span></a>
+  </div>
+</div>
+
+<script>
+/* Flag click → straight into the Teacher Onboarding form, pre-set to that
+   locale. Uses the SAME localStorage key TeacherOnboardingI18nProvider reads
+   on mount (src/i18n-teacher-onboarding.jsx: phoenix_teacher_onboarding_locale,
+   BCP-47 codes), so /teacher_onboarding.html skips its own FlagLocaleGate and
+   renders the form directly — no double flag-picker. */
+function enterTeacherOnboarding(localeCode) {
+  localStorage.setItem('phoenix_teacher_onboarding_locale', localeCode);
+  window.location.href = 'teacher_onboarding.html';
+}
+</script>
+</body>
+</html>

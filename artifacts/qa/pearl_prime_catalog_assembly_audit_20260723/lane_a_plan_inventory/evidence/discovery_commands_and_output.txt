@@ -1,0 +1,44 @@
+$ git rev-parse origin/main
+c318b7a50733a2cd6479026c8126ffd6031f61ef
+
+$ find config/source_of_truth/book_plans_en_us -maxdepth 1 -type f -name "*.yaml" | wc -l
+   32401
+
+$ ls config/source_of_truth/book_plans_en_us | sed "s/__.*//" | sort -u | wc -l   (distinct brand archetypes)
+      40
+
+$ find config/source_of_truth/series_plans_en_us -maxdepth 1 -type f -name "*.yaml" | wc -l
+    4830
+
+$ grep -rl "_needs_authoring: true" config/source_of_truth/book_plans_en_us/ | wc -l
+   30088
+$ grep -rl "_needs_authoring: false" config/source_of_truth/book_plans_en_us/ | wc -l
+    1813
+
+$ grep -rl "thesis" config/source_of_truth/book_plans_en_us/ | wc -l  (structured thesis field search, book-plan level)
+       1
+$ grep -rn "thesis" config/source_of_truth/book_plans_en_us/   (the one hit, incidental prose word)
+config/source_of_truth/book_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__overthinking__spiral__1hr.yaml:38:    becomes a thesis on your shortcomings. One missed metric becomes a referendum
+
+$ grep -rl "reader_promise_family" config/source_of_truth/series_plans_en_us/ | wc -l  (field present, series-plan level)
+    4830
+$ grep -rln "reader_promise_family: ''" config/source_of_truth/series_plans_en_us/ | wc -l  (field present but EMPTY)
+    4165
+$ grep -rln "bestseller_hook_family: ''" config/source_of_truth/series_plans_en_us/ | wc -l
+    4347
+
+$ python3 -c "yaml global_brand_registry_unified.yaml summary"
+schema_version = 2.0
+generated_by = build_unified_brand_registry.py
+total_brand_archetypes = 40
+total_lanes = 14
+total_brands = 560
+inactive_archetypes = ['cognitive_clarity']
+thin_archetypes_topics_from_manga_only = ['bio_flow', 'calm_student', 'cognitive_clarity', 'focus_sprint', 'gentle_growth', 'healing_ground', 'high_performer', 'hormone_reset', 'longevity_lab', 'minimal_mind', 'morning_momentum', 'spiritual_ground', 'stoic_edge', 'trauma_path', 'way_stream_sanctuary']
+
+$ python3 -c "yaml config/brand_registry.yaml summary (26-brand legacy/CJK registry, NOT the catalog roster)"
+owner: pearl_prime status: active
+brands (n=26): ['stillness_press', 'cognitive_clarity', 'sleep_repair_tw', 'stabilizer_tw', 'panic_first_aid_tw', 'gen_z_grounding_tw', 'grief_companion_tw', 'inner_security_tw', 'sleep_repair_hk', 'stabilizer_hk', 'panic_first_aid_hk', 'gen_z_grounding_hk', 'grief_companion_hk', 'inner_security_hk', 'sleep_repair_cn', 'stabilizer_cn', 'panic_first_aid_cn', 'gen_z_grounding_cn', 'grief_companion_cn', 'inner_security_cn', 'sleep_repair_sg', 'stabilizer_sg', 'panic_first_aid_sg', 'gen_z_grounding_sg', 'grief_companion_sg', 'inner_security_sg']
+
+$ structural_format_id distribution across book_plans_en_us
+Counter({'F006': 32391, 'F009': 5, 'F013': 3, 'F015': 2})

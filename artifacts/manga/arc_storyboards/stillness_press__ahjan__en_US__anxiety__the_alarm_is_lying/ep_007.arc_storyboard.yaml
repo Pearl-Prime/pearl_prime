@@ -1,0 +1,464 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_007
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 7: Monday, 8:14 AM'
+logline: A four-minutes-late morning and an unanswered Friday-night work email launch Mira's subway commute
+  into a catastrophizing spiral that the practice only partly catches, proving the alarm is a returning,
+  not a cure.
+stakes_now: Mira is already running late and carrying an unanswered Friday-night email; her nervous system
+  is primed to read the ordinary commute itself as something to manage.
+stakes_end: The practice does not stop the spiral from firing twice in one morning — it only lets Mira catch
+  herself, late and imperfectly, and land back at her desk still mid-process, not fixed.
+genre_cadence:
+- establishing_calm_ritual
+- sensory_anchor_tea_beat
+- activation_trigger_time_pressure
+- body_register_escalation
+- pendulation_ground_return
+- mind_racing_spiral_onset
+- awe_pullback_shared_interiority
+- late_catch_return
+- second_activation_recurrence
+- gesture_becomes_habit_distinction
+- re_choice_grounding
+- long_drop_decompression
+- sensory_reset_return
+- completion_return
+- imperfect_practice_teaching_landing
+page_turn_promises:
+- page_id: ep_007_p01
+  promise: Will Mira make it out the door before four minutes late becomes a bigger problem, or does the
+    rushed ritual already carry a cost the practice can't cover?
+- page_id: ep_007_p02
+  promise: Once the spiral catches her on the subway, does the practice actually hold this time, or does
+    Monday prove the alarm just keeps firing regardless?
+notes: Backfill per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence, matching
+  the ep_001 precedent (PR 135) — ep_007 was authored (M3 Wave 1) before the storyboard-first process
+  existed. This plan describes the story_move already present in the shipped ep_007.yaml script; it does
+  not add new panels or change panel order, only formalizes the already-demonstrated structure (imperfect-practice
+  register, five oscillation cycles, pendant-as-fidget doctrinal turn, cold-water sensory reset, bathroom
+  Long Drop). No config/manga/genre_scene_templates/iyashikei.yaml exists yet (only mecha.yaml is populated)
+  — genre_cadence above is derived from the episode's own already-demonstrated genre-native structural
+  beats rather than a formal scene-template file, same real gap flagged in ep_001's plan.
+panels:
+- panel_id: ep007_001
+  page_id: ep_007_p01
+  story_function: establishing_calm_ritual
+  story_move: Episode opens on the kitchen ritual already resuming — a faster steam-pace than usual quietly
+    signals the morning is already slightly rushed before Mira herself appears.
+  visual_proof: Close on the kettle mid-steam in warm Monday light, the untouched succulent on the sill,
+    no figure yet in frame.
+  information_delta: Reader recognizes the returning ritual object (kettle, succulent) and registers its
+    pace as subtly quickened versus prior episodes.
+  beat_role: pre_trigger_ritual
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_002
+  page_id: ep_007_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: Mira enters half-dressed for work, pouring tea into a travel mug while the wall clock reads
+    8:14 — the morning's concrete stakes (running late) are established directly.
+  visual_proof: Wider kitchen counter shot — cream sweater, jacket on a chair, hair clipped back quickly,
+    tea pouring into a travel mug, wall clock reading 8:14 AM.
+  information_delta: Reader learns the exact time pressure driving the episode (four minutes late) and
+    that the ritual is being rushed, not skipped.
+  beat_role: ritual_anchor
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_003
+  page_id: ep_007_p01
+  story_function: activation_trigger_time_pressure
+  story_move: Mira grabs jacket, bag, and mug and gives the succulent only a half-glance — the first practice
+    anchor is skipped because there is no time, a small concrete cost of the rush.
+  visual_proof: Mira pulling on her jacket and slinging her bag, travel mug in hand, eyes flicking past
+    the succulent without stopping.
+  information_delta: Reader sees the practice's anchors are not automatic — under time pressure, one gets
+    dropped.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_004
+  page_id: ep_007_p01
+  story_function: activation_trigger_time_pressure
+  story_move: Mira moves quickly down the apartment hallway toward the elevator, a visible pace contrast
+    to prior calm-Saturday episodes, with the jade pendant now bouncing rather than resting still.
+  visual_proof: Wide hallway shot of Mira walking briskly toward the elevator, jade pendant bouncing at
+    her neckline.
+  information_delta: Reader registers the day's different register through motion alone — this Monday
+    is physically faster than the series' calmer mornings.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_005
+  page_id: ep_007_p01
+  story_function: body_register_escalation
+  story_move: Waiting for the elevator, Mira's jaw tightens and her eyes lock on the descending floor numbers
+    — the first mild activation of the day, purely somatic.
+  visual_proof: Mira's face in the elevator, eyes tracking the floor numbers ticking down, jaw a little
+    tense, faint sfx accompanying the beat.
+  information_delta: Reader confirms the running-late stress has become a bodily signal, not just a fact
+    on a clock.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_006
+  page_id: ep_007_p01
+  story_function: pendulation_ground_return
+  story_move: Mid-elevator-ride, Mira's hand goes briefly to the pendant and her shoulders settle half a
+    degree — the practice fires on its own, even while she is still in motion toward the day.
+  visual_proof: Tight framing on Mira's chest and hand at the pendant, a slow exhale visible in the shoulders
+    easing.
+  information_delta: Reader sees the practice is not limited to stillness — it can interrupt activation
+    mid-errand, a new capability shown for the first time this episode.
+  beat_role: pendulation_return
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_007
+  page_id: ep_007_p01
+  story_function: pendulation_ground_return
+  story_move: The elevator doors open onto the lobby and Mira is already walking forward — the small ground
+    holds just long enough to carry her out the door.
+  visual_proof: Elevator doors opening onto the building lobby, Mira mid-stride, already leaving frame.
+  information_delta: Reader is handed the page-turn question of whether this small ground will survive
+    contact with the actual commute.
+  beat_role: transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_008
+  page_id: ep_007_p02
+  story_function: mind_racing_spiral_onset
+  story_move: The scene cuts to a packed subway car — a new, less controllable environment where Mira is
+    now one commuter among many, travel mug still in hand, her own reflection visible in the dark window.
+  visual_proof: Subway car interior, Mira standing with one hand on the overhead bar, fluorescent light,
+    her reflection faint in the dark window opposite.
+  information_delta: Reader learns the setting has changed from private apartment to shared public transit
+    — a higher-stimulation environment for whatever comes next.
+  beat_role: scene_transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_009
+  page_id: ep_007_p02
+  story_function: mind_racing_spiral_onset
+  story_move: Mira's mind drifts to an unaddressed Friday-night work email and her body responds before
+    the practice has caught anything — the spiral begins in earnest, uncaught.
+  visual_proof: Mira's face glazing over on the subway, thud-thud sfx marking the pulse quickening as the
+    thought of the email lands.
+  information_delta: Reader now has the specific content of this episode's trigger — an unanswered email
+    — and sees the practice has not yet intervened.
+  beat_role: somatic_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_010
+  page_id: ep_007_p02
+  story_function: mind_racing_spiral_onset
+  story_move: Mira's hand tightens on the overhead bar as she rehearses a future conversation with her manager
+    — the practice fails to catch this escalation while it is happening.
+  visual_proof: Close on Mira's whitening knuckles on the subway bar while her unfocused gaze suggests the
+    rehearsal playing out in her head.
+  information_delta: Reader confirms this spiral is not being interrupted — a real failure of the practice,
+    not just a close call.
+  beat_role: somatic_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_011
+  page_id: ep_007_p02
+  story_function: mind_racing_spiral_onset
+  story_move: Mira's fragmented reflection in the dark subway window shows the reader a tightened mouth
+    that Mira herself is not looking at or aware of — the gap between her internal state and her attention
+    is externalized.
+  visual_proof: Mira's reflection in the dark subway window, fractured by the train's motion, mouth slightly
+    tight, her own gaze aimed elsewhere.
+  information_delta: Reader is given visual proof of the spiral's grip that exceeds what Mira herself currently
+    registers.
+  beat_role: externalization
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_012
+  page_id: ep_007_p02
+  story_function: mind_racing_spiral_onset
+  story_move: The narration drops into Mira's internal monologue directly — the projected accusation about
+    the unanswered email is stated in full, the spiral's content made explicit rather than implied.
+  visual_proof: Near-black panel with a thin frame of light, caption text carrying the catastrophizing thought
+    across the middle of the frame.
+  information_delta: Reader now has the exact catastrophizing sentence driving the somatic escalation, not
+    just its physical signs.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_013
+  page_id: ep_007_p02
+  story_function: mind_racing_spiral_onset
+  story_move: Back on the subway, Mira's face has moved further into the spiral and the travel mug has
+    been forgotten at her side — a visible cost of the activation on the ordinary object she was carrying.
+  visual_proof: Mira's face tighter than before on the subway, travel mug now hanging forgotten at her side,
+    thud-thud sfx continuing.
+  information_delta: Reader sees the spiral has begun to displace ordinary attention (the mug, the tea)
+    entirely.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_014
+  page_id: ep_007_p02
+  story_function: awe_pullback_shared_interiority
+  story_move: The frame pulls back to the whole subway car — Mira is shown as one small, quiet interior
+    among several strangers each absorbed in their own private weather, reframing her spiral as ordinary
+    rather than singular.
+  visual_proof: Wide pullback of the fluorescent-lit subway car — a man with headphones, a woman reading,
+    a teenager on her phone, an older man with a newspaper, Mira small among them.
+  information_delta: Reader learns Mira's spiral is not exceptional — every rider in the car is carrying
+    something similarly private, changing the emotional frame of the scene.
+  beat_role: awe_pullback
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_015
+  page_id: ep_007_p02
+  story_function: late_catch_return
+  story_move: A sudden small recognition crosses Mira's eyes — she notices, late, that she has been spiraling,
+    the practice finally arriving after several panels of failing to catch it.
+  visual_proof: Mira's face on the subway with a sudden flicker of recognition breaking through the tightness.
+  information_delta: Reader registers the turn — the practice has caught up to the spiral, later than in
+    prior episodes but real.
+  beat_role: catch
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_016
+  page_id: ep_007_p02
+  story_function: late_catch_return
+  story_move: Mira's hand returns to the pendant with three fingers and she exhales more steadily than the
+    breath that started the spiral — the ground holds, but her expression shows the spiral's cost.
+  visual_proof: Mira's hand at the pendant, a visibly steadier exhale, her reflection in the window briefly
+    meeting her own gaze.
+  information_delta: Reader sees the practice succeed this second time, and that success does not erase
+    the visible toll of the episode so far.
+  beat_role: pendulation_return
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_017
+  page_id: ep_007_p02
+  story_function: late_catch_return
+  story_move: Mira's face softens but reads tired rather than relieved — the episode refuses to let the
+    catch read as a clean win.
+  visual_proof: Mira's face on the subway, softer now but visibly worn, not smiling.
+  information_delta: Reader is told directly, through expression alone, that the spiral took something
+    real even though it was caught.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_018
+  page_id: ep_007_p02
+  story_function: completion_return
+  story_move: Mira steps out of the subway and through the office building's revolving door into the lobby
+    — the setting shifts again, from transit to workplace, still carrying the travel mug.
+  visual_proof: Wide office lobby shot, Mira stepping through the revolving door past the reception desk
+    and elevator bank, travel mug still in hand.
+  information_delta: Reader tracks Mira's physical progress through the morning — she has survived the
+    commute and reached work.
+  beat_role: scene_transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_019
+  page_id: ep_007_p02
+  story_function: second_activation_recurrence
+  story_move: In the office elevator, Mira's eyes fix on the floor indicator and the spiral resumes faintly
+    — the practice does not get to rest just because the first spiral was caught.
+  visual_proof: Mira's face in the office elevator, eyes on the floor indicator, a faint sfx marking the
+    spiral's quiet restart.
+  information_delta: Reader learns the practice is not a one-time fix within the episode — a second activation
+    arrives before the first has fully settled.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_020
+  page_id: ep_007_p02
+  story_function: second_activation_recurrence
+  story_move: At her desk, Mira sets the travel mug down beside the office succulent but has not yet opened
+    the laptop to work — the day's actual task is still being deferred.
+  visual_proof: Mira at her desk, laptop open but idle, the office succulent visible in its corner pot,
+    travel mug set down.
+  information_delta: Reader sees the office succulent for the first time this episode, tying the home and
+    work settings together, and that work itself has not yet begun.
+  beat_role: ritual_anchor
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_021
+  page_id: ep_007_p02
+  story_function: second_activation_recurrence
+  story_move: Mira's eyes land on the visible Friday-night email subject line in her inbox and a small inhale
+    catches in her throat — the exact object of the spiral is now in front of her, not just imagined.
+  visual_proof: Close on Mira's eyes tracking the inbox, the Friday-night email subject line visible, thud-thud
+    sfx marking the activation peak.
+  information_delta: Reader sees the abstract dread from the subway made concrete — the actual unanswered
+    email, now unavoidable on screen.
+  beat_role: somatic_onset
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_022
+  page_id: ep_007_p02
+  story_function: gesture_becomes_habit_distinction
+  story_move: Mira's hand goes to the pendant again, but the gesture is quicker and more anxious than before
+    — for the first time in the series, the same touch is shown functioning as habit rather than ground.
+  visual_proof: Close on Mira's hand at the pendant, fingers tugging the chain in a quicker, more anxious
+    motion than the earlier ground beats.
+  information_delta: Reader learns the pendant touch is not automatically the practice — the same gesture
+    can be either ground or nervous fidget depending on how it's held.
+  beat_role: habit_vs_anchor
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_023
+  page_id: ep_007_p02
+  story_function: gesture_becomes_habit_distinction
+  story_move: Mira catches herself mid-fidget and offers a small, mostly rueful half-smile — she recognizes
+    that her own hand's motion is not doing the grounding work it usually does.
+  visual_proof: Mira's face registering recognition of her own hand's fidgeting, a small half-smile that
+    reads as rueful rather than amused.
+  information_delta: Reader sees the meta-noticing that makes the distinction possible — Mira catching the
+    difference between the gesture and the practice itself.
+  beat_role: meta_noticing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_024
+  page_id: ep_007_p02
+  story_function: re_choice_grounding
+  story_move: Mira releases the pendant and sets both palms flat on the desk instead — she actively chooses
+    a different grounding method rather than repeating the gesture that had gone hollow.
+  visual_proof: Close on Mira's hand releasing the pendant chain and placing both palms flat on the desk
+    surface.
+  information_delta: Reader sees the practice is adaptive — when one anchor stops working, Mira has another
+    available, a new grounding method for the series.
+  beat_role: re_choice
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_025
+  page_id: ep_007_p02
+  story_function: re_choice_grounding
+  story_move: With eyes closed and hands flat on the desk, Mira's breath finds a settled rhythm against
+    the ordinary office hum around her — the surface-contact grounding actually holds.
+  visual_proof: Wider desk shot, Mira's hands flat, eyes closed, late-morning light shifting through the
+    blinds around her.
+  information_delta: Reader confirms the substitute grounding method succeeds where the pendant fidget had
+    started to fail.
+  beat_role: breath_bracket
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_026
+  page_id: ep_007_p02
+  story_function: long_drop_decompression
+  story_move: Alone in the office bathroom, Mira stands at the sink for two full silent minutes, meeting
+    her own tired, unarmored reflection with no dialogue, caption, or sound.
+  visual_proof: Wide silent panel of Mira alone at an office bathroom sink, hands braced on the counter,
+    looking directly at her own reflection under cool fluorescent light.
+  information_delta: Reader is given a held, wordless pause after a hard stretch of morning — the pause
+    itself, not new information, is the content.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_027
+  page_id: ep_007_p02
+  story_function: sensory_reset_return
+  story_move: Mira turns on the cold water tap and reaches her other hand down toward the basin — a new
+    sensory grounding method, distinct from the pendant or the desk, appears for the first time.
+  visual_proof: Close on Mira's hand turning the cold tap, water filling the basin, her other hand reaching
+    down toward it.
+  information_delta: Reader sees a third distinct grounding technique introduced this episode alone, expanding
+    the practice's toolkit.
+  beat_role: sensory_ground
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_028
+  page_id: ep_007_p02
+  story_function: sensory_reset_return
+  story_move: Cold water runs over Mira's wrists for a long beat with her eyes closed — the reset physically
+    completes before she leaves the bathroom.
+  visual_proof: Close on Mira's wrists under running cold water, eyes closed, held for a long beat.
+  information_delta: Reader is shown the reset completing in the body itself, not just narrated as finished.
+  beat_role: sensory_ground
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_029
+  page_id: ep_007_p02
+  story_function: completion_return
+  story_move: Back at her desk with the succulent and travel mug in frame, Mira finally begins typing a
+    slow, deliberate reply to the Friday-night email — the deferred task is now actually underway.
+  visual_proof: Mira at her desk, hands on the keyboard, the office succulent and travel mug both in frame,
+    starting to type a reply.
+  information_delta: Reader sees the avoided task finally being addressed, closing the loop opened by panel
+    9's onset.
+  beat_role: scene_transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_030
+  page_id: ep_007_p02
+  story_function: completion_return
+  story_move: The laptop screen shows a partial, ordinary reply beginning with an apology for the delay
+    — the dreaded email becomes a small, unremarkable sentence once actually written.
+  visual_proof: Close on the laptop screen showing a partial email reply, the opening line about apologizing
+    for the delay visible.
+  information_delta: Reader sees the catastrophized email deflate into ordinary workplace language once
+    Mira actually engages with it.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_031
+  page_id: ep_007_p02
+  story_function: completion_return
+  story_move: Wider on the desk, Mira's posture has loosened from the tight activation of the morning as
+    late-morning light stripes across her through the blinds.
+  visual_proof: Wider desk shot, the succulent's leaves catching late-morning office light, Mira typing
+    with loose rather than tight posture, window blinds striped across her.
+  information_delta: Reader confirms the day continues in an ordinary register — not transformed, just
+    settled enough to keep working.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_032
+  page_id: ep_007_p02
+  story_function: imperfect_practice_teaching_landing
+  story_move: The final panel closes on the desk's small objects — succulent, half-empty travel mug, Mira's
+    still hand near the keyboard — while the closing caption names the returning-not-staying frame directly
+    for the first time in the series.
+  visual_proof: Close on the desk — succulent, half-empty travel mug, Mira's hand briefly still near the
+    keyboard, caption strip below.
+  information_delta: Reader receives the episode's explicit thesis — the alarm will go off again, and the
+    practice is the returning, not a finished state.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_007.yaml
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ep_007 script''s already-demonstrated
+  story_move per panel; does not claim system_working or proven_at_bar.'

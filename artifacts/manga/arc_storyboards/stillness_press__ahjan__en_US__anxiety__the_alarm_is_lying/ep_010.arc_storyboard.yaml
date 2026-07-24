@@ -1,0 +1,437 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_010
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 10: Tuesday, 6:47 AM (Six Weeks Later)'
+logline: A recurring Q-review work notification returns on the exact bedside phone from episode one, testing
+  six weeks of practice against the same trigger that once hijacked Mira's whole morning.
+stakes_now: The same category of work notification that hijacked Mira's very first morning fires again on
+  the identical bedside phone, and the episode has to prove whether six weeks of practice actually changed
+  her body's response or only her mood on that one earlier day.
+stakes_end: Across all ten episodes the alarm itself is never fixed — the same notification and the same
+  smoke detector still fire on this final morning — but Mira's recovery has compressed from a multi-page
+  spiral in episode one to a single fast exhale here, closing the arc's first block on a practice that
+  measurably compounds without ever curing her.
+genre_cadence:
+- mirrored_opening_ritual
+- activation_trigger_mirrored
+- fast_ground_return
+- anchor_object_growth_witness
+- embodied_practice_without_prop
+- teaching_image_callback
+- kitchen_ritual_return
+- decision_to_step_outside
+- river_walk_awe_pullback
+- quiet_sociality_beat
+- long_drop_forward_motion
+- homecoming_ritual_completion
+- closing_bookend_caption
+page_turn_promises:
+- page_id: ep_010_p01
+  promise: Will the identical Q-review notification hit Mira the same way it did on her very first morning,
+    or has something in her body actually changed after six weeks?
+- page_id: ep_010_p02
+  promise: Having settled fast inside, will Mira take the practice out into the world today, or stay safely
+    at the kitchen table the way she always has?
+notes: Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence, mirroring
+  the ep_001 backfill pattern from merged PR 135 — ep_010 was authored (M3 Wave 1, series finale) before the
+  storyboard-first process existed. This plan describes the story_move already present in the shipped
+  script; it does not add new panels. The single original top-level pages list (all 30 panels grouped under
+  ep_010_p01) has been split into ep_010_p01 (panels 1-13, the mirrored bedroom-to-kitchen opening) and
+  ep_010_p02 (panels 14-30, the decision to walk outside through the closing bookend) to satisfy the
+  page-one-hook / page-two-turn contract, matching the ep_001 precedent — panel order and content are
+  unchanged, only page grouping. As with ep_001, no config/manga/genre_scene_templates/iyashikei.yaml exists
+  yet, so genre_cadence
+  above is derived from the episode's own already-demonstrated structural beats rather than a formal
+  scene-template file. This is the last episode of the arc's first block (ep_001-010); stakes_end reflects
+  the ten-episode arc position, not only this episode's own micro-arc.
+panels:
+- panel_id: ep010_001
+  page_id: ep_010_p01
+  story_function: mirrored_opening_ritual
+  story_move: Opens on the identical bedside composition from episode one, but the succulent has migrated
+    from windowsill to nightstand — six weeks of quietly added ritual made visible before Mira even appears.
+  visual_proof: Wide dawn bedroom mirroring ep_001 panel 1 — phone face-down, clock at 6:47, succulent now
+    on the nightstand instead of the sill.
+  information_delta: Reader recognizes the bookend composition and registers one concrete change — the
+    succulent has moved.
+  beat_role: mirror_opening
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_002
+  page_id: ep_010_p01
+  story_function: mirrored_opening_ritual
+  story_move: Establishes Mira's resting baseline exactly as ep_001 did — asleep, unhurried — giving the
+    reader a before-state to measure this episode's faster recovery against.
+  visual_proof: Wide bedroom shot, Mira asleep, sheets rumpled, breathing slow, same dawn light as episode
+    one.
+  information_delta: Reader is time-stamped (Tuesday, six forty-seven) and told this is the same kind of
+    morning.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_003
+  page_id: ep_010_p01
+  story_function: mirrored_opening_ritual
+  story_move: Mira wakes without any alarm sound at all — the first hard proof that her body's rhythm has
+    changed since episode one, before any notification even arrives.
+  visual_proof: Mira's eyes opening slowly and voluntarily, no alarm clock triggering the moment.
+  information_delta: Reader learns the wake-up itself is now unforced, a concrete behavioral change from
+    six weeks of practice.
+  beat_role: somatic_baseline_shift
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_004
+  page_id: ep_010_p01
+  story_function: mirrored_opening_ritual
+  story_move: Mira reaches for the jade pendant unprompted, beginning the morning ritual on her own terms
+    before any external trigger forces her hand.
+  visual_proof: Mira's hand lifting the jade pendant off the nightstand beside the succulent, unhurried.
+  information_delta: Reader sees the ritual object is now reached for by choice, not as a coping response
+    to a trigger.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_005
+  page_id: ep_010_p01
+  story_function: activation_trigger_mirrored
+  story_move: The external trigger arrives — the same class of work notification that opened episode one
+    fires on the same bedside phone, testing whether the practice holds against the identical stimulus.
+  visual_proof: Phone face-down lighting at the edges with a quiet vibration, mirroring ep_001 panel 4's
+    compositional language.
+  information_delta: Reader confirms this episode's test case — the identical trigger returning six weeks
+    later.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_006
+  page_id: ep_010_p01
+  story_function: activation_trigger_mirrored
+  story_move: Mira reads the same category of work-review notification and sets the phone back down herself
+    instead of spiraling into it, an active choice replacing episode one's helpless activation.
+  visual_proof: Phone screen showing the Q-review prep notification, Mira setting it face-down again, one
+    small breath.
+  information_delta: Reader learns the specific content of the trigger and sees Mira choosing not to chase
+    it.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_007
+  page_id: ep_010_p01
+  story_function: fast_ground_return
+  story_move: The activation discharges within a single panel-beat instead of building across several —
+    the episode's central proof that recovery speed itself has changed.
+  visual_proof: Close view of Mira's chest, a slight tightening followed by a visible exhale and settling
+    shoulders, all in one panel.
+  information_delta: Reader measures the somatic recovery time directly against episode one's much slower
+    unwind.
+  beat_role: somatic_recovery
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_008
+  page_id: ep_010_p01
+  story_function: fast_ground_return
+  story_move: Mira orients toward the anchor object without needing to be told to — the pendulation reflex
+    has become automatic rather than effortful.
+  visual_proof: Mira sitting up against the headboard, hair loose, gaze resting on the bedside succulent.
+  information_delta: Reader sees the anchor is reached for spontaneously, not coached.
+  beat_role: pendulation_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_009
+  page_id: ep_010_p01
+  story_function: anchor_object_growth_witness
+  story_move: The anchor object itself has visibly grown a new rosette in six weeks, giving the practice
+    a physical, undeniable timestamp beyond narration.
+  visual_proof: Macro shot of the succulent showing a new tiny growth at the center of the rosette, absent
+    from earlier episodes.
+  information_delta: Reader is handed literal evidence of elapsed time and sustained care, not just a stated
+    claim.
+  beat_role: anchor_evidence
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_010
+  page_id: ep_010_p01
+  story_function: embodied_practice_without_prop
+  story_move: Mira checks in with her own body directly, without reaching for the pendant or any prop —
+    proof the regulation skill has internalized past its original object.
+  visual_proof: Mira's hand resting lightly on her own chest, a confirming touch with no ritual object involved.
+  information_delta: Reader sees the practice has generalized beyond the tea and pendant props established
+    in earlier episodes.
+  beat_role: embodied_skill
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_011
+  page_id: ep_010_p01
+  story_function: teaching_image_callback
+  story_move: The original teaching image returns in the corner of the frame and Mira acknowledges it in
+    passing without needing it to regulate her — the vessel object has become furniture, not a crutch.
+  visual_proof: Mid-shot of Mira walking toward the kitchen, the ceiling smoke detector visible through the
+    doorway, a small smile as she passes it.
+  information_delta: Reader sees the series' central teaching image demoted from active anchor to a settled,
+    integrated memory.
+  beat_role: teaching_vessel_closure
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_012
+  page_id: ep_010_p01
+  story_function: kitchen_ritual_return
+  story_move: The frame widens to show two succulents now exist — the original sill plant and its bedside
+    offspring — and the basil still alive beside them, proof the practice has multiplied unnoticed through
+    the six weeks.
+  visual_proof: Wide kitchen shot at dawn, the parent succulent and basil glass on the sill, Mira at the
+    counter filling the kettle.
+  information_delta: Reader gets the full domestic context and a visible multiplication of the ritual objects
+    since episode one.
+  beat_role: ritual_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_013
+  page_id: ep_010_p01
+  story_function: kitchen_ritual_return
+  story_move: The kettle goes onto the burner with a sure, practiced motion — the same domestic gesture
+    repeated across all ten episodes now performed without hesitation.
+  visual_proof: Close view of the kettle settling onto the lit burner, hand steady, same kettle as every
+    prior episode.
+  information_delta: Reader registers the gesture's certainty as page one closes on an open question — what
+    will Mira do with this settled morning.
+  beat_role: ritual_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_014
+  page_id: ep_010_p02
+  story_function: decision_to_step_outside
+  story_move: Mira makes an unscripted choice to leave the kitchen before her tea is even ready, trading
+    the safest option for something new — the page-two turn the reader has been promised.
+  visual_proof: Mira at the counter looking out the window, then turning her body toward the door, a visible
+    decision forming.
+  information_delta: Reader learns today will not simply repeat the indoor ritual — Mira is choosing to
+    step outside it.
+  beat_role: decision_point
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_015
+  page_id: ep_010_p02
+  story_function: decision_to_step_outside
+  story_move: Mira turns off the whistling kettle mid-ritual and leaves it unfinished to go outside — she
+    trusts the tea will wait, prioritizing the walk over the completed routine for the first time in the
+    series.
+  visual_proof: Mira at the door switching off the whistling kettle, pulling on a cardigan over pajamas,
+    stepping into sneakers with no socks.
+  information_delta: Reader sees the ritual interrupted by choice rather than by crisis — a new kind of
+    flexibility.
+  beat_role: decision_point
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_016
+  page_id: ep_010_p02
+  story_function: river_walk_awe_pullback
+  story_move: The setting changes entirely to a location never used anywhere else in the series — the river
+    — widening the episode's world beyond the apartment for the first time in ten episodes.
+  visual_proof: Wide river path shot at sunrise, city skyline across the water, cool breath visible, Mira
+    walking with hands in cardigan pockets.
+  information_delta: Reader is given new physical space the practice can now occupy, beyond the bedroom
+    and kitchen.
+  beat_role: new_territory
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_017
+  page_id: ep_010_p02
+  story_function: river_walk_awe_pullback
+  story_move: Mira's face registers ease in open air rather than the braced alertness of episode one's kitchen
+    table, showing the practice generalizes to unfamiliar outdoor space.
+  visual_proof: Mira looking out across the water, hair lifted by the dawn breeze, expression peaceful and
+    awake.
+  information_delta: Reader confirms the calm is holding even outside the controlled home environment.
+  beat_role: somatic_confirmation
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_018
+  page_id: ep_010_p02
+  story_function: anchor_object_growth_witness
+  story_move: The anchor motif appears in the wild without Mira seeking it out — the practice has become
+    a way of seeing rather than a deliberate technique she has to remember to use.
+  visual_proof: Macro shot of a dew-bright jade-green leaf on the path beside Mira's foot, an unprompted
+    visual rhyme with the succulent.
+  information_delta: Reader sees the anchor pattern generalize into the wider world unbidden.
+  beat_role: anchor_evidence
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_019
+  page_id: ep_010_p02
+  story_function: river_walk_awe_pullback
+  story_move: The widest composition of the entire series deliberately shrinks Mira against the world —
+    a visual argument that being held by something larger, not being fixed, is the point of the practice.
+  visual_proof: Extreme wide pullback of the river path at sunrise, city skyline distant, Mira small in
+    the foreground, birds crossing the sky.
+  information_delta: Reader receives the series' broadest spatial statement just before its final act.
+  beat_role: awe_pullback
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_020
+  page_id: ep_010_p02
+  story_function: quiet_sociality_beat
+  story_move: Mira has a small, wordless social exchange with a stranger on the path — proof the practice
+    holds up under low-stakes contact with another person, not just in solitude.
+  visual_proof: Mira passing an older woman walking a small dog, a mutual nod, the dog briefly sniffing
+    Mira's shoe.
+  information_delta: Reader sees the practice tested against ordinary social contact for the first time
+    this episode.
+  beat_role: relational_test
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_021
+  page_id: ep_010_p02
+  story_function: quiet_sociality_beat
+  story_move: Mira touches the bench without needing to stop and sit — a small, deliberate proof that she
+    no longer needs to fully halt in order to regulate.
+  visual_proof: Mid-shot of Mira resting a hand briefly on the back of a riverside bench, then continuing
+    to walk without sitting.
+  information_delta: Reader registers that stopping completely is no longer required for the practice to
+    hold.
+  beat_role: relational_test
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_022
+  page_id: ep_010_p02
+  story_function: long_drop_forward_motion
+  story_move: The series' final Long Drop shows Mira walking forward and away rather than sitting still
+    — the doctrinal choice that the practice is returning-while-moving, not stopping.
+  visual_proof: Wide silent panel, Mira walking away from camera along the river path into rose-gold dawn
+    light, no text or sound.
+  information_delta: Reader is given the held, wordless proof that the practice now moves forward with
+    her rather than requiring pause.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_023
+  page_id: ep_010_p02
+  story_function: homecoming_ritual_completion
+  story_move: Mira returns home and resumes the exact domestic ritual she interrupted, closing the loop
+    she opened by choosing to leave — the walk did not replace the ritual, it made room for it.
+  visual_proof: Kitchen shot in full morning sun, cardigan draped on a chair, Mira filling the kettle again,
+    succulent and basil in the window.
+  information_delta: Reader sees the interrupted ritual resumed intact, proving the walk and the tea are
+    not in competition.
+  beat_role: ritual_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_024
+  page_id: ep_010_p02
+  story_function: homecoming_ritual_completion
+  story_move: The kettle goes on for the second time this episode, completing the ritual Mira chose to defer
+    rather than skip — deferral, not sacrifice.
+  visual_proof: Close view of the kettle on the burner, flame just catching underneath.
+  information_delta: Reader confirms the deferred ritual is being completed, not abandoned.
+  beat_role: ritual_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_025
+  page_id: ep_010_p02
+  story_function: homecoming_ritual_completion
+  story_move: Mira puts the pendant on for the first time this episode, completing the morning ritual she
+    began holding but not wearing in panel four — the full practice closes on her body.
+  visual_proof: Mira fastening the jade pendant around her neck, kitchen window full of light behind her.
+  information_delta: Reader sees the ritual object move from held to worn, marking the practice's completion
+    for the day.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_026
+  page_id: ep_010_p02
+  story_function: homecoming_ritual_completion
+  story_move: The kettle reaches full steam beside the two living plants, a quiet still-life confirming
+    the domestic world has held steady through the whole detour outside.
+  visual_proof: Kettle steaming on the counter beside the succulent and basil in the window.
+  information_delta: Reader is given a beat of confirmed stability before the closing sequence begins.
+  beat_role: ritual_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_027
+  page_id: ep_010_p02
+  story_function: closing_bookend_caption
+  story_move: Mira opens a notebook and begins writing at the table — a new object never used in prior
+    episodes, showing the practice has extended into forward planning, not just recovery.
+  visual_proof: Mira seated at the table with tea in the same clay mug from episode one, a small open notebook
+    beside it.
+  information_delta: Reader is introduced to the notebook as evidence the practice supports ordinary future-planning,
+    not just crisis response.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_028
+  page_id: ep_010_p02
+  story_function: closing_bookend_caption
+  story_move: The notebook entry places the same Q-review meeting that could have triggered a spiral onto
+    an ordinary to-do list beside watering the plant — the alarm's subject has been fully absorbed into
+    mundane planning.
+  visual_proof: Close view of Mira's hand writing the visible line about the Q-review prep and watering
+    the plant in the notebook.
+  information_delta: Reader sees the trigger explicitly reduced to one item on an ordinary list, proof of
+    the episode's central claim.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_029
+  page_id: ep_010_p02
+  story_function: closing_bookend_caption
+  story_move: Mira settles into the completed morning, present rather than braced, mirroring episode one's
+    ending state but reached far faster this time.
+  visual_proof: Mid-shot of Mira sipping tea and looking out the kitchen window, expression soft and present,
+    pendant visible at her neck.
+  information_delta: Reader confirms the episode's ending state without any new plot information, purely
+    felt completion.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_030
+  page_id: ep_010_p02
+  story_function: closing_bookend_caption
+  story_move: The series closes on the same window composition it opened on in episode one, now holding
+    two plants instead of one and Mira's reflection folded into the glass — visual proof that the practice
+    compounded without the world needing to change.
+  visual_proof: Close on the kitchen window with succulent and basil side by side, a slice of dawn-gold
+    city beyond, Mira's blurred reflection visible at the table behind.
+  information_delta: Reader receives the series' final thesis in the closing caption, paying off the title
+    after ten episodes of demonstration.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_010.yaml
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped script''s already-demonstrated
+  story_move per panel; does not claim system_working or proven_at_bar. Series-finale position: this plan''s
+  stakes_end is written at the arc level (all ten episodes), not only this episode''s micro-arc, per the
+  backfill instructions for the final episode of the ep_001-010 block.'

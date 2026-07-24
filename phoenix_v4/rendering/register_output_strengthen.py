@@ -1023,3 +1023,23 @@ def strengthen_register_craft_output(
     work = remove_sub_four_word_orphan_paragraphs(work)
     work = ensure_book_terminal_integrity(work)
     return work
+
+
+# Compatibility aliases expected by scripts/run_pipeline.py spine path.
+# ensure_unique_chapter_closings is the landed name; pipeline imports the append_* alias.
+append_unique_chapter_closings = ensure_unique_chapter_closings
+
+
+def rotate_boundaries_residue_phrase_density(
+    prose: str,
+    *,
+    seed: str = "boundaries_residue",
+    protected_spans=None,
+) -> str:
+    """Passthrough until a dedicated residue-density rotator is landed.
+
+    The spine pipeline imports this symbol; returning prose unchanged preserves
+    prior surfaces while unblocking Core collection/import for outline tests.
+    """
+    _ = seed, protected_spans
+    return prose

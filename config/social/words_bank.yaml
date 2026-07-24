@@ -1,0 +1,128 @@
+schema_version: 1
+registry_type: deterministic_social_words_bank
+hook_families:
+  validation:
+    fatigue_budget_per_9: 2
+    pattern: "Name a private experience without making it permanent."
+  contrarian:
+    fatigue_budget_per_9: 1
+    pattern: "Challenge a common assumption without shame or certainty theater."
+  mechanism:
+    fatigue_budget_per_9: 2
+    pattern: "Explain one cause or loop in plain language."
+  practical_tool:
+    fatigue_budget_per_9: 2
+    pattern: "Give one small action the reader can try today."
+  identity:
+    fatigue_budget_per_9: 1
+    pattern: "Help the reader see a kinder identity frame."
+  story:
+    fatigue_budget_per_9: 1
+    pattern: "Turn a recognizable moment into a lesson."
+  myth_truth:
+    fatigue_budget_per_9: 1
+    pattern: "Pair a false belief with a safer truth."
+  checklist:
+    fatigue_budget_per_9: 2
+    pattern: "Break action into a saveable sequence."
+  question:
+    fatigue_budget_per_9: 1
+    pattern: "Ask a genuine reflection question."
+platform_copy_modes:
+  professional_evidence:
+    platforms: [linkedin]
+    caption_shape: "professional context, mechanism, work relevance, first-comment resource"
+    forbidden_tone: [breathless, confessional_overshare, hustle_clickbait]
+  emotional_saveable:
+    platforms: [instagram]
+    caption_shape: "recognition, validation, mechanism, one practice, save/share prompt"
+    forbidden_tone: [diagnostic_claim, fear_hook]
+  hook_first_retention:
+    platforms: [tiktok_reels_shorts, instagram_reels, youtube_shorts]
+    caption_shape: "front-loaded hook, one mechanism, short practice, no cure claim"
+    forbidden_tone: [cure_all, shame_spike]
+  searchable_saveable:
+    platforms: [pinterest]
+    caption_shape: "keyword title, practical description, evergreen save CTA"
+    forbidden_tone: [vague_mystical, dense_caption]
+  community_discussion:
+    platforms: [facebook]
+    caption_shape: "relatable setup, validation, practical reset, discussion question"
+    forbidden_tone: [argument_bait, medical_advice]
+  compressed_shareable:
+    platforms: [x]
+    caption_shape: "single quotable idea plus one restrained tag"
+    forbidden_tone: [threadbait, fake_quote]
+  conversational_reply:
+    platforms: [threads]
+    caption_shape: "real-talk statement, one practice, soft reply prompt"
+    forbidden_tone: [brand_broadcast, fake_intimacy]
+  thoughtful_direct:
+    platforms: [bluesky]
+    caption_shape: "plain claim, nuance, one tag"
+    forbidden_tone: [engagement_hack, pile_on]
+  practical_local:
+    platforms: [google_business]
+    caption_shape: "practical local/event resource style"
+    forbidden_tone: [therapy_claim, social_slang]
+topics:
+  burnout:
+    book_title: "The 5-Minute Energy Audit"
+    insight: "Burnout is not only tiredness; it is a mismatch between output demands and recovery signals."
+    mechanism: "The system keeps spending energy as if the old reserve is still there."
+    practice: "Name one leak, one recovery signal, and one task that can become smaller today."
+    safe_hook: "Burnout often starts before exhaustion has a name."
+    hashtags: [burnout, burnoutrecovery, workplacewellbeing, energyaudit, selfreflection]
+  overthinking:
+    book_title: "Quiet the Loop"
+    insight: "Overthinking is often care looking for certainty it cannot get yet."
+    mechanism: "The mind keeps generating paths because action feels risky without perfect clarity."
+    practice: "Write the thought in one sentence, underline what is actionable, and circle what is unknowable."
+    safe_hook: "Your mind is not broken; it is trying to finish a loop."
+    hashtags: [overthinking, workanxiety, selfreflection, mentalhealth, mindfulwork]
+  anxiety:
+    book_title: "Untangle the Alarm"
+    insight: "Anxiety can make a neutral task feel urgent before the facts are complete."
+    mechanism: "The body alarm sends danger signals faster than the thinking mind can sort them."
+    practice: "Find the tightest place in the body, exhale longer, and choose the smallest next task."
+    safe_hook: "You do not have to solve the whole alarm at once."
+    hashtags: [anxietytools, nervoussystem, grounding, selfregulation, mentalhealth]
+  hope:
+    book_title: "The Next Small Light"
+    insight: "Hope often begins as a practice before it returns as a feeling."
+    mechanism: "A small repeated action gives the system evidence that tomorrow can be entered."
+    practice: "Pick one small light: water, window, shower, message, or walk."
+    safe_hook: "Hope usually starts smaller than confidence."
+    hashtags: [hope, smallsteps, recovery, selfreflection, gentlepractice]
+personas:
+  corporate_managers:
+    label: "corporate managers"
+    private_behavior: "answering after-hours messages while telling yourself it is just one more thing"
+    platform_bias: [linkedin, facebook, instagram]
+  gen_z_professionals:
+    label: "Gen Z professionals"
+    private_behavior: "replaying a tiny work message like it contains the whole future"
+    platform_bias: [instagram, tiktok_reels_shorts, threads, x]
+  healthcare_rns:
+    label: "healthcare RNs"
+    private_behavior: "finishing a shift while your body still thinks it is on alert"
+    platform_bias: [tiktok_reels_shorts, instagram, facebook]
+  working_parents:
+    label: "working parents"
+    private_behavior: "switching from work mode to care mode without a real landing"
+    platform_bias: [facebook, pinterest, instagram]
+safety_rules:
+  banned_phrases:
+    - "cures anxiety"
+    - "fixes depression"
+    - "diagnose yourself"
+    - "this proves you have trauma"
+    - "guaranteed results"
+    - "mental illness is a choice"
+    - "if you do not heal"
+  required_disclaimer_topics: [anxiety, depression, trauma, grief]
+  disclaimer: "This is reflective education, not medical or mental health care."
+cta_defaults:
+  link_placeholder: "UPLOAD_OR_LINK_REQUIRED"
+  release_gate: manual_review_required
+  fallback_caption_suffix: "Save this and use the free guide when you want the full practice."

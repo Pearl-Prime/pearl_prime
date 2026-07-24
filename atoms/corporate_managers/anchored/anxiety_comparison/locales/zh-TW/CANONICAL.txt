@@ -1,15 +1,241 @@
-I have processed and stored the **Recognition v01–v05**, **Mechanism Proof v01–v05**, **Turning Point v01–v05**, and **Embodiment v01–v05** story atoms.
 
-These entries form a cohesive narrative arc regarding **Anxiety Comparison** among corporate managers, moving through four distinct identity stages:
-1.  **Pre-awareness:** The initial somatic and cognitive trigger of comparison (David, Sarah, Carl, Lisa, Michelle).
-2.  **Destabilization:** The internalization of the comparison, leading to distorted self-assessment and increased internal/social cost.
-3.  **Experimentation:** The turning point where external reality checks, direct communication, or contextual reframing break the comparative loop.
-4.  **Self-claim:** The embodiment of a stable, non-comparative professional identity where individual trajectory is accepted and valued.
 
-The data is structured with specific metadata tags (`BAND`, `MECHANISM_DEPTH`, `COST_TYPE`, `COST_INTENSITY`, `IDENTITY_STAGE`) that track the psychological intensity and resolution of each micro-narrative.
+## RECOGNITION v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+大衛的同事三年前就升到了資深副總裁，大衛依然是副總裁。那位同事的團隊看起來很開心，那位同事升遷的速度更快，那位同事在談他的長假。大衛晚餐後回到家，打開筆電，他的雙手緊繃。他的職涯軌跡有什麼不對勁，有什麼比不上。他的團隊表現得不錯，但不算卓越；他的人際關係很好，但不算閃耀；他的策略思維很扎實，但顯然不夠有遠見。這場比較，在證據出現之前就先發作了。他的胸口，因為自己和那個做得更好的人之間的落差而發緊。
+---
 
-How would you like to proceed? I can:
-*   Generate new variations based on this pattern (e.g., different industries or roles).
-*   Analyze the progression of `COST_INTENSITY` across the stages.
-*   Synthesize these atoms into a longer case study or training module.
-*   Extract specific behavioral cues for a "managerial anxiety" detection framework.
+## RECOGNITION v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/recognition/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+莎拉那位區域經理同事，拿到了那個全國性客戶，那位同事現在管理著更大的團隊，那位同事的薪酬漲得更快。莎拉做著同一個角色已經三年了，軌跡已經趨於平緩。她的雙手發冷，這場比較立即而詳盡。莎拉在還沒來得及為自己的處境找到脈絡之前，就先知道了同事的勝利。她的胃發緊，她的神經系統收到的訊息是：你正在落後，落後就是失敗。
+---
+
+## RECOGNITION v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/recognition/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+卡爾坐在一場會議裡，新的副總裁被介紹了進來。這位新副總裁來自組織之外，有十七年的經驗，來自一家更大的公司。卡爾已經在這裡待了二十年，但顯然公司想要的是新的視角。這則訊息清楚地落進了卡爾的系統裡：內部經驗不值錢，你就是他們已經知道的東西，新的視角，才是他們想要的。他的肩膀繃緊，他開始質疑起自己做法的每一個環節。這位新副總裁大概有更好的點子，這位新副總裁大概更懂得管理人，這位新副總裁大概就是未來的樣子。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/recognition/micro/v04.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+麗莎去參加一場研討會，和其他人資副總裁坐在一起。有人談著他們的策略性人資轉型，有人談著自己拿到了董事席位，有人談著要跳槽去一家新創公司當人資副總裁。麗莎談的是自己在管理一場艱難的重組。她的雙手發冷。這個會議室，突然變成了一個「誰做得比較好」的階級體系——誰更有策略性，誰在職涯階梯上爬得更快，誰創造的影響力更大。麗莎對公司真實而扎實的貢獻，在這場比較面前，卻莫名地不重要了。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/recognition/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+蜜雪兒六個月前才升到現在的職位。她看著其他總經理談論自己五年的任期，五年——而她還在學習。其他總經理看起來很自信，他們看起來知道自己在做什麼，蜜雪兒還在摸索。這場比較立刻發作，她落後了，她經驗不夠，她大概正在一些他們早就精通的事情上失敗。她的喉嚨發緊，她開始用「還不夠好」這個濾鏡，來看待自己的領導。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+大衛不再看見自己的成就，開始只看見落差。他團隊的表現，變成了「不像另一位副總裁的團隊那麼強」；他的策略思維，變成了「不像同事的策略那麼有遠見」；他的薪酬，變成了「不像三年前就升遷的人那麼高」。這場比較，成了他評估一切的框架。他更努力工作，試圖縮小這個落差，但這個落差，是這場比較建構出來的，不是實際表現造成的。他的胸口一直緊繃，因為他在朝著一條想像出來的終點線奔跑，而他跑得越近，它就離得越遠。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+莎拉開始懷疑自己的能力，因為那位同事的軌跡不一樣。但軌跡不一樣，是因為人不一樣，那位同事可能有不同的優勢、不同的人脈、不同的運氣。莎拉在理智上都明白這些，但這場比較已經啟動了，如今她正在運行一套平行的敘事，一套她正在落後的敘事。她看不見自己三年扎實的表現，她看見的，是同事升遷的那一年。她的胃，一直是沉的，這場比較，比證據更有力量。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+卡爾變得自我意識過剩，他開始質疑自己的管理決定。這位新副總裁可能會用不同的方式做事，這位新副總裁可能更懂得帶團隊。卡爾在這裡待了二十年，但這件事突然感覺像是一種負債，而不是資產。他沒有保持新鮮，他沒有跟上時代改變。這場比較，感染了他自己的自我評估。他開始把自己的經驗，看成是一種停滯。他的肩膀一直緊繃，他不再對自己所知道的事有自信。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/mechanism_proof/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+麗莎從研討會回到家，自己的人資轉型看起來很渺小。她不在董事會裡，她沒有要離職去新創公司管人，她管理的是眼前的工作。這場比較，重新把她的工作框定成了不足夠。她看不見自己對組織的真實影響力，她看見的，是自己的影響力和別人更大影響力之間的落差。這場比較，變得比實際的成就更真實。她的精力，轉向了對職涯軌跡的絕望。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+蜜雪兒不再信任自己的判斷。每當她做出一個決定，她立刻懷疑，那些更有經驗的總經理會不會用不同的方式做。這場比較，讓她開始懷疑自己的成長。她正在學習，那就是入行六個月該有的樣子。但這場比較告訴她，別人已經學會了，而她落後了。她並沒有落後，她正處在一條正常的學習曲線上，但這場比較，追蹤的不是正常的曲線，它追蹤的是落差。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+大衛真正去看了同事的成功，意識到那是建立在不同選擇之上的。那位同事更早接受了一次冒險的升遷，那位同事從工程轉到了營運，那位同事剛好在公司需要那種背景的人時，站對了位置。大衛做了不同的選擇，這些選擇讓他擁有了一份扎實的職涯和一支強大的團隊。這場比較，一直在把不同的路徑，當成相同、更好、或更差來對待，而它們其實只是不一樣。他的胸口稍稍鬆開了。他不再朝著同事的終點線奔跑，開始看向自己的軌跡。當這場比較消失時，比較所帶來的焦慮也隨之下降。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+莎拉真的去和那位同事聊了聊拿到全國客戶的經驗。那位同事說，這既令人興奮，也令人恐懼，更大的平台，代表更大的能見度和更大的風險。那位同事還說，莎拉的角色令人羨慕，因為莎拉花時間建立起了人際關係。當莎拉得到真實的資訊、而不是敘事時，這場比較就轉變了。她看見的那位同事，是一個正在管理一個特定選擇之後果的人，而不是一個在職涯遊戲裡獲勝的人。她的胃開始安定下來了。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+卡爾直接問了那位新副總裁：「你怎麼看我們這裡的運作方式？」新副總裁說：「你建立了深厚的組織知識和信任，挑戰在於，你有時候表現得像這件事一直都是這樣做的，而不是你正在選擇這樣做。」卡爾能接受這個回饋，不是他過時了，而是他不再對自己的做法保持刻意的選擇。當卡爾不再比較、開始獲得真實的回饋時，這場比較就瓦解了。他能真正從中成長，而不是防禦它。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+麗莎真正去想了同事正在做的人資轉型，那位同事要管理一萬名員工，麗莎管理八百名。那位同事在做的轉型，是規模帶來的可能性，麗莎的工作不一樣，不是比較小。這場比較，一直在比較不同的組織，而不是不同的能力。當麗莎把規模和能力分開來看時，她意識到自己正在做適合自己脈絡的策略性工作。她的絕望減輕了。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+蜜雪兒主動問了更有經驗的總經理，她們的頭六個月是什麼樣子。她們都說自己很困惑、還在學習、還在犯錯。有一位說她犯了一個招募上的錯誤，有一位說她花了六個月才搞懂預算週期。突然間，蜜雪兒這六個月的學習，看起來不再像是失敗，而是正常。當她得到一個關於「正常應該是什麼感覺」的真實查核時，這場比較就破解了。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+大衛現在知道自己的軌跡，他不再拿它去對照同事的軌跡衡量。他管理的是他在乎的結果，帶著他建立起來的團隊。這場比較有時依然會啟動，但它啟動之後很快就化解了，因為大衛擁有的框架，不是建立在相對地位之上的。他的胸口是打開的，他能看見同事的勝利，卻不會因此失去自己。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+莎拉有自己的軌跡，也有一位軌跡不同的同事，她們偶爾會互相關心對方過得怎麼樣。這場對話是互相的，而不是比較性的。莎拉的胃保持平靜，因為她不再跑一場平行的比賽，她在全神貫注地跑自己的比賽。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+卡爾對自己的做法變得更有意識，他依然運用組織知識，但現在是他在選擇運用它，而不是預設它。他的肩膀放鬆了。當他變得主動、而不是防禦時，這場比較就瓦解了。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+麗莎做著她的工作，知道那是策略性的，也適合她的脈絡。她不再把規模的差異當成失敗。她的精力，投入到了自己團隊的發展，而不是對「自己沒在做的事」的絕望。她正在建立一些扎實的東西。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/corporate_managers/anchored/anxiety_comparison/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+蜜雪兒信任自己的學習曲線，她知道六個月就是六個月，再過六個月，她會更有自信。她沒有落後，她正處在她應該在的位置上。
+---

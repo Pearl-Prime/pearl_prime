@@ -1,0 +1,438 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_005
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 5: Friday, 12:08 PM'
+logline: A lunch invitation from a coworker, Yara, pulls Mira's private regulation
+  practice into view for the first time, testing whether it can be witnessed by
+  another person without turning into an explanation.
+stakes_now: Mira has kept her nervous-system practice private; if Yara notices and
+  asks about it, Mira risks either deflecting a friend or having to explain something
+  she does not yet have words for.
+stakes_end: The practice survived being witnessed — Yara noticed, Mira admitted a
+  sliver, and Yara disclosed two years of her own bathroom panic attacks in return
+  — but neither woman's underlying anxiety was cured, only made less lonely.
+genre_cadence:
+- establishing_calm_ritual
+- activation_trigger
+- body_register_escalation
+- pendulation_anchor_return
+- relational_activation
+- location_transition
+- awe_pullback
+- witness_disclosure
+- long_drop_decompression
+- closing_return
+page_turn_promises:
+- page_id: ep_005_p01
+  promise: Will the ordinary Friday desk rhythm hold, or will meeting Yara for lunch
+    stir the same old activation?
+- page_id: ep_005_p02
+  promise: Will Yara's noticing force Mira to explain herself, or can the practice
+    be witnessed without becoming a lesson — and will Yara's own hidden struggle
+    surface too?
+notes: Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory
+  sequence, following the ep_001 precedent (pull request 135) — ep_005 was authored before
+  the storyboard-first process existed. This plan describes the story_move already
+  present in the shipped script; it does not add new panels. No config/manga/genre_scene_templates/iyashikei.yaml
+  exists yet (only mecha.yaml is populated) — genre_cadence above is derived from
+  the episode's own already-demonstrated genre-native structural beats (pendant/succulent
+  ANCHOR PANEL, AWE-PULLBACK, two-person LONG DROP) rather than a formal scene-template
+  file; same real gap already flagged in ep_001's plan for the genre-template backlog.
+panels:
+- panel_id: ep005_001
+  page_id: ep_005_p01
+  story_function: establishing_calm_ritual
+  story_move: The succulent Mira brought from home establishes that she has already
+    made her regulation practice portable into her workspace, before any trigger
+    appears.
+  visual_proof: Close on a small clay-potted succulent beside a closed laptop, Friday-noon
+    sun striping the leaves gold, an empty coffee mug nearby.
+  information_delta: Reader learns the practice has physically migrated into Mira's
+    office life.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_002
+  page_id: ep_005_p01
+  story_function: establishing_calm_ritual
+  story_move: Mira is shown mid-task at her Friday desk, giving a time-stamped baseline
+    of ordinary focus before the lunch trigger arrives.
+  visual_proof: Wider shot of Mira typing slowly at her desk inside the open-plan
+    office, narrator caption timestamps the moment.
+  information_delta: Reader gets an ordinary-world baseline (Friday, 12:08) to measure
+    the coming activation against.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_003
+  page_id: ep_005_p01
+  story_function: activation_trigger
+  story_move: A lunch invitation notification arrives uninvited, converting Mira's
+    ordinary phone into the day's activation cue.
+  visual_proof: Close on Mira's phone lighting up face-up on the desk with Yara's
+    lunch text visible in the notification.
+  information_delta: Reader learns the specific external trigger — a coworker's
+    lunch invite — and that it is warm, not threatening.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_004
+  page_id: ep_005_p01
+  story_function: body_register_escalation
+  story_move: A small anticipatory flutter rises even though the invitation is friendly,
+    showing the alarm still fires on affectionate contact, not only on threat.
+  visual_proof: Close on Mira's half-smile with a small flicker at the eyes, a soft
+    sfx marking the light body reaction.
+  information_delta: Reader sees the practice now recognizes activation quickly,
+    rather than only experiencing it unnoticed.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_005
+  page_id: ep_005_p01
+  story_function: activation_trigger
+  story_move: Mira commits to the lunch by typing a reply, moving the invitation
+    from notification into a scheduled real-world plan.
+  visual_proof: Close on Mira's hands typing a reply that confirms meeting at the
+    door in five minutes.
+  information_delta: Reader knows the lunch is now confirmed and imminent, not hypothetical.
+  beat_role: trigger_onset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_006
+  page_id: ep_005_p01
+  story_function: pendulation_anchor_return
+  story_move: Mira's attention shifts to the succulent she placed here on purpose,
+    marking a deliberate self-soothing choice rather than passive calm.
+  visual_proof: Mira's gaze drifts to the desk succulent, a small recognition smile
+    forming.
+  information_delta: Reader learns Mira consciously chose to bring the anchor object
+    into this space.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_007
+  page_id: ep_005_p01
+  story_function: pendulation_anchor_return
+  story_move: Mira touches the jade pendant and stands to leave, physically transitioning
+    from desk-work into the social lunch scene.
+  visual_proof: Close on Mira's hand at the jade pendant as she slides her arms into
+    her jacket.
+  information_delta: Reader sees the pendant touch has become a standard pre-departure
+    ritual.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_008
+  page_id: ep_005_p02
+  story_function: relational_activation
+  story_move: Yara is introduced waiting at the lobby doors, moving the episode from
+    Mira's interior world into a two-person social scene for the first time.
+  visual_proof: Wide office lobby shot, Yara in a red-orange cardigan waving through
+    the glass doors, dialogue asking about lunch plans.
+  information_delta: Reader meets Yara directly and learns the lunch plan is now
+    underway.
+  beat_role: relational_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_009
+  page_id: ep_005_p02
+  story_function: relational_activation
+  story_move: Mira laughs and the two women exit together onto the street, confirming
+    the lunch has moved from plan into shared action.
+  visual_proof: Mid-shot of Mira laughing as she and Yara step out through the glass
+    doors onto the Friday street.
+  information_delta: Reader sees Mira's existing ease around Yara, establishing
+    the relationship's prior warmth.
+  beat_role: relational_onset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_010
+  page_id: ep_005_p02
+  story_function: location_transition
+  story_move: The scene relocates to the neighborhood udon restaurant, establishing
+    the specific setting the relational turn will happen inside.
+  visual_proof: Wide shot of the wooden-counter udon restaurant with hanging lanterns
+    as Mira and Yara settle into a window booth.
+  information_delta: Reader gets the concrete setting for the rest of the lunch
+    scene.
+  beat_role: scene_transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_011
+  page_id: ep_005_p02
+  story_function: relational_activation
+  story_move: Yara pauses and studies Mira over her glasses, signaling she has been
+    quietly watching for a change before saying anything.
+  visual_proof: Close on Yara pushing her glasses up and looking at Mira with a deliberate
+    pause.
+  information_delta: Reader senses Yara is about to raise something rather than
+    make small talk.
+  beat_role: relational_onset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_012
+  page_id: ep_005_p02
+  story_function: relational_activation
+  story_move: Yara names out loud that she has noticed Mira seems different, turning
+    an internal private shift into something spoken between two people for the first
+    time.
+  visual_proof: Close on Yara leaning forward with a gentle line of dialogue naming
+    the change she has noticed.
+  information_delta: Reader learns the practice has become externally visible without
+    Mira advertising it.
+  beat_role: relational_activation_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_013
+  page_id: ep_005_p02
+  story_function: body_register_escalation
+  story_move: Being seen lands as its own activation — Mira's jaw tightens at the
+    visibility itself, distinct from the earlier lunch flutter.
+  visual_proof: Close on Mira's face with a micro-tightening at the jaw and an sfx
+    heartbeat cue.
+  information_delta: Reader learns visibility, not danger, is now the thing triggering
+    Mira's body.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_014
+  page_id: ep_005_p02
+  story_function: pendulation_anchor_return
+  story_move: Mira grounds herself mid-conversation by touching the jade pendant
+    and exhaling, regulating in real time rather than leaving the table.
+  visual_proof: Close on Mira's hand finding the jade pendant with two fingers and
+    a short exhale.
+  information_delta: Reader sees the anchor ritual now operates inside a live social
+    conversation, not only alone.
+  beat_role: ritual_anchor
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_015
+  page_id: ep_005_p02
+  story_function: awe_pullback
+  story_move: The frame pulls back through the restaurant window to show the two-person
+    conversation held inside the wider rush of the Friday street, resetting scale
+    before the disclosure.
+  visual_proof: Wide pullback from outside the restaurant window showing the booth
+    small within the busy lunchtime street.
+  information_delta: Reader is given scale-context — this private moment is happening
+    inside an indifferent, ongoing world.
+  beat_role: scale_reset
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_016
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: Mira lowers her guard and admits, without full vocabulary yet, that
+    she has been practicing something with her body — the first time she names the
+    practice to another person.
+  visual_proof: Medium shot of Mira looking up at Yara with dialogue admitting she
+    has been practicing something with her body.
+  information_delta: Reader learns Mira has chosen to partially disclose rather
+    than deflect or hide.
+  beat_role: disclosure_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_017
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: Yara receives the admission with plain attention instead of fixing
+    or prying, establishing the relational safety that lets the scene continue.
+  visual_proof: Close on Yara listening, glasses catching window light, no eager-fixer
+    expression.
+  information_delta: Reader confirms Yara is a safe witness, not a foil who will
+    pathologize Mira.
+  beat_role: witness_hold
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_018
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: Yara removes her glasses and rubs her nose, physically signaling she
+    is about to disclose something of her own in return.
+  visual_proof: Yara sets her glasses on the table and rubs the bridge of her nose.
+  information_delta: Reader anticipates a reciprocal disclosure is coming.
+  beat_role: disclosure_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_019
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: Yara discloses she has had panic attacks in the office bathroom for
+    two years, turning the scene from Mira-focused into a mutual exchange of hidden
+    struggle.
+  visual_proof: Close on Yara's tired eyes without her glasses, dialogue naming two
+    years of bathroom panic attacks.
+  information_delta: Reader learns Yara has been carrying an equally heavy private
+    struggle the whole series.
+  beat_role: disclosure_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_020
+  page_id: ep_005_p02
+  story_function: relational_activation
+  story_move: Mira's old caretaking reflex rises and then visibly settles, showing
+    the practice now includes not fixing another person's disclosure.
+  visual_proof: Close on Mira's face catching the reflex to lean in and fix, then
+    settling instead.
+  information_delta: Reader sees Mira's growth measured against her own past caretaking
+    impulse, not against Yara's problem.
+  beat_role: relational_regulation
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_021
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: Mira's hand moves to rest near Yara's on the table without covering
+    it, offering wordless solidarity instead of advice.
+  visual_proof: Overhead close on Mira's hand sliding near Yara's on the booth table,
+    wood grain visible between them.
+  information_delta: Reader sees the practice transmit through a physical gesture
+    rather than any spoken teaching.
+  beat_role: witness_hold
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_022
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: Mira answers with a single spoken word, confirming she is staying
+    present with Yara's disclosure instead of retreating into commentary.
+  visual_proof: Close on Mira's steady face, eyes wet but not spilling, a single
+    short line of dialogue.
+  information_delta: Reader learns the moment is being held, not resolved with reassurance.
+  beat_role: witness_hold
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_023
+  page_id: ep_005_p02
+  story_function: witness_disclosure
+  story_move: The two of them sit in a held silence at the table while the restaurant
+    continues around them, letting the disclosure settle without further words.
+  visual_proof: Wide silent shot of both pairs of hands near the menus and the set-aside
+    glasses, restaurant hum continuing.
+  information_delta: Reader experiences the silence itself as the content of the
+    moment, not empty space.
+  beat_role: silence_hold
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_024
+  page_id: ep_005_p02
+  story_function: closing_return
+  story_move: The server delivers the ordered udon, naturalizing the moment back
+    into an ordinary lunch rather than ending on a dramatic beat.
+  visual_proof: A server places two steaming udon bowls on the table between Mira
+    and Yara.
+  information_delta: Reader sees ordinary life resume around the disclosure without
+    erasing it.
+  beat_role: completion_within
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_025
+  page_id: ep_005_p02
+  story_function: long_drop_decompression
+  story_move: Mira and Yara walk back to the office together in shared silence, the
+    first Long Drop of the series held between two people instead of alone.
+  visual_proof: Wide silent panel of the two women walking side by side down a golden-lit
+    Friday sidewalk toward the office.
+  information_delta: Reader is shown the practice can now be witnessed by another
+    person without being explained.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep005_026
+  page_id: ep_005_p02
+  story_function: closing_return
+  story_move: Yara proposes making the lunch a standing weekly plan, converting a
+    one-off disclosure into an ongoing commitment between them.
+  visual_proof: Mid-shot at the office glass doors, Yara asking whether they should
+    do the same time next Friday, with a small smile.
+  information_delta: Reader learns the relationship has changed structurally — this
+    will now recur.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_027
+  page_id: ep_005_p02
+  story_function: closing_return
+  story_move: Mira accepts the standing lunch plan, confirming the relational shift
+    is mutual and intentional, not just a one-time softness.
+  visual_proof: Mira nodding with a small smile and a short confirming line of dialogue.
+  information_delta: Reader confirms both women are choosing to continue this pattern
+    going forward.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep005_028
+  page_id: ep_005_p02
+  story_function: closing_return
+  story_move: The scene returns to Mira's desk for the afternoon, showing the succulent
+    and coffee mug unchanged while the light has shifted, proving normal work life
+    resumes.
+  visual_proof: Wide shot of Mira reopening her laptop at her desk in warmer afternoon
+    light, succulent still in its corner.
+  information_delta: Reader sees the ordinary workday continues; nothing external
+    about her job has changed.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_029
+  page_id: ep_005_p02
+  story_function: closing_return
+  story_move: Mira returns to focused work, the jade pendant catching light briefly,
+    showing the practice now sits quietly underneath ordinary tasks.
+  visual_proof: Close on Mira's hand on the laptop and her eyes scanning the screen,
+    pendant catching light at her neckline.
+  information_delta: Reader sees the practice has become background, not a performance.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep005_030
+  page_id: ep_005_p02
+  story_function: closing_return
+  story_move: The final wide shot and caption state plainly that the practice travels
+    with Mira now, closing the episode on portability rather than cure.
+  visual_proof: Wide desk shot with the succulent catching late-Friday light, Mira
+    working in the background, caption strip below.
+  information_delta: Reader receives the episode's explicit thesis as the closing
+    takeaway — the practice goes where she goes.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_005.yaml
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'

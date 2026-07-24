@@ -1,49 +1,241 @@
-I have processed the **Burnout Comparison** story atom sequence. This dataset illustrates a psychological progression for corporate managers moving from **pre-awareness** (internalizing burnout as personal failure via social comparison) through **destabilization** (paralysis and avoidance of help) to **experimentation** (breaking the comparison loop) and finally **self-claim** (embodied relief and self-care).
 
-Here is a structural summary and analysis of the provided atoms:
 
-### 1. Narrative Arc Structure
-The data follows a consistent four-stage therapeutic/psychological arc across five distinct characters (David, Sarah, Kevin, Anthony, Tanya):
+## RECOGNITION v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+大衛筋疲力竭，卻看著一位似乎沒事的同事。那位同事看起來精力充沛，那位同事在談他的假期。大衛的胸口發緊，大衛過勞了，同事沒有，大衛在一件同事能應付的事上失敗著。這場比較，隨著這份過勞一起被啟動了。
+---
 
-*   **RECOGNITION (v01–v05):**
-    *   **State:** Pre-awareness.
-    *   **Trigger:** Observing a peer/executive who appears "fine" or "thriving."
-    *   **Somatic Marker:** Tightness/coldness in specific body parts (chest, hands, shoulders, throat, stomach).
-    *   **Cognitive Distortion:** "They are succeeding where I am failing." The comparison compounds the burnout.
-*   **MECHANISM_PROOF (v01–v05):**
-    *   **State:** Destabilization.
-    *   **Mechanism:** The burnout is reinterpreted as *evidence* of inferiority/weakness rather than a physiological state.
-    *   **Behavioral Consequence:** Instead of seeking help, the subject tries to "match" the peer or study their methods, which prevents recovery and increases exhaustion.
-*   **TURNING_POINT (v01–v05):**
-    *   **State:** Experimentation.
-    *   **Shift:** Decoupling self-worth from peer performance.
-    *   **Action:** Addressing actual needs, seeking help, or realizing the peer’s "facade" (Sarah’s case).
-    *   **Somatic Shift:** Initial release (unclenching, warming, settling).
-*   **EMBODIMENT (v01–v05):**
-    *   **State:** Self-claim.
-    *   **Resolution:** Full acceptance of personal needs independent of external comparison.
-    *   **Somatic Marker:** Openness/warmth/calm in the previously affected body part.
+## RECOGNITION v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/recognition/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+莎拉被掏空了，看著另一位似乎很投入的管理者。莎拉的雙手發冷。那位同事似乎能應付這份工作量，莎拉卻在掙扎。莎拉在同事成功的地方失敗著，這場比較，加劇了這份過勞。
+---
 
-### 2. Character-Specific Somatic & Cognitive Mapping
+## RECOGNITION v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/recognition/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+凱文正在過勞，他的同事似乎正欣欣向榮。凱文的肩膀緊繃。那位同事大概有更好的界線，那位同事大概管理方式不一樣，凱文在同事成功的地方掙扎著，這場比較，讓這份過勞感覺起來像是個人的失敗。
+---
 
-| Character | Role | Somatic Anchor (Distress → Relief) | Key Cognitive Shift |
-| :--- | :--- | :--- | :--- |
-| **David** | Manager | Chest tightens → Chest open | Stops figuring out "what peer is doing"; addresses own needs. |
-| **Sarah** | Manager | Hands cold → Hands warm | **Social Cost:** Discovers peer is also struggling; comparison dissolves. |
-| **Kevin** | Manager | Shoulders tight → Shoulders relaxed | Reframes burnout as capacity issue, not weakness/competence issue. |
-| **Anthony** | Executive | Throat tightens → Throat open | Stops trying to match resilience; seeks support. |
-| **Tanya** | VP | Stomach tight → Stomach calm | Stops studying other VPs; addresses own situation. |
+## RECOGNITION v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/recognition/micro/v04.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+安東尼過勞了，卻看見另一位高階主管看起來神清氣爽。安東尼的喉嚨發緊。那位主管大概沒那麼拚，或者那位主管更懂得管理壓力。安東尼在對方成功的地方失敗著，這場比較，加劇了這份過勞。
+---
 
-### 3. Metadata Insights
-*   **Band:** Mostly 2–3, indicating moderate-to-high complexity/resonance in the narrative structure.
-*   **Mechanism Depth:** Increases from 1 (Recognition/Embodiment) to 2 (Mechanism Proof/Turning Point), reflecting the deeper cognitive processing required to break the cycle.
-*   **Cost Type:** Predominantly **Internal**, except for Sarah (v02/v02 TP), where the cost and resolution are **Social**, highlighting the power of shared vulnerability.
-*   **Identity Stage:** Clear progression from `pre_awareness` → `destabilization` → `experimentation` → `self_claim`.
+## RECOGNITION v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/recognition/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+譚雅被掏空了，把自己和其他看起來沒事的副總裁比較。她的胃感覺緊繃。其他副總裁大概有更好的策略，譚雅在他們欣欣向榮的地方過勞著，這場比較，讓譚雅覺得自己做錯了什麼。
+---
 
-### 4. Potential Applications
-This dataset is ideal for:
-*   **Corporate Wellness Training:** Illustrating how social comparison exacerbates burnout.
-*   **Therapeutic Modeling:** Demonstrating somatic awareness as a gateway to cognitive reframing.
-*   **Narrative Generation:** Providing templates for stories about managerial mental health that avoid clichés by focusing on internal mechanistic shifts rather than just external events.
+## MECHANISM_PROOF v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+大衛的過勞，如今成了失敗的徵兆。那位看起來沒事的同事，成了大衛做錯了什麼的證明。他的胸口一直緊繃。大衛試著搞懂那位同事做了什麼不一樣的事，而不是處理自己的過勞。這場比較，正阻止他尋求幫助。
+---
 
-Would you like me to generate a new variation (e.g., v06) following this pattern, or analyze a specific aspect of the mechanism depth?
+## MECHANISM_PROOF v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+莎拉的過勞，成了她比同事軟弱的證據。她的雙手一直是冷的。她試著跟上同事的能量，而不是處理自己的需求。這場比較，正阻礙著復原。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+凱文的過勞，成了他不如同事會管理的證據。他的肩膀一直緊繃。他試著搞懂同事知道什麼他不知道的事，而不是處理自己的過勞。這場比較，讓他動彈不得。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/mechanism_proof/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+安東尼的過勞，成了他比其他高階主管軟弱的證據。他的喉嚨一直緊繃。他試著跟上他們的韌性，而不是處理自己的過勞。這場比較，阻止他去尋求幫助。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+譚雅的過勞，成了其他副總裁是更好管理者的證據。她的胃一直緊繃。她研究著他們在做什麼，而不是處理自己的需求。這場比較，讓她更加筋疲力盡。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+大衛不再比較，開始處理問題。他的過勞，無關比同事差，而是關於他自己的需求。他的胸口稍稍鬆開了。他依據自己實際的處境尋求幫助，而不是依據同事看起來在應付什麼。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+莎拉問了同事實際上過得如何，結果對方也在掙扎，這場比較瓦解了。莎拉不再試圖跟上別人的表象，她的雙手漸漸回暖了，她開始處理自己的需求。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+凱文承認，過勞不是軟弱的徵兆，它是超出負荷的徵兆。他的肩膀稍稍放鬆了。他不再比較，開始復原。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+安東尼不再比較高階主管，開始關照自己。他的喉嚨鬆開了，他依據自己實際的需求得到了支持。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+譚雅不再研究其他副總裁在做什麼，開始處理自己的處境。她的胃安定下來了，她得到了自己需要的東西。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+大衛依據自己實際的需求處理自己的過勞，他的胸口是打開的。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+莎拉對同事變得真實。她的雙手是溫暖的。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+凱文知道過勞是真實的，不是軟弱。他的肩膀是放鬆的。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+安東尼的喉嚨是打開的，他照顧自己。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_comparison/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+譚雅處理自己的處境，她的胃是平靜的。
+---

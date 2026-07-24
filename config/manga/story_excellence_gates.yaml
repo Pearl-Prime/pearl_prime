@@ -257,24 +257,24 @@ strategy_bank_by_genre:
   mystery: supernatural_mystery_strategies.yaml
   horror: psychological_horror_strategies.yaml
   sports: sports_competition_strategies.yaml
-  essay: josei_adult_memoir_strategies.yaml
+  essay: seinen_strategies.yaml
   slice_of_life: iyashikei_strategies.yaml
   fantasy_adventure: isekai_strategies.yaml
-  food: food_strategies.yaml
-  family: family_strategies.yaml
-  procedural: procedural_strategies.yaml
+  food: workplace_drama_strategies.yaml
+  family: historical_period_strategies.yaml
+  procedural: psychological_thriller_strategies.yaml
   historical: historical_period_strategies.yaml
-  comedy: comedy_gag_strategies.yaml
+  comedy: shonen_strategies.yaml
   cultivation: cultivation_martial_strategies.yaml
   mecha: mecha_strategies.yaml
   dark_fantasy: dark_fantasy_strategies.yaml
   sci_fi_cyberpunk: sci_fi_cyberpunk_strategies.yaml
   supernatural_everyday: supernatural_mystery_strategies.yaml
-  school: school_coming_of_age_strategies.yaml
-  memoir: josei_adult_memoir_strategies.yaml
+  school: shojo_strategies.yaml
+  memoir: seinen_strategies.yaml
   social_issue: seinen_strategies.yaml
-  graphic_medicine: graphic_medicine_strategies.yaml
-  battle_internal: battle_internal_strategies.yaml
+  graphic_medicine: iyashikei_strategies.yaml
+  battle_internal: psychological_thriller_strategies.yaml
 
-reader_markets: [en_US, ja_JP, zh_CN, fr_FR]
+reader_markets: [en_US, ja_JP, zh_CN, zh_TW, fr_FR]
 reader_audiences: [gen_z, gen_alpha]

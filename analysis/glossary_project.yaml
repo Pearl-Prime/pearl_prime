@@ -1,0 +1,31 @@
+# glossary_project.yaml
+# zh-TW project-specific coined-term and character-name glossary index.
+#
+# Status: character-name section is DRAFT_2026-07-22 pending operator confirmation of the
+# ambiguous/collision names flagged below and in the registry file. It is NOT yet a lock.
+#
+# This file intentionally does not duplicate coined-metaphor entries drafted on other
+# unmerged sibling branches (e.g. agent/zh-tw-glossary-build-20260722) -- those were never
+# reviewed against origin/main and are out of scope for this PR. Only the character-name
+# registry (this PR's actual deliverable) is wired in below.
+
+locale: zh-TW
+status: DRAFT_2026-07-22
+
+named_recurring_characters:
+  source: analysis/character_name_registry_zh_tw.yaml
+  note: >
+    Full corpus-wide inventory of 241 recurring character names (English source -> locked
+    Taiwan Traditional Chinese transliteration), superseding the earlier unreviewed 5-name
+    draft (Marcus/Elena/James/Priya/Devon) that lived only on the never-pushed local branch
+    agent/zh-tw-glossary-build-20260722. Those 5 names were re-verified for natural Taiwan
+    usage and kept unchanged in the new registry. See the registry file for method, full
+    name list, rationale per name, and the explicit ambiguous/collision flag list -- do not
+    treat any entry as locked until the flagged names are resolved by the operator.
+  ruling: >
+    RULING (operator, 2026-07-22): transliterate character names to Chinese phonetic forms,
+    not Latin script, corpus-wide. Apply consistently across every HOOK/STORY cold-open
+    where the name recurs -- do not let individual translate-zh-tw batches invent their own
+    rendering; use the locked Chinese name from the registry every time the source name
+    recurs. Corpus conversion itself (editing atom files) is a SEPARATE, later lane and is
+    explicitly out of scope for the registry-building work in this PR.

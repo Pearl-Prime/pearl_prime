@@ -1,0 +1,257 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_001
+genre_id: psychological_thriller
+title: The Loop Is Not Thinking — Episode 1 (English gloss)
+logline: An anomalous data point that should not exist forces analyst Ren into a losing war with his own
+  body, until a silent coworker's small physical ritual proves the loop can be witnessed without being
+  finished.
+stakes_now: Ren's practiced precision is the only defense he has against a data point that should not
+  exist, and overriding his body's signals is starting to cost him physically.
+stakes_end: The anomaly is still unresolved and Ren has not mastered anything — he has only proven, once,
+  that his body can be trusted to notice before his mind agrees to override it.
+genre_cadence:
+- establishing_analyst_world
+- precision_as_armor
+- anomalous_data_point_discovery
+- baseline_composure
+- override_attempt
+- somatic_cost_registers
+- override_escalates
+- pressure_peak
+- vessel_entry_silent_witness
+- vessel_gesture_teaching
+- body_settles_before_mind
+- vessel_spoken_instruction
+- update_attempt
+- world_grants_permission
+- closing_return_no_mastery
+- episode_card
+page_turn_promises:
+- page_id: ep_001_p01
+  promise: Will Ren's practiced override hold once the office pressure peaks, or does the anomaly finally
+    break through his precision?
+- page_id: ep_001_p02
+  promise: Will Ren's one small update actually hold, or does the override reassert itself before the
+    shift can feel earned?
+panels:
+- panel_id: ep001_001
+  page_id: ep_001_p01
+  story_function: establishing_analyst_world
+  story_move: Establishes Ren's world and skill before any threat exists — the office and the screen are
+    his territory, not yet pressure.
+  visual_proof: Wide office shot, screen glow, no figure fully in view yet, establishing the analyst's
+    home territory.
+  information_delta: Reader learns Ren's role as a pattern analyst and his environment before anything
+    goes wrong.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_002
+  page_id: ep_001_p01
+  story_function: precision_as_armor
+  story_move: A close study of Ren's tools of precision frames control as his defense mechanism before
+    it is tested.
+  visual_proof: Macro insert on a memo, model diagrams, and file labels — precision rendered as physical
+    objects.
+  information_delta: Reader sees precision functions as armor for Ren, established before the anomaly
+    appears.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_003
+  page_id: ep_001_p01
+  story_function: anomalous_data_point_discovery
+  story_move: The inciting anomaly enters — a data point that should not exist surfaces inside Ren's own
+    analysis, planting the episode's central evidence.
+  visual_proof: 'Close insert on the anomalous data row: a prediction, a reflex reading, a name that does
+    not belong in the file.'
+  information_delta: Reader learns the specific anomaly driving the episode — an out-of-place data point
+    Ren cannot explain.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_004
+  page_id: ep_001_p01
+  story_function: baseline_composure
+  story_move: Ren's baseline composure is shown directly, giving the reader a before-state to measure
+    the coming override against.
+  visual_proof: 'Medium shot: Ren''s face guarded but intact, shirt sleeves, a pen mid-click in hand,
+    thirty-eight years old.'
+  information_delta: Reader confirms Ren is wary but composed — not yet cracking under the anomaly.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_005
+  page_id: ep_001_p01
+  story_function: override_attempt
+  story_move: Ren consciously overrides the anomaly by pushing forward with practiced competence, choosing
+    performance over pause.
+  visual_proof: Ren in motion at his desk, continuing his workflow, pen still moving despite the flagged
+    anomaly.
+  information_delta: 'Reader sees Ren''s chosen coping strategy: override and keep performing rather than
+    stop and look.'
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_006
+  page_id: ep_001_p01
+  story_function: somatic_cost_registers
+  story_move: The cost of the override lands physically — jaw, hand, breath — proving the choice already
+    has a bodily price.
+  visual_proof: Insert on a tightened jaw, a tensed hand, and a held breath, isolated against the ongoing
+    office rhythm.
+  information_delta: Reader sees the override is not free — the body registers cost even as Ren keeps
+    working.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_007
+  page_id: ep_001_p01
+  story_function: override_escalates
+  story_move: Ren doubles down on performance and pattern instead of acknowledging the cost, escalating
+    the override further.
+  visual_proof: Ren leaning further into his analysis, posture more rigid, motion faster and more tightly
+    controlled.
+  information_delta: Reader learns the override is escalating, not resolving — the vessel has not entered
+    the scene yet.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_008
+  page_id: ep_001_p01
+  story_function: pressure_peak
+  story_move: The episode's external pressure peaks in a single wide beat — deadline collision, cold meeting
+    room, a spike on the feed — with no explanation, only weather.
+  visual_proof: Wide shot combining a scheduling collision, a cold conference room, and a spiking data
+    feed in one compressed panel.
+  information_delta: Reader feels the full weight of Ren's professional pressure crest at once, just before
+    the turn.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_009
+  page_id: ep_001_p02
+  story_function: vessel_entry_silent_witness
+  story_move: The vessel enters — a coworker who reads Ren's shoulders instead of his slides, introducing
+    the episode's only outside witness.
+  visual_proof: A coworker's attention shown fixed on Ren's posture rather than his screen or presentation
+    materials.
+  information_delta: Reader learns someone in the room is reading Ren's body, not his work — the first
+    crack in his isolation.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_010
+  page_id: ep_001_p02
+  story_function: vessel_gesture_teaching
+  story_move: The vessel performs a small, wordless genre-native gesture — a settled hand, a drawn-in
+    chair — modeling regulation without any spoken lesson.
+  visual_proof: 'Close on the coworker''s small physical ritual: hand resting, chair angled in, feet grounded,
+    no dialogue.'
+  information_delta: Reader sees the vessel's method is entirely physical and habitual, never delivered
+    as a lecture.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_011
+  page_id: ep_001_p02
+  story_function: body_settles_before_mind
+  story_move: Ren's body visibly settles before his conscious mind agrees, proving the somatic override
+    was already losing its grip.
+  visual_proof: Ren watching the vessel; his shoulders and breath ease a half-second before any conscious
+    decision reaches his face.
+  information_delta: Reader gets the episode's thesis in image form — the body knows and is the first
+    witness, before the mind or the screen catch up.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_012
+  page_id: ep_001_p02
+  story_function: vessel_spoken_instruction
+  story_move: The vessel speaks once, giving Ren practical instruction rather than doctrine — a direct
+    counter to the override he chose in panel 5.
+  visual_proof: The coworker speaking a short, plain instruction directly to Ren, no lecture posture,
+    no slide, no raised voice.
+  information_delta: Reader hears the episode's practical counter-move stated once, in the vessel's own
+    voice, naming the app Ren should set aside.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_013
+  page_id: ep_001_p02
+  story_function: update_attempt
+  story_move: Ren tests the vessel's instruction with one small deliberate movement, attempting the update
+    for the first time.
+  visual_proof: Ren making one small, visibly different physical choice — the same task, performed from
+    a settled body instead of a braced one.
+  information_delta: Reader sees Ren's first concrete attempt at the update, not yet mastery, just a single
+    trial.
+  beat_role: pendulation_return
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_014
+  page_id: ep_001_p02
+  story_function: world_grants_permission
+  story_move: The external world responds slightly to Ren's shift — not a triumph, but a small permission
+    granted back to him.
+  visual_proof: 'A small environmental easing: the data feed steadying, the room''s tension visibly lowering,
+    nothing dramatic.'
+  information_delta: Reader learns the world's response is proportionate and honest — permission, not
+    victory.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_015
+  page_id: ep_001_p02
+  story_function: closing_return_no_mastery
+  story_move: The episode closes on Ren choosing to keep only one small deliberate gesture, explicitly
+    refusing to claim mastery or a cure.
+  visual_proof: 'Wide closing shot: Ren continuing his work with one visibly different habit intact, same
+    office, same pressure, one changed motion.'
+  information_delta: Reader is told directly this is not a fix — the takeaway is a single repeatable noticing,
+    not resolution.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_016
+  page_id: ep_001_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's anomaly.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_001.yaml
+notes: Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence — ep_001
+  was native-Japanese-authored by 黒瀬 迅 (Kurose Jin) before the storyboard-first process existed. This
+  plan describes the story_move already present in the shipped ja_JP script; it adds no new panels and
+  does not alter the ja_JP reader-facing text. No config/manga/genre_scene_templates/psychological_thriller.yaml
+  or mystery.yaml exists yet (same gap flagged for iyashikei in the stillness_press precedent) — genre_cadence
+  above is derived from the episode's own already-demonstrated genre-native structural beats rather than
+  a formal scene-template file; flagging this as a real gap for the genre-template backlog. All prose
+  fields in this storyboard are English craft-planning metadata; the authoritative reader-facing story
+  lives entirely in ja_JP inside ep_001.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s already-demonstrated
+  story_move per panel; does not claim system_working or proven_at_bar.'

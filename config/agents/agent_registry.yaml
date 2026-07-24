@@ -2,7 +2,7 @@
 # Companion: docs/AGENT_SYSTEM_AUDIT_2026_04.md, docs/AGENT_SYSTEM_IMPROVEMENT_SPEC.md
 # subsystem_id values reference artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv
 schema_version: "1.0"
-last_updated: "2026-07-09"
+last_updated: "2026-07-23"
 
 agents:
   pearl_github:
@@ -195,3 +195,22 @@ agents:
     status: mentioned
     notes: >
       consumer_marketing subsystem_id proposed in AGENT_SYSTEM_IMPROVEMENT_SPEC §8; not in map yet.
+
+  pearl_social_media_writer:
+    display_name: "Pearl_Social_Media_Writer"
+    skill_path: null
+    state_docs: []
+    subsystems:
+      - social_media
+    authority_docs:
+      - docs/PEARL_SOCIAL_MEDIA_WRITER_AGENT_SPEC_2026-07-18.md
+      - SOURCE_OF_TRUTH/social_media_atoms/
+      - config/social/
+      - config/authoring/social_brand_author_voice_profiles.yaml
+    status: formalized
+    notes: >
+      social_media subsystem_id owner per artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv
+      (status: active). Agent file: .claude/agents/pearl-social-media-writer.md. Authors and
+      repairs SOURCE_OF_TRUTH/social_media_atoms/*.jsonl atom rows only — never a live publisher;
+      does not touch Metricool, live scheduling, or phoenix_v4/social/deterministic_social.py
+      (the separate deterministic assembler that consumes these atoms).

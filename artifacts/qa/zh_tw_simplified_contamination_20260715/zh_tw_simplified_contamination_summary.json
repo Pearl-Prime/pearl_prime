@@ -1,0 +1,39 @@
+{
+  "lane": "04_zh_tw_simplified_contamination_audit",
+  "agent": "Pearl_QA",
+  "measured_at_sha": "9e9b9e606791590337cd7d0f2fb425def2e6f760",
+  "measured_date": "2026-07-15",
+  "repairs_performed": "none",
+  "files_scanned": 5172,
+  "tiers": {
+    "HIGH_CONFIDENCE_SIMPLIFIED": 869,
+    "REVIEW_VARIANT_ONLY": 1651,
+    "CLEAN": 2652
+  },
+  "contaminated_total": 869,
+  "severity_by_distinct_chars": {
+    "WHOLE_FILE": 42,
+    "PARTIAL": 321,
+    "SPOT_LEAK": 506
+  },
+  "severity_by_total_occurrences": {
+    "WHOLE_FILE": 82,
+    "PARTIAL": 342,
+    "SPOT_LEAK": 445
+  },
+  "pr5682": {
+    "state": "OPEN",
+    "head_sha": "5666b796938ba0f5d80e0287b01e7d9294244240",
+    "zh_tw_paths_owned": 20,
+    "script_fixed_by_5682": 7,
+    "still_contaminated_after_merge": 6,
+    "net_contamination_after_5682_merges": 862
+  },
+  "lane02_reconciliation": {
+    "lane02_sha": "b748f706327f500d414f60a1b967c70783b94538",
+    "lane02_contaminated": 869,
+    "this_lane_contaminated": 869,
+    "verdict": "CONFIRMED",
+    "severity_note": "Lane 02's severity tiers are keyed on DISTINCT Simplified chars, not total occurrences. Its README said '1-2 chars' without disambiguating. Tiering by distinct reproduces lane 02 exactly (506/321/42); tiering by total occurrences gives 445/342/82. Distinct is adopted as canonical here."
+  }
+}

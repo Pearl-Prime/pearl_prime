@@ -1,0 +1,457 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_011
+arc_storyboard_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml
+title: 'The Alarm Is Lying — Episode 11: The Room Is Bigger'
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: healing
+  strategy_genre: healing
+  relevance_genre: healing
+  market_surface_rule: Use social discovery, school/work pressure, gaming, creator
+    culture, comic shop/community, and phone-native life without sounding like an
+    ad for platforms.
+  market_touchpoints:
+  - group_chat
+  - discord_server
+  - short_video_clip
+  - school_bus_or_subway
+  - comic_shop
+  - mall_food_court
+  - campus_library
+  - delivery_app
+  - controller
+  - streaming_queue
+  market_guardrails:
+  - avoid_fake_japanese_surface_for_us_scene
+  - make_city_transport_specific_if_used
+  - do_not_overexplain_anime_fandom
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: 'Modern healing must receive everyday overstimulation gently:
+    notifications, transit noise, school/work fatigue, convenience rituals, and
+    weather.'
+  catalyst:
+    id: calendar_invite_grows_twelve_more_attendees
+    logline: A calendar-invite update notification silently adds twelve names to
+      Mira's Thursday meeting, turning a routine internal readout into a
+      leadership-room presentation with no warning and no time to prepare a
+      different version of herself.
+    ordinary_world_objects:
+    - phone
+    - notification
+    - calendar
+    - conference_room
+    genre_transmutation: A calendar-app update notification becomes the anxiety
+      trigger; the same alarm system that misfired on a work email now has to
+      hold under a room that is real, public, and much bigger than any trigger
+      the practice has faced so far.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint.
+    Market=en_US; audience=gen_z. Use catalyst 'calendar_invite_grows_twelve_more_attendees'.
+    Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US.
+    Use concrete objects and social pressure on page one; do not name-drop trends.
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist (UX researcher; mid-career; quietly anxious)
+    visual_anchor: long brown hair, cream sweater (work register today — soft blazer
+      over it), jade pendant visible at neckline
+  - id: devon
+    name: Devon Reyes
+    age: 26
+    role: junior colleague on Mira's team, presenting alongside her for the first
+      time; visibly more anxious than he lets on; never previously seen in the
+      series — introduced this episode, seed for ep_012
+    visual_anchor: short dark curls, wire-frame glasses, a habit of clicking a pen
+      cap when nervous
+
+scene_palette:
+  primary: cool office blue + warm desk-lamp gold
+  secondary: conference-room glass + hallway fluorescent
+  accent: jade green (pendant continuity)
+  bigroom_palette: cooler, wider, more glass than any prior workplace scene —
+    scale rendering deliberately larger than ep_002's meeting room
+
+pages:
+  - page_id: ep_011_p01
+    panels:
+      - panel_id: ep011_001
+        scene: |
+          Wide — Mira's desk, mid-morning. Laptop open, the familiar jade
+          succulent (now relocated from her apartment windowsill to a small
+          pot on the desk, established off-panel between episodes) beside
+          the monitor. Ordinary workday calm.
+        beat_type: standard
+        intent: "Safety opening — ordinary desk register, continuity anchor
+          (succulent) relocated to work"
+        silence_confirmed: true
+
+      - panel_id: ep011_002
+        scene: |
+          Close on the laptop screen. A calendar notification pops: "Updated:
+          Thursday 2pm — Q4 Research Readout. +12 attendees added." The
+          meeting title is the same one from three weeks ago; the attendee
+          count has changed.
+        beat_type: spatial
+        intent: "Activation trigger — same calendar mechanic as ep_002, now
+          escalated (silent scope-creep, not a new invite)"
+
+      - panel_id: ep011_003
+        scene: |
+          Tight on Mira's face. A half-second of genuine confusion before
+          the alarm catches up. Eyes scanning the screen again.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira_internal
+            text_by_locale:
+              en_US: "Twelve more people."
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+            font_override_by_locale:
+              en_US: italic_internal
+
+      - panel_id: ep011_004
+        scene: |
+          Mira clicks into the invite details. The names populate — director
+          level, two VPs, a name she recognizes from an all-hands she watched
+          once from the back row. The room just got much bigger than the
+          one she prepared for.
+        beat_type: spatial
+        intent: "Information delta — the specific cost becomes concrete
+          (named, ranked people), not abstract dread"
+
+      - panel_id: ep011_005
+        scene: |
+          Close on Mira's hand — knuckles slightly pale gripping the edge of
+          the desk. The trembling from earlier episodes, back, a little
+          larger this time.
+        beat_type: micro
+        intent: "Body register — same somatic signature as ep_001, larger
+          amplitude matching larger stakes"
+        sfx_by_locale:
+          en_US: ["thud-thud-thud..."]
+
+      - panel_id: ep011_006
+        scene: |
+          Mira's hand moves to the jade pendant at her neckline. Two
+          fingers, same gesture as every prior episode. A slow breath.
+        beat_type: micro
+        intent: "Ground — established anchor gesture, called on under bigger
+          pressure than it has ever answered before"
+
+      - panel_id: ep011_007
+        scene: |
+          Wide — the office floor behind Mira's desk. A younger colleague,
+          Devon Reyes (short dark curls, wire-frame glasses), stands near
+          the printer, visibly re-reading a stack of papers, clicking a pen
+          cap rapidly. He glances toward Mira's side of the floor, then
+          away.
+        beat_type: standard
+        intent: "New character introduction — Devon, seeded for ep_012, his
+          own activation visible before any dialogue names it"
+
+      - panel_id: ep011_008
+        scene: |
+          Devon approaches Mira's desk, stack of slides in hand, forced
+          casual tone not quite landing.
+        beat_type: standard
+        dialogue_lines:
+          - speaker: devon
+            text_by_locale:
+              en_US: "Did the attendee list just — is that normal?"
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep011_009
+        scene: |
+          Mira, still holding the pendant, looks up at him. A beat before
+          she answers — she recognizes the register in his voice because
+          she just heard it in her own body a panel ago.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "No. But we're presenting the same research either way."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+  - page_id: ep_011_p02
+    panels:
+      - panel_id: ep011_010
+        scene: |
+          Cut — the elevator, later that afternoon. Mira and Devon riding
+          up together, slide deck folders in hand. Devon's pen-cap clicking
+          audible even in the confined space.
+        beat_type: spatial
+        intent: "Scene transition — desk floor to the bigger room, tension
+          compounding in transit (elevator as pressure chamber, echoing
+          ep_002's own commute-to-meeting structure)"
+
+      - panel_id: ep011_011
+        scene: |
+          Close on Devon's hand, pen cap clicking fast. Mira watches it
+          without commenting.
+        beat_type: micro
+        intent: "Mirrored activation — his visible tell answers to her own
+          established trembling-hand motif, without her naming it yet"
+
+      - panel_id: ep011_012
+        scene: |
+          Wide — the doors open onto a glass-walled conference room, much
+          larger than any prior workplace scene in the series. Through the
+          glass: a long table, more chairs than either of them expected,
+          city skyline behind it.
+        beat_type: awe_pullback
+        intent: "AWE-PULLBACK / scale reveal — the room itself as the
+          visual proof of escalated stakes"
+        silence_confirmed: true
+
+      - panel_id: ep011_013
+        scene: |
+          Medium — Mira and Devon at the doorway. Neither moves for a
+          half-second too long.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira_internal
+            text_by_locale:
+              en_US: "Same alarm. Bigger room."
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_center
+            font_override_by_locale:
+              en_US: italic_internal
+
+      - panel_id: ep011_014
+        scene: |
+          Close on Mira's hand releasing the pendant and reaching instead
+          for the door handle. A small, deliberate choice — moving forward
+          without the activation resolving first.
+        beat_type: micro
+        intent: "Doctrinal beat — proceeding despite unresolved activation,
+          not waiting for calm before acting"
+
+      - panel_id: ep011_015
+        scene: |
+          Wide — inside the conference room. Directors and VPs already
+          seated, laptops open, city light through the glass wall behind
+          them. Mira and Devon at the front, slides projected. The room
+          is, in fact, full.
+        beat_type: standard
+        intent: "Stakes fully realized — the room the notification promised
+          is now literally occupied"
+
+      - panel_id: ep011_016
+        scene: |
+          Close on Mira's face mid-sentence — a genuine stumble, a word
+          repeated, a half-second of visible blank.
+        beat_type: micro
+        intent: "Real, imperfect activation under public pressure — not a
+          clean success, the practice tested honestly"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      - panel_id: ep011_017
+        scene: |
+          Tight on Mira's hand at her side, out of camera range of the
+          room, briefly touching the pendant beneath the table edge —
+          unseen by the room, seen only by the reader.
+        beat_type: micro
+        intent: "Private anchor used inside a public moment — the practice
+          doesn't require the room to know"
+
+      - panel_id: ep011_018
+        scene: |
+          Mira picks the sentence back up, steadier. Not perfect delivery —
+          recovered delivery.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Sorry — the pattern holds across all three cohorts, not
+                just the one we flagged in Q3."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      - panel_id: ep011_019
+        scene: |
+          Wide — the room, listening, unbothered by the stumble. A director
+          nods, taking a note. The moment has already passed for everyone
+          but Mira.
+        beat_type: standard
+        intent: "Reality check — the cost imagined by the alarm and the
+          actual cost in the room are visibly different sizes"
+
+      - panel_id: ep011_020
+        scene: |
+          Cut — after the meeting, hallway outside the glass room. Devon,
+          slides still in hand, exhaling hard, shoulders dropping several
+          degrees at once.
+        beat_type: standard
+        intent: "Devon's own activation resolving on a delayed timer,
+          post-event — sets up his need in ep_012"
+
+      - panel_id: ep011_021
+        scene: |
+          Mira beside him, not saying anything yet, just present. Both
+          look tired in the same specific way.
+        beat_type: micro
+        silence_confirmed: true
+
+      - panel_id: ep011_022
+        scene: |
+          Devon, quieter than his earlier forced-casual tone.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: devon
+            text_by_locale:
+              en_US: "You did that thing with your hand. Under the table.
+                What was that?"
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep011_023
+        scene: |
+          Close on Mira — caught slightly off guard. She'd assumed the
+          gesture was invisible, private. It wasn't, not entirely.
+        beat_type: micro
+        intent: "Turn — the private practice has just become visible to
+          someone else for the first time in the series"
+
+      - panel_id: ep011_024
+        scene: |
+          Mira, a small, honest half-smile — not deflecting, not
+          over-explaining either.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Ask me on Friday. I owe you a coffee anyway."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      - panel_id: ep011_025
+        scene: |
+          Wide — both walking back toward the elevator, pace unhurried now,
+          the glass conference room shrinking behind them in the
+          perspective.
+        beat_type: standard
+        intent: "LONG-DROP-adjacent closing wide — decompression without a
+          fully silent panel, since the beat needs the promise of Friday
+          to land"
+
+      - panel_id: ep011_026
+        scene: |
+          Evening. Mira's kitchen. The kettle on, same visual rhyme as
+          every episode's bookend. Through the window, city lights instead
+          of the earlier-series dawn light — a full day has passed, not a
+          Saturday morning.
+        beat_type: spatial
+        intent: "TEA BEAT bookend — closing the circuit, evening register
+          this time"
+        sfx_by_locale:
+          en_US: ["hsss..."]
+
+      - panel_id: ep011_027
+        scene: |
+          Final panel — Mira at the table, tea in hand, the succulent's
+          twin (a small cutting she kept for home) on the sill. Tired,
+          settled, thinking of Friday.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "The room was bigger. The hand under the table was the same
+            size it's always been."
+        dialogue_lines: []
+
+notes:
+  arc_position: |
+    Episode 11 of 12 — arc 1's escalation beat. Previous ten episodes
+    established the practice privately (self, then family, then coworkers
+    at a distance). This episode is the first time the stakes are public
+    and the first time another person notices the practice happening.
+    Devon is introduced here specifically to seed ep_012's closing beat —
+    Mira teaching what she's learned for the first time.
+  pacing_vs_prior: |
+    27 panels — shorter than the series average, deliberately tighter
+    pacing to match the escalated, less-domestic setting (office/elevator/
+    conference room vs. the series' usual apartment-centric rhythm).
+  continuity_callbacks: |
+    - Jade pendant (panels 6, 9, 14, 17) — now used in public for the
+      first time, unseen by the room, seen by the reader only
+    - Succulent (panel 1) — relocated to the office desk between episodes,
+      a small unremarked sign of the practice becoming portable
+    - Kettle / tea bookend (panels 26-27) — same visual rhyme, evening
+      register instead of morning for the first time
+    - Calendar notification trigger — same mechanic as ep_002, deliberately
+      escalated (silent scope-creep vs. a scheduled meeting)
+  devon_handling: |
+    Introduced and given a real, specific tell (pen-cap clicking) rather
+    than generic nervousness. He notices the pendant gesture organically,
+    in the room, not because Mira explains anything. His ask ("what was
+    that?") is the direct narrative hinge into ep_012 — nothing is
+    pre-resolved here.
+  doctrinal_anchor_ahjan: |
+    The practice does not require the activation to resolve before acting
+    — Mira proceeds into the room mid-activation (panel 14) and recovers
+    mid-sentence (panels 16-18) rather than needing calm first. This is a
+    genuine escalation of the doctrine ep_001 introduced (noticing without
+    obeying) into "acting while still noticing," not a new lesson.
+  translation_handoff: |
+    text_by_locale dicts populated for en_US only, matching ep_001-010's
+    pattern.

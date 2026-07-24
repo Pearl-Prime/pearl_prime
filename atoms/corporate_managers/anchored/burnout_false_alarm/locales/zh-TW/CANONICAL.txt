@@ -1,21 +1,241 @@
-I have processed and stored the `burnout_false_alarm` story atom sequence.
 
-This sequence effectively maps the psychological progression of corporate managers misidentifying acute stress or fatigue as chronic burnout, and the subsequent correction of that narrative. Here is a summary of the structural logic captured in these atoms:
 
-### **Core Narrative Arc**
-1.  **Recognition (Pre-awareness):** The nervous system triggers a "false alarm." Physical symptoms (tight chest, cold hands, tight shoulders/throat/stomach) are misinterpreted as permanent depletion (burnout) rather than temporary states (stress, fatigue, difficult quarters).
-2.  **Mechanism Proof (Destabilization):** Acting on the false diagnosis creates real problems. Managers make unnecessary life/work overhauls, communicate crisis to teams, or create internal disruption based on a misdiagnosis. The cost shifts from purely internal to social/operational.
-3.  **Turning Point (Experimentation):** A cognitive check occurs. The individual distinguishes between *intensity* (hard work/stress) and *depletion* (burnout). They realize rest or completion of the current cycle is the solution, not a systemic overhaul. Physical tension begins to release.
-4.  **Embodiment (Self-claim):** The new understanding is integrated. The manager responds appropriately to stress vs. burnout. Physical symptoms resolve (open chest, warm hands, relaxed shoulders), indicating a regulated nervous system and accurate self-assessment.
+## RECOGNITION v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+大衛度過了緊繃的一週，立刻認為自己過勞了。他的胸口發緊，警報響起。他筋疲力盡，這一定是過勞。但今天只是星期三，他的神經系統把暫時的壓力，當成了永久的耗竭來對待。他開始改變一切，來應付一場可能只是「糟糕的一週」的危機。
+---
 
-### **Key Differentiators Identified**
-*   **Timeframe:** Stressful week/hard month/difficult quarter vs. chronic condition.
-*   **Physiology:** Temporary tension (tightness/cold) vs. permanent depletion.
-*   **Action:** Overreaction (overhaul/boundary changes) vs. Appropriate Response (rest/finish project).
+## RECOGNITION v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/recognition/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+莎拉感覺累，立刻螺旋跌入過勞的想法。她的雙手發冷，警報很大聲。她好累，她一定是過勞了。但她累，是因為她熬夜工作，休息可能就能解決這個問題。她的神經系統，分不清「過度工作造成的疲憊」和「艱難一天造成的疲憊」。
+---
 
-### **Metadata Patterns**
-*   **Identity Stage Progression:** `pre_awareness` → `destabilization` → `experimentation` → `self_claim`.
-*   **Cost Type:** Primarily `internal`, with some `social` impact during the destabilization phase when communication spreads the false alarm.
-*   **Band/Mechanism Depth:** Recognition starts at Band 2/Depth 1, deepens to Band 3/Depth 2 during Mechanism Proof and Turning Point, and settles back to Band 1-2/Depth 1 in Embodiment as the response becomes automatic/integrated.
+## RECOGNITION v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/recognition/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+凱文經歷了艱難的一季，就以為自己過勞了。他的肩膀繃緊，警報大聲響起。一季艱難，代表他已經徹底耗盡了。但艱難的季度會發生，他的神經系統把一段挑戰性的時期，當成了他需要徹底翻修整個人生的徵兆。
+---
 
-This structure is ready for use in generating content related to managerial mental health, stress differentiation, or organizational psychology narratives. Let me know if you would like to generate variations, expand on specific atoms, or apply this pattern to a different scenario.
+## RECOGNITION v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/recognition/micro/v04.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+安東尼連續兩週工作到很晚，就以為自己過勞了。他的喉嚨發緊，警報響起。他一直在努力工作，他一定徹底耗盡了。但兩週的努力工作不是過勞，他的神經系統分不清強度和耗竭。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/recognition/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+譚雅經歷了一個令人沮喪的月份，立刻以為自己過勞了。她的胃感覺緊繃，警報很大聲。一個令人沮喪的月份，代表她已經徹底完了。但她可能只是需要休息一下，她的神經系統把艱難的時期，當成了永久的狀態。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+大衛開始根據一場誤報做出改變。他沒有過勞，他只是度過了緊繃的一週。但現在，他正基於一場其實不是緊急狀況的緊急警報，改變自己的做法、時程、界線。他的胸口一直緊繃，他正在為一場自己捏造出來的危機而耗盡自己。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+莎拉根據一個糟糕的星期，告訴每個人她過勞了。她的雙手一直是冷的。她開始從一個其實不是危機的危機處境出發做決定。她的團隊的反應，是假設情況比實際更糟。這場誤報，正在製造真正的動盪。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+凱文基於「自己過勞了」的想法做出重大決定，但他沒有，他只是經歷了艱難的一季。他的肩膀一直緊繃，他正基於一個假警報而擾亂事情。這場誤報，實際上正在製造更多問題。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/mechanism_proof/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+安東尼基於兩週的努力工作，建構出一套關於自己過勞的敘事。他的喉嚨一直緊繃，他把強度當成耗竭來對待，並基於這個錯誤的診斷做出決定。他正在做一些他其實不需要做的改變。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+譚雅基於一場誤報，告訴她的領導層自己需要退下來。她的胃一直緊繃。她正基於一個錯誤的診斷做出重大決定，這場誤報，正在製造真正的動盪。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+大衛查核了自己：「我是真的過勞了，還是只是度過了緊繃的一週？」他去看了實際的判準——他還能做這份工作，他還能在其中找到意義。他是累，不是過勞。他的胸口稍稍鬆開了，休一個週末的假，大概就能解決這個問題。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+莎拉分辨出「累」和「過勞」的差異，她是累，好好睡一晚可能會有幫助。她的雙手漸漸回暖了，她不會基於疲憊做出重大決定，她先處理疲憊。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+凱文看了自己實際的能量。他是因為艱難的一季而累，不是被這個角色本身掏空了。他的肩膀稍稍放鬆了，他不需要翻修自己的做法，他需要撐完這一季，然後休息。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+安東尼查核了自己實際的耗竭程度。他經歷了兩週的努力工作，那很正常，他沒有過勞。他的喉嚨鬆開了，他不需要做出改變，他需要完成這個專案，然後真正休一次假。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+譚雅分辨出「艱難的一個月」和「過勞」的差異。她經歷了艱難的一個月，她的胃安定下來了，她不需要退下來，她需要撐完這個月，然後好好照顧自己。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+大衛知道艱難和過勞之間的差異，他做出恰當的回應，他的胸口是打開的。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+莎拉累了就休息，她的雙手是溫暖的。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+凱文撐過艱難的季度，卻不過度反應，他的肩膀是放鬆的。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+安東尼努力工作，然後休息，他的喉嚨是打開的。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_false_alarm/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+譚雅知道自己什麼時候是真的過勞，什麼時候只是累，她做出恰當的回應。
+---

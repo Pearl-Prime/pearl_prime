@@ -1,19 +1,241 @@
-I have processed and stored the **Burnout-Shame Recognition Cycle** narrative atoms for corporate managers.
 
-This dataset outlines a clear psychological and behavioral progression across five distinct personas (David, Sarah, Kevin, Anthony, Tanya), moving through four critical stages:
 
-1.  **RECOGNITION (Pre-awareness):** The initial onset of burnout coupled with immediate shame. The core conflict is internal: *"Good leaders don't burn out."* Physical symptoms (heavy chest, shaking hands, tight shoulders/throat/stomach) are prominent.
-2.  **MECHANISM_PROOF (Destabilization):** The shame prevents help-seeking, creating a feedback loop. The cost shifts from purely internal to social (performing engagement). The mechanism is self-sabotage via silence.
-3.  **TURNING_POINT (Experimentation):** The breakthrough moment involves verbalizing the state ("I'm burned out," "I need help"). This breaks the shame loop by reframing burnout as data/reality rather than moral failure. Physical relief begins.
-4.  **EMBODIMENT (Self-claim):** The new normal. Burnout is treated as information requiring action. Physical states resolve (open chest, warm hands, relaxed shoulders). Leadership is redefined as the ability to manage one's own capacity honestly.
+## RECOGNITION v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+大衛被掏空了，他的胸口一直沉重。他曾經享受解決工程問題，如今光是想到它就令人筋疲力盡。他過勞了。羞愧立刻發作：好的領導者不會過勞，好的領導者懂得管理自己的精力。他應該有能力做到這件事。他無法維持下去，這件事感覺像是個人的失敗。他的雙手發冷。過勞正在發生，而對過勞的羞愧，讓它加倍了。
+---
 
-**Key Structural Insights:**
-*   **Somatic Anchoring:** Each character has a specific physical locus for their stress (Chest, Hands, Shoulders, Throat, Stomach) which tracks their healing journey.
-*   **Shame as Amplifier:** The texts explicitly define shame not just as a side effect, but as the *mechanism* that doubles the intensity of the burnout and prevents recovery.
-*   **Identity Shift:** The transition from `pre_awareness` to `self_claim` represents a shift from identifying *as* a failure to identifying *as* a leader who manages reality.
+## RECOGNITION v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/recognition/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+莎拉到了極限，她無法激勵自己準備下一場會議。羞愧發作：好的管理者會保持投入，她應該有能力在乎。她的團隊仰賴著她，她的雙手在顫抖。過勞正在發生，而羞愧讓它更糟了。她不只是筋疲力盡，她為自己的筋疲力盡感到羞愧。
+---
 
-How would you like to proceed? I can:
-1.  Generate new variations for different roles (e.g., Individual Contributors, Executives).
-2.  Expand these micro-atoms into full scene narratives.
-3.  Analyze the linguistic patterns used to describe the "shame loop."
-4.  Create a diagnostic tool or checklist based on the somatic markers identified.
+## RECOGNITION v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/recognition/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+凱文什麼都不剩了，他的儲備空了。羞愧立刻出現：好的總監懂得管理自己的產能，他早該說不了，他早該調配好自己的步調。他的肩膀緊繃。過勞正在降臨，而對過勞的羞愧，讓過勞更嚴重了。他不只是被掏空，他為自己被掏空而感到羞愧。
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/recognition/micro/v04.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+安東尼已經靠著燒最後一點油撐了兩年，那份羞愧是持續的。財務長不該需要休息恢復，他應該有能力應付這份壓力。他的喉嚨發緊。這份過勞是系統性的，而對它的羞愧，阻止他去處理它。他無法開口求助，求助意味著承認自己不夠格。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/recognition/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+譚雅徹底被掏空了，她已經沒有什麼可以給了。羞愧壓垮了她，她本該有能力做到這件事，這個角色是她自己選的，她應該能夠掌控它。她的胃緊繃。過勞和對它的羞愧，形成了一個回饋循環，她為過勞而感到羞愧，而羞愧，又讓過勞更嚴重了。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+大衛沒有處理這份過勞，因為他為此感到羞愧。他反而更用力地推自己，這份過勞加速了。他的胸口一直沉重。他沒有尋求幫助，因為求助意味著承認這份過勞。羞愧，阻止他保護自己。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/mechanism_proof/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+莎拉沒有告訴任何人她過勞了，因為她感到羞愧。她反而表演著投入，她的團隊察覺到了這場表演。她的雙手一直在顫抖。這份過勞是看得見的，但她在隱藏它，這代表她的團隊也在應付這份羞愧。每個人都在假裝一切都好。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+凱文不求助，因為求助意味著承認他應付不了這份工作。他的肩膀一直緊繃。這份過勞正在複合累積，因為他沒有得到支持。羞愧，阻止他保護自己。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/mechanism_proof/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+安東尼不放慢腳步，因為放慢腳步代表承認他需要放慢。他的喉嚨一直緊繃，這份過勞正在加速。羞愧阻止了任何行動，他被困在這個循環裡。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/mechanism_proof/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+譚雅繼續工作，那份對過勞的羞愧，阻止她去處理它。她的胃一直緊繃，這個循環加速了。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+大衛大聲說出：「我過勞了。」這句承認，打破了羞愧的循環。他的胸口稍稍鬆開了。他不是在承認失敗，他是在承認現實。好的管理者會注意到自己過勞，並採取行動。當他把過勞重新框定成一種需要回應的資訊時，羞愧就減輕了。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/turning_point/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+莎拉告訴她的主管：「我過勞了。」她的雙手漸漸回暖了。這句承認，並沒有招來評判，她的主管說，這很正常，接下來我們會這樣做。當莎拉不再隱藏它時，羞愧就下降了。她的團隊感受到了這份誠實，表演停止了，真實開始了。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+凱文打電話給他的老闆：「我需要幫助。」他的肩膀稍稍放鬆了。這句承認既令人恐懼，也令人寬慰，他的老闆幫助了他。這份支持，改變了一切。當凱文真正得到幫助時，對「需要幫助」的羞愧就減輕了。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/turning_point/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+安東尼安排了休假。他的喉嚨鬆開了。承認自己需要恢復，打破了這個循環。他不再硬撐，他真正在休息。當他採取行動時，羞愧就減輕了。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+譚雅告訴她的領導團隊：「我過勞了，我正在採取措施處理它。」她的胃安定下來了。這句承認，打破了這個循環，她不再隱藏，她正在採取行動。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/embodiment/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+大衛及早認出過勞，並處理它。他的胸口是打開的。過勞是一種資訊，對它採取行動，就是領導力。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+莎拉的誠實，創造出了復原的空間。她的雙手是溫暖的，她的團隊回應著她的真實。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/embodiment/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+凱文開口求助，他的肩膀是放鬆的，支持到來了。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/embodiment/micro/v04.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+安東尼恢復了，他的喉嚨是打開的。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/corporate_managers/anchored/burnout_shame/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 1
+IDENTITY_STAGE: self_claim
+---
+譚雅採取了行動，她的胃是平靜的。
+---

@@ -1,0 +1,272 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_012
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_012.arc_storyboard.yaml
+title: 月台不記得的臉——第12話
+title_en_gloss: 'The Platform Has No Record of This Face — Episode 12: The One Who Looks Back'
+manga_author: 邵臨淵
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- en_US
+- ja_JP
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk
+    and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register
+    over clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: clear_frame_reveals_multiple_registered_cards
+    logline: 覆核期滿、重新回到即時監看崗位的雅晴，終於拿到一段清晰到能看見半張臉以上的畫面；交叉比對悠遊卡註冊資料後，她發現每一次事件用的都是不同的、合法登記在不同真實姓名下的卡片——不是撿到卡，也不是同一張卡重複使用。
+    ordinary_world_objects:
+    - easycard_tap
+    - mrt_fare_gate
+    - incident_report_form
+    - personal_notebook
+    genre_transmutation: 一張清晰的監視器截圖，把八年份的『巧合』與『遺失物』理論一次全部推翻；多張合法登記的悠遊卡，把威脅的性質從『一個躲避鏡頭的人』改寫成『有能力取得多重合法身分的人』。
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z.
+    Use catalyst 'clear_frame_reveals_multiple_registered_cards'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體的偵探
+main_characters:
+- id: su
+  name: 蘇雅晴
+  name_romaji: Su Yaqing (Iris)
+  age: 31
+  role: 主人公——台北捷運行控中心異常事件分析員
+  visual_anchor: 直短髮別在耳後、深藍色行控值班制服、右手習慣性轉動一枝原子筆
+- id: zhou
+  name: 周德昌
+  name_romaji: Zhou Dechang
+  age: 58
+  role: 資深值班控制員，即將退休——器（讀懂身體的偵探）
+  visual_anchor: 灰白平頭、袖口捲起、桌上一個用了二十年的舊保溫瓶
+- id: lin
+  name: 林組長
+  name_romaji: Team Lead Lin
+  age: 45
+  role: 值班主管——制度壓力來源
+  visual_anchor: 俐落套裝、手上永遠夾著一份待簽的報表夾
+scene_palette:
+  primary: 行控中心的冷白螢幕光 + 深夜捷運藍
+  secondary: 月台霓虹的濕冷灰藍（雨夜反光）
+  accent: 一枝始終未關的琥珀色警示燈——全劇唯一反覆出現的暖色
+pages:
+- page_id: ep_012_p01
+  panels:
+  - panel_id: ep012_001
+    scene: 數週後。雅晴的覆核期已滿,重新回到即時監看崗位——桌上多了周德昌留下的舊保溫瓶,和那本八年筆記。
+    beat_type: standard
+  - panel_id: ep012_002
+    scene: 插入畫面——她的桌面比以前整齊,便條依然多,但不再是密密麻麻、無法辨讀的程度——她一直在信守對周德昌的承諾,學著放慢。
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: She's kept the promise so far — mostly. The margin notes are fewer now, not gone.
+  - panel_id: ep012_003
+    scene: 深夜,一則新的通報跳出——第六個站,同樣的異常模式。雅晴的手停在鍵盤上,先深呼吸了一次。
+    beat_type: micro
+    intent: 承諾的具體實踐——先呼吸,而非立刻投入
+  - panel_id: ep012_004
+    scene: 她調出畫面,這次系統剛好因為一次設備更新,畫質比過去清晰了整整一級。
+    beat_type: micro
+  - panel_id: ep012_005
+    scene: 插入畫面——監視器畫面裡,那個撐傘的身影第一次在鏡頭前完整停留超過一秒,傘的角度恰好讓半張臉露了出來。
+    beat_type: micro
+    intent: 全劇首次真正的視覺突破——半張臉
+  - panel_id: ep012_006
+    scene: 雅晴的呼吸停住——那張臉的輪廓,既陌生,又有種說不出的熟悉感,像是在哪裡的員工名冊照片裡見過。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 我見過這張臉。
+      en_US: She's seen this face before. That's the clue eight years of records never gave her — and
+        it isn't a stranger's.
+  - panel_id: ep012_007
+    scene: 她立刻交叉比對這半張臉與六個站點的悠遊卡註冊資料,系統跑出結果的幾秒鐘,顯得異常漫長。
+    beat_type: micro
+  - panel_id: ep012_008
+    scene: 插入畫面——螢幕上列出六筆資料:六張不同的悠遊卡,六個不同但都真實存在、合法登記的姓名。
+    beat_type: micro
+    intent: 類型轉折的核心證據——多重合法身分
+    narrator_caption_by_locale:
+      en_US: Six different easycard tap histories, six real names — not a lost card at all.
+  - panel_id: ep012_009
+    scene: 雅晴的手指懸在螢幕上,一筆一筆核對——不是撿到卡,也不是同一張卡被反覆使用。是六張真正註冊過的卡。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 六張卡。六個名字。都是真的。
+      en_US: Six cards. Six names. All of them real — a witness list that shouldn't be able to exist under
+        one face.
+  - panel_id: ep012_010
+    scene: 她想起遺失物理論、整人遊戲理論、感應器故障理論——過去八話裡她相信過的每一個解釋,此刻同時崩潰。
+    beat_type: micro
+    intent: 全季理論的總崩潰
+  - panel_id: ep012_011
+    scene: 特寫——她的手抓起手機,螢幕上是周德昌的聯絡人頁面——她想起了自己的承諾:下次快要看清楚的時候,先打給他。
+    beat_type: micro
+  - panel_id: ep012_012
+    scene: 她的拇指懸在撥號鍵上方,這是她八話以來第一次,在案件的關鍵時刻選擇先求助,而不是獨自往前衝。
+    beat_type: micro
+    intent: 承諾實踐的高峰——選擇打電話而非獨自行動
+  - panel_id: ep012_013
+    scene: 她按下撥號鍵,電話響了一聲、兩聲、三聲。
+    beat_type: micro
+  - panel_id: ep012_014
+    scene: 插入畫面——電話那頭傳來語音信箱的制式提示音:「您撥的電話目前無法接通⋯⋯」頁末懸念。
+    beat_type: long_drop
+- page_id: ep_012_p02
+  panels:
+  - panel_id: ep012_015
+    scene: 雅晴僵住,盯著手機螢幕——她想起了,周德昌退休後第一件事,就是關掉手機,去了一趟他計畫多年、完全收不到訊號的環島鐵道旅行。
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: Right. He's off the grid — the trip he'd promised himself for years. She needs him now, and
+        he genuinely cannot answer.
+  - panel_id: ep012_016
+    scene: 她放下手機,獨自坐在螢幕前——她信守了打電話的那一半承諾,但接下來的部分,她從沒想過會落在自己一個人身上。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep012_017
+    scene: 插入畫面——六個名字的名單還開在螢幕上,其中一個姓氏的拼法,和行控中心某個部門的員工名冊有一個字重疊——雅晴瞪大了眼睛。
+    beat_type: micro
+    intent: 讀者特權的新伏筆——尚未完全確認的內部關聯
+  - panel_id: ep012_018
+    scene: 她的手指再次懸在鍵盤上——這次的選擇不再只是『繼續查』或『交出去』,而是『這件事可能牽涉到自己人』。
+    beat_type: micro
+  - panel_id: ep012_019
+    scene: 特寫——她的臉,恐懼與職業本能同時運作,這一次沒有簡單的答案可以讓她安心。
+    beat_type: micro
+  - panel_id: ep012_020
+    scene: 扭曲特寫——整面監視器牆的光線在她眼中第一次顯得不只是冷,而是完全不可信任——連系統本身,都可能是問題的一部分。
+    beat_type: micro
+    intent: 全劇最深的扭曲特寫——不可靠感從『個人執念』擴展到『系統本身』
+  - panel_id: ep012_021
+    scene: 她低頭看著桌上那本八年筆記,又看了看空著的、屬於周德昌的座位——這一次,沒有人可以幫她確認這是不是她自己的過度解讀。
+    beat_type: micro
+  - panel_id: ep012_022
+    scene: 雅晴,對著空無一人的控制室,聲音很輕,像是在對自己,也像是在對那個從沒現身的人說話。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 你到底是誰?
+        en_US: Who are you? For eight years, who have you actually been?
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: dotless
+      position_hint: top_right
+  - panel_id: ep012_023
+    scene: 插入畫面——監視器畫面裡,那個半張臉的身影,這次沒有轉身消失,而是靜靜地站在原地,像是在回望鏡頭。
+    beat_type: micro
+    intent: 第一部收尾的真正轉折——對方首次沒有逃離
+  - panel_id: ep012_024
+    scene: 雅晴的呼吸停住——這是全季第一次,對方不是被動地被拍到,而像是主動選擇被看見。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 他在看著我。
+      en_US: He isn't hiding this time. That's not a glitch, and it isn't a coincidence — it's a choice,
+        and it's aimed at her.
+  - panel_id: ep012_025
+    scene: 雅晴的手伸向對講機,想呼叫站務人員前往現場——但畫面裡的身影在她按下通話鍵之前,平靜地轉身,融入人群消失。
+    beat_type: micro
+  - panel_id: ep012_026
+    scene: 大場景——月台恢復平靜,系統自動記錄下這次事件,標記為「第六起,未結案」。雅晴獨自坐在控制室裡,手機還握在手中,語音信箱的提示音還沒掛斷。
+    beat_type: standard
+  - panel_id: ep012_027
+    scene: 特寫——雅晴的手,終於放下手機,伸向那本八年筆記,翻開第一頁,在下面用自己的筆跡,寫下第一行新的紀錄。
+    beat_type: micro
+    intent: 第一部真正的收尾動作——不是解決,而是接手
+  - panel_id: ep012_028
+    scene: 大遠景拉開——控制室的燈光,雅晴獨自伏案書寫的身影,窗外天色將亮未亮。全季第一部,在一個問題被回答之前,正式收尾。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      zh_TW: 第一部・完。
+      en_US: End of Arc One. The pattern was never a coincidence, and for the first time, it's looking
+        back. She is no longer the only one who knows.
+notes:
+  arc_position: 第十二話——第一部「執念的種子」收尾，非解決。雅晴實踐了對周德昌的承諾（先打電話），但承諾在她最需要的時刻落空（周德昌收不到訊號），把她重新推回獨自一人的處境——與第一話的『獨自一人』形成結構性呼應，但這次她手握八年份的證據，且對方首次主動回望鏡頭。真正的轉折不是謎案被解開，而是：(1)
+    威脅可能牽涉行控中心『自己人』（尚未證實，留給第二部）；(2) 對方從『被動避開鏡頭』轉為『主動被看見』，代表對方也在觀察她。第二部『螺旋』由此展開，本話絕不構成解決或治癒式收尾。
+  pacing_vs_prior: 二十八格，兩頁，全季最長篇幅，反映收尾集需要承載的資訊密度與情緒重量。
+  continuity_callbacks: 保溫瓶（周德昌留下的物件，ep_011）持續在桌上；八年筆記（ep_011）在此話首次被雅晴親手寫下新的一行，象徵『接手』而非『解決』；遺失物理論（ep_007）、整人遊戲理論（ep_002）、感應器故障理論（ep_001）三個舊解釋在panel
+    10被明確總結推翻；語音信箱提示音呼應全劇『系統回應延遲』的母題（ep_009的六秒延遲）。
+  language: zh_TW為權威語言，en_US僅為操作用註解，非翻譯。
+  translation_pipeline_handoff: en_US為審閱用註解草稿；其餘CJK語系另案處理。
+  arc_two_setup: 第二部『螺旋』的具體鉤子：(a) 六個合法姓名中一個與行控中心內部員工姓氏的疑似重疊，尚未證實，是第二部的核心懸念；(b) 對手首次主動回望鏡頭，代表監視關係可能雙向——威脅不再只是雅晴在看誰，也可能是誰在看雅晴；(c)
+    周德昌物理上離場（退休旅行），承諾機制（打電話）第一次因外部現實而失效，逼迫雅晴發展新的自我調節方式，而非僅依賴周德昌在場——此為第二部『螺旋』階段角色心理架構轉變的種子（呼應psychological_thriller.md
+    §7 Investigation One→Two的過渡邏輯）。
+craft_notes: 'VESSEL: 讀懂身體的偵探——周德昌本話physically缺席，但他留下的物件（保溫瓶、筆記）與承諾機制（打電話）延續器的功能於他不在場時；panel 3『先呼吸』是雅晴內化器教導的第一個獨立證據。GENRE
+  BIBLE: docs/research/manga_craft/psychological_thriller.md §6失敗模式4：『嚴禁在最終話乾淨解決謎案』——本話刻意保留至少一個未解的面向（六個姓名的內部關聯純屬推測，未證實）。
+
+
+  GENRE-FIRST（zh_TW）: panel 23-24『對方首次主動回望鏡頭』是全劇最重要的類型轉折——威脅從『被觀察的謎』升級為『雙向監視關係』，完全符合doctrine『威脅必須維持模糊且可能來自內部』（craft
+  bible §1、§5 antagonist grammar）的規範，且未使用任何超自然元素（純屬人為/系統性威脅，符合strategy庫anti_pattern_rules禁止supernatural_threat）。
+
+
+  ARC: 承諾的實踐（打電話）→承諾的失效（收不到訊號，非任何人的錯）→獨自面對升級的威脅→接手而非解決（在筆記本寫下新一行）→對方主動回望的真正轉折，收尾於不安而非釋然。嚴格遵守strategy庫anti_pattern_rules：全話沒有任何一句台詞是『我意識到自己在鑽牛角尖』式的自我點破，轉折完全透過畫面（半張臉、六張卡、回望的身影）與沉默呈現，從未被言語說破。
+
+
+  NATIVE: 台灣繁體中文原創，非翻譯，非改寫既有姊妹作。
+
+
+  ACCEPTANCE: authored_candidate——非bestseller聲稱（M6標準）。本話為第一部收尾，非全劇收尾；第二部『螺旋』待續。'

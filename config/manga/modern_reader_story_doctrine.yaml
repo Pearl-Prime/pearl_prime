@@ -23,6 +23,17 @@ market_evidence:
       note: "France manga growth is tied to digital access, localization, fan communities, retail availability, merchandise, anime, and video games."
     - source: "https://www.ypulse.com/newsfeed/2023/01/04/french-readers-are-now-the-second-biggest-consumer-of-manga-only-behind-japan/"
       note: "France is a deeply manga-literate market where manga represented a large share of comics sales in recent reporting."
+  zh_TW:
+    - source: "https://www.rti.org.tw/en/news?uid=3&pid=19015"
+      note: "LINE serves roughly 94% of Taiwan's population (~22M monthly active users, ~1B messages/day) and functions as the daily communications and group-coordination layer, distinct from ja_JP's LINE usage despite shared branding."
+    - source: "https://www.taipeitourism.org/easycard-taipei/"
+      note: "EasyCard tap-and-go is Taiwan's ubiquitous daily transit/payment habit across MRT, bus, YouBike, and convenience stores, giving roughly a 20% fare discount over cash and replacing ticket lines entirely."
+    - source: "https://www.taiwannews.com.tw/news/6196604"
+      note: "Taiwan has one of the world's highest convenience-store densities (~1 per 2,000 people); 7-Eleven's iBon kiosk (bill pay, ticketing, printing, ID verification) and City Cafe counter service make convenience stores a daily-life hub distinct from Japan's conbini register."
+    - source: "https://davidwu1.medium.com/why-are-there-so-many-scooters-in-taiwan-15bbeb5c77e6"
+      note: "Taiwan has ~14.6M registered scooters (~63 per 100 people); scooters, not just rail transit, are the default youth commute and delivery-gig vehicle, distinguishing zh_TW's mobility texture from ja_JP's train-only commute framing."
+    - source: "research/2026-03-30_asian-persona-topic-market-fit.md"
+      note: "zh-TW section: ~40% of Taiwanese adults report poor sleep and mental-health disorder prevalence has doubled over 20 years, but Taiwan market framing prefers atmospheric/literary register over clinical CBT language (see docs/CJK_CATALOG_PLAN.md TW hybrid/BD-influence note)."
 
 reader_markets:
   en_US:
@@ -45,6 +56,11 @@ reader_markets:
     surface_rule: "Use manga-literate reader culture, tram/metro commute, bookshop shelves, school/campus life, gaming/anime fandom, and localized emotional restraint."
     ordinary_touchpoints: [metro_or_tram, manga_shelf, fnac_or_bookshop, lycee_courtyard, campus_cafe, group_chat, gaming_console, anime_convention_queue, library_card, bakery_counter]
     localization_guardrails: [avoid_flat_us_high_school_import, respect_bd_manga_literacy, localize everyday objects_without_overexplaining]
+  zh_TW:
+    label: "Taiwan"
+    surface_rule: "Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register over clinical self-help framing."
+    ordinary_touchpoints: [mrt_fare_gate, easycard_tap, scooter_commute, night_market_stall, bubble_tea_app, buxiban_classroom, line_chat_group, ibon_kiosk, city_cafe_counter, webtoon_reading_app]
+    localization_guardrails: [avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead, prefer_atmospheric_literary_register_over_clinical_cbt_framing, distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing]
 
 audiences:
   gen_z:
@@ -123,6 +139,11 @@ genres:
         ordinary_world_objects: [phone, earbuds, cafe_counter, shared_playlist]
         genre_transmutation: "Accidental sync becomes almost-confession."
         avoid: [music_video_flatness, perfect_couple_pose]
+      - id: bubble_tea_order_typo
+        logline: "A rushed bubble-tea app order autocorrects 'less sugar' into a confession, and the protagonist has to chase the delivery scooter across town before the wrong drink, and the right words, reach someone else."
+        ordinary_world_objects: [bubble_tea_app, scooter_helmet, delivery_locker, line_chat]
+        genre_transmutation: "Delivery mix-up becomes almost-confession."
+        avoid: [instant_confession, cute_app_gimmick_without_boundary]
 
   workplace:
     relevance_rule: "Modern labor pressure must be visible through dashboards, remote work, calendar load, chat status, commuting, and after-hours phone glow."
@@ -137,6 +158,11 @@ genres:
         ordinary_world_objects: [train_platform, phone_battery, launch_dashboard, vending_machine]
         genre_transmutation: "Commute becomes decompression chamber."
         avoid: [meeting_room_only, no_private_register]
+      - id: city_cafe_line_before_clockin
+        logline: "The protagonist buys the same City Cafe coffee every morning to steal ninety seconds before clocking in on the LINE work group, and one morning a coworker is already waiting at the counter with the truth they can't say inside."
+        ordinary_world_objects: [city_cafe_counter, easycard_tap, line_work_group, msg_read_receipt]
+        genre_transmutation: "Convenience-store ritual becomes decompression chamber."
+        avoid: [boss_villain_only, generic_burnout_speech]
 
   healing:
     relevance_rule: "Modern healing must receive everyday overstimulation gently: notifications, transit noise, school/work fatigue, convenience rituals, and weather."
@@ -150,6 +176,11 @@ genres:
         logline: "A saved receipt from an ordinary snack leads the protagonist back to one small routine they thought grief had erased."
         ordinary_world_objects: [conbini_receipt, snack_wrapper, evening_walk, kettle]
         genre_transmutation: "Receipt becomes memory vessel."
+        avoid: [nostalgia_without_scene, overexplained_grief]
+      - id: night_market_last_stall
+        logline: "The protagonist returns to the one night-market stall that still remembers their order after a year away, and the quiet transaction says the thing grief would not let them say at home."
+        ordinary_world_objects: [night_market_stall, paper_ticket_number, plastic_stool, paper_cup]
+        genre_transmutation: "Street-food ritual becomes memory vessel."
         avoid: [nostalgia_without_scene, overexplained_grief]
 
   mystery:
@@ -165,6 +196,11 @@ genres:
         ordinary_world_objects: [livestream_archive, chat_log, desk_lamp, timestamp]
         genre_transmutation: "Viewer memory becomes suspect map."
         avoid: [random_hacker_solution, exposition_dump]
+      - id: ibon_ticket_stub_alibi
+        logline: "An iBon ticket stub proves the protagonist was somewhere they swore they weren't, and the only witness is a webtoon-app reading log timestamping a chapter nobody remembers finishing together."
+        ordinary_world_objects: [ibon_ticket_stub, webtoon_reading_log, receipt_timestamp, counter_camera]
+        genre_transmutation: "Convenience-store receipt becomes alibi trapdoor."
+        avoid: [magic_database_answer, generic_detective_room]
 
   horror:
     relevance_rule: "Modern horror should make familiar interfaces wrong: a phone, classroom app, livestream, station display, or game lobby behaves almost normally."
@@ -179,6 +215,11 @@ genres:
         ordinary_world_objects: [commuter_train, ad_screen, school_bag, station_map]
         genre_transmutation: "Commute becomes liminal trap."
         avoid: [monster_reveal_without_dread, cozy_resolution]
+      - id: ibon_kiosk_wrong_receipt
+        logline: "A convenience-store iBon kiosk prints a receipt for a service the protagonist never requested, a funeral date bearing their own name, and every 7-Eleven register in the neighborhood recognizes the code."
+        ordinary_world_objects: [ibon_kiosk, printed_receipt, register_beep, night_shift_clerk]
+        genre_transmutation: "Kiosk convenience becomes prophecy machine."
+        avoid: [jump_scare_only, lore_dump]
 
   sports:
     relevance_rule: "Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body."
@@ -235,6 +276,11 @@ genres:
         ordinary_world_objects: [delivery_locker, qr_code, package_label, station_exit]
         genre_transmutation: "Everyday logistics become quest contract."
         avoid: [random_portal, no_rule_pressure]
+      - id: transfer_gate_wrong_line
+        logline: "A forgotten transfer gate at a familiar MRT interchange opens onto a platform serving a line that appears on no map, and the announcement calls the protagonist's name in a voice the whole station seems to recognize."
+        ordinary_world_objects: [mrt_fare_gate, easycard_tap, transfer_gate, platform_announcement]
+        genre_transmutation: "Transit transfer becomes portal threshold."
+        avoid: [phone_remains_as_easy_solution, generic_chosen_one]
 
   food:
     relevance_rule: "Modern food stories should use convenience food, delivery culture, school/work lunches, streaming recipes, and memory taste while keeping cooking and eating physical."
@@ -291,6 +337,11 @@ genres:
         ordinary_world_objects: [museum_app, exhibit_case, school_trip, old_tool]
         genre_transmutation: "Digital caption becomes historical recovery."
         avoid: [lecture_mode, no_period_scene]
+      - id: night_market_stall_deed
+        logline: "A night-market stallholder's faded deed surfaces during a lease dispute, and each fold of the paper opens into the family decision that kept the stall's name alive through a different era."
+        ordinary_world_objects: [night_market_stall, faded_deed, paper_lantern, folding_table]
+        genre_transmutation: "Modern lease dispute opens period duty."
+        avoid: [modern_values_speech, costume_only_history]
 
   comedy:
     relevance_rule: "Modern comedy should use group chats, delivery mistakes, game lobbies, filters, QR codes, and school/work status as setup objects, not explanation."
@@ -318,6 +369,11 @@ genres:
         logline: "A mobile game's rank ladder mirrors the sect trial too closely, and the protagonist learns the real gate cannot be brute-forced like a daily quest."
         ordinary_world_objects: [mobile_game, rank_screen, sect_platform, training_token]
         genre_transmutation: "Game ladder becomes hierarchy mirror."
+        avoid: [litRPG_numbers_only, no_teacher]
+      - id: scooter_delivery_rank_trial
+        logline: "A food-delivery app's speed-ranking leaderboard mirrors the sect's outer-disciple trial too closely, and the protagonist learns the mountain road cannot be shaved down like a delivery route."
+        ordinary_world_objects: [delivery_app, scooter_commute, rank_leaderboard, mountain_trailhead]
+        genre_transmutation: "Gig-economy ranking becomes hierarchy mirror."
         avoid: [litRPG_numbers_only, no_teacher]
 
   mecha:
@@ -347,6 +403,11 @@ genres:
         ordinary_world_objects: [secondhand_console, save_file, bedroom_tv, cracked_controller]
         genre_transmutation: "Save file becomes living accusation."
         avoid: [game_world_power_fantasy, clean_hero_pose]
+      - id: buxiban_after_hours_debt
+        logline: "A buxiban classroom stays lit long after the last bus leaves, and the tutor who never seems to age collects a different kind of tuition from students who keep failing the same exam."
+        ordinary_world_objects: [buxiban_classroom, exam_worksheet, vending_machine, night_bus_stop]
+        genre_transmutation: "Cram-school debt becomes blood-oath ledger."
+        avoid: [phone_as_spell_wand, colorful_portal]
 
   sci_fi_cyberpunk:
     relevance_rule: "Cyberpunk should make today's interface life slightly more literal: recommendation feeds, biometric locks, avatars, backups, payment systems, and surveillance."
@@ -375,6 +436,11 @@ genres:
         ordinary_world_objects: [phone_photo, classroom, empty_seat, lunch_tray]
         genre_transmutation: "Image glitch becomes gentle haunting."
         avoid: [jump_scare, invisible_no_cue]
+      - id: easycard_extra_tap
+        logline: "The protagonist's EasyCard tap-out log shows one more ride than they took, always departing from the same closed station, and the fare gate never once complains."
+        ordinary_world_objects: [easycard_tap, mrt_fare_gate, transit_app_log, station_departure_board]
+        genre_transmutation: "Transit fare record becomes haunting ledger."
+        avoid: [exorcism_battle, overexplained_lore]
 
   school:
     relevance_rule: "Modern school stories need social weather: group chats, seating maps, clubs, transit, class apps, lunches, phones, and private/public self."
@@ -389,6 +455,11 @@ genres:
         ordinary_world_objects: [train_delay, station_platform, school_bag, phone_clock]
         genre_transmutation: "Transit interruption becomes social courage test."
         avoid: [random_meet_cute, no_peer_pressure]
+      - id: buxiban_line_group_seating
+        logline: "A buxiban LINE chat group turns seat assignments in the last row into a ranking nobody says out loud, and the protagonist's one honest reply on the ride home changes who saves a seat on the MRT the next morning."
+        ordinary_world_objects: [buxiban_classroom, line_chat_group, mrt_fare_gate, school_bag]
+        genre_transmutation: "Chat-group seating becomes belonging pressure."
+        avoid: [adult_voice, popularity_cliche]
 
   memoir:
     relevance_rule: "Modern memoir should use present-day artifacts as memory pressure: drafts, photos, search histories, receipts, voice notes, health portals, and chats."
