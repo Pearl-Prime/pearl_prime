@@ -1,0 +1,163 @@
+# Social Media TTS — plain-text prep (NO SSML) — Japanese (ja-JP)
+# Authority: artifacts/research/social_media_tts_text_prep_cjk6_2026-07-24/REPORT.md
+#            Method extends artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+#            (English precedent: punctuation-as-pacing, no SSML, phrase-level
+#            trap-word rewrites, do_not_blind_replace guard).
+# Engine target: CosyVoice2 (self-hosted), cosyvoice2_language: "ja"
+#   (config/tts/locale_voice_routing.yaml). Fallback: edge_tts ja-JP-NanamiNeural.
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms.
+# Date: 2026-07-24 · Lane 2 (Pearl_Research) · SOCIALTTS-L2
+# Acceptance layer: RESEARCHED + CONFIG-EXISTS — NOT proven until Lane 4 voices
+# real audio on Pearl Star CosyVoice2. Nothing in this file is EXECUTED-REAL.
+schema_version: 2
+locale: ja-JP
+cosyvoice2_language: ja
+
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden   # synth-input only, mirrors EN Q-SMV-G03
+  # Japanese sentence-final punctuation (。！？) is not followed by a space in
+  # running prose, unlike English. Without this override the shared loader's
+  # `\s+`-gated sentence split silently becomes a no-op for Japanese text —
+  # harmless (capitalization is a no-op on kana/kanji too) but the terminal
+  # punctuation top-up would wrongly append an ASCII "." to text that already
+  # ends in "。". These three keys fix both.
+  sentence_end_chars: ["。", "！", "？"]
+  sentence_boundary_requires_space: false
+  default_terminal_punct: "。"
+
+punctuation_pacing:
+  aggressiveness: mild   # 。and 、already carry EN's period/comma pacing job — do not over-split
+  rules:
+    - id: colon_to_period
+      description: >
+        Both ASCII ':' and fullwidth '：' get rushed by CosyVoice's JA
+        front-end the same way EN's colon does (2026-07-19 finding).
+        Digit-guarded so clock times ("3:00") and ratios are untouched.
+      pattern: '(?<!\d)[：:](?!\d)\s*'
+      replace: '。'
+      enabled: true
+    - id: semicolon_to_period
+      pattern: '[；;]\s*'
+      replace: '。'
+      enabled: true
+    - id: emdash_to_period
+      description: >
+        ASCII/CJK em/en dash only. Deliberately does NOT touch 'ー' (the
+        katakana long-vowel mark, e.g. パーティー) — see do_not_blind_replace.
+      pattern: '\s*[—–]\s*'
+      replace: '。'
+      enabled: true
+    - id: strip_parentheses
+      description: "Both ASCII and fullwidth parens; TTS reads them as an audible aside or 'kakko'."
+      pattern: '\s*(\([^)]*\)|（[^）]*）)'
+      replace: ''
+      enabled: true
+    - id: strip_ascii_decorative_quotes
+      description: "Strip ASCII/curly quotes only. Leave 「」『』 — they are load-bearing JA quotation grammar, not decoration, and CosyVoice's JA training data is full of them."
+      pattern: '["“”]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_run
+      pattern: '。{2,}'
+      replace: '。'
+      enabled: true
+  guidance_not_automated:
+    - "、(pause) vs 。(full stop): keep 、at natural breath points inside a clause; do not let a rewrite pass silently delete them — they are doing EN's comma job already."
+    - "Target short clauses (informally, under ~20-25 characters between 。) when hand-editing atoms for this bank, mirroring EN's ~12-16 word target."
+    - "Register: keigo (敬語) for authority/expert-voice content vs iyashikei (癒し系) softness for somatic/calming content — a voice-direction choice, not a text-prep rule. See config/tts/locale_voice_routing.yaml ja-JP notes."
+
+homograph_and_trap_rewrites:
+  # Single-kanji polyphone disambiguation (on'yomi/kun'yomi context selection)
+  # is a G2P research problem CosyVoice's own JA front-end must solve — see
+  # arxiv:2201.09427 (polyphone/accent prediction in JA TTS front-ends). A
+  # regex layer cannot resolve genuine reading ambiguity; blind single-kanji
+  # substitution would carry the same false-positive risk the EN report
+  # flagged for use/does/reset. The safe, actionable move is: for the small
+  # set of HIGH-FREQUENCY-IN-THIS-CORPUS ambiguous words, replace with an
+  # unambiguous synonym or an explicit kana spelling — the same "sidestep,
+  # don't fix in place" strategy EN used for close/project/separate.
+  - id: kango_kaigo_synonym
+    description: >
+      看護 (nursing) is unambiguous, but healthcare-persona copy sometimes
+      pairs it with 介護 (kaigo, eldercare) which non-native-trained models
+      occasionally conflate in fast speech; disambiguate with the fuller
+      compound rather than relying on isolated single-kanji context.
+    pattern: '(?<!の)介護(?!職|士|保険)'
+    replace: '介護ケア'
+    enabled: false   # documented, disabled by default: low-confidence heuristic, needs a Lane 4 listen before enabling
+  - id: ichinichi_zutsu
+    description: "一日 is a real 一日(いちにち, duration)/一日(ついたち, 1st-of-month) trap. Our wellness-pacing copy always means duration ('one day at a time') — force the unambiguous kana reading for this specific, high-frequency phrase."
+    pattern: '一日ずつ'
+    replace: 'いちにちずつ'
+    enabled: true
+  - id: ichinichi_ichizen_style
+    description: "'today, one day at a time' framing — force duration reading, not the 1st-of-month reading."
+    pattern: 'その一日を'
+    replace: 'そのいちにちを'
+    enabled: true
+  - id: sanpun_kokyuu
+    description: "分 after a small number, before a breathing/rest/meditation noun, must read as -pun/-fun (minutes), never bun ('a fraction of'). Force kana on the highest-frequency phrasing (three-minute breathing exercises) rather than trying to regex every number."
+    pattern: '三分(の?呼吸|間だけ|だけ)'
+    replace: 'さんぷん\1'
+    enabled: true
+  - id: hitori_de_disambiguation
+    description: "一人 read alone can mean 'alone/solo' (ひとり) or literal '1 person' (いちにん, rare) — our copy is always the 'alone' sense; force it so number-context misreads don't creep in from adjacent digits."
+    pattern: '一人で(?!目)'
+    replace: 'ひとりで'
+    enabled: true
+
+speakable_expansions:
+  # Untranslated English brand/platform/clinical terms that can survive
+  # translation (Lane 3 translates prose, not proper nouns/URLs/brand tokens).
+  - id: tiktok_katakana
+    pattern: '\bTikTok\b'
+    replace: 'ティックトック'
+    enabled: true
+  - id: instagram_katakana
+    pattern: '\bInstagram\b'
+    replace: 'インスタグラム'
+    enabled: true
+  - id: youtube_katakana
+    pattern: '\bYouTube\b'
+    replace: 'ユーチューブ'
+    enabled: true
+  - id: genz_katakana
+    pattern: '\bGen Z\b'
+    replace: 'Z世代'
+    enabled: true
+  - id: burnout_katakana
+    pattern: '\bburnout\b'
+    replace: 'バーンアウト'
+    enabled: true
+  - id: cortisol_katakana
+    pattern: '\bcortisol\b'
+    replace: 'コルチゾール'
+    enabled: true
+  - id: rn_to_kangoshi
+    pattern: '\bRN\b'
+    replace: '看護師'
+    enabled: true
+
+# Words/characters this ruleset must NEVER blind-replace — false-positive
+# risk documented, mirrors EN's do_not_blind_replace guard.
+do_not_blind_replace:
+  - "ー"          # katakana long-vowel mark — looks like an em-dash, is NOT one
+  - "一"          # too ambiguous standalone (numeral/prefix/particle-adjacent)
+  - "行"          # xíng-class polyphone (い(く)/おこな(う)/ぎょう/こう) — compound-dependent
+  - "生"          # notoriously ambiguous (い(きる)/う(まれる)/せい/なま/き…)
+  - "上"
+  - "下"
+  - "人"          # counter reading depends entirely on the preceding numeral
+  - "分"          # minutes/fraction/understand — only touched via the targeted phrase rules above
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing
