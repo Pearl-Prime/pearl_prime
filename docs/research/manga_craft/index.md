@@ -83,6 +83,18 @@ The three M3 Wave-1 stub bibles (~2 KB each) are now full 10-section bibles at t
   lacked the study's named exemplars; bibles landed after 2026-07-24 (rows 24–32) can cite
   the study's matching §-sections directly.
 
+- **Genre craft checklists (compiled, enforced)** — `config/manga/genre_craft_checklists.yaml`
+  (manga process uplift Lane 07, 2026-07-24) distils each bible above into machine-readable,
+  source-anchored checklists — one block per canonical genre: `story_elements_must`/`should`
+  (§1/§3/§6), `dialogue_rules` (§4), `panel_grammar_items` (§2/§8), `failure_modes` (§6), and an
+  `mc_items` reference into `mc_endurance_checklists.yaml` (by key, never restated). These are
+  **enforced at gate time** (`MANGA.STORY.GENRE_CRAFT_CHECKLIST` in
+  `phoenix_v4/manga/story_quality/excellence_gate.py`) and read by hand at QA time
+  (`docs/specs/MANGA_STORY_EXCELLENCE_REALIZATION_GATE_SPEC.md` §"Editor pass"), so the writing is
+  finally checked against the research the bibles hold. `mc_endurance_checklists.yaml` is now
+  `status: wired` (this lane wired it). Storyboard-side conformance is an advisory sub-check in
+  `scripts/ci/check_manga_arc_storyboard.py` (`panel_grammar_items`).
+
 ## How to use
 
 - **For 48-volume pre-planning:** read Section 7 of the relevant lane first; each lane gives a concrete 48-volume arc shape.
