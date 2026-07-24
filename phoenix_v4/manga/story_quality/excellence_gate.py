@@ -37,6 +37,12 @@ DEFAULT_ALIAS_CFG = REPO / "config" / "manga" / "story_genre_alias_coherence.yam
 DEFAULT_INTERACTION = REPO / "config" / "manga" / "main_character_interaction_grammar.yaml"
 STRATEGY_DIR = REPO / "config" / "source_of_truth" / "manga_story_strategies"
 CHAPTER_WRITER_PROMPT = REPO / "phoenix_v4" / "manga" / "prompts" / "chapter_writer_prompt.txt"
+# Lane 07 (manga process uplift): compiled per-genre craft checklists + the
+# MC-endurance checklist they reference by key (never restated). Loading the
+# endurance file here is what flips its `status: unwired` marker — this module
+# is its real, non-test consumer (check_manga_wiring.py).
+DEFAULT_CRAFT_CHECKLISTS = REPO / "config" / "manga" / "genre_craft_checklists.yaml"
+DEFAULT_MC_ENDURANCE = REPO / "config" / "manga" / "mc_endurance_checklists.yaml"
 
 GATE_RESEARCH = "MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE"
 GATE_ARCHITECT = "MANGA.STORY.ARCHITECT_CONTEXT"
@@ -47,6 +53,7 @@ GATE_INTERACT = "MANGA.STORY.INTERACTION_REALIZATION"
 GATE_HOOK = "MANGA.STORY.PAGE_ONE_HOOK"
 GATE_MARKET = "MANGA.STORY.MARKET_NATIVE_SURFACE"
 GATE_BLAND = "MANGA.STORY.BLAND_FALLBACK_LINT"
+GATE_CRAFT = "MANGA.STORY.GENRE_CRAFT_CHECKLIST"
 GATE_REPAIR = "MANGA.STORY.REPAIR_PACKET"
 
 
@@ -56,6 +63,20 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(str(path))
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+
+
+def _load_yaml_optional(path: Path) -> dict[str, Any]:
+    """Load a YAML mapping, returning {} when the file is absent or empty.
+
+    Used for the craft/endurance checklist configs so the gate degrades to a
+    no-op PASS (never a crash) if the files are not present in a checkout.
+    """
+    try:
+        if yaml is None or not path.is_file():
+            return {}
+        return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
 
 
 def _norm(s: str) -> str:
@@ -778,6 +799,157 @@ def _check_bland(writer_handoff: Mapping[str, Any], cfg: Mapping[str, Any]) -> d
     return _gate(GATE_BLAND, status=status, score=100 if status == "PASS" else 0, threshold=100, blocking=True, issues=issues, evidence=evidence)
 
 
+def _resolve_mc_family_items(
+    mc_ref: Mapping[str, Any],
+    mc_cfg: Mapping[str, Any],
+    genre: str,
+) -> dict[str, list[dict[str, Any]]]:
+    """Resolve the referenced MC-endurance items by key (never restated).
+
+    ``mc_ref`` names a family + which lists to pull; the actual item text lives
+    only in mc_endurance_checklists.yaml. This is the binding that makes that
+    file a live consumer dependency of the gate (wired, not duplicated).
+    """
+    family = _norm(str(mc_ref.get("family") or genre))
+    lists = mc_ref.get("lists") or ["must_have", "should_have", "anti_patterns", "endurance_mechanics"]
+    fam_block = (mc_cfg.get("families") or {}).get(family) or {}
+    out: dict[str, list[dict[str, Any]]] = {}
+    for name in lists:
+        rows = fam_block.get(name) or []
+        out[name] = [r for r in rows if isinstance(r, dict) and r.get("item")]
+    return out
+
+
+def _check_genre_craft(
+    writer_handoff: Mapping[str, Any],
+    ids: dict[str, Any],
+    craft_cfg: Mapping[str, Any],
+    mc_cfg: Mapping[str, Any],
+    cfg: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Enforce the compiled per-genre craft checklist at gate time.
+
+    Hard-blocking (like RESEARCH/ARCHITECT/ALIAS — unweighted, fail-closed) on
+    two mutation-provable conditions:
+      * a genre ``failure_mode`` signal is present on the page (defect present);
+      * fewer than ``must_coverage_floor`` of ``story_elements_must`` items have
+        on-page evidence.
+    ``endurance_mechanics`` are NEVER hard-gated (they are the 100+-episode
+    signature; completion-first genres legitimately lack them) and per-family
+    failure cadence is a genre signature, not a global pass/fail — both per the
+    MC-endurance study's cross-family synthesis. The referenced MC-endurance
+    items are resolved by key and surfaced for the Editor pass + report, not
+    restated. When no checklist exists for the genre the gate is a no-op PASS.
+    """
+    issues: list[dict[str, Any]] = []
+    evidence: list[dict[str, Any]] = []
+    params = dict(cfg.get("genre_craft") or {})
+    genres = (craft_cfg or {}).get("genres") or {}
+    genre = ids["relevance_genre"] or ids["genre_id"]
+
+    if not genres or not params.get("enforce", True):
+        return _gate(GATE_CRAFT, status="PASS", score=100, threshold=100, blocking=True,
+                     issues=[], evidence=[{"path": "config/manga/genre_craft_checklists.yaml",
+                                           "text": "disabled_or_absent", "reason": "craft gate inactive"}])
+
+    block = genres.get(genre) or genres.get(_norm(str(ids["genre_id"])))
+    if not isinstance(block, dict):
+        return _gate(GATE_CRAFT, status="PASS", score=100, threshold=100, blocking=True,
+                     issues=[], evidence=[{"path": "config/manga/genre_craft_checklists.yaml",
+                                           "text": genre, "reason": "no craft checklist for genre (skip)"}])
+
+    opening, _ = opening_pages_text(writer_handoff, max_pages=2)
+    full = full_script_text(writer_handoff)
+    blob = (opening + " " + full).lower()
+
+    # ── must-item coverage ────────────────────────────────────────────────
+    must = [m for m in (block.get("story_elements_must") or []) if isinstance(m, dict)]
+    covered = 0
+    for item in must:
+        sig = [str(s) for s in (item.get("evidence_any") or []) if s]
+        hits = _contains_any(blob, sig) if sig else []
+        if hits:
+            covered += 1
+            evidence.append({"path": "pages[*]", "text": hits[0],
+                             "reason": f"craft must-item covered ({item.get('source')})"})
+    total = len(must)
+    floor = float(params.get("must_coverage_floor", 0.5))
+    ratio = (covered / total) if total else 1.0
+    if total and ratio < floor:
+        issues.append(_issue(
+            "genre_craft_must_items_uncovered",
+            f"{genre}: {covered}/{total} craft must-items have on-page evidence "
+            f"(< floor {floor:.2f})",
+            covered=covered, total=total, floor=floor,
+        ))
+
+    # ── failure-mode lint (anti-pattern present == defect) ─────────────────
+    failure_mode_present = False
+    for fm in (block.get("failure_modes") or []):
+        if not isinstance(fm, dict):
+            continue
+        sig = [str(s) for s in (fm.get("signal_any") or []) if s]
+        hits = _contains_any(blob, sig) if sig else []
+        if hits:
+            failure_mode_present = True
+            issues.append(_issue(
+                "genre_craft_failure_mode_present",
+                f"{genre}: anti-pattern '{fm.get('item')}' — signal {hits[0]!r}",
+                signal=hits[0], source=fm.get("source"),
+            ))
+
+    # ── MC-endurance binding (resolve by key; editor-QA + report surface) ──
+    mc_ref = block.get("mc_items") or {}
+    if mc_ref:
+        resolved = _resolve_mc_family_items(mc_ref, mc_cfg or {}, genre)
+        n_must = len(resolved.get("must_have") or [])
+        n_all = sum(len(v) for v in resolved.values())
+        if n_all:
+            evidence.append({
+                "path": f"config/manga/mc_endurance_checklists.yaml#families/{mc_ref.get('family') or genre}",
+                "text": f"{n_all} MC-endurance items referenced ({n_must} must_have)",
+                "reason": "mc_endurance checklist bound by key (Editor pass + authoring)",
+            })
+        else:
+            issues.append(_issue(
+                "genre_craft_mc_reference_unresolved",
+                f"{genre}: mc_items references family "
+                f"{mc_ref.get('family') or genre!r} but it resolves to 0 items",
+            ))
+
+    if failure_mode_present:
+        score = 0
+    else:
+        score = int(round(100 * ratio))
+    status = "PASS" if not issues else "BLOCKED"
+    return _gate(GATE_CRAFT, status=status, score=score, threshold=100,
+                 blocking=True, issues=issues, evidence=evidence)
+
+
+def check_genre_craft_checklist(
+    writer_handoff: Mapping[str, Any],
+    *,
+    genre: str,
+    relevance_genre: str | None = None,
+    genre_id: str | None = None,
+    repo_root: Path | None = None,
+) -> dict[str, Any]:
+    """Public, directly-testable entry point for the craft gate.
+
+    Loads the craft + endurance + gate configs from ``repo_root`` and evaluates
+    a single genre against ``writer_handoff``. Returns the gate dict.
+    """
+    root = repo_root or REPO
+    craft_cfg = _load_yaml_optional(root / "config/manga/genre_craft_checklists.yaml")
+    mc_cfg = _load_yaml_optional(root / "config/manga/mc_endurance_checklists.yaml")
+    cfg = _load_yaml_optional(root / "config/manga/story_excellence_gates.yaml")
+    ids = {
+        "relevance_genre": _norm(str(relevance_genre or genre)),
+        "genre_id": _norm(str(genre_id or genre)),
+    }
+    return _check_genre_craft(writer_handoff, ids, craft_cfg, mc_cfg, cfg)
+
+
 def _score_report(gates: list[dict[str, Any]], cfg: Mapping[str, Any]) -> int:
     weights = cfg.get("weights") or {}
     mapping = {
@@ -874,6 +1046,8 @@ def evaluate_story_excellence(
     root = repo_root or REPO
     cfg = _load_yaml(config_path or (root / "config/manga/story_excellence_gates.yaml"))
     alias_cfg = _load_yaml(root / "config/manga/story_genre_alias_coherence.yaml")
+    craft_cfg = _load_yaml_optional(root / "config/manga/genre_craft_checklists.yaml")
+    mc_cfg = _load_yaml_optional(root / "config/manga/mc_endurance_checklists.yaml")
 
     mrc = _resolve_modern_context(story, writer, internal)
     ids = _identity_fields(story, writer, mrc)
@@ -888,6 +1062,7 @@ def evaluate_story_excellence(
         _check_page_one_hook(writer, cfg),
         _check_market(writer, ids, mrc),
         _check_bland(writer, cfg),
+        _check_genre_craft(writer, ids, craft_cfg, mc_cfg, cfg),
     ]
 
     hard_failed = [g for g in gates if g.get("status") == "BLOCKED" and g.get("blocking")]
