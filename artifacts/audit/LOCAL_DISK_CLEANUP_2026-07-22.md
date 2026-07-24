@@ -56,14 +56,33 @@ manifest) — not just trusted from the upload log.
 - All three deleted from local disk after verify (covers: file-level deletion excluding
   the 79 tracked paths, not a directory `rm -rf`).
 
+## Git representation of the large inventories
+
+The first PR attempt embedded all 29,354 artifact rows directly in five YAML
+manifests. That produced a 117,705-line PR even though the executable
+code/config/audit change was small. The artifact evidence is preserved without
+that unreviewable Git diff:
+
+- Legacy inline manifests remain local staging inputs until publication.
+- `r2_sync.py publish-index` writes deterministic JSONL parts under
+  `manifest_shards/v1/<manifest_id>/` in the same private R2 bucket.
+- The repository keeps a small schema-validated `1.1.0` index at each original
+  manifest path. Every part is pinned by R2 key, SHA-256, byte length, artifact
+  count, and aggregate artifact bytes.
+- `r2_sync.py pull` and `verify` resolve both legacy inline and indexed
+  manifests. They fail closed on part checksum, count, byte-total, or artifact
+  record drift.
+
+This is a representation change only. The underlying artifact keys and hashes
+are byte-for-byte those recorded during the completed backup.
+
 ## New R2 infrastructure (extends canonical config, per `docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md` §4.1 "no parallel uploader")
 
 - `config/artifacts/r2_buckets.yaml`: added `misc_working_banks` (prefix `misc/`) and
   `manga_catalog_render_cache` (prefix `manga_catalog_cache/`) namespaces.
-- `schemas/artifacts/manifest.schema.json`: added both new namespace values to the
-  `namespace` enum (was missing — first push attempt failed manifest-schema validation
-  until this was added; the namespace was valid in `r2_buckets.yaml` but the JSON schema
-  is a second, independently-maintained enum).
+- `schemas/artifacts/manifest.schema.json`: added both new namespace values and
+  the backwards-compatible indexed-manifest `1.1.0` contract. Legacy inline
+  `1.0.0` manifests remain valid.
 
 ## Bugs found and fixed in `scripts/artifacts/r2_sync.py` (canonical, edited in place)
 
@@ -131,3 +150,4 @@ manifest) — not just trusted from the upload log.
   git-surgery target) — recorded in `docs/PROGRAM_STATE.md` and
   `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` per the earlier Lane 03 integration
   (PR #73).
+
