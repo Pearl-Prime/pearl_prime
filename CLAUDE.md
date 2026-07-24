@@ -239,6 +239,17 @@ python3 scripts/ci/pr_governance_review.py
 
 If either blocks, do NOT merge. Ask the owner.
 
+`pre_merge_check.sh` also prints the PR's live per-check CI status (added
+2026-07-23 after the PR #191 incident: a session merged while reporting "all
+governance checks pass" when Core tests and Release gates hadn't even
+finished, and one check had already failed). It hard-blocks on any check
+still pending; it warns — without hard-blocking — on completed failures,
+since some workflows on this repo run chronically red for reasons unrelated
+to a given diff. **Never report "all checks pass" or "all governance checks
+pass."** Read the printed per-check status and name each one: which passed,
+which are pending, which are failing and why merging anyway is safe (e.g.
+"failing on main independent of this PR, tracked separately").
+
 ## Golden Branch Pattern
 
 ```bash

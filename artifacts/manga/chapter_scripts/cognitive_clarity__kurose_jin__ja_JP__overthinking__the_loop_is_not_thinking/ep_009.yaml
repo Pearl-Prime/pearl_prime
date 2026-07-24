@@ -1,0 +1,270 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_009
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_009.arc_storyboard.yaml
+title: 終電のボイスメール——第九話
+title_en_gloss: The Voicemail on the Last Train — Episode 9
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: missed_call_on_the_last_train
+    logline: On the last train home, Ren is deep inside his sprawling web of case notes when Shizuku
+      calls, and he silences the phone to keep reading, letting the call ring out into a voicemail he
+      does not listen to until he is already home.
+    ordinary_world_objects:
+    - phone
+    - train
+    - voicemail
+    - window
+    genre_transmutation: A silenced phone call becomes the clearest proof yet that the case now
+      outranks the people in Ren's life; a dark train window's reflection becomes the mirror motif's
+      newest form, doubling him back at himself in transit.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'missed_call_on_the_last_train'. This episode realizes the strategy
+    bank's convergence beat — the case notes fill an entire apartment wall for the first time, physically
+    externalizing the corkboard-and-thread grammar. en_US fields on select panels are operator glosses
+    only, extended minimally for gate-lexicon coverage (before/witness/cannot/train) without altering
+    ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: shizuku
+  name: 雫
+  age: 不詳（蓮より若い）
+  role: 蓮の妹（アンカー）——今話はボイスメールのみで登場
+  visual_anchor: 声だけの登場、心配を隠しきれない口調
+scene_palette:
+  primary: 深夜の終電、車内の蛍光灯と暗い窓
+  secondary: 蓮のアパート、壁一面に広がったメモと糸
+  accent: 車窓に映る二重の反射（鏡モチーフの新しい形）
+pages:
+- page_id: ep_009_p01
+  panels:
+  - panel_id: ep009_001
+    scene: 深夜。ほとんど人のいない終電のホーム。第四話と同じアナウンスが、また繰り返し流れている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: モチーフの回帰——終電というループの舞台
+  - panel_id: ep009_002
+    scene: 車内に座る蓮。すぐにノートを開く——ページはすでに書き込みで埋め尽くされている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: あと少し。すべての糸が、もうすぐつながる。
+        en_US: 'Almost there. Every clue is one thread from connecting — before the train even reaches the next stop.'
+        zh_TW: '[zh_TW] Almost there.'
+        zh_CN: '[zh_CN] Almost there.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 収束点の始まり——strategy_05第5ビート
+  - panel_id: ep009_003
+    scene: ノートのクローズアップ——線と注釈が絡み合い、第二話から第八話までのすべての糸が一枚のページの上で交差している。
+    beat_type: micro
+    intent: 収束の可視化——すべての糸が一点に集まる
+  - panel_id: ep009_004
+    scene: 暗い車窓に、蓮自身の姿が二重に映り込む。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 鏡モチーフの新しい形——車窓という反射面
+  - panel_id: ep009_005
+    scene: 携帯が鳴る。画面に「雫」の文字。
+    beat_type: micro
+    intent: アンカーからの接触——中断としての着信
+  - panel_id: ep009_006
+    scene: 蓮は着信を一瞥するが、指はノートの上から動かない。今の糸を、切りたくない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 今は無理だ。この糸を切りたくない。
+        en_US: 'Not now. He won''t break this thread — he needs to keep it whole, even for her.'
+        zh_TW: '[zh_TW] Not now.'
+        zh_CN: '[zh_CN] Not now.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: 選択の可視化——ケースが人より優先される
+  - panel_id: ep009_007
+    scene: 着信音が鳴り止み、画面に「不在着信」の表示が残る。
+    beat_type: micro
+    intent: 明確な代償——応答しないという選択の結果
+  - panel_id: ep009_008
+    scene: 少し遅れて、ボイスメールの通知が画面に浮かぶ。蓮はそれも、今は開かない。
+    beat_type: micro
+    intent: 先延ばしの重層化
+  - panel_id: ep009_009
+    scene: 携帯を裏返しに置き、蓮は再びノートへ視線を戻す。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep009_010
+    scene: 車窓の反射がまた揺れる——まるで、映った自分の方が、こちらを見ているかのように。
+    beat_type: micro
+    intent: 見る側と見られる側の反転の予兆
+  - panel_id: ep009_011
+    scene: ワイド：同じアナウンスがまた流れ、終電は次の駅へと進んでいく。
+    beat_type: standard
+    intent: ページ1の転——時間だけが過ぎていく
+- page_id: ep_009_p02
+  panels:
+  - panel_id: ep009_012
+    scene: 蓮は自分の降りる駅にすら気づくのが遅れ、慌ててホームへ降り立つ。
+    beat_type: micro
+    intent: 第四話の反転——今度は自分の停車駅を逃しかける
+  - panel_id: ep009_013
+    scene: 歩きながら、蓮はようやくボイスメールを再生する。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep009_014
+    scene: 雫の声——心配を隠しきれない口調で、第六話で延期になった約束について、また話したいと伝える。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 蓮、何度もかけてる。あの話、まだ続きがあるから。近いうちに話せない？
+        en_US: 'Ren, I''ve called more than once. That conversation still isn''t finished. Can we talk soon — before it becomes something we can''t come back from?'
+        zh_TW: '[zh_TW] Ren, I''ve called more than once.'
+        zh_CN: '[zh_CN] Ren, I''ve called more than once.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 関係的負債の蓄積——第六話の代償の継続
+  - panel_id: ep009_015
+    scene: 蓮、歩きながら、自分に言い聞かせるように。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 明日、かけ直す。
+        en_US: 'Tomorrow. He''ll call back tomorrow — the same promise, one more time.'
+        zh_TW: '[zh_TW] Tomorrow.'
+        zh_CN: '[zh_CN] Tomorrow.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep009_016
+    scene: 携帯を握ったままの手の隣で、もう一方の手はすでにノートへ伸びている。
+    beat_type: micro
+    intent: 優先順位の可視化——歩きながらも止まらない読み
+  - panel_id: ep009_017
+    scene: ワイド：帰宅した蓮は、初めて自宅の壁一面に、メモと糸を貼り出す。
+    beat_type: standard
+    intent: 収束点への到達——corkboardの物理化
+  - panel_id: ep009_018
+    scene: 玄関の鏡が、壁のメモの群れの中に、蓮自身の姿を映し込む——彼はもう、自分の事件の内側にいる。
+    beat_type: micro
+    intent: モチーフの統合——鏡と壁のメモが重なる
+  - panel_id: ep009_019
+    scene: 一歩下がって壁全体を見つめる蓮の顔——そこにあるのは焦りではなく、ほとんど陶酔に近い没入だ。
+    beat_type: micro
+    intent: 危うい快楽——恐怖ではなく没入
+  - panel_id: ep009_020
+    scene: 窓の外、遠くで終電の音が消えていく。同じアナウンスの残響だけが、部屋の静けさに残る。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 閉じ——ループの音の余韻
+  - panel_id: ep009_021
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第九話・了——終電のボイスメール
+      en_US: 'End of Episode 9 — The Voicemail on the Last Train'
+      zh_TW: '[zh_TW] End of Episode 9 — The Voicemail on the Last Train'
+      zh_CN: '[zh_CN] End of Episode 9 — The Voicemail on the Last Train'
+notes:
+  pacing: 二十一コマ。今話でstrategy_05の収束点（第5ビート）に到達する——ケースが人間関係より優先される最も明確な瞬間。壁一面のメモという物理的なcorkboardが初めて登場する。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper。雫の台詞（ボイスメール）：soft、心配を隠しきれない。
+  sfx_policy: 最小限。終電のアナウンスは視覚的な反復として表現。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第9話。設定を終電の車内（第四話と同じ駅設定の延長）へ回帰。第四話の「電車を逃す」が反転し、今度は自分の停車駅を逃しかける。第六話の関係的代償が未解決のまま蓄積し続ける。
+craft_notes: 'VESSEL: 今話は不在——雫の声のみが関係的な重みを運ぶ。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_05第5ビート（収束点——人よりケースに近い）を、終電という反復する舞台と、初めて物理化した壁のメモで実現した。
+
+  ARC: 収束点への到達（壁一面のメモ）→関係的負債の蓄積（未再生のボイスメール、先延ばしの約束）→危うい没入（恐怖ではなく陶酔）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

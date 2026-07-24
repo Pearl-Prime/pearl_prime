@@ -1,0 +1,247 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_005
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_005.arc_storyboard.yaml
+title: 月台不記得的臉——第5話
+title_en_gloss: 'The Platform Has No Record of This Face — Episode 5: Twenty-One Days'
+manga_author: 邵臨淵
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- en_US
+- ja_JP
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk
+    and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register
+    over clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: retirement_countdown_calendar_forces_the_line
+    logline: 休息室牆上的退休倒數月曆翻到只剩二十一天,讓周德昌第一次把他觀察到的身體徵兆說成一句直接的話,而不是繼續沉默地續杯；值班表上,她被排進了更多的夜班。
+    ordinary_world_objects:
+    - retirement_countdown_calendar
+    - duty_roster
+    - thermos
+    - overtime_log
+    genre_transmutation: 退休倒數月曆,把周德昌的沉默守望變成一句有時限的直接勸告；值班表上新增的夜班,把制度壓力和她的執念綁在同一張紙上。
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z.
+    Use catalyst 'retirement_countdown_calendar_forces_the_line'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體的偵探
+main_characters:
+- id: su
+  name: 蘇雅晴
+  name_romaji: Su Yaqing (Iris)
+  age: 31
+  role: 主人公——台北捷運行控中心異常事件分析員
+  visual_anchor: 直短髮別在耳後、深藍色行控值班制服、右手習慣性轉動一枝原子筆
+- id: zhou
+  name: 周德昌
+  name_romaji: Zhou Dechang
+  age: 58
+  role: 資深值班控制員，即將退休——器（讀懂身體的偵探）
+  visual_anchor: 灰白平頭、袖口捲起、桌上一個用了二十年的舊保溫瓶
+- id: lin
+  name: 林組長
+  name_romaji: Team Lead Lin
+  age: 45
+  role: 值班主管——制度壓力來源
+  visual_anchor: 俐落套裝、手上永遠夾著一份待簽的報表夾
+scene_palette:
+  primary: 行控中心的冷白螢幕光 + 深夜捷運藍
+  secondary: 月台霓虹的濕冷灰藍（雨夜反光）
+  accent: 一枝始終未關的琥珀色警示燈——全劇唯一反覆出現的暖色
+pages:
+- page_id: ep_005_p01
+  panels:
+  - panel_id: ep005_001
+    scene: 休息室。牆上掛著周德昌的退休倒數月曆,今天被劃掉後只剩「21」這個數字。
+    beat_type: standard
+  - panel_id: ep005_002
+    scene: 周德昌獨自站在月曆前,手裡端著保溫瓶,表情安靜,像是在想什麼。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_003
+    scene: 雅晴進來準備接班,也看到了那個「21」,腳步頓了一下——他的時間正在倒數。
+    beat_type: micro
+  - panel_id: ep005_004
+    scene: 插入畫面——值班表公告欄,雅晴這個月被排進的夜班數字,比平常多了將近一倍。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 夜班,又加了。
+      en_US: The duty roster shows more night shifts than usual — pressure she didn't choose and won't
+        refuse.
+  - panel_id: ep005_005
+    scene: 周德昌看著值班表上她的名字被排得密密麻麻,眉頭皺了起來。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_006
+    scene: 夜裡,兩人在控制室裡各自安靜工作,只有鍵盤聲與螢幕的冷光。
+    beat_type: standard
+  - panel_id: ep005_007
+    scene: 插入畫面——雅晴的螢幕上,一個新的比對結果跳出來:不是三個站,是第四個站,同一種身形,再次出現。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 第四個。
+      en_US: A fourth station. Same build. That's evidence she both wanted and dreaded finding.
+  - panel_id: ep005_008
+    scene: 特寫——她的手在鍵盤上僵住,表情裡混著一種被證實的快感,和更深的恐懼。
+    beat_type: micro
+  - panel_id: ep005_009
+    scene: 周德昌從對面的位置看見她這個反應,放下手邊的工作,認真地看著她。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_010
+    scene: 沉默格——兩人隔著整間控制室對望,沒有人先開口。頁末懸念。
+    beat_type: long_drop
+    silence_confirmed: true
+- page_id: ep_005_p02
+  panels:
+  - panel_id: ep005_011
+    scene: 周德昌走到她桌邊,這次沒有把保溫瓶遞給她——和之前每一次都不一樣。
+    beat_type: micro
+    intent: 與先前的『倒茶』手勢對照——這次是直接的話語,不是沉默的照顧
+  - panel_id: ep005_012
+    scene: 周德昌,語氣比平常任何一次都短、都直接。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 我看得出來,這件事在對妳做什麼。
+        en_US: I can see what this is doing to you. That's not a guess — that's a witness statement.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep005_013
+    scene: 雅晴愣住,一時沒有回答——這是他第一次把話說得這麼直接。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_014
+    scene: 周德昌繼續說,聲音很平靜,不是責備。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 再二十一天,我就不在這裡看著了。
+        en_US: In twenty-one days, I won't be here to notice anymore.
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep005_015
+    scene: 雅晴,聲音很小,但誠實。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 我知道。
+        en_US: I know.
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep005_016
+    scene: 特寫——她的手仍放在鍵盤上,沒有移向結案鍵,也沒有移向任何新的動作——她聽見了,但沒有停下。
+    beat_type: micro
+    intent: 誠實的承認,沒有改變——策略手法的核心
+  - panel_id: ep005_017
+    scene: 周德昌沒有再逼問下去,只是點了點頭——器的節制:不說教,不強迫。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_018
+    scene: 沉默格——他端著保溫瓶,轉身走回自己的位置,對話結束了。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_019
+    scene: 大場景——雅晴獨自留在螢幕前,第四個站的資料還開著,他的話還留在空氣裡。手機螢幕一角,LINE群組還有三則未讀。
+    beat_type: standard
+    narrator_caption_by_locale:
+      en_US: The LINE chat group still has three unread messages she hasn't opened.
+  - panel_id: ep005_020
+    scene: 她的手懸在手機上方,像是想傳訊息跟妹妹道歉,或提醒自己這週要接姪女下課——最後只是把手機放回桌上,沒有傳出去。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      zh_TW: 晚點再傳。
+      en_US: She'll send it later. That's the promise she keeps not keeping — a cost she cannot yet pay.
+notes:
+  arc_position: 第五話——策略核心拍點：代價直接落地。周德昌首次直接說出觀察，雅晴誠實承認但未改變（承認不等於停止）。
+  pacing_vs_prior: 二十格，兩頁。節奏刻意放慢，把整話重心放在一次對話上，對照前四話的資訊密度。
+  continuity_callbacks: 保溫瓶手勢首次「缺席」（周德昌沒有遞茶）成為本話的視覺對照；下巴徵兆（ep_003）延續為周德昌『看得出來』的依據。
+  language: zh_TW為權威語言，en_US僅為操作用註解，非翻譯。
+  translation_pipeline_handoff: en_US為審閱用註解草稿；其餘CJK語系另案處理。
+craft_notes: 'VESSEL: 讀懂身體的偵探——本話是器第一次把身體觀察轉為明確話語（panel 12），但仍非教學演說，而是一句直接的、有時限的見證式陳述。GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+
+  GENRE-FIRST（zh_TW）: 代價落地拍點，依照策略庫strategy_01 beat 5改編。
+
+
+  ARC: 代價正式命名→誠實承認（『我知道』）→行為未變。禁止『我意識到自己在鑽牛角尖』式的自我點破台詞（違反類型聖經§6與strategy庫anti_pattern_rules）。
+
+
+  NATIVE: 台灣繁體中文原創。
+
+
+  ACCEPTANCE: authored_candidate。'

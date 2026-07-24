@@ -1,0 +1,18 @@
+# zh-TW Simplified contamination — KNOWN DEBT BASELINE
+# Recorded: 2026-07-15 at origin/main 9e9b9e606791590337cd7d0f2fb425def2e6f760
+# Gate: scripts/ci/check_zh_tw_simplified_contamination.py (ratchet/delta gate)
+# Audit: artifacts/qa/zh_tw_simplified_contamination_20260715/
+#
+# Each row is PRE-EXISTING debt the gate tolerates at <= the recorded count.
+# This list may only SHRINK. Never add a row to silence a failing PR — that
+# is the bypass this gate exists to prevent. Remove a row when the file is
+# repaired (the gate tells you to).
+distinct_simplified_chars	zh_tw_file
+15	atoms/gen_alpha_students/courage/REFLECTION/locales/zh-TW/CANONICAL.txt
+6	atoms/gen_z_student/depression/overwhelm/locales/zh-TW/CANONICAL.txt
+3	atoms/healthcare_rns/depression/overwhelm/locales/zh-TW/CANONICAL.txt
+4	atoms/healthcare_rns/somatic_healing/watcher/locales/zh-TW/CANONICAL.txt
+1	atoms/millennial_women_professionals/depression/overwhelm/locales/zh-TW/CANONICAL.txt
+3	atoms/millennial_women_professionals/social_anxiety/false_alarm/locales/zh-TW/CANONICAL.txt
+5	atoms/millennial_women_professionals/somatic_healing/watcher/locales/zh-TW/CANONICAL.txt
+36	atoms/nyc_executives/depression/overwhelm/locales/zh-TW/CANONICAL.txt
