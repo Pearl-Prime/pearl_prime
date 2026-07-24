@@ -392,3 +392,27 @@ and EI v2 wiring. **All five sub-lanes + this synthesis are read-only; zero atom
 ---
 *Supersedes all previous status reports and planning baselines (incl. the May 2026 worldwide plan). Latest session
 detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md`.*
+- **2026-07-23 first-zh-TW-book attempt — BLOCKED, structurally clear on cell selection only.** zh-TW
+  Simplified-contamination repair, name-conversion, and corrupted-content retranslation programs all closed
+  same-day (PRs #81-86, #157-181, #152-155, consolidated in #162/#191); the 863-row
+  `artifacts/qa/zh_tw_authoring_backlog_consolidated_20260723.tsv` is the live remaining-gap ground truth.
+  Cell selection against that backlog **succeeded**: `gen_z_professionals × overthinking × spiral` (F006) is
+  zh-TW-clean (0 backlog hits on all core slots + the engine bank) and `check_tuple_viability.py` PASS — real
+  Waystream listing already exists
+  (`way_stream_sanctuary__default_teacher__gen_z_professionals__overthinking__spiral.yaml`). The four-piece-chord
+  production build (`--pipeline-mode spine --quality-profile production --exercise-journeys --locale zh-TW`)
+  **hard-fails**, but not on the locale-fallback honesty gate — on a different, pre-existing gate
+  <!-- CI-ALLOWLIST: legacy-registry-ok — prose status report of an already-run/failed build; the
+       chord flags above and the entrypoint reference below are not a live invocation in this diff -->
+  (`EXERCISE-BANK-RESOLUTION-01`, in `scripts/run_pipeline.py`, PR #912) whose practice-atom classifier
+  (`_is_practice_atom`, `phoenix_v4/planning/enrichment_select.py:1559`) tests content against **English-only**
+  substrings/regex (`"notice the "`, `"step 1"`, numbered-list pattern, …). Real, clean, human-quality zh-TW
+  EXERCISE atoms contain none of those English tokens, so 100% of zh-TW EXERCISE atoms are misclassified as
+  "not practice-shaped," every chapter falls through to the shared English `practice_library`, and the gate
+  (correctly, by its own logic) hard-exits. **Confirmed cell-independent**: reproduced identically on
+  `corporate_managers × adhd_focus × overwhelm` (also zh-TW-clean + tuple-viable). This blocks **every**
+  `--locale zh-TW` (and likely every CJK-locale) production book using the mandatory `--exercise-journeys` chord
+  flag, regardless of persona/topic — no re-pick can route around it; the classifier itself needs a CJK-aware
+  fix (Pearl_Dev/Pearl_Prime scope, out of this lane's translation-only mandate). Full diagnosis + 4 build logs:
+  `artifacts/qa/zhtw_first_book_20260723/TRACE_SUMMARY.md`. **Acceptance layer: structurally clear (Layer 1) on
+  cell selection only — zero zh-TW EPUBs shipped.**
