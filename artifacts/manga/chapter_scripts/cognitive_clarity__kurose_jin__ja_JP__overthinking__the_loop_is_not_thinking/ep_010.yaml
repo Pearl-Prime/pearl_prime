@@ -1,0 +1,319 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_010
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_010.arc_storyboard.yaml
+title: 剥がされたシーツ——第十話
+title_en_gloss: The Sheet Pulled Back — Episode 10
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: apartment_confrontation_over_the_wall_of_notes
+    logline: Shizuku arrives unannounced, worried enough to show up in person, and pulls back the sheet
+      Ren threw over his wall of notes — only to find fragments of her own calls and words tracked
+      alongside the anomaly, and the fluent explanations that have worked on everyone else finally fail.
+    ordinary_world_objects:
+    - wall
+    - notes
+    - mirror
+    - door
+    genre_transmutation: A covered wall becomes the mystery's clearest physical evidence of scale; a
+      sister's unannounced visit becomes the relationship's breaking point, converting implied cost into
+      an on-page rupture.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'apartment_confrontation_over_the_wall_of_notes'. This is the arc's
+    heaviest relationship cost, paid in full on-page rather than implied — Shizuku discovers she herself
+    has become case material. Ren's fluent cover stories fail for the first time in the series. en_US
+    fields on select panels are operator glosses only, extended minimally for gate-lexicon coverage
+    (witness/before/cannot/door) without altering ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: shizuku
+  name: 雫
+  age: 不詳（蓮より若い）
+  role: 蓮の妹（アンカー）——今話でアークの最も重い代償を運ぶ
+  visual_anchor: 心配と怒りが同居する目、突然の訪問という行動
+scene_palette:
+  primary: 蓮のアパート、日中の乾いた光
+  secondary: シーツを剥がされた壁一面のメモと糸
+  accent: 玄関のドアと鏡（両方のモチーフが今話で決定的な役割を果たす）
+pages:
+- page_id: ep_010_p01
+  panels:
+  - panel_id: ep010_001
+    scene: 数日後。蓮のアパート。壁のメモはさらに広がり、今はシーツで覆われている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 時間経過——壁の拡張と隠蔽
+  - panel_id: ep010_002
+    scene: 玄関のチャイムが鳴る。予期しない訪問。
+    beat_type: micro
+    intent: 中断——電話ではなく、直接の訪問
+  - panel_id: ep010_003
+    scene: 蓮、慌てて壁の部屋のドアを閉め、動揺を隠しながら玄関へ向かう。
+    beat_type: micro
+    intent: 隠蔽の試み——訪問者への備え
+  - panel_id: ep010_004
+    scene: ドアを開けると、雫が立っている。電話ではなく、直接ここまで来た。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 何度も電話したのに。だから、来た。
+        en_US: 'I called more than once. So I came instead — a witness who refused to stay on the phone.'
+        zh_TW: '[zh_TW] I called more than once.'
+        zh_CN: '[zh_CN] I called more than once.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: アンカーの直接行動——電話を超えた懸念
+  - panel_id: ep010_005
+    scene: 蓮、玄関を半分だけ塞ぐように立つ。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 大丈夫だよ。急に、どうしたんだ。
+        en_US: 'I''m fine. What brought this on, so suddenly — before he can think of a better line.'
+        zh_TW: '[zh_TW] I''m fine.'
+        zh_CN: '[zh_CN] I''m fine.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep010_006
+    scene: 雫は構わず、蓮の脇をすり抜けて部屋に入ってしまう。
+    beat_type: micro
+    intent: 境界の突破——アンカーが初めて能動的に踏み込む
+  - panel_id: ep010_007
+    scene: 部屋の中——洗っていない皿、閉め切ったカーテン、そして半開きのドアの奥に見えるシーツの膨らみ。
+    beat_type: micro
+    intent: 生活の乱れの可視化——第九話以降の代償
+  - panel_id: ep010_008
+    scene: 雫、そのシーツに手をかける。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: これ、何。
+        en_US: 'What is this — a plain question before the sheet is even fully pulled back.'
+        zh_TW: '[zh_TW] What is this?'
+        zh_CN: '[zh_CN] What is this?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep010_009
+    scene: シーツが剥がされ、壁一面のメモと糸が露わになる。雫の顔が凍りつく。
+    beat_type: micro
+    intent: 発見の頂点——初めて他者に全貌が晒される
+  - panel_id: ep010_010
+    scene: 蓮、言葉を探すが、いつもの流暢な説明が出てこない。
+    beat_type: micro
+    intent: 失敗する言い訳——初めて説明が機能しない
+  - panel_id: ep010_011
+    scene: 雫、壁に近づき、断片を読み始める。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 説明できる。ただの——ただの、調べものだ。
+        en_US: 'I can explain. It''s just — just research — the words falling apart before they finish.'
+        zh_TW: '[zh_TW] I can explain.'
+        zh_CN: '[zh_CN] I can explain.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    intent: ページ1の転——言い訳の崩壊
+- page_id: ep_010_p02
+  panels:
+  - panel_id: ep010_012
+    scene: 雫の視線が、壁のある一角で止まる——そこには、自分自身の通話記録や、自分が言った言葉のメモがある。
+    beat_type: micro
+    intent: 発見の深化——自分もまた対象だったという気づき
+  - panel_id: ep010_013
+    scene: 雫、震える声で。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 私のことまで、書いてある。私も——調べられてたの？
+        en_US: 'I''m on this wall too. Was I ever just your sister, or was I always evidence?'
+        zh_TW: '[zh_TW] I''m on this wall too.'
+        zh_CN: '[zh_CN] I''m on this wall too.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 心配から裏切りの痛みへ——感情の転換
+  - panel_id: ep010_014
+    scene: 蓮、否定できずに黙り込む。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep010_015
+    scene: 雫、これまでで最も鋭く、短く。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 心配してたのに。あなたは、それすら記録にしてた。
+        en_US: 'I was worried about you. And you turned even that into a file — the arc''s sharpest cost line yet.'
+        zh_TW: '[zh_TW] I was worried about you.'
+        zh_CN: '[zh_CN] I was worried about you.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: 最も重いアンカーの代償——strategy_01第5ビートの頂点
+  - panel_id: ep010_016
+    scene: 蓮、ようやく口を開くが、その言葉は自分の耳にも空虚に響く。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: そんなつもりじゃ……ただ、確かめたかっただけで。
+        en_US: 'That''s not what I meant — I just needed to be sure, said out loud, and it sounds worse than it felt.'
+        zh_TW: '[zh_TW] That''s not what I meant.'
+        zh_CN: '[zh_CN] That''s not what I meant.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep010_017
+    scene: 雫、一歩下がり、コートを抱え直す。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: shizuku
+      text_by_locale:
+        ja_JP: 少し、距離を置く。今は、そばにいられない。
+        en_US: 'I need space. I can''t be near this right now — not a goodbye, but not nothing either.'
+        zh_TW: '[zh_TW] I need space.'
+        zh_CN: '[zh_CN] I need space.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    intent: 断絶——解決ではなく、正直な距離
+  - panel_id: ep010_018
+    scene: 雫、玄関へ向かう。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep010_019
+    scene: 蓮は動けない——壁と、去っていく妹の間で、どちらへ向かうべきか分からずに立ち尽くす。
+    beat_type: micro
+    intent: 選択の麻痺——最も痛切な瞬間
+  - panel_id: ep010_020
+    scene: 玄関のドアが閉まる音。部屋に静寂が満ちる。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep010_021
+    scene: 一人残された蓮。玄関の鏡に映る自分の姿と、壁一面のメモが、同じ視界の中に重なって見える。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 鏡の中に、初めて、はっきりと自分が見えた。
+      en_US: 'For the first time, the mirror shows him clearly — not a cure, only a witness he cannot look away from.'
+      zh_TW: '[zh_TW] For the first time, the mirror shows him clearly.'
+      zh_CN: '[zh_CN] For the first time, the mirror shows him clearly.'
+    intent: 認識の到来——治癒ではなく、直視
+  - panel_id: ep010_022
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第十話・了——剥がされたシーツ
+      en_US: 'End of Episode 10 — The Sheet Pulled Back'
+      zh_TW: '[zh_TW] End of Episode 10 — The Sheet Pulled Back'
+      zh_CN: '[zh_CN] End of Episode 10 — The Sheet Pulled Back'
+notes:
+  pacing: 二十二コマ。今話でアーク最大のアンカー代償——妹との断絶——が着地する。蓮の流暢な言い訳が初めて機能しない回でもある。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper。雫の台詞：normal、心配から怒りへの明確な転換。
+  sfx_policy: 最小限。ドアの閉まる音のみ、視覚的な静寂として表現。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第10話。設定はアパート（第二話・第六話と同じ）。第六話で示唆された代償が、今話で初めて直接的な断絶として着地する。鏡モチーフが壁のメモと統合され、認識（治癒ではない）の瞬間を作る。
+craft_notes: 'VESSEL: 今話は不在——アンカー（雫）の代償に完全に焦点を当てる回。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_01第5ビート（代償の着地）をアークの頂点として実現し、初めて言い訳が機能しない瞬間（strategy_05第4ビートの限界点）を描いた。
+
+  ARC: 直接訪問という突破→全貌の発覚→最も重い代償（断絶）→治癒ではない認識（鏡）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'
