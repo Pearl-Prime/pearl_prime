@@ -436,3 +436,10 @@ detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_ma
   check for its PR before re-dispatching the same cell. Acceptance layer for every gate-passing ep_001: CODE-WIRED/
   EXECUTED-REAL — none of this is PROVEN-AT-BAR (that needs an operator blind-read per the pack's Router SS16, and
   ultimately the M6 blind-judge protocol) and none of it is "bestseller" or "shippable" on gate-PASS alone.
+- **Story/exercise/tool/EXTERNAL catalog doctrine — SPECCED 2026-07-23:**
+  `docs/specs/PEARL_PRIME_STORY_EXERCISE_TOOL_SYSTEM_V1_SPEC.md` locks mandatory
+  persona×topic×engine arc banks, supporting-only generic STORY, one cited EXTERNAL per chapter
+  with 50/40/10 audience-lane preference, coexistence of 311 practices + journey wraps +
+  persona×topic×locale book plans, and tool/exercise separation. Execution is routed by
+  `docs/agent_prompt_packs/20260722_story_exercise_external_scale/`; mass authoring and selector
+  code are not claimed landed by the spec PR.

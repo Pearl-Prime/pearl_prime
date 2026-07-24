@@ -2371,3 +2371,6 @@ ratified through 2026-05-06:
 Routing principle: if a code or content question maps to one of the above,
 read the cap entry first. The Pearl_Architect file is the canonical
 authority; this table is a navigation aid only.
+**Last updated:** 2026-07-23
+**Update notes (2026-07-23):** added the canonical Story/Exercise/Tool/EXTERNAL router, its arc/supporting, dual-exercise, and tool-policy amendments, the corrected EXTERNAL Wave-2 scale contract, and the execution prompt pack.
+| **Story, exercise, tool, and EXTERNAL authority** | [docs/specs/PEARL_PRIME_STORY_EXERCISE_TOOL_SYSTEM_V1_SPEC.md](./specs/PEARL_PRIME_STORY_EXERCISE_TOOL_SYSTEM_V1_SPEC.md) — mandatory cell arcs, supporting STORY roles, one cited EXTERNAL/chapter with 50/40/10 audience lanes, 311 practice + journey + book-plan coexistence, and tool separation. Amendments: [supporting vs arc](./STORY_SUPPORTING_VS_ARC_CONTRACT_2026-07-22.md), [exercise dual system](./specs/PEARL_PRIME_EXERCISE_DUAL_SYSTEM_V1_SPEC.md), [tool vs exercise](./specs/PEARL_PRIME_TOOL_VS_EXERCISE_POLICY_V1_SPEC.md), [EXTERNAL bank](../specs/EXTERNAL_STORIES_BANK_SPEC.md). Dispatch: [prompt-pack INDEX](./agent_prompt_packs/20260722_story_exercise_external_scale/INDEX.md). |
