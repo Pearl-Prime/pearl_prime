@@ -633,6 +633,8 @@ def build_epub(
     description: str = "",
     disclosure: str = "",
     teacher: str = "",
+    series_name: str = "",
+    series_index: int | None = None,
 ) -> Path:
     """Build a KDP-ready EPUB 3 from a book text file.
 
@@ -640,6 +642,11 @@ def build_epub(
     books this MUST be a brand pen-name, never a teacher. ``teacher`` (optional)
     is the teaching credit: emitted as a dc:contributor (role=oth) and a visible
     "Teaching by <teacher>" line on the title page. See Q-TEACHERMODE-BYLINE-01.
+
+    ``series_name``/``series_index`` (optional) emit the EPUB3
+    belongs-to-collection/collection-type/group-position meta triple so series
+    identity travels with the file itself, independent of storefront-dashboard
+    entry. Omit for books that aren't part of a series — no metadata is added.
     """
     text = input_path.read_text(encoding="utf-8")
 
@@ -689,6 +696,28 @@ def build_epub(
         "and is not a substitute for professional mental health care."
     )
     book.add_metadata("DC", "rights", ei_disclosure)
+
+    series_name_clean = series_name.strip()
+    if series_name_clean:
+        # EPUB3 collection meta triple. Namespace must be "OPF" — ebooklib's OPF
+        # writer special-cases that namespace to emit a bare <meta property=...>
+        # tag using `others` as its full attribute set (verified against
+        # ebooklib.epub._write_opf_metadata; namespace=None does not use this
+        # branch and would not produce the property/refines attributes).
+        collection_id = "series-01"
+        book.add_metadata(
+            "OPF", "meta", series_name_clean,
+            {"property": "belongs-to-collection", "id": collection_id},
+        )
+        book.add_metadata(
+            "OPF", "meta", "series",
+            {"refines": f"#{collection_id}", "property": "collection-type"},
+        )
+        if series_index is not None:
+            book.add_metadata(
+                "OPF", "meta", str(series_index),
+                {"refines": f"#{collection_id}", "property": "group-position"},
+            )
 
     # ── Cover (embedded; storefront upload still uses separate file in distributor UI / our PNG exports) ──
     if cover_path and cover_path.exists():
@@ -865,6 +894,8 @@ def main():
     )
     parser.add_argument("--description", default="", help="DC description metadata")
     parser.add_argument("--disclosure", default="", help="Title-page EI disclosure (not AI boilerplate)")
+    parser.add_argument("--series-name", default="", help="Series name (EPUB3 belongs-to-collection meta)")
+    parser.add_argument("--series-index", type=int, default=None, help="Installment number within the series (group-position meta)")
 
     args = parser.parse_args()
 
@@ -901,6 +932,8 @@ def main():
         raw_cover=args.raw_cover,
         description=args.description,
         disclosure=args.disclosure,
+        series_name=args.series_name,
+        series_index=args.series_index,
     )
     return 0
 

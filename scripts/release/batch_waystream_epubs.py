@@ -233,6 +233,16 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
         "--output", str(out_epub),
         "--topic", topic,
     ]
+    # Series identity (EPUB3 belongs-to-collection meta) — only passed when the
+    # plan actually carries a populated store_series block; absent for the ~70
+    # Waystream plans without one, matching build_epub.py's own optional default.
+    store_series = plan.get("store_series") or {}
+    series_name = store_series.get("name") if isinstance(store_series, dict) else None
+    if series_name:
+        epub_cmd += ["--series-name", str(series_name)]
+        installment_number = plan.get("installment_number")
+        if installment_number is not None:
+            epub_cmd += ["--series-index", str(installment_number)]
     # Only pass --cover when a cover PNG actually exists. Waystream covers are a
     # separate gated (look-approval) render lane and are not committed to the
     # repo, so in CI the file is absent → build a coverless EPUB instead of
