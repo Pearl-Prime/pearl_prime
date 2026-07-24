@@ -1,0 +1,1146 @@
+schema_version: 1.0.0
+artifact_type: series_demand_rollup
+schema_authority: schemas/manga/series_demand_rollup.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+brand_id: stillness_press
+locale: en_US
+episode_horizon: 100
+episodes_planned: 100
+detailed_window_end: 12
+generated_from:
+  master_plan: artifacts/manga/series_master_plans/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying.master_plan.yaml
+  bank_contracts:
+  - artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/bank_contracts/scene_inventory.yaml
+  - artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/bank_contracts/object_inventory.yaml
+  - artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/bank_contracts/character_pose_inventory.yaml
+  gap_files:
+  - artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assembly_manifests/ep_001_bank_gaps.json
+  image_bank_root: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank
+  storyboards_scanned: 0
+provenance:
+  research:
+  - MANGA_LAYER_RENDER_CONTRACT_SPEC
+  - MANGA_V5_LAYERED_ARCHITECTURE
+  documents:
+  - MANGA_SERIES_MASTER_PLAN_CONTRACT.md
+  builds_on:
+  - manga_bank_contract_generator
+  - manga_asset_estimator.py
+  consumes_gap_format: phoenix_v4/manga/chapter/visual_from_script.py::build_assembly_layer_hints
+  byte_floor_reuse: scripts/ci/check_render_progress_bytes.py (MIN_BYTES + _lfs_or_disk_bytes)
+  backdrop_seed_vocab:
+  - apartment
+  - bar
+  - bedroom
+  - breakroom
+  - cafe
+  - coffee
+  - corridor
+  - counter
+  - cupboard
+  - kitchen
+  - lobby
+  - market
+  - meeting
+  - rooftop
+  - sidewalk
+  - sill
+  - stairwell
+  - subway
+  - train
+  object_seed_vocab:
+  - candle
+  - clicker
+  - cup
+  - cutting
+  - door
+  - journal
+  - kettle
+  - lamp
+  - letter
+  - logbook
+  - note
+  - notebook
+  - notification
+  - pendant
+  - phone
+  - plant
+  - succulent
+  - wrist
+  note: episodes_touching is a prose-scan estimate for prioritization; the authoritative
+    render demand is the bank contract's declared variant counts. Outline rows (confidence:outline)
+    are candidate demand needing bank-contract authoring, NOT asserted assets.
+demand:
+  l0_backdrops:
+  - scene_id: bedroom_aoki
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K01_dawn_window_warm
+    - K02_morning_window_neutral
+    - K06_evening_warm_amber
+    - K07_night_lamp_warm
+    render_demand: 4
+    episodes_touching:
+      count: 9
+      episodes:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 7
+      - 65
+      - 66
+      - 67
+      - 68
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 4
+    confidence: authored
+  - scene_id: kitchen_table_aoki
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K01_dawn_window_warm
+    - K02_morning_window_neutral
+    - K06_evening_warm_amber
+    - K07_night_lamp_warm
+    render_demand: 4
+    episodes_touching:
+      count: 32
+      episodes:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 29
+      - 30
+      - 31
+      - 32
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 89
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 4
+    confidence: authored
+  - scene_id: home_office_corner
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    - K05_afternoon_golden
+    - K07_night_lamp_warm
+    render_demand: 4
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 4
+    confidence: authored
+  - scene_id: conference_room_flashback
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K_flashback_cool_grey_blue
+    render_demand: 1
+    episodes_touching:
+      count: 14
+      episodes:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 10
+      - 25
+      - 26
+      - 27
+      - 28
+      - 37
+      - 38
+      - 39
+      - 40
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    confidence: authored
+  - scene_id: neighborhood_walking_path
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    - K05_afternoon_golden
+    - K06_evening_warm_amber
+    render_demand: 4
+    episodes_touching:
+      count: 5
+      episodes:
+      - 9
+      - 65
+      - 66
+      - 67
+      - 68
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 4
+    confidence: authored
+  - scene_id: street_sidewalk
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    - K05_afternoon_golden
+    render_demand: 3
+    episodes_touching:
+      count: 5
+      episodes:
+      - 9
+      - 65
+      - 66
+      - 67
+      - 68
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 3
+    confidence: authored
+  - scene_id: office_lobby
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    render_demand: 2
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 2
+    confidence: authored
+  - scene_id: office_elevator
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K07_night_lamp_warm
+    - K02_morning_window_neutral
+    render_demand: 2
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 2
+    confidence: authored
+  - scene_id: office_waiting_area
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    - K05_afternoon_golden
+    render_demand: 3
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 3
+    confidence: authored
+  - scene_id: office_meeting_room
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    - K05_afternoon_golden
+    render_demand: 3
+    episodes_touching:
+      count: 14
+      episodes:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 10
+      - 25
+      - 26
+      - 27
+      - 28
+      - 37
+      - 38
+      - 39
+      - 40
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 3
+    confidence: authored
+  - scene_id: office_corridor
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K02_morning_window_neutral
+    - K03_midday_bright_natural
+    render_demand: 2
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 2
+    confidence: authored
+  - scene_id: office_stairwell
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K_flashback_cool_grey_blue
+    - K03_midday_bright_natural
+    - K02_morning_window_neutral
+    render_demand: 3
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 3
+    confidence: authored
+  - scene_id: office_rooftop
+    source: bank_contract
+    layer_class: L0
+    variants:
+    - K05_afternoon_golden
+    - K03_midday_bright_natural
+    - K06_evening_warm_amber
+    render_demand: 3
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 3
+    confidence: authored
+  - scene_id: candidate__apartment
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 14
+      episodes:
+      - 4
+      - 6
+      - 41
+      - 42
+      - 43
+      - 44
+      - 57
+      - 58
+      - 59
+      - 60
+      - 77
+      - 78
+      - 79
+      - 80
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - scene_id: candidate__bar
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 5
+      episodes:
+      - 8
+      - 33
+      - 34
+      - 35
+      - 36
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - scene_id: candidate__breakroom
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 13
+      episodes:
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 29
+      - 30
+      - 31
+      - 32
+      - 53
+      - 54
+      - 55
+      - 56
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - scene_id: candidate__coffee
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 12
+      episodes:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - scene_id: candidate__counter
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 9
+      episodes:
+      - 5
+      - 41
+      - 42
+      - 43
+      - 44
+      - 77
+      - 78
+      - 79
+      - 80
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - scene_id: candidate__cupboard
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 4
+      episodes:
+      - 77
+      - 78
+      - 79
+      - 80
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - scene_id: candidate__sill
+    source: master_plan_outline
+    layer_class: L0
+    variants: []
+    render_demand: 1
+    episodes_touching:
+      count: 8
+      episodes:
+      - 21
+      - 22
+      - 23
+      - 24
+      - 69
+      - 70
+      - 71
+      - 72
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  l2_character_poses:
+  - character_id: mira_aoki
+    display_name: Mira
+    in_bank_contract: true
+    poses:
+    - pose_id: front_portrait_seated_calm
+      render_demand: 1
+      present_byte_real: true
+    - pose_id: front_portrait_seated_tense
+      render_demand: 1
+      present_byte_real: true
+    - pose_id: hands_wrapping_cup
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: hand_only_table
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: hand_only_reaching
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: chest_breath_micro
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: medium_seated_three_quarter
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_standing_at_window
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: silhouette_back_at_window
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: walking_thoughtful_medium
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: holding_phone_in_hand
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: covering_face_with_hand
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_walking_exterior
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: medium_walking_hand_at_pendant
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_walking_interior
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: medium_standing_facing_camera
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: hands_clasped_on_lap
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_seated_tiny
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: medium_seated_at_table
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: face_close_seated_speaking
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_climbing_stairs
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_threshold_door
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_standing_at_railing
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: full_figure_standing_at_kitchen
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: reaching_for_jade_pendant
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: gripping_jade_pendant
+      render_demand: 1
+      present_byte_real: false
+    pose_render_demand: 26
+    present_byte_real: 2
+    coverage_gap: 24
+    episodes_touching:
+      count: 92
+      episodes:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 41
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 65
+      - 66
+      - 67
+      - 68
+      - 69
+      - 70
+      - 71
+      - 72
+      - 73
+      - 74
+      - 75
+      - 76
+      - 77
+      - 78
+      - 79
+      - 80
+      - 81
+      - 82
+      - 83
+      - 84
+      - 85
+      - 86
+      - 87
+      - 88
+      - 89
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+      - 100
+      method: prose_scan
+    confidence: authored
+    identity_lock:
+      pulid_reference_sheet: required
+      reference_sheet_present: true
+      flagship_lora: null
+  - character_id: dr_morimoto
+    display_name: Dr
+    in_bank_contract: true
+    poses:
+    - pose_id: face_close_seated_calm
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: medium_seated_at_table_facing
+      render_demand: 1
+      present_byte_real: false
+    - pose_id: face_three_quarter_seated_calm
+      render_demand: 1
+      present_byte_real: false
+    pose_render_demand: 3
+    present_byte_real: 0
+    coverage_gap: 3
+    episodes_touching:
+      count: 0
+      episodes: []
+      method: prose_scan
+    confidence: authored
+    identity_lock:
+      pulid_reference_sheet: required
+      reference_sheet_present: false
+      flagship_lora: null
+  - character_id: devon
+    display_name: Devon
+    in_bank_contract: false
+    poses: []
+    pose_render_demand: 0
+    present_byte_real: 0
+    coverage_gap: 0
+    authoring_gap: true
+    episodes_touching:
+      count: 25
+      episodes:
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 25
+      - 26
+      - 27
+      - 28
+      - 53
+      - 54
+      - 55
+      - 56
+      - 61
+      - 62
+      - 63
+      - 64
+      - 93
+      - 94
+      - 95
+      - 96
+      method: prose_scan
+    confidence: outline
+    identity_lock:
+      pulid_reference_sheet: required
+      reference_sheet_present: false
+      flagship_lora: null
+  - character_id: kenji
+    display_name: Kenji
+    in_bank_contract: false
+    poses: []
+    pose_render_demand: 0
+    present_byte_real: 0
+    coverage_gap: 0
+    authoring_gap: true
+    episodes_touching:
+      count: 9
+      episodes:
+      - 8
+      - 33
+      - 34
+      - 35
+      - 36
+      - 81
+      - 82
+      - 83
+      - 84
+      method: prose_scan
+    confidence: outline
+    identity_lock:
+      pulid_reference_sheet: required
+      reference_sheet_present: false
+      flagship_lora: null
+  - character_id: yara
+    display_name: Yara
+    in_bank_contract: false
+    poses: []
+    pose_render_demand: 0
+    present_byte_real: 0
+    coverage_gap: 0
+    authoring_gap: true
+    episodes_touching:
+      count: 9
+      episodes:
+      - 5
+      - 53
+      - 54
+      - 55
+      - 56
+      - 93
+      - 94
+      - 95
+      - 96
+      method: prose_scan
+    confidence: outline
+    identity_lock:
+      pulid_reference_sheet: required
+      reference_sheet_present: false
+      flagship_lora: null
+  l3_objects:
+  - object_id: cup
+    source: bank_contract
+    layer_class: L3
+    state_variants:
+    - empty
+    - half
+    - full
+    render_demand: 3
+    recurrence: recurring
+    episodes_touching:
+      count: 24
+      episodes:
+      - 13
+      - 14
+      - 15
+      - 16
+      - 21
+      - 22
+      - 23
+      - 24
+      - 29
+      - 30
+      - 31
+      - 32
+      - 53
+      - 54
+      - 55
+      - 56
+      - 61
+      - 62
+      - 63
+      - 64
+      - 85
+      - 86
+      - 87
+      - 88
+      method: prose_scan
+    present_byte_real: 3
+    coverage_gap: 0
+    confidence: outline
+  - object_id: kettle
+    source: bank_contract
+    layer_class: L3
+    state_variants:
+    - off_burner
+    - on_burner_just_lit
+    - on_burner_boiling
+    - off_burner_residual_steam
+    render_demand: 4
+    recurrence: recurring
+    episodes_touching:
+      count: 27
+      episodes:
+      - 1
+      - 4
+      - 10
+      - 13
+      - 14
+      - 15
+      - 16
+      - 41
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 50
+      - 51
+      - 52
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+      - 100
+      method: prose_scan
+    present_byte_real: 1
+    coverage_gap: 3
+    confidence: authored
+  - object_id: phone
+    source: bank_contract
+    layer_class: L3
+    state_variants:
+    - face_down
+    - face_up_dark
+    - face_up_notification
+    - in_hand_being_read
+    render_demand: 4
+    recurrence: recurring
+    episodes_touching:
+      count: 22
+      episodes:
+      - 1
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 37
+      - 38
+      - 39
+      - 40
+      - 57
+      - 58
+      - 59
+      - 60
+      - 85
+      - 86
+      - 87
+      - 88
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 4
+    confidence: authored
+  - object_id: succulent_in_clay_pot
+    source: bank_contract
+    layer_class: L1
+    state_variants:
+    - normal
+    - watered_normal
+    render_demand: 2
+    recurrence: recurring
+    episodes_touching:
+      count: 8
+      episodes:
+      - 21
+      - 22
+      - 23
+      - 24
+      - 69
+      - 70
+      - 71
+      - 72
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 2
+    confidence: outline
+  - object_id: journal
+    source: bank_contract
+    layer_class: L3
+    state_variants:
+    - closed
+    - open_to_blank_page
+    - open_to_written_page
+    - closed_with_pen_visible
+    render_demand: 4
+    recurrence: recurring
+    episodes_touching:
+      count: 8
+      episodes:
+      - 69
+      - 70
+      - 71
+      - 72
+      - 89
+      - 90
+      - 91
+      - 92
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 4
+    confidence: outline
+  - object_id: jade_pendant
+    source: bank_contract
+    layer_class: L1
+    state_variants:
+    - worn
+    render_demand: 1
+    recurrence: recurring
+    episodes_touching:
+      count: 9
+      episodes:
+      - 1
+      - 17
+      - 18
+      - 19
+      - 20
+      - 45
+      - 46
+      - 47
+      - 48
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    confidence: authored
+  - object_id: candidate__door
+    source: master_plan_outline
+    layer_class: L3
+    state_variants: []
+    render_demand: 1
+    recurrence: recurring
+    episodes_touching:
+      count: 17
+      episodes:
+      - 12
+      - 61
+      - 62
+      - 63
+      - 64
+      - 77
+      - 78
+      - 79
+      - 80
+      - 85
+      - 86
+      - 87
+      - 88
+      - 97
+      - 98
+      - 99
+      - 100
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - object_id: candidate__lamp
+    source: master_plan_outline
+    layer_class: L3
+    state_variants: []
+    render_demand: 1
+    recurrence: recurring
+    episodes_touching:
+      count: 4
+      episodes:
+      - 65
+      - 66
+      - 67
+      - 68
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+  - object_id: candidate__wrist
+    source: master_plan_outline
+    layer_class: L3
+    state_variants: []
+    render_demand: 1
+    recurrence: recurring
+    episodes_touching:
+      count: 8
+      episodes:
+      - 25
+      - 26
+      - 27
+      - 28
+      - 61
+      - 62
+      - 63
+      - 64
+      method: prose_scan
+    present_byte_real: 0
+    coverage_gap: 1
+    authoring_gap: true
+    confidence: outline
+storyboard_gap_rollup:
+  episodes_with_gap_files:
+  - ep_001
+  total_panels_with_gaps: 0
+  gap_asset_counts: {}
+coverage_summary:
+  required_render_demand_total: 95
+  present_byte_real_total: 6
+  coverage_gap_total: 89
+  coverage_pct: 6.3
+  byte_floor: 50000
+  byte_floor_source: scripts/ci/check_render_progress_bytes.py::MIN_BYTES
+identity_lock_plan:
+  engine_note: 'V5 doctrine: PuLID-first identity lock for ALL cast (reference sheets);
+    LoRA training is flagship-only (MANGA_V5_LAYERED_ARCHITECTURE.md §15.A). Bank-contract
+    metadata currently reports identity_lock_active:false (hash-only structural check;
+    PuLID-FaceNet EVA-CLIP unresolved) — reference sheets are the plan, not yet an
+    active lock.'
+  pulid_reference_sheets:
+    required_for:
+    - mira_aoki
+    - dr_morimoto
+    - devon
+    - kenji
+    - yara
+    present:
+    - mira_aoki
+    gap:
+    - dr_morimoto
+    - devon
+    - kenji
+    - yara
+  flagship_lora:
+    brand_on_flagship_list: true
+    flagship_list_source: config/manga/canonical_brand_list.yaml
+    brand_tier: flagship
+    lora_plan_rows:
+    - kind: brand_style_lora
+      brand_id: stillness_press
+      trigger_word: style_sp
+      status: planned
+    lora_plan_source: config/manga/brand_lora_plans.yaml
+    authoring_gaps:
+    - flagship brand but no protagonist_lora row for this en_US series stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying;
+      protagonist candidate mira_aoki needs one
+render_queue_estimate:
+  by_class:
+    L0:
+      render_demand: 45
+      present: 0
+      to_render: 45
+    L2:
+      render_demand: 29
+      present: 2
+      to_render: 27
+    L3:
+      render_demand: 21
+      present: 4
+      to_render: 17
+  total_assets_to_render: 89
+  gpu_cost_usd_est: 1.07
+  human_labor_hours_est: 28.5
+  human_labor_cost_usd_est: 2223.0
+  method: asset_count × per-asset render class (coverage gap by L-class)
+  heuristic_source: manga_asset_estimator.py per-panel constants (usd_per_panel_gpu=0.012,
+    artist_hours_per_panel=0.32, hourly_usd=78.0); its _estimate_brand API is brand-plan-lane
+    shaped, not per-asset, so reused as constants not called.
+acceptance_layer: structurally_clear
+notes: ANALYSIS ONLY (Lane 09). No GPU render, no LoRA training. Demand is derived
+  from the master plan + authored bank contracts + storyboards + image_bank byte-reality.
+  A generator PASS is structurally_clear, never a render claim.
