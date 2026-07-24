@@ -180,7 +180,203 @@ first third).
 family row in `manga_pacing_by_genre.yaml`** to carry an `arc_cadence` block; named follow-up in
 the Lane 03 handoff so Lane 06 doesn't silently inherit print cadence for webtoon-format series.
 
-<!-- SCALE SECTIONS LAND IN THE SCALE CHECKPOINT COMMIT -->
+## mystery — Seinen psychological / mystery (confidence: medium, corpus-derived)
+
+**Corpus:** Monster (162 ch / 18 vols), 20th Century Boys (249 ch / 22 vols), Pluto (65 ch / 8 vols).
+
+Investigation-block arcs (a location, an era-jump, a suspect) of 8–25 ch early, widening to 30–40
+as conspiracies compound; Pluto's act-per-robot grid (~8 ch/act) is the compact model. Pattern:
+**escalating**. ~9 ch/vol biweekly seinen; arc↔volume alignment moderate (acts often close on
+volume ends). First irreversible reframe by ch ~15–55 (Tenma becomes fugitive early; 20thCB's
+Bloody New Year's Eve climax ~vol 5). First 100 eps ≈ 4–6 investigation blocks with one mid-run
+reframe. `first_major_shift_by: 55`.
+
+## horror — Horror / dread (confidence: high, corpus-consistent)
+
+**Corpus:** Uzumaki (19 ch), Tomie (~20 stories), Junji Ito short-form collections.
+
+Anthology grammar: 1-ch standalones sharing a town/motif; range [1, 3], median 1. Pattern:
+**fixed**, with the genre's signature **terminal convergence** (Uzumaki's final 3 chapters fuse
+the standalone dread into apocalypse). No first-shift convention (`null`) — dread accumulates
+without status-quo change until the convergence. A 100-ep horror plan ≈ 85–92 standalones with
+motif escalation clusters every ~10 eps + a 8–15-ep convergence finale. ~10 stories/volume.
+
+## sports — Sports ascent (confidence: high, corpus-derived)
+
+**Corpus:** Slam Dunk (276 ch), Haikyu!! (402 ch), Blue Lock, Kuroko's Basketball (275 ch).
+
+Unit = match, container = tournament. Match length scales with stakes — practice matches 5–10 ch,
+mid-tournament 10–25, climax matches 30–45 (Slam Dunk's Sannoh match spans ~6 volumes; Haikyu!!'s
+Shiratorizawa ~30 ch). Range [5, 45], median 18, pattern **escalating**. WSJ ~9 ch/vol; big
+matches deliberately straddle volume ends (buy-the-next-volume engineering). First tournament
+entry = first status-quo shift, by ch ~30–45 → `first_major_shift_by: 40`. First 100 eps ≈ 1
+full tournament cycle + entry of the second, 5–7 matches.
+
+## essay — Essay / diary (confidence: LOW — no long-serial evidence)
+
+**Corpus:** My Lesbian Experience with Loneliness, My Solo Exchange Diary (+ sequel volumes).
+
+Unit = one essay/diary entry (1 ch); a volume is a curated thematic arc of 8–12 entries. Pattern:
+**fixed**; shifts are retrospective (narrated as already-having-happened), so `first_major_shift_by:
+null`. The corpus is 1–2-volume works — **there is no 100-episode essay-manga long-runner to
+observe**; Lane 06 must treat 100-ep essay plans as inference (stacked thematic volumes with
+recurrence motifs), flagged in the handoff. Confidence: low.
+
+## memoir — Memoir / life reflection (confidence: LOW — thin long-serial evidence)
+
+**Corpus:** Nagata Kabi's memoir sequence, The Summit of the Gods (5 vols).
+
+Life-phase / expedition arcs of 6–15 ch, median 10, pattern **fixed**. The premise-defining
+rupture sits in the opening chapters (`first_major_shift_by: 5`) and the remainder excavates it —
+memoir front-loads what battle back-loads. Craft-bible retrospective rhythm (vols 8/16/24…) is
+consistent with the corpus shape but unproven at 100-ep scale. Confidence: low.
+
+## social_issue — Josei realism (confidence: medium, corpus-derived)
+
+**Corpus:** A Silent Voice (62 ch / 7 vols), Blue Period, Princess Jellyfish (overlap).
+
+Inciting rupture is **front-loaded**: A Silent Voice's elementary prologue ends at ch 6
+(time-skip = status-quo shift); Blue Period commits to the art path by ch ~5. Then life-stage
+arcs of 6–25 ch (median 14) escalate toward institutional tests (exam, film screening, hospital).
+Pattern: **escalating**. `first_major_shift_by: 10` — the inverse of battle; Lane 06 should open
+social-issue plans with the rupture, not build to it. Season unit mixed (weekly ~9/vol vs monthly
+~4/vol) → `season_unit: null` + note.
+
+## supernatural_everyday — (confidence: high, corpus-consistent)
+
+**Corpus:** Mushishi (~50 cases), Natsume's Book of Friends (29+ vols), xxxHolic (213 ch).
+
+Case-of-the-chapter grammar: 1–4 ch per case (Mushishi strictly 1; Natsume 1–4; xxxHolic 1–5),
+median 2, pattern **fixed**. Serial threads (Reiko's past, exorcist clans) resurface every ~8–12
+cases and deepen relationships **without status-quo change** → `first_major_shift_by: null`.
+First 100 eps ≈ 50–70 cases with 3–4 thread-surfacing clusters. ~5 case-chapters/vol monthly.
+
+## school — School / youth (confidence: medium, corpus-derived)
+
+**Corpus:** Kimi ni Todoke, Ao Haru Ride, My Love Story!! (26 monthly ch).
+
+Arcs are school-calendar events (entrance, culture festival, exams, summer trip, graduation) of
+3–8 ch riding the annual cycle — the calendar sets cadence, hence **seasonal_cycle** despite
+romance-adjacent stakes. Median 5. Monthly shojo ~4 ch/vol with designed volume alignment.
+Relationship-status shift by ch ~50 (KnT ch 48–49) unless the couple forms in act one (My Love
+Story!! ch 3 — the post-couple variant). `first_major_shift_by: 50`.
+
+## fantasy — Fantasy / isekai adventure (confidence: medium, corpus-derived)
+
+**Corpus:** Fullmetal Alchemist (108 monthly ch / 27 vols), Made in Abyss, Witch Hat Atelier.
+
+Journey-segment arcs (a layer, a city, a trial) of 5–25 **monthly** chapters, median 12, pattern
+**escalating**. Monthly mega-chapters (40–60 pages) mean episode counts run lower than weekly
+genres at equal story mass — Lane 06 must not compare fantasy arc counts to weekly-genre arc
+counts 1:1. First irreversible loss/reveal early-to-mid: FMA Hughes' death ch 15–16; Made in
+Abyss's descent commitment ch ~9. `first_major_shift_by: 16`. Season unit mixed (4–8 ch/vol) →
+null + note.
+
+## battle_internal — Internal battle / philosophical (confidence: medium, corpus-derived)
+
+**Corpus:** Vagabond (327 ch / 37 vols), Berserk (contemplative arcs).
+
+Long-breath opponent/era arcs of 25–80 ch (Vagabond's Yoshioka block ~60–80 ch; Kojiro flashback
+~55 ch; Berserk's Golden Age ~85 eps), median 45, pattern **escalating**. Extended non-combat
+stretches (Vagabond's farming arc ~30 ch) are canonical to the family, not filler — a 100-ep plan
+holds only ~2 major arcs plus an establishing arc. First reframe of the vow (renaming, first true
+defeat) by ch ~30. Weekly seinen ~9 ch/vol.
+
+## graphic_medicine — (confidence: LOW — single-book form)
+
+**Corpus:** Stitches, El Deafo (~21 ch units), Mom's Cancer.
+
+Complete-in-one-book memoirs of 8–21 chapter units; diagnosis/premise rupture by ch ~3; the book
+IS the arc. Pattern: **fixed**; `season_unit: null` (no serialized volume convention exists).
+**No 100-episode graphic-medicine long-runner exists** — for serial planning, treat as stacked
+10–15-ch case/treatment arcs (explicit inference, flagged in handoff). Confidence: low.
+
+## gag — Gag / comedy (confidence: medium, corpus-derived)
+
+**Corpus:** Gintama (704 ch), Azumanga Daioh, Daily Lives of High School Boys.
+
+Status quo is sacred. Baseline = 1-ch (or 1-page 4-koma) episodic units, median 1; long-runners
+spike a 5–25-ch "serious arc" every ~50–100 ch (Gintama's Benizakura ch 89–97; Shogun Assassination
+~23 ch) then **reset to baseline**. Pattern: **fixed** with periodic spikes — the spike is not a
+status-quo shift (`first_major_shift_by: null`). School-cycle gag (Azumanga) rides the 3-year
+calendar with graduation as the only shift, at the very end. First 100 eps ≈ 90+ episodic units +
+one serious-arc spike around ep ~85–100.
+
+## dark_fantasy — (confidence: high, live-verified anchor)
+
+**Corpus:** Berserk, Vinland Saga (live-verified arcs: 1–54 / 55–99 / 100–166 / 167+), Frieren.
+
+Short establishing arc (9–15 eps: Berserk's Black Swordsman ~9) then saga-blocks of 45–90 eps
+(Vinland War arc 54, Slave arc 45, Eastern Expedition 67; Berserk Golden Age ~85). Median 45,
+pattern **escalating**. The genre's signature is the **first status-quo destruction** — Vinland
+ch 54 (Askeladd's death + timeskip), Berserk's Eclipse closing the Golden Age —
+`first_major_shift_by: 55`. Frieren runs the quiet variant (10–25-ep arcs, First-Class Exam
+ch ~36–60). A 100-ep plan = establishing arc + one full saga-block + the destruction beat +
+opening of the second block. ~9 eps/vol.
+
+## mecha — (confidence: medium, corpus-derived)
+
+**Corpus:** Neon Genesis Evangelion manga (96 ch / 14 vols), Knights of Sidonia (78 ch / 15 vols),
+Gundam: The Origin.
+
+Sortie-of-the-arc units: 2–6 ch per enemy encounter early, fusing into continuous operations as
+the command-layer conspiracy surfaces; act-structured titles (Origin) run ~8 ch/act. Range [2, 15],
+median 8, pattern **escalating**. Pilot-roster changes / conspiracy reveals land ch ~20–35 (Eva:
+Asuka's arrival ~ch 20; Sidonia timeskip ~ch 30) → `first_major_shift_by: 30`. ~5–7 ch/vol monthly.
+
+## sci_fi_cyberpunk — (confidence: medium, corpus-derived)
+
+**Corpus:** Battle Angel Alita (56 ch / 9 vols), BLAME! (65 ch / 10 vols), Akira (120 ch / 6 vols),
+Ghost in the Shell (12 ch).
+
+Role/zone arcs (a job, a stratum, a case): Alita's Motorball ~10 ch; BLAME!'s zone-per-arc ~6;
+case-grammar GitS = 12 episodic ch with 3-ch convergence. Range [3, 25], median 9, pattern
+**escalating**. First systemic rupture ranges ch 9–60 (Alita enters Motorball ch ~13; Akira's
+awakening mid-series) → plan `first_major_shift_by: 30`. Volume sizes vary wildly (6–20 ch/vol)
+→ `season_unit: null` + note.
+
+## historical_period — (confidence: medium, live-verified anchor)
+
+**Corpus:** Vinland Saga (verified), Vagabond, A Bride's Story, Cesare.
+
+Two sub-modes share the family: **saga-blocks** of 45–80 ch driven by war/politics (Vinland,
+Vagabond) and **portrait-cycles** of 5–15 ch rotating POV households (A Bride's Story's
+bride-per-arc). Range [5, 80], median 30, pattern **escalating** (saga mode). Era-defining shift
+(a death, an exile, a POV handoff) by ch ~20–55 → `first_major_shift_by: 55`. Flagship planning
+should use saga-block mode; portrait-cycle is the low-arousal variant. ~8 ch/vol.
+
+## cultivation_martial — (confidence: LOW — arc boundaries poorly indexed)
+
+**Corpus:** Battle Through the Heavens, Soul Land, Tales of Demons and Gods (manhua).
+
+Power-ladder loop (train → breakthrough → rival → new tier) every 15–50 ch, median ~30; leaving
+the home sect/village by ch ~20–30 → `first_major_shift_by: 30`. Pattern: **escalating** (each
+realm tier raises scale). Release is continuous webtoon-style (often multiple ch/week) with **no
+stable volume/season convention** → `season_unit: null`. English-language arc indexing for manhua
+is genuinely thin: ranges derive from realm/sect-stage groupings in aggregate listings, not
+per-arc verified counts. Confidence: low; named follow-up in handoff (verify against zh-language
+chapter indexes when the zh lanes are active).
+
+---
+
+## Cross-family findings (for Lane 06's segmentation logic)
+
+1. **Three cadence regimes, not one:** escalating-arc genres (battle, sports, mystery, fantasy,
+   dark_fantasy, mecha, sci-fi, historical, cultivation, battle_internal, social_issue),
+   fixed-unit genres (romance ladder, workplace/supernatural/horror/gag/essay episodic), and
+   calendar genres (healing, school — the year is the structure). A 100-episode contract needs a
+   different segmentation function per regime.
+2. **`first_major_shift_by` is trimodal:** front-loaded (social_issue 10, memoir 5,
+   graphic_medicine 3), mid-run (fantasy 16, workplace/mecha/sci-fi/cultivation ~30, sports 40,
+   romance/school 50, mystery/dark_fantasy/historical 55), and late (battle 100) — plus **null**
+   families where forcing a shift breaks the genre contract (healing, horror, supernatural,
+   gag, essay). Lane 06 must branch on null.
+3. **Volume alignment is strongest where volumes are the retail emotion-unit** (monthly shojo —
+   designed alignment; anthology volumes as bouquets) and weakest in weekly action (arcs straddle
+   volume ends deliberately at climax matches/fights).
+4. **Webtoon seasons are production units, not story units** (78–115+ eps verified); story arcs
+   inside them run 15–30 eps. Any webtoon-format series planned off print-family cadence rows
+   needs the season grain corrected first (no YAML family row exists yet — see handoff).
 
 ## Sources footer
 

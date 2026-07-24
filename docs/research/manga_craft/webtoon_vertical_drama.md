@@ -49,6 +49,8 @@ Readers are 14–32, mobile-first, action/mystery/thriller-seeking, trained on s
 10. Ignoring the reader's reconstruction pleasure — this lane lives on the "oh, THAT'S what that was three arcs ago" click.
 
 ## 7. Series planning implications (48-volume pre-plan)
+
+> **CORRECTION (2026-07-24, Lane 03 arc-cadence study):** "season/arc of ~20–30 episodes" conflates two grains — the story-*arc* size of 20–30 eps is confirmed, but platform *seasons* are 78+ episodes (Tower of God S1 = 78 eps, webtoons.com episode list; Solo Leveling S1 break ≈ ch 110, cbr.com guide; accessed 2026-07-24). Read "volume" below as arc, never as platform season; see `artifacts/research/manga_arc_cadence_study_2026-07-24.md` §Webtoon.
 Map "volume" to a **season/arc of ~20–30 episodes**. 48 volumes = 48 arcs, which is *Tower of God* / long-runner scale.
 - **Macro shape:** 48 arcs as a 4-stage cosmology (like ToG's Floor ascent): arcs 1–12 "ground" / foundation; arcs 13–24 mid-world reveals; arcs 25–36 political/spiritual truth layer; arcs 37–48 endgame ascent.
 - Each arc: 20–30 episodes, one major reveal, one new antagonist, one new ally, one new power tier.
