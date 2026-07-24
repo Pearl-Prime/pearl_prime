@@ -1,0 +1,143 @@
+# Social Media TTS — plain-text prep (NO SSML) — Cantonese, Hong Kong (zh-HK)
+# Authority: artifacts/research/social_media_tts_text_prep_cjk6_2026-07-24/REPORT.md
+#            Extends the METHOD (punctuation-as-pacing, phrase-level trap
+#            rewrites, do_not_blind_replace) from
+#            artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+#            — but NOT the zh_CN.yaml Mandarin polyphone content. Cantonese
+#            is a DIFFERENT LANGUAGE with its own phonology (jyutping tones,
+#            different polyphone set) — Mandarin fixes do not transfer.
+#
+# *** HARD RULE — READ THIS FIRST ***
+# cosyvoice2_language MUST be "yue" (Cantonese). NEVER "zh" (Mandarin).
+# config/tts/locale_voice_routing.yaml already encodes this
+# (hard_rules: "zh-HK rule: cosyvoice2_language MUST be 'yue'. NEVER 'zh'.").
+# A Mandarin render of Cantonese-intended text is a DEFECT, not a lesser
+# variant — HK audiences will reject it outright. This ruleset assumes
+# whatever driver consumes it (Lane 4) has already selected "yue"; this file
+# does not and cannot enforce that at the text layer, only document it.
+# Fallback if CosyVoice2 "yue" proves weak on listen: edge_tts
+# zh-HK-HiuGaaiNeural (per locale_voice_routing.yaml).
+#
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms.
+# Date: 2026-07-24 · Lane 2 (Pearl_Research) · SOCIALTTS-L2
+# Acceptance layer: RESEARCHED + CONFIG-EXISTS — NOT proven until Lane 4 voices
+# real audio AND confirms it is genuinely Cantonese, not Mandarin-with-
+# Traditional-characters. Cantonese TTS is comparatively immature/under-
+# documented versus Mandarin/Japanese/Korean (per migaku.com: "Cantonese
+# pronunciation involves tone changes in connected speech, rhythm patterns,
+# and subtle pitch adjustments that TTS systems don't capture well yet") —
+# treat every rule below as lower-confidence than the other five locales
+# and budget EXTRA A/B listening time before this locale ships.
+schema_version: 2
+locale: zh-HK
+cosyvoice2_language: yue   # NEVER "zh" — see hard rule above
+script: traditional
+
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden
+  sentence_end_chars: ["。", "！", "？"]
+  sentence_boundary_requires_space: false
+  default_terminal_punct: "。"
+
+hard_rules:
+  - "cosyvoice2_language MUST be 'yue' (Cantonese). NEVER 'zh' (Mandarin). A Mandarin render for this locale is a defect, full stop."
+  - "If CosyVoice2 'yue' output sounds like Mandarin read with Cantonese-adjacent tones (a known failure mode for under-trained Cantonese models), that is NOT an acceptable ship — escalate to the edge_tts zh-HK-HiuGaaiNeural fallback rather than shipping a near-miss."
+
+punctuation_pacing:
+  aggressiveness: mild
+  rules:
+    - id: colon_to_period
+      pattern: '(?<!\d)[：:](?!\d)\s*'
+      replace: '。'
+      enabled: true
+    - id: semicolon_to_period
+      pattern: '[；;]\s*'
+      replace: '。'
+      enabled: true
+    - id: emdash_to_period
+      pattern: '\s*[—–]\s*'
+      replace: '。'
+      enabled: true
+    - id: strip_parentheses
+      pattern: '\s*(\([^)]*\)|（[^）]*）)'
+      replace: ''
+      enabled: true
+    - id: strip_ascii_decorative_quotes
+      pattern: '["]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_run
+      pattern: '。{2,}'
+      replace: '。'
+      enabled: true
+  guidance_not_automated:
+    - "Cantonese has 6 (traditionally cited as 9, counting entering-tone duplicates) lexical tones vs Mandarin's 4 — tone realization in connected speech is entirely the acoustic model's job, no text-layer fix exists."
+    - "Formal Standard Written Chinese CAN be read aloud in Cantonese using literary character readings — this is normal (HK news broadcasts do it constantly). The colloquial-character items below are for AUTHENTICITY/register in casual social content, not a correctness requirement."
+
+homograph_and_trap_rewrites:
+  # Cantonese polyphones are a DIFFERENT set from Mandarin's — do not assume
+  # zh_CN.yaml's fixes transfer. 行 is confirmed polyphonic in BOTH languages
+  # (hang4 'walk' vs hong4 'row/bank/profession' — 銀行 ngan4hong4), included
+  # here as the one cross-linguistic item with real sourcing. Below that: a
+  # colloquial-vs-literary register note, not a forced substitution, because
+  # regex cannot safely choose which register a given atom should target —
+  # that is a Lane 3 translation/register decision, not a Lane 2 text-prep
+  # fix. Confidence on this section is intentionally lower than the other
+  # five files; see the file header.
+  - id: kanhu_to_zhaohu
+    description: "Same rationale as Mandarin: sidestep a look/care-for ambiguity by using an unambiguous synonym rather than betting on the model's context resolution."
+    pattern: '睇護'
+    replace: '照顧'
+    enabled: false   # low confidence 睇護 is even the natural HK spelling here vs 照顧 already being the default translation — disabled pending Lane 3 sample review
+
+speakable_expansions:
+  - id: genz_zh
+    pattern: '\bGen Z\b'
+    replace: 'Z世代'
+    enabled: true
+  - id: burnout_zh
+    pattern: '\bburnout\b'
+    replace: '職業倦怠'
+    enabled: true
+  - id: rn_to_wusi
+    pattern: '\bRN\b'
+    replace: '護士'
+    enabled: true
+
+# Colloquial written-Cantonese particle cheat-sheet (jyutping romanization),
+# provided as Lane 4 A/B ground truth — NOT auto-inserted anywhere, since
+# choosing colloquial vs formal register is a translation decision, not a
+# text-prep rule. If Lane 3's zh-HK output uses these characters, Lane 4
+# should specifically check CosyVoice2 "yue" pronounces them correctly —
+# they are rarer/dialectal and a plausible weak spot for a Cantonese model
+# with thinner training data (per migaku.com sourcing above).
+cantonese_particle_reference:
+  - {char: "嘅", jyutping: "ge3", gloss: "possessive/emphatic particle (~ Mandarin 的)"}
+  - {char: "咗", jyutping: "zo2", gloss: "completed-aspect marker (~ Mandarin 了)"}
+  - {char: "喺", jyutping: "hai2", gloss: "at/in (~ Mandarin 在)"}
+  - {char: "唔", jyutping: "m4", gloss: "not (~ Mandarin 不)"}
+  - {char: "佢", jyutping: "keoi5", gloss: "he/she/it (~ Mandarin 他/她)"}
+  - {char: "啲", jyutping: "di1", gloss: "some/a bit (~ Mandarin 一些/點)"}
+  - {char: "冇", jyutping: "mou5", gloss: "don't have (~ Mandarin 沒有)"}
+  - {char: "嘢", jyutping: "je5", gloss: "thing (~ Mandarin 東西)"}
+  - {char: "咁", jyutping: "gam2", gloss: "so/like this (~ Mandarin 這樣/那麼)"}
+
+do_not_blind_replace:
+  - "了"
+  - "的"
+  - "還"
+  - "為"
+  - "重"
+  - "行"   # hang4/hong4 polyphone — compound-dependent, see homograph section
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing

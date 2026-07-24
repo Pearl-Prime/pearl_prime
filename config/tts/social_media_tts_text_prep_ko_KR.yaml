@@ -1,0 +1,172 @@
+# Social Media TTS — plain-text prep (NO SSML) — Korean (ko-KR)
+# Authority: artifacts/research/social_media_tts_text_prep_cjk6_2026-07-24/REPORT.md
+#            Method extends artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+# Engine target: CosyVoice2 (self-hosted), cosyvoice2_language: "ko"
+#   (config/tts/locale_voice_routing.yaml). Fallback: edge_tts ko-KR-SunHiNeural.
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms.
+# Date: 2026-07-24 · Lane 2 (Pearl_Research) · SOCIALTTS-L2
+# Acceptance layer: RESEARCHED + CONFIG-EXISTS — NOT proven until Lane 4 voices
+# real audio on Pearl Star CosyVoice2. Nothing in this file is EXECUTED-REAL.
+schema_version: 2
+locale: ko-KR
+cosyvoice2_language: ko
+
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden
+  # Korean uses the same Latin-style sentence punctuation as English
+  # (. ! ? , with a following space) — no CJK-fullwidth override needed here,
+  # unlike ja/zh*. The shared loader's default English behavior is already
+  # correct for Korean sentence boundaries.
+
+punctuation_pacing:
+  aggressiveness: mild
+  rules:
+    - id: colon_to_period
+      description: "Digit-guarded so clock times ('3:00') and ratios ('3:1') are untouched."
+      pattern: '(?<!\d):(?!\d)\s*'
+      replace: '. '
+      enabled: true
+    - id: semicolon_to_period
+      pattern: ';\s+'
+      replace: '. '
+      enabled: true
+    - id: emdash_to_period
+      pattern: '\s*[—–]\s*'
+      replace: '. '
+      enabled: true
+    - id: strip_parentheses
+      pattern: '\s*\([^)]*\)'
+      replace: ''
+      enabled: true
+    - id: strip_decorative_quotes
+      description: "Strip ASCII/curly quotes only. Leave 《》 〈〉 (title/citation marks) — those are read or silently skipped correctly by KO front-ends; they're grammar, not decoration."
+      pattern: '["“”]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_space
+      pattern: '\.\s*\.'
+      replace: '.'
+      enabled: true
+  guidance_not_automated:
+    - "Target under ~12-16 words (어절) per sentence when hand-editing, same target as EN."
+    - "받침 (final-consonant) liaison/nasalization across word boundaries (연음, e.g. 책이→채기; 국물→궁물) is regular, productive KO phonology. This is the acoustic model's job, not ours — do not attempt to respell it in the text layer. Documented here only so nobody 'fixes' it by hand later."
+    - "힐링 (healing/wellness) register note (config/tts/locale_voice_routing.yaml ko-KR): soft, warm delivery for somatic content — a voice-direction choice, not a text-prep rule."
+
+homograph_and_trap_rewrites:
+  # Korean Hangul is phonetic — a written Hangul word has exactly one
+  # pronunciation, so hanja-derived homographs (e.g. 방화=防火/放火, 연패=連覇/
+  # 連敗) are a MEANING-disambiguation risk for translation choice (Lane 3's
+  # job), not a mispronunciation risk for TTS: the engine says the syllables
+  # correctly either way. The real TTS-pronunciation gotcha for Korean is
+  # NUMBER-SYSTEM SELECTION: Korean digits combined with a "native-Korean-
+  # counter" noun must be read with native numerals (하나/둘/셋…), not
+  # Sino-Korean (일/이/삼…), and a naive G2P front-end commonly defaults to
+  # Sino-Korean for any bare digit. Source: migaku.com/90daykorean native-vs-
+  # Sino-Korean number system guides (native Korean numbers: age, counting
+  # objects/people/animals, hours; Sino-Korean: dates, money, minutes,
+  # phone numbers — native numbers cap at 99, Sino-Korean above that).
+  - id: counter_gae_1to10
+    description: "개 (general counter, items) takes native numerals 1-10 in this corpus's number range."
+    pattern: '\b1개'
+    replace: '한 개'
+    enabled: true
+  - id: counter_gae_2
+    pattern: '\b2개'
+    replace: '두 개'
+    enabled: true
+  - id: counter_gae_3
+    pattern: '\b3개'
+    replace: '세 개'
+    enabled: true
+  - id: counter_gae_5
+    pattern: '\b5개'
+    replace: '다섯 개'
+    enabled: true
+  - id: counter_sigan_1
+    description: "시간 (hours) takes native numerals — '3시간' misread as Sino 삼시간 is a documented KO-TTS failure mode."
+    pattern: '\b1시간'
+    replace: '한 시간'
+    enabled: true
+  - id: counter_sigan_2
+    pattern: '\b2시간'
+    replace: '두 시간'
+    enabled: true
+  - id: counter_sigan_3
+    pattern: '\b3시간'
+    replace: '세 시간'
+    enabled: true
+  - id: counter_beon_1
+    description: "번 (times/repetitions) — common in exercise-repetition copy ('3번 반복하세요')."
+    pattern: '\b1번'
+    replace: '한 번'
+    enabled: true
+  - id: counter_beon_3
+    pattern: '\b3번'
+    replace: '세 번'
+    enabled: true
+  - id: counter_beon_5
+    pattern: '\b5번'
+    replace: '다섯 번'
+    enabled: true
+  - id: counter_myeong_1
+    description: "명 (people, semi-formal counter)."
+    pattern: '\b1명'
+    replace: '한 명'
+    enabled: true
+  - id: counter_myeong_2
+    pattern: '\b2명'
+    replace: '두 명'
+    enabled: true
+
+# homograph_and_trap_rewrites stays a pure list (loader contract) — guidance
+# that doesn't reduce to a rule lives here instead.
+homograph_guidance_notes:
+  - "Sino-Korean counters (분=minutes, 초=seconds, 원=currency, 년=year, 월=month, 일=date-of-month, 층=floor) correctly read bare Arabic digits by default — do NOT apply native-numeral rewriting to those; that would introduce the opposite error."
+  - "Only 1-10 (and a couple of round numbers) are covered above because our wellness-copy number range is small (breath counts, minute counts, repetitions); extend the table if a weekly-delta atom uses a larger native-numeral count."
+  - "Hanja-derived homographs (e.g. 방화=防火/放火, 연패=連覇/連敗) are a MEANING-disambiguation risk for Lane 3's word choice, not a TTS mispronunciation risk — Hangul is phonetic, so the engine says the syllables correctly either way."
+
+speakable_expansions:
+  - id: tiktok_hangul
+    pattern: '\bTikTok\b'
+    replace: '틱톡'
+    enabled: true
+  - id: instagram_hangul
+    pattern: '\bInstagram\b'
+    replace: '인스타그램'
+    enabled: true
+  - id: youtube_hangul
+    pattern: '\bYouTube\b'
+    replace: '유튜브'
+    enabled: true
+  - id: genz_hangul
+    pattern: '\bGen Z\b'
+    replace: '젠지'
+    enabled: true
+  - id: burnout_hangul
+    pattern: '\bburnout\b'
+    replace: '번아웃'
+    enabled: true
+  - id: rn_to_ganhosa
+    pattern: '\bRN\b'
+    replace: '간호사'
+    enabled: true
+
+do_not_blind_replace:
+  - "분"   # minutes (Sino-Korean) — never rewrite to a native numeral
+  - "초"   # seconds (Sino-Korean)
+  - "원"   # currency (Sino-Korean)
+  - "년"   # year (Sino-Korean)
+  - "월"   # month (Sino-Korean)
+  - "살"   # age counter uses native numbers but has its own irregular set (한 살, 두 살, 스무 살 not 이십 살) — do not extend the 개/시간/번/명 table blindly onto 살
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing
