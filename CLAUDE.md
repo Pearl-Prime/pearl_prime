@@ -29,6 +29,26 @@ operations agent.
   calibration-set + explicitly high-risk content only,
   `PHOENIX_TRANSLATION_ALLOW_CLOUD=1` required. No other DashScope call site
   is exempt. See `docs/agent_prompt_packs/20260721_zh_tw_translation_quality_program/`.
+- **Scoped exception (2026-07-24):** DashScope **free-quota-only** image/video
+  content-bank build, `scripts/social/dashscope_free_media.py` +
+  `run_dashscope_free_media_burn.py` + `ingest_dashscope_free_media_bank.py`
+  ONLY (`config/governance/banned_llm_patterns.yaml` →
+  `dashscope_free_media_rest_api.exempt_paths`). This is a **one-time content
+  bank build, not a standing pipeline** — the ban on DashScope in *routine*
+  agent work stands; it exists because agents previously defaulted to paid
+  DashScope over free Pearl Star and that cost real money. This exception is
+  narrow on purpose: operator-run only (`PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW=1`,
+  off by default), a dedicated `DASHSCOPE_FREE_QUOTA_API_KEY` (never the
+  routine-fallback `DASHSCOPE_API_KEY`), account `ahjansamvara@gmail.com`
+  (confirmed live free quota 2026-07-24 — separate from the paid/blocked
+  `gmalone@oneteamtech.com` account), and every output already tagged
+  `content_provenance: INTERIM` in code. **Sunset 2026-10-18** (free-quota
+  expiry) — re-review or remove after that date. Manga/vision output from this
+  lane stays INTERIM per the Manga Vision-Conformance Doctrine; it is never
+  final render-path art. The same exception also covers the **manga video
+  pose-bank method pilot** (`docs/agent_prompt_packs/20260724_manga_video_pose_bank/`,
+  Lane 05) under identical constraints (operator-run, env gates, caps, sunset
+  2026-10-18, INTERIM provenance). No other DashScope media call site is exempt.
 
 ## API Keys & Credentials — READ THIS FIRST
 

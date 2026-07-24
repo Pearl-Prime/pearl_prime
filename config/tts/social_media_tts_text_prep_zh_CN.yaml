@@ -1,0 +1,143 @@
+# Social Media TTS — plain-text prep (NO SSML) — Mandarin, Mainland (zh-CN)
+# Authority: artifacts/research/social_media_tts_text_prep_cjk6_2026-07-24/REPORT.md
+#            Method extends artifacts/research/social_media_tts_text_prep_2026-07-19/REPORT.md
+# Engine target: CosyVoice2 (self-hosted), cosyvoice2_language: "zh"
+#   (config/tts/locale_voice_routing.yaml). Fallback: edge_tts zh-CN-XiaoxiaoNeural.
+# This is the BASE Mandarin ruleset. zh-TW / zh-SG extend it with locale
+# deltas; zh-HK (Cantonese) does NOT extend it — Cantonese is a different
+# phonology, see social_media_tts_text_prep_zh_HK.yaml.
+# Apply to synth input only; do not mutate SOURCE_OF_TRUTH atoms.
+# Date: 2026-07-24 · Lane 2 (Pearl_Research) · SOCIALTTS-L2
+# Acceptance layer: RESEARCHED + CONFIG-EXISTS — NOT proven until Lane 4 voices
+# real audio on Pearl Star CosyVoice2. Nothing in this file is EXECUTED-REAL.
+schema_version: 2
+locale: zh-CN
+cosyvoice2_language: zh
+
+policy:
+  ssml: forbidden
+  engine_param_modulation: forbidden
+  mode: speakable_plain_text
+  ssot_mutation: forbidden
+  sentence_end_chars: ["。", "！", "？"]
+  sentence_boundary_requires_space: false
+  default_terminal_punct: "。"
+
+punctuation_pacing:
+  aggressiveness: mild   # 。！？，、already carry EN's period/comma pacing job
+  rules:
+    - id: colon_to_period
+      description: "Digit-guarded so times/ratios ('3:00', '3:1') are untouched."
+      pattern: '(?<!\d)[：:](?!\d)\s*'
+      replace: '。'
+      enabled: true
+    - id: semicolon_to_period
+      pattern: '[；;]\s*'
+      replace: '。'
+      enabled: true
+    - id: emdash_to_period
+      pattern: '\s*[—–]\s*'
+      replace: '。'
+      enabled: true
+    - id: strip_parentheses
+      pattern: '\s*(\([^)]*\)|（[^）]*）)'
+      replace: ''
+      enabled: true
+    - id: strip_ascii_decorative_quotes
+      description: "Strip ASCII/curly quotes only; leave “”「」《》 which are correctly trained/handled in Mandarin corpora."
+      pattern: '["]'
+      replace: ''
+      enabled: true
+    - id: collapse_multispaces
+      pattern: '\s{2,}'
+      replace: ' '
+      enabled: true
+    - id: normalize_period_run
+      pattern: '。{2,}'
+      replace: '。'
+      enabled: true
+  guidance_not_automated:
+    - "Tone sandhi (一/不 sandhi, 3rd-tone chain sandhi) is a phonetic-realization rule applied to the WRITTEN characters 一/不 regardless of spelling — there is no text-level fix; it is 100% the acoustic model's job. Do not attempt to respell it."
+    - "儿化 (erhua, retroflex suffix) is a colloquial Beijing-area feature. Formal translated wellness/social copy should not contain 儿-suffixed colloquialisms; if Lane 3 output does, that's a register/translation issue, not a TTS text-prep issue."
+    - "Target short 。-delimited clauses when hand-editing, mirroring EN's ~12-16 word target."
+
+homograph_and_trap_rewrites:
+  # Mandarin single-character polyphone (多音字) disambiguation is a genuine
+  # NLP research problem, not a regex problem — see arxiv:2207.12089 (BERT
+  # for polyphone disambiguation), arxiv:2102.00621 (semi-supervised polyphone
+  # disambiguation), mandarinhq.com/2021/07/chinese-polyphones. Blind
+  # single-character regex replacement of common polyphones (长/行/重/得/了/
+  # 着/还/看/种/为/上/过) would carry the SAME false-positive risk the EN
+  # report flagged for use/does/reset — do not do it. Compound-level readings
+  # (成长, 睡觉, 感觉, 因为, 作为, 一种) are high-frequency dictionary entries
+  # any real Mandarin TTS front-end gets right; that is NOT where the actual
+  # risk sits for THIS corpus. The two real, actionable fixes below sidestep
+  # genuine ambiguity by swapping to an unambiguous synonym — the same
+  # "don't fix in place, avoid the trap word" strategy EN used for
+  # close/project/separate/minute.
+  - id: kanhu_to_zhaohu
+    description: >
+      看护 (caregiving) is read kān-hù, but 看 alone defaults to kàn ('look').
+      Healthcare-persona content uses this word specifically; swap to the
+      synonym 照护 (zhào-hù, "care for") which has no polyphone risk at all
+      and reads naturally in the same register.
+    pattern: '看护'
+    replace: '照护'
+    enabled: true
+  - id: er_ge_to_liang_ge
+    description: >
+      Mandarin numeral-classifier rule (not a "pronunciation trap" so much as
+      a correctness net): 两 (liǎng), not 二 (èr), precedes a measure word
+      when counting quantity ("两个人" not "二个人"). Both characters have
+      fixed, distinct pronunciations, so a wrong character here is read
+      confidently wrong. Should rarely fire if Lane 3 translation is clean —
+      this is a safety net, not the primary fix.
+    pattern: '二个'
+    replace: '两个'
+    enabled: true
+
+homograph_guidance_notes:
+  - "感觉 (feel, gǎnjué) and 睡觉 (sleep, shuìjiào) both use 觉 correctly in modern Mandarin TTS training data — both senses appear heavily in wellness copy, and neither needs an intervention. Documented so nobody 'fixes' a non-problem."
+  - "值得/觉得/记得 (all dé) are dictionary-safe; 得 as a děi ('must') reading is a documented risk only in rarer standalone modal usage this corpus's short-form copy is unlikely to hit."
+  - "V不了 (can't V — e.g. 忍不了, 撑不了) is a common, dictionary-level pattern where 了 reads as liǎo; this is high-frequency training data for any real Mandarin front-end, low risk, no forced rule needed."
+  - "行 (xíng 'OK/walk' vs háng 'row/bank/profession'): both readings sit in common, high-frequency compounds (可以/行, 银行, 行业) that are dictionary-safe; genuinely ambiguous standalone usage is rare in this corpus's register."
+
+speakable_expansions:
+  - id: tiktok_zh
+    pattern: '\bTikTok\b'
+    replace: '抖音国际版'
+    enabled: false   # disabled: TikTok ≠ 抖音 (Douyin) product-wise outside China; do not conflate brand names — see do_not_blind_replace
+  - id: instagram_zh
+    pattern: '\bInstagram\b'
+    replace: 'Instagram（照片墙）'
+    enabled: false   # disabled pending Lane 3/brand guidance on whether to transliterate or keep as Latin loanword — CosyVoice2's zh front-end generally reads short embedded Latin brand tokens acceptably
+  - id: genz_zh
+    pattern: '\bGen Z\b'
+    replace: 'Z世代'
+    enabled: true
+  - id: burnout_zh
+    pattern: '\bburnout\b'
+    replace: '职业倦怠'
+    enabled: true
+  - id: rn_to_huli
+    pattern: '\bRN\b'
+    replace: '护士'
+    enabled: true
+
+do_not_blind_replace:
+  - "了"
+  - "的"
+  - "着"
+  - "还"
+  - "为"
+  - "种"
+  - "重"
+  - "长"
+  - "过"
+  - "上"
+  - "TikTok"   # brand name; do not auto-map to 抖音 (a different, China-only product)
+
+apply_order:
+  - speakable_expansions
+  - homograph_and_trap_rewrites
+  - punctuation_pacing
