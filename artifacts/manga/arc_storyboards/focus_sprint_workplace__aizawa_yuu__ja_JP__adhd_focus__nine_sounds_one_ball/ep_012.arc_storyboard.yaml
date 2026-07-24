@@ -1,0 +1,436 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_012
+genre_id: sports_competition
+title: 'Nine Sounds, One Ball — Episode 12: Two Deadlines'
+logline: Shinonome advances by the narrowest possible margin, and the same evening
+  reveals two collisions at once -- an undefeated rival now waiting in the bracket,
+  and a probation review now confirmed on Hayato's own calendar.
+stakes_now: The team has just won a decisive rematch by two points; nothing about
+  the season's precariousness -- Hayato's spot on the team, the club's underdog
+  status, his own workplace probation -- has actually been resolved by that win.
+stakes_end: The bracket names an undefeated defending champion (Kiryuu Pharma) as
+  the team's next opponent, Hayato's job-probation review is now dated exactly one
+  week out, and he chooses to stand alone at the free-throw line without shooting
+  -- arc one closes on two live countdowns, not a victory.
+genre_cadence:
+- narrow_margin_aftermath
+- body_cost_shown
+- muted_celebration
+- locker_room_transition
+- bracket_board_reveal
+- rival_named_undefeated
+- endou_goes_quiet
+- object_over_narration
+- transit_same_evening
+- workplace_notification_collision
+- twin_countdown_object_contrast
+- conbini_late_hour_callback
+- return_to_the_gym
+- mentor_wordless_departure
+- chosen_stillness_turn
+- closing_wide_unresolved
+page_turn_promises:
+- page_id: ep_012_p01
+  promise: Whose name is waiting on the other side of the bracket?
+- page_id: ep_012_p02
+  promise: What is Hayato actually carrying home besides the win?
+- page_id: ep_012_p03
+  promise: Where does he go instead of straight home?
+- page_id: ep_012_p04
+  promise: What does he do with the stillness now that both clocks are running?
+panels:
+- panel_id: ep012_001
+  page_id: ep_012_p01
+  story_function: narrow_margin_aftermath
+  story_move: The episode opens after the buzzer, not during it -- the decisive
+    shot from ep_011 is not restaged, only its narrow result.
+  visual_proof: Scoreboard close-up reading 61-59, buzzer light still lit, no
+    crowd celebration staged.
+  information_delta: Reader confirms the margin was narrow and that the episode
+    will not replay the winning play.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_002
+  page_id: ep_012_p01
+  story_function: body_cost_shown
+  story_move: Hayato's exhaustion is shown as plain physical fact, per the genre's
+    requirement that even a win costs the body something visible.
+  visual_proof: Hayato bent over, hands on knees, sweat dripping, sfx of ragged
+    breathing.
+  information_delta: Reader measures the win against its physical price, not its
+    glory.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_003
+  page_id: ep_012_p01
+  story_function: muted_celebration
+  story_move: Aya's congratulation is understated by design -- a towel and a flat
+    line, not a locker-room speech.
+  visual_proof: Aya handing over a towel, a small nod, no embrace or cheer.
+  information_delta: Reader sees the team's culture of restraint, consistent
+    with the anti-pattern rule against trophy-as-proof-of-growth staging.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_004
+  page_id: ep_012_p01
+  story_function: muted_celebration
+  story_move: Endou names the margin bluntly instead of celebrating it, keeping
+    the win grounded rather than triumphant.
+  visual_proof: Endou wiping his face with a towel, eyes on the scoreboard, flat
+    delivery.
+  information_delta: Reader gets the veteran's read on the win -- relief, not
+    pride.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_005
+  page_id: ep_012_p01
+  story_function: locker_room_transition
+  story_move: The old-sneakers visual anchor from ep_001 returns as ordinary
+    locker-corridor texture, not a callback speech.
+  visual_proof: Hallway shot, players packing bags, Hayato tucking his spare
+    sneakers back into his bag.
+  information_delta: Reader tracks the continuity object without it being
+    narrated as significant.
+  beat_role: training_cost
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_006
+  page_id: ep_012_p01
+  story_function: locker_room_transition
+  story_move: Tournament staff updating the bracket board pulls the team's
+    attention before any character comments on it.
+  visual_proof: Wide hallway shot, staff pinning a new sheet to the board,
+    players glancing over.
+  information_delta: Reader anticipates the reveal one beat ahead of the
+    characters reacting to it.
+  beat_role: scene_transition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_007
+  page_id: ep_012_p01
+  story_function: locker_room_transition
+  story_move: A teammate voices the page-one hook question aloud, pulling the
+    group physically toward the board.
+  visual_proof: Team clustering toward the corkboard, one voice asking who came
+    up on the other side.
+  information_delta: Reader receives the explicit page-turn question into the
+    bracket reveal.
+  beat_role: mirror_introduced
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_008
+  page_id: ep_012_p02
+  story_function: bracket_board_reveal
+  story_move: The board names the next opponent in flat, administrative
+    language -- the weight comes from the plainness, not from any staged drama.
+  visual_proof: Close on the printed bracket slot -- Kiryuu Pharma, undefeated,
+    previous champion.
+  information_delta: Reader learns the next opponent's identity and reputation
+    at the same moment the team does.
+  beat_role: scale_reveal
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_009
+  page_id: ep_012_p02
+  story_function: rival_named_undefeated
+  story_move: Aya reads the name aloud, her tone the only signal of how much it
+    costs to say it evenly.
+  visual_proof: Aya's face, quiet delivery of the rival team's name.
+  information_delta: Reader confirms the name is recognized -- this is the
+    ep_008 rival's team, not a stranger.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_010
+  page_id: ep_012_p02
+  story_function: endou_goes_quiet
+  story_move: The team's loudest, most skeptical veteran goes silent -- an
+    absence of his usual bravado stands in for the fear no one states aloud.
+  visual_proof: Endou's face frozen mid-motion, towel around his neck, no line
+    delivered.
+  information_delta: Reader measures the opponent's threat level entirely
+    through Endou's uncharacteristic silence.
+  beat_role: aftermath_silence
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_011
+  page_id: ep_012_p02
+  story_function: rival_named_undefeated
+  story_move: Aya deflects into task-mode rather than sitting with the reveal,
+    a seed (not a resolution) of her imposter-syndrome thread.
+  visual_proof: Aya's finger tracing the schedule sheet on her clipboard,
+    retreating into logistics.
+  information_delta: Reader sees a character coping mechanism established
+    without being explained or resolved.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_012
+  page_id: ep_012_p02
+  story_function: object_over_narration
+  story_move: Hayato's reaction is displaced onto the ball in his hands rather
+    than narrated as an interior thought about the rival -- the doctrine's
+    hard rule against a coach or narrator stating the psychology, applied to
+    the protagonist's own reaction as well.
+  visual_proof: Close on Hayato's thumb tracing the ball's seam, eyes not on
+    the board.
+  information_delta: Reader receives Hayato's actual state only through a
+    physical, sensory detail, never a named emotion.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_013
+  page_id: ep_012_p02
+  story_function: rival_named_undefeated
+  story_move: A printed schedule slip on the board becomes the tournament's own
+    concrete countdown object, seeded before the workplace one arrives.
+  visual_proof: Close insert on the dated schedule slip pinned beside the
+    bracket sheet.
+  information_delta: Reader registers the first of the episode's two literal
+    countdown objects.
+  beat_role: scale_reveal
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_014
+  page_id: ep_012_p02
+  story_function: rival_named_undefeated
+  story_move: The team disperses from the board under a joke that lands flat,
+    proving the mood shift without any character naming it.
+  visual_proof: Wide hallway shot, players walking off, one joke met with no
+    laughter.
+  information_delta: Reader confirms the reveal's weight through silence
+    rather than dialogue.
+  beat_role: aftermath_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_015
+  page_id: ep_012_p03
+  story_function: transit_same_evening
+  story_move: The shoe-locker/half-untucked-shirt visual anchor marks Hayato's
+    identity switching back to his workplace self.
+  visual_proof: Clubroom shot, Hayato changing into his work shirt, collar
+    still half-untucked.
+  information_delta: Reader tracks the transition between the episode's two
+    worlds through a costume object, not narration.
+  beat_role: training_cost
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_016
+  page_id: ep_012_p03
+  story_function: transit_same_evening
+  story_move: A vending-machine stop grounds the transition in ordinary
+    market-native texture before the notification lands.
+  visual_proof: Hayato buying a canned coffee outside the building, sfx of the
+    can dropping.
+  information_delta: Reader is given one more beat of ordinary calm just
+    before the collision.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_017
+  page_id: ep_012_p03
+  story_function: transit_same_evening
+  story_move: The team's group chat provides ordinary post-game texture on the
+    commuter car, establishing the phone as an object of routine, not yet
+    threat.
+  visual_proof: Commuter car interior, Hayato scrolling the team chat,
+    teammates' short messages visible.
+  information_delta: Reader sees the phone in its ordinary social role right
+    before it delivers the episode's second countdown.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_018
+  page_id: ep_012_p03
+  story_function: workplace_notification_collision
+  story_move: A calendar notification confirms Hayato's probation review date,
+    landing on the same screen and the same evening as the team chat.
+  visual_proof: Phone screen close-up, calendar notification with a confirmed
+    date and department name.
+  information_delta: Reader receives the second countdown object, concrete and
+    dated, matching the tournament schedule slip in weight.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_019
+  page_id: ep_012_p03
+  story_function: workplace_notification_collision
+  story_move: Hayato receives the news quietly rather than with visible panic,
+    naming only the concrete fact of the timeline, not a feeling.
+  visual_proof: Hayato's face, a small breath, no dramatic reaction shot.
+  information_delta: Reader confirms the collision registers as weight, not
+    crisis, keeping the arc from over-resolving into full crisis per the
+    arc-shape hint.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_020
+  page_id: ep_012_p03
+  story_function: twin_countdown_object_contrast
+  story_move: Both worlds are shown literally in the same frame -- the phone's
+    glow in one hand, the gym's chalk dust still on the other.
+  visual_proof: Close insert on both of Hayato's hands, phone screen and
+    chalk-dusted fingers side by side.
+  information_delta: Reader receives the episode's central image of collision
+    without a single line of narration explaining it.
+  beat_role: interior_focus
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_021
+  page_id: ep_012_p03
+  story_function: conbini_late_hour_callback
+  story_move: The conbini-receipt device from ep_010 returns, but only to mark
+    how late the night has gotten, deliberately not reused as a teaching
+    object a second time.
+  visual_proof: Conbini receipt insert, timestamp 23:47 clearly legible.
+  information_delta: Reader tracks the hour without the device being
+    over-leveraged into a repeated lesson beat.
+  beat_role: crowd_beat
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_022
+  page_id: ep_012_p04
+  story_function: return_to_the_gym
+  story_move: The company ID badge from ep_001's catalyst resurfaces as the
+    concrete reason Hayato can walk back into the building after hours instead
+    of going straight home.
+  visual_proof: Side entrance, Hayato badging in, decisively not heading toward
+    the train home.
+  information_delta: Reader understands exactly how and why he ends up back in
+    the gym, without any line explaining the choice.
+  beat_role: threshold_choice
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_023
+  page_id: ep_012_p04
+  story_function: mentor_wordless_departure
+  story_move: Kuroda's signature ball-rack reset gesture returns, unprompted
+    and unexplained, exactly as established since ep_003.
+  visual_proof: Half-lit gym, Kuroda alone resetting the ball rack.
+  information_delta: Reader recognizes the continuity gesture without new
+    dialogue attached to it.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_024
+  page_id: ep_012_p04
+  story_function: mentor_wordless_departure
+  story_move: Kuroda's entire dialogue for the episode is a two-word dry
+    question -- no lecture, no acknowledgment of the bracket or the
+    notification.
+  visual_proof: Kuroda glancing toward the doorway, Hayato standing there.
+  information_delta: Reader confirms the mentor doctrine holds -- observation
+    only, never interpretation.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_025
+  page_id: ep_012_p04
+  story_function: mentor_wordless_departure
+  story_move: Hayato answers in kind -- minimal, unresolved, no explanation of
+    why he came back.
+  visual_proof: Hayato taking a ball off the rack, a small tired smile.
+  information_delta: Reader sees the exchange stay exactly as terse as the
+    mentor relationship has always been.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep012_026
+  page_id: ep_012_p04
+  story_function: mentor_wordless_departure
+  story_move: Kuroda leaves without a send-off line, cutting most of the
+    lights and leaving Hayato alone by choice, not by staging.
+  visual_proof: Kuroda exiting, gym going darker except near the free-throw
+    line.
+  information_delta: Reader receives the final confirmation that no lesson
+    will be spoken aloud this episode.
+  beat_role: coach_cut
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_027
+  page_id: ep_012_p04
+  story_function: chosen_stillness_turn
+  story_move: Hayato stands at the free-throw line and turns the ball over once
+    in his hands without shooting -- the carrier beat, deliberately not a
+    replayed technique-lands moment.
+  visual_proof: Close, silent shot of both hands turning the ball over exactly
+    once, seam sliding under the palm.
+  information_delta: Reader receives the episode's true turn as a chosen
+    stillness, explicitly not a victory beat, consistent with the anti-pattern
+    rule against the object/technique landing as the resolution.
+  beat_role: interior_focus
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep012_028
+  page_id: ep_012_p04
+  story_function: closing_wide_unresolved
+  story_move: A wide pull-back shows both countdowns still present in the
+    background -- the bracket paper and the distant city lights -- without
+    either being named in text.
+  visual_proof: Wide dark-gym shot, Hayato small in frame, ball motionless in
+    his hands, background objects legible but unremarked.
+  information_delta: Reader closes the arc holding both unresolved threats at
+    once, with no dialogue resolving either.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep012_029
+  page_id: ep_012_p04
+  story_function: closing_wide_unresolved
+  story_move: The episode card marks the close of arc one explicitly, without
+    claiming a resolution.
+  visual_proof: Typographic arc-close card on a quiet color field.
+  information_delta: Reader receives a clean structural close to arc one that
+    hands off directly into arc two's losing-streak phase.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_012.yaml
+notes: Freshly authored as arc 1's closing episode (ep_012 of 12), following the
+  bible's exact beat assignment -- narrowest-margin advancement, bracket reveal of
+  an undefeated Kiryuu Pharma (reusing the ep_008 rival rather than a fresh
+  opponent), same-evening probation-review notification, and a closing empty-gym
+  stillness beat that explicitly withholds a replayed free-throw shot. This is a
+  TURN into arc 2 (the "losing streak" phase per ASSIGNMENT_MATRIX.tsv
+  arc_shape_hint), not a resolution; both the tournament and job countdowns are
+  still live when the episode ends. scripts/ci/check_manga_arc_storyboard.py does
+  not exist in this repo checkout and was not run, per the bible's noted gap; this
+  file was still authored to the established storyboard-first shape for
+  continuity with the stillness_press ep_011/ep_012 template.

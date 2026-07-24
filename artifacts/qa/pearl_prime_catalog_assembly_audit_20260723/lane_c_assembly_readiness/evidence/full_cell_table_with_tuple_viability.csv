@@ -1,0 +1,658 @@
+persona,topic,engine,planned_book_count,brand_spread,canonical_txt_present,story_atoms_present,thesis_topic_overlay,predicted_bind_status,predicted_acceptance_ceiling,tuple_viability_status,tuple_viability_errors,tuple_viability_error_codes
+tech_finance_burnout,overthinking,spiral,67,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,financial_stress,spiral,66,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,grief,grief,66,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,overthinking,spiral,65,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,financial_anxiety,shame,65,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,boundaries,comparison,65,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,overthinking,grief,65,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=overthinking engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,courage,shame,65,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,courage,spiral,64,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,anxiety,spiral,64,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,sleep_anxiety,spiral,64,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,burnout,false_alarm,64,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=burnout engine=false_alarm,NO_BINDING
+corporate_managers,anxiety,spiral,64,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,boundaries,comparison,64,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,shame,64,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,overwhelm,64,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,sleep_anxiety,watcher,63,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=sleep_anxiety engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+tech_finance_burnout,anxiety,comparison,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,social_anxiety,false_alarm,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,courage,false_alarm,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,anxiety,spiral,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,courage,false_alarm,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,financial_anxiety,overwhelm,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,depression,overwhelm,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,grief,watcher,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,sleep_anxiety,overwhelm,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,anxiety,false_alarm,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,anxiety,grief,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,shame,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,self_worth,shame,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,courage,spiral,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,anxiety,comparison,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,compassion_fatigue,grief,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,burnout,overwhelm,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,courage,shame,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,social_anxiety,shame,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,sleep_anxiety,spiral,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,anxiety,shame,63,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,imposter_syndrome,comparison,63,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,self_worth,comparison,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,overthinking,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,imposter_syndrome,grief,62,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=imposter_syndrome engine=grief,NO_BINDING
+tech_finance_burnout,somatic_healing,watcher,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,self_worth,comparison,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,anxiety,grief,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,compassion_fatigue,grief,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,social_anxiety,shame,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,compassion_fatigue,shame,62,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=compassion_fatigue engine=shame,NO_BINDING
+gen_alpha_students,boundaries,false_alarm,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,imposter_syndrome,shame,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,financial_anxiety,shame,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,sleep_anxiety,overwhelm,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,burnout,grief,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,burnout,grief,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,compassion_fatigue,overwhelm,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,depression,overwhelm,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,financial_anxiety,overwhelm,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,burnout,grief,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,overthinking,false_alarm,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,boundaries,false_alarm,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,burnout,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,financial_stress,shame,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,imposter_syndrome,comparison,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,burnout,grief,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,anxiety,shame,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,courage,false_alarm,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,self_worth,comparison,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,burnout,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,depression,overwhelm,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,overthinking,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,anxiety,watcher,62,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,courage,spiral,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,somatic_healing,watcher,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,overthinking,overwhelm,62,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=overthinking engine=overwhelm,NO_BINDING
+gen_x_sandwich,financial_stress,spiral,62,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,imposter_syndrome,false_alarm,62,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,overthinking,watcher,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,courage,false_alarm,61,40,True,True,False,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+millennial_women_professionals,somatic_healing,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,financial_anxiety,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,sleep_anxiety,spiral,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,burnout,overwhelm,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,boundaries,shame,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,financial_anxiety,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,overthinking,false_alarm,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,burnout,grief,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,depression,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,anxiety,shame,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,burnout,spiral,61,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=burnout engine=spiral,NO_BINDING
+corporate_managers,somatic_healing,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,burnout,spiral,61,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=burnout engine=spiral;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+tech_finance_burnout,burnout,shame,61,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=burnout engine=shame,NO_BINDING
+gen_x_sandwich,compassion_fatigue,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,compassion_fatigue,overwhelm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,burnout,watcher,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,boundaries,false_alarm,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,sleep_anxiety,false_alarm,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,grief,grief,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,social_anxiety,shame,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,grief,grief,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,depression,grief,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,grief,watcher,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,self_worth,shame,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,courage,shame,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,imposter_syndrome,spiral,61,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=imposter_syndrome engine=spiral;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,compassion_fatigue,shame,61,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=compassion_fatigue engine=shame,NO_BINDING
+tech_finance_burnout,sleep_anxiety,spiral,61,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,anxiety,comparison,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,anxiety,comparison,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,sleep_anxiety,watcher,61,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=sleep_anxiety engine=watcher,NO_BINDING
+working_parents,burnout,overwhelm,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,boundaries,false_alarm,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,overthinking,overwhelm,61,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=overthinking engine=overwhelm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_x_sandwich,imposter_syndrome,false_alarm,61,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT
+entrepreneurs,anxiety,shame,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,compassion_fatigue,shame,61,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=compassion_fatigue engine=shame,NO_BINDING
+entrepreneurs,burnout,grief,61,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,courage,shame,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,courage,spiral,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,financial_stress,overwhelm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,grief,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,social_anxiety,shame,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,imposter_syndrome,shame,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,boundaries,shame,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,imposter_syndrome,grief,60,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=imposter_syndrome engine=grief,NO_BINDING
+working_parents,depression,grief,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,courage,false_alarm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,social_anxiety,comparison,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,burnout,overwhelm,60,40,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+corporate_managers,financial_stress,spiral,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,depression,grief,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,burnout,watcher,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,boundaries,false_alarm,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,grief,grief,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,sleep_anxiety,false_alarm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,financial_anxiety,spiral,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,overthinking,watcher,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,compassion_fatigue,watcher,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,grief,watcher,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,imposter_syndrome,comparison,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,social_anxiety,comparison,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,burnout,false_alarm,60,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=burnout engine=false_alarm,NO_BINDING
+corporate_managers,sleep_anxiety,shame,60,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=sleep_anxiety engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,depression,watcher,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,self_worth,shame,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,overthinking,false_alarm,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,overthinking,comparison,60,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=overthinking engine=comparison,NO_BINDING
+entrepreneurs,social_anxiety,comparison,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,burnout,watcher,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,compassion_fatigue,overwhelm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,social_anxiety,false_alarm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,grief,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,boundaries,shame,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,financial_stress,overwhelm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,burnout,spiral,60,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=burnout engine=spiral,NO_BINDING
+working_parents,courage,spiral,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,imposter_syndrome,watcher,60,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=imposter_syndrome engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+corporate_managers,somatic_healing,watcher,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,depression,grief,60,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,anxiety,false_alarm,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,imposter_syndrome,watcher,60,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=imposter_syndrome engine=watcher,NO_BINDING
+corporate_managers,boundaries,shame,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,spiral,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,grief,grief,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,social_anxiety,false_alarm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,financial_stress,overwhelm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,compassion_fatigue,grief,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,burnout,comparison,60,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=burnout engine=comparison,NO_BINDING
+entrepreneurs,courage,false_alarm,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,courage,spiral,60,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,anxiety,shame,60,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,burnout,comparison,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=burnout engine=comparison,NO_BINDING
+corporate_managers,sleep_anxiety,false_alarm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,boundaries,overwhelm,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=boundaries engine=overwhelm,NO_BINDING
+millennial_women_professionals,anxiety,overwhelm,59,40,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+gen_x_sandwich,somatic_healing,overwhelm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,overwhelm,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,financial_anxiety,spiral,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,sleep_anxiety,spiral,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,sleep_anxiety,overwhelm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,imposter_syndrome,overwhelm,59,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=imposter_syndrome engine=overwhelm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+millennial_women_professionals,anxiety,spiral,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,overthinking,comparison,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=overthinking engine=comparison,NO_BINDING
+entrepreneurs,sleep_anxiety,comparison,59,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=sleep_anxiety engine=comparison,NO_BINDING
+gen_z_professionals,self_worth,shame,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,financial_anxiety,shame,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,anxiety,overwhelm,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,overthinking,overwhelm,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=overthinking engine=overwhelm,NO_BINDING
+gen_z_professionals,imposter_syndrome,overwhelm,59,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=imposter_syndrome engine=overwhelm,NO_BINDING
+corporate_managers,social_anxiety,comparison,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,spiral,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,burnout,grief,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,imposter_syndrome,watcher,59,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=imposter_syndrome engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_x_sandwich,financial_stress,shame,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,courage,false_alarm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,anxiety,overwhelm,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,overthinking,comparison,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=overthinking engine=comparison,NO_BINDING
+corporate_managers,anxiety,false_alarm,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,social_anxiety,false_alarm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,boundaries,comparison,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,financial_stress,overwhelm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,anxiety,comparison,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,overthinking,spiral,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,burnout,overwhelm,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,depression,grief,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,social_anxiety,false_alarm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,comparison,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,overthinking,shame,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=overthinking engine=shame,NO_BINDING
+gen_alpha_students,burnout,comparison,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=burnout engine=comparison,NO_BINDING
+millennial_women_professionals,imposter_syndrome,comparison,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,burnout,overwhelm,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,burnout,grief,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT
+millennial_women_professionals,somatic_healing,watcher,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,anxiety,watcher,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,sleep_anxiety,watcher,59,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=sleep_anxiety engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+healthcare_rns,overthinking,overwhelm,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=overthinking engine=overwhelm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,imposter_syndrome,watcher,59,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=imposter_syndrome engine=watcher,NO_BINDING
+corporate_managers,imposter_syndrome,comparison,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,depression,watcher,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,depression,overwhelm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,grief,watcher,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,overthinking,watcher,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,boundaries,comparison,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,financial_anxiety,spiral,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,compassion_fatigue,watcher,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,depression,watcher,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,imposter_syndrome,shame,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,anxiety,grief,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,overthinking,spiral,59,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,imposter_syndrome,comparison,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,burnout,spiral,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=burnout engine=spiral,NO_BINDING
+gen_z_professionals,depression,overwhelm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,overthinking,shame,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=overthinking engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+millennial_women_professionals,courage,shame,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,social_anxiety,shame,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,overwhelm,59,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=overthinking engine=overwhelm,NO_BINDING
+healthcare_rns,somatic_healing,overwhelm,59,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,compassion_fatigue,overwhelm,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,comparison,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,anxiety,watcher,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,social_anxiety,comparison,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,boundaries,overwhelm,58,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=boundaries engine=overwhelm,NO_BINDING
+tech_finance_burnout,financial_stress,spiral,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,burnout,shame,58,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=burnout engine=shame,NO_BINDING
+healthcare_rns,anxiety,watcher,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,comparison,58,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=overthinking engine=comparison,NO_BINDING
+working_parents,imposter_syndrome,overwhelm,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=imposter_syndrome engine=overwhelm,NO_BINDING
+working_parents,burnout,grief,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,boundaries,comparison,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,sleep_anxiety,comparison,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=sleep_anxiety engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_x_sandwich,boundaries,false_alarm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,overthinking,false_alarm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,sleep_anxiety,shame,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=sleep_anxiety engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,financial_anxiety,shame,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,overthinking,shame,58,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=overthinking engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,compassion_fatigue,watcher,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,compassion_fatigue,watcher,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,burnout,overwhelm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,imposter_syndrome,comparison,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,imposter_syndrome,false_alarm,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT
+millennial_women_professionals,courage,spiral,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,imposter_syndrome,spiral,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=imposter_syndrome engine=spiral,NO_BINDING
+millennial_women_professionals,burnout,comparison,58,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=burnout engine=comparison,NO_BINDING
+gen_z_professionals,sleep_anxiety,false_alarm,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,sleep_anxiety,shame,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=sleep_anxiety engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,sleep_anxiety,grief,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=sleep_anxiety engine=grief,NO_BINDING
+entrepreneurs,anxiety,false_alarm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,self_worth,comparison,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,grief,grief,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,depression,watcher,58,38,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,imposter_syndrome,watcher,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=imposter_syndrome engine=watcher,NO_BINDING
+gen_z_professionals,overthinking,grief,58,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=overthinking engine=grief,NO_BINDING
+gen_z_professionals,overthinking,false_alarm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,imposter_syndrome,shame,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,depression,watcher,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,depression,grief,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,financial_stress,spiral,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,sleep_anxiety,overwhelm,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,financial_anxiety,overwhelm,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,burnout,overwhelm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,compassion_fatigue,watcher,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,sleep_anxiety,comparison,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=sleep_anxiety engine=comparison,NO_BINDING
+corporate_managers,burnout,watcher,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT
+corporate_managers,boundaries,comparison,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,compassion_fatigue,grief,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,depression,overwhelm,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,burnout,overwhelm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,financial_stress,spiral,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,self_worth,shame,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,anxiety,false_alarm,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,imposter_syndrome,false_alarm,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,anxiety,grief,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,financial_anxiety,shame,58,37,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,self_worth,shame,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,sleep_anxiety,shame,58,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=sleep_anxiety engine=shame,NO_BINDING
+entrepreneurs,grief,watcher,58,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,somatic_healing,overwhelm,58,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,imposter_syndrome,spiral,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=imposter_syndrome engine=spiral,NO_BINDING
+millennial_women_professionals,social_anxiety,comparison,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,financial_stress,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,anxiety,false_alarm,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,compassion_fatigue,grief,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,financial_anxiety,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,sleep_anxiety,false_alarm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,boundaries,overwhelm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=boundaries engine=overwhelm,NO_BINDING
+working_parents,sleep_anxiety,grief,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=sleep_anxiety engine=grief,NO_BINDING
+gen_z_professionals,compassion_fatigue,watcher,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,boundaries,overwhelm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=boundaries engine=overwhelm,NO_BINDING
+millennial_women_professionals,anxiety,comparison,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,compassion_fatigue,grief,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,compassion_fatigue,shame,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=compassion_fatigue engine=shame,NO_BINDING
+working_parents,compassion_fatigue,watcher,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,social_anxiety,false_alarm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,boundaries,overwhelm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=boundaries engine=overwhelm,NO_BINDING
+corporate_managers,social_anxiety,false_alarm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,sleep_anxiety,spiral,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,boundaries,false_alarm,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,social_anxiety,comparison,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,compassion_fatigue,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,burnout,shame,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=burnout engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,burnout,comparison,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=burnout engine=comparison,NO_BINDING
+entrepreneurs,imposter_syndrome,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,imposter_syndrome,false_alarm,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT
+working_parents,sleep_anxiety,false_alarm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,financial_stress,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,sleep_anxiety,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,somatic_healing,watcher,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,anxiety,false_alarm,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,anxiety,spiral,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,financial_stress,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,overthinking,overwhelm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=overthinking engine=overwhelm,NO_BINDING
+healthcare_rns,overthinking,spiral,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,sleep_anxiety,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,sleep_anxiety,watcher,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=sleep_anxiety engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_x_sandwich,sleep_anxiety,watcher,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=sleep_anxiety engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,burnout,comparison,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=burnout engine=comparison,NO_BINDING
+tech_finance_burnout,financial_anxiety,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,burnout,shame,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=burnout engine=shame,NO_BINDING
+working_parents,burnout,false_alarm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=burnout engine=false_alarm,NO_BINDING
+millennial_women_professionals,overthinking,spiral,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,burnout,spiral,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=burnout engine=spiral;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,anxiety,overwhelm,57,40,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+healthcare_rns,sleep_anxiety,false_alarm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,financial_anxiety,spiral,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,somatic_healing,watcher,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,boundaries,overwhelm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=boundaries engine=overwhelm,NO_BINDING
+millennial_women_professionals,burnout,false_alarm,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=burnout engine=false_alarm,NO_BINDING
+working_parents,financial_anxiety,spiral,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,financial_anxiety,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,boundaries,false_alarm,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,imposter_syndrome,grief,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=imposter_syndrome engine=grief,NO_BINDING
+gen_alpha_students,boundaries,shame,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,somatic_healing,watcher,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,financial_anxiety,spiral,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,boundaries,false_alarm,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,anxiety,grief,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,sleep_anxiety,comparison,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=sleep_anxiety engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+corporate_managers,courage,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,boundaries,comparison,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,imposter_syndrome,spiral,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=imposter_syndrome engine=spiral;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,compassion_fatigue,grief,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,financial_anxiety,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,burnout,spiral,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=burnout engine=spiral,NO_BINDING
+healthcare_rns,depression,watcher,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,grief,watcher,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,social_anxiety,comparison,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,imposter_syndrome,shame,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,imposter_syndrome,grief,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=imposter_syndrome engine=grief,NO_BINDING
+gen_x_sandwich,grief,grief,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,false_alarm,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,sleep_anxiety,overwhelm,57,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,burnout,spiral,57,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=burnout engine=spiral,NO_BINDING
+gen_x_sandwich,boundaries,comparison,57,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,imposter_syndrome,spiral,57,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=imposter_syndrome engine=spiral,NO_BINDING
+gen_x_sandwich,overthinking,overwhelm,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=overthinking engine=overwhelm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,sleep_anxiety,grief,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=sleep_anxiety engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+tech_finance_burnout,depression,grief,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,sleep_anxiety,grief,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=sleep_anxiety engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+healthcare_rns,burnout,false_alarm,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=burnout engine=false_alarm,NO_BINDING
+millennial_women_professionals,depression,overwhelm,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,sleep_anxiety,shame,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=sleep_anxiety engine=shame,NO_BINDING
+entrepreneurs,imposter_syndrome,false_alarm,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,compassion_fatigue,shame,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=compassion_fatigue engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+healthcare_rns,self_worth,comparison,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,sleep_anxiety,comparison,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=sleep_anxiety engine=comparison,NO_BINDING
+corporate_managers,burnout,shame,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=burnout engine=shame,NO_BINDING
+millennial_women_professionals,grief,watcher,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,financial_stress,spiral,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,compassion_fatigue,overwhelm,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,watcher,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,anxiety,comparison,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,false_alarm,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,burnout,watcher,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,financial_anxiety,spiral,56,40,True,True,False,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+millennial_women_professionals,burnout,spiral,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=burnout engine=spiral,NO_BINDING
+corporate_managers,compassion_fatigue,grief,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,anxiety,spiral,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,imposter_syndrome,grief,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=imposter_syndrome engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,financial_stress,overwhelm,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,self_worth,comparison,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,anxiety,spiral,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,sleep_anxiety,grief,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=sleep_anxiety engine=grief,NO_BINDING
+healthcare_rns,anxiety,overwhelm,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,social_anxiety,shame,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,financial_stress,shame,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,sleep_anxiety,shame,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=sleep_anxiety engine=shame,NO_BINDING
+healthcare_rns,grief,watcher,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,overthinking,watcher,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,overthinking,false_alarm,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,burnout,comparison,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=burnout engine=comparison,NO_BINDING
+entrepreneurs,burnout,shame,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=burnout engine=shame,NO_BINDING
+working_parents,anxiety,grief,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,compassion_fatigue,watcher,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,imposter_syndrome,grief,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=imposter_syndrome engine=grief,NO_BINDING
+millennial_women_professionals,sleep_anxiety,false_alarm,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,imposter_syndrome,grief,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=imposter_syndrome engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_x_sandwich,imposter_syndrome,overwhelm,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=imposter_syndrome engine=overwhelm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+millennial_women_professionals,imposter_syndrome,spiral,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=imposter_syndrome engine=spiral,NO_BINDING
+gen_alpha_students,burnout,shame,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=burnout engine=shame,NO_BINDING
+gen_x_sandwich,boundaries,shame,56,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,overthinking,shame,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=overthinking engine=shame,NO_BINDING
+gen_x_sandwich,burnout,false_alarm,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=burnout engine=false_alarm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,somatic_healing,overwhelm,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,depression,watcher,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,courage,shame,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,burnout,spiral,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=burnout engine=spiral,NO_BINDING
+corporate_managers,overthinking,grief,56,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=overthinking engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+corporate_managers,imposter_syndrome,watcher,56,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=imposter_syndrome engine=watcher;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_alpha_students,courage,spiral,56,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,financial_stress,overwhelm,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,shame,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=overthinking engine=shame,NO_BINDING
+healthcare_rns,boundaries,overwhelm,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=boundaries engine=overwhelm,NO_BINDING
+gen_z_professionals,courage,spiral,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,social_anxiety,shame,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,anxiety,watcher,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,depression,grief,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,courage,shame,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,social_anxiety,shame,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,overthinking,comparison,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=overthinking engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+healthcare_rns,financial_anxiety,shame,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,burnout,watcher,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,self_worth,comparison,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,financial_anxiety,overwhelm,55,37,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,overthinking,comparison,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=overthinking engine=comparison,NO_BINDING
+millennial_women_professionals,imposter_syndrome,overwhelm,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=imposter_syndrome engine=overwhelm,NO_BINDING
+tech_finance_burnout,sleep_anxiety,shame,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=sleep_anxiety engine=shame,NO_BINDING
+gen_alpha_students,compassion_fatigue,grief,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,imposter_syndrome,spiral,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=imposter_syndrome engine=spiral,NO_BINDING
+corporate_managers,compassion_fatigue,overwhelm,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,anxiety,shame,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,sleep_anxiety,comparison,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=sleep_anxiety engine=comparison,NO_BINDING
+tech_finance_burnout,compassion_fatigue,watcher,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,overthinking,grief,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=overthinking engine=grief,NO_BINDING
+gen_z_professionals,anxiety,overwhelm,55,40,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+working_parents,financial_stress,shame,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,burnout,comparison,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=burnout engine=comparison,NO_BINDING
+entrepreneurs,self_worth,comparison,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,boundaries,shame,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,imposter_syndrome,watcher,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=imposter_syndrome engine=watcher,NO_BINDING
+tech_finance_burnout,boundaries,shame,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,sleep_anxiety,comparison,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=sleep_anxiety engine=comparison,NO_BINDING
+gen_alpha_students,financial_stress,spiral,55,36,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,burnout,false_alarm,55,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=burnout engine=false_alarm,NO_BINDING
+healthcare_rns,imposter_syndrome,shame,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,sleep_anxiety,overwhelm,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,sleep_anxiety,watcher,55,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=sleep_anxiety engine=watcher,NO_BINDING
+gen_z_professionals,sleep_anxiety,spiral,55,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,boundaries,shame,55,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,anxiety,watcher,55,40,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+gen_alpha_students,courage,false_alarm,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,overthinking,comparison,54,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=overthinking engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,somatic_healing,overwhelm,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,overthinking,shame,54,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=overthinking engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+healthcare_rns,boundaries,comparison,54,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,depression,watcher,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,imposter_syndrome,watcher,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=imposter_syndrome engine=watcher,NO_BINDING
+healthcare_rns,imposter_syndrome,overwhelm,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=imposter_syndrome engine=overwhelm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_alpha_students,depression,overwhelm,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,somatic_healing,overwhelm,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,burnout,false_alarm,54,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=burnout engine=false_alarm,NO_BINDING
+gen_z_professionals,compassion_fatigue,shame,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=compassion_fatigue engine=shame,NO_BINDING
+tech_finance_burnout,imposter_syndrome,overwhelm,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=imposter_syndrome engine=overwhelm,NO_BINDING
+gen_x_sandwich,imposter_syndrome,grief,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=imposter_syndrome engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,imposter_syndrome,comparison,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,overthinking,grief,54,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=overthinking engine=grief,NO_BINDING
+working_parents,boundaries,overwhelm,54,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=boundaries engine=overwhelm,NO_BINDING
+healthcare_rns,financial_stress,spiral,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,imposter_syndrome,shame,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,sleep_anxiety,grief,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=sleep_anxiety engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,financial_anxiety,shame,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,overthinking,false_alarm,54,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,courage,false_alarm,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,sleep_anxiety,grief,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=sleep_anxiety engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,financial_anxiety,overwhelm,54,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,grief,grief,54,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_professionals,anxiety,spiral,54,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,financial_stress,overwhelm,54,40,True,True,False,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+millennial_women_professionals,overthinking,overwhelm,54,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=millennial_women_professionals topic=overthinking engine=overwhelm,NO_BINDING
+tech_finance_burnout,imposter_syndrome,false_alarm,54,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,anxiety,watcher,53,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,compassion_fatigue,shame,53,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=compassion_fatigue engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+tech_finance_burnout,anxiety,overwhelm,53,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,self_worth,shame,53,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,financial_stress,shame,53,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,courage,shame,53,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,overthinking,spiral,53,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+tech_finance_burnout,compassion_fatigue,overwhelm,53,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,sleep_anxiety,comparison,53,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=sleep_anxiety engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+entrepreneurs,overthinking,grief,53,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=overthinking engine=grief,NO_BINDING
+gen_alpha_students,boundaries,overwhelm,53,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=boundaries engine=overwhelm,NO_BINDING
+entrepreneurs,overthinking,shame,53,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=overthinking engine=shame,NO_BINDING
+tech_finance_burnout,sleep_anxiety,grief,53,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=sleep_anxiety engine=grief,NO_BINDING
+gen_z_professionals,financial_stress,shame,53,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,social_anxiety,false_alarm,53,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+corporate_managers,overthinking,watcher,53,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,sleep_anxiety,spiral,53,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,anxiety,grief,53,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+healthcare_rns,overthinking,comparison,53,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=overthinking engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,sleep_anxiety,shame,53,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=sleep_anxiety engine=shame,NO_BINDING
+gen_x_sandwich,imposter_syndrome,spiral,53,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=imposter_syndrome engine=spiral;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,sleep_anxiety,watcher,53,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=sleep_anxiety engine=watcher,NO_BINDING
+tech_finance_burnout,burnout,false_alarm,53,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=burnout engine=false_alarm,NO_BINDING
+entrepreneurs,imposter_syndrome,overwhelm,52,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=imposter_syndrome engine=overwhelm,NO_BINDING
+millennial_women_professionals,anxiety,shame,52,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,compassion_fatigue,shame,52,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=compassion_fatigue engine=shame,NO_BINDING
+healthcare_rns,overthinking,grief,52,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=healthcare_rns topic=overthinking engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+gen_z_professionals,overthinking,shame,52,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=overthinking engine=shame,NO_BINDING
+gen_z_professionals,burnout,shame,52,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_z_professionals topic=burnout engine=shame,NO_BINDING
+gen_alpha_students,financial_anxiety,spiral,52,37,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,compassion_fatigue,shame,52,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=compassion_fatigue engine=shame,NO_BINDING
+healthcare_rns,depression,grief,51,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,burnout,watcher,51,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+working_parents,burnout,shame,51,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=burnout engine=shame,NO_BINDING
+gen_z_professionals,anxiety,false_alarm,51,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,depression,watcher,51,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,financial_stress,overwhelm,51,36,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+millennial_women_professionals,imposter_syndrome,false_alarm,50,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,sleep_anxiety,watcher,50,39,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=entrepreneurs topic=sleep_anxiety engine=watcher,NO_BINDING
+tech_finance_burnout,financial_anxiety,spiral,50,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_x_sandwich,burnout,comparison,50,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_x_sandwich topic=burnout engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+tech_finance_burnout,overthinking,grief,50,39,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=tech_finance_burnout topic=overthinking engine=grief,NO_BINDING
+healthcare_rns,self_worth,shame,50,40,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+entrepreneurs,somatic_healing,watcher,48,40,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,financial_stress,shame,47,34,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,grief,grief,46,33,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,grief,watcher,44,31,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,imposter_syndrome,false_alarm,39,28,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,imposter_syndrome,overwhelm,38,26,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=imposter_syndrome engine=overwhelm,NO_BINDING
+gen_alpha_students,imposter_syndrome,shame,35,25,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,imposter_syndrome,spiral,32,23,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=imposter_syndrome engine=spiral,NO_BINDING
+gen_alpha_students,imposter_syndrome,comparison,30,22,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,imposter_syndrome,grief,29,19,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=imposter_syndrome engine=grief,NO_BINDING
+gen_alpha_students,imposter_syndrome,watcher,22,18,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=imposter_syndrome engine=watcher,NO_BINDING
+gen_alpha_students,overthinking,spiral,20,13,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,overthinking,false_alarm,19,15,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,overthinking,overwhelm,17,12,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=overthinking engine=overwhelm,NO_BINDING
+gen_alpha_students,overthinking,shame,14,9,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=overthinking engine=shame,NO_BINDING
+gen_alpha_students,overthinking,watcher,13,9,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,self_worth,comparison,13,9,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,self_worth,shame,12,9,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,overthinking,grief,11,7,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=overthinking engine=grief,NO_BINDING
+gen_alpha_students,sleep_anxiety,false_alarm,7,6,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,overthinking,comparison,7,6,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=gen_alpha_students topic=overthinking engine=comparison,NO_BINDING
+first_responders,courage,spiral,7,6,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,courage,shame,7,6,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,courage,false_alarm,7,6,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,self_worth,comparison,6,5,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,self_worth,shame,6,5,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,burnout,grief,6,5,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,burnout,watcher,6,5,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,imposter_syndrome,shame,6,6,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,imposter_syndrome,comparison,6,6,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_alpha_students,sleep_anxiety,overwhelm,6,4,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,burnout,overwhelm,6,5,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+first_responders,somatic_healing,overwhelm,5,5,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,somatic_healing,watcher,5,5,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,boundaries,comparison,5,4,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,imposter_syndrome,comparison,5,5,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,boundaries,false_alarm,5,4,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,imposter_syndrome,shame,5,5,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,boundaries,shame,5,4,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,sleep_anxiety,spiral,5,4,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,imposter_syndrome,false_alarm,4,4,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,depression,overwhelm,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,social_anxiety,shame,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,somatic_healing,overwhelm,4,4,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,imposter_syndrome,grief,4,4,False,False,False,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=imposter_syndrome engine=grief,NO_BINDING
+first_responders,sleep_anxiety,overwhelm,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,social_anxiety,false_alarm,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,depression,watcher,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,imposter_syndrome,watcher,4,4,False,False,False,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=imposter_syndrome engine=watcher,NO_BINDING
+first_responders,financial_anxiety,shame,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,imposter_syndrome,overwhelm,4,4,False,False,False,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=imposter_syndrome engine=overwhelm,NO_BINDING
+first_responders,financial_anxiety,overwhelm,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,somatic_healing,watcher,4,4,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,depression,grief,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_alpha_students,social_anxiety,comparison,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,sleep_anxiety,false_alarm,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,sleep_anxiety,spiral,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,financial_anxiety,spiral,4,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,imposter_syndrome,spiral,4,4,False,False,False,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=imposter_syndrome engine=spiral,NO_BINDING
+first_responders,social_anxiety,false_alarm,3,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,anxiety,false_alarm,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,compassion_fatigue,watcher,3,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,social_anxiety,shame,3,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,grief,watcher,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,overthinking,false_alarm,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,anxiety,grief,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,overthinking,spiral,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,anxiety,comparison,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,anxiety,spiral,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,anxiety,grief,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,anxiety,shame,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,anxiety,watcher,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,anxiety,overwhelm,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,overthinking,false_alarm,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,anxiety,comparison,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,grief,grief,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,anxiety,shame,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,anxiety,watcher,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,social_anxiety,comparison,3,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,anxiety,false_alarm,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,overthinking,watcher,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,compassion_fatigue,grief,3,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,anxiety,overwhelm,3,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,compassion_fatigue,overwhelm,3,3,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,overthinking,spiral,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,anxiety,spiral,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,overthinking,watcher,3,3,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,sleep_anxiety,spiral,2,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,burnout,overwhelm,2,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,overthinking,overwhelm,2,2,False,False,True,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=overthinking engine=overwhelm,NO_BINDING
+gen_z_student,overthinking,shame,2,2,False,False,True,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=overthinking engine=shame,NO_BINDING
+gen_z_student,overthinking,comparison,2,2,False,False,True,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=overthinking engine=comparison,NO_BINDING
+nyc_executives,anxiety,spiral,2,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,burnout,watcher,2,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+gen_z_student,burnout,grief,2,2,True,False,True,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,financial_stress,spiral,2,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+first_responders,financial_stress,shame,2,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+gen_z_student,overthinking,grief,2,2,False,False,True,UNKNOWN,likely-hard-fail (no atom bank at all; InsufficientVariantsError / renderer skip likely),FAIL,NO_BINDING: persona=gen_z_student topic=overthinking engine=grief,NO_BINDING
+gen_z_student,sleep_anxiety,overwhelm,2,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+first_responders,financial_stress,overwhelm,2,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),PASS,,
+educators,anxiety,overwhelm,2,2,True,True,True,BOUND,authored-candidate-possible (Layer 2+ reachable; NOT guaranteed — see healthcare_rns x burnout 43006 precedent),PASS,,
+gen_z_student,sleep_anxiety,false_alarm,2,2,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,POOL_TOO_SHALLOW: 9 < 12,POOL_TOO_SHALLOW
+working_parents,somatic_healing,false_alarm,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=somatic_healing engine=false_alarm,NO_BINDING
+corporate_managers,somatic_healing,grief,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=somatic_healing engine=grief;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+corporate_managers,somatic_healing,false_alarm,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=somatic_healing engine=false_alarm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,somatic_healing,shame,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=somatic_healing engine=shame,NO_BINDING
+working_parents,somatic_healing,comparison,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=somatic_healing engine=comparison,NO_BINDING
+corporate_managers,somatic_healing,spiral,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=somatic_healing engine=spiral;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,somatic_healing,grief,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=somatic_healing engine=grief,NO_BINDING
+corporate_managers,somatic_healing,shame,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=somatic_healing engine=shame;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+corporate_managers,compassion_fatigue,false_alarm,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=compassion_fatigue engine=false_alarm;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+corporate_managers,somatic_healing,comparison,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=corporate_managers topic=somatic_healing engine=comparison;BAND_DEFICIT: missing band 1;BAND_DEFICIT: missing band 2,BAND_DEFICIT;NO_BINDING
+working_parents,somatic_healing,spiral,1,1,True,False,False,UNBOUND-thin,structurally-clear-only (Layer 1 cap; research_fit binding cap per scorecard),FAIL,NO_BINDING: persona=working_parents topic=somatic_healing engine=spiral,NO_BINDING

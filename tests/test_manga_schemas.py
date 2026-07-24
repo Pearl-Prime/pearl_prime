@@ -359,6 +359,15 @@ def _minimal_payload(stem: str) -> dict:
             "set_pieces_fired": ["sp1"],
             "unresolved_hooks": ["gate still closed"],
         },
+        "story_excellence_realization_report": {
+            "schema_version": "1.0.0",
+            "artifact_type": "manga_story_excellence_realization_report",
+            "status": "PASS",
+            "production_blocking": False,
+            "score": 100,
+            "threshold": 100,
+            "gates": [],
+        },
     }
     if stem not in builders:
         raise KeyError(stem)

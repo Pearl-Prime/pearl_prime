@@ -152,20 +152,24 @@ def test_rename_inherits_baseline_debt(tmp_path: Path) -> None:
 # --------------------------------------------------------------------------
 
 def test_shipped_baseline_matches_audited_corpus() -> None:
-    """The baseline records exactly the 869 audited files. It may only shrink."""
+    """The baseline records exactly the 8 remaining audited files (down from an
+    original 869 as parallel zh-TW decontamination work has landed repairs —
+    the baseline "may only shrink" per its own header). It may only shrink further."""
     baseline = load_baseline(BASELINE_PATH)
-    assert len(baseline) == 869
+    assert len(baseline) == 8
     assert all(is_zh_tw_atom(p) for p in baseline)
     assert all(v >= 1 for v in baseline.values())
 
 
 def test_shipped_baseline_severity_distribution() -> None:
-    """Pins lane-02's distinct-char tiering: 42 WHOLE_FILE / 321 PARTIAL / 506 SPOT_LEAK."""
+    """Pins lane-02's distinct-char tiering for the current 8-file baseline:
+    2 WHOLE_FILE / 5 PARTIAL / 1 SPOT_LEAK (was 42/321/506 against the original
+    869-file corpus before parallel zh-TW decontamination repairs landed)."""
     baseline = load_baseline(BASELINE_PATH)
     dist: dict[str, int] = {}
     for n in baseline.values():
         dist[severity_for(n)] = dist.get(severity_for(n), 0) + 1
-    assert dist == {"WHOLE_FILE": 42, "PARTIAL": 321, "SPOT_LEAK": 506}
+    assert dist == {"WHOLE_FILE": 2, "PARTIAL": 5, "SPOT_LEAK": 1}
 
 
 def test_no_zh_tw_files_changed_is_a_noop(tmp_path: Path) -> None:

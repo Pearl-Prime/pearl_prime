@@ -1,0 +1,123 @@
+# Book Engine Policy v1
+# Status: wired into selector/gate surfaces (lane 06, 20260718 oldchats7 finish pack).
+# Runtime consumers: phoenix_v4/planning/book_engine_policy.py + enrichment_select,
+# accent_planner, register_gate F15, chapter_flow_gate, book_quality_gate.
+schema_version: 1
+policy_id: book_engine_policy_v1
+status: wired_v1
+source_pack: docs/agent_prompt_packs/20260718_book_engine_bestseller_cohesion_generalization/
+principle: right_function_right_placement_right_entry_right_depth_right_handoff_no_visible_template
+
+global_rules:
+  no_public_release_authorization: true
+  no_catalog_scale: true
+  do_not_add_all_unused_atoms: true
+  author_disclosure_requires_real_approved_source: true
+  evidence_claims_must_not_be_strengthened: true
+  maximum_visible_phrase_reuse:
+    exact_phrase_default: 3
+    scaffold_phrase_default: 2
+    five_gram_default: 4
+  troubleshooting_permission_split:
+    troubleshooting: practical_objection
+    permission: emotional_safety_shame_grief_fear_resistance
+
+validator_profile:
+  enabled_gates:
+    - schema_enums
+    - visible_repetition
+    - cleared_exercise_wrappers
+  # Soft WARN for high-level scaffold n-grams (operator polish target).
+  hard_gate_repetition: false
+  # Cleared exercise-wrapper phrases must stay at count 0 (HARD FAIL in production).
+  hard_gate_cleared_scaffolds: true
+  thresholds:
+    exact_phrase: 3
+    scaffold_phrase: 2
+    five_gram: 4
+
+atom_job_classes:
+  information: explains mechanism, topic cognition, context, or pattern
+  communication: governs voice, promise, author observation, and direct reader address
+  engagement: creates narrative interest, question tension, story energy, or scene pull
+  emotional_safety: normalizes, reassures, grants permission, or lowers shame/fear
+  practical_action: gives tools, diagnostics, exercises, reflection, integration, or scripts
+  proof: supports trust through cited evidence, public case, external story, parable, or real disclosure
+  cohesion: maintains motif, callback, story, transition, or part architecture
+  propulsion: opens the next question or lands a chapter/book payoff
+
+proof_classes:
+  cited_evidence: named or field-level evidence; requires source-safe entry and limitation
+  case_study: public or composite case carrying narrative function; do not present as citation alone
+  external_story_or_public_case: widens the chapter; must bridge back to reader problem
+  parable_or_teaching_story: illustrative only; must not imply factual evidence
+  author_observation_not_disclosure: author voice from approved positioning; no invented biography
+  real_author_source_required: first-person disclosure only when approved real material exists
+  none_or_contextual: not a proof surface
+
+variation_modes:
+  - protagonist_scene_open
+  - reader_question_open
+  - quiet_image_open
+  - evidence_or_public_case_open
+  - author_observation_open
+  - practice_begins_without_announcement
+  - mechanism_culminates_in_experiment
+  - corporate_tool_to_embodiment
+  - callback_return_to_changed_object
+  - final_cumulative_operating_agreement
+
+smoke_cell:
+  book_id: corporate_managers__burnout__overwhelm__F006
+  canonical_render: artifacts/qa/corporate_burnout_reader_layer_integration_20260717/integrated_full_book_render.txt
+  motif_ledger:
+    primary: invisible_cost_ledger
+    supporting: [meter, body_signal, attention_tax, capacity, worth_without_output]
+  tool_ledger:
+    - before_work_signal_check
+    - attention_ledger
+    - usefulness_audit
+    - foundation_scan
+    - coverage_map
+    - recovery_practice
+    - non_output_hour
+    - rescue_ledger
+    - capacity_budget
+    - deliberate_not_do
+    - worth_ledger_correction
+  chapter_policy:
+    ch01:
+      variation_mode: protagonist_scene_open
+      entry_contract: body already paying before visible work
+      exit_contract: meter/ledger becomes visible and asks for live-room truth
+      motif_callback_role: ledger_plant
+      tool_practice_role: diagnostic_signal_check
+      proof_class: cited_evidence
+    ch02:
+      variation_mode: protagonist_scene_open
+      entry_contract: attention miss reveals hidden cognitive tax
+      exit_contract: attention ledger joins invisible cost ledger
+      motif_callback_role: ledger_deepening
+      tool_practice_role: diagnostic_attention_ledger
+      proof_class: mechanism_context
+    ch03:
+      variation_mode: reader_question_open
+      entry_contract: worth has been traded for output
+      exit_contract: usefulness audit tests automatic verdict
+      motif_callback_role: second_ledger_entry
+      tool_practice_role: usefulness_audit
+      proof_class: cited_evidence_and_external_story
+
+dry_run_cells:
+  - persona: gen_z_professionals
+    topic: anxiety
+    proof_mode: metadata_only
+    source_hint: atoms/gen_z_professionals/anxiety/HOOK/CANONICAL.txt
+  - persona: educators
+    topic: imposter_syndrome
+    proof_mode: metadata_only
+    source_hint: atoms/educators/imposter_syndrome/REFLECTION/CANONICAL.txt
+  - persona: corporate_managers
+    topic: boundaries
+    proof_mode: metadata_only
+    source_hint: atoms/corporate_managers/boundaries/INTEGRATION/CANONICAL.txt

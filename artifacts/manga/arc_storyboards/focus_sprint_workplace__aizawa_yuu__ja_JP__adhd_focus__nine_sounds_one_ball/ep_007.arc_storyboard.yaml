@@ -1,0 +1,472 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_007
+genre_id: sports_competition
+title: '静寂のフリースロー——第七話「九つの音」'
+logline: In Shinonome's first qualifier match, the gymnasium scoreboard and a
+  small but loud rival-company crowd overload Hayato's attention exactly when
+  the game is tightest, and the team's first real loss lands on a mistake
+  that is unmistakably his.
+stakes_now: Shinonome enters its first live qualifier match carrying only the
+  paper-thin eight-player roster secured under deadline pressure in ep_006 —
+  no proof yet that a company recreational team can hold together in a real,
+  refereed, spectated game against opponents who play every week.
+stakes_end: The team's first qualifier ends in a real, unsoftened loss — a
+  turnover and a twisted ankle that are unmistakably Hayato's — dropping
+  Shinonome into the tournament's loser's bracket. No cure is offered, no
+  lesson is spoken aloud, and the body cost (scraped forearm, taped ankle)
+  carries forward into the episodes that follow.
+genre_cadence:
+- away_venue_arrival
+- opposing_crowd_established
+- captains_simple_declaration
+- tipoff_and_early_rhythm
+- scoreboard_and_crowd_escalation
+- foul_line_test_and_miss
+- halftime_tactical_call
+- second_half_body_cost
+- bench_teammate_distinct_register
+- interior_overload_widening
+- tactical_correction_bark
+- noise_convergence_and_the_mistake
+- fall_and_injury
+- opponent_breakaway_and_final_buzzer
+- rival_genuine_relief
+- post_loss_silence_and_care
+- closing_wide_walkout
+page_turn_promises:
+- page_id: ep_007_p01
+  promise: Will Shinonome's first real qualifier feel like practice, or like
+    something else entirely?
+- page_id: ep_007_p02
+  promise: Can Hayato hold his free-throw form with a stranger's crowd
+    yelling behind the backboard?
+- page_id: ep_007_p03
+  promise: Is the team's slim lead enough to survive a second half this loud?
+- page_id: ep_007_p04
+  promise: When the final minute arrives with every sound at once, what is
+    Hayato's eye actually locked onto?
+panels:
+- panel_id: ep007_001
+  page_id: ep_007_p01
+  story_function: away_venue_arrival
+  story_move: The team arrives at an unfamiliar district gymnasium for their
+    first live qualifier, visibly less certain than they are on their own
+    home floor.
+  visual_proof: Wide exterior shot, dusk light, Shinonome players checking a
+    phone map against the building signage, gym bags over shoulders.
+  information_delta: Reader registers this is the first time the team has
+    played somewhere that isn't their own company gym.
+  beat_role: pre_game_tension
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_002
+  page_id: ep_007_p01
+  story_function: opposing_crowd_established
+  story_move: Before the team even reaches the court, the rival company's
+    crowd is already audible through the corridor wall.
+  visual_proof: Corridor shot, Aya stopping mid-stride to listen, a chant and
+    fan-clapping bleeding through the wall ahead.
+  information_delta: Reader learns the opposing crowd is small but already
+    louder than anything the team has played in front of before.
+  beat_role: crowd_beat
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_003
+  page_id: ep_007_p01
+  story_function: captains_simple_declaration
+  story_move: Aya gives the team's pre-match instruction — short, factual, no
+    elaboration, per the genre's captain-declaration convention.
+  visual_proof: Tight huddle shot, Aya at the center, Endou and Matsuo
+    listening, no raised voices.
+  information_delta: Reader receives the team's actual game plan in one
+    plain sentence, not a speech.
+  beat_role: pre_game_tension
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_004
+  page_id: ep_007_p01
+  story_function: body_before_mind_grounding
+  story_move: Hayato laces the old sneakers from his desk drawer — the
+    series' established visual anchor — before stepping onto an unfamiliar
+    floor.
+  visual_proof: Close on hands lacing worn sneakers, name badge still clipped
+    to his bag from the direct commute out of the office.
+  information_delta: Reader sees the object connecting his two lives arrive
+    with him into the away gym.
+  beat_role: interior_focus
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_005
+  page_id: ep_007_p01
+  story_function: tipoff_and_early_rhythm
+  story_move: The whistle blows and the ball goes up — the team's first
+    live qualifier possession begins.
+  visual_proof: Wide court shot, opposing banner reading "三笠魂" hanging
+    behind one basket, referee's whistle mid-blow, tip-off jump.
+  information_delta: Reader confirms the game itself, and the specific
+    opponent, are now underway.
+  beat_role: first_contact
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_006
+  page_id: ep_007_p02
+  story_function: tipoff_and_early_rhythm
+  story_move: The team functions cleanly in the opening exchanges — Hayato's
+    flaw has not yet been exposed, establishing a working baseline before it
+    fractures.
+  visual_proof: Flowing action panel, Hayato feeding a clean assist to
+    Endou for an early basket, rare praise passing between them.
+  information_delta: Reader sees the team, and Hayato specifically, can
+    play well under ordinary conditions.
+  beat_role: first_contact
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_007
+  page_id: ep_007_p02
+  story_function: scoreboard_and_crowd_escalation
+  story_move: The scoreboard's first real update becomes a visible, tracked
+    object rather than background detail.
+  visual_proof: Insert close-up on the scoreboard reading a narrow early
+    lead for Shinonome.
+  information_delta: Reader gets the first concrete numeric stake of the
+    match.
+  beat_role: crowd_beat
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_008
+  page_id: ep_007_p02
+  story_function: scoreboard_and_crowd_escalation
+  story_move: The small opposing crowd's chant grows louder as their team
+    answers back on the scoreboard.
+  visual_proof: Wide crowd insert, fans banging paper fans and a hand drum,
+    chanting the rival company's name.
+  information_delta: Reader tracks the noise rising in direct proportion to
+    the game tightening.
+  beat_role: crowd_beat
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_009
+  page_id: ep_007_p02
+  story_function: foul_line_test_and_miss
+  story_move: Hayato is fouled and sent to the free-throw line for the first
+    time in a live match, and the routine that should be automatic goes
+    slippery under the crowd behind the backboard.
+  visual_proof: Close on Hayato at the foul line, eyes flicking rim, crowd,
+    scoreboard, rim again — the exact darting pattern of the strategy bank's
+    signature device, seen here failing for the first time in-game.
+  information_delta: Reader watches the series' central device (the
+    free-throw line) get its first live-fire test, and lose.
+  beat_role: interior_focus
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_010
+  page_id: ep_007_p02
+  story_function: foul_line_test_and_miss
+  story_move: The rushed shot clangs off the front iron.
+  visual_proof: Close on the ball hitting the front rim hard and bouncing
+    away, no net contact.
+  information_delta: Reader confirms the miss as a clean, visible fact, not
+    a narrated feeling.
+  beat_role: reaction_shot
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_011
+  page_id: ep_007_p02
+  story_function: team_moves_on_no_dwelling
+  story_move: The team's reaction is brisk and practical rather than
+    comforting or accusatory — genre-correct team-sport restraint.
+  visual_proof: Medium shot, Aya clapping once and calling the team back on
+    defense, Endou's jaw tight but silent.
+  information_delta: Reader sees the team absorb the miss without a scene,
+    which itself carries information about team culture.
+  beat_role: reaction_shot
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_012
+  page_id: ep_007_p02
+  story_function: halftime_tactical_call
+  story_move: Halftime arrives with the score razor-close; Aya's instruction
+    is tactical, not psychological.
+  visual_proof: Bench huddle, water bottles, scoreboard visible behind them
+    reading a one-point deficit at the half.
+  information_delta: Reader gets the concrete halftime stakes and the
+    team's stated plan for the second half.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_013
+  page_id: ep_007_p03
+  story_function: second_half_body_cost
+  story_move: The second half opens on visible physical cost — sweat, hard
+    breathing — before any dialogue.
+  visual_proof: Close on Hayato's chest heaving, sweat dripping off his
+    jaw, sock lines dark with it.
+  information_delta: Reader is reminded the game has a body cost that has
+    been accumulating off-panel between beats.
+  beat_role: training_cost
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_014
+  page_id: ep_007_p03
+  story_function: bench_teammate_distinct_register
+  story_move: Matsuo subs in for a defensive stretch, his nervous energy a
+    distinct speech register from Endou's or Aya's.
+  visual_proof: Medium shot, Matsuo checking into the scorer's table,
+    stumbling slightly over his own words.
+  information_delta: Reader meets the team's bench depth as a real,
+    specific person rather than a roster line.
+  beat_role: crowd_beat
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_015
+  page_id: ep_007_p03
+  story_function: scoreboard_and_crowd_escalation
+  story_move: The scoreboard gap narrows further into the third quarter.
+  visual_proof: Insert close-up, scoreboard showing the margin now down to
+    a single point with the clock well into the second half.
+  information_delta: Reader tracks the tightening game state numerically.
+  beat_role: crowd_beat
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_016
+  page_id: ep_007_p03
+  story_function: scoreboard_and_crowd_escalation
+  story_move: A specific heckler sign becomes visible in the crowd during a
+    Shinonome scoring drought, escalating the noise from generic to
+    pointed.
+  visual_proof: Insert on a hand-lettered sign in the small crowd, held up
+    during a dead ball.
+  information_delta: Reader sees the crowd noise sharpen from ambient to
+    targeted.
+  beat_role: crowd_beat
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_017
+  page_id: ep_007_p03
+  story_function: interior_overload_widening
+  story_move: Hayato's eyes visibly dart between too many sources at once —
+    the strategy bank's flooded state, escalating from the foul-line
+    version seen earlier.
+  visual_proof: Tight face close-up, rapid eye-line cuts implied by panel
+    composition — scoreboard, sign, bench, opposing player.
+  information_delta: Reader confirms the overload has widened from a single
+    dead-ball moment (the foul line) into the live flow of the game itself.
+  beat_role: interior_focus
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_018
+  page_id: ep_007_p03
+  story_function: tactical_correction_bark
+  story_move: Endou corrects Hayato with an ordinary coaching bark — sharp,
+    specific, non-psychological.
+  visual_proof: Medium shot, Endou pointing at the floor where Hayato
+    should be, voice raised over the noise.
+  information_delta: Reader sees the team's actual coaching register —
+    tactical correction, never insight or lecture.
+  beat_role: coach_cut
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_019
+  page_id: ep_007_p04
+  story_function: noise_convergence_and_the_mistake
+  story_move: With under a minute left and Shinonome clinging to a one-point
+    lead, every noise source arrives at once — the strategy bank's opening
+    beat, fully realized in-game for the first time.
+  visual_proof: Wide composite panel — blinking scoreboard clock, crowd
+    roar, bench shouting a play call, referee's whistle from the prior
+    possession still seeming to ring — all rendered at equal visual weight.
+  information_delta: Reader receives the full sensory flood the strategy
+    bank names as the trigger state, staged here at its highest stakes yet.
+  beat_role: crowd_beat
+  action_intensity: 3
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_020
+  page_id: ep_007_p04
+  story_function: wrong_object_narrowed_on
+  story_move: Hayato brings the ball up and narrows his focus onto the game
+    clock — the wrong single object — instead of the floor around him, an
+    ironic mirror of the technique he has not yet been taught.
+  visual_proof: Close on Hayato's eyes locked on the scoreboard clock,
+    peripheral defenders rendered as unfocused shapes.
+  information_delta: Reader recognizes the shape of the eventual carrier
+    beat (narrowing to one object) landing on the wrong object entirely.
+  beat_role: interior_focus
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_021
+  page_id: ep_007_p04
+  story_function: double_team_unseen
+  story_move: Two defenders converge on Hayato from outside his narrowed
+    field of attention.
+  visual_proof: Wide shot from behind Hayato, showing the trap closing
+    while his own eye-line stays fixed upward on the scoreboard.
+  information_delta: Reader sees the mistake forming before Hayato does —
+    dramatic irony rather than a narrated warning.
+  beat_role: crowd_beat
+  action_intensity: 3
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_022
+  page_id: ep_007_p04
+  story_function: the_steal
+  story_move: The ball is stripped clean.
+  visual_proof: Close, fast panel — a defender's hand knocking the ball
+    loose, Hayato's grip closing on empty air a half-beat late.
+  information_delta: Reader confirms the turnover as a clean, unambiguous
+    fact.
+  beat_role: reaction_shot
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_023
+  page_id: ep_007_p04
+  story_function: fall_and_injury
+  story_move: Lunging to recover the loose ball, Hayato goes down hard,
+    scraping his forearm on the hardwood and planting his ankle wrong as he
+    tries to get up too fast.
+  visual_proof: Close sequence — forearm skidding across the floor, ankle
+    twisting under his own weight as he pushes to rise.
+  information_delta: Reader receives the physical cost of the mistake as a
+    specific, visible injury, not an abstraction.
+  beat_role: training_cost
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_024
+  page_id: ep_007_p04
+  story_function: opponent_breakaway_score
+  story_move: The opposing player converts the steal into an uncontested
+    transition basket while Hayato is still down on the floor.
+  visual_proof: Wide shot, clean uncontested layup at one end, Hayato
+    gripping his ankle at the other, teammates too far to recover.
+  information_delta: Reader sees the lead change directly and immediately
+    caused by the turnover, no ambiguity about cause and effect.
+  beat_role: reaction_shot
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_025
+  page_id: ep_007_p04
+  story_function: opponent_breakaway_and_final_buzzer
+  story_move: Shinonome's final possession is rushed and contested; Endou's
+    last attempt rims out as the horn sounds.
+  visual_proof: Close on the ball spinning off the rim as the buzzer light
+    flashes, scoreboard frozen on the final tally.
+  information_delta: Reader sees the loss become final and official,
+    without a hero shot resolving it either way.
+  beat_role: reaction_shot
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_026
+  page_id: ep_007_p04
+  story_function: rival_genuine_relief
+  story_move: The opposing bench celebrates with real, unguarded relief
+    rather than mockery — the required humanizing beat for the rival side.
+  visual_proof: Wide shot, Mikasa Electric's players hugging, their captain
+    exhaling hard rather than posing for a celebration.
+  information_delta: Reader sees the win mean as much to the other side as
+    the loss means to Shinonome, avoiding a flattened, villainous opponent.
+  beat_role: reaction_shot
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_027
+  page_id: ep_007_p05
+  story_function: teammate_physical_care
+  story_move: Aya reaches Hayato first, checking the ankle physically
+    rather than offering words.
+  visual_proof: Medium shot, Aya kneeling, hands on Hayato's ankle, face
+    focused on the injury, not on assigning blame.
+  information_delta: Reader sees the team's actual priority in the
+    immediate aftermath is his body, not the loss.
+  beat_role: coach_cut
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_028
+  page_id: ep_007_p05
+  story_function: post_loss_silence_and_care
+  story_move: The team sits in near-total silence on the bench, a water
+    bottle passed wordlessly — the genre's post-loss silence convention
+    held for a full beat.
+  visual_proof: Wide bench shot, Matsuo handing Hayato a water bottle
+    without meeting his eyes, no one speaking.
+  information_delta: Reader experiences the loss's weight through absence
+    of dialogue rather than through stated grief.
+  beat_role: aftermath_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_029
+  page_id: ep_007_p05
+  story_function: restrained_anger_no_lecture
+  story_move: Endou stands apart, arms crossed, visibly holding something
+    back — and does not say it. No coach or teammate explains the lesson.
+  visual_proof: Medium shot, Endou's jaw tight, eyes on the dark scoreboard
+    rather than on Hayato; intercut with a close insert of Hayato's taped
+    ankle and scraped forearm beside the untouched ball.
+  information_delta: Reader is trusted to read the restraint itself as the
+    information, per the strategy bank's anti-pattern rule against stated
+    psychology.
+  beat_role: aftermath_silence
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_030
+  page_id: ep_007_p05
+  story_function: closing_wide_walkout
+  story_move: The team walks out of the gym into the night, the lit
+    scoreboard still visible through the doorway behind them, Hayato
+    limping at the back of the group.
+  visual_proof: Wide receding shot, doorway framing the still-lit
+    scoreboard, the group's silhouettes small against the night outside.
+  information_delta: Reader closes the episode on the concrete, object-
+    level image of the score rather than on any spoken reflection.
+  beat_role: aftermath_silence
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_007.yaml
+notes: Episode 7 of 12 — arc 1's first live qualifier match and the arc's real
+  sting, per the series bible's per-episode beat assignment. Follows directly
+  from ep_006's roster registration under deadline pressure. The team's first
+  formal, refereed, spectated game ends in a genuine, unsoftened loss on a
+  turnover that is unmistakably Hayato's — a double-team he never sees because
+  his narrowed attention has locked onto the scoreboard clock instead of the
+  floor, an ironic pre-echo of the "one ball at the line" technique he has not
+  yet been taught (paced to land properly in ep_010/ep_011 per the throughline).
+  Kuroda does not appear in this episode — the away venue is outside his
+  established domain (company-building facilities caretaker, not a traveling
+  coach) — keeping the vessel silent by absence rather than staged restraint
+  this time. The loss produces the physical continuity objects (a scraped
+  forearm, a wrong-angle ankle plant) that ep_008 and ep_009 both reference as
+  carried-forward body cost, and drops the team into the loser's-bracket path
+  ep_008 opens on. scripts/ci/check_manga_arc_storyboard.py does not exist in
+  this repo checkout and could not be run against this file; it was still
+  authored to the established shape for continuity and future-proofing, per
+  the dispatch brief.

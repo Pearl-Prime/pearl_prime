@@ -1,0 +1,303 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_010
+genre_id: psychological_thriller
+title: The Sheet Pulled Back — Episode 10 (English gloss)
+logline: Shizuku arrives unannounced after days of unanswered calls and pulls back the sheet Ren threw
+  over his wall of notes, discovering fragments of her own words tracked alongside the anomaly — and for
+  the first time, Ren's fluent explanations fail him completely.
+stakes_now: Shizuku has never shown up in person before — every prior contact has been a call or a
+  video chat — and her decision to come anyway signals the relationship has reached a point words alone
+  can no longer manage.
+stakes_end: Shizuku leaves needing distance, the relationship's heaviest cost paid in full on-page, and
+  Ren is left alone seeing his own reflection clearly against the wall for the first time — recognition,
+  not a cure.
+genre_cadence:
+- time_passes_wall_grows_covered
+- unexpected_doorbell_not_a_call
+- concealment_attempted_before_answering
+- anchor_arrives_in_person
+- deflection_attempted_at_the_door
+- anchor_pushes_past_boundary
+- domestic_neglect_visible
+- anchor_reaches_for_the_covering
+- sheet_pulled_back_full_reveal
+- fluent_excuse_fails_for_first_time
+- anchor_reads_fragments_aloud
+- anchor_finds_herself_on_the_wall
+- worry_turns_to_betrayal
+- sharpest_cost_line_of_the_arc
+- explanation_sounds_worse_spoken
+- anchor_states_need_for_distance
+- anchor_walks_toward_the_door
+- ren_frozen_between_wall_and_sister
+- door_closes_silence_fills_room
+- mirror_and_wall_merge_into_recognition
+- episode_card
+page_turn_promises:
+- page_id: ep_010_p01
+  promise: Will Ren manage to keep the wall hidden behind the sheet, or does Shizuku's unannounced visit
+    finally force the full scope of the case into the open?
+- page_id: ep_010_p02
+  promise: Now that Shizuku has found herself on the wall, does anything Ren says reach her, or does the
+    relationship's heaviest cost land beyond any explanation's reach?
+panels:
+- panel_id: ep010_001
+  page_id: ep_010_p01
+  story_function: time_passes_wall_grows_covered
+  story_move: A time skip shows the wall of notes from episode nine has grown further and is now hidden
+    under a sheet, establishing both escalation and concealment before any character acts.
+  visual_proof: Wide shot of the apartment room with the note-covered wall now draped under a sheet.
+  information_delta: Reader learns time has passed and Ren has begun actively hiding the wall's scale.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_002
+  page_id: ep_010_p01
+  story_function: unexpected_doorbell_not_a_call
+  story_move: An unexpected doorbell rings instead of a call, immediately signaling a different, higher-
+    stakes kind of contact than the phone calls of prior episodes.
+  visual_proof: Close insert on the apartment door with the doorbell chime rendered visually.
+  information_delta: Reader recognizes this interruption as categorically different from earlier
+    episodes' phone-based contacts.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_003
+  page_id: ep_010_p01
+  story_function: concealment_attempted_before_answering
+  story_move: Ren rushes to shut the door to the note-covered room before answering, showing active,
+    deliberate concealment rather than mere untidiness.
+  visual_proof: Medium shot of Ren pulling a door closed on the covered wall before moving toward the
+    entrance.
+  information_delta: Reader sees Ren's concealment is a conscious choice, not an accident of timing.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_004
+  page_id: ep_010_p01
+  story_function: anchor_arrives_in_person
+  story_move: Shizuku states plainly that she came in person because calling was not working, escalating
+    the anchor relationship's method for the first time in the series.
+  visual_proof: Medium shot of Shizuku standing at the open door, having traveled here herself.
+  information_delta: Reader learns the anchor has escalated her own response to Ren's unavailability.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_005
+  page_id: ep_010_p01
+  story_function: deflection_attempted_at_the_door
+  story_move: Ren attempts his usual deflection while physically blocking half the doorway, showing the
+    cover-story reflex activating even here.
+  visual_proof: Medium shot of Ren standing in the doorway at an angle that partially blocks entry.
+  information_delta: Reader sees Ren's habitual deflection deployed against family, not just coworkers.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_006
+  page_id: ep_010_p01
+  story_function: anchor_pushes_past_boundary
+  story_move: Shizuku steps past Ren into the apartment despite his positioning, the anchor's first
+    active boundary-crossing in the series.
+  visual_proof: Medium shot of Shizuku moving past Ren into the apartment's interior.
+  information_delta: Reader sees the anchor take physical initiative for the first time, matching the
+    urgency of her earlier statement.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_007
+  page_id: ep_010_p01
+  story_function: domestic_neglect_visible
+  story_move: The apartment's visible neglect — unwashed dishes, drawn curtains, the sheet's bulge behind
+    a half-open door — makes the accumulated cost concrete before the wall itself is even seen.
+  visual_proof: Wide shot of the apartment interior showing unwashed dishes, closed curtains, and the
+    sheet-covered shape visible through a half-open door.
+  information_delta: Reader receives visible proof of decline in ordinary domestic upkeep, not just the
+    obsession's central object.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_008
+  page_id: ep_010_p01
+  story_function: anchor_reaches_for_the_covering
+  story_move: Shizuku reaches directly for the sheet, asking a plain question before pulling it back,
+    giving Ren one final moment before the full reveal.
+  visual_proof: Close insert on Shizuku's hand reaching for the edge of the sheet.
+  information_delta: Reader anticipates the reveal one beat ahead of it happening.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_009
+  page_id: ep_010_p01
+  story_function: sheet_pulled_back_full_reveal
+  story_move: The sheet comes off, revealing the full wall to another character for the first time in
+    the series, and Shizuku's reaction registers the scale immediately.
+  visual_proof: Wide shot of the fully revealed note-covered wall, Shizuku's face frozen in shock beside
+    it.
+  information_delta: Reader witnesses the case's full scope land on another character exactly as it
+    would on the reader — as genuinely alarming.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_010
+  page_id: ep_010_p01
+  story_function: fluent_excuse_fails_for_first_time
+  story_move: Ren searches for his usual explanation and cannot produce one, a genuine first-time failure
+    of the justification skill established across every earlier episode.
+  visual_proof: Close on Ren's face, mouth open, no words coming, markedly different from his composed
+    explanations in earlier episodes.
+  information_delta: Reader sees the protagonist's most reliable coping tool fail for the first time in
+    the series.
+  beat_role: recognition
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_011
+  page_id: ep_010_p01
+  story_function: anchor_reads_fragments_aloud
+  story_move: Shizuku moves toward the wall and begins reading its fragments while Ren's broken
+    explanation trails off, ending page one with the reveal actively unfolding rather than resolved.
+  visual_proof: Medium shot of Shizuku stepping toward the wall, eyes moving across the notes, while Ren
+    speaks unfinished sentences behind her.
+  information_delta: Reader is left mid-discovery at the page turn, the worst of the reveal still ahead.
+  beat_role: spiral_peak
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_012
+  page_id: ep_010_p02
+  story_function: anchor_finds_herself_on_the_wall
+  story_move: Shizuku's eyes stop on a section of the wall containing records of her own calls and words,
+    the episode's central discovery.
+  visual_proof: Close insert on a wall section showing annotated notes referencing Shizuku's own past
+    calls and phrases.
+  information_delta: Reader learns Ren's compulsion has extended to tracking his own sister, not just
+    the original anomaly.
+  beat_role: recognition
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_013
+  page_id: ep_010_p02
+  story_function: worry_turns_to_betrayal
+  story_move: Shizuku's voice shifts from shock to a shaking question about whether she was ever just his
+    sister or always evidence, marking the emotional turn from concern to betrayal.
+  visual_proof: Close on Shizuku's face, her earlier concern now visibly curdling into hurt.
+  information_delta: Reader hears the exact moment the anchor's worry becomes something closer to grief.
+  beat_role: recognition
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_014
+  page_id: ep_010_p02
+  story_function: sharpest_cost_line_of_the_arc
+  story_move: Shizuku delivers the arc's sharpest, most direct cost line, naming exactly what Ren did to
+    her concern without any softening.
+  visual_proof: Medium shot of Shizuku speaking directly and briefly, her posture rigid.
+  information_delta: Reader receives the single most damning line of dialogue in the arc so far.
+  beat_role: honest_landing
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_015
+  page_id: ep_010_p02
+  story_function: explanation_sounds_worse_spoken
+  story_move: Ren finally speaks, but hearing his own explanation out loud makes it sound worse than it
+    felt internally, a genuine moment of self-confrontation through speech.
+  visual_proof: Close on Ren's face, visibly hearing his own words land badly as he says them.
+  information_delta: Reader sees Ren register, in real time, that his justification does not survive
+    being spoken aloud.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_016
+  page_id: ep_010_p02
+  story_function: anchor_states_need_for_distance
+  story_move: Shizuku states her need for distance plainly, an honest rupture rather than a clean
+    resolution or dramatic exit line.
+  visual_proof: Medium shot of Shizuku stepping back, gathering her coat, her tone quieter than her
+    earlier anger.
+  information_delta: Reader receives the episode's central cost stated in its final, unambiguous form.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep010_017
+  page_id: ep_010_p02
+  story_function: anchor_walks_toward_the_door
+  story_move: Shizuku walks toward the door, physically enacting the distance she just named.
+  visual_proof: Medium shot of Shizuku moving toward the apartment's front door.
+  information_delta: Reader sees the stated need for distance immediately followed by physical action.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_018
+  page_id: ep_010_p02
+  story_function: ren_frozen_between_wall_and_sister
+  story_move: Ren stands frozen, physically caught between the direction of the wall and the direction of
+    his departing sister, unable to choose either.
+  visual_proof: Wide shot positioning Ren equidistant between the wall and the door, unmoving.
+  information_delta: Reader sees the arc's most painful visual expression of Ren's divided priorities.
+  beat_role: recognition
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_019
+  page_id: ep_010_p02
+  story_function: door_closes_silence_fills_room
+  story_move: The apartment door closes behind Shizuku, and silence fills the room in her absence.
+  visual_proof: Close insert on the closed front door, the apartment now visibly emptier without her.
+  information_delta: Reader registers the finality of her departure without any dialogue.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep010_020
+  page_id: ep_010_p02
+  story_function: mirror_and_wall_merge_into_recognition
+  story_move: The hallway mirror and the wall of notes appear together in Ren's view for the first time,
+    producing a genuine moment of clear self-recognition without claiming any cure.
+  visual_proof: Wide shot composed so Ren's reflection in the hallway mirror and the note-covered wall
+    occupy the same frame.
+  information_delta: Reader receives the episode's honest emotional peak — recognition, explicitly not
+    resolution — matching the craft bible's no-clean-answer requirement.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep010_021
+  page_id: ep_010_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    arc's final two episodes.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_010.yaml
+notes: 'Episode 10 of 12 in arc 1 (''obsession seed''). Realizes strategy_01''s beat 5 (the cost lands
+  on the anchor) at its highest intensity in the arc, converting the relationship cost implied since
+  episode two into an on-page rupture. Setting: the apartment from the strategy bank''s setting_pool,
+  reused from episodes 2 and 6, chosen so the mirror motif and the wall of notes (introduced in episode
+  9) can visually merge in the closing beat. This episode explicitly ends on recognition, not resolution
+  or cure, per this program''s acceptance-layer doctrine and the craft bible''s failure-mode 1 (never let
+  the protagonist become reliable about their own unreliability in caption) — the recognition is shown
+  through composition, not narrated as insight.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'

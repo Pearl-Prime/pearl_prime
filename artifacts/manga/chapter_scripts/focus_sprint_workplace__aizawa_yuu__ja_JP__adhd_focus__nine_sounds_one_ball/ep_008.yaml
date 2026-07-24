@@ -1,0 +1,680 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_008
+chapter_number: 8
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_008.arc_storyboard.yaml
+title: 静寂のフリースロー——第八話「鏡」
+title_en_gloss: 'Nine Sounds, One Ball — Episode 8: The Mirror'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: the coach of the unclenched
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+    - train_platform
+    - commuter_car
+    - conbini_receipt
+    - bento_shelf
+    - club_room
+    - shoe_locker
+    - line_chat
+    - vending_machine
+    - manga_app
+  market_guardrails:
+    - avoid_tourist_japan
+    - avoid_samurai_default_for_modern_scenes
+    - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+    - phone_as_social_pressure
+    - group_chat_status
+    - creator_or_streaming_identity
+    - gig_or_work_pressure
+    - transit_between_roles
+    - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings, team chats, finance/time pressure, and physical cost without letting analytics replace the body.
+  catalyst:
+    id: the_vending_machine_between_gyms
+    logline: Scouting the loser's-bracket route at a shared tournament venue, Hayato and Aya stop at a vending machine between gyms and watch Kiryuu Pharma's captain run the exact same free-throw routine nine times in a row without once missing or reacting.
+    ordinary_world_objects:
+      - vending_machine
+      - tournament_bracket_board
+      - warm_can_coffee
+      - opposing_practice_court
+    genre_transmutation: A vending machine break becomes an unplanned scouting report; a rival's flawless, emotionless routine becomes a mirror for the control Hayato doesn't have.
+    avoid:
+      - instant_cure
+      - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+      - high_concept_collision
+      - concrete_reader_world_anchor
+      - genre_engine_not_replaced_by_trend
+      - protagonist_desire_visible_in_scene
+      - social_or_system_pressure
+      - reversal_or_discovery_by_page_two
+      - market_localized_touchpoint
+      - no_generic_therapy_summary
+    flat_story_failure_modes:
+      - classic_genre_without_modern_entrypoint
+      - modern_object_as_name_drop_only
+      - protagonist_waits_for_lesson
+      - no_personal_stakes_before_lore
+      - no_social_cost
+      - no_specific_place_or_object
+      - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'the_vending_machine_between_gyms'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects and social pressure on page one; do not name-drop trends.
+
+main_characters:
+  - id: hayato
+    name: 神崎 隼人
+    name_romaji: Kanzaki Hayato
+    age: 23
+    role: 主人公。東雲商事バスケットボール部、新入社員。昨日の敗戦の記憶をまだ体に残している。
+    visual_anchor: 半分出したままのワイシャツの裾（今日は私服のスウェット）、指の関節をペンでなく缶コーヒーで叩く癖、足首に昨日からのテーピング。
+  - id: aya
+    name: 美濃部 彩
+    name_romaji: Minobe Aya
+    age: 25
+    role: チームの事実上のキャプテン兼マネージャー。隼人の職場の先輩でもある。スカウティングノートを常に持つ。
+    visual_anchor: 開いたままのスカウティングノート、まとめ髪、油断のない目。
+  - id: endou
+    name: 遠藤 岳
+    name_romaji: Endou Gaku
+    age: 34
+    role: チームのエース。無口で不機嫌に見えるが、誰よりもチームの生き残りにこだわる。
+    visual_anchor: がっしりした体格、腕組み、掲示板を睨む癖。
+  - id: ren
+    name: 桐生 蓮
+    name_romaji: Kiryuu Ren
+    age: 24
+    role: 桐生製薬バスケットボール部主将。今話で初登場するライバル。感情を見せない、完璧に制御されたフォーム。隼人の「散らばる集中」の鏡像——制御はあるが、感情がない。
+    visual_anchor: 無駄のない姿勢、常に同じリズムで弾むボール、汗をかいても表情が動かない顔。
+  - id: miyashita
+    name: 宮下
+    name_romaji: Miyashita
+    age: 24
+    role: 桐生製薬の控えメンバー。蓮の数少ない私的な一面に触れる、今話限りの脇役。
+    visual_anchor: 練習着の上から羽織ったジャージ、軽口を叩く口調。
+
+scene_palette:
+  primary: 体育館の白い蛍光灯 + フローリングのアンバー
+  secondary: 渡り廊下の事務的なグレーブルー
+  accent: 缶コーヒーのオレンジ（今話で初出、以後の巡回モチーフになりうる）
+  rival_court_palette: 桐生製薬側のコートだけ、意図的に冷たいブルーホワイトで塗る——東雲側の暖色と対比させ、「制御」対「散らばり」の温度差を色で示す。
+
+pages:
+  - page_id: ep_008_p01
+    panels:
+      - panel_id: ep008_001
+        scene: |
+          ワイド。大会本部を兼ねる区の総合体育館、外観。同日に複数の企業対抗リーグが
+          重なって開催されており、正面玄関の案内板には見慣れないチーム名がいくつも
+          並んでいる。東雲商事の面々が到着するが、初戦の朝にあった軽口はもうない。
+        beat_type: standard
+        silence_confirmed: true
+        intent: 会場全体を確立——敗者復活という新しい現実の中で始まる話数
+
+      - panel_id: ep008_002
+        scene: |
+          館内、渡り廊下の壁に据えられた大きな組み合わせ表（トーナメント表）のクローズ。
+          昨日の結果を反映して更新されたばかりで、東雲商事の名前は敗者復活ブロックの
+          列に赤いラインで移されている。
+        beat_type: spatial
+        intent: 具体物の提示——大会全体の地図が変わったことを視覚で見せる
+        narrator_caption_by_locale:
+          ja_JP: 組み合わせ表はもう更新されていた。彼らの名前は、この春ずっと目指してきた
+            場所より一段下にあった。
+          en_US: The bracket board had already been updated. Their name sat one line
+            lower than the one they'd trained all spring to reach — the loser's
+            bracket now, not the winner's side.
+          zh_TW: '[zh_TW] The bracket board had already been updated. Their name sat
+            one line lower than the one they''d trained all spring to reach — the
+            loser''s bracket now, not the winner''s side.'
+          zh_CN: '[zh_CN] The bracket board had already been updated. Their name sat
+            one line lower than the one they''d trained all spring to reach — the
+            loser''s bracket now, not the winner''s side.'
+
+      - panel_id: ep008_003
+        scene: |
+          クローズ。隼人の足首、昨日から巻いたままのテーピング。ソックスの上から
+          うっすらと内出血が透けている。体重をかけて一度、確かめるように踏む。
+        beat_type: micro
+        intent: 身体の代償——昨日のミスは物語らず、テープと痣だけで示す
+        narrator_caption_by_locale:
+          ja_JP: テープは持ちこたえていた。痛みの方は、持ちこたえていなかった。
+          en_US: The tape was holding. The pain wasn't. His ankle still carried a low,
+            steady pain from the way he'd planted wrong on yesterday's turnover.
+          zh_TW: '[zh_TW] The tape was holding. The pain wasn''t. His ankle still
+            carried a low, steady pain from the way he''d planted wrong on
+            yesterday''s turnover.'
+          zh_CN: '[zh_CN] The tape was holding. The pain wasn''t. His ankle still
+            carried a low, steady pain from the way he''d planted wrong on
+            yesterday''s turnover.'
+
+      - panel_id: ep008_004
+        scene: |
+          ミディアム。先を歩く遠藤、案内板と組み合わせ表を交互に睨みながら、
+          振り返らずに言う。彩は隼人の隣、スカウティングノートを開いたまま。
+        beat_type: standard
+        dialogue_lines:
+          - speaker: endou
+            text_by_locale:
+              ja_JP: 敗者復活からでも、上がれる。上がるしかない。
+              en_US: We can still climb out of the loser's bracket. There's no other
+                way up from here — the team doesn't get a second version of
+                yesterday.
+              zh_TW: '[zh_TW] We can still climb out of the loser''s bracket. There''s
+                no other way up from here — the team doesn''t get a second
+                version of yesterday.'
+              zh_CN: '[zh_CN] We can still climb out of the loser''s bracket. There''s
+                no other way up from here — the team doesn''t get a second
+                version of yesterday.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep008_005
+        scene: |
+          彩が隼人の顔をのぞきこむ。隼人は答えない——昨日の光景がまだ頭のどこかで
+          鳴っているような、うわの空の表情。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 隼人、聞いてる?
+              en_US: "Hayato. Are you even listening?"
+              zh_TW: '[zh_TW] Hayato. Are you even listening?'
+              zh_CN: '[zh_CN] Hayato. Are you even listening?'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+          - speaker: hayato_internal
+            text_by_locale:
+              ja_JP: 昨日の光景が、まだ頭の中で鳴ってる。
+              en_US: Yesterday is still playing on a loop in his head, and he can't
+                find the switch that turns it off.
+              zh_TW: '[zh_TW] Yesterday is still playing on a loop in his head, and
+                he can''t find the switch that turns it off.'
+              zh_CN: '[zh_CN] Yesterday is still playing on a loop in his head, and
+                he can''t find the switch that turns it off.'
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: bottom_left
+            font_override_by_locale:
+              ja_JP: italic_internal
+              en_US: italic_internal
+
+      - panel_id: ep008_006
+        scene: |
+          彩、スカウティングノートを軽く指で叩く。次に勝ち上がった時のために、
+          今のうちに他コートを見ておこうという、実務的な提案。
+        beat_type: standard
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 次、勝ち上がったら、どこと当たるか——先に見ておきたい。うちの
+                次の試合の前に、少し歩こう。
+              en_US: "If we keep winning from here, I want to know who our next rival
+                is. I want to see them before they see us — before our own
+                match starts."
+              zh_TW: '[zh_TW] If we keep winning from here, I want to know who our
+                next rival is. I want to see them before they see us — before
+                our own match starts.'
+              zh_CN: '[zh_CN] If we keep winning from here, I want to know who our
+                next rival is. I want to see them before they see us — before
+                our own match starts.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+  - page_id: ep_008_p02
+    panels:
+      - panel_id: ep008_007
+        scene: |
+          ワイド。二つの体育館をつなぐ渡り廊下。プロップで開けられたドアの隙間から、
+          別の会場の練習音——シューズの擦れる音、規則正しいボールの音——が漏れて
+          聞こえてくる。
+        beat_type: spatial
+        sfx_by_locale:
+          ja_JP: ["キュキュ...", "ドッ、ドッ..."]
+          en_US: ["squeak-squeak...", "thud, thud..."]
+        intent: 会場移動——別チームの気配を先に音だけで提示する
+
+      - panel_id: ep008_008
+        scene: |
+          クローズ。廊下の壁際で唸る自動販売機。売り切れのランプがいくつも点いている。
+          彩が足を止め、財布代わりのICカードを取り出す。
+        beat_type: standard
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 次のコートの前に、自販機で何か買っていこう。昨日の足、まだ死んで
+                るでしょ。
+              en_US: "Let's grab something from the vending machine before the next
+                gym. Your legs are still dead from yesterday, aren't they?"
+              zh_TW: '[zh_TW] Let''s grab something from the vending machine before
+                the next gym. Your legs are still dead from yesterday, aren''t
+                they?'
+              zh_CN: '[zh_CN] Let''s grab something from the vending machine before
+                the next gym. Your legs are still dead from yesterday, aren''t
+                they?'
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep008_009
+        scene: |
+          クローズ。取り出し口に落ちる缶コーヒー。隼人がそれを受け取るが、開けずに
+          ただ握っている。視線はもう別コートの方に向いている。
+        beat_type: micro
+        sfx_by_locale:
+          ja_JP: ["ゴトッ"]
+          en_US: ["thunk"]
+        narrator_caption_by_locale:
+          ja_JP: 缶は開ける前からもう温かかった。彼はコーヒーのことを考えていなかった。
+          en_US: The can was warm in his hand before he'd even opened it. He wasn't
+            thinking about the coffee. Something down the hallway had already
+            taken his attention.
+          zh_TW: '[zh_TW] The can was warm in his hand before he''d even opened it.
+            He wasn''t thinking about the coffee. Something down the hallway
+            had already taken his attention.'
+          zh_CN: '[zh_CN] The can was warm in his hand before he''d even opened it.
+            He wasn''t thinking about the coffee. Something down the hallway
+            had already taken his attention.'
+
+      - panel_id: ep008_010
+        scene: |
+          隼人と彩の主観に近いアングル。プロップで開けられた両開きの扉越しに、
+          隣の会場（Bコート）の練習風景が見える——一人の選手がフリースローライン
+          で単独練習をし、他の部員はその外側でドリルを回している。
+        beat_type: awe_pullback
+        intent: ライバルコートの初提示——蓮の存在をシルエットとリズムだけで先に見せる
+        narrator_caption_by_locale:
+          ja_JP: 両開きのドアの向こうに、別のチームの練習が漏れていた。一人だけ、
+            フリースローラインで黙々と反復している選手がいた。
+          en_US: Through the propped double doors, a rival team's practice bled into
+            the corridor — one player working the free-throw line alone while
+            the rest ran drills around him.
+          zh_TW: '[zh_TW] Through the propped double doors, a rival team''s practice
+            bled into the corridor — one player working the free-throw line
+            alone while the rest ran drills around him.'
+          zh_CN: '[zh_CN] Through the propped double doors, a rival team''s practice
+            bled into the corridor — one player working the free-throw line
+            alone while the rest ran drills around him.'
+
+      - panel_id: ep008_011
+        scene: |
+          ミディアム。ラインに立つ蓮のフォーム。無駄のない構え。ボールが手を離れ、
+          ネットだけを揺らして落ちる。誰も歓声を上げない——味方にとっても
+          当たり前の光景らしい。彩がユニフォームの胸の企業ロゴに気づく。
+        beat_type: standard
+        sfx_by_locale:
+          ja_JP: ["スパッ"]
+          en_US: ["swish"]
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 桐生製薬……去年の準優勝チーム。
+              en_US: "Kiryuu Pharma. Last year's runner-up."
+              zh_TW: '[zh_TW] Kiryuu Pharma. Last year''s runner-up.'
+              zh_CN: '[zh_CN] Kiryuu Pharma. Last year''s runner-up.'
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep008_012
+        scene: |
+          隼人の手元、開けていない缶コーヒーを持ったまま。視線は蓮のリズムに
+          固定されている。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: hayato_internal
+            text_by_locale:
+              ja_JP: 同じ場所に、毎回、同じ数だけ弾ませてる……崩れない。
+              en_US: Same spot. Same bounce count. Every single time. Nothing about
+                it ever breaks down.
+              zh_TW: '[zh_TW] Same spot. Same bounce count. Every single time.
+                Nothing about it ever breaks down.'
+              zh_CN: '[zh_CN] Same spot. Same bounce count. Every single time.
+                Nothing about it ever breaks down.'
+            intensity: internal
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_left
+            font_override_by_locale:
+              ja_JP: italic_internal
+              en_US: italic_internal
+
+  - page_id: ep_008_p03
+    panels:
+      - panel_id: ep008_013
+        scene: |
+          インサートの連続コマ（一コマ内でモンタージュ的に処理）。蓮が同じフォームで
+          何度も投げ続ける様子——1本目、2本目……と数が積み重なっていく。壁際で
+          控えの宮下がタオルを片手に数を読み上げている。
+        beat_type: spatial
+        dialogue_lines:
+          - speaker: miyashita
+            text_by_locale:
+              ja_JP: 9本目、いくぞ。
+              en_US: "Ninth shot. Here it comes."
+              zh_TW: '[zh_TW] Ninth shot. Here it comes.'
+              zh_CN: '[zh_CN] Ninth shot. Here it comes.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep008_014
+        scene: |
+          ワイド。9本目、同じフォーム、同じリリース。ネットが揺れる。ガッツポーズも、
+          息を吐く仕草もない。蓮はもう振り返って次のドリルへ小走りに戻っている。
+        beat_type: standard
+        sfx_by_locale:
+          ja_JP: ["スパッ"]
+          en_US: ["swish"]
+
+      - panel_id: ep008_015
+        scene: |
+          クローズ・インサート。リリースの一瞬前、蓮の指先が縫い目を握る力が、
+          1本目から8本目までよりもわずかに強い。ほんの一コマだけの違和感。
+        beat_type: micro
+        intent: 制御の中の小さなひび——身体だけが一瞬だけ何かを漏らす
+        narrator_caption_by_locale:
+          ja_JP: リリースの一瞬前、指先が縫い目を握る力が、1本目のときより少しだけ
+            強かった。次の瞬間には、もうボールは空中にあった。
+          en_US: For a fraction of a second before the release, his fingers gripped
+            the seams tighter than they had on shot one. Then it was gone, and
+            the ball was already in the air.
+          zh_TW: '[zh_TW] For a fraction of a second before the release, his fingers
+            gripped the seams tighter than they had on shot one. Then it was
+            gone, and the ball was already in the air.'
+          zh_CN: '[zh_CN] For a fraction of a second before the release, his fingers
+            gripped the seams tighter than they had on shot one. Then it was
+            gone, and the ball was already in the air.'
+
+      - panel_id: ep008_016
+        scene: |
+          宮下が笑いながらボールを拾いに走り、蓮とすれ違いざまに軽口を叩く。
+        beat_type: standard
+        dialogue_lines:
+          - speaker: miyashita
+            text_by_locale:
+              ja_JP: お前の親父さん、また来てるぞ。二階の隅。
+              en_US: "Your old man's here again. Corner of the upper deck."
+              zh_TW: '[zh_TW] Your old man''s here again. Corner of the upper deck.'
+              zh_CN: '[zh_CN] Your old man''s here again. Corner of the upper deck.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      - panel_id: ep008_017
+        scene: |
+          クローズ。蓮の視線が一コマだけ、二階の観客席の隅に流れる。グレーのスーツを
+          着た男が一人、腕を組んで動かずに座っている。蓮はすぐに視線を戻し、
+          次のボールに手を伸ばす。
+        beat_type: micro
+        intent: 人間味の一瞬——制御の裏にある重さを、台詞なしで見せる
+        narrator_caption_by_locale:
+          ja_JP: 灰色のスーツの男が一人、二階の隅に座っていた。腕を組んだまま、
+            動かない。蓮の方が先に目をそらした。
+          en_US: A man in a gray suit sat alone in the upper section, arms crossed,
+            unmoving. Ren looked away first.
+          zh_TW: '[zh_TW] A man in a gray suit sat alone in the upper section, arms
+            crossed, unmoving. Ren looked away first.'
+          zh_CN: '[zh_CN] A man in a gray suit sat alone in the upper section, arms
+            crossed, unmoving. Ren looked away first.'
+
+      - panel_id: ep008_018
+        scene: |
+          ワイド。ラインに戻る蓮。呼吸は既に平常に戻り、ひびは見えなくなっている。
+          数はまた1本目からリセットされる。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: 10本目には、もう何事もなかったことになっていた。数はまた1から
+            始まる。
+          en_US: By the tenth ball he was already back to exactly nothing. The count
+            started again at one, as controlled as it had ever been.
+          zh_TW: '[zh_TW] By the tenth ball he was already back to exactly nothing.
+            The count started again at one, as controlled as it had ever
+            been.'
+          zh_CN: '[zh_CN] By the tenth ball he was already back to exactly nothing.
+            The count started again at one, as controlled as it had ever
+            been.'
+
+  - page_id: ep_008_p04
+    panels:
+      - panel_id: ep008_019
+        scene: |
+          場面戻り。廊下の戸口に立つ隼人と彩。隼人はようやく缶コーヒーのタブを
+          開け、一口飲む。二人ともしばらく無言。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: hayato
+            text_by_locale:
+              ja_JP: あれと、当たるのか……勝ち上がったら。
+              en_US: "That's who we'd play. If we make it that far."
+              zh_TW: '[zh_TW] That''s who we''d play. If we make it that far.'
+              zh_CN: '[zh_CN] That''s who we''d play. If we make it that far.'
+            intensity: quiet
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      - panel_id: ep008_020
+        scene: |
+          彩、スカウティングノートを閉じる。何も書かなかった——戦術的に狙える
+          隙が、見当たらなかったから。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 隙が見えない。あの子には、狙うところがない。
+              en_US: "There's no crack in it. Nothing to aim for."
+              zh_TW: '[zh_TW] There''s no crack in it. Nothing to aim for.'
+              zh_CN: '[zh_CN] There''s no crack in it. Nothing to aim for.'
+            intensity: normal
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep008_021
+        scene: |
+          遠藤が追いつき、開いたドア越しに桐生製薬のユニフォームとスコアボード
+          脇の横断幕を見る——「優勝候補」の文字。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: スコアボードの脇の横断幕には、すでに「桐生製薬・優勝候補」の
+            文字があった。
+          en_US: A banner near the scoreboard already listed Kiryuu Pharma as the
+            favorite to win the whole bracket.
+          zh_TW: '[zh_TW] A banner near the scoreboard already listed Kiryuu Pharma
+            as the favorite to win the whole bracket.'
+          zh_CN: '[zh_CN] A banner near the scoreboard already listed Kiryuu Pharma
+            as the favorite to win the whole bracket.'
+        dialogue_lines:
+          - speaker: endou
+            text_by_locale:
+              ja_JP: 化け物だな、あれは。
+              en_US: "That's a monster, right there."
+              zh_TW: '[zh_TW] That''s a monster, right there.'
+              zh_CN: '[zh_CN] That''s a monster, right there.'
+            intensity: low
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep008_022
+        scene: |
+          クローズ。缶を持っていない方の隼人の手が、無意識に一度、固く握られる。
+          蓮の指先がボールの縫い目を握った、あの一瞬とよく似た動きだが——
+          隼人の手はそのまま、小さく震え続けている。
+        beat_type: micro
+        intent: 直接の身体的ミラー——同じ仕草が正反対の結果を見せる
+        narrator_caption_by_locale:
+          ja_JP: 隼人の手も、蓮の指先と同じように一度、固く丸まった。何もつかんで
+            いない、ただの反射だった。震えの方は、止まらなかった。
+          en_US: His own hand curled the same way Kiryuu's fingers had — around
+            nothing, just a reflex. His didn't stop shaking.
+          zh_TW: '[zh_TW] His own hand curled the same way Kiryuu''s fingers had —
+            around nothing, just a reflex. His didn''t stop shaking.'
+          zh_CN: '[zh_CN] His own hand curled the same way Kiryuu''s fingers had —
+            around nothing, just a reflex. His didn''t stop shaking.'
+
+      - panel_id: ep008_023
+        scene: |
+          彩が隼人の手にちらりと気づくが、何も言わない。ただノートを閉じて
+          肩を軽く押し、廊下の先を促す。
+        beat_type: micro
+        dialogue_lines:
+          - speaker: aya
+            text_by_locale:
+              ja_JP: 行くよ。次の会場、うちの試合、もうすぐ。
+              en_US: "Come on. Our match is coming up. Let's move."
+              zh_TW: '[zh_TW] Come on. Our match is coming up. Let''s move.'
+              zh_CN: '[zh_CN] Come on. Our match is coming up. Let''s move.'
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+  - page_id: ep_008_p05
+    panels:
+      - panel_id: ep008_024
+        scene: |
+          ワイド。自分たちのコートへ戻る廊下。途中でもう一度、組み合わせ表の前を
+          通り過ぎる。東雲商事の列と、数ブロック離れた場所にある桐生製薬の列——
+          まだ交わらない、別々の道筋。
+        beat_type: spatial
+        narrator_caption_by_locale:
+          ja_JP: 同じ表の中に、二つの名前があった。まだ何ブロックか離れている。
+            今はそれだけが、唯一の猶予だった。
+          en_US: Two names on the same board, still several rounds apart. For now,
+            that was the only mercy the tournament offered.
+          zh_TW: '[zh_TW] Two names on the same board, still several rounds apart.
+            For now, that was the only mercy the tournament offered.'
+          zh_CN: '[zh_CN] Two names on the same board, still several rounds apart.
+            For now, that was the only mercy the tournament offered.'
+
+      - panel_id: ep008_025
+        scene: |
+          クローズ。隼人の手の中で、飲み終えた缶コーヒーの縁が少しへこんでいる。
+          気づかないうちに握りしめていたらしい。リサイクルボックスに投げ入れる。
+        beat_type: micro
+        narrator_caption_by_locale:
+          ja_JP: 缶の縁がへこんでいることに、投げ入れる直前まで気づかなかった。
+          en_US: He hadn't noticed his own hand crushing the can until it was already
+            dented at the rim.
+          zh_TW: '[zh_TW] He hadn''t noticed his own hand crushing the can until it
+            was already dented at the rim.'
+          zh_CN: '[zh_CN] He hadn''t noticed his own hand crushing the can until it
+            was already dented at the rim.'
+
+      - panel_id: ep008_026
+        scene: |
+          最終コマ。自分たちのコートの入口で一度だけ足を止め、隼人が振り返る。
+          廊下の奥、桐生製薬の練習の音——弾む、スパッ、弾む、スパッ——がまだ
+          途切れずに続いている。前方からは、チームメイトが彼の名前を呼ぶ声。
+        beat_type: standard
+        narrator_caption_by_locale:
+          ja_JP: 背後では、同じリズムが誰にも見られないまま続いていた。前方では、
+            もう自分のチームが彼の名前を呼んでいた。
+          en_US: Behind him, the same rhythm kept going, untouched by anyone watching.
+            Ahead of him, his own team was already calling his name.
+          zh_TW: '[zh_TW] Behind him, the same rhythm kept going, untouched by anyone
+            watching. Ahead of him, his own team was already calling his
+            name.'
+          zh_CN: '[zh_CN] Behind him, the same rhythm kept going, untouched by anyone
+            watching. Ahead of him, his own team was already calling his
+            name.'
+
+notes:
+  arc_position: |
+    Episode 8 of 12 — the rival-introduction beat per the arc-1 assignment
+    matrix. Follows directly from ep_007's first qualifier loss (a mistake
+    that was unmistakably Hayato's; Shinonome is now in the loser's bracket).
+    This episode plays no game — it is a scouting/observation chapter,
+    structurally the calm-before-friction beat that sets up ep_009's team
+    doubt. Kiryuu Ren is introduced here as the strategy bank's mirror-rival:
+    control without feeling, the inverse of Hayato's feeling without
+    control. Per the sports-competition craft bible ("the best rivals become
+    mirrors: they have solved the protagonist's current flaw") and the
+    anti-pattern rules in sports_competition_strategies.yaml (no coach
+    explains the lesson; no scoreboard resolves anything — there is,
+    deliberately, no scoreboard in play this chapter at all).
+  pacing_vs_prior: |
+    26 panels across 5 pages — slightly denser than a pure off-game chapter
+    because it carries two parallel physical throughlines (Hayato's taped
+    ankle and unconscious hand-clench; Ren's repeated free-throw count) that
+    both need panel-level room to read as bodies, not summary. No match is
+    played this episode; the tension is entirely observational, which is
+    itself the escalation after ep_007's crowd-noise/scoreboard overload —
+    a controlled quiet chapter between two loud ones.
+  continuity_callbacks: |
+    - Hayato's taped ankle (panel 3) is the direct physical residue of
+      ep_007's turnover — body cost carried forward, never narrated as
+      guilt, only shown as tape and a low ache.
+    - The can-of-coffee motif (panels 9, 12, 19, 22, 25) is introduced fresh
+      this episode as a small object Hayato handles without noticing,
+      tracking his unconscious tension across the whole chapter, ending on
+      the dented rim in panel 25 — planted for possible reuse in later
+      episodes as a body-tell parallel to Kuroda's towel-holding gesture
+      established in ep_003.
+    - Aya's scouting notebook (panels 4, 6, 20, 23) stays a working prop,
+      not a montage device — she closes it having written nothing, because
+      the flaw she was hunting for tactically isn't visible from the stands.
+    - The bracket board (panels 2, 24) opens and closes the episode, framing
+      the whole chapter between two readings of the same board — one
+      confirming the loss, one confirming the two teams are not yet forced
+      to meet.
+  doctrinal_anchor_vessel_handling: |
+    Kuroda does not appear this episode — the vessel is off-page by design;
+    this chapter externalizes the "one ball at the line" throughline through
+    a RIVAL's version of the routine instead of the mentor's. Per the genre
+    strategy bank's anti-pattern rule, no one explains what Hayato is
+    watching or what it means for him; Aya's assessment ("there's no crack
+    in it") is tactical and, notably, wrong about the one crack that exists
+    — the reader is trusted to hold information neither point-of-view
+    character has. Ren is deliberately not written as a villain: panel 15
+    (the tightened grip before shot nine) and panels 16-17 (Miyashita's line
+    about Ren's father in the stands, and Ren's one-panel glance away) are
+    the required single humanizing beat, delivered entirely through gesture
+    and a supporting character's aside — never through Ren's own interior
+    monologue and never explained by anyone on either team. The scoreboard
+    itself never appears in this chapter; per the anti-pattern rules, the
+    only "score" tracked this episode is Ren's free-throw count, which
+    resets to one every ten shots and proves nothing about Hayato's own
+    arc — deliberately withheld until ep_010/ep_011.
+  translation_handoff: |
+    ja_JP is authoritative and native-authored (not translated from a prior
+    English draft). en_US carries full, natural operator-review translations
+    for every dialogue_lines and narrator_caption_by_locale entry (not a
+    thin gloss). zh_TW and zh_CN carry bracket-tagged placeholders that
+    reuse the en_US line verbatim, per the established
+    heart_balance_shojo/career_lift_workplace convention, pending a
+    dedicated CJK localization pass.
