@@ -1,0 +1,109 @@
+# genre_craft_checklists.yaml — compiled, machine-readable per-genre craft checklists.
+#
+# WHY THIS FILE EXISTS: the craft bibles (docs/research/manga_craft/*.md) held the
+# genre wisdom as prose, but the authoring + gate path never checked against it (the
+# operator's core complaint). This file distils each bible into testable one-liners
+# that are consumed at authoring time (Editor pass) AND enforced at gate time
+# (phoenix_v4/manga/story_quality/excellence_gate.py :: _check_genre_craft / GATE_CRAFT).
+# NEW-ARTIFACT-JUSTIFIED: no prior machine checklist existed. Registry row:
+# artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv (genre_craft_checklists).
+#
+# KEY-SPACE (stable): the top-level `genres:` keys are exactly the 25 canonical genre
+# ids of config/manga/canonical_genre_list.yaml == story_excellence_gates.yaml::
+# genre_core_evidence == mc_endurance_checklists.yaml::families. Keep all four aligned.
+#
+# SCHEMA (per genre block):
+#   <canonical_genre_id>:
+#     bible: docs/research/manga_craft/<slug>.md      # the source bible (must exist)
+#     story_elements_must:    # bible §1/§3/§6 distilled — MC/story fails without these
+#       - item: "<one testable sentence>"
+#         source: "docs/research/manga_craft/<slug>.md#<section-number>"   # must resolve
+#         evidence_any: [kw, ...]   # on-page evidence tokens; >=1 hit == item covered
+#     story_elements_should:  # strong-default expectations (scored soft, advisory)
+#       - {item, source, evidence_any}
+#     mc_items:               # REFERENCE to mc_endurance_checklists.yaml — never restated
+#       family: <canonical_genre_id>
+#       lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+#     dialogue_rules:         # bible §4 — for the writer + Editor pass
+#       - {item, source}
+#     panel_grammar_items:    # bible §2/§8 — for the storyboarder (advisory sub-check)
+#       - item: "<sentence>"
+#         source: "..."
+#         storyboard_signal_any: [kw, ...]   # tokens the storyboard YAML should show
+#     failure_modes:          # bible §6 anti-patterns — presence == defect (hard lint)
+#       - item: "<sentence>"
+#         source: "..."
+#         signal_any: [defect_phrase, ...]   # >=1 hit on the page BLOCKS GATE_CRAFT
+#
+# ENFORCEMENT (excellence_gate._check_genre_craft, hard-blocking + unweighted):
+#   * any failure_modes.signal_any present on the page  -> BLOCK (defect present)
+#   * < story_excellence_gates.yaml::genre_craft.must_coverage_floor of
+#     story_elements_must covered by evidence_any        -> BLOCK (uncovered must-items)
+#   * endurance_mechanics are NEVER hard-gated (100+-episode signature; completion-first
+#     genres legitimately lack them). Per-family failure cadence is a genre SIGNATURE,
+#     not a global "MC must fail every N" rule. (MC-endurance study, cross-family synthesis.)
+#
+# Editor pass: docs/specs/MANGA_STORY_EXCELLENCE_REALIZATION_GATE_SPEC.md §"Editor pass"
+# defines the human QA read that uses this SAME file (per-item verdict lines). Lane 08's
+# manga-editor skill binds to that section.
+
+schema_version: "1.0"
+last_updated: "2026-07-24"
+source_bibles_dir: docs/research/manga_craft
+mc_endurance_file: config/manga/mc_endurance_checklists.yaml
+
+genres:
+
+  # ── SMOKE (Lane 07 stage 1) ─────────────────────────────────────────────
+  supernatural_everyday:
+    bible: docs/research/manga_craft/supernatural_mystery.md
+    story_elements_must:
+      - item: "Each episode opens on the trace/sign of the encounter (an object out of place, a sound from an empty room), never on the spirit itself."
+        source: "docs/research/manga_craft/supernatural_mystery.md#3"
+        evidence_any: ["out of place", "empty room", "trace", "sign", "left behind", "shouldn't be", "should not be", "object", "sound from", "who should not"]
+      - item: "Every case resolves as bittersweet release — peace and loss together — never a clean rescue or total despair."
+        source: "docs/research/manga_craft/supernatural_mystery.md#3"
+        evidence_any: ["fade", "faded", "gone", "release", "let go", "farewell", "bittersweet", "empty house", "left with", "watches them", "passing"]
+      - item: "Each spirit carries one specific named human wound (grief, unspoken apology, generational obligation), not generic 'unfinished business'."
+        source: "docs/research/manga_craft/supernatural_mystery.md#6"
+        evidence_any: ["grief", "wound", "apology", "regret", "mother", "father", "unfinished", "unspoken", "memory", "obligation", "waited", "forty years"]
+      - item: "A mandatory aftermath beat follows spirit departure: the protagonist alone, processing the residue."
+        source: "docs/research/manga_craft/supernatural_mystery.md#3"
+        evidence_any: ["alone", "afterward", "aftermath", "empty", "quiet", "stands", "left", "residue", "the room is"]
+    story_elements_should:
+      - item: "The protagonist perceives the spirit world at a personal, often somatic, cost (accumulating residue, strained human bonds)."
+        source: "docs/research/manga_craft/supernatural_mystery.md#5"
+        evidence_any: ["cost", "residue", "chest", "body", "isolat", "strain", "toll", "heavier than", "alone among"]
+      - item: "Scene transitions ride threshold imagery — torii, mist, still water, genkan doorway — as tonal boundary markers."
+        source: "docs/research/manga_craft/supernatural_mystery.md#3"
+        evidence_any: ["torii", "mist", "fog", "threshold", "still water", "lantern", "shrine", "doorway", "genkan"]
+    mc_items:
+      family: supernatural_everyday
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Spirit speech is off-register/archaic, fragmentary, and asks rather than explains ('The box. Under the floor.')."
+        source: "docs/research/manga_craft/supernatural_mystery.md#4"
+      - item: "Protagonist captions are somatic/observational, never emotion-labels — 'my chest contracted' not 'I was afraid'."
+        source: "docs/research/manga_craft/supernatural_mystery.md#4"
+      - item: "Human characters speak in a measured adult josei register; no slang, no exclamation-driven cadence."
+        source: "docs/research/manga_craft/supernatural_mystery.md#4"
+    panel_grammar_items:
+      - item: "Silent panels are >=28% of the chapter; consecutive non-silent panels stay <=5 (silence is the medium of spirit presence)."
+        source: "docs/research/manga_craft/supernatural_mystery.md#8"
+        storyboard_signal_any: ["silence", "silent", "wordless", "no dialogue", "atmospheric_breath", "silence_flag"]
+      - item: "Spirit-present panels use spirit-register treatment (fog screentone layer, soft/ragged-edge bubble, heavier brush line)."
+        source: "docs/research/manga_craft/supernatural_mystery.md#8"
+        storyboard_signal_any: ["spirit", "fog", "screentone", "soft-edge", "threshold-shot", "spirit_present"]
+      - item: "Every panel carries a beat_role along the encounter cadence: sign -> investigation -> encounter -> negotiation/ritual -> release -> aftermath."
+        source: "docs/research/manga_craft/supernatural_mystery.md#8"
+        storyboard_signal_any: ["encounter_sign", "investigation", "ritual", "release", "aftermath", "negotiation", "beat_role"]
+    failure_modes:
+      - item: "Over-exposed supernatural rulebook — named power tiers / a codified spirit taxonomy — collapses the contemplative register into a shonen power system."
+        source: "docs/research/manga_craft/supernatural_mystery.md#6"
+        signal_any: ["power level", "power-up", "power up", "tier list", "rank up", "power system", "level up", "stat block"]
+      - item: "Horror-register contamination — the spirit as a physical threat, jump-scare, or body horror. Spirits are sad, not dangerous."
+        source: "docs/research/manga_craft/supernatural_mystery.md#6"
+        signal_any: ["jump scare", "jump-scare", "body horror", "gore", "lunges at", "monster attack", "chases her down"]
+      - item: "Escalating exorcism combat converts the family into battle genre."
+        source: "docs/research/manga_craft/supernatural_mystery.md#6"
+        signal_any: ["exorcism combat", "spirit battle", "banish it with force", "fights the spirit", "final boss"]
