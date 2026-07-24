@@ -1,0 +1,264 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_007
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 7: An Ordinary Answer'
+logline: A lost-and-found EasyCard theory finally gives Yaqing the gentle, ordinary explanation she wants,
+  while Zhou independently uncovers an old note of his own that quietly contradicts it.
+stakes_now: Yaqing's relief depends on not reading the one ledger annotation that could undo her new theory.
+stakes_end: Yaqing has closed her notebook and repaired ground with her sister, but Zhou now holds contradicting
+  evidence of his own that she does not yet know exists.
+genre_cadence:
+- lost_and_found_ledger_review
+- matching_card_number_found
+- relief_theory_forms
+- sympathetic_explanation_imagined
+- ibon_copy_printed_relaxed
+- platform_light_warms
+- message_to_sister_repair_offered
+- ledger_closing_pause
+- unread_margin_note_glimpsed
+- closed_without_reading_note
+- breakroom_early_arrival
+- vessel_notices_the_change
+- yaqing_states_the_answer
+- vessel_withholds_agreement
+- notebook_closed_no_new_notes
+- yaqing_leaves_on_time
+- vessel_reviews_own_old_notes
+- old_note_contradicts_theory
+- vessel_photographs_the_page
+- closing_vessel_alone_hold
+page_turn_promises:
+- page_id: ep_007_p01
+  promise: Is the lost-card explanation the real answer, or just the one Yaqing wants badly enough to
+    stop reading the margin note?
+- page_id: ep_007_p02
+  promise: Will Zhou's own contradicting record reach Yaqing before her relief hardens into a closed case?
+panels:
+- panel_id: ep007_001
+  page_id: ep_007_p01
+  story_function: lost_and_found_ledger_review
+  story_move: Yaqing reviews the station's lost-and-found ledger during a gap in her rescheduled shift.
+  visual_proof: Wide shot of Yaqing at a station office desk, a thick, rarely-opened ledger in front of
+    her.
+  information_delta: Reader learns Yaqing has widened her search to a new institutional record source.
+  beat_role: evidence_detail
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_002
+  page_id: ep_007_p01
+  story_function: matching_card_number_found
+  story_move: Yaqing finds an unclaimed EasyCard number matching two of the anomaly's supplemental records.
+  visual_proof: Close insert on Yaqing's finger stopped on a ledger line, a card number circled.
+  information_delta: Reader learns of a concrete lead pointing toward an ordinary, non-sinister explanation.
+  beat_role: evidence_detail
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_003
+  page_id: ep_007_p01
+  story_function: relief_theory_forms
+  story_move: 'Yaqing forms a relieved, gentler theory: a lost card, reused, not deliberate evasion.'
+  visual_proof: Medium shot, Yaqing's expression loosening into something close to relief rather than
+    focus.
+  information_delta: Reader hears the episode's false-relief theory stated for the first time all season.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_004
+  page_id: ep_007_p01
+  story_function: sympathetic_explanation_imagined
+  story_move: Yaqing imagines a sympathetic, ordinary image replacing her darker earlier suspicions.
+  visual_proof: Insert imagining a station underpass corner, a plausible mundane scenario rendered softly.
+  information_delta: Reader sees the emotional shift from suspicion to sympathy driving her acceptance.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_005
+  page_id: ep_007_p01
+  story_function: ibon_copy_printed_relaxed
+  story_move: Yaqing prints a copy of the ledger entry at a 7-Eleven iBon kiosk, her posture visibly relaxed.
+  visual_proof: Insert on an iBon kiosk printing a copy, Yaqing's shoulders loose rather than tense.
+  information_delta: Reader sees the episode's tonal shift made physical through relaxed body language.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_006
+  page_id: ep_007_p01
+  story_function: platform_light_warms
+  story_move: The platform lighting reads warmer to Yaqing for the first time, replacing the usual cold
+    white.
+  visual_proof: Wide shot of the platform bathed in warmer light than the series' established cold palette.
+  information_delta: Reader receives the episode's deliberate, temporary tonal warming per genre false-relief
+    convention.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_007
+  page_id: ep_007_p01
+  story_function: message_to_sister_repair_offered
+  story_move: Yaqing texts her sister a genuine offer to make up the missed pickup, tone visibly lighter.
+  visual_proof: Insert on a text message being sent, warm tone visible in the phrasing.
+  information_delta: Reader sees Yaqing attempting real repair with her sister for the first time this
+    arc.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_008
+  page_id: ep_007_p01
+  story_function: ledger_closing_pause
+  story_move: Yaqing reopens the ledger to file her copies and pauses on a particular page.
+  visual_proof: Medium insert on Yaqing's hand pausing mid-page while closing the ledger.
+  information_delta: Reader senses a hesitation the reader cannot yet fully explain.
+  beat_role: unreliable_flag
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_009
+  page_id: ep_007_p01
+  story_function: unread_margin_note_glimpsed
+  story_move: A staff annotation beside the card's blank claim field goes unread by Yaqing, visible only
+    to the reader.
+  visual_proof: Extreme close insert on a small handwritten note in the ledger margin, in focus for the
+    reader only.
+  information_delta: Reader receives privileged contradicting evidence Yaqing has not registered.
+  beat_role: unreliable_flag
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_010
+  page_id: ep_007_p01
+  story_function: closed_without_reading_note
+  story_move: Yaqing closes the ledger satisfied, never having read the contradicting margin note.
+  visual_proof: Wide shot of the ledger closing, Yaqing's satisfied expression as the page disappears
+    from view.
+  information_delta: Reader closes the page knowing the relief is built on an incomplete reading.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_011
+  page_id: ep_007_p02
+  story_function: breakroom_early_arrival
+  story_move: Yaqing arrives early to the breakroom for once, tea in hand, visibly at ease.
+  visual_proof: Wide breakroom shot, Yaqing seated with tea, posture relaxed rather than hunched over
+    notes.
+  information_delta: Reader sees a concrete behavioral change from the relief — early arrival, no notebook.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_012
+  page_id: ep_007_p02
+  story_function: vessel_notices_the_change
+  story_move: Zhou notices the visible change in Yaqing and remarks on it directly.
+  visual_proof: Medium two-shot, Zhou's slightly surprised expression taking in her relaxed posture.
+  information_delta: Reader sees the change register with the one person who tracks her state closely.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_013
+  page_id: ep_007_p02
+  story_function: yaqing_states_the_answer
+  story_move: Yaqing shares her lost-card theory with visible relief, smiling for the first time this
+    arc.
+  visual_proof: Close insert on Yaqing's genuine, relaxed smile as she explains the theory.
+  information_delta: Reader hears Yaqing state the false-relief theory aloud to another person.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep007_014
+  page_id: ep_007_p02
+  story_function: vessel_withholds_agreement
+  story_move: Zhou listens without agreeing, a small reservation crossing his face that Yaqing does not
+    catch.
+  visual_proof: Close insert on Zhou's face, listening carefully, a flicker of doubt Yaqing misses.
+  information_delta: Reader sees a contradiction planted between Zhou's reaction and Yaqing's certainty.
+  beat_role: unreliable_flag
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_015
+  page_id: ep_007_p02
+  story_function: notebook_closed_no_new_notes
+  story_move: Yaqing's notebook stays closed for the first time this arc, no new annotation added.
+  visual_proof: Insert on Yaqing's closed notebook sitting untouched on the breakroom table.
+  information_delta: Reader gets concrete visual proof the spiral has paused, at least for this evening.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_016
+  page_id: ep_007_p02
+  story_function: yaqing_leaves_on_time
+  story_move: Yaqing leaves for the day exactly on schedule, her steps lighter than in previous episodes.
+  visual_proof: Wide shot of Yaqing walking out through the OCC entrance at a normal, unhurried pace.
+  information_delta: Reader sees a full behavioral reversal from the overtime pattern established earlier.
+  beat_role: false_relief
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_017
+  page_id: ep_007_p02
+  story_function: vessel_reviews_own_old_notes
+  story_move: Alone, Zhou pulls up years of his own private handover notes on his phone.
+  visual_proof: Medium shot of Zhou alone in the breakroom, scrolling through an old personal notes app.
+  information_delta: Reader sees the vessel begin independent investigation, unseen by the protagonist.
+  beat_role: teaching_recall
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_018
+  page_id: ep_007_p02
+  story_function: old_note_contradicts_theory
+  story_move: Zhou finds an old, nearly forgotten note of his own that contradicts Yaqing's lost-card
+    theory.
+  visual_proof: Close insert on Zhou's phone screen, an old handwritten-style note visibly at odds with
+    the ledger.
+  information_delta: Reader receives a second piece of privileged contradicting evidence, now in Zhou's
+    hands.
+  beat_role: unreliable_flag
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep007_019
+  page_id: ep_007_p02
+  story_function: vessel_photographs_the_page
+  story_move: Zhou's expression turns serious; he photographs the note instead of calling Yaqing immediately.
+  visual_proof: Close insert on Zhou's face hardening, his phone camera aimed at the old note.
+  information_delta: Reader sees Zhou choosing to verify before alarming Yaqing, raising tension for next
+    episode.
+  beat_role: teaching_recall
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep007_020
+  page_id: ep_007_p02
+  story_function: closing_vessel_alone_hold
+  story_move: Zhou sits alone in the half-lit breakroom as Yaqing's scooter is heard leaving outside.
+  visual_proof: Wide pull-back of Zhou alone at the table, half the breakroom lights off, window showing
+    the lot outside.
+  information_delta: Reader closes the episode knowing the false relief is about to be tested by evidence
+    Yaqing hasn't seen.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_007.yaml
+notes: Arc 1 (obsession seed), episode 7 of 12 — the arc's single false_relief episode per genre craft
+  bible pacing (docs/research/manga_craft/psychological_thriller.md §3), immediately destabilized at the
+  close and due to collapse in ep_008. English craft-planning metadata only; authoritative story is zh_TW
+  in ep_007.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate.'
