@@ -2,6 +2,13 @@
 
 Renders via ComfyUI split-file Qwen graph (no PuLID — bank L0/L2/L3 layers).
 Spec: MANGA_GENRE_PROMPTING_SYSTEM_RESEARCH_2026-07-10; prompt-builder v3 Qwen-primary.
+
+Wave-2 Item 2 (2026-07-22): step count and negative-prompt CJK-character
+exclusion synced to the reference no-PuLID workflow
+(scripts/image_generation/comfyui_workflows/qwen_image_no_pulid_manga.json —
+KSampler steps=28, cfg=4.0) plus a byte-floor blob-gate on the landed PNG
+(the render-progress-bytes doctrine in CLAUDE.md, applied at the worker level
+so a corrupt/stub ComfyUI output fails the task instead of landing silently).
 """
 
 from __future__ import annotations
@@ -26,9 +33,23 @@ STALL_KILL_S = 600.0
 EXPECTED_TOTAL_S = 120.0
 DEFAULT_W, DEFAULT_H = 1080, 1920
 
+# Blob-gate floor (bytes): a landed PNG smaller than this is treated as a
+# corrupt/stub ComfyUI output, not a real panel render (CLAUDE.md manga
+# doctrine: "stub-as-done" — a render marked ok/done with bytes < floor must
+# not pass silently). Mirrors the CI-side check_render_progress_bytes.py floor.
+MIN_PNG_BYTES = 50_000
+
+# Steps/cfg synced to the reference no-PuLID workflow (Wave-2 Item 2,
+# 2026-07-22): scripts/image_generation/comfyui_workflows/qwen_image_no_pulid_manga.json
+# KSampler node "5" — steps=28, cfg=4.0 (was steps=24 here; 24 predates the
+# reference JSON and undercounted denoising steps vs the shipped graph).
+STEPS = 28
+CFG = 4.0
+
 _NEG_SUFFIX = (
     "text, words, letters, captions, watermark, signature, signs, writing, "
-    "typography, text characters, font, lettering, logos, subtitles, calligraphy"
+    "typography, font, lettering, logos, subtitles, calligraphy, "
+    "chinese characters, japanese characters, kanji, hiragana, katakana, hangul"
 )
 
 
@@ -65,8 +86,8 @@ def qwen_image_txt2img_graph(
             "class_type": "KSampler",
             "inputs": {
                 "seed": seed,
-                "steps": 24,
-                "cfg": 4.0,
+                "steps": STEPS,
+                "cfg": CFG,
                 "sampler_name": "euler",
                 "scheduler": "simple",
                 "denoise": 1.0,
@@ -95,6 +116,25 @@ def _resolve_dest(dest_path: str, output_basename: str, panel_id: str) -> Path:
     out_root = Path(os.environ.get("PS_OUTPUT_DIR", "/var/lib/pearl-star/output"))
     name = output_basename or panel_id or "panel"
     return out_root / f"{name}.png"
+
+
+def _assert_blob_gate(dst: Path) -> None:
+    """Raise if the landed PNG is under MIN_PNG_BYTES (stub/corrupt output).
+
+    Mirrors the CI-side "stub-as-done" gate (CLAUDE.md manga doctrine,
+    scripts/ci/check_render_progress_bytes.py) at the worker level: a task
+    that lands a near-empty file should fail loudly (Procrastinate retries
+    once, per @app.task(retry=1)) rather than report COMPLETED silently.
+    """
+    try:
+        size = dst.stat().st_size
+    except FileNotFoundError as exc:
+        raise RuntimeError(f"blob-gate: expected output missing at {dst}") from exc
+    if size < MIN_PNG_BYTES:
+        raise RuntimeError(
+            f"blob-gate: {dst} is {size} bytes (< {MIN_PNG_BYTES} floor) — "
+            "treating as a stub/corrupt render, not a real panel"
+        )
 
 
 def _land_png(filename: str, dst: Path) -> None:
@@ -197,6 +237,7 @@ def _run_qwen_image(
     hb.set_phase("copying_output", prompt_id=prompt_id)
     dst = _resolve_dest(dest_path, output_basename, panel_id)
     _land_png(filename, dst)
+    _assert_blob_gate(dst)
     hb.set_phase("done", prompt_id=prompt_id)
     return {
         "status": "COMPLETED",
