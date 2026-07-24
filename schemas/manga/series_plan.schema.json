@@ -4,6 +4,28 @@
   "title": "Manga Series Plan",
   "description": "Per-series catalog plan. Drives format-aware production. v2 adds localized titles, master/flatten format split (per PR #631 — webtoon as master, B&W as flatten-export), and three-connector-lane targeting (unified CANVAS / LINE Manga Indies / Naver KR). Source-of-truth: artifacts/manga/MANGA_FULL_CATALOG_PLAN.md (PR #624). Format weights: artifacts/research/manga_vs_webtoon_decision_matrix_2026-04-25.yaml (PR #626). Connector lanes: artifacts/research/webtoon_master_reference_2026-04-25.md (PR #631).",
   "type": "object",
+  "allOf": [
+    {
+      "if": {"properties": {"mode": {"const": "teacher"}}, "required": ["mode"]},
+      "then": {
+        "required": ["teacher_id"],
+        "properties": {
+          "teacher_id": {"type": "string", "minLength": 1},
+          "musician_id": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"mode": {"const": "music"}}, "required": ["mode"]},
+      "then": {
+        "required": ["musician_id"],
+        "properties": {
+          "teacher_id": {"type": "null"},
+          "musician_id": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  ],
   "required": [
     "series_plan_schema",
     "series_id",
@@ -34,6 +56,15 @@
     "teacher_id": {
       "type": ["string", "null"],
       "description": "Teacher canonical id (ahjan, joshin, etc.). v2.1: nullable per CATALOG_RECONCILIATION_SPEC D-6 (brand wins; teacher is a series attribute, may be null for non-teacher-anchored brands like legacy_builder_memoir, longevity_lab_healing, bio_flow_healing, stoic_edge_battle)."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["teacher", "music"],
+      "description": "Identity mode. Teacher dramatizes doctrine; music transforms a motif. Exactly one identity is required when set."
+    },
+    "musician_id": {
+      "type": ["string", "null"],
+      "description": "Canonical musician handle from config/music/music_brand_registry.yaml; required only for mode=music."
     },
     "locale": {
       "type": "string",

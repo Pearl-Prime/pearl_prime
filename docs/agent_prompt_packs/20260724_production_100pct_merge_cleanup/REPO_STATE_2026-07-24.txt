@@ -1,0 +1,68 @@
+PHOENIX OMEGA — REPO STATUS IN PLAIN ENGLISH
+Date: 2026-07-24. Written by Piper after reading all of yesterday's handoffs,
+the coordination SSOT docs, live GitHub state, and every worktree on disk.
+
+=== THE ONE-SENTENCE VERSION ===
+The factory is built and mostly works; the loading dock is jammed — 33
+finished PRs waiting in line, a red test suite blocking the door, no lock
+on the front door (branch protection), and 8 boxes of real finished work
+sitting in forgotten worktrees.
+
+=== WHAT'S GOOD (done and real) ===
+- zh-TW quality program: FINISHED and merged (contamination repair,
+  name conversions, retranslation, CI ratchet, 863-row backlog).
+- Manga pilot: 3 series, 37 episodes, verified real on main. 10 PRs merged.
+- The zh-CN stub fix everyone was waiting on (PR #131) — actually already
+  merged as PR #234. Four sessions didn't know this.
+- Catalog audit: merged. Flagship book: operator-approved (Layer 4).
+- Storefront live, GHL feed live, covers bank 24/24 topics.
+- A new pre-merge CI gate (PR #199) now stops the "merged while red" bug.
+
+=== WHAT'S BROKEN (blocking everything) ===
+1. Main's test suite is red: one bad test (enhancement_contract_v21) and
+   one missing dependency (opencc) in CI. Until green, nothing merges.
+2. 33 open PRs. Most are FINISHED work just waiting in line.
+3. main has NO branch protection at all (confirmed live). Any bad merge
+   can land silently. This is how the 20,006-file disaster happened.
+4. ~900 stale local branches + 8 dead worktrees = clutter and confusion.
+5. 8 branches/worktrees hold REAL unmerged work (translations, Perfect
+   Books wave, outfit continuity, session-mining specs) never landed.
+6. Brand wizard lost its Brazil/pt_BR page in PR #166; 3 tests failing.
+7. The coordination books (PROGRAM_STATE, project registries, doc index)
+   are days-to-weeks stale and disagree with each other.
+
+=== WHAT ONLY YOU CAN DO (operator actions — see OPERATOR_ACTIONS.md) ===
+A. Rotate the leaked R2/Cloudflare keys (leaked 07-21, still not rotated).
+B. Add CLOUDFLARE_API_TOKEN as a GitHub Actions secret (all brand-wizard
+   deploys have failed since 07-22 without it).
+C. Pay/clear the Alibaba DashScope billing arrearage (blocks free CJK TTS).
+D. Say "yes" to turning on branch protection (Lane 02 has it ready).
+E. Read-approve the manga pilot episodes and zh-TW smoke book (quality
+   calls only you can make).
+
+=== WHAT THE PROMPT PACK DOES (7 lanes) ===
+Lane 02  Make main GREEN (fix the 2 CI breaks) + turn on branch protection.
+Lane 01  Drain the merge queue: verify all 33 PRs live, close the 6
+         superseded ones, merge everything green (Rule-0 + governance).
+Lane 03  Clean house: delete 8 dead worktrees + ~stale branches, rescue
+         the 5 non-manga branches with real work, land this branch's own
+         9 stranded commits.
+Lane 04  Fix the books: PROGRAM_STATE, project/workstream registries,
+         authority map, doc index — all reconciled to today's truth.
+Lane 05  Fix brand wizard: restore the Brazil lane, fix the 3 tests,
+         re-land the closed-unmerged #58 bug fix.
+Lane 06  Start the zh-TW Waystream 100-book run (Wave 0 is now unblocked
+         because #234 merged; #223 is the only gate left).
+Lane 07  Manga: land the stranded genre-bubble + outfit-continuity work,
+         then hold at the operator-read gate (your call E above).
+
+Order: Lane 02 first (everything else needs green CI), Lane 01 right
+behind it, then 03/04/05 in parallel, then 06/07.
+
+=== WHAT "100% PRODUCTION" HONESTLY MEANS HERE ===
+After this pack: main green, queue empty, repo clean, books accurate,
+protection on. That is "system working" — the infrastructure at 100%.
+Content 100% (every book bestseller-grade, every locale native-clean,
+manga PROVEN-AT-BAR) is a longer road with known next steps (line-edit
+lane, CJK gates, operator reads) — the pack's closeouts name each one.
+No lane is allowed to call gate-PASS "done." That rule is in every prompt.

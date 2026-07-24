@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+# STATUS: unwired/legacy — see artifacts/qa/manga_research_currency_audit_2026-07-22.md
+# Zero reachable callsites from any production/pilot entry point (confirmed by
+# full-repo grep trace). identity_compose_prompt.py reads the same
+# genre_prompt_cookbook_v2.yaml data file directly via its own _load_cookbook()
+# and does NOT import this module. Only tests/test_cookbook_v2_loader.py
+# imports it. Do not delete without operator sign-off — the underlying YAML
+# (genre_prompt_cookbook_v2.yaml) IS live for KDP cover rendering; only this
+# compose script itself is unreachable.
 """Compose final FLUX positive (and optional negative) prompt for a book.
 
 Loads ``config/manga/genre_prompt_cookbook_v2.yaml`` and renders the
