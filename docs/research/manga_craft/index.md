@@ -26,8 +26,27 @@ Per-lane style bibles for 48-volume series planning and deterministic panel-leve
 17. **[sports_competition](sports_competition.md)** — Slam Dunk / Haikyuu register (Genre Shell #11). Carries ADHD hyperfocus, performance anxiety, imposter syndrome at peak moments, financial pressure around athletic careers.
 18. **[historical_period](historical_period.md)** — Vinland Saga / Vagabond / Bride's Story register (Genre Shell #12). Carries grief across time, legacy and self-worth, courage in context, honor vs authenticity. Viking is a setting flavor inside this genre, not its own.
 19. **[mecha](mecha.md)** — Evangelion / Gundam / Knights of Sidonia register (Genre Shell #15; mega-example tier per spec D-9; Evangelion $16B franchise). Carries depression-as-mecha, scale-as-mortality, identity vs machine. `cognitive_clarity` brand 15% allocation.
+20. **[cultivation](cultivation.md)** — Battle Through the Heavens / Tales of Demons and Gods / Soul Land / Solo Leveling register (`cultivation_martial` pacing alias per `canonical_genre_list.yaml`). Carries aspiration, conviction, mastery — status earned through disciplined, legible ascent up a named power taxonomy.
+21. **[comedy](comedy.md)** — Gintama / Nichijou / Azumanga Daioh / Daily Lives of High School Boys register (`gag` pacing alias per `canonical_genre_list.yaml`). Boke/tsukkomi comedic engine; episodic-cumulative structure rather than escalating-stakes.
+22. **[battle_internal](battle_internal.md)** — Vagabond / Berserk (contemplative arcs) / Vinland Saga (pacifism arc) / One Punch Man (Garou) register (`canonical_genre_list.yaml` id `battle_internal`, label "Internal Battle / Philosophical", `parent_family: battle`). Carries purely psychological/internal conflict externalized through stance-mirroring, weapon-as-burden staging, and line-weight shifts — never literalized into an actual second combatant.
+23. **[social_issue](social_issue.md)** — A Silent Voice / Princess Jellyfish / Blue Period register (`canonical_genre_list.yaml` id `social_issue`, label "Social Issue / Josei Realism"). Carries a real, named social pressure (eldercare, single parenthood, housing precarity, disability/exclusion) through a family/community lens via institutional-object inserts; resolves toward redistributed load, never a solved system.
 
 (Note: `school_coming_of_age` (#14) bible deferred to a future PR; pacing covered via existing `school` row in `manga_pacing_by_genre.yaml`.)
+
+### Phase 2X.4 essay-family additions
+
+24. **[essay](essay.md)** — Broader reflective/confessional register (Nagata Kabi's diaristic work, Yamada Murasaki's *Talk to My Back*, Taniguchi Jiro's *The Walking Man*). Any subject, not only memoir-of-crisis; gated on `self_or_artifact_interaction` — a recurring recognizable modern artifact (search history, voice memo, receipts) stands in for a second character. `parent_family: null` per `canonical_genre_list.yaml`; sibling to `josei_adult_memoir` but broader in topic and less confessional-intensity by default.
+25. **[graphic_medicine](graphic_medicine.md)** — Illness/disability/patient-care register (*Marbles*, *Cancer Vixen*, *Epileptic*, *Stitches*, *El Deafo*). `parent_family: essay` per `canonical_genre_list.yaml`; gated on `patient_care_or_family_pressure` — narrower than `essay`, always specifically medical/embodied, requires a living clinical or family pressure axis rather than solo artifact-review.
+
+### Phase 2X.4 proxy-only genre bibles
+
+26. **[procedural](procedural.md)** — Case Closed / Golden Kamuy / Silver Spoon / Dr. Stone register. Investigative/systems-driven manga where a professional process (forensics, agriculture, chemistry, medicine, craft-trade) is the narrative engine. `pacing_proxy: workplace` per `canonical_genre_list.yaml` (no direct pacing entry); reaction-shot frequency and diagram-inset convention adapted up from the workplace baseline for investigative reveals.
+27. **[family](family.md)** — Yotsuba&! / Usagi Drop / Sweetness & Lightning register. Multi-generational household drama carried through caregiving labor and domestic-specific texture. `pacing_proxy: social_issue` per `canonical_genre_list.yaml` (no direct pacing entry); silent-panel ratio and black-fill baseline adapted toward a warmer, quieter register than social_issue's issue-driven tension.
+
+### Weakest-grounded-pair addition (taxonomy-only lanes with no dedicated bible AND no direct pacing entry, per `canonical_genre_list.yaml`)
+
+28. **[slice_of_life](slice_of_life.md)** — Yotsuba&! / K-On! / Nichijou / Barakamon / Non Non Biyori register. Ensemble everyday-life warmth and social texture at low stakes; the reaction-row and the group-tableau spread are the lane's signature devices. `pacing_proxy: healing` per `canonical_genre_list.yaml` (no direct pacing entry, explicitly adapted up in dialogue density and reaction-shot frequency, down in silent-panel ratio, from the iyashikei/healing baseline since slice_of_life is warmer and more socially populated than iyashikei's atmospheric solo-lead register).
+29. **[food](food.md)** — Food Wars! / Oishinbo / What Did You Eat Yesterday? / Sweetness & Lightning / Restaurant to Another World register. Craft/kitchen manga where cooking and eating are the narrative engine; the dish-reveal spread and the tasting-reaction sequence are the lane's signature devices, paired with a dedicated food-specific SFX vocabulary. `pacing_proxy: healing` per `canonical_genre_list.yaml` (no direct pacing entry; keeps healing's sensory-close-up quietness but adds craft/technique-demonstration beats and a much higher reaction-shot frequency around tasting moments).
 
 ## How to use
 
@@ -57,3 +76,13 @@ Per-lane style bibles for 48-volume series planning and deterministic panel-leve
 | BL slice-of-life | 4 × 12-vol couple arcs + aging coda | relationship stage |
 | literary GN | 48 thematic-artifact single volumes | one artifact/theme |
 | kodomomuke | age-progressive 4 × 12-vol bands (5–7, 7–9, 9–11, 10–12) | age-register |
+| cultivation | 4-band tier ascent: Qi Gathering (1–10) → Foundation/Core Formation (11–22) → Nascent Soul (23–36) → Immortal Ascension (37–48) | one power-tier |
+| comedy | episodic-cumulative: formula (1–12) → running-gag accumulation (13–24) → format play (25–36) → legacy payoff (37–48) | one gag/callback cycle |
+| battle_internal | 4 × 12-vol convictions (vow formed → tested → near-relapse → held) | one vow lifecycle |
+| social_issue | 4 × 12-vol community eras, each keyed to a related social pressure aging with the same household | one pressure-cycle |
+| essay | single spine artifact reviewed serially across all 48 vols (discovery → accumulation → intervention → practice) | one artifact/theme |
+| graphic_medicine | 4 × 12-vol care bands (onset/admission → relearning/living-with → setback → practice, not finish line) | one recovery/care band |
+| procedural | 4 × 12-vol discipline-mastery macro-arcs (apprentice method → independent casework → system pressure → standard-setter) | one method/case-mastery band |
+| family | 4 × 12-vol household-configuration macro-arcs (formation → growth friction → wider household → legacy) | one household-configuration band |
+| slice_of_life | 12 × 4-vol ensemble terms/seasons (or 8 × 6-vol "chapters of the group's life", or 48 standalone-ish place-and-cast-linked vols) | one ensemble term/season |
+| food | 12 × 4-vol "menus" by technique/ingredient theme (or 4 × 12-vol career stages apprentice→head-of-table, or 48 standalone-ish vols linked by one restaurant/tavern vessel) | one menu/technique block |
