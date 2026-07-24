@@ -1153,6 +1153,37 @@ def main() -> int:
     else:
         gate("47. Manga arc storyboard contract", True, "gate script not present; skip", skip=True)
 
+    # --- 48. Manga series master plan contract (ADVISORY — Lane 06, manga process uplift) ---
+    # Authority: docs/specs/MANGA_SERIES_MASTER_PLAN_CONTRACT.md. Genre-derived
+    # arc cadence (pacing yaml arc_cadence blocks) — never a fixed 12; null-shift
+    # families stay cyclical. Advisory until Lane 11 proves the loop — do NOT
+    # promote to required before that. Display numbering note: slots 1-47 are in
+    # continuous use above (47 = arc storyboard); the display number "46" is
+    # pre-existingly used TWICE above (zh-TW ratchet + store series name) — that
+    # collision predates this gate and is deliberately not renumbered here.
+    smp_gate = REPO_ROOT / "scripts" / "ci" / "check_manga_series_master_plan.py"
+    if smp_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(smp_gate)],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            smp_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            smp_detail = out.splitlines()[-1] if out else "check_manga_series_master_plan"
+        except Exception as e:
+            smp_ok = False
+            smp_detail = str(e)
+        gate(
+            "48. Manga series master plan contract (genre-derived arc cadence — ADVISORY)",
+            smp_ok, smp_detail, advisory=True,
+        )
+    else:
+        gate("48. Manga series master plan contract", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:

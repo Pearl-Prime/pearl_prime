@@ -359,6 +359,60 @@ def _minimal_payload(stem: str) -> dict:
             "set_pieces_fired": ["sp1"],
             "unresolved_hooks": ["gate still closed"],
         },
+        "series_master_plan": {
+            **common,
+            "artifact_type": "series_master_plan",
+            "series_id": "s",
+            "brand_id": "b",
+            "locale": "en_US",
+            "genre_id": "mecha",
+            "pacing_family": "mecha",
+            "cadence_source": "pacing_yaml",
+            "episode_unit": "monthly_chapter",
+            "episode_unit_mapping_note": "1 episode = 1 monthly chapter.",
+            "episode_horizon": 100,
+            "plan_frame": "serialized_episode",
+            "mode": "none",
+            "first_major_shift": None,
+            "arcs": [
+                {
+                    "arc_id": f"arc_{i}",
+                    "episode_start": start,
+                    "episode_end": end,
+                    "detail_level": "outline",
+                    "arc_premise": "A minimal but schema-valid arc premise sentence.",
+                    "arc_promise": "A minimal arc promise.",
+                    "status_quo_shift": None,
+                    "mc_change_vector": {
+                        "from_state": "from state",
+                        "to_state": "to state",
+                    },
+                    "self_help_topic": "burnout",
+                    "mode_arc": {"mode": "none"},
+                }
+                for i, (start, end) in enumerate([(1, 50), (51, 100)], 1)
+            ],
+            "conformance": {
+                "genre_contract": {
+                    "checked": True,
+                    "craft_bible": "docs/research/manga_craft/mecha.md",
+                },
+                "cadence_conformance": {
+                    "checked": True,
+                    "family_range": [2, 15],
+                    "tolerance_pct": 25,
+                },
+                "mc_endurance": {
+                    "status": "pending_lane_04",
+                    "checklist": "config/manga/mc_endurance_checklists.yaml",
+                },
+                "mode_arc_coherence": {
+                    "checked": True,
+                    "vessels_config": "config/manga/manga_mode_vessels.yaml",
+                },
+            },
+            "acceptance_layer": "structurally_clear",
+        },
         "story_excellence_realization_report": {
             "schema_version": "1.0.0",
             "artifact_type": "manga_story_excellence_realization_report",
