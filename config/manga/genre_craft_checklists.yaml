@@ -399,3 +399,760 @@ genres:
       - item: "Action-sequence inflation — extended fight choreography without cognitive-load narration."
         source: "docs/research/manga_craft/sci_fi_cyberpunk.md#6"
         signal_any: ["extended gunfight", "long chase sequence", "drawn-out shootout"]
+
+  # ── SCALE (Lane 07 stage 3) — remaining 18 canonical genres ─────────────
+  workplace:
+    bible: docs/research/manga_craft/workplace_drama.md
+    story_elements_must:
+      - item: "Institutional pressure (deadline / manager / review) presses on the MC as a concrete on-page force."
+        source: "docs/research/manga_craft/workplace_drama.md#1"
+        evidence_any: ["deadline", "manager", "meeting", "slide", "okr", "boss", "review", "quota"]
+      - item: "The public work-mask and the private self are visibly distinct (register / space gap)."
+        source: "docs/research/manga_craft/workplace_drama.md#6"
+        evidence_any: ["smile", "mask", "fine", "okay", "private", "bathroom", "after hours", "alone"]
+      - item: "A coworker/colleague witnesses or shares the pressure (interpersonal arc, not just the project)."
+        source: "docs/research/manga_craft/workplace_drama.md#6"
+        evidence_any: ["coworker", "desk", "slack", "chat", "colleague", "cc", "team", "together"]
+    story_elements_should:
+      - item: "The boss is shaped by the same system, not a cartoon obstacle."
+        source: "docs/research/manga_craft/workplace_drama.md#6"
+        evidence_any: ["boss", "manager", "system", "pressure", "also", "too"]
+    mc_items:
+      family: workplace
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Interiority targets emotional truth, never resolves into actionable career advice."
+        source: "docs/research/manga_craft/workplace_drama.md#4"
+      - item: "Corporate register and private register are audibly different."
+        source: "docs/research/manga_craft/workplace_drama.md#4"
+    panel_grammar_items:
+      - item: "Office space and after-work space are visually distinguished."
+        source: "docs/research/manga_craft/workplace_drama.md#2"
+        storyboard_signal_any: ["office", "desk", "after work", "home", "street", "bar"]
+      - item: "Comedic release reconnects to the weight of the situation, never floats free."
+        source: "docs/research/manga_craft/workplace_drama.md#2"
+        storyboard_signal_any: ["reaction", "chibi", "return", "weight", "quiet"]
+    failure_modes:
+      - item: "Boss-as-villain oversimplification — a cartoon obstacle rather than a shaped-by-the-system person."
+        source: "docs/research/manga_craft/workplace_drama.md#6"
+        signal_any: ["the evil boss", "cartoon villain boss", "pure tyrant manager"]
+      - item: "Preachy career advice — interior monologue resolving into actionable productivity wisdom."
+        source: "docs/research/manga_craft/workplace_drama.md#6"
+        signal_any: ["here's my productivity tip", "and that's how to get promoted", "five tips for success"]
+      - item: "Resolution through the system — the institution reforms / the bad boss is removed."
+        source: "docs/research/manga_craft/workplace_drama.md#6"
+        signal_any: ["the company reformed itself", "the bad boss was fired and everything fixed", "hr solved everything"]
+
+  mystery:
+    bible: docs/research/manga_craft/psychological_thriller.md
+    story_elements_must:
+      - item: "An information asymmetry drives the chapter — someone knows or hides something the MC must close."
+        source: "docs/research/manga_craft/psychological_thriller.md#3"
+        evidence_any: ["clue", "evidence", "knows", "hiding", "missing", "gap", "lie", "secret"]
+      - item: "The MC is a skilled analyst whose skill is misfiring — not an incompetent."
+        source: "docs/research/manga_craft/psychological_thriller.md#6"
+        evidence_any: ["deduce", "analyze", "predict", "notice", "read", "logic", "pattern", "wrong"]
+      - item: "A timed pressure (deadline / clock) meters the reveal."
+        source: "docs/research/manga_craft/psychological_thriller.md#3"
+        evidence_any: ["deadline", "before", "clock", "tonight", "expires", "timer", "time is running"]
+    story_elements_should:
+      - item: "The obsession loop accrues visible cost by mid-run (relationship / body / exposure)."
+        source: "docs/research/manga_craft/psychological_thriller.md#6"
+        evidence_any: ["cost", "tired", "alone", "exposed", "shaking", "sleep", "lost"]
+    mc_items:
+      family: mystery
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "The unreliable narrator is never explained to the reader in caption ('I realize now I was lying')."
+        source: "docs/research/manga_craft/psychological_thriller.md#4"
+      - item: "The antagonist's logic is reconstructible — they believe they are right."
+        source: "docs/research/manga_craft/psychological_thriller.md#4"
+    panel_grammar_items:
+      - item: "The visual field stays consistently pressured, even in quiet scenes (no iyashikei reassurance grammar)."
+        source: "docs/research/manga_craft/psychological_thriller.md#2"
+        storyboard_signal_any: ["pressure", "tight", "shadow", "tension", "close"]
+      - item: "Each correct prediction is followed by the same logic producing a wrong one."
+        source: "docs/research/manga_craft/psychological_thriller.md#2"
+        storyboard_signal_any: ["predict", "wrong", "misread", "reversal", "mistake"]
+    failure_modes:
+      - item: "Making the threat supernatural — a ghost/entity shifts the contract to psychological horror."
+        source: "docs/research/manga_craft/psychological_thriller.md#6"
+        signal_any: ["a ghost appears", "the entity was real", "supernatural monster", "cursed spirit did it"]
+      - item: "Resolving the final mystery cleanly — a full explanation evacuates retroactive dread."
+        source: "docs/research/manga_craft/psychological_thriller.md#6"
+        signal_any: ["everything was fully explained", "every question answered neatly", "the case is completely solved with no doubt"]
+      - item: "Antagonist revealed as purely evil with no self-model."
+        source: "docs/research/manga_craft/psychological_thriller.md#6"
+        signal_any: ["evil just because", "pure evil with no reason", "villain for the sake of it"]
+
+  horror:
+    bible: docs/research/manga_craft/psychological_horror.md
+    story_elements_must:
+      - item: "Something familiar is subtly wrong before it can be named (dread precedes explanation)."
+        source: "docs/research/manga_craft/psychological_horror.md#3"
+        evidence_any: ["wrong", "familiar", "should not", "too quiet", "smells like", "off", "not right"]
+      - item: "The entity is under-explained; dread lives in what is withheld, not a codified taxonomy."
+        source: "docs/research/manga_craft/psychological_horror.md#6"
+        evidence_any: ["dread", "don't look", "behind", "listening", "watching", "unseen", "something"]
+      - item: "The protagonist is not too-capable; resourcefulness is only somatic."
+        source: "docs/research/manga_craft/psychological_horror.md#6"
+        evidence_any: ["breath", "body", "freeze", "run", "hands", "cannot", "trembles"]
+    story_elements_should:
+      - item: "Every reveal is paid for by a preceding lull."
+        source: "docs/research/manga_craft/psychological_horror.md#3"
+        evidence_any: ["quiet", "still", "silence", "wait", "pause", "empty"]
+    mc_items:
+      family: horror
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Word count lives under the 30-80 words/page ceiling; every added word reduces the scene's power."
+        source: "docs/research/manga_craft/psychological_horror.md#4"
+      - item: "No therapy jargon in caption or balloon ('grounding', 'trauma response', 'nervous system')."
+        source: "docs/research/manga_craft/psychological_horror.md#4"
+    panel_grammar_items:
+      - item: "SFX stay whisper-register (heartbeat), never BANG-register; dread is quiet."
+        source: "docs/research/manga_craft/psychological_horror.md#2"
+        storyboard_signal_any: ["heartbeat", "whisper", "silence", "quiet", "breath"]
+      - item: "A reveal follows a lull; no shocking image without preceding tension."
+        source: "docs/research/manga_craft/psychological_horror.md#2"
+        storyboard_signal_any: ["lull", "build", "tension", "reveal", "quiet before"]
+    failure_modes:
+      - item: "Over-explaining the monster — a codified entity taxonomy converts dread into a power system."
+        source: "docs/research/manga_craft/psychological_horror.md#6"
+        signal_any: ["the monster's full backstory", "codified entity taxonomy", "power ranking of ghosts"]
+      - item: "Jump scares without build-up — a shocking image with no preceding tension is gross, not scary."
+        source: "docs/research/manga_craft/psychological_horror.md#6"
+        signal_any: ["sudden jump scare", "jump-scare with no build", "gore reveal out of nowhere"]
+      - item: "Defeating the monster = curing the topic — a slain entity is a genre exit."
+        source: "docs/research/manga_craft/psychological_horror.md#6"
+        signal_any: ["defeats the monster and is cured", "kills the entity and the trauma is gone", "slays it and all is well"]
+
+  sports:
+    bible: docs/research/manga_craft/sports_competition.md
+    story_elements_must:
+      - item: "The body is a visible limit — lungs, legs, cramp — that the MC pushes against."
+        source: "docs/research/manga_craft/sports_competition.md#1"
+        evidence_any: ["lungs", "legs", "cramp", "breath", "ankle", "limit", "body", "sweat"]
+      - item: "A team/rival/coach axis is present; individual growth serves collective growth."
+        source: "docs/research/manga_craft/sports_competition.md#6"
+        evidence_any: ["team", "rival", "coach", "bench", "pass", "court", "field", "teammate"]
+      - item: "Practice/match cost is on the page; the body is seen depleting even in triumph."
+        source: "docs/research/manga_craft/sports_competition.md#6"
+        evidence_any: ["match", "practice", "training", "score", "foul", "cost", "spent", "depleted"]
+    story_elements_should:
+      - item: "Loss is used as the genre's most powerful tool; the MC does not win everything."
+        source: "docs/research/manga_craft/sports_competition.md#6"
+        evidence_any: ["lose", "loss", "defeat", "lost", "fell short", "beaten"]
+    mc_items:
+      family: sports
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Sport rules are learned through gameplay, not infodumped."
+        source: "docs/research/manga_craft/sports_competition.md#4"
+      - item: "Rival teams get personality and at least one sympathetic interior moment."
+        source: "docs/research/manga_craft/sports_competition.md#4"
+    panel_grammar_items:
+      - item: "Training scenes advance psychology / relationship / a specific technical threshold, never filler."
+        source: "docs/research/manga_craft/sports_competition.md#2"
+        storyboard_signal_any: ["training", "practice", "drill", "threshold", "technique"]
+      - item: "Body depletion is visible even during a winning streak."
+        source: "docs/research/manga_craft/sports_competition.md#2"
+        storyboard_signal_any: ["sweat", "exhausted", "collapse", "breath", "strain"]
+    failure_modes:
+      - item: "Protagonist wins everything — undefeated heroes break the genre contract; loss is the tool."
+        source: "docs/research/manga_craft/sports_competition.md#6"
+        signal_any: ["never loses a single match", "undefeated champion always wins", "wins every game effortlessly"]
+      - item: "Power-up without training — sudden mid-match abilities with no groundwork."
+        source: "docs/research/manga_craft/sports_competition.md#6"
+        signal_any: ["suddenly unlocks a new power mid-match", "instant new ability out of nowhere", "power-up without any training"]
+      - item: "One-man show in a team sport — individual growth that never serves the team."
+        source: "docs/research/manga_craft/sports_competition.md#6"
+        signal_any: ["wins the whole game single-handedly", "one-man show carries the team", "doesn't need his teammates at all"]
+
+  essay:
+    bible: docs/research/manga_craft/essay.md
+    story_elements_must:
+      - item: "A recognizable modern artifact (search history, voice memo, receipts, saved chats) is seen on-panel, grounding the reflection."
+        source: "docs/research/manga_craft/essay.md#2"
+        evidence_any: ["search history", "voice memo", "receipt", "saved chat", "notebook", "photo", "screenshot", "artifact", "page"]
+      - item: "The narrator interrogates the self ('why did I', 'what if') rather than prescribing to a reader."
+        source: "docs/research/manga_craft/essay.md#1"
+        evidence_any: ["why did i", "what if", "i wrote", "i remember", "ask myself", "i keep", "i notice"]
+      - item: "A first truth is revised — the second look complicates the first (confession-with-revision)."
+        source: "docs/research/manga_craft/essay.md#6"
+        evidence_any: ["actually", "or maybe", "but then", "revise", "look again", "not quite", "reconsider"]
+    story_elements_should:
+      - item: "Stakes are allowed to be small (a quiet Tuesday, a stalled project); no borrowed crisis register."
+        source: "docs/research/manga_craft/essay.md#6"
+        evidence_any: ["tuesday", "small", "quiet", "stalled", "ordinary", "everyday"]
+    mc_items:
+      family: essay
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Narration stays inside 'I'; the moment it addresses 'you' with prescriptive wisdom it becomes content marketing."
+        source: "docs/research/manga_craft/essay.md#4"
+      - item: "Therapy-manual vocabulary is the narrator's own uncertain language, not stated as diagnosis."
+        source: "docs/research/manga_craft/essay.md#4"
+    panel_grammar_items:
+      - item: "The artifact stays on the page; if it leaves for two consecutive scenes the chapter has drifted genre."
+        source: "docs/research/manga_craft/essay.md#8"
+        storyboard_signal_any: ["artifact", "notebook", "screen", "receipt", "photo", "object"]
+      - item: "Specificity is the craft — the exact receipt, the exact timestamp, not an atmosphere of feeling."
+        source: "docs/research/manga_craft/essay.md#2"
+        storyboard_signal_any: ["exact", "timestamp", "specific", "named", "detail"]
+    failure_modes:
+      - item: "Advice-blog voice — narration slides into general prescriptive wisdom ('and that's why journaling matters')."
+        source: "docs/research/manga_craft/essay.md#6"
+        signal_any: ["and that's why journaling matters", "here's what you should do", "the lesson for you is"]
+      - item: "Epiphany endings — 'and then I understood' resolves what the form requires to stay open."
+        source: "docs/research/manga_craft/essay.md#6"
+        signal_any: ["and then i understood everything", "suddenly it all made sense", "and that's when i finally understood myself"]
+      - item: "Generic memoir — an unspecified diary/journal instead of a recognizable modern artifact."
+        source: "docs/research/manga_craft/essay.md#6"
+        signal_any: ["dear diary", "in my journal i wrote", "my generic notebook"]
+
+  slice_of_life:
+    bible: docs/research/manga_craft/slice_of_life.md
+    story_elements_must:
+      - item: "Everyday texture is specific and observed (an exact snack, an exact vending machine), not generic vibes."
+        source: "docs/research/manga_craft/slice_of_life.md#6"
+        evidence_any: ["exact", "specific", "named", "today", "usual", "habit", "routine", "particular"]
+      - item: "The ensemble is voice-differentiated — a speaker is identifiable without a name tag."
+        source: "docs/research/manga_craft/slice_of_life.md#6"
+        evidence_any: ["said", "laughs", "quiet one", "the loud", "teases", "voice", "group"]
+      - item: "At least one engine runs per chapter — comedy or warmth (care / belonging)."
+        source: "docs/research/manga_craft/slice_of_life.md#6"
+        evidence_any: ["laugh", "warm", "belong", "care", "together", "miss", "joke", "smile"]
+    story_elements_should:
+      - item: "Closeness accrues over time — the cast visibly knows each other better with no plot forcing it."
+        source: "docs/research/manga_craft/slice_of_life.md#5"
+        evidence_any: ["again", "still", "now", "closer", "used to", "these days"]
+    mc_items:
+      family: slice_of_life
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "The gag or the warmth is not explained in a caption after the panel already delivered it."
+        source: "docs/research/manga_craft/slice_of_life.md#4"
+      - item: "Voice differentiation carries characterization; cast members do not converge into one register."
+        source: "docs/research/manga_craft/slice_of_life.md#4"
+    panel_grammar_items:
+      - item: "The reaction-row and group-tableau spread are the lane's signature devices."
+        source: "docs/research/manga_craft/slice_of_life.md#2"
+        storyboard_signal_any: ["reaction", "group", "tableau", "ensemble", "row"]
+      - item: "Silent-panel ratio stays below iyashikei's (never 40%+) — a warmer, more populated rhythm."
+        source: "docs/research/manga_craft/slice_of_life.md#2"
+        storyboard_signal_any: ["dialogue", "chatter", "group", "reaction", "banter"]
+    failure_modes:
+      - item: "Nothing actually observed, just vibes — generic texture that could be moved to any other series."
+        source: "docs/research/manga_craft/slice_of_life.md#6"
+        signal_any: ["some snacks", "an unnamed street", "generic everyday vibes", "just vibes"]
+      - item: "Introducing real stakes — a villain / genuine threat / relationship-ending betrayal breaks the contract."
+        source: "docs/research/manga_craft/slice_of_life.md#6"
+        signal_any: ["a villain appears", "a genuine threat", "betrayal ends everything", "someone is in danger"]
+      - item: "Ensemble collapse into one voice — all members interchangeable in dialogue."
+        source: "docs/research/manga_craft/slice_of_life.md#6"
+        signal_any: ["everyone sounds the same", "interchangeable dialogue", "no distinct voices"]
+
+  fantasy_adventure:
+    bible: docs/research/manga_craft/isekai.md
+    story_elements_must:
+      - item: "A threshold crossing (door / gate / summons) opens the adventure with specific world-rules."
+        source: "docs/research/manga_craft/isekai.md#3"
+        evidence_any: ["threshold", "door", "gate", "crossing", "beyond", "opens", "summon", "portal"]
+      - item: "The world is bound by rules with a price of entry, not a generic interchangeable JRPG setting."
+        source: "docs/research/manga_craft/isekai.md#6"
+        evidence_any: ["rule", "must not", "contract", "bound", "price of entry", "law", "forbidden"]
+      - item: "Advancement is paid for — quest/cost, cannot-return, debt — no wish fulfillment without consequence."
+        source: "docs/research/manga_craft/isekai.md#6"
+        evidence_any: ["quest", "cost", "cannot return", "ticket", "debt", "pay", "price", "sacrifice"]
+    story_elements_should:
+      - item: "The MC's modern perspective keeps mattering (the translation layer earns its place)."
+        source: "docs/research/manga_craft/isekai.md#6"
+        evidence_any: ["modern", "back home", "in my world", "remember", "different here"]
+    mc_items:
+      family: fantasy_adventure
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Status/UI text (if any) is a boxed typographic garnish for milestones only, never the emotional climax."
+        source: "docs/research/manga_craft/isekai.md#4"
+      - item: "The guide is never the brand's teacher named in-story; doctrine stays enacted in the land."
+        source: "docs/research/manga_craft/isekai.md#4"
+    panel_grammar_items:
+      - item: "The chapter's peak beat is never a number going up (no LitRPG stat screen as climax)."
+        source: "docs/research/manga_craft/isekai.md#2"
+        storyboard_signal_any: ["threshold", "world", "choice", "cost", "reveal"]
+      - item: "Three unique world-rules exist that appear nowhere else, staged visually."
+        source: "docs/research/manga_craft/isekai.md#2"
+        storyboard_signal_any: ["rule", "world", "unique", "law", "custom"]
+    failure_modes:
+      - item: "Generic JRPG world interchangeable with any other."
+        source: "docs/research/manga_craft/isekai.md#6"
+        signal_any: ["generic fantasy world", "standard jrpg setting", "interchangeable medieval kingdom"]
+      - item: "Status screens as storytelling crutch — numbers delivered instead of struggle."
+        source: "docs/research/manga_craft/isekai.md#6"
+        signal_any: ["status screen shows his stats", "level up screen appears", "litrpg stat window climax"]
+      - item: "Overpowered protagonist without tension — the MC cannot lose, so there are no stakes."
+        source: "docs/research/manga_craft/isekai.md#6"
+        signal_any: ["overpowered hero cannot lose", "one-shots every enemy effortlessly", "invincible protagonist no stakes"]
+
+  food:
+    bible: docs/research/manga_craft/food.md
+    story_elements_must:
+      - item: "A maker and an eater who matters are both on the page — cooking has a stake in a relationship or self-understanding."
+        source: "docs/research/manga_craft/food.md#1"
+        evidence_any: ["cook", "taste", "recipe", "knife", "steam", "eat", "share plate", "kitchen", "dish"]
+      - item: "Technique has a specific, researchable reason — not 'it tasted better because he tried harder'."
+        source: "docs/research/manga_craft/food.md#6"
+        evidence_any: ["technique", "temperature", "knife", "heat", "fold", "sear", "ferment", "method", "recipe"]
+      - item: "The craft demonstration resolves at a table — the food is eaten and reacted to by someone who matters."
+        source: "docs/research/manga_craft/food.md#6"
+        evidence_any: ["table", "first bite", "taste", "eat", "reaction", "mouth", "shared"]
+    story_elements_should:
+      - item: "Flavor is described with sensory specificity (texture, temperature, aroma), never 'it was delicious'."
+        source: "docs/research/manga_craft/food.md#6"
+        evidence_any: ["texture", "aroma", "warm", "crisp", "salt", "sweet", "bitter", "steam"]
+    mc_items:
+      family: food
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "The dish is a catalyst the characters still have to meet, never a magic solution stated in dialogue."
+        source: "docs/research/manga_craft/food.md#4"
+      - item: "Craft respect is honored — technique is spoken accurately, not hand-waved."
+        source: "docs/research/manga_craft/food.md#4"
+    panel_grammar_items:
+      - item: "The dish-reveal spread and the tasting-reaction sequence are the lane's signature devices."
+        source: "docs/research/manga_craft/food.md#2"
+        storyboard_signal_any: ["dish", "reveal", "tasting", "reaction", "plate", "bite"]
+      - item: "A dedicated food SFX vocabulary marks the cooking and eating beats."
+        source: "docs/research/manga_craft/food.md#2"
+        storyboard_signal_any: ["sizzle", "steam", "crunch", "simmer", "sfx"]
+    failure_modes:
+      - item: "Recipe-as-plot-device with no character stakes — the dish would read the same swapped for any other."
+        source: "docs/research/manga_craft/food.md#6"
+        signal_any: ["recipe with no character stakes", "interchangeable dish", "food as checklist item"]
+      - item: "Craft resolving relationship problems by itself — a dish magically fixing an estranged bond."
+        source: "docs/research/manga_craft/food.md#6"
+        signal_any: ["the dish magically fixed their relationship", "one meal cured his sadness", "food solved everything by itself"]
+      - item: "Flavor description with no sensory specificity ('it was delicious')."
+        source: "docs/research/manga_craft/food.md#6"
+        signal_any: ["it was just delicious", "so tasty and good", "yummy with no detail"]
+
+  family:
+    bible: docs/research/manga_craft/family.md
+    story_elements_must:
+      - item: "Caregiving labor and domestic-specific texture (dishes, dinner, chores) carry the household on the page."
+        source: "docs/research/manga_craft/family.md#1"
+        evidence_any: ["dishes", "laundry", "dinner", "chore", "sink", "table", "cook", "bath"]
+      - item: "Role pressure is felt (eldest / parent / duty) as a concrete on-page force."
+        source: "docs/research/manga_craft/family.md#3"
+        evidence_any: ["eldest", "parent", "role", "expected", "duty", "family", "responsible", "care for"]
+      - item: "A child character has real interiority and pressure-generating needs — not a cuteness-delivery device."
+        source: "docs/research/manga_craft/family.md#6"
+        evidence_any: ["asks", "why", "wants", "needs", "afraid", "question", "cries", "hungry"]
+    story_elements_should:
+      - item: "An ordinary-routine baseline exists between crises so the crises have contrast and weight."
+        source: "docs/research/manga_craft/family.md#6"
+        evidence_any: ["morning", "routine", "usual", "again", "everyday", "breakfast"]
+    mc_items:
+      family: family
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Caregiving insight is shown through the caregiving act, never stated as a narrated life-lesson."
+        source: "docs/research/manga_craft/family.md#4"
+      - item: "Generational voices are distinct by age register."
+        source: "docs/research/manga_craft/family.md#4"
+    panel_grammar_items:
+      - item: "Silent panels and a warm black-fill baseline render the quiet, warmer register."
+        source: "docs/research/manga_craft/family.md#2"
+        storyboard_signal_any: ["silence", "silent", "quiet", "warm", "home"]
+      - item: "Household-specific objects and routines give the home a texture no other household has."
+        source: "docs/research/manga_craft/family.md#2"
+        storyboard_signal_any: ["object", "routine", "table", "kitchen", "specific"]
+    failure_modes:
+      - item: "Time-skip relationship recast — aging a caregiving bond into a romantic one (the Usagi Drop failure)."
+        source: "docs/research/manga_craft/family.md#6"
+        signal_any: ["time-skip turns the child into a romantic partner", "caregiver becomes love interest", "getting usagi dropped"]
+      - item: "Child as cuteness-delivery device — adorable for the adult with no interiority of their own."
+        source: "docs/research/manga_craft/family.md#6"
+        signal_any: ["child exists only to be adorable", "cute prop with no interiority", "cuteness-delivery device"]
+      - item: "Adult-wisdom lecture delivery — caregiving insight stated as a narrated life-lesson."
+        source: "docs/research/manga_craft/family.md#6"
+        signal_any: ["and that's the lesson of parenting", "let me teach you about family", "narrated life-lesson about caregiving"]
+
+  procedural:
+    bible: docs/research/manga_craft/procedural.md
+    story_elements_must:
+      - item: "A professional method (forensics / agriculture / chemistry / craft) is the engine, shown as workflow steps."
+        source: "docs/research/manga_craft/procedural.md#1"
+        evidence_any: ["procedure", "step", "checklist", "protocol", "method", "case file", "process", "test"]
+      - item: "The conclusion is reached by the method actually shown on-page — no genius-flash shortcut."
+        source: "docs/research/manga_craft/procedural.md#6"
+        evidence_any: ["because", "the evidence shows", "step", "trace", "test", "compare", "found", "measured"]
+      - item: "Institutional cost/constraint (policy / budget / hours) is felt on the process."
+        source: "docs/research/manga_craft/procedural.md#3"
+        evidence_any: ["policy", "budget", "hours", "system", "compliance", "protocol", "rule", "limit"]
+    story_elements_should:
+      - item: "Cases accrete into visible method-mastery, not a reset button each chapter."
+        source: "docs/research/manga_craft/procedural.md#6"
+        evidence_any: ["again", "learned", "last case", "now", "better", "mastered"]
+    mc_items:
+      family: procedural
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Technical explanation has an in-fiction listener, a visual demonstration, and pushback — never an unbroken infodump."
+        source: "docs/research/manga_craft/procedural.md#4"
+      - item: "Team members contribute genuine procedural insight, not just receive exposition."
+        source: "docs/research/manga_craft/procedural.md#4"
+    panel_grammar_items:
+      - item: "A diagram / inset panel carries technical information so it does not overload dialogue."
+        source: "docs/research/manga_craft/procedural.md#2"
+        storyboard_signal_any: ["diagram", "inset", "chart", "map", "figure"]
+      - item: "The method is demonstrated visually, step by step, not delivered as a caption block."
+        source: "docs/research/manga_craft/procedural.md#2"
+        storyboard_signal_any: ["step", "demonstrate", "close-up", "process", "hands"]
+    failure_modes:
+      - item: "Process as infodump — technical explanation with no listener, demonstration, or pushback."
+        source: "docs/research/manga_craft/procedural.md#6"
+        signal_any: ["unbroken infodump paragraph", "monologue block of technical detail", "caption dump of process"]
+      - item: "Genius-flash shortcut — the detective 'just knows', the cure 'just works'."
+        source: "docs/research/manga_craft/procedural.md#6"
+        signal_any: ["the detective just knows", "the cure just works", "solved it by intuition alone"]
+      - item: "Evidence-free confession — an antagonist explaining their own crime because the plot needs the reveal."
+        source: "docs/research/manga_craft/procedural.md#6"
+        signal_any: ["confesses everything unprompted", "explains their own crime for no reason", "evidence-free confession"]
+
+  historical:
+    bible: docs/research/manga_craft/historical_period.md
+    story_elements_must:
+      - item: "Period material culture (clothing / tools / rank objects) is rendered with visual specificity."
+        source: "docs/research/manga_craft/historical_period.md#2"
+        evidence_any: ["kimono", "sword", "letter seal", "rice", "carriage", "period", "robe", "loom"]
+      - item: "The era shapes the characters' assumptions, silences, and concept of the self — not costume on modern minds."
+        source: "docs/research/manga_craft/historical_period.md#6"
+        evidence_any: ["rank", "duty", "lord", "clan", "honor", "forbidden", "custom", "shame"]
+      - item: "The era-force (political / social layer) is established before the personal arc so stakes have weight."
+        source: "docs/research/manga_craft/historical_period.md#6"
+        evidence_any: ["war", "clan", "lord", "law", "tax", "border", "court", "era"]
+    story_elements_should:
+      - item: "Every faction has comprehensible reasons; no Orient-as-backdrop or one-sided villainy."
+        source: "docs/research/manga_craft/historical_period.md#6"
+        evidence_any: ["reason", "both", "faction", "side", "because", "believed"]
+    mc_items:
+      family: historical
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "No anachronistic dialogue — each line could be said by someone formed entirely by that era."
+        source: "docs/research/manga_craft/historical_period.md#4"
+      - item: "Material culture is conveyed through visual specificity, not vocabulary gates and untranslated jargon."
+        source: "docs/research/manga_craft/historical_period.md#4"
+    panel_grammar_items:
+      - item: "Violence has aftermath — bodies, grief, logistical ruin — not action-movie choreography."
+        source: "docs/research/manga_craft/historical_period.md#2"
+        storyboard_signal_any: ["aftermath", "grief", "ruin", "bodies", "burial"]
+      - item: "Period-authentic composition and material detail anchor every scene."
+        source: "docs/research/manga_craft/historical_period.md#2"
+        storyboard_signal_any: ["period", "material", "detail", "authentic", "era"]
+    failure_modes:
+      - item: "Anachronistic dialogue — modern therapeutic vocabulary or idiom in a period mouth."
+        source: "docs/research/manga_craft/historical_period.md#6"
+        signal_any: ["to be fair", "modern therapy vocabulary in period", "okay boomer in feudal japan"]
+      - item: "History as costume — characters who speak and think like contemporary people in period clothes."
+        source: "docs/research/manga_craft/historical_period.md#6"
+        signal_any: ["modern minds in period clothes", "history as costume only", "contemporary attitudes in ancient setting"]
+      - item: "Violence as spectacle without aftermath."
+        source: "docs/research/manga_craft/historical_period.md#6"
+        signal_any: ["battle spectacle with no consequences", "action-movie choreography no aftermath", "bloodless glorious battle"]
+
+  comedy:
+    bible: docs/research/manga_craft/comedy.md
+    story_elements_must:
+      - item: "A boke/tsukkomi comedic engine drives the beat — a setup and a grounded reaction."
+        source: "docs/research/manga_craft/comedy.md#1"
+        evidence_any: ["setup", "plan", "if i just", "simple", "wait what", "reaction", "straight man", "punchline"]
+      - item: "The scene has at least one grounded anchor (a bystander or reliable tsukkomi) in the chaos."
+        source: "docs/research/manga_craft/comedy.md#6"
+        evidence_any: ["really?", "obviously", "reaction", "sighs", "deadpan", "seriously", "why"]
+      - item: "Escalation resolves in a punchline or beat-pause reset — it does not run past its ceiling."
+        source: "docs/research/manga_craft/comedy.md#3"
+        evidence_any: ["worse", "again", "also", "and then", "finally", "reset", "pause", "punchline"]
+    story_elements_should:
+      - item: "Running gags recur recognizably rather than mutating past recognition."
+        source: "docs/research/manga_craft/comedy.md#6"
+        evidence_any: ["again", "callback", "as always", "every time", "recur"]
+    mc_items:
+      family: comedy
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "The joke is never explained by a character or underlined by a caption; trust the panel and timing."
+        source: "docs/research/manga_craft/comedy.md#4"
+      - item: "The cast occasionally inverts expectation (the boke is once right, the tsukkomi once wrong)."
+        source: "docs/research/manga_craft/comedy.md#4"
+    panel_grammar_items:
+      - item: "A legible visual shift marks the punchline (chibi, blank background, line-weight break)."
+        source: "docs/research/manga_craft/comedy.md#2"
+        storyboard_signal_any: ["chibi", "blank background", "line-weight", "punchline panel", "beat panel"]
+      - item: "The fourth-wall break is reserved for genuine surprise, not a default punchline tool."
+        source: "docs/research/manga_craft/comedy.md#2"
+        storyboard_signal_any: ["fourth wall", "to camera", "aside", "surprise"]
+    failure_modes:
+      - item: "The joke explains itself — a character stating why something is funny kills the beat."
+        source: "docs/research/manga_craft/comedy.md#6"
+        signal_any: ["and that's why it's funny", "the caption explains the joke", "let me tell you why this is hilarious"]
+      - item: "Escalation without a reset — a gag that keeps escalating past its ceiling with no punchline or pause."
+        source: "docs/research/manga_craft/comedy.md#6"
+        signal_any: ["escalates endlessly with no punchline", "gag runs past its ceiling forever", "no beat-pause reset"]
+      - item: "Overusing the fourth-wall break as a default punchline tool."
+        source: "docs/research/manga_craft/comedy.md#6"
+        signal_any: ["breaks the fourth wall every page", "fourth-wall break as default punchline", "constant to-camera asides"]
+
+  cultivation:
+    bible: docs/research/manga_craft/cultivation_martial.md
+    story_elements_must:
+      - item: "A power/rank hierarchy (sect / realm / elder) frames the MC's ascent."
+        source: "docs/research/manga_craft/cultivation_martial.md#1"
+        evidence_any: ["sect", "rank", "realm", "elder", "disciple", "tier", "cultivation", "master"]
+      - item: "Body discipline (meridian / breath / core / training) grounds the progression in effort."
+        source: "docs/research/manga_craft/cultivation_martial.md#3"
+        evidence_any: ["meridian", "breath", "core", "body", "training", "qi", "temper", "refine"]
+      - item: "Every breakthrough costs something (health / relationships / reputation / face) — no weightless progress."
+        source: "docs/research/manga_craft/cultivation_martial.md#6"
+        evidence_any: ["cost", "face", "reputation", "price", "sacrifice", "wound", "backlash", "loss"]
+    story_elements_should:
+      - item: "Face/reputation stakes ride alongside raw power (the genre's divergence from shonen escalation)."
+        source: "docs/research/manga_craft/cultivation_martial.md#5"
+        evidence_any: ["face", "reputation", "honor", "humiliation", "respect", "shame"]
+    mc_items:
+      family: cultivation
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Tier taxonomy is woven into struggle, not delivered as three pages of exposition before anything happens."
+        source: "docs/research/manga_craft/cultivation_martial.md#4"
+      - item: "A named tier is not a personality trait — character is not substituted by stat blocks."
+        source: "docs/research/manga_craft/cultivation_martial.md#4"
+    panel_grammar_items:
+      - item: "Qi effects use the manhua register (flowing robes), never Western plate-armor / D&D-cover drift."
+        source: "docs/research/manga_craft/cultivation_martial.md#2"
+        storyboard_signal_any: ["qi", "robe", "flowing", "manhua", "realm"]
+      - item: "World/power information arrives through character reaction and struggle, not cutaway UI slides."
+        source: "docs/research/manga_craft/cultivation_martial.md#2"
+        storyboard_signal_any: ["struggle", "reaction", "breakthrough", "training", "duel"]
+    failure_modes:
+      - item: "Exposition avalanche — three pages of tier taxonomy before anything happens."
+        source: "docs/research/manga_craft/cultivation_martial.md#6"
+        signal_any: ["three pages of tier taxonomy", "exposition avalanche of realms", "lengthy realm-ranking infodump"]
+      - item: "Power fantasy without cost — a breakthrough that costs nothing feels weightless."
+        source: "docs/research/manga_craft/cultivation_martial.md#6"
+        signal_any: ["breakthrough with no cost", "effortless power fantasy", "ascends with nothing sacrificed"]
+      - item: "Status-screen crutch — all world/power information through cutaway UI slides."
+        source: "docs/research/manga_craft/cultivation_martial.md#6"
+        signal_any: ["cutaway status slide explains everything", "ui screen dumps the power system", "stat window narrates progress"]
+
+  mecha:
+    bible: docs/research/manga_craft/mecha.md
+    story_elements_must:
+      - item: "The pilot commands the machine from inside the cockpit — the cockpit is the genre's delivery mechanism."
+        source: "docs/research/manga_craft/mecha.md#1"
+        evidence_any: ["cockpit", "pilot", "command", "machine", "radio", "controls", "hatch"]
+      - item: "The cockpit-body is felt (harness, sweat, sync) — a psychology inside a machine, not a vehicle for action."
+        source: "docs/research/manga_craft/mecha.md#6"
+        evidence_any: ["harness", "sweat", "hands shake", "sync", "neural", "heartbeat", "breath"]
+      - item: "Mission cost is on the page (casualty / order / abort) — escalation raises emotional stakes, not just specs."
+        source: "docs/research/manga_craft/mecha.md#6"
+        evidence_any: ["mission", "casualty", "order", "cost", "abort", "loss", "sacrifice"]
+    story_elements_should:
+      - item: "The arc closes only when both the pilot and the machine have changed."
+        source: "docs/research/manga_craft/mecha.md#6"
+        evidence_any: ["changed", "damaged", "repaired", "pilot", "machine", "both"]
+    mc_items:
+      family: mecha
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Military briefings do work beyond explaining the plot; the commander is not an exposition unit."
+        source: "docs/research/manga_craft/mecha.md#4"
+      - item: "The rival pilot has an arc — never staged only to be defeated."
+        source: "docs/research/manga_craft/mecha.md#4"
+    panel_grammar_items:
+      - item: "Major battles include cockpit interiority, not only exterior wide-shots."
+        source: "docs/research/manga_craft/mecha.md#2"
+        storyboard_signal_any: ["cockpit", "interior", "pilot face", "harness", "controls"]
+      - item: "Mecha motion and damage stay internally consistent (physics honored, not spectacle-only)."
+        source: "docs/research/manga_craft/mecha.md#2"
+        storyboard_signal_any: ["damage", "weight", "motion", "impact", "physics"]
+    failure_modes:
+      - item: "'Mech porn' — mechanical detail without character interiority."
+        source: "docs/research/manga_craft/mecha.md#6"
+        signal_any: ["pages of mech specs no interiority", "mech porn detail only", "machine described with no pilot inside"]
+      - item: "Cockpit bypass — staging major battles entirely in exterior wide-shots with no cockpit interiority."
+        source: "docs/research/manga_craft/mecha.md#6"
+        signal_any: ["battle entirely in exterior wide shots", "no cockpit interiority at all", "cockpit bypass"]
+      - item: "Meaningless escalation in mech specs without raising emotional stakes."
+        source: "docs/research/manga_craft/mecha.md#6"
+        signal_any: ["new more powerful mech each arc with no stakes", "spec escalation only", "bigger machine no emotional stakes"]
+
+  memoir:
+    bible: docs/research/manga_craft/josei_adult_memoir.md
+    story_elements_must:
+      - item: "The body-state carries the feeling (chest / hands / throat / tired), not an emotion-label."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#1"
+        evidence_any: ["chest", "hands", "throat", "body", "tired", "stomach", "shoulders"]
+      - item: "A concrete memory artifact (photo / diary / letter / recording) anchors the diaristic beat."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#3"
+        evidence_any: ["photo", "diary", "letter", "recording", "drawer", "note", "album"]
+      - item: "The truth stays unresolved — still / unfinished / cannot-say — the form must stay open."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#6"
+        evidence_any: ["still", "unfinished", "don't know", "cannot say", "maybe", "not sure"]
+    story_elements_should:
+      - item: "The narration stays first-person and can only know what the narrator can know."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#5"
+        evidence_any: ["i", "my", "i think", "i remember", "i felt"]
+    mc_items:
+      family: memoir
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Captions never know something the narrator can't; no third-person omniscience breaks the pact."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#4"
+      - item: "Therapy-manual vocabulary is quoted, not used sincerely as diagnosis."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#4"
+    panel_grammar_items:
+      - item: "The honesty register needs a visible tremor in the line — no clean, polished vanity drawing."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#2"
+        storyboard_signal_any: ["tremor", "rough", "sketch", "line", "unpolished"]
+      - item: "Emotional peaks use stillness where shonen uses motion — no speed-lines."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#2"
+        storyboard_signal_any: ["stillness", "silent", "quiet", "still", "pause"]
+    failure_modes:
+      - item: "Epiphany endings — 'and then I understood myself' resolves what the form requires to stay open."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#6"
+        signal_any: ["and then i understood myself", "finally i understood everything", "and it all made sense at last"]
+      - item: "Romance resolution — a new partner fixing the depression retroactively invalidates the subject."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#6"
+        signal_any: ["a new partner fixed her depression", "love cured everything", "he made all the sadness go away"]
+      - item: "Preaching to the reader ('and that's why you shouldn't…') breaks the diary pact."
+        source: "docs/research/manga_craft/josei_adult_memoir.md#6"
+        signal_any: ["and that's why you shouldn't", "the lesson for you readers", "you should learn from my mistake"]
+
+  social_issue:
+    bible: docs/research/manga_craft/social_issue.md
+    story_elements_must:
+      - item: "A real, named social pressure (eldercare / housing / disability / single-parenthood) recurs and compounds — not issue-of-the-week."
+        source: "docs/research/manga_craft/social_issue.md#1"
+        evidence_any: ["denied", "form", "waitlist", "access", "barrier", "closed", "rent", "eldercare", "eviction"]
+      - item: "A power relation (caseworker / landlord / officer / system) exerts institutional pressure on the page."
+        source: "docs/research/manga_craft/social_issue.md#3"
+        evidence_any: ["caseworker", "landlord", "officer", "system", "power", "office", "clerk", "institution"]
+      - item: "A named relationship (my sister / my mother / a neighbor) carries the issue through a family/community lens."
+        source: "docs/research/manga_craft/social_issue.md#6"
+        evidence_any: ["my sister", "my mother", "my friend", "named", "care for", "neighbor", "brother", "father"]
+    story_elements_should:
+      - item: "Fixes are local, partial, and often temporary — no savior protagonist who structurally fixes the system."
+        source: "docs/research/manga_craft/social_issue.md#6"
+        evidence_any: ["for now", "partial", "temporary", "small", "this time", "survive"]
+    mc_items:
+      family: social_issue
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Characters never explain the social issue to each other in terms a real person there would never need explained."
+        source: "docs/research/manga_craft/social_issue.md#4"
+      - item: "Silence is a deliberate charged beat, never used to evade dramatizing a hard conversation."
+        source: "docs/research/manga_craft/social_issue.md#4"
+    panel_grammar_items:
+      - item: "Institutional-object inserts (a form, a notice, a queue ticket) make the pressure legible."
+        source: "docs/research/manga_craft/social_issue.md#2"
+        storyboard_signal_any: ["form", "notice", "ticket", "queue", "document", "insert"]
+      - item: "Hardship is rendered through unglamorous procedural detail, never picturesque poverty."
+        source: "docs/research/manga_craft/social_issue.md#2"
+        storyboard_signal_any: ["realist", "procedural", "detail", "grounded", "unglamorous"]
+    failure_modes:
+      - item: "The savior protagonist — individual competence structurally fixes the institutional problem."
+        source: "docs/research/manga_craft/social_issue.md#6"
+        signal_any: ["single-handedly changes the policy", "personally rescues the family and fixes the system", "savior protagonist solves the institution"]
+      - item: "Essay-register dialogue — characters explaining the social issue to each other like a lecture."
+        source: "docs/research/manga_craft/social_issue.md#6"
+        signal_any: ["explains the social issue like a lecture", "essay-register dialogue about policy", "characters lecture each other on the issue"]
+      - item: "Premature or total resolution — declaring the social pressure solved rather than made survivable."
+        source: "docs/research/manga_craft/social_issue.md#6"
+        signal_any: ["the social problem was completely solved", "poverty ended for good", "the system was permanently fixed"]
+
+  graphic_medicine:
+    bible: docs/research/manga_craft/graphic_medicine.md
+    story_elements_must:
+      - item: "The felt, subjective experience of the body is rendered — not clinical/anatomical illustration only."
+        source: "docs/research/manga_craft/graphic_medicine.md#1"
+        evidence_any: ["symptom", "pain", "ache", "tired", "body", "chest", "nausea", "felt"]
+      - item: "A living care relationship (nurse / doctor / caregiver / patient) is present as a real pressure axis."
+        source: "docs/research/manga_craft/graphic_medicine.md#5"
+        evidence_any: ["nurse", "doctor", "caregiver", "patient", "clinic", "ward", "appointment"]
+      - item: "The patient's consent and agency are visible — decisions happen WITH them, not only TO them."
+        source: "docs/research/manga_craft/graphic_medicine.md#6"
+        evidence_any: ["consent", "choose", "refuse", "agency", "my body", "decide", "ask me", "my choice"]
+    story_elements_should:
+      - item: "Recovery is sustained practice, not a miracle cure or a solved-by-an-event resolution."
+        source: "docs/research/manga_craft/graphic_medicine.md#6"
+        evidence_any: ["practice", "daily", "ongoing", "manage", "living with", "each day", "again"]
+    mc_items:
+      family: graphic_medicine
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "Mechanism is revealed through visual/experiential rendering, not a dialogue lecture (medical infodump)."
+        source: "docs/research/manga_craft/graphic_medicine.md#4"
+      - item: "Narration never turns the patient's experience into a lesson for healthy readers (inspiration-porn)."
+        source: "docs/research/manga_craft/graphic_medicine.md#4"
+    panel_grammar_items:
+      - item: "The clinical space is a specific, researched setting with real protocol and texture, not set-dressing."
+        source: "docs/research/manga_craft/graphic_medicine.md#2"
+        storyboard_signal_any: ["clinic", "ward", "protocol", "chart", "specific", "equipment"]
+      - item: "The body's literal, physical reality is rendered — the condition is never pure metaphor."
+        source: "docs/research/manga_craft/graphic_medicine.md#2"
+        storyboard_signal_any: ["body", "symptom", "physical", "scar", "literal"]
+    failure_modes:
+      - item: "Miracle cure — the condition fully solved, especially via an event rather than sustained practice."
+        source: "docs/research/manga_craft/graphic_medicine.md#6"
+        signal_any: ["miracle cure fixes everything", "suddenly completely healed", "the condition vanished overnight"]
+      - item: "Inspiration-porn tone — the patient's experience turned into a lesson for healthy readers."
+        source: "docs/research/manga_craft/graphic_medicine.md#6"
+        signal_any: ["and that's how i learned to appreciate every day", "inspiration for healthy readers", "her illness taught the able-bodied a lesson"]
+      - item: "Clinician-as-villain shortcut — a doctor made cruel to manufacture conflict."
+        source: "docs/research/manga_craft/graphic_medicine.md#6"
+        signal_any: ["the evil doctor withholds care", "cruel clinician villain", "sadistic doctor manufactures conflict"]
+
+  battle_internal:
+    bible: docs/research/manga_craft/battle_internal.md
+    story_elements_must:
+      - item: "The conflict is psychological/internal, externalized through a self/shadow/mirror figure — never a literal second combatant."
+        source: "docs/research/manga_craft/battle_internal.md#1"
+        evidence_any: ["shadow", "mirror", "other me", "counterpart", "self", "reflection", "inner"]
+      - item: "A body decision under pressure carries the turn (hands / step forward / the body decides)."
+        source: "docs/research/manga_craft/battle_internal.md#3"
+        evidence_any: ["choose", "hands", "step forward", "body decides", "still", "breath", "grip"]
+      - item: "Competence stays visibly intact — clumsiness would read as technical incompetence, not doubt."
+        source: "docs/research/manga_craft/battle_internal.md#6"
+        evidence_any: ["skilled", "precise", "steady", "master", "sure", "controlled", "knows"]
+    story_elements_should:
+      - item: "The internal question recurs at lower amplitude across the series; it is never won permanently in one chapter."
+        source: "docs/research/manga_craft/battle_internal.md#6"
+        evidence_any: ["again", "still", "returns", "pull back", "once more", "not yet"]
+    mc_items:
+      family: battle_internal
+      lists: [must_have, should_have, anti_patterns, endurance_mechanics]
+    dialogue_rules:
+      - item: "No line ever states 'this fight represents your inner doubt'; stance-mirroring carries it."
+        source: "docs/research/manga_craft/battle_internal.md#4"
+      - item: "The mirror-opponent embodies the psychology through posture/action, never diagnoses it as a therapist."
+        source: "docs/research/manga_craft/battle_internal.md#4"
+    panel_grammar_items:
+      - item: "Stance-mirroring and line-weight shifts carry the internal state; spreads are rare and reserved for the vow/realization."
+        source: "docs/research/manga_craft/battle_internal.md#2"
+        storyboard_signal_any: ["stance", "mirror", "line-weight", "posture", "vow"]
+      - item: "The body occasionally pays a real, visible price (an old wound reopening, a hand that won't stop shaking)."
+        source: "docs/research/manga_craft/battle_internal.md#2"
+        storyboard_signal_any: ["wound", "shaking", "exhaustion", "trembles", "cost"]
+    failure_modes:
+      - item: "The battle turns out to be literal after all — resolving via an actual physical fight with an actual entity."
+        source: "docs/research/manga_craft/battle_internal.md#6"
+        signal_any: ["the inner battle was a real monster", "resolves with an actual physical entity", "literal second combatant appears"]
+      - item: "The mentor/narrator explains the metaphor — 'this fight represents your inner doubt'."
+        source: "docs/research/manga_craft/battle_internal.md#6"
+        signal_any: ["this fight represents your inner doubt", "the caption explains the metaphor", "villain-as-therapist diagnoses him"]
+      - item: "Winning the internal battle permanently in one chapter — it resolves cleanly and never resurfaces."
+        source: "docs/research/manga_craft/battle_internal.md#6"
+        signal_any: ["conquers his inner demon forever", "the doubt never returns again", "permanently wins the internal battle in one chapter"]
