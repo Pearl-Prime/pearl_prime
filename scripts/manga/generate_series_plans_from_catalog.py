@@ -278,6 +278,8 @@ def build_plan(row: dict[str, Any], routing: dict[str, Any]) -> dict[str, Any]:
         "chapters_target": row["chapters_target"],
         "ai_disclosure_required": True,             # all AI-rendered series declare
     }
+    from phoenix_v4.manga.mode.catalog import apply_brand_mode
+    plan = apply_brand_mode(plan)
     if pending:
         plan["pending_partner_targets"] = pending
     return plan
