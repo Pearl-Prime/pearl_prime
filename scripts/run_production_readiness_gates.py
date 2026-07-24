@@ -1127,6 +1127,32 @@ def main() -> int:
     else:
         gate("46. Store series name consistency", True, "gate script not present; skip", skip=True)
 
+    # --- 47. Manga arc storyboard contract (ADVISORY — Lane 01, manga process uplift) ---
+    # Authority: docs/specs/MANGA_ARC_STORYBOARD_CONTRACT.md. Advisory on first
+    # land per the uplift pack; promotion to required is Lane 07's gate pass.
+    arc_gate = REPO_ROOT / "scripts" / "ci" / "check_manga_arc_storyboard.py"
+    if arc_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(arc_gate)],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            arc_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            arc_detail = out.splitlines()[-1] if out else "check_manga_arc_storyboard"
+        except Exception as e:
+            arc_ok = False
+            arc_detail = str(e)
+        gate(
+            "47. Manga arc storyboard contract (story_move + visual_proof — ADVISORY)",
+            arc_ok, arc_detail, advisory=True,
+        )
+    else:
+        gate("47. Manga arc storyboard contract", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
