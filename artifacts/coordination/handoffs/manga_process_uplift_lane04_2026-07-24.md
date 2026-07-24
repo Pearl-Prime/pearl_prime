@@ -41,12 +41,15 @@ generator's documented blend weights).
 ## Findings / follow-ups (not actioned here)
 
 1. **Untracked-authority gap:** `docs/research/manga_craft/main_character_interaction_grammar_by_genre.md`,
-   `comedy_gag.md`, `cultivation_martial.md` (file), and `story_quality_gap_audit_modern_reader_worlds.md`
-   exist in the shared checkout but are NOT on origin/main (same class as the known
-   catalog tracked-vs-untracked gap). Lane 05's PR #323 lands bible content; whoever lands
-   `comedy_gag.md` should carry the comedy exemplar addendum (Ryotsu/Kochikame 200 vols,
-   Gintoki, Saiki — study §comedy has the full text). The interaction-grammar doc needs a
-   landing owner.
+   `comedy_gag.md`, and `story_quality_gap_audit_modern_reader_worlds.md` exist in the shared
+   checkout but are NOT on origin/main (same class as the known catalog tracked-vs-untracked
+   gap). Lane 05's PR #323 lands `comedy.md` (index row 24, absorbed from #295), which
+   supersedes the untracked `comedy_gag.md`; a follow-up should add the comedy endurance
+   exemplars to that bible's §5 (Ryotsu/Kochikame 200 vols, Gintoki, Saiki — study §comedy
+   has the full text). Same applies to the other Lane-05-landed bibles for families covered
+   by this study (slice_of_life, food, family, procedural, essay, graphic_medicine,
+   battle_internal, social_issue) — study §-sections are ready to cite. The
+   interaction-grammar doc still needs a landing owner.
 2. **Romance webtoon share correction:** the 39.4% figure in the 2025-era docs reads as a
    platform-specific share; cross-market 2025 romance share is ≈27.4% (#1 rank unchanged).
    Noted in the allocation addendum; no table rewrite performed (append-only rule).

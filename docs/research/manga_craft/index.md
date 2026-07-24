@@ -69,6 +69,20 @@ The three M3 Wave-1 stub bibles (~2 KB each) are now full 10-section bibles at t
 > which merged first via PR #94, is pinned to the canonical `cultivation_martial` pacing/cookbook/
 > drawing-tradition configs, and closes the `VALID_GENRES` gap — canonical singleton wins.
 
+### Cross-cutting research layers (2026-07-24, manga process uplift Lane 04)
+
+- **[MC endurance study](../../../artifacts/research/manga_mc_endurance_study_2026-07-24.md)** —
+  enduring-protagonist extraction for all 25 canonical genre families
+  (`canonical_genre_list.yaml` ids): ≥3 commercially proven MC exemplars each, plus trait
+  architecture, endurance mechanics (what carries 100+ episodes), reader-bond devices
+  (incl. per-genre failure cadence), documented anti-patterns, and wellness-embed notes
+  (vessel cross-refs). Machine-usable distillation:
+  `config/manga/mc_endurance_checklists.yaml` (25 families × must/should/anti/endurance,
+  289 anchored items; `status: unwired` until Lane 07 wires it into the story excellence
+  gate). Dated §5 addendum lines were added to the 9 bibles whose protagonist sections
+  lacked the study's named exemplars; bibles landed after 2026-07-24 (rows 24–32) can cite
+  the study's matching §-sections directly.
+
 ## How to use
 
 - **For 48-volume pre-planning:** read Section 7 of the relevant lane first; each lane gives a concrete 48-volume arc shape.
@@ -113,3 +127,10 @@ The three M3 Wave-1 stub bibles (~2 KB each) are now full 10-section bibles at t
 | family | 4 × 12-vol household-configuration macro-arcs (formation → growth friction → wider household → legacy) | one household-configuration band |
 | slice_of_life | 12 × 4-vol ensemble terms/seasons (or 8 × 6-vol "chapters of the group's life", or 48 standalone-ish place-and-cast-linked vols) | one ensemble term/season |
 | food | 12 × 4-vol "menus" by technique/ingredient theme (or 4 × 12-vol career stages apprentice→head-of-table, or 48 standalone-ish vols linked by one restaurant/tavern vessel) | one menu/technique block |
+
+> **2026-07-24 correction (Lane 04, per arc-cadence study):** the `webtoon romance` row's
+> "48 seasons × ~25 episodes" mapping is contradicted by live platform data — seasons run
+> **78–115+ episodes** (Tower of God S1 = 78; Lore Olympus S1 finale = ep 115); ~20–30
+> episodes is the *arc* grain, not the season. Seasons are production units, not story
+> units. See `artifacts/research/manga_arc_cadence_study_2026-07-24.md` (merged #322,
+> `9446b3e74e`), which carries the dated corrections to the two webtoon bibles' §7.
