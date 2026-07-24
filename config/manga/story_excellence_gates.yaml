@@ -6,6 +6,26 @@ schema_version: "1.0.0"
 artifact_type: manga_story_excellence_gates
 production_score_threshold: 85
 
+# ── Genre craft checklist wiring (Lane 07, manga process uplift 2026-07-24) ──
+# The compiled per-genre craft checklists (story_elements_must / failure_modes /
+# dialogue_rules / panel_grammar_items) live in genre_craft_checklists.yaml, one
+# block per canonical genre id (same key-space as genre_core_evidence below and
+# canonical_genre_list.yaml). Each block's mc_items REFERENCE mc_endurance_checklists.yaml
+# by key (never restated). The GATE_CRAFT check (excellence_gate._check_genre_craft):
+#   * hard-blocks when a failure_modes signal_any phrase is present on the page;
+#   * hard-blocks when < must_coverage_floor of story_elements_must have on-page
+#     evidence (each must-item carries evidence_any keywords);
+#   * NEVER hard-gates endurance_mechanics (100+-episode signature — completion-first
+#     genres legitimately lack them) and does NOT convert per-family failure cadence
+#     into a universal pass/fail (both per the MC-endurance study synthesis).
+# GATE_CRAFT is a hard-blocking, unweighted evidence gate (like RESEARCH/ARCHITECT/
+# ALIAS) — it does not enter the weighted score, so it never lowers threshold 85.
+genre_craft:
+  checklist_file: config/manga/genre_craft_checklists.yaml
+  mc_endurance_file: config/manga/mc_endurance_checklists.yaml
+  enforce: true
+  must_coverage_floor: 0.5   # fraction of story_elements_must needing on-page evidence
+
 weights:
   modern_reader_realization: 20
   genre_core_pleasure: 20
