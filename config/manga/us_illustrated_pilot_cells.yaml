@@ -3,11 +3,17 @@
 # Authority: artifacts/qa/US_ILLUSTRATED_SELF_HELP_PILOT_2026-07-08.md
 # Consumer: scripts/ci/check_western_lane_format.py
 
-schema_version: "1.0.0"
+schema_version: "1.1.0"
 status: active
 lane: western_intent_led
 locale: en_US
 master_format: direct_self_help_illustrated
+
+# Format parameters were ASSERTED-only (none existed) until 2026-07-24; now RESEARCHED.
+# Study: artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md
+# (17-title comp corpus; norms §2; per-cell recommendations §4 with confidence).
+format_parameters_status: RESEARCHED
+format_study: artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md
 
 # Phase B (not in this PR): prose authoring, illustration render queue, Andrews McMeel trim export.
 phase_b_note: >-
@@ -22,6 +28,21 @@ pilot_cells:
     sub_shape: doodle_humor_essay
     series_plan_stub: stillness_press__en_US__iyashikei__illustrated_pilot01.yaml
     teacher_id: ahjan
+    format_parameters:
+      source: "artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md#4-recommendations-per-pilot-cell"
+      provenance: RESEARCHED
+      confidence: high
+      format_class: B_doodle_humor_strip
+      page_count_target: 128
+      page_count_band: [112, 144]
+      trim_class_in: "7 x 9"
+      color_mode: bw_plus_single_spot
+      art_text_class: ST          # strip/panel cartoon, ~70:30 art
+      words_per_page_band: [10, 40]
+      total_word_class: micro     # 3-5k total
+      binding: paperback
+      us_list_price_band_usd: [14.99, 16.99]
+      structure: thematic_chapters_4_6
 
   - brand_id: digital_ground
     topic: burnout
@@ -30,6 +51,21 @@ pilot_cells:
     sub_shape: workplace_doodle
     series_plan_stub: digital_ground__en_US__workplace_drama__illustrated_pilot01.yaml
     teacher_id: miki
+    format_parameters:
+      source: "artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md#4-recommendations-per-pilot-cell"
+      provenance: RESEARCHED
+      confidence: high
+      format_class: B_doodle_humor_strip
+      page_count_target: 144
+      page_count_band: [128, 160]
+      trim_class_in: "7 x 9"
+      color_mode: flat_color_2_4_tone
+      art_text_class: ST          # strip/panel cartoon, ~70:30 art
+      words_per_page_band: [10, 50]
+      total_word_class: micro     # 3-6k total
+      binding: paperback
+      us_list_price_band_usd: [16.99, 16.99]
+      structure: thematic_chapters_4_6_plus_microglossary
 
   - brand_id: cognitive_clarity
     topic: overthinking
@@ -38,6 +74,21 @@ pilot_cells:
     sub_shape: confessional_essay
     series_plan_stub: cognitive_clarity__en_US__psychological_thriller__illustrated_pilot01.yaml
     teacher_id: kenjin
+    format_parameters:
+      source: "artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md#4-recommendations-per-pilot-cell"
+      provenance: RESEARCHED
+      confidence: med_high        # class solid; word-mass target rests on estimated words/page
+      format_class: C_graphic_memoir_essay
+      page_count_target: 208
+      page_count_band: [192, 256]
+      trim_class_in: "5.5 x 8.2 - 6.5 x 8.5"
+      color_mode: duotone_or_color
+      art_text_class: HY          # hybrid alternating text/art, ~50:50
+      words_per_page_band: [80, 160]
+      total_word_class: medium    # 18-28k total
+      binding: paperback          # hardcover at $21.99 viable per comp row 6
+      us_list_price_band_usd: [17.99, 19.99]
+      structure: discrete_essays_12_16
 
   - brand_id: healing_ground
     topic: somatic_healing
@@ -46,6 +97,21 @@ pilot_cells:
     sub_shape: warm_illustrated_essay
     series_plan_stub: healing_ground__en_US__supernatural_mystery__illustrated_pilot01.yaml
     teacher_id: null
+    format_parameters:
+      source: "artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md#4-recommendations-per-pilot-cell"
+      provenance: RESEARCHED
+      confidence: high            # strongest breakout comps in corpus (study rows 1, 2, 17)
+      format_class: A_gift_inspiration
+      page_count_target: 144
+      page_count_band: [128, 160]
+      trim_class_in: "6.7 x 8.2"
+      color_mode: full_color_watercolor_wash
+      art_text_class: FP          # full-page-art dominant, ~80:20
+      words_per_page_band: [10, 40]
+      total_word_class: micro     # 2.5-5k total
+      binding: hardcover          # only hardcover-first cell (study §4 cross-cell rule)
+      us_list_price_band_usd: [19.99, 22.99]
+      structure: no_chapters_movements_4_8
 
   - brand_id: calm_student
     topic: exam_anxiety
@@ -54,3 +120,19 @@ pilot_cells:
     sub_shape: ya_campus_doodle
     series_plan_stub: calm_student__en_US__school_coming_of_age__illustrated_pilot01.yaml
     teacher_id: null
+    format_parameters:
+      source: "artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md#4-recommendations-per-pilot-cell"
+      provenance: RESEARCHED
+      confidence: med             # no direct exam-anxiety illustrated-trade comp; nearest are
+                                  # anxiety-doodle + graphic-medicine explainer inserts
+      format_class: B_doodle_humor_strip_plus_D_explainer_inserts
+      page_count_target: 128
+      page_count_band: [112, 144]
+      trim_class_in: "7 x 9"
+      color_mode: two_color_or_full_color
+      art_text_class: ST          # strip cartoon ~70:30 + calm-technique explainer spreads
+      words_per_page_band: [15, 50]
+      total_word_class: micro     # 3-6k total
+      binding: paperback
+      us_list_price_band_usd: [14.99, 14.99]
+      structure: exam_arc_chapters_4_6_plus_technique_spreads

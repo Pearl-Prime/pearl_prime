@@ -277,3 +277,33 @@ Portal fantasy in which a woman with a chronic illness arrives in a world that h
   - Open WEBTOON Canvas accounts for pilot brands
   - Research current Scholastic Graphix open submission windows
   - Identify 5–10 US literary agents with graphic memoir expertise for `trauma_path_healing` and `healing_ground_healing` submissions
+
+---
+
+## Addendum (2026-07-24) — US illustrated self-help book-format study landed
+
+The illustrated self-help lane (`western_intent_led` / `direct_self_help_illustrated`,
+the "Illustrated Prose Hybrid" 5% row in §3) now has **researched** format parameters:
+**`artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md`** (manga
+process uplift pack, Lane 02).
+
+What changed:
+
+- **17-title comp corpus** (gift/inspiration, doodle-humor, graphic-memoir essay,
+  graphic-medicine, illustrated-prose idea books) with sourced page counts, trims,
+  prices, shelving, and sales signal — replacing the two-comp sketch in §3.
+- **Format-norm bands derived, not assumed** (study §2): gift class centers 128–176pp
+  HC $19.99–22.99; doodle-strip class 112–144pp PB $14.99–16.99; graphic-essay class
+  192–256pp; words-per-page and art-density bands per class.
+- **Category tide:** US self-help print units +14.7% in 2025 (Circana BookScan via PW);
+  the gift-illustrated ceiling is category-defining (Boy/Mole was the #1 book of 2020,
+  UK TCM). See study §3, including the negative finding that born-illustrated wins —
+  do not plan "illustrated editions" of existing prose catalog as the lane mechanism.
+- **`config/manga/us_illustrated_pilot_cells.yaml`** now carries per-cell
+  `format_parameters` blocks (page/trim/color/art:text/words-page/price/structure)
+  with `provenance: RESEARCHED`, source-anchored to the study, confidence per cell.
+- **Dual planning frame (operator ruling Q-MPU-03):** this lane is a BOOK format first;
+  the serialized frame is Instagram-strip-cadence-feeding-a-collection, NOT webtoon
+  episodes (study §6 — Western wellness serials live on Instagram/Tumblr; WEBTOON Canvas
+  wellness is hobbyist-scale only). Planning-contract implications flagged to Lane 06
+  via `artifacts/coordination/handoffs/manga_process_uplift_lane02_2026-07-24.md`.
