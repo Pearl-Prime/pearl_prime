@@ -18,6 +18,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from phoenix_v4.manga.chapter.chapter_production import produce_chapter_assets
 from phoenix_v4.manga.image_backend import FixtureReplayImageBackend, NoopImageBackend
 from phoenix_v4.manga.models import paths as manga_paths
+from phoenix_v4.manga.style_resolution import resolve_style_id
 from scripts.manga._config import config_snapshot_hash, write_atomically
 
 
@@ -39,7 +40,13 @@ def main() -> int:
         action="store_true",
         help="Write final_page_composite/page_NNN.png (requires Pillow + ok panel paths)",
     )
-    ap.add_argument("--style-id", default="dark_psychological")
+    ap.add_argument(
+        "--style-id",
+        default=None,
+        help="Explicit style archetype id. Omit to resolve via the authority "
+        "chain in phoenix_v4.manga.style_resolution (genre/teacher/format "
+        "signal, falling back to grounded_realism).",
+    )
     ap.add_argument("--teacher-id", default="ahjan")
     ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
@@ -79,12 +86,20 @@ def main() -> int:
             print("compose-pages needs replay backend with real PNG paths", file=sys.stderr)
             return 1
 
+    resolved_style_id, style_source = resolve_style_id(
+        explicit_override=args.style_id,
+        chapter_script=raw,
+        teacher_id=args.teacher_id,
+        genre_id=raw.get("genre") or raw.get("genre_id"),
+    )
+    print(f"style_id={resolved_style_id} (source={style_source})", file=sys.stderr)
+
     try:
         bundle = produce_chapter_assets(
             raw,
             image_backend=backend,
             config_hash=snap,
-            style_id=args.style_id,
+            style_id=resolved_style_id,
             teacher_id=args.teacher_id,
             final_pages_out=final_out,
         )

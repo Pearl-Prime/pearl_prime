@@ -306,3 +306,8 @@ Keep PRs ≤180 files; one brand or one locale per wave where possible.
 4. **Re-run vs build:** Title/subtitle regen and cover render = **re-run**; localization, store_series engine, CJK fonts, missing plan dirs = **build**.
 
 5. **Recommended waves:** W0 engine gate → W1 en_US per-brand regen → W2 store_series → W3 cover proof → W4–W6 locale expansion (operator chooses scope per PR).
+
+## gt30d C06 pointer (2026-07-22)
+
+gt30d C06 pointer: five-layer uniqueness + author signature unify lives in [`docs/specs/COVER_FIVE_LAYER_UNIQUENESS_V1_SPEC.md`](specs/COVER_FIVE_LAYER_UNIQUENESS_V1_SPEC.md) § gt30d C06.
+Do not create a parallel cover registry.

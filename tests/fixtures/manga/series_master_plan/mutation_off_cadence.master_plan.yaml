@@ -1,0 +1,262 @@
+# Test fixture — MUTATION (must FAIL): arc length 30 outside mecha [2,15] +/-25%
+schema_version: 1.0.0
+artifact_type: series_master_plan
+schema_authority: schemas/manga/series_master_plan.schema.json
+series_id: fixture_brand__joshin__en_US__burnout__the_chassis_test_plan
+brand_id: fixture_brand
+locale: en_US
+genre_id: mecha
+pacing_family: mecha
+cadence_source: pacing_yaml
+cadence_ref: config/manga/manga_pacing_by_genre.yaml#genre_pacing.mecha.arc_cadence
+episode_unit: monthly_chapter
+episode_unit_mapping_note: 1 episode = 1 monthly mecha chapter; arc_cadence counts are in
+  this unit.
+episode_horizon: 100
+plan_frame: serialized_episode
+mode: teacher
+teacher_id: joshin
+musician_id: null
+self_help_topic_set:
+- burnout
+first_major_shift:
+  arc_id: arc_03_the_grounded_wing
+  episode: 24
+  description: The squadron is grounded and re-formed under a new doctrine; the hangar the
+    series opened in is decommissioned for good.
+migration:
+  migrated_from_48ep: false
+arcs:
+- arc_id: arc_01_the_ragged_sync
+  episode_start: 1
+  episode_end: 6
+  detail_level: detailed
+  arc_premise: A cadet pilot forces every sync with the training chassis and burns out circuits
+    faster than the hangar can replace them.
+  arc_promise: The reader learns the cost ledger of forced syncs before the first real sortie
+    ever launches.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The cadet treats the machine as a thing to be overridden.
+    to_state: The cadet has felt, once, what a settled sync does to the readouts.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/endurance
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The mechanic never lectures; by arc end the cadet copies the
+      pre-flight breath the mechanic uses on the machine itself.
+  episodes:
+  - episode: 1
+    logline: A failed sync test in front of the whole cadre puts the cadet on probation and
+      the training chassis in the repair bay.
+    genre_pleasure_beat: Launch-bay hardware detail and a sync sequence that goes loud and
+      wrong.
+    self_help_topic_beat: Forcing reads as dedication to the cadet and as damage on every
+      gauge.
+    hook:
+      position: closing_panel
+      promise: One more failed sync ends the cadet's placement for good.
+  - episode: 2
+    logline: Repair duty under the night-shift mechanic shows the cadet how the chassis is
+      listened to when nobody is trying to pilot it.
+    genre_pleasure_beat: Maintenance-bay quiet, panels of hands and coolant lines.
+    self_help_topic_beat: Care as diagnostics; the machine's strain mirrors the pilot's.
+    hook:
+      position: closing_panel
+      promise: The mechanic marks one gauge the cadet has never once watched.
+  - episode: 3
+    logline: A live drill forces the cadet back into the seat before the probation review,
+      with the marked gauge taped over.
+    genre_pleasure_beat: Drill choreography against a timer, squad radio discipline.
+    self_help_topic_beat: The body's alarm precedes the cockpit warning by a full panel.
+    hook:
+      position: closing_panel
+      promise: The taped gauge is climbing and only the reader knows.
+  - episode: 4
+    logline: The drill ends in a controlled abort that the cadre reads as failure and the
+      mechanic reads as the first correct decision all season.
+    genre_pleasure_beat: Abort sequence rendered as competence, not collapse.
+    self_help_topic_beat: Stopping before rupture is reframed as skill by someone who knows
+      the cost.
+    hook:
+      position: closing_panel
+      promise: The review board wants an explanation the cadet cannot yet word.
+  - episode: 5
+    logline: At the review board the cadet defends the abort with the mechanic's gauge log
+      instead of an apology, and the room splits.
+    genre_pleasure_beat: Procedural tension in a briefing room lined with flight records.
+    self_help_topic_beat: Evidence of limits is presented as professionalism for the first
+      time.
+    hook:
+      position: closing_panel
+      promise: One examiner requests the cadet for a live escort sortie.
+  - episode: 6
+    logline: The escort sortie flies quiet and uneventful, and the settled sync holds for
+      a full patrol arc for the first time.
+    genre_pleasure_beat: First clean flight — the machine hum steady across three silent panels.
+    self_help_topic_beat: The unclenched body performs better and the readouts prove it.
+    hook:
+      position: closing_panel
+      promise: A distress ping arrives on the last panel of the patrol.
+- arc_id: arc_02_the_distress_arc
+  episode_start: 7
+  episode_end: 14
+  detail_level: outline
+  arc_premise: The distress ping leads the squadron into a salvage field where forced syncs
+    are the local doctrine and the wrecks show where that ends.
+  arc_promise: The salvage field is a museum of the cost ledger from arc one, at squadron
+    scale.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The cadet believes their old habit was a personal flaw.
+    to_state: The cadet recognizes forced sync as a culture with casualties.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/anti
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The mechanic's doctrine is read backwards out of wreckage; nothing
+      is stated that a hull breach has not already shown.
+- arc_id: arc_03_the_grounded_wing
+  episode_start: 15
+  episode_end: 24
+  detail_level: outline
+  arc_premise: Fallout from the salvage report grounds the wing; a re-formed squadron under
+    a new doctrine must re-certify on settled-sync protocols.
+  arc_promise: The institution itself is forced through the change the cadet went through
+    in arc one.
+  status_quo_shift: The old hangar and its forced-sync certification are decommissioned; the
+    series' home base changes permanently.
+  mc_change_vector:
+    from_state: The cadet practices the settled sync privately, against the grain.
+    to_state: The cadet co-writes the drill sheet the whole wing now certifies on.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/endurance
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The mechanic declines the instructor post and keeps the night
+      shift; the doctrine stays care, not curriculum.
+- arc_id: arc_04_first_deployment
+  episode_start: 25
+  episode_end: 36
+  detail_level: outline
+  arc_premise: The re-certified wing takes its first real deployment escorting a convoy through
+    contested corridor space.
+  arc_promise: Settled-sync doctrine meets an enemy that specifically punishes hesitation,
+    and holds anyway.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The doctrine has only ever been tested in drills.
+    to_state: The doctrine has a combat record and the cadet owns a piece of it.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/endurance
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: Field repairs under fire become the vessel; the mechanic's habits
+      are now squadron muscle memory.
+- arc_id: arc_05_the_rival_wing
+  episode_start: 37
+  episode_end: 50
+  detail_level: outline
+  arc_premise: A decorated rival wing still flying forced-sync doctrine posts better sortie
+    numbers, and command starts comparing charts.
+  arc_promise: 'The numbers fight: short-term output against the cost ledger, argued in hangars
+    and infirmaries.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The cadet needs the doctrine to be visibly winning to trust it.
+    to_state: The cadet can hold the slower curve while the rival wing burns bright.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/bond
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The rival wing's ace quietly visits the night shift; the vessel's
+      reach crosses wing lines before any argument is won.
+- arc_id: arc_06_attrition_season
+  episode_start: 51
+  episode_end: 66
+  detail_level: outline
+  arc_premise: A long attrition campaign grinds both wings; the rival wing's numbers collapse
+    exactly the way the salvage field predicted.
+  arc_promise: The cost ledger comes due on-page, and the series refuses to gloat about it.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The cadet carries the doctrine as a position in an argument.
+    to_state: The cadet carries stretchers for the wing that argued back, no told-you-so anywhere.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/bond
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The mechanic organizes the recovery bay for the rival wing's
+      machines; care extended to the opposition is the arc's whole teaching.
+- arc_id: arc_07_the_long_watch
+  episode_start: 67
+  episode_end: 70
+  detail_level: outline
+  arc_premise: A quiet occupation posting tests the doctrine against monotony instead of fire
+    — the slow burnout that no siren announces.
+  arc_promise: The series names the second kind of burnout and gives it the same seriousness
+    as combat.
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The cadet-now-veteran equates danger with intensity.
+    to_state: The veteran can keep a crew whole through months where nothing happens.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/wellness
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The night-shift ritual scales to a whole garrison calendar; the
+      teaching is now infrastructure.
+- arc_id: arc_08_the_handover
+  episode_start: 71
+  episode_end: 100
+  detail_level: outline
+  arc_premise: New cadets arrive flying the doctrine as their default; the veteran must learn
+    to be the mechanic's kind of presence for pilots who never knew the old hangar.
+  arc_promise: 'The series closes its loop: the settled strike is now the baseline, and the
+    veteran''s job is to keep it human.'
+  status_quo_shift: null
+  mc_change_vector:
+    from_state: The veteran's identity is the person who changed the doctrine.
+    to_state: The veteran can be ordinary inside the world that change built.
+    endurance_checklist_refs:
+    - mc_endurance_study#mecha/endurance
+  self_help_topic: burnout
+  mode_arc:
+    mode: teacher
+    vessel: the mechanic who co-regulates the pilot
+    arc_teaching_resolution: The veteran takes a night shift of their own; the vessel is inherited,
+      never named as inheritance.
+conformance:
+  genre_contract:
+    checked: true
+    craft_bible: docs/research/manga_craft/mecha.md
+  cadence_conformance:
+    checked: true
+    family_range:
+    - 2
+    - 15
+    arc_pattern: escalating
+    tolerance_pct: 25
+  mc_endurance:
+    status: pending_lane_04
+    checklist: config/manga/mc_endurance_checklists.yaml
+    family_key: mecha
+  mode_arc_coherence:
+    checked: true
+    vessels_config: config/manga/manga_mode_vessels.yaml
+acceptance_layer: structurally_clear
+notes: Test fixture only — not a production plan.

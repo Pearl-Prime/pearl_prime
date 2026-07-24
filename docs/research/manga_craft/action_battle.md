@@ -69,6 +69,8 @@ Cover at thumbnail scale: warm palette (red/orange/yellow dominant), single hero
 
 **Demographic flexibility:** Same archetype grammar serves both shonen (younger reader, simpler word register, more exclamation marks, faster escalation) and seinen (older reader, denser internal monologue, higher cost per power-up, moral ambiguity in villain). Adjust word density and philosophical depth per target demographic; do not alter the core archetype grammar.
 
+**2026-07-24 addendum (MC endurance study):** named endurance exemplars for this archetype grammar — Monkey D. Luffy (*One Piece*, 27+ yrs, Oricon #2 2026-H1), Yuji Itadori (*Jujutsu Kaisen*, 150M cumulative 2026), and new-generation proof Chihiro Rokuhira (*Kagurabachi*, 4M+ by 2026): quiet grief-forward register inside the shonen contract. Trait/endurance extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §battle.
+
 ## 6. Failure Modes
 
 1. **Power-creep escalation without a ceiling.** Endlessly raising power levels until stakes become meaningless. Fix: establish a conceptual ceiling early or pivot to tactical/strategic fight choreography after physical escalation maxes out.

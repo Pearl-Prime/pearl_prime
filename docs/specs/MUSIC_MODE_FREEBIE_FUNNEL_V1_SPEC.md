@@ -169,3 +169,25 @@ AMENDMENT entry: docs/PEARL_ARCHITECT_STATE.md MUSIC-MODE-FREEBIE-FUNNEL-V1-02 �
 |------|--------|
 | 2026-05-09 | Initial Pearl_Architect doc-only cap + spec; discovery snapshot on `origin/main`. |
 | 2026-05-09 | AMENDMENT — operator Q1=approve, Q2=minimal, Q3=phased recorded in §16 (Pearl_Conductor autonomous wave defaults; binding). Cap status proposed → active. Cross-ref: `docs/PEARL_ARCHITECT_STATE.md` MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — AMENDMENT — 2026-05-09. |
+
+## gt30d C05 — Wizard/survey-driven freebie selection (2026-07-22)
+
+**Keeper:** I026 · Additive to this ACTIVE spec — does not supersede §0–§16.
+
+### Hard rule
+
+Freebie selection for music-mode brands MUST be driven by:
+
+1. `brand_wizard` YAML output for the minted brand, and
+2. `musician_reflections_survey` (or successor) YAML,
+
+**not** hardcoded freebie lists in Python.
+
+### Cursor implementation surface
+
+- `scripts/music/select_music_mode_freebie.py` — hard-errors if wizard/survey candidates missing
+- Reuse pack: `docs/agent_prompt_packs/20260721_music_mode_wizard_to_pipeline_wiring/`
+
+### Signal
+
+`gt30d-c05-spec-terminal` when this additive section lands with the selector.

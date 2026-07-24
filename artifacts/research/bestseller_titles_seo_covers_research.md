@@ -4,6 +4,8 @@
 **Scope:** 13 global markets, 312 brands, ~1,500-2,500 titles
 **Researcher:** Pearl_Research
 
+**See also:** [`SERIES_TITLES_SUBTITLES_PLATFORM_SEO_RESEARCH_2026-07-23.md`](SERIES_TITLES_SUBTITLES_PLATFORM_SEO_RESEARCH_2026-07-23.md) — extends this single-book title/subtitle/SEO research with **series-level** mechanics: per-platform series-metadata objects (KDP Series name/number, Google Play series linking, Apple Books series-completeness rule, Audible's ASIN-inherited series page), the cross-book keyword ladder, and series planning/duration.
+
 ---
 
 ## Table of Contents

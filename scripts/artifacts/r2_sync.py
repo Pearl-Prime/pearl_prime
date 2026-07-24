@@ -49,7 +49,9 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -59,6 +61,9 @@ CONFIG = REPO / "config" / "artifacts" / "r2_buckets.yaml"
 SCHEMA = REPO / "schemas" / "artifacts" / "manifest.schema.json"
 LOCAL_CACHE_DIR = REPO / "artifacts" / "r2_cache"
 OFFLOAD_MANIFEST_DIR = REPO / "artifacts" / "manifests" / "lfs_offload"
+DEFAULT_WORKERS = 16
+DEFAULT_MANIFEST_PART_SIZE = 2000
+_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 # ─── Errors ─────────────────────────────────────────────────────────────────
@@ -169,9 +174,13 @@ def _validate_manifest(data: dict[str, Any]) -> list[str]:
     except ImportError:
         # Soft check
         errors = []
-        for req in ("manifest_schema", "manifest_id", "namespace", "bucket", "artifacts"):
+        for req in ("manifest_schema", "manifest_id", "namespace", "bucket"):
             if req not in data:
                 errors.append(f"missing required: {req}")
+        has_artifacts = "artifacts" in data
+        has_parts = "parts" in data
+        if has_artifacts == has_parts:
+            errors.append("manifest must contain exactly one of artifacts or parts")
         return errors
 
 
@@ -187,6 +196,189 @@ def _write_manifest(path: Path, data: dict[str, Any]) -> None:
         + yaml.safe_dump(data, sort_keys=False, default_flow_style=False),
         encoding="utf-8",
     )
+
+
+def _worker_count(item_count: int, requested: int = DEFAULT_WORKERS) -> int:
+    if item_count < 1:
+        return 1
+    return max(1, min(int(requested), item_count))
+
+
+def _artifact_record_errors(artifact: Any, label: str) -> list[str]:
+    if not isinstance(artifact, dict):
+        return [f"{label}: artifact record must be an object"]
+    errors = []
+    if not isinstance(artifact.get("key"), str) or not artifact["key"]:
+        errors.append(f"{label}.key: must be a non-empty string")
+    if not isinstance(artifact.get("sha256"), str) or not _SHA256_RE.fullmatch(
+        artifact["sha256"]
+    ):
+        errors.append(f"{label}.sha256: must be 64 lowercase hex characters")
+    if not isinstance(artifact.get("bytes"), int) or artifact["bytes"] < 0:
+        errors.append(f"{label}.bytes: must be a non-negative integer")
+    allowed = {"key", "sha256", "bytes", "content_type", "asset_role"}
+    extras = sorted(set(artifact) - allowed)
+    if extras:
+        errors.append(f"{label}: unexpected keys: {', '.join(extras)}")
+    return errors
+
+
+def _encode_artifact_part(artifacts: list[dict[str, Any]]) -> bytes:
+    lines = [
+        json.dumps(artifact, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        for artifact in artifacts
+    ]
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def _manifest_shard_prefix(cfg: dict[str, Any], manifest_id: str) -> str:
+    base = ((cfg.get("manifests") or {}).get("shard_prefix") or "manifest_shards/v1/")
+    clean_id = manifest_id.strip("/")
+    if not clean_id or any(part in ("", ".", "..") for part in clean_id.split("/")):
+        raise R2SyncError(f"unsafe manifest_id for shard key: {manifest_id!r}")
+    return f"{base.rstrip('/')}/{clean_id}/"
+
+
+def build_index_manifest(
+    source: dict[str, Any],
+    *,
+    shard_prefix: str,
+    part_size: int = DEFAULT_MANIFEST_PART_SIZE,
+) -> tuple[dict[str, Any], list[tuple[str, bytes]]]:
+    """Convert a legacy inline manifest into a small checksum-pinned index.
+
+    Detailed artifact rows become deterministic JSONL payloads. The caller owns
+    uploading those payloads to the returned keys before committing the index.
+    """
+    if part_size < 1:
+        raise R2SyncError("part_size must be at least 1")
+    artifacts = source.get("artifacts")
+    if not isinstance(artifacts, list) or not artifacts:
+        raise R2SyncError("source manifest must contain a non-empty artifacts list")
+
+    record_errors = []
+    for i, artifact in enumerate(artifacts):
+        record_errors.extend(_artifact_record_errors(artifact, f"artifacts[{i}]"))
+    if record_errors:
+        raise R2SyncError("invalid source artifact records:\n  - " + "\n  - ".join(record_errors))
+
+    parts = []
+    payloads = []
+    for offset in range(0, len(artifacts), part_size):
+        chunk = artifacts[offset : offset + part_size]
+        payload = _encode_artifact_part(chunk)
+        digest = hashlib.sha256(payload).hexdigest()
+        number = offset // part_size + 1
+        key = f"{shard_prefix}part-{number:05d}-{digest[:12]}.jsonl"
+        payloads.append((key, payload))
+        parts.append(
+            {
+                "key": key,
+                "sha256": digest,
+                "bytes": len(payload),
+                "artifact_count": len(chunk),
+                "artifact_bytes": sum(int(artifact["bytes"]) for artifact in chunk),
+            }
+        )
+
+    index = {
+        key: source[key]
+        for key in (
+            "manifest_id",
+            "namespace",
+            "bucket",
+            "produced_by",
+            "produced_at",
+            "series_id",
+            "book_id",
+            "run_id",
+            "notes",
+        )
+        if key in source
+    }
+    index["manifest_schema"] = "1.1.0"
+    index["parts"] = parts
+    index["total_bytes"] = sum(int(artifact["bytes"]) for artifact in artifacts)
+    index["total_artifacts"] = len(artifacts)
+    return index, payloads
+
+
+def _load_indexed_artifacts(
+    manifest: dict[str, Any],
+    client: Any,
+) -> list[dict[str, Any]]:
+    inline = manifest.get("artifacts")
+    if isinstance(inline, list):
+        return inline
+
+    parts = manifest.get("parts")
+    if not isinstance(parts, list) or not parts:
+        raise R2SyncError("manifest contains neither inline artifacts nor indexed parts")
+
+    bucket = manifest["bucket"]
+    artifacts: list[dict[str, Any]] = []
+    for part_index, part in enumerate(parts):
+        key = part["key"]
+        try:
+            response = client.get_object(Bucket=bucket, Key=key)
+            payload = response["Body"].read()
+        except Exception as exc:
+            raise R2SyncError(
+                f"could not load manifest part {key}: {exc.__class__.__name__}"
+            ) from exc
+
+        if len(payload) != part["bytes"]:
+            raise R2SyncError(
+                f"manifest part {key} bytes mismatch: index={part['bytes']}, actual={len(payload)}"
+            )
+        digest = hashlib.sha256(payload).hexdigest()
+        if digest != part["sha256"]:
+            raise R2SyncError(
+                f"manifest part {key} sha256 mismatch: index={part['sha256']}, actual={digest}"
+            )
+
+        rows = []
+        for line_number, raw in enumerate(payload.decode("utf-8").splitlines(), start=1):
+            if not raw.strip():
+                continue
+            try:
+                artifact = json.loads(raw)
+            except json.JSONDecodeError as exc:
+                raise R2SyncError(
+                    f"manifest part {key} line {line_number} is not valid JSON"
+                ) from exc
+            errors = _artifact_record_errors(
+                artifact, f"parts[{part_index}] line {line_number}"
+            )
+            if errors:
+                raise R2SyncError("invalid artifact shard:\n  - " + "\n  - ".join(errors))
+            rows.append(artifact)
+
+        actual_bytes = sum(int(artifact["bytes"]) for artifact in rows)
+        if len(rows) != part["artifact_count"]:
+            raise R2SyncError(
+                f"manifest part {key} count mismatch: "
+                f"index={part['artifact_count']}, actual={len(rows)}"
+            )
+        if actual_bytes != part["artifact_bytes"]:
+            raise R2SyncError(
+                f"manifest part {key} artifact_bytes mismatch: "
+                f"index={part['artifact_bytes']}, actual={actual_bytes}"
+            )
+        artifacts.extend(rows)
+
+    if len(artifacts) != manifest.get("total_artifacts"):
+        raise R2SyncError(
+            f"indexed manifest count mismatch: index={manifest.get('total_artifacts')}, "
+            f"actual={len(artifacts)}"
+        )
+    total_bytes = sum(int(artifact["bytes"]) for artifact in artifacts)
+    if total_bytes != manifest.get("total_bytes"):
+        raise R2SyncError(
+            f"indexed manifest bytes mismatch: index={manifest.get('total_bytes')}, "
+            f"actual={total_bytes}"
+        )
+    return artifacts
 
 
 # ─── Operations ─────────────────────────────────────────────────────────────
@@ -225,11 +417,9 @@ def cmd_push(args: argparse.Namespace) -> int:
             key_path_parts.append(opt)
     key_prefix = "/".join(key_path_parts) + "/"
 
-    client = _r2_client()
-    artifacts = []
-    total_bytes = 0
+    client = None if args.dry_run else _r2_client()
 
-    for f in files:
+    def _upload_one(f: Path) -> tuple[dict[str, Any], str]:
         rel = f.relative_to(src)
         key = key_prefix + str(rel).replace(os.sep, "/")
         sha = _sha256_file(f)
@@ -237,9 +427,12 @@ def cmd_push(args: argparse.Namespace) -> int:
         ctype = _content_type(f)
 
         if args.dry_run:
-            print(f"would upload {f}  →  s3://{bucket}/{key}  ({size:,} B, {sha[:12]})")
+            message = (
+                f"would upload {f}  →  s3://{bucket}/{key}  "
+                f"({size:,} B, {sha[:12]})"
+            )
         else:
-            print(f"upload {rel}  ({size:,} B)")
+            assert client is not None
             with f.open("rb") as fh:
                 client.put_object(
                     Bucket=bucket,
@@ -248,16 +441,32 @@ def cmd_push(args: argparse.Namespace) -> int:
                     ContentType=ctype,
                     Metadata={"sha256": sha},
                 )
-
-        artifacts.append(
+            message = f"upload {rel}  ({size:,} B)"
+        return (
             {
                 "key": key,
                 "sha256": sha,
                 "bytes": size,
                 "content_type": ctype,
-            }
+            },
+            message,
         )
-        total_bytes += size
+
+    # PUTs are independent and network-latency bound. Keep the cap modest:
+    # two simultaneous 64-worker runs triggered a temporary client-burst block
+    # during the 2026-07-23 cleanup. Do not raise the default above 16 without
+    # adding a cross-process limiter.
+    results: list[tuple[dict[str, Any], str] | None] = [None] * len(files)
+    with ThreadPoolExecutor(max_workers=_worker_count(len(files), args.workers)) as pool:
+        futures = {pool.submit(_upload_one, path): i for i, path in enumerate(files)}
+        for future in as_completed(futures):
+            results[futures[future]] = future.result()
+
+    completed = [result for result in results if result is not None]
+    artifacts = [artifact for artifact, _message in completed]
+    for _artifact, message in completed:
+        print(message)
+    total_bytes = sum(int(artifact["bytes"]) for artifact in artifacts)
 
     manifest_id = key_prefix.rstrip("/")
     manifest = {
@@ -265,7 +474,7 @@ def cmd_push(args: argparse.Namespace) -> int:
         "manifest_id": manifest_id,
         "namespace": args.namespace,
         "bucket": bucket,
-        "produced_by": os.environ.get("PHOENIX_OMEGA_REMOTE", "unknown"),
+        "produced_by": _produced_by_label(),
         "produced_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "artifacts": artifacts,
         "total_bytes": total_bytes,
@@ -283,7 +492,10 @@ def cmd_push(args: argparse.Namespace) -> int:
     )
     _write_manifest(manifest_path, manifest)
     print(f"\n✓ pushed {len(artifacts)} artifacts ({total_bytes:,} B)")
-    print(f"✓ manifest: {manifest_path.relative_to(REPO)}")
+    try:
+        print(f"✓ manifest: {manifest_path.relative_to(REPO)}")
+    except ValueError:
+        print(f"✓ manifest: {manifest_path}")
     return 0
 
 
@@ -296,12 +508,13 @@ def cmd_pull(args: argparse.Namespace) -> int:
 
     client = _r2_client()
     bucket = manifest["bucket"]
+    artifacts = _load_indexed_artifacts(manifest, client)
     cache_dir = LOCAL_CACHE_DIR / manifest["manifest_id"]
     cache_dir.mkdir(parents=True, exist_ok=True)
 
     pulled = 0
     skipped = 0
-    for art in manifest["artifacts"]:
+    for art in artifacts:
         key = art["key"]
         sha = art["sha256"]
         local = cache_dir / Path(key).name
@@ -336,25 +549,111 @@ def cmd_verify(args: argparse.Namespace) -> int:
 
     client = _r2_client()
     bucket = manifest["bucket"]
-    bad = []
-    for art in manifest["artifacts"]:
+    try:
+        artifacts = _load_indexed_artifacts(manifest, client)
+    except R2SyncError as exc:
+        print(f"❌ {exc}")
+        return 1
+
+    def _check_one(art: dict[str, Any]) -> str | None:
         key = art["key"]
         try:
             head = client.head_object(Bucket=bucket, Key=key)
         except Exception as e:
-            bad.append(f"{key}: missing in R2 ({e.__class__.__name__})")
-            continue
+            return f"{key}: missing in R2 ({e.__class__.__name__})"
         if head["ContentLength"] != art["bytes"]:
-            bad.append(
-                f"{key}: bytes mismatch (manifest={art['bytes']}, r2={head['ContentLength']})"
+            return (
+                f"{key}: bytes mismatch "
+                f"(manifest={art['bytes']}, r2={head['ContentLength']})"
             )
+        return None
+
+    bad = []
+    with ThreadPoolExecutor(
+        max_workers=_worker_count(len(artifacts), args.workers)
+    ) as pool:
+        for result in pool.map(_check_one, artifacts):
+            if result:
+                bad.append(result)
 
     if bad:
         print(f"❌ {len(bad)} mismatches")
         for b in bad:
             print(f"   - {b}")
         return 1
-    print(f"✓ all {len(manifest['artifacts'])} artifacts present in R2 with correct size")
+    print(f"✓ all {len(artifacts)} artifacts present in R2 with correct size")
+    return 0
+
+
+def cmd_publish_index(args: argparse.Namespace) -> int:
+    """Upload JSONL manifest parts and write a small repo-safe index manifest."""
+    source_path = Path(args.source_manifest).resolve()
+    source = _load_yaml(source_path)
+    errors = _validate_manifest(source)
+    if errors:
+        raise R2SyncError("source manifest invalid:\n  - " + "\n  - ".join(errors))
+    if "parts" in source:
+        raise R2SyncError("source manifest is already indexed")
+
+    cfg = _load_config()
+    _resolve_namespace(cfg, source["namespace"])
+    expected_bucket = _bucket_name(cfg)
+    if source["bucket"] != expected_bucket:
+        raise R2SyncError(
+            f"source manifest bucket {source['bucket']!r} does not match config "
+            f"bucket {expected_bucket!r}"
+        )
+
+    shard_prefix = _manifest_shard_prefix(cfg, source["manifest_id"])
+    index, payloads = build_index_manifest(
+        source,
+        shard_prefix=shard_prefix,
+        part_size=args.part_size,
+    )
+    index_errors = _validate_manifest(index)
+    if index_errors:
+        raise R2SyncError("index manifest invalid:\n  - " + "\n  - ".join(index_errors))
+
+    if args.dry_run:
+        for key, payload in payloads:
+            print(f"would upload manifest part s3://{source['bucket']}/{key} ({len(payload):,} B)")
+        print(
+            f"\n✓ dry-run: {len(source['artifacts'])} artifact rows → "
+            f"{len(payloads)} manifest part(s); no upload or index write performed"
+        )
+        return 0
+
+    client = _r2_client()
+
+    def _upload_part(item: tuple[str, bytes]) -> str:
+        key, payload = item
+        digest = hashlib.sha256(payload).hexdigest()
+        client.put_object(
+            Bucket=source["bucket"],
+            Key=key,
+            Body=payload,
+            ContentType="application/x-ndjson",
+            Metadata={"sha256": digest, "manifest-id": source["manifest_id"]},
+        )
+        return key
+
+    with ThreadPoolExecutor(
+        max_workers=_worker_count(len(payloads), args.workers)
+    ) as pool:
+        uploaded = list(pool.map(_upload_part, payloads))
+    for key in uploaded:
+        print(f"upload manifest part {key}")
+
+    output_path = Path(args.manifest).resolve()
+    _write_manifest(output_path, index)
+    print(
+        f"\n✓ published indexed manifest: {len(source['artifacts'])} artifact rows, "
+        f"{len(payloads)} checksum-pinned part(s)"
+    )
+    try:
+        print(f"✓ index: {output_path.relative_to(REPO)}")
+    except ValueError:
+        print(f"✓ index: {output_path}")
     return 0
 
 
@@ -563,6 +862,7 @@ def _main() -> int:
     sp.add_argument("--series-id")
     sp.add_argument("--book-id")
     sp.add_argument("--run-id")
+    sp.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
     sp.add_argument("--dry-run", action="store_true")
     sp.set_defaults(fn=cmd_push)
 
@@ -593,7 +893,19 @@ def _main() -> int:
 
     sp = sub.add_parser("verify", help="check manifest against actual R2 state")
     sp.add_argument("--manifest", required=True)
+    sp.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
     sp.set_defaults(fn=cmd_verify)
+
+    sp = sub.add_parser(
+        "publish-index",
+        help="upload checksum-pinned JSONL parts for a large inline manifest",
+    )
+    sp.add_argument("--source-manifest", required=True, help="local legacy YAML manifest")
+    sp.add_argument("--manifest", required=True, help="small index YAML path to write")
+    sp.add_argument("--part-size", type=int, default=DEFAULT_MANIFEST_PART_SIZE)
+    sp.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
+    sp.add_argument("--dry-run", action="store_true")
+    sp.set_defaults(fn=cmd_publish_index)
 
     sp = sub.add_parser("ls", help="list R2 objects under a namespace")
     sp.add_argument("--namespace", required=True)

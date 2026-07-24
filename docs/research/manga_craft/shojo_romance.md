@@ -34,6 +34,8 @@ Readers are girls 12–22 and nostalgic adult returnees (late 20s–40s) reading
 - **Emotional arc per volume:** Distance → closeness → misunderstanding → small repair → slightly closer new baseline. A volume without a proximity *gain* fails.
 - **Cast density:** Small ensemble (4–8 named recurring). Love triangles are near-obligatory; love quadrangles common.
 
+**2026-07-24 addendum (MC endurance study):** long-run endurance exemplars this section lacked — Kyoko Mogami (*Skip Beat!*, 49+ vols: vocation-ladder B-plot carries the 40+ volume romance), Maya Kitajima (*Glass Mask*, 49 vols/5 decades), and current riser pair Kaoruko/Rintaro (*The Fragrant Flower Blooms with Dignity*, 10M+ by 2026). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §romance.
+
 ## 6. Failure modes
 1. Confession too early. The form lives on delay; a volume-3 confession drains the engine.
 2. Love interest whose interiority is withheld forever (readers turn on him by volume 6 if no POV window opens).

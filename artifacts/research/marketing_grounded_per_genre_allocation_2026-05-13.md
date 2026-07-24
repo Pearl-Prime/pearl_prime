@@ -107,3 +107,57 @@ This is the table the V2 catalog plan should encode.
 - [Oshi no Ko 25M circulation — Wikipedia](https://en.wikipedia.org/wiki/Oshi_no_Ko)
 - [Goodnight Punpun 3M circulation — Wikipedia](https://en.wikipedia.org/wiki/Goodnight_Punpun)
 - [Vinland Saga 7M circulation — Wikipedia](https://en.wikipedia.org/wiki/Vinland_Saga_(manga))
+
+---
+
+## 2026 refresh addendum (2026-07-24 — manga process uplift Lane 04; verify-not-redo)
+
+Verification pass against newest public data (full citations in
+`popular_genre_ranking_2026-05-02.md` → 2026 refresh addendum, same date):
+
+- **Empirical share table (§1) holds.** Oricon 2026-H1 (Frieren #1, One Piece #2, JJK #3,
+  Blue Lock #4, CSM #5) and ICv2/Circana Feb–Jun 2026 (JJK-dominated, all shonen/seinen) keep
+  the battle-cluster ~40%+ of JP/US volume; no genre crosses a band boundary in §1.
+- **§2.1 battle-cluster insight unchanged**; JJK's sequel-launch (Modulo, top-10 debut) and
+  Kingdom at 120M strengthen it.
+- **§2.2 sports gap re-confirmed:** Blue Lock top-5 two consecutive years; sports remains
+  Phoenix's largest relative underweight.
+- **§2.3 romance webtoon weight re-confirmed and updated:** romance ≈27.4% of the 2025 global
+  webtoon market (#1 genre), fantasy ≈21.6% fastest-growing; WBTN FY2025 revenue $1.4B with
+  IP adaptations +31.8%. The 39.4% figure used in 2025 sourcing appears to have been a
+  platform-specific share; the cross-market 2025 figure is lower but romance's #1 digital rank
+  is unchanged — the §1 recommended 10% V2 share needs no revision.
+- **New context (not in original):** Japan total manga market contracted for the first time
+  since 2017 (−1.7% to ¥692.5B; print volumes −14.4%, digital +2.9% to 76.1% share). This is a
+  *channel* signal (digital-first), not a genre-mix signal; it does not alter §1 shares. It
+  supports webtoon/vertical and digital-native formats in V2 planning.
+
+**Verdict line (per-brand allocation):** NO change to §1 recommended V2 shares and NO
+structural change to `docs/GENRE_PORTFOLIO_PLAN.md` per-brand allocations from 2026 movement.
+The healing-anchor portfolio bet is *supported* by Frieren/Apothecary's 2026 performance
+(blend-register healing at JP print #1). Standing §2 flags (sports, battle-cluster,
+fantasy_adventure) remain operator-tier options already on record. No Q-MPU-05 escalation.
+
+### Allocation-chain live confirmation (2026-07-24)
+
+Chain re-verified end-to-end on origin/main `d55f6f3976`:
+
+- `docs/GENRE_PORTFOLIO_PLAN.md` → `config/manga/locale_genre_allocations.yaml` (14 locales;
+  every locale's `share_pct` sums to 100 — ja_JP verified 100 in this pass) →
+  **consumer scripts:** `scripts/manga/generate_catalog_plan_from_strategic.py` (primary M2
+  vehicle; header names all four inputs), `scripts/manga/run_m7_wave_a.py`,
+  `scripts/manga/fanout_illustrated_pilots.py`, `scripts/catalog/validate_worldwide_plan_completeness.py`,
+  `scripts/qa/manga_m7_plan_coverage_grid.py`. Brand-matrix side
+  (`config/manga/brand_genre_allocation.yaml`): `scripts/catalog/rollup_manga_catalog_from_ssot.py`,
+  `scripts/catalog/generate_manga_catalog.py`, `scripts/manga/generate_mecha_series_plans.py`,
+  `scripts/manga/check_brand_portfolio.py`.
+- **Live spot check:** ran `generate_catalog_plan_from_strategic.py` fresh (stdout mode, no
+  writes). ja_JP section: 461 series across 15 VALID_GENRES. Per-genre plan shares track
+  allocation shares within ≤5.8 points (e.g. supernatural_mystery 8.2% vs 8%; romance 8.0% vs
+  8%; mecha 8.0% vs 8%; largest deviations: psychological_horror 8.2% vs 14%, sports 8.0% vs
+  4%). The residual is the generator's documented design, not drift: per-brand counts blend
+  strategic 20% / metadata 5% / market-revenue 70% / baseline 5% (`DISTRIBUTION_WEIGHTS`), and
+  the M2 locale layer blends 70% locale share × 30% brand strategic, then quantizes per brand —
+  locale-level aggregation flattens the extremes. **Chain verdict: WIRED and LIVE; consumers
+  named; no action required.** (If a future lane wants locale-exact conformance, the knob is
+  the M2 70/30 blend, not the allocation YAML — operator-tier decision.)

@@ -17,8 +17,9 @@ Spec authority (this tool implements, it does not re-specify):
   - schemas/manga/assembly_manifest.schema.json         — manifest contract
 
 Reuses (does not reimplement):
-  - phoenix_v4.manga.chapter.bubble_render.render_bubbles_onto_panel for the
-    lettering pass (--bubbles)
+  - phoenix_v4.manga.chapter.bubble_render_v2.render_bubbles_onto_panel_v2 for
+    the genre-aware lettering pass (--bubbles); legacy bubble_render is
+    deprecated for production paths (see check_no_legacy_bubble_render.py)
   - scripts/manga/validate_layer.py checks remain the QA authority for the
     input cutouts; this tool validates manifest structure + provenance only.
 
@@ -35,7 +36,7 @@ Usage:
     PYTHONPATH=. python3 scripts/manga/assemble_from_bank.py \
         --manifest artifacts/manga/<series>/assembly_manifests/<name>.yaml \
         --out-dir  artifacts/manga/<series>/assembled/<name>/ \
-        [--strip] [--bubbles] [--locale en_US] [--dry-run]
+        [--strip] [--bubbles] [--genre shonen] [--locale en_US] [--dry-run]
 """
 from __future__ import annotations
 
@@ -183,9 +184,27 @@ def validate_manifest(manifest: dict[str, Any]) -> list[str]:
     canvas = manifest["canvas"]
     if not (isinstance(canvas.get("width"), int) and isinstance(canvas.get("height"), int)):
         errors.append("canvas.width/height must be integers")
+    sb_ref = manifest.get("arc_storyboard_ref")
+    if sb_ref is not None and not isinstance(sb_ref, str):
+        errors.append("arc_storyboard_ref must be a string path")
     for i, panel in enumerate(manifest["panels"]):
         pid = panel.get("panel_id", f"<panels[{i}]>")
         layers = panel.get("layers") or []
+        # Storyboard-hint block (MANGA_ARC_STORYBOARD_CONTRACT.md §"Storyboard
+        # consumption"): optional, but when present it must carry the contract's
+        # hard-rule-1 minimum — non-empty story_move + visual_proof (≥8 chars).
+        storyboard = panel.get("storyboard")
+        if storyboard is not None:
+            if not isinstance(storyboard, dict):
+                errors.append(f"{pid}: storyboard must be a mapping when present")
+            else:
+                for req_key in ("story_move", "visual_proof"):
+                    val = storyboard.get(req_key)
+                    if not isinstance(val, str) or len(val.strip()) < 8:
+                        errors.append(
+                            f"{pid}: storyboard.{req_key} must be a non-empty "
+                            "string (≥8 chars) — arc storyboard hard rule 1"
+                        )
         has_structural_plan = bool(
             panel.get("structural_plan") is not None or panel.get("structural_plan_path")
         )
@@ -1082,7 +1101,7 @@ def render_strip(panel_paths: list[Path], out_path: Path,
 
 def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
         bubbles: bool = False, locale: str = "en_US",
-        dry_run: bool = False) -> dict[str, Any]:
+        dry_run: bool = False, genre: str | None = None) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
     if dry_run:
         n_layers = sum(len(p["layers"]) for p in manifest["panels"])
@@ -1095,6 +1114,18 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
     all_records: list[dict] = []
     panel_paths: list[Path] = []
     gate_reports: list[dict] = []
+    # Genre for bubble_render_v2: CLI wins, else manifest/series metadata.
+    # Do not invent a genre — omit style_config genre key when unknown so
+    # the renderer keeps intensity defaults rather than guessing.
+    resolved_genre = (
+        (genre or "").strip()
+        or str(manifest.get("genre") or "").strip()
+        or str((manifest.get("series_meta") or {}).get("genre") or "").strip()
+        or None
+    )
+    bubble_style_config: dict[str, Any] = {}
+    if resolved_genre:
+        bubble_style_config["genre"] = resolved_genre.lower()
 
     for panel in manifest["panels"]:
         img, records, grammar_report = assemble_panel(panel, manifest["canvas"], manifest_dir)
@@ -1103,7 +1134,7 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
         all_records.extend(records)
 
         if grammar_report is not None:
-            gate_reports.append({
+            report_row: dict[str, Any] = {
                 "panel_id": grammar_report.panel_id,
                 "shot_type": grammar_report.shot_type,
                 "passed": grammar_report.passed,
@@ -1112,18 +1143,30 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
                     {"gate": g.gate, "severity": g.severity.value, "message": g.message}
                     for g in grammar_report.gates
                 ],
-            })
+            }
+            # Storyboard-hint carry-through: the board's story_move/visual_proof
+            # travel with the gate report so audits can trace panel → plan.
+            if isinstance(panel.get("storyboard"), dict):
+                report_row["storyboard"] = panel["storyboard"]
+            gate_reports.append(report_row)
 
         final_path = out_path
         if bubbles and (panel.get("dialogue") or panel.get("narrator_caption") or panel.get("sfx")):
             sys.path.insert(0, str(REPO))
-            from phoenix_v4.manga.chapter.bubble_render import render_bubbles_onto_panel
+            from phoenix_v4.manga.chapter.bubble_render_v2 import (
+                render_bubbles_onto_panel_v2,
+            )
             bubbled = out_dir / f"{panel['panel_id']}_bubbled.png"
-            render_bubbles_onto_panel(
+            panel_style = dict(bubble_style_config)
+            panel_genre = str(panel.get("genre") or "").strip()
+            if panel_genre:
+                panel_style["genre"] = panel_genre.lower()
+            render_bubbles_onto_panel_v2(
                 out_path,
                 panel.get("dialogue") or [],
                 panel.get("sfx") or [],
                 panel.get("narrator_caption"),
+                bubble_style_config=panel_style or None,
                 out_path=bubbled,
                 locale=locale,
             )
@@ -1137,6 +1180,11 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
     prov = {
         "manifest": str(manifest_path),
         "manifest_sha256": _sha256(manifest_path),
+        **(
+            {"arc_storyboard_ref": manifest["arc_storyboard_ref"]}
+            if manifest.get("arc_storyboard_ref")
+            else {}
+        ),
         "series_id": manifest["series_id"],
         "panels": len(manifest["panels"]),
         "layers_total": len(all_records),
@@ -1174,13 +1222,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out-dir", required=True, type=Path)
     ap.add_argument("--strip", action="store_true", help="also emit a vertical strip")
     ap.add_argument("--bubbles", action="store_true",
-                    help="lettering pass via phoenix_v4 bubble_render")
+                    help="genre-aware lettering via bubble_render_v2")
+    ap.add_argument(
+        "--genre",
+        default=None,
+        help="genre register for bubble styles (e.g. shonen/shoujo/iyashikei); "
+             "falls back to manifest.genre when omitted",
+    )
     ap.add_argument("--locale", default="en_US")
     ap.add_argument("--dry-run", action="store_true",
                     help="validate manifest only; no PIL work")
     args = ap.parse_args(argv)
     run(args.manifest, args.out_dir, strip=args.strip, bubbles=args.bubbles,
-        locale=args.locale, dry_run=args.dry_run)
+        locale=args.locale, dry_run=args.dry_run, genre=args.genre)
     return 0
 
 

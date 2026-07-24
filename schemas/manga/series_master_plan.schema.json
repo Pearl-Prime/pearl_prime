@@ -1,0 +1,422 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/series_master_plan.schema.json",
+  "title": "Manga Series Master Plan",
+  "description": "Per-series long-horizon plan (default 100 episodes) sitting ABOVE per-arc storyboards and BELOW the series_plan listing. Arc segmentation is genre-derived from config/manga/manga_pacing_by_genre.yaml arc_cadence blocks — never a fixed 12. Authority: docs/specs/MANGA_SERIES_MASTER_PLAN_CONTRACT.md",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "series_id",
+    "brand_id",
+    "locale",
+    "genre_id",
+    "pacing_family",
+    "cadence_source",
+    "episode_unit",
+    "episode_unit_mapping_note",
+    "episode_horizon",
+    "plan_frame",
+    "mode",
+    "arcs",
+    "first_major_shift",
+    "conformance",
+    "acceptance_layer"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "artifact_type": { "type": "string", "const": "series_master_plan" },
+    "schema_authority": {
+      "type": "string",
+      "const": "schemas/manga/series_master_plan.schema.json"
+    },
+    "series_id": { "type": "string", "minLength": 1 },
+    "brand_id": { "type": "string", "minLength": 1 },
+    "locale": { "type": "string", "minLength": 1 },
+    "genre_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Canonical genre id (config/manga/canonical_genre_list.yaml). Resolved to a pacing family via manga_pacing_by_genre.yaml genre_family_aliases."
+    },
+    "pacing_family": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Resolved pacing family key in manga_pacing_by_genre.yaml genre_pacing (must match alias resolution of genre_id). For cadence_source=study_webtoon this records the print family the series would otherwise inherit."
+    },
+    "cadence_source": {
+      "type": "string",
+      "enum": ["pacing_yaml", "study_webtoon", "study_us_illustrated"],
+      "description": "Where the arc-cadence numbers come from. pacing_yaml = the family arc_cadence block (default). study_webtoon = webtoon-format series (NO YAML family row exists; numbers from artifacts/research/manga_arc_cadence_study_2026-07-24.md §Webtoon: arc grain 15-30 eps, platform seasons 78-115+). study_us_illustrated = US illustrated self-help lane (artifacts/research/us_illustrated_self_help_format_study_2026-07-24.md; book/strip frames, not episode cadence)."
+    },
+    "cadence_ref": {
+      "type": "string",
+      "description": "Evidence pointer for the cadence numbers (yaml path anchor or study section)."
+    },
+    "episode_unit": {
+      "type": "string",
+      "enum": [
+        "weekly_chapter",
+        "biweekly_chapter",
+        "monthly_chapter",
+        "webtoon_episode",
+        "book_chapter",
+        "strip"
+      ],
+      "description": "Serialization unit one 'episode' maps to. Monthly-chapter print genres are NOT 1:1 comparable with weekly units at equal story mass — episode_unit_mapping_note must state the assumption. 'strip' = US illustrated strip-serial frame (strip = atom feeding a collected book, study §6)."
+    },
+    "episode_unit_mapping_note": {
+      "type": "string",
+      "minLength": 16,
+      "description": "The mapping assumption for this series' episode unit (e.g. '1 episode = 1 monthly 40-60p chapter; arc_cadence counts are in this unit')."
+    },
+    "episode_horizon": {
+      "type": "integer",
+      "minimum": 24,
+      "maximum": 200,
+      "description": "Planning horizon in episodes. Default 100. Low-confidence/no-evidence families (essay, memoir, graphic_medicine) MAY carry 48-60 with horizon_rationale citing the study evidence line."
+    },
+    "horizon_rationale": {
+      "type": "string",
+      "description": "Required when episode_horizon != 100: the evidence-cited reason (e.g. 'no 100-episode long-runner exists in this family; study §essay')."
+    },
+    "plan_frame": {
+      "type": "string",
+      "enum": ["serialized_episode", "book_format", "strip_serial"],
+      "description": "Routing per series_plan format/master_format (contract §US-illustrated addendum): manga/webtoon formats use serialized_episode; a non-serialized direct_self_help_illustrated book uses book_format (page/word-mass targets, NOT episode counts); illustrated content that ships as a series uses strip_serial (Instagram/Tumblr strip cadence feeding a collected book — NOT webtoon-episode structure; no episode-framed wellness comps exist, study §6)."
+    },
+    "book_format_params": {
+      "type": "object",
+      "description": "book_format frame only. Parameters come from config/manga/us_illustrated_pilot_cells.yaml (provenance: RESEARCHED, Lane 02 study) — reference the cell, do not restate numbers. Class-A gift books have NO chapter contract (4-8 loose movements, study §2d): use movement_count and page-flow beats, never a forced chapter_count.",
+      "required": ["structure_class", "params_ref"],
+      "properties": {
+        "structure_class": {
+          "type": "string",
+          "enum": ["A", "B", "C", "D", "E"],
+          "description": "Sub-format class per study §2d (A gift / B doodle-strip / C graphic-essay / D graphic-medicine / E illustrated-prose)."
+        },
+        "params_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Pointer to the researched format_parameters block (e.g. config/manga/us_illustrated_pilot_cells.yaml#<cell>)."
+        },
+        "chapter_count": { "type": ["integer", "null"] },
+        "movement_count": { "type": ["integer", "null"] },
+        "source": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["teacher", "music", "none"],
+      "description": "Series identity mode (XOR per config/manga/manga_mode_vessels.yaml). 'none' = regular series: self-help stays genre-native subtext with no mode vessel."
+    },
+    "teacher_id": {
+      "type": ["string", "null"],
+      "description": "Metadata only — the teacher is NEVER named in plan prose (check_manga_story_authored doctrine)."
+    },
+    "musician_id": { "type": ["string", "null"] },
+    "self_help_topic_set": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "The brand's topic set; every arc self_help_topic must come from this set."
+    },
+    "first_major_shift": {
+      "type": ["object", "null"],
+      "description": "MUST be null when the pacing family's first_major_shift_by is null (healing, horror, supernatural_everyday, gag, essay — no status-quo-shift convention; the loop is the product). Otherwise required non-null with episode <= first_major_shift_by (+25% tolerance).",
+      "required": ["arc_id", "episode", "description"],
+      "properties": {
+        "arc_id": { "type": "string", "minLength": 1 },
+        "episode": { "type": "integer", "minimum": 1 },
+        "description": { "type": "string", "minLength": 16 }
+      },
+      "additionalProperties": true
+    },
+    "season_wheels": {
+      "type": "array",
+      "description": "seasonal_cycle families only: calendar wheels the cycles hang on (study: plan first-100 as ~3-4 season wheels with demographic, not plot, drift).",
+      "items": {
+        "type": "object",
+        "required": ["wheel_id", "episode_start", "episode_end"],
+        "properties": {
+          "wheel_id": { "type": "string", "minLength": 1 },
+          "episode_start": { "type": "integer", "minimum": 1 },
+          "episode_end": { "type": "integer", "minimum": 1 },
+          "drift": {
+            "type": "string",
+            "description": "What changes across this wheel (demographic/relational drift, never forced plot shift)."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "arcs": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/arc_block" },
+      "description": "Arc spans must tile 1..episode_horizon with no gaps/overlaps. Count and lengths derive from the family arc_cadence block (episodes_per_arc_range, arc_pattern) — NEVER a fixed 12."
+    },
+    "migration": {
+      "type": "object",
+      "description": "48-ep -> master-plan upgrade record (contract §Migration). Existing 48-ep artifacts stay valid — inventory EXTENDS, never REDUCED.",
+      "properties": {
+        "migrated_from_48ep": { "type": "boolean" },
+        "detailed_window_end": {
+          "type": "integer",
+          "description": "Last episode of the near-term detailed window (Q-MPU-01: eps 1-48 detailed for flagship-first wave; 49+ outline-level)."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source credit for absorbed plan content (e.g. PR #295 branch + path)."
+        }
+      },
+      "additionalProperties": true
+    },
+    "conformance": {
+      "type": "object",
+      "description": "Marketing/genre conformance self-check — machine-checkable fields, not prose vibes.",
+      "required": [
+        "genre_contract",
+        "cadence_conformance",
+        "mc_endurance",
+        "mode_arc_coherence"
+      ],
+      "properties": {
+        "genre_contract": {
+          "type": "object",
+          "required": ["checked", "craft_bible"],
+          "properties": {
+            "checked": { "type": "boolean" },
+            "craft_bible": { "type": "string", "minLength": 1 },
+            "notes": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "cadence_conformance": {
+          "type": "object",
+          "required": ["checked", "family_range", "tolerance_pct"],
+          "properties": {
+            "checked": { "type": "boolean" },
+            "family_range": {
+              "type": "array",
+              "items": { "type": "integer" },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "arc_pattern": { "type": "string" },
+            "tolerance_pct": { "type": "number" }
+          },
+          "additionalProperties": true
+        },
+        "mc_endurance": {
+          "type": "object",
+          "required": ["status", "checklist"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["checked", "pending_lane_04"],
+              "description": "checked = validated against config/manga/mc_endurance_checklists.yaml family keys; pending_lane_04 = the checklist file is not yet on main (manga-mc-endurance-research-merged not emitted)."
+            },
+            "checklist": { "type": "string", "minLength": 1 },
+            "family_key": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "mode_arc_coherence": {
+          "type": "object",
+          "required": ["checked", "vessels_config"],
+          "properties": {
+            "checked": { "type": "boolean" },
+            "vessels_config": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "acceptance_layer": {
+      "type": "string",
+      "enum": [
+        "authored_candidate",
+        "structurally_clear",
+        "system_working",
+        "executed_real",
+        "proven_at_bar"
+      ],
+      "description": "Honest acceptance layer, same enum as arc_storyboard_plan. A validator PASS is at most structurally_clear / authored_candidate — never bestseller."
+    },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mode": { "const": "teacher" } }, "required": ["mode"] },
+      "then": {
+        "required": ["teacher_id"],
+        "properties": {
+          "teacher_id": { "type": "string", "minLength": 1 },
+          "musician_id": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "music" } }, "required": ["mode"] },
+      "then": {
+        "required": ["musician_id"],
+        "properties": { "musician_id": { "type": "string", "minLength": 1 } }
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "arc_block": {
+      "type": "object",
+      "required": [
+        "arc_id",
+        "episode_start",
+        "episode_end",
+        "detail_level",
+        "arc_premise",
+        "arc_promise",
+        "status_quo_shift",
+        "mc_change_vector",
+        "self_help_topic",
+        "mode_arc"
+      ],
+      "properties": {
+        "arc_id": { "type": "string", "minLength": 1 },
+        "episode_start": { "type": "integer", "minimum": 1 },
+        "episode_end": { "type": "integer", "minimum": 1 },
+        "detail_level": {
+          "type": "string",
+          "enum": ["detailed", "outline"],
+          "description": "detailed = carries per-episode plans (the operator's second pass); outline = premise/promise level (episodes beyond the detailed window per Q-MPU-01)."
+        },
+        "season_wheel": { "type": "string" },
+        "arc_premise": {
+          "type": "string",
+          "minLength": 24,
+          "description": "What this arc is about — an external situation, not a therapy summary."
+        },
+        "arc_promise": {
+          "type": "string",
+          "minLength": 16,
+          "description": "What the reader is promised this arc will pay off."
+        },
+        "status_quo_shift": {
+          "type": ["string", "null"],
+          "description": "What durable change the arc leaves behind. MUST be null in families whose arc_cadence first_major_shift_by is null (cyclical genres — forcing a shift breaks the genre contract)."
+        },
+        "mc_change_vector": {
+          "type": "object",
+          "required": ["from_state", "to_state"],
+          "properties": {
+            "from_state": { "type": "string", "minLength": 8 },
+            "to_state": { "type": "string", "minLength": 8 },
+            "endurance_checklist_refs": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Anchors into the MC endurance checklist/study, format mc_endurance_study#<family>/<section> (Lane 04 stable keys: must_have / should_have / anti_patterns / endurance_mechanics)."
+            }
+          },
+          "additionalProperties": true
+        },
+        "self_help_topic": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Must come from the plan self_help_topic_set (brand topic set)."
+        },
+        "mode_arc": { "$ref": "#/$defs/mode_arc" },
+        "source_arc_ref": {
+          "type": "string",
+          "description": "Migration credit: the 48-ep plan block / arc plan this arc was upgraded from."
+        },
+        "episodes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/episode_plan" },
+          "description": "Required (covering the full span) when detail_level=detailed."
+        }
+      },
+      "additionalProperties": true
+    },
+    "mode_arc": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["teacher", "music", "none"] },
+        "vessel": {
+          "type": "string",
+          "description": "teacher mode: the genre-native vessel (config/manga/manga_mode_vessels.yaml genres.<genre>.teacher). The teacher is NEVER named."
+        },
+        "arc_teaching_resolution": {
+          "type": "string",
+          "description": "teacher mode: what the arc-level teaching resolves to across the arc (doctrine earned, never lectured)."
+        },
+        "motif": {
+          "type": "string",
+          "description": "music mode: the arc-level musical motif per MUSIC_MODE_MANGA_V1_SPEC."
+        },
+        "opening": { "type": "string" },
+        "mid_recurrence": { "type": "string" },
+        "closing": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "mode": { "const": "teacher" } } },
+          "then": { "required": ["vessel", "arc_teaching_resolution"] }
+        },
+        {
+          "if": { "properties": { "mode": { "const": "music" } } },
+          "then": { "required": ["motif"] }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "episode_plan": {
+      "type": "object",
+      "required": [
+        "episode",
+        "logline",
+        "genre_pleasure_beat",
+        "self_help_topic_beat",
+        "hook"
+      ],
+      "properties": {
+        "episode": { "type": "integer", "minimum": 1 },
+        "logline": {
+          "type": "string",
+          "minLength": 24,
+          "description": "One sentence including an external force (mirrors arc_storyboard_plan logline rule)."
+        },
+        "genre_pleasure_beat": {
+          "type": "string",
+          "minLength": 8,
+          "description": "The genre-native pleasure this episode delivers (what the reader came for)."
+        },
+        "self_help_topic_beat": {
+          "type": "string",
+          "minLength": 8,
+          "description": "How the self-help topic advances as subtext through genre mechanics — never as lecture."
+        },
+        "hook": {
+          "type": "object",
+          "required": ["position", "promise"],
+          "properties": {
+            "position": {
+              "type": "string",
+              "enum": ["cold_open", "mid_episode", "closing_panel", "none"],
+              "description": "Where the episode's forward hook/cliff lands. 'none' is legal in cyclical genres (quiet-close convention)."
+            },
+            "promise": { "type": "string", "minLength": 8 }
+          },
+          "additionalProperties": true
+        },
+        "checklist_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Refs into genre/editor checklists (Lane 07) and mc_endurance_study anchors."
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

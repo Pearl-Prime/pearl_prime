@@ -83,6 +83,29 @@ namespaces:
     consumed_by: ["any"]
     lifecycle: "expire 1d"
 
+  misc_working_banks:
+    prefix: "misc/"
+    pattern: "misc/{family_slug}/{asset_filename}"
+    description: |
+      Backup namespace for operator-owned working banks that do not fit a
+      production namespace. No lifecycle expiry; restore is pull-on-demand.
+    examples:
+      - "misc/brand_wizard_app_dist_2026-07-23/assets/index.js"
+      - "misc/brand_wizard_app_public_covers_2026-07-23/adhd_forge/cover.png"
+    produced_by: ["operator"]
+    consumed_by: ["operator"]
+
+  manga_catalog_render_cache:
+    prefix: "manga_catalog_cache/"
+    pattern: "manga_catalog_cache/{run_id}/{asset_filename}"
+    description: |
+      Backup of the gitignored assets/manga_catalog render cache. These are
+      regenerable working assets, not production manga delivery artifacts.
+    examples:
+      - "manga_catalog_cache/manga_catalog_2026-07-23/stillness_press/page_01.png"
+    produced_by: ["operator", "pearl-star"]
+    consumed_by: ["operator", "panel_compositor"]
+
   social_media_voice_bank:
     prefix: "social_media/voice_bank/"
     pattern: "social_media/voice_bank/{run_id}/mp3/{locale}/{persona}/{topic}/{atom_id}.mp3"
@@ -123,3 +146,5 @@ local_cache:
 manifests:
   dir: "artifacts/manifests/"
   schema: "schemas/artifacts/manifest.schema.json"
+  shard_prefix: "manifest_shards/v1/"
+

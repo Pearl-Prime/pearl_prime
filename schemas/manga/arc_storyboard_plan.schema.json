@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/arc_storyboard_plan.schema.json",
+  "title": "Manga Arc Storyboard Plan",
+  "description": "Arc-first storyboard contract: every panel must declare story_move + visual_proof before chapter prose / visual production. Authority: docs/specs/MANGA_ARC_STORYBOARD_CONTRACT.md",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "series_id",
+    "chapter_id",
+    "genre_id",
+    "logline",
+    "stakes_now",
+    "stakes_end",
+    "genre_cadence",
+    "page_turn_promises",
+    "panels",
+    "acceptance_layer"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "artifact_type": { "type": "string", "const": "arc_storyboard_plan" },
+    "schema_authority": {
+      "type": "string",
+      "const": "schemas/manga/arc_storyboard_plan.schema.json"
+    },
+    "series_id": { "type": "string", "minLength": 1 },
+    "chapter_id": { "type": "string", "minLength": 1 },
+    "genre_id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string" },
+    "logline": {
+      "type": "string",
+      "minLength": 24,
+      "description": "One sentence including an external force (not therapy summary)."
+    },
+    "stakes_now": {
+      "type": "string",
+      "minLength": 8,
+      "description": "What is at risk at episode open."
+    },
+    "stakes_end": {
+      "type": "string",
+      "minLength": 8,
+      "description": "What was paid / changed by episode close."
+    },
+    "genre_cadence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Ordered story functions from genre scene templates (e.g. launch_sequence, battle_action)."
+    },
+    "page_turn_promises": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["page_id", "promise"],
+        "properties": {
+          "page_id": { "type": "string" },
+          "promise": {
+            "type": "string",
+            "minLength": 8,
+            "description": "What the reader must wonder after this page."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "panels": {
+      "type": "array",
+      "minItems": 6,
+      "items": { "$ref": "#/$defs/panel_plan" }
+    },
+    "acceptance_layer": {
+      "type": "string",
+      "enum": [
+        "authored_candidate",
+        "structurally_clear",
+        "system_working",
+        "executed_real",
+        "proven_at_bar"
+      ],
+      "description": "Honest acceptance layer. Gate PASS is at most structurally_clear / authored_candidate — never bestseller."
+    },
+    "chapter_script_ref": {
+      "type": "string",
+      "description": "Path to chapter_script_writer_handoff this plan governs."
+    },
+    "beatsheet_ref": {
+      "type": "string",
+      "description": "Optional path to beatsheet artifact."
+    },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "panel_plan": {
+      "type": "object",
+      "required": [
+        "panel_id",
+        "story_move",
+        "visual_proof",
+        "information_delta"
+      ],
+      "properties": {
+        "panel_id": { "type": "string", "minLength": 1 },
+        "page_id": { "type": "string" },
+        "story_function": {
+          "type": "string",
+          "description": "Maps to genre scene-template story function when applicable."
+        },
+        "story_move": {
+          "type": "string",
+          "minLength": 8,
+          "description": "What changes in the world or relationship this panel (not 'show face')."
+        },
+        "visual_proof": {
+          "type": "string",
+          "minLength": 8,
+          "description": "What the picture must prove that dialogue alone cannot."
+        },
+        "information_delta": {
+          "type": "string",
+          "minLength": 4,
+          "description": "What the reader knows after this panel that they did not before."
+        },
+        "beat_role": { "type": "string" },
+        "action_intensity": {
+          "type": ["integer", "string"],
+          "description": "0–5 intensity from genre craft scaffolding."
+        },
+        "archetype": { "type": "string" },
+        "scene_template_id": { "type": "string" },
+        "silence": { "type": "boolean" },
+        "forbidden": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "talking_head",
+              "exposition_dump",
+              "therapy_caption_climax",
+              "deferred_action",
+              "face_reaction_only",
+              "radio_only_climax"
+            ]
+          }
+        },
+        "dialogue_allowed": {
+          "type": "boolean",
+          "description": "If true, dialogue may label the already-visible move; it may not be the move."
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

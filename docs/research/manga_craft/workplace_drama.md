@@ -42,6 +42,8 @@ Readers are millennial professionals 26–40 — late enough in career to feel t
 - **The outside friend:** Does not work at the same company; may not work in the same industry. Provides a frame in which the protagonist's workplace concerns sound genuinely absurd when described aloud. Carries the "what are you actually doing with your life" question.
 - **The institutional antagonist:** Not a person — the system itself: the review structure, the headcount freeze, the reorg, the metrics dashboard. When a specific person embodies institutional harm, that character must also have a comprehensible institutional motivation — they are not cruel, they are also caught.
 
+**2026-07-24 addendum (MC endurance study):** the genre's endurance record — Kosaku Shima (*Kosaku Shima* series, 40+ years: rank-per-series org-chart ladder, section chief → chairman). Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §workplace.
+
 ## 6. Failure modes
 
 1. **Corporate cynicism without interiority.** Depicting workplace absurdity without access to what it costs the protagonist emotionally. Satire without interiority is commentary, not story.

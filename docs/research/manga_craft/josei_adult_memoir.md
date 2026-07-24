@@ -34,6 +34,8 @@ Readers are adults 20–40 navigating stalled adulthood — career drift, estran
 - **Emotional arc per volume:** Not Baseline→Disruption→Return. Rather: *Avowal → Attempt → Aftermath → Honest assessment that things are only a little different.* The genre resists transformation arcs.
 - **Cast density:** Solo lead + 1–3 named others. Cast bloat destroys the interiority.
 
+**2026-07-24 addendum (MC endurance study):** additional exemplars — Shigeru Mizuki (*Showa: A History of Japan*: witness-memoir at era scale) and the serialized-self endurance model (Nagata Kabi's sequel-per-life-event line): endurance lives in the trusted narrating persona, not an open serial. Extraction: `artifacts/research/manga_mc_endurance_study_2026-07-24.md` §memoir.
+
 ## 6. Failure modes
 1. Epiphany endings — "and then I understood myself" resolves what the form requires to stay open.
 2. Pretty art. Clean, polished figure drawing reads as vanity; the honesty register needs visible tremor in the line.

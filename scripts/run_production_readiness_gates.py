@@ -1103,6 +1103,87 @@ def main() -> int:
             skip=True,
         )
 
+    # --- 46. Store series name consistency (store_series.id -> exact-match name) ---
+    series_name_gate = REPO_ROOT / "scripts" / "ci" / "check_store_series_name_consistency.py"
+    if series_name_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(series_name_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=360,
+            )
+            sn_ok = r.returncode == 0
+            sn_detail = (r.stdout or r.stderr or "").strip().splitlines()[-1] if (r.stdout or r.stderr) else "check_store_series_name_consistency"
+        except Exception as e:
+            sn_ok = False
+            sn_detail = str(e)
+        if not gate("46. Store series name consistency (store_series.id -> exact-match name)", sn_ok, sn_detail):
+            failed += 1
+    else:
+        gate("46. Store series name consistency", True, "gate script not present; skip", skip=True)
+
+    # --- 47. Manga arc storyboard contract (ADVISORY — Lane 01, manga process uplift) ---
+    # Authority: docs/specs/MANGA_ARC_STORYBOARD_CONTRACT.md. Advisory on first
+    # land per the uplift pack; promotion to required is Lane 07's gate pass.
+    arc_gate = REPO_ROOT / "scripts" / "ci" / "check_manga_arc_storyboard.py"
+    if arc_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(arc_gate)],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            arc_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            arc_detail = out.splitlines()[-1] if out else "check_manga_arc_storyboard"
+        except Exception as e:
+            arc_ok = False
+            arc_detail = str(e)
+        gate(
+            "47. Manga arc storyboard contract (story_move + visual_proof — ADVISORY)",
+            arc_ok, arc_detail, advisory=True,
+        )
+    else:
+        gate("47. Manga arc storyboard contract", True, "gate script not present; skip", skip=True)
+
+    # --- 48. Manga series master plan contract (ADVISORY — Lane 06, manga process uplift) ---
+    # Authority: docs/specs/MANGA_SERIES_MASTER_PLAN_CONTRACT.md. Genre-derived
+    # arc cadence (pacing yaml arc_cadence blocks) — never a fixed 12; null-shift
+    # families stay cyclical. Advisory until Lane 11 proves the loop — do NOT
+    # promote to required before that. Display numbering note: slots 1-47 are in
+    # continuous use above (47 = arc storyboard); the display number "46" is
+    # pre-existingly used TWICE above (zh-TW ratchet + store series name) — that
+    # collision predates this gate and is deliberately not renumbered here.
+    smp_gate = REPO_ROOT / "scripts" / "ci" / "check_manga_series_master_plan.py"
+    if smp_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(smp_gate)],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            smp_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            smp_detail = out.splitlines()[-1] if out else "check_manga_series_master_plan"
+        except Exception as e:
+            smp_ok = False
+            smp_detail = str(e)
+        gate(
+            "48. Manga series master plan contract (genre-derived arc cadence — ADVISORY)",
+            smp_ok, smp_detail, advisory=True,
+        )
+    else:
+        gate("48. Manga series master plan contract", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:

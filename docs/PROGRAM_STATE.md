@@ -392,3 +392,54 @@ and EI v2 wiring. **All five sub-lanes + this synthesis are read-only; zero atom
 ---
 *Supersedes all previous status reports and planning baselines (incl. the May 2026 worldwide plan). Latest session
 detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md`.*
+- **2026-07-23 first-zh-TW-book attempt — BLOCKED, structurally clear on cell selection only.** zh-TW
+  Simplified-contamination repair, name-conversion, and corrupted-content retranslation programs all closed
+  same-day (PRs #81-86, #157-181, #152-155, consolidated in #162/#191); the 863-row
+  `artifacts/qa/zh_tw_authoring_backlog_consolidated_20260723.tsv` is the live remaining-gap ground truth.
+  Cell selection against that backlog **succeeded**: `gen_z_professionals × overthinking × spiral` (F006) is
+  zh-TW-clean (0 backlog hits on all core slots + the engine bank) and `check_tuple_viability.py` PASS — real
+  Waystream listing already exists
+  (`way_stream_sanctuary__default_teacher__gen_z_professionals__overthinking__spiral.yaml`). The four-piece-chord
+  production build (`--pipeline-mode spine --quality-profile production --exercise-journeys --locale zh-TW`)
+  **hard-fails**, but not on the locale-fallback honesty gate — on a different, pre-existing gate
+  <!-- CI-ALLOWLIST: legacy-registry-ok — prose status report of an already-run/failed build; the
+       chord flags above and the entrypoint reference below are not a live invocation in this diff -->
+  (`EXERCISE-BANK-RESOLUTION-01`, in `scripts/run_pipeline.py`, PR #912) whose practice-atom classifier
+  (`_is_practice_atom`, `phoenix_v4/planning/enrichment_select.py:1559`) tests content against **English-only**
+  substrings/regex (`"notice the "`, `"step 1"`, numbered-list pattern, …). Real, clean, human-quality zh-TW
+  EXERCISE atoms contain none of those English tokens, so 100% of zh-TW EXERCISE atoms are misclassified as
+  "not practice-shaped," every chapter falls through to the shared English `practice_library`, and the gate
+  (correctly, by its own logic) hard-exits. **Confirmed cell-independent**: reproduced identically on
+  `corporate_managers × adhd_focus × overwhelm` (also zh-TW-clean + tuple-viable). This blocks **every**
+  `--locale zh-TW` (and likely every CJK-locale) production book using the mandatory `--exercise-journeys` chord
+  flag, regardless of persona/topic — no re-pick can route around it; the classifier itself needs a CJK-aware
+  fix (Pearl_Dev/Pearl_Prime scope, out of this lane's translation-only mandate). Full diagnosis + 4 build logs:
+  `artifacts/qa/zhtw_first_book_20260723/TRACE_SUMMARY.md`. **Acceptance layer: structurally clear (Layer 1) on
+  cell selection only — zero zh-TW EPUBs shipped.**
+- **Roadmap doc drift corrected 2026-07-23 (live-verified, do not re-derive without re-checking):** the
+  2026-07-03 roadmap doc (`docs/specs/MANGA_100PCT_PRODUCTION_ROADMAP_2026-07-03.md`) undersells current state —
+  M1 (`check_render_progress_bytes.py` / `check_manga_story_authored.py` / `check_manga_wiring.py`), M2
+  (`config/manga/locale_genre_allocations.yaml` + registry C-1/C-2 closed 2026-07-04), and M4 (`manga_mode_vessels.yaml`
+  wired into `phoenix_v4/manga/series/story_architect.py::apply_mode_vessel`, `MANGA_MODE_WRAPPER_DESIGN.md` /
+  `MUSIC_MODE_MANGA_V1_SPEC.md` / `teacher_apparatus_per_genre.md` all landed) are all CODE-WIRED/EXECUTED-REAL and
+  gate-green on `origin/main` as of this verification — none of this was reflected in the roadmap doc's milestone
+  table. All 562 `tests/manga/` pass. The real remaining long pole is M3 (stories at scale), now tracked by the
+  same-day program `docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/` (PR #103, merged; ws
+  `ws_manga_48ep_3catalog_writing_20260723`): 1 series x 48 episodes (4 arcs x 12) per brand per catalog,
+  en_US/ja_JP/zh_TW x 37 brands = 109 cells. Live count this session: **en_US 37/37 cells have a gate-passing
+  ep_001** (`check_manga_story_authored.py`; some series deeper into arc 1 already — 55 episode files total);
+  **ja_JP 17/37 cells have a gate-passing ep_001** (16 episode files; 20 cells still NEW_SERIES, unauthored);
+  **zh_TW 0/37 — no episode files exist**, though its research blocker (lane 01, the modern-reader-context
+  doctrine gap) is already resolved (`config/manga/modern_reader_story_doctrine.yaml` carries a real, substantive
+  `zh_TW:` market profile, not a stub) — the zh_TW writer lane (`04_WRITER_LANE_ZH_TW_PROMPT.md`) was simply never
+  dispatched. A zh_TW smoke-cell dispatch (`cognitive_clarity`, flagship) was launched 2026-07-23 to close this;
+  check for its PR before re-dispatching the same cell. Acceptance layer for every gate-passing ep_001: CODE-WIRED/
+  EXECUTED-REAL — none of this is PROVEN-AT-BAR (that needs an operator blind-read per the pack's Router SS16, and
+  ultimately the M6 blind-judge protocol) and none of it is "bestseller" or "shippable" on gate-PASS alone.
+- **Story/exercise/tool/EXTERNAL catalog doctrine — SPECCED 2026-07-23:**
+  `docs/specs/PEARL_PRIME_STORY_EXERCISE_TOOL_SYSTEM_V1_SPEC.md` locks mandatory
+  persona×topic×engine arc banks, supporting-only generic STORY, one cited EXTERNAL per chapter
+  with 50/40/10 audience-lane preference, coexistence of 311 practices + journey wraps +
+  persona×topic×locale book plans, and tool/exercise separation. Execution is routed by
+  `docs/agent_prompt_packs/20260722_story_exercise_external_scale/`; mass authoring and selector
+  code are not claimed landed by the spec PR.
