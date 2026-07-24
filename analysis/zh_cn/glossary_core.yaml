@@ -1,0 +1,123 @@
+# glossary_core.yaml — zh-CN (Mainland Simplified Chinese)
+#
+# Universal, cross-persona therapeutic/self-help vocabulary. These are the
+# base terms almost every atom touches regardless of persona pool. Mainland
+# preferred forms; Taiwan/HK alternatives are explicitly forbidden per
+# CLAUDE.md's zh-CN script rule (Simplified for Mainland China — see
+# .claude/skills/translation-qa/SKILL.md and config/localization/
+# locale_registry.yaml).
+#
+# Derived from real corpus reading (atoms/tech_finance_burnout,
+# atoms/working_parents, atoms/corporate_managers, atoms/midlife_women,
+# atoms/first_responders, atoms/corporate_managers/people_pleasing —
+# sampled 2026-07-22), not from metadata alone.
+
+schema_version: 1
+locale: zh-CN
+
+terms:
+  - source: mindfulness
+    preferred: 正念
+    avoid: ["靜觀", "覺察力訓練"]   # 靜觀 = Taiwan/HK register
+    notes: 正念 is the standard Mainland academic/clinical + popular term.
+
+  - source: anxiety
+    preferred: 焦虑
+    avoid: ["焦慮"]  # Traditional form — script violation, not a register choice
+    notes: Standard clinical + colloquial Mainland term.
+
+  - source: overthinking
+    preferred: 过度思虑
+    context_alt: ["想太多", "反复琢磨"]
+    notes: >
+      过度思虑 for clinical/expository register (TAKEAWAY, REFLECTION);
+      想太多 for colloquial narrative voice (HOOK, dialogue-adjacent STORY)
+      when the English source itself is colloquial. Choose by context, do
+      not flatten to one form everywhere.
+
+  - source: burnout
+    preferred: 职业倦怠
+    avoid: ["過勞", "燃燒殆盡（口語直譯，避免）"]
+    notes: 职业倦怠 is the Mainland clinical/HR-standard term.
+
+  - source: compassion fatigue
+    preferred: 共情耗竭
+    context_alt: ["同情疲劳（次选，仅当上下文更口语化时）"]
+    notes: >
+      Locked critical_recurring term — see concept_map.json. Do not vary
+      across files once chosen.
+
+  - source: people-pleasing
+    preferred: 讨好型行为
+    context_alt: ["取悦他人", "过度迎合"]
+    notes: >
+      讨好型行为 for the named-condition/title role (recurs as a topic
+      label); 取悦他人 / 过度迎合 acceptable in flowing narrative prose
+      describing the behavior rather than naming it.
+
+  - source: self-compassion
+    preferred: 自我关怀
+    avoid: ["自我慈悲（過度直譯）"]
+
+  - source: boundaries (interpersonal)
+    preferred: 边界
+    context_alt: ["个人边界", "界限"]
+    notes: 边界 default; 界限 acceptable when 边界 already used nearby to
+      avoid repetition.
+
+  - source: watcher (recurring narrative role/motif)
+    preferred: 监视者
+    context_alt: ["守望者（叙事语气更柔和时）"]
+    notes: >
+      Motif role name (financial_anxiety/watcher, anxiety/watcher, etc.) —
+      pick one rendering per persona pool and hold it constant across that
+      pool's files; do not mix 监视者 and 守望者 within the same persona's
+      atom set.
+
+  - source: recognition (identity_stage / atom shape)
+    preferred: 觉察
+    notes: Used for the moment-of-noticing beat; distinct from 意识到
+      (realize, more cognitive) — prefer 觉察 for the somatic/felt sense
+      atoms use throughout (RECOGNITION shape, PIVOT "Notice..." openers).
+
+  - source: reframe / pivot
+    preferred: 转念
+    context_alt: ["换个角度看"]
+    notes: 转念 for the compressed instructional register PIVOT atoms use.
+
+  - source: exercise (practice instruction atom)
+    preferred: 练习
+    notes: Not 運動 (physical exercise) or 訓練 (training/drill) — 练习
+      matches the atom's short embodied-practice register.
+
+  - source: takeaway
+    preferred: 要点
+    context_alt: ["核心提醒"]
+    notes: Keep TAKEAWAY translations short and aphoristic, matching the
+      English source's compression — do not expand into a full sentence
+      of explanation.
+
+  - source: overwhelm
+    preferred: 不堪重负
+    context_alt: ["压垮", "喘不过气"]
+
+  - source: shame
+    preferred: 羞耻感
+    avoid: ["羞恥感"]  # Traditional form
+
+  - source: spiral (anxiety/thought spiral)
+    preferred: 螺旋式恶化
+    context_alt: ["越想越糟", "陷入循环"]
+
+  - source: grief
+    preferred: 悲伤
+    context_alt: ["丧失感（谈失去本身时）"]
+
+  - source: identity (self-concept, not legal ID)
+    preferred: 自我认同
+    avoid: ["身份"]  # 身份 reads as legal/social ID in Mainland usage, not self-concept
+
+  - source: therapist / clinical professional referenced in-text
+    preferred: 心理咨询师
+    avoid: ["心理諮商師", "輔導員"]  # Taiwan/HK register
+    notes: 心理咨询师 is the standard Mainland professional title.

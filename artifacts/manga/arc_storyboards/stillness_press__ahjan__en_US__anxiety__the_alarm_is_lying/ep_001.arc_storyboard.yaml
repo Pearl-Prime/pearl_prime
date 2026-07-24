@@ -1,0 +1,451 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_001
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 1: Tuesday, 6:47 AM'
+logline: A Tuesday-morning work notification fires Mira's body into a catastrophizing spiral before she
+  has even finished her tea, and the episode has to prove the alarm can be witnessed without being obeyed.
+stakes_now: Mira's nervous system is already primed to read any notification as danger; one email subject
+  line can hijack a whole morning.
+stakes_end: The alarm still fires — the smoke detector is still on the ceiling — but Mira has one lived
+  instance of noticing the false alarm without being run by it, not a cure.
+genre_cadence:
+- establishing_calm_ritual
+- sensory_anchor_tea_beat
+- activation_trigger
+- body_register_escalation
+- mind_racing_spiral
+- anchor_object_discovery
+- memory_pendulation_flashback
+- present_return
+- teaching_insight_landing
+- long_drop_decompression
+- closing_return
+page_turn_promises:
+- page_id: ep_001_p01
+  promise: Will the quiet morning stay quiet once the phone lights up?
+- page_id: ep_001_p02
+  promise: Will the catastrophizing spiral run unchecked, or does something in the ordinary world interrupt
+    it before the meeting?
+notes: Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence — ep_001
+  was authored (M3 Wave 1) before the storyboard-first process existed. This plan describes the story_move
+  already present in the shipped script; it does not add new panels. No config/manga/genre_scene_templates/iyashikei.yaml
+  exists yet (only mecha.yaml is populated) — genre_cadence above is derived from the episode's own already-demonstrated
+  genre-native structural beats (TEA BEAT, DAPPLED LIGHT HAND, ANCHOR PANEL, BREATH BRACKET, LONG DROP)
+  rather than a formal scene-template file; flagging this as a real gap for the genre-template backlog.
+panels:
+- panel_id: ep001_001
+  page_id: ep_001_p01
+  story_function: establishing_calm_ritual
+  story_move: Episode opens on the room, not Mira — dawn light and an undisturbed bed establish a baseline
+    of safety before any trigger exists.
+  visual_proof: Wide dawn bedroom, gauze-curtain leaf-shadow, phone face-down, clock at 6:47, no figure
+    yet.
+  information_delta: Reader knows this is a calm ordinary morning, time-stamped, before anything has happened.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_002
+  page_id: ep_001_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: The first TEA BEAT establishes the recurring sensory anchor the episode will return to and
+    bookend against.
+  visual_proof: Close-up, steady hand wrapping a ceramic cup, steam curling, hand still.
+  information_delta: Reader learns tea is Mira's ritual object before it is ever named as one.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_003
+  page_id: ep_001_p01
+  story_function: establishing_calm_ritual
+  story_move: Mira's calm baseline is shown on her face directly, giving the reader a before-state to
+    measure the coming activation against.
+  visual_proof: Medium shot, eyes calm and slightly downcast at the tea, loose hair, cream sweater.
+  information_delta: Reader has a clear read on Mira's resting emotional state.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_004
+  page_id: ep_001_p01
+  story_function: activation_trigger
+  story_move: The external force enters — a work notification lights the phone screen before Mira has
+    chosen to look, converting an ordinary object into a threat cue.
+  visual_proof: 'Mira''s POV, phone screen lit, notification banner reading Re: Q3 review 10am bold, cup
+    still in frame.'
+  information_delta: Reader now knows the specific trigger (a work review meeting) and that it arrived
+    uninvited.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_005
+  page_id: ep_001_p01
+  story_function: body_register_escalation
+  story_move: The nervous system responds before conscious thought does — the body registers alarm ahead
+    of any narrated fear.
+  visual_proof: Tight chest-level close-up, tension in the sweater fabric and posture, soft motion-blur
+    implying a quickening pulse.
+  information_delta: Reader sees the activation is somatic first, not a decision Mira is making.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_006
+  page_id: ep_001_p01
+  story_function: body_register_escalation
+  story_move: Mira's face registers the shift from calm to alert, giving the reader a visible hinge between
+    panel 3's baseline and what follows.
+  visual_proof: Close on Mira's face, eyes widened slightly, lips closed, alerted but not yet afraid.
+  information_delta: Reader confirms the trigger has landed — Mira has noticed her own activation.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_007
+  page_id: ep_001_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: A deliberate visual rhyme to panel 2 — the tea beat repeats to show Mira reaching for the
+    anchor rather than only spiraling.
+  visual_proof: Same composition as panel 2, hand on the cup, steam still rising.
+  information_delta: Reader sees Mira has an existing coping reflex, established before the spiral peaks.
+  beat_role: ritual_anchor
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_008
+  page_id: ep_001_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: The frame widens to show Mira's whole context (kitchen, window, plant), grounding the activation
+    in a specific lived space rather than an abstract feeling.
+  visual_proof: Pull-back wide, Mira at the kitchen table, both hands on the cup, sunrise and leaf-shadow
+    through the window.
+  information_delta: Reader gets the full ordinary-world setting the alarm is happening inside of.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_009
+  page_id: ep_001_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: A macro insert confirms the tea is still warm — a concrete, disprovable fact that will later
+    underwrite the episode's central metaphor.
+  visual_proof: Macro on the cup and steam, hint of Mira's hand and the wall.
+  information_delta: Reader is handed a specific sensory fact (warmth, not danger) that the ending will
+    pay off.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_010
+  page_id: ep_001_p02
+  story_function: activation_trigger
+  story_move: The trigger compounds — the calendar reveals the review is not an isolated item but one
+    of several crowding the morning, raising the stakes of the activation.
+  visual_proof: Laptop screen reflected in Mira's face, calendar app crowded with blocks, "10:00 AM —
+    Q3 Review (DM)" visible.
+  information_delta: Reader learns the meeting is with a decision-maker and the morning is already overloaded.
+  beat_role: trigger_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_011
+  page_id: ep_001_p02
+  story_function: mind_racing_spiral
+  story_move: The spiral becomes externally visible — three catastrophizing thoughts crowd the panel like
+    weather, showing the cost of the activation directly rather than describing it.
+  visual_proof: Overlapping cloud-thought bubbles at three positions, background dimmed, each carrying
+    a distinct catastrophizing fragment.
+  information_delta: Reader now has concrete content for what "anxious" means for Mira — specific self-doubting
+    thoughts, not a generic label.
+  beat_role: spiral_peak
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_012
+  page_id: ep_001_p02
+  story_function: body_register_escalation
+  story_move: The somatic cost becomes visible in the physical world — the trembling hand ripples the
+    tea, proving the activation has a real, small, deniable-nothing physical signature.
+  visual_proof: Close on a hand trembling slightly on the table, tea rippling in the cup.
+  information_delta: Reader sees the spiral has a bodily cost, kept small and specific rather than catastrophic.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_013
+  page_id: ep_001_p02
+  story_function: anchor_object_discovery
+  story_move: An unplanned present-moment object interrupts the spiral's momentum — Mira looks up and
+    away from the loop toward something outside herself.
+  visual_proof: Wide shot, a finch landing on the outer windowsill, sunlight through the glass.
+  information_delta: Reader sees the spiral is interruptible by ordinary outside stimulus, not only by
+    effort.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_014
+  page_id: ep_001_p02
+  story_function: anchor_object_discovery
+  story_move: The anchor object is given full attention — the bird becomes a concrete, alive, present-tense
+    counterweight to the abstract catastrophizing.
+  visual_proof: Close on the bird, head-tilt, eye visible, gold light on feathers.
+  information_delta: Reader is given a specific sensory anchor Mira can return to (this bird, this light),
+    not a generic "grounding technique."
+  beat_role: interrupt
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_015
+  page_id: ep_001_p02
+  story_function: anchor_object_discovery
+  story_move: Mira's body visibly softens in response to the anchor — the first physical evidence that
+    the spiral is losing its grip.
+  visual_proof: Mira's face, shoulders softened a fraction, lips parting, not yet a smile.
+  information_delta: Reader sees the first reversal signal — activation is easing, not escalating further.
+  beat_role: interrupt
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_016
+  page_id: ep_001_p02
+  story_function: memory_pendulation_flashback
+  story_move: A palette-marked flashback surfaces the origin of the catastrophizing pattern — a past professional
+    failure the body is still bracing against.
+  visual_proof: Desaturated cool-blue conference room, Mira upright at a long table, faces deliberately
+    blurred, gaze down at her notebook.
+  information_delta: Reader learns the alarm has a specific history, not just a generic anxious disposition.
+  beat_role: origin_memory
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_017
+  page_id: ep_001_p02
+  story_function: memory_pendulation_flashback
+  story_move: The bodily cost of that past failure is made visible even though the face stayed composed
+    in the memory — proving the alarm was already misfiring then.
+  visual_proof: Same flashback palette, close on a clenched fist hidden under the conference table.
+  information_delta: Reader sees the gap between Mira's public composure and private somatic cost, then
+    and now.
+  beat_role: origin_memory
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_018
+  page_id: ep_001_p02
+  story_function: present_return
+  story_move: The palette returns to present-day warmth and the hand physically releases — the flashback's
+    tension is discharged in the body, not narrated away.
+  visual_proof: Present palette, Mira's hand at the kitchen table flexes, releases, stretches.
+  information_delta: Reader sees the memory has been metabolized in real time, not just remembered.
+  beat_role: pendulation_return
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_019
+  page_id: ep_001_p02
+  story_function: sensory_anchor_tea_beat
+  story_move: The third tea beat marks a full pendulation cycle completed — trigger, spiral, memory, and
+    now a return to the anchor ritual.
+  visual_proof: Close, Mira lifts the cup and sips, steam on her lip, eyes nearly closed.
+  information_delta: Reader tracks the rhythm of the episode as regulation, not a single fix.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_020
+  page_id: ep_001_p02
+  story_function: present_return
+  story_move: A full inhale is shown as its own beat, giving the reader's own body a breathing cue synchronized
+    with Mira's.
+  visual_proof: Eyes closed, faint smile, sweater visibly rising with an inhale.
+  information_delta: Reader is invited into a shared physiological beat, not just observing one.
+  beat_role: breath_bracket
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_021
+  page_id: ep_001_p02
+  story_function: present_return
+  story_move: The exhale completes the breath bracket, closing the physiological loop opened by the trigger
+    four beats ago.
+  visual_proof: Same composition, sweater settles, eyes still closed, long exhale.
+  information_delta: Reader registers a completed down-regulation cycle, felt rather than stated.
+  beat_role: breath_bracket
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_022
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: The episode's central image is introduced visually before it is explained — the smoke detector
+    is shown as an ordinary, unremarkable object first.
+  visual_proof: Mira's POV up at the ceiling, a smoke detector with a steady green LED, otherwise unmarked.
+  information_delta: Reader is given the vessel object the closing metaphor will depend on, seeded before
+    any explanation.
+  beat_role: teaching_vessel_intro
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_023
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: Mira's remembered teaching begins — an outside voice (never named in-story) is introduced
+    as the source of the reframe she is about to test.
+  visual_proof: Mira's face looking up, contemplative rather than braced.
+  information_delta: Reader learns the reframe did not originate with Mira alone — it was taught to her
+    once and not yet believed.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_024
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: The reframe is stated in full for the first time, naming the nervous system rather than
+    Mira as the actor with the outdated alarm.
+  visual_proof: Wider frame, ceiling and kitchen both visible, fuller morning light.
+  information_delta: Reader gets the episode's thesis in one sentence — the alarm system is old, not the
+    person.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_025
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: A return to the vessel object holds the teaching in view while Mira's thought continues,
+    letting picture and idea sit together.
+  visual_proof: Close on the smoke detector LED, steady green.
+  information_delta: Reader is reminded the alarm is still active and unresolved even as the reframe lands.
+  beat_role: teaching_vessel_intro
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_026
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: The reframe's specific mechanism is stated — the alarm cannot discriminate real threat from
+    harmless heat, directly naming Mira's own false-positive spiral.
+  visual_proof: Close on Mira's eyes, tracking the thought as it lands.
+  information_delta: Reader now has the precise mechanism (can't tell smoke from steam) that explains
+    everything from panels 4 through 12.
+  beat_role: teaching_recall
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_027
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: The metaphor is proven with a literal visual rhyme — actual steam from the kettle rising
+    toward the ceiling shows exactly the false-alarm input just described.
+  visual_proof: Wider kitchen counter shot, kettle still on, steam curling up near the ceiling.
+  information_delta: Reader sees the metaphor made literal — steam, not smoke, is the input the detector
+    (and Mira) has been reacting to all episode.
+  beat_role: teaching_vessel_intro
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_028
+  page_id: ep_001_p02
+  story_function: teaching_insight_landing
+  story_move: The teaching visibly lands as recognition rather than relief — the turn of the episode is
+    registered on Mira's face and in a single internal word.
+  visual_proof: Mira's face, teaching landed, eyes soft, not smiling yet.
+  information_delta: Reader confirms the reframe has been metabolized as insight, not just heard.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_029
+  page_id: ep_001_p02
+  story_function: long_drop_decompression
+  story_move: The episode's single silent decompression beat — nothing changes on purpose, giving the
+    reader the same pause Mira is taking.
+  visual_proof: Wide silent panel, kettle steaming, fuller light, leaf-shadow across the wall, deliberate
+    empty space top and bottom, no text.
+  information_delta: Reader is given a held moment with no new information — the pause itself is the content.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_030
+  page_id: ep_001_p02
+  story_function: closing_return
+  story_move: The final tea beat bookends the episode's opening ritual, showing the anchor is still available
+    after the whole cycle.
+  visual_proof: Close, hand on the cup again, same composition as panel 2, deliberate bookend.
+  information_delta: Reader recognizes the visual rhyme closing the episode's structural loop.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_031
+  page_id: ep_001_p02
+  story_function: closing_return
+  story_move: The episode explicitly refuses a cure ending — the smile is small and the change is stated
+    as presence, not transformation.
+  visual_proof: Mira's face, barely a smile, eyes soft, not transformed, not fixed.
+  information_delta: Reader is told directly that this is not a fix — an important genre-honesty beat
+    for iyashikei.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_032
+  page_id: ep_001_p02
+  story_function: closing_return
+  story_move: The episode's thesis is restated as an achievable, repeatable action (notice once) rather
+    than a belief Mira must hold — the actual takeaway for the reader.
+  visual_proof: Empty wall with moving light, caption space.
+  information_delta: Reader receives the practical, repeatable version of the teaching that a reader could
+    actually use.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_033
+  page_id: ep_001_p02
+  story_function: closing_return
+  story_move: The vessel object returns unchanged — same alarm, same LED — proving the episode's honesty
+    that circumstances didn't change, only Mira's relationship to them.
+  visual_proof: Close on the smoke detector LED, steady green, identical to panel 22 and 25.
+  information_delta: Reader confirms nothing external was fixed — the change was entirely in relationship,
+    not circumstance.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_034
+  page_id: ep_001_p02
+  story_function: closing_return
+  story_move: A wide pull-back closes the episode's world, showing Mira settled in the same space the
+    episode opened in, now fully lit.
+  visual_proof: Wide kitchen, stronger sunlight, bird gone, Mira at the table with cup, closed laptop,
+    plant, light.
+  information_delta: Reader sees the ordinary world continuing without either character or setting being
+    dramatically altered.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_035
+  page_id: ep_001_p02
+  story_function: closing_return
+  story_move: The episode card closes the chapter and names it, marking the end of this specific cycle
+    before the next episode's trigger.
+  visual_proof: Typographic episode-card panel on cream background.
+  information_delta: Reader is given a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_001.yaml
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped script''s already-demonstrated
+  story_move per panel; does not claim system_working or proven_at_bar.'

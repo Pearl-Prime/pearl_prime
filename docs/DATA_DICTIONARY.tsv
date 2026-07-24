@@ -75,12 +75,14 @@ scripts/ci/check_system_governance_status.py	CI drift/readiness gate (check_syst
 scripts/ci/check_teacher_photo_drift.py	CI drift/readiness gate (check_teacher_photo_drift.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_teacher_readiness.py	CI drift/readiness gate (check_teacher_readiness.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_teacher_synthetic_governance.py	CI drift/readiness gate (check_teacher_synthetic_governance.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_title_language_conformance.py	CI drift/readiness gate (check_title_language_conformance.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_variation_manifest.py	CI drift/readiness gate (check_variation_manifest.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_voice_audition_contract.py	CI drift/readiness gate (check_voice_audition_contract.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_wave_density.py	CI drift/readiness gate (check_wave_density.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_waystream_catalog_uniqueness.py	CI drift/readiness gate (check_waystream_catalog_uniqueness.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_western_lane_format.py	CI drift/readiness gate (check_western_lane_format.py)	ci	Pearl_GitHub	.github/workflows	WIRED
-config/source_of_truth/doctrine_rotation.yaml	config entry (doctrine_rotation.yaml)	config	Pearl_Architect	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
+scripts/ci/check_zh_tw_simplified_contamination.py	CI drift/readiness gate (check_zh_tw_simplified_contamination.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+config/source_of_truth/doctrine_rotation.yaml	config entry (doctrine_rotation.yaml)	config	Pearl_Architect	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;phoenix_v4/social/media_selector.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
 SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION	composite-doctrine REFLECTION bank (anxiety)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/composite_doctrine/boundaries/REFLECTION	composite-doctrine REFLECTION bank (boundaries)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/composite_doctrine/burnout/REFLECTION	composite-doctrine REFLECTION bank (burnout)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
@@ -107,7 +109,7 @@ SOURCE_OF_TRUTH/exercises_v4/approved/07_self_contact_touch.yaml	approved five-l
 SOURCE_OF_TRUTH/exercises_v4/approved/08_emotional_processing_completion.yaml	approved five-layer-lane exercise body (08_emotional_processing_completion.yaml)	exercise_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/exercises_v4/approved/09_embodied_intention_direction.yaml	approved five-layer-lane exercise body (09_embodied_intention_direction.yaml)	exercise_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/exercises_v4/approved/10_integration_return_to_baseline.yaml	approved five-layer-lane exercise body (10_integration_return_to_baseline.yaml)	exercise_bank	Pearl_Editor	-	KNOWN_UNWIRED
-phoenix_v4/planning/doctrine_rotation.py	planning entry (doctrine_rotation.py)	planning	Pearl_Prime	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
+phoenix_v4/planning/doctrine_rotation.py	planning entry (doctrine_rotation.py)	planning	Pearl_Prime	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;phoenix_v4/social/media_selector.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
 .github/workflows/accent-supply-preflight.yml	GitHub Actions workflow (accent-supply-preflight.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED
 .github/workflows/atoms-external-ref-audit.yml	GitHub Actions workflow (atoms-external-ref-audit.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED
 .github/workflows/atoms-parse-sweep.yml	GitHub Actions workflow (atoms-parse-sweep.yml)	workflow	Pearl_GitHub	.github/workflows	WIRED

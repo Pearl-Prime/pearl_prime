@@ -1,0 +1,355 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_009
+genre_id: iyashikei
+title: 'The Alarm Is Lying — Episode 9: Saturday, 2:38 PM'
+logline: A stray thought about a work deadline surfaces during ordinary Saturday chores and passes through
+  Mira's body without needing to be managed, proving the practice has become invisible even to her.
+stakes_now: Whether Saturday will pull Mira into any of the old catastrophizing, or whether the practice
+  has become invisible enough that there is nothing left to prove.
+stakes_end: Nothing dramatic resolved because nothing dramatic needed to -- the episode proves the practice
+  now runs beneath conscious effort, unridden even by a stray deadline thought.
+genre_cadence:
+- establishing_calm_ritual
+- domestic_ordinary_task
+- activation_trigger_minimal
+- body_register_no_effort
+- present_ground_looking
+- transition_to_outside_world
+- awe_pullback_street
+- anchor_object_discovery
+- long_drop_decompression
+- continuity_callback_return
+- completion_domestic_return
+- closing_return
+page_turn_promises:
+- page_id: ep_009_p01
+  promise: Will the quiet Saturday stay quiet once the small deadline thought surfaces at the sink?
+- page_id: ep_009_p02
+  promise: Now that Mira has stepped outside, will the ordinary walk find anything the old alarm would
+    have caught?
+panels:
+- panel_id: ep009_001
+  page_id: ep_009_p01
+  story_function: establishing_calm_ritual
+  story_move: Episode opens on stillness itself, not Mira -- folded laundry and a bar of sunlight establish
+    the practice's baseline before any figure or trigger appears.
+  visual_proof: Close-up on a small folded stack of cream sweaters in a diagonal sunbeam, dust motes visible,
+    the kitchen succulent soft-focus in the corner.
+  information_delta: Reader knows this is an ordinary settled Saturday afternoon before anything has happened.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_002
+  page_id: ep_009_p01
+  story_function: domestic_ordinary_task
+  story_move: Mira is shown mid ordinary task, grounding the practice in plain domestic labor rather than
+    a performed ritual.
+  visual_proof: Wider shot of Mira sitting cross-legged on the floor near the laundry pile, hand smoothing
+    a wrinkle on a folded shirt, caption gives the exact time.
+  information_delta: Reader gets the day and time stamp and confirms Mira's ordinary task in progress.
+  beat_role: ordinary_task
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_003
+  page_id: ep_009_p01
+  story_function: domestic_ordinary_task
+  story_move: The folded sweater is put away without ceremony, showing the task completing itself rather
+    than becoming a mindfulness moment.
+  visual_proof: Close on Mira's hand carrying a folded sweater to an already half-open dresser drawer.
+  information_delta: Reader sees the task proceeding at ordinary pace with no hesitation or noticing-ritual
+    attached.
+  beat_role: ordinary_task
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_004
+  page_id: ep_009_p01
+  story_function: domestic_ordinary_task
+  story_move: The drawer closing marks a small completed loop, settling the apartment into quiet before
+    the day's only spike.
+  visual_proof: The drawer sliding shut with a soft thump sound effect, the apartment otherwise silent.
+  information_delta: Reader registers the domestic beat as finished and the space as calm.
+  beat_role: ordinary_task
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_005
+  page_id: ep_009_p01
+  story_function: activation_trigger_minimal
+  story_move: A work deadline thought surfaces uninvited at the sink and the body registers it for a flicker
+    -- the episode's only real activation spike.
+  visual_proof: Mira at the kitchen sink rinsing a single cup, a small thought about a project deadline
+    arriving, sfx marking the interior flicker.
+  information_delta: Reader learns Mira still has an active work stressor even on an off day, and sees
+    it land in the body before any thought is narrated.
+  beat_role: minimal_activation
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_006
+  page_id: ep_009_p01
+  story_function: body_register_no_effort
+  story_move: The activation passes through without any coping ritual being performed, proving the practice
+    now runs beneath conscious effort.
+  visual_proof: Mira's expression drifts distant for a beat then returns as she sets the rinsed cup on
+    the drying rack.
+  information_delta: Reader sees the thought has already passed with no pendant touch or breathing ritual
+    -- the doctrinal point made visually rather than stated.
+  beat_role: met_without_effort
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_007
+  page_id: ep_009_p01
+  story_function: present_ground_looking
+  story_move: A held beat on the just-rinsed cup lets the reader sit inside the ground state Mira has
+    already returned to.
+  visual_proof: Close on the cup with a single bead of afternoon light caught on its rim.
+  information_delta: Reader confirms the moment has fully settled with no residual tension shown.
+  beat_role: ground
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_008
+  page_id: ep_009_p01
+  story_function: present_ground_looking
+  story_move: Mira looks out the window with no destination in the gaze, marking the ground state as complete
+    before the world calls her outward.
+  visual_proof: Mid-shot of Mira drying her hands at the sink, gaze out the window, attention resting
+    on nothing in particular.
+  information_delta: Reader sees unoccupied attention itself as the episode's real subject, not a technique
+    being applied.
+  beat_role: ground
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_009
+  page_id: ep_009_p02
+  story_function: transition_to_outside_world
+  story_move: Mira chooses to leave the apartment for the corner store, moving the episode from interior
+    ground into the outside world.
+  visual_proof: Mira at her front door slipping on canvas shoes, a small canvas tote bag already on her
+    shoulder.
+  information_delta: Reader knows the day is about to open outward into the neighborhood.
+  beat_role: transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_010
+  page_id: ep_009_p02
+  story_function: transition_to_outside_world
+  story_move: The outside world is established as safe and ordinary -- a stranger and her dog pass without
+    incident, confirming there is nothing to brace against.
+  visual_proof: Wide sidewalk shot outside her building, late-spring sky, a woman walking a small dog
+    passes in golden light.
+  information_delta: 'Reader gets the concrete external setting: neighborhood, season, and time of day.'
+  beat_role: world_establish
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_011
+  page_id: ep_009_p02
+  story_function: transition_to_outside_world
+  story_move: A small obstacle, a fallen petal, is stepped around without any noticing-ritual, showing
+    automatic ease rather than effortful mindfulness.
+  visual_proof: Close on Mira's sneakers on warm concrete, a fallen petal she steps around unthinkingly.
+  information_delta: Reader sees avoidance happening below the level of conscious technique.
+  beat_role: ground
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_012
+  page_id: ep_009_p02
+  story_function: transition_to_outside_world
+  story_move: A wordless transaction at the corner store shows Mira functioning normally inside a low-stakes
+    social exchange.
+  visual_proof: Mira at the corner store buying a lemon, basil, and a small bottle of milk, the cashier
+    nods, she nods back, no dialogue exchanged.
+  information_delta: Reader sees the practice has not isolated her -- ordinary commerce still happens
+    with ease.
+  beat_role: world_establish
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_013
+  page_id: ep_009_p02
+  story_function: awe_pullback_street
+  story_move: A wide pullback holds the whole street in view, letting the ordinary neighborhood itself
+    carry weight rather than any single event.
+  visual_proof: 'Above-shoulder wide pullback of the street: pedestrians, parked cars, an awning, Mira
+    small in frame with her tote.'
+  information_delta: Reader is given scale and dimension -- this Saturday is unremarkable and that is
+    the point being proven.
+  beat_role: awe_pullback
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_014
+  page_id: ep_009_p02
+  story_function: transition_to_outside_world
+  story_move: Mira makes an unscheduled, low-stakes choice to detour into a small park, showing agency
+    without deliberation or struggle.
+  visual_proof: Mira at a small intersection glancing toward a park visible half a block down, then turning
+    toward it.
+  information_delta: Reader sees a spontaneous decision made without any visible inner debate.
+  beat_role: choice
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_015
+  page_id: ep_009_p02
+  story_function: transition_to_outside_world
+  story_move: The park is established as the episode's real destination, widening the world one more step
+    from the apartment.
+  visual_proof: 'Wide shot of a small park: an off fountain, a single wooden bench under a tree, a few
+    people on the grass.'
+  information_delta: Reader gets the setting for the coming Long Drop before it happens.
+  beat_role: world_establish
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_016
+  page_id: ep_009_p02
+  story_function: anchor_object_discovery
+  story_move: Mira sits on the bench without reaching for her phone, showing presence as the default rather
+    than an effortful choice.
+  visual_proof: Mira seated on the bench, tote beside her, hands empty, no phone in sight.
+  information_delta: Reader confirms the absence of phone-checking as a deliberate, notable non-event.
+  beat_role: anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_017
+  page_id: ep_009_p02
+  story_function: anchor_object_discovery
+  story_move: A sensory detail, the sun-warmed wood grain, is felt directly, without the meta-noticing
+    earlier episodes needed to name the technique.
+  visual_proof: Close on Mira's hand resting on the bench's sun-warmed wooden slat, feeling the grain.
+  information_delta: Reader sees a sensory anchor used without narration calling attention to itself as
+    a technique.
+  beat_role: anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_018
+  page_id: ep_009_p02
+  story_function: long_drop_decompression
+  story_move: The episode's Long Drop happens in daylight with no precipitating hardship -- the bench
+    itself is allowed to hold the moment, unearned by crisis.
+  visual_proof: Wide silent panel, Mira head tipped back eyes closed in the sun beside a jade-green fern,
+    deliberately empty sky, no text.
+  information_delta: Reader is given a wordless held pause that needed no crisis to earn it.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_019
+  page_id: ep_009_p02
+  story_function: continuity_callback_return
+  story_move: The visual rhyme of the jade fern catches Mira's eye as she stands, showing the practice
+    visible to her without any effort to look for it.
+  visual_proof: Close on the jade-green fern beside the bench as Mira opens her eyes and rises.
+  information_delta: Reader sees the anchor system operating passively, below the level of conscious technique.
+  beat_role: anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_020
+  page_id: ep_009_p02
+  story_function: continuity_callback_return
+  story_move: Mira passes the same fallen petal on the way home and allows herself an unperformed smile,
+    closing a small structural loop from the walk out.
+  visual_proof: Mira walking back with her tote, passing the same fallen petal, a small unguarded smile.
+  information_delta: Reader recognizes the continuity beat and the ease with which pleasure now surfaces.
+  beat_role: callback
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_021
+  page_id: ep_009_p02
+  story_function: continuity_callback_return
+  story_move: Mira hums without performing the feeling for anyone including herself, showing joy as background
+    texture rather than an event.
+  visual_proof: Mira at the lobby door, mouth shaped mid-hum, no sound effect marking it, warm lobby light.
+  information_delta: Reader is shown subtle, unarticulated contentment as the episode's real payload.
+  beat_role: callback
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_022
+  page_id: ep_009_p02
+  story_function: completion_domestic_return
+  story_move: Mira unpacks the groceries at home, returning the outside world's small harvest into the
+    domestic space that opened the episode.
+  visual_proof: Mira in the kitchen unpacking the lemon, basil, and milk onto the counter, succulent visible
+    behind her in fading light.
+  information_delta: Reader sees the outside errand completing its purpose back inside the home.
+  beat_role: completion
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_023
+  page_id: ep_009_p02
+  story_function: completion_domestic_return
+  story_move: The basil is placed beside the succulent, turning a one-off purchase into a habitual visual
+    rhyme linking this apartment to Mira's mother's kitchen.
+  visual_proof: Close on Mira's hand setting basil into a small glass of water on the windowsill next
+    to the succulent.
+  information_delta: Reader connects this episode's new prop to the established home-and-mother visual
+    rhyme.
+  beat_role: completion
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_024
+  page_id: ep_009_p02
+  story_function: completion_domestic_return
+  story_move: The evening settles in with Mira reading the same paperback from ep_006, bookending the
+    apartment's evening register across episodes.
+  visual_proof: Mira on the couch with the ep_006 paperback in her lap, a lit candle on the side table,
+    soft cream-gold light.
+  information_delta: Reader is given a cross-episode continuity anchor confirming ordinary time has simply
+    passed.
+  beat_role: completion
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_025
+  page_id: ep_009_p02
+  story_function: closing_return
+  story_move: The kettle begins to steam, restarting the series' recurring kettle bookend as the day moves
+    toward its close.
+  visual_proof: The kettle on the stove beginning to steam, purple-blue evening sky through the window
+    behind it.
+  information_delta: Reader recognizes the bookend device signaling the episode's ending sequence has
+    begun.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_026
+  page_id: ep_009_p02
+  story_function: closing_return
+  story_move: The episode closes on Mira at the table with tea, the basil and succulent side by side behind
+    her, stating directly that nothing happening was the entire practice.
+  visual_proof: Mira at the kitchen table with a cup of tea, basil and succulent visible on the sill,
+    jade pendant at her neck, caption beneath.
+  information_delta: Reader receives the episode's direct doctrinal statement as the closing beat.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_009.yaml
+notes: 'Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence — ep_009
+  was authored (M3 Wave 1) before the storyboard-first process existed. This plan describes the story_move
+  already present in the shipped script; it does not add new panels or new story content. No config/manga/genre_scene_templates/iyashikei.yaml
+  exists yet (only mecha.yaml is populated) — genre_cadence above is derived from the episode''s own already-demonstrated
+  genre-native structural beats (minimal single-spike activation, Awe-Pullback, daylight Long Drop, continuity
+  visual-rhyme, kettle bookend) rather than a formal scene-template file; same documented gap flagged
+  in ep_001''s arc storyboard notes. acceptance_layer: authored_candidate, not proven_at_bar or bestseller.'

@@ -1,0 +1,69 @@
+# POST-FIX CONFIRMATION LOG — EXERCISE-BANK-RESOLUTION-01 classifier fix
+#
+# Lane: agent/fix-zhtw-practice-atom-classifier (Pearl_Dev)
+# Date: 2026-07-23
+# Fix: phoenix_v4/planning/registry_resolver.py — _stamp_locale_exercise_metadata()
+#      (see docstring there + tests/unit/planning/test_locale_exercise_classifier.py)
+#
+# Command run (exact four-piece chord + locale, unchanged from
+# artifacts/qa/zhtw_first_book_20260723/TRACE_SUMMARY.md build_attempt2, on
+# agent/zhtw-first-book-20260723 / PR #211 — cell selection reused verbatim,
+# no re-pick):
+#
+#   PYTHONPATH=. python3 scripts/run_pipeline.py \
+#     --topic overthinking --persona gen_z_professionals \
+#     --arc config/source_of_truth/master_arcs/gen_z_professionals__overthinking__spiral__F006.yaml \
+#     --pipeline-mode spine --quality-profile production --exercise-journeys \
+#     --locale zh-TW --runtime-format standard_book \
+#     --no-job-check --render-book \
+#     --render-dir artifacts/qa/zhtw_first_book_20260723/
+#
+# BEFORE (pre-fix, build_attempt2_gen_z_professionals_overthinking_spiral_zhTW_FAILED_exercise_gate.log
+# on origin/agent/zhtw-first-book-20260723): 12/12 EXERCISE slots printed
+#   "EXERCISE: chapter N ... drew from the shared practice_library ... no
+#   per-cell registry/teacher EXERCISE atom for this slot"
+# then hard SystemExit:
+#   [PRODUCTION GATE] EXERCISE-BANK-RESOLUTION-01 strict-canonical: 12 EXERCISE
+#   slot(s) resolved via practice_library fall-through. ...
+#
+# AFTER (this log, same cell, same command, only the classifier fix applied):
+# zero "drew from the shared practice_library" lines (grep confirms none —
+# every EXERCISE slot now resolves from the real, translated zh-TW persona
+# EXERCISE bank), and EXERCISE-BANK-RESOLUTION-01 does not fire. The build
+# proceeds past it and now hard-exits on a LATER, unrelated production gate
+# ("Accent planner anti-spam violations: capability_gap for AUTHOR_DISCLOSURE,
+# no_supply_pool with budget 1" — scripts/run_pipeline.py line ~1622,
+# phoenix_v4/planning/accent_planner.py). That gate fires for every locale
+# including en-US when an accent supply pool is thin; it is unrelated to the
+# EXERCISE-BANK-RESOLUTION-01 classifier bug this PR fixes and is NOT
+# addressed here — carrying this cell further (accent supply authoring, then
+# eventually the locale-fallback honesty gate) remains Pearl_Localization's
+# lane (PR #211 / agent/zhtw-first-book-20260723), not this PR's scope. This
+# log proves only the classifier fix: EXERCISE-BANK-RESOLUTION-01 clears.
+#
+# Ordering proof that EXERCISE-BANK-RESOLUTION-01 genuinely ran and passed
+# (not skipped): scripts/run_pipeline.py calls
+# _check_exercise_strict_canonical_gate(...) at line 1535, strictly before
+# attach_accent_plan()/validate_accent_plan() at lines 1598/1619-1622 in the
+# same linear script execution. Reaching the accent-gate SystemExit below is
+# only possible if line 1535 did not raise.
+#
+# ---------------------------------------------------------------------------
+WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).
+Warning: atoms_model missing in spec; derived from config (legacy_personas) -> legacy
+Template routing: overthinking×gen_z_professionals×standard_book → spine_only (no template overlay)
+Book planning layer: no pre-authored plan for overthinking x gen_z_professionals x standard_book (No deterministic BookStructurePlan for topic='overthinking', persona='gen_z_professionals', runtime='standard_book'. Expected one of: config/plans/overthinking_gen_z_professionals_standard_book.yaml, config/plans/overthinking_gen_z_professionals_deep_book_6h.yaml, config/plans/overthinking_gen_z_professionals_6h.yaml); generating auto-plan.
+Skipping malformed content bank config/content_banks/anxiety_corporate_managers_scene_recognition_bank.yaml: variant 'acmr_001' missing keys ['band', 'ei_v2_targets', 'forbidden_terms', 'frame_allowlist', 'frame_blocklist', 'intensity', 'mechanism_depth', 'ontgp_move', 'persona_allowlist', 'runtime_allowlist', 'signature_phrases', 'slot_type', 'topic_allowlist', 'topic_blocklist']
+Skipping malformed content bank config/content_banks/anxiety_healthcare_rns_scene_recognition_bank.yaml: variant 'ahrn_001' missing keys [...same shape...]
+Skipping malformed content bank config/content_banks/burnout_genz_scene_recognition_bank.yaml: variant 'bsgr_001' missing keys [...same shape...]
+Skipping malformed content bank config/content_banks/overthinking_genz_scene_recognition_bank.yaml: variant 'otgr_001' missing keys [...same shape...]
+Skipping malformed content bank config/content_banks/shame_genz_scene_recognition_bank.yaml: variant 'ssgr_001' missing keys [...same shape...]
+[PRODUCTION GATE] Accent planner anti-spam violations:
+  - capability_gap for AUTHOR_DISCLOSURE: no_supply_pool with budget 1
+#
+# NOTE: the "Skipping malformed content bank" lines above are pre-existing,
+# unrelated warnings (scene_recognition_bank.yaml schema drift) present on
+# origin/main independent of this fix — included for reproducibility, paths
+# abbreviated to repo-relative for readability. The exact unabbreviated raw
+# output (absolute paths, byte-for-byte stdout+stderr) is preserved in the
+# sibling file in this directory: build_attempt5_postfix_confirm_RAW.log

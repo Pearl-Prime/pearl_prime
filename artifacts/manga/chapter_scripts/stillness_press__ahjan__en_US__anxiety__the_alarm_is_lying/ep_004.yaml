@@ -52,6 +52,7 @@ schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
 
 series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
 chapter_id: ep_004
+arc_storyboard_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_004.arc_storyboard.yaml
 title: "The Alarm Is Lying — Episode 4: Wednesday, 11:42 PM"
 manga_author: Hana Tidecalm
 teacher_id: ahjan
@@ -60,6 +61,58 @@ engine: false_alarm
 locale: en_US
 default_locale: en_US
 available_locales: [en_US]
+
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: healing
+  strategy_genre: healing
+  relevance_genre: healing
+  market_surface_rule: Use social discovery, school/work pressure, gaming, creator culture, comic shop/community,
+    and phone-native life without sounding like an ad for platforms.
+  market_touchpoints:
+  - group_chat
+  - discord_server
+  - short_video_clip
+  - school_bus_or_subway
+  - comic_shop
+  - mall_food_court
+  - campus_library
+  - delivery_app
+  - controller
+  - streaming_queue
+  market_guardrails:
+  - avoid_fake_japanese_surface_for_us_scene
+  - make_city_transport_specific_if_used
+  - do_not_overexplain_anime_fandom
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: 'Modern healing must receive everyday overstimulation gently: notifications, transit
+    noise, school/work fatigue, convenience rituals, and weather.'
+  catalyst:
+    id: insomnia_alarm_with_no_external_trigger
+    logline: The bedside clock and lamp are the only witnesses when Mira's alarm fires with no notification,
+      meeting, or person to blame, and she has to prove the breath practice holds even when there is nothing
+      outside her to point at.
+    ordinary_world_objects:
+    - lamp
+    - clock
+    - pendant
+    - kettle
+    genre_transmutation: The nightly clock-watching hour becomes the anxiety trigger; the bedside lamp
+      becomes the externalized image of a steady anchor that stays lit even when nothing outside is actually
+      wrong.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
 
 main_characters:
   - id: mira
@@ -163,6 +216,9 @@ pages:
           Tight close on Mira's face — eyes closing. A slow breath.
         beat_type: micro
         intent: "BREATH BRACKET — no pendant, no plant, just the breath"
+
+  - page_id: ep_004_p02
+    panels:
 
       # ── RAMP 2 — but the alarm doesn't stop ───────────────────────────
       - panel_id: ep004_010
