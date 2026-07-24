@@ -381,6 +381,39 @@ Important: phrase hits are not automatically fatal when surrounded by strong
 specific action. They become fatal when the surrounding panel lacks concrete
 object, choice, consequence, or relationship movement.
 
+### `MANGA.STORY.GENRE_CRAFT_CHECKLIST`
+
+**Added by Lane 07 (manga process uplift, 2026-07-24).** Purpose: enforce, at gate
+time, the craft wisdom compiled from the per-genre bibles — so the writing is checked
+against the research that already existed.
+
+Config: `config/manga/genre_craft_checklists.yaml`, one block per canonical genre id
+(same key-space as `genre_core_evidence` and `canonical_genre_list.yaml`). Each block
+distils its bible into `story_elements_must` / `story_elements_should` (§1/§3/§6),
+`dialogue_rules` (§4), `panel_grammar_items` (§2/§8), `failure_modes` (§6), and an
+`mc_items` **reference** into `mc_endurance_checklists.yaml` (family + lists — resolved
+by key, never restated).
+
+Hard checks (fail-closed, unweighted — like RESEARCH/ARCHITECT/ALIAS, so it never
+lowers threshold 85):
+
+- **must-item coverage**: each `story_elements_must` item carries `evidence_any`
+  tokens; the gate BLOCKS when fewer than `story_excellence_gates.yaml::genre_craft.
+  must_coverage_floor` of the must-items have on-page evidence;
+- **failure-mode lint**: each `failure_modes` item carries `signal_any` defect phrases;
+  any present on the page BLOCKS.
+
+Never hard-gated: `endurance_mechanics` (the 100+-episode signature — completion-first
+genres legitimately lack them) and per-family failure cadence (a genre *signature*, not
+a universal "MC fails every N chapters" rule). Both per the MC-endurance study's
+cross-family synthesis. When a genre has no checklist block the gate is a no-op PASS.
+
+Wiring: `phoenix_v4/manga/story_quality/excellence_gate.py::_check_genre_craft`
+(gate id `MANGA.STORY.GENRE_CRAFT_CHECKLIST`); storyboard advisory sub-check in
+`scripts/ci/check_manga_arc_storyboard.py::advisory_panel_grammar`
+(`panel_grammar_items.storyboard_signal_any`, non-blocking); human read in
+§"Editor pass".
+
 ### `MANGA.STORY.REPAIR_PACKET`
 
 Purpose: every blocked story must produce an executable repair brief.
@@ -548,6 +581,64 @@ In `phoenix_v4/manga/runner/chapter_runner.py`:
    PASS report.
 
 This makes "valid JSON but bad story" stop before image spend.
+
+## Editor pass
+
+**Added by Lane 07 (manga process uplift, 2026-07-24).** The automated gate proves
+the machine-checkable floor; a bestseller read is not machine-decidable. Story QA is
+therefore a **two-stage flow that shares one checklist source**, so the human read and
+the machine gate never drift apart:
+
+1. **Stage A — automated gate ≥ 85 (and all hard gates PASS), including
+   `MANGA.STORY.GENRE_CRAFT_CHECKLIST`.** No editor time is spent on a chapter that
+   has not cleared the machine floor; a BLOCKED report routes to the repair packet
+   first. (Per the acceptance-layer doctrine, a gate PASS is at most `system working`
+   / `structurally clear` — never a bestseller claim on its own.)
+
+2. **Stage B — Pearl_Editor structured read against the SAME checklist file**
+   (`config/manga/genre_craft_checklists.yaml` for the chapter's canonical genre, plus
+   the `mc_items`-referenced rows resolved from `config/manga/mc_endurance_checklists.yaml`).
+   The editor renders a **per-item verdict** — not a prose review — so the human read is
+   diffable against the machine gate and reusable by downstream QA.
+
+### Editor review artifact (schema)
+
+Written to `artifacts/manga/editor_reviews/<series_id>/<chapter_id>.editor_review.yaml`:
+
+```yaml
+artifact_type: manga_chapter_editor_review
+schema_version: "1.0"
+series_id: <str>
+chapter_id: <str>
+genre: <canonical_genre_id>              # matches genre_craft_checklists.yaml key
+checklist_source: config/manga/genre_craft_checklists.yaml
+mc_endurance_source: config/manga/mc_endurance_checklists.yaml
+gate_report: <path to story_excellence_realization_report.json>   # Stage A evidence
+gate_status: PASS | WARN | BLOCKED       # copied from Stage A; Stage B runs only on PASS
+verdicts:                                # ONE line per checklist item read
+  - checklist: story_elements_must       # or story_elements_should / dialogue_rules /
+                                         #   panel_grammar_items / failure_modes /
+                                         #   mc_must_have / mc_should_have / mc_anti_patterns
+    item: "<verbatim item text>"
+    source: "<the item's source anchor>"
+    verdict: PASS | WEAK | FAIL | NA     # NA only for genuinely inapplicable items
+    note: "<one concrete line: where it lands on the page, or what is missing>"
+overall: SHIP | REVISE | HOLD
+editor: <name-or-agent-id>
+reviewed_at: <ISO-8601>
+```
+
+**Binding rules.** Every `story_elements_must` item and every resolved `mc_items`
+`must_have` item MUST have a verdict line; a `FAIL` on any must-item forces
+`overall != SHIP`. `failure_modes` items are read as "absent?" (a PASS verdict means the
+anti-pattern is absent). Verdicts are advisory to shipping — they do not mutate the gate —
+but a chapter is not `bestseller register` (Layer 4) without a `SHIP` review on record.
+`endurance_mechanics` items are read for **series-plan** review (100+-episode horizon),
+not per-chapter, and are skipped (`NA`) for completion-first genres.
+
+**Lane 08 binding.** The `manga-editor` skill consumes this section: it loads the genre's
+block, resolves the `mc_items` reference, and emits exactly this artifact. Do not fork a
+second checklist source for the human read.
 
 ## Test Fixtures
 
