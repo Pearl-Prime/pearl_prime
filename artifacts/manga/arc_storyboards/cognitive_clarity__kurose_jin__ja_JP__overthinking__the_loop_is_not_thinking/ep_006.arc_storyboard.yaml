@@ -1,0 +1,290 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_006
+genre_id: psychological_thriller
+title: My Sister, Through a Screen — Episode 6 (English gloss)
+logline: Ren's sister Shizuku video-calls to confirm their weekend plans, and while she talks he keeps a
+  second screen open beneath the frame, scrolling case notes with the hand she cannot see, until the
+  plan itself becomes the first relationship cost paid in full.
+stakes_now: Ren and Shizuku have a real, if distant, weekend plan together — visiting their mother's
+  grave — and this call is the first time the pattern-reading habit is tested against an obligation to a
+  person he actually loves, not just a coworker or a stranger.
+stakes_end: The visit is postponed, Shizuku's hurt is visible even through her composure, and Ren's hand
+  returns to the case notes before he has time to feel what the postponement cost — the arc's first
+  relationship price paid in full, not just implied.
+genre_cadence:
+- home_motif_continuity_reestablished
+- anchor_first_direct_appearance
+- half_second_hesitation_before_answering
+- voice_built_to_sound_fine
+- shared_plan_stated_plainly
+- divided_attention_visualized_off_screen
+- anchor_notices_the_delay
+- anchor_asks_directly_if_hes_okay
+- cover_story_repeated
+- anchor_tests_with_postponement_offer
+- relief_answered_too_quickly
+- anchor_hidden_pain_visible_to_reader
+- anchor_short_harder_voice
+- call_ends_blank_screen
+- blank_screen_stared_at
+- hand_returns_before_grief_lands
+- cold_tea_motif_repeats
+- closed_door_motif_all_day
+- episode_card
+page_turn_promises:
+- page_id: ep_006_p01
+  promise: Will Ren's divided attention stay hidden from Shizuku, or does her direct question force him
+    to choose between the call and the case notes in front of her?
+- page_id: ep_006_p02
+  promise: Now that the visit is postponed, does Ren register what it cost him, or does his hand return
+    to the file before the loss has time to land?
+panels:
+- panel_id: ep006_001
+  page_id: ep_006_p01
+  story_function: home_motif_continuity_reestablished
+  story_move: Re-establishes the apartment setting and confirms the hallway mirror's altered angle from
+    episode two has persisted unchanged, maintaining motif continuity.
+  visual_proof: Wide shot of the weekend-morning apartment, hallway mirror visible at the same shifted
+    angle established in episode two.
+  information_delta: Reader confirms the earlier motif shift was not undone or explained away between
+    episodes.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_002
+  page_id: ep_006_p01
+  story_function: anchor_first_direct_appearance
+  story_move: The anchor relationship enters the story directly for the first time via an incoming video
+    call, moving Shizuku from referenced absence to active presence.
+  visual_proof: Close insert on Ren's phone screen showing an incoming video call labeled with Shizuku's
+    name.
+  information_delta: Reader meets the anchor relationship in real time rather than through reference.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_003
+  page_id: ep_006_p01
+  story_function: half_second_hesitation_before_answering
+  story_move: Ren's hesitation before answering reveals the call registers first as an interruption
+    rather than a welcome contact, an honest and unflattering beat.
+  visual_proof: Close insert on Ren's finger hovering over the answer button a half-second too long.
+  information_delta: Reader learns Ren's first instinct toward his sister's call is reluctance, not
+    warmth.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_004
+  page_id: ep_006_p01
+  story_function: voice_built_to_sound_fine
+  story_move: Ren consciously constructs a normal-sounding voice before speaking, showing the
+    performance of fine begins before the conversation even starts.
+  visual_proof: Medium shot of Ren answering the call with a visibly composed expression assembled just
+    before speaking.
+  information_delta: Reader sees the deliberate effort behind Ren's opening tone.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_005
+  page_id: ep_006_p01
+  story_function: shared_plan_stated_plainly
+  story_move: Shizuku states the concrete shared plan plainly, giving the episode a specific, real
+    obligation to measure Ren's behavior against.
+  visual_proof: Medium shot of Shizuku on the video call screen, warm and direct about the weekend plan.
+  information_delta: Reader learns the specific stakes of this call — a real, previously agreed
+    commitment.
+  beat_role: pre_trigger_calm
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_006
+  page_id: ep_006_p01
+  story_function: divided_attention_visualized_off_screen
+  story_move: Ren's other hand scrolls the case file outside the video frame, making his divided
+    attention visible to the reader while it stays invisible to Shizuku.
+  visual_proof: Split framing showing the video call window and, just outside its border, Ren's other
+    hand scrolling a tablet.
+  information_delta: Reader gains privileged information Shizuku does not have — the true state of
+    Ren's attention.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_007
+  page_id: ep_006_p01
+  story_function: anchor_notices_the_delay
+  story_move: Shizuku's expression shows she has noticed something is off in the rhythm of the
+    conversation, even without seeing the tablet.
+  visual_proof: Close insert on Shizuku's face on screen, a flicker of concern crossing it during a
+    pause.
+  information_delta: Reader sees the anchor's own perceptiveness, distinct from the vessel's method but
+    just as real.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_008
+  page_id: ep_006_p01
+  story_function: anchor_asks_directly_if_hes_okay
+  story_move: Shizuku asks Ren directly whether he is actually listening and actually okay, raising the
+    emotional stakes of the call past small talk.
+  visual_proof: Medium shot of Shizuku speaking directly into the camera, her earlier warmth now edged
+    with concern.
+  information_delta: Reader hears the anchor's concern stated plainly for the first time this episode.
+  beat_role: interrupt
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_009
+  page_id: ep_006_p01
+  story_function: cover_story_repeated
+  story_move: Ren repeats the same work-based cover story he has used with Saeki and himself, showing
+    the excuse has become a reflex across every relationship.
+  visual_proof: Close on Ren's face as he answers, eyes flicking back to the screen from the tablet a
+    beat late.
+  information_delta: Reader recognizes the cover story as a pattern now, not an isolated excuse.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_010
+  page_id: ep_006_p01
+  story_function: anchor_tests_with_postponement_offer
+  story_move: Shizuku offers to postpone their plan as a quiet test of how Ren will respond, ending page
+    one on a real question rather than a resolution.
+  visual_proof: Medium shot of Shizuku, tone deliberately light, offering to push the visit to another
+    time.
+  information_delta: Reader recognizes this as a test the anchor is setting, not a neutral scheduling
+    question.
+  beat_role: spiral_peak
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_011
+  page_id: ep_006_p02
+  story_function: relief_answered_too_quickly
+  story_move: Ren accepts the postponement without hesitation, the speed of his relief more honest and
+    more damning than the words themselves.
+  visual_proof: Close on Ren's face answering immediately, no visible reluctance at losing the plan.
+  information_delta: Reader learns Ren's true priority in this moment, stated through timing rather than
+    words.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_012
+  page_id: ep_006_p02
+  story_function: anchor_hidden_pain_visible_to_reader
+  story_move: Shizuku's hurt flashes visibly to the reader before she hides it, giving the audience
+    privileged access Ren himself misses because he is not fully watching.
+  visual_proof: Close insert on Shizuku's face showing a brief, unguarded flash of hurt before her
+    expression resets.
+  information_delta: Reader sees a cost Ren does not, deepening the dramatic irony of his divided
+    attention.
+  beat_role: recognition
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_013
+  page_id: ep_006_p02
+  story_function: anchor_short_harder_voice
+  story_move: Shizuku closes the exchange with a shorter, harder-edged line than her earlier warmth,
+    matching the strategy bank's pattern of the anchor's cost line reading as either care or the end of
+    patience.
+  visual_proof: Medium shot of Shizuku speaking a brief closing line, her tone noticeably cooler than
+    the call's opening.
+  information_delta: Reader receives the episode's key ambiguous line, exactly as the strategy bank
+    specifies — readable as care or as accusation.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep006_014
+  page_id: ep_006_p02
+  story_function: call_ends_blank_screen
+  story_move: The call ends and the screen goes dark, marking a hard structural break after the anchor's
+    closing line.
+  visual_proof: Close insert on the phone screen transitioning from Shizuku's face to black.
+  information_delta: Reader registers the conversation's abrupt, unresolved end.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_015
+  page_id: ep_006_p02
+  story_function: blank_screen_stared_at
+  story_move: Ren stares at the now-blank screen where his sister's face was, a rare unguarded moment of
+    stillness.
+  visual_proof: Medium shot of Ren looking at the dark phone screen without moving.
+  information_delta: Reader sees the first sign the cost is beginning to register with Ren, even
+    briefly.
+  beat_role: recognition
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_016
+  page_id: ep_006_p02
+  story_function: hand_returns_before_grief_lands
+  story_move: Ren's hand returns to the tablet before any grief has time to fully register, showing the
+    habit outrunning his own emotional processing.
+  visual_proof: Close insert on Ren's hand already back on the tablet screen, his expression still
+    unprocessed.
+  information_delta: Reader learns the compulsion now operates faster than Ren's own feelings can catch
+    up to it.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_017
+  page_id: ep_006_p02
+  story_function: cold_tea_motif_repeats
+  story_move: The cold, untouched tea motif from episode two repeats, reinforcing the somatic-neglect
+    pattern as a recurring visual rhyme across episodes.
+  visual_proof: Insert on a cold, untouched cup of tea on the kitchen table, composition echoing episode
+    two.
+  information_delta: Reader recognizes the deliberate visual rhyme signaling the pattern has not
+    improved since episode two.
+  beat_role: recognition
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep006_018
+  page_id: ep_006_p02
+  story_function: closed_door_motif_all_day
+  story_move: The episode closes on the apartment's front door, unmoved all day, standing as quiet
+    evidence of the visit that never happened.
+  visual_proof: Wide evening shot of the apartment's front door, unopened since morning, framed to feel
+    conspicuously still.
+  information_delta: Reader receives a wordless, concrete image of the day's real cost — no one came,
+    nothing changed.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep006_019
+  page_id: ep_006_p02
+  story_function: episode_card
+  story_move: The episode card closes the chapter and names it, marking the end of this cycle before the
+    next episode's escalation.
+  visual_proof: Typographic end-card panel on a quiet solid color field, no figures.
+  information_delta: Reader receives a clean structural close to the episode.
+  beat_role: episode_card
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_006.yaml
+notes: 'Episode 6 of 12 in arc 1 (''obsession seed''). Realizes strategy_01''s beat 5 (the cost lands on
+  the anchor; a line that reads as either steadying or as one more thing to analyze) through Shizuku''s
+  first direct appearance in the series, previously only referenced in episode 2. Setting: the apartment
+  from the strategy bank''s setting_pool, reused from episode 2 to make the mirror-motif continuity and
+  the cold-tea visual rhyme legible across episodes. This is the arc''s first relationship cost paid in
+  full rather than merely implied.'
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped ja_JP script''s
+  already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'

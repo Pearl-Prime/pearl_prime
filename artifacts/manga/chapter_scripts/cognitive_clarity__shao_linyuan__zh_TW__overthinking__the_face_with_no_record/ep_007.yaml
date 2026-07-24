@@ -1,0 +1,246 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_007
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_007.arc_storyboard.yaml
+title: 月台不記得的臉——第7話
+title_en_gloss: 'The Platform Has No Record of This Face — Episode 7: An Ordinary Answer'
+manga_author: 邵臨淵
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- en_US
+- ja_JP
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk
+    and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register
+    over clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: lost_and_found_easycard_reused_theory
+    logline: 站務室的遺失物招領紀錄裡,一張過期未領的悠遊卡編號,恰好對上異常紀錄的其中兩筆——雅晴說服自己,這只是一位無家可歸的人撿到卡片重複使用,案件終於可以有一個溫和、無害的答案。
+    ordinary_world_objects:
+    - ibon_kiosk
+    - easycard_tap
+    - mrt_fare_gate
+    - personal_notebook
+    genre_transmutation: 遺失物招領紀錄裡一張普通的過期卡片，被她的邏輯重新讀成整起案件最合理的解釋；這個看似溫和的答案，短暫地讓月台的燈光在她眼裡第一次顯得不那麼冷。
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z.
+    Use catalyst 'lost_and_found_easycard_reused_theory'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體的偵探
+main_characters:
+- id: su
+  name: 蘇雅晴
+  name_romaji: Su Yaqing (Iris)
+  age: 31
+  role: 主人公——台北捷運行控中心異常事件分析員
+  visual_anchor: 直短髮別在耳後、深藍色行控值班制服、右手習慣性轉動一枝原子筆
+- id: zhou
+  name: 周德昌
+  name_romaji: Zhou Dechang
+  age: 58
+  role: 資深值班控制員，即將退休——器（讀懂身體的偵探）
+  visual_anchor: 灰白平頭、袖口捲起、桌上一個用了二十年的舊保溫瓶
+- id: lin
+  name: 林組長
+  name_romaji: Team Lead Lin
+  age: 45
+  role: 值班主管——制度壓力來源
+  visual_anchor: 俐落套裝、手上永遠夾著一份待簽的報表夾
+scene_palette:
+  primary: 行控中心的冷白螢幕光 + 深夜捷運藍
+  secondary: 月台霓虹的濕冷灰藍（雨夜反光）
+  accent: 一枝始終未關的琥珀色警示燈——全劇唯一反覆出現的暖色
+pages:
+- page_id: ep_007_p01
+  panels:
+  - panel_id: ep007_001
+    scene: 站務室,白天。雅晴利用調班的空檔,翻閱西門站的遺失物招領紀錄簿——一本厚厚的、少有人翻的登記本。
+    beat_type: standard
+  - panel_id: ep007_002
+    scene: 插入畫面——她的手指停在一行紀錄上:一張過期未領的悠遊卡,卡號末四碼與其中兩筆異常紀錄的補登資料吻合。
+    beat_type: micro
+  - panel_id: ep007_003
+    scene: 雅晴的表情第一次鬆動——不是興奮,是一種近乎渴望的鬆一口氣。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 遺失物。有人撿到卡,重複用同一張卡進出——不是刻意躲避鏡頭,只是一張沒人來領的卡。
+      en_US: A lost card, reused — not evasion, just an unclaimed EasyCard. That's the clue that finally
+        closes this without a threat behind it. Isn't it?
+  - panel_id: ep007_004
+    scene: 她想起附近車站地下道,偶爾會有街友借站體的角落過夜——一個溫和、可以理解的畫面,取代了她原本想像的更黑暗的可能性。
+    beat_type: micro
+  - panel_id: ep007_005
+    scene: 插入畫面——7-11的iBon機台,她順手列印了一份遺失物紀錄的副本,動作放鬆,不再是深夜那種緊繃的姿態。
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: The iBon kiosk prints the copy — an easycard tap that finally makes sense.
+  - panel_id: ep007_006
+    scene: 大場景——雅晴走出站務室,月台上的燈光在她眼裡第一次顯得柔和,不再是監視器牆那種冷白。
+    beat_type: standard
+    intent: 假性寬慰的視覺基調轉暖——類型規範允許但需在兩格內被打破
+  - panel_id: ep007_007
+    scene: 她傳訊息給妹妹,語氣輕鬆許多:「案子快解決了,這週末補接晴晴放學,我請客手搖飲。」
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 案子快解決了,這週末補接晴晴放學,我請客手搖飲。
+        en_US: The case is almost closed — I need to make it up to Qingqing this weekend, bubble tea's
+          on me.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep007_008
+    scene: 插入畫面——她重新翻開遺失物招領紀錄簿,準備把兩張截圖夾進去存檔,動作卻在某一頁停住。
+    beat_type: micro
+  - panel_id: ep007_009
+    scene: 特寫——紀錄簿裡那張卡片的「領取欄」是空白的,但旁邊站務員的備註欄,有一行她剛剛沒有細看的小字。
+    beat_type: micro
+    intent: 讀者特權的矛盾細節——尚未被敘述
+    narrator_caption_by_locale:
+      en_US: The margin note is the only witness who saw it differently.
+  - panel_id: ep007_010
+    scene: 雅晴閤上紀錄簿,沒有細看那行備註,滿足於已經得到的答案。頁末懸念:讀者已經看到伏筆,她卻沒有。
+    beat_type: long_drop
+- page_id: ep_007_p02
+  panels:
+  - panel_id: ep007_011
+    scene: 傍晚,休息室。雅晴難得早到,泡了杯茶,神情放鬆地坐著。
+    beat_type: standard
+  - panel_id: ep007_012
+    scene: 周德昌走進來,看見她的樣子,略顯意外。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 妳今天,看起來不太一樣。
+        en_US: You look different today.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep007_013
+    scene: 雅晴,難得露出輕鬆的笑容。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 找到答案了,一個很普通的答案。
+        en_US: I found the answer — an ordinary one, finally.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep007_014
+    scene: 周德昌,沒有立刻附和,只是安靜地聽她說完遺失物卡片的推論,表情裡有一絲雅晴沒注意到的保留。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep007_015
+    scene: 插入畫面——雅晴的筆記本合上了,第一次,沒有新的分岔註記被加上去。
+    beat_type: micro
+    intent: 假性寬慰的具體視覺標記——螺旋暫停
+  - panel_id: ep007_016
+    scene: 雅晴起身準備回家,難得準時,腳步輕快。
+    beat_type: micro
+  - panel_id: ep007_017
+    scene: 插入畫面——她離開後,周德昌獨自留在休息室,拿出手機,翻看自己這幾年私下記錄的站務交接筆記。
+    beat_type: micro
+    intent: 器的獨立行動——尚未向主角揭露
+  - panel_id: ep007_018
+    scene: 特寫——周德昌的筆記裡,有一行他自己多年前寫下、幾乎忘記的舊紀錄,和雅晴的「遺失物」解釋對不上。
+    beat_type: micro
+    intent: 讀者特權——矛盾證據在器手中,尚未交會
+  - panel_id: ep007_019
+    scene: 周德昌的表情變得凝重,他沒有打電話給雅晴,只是把那頁筆記拍了下來。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep007_020
+    scene: 大遠景拉開——休息室的燈熄了一半,周德昌獨自坐在那裡,窗外雅晴的機車已經騎遠。假性寬慰即將在下一話崩潰。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      zh_TW: 但願是我多心了。
+      en_US: Maybe it's nothing. But the note doesn't agree with her answer, and someone should check
+        before she stops looking.
+notes:
+  arc_position: 第七話——假性寬慰拍點（strategy_01 false_relief精神）。案件表面上得到溫和解答，畫面基調首次轉暖，但讀者已經看到與此矛盾的伏筆（招領紀錄備註、周德昌的舊筆記）。
+  pacing_vs_prior: 二十二格，兩頁。刻意放緩節奏、視覺基調轉暖，依doctrine此類假性寬慰全季不得超過既定次數且須於兩格內被打破——本話結尾已埋下下一話崩潰的種子。
+  continuity_callbacks: 手搖飲承諾呼應ep_006的補習班事件；周德昌的獨立行動是全季首次器脫離主角視角單獨行動。
+  language: zh_TW為權威語言，en_US僅為操作用註解，非翻譯。
+  translation_pipeline_handoff: en_US為審閱用註解草稿；其餘CJK語系另案處理。
+craft_notes: 'VESSEL: 讀懂身體的偵探——本話周德昌的『讀』對象從雅晴的身體轉為一份舊紀錄，為下一話的介入預先鋪墊，但仍未介入或說教。GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+
+  GENRE-FIRST（zh_TW）: false_relief依craft_notes§2 Spread rule/§8 generator constraint精神執行——全季至此僅使用一次，且下一話（ep_008）將於此假性寬慰後立即被打破。
+
+
+  ARC: 溫和解答被接受→螺旋暫停（筆記本合上）→讀者特權矛盾證據浮現（未被主角看見）。
+
+
+  NATIVE: 台灣繁體中文原創。
+
+
+  ACCEPTANCE: authored_candidate。'
