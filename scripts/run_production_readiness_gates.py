@@ -1103,6 +1103,30 @@ def main() -> int:
             skip=True,
         )
 
+    # --- 46. Store series name consistency (store_series.id -> exact-match name) ---
+    series_name_gate = REPO_ROOT / "scripts" / "ci" / "check_store_series_name_consistency.py"
+    if series_name_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(series_name_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=360,
+            )
+            sn_ok = r.returncode == 0
+            sn_detail = (r.stdout or r.stderr or "").strip().splitlines()[-1] if (r.stdout or r.stderr) else "check_store_series_name_consistency"
+        except Exception as e:
+            sn_ok = False
+            sn_detail = str(e)
+        if not gate("46. Store series name consistency (store_series.id -> exact-match name)", sn_ok, sn_detail):
+            failed += 1
+    else:
+        gate("46. Store series name consistency", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
