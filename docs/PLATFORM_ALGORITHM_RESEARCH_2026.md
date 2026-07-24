@@ -3,6 +3,8 @@
 **Source:** Pearl_Research deep web research + existing repo docs
 **Purpose:** Wire platform-specific tuning into catalog planners
 
+**See also:** [`artifacts/research/SERIES_TITLES_SUBTITLES_PLATFORM_SEO_RESEARCH_2026-07-23.md`](../artifacts/research/SERIES_TITLES_SUBTITLES_PLATFORM_SEO_RESEARCH_2026-07-23.md) — extends this single-book duration data with series-level pacing (how many books, box-set ISBNs, Kakao WUF episodic model) and series-specific SEO/metadata mechanics per platform.
+
 ## Key Findings by Platform
 
 ### Audible (50% market share)

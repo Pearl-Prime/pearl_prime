@@ -3,6 +3,8 @@
 Machine-readable aggregate: `config/podcast/platform_marketing_config.yaml`.  
 Distribution map: `config/podcast/platform_distribution.yaml`.
 
+**See also:** [`artifacts/research/SERIES_TITLES_SUBTITLES_PLATFORM_SEO_RESEARCH_2026-07-23.md`](../artifacts/research/SERIES_TITLES_SUBTITLES_PLATFORM_SEO_RESEARCH_2026-07-23.md) — book/audiobook series title+subtitle SEO mechanics per storefront (Amazon, Google Play, Apple Books, Audible, Spotify, Ximalaya) and series planning/duration.
+
 ## artwork + RSS anchors (global)
 
 - **Spotify show art:** [Dos and don’ts of show art](https://creators.spotify.com/resources/create/dos-donts-showart) (accessed 2026-04-09).
