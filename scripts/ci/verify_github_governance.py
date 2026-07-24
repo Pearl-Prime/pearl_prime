@@ -214,8 +214,32 @@ def check_required_names_exist() -> bool:
     return ok
 
 
+def resolve_repo() -> str:
+    """Determine the "owner/repo" this checkout targets.
+
+    Preference order: GITHUB_REPOSITORY (set by GitHub Actions) -> the
+    origin remote URL -> a hardcoded fallback for environments with neither.
+    """
+    env_repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    if env_repo:
+        return env_repo
+    try:
+        out = subprocess.run(
+            ["git", "remote", "get-url", "origin"],
+            capture_output=True, text=True, timeout=5, cwd=REPO_ROOT,
+        )
+        if out.returncode == 0 and out.stdout.strip():
+            remote = out.stdout.strip()
+            match = re.search(r"[:/]([^/:]+/[^/]+?)(?:\.git)?$", remote)
+            if match:
+                return match.group(1)
+    except Exception:
+        pass
+    return "Ahjan108/phoenix_omega_v4.8"
+
+
 def api_get(token: str, path: str) -> dict | list:
-    url = f"https://api.github.com/repos/Ahjan108/phoenix_omega_v4.8{path}"
+    url = f"https://api.github.com/repos/{resolve_repo()}{path}"
     req = urllib.request.Request(
         url,
         headers={
