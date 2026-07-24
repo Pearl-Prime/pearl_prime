@@ -23,6 +23,11 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Qwen / DashScope", "DASHSCOPE_API_KEY", False, "Alt env var for DashScope key"),
     ("Qwen / DashScope", "DASHSCOPE_BASE_URL", False, "Alt env var for DashScope URL"),
     ("Qwen / DashScope", "DASHSCOPE_MODEL", False, "Alt env var for DashScope model"),
+    # One-time free-quota content-bank build (CLAUDE.md scoped exception, 2026-07-24).
+    # Deliberately distinct from DASHSCOPE_API_KEY above — never reuse the routine
+    # fallback key for this. Sunset 2026-10-18 (free-quota expiry).
+    ("Qwen / DashScope (free-quota one-time build)", "DASHSCOPE_FREE_QUOTA_API_KEY", False, "ahjansamvara@gmail.com Model Studio (Singapore) key — scripts/social/dashscope_free_media.py ONLY, never routine pipelines"),
+    ("Qwen / DashScope (free-quota one-time build)", "PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW", False, "Set to 1 by hand to run the one-time burn; never set in a workflow/cron"),
     # ANTHROPIC_API_KEY is BANNED from production code. Tier 1 = Claude Code session (subscription).
     # This entry is kept so load_integration_env_from_keychain.py doesn't emit an error if present.
     ("Anthropic", "ANTHROPIC_API_KEY", False, "NOT required for production — Tier 1 = Claude Code subscription"),

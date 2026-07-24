@@ -71,6 +71,35 @@ banned_patterns:
     regex: 'dashscope\.(Generation|MultiModalConversation)'
     reason: "DashScope cloud SDK is paid."
     exempt_paths: []
+  dashscope_free_media_rest_api:
+    # SCOPED EXCEPTION (2026-07-24): one-time, operator-present free-quota
+    # content-bank build (image/video via DashScope's native async media REST
+    # API, not the chat-completions SDK shape dashscope_paid_tier matches —
+    # that's why this is a separate rule). Covers ONLY these 3 files, which
+    # already hard-fail on Arrearage/FreeTierOnly and tag every output
+    # content_provenance=INTERIM. Account: ahjansamvara@gmail.com (confirmed
+    # live free quota 2026-07-24; NOT the paid/blocked gmalone@oneteamtech.com
+    # account these files were originally drafted against). Gated by
+    # PHOENIX_DASHSCOPE_FREE_MEDIA_ALLOW=1 (off by default, checked in
+    # run_dashscope_free_media_burn.py) and a dedicated
+    # DASHSCOPE_FREE_QUOTA_API_KEY (never the routine-fallback
+    # DASHSCOPE_API_KEY). SUNSET: 2026-10-18 (free-quota expiry) — this
+    # exemption should be re-reviewed or removed after that date; it is not a
+    # standing production pathway. Manga/vision outputs stay INTERIM per the
+    # Manga Vision-Conformance Doctrine — never presented as final render-path
+    # art. Also covers the manga video pose-bank method pilot
+    # (docs/agent_prompt_packs/20260724_manga_video_pose_bank/, Lane 05) under
+    # the same constraints (OPD-20260724-VBANK-00). No other DashScope media
+    # call site is exempt.
+    regex: 'X-DashScope-Async|/services/aigc/(text2image|video-generation|multimodal-generation)'
+    reason: "DashScope native async media REST API is paid outside free quota."
+    exempt_paths:
+      - "scripts/social/dashscope_free_media.py"
+      - "scripts/social/run_dashscope_free_media_burn.py"
+      - "scripts/social/ingest_dashscope_free_media_bank.py"
+      # This rule's own regex text literally contains its match targets —
+      # exempt this file from itself, not a real violation.
+      - "config/governance/banned_llm_patterns.yaml"
   together_replicate_perplexity:
     regex: '(together|replicate|perplexity)\.(chat|completions|run|complete)'
     reason: "Third-party paid inference banned."
