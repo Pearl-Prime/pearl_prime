@@ -260,6 +260,11 @@ gates:
     severity: BLOCKER
     description: Blocks canned stub markers and generic fallback phrases when surrounding panels lack concrete object/choice/consequence/relationship movement.
 
+  - gate_id: MANGA.STORY.GENRE_CRAFT_CHECKLIST
+    stage_owner: chapter_writer
+    severity: BLOCKER
+    description: Per-genre craft checklist (config/manga/genre_craft_checklists.yaml, compiled from the craft bibles; mc_items reference mc_endurance_checklists.yaml by key). Blocks when a genre failure-mode signal is present on the page, or when fewer than must_coverage_floor of story_elements_must have on-page evidence. Endurance mechanics and per-family failure cadence are signatures, never hard-gated. Hard-blocking and unweighted (does not lower threshold 85).
+
   - gate_id: MANGA.STORY.REPAIR_PACKET
     stage_owner: chapter_qc
     severity: MAJOR
