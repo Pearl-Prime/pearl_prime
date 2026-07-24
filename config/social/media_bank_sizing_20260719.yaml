@@ -1,0 +1,231 @@
+# Social Media Media-Bank — machine-readable sizing table (Lane 02).
+# Mirrors docs/specs/SOCIAL_MEDIA_BANK_SIZING_SPEC_2026-07-19.md sections 1, 3, 5.
+# Layer: SPECCED. Consumers: Lane 03 (video), Lane 04 (audio), Lane 05 (image).
+# Do not hand-edit counts here without updating the spec doc and its citations.
+
+spec_version: "2026-07-19"
+source_spec: "docs/specs/SOCIAL_MEDIA_BANK_SIZING_SPEC_2026-07-19.md"
+research_baseline: "artifacts/research/social_media_media_bank_2026-07-19/RESEARCH_BASELINE.md"
+
+dimensions:
+  personas:
+    count: 13
+    source: "config/catalog_planning/canonical_personas.yaml:6-20"
+  topics_expanded:
+    count: 57
+    source: "artifacts/generated/topic_persona_image_bank_1000_20260715/coverage/coverage_summary.json"
+  topics_native_family:
+    count: 15
+    source: "artifacts/generated/topic_persona_image_bank_1000_20260715/coverage/topic_counts.csv (native_or_mapped_source_family column, unique values)"
+    families:
+      - anxiety
+      - boundaries
+      - burnout
+      - compassion_fatigue
+      - courage
+      - depression
+      - financial_anxiety
+      - financial_stress
+      - grief
+      - imposter_syndrome
+      - overthinking
+      - self_worth
+      - sleep_anxiety
+      - social_anxiety
+      - somatic_healing
+  surfaces:
+    count: 14
+    source: "config/social/platform_specs.yaml:40-257"
+  market_lanes:
+    count: 7
+    source: "artifacts/research/social_media_media_bank_2026-07-19/RESEARCH_BASELINE.md:39,212"
+    lanes: [en_us, japan, taiwan, hong_kong, korea, china, singapore]
+  design_families_total:
+    count: 9
+    source: "docs/SOCIAL_VISUAL_PUBLISHABLE_QUALITY_SPEC_2026-07-18.md:50-61"
+    note: "Correction to Lane 01, which said 10; the source file defines 9."
+  video_wired_families:
+    count: 3
+    source: "scripts/social/render_broll_montage_shorts.py, render_kinetic_type_shorts.py, render_object_metaphor_shorts.py"
+    families: [broll_montage, kinetic_type, object_metaphor]
+  image_applicable_families:
+    count: 7
+    source: "docs/agent_prompt_packs/20260719_social_media_media_bank_deterministic_assembly/05_image_still_bank_spec.md:7-8"
+    families:
+      - photo_full_bleed_emotional
+      - premium_type_poster
+      - tool_checklist_card
+      - diagram_framework
+      - story_carousel
+      - book_page_quote
+      - object_metaphor
+  market_native_family:
+    count: 1
+    name: localized_lifestyle_note
+    scope: image_bank_only
+    note: "Not wired as a video generator; video localization lives in caption/voice copy-atom layer, out of media-bank scope."
+
+aspect_buckets:
+  video:
+    count: 4
+    buckets: [VERTICAL_9_16, SQUARE_1_1, PORTRAIT_4_5, LANDSCAPE_WIDE]
+    native_render: VERTICAL_9_16
+    derivation: deterministic_safe_crop
+  image:
+    count: 5
+    buckets: [VERTICAL_9_16, SQUARE_1_1, PORTRAIT_4_5, LANDSCAPE_WIDE, TALL_2_3]
+    note: "TALL_2_3 is Pinterest-only, kept as its own bucket per dedicated-2:3-template recommendation."
+
+rotation_k:
+  definition: "minimum pool size per cell such that a round-robin selector serves K consecutive posts with zero repeats; asset may recur every K posts."
+  cadence_assumed_posts_per_week: 2.5
+  tiers:
+    mvp_min:
+      k: 6
+      no_repeat_window_weeks: 2.4
+    robust_default:
+      k: 12
+      no_repeat_window_weeks: 4.8
+    max_fundable:
+      k: 36
+      no_repeat_window_weeks: 14.4
+
+video_bank:
+  unit: produced_masters
+  rows:
+    - phase: pilot
+      family_count: 3
+      topic_tier: native_family_subset
+      topic_count: 6
+      k: 4
+      masters: 72
+      shared_tier: topic_keyed_not_persona_keyed
+    - phase: v1_en_us
+      family_count: 3
+      topic_tier: native_family_full
+      topic_count: 15
+      k: 12
+      masters: 540
+      shared_tier: topic_keyed_not_persona_keyed
+    - phase: v1_all_markets
+      family_count: 3
+      topic_tier: native_family_full
+      topic_count: 15
+      k: 12
+      masters: 540
+      shared_tier: topic_keyed_not_persona_keyed
+      market_multiplier: 1
+      market_multiplier_note: "video localization lives in caption/voice layer; no market multiplier on masters."
+  aspect_export_multiplier: 4
+  totals:
+    pilot: 72
+    v1_en_us: 540
+    v1_all_markets: 540
+
+audio_bank:
+  unit: produced_assets
+  license_class_allowed: [musicgen_owned, owned_original]
+  mood_registers:
+    count: 4
+    clusters:
+      tense_anxious: [anxiety, financial_anxiety, financial_stress, social_anxiety, sleep_anxiety, overthinking]
+      heavy_low: [depression, grief, burnout, compassion_fatigue]
+      grounding_somatic: [somatic_healing, boundaries]
+      empowering_courage: [courage, self_worth, imposter_syndrome]
+  layers:
+    - layer: music_bed
+      topic_adjacency: mood_keyed_shared
+      pilot: 12
+      v1_en_us: 24
+      v1_all_markets: 60
+      v1_all_markets_note: "+36 market-flavor beds: 6 non-en_US markets x 2 highest-volume registers x K(3)"
+    - layer: ambient_texture
+      topic_adjacency: market_agnostic
+      pilot: 8
+      v1_en_us: 12
+      v1_all_markets: 12
+    - layer: sfx_transition
+      topic_adjacency: market_agnostic
+      pilot: 8
+      v1_en_us: 16
+      v1_all_markets: 16
+    - layer: stinger_endcard
+      topic_adjacency: brand_level_market_agnostic
+      pilot: 3
+      v1_en_us: 6
+      v1_all_markets: 6
+  totals:
+    pilot: 31
+    v1_en_us: 58
+    v1_all_markets: 94
+
+image_bank:
+  unit: production_ready_target
+  production_ready_today: 0
+  tiers:
+    - tier: A
+      name: photo_led_topic_keyed
+      families: [photo_full_bleed_emotional, object_metaphor]
+      shared_with: [story_carousel, book_page_quote]
+      shared_tier: topic_keyed
+      pilot: 36
+      v1_en_us: 180
+      v1_all_markets: 180
+      net_new_generation_needed: 0
+      note: "0 net-new shoots required; existing raw pool (1000-bank >=26/native-family, plus 100x-stock for 7 overlap families) already exceeds K=12 target after curation."
+    - tier: B
+      name: generic_type_led_topic_invariant
+      families: [premium_type_poster, tool_checklist_card, diagram_framework]
+      shared_tier: topic_invariant_fixed_pool
+      pilot: 10
+      v1_en_us: 20
+      v1_all_markets: 20
+      net_new_generation_needed: "0-20"
+    - tier: C
+      name: localized_lifestyle_note
+      families: [localized_lifestyle_note]
+      shared_tier: market_keyed
+      pilot: 0
+      v1_en_us: 0
+      v1_all_markets: 288
+      net_new_generation_needed: 288
+      note: "True generation gap; 0 existing market-tagged images in any current bank."
+  aspect_export_multiplier: 5
+  totals:
+    pilot: 46
+    v1_en_us: 200
+    v1_all_markets: 488
+
+grand_totals_produced_units:
+  mvp_min:
+    k: 6
+    video: 72
+    audio: 31
+    image: 46
+    total: 149
+  robust_default:
+    k: 12
+    video: 540
+    audio: 94
+    image: 488
+    total: 1122
+  max_fundable_ceiling:
+    k: 36
+    video: 1620
+    audio: 240
+    image: 1424
+    total: 3284
+  bloated_full_cartesian_never_fund:
+    video: 124488
+    audio: 35568
+    image: 1244880
+    total: 1404936
+
+open_questions:
+  - "Design family count corrected 10->9 vs Lane 01 baseline text."
+  - "K=12 is a rolling no-repeat window, not a full-quarter zero-repeat guarantee; confirm operator intent vs MAX_FUNDABLE K=36."
+  - "Mood-register clustering (4 registers from 15 native families) is this spec's own synthesis from 3 worked Lane-01 examples, not independently source-verified for all 15."
+  - "Stinger/endcard market-agnosticism assumed, not verified against per-market brand-voice research."
+  - "Tier B generic-background count (20) is a bank-economics estimate, not a research citation."
+  - "localized_lifestyle_note priority-topic subset (8 of 15) picked without a per-market topic-priority source."
+  - "Carried from Lane 01: en_US has no regional_lenses registry row; Bluesky has zero aesthetic research backing."

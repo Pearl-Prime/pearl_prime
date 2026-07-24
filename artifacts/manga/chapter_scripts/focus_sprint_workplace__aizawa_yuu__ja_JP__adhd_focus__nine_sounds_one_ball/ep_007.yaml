@@ -1,0 +1,722 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_007
+chapter_number: 7
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_007.arc_storyboard.yaml
+title: '静寂のフリースロー——第七話「九つの音」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 7: Nine Sounds'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: 力を抜かせるコーチ
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings,
+    team chats, finance/time pressure, and physical cost without letting analytics
+    replace the body.
+  catalyst:
+    id: the_scoreboard_glare_in_the_first_qualifier
+    logline: In Shinonome's first qualifier match, the gymnasium scoreboard and a
+      small but loud rival-company crowd overload Hayato's attention exactly when
+      the game is tightest, and the team's first real loss lands on a mistake that
+      is unmistakably his.
+    ordinary_world_objects:
+    - scoreboard
+    - opposing_company_banner
+    - foul_line
+    - whistle
+    genre_transmutation: The scoreboard's public tally becomes the externalized
+      shape of Hayato's internal noise; a lost qualifier becomes concrete, shared,
+      and no longer just his private failure.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world
+    entrypoint. Market=ja_JP; audience=gen_z. Use catalyst
+    'the_scoreboard_glare_in_the_first_qualifier'. Market surface rule per
+    config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects
+    and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公。東雲商事の営業事務の新入社員。元高校バスケ部ポイントガード。
+    今日が公式戦としては高校以来初めての試合。
+  visual_anchor: 常に少し崩れたワイシャツの裾（今日はTシャツの上に部のビブス）、
+    詰まると拳にペンを打つ癖、机の引き出しから持ち出した古いスニーカー。
+- id: aya
+  name: 美濃部 彩
+  name_romaji: Minobe Aya
+  age: 25
+  role: 隼人の職場の先輩兼チームメイト。事実上のキャプテン兼マネージャー。
+  visual_anchor: 実務的な立ち姿、束ねた髪、感情を出さない目元。
+- id: endou
+  name: 遠藤 岳
+  name_romaji: Endou Gaku
+  age: 34
+  role: チームのエース。もう一年、と言い続けるベテラン。粗野だがチームを守る。
+  visual_anchor: 腕組み、日焼けした前腕、常に少し不機嫌な眉。
+- id: matsuo
+  name: 松尾 洋介
+  name_romaji: Matsuo Yousuke
+  age: 22
+  role: 控えのガード。遠藤より慎重で気弱だが、根はまっすぐ。この話でベンチから
+    初めて実戦に加わる。
+  visual_anchor: 眼鏡、靴紐を何度も結び直す癖、人と目を合わせるのが苦手。
+- id: sasaki
+  name: 佐々木 健
+  name_romaji: Sasaki Ken
+  age: 26
+  role: 対戦相手・三笠電機バスケットボール部主将。今話限りの対戦相手。
+    悪役としてではなく、同じように必死な一社会人選手として描く。
+  visual_anchor: 引き締まった体格、汗で額に張りついた前髪、勝った瞬間の
+    飾らない安堵の表情。
+
+scene_palette:
+  primary: 遠征先体育館の白い蛍光灯 + 三笠電機側の赤いアクセント
+  secondary: 東雲側ベンチの紺色、窓の外に落ちていく夕暮れの橙
+  accent: スコアボードの赤いデジタル表示（継続する視覚モチーフ、以後の話数にも
+    引き継がれる）
+
+pages:
+- page_id: ep_007_p01
+  panels:
+  - panel_id: ep007_001
+    scene: |
+      ワイド。見知らぬ街の区立体育館、外観。夕方、まだ日が完全には落ちていない。
+      東雲商事バスケットボール部の面々が、スマホの地図アプリと看板を見比べながら
+      会場を探している。ジャージ袋を提げた足取りは、いつもの練習に向かう足取り
+      より、どこか硬い。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: "初めての遠征。初めての、本当の試合。"
+      en_US: "Their first away game. Their first game that actually counted."
+      zh_TW: "[zh_TW] Their first away game. Their first game that actually counted."
+      zh_CN: "[zh_CN] Their first away game. Their first game that actually counted."
+    silence_confirmed: true
+
+  - panel_id: ep007_002
+    scene: |
+      館内へ続く通路。まだ試合会場は見えないが、壁の向こうから聞き慣れない
+      声援が漏れてくる——太鼓、うちわを叩く音、「三笠! 三笠!」の合唱。彩が
+      先頭で足を止め、耳を澄ませる。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: "壁の向こうから「三笠!三笠!」という合唱と、うちわを打ち鳴らす音が
+        漏れてくる。うちのチームより先に、相手の応援がもう本気だった。この
+        重圧は、油断すれば高くつく。"
+      en_US: "A chant of \"Mikasa! Mikasa!\" and the slap of paper fans leaked
+        through the wall before the team even reached the court. The other
+        side's cheering section was already serious — real pressure, the
+        rival kind, the kind that could cost a team that let it in."
+      zh_TW: "[zh_TW] A chant of \"Mikasa! Mikasa!\" and the slap of paper fans
+        leaked through the wall before the team even reached the court. The
+        other side's cheering section was already serious — real pressure,
+        the rival kind, the kind that could cost a team that let it in."
+      zh_CN: "[zh_CN] A chant of \"Mikasa! Mikasa!\" and the slap of paper fans
+        leaked through the wall before the team even reached the court. The
+        other side's cheering section was already serious — real pressure,
+        the rival kind, the kind that could cost a team that let it in."
+
+  - panel_id: ep007_003
+    scene: |
+      控室代わりの通路の隅。彩を中心にした円陣。遠藤と松尾が並び、隼人が
+      その輪の中で少し肩を強張らせている。彩は書類でも見るような、普段と
+      変わらない声で言う。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "いつも通りでいい。落ち着いてやろう。それだけ。"
+        en_US: "Just play like we always do. Stay calm out there. That's it."
+        zh_TW: "[zh_TW] Just play like we always do. Stay calm out there. That's it."
+        zh_CN: "[zh_CN] Just play like we always do. Stay calm out there. That's it."
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_center
+    - speaker: endou
+      text_by_locale:
+        ja_JP: "……分かってる。"
+        en_US: "...I know."
+        zh_TW: "[zh_TW] ...I know."
+        zh_CN: "[zh_CN] ...I know."
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+
+  - panel_id: ep007_004
+    scene: |
+      クローズアップ。隼人の手が、机の引き出しから持ち出した古いスニーカーの
+      紐を結んでいる。バッグには会社の名札がまだ付いたままぶら下がっている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: "今日は、ちゃんとやる。"
+        en_US: "Today, I'm going to do this right."
+        zh_TW: "[zh_TW] Today, I'm going to do this right."
+        zh_CN: "[zh_CN] Today, I'm going to do this right."
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+    intent: "身体が先に来る——会社の名札と古いスニーカーが同じバッグの中にある"
+
+  - panel_id: ep007_005
+    scene: |
+      ワイド。コート中央。片方のゴール裏に「三笠魂」と書かれた大きな横断幕。
+      審判のホイッスルが鳴り、ジャンプボールが上がる。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: "「三笠魂」と書かれた横断幕がゴール裏に掲げられている。ホイッスルが
+        鳴り、ジャンプボールが上がる。"
+      en_US: "A banner reading \"Mikasa Spirit\" hung behind one basket. The
+        referee's whistle sounded, and the opening tip went up."
+      zh_TW: "[zh_TW] A banner reading \"Mikasa Spirit\" hung behind one
+        basket. The referee's whistle sounded, and the opening tip went up."
+      zh_CN: "[zh_CN] A banner reading \"Mikasa Spirit\" hung behind one
+        basket. The referee's whistle sounded, and the opening tip went up."
+    sfx_by_locale:
+      ja_JP: ["ピーッ"]
+      en_US: ["fweeeet"]
+      zh_TW: ["[zh_TW] fweeeet"]
+      zh_CN: ["[zh_CN] fweeeet"]
+    intent: "ティップオフ——初の公式戦がここから始まる"
+
+- page_id: ep_007_p02
+  panels:
+  - panel_id: ep007_006
+    scene: |
+      流れるようなアクション。隼人が視野の隅で遠藤の動きを捉え、迷わず
+      パスを通す。遠藤がそのままレイアップを決める。珍しく、遠藤が隼人に
+      短く声をかける。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: "いいパスだ。"
+        en_US: "Good pass."
+        zh_TW: "[zh_TW] Good pass."
+        zh_CN: "[zh_CN] Good pass."
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "基準線の確立——隼人が普通の状態では機能していることを先に見せる"
+
+  - panel_id: ep007_007
+    scene: |
+      インサート。スコアボードのクローズアップ。「7 - 5」東雲リード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: "スコアボードは7対5。まだ、いつも通りの試合に見えた。"
+      en_US: "The scoreboard read seven to five. Still, for now, it looked
+        like an ordinary game."
+      zh_TW: "[zh_TW] The scoreboard read seven to five. Still, for now, it
+        looked like an ordinary game."
+      zh_CN: "[zh_CN] The scoreboard read seven to five. Still, for now, it
+        looked like an ordinary game."
+
+  - panel_id: ep007_008
+    scene: |
+      ワイドの客席インサート。三笠電機側の小さいが密度の濃い応援団が、
+      うちわと太鼓で合唱を続けている。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: "少ないが、うるさい。三笠側の声援は、点差が縮むたびに一段階
+        大きくなっていった。"
+      en_US: "Small in number, loud in volume. Every time the gap narrowed,
+        Mikasa's cheering section got one notch louder."
+      zh_TW: "[zh_TW] Small in number, loud in volume. Every time the gap
+        narrowed, Mikasa's cheering section got one notch louder."
+      zh_CN: "[zh_CN] Small in number, loud in volume. Every time the gap
+        narrowed, Mikasa's cheering section got one notch louder."
+
+  - panel_id: ep007_009
+    scene: |
+      隼人がファウルをもらい、フリースローラインに立つ。ゴール裏の応援団が
+      すぐ後ろで太鼓を鳴らし続けている。ボールを構えたまま、視線がリム、
+      客席、スコアボード、リムと落ち着かずに動く。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: "フリースローライン、何本弾ませた……? 二回? 三回だったか?"
+        en_US: "How many times did I bounce it at the line...? Two? Was it
+          three?"
+        zh_TW: "[zh_TW] How many times did I bounce it at the line...? Two?
+          Was it three?"
+        zh_CN: "[zh_CN] How many times did I bounce it at the line...? Two?
+          Was it three?"
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+    intent: "サインの初出——フリースローの回数を見失う。技術はまだ教えられて
+      いない、これは初めての実戦テスト"
+
+  - panel_id: ep007_010
+    scene: |
+      クローズアップ。急いだシュートがリング前方に強く当たり、跳ね返る。
+      ネットには触れない。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["カンッ"]
+      en_US: ["clang"]
+      zh_TW: ["[zh_TW] clang"]
+      zh_CN: ["[zh_CN] clang"]
+
+  - panel_id: ep007_011
+    scene: |
+      彩が一度だけ手を叩き、すぐに守備位置へ戻るよう合図する。遠藤は何も
+      言わず、顎を強張らせたままディフェンスに走る。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "次!"
+        en_US: "Next play!"
+        zh_TW: "[zh_TW] Next play!"
+        zh_CN: "[zh_CN] Next play!"
+      intensity: sharp
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "チームは立ち止まらない——慰めも叱責もない、実務的な切り替え"
+
+  - panel_id: ep007_012
+    scene: |
+      ハーフタイムのベンチ。スコアボードには「24 - 23」東雲の1点ビハインドと
+      表示されている。彩が水を配りながら、戦術的な一言だけを告げる。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: "前半終了。24対23。1点ビハインド。"
+      en_US: "Halftime. Twenty-four to twenty-three. Down by one."
+      zh_TW: "[zh_TW] Halftime. Twenty-four to twenty-three. Down by one."
+      zh_CN: "[zh_CN] Halftime. Twenty-four to twenty-three. Down by one."
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "後半、リバウンドで我慢だ。焦らない。"
+        en_US: "Second half, we grind it out on the boards. No rushing."
+        zh_TW: "[zh_TW] Second half, we grind it out on the boards. No rushing."
+        zh_CN: "[zh_CN] Second half, we grind it out on the boards. No rushing."
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+
+- page_id: ep_007_p03
+  panels:
+  - panel_id: ep007_013
+    scene: |
+      後半再開。クローズアップ。隼人の胸が大きく上下し、顎から汗が
+      滴り落ちる。ソックスは汗で色が変わっている。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "身体の代償——台詞より先に、消耗そのものを見せる"
+
+  - panel_id: ep007_014
+    scene: |
+      スコアラーテーブルで松尾がゼッケンを付け替え、コートに入る。緊張で
+      靴紐をもう一度結び直している。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: matsuo
+      text_by_locale:
+        ja_JP: "い、行きます……!"
+        en_US: "G-going in...!"
+        zh_TW: "[zh_TW] G-going in...!"
+        zh_CN: "[zh_CN] G-going in...!"
+      intensity: nervous
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "ベンチの厚み——遠藤とも彩とも違う、松尾固有の話し方"
+
+  - panel_id: ep007_015
+    scene: |
+      インサート。スコアボードのクローズアップ。第3クォーター終盤、点差は
+      1点のまま動かない。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: "第3クォーター終盤。点差は、まだ1点。"
+      en_US: "Late third quarter. The gap was still just one point."
+      zh_TW: "[zh_TW] Late third quarter. The gap was still just one point."
+      zh_CN: "[zh_CN] Late third quarter. The gap was still just one point."
+
+  - panel_id: ep007_016
+    scene: |
+      デッドボールの間、客席インサート。手書きの応援ボードが一枚、高く
+      掲げられている——「帰れ東雲!」の文字。周りの三笠側の観客がどっと
+      沸く。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: "「帰れ東雲!」手書きのボードが一枚、高く掲げられた。応援は、
+        いつの間にか輪郭のある悪意になっていた。"
+      en_US: "\"Go home, Shinonome!\" A hand-lettered sign went up high. The
+        cheering had sharpened, somewhere along the way, into something with
+        a specific edge to it."
+      zh_TW: "[zh_TW] \"Go home, Shinonome!\" A hand-lettered sign went up
+        high. The cheering had sharpened, somewhere along the way, into
+        something with a specific edge to it."
+      zh_CN: "[zh_CN] \"Go home, Shinonome!\" A hand-lettered sign went up
+        high. The cheering had sharpened, somewhere along the way, into
+        something with a specific edge to it."
+
+  - panel_id: ep007_017
+    scene: |
+      隼人のタイトな顔のクローズアップ。視線が忙しく動く——客席の応援ボード、
+      スコアボードの数字、ベンチで叫ぶ味方、正面の相手選手。どれも同じ
+      音量で頭の中に入ってくる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: "音が、多い……。"
+        en_US: "There are too many sounds..."
+        zh_TW: "[zh_TW] There are too many sounds..."
+        zh_CN: "[zh_CN] There are too many sounds..."
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+    intent: "フリースロー限定だった過負荷が、試合の流れそのものに広がっている"
+
+  - panel_id: ep007_018
+    scene: |
+      遠藤が床を指差しながら、隼人に向かって声を張る。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: "隼人! ここ絞れ! ヘルプに回るな!"
+        en_US: "Hayato! Tighten up here! Stop drifting into the help!"
+        zh_TW: "[zh_TW] Hayato! Tighten up here! Stop drifting into the help!"
+        zh_CN: "[zh_CN] Hayato! Tighten up here! Stop drifting into the help!"
+      intensity: sharp
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "戦術的な修正のみ——心理を語る台詞は一切ない"
+
+- page_id: ep_007_p04
+  panels:
+  - panel_id: ep007_019
+    scene: |
+      ワイドの合成的なコマ。残り1分を切ったスコアボードの点滅する時計、
+      客席の絶え間ない声援、ベンチから飛ぶ指示の声、直前のファウルの
+      ホイッスルの残響——すべてが同じ重さで一度に迫ってくる。
+    beat_type: awe_pullback
+    narrator_caption_by_locale:
+      ja_JP: "残り48秒。東雲、61対60でリード。すべての音が、一度に来た。"
+      en_US: "Forty-eight seconds left. Shinonome up sixty-one to sixty.
+        Every sound arrived at once."
+      zh_TW: "[zh_TW] Forty-eight seconds left. Shinonome up sixty-one to
+        sixty. Every sound arrived at once."
+      zh_CN: "[zh_CN] Forty-eight seconds left. Shinonome up sixty-one to
+        sixty. Every sound arrived at once."
+    silence_confirmed: true
+
+  - panel_id: ep007_020
+    scene: |
+      クローズアップ。ボールを運ぶ隼人の目が、コートの床ではなく壁際の
+      スコアボードの時計に固定されている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: "時計だけ見てろ……時間を潰せば、勝てる。"
+        en_US: "Just watch the clock... Run it down, and we win."
+        zh_TW: "[zh_TW] Just watch the clock... Run it down, and we win."
+        zh_CN: "[zh_CN] Just watch the clock... Run it down, and we win."
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+    intent: "間違った一点への収束——のちに教わる技術の、ねじれた前触れ"
+
+  - panel_id: ep007_021
+    scene: |
+      隼人の背後からのワイドショット。二人のディフェンダーが左右から
+      静かに距離を詰めてくる。隼人の視線は依然としてスコアボードの
+      方向に向いたままだ。
+    beat_type: standard
+    silence_confirmed: true
+    intent: "読者だけが罠を見ている——警告の台詞はない"
+
+  - panel_id: ep007_022
+    scene: |
+      クローズの速いコマ。三笠の選手の手がボールを弾き出す。隼人の指先は
+      半瞬遅れて、何もない空を握る。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["パンッ"]
+      en_US: ["smack"]
+      zh_TW: ["[zh_TW] smack"]
+      zh_CN: ["[zh_CN] smack"]
+
+  - panel_id: ep007_023
+    scene: |
+      こぼれ球に飛びついた隼人が、床に強く倒れ込む。前腕が硬い床の上を
+      滑り、皮膚が擦れる。慌てて立ち上がろうとした瞬間、足首が変な角度で
+      床を捉える。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ["ドサッ"]
+      en_US: ["thud"]
+      zh_TW: ["[zh_TW] thud"]
+      zh_CN: ["[zh_CN] thud"]
+    intent: "具体的な身体の代償——前腕の擦り傷と足首の悪い着地。物語らず、
+      傷そのものを見せる"
+
+  - panel_id: ep007_024
+    scene: |
+      ワイド。反対側のゴールで三笠の選手が誰にも邪魔されずレイアップを
+      決める。手前では、隼人がまだ床に手をついたまま、足首を押さえている。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: ["タンッ"]
+      en_US: ["thump"]
+      zh_TW: ["[zh_TW] thump"]
+      zh_CN: ["[zh_CN] thump"]
+    narrator_caption_by_locale:
+      ja_JP: "62対61。三笠、逆転。残り27秒。"
+      en_US: "62 to 61. Mikasa takes the lead. Twenty-seven seconds left."
+      zh_TW: "[zh_TW] 62 to 61. Mikasa takes the lead. Twenty-seven seconds
+        left."
+      zh_CN: "[zh_CN] 62 to 61. Mikasa takes the lead. Twenty-seven seconds
+        left."
+
+  - panel_id: ep007_025
+    scene: |
+      東雲最後の攻撃。遠藤が無理な体勢からシュートを打つが、リングに
+      当たって外に弾かれる。同時にブザーが鳴る。スコアボードの表示が
+      最終スコアのまま止まる。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: ["ブォー"]
+      en_US: ["BRAAAP"]
+      zh_TW: ["[zh_TW] BRAAAP"]
+      zh_CN: ["[zh_CN] BRAAAP"]
+    narrator_caption_by_locale:
+      ja_JP: "最終スコア、62対61。東雲商事、初戦敗退。"
+      en_US: "Final score: 62 to 61. Shinonome loses its opening match."
+      zh_TW: "[zh_TW] Final score: 62 to 61. Shinonome loses its opening
+        match."
+      zh_CN: "[zh_CN] Final score: 62 to 61. Shinonome loses its opening
+        match."
+
+  - panel_id: ep007_026
+    scene: |
+      ワイド。三笠電機のベンチが歓声を上げる——勝ち誇るのではなく、
+      本気で安堵したような表情。主将の佐々木が仲間と抱き合い、肩で
+      息をしながら短く言葉を漏らす。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: sasaki
+      text_by_locale:
+        ja_JP: "……勝った……!"
+        en_US: "...We won...!"
+        zh_TW: "[zh_TW] ...We won...!"
+        zh_CN: "[zh_CN] ...We won...!"
+      intensity: exhausted
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "人間味のある対戦相手——嘲笑ではなく、こちらと同じ必死さを見せる"
+
+- page_id: ep_007_p05
+  panels:
+  - panel_id: ep007_027
+    scene: |
+      彩が真っ先に隼人のもとへ駆け寄り、膝をついて足首に手を当てる。
+      顔は怪我だけを見ている。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "動かないで。足、見せて。"
+        en_US: "Don't move. Let me see your ankle."
+        zh_TW: "[zh_TW] Don't move. Let me see your ankle."
+        zh_CN: "[zh_CN] Don't move. Let me see your ankle."
+      intensity: focused
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "非難ではなく身体のケアが先——チームの実際の優先順位"
+
+  - panel_id: ep007_028
+    scene: |
+      ワイドのベンチショット。誰も口を開かない。松尾が隼人に水のボトルを
+      無言で差し出す。目は合わせない。
+    beat_type: standard
+    silence_confirmed: true
+    intent: "敗戦後の沈黙——少なくとも一区画は台詞なしで持続させる"
+
+  - panel_id: ep007_029
+    scene: |
+      遠藤は少し離れた場所に立ち、腕を組んだまま消えたスコアボードを
+      見つめている。顎に力が入っているが、何も言わない。傍らのインサートで、
+      テープを巻かれた隼人の足首と擦り傷の残る前腕が、触れられないまま
+      置かれたボールの隣に映る。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "抑制された怒り——講釈はない。読者に読み取らせる"
+
+  - panel_id: ep007_030
+    scene: |
+      ワイド。チームが体育館を出て夜の中へ歩き出す。開いたドアの向こうに、
+      まだ明かりの落ちたスコアボードが見えている。隼人は列の一番後ろで、
+      わずかに足を引きずっている。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      ja_JP: "電光掲示板の光が落ちても、62対61という数字だけは、まだそこに
+        あるようだった。"
+      en_US: "Even after the scoreboard's light went dark, the number —
+        sixty-two to sixty-one — still seemed to be sitting there."
+      zh_TW: "[zh_TW] Even after the scoreboard's light went dark, the
+        number — sixty-two to sixty-one — still seemed to be sitting there."
+      zh_CN: "[zh_CN] Even after the scoreboard's light went dark, the
+        number — sixty-two to sixty-one — still seemed to be sitting there."
+    dialogue_lines: []
+
+notes:
+  arc_position: |
+    Episode 7 of 12 — the arc's first live qualifier match and its real sting,
+    per the series bible's per-episode beat assignment. Directly follows
+    ep_006's roster registration under fax-deadline pressure. This is the
+    first episode to stage a full, refereed, spectated game rather than
+    practice or scrimmage, and it is the episode where the strategy bank's
+    "flooded" opening state (crowd, scoreboard, bench, whistle — all equally
+    loud) plays out at live-game stakes for the first time, culminating in a
+    turnover that is unambiguously Hayato's. The team drops into the
+    tournament's loser's bracket as a direct result, which ep_008 opens on.
+  pacing_vs_prior: |
+    30 panels across five page groups — denser than the series' quieter
+    character episodes, matching the genre bible's higher panel count for a
+    climactic match chapter (18-28pp typical for this genre). Splits
+    attention between game action, scoreboard/crowd inserts, and body-cost
+    close-ups more aggressively than any prior episode, mirroring the
+    episode's own theme of divided attention under live-game pressure.
+  continuity_callbacks: |
+    - Hayato's old sneakers from the desk drawer (panel 4) — the established
+      visual anchor connecting his two lives, now carried into an away venue
+      for the first time.
+    - The free-throw line (panels 9-10) gets its first live-game test and
+      fails — a deliberate, controlled pre-echo of the strategy bank's
+      carrier device (strategy_01, "The One Ball at the Line"), which does
+      not fully resolve until ep_010/ep_011 per the throughline pacing.
+      Panel 9's exact "how many bounces" confusion mirrors the strategy
+      bank's own beat 2 language on purpose.
+    - Panel 20's "just watch the clock" is the episode's key authored
+      inversion: Hayato narrows his attention onto a single object under
+      pressure, exactly as the eventual technique will ask him to — but onto
+      the wrong object (the clock, not the floor/ball), which is precisely
+      what costs the team the game. This plants the payoff for ep_011
+      without pre-empting it.
+    - The scraped forearm and wrong-angle ankle plant (panel 23) are the
+      direct source of continuity objects referenced in ep_008 (taped ankle,
+      "planted wrong on yesterday's turnover") and ep_009 (forearm scratch,
+      "three days ago... fell to the floor").
+    - Endou's restrained, wordless anger (panel 29) and Aya's physical (not
+      verbal) care (panel 27) seed ep_009's team-friction catalyst directly.
+  doctrinal_anchor_vessel_handling: |
+    Kuroda (vessel: "the coach of the unclenched") does not appear in this
+    episode at all — the away qualifier venue is outside his established
+    domain (he is the Shinonome company building's facilities caretaker, not
+    a traveling coach), so his silence this episode is silence by absence
+    rather than staged restraint. No character explains the ADHD engine
+    aloud; Endou's in-game correction (panel 18) is ordinary tactical
+    coaching, not insight, and Aya's halftime and post-loss lines (panels 12,
+    27) are practical and physical, never interpretive. Per the strategy
+    bank's anti-pattern rules, the scoreboard does not resolve or explain
+    anything — it is the final, deliberately unglamorous object the episode
+    closes on (panel 30), standing in contrast to a stated lesson rather than
+    substituting for one. The loss is not softened, narrowed to a "close"
+    margin for comfort, or walked back by any character; Sasaki's genuine,
+    unmocking relief (panel 26) keeps the opposing team human rather than a
+    flattened obstacle, per the sports-competition craft bible's rule against
+    generic opponents.
+  translation_handoff: |
+    text_by_locale dicts populated for ja_JP (authoritative, native-authored)
+    and en_US (real operator-review translation, not a literal
+    back-translation). zh_TW and zh_CN carry bracket-placeholder stand-ins
+    matching the en_US line, per the heart_balance_shojo ep_001 bilingual-
+    field convention, pending the separate CJK translation-quality lane.

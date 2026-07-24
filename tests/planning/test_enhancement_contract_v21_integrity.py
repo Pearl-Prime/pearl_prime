@@ -7,8 +7,15 @@ from phoenix_v4.planning.enhancement_contract_v21_runtime import (
 )
 
 
-def _budget_with_actual(*, assigned: int, chapters: list[int], per_chapter: dict[str, int]):
+def _budget_with_actual(
+    *,
+    assigned: int,
+    chapters: list[int],
+    per_chapter: dict[str, int],
+    zero_authorized: bool = False,
+):
     budget = build_optional_accent_budget(chapter_count=12, max_accents_per_chapter=2)
+    budget["zero_optional_accent_policy"] = {"authorized": zero_authorized}
     budget["actual"] = {
         "assigned_total_optional_accents": assigned,
         "optional_assignment_counts": {"QUOTE": assigned},
@@ -50,6 +57,25 @@ def test_optional_budget_hard_fails_ceiling_violations() -> None:
 
 
 def test_supported_underfill_is_advisory_not_hard_fail() -> None:
+    # PR #21 hardened unauthorized underfill into a hard failure (see
+    # test_unsupported_underfill_without_authorization_hard_fails below); the
+    # advisory path now requires an explicit zero_optional_accent_policy
+    # authorization, matching build_enhancement_contract_v21_summary's
+    # zero-budget exception in tests/planning/test_accent_planner.py.
+    budget = _budget_with_actual(
+        assigned=6,
+        chapters=[1, 3, 5, 7, 9],
+        per_chapter={"1": 2, "3": 1, "5": 1, "7": 1, "9": 1},
+        zero_authorized=True,
+    )
+
+    result = validate_optional_accent_budget(budget, chapter_count=12)
+
+    assert result["status"] == "PASS"
+    assert {row["code"] for row in result["warnings"]} == {"zero_optional_accent_exception"}
+
+
+def test_unsupported_underfill_without_authorization_hard_fails() -> None:
     budget = _budget_with_actual(
         assigned=6,
         chapters=[1, 3, 5, 7, 9],
@@ -58,8 +84,9 @@ def test_supported_underfill_is_advisory_not_hard_fail() -> None:
 
     result = validate_optional_accent_budget(budget, chapter_count=12)
 
-    assert result["status"] == "PASS"
-    assert {row["code"] for row in result["warnings"]} == {"supported_budget_underfill"}
+    assert result["status"] == "FAIL"
+    codes = {row["code"] for row in result["hard_failures"]}
+    assert "supported_budget_underfill" in codes
 
 
 def test_external_story_requires_function_source_citation_and_truth_metadata() -> None:

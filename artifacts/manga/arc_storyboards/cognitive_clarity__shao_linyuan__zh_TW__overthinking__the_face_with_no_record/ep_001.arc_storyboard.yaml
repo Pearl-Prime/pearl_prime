@@ -1,0 +1,234 @@
+schema_version: 1.0.0
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_001
+genre_id: psychological_thriller
+title: 'The Platform Has No Record of This Face — Episode 1: The Gate Log Doesn''t Agree'
+logline: An anomalous EasyCard tap-out with no matching entry pulls night-shift analyst Yaqing into cross-referencing
+  a second matching incident before her own shift ends.
+stakes_now: Yaqing's confident 'sensor error' closure is the only thing standing between her and a quiet
+  end to the shift.
+stakes_end: The case remains open, her own cross-reference has already contradicted her closed verdict,
+  and she has spent unaccounted time and unauthorized scope on it.
+genre_cadence:
+- establishing_analyst_world
+- precision_as_armor
+- confident_verdict_stated
+- unseen_contradicting_detail
+- decisive_closure_action
+- anchor_ordinary_kindness
+- distracted_deflection
+- reader_privileged_contradiction
+- anchor_notes_the_pace
+- second_anomaly_surfaces
+- cross_reference_match
+- revised_darker_reading
+- scope_creep_begins
+- anchor_names_the_overreach
+- small_deflection_response
+- time_passing_unnoticed
+- somatic_compulsive_tell
+- closing_unresolved_hold
+page_turn_promises:
+- page_id: ep_001_p01
+  promise: Will the confident 'sensor error' verdict survive contact with a second flagged record tonight?
+- page_id: ep_001_p02
+  promise: Will Yaqing close the file as instructed, or let the match between two anomalies pull her past
+    her own shift?
+panels:
+- panel_id: ep001_001
+  page_id: ep_001_p01
+  story_function: establishing_analyst_world
+  story_move: Establishes Yaqing's night-shift world and skill before any anomaly enters the frame.
+  visual_proof: Wide OCC control room shot, wall of monitors, rain on the windows, Yaqing alone at her
+    station.
+  information_delta: Reader learns Yaqing's night-shift role and environment before anything is wrong.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_002
+  page_id: ep_001_p01
+  story_function: precision_as_armor
+  story_move: The inciting anomaly enters as a flagged EasyCard tap-log row with no matching entry.
+  visual_proof: Close insert on the scrolling tap log with one row highlighted red by the system.
+  information_delta: 'Reader learns the specific anomaly: an exit tap with no matching entry tap.'
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_003
+  page_id: ep_001_p01
+  story_function: confident_verdict_stated
+  story_move: Yaqing states a confident, total verdict — sensor error, a routine monthly occurrence.
+  visual_proof: Medium shot on Yaqing's calm, professional face, unbothered by the flagged row.
+  information_delta: Reader hears Yaqing's initial explanation stated with full certainty.
+  beat_role: false_clarity
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_004
+  page_id: ep_001_p01
+  story_function: unseen_contradicting_detail
+  story_move: A visual detail in the footage quietly contradicts Yaqing's verdict without being flagged.
+  visual_proof: CCTV freeze-frame insert of a figure exiting gate C, umbrella dripping, reflection angle
+    avoiding the camera.
+  information_delta: Reader sees a contradiction Yaqing does not — genre-standard unreliable-narrator
+    plant.
+  beat_role: unreliable_flag
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_005
+  page_id: ep_001_p01
+  story_function: decisive_closure_action
+  story_move: Yaqing closes the incident with a single decisive keystroke, filing it as sensor malfunction.
+  visual_proof: Close insert on Yaqing's hand typing the closure code and pressing the close-case key.
+  information_delta: 'Reader sees Yaqing''s chosen coping strategy: decisive closure over lingering doubt.'
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_006
+  page_id: ep_001_p01
+  story_function: anchor_ordinary_kindness
+  story_move: Zhou, the vessel, offers Yaqing a warm drink — an ordinary human gesture before the spiral
+    begins.
+  visual_proof: 'Two-shot: Zhou setting a cup beside Yaqing''s console, her posture still fixed on the
+    screen.'
+  information_delta: Reader meets the anchor character and the shift's ordinary rhythm before it breaks.
+  beat_role: anchor_intro
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_007
+  page_id: ep_001_p01
+  story_function: distracted_deflection
+  story_move: Yaqing barely acknowledges Zhou, already scrolling to the next log entry.
+  visual_proof: Medium shot, Yaqing's eyes already back on the monitor, cup untouched at her elbow.
+  information_delta: Reader sees the first small sign of the case pulling her past ordinary courtesy.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_008
+  page_id: ep_001_p01
+  story_function: reader_privileged_contradiction
+  story_move: A background monitor silently replays the same station's earlier footage, unnoticed by anyone.
+  visual_proof: Wide monitor-wall insert, one corner screen looping earlier footage of the same platform.
+  information_delta: Reader receives privileged information neither character has registered yet.
+  beat_role: unreliable_flag
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_009
+  page_id: ep_001_p01
+  story_function: anchor_notes_the_pace
+  story_move: Zhou notes aloud that tonight's queue is heavier than usual, planting scale before the turn.
+  visual_proof: Medium two-shot, Zhou glancing at her scroll speed with a half-joking expression.
+  information_delta: Reader learns tonight's anomaly count is already unusual, not yet explained.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_010
+  page_id: ep_001_p02
+  story_function: second_anomaly_surfaces
+  story_move: A second flagged anomaly at the same gate, different timestamp, cracks Yaqing's certainty.
+  visual_proof: Insert on a second red-flagged log row at the identical fare gate, different time.
+  information_delta: Reader learns a second incident exists at the same location, undermining the closed
+    case.
+  beat_role: revision
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_011
+  page_id: ep_001_p02
+  story_function: cross_reference_match
+  story_move: Yaqing cross-references both clips and finds matching umbrella, build, and gait.
+  visual_proof: Side-by-side insert of two CCTV stills, umbrella angle and gait annotated as matching.
+  information_delta: Reader sees the two 'separate' incidents may be the same figure, not two glitches.
+  beat_role: evidence_detail
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_012
+  page_id: ep_001_p02
+  story_function: revised_darker_reading
+  story_move: Yaqing's internal reading overwrites her first verdict — this is not a sensor problem.
+  visual_proof: Close insert on Yaqing's pen-clicking hand, speed increasing, the tell of full focus.
+  information_delta: Reader hears the revised, sharper hypothesis stated for the first time.
+  beat_role: revision
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_013
+  page_id: ep_001_p02
+  story_function: scope_creep_begins
+  story_move: Yaqing pulls the entire night's manual logs, expanding far past her assigned task.
+  visual_proof: Wide shot of Yaqing manually opening dozens of unflagged files across her monitors.
+  information_delta: Reader sees her workload expand self-directed, beyond any supervisor's request.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep001_014
+  page_id: ep_001_p02
+  story_function: anchor_names_the_overreach
+  story_move: Zhou names, plainly, that this work is outside her shift's task list.
+  visual_proof: Two-shot, Zhou pointing at her overflowing file tabs, expression concerned but calm.
+  information_delta: Reader learns institutional pressure (manager, sign-off) surrounding the case.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_015
+  page_id: ep_001_p02
+  story_function: small_deflection_response
+  story_move: Yaqing deflects with a controlled, minimal answer, eyes never leaving the screen.
+  visual_proof: Close insert on Yaqing's face, expression flat and professional, gaze fixed on monitor.
+  information_delta: Reader sees Yaqing choosing the case over the conversation, first real cost sign.
+  beat_role: anchor_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep001_016
+  page_id: ep_001_p02
+  story_function: time_passing_unnoticed
+  story_move: The wall clock silently advances to 03:47, marking unnoticed time lost to the case.
+  visual_proof: Spatial insert on the control-room wall clock reading 03:47, no figures in frame.
+  information_delta: Reader registers how much time has quietly passed without Yaqing noticing.
+  beat_role: threatening_silence
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_017
+  page_id: ep_001_p02
+  story_function: somatic_compulsive_tell
+  story_move: Yaqing's hand double-underlines the same timestamp without her conscious awareness.
+  visual_proof: Extreme close insert on a hand underlining a printed timestamp twice, unnoticed.
+  information_delta: Reader sees the body registering the loop before Yaqing's mind names it.
+  beat_role: unreliable_flag
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep001_018
+  page_id: ep_001_p02
+  story_function: closing_unresolved_hold
+  story_move: The episode closes on the case still open, Yaqing's self-reassurance already contradicted.
+  visual_proof: Wide pull-back of the control room, Yaqing small in frame, the anomaly still open on screen.
+  information_delta: Reader is left with an explicitly unresolved case and a self-soothing line already
+    false.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_001.yaml
+notes: Arc 1 (obsession seed) opener. Series is original zh_TW authoring, distinct setting (MRT Operations
+  Control Center) from the ja_JP sibling (securities-style office analyst) and en_US sibling (the_loop_is_not_thinking)
+  — tonal reference only, no shared plot beats. All prose fields in this storyboard are English craft-planning
+  metadata; the authoritative reader-facing story lives entirely in zh_TW inside ep_001.yaml.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes ep_001.yaml''s already-authored story_move
+  per panel.'

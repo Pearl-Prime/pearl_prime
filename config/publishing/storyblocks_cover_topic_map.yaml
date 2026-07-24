@@ -1,0 +1,29 @@
+schema_version: "1.0"
+authority: "Pearl_Prime cover imagery ontology"
+policy:
+  preferred_provider: storyblocks
+  required_surface: cover
+  required_media_type: image
+  require_exact_topic_key: true
+  require_topic_verified: true
+  fail_closed: true
+  ai_training_excluded: true
+
+topics:
+  adhd_focus: {template_topic: overthinking, positive: [focus, attention, concentration, desk, planner, organized], exclude: [party, alcohol, casino]}
+  anxiety: {positive: [anxiety, tense, worried, breathing, calm, nervous], exclude: [horror, panic attack acting, violence]}
+  boundaries: {positive: [boundary, fence, doorway, space, stop, separation], exclude: [prison, border patrol, violence]}
+  burnout: {positive: [burnout, exhausted, fatigue, overwork, empty desk, rest], exclude: [fire disaster, wildfire, explosion]}
+  compassion_fatigue: {positive: [caregiver, nurse, helping, compassion, fatigue, recovery], exclude: [graphic medical, surgery]}
+  courage: {positive: [courage, brave, climb, summit, step forward, resilience], exclude: [weapon, combat, stunt]}
+  depression: {positive: [depression, solitude, low mood, window light, recovery, support], exclude: [suicide, self harm, graphic]}
+  financial_anxiety: {positive: [budget, bills, money stress, finances, calculator, planning], exclude: [casino, gambling, luxury cash]}
+  financial_stress: {positive: [budget, bills, debt, finances, calculator, paperwork], exclude: [casino, gambling, luxury cash]}
+  grief: {positive: [grief, remembrance, loss, empty chair, candle, memorial], exclude: [funeral corpse, graphic death]}
+  imposter_syndrome: {positive: [imposter, self doubt, workplace, mask, confidence, belonging], exclude: [costume party, horror mask]}
+  mindfulness: {template_topic: anxiety, positive: [mindfulness, present, meditation, breathing, stillness, awareness], exclude: [religious conversion, intoxication]}
+  overthinking: {positive: [overthinking, thoughts, decision, tangled, maze, reflection], exclude: [psychosis, horror]}
+  self_worth: {positive: [self worth, confidence, mirror, dignity, self respect, growth], exclude: [beauty product, luxury status]}
+  sleep_anxiety: {positive: [sleep, insomnia, bedroom, night, rest, moonlight], exclude: [nightclub, nightmare horror]}
+  social_anxiety: {positive: [social anxiety, crowd, meeting, conversation, alone together, connection], exclude: [concert party, intoxication]}
+  somatic_healing: {positive: [somatic, body awareness, stretching, hands, breathwork, grounded], exclude: [graphic medical, surgery]}

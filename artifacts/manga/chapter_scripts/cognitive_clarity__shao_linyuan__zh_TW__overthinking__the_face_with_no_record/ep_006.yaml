@@ -1,0 +1,258 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_006
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_006.arc_storyboard.yaml
+title: 月台不記得的臉——第6話
+title_en_gloss: 'The Platform Has No Record of This Face — Episode 6: Forty Minutes'
+manga_author: 邵臨淵
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- en_US
+- ja_JP
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk
+    and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register
+    over clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: night_market_stakeout_misses_the_buxiban_pickup
+    logline: 雅晴騎機車在非值班時間繞去第四個站附近的夜市蹲點，錯過了答應妹妹要去接姪女下補習班的時間，手搖飲app的常態訂單第一次被她自己取消——因為她根本沒空喝。
+    ordinary_world_objects:
+    - scooter_commute
+    - night_market_stall
+    - buxiban_classroom
+    - bubble_tea_app
+    genre_transmutation: 夜市的日常喧鬧，被她重新讀成監視第四個站的最佳掩護；錯過姪女補習班接送的訊息通知，把她的執念第一次量化成一個具體的、被辜負的承諾。
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z.
+    Use catalyst 'night_market_stakeout_misses_the_buxiban_pickup'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體的偵探
+main_characters:
+- id: su
+  name: 蘇雅晴
+  name_romaji: Su Yaqing (Iris)
+  age: 31
+  role: 主人公——台北捷運行控中心異常事件分析員
+  visual_anchor: 直短髮別在耳後、深藍色行控值班制服、右手習慣性轉動一枝原子筆
+- id: zhou
+  name: 周德昌
+  name_romaji: Zhou Dechang
+  age: 58
+  role: 資深值班控制員，即將退休——器（讀懂身體的偵探）
+  visual_anchor: 灰白平頭、袖口捲起、桌上一個用了二十年的舊保溫瓶
+- id: lin
+  name: 林組長
+  name_romaji: Team Lead Lin
+  age: 45
+  role: 值班主管——制度壓力來源
+  visual_anchor: 俐落套裝、手上永遠夾著一份待簽的報表夾
+scene_palette:
+  primary: 行控中心的冷白螢幕光 + 深夜捷運藍
+  secondary: 月台霓虹的濕冷灰藍（雨夜反光）
+  accent: 一枝始終未關的琥珀色警示燈——全劇唯一反覆出現的暖色
+pages:
+- page_id: ep_006_p01
+  panels:
+  - panel_id: ep006_001
+    scene: 非值班的傍晚。雅晴騎機車穿過巷弄，目的地不是家，而是第四個異常站點附近的夜市入口。
+    beat_type: standard
+    intent: 台灣場景質地——機車穿梭巷弄
+  - panel_id: ep006_002
+    scene: 插入畫面——她把機車停在夜市邊,摘下安全帽,眼神已經在掃視周圍的人群,像在值勤。
+    beat_type: micro
+  - panel_id: ep006_003
+    scene: 夜市攤販的喧鬧、油煙、叫賣聲——雅晴站在人群中,拿著手機悄悄拍下經過的路人背影。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 如果那個人真的存在,這裡是最好的掩護。
+      en_US: If the figure is real, a night market stall is the perfect cover — the crowd hides a witness
+        as easily as it hides a suspect.
+  - panel_id: ep006_004
+    scene: 插入畫面——她的手機震動,是妹妹傳來的訊息:「姊,妳今天要去接晴晴下課吧?」
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: 'Sister: are you picking up Qingqing after buxiban class today?'
+  - panel_id: ep006_005
+    scene: 雅晴看著訊息,猶豫了一秒——她答應過的,姪女的補習班下課時間就是現在。
+    beat_type: micro
+    intent: 選擇的張力——承諾與執念的衝突
+  - panel_id: ep006_006
+    scene: 她的視線又飄回人群裡一個撐傘的身影——傘在不下雨的夜市裡,顯得格格不入。她決定再等五分鐘。
+    beat_type: micro
+  - panel_id: ep006_007
+    scene: 插入畫面——她的手搖飲app跳出「您常買的去冰半糖，要再訂一杯嗎?」通知,她這次按下了「取消」——連自動化的小小放鬆都被她犧牲了。
+    beat_type: micro
+    intent: 連自動導航式的小確幸都被案件排擠
+    narrator_caption_by_locale:
+      en_US: The bubble tea app offers its usual reorder. She cancels it — no time even for autopilot.
+  - panel_id: ep006_008
+    scene: 那個撐傘的身影轉進巷子消失了,雅晴追上去,穿過人群,腳步比平常快。
+    beat_type: micro
+  - panel_id: ep006_009
+    scene: 巷子裡空無一人,只有滴水的屋簷——她撲了個空,手機又震動,妹妹的訊息變成了未接來電。
+    beat_type: micro
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      en_US: The alley is empty — the evidence gone missing again, just like every clue before it.
+  - panel_id: ep006_010
+    scene: 大場景拉開——雅晴站在空巷子裡,手裡的手機螢幕亮著三通未接來電,夜市的喧鬧聲在她背後遠遠地繼續著。頁末懸念。
+    beat_type: long_drop
+- page_id: ep_006_p02
+  panels:
+  - panel_id: ep006_011
+    scene: 雅晴回撥電話,妹妹接起來,語氣裡有壓抑的怒氣。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su_wei
+      text_by_locale:
+        zh_TW: 晴晴在補習班外面等了四十分鐘,妳知道嗎?
+        en_US: She waited outside the classroom for forty minutes — do you understand that?
+      intensity: sharp
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep006_012
+    scene: 雅晴,聲音裡有真正的愧疚,不是敷衍的道歉。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 對不起,我真的——我在忙一件事。
+        en_US: I'm sorry — I know that's not enough. I was working something.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep006_013
+    scene: 妹妹,聲音冷了下來。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su_wei
+      text_by_locale:
+        zh_TW: 妳每次都在忙一件事。
+        en_US: You're always working something.
+      intensity: sharp
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep006_014
+    scene: 電話掛斷。雅晴站在夜市邊緣,手機螢幕暗下去,四周的燈光和人聲顯得特別遙遠。
+    beat_type: micro
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      en_US: The call ends. But the quiet after it feels heavier than the noise before.
+  - panel_id: ep006_015
+    scene: 特寫——她低頭看著手機裡自己的時間軸筆記,又看了看剛剛掛斷的通話紀錄,兩者在螢幕上並排。
+    beat_type: micro
+    intent: 案件與人際代價第一次直接並置
+  - panel_id: ep006_016
+    scene: 她把通話紀錄的截圖存了下來——連這通吵架的電話,都被她的直覺標記成「需要記錄」。
+    beat_type: micro
+    intent: 強迫性紀錄行為擴散到案件以外
+  - panel_id: ep006_017
+    scene: 雅晴獨自走回機車旁,夜市的燈光在她身後漸漸模糊,她的表情第一次顯得真正疲憊,而不只是專注。
+    beat_type: micro
+  - panel_id: ep006_018
+    scene: 插入畫面——夜市入口的招牌燈,一半亮著一半故障閃爍,像是呼應她此刻搖擺不定的狀態。
+    beat_type: spatial
+    intent: 環境呼應——閃爍的招牌燈
+  - panel_id: ep006_019
+    scene: 沉默格——她坐上機車,沒有發動,只是握著把手,低著頭。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep006_020
+    scene: 遠景——機車終於發動,騎進夜色裡,方向不是回家,而是回到第四個異常站點的方向。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      zh_TW: 只是再看一眼。
+      en_US: Just one more look. That's the promise she keeps not keeping — this time it cost her sister's
+        trust, not just her sleep.
+  - panel_id: ep006_021
+    scene: 插入畫面——夜色中的補習班招牌一閃而過,姪女的名字曾經寫在她手機的行事曆上,現在那則提醒已經過期。
+    beat_type: micro
+    intent: 台灣場景質地——補習班招牌
+  - panel_id: ep006_022
+    scene: 大遠景——她的機車消失在往第四站的方向,夜市的喧鬧聲徹底遠去,只剩引擎聲。
+    beat_type: spatial
+notes:
+  arc_position: 第六話——執念首次正面壓過對家人的承諾。夜市蹲點成為新的行為模式；補習班接送事件是本季首個具體、無可挽回的人際代價。
+  pacing_vs_prior: 二十二格，兩頁。首次讓場景完全脫離職場（非值班時間），並讓代價從『情緒』升級為『具體事件』。
+  continuity_callbacks: 手搖飲app自動訂單（延續ep_003的耗竭徵兆，這次是主動取消）；LINE群組未讀訊息（延續ep_004、ep_005的人際疏離）。
+  language: zh_TW為權威語言，en_US僅為操作用註解，非翻譯。
+  translation_pipeline_handoff: en_US為審閱用註解草稿；其餘CJK語系另案處理。
+craft_notes: 'VESSEL: 讀懂身體的偵探（本話周德昌未出場，代價轉為家庭線）。GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+
+  GENRE-FIRST（zh_TW）: 夜市場景作為類型「掩護」語彙，而非單純風景裝飾——符合doctrine避免『環境安慰』的規範（psychological_thriller.md §6失敗模式6：不可用溫暖場景暗示『這是安全的一話』）。
+
+
+  ARC: 選擇的張力（補習班 vs 蹲點）→執念勝出→具體、無可挽回的代價（妹妹的信任）。
+
+
+  NATIVE: 台灣繁體中文原創。
+
+
+  ACCEPTANCE: authored_candidate。'

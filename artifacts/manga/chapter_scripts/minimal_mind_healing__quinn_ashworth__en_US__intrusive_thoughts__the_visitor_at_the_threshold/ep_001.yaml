@@ -1,0 +1,438 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: minimal_mind_healing__quinn_ashworth__en_US__intrusive_thoughts__the_visitor_at_the_threshold
+chapter_id: ep_001
+arc_storyboard_ref: artifacts/manga/arc_storyboards/minimal_mind_healing__quinn_ashworth__en_US__intrusive_thoughts__the_visitor_at_the_threshold/ep_001.arc_storyboard.yaml
+title: 'The Visitor at the Threshold — Episode 1: Three Knocks'
+manga_author: Quinn Ashworth
+teacher_id: brand_teacher_unresolved
+brand_id: minimal_mind_healing
+engine: INTRUSIVE_THOUGHTS
+locale: en_US
+default_locale: en_US
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: horror
+  strategy_genre: horror
+  relevance_genre: horror
+  market_surface_rule: Use social discovery, school/work pressure, gaming, creator culture, comic shop/community,
+    and phone-native life without sounding like an ad for platforms.
+  market_touchpoints:
+  - group_chat
+  - discord_server
+  - short_video_clip
+  - school_bus_or_subway
+  - comic_shop
+  - mall_food_court
+  - campus_library
+  - delivery_app
+  - controller
+  - streaming_queue
+  market_guardrails:
+  - avoid_fake_japanese_surface_for_us_scene
+  - make_city_transport_specific_if_used
+  - do_not_overexplain_anime_fandom
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: 'Modern horror should make familiar interfaces wrong: a phone, classroom app,
+    livestream, station display, or game lobby behaves almost normally.'
+  catalyst:
+    id: the_thread_that_wont_stay_deleted
+    logline: A message thread from an unnamed sender opens on Sora's phone before she has chosen to look,
+      returns after every delete and block wearing her own name, and finally knocks at the front door
+      in the exact rhythm of the hallway light and her own pulse.
+    ordinary_world_objects:
+    - phone
+    - notification
+    - door
+    - knock
+    genre_transmutation: An ordinary phone notification becomes an unbanishable visitor that borrows the
+      reader's own name; the apartment's front door and deadbolt become proof that barring a threshold
+      does not work when the thing at it was never outside to begin with.
+    avoid:
+    - jump_scare_only
+    - lore_dump
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z.
+    Use catalyst 'the_thread_that_wont_stay_deleted'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    en_US. Use concrete objects (phone, notification, door, knock) and social/system pressure on page
+    one; do not name-drop trends; never claim the visitor is defeated, only not fed.
+available_locales:
+- en_US
+- ja_JP
+- zh_CN
+- zh_TW
+main_characters:
+- id: sora
+  name: Sora Akiyama
+  age: 27
+  role: protagonist (freelance narrative designer; works from home; phone-dependent)
+  visual_anchor: undercut hair pushed back, oversized cardigan, chipped black nail polish, never without
+    the phone in reach
+- id: priya
+  name: Priya
+  role: companion, voice-only (phone) — night-shift archivist
+  visual_anchor: never drawn in-panel; presence carried entirely by phone UI and dialogue; contact name
+    on screen reads 'Priya — Archive (night shift)'
+scene_palette:
+  primary: near-black apartment interior + single warm bulb glow
+  secondary: cool phone-screen blue-white
+  accent: the bulb's flicker glow (recurring visual through-line, panels 1/6/15/30)
+  dawn_palette: pale grey-gold dawn light — panels 30-32 only
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: Wide, dim shot of the apartment hallway at night. A single bare bulb hangs at the far end on
+      a bent cord, and it flickers on its own private rhythm — three quick flickers, a pause, three flickers
+      again — before anything else in the episode has happened. Each flicker throws long, moving shadows
+      down the narrow hall, as if something behind the light were counting along with it. No figure is
+      in frame yet.
+    beat_type: spatial
+    intent: RECURRING VISUAL THROUGH-LINE — the rhythm exists before any trigger does
+    silence_confirmed: true
+  - panel_id: ep001_002
+    scene: Close on Sora's phone lying screen-down on the desk beside a half-shut laptop. The screen brightens
+      on its own — no notification sound, no buzz first, just a cold wash of light spilling sideways across
+      the desk clutter, a chipped-black-polish mug ring, a tangle of charging cable. Sora's hand is not
+      yet in frame.
+    beat_type: spatial
+    intent: ENVIRONMENT ANSWERS BEFORE THE FACE DOES
+  - panel_id: ep001_003
+    scene: Close on the lit screen. A new thread sits open from a contact with no name and no photo —
+      the field simply reads 'Unknown.' One line is already delivered, waiting, as if it had been typed
+      before Sora ever picked up the phone.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: You know this is who you really are.
+      ja_JP: '[ja_JP] You know this is who you really are.'
+      zh_TW: '[zh_TW] You know this is who you really are.'
+      zh_CN: '[zh_CN] You know this is who you really are.'
+  - panel_id: ep001_004
+    scene: Sora's face, glancing down at the screen, mildly annoyed rather than afraid. Undercut hair
+      pushed back, oversized cardigan sleeve visible at the edge of frame.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: sora
+      text_by_locale:
+        en_US: Spam.
+        ja_JP: '[ja_JP] Spam.'
+        zh_TW: '[zh_TW] Spam.'
+        zh_CN: '[zh_CN] Spam.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_005
+    scene: Close on a thumb tapping delete. The screen confirms the action in small grey type.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: Conversation deleted.
+      ja_JP: '[ja_JP] Conversation deleted.'
+      zh_TW: '[zh_TW] Conversation deleted.'
+      zh_CN: '[zh_CN] Conversation deleted.'
+  - panel_id: ep001_006
+    scene: The hallway bulb flickers again — the same three-pause-three rhythm as panel one, a deliberate
+      visual rhyme. Sora, seated at her desk in the next room, does not look up.
+    beat_type: spatial
+  - panel_id: ep001_007
+    scene: 'The phone buzzes and lights again, unprompted, face-down on the desk. Same sender field: ''Unknown.'''
+    beat_type: spatial
+  - panel_id: ep001_008
+    scene: Close on the screen. Beneath the deleted conversation, marked 'Delivered,' the same sentence
+      sits again, unchanged, as if it had never left.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: You know this is who you really are.
+      ja_JP: '[ja_JP] You know this is who you really are.'
+      zh_TW: '[zh_TW] You know this is who you really are.'
+      zh_CN: '[zh_CN] You know this is who you really are.'
+  - panel_id: ep001_009
+    scene: '[PAGE-TURN] Sora holds down the contact and taps ''Block this number.'' A loading wheel spins
+      on the screen and does not stop turning.'
+    beat_type: standard
+    narrator_caption_by_locale:
+      en_US: Blocking...
+      ja_JP: '[ja_JP] Blocking...'
+      zh_TW: '[zh_TW] Blocking...'
+      zh_CN: '[zh_CN] Blocking...'
+- page_id: ep_001_p02
+  panels:
+  - panel_id: ep001_010
+    scene: Wide. Sora crosses the apartment to the front door and checks it — deadbolt, then chain, methodically,
+      the way a habit checks itself.
+    beat_type: spatial
+    dialogue_lines:
+    - speaker: sora
+      text_by_locale:
+        en_US: Just checking.
+        ja_JP: '[ja_JP] Just checking.'
+        zh_TW: '[zh_TW] Just checking.'
+        zh_CN: '[zh_CN] Just checking.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep001_011
+    scene: Close on the deadbolt sliding fully home, held one beat too long under Sora's fingers before
+      she lets go.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_012
+    scene: Cut back to the phone, lit again on its own. The 'Blocking...' wheel has stopped; a new message
+      sits in its place.
+    beat_type: spatial
+    narrator_caption_by_locale:
+      en_US: You can't lock out something already inside.
+      ja_JP: '[ja_JP] You can''t lock out something already inside.'
+      zh_TW: '[zh_TW] You can''t lock out something already inside.'
+      zh_CN: '[zh_CN] You can''t lock out something already inside.'
+  - panel_id: ep001_013
+    scene: Sora's hands, faintly unsteady, typing a reply — arguing with it directly now, choosing every
+      word instead of deleting or blocking again.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: sora
+      text_by_locale:
+        en_US: I don't know what you're talking about.
+        ja_JP: '[ja_JP] I don''t know what you''re talking about.'
+        zh_TW: '[zh_TW] I don''t know what you''re talking about.'
+        zh_CN: '[zh_CN] I don''t know what you''re talking about.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_014
+    scene: The reply lands before the send animation even finishes — impossibly fast, and more specific,
+      closer to true.
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: Then why did you delete it twice.
+      ja_JP: '[ja_JP] Then why did you delete it twice.'
+      zh_TW: '[zh_TW] Then why did you delete it twice.'
+      zh_CN: '[zh_CN] Then why did you delete it twice.'
+  - panel_id: ep001_015
+    scene: Wide — the hallway bulb's flicker rhythm has sped up, compressing toward constant, as if it
+      is watching the argument work and quickening in response.
+    beat_type: spatial
+    intent: the argument is feeding it
+  - panel_id: ep001_016
+    scene: Sora scrolls the message history hunting for a way to report the sender. Every block or delete
+      attempt in the log shows the thread reappearing — and the contact name field has changed. It no
+      longer reads 'Unknown.' It reads 'Sora Akiyama.'
+    beat_type: standard
+  - panel_id: ep001_017
+    scene: Close on Sora's face — real fear now, not irritation. Something about this feels wrong in a
+      way she cannot yet name.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_018
+    scene: A knock at the apartment door. Three knocks, a pause, three knocks — the exact rhythm of the
+      bulb and the phone's buzz, now a single synchronized threat across every surface in the apartment
+      at once.
+    beat_type: spatial
+    sfx_by_locale:
+      en_US:
+      - (three soft knocks — whisper register, not a bang)
+      ja_JP:
+      - '[ja_JP] (three soft knocks — whisper register, not a bang)'
+      zh_TW:
+      - '[zh_TW] (three soft knocks — whisper register, not a bang)'
+      zh_CN:
+      - '[zh_CN] (three soft knocks — whisper register, not a bang)'
+  - panel_id: ep001_019
+    scene: Through the peephole — the hallway is empty. No one there. The bulb keeps flickering in rhythm,
+      synced with a fresh buzz behind her.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_020
+    scene: The phone rings — an actual call, not a text. The caller ID shows Sora's own name and her own
+      photo.
+    beat_type: micro
+    sfx_by_locale:
+      en_US:
+      - (phone buzzing against wood — whisper register)
+      ja_JP:
+      - '[ja_JP] (phone buzzing against wood — whisper register)'
+      zh_TW:
+      - '[zh_TW] (phone buzzing against wood — whisper register)'
+      zh_CN:
+      - '[zh_CN] (phone buzzing against wood — whisper register)'
+  - panel_id: ep001_021
+    scene: Sora freezes at the door, hand still on the deadbolt mid-motion.
+    beat_type: micro
+    sfx_by_locale:
+      en_US:
+      - thud... thud...
+      - (heartbeat, whisper register — never BANG register)
+      ja_JP:
+      - '[ja_JP] thud... thud...'
+      - '[ja_JP] (heartbeat, whisper register — never BANG register)'
+      zh_TW:
+      - '[zh_TW] thud... thud...'
+      - '[zh_TW] (heartbeat, whisper register — never BANG register)'
+      zh_CN:
+      - '[zh_CN] thud... thud...'
+      - '[zh_CN] (heartbeat, whisper register — never BANG register)'
+  - panel_id: ep001_022
+    scene: A second call overrides the first. The caller ID changes to 'Priya — Archive (night shift).'
+    beat_type: spatial
+  - panel_id: ep001_023
+    scene: Sora answers this one, phone shaking slightly at her ear, back still to the door.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: priya
+      text_by_locale:
+        en_US: You didn't sleep again. I can hear it in how fast you're breathing. Sora — stop checking
+          the lock.
+        ja_JP: '[ja_JP] You didn''t sleep again. I can hear it in how fast you''re breathing. Sora — stop
+          checking the lock.'
+        zh_TW: '[zh_TW] You didn''t sleep again. I can hear it in how fast you''re breathing. Sora — stop
+          checking the lock.'
+        zh_CN: '[zh_CN] You didn''t sleep again. I can hear it in how fast you''re breathing. Sora — stop
+          checking the lock.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: off_panel_phone
+      position_hint: top_left
+  - panel_id: ep001_024
+    scene: Same composition — phone at her ear, other hand still frozen on the bolt.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: priya
+      text_by_locale:
+        en_US: You can't out-argue a knock. Stop answering it. Let it stand there. I'm on the line. I'll
+          stand here too.
+        ja_JP: '[ja_JP] You can''t out-argue a knock. Stop answering it. Let it stand there. I''m on the
+          line. I''ll stand here too.'
+        zh_TW: '[zh_TW] You can''t out-argue a knock. Stop answering it. Let it stand there. I''m on the
+          line. I''ll stand here too.'
+        zh_CN: '[zh_CN] You can''t out-argue a knock. Stop answering it. Let it stand there. I''m on the
+          line. I''ll stand here too.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: off_panel_phone
+      position_hint: top_left
+  - panel_id: ep001_025
+    scene: Sora's hand comes off the deadbolt. She sits down on the floor, back against the door, phone
+      still at her ear.
+    beat_type: spatial
+    sfx_by_locale:
+      en_US:
+      - (breath, slow, audible — whisper register)
+      ja_JP:
+      - '[ja_JP] (breath, slow, audible — whisper register)'
+      zh_TW:
+      - '[zh_TW] (breath, slow, audible — whisper register)'
+      zh_CN:
+      - '[zh_CN] (breath, slow, audible — whisper register)'
+  - panel_id: ep001_026
+    scene: '[LONG DROP — held silent beat] Wide. The three-knock rhythm continues faintly outside, unanswered,
+      unchecked. Nothing resolves in this panel on purpose.'
+    beat_type: long_drop
+    intent: LONG DROP — the non-engagement is held, not resolved
+    silence_confirmed: true
+  - panel_id: ep001_027
+    scene: The knocking slows, quiets — doesn't stop entirely, but the urgency is gone.
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_028
+    scene: The phone screen, still lit, resting on the floor beside Sora. A typing indicator blinks '...'
+      and never resolves into a new message.
+    beat_type: micro
+  - panel_id: ep001_029
+    scene: Sora on the floor, phone still at her ear, silent.
+    beat_type: micro
+    dialogue_lines:
+    - speaker: priya
+      text_by_locale:
+        en_US: How many nights?
+        ja_JP: '[ja_JP] How many nights?'
+        zh_TW: '[zh_TW] How many nights?'
+        zh_CN: '[zh_CN] How many nights?'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: off_panel_phone
+      position_hint: top_left
+  - panel_id: ep001_030
+    scene: Wide — dawn light just starting to touch the hallway, contrasting the flicker-dark opening.
+      The bulb has stopped flickering — steady now, not fixed, just steady for the moment.
+    beat_type: spatial
+  - panel_id: ep001_031
+    scene: '[AMBIGUOUS CLOSE — no resolution] Close on Sora''s hand, unbolted, resting flat against the
+      door. Beside it on the floor, the phone screen: the thread is still there, not deleted, not answered,
+      still marked ''Unknown.'''
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: It was never trying to come in.
+      ja_JP: '[ja_JP] It was never trying to come in.'
+      zh_TW: '[zh_TW] It was never trying to come in.'
+      zh_CN: '[zh_CN] It was never trying to come in.'
+  - panel_id: ep001_032
+    scene: Episode card. Typographic panel on a dark, quiet background.
+    beat_type: standard
+    narrator_caption_by_locale:
+      en_US: End of Episode 1 — Three Knocks
+      ja_JP: '[ja_JP] End of Episode 1 — Three Knocks'
+      zh_TW: '[zh_TW] End of Episode 1 — Three Knocks'
+      zh_CN: '[zh_CN] End of Episode 1 — Three Knocks'
+notes:
+  pacing: The episode runs 32 panels across two pages — page one (panels 1-9) is wound/refusal, page two
+    (panels 10-32) carries argument-feeds-it, synchronized dread, the companion turn, non-engagement,
+    and the ambiguous close. Silence is used deliberately at the fear hinge (17), the peephole check (19),
+    and the long-drop non-resolution (26).
+  bubble_style_register: 'Sora''s spoken dialogue: round_normal at whisper intensity. Priya''s phone-voice
+    lines: round_normal, whisper intensity, off_panel_phone tail (voice-only companion, never drawn).
+    No internal thought bubbles used for Sora — the intrusive thoughts are externalized entirely as the
+    visitor''s own diegetic UI text, per strategy_04''s the_thing_that_follows archetype.'
+  sfx_policy: 'SFX limited to three cues: the door knock (panel 18), the phone buzzing against wood (panel
+    20), and the heartbeat (panel 21) — all explicitly whisper register per docs/research/manga_craft/psychological_horror.md;
+    never BANG-register, per the craft bible''s therapeutic-brand SFX rule.'
+  gutter_choices: long_drop reserved for panel 26 (the held non-engagement beat); standard for panels
+    9 (page-turn) and 32 (episode card); everything else is micro or spatial.
+  translation_pipeline_handoff: text_by_locale dicts are populated for en_US only. ja_JP/zh_TW/zh_CN carry
+    '[locale] ...' placeholders pending the translation wave. Whisper-register SFX should stay whisper-register
+    in every locale — do not let localization amplify the heartbeat or knock into a bang.
+craft_notes: 'VESSEL: the night-shift archivist who stays on the line — a companion who models meeting
+  the dread (one breath toward it, not away) rather than banishing it. Teacher never named in-story.
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_horror.md
+
+  STRATEGY SOURCE: config/source_of_truth/manga_story_strategies/psychological_horror_strategies.yaml,
+  strategy_04 ''The Visitor at the Threshold'' (archetype_template: the_thing_that_follows, topic: intrusive_thoughts).
+
+  NEWLY AUTHORED: this episode was authored fresh for this session, fusing strategy_04''s plot skeleton
+  with the modern-reader doctrine''s app_that_opens_on_its_own horror catalyst (phone/notification/door/knock)
+  — it is not a backfill of a pre-existing render.
+
+  ACCEPTANCE LAYER: authored_candidate — NOT claimed bestseller or proven_at_bar.'
+genre: psychological_horror
+mode: teacher
+vessel: the night-shift archivist who stays on the line
