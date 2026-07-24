@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -128,6 +129,61 @@ def test_run_image_stub_guard(tmp_path, monkeypatch):
             opener=opener,
             sleeper=lambda _s: None,
         )
+
+
+def test_force_singapore_env_derives_workspace_native_base(monkeypatch):
+    """Regression (2026-07-24): force_singapore_env() must derive the
+    workspace-specific native host via dfm.native_base(), not hardcode the
+    generic dashscope-intl host — hardcoding silently broke image generation
+    for workspace-scoped keys (real incident, diagnosed live against a
+    workspace key: async submit -> AccessDenied, generic-host routing ->
+    InvalidParameter url error; sync via the correctly-derived workspace host
+    succeeded)."""
+    from scripts.social import run_dashscope_free_media_burn as burn
+
+    monkeypatch.setenv(
+        "DASHSCOPE_BASE_URL",
+        "https://ws-tbjufzktkzczfmhj.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+    )
+    monkeypatch.delenv("DASHSCOPE_NATIVE_BASE_URL", raising=False)
+    monkeypatch.delenv("OLLAMA_HOST", raising=False)
+
+    burn.force_singapore_env()
+
+    assert os.environ["DASHSCOPE_NATIVE_BASE_URL"] == (
+        "https://ws-tbjufzktkzczfmhj.ap-southeast-1.maas.aliyuncs.com/api/v1"
+    )
+
+
+def test_force_singapore_env_respects_explicit_native_base_override(monkeypatch):
+    """An operator-set DASHSCOPE_NATIVE_BASE_URL must never be clobbered —
+    setdefault() only fills gaps, it doesn't override."""
+    from scripts.social import run_dashscope_free_media_burn as burn
+
+    monkeypatch.setenv(
+        "DASHSCOPE_BASE_URL",
+        "https://ws-tbjufzktkzczfmhj.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+    )
+    monkeypatch.setenv("DASHSCOPE_NATIVE_BASE_URL", "https://example-override.test/api/v1")
+    monkeypatch.delenv("OLLAMA_HOST", raising=False)
+
+    burn.force_singapore_env()
+
+    assert os.environ["DASHSCOPE_NATIVE_BASE_URL"] == "https://example-override.test/api/v1"
+
+
+def test_force_singapore_env_defaults_to_generic_intl_without_workspace_url(monkeypatch):
+    """No regression: a plain (non-workspace) DASHSCOPE_BASE_URL still
+    defaults DASHSCOPE_NATIVE_BASE_URL to the generic dashscope-intl host."""
+    from scripts.social import run_dashscope_free_media_burn as burn
+
+    monkeypatch.delenv("DASHSCOPE_BASE_URL", raising=False)
+    monkeypatch.delenv("DASHSCOPE_NATIVE_BASE_URL", raising=False)
+    monkeypatch.delenv("OLLAMA_HOST", raising=False)
+
+    burn.force_singapore_env()
+
+    assert os.environ["DASHSCOPE_NATIVE_BASE_URL"] == "https://dashscope-intl.aliyuncs.com/api/v1"
 
 
 def test_cli_dry_run(capsys):

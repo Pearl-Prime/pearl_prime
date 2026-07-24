@@ -61,9 +61,21 @@ def force_singapore_env() -> None:
         "DASHSCOPE_BASE_URL"
     ]:
         raise dfm.DashScopeFreeMediaError("Beijing base refused for free burn")
-    os.environ.setdefault(
-        "DASHSCOPE_NATIVE_BASE_URL", "https://dashscope-intl.aliyuncs.com/api/v1"
-    )
+    # Derive via dfm.native_base()'s own workspace-aware logic instead of
+    # hardcoding the generic dashscope-intl host here. Hardcoding silently
+    # broke image generation for workspace-scoped keys (sk-ws-...) on
+    # 2026-07-24: it forced native calls through the generic host, which
+    # workspace keys can't use for async image submission ("current user api
+    # does not support asynchronous calls") nor route correctly at all
+    # ("InvalidParameter: url error"); video happened to still work there by
+    # coincidence, which is what made the bug hard to notice. At this point
+    # DASHSCOPE_NATIVE_BASE_URL is guaranteed unset (that's the precondition
+    # for setdefault to act), so native_base() correctly derives the
+    # workspace-specific ws-*.maas.aliyuncs.com/api/v1 host from the
+    # DASHSCOPE_BASE_URL just resolved above when applicable, or the generic
+    # intl default otherwise — same derivation used everywhere else in
+    # dashscope_free_media.py, now applied here too instead of bypassed.
+    os.environ.setdefault("DASHSCOPE_NATIVE_BASE_URL", dfm.native_base())
 
 
 def preflight_chat_smoke() -> dict[str, Any]:
