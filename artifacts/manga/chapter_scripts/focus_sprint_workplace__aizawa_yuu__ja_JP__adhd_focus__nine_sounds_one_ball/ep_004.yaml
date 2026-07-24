@@ -1,0 +1,666 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_004
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_004.arc_storyboard.yaml
+title: '「静寂のフリースロー」 第4話「一つのポゼッション」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 4: One Possession'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: "the coach of the unclenched"
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary
+    life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips,
+    rankings, team chats, finance/time pressure, and physical cost without
+    letting analytics replace the body.
+  catalyst:
+    id: the_scrimmage_score_in_the_group_chat
+    logline: Teammates track a Saturday scrimmage's score live in the team's
+      LINE group chat, and Hayato has to hold one clean defensive possession
+      while half the gym is visibly narrating his every mistake on their
+      phones.
+    ordinary_world_objects:
+    - line_group_chat
+    - scrimmage_scoreboard
+    - phone_in_pocket
+    - gym_floor
+    genre_transmutation: A casual scrimmage becomes a digitally-witnessed
+      trial; the group chat becomes the concrete shape of the social pressure
+      Hayato's attention has to survive.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world
+    entrypoint. Market=ja_JP; audience=gen_z. Use catalyst
+    'the_scrimmage_score_in_the_group_chat'. Market surface rule per
+    config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects
+    and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公。東雲商事の新入社員、営業支援。元高校バスケ部ポイントガード。
+    ep_003で黒田から最初の無言のレッスンを受けたばかり。
+  visual_anchor: 崩れかけたワイシャツ、締め直していないネクタイ、詰まったときに
+    指の関節をペンで叩く癖——コート上ではペンがない分、拳を自分の腿に打ちつける形
+    で残っている。
+- id: aya
+  name: 美濃部 彩
+  name_romaji: Minobe Aya
+  age: 25
+  role: 隼人の職場の先輩であり、部の事実上のキャプテン兼マネージャー。実務的で、
+    説教をしない。
+  visual_anchor: 束ねた髪、クリップボードを常に携帯、練習中は口調が職場より
+    はっきりする。
+- id: endou
+  name: 遠藤 岳
+  name_romaji: Endou Gaku
+  age: 34
+  role: チームのエース。「あと一年」を口にするベテラン。新人には最初から懐疑的
+    だったが、この回で初めて短い承認を口にする。
+  visual_anchor: 大柄、腕を組む癖、練習中も表情をほとんど動かさない。
+- id: kuroda
+  name: 黒田
+  name_romaji: Kuroda
+  age: 60s
+  role: 会社の設備管理員。元セミプロ選手。この話でも背景でボールを片付けるのみ
+    ——台詞なし。ep_003で隼人に見せた一度のバウンドが、この回で初めて実戦の中で
+    再現される。
+  visual_anchor: 作業着、いつも一定のリズムでボールラックを整える手つき。
+
+scene_palette:
+  primary: 土曜の体育館の白い蛍光灯 + 使い込まれた床材の琥珀色
+  secondary: ベンチに並ぶスマートフォン画面の冷たい青白い光
+  accent: バスケットボールのオレンジ（隼人の視線が最後に戻る一点）
+
+pages:
+- page_id: ep_004_p01
+  panels:
+  - panel_id: ep004_001
+    scene: |
+      土曜の午後、東雲商事の裏手にある古い体育館。段ボール箱からゼッケンが
+      配られていく。奥のベースラインでは、黒田が誰に頼まれるでもなくボール
+      ラックを整えている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: "エピソード導入——七人しかいない所帯の週末ミニゲーム。黒田は
+      変わらぬ背景の定数として在る。"
+
+  - panel_id: ep004_002
+    scene: |
+      彩がクリップボードを片手に、実務的にチーム分けを読み上げる。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: 白チームは隼人と私。あとは二人ずつ適当に。今日は三対三でいく。
+        en_US: 'White team: Hayato and me. Split the rest two and two.
+          Three-on-three today.'
+        zh_TW: '[zh_TW] White team: Hayato and me. Split the rest two and
+          two. Three-on-three today.'
+        zh_CN: '[zh_CN] White team: Hayato and me. Split the rest two and
+          two. Three-on-three today.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "小さな所帯のスクリメージという具体的な設定——ep_006の『七人』
+      との連続性。"
+
+  - panel_id: ep004_003
+    scene: |
+      ベンチ脇、部員Bのスマートフォンが震える。今日は出勤で来られない部員C
+      からのメッセージだ。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: [ピロン]
+      en_US: [ping]
+      zh_TW: ['[zh_TW] ping']
+      zh_CN: ['[zh_CN] ping']
+    dialogue_lines:
+    - speaker: teammate_c
+      text_by_locale:
+        ja_JP: （画面のメッセージ）出勤中……点差だけ教えて。
+        en_US: '(phone message) On shift... just send me the score.'
+        zh_TW: '[zh_TW] (phone message) On shift... just send me the score.'
+        zh_CN: '[zh_CN] (phone message) On shift... just send me the score.'
+      intensity: chat_text
+      bubble_style: line_chat_bubble
+      tail_style: none
+      position_hint: phone_screen_inset
+    intent: "デジタル観客の設定——体育館の外からも見られているという、
+      新しい種類の圧力。"
+
+  - panel_id: ep004_004
+    scene: |
+      部員Bが苦笑いしながら返信を打つ。ベンチの隅で、LINEグループ
+      「東雲バスケ部」の画面が光っている。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: teammate_b
+      text_by_locale:
+        ja_JP: 了解、実況しとくわ。
+        en_US: "Got it. I'll live-narrate."
+        zh_TW: "[zh_TW] Got it. I'll live-narrate."
+        zh_CN: "[zh_CN] Got it. I'll live-narrate."
+      intensity: light
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    narrator_caption_by_locale:
+      ja_JP: LINEグループ「東雲バスケ部」の画面が、ベンチの隅で光っている。
+      en_US: The LINE group chat — "Shinonome Basketball Club" — glows at
+        the edge of the bench.
+      zh_TW: '[zh_TW] The LINE group chat — "Shinonome Basketball Club" —
+        glows at the edge of the bench.'
+      zh_CN: '[zh_CN] The LINE group chat — "Shinonome Basketball Club" —
+        glows at the edge of the bench.'
+    intent: "実況役の確定——今夜、隼人のミスは二重に記録される。"
+
+  - panel_id: ep004_005
+    scene: |
+      ホイッスルが鳴る。得点板の数字は、まだ00-00のまま。
+    beat_type: spatial
+    sfx_by_locale:
+      ja_JP: [ピー]
+      en_US: [fwiiit]
+      zh_TW: ['[zh_TW] fwiiit']
+      zh_CN: ['[zh_CN] fwiiit']
+    narrator_caption_by_locale:
+      ja_JP: 体育館は、もう十分に人前だった。今夜は、それが二重になる。
+      en_US: The gym was already public enough. Tonight, that doubled.
+      zh_TW: '[zh_TW] The gym was already public enough. Tonight, that
+        doubled.'
+      zh_CN: '[zh_CN] The gym was already public enough. Tonight, that
+        doubled.'
+    intent: "心理を語らないナレーション——『二重の目撃』という事実だけを
+      外在化する。"
+
+  - panel_id: ep004_006
+    scene: |
+      試合開始。パスが素早く回る。隼人の番で、ボールが速すぎて指先を弾く
+      ——キャッチミス。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: パスは速く、キャッチはきれいではなかった。
+      en_US: The pass comes in hot. The catch isn't clean.
+      zh_TW: "[zh_TW] The pass comes in hot. The catch isn't clean."
+      zh_CN: "[zh_CN] The pass comes in hot. The catch isn't clean."
+    sfx_by_locale:
+      ja_JP: [ガッ]
+      en_US: [clack]
+      zh_TW: ['[zh_TW] clack']
+      zh_CN: ['[zh_CN] clack']
+    intent: "攻撃面での欠陥の再確認——ep_002の延長線上にある、まだ癖の
+      抜けない身体。"
+
+  - panel_id: ep004_007
+    scene: |
+      ベンチの部員Bがスマホでグループチャットに打ち込む。画面がアップに
+      なる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: teammate_b
+      text_by_locale:
+        ja_JP: （画面）隼人、キャッチできてない(笑)
+        en_US: "(on screen) Hayato can't catch it (lol)."
+        zh_TW: "[zh_TW] (on screen) Hayato can't catch it (lol)."
+        zh_CN: "[zh_CN] (on screen) Hayato can't catch it (lol)."
+      intensity: chat_text
+      bubble_style: line_chat_bubble
+      tail_style: none
+      position_hint: phone_screen_inset
+    intent: "ミスが即座に記録として残る——体育館の中の失敗が、外側にも
+      配信される。"
+
+  - panel_id: ep004_008
+    scene: |
+      隼人の顔、恥じらいと苛立ちが浮かぶ。拳を自分の腿に一度打ちつける
+      ——机の上ではペンだった癖が、コートでは拳になって残っている。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "既存のビジュアルアンカー（ペンで指の関節を叩く癖）の変奏。
+      オフィスの癖が、コートでは形を変えて残る。"
+
+  - panel_id: ep004_009
+    scene: |
+      守備に戻る隼人。マークしていた部員Cに、あっさりドリブルで抜かれる。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: [キュキュ, ズバッ]
+      en_US: [squeak-squeak, whoosh-past]
+      zh_TW: ['[zh_TW] squeak-squeak', '[zh_TW] whoosh-past']
+      zh_CN: ['[zh_CN] squeak-squeak', '[zh_CN] whoosh-past']
+    intent: "守備面でも同じ欠陥が露呈する——目が定まらない状態が続いて
+      いる。"
+
+  - panel_id: ep004_010
+    scene: |
+      得点板がめくれる。部員Bが再びスマホを打つ。
+    beat_type: spatial
+    dialogue_lines:
+    - speaker: teammate_b
+      text_by_locale:
+        ja_JP: （画面）うわ、抜かれた。もう2点差。
+        en_US: "(on screen) Whoa, blew right by him. Already down two."
+        zh_TW: "[zh_TW] (on screen) Whoa, blew right by him. Already down
+          two."
+        zh_CN: "[zh_CN] (on screen) Whoa, blew right by him. Already down
+          two."
+      intensity: chat_text
+      bubble_style: line_chat_bubble
+      tail_style: none
+      position_hint: phone_screen_inset
+    intent: "得点板とグループチャットが同時に更新される——二重の記録
+      装置。ページ1の終わり。"
+
+- page_id: ep_004_p02
+  panels:
+  - panel_id: ep004_011
+    scene: |
+      一区切り、給水休憩。荒い息、汗が飛ぶ。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: [ハァ, ハァ]
+      en_US: [huff, huff]
+      zh_TW: ['[zh_TW] huff', '[zh_TW] huff']
+      zh_CN: ['[zh_CN] huff', '[zh_CN] huff']
+    narrator_caption_by_locale:
+      ja_JP: 胸が上下し、息が乱れ、汗が飛ぶ——代償はまず身体に落ちる。
+      en_US: Chests heaving, breath ragged, sweat flying — the body pays
+        first.
+      zh_TW: '[zh_TW] Chests heaving, breath ragged, sweat flying — the
+        body pays first.'
+      zh_CN: '[zh_CN] Chests heaving, breath ragged, sweat flying — the
+        body pays first.'
+    intent: "身体の代償を可視化する——スポーツジャンルの必須要素、汗と
+      呼吸。"
+
+  - panel_id: ep004_012
+    scene: |
+      彩がタオルで汗を拭きながら、隼人に短く指示を出す。説教ではなく、
+      戦術的な一言。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: 間に合ってないなら、声出して。次、必要だから。
+        en_US: "If you're not in position, call it out — we need to hear
+          it, next time."
+        zh_TW: "[zh_TW] If you're not in position, call it out — we need
+          to hear it, next time."
+        zh_CN: "[zh_CN] If you're not in position, call it out — we need
+          to hear it, next time."
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "コーチ的発話だが心理を語らない——具体的な行動の指示のみ。"
+
+  - panel_id: ep004_013
+    scene: |
+      奥のベースライン、黒田が転がってきたボールを拾い、ラックに黙って
+      戻す。誰も見ていない。
+    beat_type: standard
+    silence_confirmed: true
+    intent: "黒田の一貫した所作の継続——ep_003の伏線が、この回でも変わらぬ
+      リズムで在り続ける。"
+
+  - panel_id: ep004_014
+    scene: |
+      隼人が一瞬だけ、黒田の方へ目をやる。言葉はない。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "無言の確認——師弟関係が言葉なしに一瞬だけ交わる。"
+
+  - panel_id: ep004_015
+    scene: |
+      試合再開。得点板は僅差のまま。部員Bのスマホ画面がベンチの端に
+      ちらりと映り込む。
+    beat_type: spatial
+    dialogue_lines:
+    - speaker: teammate_b
+      text_by_locale:
+        ja_JP: （画面）残り2点差。
+        en_US: "(on screen) Still down by two."
+        zh_TW: "[zh_TW] (on screen) Still down by two."
+        zh_CN: "[zh_CN] (on screen) Still down by two."
+      intensity: chat_text
+      bubble_style: line_chat_bubble
+      tail_style: none
+      position_hint: phone_screen_inset
+    intent: "緊張の維持——数字がゲームの重さを支える。"
+
+  - panel_id: ep004_016
+    scene: |
+      彩の指示でマッチアップが入れ替わる。隼人が遠藤につくことになる。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: 来いよ。
+        en_US: "Come on then."
+        zh_TW: "[zh_TW] Come on then."
+        zh_CN: "[zh_CN] Come on then."
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "エースとのミスマッチ——ep_002で示された懐疑が、この一対一で
+      試される。"
+
+  - panel_id: ep004_017
+    scene: |
+      隼人の目が忙しく動く——ボール、遠藤の肩、ベンチの光るスマホ画面、
+      得点板。どれにも定まらない。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 腰、肩、光る画面、得点板——どれも同じ重さで迫ってくる。
+      en_US: Hips, shoulders, a lit-up phone, the scoreboard — all of it
+        arriving at once, all the same weight.
+      zh_TW: '[zh_TW] Hips, shoulders, a lit-up phone, the scoreboard —
+        all of it arriving at once, all the same weight.'
+      zh_CN: '[zh_CN] Hips, shoulders, a lit-up phone, the scoreboard —
+        all of it arriving at once, all the same weight.'
+    intent: "過負荷の再演——ep_002の『目が定まらない』ビートの、守備版
+      としての再来。"
+
+  - panel_id: ep004_018
+    scene: |
+      隼人の目の動きが、ふいに止まる。肩でも、ベンチでもなく、遠藤の
+      腰のラインだけに落ち着く。
+    beat_type: micro
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      ja_JP: 揺れる肩でも、叫ぶベンチでもない。腰のラインだけを見ていた。
+      en_US: Not the shifting shoulders. Not the shouting bench — just the
+        line of his hips, instead.
+      zh_TW: '[zh_TW] Not the shifting shoulders. Not the shouting bench —
+        just the line of his hips, instead.'
+      zh_CN: '[zh_CN] Not the shifting shoulders. Not the shouting bench —
+        just the line of his hips, instead.'
+    intent: "キャリアビート——心理を語らず、視線が落ち着く『対象』だけを
+      描く。ep_003のレッスンが初めて実戦で作動する瞬間。"
+
+  - panel_id: ep004_019
+    scene: |
+      エクストリームクローズ。低く構えた膝、遠藤の腰の一点に固定された
+      視線。背景の音や動きは、輪郭のぼやけた塊として遠くに退く。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "静止のマクロ——世界の情報量が一点にまで絞られる、視覚的な
+      証明。"
+
+  - panel_id: ep004_020
+    scene: |
+      遠藤がフェイクを入れて仕掛けるが、隼人は釣られない。体を残した
+      まま押し返し、遠藤にバランスを崩した苦しいシュートを打たせる。
+      ボールはリムに弾かれる。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: [バスッ]
+      en_US: [clank]
+      zh_TW: ['[zh_TW] clank']
+      zh_CN: ['[zh_CN] clank']
+    intent: "カーテン・ビート——一つのポゼッションだけの、地味だが本物の
+      ディフェンスストップ。"
+
+- page_id: ep_004_p03
+  panels:
+  - panel_id: ep004_021
+    scene: |
+      リバウンドの競り合い。隼人がルーズボールに飛び込み、体が当たって
+      ホイッスルが鳴る——ファウル。フリースロー二本。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: [ガッ]
+      en_US: [thump]
+      zh_TW: ['[zh_TW] thump']
+      zh_CN: ['[zh_CN] thump']
+    narrator_caption_by_locale:
+      ja_JP: ホイッスル。ファウル。フリースロー二本。
+      en_US: A whistle. A foul. Two free throws.
+      zh_TW: '[zh_TW] A whistle. A foul. Two free throws.'
+      zh_CN: '[zh_CN] A whistle. A foul. Two free throws.'
+    intent: "フリースローという装置への接続——ep_003の伏線を回収する
+      入口。"
+
+  - panel_id: ep004_022
+    scene: |
+      フリースローラインに立つ隼人。視界の端には、まだ光っている
+      ベンチのスマホ画面。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 音は、消えていなかった。
+      en_US: The noise hadn't gone anywhere.
+      zh_TW: "[zh_TW] The noise hadn't gone anywhere."
+      zh_CN: "[zh_CN] The noise hadn't gone anywhere."
+    intent: "静けさの誤解を避けるナレーション——騒音は消えていない、
+      選ぶ対象が変わっただけだと示す。"
+
+  - panel_id: ep004_023
+    scene: |
+      無言のまま、ボールを一度だけ、意図的にバウンドさせる。黒田が
+      体育館で見せた、あの一度と同じリズムで。誰にも気づかれない。
+    beat_type: micro
+    silence_confirmed: true
+    sfx_by_locale:
+      ja_JP: [タン]
+      en_US: [tp]
+      zh_TW: ['[zh_TW] tp']
+      zh_CN: ['[zh_CN] tp']
+    intent: "ep_003の伏線の直接的な回収——誰にも説明されず、誰にも
+      気づかれず、ただ隼人の中でだけ再現される所作。"
+
+  - panel_id: ep004_024
+    scene: |
+      クリーンなリリース。ボールがリングを通り抜ける。試合はほとんど
+      間を置かず再開する。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: [バスッ]
+      en_US: [swish]
+      zh_TW: ['[zh_TW] swish']
+      zh_CN: ['[zh_CN] swish']
+    intent: "地味な成功——祝福されるような一本ではなく、ただの一本として
+      流れていく。"
+
+  - panel_id: ep004_025
+    scene: |
+      遠藤が短く息を吐き、振り返らずに自分のポジションへ戻る。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: ……悪くない。
+        en_US: "...Not bad."
+        zh_TW: "[zh_TW] ...Not bad."
+        zh_CN: "[zh_CN] ...Not bad."
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "控えめな承認——エースからの言葉は最小限、勝利宣言ではない。"
+
+  - panel_id: ep004_026
+    scene: |
+      コートの反対側から、彩が一瞬だけ隼人と目を合わせる。何かに
+      気づいた顔。
+    beat_type: micro
+    silence_confirmed: true
+    intent: "気づきの伏線——彩の反応が次のビートにつながる、まだ言葉に
+      ならない一瞬。"
+
+  - panel_id: ep004_027
+    scene: |
+      ミニゲーム終了後、クールダウン中に彩が隼人の隣に来る。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: さっきの、こっち見てなかったね。
+        en_US: "Back there — you weren't watching this side."
+        zh_TW: "[zh_TW] Back there — you weren't watching this side."
+        zh_CN: "[zh_CN] Back there — you weren't watching this side."
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: "具体的な観察のみ——心理を解釈せず、視線という『対象』に
+      ついてだけ言及する。"
+
+  - panel_id: ep004_028
+    scene: |
+      隼人、戸惑いながら答える。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: ……分からないです。たまたま、かもしれません。
+        en_US: "...I don't know. Might've just been luck."
+        zh_TW: "[zh_TW] ...I don't know. Might've just been luck."
+        zh_CN: "[zh_CN] ...I don't know. Might've just been luck."
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: "不確かさを残す——本人にも再現性の自覚がない。"
+
+  - panel_id: ep004_029
+    scene: |
+      彩、小さく笑う。断定も説教もしない、実務的な一言。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: たまたまは、二回目もある。
+        en_US: "Luck can happen twice."
+        zh_TW: "[zh_TW] Luck can happen twice."
+        zh_CN: "[zh_CN] Luck can happen twice."
+      intensity: light
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "曖昧な余地を残す激励——モラルの言語化を避けたまま、次への
+      含みだけを残す。"
+
+  - panel_id: ep004_030
+    scene: |
+      体育館の片付け。黒田はすでにいない——ラック脇には、彼がいた分
+      だけの空白がある。隼人は自分でボールをラックに戻す。ベンチでは、
+      部員Bがまだ点差を打ち込んでいる。
+    beat_type: long_drop
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      ja_JP: 黒田はもう、いなかった。ボールを、自分でラックに戻した。
+      en_US: Kuroda was already gone. He racked the ball himself.
+      zh_TW: '[zh_TW] Kuroda was already gone. He racked the ball himself.'
+      zh_CN: '[zh_CN] Kuroda was already gone. He racked the ball himself.'
+    dialogue_lines: []
+    intent: "小さな役割の移行で終わる——解決でも勝利でもない、地味な
+      一歩としての幕引き。"
+
+notes:
+  arc_position: |
+    12話中の第4話。ep_002の屈辱とep_003（伏線として想定、黒田の無言の
+    フリースロー・レッスン）を受け、この回で初めて「効いた」瞬間が来る
+    ——ただし一つのディフェンス・ポゼッションと一本の地味なフリースロー
+    だけ。得点板は解決しない、トロフィーもない。遠藤の三語だけの承認、
+    彩の視線への言及のみの気づき、隼人自身の「たまたまかもしれません」
+    という不確かさで幕を閉じる。ep_005以降の職場とバスケの衝突へ、
+    まだ何も解決していない状態のまま接続する。
+  pacing_vs_prior: |
+    30コマ、3ページ構成。ep_002（30コマ、5ページ）と同等の密度を目標
+    としつつ、スクリメージという小規模な試合形式に合わせてページ構成を
+    3つのシーン単位（試合前半／マッチアップ〜カーテンビート／
+    フリースロー〜幕引き）にまとめた。stillness_press ep_011テンプレート
+    と同等の深度・粒度を目標とした。
+  continuity_callbacks: |
+    - 指の関節タップの癖（パネル8）——ep_002パネル21で活性化した拳の
+      形が、この回では机の外、コート上でも同じ形で再現される。
+    - 黒田のラック整理（パネル1、13）——台詞なし、リズム不変。ep_002
+      からの直接的な継続。
+    - 一度のバウンド（パネル23）——ep_003で黒田が見せた所作（想定）の、
+      実戦での初めての再現。誰にも説明されず、誰にも気づかれない。
+    - 得点板とLINEグループチャット（パネル5、10、15）——二重の記録
+      装置として、ep_002の『名前のないゼッケン』に代わる、この回独自の
+      具体的オブジェクト。
+    - 七人という所帯の規模（パネル1、2）——ep_006の「七人」設定との
+      整合性。
+  vessel_handling: |
+    黒田はこの回も台詞ゼロ。ボールラックを片付ける所作のみで、ep_003
+    （想定）の伏線をこの回でも変わらぬリズムで維持する。ビジョン
+    「the coach of the unclenched（力を抜かせるコーチ）」は、この回で
+    初めて間接的に実を結ぶ——ただし黒田自身は何も語らず、何も見ていない
+    体で、ただラックを整え続けるだけである。コーチも、彩も、遠藤も、
+    隼人の一つのポゼッションを心理として言語化しない——腰のライン、
+    ボールのバウンド、視線という具体的なオブジェクトと行動だけで、
+    レッスンが効いたことを示している。
+  translation_handoff: |
+    text_by_locale辞書はja_JP（権威）とen_US（実訳）を実装。zh_TW/zh_CNは
+    heart_balance_shojo ep_001の規約およびこのシリーズのep_002の先例に
+    従い、対応するen_US行を角括弧プレースホルダーで保持し
+    （例: '[zh_TW] <en_US line>'）、別レーンの翻訳品質プログラムに
+    引き継ぐ。

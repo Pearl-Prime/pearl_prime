@@ -14,14 +14,14 @@ trail." Nothing below should be read or cited as a shippability claim.**
 ## Status of the two upstream lanes this plan depends on (re-verified live, 2026-07-23)
 
 - **Lane A (git/PR landing):** PR **#75** (`fix(ci): land orphan config files breaking main Core tests +
-  complete phoenix_v4.social`) is **OPEN, MERGEABLE, not yet merged** (head `5cd212f72a1159de83485b244c6abae23c689722`).
+  complete phoenix_v4.social`) is **MERGED**.
   It lands `phoenix_v4/social/__init__.py`, `phoenix_v4/social/media_selector.py`,
   `config/social/platform_specs.yaml`, `config/social/words_bank.yaml`, `config/social/visual_registry.yaml`,
   `config/manga/main_character_interaction_grammar.yaml`, a `SUBSYSTEM_AUTHORITY_MAP.tsv` row for
   `social_media`, and the `CANONICAL_ARTIFACTS_REGISTRY.tsv` fix for `evergreen_social_atom_bank`
-  (`sha_or_pr` still reads literal `pending-PR` on disk right now — confirmed by direct grep — because
-  that fix has not landed yet). **This plan is grounded on the local working tree, not yet on
-  `origin/main`; every "code exists" claim below is pending PR #75, not yet durable.**
+  and the related registry/authority rows are now durable on `origin/main`. PR **#123** subsequently
+  wired `check_social_post_variation.py` into production readiness; this correction assigns it the
+  unique display number **45** because title/subtitle language conformance already occupies gate 44.
 - **Lane B (research audit):** **COMPLETE.** `artifacts/qa/social_research_currency_audit_20260722/RESEARCH_CURRENCY_AUDIT.md`
   is on disk and its findings are folded into §3 (Research Cadence) and the gap list below.
 - **Third, adjacent, out-of-scope gap** (named for CI-health awareness, not owned by this plan):
@@ -40,17 +40,17 @@ trail." Nothing below should be read or cited as a shippability claim.**
 | Component | Layer today | Why not higher |
 |---|---|---|
 | **Evergreen atom bank** (`SOURCE_OF_TRUTH/social_media_atoms/evergreen_en_us_atoms.jsonl`, 1,642 rows; `platform_surface_atoms.jsonl`, 250 rows) | **EXECUTED-REAL** | Real authored rows exist and the deterministic assembler runs against them today. Not **PROVEN-AT-BAR**: no blind-judged sample of assembled posts exists; 98.7% of rows carry identical undifferentiated `SRC_*` boilerplate citations (only 1.3% are falsifiable quote+path citations, per Lane B) — populated-but-non-specific provenance, not a quality proof. |
-| **Brand/author vibe schema** (`SOCIAL-ATOM-BANK-VIBE-01`: `brand_id`/`author_id`/`vibe_ref` optional fields; `config/authoring/social_brand_author_voice_profiles.yaml`; `phoenix_v4/social/deterministic_social.py` wiring) | **CODE-WIRED** (mutation-tested locally, not yet merged) | Decision ratified (`docs/PEARL_ARCHITECT_STATE.md` SOCIAL-ATOM-BANK-VIBE-01, 2026-07-21), voice catalog file written, kwargs wired through `generate_copy_package`/`select_visual`/`render_static_asset`/`build_carousel_package`/`select_beat_media`, tests passing per Lane 02 handoff (`test_no_brand_args_copy_package_is_byte_identical_to_baseline`, `test_brand_voice_changes_cta_and_sign_off`). Not **EXECUTED-REAL** on the branch of record: this code exists only in the local working tree / PR #75, which is still open — nothing here is durable on `origin/main` yet. Zero atom rows currently carry a non-null `brand_id`/`author_id`/`vibe_ref` (additive fields, unused so far). |
-| **Anti-spam / variation gate** (`scripts/ci/check_social_post_variation.py`, gate 36 in `run_production_readiness_gates.py`) | **CODE-WIRED** (mutation-tested locally, not yet merged) | Real 3-gram Jaccard similarity gate with a documented PASS/FAIL mutation-test proof (2026-07-21, `--inject-duplicates 3` correctly fails 6 violations). Same caveat as above: drafted locally, landing depends on PR #75; not yet a durable required check on `main`. |
+| **Brand/author vibe schema** (`SOCIAL-ATOM-BANK-VIBE-01`: `brand_id`/`author_id`/`vibe_ref` optional fields; `config/authoring/social_brand_author_voice_profiles.yaml`; `phoenix_v4/social/deterministic_social.py` wiring) | **CODE-WIRED** (durable on `origin/main`) | Decision ratified (`docs/PEARL_ARCHITECT_STATE.md` SOCIAL-ATOM-BANK-VIBE-01, 2026-07-21), voice catalog file written, kwargs wired through `generate_copy_package`/`select_visual`/`render_static_asset`/`build_carousel_package`/`select_beat_media`, tests passing per Lane 02 handoff (`test_no_brand_args_copy_package_is_byte_identical_to_baseline`, `test_brand_voice_changes_cta_and_sign_off`). Zero atom rows currently carry a non-null `brand_id`/`author_id`/`vibe_ref` (additive fields, unused so far), so this is not yet EXECUTED-REAL for a brand-specific run. |
+| **Anti-spam / variation gate** (`scripts/ci/check_social_post_variation.py`, gate 45 in `run_production_readiness_gates.py`) | **CODE-WIRED** (durable on `origin/main` via PR #123; display-number correction in this change) | Real 3-gram Jaccard similarity gate with a documented PASS/FAIL mutation-test proof (2026-07-21, `--inject-duplicates 3` correctly fails 6 violations). PR #123 wired it as a required production-readiness check; gate 45 avoids the duplicate gate-44 label. |
 | **APAC localization set** (`apac_localization_atoms.jsonl`, 60 rows: ja-JP/zh-TW/ko-KR/zh-CN/zh-HK/en-SG) | **EXECUTED-REAL** (thin evidence trail) | Real localized rows exist, promoted to `SOURCE_OF_TRUTH/` (Lane 05, 2026-07-18), all 60/60 carry `review_status=reviewed_candidate` (correctly not `draft`, but also not `production_ready`). Not **PROVEN-AT-BAR**: per Lane B, the entire "native/human review" evidence trail is one operator chat-level assertion (`OPD-OC7-02`: *"Operator chat 342 native reviewer evidence approved"*), not a named native-reviewer per-row sign-off artifact. The spec's own "human/native review before production use" gate is not verifiably satisfied yet. |
 | **Visual b-roll bank** (Storyblocks: `artifacts/storyblocks_licensed/social_media_bank_storyblocks_20260720`) | **EXECUTED-REAL** (partial coverage only) | 16 real licensed assets exist across 8 topics (anxiety, burnout, boundaries, depression, grief, hope, loneliness, overthinking), wired as a consumer preference in `build_video_snippet_bank._licensed_storyblocks_stills`. The full 12-topic default list at max-per-topic-2 (~24 assets) is explicitly "not claimed" per the Lane 05 handoff — 4 topics have zero licensed assets today. |
 | **Visual-license operator gate** (`artifacts/qa/deterministic_social_visual_gate_20260718/`) | **CODE-WIRED / EXECUTED-REAL, hard-blocked on an operator decision, not a code gap** | The gate itself is real and ran: 3 source visuals license-verified against the Pexels license, 405 render rows evaluated. But the gate's own verdict is `SIGNAL=det-social-visual-license-operator-look=BLOCKED_PENDING_OPERATOR_APPROVAL`, `LIVE_PUBLISHING_AUTHORIZED=no`, **0 of 405 render rows marked production-ready**. This cannot become PROVEN-AT-BAR by more code — it requires a human to read `artifacts/operator_read_packets/deterministic_social_visual_gate_20260718/operator_look_packet.md` and decide (see Q-SOCIAL-VISUAL-LICENSE-APPROVAL-01 below). |
 | **Weekly research-refresh cadence** | **EXECUTED-REAL (single instance only — not a working recurring system)** | The mechanism ran once, manually, 2026-07-18 (digest + delta-atom promotion, both completed same-day). Per Lane B: zero cron/GitHub-Actions/scheduled-task artifact anywhere in the repo references it — "weekly" is not mechanically enforced. This regresses to **CONFIG-EXISTS** the moment a second week passes without a human re-dispatching it by hand — which, per the meta-rule in `CLAUDE.md` ("memory is recall, not enforcement — promote every hard-won lesson to a CI gate / can't-bypass default / CLAUDE.md rule"), is exactly the failure mode this taxonomy exists to catch before it becomes tribal memory. |
-| **Governance/SSOT registration** (`SUBSYSTEM_AUTHORITY_MAP.tsv`, `docs/PROGRAM_STATE.md`) | **ABSENT today, CODE-WIRED pending PR #75 for the authority-map row, CODE-WIRED-by-this-plan for the PROGRAM_STATE row** | Confirmed live: `social_media` has **no row** in `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` on this working tree (grep returns nothing), and `docs/PROGRAM_STATE.md` has **no** `social` section at all, despite the project having been active since 2026-07-21. PR #75 adds the authority-map row (not yet merged). This plan lane adds the PROGRAM_STATE.md row directly (see §4 below and the file itself). |
+| **Governance/SSOT registration** (`SUBSYSTEM_AUTHORITY_MAP.tsv`, `docs/PROGRAM_STATE.md`) | **CODE-WIRED** | `social_media` is registered in `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`, and `docs/PROGRAM_STATE.md` contains the Social Media Atom Bank section. PR #75 and the subsequent documentation lane made both durable on `origin/main`. |
 
 **Reading this taxonomy honestly:** nothing in the social-media subsystem has reached PROVEN-AT-BAR.
-Several pieces have reached EXECUTED-REAL on the *local working tree* but not yet on `origin/main`
-(gated behind PR #75). The single largest concrete blocker between "atoms exist" and "a real post could
+Several pieces have reached EXECUTED-REAL and the core code/config is durable on `origin/main`.
+The single largest concrete blocker between "atoms exist" and "a real post could
 ship with real visuals" is the visual-license operator gate (0/405 rows production-ready), which is an
 operator decision, not a code gap.
 
@@ -60,10 +60,9 @@ operator decision, not a code gap.
 
 Each item: current layer → target layer, owner agent, rough sizing.
 
-1. **Land PR #75 (governance/SSOT + orphan-file landing).**
-   Current: CODE-WIRED locally, OPEN PR. Target: EXECUTED-REAL on `origin/main`.
-   Owner: Pearl_GitHub (operator merges; agents do not).
-   Sizing: **one merge action** — already reviewed, `pr_governance_review.py --pr 75` = APPROVED WITH WARNINGS
+1. **COMPLETED — Land PR #75 (governance/SSOT + orphan-file landing).**
+   Current: merged and durable on `origin/main`.
+   Follow-on: PR #123 wired the anti-spam gate; this change corrects its duplicate display number.
    (workstream-overlap only, not a blocker). This is the fastest, lowest-risk unblock on this whole list and
    should be sequenced first — every other durability claim in this plan depends on it.
 
@@ -193,7 +192,8 @@ See that file for the live text; summarized here for convenience:
   SSOT — that omission is itself one of the gaps this plan closes.
 - **Details:** ~1,952 total atom rows across 3 files (1,642 EN evergreen + 250 platform/surface + 60 APAC
   localization); brand/author vibe schema (`SOCIAL-ATOM-BANK-VIBE-01`) and anti-spam variation gate
-  code-wired but pending PR #75 merge; visual-license operator gate blocked 0/405 production-ready pending
+  code-wired and durable on `origin/main`; anti-spam gate wired by PR #123 and uniquely numbered 45;
+  visual-license operator gate blocked 0/405 production-ready pending
   operator approval; Storyblocks b-roll bank 16 assets / 8 of 12 planned topics; weekly research-refresh
   cadence ran once (2026-07-18), no recurring mechanism; APAC review evidence is chat-level assertion only.
   No component has reached PROVEN-AT-BAR.

@@ -1,0 +1,402 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_012
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_012.arc_storyboard.yaml
+title: 種——第十二話
+title_en_gloss: The Seed — Episode 12 (Arc 1 Finale)
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: canary_record_reversal_watcher_becomes_watched
+    logline: The disciplinary review reveals the anomaly Ren has chased since ep_001 was a misrouted
+      internal audit test record all along — an ordinary explanation that solves nothing, because the
+      real, unresolved case has become what the reading habit cost him and everyone who tried to help.
+    ordinary_world_objects:
+    - file
+    - mirror
+    - badge
+    - door
+    genre_transmutation: A mundane compliance explanation becomes the mystery's anti-climactic true
+      answer, proving the real threat was never the data; a single voicemail and a single sheet taken off
+      the wall become the arc's only honest gesture of change, immediately followed by a new message that
+      reopens the case at a larger scale.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: 'Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst ''canary_record_reversal_watcher_becomes_watched''. This is arc 1''s
+    closing episode — it must NOT resolve or cure the compulsion (per program doctrine, gate PASS is
+    authored_candidate, never bestseller/cure). It ends on a genuine reversal that launches arc 2''s
+    spiral — the anomaly''s mundane explanation changes nothing about the cost already paid, and a new
+    message from ep_008''s coastal town reopens the case at a larger scale. en_US fields on select panels
+    are operator glosses only, extended minimally for gate-lexicon coverage (evidence/witness/before/reversal)
+    without altering ja_JP text.'
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）——アーク1の終わりに、治癒ではなく認識だけを得る
+  visual_anchor: ワイシャツの袖、机に置かれたバッジ
+- id: security_officer
+  name: セキュリティ担当者（名は明かされない）
+  age: 不詳
+  role: 制度的な反転を完結させる脇役
+  visual_anchor: 印刷されたレポート、抑えた声
+- id: saeki
+  name: 佐伯
+  age: 不詳
+  role: 器の存在（同僚）——アーク1の終わりに、自分自身も見られる側だったと明かす
+  visual_anchor: 姿勢を読む目、疲れを隠さない表情
+- id: shizuku
+  name: 雫
+  age: 不詳（蓮より若い）
+  role: 蓮の妹（アンカー）——今話はボイスメールの受け手としてのみ登場
+  visual_anchor: 声のない不在——蓮の一方的な発信のみ
+scene_palette:
+  primary: 懲戒審査室、白い蛍光灯
+  secondary: 廊下、午後の斜めの光
+  accent: 蓮のアパート、壁のメモ、玄関の鏡（三つのモチーフが最終話で一堂に会する）
+pages:
+- page_id: ep_012_p01
+  panels:
+  - panel_id: ep012_001
+    scene: 懲戒審査室。第十一話で予告された正式な審査が始まる。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 締め切りの到来——第十一話からの直接の帰結
+  - panel_id: ep012_002
+    scene: 蓮の腰にバッジがない——第十一話の所作が、今は他者の目にも見える形で残っている。
+    beat_type: micro
+    intent: モチーフの継続——距離の所作が可視化される
+  - panel_id: ep012_003
+    scene: セキュリティ担当者、意外な報告から切り出す。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: security_officer
+      text_by_locale:
+        ja_JP: あの異常データポイントについて、調査が終わりました。内部監査用の試験データが、誤って本番環境に紛れ込んだものでした。
+        en_US: 'The anomaly has been explained. It was an internal audit test record, misrouted by mistake — the evidence, closed, before he was ready for it.'
+        zh_TW: '[zh_TW] The anomaly has been explained.'
+        zh_CN: '[zh_CN] The anomaly has been explained.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 反転——謎の平凡な解決
+  - panel_id: ep012_004
+    scene: 蓮、言葉を失う。すべての夜、すべての越境が、事務的な誤配信一つに帰結する。
+    beat_type: micro
+    intent: 崩壊する意味——執着の対象の消失
+  - panel_id: ep012_005
+    scene: レポートの文面がクローズアップされる——「本件は事務的エラーとして処理済み」。感情のない、平坦な行政用語。
+    beat_type: micro
+    intent: 意図的な反ドラマ性——謎の解決を平凡にする
+  - panel_id: ep012_006
+    scene: セキュリティ担当者、続けて。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: security_officer
+      text_by_locale:
+        ja_JP: ですが、あなたの行動は別問題です。データは説明がついた。あなたの反応は、まだついていません。
+        en_US: 'But your behavior is a separate matter. The data explains itself. You do not — a witness statement that will not be dismissed with the file.'
+        zh_TW: '[zh_TW] But your behavior is a separate matter.'
+        zh_CN: '[zh_CN] But your behavior is a separate matter.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 核心——謎の解決は蓮自身の問題を解決しない
+  - panel_id: ep012_007
+    scene: 蓮、これまでのすべての夜、すべての代償を、無言のまま数え直しているような表情。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep012_008
+    scene: 佐伯が同席している。彼女の表情には、これまでで最も重いものがある。
+    beat_type: micro
+    intent: 予告——佐伯自身の代償への伏線
+  - panel_id: ep012_009
+    scene: セキュリティ担当者、資料の最後のページをめくりながら。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: security_officer
+      text_by_locale:
+        ja_JP: それと、複数回の未報告について。佐伯さんの対応も、別途、審査対象になります。
+        en_US: 'And regarding the repeated unreported incidents — Saeki''s own conduct is now under review too, before this closes.'
+        zh_TW: '[zh_TW] Saeki''s own conduct is now under review too.'
+        zh_CN: '[zh_CN] Saeki''s own conduct is now under review too.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: ページ1の転——器自身が代償を払う立場になる
+- page_id: ep_012_p02
+  panels:
+  - panel_id: ep012_010
+    scene: 審査室を出た廊下。蓮と佐伯、二人きり。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 私的な場への移行
+  - panel_id: ep012_011
+    scene: 蓮、静かに、初めて自分のためではなく相手のために動揺する。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 佐伯さんまで、巻き込んでしまった。
+        en_US: 'I''ve dragged you into this too — a cost he never accounted for, and now needs to answer for.'
+        zh_TW: '[zh_TW] I''ve dragged you into this too.'
+        zh_CN: '[zh_CN] I''ve dragged you into this too.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep012_012
+    scene: 佐伯、被害者ぶらず、まっすぐに。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 選んだのは、私。あなたを見張ってるうちに、自分が見えなくなってた。
+        en_US: 'I chose this myself. Watching you so closely, I stopped noticing what it was doing to me — the same reversal, now hers too.'
+        zh_TW: '[zh_TW] I chose this myself.'
+        zh_CN: '[zh_CN] I chose this myself.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: strategy_02のテーマの完結——見る側自身が見失う
+  - panel_id: ep012_013
+    scene: 蓮、初めて、飾らない言葉で謝る。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: すまなかった。
+        en_US: 'I''m sorry — no cover story this time, just the two words themselves.'
+        zh_TW: '[zh_TW] I''m sorry.'
+        zh_CN: '[zh_CN] I''m sorry.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep012_014
+    scene: 佐伯、許しでも拒絶でもなく、ただ疲れたように頷く。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: うん。分かってる。
+        en_US: 'Yeah. I know — not forgiveness, not closure, only acknowledgment.'
+        zh_TW: '[zh_TW] Yeah. I know.'
+        zh_CN: '[zh_CN] Yeah. I know.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep012_015
+    scene: 蓮、これからどうなるのか、答えのない問いを口にする。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: これから、どうなるんだろう。
+        en_US: 'What happens now — a question neither of them can answer yet.'
+        zh_TW: '[zh_TW] What happens now?'
+        zh_CN: '[zh_CN] What happens now?'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep012_016
+    scene: 佐伯、正直に。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 分からない。今は、まだ。
+        en_US: 'I don''t know. Not yet — no false reassurance, only the truth.'
+        zh_TW: '[zh_TW] I don''t know. Not yet.'
+        zh_CN: '[zh_CN] I don''t know. Not yet.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: アンカー・器両軸の誠実な未解決
+  - panel_id: ep012_017
+    scene: 二人、それぞれ別の方向へ歩き出す。振り返らない。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep012_018
+    scene: ワイド：夕方のオフィスビルを出る蓮の背中。
+    beat_type: standard
+    intent: ページ2の転——私的な場から、最後の帰路へ
+- page_id: ep_012_p03
+  panels:
+  - panel_id: ep012_019
+    scene: 夜。蓮のアパート。壁のメモは、第十話の断絶の日からそのままの状態で残っている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 三つのモチーフの再会——壁・鏡・ドア
+  - panel_id: ep012_020
+    scene: 蓮、長い間、壁の前に立ち尽くす。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep012_021
+    scene: 蓮は携帯を取り出し、今度こそ雫に発信する。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 今度は、かける。
+        en_US: 'This time, he calls — before he can talk himself out of it again.'
+        zh_TW: '[zh_TW] This time, he calls.'
+        zh_CN: '[zh_CN] This time, he calls.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep012_022
+    scene: 呼び出し音の後、留守番電話の案内が流れる。雫はまだ出ない。
+    beat_type: micro
+    intent: 未解決の継続——即座の和解の拒否
+  - panel_id: ep012_023
+    scene: 蓮、メッセージを残す——飾らない、短い言葉で。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 雫。どう止めればいいか、まだ分からない。でも、やめたいと思ってる。それだけ、伝えたかった。
+        en_US: 'Shizuku. I don''t know how to stop yet. But I want to try — that''s all I needed you to hear, before you call back or don''t.'
+        zh_TW: '[zh_TW] Shizuku. I don''t know how to stop yet.'
+        zh_CN: '[zh_CN] Shizuku. I don''t know how to stop yet.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    intent: 唯一の正直な所作——治癒ではなく、一つの試み
+  - panel_id: ep012_024
+    scene: 携帯を置き、蓮は再び壁と向き合う。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep012_025
+    scene: 蓮は壁から一枚だけメモを剥がし、脇へ置く——壁全体ではなく、一枚だけ。第一話の「一度、気づけばいい」という所作の反復。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 全部は無理だ。今夜は、一枚だけ。
+      en_US: 'Not all of it. Not tonight. One sheet — the same small gesture ep_001 promised, nothing more claimed.'
+      zh_TW: '[zh_TW] Not all of it. One sheet.'
+      zh_CN: '[zh_CN] Not all of it. One sheet.'
+    intent: アーク1の中心的所作の反復——治癒ではなく一つの選択
+  - panel_id: ep012_026
+    scene: ワイド：壁の前に立つ蓮と、玄関の鏡に映るその姿。窓の外から、遠い駅のアナウンスがかすかに聞こえる。
+    beat_type: standard
+    intent: 三モチーフの統合——壁・鏡・遠い駅の残響
+  - panel_id: ep012_027
+    scene: 携帯が一度、短く震える。雫からではない——見知らぬ番号からの短いメッセージ。「あの人が、あなたに会いたいと言っています」。蓮の表情が、恐れとも期待ともつかない色に変わる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: まだ、終わっていなかった。
+        en_US: 'It wasn''t finished after all — a genuine discovery, not a resolution, the reversal arc 2 will inherit.'
+        zh_TW: '[zh_TW] It wasn''t finished after all.'
+        zh_CN: '[zh_CN] It wasn''t finished after all.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: アーク1の終わり——解決ではなく、正真正銘の転回
+  - panel_id: ep012_028
+    scene: 静かな色面の上のタイポグラフィックなエンドカード——エピソードとアーク、両方の区切りを示す。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第十二話・了——種　　第一部・了
+      en_US: 'End of Episode 12 — The Seed // End of Part One'
+      zh_TW: '[zh_TW] End of Episode 12 — The Seed // End of Part One'
+      zh_CN: '[zh_CN] End of Episode 12 — The Seed // End of Part One'
+notes:
+  pacing: 二十八コマ、三ページ構成——アーク1の最終話として意図的に拡張。謎の平凡な解決（反ドラマ性）、佐伯自身の代償の明確化、そして真の転回（新たなメッセージ）という三段構成。
+  bubble_style_register: 蓮の台詞：round_normal、多くはwhisper/soft、今話で初めて飾らない謝罪と留守電の独白を含む。佐伯の台詞：normal/soft、疲れを隠さない誠実さ。セキュリティ担当者：normal、事務的。
+  sfx_policy: 最小限。囁きレジスタのみ。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の最終話（アーク1「obsession seed」の締め）。謎（異常データ）は平凡に解決するが、蓮自身の代償・佐伯の代償・雫との断絶は一切解決しない。壁から一枚のメモを剥がすという第一話の反復所作で終わりつつ、見知らぬ番号からの新しいメッセージが、アーク2「spiral」（第十三話〜）への直接的な転回として機能する。ここでの蓮は「治った」とは一度も描写されない——認識と、一つの小さな試みだけ。
+craft_notes: 'VESSEL: 身体を読む探偵（佐伯）——アーク1の終わりに、自分自身もまた見張られる側だったと認める、strategy_02の完結。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md（第7節：48巻構成における各アークの終わり方——「表面的には正しく、深層では間違っている解決」）
+
+  STRATEGY: strategy_01の結末（一枚だけ手つかずのまま残される、治癒ではない）とstrategy_02（見る側と見られる側の反転）を統合し、アーク2への直接的な橋渡しとした。
+
+  ARC: 謎の平凡な解決（反ドラマ性）→器自身の代償の明確化→唯一の正直な所作（留守電・一枚のメモ）→真の転回（新しいメッセージ、アーク2の種）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar). 蓮は治癒していない。これは結末ではなく、種である。'

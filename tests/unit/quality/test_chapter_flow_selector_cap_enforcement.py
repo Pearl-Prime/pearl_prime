@@ -224,10 +224,10 @@ def test_generic_prose_without_thesis_signal_still_fails() -> None:
 # ---------------------------------------------------------------------------
 
 def test_thesis_cues_count_matches_expansion() -> None:
-    """Sanity: 4 legacy + 18 expansion = 22 cues."""
-    assert len(_THESIS_CUES) == 22, (
-        f"Expected 22 thesis cues (4 legacy + 18 expansion); got {len(_THESIS_CUES)}. "
-        "Update count or expansion list."
+    """Sanity: 4 legacy + 18 expansion + 2 mechanism-contrast (#59) = 24 cues."""
+    assert len(_THESIS_CUES) == 24, (
+        f"Expected 24 thesis cues (4 legacy + 18 expansion + 2 mechanism-contrast); "
+        f"got {len(_THESIS_CUES)}. Update count or expansion list."
     )
 
 

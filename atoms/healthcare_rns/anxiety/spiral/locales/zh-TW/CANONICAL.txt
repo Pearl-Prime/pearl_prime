@@ -1,3 +1,5 @@
+
+
 ## RECOGNITION v01
 ---
 path: story_atoms/healthcare_rns/anchored/anxiety/spiral/recognition/micro/v01.txt
@@ -7,7 +9,7 @@ COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
-諾拉給藥。劑量正確，病人正確，時間正確。她走回給藥車，連鎖反應隨即啟動：如果我誤讀了醫囑怎麼辦？如果劑量錯了怎麼辦？如果病人產生反應怎麼辦？如果反應是過敏性休克怎麼辦？如果急救團隊回應不夠快怎麼辦？從一次正確的給藥到病人死亡，中間只隔了五個環節。她重新檢查給藥記錄（MAR）。正確。她重新確認病人狀況。穩定。這條連鎖反應靠著慣性又運轉了二十分鐘，對眼前的證據免疫。
+諾拉給了一劑藥。劑量正確、病人正確、時間正確。她走回藥車時，那條鏈開始了：萬一我看錯醫囑呢，萬一劑量錯了呢，萬一病人有反應呢，萬一反應是過敏性休克呢，萬一急救小組來不及反應呢。從一次正確的給藥，到一位病人的死亡，中間只隔了五個環節。她重新核對給藥紀錄表，正確。她重新確認病人狀況，穩定。這條鏈還是靠著殘存的燃料又運轉了二十分鐘，對證據完全免疫。
 ---
 
 ## RECOGNITION v02
@@ -19,7 +21,7 @@ COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
-湯瑪士將病人交接給夜班同事。交接過程詳盡無比——生命徵象、點滴藥物、注意事項。他開車回家。走到半路，連鎖反應開始了：我有提到血鉀的變化趨勢嗎？我有註記按需給藥（PRN）的授權嗎？如果夜班護理師漏掉了怎麼辦？如果病人情況惡化怎麼辦？如果惡化導致死亡，而死亡引發訴訟，訴訟又追溯到湯瑪士的交接紀錄怎麼辦？晚上八點，他在高速公路上，思緒從血鉀趨勢一路螺旋下墜至職業生涯的毀滅。他打電話回單位再次確認。所有資訊都在交接內容裡。但那條連鎖反應毫不在意。
+托馬斯把病人交接給夜班。交接十分周全——生命徵象、點滴、需要留意的事項。他開車回家，開到一半，那條鏈開始了：我有沒有提到鉀離子的趨勢，我有沒有註記PRN的授權，萬一夜班護理師漏看了呢，萬一病人惡化了呢，萬一惡化變成死亡，死亡變成訴訟，訴訟又追溯回托馬斯的交接呢。晚上八點，他在高速公路上，從一個鉀離子趨勢，一路螺旋到職涯毀滅。他打電話回病房再確認一次。交接內容全都在。這條鏈毫不在意。
 ---
 
 ## RECOGNITION v03
@@ -31,7 +33,7 @@ COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
-艾莎的病人檢驗報告回來，數值稍微偏高。只是稍微。仍在治療預期的範圍內。但她的大腦接手了：偏高意味著趨勢惡化，接著是器官衰竭，然後是死亡，最後是與家長的那場談話。與家長的談話永遠是最後一個環節。這條連鎖反應不會終止於臨床結果，它終止於必須直視家長雙眼的那一刻。她調整了治療計畫。這個調整是恰當的。但在那恰當的調整之下，連鎖反應仍在潛行，一邊敘述著災難，一邊讓她的雙手執行著勝任的工作。
+艾夏的病人檢驗數值稍微偏高。只是稍微，仍在治療的預期範圍內。她的腦袋卻接手了：偏高，變成持續上升，變成器官衰竭，變成死亡，變成要跟父母談話。跟父母談話，永遠是最後一個環節。這條鏈不會停在臨床結果，它會一路延伸到必須直視父母的眼睛。她調整了治療計畫，這個調整是合宜的。而那條鏈，就在這個合宜的調整之下運轉著，一邊訴說著災難，一邊讓她的雙手做著稱職的工作。
 ---
 
 ## RECOGNITION v04
@@ -43,4 +45,297 @@ COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
-克萊爾
+克萊兒在胎心監視器上聽到一次減速。短暫，十五秒內就恢復了。對這個產程階段來說很正常。但那條鏈開始了：減速，變成臍帶壓迫，變成緊急剖腹產，變成新生兒併發症，變成腦部損傷，變成整個家庭的崩潰。她盯著監視器，圖形回到完美的狀態。而那條鏈，卻在完美的圖形上持續運轉，把災難投射在一個正常的產程之上。她對母親微笑，這個微笑專業而溫暖，卻與底下運轉的那條鏈完全脫節。
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/recognition/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+德瑞克在記錄時打錯了一個字，護理紀錄上輸入了錯誤的病房號碼。他立刻發現，也立刻更正了。但那條鏈瞬間引爆：記錄錯誤，變成一連串錯誤的模式，變成用藥錯誤，變成病人受傷，變成調查，變成執照被吊銷。他坐在電腦前，畫面上是已經更正好的病歷，腦袋裡卻已經演完了他職涯的終結。更正只花了四秒鐘，這條鏈卻運轉了剩下整個班次。他把之後每一筆病歷紀錄都重新核對三次。這種三重核對，就是那條鏈化為行為的樣子——螺旋，變成了他的工作流程。
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+諾拉意識到，這種螺旋思緒在護理工作裡有一個特殊之處：那些災難，是真實可能發生的。從給藥到過敏性休克到死亡的鏈條，是一條真實存在的臨床路徑。這個螺旋的力量，正來自於它的醫學準確性。每一個環節，都是真實可能發生的事。「可能」，就是這個機制的核心。在大多數情境裡，螺旋思緒會誇大事實；但在護理工作裡，螺旋思緒是拿真實的風險當燃料。「可能發生」和「正在發生」之間的界線因此崩塌，因為這名護理師曾經親眼見過「可能」變成「正在」——一次，或許兩次。而螺旋，就把那些經驗當作永久的證據來使用。
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+托馬斯發現，交接班正是這個螺旋的觸發區。值班時，他握有掌控權——他能觀察、能介入、能回應。交接之後，掌控權轉移出去了。而失去掌控，正是螺旋思緒棲息的地方。每一次交接，都打開了一扇不確定性的窗——病人現在在別人手裡，托馬斯無法驗證照護的品質。螺旋就用最壞的情況，填滿了這份不確定性。那些回撥電話，其實是螺旋伸手越過交接，想奪回早已轉移出去的掌控權。這些電話帶來片刻的寬慰，而那份寬慰，正是螺旋暫時退去的樣子。
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+艾夏發現，這個螺旋永遠會走到父母那裡。不是走到臨床結果，而是走到人性層面的後果。從檢驗數值偏高到器官衰竭，這條鏈是醫學上的；從器官衰竭到直視父母的眼睛，這條鏈是私人的。而正是這條私人的鏈，供給了螺旋的能量。臨床結果是可以被處理的，但一次失去之後，直視父母的眼睛，卻無法被處理。螺旋思緒害怕的不是醫學，它害怕的是那場對話。那場對話，是艾夏唯一無法訂出流程、無法治療、也無法修復的事。
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+克萊兒描繪出這個螺旋與經驗之間的關係。新手護理師對什麼都會產生螺旋思緒——她們還不知道什麼是正常。有經驗的護理師，則對特定的事情產生螺旋——那些她們曾親眼見過出錯的模式。克萊兒有十年資歷，她的螺旋很精準：那種看起來像2019年那次的減速。那一次，結局很不好。這個螺旋不會使用隨機的最壞情況，它會把她最創傷的經歷當作範本，套用在每一個相似的模式上。這種精準，讓它更難被打發。這個螺旋不是在想像，它是在記憶，而那份記憶，是真實的。
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+德瑞克算出了這個螺旋對他病歷書寫的影響。正常寫一筆病歷：三分鐘。螺旋發作後寫一筆病歷：九分鐘，還要三重核對。每筆多花六分鐘，一班十二筆：七十二分鐘，全部耗在螺旋驅動的重複工作上。這些額外的時間並不會提升準確度——他第一次寫的紀錄，幾乎永遠都是對的。額外的時間，只是在安撫這個螺旋。這個螺旋創造了一種每班要付出一小時的稅，卻沒有帶來任何臨床上的效益。這一小時，用來安撫神經系統，而不是用來照顧病人。而這份稅，在排班模式裡，是完全看不見的。
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+---
+諾拉在第二個環節就抓住了這個螺旋。給藥，萬一劑量錯了——她停在這裡。第三個環節正要載入：病人有反應了。她停頓下來，核對給藥紀錄表，劑量正確。螺旋想要她進入第三個環節，她卻留在第二個環節，留在已經驗證過的資料上。第二個環節，經過驗證，是一個事實；第三個環節，只是一個投射。她抓住那個事實，那個投射還在不斷試圖載入。她重讀了一次給藥紀錄表，正確。事實和投射，爭奪著她的注意力。事實是安靜的，投射是喧鬧的。她選擇留在安靜裡，帶著手中的事實，走向下一位病人，讓那個投射拖在身後。
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 3
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+托馬斯訂了一條規則：每次交接，只打一通回撥電話。不是零通——螺旋沒辦法忍受零通。是一通。他交接完，開車回家。螺旋開始了：鉀離子的趨勢。他打了他的那一通電話，趨勢已經記錄在案。他掛了電話。螺旋說：可是那個PRN——一通電話。PRN也在交接裡，他知道，因為他的交接一向周全。螺旋想要第二通電話，他卻開車經過了那個他平常會停下來打電話的出口。開車經過，就是那條界線。螺旋依然在運轉，他依然在開車。螺旋與開車，共存在同一條高速公路上。
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+CALLBACK_ID: parent_conversation
+CALLBACK_PHASE: setup
+---
+艾夏說出了最後一個環節。「我害怕的是跟父母談話。」她在休息時間對另一位腫瘤科護理師這麼說。對方緩緩點頭。這個命名，並沒有移除那個環節，但它把醫學上的螺旋，和情感上的終點分開來了。檢驗數值和治療是臨床的；害怕面對父母的眼神，是人性的。兩者都是真實的，但它們不必是同一條鏈。她可以用臨床工具處理臨床路徑，而人性的恐懼，需要不同的工具。這個分開，就是邁向不同工具的第一步。
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: experimentation
+---
+克萊兒看到了那次減速，螺旋載入了2019年的範本。她讓它載入，不與它對抗，而是把當下的圖形和那個範本並排看著。當下的圖形：短暫、很快恢復、沒有令人擔憂的型態。那個範本：延長、不恢復、災難性的。兩者並不相符，螺旋卻堅持它們相符。克萊兒把眼前真實的圖形拿來對照那個範本，看見了：不同的持續時間、不同的恢復狀況、不同的情境。範本，是一段記憶；圖形，是此刻。螺旋把過去疊加在現在之上，克萊兒把兩者分開來看。圖形，是此刻；記憶，屬於2019年。兩者都是真實的，但只有一個正在發生。
+---
+
+## TURNING_POINT v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v05.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+---
+德瑞克記錄了那筆病歷，一次。螺旋說：再檢查一次。他讀了那筆紀錄：病房正確、病人正確、資料正確。螺旋說：萬一你自以為對，其實是錯的呢。他存了檔。螺旋跑著它的鏈條：錯誤，變成模式，變成執照被吊銷。他讓那條鏈在背景裡運轉，自己則轉向下一筆紀錄。那條鏈在背景運轉，下一筆紀錄，得到他前景的專注。那條鏈與病歷書寫，共存著。那條鏈沒有停止，病歷書寫也沒有停止。他和往常一樣完成了同樣數量的紀錄，只是每筆紀錄只核對了一次，而不是三次。結果完全一樣。
+---
+
+## EMBODIMENT v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: self_claim
+---
+諾拉給了藥。螺旋開始了：萬一劑量錯了。她核對給藥紀錄表，正確。她輕聲說：「劑量正確，病人正確。」這句話是說給螺旋聽的，不是說給病歷聽的。螺旋聽見了，卻依然繼續：萬一是過敏性休克呢。她沒有跟它爭辯，逕自走向下一位病人。螺旋跟著她走過走廊，隨著每一步逐漸失去細節。走到下一位病人的房門時，螺旋已經變成一陣低語；走到第三位病人時，它已經消失了。不被餵養時，螺旋的壽命會縮短。諾拉停止餵養它，螺旋依然會開始，但結束得更快了。
+---
+
+## EMBODIMENT v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: self_claim
+---
+托馬斯開車回家，沒有打回撥電話。螺旋運轉著：鉀離子、PRN、夜班護理師。他讓它運轉，打開了收音機。螺旋和音樂在車裡共存。伴著音樂，螺旋漸漸失去了它的連貫性——要一邊跟著一首他倒背如流的歌唱，一邊維持住六個環節的災難鏈，變得困難許多。他唱歌不是為了打敗螺旋，他唱歌，是因為這是回家的路，而回家的路，是屬於他自己的時間。螺旋，是個乘客；音樂，是駕駛的選擇。他到家時，螺旋已經淡去，那首歌卻還在他腦海裡盤旋。他更喜歡那首歌。
+---
+
+## EMBODIMENT v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: self_claim
+CALLBACK_ID: parent_conversation
+CALLBACK_PHASE: return
+---
+艾夏的病人檢驗數值偏高，她調整了治療計畫。臨床上的螺旋開始了：持續上升、器官衰竭。她用臨床工具處理這條臨床鏈——調整、監測、記錄。情感上的螺旋也開始了：父母的眼神。她把兩者分開來看，父母的眼神是未來的恐懼，不是眼前的現實；眼前的現實，是檢驗數值和治療計畫。她處理眼前的現實，讓那份恐懼在背景裡運轉。這個分開維持住了。恐懼是真實的，但不是此刻的；檢驗數值是真實的，也是此刻的。她治療此刻存在的東西。如果那份恐懼真的到來，她會在它到來的時候去面對它。今天，它沒有到來。
+---
+
+## EMBODIMENT v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: self_claim
+---
+克萊兒盯著監視器的圖形，減速發生了，2019年的範本載入了。她同時握著兩者：此刻的圖形與過去的範本，兩者不同。圖形恢復了，她記下這個恢復；範本沒有恢復，她記下這個差異。這個記錄，就是練習——把此刻和過去並排放著，看看哪一個正在發生。此刻，正在發生；過去，只是被記得。她深呼吸。那位母親問一切還好嗎，克萊兒說：「寶寶狀況很好。」這句話是真的。範本依然載入著，但這句話，比範本更真實。她選擇相信這句話。
+---
+
+## EMBODIMENT v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 4
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: self_claim
+---
+德瑞克寫病歷，只核對一次。螺旋抗議著，他存了檔，繼續往下走。螺旋這次抗議的音量，和上週一樣大，但他的反應變快了。從螺旋要求三重核對，到他決定只核對一次，中間的間隔已經縮短到大約四秒——四秒鐘，握住螺旋的急迫感，卻選擇依循流程。流程，是根據證據的；螺旋，是根據恐懼的。兩者聽起來都很有權威。他正在學習分辨兩者的方法，不是看音量，而是看來源。根據證據的：核對一次；根據恐懼的：核對三次。他選擇了證據，恐懼依然留著，但病歷，已經完成了。
+---
+
+## RECOGNITION v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety_spiral/recognition/band_fill/v06.txt
+BAND: 1
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+一個平靜的片刻。強度降低了，空間打開了。
+---
+
+## RECOGNITION v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety_spiral/recognition/band_fill/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+危機。突破。強度達到頂點的那一刻。
+---
+
+## TURNING_POINT v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+馬可仕查看病人看板，數著還沒完成的評估。思緒的螺旋把一個個擔憂串連起來，形成一個不斷加速的迴圈。馬可仕的肩膀聳起。這個模式此刻要求被關注——灼熱、堅持、不肯等待。馬可仕看著它提出要求。這一次，他沒有順從，而是去追蹤這個要求究竟從哪裡開始。它從胸口升起，蔓延到思緒，思緒編織出一個故事。故事說：現在不行動，就會失去一切。馬可仕檢視這個故事，發現它沒有任何證據。肩膀裡的，是真實的感覺；故事裡的，是捏造出來的急迫感。馬可仕把感覺留住，卻不再跟著故事走。感覺留下來了，故事卻失去了聽眾。框架就此轉變：這個模式很大聲，但大聲不等於真實。
+---
+
+## TURNING_POINT v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/turning_point/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+艾琳娜站在病房門外，手放在門把上，這是今天第三次推不開這扇門。思緒的螺旋衝到最高音量。艾琳娜的下顎繃緊，掌心冒汗。一切都收縮成這一刻——崩潰，或是突破，沒有中間地帶。艾琳娜站在浪頭的正中央。那個模式說：這就是你。艾琳娜聽見了。這是第一次，她把這句話聽成一個句子，而不是一個事實。句子可能是錯的。艾琳娜的身體因為這股強度而顫抖，顫抖是真的，那句話卻只是一種詮釋。艾琳娜把顫抖和那句話分開來看。身體仍在發抖，但那個身分認同的宣稱瓦解了。當一個環節被檢視、而不是被串連下去時，這個螺旋就失去了速度。框架，就此裂開一道縫。
+---
+
+## EMBODIMENT v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: self_claim
+---
+拉維走進病房，查看看板，開始這一班——焦慮還在，但不再主導一切。思緒的螺旋啟動了。拉維的掌心冒汗，熱度升起。他認出了這股熱度，沒有轉身逃開。拉維注意到螺旋正要開始，卻只停留在第一個念頭，不再往下串連。舊的模式仍然啟動了，但拉維依然依照新的理解去行動。他的呼吸變淺，雙手卻沒有停下。身分不是那個模式，身分是拉維在模式運作的同時所做出的行動。拉維在模式於背景中尖叫的同時，做著眼前該做的下一件正確的事。尖叫漸漸淡成嗡鳴，嗡鳴又漸漸淡成一個事實：這個模式存在，拉維也存在。它們不是同一件事。
+---
+
+## EMBODIMENT v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/embodiment/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 4
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: self_claim
+---
+葛蕾絲在思緒的螺旋於背景中尖叫的同時，處理著一場心跳停止的急救。雙手動作、藥物推入、心律恢復。強度來到頂點。葛蕾絲的胸口發緊，下顎繃緊。思緒的螺旋以最高音量咆哮。每一條神經都在說：放棄吧。葛蕾絲沒有放棄。她站在風暴的正中央，從新的身分出發行動——不是對抗這個模式，而是穿越它。模式是噪音，行動才是訊號。葛蕾絲的身體同時承載著這兩者。危機並不能定義葛蕾絲，她的回應才定義了她。葛蕾絲帶著這一刻沉甸甸的全部重量，繼續往前走。重量是真的，崩潰卻不是。葛蕾絲穿越了浪頭的頂點，走到了另一端，依然站立著，依然在選擇。
+---
+
+## MECHANISM_PROOF v06
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v06.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+但丁描繪出這一班焦慮的迴路：抵達、掃視看板、預想最棘手的病人、身體開始戒備。但丁的呼吸變淺，熱度升起。思緒的螺旋把一個個擔憂串連起來，形成一個不斷加速的迴圈。這一次，但丁追蹤了整個順序：觸發、身體反應、思緒連鎖、行為拉力。觸發來自外部，身體反應是自動的，思緒連鎖是每個念頭不停歇地孕育出更糟的念頭，而行為拉力則是真正付出代價的那一環。但丁現在看得很清楚，代價是什麼。他的肩膀聳起，模式跑完了它的迴路。這個模式之所以持續，是因為鏈條中的每個念頭都在為下一個念頭背書，而這種背書感覺起來像是進展，而不是重複。這種持續並不神秘，它是機械性的。看見這台機器，不會讓機器停下來；但看見這台機器，會讓人明白——這台機器不是但丁本人。
+---
+
+## MECHANISM_PROOF v07
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/spiral/mechanism_proof/micro/v07.txt
+BAND: 5
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
+---
+惠子接到了緊急應變的呼叫，對象正是她最擔心的那位病人。焦慮的模式衝到了最高點，強度來到頂點。惠子的下顎繃緊，掌心冒汗。思緒的螺旋全力運轉，惠子看著它運轉。即使在最高音量下，這個機制依然遵循同樣的順序：最初的擔憂、推演、災難性的終點、從終點衍生出新的擔憂、進一步推演。第五級的順序和第二級一模一樣，改變的只有音量大小。這個模式在強度升高時並不會變得更聰明，它只是變得更大聲。惠子的身體吸收了這股音量，她的心智描繪出這個迴路的圖形。這個迴路沒有內建的出口——它只會不斷循環。它之所以持續，是因為它以自己的輸出為食。惠子看見了這個餵養的過程。看見它，並不會讓迴路停下來；但看見它，會讓人明白這個迴路是有結構的。而結構，是可以被打斷的。
+---

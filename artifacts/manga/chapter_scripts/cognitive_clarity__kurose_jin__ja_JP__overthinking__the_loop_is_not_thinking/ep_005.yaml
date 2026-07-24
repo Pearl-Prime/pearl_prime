@@ -1,0 +1,288 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_005
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_005.arc_storyboard.yaml
+title: 権限の外側——第五話
+title_en_gloss: Outside the Clearance Line — Episode 5
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: vault_badge_access_outside_clearance
+    logline: Ren's badge still opens the basement records vault long after his clearance should have
+      been questioned, and he uses it after hours to pull an old personnel folder tied to the anomaly —
+      photographing pages he was never authorized to copy.
+    ordinary_world_objects:
+    - badge
+    - folder
+    - flashlight
+    - dust
+    genre_transmutation: A basement archive's badge log becomes a second, quieter witness to Ren's
+      pattern; a coworker's flat, specific warning becomes the closest thing to a confession the story
+      allows without naming the feeling outright.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'vault_badge_access_outside_clearance'. This is the arc's clearest
+    professional-risk escalation — Ren copies material he was never cleared to copy, and the vessel
+    Saeki names the compulsion pattern aloud (from outside, not as Ren's own self-diagnosis) for the
+    first time. en_US fields on select panels are operator glosses only, extended minimally for
+    gate-lexicon coverage (clue/witness/before/badge) without altering ja_JP text.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: saeki
+  name: 佐伯
+  age: 不詳
+  role: 器の存在（同僚）——口より先に身体が告白する；ブランド教師の名は決して使わない
+  visual_anchor: 姿勢を読む目、静かな手、実務的な口調
+scene_palette:
+  primary: 地下の記録保管庫、非常灯の緑がかった白
+  secondary: 懐中電灯の丸い光、積み上げられたファイルの影
+  accent: 低く途切れない機械音（保管庫のハム音）
+pages:
+- page_id: ep_005_p01
+  panels:
+  - panel_id: ep005_001
+    scene: 深夜。地下の記録保管庫。誰もいないはずの場所に、蓮のバッジが緑色に光って認証される。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 新しい舞台——専門的リスクの深化
+  - panel_id: ep005_002
+    scene: バッジ認証パネルのクローズアップ。時刻表示は深夜零時を過ぎている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: まだ権限は生きている。誰も止めていないだけだ。
+      en_US: 'The badge still works. No one has questioned the clearance yet — a clue about how far this has already gone.'
+      zh_TW: '[zh_TW] The badge still works.'
+      zh_CN: '[zh_CN] The badge still works.'
+    intent: プロトコル違反の最深化
+  - panel_id: ep005_003
+    scene: 保管庫の奥、積み上げられたファイルの列。懐中電灯の丸い光が埃を照らし出す。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_004
+    scene: 蓮は目当てのフォルダを見つけ、引き抜く——異常なデータの年代と一致する古い人事記録。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: これだ。ここに、続きがある。
+        en_US: 'This one. The clue that was missing — he needs it to be here, and it is.'
+        zh_TW: '[zh_TW] This one.'
+        zh_CN: '[zh_CN] This one.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep005_005
+    scene: 蓮の内心——「確認するだけだ」という言い訳が、もう何度目かのループになっている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 確認するだけだ。今夜も、そう思う。
+      en_US: 'Just to confirm. He has told himself that before tonight, too.'
+      zh_TW: '[zh_TW] Just to confirm.'
+      zh_CN: '[zh_CN] Just to confirm.'
+  - panel_id: ep005_006
+    scene: フォルダの中に、蓮の私生活と重なる古い記録の断片——彼が探していたものより、個人的すぎる何か。
+    beat_type: micro
+    intent: 発見の深化——個人的な領域への接近
+  - panel_id: ep005_007
+    scene: ワイド：保管庫の奥行き。埃、影、途切れない機械のハム音だけが響く。
+    beat_type: standard
+    intent: 圧力の環境化——孤立の可視化
+  - panel_id: ep005_008
+    scene: 蓮は携帯のカメラでページを撮影し始める——複写の許可はない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: これは、複写していい範囲じゃない。分かっている。
+        en_US: 'This is not his to copy. He knows that — and photographs it before he can refuse himself.'
+        zh_TW: '[zh_TW] This is not his to copy.'
+        zh_CN: '[zh_CN] This is not his to copy.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+    intent: 明確な規則違反——複写行為
+  - panel_id: ep005_009
+    scene: 撮影を終え、手が一瞬止まる——引き返すかどうかの半秒。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 踏みとどまりの可能性——半秒の分岐点
+  - panel_id: ep005_010
+    scene: どこか別の列で、足音がする。蓮ではない誰かが、同じ保管庫にいる。
+    beat_type: micro
+    intent: ページ1の転——目撃の予感
+- page_id: ep_005_p02
+  panels:
+  - panel_id: ep005_011
+    scene: 棚の陰から佐伯が現れる。驚いた様子はない——彼女もまた、この時間にここにいる理由がある。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 器の対面登場——保管庫という新しい場での再会
+  - panel_id: ep005_012
+    scene: 佐伯、いつもよりずっと直接的に。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: それはもう、読むことじゃない。続ける理由を探してるだけだ。
+        en_US: 'That is not reading anymore. That is searching for a reason to keep going — the clearest warning she has given, no lecture, just the fact.'
+        zh_TW: '[zh_TW] That is not reading anymore.'
+        zh_CN: '[zh_CN] That is not reading anymore.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 器の直接的な言語化——講義ではなく事実の指摘
+  - panel_id: ep005_013
+    scene: 蓮、フォルダを持ったまま、否定できずに黙る。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_014
+    scene: 蓮、正直に、短く。佐伯は黙って彼を見ている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: そうだ。分かってる。
+        en_US: 'Yes. He knows — an honest answer that changes nothing about the folder still in his hand.'
+        zh_TW: '[zh_TW] Yes. He knows.'
+        zh_CN: '[zh_CN] Yes. He knows.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 分かってるだけじゃ、足りない。
+        en_US: 'Knowing is not enough — she says it to him, not past him.'
+        zh_TW: '[zh_TW] Knowing is not enough.'
+        zh_CN: '[zh_CN] Knowing is not enough.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 承認と継続の同居——strategy_05第4ビートの反復
+  - panel_id: ep005_015
+    scene: 佐伯は説教しない。ただ、フォルダを蓮の手からそっと受け取り、正しい棚へ戻す——所作だけの応答。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 器の所作——講義の代わりの行動
+  - panel_id: ep005_016
+    scene: 蓮の顔のクローズアップ。安堵と抵抗が同時に浮かぶ。
+    beat_type: micro
+    intent: 複雑な感情の同居
+  - panel_id: ep005_017
+    scene: 二人は無言のまま、階段を上がっていく。機械のハム音が遠ざかる。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 閉じへの移行
+  - panel_id: ep005_018
+    scene: だが蓮の携帯には、先ほど撮った写真がまだ残っている。彼はそれを消さない。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 棚には戻した。写真までは、戻せない。
+      en_US: 'The folder went back to the shelf. The photo did not — but he keeps it anyway, a witness for himself.'
+      zh_TW: '[zh_TW] The folder went back to the shelf. The photo did not.'
+      zh_CN: '[zh_CN] The folder went back to the shelf. The photo did not.'
+    intent: 未解決の代償——行動の変化なき自覚
+  - panel_id: ep005_019
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第五話・了——権限の外側
+      en_US: 'End of Episode 5 — Outside the Clearance Line'
+      zh_TW: '[zh_TW] End of Episode 5 — Outside the Clearance Line'
+      zh_CN: '[zh_CN] End of Episode 5 — Outside the Clearance Line'
+notes:
+  pacing: 十九コマ。今話で初めて、器（佐伯）が講義ではなく明確な事実として蓮の行動パターンを言語化する——ただし本人の内省としてではなく、外部の観察として。
+  bubble_style_register: 主人公の台詞：round_normal、多くはwhisper/soft。佐伯の台詞：normal、直接的だが講義ではない。
+  sfx_policy: 最小限。保管庫のハム音は視覚的な環境描写として表現し、擬音語は最小限に留める。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第5話。設定を地下記録保管庫（records vault）に切り替え。専門的リスクの最も明確な深化——複写行為——が起こり、器が初めて「読むことではなく、続ける理由を探している」と明言する。承認しても行動は変わらない、strategy_05第4ビートの反復。
+craft_notes: 'VESSEL: 身体を読む探偵（佐伯）——今話では所作に加え、初めて直接的な言語化を行う。ただし講義ではなく事実の指摘に留める。教師は物語内で決して名指ししない。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: strategy_05の第4ビート（器の直接的な一言／正直な「そうだ」と行動の不変化）を、保管庫という新しい場で再現した。
+
+  ARC: 専門的リスクの最深化（複写行為）→器の直接的警告→未解決の代償（写真を消さない）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

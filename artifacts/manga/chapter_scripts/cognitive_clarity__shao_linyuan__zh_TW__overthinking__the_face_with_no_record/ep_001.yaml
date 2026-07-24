@@ -1,0 +1,255 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record
+chapter_id: ep_001
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__shao_linyuan__zh_TW__overthinking__the_face_with_no_record/ep_001.arc_storyboard.yaml
+title: 月台不記得的臉——第1話
+title_en_gloss: 'The Platform Has No Record of This Face — Episode 1: The Gate Log Doesn''t Agree'
+manga_author: 邵臨淵
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: zh_TW
+default_locale: zh_TW
+available_locales:
+- zh_TW
+- en_US
+- ja_JP
+- zh_CN
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: zh_TW
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use MRT commute with EasyCard tap, scooter mobility, night-market ritual, bubble-tea
+    app ordering, buxiban (cram school) culture, LINE-dominant group chat, 7-Eleven/FamilyMart iBon-kiosk
+    and City Cafe routines, and webtoon/comic-app reading habits, favoring an atmospheric literary register
+    over clinical self-help framing.
+  market_touchpoints:
+  - mrt_fare_gate
+  - easycard_tap
+  - scooter_commute
+  - night_market_stall
+  - bubble_tea_app
+  - buxiban_classroom
+  - line_chat_group
+  - ibon_kiosk
+  - city_cafe_counter
+  - webtoon_reading_app
+  market_guardrails:
+  - avoid_japan_conbini_default_use_taiwan_7_eleven_ibon_and_city_cafe_instead
+  - prefer_atmospheric_literary_register_over_clinical_cbt_framing
+  - distinguish_scooter_and_mrt_mobility_from_zh_cn_metro_super_app_framing
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: gate_c_ecard_no_entry_tap
+    logline: 西門站C出口的一筆悠遊卡刷卡出站紀錄,找不到對應的進站紀錄；監視器裡的身影模糊卻精確地避開每一個能辨識臉孔的角度,而值班換班的倒數時鐘,把控制室的日常變成她必須先解決才能離開的謎題。
+    ordinary_world_objects:
+    - easycard_tap_log
+    - fare_gate_camera
+    - shift_handover_clock
+    - incident_report_form
+    genre_transmutation: 一筆平凡的悠遊卡刷卡異常,被雅晴的職業精確度重新讀成謎案的第一條證據；換班倒數計時,把值班室的日常壓力變成她必須先解決才能離開的謎題。
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_TW; audience=gen_z.
+    Use catalyst 'gate_c_ecard_no_entry_tap'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml
+    zh_TW. Use concrete Taiwan objects and social/system pressure on page one; do not name-drop trends.
+genre: psychological_thriller
+mode: teacher
+vessel: 讀懂身體的偵探
+main_characters:
+- id: su
+  name: 蘇雅晴
+  name_romaji: Su Yaqing (Iris)
+  age: 31
+  role: 主人公——台北捷運行控中心異常事件分析員
+  visual_anchor: 直短髮別在耳後、深藍色行控值班制服、右手習慣性轉動一枝原子筆
+- id: zhou
+  name: 周德昌
+  name_romaji: Zhou Dechang
+  age: 58
+  role: 資深值班控制員，即將退休——器（讀懂身體的偵探）
+  visual_anchor: 灰白平頭、袖口捲起、桌上一個用了二十年的舊保溫瓶
+- id: lin
+  name: 林組長
+  name_romaji: Team Lead Lin
+  age: 45
+  role: 值班主管——制度壓力來源
+  visual_anchor: 俐落套裝、手上永遠夾著一份待簽的報表夾
+scene_palette:
+  primary: 行控中心的冷白螢幕光 + 深夜捷運藍
+  secondary: 月台霓虹的濕冷灰藍（雨夜反光）
+  accent: 一枝始終未關的琥珀色警示燈——全劇唯一反覆出現的暖色
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: 深夜。台北捷運行控中心。牆面整片監視器牆發著冷光,窗外雨聲不斷。蘇雅晴獨自坐在她的位置,螢幕是唯一的光源。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 建立世界與職業——雅晴的專業領域
+  - panel_id: ep001_002
+    scene: 特寫——她的螢幕。一行行悠遊卡刷卡紀錄向下捲動,其中一列被系統標成紅色:「出站無對應進站紀錄」。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_003
+    scene: 雅晴的臉,專業而平靜——這種案例她見過太多次了。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 系統誤判。尖峰時段感應器偶爾漏讀,一個月總有兩三件——這種案例,一分鐘內就能結案。
+      en_US: Sensor error, most likely — the EasyCard tap log just missed one entry. That's the clue that
+        closes this, not a threat.
+  - panel_id: ep001_004
+    scene: 插入畫面——調出的監視器截圖:西門站C出口,一個撐傘的身影背對鏡頭走出閘門,傘還在滴水。閘門玻璃反射裡有一小塊模糊的角度,恰好沒有拍到任何一次臉孔。雅晴沒有注意到這一點。
+    beat_type: micro
+    intent: 不可靠敘事者手法：畫面矛盾但不點出
+  - panel_id: ep001_005
+    scene: 雅晴的手,俐落地在報表上打下「感應器故障」四個字,點下結案鍵。動作果斷、有自信。
+    beat_type: micro
+  - panel_id: ep001_006
+    scene: 周德昌端著兩杯熱飲走近,把其中一杯放在她桌邊,順口說了句話。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 冷氣別開這麼強,喝點熱的。
+        en_US: You need to warm up — we've got a long shift ahead.
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep001_007
+    scene: 雅晴心不在焉地應了一聲,視線已經回到下一筆紀錄,幾乎沒抬頭看他。
+    beat_type: micro
+  - panel_id: ep001_008
+    scene: 插入畫面——監視器牆最角落的一台螢幕,悄悄地重播著同一個站點稍早的畫面,沒有人注意到。
+    beat_type: spatial
+    silence_confirmed: true
+    intent: 讀者特權的矛盾線索——未被敘述
+  - panel_id: ep001_009
+    scene: 周德昌注意到她今晚捲動的速度比平常快,半開玩笑地問。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 今晚的量,比平常多喔。
+        en_US: Shift's heavier tonight — why are you still moving through the queue this fast?
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+- page_id: ep_001_p02
+  panels:
+  - panel_id: ep001_010
+    scene: 雅晴調出今晚第二筆異常——同樣被標紅,同一個閘門,不同的時間點。她的眉頭微微皺起。
+    beat_type: micro
+  - panel_id: ep001_011
+    scene: 插入畫面——她把兩張監視器截圖並排:傘的角度、身形的比例、走路的節奏,幾乎一致。
+    beat_type: micro
+  - panel_id: ep001_012
+    scene: 雅晴的手指,轉筆的速度變快了——這是她專注時才會出現的習慣動作。
+    beat_type: micro
+    narrator_caption_by_locale:
+      zh_TW: 兩次。同一個月台,同一種身形——這不是感應器的問題。
+      en_US: Twice. Same gate, same build — that's evidence, not a glitch, and I need to know before the
+        next shift change. Coincidence?
+  - panel_id: ep001_013
+    scene: 大場景——她不再只看被標紅的紀錄,開始手動調出整夜的所有出入站清單,工作範圍已經超出她原本的任務。
+    beat_type: standard
+  - panel_id: ep001_014
+    scene: 周德昌又經過,看見她螢幕上開了一堆不屬於她班表項目的檔案,語氣平常但認真。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: zhou
+      text_by_locale:
+        zh_TW: 這不是妳班表上的項目吧。
+        en_US: That's not on your task list. The manager wants both incidents closed by morning — you're
+          not the only witness who has to sign off tonight.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep001_015
+    scene: 雅晴,視線沒有離開螢幕。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: su
+      text_by_locale:
+        zh_TW: 只是想搞清楚而已。
+        en_US: Just want to understand it.
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep001_016
+    scene: 插入畫面——牆上的時鐘,03:47。時間在無人注意的情況下流逝。
+    beat_type: spatial
+    silence_confirmed: true
+    intent: 威脅性的沉默——時間流逝
+  - panel_id: ep001_017
+    scene: 特寫——她的手,在紙本列印上劃了兩條底線,標記同一個時間戳記,自己卻沒有意識到已經劃了第二次。
+    beat_type: micro
+    intent: 身體先於心智的強迫性徵兆
+  - panel_id: ep001_018
+    scene: 大遠景拉開——整間控制室,螢幕光還亮著,雅晴在畫面裡顯得很小,異常紀錄仍開在螢幕上,沒有結案。
+    beat_type: long_drop
+    narrator_caption_by_locale:
+      zh_TW: 一定有一個合理的解釋。
+      en_US: There has to be a reasonable explanation. But something here is wrong, and the log won't
+        agree with me twice.
+notes:
+  arc_position: 第一話——第一部「執念的種子」開篇。建立雅晴的專業世界與能力,並種下第一個異常:她自信的「感應器故障」結論,在同一集內就被自己發現的第二筆紀錄推翻。尚未進入完整的螺旋崩潰——那是第二部的範圍。
+  pacing_vs_prior: 十八格,兩頁。系列開篇,建立控制室日常節奏後在頁末出現第一次真正的裂縫。
+  continuity_callbacks: 無(系列首集)。轉筆習慣(panel 12)、保溫瓶(角色設定)、琥珀色警示燈(場景基調)將貫穿全季。
+  language: zh_TW為權威語言，en_US僅為操作用註解，非翻譯。
+  translation_pipeline_handoff: en_US為審閱用註解草稿；其餘CJK語系另案處理。
+  author_note: 原創新系列首集，非改編自既有ja_JP姊妹作。設定台北捷運行控中心而非證券╱資料分析辦公室，刻意與cognitive_clarity既有en_US／ja_JP系列的職業場景區隔。
+craft_notes: 'VESSEL: 讀懂身體的偵探——身體先於嘴巴招供。config/manga/manga_mode_vessels.yaml psychological_thriller.teacher。教師身分（brand_teacher_unresolved）在故事中永不指名。
+
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+
+  GENRE-FIRST（zh_TW）: 表層是psychological_thriller的懸疑故事。話題（overthinking）僅以姿勢、轉筆、劃線等身體徵兆呈現，不說教。
+
+
+  ARC: 傷（自信結論）→裂縫（第二筆紀錄）→未解（頁末懸念留待第二話）。
+
+
+  NATIVE: 台灣繁體中文原創，非由英文翻譯而來，也非改寫ja_JP姊妹作的劇情。
+
+
+  ACCEPTANCE: authored_candidate — 非bestseller聲稱（M6標準）。'
