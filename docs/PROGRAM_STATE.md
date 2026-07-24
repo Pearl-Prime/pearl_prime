@@ -172,6 +172,39 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
 - **Next manga blocker (post-wave):** stillness post-merge proof re-run (local-only artifacts must not be reported as
   landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — v3 pilot is the current honest layered proof surface.
 
+### Manga 48ep/3catalog dispatch (ja_JP/zh_TW/en_US genre-native self-help series)
+- **Authority:** `docs/agent_prompt_packs/20260723_manga_48ep_3catalog_series/00_MASTER_DISPATCH_PROMPT.md`
+  (+ `ASSIGNMENT_MATRIX.tsv`, 111 brand×catalog cells). Parent project
+  `proj_manga_catalog_reconciliation_20260426`.
+- **Signal: `manga48-pilot-ja_JP-pass=97e61a849bb38266ace21d7b209d2af8fc3c19d9`** — ja_JP
+  pilot cell **MERGED 2026-07-23** (PR #196, squash SHA `97e61a849bb38266ace21d7b209d2af8fc3c19d9`):
+  `focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball`, arc 1
+  (ep_001-012, the "recruit" phase; sports_competition genre, adhd_focus topic).
+  All 12 episodes pass `check_manga_story_authored.py` +
+  `validate_story_excellence.py --production --json` (score 100/85).
+  **Operator voice/quality read-approval received 2026-07-23** (Router SS16) — this
+  cell is now the frozen ja_JP quality bar for the rest of this wave. Per the
+  dispatch's Ramp, this clears the ja_JP leg of the 3-cell pilot (`en_US /
+  stillness_press` was already complete before this program started; `zh_TW` is
+  still blocked on lane 01's research gap, see below). acceptance_layer:
+  authored_candidate only — gate-PASS is not a bestseller/PROVEN-AT-BAR claim.
+- **Known gaps carried forward (do not re-derive, see PR #196 body for detail):**
+  `scripts/ci/check_manga_arc_storyboard.py` and
+  `schemas/manga/arc_storyboard_plan.schema.json`, referenced repeatedly by the
+  dispatch pack, do not exist in this repo checkout — that gate could not be run
+  for this cell (or presumably any other). A `relevance_genre` data-quality bug
+  (genre-family engine id used where the excellence gate requires the resolved
+  canonical id, e.g. `sports_competition` → `sports`) was discovered and
+  corrected in this cell's `story_architecture_handoff.json`; check for the same
+  class of bug on every new genre's first cell.
+- **Still blocked:** `zh_TW` pilot cell — do not author until
+  `01_RESEARCH_GAP_ZHTW_MODERN_READER_PROMPT.md`'s lane lands (or an explicit
+  operator override is logged as an OPD), per the master dispatch's "Do not" list.
+- **Next:** scale wave for `ja_JP` (remaining ~35 cells, flagship tier first)
+  can now proceed against the frozen ja_JP voice bar; do not go deep on arc 2
+  for any series before every brand has an authored arc 1 in every catalog,
+  per the dispatch's ordering rule.
+
 ### DevOps / repo hygiene
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`; July 15 old-chat unblock wave reduced stale PR requeue risk**
 - **Details:**
