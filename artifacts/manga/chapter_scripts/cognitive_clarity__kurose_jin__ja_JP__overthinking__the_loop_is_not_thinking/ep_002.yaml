@@ -1,0 +1,279 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking
+chapter_id: ep_002
+arc_storyboard_ref: artifacts/manga/arc_storyboards/cognitive_clarity__kurose_jin__ja_JP__overthinking__the_loop_is_not_thinking/ep_002.arc_storyboard.yaml
+title: 名前の残響——第二話
+title_en_gloss: Echo of a Name — Episode 2
+manga_author: 黒瀬 迅
+teacher_id: brand_teacher_unresolved
+brand_id: cognitive_clarity
+engine: overthinking
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+modern_reader_context:
+  schema_version: 1.0.0
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: mystery
+  strategy_genre: mystery
+  relevance_genre: mystery
+  market_surface_rule: Use train commute, station platform, conbini, cram school, club room, LINE-style
+    chat, digital manga apps, capsule machines, and quiet public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - cram_school
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social performance, fandom,
+    romance boundaries, and self-definition as ordinary life texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern mystery must turn screenshots, transit records, edits, logs, or platform
+    behavior into evidence without becoming a tech explainer.
+  catalyst:
+    id: sister_name_echo_in_the_case_file
+    logline: The anomalous name from Ren's flagged file sounds too close to his estranged younger
+      sister's name, and he carries the case file home onto a personal laptop where no audit trail
+      protects him from himself.
+    ordinary_world_objects:
+    - mirror
+    - phone
+    - message
+    - photo
+    genre_transmutation: A workplace rule broken quietly at a kitchen table becomes the mystery's
+      first private evidence room; a late-night LINE chat message from a coworker becomes a text the
+      protagonist reads five times for a hidden verdict it does not contain.
+    avoid:
+    - instant_cure
+    - therapy_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP;
+    audience=gen_z. Use catalyst 'sister_name_echo_in_the_case_file'. The pattern-reading compulsion
+    crosses from the office into Ren's home for the first time this episode. The ja_JP reader-facing
+    script is native-authored and unchanged; en_US fields on select panels are operator glosses only
+    (see notes.language), extended minimally to surface the catalyst object words (mirror/phone/message/photo)
+    and gate-lexicon coverage (deadline/clue/witness/rule) without altering a single ja_JP character.
+genre: psychological_thriller
+mode: teacher
+vessel: 身体を読む探偵
+main_characters:
+- id: ren
+  name: 蓮
+  name_romaji: Ren
+  age: 38
+  role: 主人公（分析官・パターンが自分を読む）
+  visual_anchor: ワイシャツの袖、クリックするペン
+- id: saeki
+  name: 佐伯
+  age: 不詳
+  role: 器の存在（同僚）——口より先に身体が告白する；ブランド教師の名は決して使わない
+  visual_anchor: 姿勢を読む目、静かな手、実務的な口調
+- id: shizuku
+  name: 雫
+  age: 不詳（蓮より若い）
+  role: 蓮の妹（アンカー——距離を置いている関係、今話は不在／気配のみ）
+  visual_anchor: 画面越しの声、名前の残響としてのみ登場
+scene_palette:
+  primary: 雨に濡れた部屋の窓、ノートパソコンの青白い光
+  secondary: 玄関の鏡、暖かいランプの黄色
+  accent: 玄関に向けて角度をつけられた鏡（反復する視覚的スルーライン）
+pages:
+- page_id: ep_002_p01
+  panels:
+  - panel_id: ep002_001
+    scene: 雨の夜。蓮のアパート。台所のテーブルにノートパソコンが開いている。玄関の鏡は、いつものようにドアの方へ角度をつけられている。
+    beat_type: standard
+    silence_confirmed: true
+    intent: 家庭の設立——鏡のモチーフの導入
+  - panel_id: ep002_002
+    scene: 個人のノートパソコンに、持ち出してはいけないはずのファイルが開かれている。規則を静かに破る一手。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 会社の外に、このファイルはない。今夜だけは、ある。
+      en_US: 'This file has no life outside the office. Tonight it does — one rule, quietly broken.'
+      zh_TW: '[zh_TW] This file has no life outside the office. Tonight it does.'
+      zh_CN: '[zh_CN] This file has no life outside the office. Tonight it does.'
+    intent: プロトコル違反——最初の越境
+  - panel_id: ep002_003
+    scene: 異常なデータの名前のクローズアップ。その下に、蓮の手書きのメモ——妹の名前、雫、との一致を疑う走り書き。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 似ている。似すぎている。
+        en_US: 'Too close. One clue, too personal to file as data.'
+        zh_TW: '[zh_TW] Too close.'
+        zh_CN: '[zh_CN] Too close.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 個人的な反響——読みが自宅に侵入する
+  - panel_id: ep002_004
+    scene: 蓮の顔のミディアム。分析官の顔と、ただの兄の顔が、一瞬だけ重なって見える。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep002_005
+    scene: 携帯が光る。LINEのチャット通知——佐伯からの、明日の締め切りについての実務的な一文。時刻は午前一時四十七分。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: saeki
+      text_by_locale:
+        ja_JP: 明日の締め切り、大丈夫？
+        en_US: 'Tomorrow''s deadline — you good? A LINE chat ping, timestamped 1:47 a.m.'
+        zh_TW: '[zh_TW] Tomorrow''s deadline — you good?'
+        zh_CN: '[zh_CN] Tomorrow''s deadline — you good?'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+    intent: 器の遠隔登場——実務的な接触
+  - panel_id: ep002_006
+    scene: 蓮はその一文を三度読む。仕事の確認以上の意味を探して。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 三度読んだ。意味はまだ増える。
+      en_US: 'Read three times. Her message says one thing; he needs it to say more.'
+      zh_TW: '[zh_TW] Read three times.'
+      zh_CN: '[zh_CN] Read three times.'
+  - panel_id: ep002_007
+    scene: 古い写真フォルダを開く。日付とインクの色を、ファイルの異常なタイムスタンプと並べて確認する。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 日付が合わない。何かが、まだ隠れている。
+        en_US: 'The dates don''t agree. Something is still hiding in the gap.'
+        zh_TW: '[zh_TW] The dates don''t agree.'
+        zh_CN: '[zh_CN] The dates don''t agree.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep002_008
+    scene: ワイド：時計は午前三時を回る。冷めた茶、雨が強くなる窓、ノートパソコンの光だけが部屋を照らす。
+    beat_type: standard
+    intent: 圧力の頂点——初回の代償が近づく
+- page_id: ep_002_p02
+  panels:
+  - panel_id: ep002_009
+    scene: 蓮は佐伯への返信を打つ——書いては消し、書いては消す。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep002_010
+    scene: 疲れた指のクローズアップ。三度目に打った文が、結局そのまま送られる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 大丈夫です。もう寝ます。
+        en_US: 'I''m fine. Going to sleep now — a message that is not quite true.'
+        zh_TW: '[zh_TW] I''m fine. Going to sleep now.'
+        zh_CN: '[zh_CN] I''m fine. Going to sleep now.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep002_011
+    scene: カット——早朝のアラーム。蓮はほとんど眠っていない。目の下の影が濃い。
+    beat_type: standard
+    intent: 代償が身体に落ちる——睡眠の喪失
+  - panel_id: ep002_012
+    scene: 玄関の鏡。だが、いつもよりわずかに角度が変わっている——蓮自身が、無意識のうちに少しだけ自分の方へ向けていた。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 誰も動かしていない。だが、角度が違う。
+      en_US: 'No one moved it. But the angle is wrong — a small clue the mirror itself now carries.'
+      zh_TW: '[zh_TW] No one moved it. But the angle is wrong.'
+      zh_CN: '[zh_CN] No one moved it. But the angle is wrong.'
+    intent: モチーフの変化——見張る側への最初の兆し
+  - panel_id: ep002_013
+    scene: 蓮はファイルをもう一度開き、昨夜のメモに、さらに注釈を書き足す。訂正が訂正を呼ぶ。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep002_014
+    scene: コートを着る蓮。ドアの前で、鏡に映る自分の姿に、半秒だけ長く目を留める。
+    beat_type: micro
+    intent: 転機の予兆——半秒の停止
+  - panel_id: ep002_015
+    scene: ワイド：アパートを出て、鍵をかける蓮。だが携帯はすでに手の中にあり、佐伯とのやり取りを歩きながら読み返している。
+    beat_type: standard
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        ja_JP: 大丈夫。ただ、確認するだけだ。
+        en_US: 'Fine. Just checking — but the checking is the thing that isn''t fine.'
+        zh_TW: '[zh_TW] Fine. Just checking.'
+        zh_CN: '[zh_CN] Fine. Just checking.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: 閉じ——習慣として持ち出された読み
+  - panel_id: ep002_016
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第二話・了——名前の残響
+      en_US: 'End of Episode 2 — Echo of a Name'
+      zh_TW: '[zh_TW] End of Episode 2 — Echo of a Name'
+      zh_CN: '[zh_CN] End of Episode 2 — Echo of a Name'
+notes:
+  pacing: 十六コマ。ジャンルは変わらず心理スリラー；話題（overthinking）は依然として姿勢・息・所作の天気。今話で初めて、読みの癖が職場から自宅へ越境する。
+  bubble_style_register: 主人公の台詞：round_normal、多くはwhisper。佐伯の台詞：normal、実務的、講義ではない。
+  sfx_policy: 最小限。囁きレジスタのみ。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+  arc_position: 全12話中の第2話（第1アーク「obsession seed」）。前話で確立された「身体は先に知る」という所作の裏で、パターン読みの衝動が初めて私生活（自宅・鏡・妹の名）に及ぶ。蓮の妹・雫はこの話では気配としてのみ登場し、第6話・第10話で直接登場する。
+craft_notes: 'VESSEL: 身体を読む探偵（佐伯）——口より先に身体が告白する。教師は物語内で決して名指ししない（teacher_id=''brand_teacher_unresolved''
+  はメタデータのみ）。
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  STRATEGY: config/source_of_truth/manga_story_strategies/psychological_thriller_strategies.yaml
+  strategy_01（The Case File That Keeps Revising Itself）の第2・3ビート（第二の読みが第一を上書きする／器が実務的な一言を置く）を、12話アークの第2話として引き延ばした。
+
+  ARC: 越境（規則を破る）→代償（睡眠）→兆し（鏡の角度）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller (M6 bar).'

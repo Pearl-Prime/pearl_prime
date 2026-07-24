@@ -57,6 +57,7 @@ schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
 
 series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
 chapter_id: ep_007
+arc_storyboard_ref: artifacts/manga/arc_storyboards/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_007.arc_storyboard.yaml
 title: "The Alarm Is Lying — Episode 7: Monday, 8:14 AM"
 manga_author: Hana Tidecalm
 teacher_id: ahjan
@@ -65,6 +66,70 @@ engine: false_alarm
 locale: en_US
 default_locale: en_US
 available_locales: [en_US]
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: en_US
+  target_audience: gen_z
+  genre_id: healing
+  strategy_genre: healing
+  relevance_genre: healing
+  market_surface_rule: >-
+    Use social discovery, school/work pressure, gaming, creator
+    culture, comic shop/community, and phone-native life without
+    sounding like an ad for platforms.
+  market_touchpoints:
+    - group_chat
+    - discord_server
+    - short_video_clip
+    - school_bus_or_subway
+    - comic_shop
+    - mall_food_court
+    - campus_library
+    - delivery_app
+    - controller
+    - streaming_queue
+  market_guardrails:
+    - avoid_fake_japanese_surface_for_us_scene
+    - make_city_transport_specific_if_used
+    - do_not_overexplain_anime_fandom
+  audience_story_rule: >-
+    Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as
+    ordinary life texture.
+  audience_touchpoints:
+    - phone_as_social_pressure
+    - group_chat_status
+    - creator_or_streaming_identity
+    - gig_or_work_pressure
+    - transit_between_roles
+    - online_offline_self_gap
+  genre_relevance_rule: >-
+    Modern healing must receive everyday overstimulation gently —
+    notifications, transit noise, school/work fatigue, convenience
+    rituals, and weather.
+  catalyst:
+    id: the_unanswered_friday_email
+    logline: >-
+      An unanswered Friday-night work email and a kitchen clock reading
+      eight-fourteen combine to launch Mira's Monday commute into a
+      catastrophizing spiral about her manager's reaction, and the
+      crowded subway car becomes proof that the practice does not
+      switch the alarm off — it only teaches her to return to it.
+    ordinary_world_objects:
+      - clock
+      - email
+      - travel_mug
+      - subway
+    genre_transmutation: >-
+      A late morning and an unanswered work email become the anxiety
+      trigger; the crowded subway car becomes the externalized image of
+      an ordinary world where every rider is quietly carrying their own
+      small interior weather, and the practice is shown as an
+      imperfect returning rather than a cure.
+    avoid:
+      - instant_cure
+      - influencer_wellness_lecture
 
 main_characters:
   - id: mira
@@ -149,6 +214,9 @@ pages:
           Elevator doors opening. Lobby beyond. Mira already walking
           forward.
         beat_type: spatial
+
+  - page_id: ep_007_p02
+    panels:
 
       # ── SUBWAY CAR — the spiral starts ─────────────────────────────────
       - panel_id: ep007_008

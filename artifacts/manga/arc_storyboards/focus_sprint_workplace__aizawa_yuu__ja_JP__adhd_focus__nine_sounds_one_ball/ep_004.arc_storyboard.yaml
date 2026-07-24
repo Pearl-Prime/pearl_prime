@@ -1,0 +1,469 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_004
+genre_id: sports_competition
+title: '「静寂のフリースロー」 第4話「一つのポゼッション」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 4: One Possession'
+logline: During a Saturday three-on-three scrimmage narrated live into the team's
+  LINE group chat for the one member who couldn't come, Hayato's early mistakes
+  go out to the whole roster in real time before he holds one clean defensive
+  possession against Endou and, on the free throw that follows, quietly repeats
+  the single bounce Kuroda showed him after hours in ep_003.
+stakes_now: Hayato has been publicly humiliated once in front of the team
+  (ep_002) and given one silent, wordless lesson by Kuroda in an empty gym
+  (ep_003) — but he has never had to test whether any of it holds while people
+  are actually watching, keeping score, and typing what they see.
+stakes_end: For one defensive possession and one ordinary free throw, the
+  lesson holds. Nobody declares a breakthrough — Endou allows three flat words,
+  the group chat moves straight on to the final score, and even Hayato cannot
+  say whether it will happen again.
+genre_cadence:
+- established_team_texture_opening
+- digital_witness_setup
+- flaw_exposed_offense
+- body_cost_and_flaw_exposed_defense
+- water_break_tactical_reset
+- silent_mentor_background_presence
+- pressure_escalates_mismatch
+- carrier_beat_one_anchor_chosen
+- defensive_stand_carrier_beat
+- foul_line_echo_of_lesson
+- team_notices_understated
+- aya_concrete_observation
+- closing_ambiguous_return
+page_turn_promises:
+- page_id: ep_004_p01
+  promise: Will tonight's mistakes stay just Hayato's, or does the group chat
+    make them the whole roster's problem before the scrimmage is even half over?
+- page_id: ep_004_p02
+  promise: Can Hayato hold a single matchup against Endou without the ball,
+    the bench, and his own memory of ep_002 all shouting for his attention at
+    once?
+- page_id: ep_004_p03
+  promise: Was the stop real, or just one lucky possession the group chat
+    won't even remember by Monday?
+panels:
+- panel_id: ep004_001
+  page_id: ep_004_p01
+  story_function: established_team_texture_opening
+  story_move: Cold open on the Saturday scrimmage setup in the underfunded
+    company gym, re-establishing Kuroda as unchanged background texture before
+    any game action starts.
+  visual_proof: Wide shot, pinnies being pulled from a cardboard box, Kuroda
+    at the far baseline resetting the ball rack without being asked.
+  information_delta: Reader re-anchors in the small-roster team (seven total,
+    continuity with ep_006) before the digital-witness pressure is introduced.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_002
+  page_id: ep_004_p01
+  story_function: established_team_texture_opening
+  story_move: Aya reads out the team split in practical, unadorned captain
+    register — three-on-three, given the squad's actual size.
+  visual_proof: Medium shot, Aya with clipboard, tossing bibs toward two small
+    clusters of players.
+  information_delta: Reader confirms the scrimmage's literal scale — a small
+    team, not a full five-on-five, keeping the stakes intimate rather than
+    grand.
+  beat_role: roster_object
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_003
+  page_id: ep_004_p01
+  story_function: digital_witness_setup
+  story_move: A teammate who couldn't attend (working a Saturday shift) pings
+    the team's LINE group chat asking for the score, establishing the digital
+    witness mechanic before any mistake has happened.
+  visual_proof: Close insert, phone screen on the bench lighting up with a LINE
+    notification.
+  information_delta: Reader learns the catalyst object directly — the group
+    chat exists to report on Hayato before he has done anything reportable.
+  beat_role: digital_witness_intro
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_004
+  page_id: ep_004_p01
+  story_function: digital_witness_setup
+  story_move: A bench teammate agrees to relay the score live, and a caption
+    confirms the group chat's name and presence at the edge of the court.
+  visual_proof: Medium shot, teammate typing with a half-smile, phone glow
+    visible at the frame's edge.
+  information_delta: Reader gets the concrete named object (the "Shinonome
+    Basketball Club" LINE group) that will carry the social pressure for the
+    rest of the episode.
+  beat_role: digital_witness_named
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_005
+  page_id: ep_004_p01
+  story_function: digital_witness_setup
+  story_move: The whistle starts the scrimmage; a narrator caption states the
+    episode's real premise plainly, without naming any psychology.
+  visual_proof: Wide shot, scoreboard reading 00-00, whistle mid-blow.
+  information_delta: Reader receives the episode's thesis as an external fact
+    (double witness — gym and phone) rather than an interior claim about focus.
+  beat_role: premise_caption
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_006
+  page_id: ep_004_p01
+  story_function: flaw_exposed_offense
+  story_move: Hayato's established flaw resurfaces on offense — a pass arrives
+    too fast to be caught cleanly.
+  visual_proof: Medium shot, ball glancing off Hayato's fingertips out of
+    bounds.
+  information_delta: Reader confirms the flaw has not been cured by ep_003's
+    private lesson — it still costs him in ordinary play.
+  beat_role: flaw_recurrence
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_007
+  page_id: ep_004_p01
+  story_function: flaw_exposed_offense
+  story_move: The bench teammate types the mistake straight into the group
+    chat as it happens.
+  visual_proof: Close insert, phone screen with the message being typed in
+    real time.
+  information_delta: Reader sees the mechanism named in the catalyst directly
+    — the mistake is recorded, not just witnessed.
+  beat_role: digital_witness_record
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_008
+  page_id: ep_004_p01
+  story_function: flaw_exposed_offense
+  story_move: A silent beat on Hayato's face — the established knuckle-tap tic
+    recurs as a fist against his own thigh, since there is no pen on the court.
+  visual_proof: Close insert, fist striking thigh once, no pen in sight.
+  information_delta: Reader sees the series' visual anchor (the pen-tap tic)
+    carried into a new setting without the object that originally defined it.
+  beat_role: tic_variant
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_009
+  page_id: ep_004_p01
+  story_function: body_cost_and_flaw_exposed_defense
+  story_move: On the very next possession, Hayato is beaten cleanly on defense
+    by an unremarkable move — the same unfocused body failing a second way.
+  visual_proof: Wide shot, defender blowing past Hayato toward the basket.
+  information_delta: Reader sees the flaw is not offense-specific — it is
+    attentional, and it costs him on both ends of the floor.
+  beat_role: flaw_recurrence
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_010
+  page_id: ep_004_p01
+  story_function: body_cost_and_flaw_exposed_defense
+  story_move: The scoreboard updates by hand at the same moment the group chat
+    updates on-screen — two physical objects tracking the same cost.
+  visual_proof: Split composition, flip-number scoreboard beside the glowing
+    phone screen.
+  information_delta: Reader closes page one on the episode's double-ledger
+    device fully established — gym scoreboard and phone screen, both counting
+    against Hayato.
+  beat_role: double_ledger
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_011
+  page_id: ep_004_p02
+  story_function: water_break_tactical_reset
+  story_move: A water break makes the body's cost visible before any dialogue
+    resumes.
+  visual_proof: Medium shot, chests heaving, sweat, hands on knees.
+  information_delta: Reader gets the craft-bible-required physical cost beat
+    — sweat and breath, not just narrated fatigue.
+  beat_role: body_cost
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_012
+  page_id: ep_004_p02
+  story_function: water_break_tactical_reset
+  story_move: Aya gives one short, practical instruction — tactical, not
+    interpretive — refusing to name what is actually wrong with his attention.
+  visual_proof: Medium shot, Aya toweling off, addressing Hayato directly but
+    briefly.
+  information_delta: Reader sees the doctrine in action — a captain who
+    corrects behavior, never psychology.
+  beat_role: tactical_instruction
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_013
+  page_id: ep_004_p02
+  story_function: silent_mentor_background_presence
+  story_move: Kuroda, unremarked by anyone on the court, retrieves a loose
+    ball and racks it in the exact same rhythm as every prior episode.
+  visual_proof: Wide background shot, Kuroda's motion unchanged, no one
+    looking at him.
+  information_delta: Reader registers the ep_003 lesson's source still present
+    and still silent, priming the payoff to come.
+  beat_role: kuroda_constant
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_014
+  page_id: ep_004_p02
+  story_function: silent_mentor_background_presence
+  story_move: Hayato's eyes flick toward Kuroda for less than a second — no
+    words, no acknowledgment returned.
+  visual_proof: Close insert, Hayato's glance catching Kuroda's figure at the
+    edge of frame.
+  information_delta: Reader feels the private lesson's presence in the room
+    without it being referenced aloud by either character.
+  beat_role: silent_acknowledgment
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_015
+  page_id: ep_004_p02
+  story_function: pressure_escalates_mismatch
+  story_move: Play resumes with the score still close; the bench teammate's
+    phone glow is visible again at the frame's edge as he keeps typing updates.
+  visual_proof: Wide shot, game action with the lit phone screen visible in
+    the background.
+  information_delta: Reader confirms the digital witness has not gone away
+    — it persists through the whole scrimmage, not just the mistakes.
+  beat_role: digital_witness_persistence
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_016
+  page_id: ep_004_p02
+  story_function: pressure_escalates_mismatch
+  story_move: Aya switches the matchup — Hayato now guards Endou directly,
+    the ace who set the episode's skepticism baseline in ep_002.
+  visual_proof: Medium shot, Endou setting his feet across from Hayato,
+    unimpressed.
+  information_delta: Reader sees the stakes concentrated into a single,
+    named mismatch rather than generic game pressure.
+  beat_role: mismatch_set
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_017
+  page_id: ep_004_p02
+  story_function: pressure_escalates_mismatch
+  story_move: Hayato's eyes dart across every source of noise at once — the
+    ball, Endou's shoulders, the lit phone, the scoreboard — none of it
+    settling, the defensive mirror of ep_002's attention-fragment beat.
+  visual_proof: Extreme close-up on Hayato's eyes with small inset panels of
+    each glance's landing point.
+  information_delta: Reader sees the overload mechanism recur exactly, this
+    time on defense, immediately before the carrier beat.
+  beat_role: eyes_dart
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_018
+  page_id: ep_004_p02
+  story_function: carrier_beat_one_anchor_chosen
+  story_move: 'CARRIER BEAT: Hayato''s darting eyes stop and settle on one
+    point — not the shoulders, not the bench, only the line of Endou''s hips
+    — externalized entirely through the object of attention, never narrated as
+    insight.'
+  visual_proof: Close on Hayato's eyes locking onto Endou's waistline; a
+    narrator caption names only the object, never the psychology.
+  information_delta: Reader receives the episode's real turn as pure visual
+    and captioned fact — the ep_003 lesson activating for the first time
+    under real pressure.
+  beat_role: anchor_chosen
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_019
+  page_id: ep_004_p02
+  story_function: carrier_beat_one_anchor_chosen
+  story_move: A held, silent macro beat — Hayato's stance set low, eyes fixed,
+    the rest of the gym rendered as unfocused blur behind him.
+  visual_proof: Extreme close-up, bent knees and fixed eye-line, background
+    reduced to blurred shapes.
+  information_delta: Reader gets the visual proof that the world's information
+    load has narrowed to one point, without a single word of explanation.
+  beat_role: stillness_macro
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_020
+  page_id: ep_004_p02
+  story_function: defensive_stand_carrier_beat
+  story_move: Endou drives and fakes; Hayato does not bite, stays in front,
+    and forces an off-balance miss — one clean defensive possession, the
+    episode's modest, non-triumphant payoff.
+  visual_proof: Wide shot, Endou's contested shot clanging off the rim,
+    Hayato still in position.
+  information_delta: Reader receives the episode's promised small win exactly
+    as scaled — a single stop, not a dramatic sequence of them.
+  beat_role: clean_stop
+  action_intensity: 4
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_021
+  page_id: ep_004_p03
+  story_function: foul_line_echo_of_lesson
+  story_move: A rebound scramble puts Hayato at the free-throw line on a
+    foul, connecting the defensive payoff directly to the series' signature
+    device.
+  visual_proof: Medium shot, whistle blown, referee-teammate signaling two
+    shots.
+  information_delta: Reader sees the entry point into the free-throw device
+    established in ep_003, now reached organically through game action.
+  beat_role: foul_transition
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_022
+  page_id: ep_004_p03
+  story_function: foul_line_echo_of_lesson
+  story_move: Hayato at the line; a caption clarifies that the noise has not
+    actually gone away, preventing any misreading of the carrier beat as
+    "silence."
+  visual_proof: Medium shot, Hayato at the line, the bench's lit phone still
+    visible at the frame's edge.
+  information_delta: Reader is told explicitly (via externalized fact, not
+    psychology) that the technique is choice, not silence — reinforcing the
+    strategy bank's core distinction.
+  beat_role: noise_persists
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_023
+  page_id: ep_004_p03
+  story_function: foul_line_echo_of_lesson
+  story_move: 'CARRIER ECHO: Hayato bounces the ball once, deliberately,
+    unprompted and unexplained — the exact rhythm Kuroda demonstrated in
+    ep_003, recognized by the reader alone.'
+  visual_proof: Silent extreme close-up on the ball touching the floor once.
+  information_delta: Reader receives direct payoff of the ep_003 setup with
+    zero dialogue — nobody in the scene knows what just happened except the
+    reader.
+  beat_role: ritual_echo
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_024
+  page_id: ep_004_p03
+  story_function: foul_line_echo_of_lesson
+  story_move: A clean, unremarkable make — play resumes almost immediately,
+    with no fanfare.
+  visual_proof: Medium shot, ball dropping through the net, players already
+    turning to run back.
+  information_delta: Reader sees the deliberately modest scale of the payoff
+    — an ordinary free throw, not a dramatic shot.
+  beat_role: clean_make
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep004_025
+  page_id: ep_004_p03
+  story_function: team_notices_understated
+  story_move: Endou allows himself three flat words and nothing more before
+    jogging back — the episode's ceiling for celebration.
+  visual_proof: Medium shot, Endou already turning away as he speaks.
+  information_delta: Reader confirms the anti-triumph doctrine directly —
+    even the team's harshest skeptic keeps his reaction minimal.
+  beat_role: understated_approval
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_026
+  page_id: ep_004_p03
+  story_function: team_notices_understated
+  story_move: Aya catches Hayato's eye across the court for less than a
+    second — a visible flicker of noticing, not yet spoken.
+  visual_proof: Medium two-shot across the court, Aya's expression shifting
+    slightly.
+  information_delta: Reader is set up for the next beat's payoff — Aya has
+    seen something specific and is about to name it concretely.
+  beat_role: notice_seed
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep004_027
+  page_id: ep_004_p03
+  story_function: aya_concrete_observation
+  story_move: During cooldown, Aya names only the concrete, visible fact —
+    where Hayato was looking — never the underlying psychology.
+  visual_proof: Medium two-shot, Aya beside Hayato as the gym empties around
+    them.
+  information_delta: Reader gets the doctrine's cleanest demonstration this
+    episode — observation stated as fact, never interpretation.
+  beat_role: concrete_observation
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_028
+  page_id: ep_004_p03
+  story_function: aya_concrete_observation
+  story_move: Hayato answers honestly, without claiming mastery — he does not
+    know if it will repeat.
+  visual_proof: Close on Hayato's uncertain expression.
+  information_delta: Reader sees the anti-cure doctrine held from the
+    protagonist's own mouth — no false confidence, no resolved arc.
+  beat_role: honest_uncertainty
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_029
+  page_id: ep_004_p03
+  story_function: aya_concrete_observation
+  story_move: Aya answers with a small, practical, non-prescriptive line that
+    leaves the outcome open rather than promising future success.
+  visual_proof: Medium shot, Aya's small, ordinary smile, already turning to
+    pack up.
+  information_delta: Reader receives encouragement without resolution — the
+    exact register the anti-pattern rules require.
+  beat_role: open_encouragement
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep004_030
+  page_id: ep_004_p03
+  story_function: closing_ambiguous_return
+  story_move: Final wide — Kuroda has already left, his usual spot by the
+    rack empty; Hayato racks the ball himself for once, the bench teammate
+    still typing the final score.
+  visual_proof: Wide shot, empty space where Kuroda stood, Hayato placing the
+    ball on the rack, phone glow still visible in the background.
+  information_delta: Reader closes the episode on a small, unspoken shift in
+    role (Hayato racking the ball himself) rather than any triumphant image.
+  beat_role: closing_wide
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_004.yaml
+notes: 'Episode 4 of 12, arc 1 ("recruit" phase), authored per the series bible''s
+  beat assignment: the first small, modest win in a scrimmage. Uses catalyst
+  "the_scrimmage_score_in_the_group_chat" from story_architecture_handoff.json
+  chapter_number 4 verbatim. Continuity: assumes ep_003''s wordless free-throw
+  bounce lesson from Kuroda (per the assignment brief''s continuity note; ep_003
+  may not exist on disk yet from a parallel agent) and pays it off in miniature
+  at panel 23 — a single, unexplained, unwitnessed echo of the same gesture,
+  reached organically through a foul drawn off the episode''s real carrier beat
+  (the defensive stop at panel 20). Per
+  config/source_of_truth/manga_story_strategies/sports_competition_strategies.yaml
+  anti_pattern_rules, no character narrates or names the psychology at any
+  point — Aya''s panel 27 observation stays strictly concrete (where he was
+  looking), Endou''s panel 25 line is three words, and Kuroda never speaks this
+  episode at all. The win is deliberately scaled down per the assignment: one
+  defensive stop plus one ordinary free throw, no scoreboard resolution, no
+  team celebration, immediate honest uncertainty from Hayato himself in panel
+  28. NOTE: scripts/ci/check_manga_arc_storyboard.py does not exist in this
+  repo checkout and could not be run against this file; it was authored to
+  this established shape anyway for continuity with the storyboard-first
+  sequence (see stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_011.arc_storyboard.yaml
+  and this series'' own ep_002.arc_storyboard.yaml / ep_006.arc_storyboard.yaml).'

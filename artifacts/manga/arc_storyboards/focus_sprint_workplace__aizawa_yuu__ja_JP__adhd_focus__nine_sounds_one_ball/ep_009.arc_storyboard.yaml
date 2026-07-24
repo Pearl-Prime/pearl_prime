@@ -1,0 +1,410 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_009
+genre_id: sports_competition
+title: '「静寂のフリースロー」 第9話「既読、それだけ」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 9: Read, Not Answered'
+logline: The morning after Shinonome's first qualifier loss, the team's LINE
+  group chat stays conspicuously silent, and that silence turns out to say
+  more than any message would have — until Hayato overhears, in person, the
+  doubt the chat never typed out loud.
+stakes_now: The loss in ep_007 was unmistakably Hayato's mistake, in front of
+  the whole gym and now the whole team's group chat, which has gone quiet for
+  the first time anyone can remember.
+stakes_end: Nothing is resolved. Aya has defended Hayato's spot out loud, but
+  no one seconded her, and Hayato now knows exactly what his teammates are
+  privately unsure of. He stays behind alone, still unresolved, with the same
+  silence waiting in his pocket.
+genre_cadence:
+- body_before_mind_opening
+- silent_chat_established
+- private_mask_at_work
+- excluded_subchat_glimpsed
+- practice_post_gone_quiet
+- rival_clip_lands_cold
+- solo_training_cost
+- team_arrives_stilted
+- overheard_doubt_unmistakable
+- defense_without_agreement
+- room_silence_mirrors_chat
+- kuroda_wordless_background
+- unresolved_solo_closing
+page_turn_promises:
+- page_id: ep_009_p01
+  promise: Everyone read his apology in the group chat. Will anyone actually
+    answer it?
+- page_id: ep_009_p02
+  promise: Now that Hayato has heard the doubt out loud, does anything in the
+    gym tonight actually change — or does the silence just get a room around
+    it?
+panels:
+- panel_id: ep009_001
+  page_id: ep_009_p01
+  story_function: body_before_mind_opening
+  story_move: Cold open on the small physical residue of the loss on
+    Hayato's own body before any chat or dialogue establishes where he is.
+  visual_proof: Close on a faint scrape on Hayato's forearm, dim pre-dawn
+    room, eyes already open before the alarm.
+  information_delta: Reader re-enters the story through the body, not
+    narration — the loss is still physically legible three days later.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_002
+  page_id: ep_009_p01
+  story_function: silent_chat_established
+  story_move: The team's LINE group chat is shown with its unread badge
+    still active, but the actual content is silence — his own apology, read
+    by everyone, answered by no one.
+  visual_proof: Phone screen close-up, group chat name visible, his own
+    message with read marks under it and no replies beneath.
+  information_delta: Reader receives the episode's central object and its
+    exact, concrete shape of absence.
+  beat_role: object_plant
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_003
+  page_id: ep_009_p01
+  story_function: silent_chat_established
+  story_move: Hayato's internal read of the same silence, naming what he
+    thinks it means without anyone else saying it.
+  visual_proof: Tight face close-up, thumb hovering over the thread without
+    opening a reply field.
+  information_delta: Reader learns Hayato's own interpretation of the
+    silence, which the rest of the episode will test.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_004
+  page_id: ep_009_p01
+  story_function: private_mask_at_work
+  story_move: Established visual tic (pen against knuckles) resumes as
+    Hayato dresses for work, half-untucked shirt already back in its usual
+    state.
+  visual_proof: Medium shot, tie half-knotted, pen tapping knuckles, phone
+    face-down on the desk.
+  information_delta: Reader sees the coping tic returning under a new,
+    specific stressor rather than the original overload.
+  beat_role: somatic_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_005
+  page_id: ep_009_p01
+  story_function: private_mask_at_work
+  story_move: Commuter-train beat — Hayato checks the thread again out of
+    habit, then makes himself put the phone away.
+  visual_proof: Crowded train platform and car, phone half-drawn from a
+    pocket, then pushed back in.
+  information_delta: Reader tracks a small, failed attempt at self-restraint
+    playing out in transit, market-native and concrete.
+  beat_role: escalation_transit
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_006
+  page_id: ep_009_p01
+  story_function: private_mask_at_work
+  story_move: Office arrival — the public workplace mask goes on cleanly, a
+    normal-sounding greeting delivered over a still-unsettled body.
+  visual_proof: Office floor, name badge visible, an ordinary morning
+    greeting exchanged with a coworker.
+  information_delta: Reader sees the register gap between Hayato's public
+    performance and his private state made concrete, not narrated.
+  beat_role: mask_established
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_007
+  page_id: ep_009_p01
+  story_function: private_mask_at_work
+  story_move: Aya notices something is off from across the office floor but
+    doesn't press immediately.
+  visual_proof: Medium shot, Aya glancing over a stack of papers, starting
+    to speak, then holding back.
+  information_delta: Reader is shown a second character's restraint,
+    setting up her more direct intervention later in the episode.
+  beat_role: mirror_introduced
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_008
+  page_id: ep_009_p01
+  story_function: private_mask_at_work
+  story_move: Aya catches Hayato properly in the break room and offers a
+    partial, honest explanation for the chat's silence rather than false
+    reassurance.
+  visual_proof: Two-shot at the break room table, Aya leaning in, Hayato not
+    quite meeting her eyes.
+  information_delta: Reader receives an in-story theory for the silence from
+    a trusted character, which the rest of the episode will complicate.
+  beat_role: partial_reassurance
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_009
+  page_id: ep_009_p01
+  story_function: excluded_subchat_glimpsed
+  story_move: Aya's phone lights up on the table with a notification from a
+    smaller sub-chat Hayato is visibly not a member of, before she flips it
+    over.
+  visual_proof: Insert on the phone screen, a different group name and
+    Endou's name visible for a fraction of a second, Aya's hand moving fast
+    to turn it face-down.
+  information_delta: Reader and Hayato both learn a chat exists that
+    excludes him — the episode's real, concrete complication.
+  beat_role: excluded_object_revealed
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_010
+  page_id: ep_009_p01
+  story_function: excluded_subchat_glimpsed
+  story_move: Aya deflects without lying, redirecting to the evening's
+    practice instead of explaining the sub-chat.
+  visual_proof: Aya standing, gathering papers, not looking back at the
+    phone.
+  information_delta: Reader sees Aya choosing not to explain rather than
+    reassuring falsely, consistent with her character.
+  beat_role: deflection
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_011
+  page_id: ep_009_p01
+  story_function: practice_post_gone_quiet
+  story_move: Cut to the main group chat's practice-schedule post, normally
+    flooded with jokes and complaints, now answered by a single reaction and
+    nothing else.
+  visual_proof: Phone screen, a practice-time post from Aya, read marks
+    climbing, one thumbs-up emoji, no comments.
+  information_delta: Reader confirms the silence has spread from Hayato's
+    apology to the team's ordinary chat behavior itself.
+  beat_role: silence_confirmed_pattern
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_012
+  page_id: ep_009_p01
+  story_function: rival_clip_lands_cold
+  story_move: Scrolling back, Hayato finds the one thing that did break the
+    silence that morning — a teammate's forwarded clip of Kiryuu Ren's
+    flawless free-throw routine from the shared tournament venue, captioned
+    with nothing but a scouting note.
+  visual_proof: Phone screen, a paused video thumbnail of a rival player at
+    the free-throw line, a short caption beneath it.
+  information_delta: Reader sees the group chat's first real activity in
+    days land as cold information rather than support, compounding the
+    sting without anyone intending it to.
+  beat_role: object_reversal
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_013
+  page_id: ep_009_p01
+  story_function: rival_clip_lands_cold
+  story_move: Hayato's face, absorbing the second, unintended blow of the
+    morning — nobody meant it as a comparison, which is exactly why it
+    lands as one.
+  visual_proof: Tight close on Hayato's jaw, phone screen still lit in
+    frame.
+  information_delta: Reader closes page one on the compounded weight of the
+    episode's opening object before the location changes.
+  beat_role: page_turn_tension
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_014
+  page_id: ep_009_p02
+  story_function: body_before_mind_opening
+  story_move: Evening. Hayato arrives at the company gym alone, early,
+    changing into the old sneakers kept in his desk drawer.
+  visual_proof: Wide gym entrance at dusk, empty court, Hayato lacing worn
+    sneakers on a bench.
+  information_delta: Reader returns to the established visual anchor object
+    at the start of the episode's second location.
+  beat_role: location_callback
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_015
+  page_id: ep_009_p02
+  story_function: solo_training_cost
+  story_move: Alone, Hayato runs sprints before anyone else arrives, the
+    body's cost shown directly rather than summarized.
+  visual_proof: Wide court shot, Hayato mid-sprint, hands on knees after,
+    visible sweat and heavy breath.
+  information_delta: Reader is shown physical cost independent of any
+    dialogue, keeping the sport's weight in the frame even in an
+    off-game chapter.
+  beat_role: training_cost
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_016
+  page_id: ep_009_p02
+  story_function: team_arrives_stilted
+  story_move: Teammates arrive with normal-sounding greetings that land a
+    half-beat wrong around Hayato specifically.
+  visual_proof: Gym doorway, Endou and others entering, quick nods, eye
+    contact that lands and slides off Hayato a fraction too fast.
+  information_delta: Reader sees team friction rendered as body language and
+    timing rather than stated hostility.
+  beat_role: friction_established
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_017
+  page_id: ep_009_p02
+  story_function: team_arrives_stilted
+  story_move: Aya starts ordinary drills as if nothing has changed, the
+    team's public performance of normalcy continuing into practice itself.
+  visual_proof: Aya organizing pairs for a passing drill, clipboard in hand.
+  information_delta: Reader sees the public mask extend from the office into
+    the team's own practice space.
+  beat_role: mask_established
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_018
+  page_id: ep_009_p02
+  story_function: overheard_doubt_unmistakable
+  story_move: Retrieving a loose ball near the equipment closet, Hayato
+    overhears Endou and Matsuo talking low, unaware he is in earshot.
+  visual_proof: Hayato paused at the equipment closet doorway, two figures
+    visible in low light beyond, ball still in his hands.
+  information_delta: Reader is placed in the same overheard position as
+    Hayato, information delivered exactly as he receives it.
+  beat_role: overhearing_setup
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep009_019
+  page_id: ep_009_p02
+  story_function: overheard_doubt_unmistakable
+  story_move: Endou voices the doubt directly and specifically — not cruelly,
+    but plainly, about whether Hayato should start the next match.
+  visual_proof: Close two-shot on Endou and Matsuo, backs partly turned,
+    voices pitched low but not hidden.
+  information_delta: Reader receives the episode's real sting stated in
+    full, without softening.
+  beat_role: doubt_stated
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_020
+  page_id: ep_009_p02
+  story_function: overheard_doubt_unmistakable
+  story_move: Matsuo adds his own honest fear about the moment of the loss,
+    confirming Endou's doubt isn't isolated.
+  visual_proof: Matsuo, arms crossed, not looking at Endou, addressing the
+    floor more than his teammate.
+  information_delta: Reader learns the doubt is shared by more than one
+    teammate, matching the bible's "teammates" plural.
+  beat_role: doubt_confirmed
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_021
+  page_id: ep_009_p02
+  story_function: overheard_doubt_unmistakable
+  story_move: Hayato freezes, ball held against his chest, unable to step
+    forward or retreat.
+  visual_proof: Tight shot, Hayato motionless in the equipment closet
+    doorway, half in shadow.
+  information_delta: Reader holds in the moment's full weight before any
+    character resolves it.
+  beat_role: frozen_reaction
+  action_intensity: 2
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_022
+  page_id: ep_009_p02
+  story_function: defense_without_agreement
+  story_move: Aya arrives, catches the tail of the conversation and the
+    frozen doorway, and confronts Endou directly on Hayato's behalf.
+  visual_proof: Aya stepping between the equipment shelves and Endou,
+    posture squared, voice raised only slightly.
+  information_delta: Reader receives Aya's real, specific defense — not
+    generic reassurance — as a direct answer to a direct doubt.
+  beat_role: defense_stated
+  action_intensity: 3
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_023
+  page_id: ep_009_p02
+  story_function: defense_without_agreement
+  story_move: Endou half-concedes without fully retracting the doubt, and
+    Matsuo looks away rather than backing either of them.
+  visual_proof: Endou's arms uncrossing slightly, Matsuo's eyes dropping to
+    the floor.
+  information_delta: Reader sees the doubt survive Aya's defense instead of
+    being erased by it — the episode's anti-clean-resolution beat.
+  beat_role: doubt_unresolved
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep009_024
+  page_id: ep_009_p02
+  story_function: room_silence_mirrors_chat
+  story_move: The room goes quiet in the same shape as the chat thread —
+    no one agrees with Aya out loud, no one argues further either.
+  visual_proof: Wide equipment-closet-adjacent shot, three figures not
+    looking directly at each other.
+  information_delta: Reader is shown the episode's core image match — a
+    silent room echoing the silent thread from page one.
+  beat_role: thesis_echo
+  action_intensity: 1
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_025
+  page_id: ep_009_p02
+  story_function: kuroda_wordless_background
+  story_move: In the same wide frame, Kuroda continues resetting the ball
+    rack in the background, unbothered, present, saying nothing about any
+    of it.
+  visual_proof: Kuroda's small figure at the edge of the gym, ball rack
+    mid-reset, unreactive to the tension center-frame.
+  information_delta: Reader is reminded the mentor thread continues beneath
+    the episode's louder team conflict, unresolved and waiting for ep_010.
+  beat_role: mentor_wordless
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep009_026
+  page_id: ep_009_p02
+  story_function: unresolved_solo_closing
+  story_move: After practice empties out, Hayato stays alone at the
+    free-throw line; his phone buzzes once in his pocket and he leaves it
+    unanswered, then shoots an ordinary, unremarkable shot as the gym
+    empties into dark.
+  visual_proof: Wide shot, one window still lit in an otherwise dark gym,
+    Hayato alone at the line, phone untouched in his pocket.
+  information_delta: Reader closes on the episode's explicit non-resolution
+    — the chat is still just read, the doubt still stands, nothing has
+    actually ended tonight.
+  beat_role: honest_landing
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_009.yaml
+notes: |
+  Episode 9 of 12 — arc 1's post-loss fallout beat per the series bible's
+  per-episode assignment and the catalyst 'the_group_chat_gone_quiet' in
+  story_architecture_handoff.json. Deliberately does not resolve the team
+  friction — Aya's defense of Hayato lands but is not seconded by anyone,
+  and Hayato ends the episode alone with the same unanswered silence in his
+  pocket. Introduces one new minor character, Matsuo Yousuke, specifically
+  so the overheard doubt is plural (per bible: "doubt from teammates"), not
+  a single antagonist line from Endou alone. Kuroda remains fully wordless
+  this episode, consistent with his established silence pattern in
+  ep_002/ep_003 — his first real language lands in ep_010, not here.
+  scripts/ci/check_manga_arc_storyboard.py does not exist in this repo
+  checkout; this file was authored to the established shape anyway per the
+  brief, and that gate was not run.

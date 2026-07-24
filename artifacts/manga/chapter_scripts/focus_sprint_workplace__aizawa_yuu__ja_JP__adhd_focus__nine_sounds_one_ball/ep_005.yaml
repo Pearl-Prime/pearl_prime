@@ -1,0 +1,480 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_005
+chapter_number: 5
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_005.arc_storyboard.yaml
+title: '静寂のフリースロー — 第5話: 鳴るのはボールだけじゃない'
+title_en_gloss: 'The Silence at the Line — Episode 5: It''s Not Just the Ball That Rings'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_TW
+- zh_CN
+genre: sports_competition
+mode: teacher
+vessel: 力を抜かせるコーチ
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings,
+    team chats, finance/time pressure, and physical cost without letting analytics
+    replace the body.
+  catalyst:
+    id: the_overtime_request_mid_drill
+    logline: A department overtime-request notification lights Hayato's phone in
+      the middle of a free-throw drill, and choosing whether to answer it now
+      becomes the episode's real contest, not the drill itself.
+    ordinary_world_objects:
+    - phone_notification
+    - overtime_request_form
+    - free_throw_line
+    - gym_clock
+    genre_transmutation: A routine workplace notification becomes an in-gym
+      intrusion; the free-throw line becomes the place where two identities --
+      new-hire and rookie athlete -- collide for the first time.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world entrypoint.
+    Market=ja_JP; audience=gen_z. Use catalyst 'the_overtime_request_mid_drill'.
+    Market surface rule per config/manga/modern_reader_story_doctrine.yaml ja_JP.
+    Use concrete objects and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公。東雲商事・営業支援課の新入社員／東雲商事バスケットボール部のルーキー。二つの肩書きが今回初めて同じ十秒の中でぶつかる。
+  visual_anchor: 半分だけタックインされたワイシャツ、抱え込むと知恵の輪のようにペンをナックルに打ちつける癖、机の引き出しに入れっぱなしの古いスニーカー
+- id: kuroda
+  name: 黒田
+  name_romaji: Kuroda
+  age: 60代
+  role: 器の存在。会社の設備管理員、元セミプロ選手。三語以内でしか話さない。台詞での解釈は一切しない。
+  visual_anchor: 灰色の作業着、ボールラックを黙って整える手
+- id: aya
+  name: 美濃部 彩
+  name_romaji: Minobe Aya
+  age: 25
+  role: ハヤトの職場の先輩（同じ課）であり、部の実質的なキャプテン兼マネージャー。今回、職場と部活の両方の文脈を知る唯一の人物として初めて明示的に機能する。
+  visual_anchor: クリップボード、まとめた髪、崩れない姿勢
+- id: endou
+  name: 遠藤 岳
+  name_romaji: Endou Gaku
+  age: 30代
+  role: チームのエース。粗野だが仲間思い。ハヤトのスマホ事件に対して皮肉だが敵意のない一言を放つ。
+  visual_anchor: 日焼けした腕、テーピングの跡
+
+scene_palette:
+  primary: 体育館の夕方の木床の色とオレンジのボール
+  secondary: スマートフォン画面の青白い光
+  accent: 半分だけタックインされたワイシャツ（ハヤトの視覚的スルーライン）
+
+pages:
+- page_id: ep_005_p01
+  panels:
+  - panel_id: ep005_001
+    scene: |
+      ワイド。夕方の体育館。高い窓から橙色の光が差し込む。隼人はすでにフリースローラインに立っている——前回の小さな成功が、まだ危うい日課として続いている。周りでは部員たちがそれぞれのドリルをこなし、黒田はラックのそばで静かに動いている。
+    beat_type: standard
+    intent: "継続性の再確認 — ep_004の小さな勝利が一回限りではなく続いている日課であることを示す"
+    silence_confirmed: true
+    narrator_caption_by_locale:
+      ja_JP: "夕方の練習。仲間たちがそれぞれのドリルをこなし、黒田コーチはラックのそばで動いている。"
+      en_US: "Evening team practice. His teammates run their own drills around the court; Coach Kuroda works near the rack."
+      zh_TW: '[zh_TW] Evening team practice. His teammates run their own drills around the court; Coach Kuroda works near the rack.'
+      zh_CN: '[zh_CN] Evening team practice. His teammates run their own drills around the court; Coach Kuroda works near the rack.'
+  - panel_id: ep005_002
+    scene: |
+      手元のクローズアップ。ボールを一度、数えるように弾ませる。息を整える。動きはまだ完全な自動化ではないが、確実に近づいている。
+    beat_type: micro
+    intent: "アンカーの反復 — まだ努力を要する自動化"
+    narrator_caption_by_locale:
+      ja_JP: "一度の呼吸。身体は、頭より先にこの動きを覚えている。"
+      en_US: "One measured breath. His body already knows this motion better than his mind does."
+      zh_TW: '[zh_TW] One measured breath. His body already knows this motion better than his mind does.'
+      zh_CN: '[zh_CN] One measured breath. His body already knows this motion better than his mind does.'
+  - panel_id: ep005_003
+    scene: |
+      ボールがネットをくぐる。誰も大げさに騒がない、けれど確かな一本。サイドラインでクリップボードを構えていた彩が、視線だけ上げて小さくうなずく。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "いいよ、隼人くん。"
+        en_US: "Good, Hayato."
+        zh_TW: '[zh_TW] Good, Hayato.'
+        zh_CN: '[zh_CN] Good, Hayato.'
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep005_004
+    scene: |
+      黒田がラックを整え、次のボールを黙って転がして寄越す。見上げもしない。いつもと同じ、崩れない儀式——それが崩れる一コマ前。
+    beat_type: micro
+    intent: "コーチの不変の儀式を再アンカー — 直後に破られる伏線"
+    silence_confirmed: true
+  - panel_id: ep005_005
+    scene: |
+      カット。ベンチに置かれたジムバッグ。今夜だけマナーモードにし忘れたスマートフォンが、薄暗い体育館の中で光る。通知バナーが滑り込む。誰もまだ気づいていない。
+    beat_type: spatial
+    intent: "起動トリガー — 隼人が自覚する前に読者だけが対象物を知る"
+    sfx_by_locale:
+      ja_JP: "ブブッ"
+      en_US: "bzzt"
+      zh_TW: '[zh_TW] bzzt'
+      zh_CN: '[zh_CN] bzzt'
+  - panel_id: ep005_006
+    scene: |
+      動作の途中、隼人の視界の端をあの光がかすめる。半瞬、意識が余計に持っていかれる。リズムがさっきより少し薄くなる。
+    beat_type: micro
+    intent: "注意が分岐する正確な瞬間"
+  - panel_id: ep005_007
+    scene: |
+      画面のディテール挿入。「【要対応】残業申請 - 本日23:59まで」という通知バナーと、赤いステータスアイコン。一瞬だけ読めてしまい、また視線を戻す。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: "会社の音が、体育館に入り込んできた。"
+      en_US: "The notification. A sound from the office, inside the gym."
+      zh_TW: '[zh_TW] The notification. A sound from the office, inside the gym.'
+      zh_CN: '[zh_CN] The notification. A sound from the office, inside the gym.'
+  - panel_id: ep005_008
+    scene: |
+      隼人は目をリムに戻す。読み続ける代わりに、バウンドの数を頭の中で唱える。新しい種類の雑音に、いつもの技術を当てはめようとする最初の試み。
+    beat_type: micro
+    intent: "確立された技術を、想定外の雑音に適用しようとする試み"
+  - panel_id: ep005_009
+    scene: |
+      それでもシュートは入る——けれど急いでいた。一分前にはなかった罅が、日課に入り込んでいる。隼人自身がそれに気づいている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: "落とすわけにはいかない——ボールも、あの見積りも。"
+        en_US: "He can't drop either one — not the ball, not the estimate waiting on his phone."
+        zh_TW: '[zh_TW] He can''t drop either one — not the ball, not the estimate waiting on his phone.'
+        zh_CN: '[zh_CN] He can''t drop either one — not the ball, not the estimate waiting on his phone.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+
+- page_id: ep_005_p02
+  panels:
+  - panel_id: ep005_010
+    scene: |
+      給水休憩。隼人はバッグの方へ寄る——水のためだと、自分にも言い聞かせながら。手は水筒を通り過ぎて、スマートフォンへ伸びる。
+    beat_type: micro
+    intent: "認める前に、身体がすでに選択している"
+  - panel_id: ep005_011
+    scene: |
+      メッセージが全文表示される。係長・皆川からのLINE。「神崎くん、急で悪い。汐留物産の見積り、明日9時に前倒しになった。今日中に直して送っておいてくれる? あと、残業申請だけ出しておいて。」その下に、勤怠システムからの赤い通知——「本日23:59までに残業申請の承認が必要です」。
+    beat_type: spatial
+    intent: "職場の具体的な利害関係を、要約ではなく物として提示する"
+  - panel_id: ep005_012
+    scene: |
+      手のクローズアップ。スマートフォンの角を握る指の関節が白くなる——机でペンをナックルに打ちつける、いつもの癖と同じ緊張。今はペンがない代わりに、これがある。
+    beat_type: micro
+    intent: "確立された身体的サインを、一つの場面の中で職場と部活を横断させて初めて結びつける"
+  - panel_id: ep005_013
+    scene: |
+      締め切りの下にある本当の恐怖は、取引先だけではない。まだ何も分かっていない新人だと、どちらの場所でも見抜かれることだ。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: "新人が使えないと思われるわけにはいかない。ここでも、あそこでも。"
+        en_US: "He needs this to look easy. A first-year who can't be trusted costs more than a missed shot — at either job."
+        zh_TW: '[zh_TW] He needs this to look easy. A first-year who can''t be trusted costs more than a missed shot — at either job.'
+        zh_CN: '[zh_CN] He needs this to look easy. A first-year who can''t be trusted costs more than a missed shot — at either job.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+  - panel_id: ep005_014
+    scene: |
+      片手で返信を打ちながら、ドリルの列へ小走りで戻る。片手にはスマートフォン、もう片手にはすでに向かってくるパス。二つの肩書きが、文字通り同時に両手を占領する。
+    beat_type: micro
+    intent: "二つのアイデンティティが感情ではなく身体として衝突する"
+  - panel_id: ep005_015
+    scene: |
+      ワイド。タイミングがずれる——キャッチが遅れ、リリースが急かされ、ボールはリングの手前を叩いて跳ね返る。同じ瞬間、腰に挟んでいたスマートフォンが滑り落ち、フローリングの上で大きな音を立てる。体育館じゅうの視線がその音へ集まる。
+    beat_type: micro
+    intent: "代償が公になり、聞こえるものになる — これまでの回とは違い、私的なものではなくなる"
+    sfx_by_locale:
+      ja_JP: "ガシャッ"
+      en_US: "clatter"
+      zh_TW: '[zh_TW] clatter'
+      zh_CN: '[zh_CN] clatter'
+  - panel_id: ep005_016
+    scene: |
+      遠藤が腕を組んだまま、床のスマートフォンを見下ろす。誰よりも先に、乾いた、悪意のない一言を投げる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: endou
+      text_by_locale:
+        ja_JP: "おい、スマホ鳴ってんぞ。仕事は家に帰ってからやれよ。"
+        en_US: "Your phone's ringing, isn't it? Work can wait till you're home."
+        zh_TW: '[zh_TW] Your phone''s ringing, isn''t it? Work can wait till you''re home.'
+        zh_CN: '[zh_CN] Your phone''s ringing, isn''t it? Work can wait till you''re home.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep005_017
+    scene: |
+      彩の表情には、遠藤には見えていないもう一段深い理解がよぎる——あの着信音の主が誰か、彼女だけは正確に知っている。慰めではなく、抑えた一言だけを返す。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "……大丈夫。続けて。"
+        en_US: "...It's fine. Keep going."
+        zh_TW: '[zh_TW] ...It''s fine. Keep going.'
+        zh_CN: '[zh_CN] ...It''s fine. Keep going.'
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep005_018
+    scene: |
+      黒田が無言でフロアを横切り、誰よりも先にスマートフォンを拾い上げる。表情はいつも通り読めない。
+    beat_type: micro
+    intent: "器がこの回で初めて衝突そのものに踏み込む"
+    silence_confirmed: true
+
+- page_id: ep_005_p03
+  panels:
+  - panel_id: ep005_019
+    scene: |
+      黒田はスマートフォンをベンチに裏返しに置く——ラックの予備ボールと、まったく同じ列に。脇にどけるのでも、隠すのでもない。
+    beat_type: micro
+    intent: "この回の教義を、台詞なしの一枚の画で示す — スマートフォンを『もう一つの、順番を待つ物』として再定義する"
+    silence_confirmed: true
+  - panel_id: ep005_020
+    scene: |
+      黒田の、この回で唯一の台詞。三語以内。すでにラックの方へ向き直りかけている。反応を待たない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: kuroda
+      text_by_locale:
+        ja_JP: "先に、一本。"
+        en_US: "One first."
+        zh_TW: '[zh_TW] One first.'
+        zh_CN: '[zh_CN] One first.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep005_021
+    scene: |
+      隼人はベンチを見る。ボール、ボール、ボール、スマートフォン——すべて同じ光の中、同じ一列に並んでいる。一拍、動けない。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep005_022
+    scene: |
+      その一本のために、スマートフォンではなくボールを手に取る。小さく、意図的な選択。誰も何も言わない。
+    beat_type: micro
+    intent: "選択が言葉ではなく身体で実行される"
+  - panel_id: ep005_023
+    scene: |
+      シュート自体は地味だ——リングの手前に当たり、奥に当たり、揺れて、それから落ちる。スワイッシュではない。何かが解決した証明でもない。
+    beat_type: micro
+    intent: "意図的に、きれいな勝利の画を与えない — 勝利=治癒ではないという throughline の原則"
+    sfx_by_locale:
+      ja_JP: "カツン、コトン……スッ"
+      en_US: "tk, tk... swish"
+      zh_TW: '[zh_TW] tk, tk... swish'
+      zh_CN: '[zh_CN] tk, tk... swish'
+  - panel_id: ep005_024
+    scene: |
+      その夜の練習が終わる。隼人はようやくスマートフォンを表に返す——メッセージも締め切りも、置いていったときのまま、そこにある。体育館は少しずつ空いていく。
+    beat_type: micro
+    intent: "体育館での選択は職場の問題そのものを何も解決しなかったことを確認する — 守られたのはこの一本だけで、締め切りではない"
+  - panel_id: ep005_025
+    scene: |
+      体育館の出入口近く。隼人はこれまでのように黙ってそれを抱え込むのではなく、初めて彩に声に出して言う。片方の肩にすでにバッグを掛けている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: "彩さん……すみません、今日はこのあと会社に戻ります。見積り、明日の朝一なので。"
+        en_US: "Aya-san... sorry. I have to go back to the office tonight. The estimate's due first thing tomorrow."
+        zh_TW: '[zh_TW] Aya-san... sorry. I have to go back to the office tonight. The estimate''s due first thing tomorrow.'
+        zh_CN: '[zh_CN] Aya-san... sorry. I have to go back to the office tonight. The estimate''s due first thing tomorrow.'
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_left
+  - panel_id: ep005_026
+    scene: |
+      彩の返事は表面上は落ち着いている。けれど、その言葉が本来必要とする以上に半瞬だけ長く、表情が止まる——誰にも本気で相手にされていないチームのキャプテンが、また「大丈夫」と言っている。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: aya
+      text_by_locale:
+        ja_JP: "うん、業務なら仕方ないよ。課長には……私からうまく言っておくから。"
+        en_US: "Yeah, if it's work, it's work. I'll smooth it over with the section chief — leave that part to me."
+        zh_TW: '[zh_TW] Yeah, if it''s work, it''s work. I''ll smooth it over with the section chief — leave that part to me.'
+        zh_CN: '[zh_CN] Yeah, if it''s work, it''s work. I''ll smooth it over with the section chief — leave that part to me.'
+      intensity: warm
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+    intent: "彩自身の、この回で種として蒔かれるだけの未解決の亀裂 — 説明も解決もされない"
+  - panel_id: ep005_027
+    scene: |
+      更衣室のロッカー脇。隼人は練習着の上から、いつもの半分だけタックインされたワイシャツを羽織り直す。古いスニーカーは、今夜は机の引き出しではなくジムバッグの底に戻る。体育館を出て夜の中へ——会社のバッグと部活のバッグ、両方を肩に掛けたまま。どちらも、完全には閉まっていない。
+    beat_type: standard
+    intent: "閉じの画をこの回の実質的な結論とする — 誰の台詞にもならず、物だけで語る"
+    narrator_caption_by_locale:
+      ja_JP: "会社のカバンと、体育館のカバン。今日はどちらも、半分しか閉まらなかった。"
+      en_US: "The work bag and the gym bag. Tonight, neither one closed all the way."
+      zh_TW: '[zh_TW] The work bag and the gym bag. Tonight, neither one closed all the way.'
+      zh_CN: '[zh_CN] The work bag and the gym bag. Tonight, neither one closed all the way.'
+
+notes:
+  arc_position: |
+    Episode 5 of 12 — arc 1's first identity-collision beat. Episodes 1-4
+    established the two worlds as separate (rooftop recruitment, first
+    humiliating practice, Kuroda's wordless lesson, a first modest scrimmage
+    win). This is the first episode where the workplace physically intrudes
+    into gym space in real time rather than the two contexts simply
+    coexisting after hours. Seeds two secondary threads per the series bible:
+    Hayato's imposter syndrome (panel ep005_013, spanning both jobs) and
+    Aya's own unresolved doubt about the team's legitimacy (panel ep005_026)
+    — both left open on purpose; this arc does not close either.
+  pacing_vs_prior: |
+    27 panels across 3 pages — denser than the stillness_press template
+    average, matching the sports_competition craft bible's 18-22+ page-chapter
+    norm and the bible's 20-30 panel target for this series. The extra page
+    (vs. the 2-page ep_011 template) accommodates the sports genre's higher
+    panel-per-page density (5-8 panels/page per the genre style bible) and
+    the episode's two distinct locations (gym drill, then gym-exit/locker
+    coda) on top of the workplace intrusion sequence.
+  continuity_callbacks: |
+    - Counted-bounce anchor gesture (panels 002, 008) — same technique
+      established in ep_003/ep_004, now tested against a new kind of noise
+      it was not built for.
+    - Kuroda's ball-rack reset ritual (panel 004) — established motif,
+      deliberately interrupted this episode by the phone.
+    - Hayato's pen-against-knuckles tell (visual anchor, referenced directly
+      in panel 012's dialogue-adjacent intent) — transposed onto the phone
+      for the first time, connecting a workplace tell to a gym setting
+      inside one continuous scene.
+    - Half-untucked dress shirt / old sneakers in a drawer (visual anchors)
+      — literalized in the closing panel (027) as the two-bags image.
+    - Aya as the only character who holds both the workplace and team
+      context — established in ep_001 as his recruiter and senpai;
+      functionally activated here for the first time this episode.
+  doctrinal_anchor_vessel_handling: |
+    Kuroda never states the lesson. His entire intervention is nonverbal
+    action (picking the phone off the floor, panel 018; placing it in the
+    same row as the balls, panel 019) plus a single three-word practical
+    line (panel 020, "先に、一本。" / "One first.") that is an instruction
+    about sequence, not an interpretation of Hayato's psychology. No
+    narrator caption states "focus means choosing," per the throughline's
+    anti-pattern rule against voiceover stating the psychology — the closing
+    caption (panel 027) stays in concrete objects (two bags, neither
+    closed) rather than naming the insight. No scoreboard, no trophy, no
+    buzzer-beater: this is a practice rep inside a regular evening, and the
+    made shot in panel 023 is deliberately unglamorous (front rim, back
+    rim, a wobble) so that no one mistakes it for the arc's turn being
+    complete. The workplace deadline is explicitly NOT resolved by episode's
+    end (panel 024) — the technique protects the rep, not the job.
+  data_consistency_note: |
+    The modern_reader_context block above is copied verbatim from
+    story_architecture_handoff.json chapters[4].story_craft.modern_reader_context
+    with one deliberate correction: relevance_genre was "sports_competition"
+    in the source JSON (identical to genre_id/strategy_genre), which is the
+    strategy-bank id, not the canonical relevance-genre row id used by
+    config/manga/canonical_genre_list.yaml and
+    config/manga/story_genre_alias_coherence.yaml (both of which alias
+    sports_competition -> sports, and only register "sports" as a canonical
+    row). Passing "sports_competition" straight through causes
+    MANGA.STORY.RESEARCH_DOCTRINE_COVERAGE and MANGA.STORY.ALIAS_COHERENCE
+    to hard-fail regardless of story content (confirmed by direct testing
+    against phoenix_v4.manga.story_quality.excellence_gate before writing
+    this file's content). Corrected relevance_genre to "sports" here;
+    genre_id and strategy_genre remain "sports_competition" verbatim, which
+    is the allowed strategy-genre alias for the "sports" canonical row.
+    Catalyst id/logline/objects/genre_transmutation/avoid and all market and
+    audience fields are unchanged from the source JSON. Flagging this for
+    whoever authors ep_001-004/006-012 from the same handoff file — the
+    same correction will be needed there too.
+  translation_handoff: |
+    text_by_locale dicts populated with native ja_JP dialogue/captions
+    (authorial, not translated), real en_US translations (operator-review
+    gloss), and bracket-placeholder zh_TW/zh_CN entries in the
+    '[zh_TW] <en_US line>' / '[zh_CN] <en_US line>' pattern, matching the
+    convention established in
+    heart_balance_shojo__tsukimura_yui__ja_JP__social_anxiety__two_cups_on_the_counter/ep_001.yaml.
+    CJK real-translation lanes are a separate downstream pipeline step
+    (translate_chapter_script.py), not authored here.
