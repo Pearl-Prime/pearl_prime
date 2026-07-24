@@ -20,6 +20,7 @@ from phoenix_v4.manga.image_backend import (
     NoopImageBackend,
     build_panel_images_manifest,
 )
+from phoenix_v4.manga.style_resolution import resolve_style_id
 from scripts.manga._config import config_snapshot_hash, write_atomically
 
 
@@ -41,7 +42,13 @@ def main() -> int:
         type=Path,
         help="JSON map panel_id -> relative image path (for --backend replay)",
     )
-    ap.add_argument("--style-id", default="dark_psychological")
+    ap.add_argument(
+        "--style-id",
+        default=None,
+        help="Explicit style archetype id. Omit to resolve via the authority "
+        "chain in phoenix_v4.manga.style_resolution (genre/teacher/format "
+        "signal, falling back to grounded_realism).",
+    )
     ap.add_argument("--teacher-id", default="ahjan")
     args = ap.parse_args()
 
@@ -57,13 +64,21 @@ def main() -> int:
             file=sys.stderr,
         )
 
+    resolved_style_id, style_source = resolve_style_id(
+        explicit_override=args.style_id,
+        chapter_script=raw,
+        teacher_id=args.teacher_id,
+        genre_id=raw.get("genre") or raw.get("genre_id"),
+    )
+    print(f"style_id={resolved_style_id} (source={style_source})", file=sys.stderr)
+
     snap = config_snapshot_hash()
     doc = compile_panel_prompts_from_chapter_script(
         raw,
         series_id=raw.get("series_id"),
         chapter_id=raw.get("chapter_id"),
         config_hash=snap,
-        style_id=args.style_id,
+        style_id=resolved_style_id,
         teacher_id=args.teacher_id,
     )
     write_atomically(args.out, doc)

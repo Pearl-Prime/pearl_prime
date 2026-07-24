@@ -34,6 +34,9 @@ def build_series_artifact_bundle(
     demographic: str = "anxious_millennials_urban",
     auto_generate_author: bool = False,
     mode: str | None = None,
+    teacher_id: str | None = None,
+    musician_id: str | None = None,
+    series_plan: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Deterministic bundle: all series JSON artifacts, each schema-validated.
 
@@ -46,9 +49,23 @@ def build_series_artifact_bundle(
     style = build_style_bible(schema_version=schema_version)
     letter = build_lettering_style_bible(schema_version=schema_version)
     genre = build_genre_blueprint(genre_id=genre_id, schema_version=schema_version)
+    declared = dict(series_plan or {})
+    declared.setdefault("series_id", series_id)
+    declared.setdefault("brand_id", brand_id)
+    if mode is not None:
+        declared["mode"] = mode
+    if teacher_id is not None:
+        declared["teacher_id"] = teacher_id
+    if musician_id is not None:
+        declared["musician_id"] = musician_id
+    from phoenix_v4.manga.mode.catalog import apply_brand_mode
+    declared = apply_brand_mode(declared)
+
     internal = build_story_architecture_internal(
         series_id=series_id, arc_id=arc_id, schema_version=schema_version,
-        genre_id=genre_id, topic=topic, mode=mode,
+        genre_id=genre_id, topic=topic, mode=declared.get("mode"),
+        teacher_id=declared.get("teacher_id"),
+        musician_id=declared.get("musician_id"), brand_id=brand_id,
     )
     handoff = story_architecture_internal_to_handoff(internal)
     assets = build_asset_registry(schema_version=schema_version)
