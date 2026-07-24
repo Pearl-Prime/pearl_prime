@@ -219,11 +219,15 @@ program history. Both goldens now live + byte-frozen (re-verified 2026-07-22 aud
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`; July 15 old-chat unblock wave reduced stale PR requeue risk**
 - **Details:**
   - **LFS→R2 offload V1 spec + `composed_v4_qwen` pilot — MERGED** (#5306, `5b3f64e29954e252dc5b2dbc6a688dd2711612d8`).
-    Live reconciliation at `7095e9e44445b1cd2944307629e019c343f71999` corrected the Wave-2 premise:
-    `assets/manga_catalog` has **0 tracked files** and belongs to laptop backup/cleanup, not git surgery.
-    Waves 3–4 remain blocked pending access to the operator laptop's R2 credentials and verified round trips
-    (267 tracked manga render files; 79 tracked cover files). Parent ws `ws_lfs_setup_20260410` stays **active**;
-    Phase B history rewrite remains separately owner-gated.
+    **Waves 3 and 4 landed on `main`** (2026-07-23): Wave 3 (267 tracked manga assembled / `v4_render_cache`
+    files) via PR #151 `b702de43f9c93f36963794dd2513d45ae56b4c3d`, Wave 4 (79 tracked `brand-wizard-app` cover
+    files) via PR #161 `bccb1885352de1135c99e70cb1ac02075c302c91` — both carried the mandatory owner approval
+    for >50-file deletions (PR titles tagged `[NEEDS APPROVAL >50 deletions]`; landed manifests under
+    `artifacts/manifests/lfs_offload/`). **Wave 2 = N/A:** `assets/manga_catalog` has **0 git-tracked files**
+    (gitignored, `.gitignore:127`) — it is handled by the Lane 01 laptop→R2 backup, not by git surgery.
+    Waves 2–4 are now **closed**; the sole remaining open item is the **Phase B history rewrite**, which stays
+    owner-gated (scheduled maintenance window) — see Lane C. Parent ws `ws_lfs_setup_20260410` stays **active**
+    only because Phase B is still open.
   - **What-runs-where policy + advisory RAP artifact-write detector — INTEGRATION CANDIDATE.** Laptop is edit-only;
     Pearl Star runs GPU/LLM work via `pscli`; GitHub Actions orchestrates; R2 holds binaries. The detector is
     WARN-only for its first landing and has a mutation test proving an unmediated local binary write is surfaced.
