@@ -34,6 +34,23 @@ genre_pacing:
       - "Demon Slayer"
       - "Jujutsu Kaisen"
       - "My Hero Academia"
+    arc_cadence:
+      episodes_per_arc_range: [6, 60]
+      episodes_per_arc_median: 26
+      arc_pattern: escalating
+      season_unit: 9  # chapters per tankobon volume (Weekly Shonen Jump convention)
+      first_major_shift_by: 100
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Story Arcs — One Piece Wiki (onepiece.fandom.com/wiki/Story_Arcs, accessed 2026-07-24)"
+        - "Demon Slayer: All Manga Arcs in Order & Chapters — ComingSoon (comingsoon.net/guides/news/1786665, accessed 2026-07-24)"
+        - "Shibuya Incident Arc — Jujutsu Kaisen Wiki (jujutsu-kaisen.fandom.com/wiki/Shibuya_Incident_Arc, accessed 2026-07-24)"
+        - "Paranormal Liberation War Arc — My Hero Academia Wiki (myheroacademia.fandom.com/wiki/Paranormal_Liberation_War_Arc, accessed 2026-07-24)"
+      notes: >-
+        Arcs lengthen as the run matures (KnY 9->44, MHA ~10->54, OP <20 -> 100+); late-run
+        mega-arcs (Dressrosa 102, Wano ~148) are outliers beyond the planning range. Arc ends
+        align only partially with volume edges; saga ends align better. First 100 chapters ~5-8
+        arcs; first status-quo shift lands ch 66-101 (KnY 66, JJK 79, MHA 92-94, OP 100).
 
   romance:
     label: "Shojo romance"
@@ -56,6 +73,22 @@ genre_pacing:
       - "Ao Haru Ride"
       - "Kimi ni Todoke"
       - "Strobe Edge"
+    arc_cadence:
+      episodes_per_arc_range: [4, 20]
+      episodes_per_arc_median: 9
+      arc_pattern: fixed
+      season_unit: 4  # chapters per volume (monthly shojo magazine convention)
+      first_major_shift_by: 50
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Kimi ni Todoke — Wikipedia chapter/volume list (en.wikipedia.org/wiki/Kimi_ni_Todoke, accessed 2026-07-24)"
+        - "Fruits Basket — Wikipedia, 136 ch / 23 vols (en.wikipedia.org/wiki/Fruits_Basket, accessed 2026-07-24)"
+        - "Ao Haru Ride — Wikipedia, 49 ch / 13 vols (en.wikipedia.org/wiki/Ao_Haru_Ride, accessed 2026-07-24)"
+      notes: >-
+        Ladder-rung arcs (school event / rival / confession attempt) stay roughly constant in size
+        while stakes escalate; arcs are written to close at tankobon boundaries (~4 monthly
+        chapters). Relationship-status shift (couple formed) by ch ~48-50 in long-runners (Kimi ni
+        Todoke ch 48-49), ch ~25 in mid-length titles.
 
   workplace:
     label: "Josei workplace"
@@ -77,6 +110,22 @@ genre_pacing:
       - "Princess Jellyfish"
       - "Honey and Clover"
       - "What Did You Eat Yesterday"
+    arc_cadence:
+      episodes_per_arc_range: [1, 15]
+      episodes_per_arc_median: 8
+      arc_pattern: fixed
+      season_unit: 5  # chapters per volume (monthly josei magazine convention)
+      first_major_shift_by: 30
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "What Did You Eat Yesterday? — Wikipedia, episodic 1-ch units (en.wikipedia.org/wiki/What_Did_You_Eat_Yesterday%3F, accessed 2026-07-24)"
+        - "Princess Jellyfish — Wikipedia, 17 vols (en.wikipedia.org/wiki/Princess_Jellyfish, accessed 2026-07-24)"
+        - "Honey and Clover — Wikipedia, 10 vols / 64 ch (en.wikipedia.org/wiki/Honey_and_Clover, accessed 2026-07-24)"
+      notes: >-
+        Episodic baseline (chapter = one meal / one client / one deadline) with serial threads of
+        8-15 ch surfacing periodically (Princess Jellyfish redevelopment threat, Honey and Clover
+        life-stage turns). Purely episodic titles (WDYEY) defer status-quo shifts far beyond ch
+        100.
 
   healing:
     label: "Iyashikei / healing"
@@ -99,6 +148,22 @@ genre_pacing:
       - "Flying Witch"
       - "Non Non Biyori"
       - "Laid-Back Camp"
+    arc_cadence:
+      episodes_per_arc_range: [1, 5]
+      episodes_per_arc_median: 2
+      arc_pattern: seasonal_cycle
+      season_unit: 8  # chapters per volume (monthly seinen/shonen SoL convention)
+      first_major_shift_by: null  # no status-quo-shift convention in this family (see notes)
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Yotsuba&! — Wikipedia, standalone monthly chapters (en.wikipedia.org/wiki/Yotsuba%26!, accessed 2026-07-24)"
+        - "Laid-Back Camp — Wikipedia, trip units 2-5 ch (en.wikipedia.org/wiki/Laid-Back_Camp, accessed 2026-07-24)"
+        - "Barakamon — Wikipedia, 18 vols episodic + competition threads (en.wikipedia.org/wiki/Barakamon, accessed 2026-07-24)"
+      notes: >-
+        No status-quo-shift convention: the loop is the product. Units are vignettes (1-2 ch) and
+        trips/festivals (2-5 ch) hung on a seasonal calendar that resets yearly. Plan first-100 as
+        ~3-4 season wheels with demographic (not plot) drift; craft-bible seasonal-cycle claim
+        confirmed.
 
   mystery:
     label: "Seinen psychological / mystery"
@@ -119,6 +184,21 @@ genre_pacing:
       - "Monster"
       - "20th Century Boys"
       - "Pluto"
+    arc_cadence:
+      episodes_per_arc_range: [8, 40]
+      episodes_per_arc_median: 18
+      arc_pattern: escalating
+      season_unit: 9  # chapters per volume (seinen biweekly convention)
+      first_major_shift_by: 55
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Monster — Wikipedia, 162 ch / 18 vols (en.wikipedia.org/wiki/Monster_(manga), accessed 2026-07-24)"
+        - "20th Century Boys — Wikipedia, 249 ch / 22 vols (en.wikipedia.org/wiki/20th_Century_Boys, accessed 2026-07-24)"
+        - "Pluto — Wikipedia, 65 ch / 8 vols, act-per-robot (en.wikipedia.org/wiki/Pluto_(manga), accessed 2026-07-24)"
+      notes: >-
+        Investigation-block arcs (a location, an era, a suspect) of 8-25 ch early, widening to
+        30-40 as conspiracies compound; Pluto's 8-act case grid is the compact model. First
+        irreversible reframe (fugitive status, Bloody New Year's Eve) lands ch ~15-55.
 
   horror:
     label: "Horror / dread"
@@ -139,6 +219,22 @@ genre_pacing:
       - "Uzumaki"
       - "Tomie"
       - "Junji Ito short form"
+    arc_cadence:
+      episodes_per_arc_range: [1, 3]
+      episodes_per_arc_median: 1
+      arc_pattern: fixed
+      season_unit: 10  # stories per collected volume (anthology convention)
+      first_major_shift_by: null  # no status-quo-shift convention in this family (see notes)
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Uzumaki — Wikipedia, 19 ch, episodic until 3-ch convergence (en.wikipedia.org/wiki/Uzumaki, accessed 2026-07-24)"
+        - "Tomie — Wikipedia, ~20 standalone episodes (en.wikipedia.org/wiki/Tomie, accessed 2026-07-24)"
+        - "Junji Ito Collection listings — Junji Ito Wiki (junjiitomanga.fandom.com, accessed 2026-07-24)"
+      notes: >-
+        Anthology-of-dread model: 1-ch standalones sharing a motif/town, with a terminal
+        convergence arc (Uzumaki's final 3 of 19 ch). A 100-episode horror plan is ~85-92
+        standalones + escalating convergence, not serialized arcs; no early status-quo shift
+        convention.
 
   sports:
     label: "Sports ascent"
@@ -161,6 +257,21 @@ genre_pacing:
       - "Haikyuu!!"
       - "Blue Lock"
       - "Kuroko's Basketball"
+    arc_cadence:
+      episodes_per_arc_range: [5, 45]
+      episodes_per_arc_median: 18
+      arc_pattern: escalating
+      season_unit: 9  # chapters per tankobon volume (Weekly Shonen Jump convention)
+      first_major_shift_by: 40
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Haikyu!! — Wikipedia, 402 ch; tournament/match structure (en.wikipedia.org/wiki/Haikyu!!, accessed 2026-07-24)"
+        - "Slam Dunk — Wikipedia, 276 ch; Sannoh match spans multiple volumes (en.wikipedia.org/wiki/Slam_Dunk_(manga), accessed 2026-07-24)"
+        - "Blue Lock — Wikipedia, selection-phase arcs (en.wikipedia.org/wiki/Blue_Lock, accessed 2026-07-24)"
+      notes: >-
+        Unit = match; container = tournament. Match length scales with stakes: practice matches
+        5-10 ch, mid-tournament 10-25, climax matches 30-45 (Slam Dunk's Sannoh ~6 volumes). First
+        major tournament entry (= first status-quo shift) by ch ~30-45.
 
   essay:
     label: "Essay / memoir"
@@ -181,6 +292,21 @@ genre_pacing:
       - "My Lesbian Experience with Loneliness"
       - "My Solo Exchange Diary"
       - "Inside Mari"
+    arc_cadence:
+      episodes_per_arc_range: [1, 12]
+      episodes_per_arc_median: 1
+      arc_pattern: fixed
+      season_unit: 8  # essay-chapters per volume
+      first_major_shift_by: null  # no status-quo-shift convention in this family (see notes)
+      arc_cadence_confidence: low
+      arc_cadence_sources:
+        - "My Lesbian Experience with Loneliness — Wikipedia, single-volume essay units (en.wikipedia.org/wiki/My_Lesbian_Experience_with_Loneliness, accessed 2026-07-24)"
+        - "My Solo Exchange Diary — Wikipedia, diary-entry chapters (en.wikipedia.org/wiki/My_Solo_Exchange_Diary, accessed 2026-07-24)"
+      notes: >-
+        LOW CONFIDENCE: corpus is 1-2 volume works; no 100-episode long-runner evidence exists for
+        this family. Unit = one essay/diary entry (1 ch); volume = thematic arc (8-12 entries).
+        Shifts are retrospective (pre-narrated), not plotted. Serial extrapolation for Lane 06 is
+        inference, flagged in handoff.
 
   memoir:
     label: "Memoir / life reflection"
@@ -200,6 +326,21 @@ genre_pacing:
     reference_corpus:
       - "My Lesbian Experience with Loneliness"
       - "The Summit of the Gods"
+    arc_cadence:
+      episodes_per_arc_range: [6, 15]
+      episodes_per_arc_median: 10
+      arc_pattern: fixed
+      season_unit: 8  # chapters per volume
+      first_major_shift_by: 5
+      arc_cadence_confidence: low
+      arc_cadence_sources:
+        - "My Lesbian Experience with Loneliness + sequels — Wikipedia (accessed 2026-07-24)"
+        - "The Summit of the Gods — Wikipedia, 5 vols, expedition arcs (en.wikipedia.org/wiki/The_Summit_of_the_Gods, accessed 2026-07-24)"
+      notes: >-
+        LOW CONFIDENCE: thin long-serial evidence. Life-phase / expedition arcs of 6-15 ch; the
+        premise-defining rupture sits in the opening chapters (by ~ch 5) and the rest excavates
+        it. 100-episode memoir = stacked life-phase arcs with retrospectives (craft-bible vols
+        8/16/24 rhythm is consistent, unproven at bar).
 
   social_issue:
     label: "Social issue / josei realism"
@@ -220,6 +361,21 @@ genre_pacing:
       - "A Silent Voice"
       - "Princess Jellyfish"
       - "Blue Period"
+    arc_cadence:
+      episodes_per_arc_range: [6, 25]
+      episodes_per_arc_median: 14
+      arc_pattern: escalating
+      season_unit: null  # mixed: ~9 ch/vol weekly (A Silent Voice) vs ~4 ch/vol monthly (Blue Period)
+      first_major_shift_by: 10
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "A Silent Voice — Wikipedia, 62 ch / 7 vols; time-skip after ch 6 (en.wikipedia.org/wiki/A_Silent_Voice_(manga), accessed 2026-07-24)"
+        - "Blue Period — Wikipedia, exam arcs across vols 5-7 (en.wikipedia.org/wiki/Blue_Period_(manga), accessed 2026-07-24)"
+      notes: >-
+        Inciting rupture is FRONT-loaded (A Silent Voice elementary prologue ends ch 6; Blue
+        Period commits to art by ch 5), then life-stage arcs of 10-25 ch escalate toward an
+        institutional test (exam, film screening, hospital). Opposite of battle: the status-quo
+        shift opens the story.
 
   supernatural_everyday:
     label: "Supernatural everyday"
@@ -240,6 +396,21 @@ genre_pacing:
       - "Mushishi"
       - "Natsume's Book of Friends"
       - "xxxHolic"
+    arc_cadence:
+      episodes_per_arc_range: [1, 5]
+      episodes_per_arc_median: 2
+      arc_pattern: fixed
+      season_unit: 5  # case-chapters per volume (monthly convention)
+      first_major_shift_by: null  # no status-quo-shift convention in this family (see notes)
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Mushishi — Wikipedia, ~50 standalone cases (en.wikipedia.org/wiki/Mushishi, accessed 2026-07-24)"
+        - "Natsume's Book of Friends — Wikipedia, 1-4 ch cases, 29+ vols (en.wikipedia.org/wiki/Natsume%27s_Book_of_Friends, accessed 2026-07-24)"
+        - "xxxHolic — Wikipedia, 213 ch case grammar (en.wikipedia.org/wiki/XxxHolic, accessed 2026-07-24)"
+      notes: >-
+        Case-of-the-chapter grammar (1-4 ch); serial threads (Reiko's past, exorcist clans)
+        resurface every ~8-12 cases without breaking status quo. Relationship depth is a gradient,
+        not a shift — plan first-100 as ~50-70 cases with 3-4 thread-surfacing clusters.
 
   school:
     label: "School / youth"
@@ -260,6 +431,22 @@ genre_pacing:
       - "Ao Haru Ride"
       - "Kimi ni Todoke"
       - "My Love Story!!"
+    arc_cadence:
+      episodes_per_arc_range: [3, 10]
+      episodes_per_arc_median: 5
+      arc_pattern: seasonal_cycle
+      season_unit: 4  # chapters per volume (monthly shojo convention)
+      first_major_shift_by: 50
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Kimi ni Todoke — Wikipedia, couple formed ch 48-49 (en.wikipedia.org/wiki/Kimi_ni_Todoke, accessed 2026-07-24)"
+        - "My Love Story!! — Wikipedia, 26 monthly ch (en.wikipedia.org/wiki/My_Love_Story!!, accessed 2026-07-24)"
+        - "Ao Haru Ride — Wikipedia, school-event arc structure (en.wikipedia.org/wiki/Ao_Haru_Ride, accessed 2026-07-24)"
+      notes: >-
+        Arcs are school-calendar events (entrance, culture festival, exams, summer trip,
+        graduation) of 3-8 ch riding a yearly cycle; the calendar, not the plot, sets cadence.
+        Relationship-status shift by ch ~50 (earlier when the couple forms in act one, e.g. My
+        Love Story!! ch 3).
 
   fantasy:
     label: "Fantasy / isekai adventure"
@@ -281,6 +468,22 @@ genre_pacing:
       - "Fullmetal Alchemist"
       - "Made in Abyss"
       - "Witch Hat Atelier"
+    arc_cadence:
+      episodes_per_arc_range: [5, 25]
+      episodes_per_arc_median: 12
+      arc_pattern: escalating
+      season_unit: null  # mixed: 4 ch/vol (monthly mega-chapters, FMA) to 8 ch/vol (Made in Abyss)
+      first_major_shift_by: 16
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Fullmetal Alchemist — Wikipedia, 108 monthly ch / 27 vols; Hughes death ch 15-16 (en.wikipedia.org/wiki/Fullmetal_Alchemist, accessed 2026-07-24)"
+        - "Made in Abyss — Wikipedia, layer-per-arc structure (en.wikipedia.org/wiki/Made_in_Abyss, accessed 2026-07-24)"
+        - "Witch Hat Atelier — Wikipedia, trial arcs (en.wikipedia.org/wiki/Witch_Hat_Atelier, accessed 2026-07-24)"
+      notes: >-
+        Journey-segment arcs (a layer, a city, a trial) of 5-25 monthly chapters; monthly
+        serialization means each chapter is 40-60 pages, so episode-count ranges are lower than
+        weekly genres at equal story mass. First irreversible loss/reveal by ch ~16 (FMA Hughes)
+        to ~ch 30.
 
   battle_internal:
     label: "Internal battle / philosophical"
@@ -300,6 +503,20 @@ genre_pacing:
     reference_corpus:
       - "Vagabond"
       - "Berserk (contemplative arcs)"
+    arc_cadence:
+      episodes_per_arc_range: [25, 80]
+      episodes_per_arc_median: 45
+      arc_pattern: escalating
+      season_unit: 9  # chapters per volume (weekly seinen convention)
+      first_major_shift_by: 30
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Vagabond — Wikipedia, 327 ch / 37 vols; Yoshioka and Kojiro mega-arcs (en.wikipedia.org/wiki/Vagabond_(manga), accessed 2026-07-24)"
+        - "Berserk — Wikipedia, Golden Age ~vols 3-14 (en.wikipedia.org/wiki/Berserk_(manga), accessed 2026-07-24)"
+      notes: >-
+        Long-breath opponent/era arcs (25-80 ch) where the true fight is interior; extended
+        non-combat stretches (Vagabond farming arc ~30 ch) are canonical, not filler. First
+        reframe of the vow (renaming, first true defeat) by ch ~30.
 
   graphic_medicine:
     label: "Graphic medicine / therapeutic essay"
@@ -320,6 +537,22 @@ genre_pacing:
       - "Cancer and the City (Graphic Medicine adjacent)"
       - "Stitches"
       - "El Deafo"
+    arc_cadence:
+      episodes_per_arc_range: [8, 21]
+      episodes_per_arc_median: 12
+      arc_pattern: fixed
+      season_unit: null  # single-book form; no serialized volume convention
+      first_major_shift_by: 3
+      arc_cadence_confidence: low
+      arc_cadence_sources:
+        - "Stitches — Wikipedia, single-volume memoir (en.wikipedia.org/wiki/Stitches_(book), accessed 2026-07-24)"
+        - "El Deafo — Wikipedia, ~21 chapter units (en.wikipedia.org/wiki/El_Deafo, accessed 2026-07-24)"
+        - "Mom's Cancer — Wikipedia, episodic strips -> book (en.wikipedia.org/wiki/Mom%27s_Cancer, accessed 2026-07-24)"
+      notes: >-
+        LOW CONFIDENCE for serialization: corpus is complete-in-one-book memoirs (8-21 chapter
+        units); diagnosis/premise rupture lands by ch ~3 and the book is the arc. No 100-episode
+        graphic-medicine long-runner exists in the corpus; Lane 06 should treat this family as
+        stacked 10-15-ch case/treatment arcs (inference, flagged in handoff).
 
   gag:
     label: "Gag / comedy"
@@ -339,6 +572,22 @@ genre_pacing:
       - "Gintama"
       - "Azumanga Daioh"
       - "Daily Lives of High School Boys"
+    arc_cadence:
+      episodes_per_arc_range: [1, 25]
+      episodes_per_arc_median: 1
+      arc_pattern: fixed
+      season_unit: 9  # chapters per volume (WSJ convention; 4-koma volumes differ)
+      first_major_shift_by: null  # no status-quo-shift convention in this family (see notes)
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Gintama — Wikipedia, 704 ch; episodic + periodic serious arcs (en.wikipedia.org/wiki/Gin_Tama, accessed 2026-07-24)"
+        - "Benizakura Arc — Gintama Wiki (gintama.fandom.com/wiki/Benizakura_Arc, accessed 2026-07-24)"
+        - "Azumanga Daioh — Wikipedia, 4-koma school-year cycle (en.wikipedia.org/wiki/Azumanga_Daioh, accessed 2026-07-24)"
+      notes: >-
+        Status quo is sacred: baseline is 1-ch (or 1-page) episodic units; long-runners spike a
+        5-25-ch 'serious arc' every ~50-100 ch (Gintama Benizakura ch 89-97) then reset.
+        School-cycle gag (Azumanga) uses the 3-year calendar as macro-shape with graduation as the
+        only shift, at the very end.
 
   # ── Phase 2X.2 strategic-shell additions per spec §4.1 + §7.5 ──────────────
   # Pacing rows for the 5 net-new strategic genre shells (mecha + dark_fantasy
@@ -368,6 +617,22 @@ genre_pacing:
       - "Vagabond"
       - "Vinland Saga"
       - "Frieren: Beyond Journey's End"
+    arc_cadence:
+      episodes_per_arc_range: [10, 90]
+      episodes_per_arc_median: 45
+      arc_pattern: escalating
+      season_unit: 9  # episodes per volume (Young Animal / Afternoon convention)
+      first_major_shift_by: 55
+      arc_cadence_confidence: high
+      arc_cadence_sources:
+        - "Story Arcs — Vinland Saga Wiki: 1-54 / 55-99 / 100-166 / 167+ (vinlandsaga.fandom.com/wiki/Story_Arcs, accessed 2026-07-24)"
+        - "Berserk — Wikipedia, Black Swordsman ~9 eps -> Golden Age ~85 eps (en.wikipedia.org/wiki/Berserk_(manga), accessed 2026-07-24)"
+        - "Frieren — Wikipedia, First-Class Mage Exam arc ~ch 36-60 (en.wikipedia.org/wiki/Frieren:_Beyond_Journey%27s_End, accessed 2026-07-24)"
+      notes: >-
+        Saga-block arcs of 45-90 ch after a short 9-15-ch establishing arc; the first status-quo
+        DESTRUCTION (Vinland ch 54 Askeladd's death + timeskip; Berserk Eclipse closing the Golden
+        Age) is the genre's signature move and lands by ~ch 55 in the verified corpus (Frieren
+        runs quieter: 10-25-ch arcs).
 
   mecha:
     label: "Mecha (Evangelion/Gundam register)"
@@ -389,6 +654,22 @@ genre_pacing:
       - "Mobile Suit Gundam: The Origin"
       - "Knights of Sidonia"
       - "Eureka Seven"
+    arc_cadence:
+      episodes_per_arc_range: [2, 15]
+      episodes_per_arc_median: 8
+      arc_pattern: escalating
+      season_unit: 6  # chapters per volume (monthly serialization, 5-7 typical)
+      first_major_shift_by: 30
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Neon Genesis Evangelion (manga) — Wikipedia, 96 ch / 14 vols; angel-encounter units (en.wikipedia.org/wiki/Neon_Genesis_Evangelion_(manga), accessed 2026-07-24)"
+        - "Knights of Sidonia — Wikipedia, 78 ch / 15 vols (en.wikipedia.org/wiki/Knights_of_Sidonia, accessed 2026-07-24)"
+        - "Mobile Suit Gundam: The Origin — Wikipedia, act structure (en.wikipedia.org/wiki/Mobile_Suit_Gundam:_The_Origin, accessed 2026-07-24)"
+      notes: >-
+        Sortie-of-the-arc units (2-6 ch per enemy encounter) early, fusing into continuous
+        operations as the conspiracy surfaces; pilot-roster changes and command-layer reveals (=
+        first status-quo shift) land ch ~20-35 (Eva Asuka arrival ~ch 20; Sidonia timeskip ~ch
+        30).
 
   sci_fi_cyberpunk:
     label: "Sci-Fi / Cyberpunk (Akira/Ghost in the Shell register)"
@@ -410,6 +691,21 @@ genre_pacing:
       - "Ghost in the Shell"
       - "BLAME!"
       - "Battle Angel Alita"
+    arc_cadence:
+      episodes_per_arc_range: [3, 25]
+      episodes_per_arc_median: 9
+      arc_pattern: escalating
+      season_unit: null  # mixed: 6 ch/vol (BLAME!) to ~20 ch/vol (Akira)
+      first_major_shift_by: 30
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Battle Angel Alita — Wikipedia, 56 ch / 9 vols; Motorball arc (en.wikipedia.org/wiki/Battle_Angel_Alita, accessed 2026-07-24)"
+        - "BLAME! — Wikipedia, 65 ch / 10 vols, zone-per-arc (en.wikipedia.org/wiki/Blame!, accessed 2026-07-24)"
+        - "Akira — Wikipedia, 120 ch / 6 vols; mid-series awakening (en.wikipedia.org/wiki/Akira_(manga), accessed 2026-07-24)"
+      notes: >-
+        Role/zone arcs (a job, a stratum, a case) of 3-25 ch; case-grammar titles (GitS: 12
+        episodic ch with 3-ch convergence) sit at the short end. First systemic rupture ranges ch
+        9-60 (Alita Motorball entry ch ~13; Akira awakening mid-series) — plan by ch ~30.
 
   historical_period:
     label: "Historical / Period (Vinland Saga/Bride's Story register)"
@@ -432,6 +728,22 @@ genre_pacing:
       - "Bride's Story"
       - "Cesare"
       - "Innocent"
+    arc_cadence:
+      episodes_per_arc_range: [5, 80]
+      episodes_per_arc_median: 30
+      arc_pattern: escalating
+      season_unit: 8  # chapters per volume (monthly/biweekly seinen convention)
+      first_major_shift_by: 55
+      arc_cadence_confidence: medium
+      arc_cadence_sources:
+        - "Story Arcs — Vinland Saga Wiki (vinlandsaga.fandom.com/wiki/Story_Arcs, accessed 2026-07-24)"
+        - "A Bride's Story — Wikipedia, bride-per-arc 5-15 ch (en.wikipedia.org/wiki/A_Bride%27s_Story, accessed 2026-07-24)"
+        - "Vagabond — Wikipedia, opponent-era arcs (en.wikipedia.org/wiki/Vagabond_(manga), accessed 2026-07-24)"
+      notes: >-
+        Two sub-modes share the family: saga-blocks of 45-80 ch driven by war/politics (Vinland,
+        Vagabond) vs portrait-cycles of 5-15 ch rotating POV households (A Bride's Story).
+        Era-defining shift (a death, an exile, a POV handoff) by ch ~20-55; use the saga-block
+        mode for flagship planning.
 
   cultivation_martial:
     label: "Cultivation / Martial Arts (Battle Through the Heavens register)"
@@ -452,6 +764,22 @@ genre_pacing:
       - "Battle Through the Heavens"
       - "Tales of Demons and Gods"
       - "Soul Land"
+    arc_cadence:
+      episodes_per_arc_range: [15, 50]
+      episodes_per_arc_median: 30
+      arc_pattern: escalating
+      season_unit: null  # continuous webtoon-style release; no stable volume/season convention in corpus
+      first_major_shift_by: 30
+      arc_cadence_confidence: low
+      arc_cadence_sources:
+        - "Battle Through the Heavens — Wikipedia/Baidu chapter listings (en.wikipedia.org/wiki/Battle_Through_the_Heavens, accessed 2026-07-24)"
+        - "Soul Land — Wikipedia, academy->tournament arcs (en.wikipedia.org/wiki/Soul_Land, accessed 2026-07-24)"
+        - "Tales of Demons and Gods — manhua chapter listings (en.wikipedia.org/wiki/Tales_of_Demons_and_Gods, accessed 2026-07-24)"
+      notes: >-
+        LOW CONFIDENCE: manhua arc boundaries are poorly indexed in English sources; ranges derive
+        from realm/sect-stage groupings in aggregate listings, not per-arc verified counts.
+        Power-ladder loop (train -> breakthrough -> rival -> new tier) every 15-50 ch; leaving the
+        home sect/village (first shift) by ch ~20-30. Named follow-up in handoff.
 
 # Aliases — map manga_profile.genre_family values to pacing keys
 # Any genre_family NOT listed here is treated as unmapped (no pacing contract enforced).

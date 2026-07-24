@@ -47,6 +47,8 @@ Readers are 15–28, heavily mobile, reading in ~5-minute sessions during commut
 10. Crossing into explicit content on a SFW platform without platform awareness (Lezhin vs Webtoon audience norms differ).
 
 ## 7. Series planning implications (48-"volume" pre-plan)
+
+> **CORRECTION (2026-07-24, Lane 03 arc-cadence study):** the "season of ~25 episodes" mapping below is contradicted by verified platform data — real seasons run 78–115+ episodes (Tower of God S1 = 78 eps, webtoons.com episode list; Lore Olympus S1 finale = ep 115, lore-olympus.fandom.com; Solo Leveling S1 break ≈ ch 110 of 179, cbr.com guide; all accessed 2026-07-24). Story-*arc* grain inside seasons is ~15–30 eps. Milestone placements below are therefore stated in a season unit ~3–4× too small; see `artifacts/research/manga_arc_cadence_study_2026-07-24.md` §Webtoon before using them.
 Webtoons are episodic-not-voluminous; map "volume" to a **season of ~25 episodes**. 48 volumes = ~1,200 episodes = ~23 years of weekly release (uncommon but not unprecedented — *Tower of God* is close). Realistic shape:
 - **Season structure:** 48 seasons × 25 episodes = 1,200 episodes.
 - **Romance arc pacing:** First confession at season 2–3 end (~vol 3). First kiss season 4 end. First real relationship crisis season 6. Breakup + reunion season 9–10. Engagement season 14. Post-marriage slice-of-life seasons 15–24. Then: next-generation time-skip for seasons 25–48 (children / workplace junior / new-romance spinoff with original couple as mentors).
