@@ -1,0 +1,334 @@
+schema_version: "1.0.0"
+artifact_type: arc_storyboard_plan
+schema_authority: schemas/manga/arc_storyboard_plan.schema.json
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_003
+genre_id: iyashikei
+title: "The Alarm Is Lying — Episode 3: Saturday, 11:14 AM"
+logline: A visiting mother's Saturday text and a coffee-shop question about Mira's late father reactivate the same alarm reflex the workplace triggered in Episode 1, and the episode must prove the noticing generalizes beyond the office.
+stakes_now: Mira's regulation skill has only been tested against work triggers so far; a family visit carrying grief about her father risks proving the technique does not generalize past the office.
+stakes_end: Mira applies the same noticing to a relational and grief activation for the first time and it holds, though the loss itself stays unresolved — proof of generalization, not a cure.
+genre_cadence:
+- establishing_calm_ritual
+- sensory_anchor_tea_beat
+- activation_trigger
+- body_register_escalation
+- anchor_object_pendulation
+- relational_arrival
+- activation_trigger
+- body_register_escalation
+- awe_pullback
+- pendulation_return
+- teaching_insight_landing
+- long_drop_decompression
+- closing_return
+page_turn_promises:
+- page_id: ep_003_p01
+  promise: Will Mira's calm Saturday stay calm once her mother's text lands, or is the office-only technique about to be tested by something bigger?
+- page_id: ep_003_p02
+  promise: Will the coffee-shop conversation about her father overwhelm Mira, or does the same noticing that worked at work hold under grief?
+panels:
+- panel_id: ep003_001
+  page_id: ep_003_p01
+  story_function: establishing_calm_ritual
+  story_move: Episode opens on a new anchor object, the windowsill succulent, before Mira appears, establishing a fresh safety baseline distinct from Episode 1's bedroom opening.
+  visual_proof: Close-up on succulent leaves with a dew droplet, jade-green matching the pendant, warm mid-morning Saturday light.
+  information_delta: Reader is given a new recurring anchor object, introduced before any trigger exists this episode.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_002
+  page_id: ep_003_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: The TEA BEAT returns as a cross-episode callback, showing Mira's ritual persists into a new day and a new, non-work activation source.
+  visual_proof: Wide kitchen-table shot, Mira in weekend cream sweater and jeans holding a mug, the succulent visible behind her.
+  information_delta: Reader learns this is Saturday, not a workday, and the ritual generalizes across different kinds of days.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_003
+  page_id: ep_003_p01
+  story_function: establishing_calm_ritual
+  story_move: Mira's unhurried reading establishes a slower weekend register, giving the reader a distinct calm baseline to measure the coming activation against.
+  visual_proof: Close on a hand turning a paperback page, the tea mug still steaming at the frame's edge.
+  information_delta: Reader confirms the calm is genuine and unforced, before any trigger has arrived.
+  beat_role: pre_trigger_calm
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_004
+  page_id: ep_003_p01
+  story_function: activation_trigger
+  story_move: A relational notification arrives, a text from Mira's visiting mother, introducing a new activation source that is personal rather than professional.
+  visual_proof: Phone face-up on the table, a notification banner naming the mother and an arrival time, with a small emoji.
+  information_delta: Reader learns this episode's trigger is relational, a visit, not a work deadline.
+  beat_role: trigger_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_005
+  page_id: ep_003_p01
+  story_function: body_register_escalation
+  story_move: The nervous system responds to the relational trigger with the same somatic lift the office trigger produced in Episode 1, proving the alarm reflex is not job-specific.
+  visual_proof: Tight shot on Mira's face glancing at the phone, shoulders rising half a degree.
+  information_delta: Reader sees the activation transfer from a work context to a family context for the first time in the series.
+  beat_role: somatic_onset
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_006
+  page_id: ep_003_p01
+  story_function: anchor_object_pendulation
+  story_move: Mira's attention pendulates from the phone to the succulent, an active choice of the anchor over the notification's pull.
+  visual_proof: Mira's gaze travels from the phone toward the windowsill, the same dew droplet now slowly evaporating.
+  information_delta: Reader sees Mira already regulating before the day's larger activation has even arrived.
+  beat_role: pendulation_start
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_007
+  page_id: ep_003_p01
+  story_function: sensory_anchor_tea_beat
+  story_move: Mira's hand finds the jade pendant, physically completing the pendulation cycle and settling her shoulders back down before her mother even arrives.
+  visual_proof: Close on Mira's hand touching the pendant at her neckline, shoulders visibly lowering.
+  information_delta: Reader confirms the touch-anchor works on a new relational trigger, not only the original work trigger.
+  beat_role: pendulation_return
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_008
+  page_id: ep_003_p01
+  story_function: relational_arrival
+  story_move: Mira's mother physically arrives at the door, converting the anticipated notification into a real, present relational encounter.
+  visual_proof: Wide shot of Mira opening the door to her mother, a tote bag on the shoulder, both smiling at each other.
+  information_delta: Reader meets the mother character directly and confirms the visit opens warm rather than tense.
+  beat_role: relational_onset
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_009
+  page_id: ep_003_p01
+  story_function: relational_arrival
+  story_move: A doorway hug grounds the reunion in safe touch before any conversation happens, banking trust for the harder topic later in the episode.
+  visual_proof: Mid-shot hug at the doorway, mother's hand briefly on Mira's back, the succulent visible through the open kitchen behind them.
+  information_delta: Reader sees the relationship is physically affectionate, raising the stakes of what could go wrong later.
+  beat_role: safety_contact
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_010
+  page_id: ep_003_p02
+  story_function: activation_trigger
+  story_move: The setting moves from the private apartment to a public coffee shop, raising the social stakes of whatever conversation follows.
+  visual_proof: Wide coffee-shop interior, Mira and her mother at a window table with two ceramic cups.
+  information_delta: Reader learns the visit's centerpiece will happen in a semi-public space, not at home.
+  beat_role: setting_shift
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_011
+  page_id: ep_003_p02
+  story_function: activation_trigger
+  story_move: Mira deflects her mother's question about her sleep, showing she manages some anxiety privately even inside a loving relationship.
+  visual_proof: Close on Mira's small smile as she answers, window light catching her hair.
+  information_delta: Reader learns Mira hides part of her anxiety even from a parent who clearly loves her.
+  beat_role: deflection
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_012
+  page_id: ep_003_p02
+  story_function: activation_trigger
+  story_move: The mother's posture and pause signal an incoming topic shift before she speaks, warning the reader before Mira herself registers it.
+  visual_proof: Mother's hands wrap around her cup, her face turning slightly toward the window, a visible pause.
+  information_delta: Reader anticipates a harder subject arriving a beat before Mira does.
+  beat_role: pre_trigger_shift
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_013
+  page_id: ep_003_p02
+  story_function: activation_trigger
+  story_move: The mother names the father directly for the first time in the series, introducing the episode's real activation source, grief rather than a deadline.
+  visual_proof: Close on the mother's softened face as she recalls the father's own Saturday reading habit.
+  information_delta: Reader learns the episode's true stakes involve the father's memory, not the coffee-shop small talk.
+  beat_role: trigger_onset_relational
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_014
+  page_id: ep_003_p02
+  story_function: body_register_escalation
+  story_move: Mira's body reacts to the grief trigger with the same signature the work trigger produced in Episode 1, proving the alarm pattern extends to loss as well as deadlines.
+  visual_proof: Close on Mira's face, chest tightening, holding the coffee cup still.
+  information_delta: Reader confirms grief-activation shares the same somatic signature as work-activation established earlier in the series.
+  beat_role: somatic_onset_relational
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_015
+  page_id: ep_003_p02
+  story_function: awe_pullback
+  story_move: A wide pullback shows the conversation held inside a much larger, ordinary city, giving Mira's activation scale and context instead of isolating it.
+  visual_proof: Over-wide shot from outside the coffee-shop window, the two women small inside a busy Saturday street.
+  information_delta: Reader is shown the activation is contained within a continuing ordinary world, not a crisis that stops everything.
+  beat_role: scale_reset
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_016
+  page_id: ep_003_p02
+  story_function: pendulation_return
+  story_move: Mira grounds herself through the pendant and a visual rhyme outside the window before responding, an active regulation choice made mid-conversation.
+  visual_proof: Medium shot, Mira's fingers on the pendant, eyes toward a green flower box on the sidewalk outside.
+  information_delta: Reader sees Mira apply the anchor technique live, inside the hardest conversation of the episode.
+  beat_role: breath_bracket
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_017
+  page_id: ep_003_p02
+  story_function: pendulation_return
+  story_move: Mira's expression shifts from armored to available, showing the regulation attempt worked enough to let her stay present in the conversation.
+  visual_proof: Mira's face turning back to her mother, an open rather than braced expression.
+  information_delta: Reader sees the regulation succeeded before Mira speaks her next line.
+  beat_role: recognition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_018
+  page_id: ep_003_p02
+  story_function: teaching_insight_landing
+  story_move: Mira's posture shifts from receiving to about to disclose, signaling she is choosing to voice something she has been holding back.
+  visual_proof: Mid-shot, Mira's hands on the table, one thumb pressing into her palm, the cup set down.
+  information_delta: Reader learns Mira is about to actively share, not only absorb her mother's grief.
+  beat_role: outbound_shift
+  action_intensity: 1
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_019
+  page_id: ep_003_p02
+  story_function: teaching_insight_landing
+  story_move: Mira voices her own grief about the father directly, converting the episode's internal activation into shared, spoken vulnerability.
+  visual_proof: Close on Mira's face, eyes wet but steady, voice controlled rather than breaking.
+  information_delta: Reader hears the specific content of Mira's grief for the first time in the series.
+  beat_role: disclosure
+  action_intensity: 2
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_020
+  page_id: ep_003_p02
+  story_function: teaching_insight_landing
+  story_move: The mother responds by listening and resting her hand near Mira's without fixing or managing the moment, modeling support without control.
+  visual_proof: Mother's face listening, her hand sliding across the table to rest close to but not on top of Mira's.
+  information_delta: Reader sees the mother's own way of caring, proximity rather than intervention.
+  beat_role: witness
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_021
+  page_id: ep_003_p02
+  story_function: teaching_insight_landing
+  story_move: The steam-not-smoke teaching returns purely as internal text with no external image, showing the reframe is now internalized rather than needing its original visual prompt.
+  visual_proof: Near-black panel with only a thin frame of light and a caption strip, no ceiling or smoke detector shown this time.
+  information_delta: Reader learns the teaching now travels without its original vessel object, the series' graduation moment.
+  beat_role: teaching_internalized
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: true
+- panel_id: ep003_022
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: Mira reaches for her mother's hand and squeezes it, turning the internalized insight into a concrete relational repair inside the same scene.
+  visual_proof: Medium shot, Mira's hand finding her mother's hand, both faces softer, the cups still on the table.
+  information_delta: Reader sees the conversation's activation metabolized into connection, not only insight.
+  beat_role: relational_repair
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_023
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: The mother's departure begins, carrying a small forward-looking promise, a call on Sunday, that extends the relationship past this episode's end.
+  visual_proof: Wide shot at the cafe door, mother adjusting her cardigan, tote bag back on her shoulder, outside light spilling in.
+  information_delta: Reader learns the visit ends on warm, ongoing terms rather than a one-time resolution.
+  beat_role: closing_transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_024
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: Mira confirms the promise to call, closing the relational thread for this episode while her mother turns toward the street.
+  visual_proof: Mira nodding with a small smile as her mother turns away toward the street.
+  information_delta: Reader gets confirmation the relationship continues beyond the page.
+  beat_role: closing_transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: true
+- panel_id: ep003_025
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: Mira walks alone toward a park, physically separating from the conversation to process it before returning home.
+  visual_proof: Wide shot from behind, Mira walking down a tree-lined street in late-afternoon light, hands in her pockets.
+  information_delta: Reader is shown Mira choosing solitary processing time after the disclosure, rather than an immediate return to routine.
+  beat_role: solo_transition
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_026
+  page_id: ep_003_p02
+  story_function: long_drop_decompression
+  story_move: The episode's single silent decompression beat lets Mira, and the reader, sit with the day's activation without resolving it any further.
+  visual_proof: Wide silent panel, Mira on a park bench in three-quarter back view, honey-gold light, no text or sound effects.
+  information_delta: Reader is given a held pause with no new information, the pause itself is the content.
+  beat_role: decompression
+  action_intensity: 0
+  silence: true
+  dialogue_allowed: false
+- panel_id: ep003_027
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: Mira picks up a fallen leaf that visually matches the pendant and the succulent, completing the episode's anchor-object through-line with a physical keepsake.
+  visual_proof: Close on Mira's hand picking up a small jade-green leaf from the bench.
+  information_delta: Reader sees the anchor motif crystallize into an object Mira will carry home with her.
+  beat_role: anchor_completion
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_028
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: The setting returns home at evening, the same succulent unchanged, proving the day's activation did not alter the ordinary world around Mira.
+  visual_proof: Evening kitchen, the succulent still on the sill, Mira setting the kettle on the stove.
+  information_delta: Reader confirms the world stayed steady while Mira's internal state moved through activation and repair.
+  beat_role: closing_setup
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_029
+  page_id: ep_003_p02
+  story_function: sensory_anchor_tea_beat
+  story_move: The kettle begins to steam, rhyming visually with the prior two episodes' kettles and closing this day's regulation circuit.
+  visual_proof: Close on the kettle beginning to steam, the same kettle as Episodes 1 and 2.
+  information_delta: Reader recognizes the cross-episode visual rhyme marking a completed cycle.
+  beat_role: ritual_anchor
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+- panel_id: ep003_030
+  page_id: ep_003_p02
+  story_function: closing_return
+  story_move: Mira sits with tea and the park-bench leaf beside the mug, the episode's thesis restated as steadiness rather than transformation.
+  visual_proof: Final panel, Mira at the table with tea and leaf, a soft tired smile, the succulent visible behind her, a caption strip below.
+  information_delta: Reader receives the episode's honest closing claim, same self, steadier, not fixed or cured.
+  beat_role: honest_landing
+  action_intensity: 0
+  silence: false
+  dialogue_allowed: false
+acceptance_layer: authored_candidate
+chapter_script_ref: artifacts/manga/chapter_scripts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_003.yaml
+notes: Backfilled per docs/agent_prompt_packs/manga_arc_storyboard_planner.md mandatory sequence, same treatment as ep_001's storyboard (PR #135) — ep_003 was authored (M3 Wave 1) before the storyboard-first process existed. This plan describes the story_move already present in the shipped script; it does not add new panels or change panel order. genre_cadence above is derived from the episode's own already-demonstrated genre-native structural beats (TEA BEAT, ANCHOR PANEL succulent, BREATH BRACKET, AWE-PULLBACK, LONG DROP, internalized teaching) since no config/manga/genre_scene_templates/iyashikei.yaml exists yet — same real gap flagged in ep_001's storyboard.
+notes_craft: 'ACCEPTANCE LAYER: authored_candidate. Board describes the shipped script''s already-demonstrated story_move per panel; does not claim system_working or proven_at_bar.'

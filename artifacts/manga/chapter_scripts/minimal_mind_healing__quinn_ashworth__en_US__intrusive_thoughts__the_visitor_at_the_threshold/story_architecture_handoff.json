@@ -1,0 +1,165 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "minimal_mind_healing__quinn_ashworth__en_US__intrusive_thoughts__the_visitor_at_the_threshold",
+  "genre_id": "horror",
+  "story_strategy_genre": "horror",
+  "story_strategy_id": "horror__default",
+  "reader_market": "en_US",
+  "reader_audience": "gen_z",
+  "notes": "Series-level handoff for a newly authored (not backfilled) second series under the minimal_mind_healing brand, pen name Quinn Ashworth, genre psychological_horror (canonical relevance_genre 'horror'), topic intrusive_thoughts, built from strategy_04 'The Visitor at the Threshold' (config/source_of_truth/manga_story_strategies/psychological_horror_strategies.yaml). This is distinct from and does not touch the brand's existing minimal_mind_healing__ken_arata__en_US__overthinking__one_cup_no_thesis series, which is reserved for its own dispatch-assigned psychological_thriller genre. ep_001's story_craft below is verified against the shipped chapter script and its arc_storyboard.yaml. acceptance_layer: authored_candidate, not proven_at_bar.",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "en_US",
+    "target_audience": "gen_z",
+    "genre_id": "horror",
+    "strategy_genre": "horror",
+    "relevance_genre": "horror",
+    "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+    "market_touchpoints": [
+      "group_chat",
+      "discord_server",
+      "short_video_clip",
+      "school_bus_or_subway",
+      "comic_shop",
+      "mall_food_court",
+      "campus_library",
+      "delivery_app",
+      "controller",
+      "streaming_queue"
+    ],
+    "market_guardrails": [
+      "avoid_fake_japanese_surface_for_us_scene",
+      "make_city_transport_specific_if_used",
+      "do_not_overexplain_anime_fandom"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Modern horror should make familiar interfaces wrong: a phone, classroom app, livestream, station display, or game lobby behaves almost normally.",
+    "catalyst": {
+      "id": "the_thread_that_wont_stay_deleted",
+      "logline": "A message thread from an unnamed sender opens on Sora's phone before she has chosen to look, returns after every delete and block wearing her own name, and finally knocks at the front door in the exact rhythm of the hallway light and her own pulse.",
+      "ordinary_world_objects": [
+        "phone",
+        "notification",
+        "door",
+        "knock"
+      ],
+      "genre_transmutation": "An ordinary phone notification becomes an unbanishable visitor that borrows the reader's own name; the apartment's front door and deadbolt become proof that barring a threshold does not work when the thing at it was never outside to begin with.",
+      "avoid": [
+        "jump_scare_only",
+        "lore_dump"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'the_thread_that_wont_stay_deleted'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects (phone, notification, door, knock) and social/system pressure on page one; do not name-drop trends; never claim the visitor is defeated, only not fed."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ep_001",
+      "arc_storyboard_ref": "artifacts/manga/arc_storyboards/minimal_mind_healing__quinn_ashworth__en_US__intrusive_thoughts__the_visitor_at_the_threshold/ep_001.arc_storyboard.yaml",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "horror",
+          "strategy_genre": "horror",
+          "relevance_genre": "horror",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern horror should make familiar interfaces wrong: a phone, classroom app, livestream, station display, or game lobby behaves almost normally.",
+          "catalyst": {
+            "id": "the_thread_that_wont_stay_deleted",
+            "logline": "A message thread from an unnamed sender opens on Sora's phone before she has chosen to look, returns after every delete and block wearing her own name, and finally knocks at the front door in the exact rhythm of the hallway light and her own pulse.",
+            "ordinary_world_objects": [
+              "phone",
+              "notification",
+              "door",
+              "knock"
+            ],
+            "genre_transmutation": "An ordinary phone notification becomes an unbanishable visitor that borrows the reader's own name; the apartment's front door and deadbolt become proof that barring a threshold does not work when the thing at it was never outside to begin with.",
+            "avoid": [
+              "jump_scare_only",
+              "lore_dump"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'the_thread_that_wont_stay_deleted'. Market surface rule per config/manga/modern_reader_story_doctrine.yaml en_US. Use concrete objects (phone, notification, door, knock) and social/system pressure on page one; do not name-drop trends; never claim the visitor is defeated, only not fed."
+        }
+      }
+    }
+  ]
+}

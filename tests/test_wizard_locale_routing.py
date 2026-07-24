@@ -26,18 +26,19 @@ def _read(rel: str) -> str:
 
 
 def test_entry_screen_has_all_14_lanes_including_brazil():
-    html = _read("public/pearl_prime_entry.html")
-    lanes = re.search(r"var LANES=\{(.+?)\n\};", html, re.S).group(1)
+    # pearl_prime_entry.html's 3-screen picker was replaced by a single-screen
+    # flag grid on index.html (#166); each lane is a flag-card calling
+    # enterWizard(code) directly rather than populated from a JS LANES object.
+    html = _read("public/index.html")
     for code in CANONICAL_LANES:
-        assert re.search(rf"\b{code}\s*:", lanes), f"entry screen missing lane {code}"
-    assert "pt_BR" in lanes, "Brazil (pt_BR) missing from entry screen"
-    assert "14 Global Lanes" in html
+        assert f"enterWizard('{code}')" in html, f"entry screen missing lane {code}"
+    assert "enterWizard('pt_BR')" in html, "Brazil (pt_BR) missing from entry screen"
 
 
 def test_entry_screen_routes_every_lane_to_a_localized_wizard():
-    html = _read("public/pearl_prime_entry.html")
-    wizard = re.search(r"var LANE_WIZARD=\{(.+?)\};", html, re.S).group(1)
-    market = re.search(r"var LANE_MARKET=\{(.+?)\};", html, re.S).group(1)
+    html = _read("public/index.html")
+    wizard = re.search(r"var LANE_WIZARD = \{(.+?)\};", html, re.S).group(1)
+    market = re.search(r"var LANE_MARKET = \{(.+?)\};", html, re.S).group(1)
     for code in CANONICAL_LANES:
         assert re.search(rf"\b{code}\s*:", wizard), f"LANE_WIZARD missing {code}"
         assert re.search(rf"\b{code}\s*:", market), f"LANE_MARKET missing {code}"
@@ -49,9 +50,11 @@ def test_entry_screen_routes_every_lane_to_a_localized_wizard():
         assert val != "wizard.html", f"{code} routes to US-English wizard.html"
 
 
-def test_entry_operations_routes_to_localized_weekly_os():
-    html = _read("public/pearl_prime_entry.html")
-    assert "brand_admin_weekly_os.html?lane=" in html, "operations must route to weekly OS with ?lane="
+def test_entry_screen_preserves_weekly_operations_link():
+    html = _read("public/index.html")
+    assert 'href="brand_admin_weekly_os.html"' in html, (
+        "split entry must preserve access to weekly brand operations"
+    )
 
 
 def test_brandmatch_maps_every_lane_to_itself():

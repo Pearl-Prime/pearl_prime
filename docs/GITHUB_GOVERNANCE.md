@@ -18,15 +18,15 @@
 ## Required checks
 
 - Canonical required contexts for PR merge to `main` are:
-  - **Core tests**
-  - **Release gates**
-  - **EI V2 gates**
-  - **Change impact**
+  - **Verify governance**
+  - **parse-sweep**
 - Required context names are contract-sensitive and must match workflow-emitted job names exactly, including case and punctuation.
-- **Core tests** remains the always-on baseline check; path-filtered or conditional workflows must never be the only merge requirement.
-- **Release gates** stays PR-required, but its PR path must remain lightweight. Heavy release/canary/rollback steps belong to push, schedule, or manual runs.
+- Both required checks run on every pull request to `main`; a required check must always report or unrelated PRs can deadlock.
+- **Verify governance** enforces the repository governance contract.
+- **parse-sweep** blocks new atom parse, over-match, and stub-content regressions.
+- **Core tests**, **Release gates**, **EI V2 gates**, **Change impact**, and **Drift detectors** may report useful optional evidence, but are not canonical merge requirements. Promote a check only by updating this policy, the live ruleset, and its always-reporting reliability evidence together.
 - `Workers Builds: pearl-prime` is non-blocking operationally and must **not** be a required merge check.
-- Legacy contexts such as `change-impact` must be removed from live rulesets once cleanup is complete.
+- Legacy contexts `change-impact` and `Change impact` must not be required in live rulesets.
 - Policy is versioned in config; the verifier enforces it.
 
 ## Evidence

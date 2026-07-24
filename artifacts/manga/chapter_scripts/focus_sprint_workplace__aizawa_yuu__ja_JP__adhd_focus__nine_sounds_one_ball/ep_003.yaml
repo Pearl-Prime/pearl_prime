@@ -1,0 +1,507 @@
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball
+chapter_id: ep_003
+chapter_number: 3
+arc_storyboard_ref: artifacts/manga/arc_storyboards/focus_sprint_workplace__aizawa_yuu__ja_JP__adhd_focus__nine_sounds_one_ball/ep_003.arc_storyboard.yaml
+title: '静寂のフリースロー——第3話「忘れ物」'
+title_en_gloss: 'Nine Sounds, One Ball — Episode 3: The Forgotten Shoes'
+manga_author: 藍沢 優
+teacher_id: brand_teacher_unresolved
+brand_id: focus_sprint_workplace
+engine: adhd_focus
+locale: ja_JP
+default_locale: ja_JP
+available_locales: [ja_JP, en_US, zh_TW, zh_CN]
+genre: sports_competition
+mode: teacher
+vessel: 力を抜かせるコーチ
+
+modern_reader_context:
+  schema_version: "1.0.0"
+  target_market: ja_JP
+  target_audience: gen_z
+  genre_id: sports_competition
+  strategy_genre: sports_competition
+  relevance_genre: sports
+  market_surface_rule: Use train commute, station platform, conbini, cram school,
+    club room, LINE-style chat, digital manga apps, capsule machines, and quiet
+    public etiquette.
+  market_touchpoints:
+  - train_platform
+  - commuter_car
+  - conbini_receipt
+  - bento_shelf
+  - club_room
+  - shoe_locker
+  - line_chat
+  - vending_machine
+  - manga_app
+  market_guardrails:
+  - avoid_tourist_japan
+  - avoid_samurai_default_for_modern_scenes
+  - preserve_public_private_register_gap
+  audience_story_rule: Treat online identity, economic pressure, burnout, social
+    performance, fandom, romance boundaries, and self-definition as ordinary life
+    texture.
+  audience_touchpoints:
+  - phone_as_social_pressure
+  - group_chat_status
+  - creator_or_streaming_identity
+  - gig_or_work_pressure
+  - transit_between_roles
+  - online_offline_self_gap
+  genre_relevance_rule: Modern sports must include training data, clips, rankings,
+    team chats, finance/time pressure, and physical cost without letting
+    analytics replace the body.
+  catalyst:
+    id: the_shoe_locker_left_open
+    logline: Hayato returns to the company gym alone after hours to quietly
+      retrieve forgotten shoes from the club room locker, and finds Kuroda
+      already there, resetting the ball rack without being asked.
+    ordinary_world_objects:
+    - shoe_locker
+    - club_room
+    - ball_rack
+    - single_basketball
+    genre_transmutation: A forgotten pair of shoes becomes the excuse for the
+      first private encounter; the ball rack's silent reset becomes the
+      mentor's wordless opening lesson.
+    avoid:
+    - instant_cure
+    - influencer_wellness_lecture
+  quality_rubric:
+    great_story_requires:
+    - high_concept_collision
+    - concrete_reader_world_anchor
+    - genre_engine_not_replaced_by_trend
+    - protagonist_desire_visible_in_scene
+    - social_or_system_pressure
+    - reversal_or_discovery_by_page_two
+    - market_localized_touchpoint
+    - no_generic_therapy_summary
+    flat_story_failure_modes:
+    - classic_genre_without_modern_entrypoint
+    - modern_object_as_name_drop_only
+    - protagonist_waits_for_lesson
+    - no_personal_stakes_before_lore
+    - no_social_cost
+    - no_specific_place_or_object
+    - genre_strategy_hidden_in_metadata_only
+  craft_directive: Fuse the genre engine with a contemporary reader-world
+    entrypoint. Market=ja_JP; audience=gen_z. Use catalyst
+    'the_shoe_locker_left_open'. Market surface rule per
+    config/manga/modern_reader_story_doctrine.yaml ja_JP. Use concrete objects
+    and social pressure on page one; do not name-drop trends.
+
+main_characters:
+- id: hayato
+  name: 神崎 隼人
+  name_romaji: Kanzaki Hayato
+  age: 23
+  role: 主人公。東雲商事・営業支援部の新入社員。元高校バスケ部ポイントガード。
+  visual_anchor: 半分崩れたシャツの裾、緩めたネクタイ、過負荷になると拳にペンを打ちつける癖、机の引き出しに"念のため"のスニーカー。
+- id: kuroda
+  name: 黒田
+  name_romaji: Kuroda
+  age: 60代
+  role: 器の存在。元セミプロ選手、怪我でB2相当のチームを離れ、今は会社の設備・施設管理員として、夜間の体育館を静かに開けている。ブランド教師の名は決して使わない。
+  visual_anchor: 白髪頭、丸まった背中、無駄のない手の動き。合図はいつもボールラックを黙って直すこと。台詞は一話につき数語まで。
+
+scene_palette:
+  primary: 蛍光灯の白青いオフィスから、体育館の乾いたアンバーへの移行
+  secondary: 深夜の通勤電車の冷たい青、玄関先の暖色
+  accent: バスケットボール一つ分のオレンジ——この話で確立される反復的な視覚スルーライン
+
+pages:
+- page_id: ep_003_p01
+  panels:
+  - panel_id: ep003_001
+    scene: |
+      ワイド。東雲商事、営業支援部のフロア。夜九時を過ぎ、蛍光灯は半分落とされている。
+      隼人の机だけが、ノートパソコンの青白い光で浮かんでいる。ネクタイは緩み、シャツの
+      裾は半分外に出たまま。
+    beat_type: standard
+    intent: 職場の基準線を確立する——半分崩れたシャツという視覚アンカーの再確認
+    silence_confirmed: true
+  - panel_id: ep003_002
+    scene: |
+      隼人のスマホ画面のクローズアップ。LINEの「東雲バスケ部」グループに未読が三件。
+      彩からの短いメッセージだけが表示されている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: チームのLINEは、既読がつかないまま残っている。
+      en_US: The team's line chat sits unread.
+      zh_TW: '[zh_TW] The team''s line chat sits unread.'
+      zh_CN: '[zh_CN] The team''s line chat sits unread.'
+    dialogue_lines:
+    - speaker: aya_message
+      text_by_locale:
+        ja_JP: 明日も、来る?
+        en_US: 'Are you coming tomorrow?'
+        zh_TW: '[zh_TW] Are you coming tomorrow?'
+        zh_CN: '[zh_CN] Are you coming tomorrow?'
+      intensity: normal
+      bubble_style: notification_chip
+      tail_style: dotless
+      position_hint: top_right
+  - panel_id: ep003_003
+    scene: |
+      隼人の顔のクローズアップ。画面から目を逸らし、既読をつけないまま親指で画面を暗く
+      落とす。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: まだ、答えられない。
+        en_US: "I can't answer that yet."
+        zh_TW: '[zh_TW] I can''t answer that yet.'
+        zh_CN: '[zh_CN] I can''t answer that yet.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_left
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+  - panel_id: ep003_004
+    scene: |
+      引き出しを開ける手。中には使い古したスニーカーが一足、几帳面に揃えて置かれている。
+      "念のため"の靴。だが、本当に必要な方の靴——バッシュ——はここにはない。
+    beat_type: micro
+    intent: 常設の"念のため"靴と、本当に必要な靴の不在を対比させる
+  - panel_id: ep003_005
+    scene: |
+      インセット、速い切り替え。体育館の床。脱ぎ捨てるように置かれた、片方だけ紐が
+      緩んだままのバッシュ。ナレーションなし。
+    beat_type: micro
+    intent: ep_002の退室の瞬間への視覚的フラッシュバック——語らずに示す
+    silence_confirmed: true
+  - panel_id: ep003_006
+    scene: |
+      鞄を掴んで立ち上がる隼人。廊下の暗さを一瞥する。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: 今夜のうちに、取りに行けば。
+        en_US: "I have to get them before anyone sees."
+        zh_TW: '[zh_TW] I have to get them before anyone sees.'
+        zh_CN: '[zh_CN] I have to get them before anyone sees.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+  - panel_id: ep003_007
+    scene: |
+      ワイド。無人の廊下。自販機の低い唸りだけが響いている。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: 自販機の唸りだけが、廊下に残っていた。
+      en_US: Only the vending machine hum fills the empty hallway.
+      zh_TW: '[zh_TW] Only the vending machine hum fills the empty hallway.'
+      zh_CN: '[zh_CN] Only the vending machine hum fills the empty hallway.'
+    intent: 移動の孤独感——具体的な市場テクスチャ(自販機)
+    silence_confirmed: true
+  - panel_id: ep003_008
+    scene: |
+      クラブルームの入り口。シューズロッカーの並ぶ壁。一つだけ、扉がわずかに開いている。
+      閉めたはずの扉。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: シューズロッカーは、すでに開いていた。
+      en_US: The shoe locker was already open.
+      zh_TW: '[zh_TW] The shoe locker was already open.'
+      zh_CN: '[zh_CN] The shoe locker was already open.'
+  - panel_id: ep003_009
+    scene: |
+      ロッカーの中のクローズアップ。バッシュはそこにあった——だが、隼人が置いていった
+      ときのままではない。紐は丁寧に巻かれ、かかとを揃えて並べ直されている。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 靴は、揃え直されていた。
+      en_US: Someone had straightened his shoes in the club room.
+      zh_TW: '[zh_TW] Someone had straightened his shoes in the club room.'
+      zh_CN: '[zh_CN] Someone had straightened his shoes in the club room.'
+  - panel_id: ep003_010
+    scene: |
+      ワイド。体育館の扉の下から、灯りが細く漏れている。この時間、誰もいないはずの
+      光。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: 九時を過ぎて、まだ灯りがついている。
+      en_US: Past nine, and the gym light is still on.
+      zh_TW: '[zh_TW] Past nine, and the gym light is still on.'
+      zh_CN: '[zh_CN] Past nine, and the gym light is still on.'
+  - panel_id: ep003_011
+    scene: |
+      隼人、扉を細く開けて中を見る。コート中央、白髪頭の男が黙々とボールラックを
+      並べ直している。丸まった背中。だが、腕の動きだけは無駄がない。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 黒田だった。
+      en_US: It was Kuroda, resetting the ball rack, alone on the court.
+      zh_TW: '[zh_TW] It was Kuroda, resetting the ball rack, alone on the court.'
+      zh_CN: '[zh_CN] It was Kuroda, resetting the ball rack, alone on the court.'
+  - panel_id: ep003_012
+    scene: |
+      戸口で固まる隼人。声をかけるべきか、そのまま帰るべきか。手はまだドアの縁に
+      かかったまま。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: 見つかった、か。
+        en_US: 'Caught, then.'
+        zh_TW: '[zh_TW] Caught, then.'
+        zh_CN: '[zh_CN] Caught, then.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_center
+      font_override_by_locale:
+        ja_JP: italic_internal
+        en_US: italic_internal
+  - panel_id: ep003_013
+    scene: |
+      黒田、顔を上げる。一瞬だけ隼人と目が合う。何も言わない。小さく顎を、クラブ
+      ルームの方へしゃくる——お前の靴なら、そこだ、というように。
+    beat_type: micro
+    intent: 無言の合図——パネル9の謎(靴を直したのは黒田)を台詞なしで回収する
+    silence_confirmed: true
+- page_id: ep_003_p02
+  panels:
+  - panel_id: ep003_014
+    scene: |
+      隼人、戸惑いながら会釈する。鞄を抱えたまま、言葉を詰まらせる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: あの……靴を、忘れていて。
+        en_US: 'Sorry, I forgot my shoes.'
+        zh_TW: '[zh_TW] Sorry, I forgot my shoes.'
+        zh_CN: '[zh_CN] Sorry, I forgot my shoes.'
+      intensity: nervous
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep003_015
+    scene: |
+      黒田、答えない。ラックの間隔を数ミリ単位で直し続ける。会話が続く気配はない。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 黒田は、答えなかった。
+      en_US: "Kuroda didn't answer."
+      zh_TW: '[zh_TW] Kuroda didn''t answer.'
+      zh_CN: '[zh_CN] Kuroda didn''t answer.'
+  - panel_id: ep003_016
+    scene: |
+      ロッカーからバッシュを取り出す隼人。帰ればいいと分かっている。だが、足が
+      止まる。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato_internal
+      text_by_locale:
+        ja_JP: 帰れば、いい。
+        en_US: 'He should just leave.'
+        zh_TW: '[zh_TW] He should just leave.'
+        zh_CN: '[zh_CN] He should just leave.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_left
+  - panel_id: ep003_017
+    scene: |
+      ワイド。黒田の手元を見つめる隼人。ラックの間隔、ボールの向き、すべてが同じ
+      位置に戻っていく。無駄が一つもない。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 一つも、無駄がない。
+      en_US: Not one wasted motion, on a nearly empty court.
+      zh_TW: '[zh_TW] Not one wasted motion, on a nearly empty court.'
+      zh_CN: '[zh_CN] Not one wasted motion, on a nearly empty court.'
+  - panel_id: ep003_018
+    scene: |
+      黒田、ふと動きを止める。ラックから一つ、ボールを取り上げる。
+    beat_type: micro
+    intent: 無言のデモンストレーションが始まる合図
+  - panel_id: ep003_019
+    scene: |
+      黒田、コート中央、フリースローラインまで歩く。右膝を軽くかばう歩き方——古い
+      怪我の名残が、説明抜きで見える。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 右膝を、わずかにかばっていた。
+      en_US: His right knee still favored the old injury, no explanation offered.
+      zh_TW: '[zh_TW] His right knee still favored the old injury, no explanation offered.'
+      zh_CN: '[zh_CN] His right knee still favored the old injury, no explanation offered.'
+  - panel_id: ep003_020
+    scene: |
+      ラインに立つ黒田。両手でボールを構え、静かに息を一つ吐く。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ['すう……']
+      en_US: ['hhh...']
+    narrator_caption_by_locale:
+      ja_JP: 一つ、息をついてから。
+      en_US: One slow breath before the line.
+      zh_TW: '[zh_TW] One slow breath before the line.'
+      zh_CN: '[zh_CN] One slow breath before the line.'
+  - panel_id: ep003_021
+    scene: |
+      極端なクローズアップ。ボールが床に触れる。一度だけ。急がず、迷いなく。
+    beat_type: micro
+    sfx_by_locale:
+      ja_JP: ['トン。']
+      en_US: ['bmp.']
+    narrator_caption_by_locale:
+      ja_JP: 一度だけ。
+      en_US: Just once.
+      zh_TW: '[zh_TW] Just once.'
+      zh_CN: '[zh_CN] Just once.'
+  - panel_id: ep003_022
+    scene: |
+      ワイド、静止。体育館は、それ以外の音を持たない。黒田は動かない。隼人も、
+      画面の端で動かない。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 音は、それひとつだけだった。
+      en_US: Only that one sound existed in the whole gym.
+      zh_TW: '[zh_TW] Only that one sound existed in the whole gym.'
+      zh_CN: '[zh_CN] Only that one sound existed in the whole gym.'
+    silence_confirmed: true
+  - panel_id: ep003_023
+    scene: |
+      黒田、シュートを放つ。フォームに迷いがない。派手な予備動作もない。
+    beat_type: standard
+    sfx_by_locale:
+      ja_JP: ['バスッ。']
+      en_US: ['swish.']
+  - panel_id: ep003_024
+    scene: |
+      ワイド。ネットが揺れる音だけが残る。黒田は、入ったかどうかを見ていない——
+      すでに次のボールへ手を伸ばしている。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 黒田は、入ったかどうかを見ていなかった。
+      en_US: Kuroda wasn't watching whether it went in.
+      zh_TW: '[zh_TW] Kuroda wasn''t watching whether it went in.'
+      zh_CN: '[zh_CN] Kuroda wasn''t watching whether it went in.'
+  - panel_id: ep003_025
+    scene: |
+      隼人の顔のクローズアップ。小さな気づきが走る。黒田の目が、リングにも自分に
+      も向いていなかったこと——ボールの縫い目だけを見ていた、その一瞬に。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 見ていたのは、縫い目だけだった。
+      en_US: He'd only been looking at the seams.
+      zh_TW: '[zh_TW] He''d only been looking at the seams.'
+      zh_CN: '[zh_CN] He''d only been looking at the seams.'
+  - panel_id: ep003_026
+    scene: |
+      黒田、ボールをラックに戻す。振り返らない。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep003_027
+    scene: |
+      隼人、扉に手をかけたところで振り返る。黒田は背を向けたまま、ラックの最後の
+      一つを直しながら、口を開く。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: kuroda
+      text_by_locale:
+        ja_JP: また明日な。
+        en_US: 'Tomorrow, then.'
+        zh_TW: '[zh_TW] Tomorrow, then.'
+        zh_CN: '[zh_CN] Tomorrow, then.'
+      intensity: flat
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_left
+  - panel_id: ep003_028
+    scene: |
+      隼人、一拍置いて答える。声は小さい。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: hayato
+      text_by_locale:
+        ja_JP: ……はい。
+        en_US: '...Yes.'
+        zh_TW: '[zh_TW] ...Yes.'
+        zh_CN: '[zh_CN] ...Yes.'
+      intensity: quiet
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep003_029
+    scene: |
+      ワイド。帰りの電車。ほぼ無人の車内で、隼人はバッシュの入った袋を、いつもの
+      仕事鞄とは違う持ち方で膝に乗せている。
+    beat_type: spatial
+    narrator_caption_by_locale:
+      ja_JP: 終電まで、あと少しだった。
+      en_US: The last train wasn't far off.
+      zh_TW: '[zh_TW] The last train wasn''t far off.'
+      zh_CN: '[zh_CN] The last train wasn''t far off.'
+  - panel_id: ep003_030
+    scene: |
+      最終パネル。自宅の玄関、ワイド。隼人、靴を脱ぎながら、バッシュを下駄箱の
+      奥にしまわず、玄関のドアのすぐそばに、次もすぐ持ち出せる場所に置く。
+    beat_type: standard
+    narrator_caption_by_locale:
+      ja_JP: 今度は、しまわなかった。
+      en_US: This time, he didn't put them away.
+      zh_TW: '[zh_TW] This time, he didn''t put them away.'
+      zh_CN: '[zh_CN] This time, he didn''t put them away.'
+    silence_confirmed: true
+
+notes:
+  arc_position: |
+    Episode 3 of 12, arc 1's "recruit" phase. Per the beat matrix, this is
+    Kuroda's first wordless lesson: after-hours gym, forgotten shoes, at most
+    two to three words of dialogue from Kuroda across the whole episode. Ep_002
+    (first practice, sensory overload, near-quit) was not present on disk at
+    authoring time; this episode proceeds from the bible's beat description of
+    it only, treating it as a recent, raw prior event referenced but not shown.
+  pacing_vs_prior: |
+    30 panels across two pages, off-game and two-hander in cast (only Hayato
+    and Kuroda appear on panel; Aya is present only as an unread notification).
+    Deliberately slower and quieter than a practice or match chapter would be,
+    matching the craft bible's off-game chapter-ending convention: this
+    episode closes on a single image of a private choice continuing after
+    dark, not on a game outcome.
+  continuity_callbacks: |
+    - Desk-drawer "just in case" sneakers (panel 4) established per the series
+      bible's Hayato visual anchor, explicitly distinguished from the real
+      practice shoes he actually needs.
+    - Ep_002's abandoned shoes (panel 5) recalled as a brief, wordless visual
+      flash, never narrated.
+    - Kuroda's signature gesture, silently resetting the ball rack, is on
+      panel in six separate beats (11, 13, 15, 17, 18, 26), established as his
+      default state rather than a one-off action.
+    - The desk-drawer sneakers and the genkan placement (panel 30) form a
+      matched pair across the episode: shoes hidden away at the start, shoes
+      left ready at the end, with no line of dialogue stating the change.
+  doctrinal_anchor_vessel_handling: |
+    Kuroda never explains the lesson and is never named as a coach or teacher
+    in the text. His entire spoken dialogue budget for the episode is one
+    line, two words ("also asahi na" / "Tomorrow, then."), delivered without
+    turning to face Hayato. The free-throw demonstration (panels 18-24) is
+    staged as pure physical action: one deliberate bounce, a held silent beat,
+    a clean release, and Kuroda visibly not watching whether the shot went in,
+    a small-scale rehearsal of the arc-wide anti-pattern rule that the
+    scoreboard must never resolve or prove anything. Hayato's own registration
+    of the technique (panel 25) is described strictly as an observed physical
+    detail, what Kuroda's eyes were doing, never as a stated insight or named
+    lesson, per the strategy bank's rule that the turn must be externalized in
+    the sport's object and never spoken aloud by the mentor or the narration.
+  translation_handoff: |
+    text_by_locale populated for ja_JP (authoritative, native-authored) and
+    en_US (real operator-review gloss, not a literal translation) on every
+    dialogue_lines and narrator_caption_by_locale entry. zh_TW and zh_CN carry
+    bracket placeholders in the '[zh_TW] <en_US line>' / '[zh_CN] <en_US line>'
+    form pending the dedicated CJK translation lane, matching the convention
+    established in the heart_balance_shojo ep_001 reference file.

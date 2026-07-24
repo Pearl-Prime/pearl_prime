@@ -1,0 +1,15 @@
+=== tuple viability spot-checks (read-only preflight gate, phoenix_v4/gates/check_tuple_viability.py) ===
+
+$ PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona corporate_managers --topic anxiety --engine comparison --format F006
+TUPLE_VIABLE
+(cell used by adhd_forge, cognitive_clarity, focus_sprint, way_stream_sanctuary book_id=*__corporate_managers__anxiety__comparison.yaml)
+
+$ PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona working_parents --topic somatic_healing --engine false_alarm --format F006
+NO_BINDING: persona=working_parents topic=somatic_healing engine=false_alarm
+(cell used by stillness_press__ahjan__working_parents__somatic_healing__false_alarm.yaml, _needs_authoring: false, fully-blurbed)
+
+$ PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona gen_z_professionals --topic grief --engine watcher --format F006
+TUPLE_VIABLE
+
+$ PYTHONPATH=. python3 phoenix_v4/gates/check_tuple_viability.py --persona working_parents --topic anxiety --engine false_alarm --format F006
+TUPLE_VIABLE
