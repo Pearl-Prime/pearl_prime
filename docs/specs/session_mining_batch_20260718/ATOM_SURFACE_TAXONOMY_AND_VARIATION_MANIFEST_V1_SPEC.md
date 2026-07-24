@@ -82,3 +82,31 @@ current dry-run against real flagship/catalog cells and reviewed false positives
 Start with a smoke set and record unknown categories explicitly. Any category
 created from inference must be marked provisional until it is reconciled with
 current atom, exercise, story, and reader-layer SSOT.
+
+## gt30d C04 — Bridge / Adjacency Cohesion (2026-07-22)
+
+**Keepers:** I025, I048 · MERGE into SPEC-1 (no parallel taxonomy).
+
+### Problem
+
+Choppy books often lack adjacency-aware selection across:
+
+- scene → story
+- story → exercise
+- data → teaching / bridge intros-outros
+
+### Required measurement fields (additive)
+
+- `bridge_role`: none | scene_to_story | story_to_exercise | data_to_teaching | custom
+- `adjacency_group`: stable id for atoms that must not jarringly collide when sequenced
+- `cohesion_min_score`: optional float threshold for pilot gates (advisory until calibrated)
+
+### Cursor-may-implement (Wave-B or PM-advanced)
+
+1. Extend atom coverage / selection provenance measurement only — do not rewrite banks in this lane.
+2. Emit gap report of missing bridge roles per topic×engine cell (pilot 1 topic).
+3. Do not create a second F9/judge module; fold craft checks into existing register/craft gates if needed.
+
+### Signal
+
+`gt30d-c04-spec-terminal` when this section lands with the SPEC-1 file.

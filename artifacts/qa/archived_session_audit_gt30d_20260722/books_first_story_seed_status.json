@@ -1,0 +1,14 @@
+{
+  "keeper": "I045",
+  "status": "PILOT_READY",
+  "present": [
+    "artifacts/analysis/books_first_thin_persona_repair_slate_20260714/SLATE.md",
+    "artifacts/analysis/books_first_thin_persona_repair_slate_20260714/candidate_cells.tsv",
+    "artifacts/qa/engine_keyed_story_seed_batch_a_20260714",
+    "docs/agent_prompt_packs/20260714_books_first_epub_wave/03_Pearl_Writer_engine_keyed_story_seed_batch_a.md",
+    "old_chat_specs/Untitled 366.txt"
+  ],
+  "missing": [],
+  "next": "Pearl_Writer: run engine-keyed STORY seed batch from slate; then 4-cell rebuild proof under artifacts/qa/",
+  "acceptance_layer": "CODE-WIRED status tool only \u2014 not EXECUTED-REAL seeding"
+}

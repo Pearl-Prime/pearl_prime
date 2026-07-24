@@ -27,7 +27,18 @@ Per-lane style bibles for 48-volume series planning and deterministic panel-leve
 18. **[historical_period](historical_period.md)** — Vinland Saga / Vagabond / Bride's Story register (Genre Shell #12). Carries grief across time, legacy and self-worth, courage in context, honor vs authenticity. Viking is a setting flavor inside this genre, not its own.
 19. **[mecha](mecha.md)** — Evangelion / Gundam / Knights of Sidonia register (Genre Shell #15; mega-example tier per spec D-9; Evangelion $16B franchise). Carries depression-as-mecha, scale-as-mortality, identity vs machine. `cognitive_clarity` brand 15% allocation.
 
-(Note: `school_coming_of_age` (#14) bible deferred to a future PR; pacing covered via existing `school` row in `manga_pacing_by_genre.yaml`.)
+(Note: `school_coming_of_age` (#14) bible landed via `#4614` — [school_coming_of_age.md](school_coming_of_age.md), M3 wave 1 backfill.)
+
+### M2/M3 lane closure (2026-07-23)
+
+20. **[cultivation_martial](cultivation_martial.md)** — Soul Land / A Record of a Mortal's Journey
+    to Immortality / Battle Through the Heavens register. Progression-fantasy power-tier ladder;
+    primary tier in `zh_CN` (18% share, largest single genre in that locale's allocation),
+    secondary in `zh_TW` (8%). Carries face/reputation stakes alongside raw power progression —
+    the genre's key divergence from Japanese shonen escalation grammar. This closes the last gap
+    among the 15 `VALID_GENRES` slugs consumed by `generate_catalog_plan_from_strategic.py`
+    (all others already resolve to an existing bible via `config/manga/canonical_genre_list.yaml`
+    aliases; `cultivation_martial` → `cultivation` had no bible file until this entry).
 
 ## How to use
 
