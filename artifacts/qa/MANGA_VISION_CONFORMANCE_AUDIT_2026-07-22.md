@@ -17,6 +17,48 @@ never presented as freshly confirmed.
 
 ---
 
+## CORRECTION — R3 vessel-wiring finding is WRONG (dated 2026-07-24, Lane 01 manga process uplift)
+
+**This block supersedes every R3 statement below. Original text is left intact for history.**
+
+The R3 re-confirmation ("25% — UNCHANGED, re-confirmed") rests on a **path error, not evidence**:
+
+- The audit ran `git show origin/main:phoenix_v4/manga/story_architect.py | grep vessel` and read
+  the empty output as proof the vessel loader is unconsumed. That flat path **does not exist on
+  `origin/main`** — `git show` of a nonexistent path prints nothing, so the grep was empty for the
+  wrong reason. (Verified 2026-07-24: `git cat-file -e origin/main:phoenix_v4/manga/story_architect.py`
+  → fails.)
+- The real module is **`phoenix_v4/manga/series/story_architect.py`** (note `series/`). On
+  `origin/main` it defines `apply_mode_vessel(...)` (≈line 462), which calls
+  `phoenix_v4.manga.mode.vessels.load_vessel` and weaves `config/manga/manga_mode_vessels.yaml`
+  carrier beats into chapters — and it is **called from the generation flow at line 671**, not
+  merely defined. `phoenix_v4/manga/chapter/writer.py::_mode_vessel_prompt_block` consumes the same
+  config on the prompt path.
+- This wiring landed **2026-07-03** in M4 PR **#4616** (`2deaabe6ae`) — 19 days *before* this audit
+  — exactly as recorded in `scripts/ci/check_manga_wiring.py`'s KNOWN_UNWIRED comment ("WIRED in M4
+  (#4616)") and `artifacts/qa/manga_m4_vessel_wiring_proof/WIRING_GATE_VESSELS.md`. It was extended
+  on **2026-07-24** by PR **#200** (`90e7d1e775`, teacher/music modes through catalog + writing
+  pipeline).
+
+**Corrected R3 layer: CODE-WIRED (call-reachable consumer on a production path), not
+CONFIG-EXISTS.** The 25% figure, the "UNCHANGED, re-confirmed" claim, and the §4 carry-forward
+bullet ("remains CONFIG-EXISTS only") must not be cited. A fresh % re-score is left to the next
+full audit; depth of *runtime execution proof* (EXECUTED-REAL on vessel beats in shipped chapters)
+remains open and is a legitimate follow-up — but "unwired" is false.
+
+Superseded by this block: §1 table R3 row; §3 bullet "R3 (25%, re-confirmed unchanged)"; §4 bullet
+"Vessel … remains CONFIG-EXISTS only (R3/R4)"; the R3 row of the companion
+`artifacts/qa/manga_vision_conformance_20260722.tsv`; and the R3 sentences in
+`docs/PROGRAM_STATE.md`'s manga row (dispatcher-owned; flagged in the Lane 01 handoff, not edited
+here).
+
+Root cause matches this audit's own §0 lesson, inverted: an empty query result was treated as
+confirmation without first proving the queried path exists. Rule for future audits: pair every
+negative `git show <ref>:<path>` finding with `git cat-file -e <ref>:<path>` (or
+`git ls-tree <ref> <dir>`) so a wrong path cannot masquerade as an unwired feature.
+
+---
+
 ## 0. Critical finding: the task brief's central claim is UNMERGED
 
 The dispatch for this audit named commit `aad5cf2152` (`feat(manga): assemble_from_bank --bubbles
